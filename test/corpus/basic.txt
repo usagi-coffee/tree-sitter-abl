@@ -1,0 +1,58 @@
+================================================================================
+VARIABLE DEFINITION statement
+================================================================================
+
+DEFINE VARIABLE full_variable AS INTEGER.
+DEFINE VAR  full_var AS INTEGER.
+
+DEF VARIABLE short_variable AS INTEGER.
+DEF VAR short_var AS INTEGER.
+
+--------------------------------------------------------------------------------
+
+(source_code
+	(statement
+		(variable_definition
+			(identifier)
+			(primitive_type)
+			(terminator)))
+	(statement
+		(variable_definition
+			(identifier)
+			(primitive_type)
+			(terminator)))
+	(statement
+		(variable_definition
+			(identifier)
+			(primitive_type)
+			(terminator)))
+	(statement
+		(variable_definition
+			(identifier)
+			(primitive_type)
+			(terminator))))
+
+
+================================================================================
+VARIABLE ASSIGNMENT statement
+================================================================================
+
+DEFINE VARIABLE variable AS INTEGER.
+variable = 5.
+
+--------------------------------------------------------------------------------
+
+
+(source_code
+	(statement
+		(variable_definition
+			(identifier)
+			(primitive_type)
+			(terminator)))
+	(statement
+		(variable_assignment
+		  (assignment
+			  (identifier)
+				(expression
+				  (number_literal)))
+			(terminator))))	
