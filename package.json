@@ -4,7 +4,7 @@
   "description": "ABL grammar for tree-sitter",
   "main": "bindings/node",
   "scripts": {
-    "gen": "tree-sitter generate",
+    "generate": "tree-sitter generate",
     "parse": "tree-sitter generate && tree-sitter parse",
     "test": "tree-sitter generate && tree-sitter test",
     "dev": "nodemon --exec 'tree-sitter generate && tree-sitter parse example'"
