@@ -1,8 +1,8 @@
 # tree-sitter-abl
 
-> The project is in very early stage so expect that it's very broken and incomplete.
+> The project is in very early stage - expect that it's very broken and incomplete
 
-OpenEdge ABL grammar for tree-sitter.
+OpenEdge Advanced Business Language (ABL) grammar for tree-sitter
 
 ## Usage
 
@@ -65,5 +65,4 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
 ```
