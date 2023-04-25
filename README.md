@@ -17,7 +17,6 @@ npm run test
 ### Testing your file
 
 ```bash
-touch your_file.p # Write ABL code inside
 npm run parse your_file.p
 ```
 
@@ -40,7 +39,7 @@ npm run parse your_file.p
 - [ ] FIND statement
 - [ ] ...
 
-### ABL statements
+### ABL Statements
 - [X] ASSIGN
 - [ ] DISPLAY
 - [ ] PUT
@@ -50,7 +49,7 @@ Keep in mind these were tested on trivial examples so it may be broken in your c
 
 There is much more grammar that needs to be listed, implemented and added to the tests. Feel free to open issue/send pull request for the grammar that you need!
 
-Check out `test/corpus` directory to see the syntax tree output for specific grammar.
+Check out `test/corpus` directory to see the syntax tree output for specific grammar and examples.
 
 ## License
 
