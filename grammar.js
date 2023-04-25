@@ -53,6 +53,8 @@ module.exports = grammar({
         $.function_call_statement
       ),
 
+    conditions: ($) => _list($.expression, choice("AND", "OR")),
+
     /// Comments
     comment: ($) => seq("/*", repeat(choice(/[^*/\\]+/, /\\./)), "*/"),
 
@@ -99,7 +101,7 @@ module.exports = grammar({
     if_do_statement: ($) =>
       seq(
         "IF",
-        field("conditions", _list($.expression, choice("AND", "OR"))),
+        field("conditions", $.conditions),
         "THEN DO:",
         repeat($.statement),
         $.block_terminator,
@@ -112,7 +114,7 @@ module.exports = grammar({
     else_do_if_statement: ($) =>
       seq(
         "ELSE IF",
-        field("conditions", _list($.expression, choice("AND", "OR"))),
+        field("conditions", $.conditions),
         "THEN DO:",
         repeat($.statement),
         $.block_terminator
@@ -121,7 +123,7 @@ module.exports = grammar({
     if_then_statement: ($) =>
       seq(
         "IF",
-        field("conditions", _list($.expression, choice("AND", "OR"))),
+        field("conditions", $.conditions),
         "THEN",
         $.terminated_statement,
         optional($.else_then_statement)
@@ -129,9 +131,8 @@ module.exports = grammar({
 
     else_then_statement: ($) => seq("ELSE", $.terminated_statement),
 
-    /// FOR-like
-    where_clause: ($) =>
-      seq("WHERE", field("conditions", _list($.expression, "AND"))),
+    /// FOR statement
+    where_clause: ($) => seq("WHERE", field("conditions", $.conditions)),
 
     query_tunings: ($) => _list(choice(...query_tunings), " "),
 

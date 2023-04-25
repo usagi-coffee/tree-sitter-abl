@@ -84,12 +84,13 @@ END.
 	(statement
 		(if_statement
 			(if_do_statement
-				(expression
-					(comparison
-						(expression
-							(identifier))
-						(expression
-							(number_literal))))
+				(conditions
+					(expression
+						(comparison
+							(expression
+								(identifier))
+							(expression
+								(number_literal)))))
 				(statement
 					(variable_assignment
 						(assignment
@@ -116,12 +117,13 @@ END.
 	(statement
 		(if_statement
 			(if_do_statement
-				(expression
-					(comparison
-						(expression
-							(identifier))
-						(expression
-							(number_literal))))
+				(conditions
+					(expression
+						(comparison
+							(expression
+								(identifier))
+							(expression
+								(number_literal)))))
 				(statement
 					(variable_assignment
 						(assignment
@@ -160,12 +162,13 @@ END.
 	(statement
 		(if_statement
 			(if_do_statement
-				(expression
-					(comparison
-						(expression
-							(identifier))
-						(expression
-							(number_literal))))
+				(conditions
+					(expression
+						(comparison
+							(expression
+								(identifier))
+							(expression
+								(number_literal)))))
 				(statement
 					(variable_assignment
 						(assignment
@@ -175,18 +178,19 @@ END.
 						(terminator)))						
 				(block_terminator)
 				(else_do_if_statement
-					(expression
-						(comparison
-							(expression
-								(identifier))
-							(expression
-								(number_literal))))
-					(expression
-						(comparison
-							(expression
-								(identifier))
-							(expression
-								(number_literal))))
+					(conditions
+						(expression
+							(comparison
+								(expression
+									(identifier))
+								(expression
+									(number_literal))))
+						(expression
+							(comparison
+								(expression
+									(identifier))
+								(expression
+									(number_literal)))))
 					(statement
 						(variable_assignment
 							(assignment
@@ -217,12 +221,13 @@ IF x > 10 THEN x = 10.
 	(statement
 		(if_statement
 			(if_then_statement
-				(expression
-					(comparison
-						(expression
-							(identifier))
-						(expression
-							(number_literal))))
+				(conditions
+					(expression
+						(comparison
+							(expression
+								(identifier))
+							(expression
+								(number_literal)))))
 				(terminated_statement
 					(variable_assignment
 						(assignment
@@ -244,12 +249,13 @@ ELSE x = x.
 	(statement
 		(if_statement
 			(if_then_statement
-				(expression
-					(comparison
-						(expression
-							(identifier))
-						(expression
-							(number_literal))))
+			  (conditions
+					(expression
+						(comparison
+							(expression
+								(identifier))
+							(expression
+								(number_literal)))))
 				(terminated_statement
 					(variable_assignment
 						(assignment
