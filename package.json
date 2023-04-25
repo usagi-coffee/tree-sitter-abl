@@ -6,11 +6,15 @@
   "scripts": {
     "gen": "tree-sitter generate",
     "parse": "tree-sitter generate && tree-sitter parse",
-    "test": "tree-sitter generate && tree-sitter test"
+    "test": "tree-sitter generate && tree-sitter test",
+    "dev": "nodemon --exec 'tree-sitter generate && tree-sitter parse example'"
   },
   "author": "",
   "license": "MIT",
   "dependencies": {
     "nan": "^2.17.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
   }
 }
