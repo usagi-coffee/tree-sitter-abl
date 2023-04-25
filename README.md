@@ -22,6 +22,8 @@ npm run parse your_file.p
 
 ## Supported grammar
 
+> Current goal of the parser assumes non-frame ABL syntax so things like DISPLAY, DEFINE BUTTON or similar statements that are meant for the progress environment are probably not going to be supported/fully supported.
+
 - [X] Comments
 - [X] Variable definitions
 - [X] Variable assignments
@@ -32,6 +34,7 @@ npm run parse your_file.p
 - [X] Function calls
 - [ ] Procedures
 - [ ] Ternary operator (IF THEN ELSE)
+- [ ] Object accessors/methods
 - [ ] ...
 
 ### ABL Query
@@ -41,7 +44,6 @@ npm run parse your_file.p
 
 ### ABL Statements
 - [X] ASSIGN
-- [ ] DISPLAY
 - [ ] PUT
 - [ ] ...
   
