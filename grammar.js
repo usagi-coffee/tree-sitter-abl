@@ -34,11 +34,15 @@ module.exports = grammar({
 
     statement: ($) =>
       choice(
+        $.comment,
         $.variable_definition,
         $.variable_assignment,
         $.assign_statement,
         $.for_statement
       ),
+
+    /// Comments
+    comment: ($) => seq("/*", repeat(choice(/[^*/\\]+/, /\\./)), "*/"),
 
     /// Primitives
     primitive_type: ($) => choice("LOGICAL", "INTEGER", "CHARACTER", "DECIMAL"),

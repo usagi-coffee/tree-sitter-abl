@@ -23,7 +23,7 @@ npm run parse your_file.p
 
 ## Supported grammar
 
-- [ ] Comments
+- [X] Comments
 - [X] Variable definitions
 - [X] Variable assignments
 - [X] Comparisons

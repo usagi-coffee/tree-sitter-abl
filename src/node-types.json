@@ -38,6 +38,11 @@
     }
   },
   {
+    "type": "comment",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "comparison",
     "named": true,
     "fields": {
@@ -246,6 +251,10 @@
           "named": true
         },
         {
+          "type": "comment",
+          "named": true
+        },
+        {
           "type": "for_statement",
           "named": true
         },
@@ -375,7 +384,15 @@
     "named": false
   },
   {
+    "type": "*/",
+    "named": false
+  },
+  {
     "type": ",",
+    "named": false
+  },
+  {
+    "type": "/*",
     "named": false
   },
   {
