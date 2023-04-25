@@ -127,6 +127,56 @@
     }
   },
   {
+    "type": "do_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "assignment",
+          "named": true
+        },
+        {
+          "type": "block_terminator",
+          "named": true
+        },
+        {
+          "type": "number_literal",
+          "named": true
+        },
+        {
+          "type": "statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "do_while_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "block_terminator",
+          "named": true
+        },
+        {
+          "type": "conditions",
+          "named": true
+        },
+        {
+          "type": "statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "double_quoted_string",
     "named": true,
     "fields": {}
@@ -421,6 +471,29 @@
     }
   },
   {
+    "type": "loop_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "do_statement",
+          "named": true
+        },
+        {
+          "type": "do_while_statement",
+          "named": true
+        },
+        {
+          "type": "repeat_statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "primitive_type",
     "named": true,
     "fields": {}
@@ -495,6 +568,10 @@
         },
         {
           "type": "if_statement",
+          "named": true
+        },
+        {
+          "type": "loop_statement",
           "named": true
         },
         {
@@ -714,6 +791,14 @@
     "named": false
   },
   {
+    "type": "DO",
+    "named": false
+  },
+  {
+    "type": "DO WHILE",
+    "named": false
+  },
+  {
     "type": "EACH",
     "named": false
   },
@@ -787,6 +872,10 @@
   },
   {
     "type": "THEN DO:",
+    "named": false
+  },
+  {
+    "type": "TO",
     "named": false
   },
   {

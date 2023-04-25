@@ -29,7 +29,7 @@ npm run parse your_file.p
 - [X] Variable assignments
 - [X] Comparisons
 - [X] Conditional statements
-- [ ] Loops
+- [X] Loops
 - [ ] Functions
 - [X] Function calls
 - [ ] Procedures

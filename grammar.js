@@ -42,6 +42,7 @@ module.exports = grammar({
         $.variable_assignment,
         $.function_call_statement,
         $.if_statement,
+        $.loop_statement,
         $.for_statement,
         $.abl_statement
       ),
@@ -130,6 +131,33 @@ module.exports = grammar({
       ),
 
     else_then_statement: ($) => seq("ELSE", $.terminated_statement),
+
+    /// Loop statements
+    loop_statement: ($) =>
+      choice($.repeat_statement, $.do_while_statement, $.do_statement),
+
+    repeat_statement: ($) =>
+      seq("REPEAT:", repeat($.statement), $.block_terminator),
+
+    do_while_statement: ($) =>
+      seq(
+        "DO WHILE",
+        $.conditions,
+        ":",
+        repeat($.statement),
+        $.block_terminator
+      ),
+
+    do_statement: ($) =>
+      seq(
+        "DO",
+        $.assignment,
+        "TO",
+        $.number_literal,
+        ":",
+        repeat($.statement),
+        $.block_terminator
+      ),
 
     /// FOR statement
     where_clause: ($) => seq("WHERE", field("conditions", $.conditions)),

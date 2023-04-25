@@ -272,6 +272,88 @@ ELSE x = x.
 									(identifier)))
 							(terminator))))))))
 
+================================================================================
+REPEAT statement
+================================================================================
+
+REPEAT:
+	x = 5.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (statement
+    (loop_statement
+      (repeat_statement
+        (statement
+          (variable_assignment
+            (assignment
+              (identifier)
+              (expression
+                (number_literal)))
+            (terminator)))
+        (block_terminator)))))
+
+================================================================================
+DO WHILE statement
+================================================================================
+
+DO WHILE x < 10:
+	x = 5.
+END.
+
+
+--------------------------------------------------------------------------------
+
+(source_code
+	(statement
+		(loop_statement
+			(do_while_statement
+				(conditions
+					(expression
+						(comparison
+							(expression
+								(identifier))
+							(expression
+								(number_literal)))))
+				(statement
+					(variable_assignment
+						(assignment
+							(identifier)
+							(expression
+								(number_literal)))
+						(terminator)))
+				(block_terminator)))))
+
+================================================================================
+DO statement
+================================================================================
+
+DO x = 5 TO 20:
+	x = 5.
+END.
+
+
+--------------------------------------------------------------------------------
+
+(source_code
+	(statement
+		(loop_statement
+			(do_statement
+				(assignment
+					(identifier)
+					(expression
+						(number_literal)))
+				(number_literal)
+				(statement
+					(variable_assignment
+						(assignment
+							(identifier)
+							(expression
+								(number_literal)))
+						(terminator)))
+				(block_terminator)))))
 
 ================================================================================
 ABL (simple multi) statement
