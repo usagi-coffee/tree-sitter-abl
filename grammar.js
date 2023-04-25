@@ -15,6 +15,7 @@ module.exports = grammar({
     /// Main
     identifier: ($) => /[a-z_]+/,
     terminator: ($) => ".",
+    block_terminator: ($) => "END.",
 
     expression: ($) =>
       choice(
@@ -37,8 +38,17 @@ module.exports = grammar({
         $.comment,
         $.variable_definition,
         $.variable_assignment,
+        $.function_call_statement,
         $.assign_statement,
+        $.if_statement,
         $.for_statement
+      ),
+
+    terminated_statement: ($) =>
+      choice(
+        $.variable_definition,
+        $.variable_assignment,
+        $.function_call_statement
       ),
 
     /// Comments
@@ -74,6 +84,7 @@ module.exports = grammar({
     variable_assignment: ($) => seq($.assignment, $.terminator),
 
     /// Function
+    function_call_statement: ($) => seq($.function_call, $.terminator),
     function_call: ($) =>
       seq(
         field("function", $.identifier),
@@ -82,6 +93,42 @@ module.exports = grammar({
 
     /// ASSIGN statement
     assign_statement: ($) => seq("ASSIGN", repeat($.assignment), $.terminator),
+
+    /// IF statement
+    if_statement: ($) => choice($.if_do_statement, $.if_then_statement),
+
+    if_do_statement: ($) =>
+      seq(
+        "IF",
+        field("conditions", _list($.expression, choice("AND", "OR"))),
+        "THEN DO:",
+        repeat($.statement),
+        $.block_terminator,
+        optional(repeat(choice($.else_do_statement, $.else_do_if_statement)))
+      ),
+
+    else_do_statement: ($) =>
+      seq("ELSE DO:", repeat($.statement), $.block_terminator),
+
+    else_do_if_statement: ($) =>
+      seq(
+        "ELSE IF",
+        field("conditions", _list($.expression, choice("AND", "OR"))),
+        "THEN DO:",
+        repeat($.statement),
+        $.block_terminator
+      ),
+
+    if_then_statement: ($) =>
+      seq(
+        "IF",
+        field("conditions", _list($.expression, choice("AND", "OR"))),
+        "THEN",
+        $.terminated_statement,
+        optional($.else_then_statement)
+      ),
+
+    else_then_statement: ($) => seq("ELSE", $.terminated_statement),
 
     /// FOR-like
     where_clause: ($) =>
@@ -98,7 +145,7 @@ module.exports = grammar({
         field("query_tunings", optional($.query_tunings)),
         ":",
         repeat($.statement),
-        "END."
+        $.block_terminator
       ),
   },
 });

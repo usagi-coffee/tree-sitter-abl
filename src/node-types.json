@@ -94,6 +94,78 @@
     "fields": {}
   },
   {
+    "type": "else_do_if_statement",
+    "named": true,
+    "fields": {
+      "conditions": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": "AND",
+            "named": false
+          },
+          {
+            "type": "OR",
+            "named": false
+          },
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "block_terminator",
+          "named": true
+        },
+        {
+          "type": "statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "else_do_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "block_terminator",
+          "named": true
+        },
+        {
+          "type": "statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "else_then_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "terminated_statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "expression",
     "named": true,
     "fields": {},
@@ -169,8 +241,12 @@
     },
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
+        {
+          "type": "block_terminator",
+          "named": true
+        },
         {
           "type": "statement",
           "named": true
@@ -203,6 +279,128 @@
       "types": [
         {
           "type": "expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "function_call_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "function_call",
+          "named": true
+        },
+        {
+          "type": "terminator",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "if_do_statement",
+    "named": true,
+    "fields": {
+      "conditions": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": "AND",
+            "named": false
+          },
+          {
+            "type": "OR",
+            "named": false
+          },
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "block_terminator",
+          "named": true
+        },
+        {
+          "type": "else_do_if_statement",
+          "named": true
+        },
+        {
+          "type": "else_do_statement",
+          "named": true
+        },
+        {
+          "type": "statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "if_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "if_do_statement",
+          "named": true
+        },
+        {
+          "type": "if_then_statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "if_then_statement",
+    "named": true,
+    "fields": {
+      "conditions": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": "AND",
+            "named": false
+          },
+          {
+            "type": "OR",
+            "named": false
+          },
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "else_then_statement",
+          "named": true
+        },
+        {
+          "type": "terminated_statement",
           "named": true
         }
       ]
@@ -259,6 +457,14 @@
           "named": true
         },
         {
+          "type": "function_call_statement",
+          "named": true
+        },
+        {
+          "type": "if_statement",
+          "named": true
+        },
+        {
           "type": "variable_assignment",
           "named": true
         },
@@ -283,6 +489,29 @@
         },
         {
           "type": "single_quoted_string",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "terminated_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "function_call_statement",
+          "named": true
+        },
+        {
+          "type": "variable_assignment",
+          "named": true
+        },
+        {
+          "type": "variable_definition",
           "named": true
         }
       ]
@@ -456,7 +685,15 @@
     "named": false
   },
   {
-    "type": "END.",
+    "type": "ELSE",
+    "named": false
+  },
+  {
+    "type": "ELSE DO:",
+    "named": false
+  },
+  {
+    "type": "ELSE IF",
     "named": false
   },
   {
@@ -469,6 +706,10 @@
   },
   {
     "type": "FOR",
+    "named": false
+  },
+  {
+    "type": "IF",
     "named": false
   },
   {
@@ -492,7 +733,19 @@
     "named": false
   },
   {
+    "type": "OR",
+    "named": false
+  },
+  {
     "type": "SHARE-LOCK",
+    "named": false
+  },
+  {
+    "type": "THEN",
+    "named": false
+  },
+  {
+    "type": "THEN DO:",
     "named": false
   },
   {
@@ -506,6 +759,10 @@
   {
     "type": "WHERE",
     "named": false
+  },
+  {
+    "type": "block_terminator",
+    "named": true
   },
   {
     "type": "identifier",

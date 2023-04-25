@@ -27,7 +27,7 @@ npm run parse your_file.p
 - [X] Variable definitions
 - [X] Variable assignments
 - [X] Comparisons
-- [ ] Conditional statements
+- [X] Conditional statements
 - [ ] Loops
 - [X] ASSIGN statement
 - [X] FOR (EACH/FIRST/LAST) statement

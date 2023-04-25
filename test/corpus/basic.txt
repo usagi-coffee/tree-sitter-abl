@@ -69,3 +69,199 @@ variable = 5.
 				(expression
 				  (number_literal)))
 			(terminator))))	
+			
+================================================================================
+IF statement
+================================================================================
+
+IF x > 10 THEN DO:
+	x = 10.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+	(statement
+		(if_statement
+			(if_do_statement
+				(expression
+					(comparison
+						(expression
+							(identifier))
+						(expression
+							(number_literal))))
+				(statement
+					(variable_assignment
+						(assignment
+							(identifier)
+							(expression
+								(number_literal)))
+						(terminator)))
+				(block_terminator)))))
+
+================================================================================
+IF ELSE DO statement
+================================================================================
+
+IF x > 10 THEN DO:
+	x = 10.
+END.
+ELSE DO:
+  x = x.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+	(statement
+		(if_statement
+			(if_do_statement
+				(expression
+					(comparison
+						(expression
+							(identifier))
+						(expression
+							(number_literal))))
+				(statement
+					(variable_assignment
+						(assignment
+							(identifier)
+							(expression
+								(number_literal)))
+						(terminator)))						
+				(block_terminator)
+				(else_do_statement
+					(statement
+						(variable_assignment
+							(assignment
+								(identifier)
+								(expression
+									(identifier)))
+							(terminator)))
+					(block_terminator))))))
+
+================================================================================
+IF ELSE IF statement
+================================================================================
+
+IF x > 10 THEN DO:
+	x = 10.
+END.
+ELSE IF x < 10 OR x = 0 THEN DO:
+  x = x.
+END.
+ELSE DO:
+	x = x.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+	(statement
+		(if_statement
+			(if_do_statement
+				(expression
+					(comparison
+						(expression
+							(identifier))
+						(expression
+							(number_literal))))
+				(statement
+					(variable_assignment
+						(assignment
+							(identifier)
+							(expression
+								(number_literal)))
+						(terminator)))						
+				(block_terminator)
+				(else_do_if_statement
+					(expression
+						(comparison
+							(expression
+								(identifier))
+							(expression
+								(number_literal))))
+					(expression
+						(comparison
+							(expression
+								(identifier))
+							(expression
+								(number_literal))))
+					(statement
+						(variable_assignment
+							(assignment
+								(identifier)
+								(expression
+									(identifier)))
+							(terminator)))
+					(block_terminator))
+				(else_do_statement
+					(statement
+						(variable_assignment
+							(assignment
+								(identifier)
+								(expression
+									(identifier)))
+							(terminator)))
+					(block_terminator))))))
+
+================================================================================
+IF THEN statement
+================================================================================
+
+IF x > 10 THEN x = 10.
+
+--------------------------------------------------------------------------------
+
+(source_code
+	(statement
+		(if_statement
+			(if_then_statement
+				(expression
+					(comparison
+						(expression
+							(identifier))
+						(expression
+							(number_literal))))
+				(terminated_statement
+					(variable_assignment
+						(assignment
+							(identifier)
+							(expression
+								(number_literal)))
+						(terminator)))))))
+
+================================================================================
+IF ELSE THEN statement
+================================================================================
+
+IF x > 10 THEN x = 10.
+ELSE x = x.
+
+--------------------------------------------------------------------------------
+
+(source_code
+	(statement
+		(if_statement
+			(if_then_statement
+				(expression
+					(comparison
+						(expression
+							(identifier))
+						(expression
+							(number_literal))))
+				(terminated_statement
+					(variable_assignment
+						(assignment
+							(identifier)
+							(expression
+								(number_literal)))
+						(terminator)))
+				(else_then_statement
+					(terminated_statement
+						(variable_assignment
+							(assignment
+								(identifier)
+								(expression
+									(identifier)))
+							(terminator))))))))
