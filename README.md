@@ -1,12 +1,12 @@
 # tree-sitter-abl
 
-> The project is in very early stage - expect that it's very broken and incomplete
+> The project is in very early stage - expect that it's very broken and incomplete, contributions welcome!
 
-OpenEdge Advanced Business Language (ABL) grammar for tree-sitter
+OpenEdge Advanced Business Language (ABL) grammar for tree-sitter.
 
 ## Usage
 
-For the grammar usage in your project look at tree-sitter documentation on how to use the grammar extension.
+For the grammar usage in your project look at tree-sitter documentation on how to use the grammar parsers.
 
 ### Running the tests
 
@@ -37,6 +37,8 @@ npm run parse your_file.p
 - [ ] Procedure definitions
 - [ ] ...
   
+Keep in mind these were tested on trivial examples so it may be broken in your case, if that happens please file an issue!
+
 There is much more grammar that needs to be listed, implemented and added to the tests. Feel free to open issue/send pull request for the grammar that you need!
 
 Check out `test/corpus` directory to see the syntax tree output for specific grammar.
