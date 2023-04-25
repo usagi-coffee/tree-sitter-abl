@@ -121,15 +121,15 @@
         },
         {
           "type": "SYMBOL",
-          "name": "assign_statement"
-        },
-        {
-          "type": "SYMBOL",
           "name": "if_statement"
         },
         {
           "type": "SYMBOL",
           "name": "for_statement"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "abl_statement"
         }
       ]
     },
@@ -442,26 +442,6 @@
               "value": ")"
             }
           ]
-        }
-      ]
-    },
-    "assign_statement": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "ASSIGN"
-        },
-        {
-          "type": "REPEAT",
-          "content": {
-            "type": "SYMBOL",
-            "name": "assignment"
-          }
-        },
-        {
-          "type": "SYMBOL",
-          "name": "terminator"
         }
       ]
     },
@@ -901,6 +881,64 @@
         {
           "type": "SYMBOL",
           "name": "block_terminator"
+        }
+      ]
+    },
+    "abl_statement": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "assign_statement"
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": "DISPLAY"
+                },
+                {
+                  "type": "STRING",
+                  "value": "PUT"
+                }
+              ]
+            },
+            {
+              "type": "REPEAT",
+              "content": {
+                "type": "SYMBOL",
+                "name": "expression"
+              }
+            },
+            {
+              "type": "SYMBOL",
+              "name": "terminator"
+            }
+          ]
+        }
+      ]
+    },
+    "assign_statement": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "ASSIGN"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "assignment"
+          }
+        },
+        {
+          "type": "SYMBOL",
+          "name": "terminator"
         }
       ]
     }

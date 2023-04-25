@@ -4,6 +4,8 @@ const comparison_operators = ["<", "<=", "<>", "=", ">", ">="];
 
 const query_tunings = ["NO-LOCK", "NO-WAIT", "SHARE-LOCK", "EXCLUSIVE-LOCK"];
 
+const abl_statements = ["DISPLAY", "PUT" /* ... */];
+
 module.exports = grammar({
   name: "abl",
 
@@ -39,9 +41,9 @@ module.exports = grammar({
         $.variable_definition,
         $.variable_assignment,
         $.function_call_statement,
-        $.assign_statement,
         $.if_statement,
-        $.for_statement
+        $.for_statement,
+        $.abl_statement
       ),
 
     terminated_statement: ($) =>
@@ -90,9 +92,6 @@ module.exports = grammar({
         field("function", $.identifier),
         seq("(", optional(_list($.expression, ",")), ")")
       ),
-
-    /// ASSIGN statement
-    assign_statement: ($) => seq("ASSIGN", repeat($.assignment), $.terminator),
 
     /// IF statement
     if_statement: ($) => choice($.if_do_statement, $.if_then_statement),
@@ -147,5 +146,14 @@ module.exports = grammar({
         repeat($.statement),
         $.block_terminator
       ),
+
+    /// ABL statements
+    abl_statement: ($) =>
+      choice(
+        $.assign_statement,
+        seq(choice(...abl_statements), repeat($.expression), $.terminator)
+      ),
+
+    assign_statement: ($) => seq("ASSIGN", repeat($.assignment), $.terminator),
   },
 });

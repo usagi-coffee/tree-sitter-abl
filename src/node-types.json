@@ -1,5 +1,28 @@
 [
   {
+    "type": "abl_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "assign_statement",
+          "named": true
+        },
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "terminator",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "assign_statement",
     "named": true,
     "fields": {},
@@ -445,7 +468,7 @@
       "required": true,
       "types": [
         {
-          "type": "assign_statement",
+          "type": "abl_statement",
           "named": true
         },
         {
@@ -681,6 +704,10 @@
     "named": false
   },
   {
+    "type": "DISPLAY",
+    "named": false
+  },
+  {
     "type": "EACH",
     "named": false
   },
@@ -734,6 +761,10 @@
   },
   {
     "type": "OR",
+    "named": false
+  },
+  {
+    "type": "PUT",
     "named": false
   },
   {

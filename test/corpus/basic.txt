@@ -265,3 +265,60 @@ ELSE x = x.
 								(expression
 									(identifier)))
 							(terminator))))))))
+
+
+================================================================================
+ABL (simple multi) statement
+================================================================================
+
+DISPLAY "test" a 5 f().
+
+--------------------------------------------------------------------------------
+
+(source_code
+	(statement
+		(abl_statement
+			(expression
+				(string_literal
+					(double_quoted_string)))
+			(expression
+				(identifier))
+			(expression
+				(number_literal))
+			(expression
+				(function_call
+					(identifier)))
+			(terminator))))
+
+================================================================================
+ASSIGN statement
+================================================================================
+
+ASSIGN 
+	a = 1
+	b = "ABC"
+	c = f()
+.
+
+--------------------------------------------------------------------------------
+
+
+(source_code
+	(statement
+		(abl_statement
+			(assign_statement
+				(assignment
+					(identifier)
+					(expression
+						(number_literal)))
+				(assignment
+					(identifier)
+					(expression
+						(string_literal
+							(double_quoted_string))))
+				(assignment
+					(identifier)
+					(expression
+						(function_call
+							(identifier))))
+						(terminator)))))

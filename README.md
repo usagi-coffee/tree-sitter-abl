@@ -29,12 +29,21 @@ npm run parse your_file.p
 - [X] Comparisons
 - [X] Conditional statements
 - [ ] Loops
-- [X] ASSIGN statement
+- [ ] Functions
+- [X] Function calls
+- [ ] Procedures
+- [ ] Ternary operator (IF THEN ELSE)
+- [ ] ...
+
+### ABL Query
 - [X] FOR (EACH/FIRST/LAST) statement
 - [ ] FIND statement
-- [X] Function calls
-- [ ] Function definitions
-- [ ] Procedure definitions
+- [ ] ...
+
+### ABL statements
+- [X] ASSIGN
+- [ ] DISPLAY
+- [ ] PUT
 - [ ] ...
   
 Keep in mind these were tested on trivial examples so it may be broken in your case, if that happens please file an issue!
