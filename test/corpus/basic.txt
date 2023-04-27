@@ -7,8 +7,7 @@ COMMENT statement
 --------------------------------------------------------------------------------
 
 (source_code
-	(statement
-		(comment)))
+		(comment))
 
 
 ================================================================================
@@ -389,8 +388,7 @@ RUN some_procedure.
   (statement
     (procedure_statement
       (identifier)
-      (statement
-        (comment))
+      (comment)
       (block_terminator)))
     (statement
       (abl_statement

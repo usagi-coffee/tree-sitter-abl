@@ -5,6 +5,7 @@ const comparison_operators = ["<", "<=", "<>", "=", ">", ">="];
 module.exports = grammar({
   name: "abl",
 
+  extras: ($) => [$.comment, /[\s\f\uFEFF\u2060\u200B]|\\\r?\n/],
   word: ($) => $.identifier,
 
   rules: {
@@ -34,7 +35,6 @@ module.exports = grammar({
 
     statement: ($) =>
       choice(
-        $.comment,
         $.variable_definition,
         $.variable_assignment,
         $.procedure_statement,
