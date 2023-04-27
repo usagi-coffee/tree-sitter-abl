@@ -2,6 +2,8 @@ const _list = (rule, separator) => seq(rule, repeat(seq(separator, rule)));
 
 const comparison_operators = ["<", "<=", "<>", "=", ">", ">="];
 
+const define_variable_tunings = ["NO-UNDO"];
+
 const query_tunings = ["NO-LOCK", "NO-WAIT", "SHARE-LOCK", "EXCLUSIVE-LOCK"];
 
 module.exports = grammar({
@@ -13,9 +15,9 @@ module.exports = grammar({
     source_code: ($) => repeat($.statement),
 
     /// Main
-    identifier: ($) => /[A-z_\-]+/,
-    terminator: ($) => ".",
-    block_terminator: ($) => "END.",
+    identifier: ($) => /[A-z_\-]+/i,
+    terminator: ($) => /\s*\./i,
+    block_terminator: ($) => /END\./i,
 
     expression: ($) =>
       choice(
