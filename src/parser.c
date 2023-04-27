@@ -717,7 +717,7 @@ enum {
   field_comparator = 1,
   field_conditions = 2,
   field_function = 3,
-  field_identifier = 4,
+  field_name = 4,
   field_query_tunings = 5,
   field_table = 6,
   field_type = 7,
@@ -728,7 +728,7 @@ static const char * const ts_field_names[] = {
   [field_comparator] = "comparator",
   [field_conditions] = "conditions",
   [field_function] = "function",
-  [field_identifier] = "identifier",
+  [field_name] = "name",
   [field_query_tunings] = "query_tunings",
   [field_table] = "table",
   [field_type] = "type",
@@ -755,7 +755,7 @@ static const TSFieldMapEntry ts_field_map_entries[] = {
     {field_table, 2},
     {field_type, 1},
   [5] =
-    {field_identifier, 2},
+    {field_name, 2},
     {field_type, 4},
   [7] =
     {field_query_tunings, 3},
@@ -957,7 +957,8 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
           lookahead == '\r' ||
           lookahead == ' ') SKIP(0)
       if (('0' <= lookahead && lookahead <= '9')) ADVANCE(160);
-      if (lookahead == '_' ||
+      if (lookahead == '-' ||
+          lookahead == '_' ||
           ('a' <= lookahead && lookahead <= 'z')) ADVANCE(140);
       END_STATE();
     case 1:
@@ -1427,7 +1428,8 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
           lookahead == '\n' ||
           lookahead == '\r' ||
           lookahead == ' ') SKIP(137)
-      if (lookahead == '_' ||
+      if (lookahead == '-' ||
+          lookahead == '_' ||
           ('a' <= lookahead && lookahead <= 'z')) ADVANCE(140);
       END_STATE();
     case 138:
@@ -1444,7 +1446,8 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
           lookahead == '\n' ||
           lookahead == '\r' ||
           lookahead == ' ') SKIP(138)
-      if (lookahead == '_' ||
+      if (lookahead == '-' ||
+          lookahead == '_' ||
           ('a' <= lookahead && lookahead <= 'z')) ADVANCE(140);
       END_STATE();
     case 139:
@@ -1452,7 +1455,8 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       END_STATE();
     case 140:
       ACCEPT_TOKEN(sym_identifier);
-      if (lookahead == '_' ||
+      if (lookahead == '-' ||
+          lookahead == '_' ||
           ('a' <= lookahead && lookahead <= 'z')) ADVANCE(140);
       END_STATE();
     case 141:

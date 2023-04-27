@@ -15,7 +15,7 @@ module.exports = grammar({
     source_code: ($) => repeat($.statement),
 
     /// Main
-    identifier: ($) => /[a-z_]+/,
+    identifier: ($) => /[a-z_\-]+/,
     terminator: ($) => ".",
     block_terminator: ($) => "END.",
 
@@ -80,7 +80,7 @@ module.exports = grammar({
       seq(
         choice("DEFINE", "DEF"),
         choice("VARIABLE", "VAR"),
-        field("identifier", $.identifier),
+        field("name", $.identifier),
         "AS",
         field("type", $.primitive_type),
         $.terminator

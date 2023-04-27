@@ -650,7 +650,7 @@
     "type": "variable_definition",
     "named": true,
     "fields": {
-      "identifier": {
+      "name": {
         "multiple": false,
         "required": true,
         "types": [

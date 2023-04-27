@@ -11,7 +11,7 @@
     },
     "identifier": {
       "type": "PATTERN",
-      "value": "[a-z_]+"
+      "value": "[a-z_\\-]+"
     },
     "terminator": {
       "type": "STRING",
@@ -374,7 +374,7 @@
         },
         {
           "type": "FIELD",
-          "name": "identifier",
+          "name": "name",
           "content": {
             "type": "SYMBOL",
             "name": "identifier"
