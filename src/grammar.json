@@ -18,8 +18,17 @@
       "value": "\\s*\\."
     },
     "block_terminator": {
-      "type": "PATTERN",
-      "value": "END\\."
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": "END PROCEDURE\\."
+        },
+        {
+          "type": "PATTERN",
+          "value": "END\\."
+        }
+      ]
     },
     "expression": {
       "type": "CHOICE",
@@ -118,6 +127,10 @@
         {
           "type": "SYMBOL",
           "name": "function_call_statement"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "procedure_statement"
         },
         {
           "type": "SYMBOL",
@@ -997,6 +1010,46 @@
             {
               "type": "SYMBOL",
               "name": "sort_clause"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "STRING",
+          "value": ":"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "statement"
+          }
+        },
+        {
+          "type": "SYMBOL",
+          "name": "block_terminator"
+        }
+      ]
+    },
+    "procedure_statement": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "PROCEDURE"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "identifier"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "PRIVATE"
             },
             {
               "type": "BLANK"

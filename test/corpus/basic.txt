@@ -374,6 +374,32 @@ END.
 				(block_terminator)))))
 
 ================================================================================
+PROCEDURE statement
+================================================================================
+
+PROCEDURE some_procedure:
+  /* nice */
+END PROCEDURE.
+
+RUN some_procedure.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (statement
+    (procedure_statement
+      (identifier)
+      (statement
+        (comment))
+      (block_terminator)))
+    (statement
+      (abl_statement
+        (identifier)
+        (expression
+          (identifier))
+        (terminator))))
+
+================================================================================
 ABL GENERIC statement
 ================================================================================
 

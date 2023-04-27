@@ -32,7 +32,7 @@ npm run parse your_file.p
 - [X] Loops
 - [ ] Functions
 - [X] Function calls
-- [ ] Procedures
+- [X] Procedures
 - [ ] Ternary operator (IF THEN ELSE)
 - [ ] Object accessors/methods
 - [ ] ...

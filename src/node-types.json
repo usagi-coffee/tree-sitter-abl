@@ -72,6 +72,11 @@
     }
   },
   {
+    "type": "block_terminator",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "comment",
     "named": true,
     "fields": {}
@@ -508,6 +513,29 @@
     "fields": {}
   },
   {
+    "type": "procedure_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "block_terminator",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "query_tuning",
     "named": true,
     "fields": {}
@@ -627,6 +655,10 @@
         },
         {
           "type": "loop_statement",
+          "named": true
+        },
+        {
+          "type": "procedure_statement",
           "named": true
         },
         {
@@ -973,6 +1005,14 @@
     "named": false
   },
   {
+    "type": "PRIVATE",
+    "named": false
+  },
+  {
+    "type": "PROCEDURE",
+    "named": false
+  },
+  {
     "type": "RAW",
     "named": false
   },
@@ -1015,10 +1055,6 @@
   {
     "type": "WHERE",
     "named": false
-  },
-  {
-    "type": "block_terminator",
-    "named": true
   },
   {
     "type": "identifier",

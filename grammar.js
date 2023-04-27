@@ -13,7 +13,7 @@ module.exports = grammar({
     /// Main
     identifier: ($) => /[A-z-_]{1}[A-z-_|0-9]*/i,
     terminator: ($) => /\s*\./i,
-    block_terminator: ($) => /END\./i,
+    block_terminator: ($) => choice(/END PROCEDURE\./i, /END\./i),
 
     expression: ($) =>
       choice(
@@ -37,6 +37,7 @@ module.exports = grammar({
         $.variable_definition,
         $.variable_assignment,
         $.function_call_statement,
+        $.procedure_statement,
         $.if_statement,
         $.loop_statement,
         $.for_statement,
@@ -196,6 +197,17 @@ module.exports = grammar({
         optional($.where_clause),
         repeat($.query_tuning),
         optional($.sort_clause),
+        ":",
+        repeat($.statement),
+        $.block_terminator
+      ),
+
+    /// Procedures
+    procedure_statement: ($) =>
+      seq(
+        "PROCEDURE",
+        $.identifier,
+        optional("PRIVATE"),
         ":",
         repeat($.statement),
         $.block_terminator
