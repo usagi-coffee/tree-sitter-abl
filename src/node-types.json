@@ -2,7 +2,18 @@
   {
     "type": "abl_statement",
     "named": true,
-    "fields": {},
+    "fields": {
+      "statement": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": true,
       "required": true,
@@ -787,10 +798,6 @@
     "named": false
   },
   {
-    "type": "DISPLAY",
-    "named": false
-  },
-  {
     "type": "DO",
     "named": false
   },
@@ -852,10 +859,6 @@
   },
   {
     "type": "OR",
-    "named": false
-  },
-  {
-    "type": "PUT",
     "named": false
   },
   {

@@ -4,8 +4,6 @@ const comparison_operators = ["<", "<=", "<>", "=", ">", ">="];
 
 const query_tunings = ["NO-LOCK", "NO-WAIT", "SHARE-LOCK", "EXCLUSIVE-LOCK"];
 
-const abl_statements = ["DISPLAY", "PUT" /* ... */];
-
 module.exports = grammar({
   name: "abl",
 
@@ -15,7 +13,7 @@ module.exports = grammar({
     source_code: ($) => repeat($.statement),
 
     /// Main
-    identifier: ($) => /[a-z_\-]+/,
+    identifier: ($) => /[A-z_\-]+/,
     terminator: ($) => ".",
     block_terminator: ($) => "END.",
 
@@ -180,7 +178,11 @@ module.exports = grammar({
     abl_statement: ($) =>
       choice(
         $.assign_statement,
-        seq(choice(...abl_statements), repeat($.expression), $.terminator)
+        seq(
+          field("statement", $.identifier),
+          repeat($.expression),
+          $.terminator
+        )
       ),
 
     assign_statement: ($) => seq("ASSIGN", repeat($.assignment), $.terminator),

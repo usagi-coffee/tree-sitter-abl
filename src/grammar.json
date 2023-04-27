@@ -11,7 +11,7 @@
     },
     "identifier": {
       "type": "PATTERN",
-      "value": "[a-z_\\-]+"
+      "value": "[A-z_\\-]+"
     },
     "terminator": {
       "type": "STRING",
@@ -923,17 +923,12 @@
           "type": "SEQ",
           "members": [
             {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "STRING",
-                  "value": "DISPLAY"
-                },
-                {
-                  "type": "STRING",
-                  "value": "PUT"
-                }
-              ]
+              "type": "FIELD",
+              "name": "statement",
+              "content": {
+                "type": "SYMBOL",
+                "name": "identifier"
+              }
             },
             {
               "type": "REPEAT",

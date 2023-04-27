@@ -366,6 +366,7 @@ DISPLAY "test" a 5 f().
 (source_code
 	(statement
 		(abl_statement
+			(identifier)
 			(expression
 				(string_literal
 					(double_quoted_string)))
