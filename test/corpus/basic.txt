@@ -400,6 +400,31 @@ RUN some_procedure.
         (terminator))))
 
 ================================================================================
+FUNCTION statement
+================================================================================
+
+FUNCTION fn RETURNS INTEGER (INPUT par1 AS INTEGER):
+  RETURN par1.
+END PROCEDURE.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (statement
+    (function_statement
+      (identifier)
+      (primitive_type)
+      (function_parameter
+        (function_parameter_mode)
+        (identifier)
+        (primitive_type))
+      (statement
+        (return_statement
+          (identifier)
+          (terminator)))
+      (block_terminator))))
+
+================================================================================
 ABL GENERIC statement
 ================================================================================
 

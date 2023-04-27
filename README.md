@@ -30,7 +30,7 @@ npm run parse your_file.p
 - [X] Comparisons
 - [X] Conditional statements
 - [X] Loops
-- [ ] Functions
+- [X] Functions
 - [X] Function calls
 - [X] Procedures
 - [ ] Ternary operator (IF THEN ELSE)

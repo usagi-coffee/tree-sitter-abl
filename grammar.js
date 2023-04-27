@@ -13,7 +13,8 @@ module.exports = grammar({
     /// Main
     identifier: ($) => /[A-z-_]{1}[A-z-_|0-9]*/i,
     terminator: ($) => /\s*\./i,
-    block_terminator: ($) => choice(/END PROCEDURE\./i, /END\./i),
+    block_terminator: ($) =>
+      choice(/END PROCEDURE\./i, /END FUNCTION\./i, /END\./i),
 
     expression: ($) =>
       choice(
@@ -36,8 +37,10 @@ module.exports = grammar({
         $.comment,
         $.variable_definition,
         $.variable_assignment,
-        $.function_call_statement,
         $.procedure_statement,
+        $.function_statement,
+        $.function_call_statement,
+        $.return_statement,
         $.if_statement,
         $.loop_statement,
         $.for_statement,
@@ -212,6 +215,24 @@ module.exports = grammar({
         repeat($.statement),
         $.block_terminator
       ),
+
+    /// Functions
+    function_parameter_mode: ($) => choice("INPUT", "OUTPUT"),
+    function_parameter: ($) =>
+      seq($.function_parameter_mode, $.identifier, "AS", $.primitive_type),
+
+    function_statement: ($) =>
+      seq(
+        "FUNCTION",
+        field("name", $.identifier),
+        seq("RETURNS", field("return_type", $.primitive_type)),
+        seq("(", optional(_list($.function_parameter, ",")), ")"),
+        ":",
+        repeat($.statement),
+        $.block_terminator
+      ),
+
+    return_statement: ($) => seq("RETURN", $.identifier, $.terminator),
 
     /// ABL statements
     abl_statement: ($) =>

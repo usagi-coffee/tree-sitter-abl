@@ -398,6 +398,78 @@
     }
   },
   {
+    "type": "function_parameter",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "function_parameter_mode",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "primitive_type",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "function_parameter_mode",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "function_statement",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "return_type": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "primitive_type",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "block_terminator",
+          "named": true
+        },
+        {
+          "type": "function_parameter",
+          "named": true
+        },
+        {
+          "type": "statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "if_do_statement",
     "named": true,
     "fields": {
@@ -560,6 +632,25 @@
     }
   },
   {
+    "type": "return_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "terminator",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "single_quoted_string",
     "named": true,
     "fields": {}
@@ -650,6 +741,10 @@
           "named": true
         },
         {
+          "type": "function_statement",
+          "named": true
+        },
+        {
           "type": "if_statement",
           "named": true
         },
@@ -659,6 +754,10 @@
         },
         {
           "type": "procedure_statement",
+          "named": true
+        },
+        {
+          "type": "return_statement",
           "named": true
         },
         {
@@ -953,6 +1052,10 @@
     "named": false
   },
   {
+    "type": "FUNCTION",
+    "named": false
+  },
+  {
     "type": "HANDLE",
     "named": false
   },
@@ -962,6 +1065,10 @@
   },
   {
     "type": "INITIAL",
+    "named": false
+  },
+  {
+    "type": "INPUT",
     "named": false
   },
   {
@@ -1005,6 +1112,10 @@
     "named": false
   },
   {
+    "type": "OUTPUT",
+    "named": false
+  },
+  {
     "type": "PRIVATE",
     "named": false
   },
@@ -1022,6 +1133,14 @@
   },
   {
     "type": "REPEAT:",
+    "named": false
+  },
+  {
+    "type": "RETURN",
+    "named": false
+  },
+  {
+    "type": "RETURNS",
     "named": false
   },
   {
