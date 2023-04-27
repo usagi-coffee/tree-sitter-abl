@@ -2,8 +2,6 @@ const _list = (rule, separator) => seq(rule, repeat(seq(separator, rule)));
 
 const comparison_operators = ["<", "<=", "<>", "=", ">", ">="];
 
-const define_variable_tunings = ["NO-UNDO"];
-
 const query_tunings = ["NO-LOCK", "NO-WAIT", "SHARE-LOCK", "EXCLUSIVE-LOCK"];
 
 module.exports = grammar({
