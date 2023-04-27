@@ -805,6 +805,22 @@
     "named": false
   },
   {
+    "type": "COM-HANDLE",
+    "named": false
+  },
+  {
+    "type": "DATE",
+    "named": false
+  },
+  {
+    "type": "DATETIME",
+    "named": false
+  },
+  {
+    "type": "DATETIME-TZ",
+    "named": false
+  },
+  {
     "type": "DECIMAL",
     "named": false
   },
@@ -853,11 +869,19 @@
     "named": false
   },
   {
+    "type": "HANDLE",
+    "named": false
+  },
+  {
     "type": "IF",
     "named": false
   },
   {
     "type": "INITIAL",
+    "named": false
+  },
+  {
+    "type": "INT64",
     "named": false
   },
   {
@@ -870,6 +894,14 @@
   },
   {
     "type": "LOGICAL",
+    "named": false
+  },
+  {
+    "type": "LONGCHAR",
+    "named": false
+  },
+  {
+    "type": "MEMPTR",
     "named": false
   },
   {
@@ -889,7 +921,19 @@
     "named": false
   },
   {
+    "type": "RAW",
+    "named": false
+  },
+  {
+    "type": "RECID",
+    "named": false
+  },
+  {
     "type": "REPEAT:",
+    "named": false
+  },
+  {
+    "type": "ROWID",
     "named": false
   },
   {

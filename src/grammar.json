@@ -235,6 +235,50 @@
         {
           "type": "STRING",
           "value": "DECIMAL"
+        },
+        {
+          "type": "STRING",
+          "value": "DATE"
+        },
+        {
+          "type": "STRING",
+          "value": "DATETIME"
+        },
+        {
+          "type": "STRING",
+          "value": "DATETIME-TZ"
+        },
+        {
+          "type": "STRING",
+          "value": "INT64"
+        },
+        {
+          "type": "STRING",
+          "value": "LONGCHAR"
+        },
+        {
+          "type": "STRING",
+          "value": "MEMPTR"
+        },
+        {
+          "type": "STRING",
+          "value": "RAW"
+        },
+        {
+          "type": "STRING",
+          "value": "RECID"
+        },
+        {
+          "type": "STRING",
+          "value": "ROWID"
+        },
+        {
+          "type": "STRING",
+          "value": "HANDLE"
+        },
+        {
+          "type": "STRING",
+          "value": "COM-HANDLE"
         }
       ]
     },

@@ -60,7 +60,24 @@ module.exports = grammar({
     comment: ($) => seq("/*", repeat(choice(/[^*/\\]+/, /\\./)), "*/"),
 
     /// Primitives
-    primitive_type: ($) => choice("LOGICAL", "INTEGER", "CHARACTER", "DECIMAL"),
+    primitive_type: ($) =>
+      choice(
+        "LOGICAL",
+        "INTEGER",
+        "CHARACTER",
+        "DECIMAL",
+        "DATE",
+        "DATETIME",
+        "DATETIME-TZ",
+        "INT64",
+        "LONGCHAR",
+        "MEMPTR",
+        "RAW",
+        "RECID",
+        "ROWID",
+        "HANDLE",
+        "COM-HANDLE"
+      ),
 
     number_literal: ($) => /[0-9]+/i,
     string_literal: ($) =>
