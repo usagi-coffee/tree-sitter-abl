@@ -21,6 +21,9 @@ DEFINE VAR  full_var AS INTEGER.
 DEF VARIABLE short_variable AS INTEGER.
 DEF VAR short_var AS INTEGER.
 
+DEFINE VARIABLE no_undo AS INTEGER NO-UNDO.
+DEFINE VARIABLE initial AS INTEGER INITIAL 5.
+
 --------------------------------------------------------------------------------
 
 (source_code
@@ -43,7 +46,22 @@ DEF VAR short_var AS INTEGER.
 		(variable_definition
 			(identifier)
 			(primitive_type)
+			(terminator)))
+	(statement
+		(variable_definition
+			(identifier)
+			(primitive_type)
+			(variable_tuning)
+			(terminator)))
+	(statement
+		(variable_definition
+			(identifier)
+			(primitive_type)
+			(variable_tuning
+				(expression
+					(number_literal)))
 			(terminator))))
+		
 
 
 ================================================================================

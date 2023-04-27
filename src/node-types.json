@@ -683,11 +683,30 @@
       }
     },
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
         {
           "type": "terminator",
+          "named": true
+        },
+        {
+          "type": "variable_tuning",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "variable_tuning",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "expression",
           "named": true
         }
       ]
@@ -838,6 +857,10 @@
     "named": false
   },
   {
+    "type": "INITIAL",
+    "named": false
+  },
+  {
     "type": "INTEGER",
     "named": false
   },
@@ -851,6 +874,10 @@
   },
   {
     "type": "NO-LOCK",
+    "named": false
+  },
+  {
+    "type": "NO-UNDO",
     "named": false
   },
   {

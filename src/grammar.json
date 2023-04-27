@@ -14,12 +14,12 @@
       "value": "[A-z_\\-]+"
     },
     "terminator": {
-      "type": "STRING",
-      "value": "."
+      "type": "PATTERN",
+      "value": "\\s*\\."
     },
     "block_terminator": {
-      "type": "STRING",
-      "value": "END."
+      "type": "PATTERN",
+      "value": "END\\."
     },
     "expression": {
       "type": "CHOICE",
@@ -343,6 +343,36 @@
         }
       ]
     },
+    "variable_tuning": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "NO-UNDO"
+            },
+            {
+              "type": "STRING",
+              "value": "INITIAL"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "expression"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
+    },
     "variable_definition": {
       "type": "SEQ",
       "members": [
@@ -390,6 +420,13 @@
           "content": {
             "type": "SYMBOL",
             "name": "primitive_type"
+          }
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "variable_tuning"
           }
         },
         {

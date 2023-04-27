@@ -74,6 +74,9 @@ module.exports = grammar({
     assignment: ($) =>
       seq(prec.left($.identifier), "=", prec.right($.expression)),
 
+    variable_tuning: ($) =>
+      seq(choice("NO-UNDO", "INITIAL"), optional($.expression)),
+
     variable_definition: ($) =>
       seq(
         choice("DEFINE", "DEF"),
@@ -81,6 +84,7 @@ module.exports = grammar({
         field("name", $.identifier),
         "AS",
         field("type", $.primitive_type),
+        repeat($.variable_tuning),
         $.terminator
       ),
 
