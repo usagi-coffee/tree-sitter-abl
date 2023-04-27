@@ -429,3 +429,72 @@ ASSIGN
 						(function_call
 							(identifier))))
 						(terminator)))))
+
+================================================================================
+FOR EACH statement
+================================================================================
+
+FOR EACH some_table WHERE x = 5 NO-LOCK:
+	DISPLAY some_table.
+END.
+
+
+--------------------------------------------------------------------------------
+
+(source_code
+	(statement
+		(for_statement
+			(identifier)
+			(where_clause
+				(conditions
+					(expression
+						(comparison
+							(expression
+								(identifier))
+							(expression
+								(number_literal))))))
+			(query_tuning)
+			(statement
+				(abl_statement
+					(identifier)
+					(expression
+						(identifier))
+					(terminator)))
+			(block_terminator))))
+
+================================================================================
+FOR EACH (sorted) statement
+================================================================================
+
+FOR EACH some_table WHERE x = 5 BREAK BY col1 DESCENDING col2:
+	DISPLAY some_table.
+END.
+
+
+--------------------------------------------------------------------------------
+
+ (source_code
+	(statement
+		(for_statement
+			(identifier)
+			(where_clause
+				(conditions
+					(expression
+						(comparison
+							(expression
+								(identifier))
+							(expression
+								(number_literal))))))
+			(sort_clause
+				(sort_column
+					(identifier)
+					(sort_order))
+				(sort_column
+					(identifier)))
+			(statement
+				(abl_statement
+					(identifier)
+					(expression
+						(identifier))
+					(terminator)))
+			(block_terminator))))

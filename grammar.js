@@ -2,8 +2,6 @@ const _list = (rule, separator) => seq(rule, repeat(seq(separator, rule)));
 
 const comparison_operators = ["<", "<=", "<>", "=", ">", ">="];
 
-const query_tunings = ["NO-LOCK", "NO-WAIT", "SHARE-LOCK", "EXCLUSIVE-LOCK"];
-
 module.exports = grammar({
   name: "abl",
 
@@ -13,7 +11,7 @@ module.exports = grammar({
     source_code: ($) => repeat($.statement),
 
     /// Main
-    identifier: ($) => /[A-z_\-]+/i,
+    identifier: ($) => /[A-z-_]{1}[A-z-_|0-9]*/i,
     terminator: ($) => /\s*\./i,
     block_terminator: ($) => /END\./i,
 
@@ -181,7 +179,14 @@ module.exports = grammar({
     /// FOR statement
     where_clause: ($) => seq("WHERE", field("conditions", $.conditions)),
 
-    query_tunings: ($) => _list(choice(...query_tunings), " "),
+    sort_order: ($) => choice("DESCENDING"),
+    sort_column: ($) =>
+      seq(field("column", $.identifier), optional($.sort_order)),
+
+    sort_clause: ($) => seq(optional("BREAK"), "BY", repeat($.sort_column)),
+
+    query_tuning: ($) =>
+      choice("NO-LOCK", "NO-WAIT", "SHARE-LOCK", "EXCLUSIVE-LOCK"),
 
     for_statement: ($) =>
       seq(
@@ -189,7 +194,8 @@ module.exports = grammar({
         field("type", choice("EACH", "FIRST", "LAST")),
         field("table", $.identifier),
         optional($.where_clause),
-        field("query_tunings", optional($.query_tunings)),
+        repeat($.query_tuning),
+        optional($.sort_clause),
         ":",
         repeat($.statement),
         $.block_terminator

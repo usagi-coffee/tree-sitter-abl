@@ -11,7 +11,7 @@
     },
     "identifier": {
       "type": "PATTERN",
-      "value": "[A-z_\\-]+"
+      "value": "[A-z-_]{1}[A-z-_|0-9]*"
     },
     "terminator": {
       "type": "PATTERN",
@@ -853,7 +853,41 @@
         }
       ]
     },
-    "query_tunings": {
+    "sort_order": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "DESCENDING"
+        }
+      ]
+    },
+    "sort_column": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "column",
+          "content": {
+            "type": "SYMBOL",
+            "name": "identifier"
+          }
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "sort_order"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
+    },
+    "sort_clause": {
       "type": "SEQ",
       "members": [
         {
@@ -861,54 +895,44 @@
           "members": [
             {
               "type": "STRING",
-              "value": "NO-LOCK"
+              "value": "BREAK"
             },
             {
-              "type": "STRING",
-              "value": "NO-WAIT"
-            },
-            {
-              "type": "STRING",
-              "value": "SHARE-LOCK"
-            },
-            {
-              "type": "STRING",
-              "value": "EXCLUSIVE-LOCK"
+              "type": "BLANK"
             }
           ]
         },
         {
+          "type": "STRING",
+          "value": "BY"
+        },
+        {
           "type": "REPEAT",
           "content": {
-            "type": "SEQ",
-            "members": [
-              {
-                "type": "STRING",
-                "value": " "
-              },
-              {
-                "type": "CHOICE",
-                "members": [
-                  {
-                    "type": "STRING",
-                    "value": "NO-LOCK"
-                  },
-                  {
-                    "type": "STRING",
-                    "value": "NO-WAIT"
-                  },
-                  {
-                    "type": "STRING",
-                    "value": "SHARE-LOCK"
-                  },
-                  {
-                    "type": "STRING",
-                    "value": "EXCLUSIVE-LOCK"
-                  }
-                ]
-              }
-            ]
+            "type": "SYMBOL",
+            "name": "sort_column"
           }
+        }
+      ]
+    },
+    "query_tuning": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "NO-LOCK"
+        },
+        {
+          "type": "STRING",
+          "value": "NO-WAIT"
+        },
+        {
+          "type": "STRING",
+          "value": "SHARE-LOCK"
+        },
+        {
+          "type": "STRING",
+          "value": "EXCLUSIVE-LOCK"
         }
       ]
     },
@@ -961,20 +985,23 @@
           ]
         },
         {
-          "type": "FIELD",
-          "name": "query_tunings",
+          "type": "REPEAT",
           "content": {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "SYMBOL",
-                "name": "query_tunings"
-              },
-              {
-                "type": "BLANK"
-              }
-            ]
+            "type": "SYMBOL",
+            "name": "query_tuning"
           }
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "sort_clause"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         },
         {
           "type": "STRING",

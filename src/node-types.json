@@ -291,16 +291,6 @@
     "type": "for_statement",
     "named": true,
     "fields": {
-      "query_tunings": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "query_tunings",
-            "named": true
-          }
-        ]
-      },
       "table": {
         "multiple": false,
         "required": true,
@@ -336,6 +326,14 @@
       "types": [
         {
           "type": "block_terminator",
+          "named": true
+        },
+        {
+          "type": "query_tuning",
+          "named": true
+        },
+        {
+          "type": "sort_clause",
           "named": true
         },
         {
@@ -510,7 +508,7 @@
     "fields": {}
   },
   {
-    "type": "query_tunings",
+    "type": "query_tuning",
     "named": true,
     "fields": {}
   },
@@ -535,6 +533,52 @@
   },
   {
     "type": "single_quoted_string",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "sort_clause",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "sort_column",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "sort_column",
+    "named": true,
+    "fields": {
+      "column": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "sort_order",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "sort_order",
     "named": true,
     "fields": {}
   },
@@ -729,10 +773,6 @@
     }
   },
   {
-    "type": " ",
-    "named": false
-  },
-  {
     "type": "\"",
     "named": false
   },
@@ -801,6 +841,14 @@
     "named": false
   },
   {
+    "type": "BREAK",
+    "named": false
+  },
+  {
+    "type": "BY",
+    "named": false
+  },
+  {
     "type": "CHARACTER",
     "named": false
   },
@@ -830,6 +878,10 @@
   },
   {
     "type": "DEFINE",
+    "named": false
+  },
+  {
+    "type": "DESCENDING",
     "named": false
   },
   {
