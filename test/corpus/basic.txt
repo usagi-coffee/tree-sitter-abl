@@ -86,6 +86,21 @@ variable = 5.
 				(expression
 				  (number_literal)))
 			(terminator))))	
+
+================================================================================
+BUFFER DEFINITION statement
+================================================================================
+
+DEFINE BUFFER x-table FOR table.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (statement
+    (buffer_definition
+      (identifier)
+      (identifier)
+      (terminator))))
 			
 ================================================================================
 IF statement

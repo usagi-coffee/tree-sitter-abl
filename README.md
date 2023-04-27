@@ -27,6 +27,7 @@ npm run parse your_file.p
 - [X] Comments
 - [X] Variable definitions
 - [X] Variable assignments
+- [X] Buffer definition
 - [X] Comparisons
 - [X] Conditional statements
 - [X] Loops
@@ -35,7 +36,6 @@ npm run parse your_file.p
 - [X] Procedures
 - [X] Ternary expression (IF THEN ELSE)
 - [X] Object properties/methods
-- [ ] Buffers
 - [ ] ...
 
 ### ABL Query

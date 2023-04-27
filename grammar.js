@@ -39,6 +39,7 @@ module.exports = grammar({
       choice(
         $.variable_definition,
         $.variable_assignment,
+        $.buffer_definition,
         $.procedure_statement,
         $.function_statement,
         $.function_call_statement,
@@ -50,11 +51,7 @@ module.exports = grammar({
       ),
 
     terminated_statement: ($) =>
-      choice(
-        $.variable_definition,
-        $.variable_assignment,
-        $.function_call_statement
-      ),
+      choice($.variable_assignment, $.function_call_statement),
 
     conditions: ($) => _list($.expression, choice("AND", "OR")),
 
@@ -110,6 +107,16 @@ module.exports = grammar({
       ),
 
     variable_assignment: ($) => seq($.assignment, $.terminator),
+
+    buffer_definition: ($) =>
+      seq(
+        "DEFINE BUFFER",
+        field("name", $.identifier),
+        "FOR",
+        optional("TEMP-TABLE"),
+        field("table", $.identifier),
+        $.terminator
+      ),
 
     /// Function
     function_call_statement: ($) => seq($.function_call, $.terminator),

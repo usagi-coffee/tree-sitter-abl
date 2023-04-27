@@ -77,6 +77,42 @@
     "fields": {}
   },
   {
+    "type": "buffer_definition",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "table": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "terminator",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "comment",
     "named": true,
     "fields": {}
@@ -768,6 +804,10 @@
           "named": true
         },
         {
+          "type": "buffer_definition",
+          "named": true
+        },
+        {
           "type": "for_statement",
           "named": true
         },
@@ -839,10 +879,6 @@
         },
         {
           "type": "variable_assignment",
-          "named": true
-        },
-        {
-          "type": "variable_definition",
           "named": true
         }
       ]
@@ -1083,6 +1119,10 @@
     "named": false
   },
   {
+    "type": "DEFINE BUFFER",
+    "named": false
+  },
+  {
     "type": "DESCENDING",
     "named": false
   },
@@ -1220,6 +1260,10 @@
   },
   {
     "type": "SHARE-LOCK",
+    "named": false
+  },
+  {
+    "type": "TEMP-TABLE",
     "named": false
   },
   {
