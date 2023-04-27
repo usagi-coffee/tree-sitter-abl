@@ -586,3 +586,63 @@ DISPLAY some_object:chained_property:chained_another:method().
           (function_call
             (identifier))))
       (terminator))))
+
+================================================================================
+TERNARY EXPRESSION statement
+================================================================================
+
+x = IF x > 10 THEN 10 ELSE x.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (statement
+    (variable_assignment
+      (assignment
+        (identifier)
+        (expression
+          (ternary_expression
+            (conditions
+              (expression
+                (comparison
+                  (expression
+                    (identifier))
+                  (comparator)
+                  (expression
+                    (number_literal)))))
+            (expression
+              (number_literal))
+            (expression
+              (identifier)))))
+      (terminator))))
+
+================================================================================
+TERNARY EXPRESSION (parenthesised) statement
+================================================================================
+
+x = (IF x > 10 THEN 10 ELSE x).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (statement
+    (variable_assignment
+      (assignment
+        (identifier)
+        (expression
+          (parenthesized_expression
+            (expression
+              (ternary_expression
+                (conditions
+                  (expression
+                    (comparison
+                      (expression
+                        (identifier))
+                      (comparator)
+                      (expression
+                        (number_literal)))))
+                (expression
+                  (number_literal))
+                (expression
+                  (identifier)))))))
+      (terminator))))

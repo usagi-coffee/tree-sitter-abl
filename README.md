@@ -33,7 +33,7 @@ npm run parse your_file.p
 - [X] Functions
 - [X] Function calls
 - [X] Procedures
-- [ ] Ternary operator (IF THEN ELSE)
+- [X] Ternary expression (IF THEN ELSE)
 - [X] Object properties/methods
 - [ ] Buffers
 - [ ] ...

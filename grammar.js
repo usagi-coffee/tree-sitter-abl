@@ -10,24 +10,30 @@ module.exports = grammar({
     source_code: ($) => repeat($.statement),
 
     /// Main
-    identifier: ($) => /[A-z-_]{1}[A-z-_|0-9]*/i,
+    identifier: ($) => /[A-z_]{1}[A-z-_|0-9]*/i,
     terminator: ($) => /\s*\./i,
     block_terminator: ($) =>
       choice(/END PROCEDURE\./i, /END FUNCTION\./i, /END\./i),
 
     expression: ($) =>
       choice(
+        $.parenthesized_expression,
         $.string_literal,
         $.number_literal,
         $.comparison,
-        $.function_call,
         $.object_property,
+        $.function_call,
+        $.ternary_expression,
         $.identifier
       ),
 
+    parenthesized_expression: ($) => seq("(", $.expression, ")"),
+
     comparator: ($) => choice("<", "<=", "<>", "=", ">", ">="),
     comparison: ($) =>
-      seq(prec.left($.expression), $.comparator, prec.right($.expression)),
+      prec.left(
+        seq(prec.left($.expression), $.comparator, prec.right($.expression))
+      ),
 
     statement: ($) =>
       choice(
@@ -107,10 +113,16 @@ module.exports = grammar({
 
     /// Function
     function_call_statement: ($) => seq($.function_call, $.terminator),
+    function_call_argument: ($) =>
+      prec.right(seq($.expression, repeat(seq(",", $.expression)))),
+
     function_call: ($) =>
-      seq(
-        field("function", $.identifier),
-        seq("(", optional(_list($.expression, ",")), ")")
+      prec.right(
+        1,
+        seq(
+          field("function", $.identifier),
+          seq("(", optional($.function_call_argument), ")")
+        )
       ),
 
     /// IF statement
@@ -148,6 +160,18 @@ module.exports = grammar({
       ),
 
     else_then_statement: ($) => seq("ELSE", $.terminated_statement),
+
+    ternary_expression: ($) =>
+      prec.right(
+        seq(
+          "IF",
+          field("conditions", $.conditions),
+          "THEN",
+          field("then", $.expression),
+          "ELSE",
+          field("else", $.expression)
+        )
+      ),
 
     /// Loop statements
     loop_statement: ($) =>
