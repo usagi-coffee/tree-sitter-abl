@@ -106,6 +106,7 @@ END.
 						(comparison
 							(expression
 								(identifier))
+              (comparator)
 							(expression
 								(number_literal)))))
 				(statement
@@ -139,6 +140,7 @@ END.
 						(comparison
 							(expression
 								(identifier))
+              (comparator)
 							(expression
 								(number_literal)))))
 				(statement
@@ -184,6 +186,7 @@ END.
 						(comparison
 							(expression
 								(identifier))
+              (comparator)
 							(expression
 								(number_literal)))))
 				(statement
@@ -200,12 +203,14 @@ END.
 							(comparison
 								(expression
 									(identifier))
+                (comparator)
 								(expression
 									(number_literal))))
 						(expression
 							(comparison
 								(expression
 									(identifier))
+                (comparator)
 								(expression
 									(number_literal)))))
 					(statement
@@ -243,6 +248,7 @@ IF x > 10 THEN x = 10.
 						(comparison
 							(expression
 								(identifier))
+              (comparator)
 							(expression
 								(number_literal)))))
 				(terminated_statement
@@ -271,6 +277,7 @@ ELSE x = x.
 						(comparison
 							(expression
 								(identifier))
+              (comparator)
 							(expression
 								(number_literal)))))
 				(terminated_statement
@@ -332,6 +339,7 @@ END.
 						(comparison
 							(expression
 								(identifier))
+              (comparator)
 							(expression
 								(number_literal)))))
 				(statement
@@ -500,6 +508,7 @@ END.
 						(comparison
 							(expression
 								(identifier))
+              (comparator)
 							(expression
 								(number_literal))))))
 			(query_tuning)
@@ -519,7 +528,6 @@ FOR EACH some_table WHERE x = 5 BREAK BY col1 DESCENDING col2:
 	DISPLAY some_table.
 END.
 
-
 --------------------------------------------------------------------------------
 
  (source_code
@@ -532,6 +540,7 @@ END.
 						(comparison
 							(expression
 								(identifier))
+              (comparator)
 							(expression
 								(number_literal))))))
 			(sort_clause
@@ -547,3 +556,33 @@ END.
 						(identifier))
 					(terminator)))
 			(block_terminator))))
+      
+================================================================================
+OBJECT ACCESSORS statement
+================================================================================
+
+DISPLAY some_object:root.
+DISPLAY some_object:chained_property:chained_another:method().
+
+--------------------------------------------------------------------------------
+
+ (source_code
+  (statement
+    (abl_statement
+      (identifier)
+      (expression
+        (object_property
+          (identifier)
+          (identifier)))
+      (terminator)))
+  (statement
+    (abl_statement
+      (identifier)
+      (expression
+        (object_property
+          (identifier)
+          (identifier)
+          (identifier)
+          (function_call
+            (identifier))))
+      (terminator))))

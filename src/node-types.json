@@ -82,44 +82,22 @@
     "fields": {}
   },
   {
+    "type": "comparator",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "comparison",
     "named": true,
-    "fields": {
-      "comparator": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "<",
-            "named": false
-          },
-          {
-            "type": "<=",
-            "named": false
-          },
-          {
-            "type": "<>",
-            "named": false
-          },
-          {
-            "type": "=",
-            "named": false
-          },
-          {
-            "type": ">",
-            "named": false
-          },
-          {
-            "type": ">=",
-            "named": false
-          }
-        ]
-      }
-    },
+    "fields": {},
     "children": {
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "comparator",
+          "named": true
+        },
         {
           "type": "expression",
           "named": true
@@ -283,6 +261,10 @@
         },
         {
           "type": "number_literal",
+          "named": true
+        },
+        {
+          "type": "object_property",
           "named": true
         },
         {
@@ -580,6 +562,25 @@
     }
   },
   {
+    "type": "object_property",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "function_call",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "primitive_type",
     "named": true,
     "fields": {}
@@ -661,7 +662,7 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "sort_column",
@@ -726,10 +727,6 @@
       "types": [
         {
           "type": "abl_statement",
-          "named": true
-        },
-        {
-          "type": "comment",
           "named": true
         },
         {

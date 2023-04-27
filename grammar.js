@@ -1,7 +1,5 @@
 const _list = (rule, separator) => seq(rule, repeat(seq(separator, rule)));
 
-const comparison_operators = ["<", "<=", "<>", "=", ">", ">="];
-
 module.exports = grammar({
   name: "abl",
 
@@ -23,15 +21,13 @@ module.exports = grammar({
         $.number_literal,
         $.comparison,
         $.function_call,
+        $.object_property,
         $.identifier
       ),
 
+    comparator: ($) => choice("<", "<=", "<>", "=", ">", ">="),
     comparison: ($) =>
-      seq(
-        prec.left($.expression),
-        field("comparator", choice(...comparison_operators)),
-        prec.right($.expression)
-      ),
+      seq(prec.left($.expression), $.comparator, prec.right($.expression)),
 
     statement: ($) =>
       choice(
@@ -187,7 +183,7 @@ module.exports = grammar({
     sort_column: ($) =>
       seq(field("column", $.identifier), optional($.sort_order)),
 
-    sort_clause: ($) => seq(optional("BREAK"), "BY", repeat($.sort_column)),
+    sort_clause: ($) => seq(optional("BREAK"), "BY", repeat1($.sort_column)),
 
     query_tuning: ($) =>
       choice("NO-LOCK", "NO-WAIT", "SHARE-LOCK", "EXCLUSIVE-LOCK"),
@@ -233,6 +229,13 @@ module.exports = grammar({
       ),
 
     return_statement: ($) => seq("RETURN", $.identifier, $.terminator),
+
+    /// Objects
+    object_property: ($) =>
+      seq(
+        $.identifier,
+        repeat1(seq(/:/, choice($.identifier, $.function_call)))
+      ),
 
     /// ABL statements
     abl_statement: ($) =>

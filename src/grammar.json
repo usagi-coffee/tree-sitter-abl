@@ -55,7 +55,40 @@
         },
         {
           "type": "SYMBOL",
+          "name": "object_property"
+        },
+        {
+          "type": "SYMBOL",
           "name": "identifier"
+        }
+      ]
+    },
+    "comparator": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "<"
+        },
+        {
+          "type": "STRING",
+          "value": "<="
+        },
+        {
+          "type": "STRING",
+          "value": "<>"
+        },
+        {
+          "type": "STRING",
+          "value": "="
+        },
+        {
+          "type": "STRING",
+          "value": ">"
+        },
+        {
+          "type": "STRING",
+          "value": ">="
         }
       ]
     },
@@ -71,37 +104,8 @@
           }
         },
         {
-          "type": "FIELD",
-          "name": "comparator",
-          "content": {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "STRING",
-                "value": "<"
-              },
-              {
-                "type": "STRING",
-                "value": "<="
-              },
-              {
-                "type": "STRING",
-                "value": "<>"
-              },
-              {
-                "type": "STRING",
-                "value": "="
-              },
-              {
-                "type": "STRING",
-                "value": ">"
-              },
-              {
-                "type": "STRING",
-                "value": ">="
-              }
-            ]
-          }
+          "type": "SYMBOL",
+          "name": "comparator"
         },
         {
           "type": "PREC_RIGHT",
@@ -116,10 +120,6 @@
     "statement": {
       "type": "CHOICE",
       "members": [
-        {
-          "type": "SYMBOL",
-          "name": "comment"
-        },
         {
           "type": "SYMBOL",
           "name": "variable_definition"
@@ -932,7 +932,7 @@
           "value": "BY"
         },
         {
-          "type": "REPEAT",
+          "type": "REPEAT1",
           "content": {
             "type": "SYMBOL",
             "name": "sort_column"
@@ -1231,6 +1231,40 @@
         }
       ]
     },
+    "object_property": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "identifier"
+        },
+        {
+          "type": "REPEAT1",
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "PATTERN",
+                "value": ":"
+              },
+              {
+                "type": "CHOICE",
+                "members": [
+                  {
+                    "type": "SYMBOL",
+                    "name": "identifier"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "function_call"
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
     "abl_statement": {
       "type": "CHOICE",
       "members": [
@@ -1287,8 +1321,12 @@
   },
   "extras": [
     {
+      "type": "SYMBOL",
+      "name": "comment"
+    },
+    {
       "type": "PATTERN",
-      "value": "\\s"
+      "value": "[\\s\\f\\uFEFF\\u2060\\u200B]|\\\\\\r?\\n"
     }
   ],
   "conflicts": [],
