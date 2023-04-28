@@ -74,7 +74,21 @@
   {
     "type": "block_terminator",
     "named": true,
-    "fields": {}
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "function_terminator",
+          "named": true
+        },
+        {
+          "type": "procedure_terminator",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "buffer_definition",
@@ -500,15 +514,19 @@
       "required": true,
       "types": [
         {
-          "type": "block_terminator",
-          "named": true
-        },
-        {
           "type": "function_parameter",
           "named": true
         },
         {
+          "type": "function_terminator",
+          "named": true
+        },
+        {
           "type": "statement",
+          "named": true
+        },
+        {
+          "type": "terminator",
           "named": true
         }
       ]
@@ -672,11 +690,11 @@
       "required": true,
       "types": [
         {
-          "type": "block_terminator",
+          "type": "identifier",
           "named": true
         },
         {
-          "type": "identifier",
+          "type": "procedure_terminator",
           "named": true
         },
         {
@@ -1295,6 +1313,10 @@
     "named": false
   },
   {
+    "type": "function_terminator",
+    "named": true
+  },
+  {
     "type": "identifier",
     "named": true
   },
@@ -1304,6 +1326,10 @@
   },
   {
     "type": "number_literal",
+    "named": true
+  },
+  {
+    "type": "procedure_terminator",
     "named": true
   },
   {

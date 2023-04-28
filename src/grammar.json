@@ -21,12 +21,12 @@
       "type": "CHOICE",
       "members": [
         {
-          "type": "PATTERN",
-          "value": "END PROCEDURE\\."
+          "type": "SYMBOL",
+          "name": "procedure_terminator"
         },
         {
-          "type": "PATTERN",
-          "value": "END FUNCTION\\."
+          "type": "SYMBOL",
+          "name": "function_terminator"
         },
         {
           "type": "PATTERN",
@@ -1184,6 +1184,10 @@
         }
       ]
     },
+    "procedure_terminator": {
+      "type": "PATTERN",
+      "value": "END PROCEDURE\\."
+    },
     "procedure_statement": {
       "type": "SEQ",
       "members": [
@@ -1220,9 +1224,13 @@
         },
         {
           "type": "SYMBOL",
-          "name": "block_terminator"
+          "name": "procedure_terminator"
         }
       ]
+    },
+    "function_terminator": {
+      "type": "PATTERN",
+      "value": "END FUNCTION\\."
     },
     "function_parameter_mode": {
       "type": "CHOICE",
@@ -1337,8 +1345,8 @@
           ]
         },
         {
-          "type": "STRING",
-          "value": ":"
+          "type": "SYMBOL",
+          "name": "terminator"
         },
         {
           "type": "REPEAT",
@@ -1349,7 +1357,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "block_terminator"
+          "name": "function_terminator"
         }
       ]
     },

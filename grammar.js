@@ -13,7 +13,7 @@ module.exports = grammar({
     identifier: ($) => /[A-z_]{1}[A-z-_|0-9]*/i,
     terminator: ($) => /\s*\./i,
     block_terminator: ($) =>
-      choice(/END PROCEDURE\./i, /END FUNCTION\./i, /END\./i),
+      choice($.procedure_terminator, $.function_terminator, /END\./i),
 
     null_expression: ($) => /\?/,
 
@@ -236,6 +236,7 @@ module.exports = grammar({
       ),
 
     /// Procedures
+    procedure_terminator: ($) => /END PROCEDURE\./i,
     procedure_statement: ($) =>
       seq(
         "PROCEDURE",
@@ -243,10 +244,11 @@ module.exports = grammar({
         optional("PRIVATE"),
         ":",
         repeat($.statement),
-        $.block_terminator
+        $.procedure_terminator
       ),
 
     /// Functions
+    function_terminator: ($) => /END FUNCTION\./i,
     function_parameter_mode: ($) => choice("INPUT", "OUTPUT"),
     function_parameter: ($) =>
       seq($.function_parameter_mode, $.identifier, "AS", $.primitive_type),
@@ -257,9 +259,9 @@ module.exports = grammar({
         field("name", $.identifier),
         seq("RETURNS", field("return_type", $.primitive_type)),
         seq("(", optional(_list($.function_parameter, ",")), ")"),
-        ":",
+        $.terminator,
         repeat($.statement),
-        $.block_terminator
+        $.function_terminator
       ),
 
     return_statement: ($) => seq("RETURN", $.identifier, $.terminator),

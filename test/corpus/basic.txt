@@ -412,7 +412,7 @@ RUN some_procedure.
     (procedure_statement
       (identifier)
       (comment)
-      (block_terminator)))
+      (procedure_terminator)))
     (statement
       (abl_statement
         (identifier)
@@ -424,9 +424,9 @@ RUN some_procedure.
 FUNCTION statement
 ================================================================================
 
-FUNCTION fn RETURNS INTEGER (INPUT par1 AS INTEGER):
+FUNCTION fn RETURNS INTEGER (INPUT par1 AS INTEGER).
   RETURN par1.
-END PROCEDURE.
+END FUNCTION.
 
 --------------------------------------------------------------------------------
 
@@ -439,11 +439,12 @@ END PROCEDURE.
         (function_parameter_mode)
         (identifier)
         (primitive_type))
+			(terminator)
       (statement
         (return_statement
           (identifier)
           (terminator)))
-      (block_terminator))))
+      (function_terminator))))
 
 ================================================================================
 ABL GENERIC statement
