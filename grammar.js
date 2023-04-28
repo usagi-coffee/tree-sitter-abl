@@ -288,7 +288,8 @@ module.exports = grammar({
         kw("SHARE-LOCK"),
         kw("EXCLUSIVE-LOCK"),
         kw("NO-WAIT"),
-        kw("NO-ERROR")
+        kw("NO-ERROR"),
+        seq(kw("USE-INDEX"), $.identifier)
       ),
 
     /// FOR statement

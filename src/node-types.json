@@ -773,7 +773,17 @@
   {
     "type": "query_tuning",
     "named": true,
-    "fields": {}
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "repeat_statement",
@@ -1469,6 +1479,10 @@
   },
   {
     "type": "TRUE",
+    "named": false
+  },
+  {
+    "type": "USE-INDEX",
     "named": false
   },
   {

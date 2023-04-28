@@ -2160,6 +2160,31 @@
           },
           "named": false,
           "value": "NO-ERROR"
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PREC",
+                  "value": 1,
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "[uU][sS][eE][--][iI][nN][dD][eE][xX]"
+                  }
+                }
+              },
+              "named": false,
+              "value": "USE-INDEX"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "identifier"
+            }
+          ]
         }
       ]
     },
