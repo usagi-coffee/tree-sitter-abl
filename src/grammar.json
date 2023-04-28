@@ -220,8 +220,25 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "expression"
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": "NOT"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            },
+            {
+              "type": "SYMBOL",
+              "name": "expression"
+            }
+          ]
         },
         {
           "type": "REPEAT",
@@ -242,8 +259,25 @@
                 ]
               },
               {
-                "type": "SYMBOL",
-                "name": "expression"
+                "type": "SEQ",
+                "members": [
+                  {
+                    "type": "CHOICE",
+                    "members": [
+                      {
+                        "type": "STRING",
+                        "value": "NOT"
+                      },
+                      {
+                        "type": "BLANK"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "expression"
+                  }
+                ]
               }
             ]
           }
@@ -988,190 +1022,6 @@
         }
       ]
     },
-    "where_clause": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "WHERE"
-        },
-        {
-          "type": "FIELD",
-          "name": "conditions",
-          "content": {
-            "type": "SYMBOL",
-            "name": "conditions"
-          }
-        }
-      ]
-    },
-    "sort_order": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "DESCENDING"
-        }
-      ]
-    },
-    "sort_column": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "FIELD",
-          "name": "column",
-          "content": {
-            "type": "SYMBOL",
-            "name": "identifier"
-          }
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "sort_order"
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
-        }
-      ]
-    },
-    "sort_clause": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "STRING",
-              "value": "BREAK"
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
-        },
-        {
-          "type": "STRING",
-          "value": "BY"
-        },
-        {
-          "type": "REPEAT1",
-          "content": {
-            "type": "SYMBOL",
-            "name": "sort_column"
-          }
-        }
-      ]
-    },
-    "query_tuning": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "NO-LOCK"
-        },
-        {
-          "type": "STRING",
-          "value": "NO-WAIT"
-        },
-        {
-          "type": "STRING",
-          "value": "SHARE-LOCK"
-        },
-        {
-          "type": "STRING",
-          "value": "EXCLUSIVE-LOCK"
-        }
-      ]
-    },
-    "for_statement": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "FOR"
-        },
-        {
-          "type": "FIELD",
-          "name": "type",
-          "content": {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "STRING",
-                "value": "EACH"
-              },
-              {
-                "type": "STRING",
-                "value": "FIRST"
-              },
-              {
-                "type": "STRING",
-                "value": "LAST"
-              }
-            ]
-          }
-        },
-        {
-          "type": "FIELD",
-          "name": "table",
-          "content": {
-            "type": "SYMBOL",
-            "name": "identifier"
-          }
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "where_clause"
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
-        },
-        {
-          "type": "REPEAT",
-          "content": {
-            "type": "SYMBOL",
-            "name": "query_tuning"
-          }
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "sort_clause"
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
-        },
-        {
-          "type": "STRING",
-          "value": ":"
-        },
-        {
-          "type": "REPEAT",
-          "content": {
-            "type": "SYMBOL",
-            "name": "statement"
-          }
-        },
-        {
-          "type": "SYMBOL",
-          "name": "block_terminator"
-        }
-      ]
-    },
     "procedure_terminator": {
       "type": "PATTERN",
       "value": "END PROCEDURE\\."
@@ -1397,6 +1247,190 @@
               }
             ]
           }
+        }
+      ]
+    },
+    "where_clause": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "WHERE"
+        },
+        {
+          "type": "FIELD",
+          "name": "conditions",
+          "content": {
+            "type": "SYMBOL",
+            "name": "conditions"
+          }
+        }
+      ]
+    },
+    "sort_order": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "DESCENDING"
+        }
+      ]
+    },
+    "sort_column": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "column",
+          "content": {
+            "type": "SYMBOL",
+            "name": "identifier"
+          }
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "sort_order"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
+    },
+    "sort_clause": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "BREAK"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "STRING",
+          "value": "BY"
+        },
+        {
+          "type": "REPEAT1",
+          "content": {
+            "type": "SYMBOL",
+            "name": "sort_column"
+          }
+        }
+      ]
+    },
+    "query_tuning": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "NO-LOCK"
+        },
+        {
+          "type": "STRING",
+          "value": "NO-WAIT"
+        },
+        {
+          "type": "STRING",
+          "value": "SHARE-LOCK"
+        },
+        {
+          "type": "STRING",
+          "value": "EXCLUSIVE-LOCK"
+        }
+      ]
+    },
+    "for_statement": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "FOR"
+        },
+        {
+          "type": "FIELD",
+          "name": "type",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "STRING",
+                "value": "EACH"
+              },
+              {
+                "type": "STRING",
+                "value": "FIRST"
+              },
+              {
+                "type": "STRING",
+                "value": "LAST"
+              }
+            ]
+          }
+        },
+        {
+          "type": "FIELD",
+          "name": "table",
+          "content": {
+            "type": "SYMBOL",
+            "name": "identifier"
+          }
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "where_clause"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "query_tuning"
+          }
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "sort_clause"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "STRING",
+          "value": ":"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "statement"
+          }
+        },
+        {
+          "type": "SYMBOL",
+          "name": "block_terminator"
         }
       ]
     },

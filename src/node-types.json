@@ -1241,6 +1241,10 @@
     "named": false
   },
   {
+    "type": "NOT",
+    "named": false
+  },
+  {
     "type": "OR",
     "named": false
   },

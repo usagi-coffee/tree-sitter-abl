@@ -56,7 +56,8 @@ module.exports = grammar({
     terminated_statement: ($) =>
       choice($.variable_assignment, $.function_call_statement),
 
-    conditions: ($) => _list($.expression, choice("AND", "OR")),
+    conditions: ($) =>
+      _list(seq(optional("NOT"), $.expression), choice("AND", "OR")),
 
     /// Comments
     comment: ($) => seq("/*", /[^*]*\*+([^/*][^*]*\*+)*/, "/"),
