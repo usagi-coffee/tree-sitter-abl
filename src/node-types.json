@@ -1070,6 +1070,16 @@
     "type": "variable_definition",
     "named": true,
     "fields": {
+      "like": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
       "name": {
         "multiple": false,
         "required": true,
@@ -1082,7 +1092,7 @@
       },
       "type": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "primitive_type",
@@ -1351,6 +1361,10 @@
   },
   {
     "type": "LAST",
+    "named": false
+  },
+  {
+    "type": "LIKE",
     "named": false
   },
   {

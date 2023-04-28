@@ -126,9 +126,14 @@ module.exports = grammar({
         choice(kw("DEFINE"), kw("DEF")),
         choice(kw("VARIABLE"), kw("VAR")),
         field("name", $.identifier),
-        kw("AS"),
-        field("type", $.primitive_type),
-        repeat($.variable_tuning),
+        choice(
+          seq(
+            kw("AS"),
+            field("type", $.primitive_type),
+            repeat($.variable_tuning)
+          ),
+          seq(kw("LIKE"), field("like", $.identifier))
+        ),
         $.terminator
       ),
 

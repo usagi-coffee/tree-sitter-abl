@@ -39,6 +39,8 @@ DEF VAR short_var AS INTEGER.
 DEFINE VARIABLE no_undo AS INTEGER NO-UNDO.
 DEFINE VARIABLE initial AS INTEGER INITIAL ?.
 
+DEFINE VARIABLE clone LIKE short_variable.
+
 --------------------------------------------------------------------------------
 
 (source_code
@@ -75,6 +77,11 @@ DEFINE VARIABLE initial AS INTEGER INITIAL ?.
 			(variable_tuning
 				(expression
 					(null_expression)))
+			(terminator)))
+	(statement
+	  (variable_definition
+		  (identifier)
+			(identifier)
 			(terminator))))
 		
 
