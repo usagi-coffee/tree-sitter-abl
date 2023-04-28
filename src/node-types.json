@@ -961,7 +961,15 @@
       "required": true,
       "types": [
         {
+          "type": "abl_statement",
+          "named": true
+        },
+        {
           "type": "function_call_statement",
+          "named": true
+        },
+        {
+          "type": "return_statement",
           "named": true
         },
         {

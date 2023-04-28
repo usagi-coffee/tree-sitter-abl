@@ -1,5 +1,13 @@
 const _list = (rule, separator) => seq(rule, repeat(seq(separator, rule)));
 
+function kw(keyword) {
+  if (keyword.toUpperCase() != keyword) {
+    throw new Error(`Expected upper case keyword got ${keyword}`);
+  }
+
+  return alias(reserved(createCaseInsensitiveRegex(keyword)), keyword);
+}
+
 module.exports = grammar({
   name: "abl",
 
@@ -55,10 +63,18 @@ module.exports = grammar({
       ),
 
     terminated_statement: ($) =>
-      choice($.variable_assignment, $.function_call_statement),
+      choice(
+        $.variable_assignment,
+        $.function_call_statement,
+        $.return_statement,
+        $.abl_statement
+      ),
 
     conditions: ($) =>
-      _list(seq(optional("NOT"), $.expression), choice("AND", "OR")),
+      _list(
+        seq(optional(kw("NOT")), $.expression),
+        choice(kw("AND"), kw("OR"))
+      ),
 
     /// Comments
     comment: ($) => seq("/*", /[^*]*\*+([^/*][^*]*\*+)*/, "/"),
@@ -66,21 +82,21 @@ module.exports = grammar({
     /// Primitives
     primitive_type: ($) =>
       choice(
-        "LOGICAL",
-        "INTEGER",
-        "CHARACTER",
-        "DECIMAL",
-        "DATE",
-        "DATETIME",
-        "DATETIME-TZ",
-        "INT64",
-        "LONGCHAR",
-        "MEMPTR",
-        "RAW",
-        "RECID",
-        "ROWID",
-        "HANDLE",
-        "COM-HANDLE"
+        kw("LOGICAL"),
+        kw("INTEGER"),
+        kw("CHARACTER"),
+        kw("DECIMAL"),
+        kw("DATE"),
+        kw("DATETIME"),
+        kw("DATETIME-TZ"),
+        kw("INT64"),
+        kw("LONGCHAR"),
+        kw("MEMPTR"),
+        kw("RAW"),
+        kw("RECID"),
+        kw("ROWID"),
+        kw("HANDLE"),
+        kw("COM-HANDLE")
       ),
 
     number_literal: ($) => /[0-9]+/i,
@@ -98,14 +114,14 @@ module.exports = grammar({
       seq(prec.left($.identifier), "=", prec.right($.expression)),
 
     variable_tuning: ($) =>
-      seq(choice("NO-UNDO", "INITIAL"), optional($.expression)),
+      seq(choice(kw("NO-UNDO"), kw("INITIAL")), optional($.expression)),
 
     variable_definition: ($) =>
       seq(
-        choice("DEFINE", "DEF"),
-        choice("VARIABLE", "VAR"),
+        choice(kw("DEFINE"), kw("DEF")),
+        choice(kw("VARIABLE"), kw("VAR")),
         field("name", $.identifier),
-        "AS",
+        kw("AS"),
         field("type", $.primitive_type),
         repeat($.variable_tuning),
         $.terminator
@@ -115,10 +131,10 @@ module.exports = grammar({
 
     buffer_definition: ($) =>
       seq(
-        "DEFINE BUFFER",
+        kw("DEFINE BUFFER"),
         field("name", $.identifier),
-        "FOR",
-        optional("TEMP-TABLE"),
+        kw("FOR"),
+        optional(kw("TEMP-TABLE")),
         field("table", $.identifier),
         $.terminator
       ),
@@ -142,31 +158,31 @@ module.exports = grammar({
 
     if_do_statement: ($) =>
       seq(
-        "IF",
+        kw("IF"),
         field("conditions", $.conditions),
-        "THEN DO:",
+        kw("THEN DO:"),
         repeat($.statement),
         $.block_terminator,
         optional(repeat(choice($.else_do_statement, $.else_do_if_statement)))
       ),
 
     else_do_statement: ($) =>
-      seq("ELSE DO:", repeat($.statement), $.block_terminator),
+      seq(kw("ELSE DO:"), repeat($.statement), $.block_terminator),
 
     else_do_if_statement: ($) =>
       seq(
-        "ELSE IF",
+        kw("ELSE IF"),
         field("conditions", $.conditions),
-        "THEN DO:",
+        kw("THEN DO:"),
         repeat($.statement),
         $.block_terminator
       ),
 
     if_then_statement: ($) =>
       seq(
-        "IF",
+        kw("IF"),
         field("conditions", $.conditions),
-        "THEN",
+        kw("THEN"),
         $.terminated_statement,
         optional($.else_then_statement)
       ),
@@ -176,11 +192,11 @@ module.exports = grammar({
     ternary_expression: ($) =>
       prec.right(
         seq(
-          "IF",
+          kw("IF"),
           field("conditions", $.conditions),
-          "THEN",
+          kw("THEN"),
           field("then", $.expression),
-          "ELSE",
+          kw("ELSE"),
           field("else", $.expression)
         )
       ),
@@ -190,11 +206,11 @@ module.exports = grammar({
       choice($.repeat_statement, $.do_while_statement, $.do_statement),
 
     repeat_statement: ($) =>
-      seq("REPEAT:", repeat($.statement), $.block_terminator),
+      seq(kw("REPEAT:"), repeat($.statement), $.block_terminator),
 
     do_while_statement: ($) =>
       seq(
-        "DO WHILE",
+        kw("DO WHILE"),
         $.conditions,
         ":",
         repeat($.statement),
@@ -203,9 +219,9 @@ module.exports = grammar({
 
     do_statement: ($) =>
       seq(
-        "DO",
+        kw("DO"),
         $.assignment,
-        "TO",
+        kw("TO"),
         $.number_literal,
         ":",
         repeat($.statement),
@@ -216,7 +232,7 @@ module.exports = grammar({
     procedure_terminator: ($) => /END PROCEDURE\./i,
     procedure_statement: ($) =>
       seq(
-        "PROCEDURE",
+        kw("PROCEDURE"),
         $.identifier,
         optional("PRIVATE"),
         ":",
@@ -226,22 +242,22 @@ module.exports = grammar({
 
     /// Functions
     function_terminator: ($) => choice($.block_terminator, /END FUNCTION\./i),
-    function_parameter_mode: ($) => choice("INPUT", "OUTPUT"),
+    function_parameter_mode: ($) => choice(kw("INPUT"), kw("OUTPUT")),
     function_parameter: ($) =>
-      seq($.function_parameter_mode, $.identifier, "AS", $.primitive_type),
+      seq($.function_parameter_mode, $.identifier, kw("AS"), $.primitive_type),
 
     function_statement: ($) =>
       seq(
-        "FUNCTION",
+        kw("FUNCTION"),
         field("name", $.identifier),
-        seq("RETURNS", field("return_type", $.primitive_type)),
+        seq(kw("RETURNS"), field("return_type", $.primitive_type)),
         seq("(", optional(_list($.function_parameter, ",")), ")"),
         $.terminator,
         repeat($.statement),
         $.function_terminator
       ),
 
-    return_statement: ($) => seq("RETURN", $.expression, $.terminator),
+    return_statement: ($) => seq(kw("RETURN"), $.expression, $.terminator),
 
     /// Objects
     object_property: ($) =>
@@ -251,22 +267,29 @@ module.exports = grammar({
       ),
 
     /// ABL queries
-    where_clause: ($) => seq("WHERE", field("conditions", $.conditions)),
+    where_clause: ($) => seq(kw("WHERE"), field("conditions", $.conditions)),
 
     query_tuning: ($) =>
-      choice("NO-LOCK", "SHARE-LOCK", "EXCLUSIVE-LOCK", "NO-WAIT", "NO-ERROR"),
+      choice(
+        kw("NO-LOCK"),
+        kw("SHARE-LOCK"),
+        kw("EXCLUSIVE-LOCK"),
+        kw("NO-WAIT"),
+        kw("NO-ERROR")
+      ),
 
     /// FOR statement
-    sort_order: ($) => choice("DESCENDING"),
+    sort_order: ($) => choice(kw("DESCENDING")),
     sort_column: ($) =>
       seq(field("column", $.identifier), optional($.sort_order)),
 
-    sort_clause: ($) => seq(optional("BREAK"), "BY", repeat1($.sort_column)),
+    sort_clause: ($) =>
+      seq(optional(kw("BREAK")), kw("BY"), repeat1($.sort_column)),
 
     for_statement: ($) =>
       seq(
-        "FOR",
-        field("type", choice("EACH", "FIRST", "LAST")),
+        kw("FOR"),
+        field("type", choice(kw("EACH"), kw("FIRST"), kw("LAST"))),
         field("table", $.identifier),
         optional($.where_clause),
         repeat($.query_tuning),
@@ -279,8 +302,11 @@ module.exports = grammar({
     // FIND statement
     find_statement: ($) =>
       seq(
-        "FIND",
-        field("type", optional(choice("FIRST", "LAST", "NEXT", "PREV"))),
+        kw("FIND"),
+        field(
+          "type",
+          optional(choice(kw("FIRST"), kw("LAST"), kw("NEXT"), kw("PREV")))
+        ),
         field("table", $.identifier),
         optional($.where_clause),
         repeat($.query_tuning),
@@ -298,6 +324,20 @@ module.exports = grammar({
         )
       ),
 
-    assign_statement: ($) => seq("ASSIGN", repeat($.assignment), $.terminator),
+    assign_statement: ($) =>
+      seq(kw("ASSIGN"), repeat($.assignment), $.terminator),
   },
 });
+
+function reserved(regex) {
+  return token(prec(1, new RegExp(regex)));
+}
+
+function createCaseInsensitiveRegex(word) {
+  return new RegExp(
+    word
+      .split("")
+      .map((letter) => `[${letter.toLowerCase()}${letter.toUpperCase()}]`)
+      .join("")
+  );
+}
