@@ -59,7 +59,7 @@ module.exports = grammar({
     conditions: ($) => _list($.expression, choice("AND", "OR")),
 
     /// Comments
-    comment: ($) => seq("/*", repeat(choice(/[^*/\\]+/, /\\./)), "*/"),
+    comment: ($) => seq("/*", /[^*]*\*+([^/*][^*]*\*+)*/, "/"),
 
     /// Primitives
     primitive_type: ($) =>
