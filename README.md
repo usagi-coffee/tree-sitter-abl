@@ -23,18 +23,17 @@ npm run parse your_file.p
 ## Supported grammar
 
 - [X] Comments
-- [X] Variable definitions
-- [X] Variable assignments
-- [X] Buffer definition
+- [X] Variables
+- [ ] Unary/Binary operators
 - [X] Comparisons
 - [X] Conditional statements
 - [X] Loops
 - [X] Functions
-- [X] Function calls
 - [X] Procedures
-- [X] Ternary expression (IF THEN ELSE)
-- [X] Object properties/methods
+- [X] Ternary expression
+- [X] Object accessors
 - [X] Transactions
+- [X] Buffers
 - [ ] Streams
 - [ ] Includes
 - [ ] ...
@@ -45,8 +44,13 @@ npm run parse your_file.p
 - [ ] ...
 
 ### ABL Statements
+
+> Even though many statemenents are not listed it doesn't ***necessarily*** mean they're not parsable, it just means the syntax tree won't have details about the statement!
+
 - [X] ASSIGN
 - [ ] PUT
+- [ ] ACCUMULATE
+- [ ] AVAILABLE
 - [ ] ...
   
 Keep in mind these were tested on trivial examples so it may be broken in your case, if that happens please file an issue!
