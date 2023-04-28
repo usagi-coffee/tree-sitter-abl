@@ -12,8 +12,7 @@ module.exports = grammar({
     /// Main
     identifier: ($) => /[A-z_]{1}[A-z-_|0-9]*/i,
     terminator: ($) => /\s*\./i,
-    block_terminator: ($) =>
-      choice($.procedure_terminator, $.function_terminator, /END\./i),
+    block_terminator: ($) => choice(/END\./i),
 
     null_expression: ($) => /\?/,
 
@@ -50,7 +49,9 @@ module.exports = grammar({
         $.if_statement,
         $.loop_statement,
         $.for_statement,
-        $.abl_statement
+        $.find_statement,
+        $.abl_statement,
+        prec.left(-1, $.block_terminator)
       ),
 
     terminated_statement: ($) =>
@@ -249,17 +250,18 @@ module.exports = grammar({
         repeat1(seq(/:/, choice($.identifier, $.function_call)))
       ),
 
-    /// FOR statement
+    /// ABL queries
     where_clause: ($) => seq("WHERE", field("conditions", $.conditions)),
 
+    query_tuning: ($) =>
+      choice("NO-LOCK", "SHARE-LOCK", "EXCLUSIVE-LOCK", "NO-WAIT", "NO-ERROR"),
+
+    /// FOR statement
     sort_order: ($) => choice("DESCENDING"),
     sort_column: ($) =>
       seq(field("column", $.identifier), optional($.sort_order)),
 
     sort_clause: ($) => seq(optional("BREAK"), "BY", repeat1($.sort_column)),
-
-    query_tuning: ($) =>
-      choice("NO-LOCK", "NO-WAIT", "SHARE-LOCK", "EXCLUSIVE-LOCK"),
 
     for_statement: ($) =>
       seq(
@@ -272,6 +274,17 @@ module.exports = grammar({
         ":",
         repeat($.statement),
         $.block_terminator
+      ),
+
+    // FIND statement
+    find_statement: ($) =>
+      seq(
+        "FIND",
+        field("type", optional(choice("FIRST", "LAST", "NEXT", "PREV"))),
+        field("table", $.identifier),
+        optional($.where_clause),
+        repeat($.query_tuning),
+        $.terminator
       ),
 
     /// ABL statements

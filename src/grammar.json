@@ -21,14 +21,6 @@
       "type": "CHOICE",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "procedure_terminator"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "function_terminator"
-        },
-        {
           "type": "PATTERN",
           "value": "END\\."
         }
@@ -199,7 +191,19 @@
         },
         {
           "type": "SYMBOL",
+          "name": "find_statement"
+        },
+        {
+          "type": "SYMBOL",
           "name": "abl_statement"
+        },
+        {
+          "type": "PREC_LEFT",
+          "value": -1,
+          "content": {
+            "type": "SYMBOL",
+            "name": "block_terminator"
+          }
         }
       ]
     },
@@ -1267,6 +1271,31 @@
         }
       ]
     },
+    "query_tuning": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "NO-LOCK"
+        },
+        {
+          "type": "STRING",
+          "value": "SHARE-LOCK"
+        },
+        {
+          "type": "STRING",
+          "value": "EXCLUSIVE-LOCK"
+        },
+        {
+          "type": "STRING",
+          "value": "NO-WAIT"
+        },
+        {
+          "type": "STRING",
+          "value": "NO-ERROR"
+        }
+      ]
+    },
     "sort_order": {
       "type": "CHOICE",
       "members": [
@@ -1326,27 +1355,6 @@
             "type": "SYMBOL",
             "name": "sort_column"
           }
-        }
-      ]
-    },
-    "query_tuning": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "NO-LOCK"
-        },
-        {
-          "type": "STRING",
-          "value": "NO-WAIT"
-        },
-        {
-          "type": "STRING",
-          "value": "SHARE-LOCK"
-        },
-        {
-          "type": "STRING",
-          "value": "EXCLUSIVE-LOCK"
         }
       ]
     },
@@ -1431,6 +1439,79 @@
         {
           "type": "SYMBOL",
           "name": "block_terminator"
+        }
+      ]
+    },
+    "find_statement": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "FIND"
+        },
+        {
+          "type": "FIELD",
+          "name": "type",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "CHOICE",
+                "members": [
+                  {
+                    "type": "STRING",
+                    "value": "FIRST"
+                  },
+                  {
+                    "type": "STRING",
+                    "value": "LAST"
+                  },
+                  {
+                    "type": "STRING",
+                    "value": "NEXT"
+                  },
+                  {
+                    "type": "STRING",
+                    "value": "PREV"
+                  }
+                ]
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          }
+        },
+        {
+          "type": "FIELD",
+          "name": "table",
+          "content": {
+            "type": "SYMBOL",
+            "name": "identifier"
+          }
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "where_clause"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "query_tuning"
+          }
+        },
+        {
+          "type": "SYMBOL",
+          "name": "terminator"
         }
       ]
     },

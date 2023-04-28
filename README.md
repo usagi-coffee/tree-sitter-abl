@@ -42,7 +42,7 @@ npm run parse your_file.p
 
 ### ABL Query
 - [X] FOR (EACH/FIRST/LAST) statement
-- [ ] FIND statement
+- [X] FIND statement
 - [ ] ...
 
 ### ABL Statements

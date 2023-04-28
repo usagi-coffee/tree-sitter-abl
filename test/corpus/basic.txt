@@ -588,6 +588,57 @@ END.
 						(identifier))
 					(terminator)))
 			(block_terminator))))
+
+================================================================================
+FIND statement
+================================================================================
+
+FIND some_table WHERE x > 5 EXCLUSIVE-LOCK NO-ERROR.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+	(statement
+		(find_statement
+			(identifier)
+			(where_clause
+				(conditions
+					(expression
+						(comparison
+							(expression
+								(identifier))
+							(comparator)
+							(expression
+								(number_literal))))))
+			(query_tuning)
+			(query_tuning)
+			(terminator)))
+	(statement
+		(block_terminator)))
+
+================================================================================
+FIND FIRST (no terminator) statement
+================================================================================
+
+FIND FIRST some_table WHERE NOT x > 5.
+
+--------------------------------------------------------------------------------
+
+(source_code
+	(statement
+		(find_statement
+			(identifier)
+			(where_clause
+				(conditions
+					(expression
+						(comparison
+							(expression
+								(identifier))
+							(comparator)
+							(expression
+								(number_literal))))))
+			(terminator))))
       
 ================================================================================
 OBJECT ACCESSORS statement

@@ -74,21 +74,7 @@
   {
     "type": "block_terminator",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": false,
-      "types": [
-        {
-          "type": "function_terminator",
-          "named": true
-        },
-        {
-          "type": "procedure_terminator",
-          "named": true
-        }
-      ]
-    }
+    "fields": {}
   },
   {
     "type": "buffer_definition",
@@ -331,6 +317,62 @@
         },
         {
           "type": "ternary_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "find_statement",
+    "named": true,
+    "fields": {
+      "table": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "type": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "FIRST",
+            "named": false
+          },
+          {
+            "type": "LAST",
+            "named": false
+          },
+          {
+            "type": "NEXT",
+            "named": false
+          },
+          {
+            "type": "PREV",
+            "named": false
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "query_tuning",
+          "named": true
+        },
+        {
+          "type": "terminator",
+          "named": true
+        },
+        {
+          "type": "where_clause",
           "named": true
         }
       ]
@@ -826,7 +868,15 @@
           "named": true
         },
         {
+          "type": "block_terminator",
+          "named": true
+        },
+        {
           "type": "buffer_definition",
+          "named": true
+        },
+        {
+          "type": "find_statement",
           "named": true
         },
         {
@@ -1177,6 +1227,10 @@
     "named": false
   },
   {
+    "type": "FIND",
+    "named": false
+  },
+  {
     "type": "FIRST",
     "named": false
   },
@@ -1229,6 +1283,14 @@
     "named": false
   },
   {
+    "type": "NEXT",
+    "named": false
+  },
+  {
+    "type": "NO-ERROR",
+    "named": false
+  },
+  {
     "type": "NO-LOCK",
     "named": false
   },
@@ -1250,6 +1312,10 @@
   },
   {
     "type": "OUTPUT",
+    "named": false
+  },
+  {
+    "type": "PREV",
     "named": false
   },
   {
