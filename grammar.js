@@ -20,7 +20,7 @@ module.exports = grammar({
     /// Main
     identifier: ($) => /[A-z_]{1}[A-z-_|0-9]*/i,
     terminator: ($) => /\s*\./i,
-    block_terminator: ($) => choice(/END\./i),
+    block_terminator: ($) => seq(kw("END"), "."),
 
     null_expression: ($) => /\?/,
     boolean_expression: ($) => choice(kw("TRUE"), kw("FALSE")),
