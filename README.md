@@ -36,6 +36,7 @@ npm run parse your_file.p
 - [X] Procedures
 - [X] Ternary expression (IF THEN ELSE)
 - [X] Object properties/methods
+- [X] Transactions
 - [ ] Streams
 - [ ] Includes
 - [ ] ...

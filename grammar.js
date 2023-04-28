@@ -58,6 +58,7 @@ module.exports = grammar({
         $.loop_statement,
         $.for_statement,
         $.find_statement,
+        $.transaction_statement,
         $.abl_statement,
         prec.left(-1, $.block_terminator)
       ),
@@ -312,6 +313,10 @@ module.exports = grammar({
         repeat($.query_tuning),
         $.terminator
       ),
+
+    // DO TRANSACTION statement
+    transaction_statement: ($) =>
+      seq(kw("DO TRANSACTION"), ":", repeat($.statement), $.block_terminator),
 
     /// ABL statements
     abl_statement: ($) =>

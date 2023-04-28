@@ -464,6 +464,27 @@ END FUNCTION.
       (function_terminator))))
 
 ================================================================================
+DO TRANSACTION statement
+================================================================================
+
+DO TRANSACTION:
+  CREATE x.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+	(statement
+		(transaction_statement
+			(statement
+				(abl_statement
+					(identifier)
+					(expression
+						(identifier))
+					(terminator)))
+			(block_terminator))))
+
+================================================================================
 ABL GENERIC statement
 ================================================================================
 

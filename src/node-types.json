@@ -923,6 +923,10 @@
           "named": true
         },
         {
+          "type": "transaction_statement",
+          "named": true
+        },
+        {
           "type": "variable_assignment",
           "named": true
         },
@@ -1013,6 +1017,25 @@
           }
         ]
       }
+    }
+  },
+  {
+    "type": "transaction_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "block_terminator",
+          "named": true
+        },
+        {
+          "type": "statement",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -1223,6 +1246,10 @@
   },
   {
     "type": "DO",
+    "named": false
+  },
+  {
+    "type": "DO TRANSACTION",
     "named": false
   },
   {
