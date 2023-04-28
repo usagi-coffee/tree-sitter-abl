@@ -210,31 +210,6 @@ module.exports = grammar({
         $.block_terminator
       ),
 
-    /// FOR statement
-    where_clause: ($) => seq("WHERE", field("conditions", $.conditions)),
-
-    sort_order: ($) => choice("DESCENDING"),
-    sort_column: ($) =>
-      seq(field("column", $.identifier), optional($.sort_order)),
-
-    sort_clause: ($) => seq(optional("BREAK"), "BY", repeat1($.sort_column)),
-
-    query_tuning: ($) =>
-      choice("NO-LOCK", "NO-WAIT", "SHARE-LOCK", "EXCLUSIVE-LOCK"),
-
-    for_statement: ($) =>
-      seq(
-        "FOR",
-        field("type", choice("EACH", "FIRST", "LAST")),
-        field("table", $.identifier),
-        optional($.where_clause),
-        repeat($.query_tuning),
-        optional($.sort_clause),
-        ":",
-        repeat($.statement),
-        $.block_terminator
-      ),
-
     /// Procedures
     procedure_terminator: ($) => /END PROCEDURE\./i,
     procedure_statement: ($) =>
@@ -271,6 +246,31 @@ module.exports = grammar({
       seq(
         $.identifier,
         repeat1(seq(/:/, choice($.identifier, $.function_call)))
+      ),
+
+    /// FOR statement
+    where_clause: ($) => seq("WHERE", field("conditions", $.conditions)),
+
+    sort_order: ($) => choice("DESCENDING"),
+    sort_column: ($) =>
+      seq(field("column", $.identifier), optional($.sort_order)),
+
+    sort_clause: ($) => seq(optional("BREAK"), "BY", repeat1($.sort_column)),
+
+    query_tuning: ($) =>
+      choice("NO-LOCK", "NO-WAIT", "SHARE-LOCK", "EXCLUSIVE-LOCK"),
+
+    for_statement: ($) =>
+      seq(
+        "FOR",
+        field("type", choice("EACH", "FIRST", "LAST")),
+        field("table", $.identifier),
+        optional($.where_clause),
+        repeat($.query_tuning),
+        optional($.sort_clause),
+        ":",
+        repeat($.statement),
+        $.block_terminator
       ),
 
     /// ABL statements
