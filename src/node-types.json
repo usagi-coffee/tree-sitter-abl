@@ -1205,6 +1205,10 @@
     "named": false
   },
   {
+    "type": "CHAR",
+    "named": false
+  },
+  {
     "type": "CHARACTER",
     "named": false
   },
@@ -1306,6 +1310,10 @@
   },
   {
     "type": "INPUT",
+    "named": false
+  },
+  {
+    "type": "INT",
     "named": false
   },
   {

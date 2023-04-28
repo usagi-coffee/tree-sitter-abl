@@ -409,12 +409,44 @@
               "value": 1,
               "content": {
                 "type": "PATTERN",
+                "value": "[iI][nN][tT]"
+              }
+            }
+          },
+          "named": false,
+          "value": "INT"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "PATTERN",
                 "value": "[cC][hH][aA][rR][aA][cC][tT][eE][rR]"
               }
             }
           },
           "named": false,
           "value": "CHARACTER"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "PATTERN",
+                "value": "[cC][hH][aA][rR]"
+              }
+            }
+          },
+          "named": false,
+          "value": "CHAR"
         },
         {
           "type": "ALIAS",
@@ -1796,8 +1828,17 @@
           ]
         },
         {
-          "type": "SYMBOL",
-          "name": "terminator"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "STRING",
+              "value": ":"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "terminator"
+            }
+          ]
         },
         {
           "type": "REPEAT",

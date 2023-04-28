@@ -85,7 +85,9 @@ module.exports = grammar({
       choice(
         kw("LOGICAL"),
         kw("INTEGER"),
+        kw("INT"),
         kw("CHARACTER"),
+        kw("CHAR"),
         kw("DECIMAL"),
         kw("DATE"),
         kw("DATETIME"),
@@ -253,7 +255,7 @@ module.exports = grammar({
         field("name", $.identifier),
         seq(kw("RETURNS"), field("return_type", $.primitive_type)),
         seq("(", optional(_list($.function_parameter, ",")), ")"),
-        $.terminator,
+        choice(":", $.terminator),
         repeat($.statement),
         $.function_terminator
       ),
