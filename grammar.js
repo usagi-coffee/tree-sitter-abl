@@ -225,7 +225,7 @@ module.exports = grammar({
       ),
 
     /// Functions
-    function_terminator: ($) => /END FUNCTION\./i,
+    function_terminator: ($) => choice($.block_terminator, /END FUNCTION\./i),
     function_parameter_mode: ($) => choice("INPUT", "OUTPUT"),
     function_parameter: ($) =>
       seq($.function_parameter_mode, $.identifier, "AS", $.primitive_type),
@@ -241,7 +241,7 @@ module.exports = grammar({
         $.function_terminator
       ),
 
-    return_statement: ($) => seq("RETURN", $.identifier, $.terminator),
+    return_statement: ($) => seq("RETURN", $.expression, $.terminator),
 
     /// Objects
     object_property: ($) =>

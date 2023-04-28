@@ -458,7 +458,8 @@ END FUNCTION.
 			(terminator)
       (statement
         (return_statement
-          (identifier)
+				  (expression
+            (identifier))
           (terminator)))
       (function_terminator))))
 

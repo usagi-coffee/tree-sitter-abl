@@ -1071,8 +1071,17 @@
       ]
     },
     "function_terminator": {
-      "type": "PATTERN",
-      "value": "END FUNCTION\\."
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "block_terminator"
+        },
+        {
+          "type": "PATTERN",
+          "value": "END FUNCTION\\."
+        }
+      ]
     },
     "function_parameter_mode": {
       "type": "CHOICE",
@@ -1212,7 +1221,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "identifier"
+          "name": "expression"
         },
         {
           "type": "SYMBOL",
