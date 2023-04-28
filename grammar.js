@@ -23,10 +23,12 @@ module.exports = grammar({
     block_terminator: ($) => choice(/END\./i),
 
     null_expression: ($) => /\?/,
+    boolean_expression: ($) => choice(kw("TRUE"), kw("FALSE")),
 
     expression: ($) =>
       choice(
         $.parenthesized_expression,
+        $.boolean_expression,
         $.string_literal,
         $.number_literal,
         $.null_expression,
@@ -163,20 +165,22 @@ module.exports = grammar({
       seq(
         kw("IF"),
         field("conditions", $.conditions),
-        kw("THEN DO:"),
+        kw("THEN DO"),
+        ":",
         repeat($.statement),
         $.block_terminator,
         optional(repeat(choice($.else_do_statement, $.else_do_if_statement)))
       ),
 
     else_do_statement: ($) =>
-      seq(kw("ELSE DO:"), repeat($.statement), $.block_terminator),
+      seq(kw("ELSE DO"), ":", repeat($.statement), $.block_terminator),
 
     else_do_if_statement: ($) =>
       seq(
         kw("ELSE IF"),
         field("conditions", $.conditions),
-        kw("THEN DO:"),
+        kw("THEN DO"),
+        ":",
         repeat($.statement),
         $.block_terminator
       ),
@@ -209,7 +213,7 @@ module.exports = grammar({
       choice($.repeat_statement, $.do_while_statement, $.do_statement),
 
     repeat_statement: ($) =>
-      seq(kw("REPEAT:"), repeat($.statement), $.block_terminator),
+      seq(kw("REPEAT"), ":", repeat($.statement), $.block_terminator),
 
     do_while_statement: ($) =>
       seq(
@@ -244,7 +248,8 @@ module.exports = grammar({
       ),
 
     /// Functions
-    function_terminator: ($) => choice($.block_terminator, /END FUNCTION\./i),
+    function_terminator: ($) =>
+      choice($.block_terminator, seq(kw("END FUNCTION"), ".")),
     function_parameter_mode: ($) => choice(kw("INPUT"), kw("OUTPUT")),
     function_parameter: ($) =>
       seq($.function_parameter_mode, $.identifier, kw("AS"), $.primitive_type),

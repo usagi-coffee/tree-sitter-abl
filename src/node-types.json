@@ -77,6 +77,11 @@
     "fields": {}
   },
   {
+    "type": "boolean_expression",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "buffer_definition",
     "named": true,
     "fields": {
@@ -283,6 +288,10 @@
       "multiple": false,
       "required": true,
       "types": [
+        {
+          "type": "boolean_expression",
+          "named": true
+        },
         {
           "type": "comparison",
           "named": true
@@ -1149,6 +1158,10 @@
     "named": false
   },
   {
+    "type": ".",
+    "named": false
+  },
+  {
     "type": "/",
     "named": false
   },
@@ -1269,7 +1282,7 @@
     "named": false
   },
   {
-    "type": "ELSE DO:",
+    "type": "ELSE DO",
     "named": false
   },
   {
@@ -1277,7 +1290,15 @@
     "named": false
   },
   {
+    "type": "END FUNCTION",
+    "named": false
+  },
+  {
     "type": "EXCLUSIVE-LOCK",
+    "named": false
+  },
+  {
+    "type": "FALSE",
     "named": false
   },
   {
@@ -1393,7 +1414,7 @@
     "named": false
   },
   {
-    "type": "REPEAT:",
+    "type": "REPEAT",
     "named": false
   },
   {
@@ -1421,11 +1442,15 @@
     "named": false
   },
   {
-    "type": "THEN DO:",
+    "type": "THEN DO",
     "named": false
   },
   {
     "type": "TO",
+    "named": false
+  },
+  {
+    "type": "TRUE",
     "named": false
   },
   {

@@ -30,12 +30,53 @@
       "type": "PATTERN",
       "value": "\\?"
     },
+    "boolean_expression": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "PATTERN",
+                "value": "[tT][rR][uU][eE]"
+              }
+            }
+          },
+          "named": false,
+          "value": "TRUE"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "PATTERN",
+                "value": "[fF][aA][lL][sS][eE]"
+              }
+            }
+          },
+          "named": false,
+          "value": "FALSE"
+        }
+      ]
+    },
     "expression": {
       "type": "CHOICE",
       "members": [
         {
           "type": "SYMBOL",
           "name": "parenthesized_expression"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "boolean_expression"
         },
         {
           "type": "SYMBOL",
@@ -1150,12 +1191,16 @@
               "value": 1,
               "content": {
                 "type": "PATTERN",
-                "value": "[tT][hH][eE][nN][  ][dD][oO][::]"
+                "value": "[tT][hH][eE][nN][  ][dD][oO]"
               }
             }
           },
           "named": false,
-          "value": "THEN DO:"
+          "value": "THEN DO"
+        },
+        {
+          "type": "STRING",
+          "value": ":"
         },
         {
           "type": "REPEAT",
@@ -1206,12 +1251,16 @@
               "value": 1,
               "content": {
                 "type": "PATTERN",
-                "value": "[eE][lL][sS][eE][  ][dD][oO][::]"
+                "value": "[eE][lL][sS][eE][  ][dD][oO]"
               }
             }
           },
           "named": false,
-          "value": "ELSE DO:"
+          "value": "ELSE DO"
+        },
+        {
+          "type": "STRING",
+          "value": ":"
         },
         {
           "type": "REPEAT",
@@ -1262,12 +1311,16 @@
               "value": 1,
               "content": {
                 "type": "PATTERN",
-                "value": "[tT][hH][eE][nN][  ][dD][oO][::]"
+                "value": "[tT][hH][eE][nN][  ][dD][oO]"
               }
             }
           },
           "named": false,
-          "value": "THEN DO:"
+          "value": "THEN DO"
+        },
+        {
+          "type": "STRING",
+          "value": ":"
         },
         {
           "type": "REPEAT",
@@ -1466,12 +1519,16 @@
               "value": 1,
               "content": {
                 "type": "PATTERN",
-                "value": "[rR][eE][pP][eE][aA][tT][::]"
+                "value": "[rR][eE][pP][eE][aA][tT]"
               }
             }
           },
           "named": false,
-          "value": "REPEAT:"
+          "value": "REPEAT"
+        },
+        {
+          "type": "STRING",
+          "value": ":"
         },
         {
           "type": "REPEAT",
@@ -1650,8 +1707,29 @@
           "name": "block_terminator"
         },
         {
-          "type": "PATTERN",
-          "value": "END FUNCTION\\."
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PREC",
+                  "value": 1,
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "[eE][nN][dD][  ][fF][uU][nN][cC][tT][iI][oO][nN]"
+                  }
+                }
+              },
+              "named": false,
+              "value": "END FUNCTION"
+            },
+            {
+              "type": "STRING",
+              "value": "."
+            }
+          ]
         }
       ]
     },
