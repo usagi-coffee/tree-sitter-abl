@@ -21,7 +21,7 @@ DEF VARIABLE short_variable AS INTEGER.
 DEF VAR short_var AS INTEGER.
 
 DEFINE VARIABLE no_undo AS INTEGER NO-UNDO.
-DEFINE VARIABLE initial AS INTEGER INITIAL 5.
+DEFINE VARIABLE initial AS INTEGER INITIAL ?.
 
 --------------------------------------------------------------------------------
 
@@ -58,7 +58,7 @@ DEFINE VARIABLE initial AS INTEGER INITIAL 5.
 			(primitive_type)
 			(variable_tuning
 				(expression
-					(number_literal)))
+					(null_expression)))
 			(terminator))))
 		
 

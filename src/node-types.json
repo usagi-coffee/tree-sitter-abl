@@ -296,6 +296,10 @@
           "named": true
         },
         {
+          "type": "null_expression",
+          "named": true
+        },
+        {
           "type": "number_literal",
           "named": true
         },
@@ -1292,6 +1296,10 @@
   },
   {
     "type": "identifier",
+    "named": true
+  },
+  {
+    "type": "null_expression",
     "named": true
   },
   {

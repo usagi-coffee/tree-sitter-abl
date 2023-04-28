@@ -15,11 +15,14 @@ module.exports = grammar({
     block_terminator: ($) =>
       choice(/END PROCEDURE\./i, /END FUNCTION\./i, /END\./i),
 
+    null_expression: ($) => /\?/,
+
     expression: ($) =>
       choice(
         $.parenthesized_expression,
         $.string_literal,
         $.number_literal,
+        $.null_expression,
         $.comparison,
         $.object_property,
         $.function_call,
