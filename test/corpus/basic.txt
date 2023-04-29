@@ -111,6 +111,52 @@ variable = 5.
 			(terminator))))	
 
 ================================================================================
+UNARY/BINARY operators
+================================================================================
+
+x = 2 + 2.
+y = (4 * 3) / 2.
+
+--------------------------------------------------------------------------------
+
+
+(source_code
+	(statement
+		(variable_assignment
+			(assignment
+				(identifier)
+				(expression
+					(binary_expression
+						(additive_expression
+							(expression
+								(number_literal))
+							(additive_operator)
+							(expression
+								(number_literal))))))
+			(terminator)))
+	(statement
+		(variable_assignment
+			(assignment
+				(identifier)
+				(expression
+					(binary_expression
+						(multiplicative_expression
+							(expression
+								(parenthesized_expression
+									(expression
+										(binary_expression
+											(multiplicative_expression
+												(expression
+													(number_literal))
+												(multiplicative_operator)
+												(expression
+													(number_literal)))))))
+							(multiplicative_operator)
+							(expression
+								(number_literal))))))
+			(terminator))))
+
+================================================================================
 BUFFER DEFINITION statement
 ================================================================================
 

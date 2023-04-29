@@ -24,7 +24,7 @@ npm run parse your_file.p
 
 - [X] Comments
 - [X] Variables
-- [ ] Unary/Binary operators
+- [X] Unary/Binary operators
 - [X] Comparisons
 - [X] Conditional statements
 - [X] Loops

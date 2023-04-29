@@ -1,3 +1,10 @@
+const PREC = {
+  UNARY: 7,
+  EXP: 6,
+  MULTI: 5,
+  ADD: 4,
+};
+
 const _list = (rule, separator) => seq(rule, repeat(seq(separator, rule)));
 
 function kw(keyword) {
@@ -32,6 +39,8 @@ module.exports = grammar({
         $.string_literal,
         $.number_literal,
         $.null_expression,
+        $.unary_expression,
+        $.binary_expression,
         $.comparison,
         $.object_property,
         $.function_call,
@@ -40,6 +49,37 @@ module.exports = grammar({
       ),
 
     parenthesized_expression: ($) => seq("(", $.expression, ")"),
+
+    unary_expression: ($) => prec(PREC.UNARY, choice(seq("-", $.expression))),
+
+    additive_operator: ($) => choice("+", "-"),
+    additive_expression: ($) =>
+      prec(
+        PREC.ADD,
+        choice(
+          seq(
+            prec.left($.expression),
+            $.additive_operator,
+            prec.right($.expression)
+          )
+        )
+      ),
+
+    multiplicative_operator: ($) => choice("*", "/"),
+    multiplicative_expression: ($) =>
+      prec(
+        PREC.MULTI,
+        choice(
+          seq(
+            prec.left($.expression),
+            $.multiplicative_operator,
+            prec.right($.expression)
+          )
+        )
+      ),
+
+    binary_expression: ($) =>
+      choice($.additive_expression, $.multiplicative_expression),
 
     comparator: ($) => choice("<", "<=", "<>", "=", ">", ">="),
     comparison: ($) =>

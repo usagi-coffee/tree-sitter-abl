@@ -108,6 +108,14 @@
         },
         {
           "type": "SYMBOL",
+          "name": "unary_expression"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "binary_expression"
+        },
+        {
+          "type": "SYMBOL",
           "name": "comparison"
         },
         {
@@ -142,6 +150,135 @@
         {
           "type": "STRING",
           "value": ")"
+        }
+      ]
+    },
+    "unary_expression": {
+      "type": "PREC",
+      "value": 7,
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "STRING",
+                "value": "-"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "expression"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "additive_operator": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "+"
+        },
+        {
+          "type": "STRING",
+          "value": "-"
+        }
+      ]
+    },
+    "additive_expression": {
+      "type": "PREC",
+      "value": 4,
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "PREC_LEFT",
+                "value": 0,
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "expression"
+                }
+              },
+              {
+                "type": "SYMBOL",
+                "name": "additive_operator"
+              },
+              {
+                "type": "PREC_RIGHT",
+                "value": 0,
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "expression"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "multiplicative_operator": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "*"
+        },
+        {
+          "type": "STRING",
+          "value": "/"
+        }
+      ]
+    },
+    "multiplicative_expression": {
+      "type": "PREC",
+      "value": 5,
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "PREC_LEFT",
+                "value": 0,
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "expression"
+                }
+              },
+              {
+                "type": "SYMBOL",
+                "name": "multiplicative_operator"
+              },
+              {
+                "type": "PREC_RIGHT",
+                "value": 0,
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "expression"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "binary_expression": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "additive_expression"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "multiplicative_expression"
         }
       ]
     },
