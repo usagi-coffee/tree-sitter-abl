@@ -729,7 +729,7 @@ DISPLAY some_object:chained_property:chained_another:method().
     (abl_statement
       (identifier)
       (expression
-        (object_property
+        (object_access
           (identifier)
           (identifier)))
       (terminator)))
@@ -737,7 +737,7 @@ DISPLAY some_object:chained_property:chained_another:method().
     (abl_statement
       (identifier)
       (expression
-        (object_property
+        (object_access
           (identifier)
           (identifier)
           (identifier)

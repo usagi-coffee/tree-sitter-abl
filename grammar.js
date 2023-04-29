@@ -43,7 +43,7 @@ module.exports = grammar({
         $.unary_expression,
         $.binary_expression,
         $.comparison,
-        $.object_property,
+        $.object_access,
         $.function_call,
         $.ternary_expression,
         $.identifier
@@ -316,10 +316,18 @@ module.exports = grammar({
     return_statement: ($) => seq(kw("RETURN"), $.expression, $.terminator),
 
     /// Objects
-    object_property: ($) =>
+    object_access: ($) =>
       seq(
         $.identifier,
-        repeat1(seq(/:/, choice($.identifier, $.function_call)))
+        repeat1(
+          seq(
+            /:/,
+            choice(
+              field("property", $.identifier),
+              field("method", $.function_call)
+            )
+          )
+        )
       ),
 
     /// Streams
