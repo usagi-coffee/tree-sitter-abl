@@ -344,6 +344,10 @@
           "named": true
         },
         {
+          "type": "field_access",
+          "named": true
+        },
+        {
           "type": "function_call",
           "named": true
         },
@@ -360,7 +364,7 @@
           "named": true
         },
         {
-          "type": "object_property",
+          "type": "object_access",
           "named": true
         },
         {
@@ -380,6 +384,32 @@
           "named": true
         }
       ]
+    }
+  },
+  {
+    "type": "field_access",
+    "named": true,
+    "fields": {
+      "field": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "field_identifier",
+            "named": true
+          }
+        ]
+      },
+      "table": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -784,17 +814,34 @@
     "fields": {}
   },
   {
-    "type": "object_property",
+    "type": "object_access",
     "named": true,
-    "fields": {},
+    "fields": {
+      "method": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "function_call",
+            "named": true
+          }
+        ]
+      },
+      "property": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
-        {
-          "type": "function_call",
-          "named": true
-        },
         {
           "type": "identifier",
           "named": true
@@ -1696,6 +1743,10 @@
   {
     "type": "WHERE",
     "named": false
+  },
+  {
+    "type": "field_identifier",
+    "named": true
   },
   {
     "type": "identifier",

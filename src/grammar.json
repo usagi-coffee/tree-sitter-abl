@@ -13,6 +13,13 @@
       "type": "PATTERN",
       "value": "[A-z_]{1}[A-z-_|0-9]*"
     },
+    "field_identifier": {
+      "type": "IMMEDIATE_TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "\\.[A-z_]{1}[A-z-_|0-9]*"
+      }
+    },
     "terminator": {
       "type": "PATTERN",
       "value": "\\s*\\."
@@ -120,7 +127,11 @@
         },
         {
           "type": "SYMBOL",
-          "name": "object_property"
+          "name": "field_access"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "object_access"
         },
         {
           "type": "SYMBOL",
@@ -150,6 +161,27 @@
         {
           "type": "STRING",
           "value": ")"
+        }
+      ]
+    },
+    "field_access": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "table",
+          "content": {
+            "type": "SYMBOL",
+            "name": "identifier"
+          }
+        },
+        {
+          "type": "FIELD",
+          "name": "field",
+          "content": {
+            "type": "SYMBOL",
+            "name": "field_identifier"
+          }
         }
       ]
     },
@@ -2160,7 +2192,7 @@
         }
       ]
     },
-    "object_property": {
+    "object_access": {
       "type": "SEQ",
       "members": [
         {
@@ -2180,12 +2212,20 @@
                 "type": "CHOICE",
                 "members": [
                   {
-                    "type": "SYMBOL",
-                    "name": "identifier"
+                    "type": "FIELD",
+                    "name": "property",
+                    "content": {
+                      "type": "SYMBOL",
+                      "name": "identifier"
+                    }
                   },
                   {
-                    "type": "SYMBOL",
-                    "name": "function_call"
+                    "type": "FIELD",
+                    "name": "method",
+                    "content": {
+                      "type": "SYMBOL",
+                      "name": "function_call"
+                    }
                   }
                 ]
               }

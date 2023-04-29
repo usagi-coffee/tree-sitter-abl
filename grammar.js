@@ -27,6 +27,10 @@ module.exports = grammar({
 
     /// Main
     identifier: ($) => /[A-z_]{1}[A-z-_|0-9]*/i,
+
+    // FIXME: ugly hack
+    field_identifier: ($) => token.immediate(/\.[A-z_]{1}[A-z-_|0-9]*/),
+
     terminator: ($) => /\s*\./i,
     block_terminator: ($) => seq(kw("END"), "."),
 
@@ -43,6 +47,7 @@ module.exports = grammar({
         $.unary_expression,
         $.binary_expression,
         $.comparison,
+        $.field_access,
         $.object_access,
         $.function_call,
         $.ternary_expression,
@@ -50,6 +55,10 @@ module.exports = grammar({
       ),
 
     parenthesized_expression: ($) => seq("(", $.expression, ")"),
+
+    // FIXME: Shallow field access (1 Level)
+    field_access: ($) =>
+      seq(field("table", $.identifier), field("field", $.field_identifier)),
 
     unary_expression: ($) => prec(PREC.UNARY, choice(seq("-", $.expression))),
 
