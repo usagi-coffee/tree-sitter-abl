@@ -34,7 +34,7 @@ npm run parse your_file.p
 - [X] Object accessors
 - [X] Transactions
 - [X] Buffers
-- [ ] Streams
+- [X] Streams
 - [ ] Includes
 - [ ] ...
 

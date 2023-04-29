@@ -1,4 +1,5 @@
 const PREC = {
+  PRIMARY: 8,
   UNARY: 7,
   EXP: 6,
   MULTI: 5,
@@ -92,6 +93,7 @@ module.exports = grammar({
         $.variable_definition,
         $.variable_assignment,
         $.buffer_definition,
+        $.stream_definition,
         $.procedure_statement,
         $.function_statement,
         $.function_call_statement,
@@ -101,6 +103,7 @@ module.exports = grammar({
         $.for_statement,
         $.find_statement,
         $.transaction_statement,
+        $.output_stream_statement,
         $.abl_statement,
         prec.left(-1, $.block_terminator)
       ),
@@ -317,6 +320,27 @@ module.exports = grammar({
       seq(
         $.identifier,
         repeat1(seq(/:/, choice($.identifier, $.function_call)))
+      ),
+
+    /// Streams
+    stream_definition: ($) =>
+      seq(kw("DEFINE"), kw("STREAM"), $.identifier, $.terminator),
+
+    stream_terminator: ($) => seq(kw("OUTPUT"), kw("CLOSE"), $.terminator),
+    output_stream_statement: ($) =>
+      seq(
+        kw("OUTPUT"),
+        optional(
+          seq(
+            choice(kw("STREAM"), kw("STREAM-HANDLE")),
+            field("source", $.identifier)
+          )
+        ),
+        kw("TO"),
+        field("target", $.expression),
+        $.terminator,
+        repeat($.statement),
+        $.stream_terminator
       ),
 
     /// ABL queries
