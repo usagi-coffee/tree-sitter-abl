@@ -1469,6 +1469,10 @@
     "named": false
   },
   {
+    "type": "BUFFER",
+    "named": false
+  },
+  {
     "type": "BY",
     "named": false
   },
@@ -1510,10 +1514,6 @@
   },
   {
     "type": "DEFINE",
-    "named": false
-  },
-  {
-    "type": "DEFINE BUFFER",
     "named": false
   },
   {

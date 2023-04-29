@@ -193,7 +193,8 @@ module.exports = grammar({
 
     buffer_definition: ($) =>
       seq(
-        kw("DEFINE BUFFER"),
+        choice(kw("DEFINE"), kw("DEF")),
+        kw("BUFFER"),
         field("name", $.identifier),
         kw("FOR"),
         optional(kw("TEMP-TABLE")),
@@ -341,7 +342,12 @@ module.exports = grammar({
 
     /// Streams
     stream_definition: ($) =>
-      seq(kw("DEFINE"), kw("STREAM"), $.identifier, $.terminator),
+      seq(
+        choice(kw("DEFINE"), kw("DEF")),
+        kw("STREAM"),
+        $.identifier,
+        $.terminator
+      ),
 
     stream_terminator: ($) => seq(kw("OUTPUT"), kw("CLOSE"), $.terminator),
     output_stream_statement: ($) =>
