@@ -43,14 +43,14 @@ npm run parse your_file.p
 - [X] FIND statement
 - [ ] ...
 
-### ABL Statements
+### ABL Statements / Expressions
 
 > Even though many statemenents are not listed it doesn't ***necessarily*** mean they're not parsable, it just means the syntax tree won't have details about the statement!
 
 - [X] ASSIGN
 - [ ] PUT
 - [ ] ACCUMULATE
-- [ ] AVAILABLE
+- [X] AVAILABLE (expression)
 - [ ] ...
   
 Keep in mind these were tested on trivial examples so it may be broken in your case, if that happens please file an issue!

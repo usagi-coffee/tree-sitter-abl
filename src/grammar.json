@@ -143,6 +143,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "available_expression"
+        },
+        {
+          "type": "SYMBOL",
           "name": "identifier"
         }
       ]
@@ -3096,6 +3100,52 @@
         {
           "type": "SYMBOL",
           "name": "terminator"
+        }
+      ]
+    },
+    "available_expression": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PREC",
+                  "value": 1,
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "[aA][vV][aA][iI][lL]"
+                  }
+                }
+              },
+              "named": false,
+              "value": "AVAIL"
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PREC",
+                  "value": 1,
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "[aA][vV][aA][iI][lL][aA][bB][lL][eE]"
+                  }
+                }
+              },
+              "named": false,
+              "value": "AVAILABLE"
+            }
+          ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "identifier"
         }
       ]
     }

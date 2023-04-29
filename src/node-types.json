@@ -96,6 +96,21 @@
     }
   },
   {
+    "type": "available_expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "binary_expression",
     "named": true,
     "fields": {},
@@ -331,6 +346,10 @@
       "multiple": false,
       "required": true,
       "types": [
+        {
+          "type": "available_expression",
+          "named": true
+        },
         {
           "type": "binary_expression",
           "named": true
@@ -1462,6 +1481,14 @@
   },
   {
     "type": "ASSIGN",
+    "named": false
+  },
+  {
+    "type": "AVAIL",
+    "named": false
+  },
+  {
+    "type": "AVAILABLE",
     "named": false
   },
   {

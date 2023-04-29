@@ -51,6 +51,7 @@ module.exports = grammar({
         $.object_access,
         $.function_call,
         $.ternary_expression,
+        $.available_expression,
         $.identifier
       ),
 
@@ -431,6 +432,9 @@ module.exports = grammar({
 
     assign_statement: ($) =>
       seq(kw("ASSIGN"), repeat($.assignment), $.terminator),
+
+    available_expression: ($) =>
+      seq(choice(kw("AVAIL"), kw("AVAILABLE")), $.identifier),
   },
 });
 
