@@ -478,7 +478,7 @@ module.exports = grammar({
 
     // Available
     available_expression: ($) =>
-      seq(choice(kw("AVAIL"), kw("AVAILABLE")), $.identifier),
+      seq(choice(kw("AVAIL "), kw("AVAILABLE ")), $.identifier),
   },
 });
 

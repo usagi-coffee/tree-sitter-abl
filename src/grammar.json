@@ -3387,12 +3387,12 @@
                   "value": 1,
                   "content": {
                     "type": "PATTERN",
-                    "value": "[aA][vV][aA][iI][lL]"
+                    "value": "[aA][vV][aA][iI][lL][  ]"
                   }
                 }
               },
               "named": false,
-              "value": "AVAIL"
+              "value": "AVAIL "
             },
             {
               "type": "ALIAS",
@@ -3403,12 +3403,12 @@
                   "value": 1,
                   "content": {
                     "type": "PATTERN",
-                    "value": "[aA][vV][aA][iI][lL][aA][bB][lL][eE]"
+                    "value": "[aA][vV][aA][iI][lL][aA][bB][lL][eE][  ]"
                   }
                 }
               },
               "named": false,
-              "value": "AVAILABLE"
+              "value": "AVAILABLE "
             }
           ]
         },
