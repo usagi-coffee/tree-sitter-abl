@@ -111,6 +111,7 @@ module.exports = grammar({
         $.buffer_definition,
         $.stream_definition,
         $.procedure_statement,
+        $.procedure_parameter_definition,
         $.function_statement,
         $.function_call_statement,
         $.return_statement,
@@ -320,6 +321,18 @@ module.exports = grammar({
         ":",
         repeat($.statement),
         $.procedure_terminator
+      ),
+
+    procedure_parameter_definition: ($) =>
+      seq(
+        kw("DEFINE"),
+        choice(kw("INPUT"), kw("OUTPUT"), kw("INPUT-OUTPUT"), kw("RETURN")),
+        kw("PARAMETER"),
+        $.identifier,
+        kw("AS"),
+        $.primitive_type,
+        repeat($.variable_tuning),
+        $.terminator
       ),
 
     /// Functions

@@ -1041,6 +1041,33 @@
     "fields": {}
   },
   {
+    "type": "procedure_parameter_definition",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "primitive_type",
+          "named": true
+        },
+        {
+          "type": "terminator",
+          "named": true
+        },
+        {
+          "type": "variable_tuning",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "procedure_statement",
     "named": true,
     "fields": {},
@@ -1233,6 +1260,10 @@
         },
         {
           "type": "output_stream_statement",
+          "named": true
+        },
+        {
+          "type": "procedure_parameter_definition",
           "named": true
         },
         {
@@ -1761,6 +1792,10 @@
     "named": false
   },
   {
+    "type": "INPUT-OUTPUT",
+    "named": false
+  },
+  {
     "type": "INT",
     "named": false
   },
@@ -1830,6 +1865,10 @@
   },
   {
     "type": "OUTPUT",
+    "named": false
+  },
+  {
+    "type": "PARAMETER",
     "named": false
   },
   {
