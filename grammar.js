@@ -311,12 +311,12 @@ module.exports = grammar({
       ),
 
     /// Procedures
-    procedure_terminator: ($) => /END PROCEDURE\./i,
+    procedure_terminator: ($) => kw("END PROCEDURE."),
     procedure_statement: ($) =>
       seq(
         kw("PROCEDURE"),
         $.identifier,
-        optional("PRIVATE"),
+        optional(kw("PRIVATE")),
         ":",
         repeat($.statement),
         $.procedure_terminator

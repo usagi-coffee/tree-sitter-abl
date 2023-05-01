@@ -1966,8 +1966,20 @@
       ]
     },
     "procedure_terminator": {
-      "type": "PATTERN",
-      "value": "END PROCEDURE\\."
+      "type": "ALIAS",
+      "content": {
+        "type": "TOKEN",
+        "content": {
+          "type": "PREC",
+          "value": 1,
+          "content": {
+            "type": "PATTERN",
+            "value": "[eE][nN][dD][  ][pP][rR][oO][cC][eE][dD][uU][rR][eE][..]"
+          }
+        }
+      },
+      "named": false,
+      "value": "END PROCEDURE."
     },
     "procedure_statement": {
       "type": "SEQ",
@@ -1996,7 +2008,19 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "STRING",
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PREC",
+                  "value": 1,
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "[pP][rR][iI][vV][aA][tT][eE]"
+                  }
+                }
+              },
+              "named": false,
               "value": "PRIVATE"
             },
             {

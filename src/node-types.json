@@ -1064,6 +1064,11 @@
     }
   },
   {
+    "type": "procedure_terminator",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "query_tuning",
     "named": true,
     "fields": {},
@@ -1712,6 +1717,10 @@
     "named": false
   },
   {
+    "type": "END PROCEDURE.",
+    "named": false
+  },
+  {
     "type": "EXCLUSIVE-LOCK",
     "named": false
   },
@@ -1949,10 +1958,6 @@
   },
   {
     "type": "number_literal",
-    "named": true
-  },
-  {
-    "type": "procedure_terminator",
     "named": true
   },
   {
