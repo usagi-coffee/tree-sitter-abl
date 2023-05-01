@@ -36,6 +36,7 @@ npm run parse your_file.p
 - [X] Buffers
 - [X] Streams
 - [ ] Includes
+- [ ] Aggregate phrases
 - [ ] ...
 
 ### ABL Query
@@ -49,7 +50,7 @@ npm run parse your_file.p
 
 - [X] ASSIGN
 - [ ] PUT
-- [ ] ACCUMULATE
+- [X] ACCUMULATE
 - [X] AVAILABLE (expression)
 - [ ] ...
   

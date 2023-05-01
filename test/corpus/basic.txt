@@ -822,3 +822,26 @@ x = (IF NOT x > 10 THEN 10 ELSE x).
                 (expression
                   (identifier)))))))
       (terminator))))
+
+
+================================================================================
+ACCUMULATE statement
+================================================================================
+
+ACCUMULATE Customer.CreditLimit (AVERAGE COUNT MAXIMUM). 
+
+--------------------------------------------------------------------------------
+
+
+(source_code
+	(statement
+		(abl_statement
+			(accumulate_statement
+				(expression
+					(field_access
+						(identifier)
+						(field_identifier)))
+				(accumulate_aggregate)
+				(accumulate_aggregate)
+				(accumulate_aggregate)
+				(terminator)))))

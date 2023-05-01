@@ -423,6 +423,7 @@ module.exports = grammar({
     abl_statement: ($) =>
       choice(
         $.assign_statement,
+        $.accumulate_statement,
         seq(
           field("statement", $.identifier),
           repeat($.expression),
@@ -433,6 +434,34 @@ module.exports = grammar({
     assign_statement: ($) =>
       seq(kw("ASSIGN"), repeat($.assignment), $.terminator),
 
+    // Accumulate
+    accumulate_aggregate: ($) =>
+      choice(
+        kw("AVERAGE"),
+        kw("COUNT"),
+        kw("MAXIMUM"),
+        kw("MINIMUM"),
+        kw("TOTAL"),
+        kw("SUB-AVERAGE"),
+        kw("SUB-COUNT"),
+        kw("SUB-MAXIMUM"),
+        kw("SUB-MINIMUM"),
+        kw("SUB-TOTAL")
+      ),
+
+    accumulate_statement: ($) =>
+      seq(
+        kw("ACCUMULATE"),
+        $.expression,
+        seq(
+          "(",
+          seq($.accumulate_aggregate, repeat(seq(" ", $.accumulate_aggregate))),
+          ")"
+        ),
+        $.terminator
+      ),
+
+    // Available
     available_expression: ($) =>
       seq(choice(kw("AVAIL"), kw("AVAILABLE")), $.identifier),
   },
