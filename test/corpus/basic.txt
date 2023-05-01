@@ -25,6 +25,24 @@ COMMENT (long) statement
 (source_code
 		(comment))
 
+================================================================================
+INCLUDE statement
+================================================================================
+
+{include_file.i arg1 &arg2 = "test" arg3}
+
+--------------------------------------------------------------------------------
+
+(source_code
+	(include
+		(file_name)
+		(include_argument
+			(identifier))
+		(include_argument
+			(identifier)
+			(double_quoted_string))
+		(include_argument
+			(identifier))))
 
 ================================================================================
 VARIABLE DEFINITION statement
@@ -831,7 +849,6 @@ ACCUMULATE statement
 ACCUMULATE Customer.CreditLimit (AVERAGE COUNT MAXIMUM). 
 
 --------------------------------------------------------------------------------
-
 
 (source_code
 	(statement

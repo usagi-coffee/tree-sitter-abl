@@ -35,7 +35,7 @@ npm run parse your_file.p
 - [X] Transactions
 - [X] Buffers
 - [X] Streams
-- [ ] Includes
+- [X] Includes
 - [ ] Aggregate phrases
 - [ ] ...
 

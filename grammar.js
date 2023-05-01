@@ -19,7 +19,7 @@ function kw(keyword) {
 module.exports = grammar({
   name: "abl",
 
-  extras: ($) => [$.comment, /[\s\f\uFEFF\u2060\u200B]|\\\r?\n/],
+  extras: ($) => [$.comment, $.include, /[\s\f\uFEFF\u2060\u200B]|\\\r?\n/],
   word: ($) => $.identifier,
 
   rules: {
@@ -27,6 +27,7 @@ module.exports = grammar({
 
     /// Main
     identifier: ($) => /[A-z_]{1}[A-z-_|0-9]*/i,
+    file_name: ($) => /[A-z-_|0-9]+\.[i]/i,
 
     // FIXME: ugly hack
     field_identifier: ($) => token.immediate(/\.[A-z_]{1}[A-z-_|0-9]*/),
@@ -134,6 +135,20 @@ module.exports = grammar({
 
     /// Comments
     comment: ($) => seq("/*", /[^*]*\*+([^/*][^*]*\*+)*/, "/"),
+
+    /// Includes
+    include_argument: ($) =>
+      choice(
+        seq(
+          /\&/,
+          field("name", $.identifier),
+          "=",
+          field("value", $.double_quoted_string)
+        ),
+        field("name", $.identifier)
+      ),
+    include: ($) =>
+      seq("{", $.file_name, optional(repeat($.include_argument)), "}"),
 
     /// Primitives
     primitive_type: ($) =>
