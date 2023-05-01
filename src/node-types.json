@@ -161,6 +161,10 @@
         {
           "type": "identifier",
           "named": true
+        },
+        {
+          "type": "parenthesized_expression",
+          "named": true
         }
       ]
     }
