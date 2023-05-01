@@ -356,7 +356,8 @@ module.exports = grammar({
         $.function_terminator
       ),
 
-    return_statement: ($) => seq(kw("RETURN"), $.expression, $.terminator),
+    return_statement: ($) =>
+      seq(kw("RETURN"), optional($.expression), $.terminator),
 
     /// Objects
     object_access: ($) =>
