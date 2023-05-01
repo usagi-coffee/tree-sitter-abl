@@ -333,7 +333,10 @@ module.exports = grammar({
       seq(
         kw("FUNCTION"),
         field("name", $.identifier),
-        seq(kw("RETURNS"), field("return_type", $.primitive_type)),
+        seq(
+          choice(kw("RETURNS"), kw("RETURN")),
+          field("return_type", $.primitive_type)
+        ),
         seq("(", optional(_list($.function_parameter, ",")), ")"),
         choice(":", $.terminator),
         repeat($.statement),
