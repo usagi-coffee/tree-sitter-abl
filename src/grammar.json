@@ -220,7 +220,19 @@
             "type": "SEQ",
             "members": [
               {
-                "type": "STRING",
+                "type": "ALIAS",
+                "content": {
+                  "type": "TOKEN",
+                  "content": {
+                    "type": "PREC",
+                    "value": 1,
+                    "content": {
+                      "type": "PATTERN",
+                      "value": "[nN][oO][tT]"
+                    }
+                  }
+                },
+                "named": false,
                 "value": "NOT"
               },
               {
@@ -3329,8 +3341,17 @@
           "value": "ACCUMULATE"
         },
         {
-          "type": "SYMBOL",
-          "name": "expression"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "expression"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "identifier"
+            }
+          ]
         },
         {
           "type": "SEQ",

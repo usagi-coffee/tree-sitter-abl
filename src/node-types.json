@@ -78,6 +78,10 @@
           "named": true
         },
         {
+          "type": "identifier",
+          "named": true
+        },
+        {
           "type": "terminator",
           "named": true
         }

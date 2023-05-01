@@ -66,7 +66,7 @@ module.exports = grammar({
     unary_expression: ($) =>
       prec(
         PREC.UNARY,
-        choice(seq("-", $.expression), seq("NOT", $.expression))
+        choice(seq("-", $.expression), seq(kw("NOT"), $.expression))
       ),
 
     additive_operator: ($) => choice("+", "-"),
@@ -468,7 +468,7 @@ module.exports = grammar({
     accumulate_statement: ($) =>
       seq(
         kw("ACCUMULATE"),
-        $.expression,
+        choice($.expression, $.identifier),
         seq(
           "(",
           seq($.accumulate_aggregate, repeat(seq(" ", $.accumulate_aggregate))),
