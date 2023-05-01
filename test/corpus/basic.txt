@@ -134,6 +134,7 @@ UNARY/BINARY operators
 
 x = 2 + 2.
 y = (4 * 3) / 2.
+z = NOT y > 5.
 
 --------------------------------------------------------------------------------
 
@@ -172,6 +173,20 @@ y = (4 * 3) / 2.
 							(multiplicative_operator)
 							(expression
 								(number_literal))))))
+			(terminator)))
+	(statement
+			(variable_assignment
+				(assignment
+					(identifier)
+					(expression
+						(comparison
+							(expression
+								(unary_expression
+									(expression
+										(identifier))))
+							(comparator)
+							(expression
+								(number_literal)))))
 			(terminator))))
 
 ================================================================================
@@ -745,7 +760,9 @@ FIND FIRST some_table WHERE NOT x > 5.
 					(expression
 						(comparison
 							(expression
-								(identifier))
+							  (unary_expression
+								  (expression
+										(identifier))))
 							(comparator)
 							(expression
 								(number_literal))))))
@@ -819,27 +836,29 @@ x = (IF NOT x > 10 THEN 10 ELSE x).
 --------------------------------------------------------------------------------
 
 (source_code
-  (statement
-    (variable_assignment
-      (assignment
-        (identifier)
-        (expression
-          (parenthesized_expression
-            (expression
-              (ternary_expression
-                (conditions
-                  (expression
-                    (comparison
-                      (expression
-                        (identifier))
-                      (comparator)
-                      (expression
-                        (number_literal)))))
-                (expression
-                  (number_literal))
-                (expression
-                  (identifier)))))))
-      (terminator))))
+	(statement
+		(variable_assignment
+			(assignment
+				(identifier)
+				(expression
+					(parenthesized_expression
+						(expression
+							(ternary_expression
+								(conditions
+									(expression
+										(comparison
+											(expression
+												(unary_expression
+													(expression
+														(identifier))))
+											(comparator)
+											(expression
+												(number_literal)))))
+								(expression
+									(number_literal))
+								(expression
+									(identifier)))))))
+			(terminator))))
 
 
 ================================================================================

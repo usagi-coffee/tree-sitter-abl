@@ -62,7 +62,11 @@ module.exports = grammar({
     field_access: ($) =>
       seq(field("table", $.identifier), field("field", $.field_identifier)),
 
-    unary_expression: ($) => prec(PREC.UNARY, choice(seq("-", $.expression))),
+    unary_expression: ($) =>
+      prec(
+        PREC.UNARY,
+        choice(seq("-", $.expression), seq("NOT", $.expression))
+      ),
 
     additive_operator: ($) => choice("+", "-"),
     additive_expression: ($) =>
@@ -127,11 +131,7 @@ module.exports = grammar({
         $.abl_statement
       ),
 
-    conditions: ($) =>
-      _list(
-        seq(optional(kw("NOT")), $.expression),
-        choice(kw("AND"), kw("OR"))
-      ),
+    conditions: ($) => _list($.expression, choice(kw("AND"), kw("OR"))),
 
     /// Comments
     comment: ($) => seq("/*", /[^*]*\*+([^/*][^*]*\*+)*/, "/"),
