@@ -1652,6 +1652,10 @@
     "named": false
   },
   {
+    "type": "BEGINS",
+    "named": false
+  },
+  {
     "type": "BREAK",
     "named": false
   },

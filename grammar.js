@@ -98,7 +98,7 @@ module.exports = grammar({
     binary_expression: ($) =>
       choice($.additive_expression, $.multiplicative_expression),
 
-    comparator: ($) => choice("<", "<=", "<>", "=", ">", ">="),
+    comparator: ($) => choice("<", "<=", "<>", "=", ">", ">=", kw("BEGINS")),
     comparison: ($) =>
       prec.left(
         seq(prec.left($.expression), $.comparator, prec.right($.expression))
