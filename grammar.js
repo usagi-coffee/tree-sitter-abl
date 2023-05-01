@@ -451,7 +451,12 @@ module.exports = grammar({
       ),
 
     assign_statement: ($) =>
-      seq(kw("ASSIGN"), repeat($.assignment), $.terminator),
+      seq(
+        kw("ASSIGN"),
+        repeat($.assignment),
+        optional("NO-ERROR"),
+        $.terminator
+      ),
 
     // Accumulate
     accumulate_aggregate: ($) =>
