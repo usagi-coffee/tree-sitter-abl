@@ -383,7 +383,12 @@ module.exports = grammar({
         $.terminator
       ),
 
-    stream_terminator: ($) => seq(kw("OUTPUT"), kw("CLOSE"), $.terminator),
+    stream_terminator: ($) =>
+      choice(
+        seq(kw("OUTPUT"), kw("CLOSE"), $.terminator),
+        seq(kw("OUTPUT"), kw("STREAM"), $.identifier, kw("CLOSE"), $.terminator)
+      ),
+
     output_stream_statement: ($) =>
       seq(
         kw("OUTPUT"),
