@@ -53,6 +53,7 @@ module.exports = grammar({
         $.function_call,
         $.ternary_expression,
         $.available_expression,
+        $.accumulate_expression,
         $.identifier
       ),
 
@@ -475,6 +476,9 @@ module.exports = grammar({
         ),
         $.terminator
       ),
+
+    accumulate_expression: ($) =>
+      seq(kw("ACCUM"), $.accumulate_aggregate, prec.left($.expression)),
 
     // Available
     available_expression: ($) =>

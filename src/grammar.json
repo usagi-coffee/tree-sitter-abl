@@ -151,6 +151,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "accumulate_expression"
+        },
+        {
+          "type": "SYMBOL",
           "name": "identifier"
         }
       ]
@@ -3369,6 +3373,39 @@
         {
           "type": "SYMBOL",
           "name": "terminator"
+        }
+      ]
+    },
+    "accumulate_expression": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "PATTERN",
+                "value": "[aA][cC][cC][uU][mM]"
+              }
+            }
+          },
+          "named": false,
+          "value": "ACCUM"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "accumulate_aggregate"
+        },
+        {
+          "type": "PREC_LEFT",
+          "value": 0,
+          "content": {
+            "type": "SYMBOL",
+            "name": "expression"
+          }
         }
       ]
     },

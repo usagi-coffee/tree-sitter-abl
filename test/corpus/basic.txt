@@ -866,6 +866,7 @@ ACCUMULATE statement
 ================================================================================
 
 ACCUMULATE Customer.CreditLimit (AVERAGE COUNT MAXIMUM). 
+value = (accum total Customer.CreditLimit).
 
 --------------------------------------------------------------------------------
 
@@ -880,4 +881,18 @@ ACCUMULATE Customer.CreditLimit (AVERAGE COUNT MAXIMUM).
 				(accumulate_aggregate)
 				(accumulate_aggregate)
 				(accumulate_aggregate)
-				(terminator)))))
+				(terminator))))
+	(statement
+		(variable_assignment
+			(assignment
+				(identifier)
+				(expression
+					(parenthesized_expression
+						(expression
+							(accumulate_expression
+								(accumulate_aggregate)
+								(expression
+									(field_access
+										(identifier)
+										(field_identifier))))))))
+			(terminator))))

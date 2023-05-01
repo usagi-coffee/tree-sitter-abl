@@ -43,6 +43,25 @@
     "fields": {}
   },
   {
+    "type": "accumulate_expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "accumulate_aggregate",
+          "named": true
+        },
+        {
+          "type": "expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "accumulate_statement",
     "named": true,
     "fields": {},
@@ -378,6 +397,10 @@
       "multiple": false,
       "required": true,
       "types": [
+        {
+          "type": "accumulate_expression",
+          "named": true
+        },
         {
           "type": "available_expression",
           "named": true
@@ -1550,6 +1573,10 @@
   },
   {
     "type": ">=",
+    "named": false
+  },
+  {
+    "type": "ACCUM",
     "named": false
   },
   {

@@ -36,7 +36,7 @@ npm run parse your_file.p
 - [X] Buffers
 - [X] Streams
 - [X] Includes
-- [ ] Aggregate phrases
+- [X] Aggregate phrases
 - [ ] ...
 
 ### ABL Query
