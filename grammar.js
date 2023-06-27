@@ -22,9 +22,10 @@ module.exports = grammar({
 
   extras: ($) => [$.comment, $.include, /[\s\f\uFEFF\u2060\u200B]|\\\r?\n/],
   word: ($) => $.identifier,
+  supertypes: ($) => [$._expression, $._statement],
 
   rules: {
-    source_code: ($) => repeat($.statement),
+    source_code: ($) => repeat($._statement),
 
     /// Main
     identifier: ($) => /[A-z_]{1}[A-z-_|0-9]*/i,
@@ -33,22 +34,22 @@ module.exports = grammar({
     // FIXME: ugly hack
     field_identifier: ($) => token.immediate(/\.[A-z_]{1}[A-z-_|0-9]*/),
 
-    terminator: ($) => /\s*\./i,
-    block_terminator: ($) => seq(kw("END"), "."),
+    _terminator: ($) => /\s*\./i,
+    _block_terminator: ($) => seq(kw("END"), "."),
 
     null_expression: ($) => /\?/,
     boolean_literal: ($) =>
       choice(kw("TRUE"), kw("FALSE"), kw("YES"), kw("NO")),
 
-    expression: ($) =>
+    _expression: ($) =>
       choice(
         $.parenthesized_expression,
         $.unary_expression,
         $.boolean_literal,
-        $.string_literal,
+        $._string_literal,
         $.number_literal,
         $.null_expression,
-        $.binary_expression,
+        $._binary_expression,
         $.field_access,
         $.object_access,
         $.function_call,
@@ -58,65 +59,65 @@ module.exports = grammar({
         $.identifier
       ),
 
-    parenthesized_expression: ($) => seq("(", $.expression, ")"),
+    parenthesized_expression: ($) => seq("(", $._expression, ")"),
 
     field_access: ($) =>
       seq(field("table", $.identifier), field("field", $.field_identifier)),
 
-    logical_operator: ($) => prec.left(choice(kw("AND"), kw("OR"))),
+    _logical_operator: ($) => prec.left(choice(kw("AND"), kw("OR"))),
     logical_expression: ($) =>
       prec.right(
         PREC.LOGICAL,
         seq(
-          $.expression,
-          $.logical_operator,
-          $.expression
+          $._expression,
+          $._logical_operator,
+          $._expression
         )
       ),
 
-    unary_operator: ($) => choice(kw("-"), kw("NOT")),
+    _unary_operator: ($) => choice(kw("-"), kw("NOT")),
     unary_expression: ($) =>
-      prec(PREC.UNARY, seq($.unary_operator, prec.right($.expression))),
+      prec(PREC.UNARY, seq($._unary_operator, prec.right($._expression))),
 
-    additive_operator: ($) => choice("+", "-"),
+    _additive_operator: ($) => choice("+", "-"),
     additive_expression: ($) =>
       prec.left(
         PREC.ADD,
         choice(
           seq(
-            $.expression,
-            $.additive_operator,
-            $.expression
+            $._expression,
+            $._additive_operator,
+            $._expression
           )
         )
       ),
 
-    multiplicative_operator: ($) => choice("*", "/"),
+    _multiplicative_operator: ($) => choice("*", "/"),
     multiplicative_expression: ($) =>
       prec.left(
         PREC.MULTI,
         choice(
           seq(
-            $.expression,
-            $.multiplicative_operator,
-            $.expression
+            $._expression,
+            $._multiplicative_operator,
+            $._expression
           )
         )
       ),
 
-    comparison_operator: ($) =>
+    _comparison_operator: ($) =>
       choice("<", "<=", "<>", "=", ">", ">=", kw("BEGINS")),
     comparison_expression: ($) =>
       prec.left(
         PREC.COMPARE,
         seq(
-          $.expression,
-          $.comparison_operator,
-          $.expression
+          $._expression,
+          $._comparison_operator,
+          $._expression
         )
       ),
 
-    binary_expression: ($) =>
+    _binary_expression: ($) =>
       choice(
         $.additive_expression,
         $.multiplicative_expression,
@@ -124,7 +125,7 @@ module.exports = grammar({
         $.logical_expression
       ),
 
-    statement: ($) =>
+    _statement: ($) =>
       choice(
         $.variable_definition,
         $.variable_assignment,
@@ -135,17 +136,18 @@ module.exports = grammar({
         $.function_statement,
         $.function_call_statement,
         $.return_statement,
-        $.if_statement,
-        $.loop_statement,
+        $._if_statement,
+        $._loop_statement,
         $.for_statement,
         $.find_statement,
         $.transaction_statement,
-        $.stream_statement,
+        $._stream_statement,
+        $.assign_statement,
+        $.accumulate_statement,
         $.abl_statement,
-        prec.left(-1, $.block_terminator)
       ),
 
-    terminated_statement: ($) =>
+    _terminated_statement: ($) =>
       choice(
         $.variable_assignment,
         $.function_call_statement,
@@ -153,7 +155,7 @@ module.exports = grammar({
         $.abl_statement
       ),
 
-    conditions: ($) => _list($.expression, choice(kw("AND"), kw("OR"))),
+    conditions: ($) => _list($._expression, choice(kw("AND"), kw("OR"))),
 
     /// Comments
     comment: ($) => seq("/*", /[^*]*\*+([^/*][^*]*\*+)*/, "/"),
@@ -196,7 +198,7 @@ module.exports = grammar({
       ),
 
     number_literal: ($) => /[0-9]+/i,
-    string_literal: ($) =>
+    _string_literal: ($) =>
       seq(choice($.double_quoted_string, $.single_quoted_string)),
 
     double_quoted_string: ($) =>
@@ -207,10 +209,10 @@ module.exports = grammar({
 
     /// Variables
     assignment: ($) =>
-      seq(prec.left($.identifier), "=", prec.right($.expression)),
+      seq(prec.left($.identifier), "=", prec.right($._expression)),
 
     variable_tuning: ($) =>
-      seq(choice(kw("NO-UNDO"), kw("INITIAL")), optional($.expression)),
+      seq(choice(kw("NO-UNDO"), kw("INITIAL")), optional($._expression)),
 
     variable_definition: ($) =>
       seq(
@@ -225,10 +227,10 @@ module.exports = grammar({
           ),
           seq(kw("LIKE"), field("like", $.identifier))
         ),
-        $.terminator
+        $._terminator
       ),
 
-    variable_assignment: ($) => seq($.assignment, $.terminator),
+    variable_assignment: ($) => seq($.assignment, $._terminator),
 
     buffer_definition: ($) =>
       seq(
@@ -238,13 +240,13 @@ module.exports = grammar({
         kw("FOR"),
         optional(kw("TEMP-TABLE")),
         field("table", $.identifier),
-        $.terminator
+        $._terminator
       ),
 
     /// Function
-    function_call_statement: ($) => seq($.function_call, $.terminator),
+    function_call_statement: ($) => seq($.function_call, $._terminator),
     function_call_argument: ($) =>
-      prec.right(seq($.expression, repeat(seq(",", $.expression)))),
+      prec.right(seq($._expression, repeat(seq(",", $._expression)))),
 
     function_call: ($) =>
       prec.right(
@@ -256,7 +258,7 @@ module.exports = grammar({
       ),
 
     /// IF statement
-    if_statement: ($) => choice($.if_do_statement, $.if_then_statement),
+    _if_statement: ($) => choice($.if_do_statement, $.if_then_statement),
 
     if_do_statement: ($) =>
       seq(
@@ -264,13 +266,13 @@ module.exports = grammar({
         field("conditions", $.conditions),
         kw("THEN DO"),
         ":",
-        repeat($.statement),
-        $.block_terminator,
+        repeat($._statement),
+        $._block_terminator,
         optional(repeat(choice($.else_do_statement, $.else_do_if_statement)))
       ),
 
     else_do_statement: ($) =>
-      seq(kw("ELSE DO"), ":", repeat($.statement), $.block_terminator),
+      seq(kw("ELSE DO"), ":", repeat($._statement), $._block_terminator),
 
     else_do_if_statement: ($) =>
       seq(
@@ -278,8 +280,8 @@ module.exports = grammar({
         field("conditions", $.conditions),
         kw("THEN DO"),
         ":",
-        repeat($.statement),
-        $.block_terminator
+        repeat($._statement),
+        $._block_terminator
       ),
 
     if_then_statement: ($) =>
@@ -287,11 +289,11 @@ module.exports = grammar({
         kw("IF"),
         field("conditions", $.conditions),
         kw("THEN"),
-        $.terminated_statement,
+        $._terminated_statement,
         optional($.else_then_statement)
       ),
 
-    else_then_statement: ($) => seq("ELSE", $.terminated_statement),
+    else_then_statement: ($) => seq("ELSE", $._terminated_statement),
 
     ternary_expression: ($) =>
       prec.right(
@@ -299,26 +301,26 @@ module.exports = grammar({
           kw("IF"),
           field("conditions", $.conditions),
           kw("THEN"),
-          field("then", $.expression),
+          field("then", $._expression),
           kw("ELSE"),
-          field("else", $.expression)
+          field("else", $._expression)
         )
       ),
 
     /// Loop statements
-    loop_statement: ($) =>
+    _loop_statement: ($) =>
       choice($.repeat_statement, $.do_while_statement, $.do_statement),
 
     repeat_statement: ($) =>
-      seq(kw("REPEAT"), ":", repeat($.statement), $.block_terminator),
+      seq(kw("REPEAT"), ":", repeat($._statement), $._block_terminator),
 
     do_while_statement: ($) =>
       seq(
         kw("DO WHILE"),
         $.conditions,
         ":",
-        repeat($.statement),
-        $.block_terminator
+        repeat($._statement),
+        $._block_terminator
       ),
 
     do_statement: ($) =>
@@ -328,20 +330,20 @@ module.exports = grammar({
         kw("TO"),
         $.number_literal,
         ":",
-        repeat($.statement),
-        $.block_terminator
+        repeat($._statement),
+        $._block_terminator
       ),
 
     /// Procedures
-    procedure_terminator: ($) => kw("END PROCEDURE."),
+    _procedure_terminator: ($) => kw("END PROCEDURE."),
     procedure_statement: ($) =>
       seq(
         kw("PROCEDURE"),
         $.identifier,
         optional(kw("PRIVATE")),
         ":",
-        repeat($.statement),
-        $.procedure_terminator
+        repeat($._statement),
+        $._procedure_terminator
       ),
 
     procedure_parameter_definition: ($) =>
@@ -353,12 +355,12 @@ module.exports = grammar({
         kw("AS"),
         $.primitive_type,
         repeat($.variable_tuning),
-        $.terminator
+        $._terminator
       ),
 
     /// Functions
-    function_terminator: ($) =>
-      choice($.block_terminator, seq(kw("END FUNCTION"), ".")),
+    _function_terminator: ($) =>
+      choice($._block_terminator, seq(kw("END FUNCTION"), ".")),
     function_parameter_mode: ($) => choice(kw("INPUT"), kw("OUTPUT")),
     function_parameter: ($) =>
       seq($.function_parameter_mode, $.identifier, kw("AS"), $.primitive_type),
@@ -372,13 +374,13 @@ module.exports = grammar({
           field("return_type", $.primitive_type)
         ),
         seq("(", optional(_list($.function_parameter, ",")), ")"),
-        choice(":", $.terminator),
-        repeat($.statement),
-        $.function_terminator
+        choice(":", $._terminator),
+        repeat($._statement),
+        $._function_terminator
       ),
 
     return_statement: ($) =>
-      seq(kw("RETURN"), optional($.expression), $.terminator),
+      seq(kw("RETURN"), optional($._expression), $._terminator),
 
     /// Objects
     object_access: ($) =>
@@ -401,18 +403,18 @@ module.exports = grammar({
         choice(kw("DEFINE"), kw("DEF")),
         kw("STREAM"),
         $.identifier,
-        $.terminator
+        $._terminator
       ),
 
     stream_terminator: ($) =>
       choice(
-        seq(kw("INPUT"), kw("CLOSE"), $.terminator),
-        seq(kw("INPUT"), kw("STREAM"), $.identifier, kw("CLOSE"), $.terminator),
-        seq(kw("OUTPUT"), kw("CLOSE"), $.terminator),
-        seq(kw("OUTPUT"), kw("STREAM"), $.identifier, kw("CLOSE"), $.terminator)
+        seq(kw("INPUT"), kw("CLOSE"), $._terminator),
+        seq(kw("INPUT"), kw("STREAM"), $.identifier, kw("CLOSE"), $._terminator),
+        seq(kw("OUTPUT"), kw("CLOSE"), $._terminator),
+        seq(kw("OUTPUT"), kw("STREAM"), $.identifier, kw("CLOSE"), $._terminator)
       ),
 
-    stream_statement: ($) =>
+    _stream_statement: ($) =>
       choice($.input_stream_statement, $.output_stream_statement),
 
     input_stream_statement: ($) =>
@@ -425,9 +427,9 @@ module.exports = grammar({
           )
         ),
         kw("FROM"),
-        field("target", $.expression),
-        $.terminator,
-        repeat($.statement),
+        field("target", $._expression),
+        $._terminator,
+        repeat($._statement),
         $.stream_terminator
       ),
 
@@ -441,9 +443,9 @@ module.exports = grammar({
           )
         ),
         kw("TO"),
-        field("target", $.expression),
-        $.terminator,
-        repeat($.statement),
+        field("target", $._expression),
+        $._terminator,
+        repeat($._statement),
         $.stream_terminator
       ),
 
@@ -477,8 +479,8 @@ module.exports = grammar({
         repeat($.query_tuning),
         optional($.sort_clause),
         ":",
-        repeat($.statement),
-        $.block_terminator
+        repeat($._statement),
+        $._block_terminator
       ),
 
     // FIND statement
@@ -492,23 +494,19 @@ module.exports = grammar({
         field("table", $.identifier),
         optional($.where_clause),
         repeat($.query_tuning),
-        $.terminator
+        $._terminator
       ),
 
     // DO TRANSACTION statement
     transaction_statement: ($) =>
-      seq(kw("DO TRANSACTION"), ":", repeat($.statement), $.block_terminator),
+      seq(kw("DO TRANSACTION"), ":", repeat($._statement), $._block_terminator),
 
     /// ABL statements
     abl_statement: ($) =>
-      choice(
-        $.assign_statement,
-        $.accumulate_statement,
-        seq(
-          field("statement", $.identifier),
-          repeat($.expression),
-          $.terminator
-        )
+      seq(
+        field("statement", $.identifier),
+        repeat($._expression),
+        $._terminator
       ),
 
     assign_statement: ($) =>
@@ -516,7 +514,7 @@ module.exports = grammar({
         kw("ASSIGN"),
         repeat($.assignment),
         optional("NO-ERROR"),
-        $.terminator
+        $._terminator
       ),
 
     // Accumulate
@@ -537,17 +535,17 @@ module.exports = grammar({
     accumulate_statement: ($) =>
       seq(
         kw("ACCUMULATE"),
-        choice($.expression, $.identifier),
+        choice($._expression, $.identifier),
         seq(
           "(",
           seq($.accumulate_aggregate, repeat(seq(" ", $.accumulate_aggregate))),
           ")"
         ),
-        $.terminator
+        $._terminator
       ),
 
     accumulate_expression: ($) =>
-      seq(kw("ACCUM"), $.accumulate_aggregate, prec.left($.expression)),
+      seq(kw("ACCUM"), $.accumulate_aggregate, prec.left($._expression)),
 
     // Available
     available_expression: ($) =>
