@@ -7,7 +7,7 @@ COMMENT statement
 --------------------------------------------------------------------------------
 
 (source_code
-    (comment))
+  (comment))
 
 ================================================================================
 COMMENT (long) statement
@@ -23,7 +23,7 @@ COMMENT (long) statement
 --------------------------------------------------------------------------------
 
 (source_code
-    (comment))
+  (comment))
 
 ================================================================================
 INCLUDE statement
@@ -251,8 +251,6 @@ zr2 = NOT 5 = 2 + 2.
                           (expression
                             (number_literal))))))))))
           (terminator))))
-
-
 
 ================================================================================
 FIELD ACCESS
@@ -900,7 +898,7 @@ DISPLAY some_object:chained_property:chained_another:method().
 
 --------------------------------------------------------------------------------
 
- (source_code
+(source_code
   (statement
     (abl_statement
       (identifier)
