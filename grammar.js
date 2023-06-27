@@ -1,9 +1,11 @@
 const PREC = {
   PRIMARY: 8,
-  UNARY: 7,
-  EXP: 6,
-  MULTI: 5,
-  ADD: 4,
+
+  COMPARE: 7,
+  UNARY: 6,
+  EXP: 5,
+  MULTI: 4,
+  ADD: 3,
 };
 
 const _list = (rule, separator) => seq(rule, repeat(seq(separator, rule)));
@@ -46,8 +48,8 @@ module.exports = grammar({
         $.string_literal,
         $.number_literal,
         $.null_expression,
-        $.binary_expression,
         $.comparison,
+        $.binary_expression,
         $.field_access,
         $.object_access,
         $.function_call,
@@ -64,7 +66,7 @@ module.exports = grammar({
 
     unary_operator: ($) => choice(kw("-"), kw("NOT")),
     unary_expression: ($) =>
-      prec(PREC.UNARY, seq($.unary_operator, $.expression)),
+      prec(PREC.UNARY, seq($.unary_operator, prec.right($.expression))),
 
     additive_operator: ($) => choice("+", "-"),
     additive_expression: ($) =>
@@ -98,7 +100,7 @@ module.exports = grammar({
     comparator: ($) => choice("<", "<=", "<>", "=", ">", ">=", kw("BEGINS")),
     comparison: ($) =>
       prec(
-        PREC.PRIMARY,
+        PREC.COMPARE,
         seq(prec.left($.expression), $.comparator, prec.right($.expression))
       ),
 

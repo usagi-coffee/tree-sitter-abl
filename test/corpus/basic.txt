@@ -136,6 +136,8 @@ x = 2 + 2.
 y = (4 * 3) / 2.
 z = NOT y > 5.
 
+z1 = NOT 2 + 2.
+
 --------------------------------------------------------------------------------
 
 (source_code
@@ -187,7 +189,23 @@ z = NOT y > 5.
 								(comparator)
 								(expression
 									(number_literal)))))))
-			(terminator))))
+				(terminator)))
+      (statement
+        (variable_assignment
+          (assignment
+            (identifier)
+            (expression
+              (unary_expression
+                (unary_operator)
+                (expression
+                  (binary_expression
+                    (additive_expression
+                      (expression
+                        (number_literal))
+                      (additive_operator)
+                      (expression
+                        (number_literal))))))))
+          (terminator))))
 
 
 ================================================================================

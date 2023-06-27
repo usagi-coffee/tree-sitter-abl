@@ -123,11 +123,11 @@
         },
         {
           "type": "SYMBOL",
-          "name": "binary_expression"
+          "name": "comparison"
         },
         {
           "type": "SYMBOL",
-          "name": "comparison"
+          "name": "binary_expression"
         },
         {
           "type": "SYMBOL",
@@ -236,7 +236,7 @@
     },
     "unary_expression": {
       "type": "PREC",
-      "value": 7,
+      "value": 6,
       "content": {
         "type": "SEQ",
         "members": [
@@ -245,8 +245,12 @@
             "name": "unary_operator"
           },
           {
-            "type": "SYMBOL",
-            "name": "expression"
+            "type": "PREC_RIGHT",
+            "value": 0,
+            "content": {
+              "type": "SYMBOL",
+              "name": "expression"
+            }
           }
         ]
       }
@@ -266,7 +270,7 @@
     },
     "additive_expression": {
       "type": "PREC",
-      "value": 4,
+      "value": 3,
       "content": {
         "type": "CHOICE",
         "members": [
@@ -313,7 +317,7 @@
     },
     "multiplicative_expression": {
       "type": "PREC",
-      "value": 5,
+      "value": 4,
       "content": {
         "type": "CHOICE",
         "members": [
@@ -405,7 +409,7 @@
     },
     "comparison": {
       "type": "PREC",
-      "value": 8,
+      "value": 7,
       "content": {
         "type": "SEQ",
         "members": [
