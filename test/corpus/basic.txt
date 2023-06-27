@@ -895,3 +895,41 @@ value = (accum total Customer.CreditLimit).
 										(identifier)
 										(field_identifier))))))))
 			(terminator))))
+	
+================================================================================
+STREAM statements
+================================================================================
+
+INPUT FROM VALUE(in).
+OUTPUT TO VALUE(out).
+
+OUTPUT CLOSE.
+INPUT CLOSE.
+
+--------------------------------------------------------------------------------
+
+(source_code
+	(statement
+		(stream_statement
+			(input_stream_statement
+				(expression
+					(function_call
+						(identifier)
+						(function_call_argument
+							(expression
+								(identifier)))))
+				(terminator)
+				(statement
+					(stream_statement
+						(output_stream_statement
+							(expression
+								(function_call
+									(identifier)
+									(function_call_argument
+										(expression
+											(identifier)))))
+							(terminator)
+							(stream_terminator
+								(terminator)))))
+				(stream_terminator
+          (terminator))))))

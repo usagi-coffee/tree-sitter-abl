@@ -894,6 +894,50 @@
     }
   },
   {
+    "type": "input_stream_statement",
+    "named": true,
+    "fields": {
+      "source": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "target": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "statement",
+          "named": true
+        },
+        {
+          "type": "stream_terminator",
+          "named": true
+        },
+        {
+          "type": "terminator",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "loop_statement",
     "named": true,
     "fields": {},
@@ -1259,10 +1303,6 @@
           "named": true
         },
         {
-          "type": "output_stream_statement",
-          "named": true
-        },
-        {
           "type": "procedure_parameter_definition",
           "named": true
         },
@@ -1276,6 +1316,10 @@
         },
         {
           "type": "stream_definition",
+          "named": true
+        },
+        {
+          "type": "stream_statement",
           "named": true
         },
         {
@@ -1307,6 +1351,25 @@
         },
         {
           "type": "terminator",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "stream_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "input_stream_statement",
+          "named": true
+        },
+        {
+          "type": "output_stream_statement",
           "named": true
         }
       ]
@@ -1777,6 +1840,10 @@
   },
   {
     "type": "FOR",
+    "named": false
+  },
+  {
+    "type": "FROM",
     "named": false
   },
   {
