@@ -1000,3 +1000,60 @@ INPUT CLOSE.
 								(terminator)))))
 				(stream_terminator
           (terminator))))))
+
+================================================================================
+Booleans
+================================================================================
+
+w = YES.
+x = NO.
+y = TRUE.
+z = FALSE.
+IF YES AND TRUE THEN DISPLAY "yes".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (statement
+    (variable_assignment
+      (assignment
+        (identifier)
+        (expression
+          (boolean_expression)))
+      (terminator)))
+  (statement
+    (variable_assignment
+      (assignment
+        (identifier)
+        (expression
+          (boolean_expression)))
+      (terminator)))
+  (statement
+    (variable_assignment
+      (assignment
+        (identifier)
+        (expression
+          (boolean_expression)))
+      (terminator)))
+  (statement
+    (variable_assignment
+      (assignment
+        (identifier)
+        (expression
+          (boolean_expression)))
+      (terminator)))
+  (statement
+    (if_statement
+      (if_then_statement
+        conditions: (conditions
+          (expression
+            (boolean_expression))
+          (expression
+            (boolean_expression)))
+        (terminated_statement
+          (abl_statement
+            statement: (identifier)
+            (expression
+              (string_literal
+                (double_quoted_string)))
+            (terminator)))))))
