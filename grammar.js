@@ -4,7 +4,6 @@ const PREC = {
   EXP: 6,
   MULTI: 5,
   ADD: 4,
-  COMPARE: 3,
 };
 
 const _list = (rule, separator) => seq(rule, repeat(seq(separator, rule)));
@@ -60,7 +59,6 @@ module.exports = grammar({
 
     parenthesized_expression: ($) => seq("(", $.expression, ")"),
 
-    // FIXME: Shallow field access (1 Level)
     field_access: ($) =>
       seq(field("table", $.identifier), field("field", $.field_identifier)),
 
