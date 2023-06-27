@@ -76,7 +76,7 @@ module.exports = grammar({
           seq(
             prec.left($.expression),
             $.additive_operator,
-            prec.right($.expression)
+            prec.right(PREC.PRIMARY, $.expression)
           )
         )
       ),
@@ -89,7 +89,7 @@ module.exports = grammar({
           seq(
             prec.left($.expression),
             $.multiplicative_operator,
-            prec.right($.expression)
+            prec.right(PREC.PRIMARY, $.expression)
           )
         )
       ),

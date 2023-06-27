@@ -291,7 +291,7 @@
               },
               {
                 "type": "PREC_RIGHT",
-                "value": 0,
+                "value": 8,
                 "content": {
                   "type": "SYMBOL",
                   "name": "expression"
@@ -338,7 +338,7 @@
               },
               {
                 "type": "PREC_RIGHT",
-                "value": 0,
+                "value": 8,
                 "content": {
                   "type": "SYMBOL",
                   "name": "expression"
