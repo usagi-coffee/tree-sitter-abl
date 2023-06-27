@@ -139,6 +139,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "logical_expression"
+        },
+        {
+          "type": "SYMBOL",
           "name": "boolean_literal"
         },
         {
@@ -228,6 +232,76 @@
           }
         }
       ]
+    },
+    "logical_operator": {
+      "type": "PREC_LEFT",
+      "value": 0,
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "ALIAS",
+            "content": {
+              "type": "TOKEN",
+              "content": {
+                "type": "PREC",
+                "value": 1,
+                "content": {
+                  "type": "PATTERN",
+                  "value": "[aA][nN][dD]"
+                }
+              }
+            },
+            "named": false,
+            "value": "AND"
+          },
+          {
+            "type": "ALIAS",
+            "content": {
+              "type": "TOKEN",
+              "content": {
+                "type": "PREC",
+                "value": 1,
+                "content": {
+                  "type": "PATTERN",
+                  "value": "[oO][rR]"
+                }
+              }
+            },
+            "named": false,
+            "value": "OR"
+          }
+        ]
+      }
+    },
+    "logical_expression": {
+      "type": "PREC",
+      "value": 8,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "PREC_LEFT",
+            "value": 0,
+            "content": {
+              "type": "SYMBOL",
+              "name": "expression"
+            }
+          },
+          {
+            "type": "SYMBOL",
+            "name": "logical_operator"
+          },
+          {
+            "type": "PREC_RIGHT",
+            "value": 0,
+            "content": {
+              "type": "SYMBOL",
+              "name": "expression"
+            }
+          }
+        ]
+      }
     },
     "unary_operator": {
       "type": "CHOICE",
@@ -323,7 +397,7 @@
               },
               {
                 "type": "PREC_RIGHT",
-                "value": 8,
+                "value": 9,
                 "content": {
                   "type": "SYMBOL",
                   "name": "expression"
@@ -370,7 +444,7 @@
               },
               {
                 "type": "PREC_RIGHT",
-                "value": 8,
+                "value": 9,
                 "content": {
                   "type": "SYMBOL",
                   "name": "expression"

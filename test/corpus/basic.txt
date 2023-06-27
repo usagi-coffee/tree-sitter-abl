@@ -395,7 +395,7 @@ END.
               (identifier)
               (expression
                 (number_literal)))
-            (terminator)))            
+            (terminator)))
         (block_terminator)
         (else_do_if_statement
           (conditions
@@ -405,14 +405,17 @@ END.
                   (identifier))
                 (comparator)
                 (expression
-                  (number_literal))))
-            (expression
-              (comparison
-                (expression
-                  (identifier))
-                (comparator)
-                (expression
-                  (number_literal)))))
+                  (logical_expression
+                    (expression
+                      (number_literal))
+                    (logical_operator)
+                    (expression
+                      (comparison
+                        (expression
+                          (identifier))
+                        (comparator)
+                        (expression
+                          (number_literal)))))))))
           (statement
             (variable_assignment
               (assignment
@@ -497,7 +500,7 @@ ELSE x = x.
               (terminator))))))))
 
 ================================================================================
-BOOLEAN literals
+LOGICAL expressions
 ================================================================================
 
 w = YES.
@@ -505,6 +508,9 @@ x = NO.
 y = TRUE.
 z = FALSE.
 IF YES AND TRUE THEN DISPLAY "yes".
+
+and = YES AND NO.
+or = YES OR NO.
 
 --------------------------------------------------------------------------------
 
@@ -540,18 +546,45 @@ IF YES AND TRUE THEN DISPLAY "yes".
   (statement
     (if_statement
       (if_then_statement
-        conditions: (conditions
+        (conditions
           (expression
-            (boolean_literal))
-          (expression
-            (boolean_literal)))
+            (logical_expression
+              (expression
+                (boolean_literal))
+              (logical_operator)
+              (expression
+                (boolean_literal)))))
         (terminated_statement
           (abl_statement
-            statement: (identifier)
+            (identifier)
             (expression
               (string_literal
                 (double_quoted_string)))
-            (terminator)))))))
+            (terminator))))))
+  (statement
+    (variable_assignment
+      (assignment
+        (identifier)
+        (expression
+          (logical_expression
+            (expression
+              (boolean_literal))
+            (logical_operator)
+            (expression
+              (boolean_literal)))))
+      (terminator)))
+  (statement
+    (variable_assignment
+      (assignment
+        (identifier)
+        (expression
+          (logical_expression
+            (expression
+              (boolean_literal))
+            (logical_operator)
+            (expression
+              (boolean_literal)))))
+      (terminator))))
 
 ================================================================================
 REPEAT statement

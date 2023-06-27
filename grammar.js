@@ -1,6 +1,7 @@
 const PREC = {
-  PRIMARY: 8,
+  PRIMARY: 9,
 
+  LOGICAL: 8,
   COMPARE: 7,
   UNARY: 6,
   EXP: 5,
@@ -45,6 +46,7 @@ module.exports = grammar({
       choice(
         $.parenthesized_expression,
         $.unary_expression,
+        $.logical_expression,
         $.boolean_literal,
         $.string_literal,
         $.number_literal,
@@ -64,6 +66,17 @@ module.exports = grammar({
 
     field_access: ($) =>
       seq(field("table", $.identifier), field("field", $.field_identifier)),
+
+    logical_operator: ($) => prec.left(choice(kw("AND"), kw("OR"))),
+    logical_expression: ($) =>
+      prec(
+        PREC.LOGICAL,
+        seq(
+          prec.left($.expression),
+          $.logical_operator,
+          prec.right($.expression)
+        )
+      ),
 
     unary_operator: ($) => choice(kw("-"), kw("NOT")),
     unary_expression: ($) =>
