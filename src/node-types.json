@@ -1500,15 +1500,24 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
         {
           "type": "expression",
           "named": true
+        },
+        {
+          "type": "unary_operator",
+          "named": true
         }
       ]
     }
+  },
+  {
+    "type": "unary_operator",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "variable_assignment",

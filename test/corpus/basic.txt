@@ -179,6 +179,7 @@ z = NOT y > 5.
 				(identifier)
 				(expression
 					(unary_expression
+						(unary_operator)
 						(expression
 							(comparison
 								(expression
@@ -759,6 +760,7 @@ FIND FIRST some_table WHERE NOT x > 5.
 				(conditions
 					(expression
 						(unary_expression
+							(unary_operator)
 							(expression
 								(comparison
 									(expression
@@ -847,6 +849,7 @@ x = (IF NOT x > 10 THEN 10 ELSE x).
 								(conditions
 									(expression
 										(unary_expression
+											(unary_operator)
 											(expression
 												(comparison
 													(expression
