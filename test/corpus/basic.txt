@@ -138,6 +138,7 @@ z = NOT y > 5.
 
 z1 = NOT 2 + 2.
 z2 = NOT 2 + 2 = 5.
+zr2 = NOT 5 = 2 + 2.
 
 
 --------------------------------------------------------------------------------
@@ -228,7 +229,29 @@ z2 = NOT 2 + 2 = 5.
                     (comparator)
                     (expression
                       (number_literal)))))))
+				(terminator)))
+      (statement
+        (variable_assignment
+          (assignment
+            (identifier)
+            (expression
+              (unary_expression
+                (unary_operator)
+                (expression
+                  (comparison
+                    (expression
+                      (number_literal))
+                    (comparator)
+                    (expression
+                      (binary_expression
+                        (additive_expression
+                          (expression
+                            (number_literal))
+                          (additive_operator)
+                          (expression
+                            (number_literal))))))))))
           (terminator))))
+
 
 
 ================================================================================
