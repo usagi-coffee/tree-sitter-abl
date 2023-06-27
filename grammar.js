@@ -38,7 +38,8 @@ module.exports = grammar({
     block_terminator: ($) => seq(kw("END"), "."),
 
     null_expression: ($) => /\?/,
-    boolean_expression: ($) => choice(kw("TRUE"), kw("FALSE"), kw("YES"), kw("NO")),
+    boolean_expression: ($) =>
+      choice(kw("TRUE"), kw("FALSE"), kw("YES"), kw("NO")),
 
     expression: ($) =>
       choice(
@@ -147,7 +148,8 @@ module.exports = grammar({
           "=",
           field("value", $.double_quoted_string)
         ),
-        field("name", $.identifier)
+        field("name", $.identifier),
+        field("value", $.double_quoted_string)
       ),
     include: ($) =>
       seq("{", $.file_name, optional(repeat($.include_argument)), "}"),
