@@ -194,7 +194,7 @@
     "fields": {}
   },
   {
-    "type": "boolean_expression",
+    "type": "boolean_literal",
     "named": true,
     "fields": {}
   },
@@ -418,7 +418,7 @@
           "named": true
         },
         {
-          "type": "boolean_expression",
+          "type": "boolean_literal",
           "named": true
         },
         {

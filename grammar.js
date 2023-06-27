@@ -38,14 +38,14 @@ module.exports = grammar({
     block_terminator: ($) => seq(kw("END"), "."),
 
     null_expression: ($) => /\?/,
-    boolean_expression: ($) =>
+    boolean_literal: ($) =>
       choice(kw("TRUE"), kw("FALSE"), kw("YES"), kw("NO")),
 
     expression: ($) =>
       choice(
         $.parenthesized_expression,
         $.unary_expression,
-        $.boolean_expression,
+        $.boolean_literal,
         $.string_literal,
         $.number_literal,
         $.null_expression,

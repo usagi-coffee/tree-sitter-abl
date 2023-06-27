@@ -57,7 +57,7 @@
       "type": "PATTERN",
       "value": "\\?"
     },
-    "boolean_expression": {
+    "boolean_literal": {
       "type": "CHOICE",
       "members": [
         {
@@ -139,7 +139,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "boolean_expression"
+          "name": "boolean_literal"
         },
         {
           "type": "SYMBOL",

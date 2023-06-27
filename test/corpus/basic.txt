@@ -497,7 +497,7 @@ ELSE x = x.
               (terminator))))))))
 
 ================================================================================
-BOOLEAN expressions
+BOOLEAN literals
 ================================================================================
 
 w = YES.
@@ -514,37 +514,37 @@ IF YES AND TRUE THEN DISPLAY "yes".
       (assignment
         (identifier)
         (expression
-          (boolean_expression)))
+          (boolean_literal)))
       (terminator)))
   (statement
     (variable_assignment
       (assignment
         (identifier)
         (expression
-          (boolean_expression)))
+          (boolean_literal)))
       (terminator)))
   (statement
     (variable_assignment
       (assignment
         (identifier)
         (expression
-          (boolean_expression)))
+          (boolean_literal)))
       (terminator)))
   (statement
     (variable_assignment
       (assignment
         (identifier)
         (expression
-          (boolean_expression)))
+          (boolean_literal)))
       (terminator)))
   (statement
     (if_statement
       (if_then_statement
         conditions: (conditions
           (expression
-            (boolean_expression))
+            (boolean_literal))
           (expression
-            (boolean_expression)))
+            (boolean_literal)))
         (terminated_statement
           (abl_statement
             statement: (identifier)
