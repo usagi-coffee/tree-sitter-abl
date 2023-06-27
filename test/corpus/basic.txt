@@ -138,7 +138,6 @@ z = NOT y > 5.
 
 --------------------------------------------------------------------------------
 
-
 (source_code
 	(statement
 		(variable_assignment
@@ -175,19 +174,20 @@ z = NOT y > 5.
 								(number_literal))))))
 			(terminator)))
 	(statement
-			(variable_assignment
-				(assignment
-					(identifier)
-					(expression
-						(comparison
-							(expression
-								(unary_expression
-									(expression
-										(identifier))))
-							(comparator)
-							(expression
-								(number_literal)))))
+		(variable_assignment
+			(assignment
+				(identifier)
+				(expression
+					(unary_expression
+						(expression
+							(comparison
+								(expression
+									(identifier))
+								(comparator)
+								(expression
+									(number_literal)))))))
 			(terminator))))
+
 
 ================================================================================
 FIELD ACCESS (shallow)
@@ -758,14 +758,14 @@ FIND FIRST some_table WHERE NOT x > 5.
 			(where_clause
 				(conditions
 					(expression
-						(comparison
+						(unary_expression
 							(expression
-							  (unary_expression
-								  (expression
-										(identifier))))
-							(comparator)
-							(expression
-								(number_literal))))))
+								(comparison
+									(expression
+										(identifier))
+									(comparator)
+									(expression
+										(number_literal))))))))
 			(terminator))))
       
 ================================================================================
@@ -846,20 +846,19 @@ x = (IF NOT x > 10 THEN 10 ELSE x).
 							(ternary_expression
 								(conditions
 									(expression
-										(comparison
+										(unary_expression
 											(expression
-												(unary_expression
+												(comparison
 													(expression
-														(identifier))))
-											(comparator)
-											(expression
-												(number_literal)))))
+														(identifier))
+													(comparator)
+													(expression
+														(number_literal)))))))
 								(expression
 									(number_literal))
 								(expression
 									(identifier)))))))
 			(terminator))))
-
 
 ================================================================================
 ACCUMULATE statement

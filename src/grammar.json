@@ -103,6 +103,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "unary_expression"
+        },
+        {
+          "type": "SYMBOL",
           "name": "boolean_expression"
         },
         {
@@ -116,10 +120,6 @@
         {
           "type": "SYMBOL",
           "name": "null_expression"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "unary_expression"
         },
         {
           "type": "SYMBOL",
@@ -397,8 +397,8 @@
       ]
     },
     "comparison": {
-      "type": "PREC_LEFT",
-      "value": 0,
+      "type": "PREC",
+      "value": 8,
       "content": {
         "type": "SEQ",
         "members": [
