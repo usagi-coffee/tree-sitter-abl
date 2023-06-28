@@ -159,10 +159,6 @@
         },
         {
           "type": "SYMBOL",
-          "name": "comparison"
-        },
-        {
-          "type": "SYMBOL",
           "name": "binary_expression"
         },
         {
@@ -455,20 +451,7 @@
         ]
       }
     },
-    "binary_expression": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "additive_expression"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "multiplicative_expression"
-        }
-      ]
-    },
-    "comparator": {
+    "comparison_operator": {
       "type": "CHOICE",
       "members": [
         {
@@ -513,7 +496,7 @@
         }
       ]
     },
-    "comparison": {
+    "comparison_expression": {
       "type": "PREC",
       "value": 7,
       "content": {
@@ -529,7 +512,7 @@
           },
           {
             "type": "SYMBOL",
-            "name": "comparator"
+            "name": "comparison_operator"
           },
           {
             "type": "PREC_RIGHT",
@@ -541,6 +524,23 @@
           }
         ]
       }
+    },
+    "binary_expression": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "additive_expression"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "multiplicative_expression"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "comparison_expression"
+        }
+      ]
     },
     "statement": {
       "type": "CHOICE",

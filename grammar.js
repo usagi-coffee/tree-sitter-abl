@@ -51,7 +51,6 @@ module.exports = grammar({
         $.string_literal,
         $.number_literal,
         $.null_expression,
-        $.comparison,
         $.binary_expression,
         $.field_access,
         $.object_access,
@@ -108,14 +107,23 @@ module.exports = grammar({
         )
       ),
 
-    binary_expression: ($) =>
-      choice($.additive_expression, $.multiplicative_expression),
-
-    comparator: ($) => choice("<", "<=", "<>", "=", ">", ">=", kw("BEGINS")),
-    comparison: ($) =>
+    comparison_operator: ($) =>
+      choice("<", "<=", "<>", "=", ">", ">=", kw("BEGINS")),
+    comparison_expression: ($) =>
       prec(
         PREC.COMPARE,
-        seq(prec.left($.expression), $.comparator, prec.right($.expression))
+        seq(
+          prec.left($.expression),
+          $.comparison_operator,
+          prec.right($.expression)
+        )
+      ),
+
+    binary_expression: ($) =>
+      choice(
+        $.additive_expression,
+        $.multiplicative_expression,
+        $.comparison_expression
       ),
 
     statement: ($) =>

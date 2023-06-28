@@ -103,8 +103,6 @@ DEFINE VARIABLE clone LIKE short_variable.
       (identifier)
       (identifier)
       (terminator))))
-    
-
 
 ================================================================================
 VARIABLE ASSIGNMENT statement
@@ -114,7 +112,6 @@ DEFINE VARIABLE variable AS INTEGER.
 variable = 5.
 
 --------------------------------------------------------------------------------
-
 
 (source_code
   (statement
@@ -128,7 +125,7 @@ variable = 5.
         (identifier)
         (expression
           (number_literal)))
-      (terminator))))  
+      (terminator))))
 
 ================================================================================
 UNARY/BINARY operators
@@ -188,71 +185,74 @@ zr2 = NOT 5 = 2 + 2.
           (unary_expression
             (unary_operator)
             (expression
-              (comparison
-                (expression
-                  (identifier))
-                (comparator)
-                (expression
-                  (number_literal)))))))
-        (terminator)))
-      (statement
-        (variable_assignment
-          (assignment
-            (identifier)
+              (binary_expression
+                (comparison_expression
+                  (expression
+                    (identifier))
+                  (comparison_operator)
+                  (expression
+                    (number_literal))))))))
+      (terminator)))
+  (statement
+    (variable_assignment
+      (assignment
+        (identifier)
+        (expression
+          (unary_expression
+            (unary_operator)
             (expression
-              (unary_expression
-                (unary_operator)
-                (expression
-                  (binary_expression
-                    (additive_expression
-                      (expression
-                        (number_literal))
-                      (additive_operator)
-                      (expression
-                        (number_literal))))))))
-          (terminator)))
-      (statement
-        (variable_assignment
-          (assignment
-            (identifier)
+              (binary_expression
+                (additive_expression
+                  (expression
+                    (number_literal))
+                  (additive_operator)
+                  (expression
+                    (number_literal))))))))
+      (terminator)))
+  (statement
+    (variable_assignment
+      (assignment
+        (identifier)
+        (expression
+          (unary_expression
+            (unary_operator)
             (expression
-              (unary_expression
-                (unary_operator)
-                (expression
-                  (comparison
-                    (expression
-                      (binary_expression
-                        (additive_expression
-                          (expression
-                            (number_literal))
-                          (additive_operator)
-                          (expression
-                            (number_literal)))))
-                    (comparator)
-                    (expression
-                      (number_literal)))))))
-        (terminator)))
-      (statement
-        (variable_assignment
-          (assignment
-            (identifier)
+              (binary_expression
+                (comparison_expression
+                  (expression
+                    (binary_expression
+                      (additive_expression
+                        (expression
+                          (number_literal))
+                        (additive_operator)
+                        (expression
+                          (number_literal)))))
+                  (comparison_operator)
+                  (expression
+                    (number_literal))))))))
+      (terminator)))
+  (statement
+    (variable_assignment
+      (assignment
+        (identifier)
+        (expression
+          (unary_expression
+            (unary_operator)
             (expression
-              (unary_expression
-                (unary_operator)
-                (expression
-                  (comparison
-                    (expression
-                      (number_literal))
-                    (comparator)
-                    (expression
-                      (binary_expression
-                        (additive_expression
-                          (expression
-                            (number_literal))
-                          (additive_operator)
-                          (expression
-                            (number_literal))))))))))
-          (terminator))))
+              (binary_expression
+                (comparison_expression
+                  (expression
+                    (number_literal))
+                  (comparison_operator)
+                  (expression
+                    (binary_expression
+                      (additive_expression
+                        (expression
+                          (number_literal))
+                        (additive_operator)
+                        (expression
+                          (number_literal)))))))))))
+      (terminator))))
 
 ================================================================================
 FIELD ACCESS
@@ -286,7 +286,7 @@ DEFINE BUFFER x-table FOR table.
       (identifier)
       (identifier)
       (terminator))))
-      
+
 ================================================================================
 IF statement
 ================================================================================
@@ -303,12 +303,13 @@ END.
       (if_do_statement
         (conditions
           (expression
-            (comparison
-              (expression
-                (identifier))
-              (comparator)
-              (expression
-                (number_literal)))))
+            (binary_expression
+              (comparison_expression
+                (expression
+                  (identifier))
+                (comparison_operator)
+                (expression
+                  (number_literal))))))
         (statement
           (variable_assignment
             (assignment
@@ -337,19 +338,20 @@ END.
       (if_do_statement
         (conditions
           (expression
-            (comparison
-              (expression
-                (identifier))
-              (comparator)
-              (expression
-                (number_literal)))))
+            (binary_expression
+              (comparison_expression
+                (expression
+                  (identifier))
+                (comparison_operator)
+                (expression
+                  (number_literal))))))
         (statement
           (variable_assignment
             (assignment
               (identifier)
               (expression
                 (number_literal)))
-            (terminator)))            
+            (terminator)))
         (block_terminator)
         (else_do_statement
           (statement
@@ -383,12 +385,13 @@ END.
       (if_do_statement
         (conditions
           (expression
-            (comparison
-              (expression
-                (identifier))
-              (comparator)
-              (expression
-                (number_literal)))))
+            (binary_expression
+              (comparison_expression
+                (expression
+                  (identifier))
+                (comparison_operator)
+                (expression
+                  (number_literal))))))
         (statement
           (variable_assignment
             (assignment
@@ -400,22 +403,24 @@ END.
         (else_do_if_statement
           (conditions
             (expression
-              (comparison
-                (expression
-                  (identifier))
-                (comparator)
-                (expression
-                  (logical_expression
-                    (expression
-                      (number_literal))
-                    (logical_operator)
-                    (expression
-                      (comparison
-                        (expression
-                          (identifier))
-                        (comparator)
-                        (expression
-                          (number_literal)))))))))
+              (binary_expression
+                (comparison_expression
+                  (expression
+                    (identifier))
+                  (comparison_operator)
+                  (expression
+                    (logical_expression
+                      (expression
+                        (number_literal))
+                      (logical_operator)
+                      (expression
+                        (binary_expression
+                          (comparison_expression
+                            (expression
+                              (identifier))
+                            (comparison_operator)
+                            (expression
+                              (number_literal)))))))))))
           (statement
             (variable_assignment
               (assignment
@@ -448,12 +453,13 @@ IF x > 10 THEN x = 10.
       (if_then_statement
         (conditions
           (expression
-            (comparison
-              (expression
-                (identifier))
-              (comparator)
-              (expression
-                (number_literal)))))
+            (binary_expression
+              (comparison_expression
+                (expression
+                  (identifier))
+                (comparison_operator)
+                (expression
+                  (number_literal))))))
         (terminated_statement
           (variable_assignment
             (assignment
@@ -477,12 +483,13 @@ ELSE x = x.
       (if_then_statement
         (conditions
           (expression
-            (comparison
-              (expression
-                (identifier))
-              (comparator)
-              (expression
-                (number_literal)))))
+            (binary_expression
+              (comparison_expression
+                (expression
+                  (identifier))
+                (comparison_operator)
+                (expression
+                  (number_literal))))))
         (terminated_statement
           (variable_assignment
             (assignment
@@ -626,12 +633,13 @@ END.
       (do_while_statement
         (conditions
           (expression
-            (comparison
-              (expression
-                (identifier))
-              (comparator)
-              (expression
-                (number_literal)))))
+            (binary_expression
+              (comparison_expression
+                (expression
+                  (identifier))
+                (comparison_operator)
+                (expression
+                  (number_literal))))))
         (statement
           (variable_assignment
             (assignment
@@ -688,12 +696,12 @@ RUN some_procedure.
       (identifier)
       (comment)
       (procedure_terminator)))
-    (statement
-      (abl_statement
-        (identifier)
-        (expression
-          (identifier))
-        (terminator))))
+  (statement
+    (abl_statement
+      (identifier)
+      (expression
+        (identifier))
+      (terminator))))
 
 ================================================================================
 FUNCTION statement
@@ -779,7 +787,6 @@ ASSIGN
 
 --------------------------------------------------------------------------------
 
-
 (source_code
   (statement
     (abl_statement
@@ -798,7 +805,7 @@ ASSIGN
           (expression
             (function_call
               (identifier))))
-            (terminator)))))
+        (terminator)))))
 
 ================================================================================
 FOR EACH statement
@@ -818,12 +825,13 @@ END.
       (where_clause
         (conditions
           (expression
-            (comparison
-              (expression
-                (identifier))
-              (comparator)
-              (expression
-                (number_literal))))))
+            (binary_expression
+              (comparison_expression
+                (expression
+                  (identifier))
+                (comparison_operator)
+                (expression
+                  (number_literal)))))))
       (query_tuning)
       (statement
         (abl_statement
@@ -843,19 +851,20 @@ END.
 
 --------------------------------------------------------------------------------
 
- (source_code
+(source_code
   (statement
     (for_statement
       (identifier)
       (where_clause
         (conditions
           (expression
-            (comparison
-              (expression
-                (identifier))
-              (comparator)
-              (expression
-                (number_literal))))))
+            (binary_expression
+              (comparison_expression
+                (expression
+                  (identifier))
+                (comparison_operator)
+                (expression
+                  (number_literal)))))))
       (sort_clause
         (sort_column
           (identifier)
@@ -886,12 +895,13 @@ END.
       (where_clause
         (conditions
           (expression
-            (comparison
-              (expression
-                (identifier))
-              (comparator)
-              (expression
-                (number_literal))))))
+            (binary_expression
+              (comparison_expression
+                (expression
+                  (identifier))
+                (comparison_operator)
+                (expression
+                  (number_literal)))))))
       (query_tuning)
       (query_tuning)
       (terminator)))
@@ -916,14 +926,15 @@ FIND FIRST some_table WHERE NOT x > 5.
             (unary_expression
               (unary_operator)
               (expression
-                (comparison
-                  (expression
-                    (identifier))
-                  (comparator)
-                  (expression
-                    (number_literal))))))))
+                (binary_expression
+                  (comparison_expression
+                    (expression
+                      (identifier))
+                    (comparison_operator)
+                    (expression
+                      (number_literal)))))))))
       (terminator))))
-      
+
 ================================================================================
 OBJECT ACCESSORS statement
 ================================================================================
@@ -971,12 +982,13 @@ x = IF x > 10 THEN 10 ELSE x.
           (ternary_expression
             (conditions
               (expression
-                (comparison
-                  (expression
-                    (identifier))
-                  (comparator)
-                  (expression
-                    (number_literal)))))
+                (binary_expression
+                  (comparison_expression
+                    (expression
+                      (identifier))
+                    (comparison_operator)
+                    (expression
+                      (number_literal))))))
             (expression
               (number_literal))
             (expression
@@ -1005,12 +1017,13 @@ x = (IF NOT x > 10 THEN 10 ELSE x).
                     (unary_expression
                       (unary_operator)
                       (expression
-                        (comparison
-                          (expression
-                            (identifier))
-                          (comparator)
-                          (expression
-                            (number_literal)))))))
+                        (binary_expression
+                          (comparison_expression
+                            (expression
+                              (identifier))
+                            (comparison_operator)
+                            (expression
+                              (number_literal))))))))
                 (expression
                   (number_literal))
                 (expression
@@ -1052,7 +1065,7 @@ value = (accum total Customer.CreditLimit).
                     (identifier)
                     (field_identifier))))))))
       (terminator))))
-  
+
 ================================================================================
 STREAM statements
 ================================================================================
