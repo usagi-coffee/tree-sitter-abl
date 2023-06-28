@@ -244,10 +244,11 @@ END.
       (comparison_expression
         (identifier)
         (number_literal)))
-    (variable_assignment
-      (assignment
-        (identifier)
-        (number_literal)))))
+    (body
+      (variable_assignment
+        (assignment
+          (identifier)
+          (number_literal))))))
 
 ================================================================================
 IF ELSE DO statement
@@ -268,15 +269,17 @@ END.
       (comparison_expression
         (identifier)
         (number_literal)))
-    (variable_assignment
-      (assignment
-        (identifier)
-        (number_literal)))
-    (else_do_statement
+    (body
       (variable_assignment
         (assignment
           (identifier)
-          (identifier))))))
+          (number_literal))))
+    (else_do_statement
+      (body
+        (variable_assignment
+          (assignment
+            (identifier)
+            (identifier)))))))
 
 ================================================================================
 IF ELSE IF statement
@@ -300,24 +303,27 @@ END.
       (comparison_expression
         (identifier)
         (number_literal)))
-    (variable_assignment
-      (assignment
-        (identifier)
-        (number_literal)))
+    (body
+      (variable_assignment
+        (assignment
+          (identifier)
+          (number_literal))))
     (else_do_if_statement
       (conditions
         (comparison_expression
           (identifier)
           (number_literal)))
-      (variable_assignment
-        (assignment
-          (identifier)
-          (identifier))))
+      (body
+        (variable_assignment
+          (assignment
+            (identifier)
+            (identifier)))))
     (else_do_statement
-      (variable_assignment
-        (assignment
-          (identifier)
-          (identifier))))))
+      (body
+        (variable_assignment
+          (assignment
+            (identifier)
+            (identifier)))))))
 
 ================================================================================
 IF THEN statement
@@ -440,10 +446,11 @@ END.
 
 (source_code
   (repeat_statement
-    (variable_assignment
-      (assignment
-        (identifier)
-        (number_literal)))))
+    (body
+      (variable_assignment
+        (assignment
+          (identifier)
+          (number_literal))))))
 
 ================================================================================
 DO WHILE statement
@@ -462,10 +469,11 @@ END.
       (comparison_expression
         (identifier)
         (number_literal)))
-    (variable_assignment
-      (assignment
-        (identifier)
-        (number_literal)))))
+    (body
+      (variable_assignment
+        (assignment
+          (identifier)
+          (number_literal))))))
 
 ================================================================================
 DO statement
@@ -484,10 +492,11 @@ END.
       (identifier)
       (number_literal))
     (number_literal)
-    (variable_assignment
-      (assignment
-        (identifier)
-        (number_literal)))))
+    (body
+      (variable_assignment
+        (assignment
+          (identifier)
+          (number_literal))))))
 
 ================================================================================
 PROCEDURE statement
@@ -527,8 +536,9 @@ END FUNCTION.
       (function_parameter_mode)
       (identifier)
       (primitive_type))
-    (return_statement
-      (identifier))))
+    (body
+      (return_statement
+        (identifier)))))
 
 ================================================================================
 DO TRANSACTION statement
@@ -542,9 +552,10 @@ END.
 
 (source_code
   (transaction_statement
-    (abl_statement
-      statement: (identifier)
-      (identifier))))
+    (body
+      (abl_statement
+        statement: (identifier)
+        (identifier)))))
 
 ================================================================================
 ABL GENERIC statement
@@ -608,9 +619,10 @@ END.
           (identifier)
           (number_literal))))
     (query_tuning)
-    (abl_statement
-      statement: (identifier)
-      (identifier))))
+    (body
+      (abl_statement
+        statement: (identifier)
+        (identifier)))))
 
 ================================================================================
 FOR EACH (sorted) statement
@@ -636,9 +648,10 @@ END.
         (sort_order))
       (sort_column
         column: (identifier)))
-    (abl_statement
-      statement: (identifier)
-      (identifier))))
+    (body
+      (abl_statement
+        statement: (identifier)
+        (identifier)))))
 
 ================================================================================
 FIND statement
