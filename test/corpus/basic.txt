@@ -128,17 +128,12 @@ variable = 5.
       (terminator))))
 
 ================================================================================
-UNARY/BINARY operators
+BINARY (simple) operators
 ================================================================================
 
 x = 2 + 2.
 y = (4 * 3) / 2.
-z = NOT y > 5.
-
-z1 = NOT 2 + 2.
-z2 = NOT 2 + 2 = 5.
-zr2 = NOT 5 = 2 + 2.
-
+z = 2 > 4.
 
 --------------------------------------------------------------------------------
 
@@ -177,6 +172,69 @@ zr2 = NOT 5 = 2 + 2.
               (expression
                 (number_literal))))))
       (terminator)))
+  (statement
+    (variable_assignment
+      (assignment
+        (identifier)
+        (expression
+          (binary_expression
+            (comparison_expression
+              (expression
+                (number_literal))
+              (comparison_operator)
+              (expression
+                (number_literal))))))
+      (terminator))))
+
+================================================================================
+UNARY (simple) operators
+================================================================================
+
+x = -2 + 2.
+z = NOT y.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (statement
+    (variable_assignment
+      (assignment
+        (identifier)
+        (expression
+          (unary_expression
+            (unary_operator)
+            (expression
+              (binary_expression
+                (additive_expression
+                  (expression
+                    (number_literal))
+                  (additive_operator)
+                  (expression
+                    (number_literal))))))))
+      (terminator)))
+  (statement
+    (variable_assignment
+      (assignment
+        (identifier)
+        (expression
+          (unary_expression
+            (unary_operator)
+            (expression
+              (identifier)))))
+      (terminator))))
+
+================================================================================
+UNARY/BINARY operators
+================================================================================
+
+z = NOT y > 5.
+y = NOT 2 + 2.
+z = NOT 2 + 2 = 5.
+zr = NOT 5 = 2 + 2.
+
+--------------------------------------------------------------------------------
+
+(source_code
   (statement
     (variable_assignment
       (assignment
@@ -505,8 +563,8 @@ y = TRUE.
 z = FALSE.
 IF YES AND TRUE THEN DISPLAY "yes".
 
-and = YES AND NO.
-or = YES OR NO.
+x = YES AND NO.
+x = YES OR NO.
 
 --------------------------------------------------------------------------------
 
