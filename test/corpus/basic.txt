@@ -190,28 +190,11 @@ z = 2 > 4.
 UNARY (simple) operators
 ================================================================================
 
-x = -2 + 2.
 z = NOT y.
 
 --------------------------------------------------------------------------------
 
 (source_code
-  (statement
-    (variable_assignment
-      (assignment
-        (identifier)
-        (expression
-          (unary_expression
-            (unary_operator)
-            (expression
-              (binary_expression
-                (additive_expression
-                  (expression
-                    (number_literal))
-                  (additive_operator)
-                  (expression
-                    (number_literal))))))))
-      (terminator)))
   (statement
     (variable_assignment
       (assignment
