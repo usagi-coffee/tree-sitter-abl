@@ -26,6 +26,7 @@ module.exports = grammar({
 
   rules: {
     source_code: ($) => repeat($._statement),
+    body: ($) => repeat1($._statement),
 
     /// Main
     identifier: ($) => /[A-z_]{1}[A-z-_|0-9]*/i,
@@ -266,13 +267,13 @@ module.exports = grammar({
         field("conditions", $.conditions),
         kw("THEN DO"),
         ":",
-        repeat($._statement),
+        optional($.body),
         $._block_terminator,
         optional(repeat(choice($.else_do_statement, $.else_do_if_statement)))
       ),
 
     else_do_statement: ($) =>
-      seq(kw("ELSE DO"), ":", repeat($._statement), $._block_terminator),
+      seq(kw("ELSE DO"), ":", optional($.body), $._block_terminator),
 
     else_do_if_statement: ($) =>
       seq(
@@ -280,7 +281,7 @@ module.exports = grammar({
         field("conditions", $.conditions),
         kw("THEN DO"),
         ":",
-        repeat($._statement),
+        optional($.body),
         $._block_terminator
       ),
 
@@ -312,14 +313,14 @@ module.exports = grammar({
       choice($.repeat_statement, $.do_while_statement, $.do_statement),
 
     repeat_statement: ($) =>
-      seq(kw("REPEAT"), ":", repeat($._statement), $._block_terminator),
+      seq(kw("REPEAT"), ":", optional($.body), $._block_terminator),
 
     do_while_statement: ($) =>
       seq(
         kw("DO WHILE"),
         $.conditions,
         ":",
-        repeat($._statement),
+        optional($.body),
         $._block_terminator
       ),
 
@@ -330,7 +331,7 @@ module.exports = grammar({
         kw("TO"),
         $.number_literal,
         ":",
-        repeat($._statement),
+        optional($.body),
         $._block_terminator
       ),
 
@@ -342,7 +343,7 @@ module.exports = grammar({
         $.identifier,
         optional(kw("PRIVATE")),
         ":",
-        repeat($._statement),
+        optional($.body),
         $._procedure_terminator
       ),
 
@@ -375,7 +376,7 @@ module.exports = grammar({
         ),
         seq("(", optional(_list($.function_parameter, ",")), ")"),
         choice(":", $._terminator),
-        repeat($._statement),
+        optional($.body),
         $._function_terminator
       ),
 
@@ -479,7 +480,7 @@ module.exports = grammar({
         repeat($.query_tuning),
         optional($.sort_clause),
         ":",
-        repeat($._statement),
+        optional($.body),
         $._block_terminator
       ),
 
@@ -499,7 +500,7 @@ module.exports = grammar({
 
     // DO TRANSACTION statement
     transaction_statement: ($) =>
-      seq(kw("DO TRANSACTION"), ":", repeat($._statement), $._block_terminator),
+      seq(kw("DO TRANSACTION"), ":", optional($.body), $._block_terminator),
 
     /// ABL statements
     abl_statement: ($) =>
