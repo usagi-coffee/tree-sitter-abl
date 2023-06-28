@@ -145,7 +145,7 @@ UNARY (simple) operators
 ================================================================================
 
 z = NOT y.
-y = NOT -x < 10 OR x = 10.
+y = NOT -x < -10 OR x = 10.
 
 --------------------------------------------------------------------------------
 
@@ -163,7 +163,8 @@ y = NOT -x < 10 OR x = 10.
           (comparison_expression
             (unary_expression
               (identifier))
-            (number_literal)))
+            (unary_expression
+              (number_literal))))
         (comparison_expression
           (identifier)
           (number_literal))))))

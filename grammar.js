@@ -79,7 +79,7 @@ module.exports = grammar({
     _unary_operator: ($) => choice(kw("-"), kw("NOT")),
     unary_expression: ($) =>
       choice(
-        prec.left(PREC.UNARY, seq(kw("-"), prec.left($.identifier))),
+        prec.left(PREC.UNARY, seq(kw("-"), prec.left(choice($.number_literal, $.identifier)))),
         prec.left(PREC.LOGICAL, seq(kw("NOT"), prec.left(PREC.LOGICAL, $._expression))),
       ),
 
@@ -200,7 +200,7 @@ module.exports = grammar({
         kw("COM-HANDLE")
       ),
 
-    number_literal: ($) => /[0-9]+/i,
+    number_literal: ($) => /[0-9]+/,
     _string_literal: ($) =>
       seq(choice($.double_quoted_string, $.single_quoted_string)),
 
