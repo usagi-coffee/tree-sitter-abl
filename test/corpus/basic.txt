@@ -370,7 +370,7 @@ IF ELSE IF statement
 IF x > 10 THEN DO:
   x = 10.
 END.
-ELSE IF x < 10 OR x = 0 THEN DO:
+ELSE IF x < 10 THEN DO:
   x = x.
 END.
 ELSE DO:
@@ -409,18 +409,7 @@ END.
                     (identifier))
                   (comparison_operator)
                   (expression
-                    (logical_expression
-                      (expression
-                        (number_literal))
-                      (logical_operator)
-                      (expression
-                        (binary_expression
-                          (comparison_expression
-                            (expression
-                              (identifier))
-                            (comparison_operator)
-                            (expression
-                              (number_literal)))))))))))
+                    (number_literal))))))
           (statement
             (variable_assignment
               (assignment
