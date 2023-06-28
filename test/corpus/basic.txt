@@ -549,6 +549,8 @@ IF YES AND TRUE THEN DISPLAY "yes".
 x = YES AND NO.
 x = YES OR NO.
 
+y = x < 10 OR x = 10.
+
 --------------------------------------------------------------------------------
 
 (source_code
@@ -585,12 +587,13 @@ x = YES OR NO.
       (if_then_statement
         (conditions
           (expression
-            (logical_expression
-              (expression
-                (boolean_literal))
-              (logical_operator)
-              (expression
-                (boolean_literal)))))
+            (binary_expression
+              (logical_expression
+                (expression
+                  (boolean_literal))
+                (logical_operator)
+                (expression
+                  (boolean_literal))))))
         (terminated_statement
           (abl_statement
             (identifier)
@@ -603,24 +606,51 @@ x = YES OR NO.
       (assignment
         (identifier)
         (expression
-          (logical_expression
-            (expression
-              (boolean_literal))
-            (logical_operator)
-            (expression
-              (boolean_literal)))))
+          (binary_expression
+            (logical_expression
+              (expression
+                (boolean_literal))
+              (logical_operator)
+              (expression
+                (boolean_literal))))))
       (terminator)))
   (statement
     (variable_assignment
       (assignment
         (identifier)
         (expression
-          (logical_expression
-            (expression
-              (boolean_literal))
-            (logical_operator)
-            (expression
-              (boolean_literal)))))
+          (binary_expression
+            (logical_expression
+              (expression
+                (boolean_literal))
+              (logical_operator)
+              (expression
+                (boolean_literal))))))
+      (terminator)))
+  (statement
+    (variable_assignment
+      (assignment
+        (identifier)
+        (expression
+          (binary_expression
+            (logical_expression
+              (expression
+                (binary_expression
+                  (comparison_expression
+                    (expression
+                      (identifier))
+                    (comparison_operator)
+                    (expression
+                      (number_literal)))))
+              (logical_operator)
+              (expression
+                (binary_expression
+                  (comparison_expression
+                    (expression
+                      (identifier))
+                    (comparison_operator)
+                    (expression
+                      (number_literal)))))))))
       (terminator))))
 
 ================================================================================

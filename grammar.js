@@ -1,12 +1,10 @@
 const PREC = {
-  PRIMARY: 9,
-
-  LOGICAL: 8,
-  COMPARE: 7,
-  UNARY: 6,
-  EXP: 5,
-  MULTI: 4,
-  ADD: 3,
+  UNARY: 7,
+  EXP: 6,
+  MULTI: 5,
+  ADD: 4,
+  COMPARE: 3,
+  LOGICAL: 2
 };
 
 const _list = (rule, separator) => seq(rule, repeat(seq(separator, rule)));
@@ -46,7 +44,6 @@ module.exports = grammar({
       choice(
         $.parenthesized_expression,
         $.unary_expression,
-        $.logical_expression,
         $.boolean_literal,
         $.string_literal,
         $.number_literal,
@@ -68,12 +65,12 @@ module.exports = grammar({
 
     logical_operator: ($) => prec.left(choice(kw("AND"), kw("OR"))),
     logical_expression: ($) =>
-      prec(
+      prec.right(
         PREC.LOGICAL,
         seq(
-          prec.left($.expression),
+          $.expression,
           $.logical_operator,
-          prec.right($.expression)
+          $.expression
         )
       ),
 
@@ -83,26 +80,26 @@ module.exports = grammar({
 
     additive_operator: ($) => choice("+", "-"),
     additive_expression: ($) =>
-      prec(
+      prec.left(
         PREC.ADD,
         choice(
           seq(
-            prec.left($.expression),
+            $.expression,
             $.additive_operator,
-            prec.right(PREC.PRIMARY, $.expression)
+            $.expression
           )
         )
       ),
 
     multiplicative_operator: ($) => choice("*", "/"),
     multiplicative_expression: ($) =>
-      prec(
+      prec.left(
         PREC.MULTI,
         choice(
           seq(
-            prec.left($.expression),
+            $.expression,
             $.multiplicative_operator,
-            prec.right(PREC.PRIMARY, $.expression)
+            $.expression
           )
         )
       ),
@@ -110,12 +107,12 @@ module.exports = grammar({
     comparison_operator: ($) =>
       choice("<", "<=", "<>", "=", ">", ">=", kw("BEGINS")),
     comparison_expression: ($) =>
-      prec(
+      prec.left(
         PREC.COMPARE,
         seq(
-          prec.left($.expression),
+          $.expression,
           $.comparison_operator,
-          prec.right($.expression)
+          $.expression
         )
       ),
 
@@ -123,7 +120,8 @@ module.exports = grammar({
       choice(
         $.additive_expression,
         $.multiplicative_expression,
-        $.comparison_expression
+        $.comparison_expression,
+        $.logical_expression
       ),
 
     statement: ($) =>

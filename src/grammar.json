@@ -139,10 +139,6 @@
         },
         {
           "type": "SYMBOL",
-          "name": "logical_expression"
-        },
-        {
-          "type": "SYMBOL",
           "name": "boolean_literal"
         },
         {
@@ -271,30 +267,22 @@
       }
     },
     "logical_expression": {
-      "type": "PREC",
-      "value": 8,
+      "type": "PREC_RIGHT",
+      "value": 2,
       "content": {
         "type": "SEQ",
         "members": [
           {
-            "type": "PREC_LEFT",
-            "value": 0,
-            "content": {
-              "type": "SYMBOL",
-              "name": "expression"
-            }
+            "type": "SYMBOL",
+            "name": "expression"
           },
           {
             "type": "SYMBOL",
             "name": "logical_operator"
           },
           {
-            "type": "PREC_RIGHT",
-            "value": 0,
-            "content": {
-              "type": "SYMBOL",
-              "name": "expression"
-            }
+            "type": "SYMBOL",
+            "name": "expression"
           }
         ]
       }
@@ -338,7 +326,7 @@
     },
     "unary_expression": {
       "type": "PREC",
-      "value": 6,
+      "value": 7,
       "content": {
         "type": "SEQ",
         "members": [
@@ -371,8 +359,8 @@
       ]
     },
     "additive_expression": {
-      "type": "PREC",
-      "value": 3,
+      "type": "PREC_LEFT",
+      "value": 4,
       "content": {
         "type": "CHOICE",
         "members": [
@@ -380,24 +368,16 @@
             "type": "SEQ",
             "members": [
               {
-                "type": "PREC_LEFT",
-                "value": 0,
-                "content": {
-                  "type": "SYMBOL",
-                  "name": "expression"
-                }
+                "type": "SYMBOL",
+                "name": "expression"
               },
               {
                 "type": "SYMBOL",
                 "name": "additive_operator"
               },
               {
-                "type": "PREC_RIGHT",
-                "value": 9,
-                "content": {
-                  "type": "SYMBOL",
-                  "name": "expression"
-                }
+                "type": "SYMBOL",
+                "name": "expression"
               }
             ]
           }
@@ -418,8 +398,8 @@
       ]
     },
     "multiplicative_expression": {
-      "type": "PREC",
-      "value": 4,
+      "type": "PREC_LEFT",
+      "value": 5,
       "content": {
         "type": "CHOICE",
         "members": [
@@ -427,24 +407,16 @@
             "type": "SEQ",
             "members": [
               {
-                "type": "PREC_LEFT",
-                "value": 0,
-                "content": {
-                  "type": "SYMBOL",
-                  "name": "expression"
-                }
+                "type": "SYMBOL",
+                "name": "expression"
               },
               {
                 "type": "SYMBOL",
                 "name": "multiplicative_operator"
               },
               {
-                "type": "PREC_RIGHT",
-                "value": 9,
-                "content": {
-                  "type": "SYMBOL",
-                  "name": "expression"
-                }
+                "type": "SYMBOL",
+                "name": "expression"
               }
             ]
           }
@@ -497,30 +469,22 @@
       ]
     },
     "comparison_expression": {
-      "type": "PREC",
-      "value": 7,
+      "type": "PREC_LEFT",
+      "value": 3,
       "content": {
         "type": "SEQ",
         "members": [
           {
-            "type": "PREC_LEFT",
-            "value": 0,
-            "content": {
-              "type": "SYMBOL",
-              "name": "expression"
-            }
+            "type": "SYMBOL",
+            "name": "expression"
           },
           {
             "type": "SYMBOL",
             "name": "comparison_operator"
           },
           {
-            "type": "PREC_RIGHT",
-            "value": 0,
-            "content": {
-              "type": "SYMBOL",
-              "name": "expression"
-            }
+            "type": "SYMBOL",
+            "name": "expression"
           }
         ]
       }
@@ -539,6 +503,10 @@
         {
           "type": "SYMBOL",
           "name": "comparison_expression"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "logical_expression"
         }
       ]
     },

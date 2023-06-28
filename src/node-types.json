@@ -186,6 +186,10 @@
           "named": true
         },
         {
+          "type": "logical_expression",
+          "named": true
+        },
+        {
           "type": "multiplicative_expression",
           "named": true
         }
@@ -435,10 +439,6 @@
         },
         {
           "type": "identifier",
-          "named": true
-        },
-        {
-          "type": "logical_expression",
           "named": true
         },
         {
