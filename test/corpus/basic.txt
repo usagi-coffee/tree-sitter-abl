@@ -240,10 +240,9 @@ END.
 
 (source_code
   (if_do_statement
-    (conditions
-      (comparison_expression
-        (identifier)
-        (number_literal)))
+    condition: (comparison_expression
+      (identifier)
+      (number_literal))
     (body
       (variable_assignment
         (assignment
@@ -265,10 +264,9 @@ END.
 
 (source_code
   (if_do_statement
-    (conditions
-      (comparison_expression
-        (identifier)
-        (number_literal)))
+    condition: (comparison_expression
+      (identifier)
+      (number_literal))
     (body
       (variable_assignment
         (assignment
@@ -299,20 +297,18 @@ END.
 
 (source_code
   (if_do_statement
-    (conditions
-      (comparison_expression
-        (identifier)
-        (number_literal)))
+    condition: (comparison_expression
+      (identifier)
+      (number_literal))
     (body
       (variable_assignment
         (assignment
           (identifier)
           (number_literal))))
     (else_do_if_statement
-      (conditions
-        (comparison_expression
-          (identifier)
-          (number_literal)))
+      condition: (comparison_expression
+        (identifier)
+        (number_literal))
       (body
         (variable_assignment
           (assignment
@@ -335,10 +331,9 @@ IF x > 10 THEN x = 10.
 
 (source_code
   (if_then_statement
-    (conditions
-      (comparison_expression
-        (identifier)
-        (number_literal)))
+    condition: (comparison_expression
+      (identifier)
+      (number_literal))
     (variable_assignment
       (assignment
         (identifier)
@@ -355,10 +350,9 @@ ELSE x = x.
 
 (source_code
   (if_then_statement
-    (conditions
-      (comparison_expression
-        (identifier)
-        (number_literal)))
+    condition: (comparison_expression
+      (identifier)
+      (number_literal))
     (variable_assignment
       (assignment
         (identifier)
@@ -404,12 +398,11 @@ y = x < 10 OR x = 10.
       (identifier)
       (boolean_literal)))
   (if_then_statement
-    (conditions
-      (logical_expression
-        (boolean_literal)
-        (boolean_literal)))
+    condition: (logical_expression
+      (boolean_literal)
+      (boolean_literal))
     (abl_statement
-      (identifier)
+      statement: (identifier)
       (double_quoted_string)))
   (variable_assignment
     (assignment
@@ -465,10 +458,9 @@ END.
 
 (source_code
   (do_while_statement
-    (conditions
-      (comparison_expression
-        (identifier)
-        (number_literal)))
+    condition: (comparison_expression
+      (identifier)
+      (number_literal))
     (body
       (variable_assignment
         (assignment
@@ -614,10 +606,9 @@ END.
   (for_statement
     table: (identifier)
     (where_clause
-      conditions: (conditions
-        (comparison_expression
-          (identifier)
-          (number_literal))))
+      condition: (comparison_expression
+        (identifier)
+        (number_literal)))
     (query_tuning)
     (body
       (abl_statement
@@ -638,10 +629,9 @@ END.
   (for_statement
     table: (identifier)
     (where_clause
-      conditions: (conditions
-        (comparison_expression
-          (identifier)
-          (number_literal))))
+      condition: (comparison_expression
+        (identifier)
+        (number_literal)))
     (sort_clause
       (sort_column
         column: (identifier)
@@ -663,12 +653,11 @@ FIND some_table WHERE x > 5 EXCLUSIVE-LOCK NO-ERROR.
 
 (source_code
   (find_statement
-    (identifier)
+    table: (identifier)
     (where_clause
-      (conditions
-        (comparison_expression
-          (identifier)
-          (number_literal))))
+      condition: (comparison_expression
+        (identifier)
+        (number_literal)))
     (query_tuning)
     (query_tuning)))
 
@@ -682,13 +671,12 @@ FIND FIRST some_table WHERE NOT x > 5.
 
 (source_code
   (find_statement
-    (identifier)
+    table: (identifier)
     (where_clause
-      (conditions
-        (unary_expression
-          (comparison_expression
-            (identifier)
-            (number_literal)))))))
+      condition: (unary_expression
+        (comparison_expression
+          (identifier)
+          (number_literal))))))
 
 ================================================================================
 OBJECT ACCESSORS statement
@@ -701,18 +689,18 @@ DISPLAY some_object:chained_property:chained_another:method().
 
 (source_code
   (abl_statement
-    (identifier)
+    statement: (identifier)
     (object_access
       (identifier)
-      (identifier)))
+      property: (identifier)))
   (abl_statement
-    (identifier)
+    statement: (identifier)
     (object_access
       (identifier)
-      (identifier)
-      (identifier)
-      (function_call
-        (identifier)))))
+      property: (identifier)
+      property: (identifier)
+      method: (function_call
+        function: (identifier)))))
 
 ================================================================================
 TERNARY EXPRESSION statement
@@ -727,12 +715,11 @@ x = IF x > 10 THEN 10 ELSE x.
     (assignment
       (identifier)
       (ternary_expression
-        (conditions
-          (comparison_expression
-            (identifier)
-            (number_literal)))
-        (number_literal)
-        (identifier)))))
+        condition: (comparison_expression
+          (identifier)
+          (number_literal))
+        then: (number_literal)
+        else: (identifier)))))
 
 ================================================================================
 TERNARY EXPRESSION (parenthesised) statement
@@ -748,13 +735,12 @@ x = (IF NOT x > 10 THEN 10 ELSE x).
       (identifier)
       (parenthesized_expression
         (ternary_expression
-          (conditions
-            (unary_expression
-              (comparison_expression
-                (identifier)
-                (number_literal))))
-          (number_literal)
-          (identifier))))))
+          condition: (unary_expression
+            (comparison_expression
+              (identifier)
+              (number_literal)))
+          then: (number_literal)
+          else: (identifier))))))
 
 ================================================================================
 ACCUMULATE statement

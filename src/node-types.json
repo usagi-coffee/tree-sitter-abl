@@ -371,21 +371,6 @@
     }
   },
   {
-    "type": "conditions",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "_expression",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "do_statement",
     "named": true,
     "fields": {},
@@ -411,17 +396,24 @@
   {
     "type": "do_while_statement",
     "named": true,
-    "fields": {},
+    "fields": {
+      "condition": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "_expression",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
-      "multiple": true,
-      "required": true,
+      "multiple": false,
+      "required": false,
       "types": [
         {
           "type": "body",
-          "named": true
-        },
-        {
-          "type": "conditions",
           "named": true
         }
       ]
@@ -436,12 +428,12 @@
     "type": "else_do_if_statement",
     "named": true,
     "fields": {
-      "conditions": {
+      "condition": {
         "multiple": false,
         "required": true,
         "types": [
           {
-            "type": "conditions",
+            "type": "_expression",
             "named": true
           }
         ]
@@ -762,12 +754,12 @@
     "type": "if_do_statement",
     "named": true,
     "fields": {
-      "conditions": {
+      "condition": {
         "multiple": false,
         "required": true,
         "types": [
           {
-            "type": "conditions",
+            "type": "_expression",
             "named": true
           }
         ]
@@ -796,12 +788,12 @@
     "type": "if_then_statement",
     "named": true,
     "fields": {
-      "conditions": {
+      "condition": {
         "multiple": false,
         "required": true,
         "types": [
           {
-            "type": "conditions",
+            "type": "_expression",
             "named": true
           }
         ]
@@ -1232,12 +1224,12 @@
     "type": "ternary_expression",
     "named": true,
     "fields": {
-      "conditions": {
+      "condition": {
         "multiple": false,
         "required": true,
         "types": [
           {
-            "type": "conditions",
+            "type": "_expression",
             "named": true
           }
         ]
@@ -1374,12 +1366,12 @@
     "type": "where_clause",
     "named": true,
     "fields": {
-      "conditions": {
+      "condition": {
         "multiple": false,
         "required": true,
         "types": [
           {
-            "type": "conditions",
+            "type": "_expression",
             "named": true
           }
         ]

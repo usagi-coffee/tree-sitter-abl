@@ -156,8 +156,6 @@ module.exports = grammar({
         $.abl_statement
       ),
 
-    conditions: ($) => _list($._expression, choice(kw("AND"), kw("OR"))),
-
     /// Comments
     comment: ($) => seq("/*", /[^*]*\*+([^/*][^*]*\*+)*/, "/"),
 
@@ -264,7 +262,7 @@ module.exports = grammar({
     if_do_statement: ($) =>
       seq(
         kw("IF"),
-        field("conditions", $.conditions),
+        field("condition", $._expression),
         kw("THEN DO"),
         ":",
         optional($.body),
@@ -278,7 +276,7 @@ module.exports = grammar({
     else_do_if_statement: ($) =>
       seq(
         kw("ELSE IF"),
-        field("conditions", $.conditions),
+        field("condition", $._expression),
         kw("THEN DO"),
         ":",
         optional($.body),
@@ -288,7 +286,7 @@ module.exports = grammar({
     if_then_statement: ($) =>
       seq(
         kw("IF"),
-        field("conditions", $.conditions),
+        field("condition", $._expression),
         kw("THEN"),
         $._terminated_statement,
         optional($.else_then_statement)
@@ -300,7 +298,7 @@ module.exports = grammar({
       prec.right(
         seq(
           kw("IF"),
-          field("conditions", $.conditions),
+          field("condition", $._expression),
           kw("THEN"),
           field("then", $._expression),
           kw("ELSE"),
@@ -318,7 +316,7 @@ module.exports = grammar({
     do_while_statement: ($) =>
       seq(
         kw("DO WHILE"),
-        $.conditions,
+        field("condition", $._expression),
         ":",
         optional($.body),
         $._block_terminator
@@ -451,7 +449,7 @@ module.exports = grammar({
       ),
 
     /// ABL queries
-    where_clause: ($) => seq(kw("WHERE"), field("conditions", $.conditions)),
+    where_clause: ($) => seq(kw("WHERE"), field("condition", $._expression)),
 
     query_tuning: ($) =>
       choice(
