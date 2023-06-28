@@ -615,64 +615,6 @@
         }
       ]
     },
-    "conditions": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "_expression"
-        },
-        {
-          "type": "REPEAT",
-          "content": {
-            "type": "SEQ",
-            "members": [
-              {
-                "type": "CHOICE",
-                "members": [
-                  {
-                    "type": "ALIAS",
-                    "content": {
-                      "type": "TOKEN",
-                      "content": {
-                        "type": "PREC",
-                        "value": 1,
-                        "content": {
-                          "type": "PATTERN",
-                          "value": "[aA][nN][dD]"
-                        }
-                      }
-                    },
-                    "named": false,
-                    "value": "AND"
-                  },
-                  {
-                    "type": "ALIAS",
-                    "content": {
-                      "type": "TOKEN",
-                      "content": {
-                        "type": "PREC",
-                        "value": 1,
-                        "content": {
-                          "type": "PATTERN",
-                          "value": "[oO][rR]"
-                        }
-                      }
-                    },
-                    "named": false,
-                    "value": "OR"
-                  }
-                ]
-              },
-              {
-                "type": "SYMBOL",
-                "name": "_expression"
-              }
-            ]
-          }
-        }
-      ]
-    },
     "comment": {
       "type": "SEQ",
       "members": [
@@ -1618,10 +1560,10 @@
         },
         {
           "type": "FIELD",
-          "name": "conditions",
+          "name": "condition",
           "content": {
             "type": "SYMBOL",
-            "name": "conditions"
+            "name": "_expression"
           }
         },
         {
@@ -1748,10 +1690,10 @@
         },
         {
           "type": "FIELD",
-          "name": "conditions",
+          "name": "condition",
           "content": {
             "type": "SYMBOL",
-            "name": "conditions"
+            "name": "_expression"
           }
         },
         {
@@ -1813,10 +1755,10 @@
         },
         {
           "type": "FIELD",
-          "name": "conditions",
+          "name": "condition",
           "content": {
             "type": "SYMBOL",
-            "name": "conditions"
+            "name": "_expression"
           }
         },
         {
@@ -1890,10 +1832,10 @@
           },
           {
             "type": "FIELD",
-            "name": "conditions",
+            "name": "condition",
             "content": {
               "type": "SYMBOL",
-              "name": "conditions"
+              "name": "_expression"
             }
           },
           {
@@ -2025,8 +1967,12 @@
           "value": "DO WHILE"
         },
         {
-          "type": "SYMBOL",
-          "name": "conditions"
+          "type": "FIELD",
+          "name": "condition",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_expression"
+          }
         },
         {
           "type": "STRING",
@@ -3223,10 +3169,10 @@
         },
         {
           "type": "FIELD",
-          "name": "conditions",
+          "name": "condition",
           "content": {
             "type": "SYMBOL",
-            "name": "conditions"
+            "name": "_expression"
           }
         }
       ]
