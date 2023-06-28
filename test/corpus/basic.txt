@@ -145,6 +145,7 @@ UNARY (simple) operators
 ================================================================================
 
 z = NOT y.
+y = NOT -x < 10 OR x = 10.
 
 --------------------------------------------------------------------------------
 
@@ -153,7 +154,19 @@ z = NOT y.
     (assignment
       (identifier)
       (unary_expression
-        (identifier)))))
+        (identifier))))
+  (variable_assignment
+    (assignment
+      (identifier)
+      (logical_expression
+        (unary_expression
+          (comparison_expression
+            (unary_expression
+              (identifier))
+            (number_literal)))
+        (comparison_expression
+          (identifier)
+          (number_literal))))))
 
 ================================================================================
 UNARY/BINARY operators

@@ -78,7 +78,11 @@ module.exports = grammar({
 
     _unary_operator: ($) => choice(kw("-"), kw("NOT")),
     unary_expression: ($) =>
-      prec(PREC.UNARY, seq($._unary_operator, prec.right($._expression))),
+      choice(
+        prec.left(PREC.UNARY, seq(kw("-"), prec.left($.identifier))),
+        prec.left(PREC.LOGICAL, seq(kw("NOT"), prec.left(PREC.LOGICAL, $._expression))),
+      ),
+
 
     _additive_operator: ($) => choice("+", "-"),
     additive_expression: ($) =>
