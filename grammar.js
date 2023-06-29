@@ -69,11 +69,7 @@ module.exports = grammar({
     logical_expression: ($) =>
       prec.right(
         PREC.LOGICAL,
-        seq(
-          $._expression,
-          $._logical_operator,
-          $._expression
-        )
+        seq($._expression, $._logical_operator, $._expression)
       ),
 
     _unary_operator: ($) => choice(kw("-"), kw("NOT")),
@@ -97,26 +93,14 @@ module.exports = grammar({
     additive_expression: ($) =>
       prec.left(
         PREC.ADD,
-        choice(
-          seq(
-            $._expression,
-            $._additive_operator,
-            $._expression
-          )
-        )
+        choice(seq($._expression, $._additive_operator, $._expression))
       ),
 
     _multiplicative_operator: ($) => choice("*", "/"),
     multiplicative_expression: ($) =>
       prec.left(
         PREC.MULTI,
-        choice(
-          seq(
-            $._expression,
-            $._multiplicative_operator,
-            $._expression
-          )
-        )
+        choice(seq($._expression, $._multiplicative_operator, $._expression))
       ),
 
     _comparison_operator: ($) =>
@@ -124,11 +108,7 @@ module.exports = grammar({
     comparison_expression: ($) =>
       prec.left(
         PREC.COMPARE,
-        seq(
-          $._expression,
-          $._comparison_operator,
-          $._expression
-        )
+        seq($._expression, $._comparison_operator, $._expression)
       ),
 
     _binary_expression: ($) =>
@@ -158,7 +138,7 @@ module.exports = grammar({
         $._stream_statement,
         $.assign_statement,
         $.accumulate_statement,
-        $.abl_statement,
+        $.abl_statement
       ),
 
     _terminated_statement: ($) =>
@@ -421,9 +401,21 @@ module.exports = grammar({
     stream_terminator: ($) =>
       choice(
         seq(kw("INPUT"), kw("CLOSE"), $._terminator),
-        seq(kw("INPUT"), kw("STREAM"), $.identifier, kw("CLOSE"), $._terminator),
+        seq(
+          kw("INPUT"),
+          kw("STREAM"),
+          $.identifier,
+          kw("CLOSE"),
+          $._terminator
+        ),
         seq(kw("OUTPUT"), kw("CLOSE"), $._terminator),
-        seq(kw("OUTPUT"), kw("STREAM"), $.identifier, kw("CLOSE"), $._terminator)
+        seq(
+          kw("OUTPUT"),
+          kw("STREAM"),
+          $.identifier,
+          kw("CLOSE"),
+          $._terminator
+        )
       ),
 
     _stream_statement: ($) =>
@@ -564,8 +556,8 @@ module.exports = grammar({
       seq(
         choice(kw("AVAIL "), kw("AVAILABLE ")),
         choice($.parenthesized_expression, $.identifier)
-      ),
-  },
+      )
+  }
 });
 
 function reserved(regex) {
