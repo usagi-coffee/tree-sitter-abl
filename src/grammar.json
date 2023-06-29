@@ -364,11 +364,27 @@
                   "members": [
                     {
                       "type": "SYMBOL",
+                      "name": "identifier"
+                    },
+                    {
+                      "type": "SYMBOL",
                       "name": "number_literal"
                     },
                     {
                       "type": "SYMBOL",
-                      "name": "identifier"
+                      "name": "function_call"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "field_access"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "object_access"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "parenthesized_expression"
                     }
                   ]
                 }

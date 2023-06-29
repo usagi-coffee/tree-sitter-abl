@@ -144,12 +144,44 @@ z = 2 > 4.
 UNARY (simple) operators
 ================================================================================
 
+w = -(0).
+x = -f().
+y = -table.field.
+z = -obj:method().
+
 z = NOT y.
 y = NOT -x < -10 OR x = 10.
 
 --------------------------------------------------------------------------------
 
 (source_code
+  (variable_assignment
+    (assignment
+      (identifier)
+      (unary_expression
+        (parenthesized_expression
+          (number_literal)))))
+  (variable_assignment
+    (assignment
+      (identifier)
+      (unary_expression
+        (function_call
+          (identifier)))))
+  (variable_assignment
+    (assignment
+      (identifier)
+      (unary_expression
+        (field_access
+          (identifier)
+          (field_identifier)))))
+  (variable_assignment
+    (assignment
+      (identifier)
+      (unary_expression
+        (object_access
+          (identifier)
+          (function_call
+            (identifier))))))
   (variable_assignment
     (assignment
       (identifier)

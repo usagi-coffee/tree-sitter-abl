@@ -79,7 +79,16 @@ module.exports = grammar({
     _unary_operator: ($) => choice(kw("-"), kw("NOT")),
     unary_expression: ($) =>
       choice(
-        prec.left(PREC.UNARY, seq(kw("-"), prec.left(choice($.number_literal, $.identifier)))),
+        prec.left(PREC.UNARY, seq(kw("-"), prec.left(
+          choice(
+            $.identifier,
+            $.number_literal,
+            $.function_call,
+            $.field_access,
+            $.object_access,
+            $.parenthesized_expression,
+          ))
+        )),
         prec.left(PREC.LOGICAL, seq(kw("NOT"), prec.left(PREC.LOGICAL, $._expression))),
       ),
 
