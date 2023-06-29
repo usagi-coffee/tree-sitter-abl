@@ -294,40 +294,32 @@
         ]
       }
     },
-    "_unary_operator": {
+    "_unary_minus_expressions": {
       "type": "CHOICE",
       "members": [
         {
-          "type": "ALIAS",
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "PREC",
-              "value": 1,
-              "content": {
-                "type": "PATTERN",
-                "value": "[--]"
-              }
-            }
-          },
-          "named": false,
-          "value": "-"
+          "type": "SYMBOL",
+          "name": "identifier"
         },
         {
-          "type": "ALIAS",
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "PREC",
-              "value": 1,
-              "content": {
-                "type": "PATTERN",
-                "value": "[nN][oO][tT]"
-              }
-            }
-          },
-          "named": false,
-          "value": "NOT"
+          "type": "SYMBOL",
+          "name": "number_literal"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "function_call"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "field_access"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "object_access"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "parenthesized_expression"
         }
       ]
     },
@@ -360,33 +352,8 @@
                 "type": "PREC_LEFT",
                 "value": 0,
                 "content": {
-                  "type": "CHOICE",
-                  "members": [
-                    {
-                      "type": "SYMBOL",
-                      "name": "identifier"
-                    },
-                    {
-                      "type": "SYMBOL",
-                      "name": "number_literal"
-                    },
-                    {
-                      "type": "SYMBOL",
-                      "name": "function_call"
-                    },
-                    {
-                      "type": "SYMBOL",
-                      "name": "field_access"
-                    },
-                    {
-                      "type": "SYMBOL",
-                      "name": "object_access"
-                    },
-                    {
-                      "type": "SYMBOL",
-                      "name": "parenthesized_expression"
-                    }
-                  ]
+                  "type": "SYMBOL",
+                  "name": "_unary_minus_expressions"
                 }
               }
             ]

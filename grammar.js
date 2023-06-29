@@ -72,22 +72,27 @@ module.exports = grammar({
         seq($._expression, $._logical_operator, $._expression)
       ),
 
-    _unary_operator: ($) => choice(kw("-"), kw("NOT")),
-    unary_expression: ($) =>
+    _unary_minus_expressions: ($) =>
       choice(
-        prec.left(PREC.UNARY, seq(kw("-"), prec.left(
-          choice(
-            $.identifier,
-            $.number_literal,
-            $.function_call,
-            $.field_access,
-            $.object_access,
-            $.parenthesized_expression,
-          ))
-        )),
-        prec.left(PREC.LOGICAL, seq(kw("NOT"), prec.left(PREC.LOGICAL, $._expression))),
+        $.identifier,
+        $.number_literal,
+        $.function_call,
+        $.field_access,
+        $.object_access,
+        $.parenthesized_expression
       ),
 
+    unary_expression: ($) =>
+      choice(
+        prec.left(
+          PREC.UNARY,
+          seq(kw("-"), prec.left($._unary_minus_expressions))
+        ),
+        prec.left(
+          PREC.LOGICAL,
+          seq(kw("NOT"), prec.left(PREC.LOGICAL, $._expression))
+        )
+      ),
 
     _additive_operator: ($) => choice("+", "-"),
     additive_expression: ($) =>
