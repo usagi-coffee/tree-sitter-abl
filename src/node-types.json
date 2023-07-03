@@ -1591,6 +1591,10 @@
     "named": false
   },
   {
+    "type": "EQ",
+    "named": false
+  },
+  {
     "type": "EXCLUSIVE-LOCK",
     "named": false
   },
@@ -1616,6 +1620,14 @@
   },
   {
     "type": "FUNCTION",
+    "named": false
+  },
+  {
+    "type": "GE",
+    "named": false
+  },
+  {
+    "type": "GT",
     "named": false
   },
   {
@@ -1655,6 +1667,10 @@
     "named": false
   },
   {
+    "type": "LE",
+    "named": false
+  },
+  {
     "type": "LIKE",
     "named": false
   },
@@ -1667,6 +1683,14 @@
     "named": false
   },
   {
+    "type": "LT",
+    "named": false
+  },
+  {
+    "type": "MATCHES",
+    "named": false
+  },
+  {
     "type": "MAXIMUM",
     "named": false
   },
@@ -1676,6 +1700,10 @@
   },
   {
     "type": "MINIMUM",
+    "named": false
+  },
+  {
+    "type": "NE",
     "named": false
   },
   {
