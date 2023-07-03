@@ -840,3 +840,71 @@ INPUT CLOSE.
           (identifier)))
       (stream_terminator))
     (stream_terminator)))
+
+================================================================================
+Keyword comparison operators
+================================================================================
+
+v = 9 GE 0 AND 0 LT 9.
+w = (9 + 10 LE 21) NE (9 + 10 > 21).
+x = (2 + 2 GT 0) EQ (2 + 2 > 0).
+y = "y" BEGINS "yes".
+z = "yes" MATCHES "y*".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_assignment
+    (assignment
+      (identifier)
+      (logical_expression
+        (comparison_expression
+          (number_literal)
+          (number_literal))
+        (comparison_expression
+          (number_literal)
+          (number_literal)))))
+  (variable_assignment
+    (assignment
+      (identifier)
+      (comparison_expression
+        (parenthesized_expression
+          (comparison_expression
+            (additive_expression
+              (number_literal)
+              (number_literal))
+            (number_literal)))
+        (parenthesized_expression
+          (comparison_expression
+            (additive_expression
+              (number_literal)
+              (number_literal))
+            (number_literal))))))
+  (variable_assignment
+    (assignment
+      (identifier)
+      (comparison_expression
+        (parenthesized_expression
+          (comparison_expression
+            (additive_expression
+              (number_literal)
+              (number_literal))
+            (number_literal)))
+        (parenthesized_expression
+          (comparison_expression
+            (additive_expression
+              (number_literal)
+              (number_literal))
+            (number_literal))))))
+  (variable_assignment
+    (assignment
+      (identifier)
+      (comparison_expression
+        (double_quoted_string)
+        (double_quoted_string))))
+  (variable_assignment
+    (assignment
+      (identifier)
+      (comparison_expression
+        (double_quoted_string)
+        (double_quoted_string)))))
