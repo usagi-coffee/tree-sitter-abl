@@ -832,14 +832,14 @@ INPUT CLOSE.
     (function_call
       (identifier)
       (function_call_argument
-        (identifier)))
-    (output_stream_statement
-      (function_call
-        (identifier)
-        (function_call_argument
-          (identifier)))
-      (stream_terminator))
-    (stream_terminator)))
+        (identifier))))
+  (output_stream_statement
+    (function_call
+      (identifier)
+      (function_call_argument
+        (identifier))))
+  (stream_terminator)
+  (stream_terminator))
 
 ================================================================================
 Keyword comparison operators

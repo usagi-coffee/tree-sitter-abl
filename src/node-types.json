@@ -158,6 +158,10 @@
         "named": true
       },
       {
+        "type": "stream_terminator",
+        "named": true
+      },
+      {
         "type": "transaction_statement",
         "named": true
       },
@@ -895,20 +899,6 @@
           }
         ]
       }
-    },
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "_statement",
-          "named": true
-        },
-        {
-          "type": "stream_terminator",
-          "named": true
-        }
-      ]
     }
   },
   {
@@ -1001,20 +991,6 @@
           }
         ]
       }
-    },
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "_statement",
-          "named": true
-        },
-        {
-          "type": "stream_terminator",
-          "named": true
-        }
-      ]
     }
   },
   {
