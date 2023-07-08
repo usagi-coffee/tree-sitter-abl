@@ -145,6 +145,7 @@ module.exports = grammar({
         $.find_statement,
         $.transaction_statement,
         $._stream_statement,
+        $.stream_terminator,
         $.assign_statement,
         $.accumulate_statement,
         $.abl_statement
@@ -442,8 +443,6 @@ module.exports = grammar({
         kw("FROM"),
         field("target", $._expression),
         $._terminator,
-        repeat($._statement),
-        $.stream_terminator
       ),
 
     output_stream_statement: ($) =>
@@ -458,8 +457,6 @@ module.exports = grammar({
         kw("TO"),
         field("target", $._expression),
         $._terminator,
-        repeat($._statement),
-        $.stream_terminator
       ),
 
     /// ABL queries

@@ -736,6 +736,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "stream_terminator"
+        },
+        {
+          "type": "SYMBOL",
           "name": "assign_statement"
         },
         {
@@ -3170,17 +3174,6 @@
         {
           "type": "SYMBOL",
           "name": "_terminator"
-        },
-        {
-          "type": "REPEAT",
-          "content": {
-            "type": "SYMBOL",
-            "name": "_statement"
-          }
-        },
-        {
-          "type": "SYMBOL",
-          "name": "stream_terminator"
         }
       ]
     },
@@ -3288,17 +3281,6 @@
         {
           "type": "SYMBOL",
           "name": "_terminator"
-        },
-        {
-          "type": "REPEAT",
-          "content": {
-            "type": "SYMBOL",
-            "name": "_statement"
-          }
-        },
-        {
-          "type": "SYMBOL",
-          "name": "stream_terminator"
         }
       ]
     },
