@@ -825,21 +825,61 @@ OUTPUT TO VALUE(out).
 OUTPUT CLOSE.
 INPUT CLOSE.
 
+DEFINE STREAM i.
+INPUT STREAM i FROM VALUE(in).
+INPUT CLOSE.
+
+INPUT STREAM-HANDLE hi FROM VALUE(in).
+INPUT CLOSE.
+
+DEFINE STREAM o.
+OUTPUT STREAM o TO "CLIPBOARD".
+OUTPUT CLOSE.
+
+OUTPUT STREAM-HANDLE ho TO "CLIPBOARD".
+OUTPUT CLOSE.
+
 --------------------------------------------------------------------------------
 
 (source_code
   (input_stream_statement
-    (function_call
-      (identifier)
+    target: (function_call
+      function: (identifier)
       (function_call_argument
         (identifier))))
   (output_stream_statement
-    (function_call
-      (identifier)
+    target: (function_call
+      function: (identifier)
       (function_call_argument
         (identifier))))
   (output_close_statement)
-  (input_close_statement))
+  (input_close_statement)
+  (stream_definition
+    (identifier))
+  (input_stream_statement
+    source: (identifier)
+    target: (function_call
+      function: (identifier)
+      (function_call_argument
+        (identifier))))
+  (input_close_statement)
+  (input_stream_statement
+    source: (identifier)
+    target: (function_call
+      function: (identifier)
+      (function_call_argument
+        (identifier))))
+  (input_close_statement)
+  (stream_definition
+    (identifier))
+  (output_stream_statement
+    source: (identifier)
+    target: (double_quoted_string))
+  (output_close_statement)
+  (output_stream_statement
+    source: (identifier)
+    target: (double_quoted_string))
+  (output_close_statement))
 
 ================================================================================
 Keyword comparison operators
