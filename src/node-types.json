@@ -130,7 +130,15 @@
         "named": true
       },
       {
+        "type": "input_close_statement",
+        "named": true
+      },
+      {
         "type": "input_stream_statement",
+        "named": true
+      },
+      {
+        "type": "output_close_statement",
         "named": true
       },
       {
@@ -155,10 +163,6 @@
       },
       {
         "type": "stream_definition",
-        "named": true
-      },
-      {
-        "type": "stream_terminator",
         "named": true
       },
       {
@@ -876,6 +880,32 @@
     }
   },
   {
+    "type": "input_close_statement",
+    "named": true,
+    "fields": {
+      "stream": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "stream_handle": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "input_stream_statement",
     "named": true,
     "fields": {
@@ -965,6 +995,32 @@
           "named": true
         }
       ]
+    }
+  },
+  {
+    "type": "output_close_statement",
+    "named": true,
+    "fields": {
+      "stream": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "stream_handle": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -1173,21 +1229,6 @@
     "children": {
       "multiple": false,
       "required": true,
-      "types": [
-        {
-          "type": "identifier",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "stream_terminator",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": false,
       "types": [
         {
           "type": "identifier",

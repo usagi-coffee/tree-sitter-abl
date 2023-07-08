@@ -145,7 +145,8 @@ module.exports = grammar({
         $.find_statement,
         $.transaction_statement,
         $._stream_statement,
-        $.stream_terminator,
+        $.input_close_statement,
+        $.output_close_statement,
         $.assign_statement,
         $.accumulate_statement,
         $.abl_statement
@@ -408,24 +409,26 @@ module.exports = grammar({
         $._terminator
       ),
 
-    stream_terminator: ($) =>
-      choice(
-        seq(kw("INPUT"), kw("CLOSE"), $._terminator),
-        seq(
-          kw("INPUT"),
-          kw("STREAM"),
-          $.identifier,
-          kw("CLOSE"),
-          $._terminator
-        ),
-        seq(kw("OUTPUT"), kw("CLOSE"), $._terminator),
-        seq(
-          kw("OUTPUT"),
-          kw("STREAM"),
-          $.identifier,
-          kw("CLOSE"),
-          $._terminator
-        )
+    input_close_statement: ($) =>
+      seq(
+        kw("INPUT"),
+        optional(choice(
+          seq(kw("STREAM"), field("stream", $.identifier)),
+          seq(kw("STREAM-HANDLE"), field("stream_handle", $.identifier)),
+        )),
+        kw("CLOSE"),
+        $._terminator
+      ),
+
+    output_close_statement: ($) =>
+      seq(
+        kw("OUTPUT"),
+        optional(choice(
+          seq(kw("STREAM"), field("stream", $.identifier)),
+          seq(kw("STREAM-HANDLE"), field("stream_handle", $.identifier)),
+        )),
+        kw("CLOSE"),
+        $._terminator
       ),
 
     _stream_statement: ($) =>

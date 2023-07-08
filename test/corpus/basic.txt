@@ -838,8 +838,8 @@ INPUT CLOSE.
       (identifier)
       (function_call_argument
         (identifier))))
-  (stream_terminator)
-  (stream_terminator))
+  (output_close_statement)
+  (input_close_statement))
 
 ================================================================================
 Keyword comparison operators
