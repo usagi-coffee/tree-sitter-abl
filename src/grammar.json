@@ -736,7 +736,11 @@
         },
         {
           "type": "SYMBOL",
-          "name": "stream_terminator"
+          "name": "input_close_statement"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "output_close_statement"
         },
         {
           "type": "SYMBOL",
@@ -2848,212 +2852,227 @@
         }
       ]
     },
-    "stream_terminator": {
-      "type": "CHOICE",
+    "input_close_statement": {
+      "type": "SEQ",
       "members": [
         {
-          "type": "SEQ",
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "PATTERN",
+                "value": "[iI][nN][pP][uU][tT]"
+              }
+            }
+          },
+          "named": false,
+          "value": "INPUT"
+        },
+        {
+          "type": "CHOICE",
           "members": [
             {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "PREC",
-                  "value": 1,
-                  "content": {
-                    "type": "PATTERN",
-                    "value": "[iI][nN][pP][uU][tT]"
-                  }
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SEQ",
+                  "members": [
+                    {
+                      "type": "ALIAS",
+                      "content": {
+                        "type": "TOKEN",
+                        "content": {
+                          "type": "PREC",
+                          "value": 1,
+                          "content": {
+                            "type": "PATTERN",
+                            "value": "[sS][tT][rR][eE][aA][mM]"
+                          }
+                        }
+                      },
+                      "named": false,
+                      "value": "STREAM"
+                    },
+                    {
+                      "type": "FIELD",
+                      "name": "stream",
+                      "content": {
+                        "type": "SYMBOL",
+                        "name": "identifier"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "SEQ",
+                  "members": [
+                    {
+                      "type": "ALIAS",
+                      "content": {
+                        "type": "TOKEN",
+                        "content": {
+                          "type": "PREC",
+                          "value": 1,
+                          "content": {
+                            "type": "PATTERN",
+                            "value": "[sS][tT][rR][eE][aA][mM][--][hH][aA][nN][dD][lL][eE]"
+                          }
+                        }
+                      },
+                      "named": false,
+                      "value": "STREAM-HANDLE"
+                    },
+                    {
+                      "type": "FIELD",
+                      "name": "stream_handle",
+                      "content": {
+                        "type": "SYMBOL",
+                        "name": "identifier"
+                      }
+                    }
+                  ]
                 }
-              },
-              "named": false,
-              "value": "INPUT"
+              ]
             },
             {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "PREC",
-                  "value": 1,
-                  "content": {
-                    "type": "PATTERN",
-                    "value": "[cC][lL][oO][sS][eE]"
-                  }
-                }
-              },
-              "named": false,
-              "value": "CLOSE"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "_terminator"
+              "type": "BLANK"
             }
           ]
         },
         {
-          "type": "SEQ",
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "PATTERN",
+                "value": "[cC][lL][oO][sS][eE]"
+              }
+            }
+          },
+          "named": false,
+          "value": "CLOSE"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_terminator"
+        }
+      ]
+    },
+    "output_close_statement": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "PATTERN",
+                "value": "[oO][uU][tT][pP][uU][tT]"
+              }
+            }
+          },
+          "named": false,
+          "value": "OUTPUT"
+        },
+        {
+          "type": "CHOICE",
           "members": [
             {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "PREC",
-                  "value": 1,
-                  "content": {
-                    "type": "PATTERN",
-                    "value": "[iI][nN][pP][uU][tT]"
-                  }
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SEQ",
+                  "members": [
+                    {
+                      "type": "ALIAS",
+                      "content": {
+                        "type": "TOKEN",
+                        "content": {
+                          "type": "PREC",
+                          "value": 1,
+                          "content": {
+                            "type": "PATTERN",
+                            "value": "[sS][tT][rR][eE][aA][mM]"
+                          }
+                        }
+                      },
+                      "named": false,
+                      "value": "STREAM"
+                    },
+                    {
+                      "type": "FIELD",
+                      "name": "stream",
+                      "content": {
+                        "type": "SYMBOL",
+                        "name": "identifier"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "SEQ",
+                  "members": [
+                    {
+                      "type": "ALIAS",
+                      "content": {
+                        "type": "TOKEN",
+                        "content": {
+                          "type": "PREC",
+                          "value": 1,
+                          "content": {
+                            "type": "PATTERN",
+                            "value": "[sS][tT][rR][eE][aA][mM][--][hH][aA][nN][dD][lL][eE]"
+                          }
+                        }
+                      },
+                      "named": false,
+                      "value": "STREAM-HANDLE"
+                    },
+                    {
+                      "type": "FIELD",
+                      "name": "stream_handle",
+                      "content": {
+                        "type": "SYMBOL",
+                        "name": "identifier"
+                      }
+                    }
+                  ]
                 }
-              },
-              "named": false,
-              "value": "INPUT"
+              ]
             },
             {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "PREC",
-                  "value": 1,
-                  "content": {
-                    "type": "PATTERN",
-                    "value": "[sS][tT][rR][eE][aA][mM]"
-                  }
-                }
-              },
-              "named": false,
-              "value": "STREAM"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "identifier"
-            },
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "PREC",
-                  "value": 1,
-                  "content": {
-                    "type": "PATTERN",
-                    "value": "[cC][lL][oO][sS][eE]"
-                  }
-                }
-              },
-              "named": false,
-              "value": "CLOSE"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "_terminator"
+              "type": "BLANK"
             }
           ]
         },
         {
-          "type": "SEQ",
-          "members": [
-            {
-              "type": "ALIAS",
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 1,
               "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "PREC",
-                  "value": 1,
-                  "content": {
-                    "type": "PATTERN",
-                    "value": "[oO][uU][tT][pP][uU][tT]"
-                  }
-                }
-              },
-              "named": false,
-              "value": "OUTPUT"
-            },
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "PREC",
-                  "value": 1,
-                  "content": {
-                    "type": "PATTERN",
-                    "value": "[cC][lL][oO][sS][eE]"
-                  }
-                }
-              },
-              "named": false,
-              "value": "CLOSE"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "_terminator"
+                "type": "PATTERN",
+                "value": "[cC][lL][oO][sS][eE]"
+              }
             }
-          ]
+          },
+          "named": false,
+          "value": "CLOSE"
         },
         {
-          "type": "SEQ",
-          "members": [
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "PREC",
-                  "value": 1,
-                  "content": {
-                    "type": "PATTERN",
-                    "value": "[oO][uU][tT][pP][uU][tT]"
-                  }
-                }
-              },
-              "named": false,
-              "value": "OUTPUT"
-            },
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "PREC",
-                  "value": 1,
-                  "content": {
-                    "type": "PATTERN",
-                    "value": "[sS][tT][rR][eE][aA][mM]"
-                  }
-                }
-              },
-              "named": false,
-              "value": "STREAM"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "identifier"
-            },
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "PREC",
-                  "value": 1,
-                  "content": {
-                    "type": "PATTERN",
-                    "value": "[cC][lL][oO][sS][eE]"
-                  }
-                }
-              },
-              "named": false,
-              "value": "CLOSE"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "_terminator"
-            }
-          ]
+          "type": "SYMBOL",
+          "name": "_terminator"
         }
       ]
     },
