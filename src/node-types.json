@@ -1616,6 +1616,10 @@
     "named": false
   },
   {
+    "type": "CONTAINS",
+    "named": false
+  },
+  {
     "type": "COUNT",
     "named": false
   },

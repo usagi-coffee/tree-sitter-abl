@@ -124,7 +124,7 @@ module.exports = grammar({
       choice(
         "<", "<=", "<>", "=", ">", ">=",
         kw("LT"), kw("LE"), kw("NE"), kw("EQ"), kw("GT"), kw("GE"),
-        kw("BEGINS"), kw("MATCHES")
+        kw("BEGINS"), kw("MATCHES"), kw("CONTAINS")
       ),
     comparison_expression: ($) =>
       prec.left(

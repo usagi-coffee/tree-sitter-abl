@@ -763,6 +763,22 @@
           },
           "named": false,
           "value": "MATCHES"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "PATTERN",
+                "value": "[cC][oO][nN][tT][aA][iI][nN][sS]"
+              }
+            }
+          },
+          "named": false,
+          "value": "CONTAINS"
         }
       ]
     },
