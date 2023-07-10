@@ -514,7 +514,15 @@ module.exports = grammar({
         kw("FIND"),
         field(
           "type",
-          optional(choice(kw("FIRST"), kw("LAST"), kw("NEXT"), kw("PREV")))
+          optional(
+            choice(
+              kw("FIRST"),
+              kw("LAST"),
+              kw("NEXT"),
+              kw("PREV"),
+              kw("CURRENT")
+            )
+          )
         ),
         field("table", $.identifier),
         optional($.where_clause),

@@ -3905,6 +3905,22 @@
                     },
                     "named": false,
                     "value": "PREV"
+                  },
+                  {
+                    "type": "ALIAS",
+                    "content": {
+                      "type": "TOKEN",
+                      "content": {
+                        "type": "PREC",
+                        "value": 1,
+                        "content": {
+                          "type": "PATTERN",
+                          "value": "[cC][uU][rR][rR][eE][nN][tT]"
+                        }
+                      }
+                    },
+                    "named": false,
+                    "value": "CURRENT"
                   }
                 ]
               },

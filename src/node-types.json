@@ -572,6 +572,10 @@
         "required": false,
         "types": [
           {
+            "type": "CURRENT",
+            "named": false
+          },
+          {
             "type": "FIRST",
             "named": false
           },
@@ -1613,6 +1617,10 @@
   },
   {
     "type": "COUNT",
+    "named": false
+  },
+  {
+    "type": "CURRENT",
     "named": false
   },
   {
