@@ -57,6 +57,9 @@ module.exports = grammar({
         $.ternary_expression,
         $.available_expression,
         $.accumulate_expression,
+        $.ambiguous_expression,
+        $.locked_expression,
+        $.input_expression,
         $.identifier
       ),
 
@@ -92,6 +95,15 @@ module.exports = grammar({
           PREC.LOGICAL,
           seq(kw("NOT"), prec.left(PREC.LOGICAL, $._expression))
         )
+      ),
+
+    ambiguous_expression: ($) => seq(kw("AMBIGUOUS"), $._expression),
+    locked_expression: ($) => seq(kw("LOCKED"), $._expression),
+    input_expression: ($) =>
+      seq(
+        kw("INPUT"),
+        optional(seq(kw("FRAME"), field("frame", $.identifier))),
+        field("field", choice($.identifier, $.field_access))
       ),
 
     _additive_operator: ($) => choice("+", "-"),
