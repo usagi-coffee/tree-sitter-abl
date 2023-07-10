@@ -890,6 +890,7 @@ w = (9 + 10 LE 21) NE (9 + 10 > 21).
 x = (2 + 2 GT 0) EQ (2 + 2 > 0).
 y = "y" BEGINS "yes".
 z = "yes" MATCHES "y*".
+FIND foo WHERE bar CONTAINS "stuff" OR baz CONTAINS "what?".
 
 --------------------------------------------------------------------------------
 
@@ -947,7 +948,17 @@ z = "yes" MATCHES "y*".
       (identifier)
       (comparison_expression
         (double_quoted_string)
-        (double_quoted_string)))))
+        (double_quoted_string))))
+  (find_statement
+    table: (identifier)
+    (where_clause
+      condition: (logical_expression
+        (comparison_expression
+          (identifier)
+          (double_quoted_string))
+        (comparison_expression
+          (identifier)
+          (double_quoted_string))))))
 
 ================================================================================
 Miscellaneous unary expressions
