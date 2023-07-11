@@ -725,6 +725,31 @@ FIND FIRST some_table WHERE NOT x > 5.
           (number_literal))))))
 
 ================================================================================
+CAN-FIND function
+================================================================================
+
+w = CAN-FIND(LAST x OF y USING z1 AND FRAME f z2 WHERE z NO-LOCK).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_assignment
+    (assignment
+      (identifier)
+      (can_find_expression
+        table: (identifier)
+        (of
+          (identifier))
+        (using
+          field: (identifier))
+        (using
+          frame: (identifier)
+          field: (identifier))
+        (where_clause
+          condition: (identifier))
+        (query_tuning)))))
+
+================================================================================
 OBJECT ACCESSORS statement
 ================================================================================
 

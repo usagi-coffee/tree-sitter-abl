@@ -61,6 +61,7 @@ module.exports = grammar({
         $.current_changed_expression,
         $.locked_expression,
         $.input_expression,
+        $.can_find_expression,
         $.identifier
       ),
 
@@ -531,6 +532,41 @@ module.exports = grammar({
         optional($.where_clause),
         repeat($.query_tuning),
         $._terminator
+      ),
+
+    can_find_expression: ($) =>
+      seq(
+        kw("CAN-FIND"),
+        "(",
+        optional(choice(kw("FIRST"), kw("LAST"))),
+        field("table", $.identifier),
+        optional(field("constant", $._expression)),
+        repeat(
+          choice(
+            $.query_tuning,
+            $.of,
+            $.where_clause,
+            seq(
+              alias($._using_first, $.using),
+              repeat(alias($._using_and, $.using))
+            )
+          )
+        ),
+        ")"
+      ),
+
+    of: ($) => seq(kw("OF"), choice($.identifier, $.field_access)),
+    _using_first: ($) =>
+      seq(
+        kw("USING"),
+        optional(seq(kw("FRAME"), field("frame", $.identifier))),
+        field("field", $.identifier)
+      ),
+    _using_and: ($) =>
+      seq(
+        kw("AND"),
+        optional(seq(kw("FRAME"), field("frame", $.identifier))),
+        field("field", $.identifier)
       ),
 
     // DO TRANSACTION statement
