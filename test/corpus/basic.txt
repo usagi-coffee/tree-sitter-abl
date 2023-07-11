@@ -971,6 +971,8 @@ baz = INPUT FRAME y bar.
 PROMPT-FOR qux.
 quux = INPUT qux.
 IF LOCKED foo THEN RETURN 'error'.
+FIND CURRENT x.
+IF CURRENT-CHANGED x THEN RETURN '!'.
 
 --------------------------------------------------------------------------------
 
@@ -1010,6 +1012,13 @@ IF LOCKED foo THEN RETURN 'error'.
         field: (identifier))))
   (if_then_statement
     condition: (locked_expression
+      (identifier))
+    (return_statement
+      (single_quoted_string)))
+  (find_statement
+    table: (identifier))
+  (if_then_statement
+    condition: (current_changed_expression
       (identifier))
     (return_statement
       (single_quoted_string))))

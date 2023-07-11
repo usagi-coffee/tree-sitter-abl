@@ -194,6 +194,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "current_changed_expression"
+        },
+        {
+          "type": "SYMBOL",
           "name": "locked_expression"
         },
         {
@@ -424,6 +428,31 @@
           },
           "named": false,
           "value": "AMBIGUOUS"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_expression"
+        }
+      ]
+    },
+    "current_changed_expression": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "PATTERN",
+                "value": "[cC][uU][rR][rR][eE][nN][tT][--][cC][hH][aA][nN][gG][eE][dD]"
+              }
+            }
+          },
+          "named": false,
+          "value": "CURRENT-CHANGED"
         },
         {
           "type": "SYMBOL",
