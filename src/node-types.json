@@ -670,6 +670,10 @@
       "required": false,
       "types": [
         {
+          "type": "of",
+          "named": true
+        },
+        {
           "type": "query_tuning",
           "named": true
         },
@@ -719,6 +723,10 @@
       "types": [
         {
           "type": "body",
+          "named": true
+        },
+        {
+          "type": "of",
           "named": true
         },
         {
