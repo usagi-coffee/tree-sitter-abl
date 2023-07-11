@@ -641,7 +641,7 @@ ASSIGN
 FOR EACH statement
 ================================================================================
 
-FOR EACH some_table WHERE x = 5 NO-LOCK:
+FOR EACH some_table OF other_table WHERE x = 5 NO-LOCK:
   DISPLAY some_table.
 END.
 
@@ -651,6 +651,8 @@ END.
 (source_code
   (for_statement
     table: (identifier)
+    (of
+      (identifier))
     (where_clause
       condition: (comparison_expression
         (identifier)
@@ -693,13 +695,15 @@ END.
 FIND statement
 ================================================================================
 
-FIND some_table WHERE x > 5 EXCLUSIVE-LOCK NO-ERROR.
+FIND some_table OF other_table WHERE x > 5 EXCLUSIVE-LOCK NO-ERROR.
 
 --------------------------------------------------------------------------------
 
 (source_code
   (find_statement
     table: (identifier)
+    (of
+      (identifier))
     (where_clause
       condition: (comparison_expression
         (identifier)

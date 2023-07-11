@@ -504,6 +504,7 @@ module.exports = grammar({
         kw("FOR"),
         field("type", choice(kw("EACH"), kw("FIRST"), kw("LAST"))),
         field("table", $.identifier),
+        optional($.of),
         optional($.where_clause),
         repeat($.query_tuning),
         optional($.sort_clause),
@@ -529,6 +530,7 @@ module.exports = grammar({
           )
         ),
         field("table", $.identifier),
+        optional($.of),
         optional($.where_clause),
         repeat($.query_tuning),
         $._terminator
