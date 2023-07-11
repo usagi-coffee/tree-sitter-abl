@@ -28,6 +28,10 @@
         "named": true
       },
       {
+        "type": "current_changed_expression",
+        "named": true
+      },
+      {
         "type": "double_quoted_string",
         "named": true
       },
@@ -396,6 +400,21 @@
     "fields": {},
     "children": {
       "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "current_changed_expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
       "required": true,
       "types": [
         {
@@ -1625,6 +1644,10 @@
   },
   {
     "type": "CURRENT",
+    "named": false
+  },
+  {
+    "type": "CURRENT-CHANGED",
     "named": false
   },
   {
