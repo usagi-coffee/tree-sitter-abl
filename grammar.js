@@ -154,6 +154,7 @@ module.exports = grammar({
         $.function_statement,
         $.function_call_statement,
         $.return_statement,
+        $.class_statement,
         $._if_statement,
         $._loop_statement,
         $.for_statement,
@@ -401,6 +402,47 @@ module.exports = grammar({
 
     return_statement: ($) =>
       seq(kw("RETURN"), optional($._expression), $._terminator),
+
+    /// Classes
+    class_statement: ($) =>
+      seq(
+        kw("CLASS"),
+        field(
+          "name", choice($._string_literal, $.identifier, $.qualified_name)
+        ),
+        repeat(
+          choice(
+            seq(
+              kw("INHERITS"),
+              field(
+                "inherits",
+                choice($._string_literal, $.identifier, $.qualified_name)
+              )
+            ),
+            $.implements,
+            $.use_widget_pool,
+            $.abstract,
+            $.final,
+            $.serializable,
+          )
+        ),
+        ":",
+        optional($.body),
+        kw("END"),
+        optional(kw("CLASS")),
+        $._terminator
+      ),
+
+    implements: ($) =>
+      seq(
+        kw("IMPLEMENTS"),
+        _list(choice($._string_literal, $.identifier, $.qualified_name), ",")
+      ),
+
+    use_widget_pool: ($) => kw("USE-WIDGET-POOL"),
+    abstract: ($) => kw("ABSTRACT"),
+    final: ($) => kw("FINAL"),
+    serializable: ($) => kw("SERIALIZABLE"),
 
     /// Objects
     object_access: ($) =>

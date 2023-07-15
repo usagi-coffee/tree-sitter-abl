@@ -1114,3 +1114,36 @@ END.
             (double_quoted_string)
             (identifier)
             (identifier)))))))
+
+================================================================================
+CLASS statement
+================================================================================
+
+CLASS x IMPLEMENTS y:
+  DEFINE VARIABLE foo AS INTEGER.
+END CLASS.
+
+CLASS z INHERITS x FINAL SERIALIZABLE:
+  DEFINE VARIABLE bar AS INTEGER.
+END CLASS.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (class_statement
+    name: (identifier)
+    (implements
+      (identifier))
+    (body
+      (variable_definition
+        name: (identifier)
+        type: (primitive_type))))
+  (class_statement
+    name: (identifier)
+    inherits: (identifier)
+    (final)
+    (serializable)
+    (body
+      (variable_definition
+        name: (identifier)
+        type: (primitive_type)))))
