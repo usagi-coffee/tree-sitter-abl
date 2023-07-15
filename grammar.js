@@ -20,6 +20,7 @@ function kw(keyword) {
 module.exports = grammar({
   name: "abl",
 
+  externals: ($) => [$._namedot],
   extras: ($) => [$.comment, $.include, /[\s\f\uFEFF\u2060\u200B]|\\\r?\n/],
   word: ($) => $.identifier,
   supertypes: ($) => [$._expression, $._statement],
@@ -32,8 +33,9 @@ module.exports = grammar({
     identifier: ($) => /[A-z_]{1}[A-z-_|0-9]*/i,
     file_name: ($) => /[A-z-_|0-9]+\.[i]/i,
 
-    // FIXME: ugly hack
-    field_identifier: ($) => token.immediate(/\.[A-z_]{1}[A-z-_|0-9]*/),
+    qualified_name: ($) => seq(
+      $.identifier, repeat1(seq(alias($._namedot, "."), $.identifier))
+    ),
 
     _terminator: ($) => /\s*\./i,
     _block_terminator: ($) => seq(kw("END"), "."),
@@ -51,7 +53,7 @@ module.exports = grammar({
         $.number_literal,
         $.null_expression,
         $._binary_expression,
-        $.field_access,
+        $.qualified_name,
         $.object_access,
         $.function_call,
         $.ternary_expression,
@@ -67,9 +69,6 @@ module.exports = grammar({
 
     parenthesized_expression: ($) => seq("(", $._expression, ")"),
 
-    field_access: ($) =>
-      seq(field("table", $.identifier), field("field", $.field_identifier)),
-
     _logical_operator: ($) => prec.left(choice(kw("AND"), kw("OR"))),
     logical_expression: ($) =>
       prec.right(
@@ -82,7 +81,7 @@ module.exports = grammar({
         $.identifier,
         $.number_literal,
         $.function_call,
-        $.field_access,
+        $.qualified_name,
         $.object_access,
         $.parenthesized_expression
       ),
@@ -107,7 +106,7 @@ module.exports = grammar({
       seq(
         kw("INPUT"),
         optional(seq(kw("FRAME"), field("frame", $.identifier))),
-        field("field", choice($.identifier, $.field_access))
+        field("field", choice($.identifier, $.qualified_name))
       ),
 
     _additive_operator: ($) => choice("+", "-"),
@@ -557,7 +556,7 @@ module.exports = grammar({
         ")"
       ),
 
-    of: ($) => seq(kw("OF"), choice($.identifier, $.field_access)),
+    of: ($) => seq(kw("OF"), choice($.identifier, $.qualified_name)),
     _using_first: ($) =>
       seq(
         kw("USING"),
