@@ -40,10 +40,6 @@
         "named": true
       },
       {
-        "type": "field_access",
-        "named": true
-      },
-      {
         "type": "function_call",
         "named": true
       },
@@ -81,6 +77,10 @@
       },
       {
         "type": "parenthesized_expression",
+        "named": true
+      },
+      {
+        "type": "qualified_name",
         "named": true
       },
       {
@@ -599,32 +599,6 @@
     }
   },
   {
-    "type": "field_access",
-    "named": true,
-    "fields": {
-      "field": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "field_identifier",
-            "named": true
-          }
-        ]
-      },
-      "table": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
     "type": "find_statement",
     "named": true,
     "fields": {
@@ -1024,11 +998,11 @@
         "required": true,
         "types": [
           {
-            "type": "field_access",
+            "type": "identifier",
             "named": true
           },
           {
-            "type": "identifier",
+            "type": "qualified_name",
             "named": true
           }
         ]
@@ -1161,11 +1135,11 @@
       "required": true,
       "types": [
         {
-          "type": "field_access",
+          "type": "identifier",
           "named": true
         },
         {
-          "type": "identifier",
+          "type": "qualified_name",
           "named": true
         }
       ]
@@ -1278,6 +1252,21 @@
           "type": "body",
           "named": true
         },
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "qualified_name",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
         {
           "type": "identifier",
           "named": true
@@ -2110,10 +2099,6 @@
   {
     "type": "YES",
     "named": false
-  },
-  {
-    "type": "field_identifier",
-    "named": true
   },
   {
     "type": "file_name",

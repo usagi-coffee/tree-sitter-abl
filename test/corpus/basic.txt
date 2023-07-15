@@ -171,9 +171,9 @@ y = NOT -x < -10 OR x = 10.
     (assignment
       (identifier)
       (unary_expression
-        (field_access
+        (qualified_name
           (identifier)
-          (field_identifier)))))
+          (identifier)))))
   (variable_assignment
     (assignment
       (identifier)
@@ -247,19 +247,29 @@ zr = NOT 5 = 2 + 2.
             (number_literal)))))))
 
 ================================================================================
-FIELD ACCESS
+Qualified name
 ================================================================================
 
 DISPLAY table.field1.
+DISPLAY
+  database
+    .table
+    .field2.
 
 --------------------------------------------------------------------------------
 
 (source_code
   (abl_statement
     statement: (identifier)
-    (field_access
-      table: (identifier)
-      field: (field_identifier))))
+    (qualified_name
+      (identifier)
+      (identifier)))
+  (abl_statement
+    statement: (identifier)
+    (qualified_name
+      (identifier)
+      (identifier)
+      (identifier))))
 
 ================================================================================
 BUFFER DEFINITION statement
@@ -616,7 +626,7 @@ DISPLAY "test" a 5 f().
 ASSIGN statement
 ================================================================================
 
-ASSIGN 
+ASSIGN
   a = 1
   b = "ABC"
   c = f()
@@ -821,16 +831,16 @@ x = (IF NOT x > 10 THEN 10 ELSE x).
 ACCUMULATE statement
 ================================================================================
 
-ACCUMULATE Customer.CreditLimit (AVERAGE COUNT MAXIMUM). 
+ACCUMULATE Customer.CreditLimit (AVERAGE COUNT MAXIMUM).
 value = (accum total Customer.CreditLimit).
 
 --------------------------------------------------------------------------------
 
 (source_code
   (accumulate_statement
-    (field_access
+    (qualified_name
       (identifier)
-      (field_identifier))
+      (identifier))
     (accumulate_aggregate)
     (accumulate_aggregate)
     (accumulate_aggregate))
@@ -840,9 +850,9 @@ value = (accum total Customer.CreditLimit).
       (parenthesized_expression
         (accumulate_expression
           (accumulate_aggregate)
-          (field_access
+          (qualified_name
             (identifier)
-            (field_identifier)))))))
+            (identifier)))))))
 
 ================================================================================
 STREAM statements
@@ -1011,7 +1021,7 @@ IF CURRENT-CHANGED x THEN RETURN '!'.
     (where_clause
       condition: (identifier))
     (query_tuning))
-  (variable_assignment 
+  (variable_assignment
     (assignment
       (identifier)
       (logical_expression
@@ -1025,7 +1035,7 @@ IF CURRENT-CHANGED x THEN RETURN '!'.
     (identifier)
     (identifier)
     (identifier))
-  (variable_assignment 
+  (variable_assignment
     (assignment
       (identifier)
       (input_expression

@@ -24,12 +24,35 @@
       "type": "PATTERN",
       "value": "[A-z-_|0-9]+\\.[i]"
     },
-    "field_identifier": {
-      "type": "IMMEDIATE_TOKEN",
-      "content": {
-        "type": "PATTERN",
-        "value": "\\.[A-z_]{1}[A-z-_|0-9]*"
-      }
+    "qualified_name": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "identifier"
+        },
+        {
+          "type": "REPEAT1",
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "_namedot"
+                },
+                "named": false,
+                "value": "."
+              },
+              {
+                "type": "SYMBOL",
+                "name": "identifier"
+              }
+            ]
+          }
+        }
+      ]
     },
     "_terminator": {
       "type": "PATTERN",
@@ -166,7 +189,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "field_access"
+          "name": "qualified_name"
         },
         {
           "type": "SYMBOL",
@@ -228,27 +251,6 @@
         {
           "type": "STRING",
           "value": ")"
-        }
-      ]
-    },
-    "field_access": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "FIELD",
-          "name": "table",
-          "content": {
-            "type": "SYMBOL",
-            "name": "identifier"
-          }
-        },
-        {
-          "type": "FIELD",
-          "name": "field",
-          "content": {
-            "type": "SYMBOL",
-            "name": "field_identifier"
-          }
         }
       ]
     },
@@ -331,7 +333,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "field_access"
+          "name": "qualified_name"
         },
         {
           "type": "SYMBOL",
@@ -557,7 +559,7 @@
               },
               {
                 "type": "SYMBOL",
-                "name": "field_access"
+                "name": "qualified_name"
               }
             ]
           }
@@ -4208,7 +4210,7 @@
             },
             {
               "type": "SYMBOL",
-              "name": "field_access"
+              "name": "qualified_name"
             }
           ]
         }
@@ -4801,7 +4803,12 @@
   ],
   "conflicts": [],
   "precedences": [],
-  "externals": [],
+  "externals": [
+    {
+      "type": "SYMBOL",
+      "name": "_namedot"
+    }
+  ],
   "inline": [],
   "supertypes": [
     "_expression",
