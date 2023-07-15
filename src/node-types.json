@@ -122,6 +122,10 @@
         "named": true
       },
       {
+        "type": "class_statement",
+        "named": true
+      },
+      {
         "type": "do_statement",
         "named": true
       },
@@ -232,6 +236,11 @@
         }
       ]
     }
+  },
+  {
+    "type": "abstract",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "accumulate_aggregate",
@@ -494,6 +503,86 @@
     }
   },
   {
+    "type": "class_statement",
+    "named": true,
+    "fields": {
+      "inherits": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "double_quoted_string",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "qualified_name",
+            "named": true
+          },
+          {
+            "type": "single_quoted_string",
+            "named": true
+          }
+        ]
+      },
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "double_quoted_string",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "qualified_name",
+            "named": true
+          },
+          {
+            "type": "single_quoted_string",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "abstract",
+          "named": true
+        },
+        {
+          "type": "body",
+          "named": true
+        },
+        {
+          "type": "final",
+          "named": true
+        },
+        {
+          "type": "implements",
+          "named": true
+        },
+        {
+          "type": "serializable",
+          "named": true
+        },
+        {
+          "type": "use_widget_pool",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "comment",
     "named": true,
     "fields": {}
@@ -649,6 +738,11 @@
         }
       ]
     }
+  },
+  {
+    "type": "final",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "finally_statement",
@@ -980,6 +1074,33 @@
         },
         {
           "type": "variable_assignment",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "implements",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "double_quoted_string",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "qualified_name",
+          "named": true
+        },
+        {
+          "type": "single_quoted_string",
           "named": true
         }
       ]
@@ -1387,6 +1508,11 @@
     }
   },
   {
+    "type": "serializable",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "single_quoted_string",
     "named": true,
     "fields": {}
@@ -1532,6 +1658,11 @@
         }
       ]
     }
+  },
+  {
+    "type": "use_widget_pool",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "using",
@@ -1728,6 +1859,10 @@
     "named": false
   },
   {
+    "type": "ABSTRACT",
+    "named": false
+  },
+  {
     "type": "ACCUM",
     "named": false
   },
@@ -1904,6 +2039,10 @@
     "named": false
   },
   {
+    "type": "FINAL",
+    "named": false
+  },
+  {
     "type": "FINALLY",
     "named": false
   },
@@ -1945,6 +2084,14 @@
   },
   {
     "type": "IF",
+    "named": false
+  },
+  {
+    "type": "IMPLEMENTS",
+    "named": false
+  },
+  {
+    "type": "INHERITS",
     "named": false
   },
   {
@@ -2100,6 +2247,10 @@
     "named": false
   },
   {
+    "type": "SERIALIZABLE",
+    "named": false
+  },
+  {
     "type": "SHARE-LOCK",
     "named": false
   },
@@ -2157,6 +2308,10 @@
   },
   {
     "type": "USE-INDEX",
+    "named": false
+  },
+  {
+    "type": "USE-WIDGET-POOL",
     "named": false
   },
   {
