@@ -1061,3 +1061,56 @@ IF CURRENT-CHANGED x THEN RETURN '!'.
       (identifier))
     (return_statement
       (single_quoted_string))))
+
+================================================================================
+CATCH and FINALLY statements
+================================================================================
+
+DO TRANSACTION:
+  CATCH e AS CLASS Progress.Lang.SysError:
+    MESSAGE "sys error" VIEW-AS ALERT-BOX.
+  END.
+  CATCH e AS Progress.Lang.Error:
+    MESSAGE "other error" VIEW-AS ALERT-BOX.
+  END CATCH.
+  FINALLY:
+    MESSAGE "done." VIEW-AS ALERT-BOX.
+  END FINALLY.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (transaction_statement
+    (body
+      (catch_statement
+        variable: (identifier)
+        type: (qualified_name
+          (identifier)
+          (identifier)
+          (identifier))
+        (body
+          (abl_statement
+            statement: (identifier)
+            (double_quoted_string)
+            (identifier)
+            (identifier))))
+      (catch_statement
+        variable: (identifier)
+        type: (qualified_name
+          (identifier)
+          (identifier)
+          (identifier))
+        (body
+          (abl_statement
+            statement: (identifier)
+            (double_quoted_string)
+            (identifier)
+            (identifier))))
+      (finally_statement
+        (body
+          (abl_statement
+            statement: (identifier)
+            (double_quoted_string)
+            (identifier)
+            (identifier)))))))
