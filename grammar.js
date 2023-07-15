@@ -163,6 +163,8 @@ module.exports = grammar({
         $.input_close_statement,
         $.output_close_statement,
         $.assign_statement,
+        $.catch_statement,
+        $.finally_statement,
         $.accumulate_statement,
         $.abl_statement
       ),
@@ -587,6 +589,32 @@ module.exports = grammar({
         kw("ASSIGN"),
         repeat($.assignment),
         optional("NO-ERROR"),
+        $._terminator
+      ),
+
+    catch_statement: ($) =>
+      seq(
+        kw("CATCH"),
+        field("variable", $.identifier),
+        kw("AS"),
+        field(
+          "type",
+          seq(optional(kw("CLASS")), choice($.identifier, $.qualified_name))
+        ),
+        ":",
+        optional($.body),
+        kw("END"),
+        optional(kw("CATCH")),
+        $._terminator
+      ),
+
+    finally_statement: ($) =>
+      seq(
+        kw("FINALLY"),
+        ":",
+        optional($.body),
+        kw("END"),
+        optional(kw("FINALLY")),
         $._terminator
       ),
 
