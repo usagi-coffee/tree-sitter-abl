@@ -1887,11 +1887,11 @@
     "named": false
   },
   {
-    "type": "AVAIL ",
+    "type": "AVAIL",
     "named": false
   },
   {
-    "type": "AVAILABLE ",
+    "type": "AVAILABLE",
     "named": false
   },
   {
@@ -1991,14 +1991,6 @@
     "named": false
   },
   {
-    "type": "DO TRANSACTION",
-    "named": false
-  },
-  {
-    "type": "DO WHILE",
-    "named": false
-  },
-  {
     "type": "EACH",
     "named": false
   },
@@ -2007,23 +1999,7 @@
     "named": false
   },
   {
-    "type": "ELSE DO",
-    "named": false
-  },
-  {
-    "type": "ELSE IF",
-    "named": false
-  },
-  {
     "type": "END",
-    "named": false
-  },
-  {
-    "type": "END FUNCTION",
-    "named": false
-  },
-  {
-    "type": "END PROCEDURE.",
     "named": false
   },
   {
@@ -2291,15 +2267,15 @@
     "named": false
   },
   {
-    "type": "THEN DO",
-    "named": false
-  },
-  {
     "type": "TO",
     "named": false
   },
   {
     "type": "TOTAL",
+    "named": false
+  },
+  {
+    "type": "TRANSACTION",
     "named": false
   },
   {
@@ -2328,6 +2304,10 @@
   },
   {
     "type": "WHERE",
+    "named": false
+  },
+  {
+    "type": "WHILE",
     "named": false
   },
   {
