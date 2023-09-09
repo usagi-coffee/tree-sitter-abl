@@ -1937,12 +1937,28 @@
               "value": 1,
               "content": {
                 "type": "PATTERN",
-                "value": "[tT][hH][eE][nN][  ][dD][oO]"
+                "value": "[tT][hH][eE][nN]"
               }
             }
           },
           "named": false,
-          "value": "THEN DO"
+          "value": "THEN"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "PATTERN",
+                "value": "[dD][oO]"
+              }
+            }
+          },
+          "named": false,
+          "value": "DO"
         },
         {
           "type": "STRING",
@@ -2002,12 +2018,28 @@
               "value": 1,
               "content": {
                 "type": "PATTERN",
-                "value": "[eE][lL][sS][eE][  ][dD][oO]"
+                "value": "[eE][lL][sS][eE]"
               }
             }
           },
           "named": false,
-          "value": "ELSE DO"
+          "value": "ELSE"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "PATTERN",
+                "value": "[dD][oO]"
+              }
+            }
+          },
+          "named": false,
+          "value": "DO"
         },
         {
           "type": "STRING",
@@ -2043,12 +2075,28 @@
               "value": 1,
               "content": {
                 "type": "PATTERN",
-                "value": "[eE][lL][sS][eE][  ][iI][fF]"
+                "value": "[eE][lL][sS][eE]"
               }
             }
           },
           "named": false,
-          "value": "ELSE IF"
+          "value": "ELSE"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "PATTERN",
+                "value": "[iI][fF]"
+              }
+            }
+          },
+          "named": false,
+          "value": "IF"
         },
         {
           "type": "FIELD",
@@ -2067,12 +2115,28 @@
               "value": 1,
               "content": {
                 "type": "PATTERN",
-                "value": "[tT][hH][eE][nN][  ][dD][oO]"
+                "value": "[tT][hH][eE][nN]"
               }
             }
           },
           "named": false,
-          "value": "THEN DO"
+          "value": "THEN"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "PATTERN",
+                "value": "[dD][oO]"
+              }
+            }
+          },
+          "named": false,
+          "value": "DO"
         },
         {
           "type": "STRING",
@@ -2321,12 +2385,28 @@
               "value": 1,
               "content": {
                 "type": "PATTERN",
-                "value": "[dD][oO][  ][wW][hH][iI][lL][eE]"
+                "value": "[dD][oO]"
               }
             }
           },
           "named": false,
-          "value": "DO WHILE"
+          "value": "DO"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "PATTERN",
+                "value": "[wW][hH][iI][lL][eE]"
+              }
+            }
+          },
+          "named": false,
+          "value": "WHILE"
         },
         {
           "type": "FIELD",
@@ -2424,20 +2504,45 @@
       ]
     },
     "_procedure_terminator": {
-      "type": "ALIAS",
-      "content": {
-        "type": "TOKEN",
-        "content": {
-          "type": "PREC",
-          "value": 1,
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
           "content": {
-            "type": "PATTERN",
-            "value": "[eE][nN][dD][  ][pP][rR][oO][cC][eE][dD][uU][rR][eE][..]"
-          }
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "PATTERN",
+                "value": "[eE][nN][dD]"
+              }
+            }
+          },
+          "named": false,
+          "value": "END"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "PATTERN",
+                "value": "[pP][rR][oO][cC][eE][dD][uU][rR][eE]"
+              }
+            }
+          },
+          "named": false,
+          "value": "PROCEDURE"
+        },
+        {
+          "type": "STRING",
+          "value": "."
         }
-      },
-      "named": false,
-      "value": "END PROCEDURE."
+      ]
     },
     "procedure_statement": {
       "type": "SEQ",
@@ -2503,8 +2608,17 @@
           ]
         },
         {
-          "type": "SYMBOL",
-          "name": "_procedure_terminator"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "_block_terminator"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_procedure_terminator"
+            }
+          ]
         }
       ]
     },
@@ -2668,16 +2782,32 @@
                   "value": 1,
                   "content": {
                     "type": "PATTERN",
-                    "value": "[eE][nN][dD][  ][fF][uU][nN][cC][tT][iI][oO][nN]"
+                    "value": "[eE][nN][dD]"
                   }
                 }
               },
               "named": false,
-              "value": "END FUNCTION"
+              "value": "END"
             },
             {
-              "type": "STRING",
-              "value": "."
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PREC",
+                  "value": 1,
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "[fF][uU][nN][cC][tT][iI][oO][nN]"
+                  }
+                }
+              },
+              "named": false,
+              "value": "FUNCTION"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_terminator"
             }
           ]
         }
@@ -4680,12 +4810,28 @@
               "value": 1,
               "content": {
                 "type": "PATTERN",
-                "value": "[dD][oO][  ][tT][rR][aA][nN][sS][aA][cC][tT][iI][oO][nN]"
+                "value": "[dD][oO]"
               }
             }
           },
           "named": false,
-          "value": "DO TRANSACTION"
+          "value": "DO"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "PATTERN",
+                "value": "[tT][rR][aA][nN][sS][aA][cC][tT][iI][oO][nN]"
+              }
+            }
+          },
+          "named": false,
+          "value": "TRANSACTION"
         },
         {
           "type": "STRING",
@@ -5298,12 +5444,12 @@
                   "value": 1,
                   "content": {
                     "type": "PATTERN",
-                    "value": "[aA][vV][aA][iI][lL][  ]"
+                    "value": "[aA][vV][aA][iI][lL]"
                   }
                 }
               },
               "named": false,
-              "value": "AVAIL "
+              "value": "AVAIL"
             },
             {
               "type": "ALIAS",
@@ -5314,12 +5460,12 @@
                   "value": 1,
                   "content": {
                     "type": "PATTERN",
-                    "value": "[aA][vV][aA][iI][lL][aA][bB][lL][eE][  ]"
+                    "value": "[aA][vV][aA][iI][lL][aA][bB][lL][eE]"
                   }
                 }
               },
               "named": false,
-              "value": "AVAILABLE "
+              "value": "AVAILABLE"
             }
           ]
         },

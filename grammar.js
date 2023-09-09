@@ -285,7 +285,8 @@ module.exports = grammar({
       seq(
         kw("IF"),
         field("condition", $._expression),
-        kw("THEN DO"),
+        kw("THEN"),
+        kw("DO"),
         ":",
         optional($.body),
         $._block_terminator,
@@ -293,13 +294,15 @@ module.exports = grammar({
       ),
 
     else_do_statement: ($) =>
-      seq(kw("ELSE DO"), ":", optional($.body), $._block_terminator),
+      seq(kw("ELSE"), kw("DO"), ":", optional($.body), $._block_terminator),
 
     else_do_if_statement: ($) =>
       seq(
-        kw("ELSE IF"),
+        kw("ELSE"),
+        kw("IF"),
         field("condition", $._expression),
-        kw("THEN DO"),
+        kw("THEN"),
+        kw("DO"),
         ":",
         optional($.body),
         $._block_terminator
@@ -337,7 +340,8 @@ module.exports = grammar({
 
     do_while_statement: ($) =>
       seq(
-        kw("DO WHILE"),
+        kw("DO"),
+        kw("WHILE"),
         field("condition", $._expression),
         ":",
         optional($.body),
@@ -356,7 +360,7 @@ module.exports = grammar({
       ),
 
     /// Procedures
-    _procedure_terminator: ($) => kw("END PROCEDURE."),
+    _procedure_terminator: ($) => seq(kw("END"), kw("PROCEDURE"), "."),
     procedure_statement: ($) =>
       seq(
         kw("PROCEDURE"),
@@ -364,7 +368,7 @@ module.exports = grammar({
         optional(kw("PRIVATE")),
         ":",
         optional($.body),
-        $._procedure_terminator
+        choice($._block_terminator, $._procedure_terminator)
       ),
 
     procedure_parameter_definition: ($) =>
@@ -381,7 +385,10 @@ module.exports = grammar({
 
     /// Functions
     _function_terminator: ($) =>
-      choice($._block_terminator, seq(kw("END FUNCTION"), ".")),
+      choice(
+        $._block_terminator,
+        seq(kw("END"), kw("FUNCTION"), $._terminator)
+      ),
     function_parameter_mode: ($) => choice(kw("INPUT"), kw("OUTPUT")),
     function_parameter: ($) =>
       seq($.function_parameter_mode, $.identifier, kw("AS"), $.primitive_type),
@@ -616,7 +623,13 @@ module.exports = grammar({
 
     // DO TRANSACTION statement
     transaction_statement: ($) =>
-      seq(kw("DO TRANSACTION"), ":", optional($.body), $._block_terminator),
+      seq(
+        kw("DO"),
+        kw("TRANSACTION"),
+        ":",
+        optional($.body),
+        $._block_terminator
+      ),
 
     /// ABL statements
     abl_statement: ($) =>
@@ -693,7 +706,7 @@ module.exports = grammar({
     // Available
     available_expression: ($) =>
       seq(
-        choice(kw("AVAIL "), kw("AVAILABLE ")),
+        choice(kw("AVAIL"), kw("AVAILABLE")),
         choice($.parenthesized_expression, $.identifier)
       )
   }

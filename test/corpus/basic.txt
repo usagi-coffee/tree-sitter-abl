@@ -378,6 +378,51 @@ END.
             (identifier)))))))
 
 ================================================================================
+IF ELSE IF statement with line break before DOs
+================================================================================
+
+If x > 10 Then
+Do:
+  x = 10.
+End.
+Else If x < 10 Then
+Do:
+  x = x.
+End.
+Else
+Do:
+  x = x.
+End.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (if_do_statement
+    condition: (comparison_expression
+      (identifier)
+      (number_literal))
+    (body
+      (variable_assignment
+        (assignment
+          (identifier)
+          (number_literal))))
+    (else_do_if_statement
+      condition: (comparison_expression
+        (identifier)
+        (number_literal))
+      (body
+        (variable_assignment
+          (assignment
+            (identifier)
+            (identifier)))))
+    (else_do_statement
+      (body
+        (variable_assignment
+          (assignment
+            (identifier)
+            (identifier)))))))
+
+================================================================================
 IF THEN statement
 ================================================================================
 
@@ -556,6 +601,9 @@ END PROCEDURE.
 
 RUN some_procedure.
 
+PROCEDURE another_procedure:
+END.
+
 --------------------------------------------------------------------------------
 
 (source_code
@@ -564,6 +612,8 @@ RUN some_procedure.
     (comment))
   (abl_statement
     statement: (identifier)
+    (identifier))
+  (procedure_statement
     (identifier)))
 
 ================================================================================
