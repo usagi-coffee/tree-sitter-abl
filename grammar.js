@@ -544,7 +544,7 @@ module.exports = grammar({
     /// FOR statement
     sort_order: ($) => choice(kw("DESCENDING")),
     sort_column: ($) =>
-      seq(field("column", $.identifier), optional($.sort_order)),
+      seq(field("column", choice($.function_call, $.identifier)), optional($.sort_order)),
 
     sort_clause: ($) =>
       seq(optional(kw("BREAK")), kw("BY"), repeat1($.sort_column)),
