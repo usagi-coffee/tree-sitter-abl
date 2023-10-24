@@ -550,7 +550,7 @@ module.exports = grammar({
     _case_terminator: ($) =>
       choice($._block_terminator, seq(kw("END"), kw("CASE"), $._terminator)),
 
-    _case_body: ($) =>
+    _case_branch_body: ($) =>
       choice(
         $.do_block,
         $.repeat_statement,
@@ -563,18 +563,20 @@ module.exports = grammar({
         kw("WHEN"),
         field("value", $._expression),
         kw("THEN"),
-        field("body", $._case_body)
+        field("body", $._case_branch_body)
       ),
     case_otherwise_branch: ($) =>
-      seq(kw("OTHERWISE"), field("body", $._case_body)),
+      seq(kw("OTHERWISE"), field("body", $._case_branch_body)),
+
+    case_body: ($) =>
+      seq(repeat1($.case_when_branch), optional($.case_otherwise_branch)),
 
     case_statement: ($) =>
       seq(
         kw("CASE"),
         $.identifier,
         ":",
-        repeat1($.case_when_branch),
-        optional($.case_otherwise_branch),
+        optional($.case_body),
         $._case_terminator
       ),
 

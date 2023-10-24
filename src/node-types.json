@@ -463,6 +463,25 @@
     }
   },
   {
+    "type": "case_body",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "case_otherwise_branch",
+          "named": true
+        },
+        {
+          "type": "case_when_branch",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "case_otherwise_branch",
     "named": true,
     "fields": {
@@ -511,11 +530,7 @@
       "required": true,
       "types": [
         {
-          "type": "case_otherwise_branch",
-          "named": true
-        },
-        {
-          "type": "case_when_branch",
+          "type": "case_body",
           "named": true
         },
         {
