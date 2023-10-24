@@ -172,6 +172,7 @@ module.exports = grammar({
         $.find_statement,
         $.transaction_statement,
         $._stream_statement,
+        $.case_statement,
         $.input_close_statement,
         $.output_close_statement,
         $.assign_statement,
@@ -542,6 +543,39 @@ module.exports = grammar({
         kw("TO"),
         field("target", $._expression),
         $._terminator
+      ),
+
+    do_block: ($) => seq(kw("DO"), ":", optional($.body), $._block_terminator),
+
+    _case_terminator: ($) =>
+      choice($._block_terminator, seq(kw("END"), kw("CASE"), $._terminator)),
+
+    _case_body: ($) =>
+      choice(
+        $.do_block,
+        $.repeat_statement,
+        $.for_statement,
+        $._terminated_statement
+      ),
+
+    case_when_branch: ($) =>
+      seq(
+        kw("WHEN"),
+        field("value", $._expression),
+        kw("THEN"),
+        field("body", $._case_body)
+      ),
+    case_otherwise_branch: ($) =>
+      seq(kw("OTHERWISE"), field("body", $._case_body)),
+
+    case_statement: ($) =>
+      seq(
+        kw("CASE"),
+        $.identifier,
+        ":",
+        repeat1($.case_when_branch),
+        optional($.case_otherwise_branch),
+        $._case_terminator
       ),
 
     /// ABL queries

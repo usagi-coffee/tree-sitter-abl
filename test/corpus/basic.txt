@@ -1217,3 +1217,45 @@ END CLASS.
       (variable_definition
         name: (identifier)
         type: (primitive_type)))))
+
+================================================================================
+CASE statement
+================================================================================
+
+CASE test:
+  WHEN "abc" THEN DO:
+    x = 5.
+    y = 20.
+  END.
+  WHEN "def" THEN y = 10.
+  OTHERWISE c = 8.
+END CASE.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (case_statement
+    (identifier)
+    (case_when_branch
+      (double_quoted_string)
+      (do_block
+        (body
+          (variable_assignment
+            (assignment
+              (identifier)
+              (number_literal)))
+          (variable_assignment
+            (assignment
+              (identifier)
+              (number_literal))))))
+    (case_when_branch
+      (double_quoted_string)
+      (variable_assignment
+        (assignment
+          (identifier)
+          (number_literal))))
+    (case_otherwise_branch
+      (variable_assignment
+        (assignment
+          (identifier)
+          (number_literal))))))
