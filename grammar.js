@@ -33,9 +33,8 @@ module.exports = grammar({
     identifier: ($) => /[A-z_]{1}[A-z-_|0-9]*/i,
     file_name: ($) => /[A-z-_|0-9]+\.[i]/i,
 
-    qualified_name: ($) => seq(
-      $.identifier, repeat1(seq(alias($._namedot, "."), $.identifier))
-    ),
+    qualified_name: ($) =>
+      seq($.identifier, repeat1(seq(alias($._namedot, "."), $.identifier))),
 
     _terminator: ($) => /\s*\./i,
     _block_terminator: ($) => seq(kw("END"), "."),
@@ -125,9 +124,21 @@ module.exports = grammar({
 
     _comparison_operator: ($) =>
       choice(
-        "<", "<=", "<>", "=", ">", ">=",
-        kw("LT"), kw("LE"), kw("NE"), kw("EQ"), kw("GT"), kw("GE"),
-        kw("BEGINS"), kw("MATCHES"), kw("CONTAINS")
+        "<",
+        "<=",
+        "<>",
+        "=",
+        ">",
+        ">=",
+        kw("LT"),
+        kw("LE"),
+        kw("NE"),
+        kw("EQ"),
+        kw("GT"),
+        kw("GE"),
+        kw("BEGINS"),
+        kw("MATCHES"),
+        kw("CONTAINS")
       ),
     comparison_expression: ($) =>
       prec.left(
@@ -415,7 +426,8 @@ module.exports = grammar({
       seq(
         kw("CLASS"),
         field(
-          "name", choice($._string_literal, $.identifier, $.qualified_name)
+          "name",
+          choice($._string_literal, $.identifier, $.qualified_name)
         ),
         repeat(
           choice(
@@ -430,7 +442,7 @@ module.exports = grammar({
             $.use_widget_pool,
             $.abstract,
             $.final,
-            $.serializable,
+            $.serializable
           )
         ),
         ":",
@@ -478,10 +490,12 @@ module.exports = grammar({
     input_close_statement: ($) =>
       seq(
         kw("INPUT"),
-        optional(choice(
-          seq(kw("STREAM"), field("stream", $.identifier)),
-          seq(kw("STREAM-HANDLE"), field("stream_handle", $.identifier)),
-        )),
+        optional(
+          choice(
+            seq(kw("STREAM"), field("stream", $.identifier)),
+            seq(kw("STREAM-HANDLE"), field("stream_handle", $.identifier))
+          )
+        ),
         kw("CLOSE"),
         $._terminator
       ),
@@ -489,10 +503,12 @@ module.exports = grammar({
     output_close_statement: ($) =>
       seq(
         kw("OUTPUT"),
-        optional(choice(
-          seq(kw("STREAM"), field("stream", $.identifier)),
-          seq(kw("STREAM-HANDLE"), field("stream_handle", $.identifier)),
-        )),
+        optional(
+          choice(
+            seq(kw("STREAM"), field("stream", $.identifier)),
+            seq(kw("STREAM-HANDLE"), field("stream_handle", $.identifier))
+          )
+        ),
         kw("CLOSE"),
         $._terminator
       ),
@@ -511,7 +527,7 @@ module.exports = grammar({
         ),
         kw("FROM"),
         field("target", $._expression),
-        $._terminator,
+        $._terminator
       ),
 
     output_stream_statement: ($) =>
@@ -525,7 +541,7 @@ module.exports = grammar({
         ),
         kw("TO"),
         field("target", $._expression),
-        $._terminator,
+        $._terminator
       ),
 
     /// ABL queries
@@ -544,7 +560,10 @@ module.exports = grammar({
     /// FOR statement
     sort_order: ($) => choice(kw("DESCENDING")),
     sort_column: ($) =>
-      seq(field("column", choice($.function_call, $.identifier)), optional($.sort_order)),
+      seq(
+        field("column", choice($.function_call, $.identifier)),
+        optional($.sort_order)
+      ),
 
     sort_clause: ($) =>
       seq(optional(kw("BREAK")), kw("BY"), repeat1($.sort_column)),
