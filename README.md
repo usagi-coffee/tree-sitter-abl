@@ -1,7 +1,5 @@
 # tree-sitter-abl
 
-> The project is in very early stage - expect that it's very broken and incomplete, contributions welcome!
-
 OpenEdge Advanced Business Language (ABL) grammar for tree-sitter.
 
 ## Usage
@@ -32,6 +30,7 @@ npm run parse your_file.p
 - [X] Procedures
 - [X] Ternary expression
 - [X] Object accessors
+- [X] Case/Switch statement
 - [X] Transactions
 - [X] Buffers
 - [X] Streams
@@ -49,7 +48,6 @@ npm run parse your_file.p
 > Even though many statemenents are not listed it doesn't ***necessarily*** mean they're not parsable, it just means the syntax tree won't have details about the statement!
 
 - [X] ASSIGN
-- [ ] PUT
 - [X] ACCUMULATE
 - [X] AVAILABLE (expression)
 - [ ] ...
@@ -65,7 +63,7 @@ Check out `test/corpus` directory to see the syntax tree output for specific gra
 ```LICENSE
 MIT License
 
-Copyright (c) 2023 Kamil Jakubus and contributors
+Copyright (c) 2023 Kamil Jakubus, Jason Chrosrova and contributors
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
