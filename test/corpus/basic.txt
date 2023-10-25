@@ -585,6 +585,10 @@ DO x = 5 TO 20:
   x = 5.
 END.
 
+DO x = 5 TO INTEGER("20"):
+  x = 5.
+END.
+
 
 --------------------------------------------------------------------------------
 
@@ -594,6 +598,19 @@ END.
       (identifier)
       (number_literal))
     (number_literal)
+    (body
+      (variable_assignment
+        (assignment
+          (identifier)
+          (number_literal)))))
+  (do_statement
+    (assignment
+      (identifier)
+      (number_literal))
+    (function_call
+      (identifier)
+      (function_call_argument
+        (double_quoted_string)))
     (body
       (variable_assignment
         (assignment

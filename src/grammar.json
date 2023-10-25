@@ -2575,7 +2575,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "number_literal"
+          "name": "_expression"
         },
         {
           "type": "STRING",

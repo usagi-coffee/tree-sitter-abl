@@ -374,7 +374,7 @@ module.exports = grammar({
         kw("DO"),
         $.assignment,
         kw("TO"),
-        $.number_literal,
+        $._expression,
         ":",
         optional($.body),
         $._block_terminator
