@@ -860,6 +860,44 @@
     }
   },
   {
+    "type": "else_then_if_statement",
+    "named": true,
+    "fields": {
+      "condition": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "_expression",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "abl_statement",
+          "named": true
+        },
+        {
+          "type": "function_call_statement",
+          "named": true
+        },
+        {
+          "type": "return_statement",
+          "named": true
+        },
+        {
+          "type": "variable_assignment",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "else_then_statement",
     "named": true,
     "fields": {},
@@ -1205,6 +1243,10 @@
       "types": [
         {
           "type": "abl_statement",
+          "named": true
+        },
+        {
+          "type": "else_then_if_statement",
           "named": true
         },
         {

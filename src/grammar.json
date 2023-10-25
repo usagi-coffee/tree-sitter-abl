@@ -2215,6 +2215,21 @@
           "type": "CHOICE",
           "members": [
             {
+              "type": "REPEAT",
+              "content": {
+                "type": "SYMBOL",
+                "name": "else_then_if_statement"
+              }
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
               "type": "SYMBOL",
               "name": "else_then_statement"
             },
@@ -2225,11 +2240,88 @@
         }
       ]
     },
+    "else_then_if_statement": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "PATTERN",
+                "value": "[eE][lL][sS][eE]"
+              }
+            }
+          },
+          "named": false,
+          "value": "ELSE"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "PATTERN",
+                "value": "[iI][fF]"
+              }
+            }
+          },
+          "named": false,
+          "value": "IF"
+        },
+        {
+          "type": "FIELD",
+          "name": "condition",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_expression"
+          }
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "PATTERN",
+                "value": "[tT][hH][eE][nN]"
+              }
+            }
+          },
+          "named": false,
+          "value": "THEN"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_terminated_statement"
+        }
+      ]
+    },
     "else_then_statement": {
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "PATTERN",
+                "value": "[eE][lL][sS][eE]"
+              }
+            }
+          },
+          "named": false,
           "value": "ELSE"
         },
         {

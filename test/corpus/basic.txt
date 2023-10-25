@@ -445,6 +445,7 @@ IF ELSE THEN statement
 ================================================================================
 
 IF x > 10 THEN x = 10.
+ELSE IF x > 20 THEN x = 20.
 ELSE x = x.
 
 --------------------------------------------------------------------------------
@@ -458,6 +459,14 @@ ELSE x = x.
       (assignment
         (identifier)
         (number_literal)))
+    (else_then_if_statement
+      condition: (comparison_expression
+        (identifier)
+        (number_literal))
+      (variable_assignment
+        (assignment
+          (identifier)
+          (number_literal))))
     (else_then_statement
       (variable_assignment
         (assignment

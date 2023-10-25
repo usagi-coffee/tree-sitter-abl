@@ -326,10 +326,19 @@ module.exports = grammar({
         field("condition", $._expression),
         kw("THEN"),
         $._terminated_statement,
+        optional(repeat($.else_then_if_statement)),
         optional($.else_then_statement)
       ),
 
-    else_then_statement: ($) => seq("ELSE", $._terminated_statement),
+    else_then_if_statement: ($) =>
+      seq(
+        kw("ELSE"),
+        kw("IF"),
+        field("condition", $._expression),
+        kw("THEN"),
+        $._terminated_statement
+      ),
+    else_then_statement: ($) => seq(kw("ELSE"), $._terminated_statement),
 
     ternary_expression: ($) =>
       prec.right(
