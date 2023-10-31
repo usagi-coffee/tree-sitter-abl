@@ -179,7 +179,8 @@ module.exports = grammar({
         $.catch_statement,
         $.finally_statement,
         $.accumulate_statement,
-        $.abl_statement
+        $.abl_statement,
+        prec.left(-1, $.label)
       ),
 
     _terminated_statement: ($) =>
@@ -353,14 +354,23 @@ module.exports = grammar({
       ),
 
     /// Loop statements
+    label: ($) => seq($.identifier, ":"),
+
     _loop_statement: ($) =>
       choice($.repeat_statement, $.do_while_statement, $.do_statement),
 
     repeat_statement: ($) =>
-      seq(kw("REPEAT"), ":", optional($.body), $._block_terminator),
+      seq(
+        optional($.label),
+        kw("REPEAT"),
+        ":",
+        optional($.body),
+        $._block_terminator
+      ),
 
     do_while_statement: ($) =>
       seq(
+        optional($.label),
         kw("DO"),
         kw("WHILE"),
         field("condition", $._expression),
@@ -371,6 +381,7 @@ module.exports = grammar({
 
     do_statement: ($) =>
       seq(
+        optional($.label),
         kw("DO"),
         $.assignment,
         kw("TO"),
@@ -615,6 +626,7 @@ module.exports = grammar({
 
     for_statement: ($) =>
       seq(
+        optional($.label),
         kw("FOR"),
         field("type", choice(kw("EACH"), kw("FIRST"), kw("LAST"))),
         field("table", $.identifier),
