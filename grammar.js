@@ -4,7 +4,8 @@ const PREC = {
   MULTI: 5,
   ADD: 4,
   COMPARE: 3,
-  LOGICAL: 2
+  LOGICAL: 2,
+  EXTRA: -1
 };
 
 const _list = (rule, separator) => seq(rule, repeat(seq(separator, rule)));
@@ -180,7 +181,7 @@ module.exports = grammar({
         $.finally_statement,
         $.accumulate_statement,
         $.abl_statement,
-        prec.left(-1, $.label)
+        prec.left(PREC.EXTRA, $.label)
       ),
 
     _terminated_statement: ($) =>
