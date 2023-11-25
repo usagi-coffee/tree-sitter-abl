@@ -63,7 +63,7 @@ Check out `test/corpus` directory to see the syntax tree output for specific gra
 ```LICENSE
 MIT License
 
-Copyright (c) 2023 Kamil Jakubus, Jason Chrosrova and contributors
+Copyright (c) Kamil Jakubus, Jason Chrosrova and contributors
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
