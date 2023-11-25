@@ -14,10 +14,11 @@ npm install @usagi-coffee/tree-sitter-abl
 
 ### WASM
 
-Prebuilt WASM binary can be found in NPM package or build yourself with `npx tre-sitter build-wasm`.
-Follow [web-tree-sitter](https://github.com/tree-sitter/tree-sitter/tree/master/lib/binding_web) bindings.
+Prebuilt WASM binary can be found in NPM package or build yourself with `npx tree-sitter build-wasm`.
+Follow [web-tree-sitter](https://github.com/tree-sitter/tree-sitter/tree/master/lib/binding_web) binding documentation.
 
 ```
+// Getting wasm binary from the npm package
 const fs = require('node:fs');
 const mod = fs.readFileSync('node_modules/@usagi-coffee/tree-sitter-abl/tree-sitter-abl.wasm');
 ```
