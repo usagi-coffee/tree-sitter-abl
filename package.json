@@ -1,5 +1,5 @@
 {
-  "name": "tree-sitter-abl",
+  "name": "@usagi-coffee/tree-sitter-abl",
   "version": "0.0.1",
   "description": "ABL grammar for tree-sitter",
   "main": "bindings/node",
