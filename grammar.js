@@ -174,6 +174,7 @@ module.exports = grammar({
         $.transaction_statement,
         $._stream_statement,
         $.case_statement,
+        $.do_block,
         $.input_close_statement,
         $.output_close_statement,
         $.assign_statement,
@@ -566,7 +567,43 @@ module.exports = grammar({
         $._terminator
       ),
 
-    do_block: ($) => seq(kw("DO"), ":", optional($.body), $._block_terminator),
+    on_stop_phrase: ($) =>
+      seq(
+        kw("ON"),
+        kw("STOP"),
+        kw("UNDO"),
+        field("label", optional($.identifier)),
+        ",",
+        choice(
+          seq(kw("LEAVE"), field("label", optional($.identifier))),
+          seq(kw("NEXT"), field("label", optional($.identifier))),
+          seq(kw("RETRY"), field("label", optional($.identifier))),
+          seq(kw("RETURN"), choice(seq(kw("ERROR")), kw("NO-APPLY")))
+        )
+      ),
+
+    on_quit_phrase: ($) =>
+      seq(
+        kw("ON"),
+        kw("QUIT"),
+        optional(seq(kw("UNDO"), optional($.identifier))),
+        ",",
+        choice(
+          seq(kw("LEAVE"), field("label", optional($.identifier))),
+          seq(kw("NEXT"), field("label", optional($.identifier))),
+          seq(kw("RETRY"), field("label", optional($.identifier))),
+          seq(kw("RETURN"), choice(seq(kw("ERROR")), kw("NO-APPLY")))
+        )
+      ),
+
+    do_block: ($) =>
+      seq(
+        kw("DO"),
+        optional(choice($.on_stop_phrase, $.on_quit_phrase)),
+        ":",
+        optional($.body),
+        $._block_terminator
+      ),
 
     _case_terminator: ($) =>
       choice($._block_terminator, seq(kw("END"), kw("CASE"), $._terminator)),

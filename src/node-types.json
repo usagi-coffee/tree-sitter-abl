@@ -130,6 +130,10 @@
         "named": true
       },
       {
+        "type": "do_block",
+        "named": true
+      },
+      {
         "type": "do_statement",
         "named": true
       },
@@ -758,11 +762,19 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": false,
       "types": [
         {
           "type": "body",
+          "named": true
+        },
+        {
+          "type": "on_quit_phrase",
+          "named": true
+        },
+        {
+          "type": "on_stop_phrase",
           "named": true
         }
       ]
@@ -1554,6 +1566,48 @@
     }
   },
   {
+    "type": "on_quit_phrase",
+    "named": true,
+    "fields": {
+      "label": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "on_stop_phrase",
+    "named": true,
+    "fields": {
+      "label": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "output_close_statement",
     "named": true,
     "fields": {
@@ -2239,6 +2293,10 @@
     "named": false
   },
   {
+    "type": "ERROR",
+    "named": false
+  },
+  {
     "type": "EXCLUSIVE-LOCK",
     "named": false
   },
@@ -2335,6 +2393,10 @@
     "named": false
   },
   {
+    "type": "LEAVE",
+    "named": false
+  },
+  {
     "type": "LIKE",
     "named": false
   },
@@ -2383,6 +2445,10 @@
     "named": false
   },
   {
+    "type": "NO-APPLY",
+    "named": false
+  },
+  {
     "type": "NO-ERROR",
     "named": false
   },
@@ -2404,6 +2470,10 @@
   },
   {
     "type": "OF",
+    "named": false
+  },
+  {
+    "type": "ON",
     "named": false
   },
   {
@@ -2435,6 +2505,10 @@
     "named": false
   },
   {
+    "type": "QUIT",
+    "named": false
+  },
+  {
     "type": "RAW",
     "named": false
   },
@@ -2444,6 +2518,10 @@
   },
   {
     "type": "REPEAT",
+    "named": false
+  },
+  {
+    "type": "RETRY",
     "named": false
   },
   {
@@ -2464,6 +2542,10 @@
   },
   {
     "type": "SHARE-LOCK",
+    "named": false
+  },
+  {
+    "type": "STOP",
     "named": false
   },
   {
@@ -2516,6 +2598,10 @@
   },
   {
     "type": "TRUE",
+    "named": false
+  },
+  {
+    "type": "UNDO",
     "named": false
   },
   {

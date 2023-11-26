@@ -1313,3 +1313,31 @@ END CASE.
           (assignment
             (identifier)
             (number_literal)))))))
+
+================================================================================
+DO block
+================================================================================
+
+DO ON QUIT UNDO, RETURN ERROR:
+  QUIT.
+END.
+
+DO ON STOP UNDO label1, LEAVE label2:
+  STOP.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (do_block
+    (on_quit_phrase)
+    (body
+      (abl_statement
+        (identifier))))
+  (do_block
+    (on_stop_phrase
+      (identifier)
+      (identifier))
+    (body
+      (abl_statement
+        (identifier)))))
