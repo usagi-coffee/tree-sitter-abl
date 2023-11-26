@@ -203,7 +203,7 @@ module.exports = grammar({
           /\&/,
           field("name", $.identifier),
           "=",
-          field("value", $.double_quoted_string)
+          field("value", $._expression)
         ),
         field("name", $.identifier),
         field("value", $.double_quoted_string)

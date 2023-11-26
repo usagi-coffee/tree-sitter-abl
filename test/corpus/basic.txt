@@ -41,7 +41,7 @@ COMMENT (long) statement
 INCLUDE statement
 ================================================================================
 
-{include_file.i arg1 &arg2 = "test" arg3 "NEW"}
+{include_file.i arg1 &arg2="test" arg3 "NEW" &ABC=variable}
 
 --------------------------------------------------------------------------------
 
@@ -56,7 +56,10 @@ INCLUDE statement
     (include_argument
       (identifier))
     (include_argument
-      (double_quoted_string))))
+      (double_quoted_string))
+    (include_argument
+      (identifier)
+      (identifier))))
 
 ================================================================================
 VARIABLE DEFINITION statement
