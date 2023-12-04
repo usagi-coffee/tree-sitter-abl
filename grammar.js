@@ -426,7 +426,12 @@ module.exports = grammar({
       ),
     function_parameter_mode: ($) => choice(kw("INPUT"), kw("OUTPUT")),
     function_parameter: ($) =>
-      seq($.function_parameter_mode, $.identifier, kw("AS"), $.primitive_type),
+      seq(
+        optional($.function_parameter_mode),
+        $.identifier,
+        kw("AS"),
+        $.primitive_type
+      ),
 
     function_statement: ($) =>
       seq(

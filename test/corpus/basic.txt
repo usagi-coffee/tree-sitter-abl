@@ -691,6 +691,10 @@ FUNCTION fn RETURNS INTEGER (INPUT par1 AS INTEGER).
   RETURN par1.
 END FUNCTION.
 
+FUNCTION fn-no-mode RETURNS INTEGER (par1 AS INTEGER).
+  RETURN par1.
+END FUNCTION.
+
 --------------------------------------------------------------------------------
 
 (source_code
