@@ -230,7 +230,8 @@ module.exports = grammar({
         kw("RECID"),
         kw("ROWID"),
         kw("HANDLE"),
-        kw("COM-HANDLE")
+        kw("COM-HANDLE"),
+        $.qualified_name
       ),
 
     number_literal: ($) => /[0-9]+/,

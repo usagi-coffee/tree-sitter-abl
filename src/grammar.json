@@ -1366,6 +1366,10 @@
           },
           "named": false,
           "value": "COM-HANDLE"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "qualified_name"
         }
       ]
     },

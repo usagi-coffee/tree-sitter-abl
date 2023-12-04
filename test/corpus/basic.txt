@@ -76,6 +76,8 @@ DEFINE VARIABLE initial AS INTEGER INITIAL ?.
 
 DEFINE VARIABLE clone LIKE short_variable.
 
+DEFINE VARIABLE ojb AS Progress.Json.ObjectModel.JsonObject NO-UNDO.
+
 --------------------------------------------------------------------------------
 
 (source_code
@@ -102,7 +104,16 @@ DEFINE VARIABLE clone LIKE short_variable.
       (null_expression)))
   (variable_definition
     (identifier)
-    (identifier)))
+    (identifier))
+  (variable_definition
+    (identifier)
+    (primitive_type
+      (qualified_name
+        (identifier)
+        (identifier)
+        (identifier)
+        (identifier)))
+    (variable_tuning)))
 
 ================================================================================
 VARIABLE ASSIGNMENT statement
