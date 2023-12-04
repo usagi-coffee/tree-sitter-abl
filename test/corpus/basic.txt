@@ -707,6 +707,15 @@ END FUNCTION.
       (primitive_type))
     (body
       (return_statement
+        (identifier))))
+  (function_statement
+    name: (identifier)
+    return_type: (primitive_type)
+    (function_parameter
+      (identifier)
+      (primitive_type))
+    (body
+      (return_statement
         (identifier)))))
 
 ================================================================================
