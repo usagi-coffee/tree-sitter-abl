@@ -585,6 +585,22 @@ module.exports = grammar({
         $._terminator
       ),
 
+    on_error_phrase: ($) =>
+      seq(
+        kw("ON"),
+        kw("ERROR"),
+        kw("UNDO"),
+        field("label", optional($.identifier)),
+        ",",
+        choice(
+          seq(kw("LEAVE"), field("label", optional($.identifier))),
+          seq(kw("NEXT"), field("label", optional($.identifier))),
+          seq(kw("RETRY"), field("label", optional($.identifier))),
+          seq(kw("RETURN"), choice(seq(kw("ERROR")), kw("NO-APPLY"))),
+          kw("THROW")
+        )
+      ),
+
     on_stop_phrase: ($) =>
       seq(
         kw("ON"),
@@ -617,7 +633,7 @@ module.exports = grammar({
     do_block: ($) =>
       seq(
         kw("DO"),
-        optional(choice($.on_stop_phrase, $.on_quit_phrase)),
+        optional(choice($.on_error_phrase, $.on_stop_phrase, $.on_quit_phrase)),
         ":",
         optional($.body),
         $._block_terminator

@@ -1352,6 +1352,10 @@ END CASE.
 DO block
 ================================================================================
 
+DO ON ERROR UNDO, THROW:
+  UNDO, THROW NEW Progress.Lang.AppError("Rethrow me :)").
+END.
+
 DO ON QUIT UNDO, RETURN ERROR:
   QUIT.
 END.

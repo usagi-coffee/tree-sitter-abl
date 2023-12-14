@@ -778,6 +778,10 @@
           "named": true
         },
         {
+          "type": "on_error_phrase",
+          "named": true
+        },
+        {
           "type": "on_quit_phrase",
           "named": true
         },
@@ -1594,6 +1598,22 @@
           "named": true
         }
       ]
+    }
+  },
+  {
+    "type": "on_error_phrase",
+    "named": true,
+    "fields": {
+      "label": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
