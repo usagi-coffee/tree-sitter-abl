@@ -5676,6 +5676,18 @@
           "members": [
             {
               "type": "SYMBOL",
+              "name": "sort_clause"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
               "name": "on_error_phrase"
             },
             {
@@ -5701,18 +5713,6 @@
             {
               "type": "SYMBOL",
               "name": "on_stop_phrase"
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "sort_clause"
             },
             {
               "type": "BLANK"
