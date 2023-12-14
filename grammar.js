@@ -64,6 +64,7 @@ module.exports = grammar({
         $.locked_expression,
         $.input_expression,
         $.can_find_expression,
+        $.new_expression,
         $.identifier
       ),
 
@@ -491,6 +492,16 @@ module.exports = grammar({
     abstract: ($) => kw("ABSTRACT"),
     final: ($) => kw("FINAL"),
     serializable: ($) => kw("SERIALIZABLE"),
+
+    new_expression: ($) =>
+      prec.right(
+        seq(
+          kw("NEW"),
+          choice($.identifier, $.qualified_name),
+          seq("(", optional($.function_call_argument), ")"),
+          optional("NO-ERROR")
+        )
+      ),
 
     /// Objects
     object_access: ($) =>

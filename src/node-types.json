@@ -64,6 +64,10 @@
         "named": true
       },
       {
+        "type": "new_expression",
+        "named": true
+      },
+      {
         "type": "null_expression",
         "named": true
       },
@@ -1511,6 +1515,29 @@
     }
   },
   {
+    "type": "new_expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "function_call_argument",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "qualified_name",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "object_access",
     "named": true,
     "fields": {
@@ -2444,6 +2471,10 @@
   },
   {
     "type": "NE",
+    "named": false
+  },
+  {
+    "type": "NEW",
     "named": false
   },
   {

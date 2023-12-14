@@ -1277,6 +1277,8 @@ CLASS z INHERITS x FINAL SERIALIZABLE:
   DEFINE VARIABLE bar AS INTEGER.
 END CLASS.
 
+instance = NEW z().
+
 --------------------------------------------------------------------------------
 
 (source_code
@@ -1296,7 +1298,12 @@ END CLASS.
     (body
       (variable_definition
         name: (identifier)
-        type: (primitive_type)))))
+        type: (primitive_type))))
+  (variable_assignment
+    (assignment
+      (identifier)
+      (new_expression
+        (identifier)))))
 
 ================================================================================
 CASE statement
