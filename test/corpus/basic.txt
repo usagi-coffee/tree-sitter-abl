@@ -736,7 +736,7 @@ END.
         (identifier)))))
 
 ================================================================================
-ABL GENERIC statement
+ABL statements
 ================================================================================
 
 DISPLAY "test" a 5 f().
@@ -1375,3 +1375,22 @@ END.
     (body
       (abl_statement
         (identifier)))))
+
+================================================================================
+UNDO statement
+================================================================================
+
+UNDO, THROW NEW Progress.Lang.AppError("test message", 420).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (undo_statement
+    (new_expression
+      (qualified_name
+        (identifier)
+        (identifier)
+        (identifier))
+      (function_call_argument
+        (double_quoted_string)
+        (number_literal)))))

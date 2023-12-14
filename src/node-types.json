@@ -218,6 +218,10 @@
         "named": true
       },
       {
+        "type": "undo_statement",
+        "named": true
+      },
+      {
         "type": "variable_assignment",
         "named": true
       },
@@ -1979,6 +1983,32 @@
     }
   },
   {
+    "type": "undo_statement",
+    "named": true,
+    "fields": {
+      "label": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "new_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "use_widget_pool",
     "named": true,
     "fields": {}
@@ -2623,6 +2653,10 @@
   },
   {
     "type": "THEN",
+    "named": false
+  },
+  {
+    "type": "THROW",
     "named": false
   },
   {

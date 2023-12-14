@@ -182,6 +182,7 @@ module.exports = grammar({
         $.catch_statement,
         $.finally_statement,
         $.accumulate_statement,
+        $.undo_statement,
         $.abl_statement,
         prec.left(PREC.EXTRA, $.label)
       ),
@@ -839,6 +840,21 @@ module.exports = grammar({
       seq(
         choice(kw("AVAIL"), kw("AVAILABLE")),
         choice($.parenthesized_expression, $.identifier)
+      ),
+
+    undo_statement: ($) =>
+      seq(
+        kw("UNDO"),
+        field("label", optional($.identifier)),
+        ",",
+        choice(
+          seq(kw("LEAVE"), field("label", optional($.identifier))),
+          seq(kw("NEXT"), field("label", optional($.identifier))),
+          seq(kw("RETRY"), field("label", optional($.identifier))),
+          seq(kw("RETURN"), choice(seq(kw("ERROR")), kw("NO-APPLY"))),
+          seq(kw("THROW"), $.new_expression)
+        ),
+        $._terminator
       )
   }
 });
