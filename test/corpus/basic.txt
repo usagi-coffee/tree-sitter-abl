@@ -1368,6 +1368,17 @@ END.
 
 (source_code
   (do_block
+    (on_error_phrase)
+    (body
+      (undo_statement
+        (new_expression
+          (qualified_name
+            (identifier)
+            (identifier)
+            (identifier))
+          (function_call_argument
+            (double_quoted_string))))))
+  (do_block
     (on_quit_phrase)
     (body
       (abl_statement
