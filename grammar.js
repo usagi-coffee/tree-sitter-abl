@@ -368,6 +368,9 @@ module.exports = grammar({
       seq(
         optional($.label),
         kw("REPEAT"),
+        optional($.on_error_phrase),
+        optional($.on_quit_phrase),
+        optional($.on_stop_phrase),
         ":",
         optional($.body),
         $._block_terminator
@@ -705,6 +708,9 @@ module.exports = grammar({
         optional($.of),
         optional($.where_clause),
         repeat($.query_tuning),
+        optional($.on_error_phrase),
+        optional($.on_quit_phrase),
+        optional($.on_stop_phrase),
         optional($.sort_clause),
         ":",
         optional($.body),

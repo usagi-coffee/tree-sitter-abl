@@ -1409,3 +1409,34 @@ UNDO, THROW NEW Progress.Lang.AppError("test message", 420).
       (function_call_argument
         (double_quoted_string)
         (number_literal)))))
+
+================================================================================
+ON ERROR/QUIT/STOP phrases
+================================================================================
+
+REPEAT ON ERROR UNDO, THROW:
+  UNDO, LEAVE.
+END.
+
+FOR EACH tb_mstr WHERE tb_field = 1 NO-LOCK ON QUIT, NEXT:
+  QUIT.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (repeat_statement
+    (on_error_phrase)
+    (body
+      (undo_statement)))
+  (for_statement
+    (identifier)
+    (where_clause
+      (comparison_expression
+        (identifier)
+        (number_literal)))
+    (query_tuning)
+    (on_quit_phrase)
+    (body
+      (abl_statement
+        (identifier)))))
