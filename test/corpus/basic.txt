@@ -857,6 +857,8 @@ FIND statement
 
 FIND some_table OF other_table WHERE x > 5 EXCLUSIVE-LOCK NO-ERROR.
 
+FIND some_table NO-LOCK WHERE x > 5 NO-ERROR.
+
 --------------------------------------------------------------------------------
 
 (source_code
@@ -869,6 +871,14 @@ FIND some_table OF other_table WHERE x > 5 EXCLUSIVE-LOCK NO-ERROR.
         (identifier)
         (number_literal)))
     (query_tuning)
+    (query_tuning))
+  (find_statement
+    table: (identifier)
+    (query_tuning)
+    (where_clause
+      condition: (comparison_expression
+        (identifier)
+        (number_literal)))
     (query_tuning)))
 
 ================================================================================

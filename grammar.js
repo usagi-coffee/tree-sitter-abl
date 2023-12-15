@@ -678,6 +678,9 @@ module.exports = grammar({
     /// ABL queries
     where_clause: ($) => seq(kw("WHERE"), field("condition", $._expression)),
 
+    // HACK: progress spaghetti allows to define tuning order before where clause
+    _pre_tuning: ($) => prec.right(1, $.query_tuning),
+
     query_tuning: ($) =>
       choice(
         kw("NO-LOCK"),
@@ -706,6 +709,7 @@ module.exports = grammar({
         field("type", choice(kw("EACH"), kw("FIRST"), kw("LAST"))),
         field("table", $.identifier),
         optional($.of),
+        optional($._pre_tuning),
         optional($.where_clause),
         repeat($.query_tuning),
         optional($.sort_clause),
@@ -717,24 +721,17 @@ module.exports = grammar({
         $._block_terminator
       ),
 
+    _find_type: ($) =>
+      choice(kw("FIRST"), kw("LAST"), kw("NEXT"), kw("PREV"), kw("CURRENT")),
+
     // FIND statement
     find_statement: ($) =>
       seq(
         kw("FIND"),
-        field(
-          "type",
-          optional(
-            choice(
-              kw("FIRST"),
-              kw("LAST"),
-              kw("NEXT"),
-              kw("PREV"),
-              kw("CURRENT")
-            )
-          )
-        ),
+        field("type", optional($._find_type)),
         field("table", $.identifier),
         optional($.of),
+        optional($._pre_tuning),
         optional($.where_clause),
         repeat($.query_tuning),
         $._terminator

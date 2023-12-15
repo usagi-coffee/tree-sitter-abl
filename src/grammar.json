@@ -5327,6 +5327,14 @@
         }
       ]
     },
+    "_pre_tuning": {
+      "type": "PREC_RIGHT",
+      "value": 1,
+      "content": {
+        "type": "SYMBOL",
+        "name": "query_tuning"
+      }
+    },
     "query_tuning": {
       "type": "CHOICE",
       "members": [
@@ -5657,6 +5665,18 @@
           "members": [
             {
               "type": "SYMBOL",
+              "name": "_pre_tuning"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
               "name": "where_clause"
             },
             {
@@ -5741,6 +5761,91 @@
         }
       ]
     },
+    "_find_type": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "PATTERN",
+                "value": "[fF][iI][rR][sS][tT]"
+              }
+            }
+          },
+          "named": false,
+          "value": "FIRST"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "PATTERN",
+                "value": "[lL][aA][sS][tT]"
+              }
+            }
+          },
+          "named": false,
+          "value": "LAST"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "PATTERN",
+                "value": "[nN][eE][xX][tT]"
+              }
+            }
+          },
+          "named": false,
+          "value": "NEXT"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "PATTERN",
+                "value": "[pP][rR][eE][vV]"
+              }
+            }
+          },
+          "named": false,
+          "value": "PREV"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "PATTERN",
+                "value": "[cC][uU][rR][rR][eE][nN][tT]"
+              }
+            }
+          },
+          "named": false,
+          "value": "CURRENT"
+        }
+      ]
+    },
     "find_statement": {
       "type": "SEQ",
       "members": [
@@ -5767,89 +5872,8 @@
             "type": "CHOICE",
             "members": [
               {
-                "type": "CHOICE",
-                "members": [
-                  {
-                    "type": "ALIAS",
-                    "content": {
-                      "type": "TOKEN",
-                      "content": {
-                        "type": "PREC",
-                        "value": 1,
-                        "content": {
-                          "type": "PATTERN",
-                          "value": "[fF][iI][rR][sS][tT]"
-                        }
-                      }
-                    },
-                    "named": false,
-                    "value": "FIRST"
-                  },
-                  {
-                    "type": "ALIAS",
-                    "content": {
-                      "type": "TOKEN",
-                      "content": {
-                        "type": "PREC",
-                        "value": 1,
-                        "content": {
-                          "type": "PATTERN",
-                          "value": "[lL][aA][sS][tT]"
-                        }
-                      }
-                    },
-                    "named": false,
-                    "value": "LAST"
-                  },
-                  {
-                    "type": "ALIAS",
-                    "content": {
-                      "type": "TOKEN",
-                      "content": {
-                        "type": "PREC",
-                        "value": 1,
-                        "content": {
-                          "type": "PATTERN",
-                          "value": "[nN][eE][xX][tT]"
-                        }
-                      }
-                    },
-                    "named": false,
-                    "value": "NEXT"
-                  },
-                  {
-                    "type": "ALIAS",
-                    "content": {
-                      "type": "TOKEN",
-                      "content": {
-                        "type": "PREC",
-                        "value": 1,
-                        "content": {
-                          "type": "PATTERN",
-                          "value": "[pP][rR][eE][vV]"
-                        }
-                      }
-                    },
-                    "named": false,
-                    "value": "PREV"
-                  },
-                  {
-                    "type": "ALIAS",
-                    "content": {
-                      "type": "TOKEN",
-                      "content": {
-                        "type": "PREC",
-                        "value": 1,
-                        "content": {
-                          "type": "PATTERN",
-                          "value": "[cC][uU][rR][rR][eE][nN][tT]"
-                        }
-                      }
-                    },
-                    "named": false,
-                    "value": "CURRENT"
-                  }
-                ]
+                "type": "SYMBOL",
+                "name": "_find_type"
               },
               {
                 "type": "BLANK"
@@ -5871,6 +5895,18 @@
             {
               "type": "SYMBOL",
               "name": "of"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "_pre_tuning"
             },
             {
               "type": "BLANK"
