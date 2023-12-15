@@ -364,10 +364,14 @@ module.exports = grammar({
     _loop_statement: ($) =>
       choice($.repeat_statement, $.do_while_statement, $.do_statement),
 
+    _while_condition: ($) =>
+      seq(kw("WHILE"), field("condition", $._expression)),
+
     repeat_statement: ($) =>
       seq(
         optional($.label),
         kw("REPEAT"),
+        optional($._while_condition),
         optional($.on_error_phrase),
         optional($.on_quit_phrase),
         optional($.on_stop_phrase),
@@ -380,8 +384,7 @@ module.exports = grammar({
       seq(
         optional($.label),
         kw("DO"),
-        kw("WHILE"),
-        field("condition", $._expression),
+        $._while_condition,
         ":",
         optional($.body),
         $._block_terminator

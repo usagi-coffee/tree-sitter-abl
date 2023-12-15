@@ -567,7 +567,7 @@ y = x < 10 OR x = 10.
 REPEAT statement
 ================================================================================
 
-REPEAT:
+REPEAT WHILE TRUE:
   x = 5.
 END.
 
@@ -575,6 +575,7 @@ END.
 
 (source_code
   (repeat_statement
+    (boolean_literal)
     (body
       (variable_assignment
         (assignment
