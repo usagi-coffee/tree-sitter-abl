@@ -344,7 +344,14 @@ module.exports = grammar({
         kw("THEN"),
         $._terminated_statement
       ),
-    else_then_statement: ($) => seq(kw("ELSE"), $._terminated_statement),
+    else_then_statement: ($) =>
+      seq(
+        kw("ELSE"),
+        choice(
+          seq(kw("DO"), ":", optional($.body), $._block_terminator),
+          $._terminated_statement
+        )
+      ),
 
     ternary_expression: ($) =>
       prec.right(

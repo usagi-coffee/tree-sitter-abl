@@ -474,6 +474,11 @@ IF x > 10 THEN x = 10.
 ELSE IF x > 20 THEN x = 20.
 ELSE x = x.
 
+IF x > 10 THEN x = 10.
+ELSE DO:
+  x = 20.
+END.
+
 --------------------------------------------------------------------------------
 
 (source_code
@@ -497,7 +502,21 @@ ELSE x = x.
       (variable_assignment
         (assignment
           (identifier)
-          (identifier))))))
+          (identifier)))))
+  (if_then_statement
+    condition: (comparison_expression
+      (identifier)
+      (number_literal))
+    (variable_assignment
+      (assignment
+        (identifier)
+        (number_literal)))
+    (else_then_statement
+      (body
+        (variable_assignment
+          (assignment
+            (identifier)
+            (number_literal)))))))
 
 ================================================================================
 LOGICAL expressions

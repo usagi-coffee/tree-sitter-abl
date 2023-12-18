@@ -2349,8 +2349,54 @@
           "value": "ELSE"
         },
         {
-          "type": "SYMBOL",
-          "name": "_terminated_statement"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "TOKEN",
+                    "content": {
+                      "type": "PREC",
+                      "value": 1,
+                      "content": {
+                        "type": "PATTERN",
+                        "value": "[dD][oO]"
+                      }
+                    }
+                  },
+                  "named": false,
+                  "value": "DO"
+                },
+                {
+                  "type": "STRING",
+                  "value": ":"
+                },
+                {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "body"
+                    },
+                    {
+                      "type": "BLANK"
+                    }
+                  ]
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "_block_terminator"
+                }
+              ]
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_terminated_statement"
+            }
+          ]
         }
       ]
     },
