@@ -968,6 +968,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "error_scope_statement"
+        },
+        {
+          "type": "SYMBOL",
           "name": "abl_statement"
         },
         {
@@ -7243,6 +7247,32 @@
               ]
             }
           ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_terminator"
+        }
+      ]
+    },
+    "error_scope_statement": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "ROUTINE-LEVEL"
+            },
+            {
+              "type": "STRING",
+              "value": "BLOCK-LEVEL"
+            }
+          ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "on_error_phrase"
         },
         {
           "type": "SYMBOL",

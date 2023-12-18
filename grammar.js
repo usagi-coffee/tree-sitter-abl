@@ -183,6 +183,7 @@ module.exports = grammar({
         $.finally_statement,
         $.accumulate_statement,
         $.undo_statement,
+        $.error_scope_statement,
         $.abl_statement,
         prec.left(PREC.EXTRA, $.label)
       ),
@@ -883,6 +884,13 @@ module.exports = grammar({
           seq(kw("RETURN"), choice(seq(kw("ERROR")), kw("NO-APPLY"))),
           seq(kw("THROW"), $.new_expression)
         ),
+        $._terminator
+      ),
+
+    error_scope_statement: ($) =>
+      seq(
+        choice("ROUTINE-LEVEL", "BLOCK-LEVEL"),
+        $.on_error_phrase,
         $._terminator
       )
   }

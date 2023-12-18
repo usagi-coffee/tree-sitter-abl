@@ -1444,6 +1444,9 @@ UNDO, THROW NEW Progress.Lang.AppError("test message", 420).
 ON ERROR/QUIT/STOP phrases
 ================================================================================
 
+ROUTINE-LEVEL ON ERROR UNDO, THROW.
+BLOCK-LEVEL ON ERROR UNDO, THROW.
+
 REPEAT ON ERROR UNDO, THROW:
   UNDO, LEAVE.
 END.
@@ -1455,6 +1458,10 @@ END.
 --------------------------------------------------------------------------------
 
 (source_code
+  (error_scope_statement
+    (on_error_phrase))
+  (error_scope_statement
+    (on_error_phrase))
   (repeat_statement
     (on_error_phrase)
     (body
