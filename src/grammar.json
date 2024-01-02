@@ -1104,6 +1104,27 @@
         }
       ]
     },
+    "constant": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "{"
+        },
+        {
+          "type": "STRING",
+          "value": "&"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "identifier"
+        },
+        {
+          "type": "STRING",
+          "value": "}"
+        }
+      ]
+    },
     "primitive_type": {
       "type": "CHOICE",
       "members": [
@@ -7289,6 +7310,10 @@
     {
       "type": "SYMBOL",
       "name": "include"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "constant"
     },
     {
       "type": "PATTERN",

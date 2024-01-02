@@ -755,6 +755,21 @@
     }
   },
   {
+    "type": "constant",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "current_changed_expression",
     "named": true,
     "fields": {},
@@ -2215,6 +2230,10 @@
   },
   {
     "type": "\"",
+    "named": false
+  },
+  {
+    "type": "&",
     "named": false
   },
   {

@@ -22,7 +22,12 @@ module.exports = grammar({
   name: "abl",
 
   externals: ($) => [$._namedot],
-  extras: ($) => [$.comment, $.include, /[\s\f\uFEFF\u2060\u200B]|\\\r?\n/],
+  extras: ($) => [
+    $.comment,
+    $.include,
+    $.constant,
+    /[\s\f\uFEFF\u2060\u200B]|\\\r?\n/
+  ],
   word: ($) => $.identifier,
   supertypes: ($) => [$._expression, $._statement],
 
@@ -213,6 +218,8 @@ module.exports = grammar({
       ),
     include: ($) =>
       seq("{", $.file_name, optional(repeat($.include_argument)), "}"),
+
+    constant: ($) => seq("{", "&", $.identifier, "}"),
 
     /// Primitives
     primitive_type: ($) =>
