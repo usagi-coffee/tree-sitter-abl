@@ -32,6 +32,10 @@
         "named": true
       },
       {
+        "type": "constant",
+        "named": true
+      },
+      {
         "type": "current_changed_expression",
         "named": true
       },

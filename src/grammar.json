@@ -238,6 +238,10 @@
         {
           "type": "SYMBOL",
           "name": "identifier"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "constant"
         }
       ]
     },
@@ -7310,10 +7314,6 @@
     {
       "type": "SYMBOL",
       "name": "include"
-    },
-    {
-      "type": "SYMBOL",
-      "name": "constant"
     },
     {
       "type": "PATTERN",

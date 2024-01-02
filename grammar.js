@@ -22,12 +22,7 @@ module.exports = grammar({
   name: "abl",
 
   externals: ($) => [$._namedot],
-  extras: ($) => [
-    $.comment,
-    $.include,
-    $.constant,
-    /[\s\f\uFEFF\u2060\u200B]|\\\r?\n/
-  ],
+  extras: ($) => [$.comment, $.include, /[\s\f\uFEFF\u2060\u200B]|\\\r?\n/],
   word: ($) => $.identifier,
   supertypes: ($) => [$._expression, $._statement],
 
@@ -70,7 +65,8 @@ module.exports = grammar({
         $.input_expression,
         $.can_find_expression,
         $.new_expression,
-        $.identifier
+        $.identifier,
+        $.constant
       ),
 
     parenthesized_expression: ($) => seq("(", $._expression, ")"),
