@@ -6,4 +6,5 @@ venv/
 yarn.lock
 pnpm-lock.yaml
 example
+example.p
 bin
