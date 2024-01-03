@@ -709,7 +709,10 @@ module.exports = grammar({
     sort_order: ($) => choice(kw("DESCENDING")),
     sort_column: ($) =>
       seq(
-        field("column", choice($.function_call, $.identifier)),
+        field(
+          "column",
+          choice($.function_call, $.qualified_name, $.identifier)
+        ),
         optional($.sort_order)
       ),
 

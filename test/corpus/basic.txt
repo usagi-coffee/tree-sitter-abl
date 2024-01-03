@@ -836,6 +836,10 @@ FOR EACH some_table WHERE x = 5 BREAK BY col1 DESCENDING col2:
   DISPLAY some_table.
 END.
 
+FOR EACH some_table WHERE x = 5 BREAK BY some_table.col2:
+  DISPLAY some_table.
+END.
+
 FOR EACH some_table WHERE x = 10 BY SOME-FUNC(col1):
   DISPLAY some_table.
 END.
@@ -855,6 +859,21 @@ END.
         (sort_order))
       (sort_column
         column: (identifier)))
+    (body
+      (abl_statement
+        statement: (identifier)
+        (identifier))))
+  (for_statement
+    table: (identifier)
+    (where_clause
+      condition: (comparison_expression
+        (identifier)
+        (number_literal)))
+    (sort_clause
+      (sort_column
+        column: (qualified_name
+          (identifier)
+          (identifier))))
     (body
       (abl_statement
         statement: (identifier)
