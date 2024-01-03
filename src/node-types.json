@@ -901,7 +901,15 @@
           "named": true
         },
         {
+          "type": "for_statement",
+          "named": true
+        },
+        {
           "type": "function_call_statement",
+          "named": true
+        },
+        {
+          "type": "repeat_statement",
           "named": true
         },
         {
@@ -932,7 +940,15 @@
           "named": true
         },
         {
+          "type": "for_statement",
+          "named": true
+        },
+        {
           "type": "function_call_statement",
+          "named": true
+        },
+        {
+          "type": "repeat_statement",
           "named": true
         },
         {
@@ -1277,7 +1293,15 @@
           "named": true
         },
         {
+          "type": "for_statement",
+          "named": true
+        },
+        {
           "type": "function_call_statement",
+          "named": true
+        },
+        {
+          "type": "repeat_statement",
           "named": true
         },
         {

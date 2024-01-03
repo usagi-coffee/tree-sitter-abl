@@ -1005,6 +1005,14 @@
         },
         {
           "type": "SYMBOL",
+          "name": "for_statement"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "repeat_statement"
+        },
+        {
+          "type": "SYMBOL",
           "name": "abl_statement"
         }
       ]
@@ -4952,14 +4960,6 @@
         {
           "type": "SYMBOL",
           "name": "do_block"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "repeat_statement"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "for_statement"
         },
         {
           "type": "SYMBOL",

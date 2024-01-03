@@ -194,6 +194,8 @@ module.exports = grammar({
         $.variable_assignment,
         $.function_call_statement,
         $.return_statement,
+        $.for_statement,
+        $.repeat_statement,
         $.abl_statement
       ),
 
@@ -627,13 +629,7 @@ module.exports = grammar({
     _case_terminator: ($) =>
       choice($._block_terminator, seq(kw("END"), kw("CASE"), $._terminator)),
 
-    _case_branch_body: ($) =>
-      choice(
-        $.do_block,
-        $.repeat_statement,
-        $.for_statement,
-        $._terminated_statement
-      ),
+    _case_branch_body: ($) => choice($.do_block, $._terminated_statement),
 
     case_when_branch: ($) =>
       seq(
