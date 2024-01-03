@@ -912,7 +912,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "_if_statement"
+          "name": "if_statement"
         },
         {
           "type": "SYMBOL",
@@ -1945,20 +1945,7 @@
         ]
       }
     },
-    "_if_statement": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "if_do_statement"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "if_then_statement"
-        }
-      ]
-    },
-    "if_do_statement": {
+    "if_statement": {
       "type": "SEQ",
       "members": [
         {
@@ -2002,40 +1989,17 @@
           "value": "THEN"
         },
         {
-          "type": "ALIAS",
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "PREC",
-              "value": 1,
-              "content": {
-                "type": "PATTERN",
-                "value": "[dD][oO]"
-              }
-            }
-          },
-          "named": false,
-          "value": "DO"
-        },
-        {
-          "type": "STRING",
-          "value": ":"
-        },
-        {
           "type": "CHOICE",
           "members": [
             {
               "type": "SYMBOL",
-              "name": "body"
+              "name": "_if_do_variant"
             },
             {
-              "type": "BLANK"
+              "type": "SYMBOL",
+              "name": "_if_then_variant"
             }
           ]
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_block_terminator"
         },
         {
           "type": "CHOICE",
@@ -2047,11 +2011,11 @@
                 "members": [
                   {
                     "type": "SYMBOL",
-                    "name": "else_do_statement"
+                    "name": "else_if_statement"
                   },
                   {
                     "type": "SYMBOL",
-                    "name": "else_do_if_statement"
+                    "name": "else_statement"
                   }
                 ]
               }
@@ -2063,302 +2027,99 @@
         }
       ]
     },
-    "else_do_statement": {
+    "_if_do_variant": {
       "type": "SEQ",
       "members": [
         {
-          "type": "ALIAS",
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "PREC",
-              "value": 1,
-              "content": {
-                "type": "PATTERN",
-                "value": "[eE][lL][sS][eE]"
-              }
-            }
-          },
-          "named": false,
-          "value": "ELSE"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "PREC",
-              "value": 1,
-              "content": {
-                "type": "PATTERN",
-                "value": "[dD][oO]"
-              }
-            }
-          },
-          "named": false,
-          "value": "DO"
-        },
-        {
-          "type": "STRING",
-          "value": ":"
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "body"
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
-        },
-        {
           "type": "SYMBOL",
-          "name": "_block_terminator"
+          "name": "do_block"
         }
       ]
     },
-    "else_do_if_statement": {
+    "_if_then_variant": {
       "type": "SEQ",
       "members": [
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "PREC",
-              "value": 1,
-              "content": {
-                "type": "PATTERN",
-                "value": "[eE][lL][sS][eE]"
-              }
-            }
-          },
-          "named": false,
-          "value": "ELSE"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "PREC",
-              "value": 1,
-              "content": {
-                "type": "PATTERN",
-                "value": "[iI][fF]"
-              }
-            }
-          },
-          "named": false,
-          "value": "IF"
-        },
-        {
-          "type": "FIELD",
-          "name": "condition",
-          "content": {
-            "type": "SYMBOL",
-            "name": "_expression"
-          }
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "PREC",
-              "value": 1,
-              "content": {
-                "type": "PATTERN",
-                "value": "[tT][hH][eE][nN]"
-              }
-            }
-          },
-          "named": false,
-          "value": "THEN"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "PREC",
-              "value": 1,
-              "content": {
-                "type": "PATTERN",
-                "value": "[dD][oO]"
-              }
-            }
-          },
-          "named": false,
-          "value": "DO"
-        },
-        {
-          "type": "STRING",
-          "value": ":"
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "body"
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_block_terminator"
-        }
-      ]
-    },
-    "if_then_statement": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "PREC",
-              "value": 1,
-              "content": {
-                "type": "PATTERN",
-                "value": "[iI][fF]"
-              }
-            }
-          },
-          "named": false,
-          "value": "IF"
-        },
-        {
-          "type": "FIELD",
-          "name": "condition",
-          "content": {
-            "type": "SYMBOL",
-            "name": "_expression"
-          }
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "PREC",
-              "value": 1,
-              "content": {
-                "type": "PATTERN",
-                "value": "[tT][hH][eE][nN]"
-              }
-            }
-          },
-          "named": false,
-          "value": "THEN"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_terminated_statement"
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "REPEAT",
-              "content": {
-                "type": "SYMBOL",
-                "name": "else_then_if_statement"
-              }
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "else_then_statement"
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
-        }
-      ]
-    },
-    "else_then_if_statement": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "PREC",
-              "value": 1,
-              "content": {
-                "type": "PATTERN",
-                "value": "[eE][lL][sS][eE]"
-              }
-            }
-          },
-          "named": false,
-          "value": "ELSE"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "PREC",
-              "value": 1,
-              "content": {
-                "type": "PATTERN",
-                "value": "[iI][fF]"
-              }
-            }
-          },
-          "named": false,
-          "value": "IF"
-        },
-        {
-          "type": "FIELD",
-          "name": "condition",
-          "content": {
-            "type": "SYMBOL",
-            "name": "_expression"
-          }
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "PREC",
-              "value": 1,
-              "content": {
-                "type": "PATTERN",
-                "value": "[tT][hH][eE][nN]"
-              }
-            }
-          },
-          "named": false,
-          "value": "THEN"
-        },
         {
           "type": "SYMBOL",
           "name": "_terminated_statement"
         }
       ]
     },
-    "else_then_statement": {
+    "else_if_statement": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "PATTERN",
+                "value": "[eE][lL][sS][eE]"
+              }
+            }
+          },
+          "named": false,
+          "value": "ELSE"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "PATTERN",
+                "value": "[iI][fF]"
+              }
+            }
+          },
+          "named": false,
+          "value": "IF"
+        },
+        {
+          "type": "FIELD",
+          "name": "condition",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_expression"
+          }
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "PATTERN",
+                "value": "[tT][hH][eE][nN]"
+              }
+            }
+          },
+          "named": false,
+          "value": "THEN"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "_if_do_variant"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_if_then_variant"
+            }
+          ]
+        }
+      ]
+    },
+    "else_statement": {
       "type": "SEQ",
       "members": [
         {
@@ -2381,49 +2142,12 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "SEQ",
-              "members": [
-                {
-                  "type": "ALIAS",
-                  "content": {
-                    "type": "TOKEN",
-                    "content": {
-                      "type": "PREC",
-                      "value": 1,
-                      "content": {
-                        "type": "PATTERN",
-                        "value": "[dD][oO]"
-                      }
-                    }
-                  },
-                  "named": false,
-                  "value": "DO"
-                },
-                {
-                  "type": "STRING",
-                  "value": ":"
-                },
-                {
-                  "type": "CHOICE",
-                  "members": [
-                    {
-                      "type": "SYMBOL",
-                      "name": "body"
-                    },
-                    {
-                      "type": "BLANK"
-                    }
-                  ]
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "_block_terminator"
-                }
-              ]
+              "type": "SYMBOL",
+              "name": "_if_do_variant"
             },
             {
               "type": "SYMBOL",
-              "name": "_terminated_statement"
+              "name": "_if_then_variant"
             }
           ]
         }

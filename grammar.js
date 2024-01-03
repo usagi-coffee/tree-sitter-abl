@@ -169,7 +169,7 @@ module.exports = grammar({
         $.function_call_statement,
         $.return_statement,
         $.class_statement,
-        $._if_statement,
+        $.if_statement,
         $._loop_statement,
         $.for_statement,
         $.find_statement,
@@ -301,61 +301,29 @@ module.exports = grammar({
       ),
 
     /// IF statement
-    _if_statement: ($) => choice($.if_do_statement, $.if_then_statement),
-
-    if_do_statement: ($) =>
+    if_statement: ($) =>
       seq(
         kw("IF"),
         field("condition", $._expression),
         kw("THEN"),
-        kw("DO"),
-        ":",
-        optional($.body),
-        $._block_terminator,
-        optional(repeat(choice($.else_do_statement, $.else_do_if_statement)))
+        choice($._if_do_variant, $._if_then_variant),
+        optional(repeat(choice($.else_if_statement, $.else_statement)))
       ),
 
-    else_do_statement: ($) =>
-      seq(kw("ELSE"), kw("DO"), ":", optional($.body), $._block_terminator),
+    _if_do_variant: ($) => seq($.do_block),
+    _if_then_variant: ($) => seq($._terminated_statement),
 
-    else_do_if_statement: ($) =>
+    else_if_statement: ($) =>
       seq(
         kw("ELSE"),
         kw("IF"),
         field("condition", $._expression),
         kw("THEN"),
-        kw("DO"),
-        ":",
-        optional($.body),
-        $._block_terminator
+        choice($._if_do_variant, $._if_then_variant)
       ),
 
-    if_then_statement: ($) =>
-      seq(
-        kw("IF"),
-        field("condition", $._expression),
-        kw("THEN"),
-        $._terminated_statement,
-        optional(repeat($.else_then_if_statement)),
-        optional($.else_then_statement)
-      ),
-
-    else_then_if_statement: ($) =>
-      seq(
-        kw("ELSE"),
-        kw("IF"),
-        field("condition", $._expression),
-        kw("THEN"),
-        $._terminated_statement
-      ),
-    else_then_statement: ($) =>
-      seq(
-        kw("ELSE"),
-        choice(
-          seq(kw("DO"), ":", optional($.body), $._block_terminator),
-          $._terminated_statement
-        )
-      ),
+    else_statement: ($) =>
+      seq(kw("ELSE"), choice($._if_do_variant, $._if_then_variant)),
 
     ternary_expression: ($) =>
       prec.right(

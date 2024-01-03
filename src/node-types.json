@@ -174,11 +174,7 @@
         "named": true
       },
       {
-        "type": "if_do_statement",
-        "named": true
-      },
-      {
-        "type": "if_then_statement",
+        "type": "if_statement",
         "named": true
       },
       {
@@ -878,48 +874,7 @@
     "fields": {}
   },
   {
-    "type": "else_do_if_statement",
-    "named": true,
-    "fields": {
-      "condition": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "_expression",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": false,
-      "required": false,
-      "types": [
-        {
-          "type": "body",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "else_do_statement",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": false,
-      "types": [
-        {
-          "type": "body",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "else_then_if_statement",
+    "type": "else_if_statement",
     "named": true,
     "fields": {
       "condition": {
@@ -942,6 +897,10 @@
           "named": true
         },
         {
+          "type": "do_block",
+          "named": true
+        },
+        {
           "type": "function_call_statement",
           "named": true
         },
@@ -957,19 +916,19 @@
     }
   },
   {
-    "type": "else_then_statement",
+    "type": "else_statement",
     "named": true,
     "fields": {},
     "children": {
       "multiple": false,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "abl_statement",
           "named": true
         },
         {
-          "type": "body",
+          "type": "do_block",
           "named": true
         },
         {
@@ -1283,41 +1242,7 @@
     }
   },
   {
-    "type": "if_do_statement",
-    "named": true,
-    "fields": {
-      "condition": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "_expression",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "body",
-          "named": true
-        },
-        {
-          "type": "else_do_if_statement",
-          "named": true
-        },
-        {
-          "type": "else_do_statement",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "if_then_statement",
+    "type": "if_statement",
     "named": true,
     "fields": {
       "condition": {
@@ -1340,11 +1265,15 @@
           "named": true
         },
         {
-          "type": "else_then_if_statement",
+          "type": "do_block",
           "named": true
         },
         {
-          "type": "else_then_statement",
+          "type": "else_if_statement",
+          "named": true
+        },
+        {
+          "type": "else_statement",
           "named": true
         },
         {
