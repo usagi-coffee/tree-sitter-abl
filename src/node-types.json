@@ -340,6 +340,11 @@
     }
   },
   {
+    "type": "argument_mode",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "assign_statement",
     "named": true,
     "fields": {},
@@ -1149,7 +1154,7 @@
       }
     },
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": false,
       "types": [
         {
@@ -1169,6 +1174,10 @@
       "types": [
         {
           "type": "_expression",
+          "named": true
+        },
+        {
+          "type": "argument_mode",
           "named": true
         }
       ]

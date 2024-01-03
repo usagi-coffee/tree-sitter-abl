@@ -722,13 +722,16 @@ END.
 FUNCTION statement
 ================================================================================
 
-FUNCTION fn RETURNS INTEGER (INPUT par1 AS INTEGER).
+FUNCTION fn RETURNS INTEGER (INPUT par1 AS INTEGER, OUTPUT par2 AS CHARACTER).
   RETURN par1.
 END FUNCTION.
 
 FUNCTION fn-no-mode RETURNS INTEGER (par1 AS INTEGER).
   RETURN par1.
-END FUNCTION.
+END.
+
+fn(INPUT somepar, OUTPUT otherpar).
+fn-no-mode(somerpar).
 
 --------------------------------------------------------------------------------
 
@@ -736,6 +739,10 @@ END FUNCTION.
   (function_statement
     name: (identifier)
     return_type: (primitive_type)
+    (function_parameter
+      (function_parameter_mode)
+      (identifier)
+      (primitive_type))
     (function_parameter
       (function_parameter_mode)
       (identifier)
@@ -751,6 +758,20 @@ END FUNCTION.
       (primitive_type))
     (body
       (return_statement
+        (identifier))))
+  (function_call_statement
+    (function_call
+      function: (identifier)
+      (function_call_argument
+        (input_expression
+          field: (identifier)))
+      (function_call_argument
+        (argument_mode)
+        (identifier))))
+  (function_call_statement
+    (function_call
+      function: (identifier)
+      (function_call_argument
         (identifier)))))
 
 ================================================================================
@@ -1471,7 +1492,8 @@ UNDO, THROW NEW Progress.Lang.AppError("test message", 420).
         (identifier)
         (identifier))
       (function_call_argument
-        (double_quoted_string)
+        (double_quoted_string))
+      (function_call_argument
         (number_literal)))))
 
 ================================================================================

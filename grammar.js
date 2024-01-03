@@ -290,15 +290,27 @@ module.exports = grammar({
 
     /// Function
     function_call_statement: ($) => seq($.function_call, $._terminator),
+    _function_call_arguments: ($) =>
+      prec.right(
+        seq(
+          $.function_call_argument,
+          repeat(seq(",", $.function_call_argument))
+        )
+      ),
+
+    argument_mode: ($) =>
+      prec.right(choice(kw("INPUT"), kw("OUTPUT"), kw("INPUT-OUTPUT"))),
+
+    _function_argument_with_mode: ($) => seq($.argument_mode, $.identifier),
     function_call_argument: ($) =>
-      prec.right(seq($._expression, repeat(seq(",", $._expression)))),
+      prec.right(1, choice($._function_argument_with_mode, $._expression)),
 
     function_call: ($) =>
       prec.right(
         1,
         seq(
           field("function", $.identifier),
-          seq("(", optional($.function_call_argument), ")")
+          seq("(", optional($._function_call_arguments), ")")
         )
       ),
 
@@ -486,7 +498,7 @@ module.exports = grammar({
         seq(
           kw("NEW"),
           choice($.identifier, $.qualified_name),
-          seq("(", optional($.function_call_argument), ")"),
+          seq("(", optional($._function_call_arguments), ")"),
           optional("NO-ERROR")
         )
       ),
