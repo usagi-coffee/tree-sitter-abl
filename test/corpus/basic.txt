@@ -326,15 +326,16 @@ END.
 --------------------------------------------------------------------------------
 
 (source_code
-  (if_do_statement
+  (if_statement
     condition: (comparison_expression
       (identifier)
       (number_literal))
-    (body
-      (variable_assignment
-        (assignment
-          (identifier)
-          (number_literal))))))
+    (do_block
+      (body
+        (variable_assignment
+          (assignment
+            (identifier)
+            (number_literal)))))))
 
 ================================================================================
 IF ELSE DO statement
@@ -350,21 +351,23 @@ END.
 --------------------------------------------------------------------------------
 
 (source_code
-  (if_do_statement
+  (if_statement
     condition: (comparison_expression
       (identifier)
       (number_literal))
-    (body
-      (variable_assignment
-        (assignment
-          (identifier)
-          (number_literal))))
-    (else_do_statement
+    (do_block
       (body
         (variable_assignment
           (assignment
             (identifier)
-            (identifier)))))))
+            (number_literal)))))
+    (else_statement
+      (do_block
+        (body
+          (variable_assignment
+            (assignment
+              (identifier)
+              (identifier))))))))
 
 ================================================================================
 IF ELSE IF statement
@@ -383,30 +386,33 @@ END.
 --------------------------------------------------------------------------------
 
 (source_code
-  (if_do_statement
+  (if_statement
     condition: (comparison_expression
       (identifier)
       (number_literal))
-    (body
-      (variable_assignment
-        (assignment
-          (identifier)
-          (number_literal))))
-    (else_do_if_statement
+    (do_block
+      (body
+        (variable_assignment
+          (assignment
+            (identifier)
+            (number_literal)))))
+    (else_if_statement
       condition: (comparison_expression
         (identifier)
         (number_literal))
-      (body
-        (variable_assignment
-          (assignment
-            (identifier)
-            (identifier)))))
-    (else_do_statement
-      (body
-        (variable_assignment
-          (assignment
-            (identifier)
-            (identifier)))))))
+      (do_block
+        (body
+          (variable_assignment
+            (assignment
+              (identifier)
+              (identifier))))))
+    (else_statement
+      (do_block
+        (body
+          (variable_assignment
+            (assignment
+              (identifier)
+              (identifier))))))))
 
 ================================================================================
 IF ELSE IF statement with line break before DOs
@@ -428,30 +434,33 @@ End.
 --------------------------------------------------------------------------------
 
 (source_code
-  (if_do_statement
+  (if_statement
     condition: (comparison_expression
       (identifier)
       (number_literal))
-    (body
-      (variable_assignment
-        (assignment
-          (identifier)
-          (number_literal))))
-    (else_do_if_statement
+    (do_block
+      (body
+        (variable_assignment
+          (assignment
+            (identifier)
+            (number_literal)))))
+    (else_if_statement
       condition: (comparison_expression
         (identifier)
         (number_literal))
-      (body
-        (variable_assignment
-          (assignment
-            (identifier)
-            (identifier)))))
-    (else_do_statement
-      (body
-        (variable_assignment
-          (assignment
-            (identifier)
-            (identifier)))))))
+      (do_block
+        (body
+          (variable_assignment
+            (assignment
+              (identifier)
+              (identifier))))))
+    (else_statement
+      (do_block
+        (body
+          (variable_assignment
+            (assignment
+              (identifier)
+              (identifier))))))))
 
 ================================================================================
 IF THEN statement
@@ -462,7 +471,7 @@ IF x > 10 THEN x = 10.
 --------------------------------------------------------------------------------
 
 (source_code
-  (if_then_statement
+  (if_statement
     condition: (comparison_expression
       (identifier)
       (number_literal))
@@ -487,7 +496,7 @@ END.
 --------------------------------------------------------------------------------
 
 (source_code
-  (if_then_statement
+  (if_statement
     condition: (comparison_expression
       (identifier)
       (number_literal))
@@ -495,7 +504,7 @@ END.
       (assignment
         (identifier)
         (number_literal)))
-    (else_then_if_statement
+    (else_if_statement
       condition: (comparison_expression
         (identifier)
         (number_literal))
@@ -503,12 +512,12 @@ END.
         (assignment
           (identifier)
           (number_literal))))
-    (else_then_statement
+    (else_statement
       (variable_assignment
         (assignment
           (identifier)
           (identifier)))))
-  (if_then_statement
+  (if_statement
     condition: (comparison_expression
       (identifier)
       (number_literal))
@@ -516,12 +525,13 @@ END.
       (assignment
         (identifier)
         (number_literal)))
-    (else_then_statement
-      (body
-        (variable_assignment
-          (assignment
-            (identifier)
-            (number_literal)))))))
+    (else_statement
+      (do_block
+        (body
+          (variable_assignment
+            (assignment
+              (identifier)
+              (number_literal))))))))
 
 ================================================================================
 LOGICAL expressions
@@ -557,7 +567,7 @@ y = x < 10 OR x = 10.
     (assignment
       (identifier)
       (boolean_literal)))
-  (if_then_statement
+  (if_statement
     condition: (logical_expression
       (boolean_literal)
       (boolean_literal))
@@ -1253,14 +1263,14 @@ IF CURRENT-CHANGED x THEN RETURN '!'.
       (identifier)
       (input_expression
         field: (identifier))))
-  (if_then_statement
+  (if_statement
     condition: (locked_expression
       (identifier))
     (return_statement
       (single_quoted_string)))
   (find_statement
     table: (identifier))
-  (if_then_statement
+  (if_statement
     condition: (current_changed_expression
       (identifier))
     (return_statement
