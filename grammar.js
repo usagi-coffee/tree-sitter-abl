@@ -284,7 +284,7 @@ module.exports = grammar({
         field("name", $.identifier),
         kw("FOR"),
         optional(kw("TEMP-TABLE")),
-        field("table", $.identifier),
+        field("table", choice($.identifier, $.qualified_name)),
         $._terminator
       ),
 
@@ -700,7 +700,7 @@ module.exports = grammar({
         optional($.label),
         kw("FOR"),
         field("type", choice(kw("EACH"), kw("FIRST"), kw("LAST"))),
-        field("table", $.identifier),
+        field("table", choice($.identifier, $.qualified_name)),
         optional($.of),
         optional($._pre_tuning),
         optional($.where_clause),
@@ -722,7 +722,7 @@ module.exports = grammar({
       seq(
         kw("FIND"),
         field("type", optional($._find_type)),
-        field("table", $.identifier),
+        field("table", choice($.identifier, $.qualified_name)),
         optional($.of),
         optional($._pre_tuning),
         optional($.where_clause),
@@ -735,7 +735,7 @@ module.exports = grammar({
         kw("CAN-FIND"),
         "(",
         optional(choice(kw("FIRST"), kw("LAST"))),
-        field("table", $.identifier),
+        field("table", choice($.identifier, $.qualified_name)),
         optional(field("constant", $._expression)),
         repeat(
           choice(
