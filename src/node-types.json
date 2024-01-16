@@ -2291,6 +2291,14 @@
     "named": false
   },
   {
+    "type": " AND ",
+    "named": false
+  },
+  {
+    "type": " OR ",
+    "named": false
+  },
+  {
     "type": "\"",
     "named": false
   },
@@ -2708,10 +2716,6 @@
   },
   {
     "type": "ON",
-    "named": false
-  },
-  {
-    "type": "OR",
     "named": false
   },
   {

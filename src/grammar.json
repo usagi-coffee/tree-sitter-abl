@@ -277,12 +277,12 @@
                 "value": 1,
                 "content": {
                   "type": "PATTERN",
-                  "value": "[aA][nN][dD]"
+                  "value": "[  ][aA][nN][dD][  ]"
                 }
               }
             },
             "named": false,
-            "value": "AND"
+            "value": " AND "
           },
           {
             "type": "ALIAS",
@@ -293,12 +293,12 @@
                 "value": 1,
                 "content": {
                   "type": "PATTERN",
-                  "value": "[oO][rR]"
+                  "value": "[  ][oO][rR][  ]"
                 }
               }
             },
             "named": false,
-            "value": "OR"
+            "value": " OR "
           }
         ]
       }
