@@ -2,7 +2,13 @@
 
 OpenEdge Advanced Business Language (ABL) grammar for tree-sitter.
 
+Check out `test/corpus` directory to see the syntax tree output for specific grammar and examples.
+
+There is much more grammar that needs to be listed, implemented and added to the tests. Feel free to open issue/send pull request for the grammar that you need!
+
 ## Usage
+
+> Keep in mind there are many ABL statements that are not yet implemented but that doesn't ***necessarily*** mean they're not parsable, it just means the syntax tree won't have details about the statements!
 
 For the grammar usage in your project look at tree-sitter documentation on how to use the grammar parsers because you can use tree-sitter parsers using [node](https://github.com/tree-sitter/node-tree-sitter)/[rust](https://github.com/tree-sitter/tree-sitter/tree/master/lib/binding_rust)/[wasm](https://github.com/tree-sitter/tree-sitter/tree/master/lib/binding_web) bindings.
 
@@ -34,46 +40,6 @@ npm run test
 ```bash
 npm run parse your_file.p
 ```
-
-## Supported grammar
-
-- [X] Comments
-- [X] Variables
-- [X] Unary/Binary operators
-- [X] Comparisons
-- [X] Conditional statements
-- [X] Loops
-- [X] Functions
-- [X] Procedures
-- [X] Ternary expression
-- [X] Object accessors
-- [X] Case/Switch statement
-- [X] Transactions
-- [X] Buffers
-- [X] Streams
-- [X] Includes
-- [X] Aggregate phrases
-- [ ] ...
-
-### ABL Query
-- [X] FOR (EACH/FIRST/LAST) statement
-- [X] FIND statement
-- [ ] ...
-
-### ABL Statements / Expressions
-
-> Even though many statemenents are not listed it doesn't ***necessarily*** mean they're not parsable, it just means the syntax tree won't have details about the statement!
-
-- [X] ASSIGN
-- [X] ACCUMULATE
-- [X] AVAILABLE (expression)
-- [ ] ...
-  
-Keep in mind these were tested on trivial examples so it may be broken in your case, if that happens please file an issue!
-
-There is much more grammar that needs to be listed, implemented and added to the tests. Feel free to open issue/send pull request for the grammar that you need!
-
-Check out `test/corpus` directory to see the syntax tree output for specific grammar and examples.
 
 ## License
 
