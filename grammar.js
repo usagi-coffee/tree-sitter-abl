@@ -693,7 +693,7 @@ module.exports = grammar({
       ),
 
     sort_clause: ($) =>
-      seq(optional(kw("BREAK")), kw("BY"), repeat1($.sort_column)),
+      seq(optional(kw("BREAK")), seq(kw("BY"), repeat1($.sort_column))),
 
     for_statement: ($) =>
       seq(
@@ -705,7 +705,7 @@ module.exports = grammar({
         optional($._pre_tuning),
         optional($.where_clause),
         repeat($.query_tuning),
-        optional($.sort_clause),
+        optional(repeat($.sort_clause)),
         optional($.on_error_phrase),
         optional($.on_quit_phrase),
         optional($.on_stop_phrase),

@@ -871,6 +871,10 @@ FOR EACH some_table WHERE x = 5 BREAK BY some_table.col2:
   DISPLAY some_table.
 END.
 
+FOR EACH some_table WHERE x = 5 BY some_table.col1 BY some_table.col2:
+  DISPLAY some_table.
+END.
+
 FOR EACH some_table WHERE x = 10 BY SOME-FUNC(col1):
   DISPLAY some_table.
 END.
