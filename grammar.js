@@ -695,6 +695,20 @@ module.exports = grammar({
     sort_clause: ($) =>
       seq(optional(kw("BREAK")), seq(kw("BY"), repeat1($.sort_column))),
 
+    for_phrase: ($) =>
+      seq(
+        field("type", choice(kw("EACH"), kw("FIRST"), kw("LAST"))),
+        field("table", choice($.identifier, $.qualified_name)),
+        optional($.of),
+        optional($._pre_tuning),
+        optional($.where_clause),
+        repeat($.query_tuning),
+        optional(repeat($.sort_clause)),
+        optional($.on_error_phrase),
+        optional($.on_quit_phrase),
+        optional($.on_stop_phrase)
+      ),
+
     for_statement: ($) =>
       seq(
         optional($.label),
@@ -709,6 +723,7 @@ module.exports = grammar({
         optional($.on_error_phrase),
         optional($.on_quit_phrase),
         optional($.on_stop_phrase),
+        repeat(seq(",", $.for_phrase)),
         ":",
         optional($.body),
         $._block_terminator
