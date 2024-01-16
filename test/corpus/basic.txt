@@ -842,6 +842,10 @@ FOR EACH some_table OF other_table WHERE x = 5 NO-LOCK:
 END.
 
 
+FOR EACH some_table NO-LOCK, FIRST something OF other:
+  DISPLAY something some_table.
+END.
+
 --------------------------------------------------------------------------------
 
 (source_code
@@ -857,6 +861,18 @@ END.
     (body
       (abl_statement
         statement: (identifier)
+        (identifier))))
+  (for_statement
+    table: (identifier)
+    (query_tuning)
+    (for_phrase
+      table: (identifier)
+      (of
+        (identifier)))
+    (body
+      (abl_statement
+        statement: (identifier)
+        (identifier)
         (identifier)))))
 
 ================================================================================
@@ -904,6 +920,26 @@ END.
       condition: (comparison_expression
         (identifier)
         (number_literal)))
+    (sort_clause
+      (sort_column
+        column: (qualified_name
+          (identifier)
+          (identifier))))
+    (body
+      (abl_statement
+        statement: (identifier)
+        (identifier))))
+  (for_statement
+    table: (identifier)
+    (where_clause
+      condition: (comparison_expression
+        (identifier)
+        (number_literal)))
+    (sort_clause
+      (sort_column
+        column: (qualified_name
+          (identifier)
+          (identifier))))
     (sort_clause
       (sort_column
         column: (qualified_name

@@ -1075,6 +1075,78 @@
     }
   },
   {
+    "type": "for_phrase",
+    "named": true,
+    "fields": {
+      "table": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "qualified_name",
+            "named": true
+          }
+        ]
+      },
+      "type": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "EACH",
+            "named": false
+          },
+          {
+            "type": "FIRST",
+            "named": false
+          },
+          {
+            "type": "LAST",
+            "named": false
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "of",
+          "named": true
+        },
+        {
+          "type": "on_error_phrase",
+          "named": true
+        },
+        {
+          "type": "on_quit_phrase",
+          "named": true
+        },
+        {
+          "type": "on_stop_phrase",
+          "named": true
+        },
+        {
+          "type": "query_tuning",
+          "named": true
+        },
+        {
+          "type": "sort_clause",
+          "named": true
+        },
+        {
+          "type": "where_clause",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "for_statement",
     "named": true,
     "fields": {
@@ -1117,6 +1189,10 @@
       "types": [
         {
           "type": "body",
+          "named": true
+        },
+        {
+          "type": "for_phrase",
           "named": true
         },
         {
