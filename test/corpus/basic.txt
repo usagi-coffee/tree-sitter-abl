@@ -1581,3 +1581,15 @@ QUIRKS
 DISPLAY Order.CustNum Order.OrderDate Andsomething AndBug.
 
 --------------------------------------------------------------------------------
+
+(source_code
+  (abl_statement
+    (identifier)
+    (qualified_name
+      (identifier)
+      (identifier))
+    (qualified_name
+      (identifier)
+      (identifier))
+    (identifier)
+    (identifier)))
