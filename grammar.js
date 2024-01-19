@@ -185,6 +185,7 @@ module.exports = grammar({
         $.accumulate_statement,
         $.undo_statement,
         $.error_scope_statement,
+        $.temp_table_definition,
         $.abl_statement,
         prec.left(PREC.EXTRA, $.label)
       ),
@@ -259,9 +260,16 @@ module.exports = grammar({
     variable_tuning: ($) =>
       seq(choice(kw("NO-UNDO"), kw("INITIAL")), optional($._expression)),
 
+    scope_tuning: ($) =>
+      choice(kw("NEW"), kw("GLOBAL"), kw("SHARED"), kw("STATIC")),
+    access_tuning: ($) => choice(kw("PRIVATE"), kw("PROTECTED"), kw("PUBLIC")),
+    serialization_tuning: ($) =>
+      choice(kw("SERIALIZABLE"), kw("NON-SERIALIZABLE")),
+
     variable_definition: ($) =>
       seq(
         choice(kw("DEFINE"), kw("DEF")),
+        repeat(choice($.scope_tuning, $.access_tuning, $.serialization_tuning)),
         choice(kw("VARIABLE"), kw("VAR")),
         field("name", $.identifier),
         choice(
@@ -682,7 +690,8 @@ module.exports = grammar({
       ),
 
     /// FOR statement
-    sort_order: ($) => choice(kw("DESCENDING")),
+    sort_order: ($) =>
+      choice(kw("ASCENDING"), kw("DESCENDING"), kw("DESC"), kw("ASC")),
     sort_column: ($) =>
       seq(
         field(
@@ -888,6 +897,58 @@ module.exports = grammar({
       seq(
         choice("ROUTINE-LEVEL", "BLOCK-LEVEL"),
         $.on_error_phrase,
+        $._terminator
+      ),
+
+    temp_table_tuning: ($) =>
+      choice(
+        kw("NO-UNDO"),
+        kw("REFERENCE-ONLY"),
+        seq("LIKE", choice($.identifier, $.qualified_name))
+      ),
+    field_option: ($) =>
+      choice(
+        seq(kw("COLUMN-LABEL"), $._string_literal),
+        seq(kw("LABEL"), $._string_literal),
+        seq(kw("FORMAT"), $._string_literal),
+        seq(kw("DECIMALS"), $.number_literal),
+        seq(kw("EXTENT"), $.number_literal),
+        seq(kw("INITIAL"), $._expression)
+      ),
+    field_definition: ($) =>
+      seq(
+        kw("FIELD"),
+        $.identifier,
+        choice(
+          seq(kw("AS"), $.primitive_type),
+          seq(kw("LIKE"), field("like", choice($.identifier, $.qualified_name)))
+        ),
+        repeat($.field_option)
+      ),
+    index_tuning: ($) =>
+      choice(
+        seq(choice(kw("IS"), kw("AS")), kw("PRIMARY")),
+        seq(choice(kw("IS"), kw("AS")), kw("UNIQUE")),
+        seq(choice(kw("IS"), kw("AS")), kw("WORD-INDEX"))
+      ),
+    index_definition: ($) =>
+      prec.left(
+        seq(
+          kw("INDEX"),
+          $.identifier,
+          repeat($.index_tuning),
+          repeat($.sort_column)
+        )
+      ),
+    temp_table_definition: ($) =>
+      seq(
+        kw("DEFINE"),
+        repeat(choice($.scope_tuning, $.access_tuning, $.serialization_tuning)),
+        kw("TEMP-TABLE"),
+        $.identifier,
+        repeat($.temp_table_tuning),
+        optional(seq(kw("LIKE"), choice($.identifier, $.qualified_name))),
+        repeat(choice($.field_definition, $.index_definition)),
         $._terminator
       )
   }

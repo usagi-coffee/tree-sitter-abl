@@ -1575,6 +1575,80 @@ END.
         (identifier)))))
 
 ================================================================================
+DEFINE TEMP-TABLE statement
+================================================================================
+
+DEFINE NEW GLOBAL PRIVATE SERIALIZABLE TEMP-TABLE temp-item NO-UNDO REFERENCE-ONLY
+  FIELD cat-page  LIKE Item.CatPage
+  FIELD inventory LIKE Item.Price LABEL "Inventory Value"
+  INDEX cat-page  IS PRIMARY cat-page ASCENDING
+  INDEX inventory-value inventory DESCENDING.
+
+DEFINE TEMP-TABLE foo
+  FIELD a AS CHARACTER
+  FIELD b AS CHARACTER
+  FIELD c AS CHARACTER
+  INDEX x a DESC b DESC c DESC
+.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (temp_table_definition
+    (scope_tuning)
+    (scope_tuning)
+    (access_tuning)
+    (serialization_tuning)
+    (identifier)
+    (temp_table_tuning)
+    (temp_table_tuning)
+    (field_definition
+      (identifier)
+      (qualified_name
+        (identifier)
+        (identifier)))
+    (field_definition
+      (identifier)
+      (qualified_name
+        (identifier)
+        (identifier))
+      (field_option
+        (double_quoted_string)))
+    (index_definition
+      (identifier)
+      (index_tuning)
+      (sort_column
+        (identifier)
+        (sort_order)))
+    (index_definition
+      (identifier)
+      (sort_column
+        (identifier)
+        (sort_order))))
+  (temp_table_definition
+    (identifier)
+    (field_definition
+      (identifier)
+      (primitive_type))
+    (field_definition
+      (identifier)
+      (primitive_type))
+    (field_definition
+      (identifier)
+      (primitive_type))
+    (index_definition
+      (identifier)
+      (sort_column
+        (identifier)
+        (sort_order))
+      (sort_column
+        (identifier)
+        (sort_order))
+      (sort_column
+        (identifier)
+        (sort_order)))))
+
+================================================================================
 QUIRKS
 ================================================================================
 

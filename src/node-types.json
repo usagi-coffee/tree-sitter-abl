@@ -218,6 +218,10 @@
         "named": true
       },
       {
+        "type": "temp_table_definition",
+        "named": true
+      },
+      {
         "type": "transaction_statement",
         "named": true
       },
@@ -263,6 +267,11 @@
   },
   {
     "type": "abstract",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "access_tuning",
     "named": true,
     "fields": {}
   },
@@ -991,6 +1000,59 @@
     }
   },
   {
+    "type": "field_definition",
+    "named": true,
+    "fields": {
+      "like": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "qualified_name",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "field_option",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "primitive_type",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "field_option",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "final",
     "named": true,
     "fields": {}
@@ -1489,6 +1551,34 @@
     }
   },
   {
+    "type": "index_definition",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "index_tuning",
+          "named": true
+        },
+        {
+          "type": "sort_column",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "index_tuning",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "input_close_statement",
     "named": true,
     "fields": {
@@ -1978,7 +2068,17 @@
     }
   },
   {
+    "type": "scope_tuning",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "serializable",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "serialization_tuning",
     "named": true,
     "fields": {}
   },
@@ -2066,6 +2166,68 @@
       "types": [
         {
           "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "temp_table_definition",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "access_tuning",
+          "named": true
+        },
+        {
+          "type": "field_definition",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "index_definition",
+          "named": true
+        },
+        {
+          "type": "qualified_name",
+          "named": true
+        },
+        {
+          "type": "scope_tuning",
+          "named": true
+        },
+        {
+          "type": "serialization_tuning",
+          "named": true
+        },
+        {
+          "type": "temp_table_tuning",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "temp_table_tuning",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "qualified_name",
           "named": true
         }
       ]
@@ -2249,6 +2411,18 @@
       "required": false,
       "types": [
         {
+          "type": "access_tuning",
+          "named": true
+        },
+        {
+          "type": "scope_tuning",
+          "named": true
+        },
+        {
+          "type": "serialization_tuning",
+          "named": true
+        },
+        {
           "type": "variable_tuning",
           "named": true
         }
@@ -2399,6 +2573,14 @@
     "named": false
   },
   {
+    "type": "ASC",
+    "named": false
+  },
+  {
+    "type": "ASCENDING",
+    "named": false
+  },
+  {
     "type": "ASSIGN",
     "named": false
   },
@@ -2463,6 +2645,10 @@
     "named": false
   },
   {
+    "type": "COLUMN-LABEL",
+    "named": false
+  },
+  {
     "type": "COM-HANDLE",
     "named": false
   },
@@ -2499,11 +2685,19 @@
     "named": false
   },
   {
+    "type": "DECIMALS",
+    "named": false
+  },
+  {
     "type": "DEF",
     "named": false
   },
   {
     "type": "DEFINE",
+    "named": false
+  },
+  {
+    "type": "DESC",
     "named": false
   },
   {
@@ -2539,7 +2733,15 @@
     "named": false
   },
   {
+    "type": "EXTENT",
+    "named": false
+  },
+  {
     "type": "FALSE",
+    "named": false
+  },
+  {
+    "type": "FIELD",
     "named": false
   },
   {
@@ -2563,6 +2765,10 @@
     "named": false
   },
   {
+    "type": "FORMAT",
+    "named": false
+  },
+  {
     "type": "FRAME",
     "named": false
   },
@@ -2579,6 +2785,10 @@
     "named": false
   },
   {
+    "type": "GLOBAL",
+    "named": false
+  },
+  {
     "type": "GT",
     "named": false
   },
@@ -2592,6 +2802,10 @@
   },
   {
     "type": "IMPLEMENTS",
+    "named": false
+  },
+  {
+    "type": "INDEX",
     "named": false
   },
   {
@@ -2620,6 +2834,14 @@
   },
   {
     "type": "INTEGER",
+    "named": false
+  },
+  {
+    "type": "IS",
+    "named": false
+  },
+  {
+    "type": "LABEL",
     "named": false
   },
   {
@@ -2707,6 +2929,10 @@
     "named": false
   },
   {
+    "type": "NON-SERIALIZABLE",
+    "named": false
+  },
+  {
     "type": "NOT",
     "named": false
   },
@@ -2735,11 +2961,23 @@
     "named": false
   },
   {
+    "type": "PRIMARY",
+    "named": false
+  },
+  {
     "type": "PRIVATE",
     "named": false
   },
   {
     "type": "PROCEDURE",
+    "named": false
+  },
+  {
+    "type": "PROTECTED",
+    "named": false
+  },
+  {
+    "type": "PUBLIC",
     "named": false
   },
   {
@@ -2752,6 +2990,10 @@
   },
   {
     "type": "RECID",
+    "named": false
+  },
+  {
+    "type": "REFERENCE-ONLY",
     "named": false
   },
   {
@@ -2784,6 +3026,14 @@
   },
   {
     "type": "SHARE-LOCK",
+    "named": false
+  },
+  {
+    "type": "SHARED",
+    "named": false
+  },
+  {
+    "type": "STATIC",
     "named": false
   },
   {
@@ -2851,6 +3101,10 @@
     "named": false
   },
   {
+    "type": "UNIQUE",
+    "named": false
+  },
+  {
     "type": "USE-INDEX",
     "named": false
   },
@@ -2880,6 +3134,10 @@
   },
   {
     "type": "WHILE",
+    "named": false
+  },
+  {
+    "type": "WORD-INDEX",
     "named": false
   },
   {
