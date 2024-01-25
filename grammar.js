@@ -186,6 +186,7 @@ module.exports = grammar({
         $.undo_statement,
         $.error_scope_statement,
         $.temp_table_definition,
+        $.on_statement,
         $.abl_statement,
         prec.left(PREC.EXTRA, $.label)
       ),
@@ -960,6 +961,28 @@ module.exports = grammar({
         optional(seq(kw("LIKE"), choice($.identifier, $.qualified_name))),
         repeat(choice($.field_definition, $.index_definition)),
         $._terminator
+      ),
+
+    widget_field: ($) =>
+      seq(
+        optional(kw("FIELD")),
+        $.identifier,
+        optional(seq(kw("IN"), kw("FRAME"), $.identifier))
+      ),
+
+    widget_phrase: ($) =>
+      seq(kw("FRAME"), $.identifier, repeat($.widget_field)),
+
+    on_statement: ($) =>
+      seq(
+        kw("ON"),
+        seq($._expression, repeat(seq(",", $._expression))),
+        optional(kw("ANYWHERE")),
+        kw("OF"),
+        seq($._expression, repeat(seq(",", $._expression))),
+        optional(kw("IN")),
+        repeat($.widget_phrase),
+        $.do_block
       )
   }
 });

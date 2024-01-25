@@ -190,6 +190,10 @@
         "named": true
       },
       {
+        "type": "on_statement",
+        "named": true
+      },
+      {
         "type": "output_close_statement",
         "named": true
       },
@@ -1744,6 +1748,11 @@
     }
   },
   {
+    "type": "number_literal",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "object_access",
     "named": true,
     "fields": {
@@ -1835,6 +1844,29 @@
       "types": [
         {
           "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "on_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "_expression",
+          "named": true
+        },
+        {
+          "type": "do_block",
+          "named": true
+        },
+        {
+          "type": "widget_phrase",
           "named": true
         }
       ]
@@ -2461,6 +2493,40 @@
     }
   },
   {
+    "type": "widget_field",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "widget_phrase",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "widget_field",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": " ",
     "named": false
   },
@@ -2566,6 +2632,10 @@
   },
   {
     "type": "AND",
+    "named": false
+  },
+  {
+    "type": "ANYWHERE",
     "named": false
   },
   {
@@ -2802,6 +2872,10 @@
   },
   {
     "type": "IMPLEMENTS",
+    "named": false
+  },
+  {
+    "type": "IN",
     "named": false
   },
   {
@@ -3154,10 +3228,6 @@
   },
   {
     "type": "null_expression",
-    "named": true
-  },
-  {
-    "type": "number_literal",
     "named": true
   },
   {
