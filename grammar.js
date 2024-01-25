@@ -243,7 +243,11 @@ module.exports = grammar({
         $.qualified_name
       ),
 
-    number_literal: ($) => /[0-9]+/,
+    _integer_literal: ($) => /[0-9]+/,
+    _decimal_literal: ($) =>
+      seq($._integer_literal, alias($._namedot, "."), $._integer_literal),
+
+    number_literal: ($) => choice($._integer_literal, $._decimal_literal),
     _string_literal: ($) =>
       seq(choice($.double_quoted_string, $.single_quoted_string)),
 

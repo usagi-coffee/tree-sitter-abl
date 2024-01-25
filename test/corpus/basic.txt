@@ -126,6 +126,7 @@ VARIABLE ASSIGNMENT statement
 
 DEFINE VARIABLE variable AS INTEGER.
 variable = 5.
+variable = 5.35.
 
 --------------------------------------------------------------------------------
 
@@ -133,6 +134,10 @@ variable = 5.
   (variable_definition
     (identifier)
     (primitive_type))
+  (variable_assignment
+    (assignment
+      (identifier)
+      (number_literal)))
   (variable_assignment
     (assignment
       (identifier)
