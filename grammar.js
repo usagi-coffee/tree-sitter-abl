@@ -32,7 +32,7 @@ module.exports = grammar({
 
     /// Main
     identifier: ($) => /[A-z_]{1}[A-z-_|0-9]*/i,
-    file_name: ($) => /[A-z-_|0-9]+\.[i]/i,
+    file_name: ($) => /[A-z-_|0-9|\/]+\.[i]/i,
 
     qualified_name: ($) =>
       seq($.identifier, repeat1(seq(alias($._namedot, "."), $.identifier))),
