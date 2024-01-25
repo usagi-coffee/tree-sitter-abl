@@ -258,7 +258,16 @@ module.exports = grammar({
       seq(prec.left($.identifier), "=", prec.right($._expression)),
 
     variable_tuning: ($) =>
-      seq(choice(kw("NO-UNDO"), kw("INITIAL")), optional($._expression)),
+      seq(
+        choice(
+          seq(kw("INITIAL"), $._expression),
+          seq(kw("FORMAT"), $._expression),
+          seq(kw("LABEL"), $._expression),
+          seq(kw("COLUMN-LABEL"), $._expression),
+          seq(kw("DECIMALS"), $._expression),
+          kw("NO-UNDO")
+        )
+      ),
 
     scope_tuning: ($) =>
       choice(kw("NEW"), kw("GLOBAL"), kw("SHARED"), kw("STATIC")),
@@ -273,13 +282,10 @@ module.exports = grammar({
         choice(kw("VARIABLE"), kw("VAR")),
         field("name", $.identifier),
         choice(
-          seq(
-            kw("AS"),
-            field("type", $.primitive_type),
-            repeat($.variable_tuning)
-          ),
+          seq(kw("AS"), field("type", $.primitive_type)),
           seq(kw("LIKE"), field("like", $.identifier))
         ),
+        repeat($.variable_tuning),
         $._terminator
       ),
 
