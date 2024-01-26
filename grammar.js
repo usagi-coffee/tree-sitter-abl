@@ -25,6 +25,14 @@ module.exports = grammar({
   extras: ($) => [$.comment, $.include, /[\s\f\uFEFF\u2060\u200B]|\\\r?\n/],
   word: ($) => $.identifier,
   supertypes: ($) => [$._expression, $._statement],
+  conflicts: ($) => [
+    [
+      $.variable_definition,
+      $.buffer_definition,
+      $.query_definition,
+      $.temp_table_definition
+    ]
+  ],
 
   rules: {
     source_code: ($) => repeat($._statement),
@@ -241,11 +249,33 @@ module.exports = grammar({
     buffer_definition: ($) =>
       seq(
         choice(kw("DEFINE"), kw("DEF")),
+        repeat(choice($.scope_tuning, $.access_tuning)),
         kw("BUFFER"),
         field("name", $.identifier),
         kw("FOR"),
         optional(kw("TEMP-TABLE")),
         field("table", choice($.identifier, $.qualified_name)),
+        $._terminator
+      ),
+
+    query_definition_tuning: ($) =>
+      choice(
+        seq(kw("CACHE"), $.number_literal),
+        "SCROLLING",
+        kw("RCODE-INFORMATION")
+      ),
+    query_fields: ($) => seq("(", repeat($.identifier), ")"),
+    query_definition: ($) =>
+      seq(
+        choice(kw("DEFINE"), kw("DEF")),
+        repeat(choice($.scope_tuning, $.access_tuning)),
+        kw("QUERY"),
+        field("name", $.identifier),
+        kw("FOR"),
+        $.identifier,
+        optional(seq(kw("FIELDS"), $.query_fields)),
+        optional(seq(kw("EXCEPT"), $.query_fields)),
+        repeat($.query_definition_tuning),
         $._terminator
       ),
 
@@ -958,6 +988,7 @@ module.exports = grammar({
         $.variable_definition,
         $.variable_assignment,
         $.buffer_definition,
+        $.query_definition,
         $.stream_definition,
         $.procedure_statement,
         $.procedure_parameter_definition,

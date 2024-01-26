@@ -210,6 +210,10 @@
         "named": true
       },
       {
+        "type": "query_definition",
+        "named": true
+      },
+      {
         "type": "repeat_statement",
         "named": true
       },
@@ -454,6 +458,20 @@
           }
         ]
       }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "access_tuning",
+          "named": true
+        },
+        {
+          "type": "scope_tuning",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -2028,6 +2046,78 @@
     }
   },
   {
+    "type": "query_definition",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "access_tuning",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "query_definition_tuning",
+          "named": true
+        },
+        {
+          "type": "query_fields",
+          "named": true
+        },
+        {
+          "type": "scope_tuning",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "query_definition_tuning",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "number_literal",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "query_fields",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "query_tuning",
     "named": true,
     "fields": {},
@@ -2703,6 +2793,10 @@
     "named": false
   },
   {
+    "type": "CACHE",
+    "named": false
+  },
+  {
     "type": "CAN-FIND",
     "named": false
   },
@@ -2815,6 +2909,10 @@
     "named": false
   },
   {
+    "type": "EXCEPT",
+    "named": false
+  },
+  {
     "type": "EXCLUSIVE-LOCK",
     "named": false
   },
@@ -2828,6 +2926,10 @@
   },
   {
     "type": "FIELD",
+    "named": false
+  },
+  {
+    "type": "FIELDS",
     "named": false
   },
   {
@@ -3071,11 +3173,19 @@
     "named": false
   },
   {
+    "type": "QUERY",
+    "named": false
+  },
+  {
     "type": "QUIT",
     "named": false
   },
   {
     "type": "RAW",
+    "named": false
+  },
+  {
+    "type": "RCODE-INFORMATION",
     "named": false
   },
   {
@@ -3108,6 +3218,10 @@
   },
   {
     "type": "ROWID",
+    "named": false
+  },
+  {
+    "type": "SCROLLING",
     "named": false
   },
   {

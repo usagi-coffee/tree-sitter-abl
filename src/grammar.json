@@ -1967,6 +1967,22 @@
           ]
         },
         {
+          "type": "REPEAT",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "scope_tuning"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "access_tuning"
+              }
+            ]
+          }
+        },
+        {
           "type": "ALIAS",
           "content": {
             "type": "TOKEN",
@@ -2045,6 +2061,255 @@
                 "name": "qualified_name"
               }
             ]
+          }
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_terminator"
+        }
+      ]
+    },
+    "query_definition_tuning": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PREC",
+                  "value": 1,
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "[cC][aA][cC][hH][eE]"
+                  }
+                }
+              },
+              "named": false,
+              "value": "CACHE"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "number_literal"
+            }
+          ]
+        },
+        {
+          "type": "STRING",
+          "value": "SCROLLING"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "PATTERN",
+                "value": "[rR][cC][oO][dD][eE][--][iI][nN][fF][oO][rR][mM][aA][tT][iI][oO][nN]"
+              }
+            }
+          },
+          "named": false,
+          "value": "RCODE-INFORMATION"
+        }
+      ]
+    },
+    "query_fields": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "("
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "identifier"
+          }
+        },
+        {
+          "type": "STRING",
+          "value": ")"
+        }
+      ]
+    },
+    "query_definition": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PREC",
+                  "value": 1,
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "[dD][eE][fF][iI][nN][eE]"
+                  }
+                }
+              },
+              "named": false,
+              "value": "DEFINE"
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PREC",
+                  "value": 1,
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "[dD][eE][fF]"
+                  }
+                }
+              },
+              "named": false,
+              "value": "DEF"
+            }
+          ]
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "scope_tuning"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "access_tuning"
+              }
+            ]
+          }
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "PATTERN",
+                "value": "[qQ][uU][eE][rR][yY]"
+              }
+            }
+          },
+          "named": false,
+          "value": "QUERY"
+        },
+        {
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "SYMBOL",
+            "name": "identifier"
+          }
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "PATTERN",
+                "value": "[fF][oO][rR]"
+              }
+            }
+          },
+          "named": false,
+          "value": "FOR"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "identifier"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "TOKEN",
+                    "content": {
+                      "type": "PREC",
+                      "value": 1,
+                      "content": {
+                        "type": "PATTERN",
+                        "value": "[fF][iI][eE][lL][dD][sS]"
+                      }
+                    }
+                  },
+                  "named": false,
+                  "value": "FIELDS"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "query_fields"
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "TOKEN",
+                    "content": {
+                      "type": "PREC",
+                      "value": 1,
+                      "content": {
+                        "type": "PATTERN",
+                        "value": "[eE][xX][cC][eE][pP][tT]"
+                      }
+                    }
+                  },
+                  "named": false,
+                  "value": "EXCEPT"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "query_fields"
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "query_definition_tuning"
           }
         },
         {
@@ -8629,6 +8894,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "query_definition"
+        },
+        {
+          "type": "SYMBOL",
           "name": "stream_definition"
         },
         {
@@ -8756,7 +9025,14 @@
       "value": "[\\s\\f\\uFEFF\\u2060\\u200B]|\\\\\\r?\\n"
     }
   ],
-  "conflicts": [],
+  "conflicts": [
+    [
+      "variable_definition",
+      "buffer_definition",
+      "query_definition",
+      "temp_table_definition"
+    ]
+  ],
   "precedences": [],
   "externals": [
     {

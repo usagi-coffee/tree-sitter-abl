@@ -321,6 +321,27 @@ DEFINE BUFFER x-table FOR table.
     (identifier)))
 
 ================================================================================
+QUERY DEFINITION statement
+================================================================================
+
+DEFINE QUERY q1 FOR tr_hist FIELDS (name balance) EXCEPT (something else lol) SCROLLING.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (query_definition
+    (identifier)
+    (identifier)
+    (query_fields
+      (identifier)
+      (identifier))
+    (query_fields
+      (identifier)
+      (identifier)
+      (identifier))
+    (query_definition_tuning)))
+
+================================================================================
 IF statement
 ================================================================================
 
