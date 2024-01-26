@@ -895,7 +895,7 @@ module.exports = grammar({
       ),
     temp_table_definition: ($) =>
       seq(
-        kw("DEFINE"),
+        choice(kw("DEFINE"), kw("DEF")),
         repeat(choice($.scope_tuning, $.access_tuning, $.serialization_tuning)),
         kw("TEMP-TABLE"),
         $.identifier,

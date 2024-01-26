@@ -8116,20 +8116,41 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "ALIAS",
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "PREC",
-              "value": 1,
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "ALIAS",
               "content": {
-                "type": "PATTERN",
-                "value": "[dD][eE][fF][iI][nN][eE]"
-              }
+                "type": "TOKEN",
+                "content": {
+                  "type": "PREC",
+                  "value": 1,
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "[dD][eE][fF][iI][nN][eE]"
+                  }
+                }
+              },
+              "named": false,
+              "value": "DEFINE"
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PREC",
+                  "value": 1,
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "[dD][eE][fF]"
+                  }
+                }
+              },
+              "named": false,
+              "value": "DEF"
             }
-          },
-          "named": false,
-          "value": "DEFINE"
+          ]
         },
         {
           "type": "REPEAT",
