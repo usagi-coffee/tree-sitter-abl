@@ -2531,7 +2531,23 @@
     "named": false
   },
   {
+    "type": " AND\n",
+    "named": false
+  },
+  {
+    "type": " AND\r\n",
+    "named": false
+  },
+  {
     "type": " AND ",
+    "named": false
+  },
+  {
+    "type": " OR\n",
+    "named": false
+  },
+  {
+    "type": " OR\r\n",
     "named": false
   },
   {

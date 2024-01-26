@@ -30,10 +30,11 @@ module.exports = grammar({
     source_code: ($) => repeat($._statement),
     body: ($) => repeat1($._statement),
 
-    /// Main
-    identifier: ($) => /[A-z_]{1}[A-z-_|0-9]*/i,
     file_name: ($) => /[A-z-_|0-9|\/]+\.[i]/i,
+    comment: ($) => seq("/*", /[^*]*\*+([^/*][^*]*\*+)*/, "/"),
+    constant: ($) => seq("{", "&", $.identifier, "}"),
 
+    identifier: ($) => /[A-z_]{1}[A-z-_|0-9]*/i,
     qualified_name: ($) =>
       seq($.identifier, repeat1(seq(alias($._namedot, "."), $.identifier))),
 
@@ -43,31 +44,19 @@ module.exports = grammar({
     null_expression: ($) => /\?/,
     boolean_literal: ($) =>
       choice(kw("TRUE"), kw("FALSE"), kw("YES"), kw("NO")),
+    _integer_literal: ($) => /[0-9]+/,
+    _decimal_literal: ($) =>
+      seq($._integer_literal, alias($._namedot, "."), $._integer_literal),
 
-    _expression: ($) =>
-      choice(
-        $.parenthesized_expression,
-        $.unary_expression,
-        $.boolean_literal,
-        $._string_literal,
-        $.number_literal,
-        $.null_expression,
-        $._binary_expression,
-        $.qualified_name,
-        $.object_access,
-        $.function_call,
-        $.ternary_expression,
-        $.available_expression,
-        $.accumulate_expression,
-        $.ambiguous_expression,
-        $.current_changed_expression,
-        $.locked_expression,
-        $.input_expression,
-        $.can_find_expression,
-        $.new_expression,
-        $.identifier,
-        $.constant
-      ),
+    number_literal: ($) => choice($._integer_literal, $._decimal_literal),
+    _string_literal: ($) =>
+      seq(choice($.double_quoted_string, $.single_quoted_string)),
+
+    double_quoted_string: ($) =>
+      seq('"', repeat(choice(/[^"\\]+/, /\\./)), '"'),
+
+    single_quoted_string: ($) =>
+      seq("'", repeat(choice(/[^'\\]+/, /\\./)), "'"),
 
     parenthesized_expression: ($) => seq("(", $._expression, ")"),
 
@@ -163,40 +152,6 @@ module.exports = grammar({
         $.logical_expression
       ),
 
-    _statement: ($) =>
-      choice(
-        $.variable_definition,
-        $.variable_assignment,
-        $.buffer_definition,
-        $.stream_definition,
-        $.procedure_statement,
-        $.procedure_parameter_definition,
-        $.function_statement,
-        $.function_call_statement,
-        $.return_statement,
-        $.class_statement,
-        $.if_statement,
-        $._loop_statement,
-        $.for_statement,
-        $.find_statement,
-        $.transaction_statement,
-        $._stream_statement,
-        $.case_statement,
-        $.do_block,
-        $.input_close_statement,
-        $.output_close_statement,
-        $.assign_statement,
-        $.catch_statement,
-        $.finally_statement,
-        $.accumulate_statement,
-        $.undo_statement,
-        $.error_scope_statement,
-        $.temp_table_definition,
-        $.on_statement,
-        $.abl_statement,
-        prec.left(PREC.EXTRA, $.label)
-      ),
-
     _terminated_statement: ($) =>
       choice(
         $.variable_assignment,
@@ -206,9 +161,6 @@ module.exports = grammar({
         $.repeat_statement,
         $.abl_statement
       ),
-
-    /// Comments
-    comment: ($) => seq("/*", /[^*]*\*+([^/*][^*]*\*+)*/, "/"),
 
     /// Includes
     include_argument: ($) =>
@@ -224,8 +176,6 @@ module.exports = grammar({
       ),
     include: ($) =>
       seq("{", $.file_name, optional(repeat($.include_argument)), "}"),
-
-    constant: ($) => seq("{", "&", $.identifier, "}"),
 
     /// Primitives
     primitive_type: ($) =>
@@ -249,20 +199,6 @@ module.exports = grammar({
         kw("COM-HANDLE"),
         $.qualified_name
       ),
-
-    _integer_literal: ($) => /[0-9]+/,
-    _decimal_literal: ($) =>
-      seq($._integer_literal, alias($._namedot, "."), $._integer_literal),
-
-    number_literal: ($) => choice($._integer_literal, $._decimal_literal),
-    _string_literal: ($) =>
-      seq(choice($.double_quoted_string, $.single_quoted_string)),
-
-    double_quoted_string: ($) =>
-      seq('"', repeat(choice(/[^"\\]+/, /\\./)), '"'),
-
-    single_quoted_string: ($) =>
-      seq("'", repeat(choice(/[^'\\]+/, /\\./)), "'"),
 
     /// Variables
     assignment: ($) =>
@@ -989,6 +925,66 @@ module.exports = grammar({
         optional(kw("IN")),
         repeat($.widget_phrase),
         $.do_block
+      ),
+
+    // Supertypes
+    _expression: ($) =>
+      choice(
+        $.parenthesized_expression,
+        $.unary_expression,
+        $.boolean_literal,
+        $._string_literal,
+        $.number_literal,
+        $.null_expression,
+        $._binary_expression,
+        $.qualified_name,
+        $.object_access,
+        $.function_call,
+        $.ternary_expression,
+        $.available_expression,
+        $.accumulate_expression,
+        $.ambiguous_expression,
+        $.current_changed_expression,
+        $.locked_expression,
+        $.input_expression,
+        $.can_find_expression,
+        $.new_expression,
+        $.identifier,
+        $.constant
+      ),
+
+    _statement: ($) =>
+      choice(
+        $.variable_definition,
+        $.variable_assignment,
+        $.buffer_definition,
+        $.stream_definition,
+        $.procedure_statement,
+        $.procedure_parameter_definition,
+        $.function_statement,
+        $.function_call_statement,
+        $.return_statement,
+        $.class_statement,
+        $.if_statement,
+        $._loop_statement,
+        $.for_statement,
+        $.find_statement,
+        $.transaction_statement,
+        $._stream_statement,
+        $.case_statement,
+        $.do_block,
+        $.input_close_statement,
+        $.output_close_statement,
+        $.assign_statement,
+        $.catch_statement,
+        $.finally_statement,
+        $.accumulate_statement,
+        $.undo_statement,
+        $.error_scope_statement,
+        $.temp_table_definition,
+        $.on_statement,
+        $.abl_statement,
+        prec.left(PREC.EXTRA, $.label)
       )
   }
 });
