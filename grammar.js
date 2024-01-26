@@ -40,7 +40,8 @@ module.exports = grammar({
 
     file_name: ($) => /[A-z-_|0-9|\/]+\.[i]/i,
     comment: ($) => seq("/*", /[^*]*\*+([^/*][^*]*\*+)*/, "/"),
-    constant: ($) => seq("{", "&", $.identifier, "}"),
+    constant: ($) =>
+      seq("{", optional("&"), choice($.identifier, $._integer_literal), "}"),
 
     identifier: ($) => /[A-z_]{1}[A-z-_|0-9]*/i,
     qualified_name: ($) =>
@@ -180,7 +181,8 @@ module.exports = grammar({
           field("value", $._expression)
         ),
         field("name", $.identifier),
-        field("value", $.double_quoted_string)
+        field("value", $.double_quoted_string),
+        $.constant
       ),
     include: ($) =>
       seq("{", $.file_name, optional(repeat($.include_argument)), "}"),

@@ -45,12 +45,29 @@
           "value": "{"
         },
         {
-          "type": "STRING",
-          "value": "&"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "&"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         },
         {
-          "type": "SYMBOL",
-          "name": "identifier"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "identifier"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_integer_literal"
+            }
+          ]
         },
         {
           "type": "STRING",
@@ -1081,6 +1098,10 @@
             "type": "SYMBOL",
             "name": "double_quoted_string"
           }
+        },
+        {
+          "type": "SYMBOL",
+          "name": "constant"
         }
       ]
     },
