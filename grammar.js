@@ -39,7 +39,8 @@ module.exports = grammar({
     body: ($) => repeat1($._statement),
 
     file_name: ($) => /[A-z-_|0-9|\/]+\.[i]/i,
-    comment: ($) => seq("/*", /[^*]*\*+([^/*][^*]*\*+)*/, "/"),
+    comment: ($) =>
+      choice(seq("//", /.*/), seq("/*", /[^*]*\*+([^/*][^*]*\*+)*/, "/")),
     constant: ($) =>
       seq("{", optional("&"), choice($.identifier, $._integer_literal), "}"),
 
