@@ -71,7 +71,13 @@ module.exports = grammar({
 
     parenthesized_expression: ($) => seq("(", $._expression, ")"),
 
-    _logical_operator: ($) => prec.left(choice(kw(" AND "), kw(" OR "))),
+    _logical_operator: ($) =>
+      prec.left(
+        choice(
+          choice(kw(" AND "), kw(" AND\n"), kw(" AND\r\n")),
+          choice(kw(" OR "), kw(" OR\n"), kw(" OR\r\n"))
+        )
+      ),
     logical_expression: ($) =>
       prec.right(
         PREC.LOGICAL,
