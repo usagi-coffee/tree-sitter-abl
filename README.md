@@ -2,9 +2,9 @@
 
 OpenEdge Advanced Business Language (ABL) grammar for tree-sitter.
 
-Check out `test/corpus` directory to see the syntax tree output for specific grammar and examples.
+To see syntax tree output see `test/corpus`.
 
-There is much more grammar that needs to be listed, implemented and added to the tests. Feel free to open issue/send pull request for the grammar that you need!
+Check out [tree-sitter-df](https://github.com/usagi-coffee/tree-sitter-df) for progress data definitions parser.
 
 ## Usage
 
