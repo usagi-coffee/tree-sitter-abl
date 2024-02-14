@@ -348,8 +348,7 @@ module.exports = grammar({
     /// Loop statements
     label: ($) => seq($.identifier, ":"),
 
-    _loop_statement: ($) =>
-      choice($.repeat_statement, $.do_while_statement, $.do_statement),
+    _loop_statement: ($) => choice($.repeat_statement, $.do_while_statement),
 
     _while_condition: ($) =>
       seq(kw("WHILE"), field("condition", $._expression)),
@@ -372,18 +371,6 @@ module.exports = grammar({
         optional($.label),
         kw("DO"),
         $._while_condition,
-        ":",
-        optional($.body),
-        $._block_terminator
-      ),
-
-    do_statement: ($) =>
-      seq(
-        optional($.label),
-        kw("DO"),
-        $.assignment,
-        kw("TO"),
-        $._expression,
         ":",
         optional($.body),
         $._block_terminator
@@ -623,9 +610,26 @@ module.exports = grammar({
         )
       ),
 
+    stop_after_phrase: ($) => seq(kw("STOP-AFTER"), $._expression),
+
+    do_tuning: ($) => choice(kw("TRANSACTION")),
+    to_phrase: ($) =>
+      seq(
+        $.assignment,
+        kw("TO"),
+        choice(
+          $._expression,
+          seq($._expression, optional(seq("BY", $.number_literal)))
+        )
+      ),
+
     do_block: ($) =>
       seq(
+        optional($.label),
         kw("DO"),
+        optional($.to_phrase),
+        repeat($.do_tuning),
+        optional($.stop_after_phrase),
         optional(choice($.on_error_phrase, $.on_stop_phrase, $.on_quit_phrase)),
         ":",
         optional($.body),
@@ -946,7 +950,7 @@ module.exports = grammar({
       ),
 
     widget_phrase: ($) =>
-      seq(kw("FRAME"), $.identifier, repeat($.widget_field)),
+      prec.left(seq(kw("FRAME"), $.identifier, repeat($.widget_field))),
 
     on_statement: ($) =>
       seq(
@@ -1003,7 +1007,6 @@ module.exports = grammar({
         $._loop_statement,
         $.for_statement,
         $.find_statement,
-        $.transaction_statement,
         $._stream_statement,
         $.case_statement,
         $.do_block,
