@@ -31,7 +31,9 @@ module.exports = grammar({
       $.buffer_definition,
       $.query_definition,
       $.temp_table_definition
-    ]
+    ],
+    [$.property_definition, $.temp_table_definition],
+    [$.temp_table_definition, $.dataset_definition]
   ],
 
   rules: {
@@ -191,6 +193,7 @@ module.exports = grammar({
     /// Primitives
     primitive_type: ($) =>
       choice(
+        kw("VOID"),
         kw("LOGICAL"),
         kw("INTEGER"),
         kw("INT"),
@@ -410,9 +413,9 @@ module.exports = grammar({
     function_parameter: ($) =>
       seq(
         optional($.function_parameter_mode),
+        optional(kw("DATASET")),
         $.identifier,
-        kw("AS"),
-        $.primitive_type
+        choice(seq(kw("AS"), $.primitive_type), kw("BIND"))
       ),
 
     function_statement: ($) =>
@@ -432,7 +435,99 @@ module.exports = grammar({
     return_statement: ($) =>
       seq(kw("RETURN"), optional($._expression), $._terminator),
 
-    /// Classes
+    /// OOP
+    interface_body: ($) =>
+      repeat1(
+        choice(
+          $.property_definition,
+          $.temp_table_definition,
+          $.event_definition,
+          $.method_definition,
+          $.dataset_definition
+        )
+      ),
+    interface_statement: ($) =>
+      seq(
+        kw("INTERFACE"),
+        field(
+          "name",
+          choice($._string_literal, $.identifier, $.qualified_name)
+        ),
+        optional($.inherits),
+        ":",
+        choice(seq($.interface_body, kw("END")), kw("END")),
+        optional(kw("INTERFACE")),
+        $._terminator
+      ),
+
+    property_tuning: ($) => choice(kw("ABSTRACT"), kw("OVERRIDE")),
+    getter: ($) => seq(optional($.access_tuning), kw("GET"), $._terminator),
+    setter: ($) => seq(optional($.access_tuning), kw("SET"), $._terminator),
+    property_definition: ($) =>
+      seq(
+        kw("DEFINE"),
+        optional($.access_tuning),
+        repeat($.property_tuning),
+        optional($.serialization_tuning),
+        kw("PROPERTY"),
+        $.identifier,
+        choice(
+          seq(kw("AS"), $.primitive_type),
+          seq(kw("LIKE"), field("like", choice($.identifier, $.qualified_name)))
+        ),
+        optional(seq(kw("EXTENT"), $.number_literal)),
+        optional(kw("NO-UNDO")),
+        repeat(choice($.getter, $.setter))
+      ),
+
+    event_definition: ($) =>
+      seq(
+        kw("DEFINE"),
+        optional($.access_tuning),
+        repeat($.property_tuning),
+        kw("EVENT"),
+        $.identifier,
+        optional(kw("SIGNATURE")),
+        kw("VOID"),
+        seq("(", optional(_list($.function_parameter, ",")), ")"),
+        $._terminator
+      ),
+
+    method_definition: ($) =>
+      seq(
+        kw("METHOD"),
+        optional($.access_tuning),
+        field("return_type", $.primitive_type),
+        $.identifier,
+        seq("(", optional(_list($.function_parameter, ",")), ")"),
+        $._terminator
+      ),
+
+    data_relation: ($) =>
+      seq(
+        kw("DATA-RELATION"),
+        kw("FOR"),
+        _list(choice($.identifier, $.qualified_name), ","),
+        kw("RELATION-FIELDS"),
+        seq(
+          "(",
+          optional(_list(choice($.identifier, $.qualified_name), ",")),
+          ")"
+        )
+      ),
+    dataset_definition: ($) =>
+      seq(
+        kw("DEFINE"),
+        optional($.scope_tuning),
+        optional($.access_tuning),
+        kw("DATASET"),
+        $.identifier,
+        kw("FOR"),
+        _list(choice($.identifier, $.qualified_name), ","),
+        $.data_relation,
+        $._terminator
+      ),
+
     class_statement: ($) =>
       seq(
         kw("CLASS"),
@@ -442,13 +537,7 @@ module.exports = grammar({
         ),
         repeat(
           choice(
-            seq(
-              kw("INHERITS"),
-              field(
-                "inherits",
-                choice($._string_literal, $.identifier, $.qualified_name)
-              )
-            ),
+            $.inherits,
             $.implements,
             $.use_widget_pool,
             $.abstract,
@@ -461,6 +550,12 @@ module.exports = grammar({
         kw("END"),
         optional(kw("CLASS")),
         $._terminator
+      ),
+
+    inherits: ($) =>
+      seq(
+        kw("INHERITS"),
+        _list(choice($._string_literal, $.identifier, $.qualified_name), ",")
       ),
 
     implements: ($) =>
@@ -1002,7 +1097,6 @@ module.exports = grammar({
         $.function_statement,
         $.function_call_statement,
         $.return_statement,
-        $.class_statement,
         $.if_statement,
         $._loop_statement,
         $.for_statement,
@@ -1019,6 +1113,8 @@ module.exports = grammar({
         $.undo_statement,
         $.error_scope_statement,
         $.temp_table_definition,
+        $.class_statement,
+        $.interface_statement,
         $.on_statement,
         $.abl_statement,
         prec.left(PREC.EXTRA, $.label)

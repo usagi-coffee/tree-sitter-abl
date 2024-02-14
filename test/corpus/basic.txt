@@ -686,36 +686,39 @@ END.
 --------------------------------------------------------------------------------
 
 (source_code
-  (do_statement
-    (assignment
-      (identifier)
+  (do_block
+    (to_phrase
+      (assignment
+        (identifier)
+        (number_literal))
       (number_literal))
-    (number_literal)
     (body
       (variable_assignment
         (assignment
           (identifier)
           (number_literal)))))
-  (do_statement
-    (assignment
-      (identifier)
-      (number_literal))
-    (function_call
-      (identifier)
-      (function_call_argument
-        (double_quoted_string)))
+  (do_block
+    (to_phrase
+      (assignment
+        (identifier)
+        (number_literal))
+      (function_call
+        (identifier)
+        (function_call_argument
+          (double_quoted_string))))
     (body
       (variable_assignment
         (assignment
           (identifier)
           (number_literal)))))
-  (do_statement
+  (do_block
     (label
       (identifier))
-    (assignment
-      (identifier)
+    (to_phrase
+      (assignment
+        (identifier)
+        (number_literal))
       (number_literal))
-    (number_literal)
     (body
       (abl_statement
         (identifier)
@@ -813,7 +816,8 @@ END.
 --------------------------------------------------------------------------------
 
 (source_code
-  (transaction_statement
+  (do_block
+    (do_tuning)
     (body
       (abl_statement
         statement: (identifier)
@@ -1384,7 +1388,8 @@ END.
 --------------------------------------------------------------------------------
 
 (source_code
-  (transaction_statement
+  (do_block
+    (do_tuning)
     (body
       (catch_statement
         variable: (identifier)
@@ -1445,7 +1450,8 @@ instance = NEW z().
         type: (primitive_type))))
   (class_statement
     name: (identifier)
-    inherits: (identifier)
+    (inherits
+      (identifier))
     (final)
     (serializable)
     (body
@@ -1695,3 +1701,103 @@ DISPLAY Order.CustNum Order.OrderDate Andsomething AndBug.
       (identifier))
     (identifier)
     (identifier)))
+
+================================================================================
+INTERFACE statement
+================================================================================
+
+INTERFACE r-ICustObj:  
+
+  /* Property prototypes to return basic values for the Customer
+     identified with the highest balance in the database */
+  DEFINE PUBLIC PROPERTY HighCustBalance AS DECIMAL NO-UNDO
+    GET.
+    SET.
+  DEFINE PUBLIC PROPERTY HighCustNum AS INTEGER NO-UNDO
+    GET.
+    SET.
+    
+  /* Event prototype to notify about Customers with Invoices */
+  DEFINE PUBLIC EVENT CustHasInvoices 
+    SIGNATURE VOID ( piCustNum AS INTEGER ).
+
+  /* Temp-tables for the ProDataSet parameter */
+  DEFINE TEMP-TABLE ttCust NO-UNDO LIKE Customer.
+  DEFINE TEMP-TABLE ttInv  NO-UNDO LIKE Invoice.
+
+  /* ProDataSet parameter for passing a single Customer with the highest
+     balance along with its related Invoices */
+  DEFINE DATASET dsHighCustData FOR ttCust, ttInv
+    DATA-RELATION FOR ttCust, ttInv 
+      RELATION-FIELDS (ttCust.CustNum, ttInv.CustNum).
+
+  /* Method prototype to get the current high Customer balance data */
+  METHOD PUBLIC VOID GetHighCustomerData
+    ( OUTPUT DATASET dsHighCustData BIND ).
+
+  /* Method prototype to set (or reset) the current high Customer data */
+  METHOD PUBLIC VOID SetHighCustomerData ( ).
+END INTERFACE.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (interface_statement
+    (identifier)
+    (comment)
+    (interface_body
+      (property_definition
+        (access_tuning)
+        (identifier)
+        (primitive_type)
+        (getter)
+        (setter))
+      (property_definition
+        (access_tuning)
+        (identifier)
+        (primitive_type)
+        (getter)
+        (setter))
+      (comment)
+      (event_definition
+        (access_tuning)
+        (identifier)
+        (function_parameter
+          (identifier)
+          (primitive_type)))
+      (comment)
+      (temp_table_definition
+        (identifier)
+        (temp_table_tuning)
+        (identifier))
+      (temp_table_definition
+        (identifier)
+        (temp_table_tuning)
+        (identifier))
+      (comment)
+      (dataset_definition
+        (identifier)
+        (identifier)
+        (identifier)
+        (data_relation
+          (identifier)
+          (identifier)
+          (qualified_name
+            (identifier)
+            (identifier))
+          (qualified_name
+            (identifier)
+            (identifier))))
+      (comment)
+      (method_definition
+        (access_tuning)
+        (primitive_type)
+        (identifier)
+        (function_parameter
+          (function_parameter_mode)
+          (identifier)))
+      (comment)
+      (method_definition
+        (access_tuning)
+        (primitive_type)
+        (identifier)))))
