@@ -695,6 +695,57 @@
     }
   },
   {
+    "type": "class_body",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "buffer_definition",
+          "named": true
+        },
+        {
+          "type": "constructor_definition",
+          "named": true
+        },
+        {
+          "type": "data_source_definition",
+          "named": true
+        },
+        {
+          "type": "dataset_definition",
+          "named": true
+        },
+        {
+          "type": "event_definition",
+          "named": true
+        },
+        {
+          "type": "method_definition",
+          "named": true
+        },
+        {
+          "type": "property_definition",
+          "named": true
+        },
+        {
+          "type": "query_definition",
+          "named": true
+        },
+        {
+          "type": "temp_table_definition",
+          "named": true
+        },
+        {
+          "type": "variable_definition",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "class_statement",
     "named": true,
     "fields": {
@@ -730,7 +781,7 @@
           "named": true
         },
         {
-          "type": "body",
+          "type": "class_body",
           "named": true
         },
         {
@@ -792,6 +843,33 @@
     }
   },
   {
+    "type": "constructor_definition",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "access_tuning",
+          "named": true
+        },
+        {
+          "type": "body",
+          "named": true
+        },
+        {
+          "type": "function_parameter",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "current_changed_expression",
     "named": true,
     "fields": {},
@@ -820,6 +898,33 @@
         },
         {
           "type": "qualified_name",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "data_source_definition",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "access_tuning",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "qualified_name",
+          "named": true
+        },
+        {
+          "type": "scope_tuning",
           "named": true
         }
       ]
@@ -1925,6 +2030,10 @@
           "named": true
         },
         {
+          "type": "body",
+          "named": true
+        },
+        {
           "type": "function_parameter",
           "named": true
         },
@@ -2274,15 +2383,15 @@
           "named": true
         },
         {
-          "type": "number_literal",
-          "named": true
-        },
-        {
           "type": "primitive_type",
           "named": true
         },
         {
           "type": "property_tuning",
+          "named": true
+        },
+        {
+          "type": "property_type",
           "named": true
         },
         {
@@ -2298,6 +2407,21 @@
   },
   {
     "type": "property_tuning",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "property_type",
     "named": true,
     "fields": {}
   },
@@ -3146,6 +3270,10 @@
     "named": false
   },
   {
+    "type": "CONSTRUCTOR",
+    "named": false
+  },
+  {
     "type": "CONTAINS",
     "named": false
   },
@@ -3163,6 +3291,10 @@
   },
   {
     "type": "DATA-RELATION",
+    "named": false
+  },
+  {
+    "type": "DATA-SOURCE",
     "named": false
   },
   {

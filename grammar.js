@@ -32,8 +32,23 @@ module.exports = grammar({
       $.query_definition,
       $.temp_table_definition
     ],
+    [$.variable_definition, $.property_definition, $.temp_table_definition],
     [$.property_definition, $.temp_table_definition],
-    [$.temp_table_definition, $.dataset_definition]
+    [$.temp_table_definition, $.dataset_definition],
+    [
+      $.variable_definition,
+      $.buffer_definition,
+      $.query_definition,
+      $.temp_table_definition,
+      $.data_source_definition
+    ],
+    [
+      $.variable_definition,
+      $.buffer_definition,
+      $.query_definition,
+      $.temp_table_definition,
+      $.dataset_definition
+    ]
   ],
 
   rules: {
@@ -460,14 +475,24 @@ module.exports = grammar({
         $._terminator
       ),
 
-    property_tuning: ($) => choice(kw("ABSTRACT"), kw("OVERRIDE")),
+    property_type: ($) => choice(kw("ABSTRACT"), kw("OVERRIDE")),
+    property_tuning: ($) =>
+      seq(
+        choice(
+          seq(kw("INITIAL"), $._expression),
+          seq(kw("DECIMALS"), $._expression),
+          seq(kw("EXTENT"), $.number_literal),
+          kw("NO-UNDO")
+        )
+      ),
+
     getter: ($) => seq(optional($.access_tuning), kw("GET"), $._terminator),
     setter: ($) => seq(optional($.access_tuning), kw("SET"), $._terminator),
     property_definition: ($) =>
       seq(
         kw("DEFINE"),
         optional($.access_tuning),
-        repeat($.property_tuning),
+        repeat($.property_type),
         optional($.serialization_tuning),
         kw("PROPERTY"),
         $.identifier,
@@ -475,8 +500,7 @@ module.exports = grammar({
           seq(kw("AS"), $.primitive_type),
           seq(kw("LIKE"), field("like", choice($.identifier, $.qualified_name)))
         ),
-        optional(seq(kw("EXTENT"), $.number_literal)),
-        optional(kw("NO-UNDO")),
+        repeat($.property_tuning),
         repeat(choice($.getter, $.setter))
       ),
 
@@ -500,6 +524,7 @@ module.exports = grammar({
         field("return_type", $.primitive_type),
         $.identifier,
         seq("(", optional(_list($.function_parameter, ",")), ")"),
+        optional(seq(":", optional($.body), kw("END"), optional("METHOD"))),
         $._terminator
       ),
 
@@ -528,6 +553,35 @@ module.exports = grammar({
         $._terminator
       ),
 
+    class_body: ($) =>
+      repeat1(
+        choice(
+          $.property_definition,
+          $.temp_table_definition,
+          $.event_definition,
+          $.method_definition,
+          $.dataset_definition,
+          $.constructor_definition,
+          $.variable_definition,
+          $.query_definition,
+          $.buffer_definition,
+          $.data_source_definition
+        )
+      ),
+
+    constructor_definition: ($) =>
+      seq(
+        kw("CONSTRUCTOR"),
+        optional($.access_tuning),
+        $.identifier,
+        seq("(", optional(_list($.function_parameter, ",")), ")"),
+        ":",
+        optional($.body),
+        kw("END"),
+        optional(kw("CONSTRUCTOR")),
+        $._terminator
+      ),
+
     class_statement: ($) =>
       seq(
         kw("CLASS"),
@@ -546,8 +600,7 @@ module.exports = grammar({
           )
         ),
         ":",
-        optional($.body),
-        kw("END"),
+        choice(seq($.class_body, kw("END")), kw("END")),
         optional(kw("CLASS")),
         $._terminator
       ),
@@ -1057,6 +1110,24 @@ module.exports = grammar({
         optional(kw("IN")),
         repeat($.widget_phrase),
         $.do_block
+      ),
+
+    data_source_definition: ($) =>
+      seq(
+        kw("DEFINE"),
+        optional($.access_tuning),
+        optional($.scope_tuning),
+        kw("DATA-SOURCE"),
+        $.identifier,
+        kw("FOR"),
+        optional(seq(kw("QUERY"), $.identifier)),
+        choice(
+          seq(
+            _list(choice($.identifier, $.qualified_name), ","),
+            $._terminator
+          ),
+          $._terminator
+        )
       ),
 
     // Supertypes
