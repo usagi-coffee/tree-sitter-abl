@@ -735,7 +735,10 @@ module.exports = grammar({
           seq(kw("LEAVE"), field("label", optional($.identifier))),
           seq(kw("NEXT"), field("label", optional($.identifier))),
           seq(kw("RETRY"), field("label", optional($.identifier))),
-          seq(kw("RETURN"), choice(seq(kw("ERROR")), kw("NO-APPLY"))),
+          seq(
+            kw("RETURN"),
+            choice(seq(kw("ERROR")), kw("NO-APPLY"), $._string_literal)
+          ),
           kw("THROW")
         )
       ),

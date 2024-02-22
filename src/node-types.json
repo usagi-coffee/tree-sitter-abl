@@ -142,10 +142,6 @@
         "named": true
       },
       {
-        "type": "do_while_statement",
-        "named": true
-      },
-      {
         "type": "error_scope_statement",
         "named": true
       },
@@ -207,6 +203,108 @@
       },
       {
         "type": "procedure_statement",
+        "named": true
+      },
+      {
+        "type": "query_definition",
+        "named": true
+      },
+      {
+        "type": "repeat_statement",
+        "named": true
+      },
+      {
+        "type": "return_statement",
+        "named": true
+      },
+      {
+        "type": "stream_definition",
+        "named": true
+      },
+      {
+        "type": "temp_table_definition",
+        "named": true
+      },
+      {
+        "type": "undo_statement",
+        "named": true
+      },
+      {
+        "type": "variable_assignment",
+        "named": true
+      },
+      {
+        "type": "variable_definition",
+        "named": true
+      }
+    ]
+  },
+  {
+    "type": "_terminated_statement",
+    "named": true,
+    "subtypes": [
+      {
+        "type": "abl_statement",
+        "named": true
+      },
+      {
+        "type": "accumulate_statement",
+        "named": true
+      },
+      {
+        "type": "assign_statement",
+        "named": true
+      },
+      {
+        "type": "buffer_definition",
+        "named": true
+      },
+      {
+        "type": "case_statement",
+        "named": true
+      },
+      {
+        "type": "class_statement",
+        "named": true
+      },
+      {
+        "type": "error_scope_statement",
+        "named": true
+      },
+      {
+        "type": "find_statement",
+        "named": true
+      },
+      {
+        "type": "for_statement",
+        "named": true
+      },
+      {
+        "type": "function_call_statement",
+        "named": true
+      },
+      {
+        "type": "input_close_statement",
+        "named": true
+      },
+      {
+        "type": "input_stream_statement",
+        "named": true
+      },
+      {
+        "type": "interface_statement",
+        "named": true
+      },
+      {
+        "type": "on_statement",
+        "named": true
+      },
+      {
+        "type": "output_close_statement",
+        "named": true
+      },
+      {
+        "type": "output_stream_statement",
         "named": true
       },
       {
@@ -550,31 +648,11 @@
         "required": true,
         "types": [
           {
-            "type": "abl_statement",
+            "type": "_terminated_statement",
             "named": true
           },
           {
             "type": "do_block",
-            "named": true
-          },
-          {
-            "type": "for_statement",
-            "named": true
-          },
-          {
-            "type": "function_call_statement",
-            "named": true
-          },
-          {
-            "type": "repeat_statement",
-            "named": true
-          },
-          {
-            "type": "return_statement",
-            "named": true
-          },
-          {
-            "type": "variable_assignment",
             "named": true
           }
         ]
@@ -609,31 +687,11 @@
         "required": true,
         "types": [
           {
-            "type": "abl_statement",
+            "type": "_terminated_statement",
             "named": true
           },
           {
             "type": "do_block",
-            "named": true
-          },
-          {
-            "type": "for_statement",
-            "named": true
-          },
-          {
-            "type": "function_call_statement",
-            "named": true
-          },
-          {
-            "type": "repeat_statement",
-            "named": true
-          },
-          {
-            "type": "return_statement",
-            "named": true
-          },
-          {
-            "type": "variable_assignment",
             "named": true
           }
         ]
@@ -1000,6 +1058,10 @@
         {
           "type": "to_phrase",
           "named": true
+        },
+        {
+          "type": "while_phrase",
+          "named": true
         }
       ]
     }
@@ -1008,36 +1070,6 @@
     "type": "do_tuning",
     "named": true,
     "fields": {}
-  },
-  {
-    "type": "do_while_statement",
-    "named": true,
-    "fields": {
-      "condition": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "_expression",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "body",
-          "named": true
-        },
-        {
-          "type": "label",
-          "named": true
-        }
-      ]
-    }
   },
   {
     "type": "double_quoted_string",
@@ -1064,31 +1096,11 @@
       "required": true,
       "types": [
         {
-          "type": "abl_statement",
+          "type": "_terminated_statement",
           "named": true
         },
         {
           "type": "do_block",
-          "named": true
-        },
-        {
-          "type": "for_statement",
-          "named": true
-        },
-        {
-          "type": "function_call_statement",
-          "named": true
-        },
-        {
-          "type": "repeat_statement",
-          "named": true
-        },
-        {
-          "type": "return_statement",
-          "named": true
-        },
-        {
-          "type": "variable_assignment",
           "named": true
         }
       ]
@@ -1103,31 +1115,11 @@
       "required": true,
       "types": [
         {
-          "type": "abl_statement",
+          "type": "_terminated_statement",
           "named": true
         },
         {
           "type": "do_block",
-          "named": true
-        },
-        {
-          "type": "for_statement",
-          "named": true
-        },
-        {
-          "type": "function_call_statement",
-          "named": true
-        },
-        {
-          "type": "repeat_statement",
-          "named": true
-        },
-        {
-          "type": "return_statement",
-          "named": true
-        },
-        {
-          "type": "variable_assignment",
           "named": true
         }
       ]
@@ -1479,6 +1471,10 @@
           {
             "type": "identifier",
             "named": true
+          },
+          {
+            "type": "object_access",
+            "named": true
           }
         ]
       }
@@ -1631,7 +1627,7 @@
       "required": true,
       "types": [
         {
-          "type": "abl_statement",
+          "type": "_terminated_statement",
           "named": true
         },
         {
@@ -1644,26 +1640,6 @@
         },
         {
           "type": "else_statement",
-          "named": true
-        },
-        {
-          "type": "for_statement",
-          "named": true
-        },
-        {
-          "type": "function_call_statement",
-          "named": true
-        },
-        {
-          "type": "repeat_statement",
-          "named": true
-        },
-        {
-          "type": "return_statement",
-          "named": true
-        },
-        {
-          "type": "variable_assignment",
           "named": true
         }
       ]
@@ -1886,6 +1862,31 @@
           }
         ]
       }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "input_stream_tuning",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "input_stream_tuning",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "_expression",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -2091,19 +2092,19 @@
     "type": "object_access",
     "named": true,
     "fields": {
-      "method": {
-        "multiple": true,
-        "required": false,
+      "object": {
+        "multiple": false,
+        "required": true,
         "types": [
           {
-            "type": "function_call",
+            "type": "identifier",
             "named": true
           }
         ]
       },
       "property": {
         "multiple": true,
-        "required": false,
+        "required": true,
         "types": [
           {
             "type": "identifier",
@@ -2111,16 +2112,6 @@
           }
         ]
       }
-    },
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "identifier",
-          "named": true
-        }
-      ]
     }
   },
   {
@@ -2156,6 +2147,20 @@
           }
         ]
       }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "double_quoted_string",
+          "named": true
+        },
+        {
+          "type": "single_quoted_string",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -2273,6 +2278,31 @@
           }
         ]
       }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "output_stream_tuning",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "output_stream_tuning",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "_expression",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -2530,18 +2560,7 @@
   {
     "type": "repeat_statement",
     "named": true,
-    "fields": {
-      "condition": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "_expression",
-            "named": true
-          }
-        ]
-      }
-    },
+    "fields": {},
     "children": {
       "multiple": true,
       "required": false,
@@ -2564,6 +2583,14 @@
         },
         {
           "type": "on_stop_phrase",
+          "named": true
+        },
+        {
+          "type": "to_phrase",
+          "named": true
+        },
+        {
+          "type": "while_phrase",
           "named": true
         }
       ]
@@ -3012,6 +3039,22 @@
     }
   },
   {
+    "type": "while_phrase",
+    "named": true,
+    "fields": {
+      "condition": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "_expression",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "widget_field",
     "named": true,
     "fields": {},
@@ -3178,6 +3221,10 @@
     "named": false
   },
   {
+    "type": "APPEND",
+    "named": false
+  },
+  {
     "type": "AS",
     "named": false
   },
@@ -3207,6 +3254,10 @@
   },
   {
     "type": "BEGINS",
+    "named": false
+  },
+  {
+    "type": "BINARY",
     "named": false
   },
   {
@@ -3262,6 +3313,10 @@
     "named": false
   },
   {
+    "type": "COLLATE",
+    "named": false
+  },
+  {
     "type": "COLUMN-LABEL",
     "named": false
   },
@@ -3275,6 +3330,10 @@
   },
   {
     "type": "CONTAINS",
+    "named": false
+  },
+  {
+    "type": "CONVERT",
     "named": false
   },
   {
@@ -3343,6 +3402,10 @@
   },
   {
     "type": "EACH",
+    "named": false
+  },
+  {
+    "type": "ECHO",
     "named": false
   },
   {
@@ -3498,7 +3561,15 @@
     "named": false
   },
   {
+    "type": "KEEP-MESSAGES",
+    "named": false
+  },
+  {
     "type": "LABEL",
+    "named": false
+  },
+  {
+    "type": "LANDSCAPE",
     "named": false
   },
   {
@@ -3518,6 +3589,10 @@
     "named": false
   },
   {
+    "type": "LOB-DIR",
+    "named": false
+  },
+  {
     "type": "LOCKED",
     "named": false
   },
@@ -3531,6 +3606,10 @@
   },
   {
     "type": "LT",
+    "named": false
+  },
+  {
+    "type": "MAP",
     "named": false
   },
   {
@@ -3574,11 +3653,23 @@
     "named": false
   },
   {
+    "type": "NO-CONVERT",
+    "named": false
+  },
+  {
+    "type": "NO-ECHO",
+    "named": false
+  },
+  {
     "type": "NO-ERROR",
     "named": false
   },
   {
     "type": "NO-LOCK",
+    "named": false
+  },
+  {
+    "type": "NO-MAP",
     "named": false
   },
   {
@@ -3595,6 +3686,10 @@
   },
   {
     "type": "NOT",
+    "named": false
+  },
+  {
+    "type": "NUM-COPIES",
     "named": false
   },
   {
@@ -3618,7 +3713,19 @@
     "named": false
   },
   {
+    "type": "PAGE-SIZE",
+    "named": false
+  },
+  {
+    "type": "PAGED",
+    "named": false
+  },
+  {
     "type": "PARAMETER",
+    "named": false
+  },
+  {
+    "type": "PORTRAIT",
     "named": false
   },
   {
@@ -3726,6 +3833,10 @@
     "named": false
   },
   {
+    "type": "SOURCE",
+    "named": false
+  },
+  {
     "type": "STATIC",
     "named": false
   },
@@ -3766,6 +3877,10 @@
     "named": false
   },
   {
+    "type": "TARGET",
+    "named": false
+  },
+  {
     "type": "TEMP-TABLE",
     "named": false
   },
@@ -3791,6 +3906,10 @@
   },
   {
     "type": "TRUE",
+    "named": false
+  },
+  {
+    "type": "UNBUFFERED",
     "named": false
   },
   {
