@@ -677,6 +677,21 @@ module.exports = grammar({
     _stream_statement: ($) =>
       choice($.input_stream_statement, $.output_stream_statement),
 
+    input_stream_tuning: ($) =>
+      choice(
+        seq(kw("LOB-DIR"), $._expression),
+        kw("BINARY"),
+        kw("ECHO"),
+        kw("NO-ECHO"),
+        choice(seq(kw("MAP"), $._expression), kw("NO-MAP")),
+        kw("UNBUFFERED"),
+        kw("NO-CONVERT"),
+        seq(
+          kw("CONVERT"),
+          optional(seq(kw("TARGET"), $._expression)),
+          optional(seq(kw("SOURCE"), $._expression))
+        )
+      ),
     input_stream_statement: ($) =>
       seq(
         kw("INPUT"),
@@ -688,6 +703,7 @@ module.exports = grammar({
         ),
         kw("FROM"),
         field("target", $._expression),
+        repeat($.input_stream_tuning),
         $._terminator
       ),
 
