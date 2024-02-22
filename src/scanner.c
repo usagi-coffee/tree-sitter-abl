@@ -3,6 +3,7 @@
 
 enum TokenType {
   NAMEDOT,
+  NAMECOLON,
 };
 
 void *tree_sitter_abl_external_scanner_create() {
@@ -28,7 +29,7 @@ bool tree_sitter_abl_external_scanner_scan(
   TSLexer *lexer,
   const bool *valid_symbols
 ) {
-  if (valid_symbols[NAMEDOT]) {
+  if (valid_symbols[NAMEDOT] || valid_symbols[NAMECOLON]) {
     while (!lexer->eof(lexer) && iswspace(lexer->lookahead)) {
       lexer->advance(lexer, true);
     }
@@ -39,6 +40,14 @@ bool tree_sitter_abl_external_scanner_scan(
         return true;
       }
     }
+    if (!lexer->eof(lexer) && lexer->lookahead == ':') {
+      lexer->advance(lexer, false);
+      if (!lexer->eof(lexer) && !iswspace(lexer->lookahead)) {
+        lexer->result_symbol = NAMECOLON;
+        return true;
+      }
+    }
   }
+
   return false;
 }

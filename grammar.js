@@ -21,7 +21,7 @@ function kw(keyword) {
 module.exports = grammar({
   name: "abl",
 
-  externals: ($) => [$._namedot],
+  externals: ($) => [$._namedot, $._namecolon],
   extras: ($) => [$.comment, $.include, /[\s\f\uFEFF\u2060\u200B]|\\\r?\n/],
   word: ($) => $.identifier,
   supertypes: ($) => [$._expression, $._statement],
@@ -321,7 +321,7 @@ module.exports = grammar({
       prec.right(
         1,
         seq(
-          field("function", $.identifier),
+          field("function", choice($.identifier, $.object_access)),
           seq("(", optional($._function_call_arguments), ")")
         )
       ),
@@ -636,15 +636,7 @@ module.exports = grammar({
     object_access: ($) =>
       seq(
         $.identifier,
-        repeat1(
-          seq(
-            /:/,
-            choice(
-              field("property", $.identifier),
-              field("method", $.function_call)
-            )
-          )
-        )
+        repeat1(seq(alias($._namecolon, ":"), field("property", $.identifier)))
       ),
 
     /// Streams
