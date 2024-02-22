@@ -24,7 +24,7 @@ module.exports = grammar({
   externals: ($) => [$._namedot, $._namecolon],
   extras: ($) => [$.comment, $.include, /[\s\f\uFEFF\u2060\u200B]|\\\r?\n/],
   word: ($) => $.identifier,
-  supertypes: ($) => [$._expression, $._statement],
+  supertypes: ($) => [$._expression, $._statement, $._terminated_statement],
   conflicts: ($) => [
     [
       $.variable_definition,
@@ -179,16 +179,6 @@ module.exports = grammar({
         $.logical_expression
       ),
 
-    _terminated_statement: ($) =>
-      choice(
-        $.variable_assignment,
-        $.function_call_statement,
-        $.return_statement,
-        $.for_statement,
-        $.repeat_statement,
-        $.abl_statement
-      ),
-
     /// Includes
     include_argument: ($) =>
       choice(
@@ -321,7 +311,10 @@ module.exports = grammar({
       prec.right(
         1,
         seq(
-          field("function", choice($.identifier, $.object_access)),
+          field(
+            "function",
+            choice($.identifier, prec.right(2, $.object_access))
+          ),
           seq("(", optional($._function_call_arguments), ")")
         )
       ),
@@ -332,12 +325,9 @@ module.exports = grammar({
         kw("IF"),
         field("condition", $._expression),
         kw("THEN"),
-        choice($._if_do_variant, $._if_then_variant),
+        choice($.do_block, $._terminated_statement),
         optional(repeat(choice($.else_if_statement, $.else_statement)))
       ),
-
-    _if_do_variant: ($) => seq($.do_block),
-    _if_then_variant: ($) => seq($._terminated_statement),
 
     else_if_statement: ($) =>
       seq(
@@ -345,11 +335,11 @@ module.exports = grammar({
         kw("IF"),
         field("condition", $._expression),
         kw("THEN"),
-        choice($._if_do_variant, $._if_then_variant)
+        choice($.do_block, $._terminated_statement)
       ),
 
     else_statement: ($) =>
-      seq(kw("ELSE"), choice($._if_do_variant, $._if_then_variant)),
+      seq(kw("ELSE"), choice($.do_block, $._terminated_statement)),
 
     ternary_expression: ($) =>
       prec.right(
@@ -366,29 +356,17 @@ module.exports = grammar({
     /// Loop statements
     label: ($) => seq($.identifier, ":"),
 
-    _loop_statement: ($) => choice($.repeat_statement, $.do_while_statement),
-
-    _while_condition: ($) =>
-      seq(kw("WHILE"), field("condition", $._expression)),
+    while_phrase: ($) => seq(kw("WHILE"), field("condition", $._expression)),
 
     repeat_statement: ($) =>
       seq(
         optional($.label),
         kw("REPEAT"),
-        optional($._while_condition),
+        optional($.to_phrase),
+        optional($.while_phrase),
         optional($.on_error_phrase),
         optional($.on_quit_phrase),
         optional($.on_stop_phrase),
-        ":",
-        optional($.body),
-        $._block_terminator
-      ),
-
-    do_while_statement: ($) =>
-      seq(
-        optional($.label),
-        kw("DO"),
-        $._while_condition,
         ":",
         optional($.body),
         $._block_terminator
@@ -773,10 +751,8 @@ module.exports = grammar({
       seq(
         $.assignment,
         kw("TO"),
-        choice(
-          $._expression,
-          seq($._expression, optional(seq("BY", $.number_literal)))
-        )
+        $._expression,
+        optional(seq("BY", $.number_literal))
       ),
 
     do_block: ($) =>
@@ -784,6 +760,7 @@ module.exports = grammar({
         optional($.label),
         kw("DO"),
         optional($.to_phrase),
+        optional($.while_phrase),
         repeat($.do_tuning),
         optional($.stop_after_phrase),
         optional(choice($.on_error_phrase, $.on_stop_phrase, $.on_quit_phrase)),
@@ -1177,8 +1154,8 @@ module.exports = grammar({
         $.function_call_statement,
         $.return_statement,
         $.if_statement,
-        $._loop_statement,
         $.for_statement,
+        $.repeat_statement,
         $.find_statement,
         $._stream_statement,
         $.case_statement,
@@ -1197,6 +1174,33 @@ module.exports = grammar({
         $.on_statement,
         $.abl_statement,
         prec.left(PREC.EXTRA, $.label)
+      ),
+
+    _terminated_statement: ($) =>
+      choice(
+        $.variable_definition,
+        $.variable_assignment,
+        $.buffer_definition,
+        $.query_definition,
+        $.stream_definition,
+        $.function_call_statement,
+        $.return_statement,
+        $.for_statement,
+        $.repeat_statement,
+        $.find_statement,
+        $._stream_statement,
+        $.case_statement,
+        $.input_close_statement,
+        $.output_close_statement,
+        $.assign_statement,
+        $.accumulate_statement,
+        $.undo_statement,
+        $.error_scope_statement,
+        $.temp_table_definition,
+        $.class_statement,
+        $.interface_statement,
+        $.on_statement,
+        $.abl_statement
       )
   }
 });

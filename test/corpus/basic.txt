@@ -216,9 +216,9 @@ y = NOT -x < -10 OR x = 10.
     (assignment
       (identifier)
       (unary_expression
-        (object_access
-          (identifier)
-          (function_call
+        (function_call
+          (object_access
+            (identifier)
             (identifier))))))
   (variable_assignment
     (assignment
@@ -637,29 +637,8 @@ END.
 
 (source_code
   (repeat_statement
-    (boolean_literal)
-    (body
-      (variable_assignment
-        (assignment
-          (identifier)
-          (number_literal))))))
-
-================================================================================
-DO WHILE statement
-================================================================================
-
-DO WHILE x < 10:
-  x = 5.
-END.
-
-
---------------------------------------------------------------------------------
-
-(source_code
-  (do_while_statement
-    condition: (comparison_expression
-      (identifier)
-      (number_literal))
+    (while_phrase
+      (boolean_literal))
     (body
       (variable_assignment
         (assignment
@@ -675,6 +654,10 @@ DO x = 5 TO 20:
 END.
 
 DO x = 5 TO INTEGER("20"):
+  x = 5.
+END.
+
+DO WHILE x < 10:
   x = 5.
 END.
 
@@ -706,6 +689,16 @@ END.
         (identifier)
         (function_call_argument
           (double_quoted_string))))
+    (body
+      (variable_assignment
+        (assignment
+          (identifier)
+          (number_literal)))))
+  (do_block
+    (while_phrase
+      (comparison_expression
+        (identifier)
+        (number_literal)))
     (body
       (variable_assignment
         (assignment
@@ -1083,16 +1076,16 @@ DISPLAY some_object:chained_property:chained_another:method().
   (abl_statement
     statement: (identifier)
     (object_access
-      (identifier)
+      object: (identifier)
       property: (identifier)))
   (abl_statement
     statement: (identifier)
-    (object_access
-      (identifier)
-      property: (identifier)
-      property: (identifier)
-      method: (function_call
-        function: (identifier)))))
+    (function_call
+      function: (object_access
+        object: (identifier)
+        property: (identifier)
+        property: (identifier)
+        property: (identifier)))))
 
 ================================================================================
 TERNARY EXPRESSION statement
@@ -1618,11 +1611,11 @@ END CLASS.
         return_type: (primitive_type)
         (identifier)
         (body
-          (label
-            (identifier))
           (function_call_statement
             (function_call
-              function: (identifier)))
+              function: (object_access
+                object: (identifier)
+                property: (identifier))))
           (for_statement
             table: (identifier)
             (comment)
@@ -1649,47 +1642,46 @@ END CLASS.
                           (identifier)
                           (identifier))
                         (identifier))
-                      (abl_statement
-                        statement: (identifier)
-                        (comparison_expression
+                      (assign_statement
+                        (assignment
                           (identifier)
                           (qualified_name
                             (identifier)
                             (identifier)))
-                        (comparison_expression
+                        (assignment
                           (identifier)
                           (qualified_name
                             (identifier)
                             (identifier)))))
-                    (label
-                      (identifier))
                     (function_call_statement
                       (function_call
-                        function: (identifier)
+                        function: (object_access
+                          object: (identifier)
+                          property: (identifier))
                         (function_call_argument
                           (qualified_name
                             (identifier)
                             (identifier))))))))))
           (abl_statement
             statement: (identifier)
-            (object_access
-              (identifier)
-              method: (function_call
-                function: (identifier)
-                (function_call_argument
+            (function_call
+              function: (object_access
+                object: (identifier)
+                property: (identifier))
+              (function_call_argument
+                (additive_expression
                   (additive_expression
-                    (additive_expression
-                      (double_quoted_string)
-                      (double_quoted_string))
-                    (function_call
-                      function: (identifier)
-                      (function_call_argument
-                        (identifier))))))))
-          (label
-            (identifier))
+                    (double_quoted_string)
+                    (double_quoted_string))
+                  (function_call
+                    function: (identifier)
+                    (function_call_argument
+                      (identifier)))))))
           (function_call_statement
             (function_call
-              function: (identifier))))))))
+              function: (object_access
+                object: (identifier)
+                property: (identifier)))))))))
 
 ================================================================================
 CASE statement
