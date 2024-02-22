@@ -635,7 +635,7 @@ module.exports = grammar({
     /// Objects
     object_access: ($) =>
       seq(
-        $.identifier,
+        field("object", $.identifier),
         repeat1(seq(alias($._namecolon, ":"), field("property", $.identifier)))
       ),
 
