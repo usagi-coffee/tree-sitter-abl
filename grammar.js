@@ -685,6 +685,30 @@ module.exports = grammar({
         $._terminator
       ),
 
+    output_stream_tuning: ($) =>
+      choice(
+        choice(
+          seq(kw("LOB-DIR"), $._expression),
+          seq(kw("NUM-COPIES"), $._expression),
+          kw("COLLATE"),
+          kw("BINARY"),
+          choice(kw("LANDSCAPE"), kw("PORTRAIT")),
+          kw("APPEND"),
+          kw("ECHO"),
+          kw("NO-ECHO"),
+          kw("KEEP-MESSAGES"),
+          choice(seq(kw("MAP"), $._expression), kw("NO-MAP")),
+          kw("PAGED"),
+          seq(kw("PAGE-SIZE"), $._expression),
+          kw("UNBUFFERED"),
+          kw("NO-CONVERT"),
+          seq(
+            kw("CONVERT"),
+            optional(seq(kw("TARGET"), $._expression)),
+            optional(seq(kw("SOURCE"), $._expression))
+          )
+        )
+      ),
     output_stream_statement: ($) =>
       seq(
         kw("OUTPUT"),
@@ -696,6 +720,7 @@ module.exports = grammar({
         ),
         kw("TO"),
         field("target", $._expression),
+        repeat($.output_stream_tuning),
         $._terminator
       ),
 
