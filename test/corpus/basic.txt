@@ -85,6 +85,8 @@ DEFINE VARIABLE clone LIKE short_variable.
 
 DEFINE VARIABLE ojb AS Progress.Json.ObjectModel.JsonObject NO-UNDO.
 
+DEFINE VARIABLE cls AS CLASS CustomClass.
+
 --------------------------------------------------------------------------------
 
 (source_code
@@ -120,7 +122,11 @@ DEFINE VARIABLE ojb AS Progress.Json.ObjectModel.JsonObject NO-UNDO.
         (identifier)
         (identifier)
         (identifier)))
-    (variable_tuning)))
+    (variable_tuning))
+  (variable_definition
+    (identifier)
+    (primitive_type
+      (identifier))))
 
 ================================================================================
 VARIABLE ASSIGNMENT statement
@@ -1430,6 +1436,8 @@ END CLASS.
 
 instance = NEW z().
 
+USING Acme.BusObjs.* FROM ASSEMBLY.
+
 CLASS r-CustObj FINAL:
 
   /* Public properties to return basic values for a customer with the
@@ -1491,6 +1499,7 @@ CLASS r-CustObj FINAL:
 
 END CLASS.
 
+
 --------------------------------------------------------------------------------
 
 (source_code
@@ -1517,6 +1526,10 @@ END CLASS.
       (identifier)
       (new_expression
         (identifier))))
+  (using_statement
+    (qualified_name
+      (identifier)
+      (identifier)))
   (class_statement
     name: (identifier)
     (final)

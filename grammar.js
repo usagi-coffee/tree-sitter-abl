@@ -63,7 +63,10 @@ module.exports = grammar({
 
     identifier: ($) => /[A-z_]{1}[A-z-_|0-9]*/i,
     qualified_name: ($) =>
-      seq($.identifier, repeat1(seq(alias($._namedot, "."), $.identifier))),
+      seq(
+        $.identifier,
+        repeat1(seq(alias($._namedot, "."), choice($.identifier, "*")))
+      ),
 
     _terminator: ($) => /\s*\./i,
     _block_terminator: ($) => seq(kw("END"), "."),
@@ -216,6 +219,7 @@ module.exports = grammar({
         kw("ROWID"),
         kw("HANDLE"),
         kw("COM-HANDLE"),
+        seq(kw("CLASS"), choice($.identifier, $.qualified_name)),
         $.qualified_name
       ),
 
@@ -528,6 +532,14 @@ module.exports = grammar({
         kw("FOR"),
         _list(choice($.identifier, $.qualified_name), ","),
         $.data_relation,
+        $._terminator
+      ),
+
+    using_statement: ($) =>
+      seq(
+        kw("USING"),
+        choice($.identifier, $.qualified_name),
+        optional(seq(kw("FROM"), choice(kw("ASSEMBLY"), kw("PROPATH")))),
         $._terminator
       ),
 
@@ -1197,6 +1209,7 @@ module.exports = grammar({
         $.undo_statement,
         $.error_scope_statement,
         $.temp_table_definition,
+        $.using_statement,
         $.class_statement,
         $.interface_statement,
         $.on_statement,

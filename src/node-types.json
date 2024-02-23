@@ -230,6 +230,10 @@
         "named": true
       },
       {
+        "type": "using_statement",
+        "named": true
+      },
+      {
         "type": "variable_assignment",
         "named": true
       },
@@ -2329,6 +2333,10 @@
       "required": false,
       "types": [
         {
+          "type": "identifier",
+          "named": true
+        },
+        {
           "type": "qualified_name",
           "named": true
         }
@@ -2935,6 +2943,25 @@
     }
   },
   {
+    "type": "using_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "qualified_name",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "variable_assignment",
     "named": true,
     "fields": {},
@@ -3234,6 +3261,10 @@
   },
   {
     "type": "ASCENDING",
+    "named": false
+  },
+  {
+    "type": "ASSEMBLY",
     "named": false
   },
   {
@@ -3742,6 +3773,10 @@
   },
   {
     "type": "PROCEDURE",
+    "named": false
+  },
+  {
+    "type": "PROPATH",
     "named": false
   },
   {
