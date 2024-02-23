@@ -67,17 +67,17 @@ bool tree_sitter_abl_external_scanner_scan(
         }
       }
     }
-  }
 
-  if (!lexer->eof(lexer) && insensitive_equals(lexer->lookahead, 'A')) {
-    lexer->advance(lexer, false);
-    if (!lexer->eof(lexer) && insensitive_equals(lexer->lookahead, 'N')) {
+    if (!lexer->eof(lexer) && insensitive_equals(lexer->lookahead, 'A')) {
       lexer->advance(lexer, false);
-      if (!lexer->eof(lexer) && insensitive_equals(lexer->lookahead,'D')) {
+      if (!lexer->eof(lexer) && insensitive_equals(lexer->lookahead, 'N')) {
         lexer->advance(lexer, false);
-        if (!lexer->eof(lexer) && iswspace(lexer->lookahead)) {
-          lexer->result_symbol = AND_OPERATOR;
-          return true;
+        if (!lexer->eof(lexer) && insensitive_equals(lexer->lookahead,'D')) {
+          lexer->advance(lexer, false);
+          if (!lexer->eof(lexer) && iswspace(lexer->lookahead)) {
+            lexer->result_symbol = AND_OPERATOR;
+            return true;
+          }
         }
       }
     }
