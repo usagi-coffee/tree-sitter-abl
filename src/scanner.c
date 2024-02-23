@@ -36,7 +36,7 @@ bool tree_sitter_abl_external_scanner_scan(
   TSLexer *lexer,
   const bool *valid_symbols
 ) {
-  if (valid_symbols[NAMEDOT] || valid_symbols[NAMECOLON] || valid_symbols[AND_OPERATOR] || valid_symbols[OR_OPERATOR]) {
+  if (valid_symbols[NAMEDOT] || valid_symbols[NAMECOLON]) {
     while (!lexer->eof(lexer) && iswspace(lexer->lookahead)) {
       lexer->advance(lexer, true);
     }
@@ -48,13 +48,18 @@ bool tree_sitter_abl_external_scanner_scan(
         return true;
       }
     }
-
-    if (!lexer->eof(lexer) && lexer->lookahead == ':') {
+    else if (!lexer->eof(lexer) && lexer->lookahead == ':') {
       lexer->advance(lexer, false);
       if (!lexer->eof(lexer) && !iswspace(lexer->lookahead)) {
         lexer->result_symbol = NAMECOLON;
         return true;
       }
+    }
+  }
+
+  if (valid_symbols[OR_OPERATOR] || valid_symbols[AND_OPERATOR]) {
+    while (!lexer->eof(lexer) && iswspace(lexer->lookahead)) {
+      lexer->advance(lexer, true);
     }
 
     if (!lexer->eof(lexer) && insensitive_equals(lexer->lookahead, 'O')) {
@@ -67,8 +72,7 @@ bool tree_sitter_abl_external_scanner_scan(
         }
       }
     }
-
-    if (!lexer->eof(lexer) && insensitive_equals(lexer->lookahead, 'A')) {
+    else if (!lexer->eof(lexer) && insensitive_equals(lexer->lookahead, 'A')) {
       lexer->advance(lexer, false);
       if (!lexer->eof(lexer) && insensitive_equals(lexer->lookahead, 'N')) {
         lexer->advance(lexer, false);
