@@ -377,110 +377,22 @@
         "type": "CHOICE",
         "members": [
           {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "ALIAS",
-                "content": {
-                  "type": "TOKEN",
-                  "content": {
-                    "type": "PREC",
-                    "value": 1,
-                    "content": {
-                      "type": "PATTERN",
-                      "value": "[  ][aA][nN][dD][  ]"
-                    }
-                  }
-                },
-                "named": false,
-                "value": " AND "
-              },
-              {
-                "type": "ALIAS",
-                "content": {
-                  "type": "TOKEN",
-                  "content": {
-                    "type": "PREC",
-                    "value": 1,
-                    "content": {
-                      "type": "PATTERN",
-                      "value": "[  ][aA][nN][dD][\\n\\n]"
-                    }
-                  }
-                },
-                "named": false,
-                "value": " AND\n"
-              },
-              {
-                "type": "ALIAS",
-                "content": {
-                  "type": "TOKEN",
-                  "content": {
-                    "type": "PREC",
-                    "value": 1,
-                    "content": {
-                      "type": "PATTERN",
-                      "value": "[  ][aA][nN][dD][\\r\\r][\\n\\n]"
-                    }
-                  }
-                },
-                "named": false,
-                "value": " AND\r\n"
-              }
-            ]
+            "type": "ALIAS",
+            "content": {
+              "type": "SYMBOL",
+              "name": "_and_operator"
+            },
+            "named": false,
+            "value": "AND"
           },
           {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "ALIAS",
-                "content": {
-                  "type": "TOKEN",
-                  "content": {
-                    "type": "PREC",
-                    "value": 1,
-                    "content": {
-                      "type": "PATTERN",
-                      "value": "[  ][oO][rR][  ]"
-                    }
-                  }
-                },
-                "named": false,
-                "value": " OR "
-              },
-              {
-                "type": "ALIAS",
-                "content": {
-                  "type": "TOKEN",
-                  "content": {
-                    "type": "PREC",
-                    "value": 1,
-                    "content": {
-                      "type": "PATTERN",
-                      "value": "[  ][oO][rR][\\n\\n]"
-                    }
-                  }
-                },
-                "named": false,
-                "value": " OR\n"
-              },
-              {
-                "type": "ALIAS",
-                "content": {
-                  "type": "TOKEN",
-                  "content": {
-                    "type": "PREC",
-                    "value": 1,
-                    "content": {
-                      "type": "PATTERN",
-                      "value": "[  ][oO][rR][\\r\\r][\\n\\n]"
-                    }
-                  }
-                },
-                "named": false,
-                "value": " OR\r\n"
-              }
-            ]
+            "type": "ALIAS",
+            "content": {
+              "type": "SYMBOL",
+              "name": "_or_operator"
+            },
+            "named": false,
+            "value": "OR"
           }
         ]
       }
@@ -11607,6 +11519,14 @@
     {
       "type": "SYMBOL",
       "name": "_namecolon"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_or_operator"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_and_operator"
     }
   ],
   "inline": [],

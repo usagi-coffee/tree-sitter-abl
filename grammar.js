@@ -21,7 +21,7 @@ function kw(keyword) {
 module.exports = grammar({
   name: "abl",
 
-  externals: ($) => [$._namedot, $._namecolon],
+  externals: ($) => [$._namedot, $._namecolon, $._or_operator, $._and_operator],
   extras: ($) => [$.comment, $.include, /[\s\f\uFEFF\u2060\u200B]|\\\r?\n/],
   word: ($) => $.identifier,
   supertypes: ($) => [$._expression, $._statement, $._terminated_statement],
@@ -92,10 +92,7 @@ module.exports = grammar({
 
     _logical_operator: ($) =>
       prec.left(
-        choice(
-          choice(kw(" AND "), kw(" AND\n"), kw(" AND\r\n")),
-          choice(kw(" OR "), kw(" OR\n"), kw(" OR\r\n"))
-        )
+        choice(alias($._and_operator, "AND"), alias($._or_operator, "OR"))
       ),
     logical_expression: ($) =>
       prec.right(
