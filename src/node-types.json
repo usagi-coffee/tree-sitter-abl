@@ -2045,9 +2045,18 @@
         {
           "type": "identifier",
           "named": true
+        },
+        {
+          "type": "method_tuning",
+          "named": true
         }
       ]
     }
+  },
+  {
+    "type": "method_tuning",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "multiplicative_expression",

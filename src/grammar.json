@@ -4223,6 +4223,75 @@
         }
       ]
     },
+    "method_tuning": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "PATTERN",
+                "value": "[sS][tT][aA][tT][iI][cC]"
+              }
+            }
+          },
+          "named": false,
+          "value": "STATIC"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "PATTERN",
+                "value": "[aA][bB][sS][tT][rR][aA][cC][tT]"
+              }
+            }
+          },
+          "named": false,
+          "value": "ABSTRACT"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "PATTERN",
+                "value": "[oO][vV][eE][rR][rR][iI][dD][eE]"
+              }
+            }
+          },
+          "named": false,
+          "value": "OVERRIDE"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "PATTERN",
+                "value": "[fF][iI][nN][aA][lL]"
+              }
+            }
+          },
+          "named": false,
+          "value": "FINAL"
+        }
+      ]
+    },
     "method_definition": {
       "type": "SEQ",
       "members": [
@@ -4253,6 +4322,13 @@
               "type": "BLANK"
             }
           ]
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "method_tuning"
+          }
         },
         {
           "type": "FIELD",
