@@ -470,7 +470,21 @@ module.exports = grammar({
       ),
 
     getter: ($) => seq(optional($.access_tuning), kw("GET"), $._terminator),
-    setter: ($) => seq(optional($.access_tuning), kw("SET"), $._terminator),
+    setter: ($) =>
+      seq(
+        optional($.access_tuning),
+        kw("SET"),
+        optional(
+          seq(
+            seq("(", optional(_list($.function_parameter, ",")), ")"),
+            ":",
+            optional($.body),
+            kw("END"),
+            kw("SET")
+          )
+        ),
+        $._terminator
+      ),
     property_definition: ($) =>
       seq(
         kw("DEFINE"),
