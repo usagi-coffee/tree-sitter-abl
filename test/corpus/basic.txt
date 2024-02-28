@@ -847,6 +847,7 @@ ASSIGN
   a = 1
   b = "ABC"
   c = f()
+  qualified.name = var + 1
 .
 
 --------------------------------------------------------------------------------
@@ -862,7 +863,14 @@ ASSIGN
     (assignment
       (identifier)
       (function_call
-        (identifier)))))
+        (identifier)))
+    (assignment
+      (qualified_name
+        (identifier)
+        (identifier))
+      (additive_expression
+        (identifier)
+        (number_literal)))))
 
 ================================================================================
 FOR EACH statement

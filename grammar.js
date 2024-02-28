@@ -222,7 +222,11 @@ module.exports = grammar({
 
     /// Variables
     assignment: ($) =>
-      seq(prec.left($.identifier), "=", prec.right($._expression)),
+      seq(
+        prec.left(choice($.identifier, $.qualified_name)),
+        "=",
+        prec.right($._expression)
+      ),
 
     variable_tuning: ($) =>
       seq(
