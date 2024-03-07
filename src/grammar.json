@@ -1394,6 +1394,10 @@
               {
                 "type": "SYMBOL",
                 "name": "qualified_name"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "object_access"
               }
             ]
           }

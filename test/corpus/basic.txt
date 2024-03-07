@@ -135,6 +135,7 @@ VARIABLE ASSIGNMENT statement
 DEFINE VARIABLE variable AS INTEGER.
 variable = 5.
 variable = 5.35.
+SESSION:NUMERIC-FORMAT = "european".
 
 --------------------------------------------------------------------------------
 
@@ -149,7 +150,13 @@ variable = 5.35.
   (variable_assignment
     (assignment
       (identifier)
-      (number_literal))))
+      (number_literal)))
+  (variable_assignment
+    (assignment
+      (object_access
+        (identifier)
+        (identifier))
+      (double_quoted_string))))
 
 ================================================================================
 BINARY (simple) operators

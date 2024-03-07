@@ -223,7 +223,7 @@ module.exports = grammar({
     /// Variables
     assignment: ($) =>
       seq(
-        prec.left(choice($.identifier, $.qualified_name)),
+        prec.left(choice($.identifier, $.qualified_name, $.object_access)),
         "=",
         prec.right($._expression)
       ),
