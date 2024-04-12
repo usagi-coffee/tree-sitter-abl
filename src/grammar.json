@@ -2492,6 +2492,30 @@
                 "value": ")"
               }
             ]
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "ALIAS",
+                "content": {
+                  "type": "TOKEN",
+                  "content": {
+                    "type": "PREC",
+                    "value": 1,
+                    "content": {
+                      "type": "PATTERN",
+                      "value": "[nN][oO][--][eE][rR][rR][oO][rR]"
+                    }
+                  }
+                },
+                "named": false,
+                "value": "NO-ERROR"
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
           }
         ]
       }

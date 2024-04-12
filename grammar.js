@@ -320,7 +320,8 @@ module.exports = grammar({
             "function",
             choice($.identifier, prec.right(2, $.object_access))
           ),
-          seq("(", optional($._function_call_arguments), ")")
+          seq("(", optional($._function_call_arguments), ")"),
+          optional(kw("NO-ERROR"))
         )
       ),
 

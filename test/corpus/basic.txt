@@ -769,6 +769,7 @@ END.
 
 fn(INPUT somepar, OUTPUT otherpar).
 fn-no-mode(somerpar).
+fn-no-mode(somerpar) NO-ERROR.
 
 --------------------------------------------------------------------------------
 
