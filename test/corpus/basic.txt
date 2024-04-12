@@ -810,6 +810,11 @@ fn-no-mode(somerpar) NO-ERROR.
     (function_call
       function: (identifier)
       (function_call_argument
+        (identifier))))
+  (function_call_statement
+    (function_call
+      function: (identifier)
+      (function_call_argument
         (identifier)))))
 
 ================================================================================
