@@ -1023,6 +1023,13 @@
           "value": "{"
         },
         {
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "constant"
+          }
+        },
+        {
           "type": "SYMBOL",
           "name": "file_name"
         },

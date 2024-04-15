@@ -1685,6 +1685,10 @@
       "required": true,
       "types": [
         {
+          "type": "constant",
+          "named": true
+        },
+        {
           "type": "file_name",
           "named": true
         },

@@ -193,7 +193,13 @@ module.exports = grammar({
         $.constant
       ),
     include: ($) =>
-      seq("{", $.file_name, optional(repeat($.include_argument)), "}"),
+      seq(
+        "{",
+        repeat($.constant),
+        $.file_name,
+        optional(repeat($.include_argument)),
+        "}"
+      ),
 
     /// Primitives
     primitive_type: ($) =>
