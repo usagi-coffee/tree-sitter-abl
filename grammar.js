@@ -370,6 +370,8 @@ module.exports = grammar({
 
     while_phrase: ($) => seq(kw("WHILE"), field("condition", $._expression)),
 
+    repeat_tuning: ($) => choice(seq(kw("WITH"), kw("FRAME"), $.identifier)),
+
     repeat_statement: ($) =>
       seq(
         optional($.label),
@@ -379,6 +381,7 @@ module.exports = grammar({
         optional($.on_error_phrase),
         optional($.on_quit_phrase),
         optional($.on_stop_phrase),
+        repeat($.repeat_tuning),
         ":",
         optional($.body),
         $._block_terminator
