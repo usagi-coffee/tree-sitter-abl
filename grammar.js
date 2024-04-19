@@ -1148,6 +1148,16 @@ module.exports = grammar({
         )
       ),
 
+    prompt_for_statement: ($) =>
+      seq(
+        kw("PROMPT-FOR"),
+        choice($.identifier, $.qualified_name),
+        optional(kw("EDITING")),
+        ":",
+        optional($.body),
+        $._block_terminator
+      ),
+
     // Supertypes
     _expression: ($) =>
       choice(
@@ -1206,6 +1216,7 @@ module.exports = grammar({
         $.class_statement,
         $.interface_statement,
         $.on_statement,
+        $.prompt_for_statement,
         $.abl_statement,
         prec.left(PREC.EXTRA, $.label)
       ),

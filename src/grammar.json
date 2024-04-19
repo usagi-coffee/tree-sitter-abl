@@ -11368,6 +11368,84 @@
         }
       ]
     },
+    "prompt_for_statement": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "PATTERN",
+                "value": "[pP][rR][oO][mM][pP][tT][--][fF][oO][rR]"
+              }
+            }
+          },
+          "named": false,
+          "value": "PROMPT-FOR"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "identifier"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "qualified_name"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PREC",
+                  "value": 1,
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "[eE][dD][iI][tT][iI][nN][gG]"
+                  }
+                }
+              },
+              "named": false,
+              "value": "EDITING"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "STRING",
+          "value": ":"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "body"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_block_terminator"
+        }
+      ]
+    },
     "_expression": {
       "type": "CHOICE",
       "members": [
@@ -11579,6 +11657,10 @@
         {
           "type": "SYMBOL",
           "name": "on_statement"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "prompt_for_statement"
         },
         {
           "type": "SYMBOL",

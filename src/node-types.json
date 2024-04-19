@@ -206,6 +206,10 @@
         "named": true
       },
       {
+        "type": "prompt_for_statement",
+        "named": true
+      },
+      {
         "type": "query_definition",
         "named": true
       },
@@ -2399,6 +2403,25 @@
     }
   },
   {
+    "type": "prompt_for_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "body",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "property_definition",
     "named": true,
     "fields": {
@@ -3456,6 +3479,10 @@
     "named": false
   },
   {
+    "type": "EDITING",
+    "named": false
+  },
+  {
     "type": "ELSE",
     "named": false
   },
@@ -3793,6 +3820,10 @@
   },
   {
     "type": "PROCEDURE",
+    "named": false
+  },
+  {
+    "type": "PROMPT-FOR",
     "named": false
   },
   {
