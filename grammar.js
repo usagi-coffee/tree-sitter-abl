@@ -16,6 +16,7 @@ module.exports = grammar({
   word: ($) => $.identifier,
   supertypes: ($) => [$._expression, $._statement, $._terminated_statement],
   conflicts: ($) => [
+    [$.input_expression],
     [
       $.variable_definition,
       $.buffer_definition,
@@ -120,7 +121,7 @@ module.exports = grammar({
       seq(
         kw("INPUT"),
         optional(seq(kw("FRAME"), field("frame", $.identifier))),
-        field("field", choice($.identifier, $.qualified_name))
+        optional(field("field", choice($.identifier, $.qualified_name)))
       ),
 
     _additive_operator: ($) => choice("+", "-"),
