@@ -8,16 +8,6 @@ const PREC = {
   EXTRA: -1
 };
 
-const _list = (rule, separator) => seq(rule, repeat(seq(separator, rule)));
-
-function kw(keyword) {
-  if (keyword.toUpperCase() != keyword) {
-    throw new Error(`Expected upper case keyword got ${keyword}`);
-  }
-
-  return alias(reserved(createCaseInsensitiveRegex(keyword)), keyword);
-}
-
 module.exports = grammar({
   name: "abl",
 
@@ -201,7 +191,6 @@ module.exports = grammar({
         "}"
       ),
 
-    /// Primitives
     primitive_type: ($) =>
       choice(
         kw("VOID"),
@@ -226,7 +215,6 @@ module.exports = grammar({
         $.qualified_name
       ),
 
-    /// Variables
     assignment: ($) =>
       seq(
         prec.left(choice($.identifier, $.qualified_name, $.object_access)),
@@ -301,7 +289,6 @@ module.exports = grammar({
         $._terminator
       ),
 
-    /// Function
     function_call_statement: ($) => seq($.function_call, $._terminator),
     _function_call_arguments: ($) =>
       prec.right(
@@ -331,7 +318,6 @@ module.exports = grammar({
         )
       ),
 
-    /// IF statement
     if_statement: ($) =>
       seq(
         kw("IF"),
@@ -365,7 +351,6 @@ module.exports = grammar({
         )
       ),
 
-    /// Loop statements
     label: ($) => seq($.identifier, ":"),
 
     while_phrase: ($) => seq(kw("WHILE"), field("condition", $._expression)),
@@ -387,7 +372,6 @@ module.exports = grammar({
         $._block_terminator
       ),
 
-    /// Procedures
     _procedure_terminator: ($) => seq(kw("END"), kw("PROCEDURE"), "."),
     procedure_statement: ($) =>
       seq(
@@ -411,7 +395,6 @@ module.exports = grammar({
         $._terminator
       ),
 
-    /// Functions
     _function_terminator: ($) =>
       choice(
         $._block_terminator,
@@ -443,7 +426,6 @@ module.exports = grammar({
     return_statement: ($) =>
       seq(kw("RETURN"), optional($._expression), $._terminator),
 
-    /// OOP
     interface_body: ($) =>
       repeat1(
         choice(
@@ -650,14 +632,12 @@ module.exports = grammar({
         )
       ),
 
-    /// Objects
     object_access: ($) =>
       seq(
         field("object", $.identifier),
         repeat1(seq(alias($._namecolon, ":"), field("property", $.identifier)))
       ),
 
-    /// Streams
     stream_definition: ($) =>
       seq(
         choice(kw("DEFINE"), kw("DEF")),
@@ -864,7 +844,6 @@ module.exports = grammar({
         $._case_terminator
       ),
 
-    /// ABL queries
     where_clause: ($) => seq(kw("WHERE"), field("condition", $._expression)),
 
     // HACK: progress spaghetti allows to define tuning order before where clause
@@ -880,7 +859,6 @@ module.exports = grammar({
         seq(kw("USE-INDEX"), $.identifier)
       ),
 
-    /// FOR statement
     sort_order: ($) =>
       choice(kw("ASCENDING"), kw("DESCENDING"), kw("DESC"), kw("ASC")),
     sort_column: ($) =>
@@ -932,7 +910,6 @@ module.exports = grammar({
     _find_type: ($) =>
       choice(kw("FIRST"), kw("LAST"), kw("NEXT"), kw("PREV"), kw("CURRENT")),
 
-    // FIND statement
     find_statement: ($) =>
       seq(
         kw("FIND"),
@@ -980,7 +957,6 @@ module.exports = grammar({
         field("field", $.identifier)
       ),
 
-    /// ABL statements
     abl_statement: ($) =>
       seq(
         field("statement", $.identifier),
@@ -1022,7 +998,6 @@ module.exports = grammar({
         $._terminator
       ),
 
-    // Accumulate
     accumulate_aggregate: ($) =>
       choice(
         kw("AVERAGE"),
@@ -1052,7 +1027,6 @@ module.exports = grammar({
     accumulate_expression: ($) =>
       seq(kw("ACCUM"), $.accumulate_aggregate, prec.left($._expression)),
 
-    // Available
     available_expression: ($) =>
       seq(
         choice(kw("AVAIL"), kw("AVAILABLE")),
@@ -1263,6 +1237,18 @@ module.exports = grammar({
       )
   }
 });
+
+function _list(rule, separator) {
+  return seq(rule, repeat(seq(separator, rule)));
+}
+
+function kw(keyword) {
+  if (keyword.toUpperCase() != keyword) {
+    throw new Error(`Expected upper case keyword got ${keyword}`);
+  }
+
+  return alias(reserved(createCaseInsensitiveRegex(keyword)), keyword);
+}
 
 function reserved(regex) {
   return token(prec(1, new RegExp(regex)));
