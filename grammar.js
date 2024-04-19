@@ -980,16 +980,6 @@ module.exports = grammar({
         field("field", $.identifier)
       ),
 
-    // DO TRANSACTION statement
-    transaction_statement: ($) =>
-      seq(
-        kw("DO"),
-        kw("TRANSACTION"),
-        ":",
-        optional($.body),
-        $._block_terminator
-      ),
-
     /// ABL statements
     abl_statement: ($) =>
       seq(

@@ -9330,63 +9330,6 @@
         }
       ]
     },
-    "transaction_statement": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "PREC",
-              "value": 1,
-              "content": {
-                "type": "PATTERN",
-                "value": "[dD][oO]"
-              }
-            }
-          },
-          "named": false,
-          "value": "DO"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "PREC",
-              "value": 1,
-              "content": {
-                "type": "PATTERN",
-                "value": "[tT][rR][aA][nN][sS][aA][cC][tT][iI][oO][nN]"
-              }
-            }
-          },
-          "named": false,
-          "value": "TRANSACTION"
-        },
-        {
-          "type": "STRING",
-          "value": ":"
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "body"
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_block_terminator"
-        }
-      ]
-    },
     "abl_statement": {
       "type": "SEQ",
       "members": [
