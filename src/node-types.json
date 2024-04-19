@@ -2405,7 +2405,18 @@
   {
     "type": "prompt_for_statement",
     "named": true,
-    "fields": {},
+    "fields": {
+      "frame": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": true,
       "required": true,
@@ -2416,6 +2427,10 @@
         },
         {
           "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "qualified_name",
           "named": true
         }
       ]

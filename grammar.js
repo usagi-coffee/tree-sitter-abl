@@ -1152,10 +1152,11 @@ module.exports = grammar({
       seq(
         kw("PROMPT-FOR"),
         choice($.identifier, $.qualified_name),
-        optional(kw("EDITING")),
-        ":",
-        optional($.body),
-        $._block_terminator
+        optional(seq(kw("FRAME"), field("frame", $.identifier))),
+        choice(
+          seq(kw("EDITING"), ":", optional($.body), $._block_terminator),
+          $._terminator
+        )
       ),
 
     // Supertypes

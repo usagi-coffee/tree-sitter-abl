@@ -1357,19 +1357,16 @@ IF CURRENT-CHANGED x THEN RETURN '!'.
         (unary_expression
           (ambiguous_expression
             (identifier))))))
-  (abl_statement
-    statement: (identifier)
+  (prompt_for_statement
     (identifier)
-    (identifier)
-    (identifier))
+    frame: (identifier))
   (variable_assignment
     (assignment
       (identifier)
       (input_expression
         frame: (identifier)
         field: (identifier))))
-  (abl_statement
-    statement: (identifier)
+  (prompt_for_statement
     (identifier))
   (variable_assignment
     (assignment
