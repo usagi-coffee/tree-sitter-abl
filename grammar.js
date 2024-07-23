@@ -18,7 +18,7 @@ module.exports = grammar({
   conflicts: ($) => [
     [$.input_expression],
     // DEFINE * conflicts
-    ...permutations([
+    ...combinations([
       $.variable_definition,
       $.buffer_definition,
       $.query_definition,
@@ -1267,7 +1267,7 @@ function createCaseInsensitiveRegex(word) {
   );
 }
 
-function permutations(arr) {
+function combinations(arr) {
   let result = [];
 
   // Helper function to generate combinations
