@@ -1192,7 +1192,7 @@
           "named": true
         },
         {
-          "type": "property_tuning",
+          "type": "property_type",
           "named": true
         },
         {
@@ -2083,6 +2083,10 @@
         },
         {
           "type": "method_tuning",
+          "named": true
+        },
+        {
+          "type": "scope_tuning",
           "named": true
         }
       ]

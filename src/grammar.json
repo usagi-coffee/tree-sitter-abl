@@ -4378,7 +4378,7 @@
               },
               {
                 "type": "SYMBOL",
-                "name": "property_tuning"
+                "name": "property_type"
               }
             ]
           }
@@ -4507,22 +4507,6 @@
               "value": 1,
               "content": {
                 "type": "PATTERN",
-                "value": "[sS][tT][aA][tT][iI][cC]"
-              }
-            }
-          },
-          "named": false,
-          "value": "STATIC"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "PREC",
-              "value": 1,
-              "content": {
-                "type": "PATTERN",
                 "value": "[aA][bB][sS][tT][rR][aA][cC][tT]"
               }
             }
@@ -4584,22 +4568,23 @@
           "value": "METHOD"
         },
         {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "access_tuning"
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
-        },
-        {
           "type": "REPEAT",
           "content": {
-            "type": "SYMBOL",
-            "name": "method_tuning"
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "access_tuning"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "scope_tuning"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "method_tuning"
+              }
+            ]
           }
         },
         {

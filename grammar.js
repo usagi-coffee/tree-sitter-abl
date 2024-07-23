@@ -491,7 +491,7 @@ module.exports = grammar({
     event_definition: ($) =>
       seq(
         kw("DEFINE"),
-        repeat(choice($.access_tuning, $.scope_tuning, $.property_tuning)),
+        repeat(choice($.access_tuning, $.scope_tuning, $.property_type)),
         kw("EVENT"),
         $.identifier,
         optional(kw("SIGNATURE")),
@@ -500,13 +500,11 @@ module.exports = grammar({
         $._terminator
       ),
 
-    method_tuning: ($) =>
-      choice(kw("STATIC"), kw("ABSTRACT"), kw("OVERRIDE"), kw("FINAL")),
+    method_tuning: ($) => choice(kw("ABSTRACT"), kw("OVERRIDE"), kw("FINAL")),
     method_definition: ($) =>
       seq(
         kw("METHOD"),
-        optional($.access_tuning),
-        repeat($.method_tuning),
+        repeat(choice($.access_tuning, $.scope_tuning, $.method_tuning)),
         field("return_type", $.primitive_type),
         $.identifier,
         seq("(", optional(_list($.function_parameter, ",")), ")"),
