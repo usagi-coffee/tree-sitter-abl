@@ -17,29 +17,17 @@ module.exports = grammar({
   supertypes: ($) => [$._expression, $._statement, $._terminated_statement],
   conflicts: ($) => [
     [$.input_expression],
-    [
-      $.variable_definition,
-      $.buffer_definition,
-      $.query_definition,
-      $.temp_table_definition
-    ],
-    [$.variable_definition, $.property_definition, $.temp_table_definition],
-    [$.property_definition, $.temp_table_definition],
-    [$.temp_table_definition, $.dataset_definition],
-    [
+    // DEFINE * conflicts
+    ...permutations([
       $.variable_definition,
       $.buffer_definition,
       $.query_definition,
       $.temp_table_definition,
-      $.data_source_definition
-    ],
-    [
-      $.variable_definition,
-      $.buffer_definition,
-      $.query_definition,
-      $.temp_table_definition,
+      $.property_definition,
+      $.data_source_definition,
+      $.event_definition,
       $.dataset_definition
-    ]
+    ])
   ],
 
   rules: {
@@ -301,9 +289,15 @@ module.exports = grammar({
       ),
 
     argument_mode: ($) =>
-      prec.right(choice(kw("INPUT"), kw("OUTPUT"), kw("INPUT-OUTPUT"))),
+      prec.right(
+        choice(kw("INPUT"), kw("OUTPUT"), kw("INPUT-OUTPUT"), kw("DATA-SOURCE"))
+      ),
 
-    _function_argument_with_mode: ($) => seq($.argument_mode, $.identifier),
+    _function_argument_with_mode: ($) =>
+      seq(
+        $.argument_mode,
+        choice($.identifier, $.object_access, $.qualified_name)
+      ),
     function_call_argument: ($) =>
       prec.right(1, choice($._function_argument_with_mode, $._expression)),
 
@@ -482,8 +476,7 @@ module.exports = grammar({
     property_definition: ($) =>
       seq(
         kw("DEFINE"),
-        optional($.access_tuning),
-        repeat($.property_type),
+        repeat(choice($.access_tuning, $.scope_tuning, $.property_type)),
         optional($.serialization_tuning),
         kw("PROPERTY"),
         $.identifier,
@@ -498,8 +491,7 @@ module.exports = grammar({
     event_definition: ($) =>
       seq(
         kw("DEFINE"),
-        optional($.access_tuning),
-        repeat($.property_tuning),
+        repeat(choice($.access_tuning, $.scope_tuning, $.property_tuning)),
         kw("EVENT"),
         $.identifier,
         optional(kw("SIGNATURE")),
@@ -537,8 +529,7 @@ module.exports = grammar({
     dataset_definition: ($) =>
       seq(
         kw("DEFINE"),
-        optional($.scope_tuning),
-        optional($.access_tuning),
+        repeat(choice($.scope_tuning, $.access_tuning)),
         kw("DATASET"),
         $.identifier,
         kw("FOR"),
@@ -574,7 +565,7 @@ module.exports = grammar({
     constructor_definition: ($) =>
       seq(
         kw("CONSTRUCTOR"),
-        optional($.access_tuning),
+        repeat(choice($.scope_tuning, $.access_tuning)),
         $.identifier,
         seq("(", optional(_list($.function_parameter, ",")), ")"),
         ":",
@@ -1276,4 +1267,21 @@ function createCaseInsensitiveRegex(word) {
       .map((letter) => `[${letter.toLowerCase()}${letter.toUpperCase()}]`)
       .join("")
   );
+}
+
+function permutations(arr) {
+  let result = [];
+
+  // Helper function to generate combinations
+  function generateCombination(start, combination) {
+    for (let i = start; i < arr.length; i++) {
+      combination.push(arr[i]);
+      result.push([...combination]);
+      generateCombination(i + 1, combination);
+      combination.pop();
+    }
+  }
+
+  generateCombination(0, []);
+  return result;
 }
