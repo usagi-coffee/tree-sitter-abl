@@ -117,6 +117,7 @@ module.exports = grammar({
     current_changed_expression: ($) =>
       seq(kw("CURRENT-CHANGED"), $._expression),
     locked_expression: ($) => seq(kw("LOCKED"), $._expression),
+    dataset_expression: ($) => seq(prec.left(kw("DATASET")), $._expression),
     input_expression: ($) =>
       seq(
         kw("INPUT"),
@@ -1178,6 +1179,7 @@ module.exports = grammar({
         $.ambiguous_expression,
         $.current_changed_expression,
         $.locked_expression,
+        $.dataset_expression,
         $.input_expression,
         $.can_find_expression,
         $.new_expression,
