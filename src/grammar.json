@@ -4687,7 +4687,19 @@
                   "type": "CHOICE",
                   "members": [
                     {
-                      "type": "STRING",
+                      "type": "ALIAS",
+                      "content": {
+                        "type": "TOKEN",
+                        "content": {
+                          "type": "PREC",
+                          "value": 1,
+                          "content": {
+                            "type": "PATTERN",
+                            "value": "[mM][eE][tT][hH][oO][dD]"
+                          }
+                        }
+                      },
+                      "named": false,
                       "value": "METHOD"
                     },
                     {

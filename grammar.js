@@ -508,7 +508,7 @@ module.exports = grammar({
         field("return_type", $.primitive_type),
         $.identifier,
         seq("(", optional(_list($.function_parameter, ",")), ")"),
-        optional(seq(":", optional($.body), kw("END"), optional("METHOD"))),
+        optional(seq(":", optional($.body), kw("END"), optional(kw("METHOD")))),
         $._terminator
       ),
 
