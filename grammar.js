@@ -553,6 +553,7 @@ module.exports = grammar({
           $.method_definition,
           $.dataset_definition,
           $.constructor_definition,
+          $.destructor_definition,
           $.variable_definition,
           $.query_definition,
           $.buffer_definition,
@@ -570,6 +571,19 @@ module.exports = grammar({
         optional($.body),
         kw("END"),
         optional(kw("CONSTRUCTOR")),
+        $._terminator
+      ),
+
+    destructor_definition: ($) =>
+      seq(
+        kw("DESTRUCTOR"),
+        repeat($.access_tuning),
+        $.identifier,
+        seq("(", ")"),
+        ":",
+        optional($.body),
+        kw("END"),
+        optional(kw("DESTRUCTOR")),
         $._terminator
       ),
 
