@@ -215,7 +215,7 @@ module.exports = grammar({
     variable_tuning: ($) =>
       seq(
         choice(
-          seq(kw("INITIAL"), $._expression),
+          seq(choice(kw("INITIAL"), kw("INIT")), $._expression),
           seq(kw("FORMAT"), $._expression),
           seq(kw("LABEL"), $._expression),
           seq(kw("COLUMN-LABEL"), $._expression),
