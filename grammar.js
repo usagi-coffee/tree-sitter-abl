@@ -61,11 +61,16 @@ module.exports = grammar({
     _string_literal: ($) =>
       seq(choice($.double_quoted_string, $.single_quoted_string)),
 
+    _special_character: ($) =>
+      seq(
+        "~",
+        choice('"', "`", "~", "\\", "{", /0-9{3}/, "t", "r", "n", "E", "b", "f")
+      ),
     double_quoted_string: ($) =>
-      seq('"', repeat(choice(/[^"\\]+/, /\\./)), '"'),
+      seq('"', repeat(choice(/[^"\\]+/, /\\./, $._special_character)), '"'),
 
     single_quoted_string: ($) =>
-      seq("'", repeat(choice(/[^'\\]+/, /\\./)), "'"),
+      seq("'", repeat(choice(/[^'\\]+/, /\\./, $._special_character)), "'"),
 
     parenthesized_expression: ($) => seq("(", $._expression, ")"),
 
