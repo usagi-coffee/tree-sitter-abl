@@ -295,6 +295,68 @@
         }
       ]
     },
+    "_special_character": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "~"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "\""
+            },
+            {
+              "type": "STRING",
+              "value": "`"
+            },
+            {
+              "type": "STRING",
+              "value": "~"
+            },
+            {
+              "type": "STRING",
+              "value": "\\"
+            },
+            {
+              "type": "STRING",
+              "value": "{"
+            },
+            {
+              "type": "PATTERN",
+              "value": "0-9{3}"
+            },
+            {
+              "type": "STRING",
+              "value": "t"
+            },
+            {
+              "type": "STRING",
+              "value": "r"
+            },
+            {
+              "type": "STRING",
+              "value": "n"
+            },
+            {
+              "type": "STRING",
+              "value": "E"
+            },
+            {
+              "type": "STRING",
+              "value": "b"
+            },
+            {
+              "type": "STRING",
+              "value": "f"
+            }
+          ]
+        }
+      ]
+    },
     "double_quoted_string": {
       "type": "SEQ",
       "members": [
@@ -314,6 +376,10 @@
               {
                 "type": "PATTERN",
                 "value": "\\\\."
+              },
+              {
+                "type": "SYMBOL",
+                "name": "_special_character"
               }
             ]
           }
@@ -343,6 +409,10 @@
               {
                 "type": "PATTERN",
                 "value": "\\\\."
+              },
+              {
+                "type": "SYMBOL",
+                "name": "_special_character"
               }
             ]
           }
@@ -1422,6 +1492,31 @@
         }
       ]
     },
+    "when_expression": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "PATTERN",
+                "value": "[wW][hH][eE][nN]"
+              }
+            }
+          },
+          "named": false,
+          "value": "WHEN"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_expression"
+        }
+      ]
+    },
     "assignment": {
       "type": "SEQ",
       "members": [
@@ -1457,6 +1552,18 @@
             "type": "SYMBOL",
             "name": "_expression"
           }
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "when_expression"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         }
       ]
     },
@@ -1470,20 +1577,41 @@
               "type": "SEQ",
               "members": [
                 {
-                  "type": "ALIAS",
-                  "content": {
-                    "type": "TOKEN",
-                    "content": {
-                      "type": "PREC",
-                      "value": 1,
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "ALIAS",
                       "content": {
-                        "type": "PATTERN",
-                        "value": "[iI][nN][iI][tT][iI][aA][lL]"
-                      }
+                        "type": "TOKEN",
+                        "content": {
+                          "type": "PREC",
+                          "value": 1,
+                          "content": {
+                            "type": "PATTERN",
+                            "value": "[iI][nN][iI][tT][iI][aA][lL]"
+                          }
+                        }
+                      },
+                      "named": false,
+                      "value": "INITIAL"
+                    },
+                    {
+                      "type": "ALIAS",
+                      "content": {
+                        "type": "TOKEN",
+                        "content": {
+                          "type": "PREC",
+                          "value": 1,
+                          "content": {
+                            "type": "PATTERN",
+                            "value": "[iI][nN][iI][tT]"
+                          }
+                        }
+                      },
+                      "named": false,
+                      "value": "INIT"
                     }
-                  },
-                  "named": false,
-                  "value": "INITIAL"
+                  ]
                 },
                 {
                   "type": "SYMBOL",

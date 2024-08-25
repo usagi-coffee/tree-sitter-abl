@@ -493,6 +493,10 @@
         {
           "type": "_expression",
           "named": true
+        },
+        {
+          "type": "when_expression",
+          "named": true
         }
       ]
     }
@@ -3190,6 +3194,21 @@
     }
   },
   {
+    "type": "when_expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "where_clause",
     "named": true,
     "fields": {
@@ -3552,6 +3571,10 @@
     "named": false
   },
   {
+    "type": "E",
+    "named": false
+  },
+  {
     "type": "EACH",
     "named": false
   },
@@ -3681,6 +3704,10 @@
   },
   {
     "type": "INHERITS",
+    "named": false
+  },
+  {
+    "type": "INIT",
     "named": false
   },
   {
@@ -4136,6 +4163,22 @@
     "named": false
   },
   {
+    "type": "\\",
+    "named": false
+  },
+  {
+    "type": "`",
+    "named": false
+  },
+  {
+    "type": "b",
+    "named": false
+  },
+  {
+    "type": "f",
+    "named": false
+  },
+  {
     "type": "file_name",
     "named": true
   },
@@ -4144,8 +4187,20 @@
     "named": true
   },
   {
+    "type": "n",
+    "named": false
+  },
+  {
     "type": "null_expression",
     "named": true
+  },
+  {
+    "type": "r",
+    "named": false
+  },
+  {
+    "type": "t",
+    "named": false
   },
   {
     "type": "{",
@@ -4153,6 +4208,10 @@
   },
   {
     "type": "}",
+    "named": false
+  },
+  {
+    "type": "~",
     "named": false
   }
 ]
