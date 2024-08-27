@@ -1637,6 +1637,10 @@
         "required": true,
         "types": [
           {
+            "type": "identifier",
+            "named": true
+          },
+          {
             "type": "primitive_type",
             "named": true
           }
@@ -2085,6 +2089,10 @@
         "multiple": false,
         "required": true,
         "types": [
+          {
+            "type": "identifier",
+            "named": true
+          },
           {
             "type": "primitive_type",
             "named": true
@@ -2822,15 +2830,7 @@
         "required": true,
         "types": [
           {
-            "type": "function_call",
-            "named": true
-          },
-          {
-            "type": "identifier",
-            "named": true
-          },
-          {
-            "type": "qualified_name",
+            "type": "_expression",
             "named": true
           }
         ]
@@ -3148,6 +3148,10 @@
         "multiple": false,
         "required": false,
         "types": [
+          {
+            "type": "identifier",
+            "named": true
+          },
           {
             "type": "primitive_type",
             "named": true

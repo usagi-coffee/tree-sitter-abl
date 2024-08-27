@@ -245,7 +245,7 @@ module.exports = grammar({
         choice(kw("VARIABLE"), kw("VAR")),
         field("name", $.identifier),
         choice(
-          seq(kw("AS"), field("type", $.primitive_type)),
+          seq(kw("AS"), field("type", choice($.primitive_type, $.identifier))),
           seq(kw("LIKE"), field("like", $.identifier))
         ),
         repeat($.variable_tuning),
@@ -394,7 +394,7 @@ module.exports = grammar({
         kw("PARAMETER"),
         $.identifier,
         kw("AS"),
-        $.primitive_type,
+        choice($.primitive_type, $.identifier),
         repeat($.variable_tuning),
         $._terminator
       ),
@@ -410,7 +410,10 @@ module.exports = grammar({
         optional($.function_parameter_mode),
         optional(kw("DATASET")),
         $.identifier,
-        choice(seq(kw("AS"), $.primitive_type), kw("BIND"))
+        choice(
+          seq(kw("AS"), choice($.primitive_type, $.identifier)),
+          kw("BIND")
+        )
       ),
 
     function_statement: ($) =>
@@ -419,7 +422,7 @@ module.exports = grammar({
         field("name", $.identifier),
         seq(
           choice(kw("RETURNS"), kw("RETURN")),
-          field("return_type", $.primitive_type)
+          field("return_type", choice($.primitive_type, $.identifier))
         ),
         seq("(", optional(_list($.function_parameter, ",")), ")"),
         choice(":", $._terminator),
@@ -487,7 +490,7 @@ module.exports = grammar({
         kw("PROPERTY"),
         $.identifier,
         choice(
-          seq(kw("AS"), $.primitive_type),
+          seq(kw("AS"), choice($.primitive_type, $.identifier)),
           seq(kw("LIKE"), field("like", choice($.identifier, $.qualified_name)))
         ),
         repeat($.property_tuning),
@@ -511,7 +514,7 @@ module.exports = grammar({
       seq(
         kw("METHOD"),
         repeat(choice($.access_tuning, $.scope_tuning, $.method_tuning)),
-        field("return_type", $.primitive_type),
+        field("return_type", choice($.primitive_type, $.identifier)),
         $.identifier,
         seq("(", optional(_list($.function_parameter, ",")), ")"),
         optional(seq(":", optional($.body), kw("END"), optional(kw("METHOD")))),
@@ -1080,7 +1083,7 @@ module.exports = grammar({
         kw("FIELD"),
         $.identifier,
         choice(
-          seq(kw("AS"), $.primitive_type),
+          seq(kw("AS"), choice($.primitive_type, $.identifier)),
           seq(kw("LIKE"), field("like", choice($.identifier, $.qualified_name)))
         ),
         repeat($.field_option)
