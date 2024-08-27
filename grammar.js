@@ -227,6 +227,7 @@ module.exports = grammar({
           seq(kw("LABEL"), $._expression),
           seq(kw("COLUMN-LABEL"), $._expression),
           seq(kw("DECIMALS"), $._expression),
+          seq(kw("EXTENT"), $.number_literal),
           kw("NO-UNDO")
         )
       ),
@@ -455,13 +456,11 @@ module.exports = grammar({
 
     property_type: ($) => choice(kw("ABSTRACT"), kw("OVERRIDE")),
     property_tuning: ($) =>
-      seq(
-        choice(
-          seq(kw("INITIAL"), $._expression),
-          seq(kw("DECIMALS"), $._expression),
-          seq(kw("EXTENT"), $.number_literal),
-          kw("NO-UNDO")
-        )
+      choice(
+        seq(kw("INITIAL"), $._expression),
+        seq(kw("DECIMALS"), $._expression),
+        seq(kw("EXTENT"), $.number_literal),
+        kw("NO-UNDO")
       ),
 
     getter: ($) => seq(optional($.access_tuning), kw("GET"), $._terminator),
