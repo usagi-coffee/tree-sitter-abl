@@ -389,7 +389,7 @@ module.exports = grammar({
 
     procedure_parameter_definition: ($) =>
       seq(
-        kw("DEFINE"),
+        choice(kw("DEFINE"), kw("DEF")),
         choice(kw("INPUT"), kw("OUTPUT"), kw("INPUT-OUTPUT"), kw("RETURN")),
         kw("PARAMETER"),
         $.identifier,
@@ -484,7 +484,7 @@ module.exports = grammar({
       ),
     property_definition: ($) =>
       seq(
-        kw("DEFINE"),
+        choice(kw("DEFINE"), kw("DEF")),
         repeat(choice($.access_tuning, $.scope_tuning, $.property_type)),
         optional($.serialization_tuning),
         kw("PROPERTY"),
@@ -499,7 +499,7 @@ module.exports = grammar({
 
     event_definition: ($) =>
       seq(
-        kw("DEFINE"),
+        choice(kw("DEFINE"), kw("DEF")),
         repeat(choice($.access_tuning, $.scope_tuning, $.property_type)),
         kw("EVENT"),
         $.identifier,
@@ -535,7 +535,7 @@ module.exports = grammar({
       ),
     dataset_definition: ($) =>
       seq(
-        kw("DEFINE"),
+        choice(kw("DEFINE"), kw("DEF")),
         repeat(choice($.scope_tuning, $.access_tuning)),
         kw("DATASET"),
         $.identifier,
@@ -1139,7 +1139,7 @@ module.exports = grammar({
 
     data_source_definition: ($) =>
       seq(
-        kw("DEFINE"),
+        choice(kw("DEFINE"), kw("DEF")),
         optional($.access_tuning),
         optional($.scope_tuning),
         kw("DATA-SOURCE"),
