@@ -40,7 +40,7 @@ module.exports = grammar({
     constant: ($) =>
       seq("{", optional("&"), choice($.identifier, $._integer_literal), "}"),
 
-    identifier: ($) => /[A-z_]{1}[A-z-_|0-9]*/i,
+    identifier: ($) => /[A-Z|a-z|\-|\\_]{1}[A-Z|a-z|\-|\\_|0-9]*/i,
     qualified_name: ($) =>
       seq(
         $.identifier,
