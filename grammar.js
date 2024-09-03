@@ -236,7 +236,14 @@ module.exports = grammar({
 
     scope_tuning: ($) =>
       choice(kw("NEW"), kw("GLOBAL"), kw("SHARED"), kw("STATIC")),
-    access_tuning: ($) => choice(kw("PRIVATE"), kw("PROTECTED"), kw("PUBLIC")),
+    access_tuning: ($) =>
+      choice(
+        kw("PRIVATE"),
+        kw("PROTECTED"),
+        kw("PUBLIC"),
+        kw("PACKAGE-PRIVATE"),
+        kw("PACKAGE-PROTECTED")
+      ),
     serialization_tuning: ($) =>
       choice(kw("SERIALIZABLE"), kw("NON-SERIALIZABLE")),
 
