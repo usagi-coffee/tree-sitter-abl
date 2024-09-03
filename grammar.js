@@ -301,10 +301,28 @@ module.exports = grammar({
         choice(kw("INPUT"), kw("OUTPUT"), kw("INPUT-OUTPUT"), kw("DATA-SOURCE"))
       ),
 
+    argument_pass_type: ($) =>
+      choice(kw("BY-VALUE"), kw("BY-REFERENCE"), kw("BIND")),
     _function_argument_with_mode: ($) =>
       seq(
         $.argument_mode,
-        choice($.identifier, $.object_access, $.qualified_name)
+        choice(
+          seq(
+            choice($.identifier, $.object_access, $.qualified_name),
+            optional(seq(kw("AS"), choice($.primitive_type, $.identifier)))
+          ),
+          seq(
+            choice(
+              kw("TABLE"),
+              kw("TABLE-HANDLE"),
+              kw("DATASET"),
+              kw("DATASET-HANDLE")
+            ),
+            choice($.identifier, $.qualified_name)
+          )
+        ),
+        optional(kw("APPEND")),
+        optional($.argument_pass_type)
       ),
     function_call_argument: ($) =>
       prec.right(1, choice($._function_argument_with_mode, $._expression)),

@@ -468,6 +468,11 @@
     "fields": {}
   },
   {
+    "type": "argument_pass_type",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "assign_statement",
     "named": true,
     "fields": {},
@@ -1570,6 +1575,14 @@
         },
         {
           "type": "argument_mode",
+          "named": true
+        },
+        {
+          "type": "argument_pass_type",
+          "named": true
+        },
+        {
+          "type": "primitive_type",
           "named": true
         }
       ]
@@ -3451,6 +3464,14 @@
     "named": false
   },
   {
+    "type": "BY-REFERENCE",
+    "named": false
+  },
+  {
+    "type": "BY-VALUE",
+    "named": false
+  },
+  {
     "type": "CACHE",
     "named": false
   },
@@ -3528,6 +3549,10 @@
   },
   {
     "type": "DATASET",
+    "named": false
+  },
+  {
+    "type": "DATASET-HANDLE",
     "named": false
   },
   {
@@ -4072,6 +4097,14 @@
   },
   {
     "type": "SUB-TOTAL",
+    "named": false
+  },
+  {
+    "type": "TABLE",
+    "named": false
+  },
+  {
+    "type": "TABLE-HANDLE",
     "named": false
   },
   {

@@ -771,6 +771,8 @@ fn(INPUT somepar, OUTPUT otherpar).
 fn-no-mode(somerpar).
 fn-no-mode(somerpar) NO-ERROR.
 
+PersonData:GetById(id, output table ttPerson by-reference).
+
 --------------------------------------------------------------------------------
 
 (source_code
@@ -815,7 +817,18 @@ fn-no-mode(somerpar) NO-ERROR.
     (function_call
       function: (identifier)
       (function_call_argument
-        (identifier)))))
+        (identifier))))
+  (function_call_statement
+    (function_call
+      function: (object_access
+        object: (identifier)
+        property: (identifier))
+      (function_call_argument
+        (identifier))
+      (function_call_argument
+        (argument_mode)
+        (identifier)
+        (argument_pass_type)))))
 
 ================================================================================
 DO TRANSACTION statement
