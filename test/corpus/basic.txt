@@ -2066,3 +2066,324 @@ END INTERFACE.
         (access_tuning)
         (primitive_type)
         (identifier)))))
+
+================================================================================
+VAR statement
+================================================================================
+
+/* Four character variables with default initial values */
+VAR CHAR s1, s2, s3, s4.
+
+/* Three integer variables. */
+/* z’s initial value is 3. x and y default to 0 */
+VAR INT x, y, z = 3.
+
+/* Three date variables */
+VAR DATE d1, d2 = 1/1/2020, d3 = TODAY.
+
+/* Date variables with the protected access mode */
+VAR PROTECTED DATE d1, d2 = 1/1/2020.
+
+/* Three arrays of size 3 */
+/* x's third element defaults to 2 (the previous element) */
+/* y's elements default to 0 */
+VAR INT[3] x = [1, 2], y, z = [100, 200, 300].
+
+/* Two indeterminate arrays. x has no size. y has a size of 3. */
+VAR INT[] x, y = [1,2,3].
+
+/* .NET generic object */
+VAR "System.Collections.Generic.List<char>" cList.
+
+/* Three object variables */
+VAR mypackage.subdir.myclass myobj1, myobj2, myobj3.
+
+/* Object variable with the optional CLASS keyword */
+VAR CLASS mypackage.subdir.myclass myobj1.
+
+/* Object array of size 2 */
+VAR foo[2] classArray.
+
+/* Instantiated object variables */
+VAR myclass myobj = NEW myclass().
+VAR myclass myobj = NEW myclass("Progress", 2020,?).
+
+/* Multiple instantiated object variables */
+VAR myclass myobj1 = NEW myclass("MA"), 
+            myobj2 = NEW myclass("VT"),
+            myobj3 = NEW myclass("NH").
+
+/* Instantiated base class type */
+VAR baseclass myobj1 = NEW derivedAClass(), myobj2 = NEW derivedBClass("foo").
+
+/* Instantiated interface type */
+VAR IMaps myobj1 = NEW GoogleMap("CANADA"), myobj2 = NEW OpenStreetMap("USA").
+
+/* Instantiated and initialized determinate array object variable */
+VAR StateClass[2] objArrayA = [NEW StateClass("MA"), NEW StateClass("NH")].
+
+/* Instantiated and initialized indeterminate array object variable */
+VAR StateClass[] objArrayB = [NEW StateClass("MA"), NEW StateClass("NH")].
+
+/* Integer variables initialized using expressions */
+VAR INT x = a + b , y = a - b, z = x - y.
+
+/* Indeterminate integer array initialized using expressions */
+VAR INT[ ] x = [funct( ), a + b].
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (comment)
+  (var_statement
+    (primitive_type)
+    (variable
+      (identifier))
+    (variable
+      (identifier))
+    (variable
+      (identifier))
+    (variable
+      (identifier)))
+  (comment)
+  (comment)
+  (var_statement
+    (primitive_type)
+    (variable
+      (identifier))
+    (variable
+      (identifier))
+    (variable
+      (assignment
+        (identifier)
+        (number_literal))))
+  (comment)
+  (var_statement
+    (primitive_type)
+    (variable
+      (identifier))
+    (variable
+      (assignment
+        (identifier)
+        (date_literal)))
+    (variable
+      (assignment
+        (identifier)
+        (identifier))))
+  (comment)
+  (var_statement
+    (access_tuning)
+    (primitive_type)
+    (variable
+      (identifier))
+    (variable
+      (assignment
+        (identifier)
+        (date_literal))))
+  (comment)
+  (comment)
+  (comment)
+  (var_statement
+    (primitive_type)
+    (number_literal)
+    (variable
+      (assignment
+        (identifier)
+        (array_literal
+          (number_literal)
+          (number_literal))))
+    (variable
+      (identifier))
+    (variable
+      (assignment
+        (identifier)
+        (array_literal
+          (number_literal)
+          (number_literal)
+          (number_literal)))))
+  (comment)
+  (var_statement
+    (primitive_type)
+    (variable
+      (identifier))
+    (variable
+      (assignment
+        (identifier)
+        (array_literal
+          (number_literal)
+          (number_literal)
+          (number_literal)))))
+  (comment)
+  (var_statement
+    (double_quoted_string)
+    (variable
+      (identifier)))
+  (comment)
+  (var_statement
+    (primitive_type
+      (qualified_name
+        (identifier)
+        (identifier)
+        (identifier)))
+    (variable
+      (identifier))
+    (variable
+      (identifier))
+    (variable
+      (identifier)))
+  (comment)
+  (var_statement
+    (primitive_type
+      (qualified_name
+        (identifier)
+        (identifier)
+        (identifier)))
+    (variable
+      (identifier)))
+  (comment)
+  (var_statement
+    (identifier)
+    (number_literal)
+    (variable
+      (identifier)))
+  (comment)
+  (var_statement
+    (identifier)
+    (variable
+      (assignment
+        (identifier)
+        (new_expression
+          (identifier)))))
+  (var_statement
+    (identifier)
+    (variable
+      (assignment
+        (identifier)
+        (new_expression
+          (identifier)
+          (function_call_argument
+            (double_quoted_string))
+          (function_call_argument
+            (number_literal))
+          (function_call_argument
+            (null_expression))))))
+  (comment)
+  (var_statement
+    (identifier)
+    (variable
+      (assignment
+        (identifier)
+        (new_expression
+          (identifier)
+          (function_call_argument
+            (double_quoted_string)))))
+    (variable
+      (assignment
+        (identifier)
+        (new_expression
+          (identifier)
+          (function_call_argument
+            (double_quoted_string)))))
+    (variable
+      (assignment
+        (identifier)
+        (new_expression
+          (identifier)
+          (function_call_argument
+            (double_quoted_string))))))
+  (comment)
+  (var_statement
+    (identifier)
+    (variable
+      (assignment
+        (identifier)
+        (new_expression
+          (identifier))))
+    (variable
+      (assignment
+        (identifier)
+        (new_expression
+          (identifier)
+          (function_call_argument
+            (double_quoted_string))))))
+  (comment)
+  (var_statement
+    (identifier)
+    (variable
+      (assignment
+        (identifier)
+        (new_expression
+          (identifier)
+          (function_call_argument
+            (double_quoted_string)))))
+    (variable
+      (assignment
+        (identifier)
+        (new_expression
+          (identifier)
+          (function_call_argument
+            (double_quoted_string))))))
+  (comment)
+  (var_statement
+    (identifier)
+    (number_literal)
+    (variable
+      (assignment
+        (identifier)
+        (array_literal
+          (new_expression
+            (identifier)
+            (function_call_argument
+              (double_quoted_string)))
+          (new_expression
+            (identifier)
+            (function_call_argument
+              (double_quoted_string)))))))
+  (comment)
+  (var_statement
+    (identifier)
+    (variable
+      (assignment
+        (identifier)
+        (array_literal
+          (new_expression
+            (identifier)
+            (function_call_argument
+              (double_quoted_string)))
+          (new_expression
+            (identifier)
+            (function_call_argument
+              (double_quoted_string)))))))
+  (comment)
+  (var_statement
+    (primitive_type)
+    (variable
+      (assignment
+        (identifier)
+        (additive_expression
+          (identifier)
+          (identifier))))
+    (variable
+      (assignment
+        (identifier)
+        (additive_expression
+          (identifier)
+          (identifier))))
+    (variable
+      (assignment
+        (identifier)
+        (additive_expression
+          (identifier)
+          (identifier)))))
+  (comment)
+  (var_statement
+    (primitive_type)
+    (variable
+      (assignment
+        (identifier)
+        (array_literal
+          (function_call
+            (identifier))
+          (additive_expression
+            (identifier)
+            (identifier)))))))

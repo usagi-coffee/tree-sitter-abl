@@ -1197,6 +1197,23 @@ module.exports = grammar({
         )
       ),
 
+    variable: ($) => choice(field("name", $.identifier), $.assignment),
+    var_statement: ($) =>
+      seq(
+        // FIXME: hack to avoid breaking assignments where identifier begins with var
+        kw("VAR "),
+        optional(
+          choice($.scope_tuning, $.access_tuning, $.serialization_tuning)
+        ),
+        field(
+          "type",
+          choice($.primitive_type, $.identifier, $._string_literal)
+        ),
+        optional(seq("[", optional(field("size", $.number_literal)), "]")),
+        repeat(seq($.variable, optional(","))),
+        $._terminator
+      ),
+
     // Supertypes
     _expression: ($) =>
       choice(
@@ -1228,6 +1245,7 @@ module.exports = grammar({
 
     _statement: ($) =>
       choice(
+        $.var_statement,
         $.variable_definition,
         $.variable_assignment,
         $.buffer_definition,
