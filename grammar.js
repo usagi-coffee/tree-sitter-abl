@@ -62,6 +62,8 @@ module.exports = grammar({
       seq(choice($.double_quoted_string, $.single_quoted_string)),
 
     date_literal: ($) => /\d{1,2}\/\d{1,2}\/\d{4}|\d{2}/,
+    array_literal: ($) =>
+      seq("[", repeat(seq($._expression, optional(","))), "]"),
 
     _special_character: ($) =>
       seq(
@@ -1204,6 +1206,7 @@ module.exports = grammar({
         $._string_literal,
         $.date_literal,
         $.number_literal,
+        $.array_literal,
         $.null_expression,
         $._binary_expression,
         $.qualified_name,
