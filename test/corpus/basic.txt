@@ -375,7 +375,7 @@ END.
       (body
         (variable_assignment
           (assignment
-            (identifier)
+            name: (identifier)
             (number_literal)))))))
 
 ================================================================================
@@ -400,14 +400,14 @@ END.
       (body
         (variable_assignment
           (assignment
-            (identifier)
+            name: (identifier)
             (number_literal)))))
     (else_statement
       (do_block
         (body
           (variable_assignment
             (assignment
-              (identifier)
+              name: (identifier)
               (identifier))))))))
 
 ================================================================================
@@ -435,7 +435,7 @@ END.
       (body
         (variable_assignment
           (assignment
-            (identifier)
+            name: (identifier)
             (number_literal)))))
     (else_if_statement
       condition: (comparison_expression
@@ -445,14 +445,14 @@ END.
         (body
           (variable_assignment
             (assignment
-              (identifier)
+              name: (identifier)
               (identifier))))))
     (else_statement
       (do_block
         (body
           (variable_assignment
             (assignment
-              (identifier)
+              name: (identifier)
               (identifier))))))))
 
 ================================================================================
@@ -483,7 +483,7 @@ End.
       (body
         (variable_assignment
           (assignment
-            (identifier)
+            name: (identifier)
             (number_literal)))))
     (else_if_statement
       condition: (comparison_expression
@@ -493,14 +493,14 @@ End.
         (body
           (variable_assignment
             (assignment
-              (identifier)
+              name: (identifier)
               (identifier))))))
     (else_statement
       (do_block
         (body
           (variable_assignment
             (assignment
-              (identifier)
+              name: (identifier)
               (identifier))))))))
 
 ================================================================================
@@ -518,7 +518,7 @@ IF x > 10 THEN x = 10.
       (number_literal))
     (variable_assignment
       (assignment
-        (identifier)
+        name: (identifier)
         (number_literal)))))
 
 ================================================================================
@@ -543,7 +543,7 @@ END.
       (number_literal))
     (variable_assignment
       (assignment
-        (identifier)
+        name: (identifier)
         (number_literal)))
     (else_if_statement
       condition: (comparison_expression
@@ -551,12 +551,12 @@ END.
         (number_literal))
       (variable_assignment
         (assignment
-          (identifier)
+          name: (identifier)
           (number_literal))))
     (else_statement
       (variable_assignment
         (assignment
-          (identifier)
+          name: (identifier)
           (identifier)))))
   (if_statement
     condition: (comparison_expression
@@ -564,14 +564,14 @@ END.
       (number_literal))
     (variable_assignment
       (assignment
-        (identifier)
+        name: (identifier)
         (number_literal)))
     (else_statement
       (do_block
         (body
           (variable_assignment
             (assignment
-              (identifier)
+              name: (identifier)
               (number_literal))))))))
 
 ================================================================================
@@ -594,19 +594,19 @@ y = x < 10 OR x = 10.
 (source_code
   (variable_assignment
     (assignment
-      (identifier)
+      name: (identifier)
       (boolean_literal)))
   (variable_assignment
     (assignment
-      (identifier)
+      name: (identifier)
       (boolean_literal)))
   (variable_assignment
     (assignment
-      (identifier)
+      name: (identifier)
       (boolean_literal)))
   (variable_assignment
     (assignment
-      (identifier)
+      name: (identifier)
       (boolean_literal)))
   (if_statement
     condition: (logical_expression
@@ -617,19 +617,19 @@ y = x < 10 OR x = 10.
       (double_quoted_string)))
   (variable_assignment
     (assignment
-      (identifier)
+      name: (identifier)
       (logical_expression
         (boolean_literal)
         (boolean_literal))))
   (variable_assignment
     (assignment
-      (identifier)
+      name: (identifier)
       (logical_expression
         (boolean_literal)
         (boolean_literal))))
   (variable_assignment
     (assignment
-      (identifier)
+      name: (identifier)
       (logical_expression
         (comparison_expression
           (identifier)
@@ -1089,7 +1089,7 @@ w = CAN-FIND(LAST x OF y USING z1 AND FRAME f z2 WHERE z NO-LOCK).
 (source_code
   (variable_assignment
     (assignment
-      (identifier)
+      name: (identifier)
       (can_find_expression
         table: (identifier)
         (of
@@ -1138,7 +1138,7 @@ x = IF x > 10 THEN 10 ELSE x.
 (source_code
   (variable_assignment
     (assignment
-      (identifier)
+      name: (identifier)
       (ternary_expression
         condition: (comparison_expression
           (identifier)
@@ -1157,7 +1157,7 @@ x = (IF NOT x > 10 THEN 10 ELSE x).
 (source_code
   (variable_assignment
     (assignment
-      (identifier)
+      name: (identifier)
       (parenthesized_expression
         (ternary_expression
           condition: (unary_expression
@@ -1276,7 +1276,7 @@ FIND foo WHERE bar CONTAINS "stuff" OR baz CONTAINS "what?".
 (source_code
   (variable_assignment
     (assignment
-      (identifier)
+      name: (identifier)
       (logical_expression
         (comparison_expression
           (number_literal)
@@ -1286,7 +1286,7 @@ FIND foo WHERE bar CONTAINS "stuff" OR baz CONTAINS "what?".
           (number_literal)))))
   (variable_assignment
     (assignment
-      (identifier)
+      name: (identifier)
       (comparison_expression
         (parenthesized_expression
           (comparison_expression
@@ -1302,7 +1302,7 @@ FIND foo WHERE bar CONTAINS "stuff" OR baz CONTAINS "what?".
             (number_literal))))))
   (variable_assignment
     (assignment
-      (identifier)
+      name: (identifier)
       (comparison_expression
         (parenthesized_expression
           (comparison_expression
@@ -1318,13 +1318,13 @@ FIND foo WHERE bar CONTAINS "stuff" OR baz CONTAINS "what?".
             (number_literal))))))
   (variable_assignment
     (assignment
-      (identifier)
+      name: (identifier)
       (comparison_expression
         (double_quoted_string)
         (double_quoted_string))))
   (variable_assignment
     (assignment
-      (identifier)
+      name: (identifier)
       (comparison_expression
         (double_quoted_string)
         (double_quoted_string))))
@@ -1363,7 +1363,7 @@ IF CURRENT-CHANGED x THEN RETURN '!'.
     (query_tuning))
   (variable_assignment
     (assignment
-      (identifier)
+      name: (identifier)
       (logical_expression
         (available_expression
           (identifier))
@@ -1375,7 +1375,7 @@ IF CURRENT-CHANGED x THEN RETURN '!'.
     frame: (identifier))
   (variable_assignment
     (assignment
-      (identifier)
+      name: (identifier)
       (input_expression
         frame: (identifier)
         field: (identifier))))
@@ -1383,7 +1383,7 @@ IF CURRENT-CHANGED x THEN RETURN '!'.
     (identifier))
   (variable_assignment
     (assignment
-      (identifier)
+      name: (identifier)
       (input_expression
         field: (identifier))))
   (if_statement
@@ -1554,7 +1554,7 @@ END CLASS.
         type: (primitive_type))))
   (variable_assignment
     (assignment
-      (identifier)
+      name: (identifier)
       (new_expression
         (identifier))))
   (using_statement
@@ -1688,12 +1688,12 @@ END CLASS.
                         (identifier))
                       (assign_statement
                         (assignment
-                          (identifier)
+                          name: (identifier)
                           (qualified_name
                             (identifier)
                             (identifier)))
                         (assignment
-                          (identifier)
+                          name: (identifier)
                           (qualified_name
                             (identifier)
                             (identifier)))))

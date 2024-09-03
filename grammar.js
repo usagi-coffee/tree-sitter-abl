@@ -215,7 +215,9 @@ module.exports = grammar({
     when_expression: ($) => seq(kw("WHEN"), $._expression),
     assignment: ($) =>
       seq(
-        prec.left(choice($.identifier, $.qualified_name, $.object_access)),
+        prec.left(
+          choice(field("name", $.identifier), $.qualified_name, $.object_access)
+        ),
         "=",
         prec.right($._expression),
         optional($.when_expression)
