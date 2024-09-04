@@ -497,7 +497,21 @@ module.exports = grammar({
         kw("NO-UNDO")
       ),
 
-    getter: ($) => seq(optional($.access_tuning), kw("GET"), $._terminator),
+    getter: ($) =>
+      seq(
+        optional($.access_tuning),
+        kw("GET"),
+        optional(
+          seq(
+            optional(seq("(", optional(_list($.function_parameter, ",")), ")")),
+            ":",
+            optional($.body),
+            kw("END"),
+            kw("GET")
+          )
+        ),
+        $._terminator
+      ),
     setter: ($) =>
       seq(
         optional($.access_tuning),
