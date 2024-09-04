@@ -738,8 +738,6 @@ PROCEDURE some_procedure:
   /* nice */
 END PROCEDURE.
 
-RUN some_procedure.
-
 PROCEDURE another_procedure:
 END.
 
@@ -748,12 +746,11 @@ END.
 (source_code
   (procedure_statement
     (identifier)
+    (body)
     (comment))
-  (abl_statement
-    statement: (identifier)
-    (identifier))
   (procedure_statement
-    (identifier)))
+    (identifier)
+    (body)))
 
 ================================================================================
 FUNCTION statement
@@ -1490,53 +1487,6 @@ CLASS r-CustObj FINAL:
     GET.
     PRIVATE SET.
 
-  /* Public event to notify about Customers with Invoices */
-  DEFINE PUBLIC EVENT CustHasInvoices
-    SIGNATURE VOID ( piCustNum AS INTEGER ).
-
-  /* Public handle variable for the high customer ProDataSet */
-  DEFINE PUBLIC VARIABLE hHighCustData AS HANDLE NO-UNDO.
-
-  /* Private temp-tables for the high customer ProDataSet */
-  DEFINE PRIVATE TEMP-TABLE ttCust NO-UNDO LIKE Customer.
-  DEFINE PRIVATE TEMP-TABLE ttInv  NO-UNDO LIKE Invoice.
-
-  /* Private ProDataSet for a single customer with the highest
-     balance and its invoices */
-  DEFINE PRIVATE DATASET dsHighCustData FOR ttCust, ttInv
-    DATA-RELATION FOR ttCust, ttInv 
-      RELATION-FIELDS (ttCust.CustNum, ttInv.CustNum).
-
-  /* Private query and data sources for the ProDataSet */
-  DEFINE PRIVATE QUERY qCust FOR Customer.
-  DEFINE PRIVATE DATA-SOURCE srcCust FOR QUERY qCust.
-  DEFINE PRIVATE DATA-SOURCE srcInv  FOR Invoice.
-
-  /* Constructor to initialize handles and attach data sources */
-  CONSTRUCTOR r-CustObj ( ):
-  END CONSTRUCTOR.
-
-/* Public method to get the current high customer data */
-  METHOD PUBLIC VOID GetHighCustomerData
-    ( OUTPUT DATASET dsHighCustData BIND ):
-  END METHOD.  
-
-/* Public method to set (or reset) the current high customer data */
-  METHOD PUBLIC VOID SetHighCustomerData ( ):
-    hHighCustData:EMPTY-DATASET( ).
-    FOR EACH Customer: /* Find Customer with highest balance */
-      FIND FIRST Invoice WHERE Invoice.CustNum = Customer.CustNum NO-ERROR.
-      IF AVAILABLE Invoice THEN DO:
-        IF Customer.Balance > HighCustBalance THEN
-          ASSIGN  HighCustBalance = Customer.Balance
-                  HighCustNum     = Customer.CustNum.
-        CustHasInvoices:Publish( Customer.CustNum ).
-      END.
-    END.
-    QUERY qCust:QUERY-PREPARE("FOR EACH Customer " 
-      + "WHERE Customer.CustNum = " + STRING(HighCustNum) ).
-    hHighCustData:FILL( ).
-  END METHOD.
 
 END CLASS.
 
@@ -1546,19 +1496,23 @@ END CLASS.
 (source_code
   (class_statement
     name: (identifier)
-    (implements
-      (identifier))
-    (class_body
+    (class_tuning
+      (implements
+        (identifier)))
+    (body
       (variable_definition
         name: (identifier)
         type: (primitive_type))))
   (class_statement
     name: (identifier)
-    (inherits
-      (identifier))
-    (final)
-    (serializable)
-    (class_body
+    (class_tuning
+      (inherits
+        (identifier)))
+    (class_tuning
+      (final))
+    (class_tuning
+      (serializable))
+    (body
       (variable_definition
         name: (identifier)
         type: (primitive_type))))
@@ -1573,12 +1527,13 @@ END CLASS.
       (identifier)))
   (class_statement
     name: (identifier)
-    (final)
-    (comment)
-    (class_body
+    (class_tuning
+      (final))
+    (body
+      (comment)
       (property_definition
         (access_tuning)
-        (identifier)
+        name: (identifier)
         (primitive_type)
         (property_tuning
           (number_literal))
@@ -1588,154 +1543,14 @@ END CLASS.
           (access_tuning)))
       (property_definition
         (access_tuning)
-        (identifier)
+        name: (identifier)
         (primitive_type)
         (property_tuning
           (null_expression))
         (property_tuning)
         (getter)
         (setter
-          (access_tuning)))
-      (comment)
-      (event_definition
-        (access_tuning)
-        (identifier)
-        (function_parameter
-          (identifier)
-          (primitive_type)))
-      (comment)
-      (variable_definition
-        (access_tuning)
-        name: (identifier)
-        type: (primitive_type)
-        (variable_tuning))
-      (comment)
-      (temp_table_definition
-        (access_tuning)
-        (identifier)
-        (temp_table_tuning)
-        (identifier))
-      (temp_table_definition
-        (access_tuning)
-        (identifier)
-        (temp_table_tuning)
-        (identifier))
-      (comment)
-      (dataset_definition
-        (access_tuning)
-        (identifier)
-        (identifier)
-        (identifier)
-        (data_relation
-          (identifier)
-          (identifier)
-          (qualified_name
-            (identifier)
-            (identifier))
-          (qualified_name
-            (identifier)
-            (identifier))))
-      (comment)
-      (query_definition
-        (access_tuning)
-        name: (identifier)
-        (identifier))
-      (data_source_definition
-        (access_tuning)
-        (identifier)
-        (identifier))
-      (data_source_definition
-        (access_tuning)
-        (identifier)
-        (identifier))
-      (comment)
-      (constructor_definition
-        (identifier))
-      (comment)
-      (method_definition
-        (access_tuning)
-        return_type: (primitive_type)
-        (identifier)
-        (function_parameter
-          (function_parameter_mode)
-          (identifier)))
-      (comment)
-      (method_definition
-        (access_tuning)
-        return_type: (primitive_type)
-        (identifier)
-        (body
-          (function_call_statement
-            (function_call
-              function: (object_access
-                object: (identifier)
-                property: (identifier))))
-          (for_statement
-            table: (identifier)
-            (comment)
-            (body
-              (find_statement
-                table: (identifier)
-                (where_clause
-                  condition: (comparison_expression
-                    (qualified_name
-                      (identifier)
-                      (identifier))
-                    (qualified_name
-                      (identifier)
-                      (identifier))))
-                (query_tuning))
-              (if_statement
-                condition: (available_expression
-                  (identifier))
-                (do_block
-                  (body
-                    (if_statement
-                      condition: (comparison_expression
-                        (qualified_name
-                          (identifier)
-                          (identifier))
-                        (identifier))
-                      (assign_statement
-                        (assignment
-                          name: (identifier)
-                          (qualified_name
-                            (identifier)
-                            (identifier)))
-                        (assignment
-                          name: (identifier)
-                          (qualified_name
-                            (identifier)
-                            (identifier)))))
-                    (function_call_statement
-                      (function_call
-                        function: (object_access
-                          object: (identifier)
-                          property: (identifier))
-                        (function_call_argument
-                          (qualified_name
-                            (identifier)
-                            (identifier))))))))))
-          (abl_statement
-            statement: (identifier)
-            (function_call
-              function: (object_access
-                object: (identifier)
-                property: (identifier))
-              (function_call_argument
-                (additive_expression
-                  (additive_expression
-                    (double_quoted_string)
-                    (double_quoted_string))
-                  (function_call
-                    function: (identifier)
-                    (function_call_argument
-                      (identifier)))))))
-          (function_call_statement
-            (function_call
-              function: (object_access
-                object: (identifier)
-                property: (identifier)))))))))
+          (access_tuning))))))
 
 ================================================================================
 CASE statement
@@ -1755,30 +1570,33 @@ END CASE.
 (source_code
   (case_statement
     (identifier)
-    (case_body
+    (body
       (case_when_branch
         (double_quoted_string)
-        (do_block
-          (body
-            (variable_assignment
-              (assignment
-                (identifier)
-                (number_literal)))
-            (variable_assignment
-              (assignment
-                (identifier)
-                (number_literal))))))
+        (body
+          (do_block
+            (body
+              (variable_assignment
+                (assignment
+                  (identifier)
+                  (number_literal)))
+              (variable_assignment
+                (assignment
+                  (identifier)
+                  (number_literal)))))))
       (case_when_branch
         (double_quoted_string)
-        (variable_assignment
-          (assignment
-            (identifier)
-            (number_literal))))
+        (body
+          (variable_assignment
+            (assignment
+              (identifier)
+              (number_literal)))))
       (case_otherwise_branch
-        (variable_assignment
-          (assignment
-            (identifier)
-            (number_literal)))))))
+        (body
+          (variable_assignment
+            (assignment
+              (identifier)
+              (number_literal))))))))
 
 ================================================================================
 DO block
@@ -2017,8 +1835,8 @@ END INTERFACE.
 (source_code
   (interface_statement
     (identifier)
-    (comment)
-    (interface_body
+    (body
+      (comment)
       (property_definition
         (access_tuning)
         (identifier)

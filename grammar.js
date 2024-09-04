@@ -32,7 +32,9 @@ module.exports = grammar({
 
   rules: {
     source_code: ($) => repeat($._statement),
-    body: ($) => repeat1($._statement),
+
+    body: ($) => seq(choice(":"), repeat($._statement)),
+    dot_body: ($) => seq(choice(":", "."), repeat($._statement)),
 
     file_name: ($) => /[A-z-_|0-9|\/]+\.[i]/i,
     comment: ($) =>
@@ -402,7 +404,6 @@ module.exports = grammar({
         optional($.on_quit_phrase),
         optional($.on_stop_phrase),
         repeat($.repeat_tuning),
-        ":",
         optional($.body),
         $._block_terminator
       ),
@@ -413,8 +414,7 @@ module.exports = grammar({
         kw("PROCEDURE"),
         $.identifier,
         optional(kw("PRIVATE")),
-        ":",
-        optional($.body),
+        optional(alias($.dot_body, $.body)),
         choice($._block_terminator, $._procedure_terminator)
       ),
 
@@ -456,8 +456,7 @@ module.exports = grammar({
           field("return_type", choice($.primitive_type, $.identifier))
         ),
         optional(seq("(", optional(_list($.function_parameter, ",")), ")")),
-        choice(":", $._terminator),
-        optional($.body),
+        optional(alias($.dot_body, $.body)),
         $._function_terminator
       ),
 
@@ -465,15 +464,20 @@ module.exports = grammar({
       seq(kw("RETURN"), optional($._expression), $._terminator),
 
     interface_body: ($) =>
-      repeat1(
-        choice(
-          $.property_definition,
-          $.temp_table_definition,
-          $.event_definition,
-          $.method_definition,
-          $.dataset_definition
+      seq(
+        ":",
+        repeat(
+          choice(
+            $.property_definition,
+            $.temp_table_definition,
+            $.event_definition,
+            $.method_definition,
+            $.dataset_definition
+          )
         )
       ),
+
+    interface_tuning: ($) => choice($.inherits),
     interface_statement: ($) =>
       seq(
         kw("INTERFACE"),
@@ -481,9 +485,9 @@ module.exports = grammar({
           "name",
           choice($._string_literal, $.identifier, $.qualified_name)
         ),
-        optional($.inherits),
-        ":",
-        choice(seq($.interface_body, kw("END")), kw("END")),
+        repeat($.interface_tuning),
+        alias($.interface_body, $.body),
+        kw("END"),
         optional(kw("INTERFACE")),
         $._terminator
       ),
@@ -504,42 +508,42 @@ module.exports = grammar({
         optional(
           seq(
             optional(seq("(", optional(_list($.function_parameter, ",")), ")")),
-            ":",
-            optional($.body),
+            $.body,
             kw("END"),
-            kw("GET")
+            optional(kw("GET"))
           )
         ),
         $._terminator
       ),
+
     setter: ($) =>
       seq(
         optional($.access_tuning),
         kw("SET"),
-        optional(
-          seq(
-            seq("(", optional(_list($.function_parameter, ",")), ")"),
-            ":",
-            optional($.body),
-            kw("END"),
-            kw("SET")
-          )
-        ),
+        optional(seq("(", optional(_list($.function_parameter, ",")), ")")),
+        optional(seq($.body, kw("END"), optional(kw("SET")))),
         $._terminator
       ),
+
     property_definition: ($) =>
       seq(
         choice(kw("DEFINE"), kw("DEF")),
-        repeat(choice($.access_tuning, $.scope_tuning, $.property_type)),
-        optional($.serialization_tuning),
+        repeat(
+          choice(
+            $.access_tuning,
+            $.scope_tuning,
+            $.property_type,
+            $.serialization_tuning
+          )
+        ),
         kw("PROPERTY"),
-        $.identifier,
+        field("name", $.identifier),
         choice(
           seq(kw("AS"), choice($.primitive_type, $.identifier)),
           seq(kw("LIKE"), field("like", choice($.identifier, $.qualified_name)))
         ),
         repeat($.property_tuning),
-        repeat(choice($.getter, $.setter))
+        choice(repeat1(choice($.getter, $.setter)), $._terminator)
       ),
 
     event_definition: ($) =>
@@ -562,7 +566,7 @@ module.exports = grammar({
         field("return_type", choice($.primitive_type, $.identifier)),
         $.identifier,
         seq("(", optional(_list($.function_parameter, ",")), ")"),
-        optional(seq(":", optional($.body), kw("END"), optional(kw("METHOD")))),
+        optional(seq($.body, kw("END"), optional(kw("METHOD")))),
         $._terminator
       ),
 
@@ -599,19 +603,22 @@ module.exports = grammar({
       ),
 
     class_body: ($) =>
-      repeat1(
-        choice(
-          $.property_definition,
-          $.temp_table_definition,
-          $.event_definition,
-          $.method_definition,
-          $.dataset_definition,
-          $.constructor_definition,
-          $.destructor_definition,
-          $.variable_definition,
-          $.query_definition,
-          $.buffer_definition,
-          $.data_source_definition
+      seq(
+        ":",
+        repeat(
+          choice(
+            $.property_definition,
+            $.temp_table_definition,
+            $.event_definition,
+            $.method_definition,
+            $.dataset_definition,
+            $.constructor_definition,
+            $.destructor_definition,
+            $.variable_definition,
+            $.query_definition,
+            $.buffer_definition,
+            $.data_source_definition
+          )
         )
       ),
 
@@ -621,8 +628,7 @@ module.exports = grammar({
         repeat(choice($.scope_tuning, $.access_tuning)),
         $.identifier,
         seq("(", optional(_list($.function_parameter, ",")), ")"),
-        ":",
-        optional($.body),
+        $.body,
         kw("END"),
         optional(kw("CONSTRUCTOR")),
         $._terminator
@@ -634,11 +640,20 @@ module.exports = grammar({
         repeat($.access_tuning),
         $.identifier,
         seq("(", ")"),
-        ":",
-        optional($.body),
+        $.body,
         kw("END"),
         optional(kw("DESTRUCTOR")),
         $._terminator
+      ),
+
+    class_tuning: ($) =>
+      choice(
+        $.inherits,
+        $.implements,
+        $.use_widget_pool,
+        $.abstract,
+        $.final,
+        $.serializable
       ),
 
     class_statement: ($) =>
@@ -648,18 +663,9 @@ module.exports = grammar({
           "name",
           choice($._string_literal, $.identifier, $.qualified_name)
         ),
-        repeat(
-          choice(
-            $.inherits,
-            $.implements,
-            $.use_widget_pool,
-            $.abstract,
-            $.final,
-            $.serializable
-          )
-        ),
-        ":",
-        choice(seq($.class_body, kw("END")), kw("END")),
+        repeat($.class_tuning),
+        alias($.class_body, $.body),
+        kw("END"),
         optional(kw("CLASS")),
         $._terminator
       ),
@@ -871,8 +877,7 @@ module.exports = grammar({
         repeat($.do_tuning),
         optional($.stop_after_phrase),
         optional(choice($.on_error_phrase, $.on_stop_phrase, $.on_quit_phrase)),
-        ":",
-        optional($.body),
+        $.body,
         $._block_terminator
       ),
 
@@ -884,22 +889,21 @@ module.exports = grammar({
     case_when_branch: ($) =>
       seq(
         kw("WHEN"),
-        field("value", $._expression),
+        field("condition", $._expression),
         kw("THEN"),
-        field("body", $._case_branch_body)
+        alias($._case_branch_body, $.body)
       ),
     case_otherwise_branch: ($) =>
-      seq(kw("OTHERWISE"), field("body", $._case_branch_body)),
+      seq(kw("OTHERWISE"), alias($._case_branch_body, $.body)),
 
     case_body: ($) =>
-      seq(repeat1($.case_when_branch), optional($.case_otherwise_branch)),
+      seq(":", repeat1($.case_when_branch), optional($.case_otherwise_branch)),
 
     case_statement: ($) =>
       seq(
         kw("CASE"),
         $.identifier,
-        ":",
-        optional($.case_body),
+        alias($.case_body, $.body),
         $._case_terminator
       ),
 
@@ -955,8 +959,7 @@ module.exports = grammar({
         optional($.on_quit_phrase),
         optional($.on_stop_phrase),
         repeat(seq(",", $.for_phrase)),
-        ":",
-        optional($.body),
+        $.body,
         $._block_terminator
       ),
 
@@ -1034,8 +1037,7 @@ module.exports = grammar({
           "type",
           seq(optional(kw("CLASS")), choice($.identifier, $.qualified_name))
         ),
-        ":",
-        optional($.body),
+        $.body,
         kw("END"),
         optional(kw("CATCH")),
         $._terminator
@@ -1044,8 +1046,7 @@ module.exports = grammar({
     finally_statement: ($) =>
       seq(
         kw("FINALLY"),
-        ":",
-        optional($.body),
+        $.body,
         kw("END"),
         optional(kw("FINALLY")),
         $._terminator
@@ -1205,10 +1206,7 @@ module.exports = grammar({
         kw("PROMPT-FOR"),
         choice($.identifier, $.qualified_name),
         optional(seq(kw("FRAME"), field("frame", $.identifier))),
-        choice(
-          seq(kw("EDITING"), ":", optional($.body), $._block_terminator),
-          $._terminator
-        )
+        choice(seq(kw("EDITING"), $.body, $._block_terminator), $._terminator)
       ),
 
     variable: ($) => choice(field("name", $.identifier), $.assignment),
