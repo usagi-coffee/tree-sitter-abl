@@ -932,7 +932,7 @@ module.exports = grammar({
 
     for_phrase: ($) =>
       seq(
-        field("type", choice(kw("EACH"), kw("FIRST"), kw("LAST"))),
+        optional(field("type", choice(kw("EACH"), kw("FIRST"), kw("LAST")))),
         field("table", choice($.identifier, $.qualified_name)),
         optional($.of),
         optional($._pre_tuning),
