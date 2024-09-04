@@ -919,7 +919,8 @@ module.exports = grammar({
         kw("EXCLUSIVE-LOCK"),
         kw("NO-WAIT"),
         kw("NO-ERROR"),
-        seq(kw("USE-INDEX"), $.identifier)
+        seq(kw("USE-INDEX"), $.identifier),
+        $.using
       ),
 
     sort_order: ($) =>
@@ -985,32 +986,20 @@ module.exports = grammar({
         optional(choice(kw("FIRST"), kw("LAST"))),
         field("table", choice($.identifier, $.qualified_name)),
         optional(field("constant", $._expression)),
-        repeat(
-          choice(
-            $.query_tuning,
-            $.of,
-            $.where_clause,
-            seq(
-              alias($._using_first, $.using),
-              repeat(alias($._using_and, $.using))
-            )
-          )
-        ),
+        repeat(choice($.query_tuning, $.of, $.where_clause)),
         ")"
       ),
 
     of: ($) => seq(kw("OF"), choice($.identifier, $.qualified_name)),
-    _using_first: ($) =>
+    using: ($) =>
       seq(
         kw("USING"),
-        optional(seq(kw("FRAME"), field("frame", $.identifier))),
-        field("field", $.identifier)
+        seq($.using_field, repeat(seq(kw("AND"), $.using_field)))
       ),
-    _using_and: ($) =>
+    using_field: ($) =>
       seq(
-        kw("AND"),
         optional(seq(kw("FRAME"), field("frame", $.identifier))),
-        field("field", $.identifier)
+        field("field", choice($.identifier, $.qualified_name))
       ),
 
     abl_statement: ($) =>

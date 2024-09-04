@@ -1106,11 +1106,13 @@ w = CAN-FIND(LAST x OF y USING z1 AND FRAME f z2 WHERE z NO-LOCK).
         table: (identifier)
         (of
           (identifier))
-        (using
-          field: (identifier))
-        (using
-          frame: (identifier)
-          field: (identifier))
+        (query_tuning
+          (using
+            (using_field
+              field: (identifier))
+            (using_field
+              frame: (identifier)
+              field: (identifier))))
         (where_clause
           condition: (identifier))
         (query_tuning)))))
