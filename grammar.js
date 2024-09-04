@@ -1104,7 +1104,7 @@ module.exports = grammar({
 
     error_scope_statement: ($) =>
       seq(
-        choice("ROUTINE-LEVEL", "BLOCK-LEVEL"),
+        choice(kw("ROUTINE-LEVEL"), kw("BLOCK-LEVEL")),
         $.on_error_phrase,
         $._terminator
       ),
