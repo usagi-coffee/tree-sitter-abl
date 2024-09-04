@@ -735,6 +735,7 @@ PROCEDURE statement
 ================================================================================
 
 PROCEDURE some_procedure:
+  define input param pcMyNumber as int no-undo.
   /* nice */
 END PROCEDURE.
 
@@ -746,7 +747,11 @@ END.
 (source_code
   (procedure_statement
     (identifier)
-    (body)
+    (body
+      (procedure_parameter_definition
+        (identifier)
+        (primitive_type)
+        (variable_tuning)))
     (comment))
   (procedure_statement
     (identifier)

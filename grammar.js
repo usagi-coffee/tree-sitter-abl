@@ -422,8 +422,8 @@ module.exports = grammar({
       seq(
         choice(kw("DEFINE"), kw("DEF")),
         choice(kw("INPUT"), kw("OUTPUT"), kw("INPUT-OUTPUT"), kw("RETURN")),
-        kw("PARAMETER"),
-        $.identifier,
+        choice(kw("PARAMETER"), kw("PARAM")),
+        field("name", $.identifier),
         kw("AS"),
         choice($.primitive_type, $.identifier),
         repeat($.variable_tuning),
