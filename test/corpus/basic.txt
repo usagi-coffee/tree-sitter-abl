@@ -767,6 +767,10 @@ FUNCTION fn-no-mode RETURNS INTEGER (par1 AS INTEGER).
   RETURN par1.
 END.
 
+FUNCTION fn-no-parameters RETURNS INTEGER:
+  RETURN 0.
+END.
+
 fn(INPUT somepar, OUTPUT otherpar).
 fn-no-mode(somerpar).
 fn-no-mode(somerpar) NO-ERROR.
@@ -799,6 +803,12 @@ PersonData:GetById(id, output table ttPerson by-reference).
     (body
       (return_statement
         (identifier))))
+  (function_statement
+    name: (identifier)
+    return_type: (primitive_type)
+    (body
+      (return_statement
+        (number_literal))))
   (function_call_statement
     (function_call
       function: (identifier)
