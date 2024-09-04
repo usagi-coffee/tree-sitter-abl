@@ -491,7 +491,7 @@ module.exports = grammar({
     property_type: ($) => choice(kw("ABSTRACT"), kw("OVERRIDE")),
     property_tuning: ($) =>
       choice(
-        seq(kw("INITIAL"), $._expression),
+        seq(choice(kw("INITIAL"), kw("INIT")), $._expression),
         seq(kw("DECIMALS"), $._expression),
         seq(kw("EXTENT"), $.number_literal),
         kw("NO-UNDO")
@@ -1107,7 +1107,7 @@ module.exports = grammar({
         seq(kw("FORMAT"), $._string_literal),
         seq(kw("DECIMALS"), $.number_literal),
         seq(kw("EXTENT"), $.number_literal),
-        seq(kw("INITIAL"), $._expression)
+        seq(choice(kw("INITIAL"), kw("INIT")), $._expression)
       ),
     field_definition: ($) =>
       seq(
