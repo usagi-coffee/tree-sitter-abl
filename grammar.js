@@ -1111,7 +1111,14 @@ module.exports = grammar({
         seq(kw("FORMAT"), $._string_literal),
         seq(kw("DECIMALS"), $.number_literal),
         seq(kw("EXTENT"), $.number_literal),
-        seq(choice(kw("INITIAL"), kw("INIT")), $._expression)
+        seq(choice(kw("INITIAL"), kw("INIT")), $._expression),
+        kw("SERIALIZE-HIDDEN"),
+        seq(kw("SERIALIZE-NAME"), $._string_literal),
+        seq(kw("XML-DATA-TYPE"), $._string_literal),
+        seq(kw("XML-NODE-TYPE"), $._string_literal),
+        seq(kw("XML-NODE-NAME"), $._string_literal),
+        seq(kw("HELP"), $._string_literal),
+        seq(kw("NOT"), kw("CASE-SENSITIVE"))
       ),
     field_definition: ($) =>
       seq(
