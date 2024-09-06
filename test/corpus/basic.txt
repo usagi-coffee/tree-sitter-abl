@@ -1580,30 +1580,27 @@ END CASE.
     (body
       (case_when_branch
         (double_quoted_string)
-        (body
-          (do_block
-            (body
-              (variable_assignment
-                (assignment
-                  (identifier)
-                  (number_literal)))
-              (variable_assignment
-                (assignment
-                  (identifier)
-                  (number_literal)))))))
+        (do_block
+          (body
+            (variable_assignment
+              (assignment
+                (identifier)
+                (number_literal)))
+            (variable_assignment
+              (assignment
+                (identifier)
+                (number_literal))))))
       (case_when_branch
         (double_quoted_string)
-        (body
-          (variable_assignment
-            (assignment
-              (identifier)
-              (number_literal)))))
+        (variable_assignment
+          (assignment
+            (identifier)
+            (number_literal))))
       (case_otherwise_branch
-        (body
-          (variable_assignment
-            (assignment
-              (identifier)
-              (number_literal))))))))
+        (variable_assignment
+          (assignment
+            (identifier)
+            (number_literal)))))))
 
 ================================================================================
 DO block

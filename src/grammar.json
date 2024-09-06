@@ -8888,13 +8888,8 @@
           "value": "THEN"
         },
         {
-          "type": "ALIAS",
-          "content": {
-            "type": "SYMBOL",
-            "name": "_case_branch_body"
-          },
-          "named": true,
-          "value": "body"
+          "type": "SYMBOL",
+          "name": "_case_branch_body"
         }
       ]
     },
@@ -8918,13 +8913,8 @@
           "value": "OTHERWISE"
         },
         {
-          "type": "ALIAS",
-          "content": {
-            "type": "SYMBOL",
-            "name": "_case_branch_body"
-          },
-          "named": true,
-          "value": "body"
+          "type": "SYMBOL",
+          "name": "_case_branch_body"
         }
       ]
     },
@@ -8976,8 +8966,21 @@
           "value": "CASE"
         },
         {
-          "type": "SYMBOL",
-          "name": "identifier"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "identifier"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "qualified_name"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "object_access"
+            }
+          ]
         },
         {
           "type": "ALIAS",
@@ -11300,6 +11303,184 @@
             {
               "type": "SYMBOL",
               "name": "_expression"
+            }
+          ]
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "PATTERN",
+                "value": "[sS][eE][rR][iI][aA][lL][iI][zZ][eE][--][hH][iI][dD][dD][eE][nN]"
+              }
+            }
+          },
+          "named": false,
+          "value": "SERIALIZE-HIDDEN"
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PREC",
+                  "value": 1,
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "[sS][eE][rR][iI][aA][lL][iI][zZ][eE][--][nN][aA][mM][eE]"
+                  }
+                }
+              },
+              "named": false,
+              "value": "SERIALIZE-NAME"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_string_literal"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PREC",
+                  "value": 1,
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "[xX][mM][lL][--][dD][aA][tT][aA][--][tT][yY][pP][eE]"
+                  }
+                }
+              },
+              "named": false,
+              "value": "XML-DATA-TYPE"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_string_literal"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PREC",
+                  "value": 1,
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "[xX][mM][lL][--][nN][oO][dD][eE][--][tT][yY][pP][eE]"
+                  }
+                }
+              },
+              "named": false,
+              "value": "XML-NODE-TYPE"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_string_literal"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PREC",
+                  "value": 1,
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "[xX][mM][lL][--][nN][oO][dD][eE][--][nN][aA][mM][eE]"
+                  }
+                }
+              },
+              "named": false,
+              "value": "XML-NODE-NAME"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_string_literal"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PREC",
+                  "value": 1,
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "[hH][eE][lL][pP]"
+                  }
+                }
+              },
+              "named": false,
+              "value": "HELP"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_string_literal"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PREC",
+                  "value": 1,
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "[nN][oO][tT]"
+                  }
+                }
+              },
+              "named": false,
+              "value": "NOT"
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PREC",
+                  "value": 1,
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "[cC][aA][sS][eE][--][sS][eE][nN][sS][iI][tT][iI][vV][eE]"
+                  }
+                }
+              },
+              "named": false,
+              "value": "CASE-SENSITIVE"
             }
           ]
         }

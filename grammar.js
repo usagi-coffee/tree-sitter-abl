@@ -891,10 +891,9 @@ module.exports = grammar({
         kw("WHEN"),
         field("condition", $._expression),
         kw("THEN"),
-        alias($._case_branch_body, $.body)
+        $._case_branch_body
       ),
-    case_otherwise_branch: ($) =>
-      seq(kw("OTHERWISE"), alias($._case_branch_body, $.body)),
+    case_otherwise_branch: ($) => seq(kw("OTHERWISE"), $._case_branch_body),
 
     case_body: ($) =>
       seq(":", repeat1($.case_when_branch), optional($.case_otherwise_branch)),
