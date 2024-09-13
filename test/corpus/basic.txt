@@ -1595,6 +1595,7 @@ CASE test:
     x = 5.
     y = 20.
   END.
+  WHEN "yyy" OR WHEN "zxc" THEN y = 3.
   WHEN "def" THEN y = 10.
   OTHERWISE c = 8.
 END CASE.
@@ -1606,7 +1607,8 @@ END CASE.
     (identifier)
     (body
       (case_when_branch
-        (double_quoted_string)
+        (case_conditon
+          (double_quoted_string))
         (do_block
           (body
             (variable_assignment
@@ -1618,7 +1620,19 @@ END CASE.
                 (identifier)
                 (number_literal))))))
       (case_when_branch
-        (double_quoted_string)
+        (case_conditon
+          (logical_expression
+            (double_quoted_string)
+            (identifier)))
+        (case_conditon
+          (double_quoted_string))
+        (variable_assignment
+          (assignment
+            (identifier)
+            (number_literal))))
+      (case_when_branch
+        (case_conditon
+          (double_quoted_string))
         (variable_assignment
           (assignment
             (identifier)

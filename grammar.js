@@ -895,15 +895,14 @@ module.exports = grammar({
     _case_terminator: ($) =>
       choice($._block_terminator, seq(kw("END"), kw("CASE"), $._terminator)),
 
-    _case_branch_body: ($) => choice($.do_block, $._terminated_statement),
+    _case_branch_body: ($) =>
+      choice($.do_block, field("statement", $._terminated_statement)),
+
+    case_conditon: ($) =>
+      seq(optional(seq(kw("OR"), kw("WHEN"))), $._expression),
 
     case_when_branch: ($) =>
-      seq(
-        kw("WHEN"),
-        field("condition", $._expression),
-        kw("THEN"),
-        $._case_branch_body
-      ),
+      seq(kw("WHEN"), repeat($.case_conditon), kw("THEN"), $._case_branch_body),
     case_otherwise_branch: ($) => seq(kw("OTHERWISE"), $._case_branch_body),
 
     case_body: ($) =>
