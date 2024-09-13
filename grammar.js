@@ -170,6 +170,17 @@ module.exports = grammar({
         $.logical_expression
       ),
 
+    array_access: ($) =>
+      prec.right(
+        1,
+        seq(
+          field("array", choice($.identifier, $.object_access)),
+          "[",
+          $._expression,
+          "]"
+        )
+      ),
+
     /// Includes
     include_argument: ($) =>
       choice(
@@ -1235,6 +1246,7 @@ module.exports = grammar({
         $._binary_expression,
         $.qualified_name,
         $.object_access,
+        $.array_access,
         $.function_call,
         $.ternary_expression,
         $.available_expression,

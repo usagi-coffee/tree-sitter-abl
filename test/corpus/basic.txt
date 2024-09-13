@@ -1124,6 +1124,8 @@ OBJECT ACCESSORS statement
 DISPLAY some_object:root.
 DISPLAY some_object:chained_property:chained_another:method().
 
+PUT some_object:array[5].
+
 --------------------------------------------------------------------------------
 
 (source_code
@@ -1139,7 +1141,14 @@ DISPLAY some_object:chained_property:chained_another:method().
         object: (identifier)
         property: (identifier)
         property: (identifier)
-        property: (identifier)))))
+        property: (identifier))))
+  (abl_statement
+    statement: (identifier)
+    (array_access
+      array: (object_access
+        object: (identifier)
+        property: (identifier))
+      (number_literal))))
 
 ================================================================================
 TERNARY EXPRESSION statement
