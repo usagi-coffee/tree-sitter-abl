@@ -92,41 +92,50 @@ DEFINE VARIABLE cls AS CLASS CustomClass.
 (source_code
   (variable_definition
     (identifier)
-    (primitive_type))
+    (type_tuning
+      (primitive_type)))
   (variable_definition
     (identifier)
-    (primitive_type))
+    (type_tuning
+      (primitive_type)))
   (variable_definition
     (identifier)
-    (primitive_type))
+    (type_tuning
+      (primitive_type)))
   (variable_definition
     (identifier)
-    (primitive_type))
+    (type_tuning
+      (primitive_type)))
   (variable_definition
     (identifier)
-    (primitive_type)
+    (type_tuning
+      (primitive_type))
     (variable_tuning))
   (variable_definition
     (identifier)
-    (primitive_type)
+    (type_tuning
+      (primitive_type))
     (variable_tuning
       (null_expression)))
   (variable_definition
     (identifier)
-    (identifier))
+    (type_tuning
+      (identifier)))
   (variable_definition
     (identifier)
-    (primitive_type
-      (qualified_name
-        (identifier)
-        (identifier)
-        (identifier)
-        (identifier)))
+    (type_tuning
+      (primitive_type
+        (qualified_name
+          (identifier)
+          (identifier)
+          (identifier)
+          (identifier))))
     (variable_tuning))
   (variable_definition
     (identifier)
-    (primitive_type
-      (identifier))))
+    (type_tuning
+      (primitive_type
+        (identifier)))))
 
 ================================================================================
 VARIABLE ASSIGNMENT statement
@@ -142,7 +151,8 @@ SESSION:NUMERIC-FORMAT = "european".
 (source_code
   (variable_definition
     (identifier)
-    (primitive_type))
+    (type_tuning
+      (primitive_type)))
   (variable_assignment
     (assignment
       (identifier)
@@ -750,7 +760,8 @@ END.
     (body
       (procedure_parameter_definition
         (identifier)
-        (primitive_type)
+        (type_tuning
+          (primitive_type))
         (variable_tuning)))
     (comment))
   (procedure_statement
@@ -788,11 +799,13 @@ PersonData:GetById(id, output table ttPerson by-reference).
     (function_parameter
       (function_parameter_mode)
       (identifier)
-      (primitive_type))
+      (type_tuning
+        type: (primitive_type)))
     (function_parameter
       (function_parameter_mode)
       (identifier)
-      (primitive_type))
+      (type_tuning
+        type: (primitive_type)))
     (body
       (return_statement
         (identifier))))
@@ -801,7 +814,8 @@ PersonData:GetById(id, output table ttPerson by-reference).
     return_type: (primitive_type)
     (function_parameter
       (identifier)
-      (primitive_type))
+      (type_tuning
+        type: (primitive_type)))
     (body
       (return_statement
         (identifier))))
@@ -1518,7 +1532,8 @@ END CLASS.
     (body
       (variable_definition
         name: (identifier)
-        type: (primitive_type))))
+        (type_tuning
+          type: (primitive_type)))))
   (class_statement
     name: (identifier)
     (class_tuning
@@ -1531,7 +1546,8 @@ END CLASS.
     (body
       (variable_definition
         name: (identifier)
-        type: (primitive_type))))
+        (type_tuning
+          type: (primitive_type)))))
   (variable_assignment
     (assignment
       name: (identifier)
@@ -1550,7 +1566,8 @@ END CLASS.
       (property_definition
         (access_tuning)
         name: (identifier)
-        (primitive_type)
+        (type_tuning
+          type: (primitive_type))
         (property_tuning
           (number_literal))
         (property_tuning)
@@ -1560,7 +1577,8 @@ END CLASS.
       (property_definition
         (access_tuning)
         name: (identifier)
-        (primitive_type)
+        (type_tuning
+          type: (primitive_type))
         (property_tuning
           (null_expression))
         (property_tuning)
@@ -1742,38 +1760,42 @@ DEFINE TEMP-TABLE foo
     (temp_table_tuning)
     (field_definition
       (identifier)
-      (qualified_name
-        (identifier)
-        (identifier)))
-    (field_definition
+      (type_tuning
+        (identifier))))
+  (abl_statement
+    (identifier)
+    (identifier)
+    (identifier)
+    (identifier)
+    (qualified_name
       (identifier)
-      (qualified_name
-        (identifier)
-        (identifier))
-      (field_option
-        (double_quoted_string)))
-    (index_definition
-      (identifier)
-      (index_tuning)
-      (sort_column
-        (identifier)
-        (sort_order)))
-    (index_definition
-      (identifier)
-      (sort_column
-        (identifier)
-        (sort_order))))
+      (identifier))
+    (identifier)
+    (double_quoted_string)
+    (identifier)
+    (identifier)
+    (identifier)
+    (identifier)
+    (identifier)
+    (identifier)
+    (identifier)
+    (identifier)
+    (identifier)
+    (identifier))
   (temp_table_definition
     (identifier)
     (field_definition
       (identifier)
-      (primitive_type))
+      (type_tuning
+        (primitive_type)))
     (field_definition
       (identifier)
-      (primitive_type))
+      (type_tuning
+        (primitive_type)))
     (field_definition
       (identifier)
-      (primitive_type))
+      (type_tuning
+        (primitive_type)))
     (index_definition
       (identifier)
       (sort_column
@@ -1853,14 +1875,16 @@ END INTERFACE.
       (property_definition
         (access_tuning)
         (identifier)
-        (primitive_type)
+        (type_tuning
+          (primitive_type))
         (property_tuning)
         (getter)
         (setter))
       (property_definition
         (access_tuning)
         (identifier)
-        (primitive_type)
+        (type_tuning
+          (primitive_type))
         (property_tuning)
         (getter)
         (setter))
@@ -1870,16 +1894,19 @@ END INTERFACE.
         (identifier)
         (function_parameter
           (identifier)
-          (primitive_type)))
+          (type_tuning
+            (primitive_type))))
       (comment)
       (temp_table_definition
         (identifier)
         (temp_table_tuning)
-        (identifier))
+        (type_tuning
+          (identifier)))
       (temp_table_definition
         (identifier)
         (temp_table_tuning)
-        (identifier))
+        (type_tuning
+          (identifier)))
       (comment)
       (dataset_definition
         (identifier)

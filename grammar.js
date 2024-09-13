@@ -23,6 +23,7 @@ module.exports = grammar({
       $.buffer_definition,
       $.query_definition,
       $.temp_table_definition,
+      $.workfile_definition,
       $.property_definition,
       $.data_source_definition,
       $.event_definition,
@@ -88,6 +89,12 @@ module.exports = grammar({
       prec.right(
         PREC.LOGICAL,
         seq($._expression, $._logical_operator, $._expression)
+      ),
+
+    type_tuning: ($) =>
+      choice(
+        seq(kw("AS"), field("type", choice($.primitive_type, $.identifier))),
+        seq(kw("LIKE"), field("type", $.identifier))
       ),
 
     _unary_minus_expressions: ($) =>
@@ -270,10 +277,7 @@ module.exports = grammar({
         repeat(choice($.scope_tuning, $.access_tuning, $.serialization_tuning)),
         choice(kw("VARIABLE"), kw("VAR")),
         field("name", $.identifier),
-        choice(
-          seq(kw("AS"), field("type", choice($.primitive_type, $.identifier))),
-          seq(kw("LIKE"), field("like", $.identifier))
-        ),
+        $.type_tuning,
         repeat($.variable_tuning),
         $._terminator
       ),
@@ -335,7 +339,7 @@ module.exports = grammar({
         choice(
           seq(
             choice($.identifier, $.object_access, $.qualified_name),
-            optional(seq(kw("AS"), choice($.primitive_type, $.identifier)))
+            optional($.type_tuning)
           ),
           seq(
             choice(
@@ -435,8 +439,7 @@ module.exports = grammar({
         choice(kw("INPUT"), kw("OUTPUT"), kw("INPUT-OUTPUT"), kw("RETURN")),
         choice(kw("PARAMETER"), kw("PARAM")),
         field("name", $.identifier),
-        kw("AS"),
-        choice($.primitive_type, $.identifier),
+        $.type_tuning,
         repeat($.variable_tuning),
         $._terminator
       ),
@@ -452,10 +455,7 @@ module.exports = grammar({
         optional($.function_parameter_mode),
         optional(kw("DATASET")),
         $.identifier,
-        choice(
-          seq(kw("AS"), choice($.primitive_type, $.identifier)),
-          kw("BIND")
-        )
+        choice($.type_tuning, kw("BIND"))
       ),
 
     function_statement: ($) =>
@@ -549,10 +549,7 @@ module.exports = grammar({
         ),
         kw("PROPERTY"),
         field("name", $.identifier),
-        choice(
-          seq(kw("AS"), choice($.primitive_type, $.identifier)),
-          seq(kw("LIKE"), field("like", choice($.identifier, $.qualified_name)))
-        ),
+        $.type_tuning,
         repeat($.property_tuning),
         choice(repeat1(choice($.getter, $.setter)), $._terminator)
       ),
@@ -1108,12 +1105,7 @@ module.exports = grammar({
         $._terminator
       ),
 
-    temp_table_tuning: ($) =>
-      choice(
-        kw("NO-UNDO"),
-        kw("REFERENCE-ONLY"),
-        seq("LIKE", choice($.identifier, $.qualified_name))
-      ),
+    temp_table_tuning: ($) => choice(kw("NO-UNDO"), kw("REFERENCE-ONLY")),
     field_option: ($) =>
       choice(
         seq(kw("COLUMN-LABEL"), $._string_literal),
@@ -1131,15 +1123,7 @@ module.exports = grammar({
         seq(kw("NOT"), kw("CASE-SENSITIVE"))
       ),
     field_definition: ($) =>
-      seq(
-        kw("FIELD"),
-        $.identifier,
-        choice(
-          seq(kw("AS"), choice($.primitive_type, $.identifier)),
-          seq(kw("LIKE"), field("like", choice($.identifier, $.qualified_name)))
-        ),
-        repeat($.field_option)
-      ),
+      seq(kw("FIELD"), $.identifier, $.type_tuning, repeat($.field_option)),
     index_tuning: ($) =>
       choice(
         seq(choice(kw("IS"), kw("AS")), kw("PRIMARY")),
@@ -1155,6 +1139,20 @@ module.exports = grammar({
           repeat($.sort_column)
         )
       ),
+
+    workfile_tuning: ($) => kw("NO-UNDO"),
+    workfile_definition: ($) =>
+      seq(
+        choice(kw("DEFINE"), kw("DEF")),
+        repeat(choice($.access_tuning, $.scope_tuning)),
+        choice(kw("WORKFILE"), kw("WORK-TABLE")),
+        field("name", $.identifier),
+        repeat($.workfile_tuning),
+        optional($.type_tuning),
+        repeat($.field_definition),
+        $._terminator
+      ),
+
     temp_table_definition: ($) =>
       seq(
         choice(kw("DEFINE"), kw("DEF")),
@@ -1162,7 +1160,7 @@ module.exports = grammar({
         kw("TEMP-TABLE"),
         $.identifier,
         repeat($.temp_table_tuning),
-        optional(seq(kw("LIKE"), choice($.identifier, $.qualified_name))),
+        optional($.type_tuning),
         repeat(choice($.field_definition, $.index_definition)),
         $._terminator
       ),
@@ -1291,6 +1289,7 @@ module.exports = grammar({
         $.undo_statement,
         $.error_scope_statement,
         $.temp_table_definition,
+        $.workfile_definition,
         $.using_statement,
         $.class_statement,
         $.interface_statement,
@@ -1321,6 +1320,7 @@ module.exports = grammar({
         $.undo_statement,
         $.error_scope_statement,
         $.temp_table_definition,
+        $.workfile_definition,
         $.class_statement,
         $.interface_statement,
         $.on_statement,
