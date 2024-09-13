@@ -568,6 +568,78 @@
         ]
       }
     },
+    "type_tuning": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PREC",
+                  "value": 1,
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "[aA][sS]"
+                  }
+                }
+              },
+              "named": false,
+              "value": "AS"
+            },
+            {
+              "type": "FIELD",
+              "name": "type",
+              "content": {
+                "type": "CHOICE",
+                "members": [
+                  {
+                    "type": "SYMBOL",
+                    "name": "primitive_type"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "identifier"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PREC",
+                  "value": 1,
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "[lL][iI][kK][eE]"
+                  }
+                }
+              },
+              "named": false,
+              "value": "LIKE"
+            },
+            {
+              "type": "FIELD",
+              "name": "type",
+              "content": {
+                "type": "SYMBOL",
+                "name": "identifier"
+              }
+            }
+          ]
+        }
+      ]
+    },
     "_unary_minus_expressions": {
       "type": "CHOICE",
       "members": [
@@ -690,6 +762,40 @@
         {
           "type": "SYMBOL",
           "name": "_expression"
+        }
+      ]
+    },
+    "temp_table_expression": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "PATTERN",
+                "value": "[tT][eE][mM][pP][--][tT][aA][bB][lL][eE]"
+              }
+            }
+          },
+          "named": false,
+          "value": "TEMP-TABLE"
+        },
+        {
+          "type": "FIELD",
+          "name": "table",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "_expression"
+              }
+            ]
+          }
         }
       ]
     },
@@ -1147,6 +1253,44 @@
           "name": "logical_expression"
         }
       ]
+    },
+    "array_access": {
+      "type": "PREC_RIGHT",
+      "value": 1,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "FIELD",
+            "name": "array",
+            "content": {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "identifier"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "object_access"
+                }
+              ]
+            }
+          },
+          {
+            "type": "STRING",
+            "value": "["
+          },
+          {
+            "type": "SYMBOL",
+            "name": "_expression"
+          },
+          {
+            "type": "STRING",
+            "value": "]"
+          }
+        ]
+      }
     },
     "include_argument": {
       "type": "CHOICE",
@@ -2145,76 +2289,8 @@
           }
         },
         {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SEQ",
-              "members": [
-                {
-                  "type": "ALIAS",
-                  "content": {
-                    "type": "TOKEN",
-                    "content": {
-                      "type": "PREC",
-                      "value": 1,
-                      "content": {
-                        "type": "PATTERN",
-                        "value": "[aA][sS]"
-                      }
-                    }
-                  },
-                  "named": false,
-                  "value": "AS"
-                },
-                {
-                  "type": "FIELD",
-                  "name": "type",
-                  "content": {
-                    "type": "CHOICE",
-                    "members": [
-                      {
-                        "type": "SYMBOL",
-                        "name": "primitive_type"
-                      },
-                      {
-                        "type": "SYMBOL",
-                        "name": "identifier"
-                      }
-                    ]
-                  }
-                }
-              ]
-            },
-            {
-              "type": "SEQ",
-              "members": [
-                {
-                  "type": "ALIAS",
-                  "content": {
-                    "type": "TOKEN",
-                    "content": {
-                      "type": "PREC",
-                      "value": 1,
-                      "content": {
-                        "type": "PATTERN",
-                        "value": "[lL][iI][kK][eE]"
-                      }
-                    }
-                  },
-                  "named": false,
-                  "value": "LIKE"
-                },
-                {
-                  "type": "FIELD",
-                  "name": "like",
-                  "content": {
-                    "type": "SYMBOL",
-                    "name": "identifier"
-                  }
-                }
-              ]
-            }
-          ]
+          "type": "SYMBOL",
+          "name": "type_tuning"
         },
         {
           "type": "REPEAT",
@@ -2836,38 +2912,8 @@
                   "type": "CHOICE",
                   "members": [
                     {
-                      "type": "SEQ",
-                      "members": [
-                        {
-                          "type": "ALIAS",
-                          "content": {
-                            "type": "TOKEN",
-                            "content": {
-                              "type": "PREC",
-                              "value": 1,
-                              "content": {
-                                "type": "PATTERN",
-                                "value": "[aA][sS]"
-                              }
-                            }
-                          },
-                          "named": false,
-                          "value": "AS"
-                        },
-                        {
-                          "type": "CHOICE",
-                          "members": [
-                            {
-                              "type": "SYMBOL",
-                              "name": "primitive_type"
-                            },
-                            {
-                              "type": "SYMBOL",
-                              "name": "identifier"
-                            }
-                          ]
-                        }
-                      ]
+                      "type": "SYMBOL",
+                      "name": "type_tuning"
                     },
                     {
                       "type": "BLANK"
@@ -3849,33 +3895,8 @@
           }
         },
         {
-          "type": "ALIAS",
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "PREC",
-              "value": 1,
-              "content": {
-                "type": "PATTERN",
-                "value": "[aA][sS]"
-              }
-            }
-          },
-          "named": false,
-          "value": "AS"
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "primitive_type"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "identifier"
-            }
-          ]
+          "type": "SYMBOL",
+          "name": "type_tuning"
         },
         {
           "type": "REPEAT",
@@ -4024,38 +4045,8 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "SEQ",
-              "members": [
-                {
-                  "type": "ALIAS",
-                  "content": {
-                    "type": "TOKEN",
-                    "content": {
-                      "type": "PREC",
-                      "value": 1,
-                      "content": {
-                        "type": "PATTERN",
-                        "value": "[aA][sS]"
-                      }
-                    }
-                  },
-                  "named": false,
-                  "value": "AS"
-                },
-                {
-                  "type": "CHOICE",
-                  "members": [
-                    {
-                      "type": "SYMBOL",
-                      "name": "primitive_type"
-                    },
-                    {
-                      "type": "SYMBOL",
-                      "name": "identifier"
-                    }
-                  ]
-                }
-              ]
+              "type": "SYMBOL",
+              "name": "type_tuning"
             },
             {
               "type": "ALIAS",
@@ -4964,81 +4955,8 @@
           }
         },
         {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SEQ",
-              "members": [
-                {
-                  "type": "ALIAS",
-                  "content": {
-                    "type": "TOKEN",
-                    "content": {
-                      "type": "PREC",
-                      "value": 1,
-                      "content": {
-                        "type": "PATTERN",
-                        "value": "[aA][sS]"
-                      }
-                    }
-                  },
-                  "named": false,
-                  "value": "AS"
-                },
-                {
-                  "type": "CHOICE",
-                  "members": [
-                    {
-                      "type": "SYMBOL",
-                      "name": "primitive_type"
-                    },
-                    {
-                      "type": "SYMBOL",
-                      "name": "identifier"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "SEQ",
-              "members": [
-                {
-                  "type": "ALIAS",
-                  "content": {
-                    "type": "TOKEN",
-                    "content": {
-                      "type": "PREC",
-                      "value": 1,
-                      "content": {
-                        "type": "PATTERN",
-                        "value": "[lL][iI][kK][eE]"
-                      }
-                    }
-                  },
-                  "named": false,
-                  "value": "LIKE"
-                },
-                {
-                  "type": "FIELD",
-                  "name": "like",
-                  "content": {
-                    "type": "CHOICE",
-                    "members": [
-                      {
-                        "type": "SYMBOL",
-                        "name": "identifier"
-                      },
-                      {
-                        "type": "SYMBOL",
-                        "name": "qualified_name"
-                      }
-                    ]
-                  }
-                }
-              ]
-            }
-          ]
+          "type": "SYMBOL",
+          "name": "type_tuning"
         },
         {
           "type": "REPEAT",
@@ -5701,8 +5619,12 @@
           "value": "DATASET"
         },
         {
-          "type": "SYMBOL",
-          "name": "identifier"
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "SYMBOL",
+            "name": "identifier"
+          }
         },
         {
           "type": "ALIAS",
@@ -5764,8 +5686,16 @@
           ]
         },
         {
-          "type": "SYMBOL",
-          "name": "data_relation"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "data_relation"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         },
         {
           "type": "SYMBOL",
@@ -8839,8 +8769,66 @@
           "name": "do_block"
         },
         {
+          "type": "FIELD",
+          "name": "statement",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_terminated_statement"
+          }
+        }
+      ]
+    },
+    "case_conditon": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "TOKEN",
+                    "content": {
+                      "type": "PREC",
+                      "value": 1,
+                      "content": {
+                        "type": "PATTERN",
+                        "value": "[oO][rR]"
+                      }
+                    }
+                  },
+                  "named": false,
+                  "value": "OR"
+                },
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "TOKEN",
+                    "content": {
+                      "type": "PREC",
+                      "value": 1,
+                      "content": {
+                        "type": "PATTERN",
+                        "value": "[wW][hH][eE][nN]"
+                      }
+                    }
+                  },
+                  "named": false,
+                  "value": "WHEN"
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
           "type": "SYMBOL",
-          "name": "_terminated_statement"
+          "name": "_expression"
         }
       ]
     },
@@ -8864,11 +8852,10 @@
           "value": "WHEN"
         },
         {
-          "type": "FIELD",
-          "name": "condition",
+          "type": "REPEAT",
           "content": {
             "type": "SYMBOL",
-            "name": "_expression"
+            "name": "case_conditon"
           }
         },
         {
@@ -11107,28 +11094,6 @@
           },
           "named": false,
           "value": "REFERENCE-ONLY"
-        },
-        {
-          "type": "SEQ",
-          "members": [
-            {
-              "type": "STRING",
-              "value": "LIKE"
-            },
-            {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "SYMBOL",
-                  "name": "identifier"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "qualified_name"
-                }
-              ]
-            }
-          ]
         }
       ]
     },
@@ -11510,81 +11475,8 @@
           "name": "identifier"
         },
         {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SEQ",
-              "members": [
-                {
-                  "type": "ALIAS",
-                  "content": {
-                    "type": "TOKEN",
-                    "content": {
-                      "type": "PREC",
-                      "value": 1,
-                      "content": {
-                        "type": "PATTERN",
-                        "value": "[aA][sS]"
-                      }
-                    }
-                  },
-                  "named": false,
-                  "value": "AS"
-                },
-                {
-                  "type": "CHOICE",
-                  "members": [
-                    {
-                      "type": "SYMBOL",
-                      "name": "primitive_type"
-                    },
-                    {
-                      "type": "SYMBOL",
-                      "name": "identifier"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "SEQ",
-              "members": [
-                {
-                  "type": "ALIAS",
-                  "content": {
-                    "type": "TOKEN",
-                    "content": {
-                      "type": "PREC",
-                      "value": 1,
-                      "content": {
-                        "type": "PATTERN",
-                        "value": "[lL][iI][kK][eE]"
-                      }
-                    }
-                  },
-                  "named": false,
-                  "value": "LIKE"
-                },
-                {
-                  "type": "FIELD",
-                  "name": "like",
-                  "content": {
-                    "type": "CHOICE",
-                    "members": [
-                      {
-                        "type": "SYMBOL",
-                        "name": "identifier"
-                      },
-                      {
-                        "type": "SYMBOL",
-                        "name": "qualified_name"
-                      }
-                    ]
-                  }
-                }
-              ]
-            }
-          ]
+          "type": "SYMBOL",
+          "name": "type_tuning"
         },
         {
           "type": "REPEAT",
@@ -11817,6 +11709,155 @@
         ]
       }
     },
+    "workfile_tuning": {
+      "type": "ALIAS",
+      "content": {
+        "type": "TOKEN",
+        "content": {
+          "type": "PREC",
+          "value": 1,
+          "content": {
+            "type": "PATTERN",
+            "value": "[nN][oO][--][uU][nN][dD][oO]"
+          }
+        }
+      },
+      "named": false,
+      "value": "NO-UNDO"
+    },
+    "workfile_definition": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PREC",
+                  "value": 1,
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "[dD][eE][fF][iI][nN][eE]"
+                  }
+                }
+              },
+              "named": false,
+              "value": "DEFINE"
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PREC",
+                  "value": 1,
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "[dD][eE][fF]"
+                  }
+                }
+              },
+              "named": false,
+              "value": "DEF"
+            }
+          ]
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "access_tuning"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "scope_tuning"
+              }
+            ]
+          }
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PREC",
+                  "value": 1,
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "[wW][oO][rR][kK][fF][iI][lL][eE]"
+                  }
+                }
+              },
+              "named": false,
+              "value": "WORKFILE"
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PREC",
+                  "value": 1,
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "[wW][oO][rR][kK][--][tT][aA][bB][lL][eE]"
+                  }
+                }
+              },
+              "named": false,
+              "value": "WORK-TABLE"
+            }
+          ]
+        },
+        {
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "SYMBOL",
+            "name": "identifier"
+          }
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "workfile_tuning"
+          }
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "type_tuning"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "field_definition"
+          }
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_terminator"
+        }
+      ]
+    },
     "temp_table_definition": {
       "type": "SEQ",
       "members": [
@@ -11908,38 +11949,8 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "SEQ",
-              "members": [
-                {
-                  "type": "ALIAS",
-                  "content": {
-                    "type": "TOKEN",
-                    "content": {
-                      "type": "PREC",
-                      "value": 1,
-                      "content": {
-                        "type": "PATTERN",
-                        "value": "[lL][iI][kK][eE]"
-                      }
-                    }
-                  },
-                  "named": false,
-                  "value": "LIKE"
-                },
-                {
-                  "type": "CHOICE",
-                  "members": [
-                    {
-                      "type": "SYMBOL",
-                      "name": "identifier"
-                    },
-                    {
-                      "type": "SYMBOL",
-                      "name": "qualified_name"
-                    }
-                  ]
-                }
-              ]
+              "type": "SYMBOL",
+              "name": "type_tuning"
             },
             {
               "type": "BLANK"
@@ -12686,6 +12697,971 @@
         }
       ]
     },
+    "image_phrase": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PREC",
+                  "value": 1,
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "[iI][mM][aA][gG][eE]"
+                  }
+                }
+              },
+              "named": false,
+              "value": "IMAGE"
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PREC",
+                  "value": 1,
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "[iI][mM][aA][gG][eE][--][uU][pP]"
+                  }
+                }
+              },
+              "named": false,
+              "value": "IMAGE-UP"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PREC",
+                  "value": 1,
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "[fF][iI][lL][eE]"
+                  }
+                }
+              },
+              "named": false,
+              "value": "FILE"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_string_literal"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "ALIAS",
+                      "content": {
+                        "type": "TOKEN",
+                        "content": {
+                          "type": "PREC",
+                          "value": 1,
+                          "content": {
+                            "type": "PATTERN",
+                            "value": "[iI][mM][aA][gG][eE][--][sS][iI][zZ][eE]"
+                          }
+                        }
+                      },
+                      "named": false,
+                      "value": "IMAGE-SIZE"
+                    },
+                    {
+                      "type": "ALIAS",
+                      "content": {
+                        "type": "TOKEN",
+                        "content": {
+                          "type": "PREC",
+                          "value": 1,
+                          "content": {
+                            "type": "PATTERN",
+                            "value": "[iI][mM][aA][gG][eE][--][sS][iI][zZ][eE][--][cC][hH][aA][rR][sS]"
+                          }
+                        }
+                      },
+                      "named": false,
+                      "value": "IMAGE-SIZE-CHARS"
+                    },
+                    {
+                      "type": "ALIAS",
+                      "content": {
+                        "type": "TOKEN",
+                        "content": {
+                          "type": "PREC",
+                          "value": 1,
+                          "content": {
+                            "type": "PATTERN",
+                            "value": "[iI][mM][aA][gG][eE][--][sS][iI][zZ][eE][--][pP][iI][xX][eE][lL][sS]"
+                          }
+                        }
+                      },
+                      "named": false,
+                      "value": "IMAGE-SIZE-PIXELS"
+                    }
+                  ]
+                },
+                {
+                  "type": "FIELD",
+                  "name": "width",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "number_literal"
+                  }
+                },
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "TOKEN",
+                    "content": {
+                      "type": "PREC",
+                      "value": 1,
+                      "content": {
+                        "type": "PATTERN",
+                        "value": "[bB][yY]"
+                      }
+                    }
+                  },
+                  "named": false,
+                  "value": "BY"
+                },
+                {
+                  "type": "FIELD",
+                  "name": "height",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "number_literal"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "TOKEN",
+                    "content": {
+                      "type": "PREC",
+                      "value": 1,
+                      "content": {
+                        "type": "PATTERN",
+                        "value": "[fF][rR][oO][mM]"
+                      }
+                    }
+                  },
+                  "named": false,
+                  "value": "FROM"
+                },
+                {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SEQ",
+                      "members": [
+                        {
+                          "type": "ALIAS",
+                          "content": {
+                            "type": "TOKEN",
+                            "content": {
+                              "type": "PREC",
+                              "value": 1,
+                              "content": {
+                                "type": "PATTERN",
+                                "value": "[xX]"
+                              }
+                            }
+                          },
+                          "named": false,
+                          "value": "X"
+                        },
+                        {
+                          "type": "SYMBOL",
+                          "name": "number_literal"
+                        },
+                        {
+                          "type": "ALIAS",
+                          "content": {
+                            "type": "TOKEN",
+                            "content": {
+                              "type": "PREC",
+                              "value": 1,
+                              "content": {
+                                "type": "PATTERN",
+                                "value": "[yY]"
+                              }
+                            }
+                          },
+                          "named": false,
+                          "value": "Y"
+                        },
+                        {
+                          "type": "SYMBOL",
+                          "name": "number_literal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "SEQ",
+                      "members": [
+                        {
+                          "type": "ALIAS",
+                          "content": {
+                            "type": "TOKEN",
+                            "content": {
+                              "type": "PREC",
+                              "value": 1,
+                              "content": {
+                                "type": "PATTERN",
+                                "value": "[rR][oO][wW]"
+                              }
+                            }
+                          },
+                          "named": false,
+                          "value": "ROW"
+                        },
+                        {
+                          "type": "SYMBOL",
+                          "name": "number_literal"
+                        },
+                        {
+                          "type": "ALIAS",
+                          "content": {
+                            "type": "TOKEN",
+                            "content": {
+                              "type": "PREC",
+                              "value": 1,
+                              "content": {
+                                "type": "PATTERN",
+                                "value": "[cC][oO][lL][uU][mM][nN]"
+                              }
+                            }
+                          },
+                          "named": false,
+                          "value": "COLUMN"
+                        },
+                        {
+                          "type": "SYMBOL",
+                          "name": "number_literal"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
+    },
+    "size_phrase": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PREC",
+                  "value": 1,
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "[sS][iI][zZ][eE]"
+                  }
+                }
+              },
+              "named": false,
+              "value": "SIZE"
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PREC",
+                  "value": 1,
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "[sS][iI][zZ][eE][--][cC][hH][aA][rR][sS]"
+                  }
+                }
+              },
+              "named": false,
+              "value": "SIZE-CHARS"
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PREC",
+                  "value": 1,
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "[sS][iI][zZ][eE][--][pP][iI][xX][eE][lL][sS]"
+                  }
+                }
+              },
+              "named": false,
+              "value": "SIZE-PIXELS"
+            }
+          ]
+        },
+        {
+          "type": "FIELD",
+          "name": "width",
+          "content": {
+            "type": "SYMBOL",
+            "name": "number_literal"
+          }
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "PATTERN",
+                "value": "[bB][yY]"
+              }
+            }
+          },
+          "named": false,
+          "value": "BY"
+        },
+        {
+          "type": "FIELD",
+          "name": "height",
+          "content": {
+            "type": "SYMBOL",
+            "name": "number_literal"
+          }
+        }
+      ]
+    },
+    "button_tuning": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PREC",
+                  "value": 1,
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "[aA][uU][tT][oO][--][gG][oO]"
+                  }
+                }
+              },
+              "named": false,
+              "value": "AUTO-GO"
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "TOKEN",
+                    "content": {
+                      "type": "PREC",
+                      "value": 1,
+                      "content": {
+                        "type": "PATTERN",
+                        "value": "[aA][uU][tT][oO][--][eE][nN][dD][kK][eE][yY]"
+                      }
+                    }
+                  },
+                  "named": false,
+                  "value": "AUTO-ENDKEY"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "PATTERN",
+                "value": "[dD][eE][fF][aA][uU][lL][tT]"
+              }
+            }
+          },
+          "named": false,
+          "value": "DEFAULT"
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PREC",
+                  "value": 1,
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "[bB][gG][cC][oO][lL][oO][rR]"
+                  }
+                }
+              },
+              "named": false,
+              "value": "BGCOLOR"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_expression"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PREC",
+                  "value": 1,
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "[cC][oO][nN][tT][eE][xX][tT][--][hH][eE][lL][pP][--][iI][dD]"
+                  }
+                }
+              },
+              "named": false,
+              "value": "CONTEXT-HELP-ID"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_expression"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PREC",
+                  "value": 1,
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "[dD][cC][oO][lL][oO][rR]"
+                  }
+                }
+              },
+              "named": false,
+              "value": "DCOLOR"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_expression"
+            }
+          ]
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "PATTERN",
+                "value": "[dD][rR][oO][pP][--][tT][aA][rR][gG][eE][tT]"
+              }
+            }
+          },
+          "named": false,
+          "value": "DROP-TARGET"
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PREC",
+                  "value": 1,
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "[fF][gG][cC][oO][lL][oO][rR]"
+                  }
+                }
+              },
+              "named": false,
+              "value": "FGCOLOR"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_expression"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PREC",
+                  "value": 1,
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "[fF][oO][nN][tT]"
+                  }
+                }
+              },
+              "named": false,
+              "value": "FONT"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "number_literal"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PREC",
+                  "value": 1,
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "[iI][mM][aA][gG][eE][--][dD][oO][wW][nN]"
+                  }
+                }
+              },
+              "named": false,
+              "value": "IMAGE-DOWN"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "image_phrase"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PREC",
+                  "value": 1,
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "[iI][mM][aA][gG][eE]"
+                  }
+                }
+              },
+              "named": false,
+              "value": "IMAGE"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "image_phrase"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PREC",
+                  "value": 1,
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "[iI][mM][aA][gG][eE][--][uU][pP]"
+                  }
+                }
+              },
+              "named": false,
+              "value": "IMAGE-UP"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "image_phrase"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PREC",
+                  "value": 1,
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "[iI][mM][aA][gG][eE][--][iI][nN][sS][eE][nN][sS][iI][tT][iI][vV][eE]"
+                  }
+                }
+              },
+              "named": false,
+              "value": "IMAGE-INSENSITIVE"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "image_phrase"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PREC",
+                  "value": 1,
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "[mM][oO][uU][sS][eE][--][pP][oO][iI][nN][tT][eE][rR]"
+                  }
+                }
+              },
+              "named": false,
+              "value": "MOUSE-POINTER"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "identifier"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PREC",
+                  "value": 1,
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "[lL][aA][bB][eE][lL]"
+                  }
+                }
+              },
+              "named": false,
+              "value": "LABEL"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_string_literal"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PREC",
+                  "value": 1,
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "[lL][iI][kK][eE]"
+                  }
+                }
+              },
+              "named": false,
+              "value": "LIKE"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "identifier"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PREC",
+                  "value": 1,
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "[pP][fF][cC][oO][lL][oO][rR]"
+                  }
+                }
+              },
+              "named": false,
+              "value": "PFCOLOR"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_expression"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PREC",
+                  "value": 1,
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "[nN][oO][--][fF][oO][cC][uU][sS]"
+                  }
+                }
+              },
+              "named": false,
+              "value": "NO-FOCUS"
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "TOKEN",
+                    "content": {
+                      "type": "PREC",
+                      "value": 1,
+                      "content": {
+                        "type": "PATTERN",
+                        "value": "[fF][lL][aA][tT][--][bB][uU][tT][tT][oO][nN]"
+                      }
+                    }
+                  },
+                  "named": false,
+                  "value": "FLAT-BUTTON"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "PATTERN",
+                "value": "[nN][oO][--][cC][oO][nN][vV][eE][rR][tT][--][33][dD][--][cC][oO][lL][oO][rR][sS]"
+              }
+            }
+          },
+          "named": false,
+          "value": "NO-CONVERT-3D-COLORS"
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PREC",
+                  "value": 1,
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "[tT][oO][oO][lL][tT][iI][pP]"
+                  }
+                }
+              },
+              "named": false,
+              "value": "TOOLTIP"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_string_literal"
+            }
+          ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "size_phrase"
+        }
+      ]
+    },
+    "button_definition": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PREC",
+                  "value": 1,
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "[dD][eE][fF][iI][nN][eE]"
+                  }
+                }
+              },
+              "named": false,
+              "value": "DEFINE"
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PREC",
+                  "value": 1,
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "[dD][eE][fF]"
+                  }
+                }
+              },
+              "named": false,
+              "value": "DEF"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "access_tuning"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "PATTERN",
+                "value": "[bB][uU][tT][tT][oO][nN]"
+              }
+            }
+          },
+          "named": false,
+          "value": "BUTTON"
+        },
+        {
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "SYMBOL",
+            "name": "identifier"
+          }
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "button_tuning"
+          }
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_terminator"
+        }
+      ]
+    },
     "_expression": {
       "type": "CHOICE",
       "members": [
@@ -12735,6 +13711,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "array_access"
+        },
+        {
+          "type": "SYMBOL",
           "name": "function_call"
         },
         {
@@ -12752,6 +13732,10 @@
         {
           "type": "SYMBOL",
           "name": "ambiguous_expression"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "temp_table_expression"
         },
         {
           "type": "SYMBOL",
@@ -12900,6 +13884,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "workfile_definition"
+        },
+        {
+          "type": "SYMBOL",
           "name": "using_statement"
         },
         {
@@ -12917,6 +13905,14 @@
         {
           "type": "SYMBOL",
           "name": "prompt_for_statement"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "dataset_definition"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "button_definition"
         },
         {
           "type": "SYMBOL",
@@ -13013,6 +14009,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "workfile_definition"
+        },
+        {
+          "type": "SYMBOL",
           "name": "class_statement"
         },
         {
@@ -13049,6 +14049,3846 @@
       "input_expression"
     ],
     [
+      "abl_statement"
+    ],
+    [
+      "abl_statement",
+      "variable_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "query_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "query_definition",
+      "temp_table_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "data_source_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "data_source_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "data_source_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "data_source_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "query_definition",
+      "temp_table_definition",
+      "property_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "query_definition",
+      "temp_table_definition",
+      "property_definition",
+      "data_source_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "query_definition",
+      "temp_table_definition",
+      "property_definition",
+      "data_source_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "query_definition",
+      "temp_table_definition",
+      "property_definition",
+      "data_source_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "query_definition",
+      "temp_table_definition",
+      "property_definition",
+      "data_source_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "query_definition",
+      "temp_table_definition",
+      "property_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "query_definition",
+      "temp_table_definition",
+      "property_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "query_definition",
+      "temp_table_definition",
+      "property_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "query_definition",
+      "temp_table_definition",
+      "data_source_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "query_definition",
+      "temp_table_definition",
+      "data_source_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "query_definition",
+      "temp_table_definition",
+      "data_source_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "query_definition",
+      "temp_table_definition",
+      "data_source_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "query_definition",
+      "temp_table_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "query_definition",
+      "temp_table_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "query_definition",
+      "temp_table_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "query_definition",
+      "workfile_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "query_definition",
+      "workfile_definition",
+      "property_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "query_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "query_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "query_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "query_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "query_definition",
+      "workfile_definition",
+      "property_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "query_definition",
+      "workfile_definition",
+      "property_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "query_definition",
+      "workfile_definition",
+      "property_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "query_definition",
+      "workfile_definition",
+      "data_source_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "query_definition",
+      "workfile_definition",
+      "data_source_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "query_definition",
+      "workfile_definition",
+      "data_source_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "query_definition",
+      "workfile_definition",
+      "data_source_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "query_definition",
+      "workfile_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "query_definition",
+      "workfile_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "query_definition",
+      "workfile_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "query_definition",
+      "property_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "query_definition",
+      "property_definition",
+      "data_source_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "query_definition",
+      "property_definition",
+      "data_source_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "query_definition",
+      "property_definition",
+      "data_source_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "query_definition",
+      "property_definition",
+      "data_source_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "query_definition",
+      "property_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "query_definition",
+      "property_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "query_definition",
+      "property_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "query_definition",
+      "data_source_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "query_definition",
+      "data_source_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "query_definition",
+      "data_source_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "query_definition",
+      "data_source_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "query_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "query_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "query_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "temp_table_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "temp_table_definition",
+      "workfile_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "data_source_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "data_source_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "data_source_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "data_source_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "temp_table_definition",
+      "property_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "temp_table_definition",
+      "property_definition",
+      "data_source_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "temp_table_definition",
+      "property_definition",
+      "data_source_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "temp_table_definition",
+      "property_definition",
+      "data_source_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "temp_table_definition",
+      "property_definition",
+      "data_source_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "temp_table_definition",
+      "property_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "temp_table_definition",
+      "property_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "temp_table_definition",
+      "property_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "temp_table_definition",
+      "data_source_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "temp_table_definition",
+      "data_source_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "temp_table_definition",
+      "data_source_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "temp_table_definition",
+      "data_source_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "temp_table_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "temp_table_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "temp_table_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "workfile_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "workfile_definition",
+      "property_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "workfile_definition",
+      "property_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "workfile_definition",
+      "property_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "workfile_definition",
+      "property_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "workfile_definition",
+      "data_source_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "workfile_definition",
+      "data_source_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "workfile_definition",
+      "data_source_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "workfile_definition",
+      "data_source_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "workfile_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "workfile_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "workfile_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "property_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "property_definition",
+      "data_source_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "property_definition",
+      "data_source_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "property_definition",
+      "data_source_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "property_definition",
+      "data_source_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "property_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "property_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "property_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "data_source_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "data_source_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "data_source_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "data_source_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "buffer_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "query_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "query_definition",
+      "temp_table_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "data_source_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "data_source_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "data_source_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "data_source_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "query_definition",
+      "temp_table_definition",
+      "property_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "query_definition",
+      "temp_table_definition",
+      "property_definition",
+      "data_source_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "query_definition",
+      "temp_table_definition",
+      "property_definition",
+      "data_source_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "query_definition",
+      "temp_table_definition",
+      "property_definition",
+      "data_source_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "query_definition",
+      "temp_table_definition",
+      "property_definition",
+      "data_source_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "query_definition",
+      "temp_table_definition",
+      "property_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "query_definition",
+      "temp_table_definition",
+      "property_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "query_definition",
+      "temp_table_definition",
+      "property_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "query_definition",
+      "temp_table_definition",
+      "data_source_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "query_definition",
+      "temp_table_definition",
+      "data_source_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "query_definition",
+      "temp_table_definition",
+      "data_source_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "query_definition",
+      "temp_table_definition",
+      "data_source_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "query_definition",
+      "temp_table_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "query_definition",
+      "temp_table_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "query_definition",
+      "temp_table_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "query_definition",
+      "workfile_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "query_definition",
+      "workfile_definition",
+      "property_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "query_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "query_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "query_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "query_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "query_definition",
+      "workfile_definition",
+      "property_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "query_definition",
+      "workfile_definition",
+      "property_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "query_definition",
+      "workfile_definition",
+      "property_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "query_definition",
+      "workfile_definition",
+      "data_source_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "query_definition",
+      "workfile_definition",
+      "data_source_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "query_definition",
+      "workfile_definition",
+      "data_source_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "query_definition",
+      "workfile_definition",
+      "data_source_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "query_definition",
+      "workfile_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "query_definition",
+      "workfile_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "query_definition",
+      "workfile_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "query_definition",
+      "property_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "query_definition",
+      "property_definition",
+      "data_source_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "query_definition",
+      "property_definition",
+      "data_source_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "query_definition",
+      "property_definition",
+      "data_source_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "query_definition",
+      "property_definition",
+      "data_source_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "query_definition",
+      "property_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "query_definition",
+      "property_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "query_definition",
+      "property_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "query_definition",
+      "data_source_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "query_definition",
+      "data_source_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "query_definition",
+      "data_source_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "query_definition",
+      "data_source_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "query_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "query_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "query_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "temp_table_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "temp_table_definition",
+      "workfile_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "data_source_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "data_source_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "data_source_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "data_source_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "temp_table_definition",
+      "property_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "temp_table_definition",
+      "property_definition",
+      "data_source_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "temp_table_definition",
+      "property_definition",
+      "data_source_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "temp_table_definition",
+      "property_definition",
+      "data_source_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "temp_table_definition",
+      "property_definition",
+      "data_source_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "temp_table_definition",
+      "property_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "temp_table_definition",
+      "property_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "temp_table_definition",
+      "property_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "temp_table_definition",
+      "data_source_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "temp_table_definition",
+      "data_source_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "temp_table_definition",
+      "data_source_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "temp_table_definition",
+      "data_source_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "temp_table_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "temp_table_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "temp_table_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "workfile_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "workfile_definition",
+      "property_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "workfile_definition",
+      "property_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "workfile_definition",
+      "property_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "workfile_definition",
+      "property_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "workfile_definition",
+      "data_source_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "workfile_definition",
+      "data_source_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "workfile_definition",
+      "data_source_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "workfile_definition",
+      "data_source_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "workfile_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "workfile_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "workfile_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "property_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "property_definition",
+      "data_source_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "property_definition",
+      "data_source_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "property_definition",
+      "data_source_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "property_definition",
+      "data_source_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "property_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "property_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "property_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "data_source_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "data_source_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "data_source_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "data_source_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "variable_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "query_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "query_definition",
+      "temp_table_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "data_source_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "data_source_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "data_source_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "data_source_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "query_definition",
+      "temp_table_definition",
+      "property_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "query_definition",
+      "temp_table_definition",
+      "property_definition",
+      "data_source_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "query_definition",
+      "temp_table_definition",
+      "property_definition",
+      "data_source_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "query_definition",
+      "temp_table_definition",
+      "property_definition",
+      "data_source_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "query_definition",
+      "temp_table_definition",
+      "property_definition",
+      "data_source_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "query_definition",
+      "temp_table_definition",
+      "property_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "query_definition",
+      "temp_table_definition",
+      "property_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "query_definition",
+      "temp_table_definition",
+      "property_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "query_definition",
+      "temp_table_definition",
+      "data_source_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "query_definition",
+      "temp_table_definition",
+      "data_source_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "query_definition",
+      "temp_table_definition",
+      "data_source_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "query_definition",
+      "temp_table_definition",
+      "data_source_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "query_definition",
+      "temp_table_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "query_definition",
+      "temp_table_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "query_definition",
+      "temp_table_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "query_definition",
+      "workfile_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "query_definition",
+      "workfile_definition",
+      "property_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "query_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "query_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "query_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "query_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "query_definition",
+      "workfile_definition",
+      "property_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "query_definition",
+      "workfile_definition",
+      "property_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "query_definition",
+      "workfile_definition",
+      "property_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "query_definition",
+      "workfile_definition",
+      "data_source_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "query_definition",
+      "workfile_definition",
+      "data_source_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "query_definition",
+      "workfile_definition",
+      "data_source_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "query_definition",
+      "workfile_definition",
+      "data_source_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "query_definition",
+      "workfile_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "query_definition",
+      "workfile_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "query_definition",
+      "workfile_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "query_definition",
+      "property_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "query_definition",
+      "property_definition",
+      "data_source_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "query_definition",
+      "property_definition",
+      "data_source_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "query_definition",
+      "property_definition",
+      "data_source_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "query_definition",
+      "property_definition",
+      "data_source_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "query_definition",
+      "property_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "query_definition",
+      "property_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "query_definition",
+      "property_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "query_definition",
+      "data_source_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "query_definition",
+      "data_source_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "query_definition",
+      "data_source_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "query_definition",
+      "data_source_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "query_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "query_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "query_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "temp_table_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "temp_table_definition",
+      "workfile_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "data_source_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "data_source_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "data_source_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "data_source_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "temp_table_definition",
+      "property_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "temp_table_definition",
+      "property_definition",
+      "data_source_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "temp_table_definition",
+      "property_definition",
+      "data_source_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "temp_table_definition",
+      "property_definition",
+      "data_source_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "temp_table_definition",
+      "property_definition",
+      "data_source_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "temp_table_definition",
+      "property_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "temp_table_definition",
+      "property_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "temp_table_definition",
+      "property_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "temp_table_definition",
+      "data_source_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "temp_table_definition",
+      "data_source_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "temp_table_definition",
+      "data_source_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "temp_table_definition",
+      "data_source_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "temp_table_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "temp_table_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "temp_table_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "workfile_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "workfile_definition",
+      "property_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "workfile_definition",
+      "property_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "workfile_definition",
+      "property_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "workfile_definition",
+      "property_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "workfile_definition",
+      "data_source_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "workfile_definition",
+      "data_source_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "workfile_definition",
+      "data_source_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "workfile_definition",
+      "data_source_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "workfile_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "workfile_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "workfile_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "property_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "property_definition",
+      "data_source_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "property_definition",
+      "data_source_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "property_definition",
+      "data_source_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "property_definition",
+      "data_source_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "property_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "property_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "property_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "data_source_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "data_source_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "data_source_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "data_source_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "buffer_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "query_definition"
+    ],
+    [
+      "abl_statement",
+      "query_definition",
+      "temp_table_definition"
+    ],
+    [
+      "abl_statement",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition"
+    ],
+    [
+      "abl_statement",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition"
+    ],
+    [
+      "abl_statement",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition"
+    ],
+    [
+      "abl_statement",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "data_source_definition"
+    ],
+    [
+      "abl_statement",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "data_source_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "data_source_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "data_source_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "query_definition",
+      "temp_table_definition",
+      "property_definition"
+    ],
+    [
+      "abl_statement",
+      "query_definition",
+      "temp_table_definition",
+      "property_definition",
+      "data_source_definition"
+    ],
+    [
+      "abl_statement",
+      "query_definition",
+      "temp_table_definition",
+      "property_definition",
+      "data_source_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "query_definition",
+      "temp_table_definition",
+      "property_definition",
+      "data_source_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "query_definition",
+      "temp_table_definition",
+      "property_definition",
+      "data_source_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "query_definition",
+      "temp_table_definition",
+      "property_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "query_definition",
+      "temp_table_definition",
+      "property_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "query_definition",
+      "temp_table_definition",
+      "property_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "query_definition",
+      "temp_table_definition",
+      "data_source_definition"
+    ],
+    [
+      "abl_statement",
+      "query_definition",
+      "temp_table_definition",
+      "data_source_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "query_definition",
+      "temp_table_definition",
+      "data_source_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "query_definition",
+      "temp_table_definition",
+      "data_source_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "query_definition",
+      "temp_table_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "query_definition",
+      "temp_table_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "query_definition",
+      "temp_table_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "query_definition",
+      "workfile_definition"
+    ],
+    [
+      "abl_statement",
+      "query_definition",
+      "workfile_definition",
+      "property_definition"
+    ],
+    [
+      "abl_statement",
+      "query_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition"
+    ],
+    [
+      "abl_statement",
+      "query_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "query_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "query_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "query_definition",
+      "workfile_definition",
+      "property_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "query_definition",
+      "workfile_definition",
+      "property_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "query_definition",
+      "workfile_definition",
+      "property_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "query_definition",
+      "workfile_definition",
+      "data_source_definition"
+    ],
+    [
+      "abl_statement",
+      "query_definition",
+      "workfile_definition",
+      "data_source_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "query_definition",
+      "workfile_definition",
+      "data_source_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "query_definition",
+      "workfile_definition",
+      "data_source_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "query_definition",
+      "workfile_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "query_definition",
+      "workfile_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "query_definition",
+      "workfile_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "query_definition",
+      "property_definition"
+    ],
+    [
+      "abl_statement",
+      "query_definition",
+      "property_definition",
+      "data_source_definition"
+    ],
+    [
+      "abl_statement",
+      "query_definition",
+      "property_definition",
+      "data_source_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "query_definition",
+      "property_definition",
+      "data_source_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "query_definition",
+      "property_definition",
+      "data_source_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "query_definition",
+      "property_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "query_definition",
+      "property_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "query_definition",
+      "property_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "query_definition",
+      "data_source_definition"
+    ],
+    [
+      "abl_statement",
+      "query_definition",
+      "data_source_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "query_definition",
+      "data_source_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "query_definition",
+      "data_source_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "query_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "query_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "query_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "temp_table_definition"
+    ],
+    [
+      "abl_statement",
+      "temp_table_definition",
+      "workfile_definition"
+    ],
+    [
+      "abl_statement",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition"
+    ],
+    [
+      "abl_statement",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition"
+    ],
+    [
+      "abl_statement",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "temp_table_definition",
+      "workfile_definition",
+      "data_source_definition"
+    ],
+    [
+      "abl_statement",
+      "temp_table_definition",
+      "workfile_definition",
+      "data_source_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "temp_table_definition",
+      "workfile_definition",
+      "data_source_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "temp_table_definition",
+      "workfile_definition",
+      "data_source_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "temp_table_definition",
+      "workfile_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "temp_table_definition",
+      "workfile_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "temp_table_definition",
+      "workfile_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "temp_table_definition",
+      "property_definition"
+    ],
+    [
+      "abl_statement",
+      "temp_table_definition",
+      "property_definition",
+      "data_source_definition"
+    ],
+    [
+      "abl_statement",
+      "temp_table_definition",
+      "property_definition",
+      "data_source_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "temp_table_definition",
+      "property_definition",
+      "data_source_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "temp_table_definition",
+      "property_definition",
+      "data_source_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "temp_table_definition",
+      "property_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "temp_table_definition",
+      "property_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "temp_table_definition",
+      "property_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "temp_table_definition",
+      "data_source_definition"
+    ],
+    [
+      "abl_statement",
+      "temp_table_definition",
+      "data_source_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "temp_table_definition",
+      "data_source_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "temp_table_definition",
+      "data_source_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "temp_table_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "temp_table_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "temp_table_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "workfile_definition"
+    ],
+    [
+      "abl_statement",
+      "workfile_definition",
+      "property_definition"
+    ],
+    [
+      "abl_statement",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition"
+    ],
+    [
+      "abl_statement",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "workfile_definition",
+      "property_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "workfile_definition",
+      "property_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "workfile_definition",
+      "property_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "workfile_definition",
+      "data_source_definition"
+    ],
+    [
+      "abl_statement",
+      "workfile_definition",
+      "data_source_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "workfile_definition",
+      "data_source_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "workfile_definition",
+      "data_source_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "workfile_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "workfile_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "workfile_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "property_definition"
+    ],
+    [
+      "abl_statement",
+      "property_definition",
+      "data_source_definition"
+    ],
+    [
+      "abl_statement",
+      "property_definition",
+      "data_source_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "property_definition",
+      "data_source_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "property_definition",
+      "data_source_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "property_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "property_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "property_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "data_source_definition"
+    ],
+    [
+      "abl_statement",
+      "data_source_definition",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "data_source_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "data_source_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "event_definition"
+    ],
+    [
+      "abl_statement",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "abl_statement",
+      "dataset_definition"
+    ],
+    [
       "variable_definition"
     ],
     [
@@ -13071,6 +17911,150 @@
       "buffer_definition",
       "query_definition",
       "temp_table_definition",
+      "workfile_definition"
+    ],
+    [
+      "variable_definition",
+      "buffer_definition",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition"
+    ],
+    [
+      "variable_definition",
+      "buffer_definition",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition"
+    ],
+    [
+      "variable_definition",
+      "buffer_definition",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition",
+      "event_definition"
+    ],
+    [
+      "variable_definition",
+      "buffer_definition",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "variable_definition",
+      "buffer_definition",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition",
+      "dataset_definition"
+    ],
+    [
+      "variable_definition",
+      "buffer_definition",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "event_definition"
+    ],
+    [
+      "variable_definition",
+      "buffer_definition",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "variable_definition",
+      "buffer_definition",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "dataset_definition"
+    ],
+    [
+      "variable_definition",
+      "buffer_definition",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "data_source_definition"
+    ],
+    [
+      "variable_definition",
+      "buffer_definition",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "data_source_definition",
+      "event_definition"
+    ],
+    [
+      "variable_definition",
+      "buffer_definition",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "data_source_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "variable_definition",
+      "buffer_definition",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "data_source_definition",
+      "dataset_definition"
+    ],
+    [
+      "variable_definition",
+      "buffer_definition",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "event_definition"
+    ],
+    [
+      "variable_definition",
+      "buffer_definition",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "variable_definition",
+      "buffer_definition",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "dataset_definition"
+    ],
+    [
+      "variable_definition",
+      "buffer_definition",
+      "query_definition",
+      "temp_table_definition",
       "property_definition"
     ],
     [
@@ -13186,6 +18170,134 @@
       "buffer_definition",
       "query_definition",
       "temp_table_definition",
+      "dataset_definition"
+    ],
+    [
+      "variable_definition",
+      "buffer_definition",
+      "query_definition",
+      "workfile_definition"
+    ],
+    [
+      "variable_definition",
+      "buffer_definition",
+      "query_definition",
+      "workfile_definition",
+      "property_definition"
+    ],
+    [
+      "variable_definition",
+      "buffer_definition",
+      "query_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition"
+    ],
+    [
+      "variable_definition",
+      "buffer_definition",
+      "query_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition",
+      "event_definition"
+    ],
+    [
+      "variable_definition",
+      "buffer_definition",
+      "query_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "variable_definition",
+      "buffer_definition",
+      "query_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition",
+      "dataset_definition"
+    ],
+    [
+      "variable_definition",
+      "buffer_definition",
+      "query_definition",
+      "workfile_definition",
+      "property_definition",
+      "event_definition"
+    ],
+    [
+      "variable_definition",
+      "buffer_definition",
+      "query_definition",
+      "workfile_definition",
+      "property_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "variable_definition",
+      "buffer_definition",
+      "query_definition",
+      "workfile_definition",
+      "property_definition",
+      "dataset_definition"
+    ],
+    [
+      "variable_definition",
+      "buffer_definition",
+      "query_definition",
+      "workfile_definition",
+      "data_source_definition"
+    ],
+    [
+      "variable_definition",
+      "buffer_definition",
+      "query_definition",
+      "workfile_definition",
+      "data_source_definition",
+      "event_definition"
+    ],
+    [
+      "variable_definition",
+      "buffer_definition",
+      "query_definition",
+      "workfile_definition",
+      "data_source_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "variable_definition",
+      "buffer_definition",
+      "query_definition",
+      "workfile_definition",
+      "data_source_definition",
+      "dataset_definition"
+    ],
+    [
+      "variable_definition",
+      "buffer_definition",
+      "query_definition",
+      "workfile_definition",
+      "event_definition"
+    ],
+    [
+      "variable_definition",
+      "buffer_definition",
+      "query_definition",
+      "workfile_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "variable_definition",
+      "buffer_definition",
+      "query_definition",
+      "workfile_definition",
       "dataset_definition"
     ],
     [
@@ -13304,6 +18416,134 @@
       "variable_definition",
       "buffer_definition",
       "temp_table_definition",
+      "workfile_definition"
+    ],
+    [
+      "variable_definition",
+      "buffer_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition"
+    ],
+    [
+      "variable_definition",
+      "buffer_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition"
+    ],
+    [
+      "variable_definition",
+      "buffer_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition",
+      "event_definition"
+    ],
+    [
+      "variable_definition",
+      "buffer_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "variable_definition",
+      "buffer_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition",
+      "dataset_definition"
+    ],
+    [
+      "variable_definition",
+      "buffer_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "event_definition"
+    ],
+    [
+      "variable_definition",
+      "buffer_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "variable_definition",
+      "buffer_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "dataset_definition"
+    ],
+    [
+      "variable_definition",
+      "buffer_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "data_source_definition"
+    ],
+    [
+      "variable_definition",
+      "buffer_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "data_source_definition",
+      "event_definition"
+    ],
+    [
+      "variable_definition",
+      "buffer_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "data_source_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "variable_definition",
+      "buffer_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "data_source_definition",
+      "dataset_definition"
+    ],
+    [
+      "variable_definition",
+      "buffer_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "event_definition"
+    ],
+    [
+      "variable_definition",
+      "buffer_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "variable_definition",
+      "buffer_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "dataset_definition"
+    ],
+    [
+      "variable_definition",
+      "buffer_definition",
+      "temp_table_definition",
       "property_definition"
     ],
     [
@@ -13405,6 +18645,118 @@
       "variable_definition",
       "buffer_definition",
       "temp_table_definition",
+      "dataset_definition"
+    ],
+    [
+      "variable_definition",
+      "buffer_definition",
+      "workfile_definition"
+    ],
+    [
+      "variable_definition",
+      "buffer_definition",
+      "workfile_definition",
+      "property_definition"
+    ],
+    [
+      "variable_definition",
+      "buffer_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition"
+    ],
+    [
+      "variable_definition",
+      "buffer_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition",
+      "event_definition"
+    ],
+    [
+      "variable_definition",
+      "buffer_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "variable_definition",
+      "buffer_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition",
+      "dataset_definition"
+    ],
+    [
+      "variable_definition",
+      "buffer_definition",
+      "workfile_definition",
+      "property_definition",
+      "event_definition"
+    ],
+    [
+      "variable_definition",
+      "buffer_definition",
+      "workfile_definition",
+      "property_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "variable_definition",
+      "buffer_definition",
+      "workfile_definition",
+      "property_definition",
+      "dataset_definition"
+    ],
+    [
+      "variable_definition",
+      "buffer_definition",
+      "workfile_definition",
+      "data_source_definition"
+    ],
+    [
+      "variable_definition",
+      "buffer_definition",
+      "workfile_definition",
+      "data_source_definition",
+      "event_definition"
+    ],
+    [
+      "variable_definition",
+      "buffer_definition",
+      "workfile_definition",
+      "data_source_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "variable_definition",
+      "buffer_definition",
+      "workfile_definition",
+      "data_source_definition",
+      "dataset_definition"
+    ],
+    [
+      "variable_definition",
+      "buffer_definition",
+      "workfile_definition",
+      "event_definition"
+    ],
+    [
+      "variable_definition",
+      "buffer_definition",
+      "workfile_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "variable_definition",
+      "buffer_definition",
+      "workfile_definition",
       "dataset_definition"
     ],
     [
@@ -13512,6 +18864,134 @@
       "variable_definition",
       "query_definition",
       "temp_table_definition",
+      "workfile_definition"
+    ],
+    [
+      "variable_definition",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition"
+    ],
+    [
+      "variable_definition",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition"
+    ],
+    [
+      "variable_definition",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition",
+      "event_definition"
+    ],
+    [
+      "variable_definition",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "variable_definition",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition",
+      "dataset_definition"
+    ],
+    [
+      "variable_definition",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "event_definition"
+    ],
+    [
+      "variable_definition",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "variable_definition",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "dataset_definition"
+    ],
+    [
+      "variable_definition",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "data_source_definition"
+    ],
+    [
+      "variable_definition",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "data_source_definition",
+      "event_definition"
+    ],
+    [
+      "variable_definition",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "data_source_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "variable_definition",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "data_source_definition",
+      "dataset_definition"
+    ],
+    [
+      "variable_definition",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "event_definition"
+    ],
+    [
+      "variable_definition",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "variable_definition",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "dataset_definition"
+    ],
+    [
+      "variable_definition",
+      "query_definition",
+      "temp_table_definition",
       "property_definition"
     ],
     [
@@ -13613,6 +19093,118 @@
       "variable_definition",
       "query_definition",
       "temp_table_definition",
+      "dataset_definition"
+    ],
+    [
+      "variable_definition",
+      "query_definition",
+      "workfile_definition"
+    ],
+    [
+      "variable_definition",
+      "query_definition",
+      "workfile_definition",
+      "property_definition"
+    ],
+    [
+      "variable_definition",
+      "query_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition"
+    ],
+    [
+      "variable_definition",
+      "query_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition",
+      "event_definition"
+    ],
+    [
+      "variable_definition",
+      "query_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "variable_definition",
+      "query_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition",
+      "dataset_definition"
+    ],
+    [
+      "variable_definition",
+      "query_definition",
+      "workfile_definition",
+      "property_definition",
+      "event_definition"
+    ],
+    [
+      "variable_definition",
+      "query_definition",
+      "workfile_definition",
+      "property_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "variable_definition",
+      "query_definition",
+      "workfile_definition",
+      "property_definition",
+      "dataset_definition"
+    ],
+    [
+      "variable_definition",
+      "query_definition",
+      "workfile_definition",
+      "data_source_definition"
+    ],
+    [
+      "variable_definition",
+      "query_definition",
+      "workfile_definition",
+      "data_source_definition",
+      "event_definition"
+    ],
+    [
+      "variable_definition",
+      "query_definition",
+      "workfile_definition",
+      "data_source_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "variable_definition",
+      "query_definition",
+      "workfile_definition",
+      "data_source_definition",
+      "dataset_definition"
+    ],
+    [
+      "variable_definition",
+      "query_definition",
+      "workfile_definition",
+      "event_definition"
+    ],
+    [
+      "variable_definition",
+      "query_definition",
+      "workfile_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "variable_definition",
+      "query_definition",
+      "workfile_definition",
       "dataset_definition"
     ],
     [
@@ -13714,6 +19306,118 @@
     [
       "variable_definition",
       "temp_table_definition",
+      "workfile_definition"
+    ],
+    [
+      "variable_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition"
+    ],
+    [
+      "variable_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition"
+    ],
+    [
+      "variable_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition",
+      "event_definition"
+    ],
+    [
+      "variable_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "variable_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition",
+      "dataset_definition"
+    ],
+    [
+      "variable_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "event_definition"
+    ],
+    [
+      "variable_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "variable_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "dataset_definition"
+    ],
+    [
+      "variable_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "data_source_definition"
+    ],
+    [
+      "variable_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "data_source_definition",
+      "event_definition"
+    ],
+    [
+      "variable_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "data_source_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "variable_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "data_source_definition",
+      "dataset_definition"
+    ],
+    [
+      "variable_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "event_definition"
+    ],
+    [
+      "variable_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "variable_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "dataset_definition"
+    ],
+    [
+      "variable_definition",
+      "temp_table_definition",
       "property_definition"
     ],
     [
@@ -13801,6 +19505,102 @@
     [
       "variable_definition",
       "temp_table_definition",
+      "dataset_definition"
+    ],
+    [
+      "variable_definition",
+      "workfile_definition"
+    ],
+    [
+      "variable_definition",
+      "workfile_definition",
+      "property_definition"
+    ],
+    [
+      "variable_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition"
+    ],
+    [
+      "variable_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition",
+      "event_definition"
+    ],
+    [
+      "variable_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "variable_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition",
+      "dataset_definition"
+    ],
+    [
+      "variable_definition",
+      "workfile_definition",
+      "property_definition",
+      "event_definition"
+    ],
+    [
+      "variable_definition",
+      "workfile_definition",
+      "property_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "variable_definition",
+      "workfile_definition",
+      "property_definition",
+      "dataset_definition"
+    ],
+    [
+      "variable_definition",
+      "workfile_definition",
+      "data_source_definition"
+    ],
+    [
+      "variable_definition",
+      "workfile_definition",
+      "data_source_definition",
+      "event_definition"
+    ],
+    [
+      "variable_definition",
+      "workfile_definition",
+      "data_source_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "variable_definition",
+      "workfile_definition",
+      "data_source_definition",
+      "dataset_definition"
+    ],
+    [
+      "variable_definition",
+      "workfile_definition",
+      "event_definition"
+    ],
+    [
+      "variable_definition",
+      "workfile_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "variable_definition",
+      "workfile_definition",
       "dataset_definition"
     ],
     [
@@ -13896,6 +19696,134 @@
       "buffer_definition",
       "query_definition",
       "temp_table_definition",
+      "workfile_definition"
+    ],
+    [
+      "buffer_definition",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition"
+    ],
+    [
+      "buffer_definition",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition"
+    ],
+    [
+      "buffer_definition",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition",
+      "event_definition"
+    ],
+    [
+      "buffer_definition",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "buffer_definition",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition",
+      "dataset_definition"
+    ],
+    [
+      "buffer_definition",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "event_definition"
+    ],
+    [
+      "buffer_definition",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "buffer_definition",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "dataset_definition"
+    ],
+    [
+      "buffer_definition",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "data_source_definition"
+    ],
+    [
+      "buffer_definition",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "data_source_definition",
+      "event_definition"
+    ],
+    [
+      "buffer_definition",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "data_source_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "buffer_definition",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "data_source_definition",
+      "dataset_definition"
+    ],
+    [
+      "buffer_definition",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "event_definition"
+    ],
+    [
+      "buffer_definition",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "buffer_definition",
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "dataset_definition"
+    ],
+    [
+      "buffer_definition",
+      "query_definition",
+      "temp_table_definition",
       "property_definition"
     ],
     [
@@ -13997,6 +19925,118 @@
       "buffer_definition",
       "query_definition",
       "temp_table_definition",
+      "dataset_definition"
+    ],
+    [
+      "buffer_definition",
+      "query_definition",
+      "workfile_definition"
+    ],
+    [
+      "buffer_definition",
+      "query_definition",
+      "workfile_definition",
+      "property_definition"
+    ],
+    [
+      "buffer_definition",
+      "query_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition"
+    ],
+    [
+      "buffer_definition",
+      "query_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition",
+      "event_definition"
+    ],
+    [
+      "buffer_definition",
+      "query_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "buffer_definition",
+      "query_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition",
+      "dataset_definition"
+    ],
+    [
+      "buffer_definition",
+      "query_definition",
+      "workfile_definition",
+      "property_definition",
+      "event_definition"
+    ],
+    [
+      "buffer_definition",
+      "query_definition",
+      "workfile_definition",
+      "property_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "buffer_definition",
+      "query_definition",
+      "workfile_definition",
+      "property_definition",
+      "dataset_definition"
+    ],
+    [
+      "buffer_definition",
+      "query_definition",
+      "workfile_definition",
+      "data_source_definition"
+    ],
+    [
+      "buffer_definition",
+      "query_definition",
+      "workfile_definition",
+      "data_source_definition",
+      "event_definition"
+    ],
+    [
+      "buffer_definition",
+      "query_definition",
+      "workfile_definition",
+      "data_source_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "buffer_definition",
+      "query_definition",
+      "workfile_definition",
+      "data_source_definition",
+      "dataset_definition"
+    ],
+    [
+      "buffer_definition",
+      "query_definition",
+      "workfile_definition",
+      "event_definition"
+    ],
+    [
+      "buffer_definition",
+      "query_definition",
+      "workfile_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "buffer_definition",
+      "query_definition",
+      "workfile_definition",
       "dataset_definition"
     ],
     [
@@ -14098,6 +20138,118 @@
     [
       "buffer_definition",
       "temp_table_definition",
+      "workfile_definition"
+    ],
+    [
+      "buffer_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition"
+    ],
+    [
+      "buffer_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition"
+    ],
+    [
+      "buffer_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition",
+      "event_definition"
+    ],
+    [
+      "buffer_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "buffer_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition",
+      "dataset_definition"
+    ],
+    [
+      "buffer_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "event_definition"
+    ],
+    [
+      "buffer_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "buffer_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "dataset_definition"
+    ],
+    [
+      "buffer_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "data_source_definition"
+    ],
+    [
+      "buffer_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "data_source_definition",
+      "event_definition"
+    ],
+    [
+      "buffer_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "data_source_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "buffer_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "data_source_definition",
+      "dataset_definition"
+    ],
+    [
+      "buffer_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "event_definition"
+    ],
+    [
+      "buffer_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "buffer_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "dataset_definition"
+    ],
+    [
+      "buffer_definition",
+      "temp_table_definition",
       "property_definition"
     ],
     [
@@ -14185,6 +20337,102 @@
     [
       "buffer_definition",
       "temp_table_definition",
+      "dataset_definition"
+    ],
+    [
+      "buffer_definition",
+      "workfile_definition"
+    ],
+    [
+      "buffer_definition",
+      "workfile_definition",
+      "property_definition"
+    ],
+    [
+      "buffer_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition"
+    ],
+    [
+      "buffer_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition",
+      "event_definition"
+    ],
+    [
+      "buffer_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "buffer_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition",
+      "dataset_definition"
+    ],
+    [
+      "buffer_definition",
+      "workfile_definition",
+      "property_definition",
+      "event_definition"
+    ],
+    [
+      "buffer_definition",
+      "workfile_definition",
+      "property_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "buffer_definition",
+      "workfile_definition",
+      "property_definition",
+      "dataset_definition"
+    ],
+    [
+      "buffer_definition",
+      "workfile_definition",
+      "data_source_definition"
+    ],
+    [
+      "buffer_definition",
+      "workfile_definition",
+      "data_source_definition",
+      "event_definition"
+    ],
+    [
+      "buffer_definition",
+      "workfile_definition",
+      "data_source_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "buffer_definition",
+      "workfile_definition",
+      "data_source_definition",
+      "dataset_definition"
+    ],
+    [
+      "buffer_definition",
+      "workfile_definition",
+      "event_definition"
+    ],
+    [
+      "buffer_definition",
+      "workfile_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "buffer_definition",
+      "workfile_definition",
       "dataset_definition"
     ],
     [
@@ -14274,6 +20522,118 @@
     [
       "query_definition",
       "temp_table_definition",
+      "workfile_definition"
+    ],
+    [
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition"
+    ],
+    [
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition"
+    ],
+    [
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition",
+      "event_definition"
+    ],
+    [
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition",
+      "dataset_definition"
+    ],
+    [
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "event_definition"
+    ],
+    [
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "dataset_definition"
+    ],
+    [
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "data_source_definition"
+    ],
+    [
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "data_source_definition",
+      "event_definition"
+    ],
+    [
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "data_source_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "data_source_definition",
+      "dataset_definition"
+    ],
+    [
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "event_definition"
+    ],
+    [
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "query_definition",
+      "temp_table_definition",
+      "workfile_definition",
+      "dataset_definition"
+    ],
+    [
+      "query_definition",
+      "temp_table_definition",
       "property_definition"
     ],
     [
@@ -14361,6 +20721,102 @@
     [
       "query_definition",
       "temp_table_definition",
+      "dataset_definition"
+    ],
+    [
+      "query_definition",
+      "workfile_definition"
+    ],
+    [
+      "query_definition",
+      "workfile_definition",
+      "property_definition"
+    ],
+    [
+      "query_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition"
+    ],
+    [
+      "query_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition",
+      "event_definition"
+    ],
+    [
+      "query_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "query_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition",
+      "dataset_definition"
+    ],
+    [
+      "query_definition",
+      "workfile_definition",
+      "property_definition",
+      "event_definition"
+    ],
+    [
+      "query_definition",
+      "workfile_definition",
+      "property_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "query_definition",
+      "workfile_definition",
+      "property_definition",
+      "dataset_definition"
+    ],
+    [
+      "query_definition",
+      "workfile_definition",
+      "data_source_definition"
+    ],
+    [
+      "query_definition",
+      "workfile_definition",
+      "data_source_definition",
+      "event_definition"
+    ],
+    [
+      "query_definition",
+      "workfile_definition",
+      "data_source_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "query_definition",
+      "workfile_definition",
+      "data_source_definition",
+      "dataset_definition"
+    ],
+    [
+      "query_definition",
+      "workfile_definition",
+      "event_definition"
+    ],
+    [
+      "query_definition",
+      "workfile_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "query_definition",
+      "workfile_definition",
       "dataset_definition"
     ],
     [
@@ -14445,6 +20901,102 @@
     ],
     [
       "temp_table_definition",
+      "workfile_definition"
+    ],
+    [
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition"
+    ],
+    [
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition"
+    ],
+    [
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition",
+      "event_definition"
+    ],
+    [
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition",
+      "dataset_definition"
+    ],
+    [
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "event_definition"
+    ],
+    [
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "temp_table_definition",
+      "workfile_definition",
+      "property_definition",
+      "dataset_definition"
+    ],
+    [
+      "temp_table_definition",
+      "workfile_definition",
+      "data_source_definition"
+    ],
+    [
+      "temp_table_definition",
+      "workfile_definition",
+      "data_source_definition",
+      "event_definition"
+    ],
+    [
+      "temp_table_definition",
+      "workfile_definition",
+      "data_source_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "temp_table_definition",
+      "workfile_definition",
+      "data_source_definition",
+      "dataset_definition"
+    ],
+    [
+      "temp_table_definition",
+      "workfile_definition",
+      "event_definition"
+    ],
+    [
+      "temp_table_definition",
+      "workfile_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "temp_table_definition",
+      "workfile_definition",
+      "dataset_definition"
+    ],
+    [
+      "temp_table_definition",
       "property_definition"
     ],
     [
@@ -14518,6 +21070,86 @@
     ],
     [
       "temp_table_definition",
+      "dataset_definition"
+    ],
+    [
+      "workfile_definition"
+    ],
+    [
+      "workfile_definition",
+      "property_definition"
+    ],
+    [
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition"
+    ],
+    [
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition",
+      "event_definition"
+    ],
+    [
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "workfile_definition",
+      "property_definition",
+      "data_source_definition",
+      "dataset_definition"
+    ],
+    [
+      "workfile_definition",
+      "property_definition",
+      "event_definition"
+    ],
+    [
+      "workfile_definition",
+      "property_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "workfile_definition",
+      "property_definition",
+      "dataset_definition"
+    ],
+    [
+      "workfile_definition",
+      "data_source_definition"
+    ],
+    [
+      "workfile_definition",
+      "data_source_definition",
+      "event_definition"
+    ],
+    [
+      "workfile_definition",
+      "data_source_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "workfile_definition",
+      "data_source_definition",
+      "dataset_definition"
+    ],
+    [
+      "workfile_definition",
+      "event_definition"
+    ],
+    [
+      "workfile_definition",
+      "event_definition",
+      "dataset_definition"
+    ],
+    [
+      "workfile_definition",
       "dataset_definition"
     ],
     [

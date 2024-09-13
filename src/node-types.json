@@ -16,6 +16,10 @@
         "named": true
       },
       {
+        "type": "array_access",
+        "named": true
+      },
+      {
         "type": "array_literal",
         "named": true
       },
@@ -108,6 +112,10 @@
         "named": true
       },
       {
+        "type": "temp_table_expression",
+        "named": true
+      },
+      {
         "type": "ternary_expression",
         "named": true
       },
@@ -138,6 +146,10 @@
         "named": true
       },
       {
+        "type": "button_definition",
+        "named": true
+      },
+      {
         "type": "case_statement",
         "named": true
       },
@@ -147,6 +159,10 @@
       },
       {
         "type": "class_statement",
+        "named": true
+      },
+      {
+        "type": "dataset_definition",
         "named": true
       },
       {
@@ -260,6 +276,10 @@
       {
         "type": "variable_definition",
         "named": true
+      },
+      {
+        "type": "workfile_definition",
+        "named": true
       }
     ]
   },
@@ -361,6 +381,10 @@
       },
       {
         "type": "variable_definition",
+        "named": true
+      },
+      {
+        "type": "workfile_definition",
         "named": true
       }
     ]
@@ -485,6 +509,36 @@
     "fields": {}
   },
   {
+    "type": "array_access",
+    "named": true,
+    "fields": {
+      "array": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "object_access",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "array_literal",
     "named": true,
     "fields": {},
@@ -592,10 +646,6 @@
           "named": true
         },
         {
-          "type": "dataset_definition",
-          "named": true
-        },
-        {
           "type": "destructor_definition",
           "named": true
         },
@@ -664,6 +714,59 @@
     }
   },
   {
+    "type": "button_definition",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "access_tuning",
+          "named": true
+        },
+        {
+          "type": "button_tuning",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "button_tuning",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "_expression",
+          "named": true
+        },
+        {
+          "type": "image_phrase",
+          "named": true
+        },
+        {
+          "type": "size_phrase",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "can_find_expression",
     "named": true,
     "fields": {
@@ -712,7 +815,7 @@
     }
   },
   {
-    "type": "case_otherwise_branch",
+    "type": "case_conditon",
     "named": true,
     "fields": {},
     "children": {
@@ -720,9 +823,31 @@
       "required": true,
       "types": [
         {
-          "type": "_terminated_statement",
+          "type": "_expression",
           "named": true
-        },
+        }
+      ]
+    }
+  },
+  {
+    "type": "case_otherwise_branch",
+    "named": true,
+    "fields": {
+      "statement": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "_terminated_statement",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
         {
           "type": "do_block",
           "named": true
@@ -761,23 +886,23 @@
     "type": "case_when_branch",
     "named": true,
     "fields": {
-      "condition": {
+      "statement": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
           {
-            "type": "_expression",
+            "type": "_terminated_statement",
             "named": true
           }
         ]
       }
     },
     "children": {
-      "multiple": false,
-      "required": true,
+      "multiple": true,
+      "required": false,
       "types": [
         {
-          "type": "_terminated_statement",
+          "type": "case_conditon",
           "named": true
         },
         {
@@ -1038,7 +1163,18 @@
   {
     "type": "dataset_definition",
     "named": true,
-    "fields": {},
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": true,
       "required": true,
@@ -1259,22 +1395,7 @@
   {
     "type": "field_definition",
     "named": true,
-    "fields": {
-      "like": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          },
-          {
-            "type": "qualified_name",
-            "named": true
-          }
-        ]
-      }
-    },
+    "fields": {},
     "children": {
       "multiple": true,
       "required": true,
@@ -1288,7 +1409,7 @@
           "named": true
         },
         {
-          "type": "primitive_type",
+          "type": "type_tuning",
           "named": true
         }
       ]
@@ -1600,7 +1721,7 @@
           "named": true
         },
         {
-          "type": "primitive_type",
+          "type": "type_tuning",
           "named": true
         }
       ]
@@ -1638,7 +1759,7 @@
           "named": true
         },
         {
-          "type": "primitive_type",
+          "type": "type_tuning",
           "named": true
         }
       ]
@@ -1749,6 +1870,50 @@
         },
         {
           "type": "else_statement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "image_phrase",
+    "named": true,
+    "fields": {
+      "height": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "number_literal",
+            "named": true
+          }
+        ]
+      },
+      "width": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "number_literal",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "double_quoted_string",
+          "named": true
+        },
+        {
+          "type": "number_literal",
+          "named": true
+        },
+        {
+          "type": "single_quoted_string",
           "named": true
         }
       ]
@@ -2473,11 +2638,7 @@
       "required": true,
       "types": [
         {
-          "type": "identifier",
-          "named": true
-        },
-        {
-          "type": "primitive_type",
+          "type": "type_tuning",
           "named": true
         },
         {
@@ -2544,20 +2705,6 @@
     "type": "property_definition",
     "named": true,
     "fields": {
-      "like": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          },
-          {
-            "type": "qualified_name",
-            "named": true
-          }
-        ]
-      },
       "name": {
         "multiple": false,
         "required": true,
@@ -2571,7 +2718,7 @@
     },
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "access_tuning",
@@ -2579,14 +2726,6 @@
         },
         {
           "type": "getter",
-          "named": true
-        },
-        {
-          "type": "identifier",
-          "named": true
-        },
-        {
-          "type": "primitive_type",
           "named": true
         },
         {
@@ -2607,6 +2746,10 @@
         },
         {
           "type": "setter",
+          "named": true
+        },
+        {
+          "type": "type_tuning",
           "named": true
         }
       ]
@@ -2855,6 +2998,32 @@
     "fields": {}
   },
   {
+    "type": "size_phrase",
+    "named": true,
+    "fields": {
+      "height": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "number_literal",
+            "named": true
+          }
+        ]
+      },
+      "width": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "number_literal",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "sort_clause",
     "named": true,
     "fields": {},
@@ -2970,10 +3139,6 @@
           "named": true
         },
         {
-          "type": "qualified_name",
-          "named": true
-        },
-        {
           "type": "scope_tuning",
           "named": true
         },
@@ -2984,28 +3149,34 @@
         {
           "type": "temp_table_tuning",
           "named": true
+        },
+        {
+          "type": "type_tuning",
+          "named": true
         }
       ]
     }
   },
   {
+    "type": "temp_table_expression",
+    "named": true,
+    "fields": {
+      "table": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "_expression",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "temp_table_tuning",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": false,
-      "types": [
-        {
-          "type": "identifier",
-          "named": true
-        },
-        {
-          "type": "qualified_name",
-          "named": true
-        }
-      ]
-    }
+    "fields": {}
   },
   {
     "type": "ternary_expression",
@@ -3060,6 +3231,26 @@
           "named": true
         }
       ]
+    }
+  },
+  {
+    "type": "type_tuning",
+    "named": true,
+    "fields": {
+      "type": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "primitive_type",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -3277,16 +3468,6 @@
     "type": "variable_definition",
     "named": true,
     "fields": {
-      "like": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
       "name": {
         "multiple": false,
         "required": true,
@@ -3296,25 +3477,11 @@
             "named": true
           }
         ]
-      },
-      "type": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          },
-          {
-            "type": "primitive_type",
-            "named": true
-          }
-        ]
       }
     },
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "access_tuning",
@@ -3326,6 +3493,10 @@
         },
         {
           "type": "serialization_tuning",
+          "named": true
+        },
+        {
+          "type": "type_tuning",
           "named": true
         },
         {
@@ -3430,6 +3601,53 @@
         }
       ]
     }
+  },
+  {
+    "type": "workfile_definition",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "access_tuning",
+          "named": true
+        },
+        {
+          "type": "field_definition",
+          "named": true
+        },
+        {
+          "type": "scope_tuning",
+          "named": true
+        },
+        {
+          "type": "type_tuning",
+          "named": true
+        },
+        {
+          "type": "workfile_tuning",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "workfile_tuning",
+    "named": true,
+    "fields": {}
   },
   {
     "type": " ",
@@ -3564,6 +3782,14 @@
     "named": false
   },
   {
+    "type": "AUTO-ENDKEY",
+    "named": false
+  },
+  {
+    "type": "AUTO-GO",
+    "named": false
+  },
+  {
     "type": "AVAIL",
     "named": false
   },
@@ -3577,6 +3803,10 @@
   },
   {
     "type": "BEGINS",
+    "named": false
+  },
+  {
+    "type": "BGCOLOR",
     "named": false
   },
   {
@@ -3597,6 +3827,10 @@
   },
   {
     "type": "BUFFER",
+    "named": false
+  },
+  {
+    "type": "BUTTON",
     "named": false
   },
   {
@@ -3652,6 +3886,10 @@
     "named": false
   },
   {
+    "type": "COLUMN",
+    "named": false
+  },
+  {
     "type": "COLUMN-LABEL",
     "named": false
   },
@@ -3665,6 +3903,10 @@
   },
   {
     "type": "CONTAINS",
+    "named": false
+  },
+  {
+    "type": "CONTEXT-HELP-ID",
     "named": false
   },
   {
@@ -3712,6 +3954,10 @@
     "named": false
   },
   {
+    "type": "DCOLOR",
+    "named": false
+  },
+  {
     "type": "DECIMAL",
     "named": false
   },
@@ -3721,6 +3967,10 @@
   },
   {
     "type": "DEF",
+    "named": false
+  },
+  {
+    "type": "DEFAULT",
     "named": false
   },
   {
@@ -3741,6 +3991,10 @@
   },
   {
     "type": "DO",
+    "named": false
+  },
+  {
+    "type": "DROP-TARGET",
     "named": false
   },
   {
@@ -3796,11 +4050,19 @@
     "named": false
   },
   {
+    "type": "FGCOLOR",
+    "named": false
+  },
+  {
     "type": "FIELD",
     "named": false
   },
   {
     "type": "FIELDS",
+    "named": false
+  },
+  {
+    "type": "FILE",
     "named": false
   },
   {
@@ -3817,6 +4079,14 @@
   },
   {
     "type": "FIRST",
+    "named": false
+  },
+  {
+    "type": "FLAT-BUTTON",
+    "named": false
+  },
+  {
+    "type": "FONT",
     "named": false
   },
   {
@@ -3865,6 +4135,34 @@
   },
   {
     "type": "IF",
+    "named": false
+  },
+  {
+    "type": "IMAGE",
+    "named": false
+  },
+  {
+    "type": "IMAGE-DOWN",
+    "named": false
+  },
+  {
+    "type": "IMAGE-INSENSITIVE",
+    "named": false
+  },
+  {
+    "type": "IMAGE-SIZE",
+    "named": false
+  },
+  {
+    "type": "IMAGE-SIZE-CHARS",
+    "named": false
+  },
+  {
+    "type": "IMAGE-SIZE-PIXELS",
+    "named": false
+  },
+  {
+    "type": "IMAGE-UP",
     "named": false
   },
   {
@@ -3992,6 +4290,10 @@
     "named": false
   },
   {
+    "type": "MOUSE-POINTER",
+    "named": false
+  },
+  {
     "type": "NE",
     "named": false
   },
@@ -4016,11 +4318,19 @@
     "named": false
   },
   {
+    "type": "NO-CONVERT-3D-COLORS",
+    "named": false
+  },
+  {
     "type": "NO-ECHO",
     "named": false
   },
   {
     "type": "NO-ERROR",
+    "named": false
+  },
+  {
+    "type": "NO-FOCUS",
     "named": false
   },
   {
@@ -4097,6 +4407,10 @@
   },
   {
     "type": "PARAMETER",
+    "named": false
+  },
+  {
+    "type": "PFCOLOR",
     "named": false
   },
   {
@@ -4188,6 +4502,10 @@
     "named": false
   },
   {
+    "type": "ROW",
+    "named": false
+  },
+  {
     "type": "ROWID",
     "named": false
   },
@@ -4221,6 +4539,18 @@
   },
   {
     "type": "SIGNATURE",
+    "named": false
+  },
+  {
+    "type": "SIZE",
+    "named": false
+  },
+  {
+    "type": "SIZE-CHARS",
+    "named": false
+  },
+  {
+    "type": "SIZE-PIXELS",
     "named": false
   },
   {
@@ -4296,6 +4626,10 @@
     "named": false
   },
   {
+    "type": "TOOLTIP",
+    "named": false
+  },
+  {
     "type": "TOTAL",
     "named": false
   },
@@ -4368,6 +4702,18 @@
     "named": false
   },
   {
+    "type": "WORK-TABLE",
+    "named": false
+  },
+  {
+    "type": "WORKFILE",
+    "named": false
+  },
+  {
+    "type": "X",
+    "named": false
+  },
+  {
     "type": "XML-DATA-TYPE",
     "named": false
   },
@@ -4377,6 +4723,10 @@
   },
   {
     "type": "XML-NODE-TYPE",
+    "named": false
+  },
+  {
+    "type": "Y",
     "named": false
   },
   {
