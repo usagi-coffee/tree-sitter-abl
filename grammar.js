@@ -121,6 +121,8 @@ module.exports = grammar({
       ),
 
     ambiguous_expression: ($) => seq(kw("AMBIGUOUS"), $._expression),
+    temp_table_expression: ($) =>
+      seq(kw("TEMP-TABLE"), field("table", choice($._expression))),
     current_changed_expression: ($) =>
       seq(kw("CURRENT-CHANGED"), $._expression),
     locked_expression: ($) => seq(kw("LOCKED"), $._expression),
@@ -1320,6 +1322,7 @@ module.exports = grammar({
         $.available_expression,
         $.accumulate_expression,
         $.ambiguous_expression,
+        $.temp_table_expression,
         $.current_changed_expression,
         $.locked_expression,
         $.dataset_expression,
