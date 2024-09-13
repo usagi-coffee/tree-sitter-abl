@@ -19,6 +19,7 @@ module.exports = grammar({
     [$.input_expression],
     // DEFINE * conflicts
     ...combinations([
+      $.abl_statement,
       $.variable_definition,
       $.buffer_definition,
       $.query_definition,
@@ -595,10 +596,10 @@ module.exports = grammar({
         choice(kw("DEFINE"), kw("DEF")),
         repeat(choice($.scope_tuning, $.access_tuning)),
         kw("DATASET"),
-        $.identifier,
+        field("name", $.identifier),
         kw("FOR"),
         _list(choice($.identifier, $.qualified_name), ","),
-        $.data_relation,
+        optional($.data_relation),
         $._terminator
       ),
 
@@ -1230,6 +1231,75 @@ module.exports = grammar({
         $._terminator
       ),
 
+    image_phrase: ($) =>
+      seq(
+        choice(kw("IMAGE"), kw("IMAGE-UP")),
+        seq(kw("FILE"), $._string_literal),
+        optional(
+          seq(
+            choice(
+              kw("IMAGE-SIZE"),
+              kw("IMAGE-SIZE-CHARS"),
+              kw("IMAGE-SIZE-PIXELS")
+            ),
+            field("width", $.number_literal),
+            kw("BY"),
+            field("height", $.number_literal)
+          )
+        ),
+        optional(
+          seq(
+            kw("FROM"),
+            choice(
+              seq(kw("X"), $.number_literal, kw("Y"), $.number_literal),
+              seq(kw("ROW"), $.number_literal, kw("COLUMN"), $.number_literal)
+            )
+          )
+        )
+      ),
+
+    size_phrase: ($) =>
+      seq(
+        choice(kw("SIZE"), kw("SIZE-CHARS"), kw("SIZE-PIXELS")),
+        field("width", $.number_literal),
+        kw("BY"),
+        field("height", $.number_literal)
+      ),
+
+    button_tuning: ($) =>
+      choice(
+        seq(kw("AUTO-GO"), optional(kw("AUTO-ENDKEY"))),
+        kw("DEFAULT"),
+        seq(kw("BGCOLOR"), $._expression),
+        seq(kw("CONTEXT-HELP-ID"), $._expression),
+        seq(kw("DCOLOR"), $._expression),
+        kw("DROP-TARGET"),
+        seq(kw("FGCOLOR"), $._expression),
+        seq(kw("FONT"), $.number_literal),
+        seq(kw("IMAGE-DOWN"), $.image_phrase),
+        seq(kw("IMAGE"), $.image_phrase),
+        seq(kw("IMAGE-UP"), $.image_phrase),
+        seq(kw("IMAGE-INSENSITIVE"), $.image_phrase),
+        seq(kw("MOUSE-POINTER"), $.identifier),
+        seq(kw("LABEL"), $._string_literal),
+        seq(kw("LIKE"), $.identifier),
+        seq(kw("PFCOLOR"), $._expression),
+        seq(kw("NO-FOCUS"), optional(kw("FLAT-BUTTON"))),
+        kw("NO-CONVERT-3D-COLORS"),
+        seq(kw("TOOLTIP"), $._string_literal),
+        $.size_phrase
+      ),
+
+    button_definition: ($) =>
+      seq(
+        choice(kw("DEFINE"), kw("DEF")),
+        optional($.access_tuning),
+        kw("BUTTON"),
+        field("name", $.identifier),
+        repeat($.button_tuning),
+        $._terminator
+      ),
+
     // Supertypes
     _expression: ($) =>
       choice(
@@ -1295,6 +1365,8 @@ module.exports = grammar({
         $.interface_statement,
         $.on_statement,
         $.prompt_for_statement,
+        $.dataset_definition,
+        $.button_definition,
         $.abl_statement,
         prec.left(PREC.EXTRA, $.label)
       ),
