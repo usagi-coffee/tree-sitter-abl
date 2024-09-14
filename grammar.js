@@ -11,7 +11,13 @@ const PREC = {
 module.exports = grammar({
   name: "abl",
 
-  externals: ($) => [$._namedot, $._namecolon, $._or_operator, $._and_operator],
+  externals: ($) => [
+    $._namedot,
+    $._namecolon,
+    $._or_operator,
+    $._and_operator,
+    $._special_character
+  ],
   extras: ($) => [$.comment, $.include, /[\s\f\uFEFF\u2060\u200B]|\\\r?\n/],
   word: ($) => $.identifier,
   supertypes: ($) => [$._expression, $._statement, $._terminated_statement],
@@ -69,11 +75,6 @@ module.exports = grammar({
     array_literal: ($) =>
       seq("[", repeat(seq($._expression, optional(","))), "]"),
 
-    _special_character: ($) =>
-      seq(
-        "~",
-        choice('"', "`", "~", "\\", "{", /0-9{3}/, "t", "r", "n", "E", "b", "f")
-      ),
     double_quoted_string: ($) =>
       seq('"', repeat(choice(/[^"\\]+/, /\\./, $._special_character)), '"'),
 

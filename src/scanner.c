@@ -6,6 +6,7 @@ enum TokenType {
   NAMECOLON,
   OR_OPERATOR,
   AND_OPERATOR, 
+  SPECIAL_CHARACTER,
 };
 
 void *tree_sitter_abl_external_scanner_create() {
@@ -84,6 +85,19 @@ bool tree_sitter_abl_external_scanner_scan(
           }
         }
       }
+    }
+  }
+
+  if (valid_symbols[SPECIAL_CHARACTER]) {
+    while (!lexer->eof(lexer) && lexer->lookahead != '~') {
+      lexer->advance(lexer, true);
+    }
+
+    lexer->advance(lexer, false);
+    if (!lexer->eof(lexer) && !iswspace(lexer->lookahead)) {
+      lexer->advance(lexer, false);
+      lexer->result_symbol = SPECIAL_CHARACTER;
+      return true;
     }
   }
 
