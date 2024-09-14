@@ -142,7 +142,7 @@ module.exports = grammar({
         choice(seq($._expression, $._additive_operator, $._expression))
       ),
 
-    _multiplicative_operator: ($) => choice("*", "/"),
+    _multiplicative_operator: ($) => choice("*", "/", kw("MODULO")),
     multiplicative_expression: ($) =>
       prec.left(
         PREC.MULTI,
