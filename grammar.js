@@ -14,6 +14,7 @@ module.exports = grammar({
   externals: ($) => [
     $._namedot,
     $._namecolon,
+    $._namedoublecolon,
     $._or_operator,
     $._and_operator,
     $._special_character
@@ -106,6 +107,7 @@ module.exports = grammar({
         $.function_call,
         $.qualified_name,
         $.object_access,
+        $.member_access,
         $.parenthesized_expression
       ),
 
@@ -242,7 +244,12 @@ module.exports = grammar({
     assignment: ($) =>
       seq(
         prec.left(
-          choice(field("name", $.identifier), $.qualified_name, $.object_access)
+          choice(
+            field("name", $.identifier),
+            $.qualified_name,
+            $.object_access,
+            $.member_access
+          )
         ),
         "=",
         prec.right($._expression),
@@ -713,6 +720,14 @@ module.exports = grammar({
       seq(
         field("object", $.identifier),
         repeat1(seq(alias($._namecolon, ":"), field("property", $.identifier)))
+      ),
+
+    member_access: ($) =>
+      seq(
+        field("object", $.identifier),
+        repeat1(
+          seq(alias($._namedoublecolon, "::"), field("property", $.identifier))
+        )
       ),
 
     stream_definition: ($) =>
@@ -1316,6 +1331,7 @@ module.exports = grammar({
         $._binary_expression,
         $.qualified_name,
         $.object_access,
+        $.member_access,
         $.array_access,
         $.function_call,
         $.ternary_expression,

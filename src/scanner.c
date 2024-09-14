@@ -4,6 +4,7 @@
 enum TokenType {
   NAMEDOT,
   NAMECOLON,
+  NAMEDOUBLECOLON,
   OR_OPERATOR,
   AND_OPERATOR, 
   SPECIAL_CHARACTER,
@@ -37,7 +38,7 @@ bool tree_sitter_abl_external_scanner_scan(
   TSLexer *lexer,
   const bool *valid_symbols
 ) {
-  if (valid_symbols[NAMEDOT] || valid_symbols[NAMECOLON]) {
+  if (valid_symbols[NAMEDOT] || valid_symbols[NAMECOLON] || valid_symbols[NAMEDOUBLECOLON]) {
     while (!lexer->eof(lexer) && iswspace(lexer->lookahead)) {
       lexer->advance(lexer, true);
     }
@@ -51,7 +52,15 @@ bool tree_sitter_abl_external_scanner_scan(
     }
     else if (!lexer->eof(lexer) && lexer->lookahead == ':') {
       lexer->advance(lexer, false);
-      if (!lexer->eof(lexer) && !iswspace(lexer->lookahead)) {
+
+      if (!lexer->eof(lexer) && lexer->lookahead == ':') {
+        lexer->advance(lexer, false);
+        if (!iswspace(lexer->lookahead)) {
+          lexer->result_symbol = NAMEDOUBLECOLON;
+          return true;
+        }
+      }
+      else if (!lexer->eof(lexer) && !iswspace(lexer->lookahead)) {
         lexer->result_symbol = NAMECOLON;
         return true;
       }
