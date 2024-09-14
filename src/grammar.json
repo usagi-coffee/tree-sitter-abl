@@ -375,68 +375,6 @@
         }
       ]
     },
-    "_special_character": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "~"
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "STRING",
-              "value": "\""
-            },
-            {
-              "type": "STRING",
-              "value": "`"
-            },
-            {
-              "type": "STRING",
-              "value": "~"
-            },
-            {
-              "type": "STRING",
-              "value": "\\"
-            },
-            {
-              "type": "STRING",
-              "value": "{"
-            },
-            {
-              "type": "PATTERN",
-              "value": "0-9{3}"
-            },
-            {
-              "type": "STRING",
-              "value": "t"
-            },
-            {
-              "type": "STRING",
-              "value": "r"
-            },
-            {
-              "type": "STRING",
-              "value": "n"
-            },
-            {
-              "type": "STRING",
-              "value": "E"
-            },
-            {
-              "type": "STRING",
-              "value": "b"
-            },
-            {
-              "type": "STRING",
-              "value": "f"
-            }
-          ]
-        }
-      ]
-    },
     "double_quoted_string": {
       "type": "SEQ",
       "members": [
@@ -662,6 +600,10 @@
         {
           "type": "SYMBOL",
           "name": "object_access"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "member_access"
         },
         {
           "type": "SYMBOL",
@@ -1010,6 +952,22 @@
         {
           "type": "STRING",
           "value": "/"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "PATTERN",
+                "value": "[mM][oO][dD][uU][lL][oO]"
+              }
+            }
+          },
+          "named": false,
+          "value": "MODULO"
         }
       ]
     },
@@ -1765,6 +1723,10 @@
               {
                 "type": "SYMBOL",
                 "name": "object_access"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "member_access"
               }
             ]
           }
@@ -6534,6 +6496,44 @@
                 },
                 "named": false,
                 "value": ":"
+              },
+              {
+                "type": "FIELD",
+                "name": "property",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "identifier"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "member_access": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "object",
+          "content": {
+            "type": "SYMBOL",
+            "name": "identifier"
+          }
+        },
+        {
+          "type": "REPEAT1",
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "_namedoublecolon"
+                },
+                "named": false,
+                "value": "::"
               },
               {
                 "type": "FIELD",
@@ -13708,6 +13708,10 @@
         {
           "type": "SYMBOL",
           "name": "object_access"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "member_access"
         },
         {
           "type": "SYMBOL",
@@ -21227,11 +21231,19 @@
     },
     {
       "type": "SYMBOL",
+      "name": "_namedoublecolon"
+    },
+    {
+      "type": "SYMBOL",
       "name": "_or_operator"
     },
     {
       "type": "SYMBOL",
       "name": "_and_operator"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_special_character"
     }
   ],
   "inline": [],

@@ -80,6 +80,10 @@
         "named": true
       },
       {
+        "type": "member_access",
+        "named": true
+      },
+      {
         "type": "multiplicative_expression",
         "named": true
       },
@@ -2270,6 +2274,32 @@
     }
   },
   {
+    "type": "member_access",
+    "named": true,
+    "fields": {
+      "object": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "property": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "method_definition",
     "named": true,
     "fields": {
@@ -3710,6 +3740,10 @@
     "named": false
   },
   {
+    "type": "::",
+    "named": false
+  },
+  {
     "type": "<",
     "named": false
   },
@@ -3998,10 +4032,6 @@
     "named": false
   },
   {
-    "type": "E",
-    "named": false
-  },
-  {
     "type": "EACH",
     "named": false
   },
@@ -4287,6 +4317,10 @@
   },
   {
     "type": "MINIMUM",
+    "named": false
+  },
+  {
+    "type": "MODULO",
     "named": false
   },
   {
@@ -4738,28 +4772,12 @@
     "named": false
   },
   {
-    "type": "\\",
-    "named": false
-  },
-  {
     "type": "]",
-    "named": false
-  },
-  {
-    "type": "`",
-    "named": false
-  },
-  {
-    "type": "b",
     "named": false
   },
   {
     "type": "date_literal",
     "named": true
-  },
-  {
-    "type": "f",
-    "named": false
   },
   {
     "type": "file_name",
@@ -4770,20 +4788,8 @@
     "named": true
   },
   {
-    "type": "n",
-    "named": false
-  },
-  {
     "type": "null_expression",
     "named": true
-  },
-  {
-    "type": "r",
-    "named": false
-  },
-  {
-    "type": "t",
-    "named": false
   },
   {
     "type": "{",
@@ -4791,10 +4797,6 @@
   },
   {
     "type": "}",
-    "named": false
-  },
-  {
-    "type": "~",
     "named": false
   }
 ]
