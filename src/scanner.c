@@ -100,7 +100,7 @@ bool tree_sitter_abl_external_scanner_scan(
 
   if (valid_symbols[ESCAPED_STRING] && (lexer->lookahead == '"' || lexer->lookahead == '\'')) {
     char start = lexer->lookahead;
-    lexer->advance(lexer, true);
+    lexer->advance(lexer, false);
 
     while (!lexer->eof(lexer) && lexer->lookahead != start) {
       lexer->advance(lexer, false);

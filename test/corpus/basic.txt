@@ -55,7 +55,7 @@ DISPLAY {&VAR1}.
       (identifier))
     (include_argument
       (identifier)
-      (double_quoted_string))
+      (string_literal))
     (include_argument
       (identifier))
     (include_argument
@@ -166,7 +166,7 @@ SESSION:NUMERIC-FORMAT = "european".
       (object_access
         (identifier)
         (identifier))
-      (double_quoted_string))))
+      (string_literal))))
 
 ================================================================================
 BINARY (simple) operators
@@ -624,7 +624,7 @@ y = x < 10 OR x = 10.
       (boolean_literal))
     (abl_statement
       statement: (identifier)
-      (double_quoted_string)))
+      (string_literal)))
   (variable_assignment
     (assignment
       name: (identifier)
@@ -711,7 +711,7 @@ END.
       (function_call
         (identifier)
         (function_call_argument
-          (double_quoted_string))))
+          (string_literal))))
     (body
       (variable_assignment
         (assignment
@@ -885,7 +885,7 @@ DISPLAY "test" a 5 f().
 (source_code
   (abl_statement
     statement: (identifier)
-    (double_quoted_string)
+    (string_literal)
     (identifier)
     (number_literal)
     (function_call
@@ -911,7 +911,7 @@ ASSIGN
       (number_literal))
     (assignment
       (identifier)
-      (double_quoted_string))
+      (string_literal))
     (assignment
       (identifier)
       (function_call
@@ -1290,11 +1290,11 @@ OUTPUT CLOSE.
     (identifier))
   (output_stream_statement
     source: (identifier)
-    target: (double_quoted_string))
+    target: (string_literal))
   (output_close_statement)
   (output_stream_statement
     source: (identifier)
-    target: (double_quoted_string))
+    target: (string_literal))
   (output_close_statement))
 
 ================================================================================
@@ -1357,24 +1357,24 @@ FIND foo WHERE bar CONTAINS "stuff" OR baz CONTAINS "what?".
     (assignment
       name: (identifier)
       (comparison_expression
-        (double_quoted_string)
-        (double_quoted_string))))
+        (string_literal)
+        (string_literal))))
   (variable_assignment
     (assignment
       name: (identifier)
       (comparison_expression
-        (double_quoted_string)
-        (double_quoted_string))))
+        (string_literal)
+        (string_literal))))
   (find_statement
     table: (identifier)
     (where_clause
       condition: (logical_expression
         (comparison_expression
           (identifier)
-          (double_quoted_string))
+          (string_literal))
         (comparison_expression
           (identifier)
-          (double_quoted_string))))))
+          (string_literal))))))
 
 ================================================================================
 Miscellaneous unary expressions
@@ -1427,14 +1427,14 @@ IF CURRENT-CHANGED x THEN RETURN '!'.
     condition: (locked_expression
       (identifier))
     (return_statement
-      (single_quoted_string)))
+      (string_literal)))
   (find_statement
     table: (identifier))
   (if_statement
     condition: (current_changed_expression
       (identifier))
     (return_statement
-      (single_quoted_string))))
+      (string_literal))))
 
 ================================================================================
 CATCH and FINALLY statements
@@ -1467,7 +1467,7 @@ END.
         (body
           (abl_statement
             statement: (identifier)
-            (double_quoted_string)
+            (string_literal)
             (identifier)
             (identifier))))
       (catch_statement
@@ -1479,14 +1479,14 @@ END.
         (body
           (abl_statement
             statement: (identifier)
-            (double_quoted_string)
+            (string_literal)
             (identifier)
             (identifier))))
       (finally_statement
         (body
           (abl_statement
             statement: (identifier)
-            (double_quoted_string)
+            (string_literal)
             (identifier)
             (identifier)))))))
 
@@ -1608,7 +1608,7 @@ END CASE.
     (body
       (case_when_branch
         (case_conditon
-          (double_quoted_string))
+          (string_literal))
         (do_block
           (body
             (variable_assignment
@@ -1622,17 +1622,17 @@ END CASE.
       (case_when_branch
         (case_conditon
           (logical_expression
-            (double_quoted_string)
+            (string_literal)
             (identifier)))
         (case_conditon
-          (double_quoted_string))
+          (string_literal))
         (variable_assignment
           (assignment
             (identifier)
             (number_literal))))
       (case_when_branch
         (case_conditon
-          (double_quoted_string))
+          (string_literal))
         (variable_assignment
           (assignment
             (identifier)
@@ -1672,7 +1672,7 @@ END.
             (identifier)
             (identifier))
           (function_call_argument
-            (double_quoted_string))))))
+            (string_literal))))))
   (do_block
     (on_quit_phrase)
     (body
@@ -1702,7 +1702,7 @@ UNDO, THROW NEW Progress.Lang.AppError("test message", 420).
         (identifier)
         (identifier))
       (function_call_argument
-        (double_quoted_string))
+        (string_literal))
       (function_call_argument
         (number_literal)))))
 
@@ -1785,7 +1785,7 @@ DEFINE TEMP-TABLE foo
       (identifier)
       (identifier))
     (identifier)
-    (double_quoted_string)
+    (string_literal)
     (identifier)
     (identifier)
     (identifier)
@@ -2097,7 +2097,7 @@ VAR INT[ ] x = [funct( ), a + b].
           (number_literal)))))
   (comment)
   (var_statement
-    (double_quoted_string)
+    (string_literal)
     (variable
       (identifier)))
   (comment)
@@ -2144,7 +2144,7 @@ VAR INT[ ] x = [funct( ), a + b].
         (new_expression
           (identifier)
           (function_call_argument
-            (double_quoted_string))
+            (string_literal))
           (function_call_argument
             (number_literal))
           (function_call_argument
@@ -2158,21 +2158,21 @@ VAR INT[ ] x = [funct( ), a + b].
         (new_expression
           (identifier)
           (function_call_argument
-            (double_quoted_string)))))
+            (string_literal)))))
     (variable
       (assignment
         (identifier)
         (new_expression
           (identifier)
           (function_call_argument
-            (double_quoted_string)))))
+            (string_literal)))))
     (variable
       (assignment
         (identifier)
         (new_expression
           (identifier)
           (function_call_argument
-            (double_quoted_string))))))
+            (string_literal))))))
   (comment)
   (var_statement
     (identifier)
@@ -2187,7 +2187,7 @@ VAR INT[ ] x = [funct( ), a + b].
         (new_expression
           (identifier)
           (function_call_argument
-            (double_quoted_string))))))
+            (string_literal))))))
   (comment)
   (var_statement
     (identifier)
@@ -2197,14 +2197,14 @@ VAR INT[ ] x = [funct( ), a + b].
         (new_expression
           (identifier)
           (function_call_argument
-            (double_quoted_string)))))
+            (string_literal)))))
     (variable
       (assignment
         (identifier)
         (new_expression
           (identifier)
           (function_call_argument
-            (double_quoted_string))))))
+            (string_literal))))))
   (comment)
   (var_statement
     (identifier)
@@ -2216,11 +2216,11 @@ VAR INT[ ] x = [funct( ), a + b].
           (new_expression
             (identifier)
             (function_call_argument
-              (double_quoted_string)))
+              (string_literal)))
           (new_expression
             (identifier)
             (function_call_argument
-              (double_quoted_string)))))))
+              (string_literal)))))))
   (comment)
   (var_statement
     (identifier)
@@ -2231,11 +2231,11 @@ VAR INT[ ] x = [funct( ), a + b].
           (new_expression
             (identifier)
             (function_call_argument
-              (double_quoted_string)))
+              (string_literal)))
           (new_expression
             (identifier)
             (function_call_argument
-              (double_quoted_string)))))))
+              (string_literal)))))))
   (comment)
   (var_statement
     (primitive_type)
