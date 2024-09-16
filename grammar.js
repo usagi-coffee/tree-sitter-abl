@@ -17,6 +17,7 @@ module.exports = grammar({
     $._namedoublecolon,
     $._or_operator,
     $._and_operator,
+    $._escaped_string,
     $._special_character
   ],
   extras: ($) => [$.comment, $.include, /[\s\f\uFEFF\u2060\u200B]|\\\r?\n/],
@@ -69,8 +70,7 @@ module.exports = grammar({
       seq($._integer_literal, alias($._namedot, "."), $._integer_literal),
 
     number_literal: ($) => choice($._integer_literal, $._decimal_literal),
-    _string_literal: ($) =>
-      seq(choice($.double_quoted_string, $.single_quoted_string)),
+    string_literal: ($) => $._escaped_string,
 
     date_literal: ($) => /\d{1,2}\/\d{1,2}\/\d{4}|\d{2}/,
     array_literal: ($) =>
@@ -503,10 +503,7 @@ module.exports = grammar({
     interface_statement: ($) =>
       seq(
         kw("INTERFACE"),
-        field(
-          "name",
-          choice($._string_literal, $.identifier, $.qualified_name)
-        ),
+        field("name", choice($.string_literal, $.identifier, $.qualified_name)),
         repeat($.interface_tuning),
         alias($.interface_body, $.body),
         kw("END"),
@@ -678,10 +675,7 @@ module.exports = grammar({
     class_statement: ($) =>
       seq(
         kw("CLASS"),
-        field(
-          "name",
-          choice($._string_literal, $.identifier, $.qualified_name)
-        ),
+        field("name", choice($.string_literal, $.identifier, $.qualified_name)),
         repeat($.class_tuning),
         alias($.class_body, $.body),
         kw("END"),
@@ -692,13 +686,13 @@ module.exports = grammar({
     inherits: ($) =>
       seq(
         kw("INHERITS"),
-        _list(choice($._string_literal, $.identifier, $.qualified_name), ",")
+        _list(choice($.string_literal, $.identifier, $.qualified_name), ",")
       ),
 
     implements: ($) =>
       seq(
         kw("IMPLEMENTS"),
-        _list(choice($._string_literal, $.identifier, $.qualified_name), ",")
+        _list(choice($.string_literal, $.identifier, $.qualified_name), ",")
       ),
 
     use_widget_pool: ($) => kw("USE-WIDGET-POOL"),
@@ -849,7 +843,7 @@ module.exports = grammar({
           seq(kw("RETRY"), field("label", optional($.identifier))),
           seq(
             kw("RETURN"),
-            choice(seq(kw("ERROR")), kw("NO-APPLY"), $._string_literal)
+            choice(seq(kw("ERROR")), kw("NO-APPLY"), $.string_literal)
           ),
           kw("THROW")
         )
@@ -1126,18 +1120,18 @@ module.exports = grammar({
     temp_table_tuning: ($) => choice(kw("NO-UNDO"), kw("REFERENCE-ONLY")),
     field_option: ($) =>
       choice(
-        seq(kw("COLUMN-LABEL"), $._string_literal),
-        seq(kw("LABEL"), $._string_literal),
-        seq(kw("FORMAT"), $._string_literal),
+        seq(kw("COLUMN-LABEL"), $.string_literal),
+        seq(kw("LABEL"), $.string_literal),
+        seq(kw("FORMAT"), $.string_literal),
         seq(kw("DECIMALS"), $.number_literal),
         seq(kw("EXTENT"), $.number_literal),
         seq(choice(kw("INITIAL"), kw("INIT")), $._expression),
         kw("SERIALIZE-HIDDEN"),
-        seq(kw("SERIALIZE-NAME"), $._string_literal),
-        seq(kw("XML-DATA-TYPE"), $._string_literal),
-        seq(kw("XML-NODE-TYPE"), $._string_literal),
-        seq(kw("XML-NODE-NAME"), $._string_literal),
-        seq(kw("HELP"), $._string_literal),
+        seq(kw("SERIALIZE-NAME"), $.string_literal),
+        seq(kw("XML-DATA-TYPE"), $.string_literal),
+        seq(kw("XML-NODE-TYPE"), $.string_literal),
+        seq(kw("XML-NODE-NAME"), $.string_literal),
+        seq(kw("HELP"), $.string_literal),
         seq(kw("NOT"), kw("CASE-SENSITIVE"))
       ),
     field_definition: ($) =>
@@ -1239,10 +1233,7 @@ module.exports = grammar({
         optional(
           choice($.scope_tuning, $.access_tuning, $.serialization_tuning)
         ),
-        field(
-          "type",
-          choice($.primitive_type, $.identifier, $._string_literal)
-        ),
+        field("type", choice($.primitive_type, $.identifier, $.string_literal)),
         optional(seq("[", optional(field("size", $.number_literal)), "]")),
         repeat(seq($.variable, optional(","))),
         $._terminator
@@ -1251,7 +1242,7 @@ module.exports = grammar({
     image_phrase: ($) =>
       seq(
         choice(kw("IMAGE"), kw("IMAGE-UP")),
-        seq(kw("FILE"), $._string_literal),
+        seq(kw("FILE"), $.string_literal),
         optional(
           seq(
             choice(
@@ -1298,12 +1289,12 @@ module.exports = grammar({
         seq(kw("IMAGE-UP"), $.image_phrase),
         seq(kw("IMAGE-INSENSITIVE"), $.image_phrase),
         seq(kw("MOUSE-POINTER"), $.identifier),
-        seq(kw("LABEL"), $._string_literal),
+        seq(kw("LABEL"), $.string_literal),
         seq(kw("LIKE"), $.identifier),
         seq(kw("PFCOLOR"), $._expression),
         seq(kw("NO-FOCUS"), optional(kw("FLAT-BUTTON"))),
         kw("NO-CONVERT-3D-COLORS"),
-        seq(kw("TOOLTIP"), $._string_literal),
+        seq(kw("TOOLTIP"), $.string_literal),
         $.size_phrase
       ),
 
@@ -1323,7 +1314,7 @@ module.exports = grammar({
         $.parenthesized_expression,
         $.unary_expression,
         $.boolean_literal,
-        $._string_literal,
+        $.string_literal,
         $.date_literal,
         $.number_literal,
         $.array_literal,
