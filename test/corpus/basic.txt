@@ -798,12 +798,12 @@ PersonData:GetById(id, output table ttPerson by-reference).
     return_type: (primitive_type)
     (function_parameter
       (function_parameter_mode)
-      (identifier)
+      name: (identifier)
       (type_tuning
         type: (primitive_type)))
     (function_parameter
       (function_parameter_mode)
-      (identifier)
+      name: (identifier)
       (type_tuning
         type: (primitive_type)))
     (body
@@ -813,7 +813,7 @@ PersonData:GetById(id, output table ttPerson by-reference).
     name: (identifier)
     return_type: (primitive_type)
     (function_parameter
-      (identifier)
+      name: (identifier)
       (type_tuning
         type: (primitive_type)))
     (body
@@ -1948,7 +1948,8 @@ END INTERFACE.
         (identifier)
         (function_parameter
           (function_parameter_mode)
-          (identifier)))
+          (identifier)
+          (function_parameter_tuning)))
       (comment)
       (method_definition
         (access_tuning)

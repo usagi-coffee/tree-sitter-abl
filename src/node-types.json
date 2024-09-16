@@ -1741,17 +1741,28 @@
   {
     "type": "function_parameter",
     "named": true,
-    "fields": {},
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "function_parameter_mode",
           "named": true
         },
         {
-          "type": "identifier",
+          "type": "function_parameter_tuning",
           "named": true
         },
         {
@@ -1765,6 +1776,21 @@
     "type": "function_parameter_mode",
     "named": true,
     "fields": {}
+  },
+  {
+    "type": "function_parameter_tuning",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "number_literal",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "function_statement",
@@ -2283,6 +2309,16 @@
     "type": "method_definition",
     "named": true,
     "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
       "return_type": {
         "multiple": false,
         "required": true,
@@ -2300,7 +2336,7 @@
     },
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "access_tuning",
@@ -2312,10 +2348,6 @@
         },
         {
           "type": "function_parameter",
-          "named": true
-        },
-        {
-          "type": "identifier",
           "named": true
         },
         {
