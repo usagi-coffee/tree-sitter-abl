@@ -1826,11 +1826,17 @@ DEFINE TEMP-TABLE foo
 QUIRKS
 ================================================================================
 
+nonAlphaChars = "~"!@#$%^&*()-_=+[]{}\|;:'~",<.>/?~~".
+
 DISPLAY Order.CustNum Order.OrderDate Andsomething AndBug.
 
 --------------------------------------------------------------------------------
 
 (source_code
+  (variable_assignment
+    (assignment
+      (identifier)
+      (string_literal)))
   (abl_statement
     (identifier)
     (qualified_name
