@@ -461,12 +461,28 @@ module.exports = grammar({
         seq(kw("END"), kw("FUNCTION"), $._terminator)
       ),
     function_parameter_mode: ($) => choice(kw("INPUT"), kw("OUTPUT")),
+    function_parameter_tuning: ($) =>
+      choice(
+        kw("APPEND"),
+        kw("BIND"),
+        kw("BY-VALUE"),
+        seq(kw("EXTENT"), optional($.number_literal))
+      ),
     function_parameter: ($) =>
       seq(
+        optional(kw("TABLE-HANDLE")),
         optional($.function_parameter_mode),
-        optional(kw("DATASET")),
-        $.identifier,
-        choice($.type_tuning, kw("BIND"))
+        optional(
+          choice(
+            kw("TABLE"),
+            kw("TABLE-HANDLE"),
+            kw("DATASET"),
+            kw("DATASET-HANDLE")
+          )
+        ),
+        field("name", $.identifier),
+        optional($.type_tuning),
+        repeat($.function_parameter_tuning)
       ),
 
     function_statement: ($) =>
@@ -580,7 +596,7 @@ module.exports = grammar({
         kw("METHOD"),
         repeat(choice($.access_tuning, $.scope_tuning, $.method_tuning)),
         field("return_type", choice($.primitive_type, $.identifier)),
-        $.identifier,
+        field("name", $.identifier),
         seq("(", optional(_list($.function_parameter, ",")), ")"),
         optional(seq($.body, kw("END"), optional(kw("METHOD")))),
         $._terminator
