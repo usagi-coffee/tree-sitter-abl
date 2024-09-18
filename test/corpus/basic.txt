@@ -145,6 +145,11 @@ variable = 5.
 variable = 5.35.
 SESSION:NUMERIC-FORMAT = "european".
 
+variable += 8.
+variable -= 4.
+variable *= 2.
+variable /= 3.
+
 --------------------------------------------------------------------------------
 
 (source_code
@@ -165,7 +170,23 @@ SESSION:NUMERIC-FORMAT = "european".
       (object_access
         (identifier)
         (identifier))
-      (string_literal))))
+      (string_literal)))
+  (variable_assignment
+    (assignment
+      (identifier)
+      (number_literal)))
+  (variable_assignment
+    (assignment
+      (identifier)
+      (number_literal)))
+  (variable_assignment
+    (assignment
+      (identifier)
+      (number_literal)))
+  (variable_assignment
+    (assignment
+      (identifier)
+      (number_literal))))
 
 ================================================================================
 BINARY (simple) operators

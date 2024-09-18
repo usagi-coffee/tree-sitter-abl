@@ -1,10 +1,11 @@
 const PREC = {
-  UNARY: 7,
-  EXP: 6,
-  MULTI: 5,
-  ADD: 4,
-  COMPARE: 3,
-  LOGICAL: 2,
+  UNARY: 8,
+  EXP: 7,
+  MULTI: 6,
+  ADD: 5,
+  COMPARE: 4,
+  LOGICAL: 3,
+  ASSIGN: 2,
   EXTRA: -1
 };
 
@@ -17,6 +18,7 @@ module.exports = grammar({
     $._namedoublecolon,
     $._or_operator,
     $._and_operator,
+    $._augmented_assignment,
     $._escaped_string,
     $._special_character
   ],
@@ -171,7 +173,7 @@ module.exports = grammar({
         kw("CONTAINS")
       ),
     comparison_expression: ($) =>
-      prec.left(
+      prec.right(
         PREC.COMPARE,
         seq($._expression, $._comparison_operator, $._expression)
       ),
@@ -245,19 +247,26 @@ module.exports = grammar({
 
     when_expression: ($) => seq(kw("WHEN"), $._expression),
     assignment: ($) =>
-      seq(
-        prec.left(
-          choice(
-            field("name", $.identifier),
-            $.qualified_name,
-            $.object_access,
-            $.member_access
-          )
-        ),
-        "=",
-        prec.right($._expression),
-        optional($.when_expression)
+      prec.right(
+        PREC.ASSIGN,
+        seq(
+          prec.left(
+            field(
+              "name",
+              choice(
+                $.identifier,
+                $.qualified_name,
+                $.object_access,
+                $.member_access
+              )
+            )
+          ),
+          field("operator", choice("=", $._augmented_assignment)),
+          prec.right($._expression),
+          optional($.when_expression)
+        )
       ),
+    variable_assignment: ($) => seq($.assignment, $._terminator),
 
     variable_tuning: ($) =>
       seq(
@@ -1045,14 +1054,14 @@ module.exports = grammar({
     abl_statement: ($) =>
       seq(
         field("statement", $.identifier),
-        repeat($._expression),
+        repeat(prec(-1, $._expression)),
         $._terminator
       ),
 
     assign_statement: ($) =>
       seq(
         kw("ASSIGN"),
-        repeat($.assignment),
+        repeat(choice($.assignment)),
         optional("NO-ERROR"),
         $._terminator
       ),
