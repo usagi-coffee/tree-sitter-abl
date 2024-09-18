@@ -1201,7 +1201,34 @@ oObject:Length -= String(pcMessage):Size.
       array: (object_access
         object: (identifier)
         property: (identifier))
-      (number_literal))))
+      (number_literal)))
+  (variable_assignment
+    (assignment
+      name: (object_access
+        object: (identifier)
+        property: (identifier))
+      (object_access
+        object: (new_expression
+          (qualified_name
+            (identifier)
+            (identifier)
+            (identifier))
+          (arguments
+            (argument
+              (identifier))))
+        property: (identifier))))
+  (variable_assignment
+    (assignment
+      name: (object_access
+        object: (identifier)
+        property: (identifier))
+      (object_access
+        object: (function_call
+          function: (identifier)
+          (arguments
+            (argument
+              (identifier))))
+        property: (identifier)))))
 
 ================================================================================
 TERNARY EXPRESSION statement
