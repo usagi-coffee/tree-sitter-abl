@@ -1175,6 +1175,9 @@ DISPLAY some_object:chained_property:chained_another:method().
 
 PUT some_object:array[5].
 
+Object:Length = new OpenEdge.Core.String(pcMessage):Size.
+oObject:Length -= String(pcMessage):Size.
+
 --------------------------------------------------------------------------------
 
 (source_code

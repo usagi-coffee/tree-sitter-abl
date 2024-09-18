@@ -742,7 +742,10 @@ module.exports = grammar({
 
     object_access: ($) =>
       seq(
-        field("object", $.identifier),
+        field(
+          "object",
+          choice($.identifier, $.new_expression, $.function_call)
+        ),
         repeat1(seq(alias($._namecolon, ":"), field("property", $.identifier)))
       ),
 
