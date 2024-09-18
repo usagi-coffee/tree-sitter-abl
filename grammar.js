@@ -22,9 +22,10 @@ module.exports = grammar({
   ],
   extras: ($) => [$.comment, $.include, /[\s\f\uFEFF\u2060\u200B]|\\\r?\n/],
   word: ($) => $.identifier,
-  supertypes: ($) => [$._expression, $._statement, $._terminated_statement],
+  supertypes: ($) => [$._expression, $._statement],
   conflicts: ($) => [
     [$.input_expression],
+    ...combinations([$._statement, $.if_statement]),
     // DEFINE * conflicts
     ...combinations([
       $.abl_statement,
@@ -391,21 +392,21 @@ module.exports = grammar({
         kw("IF"),
         field("condition", $._expression),
         kw("THEN"),
-        choice($.do_block, $._terminated_statement),
-        optional(repeat(choice($.else_if_statement, $.else_statement)))
-      ),
-
-    else_if_statement: ($) =>
-      seq(
-        kw("ELSE"),
-        kw("IF"),
-        field("condition", $._expression),
-        kw("THEN"),
-        choice($.do_block, $._terminated_statement)
+        choice($.do_block, prec(2, $._statement)),
+        repeat(choice($.else_statement))
       ),
 
     else_statement: ($) =>
-      seq(kw("ELSE"), choice($.do_block, $._terminated_statement)),
+      prec(
+        1,
+        seq(
+          kw("ELSE"),
+          optional(
+            seq(kw("IF"), field("condition", $._expression), kw("THEN"))
+          ),
+          choice($.do_block, $._statement)
+        )
+      ),
 
     ternary_expression: ($) =>
       prec.right(
@@ -927,7 +928,7 @@ module.exports = grammar({
       choice($._block_terminator, seq(kw("END"), kw("CASE"), $._terminator)),
 
     _case_branch_body: ($) =>
-      choice($.do_block, field("statement", $._terminated_statement)),
+      prec(1, choice($.do_block, field("statement", $._statement))),
 
     case_conditon: ($) =>
       seq(optional(seq(kw("OR"), kw("WHEN"))), $._expression),
@@ -1400,34 +1401,6 @@ module.exports = grammar({
         $.button_definition,
         $.abl_statement,
         prec.left(PREC.EXTRA, $.label)
-      ),
-
-    _terminated_statement: ($) =>
-      choice(
-        $.variable_definition,
-        $.variable_assignment,
-        $.buffer_definition,
-        $.query_definition,
-        $.stream_definition,
-        $.function_call_statement,
-        $.return_statement,
-        $.for_statement,
-        $.repeat_statement,
-        $.find_statement,
-        $._stream_statement,
-        $.case_statement,
-        $.input_close_statement,
-        $.output_close_statement,
-        $.assign_statement,
-        $.accumulate_statement,
-        $.undo_statement,
-        $.error_scope_statement,
-        $.temp_table_definition,
-        $.workfile_definition,
-        $.class_statement,
-        $.interface_statement,
-        $.on_statement,
-        $.abl_statement
       )
   }
 });

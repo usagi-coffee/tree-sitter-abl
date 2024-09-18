@@ -446,7 +446,7 @@ END.
           (assignment
             name: (identifier)
             (number_literal)))))
-    (else_if_statement
+    (else_statement
       condition: (comparison_expression
         (identifier)
         (number_literal))
@@ -494,7 +494,7 @@ End.
           (assignment
             name: (identifier)
             (number_literal)))))
-    (else_if_statement
+    (else_statement
       condition: (comparison_expression
         (identifier)
         (number_literal))
@@ -554,7 +554,7 @@ END.
       (assignment
         name: (identifier)
         (number_literal)))
-    (else_if_statement
+    (else_statement
       condition: (comparison_expression
         (identifier)
         (number_literal))
