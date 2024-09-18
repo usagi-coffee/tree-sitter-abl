@@ -96,7 +96,7 @@ module.exports = grammar({
 
     type_tuning: ($) =>
       choice(
-        seq(kw("AS"), field("type", choice($.primitive_type, $.identifier))),
+        seq(kw("AS"), field("type", $._type)),
         seq(kw("LIKE"), field("type", $.identifier))
       ),
 
@@ -235,10 +235,12 @@ module.exports = grammar({
         kw("RECID"),
         kw("ROWID"),
         kw("HANDLE"),
-        kw("COM-HANDLE"),
-        seq(kw("CLASS"), choice($.identifier, $.qualified_name)),
-        $.qualified_name
+        kw("COM-HANDLE")
       ),
+
+    class_type: ($) => seq(kw("CLASS"), choice($.identifier, $.qualified_name)),
+    _type: ($) =>
+      choice($.primitive_type, $.identifier, $.qualified_name, $.class_type),
 
     when_expression: ($) => seq(kw("WHEN"), $._expression),
     assignment: ($) =>
@@ -327,6 +329,9 @@ module.exports = grammar({
         repeat($.query_definition_tuning),
         $._terminator
       ),
+
+    return_type: ($) =>
+      seq(choice(kw("RETURNS"), kw("RETURN")), field("type", $._type)),
 
     function_call_statement: ($) => seq($.function_call, $._terminator),
     _function_call_arguments: ($) =>
@@ -485,15 +490,15 @@ module.exports = grammar({
         repeat($.function_parameter_tuning)
       ),
 
+    function_parameters: ($) =>
+      seq("(", optional(_list($.function_parameter, ",")), ")"),
+
     function_statement: ($) =>
       seq(
         kw("FUNCTION"),
         field("name", $.identifier),
-        seq(
-          choice(kw("RETURNS"), kw("RETURN")),
-          field("return_type", choice($.primitive_type, $.identifier))
-        ),
-        optional(seq("(", optional(_list($.function_parameter, ",")), ")")),
+        $.return_type,
+        optional(alias($.function_parameters, $.parameters)),
         optional(alias($.dot_body, $.body)),
         $._function_terminator
       ),
@@ -595,7 +600,7 @@ module.exports = grammar({
       seq(
         kw("METHOD"),
         repeat(choice($.access_tuning, $.scope_tuning, $.method_tuning)),
-        field("return_type", choice($.primitive_type, $.identifier)),
+        alias($._type, $.return_type),
         field("name", $.identifier),
         seq("(", optional(_list($.function_parameter, ",")), ")"),
         optional(seq($.body, kw("END"), optional(kw("METHOD")))),
@@ -1249,7 +1254,7 @@ module.exports = grammar({
         optional(
           choice($.scope_tuning, $.access_tuning, $.serialization_tuning)
         ),
-        field("type", choice($.primitive_type, $.identifier, $.string_literal)),
+        alias(choice($._type, $.string_literal), $.type_tuning),
         optional(seq("[", optional(field("size", $.number_literal)), "]")),
         repeat(seq($.variable, optional(","))),
         $._terminator
