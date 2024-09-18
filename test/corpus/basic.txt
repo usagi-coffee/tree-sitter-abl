@@ -2334,3 +2334,64 @@ VAR INT[ ] x = [funct( ), a + b].
           (additive_expression
             (identifier)
             (identifier)))))))
+
+================================================================================
+RUN statement
+================================================================================
+
+RUN getMyNumber.p(piFirstNum, piSecNum).
+RUN VALUE(programs[INDEX("12345", selection)]).
+RUN recall-query IN phand.
+
+RUN server-error.p ON SERVER hServer
+  ASYNCHRONOUS SET hRequest EVENT-PROCEDURE "procDone" IN
+  THIS-PROCEDURE (OUTPUT numLines AS INTEGER).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (run_statement
+    (qualified_name
+      (identifier)
+      (identifier))
+    (arguments
+      (argument
+        (identifier))
+      (argument
+        (identifier))))
+  (run_statement
+    (function_call
+      (identifier)
+      (arguments
+        (argument
+          (array_access
+            (identifier)
+            (function_call
+              (identifier)
+              (arguments
+                (argument
+                  (string_literal))
+                (argument
+                  (identifier)))))))))
+  (run_statement
+    (identifier)
+    (run_tuning
+      (identifier)))
+  (run_statement
+    (qualified_name
+      (identifier)
+      (identifier))
+    (run_tuning
+      (identifier))
+    (run_tuning)
+    (run_tuning
+      (identifier))
+    (run_tuning
+      (string_literal))
+    (run_tuning)
+    (arguments
+      (argument
+        (argument_mode)
+        (identifier)
+        (type_tuning
+          (primitive_type))))))

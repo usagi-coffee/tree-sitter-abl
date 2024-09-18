@@ -1329,6 +1329,30 @@ module.exports = grammar({
         $._terminator
       ),
 
+    run_tuning: ($) =>
+      choice(
+        kw("PERSISTENT"),
+        kw("SINGLE-RUN"),
+        kw("SINGLETON"),
+        kw("ASYNCHRONOUS"),
+        seq(kw("SET"), $.identifier),
+        seq(kw("ON"), kw("SERVER"), $.identifier),
+        seq(kw("IN"), choice(kw("THIS-PROCEDURE"), $.identifier)),
+        seq(kw("EVENT-PROCEDURE"), $.string_literal)
+      ),
+    run_statement: ($) =>
+      seq(
+        kw("RUN"),
+        field(
+          "procedure",
+          choice($.identifier, $.qualified_name, $.function_call)
+        ),
+        repeat($.run_tuning),
+        optional(alias($.function_arguments, $.arguments)),
+        optional(kw("NO-ERROR")),
+        $._terminator
+      ),
+
     // Supertypes
     _expression: ($) =>
       choice(
@@ -1398,6 +1422,7 @@ module.exports = grammar({
         $.prompt_for_statement,
         $.dataset_definition,
         $.button_definition,
+        $.run_statement,
         $.abl_statement,
         prec.left(PREC.EXTRA, $.label)
       )
