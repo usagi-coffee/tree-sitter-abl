@@ -335,13 +335,6 @@ module.exports = grammar({
       seq(choice(kw("RETURNS"), kw("RETURN")), field("type", $._type)),
 
     function_call_statement: ($) => seq($.function_call, $._terminator),
-    _function_call_arguments: ($) =>
-      prec.right(
-        seq(
-          $.function_call_argument,
-          repeat(seq(",", $.function_call_argument))
-        )
-      ),
 
     argument_mode: ($) =>
       prec.right(
@@ -374,6 +367,12 @@ module.exports = grammar({
     function_call_argument: ($) =>
       prec.right(1, choice($._function_argument_with_mode, $._expression)),
 
+    function_arguments: ($) =>
+      seq(
+        "(",
+        optional(_list(alias($.function_call_argument, $.argument), ",")),
+        ")"
+      ),
     function_call: ($) =>
       prec.right(
         1,
@@ -382,7 +381,7 @@ module.exports = grammar({
             "function",
             choice($.identifier, prec.right(2, $.object_access))
           ),
-          seq("(", optional($._function_call_arguments), ")"),
+          alias($.function_arguments, $.arguments),
           optional(kw("NO-ERROR"))
         )
       ),
@@ -727,7 +726,7 @@ module.exports = grammar({
         seq(
           kw("NEW"),
           choice($.identifier, $.qualified_name),
-          seq("(", optional($._function_call_arguments), ")"),
+          alias($.function_arguments, $.arguments),
           optional("NO-ERROR")
         )
       ),

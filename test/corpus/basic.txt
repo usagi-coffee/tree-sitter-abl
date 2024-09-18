@@ -226,7 +226,8 @@ y = NOT -x < -10 OR x = 10.
       (identifier)
       (unary_expression
         (function_call
-          (identifier)))))
+          (identifier)
+          (arguments)))))
   (variable_assignment
     (assignment
       (identifier)
@@ -241,7 +242,8 @@ y = NOT -x < -10 OR x = 10.
         (function_call
           (object_access
             (identifier)
-            (identifier))))))
+            (identifier))
+          (arguments)))))
   (variable_assignment
     (assignment
       (identifier)
@@ -709,8 +711,9 @@ END.
         (number_literal))
       (function_call
         (identifier)
-        (function_call_argument
-          (string_literal))))
+        (arguments
+          (argument
+            (string_literal)))))
     (body
       (variable_assignment
         (assignment
@@ -832,33 +835,37 @@ PersonData:GetById(id, output table ttPerson by-reference).
   (function_call_statement
     (function_call
       function: (identifier)
-      (function_call_argument
-        (input_expression
-          field: (identifier)))
-      (function_call_argument
-        (argument_mode)
-        (identifier))))
+      (arguments
+        (argument
+          (input_expression
+            field: (identifier)))
+        (argument
+          (argument_mode)
+          (identifier)))))
   (function_call_statement
     (function_call
       function: (identifier)
-      (function_call_argument
-        (identifier))))
+      (arguments
+        (argument
+          (identifier)))))
   (function_call_statement
     (function_call
       function: (identifier)
-      (function_call_argument
-        (identifier))))
+      (arguments
+        (argument
+          (identifier)))))
   (function_call_statement
     (function_call
       function: (object_access
         object: (identifier)
         property: (identifier))
-      (function_call_argument
-        (identifier))
-      (function_call_argument
-        (argument_mode)
-        (identifier)
-        (argument_pass_type)))))
+      (arguments
+        (argument
+          (identifier))
+        (argument
+          (argument_mode)
+          (identifier)
+          (argument_pass_type))))))
 
 ================================================================================
 DO TRANSACTION statement
@@ -893,7 +900,8 @@ DISPLAY "test" a 5 f().
     (identifier)
     (number_literal)
     (function_call
-      function: (identifier))))
+      function: (identifier)
+      (arguments))))
 
 ================================================================================
 ASSIGN statement
@@ -919,7 +927,8 @@ ASSIGN
     (assignment
       (identifier)
       (function_call
-        (identifier)))
+        (identifier)
+        (arguments)))
     (assignment
       (qualified_name
         (identifier)
@@ -1054,8 +1063,9 @@ END.
       (sort_column
         column: (function_call
           function: (identifier)
-          (function_call_argument
-            (identifier)))))
+          (arguments
+            (argument
+              (identifier))))))
     (body
       (abl_statement
         statement: (identifier)
@@ -1159,7 +1169,8 @@ PUT some_object:array[5].
         object: (identifier)
         property: (identifier)
         property: (identifier)
-        property: (identifier))))
+        property: (identifier))
+      (arguments)))
   (abl_statement
     statement: (identifier)
     (array_access
@@ -1265,13 +1276,15 @@ OUTPUT CLOSE.
   (input_stream_statement
     target: (function_call
       function: (identifier)
-      (function_call_argument
-        (identifier))))
+      (arguments
+        (argument
+          (identifier)))))
   (output_stream_statement
     target: (function_call
       function: (identifier)
-      (function_call_argument
-        (identifier))))
+      (arguments
+        (argument
+          (identifier)))))
   (output_close_statement)
   (input_close_statement)
   (stream_definition
@@ -1280,15 +1293,17 @@ OUTPUT CLOSE.
     source: (identifier)
     target: (function_call
       function: (identifier)
-      (function_call_argument
-        (identifier))))
+      (arguments
+        (argument
+          (identifier)))))
   (input_close_statement)
   (input_stream_statement
     source: (identifier)
     target: (function_call
       function: (identifier)
-      (function_call_argument
-        (identifier))))
+      (arguments
+        (argument
+          (identifier)))))
   (input_close_statement)
   (stream_definition
     (identifier))
@@ -1556,7 +1571,8 @@ END CLASS.
     (assignment
       name: (identifier)
       (new_expression
-        (identifier))))
+        (identifier)
+        (arguments))))
   (using_statement
     (qualified_name
       (identifier)
@@ -1675,8 +1691,9 @@ END.
             (identifier)
             (identifier)
             (identifier))
-          (function_call_argument
-            (string_literal))))))
+          (arguments
+            (argument
+              (string_literal)))))))
   (do_block
     (on_quit_phrase)
     (body
@@ -1705,10 +1722,11 @@ UNDO, THROW NEW Progress.Lang.AppError("test message", 420).
         (identifier)
         (identifier)
         (identifier))
-      (function_call_argument
-        (string_literal))
-      (function_call_argument
-        (number_literal)))))
+      (arguments
+        (argument
+          (string_literal))
+        (argument
+          (number_literal))))))
 
 ================================================================================
 ON ERROR/QUIT/STOP phrases
@@ -2160,7 +2178,8 @@ VAR INT[ ] x = [funct( ), a + b].
       (assignment
         (identifier)
         (new_expression
-          (identifier)))))
+          (identifier)
+          (arguments)))))
   (var_statement
     (type_tuning
       (identifier))
@@ -2169,12 +2188,13 @@ VAR INT[ ] x = [funct( ), a + b].
         (identifier)
         (new_expression
           (identifier)
-          (function_call_argument
-            (string_literal))
-          (function_call_argument
-            (number_literal))
-          (function_call_argument
-            (null_expression))))))
+          (arguments
+            (argument
+              (string_literal))
+            (argument
+              (number_literal))
+            (argument
+              (null_expression)))))))
   (comment)
   (var_statement
     (type_tuning
@@ -2184,38 +2204,25 @@ VAR INT[ ] x = [funct( ), a + b].
         (identifier)
         (new_expression
           (identifier)
-          (function_call_argument
-            (string_literal)))))
+          (arguments
+            (argument
+              (string_literal))))))
     (variable
       (assignment
         (identifier)
         (new_expression
           (identifier)
-          (function_call_argument
-            (string_literal)))))
+          (arguments
+            (argument
+              (string_literal))))))
     (variable
       (assignment
         (identifier)
         (new_expression
           (identifier)
-          (function_call_argument
-            (string_literal))))))
-  (comment)
-  (var_statement
-    (type_tuning
-      (identifier))
-    (variable
-      (assignment
-        (identifier)
-        (new_expression
-          (identifier))))
-    (variable
-      (assignment
-        (identifier)
-        (new_expression
-          (identifier)
-          (function_call_argument
-            (string_literal))))))
+          (arguments
+            (argument
+              (string_literal)))))))
   (comment)
   (var_statement
     (type_tuning
@@ -2225,15 +2232,35 @@ VAR INT[ ] x = [funct( ), a + b].
         (identifier)
         (new_expression
           (identifier)
-          (function_call_argument
-            (string_literal)))))
+          (arguments))))
     (variable
       (assignment
         (identifier)
         (new_expression
           (identifier)
-          (function_call_argument
-            (string_literal))))))
+          (arguments
+            (argument
+              (string_literal)))))))
+  (comment)
+  (var_statement
+    (type_tuning
+      (identifier))
+    (variable
+      (assignment
+        (identifier)
+        (new_expression
+          (identifier)
+          (arguments
+            (argument
+              (string_literal))))))
+    (variable
+      (assignment
+        (identifier)
+        (new_expression
+          (identifier)
+          (arguments
+            (argument
+              (string_literal)))))))
   (comment)
   (var_statement
     (type_tuning
@@ -2245,12 +2272,14 @@ VAR INT[ ] x = [funct( ), a + b].
         (array_literal
           (new_expression
             (identifier)
-            (function_call_argument
-              (string_literal)))
+            (arguments
+              (argument
+                (string_literal))))
           (new_expression
             (identifier)
-            (function_call_argument
-              (string_literal)))))))
+            (arguments
+              (argument
+                (string_literal))))))))
   (comment)
   (var_statement
     (type_tuning
@@ -2261,12 +2290,14 @@ VAR INT[ ] x = [funct( ), a + b].
         (array_literal
           (new_expression
             (identifier)
-            (function_call_argument
-              (string_literal)))
+            (arguments
+              (argument
+                (string_literal))))
           (new_expression
             (identifier)
-            (function_call_argument
-              (string_literal)))))))
+            (arguments
+              (argument
+                (string_literal))))))))
   (comment)
   (var_statement
     (type_tuning
@@ -2298,7 +2329,8 @@ VAR INT[ ] x = [funct( ), a + b].
         (identifier)
         (array_literal
           (function_call
-            (identifier))
+            (identifier)
+            (arguments))
           (additive_expression
             (identifier)
             (identifier)))))))
