@@ -602,7 +602,7 @@ module.exports = grammar({
         repeat(choice($.access_tuning, $.scope_tuning, $.method_tuning)),
         alias($._type, $.return_type),
         field("name", $.identifier),
-        seq("(", optional(_list($.function_parameter, ",")), ")"),
+        alias($.function_parameters, $.parameters),
         optional(seq($.body, kw("END"), optional(kw("METHOD")))),
         $._terminator
       ),

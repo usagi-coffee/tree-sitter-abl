@@ -1951,16 +1951,18 @@ END INTERFACE.
         (return_type
           (primitive_type))
         (identifier)
-        (function_parameter
-          (function_parameter_mode)
-          (identifier)
-          (function_parameter_tuning)))
+        (parameters
+          (function_parameter
+            (function_parameter_mode)
+            (identifier)
+            (function_parameter_tuning))))
       (comment)
       (method_definition
         (access_tuning)
         (return_type
           (primitive_type))
-        (identifier)))))
+        (identifier)
+        (parameters)))))
 
 ================================================================================
 VAR statement
