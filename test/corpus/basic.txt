@@ -124,17 +124,16 @@ DEFINE VARIABLE cls AS CLASS CustomClass.
   (variable_definition
     (identifier)
     (type_tuning
-      (primitive_type
-        (qualified_name
-          (identifier)
-          (identifier)
-          (identifier)
-          (identifier))))
+      (qualified_name
+        (identifier)
+        (identifier)
+        (identifier)
+        (identifier)))
     (variable_tuning))
   (variable_definition
     (identifier)
     (type_tuning
-      (primitive_type
+      (class_type
         (identifier)))))
 
 ================================================================================
@@ -795,33 +794,38 @@ PersonData:GetById(id, output table ttPerson by-reference).
 (source_code
   (function_statement
     name: (identifier)
-    return_type: (primitive_type)
-    (function_parameter
-      (function_parameter_mode)
-      name: (identifier)
-      (type_tuning
-        type: (primitive_type)))
-    (function_parameter
-      (function_parameter_mode)
-      name: (identifier)
-      (type_tuning
-        type: (primitive_type)))
+    (return_type
+      type: (primitive_type))
+    (parameters
+      (function_parameter
+        (function_parameter_mode)
+        name: (identifier)
+        (type_tuning
+          type: (primitive_type)))
+      (function_parameter
+        (function_parameter_mode)
+        name: (identifier)
+        (type_tuning
+          type: (primitive_type))))
     (body
       (return_statement
         (identifier))))
   (function_statement
     name: (identifier)
-    return_type: (primitive_type)
-    (function_parameter
-      name: (identifier)
-      (type_tuning
-        type: (primitive_type)))
+    (return_type
+      type: (primitive_type))
+    (parameters
+      (function_parameter
+        name: (identifier)
+        (type_tuning
+          type: (primitive_type))))
     (body
       (return_statement
         (identifier))))
   (function_statement
     name: (identifier)
-    return_type: (primitive_type)
+    (return_type
+      type: (primitive_type))
     (body
       (return_statement
         (number_literal))))
@@ -1944,7 +1948,8 @@ END INTERFACE.
       (comment)
       (method_definition
         (access_tuning)
-        (primitive_type)
+        (return_type
+          (primitive_type))
         (identifier)
         (function_parameter
           (function_parameter_mode)
@@ -1953,7 +1958,8 @@ END INTERFACE.
       (comment)
       (method_definition
         (access_tuning)
-        (primitive_type)
+        (return_type
+          (primitive_type))
         (identifier)))))
 
 ================================================================================
@@ -2025,7 +2031,8 @@ VAR INT[ ] x = [funct( ), a + b].
 (source_code
   (comment)
   (var_statement
-    (primitive_type)
+    (type_tuning
+      (primitive_type))
     (variable
       (identifier))
     (variable
@@ -2037,7 +2044,8 @@ VAR INT[ ] x = [funct( ), a + b].
   (comment)
   (comment)
   (var_statement
-    (primitive_type)
+    (type_tuning
+      (primitive_type))
     (variable
       (identifier))
     (variable
@@ -2048,7 +2056,8 @@ VAR INT[ ] x = [funct( ), a + b].
         (number_literal))))
   (comment)
   (var_statement
-    (primitive_type)
+    (type_tuning
+      (primitive_type))
     (variable
       (identifier))
     (variable
@@ -2062,7 +2071,8 @@ VAR INT[ ] x = [funct( ), a + b].
   (comment)
   (var_statement
     (access_tuning)
-    (primitive_type)
+    (type_tuning
+      (primitive_type))
     (variable
       (identifier))
     (variable
@@ -2073,7 +2083,8 @@ VAR INT[ ] x = [funct( ), a + b].
   (comment)
   (comment)
   (var_statement
-    (primitive_type)
+    (type_tuning
+      (primitive_type))
     (number_literal)
     (variable
       (assignment
@@ -2092,7 +2103,8 @@ VAR INT[ ] x = [funct( ), a + b].
           (number_literal)))))
   (comment)
   (var_statement
-    (primitive_type)
+    (type_tuning
+      (primitive_type))
     (variable
       (identifier))
     (variable
@@ -2104,12 +2116,12 @@ VAR INT[ ] x = [funct( ), a + b].
           (number_literal)))))
   (comment)
   (var_statement
-    (string_literal)
+    (type_tuning)
     (variable
       (identifier)))
   (comment)
   (var_statement
-    (primitive_type
+    (type_tuning
       (qualified_name
         (identifier)
         (identifier)
@@ -2122,29 +2134,33 @@ VAR INT[ ] x = [funct( ), a + b].
       (identifier)))
   (comment)
   (var_statement
-    (primitive_type
-      (qualified_name
-        (identifier)
-        (identifier)
-        (identifier)))
+    (type_tuning
+      (class_type
+        (qualified_name
+          (identifier)
+          (identifier)
+          (identifier))))
     (variable
       (identifier)))
   (comment)
   (var_statement
-    (identifier)
+    (type_tuning
+      (identifier))
     (number_literal)
     (variable
       (identifier)))
   (comment)
   (var_statement
-    (identifier)
+    (type_tuning
+      (identifier))
     (variable
       (assignment
         (identifier)
         (new_expression
           (identifier)))))
   (var_statement
-    (identifier)
+    (type_tuning
+      (identifier))
     (variable
       (assignment
         (identifier)
@@ -2158,7 +2174,8 @@ VAR INT[ ] x = [funct( ), a + b].
             (null_expression))))))
   (comment)
   (var_statement
-    (identifier)
+    (type_tuning
+      (identifier))
     (variable
       (assignment
         (identifier)
@@ -2182,7 +2199,8 @@ VAR INT[ ] x = [funct( ), a + b].
             (string_literal))))))
   (comment)
   (var_statement
-    (identifier)
+    (type_tuning
+      (identifier))
     (variable
       (assignment
         (identifier)
@@ -2197,7 +2215,8 @@ VAR INT[ ] x = [funct( ), a + b].
             (string_literal))))))
   (comment)
   (var_statement
-    (identifier)
+    (type_tuning
+      (identifier))
     (variable
       (assignment
         (identifier)
@@ -2214,7 +2233,8 @@ VAR INT[ ] x = [funct( ), a + b].
             (string_literal))))))
   (comment)
   (var_statement
-    (identifier)
+    (type_tuning
+      (identifier))
     (number_literal)
     (variable
       (assignment
@@ -2230,7 +2250,8 @@ VAR INT[ ] x = [funct( ), a + b].
               (string_literal)))))))
   (comment)
   (var_statement
-    (identifier)
+    (type_tuning
+      (identifier))
     (variable
       (assignment
         (identifier)
@@ -2245,7 +2266,8 @@ VAR INT[ ] x = [funct( ), a + b].
               (string_literal)))))))
   (comment)
   (var_statement
-    (primitive_type)
+    (type_tuning
+      (primitive_type))
     (variable
       (assignment
         (identifier)
@@ -2266,7 +2288,8 @@ VAR INT[ ] x = [funct( ), a + b].
           (identifier)))))
   (comment)
   (var_statement
-    (primitive_type)
+    (type_tuning
+      (primitive_type))
     (variable
       (assignment
         (identifier)
