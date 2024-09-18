@@ -1916,10 +1916,11 @@ END INTERFACE.
       (event_definition
         (access_tuning)
         (identifier)
-        (function_parameter
-          (identifier)
-          (type_tuning
-            (primitive_type))))
+        (parameters
+          (function_parameter
+            (identifier)
+            (type_tuning
+              (primitive_type)))))
       (comment)
       (temp_table_definition
         (identifier)

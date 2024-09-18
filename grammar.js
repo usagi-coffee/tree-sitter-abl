@@ -547,7 +547,7 @@ module.exports = grammar({
         kw("GET"),
         optional(
           seq(
-            optional(seq("(", optional(_list($.function_parameter, ",")), ")")),
+            optional(alias($.function_parameters, $.parameters)),
             $.body,
             kw("END"),
             optional(kw("GET"))
@@ -560,7 +560,7 @@ module.exports = grammar({
       seq(
         optional($.access_tuning),
         kw("SET"),
-        optional(seq("(", optional(_list($.function_parameter, ",")), ")")),
+        optional(alias($.function_parameters, $.parameters)),
         optional(seq($.body, kw("END"), optional(kw("SET")))),
         $._terminator
       ),
@@ -591,7 +591,7 @@ module.exports = grammar({
         $.identifier,
         optional(kw("SIGNATURE")),
         kw("VOID"),
-        seq("(", optional(_list($.function_parameter, ",")), ")"),
+        alias($.function_parameters, $.parameters),
         $._terminator
       ),
 
@@ -664,7 +664,7 @@ module.exports = grammar({
         kw("CONSTRUCTOR"),
         repeat(choice($.scope_tuning, $.access_tuning)),
         $.identifier,
-        seq("(", optional(_list($.function_parameter, ",")), ")"),
+        alias($.function_parameters, $.parameters),
         $.body,
         kw("END"),
         optional(kw("CONSTRUCTOR")),
