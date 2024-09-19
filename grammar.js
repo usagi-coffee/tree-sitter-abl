@@ -100,7 +100,7 @@ module.exports = grammar({
     type_tuning: ($) =>
       choice(
         seq(kw("AS"), field("type", $._type)),
-        seq(kw("LIKE"), field("type", $.identifier))
+        seq(kw("LIKE"), field("type", $._type))
       ),
 
     _unary_minus_expressions: ($) =>

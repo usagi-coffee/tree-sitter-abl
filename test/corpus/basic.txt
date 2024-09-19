@@ -1848,27 +1848,28 @@ DEFINE TEMP-TABLE foo
     (field_definition
       (identifier)
       (type_tuning
-        (identifier))))
-  (abl_statement
-    (identifier)
-    (identifier)
-    (identifier)
-    (identifier)
-    (qualified_name
+        (qualified_name
+          (identifier)
+          (identifier))))
+    (field_definition
       (identifier)
-      (identifier))
-    (identifier)
-    (string_literal)
-    (identifier)
-    (identifier)
-    (identifier)
-    (identifier)
-    (identifier)
-    (identifier)
-    (identifier)
-    (identifier)
-    (identifier)
-    (identifier))
+      (type_tuning
+        (qualified_name
+          (identifier)
+          (identifier)))
+      (field_option
+        (string_literal)))
+    (index_definition
+      (identifier)
+      (index_tuning)
+      (sort_column
+        (identifier)
+        (sort_order)))
+    (index_definition
+      (identifier)
+      (sort_column
+        (identifier)
+        (sort_order))))
   (temp_table_definition
     (identifier)
     (field_definition
