@@ -170,6 +170,10 @@
         "named": true
       },
       {
+        "type": "enum_statement",
+        "named": true
+      },
+      {
         "type": "error_scope_statement",
         "named": true
       },
@@ -609,6 +613,10 @@
         },
         {
           "type": "destructor_definition",
+          "named": true
+        },
+        {
+          "type": "enum_definition",
           "named": true
         },
         {
@@ -1299,6 +1307,98 @@
         }
       ]
     }
+  },
+  {
+    "type": "enum_definition",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "enum_member",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "enum_member",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "value": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": ",",
+            "named": false
+          },
+          {
+            "type": "=",
+            "named": false
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "number_literal",
+            "named": true
+          },
+          {
+            "type": "string_literal",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "enum_statement",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "body",
+          "named": true
+        },
+        {
+          "type": "enum_tuning",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "enum_tuning",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "error_scope_statement",
@@ -4095,6 +4195,10 @@
     "named": false
   },
   {
+    "type": "ENUM",
+    "named": false
+  },
+  {
     "type": "EQ",
     "named": false
   },
@@ -4156,6 +4260,10 @@
   },
   {
     "type": "FIRST",
+    "named": false
+  },
+  {
+    "type": "FLAGS",
     "named": false
   },
   {
