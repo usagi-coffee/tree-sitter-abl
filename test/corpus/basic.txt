@@ -2447,3 +2447,89 @@ RUN server-error.p ON SERVER hServer
         (identifier)
         (type_tuning
           (primitive_type))))))
+
+================================================================================
+ENUM statement
+================================================================================
+
+ENUM Weather:
+  define ENUM Rainy
+              Default = Sunny
+              Cloudy
+              Snowy
+              Apocalyptic.
+END ENUM.
+
+ENUM Permission FLAGS:
+    DEFINE ENUM None = 0
+                Read
+                Write
+                Update = Write
+                ReadWrite = Read,Write
+                Create
+                Delete
+                Execute.
+END ENUM.
+
+ENUM Direction:
+    DEFINE ENUM North
+                South
+                East
+                West.
+END ENUM.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (enum_statement
+    (identifier)
+    (body
+      (enum_definition
+        (enum_member
+          (identifier))
+        (enum_member
+          (identifier)
+          (identifier))
+        (enum_member
+          (identifier))
+        (enum_member
+          (identifier))
+        (enum_member
+          (identifier)))))
+  (enum_statement
+    (identifier)
+    (enum_tuning)
+    (body
+      (enum_definition
+        (enum_member
+          (identifier)
+          (number_literal))
+        (enum_member
+          (identifier))
+        (enum_member
+          (identifier))
+        (enum_member
+          (identifier)
+          (identifier))
+        (enum_member
+          (identifier)
+          (identifier)
+          (identifier))
+        (enum_member
+          (identifier))
+        (enum_member
+          (identifier))
+        (enum_member
+          (identifier)))))
+  (enum_statement
+    (identifier)
+    (body
+      (enum_definition
+        (enum_member
+          (identifier))
+        (enum_member
+          (identifier))
+        (enum_member
+          (identifier))
+        (enum_member
+          (identifier))))))

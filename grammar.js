@@ -1365,6 +1365,38 @@ module.exports = grammar({
         $._terminator
       ),
 
+    enum_body: ($) => seq(":", repeat($.enum_definition)),
+    enum_member: ($) =>
+      seq(
+        field("name", $.identifier),
+        field(
+          "value",
+          optional(
+            seq(
+              kw("="),
+              _list(
+                choice($.identifier, $.number_literal, $.string_literal),
+                ","
+              )
+            )
+          )
+        )
+      ),
+    enum_definition: ($) =>
+      seq(kw("DEFINE"), kw("ENUM"), repeat($.enum_member), $._terminator),
+
+    enum_tuning: ($) => choice(kw("FLAGS")),
+    enum_statement: ($) =>
+      seq(
+        kw("ENUM"),
+        field("name", $.identifier),
+        repeat($.enum_tuning),
+        alias($.enum_body, $.body),
+        kw("END"),
+        optional(kw("ENUM")),
+        $._terminator
+      ),
+
     // Supertypes
     _expression: ($) =>
       choice(
@@ -1435,6 +1467,7 @@ module.exports = grammar({
         $.dataset_definition,
         $.button_definition,
         $.run_statement,
+        $.enum_statement,
         $.abl_statement,
         prec.left(PREC.EXTRA, $.label)
       )
