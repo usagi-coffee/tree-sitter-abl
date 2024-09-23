@@ -1467,8 +1467,7 @@ module.exports = grammar({
         $.button_definition,
         $.run_statement,
         $.enum_statement,
-        $.abl_statement,
-        prec.left(PREC.EXTRA, $.label)
+        $.abl_statement
       )
   }
 });
