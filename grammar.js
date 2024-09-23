@@ -76,8 +76,7 @@ module.exports = grammar({
     string_literal: ($) => $._escaped_string,
 
     date_literal: ($) => /\d{1,2}\/\d{1,2}\/\d{4}|\d{2}/,
-    array_literal: ($) =>
-      seq("[", repeat(seq($._expression, optional(","))), "]"),
+    array_literal: ($) => seq("[", optional(_list($._expression, ",")), "]"),
 
     double_quoted_string: ($) =>
       seq('"', repeat(choice(/[^"\\]+/, /\\./, $._special_character)), '"'),
