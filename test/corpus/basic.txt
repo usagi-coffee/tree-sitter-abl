@@ -148,32 +148,39 @@ variable /= 3.
   (variable_assignment
     (assignment
       (identifier)
+      (assignment_operator)
       (number_literal)))
   (variable_assignment
     (assignment
       (identifier)
+      (assignment_operator)
       (number_literal)))
   (variable_assignment
     (assignment
       (object_access
         (identifier)
         (identifier))
+      (assignment_operator)
       (string_literal)))
   (variable_assignment
     (assignment
       (identifier)
+      (assignment_operator)
       (number_literal)))
   (variable_assignment
     (assignment
       (identifier)
+      (assignment_operator)
       (number_literal)))
   (variable_assignment
     (assignment
       (identifier)
+      (assignment_operator)
       (number_literal)))
   (variable_assignment
     (assignment
       (identifier)
+      (assignment_operator)
       (number_literal))))
 
 ================================================================================
@@ -190,12 +197,14 @@ z = 2 > 4.
   (variable_assignment
     (assignment
       (identifier)
+      (assignment_operator)
       (additive_expression
         (number_literal)
         (number_literal))))
   (variable_assignment
     (assignment
       (identifier)
+      (assignment_operator)
       (multiplicative_expression
         (parenthesized_expression
           (multiplicative_expression
@@ -205,6 +214,7 @@ z = 2 > 4.
   (variable_assignment
     (assignment
       (identifier)
+      (assignment_operator)
       (comparison_expression
         (number_literal)
         (number_literal)))))
@@ -227,12 +237,14 @@ y = NOT -x < -10 OR x = 10.
   (variable_assignment
     (assignment
       (identifier)
+      (assignment_operator)
       (unary_expression
         (parenthesized_expression
           (number_literal)))))
   (variable_assignment
     (assignment
       (identifier)
+      (assignment_operator)
       (unary_expression
         (function_call
           (identifier)
@@ -240,6 +252,7 @@ y = NOT -x < -10 OR x = 10.
   (variable_assignment
     (assignment
       (identifier)
+      (assignment_operator)
       (unary_expression
         (qualified_name
           (identifier)
@@ -247,6 +260,7 @@ y = NOT -x < -10 OR x = 10.
   (variable_assignment
     (assignment
       (identifier)
+      (assignment_operator)
       (unary_expression
         (function_call
           (object_access
@@ -256,11 +270,13 @@ y = NOT -x < -10 OR x = 10.
   (variable_assignment
     (assignment
       (identifier)
+      (assignment_operator)
       (unary_expression
         (identifier))))
   (variable_assignment
     (assignment
       (identifier)
+      (assignment_operator)
       (logical_expression
         (unary_expression
           (comparison_expression
@@ -287,6 +303,7 @@ zr = NOT 5 = 2 + 2.
   (variable_assignment
     (assignment
       (identifier)
+      (assignment_operator)
       (unary_expression
         (comparison_expression
           (identifier)
@@ -294,6 +311,7 @@ zr = NOT 5 = 2 + 2.
   (variable_assignment
     (assignment
       (identifier)
+      (assignment_operator)
       (unary_expression
         (additive_expression
           (number_literal)
@@ -301,6 +319,7 @@ zr = NOT 5 = 2 + 2.
   (variable_assignment
     (assignment
       (identifier)
+      (assignment_operator)
       (unary_expression
         (comparison_expression
           (additive_expression
@@ -310,6 +329,7 @@ zr = NOT 5 = 2 + 2.
   (variable_assignment
     (assignment
       (identifier)
+      (assignment_operator)
       (unary_expression
         (comparison_expression
           (number_literal)
@@ -396,6 +416,7 @@ END.
         (variable_assignment
           (assignment
             name: (identifier)
+            (assignment_operator)
             (number_literal)))))))
 
 ================================================================================
@@ -421,6 +442,7 @@ END.
         (variable_assignment
           (assignment
             name: (identifier)
+            (assignment_operator)
             (number_literal)))))
     (else_statement
       (do_block
@@ -428,6 +450,7 @@ END.
           (variable_assignment
             (assignment
               name: (identifier)
+              (assignment_operator)
               (identifier))))))))
 
 ================================================================================
@@ -456,6 +479,7 @@ END.
         (variable_assignment
           (assignment
             name: (identifier)
+            (assignment_operator)
             (number_literal)))))
     (else_statement
       condition: (comparison_expression
@@ -466,6 +490,7 @@ END.
           (variable_assignment
             (assignment
               name: (identifier)
+              (assignment_operator)
               (identifier))))))
     (else_statement
       (do_block
@@ -473,6 +498,7 @@ END.
           (variable_assignment
             (assignment
               name: (identifier)
+              (assignment_operator)
               (identifier))))))))
 
 ================================================================================
@@ -504,6 +530,7 @@ End.
         (variable_assignment
           (assignment
             name: (identifier)
+            (assignment_operator)
             (number_literal)))))
     (else_statement
       condition: (comparison_expression
@@ -514,6 +541,7 @@ End.
           (variable_assignment
             (assignment
               name: (identifier)
+              (assignment_operator)
               (identifier))))))
     (else_statement
       (do_block
@@ -521,6 +549,7 @@ End.
           (variable_assignment
             (assignment
               name: (identifier)
+              (assignment_operator)
               (identifier))))))))
 
 ================================================================================
@@ -539,6 +568,7 @@ IF x > 10 THEN x = 10.
     (variable_assignment
       (assignment
         name: (identifier)
+        (assignment_operator)
         (number_literal)))))
 
 ================================================================================
@@ -564,6 +594,7 @@ END.
     (variable_assignment
       (assignment
         name: (identifier)
+        (assignment_operator)
         (number_literal)))
     (else_statement
       condition: (comparison_expression
@@ -572,11 +603,13 @@ END.
       (variable_assignment
         (assignment
           name: (identifier)
+          (assignment_operator)
           (number_literal))))
     (else_statement
       (variable_assignment
         (assignment
           name: (identifier)
+          (assignment_operator)
           (identifier)))))
   (if_statement
     condition: (comparison_expression
@@ -585,6 +618,7 @@ END.
     (variable_assignment
       (assignment
         name: (identifier)
+        (assignment_operator)
         (number_literal)))
     (else_statement
       (do_block
@@ -592,6 +626,7 @@ END.
           (variable_assignment
             (assignment
               name: (identifier)
+              (assignment_operator)
               (number_literal))))))))
 
 ================================================================================
@@ -615,18 +650,22 @@ y = x < 10 OR x = 10.
   (variable_assignment
     (assignment
       name: (identifier)
+      (assignment_operator)
       (boolean_literal)))
   (variable_assignment
     (assignment
       name: (identifier)
+      (assignment_operator)
       (boolean_literal)))
   (variable_assignment
     (assignment
       name: (identifier)
+      (assignment_operator)
       (boolean_literal)))
   (variable_assignment
     (assignment
       name: (identifier)
+      (assignment_operator)
       (boolean_literal)))
   (if_statement
     condition: (logical_expression
@@ -638,18 +677,21 @@ y = x < 10 OR x = 10.
   (variable_assignment
     (assignment
       name: (identifier)
+      (assignment_operator)
       (logical_expression
         (boolean_literal)
         (boolean_literal))))
   (variable_assignment
     (assignment
       name: (identifier)
+      (assignment_operator)
       (logical_expression
         (boolean_literal)
         (boolean_literal))))
   (variable_assignment
     (assignment
       name: (identifier)
+      (assignment_operator)
       (logical_expression
         (comparison_expression
           (identifier)
@@ -676,6 +718,7 @@ END.
       (variable_assignment
         (assignment
           (identifier)
+          (assignment_operator)
           (number_literal))))))
 
 ================================================================================
@@ -706,17 +749,20 @@ END.
     (to_phrase
       (assignment
         (identifier)
+        (assignment_operator)
         (number_literal))
       (number_literal))
     (body
       (variable_assignment
         (assignment
           (identifier)
+          (assignment_operator)
           (number_literal)))))
   (do_block
     (to_phrase
       (assignment
         (identifier)
+        (assignment_operator)
         (number_literal))
       (function_call
         (identifier)
@@ -727,6 +773,7 @@ END.
       (variable_assignment
         (assignment
           (identifier)
+          (assignment_operator)
           (number_literal)))))
   (do_block
     (while_phrase
@@ -737,6 +784,7 @@ END.
       (variable_assignment
         (assignment
           (identifier)
+          (assignment_operator)
           (number_literal)))))
   (do_block
     (label
@@ -744,6 +792,7 @@ END.
     (to_phrase
       (assignment
         (identifier)
+        (assignment_operator)
         (number_literal))
       (number_literal))
     (body
@@ -929,12 +978,15 @@ ASSIGN
   (assign_statement
     (assignment
       (identifier)
+      (assignment_operator)
       (number_literal))
     (assignment
       (identifier)
+      (assignment_operator)
       (string_literal))
     (assignment
       (identifier)
+      (assignment_operator)
       (function_call
         (identifier)
         (arguments)))
@@ -942,6 +994,7 @@ ASSIGN
       (qualified_name
         (identifier)
         (identifier))
+      (assignment_operator)
       (additive_expression
         (identifier)
         (number_literal)))))
@@ -1139,6 +1192,7 @@ w = CAN-FIND(LAST x OF y USING z1 AND FRAME f z2 WHERE z NO-LOCK).
   (variable_assignment
     (assignment
       name: (identifier)
+      (assignment_operator)
       (can_find_expression
         table: (identifier)
         (of
@@ -1195,6 +1249,7 @@ oObject:Length -= String(pcMessage):Size.
       name: (object_access
         object: (identifier)
         property: (identifier))
+      (assignment_operator)
       (object_access
         object: (new_expression
           (qualified_name
@@ -1210,6 +1265,7 @@ oObject:Length -= String(pcMessage):Size.
       name: (object_access
         object: (identifier)
         property: (identifier))
+      (assignment_operator)
       (object_access
         object: (function_call
           function: (identifier)
@@ -1230,6 +1286,7 @@ x = IF x > 10 THEN 10 ELSE x.
   (variable_assignment
     (assignment
       name: (identifier)
+      (assignment_operator)
       (ternary_expression
         condition: (comparison_expression
           (identifier)
@@ -1249,6 +1306,7 @@ x = (IF NOT x > 10 THEN 10 ELSE x).
   (variable_assignment
     (assignment
       name: (identifier)
+      (assignment_operator)
       (parenthesized_expression
         (ternary_expression
           condition: (unary_expression
@@ -1278,6 +1336,7 @@ value = (accum total Customer.CreditLimit).
   (variable_assignment
     (assignment
       (identifier)
+      (assignment_operator)
       (parenthesized_expression
         (accumulate_expression
           (accumulate_aggregate)
@@ -1372,6 +1431,7 @@ FIND foo WHERE bar CONTAINS "stuff" OR baz CONTAINS "what?".
   (variable_assignment
     (assignment
       name: (identifier)
+      (assignment_operator)
       (logical_expression
         (comparison_expression
           (number_literal)
@@ -1382,6 +1442,7 @@ FIND foo WHERE bar CONTAINS "stuff" OR baz CONTAINS "what?".
   (variable_assignment
     (assignment
       name: (identifier)
+      (assignment_operator)
       (comparison_expression
         (parenthesized_expression
           (comparison_expression
@@ -1398,6 +1459,7 @@ FIND foo WHERE bar CONTAINS "stuff" OR baz CONTAINS "what?".
   (variable_assignment
     (assignment
       name: (identifier)
+      (assignment_operator)
       (comparison_expression
         (parenthesized_expression
           (comparison_expression
@@ -1414,12 +1476,14 @@ FIND foo WHERE bar CONTAINS "stuff" OR baz CONTAINS "what?".
   (variable_assignment
     (assignment
       name: (identifier)
+      (assignment_operator)
       (comparison_expression
         (string_literal)
         (string_literal))))
   (variable_assignment
     (assignment
       name: (identifier)
+      (assignment_operator)
       (comparison_expression
         (string_literal)
         (string_literal))))
@@ -1459,6 +1523,7 @@ IF CURRENT-CHANGED x THEN RETURN '!'.
   (variable_assignment
     (assignment
       name: (identifier)
+      (assignment_operator)
       (logical_expression
         (available_expression
           (identifier))
@@ -1471,6 +1536,7 @@ IF CURRENT-CHANGED x THEN RETURN '!'.
   (variable_assignment
     (assignment
       name: (identifier)
+      (assignment_operator)
       (input_expression
         frame: (identifier)
         field: (identifier))))
@@ -1479,6 +1545,7 @@ IF CURRENT-CHANGED x THEN RETURN '!'.
   (variable_assignment
     (assignment
       name: (identifier)
+      (assignment_operator)
       (input_expression
         field: (identifier))))
   (if_statement
@@ -1609,6 +1676,7 @@ END CLASS.
   (variable_assignment
     (assignment
       name: (identifier)
+      (assignment_operator)
       (new_expression
         (identifier)
         (arguments))))
@@ -1673,10 +1741,12 @@ END CASE.
             (variable_assignment
               (assignment
                 (identifier)
+                (assignment_operator)
                 (number_literal)))
             (variable_assignment
               (assignment
                 (identifier)
+                (assignment_operator)
                 (number_literal))))))
       (case_when_branch
         (case_conditon
@@ -1688,6 +1758,7 @@ END CASE.
         (variable_assignment
           (assignment
             (identifier)
+            (assignment_operator)
             (number_literal))))
       (case_when_branch
         (case_conditon
@@ -1695,11 +1766,13 @@ END CASE.
         (variable_assignment
           (assignment
             (identifier)
+            (assignment_operator)
             (number_literal))))
       (case_otherwise_branch
         (variable_assignment
           (assignment
             (identifier)
+            (assignment_operator)
             (number_literal)))))))
 
 ================================================================================
@@ -1901,6 +1974,7 @@ DISPLAY Order.CustNum Order.OrderDate Andsomething AndBug.
   (variable_assignment
     (assignment
       (identifier)
+      (assignment_operator)
       (string_literal)))
   (abl_statement
     (identifier)
@@ -2117,6 +2191,7 @@ VAR INT[ ] x = [funct( ), a + b].
     (variable
       (assignment
         (identifier)
+        (assignment_operator)
         (number_literal))))
   (comment)
   (var_statement
@@ -2127,10 +2202,12 @@ VAR INT[ ] x = [funct( ), a + b].
     (variable
       (assignment
         (identifier)
+        (assignment_operator)
         (date_literal)))
     (variable
       (assignment
         (identifier)
+        (assignment_operator)
         (identifier))))
   (comment)
   (var_statement
@@ -2142,6 +2219,7 @@ VAR INT[ ] x = [funct( ), a + b].
     (variable
       (assignment
         (identifier)
+        (assignment_operator)
         (date_literal))))
   (comment)
   (comment)
@@ -2153,6 +2231,7 @@ VAR INT[ ] x = [funct( ), a + b].
     (variable
       (assignment
         (identifier)
+        (assignment_operator)
         (array_literal
           (number_literal)
           (number_literal))))
@@ -2161,6 +2240,7 @@ VAR INT[ ] x = [funct( ), a + b].
     (variable
       (assignment
         (identifier)
+        (assignment_operator)
         (array_literal
           (number_literal)
           (number_literal)
@@ -2174,6 +2254,7 @@ VAR INT[ ] x = [funct( ), a + b].
     (variable
       (assignment
         (identifier)
+        (assignment_operator)
         (array_literal
           (number_literal)
           (number_literal)
@@ -2220,6 +2301,7 @@ VAR INT[ ] x = [funct( ), a + b].
     (variable
       (assignment
         (identifier)
+        (assignment_operator)
         (new_expression
           (identifier)
           (arguments)))))
@@ -2229,6 +2311,7 @@ VAR INT[ ] x = [funct( ), a + b].
     (variable
       (assignment
         (identifier)
+        (assignment_operator)
         (new_expression
           (identifier)
           (arguments
@@ -2245,6 +2328,7 @@ VAR INT[ ] x = [funct( ), a + b].
     (variable
       (assignment
         (identifier)
+        (assignment_operator)
         (new_expression
           (identifier)
           (arguments
@@ -2253,6 +2337,7 @@ VAR INT[ ] x = [funct( ), a + b].
     (variable
       (assignment
         (identifier)
+        (assignment_operator)
         (new_expression
           (identifier)
           (arguments
@@ -2261,6 +2346,7 @@ VAR INT[ ] x = [funct( ), a + b].
     (variable
       (assignment
         (identifier)
+        (assignment_operator)
         (new_expression
           (identifier)
           (arguments
@@ -2273,12 +2359,14 @@ VAR INT[ ] x = [funct( ), a + b].
     (variable
       (assignment
         (identifier)
+        (assignment_operator)
         (new_expression
           (identifier)
           (arguments))))
     (variable
       (assignment
         (identifier)
+        (assignment_operator)
         (new_expression
           (identifier)
           (arguments
@@ -2291,6 +2379,7 @@ VAR INT[ ] x = [funct( ), a + b].
     (variable
       (assignment
         (identifier)
+        (assignment_operator)
         (new_expression
           (identifier)
           (arguments
@@ -2299,6 +2388,7 @@ VAR INT[ ] x = [funct( ), a + b].
     (variable
       (assignment
         (identifier)
+        (assignment_operator)
         (new_expression
           (identifier)
           (arguments
@@ -2312,6 +2402,7 @@ VAR INT[ ] x = [funct( ), a + b].
     (variable
       (assignment
         (identifier)
+        (assignment_operator)
         (array_literal
           (new_expression
             (identifier)
@@ -2330,6 +2421,7 @@ VAR INT[ ] x = [funct( ), a + b].
     (variable
       (assignment
         (identifier)
+        (assignment_operator)
         (array_literal
           (new_expression
             (identifier)
@@ -2348,18 +2440,21 @@ VAR INT[ ] x = [funct( ), a + b].
     (variable
       (assignment
         (identifier)
+        (assignment_operator)
         (additive_expression
           (identifier)
           (identifier))))
     (variable
       (assignment
         (identifier)
+        (assignment_operator)
         (additive_expression
           (identifier)
           (identifier))))
     (variable
       (assignment
         (identifier)
+        (assignment_operator)
         (additive_expression
           (identifier)
           (identifier)))))
@@ -2370,6 +2465,7 @@ VAR INT[ ] x = [funct( ), a + b].
     (variable
       (assignment
         (identifier)
+        (assignment_operator)
         (array_literal
           (function_call
             (identifier)

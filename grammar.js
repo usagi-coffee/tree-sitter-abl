@@ -102,6 +102,8 @@ module.exports = grammar({
         seq(kw("LIKE"), field("type", $._type))
       ),
 
+    assignment_operator: ($) => choice("=", $._augmented_assignment),
+
     _unary_minus_expressions: ($) =>
       choice(
         $.identifier,
@@ -260,7 +262,7 @@ module.exports = grammar({
               )
             )
           ),
-          field("operator", choice("=", $._augmented_assignment)),
+          $.assignment_operator,
           prec.right($._expression),
           optional($.when_expression)
         )
