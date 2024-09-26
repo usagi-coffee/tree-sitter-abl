@@ -920,7 +920,7 @@ module.exports = grammar({
         $.assignment,
         kw("TO"),
         $._expression,
-        optional(seq("BY", $.number_literal))
+        optional(seq(kw("BY"), $.number_literal))
       ),
 
     do_block: ($) =>
