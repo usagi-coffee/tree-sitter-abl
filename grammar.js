@@ -62,7 +62,7 @@ module.exports = grammar({
         repeat1(seq(alias($._namedot, "."), choice($.identifier, "*")))
       ),
 
-    _terminator: ($) => ".",
+    _terminator: ($) => /\s*\./i,
     _block_terminator: ($) => seq(kw("END"), "."),
 
     null_expression: ($) => /\?/,
