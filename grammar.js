@@ -1236,13 +1236,25 @@ module.exports = grammar({
     widget_phrase: ($) =>
       prec.left(seq(kw("FRAME"), $.identifier, repeat($.widget_field))),
 
+    of_phrase: ($) =>
+      seq(
+        kw("OF"),
+        seq($._expression, repeat(seq(",", $._expression))),
+        optional(
+          seq(
+            kw("NEW"),
+            seq($._expression, repeat(seq(",", $._expression))),
+            kw("OLD"),
+            seq($._expression, repeat(seq(",", $._expression)))
+          )
+        ),
+        optional(kw("ANYWHERE"))
+      ),
     on_statement: ($) =>
       seq(
         kw("ON"),
-        seq($._expression, repeat(seq(",", $._expression))),
-        optional(kw("ANYWHERE")),
-        kw("OF"),
-        seq($._expression, repeat(seq(",", $._expression))),
+        _list($._expression, ","),
+        choice(kw("ANYWHERE"), $.of_phrase),
         optional(kw("IN")),
         repeat($.widget_phrase),
         $.do_block
