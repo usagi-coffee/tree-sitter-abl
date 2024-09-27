@@ -214,10 +214,6 @@
         "named": true
       },
       {
-        "type": "label",
-        "named": true
-      },
-      {
         "type": "on_statement",
         "named": true
       },
@@ -537,16 +533,6 @@
             "named": true
           }
         ]
-      },
-      "operator": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "=",
-            "named": false
-          }
-        ]
       }
     },
     "children": {
@@ -558,11 +544,20 @@
           "named": true
         },
         {
+          "type": "assignment_operator",
+          "named": true
+        },
+        {
           "type": "when_expression",
           "named": true
         }
       ]
     }
+  },
+  {
+    "type": "assignment_operator",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "available_expression",
@@ -1858,6 +1853,71 @@
     }
   },
   {
+    "type": "generic_expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "generic_parameter",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "qualified_name",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "generic_parameter",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "type_tuning",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "generic_type",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "generic_expression",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "qualified_name",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "getter",
     "named": true,
     "fields": {},
@@ -2466,6 +2526,21 @@
     }
   },
   {
+    "type": "of_phrase",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "on_error_phrase",
     "named": true,
     "fields": {
@@ -2531,6 +2606,10 @@
         },
         {
           "type": "do_block",
+          "named": true
+        },
+        {
+          "type": "of_phrase",
           "named": true
         },
         {
@@ -3017,6 +3096,10 @@
             "named": true
           },
           {
+            "type": "generic_type",
+            "named": true
+          },
+          {
             "type": "identifier",
             "named": true
           },
@@ -3037,6 +3120,10 @@
       "types": [
         {
           "type": "class_type",
+          "named": true
+        },
+        {
+          "type": "generic_type",
           "named": true
         },
         {
@@ -3403,6 +3490,10 @@
             "named": true
           },
           {
+            "type": "generic_type",
+            "named": true
+          },
+          {
             "type": "identifier",
             "named": true
           },
@@ -3423,6 +3514,10 @@
       "types": [
         {
           "type": "class_type",
+          "named": true
+        },
+        {
+          "type": "generic_type",
           "named": true
         },
         {
@@ -4552,6 +4647,10 @@
   },
   {
     "type": "OF",
+    "named": false
+  },
+  {
+    "type": "OLD",
     "named": false
   },
   {
