@@ -176,8 +176,8 @@
       ]
     },
     "_terminator": {
-      "type": "STRING",
-      "value": "."
+      "type": "PATTERN",
+      "value": "\\s*\\."
     },
     "_block_terminator": {
       "type": "SEQ",
