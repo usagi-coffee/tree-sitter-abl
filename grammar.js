@@ -243,8 +243,23 @@ module.exports = grammar({
       ),
 
     class_type: ($) => seq(kw("CLASS"), choice($.identifier, $.qualified_name)),
+    generic_parameter: ($) => seq($.identifier, $.type_tuning),
+    generic_expression: ($) =>
+      seq(
+        "<",
+        _list(choice($.identifier, $.qualified_name, $.generic_parameter), ","),
+        ">"
+      ),
+    generic_type: ($) =>
+      seq(choice($.identifier, $.qualified_name), $.generic_expression),
     _type: ($) =>
-      choice($.primitive_type, $.identifier, $.qualified_name, $.class_type),
+      choice(
+        $.primitive_type,
+        $.identifier,
+        $.qualified_name,
+        $.class_type,
+        $.generic_type
+      ),
 
     when_expression: ($) => seq(kw("WHEN"), $._expression),
     assignment: ($) =>

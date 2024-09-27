@@ -2164,6 +2164,9 @@ VAR INT x = a + b , y = a - b, z = x - y.
 /* Indeterminate integer array initialized using expressions */
 VAR INT[ ] x = [funct( ), a + b].
 
+/* Generic type */
+var List<Ant> ListOfAnts.
+
 --------------------------------------------------------------------------------
 
 (source_code
@@ -2472,7 +2475,16 @@ VAR INT[ ] x = [funct( ), a + b].
             (arguments))
           (additive_expression
             (identifier)
-            (identifier)))))))
+            (identifier))))))
+  (comment)
+  (var_statement
+    (type_tuning
+      (generic_type
+        (identifier)
+        (generic_expression
+          (identifier))))
+    (variable
+      (identifier))))
 
 ================================================================================
 RUN statement
