@@ -1013,6 +1013,7 @@ module.exports = grammar({
         kw("EXCLUSIVE-LOCK"),
         kw("NO-WAIT"),
         kw("NO-ERROR"),
+        kw("NO-PREFETCH"),
         seq(kw("USE-INDEX"), $.identifier),
         $.using
       ),
