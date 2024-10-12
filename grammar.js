@@ -970,7 +970,7 @@ module.exports = grammar({
     case_statement: ($) =>
       seq(
         kw("CASE"),
-        choice($.identifier, $.qualified_name, $.object_access),
+        $._expression,
         alias($.case_body, $.body),
         $._case_terminator
       ),
