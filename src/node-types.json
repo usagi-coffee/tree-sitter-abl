@@ -829,19 +829,11 @@
       "required": true,
       "types": [
         {
+          "type": "_expression",
+          "named": true
+        },
+        {
           "type": "body",
-          "named": true
-        },
-        {
-          "type": "identifier",
-          "named": true
-        },
-        {
-          "type": "object_access",
-          "named": true
-        },
-        {
-          "type": "qualified_name",
           "named": true
         }
       ]
@@ -1241,6 +1233,10 @@
           "named": true
         },
         {
+          "type": "on_endkey_phrase",
+          "named": true
+        },
+        {
           "type": "on_error_phrase",
           "named": true
         },
@@ -1609,6 +1605,10 @@
           "named": true
         },
         {
+          "type": "on_endkey_phrase",
+          "named": true
+        },
+        {
           "type": "on_error_phrase",
           "named": true
         },
@@ -1690,6 +1690,10 @@
         },
         {
           "type": "of",
+          "named": true
+        },
+        {
+          "type": "on_endkey_phrase",
           "named": true
         },
         {
@@ -2541,6 +2545,32 @@
     }
   },
   {
+    "type": "on_endkey_phrase",
+    "named": true,
+    "fields": {
+      "label": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "on_error_phrase",
     "named": true,
     "fields": {
@@ -3024,6 +3054,10 @@
         },
         {
           "type": "label",
+          "named": true
+        },
+        {
+          "type": "on_endkey_phrase",
           "named": true
         },
         {
@@ -4290,6 +4324,10 @@
     "named": false
   },
   {
+    "type": "ENDKEY",
+    "named": false
+  },
+  {
     "type": "ENUM",
     "named": false
   },
@@ -4570,6 +4608,10 @@
     "named": false
   },
   {
+    "type": "MOD",
+    "named": false
+  },
+  {
     "type": "MODULO",
     "named": false
   },
@@ -4623,6 +4665,10 @@
   },
   {
     "type": "NO-MAP",
+    "named": false
+  },
+  {
+    "type": "NO-PREFETCH",
     "named": false
   },
   {
