@@ -456,9 +456,14 @@ module.exports = grammar({
         kw("REPEAT"),
         optional($.to_phrase),
         optional($.while_phrase),
-        optional($.on_error_phrase),
-        optional($.on_quit_phrase),
-        optional($.on_stop_phrase),
+        repeat(
+          choice(
+            $.on_error_phrase,
+            $.on_quit_phrase,
+            $.on_stop_phrase,
+            $.on_endkey_phrase
+          )
+        ),
         repeat($.repeat_tuning),
         optional($.body),
         $._block_terminator
@@ -927,6 +932,20 @@ module.exports = grammar({
         )
       ),
 
+    on_endkey_phrase: ($) =>
+      seq(
+        kw("ON"),
+        kw("ENDKEY"),
+        optional(seq(kw("UNDO"), optional($.identifier))),
+        ",",
+        choice(
+          seq(kw("LEAVE"), field("label", optional($.identifier))),
+          seq(kw("NEXT"), field("label", optional($.identifier))),
+          seq(kw("RETRY"), field("label", optional($.identifier))),
+          seq(kw("RETURN"), choice(seq(kw("ERROR")), kw("NO-APPLY")))
+        )
+      ),
+
     stop_after_phrase: ($) => seq(kw("STOP-AFTER"), $._expression),
 
     do_tuning: ($) => choice(kw("TRANSACTION")),
@@ -946,7 +965,14 @@ module.exports = grammar({
         optional($.while_phrase),
         repeat($.do_tuning),
         optional($.stop_after_phrase),
-        optional(choice($.on_error_phrase, $.on_stop_phrase, $.on_quit_phrase)),
+        repeat(
+          choice(
+            $.on_error_phrase,
+            $.on_quit_phrase,
+            $.on_stop_phrase,
+            $.on_endkey_phrase
+          )
+        ),
         $.body,
         $._block_terminator
       ),
@@ -1008,9 +1034,14 @@ module.exports = grammar({
         optional($.where_clause),
         repeat($.query_tuning),
         optional(repeat($.sort_clause)),
-        optional($.on_error_phrase),
-        optional($.on_quit_phrase),
-        optional($.on_stop_phrase)
+        repeat(
+          choice(
+            $.on_error_phrase,
+            $.on_quit_phrase,
+            $.on_stop_phrase,
+            $.on_endkey_phrase
+          )
+        )
       ),
 
     for_statement: ($) =>
@@ -1023,10 +1054,15 @@ module.exports = grammar({
         optional($._pre_tuning),
         optional($.where_clause),
         repeat($.query_tuning),
-        optional(repeat($.sort_clause)),
-        optional($.on_error_phrase),
-        optional($.on_quit_phrase),
-        optional($.on_stop_phrase),
+        repeat($.sort_clause),
+        repeat(
+          choice(
+            $.on_error_phrase,
+            $.on_quit_phrase,
+            $.on_stop_phrase,
+            $.on_endkey_phrase
+          )
+        ),
         repeat(seq(",", $.for_phrase)),
         $.body,
         $._block_terminator
