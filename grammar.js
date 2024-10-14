@@ -274,7 +274,9 @@ module.exports = grammar({
                 $.identifier,
                 $.qualified_name,
                 $.object_access,
-                $.member_access
+                $.member_access,
+                $.function_call,
+                $.array_access
               )
             )
           ),
