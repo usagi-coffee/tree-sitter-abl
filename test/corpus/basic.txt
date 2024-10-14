@@ -1354,14 +1354,14 @@ OUTPUT TO VALUE(out).
 OUTPUT CLOSE.
 INPUT CLOSE.
 
-DEFINE STREAM i.
+DEFINE GLOBAL SHARED STREAM i.
 INPUT STREAM i FROM VALUE(in).
 INPUT CLOSE.
 
 INPUT STREAM-HANDLE hi FROM VALUE(in).
 INPUT CLOSE.
 
-DEFINE STREAM o.
+DEFINE NEW SHARED STREAM o.
 OUTPUT STREAM o TO "CLIPBOARD".
 OUTPUT CLOSE.
 
@@ -1386,7 +1386,9 @@ OUTPUT CLOSE.
   (output_close_statement)
   (input_close_statement)
   (stream_definition
-    (identifier))
+    (scope_tuning)
+    (scope_tuning)
+    name: (identifier))
   (input_stream_statement
     source: (identifier)
     target: (function_call
@@ -1404,7 +1406,9 @@ OUTPUT CLOSE.
           (identifier)))))
   (input_close_statement)
   (stream_definition
-    (identifier))
+    (scope_tuning)
+    (scope_tuning)
+    name: (identifier))
   (output_stream_statement
     source: (identifier)
     target: (string_literal))

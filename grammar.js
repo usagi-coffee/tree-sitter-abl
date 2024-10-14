@@ -39,7 +39,8 @@ module.exports = grammar({
       $.property_definition,
       $.data_source_definition,
       $.event_definition,
-      $.dataset_definition
+      $.dataset_definition,
+      $.stream_definition
     ])
   ],
 
@@ -684,7 +685,8 @@ module.exports = grammar({
             $.variable_definition,
             $.query_definition,
             $.buffer_definition,
-            $.data_source_definition
+            $.data_source_definition,
+            $.stream_definition
           )
         )
       ),
@@ -781,8 +783,9 @@ module.exports = grammar({
     stream_definition: ($) =>
       seq(
         choice(kw("DEFINE"), kw("DEF")),
+        repeat(choice($.scope_tuning, $.access_tuning, $.serialization_tuning)),
         kw("STREAM"),
-        $.identifier,
+        field("name", $.identifier),
         $._terminator
       ),
 
