@@ -1214,7 +1214,7 @@ module.exports = grammar({
           seq(kw("NEXT"), field("label", optional($.identifier))),
           seq(kw("RETRY"), field("label", optional($.identifier))),
           seq(kw("RETURN"), choice(seq(kw("ERROR")), kw("NO-APPLY"))),
-          seq(kw("THROW"), $.new_expression)
+          seq(kw("THROW"), $._expression)
         ),
         $._terminator
       ),

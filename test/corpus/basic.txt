@@ -1642,6 +1642,7 @@ CATCH and FINALLY statements
 DO TRANSACTION:
   CATCH e AS CLASS Progress.Lang.SysError:
     MESSAGE "sys error" VIEW-AS ALERT-BOX.
+    UNDO, THROW e.
   END.
   CATCH e AS Progress.Lang.Error:
     MESSAGE "other error" VIEW-AS ALERT-BOX.
@@ -1668,6 +1669,8 @@ END.
             statement: (identifier)
             (string_literal)
             (identifier)
+            (identifier))
+          (undo_statement
             (identifier))))
       (catch_statement
         variable: (identifier)
