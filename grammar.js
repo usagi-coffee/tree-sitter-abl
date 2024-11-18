@@ -359,6 +359,7 @@ module.exports = grammar({
         $._terminator
       ),
 
+    return_tuning: ($) => seq(kw("EXTENT"), $.number_literal),
     return_type: ($) =>
       seq(choice(kw("RETURNS"), kw("RETURN")), field("type", $._type)),
 
@@ -549,6 +550,7 @@ module.exports = grammar({
         kw("FUNCTION"),
         field("name", $.identifier),
         $.return_type,
+        optional($.return_tuning),
         optional(alias($.function_parameters, $.parameters)),
         optional(alias($.dot_body, $.body)),
         $._function_terminator
@@ -652,6 +654,7 @@ module.exports = grammar({
         kw("METHOD"),
         repeat(choice($.access_tuning, $.scope_tuning, $.method_tuning)),
         alias($._type, $.return_type),
+        optional($.return_tuning),
         field("name", $.identifier),
         alias($.function_parameters, $.parameters),
         optional(seq($.body, kw("END"), optional(kw("METHOD")))),
