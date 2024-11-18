@@ -482,14 +482,32 @@ module.exports = grammar({
         choice($._block_terminator, $._procedure_terminator)
       ),
 
+    procedure_parameter_tuning: ($) =>
+      choice(kw("APPEND"), kw("BIND"), kw("BY-VALUE")),
+
     procedure_parameter_definition: ($) =>
       seq(
         choice(kw("DEFINE"), kw("DEF")),
-        choice(kw("INPUT"), kw("OUTPUT"), kw("INPUT-OUTPUT"), kw("RETURN")),
+        optional(
+          choice(kw("INPUT"), kw("OUTPUT"), kw("INPUT-OUTPUT"), kw("RETURN"))
+        ),
         choice(kw("PARAMETER"), kw("PARAM")),
+        optional(
+          choice(
+            seq(kw("BUFFER"), field("buffer", $.identifier)),
+            choice(
+              kw("TABLE"),
+              kw("TABLE-HANDLE"),
+              seq(kw("DATASET"), optional(token.immediate(kw("-HANDLE"))))
+            )
+          )
+        ),
+        optional(kw("FOR")),
         field("name", $.identifier),
-        $.type_tuning,
-        repeat($.variable_tuning),
+        choice(
+          seq($.type_tuning, repeat($.variable_tuning)),
+          repeat($.procedure_parameter_tuning)
+        ),
         $._terminator
       ),
 

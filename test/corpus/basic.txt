@@ -812,6 +812,27 @@ END PROCEDURE.
 PROCEDURE another_procedure:
 END.
 
+DEFINE INPUT-OUTPUT PARAMETER TABLE-HANDLE hNode.
+DEFINE OUTPUT PARAMETER TABLE-HANDLE hData.
+DEFINE OUTPUT PARAMETER TABLE-HANDLE hSchema.
+DEFINE INPUT PARAMETER DATASET-HANDLE hDset.
+DEFINE OUTPUT PARAMETER TABLE-HANDLE ttHandle.
+
+DEFINE INPUT PARAMETER TABLE FOR ttCustomer.
+DEFINE OUTPUT PARAMETER TABLE FOR ttOrder APPEND.
+DEFINE INPUT-OUTPUT PARAMETER TABLE FOR ttProduct BIND.
+DEFINE INPUT PARAMETER TABLE-HANDLE hCustomer.
+DEFINE OUTPUT PARAMETER TABLE-HANDLE hOrder BY-VALUE.
+DEFINE INPUT-OUTPUT PARAMETER TABLE-HANDLE hProduct BIND BY-VALUE.
+DEFINE INPUT PARAMETER DATASET FOR dsCustomer.
+DEFINE OUTPUT PARAMETER DATASET FOR dsOrder APPEND.
+DEFINE INPUT-OUTPUT PARAMETER DATASET FOR dsProduct BIND.
+DEFINE INPUT PARAMETER DATASET-HANDLE hCustomer.
+DEFINE OUTPUT PARAMETER DATASET-HANDLE hOrder BY-VALUE.
+DEFINE INPUT-OUTPUT PARAMETER DATASET-HANDLE hProduct BIND BY-VALUE.
+DEFINE PARAMETER BUFFER bBuf FOR field.
+DEFINE INPUT PARAMETER DATASET FOR field.
+
 --------------------------------------------------------------------------------
 
 (source_code
@@ -826,7 +847,56 @@ END.
     (comment))
   (procedure_statement
     (identifier)
-    (body)))
+    (body))
+  (procedure_parameter_definition
+    (identifier))
+  (procedure_parameter_definition
+    (identifier))
+  (procedure_parameter_definition
+    (identifier))
+  (procedure_parameter_definition
+    (identifier))
+  (procedure_parameter_definition
+    (identifier))
+  (procedure_parameter_definition
+    (identifier))
+  (procedure_parameter_definition
+    (identifier)
+    (procedure_parameter_tuning))
+  (procedure_parameter_definition
+    (identifier)
+    (procedure_parameter_tuning))
+  (procedure_parameter_definition
+    (identifier))
+  (procedure_parameter_definition
+    (identifier)
+    (procedure_parameter_tuning))
+  (procedure_parameter_definition
+    (identifier)
+    (procedure_parameter_tuning)
+    (procedure_parameter_tuning))
+  (procedure_parameter_definition
+    (identifier))
+  (procedure_parameter_definition
+    (identifier)
+    (procedure_parameter_tuning))
+  (procedure_parameter_definition
+    (identifier)
+    (procedure_parameter_tuning))
+  (procedure_parameter_definition
+    (identifier))
+  (procedure_parameter_definition
+    (identifier)
+    (procedure_parameter_tuning))
+  (procedure_parameter_definition
+    (identifier)
+    (procedure_parameter_tuning)
+    (procedure_parameter_tuning))
+  (procedure_parameter_definition
+    (identifier)
+    (identifier))
+  (procedure_parameter_definition
+    (identifier)))
 
 ================================================================================
 FUNCTION statement
@@ -1995,7 +2065,7 @@ DISPLAY Order.CustNum Order.OrderDate Andsomething AndBug.
 INTERFACE statement
 ================================================================================
 
-INTERFACE r-ICustObj:  
+INTERFACE r-ICustObj:
 
   /* Property prototypes to return basic values for the Customer
      identified with the highest balance in the database */
@@ -2005,9 +2075,9 @@ INTERFACE r-ICustObj:
   DEFINE PUBLIC PROPERTY HighCustNum AS INTEGER NO-UNDO
     GET.
     SET.
-    
+
   /* Event prototype to notify about Customers with Invoices */
-  DEFINE PUBLIC EVENT CustHasInvoices 
+  DEFINE PUBLIC EVENT CustHasInvoices
     SIGNATURE VOID ( piCustNum AS INTEGER ).
 
   /* Temp-tables for the ProDataSet parameter */
@@ -2017,7 +2087,7 @@ INTERFACE r-ICustObj:
   /* ProDataSet parameter for passing a single Customer with the highest
      balance along with its related Invoices */
   DEFINE DATASET dsHighCustData FOR ttCust, ttInv
-    DATA-RELATION FOR ttCust, ttInv 
+    DATA-RELATION FOR ttCust, ttInv
       RELATION-FIELDS (ttCust.CustNum, ttInv.CustNum).
 
   /* Method prototype to get the current high Customer balance data */
@@ -2146,7 +2216,7 @@ VAR myclass myobj = NEW myclass().
 VAR myclass myobj = NEW myclass("Progress", 2020,?).
 
 /* Multiple instantiated object variables */
-VAR myclass myobj1 = NEW myclass("MA"), 
+VAR myclass myobj1 = NEW myclass("MA"),
             myobj2 = NEW myclass("VT"),
             myobj3 = NEW myclass("NH").
 
