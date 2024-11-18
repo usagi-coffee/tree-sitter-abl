@@ -993,7 +993,7 @@ PersonData:GetById(id, output table ttPerson by-reference).
         (argument
           (argument_mode)
           (identifier)
-          (argument_pass_type))))))
+          (argument_tuning))))))
 
 ================================================================================
 DO TRANSACTION statement
