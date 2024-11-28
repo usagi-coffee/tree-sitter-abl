@@ -521,7 +521,8 @@ module.exports = grammar({
         $._block_terminator,
         seq(kw("END"), kw("FUNCTION"), $._terminator)
       ),
-    function_parameter_mode: ($) => choice(kw("INPUT"), kw("OUTPUT")),
+    function_parameter_mode: ($) =>
+      choice(kw("INPUT"), kw("OUTPUT"), kw("INPUT-OUTPUT")),
     function_parameter_tuning: ($) =>
       choice(
         kw("APPEND"),
