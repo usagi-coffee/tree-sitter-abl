@@ -214,6 +214,10 @@
         "named": true
       },
       {
+        "type": "null_statement",
+        "named": true
+      },
+      {
         "type": "on_statement",
         "named": true
       },
@@ -1254,6 +1258,10 @@
         },
         {
           "type": "on_stop_phrase",
+          "named": true
+        },
+        {
+          "type": "preselect_phrase",
           "named": true
         },
         {
@@ -2488,6 +2496,21 @@
     }
   },
   {
+    "type": "null_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "object_access",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "number_literal",
     "named": true,
     "fields": {}
@@ -2789,6 +2812,33 @@
     }
   },
   {
+    "type": "preselect_phrase",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "query_tuning",
+          "named": true
+        },
+        {
+          "type": "record_phrase",
+          "named": true
+        },
+        {
+          "type": "sort_clause",
+          "named": true
+        },
+        {
+          "type": "where_clause",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "primitive_type",
     "named": true,
     "fields": {}
@@ -3076,12 +3126,54 @@
     }
   },
   {
+    "type": "record_phrase",
+    "named": true,
+    "fields": {
+      "type": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "EACH",
+            "named": false
+          },
+          {
+            "type": "FIRST",
+            "named": false
+          },
+          {
+            "type": "LAST",
+            "named": false
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "of",
+          "named": true
+        },
+        {
+          "type": "qualified_name",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "repeat_statement",
     "named": true,
     "fields": {},
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "body",
@@ -3105,6 +3197,10 @@
         },
         {
           "type": "on_stop_phrase",
+          "named": true
+        },
+        {
+          "type": "preselect_phrase",
           "named": true
         },
         {
@@ -4313,6 +4409,10 @@
     "named": false
   },
   {
+    "type": "DATASET ",
+    "named": false
+  },
+  {
     "type": "DATASET-HANDLE",
     "named": false
   },
@@ -4825,6 +4925,10 @@
     "named": false
   },
   {
+    "type": "PRESELECT",
+    "named": false
+  },
+  {
     "type": "PREV",
     "named": false
   },
@@ -5022,6 +5126,10 @@
   },
   {
     "type": "TABLE",
+    "named": false
+  },
+  {
+    "type": "TABLE ",
     "named": false
   },
   {
