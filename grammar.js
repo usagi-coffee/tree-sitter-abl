@@ -535,10 +535,10 @@ module.exports = grammar({
         optional($.function_parameter_mode),
         optional(
           choice(
-            kw("TABLE"),
+            kw("TABLE "),
             kw("TABLE-HANDLE"),
-            kw("DATASET"),
-            kw("DATASET-HANDLE")
+            kw("DATASET-HANDLE"),
+            kw("DATASET ")
           )
         ),
         field("name", $.identifier),
