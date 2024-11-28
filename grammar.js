@@ -66,6 +66,8 @@ module.exports = grammar({
     _terminator: ($) => /\s*\./i,
     _block_terminator: ($) => seq(kw("END"), "."),
 
+    null_statement: ($) => seq(choice($.object_access), $._terminator),
+
     null_expression: ($) => /\?/,
     boolean_literal: ($) =>
       choice(kw("TRUE"), kw("FALSE"), kw("YES"), kw("NO")),
@@ -1525,6 +1527,7 @@ module.exports = grammar({
     _statement: ($) =>
       choice(
         $.var_statement,
+        $.null_statement,
         $.variable_definition,
         $.variable_assignment,
         $.buffer_definition,
