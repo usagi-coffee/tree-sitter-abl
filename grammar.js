@@ -27,6 +27,8 @@ module.exports = grammar({
   supertypes: ($) => [$._expression, $._statement],
   conflicts: ($) => [
     [$.input_expression],
+    [$.record_phrase],
+    [$.sort_clause],
     ...combinations([$._statement, $.if_statement]),
     // DEFINE * conflicts
     ...combinations([
@@ -47,7 +49,7 @@ module.exports = grammar({
   rules: {
     source_code: ($) => repeat($._statement),
 
-    body: ($) => seq(choice(":"), repeat($._statement)),
+    body: ($) => seq(":", repeat($._statement)),
     dot_body: ($) => seq(choice(":", "."), repeat($._statement)),
 
     file_name: ($) => /[A-z-_|0-9|\/]+\.[i]/i,
@@ -462,6 +464,7 @@ module.exports = grammar({
       seq(
         optional($.label),
         kw("REPEAT"),
+        optional($.preselect_phrase),
         optional($.to_phrase),
         optional($.while_phrase),
         repeat(
@@ -473,7 +476,7 @@ module.exports = grammar({
           )
         ),
         repeat($.repeat_tuning),
-        optional($.body),
+        $.body,
         $._block_terminator
       ),
 
@@ -992,6 +995,7 @@ module.exports = grammar({
       seq(
         optional($.label),
         kw("DO"),
+        optional($.preselect_phrase),
         optional($.to_phrase),
         optional($.while_phrase),
         repeat($.do_tuning),
@@ -1491,6 +1495,22 @@ module.exports = grammar({
         kw("END"),
         optional(kw("ENUM")),
         $._terminator
+      ),
+
+    record_phrase: ($) =>
+      seq(
+        optional(field("type", choice(kw("EACH"), kw("FIRST"), kw("LAST")))),
+        _list(choice($.identifier, $.qualified_name), ","),
+        optional($.of)
+      ),
+    preselect_phrase: ($) =>
+      seq(
+        kw("PRESELECT"),
+        _list($.record_phrase, ","),
+        optional($._pre_tuning),
+        optional($.where_clause),
+        repeat($.query_tuning),
+        optional(repeat($.sort_clause))
       ),
 
     // Supertypes

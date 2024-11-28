@@ -708,6 +708,10 @@ REPEAT WHILE TRUE:
   x = 5.
 END.
 
+REPEAT PRESELECT EACH Order, Customer OF Order, EACH OrderLine OF Order:
+
+END.
+
 --------------------------------------------------------------------------------
 
 (source_code
@@ -719,7 +723,19 @@ END.
         (assignment
           (identifier)
           (assignment_operator)
-          (number_literal))))))
+          (number_literal)))))
+  (repeat_statement
+    (preselect_phrase
+      (record_phrase
+        (identifier)
+        (identifier)
+        (of
+          (identifier)))
+      (record_phrase
+        (identifier)
+        (of
+          (identifier))))
+    (body)))
 
 ================================================================================
 DO statement
@@ -740,6 +756,10 @@ END.
 z:
 DO x = 5 TO 20:
   LEAVE z.
+END.
+
+
+DO PRESELECT EACH Order NO-LOCK WHERE Order.OrderNum > 5:
 END.
 
 --------------------------------------------------------------------------------
@@ -798,7 +818,19 @@ END.
     (body
       (abl_statement
         (identifier)
-        (identifier)))))
+        (identifier))))
+  (do_block
+    (preselect_phrase
+      (record_phrase
+        (identifier))
+      (query_tuning)
+      (where_clause
+        (comparison_expression
+          (qualified_name
+            (identifier)
+            (identifier))
+          (number_literal))))
+    (body)))
 
 ================================================================================
 PROCEDURE statement
