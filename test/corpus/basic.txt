@@ -376,6 +376,22 @@ DEFINE BUFFER x-table FOR table.
     (identifier)))
 
 ================================================================================
+IMAGE DEFINITION statement
+================================================================================
+
+DEFINE IMAGE myImage SIZE 5 BY 5 CONVERT-3D-COLORS.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (image_definition
+    name: (identifier)
+    (size_phrase
+      width: (number_literal)
+      height: (number_literal))
+    (image_tuning)))
+
+================================================================================
 QUERY DEFINITION statement
 ================================================================================
 

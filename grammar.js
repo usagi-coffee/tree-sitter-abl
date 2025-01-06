@@ -42,7 +42,8 @@ module.exports = grammar({
       $.data_source_definition,
       $.event_definition,
       $.dataset_definition,
-      $.stream_definition
+      $.stream_definition,
+      $.image_definition
     ])
   ],
 
@@ -1441,6 +1442,27 @@ module.exports = grammar({
         $._terminator
       ),
 
+    image_tuning: ($) =>
+      choice(
+        seq(kw("BGCOLOR"), $._expression),
+        seq(kw("FGCOLOR"), $._expression),
+        kw("CONVERT-3D-COLORS"),
+        seq(kw("TOOLTIP"), $.identifier),
+        seq(kw("STRETCH-TO-FIT"), optional(kw("RETAIN-SHAPE"))),
+        kw("TRANSPARENT")
+      ),
+
+    image_definition: ($) =>
+      seq(
+        choice(kw("DEFINE"), kw("DEF")),
+        optional($.access_tuning),
+        kw("IMAGE"),
+        field("name", $.identifier),
+        choice($.size_phrase, $.image_phrase, seq(kw("LIKE"), $.identifier)),
+        repeat($.image_tuning),
+        $._terminator
+      ),
+
     run_tuning: ($) =>
       choice(
         kw("PERSISTENT"),
@@ -1583,6 +1605,7 @@ module.exports = grammar({
         $.prompt_for_statement,
         $.dataset_definition,
         $.button_definition,
+        $.image_definition,
         $.run_statement,
         $.enum_statement,
         $.abl_statement
