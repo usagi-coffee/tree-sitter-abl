@@ -731,7 +731,7 @@ module.exports = grammar({
         alias($.function_parameters, $.parameters),
         $.body,
         kw("END"),
-        optional(kw("CONSTRUCTOR")),
+        optional(choice(kw("CONSTRUCTOR"), kw("METHOD"))),
         $._terminator
       ),
 
@@ -998,8 +998,8 @@ module.exports = grammar({
         kw("DO"),
         optional($.preselect_phrase),
         optional($.to_phrase),
+        optional($.do_tuning),
         optional($.while_phrase),
-        repeat($.do_tuning),
         optional($.stop_after_phrase),
         repeat(
           choice(
