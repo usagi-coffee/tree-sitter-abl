@@ -1361,7 +1361,8 @@ oObject:Length -= String(pcMessage):Size.
       array: (object_access
         object: (identifier)
         property: (identifier))
-      (number_literal)))
+      (array_literal
+        (number_literal))))
   (variable_assignment
     (assignment
       name: (object_access
@@ -1769,7 +1770,6 @@ CLASS r-CustObj FINAL:
 
 
 END CLASS.
-
 
 --------------------------------------------------------------------------------
 
@@ -2355,7 +2355,8 @@ var List<Ant> ListOfAnts.
   (var_statement
     (type_tuning
       (primitive_type))
-    (number_literal)
+    (array_literal
+      (number_literal))
     (variable
       (assignment
         (identifier)
@@ -2377,6 +2378,7 @@ var List<Ant> ListOfAnts.
   (var_statement
     (type_tuning
       (primitive_type))
+    (array_literal)
     (variable
       (identifier))
     (variable
@@ -2419,7 +2421,8 @@ var List<Ant> ListOfAnts.
   (var_statement
     (type_tuning
       (identifier))
-    (number_literal)
+    (array_literal
+      (number_literal))
     (variable
       (identifier)))
   (comment)
@@ -2526,7 +2529,8 @@ var List<Ant> ListOfAnts.
   (var_statement
     (type_tuning
       (identifier))
-    (number_literal)
+    (array_literal
+      (number_literal))
     (variable
       (assignment
         (identifier)
@@ -2546,6 +2550,7 @@ var List<Ant> ListOfAnts.
   (var_statement
     (type_tuning
       (identifier))
+    (array_literal)
     (variable
       (assignment
         (identifier)
@@ -2590,6 +2595,7 @@ var List<Ant> ListOfAnts.
   (var_statement
     (type_tuning
       (primitive_type))
+    (array_literal)
     (variable
       (assignment
         (identifier)
@@ -2642,13 +2648,14 @@ RUN server-error.p ON SERVER hServer
         (argument
           (array_access
             (identifier)
-            (function_call
-              (identifier)
-              (arguments
-                (argument
-                  (string_literal))
-                (argument
-                  (identifier)))))))))
+            (array_literal
+              (function_call
+                (identifier)
+                (arguments
+                  (argument
+                    (string_literal))
+                  (argument
+                    (identifier))))))))))
   (run_statement
     (identifier)
     (run_tuning
