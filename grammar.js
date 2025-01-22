@@ -82,7 +82,7 @@ module.exports = grammar({
     string_literal: ($) => $._escaped_string,
 
     date_literal: ($) => /\d{1,2}\/\d{1,2}\/\d{4}|\d{2}/,
-    array_literal: ($) => seq("[", optional(_list($._expression, ",")), "]"),
+    array_literal: ($) => seq("[", optional(choice($.range_notation, _list($._expression, ","))), "]"),
 
     double_quoted_string: ($) =>
       seq('"', repeat(choice(/[^"\\]+/, /\\./, $._special_character)), '"'),
@@ -193,14 +193,13 @@ module.exports = grammar({
         $.logical_expression
       ),
 
+    range_notation: ($) => seq($._expression, kw("FOR"), $._expression),
     array_access: ($) =>
       prec.right(
         1,
         seq(
           field("array", choice($.identifier, $.object_access)),
-          "[",
-          $._expression,
-          "]"
+          $.array_literal,
         )
       ),
 
@@ -1368,7 +1367,7 @@ module.exports = grammar({
           choice($.scope_tuning, $.access_tuning, $.serialization_tuning)
         ),
         alias(choice($._type, $.string_literal), $.type_tuning),
-        optional(seq("[", optional(field("size", $.number_literal)), "]")),
+        optional(field("size", $.array_literal)),
         repeat(seq($.variable, optional(","))),
         $._terminator
       ),
