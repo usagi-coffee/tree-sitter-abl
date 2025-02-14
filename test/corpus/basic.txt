@@ -47,7 +47,7 @@ DISPLAY {&VAR1}.
     (include_argument
       (identifier))
     (include_argument
-      (double_quoted_string))
+      (string_literal))
     (include_argument
       (identifier)
       (identifier)))
@@ -2764,3 +2764,26 @@ END ENUM.
           (identifier))
         (enum_member
           (identifier))))))
+
+================================================================================
+Preprocessor Directives
+================================================================================
+
+&if DEFINED(is_Running) <> 0 &THEN
+DEFINE VARIABLE cParm AS CHARACTER.
+&ELSE
+DEFINE INPUT PARAMETER cParm AS CHARACTER.
+&ENDIF
+
+&Scoped-define OPEN-QUERY-DEFAULT-FRAME OPEN QUERY DEFAULT-FRAME FOR EACH ITEM ~
+      WHERE item.system_id = ipcItemSysid AND ~
+item.item = ipcItem NO-LOCK.
+&Scoped-define TABLES-IN-QUERY-DEFAULT-FRAME ITEM
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (preprocessor_directive)
+  (preprocessor_directive)
+  (preprocessor_directive))
+
