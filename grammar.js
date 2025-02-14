@@ -29,6 +29,7 @@ module.exports = grammar({
     [$.input_expression],
     [$.record_phrase],
     [$.sort_clause],
+    [$.string_literal],
     ...combinations([$._statement, $.if_statement]),
     // DEFINE * conflicts
     ...combinations([
@@ -79,13 +80,21 @@ module.exports = grammar({
       seq($._integer_literal, alias($._namedot, "."), $._integer_literal),
 
     number_literal: ($) => choice($._integer_literal, $._decimal_literal),
-    string_literal: ($) => $._escaped_string,
+    string_literal: ($) => seq($._escaped_string, optional(seq(":", $.string_literal_attribute))),
+
+    string_literal_attribute: ($) =>
+      repeat1(
+        choice(
+          seq("R", $._integer_literal),
+          seq("L", $._integer_literal),
+          seq("C", $._integer_literal),
+          seq("T", $._integer_literal),
+          "U"
+        )
+      ),
 
     date_literal: ($) => /\d{1,2}\/\d{1,2}\/\d{4}|\d{2}/,
     array_literal: ($) => seq("[", optional(choice($.range_notation, _list($._expression, ","))), "]"),
-
-    double_quoted_string: ($) =>
-      seq('"', repeat(choice(/[^"\\]+/, /\\./, $._special_character)), '"'),
 
     single_quoted_string: ($) =>
       seq("'", repeat(choice(/[^'\\]+/, /\\./, $._special_character)), "'"),
@@ -213,7 +222,7 @@ module.exports = grammar({
           field("value", $._expression)
         ),
         field("name", $.identifier),
-        field("value", $.double_quoted_string),
+        field("value", $.string_literal),
         $.constant
       ),
     include: ($) =>
@@ -918,6 +927,41 @@ module.exports = grammar({
         $._terminator
       ),
 
+      // output_through_tuning: ($) =>
+      //   choice(
+      //     choice(
+      //       kw("ECHO"),
+      //       kw("NO-ECHO"),
+      //       kw("KEEP-MESSAGES"),
+      //       choice(seq(kw("MAP"), $._expression), kw("NO-MAP")),
+      //       kw("PAGED"),
+      //       seq(kw("PAGE-SIZE"), $._expression),
+      //       kw("UNBUFFERED"),
+      //       kw("NO-CONVERT"),
+      //       seq(
+      //         kw("CONVERT"),
+      //         optional(seq(kw("TARGET"), $._expression)),
+      //         optional(seq(kw("SOURCE"), $._expression))
+      //       )
+      //     )
+      //   ),
+
+      // output_through_statement: ($) =>
+      //   seq(
+      //     kw("OUTPUT"),
+      //     optional(
+      //       seq(
+      //         choice(kw("STREAM"), kw("STREAM-HANDLE")),
+      //         field("source", $.identifier)
+      //       )
+      //     ),
+      //     kw("THROUGH"),
+      //     field("target", $._expression),
+      //     field("argument", $._expression),
+      //     repeat($.output_through_tuning),
+      //     $._terminator
+      // ),
+
     on_error_phrase: ($) =>
       seq(
         kw("ON"),
@@ -1289,9 +1333,9 @@ module.exports = grammar({
     temp_table_definition: ($) =>
       seq(
         choice(kw("DEFINE"), kw("DEF")),
-        repeat(choice($.scope_tuning, $.access_tuning, $.serialization_tuning)),
+        repeat(choice($.scope_tuning, $.access_tuning, $.serialization_tuning, $.constant)),
         kw("TEMP-TABLE"),
-        $.identifier,
+        choice($.identifier, $.constant),
         repeat($.temp_table_tuning),
         optional($.type_tuning),
         repeat(choice($.field_definition, $.index_definition)),
@@ -1534,6 +1578,26 @@ module.exports = grammar({
         optional(repeat($.sort_clause))
       ),
 
+    preprocessor_directive: $ =>
+      seq(
+        "&",
+        token(
+          choice(
+            seq(
+              /[^\n~]+/,
+              repeat(seq("~", /\s*\n/, /[^\n~]*/))
+            ),
+            seq(
+              kw("IF"),
+              /[^\n]*/,
+              repeat(seq(/\n/, /[^\n]*/)),
+              /\n\s*/,
+              "&", kw("ENDIF")
+            )
+          ),
+        )
+      ),
+
     // Supertypes
     _expression: ($) =>
       choice(
@@ -1607,6 +1671,7 @@ module.exports = grammar({
         $.image_definition,
         $.run_statement,
         $.enum_statement,
+        $.preprocessor_directive,
         $.abl_statement
       )
   }
