@@ -1682,7 +1682,6 @@ function _list(rule, separator) {
 }
 
 function kw(keyword) {
-  throw new Error(keyword);
   if (keyword.toUpperCase() != keyword) {
     throw new Error(`Expected upper case keyword got ${keyword}`);
   }
