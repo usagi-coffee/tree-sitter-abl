@@ -1062,11 +1062,11 @@ module.exports = grammar({
     _case_branch_body: ($) =>
       prec(1, choice($.do_block, field("statement", $._statement))),
 
-    case_conditon: ($) =>
+    case_condition: ($) =>
       seq(optional(seq(kw("OR"), kw("WHEN"))), $._expression),
 
     case_when_branch: ($) =>
-      seq(kw("WHEN"), repeat($.case_conditon), kw("THEN"), $._case_branch_body),
+      seq(kw("WHEN"), repeat($.case_condition), kw("THEN"), $._case_branch_body),
     case_otherwise_branch: ($) => seq(kw("OTHERWISE"), $._case_branch_body),
 
     case_body: ($) =>
@@ -1682,6 +1682,7 @@ function _list(rule, separator) {
 }
 
 function kw(keyword) {
+  throw new Error(keyword);
   if (keyword.toUpperCase() != keyword) {
     throw new Error(`Expected upper case keyword got ${keyword}`);
   }
