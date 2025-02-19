@@ -1859,7 +1859,7 @@ END CASE.
     (identifier)
     (body
       (case_when_branch
-        (case_conditon
+        (case_condition
           (string_literal))
         (do_block
           (body
@@ -1874,11 +1874,11 @@ END CASE.
                 (assignment_operator)
                 (number_literal))))))
       (case_when_branch
-        (case_conditon
+        (case_condition
           (logical_expression
             (string_literal)
             (identifier)))
-        (case_conditon
+        (case_condition
           (string_literal))
         (variable_assignment
           (assignment
@@ -1886,7 +1886,7 @@ END CASE.
             (assignment_operator)
             (number_literal))))
       (case_when_branch
-        (case_conditon
+        (case_condition
           (string_literal))
         (variable_assignment
           (assignment
