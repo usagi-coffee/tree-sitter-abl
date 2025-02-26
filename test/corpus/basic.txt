@@ -2770,9 +2770,9 @@ Preprocessor Directives
 ================================================================================
 
 &if DEFINED(is_Running) <> 0 &THEN
-DEFINE VARIABLE cParm AS CHARACTER.
+  DEFINE VARIABLE cParm AS CHARACTER.
 &ELSE
-DEFINE INPUT PARAMETER cParm AS CHARACTER.
+  DEFINE INPUT PARAMETER cParm AS CHARACTER.
 &ENDIF
 
 &Scoped-define OPEN-QUERY-DEFAULT-FRAME OPEN QUERY DEFAULT-FRAME FOR EACH ITEM ~
