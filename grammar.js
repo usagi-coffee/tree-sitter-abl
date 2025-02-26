@@ -20,13 +20,19 @@ module.exports = grammar({
     $._and_operator,
     $._augmented_assignment,
     $._escaped_string,
+    $._input_keyword,
+    $._output_keyword,
+    $._new_keyword,
+    $._old_keyword,
+    $._for_keyword,
+    $._def_keyword,
     $._special_character
   ],
   extras: ($) => [$.comment, $.include, /[\s\f\uFEFF\u2060\u200B]|\\\r?\n/],
   word: ($) => $.identifier,
   supertypes: ($) => [$._expression, $._statement],
   conflicts: ($) => [
-    [$.input_expression],
+    // [$.input_expression],
     [$.record_phrase],
     [$.sort_clause],
     [$.string_literal],
@@ -151,9 +157,9 @@ module.exports = grammar({
     dataset_expression: ($) => seq(prec.left(kw("DATASET")), $._expression),
     input_expression: ($) =>
       seq(
-        kw("INPUT"),
+        alias($._input_keyword, "INPUT"),
         optional(seq(kw("FRAME"), field("frame", $.identifier))),
-        optional(field("field", choice($.identifier, $.qualified_name)))
+        field("field", choice($.identifier, $.qualified_name))
       ),
 
     _additive_operator: ($) => choice("+", "-"),
@@ -202,7 +208,7 @@ module.exports = grammar({
         $.logical_expression
       ),
 
-    range_notation: ($) => seq($._expression, kw("FOR"), $._expression),
+    range_notation: ($) => seq($._expression, alias($._for_keyword, "FOR"), $._expression),
     array_access: ($) =>
       prec.right(
         1,
@@ -300,6 +306,12 @@ module.exports = grammar({
       ),
     variable_assignment: ($) => seq($.assignment, $._terminator),
 
+    _define: ($) =>
+      choice(
+        kw("DEFINE"),
+        alias($._def_keyword, "DEF"),
+      ),
+
     variable_tuning: ($) =>
       seq(
         choice(
@@ -314,7 +326,7 @@ module.exports = grammar({
       ),
 
     scope_tuning: ($) =>
-      choice(kw("NEW"), kw("GLOBAL"), kw("SHARED"), kw("STATIC")),
+      choice(alias($._new_keyword, "NEW"), kw("GLOBAL"), kw("SHARED"), kw("STATIC")),
     access_tuning: ($) =>
       choice(
         kw("PRIVATE"),
@@ -328,7 +340,7 @@ module.exports = grammar({
 
     variable_definition: ($) =>
       seq(
-        choice(kw("DEFINE"), kw("DEF")),
+        $._define,
         repeat(choice($.scope_tuning, $.access_tuning, $.serialization_tuning)),
         choice(kw("VARIABLE"), kw("VAR")),
         field("name", $.identifier),
@@ -337,15 +349,13 @@ module.exports = grammar({
         $._terminator
       ),
 
-    variable_assignment: ($) => seq($.assignment, $._terminator),
-
     buffer_definition: ($) =>
       seq(
-        choice(kw("DEFINE"), kw("DEF")),
+        $._define,
         repeat(choice($.scope_tuning, $.access_tuning)),
         kw("BUFFER"),
         field("name", $.identifier),
-        kw("FOR"),
+        alias($._for_keyword, "FOR"),
         optional(kw("TEMP-TABLE")),
         field("table", choice($.identifier, $.qualified_name)),
         $._terminator
@@ -360,11 +370,11 @@ module.exports = grammar({
     query_fields: ($) => seq("(", repeat($.identifier), ")"),
     query_definition: ($) =>
       seq(
-        choice(kw("DEFINE"), kw("DEF")),
+        $._define,
         repeat(choice($.scope_tuning, $.access_tuning)),
         kw("QUERY"),
         field("name", $.identifier),
-        kw("FOR"),
+        alias($._for_keyword, "FOR"),
         $.identifier,
         optional(seq(kw("FIELDS"), $.query_fields)),
         optional(seq(kw("EXCEPT"), $.query_fields)),
@@ -380,7 +390,7 @@ module.exports = grammar({
 
     argument_mode: ($) =>
       prec.right(
-        choice(kw("INPUT"), kw("OUTPUT"), kw("INPUT-OUTPUT"), kw("DATA-SOURCE"))
+        choice(alias($._input_keyword, "INPUT"), alias($._output_keyword, "OUTPUT"), kw("INPUT-OUTPUT"), kw("DATA-SOURCE"))
       ),
 
     argument_tuning: ($) =>
@@ -504,9 +514,9 @@ module.exports = grammar({
 
     procedure_parameter_definition: ($) =>
       seq(
-        choice(kw("DEFINE"), kw("DEF")),
+        $._define,
         optional(
-          choice(kw("INPUT"), kw("OUTPUT"), kw("INPUT-OUTPUT"), kw("RETURN"))
+          choice(alias($._input_keyword, "INPUT"), alias($._output_keyword, "OUTPUT"), kw("INPUT-OUTPUT"), kw("RETURN"))
         ),
         choice(kw("PARAMETER"), kw("PARAM")),
         optional(
@@ -519,7 +529,7 @@ module.exports = grammar({
             )
           )
         ),
-        optional(kw("FOR")),
+        optional(alias($._for_keyword, "FOR")),
         field("name", $.identifier),
         choice(
           seq($.type_tuning, repeat($.variable_tuning)),
@@ -534,7 +544,7 @@ module.exports = grammar({
         seq(kw("END"), kw("FUNCTION"), $._terminator)
       ),
     function_parameter_mode: ($) =>
-      choice(kw("INPUT"), kw("OUTPUT"), kw("INPUT-OUTPUT")),
+      choice(alias($._input_keyword, "INPUT"), alias($._output_keyword, "OUTPUT"), kw("INPUT-OUTPUT")),
     function_parameter_tuning: ($) =>
       choice(
         kw("APPEND"),
@@ -637,7 +647,7 @@ module.exports = grammar({
 
     property_definition: ($) =>
       seq(
-        choice(kw("DEFINE"), kw("DEF")),
+        $._define,
         repeat(
           choice(
             $.access_tuning,
@@ -655,7 +665,7 @@ module.exports = grammar({
 
     event_definition: ($) =>
       seq(
-        choice(kw("DEFINE"), kw("DEF")),
+        $._define,
         repeat(choice($.access_tuning, $.scope_tuning, $.property_type)),
         kw("EVENT"),
         $.identifier,
@@ -681,7 +691,7 @@ module.exports = grammar({
     data_relation: ($) =>
       seq(
         kw("DATA-RELATION"),
-        kw("FOR"),
+        alias($._for_keyword, "FOR"),
         _list(choice($.identifier, $.qualified_name), ","),
         kw("RELATION-FIELDS"),
         seq(
@@ -692,11 +702,11 @@ module.exports = grammar({
       ),
     dataset_definition: ($) =>
       seq(
-        choice(kw("DEFINE"), kw("DEF")),
+        $._define,
         repeat(choice($.scope_tuning, $.access_tuning)),
         kw("DATASET"),
         field("name", $.identifier),
-        kw("FOR"),
+        alias($._for_keyword, "FOR"),
         _list(choice($.identifier, $.qualified_name), ","),
         optional($.data_relation),
         $._terminator
@@ -796,7 +806,7 @@ module.exports = grammar({
     new_expression: ($) =>
       prec.right(
         seq(
-          kw("NEW"),
+          alias($._new_keyword, "NEW"),
           choice($.identifier, $.qualified_name),
           alias($.function_arguments, $.arguments),
           optional("NO-ERROR")
@@ -822,7 +832,7 @@ module.exports = grammar({
 
     stream_definition: ($) =>
       seq(
-        choice(kw("DEFINE"), kw("DEF")),
+        $._define,
         repeat(choice($.scope_tuning, $.access_tuning, $.serialization_tuning)),
         kw("STREAM"),
         field("name", $.identifier),
@@ -831,7 +841,7 @@ module.exports = grammar({
 
     input_close_statement: ($) =>
       seq(
-        kw("INPUT"),
+        alias($._input_keyword, "INPUT"),
         optional(
           choice(
             seq(kw("STREAM"), field("stream", $.identifier)),
@@ -844,7 +854,7 @@ module.exports = grammar({
 
     output_close_statement: ($) =>
       seq(
-        kw("OUTPUT"),
+        alias($._output_keyword, "OUTPUT"),
         optional(
           choice(
             seq(kw("STREAM"), field("stream", $.identifier)),
@@ -875,7 +885,7 @@ module.exports = grammar({
       ),
     input_stream_statement: ($) =>
       seq(
-        kw("INPUT"),
+        alias($._input_keyword, "INPUT"),
         optional(
           seq(
             choice(kw("STREAM"), kw("STREAM-HANDLE")),
@@ -914,7 +924,7 @@ module.exports = grammar({
       ),
     output_stream_statement: ($) =>
       seq(
-        kw("OUTPUT"),
+        alias($._output_keyword, "OUTPUT"),
         optional(
           seq(
             choice(kw("STREAM"), kw("STREAM-HANDLE")),
@@ -926,41 +936,6 @@ module.exports = grammar({
         repeat($.output_stream_tuning),
         $._terminator
       ),
-
-      // output_through_tuning: ($) =>
-      //   choice(
-      //     choice(
-      //       kw("ECHO"),
-      //       kw("NO-ECHO"),
-      //       kw("KEEP-MESSAGES"),
-      //       choice(seq(kw("MAP"), $._expression), kw("NO-MAP")),
-      //       kw("PAGED"),
-      //       seq(kw("PAGE-SIZE"), $._expression),
-      //       kw("UNBUFFERED"),
-      //       kw("NO-CONVERT"),
-      //       seq(
-      //         kw("CONVERT"),
-      //         optional(seq(kw("TARGET"), $._expression)),
-      //         optional(seq(kw("SOURCE"), $._expression))
-      //       )
-      //     )
-      //   ),
-
-      // output_through_statement: ($) =>
-      //   seq(
-      //     kw("OUTPUT"),
-      //     optional(
-      //       seq(
-      //         choice(kw("STREAM"), kw("STREAM-HANDLE")),
-      //         field("source", $.identifier)
-      //       )
-      //     ),
-      //     kw("THROUGH"),
-      //     field("target", $._expression),
-      //     field("argument", $._expression),
-      //     repeat($.output_through_tuning),
-      //     $._terminator
-      // ),
 
     on_error_phrase: ($) =>
       seq(
@@ -1127,7 +1102,7 @@ module.exports = grammar({
     for_statement: ($) =>
       seq(
         optional($.label),
-        kw("FOR"),
+        alias($._for_keyword, "FOR"),
         field("type", choice(kw("EACH"), kw("FIRST"), kw("LAST"))),
         field("table", choice($.identifier, $.qualified_name)),
         optional($.of),
@@ -1320,7 +1295,7 @@ module.exports = grammar({
     workfile_tuning: ($) => kw("NO-UNDO"),
     workfile_definition: ($) =>
       seq(
-        choice(kw("DEFINE"), kw("DEF")),
+        $._define,
         repeat(choice($.access_tuning, $.scope_tuning)),
         choice(kw("WORKFILE"), kw("WORK-TABLE")),
         field("name", $.identifier),
@@ -1332,7 +1307,7 @@ module.exports = grammar({
 
     temp_table_definition: ($) =>
       seq(
-        choice(kw("DEFINE"), kw("DEF")),
+        $._define,
         repeat(choice($.scope_tuning, $.access_tuning, $.serialization_tuning, $.constant)),
         kw("TEMP-TABLE"),
         choice($.identifier, $.constant),
@@ -1358,9 +1333,9 @@ module.exports = grammar({
         seq($._expression, repeat(seq(",", $._expression))),
         optional(
           seq(
-            kw("NEW"),
+            alias($._new_keyword, "NEW"),
             seq($._expression, repeat(seq(",", $._expression))),
-            kw("OLD"),
+            alias($._old_keyword, "OLD"),
             seq($._expression, repeat(seq(",", $._expression)))
           )
         ),
@@ -1378,12 +1353,12 @@ module.exports = grammar({
 
     data_source_definition: ($) =>
       seq(
-        choice(kw("DEFINE"), kw("DEF")),
+        $._define,
         optional($.access_tuning),
         optional($.scope_tuning),
         kw("DATA-SOURCE"),
         $.identifier,
-        kw("FOR"),
+        alias($._for_keyword, "FOR"),
         optional(seq(kw("QUERY"), $.identifier)),
         choice(
           seq(
@@ -1477,7 +1452,7 @@ module.exports = grammar({
 
     button_definition: ($) =>
       seq(
-        choice(kw("DEFINE"), kw("DEF")),
+        $._define,
         optional($.access_tuning),
         kw("BUTTON"),
         field("name", $.identifier),
@@ -1497,7 +1472,7 @@ module.exports = grammar({
 
     image_definition: ($) =>
       seq(
-        choice(kw("DEFINE"), kw("DEF")),
+        $._define,
         optional($.access_tuning),
         kw("IMAGE"),
         field("name", $.identifier),
@@ -1548,7 +1523,12 @@ module.exports = grammar({
         )
       ),
     enum_definition: ($) =>
-      seq(kw("DEFINE"), kw("ENUM"), repeat($.enum_member), $._terminator),
+      seq(
+        $._define,
+        kw("ENUM"),
+        repeat($.enum_member),
+        $._terminator
+      ),
 
     enum_tuning: ($) => choice(kw("FLAGS")),
     enum_statement: ($) =>
@@ -1603,18 +1583,8 @@ module.exports = grammar({
       choice(
         $.parenthesized_expression,
         $.unary_expression,
-        $.boolean_literal,
-        $.string_literal,
-        $.date_literal,
-        $.number_literal,
-        $.array_literal,
         $.null_expression,
         $._binary_expression,
-        $.qualified_name,
-        $.object_access,
-        $.member_access,
-        $.array_access,
-        $.function_call,
         $.ternary_expression,
         $.available_expression,
         $.accumulate_expression,
@@ -1626,6 +1596,19 @@ module.exports = grammar({
         $.input_expression,
         $.can_find_expression,
         $.new_expression,
+
+        $.boolean_literal,
+        $.string_literal,
+        $.date_literal,
+        $.number_literal,
+        $.array_literal,
+
+        $.object_access,
+        $.member_access,
+        $.array_access,
+        $.function_call,
+
+        $.qualified_name,
         $.identifier,
         $.constant
       ),
@@ -1634,13 +1617,7 @@ module.exports = grammar({
       choice(
         $.var_statement,
         $.null_statement,
-        $.variable_definition,
-        $.variable_assignment,
-        $.buffer_definition,
-        $.query_definition,
-        $.stream_definition,
         $.procedure_statement,
-        $.procedure_parameter_definition,
         $.function_statement,
         $.function_call_statement,
         $.return_statement,
@@ -1650,7 +1627,6 @@ module.exports = grammar({
         $.find_statement,
         $._stream_statement,
         $.case_statement,
-        $.do_block,
         $.input_close_statement,
         $.output_close_statement,
         $.assign_statement,
@@ -1659,20 +1635,29 @@ module.exports = grammar({
         $.accumulate_statement,
         $.undo_statement,
         $.error_scope_statement,
-        $.temp_table_definition,
-        $.workfile_definition,
         $.using_statement,
         $.class_statement,
         $.interface_statement,
         $.on_statement,
         $.prompt_for_statement,
+        $.run_statement,
+        $.enum_statement,
+        $.abl_statement,
+
+        $.variable_definition,
+        $.buffer_definition,
+        $.query_definition,
+        $.stream_definition,
+        $.procedure_parameter_definition,
+        $.temp_table_definition,
+        $.workfile_definition,
         $.dataset_definition,
         $.button_definition,
         $.image_definition,
-        $.run_statement,
-        $.enum_statement,
-        $.preprocessor_directive,
-        $.abl_statement
+
+        $.variable_assignment,
+        $.do_block,
+        $.preprocessor_directive
       )
   }
 });
