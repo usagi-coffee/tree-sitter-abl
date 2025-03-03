@@ -28,7 +28,7 @@ module.exports = grammar({
     $._def_keyword,
     $._special_character
   ],
-  extras: ($) => [$.comment, $.include, /[\s\f\uFEFF\u2060\u200B]|\\\r?\n/],
+  extras: ($) => [$.comment, /[\s\f\uFEFF\u2060\u200B]|\\\r?\n/],
   word: ($) => $.identifier,
   supertypes: ($) => [$._expression, $._statement],
   conflicts: ($) => [
@@ -91,11 +91,11 @@ module.exports = grammar({
     string_literal_attribute: ($) =>
       repeat1(
         choice(
-          seq("R", $._integer_literal),
-          seq("L", $._integer_literal),
-          seq("C", $._integer_literal),
-          seq("T", $._integer_literal),
-          "U"
+          seq(kw("R"), $._integer_literal),
+          seq(kw("L"), $._integer_literal),
+          seq(kw("C"), $._integer_literal),
+          seq(kw("T"), $._integer_literal),
+          kw("U")
         )
       ),
 
@@ -300,7 +300,7 @@ module.exports = grammar({
             )
           ),
           $.assignment_operator,
-          prec.right($._expression),
+          prec.right(choice($._expression, $.include)),
           optional($.when_expression)
         )
       ),
@@ -553,20 +553,29 @@ module.exports = grammar({
         seq(kw("EXTENT"), optional($.number_literal))
       ),
     function_parameter: ($) =>
-      seq(
-        optional(kw("TABLE-HANDLE")),
-        optional($.function_parameter_mode),
-        optional(
-          choice(
-            kw("TABLE "),
-            kw("TABLE-HANDLE"),
-            kw("DATASET-HANDLE"),
-            kw("DATASET ")
-          )
+      choice(
+        seq(
+          optional(kw("TABLE-HANDLE")),
+          optional($.function_parameter_mode),
+          optional(
+            choice(
+              kw("TABLE "),
+              kw("TABLE-HANDLE"),
+              kw("DATASET-HANDLE"),
+              kw("DATASET ")
+            )
+          ),
+          field("name", $.identifier),
+          optional($.type_tuning),
+          repeat($.function_parameter_tuning)
         ),
-        field("name", $.identifier),
-        optional($.type_tuning),
-        repeat($.function_parameter_tuning)
+        seq(
+          kw("BUFFER"),
+          field("buffer", $.identifier),
+          alias($._for_keyword, "FOR"),
+          field("table", choice($.identifier, $.qualified_name)),
+          optional(kw("PRESELECT"))
+        )
       ),
 
     function_parameters: ($) =>
@@ -999,6 +1008,65 @@ module.exports = grammar({
         )
       ),
 
+    frame_phrase: ($) =>
+      seq(
+        kw("WITH"),
+        repeat(
+          choice(
+            seq(kw("ACCUM"), optional($._expression)),
+            // $.at_phrase, // TODO
+            seq(kw("CANCEL-BUTTON"), $.identifier),
+            kw("CENTERED"),
+            // color specification
+            seq(kw("COLUMN"), $._expression),
+            seq($.number_literal, kw("COLUMNS")),
+            kw("CONTEXT-HELP"),
+            seq(kw("CONTEXT-HELP-FILE"), $.identifier),
+            seq(kw("DEFAULT-BUTTON"), $.identifier),
+            kw("DROP-TARGET"),
+            seq(optional($._expression), kw("DOWN")),
+            kw("EXPORT"),
+            seq(kw("WIDGET-ID"), $.number_literal),
+            seq(kw("FONT"), $._expression),
+            seq(kw("FRAME"), $.identifier),
+            kw("INHERIT-BGCOLOR"),
+            kw("NO-INHERIT-BGCOLOR"),
+            kw("INHERIT-FGCOLOR"),
+            kw("NO-INHERIT-FGCOLOR"),
+            kw("KEEP-TAB-ORDER"),
+            kw("NO-BOX"),
+            kw("NO-HIDE"),
+            kw("NO-LABELS"),
+            kw("USE-DICT-EXPS"),
+            kw("NO-VALIDATE"),
+            kw("NO-AUTO-VALIDATE"),
+            kw("NO-HELP"),
+            kw("NO-UNDERLINE"),
+            kw("OVERLAY"),
+            kw("PAGE-BOTTOM"),
+            kw("PAGE-TOP"),
+            seq(kw("RETAIN"), $.number_literal),
+            seq(kw("ROW"), $._expression),
+            kw("SCREEN-IO"),
+            kw("STREAM-IO"),
+            seq(kw("SCROLL"), $.number_literal),
+            kw("SCROLLABLE"),
+            kw("SIDE-LABELS"),
+            $.size_phrase,
+            seq(kw("STREAM"), field("stream", $.identifier)), // TODO: Refactor as reusable rule
+            seq(kw("STREAM-HANDLE"), field("stream_handle", $.identifier)), // TODO: Refactor as reusable rule
+            kw("THREE-D"),
+            // title phrase
+            kw("TOP-ONLY"),
+            kw("USE-TEXT"),
+            seq(kw("V6FRAME"), optional(choice(kw("USE-REVVIDEO"), kw("USE-UNDERLINE")))),
+            seq(kw("VIEW-AS"), kw("DIALOG-BOX")),
+            seq(kw("WIDTH"), $.number_literal),
+            seq(kw("IN-WINDOW"), $.identifier)
+          )
+        )
+      ),
+
     stop_after_phrase: ($) => seq(kw("STOP-AFTER"), $._expression),
 
     do_tuning: ($) => choice(kw("TRANSACTION")),
@@ -1119,6 +1187,7 @@ module.exports = grammar({
           )
         ),
         repeat(seq(",", $.for_phrase)),
+        optional($.frame_phrase),
         $.body,
         $._block_terminator
       ),
@@ -1171,8 +1240,8 @@ module.exports = grammar({
     assign_statement: ($) =>
       seq(
         kw("ASSIGN"),
-        repeat(choice($.assignment)),
-        optional("NO-ERROR"),
+        repeat($.assignment), // no need for choice
+        optional(kw("NO-ERROR")),
         $._terminator
       ),
 
@@ -1257,7 +1326,13 @@ module.exports = grammar({
         $._terminator
       ),
 
-    temp_table_tuning: ($) => choice(kw("NO-UNDO"), kw("REFERENCE-ONLY")),
+    temp_table_tuning: ($) =>
+      choice(
+        kw("NO-UNDO"),
+        kw("REFERENCE-ONLY"),
+        kw("RCODE-INFORMATION"),
+        // TODO: Continue here
+      ),
     field_option: ($) =>
       choice(
         seq(kw("COLUMN-LABEL"), $.string_literal),
@@ -1272,7 +1347,7 @@ module.exports = grammar({
         seq(kw("XML-NODE-TYPE"), $.string_literal),
         seq(kw("XML-NODE-NAME"), $.string_literal),
         seq(kw("HELP"), $.string_literal),
-        seq(kw("NOT"), kw("CASE-SENSITIVE"))
+        seq(optional(kw("NOT")), kw("CASE-SENSITIVE"))
       ),
     field_definition: ($) =>
       seq(kw("FIELD"), $.identifier, $.type_tuning, repeat($.field_option)),
@@ -1657,7 +1732,8 @@ module.exports = grammar({
 
         $.variable_assignment,
         $.do_block,
-        $.preprocessor_directive
+        $.preprocessor_directive,
+        $.include
       )
   }
 });
