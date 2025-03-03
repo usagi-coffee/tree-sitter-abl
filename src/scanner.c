@@ -17,7 +17,8 @@ enum TokenType {
   NEW_KEYWORD,
   OLD_KEYWORD,
   FOR_KEYWORD,
-  DEF_KEYWORD
+  DEF_KEYWORD,
+  VAR_KEYWORD
 };
 
 void *tree_sitter_abl_external_scanner_create() {
@@ -86,6 +87,7 @@ bool tree_sitter_abl_external_scanner_scan(
   if (valid_symbols[OLD_KEYWORD] && match_keyword(lexer, "OLD", OLD_KEYWORD)) return true;
   if (valid_symbols[FOR_KEYWORD] && match_keyword(lexer, "FOR", FOR_KEYWORD)) return true;
   if (valid_symbols[DEF_KEYWORD] && match_keyword(lexer, "DEF", DEF_KEYWORD)) return true;
+  if (valid_symbols[VAR_KEYWORD] && match_keyword(lexer, "VAR", VAR_KEYWORD)) return true;
 
   if (valid_symbols[AUGMENTED_ASSIGNMENT]) {
     while (!lexer->eof(lexer) && iswspace(lexer->lookahead)) {

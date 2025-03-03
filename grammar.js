@@ -26,6 +26,7 @@ module.exports = grammar({
     $._old_keyword,
     $._for_keyword,
     $._def_keyword,
+    $._var_keyword,
     $._special_character
   ],
   extras: ($) => [$.comment, /[\s\f\uFEFF\u2060\u200B]|\\\r?\n/],
@@ -745,7 +746,8 @@ module.exports = grammar({
             $.query_definition,
             $.buffer_definition,
             $.data_source_definition,
-            $.stream_definition
+            $.stream_definition,
+            $.var_statement
           )
         )
       ),
@@ -1329,17 +1331,33 @@ module.exports = grammar({
     temp_table_tuning: ($) =>
       choice(
         kw("NO-UNDO"),
+        seq(kw("NAMESPACE-URI"), $.string_literal),
+        seq(kw("NAMESPACE-PREFIX"), $.string_literal),
+        seq(kw("XML-NODE-NAME"), $.string_literal),
+        seq(kw("SERIALIZE-NAME"), $.string_literal),
         kw("REFERENCE-ONLY"),
+        seq(
+          choice(kw("LIKE"), kw("LIKE-SEQUENTIAL")),
+          $.identifier,
+          optional(kw("VALIDATE")),
+          optional(seq(kw("USE-INDEX"), $.identifier, optional(seq(kw("AS"), kw("PRIMARY")))))
+        ), // Maybe change to like_phrase
         kw("RCODE-INFORMATION"),
-        // TODO: Continue here
+        seq(kw("BEFORE-TABLE"), $.identifier)
       ),
     field_option: ($) =>
       choice(
+        seq(kw("BGCOLOR"), $._expression),
         seq(kw("COLUMN-LABEL"), $.string_literal),
-        seq(kw("LABEL"), $.string_literal),
+        seq(kw("DCOLOR"), $._expression),
+        seq(kw("LABEL"), $.string_literal), //check for multiple
         seq(kw("FORMAT"), $.string_literal),
         seq(kw("DECIMALS"), $.number_literal),
         seq(kw("EXTENT"), $.number_literal),
+        seq(kw("FONT"), $._expression),
+        seq(kw("FGCOLOR"), $._expression),
+        seq(kw("PFCOLOR"), $._expression),
+        seq(kw("FORMAT"), $.string_literal),
         seq(choice(kw("INITIAL"), kw("INIT")), $._expression),
         kw("SERIALIZE-HIDDEN"),
         seq(kw("SERIALIZE-NAME"), $.string_literal),
@@ -1347,7 +1365,10 @@ module.exports = grammar({
         seq(kw("XML-NODE-TYPE"), $.string_literal),
         seq(kw("XML-NODE-NAME"), $.string_literal),
         seq(kw("HELP"), $.string_literal),
-        seq(optional(kw("NOT")), kw("CASE-SENSITIVE"))
+        seq(optional(kw("NOT")), kw("CASE-SENSITIVE")),
+        seq(kw("MOUSE-POINTER"), $._expression),
+        kw("TTCODEPAGE"),
+        seq(kw("COLUMN-CODEPAGE"), $.string_literal),
       ),
     field_definition: ($) =>
       seq(kw("FIELD"), $.identifier, $.type_tuning, repeat($.field_option)),
@@ -1387,7 +1408,6 @@ module.exports = grammar({
         kw("TEMP-TABLE"),
         choice($.identifier, $.constant),
         repeat($.temp_table_tuning),
-        optional($.type_tuning),
         repeat(choice($.field_definition, $.index_definition)),
         $._terminator
       ),
@@ -1405,26 +1425,26 @@ module.exports = grammar({
     of_phrase: ($) =>
       seq(
         kw("OF"),
-        seq($._expression, repeat(seq(",", $._expression))),
+        seq($.identifier, repeat(seq(",", $.identifier))),
         optional(
           seq(
-            alias($._new_keyword, "NEW"),
-            seq($._expression, repeat(seq(",", $._expression))),
-            alias($._old_keyword, "OLD"),
-            seq($._expression, repeat(seq(",", $._expression)))
+            alias($._new_keyword, "NEW"), optional(kw("BUFFER")),
+            $.identifier,
+            alias($._old_keyword, "OLD"), optional(kw("BUFFER")),
+            $.identifier,
           )
         ),
         optional(kw("ANYWHERE"))
       ),
     on_statement: ($) =>
-      seq(
+      prec.right(seq(
         kw("ON"),
-        _list($._expression, ","),
-        choice(kw("ANYWHERE"), $.of_phrase),
-        optional(kw("IN")),
-        repeat($.widget_phrase),
-        $.do_block
-      ),
+        choice(
+          seq(choice(_list($.identifier, ","), $.identifier), choice(kw("ANYWHERE"), $.of_phrase), $.do_block, $._terminator),
+          seq(field("label", $.identifier), field("function", $.identifier), $._terminator)
+        )
+        // optional(kw("IN")),
+      )),
 
     data_source_definition: ($) =>
       seq(
@@ -1455,8 +1475,7 @@ module.exports = grammar({
     variable: ($) => choice(field("name", $.identifier), $.assignment),
     var_statement: ($) =>
       seq(
-        // FIXME: hack to avoid breaking assignments where identifier begins with var
-        kw("VAR "),
+        alias($._var_keyword, "VAR"),
         optional(
           choice($.scope_tuning, $.access_tuning, $.serialization_tuning)
         ),

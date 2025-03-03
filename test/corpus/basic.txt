@@ -2185,12 +2185,12 @@ END INTERFACE.
       (temp_table_definition
         (identifier)
         (temp_table_tuning)
-        (type_tuning
+        (temp_table_tuning
           (identifier)))
       (temp_table_definition
         (identifier)
         (temp_table_tuning)
-        (type_tuning
+        (temp_table_tuning
           (identifier)))
       (comment)
       (dataset_definition
