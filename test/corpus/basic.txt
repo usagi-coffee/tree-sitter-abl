@@ -1130,6 +1130,10 @@ FOR EACH some_table NO-LOCK, FIRST something OF other:
   DISPLAY something some_table.
 END.
 
+FOR EACH Item NO-LOCK WITH STREAM-IO:
+    DISPLAY something.
+END.
+
 --------------------------------------------------------------------------------
 
 (source_code
@@ -1157,6 +1161,14 @@ END.
       (abl_statement
         statement: (identifier)
         (identifier)
+        (identifier))))
+  (for_statement
+    table: (identifier)
+    (query_tuning)
+    (frame_phrase)
+    (body
+      (abl_statement
+        statement: (identifier)
         (identifier)))))
 
 ================================================================================
@@ -1771,6 +1783,10 @@ CLASS r-CustObj FINAL:
 
 END CLASS.
 
+CLASS x:
+  VAR CHAR myVariable.
+END CLASS.
+
 --------------------------------------------------------------------------------
 
 (source_code
@@ -1836,7 +1852,15 @@ END CLASS.
         (property_tuning)
         (getter)
         (setter
-          (access_tuning))))))
+          (access_tuning)))))
+  (class_statement
+    name: (identifier)
+    (body
+      (var_statement
+        (type_tuning
+          (primitive_type))
+        (variable
+          name: (identifier))))))
 
 ================================================================================
 CASE statement
@@ -2186,12 +2210,14 @@ END INTERFACE.
         (identifier)
         (temp_table_tuning)
         (temp_table_tuning
-          (identifier)))
+          (like_phrase
+            (identifier))))
       (temp_table_definition
         (identifier)
         (temp_table_tuning)
         (temp_table_tuning
-          (identifier)))
+          (like_phrase
+            (identifier))))
       (comment)
       (dataset_definition
         (identifier)
@@ -2786,4 +2812,46 @@ item.item = ipcItem NO-LOCK.
   (preprocessor_directive)
   (preprocessor_directive)
   (preprocessor_directive))
+
+================================================================================
+ON statement
+================================================================================
+
+ON F1 GO.
+
+ON WRITE OF Customer NEW new-cust OLD old-cust DO:
+  a = 3.
+END.
+
+ON "WEB-NOTIFY" ANYWHERE DO:
+  a = 3.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (on_statement
+    label: (identifier)
+    function: (identifier))
+  (on_statement
+    (identifier)
+    (referencing_phrase
+      (identifier)
+      (identifier))
+    (do_block
+      (body
+        (variable_assignment
+          (assignment
+            name: (identifier)
+            (assignment_operator)
+            (number_literal))))))
+  (on_statement
+    (string_literal)
+    (do_block
+      (body
+        (variable_assignment
+          (assignment
+            name: (identifier)
+            (assignment_operator)
+            (number_literal)))))))
 

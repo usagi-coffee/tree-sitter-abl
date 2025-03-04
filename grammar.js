@@ -38,6 +38,7 @@ module.exports = grammar({
     [$.sort_clause],
     [$.string_literal],
     ...combinations([$._statement, $.if_statement]),
+    ...combinations([$._statement, $.on_statement]),
     // DEFINE * conflicts
     ...combinations([
       $.abl_statement,
@@ -817,10 +818,10 @@ module.exports = grammar({
     new_expression: ($) =>
       prec.right(
         seq(
-          alias($._new_keyword, "NEW"),
+          choice(alias($._new_keyword, "NEW"), kw("DYNAMIC-NEW")),
           choice($.identifier, $.qualified_name),
           alias($.function_arguments, $.arguments),
-          optional("NO-ERROR")
+          optional(kw("NO-ERROR"))
         )
       ),
 
@@ -1328,6 +1329,14 @@ module.exports = grammar({
         $._terminator
       ),
 
+    like_phrase: ($) =>
+      seq(
+        choice(kw("LIKE"), kw("LIKE-SEQUENTIAL")),
+        $.identifier,
+        optional(kw("VALIDATE")),
+        optional(seq(kw("USE-INDEX"), $.identifier, optional(seq(kw("AS"), kw("PRIMARY")))))
+      ),
+
     temp_table_tuning: ($) =>
       choice(
         kw("NO-UNDO"),
@@ -1336,12 +1345,7 @@ module.exports = grammar({
         seq(kw("XML-NODE-NAME"), $.string_literal),
         seq(kw("SERIALIZE-NAME"), $.string_literal),
         kw("REFERENCE-ONLY"),
-        seq(
-          choice(kw("LIKE"), kw("LIKE-SEQUENTIAL")),
-          $.identifier,
-          optional(kw("VALIDATE")),
-          optional(seq(kw("USE-INDEX"), $.identifier, optional(seq(kw("AS"), kw("PRIMARY")))))
-        ), // Maybe change to like_phrase
+        $.like_phrase,
         kw("RCODE-INFORMATION"),
         seq(kw("BEFORE-TABLE"), $.identifier)
       ),
@@ -1350,7 +1354,7 @@ module.exports = grammar({
         seq(kw("BGCOLOR"), $._expression),
         seq(kw("COLUMN-LABEL"), $.string_literal),
         seq(kw("DCOLOR"), $._expression),
-        seq(kw("LABEL"), $.string_literal), //check for multiple
+        seq(kw("LABEL"), $.string_literal, repeat(seq(",", $.string_literal))),
         seq(kw("FORMAT"), $.string_literal),
         seq(kw("DECIMALS"), $.number_literal),
         seq(kw("EXTENT"), $.number_literal),
@@ -1412,39 +1416,64 @@ module.exports = grammar({
         $._terminator
       ),
 
-    widget_field: ($) =>
-      seq(
-        optional(kw("FIELD")),
-        $.identifier,
-        optional(seq(kw("IN"), kw("FRAME"), $.identifier))
+    widget_phrase: ($) =>
+      choice(
+        seq(kw("FRAME"), $.identifier),
+        seq(optional(kw("FIELD")), $.identifier, optional(seq(kw("IN"), kw("FRAME"), $.identifier))),
+        seq($.identifier, optional(seq(kw("IN"), kw("BROWSE"), $.identifier))),
+        seq(choice(kw("MENU"), kw("SUB-MENU")), $.identifier),
+        seq(kw("MENU-ITEM"), $.identifier, optional(seq(kw("IN"), kw("MENU"), $.identifier))),
+        // $.qualified_name // NOTE: Leaving this hidden before we get proper example
       ),
 
-    widget_phrase: ($) =>
-      prec.left(seq(kw("FRAME"), $.identifier, repeat($.widget_field))),
+    referencing_phrase: ($) =>
+      seq(
+        alias($._new_keyword, "NEW"), optional(kw("BUFFER")),
+        $.identifier,
+        alias($._old_keyword, "OLD"), optional(kw("BUFFER")),
+        $.identifier,
+      ),
 
     of_phrase: ($) =>
       seq(
         kw("OF"),
-        seq($.identifier, repeat(seq(",", $.identifier))),
-        optional(
-          seq(
-            alias($._new_keyword, "NEW"), optional(kw("BUFFER")),
-            $.identifier,
-            alias($._old_keyword, "OLD"), optional(kw("BUFFER")),
-            $.identifier,
-          )
-        ),
+        $.widget_phrase,
         optional(kw("ANYWHERE"))
       ),
+
+    _on_statement_database_phrase: ($) =>
+      prec(2, seq(
+        choice(
+          kw("CREATE"),
+          kw("DELETE"),
+          kw("FIND"),
+          kw("WRITE"),
+          kw("ASSIGN"),
+        ),
+        kw("OF"),
+        choice($.qualified_name, $.identifier), repeat(seq(",", choice($.qualified_name, $.identifier))),
+        optional($.referencing_phrase),
+        optional(kw("OVERRIDE")),
+        choice($.do_block, prec(2, $._statement), kw("REVERT"))
+      )),
+
+      _on_statement_widget_phrase: ($) =>
+        prec(2, seq(
+          _list($.identifier, ","),
+          choice(kw("ANYWHERE"), $.of_phrase),
+          choice($.do_block, prec(2, $._statement), kw("REVERT"), seq(kw("PERSISTENT"), $.run_statement))
+        )),
+
     on_statement: ($) =>
-      prec.right(seq(
+      seq(
         kw("ON"),
         choice(
-          seq(choice(_list($.identifier, ","), $.identifier), choice(kw("ANYWHERE"), $.of_phrase), $.do_block, $._terminator),
-          seq(field("label", $.identifier), field("function", $.identifier), $._terminator)
+          $._on_statement_widget_phrase,
+          $._on_statement_database_phrase,
+          seq(field("label", $.identifier), field("function", $.identifier), $._terminator),
+          seq(alias("\"WEB-NOTIFY\"", $.string_literal), kw("ANYWHERE"), choice($.do_block, prec(2, $._statement)))
         )
-        // optional(kw("IN")),
-      )),
+      ),
 
     data_source_definition: ($) =>
       seq(
