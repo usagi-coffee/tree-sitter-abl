@@ -1377,10 +1377,13 @@ module.exports = grammar({
     field_definition: ($) =>
       seq(kw("FIELD"), $.identifier, $.type_tuning, repeat($.field_option)),
     index_tuning: ($) =>
-      choice(
-        seq(choice(kw("IS"), kw("AS")), kw("PRIMARY")),
-        seq(choice(kw("IS"), kw("AS")), kw("UNIQUE")),
-        seq(choice(kw("IS"), kw("AS")), kw("WORD-INDEX"))
+      seq(
+        optional(choice(kw("IS"), kw("AS"))),
+        choice(
+          kw("PRIMARY"),
+          kw("UNIQUE"),
+          kw("WORD-INDEX")
+        )
       ),
     index_definition: ($) =>
       prec.left(
