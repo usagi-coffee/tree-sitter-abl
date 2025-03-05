@@ -2047,6 +2047,13 @@ DEFINE TEMP-TABLE foo
   INDEX x a DESC b DESC c DESC
 .
 
+DEFINE TEMP-TABLE temp-item NO-UNDO SERIALIZE-NAME "theName" {1}
+  FIELD cat-page  LIKE Item.CatPage
+  FIELD inventory LIKE Item.Price CASE-SENSITIVE
+  {schema/entity.i}
+  INDEX cat-page  IS PRIMARY cat-page ASCENDING
+  INDEX inventory-value inventory DESCENDING.
+
 --------------------------------------------------------------------------------
 
 (source_code
@@ -2105,6 +2112,39 @@ DEFINE TEMP-TABLE foo
       (sort_column
         (identifier)
         (sort_order))
+      (sort_column
+        (identifier)
+        (sort_order))))
+  (temp_table_definition
+    (identifier)
+    (temp_table_tuning)
+    (temp_table_tuning
+      (string_literal))
+    (temp_table_tuning
+      (constant))
+    (field_definition
+      (identifier)
+      (type_tuning
+        (qualified_name
+          (identifier)
+          (identifier))))
+    (field_definition
+      (identifier)
+      (type_tuning
+        (qualified_name
+          (identifier)
+          (identifier)))
+      (field_option))
+    (include
+      (file_name))
+    (index_definition
+      (identifier)
+      (index_tuning)
+      (sort_column
+        (identifier)
+        (sort_order)))
+    (index_definition
+      (identifier)
       (sort_column
         (identifier)
         (sort_order)))))

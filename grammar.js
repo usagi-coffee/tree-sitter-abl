@@ -1347,7 +1347,8 @@ module.exports = grammar({
         kw("REFERENCE-ONLY"),
         $.like_phrase,
         kw("RCODE-INFORMATION"),
-        seq(kw("BEFORE-TABLE"), $.identifier)
+        seq(kw("BEFORE-TABLE"), $.identifier),
+        $.constant
       ),
     field_option: ($) =>
       choice(
@@ -1415,7 +1416,7 @@ module.exports = grammar({
         kw("TEMP-TABLE"),
         choice($.identifier, $.constant),
         repeat($.temp_table_tuning),
-        repeat(choice($.field_definition, $.index_definition)),
+        repeat(choice($.field_definition, $.index_definition, $.include)),
         $._terminator
       ),
 
