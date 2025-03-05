@@ -2827,6 +2827,14 @@ ON "WEB-NOTIFY" ANYWHERE DO:
   a = 3.
 END.
 
+ON CHOOSE OF b_next, b_prev DO:
+  FIND PREV Customer NO-LOCK.
+END.
+
+ON {&SEARCH-KEYBOARD},{&SEARCH-MOUSE} OF particular_fill-in_Field DO:
+  display Messages.
+END.
+
 --------------------------------------------------------------------------------
 
 (source_code
@@ -2853,5 +2861,29 @@ END.
           (assignment
             name: (identifier)
             (assignment_operator)
-            (number_literal)))))))
+            (number_literal))))))
+  (on_statement
+        (identifier)
+        (of_phrase
+          (widget_phrase
+            (identifier)
+            (identifier)))
+        (do_block
+          (body
+            (find_statement
+              table: (identifier)
+              (query_tuning)))))
+  (on_statement
+    (constant
+      (identifier))
+    (constant
+      (identifier))
+    (of_phrase
+      (widget_phrase
+      (identifier)))
+    (do_block
+      (body
+        (abl_statement
+          statement: (identifier)
+          (identifier))))))
 

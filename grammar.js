@@ -1426,7 +1426,7 @@ module.exports = grammar({
         seq($.identifier, optional(seq(kw("IN"), kw("BROWSE"), $.identifier))),
         seq(choice(kw("MENU"), kw("SUB-MENU")), $.identifier),
         seq(kw("MENU-ITEM"), $.identifier, optional(seq(kw("IN"), kw("MENU"), $.identifier))),
-        // $.qualified_name // NOTE: Leaving this hidden before we get proper example
+        seq($.identifier, repeat(seq(",", $.identifier)))
       ),
 
     referencing_phrase: ($) =>
@@ -1462,7 +1462,7 @@ module.exports = grammar({
 
       _on_statement_widget_phrase: ($) =>
         prec(2, seq(
-          _list($.identifier, ","),
+          _list(choice($.identifier, $.constant), ","),
           choice(kw("ANYWHERE"), $.of_phrase),
           choice($.do_block, prec(2, $._statement), kw("REVERT"), seq(kw("PERSISTENT"), $.run_statement))
         )),
