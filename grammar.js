@@ -26,9 +26,10 @@ module.exports = grammar({
     $._old_keyword,
     $._for_keyword,
     $._def_keyword,
+    $._var_keyword,
     $._special_character
   ],
-  extras: ($) => [$.comment, $.include, /[\s\f\uFEFF\u2060\u200B]|\\\r?\n/],
+  extras: ($) => [$.comment, /[\s\f\uFEFF\u2060\u200B]|\\\r?\n/],
   word: ($) => $.identifier,
   supertypes: ($) => [$._expression, $._statement],
   conflicts: ($) => [
@@ -37,6 +38,7 @@ module.exports = grammar({
     [$.sort_clause],
     [$.string_literal],
     ...combinations([$._statement, $.if_statement]),
+    ...combinations([$._statement, $.on_statement]),
     // DEFINE * conflicts
     ...combinations([
       $.abl_statement,
@@ -89,14 +91,12 @@ module.exports = grammar({
     string_literal: ($) => seq($._escaped_string, optional(seq(":", $.string_literal_attribute))),
 
     string_literal_attribute: ($) =>
-      repeat1(
-        choice(
-          seq("R", $._integer_literal),
-          seq("L", $._integer_literal),
-          seq("C", $._integer_literal),
-          seq("T", $._integer_literal),
-          "U"
-        )
+      choice(
+        seq(kw("R"), $._integer_literal),
+        seq(kw("L"), $._integer_literal),
+        seq(kw("C"), $._integer_literal),
+        seq(kw("T"), $._integer_literal),
+        kw("U")
       ),
 
     date_literal: ($) => /\d{1,2}\/\d{1,2}\/\d{4}|\d{2}/,
@@ -300,7 +300,7 @@ module.exports = grammar({
             )
           ),
           $.assignment_operator,
-          prec.right($._expression),
+          prec.right(choice($._expression, $.include)),
           optional($.when_expression)
         )
       ),
@@ -553,20 +553,29 @@ module.exports = grammar({
         seq(kw("EXTENT"), optional($.number_literal))
       ),
     function_parameter: ($) =>
-      seq(
-        optional(kw("TABLE-HANDLE")),
-        optional($.function_parameter_mode),
-        optional(
-          choice(
-            kw("TABLE "),
-            kw("TABLE-HANDLE"),
-            kw("DATASET-HANDLE"),
-            kw("DATASET ")
-          )
+      choice(
+        seq(
+          optional(kw("TABLE-HANDLE")),
+          optional($.function_parameter_mode),
+          optional(
+            choice(
+              kw("TABLE "),
+              kw("TABLE-HANDLE"),
+              kw("DATASET-HANDLE"),
+              kw("DATASET ")
+            )
+          ),
+          field("name", $.identifier),
+          optional($.type_tuning),
+          repeat($.function_parameter_tuning)
         ),
-        field("name", $.identifier),
-        optional($.type_tuning),
-        repeat($.function_parameter_tuning)
+        seq(
+          kw("BUFFER"),
+          field("buffer", $.identifier),
+          alias($._for_keyword, "FOR"),
+          field("table", choice($.identifier, $.qualified_name)),
+          optional(kw("PRESELECT"))
+        )
       ),
 
     function_parameters: ($) =>
@@ -736,7 +745,8 @@ module.exports = grammar({
             $.query_definition,
             $.buffer_definition,
             $.data_source_definition,
-            $.stream_definition
+            $.stream_definition,
+            $.var_statement
           )
         )
       ),
@@ -806,10 +816,10 @@ module.exports = grammar({
     new_expression: ($) =>
       prec.right(
         seq(
-          alias($._new_keyword, "NEW"),
+          choice(alias($._new_keyword, "NEW"), kw("DYNAMIC-NEW")),
           choice($.identifier, $.qualified_name),
           alias($.function_arguments, $.arguments),
-          optional("NO-ERROR")
+          optional(kw("NO-ERROR"))
         )
       ),
 
@@ -999,6 +1009,65 @@ module.exports = grammar({
         )
       ),
 
+    frame_phrase: ($) =>
+      seq(
+        kw("WITH"),
+        repeat(
+          choice(
+            seq(kw("ACCUM"), optional($._expression)),
+            // $.at_phrase, // TODO
+            seq(kw("CANCEL-BUTTON"), $.identifier),
+            kw("CENTERED"),
+            // color specification
+            seq(kw("COLUMN"), $._expression),
+            seq($.number_literal, kw("COLUMNS")),
+            kw("CONTEXT-HELP"),
+            seq(kw("CONTEXT-HELP-FILE"), $.identifier),
+            seq(kw("DEFAULT-BUTTON"), $.identifier),
+            kw("DROP-TARGET"),
+            seq(optional($._expression), kw("DOWN")),
+            kw("EXPORT"),
+            seq(kw("WIDGET-ID"), $.number_literal),
+            seq(kw("FONT"), $._expression),
+            seq(kw("FRAME"), $.identifier),
+            kw("INHERIT-BGCOLOR"),
+            kw("NO-INHERIT-BGCOLOR"),
+            kw("INHERIT-FGCOLOR"),
+            kw("NO-INHERIT-FGCOLOR"),
+            kw("KEEP-TAB-ORDER"),
+            kw("NO-BOX"),
+            kw("NO-HIDE"),
+            kw("NO-LABELS"),
+            kw("USE-DICT-EXPS"),
+            kw("NO-VALIDATE"),
+            kw("NO-AUTO-VALIDATE"),
+            kw("NO-HELP"),
+            kw("NO-UNDERLINE"),
+            kw("OVERLAY"),
+            kw("PAGE-BOTTOM"),
+            kw("PAGE-TOP"),
+            seq(kw("RETAIN"), $.number_literal),
+            seq(kw("ROW"), $._expression),
+            kw("SCREEN-IO"),
+            kw("STREAM-IO"),
+            seq(kw("SCROLL"), $.number_literal),
+            kw("SCROLLABLE"),
+            kw("SIDE-LABELS"),
+            $.size_phrase,
+            seq(kw("STREAM"), field("stream", $.identifier)), // TODO: Refactor as reusable rule
+            seq(kw("STREAM-HANDLE"), field("stream_handle", $.identifier)), // TODO: Refactor as reusable rule
+            kw("THREE-D"),
+            // title phrase
+            kw("TOP-ONLY"),
+            kw("USE-TEXT"),
+            seq(kw("V6FRAME"), optional(choice(kw("USE-REVVIDEO"), kw("USE-UNDERLINE")))),
+            seq(kw("VIEW-AS"), kw("DIALOG-BOX")),
+            seq(kw("WIDTH"), $.number_literal),
+            seq(kw("IN-WINDOW"), $.identifier)
+          )
+        )
+      ),
+
     stop_after_phrase: ($) => seq(kw("STOP-AFTER"), $._expression),
 
     do_tuning: ($) => choice(kw("TRANSACTION")),
@@ -1119,6 +1188,7 @@ module.exports = grammar({
           )
         ),
         repeat(seq(",", $.for_phrase)),
+        optional($.frame_phrase),
         $.body,
         $._block_terminator
       ),
@@ -1171,8 +1241,8 @@ module.exports = grammar({
     assign_statement: ($) =>
       seq(
         kw("ASSIGN"),
-        repeat(choice($.assignment)),
-        optional("NO-ERROR"),
+        repeat($.assignment), // no need for choice
+        optional(kw("NO-ERROR")),
         $._terminator
       ),
 
@@ -1257,14 +1327,40 @@ module.exports = grammar({
         $._terminator
       ),
 
-    temp_table_tuning: ($) => choice(kw("NO-UNDO"), kw("REFERENCE-ONLY")),
+    like_phrase: ($) =>
+      seq(
+        choice(kw("LIKE"), kw("LIKE-SEQUENTIAL")),
+        $.identifier,
+        optional(kw("VALIDATE")),
+        optional(seq(kw("USE-INDEX"), $.identifier, optional(seq(kw("AS"), kw("PRIMARY")))))
+      ),
+
+    temp_table_tuning: ($) =>
+      choice(
+        kw("NO-UNDO"),
+        seq(kw("NAMESPACE-URI"), $.string_literal),
+        seq(kw("NAMESPACE-PREFIX"), $.string_literal),
+        seq(kw("XML-NODE-NAME"), $.string_literal),
+        seq(kw("SERIALIZE-NAME"), $.string_literal),
+        kw("REFERENCE-ONLY"),
+        $.like_phrase,
+        kw("RCODE-INFORMATION"),
+        seq(kw("BEFORE-TABLE"), $.identifier),
+        $.constant
+      ),
     field_option: ($) =>
       choice(
+        seq(kw("BGCOLOR"), $._expression),
         seq(kw("COLUMN-LABEL"), $.string_literal),
-        seq(kw("LABEL"), $.string_literal),
+        seq(kw("DCOLOR"), $._expression),
+        seq(kw("LABEL"), $.string_literal, repeat(seq(",", $.string_literal))),
         seq(kw("FORMAT"), $.string_literal),
         seq(kw("DECIMALS"), $.number_literal),
         seq(kw("EXTENT"), $.number_literal),
+        seq(kw("FONT"), $._expression),
+        seq(kw("FGCOLOR"), $._expression),
+        seq(kw("PFCOLOR"), $._expression),
+        seq(kw("FORMAT"), $.string_literal),
         seq(choice(kw("INITIAL"), kw("INIT")), $._expression),
         kw("SERIALIZE-HIDDEN"),
         seq(kw("SERIALIZE-NAME"), $.string_literal),
@@ -1272,15 +1368,21 @@ module.exports = grammar({
         seq(kw("XML-NODE-TYPE"), $.string_literal),
         seq(kw("XML-NODE-NAME"), $.string_literal),
         seq(kw("HELP"), $.string_literal),
-        seq(kw("NOT"), kw("CASE-SENSITIVE"))
+        seq(optional(kw("NOT")), kw("CASE-SENSITIVE")),
+        seq(kw("MOUSE-POINTER"), $._expression),
+        kw("TTCODEPAGE"),
+        seq(kw("COLUMN-CODEPAGE"), $.string_literal),
       ),
     field_definition: ($) =>
       seq(kw("FIELD"), $.identifier, $.type_tuning, repeat($.field_option)),
     index_tuning: ($) =>
-      choice(
-        seq(choice(kw("IS"), kw("AS")), kw("PRIMARY")),
-        seq(choice(kw("IS"), kw("AS")), kw("UNIQUE")),
-        seq(choice(kw("IS"), kw("AS")), kw("WORD-INDEX"))
+      seq(
+        optional(choice(kw("IS"), kw("AS"))),
+        choice(
+          kw("PRIMARY"),
+          kw("UNIQUE"),
+          kw("WORD-INDEX")
+        )
       ),
     index_definition: ($) =>
       prec.left(
@@ -1312,43 +1414,67 @@ module.exports = grammar({
         kw("TEMP-TABLE"),
         choice($.identifier, $.constant),
         repeat($.temp_table_tuning),
-        optional($.type_tuning),
-        repeat(choice($.field_definition, $.index_definition)),
+        repeat(choice($.field_definition, $.index_definition, $.include)),
         $._terminator
       ),
 
-    widget_field: ($) =>
-      seq(
-        optional(kw("FIELD")),
-        $.identifier,
-        optional(seq(kw("IN"), kw("FRAME"), $.identifier))
+    widget_phrase: ($) =>
+      choice(
+        seq(kw("FRAME"), $.identifier),
+        seq(optional(kw("FIELD")), $.identifier, optional(seq(kw("IN"), kw("FRAME"), $.identifier))),
+        seq($.identifier, optional(seq(kw("IN"), kw("BROWSE"), $.identifier))),
+        seq(choice(kw("MENU"), kw("SUB-MENU")), $.identifier),
+        seq(kw("MENU-ITEM"), $.identifier, optional(seq(kw("IN"), kw("MENU"), $.identifier))),
+        seq($.identifier, repeat(seq(",", $.identifier)))
       ),
 
-    widget_phrase: ($) =>
-      prec.left(seq(kw("FRAME"), $.identifier, repeat($.widget_field))),
+    referencing_phrase: ($) =>
+      seq(
+        alias($._new_keyword, "NEW"), optional(kw("BUFFER")),
+        $.identifier,
+        alias($._old_keyword, "OLD"), optional(kw("BUFFER")),
+        $.identifier,
+      ),
 
     of_phrase: ($) =>
       seq(
         kw("OF"),
-        seq($._expression, repeat(seq(",", $._expression))),
-        optional(
-          seq(
-            alias($._new_keyword, "NEW"),
-            seq($._expression, repeat(seq(",", $._expression))),
-            alias($._old_keyword, "OLD"),
-            seq($._expression, repeat(seq(",", $._expression)))
-          )
-        ),
+        $.widget_phrase,
         optional(kw("ANYWHERE"))
       ),
+
+    _on_statement_database_phrase: ($) =>
+      prec(2, seq(
+        choice(
+          kw("CREATE"),
+          kw("DELETE"),
+          kw("FIND"),
+          kw("WRITE"),
+          kw("ASSIGN"),
+        ),
+        kw("OF"),
+        choice($.qualified_name, $.identifier), repeat(seq(",", choice($.qualified_name, $.identifier))),
+        optional($.referencing_phrase),
+        optional(kw("OVERRIDE")),
+        choice($.do_block, prec(2, $._statement), kw("REVERT"))
+      )),
+
+      _on_statement_widget_phrase: ($) =>
+        prec(2, seq(
+          _list(choice($.identifier, $.constant), ","),
+          choice(kw("ANYWHERE"), $.of_phrase),
+          choice($.do_block, prec(2, $._statement), kw("REVERT"), seq(kw("PERSISTENT"), $.run_statement))
+        )),
+
     on_statement: ($) =>
       seq(
         kw("ON"),
-        _list($._expression, ","),
-        choice(kw("ANYWHERE"), $.of_phrase),
-        optional(kw("IN")),
-        repeat($.widget_phrase),
-        $.do_block
+        choice(
+          $._on_statement_widget_phrase,
+          $._on_statement_database_phrase,
+          seq(field("label", $.identifier), field("function", $.identifier), $._terminator),
+          seq(alias("\"WEB-NOTIFY\"", $.string_literal), kw("ANYWHERE"), choice($.do_block, prec(2, $._statement)))
+        )
       ),
 
     data_source_definition: ($) =>
@@ -1380,8 +1506,7 @@ module.exports = grammar({
     variable: ($) => choice(field("name", $.identifier), $.assignment),
     var_statement: ($) =>
       seq(
-        // FIXME: hack to avoid breaking assignments where identifier begins with var
-        kw("VAR "),
+        alias($._var_keyword, "VAR"),
         optional(
           choice($.scope_tuning, $.access_tuning, $.serialization_tuning)
         ),
@@ -1657,7 +1782,8 @@ module.exports = grammar({
 
         $.variable_assignment,
         $.do_block,
-        $.preprocessor_directive
+        $.preprocessor_directive,
+        $.include
       )
   }
 });
