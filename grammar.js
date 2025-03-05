@@ -91,14 +91,12 @@ module.exports = grammar({
     string_literal: ($) => seq($._escaped_string, optional(seq(":", $.string_literal_attribute))),
 
     string_literal_attribute: ($) =>
-      repeat1(
-        choice(
-          seq(kw("R"), $._integer_literal),
-          seq(kw("L"), $._integer_literal),
-          seq(kw("C"), $._integer_literal),
-          seq(kw("T"), $._integer_literal),
-          kw("U")
-        )
+      choice(
+        seq(kw("R"), $._integer_literal),
+        seq(kw("L"), $._integer_literal),
+        seq(kw("C"), $._integer_literal),
+        seq(kw("T"), $._integer_literal),
+        kw("U")
       ),
 
     date_literal: ($) => /\d{1,2}\/\d{1,2}\/\d{4}|\d{2}/,
