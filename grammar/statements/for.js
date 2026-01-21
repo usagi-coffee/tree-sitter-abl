@@ -29,6 +29,9 @@ module.exports = ({ kw, tkw }) => ({
   _for_record_option: ($) =>
     choice(
       alias($.__for_no_lock, $.no_lock),
+      alias($.__for_exclusive_lock, $.exclusive_lock),
+      alias($.__for_share_lock, $.share_lock),
+      alias($.__for_no_prefetch, $.no_prefetch),
       alias($.__for_by_clause, $.by_clause),
       alias($.__for_use_index, $.use_index),
       alias($.__for_break_by, $.break_by),
@@ -41,7 +44,10 @@ module.exports = ({ kw, tkw }) => ({
   __for_where_clause: ($) => seq(kw("WHERE"), $._expression),
   __for_of_clause: ($) => seq(kw("OF"), $.__for_record_name),
   __for_record_name: ($) => choice($.identifier, $.qualified_name),
-  __for_no_lock: ($) => token(/NO-LOCK/i),
+  __for_no_lock: ($) => tkw("NO-LOCK"),
+  __for_exclusive_lock: ($) => tkw("EXCLUSIVE-LOCK"),
+  __for_share_lock: ($) => tkw("SHARE-LOCK"),
+  __for_no_prefetch: ($) => tkw("NO-PREFETCH"),
   __for_by_clause: ($) =>
     prec.right(
       seq(

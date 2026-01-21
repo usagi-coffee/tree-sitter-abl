@@ -5043,6 +5043,11 @@
     }
   },
   {
+    "type": "exclusive_lock",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "export_statement",
     "named": true,
     "fields": {},
@@ -5775,11 +5780,23 @@
           "named": true
         },
         {
+          "type": "exclusive_lock",
+          "named": true
+        },
+        {
           "type": "no_lock",
           "named": true
         },
         {
+          "type": "no_prefetch",
+          "named": true
+        },
+        {
           "type": "of_clause",
+          "named": true
+        },
+        {
+          "type": "share_lock",
           "named": true
         },
         {
@@ -9166,6 +9183,11 @@
   },
   {
     "type": "no_lock",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "no_prefetch",
     "named": true,
     "fields": {}
   },
@@ -13234,6 +13256,11 @@
     }
   },
   {
+    "type": "share_lock",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "shared_variable_scope",
     "named": true,
     "fields": {}
@@ -16017,6 +16044,10 @@
     "named": false
   },
   {
+    "type": "EXCLUSIVE-LOCK",
+    "named": false
+  },
+  {
     "type": "EXPORT",
     "named": false
   },
@@ -16269,6 +16300,14 @@
     "named": false
   },
   {
+    "type": "NO-LOCK",
+    "named": false
+  },
+  {
+    "type": "NO-PREFETCH",
+    "named": false
+  },
+  {
     "type": "NON-SERIALIZABLE",
     "named": false
   },
@@ -16438,6 +16477,10 @@
   },
   {
     "type": "SET",
+    "named": false
+  },
+  {
+    "type": "SHARE-LOCK",
     "named": false
   },
   {
@@ -16726,10 +16769,6 @@
     "named": true
   },
   {
-    "type": "exclusive_lock",
-    "named": true
-  },
-  {
     "type": "file_name",
     "named": true
   },
@@ -16744,10 +16783,6 @@
   },
   {
     "type": "line_comment",
-    "named": true
-  },
-  {
-    "type": "no_prefetch",
     "named": true
   },
   {

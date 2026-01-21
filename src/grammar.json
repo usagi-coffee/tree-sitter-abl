@@ -10675,6 +10675,33 @@
           "type": "ALIAS",
           "content": {
             "type": "SYMBOL",
+            "name": "__for_exclusive_lock"
+          },
+          "named": true,
+          "value": "exclusive_lock"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "__for_share_lock"
+          },
+          "named": true,
+          "value": "share_lock"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "__for_no_prefetch"
+          },
+          "named": true,
+          "value": "no_prefetch"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
             "name": "__for_by_clause"
           },
           "named": true,
@@ -10825,12 +10852,56 @@
       ]
     },
     "__for_no_lock": {
-      "type": "TOKEN",
+      "type": "ALIAS",
       "content": {
-        "type": "PATTERN",
-        "value": "NO-LOCK",
-        "flags": "i"
-      }
+        "type": "TOKEN",
+        "content": {
+          "type": "PATTERN",
+          "value": "NO-LOCK",
+          "flags": "i"
+        }
+      },
+      "named": false,
+      "value": "NO-LOCK"
+    },
+    "__for_exclusive_lock": {
+      "type": "ALIAS",
+      "content": {
+        "type": "TOKEN",
+        "content": {
+          "type": "PATTERN",
+          "value": "EXCLUSIVE-LOCK",
+          "flags": "i"
+        }
+      },
+      "named": false,
+      "value": "EXCLUSIVE-LOCK"
+    },
+    "__for_share_lock": {
+      "type": "ALIAS",
+      "content": {
+        "type": "TOKEN",
+        "content": {
+          "type": "PATTERN",
+          "value": "SHARE-LOCK",
+          "flags": "i"
+        }
+      },
+      "named": false,
+      "value": "SHARE-LOCK"
+    },
+    "__for_no_prefetch": {
+      "type": "ALIAS",
+      "content": {
+        "type": "TOKEN",
+        "content": {
+          "type": "PATTERN",
+          "value": "NO-PREFETCH",
+          "flags": "i"
+        }
+      },
+      "named": false,
+      "value": "NO-PREFETCH"
     },
     "__for_by_clause": {
       "type": "PREC_RIGHT",

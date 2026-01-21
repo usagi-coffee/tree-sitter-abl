@@ -30,6 +30,14 @@ FOR EACH Customer ON ENDKEY UNDO, RETRY:
   DISPLAY Customer.Name.
 END.
 
+FOR EACH ld_det WHERE ld_domain = "ZMD" AND ld_site = zmk_zaklad AND ld_loc = zmk_magazyn EXCLUSIVE-LOCK:
+  DISPLAY ld_det.ld_domain.
+END.
+
+FOR EACH share_lock_rec SHARE-LOCK NO-PREFETCH:
+  DISPLAY share_lock_rec.share_id.
+END.
+
 --------------------------------------------------------------------------------
 
 (source_file
@@ -130,6 +138,39 @@ END.
         table: (identifier)))
     (on_endkey_clause
       (undo_phrase))
+    (body
+      (display_statement
+        (qualified_name
+          left: (identifier)
+          right: (identifier)))))
+  (for_each_statement
+    (for_record_list
+      (for_record
+        table: (identifier)
+        (where_clause
+          (binary_expression
+            (binary_expression
+              (binary_expression
+                (identifier)
+                (string_literal))
+              (binary_expression
+                (identifier)
+                (identifier)))
+            (binary_expression
+              (identifier)
+              (identifier))))
+        (exclusive_lock)))
+    (body
+      (display_statement
+        (qualified_name
+          left: (identifier)
+          right: (identifier)))))
+  (for_each_statement
+    (for_record_list
+      (for_record
+        table: (identifier)
+        (share_lock)
+        (no_prefetch)))
     (body
       (display_statement
         (qualified_name
