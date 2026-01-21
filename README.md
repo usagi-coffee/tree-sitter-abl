@@ -4,11 +4,29 @@
 
 OpenEdge Advanced Business Language (ABL) grammar for tree-sitter.
 
+To see the syntax tree outputs see `test/corpus`.
+
 ## Usage
 
-For grammar usage in your project, see the tree-sitter documentation on how to use grammar parsers because you can use tree-sitter parsers using [node](https://github.com/tree-sitter/node-tree-sitter)/[rust](https://github.com/tree-sitter/tree-sitter/tree/master/lib/binding_rust)/[wasm](https://github.com/tree-sitter/tree-sitter/tree/master/lib/binding_web) bindings.
+### Node
 
-To see syntax tree output see `test/corpus`.
+```bash
+npm install @usagi-coffee/tree-sitter-abl
+```
+
+### WASM
+
+Prebuilt WASM binary can be found in the NPM package or build yourself with `tree-sitter build -w`.
+
+```
+// Getting wasm binary from the npm package
+const fs = require('node:fs');
+const mod = fs.readFileSync('node_modules/@usagi-coffee/tree-sitter-abl/tree-sitter-abl.wasm');
+```
+
+### Shared library (.so)
+
+Prebuilt shared library can be found in NPM package or in releases on github or build yourself with `tree-sitter build`.
 
 ## License
 
