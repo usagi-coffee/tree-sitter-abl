@@ -86,7 +86,7 @@ END CLASS.
       (var_decl
         name: (identifier)))
     (annotation_statement
-      name: (identifier))
+      name: (annotation_name))
     (method_definition
       name: (identifier)
       (method_parameter_list)

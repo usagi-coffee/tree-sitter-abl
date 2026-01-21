@@ -1,0 +1,31 @@
+================================================================================
+ANNOTATION
+================================================================================
+
+@My-Annotation.
+@MyAnnotation(attribute="value",other-attr="two").
+@_private(attr="x", attr2="y").
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (annotation_statement
+    name: (annotation_name))
+  (annotation_statement
+    name: (annotation_name)
+    (annotation_attribute_list
+      (annotation_attribute
+        name: (annotation_name)
+        value: (string_literal))
+      (annotation_attribute
+        name: (annotation_name)
+        value: (string_literal))))
+  (annotation_statement
+    name: (annotation_name)
+    (annotation_attribute_list
+      (annotation_attribute
+        name: (annotation_name)
+        value: (string_literal))
+      (annotation_attribute
+        name: (annotation_name)
+        value: (string_literal)))))
