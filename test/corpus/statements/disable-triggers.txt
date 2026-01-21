@@ -1,0 +1,16 @@
+================================================================================
+DISABLE TRIGGERS
+================================================================================
+
+DISABLE TRIGGERS FOR DUMP OF wo_mstr.
+DISABLE TRIGGERS FOR LOAD OF db.wo_mstr ALLOW-REPLICATION.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (disable_triggers_statement
+    table: (identifier))
+  (disable_triggers_statement
+    table: (qualified_name
+      (identifier)
+      (identifier))))

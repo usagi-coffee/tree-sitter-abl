@@ -1,0 +1,75 @@
+================================================================================
+ASSIGN
+================================================================================
+
+ASSIGN // note
+  a = 1
+  b = "x" WHEN AVAILABLE Customer
+  c = dataset BDebtorShipTo:handle
+  flag = true
+  status = IF ok THEN "Y" ELSE "N".
+
+ASSIGN amount = DECIMAL(par_amount) NO-ERROR.
+
+doWork() NO-ERROR.
+x = 1 NO-ERROR.
+PUT-STRING(workBuf, 1) = cmdValue.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (assign_statement
+    (comment
+      (line_comment))
+    (assign_pair
+      left: (identifier)
+      right: (number_literal))
+    (assign_pair
+      left: (identifier)
+      right: (string_literal)
+      (when_available_clause
+        (identifier)))
+    (assign_pair
+      left: (identifier)
+      right: (dataset_reference
+        dataset: (object_access
+          (identifier)
+          (identifier))))
+    (assign_pair
+      left: (identifier)
+      right: (boolean_literal))
+    (assign_pair
+      left: (identifier)
+      right: (conditional_expression
+        (identifier)
+        (string_literal)
+        (string_literal))))
+  (assign_statement
+    (assign_pair
+      left: (identifier)
+      right: (function_call
+        function: (identifier)
+        (argument_list
+          (argument
+            value: (identifier)))))
+    (no_error))
+  (expression_statement
+    (function_call
+      function: (identifier)
+      (argument_list))
+    (no_error))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (number_literal)
+    (no_error))
+  (assignment_statement
+    left: (function_call
+      function: (identifier)
+      (argument_list
+        (argument
+          value: (identifier))
+        (argument
+          value: (number_literal))))
+    operator: (assignment_operator)
+    right: (identifier)))

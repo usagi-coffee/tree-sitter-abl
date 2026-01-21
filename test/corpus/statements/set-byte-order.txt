@@ -1,0 +1,16 @@
+================================================================================
+SET-BYTE-ORDER
+================================================================================
+
+SET-BYTE-ORDER(bufData) = BIG-ENDIAN.
+SET-BYTE-ORDER(bufData) = 2.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (set_byte_order_statement
+    buffer: (identifier)
+    order: (identifier))
+  (set_byte_order_statement
+    buffer: (identifier)
+    order: (number_literal)))

@@ -1,0 +1,30 @@
+================================================================================
+FUNCTION DEFINITION
+================================================================================
+
+DEFINE FUNCTION doThing RETURNS INTEGER.
+
+FUNCTION computeTotal RETURNS DECIMAL (INPUT qty AS INTEGER, INPUT price AS DECIMAL).
+  RETURN qty * price.
+END FUNCTION.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (function_forward_definition
+    name: (identifier)
+    type: (identifier))
+  (function_definition
+    name: (identifier)
+    type: (identifier)
+    (function_parameter_list
+      (function_parameter
+        name: (identifier)
+        type: (identifier))
+      (function_parameter
+        name: (identifier)
+        type: (identifier)))
+    (return_statement
+      (binary_expression
+        (identifier)
+        (identifier)))))

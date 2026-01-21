@@ -1,0 +1,17 @@
+================================================================================
+PAUSE
+================================================================================
+
+PAUSE.
+PAUSE 1 BEFORE-HIDE MESSAGE "Wait".
+PAUSE NO-MESSAGE IN WINDOW hWin.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (pause_statement)
+  (pause_statement
+    duration: (number_literal)
+    message: (string_literal))
+  (pause_statement
+    window: (identifier)))

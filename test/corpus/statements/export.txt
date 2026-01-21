@@ -1,0 +1,26 @@
+================================================================================
+EXPORT
+================================================================================
+
+EXPORT a b c.
+EXPORT DELIMITER "," Customer EXCEPT CustNum CustName NO-LOBS.
+EXPORT STREAM-HANDLE hOut memptrBuf.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (export_statement
+    (identifier)
+    (identifier)
+    (identifier))
+  (export_statement
+    (delimiter_clause
+      (string_literal))
+    (identifier)
+    (identifier)
+    (identifier)
+    (no_lobs))
+  (export_statement
+    (stream_handle_clause
+      handle: (identifier))
+    (identifier)))

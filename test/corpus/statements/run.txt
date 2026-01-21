@@ -1,0 +1,29 @@
+================================================================================
+RUN
+================================================================================
+
+RUN proxy/starttransaction.p (OUTPUT DATASET tFcMessages, OUTPUT bFinApiError).
+RUN someproc.p (INPUT-OUTPUT DATASET dsOrder, INPUT DATASET dsOther:HANDLE).
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (run_statement
+    procedure: (procedure_name)
+    (argument_list
+      (argument
+        value: (dataset_reference
+          dataset: (identifier)))
+      (argument
+        value: (identifier))))
+  (run_statement
+    procedure: (procedure_name)
+    (argument_list
+      (argument
+        value: (dataset_reference
+          dataset: (identifier)))
+      (argument
+        value: (dataset_reference
+          dataset: (object_access
+            (identifier)
+            (identifier)))))))

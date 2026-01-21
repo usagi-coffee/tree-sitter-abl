@@ -1,0 +1,21 @@
+================================================================================
+INPUT THROUGH
+================================================================================
+
+INPUT THROUGH "progname" arg1 VALUE(arg2) NO-ECHO NO-MAP UNBUFFERED CONVERT TARGET "utf-8" SOURCE "ibm850".
+INPUT STREAM sIn THROUGH VALUE(cmd) ECHO.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (input_through_statement
+    program: (string_literal)
+    (identifier)
+    (identifier)
+    (convert_clause
+      target: (string_literal)
+      source: (string_literal)))
+  (input_through_statement
+    (stream_clause
+      name: (identifier))
+    (identifier)))

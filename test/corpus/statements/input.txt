@@ -1,0 +1,30 @@
+================================================================================
+INPUT
+================================================================================
+
+INPUT FROM VALUE(inPath).
+INPUT FROM TERMINAL NO-CONVERT.
+INPUT STREAM inStream FROM OS-DIR("dir") NO-ATTR-LIST LOB-DIR {&LOB} BINARY NO-ECHO MAP termcap UNBUFFERED CONVERT TARGET "utf-8" SOURCE "ibm850".
+INPUT STREAM-HANDLE hStream CLOSE.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (input_statement
+    (identifier))
+  (input_statement
+    (convert_clause))
+  (input_statement
+    (stream_clause
+      name: (identifier))
+    directory: (string_literal)
+    (lob_dir_clause
+      (constant
+        (identifier)))
+    map: (identifier)
+    (convert_clause
+      target: (string_literal)
+      source: (string_literal)))
+  (input_statement
+    (stream_handle_clause
+      handle: (identifier))))

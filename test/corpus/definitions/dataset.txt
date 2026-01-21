@@ -1,0 +1,17 @@
+================================================================================
+DATASET DEFINITION
+================================================================================
+
+DEFINE DATASET dsCustomer FOR ttCustomer.
+DEF DATASET dsAudit FOR ttHeader, ttLine.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (dataset_definition
+    name: (identifier)
+    table: (identifier))
+  (dataset_definition
+    name: (identifier)
+    table: (identifier)
+    table: (identifier)))

@@ -1,0 +1,19 @@
+================================================================================
+COPY-LOB
+================================================================================
+
+COPY-LOB FROM FILE outPath TO targetPtr.
+COPY-LOB FROM FILE inPath TO targetPtr CONVERT SOURCE CODEPAGE "1250" TARGET CODEPAGE "UTF-8".
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (copy_lob_statement
+    (identifier)
+    (identifier))
+  (copy_lob_statement
+    (identifier)
+    (identifier)
+    (convert_clause
+      (string_literal)
+      (string_literal))))

@@ -1,0 +1,39 @@
+{
+  "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/config.schema.json",
+  "grammars": [
+    {
+      "name": "abl",
+      "camelcase": "abl",
+      "title": "abl",
+      "scope": "source.abl",
+      "file-types": ["cls", "p"],
+      "injection-regex": "^abl$",
+      "class-name": "TreeSitterAbl"
+    }
+  ],
+  "metadata": {
+    "version": "0.0.47",
+    "license": "MIT",
+    "description": "ABL grammar for tree-sitter",
+    "authors": [
+      {
+        "name": "Kamil Jakubus"
+      }
+    ],
+    "links": {
+      "repository": "https://github.com/usagi-coffee/tree-sitter-abl"
+    }
+  },
+  "bindings": {
+    "c": true,
+    "go": true,
+    "node": true,
+    "python": true,
+    "rust": true,
+    "swift": true,
+    "zig": false
+  },
+  "tree-sitter": {
+    "highlights": "queries/highlights.scm"
+  }
+}

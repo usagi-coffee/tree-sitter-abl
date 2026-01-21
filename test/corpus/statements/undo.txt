@@ -1,0 +1,17 @@
+================================================================================
+UNDO
+================================================================================
+
+UNDO, THROW NEW Error("boom").
+UNDO, LEAVE.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (undo_statement
+    value: (new_expression
+      type: (identifier)
+      (argument_list
+        (argument
+          value: (string_literal)))))
+  (undo_statement))

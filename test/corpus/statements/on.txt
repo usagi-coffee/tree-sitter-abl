@@ -1,0 +1,30 @@
+================================================================================
+ON
+================================================================================
+
+ON WRITE OF Customer NEW new-cust OLD old-cust DO:
+  a += 3.
+END.
+
+ON ASSIGN OF Customer.Name OLD VALUE old-name REVERT.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (on_statement
+    object: (identifier)
+    (referencing_phrase
+      new_record: (identifier)
+      old_record: (identifier))
+    (do_block
+      (body
+        (assignment_statement
+          left: (identifier)
+          operator: (assignment_operator)
+          right: (number_literal)))))
+  (on_statement
+    object: (qualified_name
+      (identifier)
+      (identifier))
+    (referencing_phrase
+      old_field: (identifier))))

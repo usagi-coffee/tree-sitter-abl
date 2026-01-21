@@ -1,0 +1,159 @@
+================================================================================
+CLASS
+================================================================================
+
+CLASS FunkyWorld.Util.KittyLogHelper:
+  VAR PRIVATE INT64 MAX_RECORDS = 5.
+  VAR PROTECTED INT64 DEFAULT_SIZE = 20.
+  VAR PUBLIC CHAR SomeName.
+
+  @Setup.
+  METHOD PUBLIC VOID setup():
+    oObject = NEW Object().
+  END METHOD.
+
+  DEFINE PUBLIC PROPERTY m_Total AS INTEGER NO-UNDO
+    GET.
+    SET.
+
+  DEFINE PUBLIC PROPERTY Totals AS INTEGER NO-UNDO
+    GET:
+      RETURN m_Total.
+    END GET.
+    SET (newValue AS INTEGER):
+      m_Total = newValue.
+    END SET.
+
+  DEFINE PRIVATE PROPERTY MY_NUMBER AS CHAR NO-UNDO INIT "9999"
+    GET.
+    SET.
+
+  METHOD PUBLIC VOID csvFileToTempTable(
+      INPUT pcFilePath AS CHAR,
+      OUTPUT TABLE-HANDLE phOutputTable):
+    RETURN.
+  END METHOD.
+END CLASS.
+
+CLASS DecoratedMotorcycle:
+  CONSTRUCTOR PUBLIC DecoratedMotorcycle():
+    MESSAGE "moto".
+  END METHOD.
+  DESTRUCTOR PUBLIC DecoratedMotorcycle():
+    MESSAGE "bye".
+  END DESTRUCTOR.
+END CLASS.
+
+INTERFACE Common.Message.IMessage:
+  METHOD PUBLIC IMessage SetLanguage (INPUT poLanguage AS Language).
+END INTERFACE.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (class_definition
+    name: (qualified_name
+      (identifier)
+      (identifier)
+      (identifier))
+    (var_statement
+      (access_modifier)
+      type: (identifier)
+      (var_decl
+        name: (identifier)
+        (var_init
+          (number_literal))))
+    (var_statement
+      (access_modifier)
+      type: (identifier)
+      (var_decl
+        name: (identifier)
+        (var_init
+          (number_literal))))
+    (var_statement
+      (access_modifier)
+      type: (identifier)
+      (var_decl
+        name: (identifier)))
+    (annotation_statement
+      name: (identifier))
+    (method_definition
+      name: (identifier)
+      (method_parameter_list)
+      (method_body
+        (assignment_statement
+          left: (identifier)
+          operator: (assignment_operator)
+          right: (new_expression
+            type: (identifier)
+            (argument_list)))))
+    (property_definition
+      (access_modifier)
+      name: (identifier)
+      type: (identifier)
+      (no_undo)
+      (property_accessor)
+      (property_accessor))
+    (property_definition
+      (access_modifier)
+      name: (identifier)
+      type: (identifier)
+      (no_undo)
+      (property_accessor
+        (return_statement
+          (identifier)))
+      (property_accessor
+        (property_set_parameter_list
+          (property_set_parameter
+            name: (identifier)
+            type: (identifier)))
+        (assignment_statement
+          left: (identifier)
+          operator: (assignment_operator)
+          right: (identifier))))
+    (property_definition
+      (access_modifier)
+      name: (identifier)
+      type: (identifier)
+      (no_undo)
+      (initial_option
+        (string_literal))
+      (property_accessor)
+      (property_accessor))
+    (method_definition
+      name: (identifier)
+      (method_parameter_list
+        (method_parameter
+          name: (identifier)
+          type: (identifier))
+        (method_parameter
+          table_handle: (identifier)))
+      (method_body
+        (return_statement))))
+  (class_definition
+    name: (identifier)
+    (constructor_definition
+      name: (identifier)
+      (method_parameter_list)
+      (constructor_body
+        (message_statement
+          (string_literal))))
+    (destructor_definition
+      name: (identifier)
+      (destructor_parameter_list)
+      (destructor_body
+        (message_statement
+          (string_literal)))))
+  (interface_definition
+    name: (qualified_name
+      (identifier)
+      (identifier)
+      (identifier))
+    (interface_body_item
+      (method_definition
+        type: (identifier)
+        name: (identifier)
+        (method_parameter_list
+          (method_parameter
+            name: (identifier)
+            type: (identifier)))))))

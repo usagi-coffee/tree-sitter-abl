@@ -1,0 +1,15 @@
+================================================================================
+OS-DELETE
+================================================================================
+
+OS-DELETE VALUE(filePath).
+OS-DELETE tmpFile tmpDir RECURSIVE.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (os_delete_statement
+    (identifier))
+  (os_delete_statement
+    (identifier)
+    (identifier)))

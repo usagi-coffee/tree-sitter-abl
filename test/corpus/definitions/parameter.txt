@@ -1,0 +1,43 @@
+================================================================================
+PARAMETER DEFINITION
+================================================================================
+
+DEFINE INPUT PARAMETER par_adres AS CHARACTER.
+DEFINE INPUT PARAMETER par_opis AS CHARACTER INITIAL ?.
+DEFINE OUTPUT PARAMETER outVal AS INTEGER NO-UNDO.
+DEFINE INPUT-OUTPUT PARAMETER TABLE-HANDLE hNode.
+DEFINE OUTPUT PARAMETER TABLE-HANDLE hData.
+DEFINE INPUT PARAMETER DATASET FOR dsAudPolicy.
+DEFINE INPUT PARAMETER DATASET-HANDLE hDset.
+DEFINE PARAMETER BUFFER p_Buf FOR _Field.
+DEFINE PARAMETER BUFFER pTemp FOR TEMP-TABLE ttAudit PRESELECT.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (parameter_definition
+    name: (identifier)
+    type: (identifier))
+  (parameter_definition
+    name: (identifier)
+    type: (identifier)
+    (initial_option
+      (null_literal)))
+  (parameter_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (parameter_definition
+    table_handle: (identifier))
+  (parameter_definition
+    table_handle: (identifier))
+  (parameter_definition
+    dataset: (identifier))
+  (parameter_definition
+    dataset_handle: (identifier))
+  (parameter_definition
+    name: (identifier)
+    table: (identifier))
+  (parameter_definition
+    name: (identifier)
+    table: (identifier)))

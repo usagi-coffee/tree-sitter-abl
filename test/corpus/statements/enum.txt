@@ -1,0 +1,86 @@
+================================================================================
+ENUM statement
+================================================================================
+
+ENUM Weather:
+  define ENUM Rainy
+              Default = Sunny
+              Cloudy
+              Snowy
+              Apocalyptic.
+END ENUM.
+
+ENUM Permission FLAGS:
+    DEFINE ENUM None = 0
+                Read
+                Write
+                Update = Write
+                ReadWrite = Read,Write
+                Create
+                Delete
+                Execute.
+END ENUM.
+
+ENUM Direction:
+    DEFINE ENUM North
+                South
+                East
+                West.
+END ENUM.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (enum_statement
+    (identifier)
+    (enum_body
+      (enum_member
+        (identifier))
+      (enum_member
+        (identifier)
+        (enum_member_value
+          (identifier)))
+      (enum_member
+        (identifier))
+      (enum_member
+        (identifier))
+      (enum_member
+        (identifier))))
+  (enum_statement
+    (identifier)
+    (enum_body
+      (enum_member
+        (identifier)
+        (enum_member_value
+          (number_literal)))
+      (enum_member
+        (identifier))
+      (enum_member
+        (identifier))
+      (enum_member
+        (identifier)
+        (enum_member_value
+          (identifier)))
+      (enum_member
+        (identifier)
+        (enum_member_value
+          (enum_member_value_list
+            (identifier)
+            (identifier))))
+      (enum_member
+        (identifier))
+      (enum_member
+        (identifier))
+      (enum_member
+        (identifier))))
+  (enum_statement
+    (identifier)
+    (enum_body
+      (enum_member
+        (identifier))
+      (enum_member
+        (identifier))
+      (enum_member
+        (identifier))
+      (enum_member
+        (identifier)))))

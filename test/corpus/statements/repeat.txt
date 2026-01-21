@@ -1,0 +1,61 @@
+================================================================================
+REPEAT
+================================================================================
+
+REPEAT:
+  DISPLAY x.
+END.
+
+REPEAT WHILE x < 5:
+  x = x + 1.
+END.
+
+REPEAT UNTIL done:
+  DISPLAY done.
+END.
+
+main: REPEAT ON STOP UNDO, RETURN ERROR NEW Progress.Lang.AppError("x", 1) ON ERROR UNDO, THROW:
+  LEAVE.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (repeat_statement
+    (body
+      (display_statement
+        (identifier))))
+  (repeat_statement
+    (binary_expression
+      (identifier)
+      (number_literal))
+    (body
+      (assignment_statement
+        left: (identifier)
+        operator: (assignment_operator)
+        right: (binary_expression
+          (identifier)
+          (number_literal)))))
+  (repeat_statement
+    (identifier)
+    (body
+      (display_statement
+        (identifier))))
+  (repeat_statement
+    label: (identifier)
+    (on_stop_clause
+      (undo_return_error
+        (new_expression
+          type: (qualified_name
+            (identifier)
+            (identifier)
+            (identifier))
+          (argument_list
+            (argument
+              value: (string_literal))
+            (argument
+              value: (number_literal))))))
+    (on_error_clause
+      (undo_throw_phrase))
+    (body
+      (leave_statement))))

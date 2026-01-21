@@ -1,0 +1,12 @@
+================================================================================
+USING
+================================================================================
+
+USING Progress.Collections.*.
+USING Domains.Vacation.Vacation, Progress.Json.ObjectModel.JsonObject.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (using_statement)
+  (using_statement))

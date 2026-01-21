@@ -1,0 +1,28 @@
+================================================================================
+PROCEDURE DEFINITION
+================================================================================
+
+PROCEDURE doSomething:
+  DEFINE INPUT PARAMETER pVal AS INTEGER.
+  DISPLAY pVal.
+END PROCEDURE.
+
+PROCEDURE emptyProc:
+END PROCEDURE.
+
+PROCEDURE forwardProc.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (procedure_definition
+    name: (identifier)
+    (parameter_definition
+      name: (identifier)
+      type: (identifier))
+    (display_statement
+      (identifier)))
+  (procedure_definition
+    name: (identifier))
+  (procedure_forward_definition
+    name: (identifier)))

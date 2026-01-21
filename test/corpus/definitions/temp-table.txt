@@ -1,0 +1,86 @@
+================================================================================
+TEMP-TABLE DEFINITION
+================================================================================
+
+DEFINE TEMP-TABLE tt_ship NO-UNDO
+  NAMESPACE-URI "urn:x" NAMESPACE-PREFIX "p"
+  XML-NODE-NAME "node" SERIALIZE-NAME "ser"
+  REFERENCE-ONLY
+  LIKE base_tbl VALIDATE USE-INDEX idx_ship AS PRIMARY
+  RCODE-INFORMATION
+  BEFORE-TABLE bt_ship
+  FIELD ship_code AS CHARACTER FORMAT "x(20)" LABEL "Code" SERIALIZE-NAME "ShipCode"
+  FIELD ship_desc AS CHARACTER
+  FIELD ship_type LIKE ship_code VALIDATE
+  FIELD ship_qty AS INTEGER INITIAL 5
+  FIELD ship_flag AS LOGICAL INITIAL TRUE
+  INDEX idx_ship AS UNIQUE PRIMARY ship_code DESCENDING ship_qty.
+
+DEFINE WORK-TABLE wt_items NO-UNDO
+  FIELD item_code AS CHARACTER
+  FIELD item_qty AS INTEGER.
+
+DEFINE TEMP-TABLE tt_like LIKE base_tbl
+  FIELD extra_col AS DECIMAL.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (temp_table_definition
+    name: (identifier)
+    (no_undo)
+    namespace_uri: (string_literal)
+    namespace_prefix: (string_literal)
+    node: (string_literal)
+    serialize_name: (string_literal)
+    (like_clause
+      like: (identifier)
+      index: (identifier))
+    (rcode_information)
+    (before_table_clause
+      before: (identifier))
+    (temp_table_field
+      name: (identifier)
+      type: (identifier)
+      (field_option
+        (string_literal))
+      (field_option
+        (string_literal))
+      (field_option
+        (string_literal)))
+    (temp_table_field
+      name: (identifier)
+      type: (identifier))
+    (temp_table_field
+      name: (identifier)
+      type: (identifier))
+    (temp_table_field
+      name: (identifier)
+      type: (identifier)
+      (field_option
+        (number_literal)))
+    (temp_table_field
+      name: (identifier)
+      type: (identifier)
+      (field_option
+        (boolean_literal)))
+    (temp_table_index
+      name: (identifier)
+      field: (identifier)
+      field: (identifier)))
+  (work_table_definition
+    name: (identifier)
+    (no_undo)
+    (work_table_field
+      name: (identifier)
+      type: (identifier))
+    (work_table_field
+      name: (identifier)
+      type: (identifier)))
+  (temp_table_definition
+    name: (identifier)
+    (like_clause
+      like: (identifier))
+    (temp_table_field
+      name: (identifier)
+      type: (identifier))))

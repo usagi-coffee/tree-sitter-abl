@@ -1,0 +1,34 @@
+================================================================================
+PUT
+================================================================================
+
+PUT UNFORMATTED "# " tFcMessages.tcFcMessage SKIP.
+PUT STREAM outStream "ok" FORMAT "x(4)" AT 10 SPACE(2) SKIP(1).
+PUT CONTROL CHR(27) "c".
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (put_statement
+    value: (string_literal)
+    value: (qualified_name
+      (identifier)
+      (identifier))
+    (skip))
+  (put_statement
+    (stream_clause
+      name: (identifier))
+    value: (string_literal)
+    format: (string_literal)
+    position: (number_literal)
+    (space
+      count: (number_literal))
+    (skip
+      count: (number_literal)))
+  (put_statement
+    control: (function_call
+      function: (identifier)
+      (argument_list
+        (argument
+          value: (number_literal))))
+    control: (string_literal)))

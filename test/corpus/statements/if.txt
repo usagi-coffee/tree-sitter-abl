@@ -1,0 +1,159 @@
+================================================================================
+IF
+================================================================================
+
+IF par_kontakt = '' THEN DO:
+  UNDO, THROW NEW Progress.Lang.AppError("msg", 400).
+END.
+ELSE DO:
+  ASSIGN par_kontakt = "x".
+END.
+
+IF NOT AVAIL(Debtor) THEN UNDO, THROW NEW Progress.Lang.AppError("missing", 400).
+
+IF NOT CAN-FIND(FIRST Contact WHERE Contact.Address_ID = Address.Address_ID) THEN DO:
+  DISPLAY Contact.ContactName.
+END.
+
+IF CAN-FIND(LAST Activity WHERE Activity.Activity_ID = 10) THEN DO:
+  DISPLAY Activity.Activity_ID.
+END.
+
+IF CAN-FIND(FIRST LogTable WHERE LogTable.Log_ID = 10 USE-INDEX log_idx) THEN DO:
+  DISPLAY LogTable.Log_ID.
+END.
+
+IF hasFlag THEN DO:
+  DISPLAY hasFlag.
+END.
+/* bridge */
+ELSE IF otherFlag THEN DISPLAY otherFlag.
+
+IF skip THEN .
+
+IF AVAILABLE Customer THEN .
+IF AVAIL (Customer) THEN .
+IF LOCKED bufOrder THEN RETURN TRUE.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (if_statement
+    (binary_expression
+      (identifier)
+      (string_literal))
+    then: (do_block
+      (body
+        (undo_statement
+          value: (new_expression
+            type: (qualified_name
+              (identifier)
+              (identifier)
+              (identifier))
+            (argument_list
+              (argument
+                value: (string_literal))
+              (argument
+                value: (number_literal)))))))
+    else: (do_block
+      (body
+        (assign_statement
+          (assign_pair
+            left: (identifier)
+            right: (string_literal))))))
+  (if_statement
+    (unary_expression
+      (available_expression
+        record: (identifier)))
+    then: (undo_statement
+      value: (new_expression
+        type: (qualified_name
+          (identifier)
+          (identifier)
+          (identifier))
+        (argument_list
+          (argument
+            value: (string_literal))
+          (argument
+            value: (number_literal))))))
+  (if_statement
+    (unary_expression
+      (can_find_expression
+        (record_query
+          table: (identifier)
+          (where_clause
+            (binary_expression
+              (qualified_name
+                (identifier)
+                (identifier))
+              (qualified_name
+                (identifier)
+                (identifier)))))))
+    then: (do_block
+      (body
+        (display_statement
+          (qualified_name
+            (identifier)
+            (identifier))))))
+  (if_statement
+    (can_find_expression
+      (record_query
+        table: (identifier)
+        (where_clause
+          (binary_expression
+            (qualified_name
+              (identifier)
+              (identifier))
+            (number_literal)))))
+    then: (do_block
+      (body
+        (display_statement
+          (qualified_name
+            (identifier)
+            (identifier))))))
+  (if_statement
+    (can_find_expression
+      (record_query
+        table: (identifier)
+        (where_clause
+          (binary_expression
+            (qualified_name
+              (identifier)
+              (identifier))
+            (number_literal)))
+        (use_index
+          index: (identifier))))
+    then: (do_block
+      (body
+        (display_statement
+          (qualified_name
+            (identifier)
+            (identifier))))))
+  (if_statement
+    (identifier)
+    then: (do_block
+      (body
+        (display_statement
+          (identifier))))
+    (comment
+      (block_comment))
+    else: (if_statement
+      (identifier)
+      then: (display_statement
+        (identifier))))
+  (if_statement
+    (identifier)
+    then: (empty_statement))
+  (if_statement
+    (available_expression
+      record: (identifier))
+    then: (empty_statement))
+  (if_statement
+    (available_expression
+      record: (identifier))
+    then: (empty_statement))
+  (if_statement
+    (locked_expression
+      record: (identifier))
+    then: (return_statement
+      (boolean_literal))))

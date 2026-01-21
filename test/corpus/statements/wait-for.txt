@@ -1,0 +1,21 @@
+================================================================================
+WAIT-FOR
+================================================================================
+
+WAIT-FOR READ-RESPONSE OF hSocket PAUSE 1.
+WAIT-FOR WINDOW-CLOSE OF CURRENT-WINDOW OR READ-RESPONSE OF hSocket FOCUS hSocket PAUSE 5.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (wait_for_statement
+    events: (identifier)
+    widgets: (identifier)
+    duration: (number_literal))
+  (wait_for_statement
+    events: (identifier)
+    widgets: (identifier)
+    events: (identifier)
+    widgets: (identifier)
+    focus: (identifier)
+    duration: (number_literal)))

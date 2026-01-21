@@ -1,0 +1,1134 @@
+================================================================================
+Preprocessor Directives
+================================================================================
+
+&if DEFINED(is_Running) <> 0 &THEN
+  DEFINE VARIABLE cParm AS CHARACTER.
+&ELSE
+  DEFINE INPUT PARAMETER cParm AS CHARACTER.
+&ENDIF
+
+&Scoped-define OPEN-QUERY-DEFAULT-FRAME OPEN QUERY DEFAULT-FRAME FOR EACH ITEM ~
+      WHERE item.system_id = ipcItemSysid AND ~
+item.item = ipcItem NO-LOCK.
+&Scoped-define TABLES-IN-QUERY-DEFAULT-FRAME ITEM
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (preprocessor_directive)
+  (variable_definition
+    (identifier)
+    (identifier))
+  (preprocessor_directive)
+  (parameter_definition
+    (identifier)
+    (identifier))
+  (preprocessor_directive)
+  (preprocessor_directive)
+  (preprocessor_directive))
+
+================================================================================
+COMMENT
+================================================================================
+
+/* comment */
+// comment
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (comment
+    (block_comment))
+  (comment
+    (line_comment)))
+
+================================================================================
+COMMENT (long)
+================================================================================
+
+/********************
+ THIS
+ IS
+ MULTILINE
+ COMMENT
+********************/
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (comment
+    (block_comment)))
+
+================================================================================
+INCLUDE
+================================================================================
+
+{include_file.i arg1 &arg2="test" arg3 "NEW" &ABC=variable}
+DISPLAY {&VAR1}.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (include
+    file: (include_file_reference
+      (file_name))
+    argument: (include_argument
+      (identifier))
+    argument: (include_argument
+      (include_named_argument
+        name: (identifier)
+        value: (string_literal)))
+    argument: (include_argument
+      (identifier))
+    argument: (include_argument
+      (string_literal))
+    argument: (include_argument
+      (include_named_argument
+        name: (identifier)
+        value: (identifier))))
+  (display_statement
+    (constant
+      (identifier))))
+
+================================================================================
+VARIABLE DEFINITION statement
+================================================================================
+
+DEFINE VARIABLE full_variable AS INTEGER.
+DEFINE VAR  full_var AS INTEGER.
+
+DEF VARIABLE short_variable AS INTEGER.
+DEF VAR short_var AS INTEGER.
+
+DEFINE VARIABLE no_undo AS INTEGER NO-UNDO.
+DEFINE VARIABLE initial AS INTEGER INITIAL ?.
+
+DEFINE VARIABLE clone LIKE short_variable.
+
+DEFINE VARIABLE ojb AS Progress.Json.ObjectModel.JsonObject NO-UNDO.
+
+DEFINE VARIABLE cls AS CLASS CustomClass.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (variable_definition
+    (identifier)
+    (identifier))
+  (variable_definition
+    (identifier)
+    (identifier))
+  (variable_definition
+    (identifier)
+    (identifier))
+  (variable_definition
+    (identifier)
+    (identifier))
+  (variable_definition
+    (identifier)
+    (identifier)
+    (no_undo))
+  (variable_definition
+    (identifier)
+    (identifier)
+    (initial_option
+      (null_literal)))
+  (variable_definition
+    (identifier)
+    (identifier))
+  (variable_definition
+    (identifier)
+    (qualified_name
+      (identifier)
+      (identifier)
+      (identifier)
+      (identifier))
+    (no_undo))
+  (variable_definition
+    (identifier)
+    (identifier)))
+
+================================================================================
+VARIABLE ASSIGNMENT statement
+================================================================================
+
+DEFINE VARIABLE variable AS INTEGER.
+variable = 5.
+variable = 5.35.
+SESSION:NUMERIC-FORMAT = "european".
+
+variable += 8.
+variable -= 4.
+variable *= 2.
+variable /= 3.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (variable_definition
+    (identifier)
+    (identifier))
+  (assignment_statement
+    (identifier)
+    (assignment_operator)
+    (number_literal))
+  (assignment_statement
+    (identifier)
+    (assignment_operator)
+    (number_literal))
+  (assignment_statement
+    (object_access
+      (identifier)
+      (identifier))
+    (assignment_operator)
+    (string_literal))
+  (assignment_statement
+    (identifier)
+    (assignment_operator)
+    (number_literal))
+  (assignment_statement
+    (identifier)
+    (assignment_operator)
+    (number_literal))
+  (assignment_statement
+    (identifier)
+    (assignment_operator)
+    (number_literal))
+  (assignment_statement
+    (identifier)
+    (assignment_operator)
+    (number_literal)))
+
+================================================================================
+BINARY (simple) operators
+================================================================================
+
+x = 2 + 2.
+y = (4 * 3) / 2.
+z = 2 > 4.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (assignment_statement
+    (identifier)
+    (assignment_operator)
+    (binary_expression
+      (number_literal)
+      (number_literal)))
+  (assignment_statement
+    (identifier)
+    (assignment_operator)
+    (binary_expression
+      (parenthesized_expression
+        (binary_expression
+          (number_literal)
+          (number_literal)))
+      (number_literal)))
+  (assignment_statement
+    (identifier)
+    (assignment_operator)
+    (binary_expression
+      (number_literal)
+      (number_literal))))
+
+================================================================================
+UNARY (simple) operators
+================================================================================
+
+w = -(0).
+x = -f().
+y = -table.field.
+z = -obj:method().
+
+z = NOT y.
+y = NOT -x < -10 OR x = 10.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (assignment_statement
+    (identifier)
+    (assignment_operator)
+    (unary_expression
+      (parenthesized_expression
+        (number_literal))))
+  (assignment_statement
+    (identifier)
+    (assignment_operator)
+    (unary_expression
+      (function_call
+        (identifier)
+        (argument_list))))
+  (assignment_statement
+    (identifier)
+    (assignment_operator)
+    (unary_expression
+      (qualified_name
+        (identifier)
+        (identifier))))
+  (assignment_statement
+    (identifier)
+    (assignment_operator)
+    (unary_expression
+      (function_call
+        (object_access
+          (identifier)
+          (identifier))
+        (argument_list))))
+  (assignment_statement
+    (identifier)
+    (assignment_operator)
+    (unary_expression
+      (identifier)))
+  (assignment_statement
+    (identifier)
+    (assignment_operator)
+    (binary_expression
+      (binary_expression
+        (unary_expression
+          (unary_expression
+            (identifier)))
+        (unary_expression
+          (number_literal)))
+      (binary_expression
+        (identifier)
+        (number_literal)))))
+
+================================================================================
+UNARY/BINARY operators
+================================================================================
+
+z = NOT y > 5.
+y = NOT 2 + 2.
+z = NOT 2 + 2 = 5.
+zr = NOT 5 = 2 + 2.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (assignment_statement
+    (identifier)
+    (assignment_operator)
+    (binary_expression
+      (unary_expression
+        (identifier))
+      (number_literal)))
+  (assignment_statement
+    (identifier)
+    (assignment_operator)
+    (binary_expression
+      (unary_expression
+        (number_literal))
+      (number_literal)))
+  (assignment_statement
+    (identifier)
+    (assignment_operator)
+    (binary_expression
+      (binary_expression
+        (unary_expression
+          (number_literal))
+        (number_literal))
+      (number_literal)))
+  (assignment_statement
+    (identifier)
+    (assignment_operator)
+    (binary_expression
+      (unary_expression
+        (number_literal))
+      (binary_expression
+        (number_literal)
+        (number_literal)))))
+
+================================================================================
+Qualified name
+================================================================================
+
+DISPLAY table.field1.
+DISPLAY
+  database
+    .table
+    .field2.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (display_statement
+    (qualified_name
+      (identifier)
+      (identifier)))
+  (display_statement
+    (qualified_name
+      (identifier)
+      (identifier)
+      (identifier))))
+
+================================================================================
+BUFFER DEFINITION statement
+================================================================================
+
+DEFINE BUFFER x-table FOR table.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (buffer_definition
+    (identifier)
+    (identifier)))
+
+================================================================================
+IMAGE DEFINITION statement
+================================================================================
+
+DEFINE IMAGE myImage SIZE 5 BY 5 CONVERT-3D-COLORS.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (image_definition
+    (identifier)
+    (size_clause
+      (number_literal)
+      (number_literal))))
+
+================================================================================
+QUERY DEFINITION statement
+================================================================================
+
+DEFINE QUERY q1 FOR tr_hist FIELDS (name balance) EXCEPT (something else lol) SCROLLING.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (query_definition
+    name: (identifier)
+    (query_table_list
+      table: (identifier)
+      (field_list
+        (identifier)
+        (identifier))
+      (field_list
+        (identifier)
+        (identifier)
+        (identifier)))))
+
+================================================================================
+IF statement
+================================================================================
+
+IF x > 10 THEN DO:
+  x = 10.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (if_statement
+    (binary_expression
+      (identifier)
+      (number_literal))
+    (do_block
+      (body
+        (assignment_statement
+          (identifier)
+          (assignment_operator)
+          (number_literal))))))
+
+================================================================================
+IF ELSE DO statement
+================================================================================
+
+IF x > 10 THEN DO:
+  x = 10.
+END.
+ELSE DO:
+  x = x.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (if_statement
+    (binary_expression
+      (identifier)
+      (number_literal))
+    (do_block
+      (body
+        (assignment_statement
+          (identifier)
+          (assignment_operator)
+          (number_literal))))
+    (do_block
+      (body
+        (assignment_statement
+          (identifier)
+          (assignment_operator)
+          (identifier))))))
+
+================================================================================
+IF ELSE IF statement
+================================================================================
+
+IF x > 10 THEN DO:
+  x = 10.
+END.
+ELSE IF x < 10 THEN DO:
+  x = x.
+END.
+ELSE DO:
+  x = x.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (if_statement
+    (binary_expression
+      (identifier)
+      (number_literal))
+    (do_block
+      (body
+        (assignment_statement
+          (identifier)
+          (assignment_operator)
+          (number_literal))))
+    (if_statement
+      (binary_expression
+        (identifier)
+        (number_literal))
+      (do_block
+        (body
+          (assignment_statement
+            (identifier)
+            (assignment_operator)
+            (identifier))))
+      (do_block
+        (body
+          (assignment_statement
+            (identifier)
+            (assignment_operator)
+            (identifier)))))))
+
+================================================================================
+IF ELSE IF statement with line break before DOs
+================================================================================
+
+If x > 10 Then
+Do:
+  x = 10.
+End.
+Else If x < 10 Then
+Do:
+  x = x.
+End.
+Else
+Do:
+  x = x.
+End.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (if_statement
+    (binary_expression
+      (identifier)
+      (number_literal))
+    (do_block
+      (body
+        (assignment_statement
+          (identifier)
+          (assignment_operator)
+          (number_literal))))
+    (if_statement
+      (binary_expression
+        (identifier)
+        (number_literal))
+      (do_block
+        (body
+          (assignment_statement
+            (identifier)
+            (assignment_operator)
+            (identifier))))
+      (do_block
+        (body
+          (assignment_statement
+            (identifier)
+            (assignment_operator)
+            (identifier)))))))
+
+================================================================================
+IF THEN statement
+================================================================================
+
+IF x > 10 THEN x = 10.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (if_statement
+    (binary_expression
+      (identifier)
+      (number_literal))
+    (assignment_statement
+      (identifier)
+      (assignment_operator)
+      (number_literal))))
+
+================================================================================
+IF ELSE THEN statement
+================================================================================
+
+IF x > 10 THEN x = 10.
+ELSE IF x > 20 THEN x = 20.
+ELSE x = x.
+
+IF x > 10 THEN x = 10.
+ELSE DO:
+  x = 20.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (if_statement
+    (binary_expression
+      (identifier)
+      (number_literal))
+    (assignment_statement
+      (identifier)
+      (assignment_operator)
+      (number_literal))
+    (if_statement
+      (binary_expression
+        (identifier)
+        (number_literal))
+      (assignment_statement
+        (identifier)
+        (assignment_operator)
+        (number_literal))
+      (assignment_statement
+        (identifier)
+        (assignment_operator)
+        (identifier))))
+  (if_statement
+    (binary_expression
+      (identifier)
+      (number_literal))
+    (assignment_statement
+      (identifier)
+      (assignment_operator)
+      (number_literal))
+    (do_block
+      (body
+        (assignment_statement
+          (identifier)
+          (assignment_operator)
+          (number_literal))))))
+
+================================================================================
+LOGICAL expressions
+================================================================================
+
+w = YES.
+x = NO.
+y = TRUE.
+z = FALSE.
+IF YES AND TRUE THEN DISPLAY "yes".
+
+x = YES AND NO.
+x = YES OR NO.
+
+y = x < 10 OR x = 10.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (assignment_statement
+    (identifier)
+    (assignment_operator)
+    (boolean_literal))
+  (assignment_statement
+    (identifier)
+    (assignment_operator)
+    (boolean_literal))
+  (assignment_statement
+    (identifier)
+    (assignment_operator)
+    (boolean_literal))
+  (assignment_statement
+    (identifier)
+    (assignment_operator)
+    (boolean_literal))
+  (if_statement
+    (binary_expression
+      (boolean_literal)
+      (boolean_literal))
+    (display_statement
+      (string_literal)))
+  (assignment_statement
+    (identifier)
+    (assignment_operator)
+    (binary_expression
+      (boolean_literal)
+      (boolean_literal)))
+  (assignment_statement
+    (identifier)
+    (assignment_operator)
+    (binary_expression
+      (boolean_literal)
+      (boolean_literal)))
+  (assignment_statement
+    (identifier)
+    (assignment_operator)
+    (binary_expression
+      (binary_expression
+        (identifier)
+        (number_literal))
+      (binary_expression
+        (identifier)
+        (number_literal)))))
+
+================================================================================
+REPEAT statement
+================================================================================
+
+REPEAT WHILE TRUE:
+  x = 5.
+END.
+
+REPEAT PRESELECT EACH Order, Customer OF Order, EACH OrderLine OF Order:
+END.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (repeat_statement
+    (boolean_literal)
+    (body
+      (assignment_statement
+        (identifier)
+        (assignment_operator)
+        (number_literal))))
+  (repeat_statement
+    (preselect_record_list
+      (preselect_record
+        (identifier))
+      (preselect_record
+        (identifier)
+        (identifier))
+      (preselect_record
+        (identifier)
+        (identifier)))
+    (body)))
+
+================================================================================
+DO statement
+================================================================================
+
+DO x = 5 TO 20:
+  x = 5.
+END.
+
+DO x = 5 TO INTEGER("20"):
+  x = 5.
+END.
+
+DO WHILE x < 10:
+  x = 5.
+END.
+
+z:
+DO x = 5 TO 20:
+  LEAVE z.
+END.
+
+DO PRESELECT EACH Order NO-LOCK WHERE Order.OrderNum > 5:
+END.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (do_block
+    (identifier)
+    (number_literal)
+    (number_literal)
+    (body
+      (assignment_statement
+        (identifier)
+        (assignment_operator)
+        (number_literal))))
+  (do_block
+    (identifier)
+    (number_literal)
+    (function_call
+      (identifier)
+      (argument_list
+        (argument
+          (string_literal))))
+    (body
+      (assignment_statement
+        (identifier)
+        (assignment_operator)
+        (number_literal))))
+  (do_block
+    (binary_expression
+      (identifier)
+      (number_literal))
+    (body
+      (assignment_statement
+        (identifier)
+        (assignment_operator)
+        (number_literal))))
+  (do_block
+    (identifier)
+    (identifier)
+    (number_literal)
+    (number_literal)
+    (body
+      (leave_statement
+        (identifier))))
+  (do_block
+    (preselect_record_list
+      (preselect_record
+        (identifier)
+        (no_lock)
+        (where_clause
+          (binary_expression
+            (qualified_name
+              (identifier)
+              (identifier))
+            (number_literal)))))
+    (body)))
+
+================================================================================
+PROCEDURE statement
+================================================================================
+
+PROCEDURE some_procedure:
+  define input param pcMyNumber as int no-undo.
+  /* nice */
+END PROCEDURE.
+
+PROCEDURE another_procedure:
+END.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (procedure_definition
+    (identifier)
+    (parameter_definition
+      (identifier)
+      (identifier)
+      (no_undo))
+    (comment
+      (block_comment)))
+  (procedure_definition
+    (identifier)))
+
+================================================================================
+FUNCTION statement
+================================================================================
+
+FUNCTION fn RETURNS INTEGER (INPUT par1 AS INTEGER, OUTPUT par2 AS CHARACTER).
+  RETURN par1.
+END FUNCTION.
+
+FUNCTION fn-no-mode RETURNS INTEGER (par1 AS INTEGER).
+  RETURN par1.
+END.
+
+FUNCTION fn-no-parameters RETURNS INTEGER:
+  RETURN 0.
+END.
+
+fn(INPUT somepar, OUTPUT otherpar).
+fn-no-mode(somerpar).
+fn-no-mode(somerpar) NO-ERROR.
+
+PersonData:GetById(id, output table ttPerson by-reference).
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (function_definition
+    (identifier)
+    (identifier)
+    (function_parameter_list
+      (function_parameter
+        (identifier)
+        (identifier))
+      (function_parameter
+        (identifier)
+        (identifier)))
+    (return_statement
+      (identifier)))
+  (function_definition
+    (identifier)
+    (identifier)
+    (function_parameter_list
+      (function_parameter
+        (identifier)
+        (identifier)))
+    (return_statement
+      (identifier)))
+  (function_definition
+    (identifier)
+    (identifier)
+    (return_statement
+      (number_literal)))
+  (expression_statement
+    (function_call
+      (identifier)
+      (argument_list
+        (argument
+          (identifier))
+        (argument
+          (identifier)))))
+  (expression_statement
+    (function_call
+      (identifier)
+      (argument_list
+        (argument
+          (identifier)))))
+  (expression_statement
+    (function_call
+      (identifier)
+      (argument_list
+        (argument
+          (identifier))))
+    (no_error))
+  (expression_statement
+    (function_call
+      (object_access
+        (identifier)
+        (identifier))
+      (argument_list
+        (argument
+          (identifier))
+        (argument
+          (identifier))))))
+
+================================================================================
+DO TRANSACTION statement
+================================================================================
+
+DO TRANSACTION:
+  CREATE x.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (do_block
+    (body
+      (create_statement
+        (identifier)))))
+
+================================================================================
+ABL statements
+================================================================================
+
+DISPLAY "test" a 5 f().
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (display_statement
+    (string_literal)
+    (identifier)
+    (number_literal)
+    (function_call
+      (identifier)
+      (argument_list))))
+
+================================================================================
+ASSIGN statement
+================================================================================
+
+ASSIGN
+  a = 1
+  b = "ABC"
+  c = f()
+  qualified.name = var + 1
+.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (assign_statement
+    (assign_pair
+      (identifier)
+      (number_literal))
+    (assign_pair
+      (identifier)
+      (string_literal))
+    (assign_pair
+      (identifier)
+      (function_call
+        (identifier)
+        (argument_list)))
+    (assign_pair
+      (qualified_name
+        (identifier)
+        (identifier))
+      (binary_expression
+        (identifier)
+        (number_literal)))))
+
+================================================================================
+FOR EACH statement
+================================================================================
+
+FOR EACH some_table OF other_table WHERE x = 5 NO-LOCK:
+  DISPLAY some_table.
+END.
+
+FOR EACH some_table NO-LOCK, FIRST something OF other:
+  DISPLAY something some_table.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (for_each_statement
+    (for_record_list
+      (for_record
+        (identifier)
+        (of_clause
+          (identifier))
+        (where_clause
+          (binary_expression
+            (identifier)
+            (number_literal)))
+        (no_lock)))
+    (body
+      (display_statement
+        (identifier))))
+  (for_each_statement
+    (for_record_list
+      (for_record
+        (identifier)
+        (no_lock))
+      (for_record
+        (identifier)
+        (of_clause
+          (identifier))))
+    (body
+      (display_statement
+        (identifier)
+        (identifier)))))
+
+================================================================================
+FIND statement
+================================================================================
+
+FIND some_table OF other_table WHERE x > 5 EXCLUSIVE-LOCK NO-ERROR.
+FIND some_table NO-LOCK WHERE x > 5 NO-ERROR.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (find_statement
+    (identifier)
+    (of_clause
+      (identifier))
+    (where_clause
+      (binary_expression
+        (identifier)
+        (number_literal)))
+    (exclusive_lock)
+    (no_error))
+  (find_statement
+    (identifier)
+    (no_lock)
+    (where_clause
+      (binary_expression
+        (identifier)
+        (number_literal)))
+    (no_error)))
+
+================================================================================
+CASE statement
+================================================================================
+
+CASE test:
+  WHEN "abc" THEN DO:
+    x = 5.
+    y = 20.
+  END.
+  WHEN "yyy" OR WHEN "zxc" THEN y = 3.
+  WHEN "def" THEN y = 10.
+  OTHERWISE c = 8.
+END CASE.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (case_statement
+    (identifier)
+    (case_when_clause
+      (string_literal)
+      (do_block
+        (body
+          (assignment_statement
+            (identifier)
+            (assignment_operator)
+            (number_literal))
+          (assignment_statement
+            (identifier)
+            (assignment_operator)
+            (number_literal)))))
+    (case_when_clause
+      (string_literal)
+      (string_literal)
+      (case_clause_statement
+        (assignment_statement
+          (identifier)
+          (assignment_operator)
+          (number_literal))))
+    (case_when_clause
+      (string_literal)
+      (case_clause_statement
+        (assignment_statement
+          (identifier)
+          (assignment_operator)
+          (number_literal))))
+    (case_otherwise_clause
+      (case_clause_statement
+        (assignment_statement
+          (identifier)
+          (assignment_operator)
+          (number_literal))))))
+
+================================================================================
+ENUM statement
+================================================================================
+
+ENUM Weather:
+  DEFINE ENUM Rainy
+              Default = Sunny
+              Cloudy
+              Snowy
+              Apocalyptic.
+END ENUM.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (enum_statement
+    (identifier)
+    (enum_body
+      (enum_member
+        (identifier))
+      (enum_member
+        (identifier)
+        (enum_member_value
+          (identifier)))
+      (enum_member
+        (identifier))
+      (enum_member
+        (identifier))
+      (enum_member
+        (identifier)))))

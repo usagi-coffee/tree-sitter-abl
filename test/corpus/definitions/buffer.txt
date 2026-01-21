@@ -1,0 +1,30 @@
+================================================================================
+BUFFER DEFINITION
+================================================================================
+
+DEFINE BUFFER bufInvoice FOR sales.Invoice.
+DEF NEW SHARED BUFFER bTemp FOR TEMP-TABLE ttSession PRESELECT LABEL "Temp" NAMESPACE-URI "urn:x" NAMESPACE-PREFIX "p" XML-NODE-NAME "node" SERIALIZE-NAME "ser".
+DEF PRIVATE STATIC BUFFER bClass FOR myTable.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (buffer_definition
+    name: (identifier)
+    table: (qualified_name
+      (identifier)
+      (identifier)))
+  (buffer_definition
+    (shared_variable_scope)
+    name: (identifier)
+    table: (identifier)
+    label: (string_literal)
+    namespace_uri: (string_literal)
+    namespace_prefix: (string_literal)
+    node: (string_literal)
+    serialize_name: (string_literal))
+  (buffer_definition
+    (access_modifier)
+    (static_modifier)
+    name: (identifier)
+    table: (identifier)))

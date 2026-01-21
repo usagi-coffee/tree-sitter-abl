@@ -1,0 +1,63 @@
+================================================================================
+CASE
+================================================================================
+
+CASE status:
+  WHEN "A" THEN DO:
+    PUT UNFORMATTED "A" SKIP.
+  END.
+  WHEN "B" THEN PUT UNFORMATTED "B" SKIP.
+  OTHERWISE PUT UNFORMATTED "Z" SKIP.
+END CASE.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (case_statement
+    (identifier)
+    (case_when_clause
+      (string_literal)
+      (do_block
+        (body
+          (put_statement
+            (string_literal)
+            (skip)))))
+    (case_when_clause
+      (string_literal)
+      (case_clause_statement
+        (put_statement
+          (string_literal)
+          (skip))))
+    (case_otherwise_clause
+      (case_clause_statement
+        (put_statement
+          (string_literal)
+          (skip))))))
+
+================================================================================
+CASE END
+================================================================================
+
+CASE user_role:
+  WHEN "ADMIN" THEN access_level = 3.
+  OTHERWISE access_level = 0.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (case_statement
+    (identifier)
+    (case_when_clause
+      (string_literal)
+      (case_clause_statement
+        (assignment_statement
+          (identifier)
+          (assignment_operator)
+          (number_literal))))
+    (case_otherwise_clause
+      (case_clause_statement
+        (assignment_statement
+          (identifier)
+          (assignment_operator)
+          (number_literal))))))

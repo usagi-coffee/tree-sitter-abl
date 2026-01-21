@@ -1,0 +1,18 @@
+================================================================================
+BUTTON DEFINITION
+================================================================================
+
+DEFINE BUTTON btnTestButton LABEL "Click Me".
+DEF BUTTON btnLike LIKE btnTestButton.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (button_definition
+    name: (identifier)
+    (button_option
+      label: (string_literal)))
+  (button_definition
+    name: (identifier)
+    (button_option
+      like: (identifier))))

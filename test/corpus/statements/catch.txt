@@ -1,0 +1,21 @@
+================================================================================
+CATCH
+================================================================================
+
+CATCH err AS Progress.Lang.Error:
+  PUT UNFORMATTED "boom" SKIP.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (catch_statement
+    name: (identifier)
+    type: (qualified_name
+      (identifier)
+      (identifier)
+      (identifier))
+    (body
+      (put_statement
+        value: (string_literal)
+        (skip)))))

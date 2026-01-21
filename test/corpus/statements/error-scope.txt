@@ -1,0 +1,12 @@
+================================================================================
+ERROR SCOPE
+================================================================================
+
+BLOCK-LEVEL ON ERROR UNDO, THROW.
+ROUTINE-LEVEL ON ERROR UNDO, THROW.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (block_level_on_error_statement)
+  (routine_level_on_error_statement))

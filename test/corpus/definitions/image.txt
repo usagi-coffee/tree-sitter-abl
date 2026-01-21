@@ -1,0 +1,31 @@
+================================================================================
+IMAGE DEFINITION
+================================================================================
+
+DEFINE IMAGE imgMain FILE "logo.bmp" IMAGE-SIZE 20 BY 10 FROM X 0 Y 0 SIZE 30 BY 15 BGCOLOR 1 FGCOLOR 2 CONVERT-3D-COLORS TOOLTIP "Logo" STRETCH-TO-FIT RETAIN-SHAPE TRANSPARENT.
+DEF PRIVATE IMAGE imgLike LIKE imgMain SIZE-PIXELS 100 BY 50.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (image_definition
+    name: (identifier)
+    (image_phrase
+      file: (string_literal)
+      width: (number_literal)
+      height: (number_literal)
+      x: (number_literal)
+      y: (number_literal))
+    (size_clause
+      width: (number_literal)
+      height: (number_literal))
+    (number_literal)
+    (number_literal)
+    tooltip: (string_literal))
+  (image_definition
+    name: (identifier)
+    (like_clause
+      like: (identifier))
+    (size_clause
+      width: (number_literal)
+      height: (number_literal))))

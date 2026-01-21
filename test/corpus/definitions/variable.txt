@@ -1,0 +1,84 @@
+================================================================================
+VARIABLE DEFINITION
+================================================================================
+
+DEFINE VARIABLE count AS INTEGER.
+DEF VAR foo AS Some.Type NO-UNDO.
+DEFINE VARIABLE list AS List<INTEGER>.
+DEFINE VARIABLE cName AS CHARACTER EXTENT 4 INITIAL ["a","b","c","d"].
+DEFINE NEW GLOBAL SHARED VARIABLE gValue AS INTEGER NO-UNDO.
+DEFINE PRIVATE STATIC SERIALIZABLE VARIABLE cust AS CLASS Customer NO-UNDO.
+DEFINE VARIABLE likeVar LIKE Customer.Name LABEL "Name" COLUMN-LABEL "Cust Name" FORMAT "x(20)".
+DEFINE VARIABLE flags AS LOGICAL NOT CASE-SENSITIVE.
+DEFINE VARIABLE fillIn AS CHARACTER DROP-TARGET.
+DEFINE VARIABLE cSer AS CHARACTER SERIALIZE-NAME "ser-name".
+DEFINE VARIABLE cView AS CHARACTER VIEW-AS FILL-IN.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (variable_definition
+    name: (identifier)
+    type: (identifier))
+  (variable_definition
+    name: (identifier)
+    type: (qualified_name
+      (identifier)
+      (identifier))
+    (no_undo))
+  (variable_definition
+    name: (identifier)
+    type: (generic_type
+      (identifier)
+      (identifier)))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (extent_clause
+      (number_literal))
+    (initial_option
+      (string_literal)
+      (string_literal)
+      (string_literal)
+      (string_literal)))
+  (variable_definition
+    (shared_variable_scope)
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (variable_definition
+    (access_modifier)
+    (static_modifier)
+    (serialization_modifier)
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (variable_definition
+    name: (identifier)
+    like: (qualified_name
+      (identifier)
+      (identifier))
+    (label_option
+      (string_literal))
+    (column_label_option
+      (string_literal))
+    (format_option
+      (string_literal)))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (case_sensitive_option))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (drop_target_option))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (serialize_name_option
+      name: (string_literal)))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (view_as_phrase
+      (identifier))))

@@ -1,0 +1,67 @@
+================================================================================
+ACCUMULATE
+================================================================================
+
+FOR EACH Customer NO-LOCK:
+  ACCUMULATE Customer.CreditLimit (AVERAGE COUNT MAXIMUM).
+END.
+
+FOR EACH Customer NO-LOCK:
+  DISPLAY Customer.CustNum
+          Customer.Name (COUNT MAXIMUM MINIMUM)
+          Customer.Balance (TOTAL MAXIMUM MINIMUM AVERAGE).
+END.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (for_each_statement
+    (for_record_list
+      (for_record
+        table: (identifier)
+        (no_lock)))
+    (body
+      (accumulate_statement
+        (accumulate_item
+          value: (qualified_name
+            (identifier)
+            (identifier))
+          aggregate: (aggregate_phrase
+            (aggregate_item
+              operation: (aggregate_operation))
+            (aggregate_item
+              operation: (aggregate_operation))
+            (aggregate_item
+              operation: (aggregate_operation)))))))
+  (for_each_statement
+    (for_record_list
+      (for_record
+        table: (identifier)
+        (no_lock)))
+    (body
+      (display_statement
+        (qualified_name
+          (identifier)
+          (identifier))
+        (qualified_name
+          (identifier)
+          (identifier))
+        (aggregate_phrase
+          (aggregate_item
+            operation: (aggregate_operation))
+          (aggregate_item
+            operation: (aggregate_operation))
+          (aggregate_item
+            operation: (aggregate_operation)))
+        (qualified_name
+          (identifier)
+          (identifier))
+        (aggregate_phrase
+          (aggregate_item
+            operation: (aggregate_operation))
+          (aggregate_item
+            operation: (aggregate_operation))
+          (aggregate_item
+            operation: (aggregate_operation))
+          (aggregate_item
+            operation: (aggregate_operation)))))))

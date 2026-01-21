@@ -1,0 +1,75 @@
+================================================================================
+FIND
+================================================================================
+
+FIND customer WHERE customer.id = 2 NO-LOCK.
+FIND FIRST DebtorShipTo WHERE DebtorShipTo.DebtorShipToCode = par_adres NO-LOCK NO-ERROR.
+FIND LAST Order WHERE Order.OrderNum = 1 NO-LOCK.
+FIND CURRENT Order NO-ERROR.
+FIND Contact OF Address EXCLUSIVE-LOCK NO-ERROR NO-WAIT.
+FIND FIRST z9zwd_det WHERE z9zwd_zw_id = z9zw_id USE-INDEX z9zwd_idx_zw_id NO-LOCK NO-ERROR.
+FIND FIRST Customer NO-LOCK NO-PREFETCH.
+FIND Customer USING Customer.CustNum NO-ERROR.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (find_statement
+    table: (identifier)
+    (where_clause
+      (binary_expression
+        (qualified_name
+          (identifier)
+          (identifier))
+        (number_literal)))
+    (no_lock))
+  (find_statement
+    table: (identifier)
+    (where_clause
+      (binary_expression
+        (qualified_name
+          (identifier)
+          (identifier))
+        (identifier)))
+    (no_lock)
+    (no_error))
+  (find_statement
+    table: (identifier)
+    (where_clause
+      (binary_expression
+        (qualified_name
+          (identifier)
+          (identifier))
+        (number_literal)))
+    (no_lock))
+  (find_statement
+    table: (identifier)
+    (no_error))
+  (find_statement
+    table: (identifier)
+    (of_clause
+      (identifier))
+    (exclusive_lock)
+    (no_error)
+    (no_wait))
+  (find_statement
+    table: (identifier)
+    (where_clause
+      (binary_expression
+        (identifier)
+        (identifier)))
+    (use_index
+      index: (identifier))
+    (no_lock)
+    (no_error))
+  (find_statement
+    table: (identifier)
+    (no_lock)
+    (no_prefetch))
+  (find_statement
+    table: (identifier)
+    (using_clause
+      (qualified_name
+        (identifier)
+        (identifier)))
+    (no_error)))

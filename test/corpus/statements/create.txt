@@ -1,0 +1,22 @@
+================================================================================
+CREATE AND BUFFER-COPY
+================================================================================
+
+CREATE tDebtorShipTo.
+BUFFER-COPY tApiBusinessRelation TO tBusinessRelation.
+BUFFER-COPY src_tbl EXCEPT fld1 fld2 TO dst_tbl.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (create_statement
+    table: (identifier))
+  (buffer_copy_statement
+    source: (identifier)
+    target: (identifier))
+  (buffer_copy_statement
+    source: (identifier)
+    (except_clause
+      (identifier)
+      (identifier))
+    target: (identifier)))

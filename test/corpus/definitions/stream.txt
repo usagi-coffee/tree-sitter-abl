@@ -1,0 +1,19 @@
+================================================================================
+STREAM DEFINITION
+================================================================================
+
+DEFINE STREAM outStream.
+DEFINE NEW GLOBAL SHARED STREAM sShared.
+DEF PRIVATE STREAM sClass.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (stream_definition
+    name: (identifier))
+  (stream_definition
+    (shared_variable_scope)
+    name: (identifier))
+  (stream_definition
+    (shared_variable_scope)
+    name: (identifier)))

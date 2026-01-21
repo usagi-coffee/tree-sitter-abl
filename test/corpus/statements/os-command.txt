@@ -1,0 +1,17 @@
+================================================================================
+OS-COMMAND
+================================================================================
+
+OS-COMMAND VALUE("echo ok").
+OS-COMMAND NO-WAIT dir /b.
+OS-COMMAND SILENT VALUE(cmd).
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (os_command_statement
+    (string_literal))
+  (os_command_statement
+    (identifier))
+  (os_command_statement
+    (identifier)))

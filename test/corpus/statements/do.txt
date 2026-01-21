@@ -1,0 +1,105 @@
+================================================================================
+DO BLOCK
+================================================================================
+
+DO:
+  x = 1.
+END.
+
+DO idx = 1 TO 3:
+  x = idx.
+END.
+
+DO WHILE idx < 3 ON ERROR UNDO, THROW:
+  idx = idx + 1.
+END.
+
+DO ON ERROR UNDO, LEAVE:
+  idx = 1.
+END.
+
+DO ON QUIT, LEAVE:
+  idx = 2.
+END.
+
+DO TRANSACTION:
+END.
+
+DO TRANSACTION WHILE something:get-next():
+  something:buffer-copy(something).
+END.
+
+DO WHILE TRUE ON ENDKEY UNDO, RETRY:
+  MESSAGE "hi".
+END.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (do_block
+    (body
+      (assignment_statement
+        left: (identifier)
+        operator: (assignment_operator)
+        right: (number_literal))))
+  (do_block
+    variable: (identifier)
+    start: (number_literal)
+    end: (number_literal)
+    (body
+      (assignment_statement
+        left: (identifier)
+        operator: (assignment_operator)
+        right: (identifier))))
+  (do_block
+    (binary_expression
+      (identifier)
+      (number_literal))
+    (on_error_clause
+      (undo_throw_phrase))
+    (body
+      (assignment_statement
+        left: (identifier)
+        operator: (assignment_operator)
+        right: (binary_expression
+          (identifier)
+          (number_literal)))))
+  (do_block
+    (on_error_clause
+      (undo_leave_phrase))
+    (body
+      (assignment_statement
+        left: (identifier)
+        operator: (assignment_operator)
+        right: (number_literal))))
+  (do_block
+    (on_quit_clause)
+    (body
+      (assignment_statement
+        left: (identifier)
+        operator: (assignment_operator)
+        right: (number_literal))))
+  (do_block
+    (body))
+  (do_block
+    (function_call
+      function: (object_access
+        (identifier)
+        (identifier))
+      (argument_list))
+    (body
+      (expression_statement
+        (function_call
+          function: (object_access
+            (identifier)
+            (identifier))
+          (argument_list
+            (argument
+              value: (identifier)))))))
+  (do_block
+    (boolean_literal)
+    (on_endkey_clause
+      (undo_phrase))
+    (body
+      (message_statement
+        (string_literal)))))

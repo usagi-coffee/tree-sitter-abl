@@ -1,0 +1,28 @@
+================================================================================
+MESSAGE
+================================================================================
+
+MESSAGE COLOR NORMAL "Export done: " + fileName SKIP(2) VIEW-AS ALERT-BOX INFORMATION BUTTONS OK-CANCEL TITLE "Alert" UPDATE okFlag AS LOGICAL AUTO-RETURN IN WINDOW hWin.
+MESSAGE "Simple" SKIP VIEW-AS ALERT-BOX QUESTION.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (message_statement
+    (color_phrase)
+    (binary_expression
+      (string_literal)
+      (identifier))
+    (skip
+      count: (number_literal))
+    (view_as_clause
+      (buttons_clause)
+      title: (string_literal))
+    (set_update_clause
+      field: (identifier)
+      type: (identifier))
+    window: (identifier))
+  (message_statement
+    (string_literal)
+    (skip)
+    (view_as_clause)))

@@ -1,0 +1,33 @@
+================================================================================
+IMPORT
+================================================================================
+
+IMPORT STREAM sIn UNFORMATTED lineText.
+IMPORT DELIMITER "," fieldA ^ fieldB NO-LOBS NO-ERROR.
+IMPORT recBuf EXCEPT fieldX fieldY.
+IMPORT STREAM-HANDLE hStream mPtrData.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (import_statement
+    (stream_clause
+      name: (identifier))
+    (unformatted_clause
+      field: (identifier)))
+  (import_statement
+    (delimiter_clause
+      (string_literal))
+    (identifier)
+    (skip_field)
+    (identifier)
+    (no_lobs)
+    (no_error))
+  (import_statement
+    (identifier)
+    (identifier)
+    (identifier))
+  (import_statement
+    (stream_handle_clause
+      handle: (identifier))
+    (identifier)))

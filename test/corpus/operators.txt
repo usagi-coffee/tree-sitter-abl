@@ -1,0 +1,182 @@
+================================================================================
+ASSIGNMENT
+================================================================================
+
+x = 5.
+obj:prop = "ok".
+x = 1 + 2.
+x = ?.
+x = +5.
+x = 1.31.2022.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (number_literal))
+  (assignment_statement
+    left: (object_access
+      (identifier)
+      (identifier))
+    operator: (assignment_operator)
+    right: (string_literal))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (binary_expression
+      (number_literal)
+      (number_literal)))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (null_literal))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (unary_expression
+      (number_literal)))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (date_literal)))
+
+================================================================================
+LOGICAL AND COMPARISON
+================================================================================
+
+x = 1.
+flag = x > 2 AND x < 5.
+ok = x EQ 2 OR x NE 3.
+w = -(0).
+x = -f().
+y = -table.field.
+z = -obj:method().
+z = NOT y.
+y = NOT -x < -10 OR x = 10.
+s = code BEGINS "AB".
+s = code MATCHES "*|*".
+x = repYear MODULO 4.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (number_literal))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (binary_expression
+      (binary_expression
+        (identifier)
+        (number_literal))
+      (binary_expression
+        (identifier)
+        (number_literal))))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (binary_expression
+      (binary_expression
+        (identifier)
+        (number_literal))
+      (binary_expression
+        (identifier)
+        (number_literal))))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (unary_expression
+      (parenthesized_expression
+        (number_literal))))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (unary_expression
+      (function_call
+        function: (identifier)
+        (argument_list))))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (unary_expression
+      (qualified_name
+        (identifier)
+        (identifier))))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (unary_expression
+      (function_call
+        function: (object_access
+          (identifier)
+          (identifier))
+        (argument_list))))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (unary_expression
+      (identifier)))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (binary_expression
+      (binary_expression
+        (unary_expression
+          (unary_expression
+            (identifier)))
+        (unary_expression
+          (number_literal)))
+      (binary_expression
+        (identifier)
+        (number_literal))))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (binary_expression
+      (identifier)
+      (string_literal)))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (binary_expression
+      (identifier)
+      (string_literal)))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (binary_expression
+      (identifier)
+      (number_literal))))
+
+================================================================================
+AUGMENTED ASSIGNMENT
+================================================================================
+
+x += 1.
+x -= 2.
+x *= 3.
+x /= 4.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (number_literal))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (number_literal))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (number_literal))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (number_literal)))

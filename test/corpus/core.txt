@@ -1,0 +1,291 @@
+================================================================================
+COMMENT
+================================================================================
+
+/* comment */
+// comment
+/***
+ TRIPLE-STAR MULTILINE
+ ***/
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (comment
+    (block_comment))
+  (comment
+    (line_comment))
+  (comment
+    (block_comment)))
+
+================================================================================
+INCLUDE
+================================================================================
+
+{include_file.i arg1 &arg2="test" arg3 "NEW" &ABC=variable}
+{{&INC}file.i}
+{{&INC}file_with_args.i
+  &PARM1=var_one &PARM2=var_two
+  &SITE=tbl_one.col_one &LOC=tbl_one.col_two
+  &ORDER=param_order
+  &ITEM=param_item &QTY=qty_val &LOT='N' &PRICE=price_val
+}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (include
+    file: (include_file_reference
+      (file_name))
+    argument: (include_argument
+      (identifier))
+    argument: (include_argument
+      (include_named_argument
+        name: (identifier)
+        value: (string_literal)))
+    argument: (include_argument
+      (identifier))
+    argument: (include_argument
+      (string_literal))
+    argument: (include_argument
+      (include_named_argument
+        name: (identifier)
+        value: (identifier))))
+  (include_extra)
+  (include
+    file: (include_file_reference
+      (constant
+        (identifier))
+      (file_name))
+    argument: (include_argument
+      (include_named_argument
+        name: (identifier)
+        value: (identifier)))
+    argument: (include_argument
+      (include_named_argument
+        name: (identifier)
+        value: (identifier)))
+    argument: (include_argument
+      (include_named_argument
+        name: (identifier)
+        value: (qualified_name
+          (identifier)
+          (identifier))))
+    argument: (include_argument
+      (include_named_argument
+        name: (identifier)
+        value: (qualified_name
+          (identifier)
+          (identifier))))
+    argument: (include_argument
+      (include_named_argument
+        name: (identifier)
+        value: (identifier)))
+    argument: (include_argument
+      (include_named_argument
+        name: (identifier)
+        value: (identifier)))
+    argument: (include_argument
+      (include_named_argument
+        name: (identifier)
+        value: (identifier)))
+    argument: (include_argument
+      (include_named_argument
+        name: (identifier)
+        value: (string_literal)))
+    argument: (include_argument
+      (include_named_argument
+        name: (identifier)
+        value: (identifier)))))
+
+================================================================================
+ACCESSORS
+================================================================================
+
+table.field.
+Type::Member.
+obj?:prop.
+obj:method(1, 2).
+Func().
+some_object:root.
+some_object:chained_property:chained_another:method().
+oObject:Length -= String(pcMessage):Size.
+new MyClass():Size.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (expression_statement
+    (qualified_name
+      (identifier)
+      (identifier)))
+  (expression_statement
+    (scoped_name
+      (identifier)
+      (identifier)))
+  (expression_statement
+    (safe_object_access
+      (identifier)
+      (identifier)))
+  (expression_statement
+    (function_call
+      function: (object_access
+        (identifier)
+        (identifier))
+      (argument_list
+        (argument
+          value: (number_literal))
+        (argument
+          value: (number_literal)))))
+  (expression_statement
+    (function_call
+      function: (identifier)
+      (argument_list)))
+  (expression_statement
+    (object_access
+      (identifier)
+      (identifier)))
+  (expression_statement
+    (function_call
+      function: (object_access
+        (identifier)
+        (identifier)
+        (identifier)
+        (identifier))
+      (argument_list)))
+  (assignment_statement
+    left: (object_access
+      (identifier)
+      (identifier))
+    operator: (assignment_operator)
+    right: (object_access_expression
+      target: (function_call
+        function: (identifier)
+        (argument_list
+          (argument
+            value: (identifier))))
+      (identifier)))
+  (expression_statement
+    (object_access_expression
+      target: (new_expression
+        type: (identifier)
+        (argument_list))
+      (identifier))))
+
+================================================================================
+ARRAY ACCESS
+================================================================================
+
+arr[1].
+arr[1, 2].
+arr[1 FOR 4].
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (expression_statement
+    (array_access
+      array: (identifier)
+      (number_literal)))
+  (expression_statement
+    (array_access
+      array: (identifier)
+      (number_literal)
+      (number_literal)))
+  (expression_statement
+    (array_access
+      array: (identifier)
+      start: (number_literal)
+      count: (number_literal))))
+
+================================================================================
+ARGUMENT REFERENCE
+================================================================================
+
+{1}.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (expression_statement
+    (argument_reference)))
+
+================================================================================
+PUNCTUATION AND TERMINATORS
+================================================================================
+
+?;
+obj?:prop;
+arr[1, 2];
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (expression_statement
+    (null_literal))
+  (expression_statement
+    (safe_object_access
+      (identifier)
+      (identifier)))
+  (expression_statement
+    (array_access
+      array: (identifier)
+      (number_literal)
+      (number_literal))))
+
+================================================================================
+CONSTANT
+================================================================================
+
+{&VAR1}.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (expression_statement
+    (constant
+      (identifier))))
+
+================================================================================
+BOOLEAN LITERAL
+================================================================================
+
+TRUE.
+FALSE.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (expression_statement
+    (boolean_literal))
+  (expression_statement
+    (boolean_literal)))
+
+================================================================================
+PREPROCESSOR DIRECTIVES
+================================================================================
+
+&GLOBAL-DEFINE APP-NAME "demo"
+&SCOPED-DEFINE FLAG YES
+&UNDEFINE FLAG
+&MESSAGE "hello"
+&IF DEFINED (FLAG) EQ 0 &THEN
+&IF TRUE
+&THEN
+&ELSEIF FALSE
+&ELSE
+&ENDIF
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (preprocessor_directive)
+  (preprocessor_directive)
+  (preprocessor_directive)
+  (preprocessor_directive)
+  (preprocessor_directive)
+  (preprocessor_directive)
+  (preprocessor_directive)
+  (preprocessor_directive)
+  (preprocessor_directive)
+  (preprocessor_directive))

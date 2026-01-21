@@ -1,0 +1,163 @@
+================================================================================
+WHITESPACE DOES NOT MATTER
+================================================================================
+
+DO
+:
+x
+= 5; END
+.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (do_block
+    (body
+      (assignment_statement
+        left: (identifier)
+        operator: (assignment_operator)
+        right: (number_literal)))))
+
+================================================================================
+KEYWORD AS IDENTIFIERS
+================================================================================
+
+DEF VAR Definex as int.
+DEF VAR int as int.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (variable_definition
+    name: (identifier)
+    type: (identifier))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)))
+
+================================================================================
+KEYWORD PREFIX IDENTIFIERS
+================================================================================
+
+display1 = 2.
+define2 = 3.
+and3 = 4.
+or4 = 5.
+formattedDate = test.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (number_literal))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (number_literal))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (number_literal))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (number_literal))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (identifier)))
+
+================================================================================
+WEIRD WHITESPACE
+================================================================================
+
+PAUSE.
+RETURN.
+
+IF flag
+THEN
+.
+
+IF other THEN
+UNDO,
+THROW NEW Progress.Lang.AppError("x", 1).
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (pause_statement)
+  (return_statement)
+  (if_statement
+    (identifier)
+    then: (empty_statement))
+  (if_statement
+    (identifier)
+    then: (undo_statement
+      value: (new_expression
+        type: (qualified_name
+          (identifier)
+          (identifier)
+          (identifier))
+        (argument_list
+          (argument
+            value: (string_literal))
+          (argument
+            value: (number_literal)))))))
+
+================================================================================
+DOT AS BLOCK START
+================================================================================
+
+define variable iEntries     as integer no-undo initial 4.
+define variable iLine        as integer no-undo.
+
+do iLine = 1 to iEntries - 1.
+  message iLine.
+end.
+
+FOR EACH Customer NO-LOCK .
+  DISPLAY Customer.Name.
+END.
+
+REPEAT .
+  DISPLAY "loop".
+END.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo)
+    (initial_option
+      (number_literal)))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (do_block
+    variable: (identifier)
+    start: (number_literal)
+    end: (binary_expression
+      (identifier)
+      (number_literal))
+    (body
+      (message_statement
+        (identifier))))
+  (for_each_statement
+    (for_record_list
+      (for_record
+        table: (identifier)
+        (no_lock)))
+    (body
+      (display_statement
+        (qualified_name
+          (identifier)
+          (identifier)))))
+  (repeat_statement
+    (body
+      (display_statement
+        (string_literal)))))

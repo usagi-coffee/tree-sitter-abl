@@ -1,0 +1,137 @@
+================================================================================
+FOR EACH
+================================================================================
+
+FOR EACH customer WHERE customer.id = 1 NO-LOCK:
+  DISPLAY customer.name.
+END.
+
+FOR EACH tFcMessages ON ERROR UNDO, THROW:
+  DISPLAY tFcMessages.tcFcMessage.
+END.
+
+FOR EACH trans_hist WHERE trans_hist.domain = "ZMD" NO-LOCK USE-INDEX idxTrans BREAK BY trans_hist.line BY trans_hist.part:
+  DISPLAY trans_hist.line.
+END.
+
+FOR EACH order_hdr NO-LOCK BY order_hdr.order_num DESC:
+  DISPLAY order_hdr.order_num.
+END.
+
+FOR EACH item NO-LOCK WITH FRAME fr WIDTH 120:
+  PUT UNFORMATTED item.item_id SKIP.
+END.
+
+outer_loop: FOR EACH item_mstr NO-LOCK:
+  DISPLAY item_mstr.item_code.
+END.
+
+FOR EACH Customer ON ENDKEY UNDO, RETRY:
+  DISPLAY Customer.Name.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (for_each_statement
+    (for_record_list
+      (for_record
+        table: (identifier)
+        (where_clause
+          (binary_expression
+            (qualified_name
+              (identifier)
+              (identifier))
+            (number_literal)))
+        (no_lock)))
+    (body
+      (display_statement
+        (qualified_name
+          (identifier)
+          (identifier)))))
+  (for_each_statement
+    (for_record_list
+      (for_record
+        table: (identifier)))
+    (on_error_clause
+      (undo_throw_phrase))
+    (body
+      (display_statement
+        (qualified_name
+          (identifier)
+          (identifier)))))
+  (for_each_statement
+    (for_record_list
+      (for_record
+        table: (identifier)
+        (where_clause
+          (binary_expression
+            (qualified_name
+              (identifier)
+              (identifier))
+            (string_literal)))
+        (no_lock)
+        (use_index
+          index: (identifier))
+        (break_by
+          (qualified_name
+            (identifier)
+            (identifier))
+          (qualified_name
+            (identifier)
+            (identifier)))))
+    (body
+      (display_statement
+        (qualified_name
+          (identifier)
+          (identifier)))))
+  (for_each_statement
+    (for_record_list
+      (for_record
+        table: (identifier)
+        (no_lock)
+        (by_clause
+          (qualified_name
+            (identifier)
+            (identifier)))))
+    (body
+      (display_statement
+        (qualified_name
+          (identifier)
+          (identifier)))))
+  (for_each_statement
+    (for_record_list
+      (for_record
+        table: (identifier)
+        (no_lock)))
+    (with_frame_clause
+      name: (identifier)
+      (number_literal))
+    (body
+      (put_statement
+        value: (qualified_name
+          (identifier)
+          (identifier))
+        (skip))))
+  (for_each_statement
+    label: (identifier)
+    (for_record_list
+      (for_record
+        table: (identifier)
+        (no_lock)))
+    (body
+      (display_statement
+        (qualified_name
+          (identifier)
+          (identifier)))))
+  (for_each_statement
+    (for_record_list
+      (for_record
+        table: (identifier)))
+    (on_endkey_clause
+      (undo_phrase))
+    (body
+      (display_statement
+        (qualified_name
+          (identifier)
+          (identifier))))))

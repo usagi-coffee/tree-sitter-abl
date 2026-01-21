@@ -1,0 +1,35 @@
+================================================================================
+OUTPUT
+================================================================================
+
+OUTPUT CLOSE.
+OUTPUT STREAM outStream CLOSE.
+OUTPUT TO VALUE(outPath + "/data.xml") APPEND.
+OUTPUT TO PRINTER "HP" NUM-COPIES 2 LANDSCAPE PAGED PAGE-SIZE 60 NO-ECHO NO-MAP UNBUFFERED NO-CONVERT.
+OUTPUT THROUGH "crypt" mypass NO-ECHO.
+OUTPUT TO "file.log".
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (output_statement)
+  (output_statement
+    (stream_clause
+      name: (identifier)))
+  (output_statement
+    (binary_expression
+      (identifier)
+      (string_literal))
+    (append_clause))
+  (output_statement
+    printer: (string_literal)
+    (num_copies_clause
+      (number_literal))
+    (page_size_clause
+      (number_literal))
+    (convert_clause))
+  (output_statement
+    program: (string_literal)
+    (identifier))
+  (output_statement
+    file: (string_literal)))
