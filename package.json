@@ -55,6 +55,6 @@
     "build": "tree-sitter generate && tree-sitter build",
     "build:wasm": "tree-sitter generate && tree-sitter build -w",
     "dev": "nodemon --ignore ./src -e js,json,p --exec 'tree-sitter generate && tree-sitter parse example.p'",
-    "prepublishOnly": "tree-sitter generate && tree-sitter build && tree-sitter build -w"
+    "prepublishOnly": "bun run prepublish.js"
   }
 }
