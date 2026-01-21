@@ -6,6 +6,7 @@ on:
 
 jobs:
   build:
+    if: "!startsWith(github.event.head_commit.message, 'meta:')"
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -29,6 +30,7 @@ jobs:
         run: bun run build:wasm
 
   test:
+    if: "!startsWith(github.event.head_commit.message, 'meta:')"
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
