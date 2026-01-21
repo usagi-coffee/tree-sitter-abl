@@ -25,5 +25,5 @@ RUN someproc.p (INPUT-OUTPUT DATASET dsOrder, INPUT DATASET dsOther:HANDLE).
       (argument
         value: (dataset_reference
           dataset: (object_access
-            (identifier)
-            (identifier)))))))
+            left: (identifier)
+            right: (identifier)))))))

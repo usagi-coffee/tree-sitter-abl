@@ -24,8 +24,8 @@ END.
       (accumulate_statement
         (accumulate_item
           value: (qualified_name
-            (identifier)
-            (identifier))
+            left: (identifier)
+            right: (identifier))
           aggregate: (aggregate_phrase
             (aggregate_item
               operation: (aggregate_operation))
@@ -41,11 +41,11 @@ END.
     (body
       (display_statement
         (qualified_name
-          (identifier)
-          (identifier))
+          left: (identifier)
+          right: (identifier))
         (qualified_name
-          (identifier)
-          (identifier))
+          left: (identifier)
+          right: (identifier))
         (aggregate_phrase
           (aggregate_item
             operation: (aggregate_operation))
@@ -54,8 +54,8 @@ END.
           (aggregate_item
             operation: (aggregate_operation)))
         (qualified_name
-          (identifier)
-          (identifier))
+          left: (identifier)
+          right: (identifier))
         (aggregate_phrase
           (aggregate_item
             operation: (aggregate_operation))

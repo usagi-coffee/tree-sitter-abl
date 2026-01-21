@@ -63,9 +63,9 @@ END CLASS.
 (source_file
   (class_definition
     name: (qualified_name
-      (identifier)
-      (identifier)
-      (identifier))
+      left: (identifier)
+      right: (identifier)
+      right: (identifier))
     (var_statement
       (access_modifier)
       type: (identifier)
@@ -156,9 +156,9 @@ END CLASS.
           (string_literal)))))
   (interface_definition
     name: (qualified_name
-      (identifier)
-      (identifier)
-      (identifier))
+      left: (identifier)
+      right: (identifier)
+      right: (identifier))
     (interface_body_item
       (method_definition
         type: (identifier)

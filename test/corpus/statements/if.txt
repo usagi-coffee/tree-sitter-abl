@@ -47,9 +47,9 @@ IF LOCKED bufOrder THEN RETURN TRUE.
         (undo_statement
           value: (new_expression
             type: (qualified_name
-              (identifier)
-              (identifier)
-              (identifier))
+              left: (identifier)
+              right: (identifier)
+              right: (identifier))
             (argument_list
               (argument
                 value: (string_literal))
@@ -68,9 +68,9 @@ IF LOCKED bufOrder THEN RETURN TRUE.
     then: (undo_statement
       value: (new_expression
         type: (qualified_name
-          (identifier)
-          (identifier)
-          (identifier))
+          left: (identifier)
+          right: (identifier)
+          right: (identifier))
         (argument_list
           (argument
             value: (string_literal))
@@ -84,17 +84,17 @@ IF LOCKED bufOrder THEN RETURN TRUE.
           (where_clause
             (binary_expression
               (qualified_name
-                (identifier)
-                (identifier))
+                left: (identifier)
+                right: (identifier))
               (qualified_name
-                (identifier)
-                (identifier)))))))
+                left: (identifier)
+                right: (identifier)))))))
     then: (do_block
       (body
         (display_statement
           (qualified_name
-            (identifier)
-            (identifier))))))
+            left: (identifier)
+            right: (identifier))))))
   (if_statement
     (can_find_expression
       (record_query
@@ -102,15 +102,15 @@ IF LOCKED bufOrder THEN RETURN TRUE.
         (where_clause
           (binary_expression
             (qualified_name
-              (identifier)
-              (identifier))
+              left: (identifier)
+              right: (identifier))
             (number_literal)))))
     then: (do_block
       (body
         (display_statement
           (qualified_name
-            (identifier)
-            (identifier))))))
+            left: (identifier)
+            right: (identifier))))))
   (if_statement
     (can_find_expression
       (record_query
@@ -118,8 +118,8 @@ IF LOCKED bufOrder THEN RETURN TRUE.
         (where_clause
           (binary_expression
             (qualified_name
-              (identifier)
-              (identifier))
+              left: (identifier)
+              right: (identifier))
             (number_literal)))
         (use_index
           index: (identifier))))
@@ -127,8 +127,8 @@ IF LOCKED bufOrder THEN RETURN TRUE.
       (body
         (display_statement
           (qualified_name
-            (identifier)
-            (identifier))))))
+            left: (identifier)
+            right: (identifier))))))
   (if_statement
     (identifier)
     then: (do_block

@@ -23,8 +23,8 @@ DEFINE VARIABLE cView AS CHARACTER VIEW-AS FILL-IN.
   (variable_definition
     name: (identifier)
     type: (qualified_name
-      (identifier)
-      (identifier))
+      left: (identifier)
+      right: (identifier))
     (no_undo))
   (variable_definition
     name: (identifier)
@@ -56,8 +56,8 @@ DEFINE VARIABLE cView AS CHARACTER VIEW-AS FILL-IN.
   (variable_definition
     name: (identifier)
     like: (qualified_name
-      (identifier)
-      (identifier))
+      left: (identifier)
+      right: (identifier))
     (label_option
       (string_literal))
     (column_label_option

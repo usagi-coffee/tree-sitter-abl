@@ -12,8 +12,8 @@ PUT CONTROL CHR(27) "c".
   (put_statement
     value: (string_literal)
     value: (qualified_name
-      (identifier)
-      (identifier))
+      left: (identifier)
+      right: (identifier))
     (skip))
   (put_statement
     (stream_clause

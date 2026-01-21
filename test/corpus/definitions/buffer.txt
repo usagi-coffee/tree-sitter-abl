@@ -12,8 +12,8 @@ DEF PRIVATE STATIC BUFFER bClass FOR myTable.
   (buffer_definition
     name: (identifier)
     table: (qualified_name
-      (identifier)
-      (identifier)))
+      left: (identifier)
+      right: (identifier)))
   (buffer_definition
     (shared_variable_scope)
     name: (identifier)

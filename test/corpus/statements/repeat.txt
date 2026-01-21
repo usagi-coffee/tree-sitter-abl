@@ -47,9 +47,9 @@ END.
       (undo_return_error
         (new_expression
           type: (qualified_name
-            (identifier)
-            (identifier)
-            (identifier))
+            left: (identifier)
+            right: (identifier)
+            right: (identifier))
           (argument_list
             (argument
               value: (string_literal))

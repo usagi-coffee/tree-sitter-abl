@@ -24,7 +24,7 @@ ON ASSIGN OF Customer.Name OLD VALUE old-name REVERT.
           right: (number_literal)))))
   (on_statement
     object: (qualified_name
-      (identifier)
-      (identifier))
+      left: (identifier)
+      right: (identifier))
     (referencing_phrase
       old_field: (identifier))))

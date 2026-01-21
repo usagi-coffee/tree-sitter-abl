@@ -12,9 +12,12 @@ module.exports = () => ({
     prec(
       1,
       seq(
-        $.identifier,
+        field("left", $.identifier),
         repeat1(
-          seq($._namecolon, alias($._identifier_immediate, $.identifier)),
+          seq(
+            $._namecolon,
+            field("right", alias($._identifier_immediate, $.identifier)),
+          ),
         ),
       ),
     ),
@@ -23,11 +26,11 @@ module.exports = () => ({
     prec(
       1,
       seq(
-        $.identifier,
+        field("left", $.identifier),
         repeat1(
           seq(
             token.immediate("?:"),
-            alias($._identifier_immediate, $.identifier),
+            field("right", alias($._identifier_immediate, $.identifier)),
           ),
         ),
       ),
@@ -37,9 +40,12 @@ module.exports = () => ({
     prec(
       1,
       seq(
-        $.identifier,
+        field("left", $.identifier),
         repeat1(
-          seq($._namedoublecolon, alias($._identifier_immediate, $.identifier)),
+          seq(
+            $._namedoublecolon,
+            field("right", alias($._identifier_immediate, $.identifier)),
+          ),
         ),
       ),
     ),
@@ -48,8 +54,13 @@ module.exports = () => ({
     prec(
       1,
       seq(
-        $.identifier,
-        repeat1(seq($._namedot, alias($._identifier_immediate, $.identifier))),
+        field("left", $.identifier),
+        repeat1(
+          seq(
+            $._namedot,
+            field("right", alias($._identifier_immediate, $.identifier)),
+          ),
+        ),
       ),
     ),
 

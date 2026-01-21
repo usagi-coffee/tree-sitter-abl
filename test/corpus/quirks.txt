@@ -97,9 +97,9 @@ THROW NEW Progress.Lang.AppError("x", 1).
     then: (undo_statement
       value: (new_expression
         type: (qualified_name
-          (identifier)
-          (identifier)
-          (identifier))
+          left: (identifier)
+          right: (identifier)
+          right: (identifier))
         (argument_list
           (argument
             value: (string_literal))
@@ -155,8 +155,8 @@ END.
     (body
       (display_statement
         (qualified_name
-          (identifier)
-          (identifier)))))
+          left: (identifier)
+          right: (identifier)))))
   (repeat_statement
     (body
       (display_statement

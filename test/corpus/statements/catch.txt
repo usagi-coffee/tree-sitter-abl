@@ -12,9 +12,9 @@ END.
   (catch_statement
     name: (identifier)
     type: (qualified_name
-      (identifier)
-      (identifier)
-      (identifier))
+      left: (identifier)
+      right: (identifier)
+      right: (identifier))
     (body
       (put_statement
         value: (string_literal)

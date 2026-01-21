@@ -84,15 +84,15 @@ END.
   (do_block
     (function_call
       function: (object_access
-        (identifier)
-        (identifier))
+        left: (identifier)
+        right: (identifier))
       (argument_list))
     (body
       (expression_statement
         (function_call
           function: (object_access
-            (identifier)
-            (identifier))
+            left: (identifier)
+            right: (identifier))
           (argument_list
             (argument
               value: (identifier)))))))

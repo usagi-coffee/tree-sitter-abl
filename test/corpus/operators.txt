@@ -18,8 +18,8 @@ x = 1.31.2022.
     right: (number_literal))
   (assignment_statement
     left: (object_access
-      (identifier)
-      (identifier))
+      left: (identifier)
+      right: (identifier))
     operator: (assignment_operator)
     right: (string_literal))
   (assignment_statement
@@ -104,16 +104,16 @@ x = repYear MODULO 4.
     operator: (assignment_operator)
     right: (unary_expression
       (qualified_name
-        (identifier)
-        (identifier))))
+        left: (identifier)
+        right: (identifier))))
   (assignment_statement
     left: (identifier)
     operator: (assignment_operator)
     right: (unary_expression
       (function_call
         function: (object_access
-          (identifier)
-          (identifier))
+          left: (identifier)
+          right: (identifier))
         (argument_list))))
   (assignment_statement
     left: (identifier)

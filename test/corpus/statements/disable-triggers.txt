@@ -12,5 +12,5 @@ DISABLE TRIGGERS FOR LOAD OF db.wo_mstr ALLOW-REPLICATION.
     table: (identifier))
   (disable_triggers_statement
     table: (qualified_name
-      (identifier)
-      (identifier))))
+      left: (identifier)
+      right: (identifier))))

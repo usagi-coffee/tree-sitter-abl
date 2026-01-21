@@ -69,14 +69,14 @@ INCLUDE
       (include_named_argument
         name: (identifier)
         value: (qualified_name
-          (identifier)
-          (identifier))))
+          left: (identifier)
+          right: (identifier))))
     argument: (include_argument
       (include_named_argument
         name: (identifier)
         value: (qualified_name
-          (identifier)
-          (identifier))))
+          left: (identifier)
+          right: (identifier))))
     argument: (include_argument
       (include_named_argument
         name: (identifier)
@@ -117,21 +117,21 @@ new MyClass():Size.
 (source_file
   (expression_statement
     (qualified_name
-      (identifier)
-      (identifier)))
+      left: (identifier)
+      right: (identifier)))
   (expression_statement
     (scoped_name
-      (identifier)
-      (identifier)))
+      left: (identifier)
+      right: (identifier)))
   (expression_statement
     (safe_object_access
-      (identifier)
-      (identifier)))
+      left: (identifier)
+      right: (identifier)))
   (expression_statement
     (function_call
       function: (object_access
-        (identifier)
-        (identifier))
+        left: (identifier)
+        right: (identifier))
       (argument_list
         (argument
           value: (number_literal))
@@ -143,34 +143,34 @@ new MyClass():Size.
       (argument_list)))
   (expression_statement
     (object_access
-      (identifier)
-      (identifier)))
+      left: (identifier)
+      right: (identifier)))
   (expression_statement
     (function_call
       function: (object_access
-        (identifier)
-        (identifier)
-        (identifier)
-        (identifier))
+        left: (identifier)
+        right: (identifier)
+        right: (identifier)
+        right: (identifier))
       (argument_list)))
   (assignment_statement
     left: (object_access
-      (identifier)
-      (identifier))
+      left: (identifier)
+      right: (identifier))
     operator: (assignment_operator)
     right: (object_access_expression
-      target: (function_call
+      left: (function_call
         function: (identifier)
         (argument_list
           (argument
             value: (identifier))))
-      (identifier)))
+      right: (identifier)))
   (expression_statement
     (object_access_expression
-      target: (new_expression
+      left: (new_expression
         type: (identifier)
         (argument_list))
-      (identifier))))
+      right: (identifier))))
 
 ================================================================================
 ARRAY ACCESS
@@ -225,8 +225,8 @@ arr[1, 2];
     (null_literal))
   (expression_statement
     (safe_object_access
-      (identifier)
-      (identifier)))
+      left: (identifier)
+      right: (identifier)))
   (expression_statement
     (array_access
       array: (identifier)

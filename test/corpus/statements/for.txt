@@ -40,15 +40,15 @@ END.
         (where_clause
           (binary_expression
             (qualified_name
-              (identifier)
-              (identifier))
+              left: (identifier)
+              right: (identifier))
             (number_literal)))
         (no_lock)))
     (body
       (display_statement
         (qualified_name
-          (identifier)
-          (identifier)))))
+          left: (identifier)
+          right: (identifier)))))
   (for_each_statement
     (for_record_list
       (for_record
@@ -58,8 +58,8 @@ END.
     (body
       (display_statement
         (qualified_name
-          (identifier)
-          (identifier)))))
+          left: (identifier)
+          right: (identifier)))))
   (for_each_statement
     (for_record_list
       (for_record
@@ -67,24 +67,24 @@ END.
         (where_clause
           (binary_expression
             (qualified_name
-              (identifier)
-              (identifier))
+              left: (identifier)
+              right: (identifier))
             (string_literal)))
         (no_lock)
         (use_index
           index: (identifier))
         (break_by
           (qualified_name
-            (identifier)
-            (identifier))
+            left: (identifier)
+            right: (identifier))
           (qualified_name
-            (identifier)
-            (identifier)))))
+            left: (identifier)
+            right: (identifier)))))
     (body
       (display_statement
         (qualified_name
-          (identifier)
-          (identifier)))))
+          left: (identifier)
+          right: (identifier)))))
   (for_each_statement
     (for_record_list
       (for_record
@@ -92,13 +92,13 @@ END.
         (no_lock)
         (by_clause
           (qualified_name
-            (identifier)
-            (identifier)))))
+            left: (identifier)
+            right: (identifier)))))
     (body
       (display_statement
         (qualified_name
-          (identifier)
-          (identifier)))))
+          left: (identifier)
+          right: (identifier)))))
   (for_each_statement
     (for_record_list
       (for_record
@@ -110,8 +110,8 @@ END.
     (body
       (put_statement
         value: (qualified_name
-          (identifier)
-          (identifier))
+          left: (identifier)
+          right: (identifier))
         (skip))))
   (for_each_statement
     label: (identifier)
@@ -122,8 +122,8 @@ END.
     (body
       (display_statement
         (qualified_name
-          (identifier)
-          (identifier)))))
+          left: (identifier)
+          right: (identifier)))))
   (for_each_statement
     (for_record_list
       (for_record
@@ -133,5 +133,5 @@ END.
     (body
       (display_statement
         (qualified_name
-          (identifier)
-          (identifier))))))
+          left: (identifier)
+          right: (identifier))))))

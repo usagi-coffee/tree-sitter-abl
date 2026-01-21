@@ -124,10 +124,10 @@ module.exports = (ctx) => {
         1,
         seq(
           field(
-            "target",
+            "left",
             choice($.function_call, $.parenthesized_expression, $.new_expression),
           ),
-          repeat1(seq($._namecolon, $.identifier)),
+          repeat1(seq($._namecolon, field("right", $.identifier))),
         ),
       ),
 

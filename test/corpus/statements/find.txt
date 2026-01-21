@@ -19,8 +19,8 @@ FIND Customer USING Customer.CustNum NO-ERROR.
     (where_clause
       (binary_expression
         (qualified_name
-          (identifier)
-          (identifier))
+          left: (identifier)
+          right: (identifier))
         (number_literal)))
     (no_lock))
   (find_statement
@@ -28,8 +28,8 @@ FIND Customer USING Customer.CustNum NO-ERROR.
     (where_clause
       (binary_expression
         (qualified_name
-          (identifier)
-          (identifier))
+          left: (identifier)
+          right: (identifier))
         (identifier)))
     (no_lock)
     (no_error))
@@ -38,8 +38,8 @@ FIND Customer USING Customer.CustNum NO-ERROR.
     (where_clause
       (binary_expression
         (qualified_name
-          (identifier)
-          (identifier))
+          left: (identifier)
+          right: (identifier))
         (number_literal)))
     (no_lock))
   (find_statement
@@ -70,6 +70,6 @@ FIND Customer USING Customer.CustNum NO-ERROR.
     table: (identifier)
     (using_clause
       (qualified_name
-        (identifier)
-        (identifier)))
+        left: (identifier)
+        right: (identifier)))
     (no_error)))
