@@ -48,6 +48,16 @@ INTERFACE Common.Message.IMessage:
   METHOD PUBLIC IMessage SetLanguage (INPUT poLanguage AS Language).
 END INTERFACE.
 
+CLASS Testings:
+  CONSTRUCTOR PUBLIC Testings(databasename AS CHAR):
+    MESSAGE "create " + databasename.
+  END CONSTRUCTOR.
+
+  METHOD PUBLIC VOID stuff(  ).
+    MESSAGE "hi".
+  END METHOD.
+END CLASS.
+
 --------------------------------------------------------------------------------
 
 (source_file
@@ -156,4 +166,23 @@ END INTERFACE.
         (method_parameter_list
           (method_parameter
             name: (identifier)
-            type: (identifier)))))))
+            type: (identifier))))))
+  (class_definition
+    name: (identifier)
+    (constructor_definition
+      name: (identifier)
+      (method_parameter_list
+        (method_parameter
+          name: (identifier)
+          type: (identifier)))
+      (constructor_body
+        (message_statement
+          (binary_expression
+            (string_literal)
+            (identifier)))))
+    (method_definition
+      name: (identifier)
+      (method_parameter_list)
+      (method_body
+        (message_statement
+          (string_literal))))))

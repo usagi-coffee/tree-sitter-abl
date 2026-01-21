@@ -12,9 +12,19 @@ module.exports = ({ kw, tkw }) => ({
 
   interface_body_item: ($) =>
     choice(
-      $.method_definition,
+      alias($.interface_method_definition, $.method_definition),
       $.property_definition,
       $.preprocessor_directive,
       $.include,
+    ),
+
+  interface_method_definition: ($) =>
+    seq(
+      kw("METHOD"),
+      repeat($.__method_modifier_no_abstract),
+      $.__method_return_type,
+      field("name", $.identifier),
+      $.method_parameter_list,
+      $._terminator_dot,
     ),
 });
