@@ -27,8 +27,8 @@
 
 ## Conventions
 
-- Always search in `docs/abl-reference.pdf` document before implementing a new syntax.
-- Treat `src/parser.c`, `src/grammar.json`, and `src/node-types.json` as generated; edit `grammar.js` and `scanner.c` (if needed) instead.
+- Always search for syntax details in `docs/abl-reference.txt` document during planning phase or implementing new features.
+- Treat `src/parser.c`, `src/grammar.json`, and `src/node-types.json` as generated
 - Keep changes to `src/scanner.c` minimal and well-scoped, as it is hand-written C.
 - Always run `bun run test` after changes and make sure they pass and they are always covered by tests.
 - Keep everyting idiomatic and in-line with how should tree-sitter grammar parser be done, consult official `tree-sitter` documentation.
@@ -37,10 +37,10 @@
 - Please place functions and write tests into correct files.
 - Always prefer to inline keywords to `kw("SOME-KW")` instead of doing `some_keyword` node unless necessary to, and if necessary first ask for confirmation.
 - Do _NOT_ try to implement keywords as external scanner tokens that match case-insensitively with non-identifier character boundaries.
-- Always check for `(ERROR)` nodes in the tests nodes and treat them as errors than need to be fixed.
+- Always check for `(ERROR)` or `(MISSING)` nodes in the test output and treat them as errors that need to be fixed.
 - Keep the nodes clean, for example if you are going to do two nodes like `binary_expression_no_eq` and `binary_expression` alias it to `binary_expression` if it's theoretically compatible.
 - Use compact rule formatting: keep one-line rules adjacent with no blank lines between them. Only insert a blank line before/after multi-line rules (rules that wrap to multiple lines). Avoid blank lines between consecutive one-line rules.
-- For every statement make a file in grammar/statements/<statement>.js and test/copus/statements<statement>.txt, do not store specific statement implementations in grammar/statements.js
+- For every statement make a file in `grammar/statements/*.js` and `test/copus/statements/*.txt`, do not store specific statement implementations in `grammar/statements.js`.
 - We are "duplicating" modifiers/tunings for statements because we want most of the context related to the statement to be in the same file hence there are `__<statement>_rules` that get aliased to `$.rule` then later.
 - When you use `token(/word/i)` prefer using `tkw()` function instead if applicable.
 
