@@ -2,9 +2,6 @@ name: CI
 
 on:
   push:
-  pull_request:
-on:
-  push:
     branches:
       - master
   pull_request:
@@ -14,6 +11,7 @@ jobs:
     if: >
       !startsWith(github.event.head_commit.message, 'meta:')
       && !startsWith(github.event.head_commit.message, 'agent:')
+      && !startsWith(github.event.head_commit.message, 'ci:')
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
