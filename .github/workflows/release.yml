@@ -35,8 +35,8 @@ jobs:
           name: ${{ github.ref_name }}
           files: |
             tree-sitter-abl.wasm
+            libtree-sitter-abl.so
             abl.so
-            libtree-sitter-abl.so 
 
   test:
     runs-on: ubuntu-latest
