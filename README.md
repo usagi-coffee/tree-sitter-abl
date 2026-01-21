@@ -2,7 +2,7 @@
 
 OpenEdge Advanced Business Language (ABL) grammar for tree-sitter.
 
-To see the syntax tree outputs see `test/corpus`.
+Starting with `v0.0.47`, this grammar was rewritten from scratch with an AI-first approach (authored largely by an agent). Expect that some things from earlier releases could break, including likely changes to AST node names. This shift reflects the scale of ABL; the language is so big that maintaining it by hand is not realistic, so the implementation favors AI-assisted evolution. As a result, some rules are intentionally duplicated to improve AI maintainability, which can make the codebase less tidy for humans.
 
 ## Usage
 
