@@ -1,7 +1,5 @@
 # tree-sitter-abl
 
-> This is a temporary repository, will be merged to [@usagi-coffee/tree-sitter-abl](https://github.com/usagi-coffee/tree-sitter-abl)
-
 OpenEdge Advanced Business Language (ABL) grammar for tree-sitter.
 
 To see the syntax tree outputs see `test/corpus`.
