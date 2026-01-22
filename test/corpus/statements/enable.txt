@@ -1,0 +1,60 @@
+================================================================================
+ENABLE
+================================================================================
+
+ENABLE ALL.
+ENABLE ALL EXCEPT field1.
+ENABLE ALL EXCEPT field1 field2.
+ENABLE field1.
+ENABLE field1 field2 field3.
+ENABLE UNLESS-HIDDEN field1.
+ENABLE field1 WHEN x > 5.
+ENABLE field1 field2 WHEN y = 1.
+ENABLE field1 WITH FRAME f1.
+ENABLE field1 IN WINDOW w1.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (enable_statement)
+  (enable_statement
+    except: (identifier))
+  (enable_statement
+    except: (identifier)
+    except: (identifier))
+  (enable_statement
+    (enable_field
+      field: (identifier)))
+  (enable_statement
+    (enable_field
+      field: (identifier))
+    (enable_field
+      field: (identifier))
+    (enable_field
+      field: (identifier)))
+  (enable_statement
+    (enable_field
+      field: (identifier)))
+  (enable_statement
+    (enable_field
+      field: (identifier)
+      when: (binary_expression
+        (identifier)
+        (number_literal))))
+  (enable_statement
+    (enable_field
+      field: (identifier))
+    (enable_field
+      field: (identifier)
+      when: (binary_expression
+        (identifier)
+        (number_literal))))
+  (enable_statement
+    (enable_field
+      field: (identifier))
+    (frame_phrase
+      frame: (identifier)))
+  (enable_statement
+    (enable_field
+      field: (identifier))
+    window: (identifier)))

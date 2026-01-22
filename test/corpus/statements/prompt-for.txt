@@ -1,0 +1,42 @@
+================================================================================
+PROMPT-FOR
+================================================================================
+
+PROMPT-FOR field1.
+PROMPT-FOR field1 field2 field3.
+PROMPT-FOR field1 WHEN x > 5.
+PROMPT-FOR UNLESS-HIDDEN field1.
+PROMPT-FOR field1 IN WINDOW w1.
+PROMPT-FOR field1 WITH FRAME f1.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (prompt_for_statement
+    (prompt_for_item
+      field: (identifier)))
+  (prompt_for_statement
+    (prompt_for_item
+      field: (identifier))
+    (prompt_for_item
+      field: (identifier))
+    (prompt_for_item
+      field: (identifier)))
+  (prompt_for_statement
+    (prompt_for_item
+      field: (identifier)
+      when: (binary_expression
+        (identifier)
+        (number_literal))))
+  (prompt_for_statement
+    (prompt_for_item
+      field: (identifier)))
+  (prompt_for_statement
+    (prompt_for_item
+      field: (identifier))
+    window: (identifier))
+  (prompt_for_statement
+    (prompt_for_item
+      field: (identifier))
+    (frame_phrase
+      frame: (identifier))))

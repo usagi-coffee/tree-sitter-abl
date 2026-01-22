@@ -1,0 +1,28 @@
+================================================================================
+LOAD
+================================================================================
+
+LOAD "myapp.r".
+LOAD cFile.
+LOAD "myapp.r" DIR "/usr/lib".
+LOAD "myapp.r" APPLICATION "app1".
+LOAD "myapp.r" NEW.
+LOAD "myapp.r" NO-ERROR.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (load_statement
+    file: (string_literal))
+  (load_statement
+    file: (identifier))
+  (load_statement
+    file: (string_literal)
+    dir: (string_literal))
+  (load_statement
+    file: (string_literal)
+    app: (string_literal))
+  (load_statement
+    file: (string_literal))
+  (load_statement
+    file: (string_literal)))

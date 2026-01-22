@@ -1,0 +1,23 @@
+================================================================================
+DOS
+================================================================================
+
+DOS.
+DOS SILENT.
+DOS NOWAIT.
+DOS VALUE("dir").
+DOS SILENT VALUE("dir").
+DOS NOWAIT VALUE("dir").
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (dos_statement)
+  (dos_statement)
+  (dos_statement)
+  (dos_statement
+    command: (string_literal))
+  (dos_statement
+    command: (string_literal))
+  (dos_statement
+    command: (string_literal)))

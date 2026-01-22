@@ -1,0 +1,17 @@
+================================================================================
+UNLOAD
+================================================================================
+
+UNLOAD "myfile.r".
+UNLOAD cFile.
+UNLOAD "myfile.r" NO-ERROR.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (unload_statement
+    file: (string_literal))
+  (unload_statement
+    file: (identifier))
+  (unload_statement
+    file: (string_literal)))

@@ -1,0 +1,19 @@
+================================================================================
+NEXT-PROMPT
+================================================================================
+
+NEXT-PROMPT field1.
+NEXT-PROMPT Name.
+NEXT-PROMPT field1 WITH FRAME f1.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (next_prompt_statement
+    field: (identifier))
+  (next_prompt_statement
+    field: (identifier))
+  (next_prompt_statement
+    field: (identifier)
+    (frame_phrase
+      frame: (identifier))))

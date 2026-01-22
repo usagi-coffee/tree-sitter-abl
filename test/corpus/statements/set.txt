@@ -1,0 +1,43 @@
+================================================================================
+SET
+================================================================================
+
+SET field1.
+SET field1 field2 field3.
+SET field1 WHEN x > 5.
+SET UNLESS-HIDDEN field1.
+SET STREAM s1 field1.
+SET field1 WITH FRAME f1.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (set_statement
+    (set_item
+      field: (identifier)))
+  (set_statement
+    (set_item
+      field: (identifier))
+    (set_item
+      field: (identifier))
+    (set_item
+      field: (identifier)))
+  (set_statement
+    (set_item
+      field: (identifier)
+      when: (binary_expression
+        (identifier)
+        (number_literal))))
+  (set_statement
+    (set_item
+      field: (identifier)))
+  (set_statement
+    (stream_clause
+      stream: (identifier))
+    (set_item
+      field: (identifier)))
+  (set_statement
+    (set_item
+      field: (identifier))
+    (frame_phrase
+      frame: (identifier))))

@@ -1,0 +1,24 @@
+================================================================================
+RAW-TRANSFER
+================================================================================
+
+RAW-TRANSFER source TO target.
+RAW-TRANSFER FIELD source TO target.
+RAW-TRANSFER source TO target NO-ERROR.
+RAW-TRANSFER FIELD source TO dest NO-ERROR.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (raw_transfer_statement
+    source_field: (identifier)
+    target: (identifier))
+  (raw_transfer_statement
+    source_field: (identifier)
+    target_field: (identifier))
+  (raw_transfer_statement
+    source_field: (identifier)
+    target: (identifier))
+  (raw_transfer_statement
+    source_field: (identifier)
+    target_field: (identifier)))

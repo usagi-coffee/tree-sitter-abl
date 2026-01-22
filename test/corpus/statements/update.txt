@@ -1,0 +1,43 @@
+================================================================================
+UPDATE
+================================================================================
+
+UPDATE field1.
+UPDATE field1 field2 field3.
+UPDATE field1 WHEN x > 5.
+UPDATE UNLESS-HIDDEN field1.
+UPDATE field1 WITH FRAME f1.
+UPDATE field1 WITH FRAME f1 NO-ERROR.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (update_statement
+    (update_item
+      field: (identifier)))
+  (update_statement
+    (update_item
+      field: (identifier))
+    (update_item
+      field: (identifier))
+    (update_item
+      field: (identifier)))
+  (update_statement
+    (update_item
+      field: (identifier)
+      when: (binary_expression
+        (identifier)
+        (number_literal))))
+  (update_statement
+    (update_item
+      field: (identifier)))
+  (update_statement
+    (update_item
+      field: (identifier))
+    (frame_phrase
+      frame: (identifier)))
+  (update_statement
+    (update_item
+      field: (identifier))
+    (frame_phrase
+      frame: (identifier))))

@@ -1,0 +1,42 @@
+================================================================================
+INSERT
+================================================================================
+
+INSERT Customer.
+INSERT db.Customer.
+INSERT Customer EXCEPT field1.
+INSERT Customer EXCEPT field1 field2.
+INSERT Customer USING alternate.
+INSERT Customer EXCEPT field1 USING alternate.
+INSERT Customer WITH FRAME f1.
+INSERT Customer NO-ERROR.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (insert_statement
+    record: (identifier))
+  (insert_statement
+    record: (qualified_name
+      left: (identifier)
+      right: (identifier)))
+  (insert_statement
+    record: (identifier)
+    except: (identifier))
+  (insert_statement
+    record: (identifier)
+    except: (identifier)
+    except: (identifier))
+  (insert_statement
+    record: (identifier)
+    using: (identifier))
+  (insert_statement
+    record: (identifier)
+    except: (identifier)
+    using: (identifier))
+  (insert_statement
+    record: (identifier)
+    (frame_phrase
+      frame: (identifier)))
+  (insert_statement
+    record: (identifier)))

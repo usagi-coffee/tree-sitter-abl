@@ -1,0 +1,55 @@
+================================================================================
+DISABLE
+================================================================================
+
+DISABLE ALL.
+DISABLE ALL EXCEPT field1.
+DISABLE ALL EXCEPT field1 field2.
+DISABLE field1.
+DISABLE field1 field2 field3.
+DISABLE UNLESS-HIDDEN field1.
+DISABLE field1 WHEN x > 5.
+DISABLE field1 field2 WHEN y = 1.
+DISABLE field1 WITH FRAME f1.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (disable_statement)
+  (disable_statement
+    except: (identifier))
+  (disable_statement
+    except: (identifier)
+    except: (identifier))
+  (disable_statement
+    (disable_field
+      field: (identifier)))
+  (disable_statement
+    (disable_field
+      field: (identifier))
+    (disable_field
+      field: (identifier))
+    (disable_field
+      field: (identifier)))
+  (disable_statement
+    (disable_field
+      field: (identifier)))
+  (disable_statement
+    (disable_field
+      field: (identifier)
+      when: (binary_expression
+        (identifier)
+        (number_literal))))
+  (disable_statement
+    (disable_field
+      field: (identifier))
+    (disable_field
+      field: (identifier)
+      when: (binary_expression
+        (identifier)
+        (number_literal))))
+  (disable_statement
+    (disable_field
+      field: (identifier))
+    (frame_phrase
+      frame: (identifier))))
