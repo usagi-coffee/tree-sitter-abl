@@ -1,7 +1,7 @@
-module.exports = () => ({
+module.exports = ({ tkw }) => ({
   locked_expression: ($) =>
     seq(
-      token(/LOCKED/i),
+      tkw("LOCKED"),
       field(
         "record",
         choice(

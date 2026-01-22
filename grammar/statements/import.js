@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+module.exports = ({ kw, tkw }) => ({
   import_statement: ($) =>
     seq(
       kw("IMPORT"),
@@ -39,6 +39,6 @@ module.exports = ({ kw }) => ({
   __import_field_or_skip: ($) =>
     choice($.__import_field_name, alias("^", $.skip_field)),
   __import_field_name: ($) => choice($.identifier, $.qualified_name),
-  __import_no_lobs: ($) => token(/NO-LOBS/i),
-  __import_no_error: ($) => token(/NO-ERROR/i),
+  __import_no_lobs: ($) => tkw("NO-LOBS"),
+  __import_no_error: ($) => tkw("NO-ERROR"),
 });

@@ -1,6 +1,6 @@
 // Accessors
 
-module.exports = (ctx) => ({
+module.exports = ({ tkw }) => ({
   object_access: ($) =>
     prec(
       1,
@@ -69,7 +69,7 @@ module.exports = (ctx) => ({
       $._expression_list,
       seq(
         field("start", $._expression),
-        token(/FOR/i),
+        tkw("FOR"),
         field("count", $._expression),
       ),
     ),

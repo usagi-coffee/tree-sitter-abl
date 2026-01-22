@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+module.exports = ({ kw, tkw }) => ({
   query_definition: ($) =>
     seq(
       choice(kw("DEFINE"), kw("DEF")),
@@ -16,8 +16,8 @@ module.exports = ({ kw }) => ({
       kw("FOR"),
       $.query_table_list,
       optional(seq(kw("CACHE"), field("cache", $.number_literal))),
-      optional(token(/SCROLLING/i)),
-      optional(token(/RCODE-INFORMATION/i)),
+      optional(tkw("SCROLLING")),
+      optional(tkw("RCODE-INFORMATION")),
       $._terminator,
     ),
 

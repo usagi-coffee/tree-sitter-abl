@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+module.exports = ({ kw, tkw }) => ({
   input_statement: ($) =>
     seq(
       kw("INPUT"),
@@ -9,16 +9,16 @@ module.exports = ({ kw }) => ({
         ),
       ),
       choice(
-        token(/CLOSE/i),
+        tkw("CLOSE"),
         seq(kw("FROM"), $.__input_from_target),
       ),
       optional(alias($.__input_lob_dir_clause, $.lob_dir_clause)),
       optional(kw("BINARY")),
-      optional(choice(token(/ECHO/i), token(/NO-ECHO/i))),
+      optional(choice(tkw("ECHO"), tkw("NO-ECHO"))),
       optional(
         choice(
           seq(kw("MAP"), field("map", $.__input_map_entry)),
-          token(/NO-MAP/i),
+          tkw("NO-MAP"),
         ),
       ),
       optional(kw("UNBUFFERED")),
@@ -29,14 +29,14 @@ module.exports = ({ kw }) => ({
   __input_from_target: ($) =>
     choice(
       field("file", $.__input_file_target),
-      token(/TERMINAL/i),
-      seq(token(/VALUE/i), "(", $._expression, ")"),
+      tkw("TERMINAL"),
+      seq(tkw("VALUE"), "(", $._expression, ")"),
       seq(
-        token(/OS-DIR/i),
+        tkw("OS-DIR"),
         "(",
         field("directory", $._expression),
         ")",
-        optional(token(/NO-ATTR-LIST/i)),
+        optional(tkw("NO-ATTR-LIST")),
       ),
     ),
   __input_file_target: ($) =>
@@ -52,12 +52,12 @@ module.exports = ({ kw }) => ({
   __input_lob_dir_clause: ($) =>
     seq(
       kw("LOB-DIR"),
-      choice($.constant, seq(token(/VALUE/i), "(", $._expression, ")")),
+      choice($.constant, seq(tkw("VALUE"), "(", $._expression, ")")),
     ),
   __input_map_entry: ($) => choice($.identifier, $.string_literal),
   __input_convert_clause: ($) =>
     choice(
-      token(/NO-CONVERT/i),
+      tkw("NO-CONVERT"),
       seq(
         kw("CONVERT"),
         optional(seq(kw("TARGET"), field("target", $.string_literal))),

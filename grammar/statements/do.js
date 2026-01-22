@@ -73,7 +73,7 @@ module.exports = ({ kw, tkw }) => ({
       ),
     ),
   __do_on_quit_clause: ($) =>
-    seq(kw("ON"), token(/QUIT/i), ",", token(/LEAVE/i)),
-  __do_undo_throw_phrase: ($) => seq(token(/UNDO/i), ",", token(/THROW/i)),
-  __do_undo_leave_phrase: ($) => seq(token(/UNDO/i), ",", token(/LEAVE/i)),
+    seq(kw("ON"), tkw("QUIT"), ",", tkw("LEAVE")),
+  __do_undo_throw_phrase: ($) => seq(tkw("UNDO"), ",", tkw("THROW")),
+  __do_undo_leave_phrase: ($) => seq(tkw("UNDO"), ",", tkw("LEAVE")),
 });

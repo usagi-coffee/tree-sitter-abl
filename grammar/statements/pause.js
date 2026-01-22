@@ -1,13 +1,13 @@
-module.exports = ({ kw }) => ({
+module.exports = ({ kw, tkw }) => ({
   pause_statement: ($) =>
     seq(
-      token(/PAUSE/i),
+      tkw("PAUSE"),
       optional(field("duration", $._expression)),
-      optional(token(/BEFORE-HIDE/i)),
+      optional(tkw("BEFORE-HIDE")),
       optional(
         choice(
           seq(kw("MESSAGE"), field("message", $.string_literal)),
-          token(/NO-MESSAGE/i),
+          tkw("NO-MESSAGE"),
         ),
       ),
       optional(seq(kw("IN"), kw("WINDOW"), field("window", $._expression))),

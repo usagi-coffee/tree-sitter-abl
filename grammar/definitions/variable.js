@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+module.exports = ({ kw, tkw }) => ({
   variable_definition: ($) =>
     seq(
       choice(kw("DEFINE"), kw("DEF")),
@@ -90,7 +90,7 @@ module.exports = ({ kw }) => ({
     seq(kw("CONTEXT-HELP-ID"), $._expression),
   __variable_dcolor_option: ($) => seq(kw("DCOLOR"), $._expression),
   __variable_decimals_option: ($) => seq(kw("DECIMALS"), $.number_literal),
-  __variable_drop_target_option: ($) => token(/DROP-TARGET/i),
+  __variable_drop_target_option: ($) => tkw("DROP-TARGET"),
   __variable_font_option: ($) => seq(kw("FONT"), $._expression),
   __variable_fgcolor_option: ($) => seq(kw("FGCOLOR"), $._expression),
   __variable_format_option: ($) => seq(kw("FORMAT"), $.string_literal),
@@ -98,11 +98,11 @@ module.exports = ({ kw }) => ({
   __variable_pfcolor_option: ($) => seq(kw("PFCOLOR"), $._expression),
   __variable_view_as_phrase: ($) => seq(kw("VIEW-AS"), $.identifier),
   __variable_trigger_phrase: ($) => seq(kw("ON"), $.identifier),
-  __variable_no_undo: ($) => token(/NO-UNDO/i),
+  __variable_no_undo: ($) => tkw("NO-UNDO"),
   __variable_mouse_pointer_option: ($) =>
     seq(kw("MOUSE-POINTER"), $._expression),
   __variable_case_sensitive_option: ($) =>
-    seq(optional(kw("NOT")), token(/CASE-SENSITIVE/i)),
+    seq(optional(kw("NOT")), tkw("CASE-SENSITIVE")),
   __variable_extent_size: ($) =>
     choice($.number_literal, $.constant, $.identifier),
   __variable_label_list: ($) =>

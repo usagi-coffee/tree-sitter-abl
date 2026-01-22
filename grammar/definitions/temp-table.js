@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+module.exports = ({ kw, tkw }) => ({
   temp_table_definition: ($) =>
     seq(
       choice(kw("DEFINE"), kw("DEF")),
@@ -30,7 +30,7 @@ module.exports = ({ kw }) => ({
       optional(
         seq(kw("SERIALIZE-NAME"), field("serialize_name", $.string_literal)),
       ),
-      optional(token(/REFERENCE-ONLY/i)),
+      optional(tkw("REFERENCE-ONLY")),
       repeat(
         choice(
           alias($.__temp_table_like_clause, $.like_clause),
@@ -83,7 +83,7 @@ module.exports = ({ kw }) => ({
         seq(
           kw("LIKE"),
           field("type", $._type_name),
-          optional(token(/VALIDATE/i)),
+          optional(tkw("VALIDATE")),
         ),
       ),
       repeat(alias($.__temp_table_field_option, $.field_option)),
@@ -103,19 +103,19 @@ module.exports = ({ kw }) => ({
       ),
       repeat1($.__temp_table_index_field),
     ),
-  __temp_table_no_undo: ($) => token(/NO-UNDO/i),
+  __temp_table_no_undo: ($) => tkw("NO-UNDO"),
   __temp_table_like_clause: ($) =>
     seq(
       kw("LIKE"),
       field("like", $.__temp_table_like_name),
-      optional(token(/VALIDATE/i)),
+      optional(tkw("VALIDATE")),
       repeat($.__temp_table_use_index_clause),
     ),
   __temp_table_like_sequential_clause: ($) =>
     seq(
       kw("LIKE-SEQUENTIAL"),
       field("like", $.__temp_table_like_name),
-      optional(token(/VALIDATE/i)),
+      optional(tkw("VALIDATE")),
       repeat($.__temp_table_use_index_clause),
     ),
   __temp_table_use_index_clause: ($) =>
@@ -124,7 +124,7 @@ module.exports = ({ kw }) => ({
       field("index", $.identifier),
       optional(seq(kw("AS"), kw("PRIMARY"))),
     ),
-  __temp_table_rcode_information: ($) => token(/RCODE-INFORMATION/i),
+  __temp_table_rcode_information: ($) => tkw("RCODE-INFORMATION"),
   __temp_table_before_table_clause: ($) =>
     seq(kw("BEFORE-TABLE"), field("before", $.identifier)),
   __temp_table_index_field: ($) =>
@@ -149,9 +149,9 @@ module.exports = ({ kw }) => ({
       ),
       seq(kw("LABEL"), $.__temp_table_label_list),
       seq(kw("MOUSE-POINTER"), $._expression),
-      seq(optional(kw("NOT")), token(/CASE-SENSITIVE/i)),
+      seq(optional(kw("NOT")), tkw("CASE-SENSITIVE")),
       seq(kw("PFCOLOR"), $._expression),
-      token(/SERIALIZE-HIDDEN/i),
+      tkw("SERIALIZE-HIDDEN"),
       seq(kw("SERIALIZE-NAME"), $.string_literal),
       seq(choice(kw("TTCODEPAGE"), kw("COLUMN-CODEPAGE")), $.string_literal),
       seq(kw("XML-DATA-TYPE"), $.string_literal),

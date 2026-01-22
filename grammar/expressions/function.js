@@ -1,4 +1,4 @@
-module.exports = () => ({
+module.exports = ({ tkw }) => ({
   function_call: ($) =>
     seq(
       field(
@@ -13,9 +13,9 @@ module.exports = () => ({
 
   argument: ($) =>
     seq(
-      optional(token(/INPUT|OUTPUT|INPUT-OUTPUT/i)),
-      optional(token(/TABLE/i)),
+      optional(choice(tkw("INPUT"), tkw("OUTPUT"), tkw("INPUT-OUTPUT"))),
+      optional(tkw("TABLE")),
       field("value", $._expression),
-      optional(token(/BY-REFERENCE/i)),
+      optional(tkw("BY-REFERENCE")),
     ),
 });

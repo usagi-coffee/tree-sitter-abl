@@ -1,7 +1,7 @@
-module.exports = () => ({
+module.exports = ({ tkw }) => ({
   set_size_statement: ($) =>
     seq(
-      token(/SET-SIZE/i),
+      tkw("SET-SIZE"),
       "(",
       field("buffer", $._expression),
       ")",

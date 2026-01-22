@@ -6,7 +6,7 @@ module.exports = ({ kw, tkw }) => ({
       $._colon,
       repeat($._statement),
       tkw("END"),
-      optional(token(/PROCEDURE/i)),
+      optional(tkw("PROCEDURE")),
       $._terminator,
     ),
 
@@ -27,7 +27,7 @@ module.exports = ({ kw, tkw }) => ({
   __procedure_standard_parameter: ($) =>
     seq(
       choice(kw("INPUT"), kw("OUTPUT"), kw("INPUT-OUTPUT"), kw("RETURN")),
-      token(/PARAM(ETER)?/i),
+      tkw("PARAM(ETER)?", "PARAMETER"),
       field("name", $.identifier),
       $.__procedure_variable_type_clause,
       optional(alias($.__procedure_initial_option, $.initial_option)),
@@ -37,7 +37,7 @@ module.exports = ({ kw, tkw }) => ({
   __procedure_table_parameter: ($) =>
     seq(
       choice(kw("INPUT"), kw("OUTPUT"), kw("INPUT-OUTPUT")),
-      token(/PARAM(ETER)?/i),
+      tkw("PARAM(ETER)?", "PARAMETER"),
       choice(
         seq(
           kw("TABLE"),
@@ -72,7 +72,7 @@ module.exports = ({ kw, tkw }) => ({
       kw("FOR"),
       optional(kw("TEMP-TABLE")),
       field("table", $.__procedure_record_name),
-      optional(token(/PRESELECT/i)),
+      optional(tkw("PRESELECT")),
     ),
 
   __procedure_variable_type_clause: ($) =>
@@ -97,13 +97,13 @@ module.exports = ({ kw, tkw }) => ({
       choice($._expression, seq("[", optional($._expression_list), "]")),
     ),
 
-  __procedure_no_undo: ($) => token(/NO-UNDO/i),
+  __procedure_no_undo: ($) => tkw("NO-UNDO"),
   __procedure_extent_size: ($) =>
     choice($.number_literal, $.constant, $.identifier),
   __procedure_field_name: ($) => choice($.qualified_name, $.identifier),
   __procedure_record_name: ($) => choice($.qualified_name, $.identifier),
   __procedure_table_parameter_option: ($) =>
-    choice(token(/APPEND/i), token(/BIND/i), token(/BY-VALUE/i)),
+    choice(tkw("APPEND"), tkw("BIND"), tkw("BY-VALUE")),
   __procedure_handle_parameter_option: ($) =>
-    choice(token(/BIND/i), token(/BY-VALUE/i)),
+    choice(tkw("BIND"), tkw("BY-VALUE")),
 });

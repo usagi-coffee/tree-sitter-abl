@@ -40,7 +40,7 @@ module.exports = ({ kw, tkw }) => ({
   _for_record_option_or_where: ($) =>
     choice($._for_record_option, alias($.__for_where_clause, $.where_clause)),
 
-  __for_undo_throw_phrase: ($) => seq(token(/UNDO/i), ",", token(/THROW/i)),
+  __for_undo_throw_phrase: ($) => seq(tkw("UNDO"), ",", tkw("THROW")),
   __for_where_clause: ($) => seq(kw("WHERE"), $._expression),
   __for_of_clause: ($) => seq(kw("OF"), $.__for_record_name),
   __for_record_name: ($) => choice($.identifier, $.qualified_name),

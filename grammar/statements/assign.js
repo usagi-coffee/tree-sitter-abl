@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+module.exports = ({ kw, tkw }) => ({
   expression_statement: ($) =>
     prec(
       -1,
@@ -41,7 +41,7 @@ module.exports = ({ kw }) => ({
   __assign_when_available_clause: ($) =>
     seq(kw("WHEN"), kw("AVAILABLE"), $.__assign_record_name),
   __assign_record_name: ($) => choice($.identifier, $.qualified_name),
-  __assign_no_error: ($) => token(/NO-ERROR/i),
-  __expression_no_error: ($) => token(/NO-ERROR/i),
-  __assignment_no_error: ($) => token(/NO-ERROR/i),
+  __assign_no_error: ($) => tkw("NO-ERROR"),
+  __expression_no_error: ($) => tkw("NO-ERROR"),
+  __assignment_no_error: ($) => tkw("NO-ERROR"),
 });

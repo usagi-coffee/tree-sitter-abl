@@ -231,7 +231,7 @@ module.exports = ({ kw, tkw }) => ({
   __property_initial_keyword: ($) =>
     choice(kw("INITIAL"), alias(token(seq(/INIT(IAL)?/i, /\s+/)), "INITIAL")),
 
-  __property_no_undo: ($) => token(/NO-UNDO/i),
+  __property_no_undo: ($) => tkw("NO-UNDO"),
 
   __method_modifier: ($) =>
     choice(
@@ -297,7 +297,7 @@ module.exports = ({ kw, tkw }) => ({
   __method_extent_size: ($) =>
     choice($.number_literal, $.constant, $.identifier),
   __method_field_name: ($) => choice($.qualified_name, $.identifier),
-  __method_no_undo: ($) => token(/NO-UNDO/i),
+  __method_no_undo: ($) => tkw("NO-UNDO"),
   __method_table_parameter: ($) =>
     seq(
       optional(choice(kw("INPUT"), kw("OUTPUT"), kw("INPUT-OUTPUT"))),
@@ -329,11 +329,11 @@ module.exports = ({ kw, tkw }) => ({
   __method_record_name: ($) => choice($.qualified_name, $.identifier),
   __method_table_parameter_option: ($) =>
     choice(
-      token(/APPEND/i),
-      token(/BIND/i),
-      token(/BY-VALUE/i),
-      token(/BY-REFERENCE/i),
+      tkw("APPEND"),
+      tkw("BIND"),
+      tkw("BY-VALUE"),
+      tkw("BY-REFERENCE"),
     ),
   __method_handle_parameter_option: ($) =>
-    choice(token(/BIND/i), token(/BY-VALUE/i), token(/BY-REFERENCE/i)),
+    choice(tkw("BIND"), tkw("BY-VALUE"), tkw("BY-REFERENCE")),
 });

@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+module.exports = ({ kw, tkw }) => ({
   export_statement: ($) =>
     seq(
       kw("EXPORT"),
@@ -30,5 +30,5 @@ module.exports = ({ kw }) => ({
   __export_stream_handle_clause: ($) =>
     seq(kw("STREAM-HANDLE"), field("handle", $._expression)),
   __export_delimiter_clause: ($) => seq(kw("DELIMITER"), $.string_literal),
-  __export_no_lobs: ($) => token(/NO-LOBS/i),
+  __export_no_lobs: ($) => tkw("NO-LOBS"),
 });

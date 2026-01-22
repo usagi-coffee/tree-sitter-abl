@@ -3,11 +3,11 @@ module.exports = ({ kw, tkw }) => ({
     seq(
       kw("ENUM"),
       field("name", $.identifier),
-      optional(token(prec(1, /FLAGS/i))),
+      optional(prec(1, tkw("FLAGS"))),
       $._colon,
       $.enum_body,
       tkw("END"),
-      token(/ENUM/i),
+      tkw("ENUM"),
       $._terminator,
     ),
 

@@ -7,7 +7,7 @@ module.exports = ({ kw, tkw }) => ({
       repeat1($.case_when_clause),
       optional($.case_otherwise_clause),
       tkw("END"),
-      optional(token(/CASE/i)),
+      optional(tkw("CASE")),
       $._terminator,
     ),
 

@@ -1,6 +1,6 @@
-module.exports = ({ op }) => ({
+module.exports = ({ op, tkw }) => ({
   can_find_expression: ($) =>
-    seq(token(/CAN-FIND/i), "(", $.record_query, ")"),
+    seq(tkw("CAN-FIND"), "(", $.record_query, ")"),
 
   record_query: ($) =>
     prec.right(

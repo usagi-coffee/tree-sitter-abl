@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+module.exports = ({ kw, tkw }) => ({
   output_statement: ($) =>
     seq(
       kw("OUTPUT"),
@@ -10,7 +10,7 @@ module.exports = ({ kw }) => ({
               alias($.__output_stream_handle_clause, $.stream_handle_clause),
             ),
           ),
-          token(/CLOSE/i),
+          tkw("CLOSE"),
         ),
         seq(
           optional(
@@ -39,7 +39,7 @@ module.exports = ({ kw }) => ({
       $._terminator,
     ),
 
-  __output_append_clause: ($) => token(/APPEND/i),
+  __output_append_clause: ($) => tkw("APPEND"),
   __output_to_option: ($) =>
     choice(
       alias($.__output_lob_dir_clause, $.lob_dir_clause),
@@ -48,11 +48,11 @@ module.exports = ({ kw }) => ({
       choice(kw("LANDSCAPE"), kw("PORTRAIT")),
       alias($.__output_append_clause, $.append_clause),
       kw("BINARY"),
-      token(/ECHO/i),
-      token(/NO-ECHO/i),
+      tkw("ECHO"),
+      tkw("NO-ECHO"),
       kw("KEEP-MESSAGES"),
       seq(kw("MAP"), field("map", $.__output_map_entry)),
-      token(/NO-MAP/i),
+      tkw("NO-MAP"),
       kw("PAGED"),
       alias($.__output_page_size_clause, $.page_size_clause),
       kw("UNBUFFERED"),
@@ -60,10 +60,10 @@ module.exports = ({ kw }) => ({
     ),
   __output_through_option: ($) =>
     choice(
-      token(/ECHO/i),
-      token(/NO-ECHO/i),
+      tkw("ECHO"),
+      tkw("NO-ECHO"),
       seq(kw("MAP"), field("map", $.__output_map_entry)),
-      token(/NO-MAP/i),
+      tkw("NO-MAP"),
       kw("PAGED"),
       alias($.__output_page_size_clause, $.page_size_clause),
       kw("UNBUFFERED"),
@@ -72,7 +72,7 @@ module.exports = ({ kw }) => ({
   __output_convert_clause: ($) =>
     seq(
       choice(
-        token(/NO-CONVERT/i),
+        tkw("NO-CONVERT"),
         seq(
           kw("CONVERT"),
           optional(seq(kw("TARGET"), field("target", $.string_literal))),
@@ -83,7 +83,7 @@ module.exports = ({ kw }) => ({
   __output_lob_dir_clause: ($) =>
     seq(
       kw("LOB-DIR"),
-      choice($.constant, seq(token(/VALUE/i), "(", $._expression, ")")),
+      choice($.constant, seq(tkw("VALUE"), "(", $._expression, ")")),
     ),
   __output_num_copies_clause: ($) =>
     seq(
@@ -91,7 +91,7 @@ module.exports = ({ kw }) => ({
       choice(
         $.number_literal,
         $.constant,
-        seq(token(/VALUE/i), "(", $._expression, ")"),
+        seq(tkw("VALUE"), "(", $._expression, ")"),
       ),
     ),
   __output_page_size_clause: ($) =>
@@ -100,7 +100,7 @@ module.exports = ({ kw }) => ({
       choice(
         $.number_literal,
         $.constant,
-        seq(token(/VALUE/i), "(", $._expression, ")"),
+        seq(tkw("VALUE"), "(", $._expression, ")"),
       ),
     ),
   __output_map_entry: ($) => choice($.identifier, $.string_literal),
@@ -108,18 +108,18 @@ module.exports = ({ kw }) => ({
     choice(
       seq(kw("PRINTER"), optional(field("printer", $.__output_printer_target))),
       field("file", choice($.string_literal, $.constant)),
-      token(/TERMINAL/i),
-      seq(token(/VALUE/i), "(", $._expression, ")"),
+      tkw("TERMINAL"),
+      seq(tkw("VALUE"), "(", $._expression, ")"),
       token(/\"CLIPBOARD\"/i),
     ),
   __output_through_program_target: ($) =>
     choice(
       field("program", $.identifier),
       field("program", $.string_literal),
-      seq(token(/VALUE/i), "(", $._expression, ")"),
+      seq(tkw("VALUE"), "(", $._expression, ")"),
     ),
   __output_through_argument: ($) =>
-    choice($.__output_argument, seq(token(/VALUE/i), "(", $._expression, ")")),
+    choice($.__output_argument, seq(tkw("VALUE"), "(", $._expression, ")")),
   __output_argument: ($) =>
     choice(
       $.string_literal,

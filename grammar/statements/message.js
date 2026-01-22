@@ -18,14 +18,14 @@ module.exports = ({ kw, tkw }) => ({
   __message_view_as_clause: ($) =>
     seq(
       kw("VIEW-AS"),
-      token(/ALERT-BOX/i),
+      tkw("ALERT-BOX"),
       optional(
         choice(
-          token(/MESSAGE/i),
-          token(/QUESTION/i),
-          token(/INFORMATION/i),
-          token(/ERROR/i),
-          token(/WARNING/i),
+          tkw("MESSAGE"),
+          tkw("QUESTION"),
+          tkw("INFORMATION"),
+          tkw("ERROR"),
+          tkw("WARNING"),
         ),
       ),
       optional(alias($.__message_buttons_clause, $.buttons_clause)),
@@ -36,17 +36,19 @@ module.exports = ({ kw, tkw }) => ({
     seq(
       kw("BUTTONS"),
       choice(
-        token(/YES-NO/i),
-        token(/YES-NO-CANCEL/i),
-        token(/OK-CANCEL/i),
-        token(/RETRY-CANCEL/i),
-        token(/OK/i),
+        tkw("YES-NO"),
+        tkw("YES-NO-CANCEL"),
+        tkw("OK-CANCEL"),
+        tkw("RETRY-CANCEL"),
+        tkw("OK"),
       ),
     ),
   __message_skip_item: ($) =>
-    choice(
-      seq(alias(token(/SKIP\(/i), "SKIP"), field("count", $._expression), ")"),
-      tkw("SKIP"),
+    prec.right(
+      choice(
+        seq(tkw("SKIP"), "(", field("count", $._expression), ")"),
+        tkw("SKIP"),
+      ),
     ),
   __message_color_phrase: ($) =>
     seq(
@@ -56,15 +58,15 @@ module.exports = ({ kw, tkw }) => ({
         kw("INPUT"),
         kw("MESSAGES"),
         $.number_literal,
-        seq(token(/VALUE/i), "(", field("value", $._expression), ")"),
+        seq(tkw("VALUE"), "(", field("value", $._expression), ")"),
         seq(
           optional(
             repeat1(
               choice(
-                token(/BLINK-/i),
-                token(/BRIGHT-/i),
-                token(/RVV-/i),
-                token(/UNDERLINE-/i),
+                tkw("BLINK-"),
+                tkw("BRIGHT-"),
+                tkw("RVV-"),
+                tkw("UNDERLINE-"),
               ),
             ),
           ),
@@ -81,7 +83,7 @@ module.exports = ({ kw, tkw }) => ({
         seq(kw("LIKE"), field("like", $.__message_field_name)),
       ),
       optional(seq(kw("FORMAT"), field("format", $.string_literal))),
-      optional(token(/AUTO-RETURN/i)),
+      optional(tkw("AUTO-RETURN")),
     ),
   __message_field_name: ($) => choice($.identifier, $.qualified_name),
 });

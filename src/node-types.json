@@ -4898,6 +4898,11 @@
     }
   },
   {
+    "type": "drop_target_option",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "empty_statement",
     "named": true,
     "fields": {}
@@ -15808,7 +15813,19 @@
     "named": false
   },
   {
+    "type": "ALERT-BOX",
+    "named": false
+  },
+  {
+    "type": "ALLOW-REPLICATION",
+    "named": false
+  },
+  {
     "type": "AND",
+    "named": false
+  },
+  {
+    "type": "APPEND",
     "named": false
   },
   {
@@ -15828,6 +15845,10 @@
     "named": false
   },
   {
+    "type": "AUTO-RETURN",
+    "named": false
+  },
+  {
     "type": "AVAIL",
     "named": false
   },
@@ -15837,6 +15858,10 @@
   },
   {
     "type": "AVERAGE",
+    "named": false
+  },
+  {
+    "type": "BEFORE-HIDE",
     "named": false
   },
   {
@@ -15856,11 +15881,23 @@
     "named": false
   },
   {
+    "type": "BIND",
+    "named": false
+  },
+  {
+    "type": "BLINK-",
+    "named": false
+  },
+  {
     "type": "BLOCK-LEVEL",
     "named": false
   },
   {
     "type": "BREAK",
+    "named": false
+  },
+  {
+    "type": "BRIGHT-",
     "named": false
   },
   {
@@ -15884,11 +15921,27 @@
     "named": false
   },
   {
+    "type": "BY-REFERENCE",
+    "named": false
+  },
+  {
+    "type": "BY-VALUE",
+    "named": false
+  },
+  {
     "type": "CACHE",
     "named": false
   },
   {
+    "type": "CAN-FIND",
+    "named": false
+  },
+  {
     "type": "CASE",
+    "named": false
+  },
+  {
+    "type": "CASE-SENSITIVE",
     "named": false
   },
   {
@@ -15897,6 +15950,14 @@
   },
   {
     "type": "CLASS",
+    "named": false
+  },
+  {
+    "type": "CLEAR",
+    "named": false
+  },
+  {
+    "type": "CLOSE",
     "named": false
   },
   {
@@ -15937,6 +15998,10 @@
   },
   {
     "type": "CONVERT",
+    "named": false
+  },
+  {
+    "type": "CONVERT-3D-COLORS",
     "named": false
   },
   {
@@ -16008,11 +16073,19 @@
     "named": false
   },
   {
+    "type": "DROP-TARGET",
+    "named": false
+  },
+  {
     "type": "DUMP",
     "named": false
   },
   {
     "type": "EACH",
+    "named": false
+  },
+  {
+    "type": "ECHO",
     "named": false
   },
   {
@@ -16085,6 +16158,10 @@
   },
   {
     "type": "FIRST",
+    "named": false
+  },
+  {
+    "type": "FLAGS",
     "named": false
   },
   {
@@ -16172,6 +16249,10 @@
     "named": false
   },
   {
+    "type": "INFORMATION",
+    "named": false
+  },
+  {
     "type": "INHERITS",
     "named": false
   },
@@ -16233,6 +16314,10 @@
   },
   {
     "type": "LOB-DIR",
+    "named": false
+  },
+  {
+    "type": "LOCKED",
     "named": false
   },
   {
@@ -16304,11 +16389,51 @@
     "named": false
   },
   {
+    "type": "NO-ATTR-LIST",
+    "named": false
+  },
+  {
+    "type": "NO-CONSOLE",
+    "named": false
+  },
+  {
+    "type": "NO-CONVERT",
+    "named": false
+  },
+  {
+    "type": "NO-ECHO",
+    "named": false
+  },
+  {
+    "type": "NO-ERROR",
+    "named": false
+  },
+  {
+    "type": "NO-LOBS",
+    "named": false
+  },
+  {
     "type": "NO-LOCK",
     "named": false
   },
   {
+    "type": "NO-MAP",
+    "named": false
+  },
+  {
+    "type": "NO-MESSAGE",
+    "named": false
+  },
+  {
     "type": "NO-PREFETCH",
+    "named": false
+  },
+  {
+    "type": "NO-UNDO",
+    "named": false
+  },
+  {
+    "type": "NO-WAIT",
     "named": false
   },
   {
@@ -16336,6 +16461,14 @@
     "named": false
   },
   {
+    "type": "OK",
+    "named": false
+  },
+  {
+    "type": "OK-CANCEL",
+    "named": false
+  },
+  {
     "type": "OLD",
     "named": false
   },
@@ -16353,6 +16486,10 @@
   },
   {
     "type": "OS-DELETE",
+    "named": false
+  },
+  {
+    "type": "OS-DIR",
     "named": false
   },
   {
@@ -16440,11 +16577,43 @@
     "named": false
   },
   {
+    "type": "QUESTION",
+    "named": false
+  },
+  {
+    "type": "QUIT",
+    "named": false
+  },
+  {
+    "type": "RCODE-INFORMATION",
+    "named": false
+  },
+  {
+    "type": "RECURSIVE",
+    "named": false
+  },
+  {
+    "type": "REFERENCE-ONLY",
+    "named": false
+  },
+  {
     "type": "RELEASE",
     "named": false
   },
   {
+    "type": "REPEAT",
+    "named": false
+  },
+  {
+    "type": "RETAIN-SHAPE",
+    "named": false
+  },
+  {
     "type": "RETRY",
+    "named": false
+  },
+  {
+    "type": "RETRY-CANCEL",
     "named": false
   },
   {
@@ -16472,6 +16641,14 @@
     "named": false
   },
   {
+    "type": "RVV-",
+    "named": false
+  },
+  {
+    "type": "SCROLLING",
+    "named": false
+  },
+  {
     "type": "SEEK",
     "named": false
   },
@@ -16480,11 +16657,23 @@
     "named": false
   },
   {
+    "type": "SERIALIZE-HIDDEN",
+    "named": false
+  },
+  {
     "type": "SERIALIZE-NAME",
     "named": false
   },
   {
     "type": "SET",
+    "named": false
+  },
+  {
+    "type": "SET-BYTE-ORDER",
+    "named": false
+  },
+  {
+    "type": "SET-SIZE",
     "named": false
   },
   {
@@ -16521,6 +16710,10 @@
   },
   {
     "type": "SOURCE",
+    "named": false
+  },
+  {
+    "type": "SPACE",
     "named": false
   },
   {
@@ -16580,6 +16773,10 @@
     "named": false
   },
   {
+    "type": "TERMINAL",
+    "named": false
+  },
+  {
     "type": "THEN",
     "named": false
   },
@@ -16612,6 +16809,10 @@
     "named": false
   },
   {
+    "type": "TRANSPARENT",
+    "named": false
+  },
+  {
     "type": "TRIGGERS",
     "named": false
   },
@@ -16621,6 +16822,10 @@
   },
   {
     "type": "UNBUFFERED",
+    "named": false
+  },
+  {
+    "type": "UNDERLINE-",
     "named": false
   },
   {
@@ -16656,6 +16861,10 @@
     "named": false
   },
   {
+    "type": "VALIDATE",
+    "named": false
+  },
+  {
     "type": "VALUE",
     "named": false
   },
@@ -16677,6 +16886,10 @@
   },
   {
     "type": "WAIT-FOR",
+    "named": false
+  },
+  {
+    "type": "WARNING",
     "named": false
   },
   {
@@ -16740,6 +16953,14 @@
     "named": false
   },
   {
+    "type": "YES-NO",
+    "named": false
+  },
+  {
+    "type": "YES-NO-CANCEL",
+    "named": false
+  },
+  {
     "type": "[",
     "named": false
   },
@@ -16770,10 +16991,6 @@
   },
   {
     "type": "date_literal",
-    "named": true
-  },
-  {
-    "type": "drop_target_option",
     "named": true
   },
   {

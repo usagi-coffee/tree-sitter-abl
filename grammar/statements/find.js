@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+module.exports = ({ kw, tkw }) => ({
   find_statement: ($) =>
     seq(
       kw("FIND"),
@@ -26,11 +26,11 @@ module.exports = ({ kw }) => ({
   __find_of_clause: ($) => seq(kw("OF"), $.__find_record_name),
   __find_where_clause: ($) => seq(kw("WHERE"), $._expression),
   __find_record_name: ($) => choice($.identifier, $.qualified_name),
-  __find_no_lock: ($) => token(/NO-LOCK/i),
-  __find_no_error: ($) => token(/NO-ERROR/i),
-  __find_no_wait: ($) => token(/NO-WAIT/i),
-  __find_no_prefetch: ($) => token(/NO-PREFETCH/i),
-  __find_exclusive_lock: ($) => token(/EXCLUSIVE-LOCK/i),
+  __find_no_lock: ($) => tkw("NO-LOCK"),
+  __find_no_error: ($) => tkw("NO-ERROR"),
+  __find_no_wait: ($) => tkw("NO-WAIT"),
+  __find_no_prefetch: ($) => tkw("NO-PREFETCH"),
+  __find_exclusive_lock: ($) => tkw("EXCLUSIVE-LOCK"),
   __find_using_clause: ($) => seq(kw("USING"), $._expression_list),
   __find_use_index: ($) =>
     seq(kw("USE-INDEX"), field("index", $.__find_index_name)),

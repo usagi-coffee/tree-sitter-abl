@@ -36,13 +36,17 @@ module.exports = ({ kw, tkw }) => ({
       ),
     ),
   __put_skip_item: ($) =>
-    choice(
-      seq(alias(token(/SKIP\(/i), "SKIP"), field("count", $._expression), ")"),
-      tkw("SKIP"),
+    prec.right(
+      choice(
+        seq(tkw("SKIP"), "(", field("count", $._expression), ")"),
+        tkw("SKIP"),
+      ),
     ),
   __put_space_item: ($) =>
-    choice(
-      seq(token(/SPACE\(/i), field("count", $._expression), ")"),
-      token(/SPACE/i),
+    prec.right(
+      choice(
+        seq(tkw("SPACE"), "(", field("count", $._expression), ")"),
+        tkw("SPACE"),
+      ),
     ),
 });

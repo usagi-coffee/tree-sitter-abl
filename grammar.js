@@ -17,7 +17,8 @@ const PREC = {
 // DO NOT CHANGE THESE TO USE PRECEDENCE
 const kw = (word) =>
   seq(alias(token(new RegExp(word, "i")), word), token.immediate(/\s+/));
-const tkw = (word) => alias(token(new RegExp(word, "i")), word);
+const tkw = (word, aliasName = word) =>
+  alias(token(new RegExp(word, "i")), aliasName);
 const op = (word) =>
   seq(alias(token(new RegExp(word, "i")), word), token.immediate(/\s+/));
 

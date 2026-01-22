@@ -1,7 +1,7 @@
-module.exports = () => ({
+module.exports = ({ tkw }) => ({
   set_byte_order_statement: ($) =>
     seq(
-      token(/SET-BYTE-ORDER/i),
+      tkw("SET-BYTE-ORDER"),
       "(",
       field("buffer", $._expression),
       ")",

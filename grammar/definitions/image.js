@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+module.exports = ({ kw, tkw }) => ({
   image_definition: ($) =>
     seq(
       choice(kw("DEFINE"), kw("DEF")),
@@ -14,15 +14,15 @@ module.exports = ({ kw }) => ({
       ),
       optional(seq(kw("BGCOLOR"), $._expression)),
       optional(seq(kw("FGCOLOR"), $._expression)),
-      optional(token(/CONVERT-3D-COLORS/i)),
+      optional(tkw("CONVERT-3D-COLORS")),
       optional(seq(kw("TOOLTIP"), field("tooltip", $.string_literal))),
       optional(
         seq(
           kw("STRETCH-TO-FIT"),
-          optional(token(/RETAIN-SHAPE/i)),
+          optional(tkw("RETAIN-SHAPE")),
         ),
       ),
-      optional(token(/TRANSPARENT/i)),
+      optional(tkw("TRANSPARENT")),
       $._terminator,
     ),
 

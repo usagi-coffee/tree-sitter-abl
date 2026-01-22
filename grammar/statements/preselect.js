@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+module.exports = ({ kw, tkw }) => ({
   preselect_record_list: ($) =>
     seq(
       $.preselect_record,
@@ -24,6 +24,6 @@ module.exports = ({ kw }) => ({
     ),
 
   __preselect_where_clause: ($) => seq(kw("WHERE"), $._expression),
-  __preselect_no_lock: ($) => token(/NO-LOCK/i),
+  __preselect_no_lock: ($) => tkw("NO-LOCK"),
   __preselect_record_name: ($) => choice($.identifier, $.qualified_name),
 });
