@@ -6,7 +6,7 @@
 
 ## Key paths
 
-- `grammar.js`, `grammar/core.js`, `grammar/core/*.js`: grammar core + shared (accessors, definitions, expressions, extras, operators, statements).
+- `grammar.js`, `grammar/core/{accessors,definitions,expressions,extras,operators,statements}.js`: core grammar rules.
 - `grammar/definitions/*.js`: definition rules (procedures, functions, variables; usually most of things that start with define keyword).
 - `grammar/expressions/*.js`: expression rules (available, locked, aggregate, conditional, function calls; specific expressions).
 - `grammar/statements/*.js`: statements rules.
@@ -38,9 +38,9 @@
 - Always run tests after changes and make sure they pass.
 - Conflicts must be resolved structurally whenever possible. Adding a `conflicts` entry is a last resort and requires prior confirmation with a clear explanation of why structural fixes are insufficient.
 - When drive-by modyfing core grammar rules ask for a confirmation.
-- Your first solution should *never* be to try to add a precedence to keywords, if it's necessary give me an explanation and ask for a confirmation.
+- Your first solution should _never_ be to try to add a precedence to keywords, if it's necessary give me an explanation and ask for a confirmation.
 - Prefer `kw` (requires whitespace after the keyword), `tkw` (does not require whitespace, to use in-place of `token(/keyword/i)` function whenever dealing with keywords.
-- Do *NOT* try to implement keywords as external scanner tokens that match case-insensitively with non-identifier character boundaries.
+- Do _NOT_ try to implement keywords as external scanner tokens that match case-insensitively with non-identifier character boundaries.
 - Always check for `(ERROR)` or `(MISSING)` nodes in the test output and treat them as errors that need to be fixed.
 - Use compact rule formatting: keep one-line rules adjacent with no blank lines between them. Only insert a blank line before/after multi-line rules (rules that wrap to multiple lines). Avoid blank lines between consecutive one-line rules.
 - For every statement make a file in their respective place `grammar/statements/*.js` and `test/corpus/statements/*.txt`.
