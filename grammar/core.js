@@ -1,4 +1,10 @@
-module.exports = () => ({
+const core_accessors = require("./core/accessors");
+const core_expressions = require("./core/expressions");
+const core_operators = require("./core/operators");
+const core_statements = require("./core/statements");
+const core_extras = require("./core/extras");
+
+module.exports = (ctx) => ({
   // Literals
   number_literal: ($) => token(prec(-1, /[0-9]+(\.[0-9]+)?/)),
   date_literal: ($) => token(prec(1, /[0-9]{1,2}[./][0-9]{1,2}[./][0-9]{2,4}/)),
@@ -7,81 +13,15 @@ module.exports = () => ({
   boolean_literal: ($) => token(/TRUE|FALSE|YES|NO/i),
   file_name: ($) => /[A-Za-z0-9_\/.-]+\.i/i,
 
-  // Accessors
-  object_access: ($) =>
-    prec(
-      1,
-      seq(
-        field("left", $.identifier),
-        repeat1(
-          seq(
-            $._namecolon,
-            field("right", alias($._identifier_immediate, $.identifier)),
-          ),
-        ),
-      ),
-    ),
+  // Types
+  generic_type: ($) => seq($._simple_type_name, "<", $._simple_type_name, ">"),
+  _simple_type_name: ($) =>
+    choice($.scoped_name, $.qualified_name, $.identifier),
+  _type_name: ($) => choice($.generic_type, $._simple_type_name),
+  _type_or_string: ($) => choice($._type_name, $.string_literal),
 
-  safe_object_access: ($) =>
-    prec(
-      1,
-      seq(
-        field("left", $.identifier),
-        repeat1(
-          seq(
-            token.immediate("?:"),
-            field("right", alias($._identifier_immediate, $.identifier)),
-          ),
-        ),
-      ),
-    ),
-
-  scoped_name: ($) =>
-    prec(
-      1,
-      seq(
-        field("left", $.identifier),
-        repeat1(
-          seq(
-            $._namedoublecolon,
-            field("right", alias($._identifier_immediate, $.identifier)),
-          ),
-        ),
-      ),
-    ),
-
-  qualified_name: ($) =>
-    prec(
-      1,
-      seq(
-        field("left", $.identifier),
-        repeat1(
-          seq(
-            $._namedot,
-            field("right", alias($._identifier_immediate, $.identifier)),
-          ),
-        ),
-      ),
-    ),
-
-  // Arrays
+  // Array
   array_initializer: ($) => seq("[", optional($._expression_list), "]"),
-  array_access: ($) =>
-    seq(
-      field("array", $._array_target),
-      "[",
-      optional($._array_subscript),
-      "]",
-    ),
-  _array_subscript: ($) =>
-    choice(
-      $._expression_list,
-      seq(
-        field("start", $._expression),
-        token(/FOR/i),
-        field("count", $._expression),
-      ),
-    ),
   _array_target: ($) =>
     choice(
       $.identifier,
@@ -91,13 +31,7 @@ module.exports = () => ({
       $.scoped_name,
     ),
 
-  // Types
-  generic_type: ($) => seq($._simple_type_name, "<", $._simple_type_name, ">"),
-  _simple_type_name: ($) =>
-    choice($.scoped_name, $.qualified_name, $.identifier),
-  _type_name: ($) => choice($.generic_type, $._simple_type_name),
-  _type_or_string: ($) => choice($._type_name, $.string_literal),
-
+  // Assignabless
   _assignable: ($) =>
     choice(
       $.identifier,
@@ -111,9 +45,14 @@ module.exports = () => ({
   // Identifiers
   identifier: ($) => token(/[_\p{L}][\p{L}\p{N}_-]*/u),
   parenthesized_identifier: ($) => seq("(", $.identifier, ")"),
-  _identifier_immediate: ($) =>
-    token.immediate(/[_\p{L}][\p{L}\p{N}_-]*/u),
+  _identifier_immediate: ($) => token.immediate(/[_\p{L}][\p{L}\p{N}_-]*/u),
 
   // Terminators
   _terminator: ($) => choice($._terminator_dot, ";"),
+
+  ...core_accessors(ctx),
+  ...core_expressions(ctx),
+  ...core_extras(ctx),
+  ...core_operators(ctx),
+  ...core_statements(ctx),
 });

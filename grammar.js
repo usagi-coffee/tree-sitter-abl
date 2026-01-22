@@ -2,10 +2,8 @@
 // @ts-check
 
 const core = require("./grammar/core");
-const extras = require("./grammar/extras");
 const definitions = require("./grammar/definitions");
 const expressions = require("./grammar/expressions");
-const operators = require("./grammar/operators");
 const statements = require("./grammar/statements");
 
 const PREC = {
@@ -56,14 +54,15 @@ module.exports = grammar({
 
   rules: (() => {
     const ctx = { PREC, kw, tkw, op };
+    // BE CAREFUL MODIFYING HERE, ORDER FOR SOME REASON MATTERS!
     return {
       source_file: ($) => repeat($._statement),
-      ...statements(ctx),
+      // Specific syntax
       ...definitions(ctx),
+      ...statements(ctx),
       ...expressions(ctx),
-      ...operators(ctx),
-      ...core(),
-      ...extras(),
+      // Common rules
+      ...core(ctx),
     };
   })(),
 });

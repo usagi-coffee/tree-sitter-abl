@@ -1,15 +1,15 @@
-const bufferDefinition = require("./definitions/buffer");
-const classDefinition = require("./definitions/class");
-const buttonDefinition = require("./definitions/button");
-const datasetDefinition = require("./definitions/dataset");
-const functionDefinition = require("./definitions/function");
-const interfaceDefinition = require("./definitions/interface");
-const imageDefinition = require("./definitions/image");
-const procedureDefinition = require("./definitions/procedure");
-const queryDefinition = require("./definitions/query");
-const streamDefinition = require("./definitions/stream");
-const tempTableDefinition = require("./definitions/temp-table");
-const variableDefinition = require("./definitions/variable");
+const bufferDefinition = require("./buffer");
+const classDefinition = require("./class");
+const buttonDefinition = require("./button");
+const datasetDefinition = require("./dataset");
+const functionDefinition = require("./function");
+const interfaceDefinition = require("./interface");
+const imageDefinition = require("./image");
+const procedureDefinition = require("./procedure");
+const queryDefinition = require("./query");
+const streamDefinition = require("./stream");
+const tempTableDefinition = require("./temp-table");
+const variableDefinition = require("./variable");
 
 module.exports = (ctx) => ({
   _definition: ($) =>

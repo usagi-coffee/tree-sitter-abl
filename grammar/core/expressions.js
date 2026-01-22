@@ -1,14 +1,6 @@
-const availableExpression = require("./expressions/available");
-const canFindExpression = require("./expressions/can-find");
-const conditionalExpression = require("./expressions/conditional");
-const aggregateExpression = require("./expressions/aggregate");
-const datasetExpression = require("./expressions/dataset");
-const functionExpression = require("./expressions/function");
-const lockedExpression = require("./expressions/locked");
-const newExpression = require("./expressions/new");
-
 module.exports = (ctx) => {
   const { PREC, op } = ctx;
+
   return {
     _expression: ($) =>
       choice(
@@ -125,19 +117,14 @@ module.exports = (ctx) => {
         seq(
           field(
             "left",
-            choice($.function_call, $.parenthesized_expression, $.new_expression),
+            choice(
+              $.function_call,
+              $.parenthesized_expression,
+              $.new_expression,
+            ),
           ),
           repeat1(seq($._namecolon, field("right", $.identifier))),
         ),
       ),
-
-    ...conditionalExpression(ctx),
-    ...availableExpression(ctx),
-    ...canFindExpression(ctx),
-    ...lockedExpression(ctx),
-    ...newExpression(ctx),
-    ...aggregateExpression(ctx),
-    ...functionExpression(ctx),
-    ...datasetExpression(ctx),
   };
 };

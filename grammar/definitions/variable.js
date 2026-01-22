@@ -94,8 +94,7 @@ module.exports = ({ kw }) => ({
   __variable_font_option: ($) => seq(kw("FONT"), $._expression),
   __variable_fgcolor_option: ($) => seq(kw("FGCOLOR"), $._expression),
   __variable_format_option: ($) => seq(kw("FORMAT"), $.string_literal),
-  __variable_label_option: ($) =>
-    seq(kw("LABEL"), $.__variable_label_list),
+  __variable_label_option: ($) => seq(kw("LABEL"), $.__variable_label_list),
   __variable_pfcolor_option: ($) => seq(kw("PFCOLOR"), $._expression),
   __variable_view_as_phrase: ($) => seq(kw("VIEW-AS"), $.identifier),
   __variable_trigger_phrase: ($) => seq(kw("ON"), $.identifier),
