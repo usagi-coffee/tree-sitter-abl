@@ -1,5 +1,6 @@
 module.exports = ({ kw, tkw }) => ({
-  aggregate_phrase: ($) => seq("(", repeat1($.aggregate_item), ")"),
+  aggregate_phrase: ($) =>
+    prec.dynamic(10, seq("(", repeat1($.aggregate_item), ")")),
 
   aggregate_item: ($) =>
     seq(
