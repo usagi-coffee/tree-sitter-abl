@@ -51,10 +51,12 @@
 - The grammar should avoid permissive or catch-all rules that allow invalid syntax to be parsed successfully.
 - Write idiomatic `tree-sitter` grammar code at all times, and consult `docs/tree-sitter.txt` whenever there is uncertainty about correct or idiomatic usage.
 - ABL grammar is filled with optionals, be careful no to explode `tree-sitter`'s `STATE_COUNT`, check `STATE_COUNT` after every generate/test.
+- Do not remove tests just to satisfy test passing, just fix the underlying issue.
 
 ## Notes
 
 - We use `bun` here instead of `npm`.
+- `bun run test` runs `tree-sitter generate` and `tree-sitter test`, in cases where you updated the test or did not do any modifications you can directly use `tree-sitter test` instead to save time (becase nothing got regenerated).
 - You can test syntax ad-hoc by invoking the parser directly, for example using `(echo 'x = 5.' > /tmp/test.p && bun run parse -- /tmp/test.p 2>&1)` to quickly retrieve a syntax tree or validate grammar behavior on a small snippet.
 - You can verify `STATE_COUNT` by invoking `grep -E "#define.*STATE_COUNT" src/parser.c`.
 - The project uses the `tree-sitter` CLI; ensure it is installed via devDependencies (`tree-sitter-cli`).
