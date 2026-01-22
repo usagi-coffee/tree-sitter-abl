@@ -402,3 +402,116 @@ END.
           left: (identifier)
           right: (identifier))))))
 
+
+
+================================================================================
+FOR variable loops
+================================================================================
+
+FOR i = 1 TO 10:
+  DISPLAY i.
+END.
+
+FOR i = 1 TO 100 BY 5:
+  DISPLAY i.
+END.
+
+FOR i = 1 TO n BY -1:
+  DISPLAY i.
+END.
+
+================================================================================
+FOR WHILE clause
+================================================================================
+
+FOR EACH Customer WHILE x > 5:
+  DISPLAY Customer.
+END.
+
+FOR i = 1 TO 10 WHILE i < 5:
+  DISPLAY i.
+END.
+
+================================================================================
+FOR TRANSACTION
+================================================================================
+
+FOR EACH Customer TRANSACTION:
+  DISPLAY Customer.
+END.
+
+================================================================================
+FOR STOP-AFTER
+================================================================================
+
+FOR EACH Customer STOP-AFTER 30:
+  DISPLAY Customer.
+END.
+
+FOR i = 1 TO 100 STOP-AFTER 5:
+  DISPLAY i.
+END.
+
+================================================================================
+FOR COLLATE
+================================================================================
+
+FOR EACH Customer NO-LOCK COLLATE (Name, "CASE-INSENSITIVE"):
+  DISPLAY Customer.
+END.
+
+FOR EACH Customer NO-LOCK COLLATE (Name, "CASE-INSENSITIVE", "en-US"):
+  DISPLAY Customer.
+END.
+
+FOR EACH Customer NO-LOCK COLLATE (Name, "CASE-INSENSITIVE") DESCENDING:
+  DISPLAY Customer.
+END.
+
+================================================================================
+FOR ON QUIT
+================================================================================
+
+FOR EACH Customer BY CustNum ON QUIT UNDO, LEAVE:
+  DISPLAY Customer.
+END.
+
+FOR EACH Customer BY CustNum ON QUIT UNDO, NEXT:
+  DISPLAY Customer.
+END.
+
+================================================================================
+FOR ON STOP
+================================================================================
+
+FOR EACH Customer BY CustNum ON STOP UNDO, LEAVE:
+  DISPLAY Customer.
+END.
+
+FOR EACH Customer BY CustNum ON STOP UNDO, RETURN 0:
+  DISPLAY Customer.
+END.
+
+================================================================================
+FOR TABLE-SCAN
+================================================================================
+
+FOR EACH Customer TABLE-SCAN:
+  DISPLAY Customer.
+END.
+
+FOR EACH Customer NO-LOCK TABLE-SCAN WHERE CustNum > 10:
+  DISPLAY Customer.
+END.
+
+================================================================================
+FOR combined options
+================================================================================
+
+FOR EACH Customer NO-LOCK WHILE x > 5 STOP-AFTER 30 ON ERROR UNDO, LEAVE:
+  DISPLAY Customer.
+END.
+
+FOR i = 1 TO 100 WHILE i < 50 STOP-AFTER 10 ON STOP UNDO, LEAVE:
+  DISPLAY i.
+END.

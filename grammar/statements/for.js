@@ -5,9 +5,14 @@ module.exports = ({ kw, tkw }) => ({
       seq(
         optional(seq(field("label", $.identifier), $._colon)),
         kw("FOR"),
-        $.for_record_list,
-        optional(alias($.__for_on_endkey_clause, $.on_endkey_clause)),
+        choice($.for_record_list, $.for_variable_loop),
+        optional(alias($.__for_while_clause, $.while_clause)),
+        optional(tkw("TRANSACTION")),
+        optional(alias($.__for_stop_after_clause, $.stop_after_clause)),
         optional(alias($.__for_on_error_clause, $.on_error_clause)),
+        optional(alias($.__for_on_endkey_clause, $.on_endkey_clause)),
+        optional(alias($.__for_on_quit_clause, $.on_quit_clause)),
+        optional(alias($.__for_on_stop_clause, $.on_stop_clause)),
         optional(alias($.__for_with_frame_clause, $.with_frame_clause)),
         $.body,
         tkw("END"),
@@ -33,8 +38,19 @@ module.exports = ({ kw, tkw }) => ({
       alias($.__for_share_lock, $.share_lock),
       alias($.__for_no_prefetch, $.no_prefetch),
       alias($.__for_by_clause, $.by_clause),
+      alias($.__for_collate_clause, $.collate_clause),
       alias($.__for_use_index, $.use_index),
       alias($.__for_break_by, $.break_by),
+    ),
+
+  for_variable_loop: ($) =>
+    seq(
+      field("variable", $.identifier),
+      "=",
+      field("start", $._expression),
+      kw("TO"),
+      field("end", $._expression),
+      optional(seq(kw("BY"), field("step", $._expression))),
     ),
 
   _for_record_option_or_where: ($) =>
@@ -59,7 +75,10 @@ module.exports = ({ kw, tkw }) => ({
     ),
 
   __for_use_index: ($) =>
-    seq(kw("USE-INDEX"), field("index", $.__for_index_name)),
+    choice(
+      seq(kw("USE-INDEX"), field("index", $.__for_index_name)),
+      tkw("TABLE-SCAN"),
+    ),
 
   __for_break_by: ($) =>
     prec.right(
@@ -114,4 +133,78 @@ module.exports = ({ kw, tkw }) => ({
     ),
   __for_sort_direction: ($) =>
     token(/ASC(ENDING)?|DESC(ENDING)?/i),
+
+  __for_collate_clause: ($) =>
+    seq(
+      kw("COLLATE"),
+      "(",
+      field("string", $._expression),
+      ",",
+      field("strength", $._expression),
+      optional(seq(",", field("collation", $._expression))),
+      ")",
+      optional($.__for_sort_direction),
+    ),
+
+  __for_while_clause: ($) => seq(kw("WHILE"), field("condition", $._expression)),
+
+  __for_stop_after_clause: ($) =>
+    seq(kw("STOP-AFTER"), field("time", $._expression)),
+
+  __for_on_quit_clause: ($) =>
+    seq(
+      kw("ON"),
+      kw("QUIT"),
+      optional(seq(tkw("UNDO"), optional(field("undo_label", $.identifier)))),
+      optional(seq(",", $.__for_on_quit_action)),
+    ),
+
+  __for_on_quit_action: ($) =>
+    choice(
+      seq(tkw("LEAVE"), optional(field("leave_label", $.identifier))),
+      seq(tkw("NEXT"), optional(field("next_label", $.identifier))),
+      seq(tkw("RETRY"), optional(field("retry_label", $.identifier))),
+      $.__for_on_quit_return,
+    ),
+
+  __for_on_quit_return: ($) =>
+    seq(
+      tkw("RETURN"),
+      optional(
+        choice(
+          seq(tkw("ERROR"), optional(field("error_value", $._expression))),
+          tkw("NO-APPLY"),
+          field("return_value", $._expression),
+        ),
+      ),
+    ),
+
+  __for_on_stop_clause: ($) =>
+    seq(
+      kw("ON"),
+      kw("STOP"),
+      tkw("UNDO"),
+      optional(field("undo_label", $.identifier)),
+      optional(seq(",", $.__for_on_stop_action)),
+    ),
+
+  __for_on_stop_action: ($) =>
+    choice(
+      seq(tkw("LEAVE"), optional(field("leave_label", $.identifier))),
+      seq(tkw("NEXT"), optional(field("next_label", $.identifier))),
+      seq(tkw("RETRY"), optional(field("retry_label", $.identifier))),
+      $.__for_on_stop_return,
+    ),
+
+  __for_on_stop_return: ($) =>
+    seq(
+      tkw("RETURN"),
+      optional(
+        choice(
+          seq(tkw("ERROR"), optional(field("error_value", $._expression))),
+          tkw("NO-APPLY"),
+          field("return_value", $._expression),
+        ),
+      ),
+    ),
 });
