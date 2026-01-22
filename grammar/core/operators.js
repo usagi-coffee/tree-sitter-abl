@@ -23,6 +23,8 @@ module.exports = ({ op }) => ({
       op("LE"),
     ),
 
+  // See _statement_expression in expressions.js - excludes `=` to disambiguate
+  // assignment vs equality comparison at statement level.
   _comparison_operator_no_eq: ($) =>
     choice(
       "<>",

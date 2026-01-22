@@ -15,6 +15,11 @@ module.exports = (ctx) => {
     _expression_list: ($) =>
       seq($._expression, repeat(seq(",", $._expression))),
 
+    // _statement_expression excludes `=` from comparison operators to disambiguate
+    // assignment vs equality at the statement level. Without this, `x = 5.` could
+    // parse as either assignment_statement or expression_statement (equality check).
+    // By excluding `=` here, expression_statement cannot match `x = 5.`, forcing it
+    // to parse as assignment_statement.
     _statement_expression: ($) =>
       choice(
         alias($.binary_expression_no_eq, $.binary_expression),
@@ -96,6 +101,7 @@ module.exports = (ctx) => {
         ),
       ),
 
+    // See _statement_expression comment - this is binary_expression without `=` comparison.
     binary_expression_no_eq: ($) =>
       choice(
         prec.left(
