@@ -56,7 +56,6 @@ module.exports = ({ kw, tkw }) => ({
   _for_record_option_or_where: ($) =>
     choice($._for_record_option, alias($.__for_where_clause, $.where_clause)),
 
-  __for_undo_throw_phrase: ($) => seq(tkw("UNDO"), ",", tkw("THROW")),
   __for_where_clause: ($) => seq(kw("WHERE"), $._expression),
   __for_of_clause: ($) => seq(kw("OF"), $.__for_record_name),
   __for_record_name: ($) => choice($.identifier, $.qualified_name),
@@ -96,7 +95,30 @@ module.exports = ({ kw, tkw }) => ({
     seq(
       kw("ON"),
       kw("ERROR"),
-      alias($.__for_undo_throw_phrase, $.undo_throw_phrase),
+      tkw("UNDO"),
+      optional(field("undo_label", $.identifier)),
+      optional(seq(",", $.__for_on_error_action)),
+    ),
+
+  __for_on_error_action: ($) =>
+    choice(
+      seq(tkw("LEAVE"), optional(field("leave_label", $.identifier))),
+      seq(tkw("NEXT"), optional(field("next_label", $.identifier))),
+      seq(tkw("RETRY"), optional(field("retry_label", $.identifier))),
+      tkw("THROW"),
+      $.__for_on_error_return,
+    ),
+
+  __for_on_error_return: ($) =>
+    seq(
+      tkw("RETURN"),
+      optional(
+        choice(
+          seq(tkw("ERROR"), optional(field("error_value", $._expression))),
+          tkw("NO-APPLY"),
+          field("return_value", $._expression),
+        ),
+      ),
     ),
   __for_on_endkey_clause: ($) =>
     seq(kw("ON"), kw("ENDKEY"), alias($.__for_on_endkey_undo, $.undo_phrase)),
