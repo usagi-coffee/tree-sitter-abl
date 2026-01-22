@@ -15,6 +15,7 @@
 - `test/corpus/`: tree-sitter corpus tests.
 - `bindings/`: language bindings.
 - `docs/abl-reference.txt`: abl language reference.
+- `docs/tree-sitter.txt`: tree-sitter documentation.
 
 ## Workflow
 
@@ -30,23 +31,27 @@
 
 ## Conventions
 
-- Always search for syntax details in `docs/abl-reference.txt` document during planning phase or implementing new features.
 - Treat `src/parser.c`, `src/grammar.json`, and `src/node-types.json` as generated.
-- Keep changes to `src/scanner.c` minimal and well-scoped, as it is hand-written C.
-- Always run `bun run test` after changes and make sure they pass and they are always covered by tests.
-- Keep everyting idiomatic and in-line with how should tree-sitter grammar parser be done, consult official `tree-sitter` documentation.
-- When `generate` reports conflicts, _always_ prefer fixing it without resorting to adding a conflict and if it's mandatory first ask for confirmation.
-- _Never_ add priority for keywords like it's done in the original legacy parser, solve it how it should be solved idiomatically unless it's necessary to add one.
-- Prefer `kw` (requires whitespace after the keyword), `tkw` (does not require whitespace, to use in-place of `token(/keyword/i), `op` function whenever dealing with keywords.
-- Do _NOT_ try to implement keywords as external scanner tokens that match case-insensitively with non-identifier character boundaries.
+- Always consult `docs/abl-reference.txt` when planning, modifying, or extending syntax support. Any work related to grammar, parsing behavior, or syntax improvements must be grounded in the reference documentation to ensure correctness, completeness, and alignment with the language specification.
+- Avoid placing shared or generic code unless it is part of the core syntax. We intentionally duplicate modifiers and tunings at the statement level so that most of the statement-specific context lives in a single file. To support this, each statement defines its own `__<statement>_rules`, which are later aliased to `$.rule` where needed. This intentional duplication favors locality, readability, and conflict isolation over DRY abstractions, which are often harmful in Tree-sitter grammars.
+- Avoid doing changes to `src/scanner.c` unless it's necessary and cleanest way to solve the problem.
+- Always run tests after changes and make sure they pass.
+- Conflicts must be resolved structurally whenever possible. Adding a `conflicts` entry is a last resort and requires prior confirmation with a clear explanation of why structural fixes are insufficient.
+- When drive-by modyfing core grammar rules ask for a confirmation.
+- Your first solution should *never* be to try to add a precedence to keywords, if it's necessary give me an explanation and ask for a confirmation.
+- Prefer `kw` (requires whitespace after the keyword), `tkw` (does not require whitespace, to use in-place of `token(/keyword/i)` function whenever dealing with keywords.
+- Do *NOT* try to implement keywords as external scanner tokens that match case-insensitively with non-identifier character boundaries.
 - Always check for `(ERROR)` or `(MISSING)` nodes in the test output and treat them as errors that need to be fixed.
 - Use compact rule formatting: keep one-line rules adjacent with no blank lines between them. Only insert a blank line before/after multi-line rules (rules that wrap to multiple lines). Avoid blank lines between consecutive one-line rules.
-- For every statement make a file in `grammar/statements/*.js` and `test/copus/statements/*.txt`, do not store specific statement implementations in `grammar/statements.js`.
-- Avoid writing common code if it's not really a part of core syntax as we are "duplicating" modifiers/tunings for statements because we want most of the context related to the statement to be in the same file hence there are `__<statement>_rules` that get aliased to `$.rule` then later.
-- Always write extensive tests in `test/corpus` when implementing new syntax.
+- For every statement make a file in their respective place `grammar/statements/*.js` and `test/corpus/statements/*.txt`.
+- Most definitions/statements/expressions should have a dedicated file in its appropriate location, for example: `grammar/statements/<statement>.js` and `test/corpus/statements/<statement>.txt` for its test cases. Statements are not considered complete without both.
+- Any new or modified syntax must be accompanied by extensive tests in `test/corpus`. Grammar changes without thorough corpus coverage are unacceptable, as tests are required to validate correctness, edge cases, and future regressions.
+- The grammar should avoid permissive or catch-all rules that allow invalid syntax to be parsed successfully.
+- Try to write idiomatically `tree-sitter` code and consult `docs/tree-sitter-.txt` if unsure.
+- Write idiomatic `tree-sitter` grammar code at all times, and consult `docs/tree-sitter.txt` whenever there is uncertainty about correct or idiomatic usage.
 
 ## Notes
 
 - We use `bun` here instead of `npm`.
-- The project uses the tree-sitter CLI; ensure it is installed via devDependencies (`tree-sitter-cli`).
-- You can use invocation like `(echo 'x = 5.' > /tmp/test.p && bunx tree-sitter parse /tmp/test.p 2>&1)` command to test syntax of code ad-hoc.
+- You can test syntax ad-hoc by invoking the parser directly, for example using `(echo 'x = 5.' > /tmp/test.p && bun run parse -- /tmp/test.p 2>&1)` to quickly retrieve a syntax tree or validate grammar behavior on a small snippet.
+- The project uses the `tree-sitter` CLI; ensure it is installed via devDependencies (`tree-sitter-cli`).
