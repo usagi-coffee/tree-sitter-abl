@@ -6,7 +6,7 @@
 
 ## Key paths
 
-- `grammar.js`, `grammar/core.js`, `grammar/core/*.js`: grammar core + shared (accessors, expressions, extras, operators, statements).
+- `grammar.js`, `grammar/core.js`, `grammar/core/*.js`: grammar core + shared (accessors, definitions, expressions, extras, operators, statements).
 - `grammar/definitions/*.js`: definition rules (procedures, functions, variables; usually most of things that start with define keyword).
 - `grammar/expressions/*.js`: expression rules (available, locked, aggregate, conditional, function calls; specific expressions).
 - `grammar/statements/*.js`: statements rules.
@@ -43,7 +43,7 @@
 - Use compact rule formatting: keep one-line rules adjacent with no blank lines between them. Only insert a blank line before/after multi-line rules (rules that wrap to multiple lines). Avoid blank lines between consecutive one-line rules.
 - For every statement make a file in `grammar/statements/*.js` and `test/copus/statements/*.txt`, do not store specific statement implementations in `grammar/statements.js`.
 - Avoid writing common code if it's not really a part of core syntax as we are "duplicating" modifiers/tunings for statements because we want most of the context related to the statement to be in the same file hence there are `__<statement>_rules` that get aliased to `$.rule` then later.
-- Always  write extensive tests in `test/corpus` when implementing new statements/expressions, try to copy the examples from `docs/abl-reference.txt`.
+- Always write extensive tests in `test/corpus` when implementing new syntax.
 
 ## Notes
 

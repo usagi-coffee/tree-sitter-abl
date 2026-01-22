@@ -10,79 +10,6 @@
         "name": "_statement"
       }
     },
-    "_definition": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "buffer_definition"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "temp_table_definition"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "work_table_definition"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "workfile_definition"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "variable_definition"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "parameter_definition"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "procedure_definition"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "procedure_forward_definition"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "function_definition"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "function_forward_definition"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "stream_definition"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "image_definition"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "query_definition"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "class_definition"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "interface_definition"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "dataset_definition"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "button_definition"
-        }
-      ]
-    },
     "buffer_definition": {
       "type": "SEQ",
       "members": [
@@ -12626,6 +12553,19 @@
         ]
       }
     },
+    "__expression_no_error": {
+      "type": "ALIAS",
+      "content": {
+        "type": "TOKEN",
+        "content": {
+          "type": "PATTERN",
+          "value": "NO-ERROR",
+          "flags": "i"
+        }
+      },
+      "named": false,
+      "value": "NO-ERROR"
+    },
     "assignment_statement": {
       "type": "PREC_RIGHT",
       "value": 1,
@@ -12857,19 +12797,6 @@
       ]
     },
     "__assign_no_error": {
-      "type": "ALIAS",
-      "content": {
-        "type": "TOKEN",
-        "content": {
-          "type": "PATTERN",
-          "value": "NO-ERROR",
-          "flags": "i"
-        }
-      },
-      "named": false,
-      "value": "NO-ERROR"
-    },
-    "__expression_no_error": {
       "type": "ALIAS",
       "content": {
         "type": "TOKEN",
@@ -39284,6 +39211,79 @@
           }
         ]
       }
+    },
+    "_definition": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "buffer_definition"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "temp_table_definition"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "work_table_definition"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "workfile_definition"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "variable_definition"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "parameter_definition"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "procedure_definition"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "procedure_forward_definition"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "function_definition"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "function_forward_definition"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "stream_definition"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "image_definition"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "query_definition"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "class_definition"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "interface_definition"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "dataset_definition"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "button_definition"
+        }
+      ]
     },
     "line_comment": {
       "type": "TOKEN",
