@@ -1,7 +1,7 @@
 // Extras are rules that can appear anywhere in the code in the middle of some syntax
 // Comments, Includes, Preprocessors, Constants and other similar syntax
 
-module.exports = () => ({
+module.exports = (ctx) => ({
   // Comments
   line_comment: ($) => token(seq("//", /[^\r\n]*/)),
   // block_comment is external

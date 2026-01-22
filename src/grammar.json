@@ -38407,6 +38407,14 @@
         "flags": "u"
       }
     },
+    "_identifier_immediate": {
+      "type": "IMMEDIATE_TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "[_\\p{L}][\\p{L}\\p{N}_-]*",
+        "flags": "u"
+      }
+    },
     "parenthesized_identifier": {
       "type": "SEQ",
       "members": [
@@ -38423,14 +38431,6 @@
           "value": ")"
         }
       ]
-    },
-    "_identifier_immediate": {
-      "type": "IMMEDIATE_TOKEN",
-      "content": {
-        "type": "PATTERN",
-        "value": "[_\\p{L}][\\p{L}\\p{N}_-]*",
-        "flags": "u"
-      }
     },
     "_terminator": {
       "type": "CHOICE",

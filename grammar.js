@@ -1,7 +1,12 @@
 /// <reference types="tree-sitter-cli/dsl" />
 // @ts-check
 
-const core = require("./grammar/core");
+const core_accessors = require("./grammar/core/accessors");
+const core_expressions = require("./grammar/core/expressions");
+const core_operators = require("./grammar/core/operators");
+const core_statements = require("./grammar/core/statements");
+const core_extras = require("./grammar/core/extras");
+
 const definitions = require("./grammar/definitions");
 const expressions = require("./grammar/expressions");
 const statements = require("./grammar/statements");
@@ -57,12 +62,64 @@ module.exports = grammar({
     const ctx = { PREC, kw, tkw, op };
     return {
       source_file: ($) => repeat($._statement),
-      // BE CAREFUL MODIFYING HERE, ORDER FOR SOME REASON MATTERS!
+
       ...definitions(ctx),
       ...statements(ctx),
       ...expressions(ctx),
-      // Common rules
-      ...core(ctx),
+
+      // Literals
+      number_literal: ($) => token(prec(-1, /[0-9]+(\.[0-9]+)?/)),
+      date_literal: ($) =>
+        token(prec(1, /[0-9]{1,2}[./][0-9]{1,2}[./][0-9]{2,4}/)),
+      string_literal: ($) => $._escaped_string,
+      null_literal: ($) => "?",
+      boolean_literal: ($) => token(/TRUE|FALSE|YES|NO/i),
+      file_name: ($) => /[A-Za-z0-9_\/.-]+\.i/i,
+
+      // Types
+      generic_type: ($) =>
+        seq($._simple_type_name, "<", $._simple_type_name, ">"),
+      _simple_type_name: ($) =>
+        choice($.scoped_name, $.qualified_name, $.identifier),
+      _type_name: ($) => choice($.generic_type, $._simple_type_name),
+      _type_or_string: ($) => choice($._type_name, $.string_literal),
+
+      // Array
+      array_initializer: ($) => seq("[", optional($._expression_list), "]"),
+      _array_target: ($) =>
+        choice(
+          $.identifier,
+          $.qualified_name,
+          $.object_access,
+          $.safe_object_access,
+          $.scoped_name,
+        ),
+
+      // Assignabless
+      _assignable: ($) =>
+        choice(
+          $.identifier,
+          $.qualified_name,
+          $.object_access,
+          $.safe_object_access,
+          $.array_access,
+          $.function_call,
+        ),
+
+      // Identifiers
+      // BE CAREFUL MODIFYING HERE, IDENTIFIER ORDER FOR SOME REASON MATTERS!
+      identifier: ($) => token(/[_\p{L}][\p{L}\p{N}_-]*/u),
+      _identifier_immediate: ($) => token.immediate(/[_\p{L}][\p{L}\p{N}_-]*/u),
+      parenthesized_identifier: ($) => seq("(", $.identifier, ")"),
+
+      // Terminators
+      _terminator: ($) => choice($._terminator_dot, ";"),
+
+      ...core_accessors(ctx),
+      ...core_expressions(ctx),
+      ...core_extras(ctx),
+      ...core_operators(ctx),
+      ...core_statements(ctx),
     };
   })(),
 });
