@@ -138,20 +138,5 @@ module.exports = (ctx) => {
         ),
       ),
 
-    object_access_expression: ($) =>
-      prec(
-        1,
-        seq(
-          field(
-            "left",
-            choice(
-              $.function_call,
-              $.parenthesized_expression,
-              $.new_expression,
-            ),
-          ),
-          repeat1(seq($._namecolon, field("right", $.identifier))),
-        ),
-      ),
   };
 };
