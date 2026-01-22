@@ -50,9 +50,11 @@
 - Any new or modified syntax must be accompanied by extensive tests in `test/corpus`. Grammar changes without thorough corpus coverage are unacceptable, as tests are required to validate correctness, edge cases, and future regressions.
 - The grammar should avoid permissive or catch-all rules that allow invalid syntax to be parsed successfully.
 - Write idiomatic `tree-sitter` grammar code at all times, and consult `docs/tree-sitter.txt` whenever there is uncertainty about correct or idiomatic usage.
+- ABL grammar is filled with optionals, be careful no to explode `tree-sitter`'s `STATE_COUNT`, check `STATE_COUNT` after every generate/test.
 
 ## Notes
 
 - We use `bun` here instead of `npm`.
 - You can test syntax ad-hoc by invoking the parser directly, for example using `(echo 'x = 5.' > /tmp/test.p && bun run parse -- /tmp/test.p 2>&1)` to quickly retrieve a syntax tree or validate grammar behavior on a small snippet.
+- You can verify `STATE_COUNT` by invoking `grep -E "#define.*STATE_COUNT" src/parser.c`.
 - The project uses the `tree-sitter` CLI; ensure it is installed via devDependencies (`tree-sitter-cli`).
