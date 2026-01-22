@@ -43,6 +43,7 @@
 - For every statement make a file in `grammar/statements/*.js` and `test/copus/statements/*.txt`, do not store specific statement implementations in `grammar/statements.js`.
 - We are "duplicating" modifiers/tunings for statements because we want most of the context related to the statement to be in the same file hence there are `__<statement>_rules` that get aliased to `$.rule` then later.
 - When you use `token(/word/i)` prefer using `tkw()` function instead if applicable.
+- Always add extensive tests when implementing new statements/expressions.
 
 ## Notes
 
