@@ -1,7 +1,7 @@
 // Expressions plumbing
 
 module.exports = (ctx) => {
-  const { PREC, op } = ctx;
+  const { PREC, op, tkw } = ctx;
 
   return {
     _expression: ($) =>
@@ -49,6 +49,25 @@ module.exports = (ctx) => {
       ),
 
     parenthesized_expression: ($) => seq("(", $._expression, ")"),
+
+    argument_list: ($) =>
+      seq("(", optional(seq($.argument, repeat(seq(",", $.argument)))), ")"),
+    argument: ($) =>
+      seq(
+        optional(choice(tkw("INPUT"), tkw("OUTPUT"), tkw("INPUT-OUTPUT"))),
+        optional(tkw("TABLE")),
+        field("value", $._expression),
+        optional(tkw("BY-REFERENCE")),
+      ),
+
+    function_call: ($) =>
+      seq(
+        field(
+          "function",
+          choice($.identifier, $.qualified_name, $.object_access, $.scoped_name),
+        ),
+        $.argument_list,
+      ),
 
     unary_expression: ($) =>
       prec(PREC.UNARY, seq(choice("+", "-", op("NOT")), $._expression)),
