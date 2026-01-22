@@ -1,8 +1,8 @@
 module.exports = ({ kw, tkw }) => ({
   disable_triggers_statement: ($) =>
     seq(
-      kw("DISABLE"),
-      kw("TRIGGERS"),
+      tkw("DISABLE"),
+      tkw("TRIGGERS"),
       kw("FOR"),
       field("mode", choice(kw("DUMP"), kw("LOAD"))),
       kw("OF"),

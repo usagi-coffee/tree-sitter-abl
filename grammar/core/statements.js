@@ -42,6 +42,7 @@ module.exports = ({ tkw }) => ({
       $.copy_lob_statement,
       $.convert_statement,
       $.disable_triggers_statement,
+      $.disable_statement,
       $.input_statement,
       $.input_clear_statement,
       $.input_through_statement,

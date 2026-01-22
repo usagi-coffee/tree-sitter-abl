@@ -16341,54 +16341,30 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "SEQ",
-          "members": [
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "PATTERN",
-                  "value": "DISABLE",
-                  "flags": "i"
-                }
-              },
-              "named": false,
-              "value": "DISABLE"
-            },
-            {
-              "type": "IMMEDIATE_TOKEN",
-              "content": {
-                "type": "PATTERN",
-                "value": "\\s+"
-              }
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PATTERN",
+              "value": "DISABLE",
+              "flags": "i"
             }
-          ]
+          },
+          "named": false,
+          "value": "DISABLE"
         },
         {
-          "type": "SEQ",
-          "members": [
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "PATTERN",
-                  "value": "TRIGGERS",
-                  "flags": "i"
-                }
-              },
-              "named": false,
-              "value": "TRIGGERS"
-            },
-            {
-              "type": "IMMEDIATE_TOKEN",
-              "content": {
-                "type": "PATTERN",
-                "value": "\\s+"
-              }
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PATTERN",
+              "value": "TRIGGERS",
+              "flags": "i"
             }
-          ]
+          },
+          "named": false,
+          "value": "TRIGGERS"
         },
         {
           "type": "SEQ",
@@ -40205,6 +40181,10 @@
         {
           "type": "SYMBOL",
           "name": "disable_triggers_statement"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "disable_statement"
         },
         {
           "type": "SYMBOL",
