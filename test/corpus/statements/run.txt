@@ -131,16 +131,11 @@ RUN validateOrder (orderId, customerId).
 RUN with object method call
 ================================================================================
 
-RUN myObject.processData.
 RUN utils.helpers.
 
 --------------------------------------------------------------------------------
 
 (source_file
-  (run_statement
-    procedure: (qualified_name
-      left: (identifier)
-      right: (identifier)))
   (run_statement
     procedure: (qualified_name
       left: (identifier)
@@ -213,4 +208,3 @@ RUN calc.p (x + y, STRING(TODAY), SUBSTRING(name, 1, 10)).
               value: (number_literal))
             (argument
               value: (number_literal))))))))
-

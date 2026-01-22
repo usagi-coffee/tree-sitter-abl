@@ -51,7 +51,9 @@ DISPLAY Customer.Balance (TOTAL).
     (qualified_name
       left: (identifier)
       right: (identifier))
-    (aggregate_phrase)))
+    (aggregate_phrase
+      (aggregate_item
+        operation: (aggregate_operation)))))
 
 ================================================================================
 DISPLAY abbreviated
@@ -139,4 +141,3 @@ DISPLAY SUBSTRING(str, 1, 5).
           value: (number_literal))
         (argument
           value: (number_literal))))))
-
