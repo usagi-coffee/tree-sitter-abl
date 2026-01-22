@@ -1704,6 +1704,10 @@
           "named": true
         },
         {
+          "type": "color_statement",
+          "named": true
+        },
+        {
           "type": "connect_statement",
           "named": true
         },
@@ -1756,6 +1760,10 @@
           "named": true
         },
         {
+          "type": "dos_statement",
+          "named": true
+        },
+        {
           "type": "down_statement",
           "named": true
         },
@@ -1765,6 +1773,10 @@
         },
         {
           "type": "empty_temp_table_statement",
+          "named": true
+        },
+        {
+          "type": "enable_statement",
           "named": true
         },
         {
@@ -1832,6 +1844,10 @@
           "named": true
         },
         {
+          "type": "insert_statement",
+          "named": true
+        },
+        {
           "type": "interface_definition",
           "named": true
         },
@@ -1840,7 +1856,15 @@
           "named": true
         },
         {
+          "type": "load_statement",
+          "named": true
+        },
+        {
           "type": "message_statement",
+          "named": true
+        },
+        {
+          "type": "next_prompt_statement",
           "named": true
         },
         {
@@ -1912,6 +1936,10 @@
           "named": true
         },
         {
+          "type": "prompt_for_statement",
+          "named": true
+        },
+        {
           "type": "publish_statement",
           "named": true
         },
@@ -1925,6 +1953,10 @@
         },
         {
           "type": "quit_statement",
+          "named": true
+        },
+        {
+          "type": "raw_transfer_statement",
           "named": true
         },
         {
@@ -1972,6 +2004,10 @@
           "named": true
         },
         {
+          "type": "set_statement",
+          "named": true
+        },
+        {
           "type": "status_statement",
           "named": true
         },
@@ -2000,6 +2036,10 @@
           "named": true
         },
         {
+          "type": "underline_statement",
+          "named": true
+        },
+        {
           "type": "undo_statement",
           "named": true
         },
@@ -2008,11 +2048,19 @@
           "named": true
         },
         {
+          "type": "unload_statement",
+          "named": true
+        },
+        {
           "type": "unsubscribe_statement",
           "named": true
         },
         {
           "type": "up_statement",
+          "named": true
+        },
+        {
+          "type": "update_statement",
           "named": true
         },
         {
@@ -3441,6 +3489,328 @@
     }
   },
   {
+    "type": "color_statement",
+    "named": true,
+    "fields": {
+      "color": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "argument_reference",
+            "named": true
+          },
+          {
+            "type": "array_access",
+            "named": true
+          },
+          {
+            "type": "available_expression",
+            "named": true
+          },
+          {
+            "type": "binary_expression",
+            "named": true
+          },
+          {
+            "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "can_find_expression",
+            "named": true
+          },
+          {
+            "type": "conditional_expression",
+            "named": true
+          },
+          {
+            "type": "constant",
+            "named": true
+          },
+          {
+            "type": "dataset_reference",
+            "named": true
+          },
+          {
+            "type": "date_literal",
+            "named": true
+          },
+          {
+            "type": "function_call",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "locked_expression",
+            "named": true
+          },
+          {
+            "type": "new_expression",
+            "named": true
+          },
+          {
+            "type": "null_literal",
+            "named": true
+          },
+          {
+            "type": "number_literal",
+            "named": true
+          },
+          {
+            "type": "object_access",
+            "named": true
+          },
+          {
+            "type": "object_access_expression",
+            "named": true
+          },
+          {
+            "type": "parenthesized_expression",
+            "named": true
+          },
+          {
+            "type": "qualified_name",
+            "named": true
+          },
+          {
+            "type": "safe_object_access",
+            "named": true
+          },
+          {
+            "type": "scoped_name",
+            "named": true
+          },
+          {
+            "type": "string_literal",
+            "named": true
+          },
+          {
+            "type": "unary_expression",
+            "named": true
+          }
+        ]
+      },
+      "field": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": "argument_reference",
+            "named": true
+          },
+          {
+            "type": "array_access",
+            "named": true
+          },
+          {
+            "type": "available_expression",
+            "named": true
+          },
+          {
+            "type": "binary_expression",
+            "named": true
+          },
+          {
+            "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "can_find_expression",
+            "named": true
+          },
+          {
+            "type": "conditional_expression",
+            "named": true
+          },
+          {
+            "type": "constant",
+            "named": true
+          },
+          {
+            "type": "dataset_reference",
+            "named": true
+          },
+          {
+            "type": "date_literal",
+            "named": true
+          },
+          {
+            "type": "function_call",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "locked_expression",
+            "named": true
+          },
+          {
+            "type": "new_expression",
+            "named": true
+          },
+          {
+            "type": "null_literal",
+            "named": true
+          },
+          {
+            "type": "number_literal",
+            "named": true
+          },
+          {
+            "type": "object_access",
+            "named": true
+          },
+          {
+            "type": "object_access_expression",
+            "named": true
+          },
+          {
+            "type": "parenthesized_expression",
+            "named": true
+          },
+          {
+            "type": "qualified_name",
+            "named": true
+          },
+          {
+            "type": "safe_object_access",
+            "named": true
+          },
+          {
+            "type": "scoped_name",
+            "named": true
+          },
+          {
+            "type": "string_literal",
+            "named": true
+          },
+          {
+            "type": "unary_expression",
+            "named": true
+          }
+        ]
+      },
+      "prompt_color": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "argument_reference",
+            "named": true
+          },
+          {
+            "type": "array_access",
+            "named": true
+          },
+          {
+            "type": "available_expression",
+            "named": true
+          },
+          {
+            "type": "binary_expression",
+            "named": true
+          },
+          {
+            "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "can_find_expression",
+            "named": true
+          },
+          {
+            "type": "conditional_expression",
+            "named": true
+          },
+          {
+            "type": "constant",
+            "named": true
+          },
+          {
+            "type": "dataset_reference",
+            "named": true
+          },
+          {
+            "type": "date_literal",
+            "named": true
+          },
+          {
+            "type": "function_call",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "locked_expression",
+            "named": true
+          },
+          {
+            "type": "new_expression",
+            "named": true
+          },
+          {
+            "type": "null_literal",
+            "named": true
+          },
+          {
+            "type": "number_literal",
+            "named": true
+          },
+          {
+            "type": "object_access",
+            "named": true
+          },
+          {
+            "type": "object_access_expression",
+            "named": true
+          },
+          {
+            "type": "parenthesized_expression",
+            "named": true
+          },
+          {
+            "type": "qualified_name",
+            "named": true
+          },
+          {
+            "type": "safe_object_access",
+            "named": true
+          },
+          {
+            "type": "scoped_name",
+            "named": true
+          },
+          {
+            "type": "string_literal",
+            "named": true
+          },
+          {
+            "type": "unary_expression",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "frame_phrase",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "column_label_option",
     "named": true,
     "fields": {},
@@ -3876,6 +4246,10 @@
           "named": true
         },
         {
+          "type": "color_statement",
+          "named": true
+        },
+        {
           "type": "connect_statement",
           "named": true
         },
@@ -3928,6 +4302,10 @@
           "named": true
         },
         {
+          "type": "dos_statement",
+          "named": true
+        },
+        {
           "type": "down_statement",
           "named": true
         },
@@ -3937,6 +4315,10 @@
         },
         {
           "type": "empty_temp_table_statement",
+          "named": true
+        },
+        {
+          "type": "enable_statement",
           "named": true
         },
         {
@@ -4004,6 +4386,10 @@
           "named": true
         },
         {
+          "type": "insert_statement",
+          "named": true
+        },
+        {
           "type": "interface_definition",
           "named": true
         },
@@ -4012,7 +4398,15 @@
           "named": true
         },
         {
+          "type": "load_statement",
+          "named": true
+        },
+        {
           "type": "message_statement",
+          "named": true
+        },
+        {
+          "type": "next_prompt_statement",
           "named": true
         },
         {
@@ -4084,6 +4478,10 @@
           "named": true
         },
         {
+          "type": "prompt_for_statement",
+          "named": true
+        },
+        {
           "type": "publish_statement",
           "named": true
         },
@@ -4097,6 +4495,10 @@
         },
         {
           "type": "quit_statement",
+          "named": true
+        },
+        {
+          "type": "raw_transfer_statement",
           "named": true
         },
         {
@@ -4144,6 +4546,10 @@
           "named": true
         },
         {
+          "type": "set_statement",
+          "named": true
+        },
+        {
           "type": "status_statement",
           "named": true
         },
@@ -4172,6 +4578,10 @@
           "named": true
         },
         {
+          "type": "underline_statement",
+          "named": true
+        },
+        {
           "type": "undo_statement",
           "named": true
         },
@@ -4180,11 +4590,19 @@
           "named": true
         },
         {
+          "type": "unload_statement",
+          "named": true
+        },
+        {
           "type": "unsubscribe_statement",
           "named": true
         },
         {
           "type": "up_statement",
+          "named": true
+        },
+        {
+          "type": "update_statement",
           "named": true
         },
         {
@@ -4860,6 +5278,10 @@
           "named": true
         },
         {
+          "type": "color_statement",
+          "named": true
+        },
+        {
           "type": "connect_statement",
           "named": true
         },
@@ -4912,6 +5334,10 @@
           "named": true
         },
         {
+          "type": "dos_statement",
+          "named": true
+        },
+        {
           "type": "down_statement",
           "named": true
         },
@@ -4921,6 +5347,10 @@
         },
         {
           "type": "empty_temp_table_statement",
+          "named": true
+        },
+        {
+          "type": "enable_statement",
           "named": true
         },
         {
@@ -4988,6 +5418,10 @@
           "named": true
         },
         {
+          "type": "insert_statement",
+          "named": true
+        },
+        {
           "type": "interface_definition",
           "named": true
         },
@@ -4996,7 +5430,15 @@
           "named": true
         },
         {
+          "type": "load_statement",
+          "named": true
+        },
+        {
           "type": "message_statement",
+          "named": true
+        },
+        {
+          "type": "next_prompt_statement",
           "named": true
         },
         {
@@ -5068,6 +5510,10 @@
           "named": true
         },
         {
+          "type": "prompt_for_statement",
+          "named": true
+        },
+        {
           "type": "publish_statement",
           "named": true
         },
@@ -5081,6 +5527,10 @@
         },
         {
           "type": "quit_statement",
+          "named": true
+        },
+        {
+          "type": "raw_transfer_statement",
           "named": true
         },
         {
@@ -5128,6 +5578,10 @@
           "named": true
         },
         {
+          "type": "set_statement",
+          "named": true
+        },
+        {
           "type": "status_statement",
           "named": true
         },
@@ -5156,6 +5610,10 @@
           "named": true
         },
         {
+          "type": "underline_statement",
+          "named": true
+        },
+        {
           "type": "undo_statement",
           "named": true
         },
@@ -5164,11 +5622,19 @@
           "named": true
         },
         {
+          "type": "unload_statement",
+          "named": true
+        },
+        {
           "type": "unsubscribe_statement",
           "named": true
         },
         {
           "type": "up_statement",
+          "named": true
+        },
+        {
+          "type": "update_statement",
           "named": true
         },
         {
@@ -5954,6 +6420,114 @@
     }
   },
   {
+    "type": "dos_statement",
+    "named": true,
+    "fields": {
+      "command": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "argument_reference",
+            "named": true
+          },
+          {
+            "type": "array_access",
+            "named": true
+          },
+          {
+            "type": "available_expression",
+            "named": true
+          },
+          {
+            "type": "binary_expression",
+            "named": true
+          },
+          {
+            "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "can_find_expression",
+            "named": true
+          },
+          {
+            "type": "conditional_expression",
+            "named": true
+          },
+          {
+            "type": "constant",
+            "named": true
+          },
+          {
+            "type": "dataset_reference",
+            "named": true
+          },
+          {
+            "type": "date_literal",
+            "named": true
+          },
+          {
+            "type": "function_call",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "locked_expression",
+            "named": true
+          },
+          {
+            "type": "new_expression",
+            "named": true
+          },
+          {
+            "type": "null_literal",
+            "named": true
+          },
+          {
+            "type": "number_literal",
+            "named": true
+          },
+          {
+            "type": "object_access",
+            "named": true
+          },
+          {
+            "type": "object_access_expression",
+            "named": true
+          },
+          {
+            "type": "parenthesized_expression",
+            "named": true
+          },
+          {
+            "type": "qualified_name",
+            "named": true
+          },
+          {
+            "type": "safe_object_access",
+            "named": true
+          },
+          {
+            "type": "scoped_name",
+            "named": true
+          },
+          {
+            "type": "string_literal",
+            "named": true
+          },
+          {
+            "type": "unary_expression",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "down_statement",
     "named": true,
     "fields": {
@@ -6099,6 +6673,348 @@
           }
         ]
       }
+    }
+  },
+  {
+    "type": "enable_field",
+    "named": true,
+    "fields": {
+      "field": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "argument_reference",
+            "named": true
+          },
+          {
+            "type": "array_access",
+            "named": true
+          },
+          {
+            "type": "available_expression",
+            "named": true
+          },
+          {
+            "type": "binary_expression",
+            "named": true
+          },
+          {
+            "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "can_find_expression",
+            "named": true
+          },
+          {
+            "type": "conditional_expression",
+            "named": true
+          },
+          {
+            "type": "constant",
+            "named": true
+          },
+          {
+            "type": "dataset_reference",
+            "named": true
+          },
+          {
+            "type": "date_literal",
+            "named": true
+          },
+          {
+            "type": "function_call",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "locked_expression",
+            "named": true
+          },
+          {
+            "type": "new_expression",
+            "named": true
+          },
+          {
+            "type": "null_literal",
+            "named": true
+          },
+          {
+            "type": "number_literal",
+            "named": true
+          },
+          {
+            "type": "object_access",
+            "named": true
+          },
+          {
+            "type": "object_access_expression",
+            "named": true
+          },
+          {
+            "type": "parenthesized_expression",
+            "named": true
+          },
+          {
+            "type": "qualified_name",
+            "named": true
+          },
+          {
+            "type": "safe_object_access",
+            "named": true
+          },
+          {
+            "type": "scoped_name",
+            "named": true
+          },
+          {
+            "type": "string_literal",
+            "named": true
+          },
+          {
+            "type": "unary_expression",
+            "named": true
+          }
+        ]
+      },
+      "when": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "argument_reference",
+            "named": true
+          },
+          {
+            "type": "array_access",
+            "named": true
+          },
+          {
+            "type": "available_expression",
+            "named": true
+          },
+          {
+            "type": "binary_expression",
+            "named": true
+          },
+          {
+            "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "can_find_expression",
+            "named": true
+          },
+          {
+            "type": "conditional_expression",
+            "named": true
+          },
+          {
+            "type": "constant",
+            "named": true
+          },
+          {
+            "type": "dataset_reference",
+            "named": true
+          },
+          {
+            "type": "date_literal",
+            "named": true
+          },
+          {
+            "type": "function_call",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "locked_expression",
+            "named": true
+          },
+          {
+            "type": "new_expression",
+            "named": true
+          },
+          {
+            "type": "null_literal",
+            "named": true
+          },
+          {
+            "type": "number_literal",
+            "named": true
+          },
+          {
+            "type": "object_access",
+            "named": true
+          },
+          {
+            "type": "object_access_expression",
+            "named": true
+          },
+          {
+            "type": "parenthesized_expression",
+            "named": true
+          },
+          {
+            "type": "qualified_name",
+            "named": true
+          },
+          {
+            "type": "safe_object_access",
+            "named": true
+          },
+          {
+            "type": "scoped_name",
+            "named": true
+          },
+          {
+            "type": "string_literal",
+            "named": true
+          },
+          {
+            "type": "unary_expression",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "enable_statement",
+    "named": true,
+    "fields": {
+      "except": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "window": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "argument_reference",
+            "named": true
+          },
+          {
+            "type": "array_access",
+            "named": true
+          },
+          {
+            "type": "available_expression",
+            "named": true
+          },
+          {
+            "type": "binary_expression",
+            "named": true
+          },
+          {
+            "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "can_find_expression",
+            "named": true
+          },
+          {
+            "type": "conditional_expression",
+            "named": true
+          },
+          {
+            "type": "constant",
+            "named": true
+          },
+          {
+            "type": "dataset_reference",
+            "named": true
+          },
+          {
+            "type": "date_literal",
+            "named": true
+          },
+          {
+            "type": "function_call",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "locked_expression",
+            "named": true
+          },
+          {
+            "type": "new_expression",
+            "named": true
+          },
+          {
+            "type": "null_literal",
+            "named": true
+          },
+          {
+            "type": "number_literal",
+            "named": true
+          },
+          {
+            "type": "object_access",
+            "named": true
+          },
+          {
+            "type": "object_access_expression",
+            "named": true
+          },
+          {
+            "type": "parenthesized_expression",
+            "named": true
+          },
+          {
+            "type": "qualified_name",
+            "named": true
+          },
+          {
+            "type": "safe_object_access",
+            "named": true
+          },
+          {
+            "type": "scoped_name",
+            "named": true
+          },
+          {
+            "type": "string_literal",
+            "named": true
+          },
+          {
+            "type": "unary_expression",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "enable_field",
+          "named": true
+        },
+        {
+          "type": "frame_phrase",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -7029,7 +7945,7 @@
     "fields": {
       "frame": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "identifier",
@@ -7179,6 +8095,10 @@
           "named": true
         },
         {
+          "type": "color_statement",
+          "named": true
+        },
+        {
           "type": "connect_statement",
           "named": true
         },
@@ -7231,6 +8151,10 @@
           "named": true
         },
         {
+          "type": "dos_statement",
+          "named": true
+        },
+        {
           "type": "down_statement",
           "named": true
         },
@@ -7240,6 +8164,10 @@
         },
         {
           "type": "empty_temp_table_statement",
+          "named": true
+        },
+        {
+          "type": "enable_statement",
           "named": true
         },
         {
@@ -7311,6 +8239,10 @@
           "named": true
         },
         {
+          "type": "insert_statement",
+          "named": true
+        },
+        {
           "type": "interface_definition",
           "named": true
         },
@@ -7319,7 +8251,15 @@
           "named": true
         },
         {
+          "type": "load_statement",
+          "named": true
+        },
+        {
           "type": "message_statement",
+          "named": true
+        },
+        {
+          "type": "next_prompt_statement",
           "named": true
         },
         {
@@ -7391,6 +8331,10 @@
           "named": true
         },
         {
+          "type": "prompt_for_statement",
+          "named": true
+        },
+        {
           "type": "publish_statement",
           "named": true
         },
@@ -7404,6 +8348,10 @@
         },
         {
           "type": "quit_statement",
+          "named": true
+        },
+        {
+          "type": "raw_transfer_statement",
           "named": true
         },
         {
@@ -7451,6 +8399,10 @@
           "named": true
         },
         {
+          "type": "set_statement",
+          "named": true
+        },
+        {
           "type": "status_statement",
           "named": true
         },
@@ -7479,6 +8431,10 @@
           "named": true
         },
         {
+          "type": "underline_statement",
+          "named": true
+        },
+        {
           "type": "undo_statement",
           "named": true
         },
@@ -7487,11 +8443,19 @@
           "named": true
         },
         {
+          "type": "unload_statement",
+          "named": true
+        },
+        {
           "type": "unsubscribe_statement",
           "named": true
         },
         {
           "type": "up_statement",
+          "named": true
+        },
+        {
+          "type": "update_statement",
           "named": true
         },
         {
@@ -7754,6 +8718,21 @@
     }
   },
   {
+    "type": "go_on_clause",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "hide_statement",
     "named": true,
     "fields": {
@@ -7944,6 +8923,10 @@
             "named": true
           },
           {
+            "type": "color_statement",
+            "named": true
+          },
+          {
             "type": "connect_statement",
             "named": true
           },
@@ -7996,6 +8979,10 @@
             "named": true
           },
           {
+            "type": "dos_statement",
+            "named": true
+          },
+          {
             "type": "down_statement",
             "named": true
           },
@@ -8005,6 +8992,10 @@
           },
           {
             "type": "empty_temp_table_statement",
+            "named": true
+          },
+          {
+            "type": "enable_statement",
             "named": true
           },
           {
@@ -8072,6 +9063,10 @@
             "named": true
           },
           {
+            "type": "insert_statement",
+            "named": true
+          },
+          {
             "type": "interface_definition",
             "named": true
           },
@@ -8080,7 +9075,15 @@
             "named": true
           },
           {
+            "type": "load_statement",
+            "named": true
+          },
+          {
             "type": "message_statement",
+            "named": true
+          },
+          {
+            "type": "next_prompt_statement",
             "named": true
           },
           {
@@ -8152,6 +9155,10 @@
             "named": true
           },
           {
+            "type": "prompt_for_statement",
+            "named": true
+          },
+          {
             "type": "publish_statement",
             "named": true
           },
@@ -8165,6 +9172,10 @@
           },
           {
             "type": "quit_statement",
+            "named": true
+          },
+          {
+            "type": "raw_transfer_statement",
             "named": true
           },
           {
@@ -8212,6 +9223,10 @@
             "named": true
           },
           {
+            "type": "set_statement",
+            "named": true
+          },
+          {
             "type": "status_statement",
             "named": true
           },
@@ -8240,6 +9255,10 @@
             "named": true
           },
           {
+            "type": "underline_statement",
+            "named": true
+          },
+          {
             "type": "undo_statement",
             "named": true
           },
@@ -8248,11 +9267,19 @@
             "named": true
           },
           {
+            "type": "unload_statement",
+            "named": true
+          },
+          {
             "type": "unsubscribe_statement",
             "named": true
           },
           {
             "type": "up_statement",
+            "named": true
+          },
+          {
+            "type": "update_statement",
             "named": true
           },
           {
@@ -8354,6 +9381,10 @@
             "named": true
           },
           {
+            "type": "color_statement",
+            "named": true
+          },
+          {
             "type": "connect_statement",
             "named": true
           },
@@ -8406,6 +9437,10 @@
             "named": true
           },
           {
+            "type": "dos_statement",
+            "named": true
+          },
+          {
             "type": "down_statement",
             "named": true
           },
@@ -8415,6 +9450,10 @@
           },
           {
             "type": "empty_temp_table_statement",
+            "named": true
+          },
+          {
+            "type": "enable_statement",
             "named": true
           },
           {
@@ -8482,6 +9521,10 @@
             "named": true
           },
           {
+            "type": "insert_statement",
+            "named": true
+          },
+          {
             "type": "interface_definition",
             "named": true
           },
@@ -8490,7 +9533,15 @@
             "named": true
           },
           {
+            "type": "load_statement",
+            "named": true
+          },
+          {
             "type": "message_statement",
+            "named": true
+          },
+          {
+            "type": "next_prompt_statement",
             "named": true
           },
           {
@@ -8562,6 +9613,10 @@
             "named": true
           },
           {
+            "type": "prompt_for_statement",
+            "named": true
+          },
+          {
             "type": "publish_statement",
             "named": true
           },
@@ -8575,6 +9630,10 @@
           },
           {
             "type": "quit_statement",
+            "named": true
+          },
+          {
+            "type": "raw_transfer_statement",
             "named": true
           },
           {
@@ -8622,6 +9681,10 @@
             "named": true
           },
           {
+            "type": "set_statement",
+            "named": true
+          },
+          {
             "type": "status_statement",
             "named": true
           },
@@ -8650,6 +9713,10 @@
             "named": true
           },
           {
+            "type": "underline_statement",
+            "named": true
+          },
+          {
             "type": "undo_statement",
             "named": true
           },
@@ -8658,11 +9725,19 @@
             "named": true
           },
           {
+            "type": "unload_statement",
+            "named": true
+          },
+          {
             "type": "unsubscribe_statement",
             "named": true
           },
           {
             "type": "up_statement",
+            "named": true
+          },
+          {
+            "type": "update_statement",
             "named": true
           },
           {
@@ -9747,6 +10822,56 @@
     }
   },
   {
+    "type": "insert_statement",
+    "named": true,
+    "fields": {
+      "except": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "record": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "qualified_name",
+            "named": true
+          }
+        ]
+      },
+      "using": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "frame_phrase",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "interface_body_item",
     "named": true,
     "fields": {},
@@ -9912,6 +11037,318 @@
           },
           {
             "type": "qualified_name",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "load_statement",
+    "named": true,
+    "fields": {
+      "app": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "argument_reference",
+            "named": true
+          },
+          {
+            "type": "array_access",
+            "named": true
+          },
+          {
+            "type": "available_expression",
+            "named": true
+          },
+          {
+            "type": "binary_expression",
+            "named": true
+          },
+          {
+            "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "can_find_expression",
+            "named": true
+          },
+          {
+            "type": "conditional_expression",
+            "named": true
+          },
+          {
+            "type": "constant",
+            "named": true
+          },
+          {
+            "type": "dataset_reference",
+            "named": true
+          },
+          {
+            "type": "date_literal",
+            "named": true
+          },
+          {
+            "type": "function_call",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "locked_expression",
+            "named": true
+          },
+          {
+            "type": "new_expression",
+            "named": true
+          },
+          {
+            "type": "null_literal",
+            "named": true
+          },
+          {
+            "type": "number_literal",
+            "named": true
+          },
+          {
+            "type": "object_access",
+            "named": true
+          },
+          {
+            "type": "object_access_expression",
+            "named": true
+          },
+          {
+            "type": "parenthesized_expression",
+            "named": true
+          },
+          {
+            "type": "qualified_name",
+            "named": true
+          },
+          {
+            "type": "safe_object_access",
+            "named": true
+          },
+          {
+            "type": "scoped_name",
+            "named": true
+          },
+          {
+            "type": "string_literal",
+            "named": true
+          },
+          {
+            "type": "unary_expression",
+            "named": true
+          }
+        ]
+      },
+      "dir": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "argument_reference",
+            "named": true
+          },
+          {
+            "type": "array_access",
+            "named": true
+          },
+          {
+            "type": "available_expression",
+            "named": true
+          },
+          {
+            "type": "binary_expression",
+            "named": true
+          },
+          {
+            "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "can_find_expression",
+            "named": true
+          },
+          {
+            "type": "conditional_expression",
+            "named": true
+          },
+          {
+            "type": "constant",
+            "named": true
+          },
+          {
+            "type": "dataset_reference",
+            "named": true
+          },
+          {
+            "type": "date_literal",
+            "named": true
+          },
+          {
+            "type": "function_call",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "locked_expression",
+            "named": true
+          },
+          {
+            "type": "new_expression",
+            "named": true
+          },
+          {
+            "type": "null_literal",
+            "named": true
+          },
+          {
+            "type": "number_literal",
+            "named": true
+          },
+          {
+            "type": "object_access",
+            "named": true
+          },
+          {
+            "type": "object_access_expression",
+            "named": true
+          },
+          {
+            "type": "parenthesized_expression",
+            "named": true
+          },
+          {
+            "type": "qualified_name",
+            "named": true
+          },
+          {
+            "type": "safe_object_access",
+            "named": true
+          },
+          {
+            "type": "scoped_name",
+            "named": true
+          },
+          {
+            "type": "string_literal",
+            "named": true
+          },
+          {
+            "type": "unary_expression",
+            "named": true
+          }
+        ]
+      },
+      "file": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "argument_reference",
+            "named": true
+          },
+          {
+            "type": "array_access",
+            "named": true
+          },
+          {
+            "type": "available_expression",
+            "named": true
+          },
+          {
+            "type": "binary_expression",
+            "named": true
+          },
+          {
+            "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "can_find_expression",
+            "named": true
+          },
+          {
+            "type": "conditional_expression",
+            "named": true
+          },
+          {
+            "type": "constant",
+            "named": true
+          },
+          {
+            "type": "dataset_reference",
+            "named": true
+          },
+          {
+            "type": "date_literal",
+            "named": true
+          },
+          {
+            "type": "function_call",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "locked_expression",
+            "named": true
+          },
+          {
+            "type": "new_expression",
+            "named": true
+          },
+          {
+            "type": "null_literal",
+            "named": true
+          },
+          {
+            "type": "number_literal",
+            "named": true
+          },
+          {
+            "type": "object_access",
+            "named": true
+          },
+          {
+            "type": "object_access_expression",
+            "named": true
+          },
+          {
+            "type": "parenthesized_expression",
+            "named": true
+          },
+          {
+            "type": "qualified_name",
+            "named": true
+          },
+          {
+            "type": "safe_object_access",
+            "named": true
+          },
+          {
+            "type": "scoped_name",
+            "named": true
+          },
+          {
+            "type": "string_literal",
+            "named": true
+          },
+          {
+            "type": "unary_expression",
             "named": true
           }
         ]
@@ -10348,6 +11785,10 @@
           "named": true
         },
         {
+          "type": "color_statement",
+          "named": true
+        },
+        {
           "type": "connect_statement",
           "named": true
         },
@@ -10400,6 +11841,10 @@
           "named": true
         },
         {
+          "type": "dos_statement",
+          "named": true
+        },
+        {
           "type": "down_statement",
           "named": true
         },
@@ -10409,6 +11854,10 @@
         },
         {
           "type": "empty_temp_table_statement",
+          "named": true
+        },
+        {
+          "type": "enable_statement",
           "named": true
         },
         {
@@ -10476,6 +11925,10 @@
           "named": true
         },
         {
+          "type": "insert_statement",
+          "named": true
+        },
+        {
           "type": "interface_definition",
           "named": true
         },
@@ -10484,7 +11937,15 @@
           "named": true
         },
         {
+          "type": "load_statement",
+          "named": true
+        },
+        {
           "type": "message_statement",
+          "named": true
+        },
+        {
+          "type": "next_prompt_statement",
           "named": true
         },
         {
@@ -10556,6 +12017,10 @@
           "named": true
         },
         {
+          "type": "prompt_for_statement",
+          "named": true
+        },
+        {
           "type": "publish_statement",
           "named": true
         },
@@ -10569,6 +12034,10 @@
         },
         {
           "type": "quit_statement",
+          "named": true
+        },
+        {
+          "type": "raw_transfer_statement",
           "named": true
         },
         {
@@ -10616,6 +12085,10 @@
           "named": true
         },
         {
+          "type": "set_statement",
+          "named": true
+        },
+        {
           "type": "status_statement",
           "named": true
         },
@@ -10644,6 +12117,10 @@
           "named": true
         },
         {
+          "type": "underline_statement",
+          "named": true
+        },
+        {
           "type": "undo_statement",
           "named": true
         },
@@ -10652,11 +12129,19 @@
           "named": true
         },
         {
+          "type": "unload_statement",
+          "named": true
+        },
+        {
           "type": "unsubscribe_statement",
           "named": true
         },
         {
           "type": "up_statement",
+          "named": true
+        },
+        {
+          "type": "update_statement",
           "named": true
         },
         {
@@ -11049,6 +12534,124 @@
     }
   },
   {
+    "type": "next_prompt_statement",
+    "named": true,
+    "fields": {
+      "field": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "argument_reference",
+            "named": true
+          },
+          {
+            "type": "array_access",
+            "named": true
+          },
+          {
+            "type": "available_expression",
+            "named": true
+          },
+          {
+            "type": "binary_expression",
+            "named": true
+          },
+          {
+            "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "can_find_expression",
+            "named": true
+          },
+          {
+            "type": "conditional_expression",
+            "named": true
+          },
+          {
+            "type": "constant",
+            "named": true
+          },
+          {
+            "type": "dataset_reference",
+            "named": true
+          },
+          {
+            "type": "date_literal",
+            "named": true
+          },
+          {
+            "type": "function_call",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "locked_expression",
+            "named": true
+          },
+          {
+            "type": "new_expression",
+            "named": true
+          },
+          {
+            "type": "null_literal",
+            "named": true
+          },
+          {
+            "type": "number_literal",
+            "named": true
+          },
+          {
+            "type": "object_access",
+            "named": true
+          },
+          {
+            "type": "object_access_expression",
+            "named": true
+          },
+          {
+            "type": "parenthesized_expression",
+            "named": true
+          },
+          {
+            "type": "qualified_name",
+            "named": true
+          },
+          {
+            "type": "safe_object_access",
+            "named": true
+          },
+          {
+            "type": "scoped_name",
+            "named": true
+          },
+          {
+            "type": "string_literal",
+            "named": true
+          },
+          {
+            "type": "unary_expression",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "frame_phrase",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "next_statement",
     "named": true,
     "fields": {
@@ -11429,6 +13032,10 @@
           "named": true
         },
         {
+          "type": "color_statement",
+          "named": true
+        },
+        {
           "type": "connect_statement",
           "named": true
         },
@@ -11481,6 +13088,10 @@
           "named": true
         },
         {
+          "type": "dos_statement",
+          "named": true
+        },
+        {
           "type": "down_statement",
           "named": true
         },
@@ -11490,6 +13101,10 @@
         },
         {
           "type": "empty_temp_table_statement",
+          "named": true
+        },
+        {
+          "type": "enable_statement",
           "named": true
         },
         {
@@ -11557,6 +13172,10 @@
           "named": true
         },
         {
+          "type": "insert_statement",
+          "named": true
+        },
+        {
           "type": "interface_definition",
           "named": true
         },
@@ -11565,7 +13184,15 @@
           "named": true
         },
         {
+          "type": "load_statement",
+          "named": true
+        },
+        {
           "type": "message_statement",
+          "named": true
+        },
+        {
+          "type": "next_prompt_statement",
           "named": true
         },
         {
@@ -11641,6 +13268,10 @@
           "named": true
         },
         {
+          "type": "prompt_for_statement",
+          "named": true
+        },
+        {
           "type": "publish_statement",
           "named": true
         },
@@ -11654,6 +13285,10 @@
         },
         {
           "type": "quit_statement",
+          "named": true
+        },
+        {
+          "type": "raw_transfer_statement",
           "named": true
         },
         {
@@ -11705,6 +13340,10 @@
           "named": true
         },
         {
+          "type": "set_statement",
+          "named": true
+        },
+        {
           "type": "status_statement",
           "named": true
         },
@@ -11733,6 +13372,10 @@
           "named": true
         },
         {
+          "type": "underline_statement",
+          "named": true
+        },
+        {
           "type": "undo_statement",
           "named": true
         },
@@ -11741,11 +13384,19 @@
           "named": true
         },
         {
+          "type": "unload_statement",
+          "named": true
+        },
+        {
           "type": "unsubscribe_statement",
           "named": true
         },
         {
           "type": "up_statement",
+          "named": true
+        },
+        {
+          "type": "update_statement",
           "named": true
         },
         {
@@ -13931,6 +15582,10 @@
           "named": true
         },
         {
+          "type": "color_statement",
+          "named": true
+        },
+        {
           "type": "connect_statement",
           "named": true
         },
@@ -13983,6 +15638,10 @@
           "named": true
         },
         {
+          "type": "dos_statement",
+          "named": true
+        },
+        {
           "type": "down_statement",
           "named": true
         },
@@ -13992,6 +15651,10 @@
         },
         {
           "type": "empty_temp_table_statement",
+          "named": true
+        },
+        {
+          "type": "enable_statement",
           "named": true
         },
         {
@@ -14059,6 +15722,10 @@
           "named": true
         },
         {
+          "type": "insert_statement",
+          "named": true
+        },
+        {
           "type": "interface_definition",
           "named": true
         },
@@ -14067,7 +15734,15 @@
           "named": true
         },
         {
+          "type": "load_statement",
+          "named": true
+        },
+        {
           "type": "message_statement",
+          "named": true
+        },
+        {
+          "type": "next_prompt_statement",
           "named": true
         },
         {
@@ -14139,6 +15814,10 @@
           "named": true
         },
         {
+          "type": "prompt_for_statement",
+          "named": true
+        },
+        {
           "type": "publish_statement",
           "named": true
         },
@@ -14152,6 +15831,10 @@
         },
         {
           "type": "quit_statement",
+          "named": true
+        },
+        {
+          "type": "raw_transfer_statement",
           "named": true
         },
         {
@@ -14199,6 +15882,10 @@
           "named": true
         },
         {
+          "type": "set_statement",
+          "named": true
+        },
+        {
           "type": "status_statement",
           "named": true
         },
@@ -14227,6 +15914,10 @@
           "named": true
         },
         {
+          "type": "underline_statement",
+          "named": true
+        },
+        {
           "type": "undo_statement",
           "named": true
         },
@@ -14235,11 +15926,19 @@
           "named": true
         },
         {
+          "type": "unload_statement",
+          "named": true
+        },
+        {
           "type": "unsubscribe_statement",
           "named": true
         },
         {
           "type": "up_statement",
+          "named": true
+        },
+        {
+          "type": "update_statement",
           "named": true
         },
         {
@@ -14297,6 +15996,346 @@
     "type": "process_events_statement",
     "named": true,
     "fields": {}
+  },
+  {
+    "type": "prompt_for_item",
+    "named": true,
+    "fields": {
+      "field": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "argument_reference",
+            "named": true
+          },
+          {
+            "type": "array_access",
+            "named": true
+          },
+          {
+            "type": "available_expression",
+            "named": true
+          },
+          {
+            "type": "binary_expression",
+            "named": true
+          },
+          {
+            "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "can_find_expression",
+            "named": true
+          },
+          {
+            "type": "conditional_expression",
+            "named": true
+          },
+          {
+            "type": "constant",
+            "named": true
+          },
+          {
+            "type": "dataset_reference",
+            "named": true
+          },
+          {
+            "type": "date_literal",
+            "named": true
+          },
+          {
+            "type": "function_call",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "locked_expression",
+            "named": true
+          },
+          {
+            "type": "new_expression",
+            "named": true
+          },
+          {
+            "type": "null_literal",
+            "named": true
+          },
+          {
+            "type": "number_literal",
+            "named": true
+          },
+          {
+            "type": "object_access",
+            "named": true
+          },
+          {
+            "type": "object_access_expression",
+            "named": true
+          },
+          {
+            "type": "parenthesized_expression",
+            "named": true
+          },
+          {
+            "type": "qualified_name",
+            "named": true
+          },
+          {
+            "type": "safe_object_access",
+            "named": true
+          },
+          {
+            "type": "scoped_name",
+            "named": true
+          },
+          {
+            "type": "string_literal",
+            "named": true
+          },
+          {
+            "type": "unary_expression",
+            "named": true
+          }
+        ]
+      },
+      "when": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "argument_reference",
+            "named": true
+          },
+          {
+            "type": "array_access",
+            "named": true
+          },
+          {
+            "type": "available_expression",
+            "named": true
+          },
+          {
+            "type": "binary_expression",
+            "named": true
+          },
+          {
+            "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "can_find_expression",
+            "named": true
+          },
+          {
+            "type": "conditional_expression",
+            "named": true
+          },
+          {
+            "type": "constant",
+            "named": true
+          },
+          {
+            "type": "dataset_reference",
+            "named": true
+          },
+          {
+            "type": "date_literal",
+            "named": true
+          },
+          {
+            "type": "function_call",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "locked_expression",
+            "named": true
+          },
+          {
+            "type": "new_expression",
+            "named": true
+          },
+          {
+            "type": "null_literal",
+            "named": true
+          },
+          {
+            "type": "number_literal",
+            "named": true
+          },
+          {
+            "type": "object_access",
+            "named": true
+          },
+          {
+            "type": "object_access_expression",
+            "named": true
+          },
+          {
+            "type": "parenthesized_expression",
+            "named": true
+          },
+          {
+            "type": "qualified_name",
+            "named": true
+          },
+          {
+            "type": "safe_object_access",
+            "named": true
+          },
+          {
+            "type": "scoped_name",
+            "named": true
+          },
+          {
+            "type": "string_literal",
+            "named": true
+          },
+          {
+            "type": "unary_expression",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "prompt_for_statement",
+    "named": true,
+    "fields": {
+      "window": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "argument_reference",
+            "named": true
+          },
+          {
+            "type": "array_access",
+            "named": true
+          },
+          {
+            "type": "available_expression",
+            "named": true
+          },
+          {
+            "type": "binary_expression",
+            "named": true
+          },
+          {
+            "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "can_find_expression",
+            "named": true
+          },
+          {
+            "type": "conditional_expression",
+            "named": true
+          },
+          {
+            "type": "constant",
+            "named": true
+          },
+          {
+            "type": "dataset_reference",
+            "named": true
+          },
+          {
+            "type": "date_literal",
+            "named": true
+          },
+          {
+            "type": "function_call",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "locked_expression",
+            "named": true
+          },
+          {
+            "type": "new_expression",
+            "named": true
+          },
+          {
+            "type": "null_literal",
+            "named": true
+          },
+          {
+            "type": "number_literal",
+            "named": true
+          },
+          {
+            "type": "object_access",
+            "named": true
+          },
+          {
+            "type": "object_access_expression",
+            "named": true
+          },
+          {
+            "type": "parenthesized_expression",
+            "named": true
+          },
+          {
+            "type": "qualified_name",
+            "named": true
+          },
+          {
+            "type": "safe_object_access",
+            "named": true
+          },
+          {
+            "type": "scoped_name",
+            "named": true
+          },
+          {
+            "type": "string_literal",
+            "named": true
+          },
+          {
+            "type": "unary_expression",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "frame_phrase",
+          "named": true
+        },
+        {
+          "type": "go_on_clause",
+          "named": true
+        },
+        {
+          "type": "prompt_for_item",
+          "named": true
+        },
+        {
+          "type": "stream_clause",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "property_accessor",
@@ -14371,6 +16410,10 @@
           "named": true
         },
         {
+          "type": "color_statement",
+          "named": true
+        },
+        {
           "type": "connect_statement",
           "named": true
         },
@@ -14423,6 +16466,10 @@
           "named": true
         },
         {
+          "type": "dos_statement",
+          "named": true
+        },
+        {
           "type": "down_statement",
           "named": true
         },
@@ -14432,6 +16479,10 @@
         },
         {
           "type": "empty_temp_table_statement",
+          "named": true
+        },
+        {
+          "type": "enable_statement",
           "named": true
         },
         {
@@ -14499,6 +16550,10 @@
           "named": true
         },
         {
+          "type": "insert_statement",
+          "named": true
+        },
+        {
           "type": "interface_definition",
           "named": true
         },
@@ -14507,7 +16562,15 @@
           "named": true
         },
         {
+          "type": "load_statement",
+          "named": true
+        },
+        {
           "type": "message_statement",
+          "named": true
+        },
+        {
+          "type": "next_prompt_statement",
           "named": true
         },
         {
@@ -14579,6 +16642,10 @@
           "named": true
         },
         {
+          "type": "prompt_for_statement",
+          "named": true
+        },
+        {
           "type": "property_set_parameter_list",
           "named": true
         },
@@ -14596,6 +16663,10 @@
         },
         {
           "type": "quit_statement",
+          "named": true
+        },
+        {
+          "type": "raw_transfer_statement",
           "named": true
         },
         {
@@ -14643,6 +16714,10 @@
           "named": true
         },
         {
+          "type": "set_statement",
+          "named": true
+        },
+        {
           "type": "status_statement",
           "named": true
         },
@@ -14671,6 +16746,10 @@
           "named": true
         },
         {
+          "type": "underline_statement",
+          "named": true
+        },
+        {
           "type": "undo_statement",
           "named": true
         },
@@ -14679,11 +16758,19 @@
           "named": true
         },
         {
+          "type": "unload_statement",
+          "named": true
+        },
+        {
           "type": "unsubscribe_statement",
           "named": true
         },
         {
           "type": "up_statement",
+          "named": true
+        },
+        {
+          "type": "update_statement",
           "named": true
         },
         {
@@ -15687,6 +17774,226 @@
     "type": "quit_statement",
     "named": true,
     "fields": {}
+  },
+  {
+    "type": "raw_transfer_statement",
+    "named": true,
+    "fields": {
+      "source_field": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "argument_reference",
+            "named": true
+          },
+          {
+            "type": "array_access",
+            "named": true
+          },
+          {
+            "type": "available_expression",
+            "named": true
+          },
+          {
+            "type": "binary_expression",
+            "named": true
+          },
+          {
+            "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "can_find_expression",
+            "named": true
+          },
+          {
+            "type": "conditional_expression",
+            "named": true
+          },
+          {
+            "type": "constant",
+            "named": true
+          },
+          {
+            "type": "dataset_reference",
+            "named": true
+          },
+          {
+            "type": "date_literal",
+            "named": true
+          },
+          {
+            "type": "function_call",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "locked_expression",
+            "named": true
+          },
+          {
+            "type": "new_expression",
+            "named": true
+          },
+          {
+            "type": "null_literal",
+            "named": true
+          },
+          {
+            "type": "number_literal",
+            "named": true
+          },
+          {
+            "type": "object_access",
+            "named": true
+          },
+          {
+            "type": "object_access_expression",
+            "named": true
+          },
+          {
+            "type": "parenthesized_expression",
+            "named": true
+          },
+          {
+            "type": "qualified_name",
+            "named": true
+          },
+          {
+            "type": "safe_object_access",
+            "named": true
+          },
+          {
+            "type": "scoped_name",
+            "named": true
+          },
+          {
+            "type": "string_literal",
+            "named": true
+          },
+          {
+            "type": "unary_expression",
+            "named": true
+          }
+        ]
+      },
+      "target": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "target_field": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "argument_reference",
+            "named": true
+          },
+          {
+            "type": "array_access",
+            "named": true
+          },
+          {
+            "type": "available_expression",
+            "named": true
+          },
+          {
+            "type": "binary_expression",
+            "named": true
+          },
+          {
+            "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "can_find_expression",
+            "named": true
+          },
+          {
+            "type": "conditional_expression",
+            "named": true
+          },
+          {
+            "type": "constant",
+            "named": true
+          },
+          {
+            "type": "dataset_reference",
+            "named": true
+          },
+          {
+            "type": "date_literal",
+            "named": true
+          },
+          {
+            "type": "function_call",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "locked_expression",
+            "named": true
+          },
+          {
+            "type": "new_expression",
+            "named": true
+          },
+          {
+            "type": "null_literal",
+            "named": true
+          },
+          {
+            "type": "number_literal",
+            "named": true
+          },
+          {
+            "type": "object_access",
+            "named": true
+          },
+          {
+            "type": "object_access_expression",
+            "named": true
+          },
+          {
+            "type": "parenthesized_expression",
+            "named": true
+          },
+          {
+            "type": "qualified_name",
+            "named": true
+          },
+          {
+            "type": "safe_object_access",
+            "named": true
+          },
+          {
+            "type": "scoped_name",
+            "named": true
+          },
+          {
+            "type": "string_literal",
+            "named": true
+          },
+          {
+            "type": "unary_expression",
+            "named": true
+          }
+        ]
+      }
+    }
   },
   {
     "type": "rcode_information",
@@ -17306,6 +19613,216 @@
     }
   },
   {
+    "type": "set_item",
+    "named": true,
+    "fields": {
+      "field": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "argument_reference",
+            "named": true
+          },
+          {
+            "type": "array_access",
+            "named": true
+          },
+          {
+            "type": "available_expression",
+            "named": true
+          },
+          {
+            "type": "binary_expression",
+            "named": true
+          },
+          {
+            "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "can_find_expression",
+            "named": true
+          },
+          {
+            "type": "conditional_expression",
+            "named": true
+          },
+          {
+            "type": "constant",
+            "named": true
+          },
+          {
+            "type": "dataset_reference",
+            "named": true
+          },
+          {
+            "type": "date_literal",
+            "named": true
+          },
+          {
+            "type": "function_call",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "locked_expression",
+            "named": true
+          },
+          {
+            "type": "new_expression",
+            "named": true
+          },
+          {
+            "type": "null_literal",
+            "named": true
+          },
+          {
+            "type": "number_literal",
+            "named": true
+          },
+          {
+            "type": "object_access",
+            "named": true
+          },
+          {
+            "type": "object_access_expression",
+            "named": true
+          },
+          {
+            "type": "parenthesized_expression",
+            "named": true
+          },
+          {
+            "type": "qualified_name",
+            "named": true
+          },
+          {
+            "type": "safe_object_access",
+            "named": true
+          },
+          {
+            "type": "scoped_name",
+            "named": true
+          },
+          {
+            "type": "string_literal",
+            "named": true
+          },
+          {
+            "type": "unary_expression",
+            "named": true
+          }
+        ]
+      },
+      "when": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "argument_reference",
+            "named": true
+          },
+          {
+            "type": "array_access",
+            "named": true
+          },
+          {
+            "type": "available_expression",
+            "named": true
+          },
+          {
+            "type": "binary_expression",
+            "named": true
+          },
+          {
+            "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "can_find_expression",
+            "named": true
+          },
+          {
+            "type": "conditional_expression",
+            "named": true
+          },
+          {
+            "type": "constant",
+            "named": true
+          },
+          {
+            "type": "dataset_reference",
+            "named": true
+          },
+          {
+            "type": "date_literal",
+            "named": true
+          },
+          {
+            "type": "function_call",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "locked_expression",
+            "named": true
+          },
+          {
+            "type": "new_expression",
+            "named": true
+          },
+          {
+            "type": "null_literal",
+            "named": true
+          },
+          {
+            "type": "number_literal",
+            "named": true
+          },
+          {
+            "type": "object_access",
+            "named": true
+          },
+          {
+            "type": "object_access_expression",
+            "named": true
+          },
+          {
+            "type": "parenthesized_expression",
+            "named": true
+          },
+          {
+            "type": "qualified_name",
+            "named": true
+          },
+          {
+            "type": "safe_object_access",
+            "named": true
+          },
+          {
+            "type": "scoped_name",
+            "named": true
+          },
+          {
+            "type": "string_literal",
+            "named": true
+          },
+          {
+            "type": "unary_expression",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "set_size_statement",
     "named": true,
     "fields": {
@@ -17513,6 +20030,33 @@
           }
         ]
       }
+    }
+  },
+  {
+    "type": "set_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "frame_phrase",
+          "named": true
+        },
+        {
+          "type": "go_on_clause",
+          "named": true
+        },
+        {
+          "type": "set_item",
+          "named": true
+        },
+        {
+          "type": "stream_clause",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -17795,6 +20339,10 @@
           "named": true
         },
         {
+          "type": "color_statement",
+          "named": true
+        },
+        {
           "type": "connect_statement",
           "named": true
         },
@@ -17847,6 +20395,10 @@
           "named": true
         },
         {
+          "type": "dos_statement",
+          "named": true
+        },
+        {
           "type": "down_statement",
           "named": true
         },
@@ -17856,6 +20408,10 @@
         },
         {
           "type": "empty_temp_table_statement",
+          "named": true
+        },
+        {
+          "type": "enable_statement",
           "named": true
         },
         {
@@ -17923,6 +20479,10 @@
           "named": true
         },
         {
+          "type": "insert_statement",
+          "named": true
+        },
+        {
           "type": "interface_definition",
           "named": true
         },
@@ -17931,7 +20491,15 @@
           "named": true
         },
         {
+          "type": "load_statement",
+          "named": true
+        },
+        {
           "type": "message_statement",
+          "named": true
+        },
+        {
+          "type": "next_prompt_statement",
           "named": true
         },
         {
@@ -18003,6 +20571,10 @@
           "named": true
         },
         {
+          "type": "prompt_for_statement",
+          "named": true
+        },
+        {
           "type": "publish_statement",
           "named": true
         },
@@ -18016,6 +20588,10 @@
         },
         {
           "type": "quit_statement",
+          "named": true
+        },
+        {
+          "type": "raw_transfer_statement",
           "named": true
         },
         {
@@ -18063,6 +20639,10 @@
           "named": true
         },
         {
+          "type": "set_statement",
+          "named": true
+        },
+        {
           "type": "status_statement",
           "named": true
         },
@@ -18091,6 +20671,10 @@
           "named": true
         },
         {
+          "type": "underline_statement",
+          "named": true
+        },
+        {
           "type": "undo_statement",
           "named": true
         },
@@ -18099,11 +20683,19 @@
           "named": true
         },
         {
+          "type": "unload_statement",
+          "named": true
+        },
+        {
           "type": "unsubscribe_statement",
           "named": true
         },
         {
           "type": "up_statement",
+          "named": true
+        },
+        {
+          "type": "update_statement",
           "named": true
         },
         {
@@ -19580,6 +22172,128 @@
     }
   },
   {
+    "type": "underline_statement",
+    "named": true,
+    "fields": {
+      "field": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": "argument_reference",
+            "named": true
+          },
+          {
+            "type": "array_access",
+            "named": true
+          },
+          {
+            "type": "available_expression",
+            "named": true
+          },
+          {
+            "type": "binary_expression",
+            "named": true
+          },
+          {
+            "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "can_find_expression",
+            "named": true
+          },
+          {
+            "type": "conditional_expression",
+            "named": true
+          },
+          {
+            "type": "constant",
+            "named": true
+          },
+          {
+            "type": "dataset_reference",
+            "named": true
+          },
+          {
+            "type": "date_literal",
+            "named": true
+          },
+          {
+            "type": "function_call",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "locked_expression",
+            "named": true
+          },
+          {
+            "type": "new_expression",
+            "named": true
+          },
+          {
+            "type": "null_literal",
+            "named": true
+          },
+          {
+            "type": "number_literal",
+            "named": true
+          },
+          {
+            "type": "object_access",
+            "named": true
+          },
+          {
+            "type": "object_access_expression",
+            "named": true
+          },
+          {
+            "type": "parenthesized_expression",
+            "named": true
+          },
+          {
+            "type": "qualified_name",
+            "named": true
+          },
+          {
+            "type": "safe_object_access",
+            "named": true
+          },
+          {
+            "type": "scoped_name",
+            "named": true
+          },
+          {
+            "type": "string_literal",
+            "named": true
+          },
+          {
+            "type": "unary_expression",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "frame_phrase",
+          "named": true
+        },
+        {
+          "type": "stream_clause",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "undo_leave_phrase",
     "named": true,
     "fields": {}
@@ -20121,6 +22835,114 @@
     }
   },
   {
+    "type": "unload_statement",
+    "named": true,
+    "fields": {
+      "file": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "argument_reference",
+            "named": true
+          },
+          {
+            "type": "array_access",
+            "named": true
+          },
+          {
+            "type": "available_expression",
+            "named": true
+          },
+          {
+            "type": "binary_expression",
+            "named": true
+          },
+          {
+            "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "can_find_expression",
+            "named": true
+          },
+          {
+            "type": "conditional_expression",
+            "named": true
+          },
+          {
+            "type": "constant",
+            "named": true
+          },
+          {
+            "type": "dataset_reference",
+            "named": true
+          },
+          {
+            "type": "date_literal",
+            "named": true
+          },
+          {
+            "type": "function_call",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "locked_expression",
+            "named": true
+          },
+          {
+            "type": "new_expression",
+            "named": true
+          },
+          {
+            "type": "null_literal",
+            "named": true
+          },
+          {
+            "type": "number_literal",
+            "named": true
+          },
+          {
+            "type": "object_access",
+            "named": true
+          },
+          {
+            "type": "object_access_expression",
+            "named": true
+          },
+          {
+            "type": "parenthesized_expression",
+            "named": true
+          },
+          {
+            "type": "qualified_name",
+            "named": true
+          },
+          {
+            "type": "safe_object_access",
+            "named": true
+          },
+          {
+            "type": "scoped_name",
+            "named": true
+          },
+          {
+            "type": "string_literal",
+            "named": true
+          },
+          {
+            "type": "unary_expression",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "unsubscribe_statement",
     "named": true,
     "fields": {
@@ -20549,6 +23371,239 @@
         },
         {
           "type": "stream_clause",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "update_item",
+    "named": true,
+    "fields": {
+      "field": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "argument_reference",
+            "named": true
+          },
+          {
+            "type": "array_access",
+            "named": true
+          },
+          {
+            "type": "available_expression",
+            "named": true
+          },
+          {
+            "type": "binary_expression",
+            "named": true
+          },
+          {
+            "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "can_find_expression",
+            "named": true
+          },
+          {
+            "type": "conditional_expression",
+            "named": true
+          },
+          {
+            "type": "constant",
+            "named": true
+          },
+          {
+            "type": "dataset_reference",
+            "named": true
+          },
+          {
+            "type": "date_literal",
+            "named": true
+          },
+          {
+            "type": "function_call",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "locked_expression",
+            "named": true
+          },
+          {
+            "type": "new_expression",
+            "named": true
+          },
+          {
+            "type": "null_literal",
+            "named": true
+          },
+          {
+            "type": "number_literal",
+            "named": true
+          },
+          {
+            "type": "object_access",
+            "named": true
+          },
+          {
+            "type": "object_access_expression",
+            "named": true
+          },
+          {
+            "type": "parenthesized_expression",
+            "named": true
+          },
+          {
+            "type": "qualified_name",
+            "named": true
+          },
+          {
+            "type": "safe_object_access",
+            "named": true
+          },
+          {
+            "type": "scoped_name",
+            "named": true
+          },
+          {
+            "type": "string_literal",
+            "named": true
+          },
+          {
+            "type": "unary_expression",
+            "named": true
+          }
+        ]
+      },
+      "when": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "argument_reference",
+            "named": true
+          },
+          {
+            "type": "array_access",
+            "named": true
+          },
+          {
+            "type": "available_expression",
+            "named": true
+          },
+          {
+            "type": "binary_expression",
+            "named": true
+          },
+          {
+            "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "can_find_expression",
+            "named": true
+          },
+          {
+            "type": "conditional_expression",
+            "named": true
+          },
+          {
+            "type": "constant",
+            "named": true
+          },
+          {
+            "type": "dataset_reference",
+            "named": true
+          },
+          {
+            "type": "date_literal",
+            "named": true
+          },
+          {
+            "type": "function_call",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "locked_expression",
+            "named": true
+          },
+          {
+            "type": "new_expression",
+            "named": true
+          },
+          {
+            "type": "null_literal",
+            "named": true
+          },
+          {
+            "type": "number_literal",
+            "named": true
+          },
+          {
+            "type": "object_access",
+            "named": true
+          },
+          {
+            "type": "object_access_expression",
+            "named": true
+          },
+          {
+            "type": "parenthesized_expression",
+            "named": true
+          },
+          {
+            "type": "qualified_name",
+            "named": true
+          },
+          {
+            "type": "safe_object_access",
+            "named": true
+          },
+          {
+            "type": "scoped_name",
+            "named": true
+          },
+          {
+            "type": "string_literal",
+            "named": true
+          },
+          {
+            "type": "unary_expression",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "update_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "frame_phrase",
+          "named": true
+        },
+        {
+          "type": "go_on_clause",
+          "named": true
+        },
+        {
+          "type": "update_item",
           "named": true
         }
       ]
@@ -21860,6 +24915,10 @@
     "named": false
   },
   {
+    "type": "APPLICATION",
+    "named": false
+  },
+  {
     "type": "APPLY",
     "named": false
   },
@@ -22128,6 +25187,10 @@
     "named": false
   },
   {
+    "type": "DIR",
+    "named": false
+  },
+  {
     "type": "DISABLE",
     "named": false
   },
@@ -22141,6 +25204,10 @@
   },
   {
     "type": "DO",
+    "named": false
+  },
+  {
+    "type": "DOS",
     "named": false
   },
   {
@@ -22169,6 +25236,10 @@
   },
   {
     "type": "EMPTY",
+    "named": false
+  },
+  {
+    "type": "ENABLE",
     "named": false
   },
   {
@@ -22296,6 +25367,10 @@
     "named": false
   },
   {
+    "type": "GO-ON",
+    "named": false
+  },
+  {
     "type": "GT",
     "named": false
   },
@@ -22365,6 +25440,10 @@
   },
   {
     "type": "INPUT-OUTPUT",
+    "named": false
+  },
+  {
+    "type": "INSERT",
     "named": false
   },
   {
@@ -22493,6 +25572,10 @@
   },
   {
     "type": "NEXT",
+    "named": false
+  },
+  {
+    "type": "NEXT-PROMPT",
     "named": false
   },
   {
@@ -22732,6 +25815,14 @@
     "named": false
   },
   {
+    "type": "PROMPT",
+    "named": false
+  },
+  {
+    "type": "PROMPT-FOR",
+    "named": false
+  },
+  {
     "type": "PROPERTY",
     "named": false
   },
@@ -22765,6 +25856,10 @@
   },
   {
     "type": "QUIT",
+    "named": false
+  },
+  {
+    "type": "RAW-TRANSFER",
     "named": false
   },
   {
@@ -23056,6 +26151,10 @@
     "named": false
   },
   {
+    "type": "UNDERLINE",
+    "named": false
+  },
+  {
     "type": "UNDERLINE-",
     "named": false
   },
@@ -23073,6 +26172,14 @@
   },
   {
     "type": "UNIX",
+    "named": false
+  },
+  {
+    "type": "UNLESS-HIDDEN",
+    "named": false
+  },
+  {
+    "type": "UNLOAD",
     "named": false
   },
   {

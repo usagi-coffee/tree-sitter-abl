@@ -40224,6 +40224,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "insert_statement"
+        },
+        {
+          "type": "SYMBOL",
           "name": "message_statement"
         },
         {
@@ -40260,7 +40264,15 @@
         },
         {
           "type": "SYMBOL",
+          "name": "next_prompt_statement"
+        },
+        {
+          "type": "SYMBOL",
           "name": "leave_statement"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "load_statement"
         },
         {
           "type": "SYMBOL",
@@ -40285,6 +40297,10 @@
         {
           "type": "SYMBOL",
           "name": "set_size_statement"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "set_statement"
         },
         {
           "type": "SYMBOL",
@@ -40316,6 +40332,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "color_statement"
+        },
+        {
+          "type": "SYMBOL",
           "name": "connect_statement"
         },
         {
@@ -40328,7 +40348,15 @@
         },
         {
           "type": "SYMBOL",
+          "name": "dos_statement"
+        },
+        {
+          "type": "SYMBOL",
           "name": "down_statement"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "enable_statement"
         },
         {
           "type": "SYMBOL",
@@ -40368,11 +40396,19 @@
         },
         {
           "type": "SYMBOL",
+          "name": "prompt_for_statement"
+        },
+        {
+          "type": "SYMBOL",
           "name": "publish_statement"
         },
         {
           "type": "SYMBOL",
           "name": "quit_statement"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "raw_transfer_statement"
         },
         {
           "type": "SYMBOL",
@@ -40408,7 +40444,15 @@
         },
         {
           "type": "SYMBOL",
+          "name": "underline_statement"
+        },
+        {
+          "type": "SYMBOL",
           "name": "unix_statement"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "unload_statement"
         },
         {
           "type": "SYMBOL",
@@ -40417,6 +40461,10 @@
         {
           "type": "SYMBOL",
           "name": "up_statement"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "update_statement"
         },
         {
           "type": "SYMBOL",
