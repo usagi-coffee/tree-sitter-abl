@@ -1,5 +1,11 @@
 import { $ } from "bun";
 
+const { exitCode} = await $`npm whoami`;
+if (exitCode !== 0) {
+  console.error("Authenticate on npm before publishing");
+  process.exit(1);
+}
+
 const ls = await $`git ls-files -v src/parser.c`;
 const [status = "", file = ""] = ls.text()?.split(" ");
 
@@ -9,7 +15,9 @@ if (file.trim() !== "src/parser.c") {
 }
 
 if (status.trim() !== "H") {
-  console.error("src/parser.c is most likely skipped, undo worktree before deploying, aborting...");
+  console.error(
+    "src/parser.c is most likely skipped, undo worktree before deploying, aborting..."
+  );
   process.exit(1);
 }
 
