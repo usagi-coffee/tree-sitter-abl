@@ -54,10 +54,9 @@ module.exports = grammar({
 
   rules: (() => {
     const ctx = { PREC, kw, tkw, op };
-    // BE CAREFUL MODIFYING HERE, ORDER FOR SOME REASON MATTERS!
     return {
       source_file: ($) => repeat($._statement),
-      // Specific syntax
+      // BE CAREFUL MODIFYING HERE, ORDER FOR SOME REASON MATTERS!
       ...definitions(ctx),
       ...statements(ctx),
       ...expressions(ctx),

@@ -1,3 +1,6 @@
+// Extras are rules that can appear anywhere in the code in the middle of some syntax
+// Comments, Includes, Preprocessors, Constants and other similar syntax
+
 module.exports = () => ({
   // Comments
   line_comment: ($) => token(seq("//", /[^\r\n]*/)),
@@ -55,7 +58,6 @@ module.exports = () => ({
 
   // Constants
   constant: ($) => seq("{&", $.identifier, "}"),
-  constant_extra: ($) =>
-    token(/[ \t]*\{&[^\}\r\n]+\}[ \t]*\r?\n/),
+  constant_extra: ($) => token(/[ \t]*\{&[^\}\r\n]+\}[ \t]*\r?\n/),
   argument_reference: ($) => token(/\{[0-9A-Za-z_-]+\}/),
 });

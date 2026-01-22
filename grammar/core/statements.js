@@ -1,3 +1,5 @@
+// Statement-related disambiguation plumbing
+
 module.exports = (ctx) => ({
   _statement: ($) =>
     choice(

@@ -1,3 +1,5 @@
+// Accessors
+
 module.exports = (ctx) => ({
   object_access: ($) =>
     prec(
