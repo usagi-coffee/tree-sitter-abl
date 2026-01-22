@@ -1,6 +1,6 @@
 {
   "name": "@usagi-coffee/tree-sitter-abl",
-  "version": "0.0.47",
+  "version": "0.0.48",
   "description": "ABL grammar for tree-sitter",
   "repository": {
     "type": "git",
