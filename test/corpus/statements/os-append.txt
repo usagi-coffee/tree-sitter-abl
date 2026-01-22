@@ -1,0 +1,16 @@
+================================================================================
+OS-APPEND statement
+================================================================================
+
+OS-APPEND "source.txt" "target.txt".
+OS-APPEND cSource cTarget.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (os_append_statement
+    source: (string_literal)
+    target: (string_literal))
+  (os_append_statement
+    source: (identifier)
+    target: (identifier)))

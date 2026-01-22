@@ -1,0 +1,14 @@
+================================================================================
+TERMINAL statement
+================================================================================
+
+TERMINAL "vt100".
+TERMINAL cTermType.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (terminal_statement
+    terminal: (string_literal))
+  (terminal_statement
+    terminal: (identifier)))

@@ -1,0 +1,21 @@
+================================================================================
+CLEAR statement
+================================================================================
+
+CLEAR.
+CLEAR FRAME ex.
+CLEAR FRAME ex NO-PAUSE.
+CLEAR ALL.
+CLEAR FRAME myframe ALL NO-PAUSE.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (clear_statement)
+  (clear_statement
+    frame: (identifier))
+  (clear_statement
+    frame: (identifier))
+  (clear_statement)
+  (clear_statement
+    frame: (identifier)))

@@ -1,0 +1,17 @@
+================================================================================
+UNSUBSCRIBE statement
+================================================================================
+
+UNSUBSCRIBE TO "MyEvent".
+UNSUBSCRIBE ALL.
+UNSUBSCRIBE TO "MyEvent" IN hPub.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (unsubscribe_statement
+    event: (string_literal))
+  (unsubscribe_statement)
+  (unsubscribe_statement
+    event: (string_literal)
+    publisher: (identifier)))

@@ -1,0 +1,18 @@
+================================================================================
+UP statement
+================================================================================
+
+UP.
+UP 2.
+UP 1 WITH FRAME myframe.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (up_statement)
+  (up_statement
+    count: (number_literal))
+  (up_statement
+    count: (number_literal)
+    (frame_phrase
+      frame: (identifier))))

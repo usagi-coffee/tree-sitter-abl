@@ -1,0 +1,20 @@
+================================================================================
+SCROLL statement
+================================================================================
+
+SCROLL.
+SCROLL UP.
+SCROLL DOWN.
+SCROLL FROM-CURRENT UP.
+SCROLL FROM-CURRENT DOWN WITH FRAME myframe.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (scroll_statement)
+  (scroll_statement)
+  (scroll_statement)
+  (scroll_statement)
+  (scroll_statement
+    (frame_phrase
+      frame: (identifier))))

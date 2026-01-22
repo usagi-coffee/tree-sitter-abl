@@ -1,0 +1,22 @@
+================================================================================
+OPEN QUERY statement
+================================================================================
+
+OPEN QUERY qCust FOR EACH Customer NO-LOCK.
+OPEN QUERY qCust FOR EACH Customer NO-LOCK BY Customer.Name.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (open_query_statement
+    query: (identifier)
+    (record_phrase
+      record: (identifier)))
+  (open_query_statement
+    query: (identifier)
+    (record_phrase
+      record: (identifier))
+    (by_clause
+      by: (qualified_name
+        left: (identifier)
+        right: (identifier)))))

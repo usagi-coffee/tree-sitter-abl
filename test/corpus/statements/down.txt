@@ -1,0 +1,18 @@
+================================================================================
+DOWN statement
+================================================================================
+
+DOWN.
+DOWN 1.
+DOWN 2 WITH FRAME cust.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (down_statement)
+  (down_statement
+    count: (number_literal))
+  (down_statement
+    count: (number_literal)
+    (frame_phrase
+      frame: (identifier))))

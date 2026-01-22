@@ -1,0 +1,15 @@
+================================================================================
+PUBLISH statement
+================================================================================
+
+PUBLISH "MyEvent".
+PUBLISH "MyEvent" FROM hPublisher.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (publish_statement
+    event: (string_literal))
+  (publish_statement
+    event: (string_literal)
+    publisher: (identifier)))

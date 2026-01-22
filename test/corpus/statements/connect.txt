@@ -1,0 +1,14 @@
+================================================================================
+CONNECT statement
+================================================================================
+
+CONNECT mydb NO-ERROR.
+CONNECT VALUE("-db mydb -H localhost").
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (connect_statement
+    database: (identifier))
+  (connect_statement
+    value: (string_literal)))

@@ -1,0 +1,14 @@
+================================================================================
+OS-CREATE-DIR statement
+================================================================================
+
+OS-CREATE-DIR "mydir".
+OS-CREATE-DIR cDirName.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (os_create_dir_statement
+    directory: (string_literal))
+  (os_create_dir_statement
+    directory: (identifier)))

@@ -1,0 +1,21 @@
+================================================================================
+APPLY statement - basic
+================================================================================
+
+APPLY "CHOOSE".
+APPLY "CHOOSE" TO order-but.
+APPLY LASTKEY.
+APPLY "ERROR".
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (apply_statement
+    event: (string_literal))
+  (apply_statement
+    event: (string_literal)
+    widget: (identifier))
+  (apply_statement
+    event: (identifier))
+  (apply_statement
+    event: (string_literal)))

@@ -1,0 +1,20 @@
+================================================================================
+SUBSCRIBE statement
+================================================================================
+
+SUBSCRIBE TO "MyEvent" IN hPublisher.
+SUBSCRIBE "MyEvent" ANYWHERE.
+SUBSCRIBE PROCEDURE hSub TO "MyEvent" IN hPub.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (subscribe_statement
+    event: (string_literal)
+    publisher: (identifier))
+  (subscribe_statement
+    event: (string_literal))
+  (subscribe_statement
+    subscriber: (identifier)
+    event: (string_literal)
+    publisher: (identifier)))

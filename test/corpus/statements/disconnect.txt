@@ -1,0 +1,17 @@
+================================================================================
+DISCONNECT statement
+================================================================================
+
+DISCONNECT mydb.
+DISCONNECT mydb NO-ERROR.
+DISCONNECT VALUE(cDbName).
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (disconnect_statement
+    database: (identifier))
+  (disconnect_statement
+    database: (identifier))
+  (disconnect_statement
+    database: (identifier)))

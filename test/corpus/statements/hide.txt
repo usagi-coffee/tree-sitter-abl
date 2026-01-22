@@ -1,0 +1,20 @@
+================================================================================
+HIDE statement
+================================================================================
+
+HIDE.
+HIDE FRAME myframe.
+HIDE MESSAGE.
+HIDE ALL.
+HIDE ALL NO-PAUSE.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (hide_statement)
+  (hide_statement
+    (widget_phrase
+      frame: (identifier)))
+  (hide_statement)
+  (hide_statement)
+  (hide_statement))

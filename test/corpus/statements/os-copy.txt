@@ -1,0 +1,16 @@
+================================================================================
+OS-COPY statement
+================================================================================
+
+OS-COPY "source.txt" "target.txt".
+OS-COPY cSource cTarget.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (os_copy_statement
+    source: (string_literal)
+    target: (string_literal))
+  (os_copy_statement
+    source: (identifier)
+    target: (identifier)))

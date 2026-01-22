@@ -1,0 +1,24 @@
+================================================================================
+REPOSITION statement
+================================================================================
+
+REPOSITION qCust TO ROW 5.
+REPOSITION qCust FORWARDS 10.
+REPOSITION qCust BACKWARDS 5.
+REPOSITION qCust TO ROWID rCust.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (reposition_statement
+    query: (identifier)
+    row: (number_literal))
+  (reposition_statement
+    query: (identifier)
+    count: (number_literal))
+  (reposition_statement
+    query: (identifier)
+    count: (number_literal))
+  (reposition_statement
+    query: (identifier)
+    rowid: (identifier)))

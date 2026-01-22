@@ -1,0 +1,20 @@
+================================================================================
+VIEW statement
+================================================================================
+
+VIEW.
+VIEW FRAME myframe.
+VIEW STREAM sOut FRAME myframe.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (view_statement)
+  (view_statement
+    (widget_phrase
+      frame: (identifier)))
+  (view_statement
+    (stream_clause
+      stream: (identifier))
+    (widget_phrase
+      frame: (identifier))))

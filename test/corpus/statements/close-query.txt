@@ -1,0 +1,14 @@
+================================================================================
+CLOSE QUERY statement
+================================================================================
+
+CLOSE QUERY qCustomer.
+CLOSE QUERY my-query.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (close_query_statement
+    query: (identifier))
+  (close_query_statement
+    query: (identifier)))

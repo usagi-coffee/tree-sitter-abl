@@ -43,9 +43,10 @@
 - Use compact rule formatting: keep one-line rules adjacent with no blank lines between them. Only insert a blank line before/after multi-line rules (rules that wrap to multiple lines). Avoid blank lines between consecutive one-line rules.
 - For every statement make a file in `grammar/statements/*.js` and `test/copus/statements/*.txt`, do not store specific statement implementations in `grammar/statements.js`.
 - Avoid writing common code if it's not really a part of core syntax as we are "duplicating" modifiers/tunings for statements because we want most of the context related to the statement to be in the same file hence there are `__<statement>_rules` that get aliased to `$.rule` then later.
-- Always add extensive tests when implementing new statements/expressions, try to copy the examples from `docs/abl-reference.txt`.
+- Always  write extensive tests in `test/corpus` when implementing new statements/expressions, try to copy the examples from `docs/abl-reference.txt`.
 
 ## Notes
 
 - We use `bun` here instead of `npm`.
 - The project uses the tree-sitter CLI; ensure it is installed via devDependencies (`tree-sitter-cli`).
+- You can use invocation like `(echo 'x = 5.' > /tmp/test.p && bunx tree-sitter parse /tmp/test.p 2>&1)` command to test syntax of code ad-hoc.

@@ -1,0 +1,26 @@
+================================================================================
+GET statement
+================================================================================
+
+GET FIRST qCustomer.
+GET NEXT qCustomer.
+GET PREV qCustomer.
+GET LAST qCustomer.
+GET CURRENT qCustomer NO-LOCK.
+GET NEXT qOrder EXCLUSIVE-LOCK NO-WAIT.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (get_statement
+    query: (identifier))
+  (get_statement
+    query: (identifier))
+  (get_statement
+    query: (identifier))
+  (get_statement
+    query: (identifier))
+  (get_statement
+    query: (identifier))
+  (get_statement
+    query: (identifier)))

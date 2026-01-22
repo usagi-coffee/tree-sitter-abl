@@ -1,0 +1,18 @@
+================================================================================
+READKEY statement
+================================================================================
+
+READKEY.
+READKEY PAUSE 5.
+READKEY STREAM sIn PAUSE 10.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (readkey_statement)
+  (readkey_statement
+    pause: (number_literal))
+  (readkey_statement
+    (stream_clause
+      stream: (identifier))
+    pause: (number_literal)))

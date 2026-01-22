@@ -1,0 +1,16 @@
+================================================================================
+OS-RENAME statement
+================================================================================
+
+OS-RENAME "old.txt" "new.txt".
+OS-RENAME cOld cNew.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (os_rename_statement
+    source: (string_literal)
+    target: (string_literal))
+  (os_rename_statement
+    source: (identifier)
+    target: (identifier)))
