@@ -6,7 +6,7 @@
 
 ## Key paths
 
-- `grammar.js`, `grammar/core/{accessors,definitions,expressions,extras,operators,statements}.js`: core grammar rules.
+- `grammar.js` and `grammar/core/{accessors,definitions,expressions,extras,operators,statements}.js`: core grammar rules.
 - `grammar/definitions/*.js`: definition rules (procedures, functions, variables; usually most of things that start with define keyword).
 - `grammar/expressions/*.js`: expression rules (available, locked, aggregate, conditional, function calls; specific expressions).
 - `grammar/statements/*.js`: statements rules.
@@ -31,6 +31,7 @@
 
 ## Conventions
 
+- Treat `grammar.js` as core grammar rules and anything inside is "core".
 - Treat `src/parser.c`, `src/grammar.json`, and `src/node-types.json` as generated.
 - Always consult `docs/abl-reference.txt` when planning, modifying, or extending syntax support. Any work related to grammar, parsing behavior, or syntax improvements must be grounded in the reference documentation to ensure correctness, completeness, and alignment with the language specification.
 - Avoid placing shared or generic code unless it is part of the core syntax. We intentionally duplicate modifiers and tunings at the statement level so that most of the statement-specific context lives in a single file. To support this, each statement defines its own `__<statement>_rules`, which are later aliased to `$.rule` where needed. This intentional duplication favors locality, readability, and conflict isolation over DRY abstractions.
