@@ -33,13 +33,13 @@
 
 - Treat `src/parser.c`, `src/grammar.json`, and `src/node-types.json` as generated.
 - Always consult `docs/abl-reference.txt` when planning, modifying, or extending syntax support. Any work related to grammar, parsing behavior, or syntax improvements must be grounded in the reference documentation to ensure correctness, completeness, and alignment with the language specification.
-- Avoid placing shared or generic code unless it is part of the core syntax. We intentionally duplicate modifiers and tunings at the statement level so that most of the statement-specific context lives in a single file. To support this, each statement defines its own `__<statement>_rules`, which are later aliased to `$.rule` where needed. This intentional duplication favors locality, readability, and conflict isolation over DRY abstractions, which are often harmful in Tree-sitter grammars.
+- Avoid placing shared or generic code unless it is part of the core syntax. We intentionally duplicate modifiers and tunings at the statement level so that most of the statement-specific context lives in a single file. To support this, each statement defines its own `__<statement>_rules`, which are later aliased to `$.rule` where needed. This intentional duplication favors locality, readability, and conflict isolation over DRY abstractions.
 - Avoid doing changes to `src/scanner.c` unless it's necessary and cleanest way to solve the problem.
 - Always run tests after changes and make sure they pass.
 - Conflicts must be resolved structurally whenever possible. Adding a `conflicts` entry is a last resort and requires prior confirmation with a clear explanation of why structural fixes are insufficient.
-- When drive-by modyfing core grammar rules ask for a confirmation.
+- When drive-by modyfing core grammar rules first ask for a confirmation.
 - Your first solution should _never_ be to try to add a precedence to keywords, if it's necessary give me an explanation and ask for a confirmation.
-- Prefer `kw` (requires whitespace after the keyword), `tkw` (does not require whitespace, to use in-place of `token(/keyword/i)` function whenever dealing with keywords.
+- Prefer `kw` (requires whitespace after the keyword) and `tkw` (does not require whitespace) to use in-place of `token(/keyword/i)` function whenever dealing with keywords.
 - Do _NOT_ try to implement keywords as external scanner tokens that match case-insensitively with non-identifier character boundaries.
 - Always check for `(ERROR)` or `(MISSING)` nodes in the test output and treat them as errors that need to be fixed.
 - Use compact rule formatting: keep one-line rules adjacent with no blank lines between them. Only insert a blank line before/after multi-line rules (rules that wrap to multiple lines). Avoid blank lines between consecutive one-line rules.
@@ -47,7 +47,6 @@
 - Most definitions/statements/expressions should have a dedicated file in its appropriate location, for example: `grammar/statements/<statement>.js` and `test/corpus/statements/<statement>.txt` for its test cases. Statements are not considered complete without both.
 - Any new or modified syntax must be accompanied by extensive tests in `test/corpus`. Grammar changes without thorough corpus coverage are unacceptable, as tests are required to validate correctness, edge cases, and future regressions.
 - The grammar should avoid permissive or catch-all rules that allow invalid syntax to be parsed successfully.
-- Try to write idiomatically `tree-sitter` code and consult `docs/tree-sitter-.txt` if unsure.
 - Write idiomatic `tree-sitter` grammar code at all times, and consult `docs/tree-sitter.txt` whenever there is uncertainty about correct or idiomatic usage.
 
 ## Notes
