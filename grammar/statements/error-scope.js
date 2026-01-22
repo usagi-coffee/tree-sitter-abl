@@ -1,7 +1,7 @@
 module.exports = ({ kw, tkw }) => ({
   block_level_on_error_statement: ($) =>
     seq(
-      token(/BLOCK-LEVEL/i),
+      tkw("BLOCK-LEVEL"),
       kw("ON"),
       kw("ERROR"),
       tkw("UNDO"),
@@ -9,10 +9,9 @@ module.exports = ({ kw, tkw }) => ({
       tkw("THROW"),
       $._terminator,
     ),
-
   routine_level_on_error_statement: ($) =>
     seq(
-      token(/ROUTINE-LEVEL/i),
+      tkw("ROUTINE-LEVEL"),
       kw("ON"),
       kw("ERROR"),
       tkw("UNDO"),

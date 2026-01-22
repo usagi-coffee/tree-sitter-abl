@@ -9443,12 +9443,17 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "TOKEN",
+          "type": "ALIAS",
           "content": {
-            "type": "PATTERN",
-            "value": "BLOCK-LEVEL",
-            "flags": "i"
-          }
+            "type": "TOKEN",
+            "content": {
+              "type": "PATTERN",
+              "value": "BLOCK-LEVEL",
+              "flags": "i"
+            }
+          },
+          "named": false,
+          "value": "BLOCK-LEVEL"
         },
         {
           "type": "SEQ",
@@ -9540,12 +9545,17 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "TOKEN",
+          "type": "ALIAS",
           "content": {
-            "type": "PATTERN",
-            "value": "ROUTINE-LEVEL",
-            "flags": "i"
-          }
+            "type": "TOKEN",
+            "content": {
+              "type": "PATTERN",
+              "value": "ROUTINE-LEVEL",
+              "flags": "i"
+            }
+          },
+          "named": false,
+          "value": "ROUTINE-LEVEL"
         },
         {
           "type": "SEQ",
