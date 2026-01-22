@@ -1,36 +1,9 @@
 ================================================================================
-DO BLOCK
+DO block basic
 ================================================================================
 
 DO:
   x = 1.
-END.
-
-DO idx = 1 TO 3:
-  x = idx.
-END.
-
-DO WHILE idx < 3 ON ERROR UNDO, THROW:
-  idx = idx + 1.
-END.
-
-DO ON ERROR UNDO, LEAVE:
-  idx = 1.
-END.
-
-DO ON QUIT, LEAVE:
-  idx = 2.
-END.
-
-DO TRANSACTION:
-END.
-
-DO TRANSACTION WHILE something:get-next():
-  something:buffer-copy(something).
-END.
-
-DO WHILE TRUE ON ENDKEY UNDO, RETRY:
-  MESSAGE "hi".
 END.
 
 --------------------------------------------------------------------------------
@@ -41,7 +14,23 @@ END.
       (assignment_statement
         left: (identifier)
         operator: (assignment_operator)
-        right: (number_literal))))
+        right: (number_literal)))))
+
+================================================================================
+DO with loop variable
+================================================================================
+
+DO idx = 1 TO 3:
+  x = idx.
+END.
+
+DO i = 1 TO 10 BY 2:
+  DISPLAY i.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_file
   (do_block
     variable: (identifier)
     start: (number_literal)
@@ -51,6 +40,61 @@ END.
         left: (identifier)
         operator: (assignment_operator)
         right: (identifier))))
+  (do_block
+    variable: (identifier)
+    start: (number_literal)
+    end: (number_literal)
+    step: (number_literal)
+    (body
+      (display_statement
+        (identifier)))))
+
+================================================================================
+DO WHILE
+================================================================================
+
+DO WHILE idx < 3:
+  idx = idx + 1.
+END.
+
+DO WHILE NOT eof:
+  x = 1.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (do_block
+    (binary_expression
+      (identifier)
+      (number_literal))
+    (body
+      (assignment_statement
+        left: (identifier)
+        operator: (assignment_operator)
+        right: (binary_expression
+          (identifier)
+          (number_literal)))))
+  (do_block
+    (unary_expression
+      (identifier))
+    (body
+      (assignment_statement
+        left: (identifier)
+        operator: (assignment_operator)
+        right: (number_literal)))))
+
+================================================================================
+DO WHILE with ON ERROR UNDO THROW
+================================================================================
+
+DO WHILE idx < 3 ON ERROR UNDO, THROW:
+  idx = idx + 1.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_file
   (do_block
     (binary_expression
       (identifier)
@@ -63,7 +107,19 @@ END.
         operator: (assignment_operator)
         right: (binary_expression
           (identifier)
-          (number_literal)))))
+          (number_literal))))))
+
+================================================================================
+DO with ON ERROR UNDO LEAVE
+================================================================================
+
+DO ON ERROR UNDO, LEAVE:
+  idx = 1.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_file
   (do_block
     (on_error_clause
       (undo_leave_phrase))
@@ -71,16 +127,66 @@ END.
       (assignment_statement
         left: (identifier)
         operator: (assignment_operator)
-        right: (number_literal))))
+        right: (number_literal)))))
+
+================================================================================
+DO with ON QUIT LEAVE
+================================================================================
+
+DO ON QUIT, LEAVE:
+  idx = 2.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_file
   (do_block
     (on_quit_clause)
     (body
       (assignment_statement
         left: (identifier)
         operator: (assignment_operator)
-        right: (number_literal))))
+        right: (number_literal)))))
+
+================================================================================
+DO TRANSACTION
+================================================================================
+
+DO TRANSACTION:
+END.
+
+DO TRANSACTION:
+  CREATE Customer.
+  Customer.Name = "Test".
+END.
+
+--------------------------------------------------------------------------------
+
+(source_file
   (do_block
     (body))
+  (do_block
+    (body
+      (create_statement
+        table: (identifier))
+      (assignment_statement
+        left: (qualified_name
+          left: (identifier)
+          right: (identifier))
+        operator: (assignment_operator)
+        right: (string_literal)))))
+
+================================================================================
+DO TRANSACTION WHILE
+================================================================================
+
+DO TRANSACTION WHILE something:get-next():
+  something:buffer-copy(something).
+END.
+
+--------------------------------------------------------------------------------
+
+(source_file
   (do_block
     (function_call
       function: (object_access
@@ -95,7 +201,19 @@ END.
             right: (identifier))
           (argument_list
             (argument
-              value: (identifier)))))))
+              value: (identifier))))))))
+
+================================================================================
+DO WHILE with ON ENDKEY UNDO RETRY
+================================================================================
+
+DO WHILE TRUE ON ENDKEY UNDO, RETRY:
+  MESSAGE "hi".
+END.
+
+--------------------------------------------------------------------------------
+
+(source_file
   (do_block
     (boolean_literal)
     (on_endkey_clause
@@ -103,3 +221,120 @@ END.
     (body
       (message_statement
         (string_literal)))))
+
+================================================================================
+DO with label
+================================================================================
+
+process_block: DO:
+  x = 1.
+END.
+
+outer: DO i = 1 TO 10:
+  inner: DO j = 1 TO 5:
+    DISPLAY i j.
+  END.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (do_block
+    label: (identifier)
+    (body
+      (assignment_statement
+        left: (identifier)
+        operator: (assignment_operator)
+        right: (number_literal))))
+  (do_block
+    label: (identifier)
+    variable: (identifier)
+    start: (number_literal)
+    end: (number_literal)
+    (body
+      (do_block
+        label: (identifier)
+        variable: (identifier)
+        start: (number_literal)
+        end: (number_literal)
+        (body
+          (display_statement
+            (identifier)
+            (identifier)))))))
+
+================================================================================
+DO with ON ENDKEY UNDO LEAVE with label
+================================================================================
+
+myloop: DO WHILE TRUE ON ENDKEY UNDO myloop, LEAVE myloop:
+  x = x + 1.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (do_block
+    label: (identifier)
+    (boolean_literal)
+    (on_endkey_clause
+      (undo_phrase
+        undo_label: (identifier)
+        leave_label: (identifier)))
+    (body
+      (assignment_statement
+        left: (identifier)
+        operator: (assignment_operator)
+        right: (binary_expression
+          (identifier)
+          (number_literal))))))
+
+================================================================================
+DO with expression TO expression
+================================================================================
+
+DO i = startVal TO endVal:
+  DISPLAY i.
+END.
+
+DO i = getStart() TO getEnd() BY getStep():
+  DISPLAY i.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (do_block
+    variable: (identifier)
+    start: (identifier)
+    end: (identifier)
+    (body
+      (display_statement
+        (identifier))))
+  (do_block
+    variable: (identifier)
+    start: (function_call
+      function: (identifier)
+      (argument_list))
+    end: (function_call
+      function: (identifier)
+      (argument_list))
+    step: (function_call
+      function: (identifier)
+      (argument_list))
+    (body
+      (display_statement
+        (identifier)))))
+
+================================================================================
+DO with empty body using dot terminator
+================================================================================
+
+DO.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (do_block
+    (body)))
+

@@ -1,9 +1,194 @@
 ================================================================================
-MESSAGE
+MESSAGE basic
+================================================================================
+
+MESSAGE "Hello".
+MESSAGE "Hello World!".
+MESSAGE x.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (message_statement
+    (string_literal))
+  (message_statement
+    (string_literal))
+  (message_statement
+    (identifier)))
+
+================================================================================
+MESSAGE with SKIP
+================================================================================
+
+MESSAGE "Line 1" SKIP "Line 2".
+MESSAGE "Hello" SKIP(2) "World".
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (message_statement
+    (string_literal)
+    (skip)
+    (string_literal))
+  (message_statement
+    (string_literal)
+    (skip
+      count: (number_literal))
+    (string_literal)))
+
+================================================================================
+MESSAGE VIEW-AS ALERT-BOX
+================================================================================
+
+MESSAGE "Simple" SKIP VIEW-AS ALERT-BOX QUESTION.
+MESSAGE "Info" VIEW-AS ALERT-BOX INFORMATION.
+MESSAGE "Warn" VIEW-AS ALERT-BOX WARNING.
+MESSAGE "Err" VIEW-AS ALERT-BOX ERROR.
+MESSAGE "Msg" VIEW-AS ALERT-BOX MESSAGE.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (message_statement
+    (string_literal)
+    (skip)
+    (view_as_clause))
+  (message_statement
+    (string_literal)
+    (view_as_clause))
+  (message_statement
+    (string_literal)
+    (view_as_clause))
+  (message_statement
+    (string_literal)
+    (view_as_clause))
+  (message_statement
+    (string_literal)
+    (view_as_clause)))
+
+================================================================================
+MESSAGE with BUTTONS
+================================================================================
+
+MESSAGE "Continue?" VIEW-AS ALERT-BOX BUTTONS YES-NO.
+MESSAGE "Confirm" VIEW-AS ALERT-BOX BUTTONS YES-NO-CANCEL.
+MESSAGE "Done" VIEW-AS ALERT-BOX BUTTONS OK.
+MESSAGE "Proceed?" VIEW-AS ALERT-BOX BUTTONS OK-CANCEL.
+MESSAGE "Retry?" VIEW-AS ALERT-BOX BUTTONS RETRY-CANCEL.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (message_statement
+    (string_literal)
+    (view_as_clause
+      (buttons_clause)))
+  (message_statement
+    (string_literal)
+    (view_as_clause
+      (buttons_clause)))
+  (message_statement
+    (string_literal)
+    (view_as_clause
+      (buttons_clause)))
+  (message_statement
+    (string_literal)
+    (view_as_clause
+      (buttons_clause)))
+  (message_statement
+    (string_literal)
+    (view_as_clause
+      (buttons_clause))))
+
+================================================================================
+MESSAGE with TITLE
+================================================================================
+
+MESSAGE "Content" VIEW-AS ALERT-BOX TITLE "My Title".
+MESSAGE "Msg" VIEW-AS ALERT-BOX INFORMATION TITLE "Info".
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (message_statement
+    (string_literal)
+    (view_as_clause
+      title: (string_literal)))
+  (message_statement
+    (string_literal)
+    (view_as_clause
+      title: (string_literal))))
+
+================================================================================
+MESSAGE with UPDATE
+================================================================================
+
+MESSAGE "Alert" VIEW-AS ALERT-BOX BUTTONS OK-CANCEL UPDATE okFlag AS LOGICAL.
+MESSAGE "Input" VIEW-AS ALERT-BOX UPDATE response AS CHARACTER.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (message_statement
+    (string_literal)
+    (view_as_clause
+      (buttons_clause))
+    (set_update_clause
+      field: (identifier)
+      type: (identifier)))
+  (message_statement
+    (string_literal)
+    (view_as_clause)
+    (set_update_clause
+      field: (identifier)
+      type: (identifier))))
+
+================================================================================
+MESSAGE with COLOR
+================================================================================
+
+MESSAGE COLOR NORMAL "Export done: " + fileName.
+MESSAGE COLOR INPUT "Enter value".
+MESSAGE COLOR MESSAGES "Status message".
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (message_statement
+    (color_phrase)
+    (binary_expression
+      (string_literal)
+      (identifier)))
+  (message_statement
+    (color_phrase)
+    (string_literal))
+  (message_statement
+    (color_phrase)
+    (string_literal)))
+
+================================================================================
+MESSAGE with IN WINDOW
+================================================================================
+
+MESSAGE "Hello" IN WINDOW hWin.
+MESSAGE "World" VIEW-AS ALERT-BOX IN WINDOW hMainWindow.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (message_statement
+    (string_literal)
+    window: (identifier))
+  (message_statement
+    (string_literal)
+    (view_as_clause)
+    window: (identifier)))
+
+================================================================================
+MESSAGE complex example
 ================================================================================
 
 MESSAGE COLOR NORMAL "Export done: " + fileName SKIP(2) VIEW-AS ALERT-BOX INFORMATION BUTTONS OK-CANCEL TITLE "Alert" UPDATE okFlag AS LOGICAL AUTO-RETURN IN WINDOW hWin.
-MESSAGE "Simple" SKIP VIEW-AS ALERT-BOX QUESTION.
 
 --------------------------------------------------------------------------------
 
@@ -21,8 +206,75 @@ MESSAGE "Simple" SKIP VIEW-AS ALERT-BOX QUESTION.
     (set_update_clause
       field: (identifier)
       type: (identifier))
-    window: (identifier))
+    window: (identifier)))
+
+================================================================================
+MESSAGE with expressions
+================================================================================
+
+MESSAGE "Total: " + STRING(amount).
+MESSAGE "Count: " numRecords.
+MESSAGE Customer.Name " - " Customer.Balance.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (message_statement
+    (binary_expression
+      (string_literal)
+      (function_call
+        function: (identifier)
+        (argument_list
+          (argument
+            value: (identifier))))))
   (message_statement
     (string_literal)
-    (skip)
-    (view_as_clause)))
+    (identifier))
+  (message_statement
+    (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (string_literal)
+    (qualified_name
+      left: (identifier)
+      right: (identifier))))
+
+================================================================================
+MESSAGE with SET clause
+================================================================================
+
+MESSAGE "Enter name:" SET cName AS CHARACTER.
+MESSAGE "Value?" SET iValue AS INTEGER FORMAT ">>9".
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (message_statement
+    (string_literal)
+    (set_update_clause
+      field: (identifier)
+      type: (identifier)))
+  (message_statement
+    (string_literal)
+    (set_update_clause
+      field: (identifier)
+      type: (identifier)
+      format: (string_literal))))
+
+================================================================================
+MESSAGE with LIKE clause
+================================================================================
+
+MESSAGE "Enter customer:" UPDATE cNum LIKE Customer.CustNum.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (message_statement
+    (string_literal)
+    (set_update_clause
+      field: (identifier)
+      like: (qualified_name
+        left: (identifier)
+        right: (identifier)))))
+

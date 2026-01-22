@@ -1,18 +1,72 @@
 ================================================================================
-CREATE AND BUFFER-COPY
+CREATE basic
 ================================================================================
 
+CREATE Customer.
+CREATE Order.
 CREATE tDebtorShipTo.
-BUFFER-COPY tApiBusinessRelation TO tBusinessRelation.
-BUFFER-COPY src_tbl EXCEPT fld1 fld2 TO dst_tbl.
 
 --------------------------------------------------------------------------------
 
 (source_file
   (create_statement
     table: (identifier))
+  (create_statement
+    table: (identifier))
+  (create_statement
+    table: (identifier)))
+
+================================================================================
+CREATE with qualified name
+================================================================================
+
+CREATE Sports2000.Customer.
+CREATE db.TableName.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (create_statement
+    table: (qualified_name
+      left: (identifier)
+      right: (identifier)))
+  (create_statement
+    table: (qualified_name
+      left: (identifier)
+      right: (identifier))))
+
+================================================================================
+BUFFER-COPY basic
+================================================================================
+
+BUFFER-COPY tApiBusinessRelation TO tBusinessRelation.
+BUFFER-COPY srcBuf TO dstBuf.
+
+--------------------------------------------------------------------------------
+
+(source_file
   (buffer_copy_statement
     source: (identifier)
+    target: (identifier))
+  (buffer_copy_statement
+    source: (identifier)
+    target: (identifier)))
+
+================================================================================
+BUFFER-COPY with EXCEPT
+================================================================================
+
+BUFFER-COPY src_tbl EXCEPT fld1 fld2 TO dst_tbl.
+BUFFER-COPY Customer EXCEPT CustNum CreatedDate TO ttCustomer.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (buffer_copy_statement
+    source: (identifier)
+    (except_clause
+      (identifier)
+      (identifier))
     target: (identifier))
   (buffer_copy_statement
     source: (identifier)
@@ -20,3 +74,27 @@ BUFFER-COPY src_tbl EXCEPT fld1 fld2 TO dst_tbl.
       (identifier)
       (identifier))
     target: (identifier)))
+
+================================================================================
+CREATE in transaction
+================================================================================
+
+DO TRANSACTION:
+  CREATE Customer.
+  ASSIGN Customer.Name = "Test".
+END.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (do_block
+    (body
+      (create_statement
+        table: (identifier))
+      (assign_statement
+        (assign_pair
+          left: (qualified_name
+            left: (identifier)
+            right: (identifier))
+          right: (string_literal))))))
+

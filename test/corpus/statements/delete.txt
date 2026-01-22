@@ -1,14 +1,107 @@
 ================================================================================
-DELETE
+DELETE basic
 ================================================================================
 
 DELETE Customer.
-DELETE OBJECT hSocket.
+DELETE Order.
+DELETE ttRecord.
 
 --------------------------------------------------------------------------------
 
 (source_file
   (delete_statement
     record: (identifier))
+  (delete_statement
+    record: (identifier))
+  (delete_statement
+    record: (identifier)))
+
+================================================================================
+DELETE with qualified name
+================================================================================
+
+DELETE Sports2000.Customer.
+DELETE db.TableName.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (delete_statement
+    record: (qualified_name
+      left: (identifier)
+      right: (identifier)))
+  (delete_statement
+    record: (qualified_name
+      left: (identifier)
+      right: (identifier))))
+
+================================================================================
+DELETE OBJECT
+================================================================================
+
+DELETE OBJECT hSocket.
+DELETE OBJECT hQuery.
+DELETE OBJECT myWidget.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (delete_object_statement
+    name: (identifier))
+  (delete_object_statement
+    name: (identifier))
   (delete_object_statement
     name: (identifier)))
+
+================================================================================
+DELETE in FOR EACH loop
+================================================================================
+
+FOR EACH Customer WHERE Customer.Balance = 0 EXCLUSIVE-LOCK:
+  DELETE Customer.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (for_each_statement
+    (for_record_list
+      (for_record
+        table: (identifier)
+        (where_clause
+          (binary_expression
+            (qualified_name
+              left: (identifier)
+              right: (identifier))
+            (number_literal)))
+        (exclusive_lock)))
+    (body
+      (delete_statement
+        record: (identifier)))))
+
+================================================================================
+DELETE in transaction
+================================================================================
+
+DO TRANSACTION:
+  FIND Customer WHERE Customer.CustNum = 1 EXCLUSIVE-LOCK.
+  DELETE Customer.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (do_block
+    (body
+      (find_statement
+        table: (identifier)
+        (where_clause
+          (binary_expression
+            (qualified_name
+              left: (identifier)
+              right: (identifier))
+            (number_literal)))
+        (exclusive_lock))
+      (delete_statement
+        record: (identifier)))))
+

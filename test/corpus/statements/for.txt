@@ -1,41 +1,30 @@
 ================================================================================
-FOR EACH
+FOR EACH basic
+================================================================================
+
+FOR EACH Customer:
+  DISPLAY Customer.Name.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (for_each_statement
+    (for_record_list
+      (for_record
+        table: (identifier)))
+    (body
+      (display_statement
+        (qualified_name
+          left: (identifier)
+          right: (identifier))))))
+
+================================================================================
+FOR EACH with WHERE clause
 ================================================================================
 
 FOR EACH customer WHERE customer.id = 1 NO-LOCK:
   DISPLAY customer.name.
-END.
-
-FOR EACH tFcMessages ON ERROR UNDO, THROW:
-  DISPLAY tFcMessages.tcFcMessage.
-END.
-
-FOR EACH trans_hist WHERE trans_hist.domain = "ZMD" NO-LOCK USE-INDEX idxTrans BREAK BY trans_hist.line BY trans_hist.part:
-  DISPLAY trans_hist.line.
-END.
-
-FOR EACH order_hdr NO-LOCK BY order_hdr.order_num DESC:
-  DISPLAY order_hdr.order_num.
-END.
-
-FOR EACH item NO-LOCK WITH FRAME fr WIDTH 120:
-  PUT UNFORMATTED item.item_id SKIP.
-END.
-
-outer_loop: FOR EACH item_mstr NO-LOCK:
-  DISPLAY item_mstr.item_code.
-END.
-
-FOR EACH Customer ON ENDKEY UNDO, RETRY:
-  DISPLAY Customer.Name.
-END.
-
-FOR EACH ld_det WHERE ld_domain = "ZMD" AND ld_site = zmk_zaklad AND ld_loc = zmk_magazyn EXCLUSIVE-LOCK:
-  DISPLAY ld_det.ld_domain.
-END.
-
-FOR EACH share_lock_rec SHARE-LOCK NO-PREFETCH:
-  DISPLAY share_lock_rec.share_id.
 END.
 
 --------------------------------------------------------------------------------
@@ -56,7 +45,19 @@ END.
       (display_statement
         (qualified_name
           left: (identifier)
-          right: (identifier)))))
+          right: (identifier))))))
+
+================================================================================
+FOR EACH with ON ERROR UNDO THROW
+================================================================================
+
+FOR EACH tFcMessages ON ERROR UNDO, THROW:
+  DISPLAY tFcMessages.tcFcMessage.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_file
   (for_each_statement
     (for_record_list
       (for_record
@@ -67,7 +68,19 @@ END.
       (display_statement
         (qualified_name
           left: (identifier)
-          right: (identifier)))))
+          right: (identifier))))))
+
+================================================================================
+FOR EACH with USE-INDEX and BREAK BY
+================================================================================
+
+FOR EACH trans_hist WHERE trans_hist.domain = "ZMD" NO-LOCK USE-INDEX idxTrans BREAK BY trans_hist.line BY trans_hist.part:
+  DISPLAY trans_hist.line.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_file
   (for_each_statement
     (for_record_list
       (for_record
@@ -92,7 +105,19 @@ END.
       (display_statement
         (qualified_name
           left: (identifier)
-          right: (identifier)))))
+          right: (identifier))))))
+
+================================================================================
+FOR EACH with BY clause and DESC
+================================================================================
+
+FOR EACH order_hdr NO-LOCK BY order_hdr.order_num DESC:
+  DISPLAY order_hdr.order_num.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_file
   (for_each_statement
     (for_record_list
       (for_record
@@ -106,7 +131,19 @@ END.
       (display_statement
         (qualified_name
           left: (identifier)
-          right: (identifier)))))
+          right: (identifier))))))
+
+================================================================================
+FOR EACH with frame clause
+================================================================================
+
+FOR EACH item NO-LOCK WITH FRAME fr WIDTH 120:
+  PUT UNFORMATTED item.item_id SKIP.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_file
   (for_each_statement
     (for_record_list
       (for_record
@@ -120,7 +157,19 @@ END.
         value: (qualified_name
           left: (identifier)
           right: (identifier))
-        (skip))))
+        (skip)))))
+
+================================================================================
+FOR EACH with label
+================================================================================
+
+outer_loop: FOR EACH item_mstr NO-LOCK:
+  DISPLAY item_mstr.item_code.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_file
   (for_each_statement
     label: (identifier)
     (for_record_list
@@ -131,7 +180,19 @@ END.
       (display_statement
         (qualified_name
           left: (identifier)
-          right: (identifier)))))
+          right: (identifier))))))
+
+================================================================================
+FOR EACH with ON ENDKEY UNDO RETRY
+================================================================================
+
+FOR EACH Customer ON ENDKEY UNDO, RETRY:
+  DISPLAY Customer.Name.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_file
   (for_each_statement
     (for_record_list
       (for_record
@@ -142,29 +203,45 @@ END.
       (display_statement
         (qualified_name
           left: (identifier)
-          right: (identifier)))))
+          right: (identifier))))))
+
+================================================================================
+FOR EACH with EXCLUSIVE-LOCK
+================================================================================
+
+FOR EACH ld_det WHERE ld_domain = "ZMD" EXCLUSIVE-LOCK:
+  DISPLAY ld_det.ld_domain.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_file
   (for_each_statement
     (for_record_list
       (for_record
         table: (identifier)
         (where_clause
           (binary_expression
-            (binary_expression
-              (binary_expression
-                (identifier)
-                (string_literal))
-              (binary_expression
-                (identifier)
-                (identifier)))
-            (binary_expression
-              (identifier)
-              (identifier))))
+            (identifier)
+            (string_literal)))
         (exclusive_lock)))
     (body
       (display_statement
         (qualified_name
           left: (identifier)
-          right: (identifier)))))
+          right: (identifier))))))
+
+================================================================================
+FOR EACH with SHARE-LOCK and NO-PREFETCH
+================================================================================
+
+FOR EACH share_lock_rec SHARE-LOCK NO-PREFETCH:
+  DISPLAY share_lock_rec.share_id.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_file
   (for_each_statement
     (for_record_list
       (for_record
@@ -176,3 +253,152 @@ END.
         (qualified_name
           left: (identifier)
           right: (identifier))))))
+
+================================================================================
+FOR FIRST
+================================================================================
+
+FOR FIRST Customer NO-LOCK:
+  DISPLAY Customer.Name.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (for_each_statement
+    (for_record_list
+      (for_record
+        table: (identifier)
+        (no_lock)))
+    (body
+      (display_statement
+        (qualified_name
+          left: (identifier)
+          right: (identifier))))))
+
+================================================================================
+FOR LAST
+================================================================================
+
+FOR LAST Order NO-LOCK:
+  DISPLAY Order.OrderNum.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (for_each_statement
+    (for_record_list
+      (for_record
+        table: (identifier)
+        (no_lock)))
+    (body
+      (display_statement
+        (qualified_name
+          left: (identifier)
+          right: (identifier))))))
+
+================================================================================
+FOR EACH with multiple tables (join)
+================================================================================
+
+FOR EACH Customer NO-LOCK, EACH Order OF Customer NO-LOCK:
+  DISPLAY Customer.Name Order.OrderNum.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (for_each_statement
+    (for_record_list
+      (for_record
+        table: (identifier)
+        (no_lock))
+      (for_record
+        table: (identifier)
+        (of_clause
+          (identifier))
+        (no_lock)))
+    (body
+      (display_statement
+        (qualified_name
+          left: (identifier)
+          right: (identifier))
+        (qualified_name
+          left: (identifier)
+          right: (identifier))))))
+
+================================================================================
+FOR EACH with complex WHERE and multiple BY
+================================================================================
+
+FOR EACH Customer NO-LOCK WHERE Customer.Balance > 0 AND Customer.State = "NY" BY Customer.Name BY Customer.Balance DESC:
+  DISPLAY Customer.Name Customer.Balance.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (for_each_statement
+    (for_record_list
+      (for_record
+        table: (identifier)
+        (no_lock)
+        (where_clause
+          (binary_expression
+            (binary_expression
+              (qualified_name
+                left: (identifier)
+                right: (identifier))
+              (number_literal))
+            (binary_expression
+              (qualified_name
+                left: (identifier)
+                right: (identifier))
+              (string_literal))))
+        (by_clause
+          (qualified_name
+            left: (identifier)
+            right: (identifier))
+          (qualified_name
+            left: (identifier)
+            right: (identifier)))))
+    (body
+      (display_statement
+        (qualified_name
+          left: (identifier)
+          right: (identifier))
+        (qualified_name
+          left: (identifier)
+          right: (identifier))))))
+
+================================================================================
+FOR EACH FIRST/LAST in join
+================================================================================
+
+FOR EACH Customer NO-LOCK, FIRST Order OF Customer NO-LOCK:
+  DISPLAY Customer.Name Order.OrderNum.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (for_each_statement
+    (for_record_list
+      (for_record
+        table: (identifier)
+        (no_lock))
+      (for_record
+        table: (identifier)
+        (of_clause
+          (identifier))
+        (no_lock)))
+    (body
+      (display_statement
+        (qualified_name
+          left: (identifier)
+          right: (identifier))
+        (qualified_name
+          left: (identifier)
+          right: (identifier))))))
+

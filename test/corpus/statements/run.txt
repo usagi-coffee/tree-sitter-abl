@@ -1,8 +1,43 @@
 ================================================================================
-RUN
+RUN basic procedure
+================================================================================
+
+RUN myproc.p.
+RUN someproc.p.
+RUN utilities/helper.p.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (run_statement
+    procedure: (procedure_name))
+  (run_statement
+    procedure: (procedure_name))
+  (run_statement
+    procedure: (procedure_name)))
+
+================================================================================
+RUN with arguments OUTPUT DATASET
 ================================================================================
 
 RUN proxy/starttransaction.p (OUTPUT DATASET tFcMessages, OUTPUT bFinApiError).
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (run_statement
+    procedure: (procedure_name)
+    (argument_list
+      (argument
+        value: (dataset_reference
+          dataset: (identifier)))
+      (argument
+        value: (identifier)))))
+
+================================================================================
+RUN with INPUT-OUTPUT DATASET
+================================================================================
+
 RUN someproc.p (INPUT-OUTPUT DATASET dsOrder, INPUT DATASET dsOther:HANDLE).
 
 --------------------------------------------------------------------------------
@@ -15,15 +50,167 @@ RUN someproc.p (INPUT-OUTPUT DATASET dsOrder, INPUT DATASET dsOther:HANDLE).
         value: (dataset_reference
           dataset: (identifier)))
       (argument
+        value: (dataset_reference
+          dataset: (object_access
+            left: (identifier)
+            right: (identifier)))))))
+
+================================================================================
+RUN with simple arguments
+================================================================================
+
+RUN calculate.p (INPUT x, INPUT y, OUTPUT result).
+RUN process.p (1, "hello", TRUE).
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (run_statement
+    procedure: (procedure_name)
+    (argument_list
+      (argument
+        value: (identifier))
+      (argument
+        value: (identifier))
+      (argument
         value: (identifier))))
   (run_statement
     procedure: (procedure_name)
     (argument_list
       (argument
-        value: (dataset_reference
-          dataset: (identifier)))
+        value: (number_literal))
       (argument
-        value: (dataset_reference
-          dataset: (object_access
-            left: (identifier)
-            right: (identifier)))))))
+        value: (string_literal))
+      (argument
+        value: (boolean_literal)))))
+
+================================================================================
+RUN internal procedure
+================================================================================
+
+RUN processData.
+RUN validate-input.
+RUN ip_calculate.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (run_statement
+    procedure: (identifier))
+  (run_statement
+    procedure: (identifier))
+  (run_statement
+    procedure: (identifier)))
+
+================================================================================
+RUN internal procedure with arguments
+================================================================================
+
+RUN processData (INPUT cValue, OUTPUT lResult).
+RUN validateOrder (orderId, customerId).
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (run_statement
+    procedure: (identifier)
+    (argument_list
+      (argument
+        value: (identifier))
+      (argument
+        value: (identifier))))
+  (run_statement
+    procedure: (identifier)
+    (argument_list
+      (argument
+        value: (identifier))
+      (argument
+        value: (identifier)))))
+
+================================================================================
+RUN with object method call
+================================================================================
+
+RUN myObject.processData.
+RUN utils.helpers.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (run_statement
+    procedure: (qualified_name
+      left: (identifier)
+      right: (identifier)))
+  (run_statement
+    procedure: (qualified_name
+      left: (identifier)
+      right: (identifier))))
+
+================================================================================
+RUN with path variations
+================================================================================
+
+RUN data/import/customers.p.
+RUN ../shared/utilities.p.
+RUN ./local/process.p.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (run_statement
+    procedure: (procedure_name))
+  (run_statement
+    procedure: (procedure_name))
+  (run_statement
+    procedure: (procedure_name)))
+
+================================================================================
+RUN with multiple arguments
+================================================================================
+
+RUN processRecord.p (cCustomer, lSuccess).
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (run_statement
+    procedure: (procedure_name)
+    (argument_list
+      (argument
+        value: (identifier))
+      (argument
+        value: (identifier)))))
+
+================================================================================
+RUN with expression arguments
+================================================================================
+
+RUN calc.p (x + y, STRING(TODAY), SUBSTRING(name, 1, 10)).
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (run_statement
+    procedure: (procedure_name)
+    (argument_list
+      (argument
+        value: (binary_expression
+          (identifier)
+          (identifier)))
+      (argument
+        value: (function_call
+          function: (identifier)
+          (argument_list
+            (argument
+              value: (identifier)))))
+      (argument
+        value: (function_call
+          function: (identifier)
+          (argument_list
+            (argument
+              value: (identifier))
+            (argument
+              value: (number_literal))
+            (argument
+              value: (number_literal))))))))
+

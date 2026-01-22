@@ -1,0 +1,142 @@
+================================================================================
+DISPLAY basic
+================================================================================
+
+DISPLAY x.
+DISPLAY "Hello".
+DISPLAY 123.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (display_statement
+    (identifier))
+  (display_statement
+    (string_literal))
+  (display_statement
+    (number_literal)))
+
+================================================================================
+DISPLAY multiple items
+================================================================================
+
+DISPLAY x y z.
+DISPLAY Customer.Name Customer.Balance.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (display_statement
+    (identifier)
+    (identifier)
+    (identifier))
+  (display_statement
+    (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (qualified_name
+      left: (identifier)
+      right: (identifier))))
+
+================================================================================
+DISPLAY with aggregates
+================================================================================
+
+DISPLAY Customer.Balance (TOTAL).
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (display_statement
+    (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (aggregate_phrase)))
+
+================================================================================
+DISPLAY abbreviated
+================================================================================
+
+DISP x.
+disp Customer.Name.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (display_statement
+    (identifier))
+  (display_statement
+    (qualified_name
+      left: (identifier)
+      right: (identifier))))
+
+================================================================================
+DISPLAY with expressions
+================================================================================
+
+DISPLAY x + y.
+DISPLAY "Total: " + STRING(amount).
+DISPLAY Item.Qty * Item.Price LABEL "Extended".
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (display_statement
+    (binary_expression
+      (identifier)
+      (identifier)))
+  (display_statement
+    (binary_expression
+      (string_literal)
+      (function_call
+        function: (identifier)
+        (argument_list
+          (argument
+            value: (identifier))))))
+  (display_statement
+    (binary_expression
+      (qualified_name
+        left: (identifier)
+        right: (identifier))
+      (qualified_name
+        left: (identifier)
+        right: (identifier)))
+    (identifier)
+    (string_literal)))
+
+================================================================================
+DISPLAY with function calls
+================================================================================
+
+DISPLAY STRING(TODAY).
+DISPLAY CAPS(Customer.Name).
+DISPLAY SUBSTRING(str, 1, 5).
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (display_statement
+    (function_call
+      function: (identifier)
+      (argument_list
+        (argument
+          value: (identifier)))))
+  (display_statement
+    (function_call
+      function: (identifier)
+      (argument_list
+        (argument
+          value: (qualified_name
+            left: (identifier)
+            right: (identifier))))))
+  (display_statement
+    (function_call
+      function: (identifier)
+      (argument_list
+        (argument
+          value: (identifier))
+        (argument
+          value: (number_literal))
+        (argument
+          value: (number_literal))))))
+

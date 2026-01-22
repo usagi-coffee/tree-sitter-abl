@@ -1,19 +1,118 @@
 ================================================================================
+ASSIGN basic
+================================================================================
+
+ASSIGN a = 1.
+ASSIGN x = "hello".
+ASSIGN flag = TRUE.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (assign_statement
+    (assign_pair
+      left: (identifier)
+      right: (number_literal)))
+  (assign_statement
+    (assign_pair
+      left: (identifier)
+      right: (string_literal)))
+  (assign_statement
+    (assign_pair
+      left: (identifier)
+      right: (boolean_literal))))
+
+================================================================================
+ASSIGN multiple pairs
+================================================================================
+
 ASSIGN
+  a = 1
+  b = "x"
+  c = TRUE
+  d = 3.14.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (assign_statement
+    (assign_pair
+      left: (identifier)
+      right: (number_literal))
+    (assign_pair
+      left: (identifier)
+      right: (string_literal))
+    (assign_pair
+      left: (identifier)
+      right: (boolean_literal))
+    (assign_pair
+      left: (identifier)
+      right: (number_literal))))
+
+================================================================================
+ASSIGN with WHEN AVAILABLE clause
+================================================================================
+
+ASSIGN
+  a = 1
+  b = "x" WHEN AVAILABLE Customer
+  c = Customer.Name WHEN AVAILABLE Customer.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (assign_statement
+    (assign_pair
+      left: (identifier)
+      right: (number_literal))
+    (assign_pair
+      left: (identifier)
+      right: (string_literal)
+      (when_available_clause
+        (identifier)))
+    (assign_pair
+      left: (identifier)
+      right: (qualified_name
+        left: (identifier)
+        right: (identifier))
+      (when_available_clause
+        (identifier)))))
+
+================================================================================
+ASSIGN with NO-ERROR
+================================================================================
+
+ASSIGN amount = DECIMAL(par_amount) NO-ERROR.
+ASSIGN a = 1 b = 2 NO-ERROR.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (assign_statement
+    (assign_pair
+      left: (identifier)
+      right: (function_call
+        function: (identifier)
+        (argument_list
+          (argument
+            value: (identifier)))))
+    (no_error))
+  (assign_statement
+    (assign_pair
+      left: (identifier)
+      right: (number_literal))
+    (assign_pair
+      left: (identifier)
+      right: (number_literal))
+    (no_error)))
+
+================================================================================
+ASSIGN with comment
 ================================================================================
 
 ASSIGN // note
   a = 1
-  b = "x" WHEN AVAILABLE Customer
-  c = dataset BDebtorShipTo:handle
-  flag = true
-  status = IF ok THEN "Y" ELSE "N".
-
-ASSIGN amount = DECIMAL(par_amount) NO-ERROR.
-
-doWork() NO-ERROR.
-x = 1 NO-ERROR.
-PUT-STRING(workBuf, 1) = cmdValue.
+  b = "x".
 
 --------------------------------------------------------------------------------
 
@@ -26,43 +125,116 @@ PUT-STRING(workBuf, 1) = cmdValue.
       right: (number_literal))
     (assign_pair
       left: (identifier)
-      right: (string_literal)
-      (when_available_clause
-        (identifier)))
+      right: (string_literal))))
+
+================================================================================
+ASSIGN with dataset reference
+================================================================================
+
+ASSIGN c = dataset BDebtorShipTo:handle.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (assign_statement
     (assign_pair
       left: (identifier)
       right: (dataset_reference
         dataset: (object_access
           left: (identifier)
-          right: (identifier))))
-    (assign_pair
-      left: (identifier)
-      right: (boolean_literal))
+          right: (identifier))))))
+
+================================================================================
+ASSIGN with conditional expression
+================================================================================
+
+ASSIGN status = IF ok THEN "Y" ELSE "N".
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (assign_statement
     (assign_pair
       left: (identifier)
       right: (conditional_expression
         (identifier)
         (string_literal)
-        (string_literal))))
+        (string_literal)))))
+
+================================================================================
+ASSIGN with qualified names
+================================================================================
+
+ASSIGN Customer.Name = "John"
+       Customer.Balance = 100.00.
+
+--------------------------------------------------------------------------------
+
+(source_file
   (assign_statement
     (assign_pair
+      left: (qualified_name
+        left: (identifier)
+        right: (identifier))
+      right: (string_literal))
+    (assign_pair
+      left: (qualified_name
+        left: (identifier)
+        right: (identifier))
+      right: (number_literal))))
+
+================================================================================
+Simple assignment statement
+================================================================================
+
+x = 1.
+Customer.Name = "test".
+a = b + c.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (number_literal))
+  (assignment_statement
+    left: (qualified_name
       left: (identifier)
-      right: (function_call
-        function: (identifier)
-        (argument_list
-          (argument
-            value: (identifier)))))
-    (no_error))
-  (expression_statement
-    (function_call
-      function: (identifier)
-      (argument_list))
-    (no_error))
+      right: (identifier))
+    operator: (assignment_operator)
+    right: (string_literal))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (binary_expression
+      (identifier)
+      (identifier))))
+
+================================================================================
+Assignment with NO-ERROR
+================================================================================
+
+x = 1 NO-ERROR.
+
+--------------------------------------------------------------------------------
+
+(source_file
   (assignment_statement
     left: (identifier)
     operator: (assignment_operator)
     right: (number_literal)
-    (no_error))
+    (no_error)))
+
+================================================================================
+Assignment to function result
+================================================================================
+
+PUT-STRING(workBuf, 1) = cmdValue.
+
+--------------------------------------------------------------------------------
+
+(source_file
   (assignment_statement
     left: (function_call
       function: (identifier)
@@ -73,3 +245,19 @@ PUT-STRING(workBuf, 1) = cmdValue.
           value: (number_literal))))
     operator: (assignment_operator)
     right: (identifier)))
+
+================================================================================
+Expression statement with NO-ERROR
+================================================================================
+
+doWork() NO-ERROR.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (expression_statement
+    (function_call
+      function: (identifier)
+      (argument_list))
+    (no_error)))
+
