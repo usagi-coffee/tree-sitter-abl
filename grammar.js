@@ -44,7 +44,7 @@ module.exports = grammar({
   word: ($) => $.identifier,
   conflicts: ($) => [
     [$._primary_expression, $.function_call],
-    [$._statement_no_def, $.if_statement],
+    [$._statement, $.if_statement],
     [$._primary_expression, $._assignable],
     [$._expression, $._statement_expression],
     // Definitions

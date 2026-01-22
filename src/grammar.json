@@ -40108,15 +40108,6 @@
         },
         {
           "type": "SYMBOL",
-          "name": "_statement_no_def"
-        }
-      ]
-    },
-    "_statement_no_def": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SYMBOL",
           "name": "enum_statement"
         },
         {
@@ -40470,7 +40461,7 @@
       "function_call"
     ],
     [
-      "_statement_no_def",
+      "_statement",
       "if_statement"
     ],
     [

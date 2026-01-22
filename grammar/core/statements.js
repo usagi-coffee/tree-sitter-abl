@@ -17,11 +17,6 @@ module.exports = ({ tkw }) => ({
       $.preprocessor_directive,
       $.include,
       $._definition,
-      $._statement_no_def,
-    ),
-
-  _statement_no_def: ($) =>
-    choice(
       $.enum_statement,
       $.var_statement,
       $.if_statement,
