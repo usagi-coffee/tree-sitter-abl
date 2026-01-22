@@ -1,6 +1,17 @@
 // Statement-related disambiguation plumbing
 
-module.exports = (ctx) => ({
+module.exports = ({ tkw }) => ({
+  expression_statement: ($) =>
+    prec(
+      -1,
+      seq(
+        $._statement_expression,
+        optional(alias($.__expression_no_error, $.no_error)),
+        $._terminator,
+      ),
+    ),
+  __expression_no_error: ($) => tkw("NO-ERROR"),
+
   _statement: ($) =>
     choice(
       $.preprocessor_directive,

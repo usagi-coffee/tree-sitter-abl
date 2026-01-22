@@ -12519,53 +12519,6 @@
         }
       ]
     },
-    "expression_statement": {
-      "type": "PREC",
-      "value": -1,
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "SYMBOL",
-            "name": "_statement_expression"
-          },
-          {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "ALIAS",
-                "content": {
-                  "type": "SYMBOL",
-                  "name": "__expression_no_error"
-                },
-                "named": true,
-                "value": "no_error"
-              },
-              {
-                "type": "BLANK"
-              }
-            ]
-          },
-          {
-            "type": "SYMBOL",
-            "name": "_terminator"
-          }
-        ]
-      }
-    },
-    "__expression_no_error": {
-      "type": "ALIAS",
-      "content": {
-        "type": "TOKEN",
-        "content": {
-          "type": "PATTERN",
-          "value": "NO-ERROR",
-          "flags": "i"
-        }
-      },
-      "named": false,
-      "value": "NO-ERROR"
-    },
     "assignment_statement": {
       "type": "PREC_RIGHT",
       "value": 1,
@@ -40090,6 +40043,53 @@
           ]
         }
       ]
+    },
+    "expression_statement": {
+      "type": "PREC",
+      "value": -1,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "_statement_expression"
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "__expression_no_error"
+                },
+                "named": true,
+                "value": "no_error"
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          },
+          {
+            "type": "SYMBOL",
+            "name": "_terminator"
+          }
+        ]
+      }
+    },
+    "__expression_no_error": {
+      "type": "ALIAS",
+      "content": {
+        "type": "TOKEN",
+        "content": {
+          "type": "PATTERN",
+          "value": "NO-ERROR",
+          "flags": "i"
+        }
+      },
+      "named": false,
+      "value": "NO-ERROR"
     },
     "_statement": {
       "type": "CHOICE",
