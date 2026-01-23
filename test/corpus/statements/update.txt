@@ -8,6 +8,7 @@ UPDATE field1 WHEN x > 5.
 UPDATE UNLESS-HIDDEN field1.
 UPDATE field1 WITH FRAME f1.
 UPDATE field1 WITH FRAME f1 NO-ERROR.
+UPDATE field1 GO-ON(f1 f2).
 
 --------------------------------------------------------------------------------
 
@@ -40,4 +41,10 @@ UPDATE field1 WITH FRAME f1 NO-ERROR.
     (update_item
       field: (identifier))
     (frame_phrase
-      frame: (identifier))))
+      frame: (identifier)))
+  (update_statement
+    (update_item
+      field: (identifier))
+    (go_on_clause
+      (identifier)
+      (identifier))))

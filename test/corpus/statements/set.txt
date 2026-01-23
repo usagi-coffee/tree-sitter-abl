@@ -8,6 +8,8 @@ SET field1 WHEN x > 5.
 SET UNLESS-HIDDEN field1.
 SET STREAM s1 field1.
 SET field1 WITH FRAME f1.
+SET field1 WITH FRAME f1 NO-ERROR.
+SET field1 GO-ON(f1 f2).
 
 --------------------------------------------------------------------------------
 
@@ -40,4 +42,15 @@ SET field1 WITH FRAME f1.
     (set_item
       field: (identifier))
     (frame_phrase
-      frame: (identifier))))
+      frame: (identifier)))
+  (set_statement
+    (set_item
+      field: (identifier))
+    (frame_phrase
+      frame: (identifier)))
+  (set_statement
+    (set_item
+      field: (identifier))
+    (go_on_clause
+      (identifier)
+      (identifier))))

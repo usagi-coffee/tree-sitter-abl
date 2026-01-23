@@ -23,7 +23,7 @@ module.exports = ({ kw, tkw }) => ({
       ),
     ),
   __prompt_for_go_on: ($) =>
-    seq(kw("GO-ON"), "(", repeat1($.identifier), ")"),
+    seq(tkw("GO-ON"), "(", repeat1($.identifier), ")"),
   __prompt_for_frame_phrase: ($) =>
     seq(kw("WITH"), optional(seq(kw("FRAME"), field("frame", $.identifier)))),
 });

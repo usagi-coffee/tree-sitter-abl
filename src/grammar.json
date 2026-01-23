@@ -13984,29 +13984,17 @@
               "type": "SEQ",
               "members": [
                 {
-                  "type": "SEQ",
-                  "members": [
-                    {
-                      "type": "ALIAS",
-                      "content": {
-                        "type": "TOKEN",
-                        "content": {
-                          "type": "PATTERN",
-                          "value": "GO-ON",
-                          "flags": "i"
-                        }
-                      },
-                      "named": false,
-                      "value": "GO-ON"
-                    },
-                    {
-                      "type": "IMMEDIATE_TOKEN",
-                      "content": {
-                        "type": "PATTERN",
-                        "value": "\\s+"
-                      }
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "TOKEN",
+                    "content": {
+                      "type": "PATTERN",
+                      "value": "GO-ON",
+                      "flags": "i"
                     }
-                  ]
+                  },
+                  "named": false,
+                  "value": "GO-ON"
                 },
                 {
                   "type": "STRING",
@@ -30908,29 +30896,17 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "SEQ",
-          "members": [
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "PATTERN",
-                  "value": "GO-ON",
-                  "flags": "i"
-                }
-              },
-              "named": false,
-              "value": "GO-ON"
-            },
-            {
-              "type": "IMMEDIATE_TOKEN",
-              "content": {
-                "type": "PATTERN",
-                "value": "\\s+"
-              }
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PATTERN",
+              "value": "GO-ON",
+              "flags": "i"
             }
-          ]
+          },
+          "named": false,
+          "value": "GO-ON"
         },
         {
           "type": "STRING",
@@ -33551,29 +33527,17 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "SEQ",
-          "members": [
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "PATTERN",
-                  "value": "GO-ON",
-                  "flags": "i"
-                }
-              },
-              "named": false,
-              "value": "GO-ON"
-            },
-            {
-              "type": "IMMEDIATE_TOKEN",
-              "content": {
-                "type": "PATTERN",
-                "value": "\\s+"
-              }
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PATTERN",
+              "value": "GO-ON",
+              "flags": "i"
             }
-          ]
+          },
+          "named": false,
+          "value": "GO-ON"
         },
         {
           "type": "STRING",
@@ -36884,29 +36848,17 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "SEQ",
-          "members": [
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "PATTERN",
-                  "value": "GO-ON",
-                  "flags": "i"
-                }
-              },
-              "named": false,
-              "value": "GO-ON"
-            },
-            {
-              "type": "IMMEDIATE_TOKEN",
-              "content": {
-                "type": "PATTERN",
-                "value": "\\s+"
-              }
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PATTERN",
+              "value": "GO-ON",
+              "flags": "i"
             }
-          ]
+          },
+          "named": false,
+          "value": "GO-ON"
         },
         {
           "type": "STRING",

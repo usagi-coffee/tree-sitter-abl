@@ -8,6 +8,7 @@ PROMPT-FOR field1 WHEN x > 5.
 PROMPT-FOR UNLESS-HIDDEN field1.
 PROMPT-FOR field1 IN WINDOW w1.
 PROMPT-FOR field1 WITH FRAME f1.
+PROMPT-FOR field1 GO-ON(f1 f2).
 
 --------------------------------------------------------------------------------
 
@@ -39,4 +40,10 @@ PROMPT-FOR field1 WITH FRAME f1.
     (prompt_for_item
       field: (identifier))
     (frame_phrase
-      frame: (identifier))))
+      frame: (identifier)))
+  (prompt_for_statement
+    (prompt_for_item
+      field: (identifier))
+    (go_on_clause
+      (identifier)
+      (identifier))))

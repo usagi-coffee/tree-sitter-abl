@@ -8,6 +8,7 @@ LOAD "myapp.r" DIR "/usr/lib".
 LOAD "myapp.r" APPLICATION "app1".
 LOAD "myapp.r" NEW.
 LOAD "myapp.r" NO-ERROR.
+LOAD "myapp.r" DIR "/usr/lib" APPLICATION "app1" NEW.
 
 --------------------------------------------------------------------------------
 
@@ -25,4 +26,8 @@ LOAD "myapp.r" NO-ERROR.
   (load_statement
     file: (string_literal))
   (load_statement
-    file: (string_literal)))
+    file: (string_literal))
+  (load_statement
+    file: (string_literal)
+    dir: (string_literal)
+    app: (string_literal)))

@@ -8,7 +8,7 @@ module.exports = ({ kw, tkw }) => ({
       ),
       optional(tkw("AUTO-RETURN")),
       optional(seq(kw("COLOR"), field("color", $._expression))),
-      optional(seq(kw("GO-ON"), "(", repeat1($.identifier), ")")),
+      optional(seq(tkw("GO-ON"), "(", repeat1($.identifier), ")")),
       optional(seq(kw("KEYS"), field("keys", $.identifier))),
       optional(tkw("NO-ERROR")),
       optional(seq(kw("PAUSE"), field("pause", $._expression))),
