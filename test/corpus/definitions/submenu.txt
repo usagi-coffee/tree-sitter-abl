@@ -1,0 +1,99 @@
+================================================================================
+SUB-MENU basic definition
+================================================================================
+
+DEFINE SUB-MENU smFile
+  MENU-ITEM miNew LABEL "New"
+  MENU-ITEM miOpen LABEL "Open"
+  MENU-ITEM miSave LABEL "Save".
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (submenu_definition
+    name: (identifier)
+    (menu_element
+      (menu_item
+        name: (identifier)
+        (string_literal)))
+    (menu_element
+      (menu_item
+        name: (identifier)
+        (string_literal)))
+    (menu_element
+      (menu_item
+        name: (identifier)
+        (string_literal)))))
+
+================================================================================
+SUB-MENU with nested submenu
+================================================================================
+
+DEFINE SUB-MENU smMain
+  MENU-ITEM miItem1 LABEL "Item 1"
+  SUB-MENU smNested LABEL "More"
+  RULE
+  MENU-ITEM miItem2 LABEL "Item 2".
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (submenu_definition
+    name: (identifier)
+    (menu_element
+      (menu_item
+        name: (identifier)
+        (string_literal)))
+    (menu_element
+      (submenu_item
+        name: (identifier)
+        (string_literal)))
+    (menu_element
+      (rule))
+    (menu_element
+      (menu_item
+        name: (identifier)
+        (string_literal)))))
+
+================================================================================
+SUB-MENU private definition
+================================================================================
+
+DEF PRIVATE SUB-MENU smPrivate
+  MENU-ITEM mi1 LABEL "Test".
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (submenu_definition
+    name: (identifier)
+    (menu_element
+      (menu_item
+        name: (identifier)
+        (string_literal)))))
+
+================================================================================
+SUB-MENU with SKIP
+================================================================================
+
+DEFINE SUB-MENU smWithSkip
+  MENU-ITEM miTop LABEL "Top"
+  SKIP
+  MENU-ITEM miBottom LABEL "Bottom".
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (submenu_definition
+    name: (identifier)
+    (menu_element
+      (menu_item
+        name: (identifier)
+        (string_literal)))
+    (menu_element
+      (skip))
+    (menu_element
+      (menu_item
+        name: (identifier)
+        (string_literal)))))
+

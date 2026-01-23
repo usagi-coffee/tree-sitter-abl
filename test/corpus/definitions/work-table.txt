@@ -1,0 +1,21 @@
+================================================================================
+WORK-TABLE basic definition
+================================================================================
+
+DEFINE WORK-TABLE wtCustomer NO-UNDO
+  FIELD custNum AS INTEGER
+  FIELD custName AS CHARACTER.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (work_table_definition
+    name: (identifier)
+    (no_undo)
+    (work_table_field
+      name: (identifier)
+      type: (identifier))
+    (work_table_field
+      name: (identifier)
+      type: (identifier))))
+

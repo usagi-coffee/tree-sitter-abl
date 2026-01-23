@@ -1,0 +1,48 @@
+module.exports = ({ kw, tkw }) => ({
+  rectangle_definition: ($) =>
+    seq(
+      choice(kw("DEFINE"), kw("DEF")),
+      optional(kw("PRIVATE")),
+      kw("RECTANGLE"),
+      field("name", $.identifier),
+      repeat(
+        choice(
+          alias($.__rectangle_like, $.like_option),
+          alias($.__rectangle_no_fill, $.no_fill),
+          alias($.__rectangle_edge_chars, $.edge_chars),
+          alias($.__rectangle_edge_pixels, $.edge_pixels),
+          alias($.__rectangle_dcolor, $.dcolor),
+          alias($.__rectangle_bgcolor, $.bgcolor),
+          alias($.__rectangle_fgcolor, $.fgcolor),
+          alias($.__rectangle_graphic_edge, $.graphic_edge),
+          alias($.__rectangle_pfcolor, $.pfcolor),
+          alias($.__rectangle_rounded, $.rounded),
+          alias($.__rectangle_group_box, $.group_box),
+          alias($.__rectangle_size, $.size_phrase),
+          alias($.__rectangle_tooltip, $.tooltip),
+          // $.on_phrase, // TODO: add trigger support
+        ),
+      ),
+      $._terminator,
+    ),
+
+  __rectangle_like: ($) => seq(kw("LIKE"), field("like", $.identifier)),
+  __rectangle_no_fill: ($) => tkw("NO-FILL"),
+  __rectangle_edge_chars: ($) => seq(tkw("EDGE-CHARS"), $._expression),
+  __rectangle_edge_pixels: ($) => seq(tkw("EDGE-PIXELS"), $._expression),
+  __rectangle_dcolor: ($) => seq(kw("DCOLOR"), $._expression),
+  __rectangle_bgcolor: ($) => seq(kw("BGCOLOR"), $._expression),
+  __rectangle_fgcolor: ($) => seq(kw("FGCOLOR"), $._expression),
+  __rectangle_graphic_edge: ($) => tkw("GRAPHIC-EDGE"),
+  __rectangle_pfcolor: ($) => seq(kw("PFCOLOR"), $._expression),
+  __rectangle_rounded: ($) => tkw("ROUNDED"),
+  __rectangle_group_box: ($) => tkw("GROUP-BOX"),
+  __rectangle_size: ($) =>
+    seq(
+      choice(kw("SIZE"), tkw("SIZE-CHARS"), tkw("SIZE-PIXELS")),
+      field("width", $._expression),
+      kw("BY"),
+      field("height", $._expression),
+    ),
+  __rectangle_tooltip: ($) => seq(kw("TOOLTIP"), $._expression),
+});

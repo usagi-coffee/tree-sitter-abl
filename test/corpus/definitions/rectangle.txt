@@ -1,0 +1,96 @@
+================================================================================
+RECTANGLE basic definition
+================================================================================
+
+DEFINE RECTANGLE rectMain SIZE 80 BY 20.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (rectangle_definition
+    name: (identifier)
+    (size_phrase
+      width: (number_literal)
+      height: (number_literal))))
+
+================================================================================
+RECTANGLE with edge options
+================================================================================
+
+DEFINE RECTANGLE rectBorder
+  EDGE-PIXELS 2
+  NO-FILL
+  FGCOLOR 15
+  SIZE 40 BY 10.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (rectangle_definition
+    name: (identifier)
+    (edge_pixels
+      (number_literal))
+    (no_fill)
+    (fgcolor
+      (number_literal))
+    (size_phrase
+      width: (number_literal)
+      height: (number_literal))))
+
+================================================================================
+RECTANGLE with LIKE
+================================================================================
+
+DEFINE RECTANGLE rect2 LIKE rect1 ROUNDED.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (rectangle_definition
+    name: (identifier)
+    (like_option
+      like: (identifier))
+    (rounded)))
+
+================================================================================
+RECTANGLE with GROUP-BOX
+================================================================================
+
+DEF RECTANGLE rectGroup
+  GROUP-BOX
+  SIZE-CHARS 50 BY 8
+  BGCOLOR 8.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (rectangle_definition
+    name: (identifier)
+    (group_box)
+    (size_phrase
+      width: (number_literal)
+      height: (number_literal))
+    (bgcolor
+      (number_literal))))
+
+================================================================================
+RECTANGLE private with tooltip
+================================================================================
+
+DEFINE PRIVATE RECTANGLE rectPrivate
+  EDGE-CHARS 1
+  TOOLTIP "Border rectangle"
+  SIZE-PIXELS 200 BY 100.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (rectangle_definition
+    name: (identifier)
+    (edge_chars
+      (number_literal))
+    (tooltip
+      (string_literal))
+    (size_phrase
+      width: (number_literal)
+      height: (number_literal))))

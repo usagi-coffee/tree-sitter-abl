@@ -56,6 +56,8 @@ module.exports = grammar({
     ],
     [$.__temp_table_access_modifier, $.__variable_access_modifier],
     [$.__temp_table_static_modifier, $.__variable_static_modifier],
+    // Event definition OVERRIDE vs ON phrase OVERRIDE
+    [$.event_definition, $.__on_override],
   ],
   inline: ($) => [$.class_body_item],
 

@@ -1,0 +1,112 @@
+================================================================================
+MENU basic definition
+================================================================================
+
+DEFINE MENU mnuMain MENUBAR
+  MENU-ITEM miFile LABEL "File"
+  MENU-ITEM miEdit LABEL "Edit".
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (menu_definition
+    name: (identifier)
+    (menubar)
+    (menu_element
+      (menu_item
+        name: (identifier)
+        (string_literal)))
+    (menu_element
+      (menu_item
+        name: (identifier)
+        (string_literal)))))
+
+================================================================================
+MENU with submenu
+================================================================================
+
+DEFINE MENU mnuBar MENUBAR
+  SUB-MENU smFile LABEL "File"
+  RULE
+  MENU-ITEM miExit LABEL "Exit".
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (menu_definition
+    name: (identifier)
+    (menubar)
+    (menu_element
+      (submenu_item
+        name: (identifier)
+        (string_literal)))
+    (menu_element
+      (rule))
+    (menu_element
+      (menu_item
+        name: (identifier)
+        (string_literal)))))
+
+================================================================================
+MENU popup with title
+================================================================================
+
+DEFINE MENU mnuPopup TITLE "Context Menu"
+  MENU-ITEM miCopy LABEL "Copy"
+  SKIP
+  MENU-ITEM miPaste LABEL "Paste".
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (menu_definition
+    name: (identifier)
+    (title
+      (string_literal))
+    (menu_element
+      (menu_item
+        name: (identifier)
+        (string_literal)))
+    (menu_element
+      (skip))
+    (menu_element
+      (menu_item
+        name: (identifier)
+        (string_literal)))))
+
+================================================================================
+MENU shared definition
+================================================================================
+
+DEFINE NEW SHARED MENU mnuShared MENUBAR.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (menu_definition
+    name: (identifier)
+    (menubar)))
+
+
+================================================================================
+MENU with colors
+================================================================================
+
+DEFINE MENU mnuColored
+  FGCOLOR 15
+  BGCOLOR 1
+  MENU-ITEM mi1 LABEL "Item".
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (menu_definition
+    name: (identifier)
+    (fgcolor
+      (number_literal))
+    (bgcolor
+      (number_literal))
+    (menu_element
+      (menu_item
+        name: (identifier)
+        (string_literal)))))

@@ -18,5 +18,11 @@ module.exports = (ctx) => ({
       $.interface_definition,
       $.dataset_definition,
       $.button_definition,
+      $.rectangle_definition,
+      $.event_definition,
+      $.menu_definition,
+      $.submenu_definition,
+      // $.frame_definition, // Too complex, causes conflicts
+      // $.browse_definition, // Too complex, exceeds state count
     ),
 });

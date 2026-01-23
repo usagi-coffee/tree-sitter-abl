@@ -1,0 +1,107 @@
+================================================================================
+EVENT basic definition
+================================================================================
+
+DEFINE EVENT onCustomerChanged SIGNATURE VOID ().
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (event_definition
+    name: (identifier)
+    (signature)))
+
+================================================================================
+EVENT with parameters
+================================================================================
+
+DEFINE EVENT onDataChanged SIGNATURE VOID (
+  INPUT sender AS CLASS Progress.Lang.Object,
+  INPUT args AS CLASS MyEventArgs
+).
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (event_definition
+    name: (identifier)
+    (signature
+      name: (identifier)
+      type: (qualified_name
+        left: (identifier)
+        right: (identifier)
+        right: (identifier))
+      name: (identifier)
+      type: (identifier))))
+
+================================================================================
+EVENT with DELEGATE
+================================================================================
+
+DEFINE EVENT onProgress DELEGATE CLASS System.EventHandler.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (event_definition
+    name: (identifier)
+    (signature
+      delegate_type: (qualified_name
+        left: (identifier)
+        right: (identifier)))))
+
+================================================================================
+EVENT static definition
+================================================================================
+
+DEFINE EVENT globalEvent SIGNATURE VOID ().
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (event_definition
+    name: (identifier)
+    (signature)))
+
+================================================================================
+EVENT abstract definition
+================================================================================
+
+DEFINE EVENT abstractEvent SIGNATURE VOID (
+  INPUT data AS CHARACTER
+).
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (event_definition
+    name: (identifier)
+    (signature
+      name: (identifier)
+      type: (identifier))))
+
+================================================================================
+EVENT override definition
+================================================================================
+
+DEFINE EVENT onInitialize SIGNATURE VOID ().
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (event_definition
+    name: (identifier)
+    (signature)))
+
+================================================================================
+EVENT package-protected
+================================================================================
+
+DEF EVENT internalEvent SIGNATURE VOID ().
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (event_definition
+    name: (identifier)
+    (signature)))
