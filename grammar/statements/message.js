@@ -24,6 +24,7 @@ module.exports = ({ kw, tkw }) => ({
           tkw("MESSAGE"),
           tkw("QUESTION"),
           tkw("INFORMATION"),
+          tkw("INFO"),
           tkw("ERROR"),
           tkw("WARNING"),
         ),

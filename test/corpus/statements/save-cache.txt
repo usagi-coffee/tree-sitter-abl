@@ -1,0 +1,24 @@
+================================================================================
+SAVE CACHE
+================================================================================
+
+SAVE CACHE CURRENT mydb TO "cache.bin".
+SAVE CACHE COMPLETE mydb TO "cache.bin".
+SAVE CACHE CURRENT VALUE(cDB) TO VALUE(cPath).
+SAVE CACHE COMPLETE mydb TO "/tmp/cache" NO-ERROR.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (save_cache_statement
+    database: (identifier)
+    path: (string_literal))
+  (save_cache_statement
+    database: (identifier)
+    path: (string_literal))
+  (save_cache_statement
+    database: (identifier)
+    path: (identifier))
+  (save_cache_statement
+    database: (identifier)
+    path: (string_literal)))

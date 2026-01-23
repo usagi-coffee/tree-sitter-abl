@@ -1,0 +1,74 @@
+================================================================================
+RUN STORED-PROCEDURE basic
+================================================================================
+
+RUN STORED-PROCEDURE sp_GetCustomers.
+RUN STORED-PROCEDURE "sp_Update".
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (run_stored_procedure_statement
+    procedure: (identifier))
+  (run_stored_procedure_statement
+    procedure: (string_literal)))
+
+================================================================================
+RUN STORED-PROCEDURE with handle
+================================================================================
+
+RUN STORED-PROCEDURE sp_Query hProc = PROC-HANDLE.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (run_stored_procedure_statement
+    procedure: (identifier)
+    handle_var: (identifier)))
+
+================================================================================
+RUN STORED-PROCEDURE with LOAD-RESULT-INTO
+================================================================================
+
+RUN STORED-PROCEDURE sp_GetData LOAD-RESULT-INTO hResult.
+RUN STORED-PROCEDURE sp_Query LOAD-RESULT-INTO hResult iStatus = PROC-STATUS.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (run_stored_procedure_statement
+    procedure: (identifier)
+    result_handle: (identifier))
+  (run_stored_procedure_statement
+    procedure: (identifier)
+    result_handle: (identifier)
+    status_var: (identifier)))
+
+================================================================================
+RUN STORED-PROCEDURE with parameters
+================================================================================
+
+RUN STORED-PROCEDURE sp_Insert (INPUT "John", INPUT 25).
+RUN STORED-PROCEDURE sp_Update (PARAM custId = iCustId, OUTPUT cResult).
+RUN STORED-PROCEDURE sp_Query NO-ERROR (1, 2, 3).
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (run_stored_procedure_statement
+    procedure: (identifier)
+    (parameter_list
+      value: (string_literal)
+      value: (number_literal)))
+  (run_stored_procedure_statement
+    procedure: (identifier)
+    (parameter_list
+      name: (identifier)
+      value: (identifier)
+      value: (identifier)))
+  (run_stored_procedure_statement
+    procedure: (identifier)
+    (parameter_list
+      value: (number_literal)
+      value: (number_literal)
+      value: (number_literal))))

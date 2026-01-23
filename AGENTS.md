@@ -22,14 +22,17 @@
 
 - Regenerate parser artifacts when `grammar.js` changes:
   - `bun run generate`
-- Run tests:
+- Run tests (runs generate before tests):
   - `bun run test`
-- Parse a sample file:
+- Parse a sample file (returns syntax tree; `tree-sitter test`):
   - `bun run parse -- <file>`
-  - `bun run parse:snippet -- <direct syntax>`
+- Parse a snippet (returns syntax tree):
+  - `bun run parse:snippet -- '<direct syntax>'`
 - Build native and wasm artifacts:
   - `bun run build`
   - `bun run build:wasm`
+- Check state count:
+  - `bun run check`
 
 ## Conventions
 
@@ -57,7 +60,4 @@
 ## Notes
 
 - We use `bun` here instead of `npm`.
-- `bun run test` runs `tree-sitter generate` and `tree-sitter test`, in cases where you updated the test or did not do any modifications you can directly use `tree-sitter test` instead to save time (becase nothing got regenerated).
-- You can test syntax ad-hoc by invoking the parser directly, for example using `bun run parse:snippet -- 'x = 5.'` to quickly retrieve a syntax tree or validate grammar behavior on a small snippet but make sure to `generate` the parser at least once.
-- You can verify `STATE_COUNT` by invoking `grep -E "#define.*STATE_COUNT" src/parser.c`.
-- The project uses the `tree-sitter` CLI; ensure it is installed via devDependencies (`tree-sitter-cli`).
+- Feel free to also use the `tree-sitter` CLI for the workflow.

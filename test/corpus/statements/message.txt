@@ -42,9 +42,11 @@ MESSAGE VIEW-AS ALERT-BOX
 
 MESSAGE "Simple" SKIP VIEW-AS ALERT-BOX QUESTION.
 MESSAGE "Info" VIEW-AS ALERT-BOX INFORMATION.
+MESSAGE "Short" VIEW-AS ALERT-BOX INFO.
 MESSAGE "Warn" VIEW-AS ALERT-BOX WARNING.
 MESSAGE "Err" VIEW-AS ALERT-BOX ERROR.
 MESSAGE "Msg" VIEW-AS ALERT-BOX MESSAGE.
+MESSAGE "Done" VIEW-AS ALERT-BOX INFO BUTTONS OK.
 
 --------------------------------------------------------------------------------
 
@@ -64,7 +66,14 @@ MESSAGE "Msg" VIEW-AS ALERT-BOX MESSAGE.
     (view_as_clause))
   (message_statement
     (string_literal)
-    (view_as_clause)))
+    (view_as_clause))
+  (message_statement
+    (string_literal)
+    (view_as_clause))
+  (message_statement
+    (string_literal)
+    (view_as_clause
+      (buttons_clause))))
 
 ================================================================================
 MESSAGE with BUTTONS

@@ -10,5 +10,7 @@ if (!snippet) {
 const tmp = `/tmp/abl-${crypto.randomUUID()}.p`;
 await Bun.write(tmp, snippet + "\n");
 
+try {
 // run parser
 await $`tree-sitter parse ${tmp}`;
+} catch (error) {}

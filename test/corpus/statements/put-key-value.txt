@@ -1,0 +1,27 @@
+================================================================================
+PUT-KEY-VALUE
+================================================================================
+
+PUT-KEY-VALUE SECTION "general" KEY "theme" VALUE "dark".
+PUT-KEY-VALUE SECTION cSection KEY DEFAULT VALUE cValue.
+PUT-KEY-VALUE COLOR 1.
+PUT-KEY-VALUE FONT ALL.
+PUT-KEY-VALUE SECTION "app" KEY "debug" VALUE "true" NO-ERROR.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (put_key_value_statement
+    section: (string_literal)
+    key: (string_literal)
+    value: (string_literal))
+  (put_key_value_statement
+    section: (identifier)
+    value: (identifier))
+  (put_key_value_statement
+    number: (number_literal))
+  (put_key_value_statement)
+  (put_key_value_statement
+    section: (string_literal)
+    key: (string_literal)
+    value: (string_literal)))

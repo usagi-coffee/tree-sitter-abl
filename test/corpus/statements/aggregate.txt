@@ -1,0 +1,36 @@
+================================================================================
+AGGREGATE
+================================================================================
+
+AGGREGATE iCount = COUNT(CustNum) FOR Customer.
+AGGREGATE dTotal = TOTAL(Balance) iCount = COUNT(CustNum) FOR Customer.
+AGGREGATE dAvg = AVERAGE(Amount) FOR Order WHERE Status = "A".
+AGGREGATE iMax = MAXIMUM(Qty) iMin = MINIMUM(Qty) FOR OrderLine.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (aggregate_statement
+    target: (identifier)
+    field: (identifier)
+    table: (identifier))
+  (aggregate_statement
+    target: (identifier)
+    field: (identifier)
+    target: (identifier)
+    field: (identifier)
+    table: (identifier))
+  (aggregate_statement
+    target: (identifier)
+    field: (identifier)
+    table: (identifier)
+    (where_clause
+      condition: (binary_expression
+        (identifier)
+        (string_literal))))
+  (aggregate_statement
+    target: (identifier)
+    field: (identifier)
+    target: (identifier)
+    field: (identifier)
+    table: (identifier)))

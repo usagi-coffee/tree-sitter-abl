@@ -1,0 +1,12 @@
+================================================================================
+TRANSACTION-MODE
+================================================================================
+
+TRANSACTION-MODE AUTOMATIC.
+TRANSACTION-MODE AUTOMATIC CHAINED.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (transaction_mode_statement)
+  (transaction_mode_statement))

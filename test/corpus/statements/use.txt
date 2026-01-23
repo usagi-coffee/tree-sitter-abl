@@ -1,0 +1,17 @@
+================================================================================
+USE
+================================================================================
+
+USE "production".
+USE cEnvironment.
+USE "testing" NO-ERROR.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (use_statement
+    environment: (string_literal))
+  (use_statement
+    environment: (identifier))
+  (use_statement
+    environment: (string_literal)))

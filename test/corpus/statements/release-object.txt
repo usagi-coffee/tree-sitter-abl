@@ -1,0 +1,14 @@
+================================================================================
+RELEASE OBJECT
+================================================================================
+
+RELEASE OBJECT hWidget.
+RELEASE OBJECT hBuffer NO-ERROR.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (release_object_statement
+    handle: (identifier))
+  (release_object_statement
+    handle: (identifier)))

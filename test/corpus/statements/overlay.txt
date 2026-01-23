@@ -1,0 +1,40 @@
+================================================================================
+OVERLAY
+================================================================================
+
+OVERLAY(cTarget, 1) = "X".
+OVERLAY(cString, 5, 3) = "ABC".
+OVERLAY(cData, 1, 10, CHARACTER) = cValue.
+OVERLAY(mBuffer, 5, 4, RAW) = mSource.
+OVERLAY(cLine, iPos, iLen, COLUMN) = "Hello".
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (overlay_statement
+    target: (identifier)
+    position: (number_literal)
+    value: (string_literal))
+  (overlay_statement
+    target: (identifier)
+    position: (number_literal)
+    length: (number_literal)
+    value: (string_literal))
+  (overlay_statement
+    target: (identifier)
+    position: (number_literal)
+    length: (number_literal)
+    type: (CHARACTER)
+    value: (identifier))
+  (overlay_statement
+    target: (identifier)
+    position: (number_literal)
+    length: (number_literal)
+    type: (RAW)
+    value: (identifier))
+  (overlay_statement
+    target: (identifier)
+    position: (identifier)
+    length: (identifier)
+    type: (COLUMN)
+    value: (string_literal)))

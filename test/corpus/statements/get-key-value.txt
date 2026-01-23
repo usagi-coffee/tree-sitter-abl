@@ -1,0 +1,21 @@
+================================================================================
+GET-KEY-VALUE
+================================================================================
+
+GET-KEY-VALUE SECTION "general" KEY "theme" VALUE cTheme.
+GET-KEY-VALUE SECTION cSection KEY cKey VALUE cValue.
+GET-KEY-VALUE SECTION "startup" DEFAULT.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (get_key_value_statement
+    section: (string_literal)
+    key: (string_literal)
+    value: (identifier))
+  (get_key_value_statement
+    section: (identifier)
+    key: (identifier)
+    value: (identifier))
+  (get_key_value_statement
+    section: (string_literal)))

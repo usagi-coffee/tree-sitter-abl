@@ -1,0 +1,83 @@
+================================================================================
+BUFFER-COMPARE basic
+================================================================================
+
+BUFFER-COMPARE bSrc TO bTgt.
+BUFFER-COMPARE bSrc EXCEPT Field1 Field2 TO bTgt.
+BUFFER-COMPARE bSrc USING Field1 Field2 TO bTgt.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (buffer_compare_statement
+    source: (identifier)
+    target: (identifier))
+  (buffer_compare_statement
+    source: (identifier)
+    field: (identifier)
+    field: (identifier)
+    target: (identifier))
+  (buffer_compare_statement
+    source: (identifier)
+    field: (identifier)
+    field: (identifier)
+    target: (identifier)))
+
+================================================================================
+BUFFER-COMPARE with options
+================================================================================
+
+BUFFER-COMPARE bSrc TO bTgt CASE-SENSITIVE.
+BUFFER-COMPARE bSrc TO bTgt BINARY.
+BUFFER-COMPARE bSrc TO bTgt SAVE lResult.
+BUFFER-COMPARE bSrc TO bTgt SAVE RESULT IN cDiff.
+BUFFER-COMPARE bSrc TO bTgt NO-LOBS.
+BUFFER-COMPARE bSrc TO bTgt NO-ERROR.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (buffer_compare_statement
+    source: (identifier)
+    target: (identifier))
+  (buffer_compare_statement
+    source: (identifier)
+    target: (identifier))
+  (buffer_compare_statement
+    source: (identifier)
+    target: (identifier)
+    (save_clause
+      result: (identifier)))
+  (buffer_compare_statement
+    source: (identifier)
+    target: (identifier)
+    (save_clause
+      result: (identifier)))
+  (buffer_compare_statement
+    source: (identifier)
+    target: (identifier))
+  (buffer_compare_statement
+    source: (identifier)
+    target: (identifier)))
+
+================================================================================
+BUFFER-COMPARE with COMPARES block
+================================================================================
+
+BUFFER-COMPARE bSrc TO bTgt
+  COMPARES:
+    WHEN Field1 <> Field2 THEN MESSAGE "Mismatch".
+  END.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (buffer_compare_statement
+    source: (identifier)
+    target: (identifier)
+    (compares_block
+      field: (identifier)
+      operator: (NE)
+      value: (identifier)
+      action: (message_statement
+        (string_literal)))))

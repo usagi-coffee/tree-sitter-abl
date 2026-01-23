@@ -27,12 +27,21 @@ module.exports = ({ kw, tkw }) => ({
   __put_expression_item: ($) =>
     seq(
       field("value", $._expression),
-      optional(seq(kw("FORMAT"), field("format", $.string_literal))),
+      optional(alias($.__put_format_clause, $.format_clause)),
       optional(
         seq(
           choice(kw("AT"), kw("TO")),
           field("position", $._expression),
         ),
+      ),
+    ),
+  __put_format_clause: ($) =>
+    choice(
+      seq(kw("FORMAT"), field("format", $.string_literal)),
+      seq(
+        alias(token(seq(/format/i, token.immediate("("))), "FORMAT"),
+        field("format", $.string_literal),
+        ")",
       ),
     ),
   __put_skip_item: ($) =>

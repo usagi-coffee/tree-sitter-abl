@@ -1,0 +1,14 @@
+================================================================================
+RELEASE EXTERNAL
+================================================================================
+
+RELEASE EXTERNAL "mylib.dll".
+RELEASE EXTERNAL PROCEDURE "kernel32.dll".
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (release_external_statement
+    library: (string_literal))
+  (release_external_statement
+    library: (string_literal)))

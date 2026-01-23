@@ -1,0 +1,43 @@
+================================================================================
+INPUT-OUTPUT CLOSE
+================================================================================
+
+INPUT-OUTPUT CLOSE.
+INPUT-OUTPUT STREAM sIO CLOSE.
+INPUT-OUTPUT STREAM-HANDLE hStream CLOSE.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (input_output_statement)
+  (input_output_statement
+    (stream_clause
+      name: (identifier)))
+  (input_output_statement
+    (stream_handle_clause
+      handle: (identifier))))
+
+================================================================================
+INPUT-OUTPUT THROUGH
+================================================================================
+
+INPUT-OUTPUT THROUGH "myprogram".
+INPUT-OUTPUT THROUGH prog arg1 arg2.
+INPUT-OUTPUT THROUGH VALUE(cProgram) NO-ECHO.
+INPUT-OUTPUT STREAM sIO THROUGH "filter" UNBUFFERED.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (input_output_statement
+    program: (string_literal))
+  (input_output_statement
+    program: (identifier)
+    (identifier)
+    (identifier))
+  (input_output_statement
+    (identifier))
+  (input_output_statement
+    (stream_clause
+      name: (identifier))
+    program: (string_literal)))

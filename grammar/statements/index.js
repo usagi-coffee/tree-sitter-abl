@@ -1,14 +1,18 @@
+const aggregateStatement = require("./aggregate");
 const assignStatement = require("./assign");
 const annotationStatement = require("./annotation");
 const accumulateStatement = require("./accumulate");
 const applyStatement = require("./apply");
 const bellStatement = require("./bell");
+const bufferCompareStatement = require("./buffer-compare");
 const bufferCopyStatement = require("./buffer-copy");
+const callStatement = require("./call");
 const caseStatement = require("./case");
 const catchStatement = require("./catch");
 const chooseStatement = require("./choose");
 const clearStatement = require("./clear");
 const closeQueryStatement = require("./close-query");
+const closeStoredProcedureStatement = require("./close-stored-procedure");
 const colorStatement = require("./color");
 const compileStatement = require("./compile");
 const connectStatement = require("./connect");
@@ -31,19 +35,24 @@ const emptyStatement = require("./empty");
 const emptyStatementStatement = require("./empty-statement");
 const errorScopeStatement = require("./error-scope");
 const exportStatement = require("./export");
+const finallyStatement = require("./finally");
 const findStatement = require("./find");
+const fixCodepageStatement = require("./fix-codepage");
 const forStatement = require("./for");
 const formStatement = require("./form");
 const getStatement = require("./get");
+const getKeyValueStatement = require("./get-key-value");
 const hideStatement = require("./hide");
 const ifStatement = require("./if");
 const inputStatement = require("./input");
 const inputClearStatement = require("./input-clear");
+const inputOutputStatement = require("./input-output");
 const inputThroughStatement = require("./input-through");
 const importStatement = require("./import");
 const insertStatement = require("./insert");
 const leaveStatement = require("./leave");
 const loadStatement = require("./load");
+const loadPictureStatement = require("./load-picture");
 const messageStatement = require("./message");
 const nextStatement = require("./next");
 const nextPromptStatement = require("./next-prompt");
@@ -56,38 +65,52 @@ const osCreateDirStatement = require("./os-create-dir");
 const osDeleteStatement = require("./os-delete");
 const osRenameStatement = require("./os-rename");
 const outputStatement = require("./output");
+const overlayStatement = require("./overlay");
 const pageStatement = require("./page");
 const pauseStatement = require("./pause");
+const propathStatement = require("./propath");
+const promsgsStatement = require("./promsgs");
 const preselectRules = require("./preselect");
 const processEventsStatement = require("./process-events");
 const promptForStatement = require("./prompt-for");
 const publishStatement = require("./publish");
 const putStatement = require("./put");
+const putCursorStatement = require("./put-cursor");
+const putKeyValueStatement = require("./put-key-value");
+const putScreenStatement = require("./put-screen");
 const quitStatement = require("./quit");
 const rawTransferStatement = require("./raw-transfer");
 const readkeyStatement = require("./readkey");
 const releaseStatement = require("./release");
+const releaseExternalStatement = require("./release-external");
+const releaseObjectStatement = require("./release-object");
 const repeatStatement = require("./repeat");
 const repositionStatement = require("./reposition");
 const runStatement = require("./run");
+const runStoredProcedureStatement = require("./run-stored-procedure");
 const returnStatement = require("./return");
+const saveCacheStatement = require("./save-cache");
 const scrollStatement = require("./scroll");
 const setSizeStatement = require("./set-size");
 const setByteOrderStatement = require("./set-byte-order");
+const setPointerValueStatement = require("./set-pointer-value");
 const setStatement = require("./set");
 const seekStatement = require("./seek");
+const showStatsStatement = require("./show-stats");
 const statusStatement = require("./status");
 const stopStatement = require("./stop");
 const subscribeStatement = require("./subscribe");
 const superStatement = require("./super");
 const systemDialogStatement = require("./system-dialog");
 const terminalStatement = require("./terminal");
+const transactionModeStatement = require("./transaction-mode");
 const underlineStatement = require("./underline");
 const unixStatement = require("./unix");
 const unloadStatement = require("./unload");
 const unsubscribeStatement = require("./unsubscribe");
 const upStatement = require("./up");
 const updateStatement = require("./update");
+const useStatement = require("./use");
 const usingStatement = require("./using");
 const undoStatement = require("./undo");
 const validateStatement = require("./validate");
@@ -97,17 +120,21 @@ const waitForStatement = require("./wait-for");
 
 module.exports = (ctx) => {
   return {
+    ...aggregateStatement(ctx),
     ...assignStatement(ctx),
     ...annotationStatement(ctx),
     ...accumulateStatement(ctx),
     ...applyStatement(ctx),
     ...bellStatement(ctx),
+    ...bufferCompareStatement(ctx),
     ...bufferCopyStatement(ctx),
+    ...callStatement(ctx),
     ...caseStatement(ctx),
     ...catchStatement(ctx),
     ...chooseStatement(ctx),
     ...clearStatement(ctx),
     ...closeQueryStatement(ctx),
+    ...closeStoredProcedureStatement(ctx),
     ...colorStatement(ctx),
     ...compileStatement(ctx),
     ...connectStatement(ctx),
@@ -130,19 +157,24 @@ module.exports = (ctx) => {
     ...emptyStatementStatement(ctx),
     ...errorScopeStatement(ctx),
     ...exportStatement(ctx),
+    ...finallyStatement(ctx),
     ...findStatement(ctx),
+    ...fixCodepageStatement(ctx),
     ...forStatement(ctx),
     ...formStatement(ctx),
     ...getStatement(ctx),
+    ...getKeyValueStatement(ctx),
     ...hideStatement(ctx),
     ...ifStatement(ctx),
     ...inputStatement(ctx),
     ...inputClearStatement(ctx),
+    ...inputOutputStatement(ctx),
     ...inputThroughStatement(ctx),
     ...importStatement(ctx),
     ...insertStatement(ctx),
     ...leaveStatement(ctx),
     ...loadStatement(ctx),
+    ...loadPictureStatement(ctx),
     ...messageStatement(ctx),
     ...nextStatement(ctx),
     ...nextPromptStatement(ctx),
@@ -155,38 +187,52 @@ module.exports = (ctx) => {
     ...osDeleteStatement(ctx),
     ...osRenameStatement(ctx),
     ...outputStatement(ctx),
+    ...overlayStatement(ctx),
     ...pageStatement(ctx),
     ...pauseStatement(ctx),
+    ...propathStatement(ctx),
+    ...promsgsStatement(ctx),
     ...preselectRules(ctx),
     ...processEventsStatement(ctx),
     ...promptForStatement(ctx),
     ...publishStatement(ctx),
     ...putStatement(ctx),
+    ...putCursorStatement(ctx),
+    ...putKeyValueStatement(ctx),
+    ...putScreenStatement(ctx),
     ...quitStatement(ctx),
     ...rawTransferStatement(ctx),
     ...readkeyStatement(ctx),
     ...releaseStatement(ctx),
+    ...releaseExternalStatement(ctx),
+    ...releaseObjectStatement(ctx),
     ...repeatStatement(ctx),
     ...repositionStatement(ctx),
     ...runStatement(ctx),
+    ...runStoredProcedureStatement(ctx),
     ...returnStatement(ctx),
+    ...saveCacheStatement(ctx),
     ...scrollStatement(ctx),
     ...setSizeStatement(ctx),
     ...setByteOrderStatement(ctx),
+    ...setPointerValueStatement(ctx),
     ...setStatement(ctx),
     ...seekStatement(ctx),
+    ...showStatsStatement(ctx),
     ...statusStatement(ctx),
     ...stopStatement(ctx),
     ...subscribeStatement(ctx),
     ...superStatement(ctx),
     ...systemDialogStatement(ctx),
     ...terminalStatement(ctx),
+    ...transactionModeStatement(ctx),
     ...underlineStatement(ctx),
     ...unixStatement(ctx),
     ...unloadStatement(ctx),
     ...unsubscribeStatement(ctx),
     ...upStatement(ctx),
     ...updateStatement(ctx),
+    ...useStatement(ctx),
     ...usingStatement(ctx),
     ...undoStatement(ctx),
     ...validateStatement(ctx),

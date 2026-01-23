@@ -1,0 +1,16 @@
+================================================================================
+LOAD-PICTURE
+================================================================================
+
+LOAD-PICTURE.
+LOAD-PICTURE "logo.bmp".
+LOAD-PICTURE cImagePath.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (load_picture_statement)
+  (load_picture_statement
+    image: (string_literal))
+  (load_picture_statement
+    image: (identifier)))

@@ -1,0 +1,16 @@
+================================================================================
+FIX-CODEPAGE
+================================================================================
+
+FIX-CODEPAGE(mData) = "UTF-8".
+FIX-CODEPAGE(mRaw) = cCodepage.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (fix_codepage_statement
+    target: (identifier)
+    codepage: (string_literal))
+  (fix_codepage_statement
+    target: (identifier)
+    codepage: (identifier)))

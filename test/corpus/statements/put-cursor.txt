@@ -1,0 +1,24 @@
+================================================================================
+PUT CURSOR
+================================================================================
+
+PUT CURSOR OFF.
+PUT CURSOR ROW 5.
+PUT CURSOR COLUMN 10.
+PUT CURSOR ROW 5 COLUMN 10.
+PUT CURSOR ROW iRow COLUMN iCol.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (put_cursor_statement)
+  (put_cursor_statement
+    row: (number_literal))
+  (put_cursor_statement
+    column: (number_literal))
+  (put_cursor_statement
+    row: (number_literal)
+    column: (number_literal))
+  (put_cursor_statement
+    row: (identifier)
+    column: (identifier)))

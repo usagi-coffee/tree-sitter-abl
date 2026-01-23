@@ -1,0 +1,21 @@
+================================================================================
+PROPATH
+================================================================================
+
+PROPATH = "/app/src".
+PROPATH += "/app/lib".
+PROPATH = cPath + "," + cOtherPath.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (propath_statement
+    value: (string_literal))
+  (propath_statement
+    value: (string_literal))
+  (propath_statement
+    value: (binary_expression
+      (binary_expression
+        (identifier)
+        (string_literal))
+      (identifier))))

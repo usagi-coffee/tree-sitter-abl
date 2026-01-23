@@ -1,0 +1,26 @@
+================================================================================
+FINALLY
+================================================================================
+
+FINALLY:
+  MESSAGE "Cleanup".
+END.
+
+FINALLY:
+  DELETE OBJECT hBuffer.
+  DELETE OBJECT hQuery.
+END FINALLY.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (finally_statement
+    (body
+      (message_statement
+        (string_literal))))
+  (finally_statement
+    (body
+      (delete_object_statement
+        name: (identifier))
+      (delete_object_statement
+        name: (identifier)))))

@@ -5,6 +5,7 @@ PUT
 PUT UNFORMATTED "# " tFcMessages.tcFcMessage SKIP.
 PUT STREAM outStream "ok" FORMAT "x(4)" AT 10 SPACE(2) SKIP(1).
 PUT CONTROL CHR(27) "c".
+PUT UNFORMATTED x format("9999-99-99") ';'.
 
 --------------------------------------------------------------------------------
 
@@ -19,7 +20,8 @@ PUT CONTROL CHR(27) "c".
     (stream_clause
       name: (identifier))
     value: (string_literal)
-    format: (string_literal)
+    (format_clause
+      format: (string_literal))
     position: (number_literal)
     (space
       count: (number_literal))
@@ -31,4 +33,9 @@ PUT CONTROL CHR(27) "c".
       (argument_list
         (argument
           value: (number_literal))))
-    control: (string_literal)))
+    control: (string_literal))
+  (put_statement
+    value: (identifier)
+    (format_clause
+      format: (string_literal))
+    value: (string_literal)))

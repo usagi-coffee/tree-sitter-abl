@@ -8,6 +8,8 @@ OUTPUT TO VALUE(outPath + "/data.xml") APPEND.
 OUTPUT TO PRINTER "HP" NUM-COPIES 2 LANDSCAPE PAGED PAGE-SIZE 60 NO-ECHO NO-MAP UNBUFFERED NO-CONVERT.
 OUTPUT THROUGH "crypt" mypass NO-ECHO.
 OUTPUT TO "file.log".
+OUTPUT TO VALUE(path) CONVERT SOURCE "UTF-8" TARGET "1250".
+OUTPUT TO "out.txt" CONVERT TARGET "1250".
 
 --------------------------------------------------------------------------------
 
@@ -32,4 +34,13 @@ OUTPUT TO "file.log".
     program: (string_literal)
     (identifier))
   (output_statement
-    file: (string_literal)))
+    file: (string_literal))
+  (output_statement
+    (identifier)
+    (convert_clause
+      source: (string_literal)
+      target: (string_literal)))
+  (output_statement
+    file: (string_literal)
+    (convert_clause
+      target: (string_literal))))

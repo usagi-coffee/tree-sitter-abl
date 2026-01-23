@@ -1,0 +1,24 @@
+================================================================================
+CLOSE STORED-PROCEDURE
+================================================================================
+
+CLOSE STORED-PROCEDURE hProc.
+CLOSE STORED-PROCEDURE hProc iStatus = PROC-STATUS.
+CLOSE STORED-PROCEDURE hProc WHERE PROC-HANDLE = hHandle.
+CLOSE STORED-PROCEDURE hProc iStatus = PROC-STATUS WHERE PROC-HANDLE = hHandle.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (close_stored_procedure_statement
+    procedure: (identifier))
+  (close_stored_procedure_statement
+    procedure: (identifier)
+    status_var: (identifier))
+  (close_stored_procedure_statement
+    procedure: (identifier)
+    handle: (identifier))
+  (close_stored_procedure_statement
+    procedure: (identifier)
+    status_var: (identifier)
+    handle: (identifier)))

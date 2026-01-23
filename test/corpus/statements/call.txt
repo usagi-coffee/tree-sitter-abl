@@ -1,0 +1,21 @@
+================================================================================
+CALL
+================================================================================
+
+CALL myRoutine.
+CALL processData "input.dat".
+CALL updateRecord iId cName dDate.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (call_statement
+    routine: (identifier))
+  (call_statement
+    routine: (identifier)
+    argument: (string_literal))
+  (call_statement
+    routine: (identifier)
+    argument: (identifier)
+    argument: (identifier)
+    argument: (identifier)))

@@ -55,7 +55,7 @@ module.exports = ({ kw, tkw }) => ({
       tkw("NO-MAP"),
       kw("PAGED"),
       alias($.__output_page_size_clause, $.page_size_clause),
-      kw("UNBUFFERED"),
+      tkw("UNBUFFERED"),
       alias($.__output_convert_clause, $.convert_clause),
     ),
   __output_through_option: ($) =>
@@ -66,17 +66,19 @@ module.exports = ({ kw, tkw }) => ({
       tkw("NO-MAP"),
       kw("PAGED"),
       alias($.__output_page_size_clause, $.page_size_clause),
-      kw("UNBUFFERED"),
+      tkw("UNBUFFERED"),
       alias($.__output_convert_clause, $.convert_clause),
     ),
   __output_convert_clause: ($) =>
-    seq(
-      choice(
-        tkw("NO-CONVERT"),
-        seq(
-          kw("CONVERT"),
-          optional(seq(kw("TARGET"), field("target", $.string_literal))),
-          optional(seq(kw("SOURCE"), field("source", $.string_literal))),
+    choice(
+      tkw("NO-CONVERT"),
+      seq(
+        kw("CONVERT"),
+        repeat(
+          choice(
+            seq(kw("TARGET"), field("target", $.string_literal)),
+            seq(kw("SOURCE"), field("source", $.string_literal)),
+          ),
         ),
       ),
     ),
