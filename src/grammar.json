@@ -52817,10 +52817,6 @@
     [
       "__temp_table_static_modifier",
       "__variable_static_modifier"
-    ],
-    [
-      "event_definition",
-      "__on_override"
     ]
   ],
   "precedences": [],
