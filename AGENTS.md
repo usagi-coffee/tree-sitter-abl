@@ -54,7 +54,7 @@
 - Any new or modified syntax must be accompanied by extensive tests in `test/corpus`. Grammar changes without thorough corpus coverage are unacceptable, as tests are required to validate correctness, edge cases, and future regressions.
 - The grammar should avoid permissive or catch-all rules that allow invalid syntax to be parsed successfully.
 - ABL grammar is filled with optionals, be careful not to explode `tree-sitter`'s `STATE_COUNT`.
-- - Always check `STATE_COUNT` impacts and note the current `STATE_COUNT` cost for statements via trailing comments in `grammar/core/statements.js`.
+- Always check `STATE_COUNT` impacts and note the current `STATE_COUNT` cost for statements via leading comments in `grammar/core/statements.js`.
 - Do not remove tests just to satisfy test passing, just fix the underlying issue.
 - Remember to regenerate parser after `src/scanner.c` modifications before testing.
 - Strongly prefer using defined workflow commands for usual write/test iteration.
