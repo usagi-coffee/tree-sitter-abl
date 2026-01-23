@@ -1,17 +1,6 @@
 // Statement-related disambiguation plumbing
 
 module.exports = ({ tkw }) => ({
-  expression_statement: ($) =>
-    prec(
-      -1,
-      seq(
-        $._statement_expression,
-        optional(alias($.__expression_no_error, $.no_error)),
-        $._terminator,
-      ),
-    ),
-  __expression_no_error: ($) => tkw("NO-ERROR"),
-
   _statement: ($) =>
     choice(
       // Extras-like
@@ -164,13 +153,15 @@ module.exports = ({ tkw }) => ({
       $.compile_statement,
 
       // TODO: statements that are hard to integrate due to state explosion or bugs
-      // $.frame_definition // Completely broken
-      // $.choose_statement, // +~4893 states, exceeds STATE_COUNT limit
-      // $.browse_definition, // Too complex, exceeds state count
+      // $.browse_definition, // +~3500 states
+      // $.frame_definition, // +~3300 states
+      // $.choose_statement, // +~4893 states
       // $.system_dialog_get_file_statement, // +~60000 states, exceeds STATE_COUNT limit
-      // $.system_dialog_color_statement
-      // $.system_dialog_font_statement
-      // $.system_dialog_get_dir_statement,
-      // $.system_dialog_printer_setup_statement,
+      //
+      // These are not expensive but it's all or none at this point
+      // $.system_dialog_get_dir_statement // +~300 states
+      // $.system_dialog_color_statement, // +~100 states
+      // $.system_dialog_font_statement, // +~1200 states
+      // $.system_dialog_printer_setup_statement, // +~400 states
     ),
 });

@@ -117,6 +117,7 @@ const validateStatement = require("./validate");
 const varStatement = require("./var");
 const viewStatement = require("./view");
 const waitForStatement = require("./wait-for");
+const expressionStatement = require("./expression");
 
 module.exports = (ctx) => {
   return {
@@ -239,5 +240,6 @@ module.exports = (ctx) => {
     ...varStatement(ctx),
     ...viewStatement(ctx),
     ...waitForStatement(ctx),
+    ...expressionStatement(ctx),
   };
 };
