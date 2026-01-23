@@ -14,8 +14,11 @@ module.exports = ({ tkw }) => ({
 
   _statement: ($) =>
     choice(
+      // Extras-like
       $.preprocessor_directive,
       $.include,
+
+      // Definitions
       $.buffer_definition,
       $.temp_table_definition,
       $.work_table_definition,
@@ -37,8 +40,8 @@ module.exports = ({ tkw }) => ({
       $.event_definition,
       $.menu_definition,
       $.submenu_definition,
-      // $.frame_definition, // Too complex, causes conflicts
-      // $.browse_definition, // Too complex, exceeds state count
+
+      // ABL Statements
       $.enum_statement,
       $.var_statement,
       $.if_statement,
@@ -103,7 +106,6 @@ module.exports = ({ tkw }) => ({
       $.release_object_statement,
       $.case_statement,
       $.catch_statement,
-      // $.choose_statement, // +~4893 states, exceeds STATE_COUNT limit
       $.close_stored_procedure_statement,
       $.return_statement,
       $.save_cache_statement,
@@ -120,7 +122,6 @@ module.exports = ({ tkw }) => ({
       $.clear_statement,
       $.close_query_statement,
       $.color_statement,
-      $.compile_statement,
       $.connect_statement,
       $.dictionary_statement,
       $.disconnect_statement,
@@ -148,11 +149,6 @@ module.exports = ({ tkw }) => ({
       $.stop_statement,
       $.subscribe_statement,
       $.super_statement,
-      $.system_dialog_color_statement,
-      $.system_dialog_font_statement,
-      $.system_dialog_get_dir_statement,
-      // $.system_dialog_get_file_statement, // +~60000 states, exceeds STATE_COUNT limit
-      $.system_dialog_printer_setup_statement,
       $.terminal_statement,
       $.transaction_mode_statement,
       $.underline_statement,
@@ -165,5 +161,16 @@ module.exports = ({ tkw }) => ({
       $.view_statement,
       $.assignment_statement,
       $.expression_statement,
+      $.compile_statement,
+
+      // TODO: statements that are hard to integrate due to state explosion or bugs
+      // $.frame_definition // Completely broken
+      // $.choose_statement, // +~4893 states, exceeds STATE_COUNT limit
+      // $.browse_definition, // Too complex, exceeds state count
+      // $.system_dialog_get_file_statement, // +~60000 states, exceeds STATE_COUNT limit
+      // $.system_dialog_color_statement
+      // $.system_dialog_font_statement
+      // $.system_dialog_get_dir_statement,
+      // $.system_dialog_printer_setup_statement,
     ),
 });
