@@ -46606,38 +46606,59 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "PATTERN",
-                  "value": "LANDSCAPE",
-                  "flags": "i"
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SEQ",
+                  "members": [
+                    {
+                      "type": "ALIAS",
+                      "content": {
+                        "type": "TOKEN",
+                        "content": {
+                          "type": "PATTERN",
+                          "value": "LANDSCAPE",
+                          "flags": "i"
+                        }
+                      },
+                      "named": false,
+                      "value": "LANDSCAPE"
+                    },
+                    {
+                      "type": "IMMEDIATE_TOKEN",
+                      "content": {
+                        "type": "PATTERN",
+                        "value": "\\s+"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "SEQ",
+                  "members": [
+                    {
+                      "type": "ALIAS",
+                      "content": {
+                        "type": "TOKEN",
+                        "content": {
+                          "type": "PATTERN",
+                          "value": "PORTRAIT",
+                          "flags": "i"
+                        }
+                      },
+                      "named": false,
+                      "value": "PORTRAIT"
+                    },
+                    {
+                      "type": "IMMEDIATE_TOKEN",
+                      "content": {
+                        "type": "PATTERN",
+                        "value": "\\s+"
+                      }
+                    }
+                  ]
                 }
-              },
-              "named": false,
-              "value": "LANDSCAPE"
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "PATTERN",
-                  "value": "PORTRAIT",
-                  "flags": "i"
-                }
-              },
-              "named": false,
-              "value": "PORTRAIT"
+              ]
             },
             {
               "type": "BLANK"
@@ -52619,6 +52640,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "compile_statement"
+        },
+        {
+          "type": "SYMBOL",
           "name": "connect_statement"
         },
         {
@@ -52640,6 +52665,10 @@
         {
           "type": "SYMBOL",
           "name": "enable_statement"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "form_statement"
         },
         {
           "type": "SYMBOL",
@@ -52720,6 +52749,22 @@
         {
           "type": "SYMBOL",
           "name": "super_statement"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "system_dialog_color_statement"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "system_dialog_font_statement"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "system_dialog_get_dir_statement"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "system_dialog_printer_setup_statement"
         },
         {
           "type": "SYMBOL",
