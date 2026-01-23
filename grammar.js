@@ -3,7 +3,6 @@
 
 const core_accessors = require("./grammar/core/accessors");
 const core_expressions = require("./grammar/core/expressions");
-const core_definitions = require("./grammar/core/definitions");
 const core_operators = require("./grammar/core/operators");
 const core_statements = require("./grammar/core/statements");
 const core_extras = require("./grammar/core/extras");
@@ -118,7 +117,6 @@ module.exports = grammar({
 
       ...core_accessors(ctx),
       ...core_expressions(ctx),
-      ...core_definitions(ctx),
       ...core_extras(ctx),
       ...core_operators(ctx),
       ...core_statements(ctx),
