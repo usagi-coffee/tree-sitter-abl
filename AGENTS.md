@@ -25,9 +25,11 @@
 - Run tests (runs generate before tests):
   - `bun run test`
 - Parse a sample file (returns syntax tree; `tree-sitter test`):
-  - `bun run parse -- <file>`
+  - `bun run parse <file>`
+  - Example: `bun run parse example.p`
 - Parse a snippet (returns syntax tree):
-  - `bun run parse:snippet -- '<direct syntax>'`
+  - `bun run parse:snippet <direct syntax string>`
+  - Example: `bun run parse:snippet 'a = b + c.'`
 - Build native and wasm artifacts:
   - `bun run build`
   - `bun run build:wasm`
@@ -57,7 +59,7 @@
 - Always check `STATE_COUNT` impacts and note the current `STATE_COUNT` cost for statements via leading comments in `grammar/core/statements.js`.
 - Do not remove tests just to satisfy test passing, just fix the underlying issue.
 - Remember to regenerate parser after `src/scanner.c` modifications before testing.
-- Strongly prefer using defined workflow commands for usual write/test iteration.
+- Strongly prefer using defined workflow commands as they have helpers like returning `STATE_COUNT` after success.
 
 ## Notes
 
