@@ -7,7 +7,6 @@ const core_operators = require("./grammar/core/operators");
 const core_statements = require("./grammar/core/statements");
 const core_extras = require("./grammar/core/extras");
 
-const definitions = require("./grammar/definitions");
 const expressions = require("./grammar/expressions");
 const statements = require("./grammar/statements");
 
@@ -68,7 +67,6 @@ module.exports = grammar({
     return {
       source_file: ($) => repeat($._statement),
 
-      ...definitions(ctx),
       ...statements(ctx),
       ...expressions(ctx),
 

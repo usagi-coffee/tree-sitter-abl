@@ -4,12 +4,16 @@ const annotationStatement = require("./annotation");
 const accumulateStatement = require("./accumulate");
 const applyStatement = require("./apply");
 const bellStatement = require("./bell");
+const browseDefinition = require("./browse");
 const bufferCompareStatement = require("./buffer-compare");
 const bufferCopyStatement = require("./buffer-copy");
+const bufferDefinition = require("./buffer");
+const buttonDefinition = require("./button");
 const callStatement = require("./call");
 const caseStatement = require("./case");
 const catchStatement = require("./catch");
 const chooseStatement = require("./choose");
+const classDefinition = require("./class");
 const clearStatement = require("./clear");
 const closeQueryStatement = require("./close-query");
 const closeStoredProcedureStatement = require("./close-stored-procedure");
@@ -20,6 +24,7 @@ const copyLobStatement = require("./copy-lob");
 const createStatement = require("./create");
 const createSocketStatement = require("./create-socket");
 const convertStatement = require("./convert");
+const datasetDefinition = require("./dataset");
 const deleteStatement = require("./delete");
 const dictionaryStatement = require("./dictionary");
 const disableStatement = require("./disable");
@@ -34,25 +39,31 @@ const enumStatement = require("./enum");
 const emptyStatement = require("./empty");
 const emptyStatementStatement = require("./empty-statement");
 const errorScopeStatement = require("./error-scope");
+const eventDefinition = require("./event");
 const exportStatement = require("./export");
 const finallyStatement = require("./finally");
 const findStatement = require("./find");
 const fixCodepageStatement = require("./fix-codepage");
 const forStatement = require("./for");
 const formStatement = require("./form");
+const frameDefinition = require("./frame");
+const functionDefinition = require("./function");
 const getStatement = require("./get");
 const getKeyValueStatement = require("./get-key-value");
 const hideStatement = require("./hide");
 const ifStatement = require("./if");
+const imageDefinition = require("./image");
 const inputStatement = require("./input");
 const inputClearStatement = require("./input-clear");
 const inputOutputStatement = require("./input-output");
 const inputThroughStatement = require("./input-through");
 const importStatement = require("./import");
 const insertStatement = require("./insert");
+const interfaceDefinition = require("./interface");
 const leaveStatement = require("./leave");
 const loadStatement = require("./load");
 const loadPictureStatement = require("./load-picture");
+const menuDefinition = require("./menu");
 const messageStatement = require("./message");
 const nextStatement = require("./next");
 const nextPromptStatement = require("./next-prompt");
@@ -67,7 +78,9 @@ const osRenameStatement = require("./os-rename");
 const outputStatement = require("./output");
 const overlayStatement = require("./overlay");
 const pageStatement = require("./page");
+const parameterDefinition = require("./parameter");
 const pauseStatement = require("./pause");
+const procedureDefinition = require("./procedure");
 const propathStatement = require("./propath");
 const promsgsStatement = require("./promsgs");
 const preselectRules = require("./preselect");
@@ -78,9 +91,11 @@ const putStatement = require("./put");
 const putCursorStatement = require("./put-cursor");
 const putKeyValueStatement = require("./put-key-value");
 const putScreenStatement = require("./put-screen");
+const queryDefinition = require("./query");
 const quitStatement = require("./quit");
 const rawTransferStatement = require("./raw-transfer");
 const readkeyStatement = require("./readkey");
+const rectangleDefinition = require("./rectangle");
 const releaseStatement = require("./release");
 const releaseExternalStatement = require("./release-external");
 const releaseObjectStatement = require("./release-object");
@@ -99,9 +114,12 @@ const seekStatement = require("./seek");
 const showStatsStatement = require("./show-stats");
 const statusStatement = require("./status");
 const stopStatement = require("./stop");
+const streamDefinition = require("./stream");
+const submenuDefinition = require("./submenu");
 const subscribeStatement = require("./subscribe");
 const superStatement = require("./super");
 const systemDialogStatement = require("./system-dialog");
+const tempTableDefinition = require("./temp-table");
 const terminalStatement = require("./terminal");
 const transactionModeStatement = require("./transaction-mode");
 const underlineStatement = require("./underline");
@@ -114,6 +132,7 @@ const useStatement = require("./use");
 const usingStatement = require("./using");
 const undoStatement = require("./undo");
 const validateStatement = require("./validate");
+const variableDefinition = require("./variable");
 const varStatement = require("./var");
 const viewStatement = require("./view");
 const waitForStatement = require("./wait-for");
@@ -127,12 +146,16 @@ module.exports = (ctx) => {
     ...accumulateStatement(ctx),
     ...applyStatement(ctx),
     ...bellStatement(ctx),
+    ...browseDefinition(ctx),
     ...bufferCompareStatement(ctx),
     ...bufferCopyStatement(ctx),
+    ...bufferDefinition(ctx),
+    ...buttonDefinition(ctx),
     ...callStatement(ctx),
     ...caseStatement(ctx),
     ...catchStatement(ctx),
     ...chooseStatement(ctx),
+    ...classDefinition(ctx),
     ...clearStatement(ctx),
     ...closeQueryStatement(ctx),
     ...closeStoredProcedureStatement(ctx),
@@ -143,6 +166,7 @@ module.exports = (ctx) => {
     ...createStatement(ctx),
     ...createSocketStatement(ctx),
     ...convertStatement(ctx),
+    ...datasetDefinition(ctx),
     ...deleteStatement(ctx),
     ...dictionaryStatement(ctx),
     ...disableStatement(ctx),
@@ -157,25 +181,31 @@ module.exports = (ctx) => {
     ...emptyStatement(ctx),
     ...emptyStatementStatement(ctx),
     ...errorScopeStatement(ctx),
+    ...eventDefinition(ctx),
     ...exportStatement(ctx),
     ...finallyStatement(ctx),
     ...findStatement(ctx),
     ...fixCodepageStatement(ctx),
     ...forStatement(ctx),
     ...formStatement(ctx),
+    ...frameDefinition(ctx),
+    ...functionDefinition(ctx),
     ...getStatement(ctx),
     ...getKeyValueStatement(ctx),
     ...hideStatement(ctx),
     ...ifStatement(ctx),
+    ...imageDefinition(ctx),
     ...inputStatement(ctx),
     ...inputClearStatement(ctx),
     ...inputOutputStatement(ctx),
     ...inputThroughStatement(ctx),
     ...importStatement(ctx),
     ...insertStatement(ctx),
+    ...interfaceDefinition(ctx),
     ...leaveStatement(ctx),
     ...loadStatement(ctx),
     ...loadPictureStatement(ctx),
+    ...menuDefinition(ctx),
     ...messageStatement(ctx),
     ...nextStatement(ctx),
     ...nextPromptStatement(ctx),
@@ -190,7 +220,9 @@ module.exports = (ctx) => {
     ...outputStatement(ctx),
     ...overlayStatement(ctx),
     ...pageStatement(ctx),
+    ...parameterDefinition(ctx),
     ...pauseStatement(ctx),
+    ...procedureDefinition(ctx),
     ...propathStatement(ctx),
     ...promsgsStatement(ctx),
     ...preselectRules(ctx),
@@ -201,9 +233,11 @@ module.exports = (ctx) => {
     ...putCursorStatement(ctx),
     ...putKeyValueStatement(ctx),
     ...putScreenStatement(ctx),
+    ...queryDefinition(ctx),
     ...quitStatement(ctx),
     ...rawTransferStatement(ctx),
     ...readkeyStatement(ctx),
+    ...rectangleDefinition(ctx),
     ...releaseStatement(ctx),
     ...releaseExternalStatement(ctx),
     ...releaseObjectStatement(ctx),
@@ -222,9 +256,12 @@ module.exports = (ctx) => {
     ...showStatsStatement(ctx),
     ...statusStatement(ctx),
     ...stopStatement(ctx),
+    ...streamDefinition(ctx),
+    ...submenuDefinition(ctx),
     ...subscribeStatement(ctx),
     ...superStatement(ctx),
     ...systemDialogStatement(ctx),
+    ...tempTableDefinition(ctx),
     ...terminalStatement(ctx),
     ...transactionModeStatement(ctx),
     ...underlineStatement(ctx),
@@ -237,6 +274,7 @@ module.exports = (ctx) => {
     ...usingStatement(ctx),
     ...undoStatement(ctx),
     ...validateStatement(ctx),
+    ...variableDefinition(ctx),
     ...varStatement(ctx),
     ...viewStatement(ctx),
     ...waitForStatement(ctx),
