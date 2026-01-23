@@ -7,33 +7,6 @@ on:
   pull_request:
 
 jobs:
-  build:
-    if: >
-      !startsWith(github.event.head_commit.message, 'meta:')
-      && !startsWith(github.event.head_commit.message, 'agent:')
-      && !startsWith(github.event.head_commit.message, 'ci:')
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Git LFS pull
-        run: git lfs pull
-
-      - name: Setup Bun
-        uses: oven-sh/setup-bun@v2
-        with:
-          bun-version: latest
-
-      - name: Install dependencies
-        run: bun install
-
-      - name: Build native
-        run: bun run build
-
-      - name: Build WASM
-        run: bun run build:wasm
-
   test:
     if: >
       !startsWith(github.event.head_commit.message, 'meta:')
@@ -53,6 +26,9 @@ jobs:
 
       - name: Install dependencies
         run: bun install
+
+      - name: Build native
+        run: bun run build
 
       - name: Test
         run: bun run test
