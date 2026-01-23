@@ -1,10 +1,7 @@
-module.exports = ({ op }) => ({
+module.exports = ({ kw }) => ({
   dataset_reference: ($) =>
     seq(
-      op("DATASET"),
-      field(
-        "dataset",
-        choice($.object_access, $.qualified_name, $.identifier),
-      ),
+      kw("DATASET"),
+      field("dataset", choice($.object_access, $.qualified_name, $.identifier)),
     ),
 });

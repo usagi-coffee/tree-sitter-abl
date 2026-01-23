@@ -17,15 +17,15 @@ const PREC = {
 };
 
 // DO NOT CHANGE THESE TO USE PRECEDENCE
+// Keyword that requires whitespace after
 const kw = (word) =>
   seq(alias(token(new RegExp(word, "i")), word), token.immediate(/\s+/));
+// Token keyword that does not require whitespace
 const tkw = (word, aliasName = word) =>
   alias(token(new RegExp(word, "i")), aliasName);
-const op = (word) =>
-  seq(alias(token(new RegExp(word, "i")), word), token.immediate(/\s+/));
 
 // prettier-ignore
-const comparison_operators = [ "<>", ">", "<", ">=", "<=", op("BEGINS"), op("MATCHES"), op("EQ"), op("NE"), op("GT"), op("LT"), op("GE"), op("LE")];
+const comparison_operators = [ "<>", ">", "<", ">=", "<=", kw("BEGINS"), kw("MATCHES"), kw("EQ"), kw("NE"), kw("GT"), kw("LT"), kw("GE"), kw("LE")];
 
 module.exports = grammar({
   name: "abl",
@@ -64,7 +64,7 @@ module.exports = grammar({
   inline: ($) => [$.class_body_item],
 
   rules: (() => {
-    const ctx = { PREC, kw, tkw, op };
+    const ctx = { PREC, kw, tkw };
     return {
       source_file: ($) => repeat($._statement),
 
@@ -197,7 +197,7 @@ module.exports = grammar({
 
       // Opeartors
       assignment_operator: ($) => choice("=", "+=", "-=", "*=", "/="),
-      _logical_operator: ($) => choice(op("AND"), op("OR")),
+      _logical_operator: ($) => choice(kw("AND"), kw("OR")),
       _comparison_operator: ($) => choice("=", ...comparison_operators),
 
       // See _statement_expression in expressions.js - excludes `=` to disambiguate
@@ -219,7 +219,7 @@ module.exports = grammar({
       parenthesized_expression: ($) => seq("(", $._expression, ")"),
 
       unary_expression: ($) =>
-        prec(PREC.UNARY, seq(choice("+", "-", op("NOT")), $._expression)),
+        prec(PREC.UNARY, seq(choice("+", "-", kw("NOT")), $._expression)),
       binary_expression: ($) =>
         binary_expression($, $._expression, $._comparison_operator),
 
@@ -291,7 +291,7 @@ function binary_expression($, expression, comparison_operator) {
   return choice(
     prec.left(
       PREC.MULT,
-      seq(expression, choice("*", "/", op("MOD"), op("MODULO")), expression),
+      seq(expression, choice("*", "/", kw("MOD"), kw("MODULO")), expression),
     ),
     prec.left(PREC.ADD, seq(expression, choice("+", "-"), expression)),
     prec.left(PREC.COMPARE, seq(expression, comparison_operator, expression)),

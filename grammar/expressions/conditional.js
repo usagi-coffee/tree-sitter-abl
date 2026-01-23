@@ -1,11 +1,11 @@
-module.exports = ({ op }) => ({
+module.exports = ({ kw }) => ({
   conditional_expression: ($) =>
     seq(
-      op("IF"),
+      kw("IF"),
       $._expression,
-      op("THEN"),
+      kw("THEN"),
       $._expression,
-      op("ELSE"),
+      kw("ELSE"),
       $._expression,
     ),
 });

@@ -1,20 +1,19 @@
-module.exports = ({ op, tkw }) => ({
-  can_find_expression: ($) =>
-    seq(tkw("CAN-FIND"), "(", $.record_query, ")"),
+module.exports = ({ kw, tkw }) => ({
+  can_find_expression: ($) => seq(tkw("CAN-FIND"), "(", $.record_query, ")"),
 
   record_query: ($) =>
     prec.right(
       seq(
-        optional(choice(op("FIRST"), op("LAST"))),
+        optional(choice(kw("FIRST"), kw("LAST"))),
         field("table", $.__record_query_record_name),
         alias($.__record_query_where_clause, $.where_clause),
         optional(alias($.__record_query_use_index, $.use_index)),
       ),
     ),
 
-  __record_query_where_clause: ($) => seq(op("WHERE"), $._expression),
+  __record_query_where_clause: ($) => seq(kw("WHERE"), $._expression),
   __record_query_use_index: ($) =>
-    seq(op("USE-INDEX"), field("index", $.__record_query_index_name)),
+    seq(kw("USE-INDEX"), field("index", $.__record_query_index_name)),
 
   __record_query_record_name: ($) => choice($.identifier, $.qualified_name),
   __record_query_index_name: ($) => choice($.identifier, $.qualified_name),
