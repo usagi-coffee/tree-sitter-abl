@@ -39,7 +39,12 @@ module.exports = grammar({
     $._escaped_string,
     $.block_comment,
   ],
-  extras: ($) => [/\s/, $.comment, $.include_extra, $.constant_extra],
+  extras: ($) => [
+    /[\s\f\uFEFF\u2060\u200B]|\\\r?\n/,
+    $.comment,
+    $.include_extra,
+    $.constant_extra,
+  ],
   word: ($) => $.identifier,
   conflicts: ($) => [
     [$._primary_expression, $.function_call],
@@ -92,7 +97,7 @@ module.exports = grammar({
           $.qualified_name,
           $.object_access,
           $.safe_object_access,
-          $.scoped_name,
+          $.scoped_name
         ),
 
       // Assignabless
@@ -103,7 +108,7 @@ module.exports = grammar({
           $.object_access,
           $.safe_object_access,
           $.array_access,
-          $.function_call,
+          $.function_call
         ),
 
       // Identifiers
