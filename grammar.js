@@ -42,16 +42,16 @@ module.exports = grammar({
   extras: ($) => [
     /[\s\f\uFEFF\u2060\u200B]|\\\r?\n/,
     $.comment,
+    // FIXME: source of trailing whitespace parsing bug
     $.include_extra,
     $.constant_extra,
   ],
   word: ($) => $.identifier,
   conflicts: ($) => [
-    [$._primary_expression, $.function_call],
     [$._statement, $.if_statement],
-    [$._primary_expression, $._assignable],
     [$._expression, $._statement_expression],
-    // Definitions
+    [$._primary_expression, $.function_call],
+    [$._primary_expression, $._assignable],
     [
       $.__buffer_access_modifier,
       $.__query_access_modifier,
@@ -149,12 +149,7 @@ module.exports = grammar({
       // Array
       array_initializer: ($) => seq("[", optional($._expression_list), "]"),
       _array_target: ($) =>
-        choice(
-          $.identifier,
-          $.qualified_name,
-          $.object_access,
-          $.scoped_name,
-        ),
+        choice($.identifier, $.qualified_name, $.object_access, $.scoped_name),
 
       array_access: ($) =>
         seq(
