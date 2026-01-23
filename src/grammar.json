@@ -50533,17 +50533,29 @@
               }
             },
             {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "PATTERN",
-                  "value": "FOR",
-                  "flags": "i"
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "TOKEN",
+                    "content": {
+                      "type": "PATTERN",
+                      "value": "FOR",
+                      "flags": "i"
+                    }
+                  },
+                  "named": false,
+                  "value": "FOR"
+                },
+                {
+                  "type": "IMMEDIATE_TOKEN",
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "\\s+"
+                  }
                 }
-              },
-              "named": false,
-              "value": "FOR"
+              ]
             },
             {
               "type": "FIELD",

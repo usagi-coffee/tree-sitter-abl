@@ -1,6 +1,6 @@
 // Accessors
 
-module.exports = ({ tkw }) => ({
+module.exports = ({ kw, tkw }) => ({
   object_access: ($) =>
     prec(
       1,
@@ -69,7 +69,7 @@ module.exports = ({ tkw }) => ({
       $._expression_list,
       seq(
         field("start", $._expression),
-        tkw("FOR"),
+        kw("FOR"),
         field("count", $._expression),
       ),
     ),
@@ -80,11 +80,7 @@ module.exports = ({ tkw }) => ({
       seq(
         field(
           "left",
-          choice(
-            $.function_call,
-            $.parenthesized_expression,
-            $.new_expression,
-          ),
+          choice($.function_call, $.parenthesized_expression, $.new_expression),
         ),
         repeat1(seq($._namecolon, field("right", $.identifier))),
       ),
