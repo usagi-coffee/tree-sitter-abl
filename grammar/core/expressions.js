@@ -19,7 +19,6 @@ module.exports = (ctx) => {
         $.dataset_reference,
         $.function_call,
         $.array_access,
-        $.safe_object_access,
         $.scoped_name,
         $.qualified_name,
         $.object_access,

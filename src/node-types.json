@@ -103,10 +103,6 @@
             "named": true
           },
           {
-            "type": "safe_object_access",
-            "named": true
-          },
-          {
             "type": "scoped_name",
             "named": true
           },
@@ -276,10 +272,6 @@
             "named": true
           },
           {
-            "type": "safe_object_access",
-            "named": true
-          },
-          {
             "type": "scoped_name",
             "named": true
           },
@@ -389,10 +381,6 @@
           },
           {
             "type": "qualified_name",
-            "named": true
-          },
-          {
-            "type": "safe_object_access",
             "named": true
           },
           {
@@ -582,10 +570,6 @@
             "named": true
           },
           {
-            "type": "safe_object_access",
-            "named": true
-          },
-          {
             "type": "scoped_name",
             "named": true
           },
@@ -681,10 +665,6 @@
           },
           {
             "type": "qualified_name",
-            "named": true
-          },
-          {
-            "type": "safe_object_access",
             "named": true
           },
           {
@@ -792,10 +772,6 @@
             "named": true
           },
           {
-            "type": "safe_object_access",
-            "named": true
-          },
-          {
             "type": "scoped_name",
             "named": true
           },
@@ -844,10 +820,6 @@
           },
           {
             "type": "qualified_name",
-            "named": true
-          },
-          {
-            "type": "safe_object_access",
             "named": true
           },
           {
@@ -938,10 +910,6 @@
           },
           {
             "type": "qualified_name",
-            "named": true
-          },
-          {
-            "type": "safe_object_access",
             "named": true
           },
           {
@@ -1043,10 +1011,6 @@
             "named": true
           },
           {
-            "type": "safe_object_access",
-            "named": true
-          },
-          {
             "type": "scoped_name",
             "named": true
           },
@@ -1143,10 +1107,6 @@
         },
         {
           "type": "qualified_name",
-          "named": true
-        },
-        {
-          "type": "safe_object_access",
           "named": true
         },
         {
@@ -1253,10 +1213,6 @@
           "named": true
         },
         {
-          "type": "safe_object_access",
-          "named": true
-        },
-        {
           "type": "scoped_name",
           "named": true
         },
@@ -1297,10 +1253,6 @@
           },
           {
             "type": "qualified_name",
-            "named": true
-          },
-          {
-            "type": "safe_object_access",
             "named": true
           }
         ]
@@ -1390,10 +1342,6 @@
             "named": true
           },
           {
-            "type": "safe_object_access",
-            "named": true
-          },
-          {
             "type": "scoped_name",
             "named": true
           },
@@ -1469,10 +1417,6 @@
           },
           {
             "type": "qualified_name",
-            "named": true
-          },
-          {
-            "type": "safe_object_access",
             "named": true
           }
         ]
@@ -1569,10 +1513,6 @@
           },
           {
             "type": "qualified_name",
-            "named": true
-          },
-          {
-            "type": "safe_object_access",
             "named": true
           },
           {
@@ -1739,10 +1679,6 @@
           "named": true
         },
         {
-          "type": "safe_object_access",
-          "named": true
-        },
-        {
           "type": "scoped_name",
           "named": true
         },
@@ -1846,10 +1782,6 @@
           "named": true
         },
         {
-          "type": "safe_object_access",
-          "named": true
-        },
-        {
           "type": "scoped_name",
           "named": true
         },
@@ -1950,10 +1882,6 @@
         },
         {
           "type": "qualified_name",
-          "named": true
-        },
-        {
-          "type": "safe_object_access",
           "named": true
         },
         {
@@ -2648,10 +2576,6 @@
           "named": true
         },
         {
-          "type": "safe_object_access",
-          "named": true
-        },
-        {
           "type": "scoped_name",
           "named": true
         },
@@ -2769,10 +2693,6 @@
             "named": true
           },
           {
-            "type": "safe_object_access",
-            "named": true
-          },
-          {
             "type": "scoped_name",
             "named": true
           },
@@ -2868,10 +2788,6 @@
           },
           {
             "type": "qualified_name",
-            "named": true
-          },
-          {
-            "type": "safe_object_access",
             "named": true
           },
           {
@@ -3165,10 +3081,6 @@
             "named": true
           },
           {
-            "type": "safe_object_access",
-            "named": true
-          },
-          {
             "type": "scoped_name",
             "named": true
           },
@@ -3264,10 +3176,6 @@
           },
           {
             "type": "qualified_name",
-            "named": true
-          },
-          {
-            "type": "safe_object_access",
             "named": true
           },
           {
@@ -3389,10 +3297,6 @@
             "named": true
           },
           {
-            "type": "safe_object_access",
-            "named": true
-          },
-          {
             "type": "scoped_name",
             "named": true
           },
@@ -3489,10 +3393,6 @@
         },
         {
           "type": "qualified_name",
-          "named": true
-        },
-        {
-          "type": "safe_object_access",
           "named": true
         },
         {
@@ -3604,10 +3504,6 @@
             "named": true
           },
           {
-            "type": "safe_object_access",
-            "named": true
-          },
-          {
             "type": "scoped_name",
             "named": true
           },
@@ -3703,10 +3599,6 @@
           },
           {
             "type": "qualified_name",
-            "named": true
-          },
-          {
-            "type": "safe_object_access",
             "named": true
           },
           {
@@ -3806,10 +3698,6 @@
         },
         {
           "type": "qualified_name",
-          "named": true
-        },
-        {
-          "type": "safe_object_access",
           "named": true
         },
         {
@@ -3913,10 +3801,6 @@
           },
           {
             "type": "qualified_name",
-            "named": true
-          },
-          {
-            "type": "safe_object_access",
             "named": true
           },
           {
@@ -4188,10 +4072,6 @@
           "named": true
         },
         {
-          "type": "safe_object_access",
-          "named": true
-        },
-        {
           "type": "scoped_name",
           "named": true
         },
@@ -4300,10 +4180,6 @@
         },
         {
           "type": "qualified_name",
-          "named": true
-        },
-        {
-          "type": "safe_object_access",
           "named": true
         },
         {
@@ -4652,10 +4528,6 @@
             "named": true
           },
           {
-            "type": "safe_object_access",
-            "named": true
-          },
-          {
             "type": "scoped_name",
             "named": true
           },
@@ -4754,10 +4626,6 @@
             "named": true
           },
           {
-            "type": "safe_object_access",
-            "named": true
-          },
-          {
             "type": "scoped_name",
             "named": true
           },
@@ -4853,10 +4721,6 @@
           },
           {
             "type": "qualified_name",
-            "named": true
-          },
-          {
-            "type": "safe_object_access",
             "named": true
           },
           {
@@ -4964,10 +4828,6 @@
             "named": true
           },
           {
-            "type": "safe_object_access",
-            "named": true
-          },
-          {
             "type": "scoped_name",
             "named": true
           },
@@ -5066,10 +4926,6 @@
             "named": true
           },
           {
-            "type": "safe_object_access",
-            "named": true
-          },
-          {
             "type": "scoped_name",
             "named": true
           },
@@ -5165,10 +5021,6 @@
           },
           {
             "type": "qualified_name",
-            "named": true
-          },
-          {
-            "type": "safe_object_access",
             "named": true
           },
           {
@@ -5273,10 +5125,6 @@
           },
           {
             "type": "qualified_name",
-            "named": true
-          },
-          {
-            "type": "safe_object_access",
             "named": true
           },
           {
@@ -5394,10 +5242,6 @@
             "named": true
           },
           {
-            "type": "safe_object_access",
-            "named": true
-          },
-          {
             "type": "scoped_name",
             "named": true
           },
@@ -5512,10 +5356,6 @@
             "named": true
           },
           {
-            "type": "safe_object_access",
-            "named": true
-          },
-          {
             "type": "scoped_name",
             "named": true
           },
@@ -5614,10 +5454,6 @@
             "named": true
           },
           {
-            "type": "safe_object_access",
-            "named": true
-          },
-          {
             "type": "scoped_name",
             "named": true
           },
@@ -5713,10 +5549,6 @@
           },
           {
             "type": "qualified_name",
-            "named": true
-          },
-          {
-            "type": "safe_object_access",
             "named": true
           },
           {
@@ -6439,10 +6271,6 @@
             "named": true
           },
           {
-            "type": "safe_object_access",
-            "named": true
-          },
-          {
             "type": "scoped_name",
             "named": true
           },
@@ -6559,10 +6387,6 @@
             "named": true
           },
           {
-            "type": "safe_object_access",
-            "named": true
-          },
-          {
             "type": "scoped_name",
             "named": true
           },
@@ -6660,10 +6484,6 @@
           },
           {
             "type": "qualified_name",
-            "named": true
-          },
-          {
-            "type": "safe_object_access",
             "named": true
           },
           {
@@ -6765,10 +6585,6 @@
             "named": true
           },
           {
-            "type": "safe_object_access",
-            "named": true
-          },
-          {
             "type": "scoped_name",
             "named": true
           },
@@ -6864,10 +6680,6 @@
           },
           {
             "type": "qualified_name",
-            "named": true
-          },
-          {
-            "type": "safe_object_access",
             "named": true
           },
           {
@@ -6969,10 +6781,6 @@
             "named": true
           },
           {
-            "type": "safe_object_access",
-            "named": true
-          },
-          {
             "type": "scoped_name",
             "named": true
           },
@@ -7068,10 +6876,6 @@
           },
           {
             "type": "qualified_name",
-            "named": true
-          },
-          {
-            "type": "safe_object_access",
             "named": true
           },
           {
@@ -7173,10 +6977,6 @@
             "named": true
           },
           {
-            "type": "safe_object_access",
-            "named": true
-          },
-          {
             "type": "scoped_name",
             "named": true
           },
@@ -7272,10 +7072,6 @@
           },
           {
             "type": "qualified_name",
-            "named": true
-          },
-          {
-            "type": "safe_object_access",
             "named": true
           },
           {
@@ -7377,10 +7173,6 @@
             "named": true
           },
           {
-            "type": "safe_object_access",
-            "named": true
-          },
-          {
             "type": "scoped_name",
             "named": true
           },
@@ -7476,10 +7268,6 @@
           },
           {
             "type": "qualified_name",
-            "named": true
-          },
-          {
-            "type": "safe_object_access",
             "named": true
           },
           {
@@ -7581,10 +7369,6 @@
             "named": true
           },
           {
-            "type": "safe_object_access",
-            "named": true
-          },
-          {
             "type": "scoped_name",
             "named": true
           },
@@ -7680,10 +7464,6 @@
           },
           {
             "type": "qualified_name",
-            "named": true
-          },
-          {
-            "type": "safe_object_access",
             "named": true
           },
           {
@@ -7783,10 +7563,6 @@
         },
         {
           "type": "qualified_name",
-          "named": true
-        },
-        {
-          "type": "safe_object_access",
           "named": true
         },
         {
@@ -7890,10 +7666,6 @@
           },
           {
             "type": "qualified_name",
-            "named": true
-          },
-          {
-            "type": "safe_object_access",
             "named": true
           },
           {
@@ -8011,10 +7783,6 @@
           "named": true
         },
         {
-          "type": "safe_object_access",
-          "named": true
-        },
-        {
           "type": "scoped_name",
           "named": true
         },
@@ -8118,10 +7886,6 @@
             "named": true
           },
           {
-            "type": "safe_object_access",
-            "named": true
-          },
-          {
             "type": "scoped_name",
             "named": true
           },
@@ -8217,10 +7981,6 @@
           },
           {
             "type": "qualified_name",
-            "named": true
-          },
-          {
-            "type": "safe_object_access",
             "named": true
           },
           {
@@ -8956,10 +8716,6 @@
           "named": true
         },
         {
-          "type": "safe_object_access",
-          "named": true
-        },
-        {
           "type": "scoped_name",
           "named": true
         },
@@ -9126,10 +8882,6 @@
         },
         {
           "type": "qualified_name",
-          "named": true
-        },
-        {
-          "type": "safe_object_access",
           "named": true
         },
         {
@@ -9322,10 +9074,6 @@
           "named": true
         },
         {
-          "type": "safe_object_access",
-          "named": true
-        },
-        {
           "type": "scoped_name",
           "named": true
         },
@@ -9426,10 +9174,6 @@
         },
         {
           "type": "qualified_name",
-          "named": true
-        },
-        {
-          "type": "safe_object_access",
           "named": true
         },
         {
@@ -10225,10 +9969,6 @@
             "named": true
           },
           {
-            "type": "safe_object_access",
-            "named": true
-          },
-          {
             "type": "scoped_name",
             "named": true
           },
@@ -10324,10 +10064,6 @@
           },
           {
             "type": "qualified_name",
-            "named": true
-          },
-          {
-            "type": "safe_object_access",
             "named": true
           },
           {
@@ -10499,10 +10235,6 @@
             "named": true
           },
           {
-            "type": "safe_object_access",
-            "named": true
-          },
-          {
             "type": "scoped_name",
             "named": true
           },
@@ -10611,10 +10343,6 @@
           "named": true
         },
         {
-          "type": "safe_object_access",
-          "named": true
-        },
-        {
           "type": "scoped_name",
           "named": true
         },
@@ -10715,10 +10443,6 @@
           },
           {
             "type": "qualified_name",
-            "named": true
-          },
-          {
-            "type": "safe_object_access",
             "named": true
           },
           {
@@ -10830,10 +10554,6 @@
             "named": true
           },
           {
-            "type": "safe_object_access",
-            "named": true
-          },
-          {
             "type": "scoped_name",
             "named": true
           },
@@ -10929,10 +10649,6 @@
           },
           {
             "type": "qualified_name",
-            "named": true
-          },
-          {
-            "type": "safe_object_access",
             "named": true
           },
           {
@@ -11065,10 +10781,6 @@
           "named": true
         },
         {
-          "type": "safe_object_access",
-          "named": true
-        },
-        {
           "type": "scoped_name",
           "named": true
         },
@@ -11169,10 +10881,6 @@
           },
           {
             "type": "qualified_name",
-            "named": true
-          },
-          {
-            "type": "safe_object_access",
             "named": true
           },
           {
@@ -11277,10 +10985,6 @@
           },
           {
             "type": "qualified_name",
-            "named": true
-          },
-          {
-            "type": "safe_object_access",
             "named": true
           },
           {
@@ -11407,10 +11111,6 @@
           "named": true
         },
         {
-          "type": "safe_object_access",
-          "named": true
-        },
-        {
           "type": "scoped_name",
           "named": true
         },
@@ -11511,10 +11211,6 @@
         },
         {
           "type": "qualified_name",
-          "named": true
-        },
-        {
-          "type": "safe_object_access",
           "named": true
         },
         {
@@ -11642,10 +11338,6 @@
             "named": true
           },
           {
-            "type": "safe_object_access",
-            "named": true
-          },
-          {
             "type": "scoped_name",
             "named": true
           },
@@ -11741,10 +11433,6 @@
           },
           {
             "type": "qualified_name",
-            "named": true
-          },
-          {
-            "type": "safe_object_access",
             "named": true
           },
           {
@@ -11859,10 +11547,6 @@
           },
           {
             "type": "qualified_name",
-            "named": true
-          },
-          {
-            "type": "safe_object_access",
             "named": true
           },
           {
@@ -12147,10 +11831,6 @@
           "named": true
         },
         {
-          "type": "safe_object_access",
-          "named": true
-        },
-        {
           "type": "scoped_name",
           "named": true
         },
@@ -12263,10 +11943,6 @@
         },
         {
           "type": "qualified_name",
-          "named": true
-        },
-        {
-          "type": "safe_object_access",
           "named": true
         },
         {
@@ -12396,10 +12072,6 @@
           "named": true
         },
         {
-          "type": "safe_object_access",
-          "named": true
-        },
-        {
           "type": "scoped_name",
           "named": true
         },
@@ -12500,10 +12172,6 @@
         },
         {
           "type": "qualified_name",
-          "named": true
-        },
-        {
-          "type": "safe_object_access",
           "named": true
         },
         {
@@ -12626,10 +12294,6 @@
         },
         {
           "type": "qualified_name",
-          "named": true
-        },
-        {
-          "type": "safe_object_access",
           "named": true
         },
         {
@@ -12813,10 +12477,6 @@
             "named": true
           },
           {
-            "type": "safe_object_access",
-            "named": true
-          },
-          {
             "type": "scoped_name",
             "named": true
           },
@@ -12912,10 +12572,6 @@
           },
           {
             "type": "qualified_name",
-            "named": true
-          },
-          {
-            "type": "safe_object_access",
             "named": true
           },
           {
@@ -13023,10 +12679,6 @@
           "named": true
         },
         {
-          "type": "safe_object_access",
-          "named": true
-        },
-        {
           "type": "scoped_name",
           "named": true
         },
@@ -13127,10 +12779,6 @@
         },
         {
           "type": "qualified_name",
-          "named": true
-        },
-        {
-          "type": "safe_object_access",
           "named": true
         },
         {
@@ -13380,10 +13028,6 @@
             "named": true
           },
           {
-            "type": "safe_object_access",
-            "named": true
-          },
-          {
             "type": "scoped_name",
             "named": true
           },
@@ -13482,10 +13126,6 @@
             "named": true
           },
           {
-            "type": "safe_object_access",
-            "named": true
-          },
-          {
             "type": "scoped_name",
             "named": true
           },
@@ -13581,10 +13221,6 @@
           },
           {
             "type": "qualified_name",
-            "named": true
-          },
-          {
-            "type": "safe_object_access",
             "named": true
           },
           {
@@ -13702,10 +13338,6 @@
             "named": true
           },
           {
-            "type": "safe_object_access",
-            "named": true
-          },
-          {
             "type": "scoped_name",
             "named": true
           },
@@ -13801,10 +13433,6 @@
           },
           {
             "type": "qualified_name",
-            "named": true
-          },
-          {
-            "type": "safe_object_access",
             "named": true
           },
           {
@@ -13924,10 +13552,6 @@
         },
         {
           "type": "qualified_name",
-          "named": true
-        },
-        {
-          "type": "safe_object_access",
           "named": true
         },
         {
@@ -14926,10 +14550,6 @@
             "named": true
           },
           {
-            "type": "safe_object_access",
-            "named": true
-          },
-          {
             "type": "scoped_name",
             "named": true
           },
@@ -15028,10 +14648,6 @@
             "named": true
           },
           {
-            "type": "safe_object_access",
-            "named": true
-          },
-          {
             "type": "scoped_name",
             "named": true
           },
@@ -15127,10 +14743,6 @@
           },
           {
             "type": "qualified_name",
-            "named": true
-          },
-          {
-            "type": "safe_object_access",
             "named": true
           },
           {
@@ -15320,10 +14932,6 @@
           },
           {
             "type": "qualified_name",
-            "named": true
-          },
-          {
-            "type": "safe_object_access",
             "named": true
           },
           {
@@ -16602,10 +16210,6 @@
           "named": true
         },
         {
-          "type": "safe_object_access",
-          "named": true
-        },
-        {
           "type": "scoped_name",
           "named": true
         },
@@ -16735,10 +16339,6 @@
         },
         {
           "type": "qualified_name",
-          "named": true
-        },
-        {
-          "type": "safe_object_access",
           "named": true
         },
         {
@@ -17118,10 +16718,6 @@
           "named": true
         },
         {
-          "type": "safe_object_access",
-          "named": true
-        },
-        {
           "type": "scoped_name",
           "named": true
         },
@@ -17263,10 +16859,6 @@
           "named": true
         },
         {
-          "type": "safe_object_access",
-          "named": true
-        },
-        {
           "type": "scoped_name",
           "named": true
         },
@@ -17375,10 +16967,6 @@
           },
           {
             "type": "qualified_name",
-            "named": true
-          },
-          {
-            "type": "safe_object_access",
             "named": true
           },
           {
@@ -17537,10 +17125,6 @@
           "named": true
         },
         {
-          "type": "safe_object_access",
-          "named": true
-        },
-        {
           "type": "scoped_name",
           "named": true
         },
@@ -17682,10 +17266,6 @@
         },
         {
           "type": "qualified_name",
-          "named": true
-        },
-        {
-          "type": "safe_object_access",
           "named": true
         },
         {
@@ -18038,10 +17618,6 @@
             "named": true
           },
           {
-            "type": "safe_object_access",
-            "named": true
-          },
-          {
             "type": "scoped_name",
             "named": true
           },
@@ -18146,10 +17722,6 @@
             "named": true
           },
           {
-            "type": "safe_object_access",
-            "named": true
-          },
-          {
             "type": "scoped_name",
             "named": true
           },
@@ -18248,10 +17820,6 @@
             "named": true
           },
           {
-            "type": "safe_object_access",
-            "named": true
-          },
-          {
             "type": "scoped_name",
             "named": true
           },
@@ -18347,10 +17915,6 @@
           },
           {
             "type": "qualified_name",
-            "named": true
-          },
-          {
-            "type": "safe_object_access",
             "named": true
           },
           {
@@ -18455,10 +18019,6 @@
         },
         {
           "type": "qualified_name",
-          "named": true
-        },
-        {
-          "type": "safe_object_access",
           "named": true
         },
         {
@@ -18709,10 +18269,6 @@
             "named": true
           },
           {
-            "type": "safe_object_access",
-            "named": true
-          },
-          {
             "type": "scoped_name",
             "named": true
           },
@@ -18813,10 +18369,6 @@
         },
         {
           "type": "qualified_name",
-          "named": true
-        },
-        {
-          "type": "safe_object_access",
           "named": true
         },
         {
@@ -19727,10 +19279,6 @@
           "named": true
         },
         {
-          "type": "safe_object_access",
-          "named": true
-        },
-        {
           "type": "scoped_name",
           "named": true
         },
@@ -19869,10 +19417,6 @@
           },
           {
             "type": "qualified_name",
-            "named": true
-          },
-          {
-            "type": "safe_object_access",
             "named": true
           },
           {
@@ -20038,10 +19582,6 @@
         },
         {
           "type": "qualified_name",
-          "named": true
-        },
-        {
-          "type": "safe_object_access",
           "named": true
         },
         {
@@ -20242,10 +19782,6 @@
             "named": true
           },
           {
-            "type": "safe_object_access",
-            "named": true
-          },
-          {
             "type": "scoped_name",
             "named": true
           },
@@ -20371,10 +19907,6 @@
           },
           {
             "type": "qualified_name",
-            "named": true
-          },
-          {
-            "type": "safe_object_access",
             "named": true
           },
           {
@@ -20506,10 +20038,6 @@
             "named": true
           },
           {
-            "type": "safe_object_access",
-            "named": true
-          },
-          {
             "type": "scoped_name",
             "named": true
           },
@@ -20635,10 +20163,6 @@
           },
           {
             "type": "qualified_name",
-            "named": true
-          },
-          {
-            "type": "safe_object_access",
             "named": true
           },
           {
@@ -21388,10 +20912,6 @@
             "named": true
           },
           {
-            "type": "safe_object_access",
-            "named": true
-          },
-          {
             "type": "scoped_name",
             "named": true
           },
@@ -21520,10 +21040,6 @@
             "named": true
           },
           {
-            "type": "safe_object_access",
-            "named": true
-          },
-          {
             "type": "scoped_name",
             "named": true
           },
@@ -21645,10 +21161,6 @@
           },
           {
             "type": "qualified_name",
-            "named": true
-          },
-          {
-            "type": "safe_object_access",
             "named": true
           },
           {
@@ -21784,10 +21296,6 @@
             "named": true
           },
           {
-            "type": "safe_object_access",
-            "named": true
-          },
-          {
             "type": "scoped_name",
             "named": true
           },
@@ -21883,10 +21391,6 @@
           },
           {
             "type": "qualified_name",
-            "named": true
-          },
-          {
-            "type": "safe_object_access",
             "named": true
           },
           {
@@ -21994,10 +21498,6 @@
           "named": true
         },
         {
-          "type": "safe_object_access",
-          "named": true
-        },
-        {
           "type": "scoped_name",
           "named": true
         },
@@ -22101,10 +21601,6 @@
             "named": true
           },
           {
-            "type": "safe_object_access",
-            "named": true
-          },
-          {
             "type": "scoped_name",
             "named": true
           },
@@ -22200,10 +21696,6 @@
           },
           {
             "type": "qualified_name",
-            "named": true
-          },
-          {
-            "type": "safe_object_access",
             "named": true
           },
           {
@@ -22311,10 +21803,6 @@
             "named": true
           },
           {
-            "type": "safe_object_access",
-            "named": true
-          },
-          {
             "type": "scoped_name",
             "named": true
           },
@@ -22416,10 +21904,6 @@
         },
         {
           "type": "qualified_name",
-          "named": true
-        },
-        {
-          "type": "safe_object_access",
           "named": true
         },
         {
@@ -22526,10 +22010,6 @@
             "named": true
           },
           {
-            "type": "safe_object_access",
-            "named": true
-          },
-          {
             "type": "scoped_name",
             "named": true
           },
@@ -22625,10 +22105,6 @@
           },
           {
             "type": "qualified_name",
-            "named": true
-          },
-          {
-            "type": "safe_object_access",
             "named": true
           },
           {
@@ -22817,10 +22293,6 @@
           "named": true
         },
         {
-          "type": "safe_object_access",
-          "named": true
-        },
-        {
           "type": "scoped_name",
           "named": true
         },
@@ -22932,10 +22404,6 @@
             "named": true
           },
           {
-            "type": "safe_object_access",
-            "named": true
-          },
-          {
             "type": "scoped_name",
             "named": true
           },
@@ -23034,10 +22502,6 @@
             "named": true
           },
           {
-            "type": "safe_object_access",
-            "named": true
-          },
-          {
             "type": "scoped_name",
             "named": true
           },
@@ -23133,10 +22597,6 @@
           },
           {
             "type": "qualified_name",
-            "named": true
-          },
-          {
-            "type": "safe_object_access",
             "named": true
           },
           {
@@ -23256,10 +22716,6 @@
             "named": true
           },
           {
-            "type": "safe_object_access",
-            "named": true
-          },
-          {
             "type": "scoped_name",
             "named": true
           },
@@ -23366,10 +22822,6 @@
         },
         {
           "type": "qualified_name",
-          "named": true
-        },
-        {
-          "type": "safe_object_access",
           "named": true
         },
         {
@@ -23631,10 +23083,6 @@
             "named": true
           },
           {
-            "type": "safe_object_access",
-            "named": true
-          },
-          {
             "type": "scoped_name",
             "named": true
           },
@@ -23736,10 +23184,6 @@
         },
         {
           "type": "qualified_name",
-          "named": true
-        },
-        {
-          "type": "safe_object_access",
           "named": true
         },
         {
@@ -23861,10 +23305,6 @@
             "named": true
           },
           {
-            "type": "safe_object_access",
-            "named": true
-          },
-          {
             "type": "scoped_name",
             "named": true
           },
@@ -23973,10 +23413,6 @@
             "named": true
           },
           {
-            "type": "safe_object_access",
-            "named": true
-          },
-          {
             "type": "scoped_name",
             "named": true
           },
@@ -24081,10 +23517,6 @@
           "named": true
         },
         {
-          "type": "safe_object_access",
-          "named": true
-        },
-        {
           "type": "scoped_name",
           "named": true
         },
@@ -24185,10 +23617,6 @@
         },
         {
           "type": "qualified_name",
-          "named": true
-        },
-        {
-          "type": "safe_object_access",
           "named": true
         },
         {
@@ -24973,10 +24401,6 @@
             "named": true
           },
           {
-            "type": "safe_object_access",
-            "named": true
-          },
-          {
             "type": "scoped_name",
             "named": true
           },
@@ -25072,10 +24496,6 @@
           },
           {
             "type": "qualified_name",
-            "named": true
-          },
-          {
-            "type": "safe_object_access",
             "named": true
           },
           {
@@ -25180,10 +24600,6 @@
           },
           {
             "type": "qualified_name",
-            "named": true
-          },
-          {
-            "type": "safe_object_access",
             "named": true
           },
           {
@@ -25313,10 +24729,6 @@
             "named": true
           },
           {
-            "type": "safe_object_access",
-            "named": true
-          },
-          {
             "type": "scoped_name",
             "named": true
           },
@@ -25418,10 +24830,6 @@
           },
           {
             "type": "qualified_name",
-            "named": true
-          },
-          {
-            "type": "safe_object_access",
             "named": true
           },
           {
@@ -26307,10 +25715,6 @@
             "named": true
           },
           {
-            "type": "safe_object_access",
-            "named": true
-          },
-          {
             "type": "scoped_name",
             "named": true
           },
@@ -26406,10 +25810,6 @@
           },
           {
             "type": "qualified_name",
-            "named": true
-          },
-          {
-            "type": "safe_object_access",
             "named": true
           },
           {
@@ -26527,10 +25927,6 @@
             "named": true
           },
           {
-            "type": "safe_object_access",
-            "named": true
-          },
-          {
             "type": "scoped_name",
             "named": true
           },
@@ -26626,10 +26022,6 @@
           },
           {
             "type": "qualified_name",
-            "named": true
-          },
-          {
-            "type": "safe_object_access",
             "named": true
           },
           {
@@ -26737,10 +26129,6 @@
             "named": true
           },
           {
-            "type": "safe_object_access",
-            "named": true
-          },
-          {
             "type": "scoped_name",
             "named": true
           },
@@ -26836,10 +26224,6 @@
           },
           {
             "type": "qualified_name",
-            "named": true
-          },
-          {
-            "type": "safe_object_access",
             "named": true
           },
           {
@@ -26941,10 +26325,6 @@
             "named": true
           },
           {
-            "type": "safe_object_access",
-            "named": true
-          },
-          {
             "type": "scoped_name",
             "named": true
           },
@@ -27040,10 +26420,6 @@
           },
           {
             "type": "qualified_name",
-            "named": true
-          },
-          {
-            "type": "safe_object_access",
             "named": true
           },
           {
@@ -27151,10 +26527,6 @@
             "named": true
           },
           {
-            "type": "safe_object_access",
-            "named": true
-          },
-          {
             "type": "scoped_name",
             "named": true
           },
@@ -27253,10 +26625,6 @@
             "named": true
           },
           {
-            "type": "safe_object_access",
-            "named": true
-          },
-          {
             "type": "scoped_name",
             "named": true
           },
@@ -27352,10 +26720,6 @@
           },
           {
             "type": "qualified_name",
-            "named": true
-          },
-          {
-            "type": "safe_object_access",
             "named": true
           },
           {
@@ -27473,10 +26837,6 @@
             "named": true
           },
           {
-            "type": "safe_object_access",
-            "named": true
-          },
-          {
             "type": "scoped_name",
             "named": true
           },
@@ -27575,10 +26935,6 @@
             "named": true
           },
           {
-            "type": "safe_object_access",
-            "named": true
-          },
-          {
             "type": "scoped_name",
             "named": true
           },
@@ -27674,10 +27030,6 @@
           },
           {
             "type": "qualified_name",
-            "named": true
-          },
-          {
-            "type": "safe_object_access",
             "named": true
           },
           {
@@ -27915,10 +27267,6 @@
           "named": true
         },
         {
-          "type": "safe_object_access",
-          "named": true
-        },
-        {
           "type": "scoped_name",
           "named": true
         },
@@ -28024,10 +27372,6 @@
           },
           {
             "type": "qualified_name",
-            "named": true
-          },
-          {
-            "type": "safe_object_access",
             "named": true
           },
           {
@@ -28139,10 +27483,6 @@
             "named": true
           },
           {
-            "type": "safe_object_access",
-            "named": true
-          },
-          {
             "type": "scoped_name",
             "named": true
           },
@@ -28249,10 +27589,6 @@
           },
           {
             "type": "qualified_name",
-            "named": true
-          },
-          {
-            "type": "safe_object_access",
             "named": true
           },
           {
@@ -28423,10 +27759,6 @@
           },
           {
             "type": "qualified_name",
-            "named": true
-          },
-          {
-            "type": "safe_object_access",
             "named": true
           },
           {
@@ -28694,10 +28026,6 @@
             "named": true
           },
           {
-            "type": "safe_object_access",
-            "named": true
-          },
-          {
             "type": "scoped_name",
             "named": true
           },
@@ -28849,10 +28177,6 @@
           "named": true
         },
         {
-          "type": "safe_object_access",
-          "named": true
-        },
-        {
           "type": "scoped_name",
           "named": true
         },
@@ -28953,10 +28277,6 @@
           },
           {
             "type": "qualified_name",
-            "named": true
-          },
-          {
-            "type": "safe_object_access",
             "named": true
           },
           {
@@ -29068,10 +28388,6 @@
             "named": true
           },
           {
-            "type": "safe_object_access",
-            "named": true
-          },
-          {
             "type": "scoped_name",
             "named": true
           },
@@ -29167,10 +28483,6 @@
           },
           {
             "type": "qualified_name",
-            "named": true
-          },
-          {
-            "type": "safe_object_access",
             "named": true
           },
           {
@@ -29272,10 +28584,6 @@
             "named": true
           },
           {
-            "type": "safe_object_access",
-            "named": true
-          },
-          {
             "type": "scoped_name",
             "named": true
           },
@@ -29371,10 +28679,6 @@
           },
           {
             "type": "qualified_name",
-            "named": true
-          },
-          {
-            "type": "safe_object_access",
             "named": true
           },
           {
@@ -29479,10 +28783,6 @@
         },
         {
           "type": "qualified_name",
-          "named": true
-        },
-        {
-          "type": "safe_object_access",
           "named": true
         },
         {
@@ -29638,10 +28938,6 @@
             "named": true
           },
           {
-            "type": "safe_object_access",
-            "named": true
-          },
-          {
             "type": "scoped_name",
             "named": true
           },
@@ -29754,10 +29050,6 @@
             "named": true
           },
           {
-            "type": "safe_object_access",
-            "named": true
-          },
-          {
             "type": "scoped_name",
             "named": true
           },
@@ -29856,10 +29148,6 @@
             "named": true
           },
           {
-            "type": "safe_object_access",
-            "named": true
-          },
-          {
             "type": "scoped_name",
             "named": true
           },
@@ -29883,32 +29171,6 @@
           "named": true
         }
       ]
-    }
-  },
-  {
-    "type": "safe_object_access",
-    "named": true,
-    "fields": {
-      "left": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "right": {
-        "multiple": true,
-        "required": true,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      }
     }
   },
   {
@@ -29997,10 +29259,6 @@
           },
           {
             "type": "qualified_name",
-            "named": true
-          },
-          {
-            "type": "safe_object_access",
             "named": true
           },
           {
@@ -30099,10 +29357,6 @@
           },
           {
             "type": "qualified_name",
-            "named": true
-          },
-          {
-            "type": "safe_object_access",
             "named": true
           },
           {
@@ -30207,10 +29461,6 @@
           },
           {
             "type": "qualified_name",
-            "named": true
-          },
-          {
-            "type": "safe_object_access",
             "named": true
           },
           {
@@ -30359,10 +29609,6 @@
             "named": true
           },
           {
-            "type": "safe_object_access",
-            "named": true
-          },
-          {
             "type": "scoped_name",
             "named": true
           },
@@ -30469,10 +29715,6 @@
         },
         {
           "type": "qualified_name",
-          "named": true
-        },
-        {
-          "type": "safe_object_access",
           "named": true
         },
         {
@@ -30604,10 +29846,6 @@
             "named": true
           },
           {
-            "type": "safe_object_access",
-            "named": true
-          },
-          {
             "type": "scoped_name",
             "named": true
           },
@@ -30726,10 +29964,6 @@
             "named": true
           },
           {
-            "type": "safe_object_access",
-            "named": true
-          },
-          {
             "type": "scoped_name",
             "named": true
           },
@@ -30825,10 +30059,6 @@
           },
           {
             "type": "qualified_name",
-            "named": true
-          },
-          {
-            "type": "safe_object_access",
             "named": true
           },
           {
@@ -30936,10 +30166,6 @@
             "named": true
           },
           {
-            "type": "safe_object_access",
-            "named": true
-          },
-          {
             "type": "scoped_name",
             "named": true
           },
@@ -31035,10 +30261,6 @@
           },
           {
             "type": "qualified_name",
-            "named": true
-          },
-          {
-            "type": "safe_object_access",
             "named": true
           },
           {
@@ -31146,10 +30368,6 @@
             "named": true
           },
           {
-            "type": "safe_object_access",
-            "named": true
-          },
-          {
             "type": "scoped_name",
             "named": true
           },
@@ -31245,10 +30463,6 @@
           },
           {
             "type": "qualified_name",
-            "named": true
-          },
-          {
-            "type": "safe_object_access",
             "named": true
           },
           {
@@ -31558,10 +30772,6 @@
             "named": true
           },
           {
-            "type": "safe_object_access",
-            "named": true
-          },
-          {
             "type": "scoped_name",
             "named": true
           },
@@ -31657,10 +30867,6 @@
           },
           {
             "type": "qualified_name",
-            "named": true
-          },
-          {
-            "type": "safe_object_access",
             "named": true
           },
           {
@@ -31765,10 +30971,6 @@
           },
           {
             "type": "qualified_name",
-            "named": true
-          },
-          {
-            "type": "safe_object_access",
             "named": true
           },
           {
@@ -32460,10 +31662,6 @@
             "named": true
           },
           {
-            "type": "safe_object_access",
-            "named": true
-          },
-          {
             "type": "scoped_name",
             "named": true
           },
@@ -32573,10 +31771,6 @@
             "named": true
           },
           {
-            "type": "safe_object_access",
-            "named": true
-          },
-          {
             "type": "scoped_name",
             "named": true
           },
@@ -32672,10 +31866,6 @@
           },
           {
             "type": "qualified_name",
-            "named": true
-          },
-          {
-            "type": "safe_object_access",
             "named": true
           },
           {
@@ -32780,10 +31970,6 @@
           },
           {
             "type": "qualified_name",
-            "named": true
-          },
-          {
-            "type": "safe_object_access",
             "named": true
           },
           {
@@ -32893,10 +32079,6 @@
           },
           {
             "type": "qualified_name",
-            "named": true
-          },
-          {
-            "type": "safe_object_access",
             "named": true
           },
           {
@@ -33047,10 +32229,6 @@
           },
           {
             "type": "qualified_name",
-            "named": true
-          },
-          {
-            "type": "safe_object_access",
             "named": true
           },
           {
@@ -33248,10 +32426,6 @@
             "named": true
           },
           {
-            "type": "safe_object_access",
-            "named": true
-          },
-          {
             "type": "scoped_name",
             "named": true
           },
@@ -33347,10 +32521,6 @@
           },
           {
             "type": "qualified_name",
-            "named": true
-          },
-          {
-            "type": "safe_object_access",
             "named": true
           },
           {
@@ -33452,10 +32622,6 @@
             "named": true
           },
           {
-            "type": "safe_object_access",
-            "named": true
-          },
-          {
             "type": "scoped_name",
             "named": true
           },
@@ -33551,10 +32717,6 @@
           },
           {
             "type": "qualified_name",
-            "named": true
-          },
-          {
-            "type": "safe_object_access",
             "named": true
           },
           {
@@ -33861,10 +33023,6 @@
             "named": true
           },
           {
-            "type": "safe_object_access",
-            "named": true
-          },
-          {
             "type": "scoped_name",
             "named": true
           },
@@ -33969,10 +33127,6 @@
           "named": true
         },
         {
-          "type": "safe_object_access",
-          "named": true
-        },
-        {
           "type": "scoped_name",
           "named": true
         },
@@ -34073,10 +33227,6 @@
         },
         {
           "type": "qualified_name",
-          "named": true
-        },
-        {
-          "type": "safe_object_access",
           "named": true
         },
         {
@@ -34203,10 +33353,6 @@
           "named": true
         },
         {
-          "type": "safe_object_access",
-          "named": true
-        },
-        {
           "type": "scoped_name",
           "named": true
         },
@@ -34307,10 +33453,6 @@
           },
           {
             "type": "qualified_name",
-            "named": true
-          },
-          {
-            "type": "safe_object_access",
             "named": true
           },
           {
@@ -34434,10 +33576,6 @@
           },
           {
             "type": "qualified_name",
-            "named": true
-          },
-          {
-            "type": "safe_object_access",
             "named": true
           },
           {
@@ -34566,10 +33704,6 @@
           },
           {
             "type": "qualified_name",
-            "named": true
-          },
-          {
-            "type": "safe_object_access",
             "named": true
           },
           {
@@ -34732,10 +33866,6 @@
             "named": true
           },
           {
-            "type": "safe_object_access",
-            "named": true
-          },
-          {
             "type": "scoped_name",
             "named": true
           },
@@ -34865,10 +33995,6 @@
             "named": true
           },
           {
-            "type": "safe_object_access",
-            "named": true
-          },
-          {
             "type": "scoped_name",
             "named": true
           },
@@ -34970,10 +34096,6 @@
           },
           {
             "type": "qualified_name",
-            "named": true
-          },
-          {
-            "type": "safe_object_access",
             "named": true
           },
           {
@@ -35081,10 +34203,6 @@
             "named": true
           },
           {
-            "type": "safe_object_access",
-            "named": true
-          },
-          {
             "type": "scoped_name",
             "named": true
           },
@@ -35183,10 +34301,6 @@
             "named": true
           },
           {
-            "type": "safe_object_access",
-            "named": true
-          },
-          {
             "type": "scoped_name",
             "named": true
           },
@@ -35282,10 +34396,6 @@
           },
           {
             "type": "qualified_name",
-            "named": true
-          },
-          {
-            "type": "safe_object_access",
             "named": true
           },
           {
@@ -35390,10 +34500,6 @@
           },
           {
             "type": "qualified_name",
-            "named": true
-          },
-          {
-            "type": "safe_object_access",
             "named": true
           },
           {
@@ -35515,10 +34621,6 @@
             "named": true
           },
           {
-            "type": "safe_object_access",
-            "named": true
-          },
-          {
             "type": "scoped_name",
             "named": true
           },
@@ -35614,10 +34716,6 @@
           },
           {
             "type": "qualified_name",
-            "named": true
-          },
-          {
-            "type": "safe_object_access",
             "named": true
           },
           {
@@ -35768,10 +34866,6 @@
             "named": true
           },
           {
-            "type": "safe_object_access",
-            "named": true
-          },
-          {
             "type": "scoped_name",
             "named": true
           },
@@ -35873,10 +34967,6 @@
         },
         {
           "type": "qualified_name",
-          "named": true
-        },
-        {
-          "type": "safe_object_access",
           "named": true
         },
         {
@@ -36062,10 +35152,6 @@
         },
         {
           "type": "qualified_name",
-          "named": true
-        },
-        {
-          "type": "safe_object_access",
           "named": true
         },
         {
@@ -36427,10 +35513,6 @@
             "named": true
           },
           {
-            "type": "safe_object_access",
-            "named": true
-          },
-          {
             "type": "scoped_name",
             "named": true
           },
@@ -36546,10 +35628,6 @@
           },
           {
             "type": "qualified_name",
-            "named": true
-          },
-          {
-            "type": "safe_object_access",
             "named": true
           },
           {
@@ -36746,10 +35824,6 @@
             "named": true
           },
           {
-            "type": "safe_object_access",
-            "named": true
-          },
-          {
             "type": "scoped_name",
             "named": true
           },
@@ -36846,10 +35920,6 @@
         },
         {
           "type": "qualified_name",
-          "named": true
-        },
-        {
-          "type": "safe_object_access",
           "named": true
         },
         {
@@ -36953,10 +36023,6 @@
           },
           {
             "type": "qualified_name",
-            "named": true
-          },
-          {
-            "type": "safe_object_access",
             "named": true
           },
           {

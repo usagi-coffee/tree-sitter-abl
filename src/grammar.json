@@ -50567,10 +50567,6 @@
         },
         {
           "type": "SYMBOL",
-          "name": "safe_object_access"
-        },
-        {
-          "type": "SYMBOL",
           "name": "scoped_name"
         }
       ]
@@ -50683,53 +50679,20 @@
               "type": "SEQ",
               "members": [
                 {
-                  "type": "SYMBOL",
-                  "name": "_namecolon"
-                },
-                {
-                  "type": "FIELD",
-                  "name": "right",
-                  "content": {
-                    "type": "ALIAS",
-                    "content": {
+                  "type": "CHOICE",
+                  "members": [
+                    {
                       "type": "SYMBOL",
-                      "name": "_identifier_immediate"
+                      "name": "_namecolon"
                     },
-                    "named": true,
-                    "value": "identifier"
-                  }
-                }
-              ]
-            }
-          }
-        ]
-      }
-    },
-    "safe_object_access": {
-      "type": "PREC",
-      "value": 1,
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "FIELD",
-            "name": "left",
-            "content": {
-              "type": "SYMBOL",
-              "name": "identifier"
-            }
-          },
-          {
-            "type": "REPEAT1",
-            "content": {
-              "type": "SEQ",
-              "members": [
-                {
-                  "type": "IMMEDIATE_TOKEN",
-                  "content": {
-                    "type": "STRING",
-                    "value": "?:"
-                  }
+                    {
+                      "type": "IMMEDIATE_TOKEN",
+                      "content": {
+                        "type": "STRING",
+                        "value": "?:"
+                      }
+                    }
+                  ]
                 },
                 {
                   "type": "FIELD",
@@ -51435,10 +51398,6 @@
         },
         {
           "type": "SYMBOL",
-          "name": "safe_object_access"
-        },
-        {
-          "type": "SYMBOL",
           "name": "array_access"
         },
         {
@@ -52121,10 +52080,6 @@
         {
           "type": "SYMBOL",
           "name": "array_access"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "safe_object_access"
         },
         {
           "type": "SYMBOL",

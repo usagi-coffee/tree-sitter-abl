@@ -124,7 +124,7 @@ new MyClass():Size.
       left: (identifier)
       right: (identifier)))
   (expression_statement
-    (safe_object_access
+    (object_access
       left: (identifier)
       right: (identifier)))
   (expression_statement
@@ -224,7 +224,7 @@ arr[1, 2];
   (expression_statement
     (null_literal))
   (expression_statement
-    (safe_object_access
+    (object_access
       left: (identifier)
       right: (identifier)))
   (expression_statement

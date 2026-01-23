@@ -153,7 +153,6 @@ module.exports = grammar({
           $.identifier,
           $.qualified_name,
           $.object_access,
-          $.safe_object_access,
           $.scoped_name,
         ),
 
@@ -175,8 +174,7 @@ module.exports = grammar({
         ),
 
       // Accessors
-      object_access: ($) => accessor($, $._namecolon),
-      safe_object_access: ($) => accessor($, token.immediate("?:")),
+      object_access: ($) => accessor($, $._namecolon, token.immediate("?:")),
       scoped_name: ($) => accessor($, $._namedoublecolon),
       qualified_name: ($) => accessor($, $._namedot),
       object_access_expression: ($) =>
@@ -210,7 +208,6 @@ module.exports = grammar({
           $.identifier,
           $.qualified_name,
           $.object_access,
-          $.safe_object_access,
           $.array_access,
           $.function_call,
         ),
@@ -272,14 +269,14 @@ module.exports = grammar({
 
 // Helpers
 
-function accessor($, separator) {
+function accessor($, ...separators) {
   return prec(
     1,
     seq(
       field("left", $.identifier),
       repeat1(
         seq(
-          separator,
+          separators.length > 1 ? choice(...separators) : separators[0],
           field("right", alias($._identifier_immediate, $.identifier)),
         ),
       ),
