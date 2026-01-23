@@ -1,12 +1,10 @@
 /// <reference types="tree-sitter-cli/dsl" />
-// @ts-check
 
-const core_accessors = require("./grammar/core/accessors");
 const core_expressions = require("./grammar/core/expressions");
-const core_operators = require("./grammar/core/operators");
+// Contains only $._statement
 const core_statements = require("./grammar/core/statements");
-const core_extras = require("./grammar/core/extras");
 
+// Barrel re-exports
 const expressions = require("./grammar/expressions");
 const statements = require("./grammar/statements");
 
@@ -25,6 +23,9 @@ const tkw = (word, aliasName = word) =>
   alias(token(new RegExp(word, "i")), aliasName);
 const op = (word) =>
   seq(alias(token(new RegExp(word, "i")), word), token.immediate(/\s+/));
+
+// prettier-ignore
+const comparison_operators = [ "<>", ">", "<", ">=", "<=", op("BEGINS"), op("MATCHES"), op("EQ"), op("NE"), op("GT"), op("LT"), op("GE"), op("LE")];
 
 module.exports = grammar({
   name: "abl",
@@ -67,6 +68,64 @@ module.exports = grammar({
     return {
       source_file: ($) => repeat($._statement),
 
+      // Comments
+      line_comment: ($) => token(seq("//", /[^\r\n]*/)),
+      comment: ($) => choice($.line_comment, $.block_comment),
+
+      // Includes
+      include: ($) =>
+        seq(
+          "{",
+          field("file", $.include_file_reference),
+          repeat(field("argument", $.include_argument)),
+          "}",
+          optional("."),
+        ),
+      include_extra: ($) =>
+        token(
+          choice(
+            /[ \t]*\{\{&[^}\r\n]+\}[^\s}\r\n]*\.i[ \t]*\}\.?[ \t]*\r?\n/i,
+            /[ \t]*\{[^\s}\r\n]*\.i[ \t]*\}\.?[ \t]*\r?\n/i,
+          ),
+        ),
+      include_argument: ($) =>
+        choice($.include_named_argument, $._include_argument_value),
+      include_named_argument: ($) =>
+        seq(
+          "&",
+          field("name", $.identifier),
+          optional(seq("=", field("value", $._include_argument_value))),
+        ),
+      _include_argument_value: ($) =>
+        choice(
+          $.qualified_name,
+          $.identifier,
+          $.string_literal,
+          $.number_literal,
+          $.boolean_literal,
+          $.constant,
+          $.argument_reference,
+          $.parenthesized_identifier,
+        ),
+
+      // Preprocessor
+      preprocessor_directive: ($) => token(/&[^\n]*(?:~\s*\n[^\n]*)*/i),
+      include_file_reference: ($) => seq(optional($.constant), $.file_name),
+      _preprocessor_argument: ($) =>
+        choice(
+          $.identifier,
+          $.string_literal,
+          $.number_literal,
+          $.boolean_literal,
+          $.constant,
+          $.parenthesized_identifier,
+        ),
+
+      // Constants
+      constant: ($) => seq("{&", $.identifier, "}"),
+      constant_extra: ($) => token(/[ \t]*\{&[^\}\r\n]+\}[ \t]*\r?\n/),
+      argument_reference: ($) => token(/\{[0-9A-Za-z_-]+\}/),
+
       ...statements(ctx),
       ...expressions(ctx),
 
@@ -95,8 +154,55 @@ module.exports = grammar({
           $.qualified_name,
           $.object_access,
           $.safe_object_access,
-          $.scoped_name
+          $.scoped_name,
         ),
+
+      array_access: ($) =>
+        seq(
+          field("array", $._array_target),
+          "[",
+          optional($._array_subscript),
+          "]",
+        ),
+      _array_subscript: ($) =>
+        choice(
+          $._expression_list,
+          seq(
+            field("start", $._expression),
+            kw("FOR"),
+            field("count", $._expression),
+          ),
+        ),
+
+      // Accessors
+      object_access: ($) => accessor($, $._namecolon),
+      safe_object_access: ($) => accessor($, token.immediate("?:")),
+      scoped_name: ($) => accessor($, $._namedoublecolon),
+      qualified_name: ($) => accessor($, $._namedot),
+      object_access_expression: ($) =>
+        prec(
+          1,
+          seq(
+            field(
+              "left",
+              choice(
+                $.function_call,
+                $.parenthesized_expression,
+                $.new_expression,
+              ),
+            ),
+            repeat1(seq($._namecolon, field("right", $.identifier))),
+          ),
+        ),
+
+      // Opeartors
+      assignment_operator: ($) => choice("=", "+=", "-=", "*=", "/="),
+      _logical_operator: ($) => choice(op("AND"), op("OR")),
+      _comparison_operator: ($) => choice("=", ...comparison_operators),
+
+      // See _statement_expression in expressions.js - excludes `=` to disambiguate
+      // assignment vs equality comparison at statement level.
+      _comparison_operator_no_eq: ($) => choice(...comparison_operators),
 
       // Assignabless
       _assignable: ($) =>
@@ -106,7 +212,47 @@ module.exports = grammar({
           $.object_access,
           $.safe_object_access,
           $.array_access,
-          $.function_call
+          $.function_call,
+        ),
+
+      // Expressions
+      parenthesized_expression: ($) => seq("(", $._expression, ")"),
+
+      unary_expression: ($) =>
+        prec(PREC.UNARY, seq(choice("+", "-", op("NOT")), $._expression)),
+      binary_expression: ($) =>
+        binary_expression($, $._expression, $._comparison_operator),
+
+      // See _statement_expression comment - this is binary_expression without `=` comparison.
+      binary_expression_no_eq: ($) =>
+        binary_expression(
+          $,
+          $._statement_expression,
+          $._comparison_operator_no_eq,
+        ),
+
+      function_call: ($) =>
+        seq(
+          field(
+            "function",
+            choice(
+              $.identifier,
+              $.qualified_name,
+              $.object_access,
+              $.scoped_name,
+            ),
+          ),
+          $.argument_list,
+        ),
+
+      argument_list: ($) =>
+        seq("(", optional(seq($.argument, repeat(seq(",", $.argument)))), ")"),
+      argument: ($) =>
+        seq(
+          optional(choice(tkw("INPUT"), tkw("OUTPUT"), tkw("INPUT-OUTPUT"))),
+          optional(tkw("TABLE")),
+          field("value", $._expression),
+          optional(tkw("BY-REFERENCE")),
         ),
 
       // Identifiers
@@ -118,11 +264,37 @@ module.exports = grammar({
       // Terminators
       _terminator: ($) => choice($._terminator_dot, ";"),
 
-      ...core_accessors(ctx),
       ...core_expressions(ctx),
-      ...core_extras(ctx),
-      ...core_operators(ctx),
       ...core_statements(ctx),
     };
   })(),
 });
+
+// Helpers
+
+function accessor($, separator) {
+  return prec(
+    1,
+    seq(
+      field("left", $.identifier),
+      repeat1(
+        seq(
+          separator,
+          field("right", alias($._identifier_immediate, $.identifier)),
+        ),
+      ),
+    ),
+  );
+}
+
+function binary_expression($, expression, comparison_operator) {
+  return choice(
+    prec.left(
+      PREC.MULT,
+      seq(expression, choice("*", "/", op("MOD"), op("MODULO")), expression),
+    ),
+    prec.left(PREC.ADD, seq(expression, choice("+", "-"), expression)),
+    prec.left(PREC.COMPARE, seq(expression, comparison_operator, expression)),
+    prec.left(PREC.LOGICAL, seq(expression, $._logical_operator, expression)),
+  );
+}

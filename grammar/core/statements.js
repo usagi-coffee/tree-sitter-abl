@@ -1,4 +1,4 @@
-// Statement-related disambiguation plumbing
+// Just aggregator of statements to avoid growing core context
 
 module.exports = ({ tkw }) => ({
   _statement: ($) =>

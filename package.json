@@ -12,12 +12,7 @@
   },
   "main": "bindings/node",
   "types": "bindings/node",
-  "keywords": [
-    "incremental",
-    "parsing",
-    "tree-sitter",
-    "abl"
-  ],
+  "keywords": ["incremental", "parsing", "tree-sitter", "abl"],
   "files": [
     "grammar.js",
     "tree-sitter.json",
@@ -50,10 +45,11 @@
     "install": "node-gyp-build",
     "prestart": "tree-sitter build --wasm",
     "start": "tree-sitter playground",
-    "test": "tree-sitter generate && tree-sitter test",
-    "generate": "tree-sitter generate",
+    "test": "tree-sitter generate && tree-sitter test && bun run tools/check.js",
+    "generate": "tree-sitter generate && bun run check",
     "parse": "tree-sitter parse",
     "check": "bun run tools/check.js",
+    "check:statements": "bun run tools/check_statements.js",
     "parse:snippet": "bun run tools/parse.js",
     "build": "tree-sitter generate && tree-sitter build",
     "build:wasm": "tree-sitter generate && tree-sitter build -w",
