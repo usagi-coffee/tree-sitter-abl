@@ -27,7 +27,6 @@ module.exports = grammar({
   extras: ($) => [
     /[\s\f\uFEFF\u2060\u200B]|\\\r?\n/,
     $.comment,
-    // FIXME: source of trailing whitespace parsing bug
     $.include_extra,
     $.constant_extra,
   ],
@@ -69,8 +68,8 @@ module.exports = grammar({
       include_extra: ($) =>
         token(
           choice(
-            /[ \t]*\{\{&[^}\r\n]+\}[^\s}\r\n]*\.i[ \t]*\}\.?[ \t]*\r?\n/i,
-            /[ \t]*\{[^\s}\r\n]*\.i[ \t]*\}\.?[ \t]*\r?\n/i,
+            /\{\{&[^}\r\n]+\}[^\s}\r\n]*\.i[ \t]*\}\.?[ \t]*\r?\n/i,
+            /\{[^\s}\r\n]*\.i[ \t]*\}\.?[ \t]*\r?\n/i,
           ),
         ),
       include_argument: ($) =>
@@ -108,7 +107,7 @@ module.exports = grammar({
 
       // Constants
       constant: ($) => seq("{&", $.identifier, "}"),
-      constant_extra: ($) => token(/[ \t]*\{&[^\}\r\n]+\}[ \t]*\r?\n/),
+      constant_extra: ($) => token(/\{&[^\}\r\n]+\}[ \t]*\r?\n/),
       argument_reference: ($) => token(/\{[0-9A-Za-z_-]+\}/),
 
       // Re-exports
