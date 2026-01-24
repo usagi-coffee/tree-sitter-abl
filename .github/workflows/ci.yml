@@ -16,9 +16,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Git LFS pull
-        run: git lfs pull
-
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
         with:
