@@ -15,8 +15,6 @@
 - `src/scanner.c`: external scanner implementation.
 - `test/corpus/`: tree-sitter corpus tests.
 - `bindings/`: language bindings.
-- `docs/abl-reference.txt`: abl language reference.
-- `docs/tree-sitter.txt`: tree-sitter documentation.
 
 ## Workflow
 
@@ -38,11 +36,13 @@
 - Prints report with state count cost for every statement:
   - `bun run check:statements`
 
+Strongly prefer using defined workflow commands to as they have helpful side-effects like returning `STATE_COUNT` after success.
+
+
 ## Conventions
 
 - Treat `grammar.js` as core grammar rules and anything inside is "core".
 - Treat `src/parser.c`, `src/grammar.json`, and `src/node-types.json` as generated.
-- Always consult `docs/abl-reference.txt` when planning, modifying, or extending syntax support. Any work related to grammar, parsing behavior, or syntax improvements must be grounded in the reference documentation to ensure correctness, completeness, and alignment with the language specification.
 - Avoid placing shared or generic code unless it is part of the core syntax. We intentionally duplicate modifiers and tunings at the statement level so that most of the statement-specific context lives in a single file. To support this, each statement defines its own `__<statement>_rules`, which are later aliased to `$.rule` where needed. This intentional duplication favors locality, readability, and conflict isolation over DRY abstractions.
 - Always run tests after changes and make sure they pass.
 - Conflicts must be resolved structurally whenever possible. Adding a `conflicts` entry is a last resort and requires prior confirmation with a clear explanation of why structural fixes are insufficient.
@@ -59,7 +59,6 @@
 - Always check `STATE_COUNT` impacts and note the current `STATE_COUNT` cost for statements via leading comments in `grammar/core/statements.js`.
 - Do not remove tests just to satisfy test passing, just fix the underlying issue.
 - Remember to regenerate parser after `src/scanner.c` modifications before testing.
-- Strongly prefer using defined workflow commands as they have helpers like returning `STATE_COUNT` after success.
 
 ## Notes
 
