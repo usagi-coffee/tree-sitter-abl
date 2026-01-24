@@ -69,7 +69,7 @@
           "name": "file",
           "content": {
             "type": "SYMBOL",
-            "name": "include_file_reference"
+            "name": "_include_file_reference"
           }
         },
         {
@@ -215,7 +215,7 @@
         "flags": "i"
       }
     },
-    "include_file_reference": {
+    "_include_file_reference": {
       "type": "SEQ",
       "members": [
         {

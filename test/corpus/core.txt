@@ -35,8 +35,7 @@ INCLUDE
 
 (source_file
   (include
-    file: (include_file_reference
-      (file_name))
+    file: (file_name)
     argument: (include_argument
       (identifier))
     argument: (include_argument
@@ -53,10 +52,9 @@ INCLUDE
         value: (identifier))))
   (include)
   (include
-    file: (include_file_reference
-      (constant
-        (identifier))
-      (file_name))
+    file: (constant
+      (identifier))
+    file: (file_name)
     argument: (include_argument
       (include_named_argument
         name: (identifier)

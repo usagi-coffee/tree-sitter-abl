@@ -16500,11 +16500,15 @@
         ]
       },
       "file": {
-        "multiple": false,
+        "multiple": true,
         "required": false,
         "types": [
           {
-            "type": "include_file_reference",
+            "type": "constant",
+            "named": true
+          },
+          {
+            "type": "file_name",
             "named": true
           }
         ]
@@ -16553,25 +16557,6 @@
         },
         {
           "type": "string_literal",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "include_file_reference",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "constant",
-          "named": true
-        },
-        {
-          "type": "file_name",
           "named": true
         }
       ]

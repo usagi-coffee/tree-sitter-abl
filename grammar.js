@@ -67,7 +67,7 @@ module.exports = grammar({
       include_expression: ($) =>
         seq(
           "{",
-          field("file", $.include_file_reference),
+          field("file", $._include_file_reference),
           repeat(field("argument", $.include_argument)),
           "}",
           optional("."),
@@ -95,7 +95,7 @@ module.exports = grammar({
 
       // Preprocessor
       preprocessor_directive: ($) => token(/&[^\n]*(?:~\s*\n[^\n]*)*/i),
-      include_file_reference: ($) =>
+      _include_file_reference: ($) =>
         seq(optional(alias($.constant_expression, $.constant)), $.file_name),
 
       // Constants

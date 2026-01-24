@@ -71,8 +71,7 @@ DISPLAY {&VAR1}.
 
 (source_file
   (include
-    file: (include_file_reference
-      (file_name))
+    file: (file_name)
     argument: (include_argument
       (identifier))
     argument: (include_argument
