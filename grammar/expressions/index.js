@@ -6,14 +6,12 @@ const datasetExpression = require("./dataset");
 const lockedExpression = require("./locked");
 const newExpression = require("./new");
 
-module.exports = (ctx) => {
-  return {
-    ...conditionalExpression(ctx),
-    ...availableExpression(ctx),
-    ...canFindExpression(ctx),
-    ...lockedExpression(ctx),
-    ...newExpression(ctx),
-    ...aggregateExpression(ctx),
-    ...datasetExpression(ctx),
-  };
-};
+module.exports = (ctx) => ({
+  ...conditionalExpression(ctx),
+  ...availableExpression(ctx),
+  ...canFindExpression(ctx),
+  ...lockedExpression(ctx),
+  ...newExpression(ctx),
+  ...aggregateExpression(ctx),
+  ...datasetExpression(ctx),
+});

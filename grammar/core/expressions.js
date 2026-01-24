@@ -32,9 +32,6 @@ module.exports = (ctx) => {
         $.constant,
       ),
 
-    _expression_list: ($) =>
-      seq($._expression, repeat(seq(",", $._expression))),
-
     // _statement_expression excludes `=` from comparison operators to disambiguate
     // assignment vs equality at the statement level. Without this, `x = 5.` could
     // parse as either assignment_statement or expression_statement (equality check).

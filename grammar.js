@@ -1,31 +1,16 @@
 /// <reference types="tree-sitter-cli/dsl" />
 
-const core_expressions = require("./grammar/core/expressions");
-// Contains only $._statement
-const core_statements = require("./grammar/core/statements");
-
-// Barrel re-exports
-const expressions = require("./grammar/expressions");
-const statements = require("./grammar/statements");
-
-const PREC = {
-  LOGICAL: 1,
-  COMPARE: 2,
-  ADD: 3,
-  MULT: 4,
-  UNARY: 5,
-};
-
 // DO NOT CHANGE THESE TO USE PRECEDENCE
 // Keyword that requires whitespace after
-const kw = (word) =>
-  seq(alias(token(new RegExp(word, "i")), word), token.immediate(/\s+/));
+const kw = (w) =>
+  seq(alias(token(new RegExp(w, "i")), w), token.immediate(/\s+/));
 // Token keyword that does not require whitespace
-const tkw = (word, aliasName = word) =>
-  alias(token(new RegExp(word, "i")), aliasName);
+const tkw = (w, a = w) => alias(token(new RegExp(w, "i")), a);
 
 // prettier-ignore
 const comparison_operators = [ "<>", ">", "<", ">=", "<=", kw("BEGINS"), kw("MATCHES"), kw("EQ"), kw("NE"), kw("GT"), kw("LT"), kw("GE"), kw("LE")];
+
+const PREC = { LOGICAL: 1, COMPARE: 2, ADD: 3, MULT: 4, UNARY: 5 };
 
 module.exports = grammar({
   name: "abl",
@@ -126,8 +111,9 @@ module.exports = grammar({
       constant_extra: ($) => token(/[ \t]*\{&[^\}\r\n]+\}[ \t]*\r?\n/),
       argument_reference: ($) => token(/\{[0-9A-Za-z_-]+\}/),
 
-      ...statements(ctx),
-      ...expressions(ctx),
+      // Re-exports
+      ...require("./grammar/statements")(ctx),
+      ...require("./grammar/expressions")(ctx),
 
       // Literals
       number_literal: ($) => token(prec(-1, /[0-9]+(\.[0-9]+)?/)),
@@ -145,6 +131,61 @@ module.exports = grammar({
         choice($.scoped_name, $.qualified_name, $.identifier),
       _type_name: ($) => choice($.generic_type, $._simple_type_name),
       _type_or_string: ($) => choice($._type_name, $.string_literal),
+
+      // Operators
+      assignment_operator: ($) => choice("=", "+=", "-=", "*=", "/="),
+      _logical_operator: ($) => choice(kw("AND"), kw("OR")),
+      _comparison_operator: ($) => choice("=", ...comparison_operators),
+      // See _statement_expression in expressions.js - excludes `=` to disambiguate
+      // assignment vs equality comparison at statement level.
+      _comparison_operator_no_eq: ($) => choice(...comparison_operators),
+
+      // Assignabless
+      _assignable: ($) =>
+        choice(
+          $.identifier,
+          $.qualified_name,
+          $.object_access,
+          $.array_access,
+          $.function_call,
+        ),
+
+      // Expressions
+      parenthesized_expression: ($) => seq("(", $._expression, ")"),
+      _expression_list: ($) =>
+        seq($._expression, repeat(seq(",", $._expression))),
+      unary_expression: ($) =>
+        prec(PREC.UNARY, seq(choice("+", "-", kw("NOT")), $._expression)),
+      binary_expression: ($) =>
+        binary_expression($, $._expression, $._comparison_operator),
+      // See _statement_expression comment - this is binary_expression without `=` comparison.
+      binary_expression_no_eq: ($) =>
+        binary_expression(
+          $,
+          $._statement_expression,
+          $._comparison_operator_no_eq,
+        ),
+
+      // Accessors
+      object_access: ($) => accessor($, $._namecolon, token.immediate("?:")),
+      scoped_name: ($) => accessor($, $._namedoublecolon),
+      qualified_name: ($) => accessor($, $._namedot),
+
+      object_access_expression: ($) =>
+        prec(
+          1,
+          seq(
+            field(
+              "left",
+              choice(
+                $.function_call,
+                $.parenthesized_expression,
+                $.new_expression,
+              ),
+            ),
+            repeat1(seq($._namecolon, field("right", $.identifier))),
+          ),
+        ),
 
       // Array
       array_initializer: ($) => seq("[", optional($._expression_list), "]"),
@@ -168,59 +209,15 @@ module.exports = grammar({
           ),
         ),
 
-      // Accessors
-      object_access: ($) => accessor($, $._namecolon, token.immediate("?:")),
-      scoped_name: ($) => accessor($, $._namedoublecolon),
-      qualified_name: ($) => accessor($, $._namedot),
-      object_access_expression: ($) =>
-        prec(
-          1,
-          seq(
-            field(
-              "left",
-              choice(
-                $.function_call,
-                $.parenthesized_expression,
-                $.new_expression,
-              ),
-            ),
-            repeat1(seq($._namecolon, field("right", $.identifier))),
-          ),
-        ),
-
-      // Opeartors
-      assignment_operator: ($) => choice("=", "+=", "-=", "*=", "/="),
-      _logical_operator: ($) => choice(kw("AND"), kw("OR")),
-      _comparison_operator: ($) => choice("=", ...comparison_operators),
-
-      // See _statement_expression in expressions.js - excludes `=` to disambiguate
-      // assignment vs equality comparison at statement level.
-      _comparison_operator_no_eq: ($) => choice(...comparison_operators),
-
-      // Assignabless
-      _assignable: ($) =>
-        choice(
-          $.identifier,
-          $.qualified_name,
-          $.object_access,
-          $.array_access,
-          $.function_call,
-        ),
-
-      // Expressions
-      parenthesized_expression: ($) => seq("(", $._expression, ")"),
-
-      unary_expression: ($) =>
-        prec(PREC.UNARY, seq(choice("+", "-", kw("NOT")), $._expression)),
-      binary_expression: ($) =>
-        binary_expression($, $._expression, $._comparison_operator),
-
-      // See _statement_expression comment - this is binary_expression without `=` comparison.
-      binary_expression_no_eq: ($) =>
-        binary_expression(
-          $,
-          $._statement_expression,
-          $._comparison_operator_no_eq,
+      // Callables
+      argument_list: ($) =>
+        seq("(", optional(seq($.argument, repeat(seq(",", $.argument)))), ")"),
+      argument: ($) =>
+        seq(
+          optional(choice(tkw("INPUT"), tkw("OUTPUT"), tkw("INPUT-OUTPUT"))),
+          optional(tkw("TABLE")),
+          field("value", $._expression),
+          optional(tkw("BY-REFERENCE")),
         ),
 
       function_call: ($) =>
@@ -237,27 +234,17 @@ module.exports = grammar({
           $.argument_list,
         ),
 
-      argument_list: ($) =>
-        seq("(", optional(seq($.argument, repeat(seq(",", $.argument)))), ")"),
-      argument: ($) =>
-        seq(
-          optional(choice(tkw("INPUT"), tkw("OUTPUT"), tkw("INPUT-OUTPUT"))),
-          optional(tkw("TABLE")),
-          field("value", $._expression),
-          optional(tkw("BY-REFERENCE")),
-        ),
-
       // Identifiers
       // BE CAREFUL MODIFYING HERE, IDENTIFIER ORDER FOR SOME REASON MATTERS!
       identifier: ($) => token(/[_\p{L}][\p{L}\p{N}_-]*/u),
       _identifier_immediate: ($) => token.immediate(/[_\p{L}][\p{L}\p{N}_-]*/u),
       parenthesized_identifier: ($) => seq("(", $.identifier, ")"),
-
-      // Terminators
       _terminator: ($) => choice($._terminator_dot, ";"),
 
-      ...core_expressions(ctx),
-      ...core_statements(ctx),
+      // Contains $._expression, $._primary_expression and $._statement_expression aggregates
+      ...require("./grammar/core/expressions")(ctx),
+      // Contains only $._statement aggregate and statement costs
+      ...require("./grammar/core/statements")(ctx),
     };
   })(),
 });
