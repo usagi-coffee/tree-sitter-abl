@@ -1,35 +1,33 @@
-module.exports = (ctx) => {
-  return {
-    _expression: ($) =>
-      choice(
-        $.conditional_expression,
-        $.binary_expression,
-        $.unary_expression,
-        $._primary_expression,
-      ),
+module.exports = (ctx) => ({
+  _expression: ($) =>
+    choice(
+      $.conditional_expression,
+      $.binary_expression,
+      $.unary_expression,
+      $._primary_expression,
+    ),
 
-    _primary_expression: ($) =>
-      choice(
-        $.parenthesized_expression,
-        $.available_expression,
-        $.can_find_expression,
-        $.locked_expression,
-        $.object_access_expression,
-        $.new_expression,
-        $.dataset_reference,
-        $.function_call,
-        $.array_access,
-        $.scoped_name,
-        $.qualified_name,
-        $.object_access,
-        $.argument_reference,
-        $.identifier,
-        $.number_literal,
-        $.date_literal,
-        $.string_literal,
-        $.boolean_literal,
-        $.null_literal,
-        alias($.constant_expression, $.constant),
-      ),
-  };
-};
+  _primary_expression: ($) =>
+    choice(
+      $.parenthesized_expression,
+      $.available_expression,
+      $.can_find_expression,
+      $.locked_expression,
+      $.object_access_expression,
+      $.new_expression,
+      $.dataset_reference,
+      $.function_call,
+      $.array_access,
+      $.scoped_name,
+      $.qualified_name,
+      $.object_access,
+      $.argument_reference,
+      $.identifier,
+      $.number_literal,
+      $.date_literal,
+      $.string_literal,
+      $.boolean_literal,
+      $.null_literal,
+      alias($.constant_expression, $.constant),
+    ),
+});
