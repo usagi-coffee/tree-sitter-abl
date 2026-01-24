@@ -18,22 +18,22 @@
 
 ## Workflow
 
-- Regenerate parser artifacts when `grammar.js` changes:
+- Regenerate parser (needed after modifications):
   - `bun run generate`
 - Run tests (runs generate before tests):
   - `bun run test`
-- Parse a sample file (returns syntax tree; `tree-sitter test`):
+- Parse a file (returns syntax tree):
   - `bun run parse <file>`
   - Example: `bun run parse example.p`
 - Parse a snippet (returns syntax tree):
   - `bun run parse:snippet <direct syntax string>`
   - Example: `bun run parse:snippet 'a = b + c.'`
 - Build native and wasm artifacts:
-  - `bun run build`
-  - `bun run build:wasm`
-- Check global state count:
+  - `bun run build` -> abl.so
+  - `bun run build:wasm` -> tree-sitter-abl.wasm
+- Prints global state count:
   - `bun run check`
-- Prints report with state count cost for every statement:
+- Prints report with state count cost for statemens
   - `bun run check:statements`
 
 Strongly prefer using these commands as they have helpful side-effects like returning `STATE_COUNT` after success.
@@ -41,9 +41,9 @@ Strongly prefer using these commands as they have helpful side-effects like retu
 ## Conventions
 
 - Grammar changes without thorough corpus coverage and testing are unacceptable.
-- Avoid placing shared or generic code unless it is part of the core syntax. We intentionally duplicate modifiers and tunings at the statement level so that most of the statement-specific context lives in a single file. To support this, each statement defines its own `__<statement>_rules`, which are later aliased to `$.rule` where needed. This intentional duplication favors locality, readability, and conflict isolation over DRY abstractions.
+- Avoid creating a shared or generic code unless it is really a part of the core syntax, core grammar modifications require a confirmation unless experimenting.
+- We intentionally duplicate modifiers and tunings at the statement level so that most of the statement-specific context lives in a single file. To support this, each statement defines its own `__<statement>_rules`, which are later aliased to `$.rule` where needed. This intentional duplication favors locality, readability, and conflict isolation over DRY abstractions.
 - Conflicts must be resolved structurally whenever possible. Adding a `conflicts` entry is a last resort and requires prior confirmation with a clear explanation of why structural fixes are insufficient.
-- Core grammar modifications require a confirmation unless experimenting.
 - Your first solution should never be to try to add a precedence to keywords, if it's necessary give me an explanation and ask for a confirmation.
 - Prefer `kw` (requires whitespace after the keyword) and `tkw` (does not require whitespace) to use in-place of `token(/keyword/i)` function whenever dealing with keywords.
 - Treat `(ERROR)` and `(MISSING)` nodes in the test output aserrors that need to be fixed.
@@ -58,4 +58,5 @@ Strongly prefer using these commands as they have helpful side-effects like retu
 
 - `bun` instead of `npm`.
 - Successful tests print out current `STATE_COUNT` at the end.
+- `bun run parse` and `bun run parse:snippet` do not regenerate the parser before parsing the code, unlike `bun run test`.
 - Parser does not build after reaching the hard limit of 65,535 `STATE_COUNT` but bugs might occur at the top-end of the limit e.g `tree-sitter test` might return status `0` but produce no output at about ~63,000 `STATE_COUNT`.
