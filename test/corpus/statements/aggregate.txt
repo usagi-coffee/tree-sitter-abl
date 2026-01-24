@@ -24,7 +24,7 @@ AGGREGATE iMax = MAXIMUM(Qty) iMin = MINIMUM(Qty) FOR OrderLine.
     target: (identifier)
     field: (identifier)
     table: (identifier)
-    (where_clause
+    (where_phrase
       condition: (binary_expression
         (identifier)
         (string_literal))))

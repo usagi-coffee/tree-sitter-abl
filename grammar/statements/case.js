@@ -4,25 +4,25 @@ module.exports = ({ kw, tkw }) => ({
       kw("CASE"),
       optional($._expression),
       $._colon,
-      repeat1($.case_when_clause),
-      optional($.case_otherwise_clause),
+      repeat1($.case_when_phrase),
+      optional($.case_otherwise_phrase),
       tkw("END"),
       optional(tkw("CASE")),
       $._terminator,
     ),
 
-  case_when_clause: ($) =>
+  case_when_phrase: ($) =>
     seq(
       kw("WHEN"),
       $.__case_when_expression_list,
       kw("THEN"),
-      choice($.do_block, $.case_clause_statement),
+      choice($.do_block, $.case_phrase_statement),
     ),
 
-  case_otherwise_clause: ($) =>
-    seq(kw("OTHERWISE"), choice($.do_block, $.case_clause_statement)),
+  case_otherwise_phrase: ($) =>
+    seq(kw("OTHERWISE"), choice($.do_block, $.case_phrase_statement)),
 
-  case_clause_statement: ($) =>
+  case_phrase_statement: ($) =>
     choice(
       $.enum_statement,
       $.var_statement,
@@ -51,8 +51,5 @@ module.exports = ({ kw, tkw }) => ({
     ),
 
   __case_when_expression_list: ($) =>
-    seq(
-      $._expression,
-      repeat(seq(kw("OR"), kw("WHEN"), $._expression)),
-    ),
+    seq($._expression, repeat(seq(kw("OR"), kw("WHEN"), $._expression))),
 });

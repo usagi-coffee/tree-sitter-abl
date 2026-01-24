@@ -40,7 +40,7 @@ module.exports = ({ kw, tkw }) => ({
       tkw("SYSTEM-DIALOG"),
       kw("GET-FILE"),
       field("variable", $.identifier),
-      optional(alias($.__system_dialog_filters, $.filters_clause)),
+      optional(alias($.__system_dialog_filters, $.filters_phrase)),
       optional(tkw("ASK-OVERWRITE")),
       optional(tkw("CREATE-TEST-FILE")),
       optional(seq(kw("DEFAULT-EXTENSION"), field("extension", $._expression))),

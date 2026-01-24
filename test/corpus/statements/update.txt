@@ -45,6 +45,6 @@ UPDATE field1 GO-ON(f1 f2).
   (update_statement
     (update_item
       field: (identifier))
-    (go_on_clause
+    (go_on_phrase
       (identifier)
       (identifier))))

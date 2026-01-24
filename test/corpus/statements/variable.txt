@@ -34,7 +34,7 @@ DEFINE VARIABLE cView AS CHARACTER VIEW-AS FILL-IN.
   (variable_definition
     name: (identifier)
     type: (identifier)
-    (extent_clause
+    (extent_phrase
       (number_literal))
     (initial_option
       (string_literal)

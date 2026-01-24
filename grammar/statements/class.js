@@ -95,7 +95,7 @@ module.exports = ({ kw, tkw }) => ({
       seq(
         optional(choice(kw("INPUT"), kw("OUTPUT"), kw("INPUT-OUTPUT"))),
         field("name", $.identifier),
-        $.__method_variable_type_clause,
+        $.__method_variable_type_phrase,
         optional(alias($.__method_no_undo, $.no_undo)),
       ),
       $.__method_table_parameter,
@@ -138,7 +138,7 @@ module.exports = ({ kw, tkw }) => ({
       repeat($.__property_modifier),
       kw("PROPERTY"),
       field("name", $.identifier),
-      $.__property_type_clause,
+      $.__property_type_phrase,
       repeat(
         choice(
           alias($.__property_initial_option, $.initial_option),
@@ -150,9 +150,9 @@ module.exports = ({ kw, tkw }) => ({
     ),
 
   property_accessor: ($) =>
-    choice($.__property_get_clause, $.__property_set_clause),
+    choice($.__property_get_phrase, $.__property_set_phrase),
 
-  __property_get_clause: ($) =>
+  __property_get_phrase: ($) =>
     seq(
       optional(alias($.__variable_access_modifier, $.access_modifier)),
       tkw("GET"),
@@ -168,7 +168,7 @@ module.exports = ({ kw, tkw }) => ({
       ),
     ),
 
-  __property_set_clause: ($) =>
+  __property_set_phrase: ($) =>
     seq(
       optional(alias($.__variable_access_modifier, $.access_modifier)),
       tkw("SET"),
@@ -190,7 +190,7 @@ module.exports = ({ kw, tkw }) => ({
   property_set_parameter: ($) =>
     seq(
       field("name", $.identifier),
-      $.__method_variable_type_clause,
+      $.__method_variable_type_phrase,
       optional(alias($.__method_no_undo, $.no_undo)),
     ),
 
@@ -211,12 +211,12 @@ module.exports = ({ kw, tkw }) => ({
   __property_modifier: ($) =>
     choice(kw("ABSTRACT"), kw("FINAL"), kw("OVERRIDE")),
 
-  __property_type_clause: ($) =>
+  __property_type_phrase: ($) =>
     seq(
       optional(kw("AS")),
       optional(kw("CLASS")),
       field("type", $._type_or_string),
-      optional($.__method_extent_clause),
+      optional($.__method_extent_phrase),
     ),
 
   __property_initial_option: ($) =>
@@ -272,20 +272,20 @@ module.exports = ({ kw, tkw }) => ({
       seq(
         optional(kw("CLASS")),
         field("type", $._type_or_string),
-        optional($.__method_extent_clause),
+        optional($.__method_extent_phrase),
       ),
     ),
 
-  __method_variable_type_clause: ($) =>
+  __method_variable_type_phrase: ($) =>
     seq(
       choice(
         seq(kw("AS"), optional(kw("CLASS")), field("type", $._type_or_string)),
         seq(kw("LIKE"), field("like", $.__method_field_name)),
       ),
-      optional($.__method_extent_clause),
+      optional($.__method_extent_phrase),
     ),
 
-  __method_extent_clause: ($) =>
+  __method_extent_phrase: ($) =>
     prec.right(seq(kw("EXTENT"), optional($.__method_extent_size))),
   __method_extent_size: ($) =>
     choice(

@@ -99,7 +99,7 @@ END.
     (binary_expression
       (identifier)
       (number_literal))
-    (on_error_clause
+    (on_error_phrase
       (undo_throw_phrase))
     (body
       (assignment_statement
@@ -121,7 +121,7 @@ END.
 
 (source_code
   (do_block
-    (on_error_clause
+    (on_error_phrase
       (undo_leave_phrase))
     (body
       (assignment_statement
@@ -141,7 +141,7 @@ END.
 
 (source_code
   (do_block
-    (on_quit_clause)
+    (on_quit_phrase)
     (body
       (assignment_statement
         left: (identifier)
@@ -216,7 +216,7 @@ END.
 (source_code
   (do_block
     (boolean_literal)
-    (on_endkey_clause
+    (on_endkey_phrase
       (undo_phrase))
     (body
       (message_statement
@@ -276,7 +276,7 @@ END.
   (do_block
     label: (identifier)
     (boolean_literal)
-    (on_endkey_clause
+    (on_endkey_phrase
       (undo_phrase
         undo_label: (identifier)
         leave_label: (identifier)))

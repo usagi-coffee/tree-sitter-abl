@@ -68,7 +68,7 @@ END.
     (for_record_list
       (for_record
         table: (identifier)
-        (where_clause
+        (where_phrase
           (binary_expression
             (qualified_name
               left: (identifier)
@@ -95,7 +95,7 @@ END.
     (body
       (find_statement
         table: (identifier)
-        (where_clause
+        (where_phrase
           (binary_expression
             (qualified_name
               left: (identifier)

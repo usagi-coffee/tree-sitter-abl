@@ -34,7 +34,7 @@ END.
     (for_record_list
       (for_record
         table: (identifier)
-        (where_clause
+        (where_phrase
           (binary_expression
             (qualified_name
               left: (identifier)
@@ -62,7 +62,7 @@ END.
     (for_record_list
       (for_record
         table: (identifier)))
-    (on_error_clause)
+    (on_error_phrase)
     (body
       (display_statement
         (qualified_name
@@ -84,7 +84,7 @@ END.
     (for_record_list
       (for_record
         table: (identifier)
-        (where_clause
+        (where_phrase
           (binary_expression
             (qualified_name
               left: (identifier)
@@ -122,7 +122,7 @@ END.
       (for_record
         table: (identifier)
         (no_lock)
-        (by_clause
+        (by_phrase
           (qualified_name
             left: (identifier)
             right: (identifier)))))
@@ -148,7 +148,7 @@ END.
       (for_record
         table: (identifier)
         (no_lock)))
-    (with_frame_clause
+    (with_frame_phrase
       name: (identifier)
       (number_literal))
     (body
@@ -196,7 +196,7 @@ END.
     (for_record_list
       (for_record
         table: (identifier)))
-    (on_endkey_clause
+    (on_endkey_phrase
       (undo_phrase))
     (body
       (display_statement
@@ -219,7 +219,7 @@ END.
     (for_record_list
       (for_record
         table: (identifier)
-        (where_clause
+        (where_phrase
           (binary_expression
             (identifier)
             (string_literal)))
@@ -315,7 +315,7 @@ END.
         (no_lock))
       (for_record
         table: (identifier)
-        (of_clause
+        (of_phrase
           (identifier))
         (no_lock)))
     (body
@@ -343,7 +343,7 @@ END.
       (for_record
         table: (identifier)
         (no_lock)
-        (where_clause
+        (where_phrase
           (binary_expression
             (binary_expression
               (qualified_name
@@ -355,7 +355,7 @@ END.
                 left: (identifier)
                 right: (identifier))
               (string_literal))))
-        (by_clause
+        (by_phrase
           (qualified_name
             left: (identifier)
             right: (identifier))
@@ -389,7 +389,7 @@ END.
         (no_lock))
       (for_record
         table: (identifier)
-        (of_clause
+        (of_phrase
           (identifier))
         (no_lock)))
     (body
@@ -453,7 +453,7 @@ END.
     (for_record_list
       (for_record
         table: (identifier)))
-    (while_clause
+    (while_phrase
       condition: (binary_expression
         (identifier)
         (number_literal)))
@@ -464,7 +464,7 @@ END.
     (for_record_list
       (for_record
         table: (identifier)))
-    (stop_after_clause
+    (stop_after_phrase
       time: (number_literal))
     (body
       (display_statement
@@ -493,7 +493,7 @@ END.
     (for_record_list
       (for_record
         table: (identifier)))
-    (on_error_clause)
+    (on_error_phrase)
     (body
       (display_statement
         (identifier))))
@@ -501,7 +501,7 @@ END.
     (for_record_list
       (for_record
         table: (identifier)))
-    (on_quit_clause)
+    (on_quit_phrase)
     (body
       (display_statement
         (identifier))))
@@ -509,7 +509,7 @@ END.
     (for_record_list
       (for_record
         table: (identifier)))
-    (on_stop_clause)
+    (on_stop_phrase)
     (body
       (display_statement
         (identifier)))))

@@ -29,7 +29,7 @@ module.exports = ({ kw, tkw }) => ({
       choice(kw("INPUT"), kw("OUTPUT"), kw("INPUT-OUTPUT"), kw("RETURN")),
       tkw("PARAM(ETER)?", "PARAMETER"),
       field("name", $.identifier),
-      $.__procedure_variable_type_clause,
+      $.__procedure_variable_type_phrase,
       optional(alias($.__procedure_initial_option, $.initial_option)),
       optional(alias($.__procedure_no_undo, $.no_undo)),
     ),
@@ -75,16 +75,16 @@ module.exports = ({ kw, tkw }) => ({
       optional(tkw("PRESELECT")),
     ),
 
-  __procedure_variable_type_clause: ($) =>
+  __procedure_variable_type_phrase: ($) =>
     seq(
       choice(
         seq(kw("AS"), optional(kw("CLASS")), field("type", $._type_or_string)),
         seq(kw("LIKE"), field("like", $.__procedure_field_name)),
       ),
-      optional($.__procedure_extent_clause),
+      optional($.__procedure_extent_phrase),
     ),
 
-  __procedure_extent_clause: ($) =>
+  __procedure_extent_phrase: ($) =>
     seq(kw("EXTENT"), optional($.__procedure_extent_size)),
 
   __procedure_initial_option: ($) =>

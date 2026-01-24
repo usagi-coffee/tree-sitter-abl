@@ -11,10 +11,10 @@ INPUT-OUTPUT STREAM-HANDLE hStream CLOSE.
 (source_code
   (input_output_statement)
   (input_output_statement
-    (stream_clause
+    (stream_phrase
       name: (identifier)))
   (input_output_statement
-    (stream_handle_clause
+    (stream_handle_phrase
       handle: (identifier))))
 
 ================================================================================
@@ -38,6 +38,6 @@ INPUT-OUTPUT STREAM sIO THROUGH "filter" UNBUFFERED.
   (input_output_statement
     (identifier))
   (input_output_statement
-    (stream_clause
+    (stream_phrase
       name: (identifier))
     program: (string_literal)))

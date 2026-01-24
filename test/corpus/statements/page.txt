@@ -10,5 +10,5 @@ PAGE STREAM sOut.
 (source_code
   (page_statement)
   (page_statement
-    (stream_clause
+    (stream_phrase
       stream: (identifier))))

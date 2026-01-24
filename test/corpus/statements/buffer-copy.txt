@@ -18,13 +18,13 @@ BUFFER-COPY bSrc EXCEPT Field1, Field2, Field3 TO bTgt.
     target: (identifier))
   (buffer_copy_statement
     source: (identifier)
-    (except_clause
+    (except_phrase
       (identifier)
       (identifier))
     target: (identifier))
   (buffer_copy_statement
     source: (identifier)
-    (except_clause
+    (except_phrase
       (identifier)
       (identifier)
       (identifier))

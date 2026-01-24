@@ -6,12 +6,12 @@ module.exports = ({ kw, tkw }) => ({
       seq(
         optional(choice(kw("FIRST"), kw("LAST"))),
         field("table", $.__record_query_record_name),
-        alias($.__record_query_where_clause, $.where_clause),
+        alias($.__record_query_where_phrase, $.where_phrase),
         optional(alias($.__record_query_use_index, $.use_index)),
       ),
     ),
 
-  __record_query_where_clause: ($) => seq(kw("WHERE"), $._expression),
+  __record_query_where_phrase: ($) => seq(kw("WHERE"), $._expression),
   __record_query_use_index: ($) =>
     seq(kw("USE-INDEX"), field("index", $.__record_query_index_name)),
 

@@ -5,15 +5,15 @@ module.exports = ({ kw, tkw }) => ({
       seq(
         optional(seq(field("label", $.identifier), $._colon)),
         tkw("DO"),
-        optional($.__do_transaction_clause),
-        optional($.__do_preselect_clause),
-        optional(choice($.__do_while_clause, $.__do_loop_clause)),
-        optional($.__do_transaction_clause),
-        optional(alias($.__do_on_endkey_clause, $.on_endkey_clause)),
+        optional($.__do_transaction_phrase),
+        optional($.__do_preselect_phrase),
+        optional(choice($.__do_while_phrase, $.__do_loop_phrase)),
+        optional($.__do_transaction_phrase),
+        optional(alias($.__do_on_endkey_phrase, $.on_endkey_phrase)),
         optional(
           choice(
-            alias($.__do_on_error_clause, $.on_error_clause),
-            alias($.__do_on_quit_clause, $.on_quit_clause),
+            alias($.__do_on_error_phrase, $.on_error_phrase),
+            alias($.__do_on_quit_phrase, $.on_quit_phrase),
           ),
         ),
         $.body,
@@ -24,7 +24,7 @@ module.exports = ({ kw, tkw }) => ({
 
   body: ($) => seq(choice($._colon, $._terminator_dot), repeat($._statement)),
 
-  __do_loop_clause: ($) =>
+  __do_loop_phrase: ($) =>
     seq(
       field("variable", $.identifier),
       "=",
@@ -33,11 +33,11 @@ module.exports = ({ kw, tkw }) => ({
       field("end", $._expression),
       optional(seq(kw("BY"), field("step", $._expression))),
     ),
-  __do_while_clause: ($) => seq(kw("WHILE"), $._expression),
-  __do_preselect_clause: ($) =>
+  __do_while_phrase: ($) => seq(kw("WHILE"), $._expression),
+  __do_preselect_phrase: ($) =>
     seq(token(/PRESELECT\s+/i), $.preselect_record_list),
-  __do_transaction_clause: ($) => tkw("TRANSACTION"),
-  __do_on_endkey_clause: ($) =>
+  __do_transaction_phrase: ($) => tkw("TRANSACTION"),
+  __do_on_endkey_phrase: ($) =>
     seq(kw("ON"), kw("ENDKEY"), alias($.__do_on_endkey_undo, $.undo_phrase)),
   __do_on_endkey_undo: ($) =>
     seq(
@@ -63,7 +63,7 @@ module.exports = ({ kw, tkw }) => ({
         ),
       ),
     ),
-  __do_on_error_clause: ($) =>
+  __do_on_error_phrase: ($) =>
     seq(
       kw("ON"),
       kw("ERROR"),
@@ -72,8 +72,7 @@ module.exports = ({ kw, tkw }) => ({
         alias($.__do_undo_leave_phrase, $.undo_leave_phrase),
       ),
     ),
-  __do_on_quit_clause: ($) =>
-    seq(kw("ON"), tkw("QUIT"), ",", tkw("LEAVE")),
+  __do_on_quit_phrase: ($) => seq(kw("ON"), tkw("QUIT"), ",", tkw("LEAVE")),
   __do_undo_throw_phrase: ($) => seq(tkw("UNDO"), ",", tkw("THROW")),
   __do_undo_leave_phrase: ($) => seq(tkw("UNDO"), ",", tkw("LEAVE")),
 });

@@ -4,8 +4,8 @@ module.exports = ({ kw, tkw }) => ({
       kw("PUT"),
       optional(
         choice(
-          alias($.__put_stream_clause, $.stream_clause),
-          alias($.__put_stream_handle_clause, $.stream_handle_clause),
+          alias($.__put_stream_phrase, $.stream_phrase),
+          alias($.__put_stream_handle_phrase, $.stream_handle_phrase),
         ),
       ),
       choice(
@@ -15,8 +15,8 @@ module.exports = ({ kw, tkw }) => ({
       $._terminator,
     ),
 
-  __put_stream_clause: ($) => seq(kw("STREAM"), field("name", $.identifier)),
-  __put_stream_handle_clause: ($) =>
+  __put_stream_phrase: ($) => seq(kw("STREAM"), field("name", $.identifier)),
+  __put_stream_handle_phrase: ($) =>
     seq(kw("STREAM-HANDLE"), field("handle", $._expression)),
   __put_item: ($) =>
     choice(
@@ -27,15 +27,12 @@ module.exports = ({ kw, tkw }) => ({
   __put_expression_item: ($) =>
     seq(
       field("value", $._expression),
-      optional(alias($.__put_format_clause, $.format_clause)),
+      optional(alias($.__put_format_phrase, $.format_phrase)),
       optional(
-        seq(
-          choice(kw("AT"), kw("TO")),
-          field("position", $._expression),
-        ),
+        seq(choice(kw("AT"), kw("TO")), field("position", $._expression)),
       ),
     ),
-  __put_format_clause: ($) =>
+  __put_format_phrase: ($) =>
     choice(
       seq(kw("FORMAT"), field("format", $.string_literal)),
       seq(

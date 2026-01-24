@@ -9,21 +9,21 @@ module.exports = ({ kw, tkw }) => ({
           seq(kw("PRESELECT"), $.preselect_record_list),
         ),
       ),
-      optional(alias($.__repeat_on_stop_clause, $.on_stop_clause)),
-      optional(alias($.__repeat_on_error_clause, $.on_error_clause)),
+      optional(alias($.__repeat_on_stop_phrase, $.on_stop_phrase)),
+      optional(alias($.__repeat_on_error_phrase, $.on_error_phrase)),
       $.body,
       tkw("END"),
       $._terminator,
     ),
 
-  __repeat_on_stop_clause: ($) =>
+  __repeat_on_stop_phrase: ($) =>
     seq(
       kw("ON"),
       kw("STOP"),
       alias($.__repeat_undo_return_error, $.undo_return_error),
     ),
 
-  __repeat_on_error_clause: ($) =>
+  __repeat_on_error_phrase: ($) =>
     seq(
       kw("ON"),
       kw("ERROR"),
@@ -32,11 +32,5 @@ module.exports = ({ kw, tkw }) => ({
 
   __repeat_undo_throw_phrase: ($) => seq(tkw("UNDO"), ",", tkw("THROW")),
   __repeat_undo_return_error: ($) =>
-    seq(
-      tkw("UNDO"),
-      ",",
-      tkw("RETURN"),
-      tkw("ERROR"),
-      $.new_expression,
-    ),
+    seq(tkw("UNDO"), ",", tkw("RETURN"), tkw("ERROR"), $.new_expression),
 });

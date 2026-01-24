@@ -30,7 +30,7 @@ FIND Customer WHERE Customer.Name = "John" AND Customer.Balance > 0.
 (source_code
   (find_statement
     table: (identifier)
-    (where_clause
+    (where_phrase
       (binary_expression
         (qualified_name
           left: (identifier)
@@ -39,7 +39,7 @@ FIND Customer WHERE Customer.Name = "John" AND Customer.Balance > 0.
     (no_lock))
   (find_statement
     table: (identifier)
-    (where_clause
+    (where_phrase
       (binary_expression
         (binary_expression
           (qualified_name
@@ -71,7 +71,7 @@ FIND FIRST DebtorShipTo WHERE DebtorShipTo.Code = par_code NO-LOCK NO-ERROR.
     (no_lock))
   (find_statement
     table: (identifier)
-    (where_clause
+    (where_phrase
       (binary_expression
         (qualified_name
           left: (identifier)
@@ -109,14 +109,14 @@ FIND Order OF Customer NO-LOCK.
 (source_code
   (find_statement
     table: (identifier)
-    (of_clause
+    (of_phrase
       (identifier))
     (exclusive_lock)
     (no_error)
     (no_wait))
   (find_statement
     table: (identifier)
-    (of_clause
+    (of_phrase
       (identifier))
     (no_lock)))
 
@@ -132,7 +132,7 @@ FIND Customer USE-INDEX CustNum.
 (source_code
   (find_statement
     table: (identifier)
-    (where_clause
+    (where_phrase
       (binary_expression
         (qualified_name
           left: (identifier)
@@ -173,14 +173,14 @@ FIND Order USING Order.OrderNum EXCLUSIVE-LOCK.
 (source_code
   (find_statement
     table: (identifier)
-    (using_clause
+    (using_phrase
       (qualified_name
         left: (identifier)
         right: (identifier)))
     (no_error))
   (find_statement
     table: (identifier)
-    (using_clause
+    (using_phrase
       (qualified_name
         left: (identifier)
         right: (identifier)))
@@ -205,7 +205,7 @@ FIND db.tablename WHERE tablename.field = 1.
     table: (qualified_name
       left: (identifier)
       right: (identifier))
-    (where_clause
+    (where_phrase
       (binary_expression
         (qualified_name
           left: (identifier)
@@ -223,7 +223,7 @@ FIND FIRST Customer WHERE Customer.Balance > 1000 USE-INDEX Balance NO-LOCK NO-E
 (source_code
   (find_statement
     table: (identifier)
-    (where_clause
+    (where_phrase
       (binary_expression
         (qualified_name
           left: (identifier)

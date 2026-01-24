@@ -387,7 +387,7 @@ DEFINE IMAGE myImage SIZE 5 BY 5 CONVERT-3D-COLORS.
 (source_code
   (image_definition
     (identifier)
-    (size_clause
+    (size_phrase
       (number_literal)
       (number_literal))))
 
@@ -792,7 +792,7 @@ END.
       (preselect_record
         (identifier)
         (no_lock)
-        (where_clause
+        (where_phrase
           (binary_expression
             (qualified_name
               (identifier)
@@ -995,9 +995,9 @@ END.
     (for_record_list
       (for_record
         (identifier)
-        (of_clause
+        (of_phrase
           (identifier))
-        (where_clause
+        (where_phrase
           (binary_expression
             (identifier)
             (number_literal)))
@@ -1012,7 +1012,7 @@ END.
         (no_lock))
       (for_record
         (identifier)
-        (of_clause
+        (of_phrase
           (identifier))))
     (body
       (display_statement
@@ -1031,9 +1031,9 @@ FIND some_table NO-LOCK WHERE x > 5 NO-ERROR.
 (source_code
   (find_statement
     (identifier)
-    (of_clause
+    (of_phrase
       (identifier))
-    (where_clause
+    (where_phrase
       (binary_expression
         (identifier)
         (number_literal)))
@@ -1042,7 +1042,7 @@ FIND some_table NO-LOCK WHERE x > 5 NO-ERROR.
   (find_statement
     (identifier)
     (no_lock)
-    (where_clause
+    (where_phrase
       (binary_expression
         (identifier)
         (number_literal)))
@@ -1067,7 +1067,7 @@ END CASE.
 (source_code
   (case_statement
     (identifier)
-    (case_when_clause
+    (case_when_phrase
       (string_literal)
       (do_block
         (body
@@ -1079,23 +1079,23 @@ END CASE.
             (identifier)
             (assignment_operator)
             (number_literal)))))
-    (case_when_clause
+    (case_when_phrase
       (string_literal)
       (string_literal)
-      (case_clause_statement
+      (case_phrase_statement
         (assignment_statement
           (identifier)
           (assignment_operator)
           (number_literal))))
-    (case_when_clause
+    (case_when_phrase
       (string_literal)
-      (case_clause_statement
+      (case_phrase_statement
         (assignment_statement
           (identifier)
           (assignment_operator)
           (number_literal))))
-    (case_otherwise_clause
-      (case_clause_statement
+    (case_otherwise_phrase
+      (case_phrase_statement
         (assignment_statement
           (identifier)
           (assignment_operator)

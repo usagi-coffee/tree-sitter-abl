@@ -26,11 +26,11 @@ module.exports = ({ kw, tkw }) => ({
       "=",
       field("right", $._expression),
       optional(
-        alias($.__assign_when_available_clause, $.when_available_clause),
+        alias($.__assign_when_available_phrase, $.when_available_phrase),
       ),
     ),
 
-  __assign_when_available_clause: ($) =>
+  __assign_when_available_phrase: ($) =>
     seq(kw("WHEN"), kw("AVAILABLE"), $.__assign_record_name),
   __assign_record_name: ($) => choice($.identifier, $.qualified_name),
   __assign_no_error: ($) => tkw("NO-ERROR"),

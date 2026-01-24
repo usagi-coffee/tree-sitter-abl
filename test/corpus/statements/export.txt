@@ -14,13 +14,13 @@ EXPORT STREAM-HANDLE hOut memptrBuf.
     (identifier)
     (identifier))
   (export_statement
-    (delimiter_clause
+    (delimiter_phrase
       (string_literal))
     (identifier)
     (identifier)
     (identifier)
     (no_lobs))
   (export_statement
-    (stream_handle_clause
+    (stream_handle_phrase
       handle: (identifier))
     (identifier)))

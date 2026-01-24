@@ -14,7 +14,7 @@ VIEW STREAM sOut FRAME myframe.
     (widget_phrase
       frame: (identifier)))
   (view_statement
-    (stream_clause
+    (stream_phrase
       stream: (identifier))
     (widget_phrase
       frame: (identifier))))

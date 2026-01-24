@@ -15,21 +15,21 @@ END CASE.
 (source_code
   (case_statement
     (identifier)
-    (case_when_clause
+    (case_when_phrase
       (string_literal)
       (do_block
         (body
           (put_statement
             (string_literal)
             (skip)))))
-    (case_when_clause
+    (case_when_phrase
       (string_literal)
-      (case_clause_statement
+      (case_phrase_statement
         (put_statement
           (string_literal)
           (skip))))
-    (case_otherwise_clause
-      (case_clause_statement
+    (case_otherwise_phrase
+      (case_phrase_statement
         (put_statement
           (string_literal)
           (skip))))))
@@ -48,15 +48,15 @@ END.
 (source_code
   (case_statement
     (identifier)
-    (case_when_clause
+    (case_when_phrase
       (string_literal)
-      (case_clause_statement
+      (case_phrase_statement
         (assignment_statement
           (identifier)
           (assignment_operator)
           (number_literal))))
-    (case_otherwise_clause
-      (case_clause_statement
+    (case_otherwise_phrase
+      (case_phrase_statement
         (assignment_statement
           (identifier)
           (assignment_operator)

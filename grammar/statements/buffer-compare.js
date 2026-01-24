@@ -3,23 +3,23 @@ module.exports = ({ kw, tkw }) => ({
     seq(
       kw("BUFFER-COMPARE"),
       field("source", $._expression),
-      optional($.__buffer_compare_field_clause),
+      optional($.__buffer_compare_field_phrase),
       kw("TO"),
       field("target", $._expression),
       optional(choice(tkw("CASE-SENSITIVE"), tkw("BINARY"))),
-      optional(alias($.__buffer_compare_save_clause, $.save_clause)),
+      optional(alias($.__buffer_compare_save_phrase, $.save_phrase)),
       optional(alias($.__buffer_compare_compares_block, $.compares_block)),
       optional(tkw("NO-LOBS")),
       optional(tkw("NO-ERROR")),
       $._terminator,
     ),
 
-  __buffer_compare_field_clause: ($) =>
+  __buffer_compare_field_phrase: ($) =>
     seq(
       choice(kw("EXCEPT"), kw("USING")),
       repeat1(field("field", choice($.identifier, $.qualified_name))),
     ),
-  __buffer_compare_save_clause: ($) =>
+  __buffer_compare_save_phrase: ($) =>
     seq(
       kw("SAVE"),
       optional(seq(kw("RESULT"), kw("IN"))),
@@ -30,11 +30,11 @@ module.exports = ({ kw, tkw }) => ({
       optional(tkw("EXPLICIT")),
       tkw("COMPARES"),
       $._colon,
-      repeat1($.__buffer_compare_when_clause),
+      repeat1($.__buffer_compare_when_phrase),
       optional(tkw("COMPARES")),
       tkw("END"),
     ),
-  __buffer_compare_when_clause: ($) =>
+  __buffer_compare_when_phrase: ($) =>
     seq(
       kw("WHEN"),
       field("field", $._primary_expression),

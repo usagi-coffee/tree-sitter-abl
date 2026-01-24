@@ -4,8 +4,8 @@ module.exports = ({ kw, tkw }) => ({
       kw("INPUT-OUTPUT"),
       optional(
         choice(
-          alias($.__input_output_stream_clause, $.stream_clause),
-          alias($.__input_output_stream_handle_clause, $.stream_handle_clause),
+          alias($.__input_output_stream_phrase, $.stream_phrase),
+          alias($.__input_output_stream_handle_phrase, $.stream_handle_phrase),
         ),
       ),
       choice(
@@ -20,9 +20,9 @@ module.exports = ({ kw, tkw }) => ({
       $._terminator,
     ),
 
-  __input_output_stream_clause: ($) =>
+  __input_output_stream_phrase: ($) =>
     seq(kw("STREAM"), field("name", $.identifier)),
-  __input_output_stream_handle_clause: ($) =>
+  __input_output_stream_handle_phrase: ($) =>
     seq(kw("STREAM-HANDLE"), field("handle", $._expression)),
   __input_output_through_target: ($) =>
     choice(
@@ -45,9 +45,9 @@ module.exports = ({ kw, tkw }) => ({
       seq(kw("MAP"), field("map", choice($.identifier, $.string_literal))),
       tkw("NO-MAP"),
       tkw("UNBUFFERED"),
-      alias($.__input_output_convert_clause, $.convert_clause),
+      alias($.__input_output_convert_phrase, $.convert_phrase),
     ),
-  __input_output_convert_clause: ($) =>
+  __input_output_convert_phrase: ($) =>
     choice(
       tkw("NO-CONVERT"),
       seq(

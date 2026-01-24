@@ -16,7 +16,7 @@ DEF PRIVATE IMAGE imgLike LIKE imgMain SIZE-PIXELS 100 BY 50.
       height: (number_literal)
       x: (number_literal)
       y: (number_literal))
-    (size_clause
+    (size_phrase
       width: (number_literal)
       height: (number_literal))
     (number_literal)
@@ -24,8 +24,8 @@ DEF PRIVATE IMAGE imgLike LIKE imgMain SIZE-PIXELS 100 BY 50.
     tooltip: (string_literal))
   (image_definition
     name: (identifier)
-    (like_clause
+    (like_phrase
       like: (identifier))
-    (size_clause
+    (size_phrase
       width: (number_literal)
       height: (number_literal))))

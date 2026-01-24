@@ -6,8 +6,8 @@ module.exports = ({ kw, tkw }) => ({
         seq(
           optional(
             choice(
-              alias($.__output_stream_clause, $.stream_clause),
-              alias($.__output_stream_handle_clause, $.stream_handle_clause),
+              alias($.__output_stream_phrase, $.stream_phrase),
+              alias($.__output_stream_handle_phrase, $.stream_handle_phrase),
             ),
           ),
           tkw("CLOSE"),
@@ -15,8 +15,8 @@ module.exports = ({ kw, tkw }) => ({
         seq(
           optional(
             choice(
-              alias($.__output_stream_clause, $.stream_clause),
-              alias($.__output_stream_handle_clause, $.stream_handle_clause),
+              alias($.__output_stream_phrase, $.stream_phrase),
+              alias($.__output_stream_handle_phrase, $.stream_handle_phrase),
             ),
           ),
           kw("TO"),
@@ -26,8 +26,8 @@ module.exports = ({ kw, tkw }) => ({
         seq(
           optional(
             choice(
-              alias($.__output_stream_clause, $.stream_clause),
-              alias($.__output_stream_handle_clause, $.stream_handle_clause),
+              alias($.__output_stream_phrase, $.stream_phrase),
+              alias($.__output_stream_handle_phrase, $.stream_handle_phrase),
             ),
           ),
           kw("THROUGH"),
@@ -39,14 +39,14 @@ module.exports = ({ kw, tkw }) => ({
       $._terminator,
     ),
 
-  __output_append_clause: ($) => tkw("APPEND"),
+  __output_append_phrase: ($) => tkw("APPEND"),
   __output_to_option: ($) =>
     choice(
-      alias($.__output_lob_dir_clause, $.lob_dir_clause),
-      alias($.__output_num_copies_clause, $.num_copies_clause),
+      alias($.__output_lob_dir_phrase, $.lob_dir_phrase),
+      alias($.__output_num_copies_phrase, $.num_copies_phrase),
       kw("COLLATE"),
       choice(kw("LANDSCAPE"), kw("PORTRAIT")),
-      alias($.__output_append_clause, $.append_clause),
+      alias($.__output_append_phrase, $.append_phrase),
       kw("BINARY"),
       tkw("ECHO"),
       tkw("NO-ECHO"),
@@ -54,9 +54,9 @@ module.exports = ({ kw, tkw }) => ({
       seq(kw("MAP"), field("map", $.__output_map_entry)),
       tkw("NO-MAP"),
       kw("PAGED"),
-      alias($.__output_page_size_clause, $.page_size_clause),
+      alias($.__output_page_size_phrase, $.page_size_phrase),
       tkw("UNBUFFERED"),
-      alias($.__output_convert_clause, $.convert_clause),
+      alias($.__output_convert_phrase, $.convert_phrase),
     ),
   __output_through_option: ($) =>
     choice(
@@ -65,11 +65,11 @@ module.exports = ({ kw, tkw }) => ({
       seq(kw("MAP"), field("map", $.__output_map_entry)),
       tkw("NO-MAP"),
       kw("PAGED"),
-      alias($.__output_page_size_clause, $.page_size_clause),
+      alias($.__output_page_size_phrase, $.page_size_phrase),
       tkw("UNBUFFERED"),
-      alias($.__output_convert_clause, $.convert_clause),
+      alias($.__output_convert_phrase, $.convert_phrase),
     ),
-  __output_convert_clause: ($) =>
+  __output_convert_phrase: ($) =>
     choice(
       tkw("NO-CONVERT"),
       seq(
@@ -82,7 +82,7 @@ module.exports = ({ kw, tkw }) => ({
         ),
       ),
     ),
-  __output_lob_dir_clause: ($) =>
+  __output_lob_dir_phrase: ($) =>
     seq(
       kw("LOB-DIR"),
       choice(
@@ -90,7 +90,7 @@ module.exports = ({ kw, tkw }) => ({
         seq(tkw("VALUE"), "(", $._expression, ")"),
       ),
     ),
-  __output_num_copies_clause: ($) =>
+  __output_num_copies_phrase: ($) =>
     seq(
       kw("NUM-COPIES"),
       choice(
@@ -99,7 +99,7 @@ module.exports = ({ kw, tkw }) => ({
         seq(tkw("VALUE"), "(", $._expression, ")"),
       ),
     ),
-  __output_page_size_clause: ($) =>
+  __output_page_size_phrase: ($) =>
     seq(
       kw("PAGE-SIZE"),
       choice(
@@ -135,8 +135,8 @@ module.exports = ({ kw, tkw }) => ({
       $.identifier,
       alias($.constant_expression, $.constant),
     ),
-  __output_stream_clause: ($) => seq(kw("STREAM"), field("name", $.identifier)),
-  __output_stream_handle_clause: ($) =>
+  __output_stream_phrase: ($) => seq(kw("STREAM"), field("name", $.identifier)),
+  __output_stream_handle_phrase: ($) =>
     seq(kw("STREAM-HANDLE"), field("handle", $._expression)),
   __output_printer_target: ($) =>
     choice(

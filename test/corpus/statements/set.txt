@@ -34,7 +34,7 @@ SET field1 GO-ON(f1 f2).
     (set_item
       field: (identifier)))
   (set_statement
-    (stream_clause
+    (stream_phrase
       stream: (identifier))
     (set_item
       field: (identifier)))
@@ -51,6 +51,6 @@ SET field1 GO-ON(f1 f2).
   (set_statement
     (set_item
       field: (identifier))
-    (go_on_clause
+    (go_on_phrase
       (identifier)
       (identifier))))

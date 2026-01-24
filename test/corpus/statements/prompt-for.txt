@@ -44,6 +44,6 @@ PROMPT-FOR field1 GO-ON(f1 f2).
   (prompt_for_statement
     (prompt_for_item
       field: (identifier))
-    (go_on_clause
+    (go_on_phrase
       (identifier)
       (identifier))))

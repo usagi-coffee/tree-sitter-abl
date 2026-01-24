@@ -30,13 +30,13 @@ module.exports = ({ kw, tkw }) => ({
       optional(tkw("REFERENCE-ONLY")),
       repeat(
         choice(
-          alias($.__temp_table_like_clause, $.like_clause),
+          alias($.__temp_table_like_phrase, $.like_phrase),
           alias(
-            $.__temp_table_like_sequential_clause,
-            $.like_sequential_clause,
+            $.__temp_table_like_sequential_phrase,
+            $.like_sequential_phrase,
           ),
           alias($.__temp_table_rcode_information, $.rcode_information),
-          alias($.__temp_table_before_table_clause, $.before_table_clause),
+          alias($.__temp_table_before_table_phrase, $.before_table_phrase),
         ),
       ),
       repeat1(
@@ -53,7 +53,7 @@ module.exports = ({ kw, tkw }) => ({
       choice(kw("DEFINE"), kw("DEF")),
       kw("WORK-TABLE"),
       field("name", $.identifier),
-      optional(alias($.__temp_table_like_clause, $.like_clause)),
+      optional(alias($.__temp_table_like_phrase, $.like_phrase)),
       optional(alias($.__temp_table_no_undo, $.no_undo)),
       repeat1(
         choice(
@@ -69,7 +69,7 @@ module.exports = ({ kw, tkw }) => ({
       choice(kw("DEFINE"), kw("DEF")),
       kw("WORKFILE"),
       field("name", $.identifier),
-      optional(alias($.__temp_table_like_clause, $.like_clause)),
+      optional(alias($.__temp_table_like_phrase, $.like_phrase)),
       optional(alias($.__temp_table_no_undo, $.no_undo)),
       $._terminator,
     ),
@@ -100,28 +100,28 @@ module.exports = ({ kw, tkw }) => ({
       repeat1($.__temp_table_index_field),
     ),
   __temp_table_no_undo: ($) => tkw("NO-UNDO"),
-  __temp_table_like_clause: ($) =>
+  __temp_table_like_phrase: ($) =>
     seq(
       kw("LIKE"),
       field("like", $.__temp_table_like_name),
       optional(tkw("VALIDATE")),
-      repeat($.__temp_table_use_index_clause),
+      repeat($.__temp_table_use_index_phrase),
     ),
-  __temp_table_like_sequential_clause: ($) =>
+  __temp_table_like_sequential_phrase: ($) =>
     seq(
       kw("LIKE-SEQUENTIAL"),
       field("like", $.__temp_table_like_name),
       optional(tkw("VALIDATE")),
-      repeat($.__temp_table_use_index_clause),
+      repeat($.__temp_table_use_index_phrase),
     ),
-  __temp_table_use_index_clause: ($) =>
+  __temp_table_use_index_phrase: ($) =>
     seq(
       kw("USE-INDEX"),
       field("index", $.identifier),
       optional(seq(kw("AS"), kw("PRIMARY"))),
     ),
   __temp_table_rcode_information: ($) => tkw("RCODE-INFORMATION"),
-  __temp_table_before_table_clause: ($) =>
+  __temp_table_before_table_phrase: ($) =>
     seq(kw("BEFORE-TABLE"), field("before", $.identifier)),
   __temp_table_index_field: ($) =>
     seq(

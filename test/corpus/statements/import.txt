@@ -11,12 +11,12 @@ IMPORT STREAM-HANDLE hStream mPtrData.
 
 (source_code
   (import_statement
-    (stream_clause
+    (stream_phrase
       name: (identifier))
-    (unformatted_clause
+    (unformatted_phrase
       field: (identifier)))
   (import_statement
-    (delimiter_clause
+    (delimiter_phrase
       (string_literal))
     (identifier)
     (skip_field)
@@ -28,6 +28,6 @@ IMPORT STREAM-HANDLE hStream mPtrData.
     (identifier)
     (identifier))
   (import_statement
-    (stream_handle_clause
+    (stream_handle_phrase
       handle: (identifier))
     (identifier)))

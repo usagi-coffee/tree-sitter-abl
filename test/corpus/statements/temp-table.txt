@@ -33,11 +33,11 @@ DEFINE TEMP-TABLE tt_like LIKE base_tbl
     namespace_prefix: (string_literal)
     node: (string_literal)
     serialize_name: (string_literal)
-    (like_clause
+    (like_phrase
       like: (identifier)
       index: (identifier))
     (rcode_information)
-    (before_table_clause
+    (before_table_phrase
       before: (identifier))
     (temp_table_field
       name: (identifier)
@@ -79,7 +79,7 @@ DEFINE TEMP-TABLE tt_like LIKE base_tbl
       type: (identifier)))
   (temp_table_definition
     name: (identifier)
-    (like_clause
+    (like_phrase
       like: (identifier))
     (temp_table_field
       name: (identifier)

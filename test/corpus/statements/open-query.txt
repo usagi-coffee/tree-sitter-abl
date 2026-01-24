@@ -16,7 +16,7 @@ OPEN QUERY qCust FOR EACH Customer NO-LOCK BY Customer.Name.
     query: (identifier)
     (record_phrase
       record: (identifier))
-    (by_clause
+    (by_phrase
       by: (qualified_name
         left: (identifier)
         right: (identifier)))))

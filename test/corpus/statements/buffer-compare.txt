@@ -46,12 +46,12 @@ BUFFER-COMPARE bSrc TO bTgt NO-ERROR.
   (buffer_compare_statement
     source: (identifier)
     target: (identifier)
-    (save_clause
+    (save_phrase
       result: (identifier)))
   (buffer_compare_statement
     source: (identifier)
     target: (identifier)
-    (save_clause
+    (save_phrase
       result: (identifier)))
   (buffer_compare_statement
     source: (identifier)

@@ -7,11 +7,11 @@ module.exports = ({ kw }) => ({
       $._expression,
       kw("TO"),
       $._expression,
-      optional(alias($.__copy_lob_convert_clause, $.convert_clause)),
+      optional(alias($.__copy_lob_convert_phrase, $.convert_phrase)),
       $._terminator,
     ),
 
-  __copy_lob_convert_clause: ($) =>
+  __copy_lob_convert_phrase: ($) =>
     seq(
       kw("CONVERT"),
       kw("SOURCE"),

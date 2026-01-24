@@ -9,5 +9,5 @@ DEFINE WORKFILE wfTest LIKE Customer.
 (source_code
   (workfile_definition
     name: (identifier)
-    (like_clause
+    (like_phrase
       like: (identifier))))

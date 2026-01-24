@@ -12,10 +12,10 @@ INPUT STREAM sIn THROUGH VALUE(cmd) ECHO.
     program: (string_literal)
     (identifier)
     (identifier)
-    (convert_clause
+    (convert_phrase
       target: (string_literal)
       source: (string_literal)))
   (input_through_statement
-    (stream_clause
+    (stream_phrase
       name: (identifier))
     (identifier)))

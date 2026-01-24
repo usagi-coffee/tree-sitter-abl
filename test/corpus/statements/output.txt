@@ -16,20 +16,20 @@ OUTPUT TO "out.txt" CONVERT TARGET "1250".
 (source_code
   (output_statement)
   (output_statement
-    (stream_clause
+    (stream_phrase
       name: (identifier)))
   (output_statement
     (binary_expression
       (identifier)
       (string_literal))
-    (append_clause))
+    (append_phrase))
   (output_statement
     printer: (string_literal)
-    (num_copies_clause
+    (num_copies_phrase
       (number_literal))
-    (page_size_clause
+    (page_size_phrase
       (number_literal))
-    (convert_clause))
+    (convert_phrase))
   (output_statement
     program: (string_literal)
     (identifier))
@@ -37,10 +37,10 @@ OUTPUT TO "out.txt" CONVERT TARGET "1250".
     file: (string_literal))
   (output_statement
     (identifier)
-    (convert_clause
+    (convert_phrase
       source: (string_literal)
       target: (string_literal)))
   (output_statement
     file: (string_literal)
-    (convert_clause
+    (convert_phrase
       target: (string_literal))))

@@ -17,7 +17,7 @@ UNDERLINE field1 WITH FRAME f1.
     field: (identifier)
     field: (identifier))
   (underline_statement
-    (stream_clause
+    (stream_phrase
       stream: (identifier))
     field: (identifier))
   (underline_statement

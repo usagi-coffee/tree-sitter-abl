@@ -15,7 +15,7 @@ module.exports = ({ kw, tkw }) => ({
       ),
       optional(alias($.__open_query_tuning, $.query_tuning)),
       optional(tkw("BREAK")),
-      repeat(alias($.__open_query_by_clause, $.by_clause)),
+      repeat(alias($.__open_query_by_phrase, $.by_phrase)),
       optional(tkw("INDEXED-REPOSITION")),
       optional(seq(kw("MAX-ROWS"), field("max_rows", $._expression))),
       $._terminator,
@@ -30,7 +30,9 @@ module.exports = ({ kw, tkw }) => ({
           choice(tkw("SHARE-LOCK"), tkw("EXCLUSIVE-LOCK"), tkw("NO-LOCK")),
         ),
       ),
-      optional(seq(kw("OF"), field("of", choice($.identifier, $.qualified_name)))),
+      optional(
+        seq(kw("OF"), field("of", choice($.identifier, $.qualified_name))),
+      ),
       optional(seq(kw("WHERE"), field("where", $._expression))),
       optional(seq(kw("USE-INDEX"), field("index", $.identifier))),
     ),
@@ -54,10 +56,6 @@ module.exports = ({ kw, tkw }) => ({
       ),
       ")",
     ),
-  __open_query_by_clause: ($) =>
-    seq(
-      kw("BY"),
-      field("by", $._expression),
-      optional(tkw("DESCENDING")),
-    ),
+  __open_query_by_phrase: ($) =>
+    seq(kw("BY"), field("by", $._expression), optional(tkw("DESCENDING"))),
 });

@@ -17,10 +17,10 @@ PUT UNFORMATTED x format("9999-99-99") ';'.
       right: (identifier))
     (skip))
   (put_statement
-    (stream_clause
+    (stream_phrase
       name: (identifier))
     value: (string_literal)
-    (format_clause
+    (format_phrase
       format: (string_literal))
     position: (number_literal)
     (space
@@ -36,6 +36,6 @@ PUT UNFORMATTED x format("9999-99-99") ';'.
     control: (string_literal))
   (put_statement
     value: (identifier)
-    (format_clause
+    (format_phrase
       format: (string_literal))
     value: (string_literal)))

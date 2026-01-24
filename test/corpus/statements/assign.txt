@@ -68,14 +68,14 @@ ASSIGN
     (assign_pair
       left: (identifier)
       right: (string_literal)
-      (when_available_clause
+      (when_available_phrase
         (identifier)))
     (assign_pair
       left: (identifier)
       right: (qualified_name
         left: (identifier)
         right: (identifier))
-      (when_available_clause
+      (when_available_phrase
         (identifier)))))
 
 ================================================================================

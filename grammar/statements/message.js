@@ -9,13 +9,13 @@ module.exports = ({ kw, tkw }) => ({
           alias($.__message_skip_item, $.skip),
         ),
       ),
-      optional(alias($.__message_view_as_clause, $.view_as_clause)),
-      optional(alias($.__message_set_update_clause, $.set_update_clause)),
+      optional(alias($.__message_view_as_phrase, $.view_as_phrase)),
+      optional(alias($.__message_set_update_phrase, $.set_update_phrase)),
       optional(seq(kw("IN"), kw("WINDOW"), field("window", $._expression))),
       $._terminator,
     ),
 
-  __message_view_as_clause: ($) =>
+  __message_view_as_phrase: ($) =>
     seq(
       kw("VIEW-AS"),
       tkw("ALERT-BOX"),
@@ -29,11 +29,11 @@ module.exports = ({ kw, tkw }) => ({
           tkw("WARNING"),
         ),
       ),
-      optional(alias($.__message_buttons_clause, $.buttons_clause)),
+      optional(alias($.__message_buttons_phrase, $.buttons_phrase)),
       optional(seq(kw("TITLE"), field("title", $.string_literal))),
     ),
 
-  __message_buttons_clause: ($) =>
+  __message_buttons_phrase: ($) =>
     seq(
       kw("BUTTONS"),
       choice(
@@ -75,7 +75,7 @@ module.exports = ({ kw, tkw }) => ({
         ),
       ),
     ),
-  __message_set_update_clause: ($) =>
+  __message_set_update_phrase: ($) =>
     seq(
       choice(kw("SET"), kw("UPDATE")),
       field("field", $.__message_field_name),

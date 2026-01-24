@@ -22,7 +22,7 @@ module.exports = ({ kw, tkw }) => ({
           alias($.__parameter_bind_option, $.bind_option),
           alias($.__parameter_by_reference_option, $.by_reference_option),
           alias($.__parameter_by_value_option, $.by_value_option),
-          alias($.__parameter_extent_clause, $.extent_clause),
+          alias($.__parameter_extent_phrase, $.extent_phrase),
           alias($.__parameter_format_option, $.format_option),
           alias($.__parameter_initial_option, $.initial_option),
           alias($.__parameter_label_option, $.label_option),
@@ -37,7 +37,7 @@ module.exports = ({ kw, tkw }) => ({
   __parameter_by_reference_option: ($) =>
     seq(kw("BY-REFERENCE"), optional(kw("BIND"))),
   __parameter_by_value_option: ($) => tkw("BY-VALUE"),
-  __parameter_extent_clause: ($) =>
+  __parameter_extent_phrase: ($) =>
     seq(kw("EXTENT"), optional($.__parameter_extent_size)),
   __parameter_extent_size: ($) =>
     choice(

@@ -81,7 +81,7 @@ IF LOCKED bufOrder THEN RETURN TRUE.
       (can_find_expression
         (record_query
           table: (identifier)
-          (where_clause
+          (where_phrase
             (binary_expression
               (qualified_name
                 left: (identifier)
@@ -99,7 +99,7 @@ IF LOCKED bufOrder THEN RETURN TRUE.
     (can_find_expression
       (record_query
         table: (identifier)
-        (where_clause
+        (where_phrase
           (binary_expression
             (qualified_name
               left: (identifier)
@@ -115,7 +115,7 @@ IF LOCKED bufOrder THEN RETURN TRUE.
     (can_find_expression
       (record_query
         table: (identifier)
-        (where_clause
+        (where_phrase
           (binary_expression
             (qualified_name
               left: (identifier)

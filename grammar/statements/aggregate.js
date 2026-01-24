@@ -5,7 +5,7 @@ module.exports = ({ kw, tkw }) => ({
       repeat1($.__aggregate_assignment),
       kw("FOR"),
       field("table", choice($.identifier, $.qualified_name)),
-      optional(alias($.__aggregate_where_clause, $.where_clause)),
+      optional(alias($.__aggregate_where_phrase, $.where_phrase)),
       $._terminator,
     ),
 
@@ -19,7 +19,13 @@ module.exports = ({ kw, tkw }) => ({
       ")",
     ),
   __aggregate_operation: ($) =>
-    choice(tkw("COUNT"), tkw("TOTAL"), tkw("AVERAGE"), tkw("MAXIMUM"), tkw("MINIMUM")),
-  __aggregate_where_clause: ($) =>
+    choice(
+      tkw("COUNT"),
+      tkw("TOTAL"),
+      tkw("AVERAGE"),
+      tkw("MAXIMUM"),
+      tkw("MINIMUM"),
+    ),
+  __aggregate_where_phrase: ($) =>
     seq(kw("WHERE"), field("condition", $._expression)),
 });

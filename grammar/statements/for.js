@@ -6,28 +6,27 @@ module.exports = ({ kw, tkw }) => ({
         optional(seq(field("label", $.identifier), $._colon)),
         kw("FOR"),
         choice($.for_record_list, $.for_variable_loop),
-        optional(alias($.__for_while_clause, $.while_clause)),
+        optional(alias($.__for_while_phrase, $.while_phrase)),
         optional(tkw("TRANSACTION")),
-        optional(alias($.__for_stop_after_clause, $.stop_after_clause)),
-        optional(alias($.__for_on_error_clause, $.on_error_clause)),
-        optional(alias($.__for_on_endkey_clause, $.on_endkey_clause)),
-        optional(alias($.__for_on_quit_clause, $.on_quit_clause)),
-        optional(alias($.__for_on_stop_clause, $.on_stop_clause)),
-        optional(alias($.__for_with_frame_clause, $.with_frame_clause)),
+        optional(alias($.__for_stop_after_phrase, $.stop_after_phrase)),
+        optional(alias($.__for_on_error_phrase, $.on_error_phrase)),
+        optional(alias($.__for_on_endkey_phrase, $.on_endkey_phrase)),
+        optional(alias($.__for_on_quit_phrase, $.on_quit_phrase)),
+        optional(alias($.__for_on_stop_phrase, $.on_stop_phrase)),
+        optional(alias($.__for_with_frame_phrase, $.with_frame_phrase)),
         $.body,
         tkw("END"),
         $._terminator,
       ),
     ),
 
-  for_record_list: ($) =>
-    seq($.for_record, repeat(seq(",", $.for_record))),
+  for_record_list: ($) => seq($.for_record, repeat(seq(",", $.for_record))),
 
   for_record: ($) =>
     seq(
       optional(choice(kw("EACH"), kw("FIRST"), kw("LAST"))),
       field("table", $.__for_record_name),
-      optional(alias($.__for_of_clause, $.of_clause)),
+      optional(alias($.__for_of_phrase, $.of_phrase)),
       repeat($._for_record_option_or_where),
     ),
 
@@ -37,8 +36,8 @@ module.exports = ({ kw, tkw }) => ({
       alias($.__for_exclusive_lock, $.exclusive_lock),
       alias($.__for_share_lock, $.share_lock),
       alias($.__for_no_prefetch, $.no_prefetch),
-      alias($.__for_by_clause, $.by_clause),
-      alias($.__for_collate_clause, $.collate_clause),
+      alias($.__for_by_phrase, $.by_phrase),
+      alias($.__for_collate_phrase, $.collate_phrase),
       alias($.__for_use_index, $.use_index),
       alias($.__for_break_by, $.break_by),
     ),
@@ -54,16 +53,16 @@ module.exports = ({ kw, tkw }) => ({
     ),
 
   _for_record_option_or_where: ($) =>
-    choice($._for_record_option, alias($.__for_where_clause, $.where_clause)),
+    choice($._for_record_option, alias($.__for_where_phrase, $.where_phrase)),
 
-  __for_where_clause: ($) => seq(kw("WHERE"), $._expression),
-  __for_of_clause: ($) => seq(kw("OF"), $.__for_record_name),
+  __for_where_phrase: ($) => seq(kw("WHERE"), $._expression),
+  __for_of_phrase: ($) => seq(kw("OF"), $.__for_record_name),
   __for_record_name: ($) => choice($.identifier, $.qualified_name),
   __for_no_lock: ($) => tkw("NO-LOCK"),
   __for_exclusive_lock: ($) => tkw("EXCLUSIVE-LOCK"),
   __for_share_lock: ($) => tkw("SHARE-LOCK"),
   __for_no_prefetch: ($) => tkw("NO-PREFETCH"),
-  __for_by_clause: ($) =>
+  __for_by_phrase: ($) =>
     prec.right(
       seq(
         kw("BY"),
@@ -91,7 +90,7 @@ module.exports = ({ kw, tkw }) => ({
     ),
 
   __for_index_name: ($) => choice($.identifier, $.qualified_name),
-  __for_on_error_clause: ($) =>
+  __for_on_error_phrase: ($) =>
     seq(
       kw("ON"),
       kw("ERROR"),
@@ -120,7 +119,7 @@ module.exports = ({ kw, tkw }) => ({
         ),
       ),
     ),
-  __for_on_endkey_clause: ($) =>
+  __for_on_endkey_phrase: ($) =>
     seq(kw("ON"), kw("ENDKEY"), alias($.__for_on_endkey_undo, $.undo_phrase)),
   __for_on_endkey_undo: ($) =>
     seq(
@@ -146,17 +145,16 @@ module.exports = ({ kw, tkw }) => ({
         ),
       ),
     ),
-  __for_with_frame_clause: ($) =>
+  __for_with_frame_phrase: ($) =>
     seq(
       kw("WITH"),
       kw("FRAME"),
       optional(field("name", $.identifier)),
       optional(seq(kw("WIDTH"), $.number_literal)),
     ),
-  __for_sort_direction: ($) =>
-    token(/ASC(ENDING)?|DESC(ENDING)?/i),
+  __for_sort_direction: ($) => token(/ASC(ENDING)?|DESC(ENDING)?/i),
 
-  __for_collate_clause: ($) =>
+  __for_collate_phrase: ($) =>
     seq(
       kw("COLLATE"),
       "(",
@@ -168,12 +166,13 @@ module.exports = ({ kw, tkw }) => ({
       optional($.__for_sort_direction),
     ),
 
-  __for_while_clause: ($) => seq(kw("WHILE"), field("condition", $._expression)),
+  __for_while_phrase: ($) =>
+    seq(kw("WHILE"), field("condition", $._expression)),
 
-  __for_stop_after_clause: ($) =>
+  __for_stop_after_phrase: ($) =>
     seq(kw("STOP-AFTER"), field("time", $._expression)),
 
-  __for_on_quit_clause: ($) =>
+  __for_on_quit_phrase: ($) =>
     seq(
       kw("ON"),
       kw("QUIT"),
@@ -201,7 +200,7 @@ module.exports = ({ kw, tkw }) => ({
       ),
     ),
 
-  __for_on_stop_clause: ($) =>
+  __for_on_stop_phrase: ($) =>
     seq(
       kw("ON"),
       kw("STOP"),

@@ -24,7 +24,7 @@ PUT SCREEN COLOR 7 ROW 1 COLUMN 1 "Header".
     column: (number_literal)
     value: (string_literal))
   (put_screen_statement
-    (color_clause
+    (color_phrase
       color: (number_literal))
     row: (number_literal)
     column: (number_literal)

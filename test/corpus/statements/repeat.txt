@@ -43,7 +43,7 @@ END.
         (identifier))))
   (repeat_statement
     label: (identifier)
-    (on_stop_clause
+    (on_stop_phrase
       (undo_return_error
         (new_expression
           type: (qualified_name
@@ -55,7 +55,7 @@ END.
               value: (string_literal))
             (argument
               value: (number_literal))))))
-    (on_error_clause
+    (on_error_phrase
       (undo_throw_phrase))
     (body
       (leave_statement))))

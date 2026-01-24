@@ -13,18 +13,18 @@ INPUT STREAM-HANDLE hStream CLOSE.
   (input_statement
     (identifier))
   (input_statement
-    (convert_clause))
+    (convert_phrase))
   (input_statement
-    (stream_clause
+    (stream_phrase
       name: (identifier))
     directory: (string_literal)
-    (lob_dir_clause
+    (lob_dir_phrase
       (constant
         (identifier)))
     map: (identifier)
-    (convert_clause
+    (convert_phrase
       target: (string_literal)
       source: (string_literal)))
   (input_statement
-    (stream_handle_clause
+    (stream_handle_phrase
       handle: (identifier))))

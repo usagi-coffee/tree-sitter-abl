@@ -4,12 +4,12 @@ module.exports = ({ kw, tkw }) => ({
       kw("INPUT"),
       optional(
         choice(
-          alias($.__input_stream_clause, $.stream_clause),
-          alias($.__input_stream_handle_clause, $.stream_handle_clause),
+          alias($.__input_stream_phrase, $.stream_phrase),
+          alias($.__input_stream_handle_phrase, $.stream_handle_phrase),
         ),
       ),
       choice(tkw("CLOSE"), seq(kw("FROM"), $.__input_from_target)),
-      optional(alias($.__input_lob_dir_clause, $.lob_dir_clause)),
+      optional(alias($.__input_lob_dir_phrase, $.lob_dir_phrase)),
       optional(kw("BINARY")),
       optional(choice(tkw("ECHO"), tkw("NO-ECHO"))),
       optional(
@@ -19,7 +19,7 @@ module.exports = ({ kw, tkw }) => ({
         ),
       ),
       optional(kw("UNBUFFERED")),
-      optional(alias($.__input_convert_clause, $.convert_clause)),
+      optional(alias($.__input_convert_phrase, $.convert_phrase)),
       $._terminator,
     ),
 
@@ -46,7 +46,7 @@ module.exports = ({ kw, tkw }) => ({
       $.function_call,
       alias($.constant_expression, $.constant),
     ),
-  __input_lob_dir_clause: ($) =>
+  __input_lob_dir_phrase: ($) =>
     seq(
       kw("LOB-DIR"),
       choice(
@@ -55,7 +55,7 @@ module.exports = ({ kw, tkw }) => ({
       ),
     ),
   __input_map_entry: ($) => choice($.identifier, $.string_literal),
-  __input_convert_clause: ($) =>
+  __input_convert_phrase: ($) =>
     choice(
       tkw("NO-CONVERT"),
       seq(
@@ -64,7 +64,7 @@ module.exports = ({ kw, tkw }) => ({
         optional(seq(kw("SOURCE"), field("source", $.string_literal))),
       ),
     ),
-  __input_stream_clause: ($) => seq(kw("STREAM"), field("name", $.identifier)),
-  __input_stream_handle_clause: ($) =>
+  __input_stream_phrase: ($) => seq(kw("STREAM"), field("name", $.identifier)),
+  __input_stream_handle_phrase: ($) =>
     seq(kw("STREAM-HANDLE"), field("handle", $._expression)),
 });

@@ -37,20 +37,20 @@ module.exports = ({ kw, tkw }) => ({
     seq(
       optional(choice(kw("INPUT"), kw("OUTPUT"), kw("INPUT-OUTPUT"))),
       field("name", $.identifier),
-      $.__function_variable_type_clause,
+      $.__function_variable_type_phrase,
       optional(alias($.__function_no_undo, $.no_undo)),
     ),
 
-  __function_variable_type_clause: ($) =>
+  __function_variable_type_phrase: ($) =>
     seq(
       choice(
         seq(kw("AS"), optional(kw("CLASS")), field("type", $._type_or_string)),
         seq(kw("LIKE"), field("like", $.__function_field_name)),
       ),
-      optional($.__function_extent_clause),
+      optional($.__function_extent_phrase),
     ),
 
-  __function_extent_clause: ($) =>
+  __function_extent_phrase: ($) =>
     seq(kw("EXTENT"), optional($.__function_extent_size)),
   __function_no_undo: ($) => tkw("NO-UNDO"),
   __function_extent_size: ($) =>

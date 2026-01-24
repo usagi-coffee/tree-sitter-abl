@@ -19,7 +19,7 @@ module.exports = ({ kw, tkw }) => ({
       ),
       choice(kw("VARIABLE"), kw("VAR")),
       field("name", $.identifier),
-      $._variable_type_clause,
+      $._variable_type_phrase,
       repeat(
         choice(
           alias($.__variable_serialize_name_option, $.serialize_name_option),
@@ -60,13 +60,13 @@ module.exports = ({ kw, tkw }) => ({
       kw("PUBLIC"),
     ),
 
-  _variable_type_clause: ($) =>
+  _variable_type_phrase: ($) =>
     seq(
       choice(
         seq(kw("AS"), optional(kw("CLASS")), field("type", $._type_or_string)),
         seq(kw("LIKE"), field("like", $.__variable_field_name)),
       ),
-      optional(alias($.__variable_extent_clause, $.extent_clause)),
+      optional(alias($.__variable_extent_phrase, $.extent_phrase)),
     ),
 
   __variable_initial_option: ($) =>
@@ -78,7 +78,7 @@ module.exports = ({ kw, tkw }) => ({
   __variable_static_modifier: ($) => kw("STATIC"),
   __variable_serialization_modifier: ($) =>
     choice(kw("SERIALIZABLE"), kw("NON-SERIALIZABLE")),
-  __variable_extent_clause: ($) =>
+  __variable_extent_phrase: ($) =>
     seq(kw("EXTENT"), optional($.__variable_extent_size)),
   __variable_serialize_name_option: ($) =>
     seq(kw("SERIALIZE-NAME"), field("name", $._name_or_string)),

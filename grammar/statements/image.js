@@ -8,20 +8,15 @@ module.exports = ({ kw, tkw }) => ({
       repeat1(
         choice(
           alias($.__image_phrase, $.image_phrase),
-          alias($.__image_like_clause, $.like_clause),
-          alias($.__image_size_clause, $.size_clause),
+          alias($.__image_like_phrase, $.like_phrase),
+          alias($.__image_size_phrase, $.size_phrase),
         ),
       ),
       optional(seq(kw("BGCOLOR"), $._expression)),
       optional(seq(kw("FGCOLOR"), $._expression)),
       optional(tkw("CONVERT-3D-COLORS")),
       optional(seq(kw("TOOLTIP"), field("tooltip", $.string_literal))),
-      optional(
-        seq(
-          kw("STRETCH-TO-FIT"),
-          optional(tkw("RETAIN-SHAPE")),
-        ),
-      ),
+      optional(seq(kw("STRETCH-TO-FIT"), optional(tkw("RETAIN-SHAPE")))),
       optional(tkw("TRANSPARENT")),
       $._terminator,
     ),
@@ -32,7 +27,11 @@ module.exports = ({ kw, tkw }) => ({
       field("file", $.string_literal),
       optional(
         seq(
-          choice(kw("IMAGE-SIZE"), kw("IMAGE-SIZE-CHARS"), kw("IMAGE-SIZE-PIXELS")),
+          choice(
+            kw("IMAGE-SIZE"),
+            kw("IMAGE-SIZE-CHARS"),
+            kw("IMAGE-SIZE-PIXELS"),
+          ),
           field("width", $.number_literal),
           kw("BY"),
           field("height", $.number_literal),
@@ -42,7 +41,12 @@ module.exports = ({ kw, tkw }) => ({
         seq(
           kw("FROM"),
           choice(
-            seq(kw("X"), field("x", $.number_literal), kw("Y"), field("y", $.number_literal)),
+            seq(
+              kw("X"),
+              field("x", $.number_literal),
+              kw("Y"),
+              field("y", $.number_literal),
+            ),
             seq(
               kw("ROW"),
               field("row", $.number_literal),
@@ -53,8 +57,8 @@ module.exports = ({ kw, tkw }) => ({
         ),
       ),
     ),
-  __image_like_clause: ($) => seq(kw("LIKE"), field("like", $.identifier)),
-  __image_size_clause: ($) =>
+  __image_like_phrase: ($) => seq(kw("LIKE"), field("like", $.identifier)),
+  __image_size_phrase: ($) =>
     seq(
       choice(kw("SIZE"), kw("SIZE-CHARS"), kw("SIZE-PIXELS")),
       field("width", $.number_literal),

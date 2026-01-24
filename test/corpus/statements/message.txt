@@ -54,26 +54,26 @@ MESSAGE "Done" VIEW-AS ALERT-BOX INFO BUTTONS OK.
   (message_statement
     (string_literal)
     (skip)
-    (view_as_clause))
+    (view_as_phrase))
   (message_statement
     (string_literal)
-    (view_as_clause))
+    (view_as_phrase))
   (message_statement
     (string_literal)
-    (view_as_clause))
+    (view_as_phrase))
   (message_statement
     (string_literal)
-    (view_as_clause))
+    (view_as_phrase))
   (message_statement
     (string_literal)
-    (view_as_clause))
+    (view_as_phrase))
   (message_statement
     (string_literal)
-    (view_as_clause))
+    (view_as_phrase))
   (message_statement
     (string_literal)
-    (view_as_clause
-      (buttons_clause))))
+    (view_as_phrase
+      (buttons_phrase))))
 
 ================================================================================
 MESSAGE with BUTTONS
@@ -90,24 +90,24 @@ MESSAGE "Retry?" VIEW-AS ALERT-BOX BUTTONS RETRY-CANCEL.
 (source_code
   (message_statement
     (string_literal)
-    (view_as_clause
-      (buttons_clause)))
+    (view_as_phrase
+      (buttons_phrase)))
   (message_statement
     (string_literal)
-    (view_as_clause
-      (buttons_clause)))
+    (view_as_phrase
+      (buttons_phrase)))
   (message_statement
     (string_literal)
-    (view_as_clause
-      (buttons_clause)))
+    (view_as_phrase
+      (buttons_phrase)))
   (message_statement
     (string_literal)
-    (view_as_clause
-      (buttons_clause)))
+    (view_as_phrase
+      (buttons_phrase)))
   (message_statement
     (string_literal)
-    (view_as_clause
-      (buttons_clause))))
+    (view_as_phrase
+      (buttons_phrase))))
 
 ================================================================================
 MESSAGE with TITLE
@@ -121,11 +121,11 @@ MESSAGE "Msg" VIEW-AS ALERT-BOX INFORMATION TITLE "Info".
 (source_code
   (message_statement
     (string_literal)
-    (view_as_clause
+    (view_as_phrase
       title: (string_literal)))
   (message_statement
     (string_literal)
-    (view_as_clause
+    (view_as_phrase
       title: (string_literal))))
 
 ================================================================================
@@ -140,15 +140,15 @@ MESSAGE "Input" VIEW-AS ALERT-BOX UPDATE response AS CHARACTER.
 (source_code
   (message_statement
     (string_literal)
-    (view_as_clause
-      (buttons_clause))
-    (set_update_clause
+    (view_as_phrase
+      (buttons_phrase))
+    (set_update_phrase
       field: (identifier)
       type: (identifier)))
   (message_statement
     (string_literal)
-    (view_as_clause)
-    (set_update_clause
+    (view_as_phrase)
+    (set_update_phrase
       field: (identifier)
       type: (identifier))))
 
@@ -190,7 +190,7 @@ MESSAGE "World" VIEW-AS ALERT-BOX IN WINDOW hMainWindow.
     window: (identifier))
   (message_statement
     (string_literal)
-    (view_as_clause)
+    (view_as_phrase)
     window: (identifier)))
 
 ================================================================================
@@ -209,10 +209,10 @@ MESSAGE COLOR NORMAL "Export done: " + fileName SKIP(2) VIEW-AS ALERT-BOX INFORM
       (identifier))
     (skip
       count: (number_literal))
-    (view_as_clause
-      (buttons_clause)
+    (view_as_phrase
+      (buttons_phrase)
       title: (string_literal))
-    (set_update_clause
+    (set_update_phrase
       field: (identifier)
       type: (identifier))
     window: (identifier)))
@@ -260,12 +260,12 @@ MESSAGE "Value?" SET iValue AS INTEGER FORMAT ">>9".
 (source_code
   (message_statement
     (string_literal)
-    (set_update_clause
+    (set_update_phrase
       field: (identifier)
       type: (identifier)))
   (message_statement
     (string_literal)
-    (set_update_clause
+    (set_update_phrase
       field: (identifier)
       type: (identifier)
       format: (string_literal))))
@@ -281,7 +281,7 @@ MESSAGE "Enter customer:" UPDATE cNum LIKE Customer.CustNum.
 (source_code
   (message_statement
     (string_literal)
-    (set_update_clause
+    (set_update_phrase
       field: (identifier)
       like: (qualified_name
         left: (identifier)
