@@ -129,9 +129,6 @@ module.exports = grammar({
       assignment_operator: ($) => choice("=", "+=", "-=", "*=", "/="),
       _logical_operator: ($) => choice(kw("AND"), kw("OR")),
       _comparison_operator: ($) => choice("=", ...comparison_operators),
-      // See _statement_expression in expressions.js - excludes `=` to disambiguate
-      // assignment vs equality comparison at statement level.
-      _comparison_operator_no_eq: ($) => choice(...comparison_operators),
 
       // Assignabless
       _assignable: ($) =>
@@ -151,7 +148,22 @@ module.exports = grammar({
         prec(PREC.UNARY, seq(choice("+", "-", kw("NOT")), $._expression)),
       binary_expression: ($) =>
         binary_expression($, $._expression, $._comparison_operator),
-      // See _statement_expression comment - this is binary_expression without `=` comparison.
+
+      // _statement_expression excludes `=` from comparison operators to disambiguate
+      // assignment vs equality at the statement level. Without this, `x = 5.` could
+      // parse as either assignment_statement or expression_statement (equality check).
+      // By excluding `=` here, expression_statement cannot match `x = 5.`, forcing it
+      // to parse as assignment_statement.
+      _statement_expression: ($) =>
+        choice(
+          alias($.binary_expression_no_eq, $.binary_expression),
+          $.conditional_expression,
+          $.unary_expression,
+          $._primary_expression,
+        ),
+      // excludes `=` to disambiguate assignment vs equality comparison at statement level.
+      _comparison_operator_no_eq: ($) => choice(...comparison_operators),
+      // binary_expression without `=` comparison.
       binary_expression_no_eq: ($) =>
         binary_expression(
           $,
@@ -234,7 +246,7 @@ module.exports = grammar({
       parenthesized_identifier: ($) => seq("(", $.identifier, ")"),
       _terminator: ($) => choice($._terminator_dot, ";"),
 
-      // Contains $._expression, $._primary_expression and $._statement_expression aggregates
+      // Contains $._expression and $._primary_expression aggregates
       ...require("./grammar/core/expressions")(ctx),
       // Contains only $._statement aggregate and statement costs
       ...require("./grammar/core/statements")(ctx),
