@@ -27,8 +27,8 @@ module.exports = grammar({
   extras: ($) => [
     /[\s\f\uFEFF\u2060\u200B]|\\\r?\n/,
     $.comment,
-    $.include_extra,
-    $.constant_extra,
+    $.include,
+    $.constant,
   ],
   word: ($) => $.identifier,
   conflicts: ($) => [
@@ -58,19 +58,19 @@ module.exports = grammar({
 
       // Includes
       include: ($) =>
+        token(
+          choice(
+            /\{\{&[^}\r\n]+\}[^\s}\r\n]*\.i[ \t]*\}\.?[ \t]*\r?\n/i,
+            /\{[^\s}\r\n]*\.i[ \t]*\}\.?[ \t]*\r?\n/i,
+          ),
+        ),
+      include_expression: ($) =>
         seq(
           "{",
           field("file", $.include_file_reference),
           repeat(field("argument", $.include_argument)),
           "}",
           optional("."),
-        ),
-      include_extra: ($) =>
-        token(
-          choice(
-            /\{\{&[^}\r\n]+\}[^\s}\r\n]*\.i[ \t]*\}\.?[ \t]*\r?\n/i,
-            /\{[^\s}\r\n]*\.i[ \t]*\}\.?[ \t]*\r?\n/i,
-          ),
         ),
       include_argument: ($) =>
         choice($.include_named_argument, $._include_argument_value),
@@ -88,14 +88,15 @@ module.exports = grammar({
           $.number_literal,
           alias($._signed_number_literal, $.number_literal),
           $.boolean_literal,
-          $.constant,
+          alias($.constant_expression, $.constant),
           $.argument_reference,
           $.parenthesized_identifier,
         ),
 
       // Preprocessor
       preprocessor_directive: ($) => token(/&[^\n]*(?:~\s*\n[^\n]*)*/i),
-      include_file_reference: ($) => seq(optional($.constant), $.file_name),
+      include_file_reference: ($) =>
+        seq(optional(alias($.constant_expression, $.constant)), $.file_name),
       _preprocessor_argument: ($) =>
         choice(
           $.identifier,
@@ -103,13 +104,13 @@ module.exports = grammar({
           $.number_literal,
           alias($._signed_number_literal, $.number_literal),
           $.boolean_literal,
-          $.constant,
+          alias($.constant_expression, $.constant),
           $.parenthesized_identifier,
         ),
 
       // Constants
-      constant: ($) => seq("{&", $.identifier, "}"),
-      constant_extra: ($) => token(/\{&[^\}\r\n]+\}[ \t]*\r?\n/),
+      constant: ($) => token(/\{&[^\}\r\n]+\}[ \t]*\r?\n/),
+      constant_expression: ($) => seq("{&", $.identifier, "}"),
       argument_reference: ($) => token(/\{[0-9A-Za-z_-]+\}/),
 
       // Re-exports

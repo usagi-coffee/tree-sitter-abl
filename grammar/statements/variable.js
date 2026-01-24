@@ -104,7 +104,11 @@ module.exports = ({ kw, tkw }) => ({
   __variable_case_sensitive_option: ($) =>
     seq(optional(kw("NOT")), tkw("CASE-SENSITIVE")),
   __variable_extent_size: ($) =>
-    choice($.number_literal, $.constant, $.identifier),
+    choice(
+      $.number_literal,
+      alias($.constant_expression, $.constant),
+      $.identifier,
+    ),
   __variable_label_list: ($) =>
     seq($.string_literal, repeat(seq(",", $.string_literal))),
   __variable_field_name: ($) => choice($.qualified_name, $.identifier),

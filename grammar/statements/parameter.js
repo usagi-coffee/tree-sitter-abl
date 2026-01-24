@@ -8,7 +8,11 @@ module.exports = ({ kw, tkw }) => ({
       field("name", $.identifier),
       optional(
         choice(
-          seq(kw("AS"), optional(kw("CLASS")), field("type", $._type_or_string)),
+          seq(
+            kw("AS"),
+            optional(kw("CLASS")),
+            field("type", $._type_or_string),
+          ),
           seq(kw("LIKE"), field("like", $.__parameter_field_name)),
         ),
       ),
@@ -30,12 +34,17 @@ module.exports = ({ kw, tkw }) => ({
 
   __parameter_append_option: ($) => tkw("APPEND"),
   __parameter_bind_option: ($) => kw("BIND"),
-  __parameter_by_reference_option: ($) => seq(kw("BY-REFERENCE"), optional(kw("BIND"))),
+  __parameter_by_reference_option: ($) =>
+    seq(kw("BY-REFERENCE"), optional(kw("BIND"))),
   __parameter_by_value_option: ($) => tkw("BY-VALUE"),
   __parameter_extent_clause: ($) =>
     seq(kw("EXTENT"), optional($.__parameter_extent_size)),
   __parameter_extent_size: ($) =>
-    choice($.number_literal, $.constant, $.identifier),
+    choice(
+      $.number_literal,
+      alias($.constant_expression, $.constant),
+      $.identifier,
+    ),
   __parameter_format_option: ($) => seq(kw("FORMAT"), $.string_literal),
   __parameter_initial_option: ($) =>
     seq(

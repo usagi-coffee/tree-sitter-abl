@@ -78,11 +78,7 @@ module.exports = ({ kw, tkw }) => ({
   __procedure_variable_type_clause: ($) =>
     seq(
       choice(
-        seq(
-          kw("AS"),
-          optional(kw("CLASS")),
-          field("type", $._type_or_string),
-        ),
+        seq(kw("AS"), optional(kw("CLASS")), field("type", $._type_or_string)),
         seq(kw("LIKE"), field("like", $.__procedure_field_name)),
       ),
       optional($.__procedure_extent_clause),
@@ -99,7 +95,11 @@ module.exports = ({ kw, tkw }) => ({
 
   __procedure_no_undo: ($) => tkw("NO-UNDO"),
   __procedure_extent_size: ($) =>
-    choice($.number_literal, $.constant, $.identifier),
+    choice(
+      $.number_literal,
+      alias($.constant_expression, $.constant),
+      $.identifier,
+    ),
   __procedure_field_name: ($) => choice($.qualified_name, $.identifier),
   __procedure_record_name: ($) => choice($.qualified_name, $.identifier),
   __procedure_table_parameter_option: ($) =>

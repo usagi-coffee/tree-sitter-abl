@@ -35,7 +35,7 @@ module.exports = ({ kw, tkw }) => ({
       $.string_literal,
       $.number_literal,
       $.identifier,
-      $.constant,
+      alias($.constant_expression, $.constant),
       seq(tkw("VALUE"), "(", $._expression, ")"),
     ),
   __input_output_through_option: ($) =>

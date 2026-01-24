@@ -51,7 +51,7 @@ INCLUDE
       (include_named_argument
         name: (identifier)
         value: (identifier))))
-  (include_extra)
+  (include)
   (include
     file: (include_file_reference
       (constant

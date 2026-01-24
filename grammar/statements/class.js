@@ -37,7 +37,7 @@ module.exports = ({ kw, tkw }) => ({
       $.using_statement,
       $.annotation_statement,
       $.preprocessor_directive,
-      $.include,
+      alias($.include_expression, $.include),
     ),
 
   method_definition: ($) =>
@@ -102,7 +102,12 @@ module.exports = ({ kw, tkw }) => ({
     ),
 
   method_body: ($) =>
-    seq(repeat($._statement), tkw("END"), optional(tkw("METHOD")), $._terminator),
+    seq(
+      repeat($._statement),
+      tkw("END"),
+      optional(tkw("METHOD")),
+      $._terminator,
+    ),
 
   constructor_body: ($) =>
     seq(
@@ -128,10 +133,7 @@ module.exports = ({ kw, tkw }) => ({
       optional(alias($.__variable_access_modifier, $.access_modifier)),
       optional(alias($.__variable_static_modifier, $.static_modifier)),
       optional(
-        alias(
-          $.__variable_serialization_modifier,
-          $.serialization_modifier,
-        ),
+        alias($.__variable_serialization_modifier, $.serialization_modifier),
       ),
       repeat($.__property_modifier),
       kw("PROPERTY"),
@@ -183,8 +185,7 @@ module.exports = ({ kw, tkw }) => ({
       ),
     ),
 
-  property_set_parameter_list: ($) =>
-    seq("(", $.property_set_parameter, ")"),
+  property_set_parameter_list: ($) => seq("(", $.property_set_parameter, ")"),
 
   property_set_parameter: ($) =>
     seq(
@@ -208,11 +209,7 @@ module.exports = ({ kw, tkw }) => ({
     ),
 
   __property_modifier: ($) =>
-    choice(
-      kw("ABSTRACT"),
-      kw("FINAL"),
-      kw("OVERRIDE"),
-    ),
+    choice(kw("ABSTRACT"), kw("FINAL"), kw("OVERRIDE")),
 
   __property_type_clause: ($) =>
     seq(
@@ -282,11 +279,7 @@ module.exports = ({ kw, tkw }) => ({
   __method_variable_type_clause: ($) =>
     seq(
       choice(
-        seq(
-          kw("AS"),
-          optional(kw("CLASS")),
-          field("type", $._type_or_string),
-        ),
+        seq(kw("AS"), optional(kw("CLASS")), field("type", $._type_or_string)),
         seq(kw("LIKE"), field("like", $.__method_field_name)),
       ),
       optional($.__method_extent_clause),
@@ -295,7 +288,11 @@ module.exports = ({ kw, tkw }) => ({
   __method_extent_clause: ($) =>
     prec.right(seq(kw("EXTENT"), optional($.__method_extent_size))),
   __method_extent_size: ($) =>
-    choice($.number_literal, $.constant, $.identifier),
+    choice(
+      $.number_literal,
+      alias($.constant_expression, $.constant),
+      $.identifier,
+    ),
   __method_field_name: ($) => choice($.qualified_name, $.identifier),
   __method_no_undo: ($) => tkw("NO-UNDO"),
   __method_table_parameter: ($) =>
@@ -328,12 +325,7 @@ module.exports = ({ kw, tkw }) => ({
     ),
   __method_record_name: ($) => choice($.qualified_name, $.identifier),
   __method_table_parameter_option: ($) =>
-    choice(
-      tkw("APPEND"),
-      tkw("BIND"),
-      tkw("BY-VALUE"),
-      tkw("BY-REFERENCE"),
-    ),
+    choice(tkw("APPEND"), tkw("BIND"), tkw("BY-VALUE"), tkw("BY-REFERENCE")),
   __method_handle_parameter_option: ($) =>
     choice(tkw("BIND"), tkw("BY-VALUE"), tkw("BY-REFERENCE")),
 });

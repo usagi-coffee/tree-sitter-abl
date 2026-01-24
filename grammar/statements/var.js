@@ -25,7 +25,12 @@ module.exports = ({ kw }) => ({
 
   var_init: ($) => seq("=", choice($.array_initializer, $._expression)),
   var_extent: ($) => seq("[", optional($.__var_extent_size), "]"),
-  __var_extent_size: ($) => choice($.number_literal, $.constant, $.identifier),
+  __var_extent_size: ($) =>
+    choice(
+      $.number_literal,
+      alias($.constant_expression, $.constant),
+      $.identifier,
+    ),
 
   __var_access_modifier: ($) =>
     choice(

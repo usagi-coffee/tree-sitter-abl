@@ -8,10 +8,7 @@ module.exports = ({ kw, tkw }) => ({
           alias($.__input_stream_handle_clause, $.stream_handle_clause),
         ),
       ),
-      choice(
-        tkw("CLOSE"),
-        seq(kw("FROM"), $.__input_from_target),
-      ),
+      choice(tkw("CLOSE"), seq(kw("FROM"), $.__input_from_target)),
       optional(alias($.__input_lob_dir_clause, $.lob_dir_clause)),
       optional(kw("BINARY")),
       optional(choice(tkw("ECHO"), tkw("NO-ECHO"))),
@@ -47,12 +44,15 @@ module.exports = ({ kw, tkw }) => ({
       $.scoped_name,
       $.object_access,
       $.function_call,
-      $.constant,
+      alias($.constant_expression, $.constant),
     ),
   __input_lob_dir_clause: ($) =>
     seq(
       kw("LOB-DIR"),
-      choice($.constant, seq(tkw("VALUE"), "(", $._expression, ")")),
+      choice(
+        alias($.constant_expression, $.constant),
+        seq(tkw("VALUE"), "(", $._expression, ")"),
+      ),
     ),
   __input_map_entry: ($) => choice($.identifier, $.string_literal),
   __input_convert_clause: ($) =>

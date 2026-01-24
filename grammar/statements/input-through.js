@@ -43,7 +43,7 @@ module.exports = ({ kw, tkw }) => ({
       $.scoped_name,
       $.object_access,
       $.function_call,
-      $.constant,
+      alias($.constant_expression, $.constant),
     ),
   __input_through_map_entry: ($) => choice($.identifier, $.string_literal),
   __input_through_convert_clause: ($) =>

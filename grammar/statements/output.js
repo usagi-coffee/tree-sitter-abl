@@ -85,14 +85,17 @@ module.exports = ({ kw, tkw }) => ({
   __output_lob_dir_clause: ($) =>
     seq(
       kw("LOB-DIR"),
-      choice($.constant, seq(tkw("VALUE"), "(", $._expression, ")")),
+      choice(
+        alias($.constant_expression, $.constant),
+        seq(tkw("VALUE"), "(", $._expression, ")"),
+      ),
     ),
   __output_num_copies_clause: ($) =>
     seq(
       kw("NUM-COPIES"),
       choice(
         $.number_literal,
-        $.constant,
+        alias($.constant_expression, $.constant),
         seq(tkw("VALUE"), "(", $._expression, ")"),
       ),
     ),
@@ -101,7 +104,7 @@ module.exports = ({ kw, tkw }) => ({
       kw("PAGE-SIZE"),
       choice(
         $.number_literal,
-        $.constant,
+        alias($.constant_expression, $.constant),
         seq(tkw("VALUE"), "(", $._expression, ")"),
       ),
     ),
@@ -109,7 +112,10 @@ module.exports = ({ kw, tkw }) => ({
   __output_to_target: ($) =>
     choice(
       seq(kw("PRINTER"), optional(field("printer", $.__output_printer_target))),
-      field("file", choice($.string_literal, $.constant)),
+      field(
+        "file",
+        choice($.string_literal, alias($.constant_expression, $.constant)),
+      ),
       tkw("TERMINAL"),
       seq(tkw("VALUE"), "(", $._expression, ")"),
       token(/\"CLIPBOARD\"/i),
@@ -127,11 +133,15 @@ module.exports = ({ kw, tkw }) => ({
       $.string_literal,
       $.number_literal,
       $.identifier,
-      $.constant,
+      alias($.constant_expression, $.constant),
     ),
   __output_stream_clause: ($) => seq(kw("STREAM"), field("name", $.identifier)),
   __output_stream_handle_clause: ($) =>
     seq(kw("STREAM-HANDLE"), field("handle", $._expression)),
   __output_printer_target: ($) =>
-    choice($.string_literal, $.identifier, $.constant),
+    choice(
+      $.string_literal,
+      $.identifier,
+      alias($.constant_expression, $.constant),
+    ),
 });

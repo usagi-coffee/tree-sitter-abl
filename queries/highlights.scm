@@ -4,8 +4,6 @@
 (preprocessor_directive) @preproc
 (include) @include
 (include) @preproc
-(include_extra) @include
-(include_extra) @preproc
 (include_file_reference) @string
 (include_named_argument name: (identifier) @attribute)
 (include_named_argument name: (identifier) @parameter)

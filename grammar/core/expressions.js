@@ -29,7 +29,7 @@ module.exports = (ctx) => {
         $.string_literal,
         $.boolean_literal,
         $.null_literal,
-        $.constant,
+        alias($.constant_expression, $.constant),
       ),
 
     // _statement_expression excludes `=` from comparison operators to disambiguate

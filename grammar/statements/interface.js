@@ -15,7 +15,7 @@ module.exports = ({ kw, tkw }) => ({
       alias($.interface_method_definition, $.method_definition),
       $.property_definition,
       $.preprocessor_directive,
-      $.include,
+      alias($.include_expression, $.include),
     ),
 
   interface_method_definition: ($) =>

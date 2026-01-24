@@ -7,14 +7,13 @@ module.exports = ({ kw, tkw }) => ({
       $._terminator,
     ),
 
-  __os_command_value_target: ($) =>
-    seq(tkw("VALUE"), "(", $._expression, ")"),
+  __os_command_value_target: ($) => seq(tkw("VALUE"), "(", $._expression, ")"),
   __os_command_token: ($) =>
     choice(
       $.identifier,
       $.string_literal,
       $.number_literal,
-      $.constant,
+      alias($.constant_expression, $.constant),
       $.__os_command_switch,
     ),
   __os_command_switch: () => token(/\/[^\s.]+/),

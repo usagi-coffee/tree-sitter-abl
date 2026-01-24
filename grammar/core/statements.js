@@ -6,7 +6,7 @@ module.exports = () => ({
     choice(
       // Extras-like
       $.preprocessor_directive,
-      $.include,
+      alias($.include_expression, $.include),
       $.empty_statement,
 
       // Definitions

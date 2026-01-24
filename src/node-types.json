@@ -8002,10 +8002,11 @@
   {
     "type": "constant",
     "named": true,
+    "extra": true,
     "fields": {},
     "children": {
       "multiple": false,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "identifier",
@@ -16486,6 +16487,7 @@
   {
     "type": "include",
     "named": true,
+    "extra": true,
     "fields": {
       "argument": {
         "multiple": true,
@@ -16499,7 +16501,7 @@
       },
       "file": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "include_file_reference",
@@ -38152,11 +38154,6 @@
     "named": true
   },
   {
-    "type": "constant_extra",
-    "named": true,
-    "extra": true
-  },
-  {
     "type": "date_literal",
     "named": true
   },
@@ -38167,11 +38164,6 @@
   {
     "type": "identifier",
     "named": true
-  },
-  {
-    "type": "include_extra",
-    "named": true,
-    "extra": true
   },
   {
     "type": "line_comment",

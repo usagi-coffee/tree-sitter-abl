@@ -10,7 +10,7 @@ module.exports = ({ kw, tkw }) => ({
       repeat($._statement),
       tkw("END"),
       optional(tkw("FUNCTION")),
-      $._terminator
+      $._terminator,
     ),
 
   function_forward_definition: ($) =>
@@ -21,16 +21,16 @@ module.exports = ({ kw, tkw }) => ({
       choice(kw("RETURNS"), kw("RETURN")),
       field("type", $._type_name),
       optional($.function_parameter_list),
-      $._terminator
+      $._terminator,
     ),
 
   function_parameter_list: ($) =>
     seq(
       "(",
       optional(
-        seq($.function_parameter, repeat(seq(",", $.function_parameter)))
+        seq($.function_parameter, repeat(seq(",", $.function_parameter))),
       ),
-      ")"
+      ")",
     ),
 
   function_parameter: ($) =>
@@ -38,22 +38,26 @@ module.exports = ({ kw, tkw }) => ({
       optional(choice(kw("INPUT"), kw("OUTPUT"), kw("INPUT-OUTPUT"))),
       field("name", $.identifier),
       $.__function_variable_type_clause,
-      optional(alias($.__function_no_undo, $.no_undo))
+      optional(alias($.__function_no_undo, $.no_undo)),
     ),
 
   __function_variable_type_clause: ($) =>
     seq(
       choice(
         seq(kw("AS"), optional(kw("CLASS")), field("type", $._type_or_string)),
-        seq(kw("LIKE"), field("like", $.__function_field_name))
+        seq(kw("LIKE"), field("like", $.__function_field_name)),
       ),
-      optional($.__function_extent_clause)
+      optional($.__function_extent_clause),
     ),
 
   __function_extent_clause: ($) =>
     seq(kw("EXTENT"), optional($.__function_extent_size)),
   __function_no_undo: ($) => tkw("NO-UNDO"),
   __function_extent_size: ($) =>
-    choice($.number_literal, $.constant, $.identifier),
+    choice(
+      $.number_literal,
+      alias($.constant_expression, $.constant),
+      $.identifier,
+    ),
   __function_field_name: ($) => choice($.qualified_name, $.identifier),
 });
