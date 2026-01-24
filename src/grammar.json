@@ -90,12 +90,12 @@
         "members": [
           {
             "type": "PATTERN",
-            "value": "[ \\t]*\\{\\{&[^}\\r\\n]+\\}[^\\s}\\r\\n]*\\.i[ \\t]*\\}\\.?[ \\t]*\\r?\\n",
+            "value": "\\{\\{&[^}\\r\\n]+\\}[^\\s}\\r\\n]*\\.i[ \\t]*\\}\\.?[ \\t]*\\r?\\n",
             "flags": "i"
           },
           {
             "type": "PATTERN",
-            "value": "[ \\t]*\\{[^\\s}\\r\\n]*\\.i[ \\t]*\\}\\.?[ \\t]*\\r?\\n",
+            "value": "\\{[^\\s}\\r\\n]*\\.i[ \\t]*\\}\\.?[ \\t]*\\r?\\n",
             "flags": "i"
           }
         ]
@@ -176,6 +176,15 @@
           "name": "number_literal"
         },
         {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_signed_number_literal"
+          },
+          "named": true,
+          "value": "number_literal"
+        },
+        {
           "type": "SYMBOL",
           "name": "boolean_literal"
         },
@@ -238,6 +247,15 @@
           "name": "number_literal"
         },
         {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_signed_number_literal"
+          },
+          "named": true,
+          "value": "number_literal"
+        },
+        {
           "type": "SYMBOL",
           "name": "boolean_literal"
         },
@@ -272,7 +290,7 @@
       "type": "TOKEN",
       "content": {
         "type": "PATTERN",
-        "value": "[ \\t]*\\{&[^\\}\\r\\n]+\\}[ \\t]*\\r?\\n"
+        "value": "\\{&[^\\}\\r\\n]+\\}[ \\t]*\\r?\\n"
       }
     },
     "argument_reference": {
@@ -44155,54 +44173,30 @@
               "type": "CHOICE",
               "members": [
                 {
-                  "type": "SEQ",
-                  "members": [
-                    {
-                      "type": "ALIAS",
-                      "content": {
-                        "type": "TOKEN",
-                        "content": {
-                          "type": "PATTERN",
-                          "value": "ASCENDING",
-                          "flags": "i"
-                        }
-                      },
-                      "named": false,
-                      "value": "ASCENDING"
-                    },
-                    {
-                      "type": "IMMEDIATE_TOKEN",
-                      "content": {
-                        "type": "PATTERN",
-                        "value": "\\s+"
-                      }
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "TOKEN",
+                    "content": {
+                      "type": "PATTERN",
+                      "value": "ASCENDING",
+                      "flags": "i"
                     }
-                  ]
+                  },
+                  "named": false,
+                  "value": "ASCENDING"
                 },
                 {
-                  "type": "SEQ",
-                  "members": [
-                    {
-                      "type": "ALIAS",
-                      "content": {
-                        "type": "TOKEN",
-                        "content": {
-                          "type": "PATTERN",
-                          "value": "DESCENDING",
-                          "flags": "i"
-                        }
-                      },
-                      "named": false,
-                      "value": "DESCENDING"
-                    },
-                    {
-                      "type": "IMMEDIATE_TOKEN",
-                      "content": {
-                        "type": "PATTERN",
-                        "value": "\\s+"
-                      }
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "TOKEN",
+                    "content": {
+                      "type": "PATTERN",
+                      "value": "DESCENDING",
+                      "flags": "i"
                     }
-                  ]
+                  },
+                  "named": false,
+                  "value": "DESCENDING"
                 }
               ]
             },
@@ -50426,6 +50420,17 @@
         "content": {
           "type": "PATTERN",
           "value": "[0-9]+(\\.[0-9]+)?"
+        }
+      }
+    },
+    "_signed_number_literal": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 1,
+        "content": {
+          "type": "PATTERN",
+          "value": "[+-][0-9]+(\\.[0-9]+)?"
         }
       }
     },

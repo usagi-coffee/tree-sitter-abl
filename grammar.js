@@ -86,6 +86,7 @@ module.exports = grammar({
           $.identifier,
           $.string_literal,
           $.number_literal,
+          alias($._signed_number_literal, $.number_literal),
           $.boolean_literal,
           $.constant,
           $.argument_reference,
@@ -100,6 +101,7 @@ module.exports = grammar({
           $.identifier,
           $.string_literal,
           $.number_literal,
+          alias($._signed_number_literal, $.number_literal),
           $.boolean_literal,
           $.constant,
           $.parenthesized_identifier,
@@ -116,6 +118,7 @@ module.exports = grammar({
 
       // Literals
       number_literal: ($) => token(prec(-1, /[0-9]+(\.[0-9]+)?/)),
+      _signed_number_literal: ($) => token(prec(1, /[+-][0-9]+(\.[0-9]+)?/)),
       date_literal: ($) =>
         token(prec(1, /[0-9]{1,2}[./][0-9]{1,2}[./][0-9]{2,4}/)),
       string_literal: ($) => $._escaped_string,
