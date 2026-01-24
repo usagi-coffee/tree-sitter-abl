@@ -13,6 +13,8 @@ module.exports = () => ({
       /* 7724 */ $.buffer_definition,
       /* 5669 */ $.temp_table_definition,
       /* 1436 */ $.image_definition,
+      /* 1100 */ $.browse_definition,
+      /* 485 */ $.frame_definition,
       /* 390 */ $.class_definition,
       /* 344 */ $.query_definition,
       /* 190 */ $.variable_definition,
@@ -33,17 +35,17 @@ module.exports = () => ({
       /* 20 */ $.procedure_forward_definition,
 
       // ABL Statements
-      /* 10243 */ $.for_each_statement,
       /* 9440 */ $.input_statement,
       /* 2660 */ $.input_through_statement,
-      /* 2353 */ $.do_block,
       /* 1955 */ $.open_query_statement,
+      /* 983 */ $.do_block,
       /* 815 */ $.buffer_compare_statement,
+      /* 643 */ $.for_each_statement,
       /* 525 */ $.hide_statement,
       /* 500 */ $.subscribe_statement,
       /* 455 */ $.prompt_for_statement,
       /* 450 */ $.pause_statement,
-      /* 323 */ $.repeat_statement,
+      /* 223 */ $.repeat_statement,
       /* 315 */ $.set_statement,
       /* 300 */ $.enable_statement,
       /* 290 */ $.output_statement,
@@ -154,9 +156,7 @@ module.exports = () => ({
 
       // TODO: statements that are hard to integrate due to state explosion or bugs
       // /* 60000 */ $.system_dialog_get_file_statement,
-      // /* 4893 */ $.choose_statement,
-      // /* 3500 */ $.browse_definition,
-      // /* 3300 */ $.frame_definition,
+      // /* 4890 */ $.choose_statement,
       //
       // These are not expensive but it's all or none at this point
       // /* 1200 */ $.system_dialog_font_statement,

@@ -1936,6 +1936,10 @@
           "named": true
         },
         {
+          "type": "browse_definition",
+          "named": true
+        },
+        {
           "type": "buffer_compare_statement",
           "named": true
         },
@@ -2101,6 +2105,10 @@
         },
         {
           "type": "form_statement",
+          "named": true
+        },
+        {
+          "type": "frame_definition",
           "named": true
         },
         {
@@ -2485,6 +2493,150 @@
     "children": {
       "multiple": true,
       "required": true,
+      "types": [
+        {
+          "type": "argument_reference",
+          "named": true
+        },
+        {
+          "type": "array_access",
+          "named": true
+        },
+        {
+          "type": "available_expression",
+          "named": true
+        },
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "boolean_literal",
+          "named": true
+        },
+        {
+          "type": "can_find_expression",
+          "named": true
+        },
+        {
+          "type": "conditional_expression",
+          "named": true
+        },
+        {
+          "type": "constant",
+          "named": true
+        },
+        {
+          "type": "dataset_reference",
+          "named": true
+        },
+        {
+          "type": "date_literal",
+          "named": true
+        },
+        {
+          "type": "function_call",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "locked_expression",
+          "named": true
+        },
+        {
+          "type": "new_expression",
+          "named": true
+        },
+        {
+          "type": "null_literal",
+          "named": true
+        },
+        {
+          "type": "number_literal",
+          "named": true
+        },
+        {
+          "type": "object_access",
+          "named": true
+        },
+        {
+          "type": "object_access_expression",
+          "named": true
+        },
+        {
+          "type": "parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "qualified_name",
+          "named": true
+        },
+        {
+          "type": "scoped_name",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "browse_definition",
+    "named": true,
+    "fields": {
+      "field": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "query": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "record": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
       "types": [
         {
           "type": "argument_reference",
@@ -5634,6 +5786,10 @@
             "named": true
           },
           {
+            "type": "browse_definition",
+            "named": true
+          },
+          {
             "type": "buffer_compare_statement",
             "named": true
           },
@@ -5799,6 +5955,10 @@
           },
           {
             "type": "form_statement",
+            "named": true
+          },
+          {
+            "type": "frame_definition",
             "named": true
           },
           {
@@ -8033,6 +8193,10 @@
           "named": true
         },
         {
+          "type": "browse_definition",
+          "named": true
+        },
+        {
           "type": "buffer_compare_statement",
           "named": true
         },
@@ -8198,6 +8362,10 @@
         },
         {
           "type": "form_statement",
+          "named": true
+        },
+        {
+          "type": "frame_definition",
           "named": true
         },
         {
@@ -9272,6 +9440,10 @@
           "named": true
         },
         {
+          "type": "browse_definition",
+          "named": true
+        },
+        {
           "type": "buffer_compare_statement",
           "named": true
         },
@@ -9437,6 +9609,10 @@
         },
         {
           "type": "form_statement",
+          "named": true
+        },
+        {
+          "type": "frame_definition",
           "named": true
         },
         {
@@ -13626,6 +13802,154 @@
     }
   },
   {
+    "type": "frame_definition",
+    "named": true,
+    "fields": {
+      "field": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "record": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "ref": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "argument_reference",
+          "named": true
+        },
+        {
+          "type": "array_access",
+          "named": true
+        },
+        {
+          "type": "available_expression",
+          "named": true
+        },
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "boolean_literal",
+          "named": true
+        },
+        {
+          "type": "can_find_expression",
+          "named": true
+        },
+        {
+          "type": "conditional_expression",
+          "named": true
+        },
+        {
+          "type": "constant",
+          "named": true
+        },
+        {
+          "type": "dataset_reference",
+          "named": true
+        },
+        {
+          "type": "date_literal",
+          "named": true
+        },
+        {
+          "type": "frame_phrase",
+          "named": true
+        },
+        {
+          "type": "function_call",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "locked_expression",
+          "named": true
+        },
+        {
+          "type": "new_expression",
+          "named": true
+        },
+        {
+          "type": "null_literal",
+          "named": true
+        },
+        {
+          "type": "number_literal",
+          "named": true
+        },
+        {
+          "type": "object_access",
+          "named": true
+        },
+        {
+          "type": "object_access_expression",
+          "named": true
+        },
+        {
+          "type": "parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "qualified_name",
+          "named": true
+        },
+        {
+          "type": "scoped_name",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "frame_phrase",
     "named": true,
     "fields": {
@@ -13639,6 +13963,104 @@
           }
         ]
       }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "argument_reference",
+          "named": true
+        },
+        {
+          "type": "array_access",
+          "named": true
+        },
+        {
+          "type": "available_expression",
+          "named": true
+        },
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "boolean_literal",
+          "named": true
+        },
+        {
+          "type": "can_find_expression",
+          "named": true
+        },
+        {
+          "type": "conditional_expression",
+          "named": true
+        },
+        {
+          "type": "constant",
+          "named": true
+        },
+        {
+          "type": "dataset_reference",
+          "named": true
+        },
+        {
+          "type": "date_literal",
+          "named": true
+        },
+        {
+          "type": "function_call",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "locked_expression",
+          "named": true
+        },
+        {
+          "type": "new_expression",
+          "named": true
+        },
+        {
+          "type": "null_literal",
+          "named": true
+        },
+        {
+          "type": "number_literal",
+          "named": true
+        },
+        {
+          "type": "object_access",
+          "named": true
+        },
+        {
+          "type": "object_access_expression",
+          "named": true
+        },
+        {
+          "type": "parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "qualified_name",
+          "named": true
+        },
+        {
+          "type": "scoped_name",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -13746,6 +14168,10 @@
         },
         {
           "type": "bell_statement",
+          "named": true
+        },
+        {
+          "type": "browse_definition",
           "named": true
         },
         {
@@ -13914,6 +14340,10 @@
         },
         {
           "type": "form_statement",
+          "named": true
+        },
+        {
+          "type": "frame_definition",
           "named": true
         },
         {
@@ -14999,6 +15429,10 @@
             "named": true
           },
           {
+            "type": "browse_definition",
+            "named": true
+          },
+          {
             "type": "buffer_compare_statement",
             "named": true
           },
@@ -15164,6 +15598,10 @@
           },
           {
             "type": "form_statement",
+            "named": true
+          },
+          {
+            "type": "frame_definition",
             "named": true
           },
           {
@@ -15573,6 +16011,10 @@
             "named": true
           },
           {
+            "type": "browse_definition",
+            "named": true
+          },
+          {
             "type": "buffer_compare_statement",
             "named": true
           },
@@ -15738,6 +16180,10 @@
           },
           {
             "type": "form_statement",
+            "named": true
+          },
+          {
+            "type": "frame_definition",
             "named": true
           },
           {
@@ -18411,6 +18857,10 @@
           "named": true
         },
         {
+          "type": "browse_definition",
+          "named": true
+        },
+        {
           "type": "buffer_compare_statement",
           "named": true
         },
@@ -18576,6 +19026,10 @@
         },
         {
           "type": "form_statement",
+          "named": true
+        },
+        {
+          "type": "frame_definition",
           "named": true
         },
         {
@@ -20241,6 +20695,10 @@
           "named": true
         },
         {
+          "type": "browse_definition",
+          "named": true
+        },
+        {
           "type": "buffer_compare_statement",
           "named": true
         },
@@ -20406,6 +20864,10 @@
         },
         {
           "type": "form_statement",
+          "named": true
+        },
+        {
+          "type": "frame_definition",
           "named": true
         },
         {
@@ -23721,6 +24183,10 @@
           "named": true
         },
         {
+          "type": "browse_definition",
+          "named": true
+        },
+        {
           "type": "buffer_compare_statement",
           "named": true
         },
@@ -23886,6 +24352,10 @@
         },
         {
           "type": "form_statement",
+          "named": true
+        },
+        {
+          "type": "frame_definition",
           "named": true
         },
         {
@@ -24861,6 +25331,10 @@
           "named": true
         },
         {
+          "type": "browse_definition",
+          "named": true
+        },
+        {
           "type": "buffer_compare_statement",
           "named": true
         },
@@ -25026,6 +25500,10 @@
         },
         {
           "type": "form_statement",
+          "named": true
+        },
+        {
+          "type": "frame_definition",
           "named": true
         },
         {
@@ -30964,6 +31442,10 @@
           "named": true
         },
         {
+          "type": "browse_definition",
+          "named": true
+        },
+        {
           "type": "buffer_compare_statement",
           "named": true
         },
@@ -31129,6 +31611,10 @@
         },
         {
           "type": "form_statement",
+          "named": true
+        },
+        {
+          "type": "frame_definition",
           "named": true
         },
         {
@@ -36346,6 +36832,10 @@
     "named": false
   },
   {
+    "type": "BACKGROUND",
+    "named": false
+  },
+  {
     "type": "BACKWARDS",
     "named": false
   },
@@ -36395,6 +36885,10 @@
   },
   {
     "type": "BRIGHT-",
+    "named": false
+  },
+  {
+    "type": "BROWSE",
     "named": false
   },
   {
@@ -36458,6 +36952,10 @@
     "named": false
   },
   {
+    "type": "CENTERED",
+    "named": false
+  },
+  {
     "type": "CHAINED",
     "named": false
   },
@@ -36490,6 +36988,10 @@
     "named": false
   },
   {
+    "type": "COLON-ALIGNED",
+    "named": false
+  },
+  {
     "type": "COLOR",
     "named": false
   },
@@ -36507,6 +37009,10 @@
   },
   {
     "type": "COLUMN-LABEL",
+    "named": false
+  },
+  {
+    "type": "COLUMN-OF",
     "named": false
   },
   {
@@ -36786,6 +37292,10 @@
     "named": false
   },
   {
+    "type": "FIT-LAST-COLUMN",
+    "named": false
+  },
+  {
     "type": "FIX-CODEPAGE",
     "named": false
   },
@@ -36880,6 +37390,10 @@
   {
     "type": "GT",
     "named": true
+  },
+  {
+    "type": "HEADER",
+    "named": false
   },
   {
     "type": "HELP",
@@ -37022,6 +37536,10 @@
     "named": false
   },
   {
+    "type": "LEFT-ALIGNED",
+    "named": false
+  },
+  {
     "type": "LIKE",
     "named": false
   },
@@ -37071,6 +37589,10 @@
   },
   {
     "type": "MATCHES",
+    "named": false
+  },
+  {
+    "type": "MAX-DATA-GUESS",
     "named": false
   },
   {
@@ -37126,6 +37648,10 @@
     "named": false
   },
   {
+    "type": "MULTIPLE",
+    "named": false
+  },
+  {
     "type": "NAMESPACE-PREFIX",
     "named": false
   },
@@ -37170,6 +37696,10 @@
     "named": false
   },
   {
+    "type": "NO-COLUMN-SCROLLING",
+    "named": false
+  },
+  {
     "type": "NO-CONSOLE",
     "named": false
   },
@@ -37190,6 +37720,10 @@
     "named": false
   },
   {
+    "type": "NO-EMPTY-SPACE",
+    "named": false
+  },
+  {
     "type": "NO-ERROR",
     "named": false
   },
@@ -37203,6 +37737,10 @@
   },
   {
     "type": "NO-JOIN-BY-SQLDB",
+    "named": false
+  },
+  {
+    "type": "NO-LABELS",
     "named": false
   },
   {
@@ -37231,6 +37769,10 @@
   },
   {
     "type": "NO-PREFETCH",
+    "named": false
+  },
+  {
+    "type": "NO-ROW-MARKERS",
     "named": false
   },
   {
@@ -37558,6 +38100,10 @@
     "named": false
   },
   {
+    "type": "RIGHT-ALIGNED",
+    "named": false
+  },
+  {
     "type": "ROUNDED",
     "named": false
   },
@@ -37567,6 +38113,10 @@
   },
   {
     "type": "ROW",
+    "named": false
+  },
+  {
+    "type": "ROW-OF",
     "named": false
   },
   {
@@ -37602,6 +38152,14 @@
     "named": false
   },
   {
+    "type": "SCROLLBAR-HORIZONTAL",
+    "named": false
+  },
+  {
+    "type": "SCROLLBAR-VERTICAL",
+    "named": false
+  },
+  {
     "type": "SCROLLING",
     "named": false
   },
@@ -37615,6 +38173,10 @@
   },
   {
     "type": "SEPARATE-CONNECTION",
+    "named": false
+  },
+  {
+    "type": "SEPARATORS",
     "named": false
   },
   {
@@ -37655,6 +38217,10 @@
   },
   {
     "type": "SHOW-STATS",
+    "named": false
+  },
+  {
+    "type": "SIDE-LABELS",
     "named": false
   },
   {
@@ -37799,6 +38365,10 @@
   },
   {
     "type": "TERMINAL",
+    "named": false
+  },
+  {
+    "type": "TEXT",
     "named": false
   },
   {
@@ -37982,6 +38552,10 @@
     "named": false
   },
   {
+    "type": "WIDGET-ID",
+    "named": false
+  },
+  {
     "type": "WIDTH",
     "named": false
   },
@@ -38014,6 +38588,10 @@
     "named": false
   },
   {
+    "type": "X-OF",
+    "named": false
+  },
+  {
     "type": "XCODE",
     "named": false
   },
@@ -38039,6 +38617,10 @@
   },
   {
     "type": "Y",
+    "named": false
+  },
+  {
+    "type": "Y-OF",
     "named": false
   },
   {

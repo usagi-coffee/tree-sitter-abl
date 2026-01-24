@@ -52262,6 +52262,14 @@
         },
         {
           "type": "SYMBOL",
+          "name": "browse_definition"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "frame_definition"
+        },
+        {
+          "type": "SYMBOL",
           "name": "class_definition"
         },
         {
@@ -52334,10 +52342,6 @@
         },
         {
           "type": "SYMBOL",
-          "name": "for_each_statement"
-        },
-        {
-          "type": "SYMBOL",
           "name": "input_statement"
         },
         {
@@ -52346,15 +52350,19 @@
         },
         {
           "type": "SYMBOL",
-          "name": "do_block"
-        },
-        {
-          "type": "SYMBOL",
           "name": "open_query_statement"
         },
         {
           "type": "SYMBOL",
+          "name": "do_block"
+        },
+        {
+          "type": "SYMBOL",
           "name": "buffer_compare_statement"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "for_each_statement"
         },
         {
           "type": "SYMBOL",
