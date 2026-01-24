@@ -241,49 +241,6 @@
         }
       ]
     },
-    "_preprocessor_argument": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "identifier"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "string_literal"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "number_literal"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "SYMBOL",
-            "name": "_signed_number_literal"
-          },
-          "named": true,
-          "value": "number_literal"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "boolean_literal"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "SYMBOL",
-            "name": "constant_expression"
-          },
-          "named": true,
-          "value": "constant"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "parenthesized_identifier"
-        }
-      ]
-    },
     "constant": {
       "type": "TOKEN",
       "content": {

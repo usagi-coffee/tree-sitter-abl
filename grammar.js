@@ -97,16 +97,6 @@ module.exports = grammar({
       preprocessor_directive: ($) => token(/&[^\n]*(?:~\s*\n[^\n]*)*/i),
       include_file_reference: ($) =>
         seq(optional(alias($.constant_expression, $.constant)), $.file_name),
-      _preprocessor_argument: ($) =>
-        choice(
-          $.identifier,
-          $.string_literal,
-          $.number_literal,
-          alias($._signed_number_literal, $.number_literal),
-          $.boolean_literal,
-          alias($.constant_expression, $.constant),
-          $.parenthesized_identifier,
-        ),
 
       // Constants
       constant: ($) => token(/\{&[^\}\r\n]+\}[ \t]*\r?\n/),
