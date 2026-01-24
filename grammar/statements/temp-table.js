@@ -15,10 +15,7 @@ module.exports = ({ kw, tkw }) => ({
       field("name", $.identifier),
       optional(alias($.__temp_table_no_undo, $.no_undo)),
       optional(
-        seq(
-          kw("NAMESPACE-URI"),
-          field("namespace_uri", $.string_literal),
-        ),
+        seq(kw("NAMESPACE-URI"), field("namespace_uri", $.string_literal)),
       ),
       optional(
         seq(
@@ -34,7 +31,10 @@ module.exports = ({ kw, tkw }) => ({
       repeat(
         choice(
           alias($.__temp_table_like_clause, $.like_clause),
-          alias($.__temp_table_like_sequential_clause, $.like_sequential_clause),
+          alias(
+            $.__temp_table_like_sequential_clause,
+            $.like_sequential_clause,
+          ),
           alias($.__temp_table_rcode_information, $.rcode_information),
           alias($.__temp_table_before_table_clause, $.before_table_clause),
         ),
@@ -80,11 +80,7 @@ module.exports = ({ kw, tkw }) => ({
       field("name", $.identifier),
       choice(
         seq(kw("AS"), field("type", $._type_name)),
-        seq(
-          kw("LIKE"),
-          field("type", $._type_name),
-          optional(tkw("VALIDATE")),
-        ),
+        seq(kw("LIKE"), field("type", $._type_name), optional(tkw("VALIDATE"))),
       ),
       repeat(alias($.__temp_table_field_option, $.field_option)),
     ),
@@ -130,7 +126,7 @@ module.exports = ({ kw, tkw }) => ({
   __temp_table_index_field: ($) =>
     seq(
       field("field", $.__temp_table_field_name),
-      optional(choice(kw("ASCENDING"), kw("DESCENDING"))),
+      optional(choice(tkw("ASCENDING"), tkw("DESCENDING"))),
     ),
   __temp_table_field_option: ($) =>
     choice(
@@ -165,11 +161,7 @@ module.exports = ({ kw, tkw }) => ({
       seq(kw("NEW"), kw("SHARED")),
       kw("SHARED"),
     ),
-  __temp_table_access_modifier: ($) =>
-    choice(
-      kw("PRIVATE"),
-      kw("PROTECTED"),
-    ),
+  __temp_table_access_modifier: ($) => choice(kw("PRIVATE"), kw("PROTECTED")),
   __temp_table_static_modifier: ($) => kw("STATIC"),
   __temp_table_serialization_modifier: ($) =>
     choice(kw("SERIALIZABLE"), kw("NON-SERIALIZABLE")),
