@@ -9,8 +9,13 @@ module.exports = ({ kw, tkw }) => ({
           seq(kw("PRESELECT"), $.preselect_record_list),
         ),
       ),
-      optional(alias($.__repeat_on_stop_phrase, $.on_stop_phrase)),
-      optional(alias($.__repeat_on_error_phrase, $.on_error_phrase)),
+      // FIXME: this shouldn't be repeat but we need to save on state counts
+      repeat(
+        choice(
+          alias($.__repeat_on_stop_phrase, $.on_stop_phrase),
+          alias($.__repeat_on_error_phrase, $.on_error_phrase),
+        ),
+      ),
       $.body,
       tkw("END"),
       $._terminator,

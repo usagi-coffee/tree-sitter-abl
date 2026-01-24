@@ -10743,6 +10743,10 @@
           "named": true
         },
         {
+          "type": "on_stop_phrase",
+          "named": true
+        },
+        {
           "type": "parenthesized_expression",
           "named": true
         },
@@ -21033,7 +21037,15 @@
       "required": false,
       "types": [
         {
+          "type": "undo_leave_phrase",
+          "named": true
+        },
+        {
           "type": "undo_return_error",
+          "named": true
+        },
+        {
+          "type": "undo_throw_phrase",
           "named": true
         }
       ]

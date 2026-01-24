@@ -9,11 +9,13 @@ module.exports = ({ kw, tkw }) => ({
         optional($.__do_preselect_phrase),
         optional(choice($.__do_while_phrase, $.__do_loop_phrase)),
         optional($.__do_transaction_phrase),
-        optional(alias($.__do_on_endkey_phrase, $.on_endkey_phrase)),
-        optional(
+        // FIXME: this shouldn't be repeat but we need to save on state counts
+        repeat(
           choice(
+            alias($.__do_on_endkey_phrase, $.on_endkey_phrase),
             alias($.__do_on_error_phrase, $.on_error_phrase),
             alias($.__do_on_quit_phrase, $.on_quit_phrase),
+            alias($.__do_on_stop_phrase, $.on_stop_phrase),
           ),
         ),
         $.body,
@@ -61,6 +63,15 @@ module.exports = ({ kw, tkw }) => ({
           tkw("NO-APPLY"),
           field("return_value", $._expression),
         ),
+      ),
+    ),
+  __do_on_stop_phrase: ($) =>
+    seq(
+      kw("ON"),
+      kw("STOP"),
+      choice(
+        alias($.__do_undo_throw_phrase, $.undo_throw_phrase),
+        alias($.__do_undo_leave_phrase, $.undo_leave_phrase),
       ),
     ),
   __do_on_error_phrase: ($) =>
