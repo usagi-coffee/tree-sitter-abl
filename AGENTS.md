@@ -1,6 +1,6 @@
 # AGENTS.md
 
-## Project overview
+## Project
 
 - Tree-sitter grammar for OpenEdge ABL.
 
@@ -36,32 +36,26 @@
 - Prints report with state count cost for every statement:
   - `bun run check:statements`
 
-Strongly prefer using defined workflow commands to as they have helpful side-effects like returning `STATE_COUNT` after success.
-
+Strongly prefer using these commands as they have helpful side-effects like returning `STATE_COUNT` after success.
 
 ## Conventions
 
-- Treat `grammar.js` as core grammar rules and anything inside is "core".
-- Treat `src/parser.c`, `src/grammar.json`, and `src/node-types.json` as generated.
+- Grammar changes without thorough corpus coverage and testing are unacceptable.
 - Avoid placing shared or generic code unless it is part of the core syntax. We intentionally duplicate modifiers and tunings at the statement level so that most of the statement-specific context lives in a single file. To support this, each statement defines its own `__<statement>_rules`, which are later aliased to `$.rule` where needed. This intentional duplication favors locality, readability, and conflict isolation over DRY abstractions.
-- Always run tests after changes and make sure they pass.
 - Conflicts must be resolved structurally whenever possible. Adding a `conflicts` entry is a last resort and requires prior confirmation with a clear explanation of why structural fixes are insufficient.
-- When modyfing core grammar rules first ask for a confirmation unless experimenting.
-- Your first solution should _never_ be to try to add a precedence to keywords, if it's necessary give me an explanation and ask for a confirmation.
+- Core grammar modifications require a confirmation unless experimenting.
+- Your first solution should never be to try to add a precedence to keywords, if it's necessary give me an explanation and ask for a confirmation.
 - Prefer `kw` (requires whitespace after the keyword) and `tkw` (does not require whitespace) to use in-place of `token(/keyword/i)` function whenever dealing with keywords.
-- Do _NOT_ try to implement keywords as external scanner tokens that match case-insensitively with non-identifier character boundaries.
-- Always check for `(ERROR)` or `(MISSING)` nodes in the test output and treat them as errors that need to be fixed.
-- Use compact rule formatting: keep one-line rules adjacent with no blank lines between them. Only insert a blank line before/after multi-line rules (rules that wrap to multiple lines). Avoid blank lines between consecutive one-line rules.
-- Most statements/expressions should have a dedicated file in its appropriate location, for example: `grammar/statements/<statement>.js` and `test/corpus/statements/<statement>.txt` for its test cases. Statements are not considered complete without both.
-- Any new or modified syntax must be accompanied by extensive tests in `test/corpus`. Grammar changes without thorough corpus coverage are unacceptable, as tests are required to validate correctness, edge cases, and future regressions.
+- Treat `(ERROR)` and `(MISSING)` nodes in the test output aserrors that need to be fixed.
+- Use compact rule formatting: keep one-line rules adjacent with no blank lines, avoid blank lines between consecutive one-line rules.
 - The grammar should avoid permissive or catch-all rules that allow invalid syntax to be parsed successfully.
 - ABL grammar is filled with optionals, be careful not to explode `tree-sitter`'s `STATE_COUNT`.
 - Always check `STATE_COUNT` impacts and note the current `STATE_COUNT` cost for statements via leading comments in `grammar/core/statements.js`.
 - Do not remove tests just to satisfy test passing, just fix the underlying issue.
-- Remember to regenerate parser after `src/scanner.c` modifications before testing.
+- `src/scanner.c` modifications need regeneration before testing.
 
 ## Notes
 
-- We use `bun` here instead of `npm`.
+- `bun` instead of `npm`.
 - Successful tests print out current `STATE_COUNT` at the end.
 - Parser does not build after reaching the hard limit of 65,535 `STATE_COUNT` but bugs might occur at the top-end of the limit e.g `tree-sitter test` might return status `0` but produce no output at about ~63,000 `STATE_COUNT`.
