@@ -7,7 +7,7 @@ RETURN myValue.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (return_statement)
   (return_statement
     (identifier)))

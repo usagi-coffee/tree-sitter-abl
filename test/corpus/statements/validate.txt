@@ -7,7 +7,7 @@ VALIDATE Item NO-ERROR.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (validate_statement
     record: (identifier))
   (validate_statement

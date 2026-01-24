@@ -8,7 +8,7 @@ STATUS INPUT OFF.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (status_statement
     message: (string_literal))
   (status_statement

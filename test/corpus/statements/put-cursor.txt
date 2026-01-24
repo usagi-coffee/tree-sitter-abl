@@ -10,7 +10,7 @@ PUT CURSOR ROW iRow COLUMN iCol.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (put_cursor_statement)
   (put_cursor_statement
     row: (number_literal))

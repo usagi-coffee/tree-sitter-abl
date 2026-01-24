@@ -8,7 +8,7 @@ USE "testing" NO-ERROR.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (use_statement
     environment: (string_literal))
   (use_statement

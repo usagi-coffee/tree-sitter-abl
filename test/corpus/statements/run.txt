@@ -8,7 +8,7 @@ RUN utilities/helper.p.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (run_statement
     procedure: (procedure_name))
   (run_statement
@@ -24,7 +24,7 @@ RUN proxy/starttransaction.p (OUTPUT DATASET tFcMessages, OUTPUT bFinApiError).
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (run_statement
     procedure: (procedure_name)
     (argument_list
@@ -42,7 +42,7 @@ RUN someproc.p (INPUT-OUTPUT DATASET dsOrder, INPUT DATASET dsOther:HANDLE).
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (run_statement
     procedure: (procedure_name)
     (argument_list
@@ -64,7 +64,7 @@ RUN process.p (1, "hello", TRUE).
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (run_statement
     procedure: (procedure_name)
     (argument_list
@@ -94,7 +94,7 @@ RUN ip_calculate.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (run_statement
     procedure: (identifier))
   (run_statement
@@ -111,7 +111,7 @@ RUN validateOrder (orderId, customerId).
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (run_statement
     procedure: (identifier)
     (argument_list
@@ -135,7 +135,7 @@ RUN utils.helpers.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (run_statement
     procedure: (qualified_name
       left: (identifier)
@@ -151,7 +151,7 @@ RUN ./local/process.p.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (run_statement
     procedure: (procedure_name))
   (run_statement
@@ -167,7 +167,7 @@ RUN processRecord.p (cCustomer, lSuccess).
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (run_statement
     procedure: (procedure_name)
     (argument_list
@@ -184,7 +184,7 @@ RUN calc.p (x + y, STRING(TODAY), SUBSTRING(name, 1, 10)).
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (run_statement
     procedure: (procedure_name)
     (argument_list

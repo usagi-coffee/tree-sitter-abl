@@ -9,7 +9,7 @@ PUT UNFORMATTED x format("9999-99-99") ';'.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (put_statement
     value: (string_literal)
     value: (qualified_name

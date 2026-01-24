@@ -6,6 +6,6 @@ CREATE SOCKET sock.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (create_socket_statement
     name: (identifier)))

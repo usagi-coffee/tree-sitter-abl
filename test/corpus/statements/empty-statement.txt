@@ -6,5 +6,5 @@ EMPTY STATEMENT
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (empty_statement))

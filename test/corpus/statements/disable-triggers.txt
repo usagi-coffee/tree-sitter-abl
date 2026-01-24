@@ -7,7 +7,7 @@ DISABLE TRIGGERS FOR LOAD OF db.wo_mstr ALLOW-REPLICATION.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (disable_triggers_statement
     table: (identifier))
   (disable_triggers_statement

@@ -13,7 +13,7 @@ END FINALLY.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (finally_statement
     (body
       (message_statement

@@ -20,7 +20,7 @@ END.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (repeat_statement
     (body
       (display_statement

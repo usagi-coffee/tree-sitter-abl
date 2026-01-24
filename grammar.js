@@ -50,7 +50,7 @@ module.exports = grammar({
   rules: (() => {
     const ctx = { PREC, kw, tkw };
     return {
-      source_file: ($) => repeat($._statement),
+      source_code: ($) => repeat($._statement),
 
       // Comments
       line_comment: ($) => token(seq("//", /[^\r\n]*/)),

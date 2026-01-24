@@ -9,7 +9,7 @@ INPUT STREAM-HANDLE hStream CLOSE.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (input_statement
     (identifier))
   (input_statement

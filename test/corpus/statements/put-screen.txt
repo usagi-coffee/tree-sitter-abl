@@ -10,7 +10,7 @@ PUT SCREEN COLOR 7 ROW 1 COLUMN 1 "Header".
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (put_screen_statement
     value: (string_literal))
   (put_screen_statement

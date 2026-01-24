@@ -30,7 +30,7 @@ END ENUM.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (enum_statement
     (identifier)
     (enum_body

@@ -10,7 +10,7 @@ COMMENT
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (comment
     (block_comment))
   (comment
@@ -33,7 +33,7 @@ INCLUDE
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (include
     file: (file_name)
     argument: (include_argument
@@ -112,7 +112,7 @@ new MyClass():Size.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (expression_statement
     (qualified_name
       left: (identifier)
@@ -180,7 +180,7 @@ arr[1 FOR 4].
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (expression_statement
     (array_access
       array: (identifier)
@@ -204,7 +204,7 @@ ARGUMENT REFERENCE
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (expression_statement
     (argument_reference)))
 
@@ -218,7 +218,7 @@ arr[1, 2];
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (expression_statement
     (null_literal))
   (expression_statement
@@ -239,7 +239,7 @@ CONSTANT
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (expression_statement
     (constant
       (identifier))))
@@ -253,7 +253,7 @@ FALSE.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (expression_statement
     (boolean_literal))
   (expression_statement
@@ -276,7 +276,7 @@ PREPROCESSOR DIRECTIVES
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (preprocessor_directive)
   (preprocessor_directive)
   (preprocessor_directive)

@@ -7,6 +7,10 @@ ROUTINE-LEVEL ON ERROR UNDO, THROW.
 
 --------------------------------------------------------------------------------
 
-(source_file
-  (block_level_on_error_statement)
-  (routine_level_on_error_statement))
+(source_code
+  (error_scope_statement
+    (error_scope_type)
+    (on_error_phrase))
+  (error_scope_statement
+    (error_scope_type)
+    (on_error_phrase)))

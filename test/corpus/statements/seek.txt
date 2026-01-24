@@ -7,7 +7,7 @@ SEEK STREAM outStream TO END.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (seek_statement
     (identifier))
   (seek_statement

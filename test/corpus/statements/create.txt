@@ -8,7 +8,7 @@ CREATE tDebtorShipTo.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (create_statement
     table: (identifier))
   (create_statement
@@ -25,7 +25,7 @@ CREATE db.TableName.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (create_statement
     table: (qualified_name
       left: (identifier)
@@ -44,7 +44,7 @@ BUFFER-COPY srcBuf TO dstBuf.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (buffer_copy_statement
     source: (identifier)
     target: (identifier))
@@ -61,7 +61,7 @@ BUFFER-COPY Customer EXCEPT CustNum CreatedDate TO ttCustomer.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (buffer_copy_statement
     source: (identifier)
     (except_clause
@@ -86,7 +86,7 @@ END.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (do_block
     (body
       (create_statement
@@ -97,4 +97,3 @@ END.
             left: (identifier)
             right: (identifier))
           right: (string_literal))))))
-

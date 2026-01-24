@@ -8,7 +8,7 @@ READKEY STREAM sIn PAUSE 10.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (readkey_statement)
   (readkey_statement
     pause: (number_literal))

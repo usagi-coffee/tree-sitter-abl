@@ -8,7 +8,7 @@ GET-KEY-VALUE SECTION "startup" DEFAULT.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (get_key_value_statement
     section: (string_literal)
     key: (string_literal)

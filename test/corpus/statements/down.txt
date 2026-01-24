@@ -8,7 +8,7 @@ DOWN 2 WITH FRAME cust.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (down_statement)
   (down_statement
     count: (number_literal))

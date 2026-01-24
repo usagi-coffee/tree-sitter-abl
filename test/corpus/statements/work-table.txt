@@ -8,7 +8,7 @@ DEFINE WORK-TABLE wtCustomer NO-UNDO
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (work_table_definition
     name: (identifier)
     (no_undo)
@@ -18,4 +18,3 @@ DEFINE WORK-TABLE wtCustomer NO-UNDO
     (work_table_field
       name: (identifier)
       type: (identifier))))
-

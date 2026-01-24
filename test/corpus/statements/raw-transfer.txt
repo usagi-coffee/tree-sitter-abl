@@ -9,7 +9,7 @@ RAW-TRANSFER FIELD source TO dest NO-ERROR.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (raw_transfer_statement
     source_field: (identifier)
     target: (identifier))

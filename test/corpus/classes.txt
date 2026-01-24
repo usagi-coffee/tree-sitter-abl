@@ -60,7 +60,7 @@ END CLASS.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (class_definition
     name: (qualified_name
       left: (identifier)

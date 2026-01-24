@@ -7,7 +7,7 @@ DEF DATASET dsAudit FOR ttHeader, ttLine.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (dataset_definition
     name: (identifier)
     table: (identifier))

@@ -25,7 +25,7 @@ DEFINE TEMP-TABLE tt_like LIKE base_tbl
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (temp_table_definition
     name: (identifier)
     (no_undo)

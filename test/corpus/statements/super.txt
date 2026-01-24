@@ -6,6 +6,6 @@ SUPER().
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (super_statement
     (argument_list)))

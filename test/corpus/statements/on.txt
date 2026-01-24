@@ -10,7 +10,7 @@ ON ASSIGN OF Customer.Name OLD VALUE old-name REVERT.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (on_statement
     object: (identifier)
     (referencing_phrase

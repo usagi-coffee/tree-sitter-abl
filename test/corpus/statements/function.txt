@@ -10,7 +10,7 @@ END FUNCTION.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (function_forward_definition
     name: (identifier)
     type: (identifier))

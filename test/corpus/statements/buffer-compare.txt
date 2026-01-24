@@ -8,7 +8,7 @@ BUFFER-COMPARE bSrc USING Field1 Field2 TO bTgt.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (buffer_compare_statement
     source: (identifier)
     target: (identifier))
@@ -36,7 +36,7 @@ BUFFER-COMPARE bSrc TO bTgt NO-ERROR.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (buffer_compare_statement
     source: (identifier)
     target: (identifier))
@@ -71,7 +71,7 @@ BUFFER-COMPARE bSrc TO bTgt
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (buffer_compare_statement
     source: (identifier)
     target: (identifier)

@@ -8,7 +8,7 @@ DEF PRIVATE STATIC BUFFER bClass FOR myTable.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (buffer_definition
     name: (identifier)
     table: (qualified_name

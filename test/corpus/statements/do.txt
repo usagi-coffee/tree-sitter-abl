@@ -8,7 +8,7 @@ END.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (do_block
     (body
       (assignment_statement
@@ -30,7 +30,7 @@ END.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (do_block
     variable: (identifier)
     start: (number_literal)
@@ -63,7 +63,7 @@ END.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (do_block
     (binary_expression
       (identifier)
@@ -94,7 +94,7 @@ END.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (do_block
     (binary_expression
       (identifier)
@@ -119,7 +119,7 @@ END.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (do_block
     (on_error_clause
       (undo_leave_phrase))
@@ -139,7 +139,7 @@ END.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (do_block
     (on_quit_clause)
     (body
@@ -162,7 +162,7 @@ END.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (do_block
     (body))
   (do_block
@@ -186,7 +186,7 @@ END.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (do_block
     (function_call
       function: (object_access
@@ -213,7 +213,7 @@ END.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (do_block
     (boolean_literal)
     (on_endkey_clause
@@ -238,7 +238,7 @@ END.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (do_block
     label: (identifier)
     (body
@@ -272,7 +272,7 @@ END.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (do_block
     label: (identifier)
     (boolean_literal)
@@ -302,7 +302,7 @@ END.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (do_block
     variable: (identifier)
     start: (identifier)
@@ -334,7 +334,6 @@ END.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (do_block
     (body)))
-

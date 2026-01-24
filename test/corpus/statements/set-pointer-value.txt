@@ -7,7 +7,7 @@ SET-POINTER-VALUE(pBuffer) = GET-POINTER-VALUE(pSource).
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (set_pointer_value_statement
     target: (identifier)
     value: (number_literal))

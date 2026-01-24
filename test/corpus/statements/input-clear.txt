@@ -6,5 +6,5 @@ INPUT CLEAR.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (input_clear_statement))

@@ -10,7 +10,7 @@ HIDE ALL NO-PAUSE.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (hide_statement)
   (hide_statement
     (widget_phrase

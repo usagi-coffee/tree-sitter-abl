@@ -8,7 +8,7 @@ UNSUBSCRIBE TO "MyEvent" IN hPub.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (unsubscribe_statement
     event: (string_literal))
   (unsubscribe_statement)

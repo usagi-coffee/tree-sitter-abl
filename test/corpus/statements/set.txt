@@ -13,7 +13,7 @@ SET field1 GO-ON(f1 f2).
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (set_statement
     (set_item
       field: (identifier)))

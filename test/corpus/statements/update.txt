@@ -12,7 +12,7 @@ UPDATE field1 GO-ON(f1 f2).
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (update_statement
     (update_item
       field: (identifier)))

@@ -6,5 +6,5 @@ DICTIONARY.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (dictionary_statement))

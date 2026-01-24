@@ -7,7 +7,7 @@ RELEASE order_hdr.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (release_statement
     record: (identifier))
   (release_statement

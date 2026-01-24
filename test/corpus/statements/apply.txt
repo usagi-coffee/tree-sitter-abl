@@ -9,7 +9,7 @@ APPLY "ERROR".
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (apply_statement
     event: (string_literal))
   (apply_statement

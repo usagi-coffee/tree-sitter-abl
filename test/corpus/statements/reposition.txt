@@ -9,7 +9,7 @@ REPOSITION qCust TO ROWID rCust.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (reposition_statement
     query: (identifier)
     row: (number_literal))

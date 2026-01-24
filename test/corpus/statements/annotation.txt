@@ -8,7 +8,7 @@ ANNOTATION
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (annotation_statement
     name: (annotation_name))
   (annotation_statement

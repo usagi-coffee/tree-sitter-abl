@@ -8,7 +8,7 @@ LOAD-PICTURE cImagePath.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (load_picture_statement)
   (load_picture_statement
     image: (string_literal))

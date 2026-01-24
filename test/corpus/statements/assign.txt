@@ -8,7 +8,7 @@ ASSIGN flag = TRUE.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (assign_statement
     (assign_pair
       left: (identifier)
@@ -34,7 +34,7 @@ ASSIGN
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (assign_statement
     (assign_pair
       left: (identifier)
@@ -60,7 +60,7 @@ ASSIGN
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (assign_statement
     (assign_pair
       left: (identifier)
@@ -87,7 +87,7 @@ ASSIGN a = 1 b = 2 NO-ERROR.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (assign_statement
     (assign_pair
       left: (identifier)
@@ -116,7 +116,7 @@ ASSIGN // note
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (assign_statement
     (comment
       (line_comment))
@@ -135,7 +135,7 @@ ASSIGN c = dataset BDebtorShipTo:handle.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (assign_statement
     (assign_pair
       left: (identifier)
@@ -152,7 +152,7 @@ ASSIGN status = IF ok THEN "Y" ELSE "N".
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (assign_statement
     (assign_pair
       left: (identifier)
@@ -170,7 +170,7 @@ ASSIGN Customer.Name = "John"
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (assign_statement
     (assign_pair
       left: (qualified_name
@@ -193,7 +193,7 @@ a = b + c.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (assignment_statement
     left: (identifier)
     operator: (assignment_operator)
@@ -219,7 +219,7 @@ x = 1 NO-ERROR.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (assignment_statement
     left: (identifier)
     operator: (assignment_operator)
@@ -234,7 +234,7 @@ PUT-STRING(workBuf, 1) = cmdValue.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (assignment_statement
     left: (function_call
       function: (identifier)
@@ -254,10 +254,9 @@ doWork() NO-ERROR.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (expression_statement
     (function_call
       function: (identifier)
       (argument_list))
     (no_error)))
-

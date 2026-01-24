@@ -7,7 +7,7 @@ LEAVE outerLoop.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (leave_statement)
   (leave_statement
     label: (identifier)))

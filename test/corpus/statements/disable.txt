@@ -14,7 +14,7 @@ DISABLE field1 WITH FRAME f1.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (disable_statement)
   (disable_statement
     except: (identifier))

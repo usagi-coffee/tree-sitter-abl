@@ -7,7 +7,7 @@ FIX-CODEPAGE(mRaw) = cCodepage.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (fix_codepage_statement
     target: (identifier)
     codepage: (string_literal))

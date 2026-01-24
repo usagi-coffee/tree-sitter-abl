@@ -8,7 +8,7 @@ UP 1 WITH FRAME myframe.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (up_statement)
   (up_statement
     count: (number_literal))

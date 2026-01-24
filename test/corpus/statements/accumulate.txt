@@ -14,7 +14,7 @@ END.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (for_each_statement
     (for_record_list
       (for_record

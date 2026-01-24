@@ -8,7 +8,7 @@ PROPATH = cPath + "," + cOtherPath.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (propath_statement
     value: (string_literal))
   (propath_statement

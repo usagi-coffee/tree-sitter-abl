@@ -7,7 +7,7 @@ OS-CREATE-DIR cDirName.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (os_create_dir_statement
     directory: (string_literal))
   (os_create_dir_statement

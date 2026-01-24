@@ -8,7 +8,7 @@ SUBSCRIBE PROCEDURE hSub TO "MyEvent" IN hPub.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (subscribe_statement
     event: (string_literal)
     publisher: (identifier))

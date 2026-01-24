@@ -8,7 +8,7 @@ DISCONNECT VALUE(cDbName).
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (disconnect_statement
     database: (identifier))
   (disconnect_statement

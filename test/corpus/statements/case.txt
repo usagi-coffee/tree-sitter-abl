@@ -12,7 +12,7 @@ END CASE.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (case_statement
     (identifier)
     (case_when_clause
@@ -45,7 +45,7 @@ END.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (case_statement
     (identifier)
     (case_when_clause

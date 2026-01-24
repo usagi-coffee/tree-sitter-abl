@@ -8,7 +8,7 @@ VIEW STREAM sOut FRAME myframe.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (view_statement)
   (view_statement
     (widget_phrase

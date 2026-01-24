@@ -15,7 +15,7 @@ item.item = ipcItem NO-LOCK.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (preprocessor_directive)
   (variable_definition
     (identifier)
@@ -37,7 +37,7 @@ COMMENT
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (comment
     (block_comment))
   (comment
@@ -56,7 +56,7 @@ COMMENT (long)
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (comment
     (block_comment)))
 
@@ -69,7 +69,7 @@ DISPLAY {&VAR1}.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (include
     file: (file_name)
     argument: (include_argument
@@ -111,7 +111,7 @@ DEFINE VARIABLE cls AS CLASS CustomClass.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (variable_definition
     (identifier)
     (identifier))
@@ -164,7 +164,7 @@ variable /= 3.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (variable_definition
     (identifier)
     (identifier))
@@ -209,7 +209,7 @@ z = 2 > 4.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (assignment_statement
     (identifier)
     (assignment_operator)
@@ -246,7 +246,7 @@ y = NOT -x < -10 OR x = 10.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (assignment_statement
     (identifier)
     (assignment_operator)
@@ -306,7 +306,7 @@ zr = NOT 5 = 2 + 2.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (assignment_statement
     (identifier)
     (assignment_operator)
@@ -352,7 +352,7 @@ DISPLAY
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (display_statement
     (qualified_name
       (identifier)
@@ -371,7 +371,7 @@ DEFINE BUFFER x-table FOR table.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (buffer_definition
     (identifier)
     (identifier)))
@@ -384,7 +384,7 @@ DEFINE IMAGE myImage SIZE 5 BY 5 CONVERT-3D-COLORS.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (image_definition
     (identifier)
     (size_clause
@@ -399,7 +399,7 @@ DEFINE QUERY q1 FOR tr_hist FIELDS (name balance) EXCEPT (something else lol) SC
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (query_definition
     name: (identifier)
     (query_table_list
@@ -422,7 +422,7 @@ END.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (if_statement
     (binary_expression
       (identifier)
@@ -447,7 +447,7 @@ END.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (if_statement
     (binary_expression
       (identifier)
@@ -481,7 +481,7 @@ END.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (if_statement
     (binary_expression
       (identifier)
@@ -528,7 +528,7 @@ End.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (if_statement
     (binary_expression
       (identifier)
@@ -564,7 +564,7 @@ IF x > 10 THEN x = 10.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (if_statement
     (binary_expression
       (identifier)
@@ -589,7 +589,7 @@ END.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (if_statement
     (binary_expression
       (identifier)
@@ -642,7 +642,7 @@ y = x < 10 OR x = 10.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (assignment_statement
     (identifier)
     (assignment_operator)
@@ -701,7 +701,7 @@ END.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (repeat_statement
     (boolean_literal)
     (body
@@ -747,7 +747,7 @@ END.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (do_block
     (identifier)
     (number_literal)
@@ -814,7 +814,7 @@ END.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (procedure_definition
     (identifier)
     (parameter_definition
@@ -850,7 +850,7 @@ PersonData:GetById(id, output table ttPerson by-reference).
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (function_definition
     (identifier)
     (identifier)
@@ -919,7 +919,7 @@ END.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (do_block
     (body
       (create_statement
@@ -933,7 +933,7 @@ DISPLAY "test" a 5 f().
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (display_statement
     (string_literal)
     (identifier)
@@ -955,7 +955,7 @@ ASSIGN
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (assign_statement
     (assign_pair
       (identifier)
@@ -990,7 +990,7 @@ END.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (for_each_statement
     (for_record_list
       (for_record
@@ -1028,7 +1028,7 @@ FIND some_table NO-LOCK WHERE x > 5 NO-ERROR.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (find_statement
     (identifier)
     (of_clause
@@ -1064,7 +1064,7 @@ END CASE.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (case_statement
     (identifier)
     (case_when_clause
@@ -1115,7 +1115,7 @@ END ENUM.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (enum_statement
     (identifier)
     (enum_body

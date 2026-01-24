@@ -8,7 +8,7 @@ DEF PRIVATE STATIC QUERY qClass FOR classBuf.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (query_definition
     name: (identifier)
     (query_table_list

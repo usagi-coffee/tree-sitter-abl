@@ -7,7 +7,7 @@ UNDO, LEAVE.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (undo_statement
     value: (new_expression
       type: (identifier)

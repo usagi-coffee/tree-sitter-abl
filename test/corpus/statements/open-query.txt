@@ -7,7 +7,7 @@ OPEN QUERY qCust FOR EACH Customer NO-LOCK BY Customer.Name.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (open_query_statement
     query: (identifier)
     (record_phrase

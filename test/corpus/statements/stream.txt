@@ -8,7 +8,7 @@ DEF PRIVATE STREAM sClass.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (stream_definition
     name: (identifier))
   (stream_definition

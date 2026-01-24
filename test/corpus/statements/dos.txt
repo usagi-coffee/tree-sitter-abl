@@ -11,7 +11,7 @@ DOS NOWAIT VALUE("dir").
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (dos_statement)
   (dos_statement)
   (dos_statement)

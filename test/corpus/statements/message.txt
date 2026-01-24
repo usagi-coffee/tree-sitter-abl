@@ -8,7 +8,7 @@ MESSAGE x.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (message_statement
     (string_literal))
   (message_statement
@@ -25,7 +25,7 @@ MESSAGE "Hello" SKIP(2) "World".
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (message_statement
     (string_literal)
     (skip)
@@ -50,7 +50,7 @@ MESSAGE "Done" VIEW-AS ALERT-BOX INFO BUTTONS OK.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (message_statement
     (string_literal)
     (skip)
@@ -87,7 +87,7 @@ MESSAGE "Retry?" VIEW-AS ALERT-BOX BUTTONS RETRY-CANCEL.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (message_statement
     (string_literal)
     (view_as_clause
@@ -118,7 +118,7 @@ MESSAGE "Msg" VIEW-AS ALERT-BOX INFORMATION TITLE "Info".
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (message_statement
     (string_literal)
     (view_as_clause
@@ -137,7 +137,7 @@ MESSAGE "Input" VIEW-AS ALERT-BOX UPDATE response AS CHARACTER.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (message_statement
     (string_literal)
     (view_as_clause
@@ -162,7 +162,7 @@ MESSAGE COLOR MESSAGES "Status message".
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (message_statement
     (color_phrase)
     (binary_expression
@@ -184,7 +184,7 @@ MESSAGE "World" VIEW-AS ALERT-BOX IN WINDOW hMainWindow.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (message_statement
     (string_literal)
     window: (identifier))
@@ -201,7 +201,7 @@ MESSAGE COLOR NORMAL "Export done: " + fileName SKIP(2) VIEW-AS ALERT-BOX INFORM
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (message_statement
     (color_phrase)
     (binary_expression
@@ -227,7 +227,7 @@ MESSAGE Customer.Name " - " Customer.Balance.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (message_statement
     (binary_expression
       (string_literal)
@@ -257,7 +257,7 @@ MESSAGE "Value?" SET iValue AS INTEGER FORMAT ">>9".
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (message_statement
     (string_literal)
     (set_update_clause
@@ -278,7 +278,7 @@ MESSAGE "Enter customer:" UPDATE cNum LIKE Customer.CustNum.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (message_statement
     (string_literal)
     (set_update_clause
@@ -286,4 +286,3 @@ MESSAGE "Enter customer:" UPDATE cNum LIKE Customer.CustNum.
       like: (qualified_name
         left: (identifier)
         right: (identifier)))))
-

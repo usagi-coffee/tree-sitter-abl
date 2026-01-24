@@ -6,7 +6,7 @@ CONVERT SOURCE CODEPAGE "1250" TARGET CODEPAGE "UTF-8".
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (convert_statement
     source: (string_literal)
     target: (string_literal)))

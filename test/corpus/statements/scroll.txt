@@ -10,7 +10,7 @@ SCROLL FROM-CURRENT DOWN WITH FRAME myframe.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (scroll_statement)
   (scroll_statement)
   (scroll_statement)

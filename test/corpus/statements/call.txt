@@ -8,7 +8,7 @@ CALL updateRecord iId cName dDate.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (call_statement
     routine: (identifier))
   (call_statement

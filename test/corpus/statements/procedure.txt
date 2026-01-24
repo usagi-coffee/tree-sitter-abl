@@ -14,7 +14,7 @@ PROCEDURE forwardProc.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (procedure_definition
     name: (identifier)
     (parameter_definition

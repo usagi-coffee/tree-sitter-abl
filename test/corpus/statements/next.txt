@@ -7,7 +7,7 @@ NEXT outer_loop.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (next_statement)
   (next_statement
     label: (identifier)))

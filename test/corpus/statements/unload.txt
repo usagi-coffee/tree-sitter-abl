@@ -8,7 +8,7 @@ UNLOAD "myfile.r" NO-ERROR.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (unload_statement
     file: (string_literal))
   (unload_statement

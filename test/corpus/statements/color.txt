@@ -9,7 +9,7 @@ COLOR 7 PROMPT 3 field1 WITH FRAME f1.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (color_statement
     color: (number_literal)
     field: (identifier))

@@ -14,7 +14,7 @@ DEFINE PARAMETER BUFFER pTemp FOR TEMP-TABLE ttAudit PRESELECT.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (parameter_definition
     name: (identifier)
     type: (identifier))

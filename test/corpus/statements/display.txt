@@ -8,7 +8,7 @@ DISPLAY 123.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (display_statement
     (identifier))
   (display_statement
@@ -25,7 +25,7 @@ DISPLAY Customer.Name Customer.Balance.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (display_statement
     (identifier)
     (identifier)
@@ -46,7 +46,7 @@ DISPLAY Customer.Balance (TOTAL).
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (display_statement
     (qualified_name
       left: (identifier)
@@ -64,7 +64,7 @@ disp Customer.Name.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (display_statement
     (identifier))
   (display_statement
@@ -82,7 +82,7 @@ DISPLAY Item.Qty * Item.Price LABEL "Extended".
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (display_statement
     (binary_expression
       (identifier)
@@ -116,7 +116,7 @@ DISPLAY SUBSTRING(str, 1, 5).
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (display_statement
     (function_call
       function: (identifier)

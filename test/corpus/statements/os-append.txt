@@ -7,7 +7,7 @@ OS-APPEND cSource cTarget.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (os_append_statement
     source: (string_literal)
     target: (string_literal))

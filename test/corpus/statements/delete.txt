@@ -8,7 +8,7 @@ DELETE ttRecord.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (delete_statement
     record: (identifier))
   (delete_statement
@@ -25,7 +25,7 @@ DELETE db.TableName.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (delete_statement
     record: (qualified_name
       left: (identifier)
@@ -45,7 +45,7 @@ DELETE OBJECT myWidget.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (delete_object_statement
     name: (identifier))
   (delete_object_statement
@@ -63,7 +63,7 @@ END.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (for_each_statement
     (for_record_list
       (for_record
@@ -90,7 +90,7 @@ END.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (do_block
     (body
       (find_statement
@@ -104,4 +104,3 @@ END.
         (exclusive_lock))
       (delete_statement
         record: (identifier)))))
-

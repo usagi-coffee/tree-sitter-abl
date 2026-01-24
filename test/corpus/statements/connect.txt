@@ -7,7 +7,7 @@ CONNECT VALUE("-db mydb -H localhost").
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (connect_statement
     database: (identifier))
   (connect_statement

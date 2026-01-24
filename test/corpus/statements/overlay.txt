@@ -10,7 +10,7 @@ OVERLAY(cLine, iPos, iLen, COLUMN) = "Hello".
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (overlay_statement
     target: (identifier)
     position: (number_literal)

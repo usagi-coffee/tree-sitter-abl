@@ -6,7 +6,7 @@ DEFINE EVENT onCustomerChanged SIGNATURE VOID ().
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (event_definition
     name: (identifier)
     (signature)))
@@ -22,7 +22,7 @@ DEFINE EVENT onDataChanged SIGNATURE VOID (
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (event_definition
     name: (identifier)
     (signature
@@ -42,7 +42,7 @@ DEFINE EVENT onProgress DELEGATE CLASS System.EventHandler.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (event_definition
     name: (identifier)
     (signature
@@ -58,7 +58,7 @@ DEFINE EVENT globalEvent SIGNATURE VOID ().
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (event_definition
     name: (identifier)
     (signature)))
@@ -73,7 +73,7 @@ DEFINE EVENT abstractEvent SIGNATURE VOID (
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (event_definition
     name: (identifier)
     (signature
@@ -88,7 +88,7 @@ DEFINE EVENT onInitialize SIGNATURE VOID ().
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (event_definition
     name: (identifier)
     (signature)))
@@ -101,7 +101,7 @@ DEF EVENT internalEvent SIGNATURE VOID ().
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (event_definition
     name: (identifier)
     (signature)))

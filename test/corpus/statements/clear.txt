@@ -10,7 +10,7 @@ CLEAR FRAME myframe ALL NO-PAUSE.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (clear_statement)
   (clear_statement
     frame: (identifier))

@@ -7,7 +7,7 @@ OS-DELETE tmpFile tmpDir RECURSIVE.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (os_delete_statement
     (identifier))
   (os_delete_statement

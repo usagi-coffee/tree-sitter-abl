@@ -7,6 +7,6 @@ USING Domains.Vacation.Vacation, Progress.Json.ObjectModel.JsonObject.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (using_statement)
   (using_statement))

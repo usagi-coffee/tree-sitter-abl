@@ -13,7 +13,7 @@ OUTPUT TO "out.txt" CONVERT TARGET "1250".
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (output_statement)
   (output_statement
     (stream_clause

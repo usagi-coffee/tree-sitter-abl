@@ -9,7 +9,7 @@ CLOSE STORED-PROCEDURE hProc iStatus = PROC-STATUS WHERE PROC-HANDLE = hHandle.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (close_stored_procedure_statement
     procedure: (identifier))
   (close_stored_procedure_statement

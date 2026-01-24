@@ -12,7 +12,7 @@ LOAD "myapp.r" DIR "/usr/lib" APPLICATION "app1" NEW.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (load_statement
     file: (string_literal))
   (load_statement

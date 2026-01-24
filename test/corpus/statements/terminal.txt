@@ -7,7 +7,7 @@ TERMINAL cTermType.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (terminal_statement
     terminal: (string_literal))
   (terminal_statement

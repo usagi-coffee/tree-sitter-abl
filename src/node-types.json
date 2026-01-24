@@ -1900,11 +1900,6 @@
     }
   },
   {
-    "type": "block_level_on_error_statement",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "body",
     "named": true,
     "fields": {},
@@ -1938,10 +1933,6 @@
         },
         {
           "type": "bell_statement",
-          "named": true
-        },
-        {
-          "type": "block_level_on_error_statement",
           "named": true
         },
         {
@@ -2074,6 +2065,10 @@
         },
         {
           "type": "enum_statement",
+          "named": true
+        },
+        {
+          "type": "error_scope_statement",
           "named": true
         },
         {
@@ -2338,10 +2333,6 @@
         },
         {
           "type": "return_statement",
-          "named": true
-        },
-        {
-          "type": "routine_level_on_error_statement",
           "named": true
         },
         {
@@ -5649,10 +5640,6 @@
             "named": true
           },
           {
-            "type": "block_level_on_error_statement",
-            "named": true
-          },
-          {
             "type": "buffer_compare_statement",
             "named": true
           },
@@ -5782,6 +5769,10 @@
           },
           {
             "type": "enum_statement",
+            "named": true
+          },
+          {
+            "type": "error_scope_statement",
             "named": true
           },
           {
@@ -6046,10 +6037,6 @@
           },
           {
             "type": "return_statement",
-            "named": true
-          },
-          {
-            "type": "routine_level_on_error_statement",
             "named": true
           },
           {
@@ -8052,10 +8039,6 @@
           "named": true
         },
         {
-          "type": "block_level_on_error_statement",
-          "named": true
-        },
-        {
           "type": "buffer_compare_statement",
           "named": true
         },
@@ -8185,6 +8168,10 @@
         },
         {
           "type": "enum_statement",
+          "named": true
+        },
+        {
+          "type": "error_scope_statement",
           "named": true
         },
         {
@@ -8449,10 +8436,6 @@
         },
         {
           "type": "return_statement",
-          "named": true
-        },
-        {
-          "type": "routine_level_on_error_statement",
           "named": true
         },
         {
@@ -9295,10 +9278,6 @@
           "named": true
         },
         {
-          "type": "block_level_on_error_statement",
-          "named": true
-        },
-        {
           "type": "buffer_compare_statement",
           "named": true
         },
@@ -9428,6 +9407,10 @@
         },
         {
           "type": "enum_statement",
+          "named": true
+        },
+        {
+          "type": "error_scope_statement",
           "named": true
         },
         {
@@ -9692,10 +9675,6 @@
         },
         {
           "type": "return_statement",
-          "named": true
-        },
-        {
-          "type": "routine_level_on_error_statement",
           "named": true
         },
         {
@@ -11684,6 +11663,30 @@
         }
       ]
     }
+  },
+  {
+    "type": "error_scope_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "error_scope_type",
+          "named": true
+        },
+        {
+          "type": "on_error_phrase",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "error_scope_type",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "event_definition",
@@ -13748,10 +13751,6 @@
           "named": true
         },
         {
-          "type": "block_level_on_error_statement",
-          "named": true
-        },
-        {
           "type": "buffer_compare_statement",
           "named": true
         },
@@ -13881,6 +13880,10 @@
         },
         {
           "type": "enum_statement",
+          "named": true
+        },
+        {
+          "type": "error_scope_statement",
           "named": true
         },
         {
@@ -14149,10 +14152,6 @@
         },
         {
           "type": "return_statement",
-          "named": true
-        },
-        {
-          "type": "routine_level_on_error_statement",
           "named": true
         },
         {
@@ -15002,10 +15001,6 @@
             "named": true
           },
           {
-            "type": "block_level_on_error_statement",
-            "named": true
-          },
-          {
             "type": "buffer_compare_statement",
             "named": true
           },
@@ -15135,6 +15130,10 @@
           },
           {
             "type": "enum_statement",
+            "named": true
+          },
+          {
+            "type": "error_scope_statement",
             "named": true
           },
           {
@@ -15399,10 +15398,6 @@
           },
           {
             "type": "return_statement",
-            "named": true
-          },
-          {
-            "type": "routine_level_on_error_statement",
             "named": true
           },
           {
@@ -15580,10 +15575,6 @@
             "named": true
           },
           {
-            "type": "block_level_on_error_statement",
-            "named": true
-          },
-          {
             "type": "buffer_compare_statement",
             "named": true
           },
@@ -15713,6 +15704,10 @@
           },
           {
             "type": "enum_statement",
+            "named": true
+          },
+          {
+            "type": "error_scope_statement",
             "named": true
           },
           {
@@ -15977,10 +15972,6 @@
           },
           {
             "type": "return_statement",
-            "named": true
-          },
-          {
-            "type": "routine_level_on_error_statement",
             "named": true
           },
           {
@@ -18422,10 +18413,6 @@
           "named": true
         },
         {
-          "type": "block_level_on_error_statement",
-          "named": true
-        },
-        {
           "type": "buffer_compare_statement",
           "named": true
         },
@@ -18555,6 +18542,10 @@
         },
         {
           "type": "enum_statement",
+          "named": true
+        },
+        {
+          "type": "error_scope_statement",
           "named": true
         },
         {
@@ -18819,10 +18810,6 @@
         },
         {
           "type": "return_statement",
-          "named": true
-        },
-        {
-          "type": "routine_level_on_error_statement",
           "named": true
         },
         {
@@ -19937,6 +19924,11 @@
     }
   },
   {
+    "type": "on_error_phrase",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "on_quit_clause",
     "named": true,
     "fields": {
@@ -20256,10 +20248,6 @@
           "named": true
         },
         {
-          "type": "block_level_on_error_statement",
-          "named": true
-        },
-        {
           "type": "buffer_compare_statement",
           "named": true
         },
@@ -20389,6 +20377,10 @@
         },
         {
           "type": "enum_statement",
+          "named": true
+        },
+        {
+          "type": "error_scope_statement",
           "named": true
         },
         {
@@ -20661,10 +20653,6 @@
         },
         {
           "type": "return_statement",
-          "named": true
-        },
-        {
-          "type": "routine_level_on_error_statement",
           "named": true
         },
         {
@@ -23732,10 +23720,6 @@
           "named": true
         },
         {
-          "type": "block_level_on_error_statement",
-          "named": true
-        },
-        {
           "type": "buffer_compare_statement",
           "named": true
         },
@@ -23865,6 +23849,10 @@
         },
         {
           "type": "enum_statement",
+          "named": true
+        },
+        {
+          "type": "error_scope_statement",
           "named": true
         },
         {
@@ -24129,10 +24117,6 @@
         },
         {
           "type": "return_statement",
-          "named": true
-        },
-        {
-          "type": "routine_level_on_error_statement",
           "named": true
         },
         {
@@ -24876,10 +24860,6 @@
           "named": true
         },
         {
-          "type": "block_level_on_error_statement",
-          "named": true
-        },
-        {
           "type": "buffer_compare_statement",
           "named": true
         },
@@ -25009,6 +24989,10 @@
         },
         {
           "type": "enum_statement",
+          "named": true
+        },
+        {
+          "type": "error_scope_statement",
           "named": true
         },
         {
@@ -25277,10 +25261,6 @@
         },
         {
           "type": "return_statement",
-          "named": true
-        },
-        {
-          "type": "routine_level_on_error_statement",
           "named": true
         },
         {
@@ -28793,11 +28773,6 @@
     "fields": {}
   },
   {
-    "type": "routine_level_on_error_statement",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "rule",
     "named": true,
     "fields": {}
@@ -30977,7 +30952,7 @@
     }
   },
   {
-    "type": "source_file",
+    "type": "source_code",
     "named": true,
     "root": true,
     "fields": {},
@@ -31011,10 +30986,6 @@
         },
         {
           "type": "bell_statement",
-          "named": true
-        },
-        {
-          "type": "block_level_on_error_statement",
           "named": true
         },
         {
@@ -31147,6 +31118,10 @@
         },
         {
           "type": "enum_statement",
+          "named": true
+        },
+        {
+          "type": "error_scope_statement",
           "named": true
         },
         {
@@ -31411,10 +31386,6 @@
         },
         {
           "type": "return_statement",
-          "named": true
-        },
-        {
-          "type": "routine_level_on_error_statement",
           "named": true
         },
         {

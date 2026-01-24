@@ -8,7 +8,7 @@ OS-COMMAND SILENT VALUE(cmd).
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (os_command_statement
     (string_literal))
   (os_command_statement

@@ -7,7 +7,7 @@ COPY-LOB FROM FILE inPath TO targetPtr CONVERT SOURCE CODEPAGE "1250" TARGET COD
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (copy_lob_statement
     (identifier)
     (identifier))

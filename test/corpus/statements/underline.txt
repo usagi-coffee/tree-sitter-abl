@@ -9,7 +9,7 @@ UNDERLINE field1 WITH FRAME f1.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (underline_statement
     field: (identifier))
   (underline_statement

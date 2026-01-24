@@ -9,7 +9,7 @@ DEFINE SUB-MENU smFile
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (submenu_definition
     name: (identifier)
     (menu_element
@@ -37,7 +37,7 @@ DEFINE SUB-MENU smMain
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (submenu_definition
     name: (identifier)
     (menu_element
@@ -64,7 +64,7 @@ DEF PRIVATE SUB-MENU smPrivate
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (submenu_definition
     name: (identifier)
     (menu_element
@@ -83,7 +83,7 @@ DEFINE SUB-MENU smWithSkip
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (submenu_definition
     name: (identifier)
     (menu_element
@@ -96,4 +96,3 @@ DEFINE SUB-MENU smWithSkip
       (menu_item
         name: (identifier)
         (string_literal)))))
-

@@ -7,7 +7,7 @@ SET-BYTE-ORDER(bufData) = 2.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (set_byte_order_statement
     buffer: (identifier)
     order: (identifier))

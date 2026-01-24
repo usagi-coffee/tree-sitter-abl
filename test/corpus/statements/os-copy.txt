@@ -7,7 +7,7 @@ OS-COPY cSource cTarget.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (os_copy_statement
     source: (string_literal)
     target: (string_literal))

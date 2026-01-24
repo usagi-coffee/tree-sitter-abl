@@ -15,7 +15,7 @@ ENABLE field1 IN WINDOW w1.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (enable_statement)
   (enable_statement
     except: (identifier))

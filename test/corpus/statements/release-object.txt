@@ -7,7 +7,7 @@ RELEASE OBJECT hBuffer NO-ERROR.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (release_object_statement
     handle: (identifier))
   (release_object_statement

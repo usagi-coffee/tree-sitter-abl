@@ -7,7 +7,7 @@ PAGE STREAM sOut.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (page_statement)
   (page_statement
     (stream_clause

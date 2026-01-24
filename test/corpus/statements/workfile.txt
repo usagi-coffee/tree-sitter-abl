@@ -6,7 +6,7 @@ DEFINE WORKFILE wfTest LIKE Customer.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (workfile_definition
     name: (identifier)
     (like_clause

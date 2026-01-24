@@ -7,7 +7,7 @@ PROMSGS = cMsgFile.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (promsgs_statement
     value: (string_literal))
   (promsgs_statement

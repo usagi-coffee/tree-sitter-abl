@@ -16,7 +16,7 @@ DEFINE VARIABLE cView AS CHARACTER VIEW-AS FILL-IN.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (variable_definition
     name: (identifier)
     type: (identifier))

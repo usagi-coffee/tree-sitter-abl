@@ -8,7 +8,7 @@ INPUT-OUTPUT STREAM-HANDLE hStream CLOSE.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (input_output_statement)
   (input_output_statement
     (stream_clause
@@ -28,7 +28,7 @@ INPUT-OUTPUT STREAM sIO THROUGH "filter" UNBUFFERED.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (input_output_statement
     program: (string_literal))
   (input_output_statement

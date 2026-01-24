@@ -8,7 +8,7 @@ DEFINE MENU mnuMain MENUBAR
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (menu_definition
     name: (identifier)
     (menubar)
@@ -32,7 +32,7 @@ DEFINE MENU mnuBar MENUBAR
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (menu_definition
     name: (identifier)
     (menubar)
@@ -58,7 +58,7 @@ DEFINE MENU mnuPopup TITLE "Context Menu"
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (menu_definition
     name: (identifier)
     (title
@@ -82,11 +82,10 @@ DEFINE NEW SHARED MENU mnuShared MENUBAR.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (menu_definition
     name: (identifier)
     (menubar)))
-
 
 ================================================================================
 MENU with colors
@@ -99,7 +98,7 @@ DEFINE MENU mnuColored
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (menu_definition
     name: (identifier)
     (fgcolor

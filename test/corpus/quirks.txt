@@ -10,7 +10,7 @@ x
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (do_block
     (body
       (assignment_statement
@@ -27,7 +27,7 @@ DEF VAR int as int.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (variable_definition
     name: (identifier)
     type: (identifier))
@@ -47,7 +47,7 @@ formattedDate = test.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (assignment_statement
     left: (identifier)
     operator: (assignment_operator)
@@ -86,7 +86,7 @@ THROW NEW Progress.Lang.AppError("x", 1).
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (pause_statement)
   (return_statement)
   (if_statement
@@ -127,7 +127,7 @@ END.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (variable_definition
     name: (identifier)
     type: (identifier)

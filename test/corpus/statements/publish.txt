@@ -7,7 +7,7 @@ PUBLISH "MyEvent" FROM hPublisher.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (publish_statement
     event: (string_literal))
   (publish_statement

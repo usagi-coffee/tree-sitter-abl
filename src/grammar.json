@@ -3,7 +3,7 @@
   "name": "abl",
   "word": "identifier",
   "rules": {
-    "source_file": {
+    "source_code": {
       "type": "REPEAT",
       "content": {
         "type": "SYMBOL",
@@ -13704,8 +13704,35 @@
       "type": "SYMBOL",
       "name": "_terminator"
     },
-    "block_level_on_error_statement": {
+    "error_scope_statement": {
       "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "__error_scope_type"
+          },
+          "named": true,
+          "value": "error_scope_type"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "__error_scope_on_error_phrase"
+          },
+          "named": true,
+          "value": "on_error_phrase"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_terminator"
+        }
+      ]
+    },
+    "__error_scope_type": {
+      "type": "CHOICE",
       "members": [
         {
           "type": "ALIAS",
@@ -13721,95 +13748,6 @@
           "value": "BLOCK-LEVEL"
         },
         {
-          "type": "SEQ",
-          "members": [
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "PATTERN",
-                  "value": "ON",
-                  "flags": "i"
-                }
-              },
-              "named": false,
-              "value": "ON"
-            },
-            {
-              "type": "IMMEDIATE_TOKEN",
-              "content": {
-                "type": "PATTERN",
-                "value": "\\s+"
-              }
-            }
-          ]
-        },
-        {
-          "type": "SEQ",
-          "members": [
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "PATTERN",
-                  "value": "ERROR",
-                  "flags": "i"
-                }
-              },
-              "named": false,
-              "value": "ERROR"
-            },
-            {
-              "type": "IMMEDIATE_TOKEN",
-              "content": {
-                "type": "PATTERN",
-                "value": "\\s+"
-              }
-            }
-          ]
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "PATTERN",
-              "value": "UNDO",
-              "flags": "i"
-            }
-          },
-          "named": false,
-          "value": "UNDO"
-        },
-        {
-          "type": "STRING",
-          "value": ","
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "PATTERN",
-              "value": "THROW",
-              "flags": "i"
-            }
-          },
-          "named": false,
-          "value": "THROW"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_terminator"
-        }
-      ]
-    },
-    "routine_level_on_error_statement": {
-      "type": "SEQ",
-      "members": [
-        {
           "type": "ALIAS",
           "content": {
             "type": "TOKEN",
@@ -13821,7 +13759,12 @@
           },
           "named": false,
           "value": "ROUTINE-LEVEL"
-        },
+        }
+      ]
+    },
+    "__error_scope_on_error_phrase": {
+      "type": "SEQ",
+      "members": [
         {
           "type": "SEQ",
           "members": [
@@ -13901,10 +13844,6 @@
           },
           "named": false,
           "value": "THROW"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_terminator"
         }
       ]
     },
@@ -52637,11 +52576,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "block_level_on_error_statement"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "routine_level_on_error_statement"
+          "name": "error_scope_statement"
         },
         {
           "type": "SYMBOL",

@@ -7,7 +7,7 @@ RUN STORED-PROCEDURE "sp_Update".
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (run_stored_procedure_statement
     procedure: (identifier))
   (run_stored_procedure_statement
@@ -21,7 +21,7 @@ RUN STORED-PROCEDURE sp_Query hProc = PROC-HANDLE.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (run_stored_procedure_statement
     procedure: (identifier)
     handle_var: (identifier)))
@@ -35,7 +35,7 @@ RUN STORED-PROCEDURE sp_Query LOAD-RESULT-INTO hResult iStatus = PROC-STATUS.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (run_stored_procedure_statement
     procedure: (identifier)
     result_handle: (identifier))
@@ -54,7 +54,7 @@ RUN STORED-PROCEDURE sp_Query NO-ERROR (1, 2, 3).
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (run_stored_procedure_statement
     procedure: (identifier)
     (parameter_list

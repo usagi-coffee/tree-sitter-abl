@@ -10,7 +10,7 @@ PUT-KEY-VALUE SECTION "app" KEY "debug" VALUE "true" NO-ERROR.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (put_key_value_statement
     section: (string_literal)
     key: (string_literal)

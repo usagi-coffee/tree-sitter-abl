@@ -8,7 +8,7 @@ PAUSE NO-MESSAGE IN WINDOW hWin.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (pause_statement)
   (pause_statement
     duration: (number_literal)

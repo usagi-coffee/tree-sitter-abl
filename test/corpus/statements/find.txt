@@ -8,7 +8,7 @@ FIND Customer EXCLUSIVE-LOCK.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (find_statement
     table: (identifier))
   (find_statement
@@ -27,7 +27,7 @@ FIND Customer WHERE Customer.Name = "John" AND Customer.Balance > 0.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (find_statement
     table: (identifier)
     (where_clause
@@ -62,7 +62,7 @@ FIND FIRST DebtorShipTo WHERE DebtorShipTo.Code = par_code NO-LOCK NO-ERROR.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (find_statement
     table: (identifier)
     (no_lock))
@@ -89,7 +89,7 @@ FIND CURRENT Customer EXCLUSIVE-LOCK.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (find_statement
     table: (identifier)
     (no_error))
@@ -106,7 +106,7 @@ FIND Order OF Customer NO-LOCK.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (find_statement
     table: (identifier)
     (of_clause
@@ -129,7 +129,7 @@ FIND Customer USE-INDEX CustNum.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (find_statement
     table: (identifier)
     (where_clause
@@ -155,7 +155,7 @@ FIND FIRST Customer NO-LOCK NO-PREFETCH.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (find_statement
     table: (identifier)
     (no_lock)
@@ -170,7 +170,7 @@ FIND Order USING Order.OrderNum EXCLUSIVE-LOCK.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (find_statement
     table: (identifier)
     (using_clause
@@ -195,7 +195,7 @@ FIND db.tablename WHERE tablename.field = 1.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (find_statement
     table: (qualified_name
       left: (identifier)
@@ -220,7 +220,7 @@ FIND FIRST Customer WHERE Customer.Balance > 1000 USE-INDEX Balance NO-LOCK NO-E
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (find_statement
     table: (identifier)
     (where_clause
@@ -234,4 +234,3 @@ FIND FIRST Customer WHERE Customer.Balance > 1000 USE-INDEX Balance NO-LOCK NO-E
     (no_lock)
     (no_error)
     (no_wait)))
-

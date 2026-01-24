@@ -67,7 +67,7 @@ var List<Ant> ListOfAnts.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (comment
     (block_comment))
   (var_statement

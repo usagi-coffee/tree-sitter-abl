@@ -13,7 +13,7 @@ INSERT Customer NO-ERROR.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (insert_statement
     record: (identifier))
   (insert_statement

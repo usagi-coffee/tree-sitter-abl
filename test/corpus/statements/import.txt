@@ -9,7 +9,7 @@ IMPORT STREAM-HANDLE hStream mPtrData.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (import_statement
     (stream_clause
       name: (identifier))

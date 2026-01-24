@@ -7,7 +7,7 @@ WAIT-FOR WINDOW-CLOSE OF CURRENT-WINDOW OR READ-RESPONSE OF hSocket FOCUS hSocke
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (wait_for_statement
     events: (identifier)
     widgets: (identifier)

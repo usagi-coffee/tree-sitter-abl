@@ -8,7 +8,7 @@ NEXT-PROMPT field1 WITH FRAME f1.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (next_prompt_statement
     field: (identifier))
   (next_prompt_statement

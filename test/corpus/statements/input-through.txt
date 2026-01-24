@@ -7,7 +7,7 @@ INPUT STREAM sIn THROUGH VALUE(cmd) ECHO.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (input_through_statement
     program: (string_literal)
     (identifier)

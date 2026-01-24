@@ -9,7 +9,7 @@ AGGREGATE iMax = MAXIMUM(Qty) iMin = MINIMUM(Qty) FOR OrderLine.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (aggregate_statement
     target: (identifier)
     field: (identifier)

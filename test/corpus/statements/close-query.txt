@@ -7,7 +7,7 @@ CLOSE QUERY my-query.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (close_query_statement
     query: (identifier))
   (close_query_statement

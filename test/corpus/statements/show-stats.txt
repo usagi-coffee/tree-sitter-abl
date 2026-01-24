@@ -7,6 +7,6 @@ SHOW-STATS CLEAR.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (show_stats_statement)
   (show_stats_statement))

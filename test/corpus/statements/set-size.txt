@@ -6,7 +6,7 @@ SET-SIZE(bufData) = 16.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (set_size_statement
     buffer: (identifier)
     size: (number_literal)))

@@ -6,7 +6,7 @@ DEFINE RECTANGLE rectMain SIZE 80 BY 20.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (rectangle_definition
     name: (identifier)
     (size_phrase
@@ -25,7 +25,7 @@ DEFINE RECTANGLE rectBorder
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (rectangle_definition
     name: (identifier)
     (edge_pixels
@@ -45,7 +45,7 @@ DEFINE RECTANGLE rect2 LIKE rect1 ROUNDED.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (rectangle_definition
     name: (identifier)
     (like_option
@@ -63,7 +63,7 @@ DEF RECTANGLE rectGroup
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (rectangle_definition
     name: (identifier)
     (group_box)
@@ -84,7 +84,7 @@ DEFINE PRIVATE RECTANGLE rectPrivate
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (rectangle_definition
     name: (identifier)
     (edge_chars

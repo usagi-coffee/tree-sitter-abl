@@ -9,7 +9,7 @@ BUFFER-COPY bSrc EXCEPT Field1, Field2, Field3 TO bTgt.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (buffer_copy_statement
     source: (identifier)
     target: (identifier))

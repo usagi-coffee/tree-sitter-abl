@@ -7,7 +7,7 @@ DEF PRIVATE IMAGE imgLike LIKE imgMain SIZE-PIXELS 100 BY 50.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (image_definition
     name: (identifier)
     (image_phrase

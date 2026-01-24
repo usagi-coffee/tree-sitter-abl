@@ -6,5 +6,5 @@ PROCESS EVENTS.
 
 --------------------------------------------------------------------------------
 
-(source_file
+(source_code
   (process_events_statement))
