@@ -46,7 +46,8 @@ Strongly prefer using these commands as they have helpful side-effects like retu
 - Grammar changes without thorough corpus coverage and testing are unacceptable.
 - Avoid creating a shared or generic code unless it is really a part of the core syntax, core grammar modifications require a confirmation unless experimenting.
 - We intentionally duplicate modifiers and tunings at the statement level so that most of the statement-specific context lives in a single file. To support this, each statement defines its own `__<statement>_rules`, which are later aliased to `$.rule` where needed. This intentional duplication favors locality, readability, and conflict isolation over DRY abstractions.
-- Conflicts must be resolved structurally whenever possible. Adding a `conflicts` entry is a last resort and requires prior confirmation with a clear explanation of why structural fixes are insufficient.
+- All statement-related modifiers, phrases, tunings that are not already part of core should be locally defined as `__<statement>_<rule>` rule and aliased to `$.<rule>`.
+- Conflicts must be resolved structurally whenever possible. Adding a `conflicts` entry or using a `prec(` is a last resort and requires prior confirmation with a clear explanation of why structural fixes are insufficient.
 - Your first solution should never be to try to add a precedence to keywords, if it's necessary give me an explanation and ask for a confirmation.
 - Prefer `kw` (requires whitespace after the keyword) and `tkw` (does not require whitespace) to use in-place of `token(/keyword/i)` function whenever dealing with keywords.
 - Treat `(ERROR)` and `(MISSING)` nodes in the test output aserrors that need to be fixed.
@@ -66,4 +67,5 @@ Strongly prefer using these commands as they have helpful side-effects like retu
 - `docs/abl-contents.txt` is a very long file; search within it to find the relevant phrase before calling `bun run reference`.
 - `bun run reference` supports partial phrases (e.g. `DEFINE`), which will return all matching `DEFINE` statements.
   - Each result section is delimited with `[START] <section>` and `[END] <section>`.
+- When using `alias`, `tree-sitter` handles undefined rules by using the property name as the symbol name so it's okay to alias to `$.something_that_wasn't defined`.
 
