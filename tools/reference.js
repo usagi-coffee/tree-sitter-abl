@@ -4,7 +4,7 @@ import * as readline from "readline";
 const phrase = process.argv[2];
 
 if (!phrase) {
-  console.error('Usage: bun run reference:search "PHRASE"');
+  console.error('Usage: bun run reference "PHRASE"');
   process.exit(1);
 }
 
@@ -23,17 +23,16 @@ async function extractSection(path, phrase) {
       const titleLower = title.toLowerCase();
 
       if (capturing) {
-        console.log("[END]", current.trim());
+        if (title !== current) console.log("[END]", current);
         capturing = false;
-        current = "";
         continue;
       }
 
       if (titleLower.includes(phraseLower)) {
-        current = title.trim();
-        console.log("[START]", current);
+        if (title !== current) console.log("[START]", title);
+        current = title;
         capturing = true;
-        continue; // skip header (remove if you want it included)
+        continue;
       }
     }
 
