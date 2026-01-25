@@ -1,0 +1,101 @@
+==============================
+Define Browse Basic
+==============================
+DEFINE BROWSE b1 QUERY q1 DISPLAY CustNum Name.
+---
+(source_code
+  (browse_definition
+    name: (identifier)
+    query: (identifier)
+    column: (identifier)
+    column: (identifier)))
+
+==============================
+Define Browse with Options
+==============================
+DEFINE BROWSE b1 QUERY q1 DISPLAY CustNum Name
+TITLE "Customer Browse" DOWN 10.
+---
+(source_code
+  (browse_definition
+    name: (identifier)
+    query: (identifier)
+    column: (identifier)
+    column: (identifier)
+    (title_option
+      (string_literal))
+    (down_option
+      (number_literal))))
+
+==============================
+Define Browse with WITH and Options
+==============================
+DEFINE BROWSE b1 QUERY q1 DISPLAY CustNum Name
+WITH DOWN 10 TITLE "Customer Browse".
+---
+(source_code
+  (browse_definition
+    name: (identifier)
+    query: (identifier)
+    column: (identifier)
+    column: (identifier)
+    (down_option
+      (number_literal))
+    (title_option
+      (string_literal))))
+
+==============================
+Define Browse with Column Options
+==============================
+DEFINE BROWSE b1 QUERY q1
+DISPLAY CustNum FORMAT ">>>>9" Name LABEL "Customer Name"
+WITH DOWN 10.
+---
+(source_code
+  (browse_definition
+    name: (identifier)
+    query: (identifier)
+    column: (identifier)
+    (format_option
+      (string_literal))
+    column: (identifier)
+    (label_option
+      (string_literal))
+    (down_option
+      (number_literal))))
+
+==============================
+Define Browse Shared
+==============================
+DEFINE NEW SHARED BROWSE b1 QUERY q1 DISPLAY CustNum Name.
+---
+(source_code
+  (browse_definition
+    name: (identifier)
+    query: (identifier)
+    column: (identifier)
+    column: (identifier)))
+
+==============================
+Define Browse Private
+==============================
+DEFINE PRIVATE BROWSE b1 QUERY q1 DISPLAY CustNum Name.
+---
+(source_code
+  (browse_definition
+    name: (identifier)
+    query: (identifier)
+    column: (identifier)
+    column: (identifier)))
+
+==============================
+Define Browse with EXCEPT
+==============================
+DEFINE BROWSE b1 QUERY q1 DISPLAY Customer EXCEPT Comments.
+---
+(source_code
+  (browse_definition
+    name: (identifier)
+    query: (identifier)
+    record: (identifier)
+    field: (identifier)))
