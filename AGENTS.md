@@ -68,4 +68,4 @@ Strongly prefer using these commands as they have helpful side-effects like retu
 - `bun run reference` supports partial phrases (e.g. `DEFINE`), which will return all matching `DEFINE` statements.
   - Each result section is delimited with `[START] <section>` and `[END] <section>`.
 - When using `alias`, `tree-sitter` handles undefined rules by using the property name as the symbol name so it's okay to alias to `$.something_that_wasn't defined`.
-
+- Terminators like `terminator` or `terminator_dot` should never be visible in the syntax tree output.
