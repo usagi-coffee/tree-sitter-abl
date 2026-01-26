@@ -1,5 +1,5 @@
 ================================================================================
-TEMP-TABLE DEFINITION
+TEMP-TABLE DEFINITION - Basic
 ================================================================================
 
 DEFINE TEMP-TABLE tt_ship NO-UNDO
@@ -15,13 +15,6 @@ DEFINE TEMP-TABLE tt_ship NO-UNDO
   FIELD ship_qty AS INTEGER INITIAL 5
   FIELD ship_flag AS LOGICAL INITIAL TRUE
   INDEX idx_ship AS UNIQUE PRIMARY ship_code DESCENDING ship_qty.
-
-DEFINE WORK-TABLE wt_items NO-UNDO
-  FIELD item_code AS CHARACTER
-  FIELD item_qty AS INTEGER.
-
-DEFINE TEMP-TABLE tt_like LIKE base_tbl
-  FIELD extra_col AS DECIMAL.
 
 --------------------------------------------------------------------------------
 
@@ -67,20 +60,331 @@ DEFINE TEMP-TABLE tt_like LIKE base_tbl
     (temp_table_index
       name: (identifier)
       field: (identifier)
-      field: (identifier)))
-  (work_table_definition
-    name: (identifier)
-    (no_undo)
-    (work_table_field
-      name: (identifier)
-      type: (identifier))
-    (work_table_field
-      name: (identifier)
-      type: (identifier)))
+      field: (identifier))))
+
+================================================================================
+TEMP-TABLE DEFINITION - LIKE Variations
+================================================================================
+
+DEFINE TEMP-TABLE tt_like LIKE base_tbl
+  FIELD extra_col AS DECIMAL.
+DEFINE TEMP-TABLE tt_seq LIKE-SEQUENTIAL base_tbl
+  FIELD f1 AS INTEGER.
+DEFINE TEMP-TABLE tt_idx LIKE base_tbl USE-INDEX idx1 USE-INDEX idx2 AS PRIMARY
+  FIELD f1 AS INTEGER.
+
+--------------------------------------------------------------------------------
+
+(source_code
   (temp_table_definition
     name: (identifier)
     (like_phrase
       like: (identifier))
     (temp_table_field
       name: (identifier)
+      type: (identifier)))
+  (temp_table_definition
+    name: (identifier)
+    (like_sequential_phrase
+      like: (identifier))
+    (temp_table_field
+      name: (identifier)
+      type: (identifier)))
+  (temp_table_definition
+    name: (identifier)
+    (like_phrase
+      like: (identifier)
+      index: (identifier)
+      index: (identifier))
+    (temp_table_field
+      name: (identifier)
       type: (identifier))))
+
+================================================================================
+TEMP-TABLE DEFINITION - Shared Variations
+================================================================================
+
+DEFINE NEW SHARED TEMP-TABLE tt1 NO-UNDO FIELD f1 AS INTEGER.
+DEFINE NEW GLOBAL SHARED TEMP-TABLE tt2 NO-UNDO FIELD f2 AS CHARACTER.
+DEFINE SHARED TEMP-TABLE tt3 NO-UNDO FIELD f3 AS INTEGER.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (temp_table_definition
+    (shared_variable_scope)
+    name: (identifier)
+    (no_undo)
+    (temp_table_field
+      name: (identifier)
+      type: (identifier)))
+  (temp_table_definition
+    (shared_variable_scope)
+    name: (identifier)
+    (no_undo)
+    (temp_table_field
+      name: (identifier)
+      type: (identifier)))
+  (temp_table_definition
+    (shared_variable_scope)
+    name: (identifier)
+    (no_undo)
+    (temp_table_field
+      name: (identifier)
+      type: (identifier))))
+
+================================================================================
+TEMP-TABLE DEFINITION - Access Modifiers
+================================================================================
+
+DEFINE PRIVATE TEMP-TABLE tt1 NO-UNDO FIELD f1 AS INTEGER.
+DEFINE PROTECTED TEMP-TABLE tt2 NO-UNDO FIELD f2 AS CHARACTER.
+DEFINE PRIVATE STATIC TEMP-TABLE tt3 NO-UNDO FIELD f3 AS LOGICAL.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (temp_table_definition
+    (access_modifier)
+    name: (identifier)
+    (no_undo)
+    (temp_table_field
+      name: (identifier)
+      type: (identifier)))
+  (temp_table_definition
+    (access_modifier)
+    name: (identifier)
+    (no_undo)
+    (temp_table_field
+      name: (identifier)
+      type: (identifier)))
+  (temp_table_definition
+    (access_modifier)
+    (static_modifier)
+    name: (identifier)
+    (no_undo)
+    (temp_table_field
+      name: (identifier)
+      type: (identifier))))
+
+================================================================================
+TEMP-TABLE DEFINITION - Serialization
+================================================================================
+
+DEFINE SERIALIZABLE TEMP-TABLE tt1 NO-UNDO FIELD f1 AS INTEGER.
+DEFINE NON-SERIALIZABLE TEMP-TABLE tt2 NO-UNDO FIELD f2 AS CHARACTER.
+DEFINE PRIVATE SERIALIZABLE TEMP-TABLE tt3 NO-UNDO FIELD f3 AS LOGICAL.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (temp_table_definition
+    (serialization_modifier)
+    name: (identifier)
+    (no_undo)
+    (temp_table_field
+      name: (identifier)
+      type: (identifier)))
+  (temp_table_definition
+    (serialization_modifier)
+    name: (identifier)
+    (no_undo)
+    (temp_table_field
+      name: (identifier)
+      type: (identifier)))
+  (temp_table_definition
+    (access_modifier)
+    (serialization_modifier)
+    name: (identifier)
+    (no_undo)
+    (temp_table_field
+      name: (identifier)
+      type: (identifier))))
+
+================================================================================
+TEMP-TABLE DEFINITION - Field Data Types
+================================================================================
+
+DEFINE TEMP-TABLE tt NO-UNDO
+  FIELD f1 AS CHARACTER
+  FIELD f2 AS COM-HANDLE
+  FIELD f3 AS DATE
+  FIELD f4 AS DATETIME
+  FIELD f5 AS DATETIME-TZ
+  FIELD f6 AS DECIMAL
+  FIELD f7 AS HANDLE
+  FIELD f8 AS INT64
+  FIELD f9 AS INTEGER
+  FIELD f10 AS LOGICAL
+  FIELD f11 AS RAW
+  FIELD f12 AS RECID
+  FIELD f13 AS ROWID.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (temp_table_definition
+    name: (identifier)
+    (no_undo)
+    (temp_table_field
+      name: (identifier)
+      type: (identifier))
+    (temp_table_field
+      name: (identifier)
+      type: (identifier))
+    (temp_table_field
+      name: (identifier)
+      type: (identifier))
+    (temp_table_field
+      name: (identifier)
+      type: (identifier))
+    (temp_table_field
+      name: (identifier)
+      type: (identifier))
+    (temp_table_field
+      name: (identifier)
+      type: (identifier))
+    (temp_table_field
+      name: (identifier)
+      type: (identifier))
+    (temp_table_field
+      name: (identifier)
+      type: (identifier))
+    (temp_table_field
+      name: (identifier)
+      type: (identifier))
+    (temp_table_field
+      name: (identifier)
+      type: (identifier))
+    (temp_table_field
+      name: (identifier)
+      type: (identifier))
+    (temp_table_field
+      name: (identifier)
+      type: (identifier))
+    (temp_table_field
+      name: (identifier)
+      type: (identifier))))
+
+================================================================================
+TEMP-TABLE DEFINITION - Field Options
+================================================================================
+
+DEFINE TEMP-TABLE tt NO-UNDO
+  FIELD f1 AS CHARACTER EXTENT 10
+  FIELD f2 AS DECIMAL DECIMALS 2 INITIAL 10.50
+  FIELD f3 AS INTEGER BGCOLOR 15 FGCOLOR 1
+  FIELD f4 AS CHARACTER HELP "Help text"
+  FIELD f5 AS LOGICAL SERIALIZE-HIDDEN
+  FIELD f6 AS CHARACTER SERIALIZE-NAME "SerName"
+  FIELD f7 AS CHARACTER COLUMN-LABEL "Label"
+  FIELD f8 AS CHARACTER XML-DATA-TYPE "string"
+  FIELD f10 AS CHARACTER XML-NODE-TYPE "ATTRIBUTE"
+  FIELD f11 AS CHARACTER XML-NODE-NAME "XmlName"
+  FIELD f12 AS LOGICAL NOT CASE-SENSITIVE.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (temp_table_definition
+    name: (identifier)
+    (no_undo)
+    (temp_table_field
+      name: (identifier)
+      type: (identifier)
+      (field_option
+        (number_literal)))
+    (temp_table_field
+      name: (identifier)
+      type: (identifier)
+      (field_option
+        (number_literal))
+      (field_option
+        (number_literal)))
+    (temp_table_field
+      name: (identifier)
+      type: (identifier)
+      (field_option
+        (number_literal))
+      (field_option
+        (number_literal)))
+    (temp_table_field
+      name: (identifier)
+      type: (identifier)
+      (field_option
+        (string_literal)))
+    (temp_table_field
+      name: (identifier)
+      type: (identifier)
+      (field_option))
+    (temp_table_field
+      name: (identifier)
+      type: (identifier)
+      (field_option
+        (string_literal)))
+    (temp_table_field
+      name: (identifier)
+      type: (identifier)
+      (field_option
+        (string_literal)))
+    (temp_table_field
+      name: (identifier)
+      type: (identifier)
+      (field_option
+        (string_literal)))
+    (temp_table_field
+      name: (identifier)
+      type: (identifier)
+      (field_option
+        (string_literal)))
+    (temp_table_field
+      name: (identifier)
+      type: (identifier)
+      (field_option
+        (string_literal)))
+    (temp_table_field
+      name: (identifier)
+      type: (identifier)
+      (field_option))))
+
+================================================================================
+TEMP-TABLE DEFINITION - Index Variations
+================================================================================
+
+DEFINE TEMP-TABLE tt NO-UNDO
+  FIELD f1 AS INTEGER
+  FIELD f2 AS CHARACTER
+  FIELD f3 AS DECIMAL
+  INDEX idx1 f1
+  INDEX idx2 AS UNIQUE f2 ASCENDING
+  INDEX idx3 IS PRIMARY f3 DESCENDING
+  INDEX idx4 AS UNIQUE PRIMARY WORD-INDEX f1 f2.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (temp_table_definition
+    name: (identifier)
+    (no_undo)
+    (temp_table_field
+      name: (identifier)
+      type: (identifier))
+    (temp_table_field
+      name: (identifier)
+      type: (identifier))
+    (temp_table_field
+      name: (identifier)
+      type: (identifier))
+    (temp_table_index
+      name: (identifier)
+      field: (identifier))
+    (temp_table_index
+      name: (identifier)
+      field: (identifier))
+    (temp_table_index
+      name: (identifier)
+      field: (identifier))
+    (temp_table_index
+      name: (identifier)
+      field: (identifier)
+      field: (identifier))))
