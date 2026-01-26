@@ -2,7 +2,7 @@
 VARIABLE DEFINITION - Basic Types
 ================================================================================
 
-DEFINE VARIABLE count AS INTEGER.
+DEFINE VARIABLE count& AS INTEGER.
 DEF VAR foo AS Some.Type NO-UNDO.
 DEFINE VARIABLE list AS List<INTEGER>.
 DEFINE VARIABLE cName AS CHARACTER EXTENT 4 INITIAL ["a","b","c","d"].
