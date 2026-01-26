@@ -79,7 +79,7 @@ module.exports = ({ kw, tkw }) => ({
   __variable_serialization_modifier: ($) =>
     choice(kw("SERIALIZABLE"), kw("NON-SERIALIZABLE")),
   __variable_extent_phrase: ($) =>
-    seq(kw("EXTENT"), optional($.__variable_extent_size)),
+    seq(tkw("EXTENT"), optional($.__variable_extent_size)),
   __variable_serialize_name_option: ($) =>
     seq(kw("SERIALIZE-NAME"), field("name", $._name_or_string)),
   _name_or_string: ($) => choice($.identifier, $.string_literal),

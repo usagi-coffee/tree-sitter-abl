@@ -1,5 +1,5 @@
 ================================================================================
-VARIABLE DEFINITION
+VARIABLE DEFINITION - Basic Types
 ================================================================================
 
 DEFINE VARIABLE count AS INTEGER.
@@ -8,11 +8,6 @@ DEFINE VARIABLE list AS List<INTEGER>.
 DEFINE VARIABLE cName AS CHARACTER EXTENT 4 INITIAL ["a","b","c","d"].
 DEFINE NEW GLOBAL SHARED VARIABLE gValue AS INTEGER NO-UNDO.
 DEFINE PRIVATE STATIC SERIALIZABLE VARIABLE cust AS CLASS Customer NO-UNDO.
-DEFINE VARIABLE likeVar LIKE Customer.Name LABEL "Name" COLUMN-LABEL "Cust Name" FORMAT "x(20)".
-DEFINE VARIABLE flags AS LOGICAL NOT CASE-SENSITIVE.
-DEFINE VARIABLE fillIn AS CHARACTER DROP-TARGET.
-DEFINE VARIABLE cSer AS CHARACTER SERIALIZE-NAME "ser-name".
-DEFINE VARIABLE cView AS CHARACTER VIEW-AS FILL-IN.
 
 --------------------------------------------------------------------------------
 
@@ -52,7 +47,21 @@ DEFINE VARIABLE cView AS CHARACTER VIEW-AS FILL-IN.
     (serialization_modifier)
     name: (identifier)
     type: (identifier)
-    (no_undo))
+    (no_undo)))
+
+================================================================================
+VARIABLE DEFINITION - LIKE and Display Options
+================================================================================
+
+DEFINE VARIABLE likeVar LIKE Customer.Name LABEL "Name" COLUMN-LABEL "Cust Name" FORMAT "x(20)".
+DEFINE VARIABLE flags AS LOGICAL NOT CASE-SENSITIVE.
+DEFINE VARIABLE fillIn AS CHARACTER DROP-TARGET.
+DEFINE VARIABLE cSer AS CHARACTER SERIALIZE-NAME "ser-name".
+DEFINE VARIABLE cView AS CHARACTER VIEW-AS FILL-IN.
+
+--------------------------------------------------------------------------------
+
+(source_code
   (variable_definition
     name: (identifier)
     like: (qualified_name
@@ -82,3 +91,314 @@ DEFINE VARIABLE cView AS CHARACTER VIEW-AS FILL-IN.
     type: (identifier)
     (view_as_phrase
       (identifier))))
+
+================================================================================
+VARIABLE DEFINITION - Color and Visual Options
+================================================================================
+
+DEFINE VARIABLE v1 AS CHARACTER BGCOLOR 15 FGCOLOR 1.
+DEFINE VARIABLE v2 AS DECIMAL DCOLOR 7 PFCOLOR 8.
+DEFINE VARIABLE v3 AS INTEGER FONT 2 MOUSE-POINTER 15.
+DEFINE VARIABLE v4 AS CHARACTER CONTEXT-HELP-ID 123.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (bgcolor_option
+      (number_literal))
+    (fgcolor_option
+      (number_literal)))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (dcolor_option
+      (number_literal))
+    (pfcolor_option
+      (number_literal)))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (font_option
+      (number_literal))
+    (mouse_pointer_option
+      (number_literal)))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (context_help_id_option
+      (number_literal))))
+
+================================================================================
+VARIABLE DEFINITION - DECIMALS Option
+================================================================================
+
+DEFINE VARIABLE price AS DECIMAL DECIMALS 2 NO-UNDO.
+DEFINE VARIABLE rate AS DECIMAL DECIMALS 4 INITIAL 0.0525.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (decimals_option
+      (number_literal))
+    (no_undo))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (decimals_option
+      (number_literal))
+    (initial_option
+      (number_literal))))
+
+================================================================================
+VARIABLE DEFINITION - EXTENT Variations
+================================================================================
+
+DEFINE VARIABLE arr1 AS INTEGER EXTENT.
+DEFINE VARIABLE arr2 AS CHARACTER EXTENT 10 NO-UNDO.
+DEFINE VARIABLE arr3 AS DECIMAL EXTENT {&MAX_SIZE}.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (extent_phrase))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (extent_phrase
+      (number_literal))
+    (no_undo))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (extent_phrase
+      (constant
+        (identifier)))))
+
+================================================================================
+VARIABLE DEFINITION - INITIAL with Different Types
+================================================================================
+
+DEFINE VARIABLE iNum AS INTEGER INITIAL 100.
+DEFINE VARIABLE dNum AS DECIMAL INITIAL 99.99.
+DEFINE VARIABLE cStr AS CHARACTER INITIAL "test".
+DEFINE VARIABLE lFlag AS LOGICAL INITIAL TRUE.
+DEFINE VARIABLE dtDate AS DATE INITIAL TODAY.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (initial_option
+      (number_literal)))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (initial_option
+      (number_literal)))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (initial_option
+      (string_literal)))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (initial_option
+      (boolean_literal)))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (initial_option
+      (identifier))))
+
+================================================================================
+VARIABLE DEFINITION - Shared Variations
+================================================================================
+
+DEFINE NEW SHARED VARIABLE v1 AS INTEGER NO-UNDO.
+DEFINE NEW GLOBAL SHARED VARIABLE v2 AS CHARACTER NO-UNDO.
+DEFINE SHARED VARIABLE v3 AS LOGICAL NO-UNDO.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    (shared_variable_scope)
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (variable_definition
+    (shared_variable_scope)
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (variable_definition
+    (shared_variable_scope)
+    name: (identifier)
+    type: (identifier)
+    (no_undo)))
+
+================================================================================
+VARIABLE DEFINITION - Access Modifiers
+================================================================================
+
+DEFINE PRIVATE VARIABLE v1 AS INTEGER NO-UNDO.
+DEFINE PROTECTED VARIABLE v2 AS CHARACTER NO-UNDO.
+DEFINE PUBLIC VARIABLE v3 AS LOGICAL NO-UNDO.
+DEFINE PACKAGE-PRIVATE VARIABLE v4 AS DECIMAL NO-UNDO.
+DEFINE PACKAGE-PROTECTED VARIABLE v5 AS INTEGER NO-UNDO.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    (access_modifier)
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (variable_definition
+    (access_modifier)
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (variable_definition
+    (access_modifier)
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (variable_definition
+    (access_modifier)
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (variable_definition
+    (access_modifier)
+    name: (identifier)
+    type: (identifier)
+    (no_undo)))
+
+================================================================================
+VARIABLE DEFINITION - Serialization Modifiers
+================================================================================
+
+DEFINE PUBLIC SERIALIZABLE VARIABLE v1 AS INTEGER NO-UNDO.
+DEFINE PRIVATE NON-SERIALIZABLE VARIABLE v2 AS CHARACTER NO-UNDO.
+DEFINE PROTECTED STATIC SERIALIZABLE VARIABLE v3 AS LOGICAL NO-UNDO.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    (access_modifier)
+    (serialization_modifier)
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (variable_definition
+    (access_modifier)
+    (serialization_modifier)
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (variable_definition
+    (access_modifier)
+    (static_modifier)
+    (serialization_modifier)
+    name: (identifier)
+    type: (identifier)
+    (no_undo)))
+
+================================================================================
+VARIABLE DEFINITION - Primitive Types
+================================================================================
+
+DEFINE VARIABLE v1 AS CHARACTER NO-UNDO.
+DEFINE VARIABLE v2 AS COM-HANDLE NO-UNDO.
+DEFINE VARIABLE v3 AS DATE NO-UNDO.
+DEFINE VARIABLE v4 AS DATETIME NO-UNDO.
+DEFINE VARIABLE v5 AS DATETIME-TZ NO-UNDO.
+DEFINE VARIABLE v6 AS DECIMAL NO-UNDO.
+DEFINE VARIABLE v7 AS HANDLE NO-UNDO.
+DEFINE VARIABLE v8 AS INT64 NO-UNDO.
+DEFINE VARIABLE v9 AS INTEGER NO-UNDO.
+DEFINE VARIABLE v10 AS LOGICAL NO-UNDO.
+DEFINE VARIABLE v11 AS LONGCHAR NO-UNDO.
+DEFINE VARIABLE v12 AS MEMPTR NO-UNDO.
+DEFINE VARIABLE v13 AS RAW NO-UNDO.
+DEFINE VARIABLE v14 AS RECID NO-UNDO.
+DEFINE VARIABLE v15 AS ROWID NO-UNDO.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo)))

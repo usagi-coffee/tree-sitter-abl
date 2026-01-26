@@ -48754,29 +48754,17 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "SEQ",
-          "members": [
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "PATTERN",
-                  "value": "EXTENT",
-                  "flags": "i"
-                }
-              },
-              "named": false,
-              "value": "EXTENT"
-            },
-            {
-              "type": "IMMEDIATE_TOKEN",
-              "content": {
-                "type": "PATTERN",
-                "value": "\\s+"
-              }
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PATTERN",
+              "value": "EXTENT",
+              "flags": "i"
             }
-          ]
+          },
+          "named": false,
+          "value": "EXTENT"
         },
         {
           "type": "CHOICE",
