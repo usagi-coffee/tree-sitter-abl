@@ -99,3 +99,81 @@ DEFINE BROWSE b1 QUERY q1 DISPLAY Customer EXCEPT Comments.
     query: (identifier)
     record: (identifier)
     field: (identifier)))
+
+==============================
+Define Browse with Locks and Column Options
+==============================
+DEFINE BROWSE b2 QUERY q2 NO-LOCK NO-WAIT
+DISPLAY CustNum FORMAT ">>>>9" LABEL "ID" NO-LABELS
+       Name COLUMN-LABEL "Full Name" COLUMN-BGCOLOR 4 LABEL-FGCOLOR 5
+       HELP "Help" VALIDATE (CustNum > 0, "Bad")
+       AUTO-RETURN DISABLE-AUTO-ZAP MOVEABLE RESIZABLE
+ENABLE ALL WITH SIZE 80 BY 10 SCROLLBAR-VERTICAL SEPARATORS NO-ROW-MARKERS.
+---
+(source_code
+  (browse_definition
+    name: (identifier)
+    query: (identifier)
+    column: (identifier)
+    (format_option
+      (string_literal))
+    (label_option
+      (string_literal))
+    (no_labels_option)
+    column: (identifier)
+    (column_label_option
+      (string_literal))
+    (column_bgcolor_option
+      (number_literal))
+    (label_fgcolor_option
+      (number_literal))
+    (help_option
+      (string_literal))
+    (validate_option
+      (binary_expression
+        (identifier)
+        (number_literal))
+      (string_literal))
+    (auto_return_option)
+    (disable_auto_zap_option)
+    (moveable_option)
+    (resizable_option)
+    (size_option
+      (number_literal)
+      (number_literal))
+    (scrollbar_vertical_option)
+    (separators_option)
+    (no_row_markers_option)))
+
+==============================
+Define Browse with Widget Options
+==============================
+DEF PRIVATE BROWSE b3 QUERY q3 DISPLAY field1 field2
+WITH DOWN 5 TITLE "Browse Title" BGCOLOR 7 FGCOLOR 9 FONT 2
+CONTEXT-HELP-ID 42 DROP-TARGET TOOLTIP "Browse tip" ROW 3 COLUMN 5.
+---
+(source_code
+  (browse_definition
+    name: (identifier)
+    query: (identifier)
+    column: (identifier)
+    column: (identifier)
+    (down_option
+      (number_literal))
+    (title_option
+      (string_literal))
+    (bgcolor_option
+      (number_literal))
+    (fgcolor_option
+      (number_literal))
+    (font_option
+      (number_literal))
+    (context_help_id_option
+      (number_literal))
+    (drop_target_option)
+    (tooltip_option
+      (string_literal))
+    (row_option
+      (number_literal))
+    (column_option
+      (number_literal))))
