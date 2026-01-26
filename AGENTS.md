@@ -35,10 +35,10 @@
   - `bun run check`
 - Retrieve syntax information from the language reference
   - `bun run reference <phrase from contents>`
-  - Example: `bun run reference 'DEFINE VARIABLE statement'`: Return reference for the define variable statement.
-  - Example: `bun run reference 'DEFINE*'`: Returns all possible DEFINE entries.
-  - Example: `bun run reference '*statement'`: Returns all statements entries.
-  - Example: `bun run reference '*'`: Returns all entries.
+  - Example: `bun run reference 'DEFINE VARIABLE statement'`: Returns reference for the define variable statement.
+  - Example: `bun run reference 'DEFINE*'`: Returns all possible DEFINE entries (names only).
+  - Example: `bun run reference '*statement'`: Returns all statements entries (names only).
+  - Example: `bun run reference '*'`: Returns all entries (names only).
 
 Strongly prefer using these commands as they have helpful side-effects like returning `STATE_COUNT` after success.
 
