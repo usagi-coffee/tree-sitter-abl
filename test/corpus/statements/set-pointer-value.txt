@@ -15,6 +15,6 @@ SET-POINTER-VALUE(pBuffer) = GET-POINTER-VALUE(pSource).
     target: (identifier)
     value: (function_call
       function: (identifier)
-      (argument_list
+      (arguments
         (argument
           value: (identifier))))))

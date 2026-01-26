@@ -6,6 +6,6 @@ module.exports = ({ kw }) => ({
         "type",
         choice($.scoped_name, $.qualified_name, $.identifier, $.string_literal),
       ),
-      $.argument_list,
+      $.arguments,
     ),
 });

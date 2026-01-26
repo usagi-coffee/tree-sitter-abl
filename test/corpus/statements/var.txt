@@ -203,7 +203,7 @@ var List<Ant> ListOfAnts.
       (var_init
         (new_expression
           (identifier)
-          (argument_list)))))
+          (arguments)))))
   (var_statement
     (identifier)
     (var_decl
@@ -211,7 +211,7 @@ var List<Ant> ListOfAnts.
       (var_init
         (new_expression
           (identifier)
-          (argument_list
+          (arguments
             (argument
               (string_literal))
             (argument
@@ -227,7 +227,7 @@ var List<Ant> ListOfAnts.
       (var_init
         (new_expression
           (identifier)
-          (argument_list
+          (arguments
             (argument
               (string_literal))))))
     (var_decl
@@ -235,7 +235,7 @@ var List<Ant> ListOfAnts.
       (var_init
         (new_expression
           (identifier)
-          (argument_list
+          (arguments
             (argument
               (string_literal))))))
     (var_decl
@@ -243,7 +243,7 @@ var List<Ant> ListOfAnts.
       (var_init
         (new_expression
           (identifier)
-          (argument_list
+          (arguments
             (argument
               (string_literal)))))))
   (comment
@@ -255,13 +255,13 @@ var List<Ant> ListOfAnts.
       (var_init
         (new_expression
           (identifier)
-          (argument_list))))
+          (arguments))))
     (var_decl
       (identifier)
       (var_init
         (new_expression
           (identifier)
-          (argument_list
+          (arguments
             (argument
               (string_literal)))))))
   (comment
@@ -273,7 +273,7 @@ var List<Ant> ListOfAnts.
       (var_init
         (new_expression
           (identifier)
-          (argument_list
+          (arguments
             (argument
               (string_literal))))))
     (var_decl
@@ -281,7 +281,7 @@ var List<Ant> ListOfAnts.
       (var_init
         (new_expression
           (identifier)
-          (argument_list
+          (arguments
             (argument
               (string_literal)))))))
   (comment
@@ -296,12 +296,12 @@ var List<Ant> ListOfAnts.
         (array_initializer
           (new_expression
             (identifier)
-            (argument_list
+            (arguments
               (argument
                 (string_literal))))
           (new_expression
             (identifier)
-            (argument_list
+            (arguments
               (argument
                 (string_literal))))))))
   (comment
@@ -315,12 +315,12 @@ var List<Ant> ListOfAnts.
         (array_initializer
           (new_expression
             (identifier)
-            (argument_list
+            (arguments
               (argument
                 (string_literal))))
           (new_expression
             (identifier)
-            (argument_list
+            (arguments
               (argument
                 (string_literal))))))))
   (comment
@@ -356,7 +356,7 @@ var List<Ant> ListOfAnts.
         (array_initializer
           (function_call
             (identifier)
-            (argument_list))
+            (arguments))
           (binary_expression
             (identifier)
             (identifier))))))

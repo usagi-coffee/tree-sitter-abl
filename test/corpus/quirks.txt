@@ -100,7 +100,7 @@ THROW NEW Progress.Lang.AppError("x", 1).
           left: (identifier)
           right: (identifier)
           right: (identifier))
-        (argument_list
+        (arguments
           (argument
             value: (string_literal))
           (argument

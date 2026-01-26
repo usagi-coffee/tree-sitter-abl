@@ -11,7 +11,7 @@ UNDO, LEAVE.
   (undo_statement
     value: (new_expression
       type: (identifier)
-      (argument_list
+      (arguments
         (argument
           value: (string_literal)))))
   (undo_statement))

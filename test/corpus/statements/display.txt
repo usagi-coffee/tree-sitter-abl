@@ -92,7 +92,7 @@ DISPLAY Item.Qty * Item.Price LABEL "Extended".
       (string_literal)
       (function_call
         function: (identifier)
-        (argument_list
+        (arguments
           (argument
             value: (identifier))))))
   (display_statement
@@ -120,13 +120,13 @@ DISPLAY SUBSTRING(str, 1, 5).
   (display_statement
     (function_call
       function: (identifier)
-      (argument_list
+      (arguments
         (argument
           value: (identifier)))))
   (display_statement
     (function_call
       function: (identifier)
-      (argument_list
+      (arguments
         (argument
           value: (qualified_name
             left: (identifier)
@@ -134,7 +134,7 @@ DISPLAY SUBSTRING(str, 1, 5).
   (display_statement
     (function_call
       function: (identifier)
-      (argument_list
+      (arguments
         (argument
           value: (identifier))
         (argument

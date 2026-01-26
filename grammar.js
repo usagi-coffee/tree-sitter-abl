@@ -215,7 +215,7 @@ module.exports = grammar({
         ),
 
       // Callables
-      argument_list: ($) =>
+      arguments: ($) =>
         seq("(", optional(seq($.argument, repeat(seq(",", $.argument)))), ")"),
       argument: ($) =>
         seq(
@@ -236,7 +236,7 @@ module.exports = grammar({
               $.scoped_name,
             ),
           ),
-          $.argument_list,
+          $.arguments,
         ),
 
       // Identifiers

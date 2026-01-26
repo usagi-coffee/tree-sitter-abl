@@ -93,7 +93,7 @@ ASSIGN a = 1 b = 2 NO-ERROR.
       left: (identifier)
       right: (function_call
         function: (identifier)
-        (argument_list
+        (arguments
           (argument
             value: (identifier)))))
     (no_error))
@@ -238,7 +238,7 @@ PUT-STRING(workBuf, 1) = cmdValue.
   (assignment_statement
     left: (function_call
       function: (identifier)
-      (argument_list
+      (arguments
         (argument
           value: (identifier))
         (argument
@@ -258,5 +258,5 @@ doWork() NO-ERROR.
   (expression_statement
     (function_call
       function: (identifier)
-      (argument_list))
+      (arguments))
     (no_error)))

@@ -50,7 +50,7 @@ IF LOCKED bufOrder THEN RETURN TRUE.
               left: (identifier)
               right: (identifier)
               right: (identifier))
-            (argument_list
+            (arguments
               (argument
                 value: (string_literal))
               (argument
@@ -71,7 +71,7 @@ IF LOCKED bufOrder THEN RETURN TRUE.
           left: (identifier)
           right: (identifier)
           right: (identifier))
-        (argument_list
+        (arguments
           (argument
             value: (string_literal))
           (argument

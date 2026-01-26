@@ -30,7 +30,7 @@ PUT UNFORMATTED x format("9999-99-99") ';'.
   (put_statement
     control: (function_call
       function: (identifier)
-      (argument_list
+      (arguments
         (argument
           value: (number_literal))))
     control: (string_literal))

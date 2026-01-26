@@ -34880,7 +34880,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "argument_list"
+              "name": "arguments"
             },
             {
               "type": "BLANK"
@@ -38852,7 +38852,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "argument_list"
+              "name": "arguments"
             },
             {
               "type": "BLANK"
@@ -42116,7 +42116,7 @@
           },
           {
             "type": "SYMBOL",
-            "name": "argument_list"
+            "name": "arguments"
           },
           {
             "type": "SYMBOL",
@@ -50994,7 +50994,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "argument_list"
+          "name": "arguments"
         }
       ]
     },
@@ -52758,7 +52758,7 @@
         }
       ]
     },
-    "argument_list": {
+    "arguments": {
       "type": "SEQ",
       "members": [
         {
@@ -52941,7 +52941,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "argument_list"
+          "name": "arguments"
         }
       ]
     },

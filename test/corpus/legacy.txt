@@ -259,7 +259,7 @@ y = NOT -x < -10 OR x = 10.
     (unary_expression
       (function_call
         (identifier)
-        (argument_list))))
+        (arguments))))
   (assignment_statement
     (identifier)
     (assignment_operator)
@@ -275,7 +275,7 @@ y = NOT -x < -10 OR x = 10.
         (object_access
           (identifier)
           (identifier))
-        (argument_list))))
+        (arguments))))
   (assignment_statement
     (identifier)
     (assignment_operator)
@@ -762,7 +762,7 @@ END.
     (number_literal)
     (function_call
       (identifier)
-      (argument_list
+      (arguments
         (argument
           (string_literal))))
     (body
@@ -880,7 +880,7 @@ PersonData:GetById(id, output table ttPerson by-reference).
   (expression_statement
     (function_call
       (identifier)
-      (argument_list
+      (arguments
         (argument
           (identifier))
         (argument
@@ -888,13 +888,13 @@ PersonData:GetById(id, output table ttPerson by-reference).
   (expression_statement
     (function_call
       (identifier)
-      (argument_list
+      (arguments
         (argument
           (identifier)))))
   (expression_statement
     (function_call
       (identifier)
-      (argument_list
+      (arguments
         (argument
           (identifier))))
     (no_error))
@@ -903,7 +903,7 @@ PersonData:GetById(id, output table ttPerson by-reference).
       (object_access
         (identifier)
         (identifier))
-      (argument_list
+      (arguments
         (argument
           (identifier))
         (argument
@@ -940,7 +940,7 @@ DISPLAY "test" a 5 f().
     (number_literal)
     (function_call
       (identifier)
-      (argument_list))))
+      (arguments))))
 
 ================================================================================
 ASSIGN statement
@@ -967,7 +967,7 @@ ASSIGN
       (identifier)
       (function_call
         (identifier)
-        (argument_list)))
+        (arguments)))
     (assign_pair
       (qualified_name
         (identifier)

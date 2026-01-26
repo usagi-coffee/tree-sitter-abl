@@ -233,7 +233,7 @@ MESSAGE Customer.Name " - " Customer.Balance.
       (string_literal)
       (function_call
         function: (identifier)
-        (argument_list
+        (arguments
           (argument
             value: (identifier))))))
   (message_statement

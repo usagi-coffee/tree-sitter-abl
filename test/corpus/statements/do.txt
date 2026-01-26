@@ -192,14 +192,14 @@ END.
       function: (object_access
         left: (identifier)
         right: (identifier))
-      (argument_list))
+      (arguments))
     (body
       (expression_statement
         (function_call
           function: (object_access
             left: (identifier)
             right: (identifier))
-          (argument_list
+          (arguments
             (argument
               value: (identifier))))))))
 
@@ -314,13 +314,13 @@ END.
     variable: (identifier)
     start: (function_call
       function: (identifier)
-      (argument_list))
+      (arguments))
     end: (function_call
       function: (identifier)
-      (argument_list))
+      (arguments))
     step: (function_call
       function: (identifier)
-      (argument_list))
+      (arguments))
     (body
       (display_statement
         (identifier)))))

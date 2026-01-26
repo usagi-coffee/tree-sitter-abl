@@ -4,7 +4,7 @@ module.exports = ({ kw, tkw }) => ({
       tkw("PUBLISH"),
       field("event", $._expression),
       optional(seq(kw("FROM"), field("publisher", $._expression))),
-      optional($.argument_list),
+      optional($.arguments),
       $._terminator,
     ),
 });

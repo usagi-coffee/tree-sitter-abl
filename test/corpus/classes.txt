@@ -96,7 +96,7 @@ END CLASS.
           operator: (assignment_operator)
           right: (new_expression
             type: (identifier)
-            (argument_list)))))
+            (arguments)))))
     (property_definition
       (access_modifier)
       name: (identifier)

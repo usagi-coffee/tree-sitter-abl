@@ -5,7 +5,7 @@ module.exports = ({ kw }) => ({
     seq(
       kw("RUN"),
       field("procedure", $._run_target),
-      optional($.argument_list),
+      optional($.arguments),
       $._terminator,
     ),
 
