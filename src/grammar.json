@@ -54325,7 +54325,7 @@
       "type": "TOKEN",
       "content": {
         "type": "PATTERN",
-        "value": "[_\\p{L}][\\p{L}\\p{N}_-]*",
+        "value": "[_\\p{L}][\\p{L}\\p{N}_\\-&]*",
         "flags": "u"
       }
     },

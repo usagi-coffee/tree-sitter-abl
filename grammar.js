@@ -251,7 +251,7 @@ module.exports = grammar({
 
       // Identifiers
       // BE CAREFUL MODIFYING HERE, IDENTIFIER ORDER FOR SOME REASON MATTERS!
-      identifier: ($) => token(/[_\p{L}][\p{L}\p{N}_-]*/u),
+      identifier: ($) => token(/[_\p{L}][\p{L}\p{N}_\-&]*/u),
       _identifier_immediate: ($) => token.immediate(/[_\p{L}][\p{L}\p{N}_-]*/u),
       parenthesized_identifier: ($) => seq("(", $.identifier, ")"),
       _terminator: ($) => choice($._terminator_dot, ";"),
