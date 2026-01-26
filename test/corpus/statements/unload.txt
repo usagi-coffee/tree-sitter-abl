@@ -1,10 +1,40 @@
-================================================================================
-UNLOAD
-================================================================================
+===============================================================================
+UNLOAD statement
+===============================================================================
 
 UNLOAD "myfile.r".
 UNLOAD cFile.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (unload_statement
+    file: (string_literal))
+  (unload_statement
+    file: (identifier)))
+
+===============================================================================
+UNLOAD statement with NO-ERROR
+===============================================================================
+
 UNLOAD "myfile.r" NO-ERROR.
+UNLOAD cFile NO-ERROR.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (unload_statement
+    file: (string_literal))
+  (unload_statement
+    file: (identifier)))
+
+===============================================================================
+UNLOAD statement with different expression types
+===============================================================================
+
+UNLOAD "path/to/file.r".
+UNLOAD cFilePath.
+UNLOAD cPathVariable + ".r".
 
 --------------------------------------------------------------------------------
 
@@ -14,4 +44,6 @@ UNLOAD "myfile.r" NO-ERROR.
   (unload_statement
     file: (identifier))
   (unload_statement
-    file: (string_literal)))
+    file: (binary_expression
+      (identifier)
+      (string_literal))))

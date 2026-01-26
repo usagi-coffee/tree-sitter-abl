@@ -1,6 +1,6 @@
-================================================================================
-PROMSGS
-================================================================================
+===============================================================================
+PROMSGS statement
+===============================================================================
 
 PROMSGS = "C:/msgfile.dat".
 PROMSGS = cMsgFile.
@@ -12,3 +12,25 @@ PROMSGS = cMsgFile.
     value: (string_literal))
   (promsgs_statement
     value: (identifier)))
+
+===============================================================================
+PROMSGS statement with different expression types
+===============================================================================
+
+PROMSGS = "promsgs".
+PROMSGS = cMsgBuffer.
+PROMSGS = cPath + "/" + cFile.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (promsgs_statement
+    value: (string_literal))
+  (promsgs_statement
+    value: (identifier))
+  (promsgs_statement
+    value: (binary_expression
+      (binary_expression
+        (identifier)
+        (string_literal))
+      (identifier))))

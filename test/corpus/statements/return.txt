@@ -1,6 +1,6 @@
-================================================================================
+===============================================================================
 RETURN
-================================================================================
+===============================================================================
 
 RETURN.
 RETURN myValue.
@@ -11,3 +11,65 @@ RETURN myValue.
   (return_statement)
   (return_statement
     (identifier)))
+
+===============================================================================
+RETURN with various expression types
+===============================================================================
+
+RETURN TRUE.
+RETURN FALSE.
+RETURN cValue.
+RETURN nIndex.
+RETURN rValue.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (return_statement
+    (boolean_literal))
+  (return_statement
+    (boolean_literal))
+  (return_statement
+    (identifier))
+  (return_statement
+    (identifier))
+  (return_statement
+    (identifier)))
+
+===============================================================================
+RETURN with complex expressions
+===============================================================================
+
+RETURN cResult.
+RETURN cName + ", " + cValue.
+RETURN nIndex + 1.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (return_statement
+    (identifier))
+  (return_statement
+    (binary_expression
+      (binary_expression
+        (identifier)
+        (string_literal))
+      (identifier)))
+  (return_statement
+    (binary_expression
+      (identifier)
+      (number_literal))))
+
+===============================================================================
+RETURN with function call
+===============================================================================
+
+RETURN CalculateResult().
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (return_statement
+    (function_call
+      function: (identifier)
+      (arguments))))

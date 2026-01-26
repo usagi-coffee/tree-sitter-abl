@@ -1,6 +1,6 @@
-================================================================================
+===============================================================================
 FINALLY
-================================================================================
+===============================================================================
 
 FINALLY:
   MESSAGE "Cleanup".
@@ -24,3 +24,46 @@ END FINALLY.
         name: (identifier))
       (delete_object_statement
         name: (identifier)))))
+
+===============================================================================
+FINALLY with different body statements
+===============================================================================
+
+FINALLY:
+  DELETE OBJECT hBuffer.
+  CLOSE QUERY qCustomer.
+  MESSAGE "Cleanup complete".
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (finally_statement
+    (body
+      (delete_object_statement
+        name: (identifier))
+      (close_query_statement
+        query: (identifier))
+      (message_statement
+        (string_literal)))))
+
+===============================================================================
+FINALLY with complex body
+===============================================================================
+
+FINALLY:
+  DELETE OBJECT hQuery.
+  DELETE OBJECT hBuffer.
+  OUTPUT CLOSE.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (finally_statement
+    (body
+      (delete_object_statement
+        name: (identifier))
+      (delete_object_statement
+        name: (identifier))
+      (output_statement))))

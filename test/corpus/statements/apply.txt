@@ -1,6 +1,6 @@
-================================================================================
+===============================================================================
 APPLY statement - basic
-================================================================================
+===============================================================================
 
 APPLY "CHOOSE".
 APPLY "CHOOSE" TO order-but.
@@ -19,3 +19,51 @@ APPLY "ERROR".
     event: (identifier))
   (apply_statement
     event: (string_literal)))
+
+===============================================================================
+APPLY statement with different event types
+===============================================================================
+
+APPLY "CHOOSE" TO button1.
+APPLY LASTKEY TO fill-in.
+APPLY "U1" TO menu-item.
+APply "CLOSE" TO window.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (apply_statement
+    event: (string_literal)
+    widget: (identifier))
+  (apply_statement
+    event: (identifier)
+    widget: (identifier))
+  (apply_statement
+    event: (string_literal)
+    widget: (identifier))
+  (apply_statement
+    event: (string_literal)
+    widget: (identifier)))
+
+===============================================================================
+APPLY statement with widget expressions
+===============================================================================
+
+APPLY "CHOOSE" TO Customer.Name.
+APPLY SELECT TO hButton.
+APPLY "CHOOSE" TO CURRENT-WINDOW.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (apply_statement
+    event: (string_literal)
+    widget: (qualified_name
+      left: (identifier)
+      right: (identifier)))
+  (apply_statement
+    event: (identifier)
+    widget: (identifier))
+  (apply_statement
+    event: (string_literal)
+    widget: (identifier)))

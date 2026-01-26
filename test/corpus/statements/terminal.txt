@@ -1,6 +1,6 @@
-================================================================================
+===============================================================================
 TERMINAL statement
-================================================================================
+===============================================================================
 
 TERMINAL "vt100".
 TERMINAL cTermType.
@@ -12,3 +12,27 @@ TERMINAL cTermType.
     terminal: (string_literal))
   (terminal_statement
     terminal: (identifier)))
+
+===============================================================================
+TERMINAL statement with various expression types
+===============================================================================
+
+TERMINAL "vt100".
+TERMINAL cTermType.
+TERMINAL "ansi".
+TERMINAL "monochrome".
+TERMINAL "CO80".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (terminal_statement
+    terminal: (string_literal))
+  (terminal_statement
+    terminal: (identifier))
+  (terminal_statement
+    terminal: (string_literal))
+  (terminal_statement
+    terminal: (string_literal))
+  (terminal_statement
+    terminal: (string_literal)))

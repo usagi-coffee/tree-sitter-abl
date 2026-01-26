@@ -1,6 +1,6 @@
-================================================================================
+===============================================================================
 NEXT-PROMPT
-================================================================================
+===============================================================================
 
 NEXT-PROMPT field1.
 NEXT-PROMPT Name.
@@ -13,6 +13,64 @@ NEXT-PROMPT field1 WITH FRAME f1.
     field: (identifier))
   (next_prompt_statement
     field: (identifier))
+  (next_prompt_statement
+    field: (identifier)
+    (frame_phrase
+      frame: (identifier))))
+
+===============================================================================
+NEXT-PROMPT with qualified field names
+===============================================================================
+
+NEXT-PROMPT Customer.Name.
+NEXT-PROMPT Order.OrderNum.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (next_prompt_statement
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier)))
+  (next_prompt_statement
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))))
+
+===============================================================================
+NEXT-PROMPT with different expressions
+===============================================================================
+
+NEXT-PROMPT cField.
+NEXT-PROMPT fieldName.
+NEXT-PROMPT field1 WITH FRAME frame1.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (next_prompt_statement
+    field: (identifier))
+  (next_prompt_statement
+    field: (identifier))
+  (next_prompt_statement
+    field: (identifier)
+    (frame_phrase
+      frame: (identifier))))
+
+===============================================================================
+NEXT-PROMPT with WITH FRAME variations
+===============================================================================
+
+NEXT-PROMPT field1 WITH FRAME main.
+NEXT-PROMPT field2 WITH FRAME detail.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (next_prompt_statement
+    field: (identifier)
+    (frame_phrase
+      frame: (identifier)))
   (next_prompt_statement
     field: (identifier)
     (frame_phrase

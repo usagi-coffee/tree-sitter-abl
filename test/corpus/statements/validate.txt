@@ -1,9 +1,10 @@
-================================================================================
+===============================================================================
 VALIDATE statement
-================================================================================
+===============================================================================
 
 VALIDATE Customer.
 VALIDATE Item NO-ERROR.
+VALIDATE db1.Customer.
 
 --------------------------------------------------------------------------------
 
@@ -11,4 +12,8 @@ VALIDATE Item NO-ERROR.
   (validate_statement
     record: (identifier))
   (validate_statement
-    record: (identifier)))
+    record: (identifier))
+  (validate_statement
+    record: (qualified_name
+      left: (identifier)
+      right: (identifier))))
