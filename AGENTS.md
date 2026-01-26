@@ -65,6 +65,5 @@ Strongly prefer using these commands as they have helpful side-effects like retu
 - Successful tests print out current `STATE_COUNT` at the end.
 - `bun run parse` and `bun run parse:snippet` do not regenerate the parser before parsing the code, unlike `bun run test`.
 - Parser does not build after reaching the hard limit of 65,535 `STATE_COUNT` but bugs might occur at the top-end of the limit e.g `tree-sitter test` might return status `0` but produce no output at about ~63,000 `STATE_COUNT`.
-- `docs/abl-contents.txt` is a very long file; search within it to find the relevant phrase before calling `bun run reference`.
 - When using `alias`, `tree-sitter` handles undefined rules by using the property name as the symbol name so it's okay to alias to `$.something_that_wasn't defined`.
 - Terminators like `terminator` or `terminator_dot` should never be visible in the syntax tree output.
