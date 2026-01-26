@@ -31,7 +31,7 @@ for (let i = 0; i < lines.length; i++) {
   if (m) {
     seenAny = true;
     nonTocStreak = 0;
-    toc.push({ title: m[1].trim(), page: Number(m[2]) });
+    toc.push({ title: m[1].trim().toLowerCase(), page: Number(m[2]) });
   } else if (seenAny) {
     nonTocStreak++;
     if (nonTocStreak >= 50) break;
@@ -43,6 +43,7 @@ if (!toc.length) {
   process.exit(1);
 }
 
+entry = entry.toLowerCase();
 const isPrefix = entry.endsWith("*");
 const isSuffix = entry.startsWith("*");
 
@@ -100,10 +101,10 @@ for (let i = 0; i < lines.length; i++) {
   if (page > next_entry_page) break;
 
   if (!capturing) {
-    if (line === entry) capturing = true;
+    if (line.toLowerCase() === entry.toLowerCase()) capturing = true;
   }
 
-  if (line === next_entry) break;
+  if (line.toLowerCase() === next_entry.toLowerCase()) break;
 
   if (capturing) {
     if (line.startsWith("\f") || line === TITLE || (line && !isNaN(+line)))
