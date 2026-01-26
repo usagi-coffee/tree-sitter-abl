@@ -69,3 +69,21 @@ Strongly prefer using these commands as they have helpful side-effects like retu
 - Terminators like `terminator` or `terminator_dot` should never be visible in the syntax tree output.
 - `kw` and `tkw` are passed down using argument, to access them unpack it inside the statement module e.g `module.exports = ({ kw, tkw })`.
 - Always prefer `| tail` when calling `bun run test` instead of `| head`.
+
+## Tree-Sitter Test Corpus Format
+
+Separators have 78 characters
+
+
+```
+==============================================================================
+Test Title                                                                                                      
+==============================================================================
+
+<code block>
+
+------------------------------------------------------------------------------
+
+(tree output)
+
+```
