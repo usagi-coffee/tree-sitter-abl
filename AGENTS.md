@@ -20,7 +20,7 @@
 
 - Regenerate parser (needed after modifications):
   - `bun run generate`
-- Run tests (runs generate before tests, tests only report failures):
+- Run tests (runs generate before tests, tests only report failures or success of everything):
   - `bun run test`
 - Parse a file (returns syntax tree):
   - `bun run parse <file>`
@@ -68,3 +68,4 @@ Strongly prefer using these commands as they have helpful side-effects like retu
 - When using `alias`, `tree-sitter` handles undefined rules by using the property name as the symbol name so it's okay to alias to `$.something_that_wasn't defined`.
 - Terminators like `terminator` or `terminator_dot` should never be visible in the syntax tree output.
 - `kw` and `tkw` are passed down using argument, to access them unpack it inside the statement module e.g `module.exports = ({ kw, tkw })`.
+- Always prefer `| tail` when calling `bun run test` instead of `| head`.
