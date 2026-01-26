@@ -483,10 +483,10 @@ DEFINE FRAME strFont
       right: (identifier))))
 
 ================================================================================
-FRAME - String with VIEW-AS TEXT
+FRAME - String form item simple
 ================================================================================
 
-DEFINE FRAME strViewAs "Label" VIEW-AS TEXT.
+DEFINE FRAME fStr "Test".
 
 --------------------------------------------------------------------------------
 

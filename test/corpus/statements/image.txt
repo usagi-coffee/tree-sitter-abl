@@ -462,6 +462,8 @@ DEFINE IMAGE imgComplete FILE "complete.png"
       height: (number_literal)
       x: (number_literal)
       y: (number_literal))
+    (number_literal)
+    (number_literal)
     tooltip: (string_literal)))
 
 ================================================================================

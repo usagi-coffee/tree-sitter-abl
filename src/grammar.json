@@ -20422,29 +20422,17 @@
                       "value": "VIEW-AS"
                     },
                     {
-                      "type": "SEQ",
-                      "members": [
-                        {
-                          "type": "ALIAS",
-                          "content": {
-                            "type": "TOKEN",
-                            "content": {
-                              "type": "PATTERN",
-                              "value": "TEXT",
-                              "flags": "i"
-                            }
-                          },
-                          "named": false,
-                          "value": "TEXT"
-                        },
-                        {
-                          "type": "IMMEDIATE_TOKEN",
-                          "content": {
-                            "type": "PATTERN",
-                            "value": "\\s+"
-                          }
+                      "type": "ALIAS",
+                      "content": {
+                        "type": "TOKEN",
+                        "content": {
+                          "type": "PATTERN",
+                          "value": "TEXT",
+                          "flags": "i"
                         }
-                      ]
+                      },
+                      "named": false,
+                      "value": "TEXT"
                     }
                   ]
                 },

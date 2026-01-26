@@ -20,7 +20,7 @@
 
 - Regenerate parser (needed after modifications):
   - `bun run generate`
-- Run tests (runs generate before tests):
+- Run tests (runs generate before tests, tests only report failures):
   - `bun run test`
 - Parse a file (returns syntax tree):
   - `bun run parse <file>`
