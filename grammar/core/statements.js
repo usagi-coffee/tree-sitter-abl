@@ -1,5 +1,6 @@
 // Just aggregator of statements to avoid growing core context
 // Leading comments indicate approximate state cost
+// Run `bun run check:statements` to retrieve the costs
 
 module.exports = () => ({
   _statement: ($) =>
@@ -10,34 +11,34 @@ module.exports = () => ({
       $.empty_statement,
 
       // Definitions
-      /* 7724 */ $.buffer_definition,
+      /* 254 */ $.buffer_definition,
       /* 5669 */ $.temp_table_definition,
-      /* 1436 */ $.image_definition,
-      /* 1100 */ $.browse_definition,
-      /* 485 */ $.frame_definition,
+      /* 1236 */ $.image_definition,
+      /* 2030 */ $.browse_definition,
+      /* 500 */ $.frame_definition,
       /* 390 */ $.class_definition,
-      /* 360 */ $.data_source_definition,
+      /* 329 */ $.data_source_definition,
       /* 344 */ $.query_definition,
       /* 190 */ $.variable_definition,
       /* 140 */ $.menu_definition,
-      /* 105 */ $.function_definition,
+      /* 195 */ $.function_definition,
       /* 86 */ $.button_definition,
-      /* 84 */ $.work_table_definition,
+      /* 99 */ $.work_table_definition,
       /* 80 */ $.rectangle_definition,
       /* 70 */ $.submenu_definition,
       /* 64 */ $.workfile_definition,
       /* 64 */ $.dataset_definition,
       /* 60 */ $.procedure_definition,
       /* 60 */ $.interface_definition,
-      /* 59 */ $.function_forward_definition,
+      /* 89 */ $.function_forward_definition,
       /* 59 */ $.stream_definition,
       /* 40 */ $.parameter_definition,
-      /* 35 */ $.event_definition,
+      /* 65 */ $.event_definition,
       /* 20 */ $.procedure_forward_definition,
 
       // ABL Statements
       /* 9440 */ $.input_statement,
-      /* 5000 */ $.choose_statement,
+      /* 4980 */ $.choose_statement,
       /* 2660 */ $.input_through_statement,
       /* 1955 */ $.open_query_statement,
       /* 983 */ $.do_block,
