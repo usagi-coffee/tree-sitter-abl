@@ -1,0 +1,104 @@
+================================================================================
+FORM basic
+================================================================================
+
+FORM customer-name.
+FORM customer-name customer-balance.
+FORM customer-name LABEL "Customer Name".
+FORM customer-name FORMAT "x(30)".
+FORM customer-name VIEW-AS FILL-IN.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (form_statement
+    (form_item
+      field: (identifier)))
+  (form_statement
+    (form_item
+      field: (identifier))
+    (form_item
+      field: (identifier)))
+  (form_statement
+    (form_item
+      field: (identifier)
+      label: (string_literal)))
+  (form_statement
+    (form_item
+      field: (identifier)
+      format: (string_literal)))
+  (form_statement
+    (form_item
+      field: (identifier)
+      (view_as_phrase
+        widget: (identifier)))))
+
+================================================================================
+FORM with expressions
+================================================================================
+
+FORM customer-name customer-balance + 100.
+FORM customer-name customer-id LABEL "ID".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (form_statement
+    (form_item
+      field: (identifier))
+    (form_item
+      field: (binary_expression
+        (identifier)
+        (number_literal))))
+  (form_statement
+    (form_item
+      field: (identifier))
+    (form_item
+      field: (identifier)
+      label: (string_literal))))
+
+================================================================================
+FORM with formatting elements
+================================================================================
+
+FORM customer-name SKIP SPACE.
+FORM customer-name SKIP(1) SPACE(2).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (form_statement
+    (form_item
+      field: (identifier))
+    (form_item)
+    (form_item))
+  (form_statement
+    (form_item
+      field: (identifier))
+    (form_item
+      (number_literal))
+    (form_item
+      (number_literal))))
+
+================================================================================
+FORM with frame phrase
+================================================================================
+
+FORM customer-name WITH FRAME A.
+FORM customer-name customer-balance WITH FRAME B.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (form_statement
+    (form_item
+      field: (identifier))
+    (frame_phrase
+      frame: (identifier)))
+  (form_statement
+    (form_item
+      field: (identifier))
+    (form_item
+      field: (identifier))
+    (frame_phrase
+      frame: (identifier))))
