@@ -1,5 +1,10 @@
 [
   {
+    "type": "abstract_modifier",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "access_modifier",
     "named": true,
     "fields": {}
@@ -2014,6 +2019,10 @@
         },
         {
           "type": "create_statement",
+          "named": true
+        },
+        {
+          "type": "data_source_definition",
           "named": true
         },
         {
@@ -4559,6 +4568,10 @@
           "named": true
         },
         {
+          "type": "data_source_definition",
+          "named": true
+        },
+        {
           "type": "dataset_definition",
           "named": true
         },
@@ -6568,6 +6581,10 @@
           },
           {
             "type": "create_statement",
+            "named": true
+          },
+          {
+            "type": "data_source_definition",
             "named": true
           },
           {
@@ -8978,6 +8995,10 @@
           "named": true
         },
         {
+          "type": "data_source_definition",
+          "named": true
+        },
+        {
           "type": "dataset_definition",
           "named": true
         },
@@ -9791,6 +9812,74 @@
     }
   },
   {
+    "type": "data_source_definition",
+    "named": true,
+    "fields": {
+      "buffer": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "qualified_name",
+            "named": true
+          }
+        ]
+      },
+      "field": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "qualified_name",
+            "named": true
+          }
+        ]
+      },
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "query": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "access_modifier",
+          "named": true
+        },
+        {
+          "type": "static_modifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "dataset_definition",
     "named": true,
     "fields": {
@@ -10222,6 +10311,10 @@
         },
         {
           "type": "create_statement",
+          "named": true
+        },
+        {
+          "type": "data_source_definition",
           "named": true
         },
         {
@@ -12695,11 +12788,27 @@
       }
     },
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
         {
+          "type": "abstract_modifier",
+          "named": true
+        },
+        {
+          "type": "access_modifier",
+          "named": true
+        },
+        {
+          "type": "override_modifier",
+          "named": true
+        },
+        {
           "type": "signature",
+          "named": true
+        },
+        {
+          "type": "static_modifier",
           "named": true
         }
       ]
@@ -15157,6 +15266,10 @@
           "named": true
         },
         {
+          "type": "data_source_definition",
+          "named": true
+        },
+        {
           "type": "dataset_definition",
           "named": true
         },
@@ -16430,6 +16543,10 @@
             "named": true
           },
           {
+            "type": "data_source_definition",
+            "named": true
+          },
+          {
             "type": "dataset_definition",
             "named": true
           },
@@ -17009,6 +17126,10 @@
           },
           {
             "type": "create_statement",
+            "named": true
+          },
+          {
+            "type": "data_source_definition",
             "named": true
           },
           {
@@ -20373,6 +20494,10 @@
           "named": true
         },
         {
+          "type": "data_source_definition",
+          "named": true
+        },
+        {
           "type": "dataset_definition",
           "named": true
         },
@@ -22238,6 +22363,10 @@
         },
         {
           "type": "create_statement",
+          "named": true
+        },
+        {
+          "type": "data_source_definition",
           "named": true
         },
         {
@@ -24645,6 +24774,11 @@
     "fields": {}
   },
   {
+    "type": "override_modifier",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "page_size_phrase",
     "named": true,
     "fields": {},
@@ -25726,6 +25860,10 @@
         },
         {
           "type": "create_statement",
+          "named": true
+        },
+        {
+          "type": "data_source_definition",
           "named": true
         },
         {
@@ -26874,6 +27012,10 @@
         },
         {
           "type": "create_statement",
+          "named": true
+        },
+        {
+          "type": "data_source_definition",
           "named": true
         },
         {
@@ -33420,6 +33562,10 @@
           "named": true
         },
         {
+          "type": "data_source_definition",
+          "named": true
+        },
+        {
           "type": "dataset_definition",
           "named": true
         },
@@ -39318,6 +39464,10 @@
     "named": false
   },
   {
+    "type": "DATA-SOURCE",
+    "named": false
+  },
+  {
     "type": "DATASET",
     "named": false
   },
@@ -39755,6 +39905,10 @@
   },
   {
     "type": "KEY",
+    "named": false
+  },
+  {
+    "type": "KEYS",
     "named": false
   },
   {

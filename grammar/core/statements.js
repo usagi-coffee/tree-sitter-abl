@@ -16,6 +16,7 @@ module.exports = () => ({
       /* 1100 */ $.browse_definition,
       /* 485 */ $.frame_definition,
       /* 390 */ $.class_definition,
+      /* 360 */ $.data_source_definition,
       /* 344 */ $.query_definition,
       /* 190 */ $.variable_definition,
       /* 140 */ $.menu_definition,

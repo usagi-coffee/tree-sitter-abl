@@ -4,6 +4,8 @@ DATASET DEFINITION
 
 DEFINE DATASET dsCustomer FOR ttCustomer.
 DEF DATASET dsAudit FOR ttHeader, ttLine.
+DEFINE DATASET dsEmpty.
+DEF DATASET dsMulti FOR ttHeader, ttLine, ttTax.
 
 --------------------------------------------------------------------------------
 
@@ -13,5 +15,12 @@ DEF DATASET dsAudit FOR ttHeader, ttLine.
     table: (identifier))
   (dataset_definition
     name: (identifier)
+    table: (identifier)
+    table: (identifier))
+  (dataset_definition
+    name: (identifier))
+  (dataset_definition
+    name: (identifier)
+    table: (identifier)
     table: (identifier)
     table: (identifier)))

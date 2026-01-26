@@ -12,6 +12,30 @@ DEFINE EVENT onCustomerChanged SIGNATURE VOID ().
     (signature)))
 
 ================================================================================
+EVENT with modifiers
+================================================================================
+
+DEFINE PUBLIC STATIC EVENT onSync SIGNATURE VOID ().
+DEFINE PROTECTED ABSTRACT OVERRIDE EVENT onAbstract SIGNATURE VOID (INPUT reason AS CHARACTER).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (event_definition
+    (access_modifier)
+    (static_modifier)
+    name: (identifier)
+    (signature))
+  (event_definition
+    (access_modifier)
+    (abstract_modifier)
+    (override_modifier)
+    name: (identifier)
+    (signature
+      name: (identifier)
+      type: (identifier))))
+
+================================================================================
 EVENT with parameters
 ================================================================================
 

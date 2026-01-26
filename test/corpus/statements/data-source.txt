@@ -1,0 +1,26 @@
+================================================================================
+DATA-SOURCE DEFINITION
+================================================================================
+
+DEFINE DATA-SOURCE dsCust FOR bCust.
+DEFINE DATA-SOURCE dsOrders QUERY qOrders FOR bCust KEYS (CustNum, SalesRep), bOrder KEYS (ROWID).
+DEF PROTECTED STATIC DATA-SOURCE dsStatic QUERY qStatic.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (data_source_definition
+    name: (identifier)
+    buffer: (identifier))
+  (data_source_definition
+    name: (identifier)
+    query: (identifier)
+    buffer: (identifier)
+    field: (identifier)
+    field: (identifier)
+    buffer: (identifier))
+  (data_source_definition
+    (access_modifier)
+    (static_modifier)
+    name: (identifier)
+    query: (identifier)))

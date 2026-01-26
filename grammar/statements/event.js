@@ -2,6 +2,7 @@ module.exports = ({ kw, tkw }) => ({
   event_definition: ($) =>
     seq(
       choice(kw("DEFINE"), kw("DEF")),
+      repeat($.__event_modifier),
       kw("EVENT"),
       field("name", $.identifier),
       alias($.__event_signature, $.signature),
@@ -12,7 +13,7 @@ module.exports = ({ kw, tkw }) => ({
     choice(
       // VOID signature
       seq(
-        kw("SIGNATURE"),
+        optional(kw("SIGNATURE")),
         kw("VOID"),
         "(",
         optional($.__event_parameter_list),
@@ -40,4 +41,22 @@ module.exports = ({ kw, tkw }) => ({
       optional(kw("CLASS")),
       field("type", $._type_or_string),
     ),
+  __event_modifier: ($) =>
+    choice(
+      alias($.__event_access_modifier, $.access_modifier),
+      alias($.__event_static_modifier, $.static_modifier),
+      alias($.__event_abstract_modifier, $.abstract_modifier),
+      alias($.__event_override_modifier, $.override_modifier),
+    ),
+  __event_access_modifier: ($) =>
+    choice(
+      kw("PRIVATE"),
+      kw("PACKAGE-PRIVATE"),
+      kw("PROTECTED"),
+      kw("PACKAGE-PROTECTED"),
+      kw("PUBLIC"),
+    ),
+  __event_static_modifier: ($) => kw("STATIC"),
+  __event_abstract_modifier: ($) => kw("ABSTRACT"),
+  __event_override_modifier: ($) => kw("OVERRIDE"),
 });

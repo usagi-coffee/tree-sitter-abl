@@ -28,6 +28,13 @@ ENUM Direction:
                 West.
 END ENUM.
 
+ENUM Status:
+  DEFINE ENUM New = 1
+              Open
+              Closed = Open
+              Archived = New,Closed.
+END ENUM.
+
 --------------------------------------------------------------------------------
 
 (source_code
@@ -83,4 +90,23 @@ END ENUM.
       (enum_member
         (identifier))
       (enum_member
-        (identifier)))))
+        (identifier))))
+  (enum_statement
+    (identifier)
+    (enum_body
+      (enum_member
+        (identifier)
+        (enum_member_value
+          (number_literal)))
+      (enum_member
+        (identifier))
+      (enum_member
+        (identifier)
+        (enum_member_value
+          (identifier)))
+      (enum_member
+        (identifier)
+        (enum_member_value
+          (enum_member_value_list
+            (identifier)
+            (identifier)))))))

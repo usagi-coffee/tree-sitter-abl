@@ -24,6 +24,7 @@ const copyLobStatement = require("./copy-lob");
 const createStatement = require("./create");
 const createSocketStatement = require("./create-socket");
 const convertStatement = require("./convert");
+const dataSourceDefinition = require("./data-source");
 const datasetDefinition = require("./dataset");
 const deleteStatement = require("./delete");
 const dictionaryStatement = require("./dictionary");
@@ -165,6 +166,7 @@ module.exports = (ctx) => ({
   ...createStatement(ctx),
   ...createSocketStatement(ctx),
   ...convertStatement(ctx),
+  ...dataSourceDefinition(ctx),
   ...datasetDefinition(ctx),
   ...deleteStatement(ctx),
   ...dictionaryStatement(ctx),

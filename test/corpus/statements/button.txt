@@ -4,6 +4,9 @@ BUTTON DEFINITION
 
 DEFINE BUTTON btnTestButton LABEL "Click Me".
 DEF BUTTON btnLike LIKE btnTestButton.
+DEFINE BUTTON btnOptions AUTO-GO DEFAULT BGCOLOR 1 FGCOLOR 2 DCOLOR 3 PFCOLOR 4 FONT 5 CONTEXT-HELP-ID 77 MOUSE-POINTER "arrow" LABEL "Go".
+DEFINE PRIVATE BUTTON btnImages IMAGE FILE "ok.png" IMAGE-SIZE 10 BY 5 FROM ROW 2 COLUMN 3 IMAGE-DOWN FILE "ok-down.png" IMAGE-SIZE-PIXELS 8 BY 6 FROM X 1 Y 2 IMAGE-INSENSITIVE FILE "ok-off.png" SIZE-PIXELS 20 BY 6 NO-FOCUS FLAT-BUTTON NO-CONVERT-3D-COLORS TOOLTIP "OK" DROP-TARGET.
+DEF BUTTON btnEnd AUTO-ENDKEY LIKE btnTestButton.
 
 --------------------------------------------------------------------------------
 
@@ -14,5 +17,54 @@ DEF BUTTON btnLike LIKE btnTestButton.
       label: (string_literal)))
   (button_definition
     name: (identifier)
+    (button_option
+      like: (identifier)))
+  (button_definition
+    name: (identifier)
+    (button_option)
+    (button_option)
+    (button_option
+      (number_literal))
+    (button_option
+      (number_literal))
+    (button_option
+      (number_literal))
+    (button_option
+      (number_literal))
+    (button_option
+      (number_literal))
+    (button_option
+      (number_literal))
+    (button_option
+      (string_literal))
+    (button_option
+      label: (string_literal)))
+  (button_definition
+    name: (identifier)
+    (button_option
+      filename: (string_literal)
+      width: (number_literal)
+      height: (number_literal)
+      (number_literal)
+      (number_literal))
+    (button_option
+      filename: (string_literal)
+      width: (number_literal)
+      height: (number_literal)
+      (number_literal)
+      (number_literal))
+    (button_option
+      filename: (string_literal))
+    (button_option
+      width: (number_literal)
+      height: (number_literal))
+    (button_option)
+    (button_option)
+    (button_option
+      (string_literal))
+    (button_option))
+  (button_definition
+    name: (identifier)
+    (button_option)
     (button_option
       like: (identifier))))
