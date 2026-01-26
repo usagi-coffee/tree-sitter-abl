@@ -54600,6 +54600,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "choose_statement"
+        },
+        {
+          "type": "SYMBOL",
           "name": "input_through_statement"
         },
         {

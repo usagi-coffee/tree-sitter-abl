@@ -1988,6 +1988,10 @@
           "named": true
         },
         {
+          "type": "choose_statement",
+          "named": true
+        },
+        {
           "type": "class_definition",
           "named": true
         },
@@ -4505,6 +4509,246 @@
     }
   },
   {
+    "type": "choose_statement",
+    "named": true,
+    "fields": {
+      "color": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "argument_reference",
+            "named": true
+          },
+          {
+            "type": "array_access",
+            "named": true
+          },
+          {
+            "type": "available_expression",
+            "named": true
+          },
+          {
+            "type": "binary_expression",
+            "named": true
+          },
+          {
+            "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "can_find_expression",
+            "named": true
+          },
+          {
+            "type": "conditional_expression",
+            "named": true
+          },
+          {
+            "type": "constant",
+            "named": true
+          },
+          {
+            "type": "dataset_reference",
+            "named": true
+          },
+          {
+            "type": "date_literal",
+            "named": true
+          },
+          {
+            "type": "function_call",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "locked_expression",
+            "named": true
+          },
+          {
+            "type": "new_expression",
+            "named": true
+          },
+          {
+            "type": "null_literal",
+            "named": true
+          },
+          {
+            "type": "number_literal",
+            "named": true
+          },
+          {
+            "type": "object_access",
+            "named": true
+          },
+          {
+            "type": "object_access_expression",
+            "named": true
+          },
+          {
+            "type": "parenthesized_expression",
+            "named": true
+          },
+          {
+            "type": "qualified_name",
+            "named": true
+          },
+          {
+            "type": "scoped_name",
+            "named": true
+          },
+          {
+            "type": "string_literal",
+            "named": true
+          },
+          {
+            "type": "unary_expression",
+            "named": true
+          }
+        ]
+      },
+      "field": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "keys": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "pause": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "argument_reference",
+            "named": true
+          },
+          {
+            "type": "array_access",
+            "named": true
+          },
+          {
+            "type": "available_expression",
+            "named": true
+          },
+          {
+            "type": "binary_expression",
+            "named": true
+          },
+          {
+            "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "can_find_expression",
+            "named": true
+          },
+          {
+            "type": "conditional_expression",
+            "named": true
+          },
+          {
+            "type": "constant",
+            "named": true
+          },
+          {
+            "type": "dataset_reference",
+            "named": true
+          },
+          {
+            "type": "date_literal",
+            "named": true
+          },
+          {
+            "type": "function_call",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "locked_expression",
+            "named": true
+          },
+          {
+            "type": "new_expression",
+            "named": true
+          },
+          {
+            "type": "null_literal",
+            "named": true
+          },
+          {
+            "type": "number_literal",
+            "named": true
+          },
+          {
+            "type": "object_access",
+            "named": true
+          },
+          {
+            "type": "object_access_expression",
+            "named": true
+          },
+          {
+            "type": "parenthesized_expression",
+            "named": true
+          },
+          {
+            "type": "qualified_name",
+            "named": true
+          },
+          {
+            "type": "scoped_name",
+            "named": true
+          },
+          {
+            "type": "string_literal",
+            "named": true
+          },
+          {
+            "type": "unary_expression",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "frame_phrase",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "class_definition",
     "named": true,
     "fields": {
@@ -6565,6 +6809,10 @@
           },
           {
             "type": "catch_statement",
+            "named": true
+          },
+          {
+            "type": "choose_statement",
             "named": true
           },
           {
@@ -8979,6 +9227,10 @@
           "named": true
         },
         {
+          "type": "choose_statement",
+          "named": true
+        },
+        {
           "type": "class_definition",
           "named": true
         },
@@ -10295,6 +10547,10 @@
         },
         {
           "type": "catch_statement",
+          "named": true
+        },
+        {
+          "type": "choose_statement",
           "named": true
         },
         {
@@ -15262,6 +15518,10 @@
           "named": true
         },
         {
+          "type": "choose_statement",
+          "named": true
+        },
+        {
           "type": "class_definition",
           "named": true
         },
@@ -16543,6 +16803,10 @@
             "named": true
           },
           {
+            "type": "choose_statement",
+            "named": true
+          },
+          {
             "type": "class_definition",
             "named": true
           },
@@ -17126,6 +17390,10 @@
           },
           {
             "type": "catch_statement",
+            "named": true
+          },
+          {
+            "type": "choose_statement",
             "named": true
           },
           {
@@ -20601,6 +20869,10 @@
           "named": true
         },
         {
+          "type": "choose_statement",
+          "named": true
+        },
+        {
           "type": "class_definition",
           "named": true
         },
@@ -22470,6 +22742,10 @@
         },
         {
           "type": "catch_statement",
+          "named": true
+        },
+        {
+          "type": "choose_statement",
           "named": true
         },
         {
@@ -25986,6 +26262,10 @@
           "named": true
         },
         {
+          "type": "choose_statement",
+          "named": true
+        },
+        {
           "type": "class_definition",
           "named": true
         },
@@ -27135,6 +27415,10 @@
         },
         {
           "type": "catch_statement",
+          "named": true
+        },
+        {
+          "type": "choose_statement",
           "named": true
         },
         {
@@ -33685,6 +33969,10 @@
           "named": true
         },
         {
+          "type": "choose_statement",
+          "named": true
+        },
+        {
           "type": "class_definition",
           "named": true
         },
@@ -39501,6 +39789,10 @@
   {
     "type": "CHARACTER",
     "named": true
+  },
+  {
+    "type": "CHOOSE",
+    "named": false
   },
   {
     "type": "CLASS",

@@ -1,0 +1,512 @@
+================================================================================
+CHOOSE - ROW basic
+================================================================================
+
+CHOOSE ROW field1.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (choose_statement
+    field: (identifier)))
+
+================================================================================
+CHOOSE - ROW with HELP
+================================================================================
+
+CHOOSE ROW fieldName HELP "Help text for this field".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (choose_statement
+    field: (identifier)
+    (string_literal)))
+
+================================================================================
+CHOOSE - FIELD single
+================================================================================
+
+CHOOSE FIELD field1.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (choose_statement
+    field: (identifier)))
+
+================================================================================
+CHOOSE - FIELD with multiple options
+================================================================================
+
+CHOOSE FIELD field1 field2 field3.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (choose_statement
+    field: (identifier)
+    field: (identifier)
+    field: (identifier)))
+
+================================================================================
+CHOOSE - FIELD single with HELP
+================================================================================
+
+CHOOSE FIELD fieldName HELP "Help for this field".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (choose_statement
+    field: (identifier)
+    (string_literal)))
+
+================================================================================
+CHOOSE - FIELD multiple with Help
+================================================================================
+
+CHOOSE FIELD field1 HELP "First field help" field2 HELP "Second field help" field3 HELP "Third field help".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (choose_statement
+    field: (identifier)
+    (string_literal)
+    field: (identifier)
+    (string_literal)
+    field: (identifier)
+    (string_literal)))
+
+================================================================================
+CHOOSE - AUTO-RETURN
+================================================================================
+
+CHOOSE ROW field1 AUTO-RETURN.
+CHOOSE FIELD field1 field2 AUTO-RETURN.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (choose_statement
+    field: (identifier))
+  (choose_statement
+    field: (identifier)
+    field: (identifier)))
+
+================================================================================
+CHOOSE - COLOR
+================================================================================
+
+CHOOSE ROW field1 COLOR NORMAL.
+CHOOSE FIELD field1 COLOR INPUT.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (choose_statement
+    field: (identifier)
+    color: (identifier))
+  (choose_statement
+    field: (identifier)
+    color: (identifier)))
+
+================================================================================
+CHOOSE - COLOR VALUE expression
+================================================================================
+
+CHOOSE ROW field1 COLOR VALUE(myColor).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (choose_statement
+    field: (identifier)
+    color: (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          value: (identifier))))))
+
+================================================================================
+CHOOSE - GO-ON
+================================================================================
+
+CHOOSE ROW field1 GO-ON (KEY1 KEY2 KEY3).
+CHOOSE FIELD field1 GO-ON(F1 F2 F3 RETURN).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (choose_statement
+    field: (identifier)
+    (identifier)
+    (identifier)
+    (identifier))
+  (choose_statement
+    field: (identifier)
+    (identifier)
+    (identifier)
+    (identifier)
+    (identifier)))
+
+================================================================================
+CHOOSE - KEYS
+================================================================================
+
+CHOOSE ROW field1 KEYS keyVar.
+CHOOSE FIELD field1 KEYS keystrokes.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (choose_statement
+    field: (identifier)
+    keys: (identifier))
+  (choose_statement
+    field: (identifier)
+    keys: (identifier)))
+
+================================================================================
+CHOOSE - NO-ERROR
+================================================================================
+
+CHOOSE ROW field1 NO-ERROR.
+CHOOSE FIELD field1 NO-ERROR.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (choose_statement
+    field: (identifier))
+  (choose_statement
+    field: (identifier)))
+
+================================================================================
+CHOOSE - PAUSE
+================================================================================
+
+CHOOSE ROW field1 PAUSE 5.
+CHOOSE FIELD field1 PAUSE 10.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (choose_statement
+    field: (identifier)
+    pause: (number_literal))
+  (choose_statement
+    field: (identifier)
+    pause: (number_literal)))
+
+================================================================================
+CHOOSE - WITH FRAME
+================================================================================
+
+CHOOSE ROW field1 WITH FRAME frameName.
+CHOOSE FIELD field1 WITH FRAME myFrame.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (choose_statement
+    field: (identifier)
+    (frame_phrase
+      frame: (identifier)))
+  (choose_statement
+    field: (identifier)
+    (frame_phrase
+      frame: (identifier))))
+
+================================================================================
+CHOOSE - ROW combined options
+================================================================================
+
+CHOOSE ROW fieldName HELP "Help text" AUTO-RETURN COLOR NORMAL KEYS keyVar NO-ERROR.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (choose_statement
+    field: (identifier)
+    (string_literal)
+    color: (identifier)
+    keys: (identifier)))
+
+================================================================================
+CHOOSE - FIELD combined options
+================================================================================
+
+CHOOSE FIELD field1 field2 HELP "Multiple field help" AUTO-RETURN COLOR NORMAL.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (choose_statement
+    field: (identifier)
+    field: (identifier)
+    (string_literal)
+    color: (identifier)))
+
+================================================================================
+CHOOSE - with GO-ON and KEYS
+================================================================================
+
+CHOOSE ROW field1 GO-ON (KEY1 KEY2) KEYS keyVar PAUSE 30.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (choose_statement
+    field: (identifier)
+    (identifier)
+    (identifier)
+    keys: (identifier)
+    pause: (number_literal)))
+
+================================================================================
+CHOOSE - complete combination
+================================================================================
+
+CHOOSE ROW fieldName HELP "Help for field" AUTO-RETURN COLOR NORMAL GO-ON (F1 F2) KEYS keyVar NO-ERROR PAUSE 15 WITH FRAME mainFrame.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (choose_statement
+    field: (identifier)
+    (string_literal)
+    color: (identifier)
+    (identifier)
+    (identifier)
+    keys: (identifier)
+    pause: (number_literal)
+    (frame_phrase
+      frame: (identifier))))
+
+================================================================================
+CHOOSE - minimal
+================================================================================
+
+CHOOSE ROW f.
+CHOOSE FIELD f1 f2 f3.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (choose_statement
+    field: (identifier))
+  (choose_statement
+    field: (identifier)
+    field: (identifier)
+    field: (identifier)))
+
+================================================================================
+CHOOSE - COLOR MESSAGES
+================================================================================
+
+CHOOSE ROW field1 COLOR MESSAGES.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (choose_statement
+    field: (identifier)
+    color: (identifier)))
+
+================================================================================
+CHOOSE - many fields with HELP
+================================================================================
+
+CHOOSE FIELD f1 HELP "First" f2 HELP "Second" f3 HELP "Third" f4 HELP "Fourth" f5 HELP "Fifth".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (choose_statement
+    field: (identifier)
+    (string_literal)
+    field: (identifier)
+    (string_literal)
+    field: (identifier)
+    (string_literal)
+    field: (identifier)
+    (string_literal)
+    field: (identifier)
+    (string_literal)))
+
+================================================================================
+CHOOSE - FIELD with all HELP
+================================================================================
+
+CHOOSE FIELD opt1 HELP "Option 1" opt2 HELP "Option 2" opt3 HELP "Option 3" opt4 HELP "Option 4" opt5 HELP "Option 5".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (choose_statement
+    field: (identifier)
+    (string_literal)
+    field: (identifier)
+    (string_literal)
+    field: (identifier)
+    (string_literal)
+    field: (identifier)
+    (string_literal)
+    field: (identifier)
+    (string_literal)))
+
+================================================================================
+CHOOSE - FIELD with mixed HELP and no HELP
+================================================================================
+
+CHOOSE FIELD fieldWithHelp HELP "Has help" fieldNoHelp fieldMoreHelp HELP "Also has help".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (choose_statement
+    field: (identifier)
+    (string_literal)
+    field: (identifier)
+    field: (identifier)
+    (string_literal)))
+
+================================================================================
+CHOOSE - GO-ON single key
+================================================================================
+
+CHOOSE ROW field1 GO-ON (F1).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (choose_statement
+    field: (identifier)
+    (identifier)))
+
+================================================================================
+CHOOSE - KEYS with short variable
+================================================================================
+
+CHOOSE ROW field1 KEYS k.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (choose_statement
+    field: (identifier)
+    keys: (identifier)))
+
+================================================================================
+CHOOSE - PAUSE with variable
+================================================================================
+
+CHOOSE ROW field1 PAUSE timeout.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (choose_statement
+    field: (identifier)
+    pause: (identifier)))
+
+================================================================================
+CHOOSE - COLOR with variable
+================================================================================
+
+CHOOSE ROW field1 COLOR colorVar.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (choose_statement
+    field: (identifier)
+    color: (identifier)))
+
+================================================================================
+CHOOSE - all options without HELP/GO-ON
+================================================================================
+
+CHOOSE ROW field1 AUTO-RETURN COLOR NORMAL KEYS k NO-ERROR PAUSE 10 WITH FRAME f1.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (choose_statement
+    field: (identifier)
+    color: (identifier)
+    keys: (identifier)
+    pause: (number_literal)
+    (frame_phrase
+      frame: (identifier))))
+
+================================================================================
+CHOOSE - FIELD without options
+================================================================================
+
+CHOOSE FIELD opt1 opt2 opt3 opt4.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (choose_statement
+    field: (identifier)
+    field: (identifier)
+    field: (identifier)
+    field: (identifier)))
+
+================================================================================
+CHOOSE - GO-ON with multiple keys
+================================================================================
+
+CHOOSE ROW field1 GO-ON (KEYCODE RETURN END-ERROR).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (choose_statement
+    field: (identifier)
+    (identifier)
+    (identifier)
+    (identifier)))
+
+================================================================================
+CHOOSE - HELP with longer text
+================================================================================
+
+CHOOSE ROW field1 HELP "This is a longer help text description for the field that explains what the user should do when they select this option from the menu".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (choose_statement
+    field: (identifier)
+    (string_literal)))
+
+================================================================================
+CHOOSE - comprehensive test
+================================================================================
+
+CHOOSE FIELD option1 HELP "First option" option2 HELP "Second option" option3 HELP "Third" AUTO-RETURN COLOR NORMAL GO-ON (F1 F2 F3 RETURN) KEYS menuKeys NO-ERROR PAUSE 30 WITH FRAME mainMenuFrame.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (choose_statement
+    field: (identifier)
+    (string_literal)
+    field: (identifier)
+    (string_literal)
+    field: (identifier)
+    (string_literal)
+    color: (identifier)
+    (identifier)
+    (identifier)
+    (identifier)
+    (identifier)
+    keys: (identifier)
+    pause: (number_literal)
+    (frame_phrase
+      frame: (identifier))))

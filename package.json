@@ -45,7 +45,7 @@
     "install": "node-gyp-build",
     "prestart": "tree-sitter build --wasm",
     "start": "tree-sitter playground",
-    "test": "tree-sitter generate && tree-sitter test && bun run tools/check.js",
+    "test": "tree-sitter generate && bun run tools/test.js && bun run tools/check.js",
     "generate": "tree-sitter generate && bun run check",
     "parse": "tree-sitter parse",
     "check": "bun run tools/check.js",

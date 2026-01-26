@@ -37,6 +37,7 @@ module.exports = () => ({
 
       // ABL Statements
       /* 9440 */ $.input_statement,
+      /* 5000 */ $.choose_statement,
       /* 2660 */ $.input_through_statement,
       /* 1955 */ $.open_query_statement,
       /* 983 */ $.do_block,
@@ -157,7 +158,6 @@ module.exports = () => ({
 
       // TODO: statements that are hard to integrate due to state explosion or bugs
       // /* 60000 */ $.system_dialog_get_file_statement,
-      // /* 4890 */ $.choose_statement,
       //
       // These are not expensive but it's all or none at this point
       // /* 1200 */ $.system_dialog_font_statement,
