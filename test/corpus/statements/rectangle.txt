@@ -94,3 +94,384 @@ DEFINE PRIVATE RECTANGLE rectPrivate
     (size_phrase
       width: (number_literal)
       height: (number_literal))))
+
+================================================================================
+RECTANGLE - Basic Syntax
+================================================================================
+
+DEFINE RECTANGLE rBox.
+DEF RECTANGLE rFrame.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (rectangle_definition
+    name: (identifier))
+  (rectangle_definition
+    name: (identifier)))
+
+================================================================================
+RECTANGLE - NO-FILL
+================================================================================
+
+DEFINE RECTANGLE rNoFill NO-FILL.
+DEF RECTANGLE rOutline NO-FILL.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (rectangle_definition
+    name: (identifier)
+    (no_fill))
+  (rectangle_definition
+    name: (identifier)
+    (no_fill)))
+
+================================================================================
+RECTANGLE - EDGE-CHARS
+================================================================================
+
+DEFINE RECTANGLE rEdgeChar EDGE-CHARS 2.
+DEF RECTANGLE rEdge2 EDGE-CHARS 1.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (rectangle_definition
+    name: (identifier)
+    (edge_chars
+      (number_literal)))
+  (rectangle_definition
+    name: (identifier)
+    (edge_chars
+      (number_literal))))
+
+================================================================================
+RECTANGLE - EDGE-PIXELS
+================================================================================
+
+DEFINE RECTANGLE rEdgePix EDGE-PIXELS 3.
+DEF RECTANGLE rEP2 EDGE-PIXELS 5.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (rectangle_definition
+    name: (identifier)
+    (edge_pixels
+      (number_literal)))
+  (rectangle_definition
+    name: (identifier)
+    (edge_pixels
+      (number_literal))))
+
+================================================================================
+RECTANGLE - DCOLOR
+================================================================================
+
+DEFINE RECTANGLE rDcolor DCOLOR 5.
+DEF RECTANGLE rDC DCOLOR 10.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (rectangle_definition
+    name: (identifier)
+    (dcolor
+      (number_literal)))
+  (rectangle_definition
+    name: (identifier)
+    (dcolor
+      (number_literal))))
+
+================================================================================
+RECTANGLE - BGCOLOR
+================================================================================
+
+DEFINE RECTANGLE rBg BGCOLOR 2.
+DEF RECTANGLE rBgColor BGCOLOR 7.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (rectangle_definition
+    name: (identifier)
+    (bgcolor
+      (number_literal)))
+  (rectangle_definition
+    name: (identifier)
+    (bgcolor
+      (number_literal))))
+
+================================================================================
+RECTANGLE - FGCOLOR
+================================================================================
+
+DEFINE RECTANGLE rFg FGCOLOR 1.
+DEF RECTANGLE rFgColor FGCOLOR 15.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (rectangle_definition
+    name: (identifier)
+    (fgcolor
+      (number_literal)))
+  (rectangle_definition
+    name: (identifier)
+    (fgcolor
+      (number_literal))))
+
+================================================================================
+RECTANGLE - GRAPHIC-EDGE
+================================================================================
+
+DEFINE RECTANGLE rGraphic GRAPHIC-EDGE.
+DEF RECTANGLE rGE GRAPHIC-EDGE NO-FILL.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (rectangle_definition
+    name: (identifier)
+    (graphic_edge))
+  (rectangle_definition
+    name: (identifier)
+    (graphic_edge)
+    (no_fill)))
+
+================================================================================
+RECTANGLE - PFCOLOR
+================================================================================
+
+DEFINE RECTANGLE rPf PFCOLOR 3.
+DEF RECTANGLE rPF PFCOLOR 8.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (rectangle_definition
+    name: (identifier)
+    (pfcolor
+      (number_literal)))
+  (rectangle_definition
+    name: (identifier)
+    (pfcolor
+      (number_literal))))
+
+================================================================================
+RECTANGLE - ROUNDED
+================================================================================
+
+DEFINE RECTANGLE rRounded ROUNDED.
+DEF RECTANGLE rRound ROUNDED NO-FILL.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (rectangle_definition
+    name: (identifier)
+    (rounded))
+  (rectangle_definition
+    name: (identifier)
+    (rounded)
+    (no_fill)))
+
+================================================================================
+RECTANGLE - TOOLTIP
+================================================================================
+
+DEFINE RECTANGLE rToolTip TOOLTIP "Rectangle tooltip".
+DEF RECTANGLE rTT TOOLTIP text.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (rectangle_definition
+    name: (identifier)
+    (tooltip
+      (string_literal)))
+  (rectangle_definition
+    name: (identifier)
+    (tooltip
+      (identifier))))
+
+================================================================================
+RECTANGLE - PRIVATE Modifier
+================================================================================
+
+DEFINE PRIVATE RECTANGLE privRect.
+DEF PRIVATE RECTANGLE privBox LIKE rBox.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (rectangle_definition
+    name: (identifier))
+  (rectangle_definition
+    name: (identifier)
+    (like_option
+      like: (identifier))))
+
+================================================================================
+RECTANGLE - Color Combinations
+================================================================================
+
+DEFINE RECTANGLE rColors NO-FILL BGCOLOR 1 FGCOLOR 2 PFCOLOR 3 DCOLOR 4.
+DEF RECTANGLE rMix GRAPHIC-EDGE BGCOLOR 5 PFCOLOR 6.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (rectangle_definition
+    name: (identifier)
+    (no_fill)
+    (bgcolor
+      (number_literal))
+    (fgcolor
+      (number_literal))
+    (pfcolor
+      (number_literal))
+    (dcolor
+      (number_literal)))
+  (rectangle_definition
+    name: (identifier)
+    (graphic_edge)
+    (bgcolor
+      (number_literal))
+    (pfcolor
+      (number_literal))))
+
+================================================================================
+RECTANGLE - LIKE with Other Options
+================================================================================
+
+DEFINE RECTANGLE rLikeOther LIKE rBox BGCOLOR 5 FGCOLOR 10.
+DEF RECTANGLE rCopy2 LIKE rFrame NO-FILL SIZE 20 BY 30.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (rectangle_definition
+    name: (identifier)
+    (like_option
+      like: (identifier))
+    (bgcolor
+      (number_literal))
+    (fgcolor
+      (number_literal)))
+  (rectangle_definition
+    name: (identifier)
+    (like_option
+      like: (identifier))
+    (no_fill)
+    (size_phrase
+      width: (number_literal)
+      height: (number_literal))))
+
+================================================================================
+RECTANGLE - All Edge Options
+================================================================================
+
+DEFINE RECTANGLE rEdge1 EDGE-CHARS 1 BGCOLOR 2.
+DEF RECTANGLE rEdge2 EDGE-PIXELS 3 FGCOLOR 5 NO-FILL.
+DEF RECTANGLE rEdge3 GRAPHIC-EDGE ROUNDED.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (rectangle_definition
+    name: (identifier)
+    (edge_chars
+      (number_literal))
+    (bgcolor
+      (number_literal)))
+  (rectangle_definition
+    name: (identifier)
+    (edge_pixels
+      (number_literal))
+    (fgcolor
+      (number_literal))
+    (no_fill))
+  (rectangle_definition
+    name: (identifier)
+    (graphic_edge)
+    (rounded)))
+
+================================================================================
+RECTANGLE - Complete Combination
+================================================================================
+
+DEFINE RECTANGLE rComplete
+  NO-FILL
+  EDGE-CHARS 2
+  BGCOLOR 1
+  FGCOLOR 2
+  PFCOLOR 3
+  DCOLOR 4
+  ROUNDED
+  SIZE-PIXELS 100 BY 150
+  TOOLTIP "Complete rectangle".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (rectangle_definition
+    name: (identifier)
+    (no_fill)
+    (edge_chars
+      (number_literal))
+    (bgcolor
+      (number_literal))
+    (fgcolor
+      (number_literal))
+    (pfcolor
+      (number_literal))
+    (dcolor
+      (number_literal))
+    (rounded)
+    (size_phrase
+      width: (number_literal)
+      height: (number_literal))
+    (tooltip
+      (string_literal))))
+
+================================================================================
+RECTANGLE - Edge Zero
+================================================================================
+
+DEFINE RECTANGLE rNoEdge EDGE-CHARS 0.
+DEF RECTANGLE rNoEdge2 EDGE-PIXELS 0.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (rectangle_definition
+    name: (identifier)
+    (edge_chars
+      (number_literal)))
+  (rectangle_definition
+    name: (identifier)
+    (edge_pixels
+      (number_literal))))
+
+================================================================================
+RECTANGLE - Minimal
+================================================================================
+
+DEFINE RECTANGLE r.
+DEF RECTANGLE r2 LIKE other.
+DEF RECTANGLE r3 NO-FILL.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (rectangle_definition
+    name: (identifier))
+  (rectangle_definition
+    name: (identifier)
+    (like_option
+      like: (identifier)))
+  (rectangle_definition
+    name: (identifier)
+    (no_fill)))

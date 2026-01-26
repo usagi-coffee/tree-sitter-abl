@@ -482,6 +482,11 @@
     }
   },
   {
+    "type": "append_option",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "append_phrase",
     "named": true,
     "fields": {}
@@ -1910,6 +1915,11 @@
     }
   },
   {
+    "type": "bind_option",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "body",
     "named": true,
     "fields": {},
@@ -2755,6 +2765,10 @@
           "named": true
         },
         {
+          "type": "label_pfcolor_option",
+          "named": true
+        },
+        {
           "type": "max_data_guess_option",
           "named": true
         },
@@ -3112,7 +3126,7 @@
     "named": true,
     "fields": {
       "label": {
-        "multiple": false,
+        "multiple": true,
         "required": false,
         "types": [
           {
@@ -3136,7 +3150,7 @@
         ]
       },
       "namespace_prefix": {
-        "multiple": false,
+        "multiple": true,
         "required": false,
         "types": [
           {
@@ -3146,7 +3160,7 @@
         ]
       },
       "namespace_uri": {
-        "multiple": false,
+        "multiple": true,
         "required": false,
         "types": [
           {
@@ -3156,7 +3170,7 @@
         ]
       },
       "node": {
-        "multiple": false,
+        "multiple": true,
         "required": false,
         "types": [
           {
@@ -3166,7 +3180,7 @@
         ]
       },
       "serialize_name": {
-        "multiple": false,
+        "multiple": true,
         "required": false,
         "types": [
           {
@@ -3439,6 +3453,10 @@
         "multiple": false,
         "required": false,
         "types": [
+          {
+            "type": "identifier",
+            "named": true
+          },
           {
             "type": "string_literal",
             "named": true
@@ -3957,6 +3975,16 @@
         }
       ]
     }
+  },
+  {
+    "type": "by_reference_option",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "by_value_option",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "call_statement",
@@ -13081,6 +13109,10 @@
           "named": true
         },
         {
+          "type": "null_literal",
+          "named": true
+        },
+        {
           "type": "number_literal",
           "named": true
         }
@@ -14831,6 +14863,10 @@
           {
             "type": "identifier",
             "named": true
+          },
+          {
+            "type": "qualified_name",
+            "named": true
           }
         ]
       },
@@ -14850,6 +14886,10 @@
         "types": [
           {
             "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "qualified_name",
             "named": true
           }
         ]
@@ -15865,6 +15905,10 @@
         },
         {
           "type": "no_undo",
+          "named": true
+        },
+        {
+          "type": "null_literal",
           "named": true
         },
         {
@@ -17725,6 +17769,10 @@
         "required": false,
         "types": [
           {
+            "type": "identifier",
+            "named": true
+          },
+          {
             "type": "string_literal",
             "named": true
           }
@@ -19296,6 +19344,109 @@
       "types": [
         {
           "type": "string_literal",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "label_pfcolor_option",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "argument_reference",
+          "named": true
+        },
+        {
+          "type": "array_access",
+          "named": true
+        },
+        {
+          "type": "available_expression",
+          "named": true
+        },
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "boolean_literal",
+          "named": true
+        },
+        {
+          "type": "can_find_expression",
+          "named": true
+        },
+        {
+          "type": "conditional_expression",
+          "named": true
+        },
+        {
+          "type": "constant",
+          "named": true
+        },
+        {
+          "type": "dataset_reference",
+          "named": true
+        },
+        {
+          "type": "date_literal",
+          "named": true
+        },
+        {
+          "type": "function_call",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "locked_expression",
+          "named": true
+        },
+        {
+          "type": "new_expression",
+          "named": true
+        },
+        {
+          "type": "null_literal",
+          "named": true
+        },
+        {
+          "type": "number_literal",
+          "named": true
+        },
+        {
+          "type": "object_access",
+          "named": true
+        },
+        {
+          "type": "object_access_expression",
+          "named": true
+        },
+        {
+          "type": "parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "qualified_name",
+          "named": true
+        },
+        {
+          "type": "scoped_name",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
           "named": true
         }
       ]
@@ -25004,11 +25155,27 @@
       "required": false,
       "types": [
         {
-          "type": "constant",
+          "type": "append_option",
           "named": true
         },
         {
-          "type": "identifier",
+          "type": "bind_option",
+          "named": true
+        },
+        {
+          "type": "by_reference_option",
+          "named": true
+        },
+        {
+          "type": "by_value_option",
+          "named": true
+        },
+        {
+          "type": "extent_phrase",
+          "named": true
+        },
+        {
+          "type": "format_option",
           "named": true
         },
         {
@@ -25016,11 +25183,11 @@
           "named": true
         },
         {
-          "type": "no_undo",
+          "type": "label_option",
           "named": true
         },
         {
-          "type": "number_literal",
+          "type": "no_undo",
           "named": true
         }
       ]
@@ -38890,7 +39057,7 @@
     },
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "like_phrase",
@@ -39929,6 +40096,10 @@
   },
   {
     "type": "LABEL-FONT",
+    "named": false
+  },
+  {
+    "type": "LABEL-PFCOLOR",
     "named": false
   },
   {

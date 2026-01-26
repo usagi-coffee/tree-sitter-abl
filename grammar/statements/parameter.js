@@ -12,6 +12,7 @@ module.exports = ({ kw, tkw }) => ({
             kw("AS"),
             optional(kw("CLASS")),
             field("type", $._type_or_string),
+            optional(seq(kw("TO"), $.identifier)),
           ),
           seq(kw("LIKE"), field("like", $.__parameter_field_name)),
         ),

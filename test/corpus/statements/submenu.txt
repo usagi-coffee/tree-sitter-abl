@@ -96,3 +96,273 @@ DEFINE SUB-MENU smWithSkip
       (menu_item
         name: (identifier)
         (string_literal)))))
+
+================================================================================
+SUBMENU - WITH BACKGROUND COLORS
+================================================================================
+
+DEFINE SUB-MENU smColors
+  BGCOLOR 1
+  FGCOLOR 15
+  DCOLOR 5
+  PFCOLOR 3
+  MENU-ITEM miTest LABEL "Test".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (submenu_definition
+    name: (identifier)
+    (bgcolor
+      (number_literal))
+    (fgcolor
+      (number_literal))
+    (dcolor
+      (number_literal))
+    (pfcolor
+      (number_literal))
+    (menu_element
+      (menu_item
+        name: (identifier)
+        (string_literal)))))
+
+================================================================================
+SUBMENU - WITH FONT
+================================================================================
+
+DEFINE SUB-MENU smFont
+  FONT 2
+  MENU-ITEM mi1 LABEL "Item 1".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (submenu_definition
+    name: (identifier)
+    (font
+      (number_literal))
+    (menu_element
+      (menu_item
+        name: (identifier)
+        (string_literal)))))
+
+================================================================================
+SUBMENU - SUB-MENU-HELP
+================================================================================
+
+DEFINE SUB-MENU smHelp
+  SUB-MENU-HELP
+  MENU-ITEM miHelp LABEL "Help".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (submenu_definition
+    name: (identifier)
+    (submenu_help)
+    (menu_element
+      (menu_item
+        name: (identifier)
+        (string_literal)))))
+
+================================================================================
+SUBMENU - LIKE option
+================================================================================
+
+DEFINE SUB-MENU smLike LIKE smOriginal.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (submenu_definition
+    name: (identifier)
+    (like_option
+      like: (identifier))))
+
+================================================================================
+SUBMENU - MENU-ITEM without label
+================================================================================
+
+DEFINE SUB-MENU smNoLab
+  MENU-ITEM mi1
+  MENU-ITEM mi2
+  RULE
+  SKIP.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (submenu_definition
+    name: (identifier)
+    (menu_element
+      (menu_item
+        name: (identifier)))
+    (menu_element
+      (menu_item
+        name: (identifier)))
+    (menu_element
+      (rule))
+    (menu_element
+      (skip))))
+
+================================================================================
+SUBMENU - MENU-ITEM WITH ACCELERATOR
+================================================================================
+
+DEFINE SUB-MENU smAcc
+  MENU-ITEM miSave LABEL "Save..." ACCELERATOR "Ctrl+S"
+  MENU-ITEM miOpen LABEL "Open..." ACCELERATOR "Ctrl+O".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (submenu_definition
+    name: (identifier)
+    (menu_element
+      (menu_item
+        name: (identifier)
+        (string_literal)
+        (string_literal)))
+    (menu_element
+      (menu_item
+        name: (identifier)
+        (string_literal)
+        (string_literal)))))
+
+================================================================================
+SUBMENU - SUB-MENU DISABLED
+================================================================================
+
+DEFINE SUB-MENU smSub
+  SUB-MENU smNested1 DISABLED
+  SUB-MENU smNested2 DISABLED LABEL "Nested 2".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (submenu_definition
+    name: (identifier)
+    (menu_element
+      (submenu_item
+        name: (identifier)))
+    (menu_element
+      (submenu_item
+        name: (identifier)
+        (string_literal)))))
+
+================================================================================
+SUBMENU - MENU-ITEM DISABLED
+================================================================================
+
+DEFINE SUB-MENU SM-ITEM-DISABLED
+  MENU-ITEM mi1 DISABLED LABEL "Disabled"
+  MENU-ITEM mi2 LABEL "Enabled"
+  MENU-ITEM mi3 LABEL "Also Disabled" DISABLED.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (submenu_definition
+    name: (identifier)
+    (menu_element
+      (menu_item
+        name: (identifier)
+        (string_literal)))
+    (menu_element
+      (menu_item
+        name: (identifier)
+        (string_literal)))
+    (menu_element
+      (menu_item
+        name: (identifier)
+        (string_literal)))))
+
+================================================================================
+SUBMENU - RULE and SKIP
+================================================================================
+
+DEFINE SUB-MENU smMixed
+  MENU-ITEM miTop LABEL "Top"
+  RULE
+  MENU-ITEM miMid1 LABEL "Middle 1"
+  SKIP
+  MENU-ITEM miMid2 LABEL "Middle 2"
+  RULE
+  MENU-ITEM miBot LABEL "Bottom".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (submenu_definition
+    name: (identifier)
+    (menu_element
+      (menu_item
+        name: (identifier)
+        (string_literal)))
+    (menu_element
+      (rule))
+    (menu_element
+      (menu_item
+        name: (identifier)
+        (string_literal)))
+    (menu_element
+      (skip))
+    (menu_element
+      (menu_item
+        name: (identifier)
+        (string_literal)))
+    (menu_element
+      (rule))
+    (menu_element
+      (menu_item
+        name: (identifier)
+        (string_literal)))))
+
+================================================================================
+SUBMENU - All color options
+================================================================================
+
+DEFINE SUB-MENU smColors2
+  BGCOLOR 2
+  FGCOLOR 15
+  DCOLOR 7
+  PFCOLOR 4
+  FONT 3
+  SUB-MENU-HELP
+  MENU-ITEM miItem LABEL "Item".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (submenu_definition
+    name: (identifier)
+    (bgcolor
+      (number_literal))
+    (fgcolor
+      (number_literal))
+    (dcolor
+      (number_literal))
+    (pfcolor
+      (number_literal))
+    (font
+      (number_literal))
+    (submenu_help)
+    (menu_element
+      (menu_item
+        name: (identifier)
+        (string_literal)))))
+
+================================================================================
+SUBMENU - Minimal
+================================================================================
+
+DEFINE SUB-MENU s.
+DEF SUB-MENU sub.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (submenu_definition
+    name: (identifier))
+  (submenu_definition
+    name: (identifier)))

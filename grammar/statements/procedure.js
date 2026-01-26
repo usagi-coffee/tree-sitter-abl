@@ -30,8 +30,14 @@ module.exports = ({ kw, tkw }) => ({
       tkw("PARAM(ETER)?", "PARAMETER"),
       field("name", $.identifier),
       $.__procedure_variable_type_phrase,
-      optional(alias($.__procedure_initial_option, $.initial_option)),
-      optional(alias($.__procedure_no_undo, $.no_undo)),
+      repeat(
+        choice(
+          alias($.__procedure_initial_option, $.initial_option),
+          alias($.__procedure_format_option, $.format_option),
+          alias($.__procedure_label_option, $.label_option),
+          alias($.__procedure_no_undo, $.no_undo),
+        ),
+      ),
     ),
 
   __procedure_table_parameter: ($) =>
@@ -81,11 +87,11 @@ module.exports = ({ kw, tkw }) => ({
         seq(kw("AS"), optional(kw("CLASS")), field("type", $._type_or_string)),
         seq(kw("LIKE"), field("like", $.__procedure_field_name)),
       ),
-      optional($.__procedure_extent_phrase),
+      optional(alias($.__procedure_extent_phrase, $.extent_phrase)),
     ),
 
   __procedure_extent_phrase: ($) =>
-    seq(kw("EXTENT"), optional($.__procedure_extent_size)),
+    seq(tkw("EXTENT"), optional($.__procedure_extent_size)),
 
   __procedure_initial_option: ($) =>
     seq(
@@ -94,16 +100,34 @@ module.exports = ({ kw, tkw }) => ({
     ),
 
   __procedure_no_undo: ($) => tkw("NO-UNDO"),
+  __procedure_format_option: ($) => seq(kw("FORMAT"), $.string_literal),
+  __procedure_label_option: ($) =>
+    seq(kw("LABEL"), $.string_literal, repeat(seq(",", $.string_literal))),
   __procedure_extent_size: ($) =>
     choice(
       $.number_literal,
       alias($.constant_expression, $.constant),
       $.identifier,
+      $.null_literal,
     ),
   __procedure_field_name: ($) => choice($.qualified_name, $.identifier),
   __procedure_record_name: ($) => choice($.qualified_name, $.identifier),
   __procedure_table_parameter_option: ($) =>
-    choice(tkw("APPEND"), tkw("BIND"), tkw("BY-VALUE")),
+    choice(
+      alias($.__procedure_append_option, $.append_option),
+      alias($.__procedure_bind_option, $.bind_option),
+      alias($.__procedure_by_value_option, $.by_value_option),
+      alias($.__procedure_no_undo, $.no_undo),
+    ),
+  __procedure_append_option: ($) => tkw("APPEND"),
   __procedure_handle_parameter_option: ($) =>
-    choice(tkw("BIND"), tkw("BY-VALUE")),
+    choice(
+      alias($.__procedure_bind_option, $.bind_option),
+      alias($.__procedure_by_value_option, $.by_value_option),
+      alias($.__procedure_by_reference_option, $.by_reference_option),
+      alias($.__procedure_no_undo, $.no_undo),
+    ),
+  __procedure_bind_option: ($) => tkw("BIND"),
+  __procedure_by_value_option: ($) => tkw("BY-VALUE"),
+  __procedure_by_reference_option: ($) => tkw("BY-REFERENCE"),
 });

@@ -1,10 +1,113 @@
 ================================================================================
-QUERY DEFINITION
+QUERY DEFINITION - Basic Syntax
 ================================================================================
 
-DEFINE QUERY qMain FOR buf1 FIELDS (id, name), buf2 EXCEPT (skip) CACHE 10 SCROLLING RCODE-INFORMATION.
-DEF NEW SHARED QUERY qShared FOR shBuf.
-DEF PRIVATE STATIC QUERY qClass FOR classBuf.
+DEFINE QUERY qMain FOR Customer.
+DEF QUERY qOrder FOR Sales.Order.
+DEFINE QUERY qTemp FOR ttData.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (query_definition
+    name: (identifier)
+    (query_table_list
+      table: (identifier)))
+  (query_definition
+    name: (identifier)
+    (query_table_list
+      table: (qualified_name
+        left: (identifier)
+        right: (identifier))))
+  (query_definition
+    name: (identifier)
+    (query_table_list
+      table: (identifier))))
+
+================================================================================
+QUERY DEFINITION - Multiple Tables
+================================================================================
+
+DEFINE QUERY qMulti FOR Customer, Order, OrderLine.
+DEF QUERY q2 FOR ttHeader, ttLine.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (query_definition
+    name: (identifier)
+    (query_table_list
+      table: (identifier)
+      table: (identifier)
+      table: (identifier)))
+  (query_definition
+    name: (identifier)
+    (query_table_list
+      table: (identifier)
+      table: (identifier))))
+
+================================================================================
+QUERY DEFINITION - FIELD Lists with FIELDS
+================================================================================
+
+DEFINE QUERY qFields FOR Customer FIELDS (CustNum, Name, City).
+DEF QUERY qOrder FOR Sales.Order FIELDS (OrderNum, CustNum, OrderDate).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (query_definition
+    name: (identifier)
+    (query_table_list
+      table: (identifier)
+      (field_list
+        (identifier)
+        (identifier)
+        (identifier))))
+  (query_definition
+    name: (identifier)
+    (query_table_list
+      table: (qualified_name
+        left: (identifier)
+        right: (identifier))
+      (field_list
+        (identifier)
+        (identifier)
+        (identifier)))))
+
+================================================================================
+QUERY DEFINITION - FIELD Lists with EXCEPT
+================================================================================
+
+DEFINE QUERY qExcept FOR Customer EXCEPT (Notes, Comments).
+DEF QUERY qOrder FOR Sales.Order EXCEPT (Status, Flag).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (query_definition
+    name: (identifier)
+    (query_table_list
+      table: (identifier)
+      (field_list
+        (identifier)
+        (identifier))))
+  (query_definition
+    name: (identifier)
+    (query_table_list
+      table: (qualified_name
+        left: (identifier)
+        right: (identifier))
+      (field_list
+        (identifier)
+        (identifier)))))
+
+================================================================================
+QUERY DEFINITION - Mix of FIELDS and EXCEPT
+================================================================================
+
+DEFINE QUERY qMixed1 FOR Customer FIELDS (CustNum, Name), Order EXCEPT (Note).
+DEF QUERY qMixed2 FOR ttHeader FIELDS (ID), ttLine EXCEPT (Skip), ttDetail FIELDS (Code).
 
 --------------------------------------------------------------------------------
 
@@ -18,10 +121,175 @@ DEF PRIVATE STATIC QUERY qClass FOR classBuf.
         (identifier))
       table: (identifier)
       (field_list
-        (identifier)))
+        (identifier))))
+  (query_definition
+    name: (identifier)
+    (query_table_list
+      table: (identifier)
+      (field_list
+        (identifier))
+      table: (identifier)
+      (field_list
+        (identifier))
+      table: (identifier)
+      (field_list
+        (identifier)))))
+
+================================================================================
+QUERY DEFINITION - CACHE Option
+================================================================================
+
+DEFINE QUERY qCache FOR Customer CACHE 100.
+DEF QUERY qCache2 FOR Sales.Order CACHE 50.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (query_definition
+    name: (identifier)
+    (query_table_list
+      table: (identifier))
     cache: (number_literal))
   (query_definition
+    name: (identifier)
+    (query_table_list
+      table: (qualified_name
+        left: (identifier)
+        right: (identifier)))
+    cache: (number_literal)))
+
+================================================================================
+QUERY DEFINITION - SCROLLING Option
+================================================================================
+
+DEFINE QUERY qScroll FOR Customer SCROLLING.
+DEF QUERY qScroll2 FOR Sales.Order SCROLLING.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (query_definition
+    name: (identifier)
+    (query_table_list
+      table: (identifier)))
+  (query_definition
+    name: (identifier)
+    (query_table_list
+      table: (qualified_name
+        left: (identifier)
+        right: (identifier)))))
+
+================================================================================
+QUERY DEFINITION - RCODE-INFORMATION Option
+================================================================================
+
+DEFINE QUERY qRcode FOR Customer RCODE-INFORMATION.
+DEF QUERY qRcode2 FOR Sales.Order SCROLLING RCODE-INFORMATION.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (query_definition
+    name: (identifier)
+    (query_table_list
+      table: (identifier)))
+  (query_definition
+    name: (identifier)
+    (query_table_list
+      table: (qualified_name
+        left: (identifier)
+        right: (identifier)))))
+
+================================================================================
+QUERY DEFINITION - All Options Combined
+================================================================================
+
+DEFINE QUERY qFull FOR Customer FIELDS (CustNum, Name)
+  CACHE 100
+  SCROLLING
+  RCODE-INFORMATION.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (query_definition
+    name: (identifier)
+    (query_table_list
+      table: (identifier)
+      (field_list
+        (identifier)
+        (identifier)))
+    cache: (number_literal)))
+
+================================================================================
+QUERY DEFINITION - Shared Scopes
+================================================================================
+
+DEFINE NEW SHARED QUERY qShared FOR Customer.
+DEFINE SHARED QUERY qUse FOR Order.
+DEF NEW SHARED QUERY qTemp FOR ttData.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (query_definition
     (shared_variable_scope)
+    name: (identifier)
+    (query_table_list
+      table: (identifier)))
+  (query_definition
+    (shared_variable_scope)
+    name: (identifier)
+    (query_table_list
+      table: (identifier)))
+  (query_definition
+    (shared_variable_scope)
+    name: (identifier)
+    (query_table_list
+      table: (identifier))))
+
+================================================================================
+QUERY DEFINITION - Access Modifiers
+================================================================================
+
+DEFINE PRIVATE QUERY qPriv FOR Customer.
+DEFINE PROTECTED QUERY qProt FOR Sales.Order.
+DEF PRIVATE QUERY qTemp FOR ttData.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (query_definition
+    (access_modifier)
+    name: (identifier)
+    (query_table_list
+      table: (identifier)))
+  (query_definition
+    (access_modifier)
+    name: (identifier)
+    (query_table_list
+      table: (qualified_name
+        left: (identifier)
+        right: (identifier))))
+  (query_definition
+    (access_modifier)
+    name: (identifier)
+    (query_table_list
+      table: (identifier))))
+
+================================================================================
+QUERY DEFINITION - STATIC Modifier
+================================================================================
+
+DEFINE STATIC QUERY qStatic FOR Customer.
+DEF PROTECTED STATIC QUERY qProtStatic FOR Sales.Order.
+DEFINE PRIVATE STATIC QUERY qPrivStatic FOR ttData.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (query_definition
+    (static_modifier)
     name: (identifier)
     (query_table_list
       table: (identifier)))
@@ -30,4 +298,99 @@ DEF PRIVATE STATIC QUERY qClass FOR classBuf.
     (static_modifier)
     name: (identifier)
     (query_table_list
+      table: (qualified_name
+        left: (identifier)
+        right: (identifier))))
+  (query_definition
+    (access_modifier)
+    (static_modifier)
+    name: (identifier)
+    (query_table_list
       table: (identifier))))
+
+================================================================================
+QUERY DEFINITION - Qualified Table Names
+================================================================================
+
+DEFINE QUERY qQual FOR Sales.Customer.
+DEFINE QUERY qFull FOR Database.Schema.Table.
+DEF QUERY q2 FOR MyProc.TempTable.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (query_definition
+    name: (identifier)
+    (query_table_list
+      table: (qualified_name
+        left: (identifier)
+        right: (identifier))))
+  (query_definition
+    name: (identifier)
+    (query_table_list
+      table: (qualified_name
+        left: (identifier)
+        right: (identifier)
+        right: (identifier))))
+  (query_definition
+    name: (identifier)
+    (query_table_list
+      table: (qualified_name
+        left: (identifier)
+        right: (identifier)))))
+
+================================================================================
+QUERY DEFINITION - Single Field
+================================================================================
+
+DEFINE QUERY qSingle FOR Customer FIELDS (CustNum).
+DEF QUERY qOne FOR Sales.Order EXCEPT (hidden).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (query_definition
+    name: (identifier)
+    (query_table_list
+      table: (identifier)
+      (field_list
+        (identifier))))
+  (query_definition
+    name: (identifier)
+    (query_table_list
+      table: (qualified_name
+        left: (identifier)
+        right: (identifier))
+      (field_list
+        (identifier)))))
+
+================================================================================
+QUERY DEFINITION - Complex Multi-Table Combinations
+================================================================================
+
+DEFINE QUERY qComplex FOR Customer FIELDS (CustNum, Name)
+  , Order FIELDS (OrderNum, CustNum)
+  , OrderLine FIELDS (LineNum, ItemNum)
+  CACHE 200
+  SCROLLING
+  RCODE-INFORMATION.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (query_definition
+    name: (identifier)
+    (query_table_list
+      table: (identifier)
+      (field_list
+        (identifier)
+        (identifier))
+      table: (identifier)
+      (field_list
+        (identifier)
+        (identifier))
+      table: (identifier)
+      (field_list
+        (identifier)
+        (identifier)))
+    cache: (number_literal)))

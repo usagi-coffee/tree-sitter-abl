@@ -55,7 +55,7 @@ module.exports = ({ kw, tkw }) => ({
       field("name", $.identifier),
       optional(alias($.__temp_table_like_phrase, $.like_phrase)),
       optional(alias($.__temp_table_no_undo, $.no_undo)),
-      repeat1(
+      repeat(
         choice(
           alias($.__temp_table_field, $.work_table_field),
           alias($.__temp_table_index, $.work_table_index),

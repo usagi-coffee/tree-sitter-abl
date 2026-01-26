@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+module.exports = ({ kw, tkw }) => ({
   buffer_definition: ($) =>
     seq(
       choice(kw("DEFINE"), kw("DEF")),
@@ -16,17 +16,15 @@ module.exports = ({ kw }) => ({
       kw("FOR"),
       optional(kw("TEMP-TABLE")),
       field("table", $.__buffer_table_name),
-      optional(kw("PRESELECT")),
-      optional(seq(kw("LABEL"), field("label", $.__buffer_name_or_string))),
-      optional(
-        seq(kw("NAMESPACE-URI"), field("namespace_uri", $.string_literal)),
-      ),
-      optional(
-        seq(kw("NAMESPACE-PREFIX"), field("namespace_prefix", $.string_literal)),
-      ),
-      optional(seq(kw("XML-NODE-NAME"), field("node", $.string_literal))),
-      optional(
-        seq(kw("SERIALIZE-NAME"), field("serialize_name", $.string_literal)),
+      repeat(
+        choice(
+          tkw("PRESELECT"),
+          seq(kw("LABEL"), field("label", $.__buffer_name_or_string)),
+          seq(kw("NAMESPACE-URI"), field("namespace_uri", $.string_literal)),
+          seq(kw("NAMESPACE-PREFIX"), field("namespace_prefix", $.string_literal)),
+          seq(kw("XML-NODE-NAME"), field("node", $.string_literal)),
+          seq(kw("SERIALIZE-NAME"), field("serialize_name", $.string_literal)),
+        ),
       ),
       $._terminator,
     ),

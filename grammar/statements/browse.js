@@ -61,6 +61,7 @@ module.exports = ({ kw, tkw }) => ({
       alias($.__browse_label_dcolor_option, $.label_dcolor_option),
       alias($.__browse_label_bgcolor_option, $.label_bgcolor_option),
       alias($.__browse_label_fgcolor_option, $.label_fgcolor_option),
+      alias($.__browse_label_pfcolor_option, $.label_pfcolor_option),
       alias($.__browse_help_option, $.help_option),
       alias($.__browse_validate_option, $.validate_option),
       alias($.__browse_auto_return_option, $.auto_return_option),
@@ -111,6 +112,7 @@ module.exports = ({ kw, tkw }) => ({
   __browse_label_dcolor_option: ($) => seq(tkw("LABEL-DCOLOR"), $._expression),
   __browse_label_bgcolor_option: ($) => seq(tkw("LABEL-BGCOLOR"), $._expression),
   __browse_label_fgcolor_option: ($) => seq(tkw("LABEL-FGCOLOR"), $._expression),
+  __browse_label_pfcolor_option: ($) => seq(tkw("LABEL-PFCOLOR"), $._expression),
   __browse_help_option: ($) => seq(kw("HELP"), $.string_literal),
   __browse_validate_option: ($) =>
     seq(kw("VALIDATE"), "(", $._expression, ",", $._expression, ")"),
@@ -146,10 +148,10 @@ module.exports = ({ kw, tkw }) => ({
 
   __browse_enable_phrase: ($) =>
     seq(
-      kw("ENABLE"),
+      tkw("ENABLE"),
       optional(
         choice(
-          kw("ALL"),
+          tkw("ALL"),
           repeat1(field("field", $.identifier)),
         ),
       ),

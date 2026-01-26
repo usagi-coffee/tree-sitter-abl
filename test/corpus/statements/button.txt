@@ -68,3 +68,414 @@ DEF BUTTON btnEnd AUTO-ENDKEY LIKE btnTestButton.
     (button_option)
     (button_option
       like: (identifier))))
+
+================================================================================
+BUTTON - AUTO-GO Only
+================================================================================
+
+DEFINE BUTTON btnAuto AUTO-GO.
+DEF BUTTON btnAuto2 AUTO-GO.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (button_definition
+    name: (identifier)
+    (button_option))
+  (button_definition
+    name: (identifier)
+    (button_option)))
+
+================================================================================
+BUTTON - AUTO-ENDKEY Only
+================================================================================
+
+DEFINE BUTTON btnEndKey AUTO-ENDKEY.
+DEF BUTTON btnEK AUTO-ENDKEY.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (button_definition
+    name: (identifier)
+    (button_option))
+  (button_definition
+    name: (identifier)
+    (button_option)))
+
+================================================================================
+BUTTON - DEFAULT Only
+================================================================================
+
+DEFINE BUTTON btnDefault DEFAULT.
+DEF BUTTON btnDef DEFAULT.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (button_definition
+    name: (identifier)
+    (button_option))
+  (button_definition
+    name: (identifier)
+    (button_option)))
+
+================================================================================
+BUTTON - LABEL Only
+================================================================================
+
+DEFINE BUTTON btnLabel LABEL "Submit".
+DEF BUTTON btnLbl LABEL btnLbl.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (button_definition
+    name: (identifier)
+    (button_option
+      label: (string_literal)))
+  (button_definition
+    name: (identifier)
+    (button_option
+      label: (identifier))))
+
+================================================================================
+BUTTON - SIZE Only
+================================================================================
+
+DEFINE BUTTON btnSize SIZE 10 BY 20.
+DEF BUTTON btnSz SIZE-CHARS 15 BY 25.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (button_definition
+    name: (identifier)
+    (button_option
+      width: (number_literal)
+      height: (number_literal)))
+  (button_definition
+    name: (identifier)
+    (button_option
+      width: (number_literal)
+      height: (number_literal))))
+
+================================================================================
+BUTTON - IMAGE Only
+================================================================================
+
+DEFINE BUTTON btnImg IMAGE FILE "up.png".
+DEF BUTTON btnImg2 IMAGE-UP FILE "up.png".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (button_definition
+    name: (identifier)
+    (button_option
+      filename: (string_literal)))
+  (button_definition
+    name: (identifier)
+    (button_option
+      filename: (string_literal))))
+
+================================================================================
+BUTTON - IMAGE-DOWN Only
+================================================================================
+
+DEFINE BUTTON btnDown IMAGE-DOWN FILE "down.png".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (button_definition
+    name: (identifier)
+    (button_option
+      filename: (string_literal))))
+
+================================================================================
+BUTTON - IMAGE-INSENSITIVE Only
+================================================================================
+
+DEFINE BUTTON btnIns IMAGE-INSENSITIVE FILE "ins.png".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (button_definition
+    name: (identifier)
+    (button_option
+      filename: (string_literal))))
+
+================================================================================
+BUTTON - NO-FOCUS Only
+================================================================================
+
+DEFINE BUTTON btnNoFocus NO-FOCUS.
+DEF BUTTON btnNF NO-FOCUS FLAT-BUTTON.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (button_definition
+    name: (identifier)
+    (button_option))
+  (button_definition
+    name: (identifier)
+    (button_option)))
+
+================================================================================
+BUTTON - DROP-TARGET Only
+================================================================================
+
+DEFINE BUTTON btnDrop DROP-TARGET.
+DEF BUTTON btnDT DROP-TARGET.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (button_definition
+    name: (identifier)
+    (button_option))
+  (button_definition
+    name: (identifier)
+    (button_option)))
+
+================================================================================
+BUTTON - NO-CONVERT-3D-COLORS Only
+================================================================================
+
+DEFINE BUTTON btnNoConvert NO-CONVERT-3D-COLORS.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (button_definition
+    name: (identifier)
+    (button_option)))
+
+================================================================================
+BUTTON - TOOLTIP Only
+================================================================================
+
+DEFINE BUTTON btnTool TOOLTIP "Button tooltip".
+DEF BUTTON btnTT TOOLTIP text.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (button_definition
+    name: (identifier)
+    (button_option
+      (string_literal)))
+  (button_definition
+    name: (identifier)
+    (button_option
+      (identifier))))
+
+================================================================================
+BUTTON - PRIVATE Modifier
+================================================================================
+
+DEFINE PRIVATE BUTTON btnPriv LABEL "Private".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (button_definition
+    name: (identifier)
+    (button_option
+      label: (string_literal))))
+
+================================================================================
+BUTTON - All Color Options
+================================================================================
+
+DEFINE BUTTON btnColors BGCOLOR 1 FGCOLOR 2 DCOLOR 3 PFCOLOR 4.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (button_definition
+    name: (identifier)
+    (button_option
+      (number_literal))
+    (button_option
+      (number_literal))
+    (button_option
+      (number_literal))
+    (button_option
+      (number_literal))))
+
+================================================================================
+BUTTON - FONT Only
+================================================================================
+
+DEFINE BUTTON btnFont FONT 2.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (button_definition
+    name: (identifier)
+    (button_option
+      (number_literal))))
+
+================================================================================
+BUTTON - CONTEXT-HELP-ID Only
+================================================================================
+
+DEFINE BUTTON btnContext CONTEXT-HELP-ID 100.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (button_definition
+    name: (identifier)
+    (button_option
+      (number_literal))))
+
+================================================================================
+BUTTON - MOUSE-POINTER Only
+================================================================================
+
+DEFINE BUTTON btnPointer MOUSE-POINTER "hand".
+DEF BUTTON btnMP MOUSE-POINTER "default".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (button_definition
+    name: (identifier)
+    (button_option
+      (string_literal)))
+  (button_definition
+    name: (identifier)
+    (button_option
+      (string_literal))))
+
+================================================================================
+BUTTON - LIKE Only
+================================================================================
+
+DEFINE BUTTON btnLike2 LIKE otherBtn.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (button_definition
+    name: (identifier)
+    (button_option
+      like: (identifier))))
+
+================================================================================
+BUTTON - IMAGE with FROM X Y
+================================================================================
+
+DEFINE BUTTON btnImgXY IMAGE FILE "img.png" IMAGE-SIZE 50 BY 50 FROM X 10 Y 20.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (button_definition
+    name: (identifier)
+    (button_option
+      filename: (string_literal)
+      width: (number_literal)
+      height: (number_literal)
+      (number_literal)
+      (number_literal))))
+
+================================================================================
+BUTTON - IMAGE with FROM ROW COLUMN
+================================================================================
+
+DEFINE BUTTON btnImgRC IMAGE FILE "img.png" FROM ROW 5 COLUMN 10.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (button_definition
+    name: (identifier)
+    (button_option
+      filename: (string_literal)
+      (number_literal)
+      (number_literal))))
+
+================================================================================
+BUTTON - Minimal
+================================================================================
+
+DEFINE BUTTON b.
+def button btn.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (button_definition
+    name: (identifier))
+  (button_definition
+    name: (identifier)))
+
+================================================================================
+BUTTON - Complete Combination
+================================================================================
+
+DEFINE BUTTON btnFull
+  AUTO-GO
+  DEFAULT
+  BGCOLOR 5
+  FGCOLOR 10
+  DCOLOR 15
+  PFCOLOR 20
+  FONT 3
+  CONTEXT-HELP-ID 100
+  MOUSE-POINTER "hand"
+  LABEL "Complete"
+  IMAGE FILE "up.png" IMAGE-SIZE 30 BY 30
+  IMAGE-DOWN FILE "down.png" IMAGE-SIZE 30 BY 30
+  SIZE-PIXELS 40 BY 40
+  NO-FOCUS
+  NO-CONVERT-3D-COLORS
+  TOOLTIP "Complete button"
+  DROP-TARGET.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (button_definition
+    name: (identifier)
+    (button_option)
+    (button_option)
+    (button_option
+      (number_literal))
+    (button_option
+      (number_literal))
+    (button_option
+      (number_literal))
+    (button_option
+      (number_literal))
+    (button_option
+      (number_literal))
+    (button_option
+      (number_literal))
+    (button_option
+      (string_literal))
+    (button_option
+      label: (string_literal))
+    (button_option
+      filename: (string_literal)
+      width: (number_literal)
+      height: (number_literal))
+    (button_option
+      filename: (string_literal)
+      width: (number_literal)
+      height: (number_literal))
+    (button_option
+      width: (number_literal)
+      height: (number_literal))
+    (button_option)
+    (button_option)
+    (button_option
+      (string_literal))
+    (button_option)))

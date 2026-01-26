@@ -1,16 +1,12 @@
 ================================================================================
-PARAMETER DEFINITION
+PARAMETER DEFINITION - Direction Modifiers
 ================================================================================
 
-DEFINE INPUT PARAMETER par_adres AS CHARACTER.
-DEFINE INPUT PARAMETER par_opis AS CHARACTER INITIAL ?.
-DEFINE OUTPUT PARAMETER outVal AS INTEGER NO-UNDO.
-DEFINE INPUT-OUTPUT PARAMETER TABLE-HANDLE hNode.
-DEFINE OUTPUT PARAMETER TABLE-HANDLE hData.
-DEFINE INPUT PARAMETER DATASET FOR dsAudPolicy.
-DEFINE INPUT PARAMETER DATASET-HANDLE hDset.
-DEFINE PARAMETER BUFFER p_Buf FOR _Field.
-DEFINE PARAMETER BUFFER pTemp FOR TEMP-TABLE ttAudit PRESELECT.
+DEFINE INPUT PARAMETER p1 AS CHARACTER.
+DEFINE OUTPUT PARAMETER p2 AS INTEGER.
+DEFINE INPUT-OUTPUT PARAMETER p3 AS DECIMAL.
+DEFINE RETURN PARAMETER pResult AS LOGICAL.
+DEF RETURN PARAMETER retval AS INTEGER NO-UNDO.
 
 --------------------------------------------------------------------------------
 
@@ -20,24 +16,371 @@ DEFINE PARAMETER BUFFER pTemp FOR TEMP-TABLE ttAudit PRESELECT.
     type: (identifier))
   (parameter_definition
     name: (identifier)
+    type: (identifier))
+  (parameter_definition
+    name: (identifier)
+    type: (identifier))
+  (parameter_definition
+    name: (identifier)
+    type: (identifier))
+  (parameter_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo)))
+
+================================================================================
+PARAMETER DEFINITION - AS Type Phrase with CLASS
+================================================================================
+
+DEFINE INPUT PARAMETER pCust AS CLASS Customer.
+DEFINE OUTPUT PARAMETER pHnd AS HANDLE.
+DEFINE INPUT-OUTPUT PARAMETER pObj AS CLASS Some.Type.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (parameter_definition
+    name: (identifier)
+    type: (identifier))
+  (parameter_definition
+    name: (identifier)
+    type: (identifier))
+  (parameter_definition
+    name: (identifier)
+    type: (qualified_name
+      left: (identifier)
+      right: (identifier))))
+
+================================================================================
+PARAMETER DEFINITION - LIKE Phrase
+================================================================================
+
+DEFINE INPUT PARAMETER pName LIKE Customer.Name.
+DEFINE OUTPUT PARAMETER pCode LIKE Customer.CustNum.
+DEFINE INPUT-OUTPUT PARAMETER pField LIKE SalesOrderDetail.LineNum.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (parameter_definition
+    name: (identifier)
+    like: (qualified_name
+      left: (identifier)
+      right: (identifier)))
+  (parameter_definition
+    name: (identifier)
+    like: (qualified_name
+      left: (identifier)
+      right: (identifier)))
+  (parameter_definition
+    name: (identifier)
+    like: (qualified_name
+      left: (identifier)
+      right: (identifier))))
+
+================================================================================
+PARAMETER DEFINITION - EXTENT Phrase
+================================================================================
+
+DEFINE INPUT PARAMETER pArray AS CHARACTER EXTENT.
+DEFINE INPUT PARAMETER pArray10 AS INTEGER EXTENT 10.
+DEFINE OUTPUT PARAMETER pArraySize AS DECIMAL EXTENT {&MAX_SIZE}.
+DEFINE INPUT-OUTPUT PARAMETER pIds AS INTEGER EXTENT ?.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (parameter_definition
+    name: (identifier)
+    type: (identifier)
+    (extent_phrase))
+  (parameter_definition
+    name: (identifier)
+    type: (identifier)
+    (extent_phrase
+      (number_literal)))
+  (parameter_definition
+    name: (identifier)
+    type: (identifier)
+    (extent_phrase
+      (constant
+        (identifier))))
+  (parameter_definition
+    name: (identifier)
+    type: (identifier)
+    (extent_phrase
+      (null_literal))))
+
+================================================================================
+PARAMETER DEFINITION - INITIAL Option
+================================================================================
+
+DEFINE INPUT PARAMETER pName AS CHARACTER INITIAL "Test".
+DEFINE INPUT PARAMETER pNum AS INTEGER INITIAL 100.
+DEFINE OUTPUT PARAMETER pArray AS INTEGER EXTENT 3 INITIAL [1, 2, 3].
+DEFINE INPUT-OUTPUT PARAMETER pVals AS DECIMAL INITIAL [] NO-UNDO.
+DEF INPUT PARAMETER pNull AS CHARACTER INITIAL ?.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (parameter_definition
+    name: (identifier)
     type: (identifier)
     (initial_option
-      (null_literal)))
+      (string_literal)))
+  (parameter_definition
+    name: (identifier)
+    type: (identifier)
+    (initial_option
+      (number_literal)))
+  (parameter_definition
+    name: (identifier)
+    type: (identifier)
+    (extent_phrase
+      (number_literal))
+    (initial_option
+      (number_literal)
+      (number_literal)
+      (number_literal)))
+  (parameter_definition
+    name: (identifier)
+    type: (identifier)
+    (initial_option)
+    (no_undo))
+  (parameter_definition
+    name: (identifier)
+    type: (identifier)
+    (initial_option
+      (null_literal))))
+
+================================================================================
+PARAMETER DEFINITION - LABEL Option
+================================================================================
+
+DEFINE INPUT PARAMETER pLabel AS CHARACTER LABEL "Parameter Label".
+DEFINE OUTPUT PARAMETER pMulti AS INTEGER LABEL "First", "Second", "Third".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (parameter_definition
+    name: (identifier)
+    type: (identifier)
+    (label_option
+      (string_literal)))
+  (parameter_definition
+    name: (identifier)
+    type: (identifier)
+    (label_option
+      (string_literal)
+      (string_literal)
+      (string_literal))))
+
+================================================================================
+PARAMETER DEFINITION - FORMAT Option
+================================================================================
+
+DEFINE INPUT PARAMETER pCode AS CHARACTER FORMAT "x(10)".
+DEFINE OUTPUT PARAMETER pNum AS DECIMAL FORMAT "z,zzz.99".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (parameter_definition
+    name: (identifier)
+    type: (identifier)
+    (format_option
+      (string_literal)))
+  (parameter_definition
+    name: (identifier)
+    type: (identifier)
+    (format_option
+      (string_literal))))
+
+================================================================================
+PARAMETER DEFINITION - NO-UNDO Option
+================================================================================
+
+DEFINE INPUT PARAMETER pVal AS INTEGER NO-UNDO.
+DEFINE INPUT-OUTPUT PARAMETERpData AS CHARACTER NO-UNDO.
+
+--------------------------------------------------------------------------------
+
+(source_code
   (parameter_definition
     name: (identifier)
     type: (identifier)
     (no_undo))
   (parameter_definition
-    table_handle: (identifier))
+    name: (identifier)
+    type: (identifier)
+    (no_undo)))
+
+================================================================================
+PARAMETER DEFINITION - BY-VALUE Option
+================================================================================
+
+DEFINE INPUT PARAMETER TABLE-HANDLE hTable BY-VALUE.
+DEFINE INPUT-OUTPUT PARAMETER DATASET-HANDLE hData BY-VALUE NO-UNDO.
+
+--------------------------------------------------------------------------------
+
+(source_code
   (parameter_definition
-    table_handle: (identifier))
+    table_handle: (identifier)
+    (by_value_option))
+  (parameter_definition
+    dataset_handle: (identifier)
+    (by_value_option)
+    (no_undo)))
+
+================================================================================
+PARAMETER DEFINITION - BY-REFERENCE Option
+================================================================================
+
+DEFINE INPUT PARAMETER TABLE-HANDLE hTable BY-REFERENCE.
+DEFINE INPUT-OUTPUT PARAMETER DATASET-HANDLE hData BY-REFERENCE BIND.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (parameter_definition
+    table_handle: (identifier)
+    (by_reference_option))
+  (parameter_definition
+    dataset_handle: (identifier)
+    (by_reference_option)
+    (bind_option)))
+
+================================================================================
+PARAMETER DEFINITION - APPEND Option
+================================================================================
+
+DEFINE INPUT PARAMETER TABLE FOR ttOrders APPEND.
+DEFINE OUTPUT PARAMETER DATASET FOR dsAudit APPEND BIND.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (parameter_definition
+    table: (identifier)
+    (append_option))
+  (parameter_definition
+    dataset: (identifier)
+    (append_option)
+    (bind_option)))
+
+================================================================================
+PARAMETER DEFINITION - BIND Option
+================================================================================
+
+DEFINE INPUT-OUTPUT PARAMETER TABLE-HANDLE hTable BIND.
+DEFINE OUTPUT PARAMETER DATASET-HANDLE hData BIND NO-UNDO.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (parameter_definition
+    table_handle: (identifier)
+    (bind_option))
+  (parameter_definition
+    dataset_handle: (identifier)
+    (bind_option)
+    (no_undo)))
+
+================================================================================
+PARAMETER DEFINITION - TABLE and DATASET Parameters
+================================================================================
+
+DEFINE INPUT PARAMETER TABLE FOR ttCustomer.
+DEFINE OUTPUT PARAMETER TABLE FOR ttOrder NO-UNDO.
+DEFINE INPUT-OUTPUT PARAMETER TABLE FOR ttLine NO-UNDO.
+DEFINE INPUT PARAMETER DATASET FOR dsInventory.
+DEFINE OUTPUT PARAMETER DATASET-HANDLE hDataset.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (parameter_definition
+    table: (identifier))
+  (parameter_definition
+    table: (identifier)
+    (no_undo))
+  (parameter_definition
+    table: (identifier)
+    (no_undo))
   (parameter_definition
     dataset: (identifier))
   (parameter_definition
-    dataset_handle: (identifier))
+    dataset_handle: (identifier)))
+
+================================================================================
+PARAMETER DEFINITION - BUFFER Parameters
+================================================================================
+
+DEFINE PARAMETER BUFFER pCust FOR Customer.
+DEFINE PARAMETER BUFFER pTemp FOR TEMP-TABLE ttOrder PRESELECT.
+
+--------------------------------------------------------------------------------
+
+(source_code
   (parameter_definition
     name: (identifier)
     table: (identifier))
   (parameter_definition
     name: (identifier)
     table: (identifier)))
+
+================================================================================
+PARAMETER DEFINITION - Combinations
+================================================================================
+
+DEFINE INPUT PARAMETER pCombo AS INTEGER FORMAT ">>>>9" INITIAL 0 LABEL "Count" NO-UNDO.
+DEFINE OUTPUT PARAMETER pArr AS INTEGER EXTENT 10 INITIAL [1,2,3] LABEL "Array" FORMAT "zz9".
+DEF INPUT-OUTPUT PARAMETER pStr LIKE Customer.Name INITIAL "" NO-UNDO.
+DEFINE INPUT PARAMETER pClass AS CLASS Customer NO-UNDO.
+DEFINE RETURN PARAMETER pRes AS LOGICAL NO-UNDO.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (parameter_definition
+    name: (identifier)
+    type: (identifier)
+    (format_option
+      (string_literal))
+    (initial_option
+      (number_literal))
+    (label_option
+      (string_literal))
+    (no_undo))
+  (parameter_definition
+    name: (identifier)
+    type: (identifier)
+    (extent_phrase
+      (number_literal))
+    (initial_option
+      (number_literal)
+      (number_literal)
+      (number_literal))
+    (label_option
+      (string_literal))
+    (format_option
+      (string_literal)))
+  (parameter_definition
+    name: (identifier)
+    like: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (initial_option
+      (string_literal))
+    (no_undo))
+  (parameter_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (parameter_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo)))

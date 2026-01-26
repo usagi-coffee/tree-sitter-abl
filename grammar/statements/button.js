@@ -70,7 +70,7 @@ module.exports = ({ kw, tkw }) => ({
       ),
     ),
   __button_mouse_pointer: ($) => seq(tkw("MOUSE-POINTER"), $._expression),
-  __button_label: ($) => seq(kw("LABEL"), field("label", $.string_literal)),
+  __button_label: ($) => seq(kw("LABEL"), field("label", choice($.string_literal, $.identifier))),
   __button_like: ($) => seq(kw("LIKE"), field("like", $.identifier)),
   __button_pfcolor: ($) => seq(kw("PFCOLOR"), $._expression),
   __button_size: ($) =>

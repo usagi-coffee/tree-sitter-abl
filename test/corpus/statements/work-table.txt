@@ -1,5 +1,5 @@
 ================================================================================
-WORK-TABLE basic definition
+WORK-TABLE BASIC DEFINITION
 ================================================================================
 
 DEFINE WORK-TABLE wtCustomer NO-UNDO
@@ -18,3 +18,144 @@ DEFINE WORK-TABLE wtCustomer NO-UNDO
     (work_table_field
       name: (identifier)
       type: (identifier))))
+
+================================================================================
+WORK-TABLE DEFINITION - LIKE Phrase
+================================================================================
+
+DEFINE WORK-TABLE wtLike LIKE Customer.
+DEFINE WORK-TABLE wtOrder LIKE Sales.Order NO-UNDO.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (work_table_definition
+    name: (identifier)
+    (like_phrase
+      like: (identifier)))
+  (work_table_definition
+    name: (identifier)
+    (like_phrase
+      like: (qualified_name
+        left: (identifier)
+        right: (identifier)))
+    (no_undo)))
+
+================================================================================
+WORK-TABLE DEFINITION - Qualified LIKE
+================================================================================
+
+DEFINE WORK-TABLE wtQual LIKE Sales.Order NO-UNDO.
+DEF WORK-TABLE wtFull LIKE Database.Schema.Table.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (work_table_definition
+    name: (identifier)
+    (like_phrase
+      like: (qualified_name
+        left: (identifier)
+        right: (identifier)))
+    (no_undo))
+  (work_table_definition
+    name: (identifier)
+    (like_phrase
+      like: (qualified_name
+        left: (identifier)
+        right: (identifier)
+        right: (identifier)))))
+
+================================================================================
+WORK-TABLE DEFINITION - Field Options
+================================================================================
+
+DEFINE WORK-TABLE wtOpt NO-UNDO
+  FIELD code AS CHARACTER FORMAT "x(10)" LABEL "Code"
+  FIELD value AS DECIMAL DECIMALS 2 INITIAL 0.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (work_table_definition
+    name: (identifier)
+    (no_undo)
+    (work_table_field
+      name: (identifier)
+      type: (identifier)
+      (field_option
+        (string_literal))
+      (field_option
+        (string_literal)))
+    (work_table_field
+      name: (identifier)
+      type: (identifier)
+      (field_option
+        (number_literal))
+      (field_option
+        (number_literal)))))
+
+================================================================================
+WORK-TABLE DEFINITION - WITH Index
+================================================================================
+
+DEFINE WORK-TABLE wtIdx NO-UNDO
+  FIELD id AS INTEGER
+  FIELD name AS CHARACTER
+  INDEX idx AS PRIMARY id.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (work_table_definition
+    name: (identifier)
+    (no_undo)
+    (work_table_field
+      name: (identifier)
+      type: (identifier))
+    (work_table_field
+      name: (identifier)
+      type: (identifier))
+    (work_table_index
+      name: (identifier)
+      field: (identifier))))
+
+================================================================================
+WORK-TABLE DEFINITION - Minimal
+================================================================================
+
+DEFINE WORK-TABLE w FIELD f AS INTEGER.
+DEF WORK-TABLE wt FIELD x AS CHARACTER.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (work_table_definition
+    name: (identifier)
+    (work_table_field
+      name: (identifier)
+      type: (identifier)))
+  (work_table_definition
+    name: (identifier)
+    (work_table_field
+      name: (identifier)
+      type: (identifier))))
+
+================================================================================
+WORK-TABLE DEFINITION - LIKE with Index
+================================================================================
+
+DEFINE WORK-TABLE wtCustomer LIKE Customer NO-UNDO
+  INDEX custIdx AS PRIMARY custNum.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (work_table_definition
+    name: (identifier)
+    (like_phrase
+      like: (identifier))
+    (no_undo)
+    (work_table_index
+      name: (identifier)
+      field: (identifier))))

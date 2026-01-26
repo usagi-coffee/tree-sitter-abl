@@ -1,8 +1,9 @@
 ================================================================================
-WORKFILE DEFINITION
+WORKFILE DEFINITION - Basic Syntax
 ================================================================================
 
 DEFINE WORKFILE wfTest LIKE Customer.
+DEF WORKFILE wfOrder LIKE Sales.Order.
 
 --------------------------------------------------------------------------------
 
@@ -10,4 +11,109 @@ DEFINE WORKFILE wfTest LIKE Customer.
   (workfile_definition
     name: (identifier)
     (like_phrase
-      like: (identifier))))
+      like: (identifier)))
+  (workfile_definition
+    name: (identifier)
+    (like_phrase
+      like: (qualified_name
+        left: (identifier)
+        right: (identifier)))))
+
+================================================================================
+WORKFILE DEFINITION - NO-UNDO Option
+================================================================================
+
+DEFINE WORKFILE wfNoUndo LIKE Customer NO-UNDO.
+DEF WORKFILE wfData LIKE ttOrder NO-UNDO.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (workfile_definition
+    name: (identifier)
+    (like_phrase
+      like: (identifier))
+    (no_undo))
+  (workfile_definition
+    name: (identifier)
+    (like_phrase
+      like: (identifier))
+    (no_undo)))
+
+================================================================================
+WORKFILE DEFINITION - WITHOUT LIKE
+================================================================================
+
+DEFINE WORKFILE wfSimple NO-UNDO.
+DEF WORKFILE wfData NO-UNDO.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (workfile_definition
+    name: (identifier)
+    (no_undo))
+  (workfile_definition
+    name: (identifier)
+    (no_undo)))
+
+================================================================================
+WORKFILE DEFINITION - Qualified Names
+================================================================================
+
+DEFINE WORKFILE wfQual LIKE Sales.Customer.
+DEF WORKFILE wfQ2 LIKE Database.Schema.Table.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (workfile_definition
+    name: (identifier)
+    (like_phrase
+      like: (qualified_name
+        left: (identifier)
+        right: (identifier))))
+  (workfile_definition
+    name: (identifier)
+    (like_phrase
+      like: (qualified_name
+        left: (identifier)
+        right: (identifier)
+        right: (identifier)))))
+
+================================================================================
+WORKFILE DEFINITION - LIKE with Validated
+================================================================================
+
+DEFINE WORKFILE wfVal LIKE Customer VALIDATE.
+DEF WORKFILE wfOrder LIKE Sales.Order VALIDATE NO-UNDO.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (workfile_definition
+    name: (identifier)
+    (like_phrase
+      like: (identifier)))
+  (workfile_definition
+    name: (identifier)
+    (like_phrase
+      like: (qualified_name
+        left: (identifier)
+        right: (identifier)))
+    (no_undo)))
+
+================================================================================
+WORKFILE DEFINITION - Minimal
+================================================================================
+
+DEFINE WORKFILE w.
+DEF WORKFILE wf.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (workfile_definition
+    name: (identifier))
+  (workfile_definition
+    name: (identifier)))

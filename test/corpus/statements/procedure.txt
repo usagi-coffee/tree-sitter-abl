@@ -26,3 +26,275 @@ PROCEDURE forwardProc.
     name: (identifier))
   (procedure_forward_definition
     name: (identifier)))
+
+================================================================================
+PROCEDURE - TABLE parameter
+================================================================================
+
+PROCEDURE tableProc:
+  DEFINE INPUT PARAMETER TABLE FOR Customer.
+  FIND FIRST Customer NO-LOCK.
+END PROCEDURE.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (procedure_definition
+    name: (identifier)
+    (parameter_definition
+      table: (identifier))
+    (find_statement
+      table: (identifier)
+      (no_lock))))
+
+================================================================================
+PROCEDURE - TABLE-HANDLE parameter
+================================================================================
+
+PROCEDURE tableHandleProc:
+  DEFINE OUTPUT PARAMETER TABLE-HANDLE hTable NO-UNDO.
+END PROCEDURE.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (procedure_definition
+    name: (identifier)
+    (parameter_definition
+      table_handle: (identifier)
+      (no_undo))))
+
+================================================================================
+PROCEDURE - DATASET parameter
+================================================================================
+
+PROCEDURE datasetProc:
+  DEFINE INPUT PARAMETER DATASET FOR dsOrders.
+  FOR EACH ttOrder OF dsOrders:
+    DISPLAY ttOrder.OrderNum.
+  END.
+END PROCEDURE.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (procedure_definition
+    name: (identifier)
+    (parameter_definition
+      dataset: (identifier))
+    (for_each_statement
+      (for_record_list
+        (for_record
+          table: (identifier)
+          (of_phrase
+            (identifier))))
+      (body
+        (display_statement
+          (qualified_name
+            left: (identifier)
+            right: (identifier)))))))
+
+================================================================================
+PROCEDURE - DATASET-HANDLE parameter
+================================================================================
+
+PROCEDURE datasetHandleProc:
+  DEFINE INPUT PARAMETER DATASET-HANDLE hDataset.
+END PROCEDURE.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (procedure_definition
+    name: (identifier)
+    (parameter_definition
+      dataset_handle: (identifier))))
+
+================================================================================
+PROCEDURE - BUFFER parameter
+================================================================================
+
+PROCEDURE bufferProc:
+  DEFINE PARAMETER BUFFER bufCustomer FOR Customer PRESELECT.
+  FIND FIRST bufCustomer NO-LOCK.
+END PROCEDURE.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (procedure_definition
+    name: (identifier)
+    (parameter_definition
+      name: (identifier)
+      table: (identifier))
+    (find_statement
+      table: (identifier)
+      (no_lock))))
+
+================================================================================
+PROCEDURE - BUFFER TEMP-TABLE parameter
+================================================================================
+
+PROCEDURE bufferTempProc:
+  DEFINE PARAMETER BUFFER bufTemp FOR TEMP-TABLE ttData PRESELECT.
+END PROCEDURE.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (procedure_definition
+    name: (identifier)
+    (parameter_definition
+      name: (identifier)
+      table: (identifier))))
+
+================================================================================
+PROCEDURE - TABLE with APPEND
+================================================================================
+
+PROCEDURE appendProc:
+  DEFINE OUTPUT PARAMETER TABLE FOR ttOrder APPEND.
+END PROCEDURE.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (procedure_definition
+    name: (identifier)
+    (parameter_definition
+      table: (identifier)
+      (append_option))))
+
+================================================================================
+PROCEDURE - TABLE with BIND
+================================================================================
+
+PROCEDURE bindProc:
+  DEFINE INPUT-OUTPUT PARAMETER TABLE FOR ttData BIND.
+END PROCEDURE.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (procedure_definition
+    name: (identifier)
+    (parameter_definition
+      table: (identifier)
+      (bind_option))))
+
+================================================================================
+PROCEDURE - TABLE with BY-VALUE
+================================================================================
+
+PROCEDURE byValueProc:
+  DEFINE INPUT PARAMETER TABLE FOR Customer BY-VALUE.
+END PROCEDURE.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (procedure_definition
+    name: (identifier)
+    (parameter_definition
+      table: (identifier)
+      (by_value_option))))
+
+================================================================================
+PROCEDURE - DATASET with APPEND
+================================================================================
+
+PROCEDURE appendDsProc:
+  DEFINE OUTPUT PARAMETER DATASET FOR dsAudit APPEND.
+END PROCEDURE.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (procedure_definition
+    name: (identifier)
+    (parameter_definition
+      dataset: (identifier)
+      (append_option))))
+
+================================================================================
+PROCEDURE - TABLE-HANDLE with BIND
+================================================================================
+
+PROCEDURE bindHandleProc:
+  DEFINE OUTPUT PARAMETER TABLE-HANDLE hTable BIND NO-UNDO.
+END PROCEDURE.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (procedure_definition
+    name: (identifier)
+    (parameter_definition
+      table_handle: (identifier)
+      (bind_option)
+      (no_undo))))
+
+================================================================================
+PROCEDURE - DATASET-HANDLE with BIND
+================================================================================
+
+PROCEDURE bindDsHandleProc:
+  DEFINE INPUT-OUTPUT PARAMETER DATASET-HANDLE hDataSet BIND.
+END PROCEDURE.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (procedure_definition
+    name: (identifier)
+    (parameter_definition
+      dataset_handle: (identifier)
+      (bind_option))))
+
+================================================================================
+PROCEDURE - FORWARD declaration
+================================================================================
+
+PROCEDURE forwardProc.
+PROCEDURE forwardProc:
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (procedure_forward_definition
+    name: (identifier))
+  (procedure_definition
+    name: (identifier)))
+
+================================================================================
+PROCEDURE - STANDARD parameter combinations
+================================================================================
+
+PROCEDURE comboProc:
+  DEFINE INPUT PARAMETER p1 AS INTEGER INITIAL 10.
+  DEFINE OUTPUT PARAMETER p2 AS CHARACTER NO-UNDO FORMAT "x(50)".
+  DEFINE INPUT-OUTPUT PARAMETER p3 LIKE Customer.CustNum.
+END PROCEDURE.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (procedure_definition
+    name: (identifier)
+    (parameter_definition
+      name: (identifier)
+      type: (identifier)
+      (initial_option
+        (number_literal)))
+    (parameter_definition
+      name: (identifier)
+      type: (identifier)
+      (no_undo)
+      (format_option
+        (string_literal)))
+    (parameter_definition
+      name: (identifier)
+      like: (qualified_name
+        left: (identifier)
+        right: (identifier)))))

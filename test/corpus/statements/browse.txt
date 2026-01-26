@@ -1,8 +1,10 @@
-==============================
+=============================
 Define Browse Basic
-==============================
+=============================
+
 DEFINE BROWSE b1 QUERY q1 DISPLAY CustNum Name.
 ---
+
 (source_code
   (browse_definition
     name: (identifier)
@@ -10,12 +12,14 @@ DEFINE BROWSE b1 QUERY q1 DISPLAY CustNum Name.
     column: (identifier)
     column: (identifier)))
 
-==============================
+=============================
 Define Browse with Options
-==============================
+=============================
+
 DEFINE BROWSE b1 QUERY q1 DISPLAY CustNum Name
 TITLE "Customer Browse" DOWN 10.
 ---
+
 (source_code
   (browse_definition
     name: (identifier)
@@ -27,12 +31,14 @@ TITLE "Customer Browse" DOWN 10.
     (down_option
       (number_literal))))
 
-==============================
+=============================
 Define Browse with WITH and Options
-==============================
+=============================
+
 DEFINE BROWSE b1 QUERY q1 DISPLAY CustNum Name
 WITH DOWN 10 TITLE "Customer Browse".
 ---
+
 (source_code
   (browse_definition
     name: (identifier)
@@ -44,13 +50,15 @@ WITH DOWN 10 TITLE "Customer Browse".
     (title_option
       (string_literal))))
 
-==============================
+=============================
 Define Browse with Column Options
-==============================
+=============================
+
 DEFINE BROWSE b1 QUERY q1
 DISPLAY CustNum FORMAT ">>>>9" Name LABEL "Customer Name"
 WITH DOWN 10.
 ---
+
 (source_code
   (browse_definition
     name: (identifier)
@@ -64,11 +72,13 @@ WITH DOWN 10.
     (down_option
       (number_literal))))
 
-==============================
+=============================
 Define Browse Shared
-==============================
+=============================
+
 DEFINE NEW SHARED BROWSE b1 QUERY q1 DISPLAY CustNum Name.
 ---
+
 (source_code
   (browse_definition
     name: (identifier)
@@ -76,11 +86,13 @@ DEFINE NEW SHARED BROWSE b1 QUERY q1 DISPLAY CustNum Name.
     column: (identifier)
     column: (identifier)))
 
-==============================
+=============================
 Define Browse Private
-==============================
+=============================
+
 DEFINE PRIVATE BROWSE b1 QUERY q1 DISPLAY CustNum Name.
 ---
+
 (source_code
   (browse_definition
     name: (identifier)
@@ -88,11 +100,13 @@ DEFINE PRIVATE BROWSE b1 QUERY q1 DISPLAY CustNum Name.
     column: (identifier)
     column: (identifier)))
 
-==============================
+=============================
 Define Browse with EXCEPT
-==============================
+=============================
+
 DEFINE BROWSE b1 QUERY q1 DISPLAY Customer EXCEPT Comments.
 ---
+
 (source_code
   (browse_definition
     name: (identifier)
@@ -100,9 +114,10 @@ DEFINE BROWSE b1 QUERY q1 DISPLAY Customer EXCEPT Comments.
     record: (identifier)
     field: (identifier)))
 
-==============================
+=============================
 Define Browse with Locks and Column Options
-==============================
+=============================
+
 DEFINE BROWSE b2 QUERY q2 NO-LOCK NO-WAIT
 DISPLAY CustNum FORMAT ">>>>9" LABEL "ID" NO-LABELS
        Name COLUMN-LABEL "Full Name" COLUMN-BGCOLOR 4 LABEL-FGCOLOR 5
@@ -110,6 +125,7 @@ DISPLAY CustNum FORMAT ">>>>9" LABEL "ID" NO-LABELS
        AUTO-RETURN DISABLE-AUTO-ZAP MOVEABLE RESIZABLE
 ENABLE ALL WITH SIZE 80 BY 10 SCROLLBAR-VERTICAL SEPARATORS NO-ROW-MARKERS.
 ---
+
 (source_code
   (browse_definition
     name: (identifier)
@@ -145,13 +161,15 @@ ENABLE ALL WITH SIZE 80 BY 10 SCROLLBAR-VERTICAL SEPARATORS NO-ROW-MARKERS.
     (separators_option)
     (no_row_markers_option)))
 
-==============================
+=============================
 Define Browse with Widget Options
-==============================
+=============================
+
 DEF PRIVATE BROWSE b3 QUERY q3 DISPLAY field1 field2
 WITH DOWN 5 TITLE "Browse Title" BGCOLOR 7 FGCOLOR 9 FONT 2
 CONTEXT-HELP-ID 42 DROP-TARGET TOOLTIP "Browse tip" ROW 3 COLUMN 5.
 ---
+
 (source_code
   (browse_definition
     name: (identifier)
@@ -177,3 +195,446 @@ CONTEXT-HELP-ID 42 DROP-TARGET TOOLTIP "Browse tip" ROW 3 COLUMN 5.
       (number_literal))
     (column_option
       (number_literal))))
+
+================================================================================
+BROWSE - SHARE-LOCK
+================================================================================
+
+DEFINE BROWSE bShare QUERY qShare SHARE-LOCK DISPLAY CustNum Name.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (browse_definition
+    name: (identifier)
+    query: (identifier)
+    column: (identifier)
+    column: (identifier)))
+
+================================================================================
+BROWSE - EXCLUSIVE-LOCK
+================================================================================
+
+DEFINE BROWSE bExclusive QUERY qExclusive EXCLUSIVE-LOCK DISPLAY CustNum Name.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (browse_definition
+    name: (identifier)
+    query: (identifier)
+    column: (identifier)
+    column: (identifier)))
+
+================================================================================
+BROWSE - NO-LOCK with NO-WAIT
+================================================================================
+
+DEFINE BROWSE bNoWait QUERY qNoWait NO-LOCK NO-WAIT
+  DISPLAY CustNum Name
+  WITH SIZE 50 BY 10.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (browse_definition
+    name: (identifier)
+    query: (identifier)
+    column: (identifier)
+    column: (identifier)
+    (size_option
+      (number_literal)
+      (number_literal))))
+
+================================================================================
+BROWSE - ENABLE phrase with specific fields
+================================================================================
+
+DEFINE BROWSE bEnable QUERY qEnable DISPLAY CustNum Name
+  ENABLE CustNum
+  WITH SIZE 60 BY 10.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (browse_definition
+    name: (identifier)
+    query: (identifier)
+    column: (identifier)
+    column: (identifier)
+    field: (identifier)
+    (size_option
+      (number_literal)
+      (number_literal))))
+
+================================================================================
+BROWSE - LABEL-FONT option
+================================================================================
+
+DEFINE BROWSE bLabFont QUERY qQ DISPLAY
+  CustNum LABEL-FONT 3
+  Name LABEL-FONT 5
+  WITH SIZE 60 BY 10.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (browse_definition
+    name: (identifier)
+    query: (identifier)
+    column: (identifier)
+    (label_font_option
+      (number_literal))
+    column: (identifier)
+    (label_font_option
+      (number_literal))
+    (size_option
+      (number_literal)
+      (number_literal))))
+
+================================================================================
+BROWSE - COLUMN-DCOLOR option
+================================================================================
+
+DEFINE BROWSE bColDcolor QUERY qQ DISPLAY
+  CustNum COLUMN-DCOLOR 5
+  Name COLUMN-DCOLOR 10
+  WITH SIZE 60 BY 10.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (browse_definition
+    name: (identifier)
+    query: (identifier)
+    column: (identifier)
+    (column_dcolor_option
+      (number_literal))
+    column: (identifier)
+    (column_dcolor_option
+      (number_literal))
+    (size_option
+      (number_literal)
+      (number_literal))))
+
+================================================================================
+BROWSE - LABEL-DCOLOR option
+================================================================================
+
+DEFINE BROWSE bLabDcolor QUERY qQ DISPLAY
+  CustNum LABEL-DCOLOR 7
+  Name LABEL-DCOLOR 15
+  WITH SIZE 60 BY 10.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (browse_definition
+    name: (identifier)
+    query: (identifier)
+    column: (identifier)
+    (label_dcolor_option
+      (number_literal))
+    column: (identifier)
+    (label_dcolor_option
+      (number_literal))
+    (size_option
+      (number_literal)
+      (number_literal))))
+
+================================================================================
+BROWSE - COLUMN-PFCOLOR option
+================================================================================
+
+DEFINE BROWSE bColPfcolor QUERY qQ DISPLAY
+  CustNum COLUMN-PFCOLOR 3
+  Name COLUMN-PFCOLOR 6
+  WITH SIZE 60 BY 10.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (browse_definition
+    name: (identifier)
+    query: (identifier)
+    column: (identifier)
+    (column_pfcolor_option
+      (number_literal))
+    column: (identifier)
+    (column_pfcolor_option
+      (number_literal))
+    (size_option
+      (number_literal)
+      (number_literal))))
+
+================================================================================
+BROWSE - LABEL-PFCOLOR option
+================================================================================
+
+DEFINE BROWSE bLabPfcolor QUERY qQ DISPLAY
+  CustNum LABEL-PFCOLOR 2
+  Name LABEL-PFCOLOR 8
+  WITH SIZE 60 BY 10.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (browse_definition
+    name: (identifier)
+    query: (identifier)
+    column: (identifier)
+    (label_pfcolor_option
+      (number_literal))
+    column: (identifier)
+    (label_pfcolor_option
+      (number_literal))
+    (size_option
+      (number_literal)
+      (number_literal))))
+
+================================================================================
+BROWSE - LABEL-BGCOLOR option
+================================================================================
+
+DEFINE BROWSE bLabBgcolor QUERY qQ DISPLAY
+  CustNum LABEL-BGCOLOR 3
+  Name LABEL-BGCOLOR 5
+  WITH SIZE 60 BY 10.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (browse_definition
+    name: (identifier)
+    query: (identifier)
+    column: (identifier)
+    (label_bgcolor_option
+      (number_literal))
+    column: (identifier)
+    (label_bgcolor_option
+      (number_literal))
+    (size_option
+      (number_literal)
+      (number_literal))))
+
+================================================================================
+BROWSE - SIZE-CHARS option
+================================================================================
+
+DEFINE BROWSE bSizeChars QUERY qQ DISPLAY CustNum Name
+  WITH SIZE-CHARS 40 BY 20.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (browse_definition
+    name: (identifier)
+    query: (identifier)
+    column: (identifier)
+    column: (identifier)
+    (size_chars_option
+      (number_literal)
+      (number_literal))))
+
+================================================================================
+BROWSE - SIZE-PIXELS option
+================================================================================
+
+DEFINE BROWSE bSizePixels QUERY qQ DISPLAY CustNum Name
+  WITH SIZE-PIXELS 400 BY 200.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (browse_definition
+    name: (identifier)
+    query: (identifier)
+    column: (identifier)
+    column: (identifier)
+    (size_pixels_option
+      (number_literal)
+      (number_literal))))
+
+================================================================================
+BROWSE - SCROLLBAR-HORIZONTAL option
+================================================================================
+
+DEFINE BROWSE bScrollH QUERY qQ DISPLAY CustNum Name
+  WITH SCROLLBAR-HORIZONTAL SIZE 60 BY 10.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (browse_definition
+    name: (identifier)
+    query: (identifier)
+    column: (identifier)
+    column: (identifier)
+    (scrollbar_horizontal_option)
+    (size_option
+      (number_literal)
+      (number_literal))))
+
+================================================================================
+BROWSE - NO-EMPTY-SPACE option
+================================================================================
+
+DEFINE BROWSE bNoEmpty QUERY qQ DISPLAY CustNum Name
+  WITH NO-EMPTY-SPACE SIZE 60 BY 10.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (browse_definition
+    name: (identifier)
+    query: (identifier)
+    column: (identifier)
+    column: (identifier)
+    (no_empty_space_option)
+    (size_option
+      (number_literal)
+      (number_literal))))
+
+================================================================================
+BROWSE - FIT-LAST-COLUMN option
+================================================================================
+
+DEFINE BROWSE bFitLast QUERY qQ DISPLAY CustNum Name
+  WITH FIT-LAST-COLUMN SIZE 60 BY 10.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (browse_definition
+    name: (identifier)
+    query: (identifier)
+    column: (identifier)
+    column: (identifier)
+    (fit_last_column_option)
+    (size_option
+      (number_literal)
+      (number_literal))))
+
+================================================================================
+BROWSE - MULTIPLE option
+================================================================================
+
+DEFINE BROWSE bMultiple QUERY qQ DISPLAY CustNum Name
+  WITH MULTIPLE SIZE 60 BY 10.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (browse_definition
+    name: (identifier)
+    query: (identifier)
+    column: (identifier)
+    column: (identifier)
+    (multiple_option)
+    (size_option
+      (number_literal)
+      (number_literal))))
+
+================================================================================
+BROWSE - NO-COLUMN-SCROLLING option
+================================================================================
+
+DEFINE BROWSE bNoColScroll QUERY qQ DISPLAY CustNum Name
+  WITH NO-COLUMN-SCROLLING SIZE 60 BY 10.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (browse_definition
+    name: (identifier)
+    query: (identifier)
+    column: (identifier)
+    column: (identifier)
+    (no_column_scrolling_option)
+    (size_option
+      (number_literal)
+      (number_literal))))
+
+================================================================================
+BROWSE - MAX-DATA-GUESS option
+================================================================================
+
+DEFINE BROWSE bMaxData QUERY qQ DISPLAY CustNum Name
+  WITH MAX-DATA-GUESS 10 SIZE 60 BY 10.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (browse_definition
+    name: (identifier)
+    query: (identifier)
+    column: (identifier)
+    column: (identifier)
+    (max_data_guess_option
+      (number_literal))
+    (size_option
+      (number_literal)
+      (number_literal))))
+
+================================================================================
+BROWSE - Multiple EXCEPT fields
+================================================================================
+
+DEFINE BROWSE bMultiExc QUERY qQ DISPLAY Customer EXCEPT Comments1 Comments2 Status Flag.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (browse_definition
+    name: (identifier)
+    query: (identifier)
+    record: (identifier)
+    field: (identifier)
+    field: (identifier)
+    field: (identifier)
+    field: (identifier)))
+
+================================================================================
+BROWSE - WIDTH option on column
+================================================================================
+
+DEFINE BROWSE bWidth QUERY qQ DISPLAY
+  CustNum WIDTH 10
+  Name WIDTH 30
+  WITH SIZE 60 BY 10.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (browse_definition
+    name: (identifier)
+    query: (identifier)
+    column: (identifier)
+    (width_option
+      (number_literal))
+    column: (identifier)
+    (width_option
+      (number_literal))
+    (size_option
+      (number_literal)
+      (number_literal))))
+
+================================================================================
+BROWSE - Minimal
+================================================================================
+
+DEFINE BROWSE b QUERY q DISPLAY c.
+DEF BROWSE browse QUERY q DISPLAY f1 f2.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (browse_definition
+    name: (identifier)
+    query: (identifier)
+    column: (identifier))
+  (browse_definition
+    name: (identifier)
+    query: (identifier)
+    column: (identifier)
+    column: (identifier)))

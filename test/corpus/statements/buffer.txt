@@ -1,12 +1,303 @@
 ================================================================================
-BUFFER DEFINITION
+BUFFER DEFINITION - Basic Syntax
 ================================================================================
 
-DEFINE BUFFER bufInvoice FOR sales.Invoice.
-DEF NEW SHARED BUFFER bTemp FOR TEMP-TABLE ttSession PRESELECT LABEL "Temp" NAMESPACE-URI "urn:x" NAMESPACE-PREFIX "p" XML-NODE-NAME "node" SERIALIZE-NAME "ser".
-DEF PRIVATE STATIC BUFFER bClass FOR myTable.
-DEFINE SHARED BUFFER bShared FOR Customer.
-DEFINE PROTECTED STATIC BUFFER bXml FOR TEMP-TABLE ttOrders PRESELECT LABEL "Orders" NAMESPACE-URI "urn:orders" NAMESPACE-PREFIX "o" XML-NODE-NAME "Order" SERIALIZE-NAME "Orders".
+DEFINE BUFFER bufCustomer FOR Customer.
+DEF BUFFER bufOrder FOR Sales.Order.
+DEFINE BUFFER bufTemp FOR TEMP-TABLE ttItems.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (buffer_definition
+    name: (identifier)
+    table: (identifier))
+  (buffer_definition
+    name: (identifier)
+    table: (qualified_name
+      left: (identifier)
+      right: (identifier)))
+  (buffer_definition
+    name: (identifier)
+    table: (identifier)))
+
+================================================================================
+BUFFER DEFINITION - PRESELECT Option
+================================================================================
+
+DEFINE BUFFER bufPre FOR Customer PRESELECT.
+DEF BUFFER bufOrder FOR Sales.Order PRESELECT.
+DEFINE BUFFER bufTemp FOR TEMP-TABLE ttData PRESELECT.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (buffer_definition
+    name: (identifier)
+    table: (identifier))
+  (buffer_definition
+    name: (identifier)
+    table: (qualified_name
+      left: (identifier)
+      right: (identifier)))
+  (buffer_definition
+    name: (identifier)
+    table: (identifier)))
+
+================================================================================
+BUFFER DEFINITION - LABEL Option
+================================================================================
+
+DEFINE BUFFER bufCust FOR Customer LABEL "Customer Buffer".
+DEF BUFFER bufOrd FOR Sales.Order LABEL "Order".
+DEFINE BUFFER bufTemp FOR TEMP-TABLE ttData LABEL ident.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (buffer_definition
+    name: (identifier)
+    table: (identifier)
+    label: (string_literal))
+  (buffer_definition
+    name: (identifier)
+    table: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    label: (string_literal))
+  (buffer_definition
+    name: (identifier)
+    table: (identifier)
+    label: (identifier)))
+
+================================================================================
+BUFFER DEFINITION - NAMESPACE Options
+================================================================================
+
+DEFINE BUFFER bufCust FOR Customer NAMESPACE-URI "http://example.com/ns" NAMESPACE-PREFIX "ex".
+DEF BUFFER bufTemp FOR TEMP-TABLE ttData NAMESPACE-URI "urn:demo" NAMESPACE-PREFIX "d".
+DEFINE BUFFER bufXml FOR ttTable NAMESPACE-URI "https://api.example.com/v1" NAMESPACE-PREFIX "api".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (buffer_definition
+    name: (identifier)
+    table: (identifier)
+    namespace_uri: (string_literal)
+    namespace_prefix: (string_literal))
+  (buffer_definition
+    name: (identifier)
+    table: (identifier)
+    namespace_uri: (string_literal)
+    namespace_prefix: (string_literal))
+  (buffer_definition
+    name: (identifier)
+    table: (identifier)
+    namespace_uri: (string_literal)
+    namespace_prefix: (string_literal)))
+
+================================================================================
+BUFFER DEFINITION - XML Options
+================================================================================
+
+DEFINE BUFFER bufCust FOR Customer XML-NODE-NAME "customer".
+DEF BUFFER bufOrder FOR Sales.Order XML-NODE-NAME "order" SERIALIZE-NAME "order-ser".
+DEFINE BUFFER bufTemp FOR TEMP-TABLE ttData XML-NODE-NAME "item" SERIALIZE-NAME "ItemNode".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (buffer_definition
+    name: (identifier)
+    table: (identifier)
+    node: (string_literal))
+  (buffer_definition
+    name: (identifier)
+    table: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    node: (string_literal)
+    serialize_name: (string_literal))
+  (buffer_definition
+    name: (identifier)
+    table: (identifier)
+    node: (string_literal)
+    serialize_name: (string_literal)))
+
+================================================================================
+BUFFER DEFINITION - Complete XML Configuration
+================================================================================
+
+DEFINE BUFFER bufFull FOR Customer
+  LABEL "Customer"
+  NAMESPACE-URI "http://example.com"
+  NAMESPACE-PREFIX "cust"
+  XML-NODE-NAME "Customer"
+  SERIALIZE-NAME "cust:Cust".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (buffer_definition
+    name: (identifier)
+    table: (identifier)
+    label: (string_literal)
+    namespace_uri: (string_literal)
+    namespace_prefix: (string_literal)
+    node: (string_literal)
+    serialize_name: (string_literal)))
+
+================================================================================
+BUFFER DEFINITION - Shared Scopes
+================================================================================
+
+DEFINE NEW SHARED BUFFER bufShared FOR Customer.
+DEFINE SHARED BUFFER bufUse FOR Sales.Order.
+DEF NEW SHARED BUFFER bufTemp FOR TEMP-TABLE ttData.
+DEF SHARED BUFFER bufCust FOR Customer.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (buffer_definition
+    (shared_variable_scope)
+    name: (identifier)
+    table: (identifier))
+  (buffer_definition
+    (shared_variable_scope)
+    name: (identifier)
+    table: (qualified_name
+      left: (identifier)
+      right: (identifier)))
+  (buffer_definition
+    (shared_variable_scope)
+    name: (identifier)
+    table: (identifier))
+  (buffer_definition
+    (shared_variable_scope)
+    name: (identifier)
+    table: (identifier)))
+
+================================================================================
+BUFFER DEFINITION - Access Modifiers
+================================================================================
+
+DEFINE PRIVATE BUFFER bufPriv FOR Customer.
+DEFINE PROTECTED BUFFER bufProt FOR Sales.Order.
+DEF PRIVATE BUFFER bufTemp FOR TEMP-TABLE ttData.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (buffer_definition
+    (access_modifier)
+    name: (identifier)
+    table: (identifier))
+  (buffer_definition
+    (access_modifier)
+    name: (identifier)
+    table: (qualified_name
+      left: (identifier)
+      right: (identifier)))
+  (buffer_definition
+    (access_modifier)
+    name: (identifier)
+    table: (identifier)))
+
+================================================================================
+BUFFER DEFINITION - STATIC Modifier
+================================================================================
+
+DEFINE STATIC BUFFER bufStatic FOR Customer.
+DEFINE PROTECTED STATIC BUFFER bufPS FOR Sales.Order.
+DEF PRIVATE STATIC BUFFER bufPTS FOR TEMP-TABLE ttData.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (buffer_definition
+    (static_modifier)
+    name: (identifier)
+    table: (identifier))
+  (buffer_definition
+    (access_modifier)
+    (static_modifier)
+    name: (identifier)
+    table: (qualified_name
+      left: (identifier)
+      right: (identifier)))
+  (buffer_definition
+    (access_modifier)
+    (static_modifier)
+    name: (identifier)
+    table: (identifier)))
+
+================================================================================
+BUFFER DEFINITION - Shared with PRESELECT
+================================================================================
+
+DEFINE NEW SHARED BUFFER bufPre FOR Customer PRESELECT.
+DEF SHARED BUFFER bufOrder FOR Sales.Order PRESELECT.
+DEFINE NEW SHARED BUFFER bufTemp FOR TEMP-TABLE ttData PRESELECT.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (buffer_definition
+    (shared_variable_scope)
+    name: (identifier)
+    table: (identifier))
+  (buffer_definition
+    (shared_variable_scope)
+    name: (identifier)
+    table: (qualified_name
+      left: (identifier)
+      right: (identifier)))
+  (buffer_definition
+    (shared_variable_scope)
+    name: (identifier)
+    table: (identifier)))
+
+================================================================================
+BUFFER DEFINITION - Private/Protected with Options
+================================================================================
+
+DEFINE PRIVATE BUFFER bufPriv FOR Customer LABEL "Private" PRESELECT.
+DEFINE PROTECTED BUFFER bufProt FOR Sales.Order NAMESPACE-URI "http://ex" NAMESPACE-PREFIX "p".
+DEF PROTECTED STATIC BUFFER bufStatic FOR TEMP-TABLE ttData XML-NODE-NAME "node" SERIALIZE-NAME "ser".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (buffer_definition
+    (access_modifier)
+    name: (identifier)
+    table: (identifier)
+    label: (string_literal))
+  (buffer_definition
+    (access_modifier)
+    name: (identifier)
+    table: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    namespace_uri: (string_literal)
+    namespace_prefix: (string_literal))
+  (buffer_definition
+    (access_modifier)
+    (static_modifier)
+    name: (identifier)
+    table: (identifier)
+    node: (string_literal)
+    serialize_name: (string_literal)))
+
+================================================================================
+BUFFER DEFINITION - Qualified Table Names
+================================================================================
+
+DEFINE BUFFER bufQual FOR Sales.Customer.
+DEFINE BUFFER bufDb FOR Database.Schema.Table.
+DEF BUFFER bufQ2 FOR MyProc.TempTable.
 
 --------------------------------------------------------------------------------
 
@@ -17,26 +308,33 @@ DEFINE PROTECTED STATIC BUFFER bXml FOR TEMP-TABLE ttOrders PRESELECT LABEL "Ord
       left: (identifier)
       right: (identifier)))
   (buffer_definition
-    (shared_variable_scope)
     name: (identifier)
-    table: (identifier)
-    label: (string_literal)
-    namespace_uri: (string_literal)
-    namespace_prefix: (string_literal)
-    node: (string_literal)
-    serialize_name: (string_literal))
+    table: (qualified_name
+      left: (identifier)
+      right: (identifier)
+      right: (identifier)))
   (buffer_definition
-    (access_modifier)
-    (static_modifier)
     name: (identifier)
-    table: (identifier))
+    table: (qualified_name
+      left: (identifier)
+      right: (identifier))))
+
+================================================================================
+BUFFER DEFINITION - TEMP-TABLE with All Options
+================================================================================
+
+DEFINE BUFFER bufTemp FOR TEMP-TABLE ttOrder
+  PRESELECT
+  LABEL "Temp Orders"
+  NAMESPACE-URI "http://temp"
+  NAMESPACE-PREFIX "t"
+  XML-NODE-NAME "Order"
+  SERIALIZE-NAME "order-ser".
+
+--------------------------------------------------------------------------------
+
+(source_code
   (buffer_definition
-    (shared_variable_scope)
-    name: (identifier)
-    table: (identifier))
-  (buffer_definition
-    (access_modifier)
-    (static_modifier)
     name: (identifier)
     table: (identifier)
     label: (string_literal)
@@ -44,3 +342,25 @@ DEFINE PROTECTED STATIC BUFFER bXml FOR TEMP-TABLE ttOrders PRESELECT LABEL "Ord
     namespace_prefix: (string_literal)
     node: (string_literal)
     serialize_name: (string_literal)))
+
+================================================================================
+BUFFER DEFINITION - Minimal Options
+================================================================================
+
+DEFINE BUFFER b FOR Customer.
+DEF BUFFER b1 FOR ttData.
+DEF NEW SHARED BUFFER b2 FOR Customer PRESELECT.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (buffer_definition
+    name: (identifier)
+    table: (identifier))
+  (buffer_definition
+    name: (identifier)
+    table: (identifier))
+  (buffer_definition
+    (shared_variable_scope)
+    name: (identifier)
+    table: (identifier)))

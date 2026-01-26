@@ -1,0 +1,580 @@
+================================================================================
+FRAME - Basic Definition
+================================================================================
+
+DEFINE FRAME f1 Customer.Name Customer.Address.
+DEF FRAME f2 Customer.CustNum Sales.Order.OrderNum.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (frame_definition
+    name: (identifier)
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier)))
+  (frame_definition
+    name: (identifier)
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier)
+      right: (identifier))))
+
+================================================================================
+FRAME - EXCEPT syntax
+================================================================================
+
+DEFINE FRAME fExcept Customer EXCEPT Comments PrivateNotes.
+DEF FRAME fOrder Sales.Order EXCEPT Status HiddenFlag.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (frame_definition
+    name: (identifier)
+    record: (identifier)
+    field: (identifier)
+    field: (identifier))
+  (frame_definition
+    name: (identifier)
+    record: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    field: (identifier)
+    field: (identifier)))
+
+================================================================================
+FRAME - String Items
+================================================================================
+
+DEFINE FRAME strings 
+  "Header: " Customer.Name 
+  "Record ID: " Customer.CustNum 
+  "Total: " Sales.Order.Total.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (frame_definition
+    name: (identifier)
+    (string_literal)
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (string_literal)
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (string_literal)
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier)
+      right: (identifier))))
+
+================================================================================
+FRAME - SPACE clause
+================================================================================
+
+DEFINE FRAME space1 SPACE "   " 10 5.
+DEF FRAME space2 SPACE.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (frame_definition
+    name: (identifier)
+    (string_literal)
+    (number_literal)
+    (number_literal))
+  (frame_definition
+    name: (identifier)))
+
+================================================================================
+FRAME - SKIP clause
+================================================================================
+
+DEFINE FRAME skip1 SKIP 3.
+DEF FRAME skip2 SKIP.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (frame_definition
+    name: (identifier)
+    (number_literal))
+  (frame_definition
+    name: (identifier)))
+
+================================================================================
+FRAME - HEADER with string
+================================================================================
+
+DEFINE FRAME headered HEADER "Customer Header".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (frame_definition
+    name: (identifier)
+    (string_literal)))
+
+================================================================================
+FRAME - BACKGROUND with SPACE
+================================================================================
+
+DEFINE FRAME bg1
+  BACKGROUND SPACE 10.
+  Customer.Name.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (frame_definition
+    name: (identifier)
+    (number_literal))
+  (expression_statement
+    (qualified_name
+      left: (identifier)
+      right: (identifier))))
+
+================================================================================
+FRAME - WITH CENTERED
+================================================================================
+
+DEFINE FRAME centered Customer.CustNum WITH CENTERED.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (frame_definition
+    name: (identifier)
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (frame_phrase)))
+
+================================================================================
+FRAME - WITH SIZE
+================================================================================
+
+DEFINE FRAME sized Customer.Name Customer.Address WITH SIZE 80 BY 20.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (frame_definition
+    name: (identifier)
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (frame_phrase
+      (number_literal)
+      (number_literal))))
+
+================================================================================
+FRAME - WITH DOWN
+================================================================================
+
+DEFINE FRAME down Customer.CustNum WITH DOWN 10.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (frame_definition
+    name: (identifier)
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (frame_phrase
+      (number_literal))))
+
+================================================================================
+FRAME - WITH WIDTH
+================================================================================
+
+DEFINE FRAME width Customer.Name WITH WIDTH 60.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (frame_definition
+    name: (identifier)
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (frame_phrase
+      (number_literal))))
+
+================================================================================
+FRAME - WITH OVERLAY
+================================================================================
+
+DEFINE FRAME overlay Sales.Order.OrderNum WITH OVERLAY.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (frame_definition
+    name: (identifier)
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier)
+      right: (identifier))
+    (frame_phrase)))
+
+================================================================================
+FRAME - WITH ROW and COLUMN
+================================================================================
+
+DEFINE FRAME positioned Customer.CustNum WITH ROW 5 COLUMN 10.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (frame_definition
+    name: (identifier)
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (frame_phrase
+      (number_literal)
+      (number_literal))))
+
+================================================================================
+FRAME - WITH NO-LABELS
+================================================================================
+
+DEFINE FRAME noLabels Customer.CustNum WITH NO-LABELS.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (frame_definition
+    name: (identifier)
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (frame_phrase)))
+
+================================================================================
+FRAME - WITH SIDE-LABELS
+================================================================================
+
+DEFINE FRAME sideLabels Customer.CustNum WITH SIDE-LABELS.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (frame_definition
+    name: (identifier)
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (frame_phrase)))
+
+================================================================================
+FRAME - String with AT phrase COLUMN
+================================================================================
+
+DEFINE FRAME atCol
+  "Name: " AT COLUMN OF Customer.Name Customer.Name
+  "ID: " AT COLUMN OF Customer.CustNum Customer.CustNum.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (frame_definition
+    name: (identifier)
+    (string_literal)
+    (identifier)
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (string_literal)
+    (identifier)
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))))
+
+================================================================================
+FRAME - String with AT phrase ROW
+================================================================================
+
+DEFINE FRAME atRow
+  "Record: " AT ROW OF Customer.CustNum Customer.CustNum.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (frame_definition
+    name: (identifier)
+    (string_literal)
+    (identifier)
+    field: (identifier)
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))))
+
+================================================================================
+FRAME - AT phrase simple
+================================================================================
+
+DEFINE FRAME atSimple Customer.CustNum AT COLUMN 5.
+DEF FRAME atSimple2 "Label: " Customer.Name AT ROW 2 COLUMN 10.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (frame_definition
+    name: (identifier)
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    field: (identifier)
+    field: (identifier)
+    (number_literal))
+  (frame_definition
+    name: (identifier)
+    (string_literal)
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    field: (identifier)
+    field: (identifier)
+    (number_literal)
+    field: (identifier)
+    (number_literal)))
+
+================================================================================
+FRAME - TO phrase on string
+================================================================================
+
+DEFINE FRAME toPhrase
+  Customer.Name TO 40
+  Customer.Address TO 50.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (frame_definition
+    name: (identifier)
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    field: (identifier)
+    (number_literal)
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    field: (identifier)
+    (number_literal)))
+
+================================================================================
+FRAME - String with BGCOLOR
+================================================================================
+
+DEFINE FRAME strBg 
+  "Header" BGCOLOR 7 
+  Customer.Name.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (frame_definition
+    name: (identifier)
+    (string_literal)
+    (number_literal)
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))))
+
+================================================================================
+FRAME - String with DCOLOR
+================================================================================
+
+DEFINE FRAME strDc
+  "Label" DCOLOR 5
+  Customer.CustNum.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (frame_definition
+    name: (identifier)
+    (string_literal)
+    (number_literal)
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))))
+
+================================================================================
+FRAME - String with FGCOLOR
+================================================================================
+
+DEFINE FRAME strFg
+  "Text" FGCOLOR 15
+  Customer.Name.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (frame_definition
+    name: (identifier)
+    (string_literal)
+    (number_literal)
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))))
+
+================================================================================
+FRAME - String with PFCOLOR
+================================================================================
+
+DEFINE FRAME strPf
+  "Prompt" PFCOLOR 3
+  Customer.CustNum.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (frame_definition
+    name: (identifier)
+    (string_literal)
+    (number_literal)
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))))
+
+================================================================================
+FRAME - String with FONT
+================================================================================
+
+DEFINE FRAME strFont
+  "Title" FONT 4
+  Customer.Name.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (frame_definition
+    name: (identifier)
+    (string_literal)
+    (number_literal)
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))))
+
+================================================================================
+FRAME - String with VIEW-AS TEXT
+================================================================================
+
+DEFINE FRAME strViewAs "Label" VIEW-AS TEXT.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (frame_definition
+    name: (identifier)
+    (string_literal)))
+
+================================================================================
+FRAME - NEW SHARED
+================================================================================
+
+DEFINE NEW SHARED FRAME sharedF Customer.CustNum.
+DEF NEW SHARED FRAME sharedF2 Customer.Name Customer.Address.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (frame_definition
+    name: (identifier)
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier)))
+  (frame_definition
+    name: (identifier)
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))))
+
+================================================================================
+FRAME - PRIVATE
+================================================================================
+
+DEFINE PRIVATE FRAME privF Customer.CustNum.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (frame_definition
+    name: (identifier)
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))))
+
+================================================================================
+FRAME - Multiple options combined
+================================================================================
+
+DEFINE FRAME combined
+  Customer.CustNum
+  Customer.Name BGCOLOR 7 FGCOLOR 15
+  WITH SIZE 80 BY 20 DOWN 10 CENTERED.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (frame_definition
+    name: (identifier)
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    field: (identifier)
+    (number_literal)
+    (number_literal)
+    (frame_phrase
+      (number_literal)
+      (number_literal)
+      (number_literal))))
+
+================================================================================
+FRAME - Minimal
+================================================================================
+
+DEFINE FRAME f field1.
+DEF FRAME frame field1.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (frame_definition
+    name: (identifier)
+    field: (identifier))
+  (frame_definition
+    name: (identifier)
+    field: (identifier)))

@@ -1,11 +1,10 @@
 ================================================================================
-DATASET DEFINITION
+DATASET DEFINITION - Basic Syntax
 ================================================================================
 
 DEFINE DATASET dsCustomer FOR ttCustomer.
-DEF DATASET dsAudit FOR ttHeader, ttLine.
+DEF DATASET dsOrder FOR ttHeader, ttLine.
 DEFINE DATASET dsEmpty.
-DEF DATASET dsMulti FOR ttHeader, ttLine, ttTax.
 
 --------------------------------------------------------------------------------
 
@@ -18,9 +17,87 @@ DEF DATASET dsMulti FOR ttHeader, ttLine, ttTax.
     table: (identifier)
     table: (identifier))
   (dataset_definition
-    name: (identifier))
+    name: (identifier)))
+
+================================================================================
+DATASET DEFINITION - Multiple Tables
+================================================================================
+
+DEFINE DATASET dsMulti FOR ttCustomer, ttOrder, ttOrderLine.
+DEF DATASET dsThree FOR ttHeader, ttDetail, ttTotals.
+
+--------------------------------------------------------------------------------
+
+(source_code
   (dataset_definition
     name: (identifier)
     table: (identifier)
     table: (identifier)
+    table: (identifier))
+  (dataset_definition
+    name: (identifier)
+    table: (identifier)
+    table: (identifier)
+    table: (identifier)))
+
+================================================================================
+DATASET DEFINITION - Single Table
+================================================================================
+
+DEFINE DATASET dsSingle FOR ttData.
+DEF DATASET dsOne FOR ttTable.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (dataset_definition
+    name: (identifier)
+    table: (identifier))
+  (dataset_definition
+    name: (identifier)
+    table: (identifier)))
+
+================================================================================
+DATASET DEFINITION - Four Tables
+================================================================================
+
+DEFINE DATASET dsFull FOR ttHeader, ttDetail, ttTax, ttLine.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (dataset_definition
+    name: (identifier)
+    table: (identifier)
+    table: (identifier)
+    table: (identifier)
+    table: (identifier)))
+
+================================================================================
+DATASET DEFINITION - No Tables
+================================================================================
+
+DEFINE DATASET dsNoTables.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (dataset_definition
+    name: (identifier)))
+
+================================================================================
+DATASET DEFINITION - Short Form
+================================================================================
+
+DEF DATASET d FOR t.
+DEF DATASET ds FOR tt.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (dataset_definition
+    name: (identifier)
+    table: (identifier))
+  (dataset_definition
+    name: (identifier)
     table: (identifier)))

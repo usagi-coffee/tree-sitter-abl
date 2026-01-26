@@ -1,10 +1,9 @@
 ================================================================================
-DATA-SOURCE DEFINITION
+DATA-SOURCE DEFINITION - Basic Syntax
 ================================================================================
 
 DEFINE DATA-SOURCE dsCust FOR bCust.
-DEFINE DATA-SOURCE dsOrders QUERY qOrders FOR bCust KEYS (CustNum, SalesRep), bOrder KEYS (ROWID).
-DEF PROTECTED STATIC DATA-SOURCE dsStatic QUERY qStatic.
+DEF DATA-SOURCE dsOrder FOR bOrder.
 
 --------------------------------------------------------------------------------
 
@@ -14,13 +13,244 @@ DEF PROTECTED STATIC DATA-SOURCE dsStatic QUERY qStatic.
     buffer: (identifier))
   (data_source_definition
     name: (identifier)
+    buffer: (identifier)))
+
+================================================================================
+DATA-SOURCE DEFINITION - QUERY Option
+================================================================================
+
+DEFINE DATA-SOURCE dsCust QUERY qOrders FOR bCust.
+DEF DATA-SOURCE dsOrder QUERY qMain FOR bOrder.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (data_source_definition
+    name: (identifier)
     query: (identifier)
+    buffer: (identifier))
+  (data_source_definition
+    name: (identifier)
+    query: (identifier)
+    buffer: (identifier)))
+
+================================================================================
+DATA-SOURCE DEFINITION - KEYS ROWID
+================================================================================
+
+DEFINE DATA-SOURCE dsRowid FOR bCust KEYS (ROWID).
+DEF DATA-SOURCE dsOrder2 FOR bOrder KEYS (ROWID).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (data_source_definition
+    name: (identifier)
+    buffer: (identifier))
+  (data_source_definition
+    name: (identifier)
+    buffer: (identifier)))
+
+================================================================================
+DATA-SOURCE DEFINITION - KEYS with Fields
+================================================================================
+
+DEFINE DATA-SOURCE dsField FOR bCust KEYS (CustNum).
+DEF DATA-SOURCE dsFields FOR bOrder KEYS (OrderNum, CustNum, SalesRep).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (data_source_definition
+    name: (identifier)
+    buffer: (identifier)
+    field: (identifier))
+  (data_source_definition
+    name: (identifier)
     buffer: (identifier)
     field: (identifier)
     field: (identifier)
+    field: (identifier)))
+
+================================================================================
+DATA-SOURCE DEFINITION - Multiple Buffers
+================================================================================
+
+DEFINE DATA-SOURCE dsMulti FOR bCust, bOrder.
+DEF DATA-SOURCE dsBoth FOR bHeader, bLine.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (data_source_definition
+    name: (identifier)
+    buffer: (identifier)
+    buffer: (identifier))
+  (data_source_definition
+    name: (identifier)
+    buffer: (identifier)
+    buffer: (identifier)))
+
+================================================================================
+DATA-SOURCE DEFINITION - Multiple Buffers with KEYS
+================================================================================
+
+DEFINE DATA-SOURCE dsKeys FOR bCust KEYS (CustNum), bOrder KEYS (OrderNum, CustNum).
+DEF DATA-SOURCE dsMulti2 FOR bHeader KEYS (ROWID), bLine KEYS (RowID).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (data_source_definition
+    name: (identifier)
+    buffer: (identifier)
+    field: (identifier)
+    buffer: (identifier)
+    field: (identifier)
+    field: (identifier))
+  (data_source_definition
+    name: (identifier)
+    buffer: (identifier)
+    buffer: (identifier)))
+
+================================================================================
+DATA-SOURCE DEFINITION - QUERY with KEYS
+================================================================================
+
+DEFINE DATA-SOURCE dsQk1 QUERY qMain FOR bCust KEYS (CustNum), bOrder KEYS (OrderNum).
+DEF DATA-SOURCE dsQk2 QUERY qMulti FOR bHeader KEYS (ROWID), bLine KEYS (OrderNum).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (data_source_definition
+    name: (identifier)
+    query: (identifier)
+    buffer: (identifier)
+    field: (identifier)
+    buffer: (identifier)
+    field: (identifier))
+  (data_source_definition
+    name: (identifier)
+    query: (identifier)
+    buffer: (identifier)
+    buffer: (identifier)
+    field: (identifier)))
+
+================================================================================
+DATA-SOURCE DEFINITION - QUERY Only
+================================================================================
+
+DEFINE DATA-SOURCE dsQuery QUERY qOrders.
+DEF DATA-SOURCE dsQuery2 QUERY qCustomers.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (data_source_definition
+    name: (identifier)
+    query: (identifier))
+  (data_source_definition
+    name: (identifier)
+    query: (identifier)))
+
+================================================================================
+DATA-SOURCE DEFINITION - Three Buffers
+================================================================================
+
+DEFINE DATA-SOURCE dsThree FOR bHeader, bDetail, bLine.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (data_source_definition
+    name: (identifier)
+    buffer: (identifier)
+    buffer: (identifier)
+    buffer: (identifier)))
+
+================================================================================
+DATA-SOURCE DEFINITION - Access Modifiers
+================================================================================
+
+DEFINE PRIVATE DATA-SOURCE dsPriv FOR bCust.
+DEFINE PROTECTED DATA-SOURCE dsProt FOR bOrder.
+DEF PRIVATE DATA-SOURCE dsQuery QUERY qMain.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (data_source_definition
+    (access_modifier)
+    name: (identifier)
+    buffer: (identifier))
+  (data_source_definition
+    (access_modifier)
+    name: (identifier)
+    buffer: (identifier))
+  (data_source_definition
+    (access_modifier)
+    name: (identifier)
+    query: (identifier)))
+
+================================================================================
+DATA-SOURCE DEFINITION - STATIC Modifier
+================================================================================
+
+DEFINE STATIC DATA-SOURCE dsStatic FOR bCust.
+DEF PROTECTED STATIC DATA-SOURCE dsProtStatic FOR bOrder.
+DEFINE PRIVATE STATIC DATA-SOURCE dsPrivStatic QUERY qMain.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (data_source_definition
+    (static_modifier)
+    name: (identifier)
+    buffer: (identifier))
+  (data_source_definition
+    (access_modifier)
+    (static_modifier)
+    name: (identifier)
     buffer: (identifier))
   (data_source_definition
     (access_modifier)
     (static_modifier)
     name: (identifier)
     query: (identifier)))
+
+================================================================================
+DATA-SOURCE DEFINITION - Combinations
+================================================================================
+
+DEFINE DATA-SOURCE dsFull QUERY qMulti
+  FOR bCust KEYS (CustNum), bOrder KEYS (OrderNum, CustNum).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (data_source_definition
+    name: (identifier)
+    query: (identifier)
+    buffer: (identifier)
+    field: (identifier)
+    buffer: (identifier)
+    field: (identifier)
+    field: (identifier)))
+
+================================================================================
+DATA-SOURCE DEFINITION - Minimal
+================================================================================
+
+DEFINE DATA-SOURCE ds FOR b.
+DEF DATA-SOURCE d FOR buf.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (data_source_definition
+    name: (identifier)
+    buffer: (identifier))
+  (data_source_definition
+    name: (identifier)
+    buffer: (identifier)))

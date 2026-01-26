@@ -4,7 +4,7 @@ FUNCTION DEFINITION
 
 DEFINE FUNCTION doThing RETURNS INTEGER.
 
-FUNCTION computeTotal RETURNS DECIMAL (INPUT qty AS INTEGER, INPUT price AS DECIMAL).
+FUNCTION computeTotal RETURNS DECIMAL (INPUT qty AS INTEGER, INPUT price AS DECIMAL):
   RETURN qty * price.
 END FUNCTION.
 
@@ -28,3 +28,415 @@ END FUNCTION.
       (binary_expression
         (identifier)
         (identifier)))))
+
+================================================================================
+FUNCTION - RETURN keyword
+================================================================================
+
+DEFINE FUNCTION testFunc1 RETURN CHARACTER.
+FUNCTION testFunc2 RETURN LOGICAL (INPUT flag AS CHARACTER).
+  RETURN FALSE.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (function_forward_definition
+    name: (identifier)
+    type: (identifier))
+  (function_definition
+    name: (identifier)
+    type: (identifier)
+    (function_parameter_list
+      (function_parameter
+        name: (identifier)
+        type: (identifier)))
+    (return_statement
+      (boolean_literal))))
+
+================================================================================
+FUNCTION - with CLASS return type
+================================================================================
+
+FUNCTION getHandle RETURNS CLASS Progress.Lang.Object (INPUT id AS INTEGER).
+  RETURN DYNAMIC-FUNCTION("getObject", id).
+END FUNCTION.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (function_definition
+    name: (identifier)
+    type: (qualified_name
+      left: (identifier)
+      right: (identifier)
+      right: (identifier))
+    (function_parameter_list
+      (function_parameter
+        name: (identifier)
+        type: (identifier)))
+    (return_statement
+      (function_call
+        function: (identifier)
+        (arguments
+          (argument
+            value: (string_literal))
+          (argument
+            value: (identifier)))))))
+
+================================================================================
+FUNCTION - EXTENT parameters
+================================================================================
+
+FUNCTION processArray RETURNS LOGICAL (INPUT arr AS INTEGER EXTENT 10).
+  RETURN TRUE.
+END FUNCTION.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (function_definition
+    name: (identifier)
+    type: (identifier)
+    (function_parameter_list
+      (function_parameter
+        name: (identifier)
+        type: (identifier)
+        (number_literal)))
+    (return_statement
+      (boolean_literal))))
+
+================================================================================
+FUNCTION - NO-UNDO parameters
+================================================================================
+
+FUNCTION getBuffer RETURNS HANDLE (INPUT name AS CHARACTER NO-UNDO).
+  RETURN BUFFER(name):HANDLE.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (function_definition
+    name: (identifier)
+    type: (identifier)
+    (function_parameter_list
+      (function_parameter
+        name: (identifier)
+        type: (identifier)
+        (no_undo)))
+    (return_statement
+      (object_access_expression
+        left: (function_call
+          function: (identifier)
+          (arguments
+            (argument
+              value: (identifier))))
+        right: (identifier)))))
+
+================================================================================
+FUNCTION - INPUT-OUTPUT parameters
+================================================================================
+
+FUNCTION updateValue RETURNS CHARACTER (INPUT-OUTPUT val AS CHARACTER NO-UNDO).
+  val = "Updated".
+  RETURN val.
+END FUNCTION.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (function_definition
+    name: (identifier)
+    type: (identifier)
+    (function_parameter_list
+      (function_parameter
+        name: (identifier)
+        type: (identifier)
+        (no_undo)))
+    (assignment_statement
+      left: (identifier)
+      operator: (assignment_operator)
+      right: (string_literal))
+    (return_statement
+      (identifier))))
+
+================================================================================
+FUNCTION - OUTPUT parameters
+================================================================================
+
+FUNCTION calc RETURNS INTEGER (INPUT a AS INTEGER, OUTPUT b AS INTEGER).
+  b = a + 10.
+  RETURN a.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (function_definition
+    name: (identifier)
+    type: (identifier)
+    (function_parameter_list
+      (function_parameter
+        name: (identifier)
+        type: (identifier))
+      (function_parameter
+        name: (identifier)
+        type: (identifier)))
+    (assignment_statement
+      left: (identifier)
+      operator: (assignment_operator)
+      right: (binary_expression
+        (identifier)
+        (number_literal)))
+    (return_statement
+      (identifier))))
+
+================================================================================
+FUNCTION - LIKE parameter type
+================================================================================
+
+FUNCTION copyField RETURNS LOGICAL (INPUT src LIKE Customer.CustNum, OUTPUT dest AS INTEGER NO-UNDO).
+  dest = src.
+  RETURN TRUE.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (function_definition
+    name: (identifier)
+    type: (identifier)
+    (function_parameter_list
+      (function_parameter
+        name: (identifier)
+        like: (qualified_name
+          left: (identifier)
+          right: (identifier)))
+      (function_parameter
+        name: (identifier)
+        type: (identifier)
+        (no_undo)))
+    (assignment_statement
+      left: (identifier)
+      operator: (assignment_operator)
+      right: (identifier))
+    (return_statement
+      (boolean_literal))))
+
+================================================================================
+FUNCTION - Multiple parameters
+================================================================================
+
+FUNCTION compute RETURNS DECIMAL (
+  INPUT a AS INTEGER,
+  INPUT b AS DECIMAL,
+  INPUT c AS CHARACTER NO-UNDO
+).
+  RETURN DECIMAL(a).
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (function_definition
+    name: (identifier)
+    type: (identifier)
+    (function_parameter_list
+      (function_parameter
+        name: (identifier)
+        type: (identifier))
+      (function_parameter
+        name: (identifier)
+        type: (identifier))
+      (function_parameter
+        name: (identifier)
+        type: (identifier)
+        (no_undo)))
+    (return_statement
+      (function_call
+        function: (identifier)
+        (arguments
+          (argument
+            value: (identifier)))))))
+
+================================================================================
+FUNCTION - EXTENT with identifier size
+================================================================================
+
+FUNCTION listValues RETURNS CHARACTER (INPUT vals AS INTEGER EXTENT ?).
+  RETURN STRING(vals).
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (function_definition
+    name: (identifier)
+    type: (identifier)
+    (function_parameter_list
+      (function_parameter
+        name: (identifier)
+        type: (identifier)
+        (null_literal)))
+    (return_statement
+      (function_call
+        function: (identifier)
+        (arguments
+          (argument
+            value: (identifier)))))))
+
+================================================================================
+FUNCTION - EXTENT with constant
+================================================================================
+
+FUNCTION getData RETURNS CHARACTER (INPUT data AS DATE EXTENT {&MAX}).
+  RETURN "".
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (function_definition
+    name: (identifier)
+    type: (identifier)
+    (function_parameter_list
+      (function_parameter
+        name: (identifier)
+        type: (identifier)
+        (constant
+          (identifier))))
+    (return_statement
+      (string_literal))))
+
+================================================================================
+FUNCTION - Minimal
+================================================================================
+
+DEFINE FUNCTION f RETURNS INTEGER.
+DEFINE FUNCTION f2 RETURN LOGICAL ().
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (function_forward_definition
+    name: (identifier)
+    type: (identifier))
+  (function_forward_definition
+    name: (identifier)
+    type: (identifier)
+    (function_parameter_list)))
+
+================================================================================
+FUNCTION - DELEGATE return
+================================================================================
+
+FUNCTION getHandler RETURNS CLASS Progress.Util.EventHandler (INPUT id AS INTEGER).
+  RETURN DYNAMIC-FUNCTION("getHandler").
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (function_definition
+    name: (identifier)
+    type: (qualified_name
+      left: (identifier)
+      right: (identifier)
+      right: (identifier))
+    (function_parameter_list
+      (function_parameter
+        name: (identifier)
+        type: (identifier)))
+    (return_statement
+      (function_call
+        function: (identifier)
+        (arguments)))))
+
+================================================================================
+FUNCTION - NO-UNDO on forward definition
+================================================================================
+
+DEFINE FUNCTION getInfo RETURNS HANDLE (INPUT id AS INTEGER NO-UNDO).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (function_forward_definition
+    name: (identifier)
+    type: (identifier)
+    (function_parameter_list
+      (function_parameter
+        name: (identifier)
+        type: (identifier)
+        (no_undo)))))
+
+================================================================================
+FUNCTION - LIKE with qualified name
+================================================================================
+
+FUNCTION copyBuffer RETURNS LOGICAL (INPUT src LIKE Sales.Customer.CustomerName, OUTPUT dest AS CHARACTER).
+  RETURN TRUE.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (function_definition
+    name: (identifier)
+    type: (identifier)
+    (function_parameter_list
+      (function_parameter
+        name: (identifier)
+        like: (qualified_name
+          left: (identifier)
+          right: (identifier)
+          right: (identifier)))
+      (function_parameter
+        name: (identifier)
+        type: (identifier)))
+    (return_statement
+      (boolean_literal))))
+
+================================================================================
+FUNCTION - Complex body with multiple statements
+================================================================================
+
+FUNCTION process RETURNS CHARACTER (INPUT id AS INTEGER NO-UNDO).
+  IF id > 0 THEN DO:
+    RETURN DYNAMIC-FUNCTION("getString", id).
+  END.
+  ELSE DO:
+    RETURN "".
+  END.
+END FUNCTION.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (function_definition
+    name: (identifier)
+    type: (identifier)
+    (function_parameter_list
+      (function_parameter
+        name: (identifier)
+        type: (identifier)
+        (no_undo)))
+    (if_statement
+      (binary_expression
+        (identifier)
+        (number_literal))
+      then: (do_block
+        (body
+          (return_statement
+            (function_call
+              function: (identifier)
+              (arguments
+                (argument
+                  value: (string_literal))
+                (argument
+                  value: (identifier)))))))
+      else: (do_block
+        (body
+          (return_statement
+            (string_literal)))))))

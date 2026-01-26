@@ -41,7 +41,7 @@ module.exports = ({ kw, tkw }) => ({
       repeat(
         choice(
           seq(kw("LABEL"), $.string_literal),
-          kw("DISABLED"),
+          tkw("DISABLED"),
           seq(kw("ACCELERATOR"), $.string_literal),
           // $.on_phrase, // TODO: add trigger support
         ),
@@ -54,6 +54,6 @@ module.exports = ({ kw, tkw }) => ({
       optional(kw("DISABLED")),
       optional(seq(kw("LABEL"), $.string_literal)),
     ),
-  __submenu_rule: ($) => kw("RULE"),
-  __submenu_skip: ($) => kw("SKIP"),
+  __submenu_rule: ($) => tkw("RULE"),
+  __submenu_skip: ($) => tkw("SKIP"),
 });

@@ -13,7 +13,7 @@ module.exports = ({ kw, tkw }) => ({
       choice(
         // DEFINE FRAME name record EXCEPT fields
         seq(
-          field("record", $.identifier),
+          field("record", choice($.qualified_name, $.identifier)),
           kw("EXCEPT"),
           repeat1(field("field", $.identifier)),
         ),
@@ -50,13 +50,32 @@ module.exports = ({ kw, tkw }) => ({
 
   __frame_form_item: ($) =>
     choice(
-      kw("SPACE"),
-      kw("SKIP"),
+      tkw("SPACE"),
+      tkw("SKIP"),
+      seq(tkw("SPACE"), "(", optional($._expression), ")"),
+      seq(tkw("SKIP"), "(", optional($._expression), ")"),
       // field
-      field("field", $.identifier),
+      field("field", choice($.qualified_name, $.identifier)),
       // constant
       seq(
         $.string_literal,
+        optional(
+          choice(
+            $.__frame_at_phrase,
+            seq(kw("TO"), $._expression),
+          ),
+        ),
+        optional(seq(kw("BGCOLOR"), $._expression)),
+        optional(seq(kw("DCOLOR"), $._expression)),
+        optional(seq(kw("FGCOLOR"), $._expression)),
+        optional(seq(kw("FONT"), $._expression)),
+        optional(seq(kw("PFCOLOR"), $._expression)),
+        optional(seq(tkw("VIEW-AS"), kw("TEXT"))),
+        optional(seq(tkw("WIDGET-ID"), $._expression)),
+      ),
+      // number literal form-item  
+      seq(
+        $.number_literal,
         optional(
           choice(
             $.__frame_at_phrase,
@@ -129,12 +148,15 @@ module.exports = ({ kw, tkw }) => ({
     choice(
       seq(kw("WIDTH"), $._expression),
       seq(kw("DOWN"), optional($._expression)),
-      kw("OVERLAY"),
+      seq(kw("SIZE"), $._expression, kw("BY"), $._expression),
+      seq(tkw("SIZE-CHARS"), $._expression, kw("BY"), $._expression),
+      seq(tkw("SIZE-PIXELS"), $._expression, kw("BY"), $._expression),
+      tkw("OVERLAY"),
       seq(kw("ROW"), $._expression),
       seq(kw("COLUMN"), $._expression),
       tkw("NO-LABELS"),
       tkw("SIDE-LABELS"),
-      kw("CENTERED"),
+      tkw("CENTERED"),
       // Add more frame options as needed
     ),
 });

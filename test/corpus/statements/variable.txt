@@ -402,3 +402,25 @@ DEFINE VARIABLE v15 AS ROWID NO-UNDO.
     name: (identifier)
     type: (identifier)
     (no_undo)))
+
+================================================================================
+VARIABLE DEFINITION - Trigger Phrase
+================================================================================
+
+DEFINE VARIABLE vTrigger AS CHARACTER ON trigger1.
+DEFINE VARIABLE vEvent AS INTEGER ON clickHandler NO-UNDO.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (trigger_phrase
+      (identifier)))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (trigger_phrase
+      (identifier))
+    (no_undo)))

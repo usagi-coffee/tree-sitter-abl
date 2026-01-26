@@ -1,14 +1,100 @@
 ================================================================================
-STREAM DEFINITION
+STREAM DEFINITION - Basic Syntax
 ================================================================================
 
 DEFINE STREAM outStream.
-DEFINE NEW GLOBAL SHARED STREAM sShared.
-DEF PRIVATE STREAM sClass.
+DEF STREAM debugStream.
 
 --------------------------------------------------------------------------------
 
 (source_code
+  (stream_definition
+    name: (identifier))
+  (stream_definition
+    name: (identifier)))
+
+================================================================================
+STREAM DEFINITION - NEW SHARED
+================================================================================
+
+DEFINE NEW SHARED STREAM sShared.
+DEF NEW SHARED STREAM sGlobal.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (stream_definition
+    (shared_variable_scope)
+    name: (identifier))
+  (stream_definition
+    (shared_variable_scope)
+    name: (identifier)))
+
+================================================================================
+STREAM DEFINITION - SHARED
+================================================================================
+
+DEFINE SHARED STREAM sCust.
+DEF SHARED STREAM sOrder.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (stream_definition
+    (shared_variable_scope)
+    name: (identifier))
+  (stream_definition
+    (shared_variable_scope)
+    name: (identifier)))
+
+================================================================================
+STREAM DEFINITION - NEW GLOBAL SHARED
+================================================================================
+
+DEFINE NEW GLOBAL SHARED STREAM sGlobalShared.
+DEF NEW GLOBAL SHARED STREAM sPersistent.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (stream_definition
+    (shared_variable_scope)
+    name: (identifier))
+  (stream_definition
+    (shared_variable_scope)
+    name: (identifier)))
+
+================================================================================
+STREAM DEFINITION - PRIVATE
+================================================================================
+
+DEFINE PRIVATE STREAM privStream.
+DEF PRIVATE STREAM classStream.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (stream_definition
+    (shared_variable_scope)
+    name: (identifier))
+  (stream_definition
+    (shared_variable_scope)
+    name: (identifier)))
+
+================================================================================
+STREAM DEFINITION - Short Names
+================================================================================
+
+DEF STREAM s.
+DEFINE STREAM log.
+DEFINE NEW SHARED STREAM db.
+DEFINE PRIVATE STREAM out.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (stream_definition
+    name: (identifier))
   (stream_definition
     name: (identifier))
   (stream_definition

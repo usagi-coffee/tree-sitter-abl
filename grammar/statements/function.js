@@ -4,6 +4,7 @@ module.exports = ({ kw, tkw }) => ({
       kw("FUNCTION"),
       field("name", $.identifier),
       choice(kw("RETURNS"), kw("RETURN")),
+      optional(kw("CLASS")),
       field("type", $._type_name),
       optional($.function_parameter_list),
       choice($._terminator, $._colon),
@@ -19,6 +20,7 @@ module.exports = ({ kw, tkw }) => ({
       kw("FUNCTION"),
       field("name", $.identifier),
       choice(kw("RETURNS"), kw("RETURN")),
+      optional(kw("CLASS")),
       field("type", $._type_name),
       optional($.function_parameter_list),
       $._terminator,
@@ -51,13 +53,14 @@ module.exports = ({ kw, tkw }) => ({
     ),
 
   __function_extent_phrase: ($) =>
-    seq(kw("EXTENT"), optional($.__function_extent_size)),
+    seq(tkw("EXTENT"), optional($.__function_extent_size)),
   __function_no_undo: ($) => tkw("NO-UNDO"),
   __function_extent_size: ($) =>
     choice(
       $.number_literal,
       alias($.constant_expression, $.constant),
       $.identifier,
+      $.null_literal,
     ),
   __function_field_name: ($) => choice($.qualified_name, $.identifier),
 });
