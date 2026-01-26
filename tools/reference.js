@@ -1,45 +1,113 @@
-import { createReadStream } from "fs";
-import * as readline from "readline";
+import { readFileSync } from "fs";
 
-const phrase = process.argv[2];
-
-if (!phrase) {
-  console.error('Usage: bun run reference "PHRASE"');
+let entry = process.argv[2];
+if (!entry) {
+  console.error('Usage: bun run reference "entry"');
   process.exit(1);
 }
 
-async function extractSection(path, phrase) {
-  const stream = createReadStream(path, { encoding: "utf8" });
-  const rl = readline.createInterface({ input: stream });
+const lines = readFileSync("./docs/abl-reference.txt", "utf8").split(/\r?\n/);
+const TITLE = "OpenEdge Development: ABL Reference: Version 12.8";
+const TOC1 = "Table of Contents";
+const TOC2 = "Contents";
+const tocRe = /^\s*(.+?)\.{5,}\s*(\d+)\s*$/;
 
-  let capturing = false;
-  let current;
-  const phraseLower = phrase.toLowerCase();
+let toc = [];
+let inToc = false;
+let seenAny = false;
+let nonTocStreak = 0;
 
-  for await (const line of rl) {
-    // Section header starts with form feed (^L)
-    if (line.startsWith("\f")) {
-      const title = line.slice(1).trim();
-      const titleLower = title.toLowerCase();
+for (let i = 0; i < lines.length; i++) {
+  const t = lines[i].trim();
 
-      if (capturing) {
-        if (title !== current) console.log("[END]", current);
-        capturing = false;
-        continue;
-      }
+  if (!inToc) {
+    if (t === TOC1) inToc = true;
+    continue;
+  }
 
-      if (titleLower.includes(phraseLower)) {
-        if (title !== current) console.log("[START]", title);
-        current = title;
-        capturing = true;
-        continue;
-      }
-    }
+  if (t === TOC2 || t === TITLE || t === "" || t === "\f") continue;
 
-    if (capturing) {
-      console.log(line);
-    }
+  const m = lines[i].match(tocRe);
+  if (m) {
+    seenAny = true;
+    nonTocStreak = 0;
+    toc.push({ title: m[1].trim(), page: Number(m[2]) });
+  } else if (seenAny) {
+    nonTocStreak++;
+    if (nonTocStreak >= 50) break;
   }
 }
 
-extractSection("./docs/abl-reference.txt", phrase);
+if (!toc.length) {
+  console.error('No TOC entries found after "Table of Contents".');
+  process.exit(1);
+}
+
+const isPrefix = entry.endsWith("*");
+const isSuffix = entry.startsWith("*");
+
+let matches = [];
+
+if (isPrefix) {
+  const prefix = entry.slice(0, -1);
+  matches = toc.filter((x) => x.title.startsWith(prefix));
+}
+
+if (isSuffix) {
+  const suffix = entry.slice(1);
+  matches = toc.filter((x) => x.title.endsWith(suffix));
+}
+
+if (isPrefix || isSuffix) {
+  if (!matches.length) {
+    console.error(`No TOC entries match: "${entry}"`);
+    process.exit(1);
+  }
+  for (const m of matches) console.log(`${m.title}`);
+  process.exit(0);
+}
+
+// ---- normal single-entry behavior (exact first, then substring fallback if you still want it)
+let idx = toc.findIndex((x) => x.title === entry);
+if (idx === -1) idx = toc.findIndex((x) => x.title.includes(entry));
+if (idx === -1) {
+  console.error(`Entry not found in TOC: "${entry}"`);
+  process.exit(1);
+}
+
+entry = toc[idx].title;
+const start_page = toc[idx].page;
+const next_entry = toc[idx + 1]?.title ?? null;
+const next_entry_page = toc[idx + 1]?.page ?? Infinity;
+// console.log(entry, start_page, next_entry, next_entry_page);
+
+let page = 0;
+let capturing = false;
+
+for (let i = 0; i < lines.length; i++) {
+  const line = lines[i];
+
+  if (line === TITLE) {
+    const fwd = +lines[i + 2];
+    const back = +lines[i - 2];
+
+    if (Number.isInteger(fwd)) page = +fwd;
+    else if (Number.isInteger(back)) page = +back;
+    else continue;
+  }
+
+  if (page + 1 < start_page) continue;
+  if (page > next_entry_page) break;
+
+  if (!capturing) {
+    if (line === entry) capturing = true;
+  }
+
+  if (line === next_entry) break;
+
+  if (capturing) {
+    if (line.startsWith("\f") || line === TITLE || (line && !isNaN(+line)))
+      continue;
+    console.log(line);
+  }
+}
