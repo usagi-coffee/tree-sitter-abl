@@ -96,10 +96,8 @@ module.exports = ({ kw, tkw }) => ({
     seq(
       kw("ON"),
       tkw("QUIT"),
-      tkw("UNDO"),
-      optional(field("undo_label", $.identifier)),
-      ",",
-      $.__do_on_quit_action,
+      optional(seq(tkw("UNDO"), optional(field("undo_label", $.identifier)))),
+      optional(seq(",", $.__do_on_quit_action)),
     ),
   __do_on_quit_action: ($) =>
     choice(
