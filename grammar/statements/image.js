@@ -5,6 +5,12 @@ module.exports = ({ kw, tkw }) => ({
       optional(kw("PRIVATE")),
       kw("IMAGE"),
       field("name", $.identifier),
+      $.__image_body,
+      $._terminator,
+    ),
+
+  __image_body: ($) =>
+    seq(
       repeat1(
         choice(
           alias($.__image_phrase, $.image_phrase),
@@ -18,7 +24,6 @@ module.exports = ({ kw, tkw }) => ({
       optional(seq(kw("TOOLTIP"), field("tooltip", choice($.string_literal, $.identifier)))),
       optional(seq(tkw("STRETCH-TO-FIT"), optional(tkw("RETAIN-SHAPE")))),
       optional(tkw("TRANSPARENT")),
-      $._terminator,
     ),
 
   __image_phrase: ($) =>

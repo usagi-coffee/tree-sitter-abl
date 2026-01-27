@@ -12,6 +12,12 @@ module.exports = ({ kw, tkw }) => ({
       field("name", $.identifier),
       kw("QUERY"),
       field("query", $.identifier),
+      $.__browse_body,
+      $._terminator,
+    ),
+
+  __browse_body: ($) =>
+    seq(
       optional(
         choice(
           tkw("SHARE-LOCK"),
@@ -34,7 +40,6 @@ module.exports = ({ kw, tkw }) => ({
       optional($.__browse_enable_phrase),
       optional(kw("WITH")),
       repeat($.__browse_option),
-      $._terminator,
     ),
 
   __browse_column: ($) =>

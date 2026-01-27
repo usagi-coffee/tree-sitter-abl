@@ -5,23 +5,28 @@ module.exports = ({ kw, tkw }) => ({
       seq(
         optional(seq(field("label", $.identifier), $._colon)),
         tkw("DO"),
-        optional($.__do_transaction_phrase),
-        optional($.__do_preselect_phrase),
-        optional(choice($.__do_while_phrase, $.__do_loop_phrase)),
-        optional($.__do_transaction_phrase),
-        // FIXME: this shouldn't be repeat but we need to save on state counts
-        repeat(
-          choice(
-            alias($.__do_on_endkey_phrase, $.on_endkey_phrase),
-            alias($.__do_on_error_phrase, $.on_error_phrase),
-            alias($.__do_on_quit_phrase, $.on_quit_phrase),
-            alias($.__do_on_stop_phrase, $.on_stop_phrase),
-          ),
-        ),
-        $.body,
+        $.__do_body,
         tkw("END"),
         $._terminator,
       ),
+    ),
+
+  __do_body: ($) =>
+    seq(
+      optional($.__do_transaction_phrase),
+      optional($.__do_preselect_phrase),
+      optional(choice($.__do_while_phrase, $.__do_loop_phrase)),
+      optional($.__do_transaction_phrase),
+      // FIXME: this shouldn't be repeat but we need to save on state counts
+      repeat(
+        choice(
+          alias($.__do_on_endkey_phrase, $.on_endkey_phrase),
+          alias($.__do_on_error_phrase, $.on_error_phrase),
+          alias($.__do_on_quit_phrase, $.on_quit_phrase),
+          alias($.__do_on_stop_phrase, $.on_stop_phrase),
+        ),
+      ),
+      $.body,
     ),
 
   body: ($) => seq(choice($._colon, $._terminator_dot), repeat($._statement)),

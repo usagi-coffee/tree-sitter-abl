@@ -2,6 +2,11 @@ module.exports = ({ kw, tkw }) => ({
   choose_statement: ($) =>
     seq(
       tkw("CHOOSE"),
+      $.__choose_body,
+      $._terminator,
+    ),
+  __choose_body: ($) =>
+    seq(
       choice(
         seq(kw("ROW"), field("field", $.identifier), optional(seq(kw("HELP"), $.string_literal))),
         seq(kw("FIELD"), repeat1(seq(field("field", $.identifier), optional(seq(kw("HELP"), $.string_literal))))),
@@ -13,7 +18,6 @@ module.exports = ({ kw, tkw }) => ({
       optional(tkw("NO-ERROR")),
       optional(seq(kw("PAUSE"), field("pause", $._expression))),
       optional(alias($.__choose_frame_phrase, $.frame_phrase)),
-      $._terminator,
     ),
   __choose_frame_phrase: ($) =>
     seq(kw("WITH"), kw("FRAME"), field("frame", $.identifier)),

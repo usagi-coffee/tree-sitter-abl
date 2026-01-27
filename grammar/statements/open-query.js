@@ -4,6 +4,11 @@ module.exports = ({ kw, tkw }) => ({
       tkw("OPEN"),
       kw("QUERY"),
       field("query", $.identifier),
+      $.__open_query_body,
+      $._terminator,
+    ),
+  __open_query_body: ($) =>
+    seq(
       choice(kw("FOR"), tkw("PRESELECT")),
       alias($.__open_query_record_phrase, $.record_phrase),
       repeat(
@@ -18,7 +23,6 @@ module.exports = ({ kw, tkw }) => ({
       repeat(alias($.__open_query_by_phrase, $.by_phrase)),
       optional(tkw("INDEXED-REPOSITION")),
       optional(seq(kw("MAX-ROWS"), field("max_rows", $._expression))),
-      $._terminator,
     ),
   __open_query_record_phrase: ($) =>
     seq(

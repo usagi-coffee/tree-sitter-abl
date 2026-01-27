@@ -9,6 +9,12 @@ module.exports = ({ kw, tkw }) => ({
         ),
       ),
       kw("THROUGH"),
+      $.__input_through_body,
+      $._terminator,
+    ),
+
+  __input_through_body: ($) =>
+    seq(
       $.__input_through_program_target,
       repeat($.__input_through_argument),
       optional(choice(tkw("ECHO"), tkw("NO-ECHO"))),
@@ -20,7 +26,6 @@ module.exports = ({ kw, tkw }) => ({
       ),
       optional(kw("UNBUFFERED")),
       optional(alias($.__input_through_convert_phrase, $.convert_phrase)),
-      $._terminator,
     ),
 
   __input_through_program_target: ($) =>

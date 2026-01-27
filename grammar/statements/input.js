@@ -8,6 +8,12 @@ module.exports = ({ kw, tkw }) => ({
           alias($.__input_stream_handle_phrase, $.stream_handle_phrase),
         ),
       ),
+      $.__input_body,
+      $._terminator,
+    ),
+
+  __input_body: ($) =>
+    seq(
       choice(tkw("CLOSE"), seq(kw("FROM"), $.__input_from_target)),
       optional(alias($.__input_lob_dir_phrase, $.lob_dir_phrase)),
       optional(kw("BINARY")),
@@ -20,7 +26,6 @@ module.exports = ({ kw, tkw }) => ({
       ),
       optional(kw("UNBUFFERED")),
       optional(alias($.__input_convert_phrase, $.convert_phrase)),
-      $._terminator,
     ),
 
   __input_from_target: ($) =>
