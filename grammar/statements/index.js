@@ -121,6 +121,7 @@ const subscribeStatement = require("./subscribe");
 const superStatement = require("./super");
 const systemDialogStatement = require("./system-dialog");
 const tempTableDefinition = require("./temp-table");
+const workTableDefinition = require("./work-table");
 const workfileDefinition = require("./workfile");
 const terminalStatement = require("./terminal");
 const transactionModeStatement = require("./transaction-mode");
@@ -265,6 +266,7 @@ module.exports = (ctx) => ({
   ...systemDialogStatement(ctx),
   ...tempTableDefinition(ctx),
   ...workfileDefinition(ctx),
+  ...workTableDefinition(ctx),
   ...terminalStatement(ctx),
   ...transactionModeStatement(ctx),
   ...underlineStatement(ctx),

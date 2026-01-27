@@ -2,16 +2,26 @@ module.exports = ({ kw, tkw }) => ({
   temp_table_definition: ($) =>
     seq(
       choice(kw("DEFINE"), kw("DEF")),
-      optional(
-        seq(
-          optional(alias($.__temp_table_shared_scope, $.shared_variable_scope)),
-          optional(alias($.__temp_table_access_modifier, $.access_modifier)),
-          optional(alias($.__temp_table_static_modifier, $.static_modifier)),
+      seq(
+        optional(alias($.__temp_table_shared_scope, $.shared_variable_scope)),
+        optional(alias($.__temp_table_access_modifier, $.access_modifier)),
+        optional(alias($.__temp_table_static_modifier, $.static_modifier)),
+        optional(
+          alias(
+            $.__temp_table_serialization_modifier,
+            $.serialization_modifier,
+          ),
         ),
+        kw("TEMP-TABLE"),
+        field("name", $.identifier),
+        optional(alias($.__temp_table_no_undo, $.no_undo)),
+        $.__temp_table_body,
+        $._terminator,
       ),
-      $.__temp_table_keyword,
-      field("name", $.identifier),
-      optional(alias($.__temp_table_no_undo, $.no_undo)),
+    ),
+
+  __temp_table_body: ($) =>
+    seq(
       optional(
         seq(kw("NAMESPACE-URI"), field("namespace_uri", $.string_literal)),
       ),
@@ -44,23 +54,6 @@ module.exports = ({ kw, tkw }) => ({
           alias($.__temp_table_index, $.temp_table_index),
         ),
       ),
-      $._terminator,
-    ),
-
-  work_table_definition: ($) =>
-    seq(
-      choice(kw("DEFINE"), kw("DEF")),
-      kw("WORK-TABLE"),
-      field("name", $.identifier),
-      optional(alias($.__temp_table_like_phrase, $.like_phrase)),
-      optional(alias($.__temp_table_no_undo, $.no_undo)),
-      repeat(
-        choice(
-          alias($.__temp_table_field, $.work_table_field),
-          alias($.__temp_table_index, $.work_table_index),
-        ),
-      ),
-      $._terminator,
     ),
 
   __temp_table_field: ($) =>
@@ -155,14 +148,6 @@ module.exports = ({ kw, tkw }) => ({
   __temp_table_static_modifier: ($) => kw("STATIC"),
   __temp_table_serialization_modifier: ($) =>
     choice(kw("SERIALIZABLE"), kw("NON-SERIALIZABLE")),
-  __temp_table_keyword: ($) =>
-    choice(
-      kw("TEMP-TABLE"),
-      seq(
-        alias($.__temp_table_serialization_modifier, $.serialization_modifier),
-        kw("TEMP-TABLE"),
-      ),
-    ),
   __temp_table_like_name: ($) => choice($.identifier, $.qualified_name),
   __temp_table_label_list: ($) =>
     seq($.string_literal, repeat(seq(",", $.string_literal))),

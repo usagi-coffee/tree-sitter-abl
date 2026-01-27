@@ -68,7 +68,7 @@ Strongly prefer using these commands as they have helpful side-effects like retu
 - Terminators like `terminator` or `terminator_dot` should never be visible in the syntax tree output.
 - `kw` and `tkw` are passed down using argument, to access them unpack it inside the statement module e.g `module.exports = ({ kw, tkw })`.
 - Always prefer `| tail` when calling `bun run test` instead of `| head`.
-- Parser regeneration takes about 40 seconds so adjust timeout for `bun run test` accordingly.
+- Parser regeneration can take up to 1 minute so adjust timeout for `bun run test` accordingly.
 - Tests return only failed cases and failed syntax tree or a message that everything went well.
 
 ## Tree-Sitter Test Corpus Format
