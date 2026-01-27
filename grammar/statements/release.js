@@ -1,6 +1,12 @@
-module.exports = ({ kw }) => ({
+module.exports = ({ kw, tkw }) => ({
   release_statement: ($) =>
-    seq(kw("RELEASE"), field("record", $.__release_record_name), $._terminator),
+    seq(
+      kw("RELEASE"),
+      field("record", $.__release_record_name),
+      optional($.__release_no_error),
+      $._terminator,
+    ),
 
+  __release_no_error: ($) => tkw("NO-ERROR"),
   __release_record_name: ($) => choice($.identifier, $.qualified_name),
 });

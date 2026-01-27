@@ -106,23 +106,9 @@ module.exports = ({ kw, tkw }) => ({
       ),
     ),
   __do_on_stop_phrase: ($) =>
-    seq(
-      kw("ON"),
-      kw("STOP"),
-      choice(
-        alias($.__do_undo_throw_phrase, $.undo_throw_phrase),
-        alias($.__do_undo_leave_phrase, $.undo_leave_phrase),
-      ),
-    ),
+    seq(kw("ON"), kw("STOP"), alias($.__do_undo_phrase, $.undo_phrase)),
   __do_on_error_phrase: ($) =>
-    seq(
-      kw("ON"),
-      kw("ERROR"),
-      choice(
-        alias($.__do_undo_throw_phrase, $.undo_throw_phrase),
-        alias($.__do_undo_leave_phrase, $.undo_leave_phrase),
-      ),
-    ),
+    seq(kw("ON"), kw("ERROR"), alias($.__do_undo_phrase, $.undo_phrase)),
   __do_on_quit_phrase: ($) =>
     seq(
       kw("ON"),
@@ -147,6 +133,12 @@ module.exports = ({ kw, tkw }) => ({
           field("return_value", $._expression),
         ),
       ),
+    ),
+  __do_undo_phrase: ($) =>
+    seq(
+      tkw("UNDO"),
+      ",",
+      choice(tkw("THROW"), tkw("LEAVE"), tkw("NEXT")),
     ),
   __do_undo_throw_phrase: ($) => seq(tkw("UNDO"), ",", tkw("THROW")),
   __do_undo_leave_phrase: ($) =>

@@ -24,18 +24,10 @@ module.exports = ({ kw, tkw }) => ({
     ),
 
   __repeat_on_stop_phrase: ($) =>
-    seq(
-      kw("ON"),
-      kw("STOP"),
-      alias($.__repeat_undo_return_error, $.undo_return_error),
-    ),
+    seq(kw("ON"), kw("STOP"), alias($.__repeat_undo_phrase, $.undo_phrase)),
 
   __repeat_on_error_phrase: ($) =>
-    seq(
-      kw("ON"),
-      kw("ERROR"),
-      alias($.__repeat_undo_throw_phrase, $.undo_throw_phrase),
-    ),
+    seq(kw("ON"), kw("ERROR"), alias($.__repeat_undo_phrase, $.undo_phrase)),
 
   __repeat_on_endkey_phrase: ($) =>
     seq(kw("ON"), kw("ENDKEY"), alias($.__repeat_on_endkey_undo, $.undo_phrase)),
@@ -90,6 +82,24 @@ module.exports = ({ kw, tkw }) => ({
       ),
     ),
 
+  __repeat_undo_phrase: ($) =>
+    seq(
+      tkw("UNDO"),
+      ",",
+      choice(
+        seq(
+          tkw("RETURN"),
+          tkw("ERROR"),
+          alias($.string_literal, $._repeat_error_value),
+        ),
+        tkw("THROW"),
+        tkw("LEAVE"),
+        tkw("NEXT"),
+        tkw("RETRY"),
+        seq(tkw("RETURN"), tkw("NO-APPLY")),
+        seq(tkw("RETURN"), alias($.string_literal, $._repeat_return_value)),
+      ),
+    ),
   __repeat_undo_throw_phrase: ($) => seq(tkw("UNDO"), ",", tkw("THROW")),
   __repeat_undo_return_error: ($) =>
     seq(tkw("UNDO"), ",", tkw("RETURN"), tkw("ERROR"), $.new_expression),

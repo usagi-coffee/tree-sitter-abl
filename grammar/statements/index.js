@@ -118,7 +118,6 @@ const stopStatement = require("./stop");
 const streamDefinition = require("./stream");
 const submenuDefinition = require("./submenu");
 const subscribeStatement = require("./subscribe");
-const superStatement = require("./super");
 const systemDialogStatement = require("./system-dialog");
 const tempTableDefinition = require("./temp-table");
 const workTableDefinition = require("./work-table");
@@ -262,7 +261,6 @@ module.exports = (ctx) => ({
   ...streamDefinition(ctx),
   ...submenuDefinition(ctx),
   ...subscribeStatement(ctx),
-  ...superStatement(ctx),
   ...systemDialogStatement(ctx),
   ...tempTableDefinition(ctx),
   ...workfileDefinition(ctx),

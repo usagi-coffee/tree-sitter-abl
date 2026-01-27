@@ -59,6 +59,7 @@ module.exports = ({ kw, tkw }) => ({
         kw("INPUT"),
         kw("MESSAGES"),
         $.number_literal,
+        $.string_literal,
         seq(tkw("VALUE"), "(", field("value", $._expression), ")"),
         seq(
           optional(

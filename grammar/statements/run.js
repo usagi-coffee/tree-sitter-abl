@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+module.exports = ({ kw, tkw }) => ({
   procedure_name: ($) => /[A-Za-z0-9_\/.-]+\.p/i,
 
   run_statement: ($) =>
@@ -6,6 +6,7 @@ module.exports = ({ kw }) => ({
       kw("RUN"),
       field("procedure", $._run_target),
       optional($.arguments),
+      optional(tkw("NO-ERROR")),
       $._terminator,
     ),
 

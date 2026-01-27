@@ -3,6 +3,12 @@ module.exports = ({ kw }) => ({
     seq(
       kw("VAR"),
       optional(alias($.__var_access_modifier, $.access_modifier)),
+      optional(
+        choice(
+          alias($.__var_static_modifier, $.static_modifier),
+          alias($.__var_serialization_modifier, $.serialization_modifier),
+        ),
+      ),
       $._var_type,
       $.var_decl,
       repeat(seq(",", $.var_decl)),
@@ -40,4 +46,7 @@ module.exports = ({ kw }) => ({
       kw("PACKAGE-PROTECTED"),
       kw("PUBLIC"),
     ),
+  __var_static_modifier: ($) => kw("STATIC"),
+  __var_serialization_modifier: ($) =>
+    choice(kw("SERIALIZABLE"), kw("NON-SERIALIZABLE")),
 });

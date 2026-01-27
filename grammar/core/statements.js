@@ -148,7 +148,6 @@ module.exports = () => ({
       $.show_stats_statement,
       $.os_create_dir_statement,
       $.process_events_statement,
-      $.super_statement,
       $.terminal_statement,
       $.bell_statement,
       $.dictionary_statement,
