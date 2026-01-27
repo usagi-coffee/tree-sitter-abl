@@ -42,6 +42,7 @@ Strongly prefer using these commands as they have helpful side-effects like retu
 
 ## Conventions
 
+- Always runs tests after modifications.
 - Grammar changes without thorough corpus coverage and testing are unacceptable.
 - Avoid creating a shared or generic code unless it is really a part of the core syntax, core grammar modifications require a confirmation unless experimenting.
 - We intentionally duplicate modifiers and tunings at the statement level so that most of the statement-specific context lives in a single file. To support this, each statement defines its own `__<statement>_rules`, which are later aliased to `$.rule` where needed. This intentional duplication favors locality, readability, and conflict isolation over DRY abstractions.
@@ -52,8 +53,7 @@ Strongly prefer using these commands as they have helpful side-effects like retu
 - Treat `(ERROR)` and `(MISSING)` nodes in the test output aserrors that need to be fixed.
 - Use compact rule formatting: keep one-line rules adjacent with no blank lines, avoid blank lines between consecutive one-line rules.
 - The grammar should avoid permissive or catch-all rules that allow invalid syntax to be parsed successfully.
-- ABL grammar is filled with optionals, be careful not to explode `tree-sitter`'s `STATE_COUNT`.
-- Always check `STATE_COUNT` impacts and note the current `STATE_COUNT` cost for statements via leading comments in `grammar/core/statements.js`.
+- ABL grammar is filled with optionals, be careful not to explode `tree-sitter`'s `STATE_COUNT`, always check modification's impact on `STATE_COUNT`.
 - Do not adjust or remove tests just to satisfy test passing, just fix the underlying parsing issue or ask me first to remove if it's really not supported.
 - `src/scanner.c` modifications need regeneration before testing.
 - Don't do unnecessary comments like (something is above).

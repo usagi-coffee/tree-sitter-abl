@@ -4,14 +4,17 @@ const proc = Bun.spawnSync({
   stderr: "pipe",
 });
 
-const raw = (proc.stdout?.toString("utf8") ?? "") + (proc.stderr?.toString("utf8") ?? "");
+const raw =
+  (proc.stdout?.toString("utf8") ?? "") + (proc.stderr?.toString("utf8") ?? "");
 
+const checkmarkCount = (raw.match(new RegExp("✓", "g")) || []).length;
+const failureCount = (raw.match(new RegExp("✗", "g")) || []).length;
 const hasCheckmark = raw.includes("✓");
 const hasFailure = raw.includes("✗");
 
 // if tests ran, had ✓, and no failures → print success and exit
 if (hasCheckmark && !hasFailure) {
-  console.log("✓ All tests passed successfully");
+  console.log(`✓ All (${checkmarkCount}) tests passed successfully`);
   process.exit(0);
 }
 
@@ -70,3 +73,4 @@ const result = lines
   .join("\n");
 
 console.log(result);
+if (failureCount > 0) console.log(`✗ ${failureCount} tests failed`);
