@@ -44377,6 +44377,19 @@
           ]
         },
         {
+          "type": "SYMBOL",
+          "name": "__system_dialog_color_body"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_terminator"
+        }
+      ]
+    },
+    "__system_dialog_color_body": {
+      "type": "SEQ",
+      "members": [
+        {
           "type": "FIELD",
           "name": "color",
           "content": {
@@ -44500,10 +44513,6 @@
               "type": "BLANK"
             }
           ]
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_terminator"
         }
       ]
     },
@@ -44548,6 +44557,19 @@
             }
           ]
         },
+        {
+          "type": "SYMBOL",
+          "name": "__system_dialog_font_body"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_terminator"
+        }
+      ]
+    },
+    "__system_dialog_font_body": {
+      "type": "SEQ",
+      "members": [
         {
           "type": "FIELD",
           "name": "font",
@@ -44806,10 +44828,6 @@
               "type": "BLANK"
             }
           ]
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_terminator"
         }
       ]
     },
@@ -44854,6 +44872,19 @@
             }
           ]
         },
+        {
+          "type": "SYMBOL",
+          "name": "__system_dialog_get_dir_body"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_terminator"
+        }
+      ]
+    },
+    "__system_dialog_get_dir_body": {
+      "type": "SEQ",
+      "members": [
         {
           "type": "FIELD",
           "name": "variable",
@@ -45070,10 +45101,6 @@
               "type": "BLANK"
             }
           ]
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_terminator"
         }
       ]
     },
@@ -45118,6 +45145,19 @@
             }
           ]
         },
+        {
+          "type": "SYMBOL",
+          "name": "__system_dialog_get_file_body"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_terminator"
+        }
+      ]
+    },
+    "__system_dialog_get_file_body": {
+      "type": "SEQ",
+      "members": [
         {
           "type": "FIELD",
           "name": "variable",
@@ -45523,10 +45563,6 @@
               "type": "BLANK"
             }
           ]
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_terminator"
         }
       ]
     },
@@ -56547,6 +56583,26 @@
         {
           "type": "SYMBOL",
           "name": "stop_statement"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "system_dialog_get_file_statement"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "system_dialog_font_statement"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "system_dialog_printer_setup_statement"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "system_dialog_get_dir_statement"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "system_dialog_color_statement"
         }
       ]
     }

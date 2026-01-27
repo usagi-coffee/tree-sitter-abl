@@ -3,16 +3,27 @@ module.exports = ({ kw, tkw }) => ({
     seq(
       tkw("SYSTEM-DIALOG"),
       kw("COLOR"),
+      $.__system_dialog_color_body,
+      $._terminator,
+    ),
+
+  __system_dialog_color_body: ($) =>
+    seq(
       field("color", $._expression),
       optional(seq(kw("UPDATE"), field("update", $.identifier))),
       optional(seq(kw("IN"), kw("WINDOW"), field("window", $._expression))),
-      $._terminator,
     ),
 
   system_dialog_font_statement: ($) =>
     seq(
       tkw("SYSTEM-DIALOG"),
       kw("FONT"),
+      $.__system_dialog_font_body,
+      $._terminator,
+    ),
+
+  __system_dialog_font_body: ($) =>
+    seq(
       field("font", $._expression),
       optional(tkw("ANSI-ONLY")),
       optional(tkw("FIXED-ONLY")),
@@ -20,25 +31,35 @@ module.exports = ({ kw, tkw }) => ({
       optional(seq(kw("MIN-SIZE"), field("min_size", $._expression))),
       optional(seq(kw("UPDATE"), field("update", $.identifier))),
       optional(seq(kw("IN"), kw("WINDOW"), field("window", $._expression))),
-      $._terminator,
     ),
 
   system_dialog_get_dir_statement: ($) =>
     seq(
       tkw("SYSTEM-DIALOG"),
       kw("GET-DIR"),
+      $.__system_dialog_get_dir_body,
+      $._terminator,
+    ),
+
+  __system_dialog_get_dir_body: ($) =>
+    seq(
       field("variable", $.identifier),
       optional(seq(kw("INITIAL-DIR"), field("initial_dir", $._expression))),
       optional(seq(kw("TITLE"), field("title", $._expression))),
       optional(seq(kw("UPDATE"), field("update", $.identifier))),
       optional(seq(kw("IN"), kw("WINDOW"), field("window", $._expression))),
-      $._terminator,
     ),
 
   system_dialog_get_file_statement: ($) =>
     seq(
       tkw("SYSTEM-DIALOG"),
       kw("GET-FILE"),
+      $.__system_dialog_get_file_body,
+      $._terminator,
+    ),
+
+  __system_dialog_get_file_body: ($) =>
+    seq(
       field("variable", $.identifier),
       optional(alias($.__system_dialog_filters, $.filters_phrase)),
       optional(tkw("ASK-OVERWRITE")),
@@ -52,7 +73,6 @@ module.exports = ({ kw, tkw }) => ({
       optional(tkw("USE-FILENAME")),
       optional(seq(kw("UPDATE"), field("update", $.identifier))),
       optional(seq(kw("IN"), kw("WINDOW"), field("window", $._expression))),
-      $._terminator,
     ),
 
   system_dialog_printer_setup_statement: ($) =>
