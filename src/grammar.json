@@ -53127,13 +53127,89 @@
             }
           },
           {
-            "type": "ALIAS",
-            "content": {
-              "type": "SYMBOL",
-              "name": "__record_query_where_phrase"
-            },
-            "named": true,
-            "value": "where_phrase"
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "__record_query_of_phrase"
+                },
+                "named": true,
+                "value": "of_phrase"
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "__record_query_using_phrase"
+                },
+                "named": true,
+                "value": "using_phrase"
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "__record_query_frame_phrase"
+                },
+                "named": true,
+                "value": "frame_phrase"
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "__record_query_where_phrase"
+                },
+                "named": true,
+                "value": "where_phrase"
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "__record_query_lock_phrase"
+                },
+                "named": true,
+                "value": "no_lock"
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
           },
           {
             "type": "CHOICE",
@@ -53188,6 +53264,174 @@
           "name": "_expression"
         }
       ]
+    },
+    "__record_query_of_phrase": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PATTERN",
+                  "value": "OF",
+                  "flags": "i"
+                }
+              },
+              "named": false,
+              "value": "OF"
+            },
+            {
+              "type": "IMMEDIATE_TOKEN",
+              "content": {
+                "type": "PATTERN",
+                "value": "\\s+"
+              }
+            }
+          ]
+        },
+        {
+          "type": "FIELD",
+          "name": "record",
+          "content": {
+            "type": "SYMBOL",
+            "name": "__record_query_record_name"
+          }
+        }
+      ]
+    },
+    "__record_query_using_phrase": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PATTERN",
+                  "value": "USING",
+                  "flags": "i"
+                }
+              },
+              "named": false,
+              "value": "USING"
+            },
+            {
+              "type": "IMMEDIATE_TOKEN",
+              "content": {
+                "type": "PATTERN",
+                "value": "\\s+"
+              }
+            }
+          ]
+        },
+        {
+          "type": "FIELD",
+          "name": "index",
+          "content": {
+            "type": "SYMBOL",
+            "name": "__record_query_index_name"
+          }
+        }
+      ]
+    },
+    "__record_query_frame_phrase": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PATTERN",
+                  "value": "AND",
+                  "flags": "i"
+                }
+              },
+              "named": false,
+              "value": "AND"
+            },
+            {
+              "type": "IMMEDIATE_TOKEN",
+              "content": {
+                "type": "PATTERN",
+                "value": "\\s+"
+              }
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PATTERN",
+                  "value": "FRAME",
+                  "flags": "i"
+                }
+              },
+              "named": false,
+              "value": "FRAME"
+            },
+            {
+              "type": "IMMEDIATE_TOKEN",
+              "content": {
+                "type": "PATTERN",
+                "value": "\\s+"
+              }
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "FIELD",
+              "name": "frame",
+              "content": {
+                "type": "SYMBOL",
+                "name": "identifier"
+              }
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "FIELD",
+          "name": "field",
+          "content": {
+            "type": "SYMBOL",
+            "name": "identifier"
+          }
+        }
+      ]
+    },
+    "__record_query_lock_phrase": {
+      "type": "ALIAS",
+      "content": {
+        "type": "TOKEN",
+        "content": {
+          "type": "PATTERN",
+          "value": "NO-LOCK",
+          "flags": "i"
+        }
+      },
+      "named": false,
+      "value": "NO-LOCK"
     },
     "__record_query_use_index": {
       "type": "SEQ",

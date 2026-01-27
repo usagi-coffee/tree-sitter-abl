@@ -16725,6 +16725,16 @@
     "type": "frame_phrase",
     "named": true,
     "fields": {
+      "field": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
       "frame": {
         "multiple": false,
         "required": false,
@@ -24023,10 +24033,25 @@
   {
     "type": "of_phrase",
     "named": true,
-    "fields": {},
+    "fields": {
+      "record": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "qualified_name",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": false,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "identifier",
@@ -32848,10 +32873,26 @@
     },
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
+          "type": "frame_phrase",
+          "named": true
+        },
+        {
+          "type": "no_lock",
+          "named": true
+        },
+        {
+          "type": "of_phrase",
+          "named": true
+        },
+        {
           "type": "use_index",
+          "named": true
+        },
+        {
+          "type": "using_phrase",
           "named": true
         },
         {
@@ -41186,7 +41227,22 @@
   {
     "type": "using_phrase",
     "named": true,
-    "fields": {},
+    "fields": {
+      "index": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "qualified_name",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": true,
       "required": false,

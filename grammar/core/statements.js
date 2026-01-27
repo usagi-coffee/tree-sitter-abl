@@ -11,13 +11,13 @@ module.exports = () => ({
       $.empty_statement,
 
       // Definitions
-      /* 5669 */ $.temp_table_definition,
       /* 1236 */ $.image_definition,
       /* 2030 */ $.browse_definition,
       /* 500 */ $.frame_definition,
       /* 390 */ $.class_definition,
       /* 329 */ $.data_source_definition,
       /* 344 */ $.query_definition,
+      /* 264 */ $.temp_table_definition,
       /* 254 */ $.buffer_definition,
       /* 190 */ $.variable_definition,
       /* 140 */ $.menu_definition,
