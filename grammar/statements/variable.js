@@ -29,6 +29,7 @@ module.exports = ({ kw, tkw }) => ({
           alias($.__variable_dcolor_option, $.dcolor_option),
           alias($.__variable_decimals_option, $.decimals_option),
           alias($.__variable_drop_target_option, $.drop_target_option),
+          alias($.__variable_extent_phrase, $.extent_phrase),
           alias($.__variable_font_option, $.font_option),
           alias($.__variable_fgcolor_option, $.fgcolor_option),
           alias($.__variable_format_option, $.format_option),
@@ -66,7 +67,6 @@ module.exports = ({ kw, tkw }) => ({
         seq(kw("AS"), optional(kw("CLASS")), field("type", $._type_or_string)),
         seq(kw("LIKE"), field("like", $.__variable_field_name)),
       ),
-      optional(alias($.__variable_extent_phrase, $.extent_phrase)),
     ),
 
   __variable_initial_option: ($) =>
@@ -96,7 +96,20 @@ module.exports = ({ kw, tkw }) => ({
   __variable_format_option: ($) => seq(kw("FORMAT"), $.string_literal),
   __variable_label_option: ($) => seq(kw("LABEL"), $.__variable_label_list),
   __variable_pfcolor_option: ($) => seq(kw("PFCOLOR"), $._expression),
-  __variable_view_as_phrase: ($) => seq(kw("VIEW-AS"), $.identifier),
+  __variable_view_as_phrase: ($) =>
+    seq(
+      kw("VIEW-AS"),
+      field("widget", $.identifier),
+      repeat($.__variable_view_as_option),
+    ),
+  __variable_view_as_option: ($) =>
+    choice(
+      tkw("HORIZONTAL"),
+      tkw("VERTICAL"),
+      seq(tkw("LIST-ITEMS"), $.__variable_list_items),
+      seq(tkw("RADIO-BUTTONS"), $.__variable_radio_buttons),
+      seq(tkw("SIZE"), $._expression, kw("BY"), $._expression),
+    ),
   __variable_trigger_phrase: ($) => seq(kw("ON"), $.identifier),
   __variable_no_undo: ($) => tkw("NO-UNDO"),
   __variable_mouse_pointer_option: ($) =>
@@ -109,6 +122,14 @@ module.exports = ({ kw, tkw }) => ({
       alias($.constant_expression, $.constant),
       $.identifier,
     ),
+  __variable_list_items: ($) =>
+    seq($._expression, repeat(seq(",", $._expression))),
+  __variable_radio_buttons: ($) =>
+    seq(
+      $.__variable_radio_button,
+      repeat(seq(",", $.__variable_radio_button)),
+    ),
+  __variable_radio_button: ($) => seq($._expression, ",", $._expression),
   __variable_label_list: ($) =>
     seq($.string_literal, repeat(seq(",", $.string_literal))),
   __variable_field_name: ($) => choice($.qualified_name, $.identifier),

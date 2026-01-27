@@ -95,7 +95,7 @@ module.exports = () => ({
       /* 65 */ $.copy_lob_statement,
       /* 65 */ $.convert_statement,
       /* 60 */ $.buffer_copy_statement,
-      /* 60 */ $.catch_statement,
+      /* 80 */ $.catch_statement,
       /* 60 */ $.connect_statement,
       /* 60 */ $.disable_triggers_statement,
       /* 60 */ $.disconnect_statement,

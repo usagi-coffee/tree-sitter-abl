@@ -348,8 +348,6 @@ DEF FRAME atSimple2 "Label: " Customer.Name AT ROW 2 COLUMN 10.
     field: (qualified_name
       left: (identifier)
       right: (identifier))
-    field: (identifier)
-    field: (identifier)
     (number_literal))
   (frame_definition
     name: (identifier)
@@ -357,8 +355,7 @@ DEF FRAME atSimple2 "Label: " Customer.Name AT ROW 2 COLUMN 10.
     field: (qualified_name
       left: (identifier)
       right: (identifier))
-    field: (identifier)
-    field: (identifier)
+    (identifier)
     (number_literal)
     field: (identifier)
     (number_literal)))

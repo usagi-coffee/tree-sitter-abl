@@ -3,12 +3,10 @@ module.exports = ({ kw, tkw }) => ({
     seq(
       choice(kw("DEFINE"), kw("DEF")),
       optional(
-        choice(
-          alias($.__temp_table_shared_scope, $.shared_variable_scope),
-          seq(
-            optional(alias($.__temp_table_access_modifier, $.access_modifier)),
-            optional(alias($.__temp_table_static_modifier, $.static_modifier)),
-          ),
+        seq(
+          optional(alias($.__temp_table_shared_scope, $.shared_variable_scope)),
+          optional(alias($.__temp_table_access_modifier, $.access_modifier)),
+          optional(alias($.__temp_table_static_modifier, $.static_modifier)),
         ),
       ),
       $.__temp_table_keyword,
@@ -30,6 +28,7 @@ module.exports = ({ kw, tkw }) => ({
       optional(tkw("REFERENCE-ONLY")),
       repeat(
         choice(
+          $.argument_reference,
           alias($.__temp_table_like_phrase, $.like_phrase),
           alias(
             $.__temp_table_like_sequential_phrase,
@@ -147,6 +146,7 @@ module.exports = ({ kw, tkw }) => ({
     ),
   __temp_table_shared_scope: ($) =>
     choice(
+      seq(kw("NEW"), kw("GLOBAL")),
       seq(kw("NEW"), kw("GLOBAL"), kw("SHARED")),
       seq(kw("NEW"), kw("SHARED")),
       kw("SHARED"),

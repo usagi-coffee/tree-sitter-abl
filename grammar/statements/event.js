@@ -5,7 +5,7 @@ module.exports = ({ kw, tkw }) => ({
       repeat($.__event_modifier),
       kw("EVENT"),
       field("name", $.identifier),
-      alias($.__event_signature, $.signature),
+      optional(alias($.__event_signature, $.signature)),
       $._terminator,
     ),
 

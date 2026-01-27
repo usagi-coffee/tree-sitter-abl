@@ -17,6 +17,7 @@ module.exports = ({ kw, tkw }) => ({
             alias($.__for_on_quit_phrase, $.on_quit_phrase),
             alias($.__for_on_stop_phrase, $.on_stop_phrase),
             alias($.__for_with_frame_phrase, $.with_frame_phrase),
+            alias($.__for_with_stream_io_phrase, $.with_stream_io_phrase),
           ),
         ),
         $.body,
@@ -157,6 +158,7 @@ module.exports = ({ kw, tkw }) => ({
       optional(field("name", $.identifier)),
       optional(seq(kw("WIDTH"), $.number_literal)),
     ),
+  __for_with_stream_io_phrase: ($) => seq(kw("WITH"), tkw("STREAM-IO")),
   __for_sort_direction: ($) => token(/ASC(ENDING)?|DESC(ENDING)?/i),
 
   __for_collate_phrase: ($) =>

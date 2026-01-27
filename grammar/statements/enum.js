@@ -18,7 +18,12 @@ module.exports = ({ kw, tkw }) => ({
     seq(field("name", $.identifier), optional(seq("=", $.enum_member_value))),
 
   enum_member_value: ($) =>
-    choice($.number_literal, $.identifier, $.enum_member_value_list),
+    choice(
+      $.number_literal,
+      $.identifier,
+      $.null_literal,
+      $.enum_member_value_list,
+    ),
 
   enum_member_value_list: ($) =>
     seq($.identifier, repeat1(seq(",", $.identifier))),

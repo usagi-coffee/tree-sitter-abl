@@ -90,7 +90,7 @@ DEFINE VARIABLE cView AS CHARACTER VIEW-AS FILL-IN.
     name: (identifier)
     type: (identifier)
     (view_as_phrase
-      (identifier))))
+      widget: (identifier))))
 
 ================================================================================
 VARIABLE DEFINITION - Color and Visual Options

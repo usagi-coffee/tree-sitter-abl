@@ -4,7 +4,7 @@ module.exports = ({ kw, tkw }) => ({
       choice(kw("DEFINE"), kw("DEF")),
       optional(choice(seq(optional(kw("NEW")), kw("SHARED")), kw("PRIVATE"))),
       kw("FRAME"),
-      field("name", $.identifier),
+      field("name", choice($.identifier, alias($.constant_expression, $.constant))),
       choice(
         // DEFINE FRAME name record EXCEPT fields
         seq(
@@ -47,7 +47,10 @@ module.exports = ({ kw, tkw }) => ({
       seq(tkw("SPACE"), "(", optional($._expression), ")"),
       seq(tkw("SKIP"), "(", optional($._expression), ")"),
       // field
-      field("field", choice($.qualified_name, $.identifier)),
+      seq(
+        field("field", choice($.qualified_name, $.identifier)),
+        optional($.__frame_at_phrase)
+      ),
       // constant
       seq(
         $.string_literal,
@@ -134,7 +137,10 @@ module.exports = ({ kw, tkw }) => ({
       seq(kw("COLUMN"), $._expression),
       tkw("NO-LABELS"),
       tkw("SIDE-LABELS"),
-      tkw("CENTERED")
+      tkw("CENTERED"),
+      tkw("NO-BOX"),
+      seq(kw("FONT"), $._expression),
+      seq(kw("BGCOLOR"), $._expression)
       // Add more frame options as needed
     ),
 });

@@ -3,9 +3,10 @@ module.exports = ({ kw, tkw }) => ({
     seq(
       kw("CATCH"),
       field("name", $.identifier),
-      optional(seq(kw("AS"), field("type", $.qualified_name))),
+      optional(seq(kw("AS"), optional(kw("CLASS")), field("type", $.qualified_name))),
       $.body,
       tkw("END"),
+      optional(tkw("CATCH")),
       $._terminator,
     ),
 });
