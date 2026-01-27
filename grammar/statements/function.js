@@ -7,6 +7,7 @@ module.exports = ({ kw, tkw }) => ({
       optional(kw("CLASS")),
       field("type", $._type_name),
       optional($.function_parameter_list),
+      optional(alias($.__function_in_phrase, $.in_phrase)),
       choice($._terminator, $._colon),
       repeat($._statement),
       tkw("END"),
@@ -23,6 +24,7 @@ module.exports = ({ kw, tkw }) => ({
       optional(kw("CLASS")),
       field("type", $._type_name),
       optional($.function_parameter_list),
+      optional(alias($.__function_in_phrase, $.in_phrase)),
       $._terminator,
     ),
 
@@ -54,6 +56,8 @@ module.exports = ({ kw, tkw }) => ({
 
   __function_extent_phrase: ($) =>
     seq(tkw("EXTENT"), optional($.__function_extent_size)),
+  __function_in_phrase: ($) =>
+    seq(kw("IN"), field("context", $._expression)),
   __function_no_undo: ($) => tkw("NO-UNDO"),
   __function_extent_size: ($) =>
     choice(

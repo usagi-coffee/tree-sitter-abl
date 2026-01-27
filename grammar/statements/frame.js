@@ -4,20 +4,21 @@ module.exports = ({ kw, tkw }) => ({
       choice(kw("DEFINE"), kw("DEF")),
       optional(choice(seq(optional(kw("NEW")), kw("SHARED")), kw("PRIVATE"))),
       kw("FRAME"),
-      field("name", choice($.identifier, alias($.constant_expression, $.constant))),
+      field(
+        "name",
+        choice($.identifier, alias($.constant_expression, $.constant)),
+      ),
       choice(
-        // DEFINE FRAME name record EXCEPT fields
         seq(
           field("record", choice($.qualified_name, $.identifier)),
           kw("EXCEPT"),
-          repeat1(field("field", $.identifier))
+          repeat1(field("field", $.identifier)),
         ),
-        // DEFINE FRAME name form-items
-        repeat($.__frame_form_item)
+        repeat($.__frame_form_item),
       ),
       optional($.__frame_header_section),
       optional($.frame_phrase),
-      $._terminator
+      $._terminator,
     ),
 
   __frame_header_section: ($) =>
@@ -36,8 +37,8 @@ module.exports = ({ kw, tkw }) => ({
         optional(seq(kw("FONT"), $._expression)),
         optional(seq(kw("PFCOLOR"), $._expression)),
         optional(seq(tkw("VIEW-AS"), tkw("TEXT"))),
-        optional(seq(tkw("WIDGET-ID"), $._expression))
-      )
+        optional(seq(tkw("WIDGET-ID"), $._expression)),
+      ),
     ),
 
   __frame_form_item: ($) =>
@@ -46,12 +47,10 @@ module.exports = ({ kw, tkw }) => ({
       tkw("SKIP"),
       seq(tkw("SPACE"), "(", optional($._expression), ")"),
       seq(tkw("SKIP"), "(", optional($._expression), ")"),
-      // field
       seq(
         field("field", choice($.qualified_name, $.identifier)),
-        optional($.__frame_at_phrase)
+        optional($.__frame_at_phrase),
       ),
-      // constant
       seq(
         $.string_literal,
         optional(choice($.__frame_at_phrase, seq(kw("TO"), $._expression))),
@@ -61,9 +60,8 @@ module.exports = ({ kw, tkw }) => ({
         optional(seq(kw("FONT"), $._expression)),
         optional(seq(kw("PFCOLOR"), $._expression)),
         optional(seq(tkw("VIEW-AS"), kw("TEXT"))),
-        optional(seq(tkw("WIDGET-ID"), $._expression))
+        optional(seq(tkw("WIDGET-ID"), $._expression)),
       ),
-      // number literal form-item
       seq(
         $.number_literal,
         optional(choice($.__frame_at_phrase, seq(kw("TO"), $._expression))),
@@ -73,8 +71,8 @@ module.exports = ({ kw, tkw }) => ({
         optional(seq(kw("FONT"), $._expression)),
         optional(seq(kw("PFCOLOR"), $._expression)),
         optional(seq(tkw("VIEW-AS"), kw("TEXT"))),
-        optional(seq(tkw("WIDGET-ID"), $._expression))
-      )
+        optional(seq(tkw("WIDGET-ID"), $._expression)),
+      ),
     ),
 
   __frame_at_phrase: ($) =>
@@ -83,46 +81,45 @@ module.exports = ({ kw, tkw }) => ({
         kw("AT"),
         choice(
           seq(kw("COLUMN"), $._expression),
-          seq(tkw("COLUMN-OF"), field("ref", $.identifier))
+          seq(tkw("COLUMN-OF"), field("ref", $.identifier)),
         ),
         optional(
           choice(
             seq(kw("ROW"), $._expression),
-            seq(tkw("ROW-OF"), field("ref", $.identifier))
-          )
+            seq(tkw("ROW-OF"), field("ref", $.identifier)),
+          ),
         ),
         optional(
           choice(
             tkw("COLON-ALIGNED"),
             tkw("LEFT-ALIGNED"),
-            tkw("RIGHT-ALIGNED")
-          )
-        )
+            tkw("RIGHT-ALIGNED"),
+          ),
+        ),
       ),
       seq(
         kw("AT"),
         choice(
           seq(kw("X"), $._expression),
-          seq(tkw("X-OF"), field("ref", $.identifier))
+          seq(tkw("X-OF"), field("ref", $.identifier)),
         ),
         optional(
           choice(
             seq(kw("Y"), $._expression),
-            seq(tkw("Y-OF"), field("ref", $.identifier))
-          )
+            seq(tkw("Y-OF"), field("ref", $.identifier)),
+          ),
         ),
         optional(
           choice(
             tkw("COLON-ALIGNED"),
             tkw("LEFT-ALIGNED"),
-            tkw("RIGHT-ALIGNED")
-          )
-        )
+            tkw("RIGHT-ALIGNED"),
+          ),
+        ),
       ),
-      seq(kw("AT"), $._expression)
+      seq(kw("AT"), $._expression),
     ),
 
-  // Frame phrase - simplified
   frame_phrase: ($) => seq(kw("WITH"), repeat($.__frame_option)),
 
   __frame_option: ($) =>
@@ -140,7 +137,6 @@ module.exports = ({ kw, tkw }) => ({
       tkw("CENTERED"),
       tkw("NO-BOX"),
       seq(kw("FONT"), $._expression),
-      seq(kw("BGCOLOR"), $._expression)
-      // Add more frame options as needed
+      seq(kw("BGCOLOR"), $._expression),
     ),
 });

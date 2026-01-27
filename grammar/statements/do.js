@@ -36,9 +36,13 @@ module.exports = ({ kw, tkw }) => ({
       optional(seq(kw("BY"), field("step", $._expression))),
     ),
   __do_while_phrase: ($) => seq(kw("WHILE"), $._expression),
+  __do_for_phrase: ($) =>
+    seq(kw("FOR"), field("record", choice($.identifier, $.qualified_name))),
   __do_preselect_phrase: ($) =>
     seq(token(/PRESELECT\s+/i), $.preselect_record_list),
   __do_transaction_phrase: ($) => tkw("TRANSACTION"),
+  __do_stop_after_phrase: ($) =>
+    seq(kw("STOP-AFTER"), field("time", $._expression)),
   __do_on_endkey_phrase: ($) =>
     seq(kw("ON"), kw("ENDKEY"), alias($.__do_on_endkey_undo, $.undo_phrase)),
   __do_on_endkey_undo: ($) =>
@@ -83,7 +87,40 @@ module.exports = ({ kw, tkw }) => ({
         alias($.__do_undo_leave_phrase, $.undo_leave_phrase),
       ),
     ),
-  __do_on_quit_phrase: ($) => seq(kw("ON"), tkw("QUIT"), ",", tkw("LEAVE")),
+  __do_on_quit_phrase: ($) =>
+    seq(
+      kw("ON"),
+      tkw("QUIT"),
+      tkw("UNDO"),
+      optional(field("undo_label", $.identifier)),
+      ",",
+      $.__do_on_quit_action,
+    ),
+  __do_on_quit_action: ($) =>
+    choice(
+      seq(tkw("LEAVE"), optional(field("leave_label", $.identifier))),
+      seq(tkw("NEXT"), optional(field("next_label", $.identifier))),
+      seq(tkw("RETRY"), optional(field("retry_label", $.identifier))),
+      $.__do_on_quit_return,
+    ),
+  __do_on_quit_return: ($) =>
+    seq(
+      tkw("RETURN"),
+      optional(
+        choice(
+          seq(tkw("ERROR"), optional(field("error_value", $._expression))),
+          tkw("NO-APPLY"),
+          field("return_value", $._expression),
+        ),
+      ),
+    ),
   __do_undo_throw_phrase: ($) => seq(tkw("UNDO"), ",", tkw("THROW")),
-  __do_undo_leave_phrase: ($) => seq(tkw("UNDO"), ",", tkw("LEAVE")),
+  __do_undo_leave_phrase: ($) =>
+    seq(
+      tkw("UNDO"),
+      optional(field("undo_label", $.identifier)),
+      ",",
+      tkw("LEAVE"),
+      optional(field("leave_label", $.identifier)),
+    ),
 });
