@@ -788,16 +788,17 @@ END.
       (leave_statement
         (identifier))))
   (do_block
-    (preselect_record_list
-      (preselect_record
-        (identifier)
-        (no_lock)
-        (where_phrase
-          (binary_expression
-            (qualified_name
-              (identifier)
-              (identifier))
-            (number_literal)))))
+   (preselect_phrase
+      (preselect_record_list
+        (preselect_record
+          (identifier)
+          (no_lock)
+          (where_phrase
+            (binary_expression
+              (qualified_name
+                (identifier)
+                (identifier))
+              (number_literal))))))
     (body)))
 
 ================================================================================
