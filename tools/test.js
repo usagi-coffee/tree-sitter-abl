@@ -76,7 +76,7 @@ console.log(result);
 if (failureCount > 0) console.log(`✗ ${failureCount} tests failed`);
 if (failureCount === 0 && checkmarkCount === 0) {
   console.error(
-    "Unexpected error has occured, `tree-sitter test` returned nothing, that means the parser, try to revert your latest changes until you see an output."
+    "`tree-sitter test` failed internally and returned nothing, this indicates some rules broke the testing (tests are ok), try to revert your latest changes until you see an output."
   );
   process.exit(1);
 }
