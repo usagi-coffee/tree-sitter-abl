@@ -74,9 +74,12 @@ const result = lines
 
 console.log(result);
 if (failureCount > 0) console.log(`✗ ${failureCount} tests failed`);
+
+/* The test output ends early without a "done" message despite exit code 0, suggesting incomplete or aborted processing possibly due to
+   grammar conflicts—specifically around tokens with trailing whitespace that might interfere with parsing control flow. */
 if (failureCount === 0 && checkmarkCount === 0) {
   console.error(
-    "`tree-sitter test` failed internally and returned nothing, this indicates some rules broke the testing (tests are ok), try to revert your latest changes until you see an output."
+    "`tree-sitter test` failed internally and returned nothing, this indicates some rules broke the testing (tests are not the issue), try to revert your latest changes until you see an output."
   );
   process.exit(1);
 }

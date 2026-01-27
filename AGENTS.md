@@ -71,6 +71,7 @@ Strongly prefer using these commands as they have helpful side-effects like retu
 - Parser regeneration can take up to 1 minute so adjust timeout for `bun run test` accordingly.
 - Tests return only failed cases and failed syntax tree or a message that everything went well.
 - If `tree-sitter test` returns status 0 and no output that means something broke and you need to review your changes, this issue has nothing to do with test corpus.
+- Please don't investigate into why `tree-sitter test` outputs nothing, it's not related to tests, some rule just broke it.
 
 ## Tree-Sitter Test Corpus Format
 
