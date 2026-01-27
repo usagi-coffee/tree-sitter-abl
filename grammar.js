@@ -110,7 +110,25 @@ module.exports = grammar({
 
       // Constants
       constant: ($) => token(/\{&[^\}\r\n]+\}[ \t]*\r?\n/),
-      constant_expression: ($) => seq("{&", $.identifier, "}"),
+      constant_expression: ($) =>
+        seq(
+          "{&",
+          $.identifier,
+          optional(seq("=", field("value", $.__constant_value))),
+          "}",
+        ),
+      __constant_value: ($) =>
+        choice(
+          $.qualified_name,
+          $.identifier,
+          $.string_literal,
+          $.number_literal,
+          alias($._signed_number_literal, $.number_literal),
+          $.boolean_literal,
+          alias($.constant_expression, $.constant),
+          $.argument_reference,
+          $.parenthesized_identifier,
+        ),
       argument_reference: ($) => token(/\{[0-9A-Za-z_-]+\}/),
 
       // Re-exports

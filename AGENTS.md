@@ -18,9 +18,7 @@
 
 ## Workflow
 
-- Regenerate parser (needed after modifications):
-  - `bun run generate`
-- Run tests (runs generate before tests, tests only report failures or success of everything):
+- Run tests (regenerates the parser, runs tests and returns current state count):
   - `bun run test`
 - Parse a file (returns syntax tree):
   - `bun run parse <file>`
@@ -56,19 +54,22 @@ Strongly prefer using these commands as they have helpful side-effects like retu
 - The grammar should avoid permissive or catch-all rules that allow invalid syntax to be parsed successfully.
 - ABL grammar is filled with optionals, be careful not to explode `tree-sitter`'s `STATE_COUNT`.
 - Always check `STATE_COUNT` impacts and note the current `STATE_COUNT` cost for statements via leading comments in `grammar/core/statements.js`.
-- Do not remove tests just to satisfy test passing, just fix the underlying issue.
+- Do not adjust or remove tests just to satisfy test passing, just fix the underlying parsing issue or ask me first to remove if it's really not supported.
 - `src/scanner.c` modifications need regeneration before testing.
+- Don't do unnecessary comments like (something is above).
 
 ## Notes
 
 - `bun` instead of `npm`.
 - Successful tests print out current `STATE_COUNT` at the end.
 - `bun run parse` and `bun run parse:snippet` do not regenerate the parser before parsing the code, unlike `bun run test`.
-- Parser does not build after reaching the hard limit of 65,535 `STATE_COUNT` but bugs might occur at the top-end of the limit e.g `tree-sitter test` might return status `0` but produce no output at about ~63,000 `STATE_COUNT`.
+- Parser does not build after reaching the hard limit of 65,535 `STATE_COUNT` but bugs might occur at the top-end of the limit (anything above ~60,000) e.g `tree-sitter test` might return status `0` but produce no output or return `ts_parser_parse: Assertion 'self->finished_tree.ptr' failed.` error.
 - When using `alias`, `tree-sitter` handles undefined rules by using the property name as the symbol name so it's okay to alias to `$.something_that_wasn't defined`.
 - Terminators like `terminator` or `terminator_dot` should never be visible in the syntax tree output.
 - `kw` and `tkw` are passed down using argument, to access them unpack it inside the statement module e.g `module.exports = ({ kw, tkw })`.
 - Always prefer `| tail` when calling `bun run test` instead of `| head`.
+- Parser regeneration takes about 40 seconds so adjust timeout for `bun run test` accordingly.
+- Tests return only failed cases and failed syntax tree or a message that everything went well.
 
 ## Tree-Sitter Test Corpus Format
 
