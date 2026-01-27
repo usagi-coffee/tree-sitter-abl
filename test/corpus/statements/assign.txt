@@ -260,3 +260,49 @@ doWork() NO-ERROR.
       function: (identifier)
       (arguments))
     (no_error)))
+
+================================================================================
+Assignment with INPUT, IN FRAME, and string options
+================================================================================
+
+baz = INPUT FRAME y bar.
+quux = INPUT qux.
+x = qbf-s:SCREEN-VALUE IN FRAME qbf-area.
+a = "A":U.
+b = "Hello":R10.
+c = "Trim":T.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (input_expression
+      frame: (identifier)
+      field: (identifier)))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (input_expression
+      field: (identifier)))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (in_frame_expression
+      value: (object_access
+        left: (identifier)
+        right: (identifier))
+      frame: (identifier)))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (string_literal))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (string_literal))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (string_literal)))
