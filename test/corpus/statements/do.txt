@@ -337,3 +337,50 @@ END.
 (source_code
   (do_block
     (body)))
+
+================================================================================
+DO FOR with TRANSACTION STOP-AFTER and ON ERROR
+================================================================================
+
+DO FOR some_copy TRANSACTION STOP-AFTER 2 ON ERROR UNDO, THROW:
+  a = 5.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (do_block
+    (for_phrase
+      record: (identifier))
+    (stop_after_phrase
+      time: (number_literal))
+    (on_error_phrase
+      (undo_throw_phrase))
+    (body
+      (assignment_statement
+        left: (identifier)
+        operator: (assignment_operator)
+        right: (number_literal)))))
+
+================================================================================
+DO FOR with QUERY-TUNING and FRAME options
+================================================================================
+
+DO FOR rec1, rec2 QUERY-TUNING (NO-LOOKAHEAD CACHE-SIZE 10) WITH WIDTH 40:
+  DISPLAY rec1.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (do_block
+    (for_phrase
+      record: (identifier)
+      record: (identifier))
+    (query_tuning)
+    (frame_phrase
+      (width_option
+        (number_literal)))
+    (body
+      (display_statement
+        (identifier)))))
