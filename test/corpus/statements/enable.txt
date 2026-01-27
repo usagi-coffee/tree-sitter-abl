@@ -23,38 +23,64 @@ ENABLE field1 IN WINDOW w1.
     except: (identifier)
     except: (identifier))
   (enable_statement
-    (enable_field
+    (enable_item
       field: (identifier)))
   (enable_statement
-    (enable_field
+    (enable_item
       field: (identifier))
-    (enable_field
+    (enable_item
       field: (identifier))
-    (enable_field
+    (enable_item
       field: (identifier)))
   (enable_statement
-    (enable_field
+    (enable_item
       field: (identifier)))
   (enable_statement
-    (enable_field
+    (enable_item
       field: (identifier)
       when: (binary_expression
         (identifier)
         (number_literal))))
   (enable_statement
-    (enable_field
+    (enable_item
       field: (identifier))
-    (enable_field
+    (enable_item
       field: (identifier)
       when: (binary_expression
         (identifier)
         (number_literal))))
   (enable_statement
-    (enable_field
+    (enable_item
       field: (identifier))
     (frame_phrase
       frame: (identifier)))
   (enable_statement
-    (enable_field
+    (enable_item
       field: (identifier))
     window: (identifier)))
+
+================================================================================
+ENABLE with format, text, and constants
+================================================================================
+
+ENABLE field1 FORMAT "x(10)" WHEN ok
+  TEXT(field2 FORMAT "x(5)")
+  "CONST" AT 5 BGCOLOR 2 VIEW-AS TEXT
+  SKIP.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (enable_statement
+    (enable_item
+      field: (identifier)
+      (format_phrase)
+      when: (identifier))
+    (enable_item
+      (format_phrase))
+    (enable_item
+      constant: (string_literal)
+      (at_phrase)
+      (constant_option)
+      (constant_option))
+    (enable_item)))

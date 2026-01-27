@@ -2,7 +2,7 @@
 CREATE basic
 ================================================================================
 
-CREATE Customer.
+CREATE Customer NO-ERROR.
 CREATE Order.
 CREATE tDebtorShipTo.
 

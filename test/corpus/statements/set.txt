@@ -54,3 +54,36 @@ SET field1 GO-ON(f1 f2).
     (go_on_phrase
       (identifier)
       (identifier))))
+
+================================================================================
+SET with format, text, constants, and editing
+================================================================================
+
+SET field1 FORMAT "x(10)" WHEN ok
+  TEXT(field2 FORMAT "x(5)")
+  "CONST" AT 5
+  field3 = 10
+  SKIP
+  EDITING:
+    READKEY.
+  END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (set_statement
+    (set_item
+      field: (identifier)
+      (format_phrase)
+      when: (identifier))
+    (set_item
+      (format_phrase))
+    (set_item
+      constant: (string_literal)
+      (at_phrase))
+    (set_item
+      field: (identifier)
+      value: (number_literal))
+    (set_item)
+    (editing_phrase
+      (readkey_statement))))

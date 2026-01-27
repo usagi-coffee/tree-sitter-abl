@@ -2,16 +2,22 @@
 UNDO
 ================================================================================
 
-UNDO, THROW NEW Error("boom").
+UNDO, THROW errObj.
 UNDO, LEAVE.
+UNDO, RETRY.
+UNDO, RETURN "done".
+UNDO, RETURN ERROR "bad".
+UNDO, RETURN NO-APPLY.
 
 --------------------------------------------------------------------------------
 
 (source_code
   (undo_statement
-    value: (new_expression
-      type: (identifier)
-      (arguments
-        (argument
-          value: (string_literal)))))
+    value: (identifier))
+  (undo_statement)
+  (undo_statement)
+  (undo_statement
+    (return_value: (string_literal)))
+  (undo_statement
+    (error_value: (string_literal)))
   (undo_statement))

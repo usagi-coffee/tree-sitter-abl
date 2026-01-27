@@ -4,6 +4,10 @@ COLOR
 
 COLOR DISPLAY 1 field1.
 COLOR 7 field1 field2 field3.
+COLOR DISPLAY NORMAL field1.
+COLOR DISPLAY VALUE (myColor) field1.
+COLOR DISPLAY "FF" field1.
+COLOR DISPLAY BLINK-RED field1.
 COLOR 7 PROMPT 3 field1.
 COLOR 7 PROMPT 3 field1 WITH FRAME f1.
 
@@ -11,20 +15,41 @@ COLOR 7 PROMPT 3 field1 WITH FRAME f1.
 
 (source_code
   (color_statement
-    color: (number_literal)
+    color: (color_phrase
+      (number_literal))
     field: (identifier))
   (color_statement
-    color: (number_literal)
+    color: (color_phrase
+      (number_literal))
     field: (identifier)
     field: (identifier)
     field: (identifier))
   (color_statement
-    color: (number_literal)
-    prompt_color: (number_literal)
+    color: (color_phrase)
     field: (identifier))
   (color_statement
-    color: (number_literal)
-    prompt_color: (number_literal)
+    color: (color_phrase
+      value: (identifier))
+    field: (identifier))
+  (color_statement
+    color: (color_phrase
+      (string_literal))
+    field: (identifier))
+  (color_statement
+    color: (color_phrase
+      foreground: (identifier))
+    field: (identifier))
+  (color_statement
+    color: (color_phrase
+      (number_literal))
+    prompt_color: (color_phrase
+      (number_literal))
+    field: (identifier))
+  (color_statement
+    color: (color_phrase
+      (number_literal))
+    prompt_color: (color_phrase
+      (number_literal))
     field: (identifier)
     (frame_phrase
       frame: (identifier))))

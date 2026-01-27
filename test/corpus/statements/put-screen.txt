@@ -7,6 +7,9 @@ PUT SCREEN ROW 5 "Text".
 PUT SCREEN COLUMN 10 "Text".
 PUT SCREEN ROW 5 COLUMN 10 "Text".
 PUT SCREEN COLOR 7 ROW 1 COLUMN 1 "Header".
+PUT SCREEN COLOR NORMAL ROW 2 COLUMN 1 "Hdr".
+PUT SCREEN COLOR "FF" "Hex".
+PUT SCREEN COLOR BLINK-RED "Blink".
 
 --------------------------------------------------------------------------------
 
@@ -28,4 +31,18 @@ PUT SCREEN COLOR 7 ROW 1 COLUMN 1 "Header".
       color: (number_literal))
     row: (number_literal)
     column: (number_literal)
+    value: (string_literal))
+  (put_screen_statement
+    (color_phrase
+      color: (identifier))
+    row: (number_literal)
+    column: (number_literal)
+    value: (string_literal))
+  (put_screen_statement
+    (color_phrase
+      color: (string_literal))
+    value: (string_literal))
+  (put_screen_statement
+    (color_phrase
+      color: (identifier))
     value: (string_literal)))

@@ -17,6 +17,24 @@ RUN utilities/helper.p.
     procedure: (procedure_name)))
 
 ================================================================================
+RUN SUPER
+================================================================================
+
+RUN SUPER.
+RUN SUPER (INPUT-OUTPUT a).
+RUN SUPER NO-ERROR.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (run_super_statement)
+  (run_super_statement
+    (arguments
+      (argument
+        value: (identifier))))
+  (run_super_statement))
+
+================================================================================
 RUN with arguments OUTPUT DATASET
 ================================================================================
 

@@ -159,6 +159,8 @@ MESSAGE with COLOR
 MESSAGE COLOR NORMAL "Export done: " + fileName.
 MESSAGE COLOR INPUT "Enter value".
 MESSAGE COLOR MESSAGES "Status message".
+MESSAGE COLOR "FF" "Hex message".
+MESSAGE COLOR RED "Color message".
 
 --------------------------------------------------------------------------------
 
@@ -168,6 +170,12 @@ MESSAGE COLOR MESSAGES "Status message".
     (binary_expression
       (string_literal)
       (identifier)))
+  (message_statement
+    (color_phrase)
+    (string_literal))
+  (message_statement
+    (color_phrase)
+    (string_literal))
   (message_statement
     (color_phrase)
     (string_literal))

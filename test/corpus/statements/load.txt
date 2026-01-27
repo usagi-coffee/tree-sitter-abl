@@ -7,6 +7,7 @@ LOAD cFile.
 LOAD "myapp.r" DIR "/usr/lib".
 LOAD "myapp.r" APPLICATION "app1".
 LOAD "myapp.r" NEW.
+LOAD "myapp.r" BASE-KEY "INI".
 LOAD "myapp.r" NO-ERROR.
 LOAD "myapp.r" DIR "/usr/lib" APPLICATION "app1" NEW.
 
@@ -25,6 +26,9 @@ LOAD "myapp.r" DIR "/usr/lib" APPLICATION "app1" NEW.
     app: (string_literal))
   (load_statement
     file: (string_literal))
+  (load_statement
+    file: (string_literal)
+    base_key: (string_literal))
   (load_statement
     file: (string_literal))
   (load_statement

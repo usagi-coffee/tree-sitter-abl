@@ -166,7 +166,7 @@ Define Browse with Widget Options
 =============================
 
 DEF PRIVATE BROWSE b3 QUERY q3 DISPLAY field1 field2
-WITH DOWN 5 TITLE "Browse Title" BGCOLOR 7 FGCOLOR 9 FONT 2
+WITH DOWN 5 TITLE "Browse Title" BGCOLOR 7 DCOLOR 3 FGCOLOR 9 PFCOLOR 6 FONT 2
 CONTEXT-HELP-ID 42 DROP-TARGET TOOLTIP "Browse tip" ROW 3 COLUMN 5.
 ---
 
@@ -182,7 +182,11 @@ CONTEXT-HELP-ID 42 DROP-TARGET TOOLTIP "Browse tip" ROW 3 COLUMN 5.
       (string_literal))
     (bgcolor_option
       (number_literal))
+    (dcolor_option
+      (number_literal))
     (fgcolor_option
+      (number_literal))
+    (pfcolor_option
       (number_literal))
     (font_option
       (number_literal))

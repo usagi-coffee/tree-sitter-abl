@@ -100,7 +100,7 @@ END.
       (identifier)
       (number_literal))
     (on_error_phrase
-      (undo_throw_phrase))
+      (undo_phrase))
     (body
       (assignment_statement
         left: (identifier)
@@ -122,7 +122,27 @@ END.
 (source_code
   (do_block
     (on_error_phrase
-      (undo_leave_phrase))
+      (undo_phrase))
+    (body
+      (assignment_statement
+        left: (identifier)
+        operator: (assignment_operator)
+        right: (number_literal)))))
+
+================================================================================
+DO with ON STOP UNDO NEXT
+================================================================================
+
+DO ON STOP UNDO, NEXT:
+  idx = 3.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (do_block
+    (on_stop_phrase
+      (undo_phrase))
     (body
       (assignment_statement
         left: (identifier)

@@ -14,7 +14,7 @@ REPEAT UNTIL done:
   DISPLAY done.
 END.
 
-main: REPEAT ON STOP UNDO, RETURN ERROR NEW Progress.Lang.AppError("x", 1) ON ERROR UNDO, THROW:
+main: REPEAT ON STOP UNDO, RETURN ERROR "x" ON ERROR UNDO, THROW:
   LEAVE.
 END.
 
@@ -44,18 +44,8 @@ END.
   (repeat_statement
     label: (identifier)
     (on_stop_phrase
-      (undo_return_error
-        (new_expression
-          type: (qualified_name
-            left: (identifier)
-            right: (identifier)
-            right: (identifier))
-          (arguments
-            (argument
-              value: (string_literal))
-            (argument
-              value: (number_literal))))))
+      (undo_phrase))
     (on_error_phrase
-      (undo_throw_phrase))
+      (undo_phrase))
     (body
       (leave_statement))))

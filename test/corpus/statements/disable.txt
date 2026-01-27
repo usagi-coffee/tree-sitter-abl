@@ -22,34 +22,60 @@ DISABLE field1 WITH FRAME f1.
     except: (identifier)
     except: (identifier))
   (disable_statement
-    (disable_field
+    (disable_item
       field: (identifier)))
   (disable_statement
-    (disable_field
+    (disable_item
       field: (identifier))
-    (disable_field
+    (disable_item
       field: (identifier))
-    (disable_field
+    (disable_item
       field: (identifier)))
   (disable_statement
-    (disable_field
+    (disable_item
       field: (identifier)))
   (disable_statement
-    (disable_field
+    (disable_item
       field: (identifier)
       when: (binary_expression
         (identifier)
         (number_literal))))
   (disable_statement
-    (disable_field
+    (disable_item
       field: (identifier))
-    (disable_field
+    (disable_item
       field: (identifier)
       when: (binary_expression
         (identifier)
         (number_literal))))
   (disable_statement
-    (disable_field
+    (disable_item
       field: (identifier))
     (frame_phrase
       frame: (identifier))))
+
+================================================================================
+DISABLE with format, text, and constants
+================================================================================
+
+DISABLE field1 FORMAT "x(10)" WHEN ok
+  TEXT(field2 FORMAT "x(5)")
+  "CONST" AT 5 BGCOLOR 2 VIEW-AS TEXT
+  SKIP.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (disable_statement
+    (disable_item
+      field: (identifier)
+      (format_phrase)
+      when: (identifier))
+    (disable_item
+      (format_phrase))
+    (disable_item
+      constant: (string_literal)
+      (at_phrase)
+      (constant_option)
+      (constant_option))
+    (disable_item)))

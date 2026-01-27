@@ -5,6 +5,7 @@ DELETE basic
 DELETE Customer.
 DELETE Order.
 DELETE ttRecord.
+DELETE Customer VALIDATE (Customer.CustNum > 0, "Bad") NO-ERROR.
 
 --------------------------------------------------------------------------------
 
@@ -14,7 +15,16 @@ DELETE ttRecord.
   (delete_statement
     record: (identifier))
   (delete_statement
-    record: (identifier)))
+    record: (identifier))
+  (delete_statement
+    record: (identifier)
+    (validate_option
+      (binary_expression
+        (qualified_name
+          left: (identifier)
+          right: (identifier))
+        (number_literal))
+      (string_literal))))
 
 ================================================================================
 DELETE with qualified name
@@ -42,10 +52,13 @@ DELETE OBJECT
 DELETE OBJECT hSocket.
 DELETE OBJECT hQuery.
 DELETE OBJECT myWidget.
+DELETE OBJECT hSocket NO-ERROR.
 
 --------------------------------------------------------------------------------
 
 (source_code
+  (delete_object_statement
+    name: (identifier))
   (delete_object_statement
     name: (identifier))
   (delete_object_statement

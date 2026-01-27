@@ -47,3 +47,32 @@ PROMPT-FOR field1 GO-ON(f1 f2).
     (go_on_phrase
       (identifier)
       (identifier))))
+
+================================================================================
+PROMPT-FOR with format, text, constants, and editing
+================================================================================
+
+PROMPT-FOR field1 FORMAT "x(10)" WHEN ok
+  TEXT(field2 FORMAT "x(5)")
+  "CONST" AT 5
+  SKIP
+  EDITING:
+    READKEY.
+  END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (prompt_for_statement
+    (prompt_for_item
+      field: (identifier)
+      (format_phrase)
+      when: (identifier))
+    (prompt_for_item
+      (format_phrase))
+    (prompt_for_item
+      constant: (string_literal)
+      (at_phrase))
+    (prompt_for_item)
+    (editing_phrase
+      (readkey_statement))))

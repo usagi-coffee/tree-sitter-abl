@@ -15,6 +15,12 @@ VAR DATE d1, d2 = 1/1/2020, d3 = TODAY.
 /* Date variables with the protected access mode */
 VAR PROTECTED DATE d1, d2 = 1/1/2020.
 
+/* Static variable */
+VAR STATIC INT sVar.
+
+/* Serializable instance variable */
+VAR SERIALIZABLE INT sVar2.
+
 /* Three arrays of size 3 */
 /* x's third element defaults to 2 (the previous element) */
 /* y's elements default to 0 */
@@ -119,6 +125,20 @@ var List<Ant> ListOfAnts.
       (identifier)
       (var_init
         (date_literal))))
+  (comment
+    (block_comment))
+  (var_statement
+    (static_modifier)
+    (identifier)
+    (var_decl
+      (identifier)))
+  (comment
+    (block_comment))
+  (var_statement
+    (serialization_modifier)
+    (identifier)
+    (var_decl
+      (identifier)))
   (comment
     (block_comment))
   (comment
