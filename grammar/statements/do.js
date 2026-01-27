@@ -13,10 +13,13 @@ module.exports = ({ kw, tkw }) => ({
 
   __do_body: ($) =>
     seq(
+      optional(alias($.__do_for_phrase, $.for_phrase)),
+      optional(alias($.__do_preselect_phrase, $.preselect_phrase)),
+      optional(alias($.__do_query_tuning_phrase, $.query_tuning)),
       optional($.__do_transaction_phrase),
-      optional($.__do_preselect_phrase),
       optional(choice($.__do_while_phrase, $.__do_loop_phrase)),
       optional($.__do_transaction_phrase),
+      optional(alias($.__do_stop_after_phrase, $.stop_after_phrase)),
       // FIXME: this shouldn't be repeat but we need to save on state counts
       repeat(
         choice(
@@ -26,6 +29,7 @@ module.exports = ({ kw, tkw }) => ({
           alias($.__do_on_stop_phrase, $.on_stop_phrase),
         ),
       ),
+      optional($.frame_phrase),
       $.body,
     ),
 
@@ -42,10 +46,37 @@ module.exports = ({ kw, tkw }) => ({
     ),
   __do_while_phrase: ($) => seq(kw("WHILE"), $._expression),
   __do_for_phrase: ($) =>
-    seq(kw("FOR"), field("record", choice($.identifier, $.qualified_name))),
+    seq(kw("FOR"), $.__do_record_list),
+  __do_record_list: ($) =>
+    seq($.__do_record, repeat(seq(",", $.__do_record))),
+  __do_record: ($) =>
+    field("record", choice($.identifier, $.qualified_name)),
   __do_preselect_phrase: ($) =>
     seq(token(/PRESELECT\s+/i), $.preselect_record_list),
   __do_transaction_phrase: ($) => tkw("TRANSACTION"),
+  __do_query_tuning_phrase: ($) =>
+    seq(
+      kw("QUERY-TUNING"),
+      "(",
+      repeat1(
+        choice(
+          tkw("BIND-WHERE"),
+          tkw("NO-BIND-WHERE"),
+          seq(kw("CACHE-SIZE"), $._expression),
+          seq(kw("DEBUG"), choice(tkw("SQL"), tkw("EXTENDED"))),
+          tkw("NO-DEBUG"),
+          tkw("INDEX-HINT"),
+          tkw("NO-INDEX-HINT"),
+          tkw("JOIN-BY-SQLDB"),
+          tkw("NO-JOIN-BY-SQLDB"),
+          tkw("LOOKAHEAD"),
+          tkw("NO-LOOKAHEAD"),
+          tkw("SEPARATE-CONNECTION"),
+          tkw("NO-SEPARATE-CONNECTION"),
+        ),
+      ),
+      ")",
+    ),
   __do_stop_after_phrase: ($) =>
     seq(kw("STOP-AFTER"), field("time", $._expression)),
   __do_on_endkey_phrase: ($) =>

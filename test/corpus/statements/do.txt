@@ -377,10 +377,10 @@ END.
     (for_phrase
       record: (identifier)
       record: (identifier))
-    (query_tuning)
+    (query_tuning
+      (number_literal))
     (frame_phrase
-      (width_option
-        (number_literal)))
+      (number_literal))
     (body
       (display_statement
         (identifier)))))

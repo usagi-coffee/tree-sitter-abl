@@ -361,6 +361,22 @@ DEF FRAME atSimple2 "Label: " Customer.Name AT ROW 2 COLUMN 10.
     (number_literal)))
 
 ================================================================================
+FRAME - Constant name with AT phrase
+================================================================================
+
+DEFINE FRAME {&FRAME_NAME} bPolicy AT COLUMN 2 ROW 2.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (frame_definition
+    name: (constant
+      (identifier))
+    field: (identifier)
+    (number_literal)
+    (number_literal)))
+
+================================================================================
 FRAME - TO phrase on string
 ================================================================================
 

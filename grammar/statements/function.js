@@ -7,7 +7,6 @@ module.exports = ({ kw, tkw }) => ({
       optional(kw("CLASS")),
       field("type", $._type_name),
       optional($.function_parameter_list),
-      optional(alias($.__function_in_phrase, $.in_phrase)),
       choice($._terminator, $._colon),
       repeat($._statement),
       tkw("END"),
@@ -16,16 +15,28 @@ module.exports = ({ kw, tkw }) => ({
     ),
 
   function_forward_definition: ($) =>
-    seq(
-      choice(kw("DEFINE"), kw("DEF")),
-      kw("FUNCTION"),
-      field("name", $.identifier),
-      choice(kw("RETURNS"), kw("RETURN")),
-      optional(kw("CLASS")),
-      field("type", $._type_name),
-      optional($.function_parameter_list),
-      optional(alias($.__function_in_phrase, $.in_phrase)),
-      $._terminator,
+    choice(
+      seq(
+        choice(kw("DEFINE"), kw("DEF")),
+        kw("FUNCTION"),
+        field("name", $.identifier),
+        choice(kw("RETURNS"), kw("RETURN")),
+        optional(kw("CLASS")),
+        field("type", $._type_name),
+        optional($.function_parameter_list),
+        optional($.__function_forward_option),
+        $._terminator,
+      ),
+      seq(
+        kw("FUNCTION"),
+        field("name", $.identifier),
+        choice(kw("RETURNS"), kw("RETURN")),
+        optional(kw("CLASS")),
+        field("type", $._type_name),
+        optional($.function_parameter_list),
+        $.__function_forward_option,
+        $._terminator,
+      ),
     ),
 
   function_parameter_list: ($) =>
@@ -57,6 +68,12 @@ module.exports = ({ kw, tkw }) => ({
   __function_extent_phrase: ($) =>
     seq(tkw("EXTENT"), optional($.__function_extent_size)),
   __function_in_phrase: ($) => seq(kw("IN"), field("context", $._expression)),
+  __function_forward_phrase: ($) => tkw("FORWARD"),
+  __function_forward_option: ($) =>
+    choice(
+      alias($.__function_in_phrase, $.in_phrase),
+      alias($.__function_forward_phrase, $.forward_phrase),
+    ),
   __function_no_undo: ($) => tkw("NO-UNDO"),
   __function_extent_size: ($) =>
     choice(
