@@ -638,3 +638,34 @@ DEF BROWSE browse QUERY q DISPLAY f1 f2.
     query: (identifier)
     column: (identifier)
     column: (identifier)))
+
+================================================================================
+Define Browse with Qualified Columns and DOWN
+================================================================================
+
+DEFINE BROWSE bPolicy QUERY qPolicy
+    DISPLAY ttPolicy.tcPolName COLUMN-LABEL "Policy Name"
+           ttPolicy.tcPolDesc COLUMN-LABEL "Policy Description"
+    WITH 6 DOWN WIDTH 65 MULTIPLE.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (browse_definition
+    name: (identifier)
+    query: (identifier)
+    column: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (column_label_option
+      (string_literal))
+    column: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (column_label_option
+      (string_literal))
+    (down_option
+      (number_literal))
+    (width_option
+      (number_literal))
+    (multiple_option)))
