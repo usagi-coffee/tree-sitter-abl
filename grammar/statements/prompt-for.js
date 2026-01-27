@@ -6,7 +6,7 @@ module.exports = ({ kw, tkw }) => ({
       optional(tkw("UNLESS-HIDDEN")),
       repeat1(alias($.__prompt_for_item, $.prompt_for_item)),
       optional(alias($.__prompt_for_go_on, $.go_on_phrase)),
-      optional(seq(kw("IN"), kw("WINDOW"), field("window", $._expression))),
+      optional(seq(kw("IN"), tkw("WINDOW"), field("window", $._expression))),
       optional(alias($.__prompt_for_frame_phrase, $.frame_phrase)),
       $._terminator,
     ),

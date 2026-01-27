@@ -33828,7 +33828,15 @@
           "named": true
         },
         {
+          "type": "on_endkey_phrase",
+          "named": true
+        },
+        {
           "type": "on_error_phrase",
+          "named": true
+        },
+        {
+          "type": "on_quit_phrase",
           "named": true
         },
         {

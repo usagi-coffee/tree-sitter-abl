@@ -7,6 +7,8 @@ const lockedExpression = require("./locked");
 const newExpression = require("./new");
 const currentChangedExpression = require("./current-changed");
 const ambiguousExpression = require("./ambiguous");
+const inFrameExpression = require("./in-frame");
+const inputExpression = require("./input");
 const accumExpression = require("./accum");
 
 module.exports = (ctx) => ({
@@ -20,4 +22,6 @@ module.exports = (ctx) => ({
   ...currentChangedExpression(ctx),
   ...ambiguousExpression(ctx),
   ...accumExpression(ctx),
+  ...inputExpression(ctx),
+  ...inFrameExpression(ctx),
 });

@@ -56,8 +56,7 @@ module.exports = ({ kw, tkw }) => ({
 
   __function_extent_phrase: ($) =>
     seq(tkw("EXTENT"), optional($.__function_extent_size)),
-  __function_in_phrase: ($) =>
-    seq(kw("IN"), field("context", $._expression)),
+  __function_in_phrase: ($) => seq(kw("IN"), field("context", $._expression)),
   __function_no_undo: ($) => tkw("NO-UNDO"),
   __function_extent_size: ($) =>
     choice(

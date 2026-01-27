@@ -36,6 +36,7 @@ module.exports = grammar({
     [$._expression, $._statement_expression],
     [$._primary_expression, $.function_call],
     [$._primary_expression, $._assignable],
+    // Accesses, minor conflicts
     [
       $.__buffer_access_modifier,
       $.__data_source_access_modifier,
@@ -256,11 +257,18 @@ module.exports = grammar({
       arguments: ($) =>
         seq("(", optional(seq($.argument, repeat(seq(",", $.argument)))), ")"),
       argument: ($) =>
-        seq(
-          optional(choice(tkw("INPUT"), tkw("OUTPUT"), tkw("INPUT-OUTPUT"))),
-          optional(tkw("TABLE")),
-          field("value", $._expression),
-          optional(tkw("BY-REFERENCE")),
+        choice(
+          seq(
+            choice(tkw("INPUT"), tkw("OUTPUT"), tkw("INPUT-OUTPUT")),
+            optional(tkw("TABLE")),
+            field("value", $._expression),
+            optional(tkw("BY-REFERENCE")),
+          ),
+          seq(
+            optional(tkw("TABLE")),
+            field("value", $._expression),
+            optional(tkw("BY-REFERENCE")),
+          ),
         ),
 
       function_call: ($) =>
