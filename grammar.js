@@ -140,7 +140,15 @@ module.exports = grammar({
       _signed_number_literal: ($) => token(prec(1, /[+-][0-9]+(\.[0-9]+)?/)),
       date_literal: ($) =>
         token(prec(1, /[0-9]{1,2}[./][0-9]{1,2}[./][0-9]{2,4}/)),
-      string_literal: ($) => $._escaped_string,
+      string_literal: ($) =>
+        seq(
+          $._escaped_string,
+          optional(
+            token.immediate(
+              /:(?:[RLCT](?:U)?(?:[0-9]+)?|U(?:[0-9]+)?|[0-9]+)/i,
+            ),
+          ),
+        ),
       null_literal: ($) => "?",
       boolean_literal: ($) => token(/TRUE|FALSE|YES|NO/i),
       file_name: ($) => /[A-Za-z0-9_\/.-]+\.i/i,
