@@ -61,7 +61,7 @@ Strongly prefer using these commands as they have helpful side-effects like retu
 ## Notes
 
 - `bun` instead of `npm`.
-- Successful tests print out current `STATE_COUNT` at the end.
+- Successful tests print a text that all tests passed AND print out current `STATE_COUNT` at the end.
 - `bun run parse` and `bun run parse:snippet` do not regenerate the parser before parsing the code, unlike `bun run test`.
 - Parser does not build after reaching the hard limit of 65,535 `STATE_COUNT` but bugs might occur at the top-end of the limit (anything above ~60,000) e.g `tree-sitter test` might return status `0` but produce no output or return `ts_parser_parse: Assertion 'self->finished_tree.ptr' failed.` error.
 - When using `alias`, `tree-sitter` handles undefined rules by using the property name as the symbol name so it's okay to alias to `$.something_that_wasn't defined`.
@@ -70,6 +70,7 @@ Strongly prefer using these commands as they have helpful side-effects like retu
 - Always prefer `| tail` when calling `bun run test` instead of `| head`.
 - Parser regeneration can take up to 1 minute so adjust timeout for `bun run test` accordingly.
 - Tests return only failed cases and failed syntax tree or a message that everything went well.
+- If `tree-sitter test` returns status 0 and no output that means something broke and you need to review your changes, this issue has nothing to do with test corpus.
 
 ## Tree-Sitter Test Corpus Format
 
