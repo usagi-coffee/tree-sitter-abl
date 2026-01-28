@@ -74,5 +74,5 @@ Strongly prefer using these commands as they have helpful side-effects like retu
 - `tkw` and `kw` are passed down using argument, to access them unpack it inside the statement module e.g `module.exports = ({ kw, tkw })`.
 - Always prefer `| head` when calling `bun run test` instead of `| tail`, retrieve at least `100` lines.
 - Please don't investigate into why `tree-sitter test` outputs nothing, it's not related to tests, some rule just broke it, it's a confirmed bug.
-- Retry the command in a few seconds on `Permission denied (os error 13)` error.
+- The `Permission denied (os error 13)` error occurs because the sandbox blocks writing outside the workspace, preventing tree-sitter from creating its lock file in the user's cache directory.
 
