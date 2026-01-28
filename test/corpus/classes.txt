@@ -69,21 +69,19 @@ END CLASS.
     (var_statement
       (access_modifier)
       type: (identifier)
-      (var_decl
+      (variable
         name: (identifier)
-        (var_init
-          (number_literal))))
+        initializer: (number_literal)))
     (var_statement
       (access_modifier)
       type: (identifier)
-      (var_decl
+      (variable
         name: (identifier)
-        (var_init
-          (number_literal))))
+        initializer: (number_literal)))
     (var_statement
       (access_modifier)
       type: (identifier)
-      (var_decl
+      (variable
         name: (identifier)))
     (annotation_statement
       name: (annotation_name))
