@@ -1,0 +1,72 @@
+================================================================================
+AUGMENTED ASSIGNMENT
+================================================================================
+
+x += 1.
+x -= 2.
+x *= 3.
+x /= 4.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (number_literal))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (number_literal))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (number_literal))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (number_literal)))
+
+================================================================================
+ASSIGNMENT
+================================================================================
+
+x = 5.
+obj:prop = "ok".
+x = 1 + 2.
+x = ?.
+x = +5.
+x = 1.31.2022.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (number_literal))
+  (assignment_statement
+    left: (object_access
+      left: (identifier)
+      right: (identifier))
+    operator: (assignment_operator)
+    right: (string_literal))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (binary_expression
+      (number_literal)
+      (number_literal)))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (null_literal))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (unary_expression
+      (number_literal)))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (date_literal)))

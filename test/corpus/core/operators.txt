@@ -1,0 +1,301 @@
+================================================================================
+LOGICAL AND COMPARISON
+================================================================================
+
+x = 1.
+flag = x > 2 AND x < 5.
+ok = x EQ 2 OR x NE 3.
+w = -(0).
+x = -f().
+y = -table.field.
+z = -obj:method().
+z = NOT y.
+y = NOT -x < -10 OR x = 10.
+s = code BEGINS "AB".
+s = code MATCHES "*|*".
+x = repYear MODULO 4.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (number_literal))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (binary_expression
+      (binary_expression
+        (identifier)
+        (number_literal))
+      (binary_expression
+        (identifier)
+        (number_literal))))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (binary_expression
+      (binary_expression
+        (identifier)
+        (number_literal))
+      (binary_expression
+        (identifier)
+        (number_literal))))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (unary_expression
+      (parenthesized_expression
+        (number_literal))))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (unary_expression
+      (function_call
+        function: (identifier)
+        (arguments))))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (unary_expression
+      (qualified_name
+        left: (identifier)
+        right: (identifier))))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (unary_expression
+      (function_call
+        function: (object_access
+          left: (identifier)
+          right: (identifier))
+        (arguments))))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (unary_expression
+      (identifier)))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (binary_expression
+      (binary_expression
+        (unary_expression
+          (unary_expression
+            (identifier)))
+        (unary_expression
+          (number_literal)))
+      (binary_expression
+        (identifier)
+        (number_literal))))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (binary_expression
+      (identifier)
+      (string_literal)))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (binary_expression
+      (identifier)
+      (string_literal)))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (binary_expression
+      (identifier)
+      (number_literal))))
+
+================================================================================
+ARITHMETIC PRECEDENCE AND ASSOCIATIVITY
+================================================================================
+
+x = 2 + 2.
+y = (4 * 3) / 2.
+z = 2 > 4.
+x = 1 + 2 * 3.
+x = (1 + 2) * 3.
+x = 10 / 2 * 5.
+x = 10 - 2 - 3.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (binary_expression
+      (number_literal)
+      (number_literal)))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (binary_expression
+      (parenthesized_expression
+        (binary_expression
+          (number_literal)
+          (number_literal)))
+      (number_literal)))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (binary_expression
+      (number_literal)
+      (number_literal)))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (binary_expression
+      (number_literal)
+      (binary_expression
+        (number_literal)
+        (number_literal))))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (binary_expression
+      (parenthesized_expression
+        (binary_expression
+          (number_literal)
+          (number_literal)))
+      (number_literal)))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (binary_expression
+      (binary_expression
+        (number_literal)
+        (number_literal))
+      (number_literal)))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (binary_expression
+      (binary_expression
+        (number_literal)
+        (number_literal))
+      (number_literal))))
+
+================================================================================
+LOGICAL BOOLEAN LITERALS
+================================================================================
+
+w = YES.
+x = NO.
+x = YES AND NO.
+x = YES OR NO.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (boolean_literal))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (boolean_literal))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (binary_expression
+      (boolean_literal)
+      (boolean_literal)))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (binary_expression
+      (boolean_literal)
+      (boolean_literal))))
+
+================================================================================
+LOGICAL NOT PRECEDENCE
+================================================================================
+
+z = NOT y > 5.
+y = NOT 2 + 2.
+z = NOT 2 + 2 = 5.
+zr = NOT 5 = 2 + 2.
+x = NOT (y > 5).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (binary_expression
+      (unary_expression
+        (identifier))
+      (number_literal)))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (binary_expression
+      (unary_expression
+        (number_literal))
+      (number_literal)))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (binary_expression
+      (binary_expression
+        (unary_expression
+          (number_literal))
+        (number_literal))
+      (number_literal)))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (binary_expression
+      (unary_expression
+        (number_literal))
+      (binary_expression
+        (number_literal)
+        (number_literal))))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (unary_expression
+      (parenthesized_expression
+        (binary_expression
+          (identifier)
+          (number_literal))))))
+
+================================================================================
+UNARY NESTING
+================================================================================
+
+x = - -1.
+x = -(-1 + 2).
+x = - -f().
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (unary_expression
+      (unary_expression
+        (number_literal))))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (unary_expression
+      (parenthesized_expression
+        (binary_expression
+          (unary_expression
+            (number_literal))
+          (number_literal)))))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (unary_expression
+      (unary_expression
+        (function_call
+          function: (identifier)
+          (arguments))))))

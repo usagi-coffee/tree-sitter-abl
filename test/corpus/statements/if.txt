@@ -159,6 +159,57 @@ IF LOCKED bufOrder THEN RETURN TRUE.
       (boolean_literal))))
 
 ================================================================================
+IF - Inline THEN/ELSE
+================================================================================
+
+IF x > 10 THEN x = 10.
+ELSE IF x > 20 THEN x = 20.
+ELSE x = x.
+
+IF x > 10 THEN x = 10.
+ELSE DO:
+  x = 20.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (if_statement
+    (binary_expression
+      (identifier)
+      (number_literal))
+    then: (assignment_statement
+      left: (identifier)
+      operator: (assignment_operator)
+      right: (number_literal))
+    else: (if_statement
+      (binary_expression
+        (identifier)
+        (number_literal))
+      then: (assignment_statement
+        left: (identifier)
+        operator: (assignment_operator)
+        right: (number_literal))
+      else: (assignment_statement
+        left: (identifier)
+        operator: (assignment_operator)
+        right: (identifier))))
+  (if_statement
+    (binary_expression
+      (identifier)
+      (number_literal))
+    then: (assignment_statement
+      left: (identifier)
+      operator: (assignment_operator)
+      right: (number_literal))
+    else: (do_block
+      (body
+        (assignment_statement
+          left: (identifier)
+          operator: (assignment_operator)
+          right: (number_literal))))))
+
+================================================================================
 IF - Reference snippet
 ================================================================================
 

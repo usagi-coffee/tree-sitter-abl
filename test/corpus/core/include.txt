@@ -1,0 +1,81 @@
+================================================================================
+INCLUDE
+================================================================================
+
+{include_file.i arg1 &arg2="test" arg3 "NEW" &ABC=variable}
+{{&INC}file.i}
+{{&INC}file_with_args.i
+  &PARM1=var_one &PARM2=var_two
+  &SITE=tbl_one.col_one &LOC=tbl_one.col_two
+  &ORDER=param_order
+  &ITEM=param_item &QTY=qty_val &LOT='N' &PRICE=price_val
+}
+DISPLAY {&VAR1}.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (include
+    file: (file_name)
+    argument: (include_argument
+      (identifier))
+    argument: (include_argument
+      (include_named_argument
+        name: (identifier)
+        value: (string_literal)))
+    argument: (include_argument
+      (identifier))
+    argument: (include_argument
+      (string_literal))
+    argument: (include_argument
+      (include_named_argument
+        name: (identifier)
+        value: (identifier))))
+  (include)
+  (include
+    file: (constant
+      (identifier))
+    file: (file_name)
+    argument: (include_argument
+      (include_named_argument
+        name: (identifier)
+        value: (identifier)))
+    argument: (include_argument
+      (include_named_argument
+        name: (identifier)
+        value: (identifier)))
+    argument: (include_argument
+      (include_named_argument
+        name: (identifier)
+        value: (qualified_name
+          left: (identifier)
+          right: (identifier))))
+    argument: (include_argument
+      (include_named_argument
+        name: (identifier)
+        value: (qualified_name
+          left: (identifier)
+          right: (identifier))))
+    argument: (include_argument
+      (include_named_argument
+        name: (identifier)
+        value: (identifier)))
+    argument: (include_argument
+      (include_named_argument
+        name: (identifier)
+        value: (identifier)))
+    argument: (include_argument
+      (include_named_argument
+        name: (identifier)
+        value: (identifier)))
+    argument: (include_argument
+      (include_named_argument
+        name: (identifier)
+        value: (string_literal)))
+    argument: (include_argument
+      (include_named_argument
+        name: (identifier)
+        value: (identifier))))
+  (display_statement
+    (constant
+      (identifier))))

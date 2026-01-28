@@ -1,0 +1,50 @@
+================================================================================
+PREPROCESSOR DIRECTIVES
+================================================================================
+
+&GLOBAL-DEFINE APP-NAME "demo"
+&SCOPED-DEFINE FLAG YES
+&UNDEFINE FLAG
+&MESSAGE "hello"
+&IF DEFINED (FLAG) EQ 0 &THEN
+&IF TRUE
+&THEN
+&ELSEIF FALSE
+&ELSE
+&ENDIF
+
+&if DEFINED(is_Running) <> 0 &THEN
+  DEFINE VARIABLE cParm AS CHARACTER.
+&ELSE
+  DEFINE INPUT PARAMETER cParm AS CHARACTER.
+&ENDIF
+
+&Scoped-define OPEN-QUERY-DEFAULT-FRAME OPEN QUERY DEFAULT-FRAME FOR EACH ITEM ~
+      WHERE item.system_id = ipcItemSysid AND ~
+item.item = ipcItem NO-LOCK.
+&Scoped-define TABLES-IN-QUERY-DEFAULT-FRAME ITEM
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (preprocessor_directive)
+  (preprocessor_directive)
+  (preprocessor_directive)
+  (preprocessor_directive)
+  (preprocessor_directive)
+  (preprocessor_directive)
+  (preprocessor_directive)
+  (preprocessor_directive)
+  (preprocessor_directive)
+  (preprocessor_directive)
+  (preprocessor_directive)
+  (variable_definition
+    (identifier)
+    (identifier))
+  (preprocessor_directive)
+  (parameter_definition
+    (identifier)
+    (identifier))
+  (preprocessor_directive)
+  (preprocessor_directive)
+  (preprocessor_directive))

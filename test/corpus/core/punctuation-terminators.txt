@@ -1,0 +1,22 @@
+================================================================================
+PUNCTUATION AND TERMINATORS
+================================================================================
+
+?;
+obj?:prop;
+arr[1, 2];
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (expression_statement
+    (null_literal))
+  (expression_statement
+    (object_access
+      left: (identifier)
+      right: (identifier)))
+  (expression_statement
+    (array_access
+      array: (identifier)
+      (number_literal)
+      (number_literal))))

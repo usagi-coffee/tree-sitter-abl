@@ -1,0 +1,25 @@
+================================================================================
+ARRAY ACCESS
+================================================================================
+
+arr[1].
+arr[1, 2].
+arr[1 FOR 4].
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (expression_statement
+    (array_access
+      array: (identifier)
+      (number_literal)))
+  (expression_statement
+    (array_access
+      array: (identifier)
+      (number_literal)
+      (number_literal)))
+  (expression_statement
+    (array_access
+      array: (identifier)
+      start: (number_literal)
+      count: (number_literal))))

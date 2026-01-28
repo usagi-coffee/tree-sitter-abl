@@ -1,0 +1,73 @@
+================================================================================
+ACCESSORS
+================================================================================
+
+table.field.
+Type::Member.
+obj?:prop.
+obj:method(1, 2).
+Func().
+some_object:root.
+some_object:chained_property:chained_another:method().
+oObject:Length -= String(pcMessage):Size.
+new MyClass():Size.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (expression_statement
+    (qualified_name
+      left: (identifier)
+      right: (identifier)))
+  (expression_statement
+    (scoped_name
+      left: (identifier)
+      right: (identifier)))
+  (expression_statement
+    (object_access
+      left: (identifier)
+      right: (identifier)))
+  (expression_statement
+    (function_call
+      function: (object_access
+        left: (identifier)
+        right: (identifier))
+      (arguments
+        (argument
+          value: (number_literal))
+        (argument
+          value: (number_literal)))))
+  (expression_statement
+    (function_call
+      function: (identifier)
+      (arguments)))
+  (expression_statement
+    (object_access
+      left: (identifier)
+      right: (identifier)))
+  (expression_statement
+    (function_call
+      function: (object_access
+        left: (identifier)
+        right: (identifier)
+        right: (identifier)
+        right: (identifier))
+      (arguments)))
+  (assignment_statement
+    left: (object_access
+      left: (identifier)
+      right: (identifier))
+    operator: (assignment_operator)
+    right: (object_access_expression
+      left: (function_call
+        function: (identifier)
+        (arguments
+          (argument
+            value: (identifier))))
+      right: (identifier)))
+  (expression_statement
+    (object_access_expression
+      left: (new_expression
+        type: (identifier)
+        (arguments))
+      right: (identifier))))
