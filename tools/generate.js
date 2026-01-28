@@ -38,7 +38,7 @@ const proc = Bun.spawnSync({
 
 if (proc.stdout + proc.stderr === "") {
   console.error(
-    "Parser failed internally and returned no output, this indicates some rules broke the parser (tests are not the issue), try to revert your latest changes until you see an output. This is a confirmed parser bug, don't investigate into this error."
+    "Parser failed internally and returned no output, this indicates some rule broke the parser (tests are not the issue), try to revert your latest changes until you see an output. This is a confirmed parser bug, don't investigate into this error."
   );
   process.exit(1);
 }
