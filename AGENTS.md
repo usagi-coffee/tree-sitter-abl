@@ -36,9 +36,10 @@
   - `bun run check`
 - Retrieve syntax information from the language reference
   - `bun run reference <phrase from contents>`
-  - Example: `bun run reference 'DEFINE VARIABLE statement'`: Returns reference for the define variable statement.
-  - Example: `bun run reference 'DEFINE*'`: Returns all possible DEFINE entries (names only).
-  - Example: `bun run reference '*statement'`: Returns all statements entries (names only).
+  - Example: `bun run reference 'DEFINE VARIABLE statement'`: Returns complete reference for the define variable statement.
+  - Example: `bun run reference 'DEFINE*'`: Returns all possible DEFINE entries by suffix (names only).
+  - Example: `bun run reference '*statement'`: Returns all statements entries by prefix (names only).
+  - Example: `bun run reference '*statement*'`: Returns all statements entries that include `statement` (names only).
   - Example: `bun run reference '*'`: Returns all entries (names only).
 
 Strongly prefer using these commands as they have helpful side-effects like returning `STATE_COUNT`.
@@ -46,8 +47,6 @@ Strongly prefer using these commands as they have helpful side-effects like retu
 ## Conventions
 
 - Always runs tests after modifications.
-- Any non-tests modifications require parser regeneration.
-- `src/scanner.c` modifications need regeneration before testing.
 - Grammar changes without thorough corpus coverage and testing are unacceptable.
 - Avoid creating a shared or generic code unless it is really a part of the core syntax, core grammar modifications require a confirmation unless experimenting.
 - We intentionally duplicate modifiers and tunings at the statement level so that most of the statement-specific context lives in a single file. To support this, each statement defines its own `__<statement>_rules`, which are later aliased to `$.rule` where needed. This intentional duplication favors locality, readability, and conflict isolation over DRY abstractions.
@@ -60,20 +59,18 @@ Strongly prefer using these commands as they have helpful side-effects like retu
 - The grammar should avoid permissive or catch-all rules that allow invalid syntax to be parsed successfully.
 - ABL grammar is filled with optionals, be careful not to explode `tree-sitter`'s `STATE_COUNT`, always check modification's impact on `STATE_COUNT`.
 - Do not adjust or remove tests just to satisfy test passing, just fix the underlying parsing issue or ask me first to remove if it's really not supported.
-- Don't do unnecessary comments like (something is above).
+- Don't do unnecessary comments like `// something is above`.
 
 ## Notes
 
 - `bun` instead of `npm`.
 - Never use `tree-sitter` CLI directly, use workflow commands.
+- Parser generation can take up to 1 minute so adjust timeout for accordingly.
 - Tests return only failed cases and failed syntax tree or a message that everything went well.
-- `bun run parse` and `bun run parse:snippet` do not regenerate the parser before parsing the code, unlike `bun run test`.
 - Parser does not build after reaching the hard limit of 65,535 `STATE_COUNT` but bugs might occur at the top-end of the limit (anything above ~60,000) e.g `tree-sitter test` might return status `0` but produce no output or return `ts_parser_parse: Assertion 'self->finished_tree.ptr' failed.` error.
 - When using `alias`, `tree-sitter` handles undefined rules by using the property name as the symbol name so it's okay to alias to `$.something_that_wasn't defined`.
-- Terminators like `terminator` or `terminator_dot` should never be visible in the syntax tree output.
-- `kw` and `tkw` are passed down using argument, to access them unpack it inside the statement module e.g `module.exports = ({ kw, tkw })`.
-- Always prefer `| head` when calling `bun run test` instead of `| tail`, retrieve at least lines.
-- Parser regeneration can take up to 1 minute so adjust timeout for accordingly.
-- If `tree-sitter test` returns status 0 and no output that means something broke and you need to review your changes, this issue has nothing to do with test corpus.
-- Please don't investigate into why `tree-sitter test` outputs nothing, it's not related to tests, some rule just broke it.
+- `terminator`, `terminator_dot` or rules prefix prefixed `_` should never be visible in the syntax tree output.
+- `tkw` and `kw` are passed down using argument, to access them unpack it inside the statement module e.g `module.exports = ({ kw, tkw })`.
+- Always prefer `| head` when calling `bun run test` instead of `| tail`, retrieve at least `100` lines.
+- Please don't investigate into why `tree-sitter test` outputs nothing, it's not related to tests, some rule just broke it, it's a confirmed bug.
 
