@@ -561,7 +561,8 @@ FUNCTION getDefault RETURNS INTEGER (INPUT customerId AS INTEGER) IN SUPER.
       (function_parameter
         name: (identifier)
         type: (identifier)))
-    (in_super_phrase)))
+    (in_phrase
+      context: (identifier))))
 
 ================================================================================
 FUNCTION - Web service operation prototype
