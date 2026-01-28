@@ -49,14 +49,15 @@ const isSuffix = entry.startsWith("*");
 
 let matches = [];
 
-if (isPrefix) {
+if (isPrefix && isSuffix) {
+  const phrase = entry.slice(0, -1).slice(1);
+  matches = toc.filter((x) => x.title.includes(phrase));
+} else if (isPrefix) {
   const prefix = entry.slice(0, -1);
   matches = toc.filter((x) => x.title.startsWith(prefix));
-}
-
-if (isSuffix) {
+} else if (isSuffix) {
   const suffix = entry.slice(1);
-  matches = toc.filter((x) => x.title.endsWith(suffix));
+  matches.push(...toc.filter((x) => x.title.endsWith(suffix)));
 }
 
 if (isPrefix || isSuffix) {
