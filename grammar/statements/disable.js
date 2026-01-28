@@ -23,7 +23,7 @@ module.exports = ({ kw, tkw }) => ({
       seq(
         tkw("TEXT"),
         "(",
-        alias($.identifier, $._disable_text_field),
+        token(/[A-Za-z_][A-Za-z0-9_-]*/),
         alias($.__disable_format_phrase, $.format_phrase),
         ")",
       ),
@@ -38,12 +38,20 @@ module.exports = ({ kw, tkw }) => ({
       tkw("SKIP"),
     ),
   __disable_format_phrase: ($) =>
-    seq(kw("FORMAT"), alias($.string_literal, $._disable_format_string)),
+    seq(
+      kw("FORMAT"),
+      $._escaped_string,
+      optional(
+        token.immediate(
+          /:(?:[RLCT](?:U)?(?:[0-9]+)?|U(?:[0-9]+)?|[0-9]+)/i,
+        ),
+      ),
+    ),
   __disable_at_phrase: ($) =>
-    seq(kw("AT"), alias($.number_literal, $._disable_at_position)),
+    seq(kw("AT"), token(/[0-9]+(\.[0-9]+)?/)),
   __disable_constant_option: ($) =>
     choice(
-      seq(kw("BGCOLOR"), alias($.number_literal, $._disable_bgcolor)),
+      seq(kw("BGCOLOR"), token(/[0-9]+(\.[0-9]+)?/)),
       seq(tkw("VIEW-AS"), tkw("TEXT")),
     ),
   __disable_frame_phrase: ($) =>

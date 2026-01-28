@@ -8,7 +8,12 @@ module.exports = ({ tkw }) => ({
           tkw("THROW"),
           field(
             "value",
-            choice($._assignable, $.string_literal, $.number_literal),
+            choice(
+              $.new_expression,
+              $._assignable,
+              $.string_literal,
+              $.number_literal,
+            ),
           ),
         ),
         seq(tkw("LEAVE"), optional(field("leave_label", $.identifier))),

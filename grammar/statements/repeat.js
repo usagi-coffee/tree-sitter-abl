@@ -90,14 +90,27 @@ module.exports = ({ kw, tkw }) => ({
         seq(
           tkw("RETURN"),
           tkw("ERROR"),
-          alias($.string_literal, $._repeat_error_value),
+          $._escaped_string,
+          optional(
+            token.immediate(
+              /:(?:[RLCT](?:U)?(?:[0-9]+)?|U(?:[0-9]+)?|[0-9]+)/i,
+            ),
+          ),
         ),
         tkw("THROW"),
         tkw("LEAVE"),
         tkw("NEXT"),
         tkw("RETRY"),
         seq(tkw("RETURN"), tkw("NO-APPLY")),
-        seq(tkw("RETURN"), alias($.string_literal, $._repeat_return_value)),
+        seq(
+          tkw("RETURN"),
+          $._escaped_string,
+          optional(
+            token.immediate(
+              /:(?:[RLCT](?:U)?(?:[0-9]+)?|U(?:[0-9]+)?|[0-9]+)/i,
+            ),
+          ),
+        ),
       ),
     ),
   __repeat_undo_throw_phrase: ($) => seq(tkw("UNDO"), ",", tkw("THROW")),
