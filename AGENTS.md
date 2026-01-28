@@ -18,17 +18,15 @@
 
 ## Workflow
 
-- Run tests (regenerates the parser and returns only failed tests if any):
+- Run tests:
   - `bun run test`
-- Iterate on a specific test (regenerates the parser):
+- Run a specific test:
   - `bun run test --include 'TEST NAME'`
   - Example: `bun run test --include 'WORKFILE DEFINITION - Shared/Private variants'`
-- Inspect failed tests (no regeneration, optional):
-  - `bun run test:failed`
-- Parse a file (no regeneration):
+- Parse a file:
   - `bun run parse <file>`
   - Example: `bun run parse example.p`
-- Parse a snippet (no regeneration):
+- Parse a snippet:
   - `bun run parse:snippet <direct syntax string>`
   - Example: `bun run parse:snippet 'a = b + c.'`
 - Build native and wasm artifacts:
@@ -48,6 +46,7 @@ Strongly prefer using these commands as they have helpful side-effects like retu
 ## Conventions
 
 - Always runs tests after modifications.
+- Any non-tests modifications require parser regeneration.
 - `src/scanner.c` modifications need regeneration before testing.
 - Grammar changes without thorough corpus coverage and testing are unacceptable.
 - Avoid creating a shared or generic code unless it is really a part of the core syntax, core grammar modifications require a confirmation unless experimenting.
@@ -66,6 +65,7 @@ Strongly prefer using these commands as they have helpful side-effects like retu
 ## Notes
 
 - `bun` instead of `npm`.
+- Never use `tree-sitter` CLI directly, use workflow commands.
 - Tests return only failed cases and failed syntax tree or a message that everything went well.
 - `bun run parse` and `bun run parse:snippet` do not regenerate the parser before parsing the code, unlike `bun run test`.
 - Parser does not build after reaching the hard limit of 65,535 `STATE_COUNT` but bugs might occur at the top-end of the limit (anything above ~60,000) e.g `tree-sitter test` might return status `0` but produce no output or return `ts_parser_parse: Assertion 'self->finished_tree.ptr' failed.` error.
