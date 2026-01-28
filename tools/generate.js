@@ -1,49 +1,28 @@
+// Skip tree-sitter generate if grammar.js, grammar/*, and src/scanner.c haven't changed
 import { $ } from "bun";
 import { readdir } from "node:fs/promises";
 import { join } from "node:path";
 
 const hasher = new Bun.CryptoHasher("sha256");
 
-// Hash grammar.js
-const grammarJs = await Bun.file("grammar.js").arrayBuffer();
-hasher.update(new Uint8Array(grammarJs));
+const hashFile = async (path) => {
+  try {
+    hasher.update(new Uint8Array(await Bun.file(path).arrayBuffer()));
+  } catch {}
+};
 
-// Hash all files in grammar/ directory
-const grammarDir = "grammar";
+await hashFile("grammar.js");
+await hashFile("src/scanner.c");
+
 try {
-  const grammarFiles = await readdir(grammarDir);
-  for (const file of grammarFiles.sort()) {
-    const content = await Bun.file(join(grammarDir, file)).arrayBuffer();
-    hasher.update(new Uint8Array(content));
-  }
-} catch {
-  // grammar directory might not exist
-}
+  for (const file of (await readdir("grammar", { recursive: true })).sort())
+    await hashFile(join("grammar", file));
+} catch {}
 
-// Hash src/scanner.c
-try {
-  const scannerC = await Bun.file("src/scanner.c").arrayBuffer();
-  hasher.update(new Uint8Array(scannerC));
-} catch {
-  // scanner.c might not exist
-}
+const hash = hasher.digest("hex");
+const prevHash = await Bun.file("abl.hash").text().catch(() => "");
 
-const currentHash = hasher.digest("hex");
+if (hash === prevHash) process.exit(0);
 
-// Check if hash changed
-let previousHash = "";
-try {
-  previousHash = (await Bun.file("abl.hash").text()).trim();
-} catch {
-  // file doesn't exist
-}
-
-if (currentHash === previousHash) {
-  process.exit(0);
-}
-
-// Run tree-sitter generate
 await $`tree-sitter generate`;
-
-// Write new hash
-await Bun.write("abl.hash", currentHash);
+await Bun.write("abl.hash", hash);
