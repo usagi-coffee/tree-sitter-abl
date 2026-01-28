@@ -46,7 +46,7 @@ Strongly prefer using these commands as they have helpful side-effects like retu
 
 ## Conventions
 
-- Always runs tests after modifications.
+- Always run tests after modifications.
 - Before working on a statement, first consult its reference to ensure you understand the available syntax and it's proper usage.
 - Grammar changes without thorough corpus coverage and testing are unacceptable.
 - Avoid creating a shared or generic code unless it is really a part of the core syntax, core grammar modifications require a confirmation unless experimenting.
@@ -66,13 +66,12 @@ Strongly prefer using these commands as they have helpful side-effects like retu
 
 - `bun` instead of `npm`.
 - Never use `tree-sitter` CLI directly, use workflow commands.
-- Parser generation can take up to 1 minute so adjust timeout for accordingly.
-- Tests return only failed cases and failed syntax tree or a message that everything went well.
+- Parser generation can take up to 1 minute so adjust timeout accordingly.
+- `bun run test` returns only failed cases and failed syntax tree OR a message that everything went well.
 - Parser does not build after reaching the hard limit of 65,535 `STATE_COUNT` but bugs might occur at the top-end of the limit (anything above ~60,000) e.g `tree-sitter test` might return status `0` but produce no output or return `ts_parser_parse: Assertion 'self->finished_tree.ptr' failed.` error.
 - When using `alias`, `tree-sitter` handles undefined rules by using the property name as the symbol name so it's okay to alias to `$.something_that_wasn't defined`.
-- `terminator`, `terminator_dot` or rules prefix prefixed `_` should never be visible in the syntax tree output.
-- `tkw` and `kw` are passed down using argument, to access them unpack it inside the statement module e.g `module.exports = ({ kw, tkw })`.
-- Always prefer `| head` when calling `bun run test` instead of `| tail`, retrieve at least `100` lines.
-- Please don't investigate into why `tree-sitter test` outputs nothing, it's not related to tests, some rule just broke it, it's a confirmed bug.
+- `terminator`, `terminator_dot` or rules prefixed with `_` (unless aliased) should never be visible in the syntax tree output.
+- `tkw` and `kw` are passed down, to access them unpack it inside the statement module e.g `module.exports = ({ kw, tkw }) => ({`.
+- Always prefer `| head` when calling `bun run test` instead of `| tail`, retrieve at least `50` lines.
 - The `Permission denied (os error 13)` error occurs because the sandbox blocks writing outside the workspace, preventing tree-sitter from creating its lock file in the user's cache directory.
 
