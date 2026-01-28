@@ -11,13 +11,18 @@ CONNECT VALUE("-db mydb -H localhost").
   (connect_statement
     database: (identifier))
   (connect_statement
-    value: (string_literal)))
+    database: (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          value: (string_literal))))))
 
 ================================================================================
 CONNECT with connection options
 ================================================================================
 
 CONNECT -db Sports2020 -H dbserver -S 1900 -U appuser -P secret NO-ERROR.
+CONNECT -db Sports2020 -H dbserver.
 CONNECT mydb1 -1 -db mydb2 -1 NO-ERROR.
 
 --------------------------------------------------------------------------------
@@ -40,11 +45,18 @@ CONNECT mydb1 -1 -db mydb2 -1 NO-ERROR.
       parameter: (identifier)
       value: (identifier)))
   (connect_statement
-    database: (identifier)
-    (connect_option
-      parameter: (number_literal))
     (connect_option
       parameter: (identifier)
       value: (identifier))
     (connect_option
-      parameter: (number_literal))))
+      parameter: (identifier)
+      value: (identifier)))
+  (connect_statement
+    database: (identifier)
+    (connect_option
+      parameter: (identifier))
+    (connect_option
+      parameter: (identifier)
+      value: (identifier))
+    (connect_option
+      parameter: (identifier))))
