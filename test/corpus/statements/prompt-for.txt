@@ -76,3 +76,34 @@ PROMPT-FOR field1 FORMAT "x(10)" WHEN ok
     (prompt_for_item)
     (editing_phrase
       (readkey_statement))))
+
+================================================================================
+PROMPT-FOR record with EXCEPT and constant VIEW-AS
+================================================================================
+
+PROMPT-FOR Customer EXCEPT Comments PrivateNotes WITH FRAME fCust.
+PROMPT-FOR "Notes:" TO 20 VIEW-AS TEXT FGCOLOR 12 BGCOLOR 1 FONT 2 field1.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (prompt_for_statement
+    record: (identifier)
+    field: (identifier)
+    field: (identifier)
+    (frame_phrase
+      frame: (identifier)))
+  (prompt_for_statement
+    (prompt_for_item
+      constant: (string_literal)
+      (to_phrase)
+      (view_as_phrase
+        widget: (identifier))
+      (fgcolor_option
+        (number_literal))
+      (bgcolor_option
+        (number_literal))
+      (font_option
+        (number_literal)))
+    (prompt_for_item
+      field: (identifier))))

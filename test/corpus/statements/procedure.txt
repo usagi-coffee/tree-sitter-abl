@@ -298,3 +298,119 @@ END PROCEDURE.
       like: (qualified_name
         left: (identifier)
         right: (identifier)))))
+
+================================================================================
+PROCEDURE - PRIVATE with CATCH/FINALLY
+================================================================================
+
+PROCEDURE calcTotals PRIVATE:
+  DEFINE VARIABLE i AS INTEGER NO-UNDO.
+  DO ON ERROR UNDO, THROW:
+    i = i + 1.
+  END.
+  CATCH err AS Progress.Lang.SysError:
+    MESSAGE err:GetMessage(1).
+  END CATCH.
+  FINALLY:
+    MESSAGE "cleanup".
+  END FINALLY.
+END PROCEDURE.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (procedure_definition
+    (access_modifier)
+    name: (identifier)
+    (variable_definition
+      name: (identifier)
+      type: (identifier)
+      (no_undo))
+    (do_block
+      (on_error_phrase
+        (undo_phrase))
+      (body
+        (assignment_statement
+          left: (identifier)
+          operator: (assignment_operator)
+          right: (binary_expression
+            (identifier)
+            (number_literal)))))
+    (catch_statement
+      name: (identifier)
+      type: (qualified_name
+        left: (identifier)
+        right: (identifier)
+        right: (identifier))
+      (body
+        (message_statement
+          (object_access_expression
+            left: (identifier)
+            right: (identifier)
+            (arguments
+              (argument
+                value: (number_literal)))))))
+    (finally_statement
+      (body
+        (message_statement
+          (string_literal))))))
+
+================================================================================
+PROCEDURE - EXTERNAL and IN SUPER prototypes
+================================================================================
+
+PROCEDURE MessageBoxA EXTERNAL "user32.dll":
+  DEFINE INPUT PARAMETER hwnd AS LONG.
+  DEFINE INPUT PARAMETER mbtext AS CHARACTER.
+  DEFINE INPUT PARAMETER mbtitle AS CHARACTER.
+  DEFINE INPUT PARAMETER style AS LONG.
+  DEFINE RETURN PARAMETER result AS LONG.
+END PROCEDURE.
+
+PROCEDURE calcTax CDECL ORDINAL 5 PERSISTENT THREAD-SAFE EXTERNAL "tax.dll":
+  DEFINE INPUT PARAMETER pAmount AS DECIMAL.
+  DEFINE RETURN PARAMETER pTax AS DECIMAL.
+END PROCEDURE.
+
+PROCEDURE doSuper IN SUPER.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (procedure_definition
+    name: (identifier)
+    (external_phrase
+      library: (string_literal))
+    (parameter_definition
+      name: (identifier)
+      type: (identifier))
+    (parameter_definition
+      name: (identifier)
+      type: (identifier))
+    (parameter_definition
+      name: (identifier)
+      type: (identifier))
+    (parameter_definition
+      name: (identifier)
+      type: (identifier))
+    (parameter_definition
+      name: (identifier)
+      type: (identifier)))
+  (procedure_definition
+    name: (identifier)
+    (cdecl_option)
+    (ordinal_option
+      (number_literal))
+    (persistent_option)
+    (thread_safe_option)
+    (external_phrase
+      library: (string_literal))
+    (parameter_definition
+      name: (identifier)
+      type: (identifier))
+    (parameter_definition
+      name: (identifier)
+      type: (identifier)))
+  (procedure_forward_definition
+    name: (identifier)
+    (in_super_phrase)))

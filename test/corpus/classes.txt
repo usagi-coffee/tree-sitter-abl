@@ -186,3 +186,126 @@ END CLASS.
       (method_body
         (message_statement
           (string_literal))))))
+
+================================================================================
+CLASS - Events and Widget Definitions
+================================================================================
+
+CLASS UiWidgets:
+  DEFINE PRIVATE BROWSE bCust QUERY qCust
+    DISPLAY Customer.CustNum Customer.Name.
+  DEFINE PRIVATE FRAME frCust Customer.CustNum Customer.Name.
+  DEFINE MENU mnuMain MENUBAR
+    MENU-ITEM miFile LABEL "File"
+    MENU-ITEM miExit LABEL "Exit".
+  DEFINE SUB-MENU smFile
+    MENU-ITEM miOpen LABEL "Open".
+  DEFINE RECTANGLE rectBorder SIZE 80 BY 10.
+  DEFINE PUBLIC EVENT DataChanged SIGNATURE VOID (INPUT id AS INTEGER).
+END CLASS.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (class_definition
+    name: (identifier)
+    (browse_definition
+      name: (identifier)
+      query: (identifier)
+      column: (qualified_name
+        left: (identifier)
+        right: (identifier))
+      column: (qualified_name
+        left: (identifier)
+        right: (identifier)))
+    (frame_definition
+      name: (identifier)
+      field: (qualified_name
+        left: (identifier)
+        right: (identifier))
+      field: (qualified_name
+        left: (identifier)
+        right: (identifier)))
+    (menu_definition
+      name: (identifier)
+      (menubar)
+      (menu_element
+        (menu_item
+          name: (identifier)
+          (string_literal)))
+      (menu_element
+        (menu_item
+          name: (identifier)
+          (string_literal))))
+    (submenu_definition
+      name: (identifier)
+      (menu_element
+        (menu_item
+          name: (identifier)
+          (string_literal))))
+    (rectangle_definition
+      name: (identifier)
+      (size_phrase
+        width: (number_literal)
+        height: (number_literal)))
+    (event_definition
+      (access_modifier)
+      name: (identifier)
+      (signature
+        name: (identifier)
+        type: (identifier)))))
+
+================================================================================
+INTERFACE - INHERITS with Temp-Table, Dataset, and Event Prototypes
+================================================================================
+
+INTERFACE App.Data.IOrderSvc INHERITS App.Core.IBaseSvc, App.Core.ILogging:
+  DEFINE TEMP-TABLE ttOrder NO-UNDO LIKE Order.
+  DEFINE DATASET dsOrders FOR ttOrder.
+  DEFINE PUBLIC EVENT OrderLoaded SIGNATURE VOID (INPUT orderNum AS INTEGER).
+  METHOD PUBLIC VOID LoadOrder (INPUT orderNum AS INTEGER, OUTPUT DATASET dsOrders).
+END INTERFACE.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (interface_definition
+    name: (qualified_name
+      left: (identifier)
+      right: (identifier)
+      right: (identifier))
+    super: (qualified_name
+      left: (identifier)
+      right: (identifier)
+      right: (identifier))
+    super: (qualified_name
+      left: (identifier)
+      right: (identifier)
+      right: (identifier))
+    (interface_body_item
+      (temp_table_definition
+        name: (identifier)
+        (no_undo)
+        (like_phrase
+          like: (identifier))))
+    (interface_body_item
+      (dataset_definition
+        name: (identifier)
+        table: (identifier)))
+    (interface_body_item
+      (event_definition
+        (access_modifier)
+        name: (identifier)
+        (signature
+          name: (identifier)
+          type: (identifier))))
+    (interface_body_item
+      (method_definition
+        type: (identifier)
+        name: (identifier)
+        (method_parameter_list
+          (method_parameter
+            name: (identifier)
+            type: (identifier))
+          (method_parameter
+            dataset: (identifier)))))))

@@ -1,0 +1,64 @@
+================================================================================
+COMPILE - OPTIONS-FILE and SAVE with logical
+================================================================================
+
+COMPILE myproc.p OPTIONS-FILE "compile.opts" SAVE = TRUE INTO "r".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (compile_statement
+    file: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (compile_option
+      options_file: (string_literal))
+    (compile_option
+      save: (boolean_literal)
+      into: (string_literal))))
+
+================================================================================
+COMPILE - LISTING with APPEND and PAGE options
+================================================================================
+
+COMPILE myproc.p LISTING "out.lst" APPEND = TRUE.
+COMPILE myproc.p LISTING "out.lst" PAGE-SIZE 80 PAGE-WIDTH 132.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (compile_statement
+    file: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (compile_option
+      listing: (string_literal)
+      append: (boolean_literal)))
+  (compile_statement
+    file: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (compile_option
+      listing: (string_literal)
+      page_size: (number_literal)
+      page_width: (number_literal))))
+
+================================================================================
+COMPILE - XREF and STRING-XREF with APPEND
+================================================================================
+
+COMPILE myproc.p XREF "xref.txt" APPEND = FALSE STRING-XREF "sxref.txt" APPEND = TRUE.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (compile_statement
+    file: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (compile_option
+      xref: (string_literal)
+      append: (boolean_literal))
+    (compile_option
+      string_xref: (string_literal)
+      append: (boolean_literal))))

@@ -479,3 +479,105 @@ FUNCTION doubler RETURNS INTEGER (INPUT parm1 AS INTEGER) FORWARD.
         name: (identifier)
         type: (identifier)))
     (forward_phrase)))
+
+================================================================================
+FUNCTION - DEFINE FORWARD prototype
+================================================================================
+
+DEFINE FUNCTION fmtId RETURNS CHARACTER (INPUT id AS INTEGER) FORWARD.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (function_forward_definition
+    name: (identifier)
+    type: (identifier)
+    (function_parameter_list
+      (function_parameter
+        name: (identifier)
+        type: (identifier)))
+    (forward_phrase)))
+
+================================================================================
+FUNCTION - PRIVATE definition
+================================================================================
+
+FUNCTION secureToken RETURNS CHARACTER PRIVATE (INPUT userId AS INTEGER):
+  RETURN STRING(userId).
+END FUNCTION.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (function_definition
+    (access_modifier)
+    name: (identifier)
+    type: (identifier)
+    (function_parameter_list
+      (function_parameter
+        name: (identifier)
+        type: (identifier)))
+    (return_statement
+      (function_call
+        function: (identifier)
+        (arguments
+          (argument
+            value: (identifier)))))))
+
+================================================================================
+FUNCTION - MAP TO IN proc-handle prototype
+================================================================================
+
+FUNCTION calcTotal RETURNS DECIMAL (INPUT orderNum AS INTEGER) MAP TO getTotal IN hOrderProc.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (function_forward_definition
+    name: (identifier)
+    type: (identifier)
+    (function_parameter_list
+      (function_parameter
+        name: (identifier)
+        type: (identifier)))
+    (map_phrase
+      actual: (identifier))
+    (in_phrase
+      context: (identifier))))
+
+================================================================================
+FUNCTION - IN SUPER prototype
+================================================================================
+
+FUNCTION getDefault RETURNS INTEGER (INPUT customerId AS INTEGER) IN SUPER.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (function_forward_definition
+    name: (identifier)
+    type: (identifier)
+    (function_parameter_list
+      (function_parameter
+        name: (identifier)
+        type: (identifier)))
+    (in_super_phrase)))
+
+================================================================================
+FUNCTION - Web service operation prototype
+================================================================================
+
+FUNCTION GetCustomer RETURNS CHARACTER (INPUT custNum AS INTEGER) IN hPortType.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (function_forward_definition
+    name: (identifier)
+    type: (identifier)
+    (function_parameter_list
+      (function_parameter
+        name: (identifier)
+        type: (identifier)))
+    (in_phrase
+      context: (identifier))))

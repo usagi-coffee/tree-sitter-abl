@@ -83,3 +83,28 @@ UPDATE field1 FORMAT "x(10)" WHEN ok
     (update_item)
     (editing_phrase
       (readkey_statement))))
+
+================================================================================
+UPDATE record with EXCEPT and constant TO
+================================================================================
+
+UPDATE Customer EXCEPT Comments PrivateNotes WITH FRAME fCust NO-ERROR.
+UPDATE "Header" TO 30 Customer.Name.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (update_statement
+    record: (identifier)
+    field: (identifier)
+    field: (identifier)
+    (frame_phrase
+      frame: (identifier)))
+  (update_statement
+    (update_item
+      constant: (string_literal)
+      (to_phrase))
+    (update_item
+      field: (qualified_name
+        left: (identifier)
+        right: (identifier)))))

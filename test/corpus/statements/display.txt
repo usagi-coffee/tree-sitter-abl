@@ -141,3 +141,37 @@ DISPLAY SUBSTRING(str, 1, 5).
           value: (number_literal))
         (argument
           value: (number_literal))))))
+
+================================================================================
+DISPLAY record with EXCEPT and frame phrase
+================================================================================
+
+DISPLAY Customer EXCEPT Comments PrivateNotes WITH FRAME fCust NO-ERROR.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (display_statement
+    record: (identifier)
+    field: (identifier)
+    field: (identifier)
+    (frame_phrase
+      frame: (identifier))))
+
+================================================================================
+DISPLAY with format, WHEN, and @ base-field
+================================================================================
+
+DISPLAY orderTotal FORMAT "->>>,>>9.99" WHEN showTotal @ baseTotal.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (display_statement
+    (display_item
+      value: (identifier)
+      (format_phrase
+        (format_option
+          (string_literal)))
+      when: (identifier)
+      base: (identifier))))
