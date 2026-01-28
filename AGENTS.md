@@ -18,12 +18,17 @@
 
 ## Workflow
 
-- Run tests (regenerates the parser, runs tests and returns current state count):
+- Run tests (regenerates the parser and returns only failed tests if any):
   - `bun run test`
-- Parse a file (returns syntax tree):
+- Iterate on a specific test (regenerates the parser):
+  - `bun run test --include 'TEST NAME'`
+  - Example: `bun run test --include 'WORKFILE DEFINITION - Shared/Private variants'`
+- Inspect failed tests (no regeneration, optional):
+  - `bun run test:failed`
+- Parse a file (no regeneration):
   - `bun run parse <file>`
   - Example: `bun run parse example.p`
-- Parse a snippet (returns syntax tree):
+- Parse a snippet (no regeneration):
   - `bun run parse:snippet <direct syntax string>`
   - Example: `bun run parse:snippet 'a = b + c.'`
 - Build native and wasm artifacts:
@@ -38,11 +43,12 @@
   - Example: `bun run reference '*statement'`: Returns all statements entries (names only).
   - Example: `bun run reference '*'`: Returns all entries (names only).
 
-Strongly prefer using these commands as they have helpful side-effects like returning `STATE_COUNT` after success.
+Strongly prefer using these commands as they have helpful side-effects like returning `STATE_COUNT`.
 
 ## Conventions
 
 - Always runs tests after modifications.
+- `src/scanner.c` modifications need regeneration before testing.
 - Grammar changes without thorough corpus coverage and testing are unacceptable.
 - Avoid creating a shared or generic code unless it is really a part of the core syntax, core grammar modifications require a confirmation unless experimenting.
 - We intentionally duplicate modifiers and tunings at the statement level so that most of the statement-specific context lives in a single file. To support this, each statement defines its own `__<statement>_rules`, which are later aliased to `$.rule` where needed. This intentional duplication favors locality, readability, and conflict isolation over DRY abstractions.
@@ -55,38 +61,19 @@ Strongly prefer using these commands as they have helpful side-effects like retu
 - The grammar should avoid permissive or catch-all rules that allow invalid syntax to be parsed successfully.
 - ABL grammar is filled with optionals, be careful not to explode `tree-sitter`'s `STATE_COUNT`, always check modification's impact on `STATE_COUNT`.
 - Do not adjust or remove tests just to satisfy test passing, just fix the underlying parsing issue or ask me first to remove if it's really not supported.
-- `src/scanner.c` modifications need regeneration before testing.
 - Don't do unnecessary comments like (something is above).
 
 ## Notes
 
 - `bun` instead of `npm`.
-- Successful tests print a text that all tests passed AND print out current `STATE_COUNT` at the end.
+- Tests return only failed cases and failed syntax tree or a message that everything went well.
 - `bun run parse` and `bun run parse:snippet` do not regenerate the parser before parsing the code, unlike `bun run test`.
 - Parser does not build after reaching the hard limit of 65,535 `STATE_COUNT` but bugs might occur at the top-end of the limit (anything above ~60,000) e.g `tree-sitter test` might return status `0` but produce no output or return `ts_parser_parse: Assertion 'self->finished_tree.ptr' failed.` error.
 - When using `alias`, `tree-sitter` handles undefined rules by using the property name as the symbol name so it's okay to alias to `$.something_that_wasn't defined`.
 - Terminators like `terminator` or `terminator_dot` should never be visible in the syntax tree output.
 - `kw` and `tkw` are passed down using argument, to access them unpack it inside the statement module e.g `module.exports = ({ kw, tkw })`.
-- Always prefer `| tail` when calling `bun run test` instead of `| head`.
-- Parser regeneration can take up to 1 minute so adjust timeout for `bun run test` accordingly.
-- Tests return only failed cases and failed syntax tree or a message that everything went well.
+- Always prefer `| head` when calling `bun run test` instead of `| tail`, retrieve at least lines.
+- Parser regeneration can take up to 1 minute so adjust timeout for accordingly.
 - If `tree-sitter test` returns status 0 and no output that means something broke and you need to review your changes, this issue has nothing to do with test corpus.
 - Please don't investigate into why `tree-sitter test` outputs nothing, it's not related to tests, some rule just broke it.
 
-## Tree-Sitter Test Corpus Format
-
-Separators have 78 characters
-
-
-```
-==============================================================================
-Test Title                                                                                                      
-==============================================================================
-
-<code block>
-
-------------------------------------------------------------------------------
-
-(tree output)
-
-```

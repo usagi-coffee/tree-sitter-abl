@@ -1,5 +1,10 @@
+import * as Bun from "bun";
+import { $ } from "bun";
+
+const [, , ...args] = Bun.argv;
+
 const proc = Bun.spawnSync({
-  cmd: ["tree-sitter", "test"],
+  cmd: ["tree-sitter", "test", ...args],
   stdout: "pipe",
   stderr: "pipe",
 });
@@ -11,12 +16,6 @@ const checkmarkCount = (raw.match(new RegExp("✓", "g")) || []).length;
 const failureCount = (raw.match(new RegExp("✗", "g")) || []).length;
 const hasCheckmark = raw.includes("✓");
 const hasFailure = raw.includes("✗");
-
-// if tests ran, had ✓, and no failures → print success and exit
-if (hasCheckmark && !hasFailure) {
-  console.log(`✓ All (${checkmarkCount}) tests passed successfully`);
-  process.exit(0);
-}
 
 // otherwise continue with your existing logic
 const lines = raw.split(/\r?\n/).filter((l) => !l.includes("✓"));
@@ -72,8 +71,20 @@ const result = lines
   .filter((v) => v !== null)
   .join("\n");
 
+// if tests ran, had ✓, and no failures → print success and exit
+if (hasCheckmark && !hasFailure) {
+  console.log(`✓ All (${checkmarkCount}) tests passed successfully`);
+  await $`bun run tools/check.js`;
+  process.exit(0);
+}
+
+if (failureCount > 0) {
+  console.log(`✗ ${failureCount} tests failed`);
+}
+
+await $`bun run tools/check.js`;
+
 console.log(result);
-if (failureCount > 0) console.log(`✗ ${failureCount} tests failed`);
 
 /* The test output ends early without a "done" message despite exit code 0, suggesting incomplete or aborted processing possibly due to
    grammar conflicts—specifically around tokens with trailing whitespace that might interfere with parsing control flow. */
