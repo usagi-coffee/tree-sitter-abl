@@ -29,13 +29,13 @@ if (hash !== prevHash) {
   await Bun.write("abl.hash", hash);
 }
 
-await $`grep -E "#define.*STATE_COUNT" src/parser.c`;
 const proc = Bun.spawnSync({
   cmd: ["tree-sitter", "test"],
   stdout: "pipe",
   stderr: "pipe",
 });
 
+await $`grep -E "#define.*STATE_COUNT" src/parser.c`;
 if (proc.stdout + proc.stderr === "") {
   console.error(
     "Parser failed internally and returned no output, this indicates some rule broke the parser (tests are not the issue), try to revert your latest changes until you see an output. This is a confirmed parser bug, don't investigate into this error."
