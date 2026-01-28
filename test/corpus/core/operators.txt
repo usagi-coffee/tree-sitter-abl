@@ -80,12 +80,12 @@ x = repYear MODULO 4.
     left: (identifier)
     operator: (assignment_operator)
     right: (binary_expression
-      (binary_expression
-        (unary_expression
+      (unary_expression
+        (binary_expression
           (unary_expression
-            (identifier)))
-        (unary_expression
-          (number_literal)))
+            (identifier))
+          (unary_expression
+            (number_literal))))
       (binary_expression
         (identifier)
         (number_literal))))
@@ -227,35 +227,35 @@ x = NOT (y > 5).
   (assignment_statement
     left: (identifier)
     operator: (assignment_operator)
-    right: (binary_expression
-      (unary_expression
-        (identifier))
-      (number_literal)))
-  (assignment_statement
-    left: (identifier)
-    operator: (assignment_operator)
-    right: (binary_expression
-      (unary_expression
-        (number_literal))
-      (number_literal)))
-  (assignment_statement
-    left: (identifier)
-    operator: (assignment_operator)
-    right: (binary_expression
+    right: (unary_expression
       (binary_expression
-        (unary_expression
-          (number_literal))
-        (number_literal))
-      (number_literal)))
+        (identifier)
+        (number_literal))))
   (assignment_statement
     left: (identifier)
     operator: (assignment_operator)
-    right: (binary_expression
-      (unary_expression
-        (number_literal))
+    right: (unary_expression
       (binary_expression
         (number_literal)
         (number_literal))))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (unary_expression
+      (binary_expression
+        (binary_expression
+          (number_literal)
+          (number_literal))
+        (number_literal))))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (unary_expression
+      (binary_expression
+        (number_literal)
+        (binary_expression
+          (number_literal)
+          (number_literal)))))
   (assignment_statement
     left: (identifier)
     operator: (assignment_operator)

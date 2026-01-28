@@ -10,7 +10,7 @@ const tkw = (w, a = w) => alias(token(new RegExp(w, "i")), a);
 // prettier-ignore
 const comparison_operators = [ "<>", ">", "<", ">=", "<=", kw("BEGINS"), kw("MATCHES"), kw("EQ"), kw("NE"), kw("GT"), kw("LT"), kw("GE"), kw("LE")];
 
-const PREC = { LOGICAL: 1, COMPARE: 2, ADD: 3, MULT: 4, UNARY: 5 };
+const PREC = { LOGICAL: 1, NOT: 2, COMPARE: 3, ADD: 4, MULT: 5, UNARY: 6 };
 
 module.exports = grammar({
   name: "abl",
@@ -185,7 +185,10 @@ module.exports = grammar({
       _expression_list: ($) =>
         seq($._expression, repeat(seq(",", $._expression))),
       unary_expression: ($) =>
-        prec(PREC.UNARY, seq(choice("+", "-", kw("NOT")), $._expression)),
+        choice(
+          prec(PREC.UNARY, seq(choice("+", "-"), $._expression)),
+          prec(PREC.NOT, seq(kw("NOT"), $._expression))
+        ),
       // Turns out this stupid split to __ reduces state counts dramatically
       binary_expression: ($) => $.__binary_expression,
       __binary_expression: ($) =>
