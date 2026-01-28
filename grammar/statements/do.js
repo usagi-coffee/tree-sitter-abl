@@ -138,7 +138,7 @@ module.exports = ({ kw, tkw }) => ({
     seq(
       tkw("UNDO"),
       ",",
-      choice(tkw("THROW"), tkw("LEAVE"), tkw("NEXT")),
+      choice(tkw("THROW"), tkw("LEAVE"), tkw("NEXT"), tkw("RETRY")),
     ),
   __do_undo_throw_phrase: ($) => seq(tkw("UNDO"), ",", tkw("THROW")),
   __do_undo_leave_phrase: ($) =>

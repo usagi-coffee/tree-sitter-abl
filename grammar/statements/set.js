@@ -59,5 +59,10 @@ module.exports = ({ kw, tkw }) => ({
     seq(tkw("EDITING"), $._colon, repeat1($._statement), tkw("END")),
   __set_go_on: ($) => seq(tkw("GO-ON"), "(", repeat1($.identifier), ")"),
   __set_frame_phrase: ($) =>
-    seq(kw("WITH"), optional(seq(kw("FRAME"), field("frame", $.identifier)))),
+    seq(
+      kw("WITH"),
+      optional(seq(kw("FRAME"), field("frame", $.identifier))),
+      repeat($.__set_frame_option),
+    ),
+  __set_frame_option: ($) => choice(tkw("NO-LABELS"), tkw("SIDE-LABELS")),
 });

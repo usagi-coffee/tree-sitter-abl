@@ -32,4 +32,56 @@ END.
 
 -------------------------------------------------------------------------------
 
-
+(source_code
+  (variable_definition
+    (identifier)
+    (identifier)
+    (no_undo)
+    (format_option
+      (string_literal))
+    (label_option
+      (string_literal)))
+  (do_block
+    (identifier)
+    (on_error_phrase
+      (undo_phrase))
+    (body
+      (set_statement
+        (set_item
+          (identifier))
+        (frame_phrase))
+      (if_statement
+        (binary_expression
+          (function_call
+            (identifier)
+            (arguments
+              (argument
+                (identifier))))
+          (identifier))
+        (do_block
+          (body
+            (message_statement
+              (string_literal)
+              (identifier)
+              (string_literal))
+            (message_statement
+              (string_literal))
+            (bell_statement)
+            (undo_statement
+              (identifier)
+              (identifier)))))))
+  (output_statement
+    (identifier))
+  (for_each_statement
+    (for_record_list
+      (for_record
+        (identifier)
+        (no_lock)))
+    (body
+      (display_statement
+        (qualified_name
+          (identifier)
+          (identifier))
+        (qualified_name
+          (identifier)
+          (identifier))))))
