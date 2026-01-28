@@ -15,3 +15,18 @@ DISCONNECT VALUE(cDbName).
     database: (identifier))
   (disconnect_statement
     database: (identifier)))
+
+================================================================================
+DISCONNECT - Reference snippet
+================================================================================
+
+DISCONNECT mydb.
+DISCONNECT VALUE("mydb") NO-ERROR.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (disconnect_statement
+    (identifier))
+  (disconnect_statement
+    (string_literal)))

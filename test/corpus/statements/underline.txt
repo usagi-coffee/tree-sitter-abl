@@ -24,3 +24,18 @@ UNDERLINE field1 WITH FRAME f1.
     field: (identifier)
     (frame_phrase
       frame: (identifier))))
+
+================================================================================
+UNDERLINE - reference snippet
+================================================================================
+
+FOR EACH Customer NO-LOCK BREAK BY Customer.State WITH USE-TEXT:
+DISPLAY Customer.State Customer.CustNum Customer.Name.
+IF LAST-OF(Customer.State) THEN UNDERLINE Customer.State.
+END.
+
+UNDERLINE STREAM-HANDLE hS Customer.Name WITH FRAME f1.
+
+--------------------------------------------------------------------------------
+
+

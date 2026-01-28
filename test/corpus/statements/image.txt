@@ -490,3 +490,26 @@ DEF IMAGE i3 SIZE 10 BY 20.
     (size_phrase
       width: (number_literal)
       height: (number_literal))))
+
+================================================================================
+IMAGE - Reference snippet
+================================================================================
+
+DEFINE VARIABLE repeat_loop AS INTEGER NO-UNDO.
+DEFINE VARIABLE animation_loop AS INTEGER NO-UNDO.
+DEFINE VARIABLE lok AS LOGICAL NO-UNDO.
+DEFINE BUTTON animate LABEL "Animate".
+DEFINE IMAGE trashcan FILE "ANI01.BMP".
+DISPLAY animate trashcan WITH FRAME y TITLE "** Animation Sample **".
+ON CHOOSE OF animate IN FRAME y DO:
+  DO repeat_loop = 1 TO 5:
+    DO animation_loop = 1 TO 14:
+      lok = trashcan:LOAD-IMAGE("ANI" + STRING(animation_loop,"99")) IN FRAME y.
+    END.
+  END.
+END.
+UPDATE animate WITH FRAME y.
+
+--------------------------------------------------------------------------------
+
+

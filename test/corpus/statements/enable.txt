@@ -84,3 +84,30 @@ ENABLE field1 FORMAT "x(10)" WHEN ok
       (constant_option)
       (constant_option))
     (enable_item)))
+
+================================================================================
+ENABLE - Reference snippet
+================================================================================
+
+ENABLE Customer.CustNum WITH FRAME cust-info.
+ENABLE b_quit WITH FRAME butt-frame.
+ENABLE ALL WITH FRAME butt-frame.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (enable_statement
+    (enable_item
+      (qualified_name
+        (identifier)
+        (identifier)))
+    (frame_phrase
+      (identifier)))
+  (enable_statement
+    (enable_item
+      (identifier))
+    (frame_phrase
+      (identifier)))
+  (enable_statement
+    (frame_phrase
+      (identifier))))

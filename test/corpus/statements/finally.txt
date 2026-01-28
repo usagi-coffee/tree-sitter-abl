@@ -67,3 +67,84 @@ END.
       (delete_object_statement
         name: (identifier))
       (output_statement))))
+
+===============================================================================
+FINALLY - Reference snippets
+===============================================================================
+
+DO ON ERROR UNDO, LEAVE:
+  FIND Customer WHERE CustNum = 1000.
+  MESSAGE "This message never appears because of ERROR condition.".
+  FINALLY:
+    MESSAGE "Inside FINALLY block." VIEW-AS ALERT-BOX BUTTONS OK.
+  END FINALLY.
+END.
+MESSAGE "Out of DO block." VIEW-AS ALERT-BOX BUTTONS OK.
+
+DO ON ERROR UNDO, LEAVE:
+  FIND Customer WHERE CustNum = 1000.
+  CATCH eSysError AS Progress.Lang.SysError:
+    MESSAGE "Inside CATCH block." VIEW-AS ALERT-BOX BUTTONS OK.
+  END CATCH.
+  FINALLY:
+    MESSAGE "Inside FINALLY block." VIEW-AS ALERT-BOX BUTTONS OK.
+  END FINALLY.
+END.
+MESSAGE "Out of DO block." VIEW-AS ALERT-BOX BUTTONS OK.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (do_block
+    (on_error_phrase
+      (undo_phrase))
+    (body
+      (find_statement
+        (identifier)
+        (where_phrase
+          (binary_expression
+            (identifier)
+            (number_literal))))
+      (message_statement
+        (string_literal))
+      (finally_statement
+        (body
+          (message_statement
+            (string_literal)
+            (view_as_phrase
+              (buttons_phrase)))))))
+  (message_statement
+    (string_literal)
+    (view_as_phrase
+      (buttons_phrase)))
+  (do_block
+    (on_error_phrase
+      (undo_phrase))
+    (body
+      (find_statement
+        (identifier)
+        (where_phrase
+          (binary_expression
+            (identifier)
+            (number_literal))))
+      (catch_statement
+        (identifier)
+        (qualified_name
+          (identifier)
+          (identifier)
+          (identifier))
+        (body
+          (message_statement
+            (string_literal)
+            (view_as_phrase
+              (buttons_phrase)))))
+      (finally_statement
+        (body
+          (message_statement
+            (string_literal)
+            (view_as_phrase
+              (buttons_phrase)))))))
+  (message_statement
+    (string_literal)
+    (view_as_phrase
+      (buttons_phrase))))

@@ -44,3 +44,54 @@ OUTPUT TO "out.txt" CONVERT TARGET "1250".
     file: (string_literal)
     (convert_phrase
       target: (string_literal))))
+
+================================================================================
+OUTPUT - reference snippets and options
+================================================================================
+
+OUTPUT TO cust.dat.
+FOR EACH Customer NO-LOCK:
+DISPLAY Customer.CustNum Customer.Name Customer.Address Customer.Address2
+Customer.City Customer.State Customer.Country SKIP(2)
+WITH 1 COLUMN SIDE-LABELS.
+END.
+OUTPUT CLOSE.
+DISPLAY "Finished".
+
+DEFINE VARIABLE ix AS INTEGER NO-UNDO.
+OUTPUT TO TERMINAL PAGED.
+FOR EACH Customer NO-LOCK BREAK BY Customer.SalesRep:
+FIND SalesRep OF Customer NO-LOCK.
+FORM HEADER TODAY
+"Customer Listing For " TO 43
+"Page " TO 55 PAGE-NUMBER - ix TO 58 FORMAT "99"
+(SalesRep.RepName) FORMAT "x(30)" AT 25
+WITH FRAME hdr PAGE-TOP CENTERED.
+VIEW FRAME hdr.
+DISPLAY Customer.CustNum COLUMN-LABEL "Customer!Number"
+Customer.Name LABEL "Name"
+Customer.Phone COLUMN-LABEL "Phone!Number" WITH CENTERED.
+IF LAST-OF(Customer.SalesRep) THEN DO:
+ix = PAGE-NUMBER.
+PAGE.
+END.
+END.
+OUTPUT CLOSE.
+
+OUTPUT TO PRINTER NUM-COPIES 3.
+OUTPUT TO PRINTER LANDSCAPE NUM-COPIES 3.
+OUTPUT TO PRINTER PORTRAIT NUM-COPIES VALUE(copies) COLLATE.
+OUTPUT TO PRINTER "\\fs_dev\hplas4" PAGE-SIZE VALUE(pageLines).
+OUTPUT TO "out.txt" LOB-DIR VALUE(lobDir) APPEND.
+OUTPUT TO "out.bin" BINARY NO-CONVERT.
+OUTPUT TO "out.txt" ECHO KEEP-MESSAGES.
+OUTPUT TO "out.txt" NO-ECHO MAP laserwriter/french.
+OUTPUT TO "out.txt" PAGED PAGE-SIZE 0.
+OUTPUT STREAM s1 TO "out2.txt" UNBUFFERED.
+OUTPUT STREAM s2 TO "CLIPBOARD".
+OUTPUT STREAM-HANDLE hOut TO VALUE(dest) NO-MAP.
+OUTPUT TO TERMINAL.
+
+--------------------------------------------------------------------------------
+
+

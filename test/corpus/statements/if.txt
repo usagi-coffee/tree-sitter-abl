@@ -157,3 +157,47 @@ IF LOCKED bufOrder THEN RETURN TRUE.
       record: (identifier))
     then: (return_statement
       (boolean_literal))))
+
+================================================================================
+IF - Reference snippet
+================================================================================
+
+DEFINE VARIABLE ans AS LOGICAL NO-UNDO.
+DEFINE STREAM due.
+OUTPUT STREAM due TO ovrdue.lst.
+DISPLAY STREAM due
+  "Orders shipped but still unpaid as of" TODAY SKIP(2)
+  WITH NO-BOX NO-LABELS CENTERED FRAME hdr PAGE-TOP.
+FOR EACH Order WITH FRAME oinfo:
+  FIND Customer OF Order NO-LOCK.
+  DISPLAY Order.OrderNum Customer.Name Order.OrderDate Order.PromiseDate
+    Order.ShipDate.
+  IF Order.ShipDate = ? THEN DO:
+    IF Order.PromiseDate = ? THEN DO:
+      MESSAGE "Please update the promise date.".
+      REPEAT WHILE promise-date = ?:
+        UPDATE Order.PromiseDate WITH FRAME oinfo.
+      END.
+    END.
+    ans = FALSE.
+    MESSAGE "Has this order been shipped?" UPDATE ans.
+    IF ans THEN
+      REPEAT WHILE Order.ShipDate = ?:
+        UPDATE Order.ShipDate WITH FRAME oinfo.
+      END.
+  END.
+  ELSE DO:
+    ans = TRUE.
+    MESSAGE "Has this order been paid?" UPDATE ans.
+    IF NOT ans THEN DO:
+      DISPLAY STREAM due Order.OrderNum TO 14 Customer.Name AT 18
+        Order.OrderDate AT 42 Order.ShipDate AT 54
+        WITH NO-BOX DOWN FRAME unpaid.
+    END.
+  END.
+END.
+OUTPUT STREAM due CLOSE.
+
+--------------------------------------------------------------------------------
+
+

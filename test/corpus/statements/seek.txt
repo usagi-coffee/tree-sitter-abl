@@ -12,3 +12,27 @@ SEEK STREAM outStream TO END.
     (identifier))
   (seek_statement
     name: (identifier)))
+
+================================================================================
+SEEK - reference snippet and variants
+================================================================================
+
+DEFINE VARIABLE savepos AS INT64 NO-UNDO.
+DEFINE VARIABLE c AS CHARACTER NO-UNDO FORMAT "x(20)".
+OUTPUT TO seek.out APPEND NO-ECHO.
+savepos = SEEK(OUTPUT).
+PUT UNFORMATTED "abcdefg" SKIP.
+OUTPUT CLOSE.
+INPUT FROM seek.out NO-ECHO.
+SEEK INPUT TO savepos.
+SET c.
+DISPLAY c.
+INPUT CLOSE.
+
+SEEK OUTPUT TO 0.
+SEEK STREAM s1 TO END.
+SEEK STREAM-HANDLE hS TO 100.
+
+--------------------------------------------------------------------------------
+
+

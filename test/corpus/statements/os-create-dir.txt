@@ -12,3 +12,22 @@ OS-CREATE-DIR cDirName.
     directory: (string_literal))
   (os_create_dir_statement
     directory: (identifier)))
+
+================================================================================
+OS-CREATE-DIR - reference snippets and VALUE
+================================================================================
+
+DEFINE VARIABLE stat AS INTEGER NO-UNDO.
+DEFINE VARIABLE dir_name AS CHARACTER NO-UNDO FORMAT "x(64)"
+LABEL "Enter the name of the directory you want to create.".
+UPDATE dir_name.
+OS-CREATE-DIR VALUE(dir_name).
+stat = OS-ERROR.
+IF stat NE 0 THEN
+MESSAGE "Directory not created. System Error #" stat.
+
+OS-CREATE-DIR VALUE("tmp") "logs".
+
+--------------------------------------------------------------------------------
+
+

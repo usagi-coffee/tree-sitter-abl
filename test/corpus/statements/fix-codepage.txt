@@ -14,3 +14,20 @@ FIX-CODEPAGE(mRaw) = cCodepage.
   (fix_codepage_statement
     target: (identifier)
     codepage: (identifier)))
+
+================================================================================
+FIX-CODEPAGE - Reference snippets
+================================================================================
+
+FIX-CODEPAGE(mData) = "UTF-8".
+FIX-CODEPAGE(mData) = ?.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (fix_codepage_statement
+    (identifier)
+    (string_literal))
+  (fix_codepage_statement
+    (identifier)
+    (null_literal)))

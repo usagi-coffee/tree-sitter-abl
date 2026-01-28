@@ -38,3 +38,49 @@ OVERLAY(cLine, iPos, iLen, COLUMN) = "Hello".
     length: (identifier)
     type: (COLUMN)
     value: (string_literal)))
+
+================================================================================
+OVERLAY - reference snippets and variants
+================================================================================
+
+DEFINE VARIABLE chktext AS CHARACTER NO-UNDO.
+DEFINE VARIABLE ix AS INTEGER NO-UNDO.
+DEFINE VARIABLE chkndx AS INTEGER NO-UNDO.
+DEFINE VARIABLE ndx AS INTEGER NO-UNDO.
+DEFINE VARIABLE old-text AS CHARACTER NO-UNDO.
+DEFINE VARIABLE new-text AS CHARACTER NO-UNDO.
+DEFINE VARIABLE max-len AS INTEGER NO-UNDO.
+DEFINE VARIABLE comment AS CHARACTER NO-UNDO FORMAT "x(49)" EXTENT 5
+INITIAL ["You are probably interested in OpenEdge because",
+"you have a lot of information to organize. You",
+"want to get at the information, add to it, and",
+"change it, without a lot of work and aggravation.",
+"You made the right choice with OpenEdge." ].
+DISPLAY comment WITH CENTERED FRAME comm NO-LABELS
+TITLE "Why You Chose OpenEdge" ROW 4.
+REPEAT:
+SET old-text LABEL "Enter text to search for"
+new-text LABEL "Enter text to replace with"
+WITH FRAME replace SIDE-LABELS CENTERED.
+max-len = MAXIMUM(LENGTH(old-text), LENGTH(new-text)).
+DO ix = 1 TO 5:
+ndx = 1.
+DO ndx = 1 TO LENGTH(comment[ix]):
+chktext = SUBSTRING(comment[ix], ndx).
+chkndx = INDEX(chktext, old-text).
+IF chkndx <> 0 THEN DO:
+ndx = ndx + chkndx - 1.
+OVERLAY(comment[ix], ndx, max-len, "CHARACTER") = new-text.
+ndx = max-len.
+END.
+END.
+DISPLAY comment[ix] WITH FRAME comm.
+END.
+END.
+
+OVERLAY(cLine, 3, -1, "RAW") = cNew.
+OVERLAY(cLong, 1, 5, "COLUMN") = "Hi".
+
+--------------------------------------------------------------------------------
+
+

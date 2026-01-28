@@ -67,3 +67,27 @@ APPLY "CHOOSE" TO CURRENT-WINDOW.
   (apply_statement
     event: (string_literal)
     widget: (identifier)))
+
+===============================================================================
+APPLY statement with keycode and frame widget-phrase
+===============================================================================
+
+APPLY 13 TO browse-1.
+APPLY "CHOOSE" TO order-but IN FRAME x.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (apply_statement
+    event: (number_literal)
+    widget: (identifier))
+  (apply_statement
+    event: (string_literal)
+    widget: (in_frame_expression
+      value: (identifier)
+      frame: (identifier))))
+
+
+--------------------------------------------------------------------------------
+
+

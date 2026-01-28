@@ -117,3 +117,15 @@ DEF WORKFILE wf.
     name: (identifier))
   (workfile_definition
     name: (identifier)))
+
+================================================================================
+WORKFILE DEFINITION - Shared/Private variants
+================================================================================
+
+DEFINE NEW SHARED WORKFILE wfShared FIELD f1 AS INTEGER.
+DEFINE SHARED WORKFILE wfShared FIELD f1 AS INTEGER.
+DEFINE PRIVATE WORKFILE wfPrivate FIELD f1 AS INTEGER.
+
+--------------------------------------------------------------------------------
+
+

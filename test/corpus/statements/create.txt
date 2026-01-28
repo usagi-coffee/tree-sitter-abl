@@ -97,3 +97,17 @@ END.
             left: (identifier)
             right: (identifier))
           right: (string_literal))))))
+
+================================================================================
+CREATE - Reference snippets and options
+================================================================================
+
+CREATE Order.
+CREATE OrderLine.
+CREATE Customer FOR TENANT 0.
+CREATE Customer USING ROWID(1) NO-ERROR.
+CREATE Customer USING RECID(2).
+
+--------------------------------------------------------------------------------
+
+

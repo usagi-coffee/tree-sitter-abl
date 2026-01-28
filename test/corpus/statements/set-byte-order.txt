@@ -14,3 +14,20 @@ SET-BYTE-ORDER(bufData) = 2.
   (set_byte_order_statement
     buffer: (identifier)
     order: (number_literal)))
+
+================================================================================
+SET-BYTE-ORDER - keyword variants
+================================================================================
+
+SET-BYTE-ORDER(bufData) = HOST-BYTE-ORDER.
+SET-BYTE-ORDER(bufData) = LITTLE-ENDIAN.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (set_byte_order_statement
+    (identifier)
+    (identifier))
+  (set_byte_order_statement
+    (identifier)
+    (identifier)))

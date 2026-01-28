@@ -475,3 +475,45 @@ DEF RECTANGLE r3 NO-FILL.
   (rectangle_definition
     name: (identifier)
     (no_fill)))
+
+================================================================================
+RECTANGLE - reference snippet
+================================================================================
+
+DEFINE VARIABLE item-tot AS DECIMAL NO-UNDO LABEL "Value".
+DEFINE RECTANGLE vline1 SIZE .4 BY 5 EDGE-PIXELS 2.
+DEFINE RECTANGLE vline2 LIKE vline1.
+DEFINE RECTANGLE vline3 LIKE vline1.
+DEFINE RECTANGLE vline4 LIKE vline1.
+DEFINE RECTANGLE vline5 LIKE vline1.
+DEFINE RECTANGLE vline6 LIKE vline1.
+DEFINE RECTANGLE hline SIZE 78 BY .1 EDGE-PIXELS 2.
+DEFINE FRAME item-info
+Item.ItemNum
+Item.ItemName
+Item.OnHand
+Item.ReOrder
+Item.OnOrder
+Item.Price
+item-tot
+BACKGROUND SKIP(1) hline
+vline1 AT 9
+vline2 AT 25
+vline3 AT 33
+vline4 AT 42
+vline5 AT 51
+vline6 AT 65
+WITH TITLE "Inventory Current Value" CENTERED USE-TEXT 5 DOWN.
+FOR EACH Item NO-LOCK WITH FRAME item-info:
+DISPLAY
+Item.ItemNum
+Item.ItemName
+Item.OnHand
+Item.ReOrder
+Item.OnOrder
+Item.Price
+Item.OnHand * Item.Price @ item-tot.
+
+--------------------------------------------------------------------------------
+
+

@@ -24,3 +24,21 @@ GET NEXT qOrder EXCLUSIVE-LOCK NO-WAIT.
     query: (identifier))
   (get_statement
     query: (identifier)))
+
+================================================================================
+GET - Reference snippet
+================================================================================
+
+DEFINE QUERY cust-order FOR Customer, Order.
+OPEN QUERY cust-order FOR EACH Customer, EACH Order OF Customer.
+GET FIRST cust-order.
+DO WHILE AVAILABLE Customer:
+  DISPLAY Customer.CustNum Customer.Name WITH FRAME cust-info.
+  DISPLAY Order WITH FRAME order-info SIDE-LABELS.
+  PAUSE.
+  GET NEXT cust-order.
+END.
+
+--------------------------------------------------------------------------------
+
+

@@ -20,3 +20,36 @@ OPEN QUERY qCust FOR EACH Customer NO-LOCK BY Customer.Name.
       by: (qualified_name
         left: (identifier)
         right: (identifier)))))
+
+================================================================================
+OPEN QUERY - Reference snippet
+================================================================================
+
+DEFINE QUERY q-order FOR Customer, Order, OrderLine, Item.
+OPEN QUERY q-order FOR EACH Customer,
+  EACH Order OF Customer,
+  EACH OrderLine OF Order,
+  EACH Item OF OrderLine NO-LOCK.
+GET FIRST q-order.
+DO WHILE AVAILABLE Customer:
+  DISPLAY Customer.CustNum Customer.Name SKIP
+    Customer.Phone SKIP
+    Order.OrderNum Order.OrderDate SKIP
+    OrderLine.LineNum OrderLine.Price OrderLine.Qty SKIP
+    Item.ItemNum Item.ItemName SKIP
+    Item.CatDesc VIEW-AS EDITOR SIZE 50 BY 2 SCROLLBAR-VERTICAL
+    WITH FRAME ord-info CENTERED SIDE-LABELS TITLE "Order Information".
+  ASSIGN Item.CatDesc:READ-ONLY IN FRAME ord-info = TRUE
+    Item.CatDesc:SENSITIVE IN FRAME ord-info = TRUE.
+  PAUSE.
+  GET NEXT q-order.
+END.
+
+OPEN QUERY qCust FOR EACH Customer BREAK BY Customer.State NO-LOCK.
+OPEN QUERY qCust FOR EACH Customer NO-LOCK INDEXED-REPOSITION MAX-ROWS 10.
+OPEN QUERY qCust PRESELECT EACH Customer NO-LOCK.
+OPEN QUERY qCust FOR EACH Customer BY COLLATE(Customer.Name, "CASE-INSENSITIVE") DESCENDING.
+
+--------------------------------------------------------------------------------
+
+

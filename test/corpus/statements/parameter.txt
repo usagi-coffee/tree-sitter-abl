@@ -384,3 +384,99 @@ DEFINE RETURN PARAMETER pRes AS LOGICAL NO-UNDO.
     name: (identifier)
     type: (identifier)
     (no_undo)))
+
+================================================================================
+PARAMETER DEFINITION - reference snippets and missing options
+================================================================================
+
+RUN r-param.p (INPUT 10).
+
+DEFINE INPUT PARAMETER int-param AS INTEGER NO-UNDO.
+DISPLAY int-param LABEL "Integer input param"
+WITH SIDE-LABELS.
+
+DEFINE VARIABLE new-param AS CHARACTER NO-UNDO FORMAT "x(20)".
+DEFINE VARIABLE out-param AS DECIMAL NO-UNDO.
+DEFINE VARIABLE in-param AS INTEGER NO-UNDO INITIAL 20.
+RUN r-param1.p (OUTPUT out-param, 10, OUTPUT new-param, in-param).
+DISPLAY out-param LABEL "Updated YTD Sales" SKIP new-param LABEL "Status"
+WITH SIDE-LABELS.
+
+DEFINE OUTPUT PARAMETER xout-param AS DECIMAL NO-UNDO.
+DEFINE INPUT PARAMETER newin AS INTEGER NO-UNDO.
+DEFINE OUTPUT PARAMETER xnew-param AS CHARACTER NO-UNDO.
+DEFINE INPUT PARAMETER xin-param AS INTEGER NO-UNDO.
+FOR EACH Customer NO-LOCK:
+xout-param = xout-param + Customer.Balance.
+END.
+DISPLAY xout-param LABEL "Balance" WITH SIDE-LABELS.
+ASSIGN
+xout-param = xout-param + newin + xin-param
+xnew-param = "Example Complete".
+
+DEFINE VARIABLE io-param AS INTEGER NO-UNDO.
+FOR EACH Item:
+DISPLAY Item.ItemName Item.OnHand WITH 1 DOWN.
+io-param = Item.OnHand.
+RUN r-param2.p (INPUT-OUTPUT io-param).
+Item.OnHand = io-param.
+DISPLAY io-param LABEL "New Quantity On-hand".
+END.
+
+DEFINE INPUT-OUTPUT PARAMETER io-param AS INTEGER NO-UNDO.
+DEFINE VARIABLE inp-qty AS INTEGER NO-UNDO.
+PROMPT-FOR inp-qty LABEL "Quantity Received?".
+ASSIGN inp-qty.
+io-param = io-param + inp-qty.
+
+DEFINE BUTTON btnFind LABEL "Find Customer".
+DO WITH FRAME frCustomer WITH SIDE-LABELS:
+ENABLE Customer.CustNum btnFind.
+ON CHOOSE OF btnFind DO:
+RUN getCustomer (Customer.CustNum:HANDLE, BUFFER Customer).
+IF NOT ERROR-STATUS:ERROR THEN
+DISPLAY Customer EXCEPT Customer.Comments WITH SIDE-LABELS.
+END.
+ON ENTRY OF Customer.CustNum
+HIDE MESSAGE.
+END.
+WAIT-FOR WINDOW-CLOSE OF CURRENT-WINDOW.
+PROCEDURE getCustomer:
+DEFINE INPUT PARAMETER hWidget AS HANDLE NO-UNDO.
+DEFINE PARAMETER BUFFER bufCustomer FOR Customer.
+FIND bufCustomer WHERE bufCustomer.CustNum =
+INTEGER(hWidget:SCREEN-VALUE) NO-LOCK NO-ERROR.
+IF NOT AVAILABLE bufCustomer THEN DO:
+MESSAGE "Customer record not found." VIEW-AS ALERT-BOX.
+RETURN ERROR.
+END.
+END.
+
+DEFINE VARIABLE result AS INTEGER NO-UNDO.
+MESSAGE " It's a whole new world!"
+VIEW-AS ALERT-BOX MESSAGE BUTTONS OK TITLE "ABL Message".
+RUN MessageBoxA (0, " It's a whole new world, again!!",
+"ABL DLL access", 0, OUTPUT result).
+PROCEDURE MessageBoxA EXTERNAL "user32.dll":
+DEFINE INPUT PARAMETER hwnd AS LONG.
+DEFINE INPUT PARAMETER mbtext AS CHARACTER.
+DEFINE INPUT PARAMETER mbtitle AS CHARACTER.
+DEFINE INPUT PARAMETER style AS LONG.
+DEFINE RETURN PARAMETER result AS LONG.
+END.
+
+DEFINE INPUT PARAMETER pCase AS CHARACTER CASE-SENSITIVE.
+DEFINE INPUT PARAMETER pCaseOff AS CHARACTER NOT CASE-SENSITIVE.
+DEFINE INPUT PARAMETER pLabel AS CHARACTER COLUMN-LABEL "Param".
+DEFINE INPUT PARAMETER pNum AS DECIMAL DECIMALS 2.
+DEFINE INPUT PARAMETER pPtr AS HANDLE TO LONG.
+DEFINE INPUT PARAMETER pObj AS CLASS My.Namespace.Type.
+DEFINE INPUT PARAMETER TABLE-HANDLE hT BY-VALUE BIND.
+DEFINE OUTPUT PARAMETER TABLE-HANDLE hTOut BY-VALUE.
+DEFINE INPUT PARAMETER DATASET FOR dsData APPEND BY-VALUE.
+DEFINE OUTPUT PARAMETER DATASET-HANDLE hDs BIND BY-VALUE.
+DEFINE INPUT PARAMETER pExtent0 AS INTEGER EXTENT 0.
+
+--------------------------------------------------------------------------------
+
+

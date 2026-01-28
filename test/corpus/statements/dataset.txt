@@ -101,3 +101,28 @@ DEF DATASET ds FOR tt.
   (dataset_definition
     name: (identifier)
     table: (identifier)))
+
+================================================================================
+DATASET DEFINITION - Reference options
+================================================================================
+
+DEFINE NEW SHARED DATASET dsShared FOR ttCustomer.
+DEFINE SHARED DATASET dsUse FOR ttCustomer.
+DEFINE PRIVATE STATIC DATASET dsPrivStatic FOR ttCustomer.
+DEFINE PROTECTED DATASET dsProt FOR ttCustomer.
+DEFINE DATASET dsSer SERIALIZABLE FOR ttCustomer.
+DEFINE DATASET dsNonSer NON-SERIALIZABLE FOR ttCustomer.
+DEFINE DATASET dsRef REFERENCE-ONLY FOR ttCustomer.
+DEFINE DATASET dsNs FOR ttCustomer NAMESPACE-URI "http://example.com" NAMESPACE-PREFIX "ex".
+DEFINE DATASET dsXml FOR ttCustomer XML-NODE-NAME "cust" SERIALIZE-NAME "custNode" XML-NODE-TYPE "HIDDEN" SERIALIZE-HIDDEN.
+DEFINE DATASET dsRel FOR ttParent, ttChild DATA-RELATION FOR ttParent, ttChild RELATION-FIELDS (parentId, childId).
+DEFINE DATASET dsRelNested FOR ttParent, ttChild DATA-RELATION FOR ttParent, ttChild RELATION-FIELDS (parentId, childId) NESTED FOREIGN-KEY-HIDDEN.
+DEFINE DATASET dsRelRepos FOR ttParent, ttChild DATA-RELATION FOR ttParent, ttChild RELATION-FIELDS (parentId, childId) REPOSITION.
+DEFINE DATASET dsRelInactive FOR ttParent, ttChild DATA-RELATION rel1 FOR ttParent, ttChild RELATION-FIELDS (parentId, childId) NOT-ACTIVE.
+DEFINE DATASET dsRelRec FOR ttParent, ttChild DATA-RELATION FOR ttParent, ttChild RELATION-FIELDS (parentId, childId) RECURSIVE.
+DEFINE DATASET dsPid FOR ttParent, ttChild PARENT-ID-RELATION FOR ttParent, ttChild PARENT-ID-FIELD childRecid.
+DEFINE DATASET dsPidFields FOR ttParent, ttChild PARENT-ID-RELATION FOR ttParent, ttChild PARENT-ID-FIELD childRecid PARENT-FIELDS-BEFORE (parentName) PARENT-FIELDS-AFTER (parentNote).
+
+--------------------------------------------------------------------------------
+
+

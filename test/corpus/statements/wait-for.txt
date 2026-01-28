@@ -19,3 +19,63 @@ WAIT-FOR WINDOW-CLOSE OF CURRENT-WINDOW OR READ-RESPONSE OF hSocket FOCUS hSocke
     widgets: (identifier)
     focus: (identifier)
     duration: (number_literal)))
+
+================================================================================
+WAIT-FOR - reference snippets
+================================================================================
+
+DEFINE BUTTON more-button LABEL "MORE".
+DEFINE BUTTON next-button LABEL "NEXT".
+FORM Customer.CustNum Customer.Name more-button next-button
+WITH FRAME brief.
+FORM Customer EXCEPT Customer.CustNum Customer.Name
+WITH FRAME full.
+ON CHOOSE OF more-button
+DISPLAY Customer EXCEPT Customer.CustNum Customer.Name WITH FRAME full.
+ON CHOOSE OF next-button DO:
+HIDE FRAME full.
+FIND NEXT Customer NO-LOCK NO-ERROR.
+IF AVAILABLE Customer THEN
+DISPLAY Customer.CustNum Customer.Name WITH FRAME brief.
+END.
+FIND FIRST Customer NO-LOCK.
+DISPLAY Customer.CustNum Customer.Name WITH FRAME brief.
+ENABLE more-button next-button WITH FRAME brief.
+WAIT-FOR WINDOW-CLOSE OF CURRENT-WINDOW FOCUS more-button.
+
+DEFINE VARIABLE jump-ahead AS LOGICAL NO-UNDO INITIAL TRUE.
+DEFINE BUTTON more-button LABEL "MORE".
+DEFINE BUTTON next-button LABEL "NEXT".
+FORM Customer.CustNum Customer.Name more-button next-button
+WITH FRAME brief.
+FORM Customer EXCEPT Customer.CustNum Customer.Name
+WITH FRAME full.
+ON CHOOSE OF more-button DO:
+DISPLAY Customer EXCEPT Customer.CustNum Customer.Name WITH FRAME full.
+jump-ahead = FALSE.
+END.
+ON CHOOSE OF next-button DO:
+jump-ahead = TRUE.
+END.
+ON WINDOW-CLOSE OF CURRENT-WINDOW DO:
+QUIT.
+END.
+ENABLE more-button next-button WITH FRAME brief.
+DO WHILE TRUE:
+IF jump-ahead THEN
+RUN next-cust.
+WAIT-FOR WINDOW-CLOSE OF CURRENT-WINDOW OR CHOOSE OF next-button
+FOCUS more-button PAUSE 3.
+END.
+PROCEDURE next-cust:
+HIDE FRAME full.
+FIND NEXT Customer NO-ERROR.
+IF AVAILABLE Customer THEN
+DISPLAY Customer.CustNum Customer.Name WITH FRAME brief.
+END.
+
+WAIT-FOR PROCEDURE-COMPLETE OF hRequest.
+
+--------------------------------------------------------------------------------
+
+

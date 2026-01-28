@@ -103,3 +103,40 @@ DEFINE PRIVATE STREAM out.
   (stream_definition
     (shared_variable_scope)
     name: (identifier)))
+
+================================================================================
+STREAM DEFINITION - reference snippet
+================================================================================
+
+DEFINE VARIABLE fnr AS CHARACTER NO-UNDO FORMAT "x(12)".
+DEFINE VARIABLE fne AS CHARACTER NO-UNDO FORMAT "x(12)".
+DEFINE VARIABLE excount AS INTEGER NO-UNDO LABEL "Total Number of exceptions".
+DEFINE NEW SHARED BUFFER xitem FOR item.
+DEFINE NEW SHARED STREAM rpt.
+DEFINE STREAM exceptions.
+SET fnr LABEL "Enter filename for report output" SKIP(1)
+fne LABEL "Enter filename for exception output"
+WITH SIDE-LABELS FRAME fnames.
+OUTPUT STREAM rpt TO VALUE(fnr) PAGED.
+OUTPUT STREAM exceptions TO VALUE(fne) PAGED.
+FOR EACH xitem:
+IF on-hand < alloc THEN DO:
+DISPLAY STREAM exceptions
+xitem.ItemNum xitem.ItemName xitem.OnHand xitem.Allocated
+WITH FRAME exitem DOWN.
+excount = excount + 1.
+END.
+RUN r-dfstr2.p.
+END.
+DISPLAY STREAM exceptions SKIP(1) excount WITH FRAME exc SIDE-LABELS.
+DISPLAY STREAM rpt WITH FRAME exc.
+OUTPUT STREAM rpt CLOSE.
+OUTPUT STREAM exceptions CLOSE.
+
+DEFINE SHARED STREAM rpt.
+DEFINE SHARED BUFFER xitem FOR Item.
+DISPLAY STREAM rpt ItemNum ItemName WITH NO-LABELS NO-BOX.
+
+--------------------------------------------------------------------------------
+
+

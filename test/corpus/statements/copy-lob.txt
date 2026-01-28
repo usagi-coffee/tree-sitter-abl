@@ -17,3 +17,17 @@ COPY-LOB FROM FILE inPath TO targetPtr CONVERT SOURCE CODEPAGE "1250" TARGET COD
     (convert_phrase
       (string_literal)
       (string_literal))))
+
+================================================================================
+COPY-LOB - Additional phrases
+================================================================================
+
+COPY-LOB OBJECT srcLob TO OBJECT tgtLob NO-CONVERT.
+COPY-LOB FROM FILE inPath STARTING AT 2 FOR 10 TO FILE outPath APPEND.
+COPY-LOB FROM OBJECT srcLob TO OBJECT tgtLob OVERLAY AT 3 TRIM.
+COPY-LOB FROM FILE inPath TO targetPtr NO-ERROR.
+
+
+--------------------------------------------------------------------------------
+
+

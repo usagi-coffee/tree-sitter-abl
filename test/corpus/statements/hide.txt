@@ -18,3 +18,25 @@ HIDE ALL NO-PAUSE.
   (hide_statement)
   (hide_statement)
   (hide_statement))
+
+================================================================================
+HIDE - Reference snippet
+================================================================================
+
+VIEW FRAME x.
+DISPLAY "This is frame A." WITH FRAME a ROW 1 COLUMN 60.
+DISPLAY "This is frame B." WITH FRAME b ROW 16 COLUMN 10 4 DOWN.
+MESSAGE "Make your selection!".
+UPDATE "Selection: " selection VALIDATE(0 < selection AND selection < 7,
+  "Invalid selection") AUTO-RETURN WITH FRAME x.
+IF selection = 1 THEN HIDE FRAME a.
+ELSE IF selection = 2 THEN HIDE FRAME b.
+ELSE IF selection = 3 THEN HIDE ALL.
+ELSE IF selection = 4 THEN HIDE FRAME x.
+
+HIDE MESSAGE.
+HIDE ALL NO-PAUSE IN WINDOW w1.
+
+--------------------------------------------------------------------------------
+
+

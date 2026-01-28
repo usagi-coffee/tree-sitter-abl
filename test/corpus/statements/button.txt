@@ -479,3 +479,29 @@ DEFINE BUTTON btnFull
     (button_option
       (string_literal))
     (button_option)))
+
+================================================================================
+BUTTON - Reference snippets
+================================================================================
+
+DEFINE BUTTON more-button LABEL "More".
+DEFINE BUTTON next-button LABEL "Next".
+DEFINE BUTTON button-1 LABEL "Drop Here" DROP-TARGET.
+
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (button_definition
+    (identifier)
+    (button_option
+      (string_literal)))
+  (button_definition
+    (identifier)
+    (button_option
+      (string_literal)))
+  (button_definition
+    (identifier)
+    (button_option
+      (string_literal))
+    (button_option)))

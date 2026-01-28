@@ -424,3 +424,111 @@ DEFINE VARIABLE vEvent AS INTEGER ON clickHandler NO-UNDO.
     (trigger_phrase
       (identifier))
     (no_undo)))
+
+================================================================================
+VARIABLE DEFINITION - reference snippets
+================================================================================
+
+DEFINE NEW SHARED VARIABLE del AS LOGICAL NO-UNDO.
+DEFINE NEW SHARED VARIABLE nrecs AS INTEGER NO-UNDO.
+MESSAGE "Do you want to delete the orders being printed (y/n)?" UPDATE del.
+RUN r-dfvar2.p.
+IF del THEN
+MESSAGE nrecs "orders have been shipped and were deleted".
+ELSE
+MESSAGE nrecs "orders have been shipped".
+
+DEFINE SHARED VARIABLE del AS LOGICAL NO-UNDO.
+DEFINE SHARED VARIABLE nrecs AS INTEGER NO-UNDO.
+OUTPUT TO PRINTER.
+FOR EACH Order WHERE Order.ShipDate <> ?:
+nrecs = nrecs + 1.
+FOR EACH OrderLine OF Order:
+DISPLAY OrderLine.OrderNum OrderLine.LineNum OrderLine.Qty
+OrderLine.Price.
+IF del THEN DELETE OrderLine.
+END.
+IF del THEN DELETE Order.
+END.
+OUTPUT CLOSE.
+
+DEFINE NEW GLOBAL SHARED VARIABLE first-time AS LOGICAL NO-UNDO INITIAL TRUE.
+DEFINE VARIABLE selection AS INTEGER NO-UNDO FORMAT "9" LABEL "Selection".
+IF first-time THEN DO:
+RUN r-init.p.
+first-time = FALSE.
+END.
+FORM
+"
+MAIN MENU
+" SKIP(1)
+"1 - Accounts Payable
+" SKIP
+"2 - Accounts Receivable"
+WITH CENTERED ROW 5 FRAME menu.
+REPEAT:
+VIEW FRAME menu.
+UPDATE selection AUTO-RETURN WITH FRAME sel CENTERED ROW 12 SIDE-LABELS.
+IF selection = 1 THEN DO:
+HIDE FRAME menu.
+HIDE FRAME sel.
+RUN apmenu.p.
+END.
+ELSE IF selection = 2 THEN DO:
+HIDE FRAME menu.
+HIDE FRAME sel.
+RUN armenu.p.
+END.
+ELSE DO:
+MESSAGE "Invalid selection. Try again".
+UNDO, RETRY.
+END.
+END.
+
+DEFINE VARIABLE dow AS CHARACTER NO-UNDO FORMAT "x(9)" EXTENT 7
+INITIAL ["Sunday", "Monday", "Tuesday", "Wednesday",
+"Thursday", "Friday", "Saturday"].
+DEFINE VARIABLE dob AS DATE NO-UNDO INITIAL TODAY.
+REPEAT WITH SIDE-LABELS 1 DOWN CENTERED ROW 10 TITLE "Date of Birth":
+DISPLAY SKIP(1).
+UPDATE dob LABEL "Enter date of birth".
+DISPLAY dow[WEEKDAY(dob)] LABEL "It was a".
+END.
+
+DEFINE VARIABLE ix AS INTEGER NO-UNDO.
+DEFINE VARIABLE clubs AS CHARACTER NO-UNDO
+VIEW-AS SELECTION-LIST SIZE 20 BY 5 MULTIPLE SCROLLBAR-VERTICAL NO-DRAG
+LIST-ITEMS "One Iron", "Two Iron", "Three Iron", "Four Iron",
+"Five Iron", "Six Iron", "Seven Iron", "Eight Iron",
+"Nine Iron", "Pitching Wedge"
+LABEL "Golf Clubs Available"
+TRIGGERS:
+ON GO DO:
+IF SELF:SCREEN-VALUE <> "" THEN
+DO ix = 1 TO NUM-ENTRIES(SELF:SCREEN-VALUE) :
+DISPLAY ENTRY(ix, SELF:SCREEN-VALUE) FORMAT "X(16)"
+WITH FRAME clubs-sel CENTERED
+NUM-ENTRIES(SELF:SCREEN-VALUE) + 1 DOWN
+TITLE "Clubs Selected" USE-TEXT.
+DOWN 1 WITH FRAME clubs-sel.
+END.
+END.
+END TRIGGERS.
+ENABLE clubs WITH FRAME get-info TITLE "Select the Desired Club(s)".
+WAIT-FOR WINDOW-CLOSE OF CURRENT-WINDOW.
+
+DEFINE VARIABLE credit-percent AS INTEGER NO-UNDO
+COLUMN-LABEL "Enter
+!percentage!increase ".
+FOR EACH Customer:
+DISPLAY Customer.Name Customer.CreditLimit.
+SET credit-percent.
+Customer.CreditLimit = (Customer.CreditLimit *
+(credit-percent / 100)) + Customer.CreditLimit.
+DISPLAY Customer.CreditLimit @ new-credit LIKE Customer.CreditLimit
+LABEL "New max cred".
+END.
+
+--------------------------------------------------------------------------------
+
+

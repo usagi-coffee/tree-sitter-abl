@@ -15,3 +15,38 @@ OS-COMMAND SILENT VALUE(cmd).
     (identifier))
   (os_command_statement
     (identifier)))
+
+================================================================================
+OS-COMMAND - reference snippets and options
+================================================================================
+
+DEFINE VARIABLE comm-line AS CHARACTER NO-UNDO FORMAT "x(70)".
+REPEAT:
+UPDATE comm-line.
+OS-COMMAND VALUE(comm-line).
+END.
+
+OS-COMMAND NO-CONSOLE VALUE("dir").
+OS-COMMAND VALUE("echo") "ok".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    (identifier)
+    (identifier)
+    (no_undo)
+    (format_option
+      (string_literal)))
+  (repeat_statement
+    (body
+      (update_statement
+        (update_item
+          (identifier)))
+      (os_command_statement
+        (identifier))))
+  (os_command_statement
+    (string_literal))
+  (os_command_statement
+    (string_literal)
+    (string_literal)))

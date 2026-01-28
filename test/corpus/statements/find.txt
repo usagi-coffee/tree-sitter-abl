@@ -234,3 +234,37 @@ FIND FIRST Customer WHERE Customer.Balance > 1000 USE-INDEX Balance NO-LOCK NO-E
     (no_lock)
     (no_error)
     (no_wait)))
+
+================================================================================
+FIND - Reference snippets
+================================================================================
+
+FIND Customer 1.
+PROMPT-FOR Customer.CustNum.
+FIND Customer USING Customer.CustNum.
+
+REPEAT:
+  PROMPT-FOR Item.ItemNum.
+  FIND Item USING Item.ItemNum.
+  DISPLAY Item.ItemNum Item.ItemName.
+  REPEAT:
+    FIND NEXT OrderLine OF Item.
+    FIND Order OF OrderLine.
+    FIND Customer WHERE Customer.CustNum = Order.CustNum.
+    DISPLAY Customer.Name Order.OrderNum OrderLine.Qty (TOTAL).
+  END.
+END.
+
+DEFINE VARIABLE start-name NO-UNDO LIKE Customer.Name.
+REPEAT:
+  SET start-name.
+  FIND FIRST Customer WHERE Customer.Name >= start-name.
+  REPEAT:
+    DISPLAY Customer.Name.
+    FIND NEXT Customer USE-INDEX name.
+  END.
+END.
+
+--------------------------------------------------------------------------------
+
+

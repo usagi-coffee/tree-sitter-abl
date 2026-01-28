@@ -12,3 +12,47 @@ RELEASE order_hdr.
     record: (identifier))
   (release_statement
     record: (identifier)))
+
+================================================================================
+RELEASE - reference snippet
+================================================================================
+
+DEFINE VARIABLE methRtn AS LOGICAL NO-UNDO.
+DEFINE VARIABLE curr-cust AS ROWID NO-UNDO.
+DEFINE BUTTON upd-cust LABEL "Update Customer".
+DEFINE BUTTON exit-app LABEL "Exit".
+DEFINE QUERY seq-cust FOR customer.
+DEFINE BROWSE brow-cust QUERY seq-cust
+DISPLAY Customer.CustNum Customer.Name WITH 10 DOWN.
+FORM
+upd-cust exit-app SKIP(1)
+brow-cust
+WITH FRAME main-frame.
+FORM
+Customer EXCEPT Customer.Comments
+WITH FRAME curr-frame COLUMN 40.
+OPEN QUERY seq-cust FOR EACH Customer.
+ON VALUE-CHANGED OF brow-cust DO:
+DISPLAY Customer EXCEPT Customer.Comments
+WITH FRAME curr-frame SIDE-LABELS.
+curr-cust = ROWID(Customer).
+END.
+ON CHOOSE OF upd-cust DO:
+FIND Customer WHERE ROWID(Customer) = curr-cust EXCLUSIVE-LOCK.
+UPDATE Customer WITH FRAME cust-frame VIEW-AS DIALOG-BOX
+TITLE "Customer Update".
+methRtn = brow-cust:REFRESH().
+DISPLAY Customer EXCEPT Customer.Comments
+WITH FRAME curr-frame SIDE-LABELS.
+RELEASE Customer.
+END.
+ENABLE ALL WITH FRAME main-frame.
+APPLY "VALUE-CHANGED" TO brow-cust.
+PAUSE 0 BEFORE-HIDE.
+WAIT-FOR CHOOSE OF exit-app OR WINDOW-CLOSE OF DEFAULT-WINDOW.
+
+RELEASE sports.Customer NO-ERROR.
+
+--------------------------------------------------------------------------------
+
+

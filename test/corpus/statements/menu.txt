@@ -476,3 +476,53 @@ DEFINE MENU mnuComplete
       (menu_item
         name: (identifier)
         (string_literal)))))
+
+================================================================================
+MENU - Reference snippet
+================================================================================
+
+DEFINE SUB-MENU topic
+  MENU-ITEM numbr LABEL "Cust. Number"
+  MENU-ITEM addr LABEL "Address"
+  MENU-ITEM othrinfo LABEL "Other".
+DEFINE SUB-MENU move
+  MENU-ITEM forward LABEL "NextRec" ACCELERATOR "PAGE-DOWN"
+  MENU-ITEM backward LABEL "PrevRec" ACCELERATOR "PAGE-UP".
+DEFINE SUB-MENU quitit
+  MENU-ITEM quititem LABEL "E&xit".
+DEFINE MENU mbar MENUBAR
+  SUB-MENU topic LABEL "Topic"
+  SUB-MENU move LABEL "Move"
+  SUB-MENU quitit LABEL "E&xit".
+ON CHOOSE OF MENU-ITEM numbr
+  DISPLAY Customer.CustNum.
+ON CHOOSE OF MENU-ITEM addr
+  DISPLAY Customer.Address Customer.Address2 Customer.City
+    Customer.State Customer.PostalCode
+    WITH FRAME addr-frame NO-LABELS COLUMN 25.
+ON CHOOSE OF MENU-ITEM othrinfo
+  DISPLAY Customer EXCEPT Customer.Name Customer.CustNum Customer.Address
+    Customer.Address2 Customer.City Customer.State Customer.PostalCode
+    WITH FRAME oth-frame SIDE-LABELS.
+ON CHOOSE OF MENU-ITEM forward DO:
+  HIDE ALL NO-PAUSE.
+  CLEAR FRAME name-frame.
+  FIND NEXT Customer NO-ERROR.
+  IF AVAILABLE Customer THEN
+    DISPLAY Customer.Name WITH FRAME name-frame.
+END.
+ON CHOOSE OF MENU-ITEM backward DO:
+  HIDE ALL NO-PAUSE.
+  CLEAR FRAME name-frame.
+  FIND PREV Customer NO-ERROR.
+  IF AVAILABLE Customer THEN
+    DISPLAY Customer.Name WITH FRAME name-frame.
+END.
+FIND FIRST Customer.
+DISPLAY Customer.Name LABEL "Customer Name" WITH FRAME name-frame.
+ASSIGN CURRENT-WINDOW:MENUBAR = MENU mbar:HANDLE.
+WAIT-FOR CHOOSE OF MENU-ITEM quititem.
+
+--------------------------------------------------------------------------------
+
+

@@ -13,3 +13,47 @@ PUBLISH "MyEvent" FROM hPublisher.
   (publish_statement
     event: (string_literal)
     publisher: (identifier)))
+
+================================================================================
+PUBLISH - reference snippets and parameters
+================================================================================
+
+DEFINE VARIABLE hPub AS HANDLE NO-UNDO.
+DEFINE VARIABLE hSub1 AS HANDLE NO-UNDO.
+DEFINE VARIABLE hSub2 AS HANDLE NO-UNDO.
+DEFINE BUTTON bNewCust LABEL "New Customer".
+DEFINE BUTTON bQuit LABEL "Quit".
+RUN r-nepub.p PERSISTENT SET hPub.
+RUN r-nesub1.p PERSISTENT SET hSub1 (hPub).
+RUN r-nesub2.p PERSISTENT SET hSub2.
+SUBSCRIBE PROCEDURE hSub2 TO "NewCustomer" IN hPub.
+FORM bNewCust bQuit WITH FRAME x.
+ENABLE ALL WITH FRAME x.
+ON CHOOSE OF bNewCust RUN NewCust IN hPub.
+WAIT-FOR CHOOSE OF bQuit OR WINDOW-CLOSE OF CURRENT-WINDOW.
+
+PROCEDURE NewCust:
+DEFINE VARIABLE name AS CHARACTER NO-UNDO INITIAL "Sam".
+PUBLISH "NewCustomer" (INPUT name).
+END PROCEDURE.
+
+DEFINE INPUT PARAMETER hPub AS HANDLE NO-UNDO.
+SUBSCRIBE TO "NewCustomer" IN hPub.
+PROCEDURE NewCustomer:
+DEFINE INPUT PARAMETER name AS CHARACTER NO-UNDO.
+MESSAGE "Subscriber 1 received event NewCustomer concerning" name
+VIEW-AS ALERT-BOX.
+END.
+
+PROCEDURE NewCustomer:
+DEFINE INPUT PARAMETER name AS CHARACTER NO-UNDO.
+MESSAGE "Subscriber 2 received event NewCustomer concerning" name
+VIEW-AS ALERT-BOX.
+UNSUBSCRIBE TO ALL.
+END.
+
+PUBLISH cEventName FROM hPublisher (INPUT p1, INPUT-OUTPUT p2, OUTPUT p3).
+
+--------------------------------------------------------------------------------
+
+

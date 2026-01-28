@@ -8,3 +8,28 @@ BELL.
 
 (source_code
   (bell_statement))
+
+===============================================================================
+BELL - reference snippet
+===============================================================================
+
+DEFINE VARIABLE outfile AS CHARACTER NO-UNDO FORMAT "x(8)"
+LABEL "Output file name".
+getfile:
+DO ON ERROR UNDO, RETRY:
+SET outfile WITH SIDE-LABELS.
+IF SEARCH(outfile) = outfile THEN DO:
+MESSAGE "A file named" outfile "already exists in your directory".
+MESSAGE "Please use another name".
+BELL.
+UNDO getfile, RETRY getfile.
+END.
+END.
+OUTPUT TO VALUE(outfile).
+FOR EACH Customer NO-LOCK:
+DISPLAY Customer.Name Customer.CreditLimit.
+END.
+
+-------------------------------------------------------------------------------
+
+

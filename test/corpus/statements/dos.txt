@@ -21,3 +21,15 @@ DOS NOWAIT VALUE("dir").
     command: (string_literal))
   (dos_statement
     command: (string_literal)))
+
+================================================================================
+DOS - Reference snippet
+================================================================================
+
+IF OPSYS = "UNIX" THEN UNIX ls.
+ELSE IF OPSYS = "WIN32" THEN DOS dir.
+ELSE DISPLAY OPSYS "is an unsupported operating system".
+
+--------------------------------------------------------------------------------
+
+

@@ -41,3 +41,28 @@ INPUT-OUTPUT STREAM sIO THROUGH "filter" UNBUFFERED.
     (stream_phrase
       name: (identifier))
     program: (string_literal)))
+
+================================================================================
+INPUT-OUTPUT - Reference snippets
+================================================================================
+
+FOR EACH Item WHERE Item.ItemNum < 10:
+  DISPLAY Item.ItemNum Item.Price LABEL "Price before recalculation".
+END.
+INPUT-OUTPUT THROUGH r-iothru UNBUFFERED.
+FOR EACH Item WHERE Item.ItemNum < 10:
+  EXPORT Item.Price.
+  SET Item.Price.
+END.
+INPUT-OUTPUT CLOSE.
+FOR EACH Item WHERE Item.ItemNum < 10 WITH COLUMN 40:
+  DISPLAY Item.ItemNum Item.Price LABEL "Price after recalculation".
+END.
+
+INPUT-OUTPUT THROUGH VALUE(cProgram) NO-ECHO.
+INPUT-OUTPUT STREAM sIO THROUGH "filter" UNBUFFERED NO-CONVERT.
+INPUT-OUTPUT STREAM sIO THROUGH "filter" CONVERT SOURCE "ibm850" TARGET "utf-8".
+
+--------------------------------------------------------------------------------
+
+

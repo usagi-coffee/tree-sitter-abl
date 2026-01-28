@@ -31,3 +31,44 @@ IMPORT STREAM-HANDLE hStream mPtrData.
     (stream_handle_phrase
       handle: (identifier))
     (identifier)))
+
+================================================================================
+IMPORT - Reference snippets
+================================================================================
+
+INPUT FROM customer.d.
+DISABLE TRIGGERS FOR LOAD OF Customer.
+REPEAT:
+  CREATE Customer.
+  IMPORT Customer.
+END.
+INPUT CLOSE.
+
+DEFINE VARIABLE cnum NO-UNDO LIKE Customer.CustNum.
+DEFINE VARIABLE cname NO-UNDO LIKE Customer.Name.
+DEFINE VARIABLE cmax NO-UNDO LIKE Customer.CreditLimit.
+INPUT FROM custdump2.
+FOR EACH Customer:
+  IMPORT DELIMITER ";" cnum cname cmax.
+  DISPLAY cnum cname cmax.
+END.
+INPUT CLOSE.
+
+DEFINE VARIABLE text-string AS CHARACTER NO-UNDO FORMAT "x(76)".
+INPUT FROM VALUE(SEARCH("hello")).
+DO WHILE TRUE ON ENDKEY UNDO, LEAVE:
+  IMPORT UNFORMATTED text-string.
+  DISPLAY text-string WITH DOWN FRAME x.
+  DOWN WITH FRAME x NO-LABELS.
+END.
+INPUT CLOSE.
+
+DEFINE VARIABLE bb AS MEMPTR NO-UNDO.
+ASSIGN FILE-INFO:FILE-NAME = "big.in" SET-SIZE(bb) = FILE-INFO:FILE-SIZE.
+INPUT FROM "big.in" BINARY NO-CONVERT.
+IMPORT bb.
+INPUT CLOSE.
+
+--------------------------------------------------------------------------------
+
+

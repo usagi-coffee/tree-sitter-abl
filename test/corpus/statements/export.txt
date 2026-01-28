@@ -24,3 +24,28 @@ EXPORT STREAM-HANDLE hOut memptrBuf.
     (stream_handle_phrase
       handle: (identifier))
     (identifier)))
+
+================================================================================
+EXPORT - Reference snippets
+================================================================================
+
+OUTPUT TO customer.d.
+FOR EACH Customer NO-LOCK:
+  EXPORT Customer.
+END.
+OUTPUT CLOSE.
+
+OUTPUT TO custdump2.
+FOR EACH Customer NO-LOCK:
+  EXPORT DELIMITER ";" Customer.CustNum Customer.Name Customer.CreditLimit.
+END.
+OUTPUT CLOSE.
+
+EXPORT tt1 EXCEPT f2.
+EXPORT z.
+EXPORT STREAM s1 Customer.Name.
+EXPORT STREAM-HANDLE hOut memptrBuf.
+
+--------------------------------------------------------------------------------
+
+

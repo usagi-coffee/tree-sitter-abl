@@ -208,3 +208,51 @@ RUN calc.p (x + y, STRING(TODAY), SUBSTRING(name, 1, 10)).
               value: (number_literal))
             (argument
               value: (number_literal))))))))
+
+================================================================================
+RUN - reference snippets and async/server options
+================================================================================
+
+DEFINE INPUT PARAMETER invDate AS DATE NO-UNDO.
+DEFINE VARIABLE sh AS HANDLE NO-UNDO.
+DEFINE VARIABLE ah AS HANDLE NO-UNDO.
+CREATE SERVER sh.
+sh:CONNECT("-URL http://slater:8810/inventory/apsv -sessionModel Session-free").
+RUN runReport.p ON SERVER sh
+ASYNCHRONOUS SET ah EVENT-HANDLER "reportDone" EVENT-HANDLER-CONTEXT THIS-PROCEDURE
+(invDate, OUTPUT numLines AS INTEGER).
+RETURN.
+PROCEDURE reportDone:
+DEFINE INPUT PARAMETER numLines AS INTEGER.
+IF ah:ERROR OR ah:STOP THEN
+MESSAGE "An error occurred when running your" SKIP
+"Inventory report for" invDate "." SKIP
+"The error is:" ERROR-STATUS:GET-MESSAGE(1)
+VIEW-AS ALERT-BOX.
+ELSE
+MESSAGE "Your Inventory report for " invDate SKIP
+"has completed successfully." SKIP
+numLines "report lines were generated"
+VIEW-AS ALERT-BOX.
+sh:DISCONNECT().
+DELETE OBJECT sh.
+DELETE OBJECT THIS-PROCEDURE.
+END PROCEDURE.
+
+RUN aproc.p SINGLE-RUN SET procHandle ON SERVER serverHandle.
+RUN internalProcA IN procHandle (INPUT argIn1, OUTPUT argout1).
+DELETE PROCEDURE procHandle.
+
+RUN aproc.p SINGLETON SET procHandle ON SERVER serverHandle.
+RUN internalProcA IN procHandle (INPUT argIn1, OUTPUT argout1).
+RUN internalProcB IN procHandle (INPUT argIn1, OUTPUT argout1).
+DELETE PROCEDURE procHandle.
+
+RUN /usr/foo/app.pl<<appmenu.r>>.
+RUN VALUE(cProcName) PERSISTENT SET hProc.
+RUN internalProc IN hProc ASYNCHRONOUS EVENT-PROCEDURE "done" IN THIS-PROCEDURE.
+RUN methodProc IN hProc NO-ERROR.
+
+--------------------------------------------------------------------------------
+
+

@@ -10,3 +10,17 @@ SHOW-STATS CLEAR.
 (source_code
   (show_stats_statement)
   (show_stats_statement))
+
+================================================================================
+SHOW-STATS - reference snippet
+================================================================================
+
+RUN dict.p.
+SHOW-STATS.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (run_statement
+    (procedure_name))
+  (show_stats_statement))

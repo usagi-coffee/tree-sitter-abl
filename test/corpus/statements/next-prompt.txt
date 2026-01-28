@@ -75,3 +75,25 @@ NEXT-PROMPT field2 WITH FRAME detail.
     field: (identifier)
     (frame_phrase
       frame: (identifier))))
+
+===============================================================================
+NEXT-PROMPT - Reference snippet
+===============================================================================
+
+FOR EACH Customer:
+  UPDATE Customer WITH 2 COLUMNS.
+  IF Customer.Contact EQ " " THEN DO:
+    MESSAGE "You must enter a contact".
+    NEXT-PROMPT Customer.Contact.
+    UNDO, RETRY.
+  END.
+END.
+
+DEFINE VARIABLE a AS CHARACTER NO-UNDO.
+DEFINE VARIABLE b AS CHARACTER NO-UNDO.
+NEXT-PROMPT b.
+UPDATE a b.
+
+-------------------------------------------------------------------------------
+
+

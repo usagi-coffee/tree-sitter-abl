@@ -61,3 +61,20 @@ END.
           (identifier)
           (assignment_operator)
           (number_literal))))))
+
+================================================================================
+CASE - Reference snippet and OR WHEN
+================================================================================
+
+DEFINE VARIABLE pay-stat AS INTEGER NO-UNDO INITIAL 1.
+CASE pay-stat:
+  WHEN 1 THEN MESSAGE "This account is unpaid.".
+  WHEN 2 OR WHEN 3 THEN DO:
+    MESSAGE "Paid.".
+  END.
+END CASE.
+
+
+--------------------------------------------------------------------------------
+
+

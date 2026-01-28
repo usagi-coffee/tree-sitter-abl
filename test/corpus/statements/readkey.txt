@@ -16,3 +16,78 @@ READKEY STREAM sIn PAUSE 10.
     (stream_phrase
       stream: (identifier))
     pause: (number_literal)))
+
+================================================================================
+READKEY - reference snippet and variants
+================================================================================
+
+FOR EACH Customer:
+DISPLAY Customer.CustNum Customer.Name Customer.Address Customer.City
+Customer.State WITH 1 DOWN.
+MESSAGE "If you want to delete this customer, press Y".
+MESSAGE "Otherwise, press any other key.".
+READKEY.
+IF CHR(LASTKEY) = "Y" THEN DELETE Customer.
+ELSE IF KEYFUNCTION(LASTKEY) = "END-ERROR" THEN LEAVE.
+END.
+
+READKEY STREAM-HANDLE hIn PAUSE 0.
+READKEY PAUSE 0.5.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (for_each_statement
+    (for_record_list
+      (for_record
+        (identifier)))
+    (body
+      (display_statement
+        (qualified_name
+          (identifier)
+          (identifier))
+        (qualified_name
+          (identifier)
+          (identifier))
+        (qualified_name
+          (identifier)
+          (identifier))
+        (qualified_name
+          (identifier)
+          (identifier))
+        (qualified_name
+          (identifier)
+          (identifier))
+        (identifier)
+        (number_literal)
+        (identifier))
+      (message_statement
+        (string_literal))
+      (message_statement
+        (string_literal))
+      (readkey_statement)
+      (if_statement
+        (binary_expression
+          (function_call
+            (identifier)
+            (arguments
+              (argument
+                (identifier))))
+          (string_literal))
+        (delete_statement
+          (identifier))
+        (if_statement
+          (binary_expression
+            (function_call
+              (identifier)
+              (arguments
+                (argument
+                  (identifier))))
+            (string_literal))
+          (leave_statement)))))
+  (readkey_statement
+    (stream_phrase
+      (identifier))
+    (number_literal))
+  (readkey_statement
+    (number_literal)))

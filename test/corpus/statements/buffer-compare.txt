@@ -81,3 +81,38 @@ BUFFER-COMPARE bSrc TO bTgt
       value: (identifier)
       action: (message_statement
         (string_literal)))))
+
+================================================================================
+BUFFER-COMPARE with EXPLICIT COMPARES and operators
+================================================================================
+
+BUFFER-COMPARE bSrc TO bTgt
+  EXPLICIT COMPARES:
+    WHEN Field1 >= Field2 THEN ASSIGN flag = TRUE.
+    WHEN Field3 < Field4 THEN MESSAGE "Less".
+  END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (buffer_compare_statement
+    source: (identifier)
+    target: (identifier)
+    (compares_block
+      field: (identifier)
+      operator: (GE)
+      value: (identifier)
+      action: (assign_statement
+        (assign_pair
+          left: (identifier)
+          right: (boolean_literal)))
+      field: (identifier)
+      operator: (LT)
+      value: (identifier)
+      action: (message_statement
+        (string_literal)))))
+
+
+--------------------------------------------------------------------------------
+
+

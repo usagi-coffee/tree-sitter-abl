@@ -19,3 +19,16 @@ CLEAR FRAME myframe ALL NO-PAUSE.
   (clear_statement)
   (clear_statement
     frame: (identifier)))
+
+================================================================================
+CLEAR - Reference snippet
+================================================================================
+
+CLEAR FRAME ex NO-PAUSE.
+
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (clear_statement
+    (identifier)))

@@ -25,3 +25,60 @@ PUT-KEY-VALUE SECTION "app" KEY "debug" VALUE "true" NO-ERROR.
     section: (string_literal)
     key: (string_literal)
     value: (string_literal)))
+
+================================================================================
+PUT-KEY-VALUE - reference examples
+================================================================================
+
+PUT-KEY-VALUE SECTION "MYSECTION" KEY "MYKEY" VALUE MYVARIABLE.
+PUT-KEY-VALUE SECTION "" KEY "MYKEY" VALUE MYVARIABLE.
+PUT-KEY-VALUE SECTION "?" KEY "MYKEY" VALUE MYVARIABLE.
+
+PUT-KEY-VALUE SECTION "MYSECTION" KEY "MYKEY" VALUE "".
+PUT-KEY-VALUE SECTION "MYSECTION" KEY "MYKEY" VALUE ?.
+
+PUT-KEY-VALUE SECTION "MYSECTION " KEY "?" VALUE ?.
+PUT-KEY-VALUE SECTION "MYSECTION " KEY "" VALUE "".
+
+PUT-KEY-VALUE SECTION "MYAPP" KEY DEFAULT VALUE "NEWVALUE".
+
+PUT-KEY-VALUE COLOR ALL.
+PUT-KEY-VALUE FONT 2.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (put_key_value_statement
+    (string_literal)
+    (string_literal)
+    (identifier))
+  (put_key_value_statement
+    (string_literal)
+    (string_literal)
+    (identifier))
+  (put_key_value_statement
+    (string_literal)
+    (string_literal)
+    (identifier))
+  (put_key_value_statement
+    (string_literal)
+    (string_literal)
+    (string_literal))
+  (put_key_value_statement
+    (string_literal)
+    (string_literal)
+    (null_literal))
+  (put_key_value_statement
+    (string_literal)
+    (string_literal)
+    (null_literal))
+  (put_key_value_statement
+    (string_literal)
+    (string_literal)
+    (string_literal))
+  (put_key_value_statement
+    (string_literal)
+    (string_literal))
+  (put_key_value_statement)
+  (put_key_value_statement
+    (number_literal)))

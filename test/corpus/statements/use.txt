@@ -15,3 +15,28 @@ USE "testing" NO-ERROR.
     environment: (identifier))
   (use_statement
     environment: (string_literal)))
+
+================================================================================
+USE - reference snippet
+================================================================================
+
+DEFINE VARIABLE w1 AS CHARACTER NO-UNDO VIEW-AS TEXT FONT 0
+FORMAT "x(34)" INITIAL "This is font 0 in the first window".
+DEFINE VARIABLE w2 AS CHARACTER NO-UNDO VIEW-AS TEXT FONT 0
+FORMAT "x(35)" INITIAL "This is font 0 in the second window".
+DEFINE VARIABLE new_win AS HANDLE NO-UNDO.
+LOAD "env1".
+LOAD "env2".
+USE "env1".
+DISPLAY w1 WITH NO-LABELS WITH FRAME a.
+PAUSE.
+USE "env2".
+CREATE WINDOW new_win.
+CURRENT-WINDOW = new_win.
+DISPLAY w2 in WINDOW new_win WITH NO-LABELS WITH FRAME b.
+PAUSE.
+DELETE WIDGET new_win.
+
+--------------------------------------------------------------------------------
+
+

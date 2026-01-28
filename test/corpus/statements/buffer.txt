@@ -364,3 +364,18 @@ DEF NEW SHARED BUFFER b2 FOR Customer PRESELECT.
     (shared_variable_scope)
     name: (identifier)
     table: (identifier)))
+
+================================================================================
+BUFFER DEFINITION - Reference snippets and ordering
+================================================================================
+
+DEFINE BUFFER other-cust FOR Customer.
+DEFINE NEW SHARED BUFFER rec FOR Customer PRESELECT.
+DEFINE SHARED BUFFER rec FOR Customer PRESELECT.
+DEFINE STATIC PRIVATE BUFFER bufStaticPriv FOR Customer.
+DEFINE BUFFER procBuf FOR proc-text-buffer.
+
+
+--------------------------------------------------------------------------------
+
+

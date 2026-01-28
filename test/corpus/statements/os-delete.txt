@@ -13,3 +13,26 @@ OS-DELETE tmpFile tmpDir RECURSIVE.
   (os_delete_statement
     (identifier)
     (identifier)))
+
+================================================================================
+OS-DELETE - reference snippets and RECURSIVE
+================================================================================
+
+DEFINE VARIABLE filename AS CHARACTER NO-UNDO.
+DEFINE VARIABLE OKpressed AS LOGICAL NO-UNDO INITIAL TRUE.
+Main:
+REPEAT:
+SYSTEM-DIALOG GET-FILE filename
+TITLE "Choose File to Delete"
+MUST-EXIST
+USE-FILENAME
+UPDATE OKpressed.
+IF OKpressed = FALSE THEN LEAVE Main.
+ELSE OS-DELETE VALUE(filename).
+END.
+
+OS-DELETE VALUE("tmp") RECURSIVE.
+
+--------------------------------------------------------------------------------
+
+

@@ -18,3 +18,30 @@ VIEW STREAM sOut FRAME myframe.
       stream: (identifier))
     (widget_phrase
       frame: (identifier))))
+
+================================================================================
+VIEW - reference snippet and variants
+================================================================================
+
+OUTPUT TO slsrep PAGED PAGE-SIZE 10.
+FOR EACH SalesRep NO-LOCK:
+PAGE.
+FORM HEADER "Sales rep report" "Page" AT 60 PAGE-NUMBER FORMAT ">>>9".
+DISPLAY SKIP(1) SalesRep.SalesRep SalesRep.RepName SalesRep.Region
+WITH NO-LABELS.
+FORM HEADER "Sales rep report" SalesRep.SalesRep "(continued)"
+"Page" AT 60 PAGE-NUMBER FORMAT ">>>9" SKIP(1)
+WITH FRAME hdr2 PAGE-TOP.
+VIEW FRAME hdr2.
+FOR EACH Customer OF SalesRep NO-LOCK:
+DISPLAY Customer.CustNum Customer.Name Customer.Address Customer.City
+Customer.State.
+END.
+END.
+
+VIEW FRAME f1 IN WINDOW w1.
+VIEW STREAM-HANDLE hS FRAME f1.
+
+--------------------------------------------------------------------------------
+
+

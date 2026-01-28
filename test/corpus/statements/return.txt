@@ -73,3 +73,168 @@ RETURN CalculateResult().
     (function_call
       function: (identifier)
       (arguments))))
+
+===============================================================================
+RETURN - reference snippets and ERROR/NO-APPLY
+===============================================================================
+
+DEFINE VARIABLE dTemp AS DECIMAL NO-UNDO INITIAL 0.
+FUNCTION CtoF RETURNS DECIMAL (INPUT dCelsius AS DECIMAL):
+RETURN (dCelsius * 1.8) + 32.
+END.
+MESSAGE dTemp "degrees Celsius is" CtoF(dTemp) "degrees Fahrenheit." SKIP
+VIEW-AS ALERT-BOX.
+
+DEFINE VARIABLE iFuncReturn AS INTEGER INITIAL 99 NO-UNDO.
+FUNCTION ErrorTest RETURNS INTEGER:
+RETURN ERROR.
+END FUNCTION.
+ASSIGN iFuncReturn = ErrorTest().
+IF iFuncReturn EQ ? THEN
+MESSAGE "Error in user-defined function." view-as alert-box.
+
+DEF VAR ix AS INT.
+RUN proc NO-ERROR.
+IF ERROR-STATUS:ERROR THEN
+DO:
+DO ix = 1 TO ERROR-STATUS:NUM-MESSAGES:
+MESSAGE ERROR-STATUS:GET-MESSAGE(ix) ERROR-STATUS:GET-NUMBER(ix).
+END.
+END.
+PROCEDURE proc:
+DEFINE VAR err AS PROGRESS.Lang.AppError.
+err = NEW PROGRESS.Lang.AppError("The car cannot be rented",1).
+err:AddMessage ("No driver's license was provided", 98).
+RETURN ERROR err.
+END.
+
+RETURN ERROR "Oops".
+RETURN NO-APPLY.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    (identifier)
+    (identifier)
+    (no_undo)
+    (initial_option
+      (number_literal)))
+  (function_definition
+    (identifier)
+    (identifier)
+    (function_parameter_list
+      (function_parameter
+        (identifier)
+        (identifier)))
+    (return_statement
+      (binary_expression
+        (parenthesized_expression
+          (binary_expression
+            (identifier)
+            (number_literal)))
+        (number_literal))))
+  (message_statement
+    (identifier)
+    (string_literal)
+    (function_call
+      (identifier)
+      (arguments
+        (argument
+          (identifier))))
+    (string_literal)
+    (skip)
+    (view_as_phrase))
+  (variable_definition
+    (identifier)
+    (identifier)
+    (initial_option
+      (number_literal))
+    (no_undo))
+  (function_definition
+    (identifier)
+    (identifier)
+    (return_statement))
+  (assign_statement
+    (assign_pair
+      (identifier)
+      (function_call
+        (identifier)
+        (arguments))))
+  (if_statement
+    (binary_expression
+      (identifier)
+      (null_literal))
+    (message_statement
+      (string_literal)
+      (view_as_phrase)))
+  (variable_definition
+    (identifier)
+    (identifier))
+  (run_statement
+    (identifier))
+  (if_statement
+    (object_access
+      (identifier)
+      (identifier))
+    (do_block
+      (body
+        (do_block
+          (identifier)
+          (number_literal)
+          (object_access
+            (identifier)
+            (identifier))
+          (body
+            (message_statement
+              (function_call
+                (object_access
+                  (identifier)
+                  (identifier))
+                (arguments
+                  (argument
+                    (identifier))))
+              (function_call
+                (object_access
+                  (identifier)
+                  (identifier))
+                (arguments
+                  (argument
+                    (identifier))))))))))
+  (procedure_definition
+    (identifier)
+    (variable_definition
+      (identifier)
+      (qualified_name
+        (identifier)
+        (identifier)
+        (identifier)))
+    (assignment_statement
+      (identifier)
+      (assignment_operator)
+      (new_expression
+        (qualified_name
+          (identifier)
+          (identifier)
+          (identifier))
+        (arguments
+          (argument
+            (string_literal))
+          (argument
+            (number_literal)))))
+    (expression_statement
+      (function_call
+        (object_access
+          (identifier)
+          (identifier))
+        (arguments
+          (argument
+            (string_literal))
+          (argument
+            (number_literal)))))
+    (return_statement
+      (identifier)))
+  (return_statement
+    (string_literal))
+  (return_statement
+    (identifier)))

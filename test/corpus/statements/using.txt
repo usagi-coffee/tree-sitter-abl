@@ -38,3 +38,35 @@ USING Acme.BusObjs.*.
   (using_statement)
   (using_statement)
   (using_statement))
+
+===============================================================================
+USING - reference snippets and FROM options
+===============================================================================
+
+USING Acme.BusObjs.*.
+DEFINE VARIABLE CustObj AS CLASS Customer.
+DEFINE VARIABLE CustObj2 AS CLASS Acme.BusObjs.Customer.
+
+USING Acme.BusObjs.Customer.
+DEFINE VARIABLE CustObj AS CLASS Customer.
+DEFINE VARIABLE CustObj2 AS CLASS Acme.BusObjs.Customer.
+
+USING System.Windows.Forms.* FROM ASSEMBLY.
+DEFINE VARIABLE rControl AS CLASS Control.
+DEFINE VARIABLE rCollection AS CLASS Control+ControlCollection.
+
+USING Classes.Inventory.*.
+DEFINE VARIABLE clRef AS CLASS Shipping.
+clRef = NEW Shipping().
+
+USING System.Windows.Forms.*.
+USING System.Collections.Generic.List<Button>.
+USING System.Collections.ObjectModel.*.
+DEFINE VARIABLE ButtonList AS CLASS List<Button> NO-UNDO.
+DEFINE VARIABLE intColl AS CLASS Collection<INTEGER> NO-UNDO.
+
+USING Acme.BusObjs.* FROM PROPATH.
+
+-------------------------------------------------------------------------------
+
+

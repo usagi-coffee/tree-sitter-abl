@@ -6,6 +6,8 @@ BUFFER-COPY bSrc TO bTgt.
 BUFFER-COPY Customer TO ttCustomer.
 BUFFER-COPY bSource EXCEPT Field1 Field2 TO bTarget.
 BUFFER-COPY bSrc EXCEPT Field1, Field2, Field3 TO bTgt.
+BUFFER-COPY tempDb.Customer TO tt.Customer.
+BUFFER-COPY bSrc EXCEPT Customer.Name, Customer.Balance TO ttTarget.
 
 --------------------------------------------------------------------------------
 
@@ -28,4 +30,34 @@ BUFFER-COPY bSrc EXCEPT Field1, Field2, Field3 TO bTgt.
       (identifier)
       (identifier)
       (identifier))
+    target: (identifier))
+  (buffer_copy_statement
+    source: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    target: (qualified_name
+      left: (identifier)
+      right: (identifier)))
+  (buffer_copy_statement
+    source: (identifier)
+    (except_phrase
+      (qualified_name
+        left: (identifier)
+        right: (identifier))
+      (qualified_name
+        left: (identifier)
+        right: (identifier)))
     target: (identifier)))
+
+================================================================================
+BUFFER-COPY with USING, ASSIGN, and options
+================================================================================
+
+BUFFER-COPY bSrc USING Field1 Field2 TO bTgt.
+BUFFER-COPY bSrc TO bTgt ASSIGN Field1 = 1 Field2 += 2.
+BUFFER-COPY bSrc EXCEPT Field3 TO bTgt ASSIGN Field1 = 1 NO-LOBS NO-ERROR.
+
+
+--------------------------------------------------------------------------------
+
+

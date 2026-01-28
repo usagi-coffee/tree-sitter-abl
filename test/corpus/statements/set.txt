@@ -87,3 +87,46 @@ SET field1 FORMAT "x(10)" WHEN ok
     (set_item)
     (editing_phrase
       (readkey_statement))))
+
+================================================================================
+SET - reference snippets and variants
+================================================================================
+
+FOR EACH Item:
+DISPLAY Item.ItemNum.
+SET Item.ItemName Item.OnHand Item.Allocated Item.Price.
+END.
+
+FOR EACH Customer:
+DISPLAY Customer.CustNum Customer.Name Customer.CreditLimit.
+SET Customer.Name Customer.CreditLimit
+VALIDATE(Customer.CreditLimit > 0, "Invalid credit limit.")
+HELP "Enter a positive credit-limit.".
+REPEAT:
+CREATE Order.
+Order.CustNum = Customer.CustNum.
+SET Order.OrderNum Order.ShipDate VALIDATE(Order.ShipDate > TODAY,
+"Ship date too early.").
+END.
+END.
+
+DEFINE VARIABLE s-com AS CHARACTER NO-UNDO FORMAT "x(40)" EXTENT 5.
+FORM "Shipped
+:" Order.ShipDate AT 13 SKIP
+"Misc Info :" Order.Instructions AT 13 SKIP(1)
+"Order Comments :" s-com AT 1
+WITH FRAME o-com CENTERED NO-LABELS TITLE "Shipping Information".
+FOR EACH Customer NO-LOCK, EACH Order OF Customer:
+DISPLAY Customer.CustNum Customer.Name Order.OrderNum
+Order.OrderDate Order.PromiseDate WITH FRAME order-hdr CENTERED.
+UPDATE Order.ShipDate Order.Instructions TEXT(s-com)
+WITH FRAME o-com.
+s-com = "".
+END.
+
+SET STREAM-HANDLE hS field1 SPACE(2) SKIP(1) ^ GO-ON(F2 F3).
+SET Customer EXCEPT Comments WITH FRAME fCust NO-ERROR.
+
+--------------------------------------------------------------------------------
+
+

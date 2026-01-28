@@ -19,3 +19,33 @@ INPUT STREAM sIn THROUGH VALUE(cmd) ECHO.
     (stream_phrase
       name: (identifier))
     (identifier)))
+
+================================================================================
+INPUT THROUGH - Reference snippets
+================================================================================
+
+DEFINE VARIABLE process-id AS CHARACTER NO-UNDO.
+DEFINE VARIABLE dir-path AS CHARACTER NO-UNDO VIEW-AS EDITOR SIZE 60 BY 10.
+INPUT THROUGH echo $$ $PATH NO-ECHO.
+SET process-id dir-path WITH FRAME indata NO-BOX NO-LABELS.
+DISPLAY process-id dir-path FORMAT "x(70)".
+INPUT CLOSE.
+
+DEFINE VARIABLE dir-name AS CHARACTER NO-UNDO FORMAT "x(64)".
+DEFINE VARIABLE fn AS CHARACTER NO-UNDO FORMAT "x(32)".
+FORM fn WITH DOWN FRAME dir-list.
+INPUT THROUGH pwd NO-ECHO.
+SET dir-name.
+INPUT CLOSE.
+fn:LABEL IN FRAME dir-list = dir-name.
+INPUT THROUGH ls NO-ECHO.
+REPEAT:
+  SET fn WITH NO-BOX NO-LABELS FRAME indata.
+  DISPLAY fn VIEW-AS TEXT WITH FRAME dir-list.
+  DOWN WITH FRAME dir-list.
+END.
+INPUT CLOSE.
+
+--------------------------------------------------------------------------------
+
+

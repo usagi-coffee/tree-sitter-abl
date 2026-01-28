@@ -582,3 +582,37 @@ FUNCTION GetCustomer RETURNS CHARACTER (INPUT custNum AS INTEGER) IN hPortType.
         type: (identifier)))
     (in_phrase
       context: (identifier))))
+
+================================================================================
+FUNCTION - Reference snippets
+================================================================================
+
+FUNCTION doubler RETURNS INTEGER (INPUT parm1 AS INTEGER):
+  RETURN (2 * parm1).
+END FUNCTION.
+
+FUNCTION doubler RETURNS INTEGER (INPUT parm1 AS INTEGER) FORWARD.
+DISPLAY "doubler(0)=" doubler(0).
+DISPLAY "doubler(1)=" doubler(1).
+DISPLAY "doubler(2)=" doubler(2).
+FUNCTION doubler RETURNS INTEGER (INPUT parm1 AS INTEGER):
+  RETURN (2 * parm1).
+END FUNCTION.
+
+DEFINE VARIABLE myhand AS HANDLE NO-UNDO.
+FUNCTION doubler RETURNS INTEGER (INPUT parm1 AS INTEGER) IN myhand.
+RUN src\prodoc\langref\r-udfdef.p PERSISTENT SET myhand.
+DISPLAY "doubler(0)=" doubler(0) SKIP
+  "doubler(1)=" doubler(1) SKIP
+  "doubler(17)=" doubler(17) SKIP.
+DELETE PROCEDURE myhand.
+
+FUNCTION fact RETURNS INTEGER (INPUT val AS INTEGER):
+  IF val LT 0 THEN RETURN 0.
+  IF val LE 1 THEN RETURN 1.
+  RETURN val * fact(val - 1).
+END.
+
+--------------------------------------------------------------------------------
+
+

@@ -19,3 +19,77 @@ END.
       (put_statement
         value: (string_literal)
         (skip)))))
+
+================================================================================
+CATCH - Reference snippets and CLASS
+================================================================================
+
+DO ON ERROR UNDO, LEAVE:
+  FIND Customer WHERE CustNum = 5000.
+  CATCH eSysError AS Progress.Lang.SysError:
+    MESSAGE eSysError:GetMessage(1) VIEW-AS ALERT-BOX.
+  END CATCH.
+END.
+
+DO ON ERROR UNDO, LEAVE:
+  FIND FIRST Customer WHERE CustNum = 6000.
+  CATCH eError AS CLASS Progress.Lang.Error:
+    MESSAGE eError:GetMessage(1).
+  END CATCH.
+END.
+
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (do_block
+    (on_error_phrase
+      (undo_phrase))
+    (body
+      (find_statement
+        (identifier)
+        (where_phrase
+          (binary_expression
+            (identifier)
+            (number_literal))))
+      (catch_statement
+        (identifier)
+        (qualified_name
+          (identifier)
+          (identifier)
+          (identifier))
+        (body
+          (message_statement
+            (function_call
+              (object_access
+                (identifier)
+                (identifier))
+              (arguments
+                (argument
+                  (number_literal))))
+            (view_as_phrase))))))
+  (do_block
+    (on_error_phrase
+      (undo_phrase))
+    (body
+      (find_statement
+        (identifier)
+        (where_phrase
+          (binary_expression
+            (identifier)
+            (number_literal))))
+      (catch_statement
+        (identifier)
+        (qualified_name
+          (identifier)
+          (identifier)
+          (identifier))
+        (body
+          (message_statement
+            (function_call
+              (object_access
+                (identifier)
+                (identifier))
+              (arguments
+                (argument
+                  (number_literal))))))))))

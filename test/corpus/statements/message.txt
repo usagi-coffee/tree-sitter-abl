@@ -296,3 +296,45 @@ MESSAGE "Enter customer:" UPDATE cNum LIKE Customer.CustNum.
       like: (qualified_name
         left: (identifier)
         right: (identifier)))))
+
+================================================================================
+MESSAGE - Reference snippets
+================================================================================
+
+REPEAT:
+  PROMPT-FOR Customer.CustNum.
+  FIND Customer USING Customer.CustNum NO-ERROR.
+  IF NOT AVAILABLE Customer THEN DO:
+    MESSAGE "Customer with CustNum " INPUT Customer.CustNum
+      " does not exist. Please try another".
+    UNDO, RETRY.
+  END.
+  ELSE
+    DISPLAY Customer.Name Customer.SalesRep.
+END.
+
+DEFINE VARIABLE cust-list AS CHARACTER NO-UNDO
+  VIEW-AS SELECTION-LIST SINGLE SIZE 50 BY 10 LABEL "Customers".
+DEFINE VARIABLE ok-status AS LOGICAL NO-UNDO.
+FORM cust-list WITH FRAME sel-frame.
+ON DEFAULT-ACTION OF cust-list DO:
+  MESSAGE "You have chosen to delete" cust-list:SCREEN-VALUE + "." SKIP(1)
+    "Do you really want to delete this customer?"
+    VIEW-AS ALERT-BOX QUESTION BUTTONS YES-NO-CANCEL
+    TITLE "" UPDATE lChoice AS LOGICAL.
+  CASE lChoice:
+    WHEN TRUE THEN DO:
+      FIND Customer WHERE Customer.Name = cust-list:SCREEN-VALUE EXCLUSIVE-LOCK.
+      DELETE Customer.
+    END.
+    WHEN FALSE THEN DO:
+      MESSAGE "Deletion canceled." VIEW-AS ALERT-BOX INFORMATION BUTTONS OK.
+      RETURN NO-APPLY.
+    END.
+    OTHERWISE STOP.
+  END CASE.
+END.
+
+--------------------------------------------------------------------------------
+
+

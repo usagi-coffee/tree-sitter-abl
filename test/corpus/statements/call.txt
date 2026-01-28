@@ -19,3 +19,33 @@ CALL updateRecord iId cName dDate.
     argument: (identifier)
     argument: (identifier)
     argument: (identifier)))
+
+================================================================================
+CALL - argument expressions
+================================================================================
+
+CALL myRoutine 1 "arg" TODAY.
+CALL runCalc (a + b) func(arg1, arg2).
+
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (call_statement
+    (identifier)
+    (number_literal)
+    (string_literal)
+    (identifier))
+  (call_statement
+    (identifier)
+    (parenthesized_expression
+      (binary_expression
+        (identifier)
+        (identifier)))
+    (function_call
+      (identifier)
+      (arguments
+        (argument
+          (identifier))
+        (argument
+          (identifier))))))

@@ -11,3 +11,19 @@ NEXT outer_loop.
   (next_statement)
   (next_statement
     label: (identifier)))
+
+================================================================================
+NEXT - Reference snippet
+================================================================================
+
+PROMPT-FOR Customer.SalesRep LABEL "Enter salesman initials"
+  WITH SIDE-LABELS CENTERED.
+FOR EACH Customer:
+  IF Customer.SalesRep <> INPUT Customer.SalesRep THEN NEXT.
+  DISPLAY Customer.CustNum Customer.Name Customer.City Customer.State
+    WITH CENTERED USE-TEXT.
+END.
+
+--------------------------------------------------------------------------------
+
+

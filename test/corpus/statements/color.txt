@@ -53,3 +53,32 @@ COLOR 7 PROMPT 3 field1 WITH FRAME f1.
     field: (identifier)
     (frame_phrase
       frame: (identifier))))
+
+================================================================================
+COLOR - Reference snippet and PROMPT form
+================================================================================
+
+COLOR DISPLAY VALUE(hilite) Item.ItemNum Item.OnHand.
+COLOR PROMPT INPUT field1 field2 WITH FRAME f1.
+
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (color_statement
+    (color_phrase
+      (identifier))
+    (qualified_name
+      (identifier)
+      (identifier))
+    (qualified_name
+      (identifier)
+      (identifier)))
+  (color_statement
+    (color_phrase
+      (identifier))
+    (identifier)
+    (identifier)
+    (identifier)
+    (frame_phrase
+      (identifier))))

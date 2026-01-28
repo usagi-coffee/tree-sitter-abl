@@ -108,3 +108,51 @@ UPDATE "Header" TO 30 Customer.Name.
       field: (qualified_name
         left: (identifier)
         right: (identifier)))))
+
+================================================================================
+UPDATE - reference snippets
+================================================================================
+
+FOR EACH Customer:
+UPDATE Customer.Name Customer.Address Customer.City Customer.State
+Customer.Country.
+END.
+
+FOR EACH Customer:
+UPDATE Customer.Name
+Customer.CreditLimit VALIDATE(Customer.CreditLimit < 500000, "Too high")
+HELP "Enter CreditLimit < 500000".
+FOR EACH Order OF Customer:
+DISPLAY Order.OrderNum.
+UPDATE Order.PromiseDate Order.ShipDate VALIDATE(Order.ShipDate > TODAY,
+"Ship date must be later than today").
+END.
+END.
+
+REPEAT:
+PROMPT-FOR Customer.CustNum.
+FIND Customer USING Customer.CustNum.
+UPDATE Customer.Name Customer.Address Customer.City Customer.State
+Customer.Country WITH 1 COLUMN 1 DOWN.
+END.
+
+DEFINE VARIABLE s-com AS CHARACTER NO-UNDO FORMAT "x(40)" EXTENT 5.
+FORM
+"Shipped
+:" order.ship-date AT 13 SKIP
+"Misc Info :" order.instructions AT 13 SKIP(1)
+"Order Comments :" s-com AT 1
+WITH FRAME o-com CENTERED NO-LABELS TITLE "Shipping Information".
+FOR EACH Customer NO-LOCK, EACH Order OF Customer:
+DISPLAY Customer.CustNum Customer.Name Order.OrderNum Order.OrderDate
+Order.PromiseDate WITH FRAME order-hdr CENTERED.
+UPDATE Order.ShipDate Order.Instructions TEXT(s-com) WITH FRAME o-com.
+s-com = "".
+END.
+
+UPDATE Customer EXCEPT Comments WITH FRAME fCust.
+UPDATE field1 SPACE(2) SKIP(1) ^.
+
+--------------------------------------------------------------------------------
+
+

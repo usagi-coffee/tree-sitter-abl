@@ -12,6 +12,14 @@ FOR EACH Customer NO-LOCK:
           Customer.Balance (TOTAL MAXIMUM MINIMUM AVERAGE).
 END.
 
+FOR EACH Customer NO-LOCK BREAK BY Customer.SalesRep BY Customer.Country:
+  ACCUMULATE Customer.Balance (TOTAL BY Customer.SalesRep BY Customer.Country).
+END.
+
+FOR EACH Item NO-LOCK:
+  ACCUMULATE Item.OnHand * Item.Price (SUB-TOTAL SUB-COUNT SUB-AVERAGE).
+END.
+
 --------------------------------------------------------------------------------
 
 (source_code
@@ -64,4 +72,55 @@ END.
           (aggregate_item
             operation: (aggregate_operation))
           (aggregate_item
-            operation: (aggregate_operation)))))))
+            operation: (aggregate_operation))))))
+  (for_each_statement
+    (for_record_list
+      (for_record
+        table: (identifier)
+        (no_lock)
+        (break_by
+          (qualified_name
+            left: (identifier)
+            right: (identifier))
+          (qualified_name
+            left: (identifier)
+            right: (identifier)))))
+    (body
+      (accumulate_statement
+        (accumulate_item
+          value: (qualified_name
+            left: (identifier)
+            right: (identifier))
+          aggregate: (aggregate_phrase
+            (aggregate_item
+              operation: (aggregate_operation)
+              (by_phrase
+                group: (qualified_name
+                  left: (identifier)
+                  right: (identifier)))
+              (by_phrase
+                group: (qualified_name
+                  left: (identifier)
+                  right: (identifier)))))))))
+  (for_each_statement
+    (for_record_list
+      (for_record
+        table: (identifier)
+        (no_lock)))
+    (body
+      (accumulate_statement
+        (accumulate_item
+          value: (binary_expression
+            (qualified_name
+              left: (identifier)
+              right: (identifier))
+            (qualified_name
+              left: (identifier)
+              right: (identifier)))
+          aggregate: (aggregate_phrase
+            (aggregate_item
+              operation: (aggregate_operation))
+            (aggregate_item
+              operation: (aggregate_operation))
+            (aggregate_item
+              operation: (aggregate_operation))))))))

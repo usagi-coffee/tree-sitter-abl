@@ -159,3 +159,34 @@ DEFINE WORK-TABLE wtCustomer LIKE Customer NO-UNDO
     (work_table_index
       name: (identifier)
       field: (identifier))))
+
+================================================================================
+WORK-TABLE - reference snippet
+================================================================================
+
+DEFINE WORK-TABLE showsales
+FIELD region LIKE SaleRrep.Region LABEL "Region"
+FIELD state LIKE Customer.State LABEL "St"
+FIELD tot-sales LIKE Customer.Balance COLUMN-LABEL "Total!Sales".
+FOR EACH Customer, SalesRep OF Customer BREAK BY Customer.State:
+ACCUMULATE Customer.Balance (TOTAL BY Customer.State).
+IF LAST-OF(Customer.State) THEN DO:
+CREATE showsales.
+showsales.state = Customer.State.
+showsales.tot-sales = ACCUM TOTAL BY Customer.State Customer.Balance.
+showsales.region = SalesRep.Region.
+END.
+END.
+FOR EACH showsales BREAK BY showsales.region BY showsales.state:
+IF FIRST-OF(showsales.region) THEN
+DISPLAY showsales.region.
+DISPLAY showsales.state tot-sales (TOTAL BY showsales.region).
+END.
+
+DEFINE NEW SHARED WORK-TABLE wtShared FIELD f1 AS INTEGER.
+DEFINE SHARED WORK-TABLE wtShared FIELD f1 AS INTEGER.
+DEFINE PRIVATE WORK-TABLE wtPrivate FIELD f1 AS INTEGER.
+
+--------------------------------------------------------------------------------
+
+

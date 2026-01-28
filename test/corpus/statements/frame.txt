@@ -591,3 +591,91 @@ DEF FRAME frame field1.
   (frame_definition
     name: (identifier)
     field: (identifier)))
+
+================================================================================
+FRAME - Reference snippets
+================================================================================
+
+DEFINE VARIABLE bal-avail LIKE Customer.Balance COLUMN-LABEL "Available!Credit" NO-UNDO.
+DEFINE FRAME cust-bal
+  Customer.CustNum
+  Customer.Name FORMAT "X(20)"
+  Customer.CreditLimit LABEL "Limit"
+  Customer.Balance
+  bal-avail
+  WITH CENTERED ROW 3 TITLE "Available Customer Credit" USE-TEXT.
+FOR EACH Customer NO-LOCK WITH FRAME cust-bal:
+  DISPLAY
+    Customer.CustNum
+    Customer.Name
+    Customer.CreditLimit
+    Customer.Balance
+    Customer.CreditLimit - Customer.Balance
+    @ bal-avail.
+END.
+
+DEFINE BUTTON b_dtl LABEL "Detail".
+DEFINE BUTTON b_next LABEL "Next".
+DEFINE BUTTON b_quit LABEL "Quit" AUTO-ENDKEY.
+DEFINE FRAME cust-info
+  Customer.CustNum
+  Customer.Name FORMAT "X(20)"
+  Customer.Phone
+  WITH CENTERED ROW 4.
+DEFINE FRAME cust-dtl
+  Customer EXCEPT Customer.CustNum Customer.Name Customer.Phone
+  WITH SIDE-LABELS ROW 9 WIDTH 100.
+DEFINE FRAME butt-frame
+  b_dtl b_next b_quit
+  WITH ROW 1.
+ON CHOOSE OF b_dtl
+  DISPLAY Customer EXCEPT Customer.CustNum Customer.Name Customer.Phone
+  WITH FRAME cust-dtl.
+
+DEFINE NEW SHARED FRAME cust-frame.
+DEFINE NEW SHARED VARIABLE csz AS CHARACTER FORMAT "x(29)".
+DEFINE NEW SHARED BUFFER xcust FOR Customer.
+FOR EACH xcust WHERE xcust.CustNum <= 20:
+  DISPLAY xcust.Name xcust.Phone xcust.Address xcust.SalesRep
+    xcust.City + ", " + xcust.State + " " + xcust.PostalCode @ csz
+    xcust.CreditLimit WITH FRAME cust-frame.
+END.
+
+DEFINE QUERY custq FOR Customer.
+DEFINE BUTTON bprev LABEL "<".
+DEFINE BUTTON bnext LABEL ">".
+DEFINE FRAME cust-fr SKIP(.5)
+  SPACE(8) Customer.Name Customer.CustNum Customer.SalesRep
+  Customer.Comments AT COLUMN 6 ROW 13.5
+  WITH SIDE-LABELS TITLE "Customer Data" SIZE 80 BY 15 VIEW-AS DIALOG-BOX.
+DEFINE FRAME cont-fr SKIP(.5)
+  Customer.Address COLON 17 SKIP
+  Customer.Address2 COLON 17 SKIP
+  Customer.City COLON 17 SKIP
+  Customer.State COLON 17 SKIP
+  Customer.PostalCode COLON 17 SKIP
+  Customer.Country COLON 17 SKIP
+  Customer.Contact COLON 17 SKIP
+  Customer.Phone COLON 17
+  WITH SIDE-LABELS TITLE "Contact Informaion" SIZE 40 BY 10 AT COLUMN 1 ROW 3.
+DEFINE FRAME ctrl-fr SKIP(.12)
+  SPACE(4) bprev bnext
+  WITH TITLE "PREVIOUS/NEXT" SIZE 15 BY 2 AT COLUMN 53 ROW 10.5.
+DEFINE FRAME acct-fr SKIP(.5)
+  Customer.Balance COLON 15 SKIP
+  Customer.CreditLimit COLON 15 SKIP
+  Customer.Discount COLON 15 SKIP
+  Customer.Terms COLON 15
+  WITH SIDE-LABELS TITLE "Account Information"
+  SIZE 38.85 BY 6 AT COLUMN 41 ROW 3.
+FRAME cont-fr:FRAME = FRAME cust-fr:HANDLE.
+FRAME acct-fr:FRAME = FRAME cust-fr:HANDLE.
+FRAME ctrl-fr:FRAME = FRAME cust-fr:HANDLE.
+OPEN QUERY custq PRESELECT EACH Customer BY Customer.Name.
+GET FIRST custq.
+ENABLE ALL WITH FRAME ctrl-fr.
+WAIT-FOR WINDOW-CLOSE OF FRAME cust-fr.
+
+--------------------------------------------------------------------------------
+
+

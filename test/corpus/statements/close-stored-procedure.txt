@@ -22,3 +22,14 @@ CLOSE STORED-PROCEDURE hProc iStatus = PROC-STATUS WHERE PROC-HANDLE = hHandle.
     procedure: (identifier)
     status_var: (identifier)
     handle: (identifier)))
+
+================================================================================
+CLOSE STORED-PROCEDURE - Reference snippet
+================================================================================
+
+CLOSE STORED-PROC p1 st = PROC-STATUS WHERE PROC-HANDLE = h.
+
+
+--------------------------------------------------------------------------------
+
+

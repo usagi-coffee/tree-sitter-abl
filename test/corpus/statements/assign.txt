@@ -356,3 +356,39 @@ mixed = [1, "test", ?, true].
       (string_literal)
       (null_literal)
       (boolean_literal))))
+
+================================================================================
+ASSIGN with qualified WHEN AVAILABLE and NO-ERROR
+================================================================================
+
+ASSIGN
+  a = 1
+  Customer.Name = "John" WHEN AVAILABLE sports.Customer
+  b = 2
+NO-ERROR.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assign_statement
+    (assign_pair
+      left: (identifier)
+      right: (number_literal))
+    (assign_pair
+      left: (qualified_name
+        left: (identifier)
+        right: (identifier))
+      right: (string_literal)
+      (when_available_phrase
+        (qualified_name
+          left: (identifier)
+          right: (identifier))))
+    (assign_pair
+      left: (identifier)
+      right: (number_literal))
+    (no_error)))
+
+
+--------------------------------------------------------------------------------
+
+

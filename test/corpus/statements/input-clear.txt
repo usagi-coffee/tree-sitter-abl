@@ -8,3 +8,55 @@ INPUT CLEAR.
 
 (source_code
   (input_clear_statement))
+
+================================================================================
+INPUT CLEAR - Reference snippet
+================================================================================
+
+READKEY.
+IF LASTKEY = KEYCODE("1") THEN RUN ordentry.
+ELSE IF LASTKEY = KEYCODE("2") THEN RUN receive.
+ELSE IF LASTKEY = KEYCODE("3") THEN QUIT.
+ELSE DO:
+  MESSAGE "Sorry, that is not a valid choice".
+  INPUT CLEAR.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (readkey_statement)
+  (if_statement
+    (binary_expression
+      (identifier)
+      (function_call
+        (identifier)
+        (arguments
+          (argument
+            (string_literal)))))
+    (run_statement
+      (identifier))
+    (if_statement
+      (binary_expression
+        (identifier)
+        (function_call
+          (identifier)
+          (arguments
+            (argument
+              (string_literal)))))
+      (run_statement
+        (identifier))
+      (if_statement
+        (binary_expression
+          (identifier)
+          (function_call
+            (identifier)
+            (arguments
+              (argument
+                (string_literal)))))
+        (quit_statement)
+        (do_block
+          (body
+            (message_statement
+              (string_literal))
+            (input_clear_statement)))))))

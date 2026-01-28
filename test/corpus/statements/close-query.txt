@@ -12,3 +12,16 @@ CLOSE QUERY my-query.
     query: (identifier))
   (close_query_statement
     query: (identifier)))
+
+================================================================================
+CLOSE QUERY - Reference snippet
+================================================================================
+
+CLOSE QUERY q-cust.
+
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (close_query_statement
+    (identifier)))

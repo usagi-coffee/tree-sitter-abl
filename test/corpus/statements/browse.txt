@@ -673,3 +673,40 @@ DEFINE BROWSE bPolicy QUERY qPolicy
     (width_option
       (number_literal))
     (multiple_option)))
+
+================================================================================
+BROWSE - Additional column color/font options
+================================================================================
+
+DEFINE BROWSE bColors QUERY qColors DISPLAY
+  ttOrder.Amount COLUMN-FONT 4 COLUMN-FGCOLOR 12
+  ttOrder.Status LABEL-FGCOLOR 6 LABEL-PFCOLOR 9
+WITH DOWN 5.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (browse_definition
+    name: (identifier)
+    query: (identifier)
+    column: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (column_font_option
+      (number_literal))
+    (column_fgcolor_option
+      (number_literal))
+    column: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (label_fgcolor_option
+      (number_literal))
+    (label_pfcolor_option
+      (number_literal))
+    (down_option
+      (number_literal))))
+
+
+--------------------------------------------------------------------------------
+
+

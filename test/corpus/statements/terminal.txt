@@ -36,3 +36,23 @@ TERMINAL "CO80".
     terminal: (string_literal))
   (terminal_statement
     terminal: (string_literal)))
+
+===============================================================================
+TERMINAL - reference snippet
+===============================================================================
+
+FOR EACH Customer NO-LOCK:
+DISPLAY Customer.
+END.
+TERMINAL = "wy60w".
+OUTPUT TO TERMINAL PAGED.
+FOR EACH Customer NO-LOCK:
+DISPLAY Customer WITH WIDTH 132.
+END.
+OUTPUT CLOSE.
+TERMINAL = "wy60".
+DISPLAY "Back to 80 columns." WITH CENTERED.
+
+-------------------------------------------------------------------------------
+
+

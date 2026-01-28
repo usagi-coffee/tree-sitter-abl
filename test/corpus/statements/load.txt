@@ -35,3 +35,27 @@ LOAD "myapp.r" DIR "/usr/lib" APPLICATION "app1" NEW.
     file: (string_literal)
     dir: (string_literal)
     app: (string_literal)))
+
+================================================================================
+LOAD - Reference snippet
+================================================================================
+
+LOAD "myenv".
+LOAD "myenv" DIR "C:\\temp".
+LOAD "myenv" NEW BASE-KEY "INI" NO-ERROR.
+LOAD "myenv" BASE-KEY "HKEY_CURRENT_USER".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (load_statement
+    (string_literal))
+  (load_statement
+    (string_literal)
+    (string_literal))
+  (load_statement
+    (string_literal)
+    (string_literal))
+  (load_statement
+    (string_literal)
+    (string_literal)))

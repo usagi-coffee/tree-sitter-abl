@@ -14,3 +14,20 @@ ROUTINE-LEVEL ON ERROR UNDO, THROW.
   (error_scope_statement
     (error_scope_type)
     (on_error_phrase)))
+
+================================================================================
+ERROR SCOPE - Reference snippets
+================================================================================
+
+BLOCK-LEVEL ON ERROR UNDO, THROW.
+ROUTINE-LEVEL ON ERROR UNDO, THROW.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (error_scope_statement
+    (error_scope_type)
+    (on_error_phrase))
+  (error_scope_statement
+    (error_scope_type)
+    (on_error_phrase)))

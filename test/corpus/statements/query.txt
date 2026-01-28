@@ -394,3 +394,50 @@ DEFINE QUERY qComplex FOR Customer FIELDS (CustNum, Name)
         (identifier)
         (identifier)))
     cache: (number_literal)))
+
+================================================================================
+QUERY DEFINITION - reference snippets
+================================================================================
+
+DEFINE QUERY q-salesrep FOR SalesRep.
+DEFINE QUERY q-cust FOR Customer.
+DEFINE BROWSE cust-brws QUERY q-cust
+DISPLAY Customer.CustNum Customer.Name Customer.Phone
+WITH 5 DOWN TITLE "Customer Information".
+DEFINE BUTTON b_next LABEL "Next".
+DEFINE BUTTON b_quit LABEL "Quit" AUTO-ENDKEY.
+FORM
+SalesRep.SalesRep SalesRep.RepName SalesRep.Region SalesRep.MonthQuota
+WITH FRAME rep-info SIDE-LABELS TITLE "Sales Rep. Info".
+FORM b_next space(5) b_quit
+WITH FRAME butt-frame COLUMN 60.
+ON CHOOSE OF b_next DO:
+GET NEXT q-salesrep.
+IF NOT AVAILABLE SalesRep THEN GET FIRST q-salesrep.
+RUN disp-rep.
+END.
+OPEN QUERY q-salesrep FOR EACH SalesRep NO-LOCK.
+GET FIRST q-salesrep.
+RUN disp-rep.
+ENABLE cust-brws WITH FRAME cust-info.
+ENABLE ALL WITH FRAME butt-frame.
+WAIT-FOR WINDOW-CLOSE OF CURRENT-WINDOW.
+PROCEDURE disp-rep:
+DISPLAY SalesRep.SalesRep Salesrep.RepName SalesRep.Region
+SalesRep.MonthQuota
+WITH FRAME rep-info CENTERED SIDE-LABELS TITLE "Sales Rep. Info".
+OPEN QUERY q-cust FOR EACH Customer OF SalesRep NO-LOCK.
+END PROCEDURE.
+
+DEFINE VARIABLE h AS HANDLE NO-UNDO.
+DEFINE QUERY q FOR Customer RCODE-INFORMATION.
+h = QUERY q:HANDLE.
+OPEN QUERY q FOR EACH Customer BY Customer.Name.
+MESSAGE h:INDEX-INFORMATION.
+
+DEFINE QUERY qEmpty FOR Customer FIELDS ().
+DEFINE QUERY qExceptAll FOR Customer EXCEPT ().
+
+--------------------------------------------------------------------------------
+
+

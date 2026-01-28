@@ -22,3 +22,47 @@ REPOSITION qCust TO ROWID rCust.
   (reposition_statement
     query: (identifier)
     rowid: (identifier)))
+
+================================================================================
+REPOSITION - reference snippet and variants
+================================================================================
+
+DEFINE VARIABLE num AS INTEGER NO-UNDO INITIAL 1.
+DEFINE QUERY q-order FOR Customer, Order SCROLLING.
+DEFINE BUTTON b_quit LABEL "Quit".
+DEFINE BUTTON b_frwd LABEL "FORWARD".
+DEFINE BUTTON b_back LABEL "BACKWARD".
+FORM b_frwd b_back b_quit
+WITH FRAME butt-frame ROW 1.
+ON CHOOSE OF b_back, b_frwd DO:
+PROMPT-FOR num LABEL "Records To Skip"
+WITH FRAME pos-info CENTERED ROW 5 overlay.
+HIDE FRAME pos-info NO-PAUSE.
+IF SELF:LABEL = "BACKWARD" THEN
+REPOSITION q-order BACKWARDS INPUT num + 1.
+ELSE
+REPOSITION q-order FORWARDS INPUT num - 1.
+RUN getone.
+END.
+OPEN QUERY q-order FOR EACH Customer NO-LOCK,
+EACH Order OF Customer NO-LOCK.
+RUN getone.
+ENABLE b_back b_frwd b_quit WITH FRAME butt-frame.
+WAIT-FOR CHOOSE OF b_quit OR WINDOW-CLOSE OF CURRENT-WINDOW.
+PROCEDURE getone:
+GET NEXT q-order.
+IF NOT AVAILABLE Customer THEN DO:
+REPOSITION q-order BACKWARDS 1.
+GET NEXT q-order.
+END.
+DISPLAY Customer.CustNum Customer.Name SKIP
+Order.OrderNum Order.OrderDate
+WITH FRAME order-info CENTERED ROW 5 SIDE-LABELS OVERLAY.
+END PROCEDURE.
+
+REPOSITION qCust TO RECID rCust NO-ERROR.
+REPOSITION qCust TO ROWID rTop, rChild FOR TENANT tenantId NO-ERROR.
+
+--------------------------------------------------------------------------------
+
+

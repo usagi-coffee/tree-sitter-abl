@@ -28,3 +28,47 @@ ON ASSIGN OF Customer.Name OLD VALUE old-name REVERT.
       right: (identifier))
     (referencing_phrase
       old_field: (identifier))))
+
+================================================================================
+ON - Reference snippets
+================================================================================
+
+ON WRITE OF Customer NEW new-cust OLD old-cust DO:
+  IF new-cust.City <> old-cust.City AND
+     new-cust.PostalCode = old-cust.PostalCode THEN DO:
+    MESSAGE "Must update postal code, too.".
+    RETURN ERROR.
+  END.
+END.
+FOR EACH Customer:
+  UPDATE Customer.
+END.
+
+DEFINE BUTTON b_next LABEL "Next".
+DEFINE BUTTON b_prev LABEL "Previous".
+DEFINE BUTTON b_quit LABEL "Quit".
+DEFINE FRAME butt-frame b_next b_prev WITH CENTERED ROW SCREEN-LINES - 1.
+DEFINE FRAME info
+  Customer.CustNum Customer.Name
+  b_quit AT ROW-OF Customer.CustNum + 2 COLUMN-OF Customer.CustNum + 18
+  WITH CENTERED TITLE "Customers" ROW 2 1 COL.
+ON CHOOSE OF b_next, b_prev DO:
+  IF SELF:LABEL = "Next" THEN
+    FIND NEXT Customer NO-LOCK.
+  ELSE
+    FIND PREV Customer NO-LOCK.
+  DISPLAY Customer.CustNum Customer.Name WITH FRAME info.
+END.
+ENABLE b_next b_prev WITH FRAME butt-frame.
+ENABLE b_quit WITH FRAME info.
+WAIT-FOR END-ERROR OF FRAME butt-frame OR
+  CHOOSE OF b_quit IN FRAME info FOCUS b_next IN FRAME butt-frame.
+
+ON F1 GO.
+ON F2 HELP.
+ON CTRL-X BELL.
+ON F5 ENDKEY.
+
+--------------------------------------------------------------------------------
+
+

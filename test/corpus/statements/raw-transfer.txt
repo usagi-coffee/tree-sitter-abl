@@ -22,3 +22,24 @@ RAW-TRANSFER FIELD source TO dest NO-ERROR.
   (raw_transfer_statement
     source_field: (identifier)
     target_field: (identifier)))
+
+================================================================================
+RAW-TRANSFER - reference example and variants
+================================================================================
+
+TRIGGER PROCEDURE FOR REPLICATION-CREATE OF Customer.
+CREATE Replication-Log.
+ASSIGN
+Replication-Log.Taskid = DBTASKID(LDBNAME(BUFFER Replication-Log))
+Replication-Log.Table = 'Customer'
+Replication-Log.Action = 'CREATE'.
+RAW-TRANSFER Customer TO Replication-Log.Record.
+
+RAW-TRANSFER BUFFER srcBuf TO FIELD rawField.
+RAW-TRANSFER FIELD rawField TO BUFFER tgtBuf.
+RAW-TRANSFER BUFFER srcBuf TO BUFFER tgtBuf.
+RAW-TRANSFER BUFFER srcBuf TO FIELD rawField NO-ERROR.
+
+--------------------------------------------------------------------------------
+
+

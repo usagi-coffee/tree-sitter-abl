@@ -18,3 +18,41 @@ SCROLL FROM-CURRENT DOWN WITH FRAME myframe.
   (scroll_statement
     (frame_phrase
       frame: (identifier))))
+
+================================================================================
+SCROLL - reference snippet
+================================================================================
+
+DEFINE VARIABLE ans AS CHARACTER NO-UNDO FORMAT "x".
+FORM Customer.CustNum Customer.Name Customer.CreditLimit
+WITH FRAME cust CENTERED 10 DOWN.
+FORM
+"1 - scroll up" SKIP
+"2 - scroll from-current up" SKIP
+"3 - scroll down" SKIP
+"4 - scroll from-current down" SKIP
+"5 - scroll from-current "
+WITH FRAME instruct CENTERED TITLE "Instructions:".
+VIEW FRAME cust.
+REPEAT WHILE FRAME-LINE(cust) <= FRAME-DOWN(cust):
+FIND NEXT Customer NO-LOCK.
+DISPLAY Customer.CustNum Customer.Name Customer.CreditLimit
+WITH FRAME cust TITLE "Customers".
+DOWN WITH FRAME cust.
+END.
+UP FRAME-DOWN(cust) / 2 WITH FRAME cust.
+VIEW FRAME instruct.
+REPEAT WITH FRAME cust:
+CHOOSE ROW Customer.Name KEYS ans AUTO-RETURN NO-ERROR WITH FRAME cust.
+IF ans = "1" THEN SCROLL UP.
+ELSE IF ans = "2" THEN SCROLL FROM-CURRENT UP.
+ELSE IF ans = "3" THEN SCROLL DOWN.
+ELSE IF ans = "4" THEN SCROLL FROM-CURRENT DOWN.
+ELSE IF ans = "5" THEN SCROLL FROM-CURRENT.
+VIEW FRAME cust.
+ans = "".
+END.
+
+--------------------------------------------------------------------------------
+
+

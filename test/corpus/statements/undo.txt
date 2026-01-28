@@ -21,3 +21,28 @@ UNDO, RETURN NO-APPLY.
   (undo_statement
     error_value: (string_literal))
   (undo_statement))
+
+================================================================================
+UNDO - reference snippet and variants
+================================================================================
+
+FIND Customer 1000 NO-ERROR.
+IF ERROR-STATUS:ERROR THEN
+UNDO, THROW NEW Progress.Lang.AppError("Can't find this customer", 550).
+MESSAGE Customer.CustNum.
+CATCH eAppError AS Progress.Lang.AppError:
+MESSAGE eAppError:GetMessage(1) eAppError:GetMessageNum(1).
+END CATCH.
+
+main: REPEAT:
+DO TRANSACTION:
+UNDO, NEXT main.
+END.
+END.
+
+UNDO, LEAVE main.
+UNDO, RETURN ERROR errObj.
+
+--------------------------------------------------------------------------------
+
+

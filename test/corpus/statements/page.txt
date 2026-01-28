@@ -25,3 +25,21 @@ PAGE STREAM-HANDLE hStream.
   (page_statement
     (stream_phrase
       handle: (identifier))))
+
+===============================================================================
+PAGE - reference snippet
+===============================================================================
+
+DEFINE VARIABLE laststate AS CHARACTER NO-UNDO.
+OUTPUT TO PRINTER.
+FOR EACH Customer NO-LOCK BY Customer.State:
+IF Customer.State <> laststate THEN DO:
+IF laststate <> "" THEN PAGE.
+laststate = Customer.State.
+END.
+DISPLAY Customer.CustNum Customer.Name Customer.Address Customer.City Customer.State.
+END.
+
+--------------------------------------------------------------------------------
+
+

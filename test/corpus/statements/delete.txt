@@ -117,3 +117,18 @@ END.
         (exclusive_lock))
       (delete_statement
         record: (identifier)))))
+
+================================================================================
+DELETE - Reference snippets
+================================================================================
+
+FOR EACH Customer:
+  DELETE Customer.
+END.
+
+DELETE Customer VALIDATE(NOT(CAN-FIND(Order OF Customer)),
+"This Customer has outstanding orders and cannot be deleted.").
+
+--------------------------------------------------------------------------------
+
+

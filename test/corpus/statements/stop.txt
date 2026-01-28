@@ -8,3 +8,32 @@ STOP.
 
 (source_code
   (stop_statement))
+
+================================================================================
+STOP - reference snippets
+================================================================================
+
+DEFINE VARIABLE ans AS LOGICAL NO-UNDO.
+FOR EACH Customer:
+DISPLAY Customer.CustNum Customer.Name.
+UPDATE Customer.CreditLimit.
+ans = FALSE.
+MESSAGE "Stopping now undoes changes to this record.".
+MESSAGE "Do you want to stop now?" UPDATE ans.
+IF ans THEN STOP.
+END.
+
+DEFINE VARIABLE ans AS LOGICAL NO-UNDO.
+FOR EACH Customer ON STOP UNDO, RETRY:
+DISPLAY Customer.CustNum Customer.Name.
+UPDATE Customer.CreditLimit.
+ans = FALSE.
+MESSAGE "Stopping now undoes changes to this record."
+"Do you want to stop now?"
+VIEW-AS ALERT-BOX QUESTION BUTTONS YES-NO UPDATE ans.
+IF ans THEN STOP.
+END.
+
+--------------------------------------------------------------------------------
+
+

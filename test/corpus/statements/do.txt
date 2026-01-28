@@ -404,3 +404,56 @@ END.
     (body
       (display_statement
         (identifier)))))
+
+================================================================================
+DO - Reference snippet
+================================================================================
+
+FOR EACH Customer NO-LOCK:
+  DISPLAY Customer.Name Customer.CreditLimit.
+  PAUSE 3.
+  IF Customer.CreditLimit > 80000 THEN DO:
+    Customer.CreditLimit = 80000.
+    DISPLAY Customer.Name Customer.CreditLimit.
+  END.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (for_each_statement
+    (for_record_list
+      (for_record
+        (identifier)
+        (no_lock)))
+    (body
+      (display_statement
+        (qualified_name
+          (identifier)
+          (identifier))
+        (qualified_name
+          (identifier)
+          (identifier)))
+      (pause_statement
+        (number_literal))
+      (if_statement
+        (binary_expression
+          (qualified_name
+            (identifier)
+            (identifier))
+          (number_literal))
+        (do_block
+          (body
+            (assignment_statement
+              (qualified_name
+                (identifier)
+                (identifier))
+              (assignment_operator)
+              (number_literal))
+            (display_statement
+              (qualified_name
+                (identifier)
+                (identifier))
+              (qualified_name
+                (identifier)
+                (identifier)))))))))

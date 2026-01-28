@@ -19,3 +19,57 @@ GET-KEY-VALUE SECTION "startup" DEFAULT.
     value: (identifier))
   (get_key_value_statement
     section: (string_literal)))
+
+================================================================================
+GET-KEY-VALUE - Reference snippets
+================================================================================
+
+GET-KEY-VALUE SECTION "MYSECTION" KEY "MYKEY" VALUE MYVARIABLE.
+GET-KEY-VALUE SECTION "" KEY "MYKEY" VALUE MYVARIABLE.
+GET-KEY-VALUE SECTION "MYSECTION" KEY "" VALUE MYVARIABLE.
+GET-KEY-VALUE SECTION "MYSECTION" KEY "?" VALUE MYVARIABLE.
+GET-KEY-VALUE SECTION "" KEY "" VALUE MYVARIABLE.
+GET-KEY-VALUE SECTION "" KEY "?" VALUE MYVARIABLE.
+GET-KEY-VALUE SECTION "?" KEY "" VALUE MYVARIABLE.
+GET-KEY-VALUE SECTION "?" KEY "?" VALUE MYVARIABLE.
+GET-KEY-VALUE SECTION "MYAPP" KEY DEFAULT VALUE MYVARIABLE.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (get_key_value_statement
+    (string_literal)
+    (string_literal)
+    (identifier))
+  (get_key_value_statement
+    (string_literal)
+    (string_literal)
+    (identifier))
+  (get_key_value_statement
+    (string_literal)
+    (string_literal)
+    (identifier))
+  (get_key_value_statement
+    (string_literal)
+    (string_literal)
+    (identifier))
+  (get_key_value_statement
+    (string_literal)
+    (string_literal)
+    (identifier))
+  (get_key_value_statement
+    (string_literal)
+    (string_literal)
+    (identifier))
+  (get_key_value_statement
+    (string_literal)
+    (string_literal)
+    (identifier))
+  (get_key_value_statement
+    (string_literal)
+    (string_literal)
+    (identifier))
+  (get_key_value_statement
+    (string_literal)
+    (identifier)
+    (identifier)))

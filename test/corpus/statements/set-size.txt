@@ -10,3 +10,72 @@ SET-SIZE(bufData) = 16.
   (set_size_statement
     buffer: (identifier)
     size: (number_literal)))
+
+================================================================================
+SET-SIZE - reference snippet
+================================================================================
+
+DEFINE VARIABLE ElipRegion AS MEMPTR NO-UNDO.
+ASSIGN
+SET-SIZE(ElipRegion) = 8
+PUT-SHORT(ElipRegion, 1) = 10
+PUT-SHORT(ElipRegion, 3) = 10
+PUT-SHORT(ElipRegion, 5) = 200
+PUT-SHORT(ElipRegion, 7) = 50.
+
+SET-SIZE(ElipRegion) = 0.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    (identifier)
+    (identifier)
+    (no_undo))
+  (assign_statement
+    (assign_pair
+      (function_call
+        (identifier)
+        (arguments
+          (argument
+            (identifier))))
+      (number_literal))
+    (assign_pair
+      (function_call
+        (identifier)
+        (arguments
+          (argument
+            (identifier))
+          (argument
+            (number_literal))))
+      (number_literal))
+    (assign_pair
+      (function_call
+        (identifier)
+        (arguments
+          (argument
+            (identifier))
+          (argument
+            (number_literal))))
+      (number_literal))
+    (assign_pair
+      (function_call
+        (identifier)
+        (arguments
+          (argument
+            (identifier))
+          (argument
+            (number_literal))))
+      (number_literal))
+    (assign_pair
+      (function_call
+        (identifier)
+        (arguments
+          (argument
+            (identifier))
+          (argument
+            (number_literal))))
+      (number_literal)))
+  (set_size_statement
+    (identifier)
+    (number_literal)))

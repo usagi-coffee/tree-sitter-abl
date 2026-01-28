@@ -18,3 +18,22 @@ SET-POINTER-VALUE(pBuffer) = GET-POINTER-VALUE(pSource).
       (arguments
         (argument
           value: (identifier))))))
+
+================================================================================
+SET-POINTER-VALUE - reference snippet
+================================================================================
+
+DEFINE VARIABLE person_struct AS MEMPTR NO-UNDO.
+DEFINE VARIABLE name AS MEMPTR NO-UNDO.
+SET-SIZE(person_struct) = 8.
+RUN person_info (OUTPUT person_struct).
+SET-POINTER-VALUE(name) = GET-LONG(person_struct,5).
+DISPLAY GET-STRING(name,1) FORMAT "x(50)".
+SET-SIZE(person_struct) = 0.
+PROCEDURE person_info EXTERNAL "person.dll" PERSISTENT:
+DEFINE OUTPUT PARAMETER person_struct AS MEMPTR.
+END PROCEDURE.
+
+--------------------------------------------------------------------------------
+
+

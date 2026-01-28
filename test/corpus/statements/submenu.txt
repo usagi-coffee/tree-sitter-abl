@@ -366,3 +366,53 @@ DEF SUB-MENU sub.
     name: (identifier))
   (submenu_definition
     name: (identifier)))
+
+================================================================================
+SUB-MENU - reference snippet
+================================================================================
+
+DEFINE VARIABLE mywin AS HANDLE NO-UNDO.
+DEFINE SUB-MENU myfile
+MENU-ITEM m1 LABEL "Save"
+MENU-ITEM m2 LABEL "Save As"
+MENU-ITEM m3 LABEL "Exit".
+DEFINE SUB-MENU myobjects
+MENU-ITEM m1 LABEL "Circle"
+MENU-ITEM m2 LABEL "Line"
+MENU-ITEM m3 LABEL "Rectangle"
+MENU-ITEM m4 LABEL "Text".
+DEFINE SUB-MENU myedit
+SUB-MENU myobjects LABEL "Add"
+MENU-ITEM e1 LABEL "Delete"
+MENU-ITEM e2 LABEL "Copy".
+DEFINE MENU mybar MENUBAR
+SUB-MENU myfile LABEL "File"
+SUB-MENU myedit LABEL "Edit".
+CREATE WINDOW mywin
+ASSIGN MENUBAR = MENU mybar:HANDLE.
+DEFINE BUTTON b1 LABEL "Text Mode".
+DEFINE BUTTON b2 LABEL "Graphics Mode".
+CURRENT-WINDOW = mywin.
+FORM
+b1 at X 10 Y 120
+b2 at x 120 Y 120
+WITH FRAME x.
+ENABLE b1 b2 WITH FRAME x.
+ON CHOOSE OF b1 IN FRAME x DO:
+MENU-ITEM m1:SENSITIVE IN MENU myobjects = FALSE.
+MENU-ITEM m2:SENSITIVE IN MENU myobjects = FALSE.
+MENU-ITEM m3:SENSITIVE IN MENU myobjects = FALSE.
+MENU-ITEM m4:SENSITIVE IN MENU myobjects = TRUE.
+END.
+ON CHOOSE OF b2 IN FRAME x DO:
+MENU-ITEM m1:SENSITIVE IN MENU myobjects = TRUE.
+MENU-ITEM m2:SENSITIVE IN MENU myobjects = TRUE.
+MENU-ITEM m3:SENSITIVE IN MENU myobjects = TRUE.
+MENU-ITEM m4:SENSITIVE IN MENU myobjects = FALSE.
+END.
+WAIT-FOR CHOOSE OF MENU-ITEM m3 IN MENU myfile.
+DELETE WIDGET mywin.
+
+--------------------------------------------------------------------------------
+
+

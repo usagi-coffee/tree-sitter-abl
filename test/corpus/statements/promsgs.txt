@@ -34,3 +34,26 @@ PROMSGS = cPath + "/" + cFile.
         (identifier)
         (string_literal))
       (identifier))))
+
+===============================================================================
+PROMSGS - reference snippet
+===============================================================================
+
+DEFINE VARIABLE newlang AS CHARACTER NO-UNDO FORMAT "x(16)"
+LABEL "Language".
+DEFINE VARIABLE msgfile AS CHARACTER NO-UNDO.
+SET newlang HELP "Enter the new language for messages.".
+IF newlang = "English" THEN msgfile = "promsgs".
+ELSE msgfile = "prolang/promsgs." + LC(SUBSTRING(newlang, 1, 3)).
+IF SEARCH(msgfile) <> ? THEN DO:
+PROMSGS = msgfile.
+MESSAGE "Messages will now be taken from" PROMSGS.
+END.
+ELSE DO:
+MESSAGE "Cannot find" msgfile.
+UNDO, RETRY.
+END.
+
+--------------------------------------------------------------------------------
+
+

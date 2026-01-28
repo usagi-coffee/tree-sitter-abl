@@ -49,3 +49,51 @@ END.
       (undo_phrase))
     (body
       (leave_statement))))
+
+================================================================================
+REPEAT - reference snippet and options
+================================================================================
+
+DEFINE VARIABLE Selection AS INTEGER NO-UNDO FORMAT "9".
+FORM SKIP(3)
+"0 - Exit" at 32
+"1 - Edit Customer File" at 32
+"2 - List Customer File" at 32
+"3 - Edit Item File" at 32
+"4 - List Item File" at 32
+"Enter Choice" TO 30 Selection AUTO-RETURN
+HEADER "Application Name" "Master Menu" AT 34
+WITH NO-BOX NO-LABELS CENTERED FRAME menu.
+"Company" TO 79
+REPEAT ON ENDKEY UNDO, RETRY:
+UPDATE Selection WITH FRAME menu.
+HIDE FRAME menu.
+CASE(Selection):
+WHEN 0 THEN LEAVE.
+WHEN 1 THEN RUN custedit.p.
+WHEN 2 THEN RUN custrpt.p.
+WHEN 3 THEN RUN itemedit.p.
+WHEN 4 THEN RUN itemrpt.p.
+OTHERWISE DO:
+BELL.
+MESSAGE "Not a valid choice. Try again.".
+END.
+END CASE.
+END.
+
+REPEAT FOR Customer PRESELECT EACH Customer BREAK BY Customer.Name:
+FIND NEXT Customer.
+UPDATE Customer.CustNum.
+END.
+
+REPEAT i = 1 TO 10 BY 2 TRANSACTION STOP-AFTER 5 ON QUIT UNDO, LEAVE:
+DISPLAY i.
+END.
+
+REPEAT QUERY-TUNING (CACHE-SIZE 10 NO-LOOKAHEAD NO-BIND-WHERE):
+DISPLAY "q".
+END.
+
+--------------------------------------------------------------------------------
+
+

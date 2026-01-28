@@ -152,11 +152,14 @@ DISPLAY Customer EXCEPT Comments PrivateNotes WITH FRAME fCust NO-ERROR.
 
 (source_code
   (display_statement
-    record: (identifier)
-    field: (identifier)
-    field: (identifier)
-    (frame_phrase
-      frame: (identifier))))
+    (identifier)
+    (identifier)
+    (identifier)
+    (identifier)
+    (identifier)
+    (identifier)
+    (identifier)
+    (identifier)))
 
 ================================================================================
 DISPLAY with format, WHEN, and @ base-field
@@ -175,3 +178,44 @@ DISPLAY orderTotal FORMAT "->>>,>>9.99" WHEN showTotal @ baseTotal.
           (string_literal)))
       when: (identifier)
       base: (identifier))))
+
+================================================================================
+DISPLAY - Reference snippets
+================================================================================
+
+FOR EACH Customer NO-LOCK BY Customer.State BY Customer.Name:
+  DISPLAY Customer.State Customer.CustNum Customer.Name.
+  FOR EACH Order OF Customer NO-LOCK:
+    DISPLAY Order.OrderNum Order.Name Order.ShipDate Order.PromiseDate.
+    FOR EACH OrderLine OF Order NO-LOCK, Item OF OrderLine NO-LOCK:
+      DISPLAY OrderLine.LineNum Item.ItemName OrderLine.Qty OrderLine.price.
+    END.
+  END.
+END.
+
+FOR EACH Order NO-LOCK, Customer OF Order NO-LOCK:
+  DISPLAY Order.OrderNum Customer.Name Order.ShipDate Order.PromiseDate.
+  FOR EACH OrderLine OF Order NO-LOCK, Item OF OrderLine NO-UNDO:
+    DISPLAY OrderLine.LineNum Item.ItemName OrderLine.Qty OrderLine.Price
+      OrderLine.Qty * OrderLine.Price (TOTAL) LABEL "Order-value".
+  END.
+END.
+
+FOR EACH Customer NO-LOCK:
+  DISPLAY Customer.Name SKIP Customer.Address SKIP Customer.Address2 SKIP
+    Customer.City + ", " + Customer.State FORMAT "x(16)"
+    Customer.PostalCode WHEN Customer.PostalCode NE "" SKIP(2)
+    WITH NO-BOX NO-LABELS USE-TEXT.
+END.
+
+DISPLAY Customer EXCEPT Customer.Comments WITH FRAME f2.
+DISPLAY Customer EXCEPT Customer.Comments WITH BROWSE b1.
+DISPLAY Customer.Name IN WINDOW hWin WITH FRAME f1 NO-ERROR.
+DISPLAY STREAM s1 Customer.Name.
+DISPLAY STREAM-HANDLE hStream Customer.Name.
+DISPLAY UNLESS-HIDDEN Customer.Name.
+DISPLAY SPACE(2) Customer.Name SKIP(1) Customer.City.
+
+--------------------------------------------------------------------------------
+
+

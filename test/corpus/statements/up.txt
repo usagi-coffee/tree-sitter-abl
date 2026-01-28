@@ -16,3 +16,41 @@ UP 1 WITH FRAME myframe.
     count: (number_literal)
     (frame_phrase
       frame: (identifier))))
+
+================================================================================
+UP - reference snippet and variants
+================================================================================
+
+FOR EACH Customer:
+UP 2.
+DISPLAY Customer.CustNum Customer.Name Customer.City.
+END.
+
+UP STREAM-HANDLE hS 3 WITH FRAME f1.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (for_each_statement
+    (for_record_list
+      (for_record
+        (identifier)))
+    (body
+      (up_statement
+        (number_literal))
+      (display_statement
+        (qualified_name
+          (identifier)
+          (identifier))
+        (qualified_name
+          (identifier)
+          (identifier))
+        (qualified_name
+          (identifier)
+          (identifier)))))
+  (up_statement
+    (stream_phrase
+      (identifier))
+    (number_literal)
+    (frame_phrase
+      (identifier))))

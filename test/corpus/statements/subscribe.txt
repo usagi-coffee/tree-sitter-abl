@@ -18,3 +18,25 @@ SUBSCRIBE PROCEDURE hSub TO "MyEvent" IN hPub.
     subscriber: (identifier)
     event: (string_literal)
     publisher: (identifier)))
+
+================================================================================
+SUBSCRIBE - reference snippets and variants
+================================================================================
+
+DEFINE VARIABLE hPub AS HANDLE NO-UNDO.
+DEFINE VARIABLE hSub1 AS HANDLE NO-UNDO.
+DEFINE VARIABLE hSub2 AS HANDLE NO-UNDO.
+RUN r-nepub.p PERSISTENT SET hPub.
+RUN r-nesub1.p PERSISTENT SET hSub1 (hPub).
+RUN r-nesub2.p PERSISTENT SET hSub2.
+SUBSCRIBE PROCEDURE hSub2 TO "NewCustomer" IN hPub.
+
+DEFINE INPUT PARAMETER hPub AS HANDLE NO-UNDO.
+SUBSCRIBE TO "NewCustomer" IN hPub.
+
+SUBSCRIBE PROCEDURE hSub1 TO cEvent IN hPub RUN-PROCEDURE "OnEvent" NO-ERROR.
+SUBSCRIBE TO "spaced event" ANYWHERE RUN-PROCEDURE "spaced event".
+
+--------------------------------------------------------------------------------
+
+

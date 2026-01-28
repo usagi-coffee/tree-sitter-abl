@@ -12,3 +12,26 @@ RELEASE OBJECT hBuffer NO-ERROR.
     handle: (identifier))
   (release_object_statement
     handle: (identifier)))
+
+================================================================================
+RELEASE OBJECT - reference snippet
+================================================================================
+
+DEFINE VARIABLE CFWidHdl AS HANDLE NO-UNDO.
+DEFINE VARIABLE CFComHdl AS COM-HANDLE NO-UNDO.
+DEFINE VARIABLE controlHdl AS COM-HANDLE NO-UNDO.
+CREATE CONTROL-FRAME CFWidHdl ASSIGN
+FRAME = FRAME foo:HANDLE
+NAME = "ctlFrame1".
+CFComHdl = CFWidHdl:COM-HANDLE.
+CFComHdl:LoadControls(hc_CmdButton.wrx, "hc_CmdButton").
+controlHdl = CFComHdl:hc_CmdButton.
+controlHdl:BgColor = RGB-VALUE(0,128,0).
+RELEASE OBJECT controlHdl.
+DELETE WIDGET CFWidHdl.
+
+RELEASE OBJECT controlHdl NO-ERROR.
+
+--------------------------------------------------------------------------------
+
+

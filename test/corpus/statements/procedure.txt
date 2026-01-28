@@ -414,3 +414,79 @@ PROCEDURE doSuper IN SUPER.
   (procedure_forward_definition
     name: (identifier)
     (in_super_phrase)))
+
+================================================================================
+PROCEDURE - reference snippets and EXTERNAL options
+================================================================================
+
+DEFINE VARIABLE FactorialResult AS INTEGER NO-UNDO FORMAT ">>>,>>>,>>9".
+DEFINE VARIABLE FactorialInput AS INTEGER NO-UNDO.
+REPEAT:
+SET FactorialInput VALIDATE(FactorialInput <= 12 AND FactorialInput >= 0,
+"Value must be between 0 and 12.").
+RUN Factorial (INPUT FactorialInput, OUTPUT FactorialResult).
+DISPLAY FactorialResult.
+END.
+PROCEDURE Factorial:
+DEFINE INPUT PARAMETER PTerm AS INTEGER NO-UNDO.
+DEFINE OUTPUT PARAMETER FactorialResult AS INTEGER NO-UNDO.
+DEFINE VARIABLE WorkingResult AS INTEGER NO-UNDO.
+IF PTerm <= 1 THEN DO:
+FactorialResult = 1.
+RETURN.
+END.
+ELSE DO:
+RUN Factorial (INPUT PTerm - 1, OUTPUT WorkingResult).
+FactorialResult = PTerm * WorkingResult.
+END.
+END PROCEDURE.
+
+DEFINE VARIABLE iResult AS INTEGER NO-UNDO.
+MESSAGE " It's a whole new world!"
+VIEW-AS ALERT-BOX MESSAGE BUTTONS OK TITLE "ABL Message".
+RUN MessageBoxA (0, " It's a whole new world, again!!",
+"ABL DLL Access", 0, OUTPUT iResult).
+PROCEDURE MessageBoxA EXTERNAL "user32.dll":
+DEFINE INPUT PARAMETER hwnd AS LONG.
+DEFINE INPUT PARAMETER mbtext AS CHARACTER.
+DEFINE INPUT PARAMETER mbtitle AS CHARACTER.
+DEFINE INPUT PARAMETER style AS LONG.
+DEFINE RETURN PARAMETER result AS LONG.
+END.
+
+PROCEDURE atoi EXTERNAL "/usr/lib/libc.so.1":
+DEFINE INPUT PARAMETER val AS CHARACTER.
+DEFINE RETURN PARAMETER outVal AS LONG.
+END.
+
+PROCEDURE dllProc EXTERNAL "mylib.dll":
+DEFINE INPUT PARAMETER p1 AS INTEGER.
+END.
+
+PROCEDURE dllCdecl EXTERNAL "mylib.dll" CDECL ORDINAL 2 PERSISTENT THREAD-SAFE:
+DEFINE INPUT PARAMETER p1 AS INTEGER.
+END.
+
+PROCEDURE dllStdcall EXTERNAL "mylib.dll" STDCALL:
+DEFINE INPUT PARAMETER p1 AS INTEGER.
+END.
+
+PROCEDURE dllPascal EXTERNAL "mylib.dll" PASCAL:
+DEFINE INPUT PARAMETER p1 AS INTEGER.
+END.
+
+PROCEDURE superProc IN SUPER:
+DEFINE INPUT PARAMETER p1 AS INTEGER.
+END.
+
+PROCEDURE PRIVATE hiddenProc:
+DEFINE INPUT PARAMETER p1 AS INTEGER.
+END PROCEDURE.
+
+PROCEDURE ANYWHERE.Click.
+PROCEDURE frCtrl.myOcx.Click:
+END PROCEDURE.
+
+--------------------------------------------------------------------------------
+
+

@@ -79,3 +79,28 @@ DISABLE field1 FORMAT "x(10)" WHEN ok
       (constant_option)
       (constant_option))
     (disable_item)))
+
+================================================================================
+DISABLE - Reference snippet
+================================================================================
+
+DISABLE b_save b_undo WITH FRAME butt-frame.
+DISABLE Customer.CreditLimit WITH FRAME cust-info.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (disable_statement
+    (disable_item
+      (identifier))
+    (disable_item
+      (identifier))
+    (frame_phrase
+      (identifier)))
+  (disable_statement
+    (disable_item
+      (qualified_name
+        (identifier)
+        (identifier)))
+    (frame_phrase
+      (identifier))))

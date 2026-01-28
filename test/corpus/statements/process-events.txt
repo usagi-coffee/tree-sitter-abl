@@ -8,3 +8,24 @@ PROCESS EVENTS.
 
 (source_code
   (process_events_statement))
+
+================================================================================
+PROCESS EVENTS - reference snippet
+================================================================================
+
+DEFINE VARIABLE ix AS INTEGER NO-UNDO.
+DEFINE VARIABLE stop-sel AS LOGICAL NO-UNDO.
+DEFINE BUTTON stop-it LABEL "STOP".
+DISPLAY stop-it.
+ON CHOOSE OF stop-it
+stop-sel = TRUE.
+ENABLE stop-it.
+DO ix = 1 TO 1000:
+DISPLAY ix VIEW-AS TEXT.
+PROCESS EVENTS.
+IF stop-sel THEN LEAVE.
+END.
+
+--------------------------------------------------------------------------------
+
+

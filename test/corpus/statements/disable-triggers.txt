@@ -14,3 +14,18 @@ DISABLE TRIGGERS FOR LOAD OF db.wo_mstr ALLOW-REPLICATION.
     table: (qualified_name
       left: (identifier)
       right: (identifier))))
+
+================================================================================
+DISABLE TRIGGERS - Reference snippet
+================================================================================
+
+DISABLE TRIGGERS FOR DUMP OF Customer.
+DISABLE TRIGGERS FOR LOAD OF Customer.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (disable_triggers_statement
+    (identifier))
+  (disable_triggers_statement
+    (identifier)))

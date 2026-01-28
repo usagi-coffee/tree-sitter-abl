@@ -40,3 +40,24 @@ INSERT Customer NO-ERROR.
       frame: (identifier)))
   (insert_statement
     record: (identifier)))
+
+================================================================================
+INSERT - Reference snippet
+================================================================================
+
+INSERT Order WITH 1 COLUMN.
+REPEAT:
+  CREATE OrderLine.
+  OrderLine.OrderNum = Order.OrderNum.
+  UPDATE OrderLine.LineNum OrderLine.ItemNum OrderLine.Qty
+    OrderLine.Price.
+  FIND Item OF OrderLine.
+END.
+END.
+
+INSERT Customer USING ROWID(1).
+INSERT Customer USING RECID(2) NO-ERROR.
+
+--------------------------------------------------------------------------------
+
+

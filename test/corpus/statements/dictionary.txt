@@ -8,3 +8,35 @@ DICTIONARY.
 
 (source_code
   (dictionary_statement))
+
+================================================================================
+DICTIONARY - reference snippet
+================================================================================
+
+DEFINE VARIABLE ans AS LOGICAL NO-UNDO.
+DISPLAY "Do you want to access the Dictionary?"
+WITH ROW 7 COLUMN 20 NO-LABELS.
+UPDATE ans.
+IF ans THEN DICTIONARY.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    (identifier)
+    (identifier)
+    (no_undo))
+  (display_statement
+    (string_literal)
+    (identifier)
+    (identifier)
+    (number_literal)
+    (identifier)
+    (number_literal)
+    (identifier))
+  (update_statement
+    (update_item
+      (identifier)))
+  (if_statement
+    (identifier)
+    (dictionary_statement)))

@@ -17,3 +17,26 @@ VALIDATE db1.Customer.
     record: (qualified_name
       left: (identifier)
       right: (identifier))))
+
+===============================================================================
+VALIDATE - reference snippet
+===============================================================================
+
+REPEAT FOR Item:
+PROMPT-FOR Item.ItemNum.
+FIND Item USING Item.ItemNum NO-ERROR.
+IF NOT AVAILABLE Item THEN DO:
+CREATE iIem.
+ASSIGN Item.ItemNum.
+UPDATE Item.ItemName Item.Price.
+VALIDATE Item.
+END.
+ELSE
+DISPLAY Item.ItemName Item.Price.
+END.
+
+VALIDATE sports.Item NO-ERROR.
+
+-------------------------------------------------------------------------------
+
+

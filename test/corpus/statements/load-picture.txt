@@ -14,3 +14,38 @@ LOAD-PICTURE cImagePath.
     image: (string_literal))
   (load_picture_statement
     image: (identifier)))
+
+================================================================================
+LOAD-PICTURE - Reference snippet
+================================================================================
+
+DEFINE VARIABLE chPic AS COM-HANDLE NO-UNDO.
+DEFINE VARIABLE chControl AS COM-HANDLE NO-UNDO.
+chPic = LOAD-PICTURE("myPic.bmp").
+chControl:Picture = chPic.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    (identifier)
+    (identifier)
+    (no_undo))
+  (variable_definition
+    (identifier)
+    (identifier)
+    (no_undo))
+  (assignment_statement
+    (identifier)
+    (assignment_operator)
+    (function_call
+      (identifier)
+      (arguments
+        (argument
+          (string_literal)))))
+  (assignment_statement
+    (object_access
+      (identifier)
+      (identifier))
+    (assignment_operator)
+    (identifier)))

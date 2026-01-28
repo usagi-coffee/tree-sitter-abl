@@ -39,3 +39,23 @@ PUT UNFORMATTED x format("9999-99-99") ';'.
     (format_phrase
       format: (string_literal))
     value: (string_literal)))
+
+================================================================================
+PUT - reference snippet and variants
+================================================================================
+
+DEFINE STREAM s1.
+OUTPUT STREAM s1 TO cus.dat.
+FOR EACH Customer NO-LOCK:
+PUT STREAM s1 name "/".
+END.
+OUTPUT STREAM s1 CLOSE.
+
+PUT STREAM s1 "Name" TO 20 SPACE SKIP.
+PUT STREAM-HANDLE hOut UNFORMATTED cVal AT 5 SKIP(2).
+PUT CONTROL "~033A" NULL.
+PUT CONTROL NULL(20).
+
+--------------------------------------------------------------------------------
+
+

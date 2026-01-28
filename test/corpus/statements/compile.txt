@@ -62,3 +62,25 @@ COMPILE myproc.p XREF "xref.txt" APPEND = FALSE STRING-XREF "sxref.txt" APPEND =
     (compile_option
       string_xref: (string_literal)
       append: (boolean_literal))))
+
+================================================================================
+COMPILE - Reference snippets and additional options
+================================================================================
+
+COMPILE ord-ent SAVE.
+COMPILE r-incl.p SAVE LISTING r-incl.lis XREF r-incl.xrf DEBUG-LIST r-incl.dbg.
+COMPILE VALUE("myproc.p") OPTIONS "require-full-names".
+COMPILE myproc.p OPTIONS-FILE VALUE(optFile) SAVE INTO VALUE(outDir).
+COMPILE myproc.p XCODE "key".
+COMPILE myproc.p XREF-XML "xrefdir".
+COMPILE myproc.p STREAM-IO.
+COMPILE myproc.p LANGUAGES("en") TEXT-SEG-GROW 100.
+COMPILE myproc.p PREPROCESS "pre.out".
+COMPILE myproc.p V6FRAME USE-REVVIDEO.
+COMPILE myproc.p V6FRAME USE-UNDERLINE.
+COMPILE myproc.p MIN-SIZE DEFAULT-UNTRANSLATABLE NO-ERROR.
+
+
+--------------------------------------------------------------------------------
+
+

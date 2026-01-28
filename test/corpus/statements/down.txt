@@ -16,3 +16,62 @@ DOWN 2 WITH FRAME cust.
     count: (number_literal)
     (frame_phrase
       frame: (identifier))))
+
+================================================================================
+DOWN - Reference snippet
+================================================================================
+
+FOR EACH Customer NO-LOCK BY Customer.State:
+  IF Customer.State <> laststate THEN DO:
+    IF laststate <> "" THEN DOWN 1.
+    laststate = Customer.State.
+  END.
+  DISPLAY Customer.CustNum Customer.Name Customer.City Customer.State.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (for_each_statement
+    (for_record_list
+      (for_record
+        (identifier)
+        (no_lock)
+        (by_phrase
+          (qualified_name
+            (identifier)
+            (identifier)))))
+    (body
+      (if_statement
+        (binary_expression
+          (qualified_name
+            (identifier)
+            (identifier))
+          (identifier))
+        (do_block
+          (body
+            (if_statement
+              (binary_expression
+                (identifier)
+                (string_literal))
+              (down_statement
+                (number_literal)))
+            (assignment_statement
+              (identifier)
+              (assignment_operator)
+              (qualified_name
+                (identifier)
+                (identifier))))))
+      (display_statement
+        (qualified_name
+          (identifier)
+          (identifier))
+        (qualified_name
+          (identifier)
+          (identifier))
+        (qualified_name
+          (identifier)
+          (identifier))
+        (qualified_name
+          (identifier)
+          (identifier))))))

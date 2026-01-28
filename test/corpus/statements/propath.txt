@@ -19,3 +19,31 @@ PROPATH = cPath + "," + cOtherPath.
         (identifier)
         (string_literal))
       (identifier))))
+
+================================================================================
+PROPATH - reference snippets
+================================================================================
+
+DEFINE VARIABLE menu AS CHARACTER NO-UNDO EXTENT 4 FORMAT "X(20)"
+INITIAL ["1. Sales","2. Acctg","3. Personnel","4. Exit"].
+DEFINE VARIABLE proglist AS CHARACTER NO-UNDO EXTENT 4 FORMAT "X(8)"
+INITIAL ["sales.p","acctg.p","per.p","exit.p"].
+DEFINE VARIABLE ppath AS CHARACTER NO-UNDO EXTENT 4
+INITIAL ["sales/s-procs","acctg/a-procs","per/p-procs",","] .
+REPEAT:
+DISPLAY menu WITH TITLE " M A I N
+1 COLUMN 1 DOWN NO-LABELS ROW 8.
+CHOOSE FIELD menu AUTO-RETURN.
+HIDE.
+PROPATH = ppath[FRAME-INDEX].
+RUN VALUE(proglist[FRAME-INDEX]).
+END.
+
+PROPATH = ENTRY(1,PROPATH) + ",/dlc,/dlc/proguide,/dlc/appl1/procs".
+DISPLAY PROPATH.
+
+PROPATH += ",/myNewAppDir1,/myNewAppDir2".
+
+--------------------------------------------------------------------------------
+
+

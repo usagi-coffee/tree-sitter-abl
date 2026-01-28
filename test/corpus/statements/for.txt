@@ -513,3 +513,165 @@ END.
     (body
       (display_statement
         (identifier)))))
+
+================================================================================
+FOR - Reference snippets
+================================================================================
+
+FOR EACH Customer NO-LOCK BY Customer.CreditLimit:
+  DISPLAY Customer.
+  LEAVE.
+END.
+
+FOR EACH Customer NO-LOCK WHERE Customer.CustNum < 12 BY Customer.State:
+  DISPLAY Customer.CustNum Customer.Name Customer.City Customer.State.
+END.
+
+FOR EACH Customer NO-LOCK, EACH Order OF Customer NO-LOCK,
+     EACH OrderLine OF Order NO-LOCK, Item OF OrderLine NO-LOCK
+     BY Order.PromiseDate BY Customer.CustNum BY OrderLine.LineNum:
+  DISPLAY Order.PromiseDate Customer.CustNum Order.OrderNum
+    OrderLine.LineNum Item.ItemNum Item.ItemName.
+END.
+
+FOR EACH Customer NO-LOCK, LAST Order OF Customer:
+  DISPLAY Customer.CustNum Customer.Name Order.OrderNum Order.OrderDate
+    Order.Instructions.
+  PAUSE 1 NO-MESSAGE.
+  Order.Instructions = "Last order".
+  DISPLAY Order.Instruction.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (for_each_statement
+    (for_record_list
+      (for_record
+        (identifier)
+        (no_lock)
+        (by_phrase
+          (qualified_name
+            (identifier)
+            (identifier)))))
+    (body
+      (display_statement
+        (identifier))
+      (leave_statement)))
+  (for_each_statement
+    (for_record_list
+      (for_record
+        (identifier)
+        (no_lock)
+        (where_phrase
+          (binary_expression
+            (qualified_name
+              (identifier)
+              (identifier))
+            (number_literal)))
+        (by_phrase
+          (qualified_name
+            (identifier)
+            (identifier)))))
+    (body
+      (display_statement
+        (qualified_name
+          (identifier)
+          (identifier))
+        (qualified_name
+          (identifier)
+          (identifier))
+        (qualified_name
+          (identifier)
+          (identifier))
+        (qualified_name
+          (identifier)
+          (identifier)))))
+  (for_each_statement
+    (for_record_list
+      (for_record
+        (identifier)
+        (no_lock))
+      (for_record
+        (identifier)
+        (of_phrase
+          (identifier))
+        (no_lock))
+      (for_record
+        (identifier)
+        (of_phrase
+          (identifier))
+        (no_lock))
+      (for_record
+        (identifier)
+        (of_phrase
+          (identifier))
+        (no_lock)
+        (by_phrase
+          (qualified_name
+            (identifier)
+            (identifier))
+          (qualified_name
+            (identifier)
+            (identifier))
+          (qualified_name
+            (identifier)
+            (identifier)))))
+    (body
+      (display_statement
+        (qualified_name
+          (identifier)
+          (identifier))
+        (qualified_name
+          (identifier)
+          (identifier))
+        (qualified_name
+          (identifier)
+          (identifier))
+        (qualified_name
+          (identifier)
+          (identifier))
+        (qualified_name
+          (identifier)
+          (identifier))
+        (qualified_name
+          (identifier)
+          (identifier)))))
+  (for_each_statement
+    (for_record_list
+      (for_record
+        (identifier)
+        (no_lock))
+      (for_record
+        (identifier)
+        (of_phrase
+          (identifier))))
+    (body
+      (display_statement
+        (qualified_name
+          (identifier)
+          (identifier))
+        (qualified_name
+          (identifier)
+          (identifier))
+        (qualified_name
+          (identifier)
+          (identifier))
+        (qualified_name
+          (identifier)
+          (identifier))
+        (qualified_name
+          (identifier)
+          (identifier)))
+      (pause_statement
+        (number_literal))
+      (assignment_statement
+        (qualified_name
+          (identifier)
+          (identifier))
+        (assignment_operator)
+        (string_literal))
+      (display_statement
+        (qualified_name
+          (identifier)
+          (identifier))))))

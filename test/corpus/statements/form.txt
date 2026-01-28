@@ -102,3 +102,32 @@ FORM customer-name customer-balance WITH FRAME B.
       field: (identifier))
     (frame_phrase
       frame: (identifier))))
+
+================================================================================
+FORM - Reference snippets
+================================================================================
+
+REPEAT FOR Customer:
+  FORM
+    Customer.Name COLON 10 Customer.Phone COLON 50
+    Customer.Address COLON 10 Customer.SalesRep COLON 50 SKIP
+    Customer.City COLON 10 NO-LABEL Customer.State NO-LABEL
+    Customer.PostalCode NO-LABEL
+    WITH SIDE-LABELS 1 DOWN CENTERED.
+  PROMPT-FOR Customer.CustNum WITH FRAME cnum SIDE-LABELS CENTERED.
+  FIND Customer USING Customer.CustNum.
+  UPDATE Customer.Name Customer.Address Customer.City Customer.State
+    Customer.PostalCode Customer.Phone Customer.SalesRep.
+END.
+
+DEFINE VARIABLE ix AS INTEGER NO-UNDO FORMAT ">9".
+FORM HEADER "This is the header - ix is" ix
+  WITH FRAME a ROW ix COLUMN ix ix DOWN.
+DO ix = 1 TO 8 WITH FRAME a:
+  DISPLAY ix.
+  HIDE FRAME a.
+END.
+
+--------------------------------------------------------------------------------
+
+

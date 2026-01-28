@@ -403,3 +403,30 @@ DEF EVENT e2 DELEGATE cls.
     name: (identifier)
     (signature
       delegate_type: (identifier))))
+
+================================================================================
+EVENT - Reference snippets
+================================================================================
+
+DEFINE PUBLIC EVENT NewCustomer SIGNATURE VOID ( INPUT pcCustName AS CHARACTER ).
+DEFINE EVENT onSimple SIGNATURE VOID ( ).
+DEFINE EVENT onDelegate DELEGATE CLASS System.EventHandler.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (event_definition
+    (access_modifier)
+    (identifier)
+    (signature
+      (identifier)
+      (identifier)))
+  (event_definition
+    (identifier)
+    (signature))
+  (event_definition
+    (identifier)
+    (signature
+      (qualified_name
+        (identifier)
+        (identifier)))))

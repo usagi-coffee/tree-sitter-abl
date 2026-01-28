@@ -360,3 +360,38 @@ var List<Ant> ListOfAnts.
       (identifier))
     (variable
       (identifier))))
+
+================================================================================
+VAR statement - additional access/serialization variants
+================================================================================
+
+VAR PACKAGE-PRIVATE INT p1.
+VAR PACKAGE-PROTECTED INT p2.
+VAR NON-SERIALIZABLE INT n1.
+VAR CLASS mypackage.subdir.myclass myobj4.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (var_statement
+    (access_modifier)
+    (identifier)
+    (variable
+      (identifier)))
+  (var_statement
+    (access_modifier)
+    (identifier)
+    (variable
+      (identifier)))
+  (var_statement
+    (serialization_modifier)
+    (identifier)
+    (variable
+      (identifier)))
+  (var_statement
+    (qualified_name
+      (identifier)
+      (identifier)
+      (identifier))
+    (variable
+      (identifier))))

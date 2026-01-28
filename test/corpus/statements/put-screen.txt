@@ -46,3 +46,109 @@ PUT SCREEN COLOR BLINK-RED "Blink".
     (color_phrase
       color: (identifier))
     value: (string_literal)))
+
+================================================================================
+PUT SCREEN - reference snippet
+================================================================================
+
+DEFINE VARIABLE paid-owed AS DECIMAL NO-UNDO.
+DEFINE VARIABLE bal-label AS CHARACTER NO-UNDO FORMAT "x(20)".
+FOR EACH Customer NO-LOCK:
+paid-owed = Customer.Balance.
+IF paid-owed < 0 THEN DO:
+paid-owed = - paid-owed.
+bal-label = "Customer Credit".
+END.
+ELSE bal-label = "Unpaid balance".
+DISPLAY Customer.CustNum Customer.Name paid-owed LABEL " " WITH 1 DOWN.
+IF Customer.Balance < 0 THEN
+PUT SCREEN COLOR MESSAGES ROW 2 COLUMN 34 bal-label.
+ELSE
+PUT SCREEN ROW 2 COLUMN 34 bal-label.
+END.
+
+PUT SCREEN COLOR VALUE(cColor) ROW 1 COLUMN 1 "Hdr".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    (identifier)
+    (identifier)
+    (no_undo))
+  (variable_definition
+    (identifier)
+    (identifier)
+    (no_undo)
+    (format_option
+      (string_literal)))
+  (for_each_statement
+    (for_record_list
+      (for_record
+        (identifier)
+        (no_lock)))
+    (body
+      (assignment_statement
+        (identifier)
+        (assignment_operator)
+        (qualified_name
+          (identifier)
+          (identifier)))
+      (if_statement
+        (binary_expression
+          (identifier)
+          (number_literal))
+        (do_block
+          (body
+            (assignment_statement
+              (identifier)
+              (assignment_operator)
+              (unary_expression
+                (identifier)))
+            (assignment_statement
+              (identifier)
+              (assignment_operator)
+              (string_literal))))
+        (assignment_statement
+          (identifier)
+          (assignment_operator)
+          (string_literal)))
+      (display_statement
+        (qualified_name
+          (identifier)
+          (identifier))
+        (qualified_name
+          (identifier)
+          (identifier))
+        (identifier)
+        (identifier)
+        (string_literal)
+        (identifier)
+        (number_literal)
+        (identifier))
+      (if_statement
+        (binary_expression
+          (qualified_name
+            (identifier)
+            (identifier))
+          (number_literal))
+        (put_screen_statement
+          (color_phrase
+            (identifier))
+          (number_literal)
+          (number_literal)
+          (identifier))
+        (put_screen_statement
+          (number_literal)
+          (number_literal)
+          (identifier)))))
+  (put_screen_statement
+    (color_phrase
+      (function_call
+        (identifier)
+        (arguments
+          (argument
+            (identifier)))))
+    (number_literal)
+    (number_literal)
+    (string_literal)))

@@ -510,3 +510,14 @@ CHOOSE FIELD option1 HELP "First option" option2 HELP "Second option" option3 HE
     pause: (number_literal)
     (frame_phrase
       frame: (identifier))))
+
+================================================================================
+CHOOSE - Reference snippet
+================================================================================
+
+CHOOSE FIELD menu GO-ON (F5) AUTO-RETURN WITH FRAME f-menu.
+
+
+--------------------------------------------------------------------------------
+
+

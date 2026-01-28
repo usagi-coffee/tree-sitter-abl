@@ -28,3 +28,24 @@ INPUT STREAM-HANDLE hStream CLOSE.
   (input_statement
     (stream_handle_phrase
       handle: (identifier))))
+
+================================================================================
+INPUT - Reference snippet
+================================================================================
+
+INPUT FROM VALUE(SEARCH("r-in.dat")).
+REPEAT:
+  PROMPT-FOR Customer.CustNum Customer.CreditLimit.
+  FIND Customer USING INPUT Customer.CustNum.
+  ASSIGN Customer.CreditLimit.
+END.
+INPUT CLOSE.
+
+INPUT FROM OS-DIR("c:\\mydir") NO-ATTR-LIST.
+INPUT FROM VALUE("file.txt") NO-ECHO.
+INPUT FROM TERMINAL.
+INPUT FROM VALUE(cPath) CONVERT SOURCE "ibm850" TARGET "utf-8".
+
+--------------------------------------------------------------------------------
+
+

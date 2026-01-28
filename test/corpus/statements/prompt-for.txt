@@ -107,3 +107,51 @@ PROMPT-FOR "Notes:" TO 20 VIEW-AS TEXT FGCOLOR 12 BGCOLOR 1 FONT 2 field1.
         (number_literal)))
     (prompt_for_item
       field: (identifier))))
+
+================================================================================
+PROMPT-FOR - reference snippets and stream variants
+================================================================================
+
+DEFINE VARIABLE ix AS INTEGER NO-UNDO INITIAL 3.
+PROMPT-FOR ix.
+MESSAGE "Record buffer" ix SKIP(0) "Screen buffer" INPUT ix.
+
+DEFINE VARIABLE s-com AS CHARACTER NO-UNDO FORMAT "x(40)" EXTENT 5.
+FORM
+"Shipped
+:" Order.ShipDate AT 13 SKIP
+"Misc Info :" Order.Instructions AT 13 SKIP(1)
+"Order Comments :" s-com AT 1
+WITH FRAME o-com CENTERED NO-LABELS TITLE "Shipping Information".
+FOR EACH Customer NO-LOCK, EACH Order OF Customer:
+DISPLAY Customer.CustNum Customer.Name Order.OrderNum Order.OrderDate
+Order.PromiseDate WITH FRAME order-hdr CENTERED.
+UPDATE Order.ShipDate Order.Instructions TEXT(s-com)
+WITH FRAME o-com.
+s-com = "".
+END.
+
+REPEAT:
+PROMPT-FOR Customer.CustNum.
+FIND Customer USING Customer.CustNum NO-ERROR.
+IF NOT AVAILABLE Customer THEN DO:
+MESSAGE "No such customer number.".
+UNDO, RETRY.
+END.
+DISPLAY Customer.Name Customer.Phone Customer.SalesRep.
+END.
+
+REPEAT:
+PROMPT-FOR SalesRep.SalesRep LABEL "Sales rep's initials"
+WITH FRAME namefr ROW 2 SIDE-LABELS.
+FIND SalesRep NO-LOCK USING SalesRep.SalesRep.
+DISPLAY SalesRep.RepName SalesRep.Region SalesRep.MonthQuota
+WITH 1 DOWN NO-HIDE.
+END.
+
+PROMPT-FOR STREAM s1 field1 SPACE(2) SKIP(1) ^ GO-ON(F2 F3).
+PROMPT-FOR STREAM-HANDLE hS field1 field2 IN WINDOW wMain WITH FRAME fMain.
+
+--------------------------------------------------------------------------------
+
+

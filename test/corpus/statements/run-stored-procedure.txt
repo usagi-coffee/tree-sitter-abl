@@ -72,3 +72,49 @@ RUN STORED-PROCEDURE sp_Query NO-ERROR (1, 2, 3).
       value: (number_literal)
       value: (number_literal)
       value: (number_literal))))
+
+================================================================================
+RUN STORED-PROCEDURE - reference snippets
+================================================================================
+
+DEFINE VARIABLE intvar AS INTEGER NO-UNDO.
+RUN STORED-PROCEDURE pcust intvar = PROC-HANDLE NO-ERROR
+(10, OUTPUT 0, OUTPUT 0).
+FOR EACH proc-text-buffer WHERE PROC-HANDLE = intvar:
+DISPLAY proc-text-buffer.
+END.
+IF ERROR-STATUS:ERROR THEN
+MESSAGE "Stored Procedure failed to run".
+ELSE
+CLOSE STORED-PROCEDURE pcust WHERE PROC-HANDLE = intvar.
+
+DEFINE VAR handle1 AS INTEGER.
+RUN STORED-PROCEDURE send-sql-statement handle1 = PROC-HANDLE
+("SELECT name, cust_num FROM customer").
+FOR EACH proc-text-buffer WHERE PROC-HANDLE = handle1:
+DISPLAY proc-text.
+END.
+CLOSE STORED-PROCEDURE send-sql-statement WHERE PROC-HANDLE = handle1.
+
+DEFINE VAR h1 AS INTEGER NO-UNDO.
+DEFINE VAR jx AS INTEGER NO-UNDO.
+RUN STORED-PROCEDURE send-sql-statement h1 = PROC-HANDLE NO-ERROR
+("select count (*) from xxx.customer where name between 'A' and 'Z' ").
+IF ERROR-STATUS:ERROR THEN
+DO jx = 1 TO ERROR-STATUS:NUM-MESSAGES:
+MESSAGE "error" ERROR-STATUS:GET-NUMBER(jx)
+ERROR-STATUS:GET-MESSAGE(jx).
+END.
+CLOSE STORED-PROCEDURE send-sql-statement WHERE PROC-HANDLE = h1.
+
+DEFINE VARIABLE res AS INTEGER NO-UNDO INITIAL 0.
+DEFINE VARIABLE tthndl AS HANDLE.
+CREATE TEMP-TABLE tthndl.
+RUN STORED-PROCEDURE send-sql-statement LOAD-RESULT-INTO tthndl
+res = PROC-STATUS ("SELECT * FROM customer").
+IF (res = 1) THEN
+DISPLAY "Succeeded".
+
+--------------------------------------------------------------------------------
+
+
