@@ -17,7 +17,7 @@ UNDO, RETURN NO-APPLY.
   (undo_statement)
   (undo_statement)
   (undo_statement
-    (return_value: (string_literal)))
+    return_value: (string_literal))
   (undo_statement
-    (error_value: (string_literal)))
+    error_value: (string_literal))
   (undo_statement))

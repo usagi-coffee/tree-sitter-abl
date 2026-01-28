@@ -17,28 +17,25 @@ module.exports = ({ kw, tkw }) => ({
   __color_frame_phrase: ($) =>
     seq(kw("WITH"), kw("FRAME"), field("frame", $.identifier)),
   __color_color_phrase: ($) =>
-    seq(
-      kw("COLOR"),
-      choice(
-        kw("NORMAL"),
-        kw("INPUT"),
-        kw("MESSAGES"),
-        $.number_literal,
-        $.string_literal,
-        seq(tkw("VALUE"), "(", field("value", $._expression), ")"),
-        seq(
-          optional(
-            repeat1(
-              choice(
-                tkw("BLINK-"),
-                tkw("BRIGHT-"),
-                tkw("RVV-"),
-                tkw("UNDERLINE-"),
-              ),
+    choice(
+      kw("NORMAL"),
+      kw("INPUT"),
+      kw("MESSAGES"),
+      $.number_literal,
+      $.string_literal,
+      seq(tkw("VALUE"), "(", field("value", $._expression), ")"),
+      seq(
+        optional(
+          repeat1(
+            choice(
+              tkw("BLINK-"),
+              tkw("BRIGHT-"),
+              tkw("RVV-"),
+              tkw("UNDERLINE-"),
             ),
           ),
-          field("foreground", $.identifier),
         ),
+        field("foreground", $.identifier),
       ),
     ),
 });

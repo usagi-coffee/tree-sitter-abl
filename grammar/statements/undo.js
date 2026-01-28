@@ -1,28 +1,29 @@
 module.exports = ({ tkw }) => ({
   undo_statement: ($) =>
-    prec(
-      1,
+    seq(
+      tkw("UNDO"),
+      ",",
       choice(
         seq(
-          tkw("UNDO"),
-          optional(field("label", $.identifier)),
-          ",",
-          choice(
-            seq(
-              tkw("THROW"),
-              field("value", choice($.new_expression, $._expression)),
-            ),
-            seq(tkw("NEXT"), optional(field("next_label", $.identifier))),
+          tkw("THROW"),
+          field(
+            "value",
+            choice($._assignable, $.string_literal, $.number_literal),
           ),
-          $._terminator,
         ),
+        seq(tkw("LEAVE"), optional(field("leave_label", $.identifier))),
+        seq(tkw("RETRY"), optional(field("retry_label", $.identifier))),
         seq(
-          tkw("UNDO"),
-          ",",
-          tkw("LEAVE"),
-          optional(field("leave_label", $.identifier)),
-          $._terminator,
+          tkw("RETURN"),
+          optional(
+            choice(
+              seq(tkw("ERROR"), field("error_value", $._expression)),
+              tkw("NO-APPLY"),
+              field("return_value", $._expression),
+            ),
+          ),
         ),
       ),
+      $._terminator,
     ),
 });

@@ -177,10 +177,12 @@ MESSAGE COLOR RED "Color message".
     (color_phrase)
     (string_literal))
   (message_statement
-    (color_phrase)
+    (color_phrase
+      (string_literal))
     (string_literal))
   (message_statement
-    (color_phrase)
+    (color_phrase
+      (identifier))
     (string_literal)))
 
 ================================================================================

@@ -13,9 +13,14 @@ module.exports = ({ kw, tkw }) => ({
     prec.right(
       seq(
         field("field", $._expression),
+        optional(alias($.__update_format_phrase, $.format_phrase)),
         optional(seq(kw("WHEN"), field("when", $._expression))),
       ),
     ),
+  __update_format_phrase: ($) =>
+    seq(alias($.__update_format_option, $.format_option)),
+  __update_format_option: ($) =>
+    seq(kw("FORMAT"), alias($.string_literal, $._update_format_string)),
   __update_go_on: ($) => seq(tkw("GO-ON"), "(", repeat1($.identifier), ")"),
   __update_frame_phrase: ($) =>
     seq(kw("WITH"), optional(seq(kw("FRAME"), field("frame", $.identifier)))),
