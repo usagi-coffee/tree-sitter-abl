@@ -37,6 +37,7 @@ module.exports = grammar({
     [$._primary_expression, $.function_call],
     [$._primary_expression, $._assignable],
     [$.__in_frame_target, $._primary_expression],
+    [$._primary_expression, $.input_expression],
     // Accesses, minor conflicts
     [
       $.__buffer_access_modifier,

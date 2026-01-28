@@ -33,5 +33,6 @@ module.exports = (ctx) => ({
       $.null_literal,
       alias($.constant_expression, $.constant),
       $.in_frame_expression,
+      $.input_expression,
     ),
 });

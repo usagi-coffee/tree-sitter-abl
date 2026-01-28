@@ -5,10 +5,7 @@ module.exports = ({ kw, tkw }) => ({
       seq(
         field("left", $._assignable),
         field("operator", $.assignment_operator),
-        field(
-          "right",
-          choice($.array_initializer, $.input_expression, $._expression),
-        ),
+        field("right", choice($.array_initializer, $._expression)),
         optional(alias($.__assignment_no_error, $.no_error)),
         $._terminator,
       ),
@@ -27,10 +24,7 @@ module.exports = ({ kw, tkw }) => ({
     seq(
       field("left", $._assignable),
       "=",
-      field(
-        "right",
-        choice($.array_initializer, $.input_expression, $._expression),
-      ),
+      field("right", choice($.array_initializer, $._expression)),
       optional(
         alias($.__assign_when_available_phrase, $.when_available_phrase),
       ),
