@@ -78,13 +78,13 @@ var List<Ant> ListOfAnts.
     (block_comment))
   (var_statement
     (identifier)
-    (var_decl
+    (variable
       (identifier))
-    (var_decl
+    (variable
       (identifier))
-    (var_decl
+    (variable
       (identifier))
-    (var_decl
+    (variable
       (identifier)))
   (comment
     (block_comment))
@@ -92,52 +92,48 @@ var List<Ant> ListOfAnts.
     (block_comment))
   (var_statement
     (identifier)
-    (var_decl
+    (variable
       (identifier))
-    (var_decl
+    (variable
       (identifier))
-    (var_decl
+    (variable
       (identifier)
-      (var_init
-        (number_literal))))
+      (number_literal)))
   (comment
     (block_comment))
   (var_statement
     (identifier)
-    (var_decl
+    (variable
       (identifier))
-    (var_decl
+    (variable
       (identifier)
-      (var_init
-        (date_literal)))
-    (var_decl
+      (date_literal))
+    (variable
       (identifier)
-      (var_init
-        (identifier))))
+      (identifier)))
   (comment
     (block_comment))
   (var_statement
     (access_modifier)
     (identifier)
-    (var_decl
+    (variable
       (identifier))
-    (var_decl
+    (variable
       (identifier)
-      (var_init
-        (date_literal))))
+      (date_literal)))
   (comment
     (block_comment))
   (var_statement
     (static_modifier)
     (identifier)
-    (var_decl
+    (variable
       (identifier)))
   (comment
     (block_comment))
   (var_statement
     (serialization_modifier)
     (identifier)
-    (var_decl
+    (variable
       (identifier)))
   (comment
     (block_comment))
@@ -147,42 +143,37 @@ var List<Ant> ListOfAnts.
     (block_comment))
   (var_statement
     (identifier)
-    (var_extent
-      (number_literal))
-    (var_decl
+    (number_literal)
+    (variable
       (identifier)
-      (var_init
-        (array_initializer
-          (number_literal)
-          (number_literal))))
-    (var_decl
+      (array_initializer
+        (number_literal)
+        (number_literal)))
+    (variable
       (identifier))
-    (var_decl
+    (variable
       (identifier)
-      (var_init
-        (array_initializer
-          (number_literal)
-          (number_literal)
-          (number_literal)))))
+      (array_initializer
+        (number_literal)
+        (number_literal)
+        (number_literal))))
   (comment
     (block_comment))
   (var_statement
     (identifier)
-    (var_extent)
-    (var_decl
+    (variable
       (identifier))
-    (var_decl
+    (variable
       (identifier)
-      (var_init
-        (array_initializer
-          (number_literal)
-          (number_literal)
-          (number_literal)))))
+      (array_initializer
+        (number_literal)
+        (number_literal)
+        (number_literal))))
   (comment
     (block_comment))
   (var_statement
     (string_literal)
-    (var_decl
+    (variable
       (identifier)))
   (comment
     (block_comment))
@@ -191,11 +182,11 @@ var List<Ant> ListOfAnts.
       (identifier)
       (identifier)
       (identifier))
-    (var_decl
+    (variable
       (identifier))
-    (var_decl
+    (variable
       (identifier))
-    (var_decl
+    (variable
       (identifier)))
   (comment
     (block_comment))
@@ -204,63 +195,109 @@ var List<Ant> ListOfAnts.
       (identifier)
       (identifier)
       (identifier))
-    (var_decl
+    (variable
       (identifier)))
   (comment
     (block_comment))
   (var_statement
     (identifier)
-    (var_extent
-      (number_literal))
-    (var_decl
+    (number_literal)
+    (variable
       (identifier)))
   (comment
     (block_comment))
   (var_statement
     (identifier)
-    (var_decl
+    (variable
       (identifier)
-      (var_init
-        (new_expression
-          (identifier)
-          (arguments)))))
+      (new_expression
+        (identifier)
+        (arguments))))
   (var_statement
     (identifier)
-    (var_decl
+    (variable
       (identifier)
-      (var_init
-        (new_expression
-          (identifier)
-          (arguments
-            (argument
-              (string_literal))
-            (argument
-              (number_literal))
-            (argument
-              (null_literal)))))))
+      (new_expression
+        (identifier)
+        (arguments
+          (argument
+            (string_literal))
+          (argument
+            (number_literal))
+          (argument
+            (null_literal))))))
   (comment
     (block_comment))
   (var_statement
     (identifier)
-    (var_decl
+    (variable
       (identifier)
-      (var_init
+      (new_expression
+        (identifier)
+        (arguments
+          (argument
+            (string_literal)))))
+    (variable
+      (identifier)
+      (new_expression
+        (identifier)
+        (arguments
+          (argument
+            (string_literal)))))
+    (variable
+      (identifier)
+      (new_expression
+        (identifier)
+        (arguments
+          (argument
+            (string_literal))))))
+  (comment
+    (block_comment))
+  (var_statement
+    (identifier)
+    (variable
+      (identifier)
+      (new_expression
+        (identifier)
+        (arguments)))
+    (variable
+      (identifier)
+      (new_expression
+        (identifier)
+        (arguments
+          (argument
+            (string_literal))))))
+  (comment
+    (block_comment))
+  (var_statement
+    (identifier)
+    (variable
+      (identifier)
+      (new_expression
+        (identifier)
+        (arguments
+          (argument
+            (string_literal)))))
+    (variable
+      (identifier)
+      (new_expression
+        (identifier)
+        (arguments
+          (argument
+            (string_literal))))))
+  (comment
+    (block_comment))
+  (var_statement
+    (identifier)
+    (number_literal)
+    (variable
+      (identifier)
+      (array_initializer
         (new_expression
           (identifier)
           (arguments
             (argument
-              (string_literal))))))
-    (var_decl
-      (identifier)
-      (var_init
-        (new_expression
-          (identifier)
-          (arguments
-            (argument
-              (string_literal))))))
-    (var_decl
-      (identifier)
-      (var_init
+              (string_literal))))
         (new_expression
           (identifier)
           (arguments
@@ -270,15 +307,14 @@ var List<Ant> ListOfAnts.
     (block_comment))
   (var_statement
     (identifier)
-    (var_decl
+    (variable
       (identifier)
-      (var_init
+      (array_initializer
         (new_expression
           (identifier)
-          (arguments))))
-    (var_decl
-      (identifier)
-      (var_init
+          (arguments
+            (argument
+              (string_literal))))
         (new_expression
           (identifier)
           (arguments
@@ -288,103 +324,39 @@ var List<Ant> ListOfAnts.
     (block_comment))
   (var_statement
     (identifier)
-    (var_decl
+    (variable
       (identifier)
-      (var_init
-        (new_expression
-          (identifier)
-          (arguments
-            (argument
-              (string_literal))))))
-    (var_decl
+      (binary_expression
+        (identifier)
+        (identifier)))
+    (variable
       (identifier)
-      (var_init
-        (new_expression
-          (identifier)
-          (arguments
-            (argument
-              (string_literal)))))))
+      (binary_expression
+        (identifier)
+        (identifier)))
+    (variable
+      (identifier)
+      (binary_expression
+        (identifier)
+        (identifier))))
   (comment
     (block_comment))
   (var_statement
     (identifier)
-    (var_extent
-      (number_literal))
-    (var_decl
+    (variable
       (identifier)
-      (var_init
-        (array_initializer
-          (new_expression
-            (identifier)
-            (arguments
-              (argument
-                (string_literal))))
-          (new_expression
-            (identifier)
-            (arguments
-              (argument
-                (string_literal))))))))
-  (comment
-    (block_comment))
-  (var_statement
-    (identifier)
-    (var_extent)
-    (var_decl
-      (identifier)
-      (var_init
-        (array_initializer
-          (new_expression
-            (identifier)
-            (arguments
-              (argument
-                (string_literal))))
-          (new_expression
-            (identifier)
-            (arguments
-              (argument
-                (string_literal))))))))
-  (comment
-    (block_comment))
-  (var_statement
-    (identifier)
-    (var_decl
-      (identifier)
-      (var_init
-        (binary_expression
+      (array_initializer
+        (function_call
           (identifier)
-          (identifier))))
-    (var_decl
-      (identifier)
-      (var_init
-        (binary_expression
-          (identifier)
-          (identifier))))
-    (var_decl
-      (identifier)
-      (var_init
+          (arguments))
         (binary_expression
           (identifier)
           (identifier)))))
   (comment
     (block_comment))
   (var_statement
-    (identifier)
-    (var_extent)
-    (var_decl
-      (identifier)
-      (var_init
-        (array_initializer
-          (function_call
-            (identifier)
-            (arguments))
-          (binary_expression
-            (identifier)
-            (identifier))))))
-  (comment
-    (block_comment))
-  (var_statement
     (generic_type
       (identifier)
       (identifier))
-    (var_decl
+    (variable
       (identifier))))

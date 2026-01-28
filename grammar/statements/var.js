@@ -10,8 +10,8 @@ module.exports = ({ kw }) => ({
         ),
       ),
       $._var_type,
-      $.var_decl,
-      repeat(seq(",", $.var_decl)),
+      alias($.__var_variable, $.variable),
+      repeat(seq(",", alias($.__var_variable, $.variable))),
       $._terminator,
     ),
 
@@ -19,18 +19,19 @@ module.exports = ({ kw }) => ({
     seq(
       optional(kw("CLASS")),
       field("type", $._type_or_string),
-      optional($.var_extent),
+      optional(field("extent", $.__var_extent)),
     ),
 
-  var_decl: ($) =>
+  __var_variable: ($) =>
     seq(
       field("name", $.identifier),
-      optional($.var_extent),
-      optional($.var_init),
+      optional(field("extent", $.__var_extent)),
+      optional(field("initializer", $.__var_initializer)),
     ),
 
-  var_init: ($) => seq("=", choice($.array_initializer, $._expression)),
-  var_extent: ($) => seq("[", optional($.__var_extent_size), "]"),
+  __var_initializer: ($) =>
+    seq("=", choice($.array_initializer, $._expression)),
+  __var_extent: ($) => seq("[", optional($.__var_extent_size), "]"),
   __var_extent_size: ($) =>
     choice(
       $.number_literal,
