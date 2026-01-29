@@ -267,4 +267,100 @@ END.
 
 --------------------------------------------------------------------------------
 
-(source_code)
+(source_code
+  (find_statement
+    table: (identifier)
+    constant: (number_literal))
+  (prompt_for_statement
+    (prompt_for_item
+      field: (qualified_name
+        left: (identifier)
+        right: (identifier))))
+  (find_statement
+    table: (identifier)
+    (using_phrase
+      (qualified_name
+        left: (identifier)
+        right: (identifier))))
+  (repeat_statement
+    (body
+      (prompt_for_statement
+        (prompt_for_item
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier))))
+      (find_statement
+        table: (identifier)
+        (using_phrase
+          (qualified_name
+            left: (identifier)
+            right: (identifier))))
+      (display_statement
+        (qualified_name
+          left: (identifier)
+          right: (identifier))
+        (qualified_name
+          left: (identifier)
+          right: (identifier)))
+      (repeat_statement
+        (body
+          (find_statement
+            table: (identifier)
+            (of_phrase
+              (identifier)))
+          (find_statement
+            table: (identifier)
+            (of_phrase
+              (identifier)))
+          (find_statement
+            table: (identifier)
+            (where_phrase
+              (binary_expression
+                (qualified_name
+                  left: (identifier)
+                  right: (identifier))
+                (qualified_name
+                  left: (identifier)
+                  right: (identifier)))))
+          (display_statement
+            (qualified_name
+              left: (identifier)
+              right: (identifier))
+            (qualified_name
+              left: (identifier)
+              right: (identifier))
+            (qualified_name
+              left: (identifier)
+              right: (identifier))
+            (aggregate_phrase
+              (aggregate_item
+                operation: (aggregate_operation))))))))
+  (variable_definition
+    name: (identifier)
+    (ERROR)
+    like: (qualified_name
+      left: (identifier)
+      right: (identifier)))
+  (repeat_statement
+    (body
+      (set_statement
+        (set_item
+          field: (identifier)))
+      (find_statement
+        table: (identifier)
+        (where_phrase
+          (binary_expression
+            (qualified_name
+              left: (identifier)
+              right: (identifier))
+            (identifier))))
+      (repeat_statement
+        (body
+          (display_statement
+            (qualified_name
+              left: (identifier)
+              right: (identifier)))
+          (find_statement
+            table: (identifier)
+            (use_index
+              index: (identifier))))))))

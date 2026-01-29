@@ -49,7 +49,9 @@ module.exports = ({ kw, tkw }) => ({
       $.object_access,
       $.function_call,
       alias($.constant_expression, $.constant),
+      alias($.__input_through_shell_variable, $.shell_variable),
     ),
+  __input_through_shell_variable: ($) => token(/\$+[A-Za-z_0-9]*/),
   __input_through_map_entry: ($) => choice($.identifier, $.string_literal),
   __input_through_convert_phrase: ($) =>
     choice(

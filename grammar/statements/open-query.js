@@ -10,6 +10,7 @@ module.exports = ({ kw, tkw }) => ({
   __open_query_body: ($) =>
     seq(
       choice(kw("FOR"), tkw("PRESELECT")),
+      tkw("EACH"),
       alias($.__open_query_record_phrase, $.record_phrase),
       repeat(
         seq(
@@ -26,19 +27,18 @@ module.exports = ({ kw, tkw }) => ({
     ),
   __open_query_record_phrase: ($) =>
     seq(
-      tkw("EACH"),
       field("record", choice($.identifier, $.qualified_name)),
+      optional(
+        seq(kw("OF"), field("of", choice($.identifier, $.qualified_name))),
+      ),
+      optional(seq(kw("WHERE"), field("where", $._expression))),
+      optional(seq(kw("USE-INDEX"), field("index", $.identifier))),
       optional(
         field(
           "lock",
           choice(tkw("SHARE-LOCK"), tkw("EXCLUSIVE-LOCK"), tkw("NO-LOCK")),
         ),
       ),
-      optional(
-        seq(kw("OF"), field("of", choice($.identifier, $.qualified_name))),
-      ),
-      optional(seq(kw("WHERE"), field("where", $._expression))),
-      optional(seq(kw("USE-INDEX"), field("index", $.identifier))),
     ),
   __open_query_tuning: ($) =>
     seq(

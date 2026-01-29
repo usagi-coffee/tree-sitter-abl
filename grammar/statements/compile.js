@@ -38,8 +38,7 @@ module.exports = ({ kw, tkw }) => ({
         tkw("DEFAULT-UNTRANSLATABLE"),
         optional(seq("=", field("default_untranslatable", $._expression))),
       ),
-      // TODO: languages
-      // seq(tkw("LANGUAGES"), "(", $.__compile_language_list, ")"),
+      seq(tkw("LANGUAGES"), "(", field("languages", $._expression), ")"),
       seq(kw("TEXT-SEG-GROW"), field("text_seg_grow", $._expression)),
       tkw("ATTR-SPACE"),
       tkw("NO-ATTR-SPACE"),

@@ -14,12 +14,14 @@ DOS NOWAIT VALUE("dir").
 (source_code
   (dos_statement)
   (dos_statement)
-  (dos_statement)
+  (dos_statement
+    command_token: (identifier))
   (dos_statement
     command: (string_literal))
   (dos_statement
     command: (string_literal))
   (dos_statement
+    command_token: (identifier)
     command: (string_literal)))
 
 ================================================================================
@@ -32,4 +34,19 @@ ELSE DISPLAY OPSYS "is an unsupported operating system".
 
 --------------------------------------------------------------------------------
 
-(source_code)
+(source_code
+  (if_statement
+    (binary_expression
+      (identifier)
+      (string_literal))
+    then: (unix_statement
+      command_token: (identifier))
+    else: (if_statement
+      (binary_expression
+        (identifier)
+        (string_literal))
+      then: (dos_statement
+        command_token: (identifier))
+      else: (display_statement
+        (identifier)
+        (string_literal)))))

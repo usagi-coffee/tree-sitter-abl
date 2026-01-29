@@ -83,4 +83,93 @@ COMPILE myproc.p MIN-SIZE DEFAULT-UNTRANSLATABLE NO-ERROR.
 
 --------------------------------------------------------------------------------
 
-(source_code)
+(source_code
+  (compile_statement
+    file: (identifier)
+    (compile_option))
+  (compile_statement
+    file: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (compile_option)
+    (compile_option
+      listing: (qualified_name
+        left: (identifier)
+        right: (identifier)))
+    (compile_option
+      xref: (qualified_name
+        left: (identifier)
+        right: (identifier)))
+    (compile_option
+      debug_list: (qualified_name
+        left: (identifier)
+        right: (identifier))))
+  (compile_statement
+    file: (string_literal)
+    (compile_option
+      options: (string_literal)))
+  (compile_statement
+    file: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (compile_option
+      options_file: (function_call
+        function: (identifier)
+        (arguments
+          (argument
+            value: (identifier)))))
+    (compile_option
+      into: (function_call
+        function: (identifier)
+        (arguments
+          (argument
+            value: (identifier))))))
+  (compile_statement
+    file: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (compile_option
+      xcode: (string_literal)))
+  (compile_statement
+    file: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (compile_option
+      xref_xml: (string_literal)))
+  (compile_statement
+    file: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (compile_option))
+  (compile_statement
+    file: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (compile_option
+      languages: (string_literal))
+    (compile_option
+      text_seg_grow: (number_literal)))
+  (compile_statement
+    file: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (compile_option
+      preprocess: (string_literal)))
+  (compile_statement
+    file: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (compile_option)
+    (compile_option))
+  (compile_statement
+    file: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (compile_option)
+    (compile_option))
+  (compile_statement
+    file: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (compile_option)
+    (compile_option)))

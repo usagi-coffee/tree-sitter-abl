@@ -2,8 +2,8 @@
 TERMINAL statement
 ===============================================================================
 
-TERMINAL "vt100".
-TERMINAL cTermType.
+TERMINAL = "vt100".
+TERMINAL = cTermType.
 
 --------------------------------------------------------------------------------
 
@@ -17,11 +17,11 @@ TERMINAL cTermType.
 TERMINAL statement with various expression types
 ===============================================================================
 
-TERMINAL "vt100".
-TERMINAL cTermType.
-TERMINAL "ansi".
-TERMINAL "monochrome".
-TERMINAL "CO80".
+TERMINAL = "vt100".
+TERMINAL = cTermType.
+TERMINAL = "ansi".
+TERMINAL = "monochrome".
+TERMINAL = "CO80".
 
 --------------------------------------------------------------------------------
 
@@ -55,4 +55,31 @@ DISPLAY "Back to 80 columns." WITH CENTERED.
 
 -------------------------------------------------------------------------------
 
-(source_code)
+(source_code
+  (for_each_statement
+    (record
+      (identifier)
+      (no_lock))
+    (body
+      (display_statement
+        (identifier))))
+  (terminal_statement
+    (string_literal))
+  (output_statement)
+  (for_each_statement
+    (record
+      (identifier)
+      (no_lock))
+    (body
+      (display_statement
+        (identifier)
+        (identifier)
+        (identifier)
+        (number_literal))))
+  (output_statement)
+  (terminal_statement
+    (string_literal))
+  (display_statement
+    (string_literal)
+    (identifier)
+    (identifier)))

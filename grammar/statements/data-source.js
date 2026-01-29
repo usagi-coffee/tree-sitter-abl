@@ -2,12 +2,8 @@ module.exports = ({ kw, tkw }) => ({
   data_source_definition: ($) =>
     seq(
       choice(kw("DEFINE"), kw("DEF")),
-      optional(
-        seq(
-          optional(alias($.__data_source_access_modifier, $.access_modifier)),
-          optional(alias($.__data_source_static_modifier, $.static_modifier)),
-        ),
-      ),
+      optional(alias($.__data_source_access_modifier, $.access_modifier)),
+      optional(alias($.__data_source_static_modifier, $.static_modifier)),
       kw("DATA-SOURCE"),
       $.__data_source_body,
       $._terminator,

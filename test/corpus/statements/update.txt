@@ -95,15 +95,20 @@ UPDATE "Header" TO 30 Customer.Name.
 
 (source_code
   (update_statement
-    record: (identifier)
-    field: (identifier)
-    field: (identifier)
+    (update_item
+      field: (identifier))
+    (update_item
+      field: (identifier))
+    (update_item
+      field: (identifier))
+    (update_item
+      field: (identifier))
     (frame_phrase
       frame: (identifier)))
   (update_statement
     (update_item
       constant: (string_literal)
-      (to_phrase))
+      (at_phrase))
     (update_item
       field: (qualified_name
         left: (identifier)

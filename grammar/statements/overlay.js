@@ -8,18 +8,11 @@ module.exports = ({ tkw }) => ({
       field("target", $._expression),
       ",",
       field("position", $._expression),
-      optional(seq(",", field("length", $._expression))),
       optional(
         seq(
           ",",
-          field(
-            "type",
-            choice(
-              alias(tkw("CHARACTER"), $.CHARACTER),
-              alias(tkw("RAW"), $.RAW),
-              alias(tkw("COLUMN"), $.COLUMN),
-            ),
-          ),
+          field("length", $._expression),
+          optional(seq(",", field("type", $._expression))),
         ),
       ),
       ")",

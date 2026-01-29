@@ -35,4 +35,31 @@ OS-DELETE VALUE("tmp") RECURSIVE.
 
 --------------------------------------------------------------------------------
 
-(source_code)
+(source_code
+  (variable_definition
+    (identifier)
+    (identifier)
+    (no_undo))
+  (variable_definition
+    (identifier)
+    (identifier)
+    (no_undo)
+    (initial_option
+      (boolean_literal)))
+  (repeat_statement
+    (identifier)
+    (body
+      (system_dialog_get_file_statement
+        (identifier)
+        (string_literal)
+        (identifier))
+      (if_statement
+        (binary_expression
+          (identifier)
+          (boolean_literal))
+        (leave_statement
+          (identifier))
+        (os_delete_statement
+          (identifier)))))
+  (os_delete_statement
+    (string_literal)))

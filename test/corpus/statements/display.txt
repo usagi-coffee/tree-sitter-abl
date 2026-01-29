@@ -195,7 +195,7 @@ END.
 
 FOR EACH Order NO-LOCK, Customer OF Order NO-LOCK:
   DISPLAY Order.OrderNum Customer.Name Order.ShipDate Order.PromiseDate.
-  FOR EACH OrderLine OF Order NO-LOCK, Item OF OrderLine NO-UNDO:
+  FOR EACH OrderLine OF Order NO-LOCK, Item OF OrderLine NO-LOCK:
     DISPLAY OrderLine.LineNum Item.ItemName OrderLine.Qty OrderLine.Price
       OrderLine.Qty * OrderLine.Price (TOTAL) LABEL "Order-value".
   END.

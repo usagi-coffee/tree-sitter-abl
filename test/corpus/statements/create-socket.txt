@@ -18,4 +18,6 @@ CREATE SOCKET sock NO-ERROR.
 
 --------------------------------------------------------------------------------
 
-(source_code)
+(source_code
+  (create_socket_statement
+    name: (identifier)))

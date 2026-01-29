@@ -22,6 +22,7 @@ module.exports = ({ kw, tkw }) => ({
           alias($.__repeat_on_stop_phrase, $.on_stop_phrase),
           alias($.__repeat_on_error_phrase, $.on_error_phrase),
           alias($.__repeat_on_quit_phrase, $.on_quit_phrase),
+          alias($.__repeat_frame_phrase, $.frame_phrase),
         ),
       ),
       $.body,
@@ -125,4 +126,7 @@ module.exports = ({ kw, tkw }) => ({
   __repeat_undo_throw_phrase: ($) => seq(tkw("UNDO"), ",", tkw("THROW")),
   __repeat_undo_return_error: ($) =>
     seq(tkw("UNDO"), ",", tkw("RETURN"), tkw("ERROR"), $.new_expression),
+
+  __repeat_frame_phrase: ($) =>
+    seq(kw("WITH"), kw("FRAME"), field("frame", $.identifier)),
 });

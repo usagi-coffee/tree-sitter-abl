@@ -41,4 +41,41 @@ END.
 
 --------------------------------------------------------------------------------
 
-(source_code)
+(source_code
+  (query_definition
+    name: (identifier)
+    (query_table_list
+      table: (identifier)
+      table: (identifier)))
+  (open_query_statement
+    query: (identifier)
+    (record_phrase
+      record: (identifier))
+    (record_phrase
+      record: (identifier)
+      of: (identifier)))
+  (get_statement
+    query: (identifier))
+  (do_block
+    (available_expression
+      record: (identifier))
+    (body
+      (display_statement
+        (qualified_name
+          left: (identifier)
+          right: (identifier))
+        (qualified_name
+          left: (identifier)
+          right: (identifier))
+        (identifier)
+        (identifier)
+        (identifier))
+      (display_statement
+        (identifier)
+        (identifier)
+        (identifier)
+        (identifier)
+        (identifier))
+      (pause_statement)
+      (get_statement
+        query: (identifier)))))

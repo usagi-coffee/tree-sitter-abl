@@ -18,4 +18,6 @@ EMPTY TEMP-TABLE tt_items NO-ERROR.
 
 --------------------------------------------------------------------------------
 
-(source_code)
+(source_code
+  (empty_temp_table_statement
+    name: (identifier)))

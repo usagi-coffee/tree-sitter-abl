@@ -30,4 +30,43 @@ OS-CREATE-DIR VALUE("tmp") "logs".
 
 --------------------------------------------------------------------------------
 
-(source_code)
+(source_code
+  (variable_definition
+    (identifier)
+    (identifier)
+    (no_undo))
+  (variable_definition
+    (identifier)
+    (identifier)
+    (no_undo)
+    (format_option
+      (string_literal))
+    (label_option
+      (string_literal)))
+  (update_statement
+    (update_item
+      (identifier)))
+  (os_create_dir_statement
+    (function_call
+      (identifier)
+      (arguments
+        (argument
+          (identifier)))))
+  (assignment_statement
+    (identifier)
+    (assignment_operator)
+    (identifier))
+  (if_statement
+    (binary_expression
+      (identifier)
+      (number_literal))
+    (message_statement
+      (string_literal)
+      (identifier)))
+  (os_create_dir_statement
+    (function_call
+      (identifier)
+      (arguments
+        (argument
+          (string_literal))))
+    (string_literal)))

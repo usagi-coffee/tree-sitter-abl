@@ -60,4 +60,57 @@ INSERT Customer USING RECID(2) NO-ERROR.
 
 --------------------------------------------------------------------------------
 
-(source_code)
+(source_code
+  (insert_statement
+    (identifier)
+    (frame_phrase
+      (number_literal)))
+  (repeat_statement
+    (body
+      (create_statement
+        (identifier))
+      (assignment_statement
+        (qualified_name
+          (identifier)
+          (identifier))
+        (assignment_operator)
+        (qualified_name
+          (identifier)
+          (identifier)))
+      (update_statement
+        (update_item
+          (qualified_name
+            (identifier)
+            (identifier)))
+        (update_item
+          (qualified_name
+            (identifier)
+            (identifier)))
+        (update_item
+          (qualified_name
+            (identifier)
+            (identifier)))
+        (update_item
+          (qualified_name
+            (identifier)
+            (identifier))))
+      (find_statement
+        (identifier)
+        (of_phrase
+          (identifier)))))
+  (expression_statement
+    (identifier))
+  (insert_statement
+    (identifier)
+    (function_call
+      (identifier)
+      (arguments
+        (argument
+          (number_literal)))))
+  (insert_statement
+    (identifier)
+    (function_call
+      (identifier)
+      (arguments
+        (argument
+          (number_literal))))))

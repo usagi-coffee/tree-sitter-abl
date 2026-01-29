@@ -30,4 +30,19 @@ COPY-LOB FROM FILE inPath TO targetPtr NO-ERROR.
 
 --------------------------------------------------------------------------------
 
-(source_code)
+(source_code
+  (copy_lob_statement
+    source: (identifier)
+    target: (identifier))
+  (copy_lob_statement
+    source_file: (identifier)
+    starting_at: (number_literal)
+    for_length: (number_literal)
+    target_file: (identifier))
+  (copy_lob_statement
+    source: (identifier)
+    target: (identifier)
+    overlay_at: (number_literal))
+  (copy_lob_statement
+    source_file: (identifier)
+    target: (identifier)))

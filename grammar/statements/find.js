@@ -3,8 +3,9 @@ module.exports = ({ kw, tkw }) => ({
 
   __find_body: ($) =>
     seq(
-      optional(choice(kw("FIRST"), kw("LAST"), kw("CURRENT"))),
+      optional(choice(kw("FIRST"), kw("LAST"), kw("NEXT"), kw("PREV"), kw("CURRENT"))),
       field("table", $.__find_record_name),
+      optional(field("constant", $._expression)),
       optional(alias($.__find_of_phrase, $.of_phrase)),
       repeat($._find_record_option_or_where),
     ),

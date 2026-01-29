@@ -96,4 +96,43 @@ UPDATE a b.
 
 -------------------------------------------------------------------------------
 
-(source_code)
+(source_code
+  (for_each_statement
+    (record
+      (identifier))
+    (body
+      (update_statement
+        (update_item
+          (identifier))
+        (frame_phrase
+          (number_literal)))
+      (if_statement
+        (binary_expression
+          (qualified_name
+            (identifier)
+            (identifier))
+          (string_literal))
+        (do_block
+          (body
+            (message_statement
+              (string_literal))
+            (next_prompt_statement
+              (qualified_name
+                (identifier)
+                (identifier)))
+            (undo_statement))))))
+  (variable_definition
+    (identifier)
+    (identifier)
+    (no_undo))
+  (variable_definition
+    (identifier)
+    (identifier)
+    (no_undo))
+  (next_prompt_statement
+    (identifier))
+  (update_statement
+    (update_item
+      (identifier))
+    (update_item
+      (identifier))))

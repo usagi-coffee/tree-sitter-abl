@@ -39,4 +39,50 @@ SUBSCRIBE TO "spaced event" ANYWHERE RUN-PROCEDURE "spaced event".
 
 --------------------------------------------------------------------------------
 
-(source_code)
+(source_code
+  (variable_definition
+    (identifier)
+    (identifier)
+    (no_undo))
+  (variable_definition
+    (identifier)
+    (identifier)
+    (no_undo))
+  (variable_definition
+    (identifier)
+    (identifier)
+    (no_undo))
+  (run_statement
+    (procedure_name)
+    (persistent_option
+      (identifier)))
+  (run_statement
+    (procedure_name)
+    (persistent_option
+      (identifier))
+    (arguments
+      (argument
+        (identifier))))
+  (run_statement
+    (procedure_name)
+    (persistent_option
+      (identifier)))
+  (subscribe_statement
+    (identifier)
+    (string_literal)
+    (identifier))
+  (parameter_definition
+    (identifier)
+    (identifier)
+    (no_undo))
+  (subscribe_statement
+    (string_literal)
+    (identifier))
+  (subscribe_statement
+    (identifier)
+    (identifier)
+    (identifier)
+    (string_literal))
+  (subscribe_statement
+    (string_literal)
+    (string_literal)))

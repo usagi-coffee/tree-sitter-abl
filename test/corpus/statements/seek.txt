@@ -35,4 +35,49 @@ SEEK STREAM-HANDLE hS TO 100.
 
 --------------------------------------------------------------------------------
 
-(source_code)
+(source_code
+  (variable_definition
+    (identifier)
+    (identifier)
+    (no_undo))
+  (variable_definition
+    (identifier)
+    (identifier)
+    (no_undo)
+    (format_option
+      (string_literal)))
+  (output_statement
+    (qualified_name
+      (identifier)
+      (identifier))
+    (append_phrase))
+  (assignment_statement
+    (identifier)
+    (assignment_operator)
+    (function_call
+      (identifier)
+      (arguments
+        (argument))))
+  (put_statement
+    (string_literal)
+    (skip))
+  (output_statement)
+  (input_statement
+    (qualified_name
+      (identifier)
+      (identifier)))
+  (seek_statement
+    (identifier))
+  (set_statement
+    (set_item
+      (identifier)))
+  (display_statement
+    (identifier))
+  (input_statement)
+  (seek_statement
+    (number_literal))
+  (seek_statement
+    (identifier))
+  (seek_statement
+    (identifier)
+    (number_literal)))

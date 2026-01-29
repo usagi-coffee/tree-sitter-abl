@@ -259,10 +259,21 @@ DEF DATA-SOURCE d FOR buf.
 DATA-SOURCE DEFINITION - Reference snippet variations
 ================================================================================
 
-DEFINE STATIC PRIVATE DATA-SOURCE dsStaticPriv FOR bCust.
+DEFINE PRIVATE STATIC DATA-SOURCE dsStaticPriv FOR bCust.
 DEFINE DATA-SOURCE dsQueryOnly QUERY qMain.
 DEFINE DATA-SOURCE dsKeyRowid FOR bCust KEYS (ROWID).
 
 --------------------------------------------------------------------------------
 
-(source_code)
+(source_code
+  (data_source_definition
+    (access_modifier)
+    (static_modifier)
+    name: (identifier)
+    buffer: (identifier))
+  (data_source_definition
+    name: (identifier)
+    query: (identifier))
+  (data_source_definition
+    name: (identifier)
+    buffer: (identifier)))

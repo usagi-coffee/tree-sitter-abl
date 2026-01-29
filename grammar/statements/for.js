@@ -163,9 +163,18 @@ module.exports = ({ kw, tkw }) => ({
   __for_with_frame_phrase: ($) =>
     seq(
       kw("WITH"),
-      kw("FRAME"),
-      optional(field("name", $.identifier)),
-      optional(seq(kw("WIDTH"), $.number_literal)),
+      repeat1(
+        choice(
+          seq(kw("FRAME"), optional(field("name", $.identifier))),
+          seq(kw("WIDTH"), $.number_literal),
+          seq($.number_literal, tkw("DOWN")),
+          tkw("CENTERED"),
+          seq(kw("TITLE"), $._expression),
+          tkw("USE-TEXT"),
+          seq(kw("COLUMN"), $._expression),
+          seq(kw("ROW"), $._expression),
+        ),
+      ),
     ),
   __for_with_stream_io_phrase: ($) => seq(kw("WITH"), tkw("STREAM-IO")),
   __for_sort_direction: ($) => token(/ASC(ENDING)?|DESC(ENDING)?/i),

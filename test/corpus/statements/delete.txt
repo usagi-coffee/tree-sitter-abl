@@ -130,4 +130,21 @@ DELETE Customer VALIDATE(NOT(CAN-FIND(Order OF Customer)),
 
 --------------------------------------------------------------------------------
 
-(source_code)
+(source_code
+  (for_each_statement
+    (record
+      table: (identifier))
+    (body
+      (delete_statement
+        record: (identifier))))
+  (delete_statement
+    record: (identifier)
+    (validate_option
+      (unary_expression
+        (parenthesized_expression
+          (can_find_expression
+            (record_query
+              table: (identifier)
+              (of_phrase
+                record: (identifier))))))
+      (string_literal))))

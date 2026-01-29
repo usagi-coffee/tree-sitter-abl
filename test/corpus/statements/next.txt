@@ -26,4 +26,43 @@ END.
 
 --------------------------------------------------------------------------------
 
-(source_code)
+(source_code
+  (prompt_for_statement
+    (prompt_for_item
+      (qualified_name
+        (identifier)
+        (identifier))
+      (format_phrase
+        (label_option
+          (string_literal))))
+    (frame_phrase))
+  (for_each_statement
+    (record
+      (identifier))
+    (body
+      (if_statement
+        (binary_expression
+          (qualified_name
+            (identifier)
+            (identifier))
+          (input_expression
+            (qualified_name
+              (identifier)
+              (identifier))))
+        (next_statement))
+      (display_statement
+        (qualified_name
+          (identifier)
+          (identifier))
+        (qualified_name
+          (identifier)
+          (identifier))
+        (qualified_name
+          (identifier)
+          (identifier))
+        (qualified_name
+          (identifier)
+          (identifier))
+        (identifier)
+        (identifier)
+        (identifier)))))

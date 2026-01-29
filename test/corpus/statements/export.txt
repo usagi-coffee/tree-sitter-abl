@@ -48,4 +48,51 @@ EXPORT STREAM-HANDLE hOut memptrBuf.
 
 --------------------------------------------------------------------------------
 
-(source_code)
+(source_code
+  (output_statement
+    file: (qualified_name
+      left: (identifier)
+      right: (identifier)))
+  (for_each_statement
+    (record
+      table: (identifier)
+      (no_lock))
+    (body
+      (export_statement
+        (identifier))))
+  (output_statement)
+  (output_statement
+    file: (identifier))
+  (for_each_statement
+    (record
+      table: (identifier)
+      (no_lock))
+    (body
+      (export_statement
+        (delimiter_phrase
+          (string_literal))
+        (qualified_name
+          left: (identifier)
+          right: (identifier))
+        (qualified_name
+          left: (identifier)
+          right: (identifier))
+        (qualified_name
+          left: (identifier)
+          right: (identifier)))))
+  (output_statement)
+  (export_statement
+    (identifier)
+    (identifier))
+  (export_statement
+    (identifier))
+  (export_statement
+    (stream_phrase
+      name: (identifier))
+    (qualified_name
+      left: (identifier)
+      right: (identifier)))
+  (export_statement
+    (stream_handle_phrase
+      handle: (identifier))
+    (identifier)))

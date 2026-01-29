@@ -110,4 +110,17 @@ CREATE Customer USING RECID(2).
 
 --------------------------------------------------------------------------------
 
-(source_code)
+(source_code
+  (create_statement
+    table: (identifier))
+  (create_statement
+    table: (identifier))
+  (create_statement
+    table: (identifier)
+    tenant: (number_literal))
+  (create_statement
+    table: (identifier)
+    rowid: (number_literal))
+  (create_statement
+    table: (identifier)
+    recid: (number_literal)))

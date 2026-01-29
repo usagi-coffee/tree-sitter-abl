@@ -61,18 +61,22 @@ module.exports = ({ kw, tkw }) => ({
   __system_dialog_get_file_body: ($) =>
     seq(
       field("variable", $.identifier),
-      optional(alias($.__system_dialog_filters, $.filters_phrase)),
-      optional(tkw("ASK-OVERWRITE")),
-      optional(tkw("CREATE-TEST-FILE")),
-      optional(seq(kw("DEFAULT-EXTENSION"), field("extension", $._expression))),
-      optional(seq(kw("INITIAL-DIR"), field("initial_dir", $._expression))),
-      optional(tkw("MUST-EXIST")),
-      optional(tkw("RETURN-TO-START-DIR")),
-      optional(tkw("SAVE-AS")),
-      optional(seq(kw("TITLE"), field("title", $._expression))),
-      optional(tkw("USE-FILENAME")),
-      optional(seq(kw("UPDATE"), field("update", $.identifier))),
-      optional(seq(kw("IN"), kw("WINDOW"), field("window", $._expression))),
+      repeat(
+        choice(
+          alias($.__system_dialog_filters, $.filters_phrase),
+          tkw("ASK-OVERWRITE"),
+          tkw("CREATE-TEST-FILE"),
+          seq(kw("DEFAULT-EXTENSION"), field("extension", $._expression)),
+          seq(kw("INITIAL-DIR"), field("initial_dir", $._expression)),
+          tkw("MUST-EXIST"),
+          tkw("RETURN-TO-START-DIR"),
+          tkw("SAVE-AS"),
+          seq(kw("TITLE"), field("title", $._expression)),
+          tkw("USE-FILENAME"),
+          seq(kw("UPDATE"), field("update", $.identifier)),
+          seq(kw("IN"), kw("WINDOW"), field("window", $._expression)),
+        ),
+      ),
     ),
 
   system_dialog_printer_setup_statement: ($) =>

@@ -74,10 +74,12 @@ SET field1 FORMAT "x(10)" WHEN ok
   (set_statement
     (set_item
       field: (identifier)
-      (format_phrase)
+      (format_phrase
+        (format_option))
       when: (identifier))
     (set_item
-      (format_phrase))
+      (format_phrase
+        (format_option)))
     (set_item
       constant: (string_literal)
       (at_phrase))

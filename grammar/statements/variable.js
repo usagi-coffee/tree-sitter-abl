@@ -114,6 +114,8 @@ module.exports = ({ kw, tkw }) => ({
     choice(
       tkw("HORIZONTAL"),
       tkw("VERTICAL"),
+      tkw("SINGLE"),
+      tkw("MULTIPLE"),
       seq(tkw("LIST-ITEMS"), $.__variable_list_items),
       seq(tkw("RADIO-BUTTONS"), $.__variable_radio_buttons),
       seq(tkw("SIZE"), $._expression, kw("BY"), $._expression),

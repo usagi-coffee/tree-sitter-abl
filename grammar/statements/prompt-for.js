@@ -41,6 +41,13 @@ module.exports = ({ kw, tkw }) => ({
     ),
   __prompt_for_field_target: ($) => choice($.identifier, $.qualified_name),
   __prompt_for_format_phrase: ($) =>
+    repeat1(
+      choice(
+        alias($.__prompt_for_format_option, $.format_option),
+        alias($.__prompt_for_label_option, $.label_option),
+      ),
+    ),
+  __prompt_for_format_option: ($) =>
     seq(
       kw("FORMAT"),
       $._escaped_string,
@@ -48,10 +55,26 @@ module.exports = ({ kw, tkw }) => ({
         token.immediate(/:(?:[RLCT](?:U)?(?:[0-9]+)?|U(?:[0-9]+)?|[0-9]+)/i),
       ),
     ),
+  __prompt_for_label_option: ($) =>
+    seq(
+      kw("LABEL"),
+      choice($.string_literal, $.identifier),
+      repeat(seq(",", choice($.string_literal, $.identifier))),
+    ),
   __prompt_for_at_phrase: ($) => seq(kw("AT"), token(/[0-9]+(\.[0-9]+)?/)),
   __prompt_for_editing_phrase: ($) =>
     seq(tkw("EDITING"), $._colon, repeat1($._statement), tkw("END")),
   __prompt_for_go_on: ($) => seq(tkw("GO-ON"), "(", repeat1($.identifier), ")"),
   __prompt_for_frame_phrase: ($) =>
-    seq(kw("WITH"), optional(seq(kw("FRAME"), field("frame", $.identifier)))),
+    seq(
+      kw("WITH"),
+      repeat(
+        choice(
+          seq(kw("FRAME"), field("frame", $.identifier)),
+          tkw("SIDE-LABELS"),
+          tkw("NO-LABELS"),
+          tkw("CENTERED"),
+        ),
+      ),
+    ),
 });

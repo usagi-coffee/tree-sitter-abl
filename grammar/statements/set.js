@@ -45,6 +45,13 @@ module.exports = ({ kw, tkw }) => ({
     ),
   __set_field_target: ($) => choice($.identifier, $.qualified_name),
   __set_format_phrase: ($) =>
+    repeat1(
+      choice(
+        alias($.__set_format_option, $.format_option),
+        alias($.__set_label_option, $.label_option),
+      ),
+    ),
+  __set_format_option: ($) =>
     seq(
       kw("FORMAT"),
       $._escaped_string,
@@ -52,6 +59,7 @@ module.exports = ({ kw, tkw }) => ({
         token.immediate(/:(?:[RLCT](?:U)?(?:[0-9]+)?|U(?:[0-9]+)?|[0-9]+)/i),
       ),
     ),
+  __set_label_option: ($) => seq(kw("LABEL"), $._expression),
   __set_at_phrase: ($) => seq(kw("AT"), token(/[0-9]+(\.[0-9]+)?/)),
   __set_editing_phrase: ($) =>
     seq(tkw("EDITING"), $._colon, repeat1($._statement), tkw("END")),
@@ -59,8 +67,17 @@ module.exports = ({ kw, tkw }) => ({
   __set_frame_phrase: ($) =>
     seq(
       kw("WITH"),
-      optional(seq(kw("FRAME"), field("frame", $.identifier))),
-      repeat($.__set_frame_option),
+      repeat(
+        choice(
+          seq(kw("FRAME"), field("frame", $.identifier)),
+          tkw("NO-LABELS"),
+          tkw("SIDE-LABELS"),
+          tkw("NO-BOX"),
+          tkw("CENTERED"),
+          seq(kw("TITLE"), $._expression),
+          seq(kw("ROW"), $._expression),
+          seq(kw("COLUMN"), $._expression),
+        ),
+      ),
     ),
-  __set_frame_option: ($) => choice(tkw("NO-LABELS"), tkw("SIDE-LABELS")),
 });

@@ -40,4 +40,65 @@ OS-RENAME "a.txt" VALUE("b.txt").
 
 --------------------------------------------------------------------------------
 
-(source_code)
+(source_code
+  (variable_definition
+    (identifier)
+    (identifier)
+    (no_undo))
+  (variable_definition
+    (identifier)
+    (identifier)
+    (no_undo)
+    (format_option
+      (string_literal))
+    (view_as_phrase
+      (identifier)))
+  (variable_definition
+    (identifier)
+    (identifier)
+    (no_undo)
+    (initial_option
+      (boolean_literal)))
+  (repeat_statement
+    (identifier)
+    (body
+      (system_dialog_get_file_statement
+        (identifier)
+        (string_literal)
+        (identifier))
+      (if_statement
+        (binary_expression
+          (identifier)
+          (boolean_literal))
+        (leave_statement
+          (identifier)))
+      (update_statement
+        (update_item
+          (identifier))
+        (frame_phrase
+          (identifier)))
+      (os_rename_statement
+        (function_call
+          (identifier)
+          (arguments
+            (argument
+              (identifier))))
+        (function_call
+          (identifier)
+          (arguments
+            (argument
+              (identifier)))))))
+  (os_rename_statement
+    (function_call
+      (identifier)
+      (arguments
+        (argument
+          (string_literal))))
+    (string_literal))
+  (os_rename_statement
+    (string_literal)
+    (function_call
+      (identifier)
+      (arguments
+        (argument
+          (string_literal))))))

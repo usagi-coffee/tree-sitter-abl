@@ -33,13 +33,18 @@ module.exports = ({ kw, tkw }) => ({
       ),
       seq(
         field("constant", $.string_literal),
-        alias($.__update_at_phrase, $.at_phrase),
+        optional(alias($.__update_at_phrase, $.at_phrase)),
       ),
       tkw("SKIP"),
     ),
   __update_field_target: ($) => choice($.identifier, $.qualified_name),
   __update_format_phrase: ($) =>
-    seq(alias($.__update_format_option, $.format_option)),
+    repeat1(
+      choice(
+        alias($.__update_format_option, $.format_option),
+        alias($.__update_validate_option, $.validate_option),
+      ),
+    ),
   __update_format_option: ($) =>
     seq(
       kw("FORMAT"),
@@ -48,10 +53,38 @@ module.exports = ({ kw, tkw }) => ({
         token.immediate(/:(?:[RLCT](?:U)?(?:[0-9]+)?|U(?:[0-9]+)?|[0-9]+)/i),
       ),
     ),
-  __update_at_phrase: ($) => seq(kw("AT"), token(/[0-9]+(\.[0-9]+)?/)),
+  __update_validate_option: ($) =>
+    seq(
+      tkw("VALIDATE"),
+      "(",
+      field("condition", $._expression),
+      ",",
+      field("message", $._expression),
+      ")",
+    ),
+  __update_at_phrase: ($) =>
+    seq(choice(kw("AT"), kw("TO")), token(/[0-9]+(\.[0-9]+)?/)),
   __update_editing_phrase: ($) =>
     seq(tkw("EDITING"), $._colon, repeat1($._statement), tkw("END")),
   __update_go_on: ($) => seq(tkw("GO-ON"), "(", repeat1($.identifier), ")"),
   __update_frame_phrase: ($) =>
-    seq(kw("WITH"), optional(seq(kw("FRAME"), field("frame", $.identifier)))),
+    seq(
+      kw("WITH"),
+      repeat(
+        choice(
+          seq(kw("FRAME"), field("frame", $.identifier)),
+          seq($.number_literal, tkw("COLUMN")),
+          seq($.number_literal, tkw("COLUMNS")),
+          tkw("CENTERED"),
+          seq(optional($.number_literal), tkw("DOWN")),
+          seq(kw("TITLE"), $._expression),
+          seq(kw("WIDTH"), $.number_literal),
+          tkw("SIDE-LABELS"),
+          tkw("NO-LABELS"),
+          tkw("NO-BOX"),
+          seq(kw("ROW"), $._expression),
+          seq(kw("COLUMN"), $._expression),
+        ),
+      ),
+    ),
 });

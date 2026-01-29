@@ -80,9 +80,11 @@ module.exports = ({ kw, tkw }) => ({
     seq(
       choice(kw("SET"), kw("UPDATE")),
       field("field", $.__message_field_name),
-      choice(
-        seq(kw("AS"), field("type", $._type_name)),
-        seq(kw("LIKE"), field("like", $.__message_field_name)),
+      optional(
+        choice(
+          seq(kw("AS"), field("type", $._type_name)),
+          seq(kw("LIKE"), field("like", $.__message_field_name)),
+        ),
       ),
       optional(seq(kw("FORMAT"), field("format", $.string_literal))),
       optional(tkw("AUTO-RETURN")),

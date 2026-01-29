@@ -21,5 +21,23 @@ module.exports = ({ kw, tkw }) => ({
     ),
   __form_view_as: ($) => seq(kw("VIEW-AS"), field("widget", $.identifier)),
   __form_frame_phrase: ($) =>
-    seq(kw("WITH"), optional(seq(kw("FRAME"), field("frame", $.identifier)))),
+    seq(
+      kw("WITH"),
+      repeat(
+        choice(
+          seq(kw("FRAME"), field("frame", $.identifier)),
+          tkw("CENTERED"),
+          seq(optional($.number_literal), tkw("DOWN")),
+          seq(kw("TITLE"), field("title", $._expression)),
+          seq(kw("WIDTH"), $.number_literal),
+          tkw("SIDE-LABELS"),
+          tkw("NO-LABELS"),
+          tkw("NO-BOX"),
+          tkw("PAGE-TOP"),
+          tkw("PAGE-BOTTOM"),
+          seq(kw("ROW"), $._expression),
+          seq(kw("COLUMN"), $._expression),
+        ),
+      ),
+    ),
 });

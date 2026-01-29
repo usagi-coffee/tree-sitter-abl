@@ -42,15 +42,17 @@ module.exports = grammar({
     [
       $.__buffer_access_modifier,
       $.__data_source_access_modifier,
+      $.__dataset_access_modifier,
       $.__event_access_modifier,
       $.__query_access_modifier,
       $.__temp_table_access_modifier,
       $.__variable_access_modifier,
     ],
     [$.__event_access_modifier, $.__variable_access_modifier],
-    [$.__temp_table_access_modifier, $.__variable_access_modifier],
-    [$.__temp_table_static_modifier, $.__variable_static_modifier],
+    [$.__dataset_access_modifier, $.__temp_table_access_modifier, $.__variable_access_modifier],
+    [$.__dataset_shared_scope, $.__temp_table_shared_scope],
     [$.__event_static_modifier, $.__variable_static_modifier],
+    [$.__dataset_static_modifier, $.__temp_table_static_modifier, $.__variable_static_modifier],
     [$.__property_modifier, $.__event_abstract_modifier],
     [$.__property_modifier, $.__event_override_modifier],
 
@@ -139,8 +141,8 @@ module.exports = grammar({
       ...require("./grammar/phrases")(ctx),
 
       // Literals
-      number_literal: ($) => token(prec(-1, /[0-9]+(\.[0-9]+)?/)),
-      _signed_number_literal: ($) => token(prec(1, /[+-][0-9]+(\.[0-9]+)?/)),
+      number_literal: ($) => token(prec(-1, /([0-9]+(\.[0-9]+)?|\.[0-9]+)/)),
+      _signed_number_literal: ($) => token(prec(1, /[+-]([0-9]+(\.[0-9]+)?|\.[0-9]+)/)),
       date_literal: ($) =>
         token(prec(1, /[0-9]{1,2}[./][0-9]{1,2}[./][0-9]{2,4}/)),
       string_literal: ($) =>
@@ -178,6 +180,7 @@ module.exports = grammar({
           $.object_access,
           $.array_access,
           $.function_call,
+          $.in_frame_expression,
         ),
 
       // Expressions
@@ -186,7 +189,7 @@ module.exports = grammar({
       unary_expression: ($) =>
         choice(
           prec(PREC.UNARY, seq(choice("+", "-"), $._expression)),
-          prec(PREC.NOT, seq(kw("NOT"), $._expression)),
+          prec(PREC.NOT, seq(tkw("NOT"), $._expression)),
         ),
       // Turns out this stupid split to __ reduces state counts dramatically
       binary_expression: ($) => $.__binary_expression,
@@ -262,11 +265,16 @@ module.exports = grammar({
       arguments: ($) =>
         seq("(", optional(seq($.argument, repeat(seq(",", $.argument)))), ")"),
       argument: ($) =>
-        seq(
-          optional(choice(tkw("INPUT"), tkw("OUTPUT"), tkw("INPUT-OUTPUT"))),
-          optional(tkw("TABLE")),
-          field("value", $._expression),
-          optional(tkw("BY-REFERENCE")),
+        choice(
+          // Stream keywords as values (e.g., SEEK(OUTPUT))
+          field("value", choice(tkw("INPUT"), tkw("OUTPUT"))),
+          // Regular arguments with optional direction
+          seq(
+            optional(choice(tkw("INPUT"), tkw("OUTPUT"), tkw("INPUT-OUTPUT"))),
+            optional(tkw("TABLE")),
+            field("value", $._expression),
+            optional(tkw("BY-REFERENCE")),
+          ),
         ),
 
       function_call: ($) =>

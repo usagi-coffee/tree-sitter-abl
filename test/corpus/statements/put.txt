@@ -58,4 +58,48 @@ PUT CONTROL NULL(20).
 
 --------------------------------------------------------------------------------
 
-(source_code)
+(source_code
+  (stream_definition
+    (identifier))
+  (output_statement
+    (stream_phrase
+      (identifier))
+    (qualified_name
+      (identifier)
+      (identifier)))
+  (for_each_statement
+    (record
+      (identifier)
+      (no_lock))
+    (body
+      (put_statement
+        (stream_phrase
+          (identifier))
+        (identifier)
+        (string_literal))))
+  (output_statement
+    (stream_phrase
+      (identifier)))
+  (put_statement
+    (stream_phrase
+      (identifier))
+    (string_literal)
+    (number_literal)
+    (space)
+    (skip))
+  (put_statement
+    (stream_handle_phrase
+      (identifier))
+    (identifier)
+    (number_literal)
+    (skip
+      (number_literal)))
+  (put_statement
+    (string_literal)
+    (identifier))
+  (put_statement
+    (function_call
+      (identifier)
+      (arguments
+        (argument
+          (number_literal))))))
