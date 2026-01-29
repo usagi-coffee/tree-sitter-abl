@@ -74,7 +74,26 @@ CASE pay-stat:
   END.
 END CASE.
 
-
 --------------------------------------------------------------------------------
 
-(source_code)
+(source_code
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo)
+    (initial_option
+      value: (number_literal)))
+  (case_statement
+    (identifier)
+    (case_when_phrase
+      (number_literal)
+      (case_phrase_statement
+        (message_statement
+          (string_literal))))
+    (case_when_phrase
+      (number_literal)
+      (number_literal)
+      (do_block
+        (body
+          (message_statement
+            (string_literal)))))))

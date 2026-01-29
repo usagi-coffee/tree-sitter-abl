@@ -22,6 +22,7 @@ module.exports = ({ kw, tkw }) => ({
   case_otherwise_phrase: ($) =>
     seq(kw("OTHERWISE"), choice($.do_block, $.case_phrase_statement)),
 
+  // TODO: why this instead of using _statement here?
   case_phrase_statement: ($) =>
     choice(
       $.enum_statement,
@@ -41,6 +42,7 @@ module.exports = ({ kw, tkw }) => ({
       $.put_statement,
       $.output_statement,
       $.os_command_statement,
+      $.message_statement,
       $.next_statement,
       $.release_statement,
       $.catch_statement,

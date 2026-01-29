@@ -77,7 +77,10 @@ module.exports = ({ kw, tkw }) => ({
   __variable_initial_option: ($) =>
     seq(
       $.__variable_initial_keyword,
-      choice($._expression, seq("[", optional($._expression_list), "]")),
+      field(
+        "value",
+        choice($._expression, seq("[", optional($._expression_list), "]")),
+      ),
     ),
 
   __variable_static_modifier: ($) => kw("STATIC"),

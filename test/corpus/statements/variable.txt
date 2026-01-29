@@ -32,10 +32,10 @@ DEFINE PRIVATE STATIC SERIALIZABLE VARIABLE cust AS CLASS Customer NO-UNDO.
     (extent_phrase
       (number_literal))
     (initial_option
-      (string_literal)
-      (string_literal)
-      (string_literal)
-      (string_literal)))
+      value: (string_literal)
+      value: (string_literal)
+      value: (string_literal)
+      value: (string_literal)))
   (variable_definition
     (shared_variable_scope)
     name: (identifier)
@@ -153,7 +153,7 @@ DEFINE VARIABLE rate AS DECIMAL DECIMALS 4 INITIAL 0.0525.
     (decimals_option
       (number_literal))
     (initial_option
-      (number_literal))))
+      value: (number_literal))))
 
 ================================================================================
 VARIABLE DEFINITION - EXTENT Variations
@@ -200,27 +200,27 @@ DEFINE VARIABLE dtDate AS DATE INITIAL TODAY.
     name: (identifier)
     type: (identifier)
     (initial_option
-      (number_literal)))
+      value: (number_literal)))
   (variable_definition
     name: (identifier)
     type: (identifier)
     (initial_option
-      (number_literal)))
+      value: (number_literal)))
   (variable_definition
     name: (identifier)
     type: (identifier)
     (initial_option
-      (string_literal)))
+      value: (string_literal)))
   (variable_definition
     name: (identifier)
     type: (identifier)
     (initial_option
-      (boolean_literal)))
+      value: (boolean_literal)))
   (variable_definition
     name: (identifier)
     type: (identifier)
     (initial_option
-      (identifier))))
+      value: (identifier))))
 
 ================================================================================
 VARIABLE DEFINITION - Shared Variations

@@ -133,7 +133,7 @@ END.
     type: (identifier)
     (no_undo)
     (initial_option
-      (number_literal)))
+      value: (number_literal)))
   (variable_definition
     name: (identifier)
     type: (identifier)
