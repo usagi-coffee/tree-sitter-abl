@@ -372,10 +372,28 @@ BUFFER DEFINITION - Reference snippets and ordering
 DEFINE BUFFER other-cust FOR Customer.
 DEFINE NEW SHARED BUFFER rec FOR Customer PRESELECT.
 DEFINE SHARED BUFFER rec FOR Customer PRESELECT.
-DEFINE STATIC PRIVATE BUFFER bufStaticPriv FOR Customer.
+DEFINE PRIVATE STATIC BUFFER bufStaticPriv FOR Customer.
 DEFINE BUFFER procBuf FOR proc-text-buffer.
-
 
 --------------------------------------------------------------------------------
 
-(source_code)
+(source_code
+  (buffer_definition
+    name: (identifier)
+    table: (identifier))
+  (buffer_definition
+    (shared_variable_scope)
+    name: (identifier)
+    table: (identifier))
+  (buffer_definition
+    (shared_variable_scope)
+    name: (identifier)
+    table: (identifier))
+  (buffer_definition
+    (access_modifier)
+    (static_modifier)
+    name: (identifier)
+    table: (identifier))
+  (buffer_definition
+    name: (identifier)
+    table: (identifier)))
