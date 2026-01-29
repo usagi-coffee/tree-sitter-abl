@@ -65,6 +65,8 @@ Strongly prefer using these commands as they have helpful side-effects like retu
 ## Notes
 
 - `bun` instead of `npm`.
+- Always prefer `tkw` over `kw`, `kw` are only needed usually for the starting keywords like `DEFINE`, `tkw` is a must for trailing keyword that happen before terminators.
+- There is no need to call `bun run build` during testing workflow, just use usual workflow commands like `bun run test` and `bun run parse:snippet`, they generate under the hood.
 - Never use `tree-sitter` CLI directly, use workflow commands.
 - Parser generation can take up to 1 minute so adjust timeout accordingly.
 - `bun run test` returns only failed cases and failed syntax tree OR a message that everything went well.

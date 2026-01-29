@@ -57,7 +57,32 @@ BUFFER-COPY bSrc USING Field1 Field2 TO bTgt.
 BUFFER-COPY bSrc TO bTgt ASSIGN Field1 = 1 Field2 += 2.
 BUFFER-COPY bSrc EXCEPT Field3 TO bTgt ASSIGN Field1 = 1 NO-LOBS NO-ERROR.
 
-
 --------------------------------------------------------------------------------
 
-(source_code)
+(source_code
+  (buffer_copy_statement
+    source: (identifier)
+    (using_phrase
+      (identifier)
+      (identifier))
+    target: (identifier))
+  (buffer_copy_statement
+    source: (identifier)
+    target: (identifier)
+    (assign_phrase
+      (assign_pair
+        left: (identifier)
+        right: (number_literal))
+      (assign_pair
+        left: (identifier)
+        right: (number_literal))))
+  (buffer_copy_statement
+    source: (identifier)
+    (except_phrase
+      (identifier))
+    target: (identifier)
+    (assign_phrase
+      (assign_pair
+        left: (identifier)
+        right: (number_literal)))
+    (no_error)))

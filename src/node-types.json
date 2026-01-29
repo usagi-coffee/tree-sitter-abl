@@ -1723,6 +1723,21 @@
     }
   },
   {
+    "type": "assign_phrase",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "assign_pair",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "assign_statement",
     "named": true,
     "fields": {},
@@ -4050,11 +4065,23 @@
       }
     },
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": false,
       "types": [
         {
+          "type": "assign_phrase",
+          "named": true
+        },
+        {
           "type": "except_phrase",
+          "named": true
+        },
+        {
+          "type": "no_error",
+          "named": true
+        },
+        {
+          "type": "using_phrase",
           "named": true
         }
       ]
