@@ -7615,6 +7615,30 @@
         },
         {
           "type": "SYMBOL",
+          "name": "browse_definition"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "frame_definition"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "menu_definition"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "submenu_definition"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "rectangle_definition"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "event_definition"
+        },
+        {
+          "type": "SYMBOL",
           "name": "procedure_definition"
         },
         {
@@ -62152,6 +62176,18 @@
     [
       "__temp_table_static_modifier",
       "__variable_static_modifier"
+    ],
+    [
+      "__event_static_modifier",
+      "__variable_static_modifier"
+    ],
+    [
+      "__property_modifier",
+      "__event_abstract_modifier"
+    ],
+    [
+      "__property_modifier",
+      "__event_override_modifier"
     ],
     [
       "_primary_expression",

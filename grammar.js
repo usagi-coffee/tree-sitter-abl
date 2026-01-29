@@ -57,6 +57,9 @@ module.exports = grammar({
     [$.__event_access_modifier, $.__variable_access_modifier],
     [$.__temp_table_access_modifier, $.__variable_access_modifier],
     [$.__temp_table_static_modifier, $.__variable_static_modifier],
+    [$.__event_static_modifier, $.__variable_static_modifier],
+    [$.__property_modifier, $.__event_abstract_modifier],
+    [$.__property_modifier, $.__event_override_modifier],
 
     // Specific disambiguations
     [$._primary_expression, $.__in_frame_target],

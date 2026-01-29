@@ -5939,6 +5939,10 @@
           "named": true
         },
         {
+          "type": "browse_definition",
+          "named": true
+        },
+        {
           "type": "buffer_definition",
           "named": true
         },
@@ -5963,6 +5967,14 @@
           "named": true
         },
         {
+          "type": "event_definition",
+          "named": true
+        },
+        {
+          "type": "frame_definition",
+          "named": true
+        },
+        {
           "type": "function_definition",
           "named": true
         },
@@ -5976,6 +5988,10 @@
         },
         {
           "type": "include",
+          "named": true
+        },
+        {
+          "type": "menu_definition",
           "named": true
         },
         {
@@ -6007,7 +6023,15 @@
           "named": true
         },
         {
+          "type": "rectangle_definition",
+          "named": true
+        },
+        {
           "type": "stream_definition",
+          "named": true
+        },
+        {
+          "type": "submenu_definition",
           "named": true
         },
         {
