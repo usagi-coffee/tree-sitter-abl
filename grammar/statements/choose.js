@@ -12,7 +12,7 @@ module.exports = ({ kw, tkw }) => ({
         seq(kw("FIELD"), repeat1(seq(field("field", $.identifier), optional(seq(kw("HELP"), $.string_literal))))),
       ),
       optional(tkw("AUTO-RETURN")),
-      optional(seq(kw("COLOR"), field("color", $._expression))),
+      optional(seq(kw("COLOR"), field("color", $.__choose_color_value))),
       optional(seq(tkw("GO-ON"), "(", repeat1($.identifier), ")")),
       optional(seq(kw("KEYS"), field("keys", $.identifier))),
       optional(tkw("NO-ERROR")),
@@ -21,4 +21,5 @@ module.exports = ({ kw, tkw }) => ({
     ),
   __choose_frame_phrase: ($) =>
     seq(kw("WITH"), kw("FRAME"), field("frame", $.identifier)),
+  __choose_color_value: ($) => $._expression,
 });

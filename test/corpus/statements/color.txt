@@ -25,7 +25,8 @@ COLOR 7 PROMPT 3 field1 WITH FRAME f1.
     field: (identifier)
     field: (identifier))
   (color_statement
-    color: (color_phrase)
+    color: (color_phrase
+      (identifier))
     field: (identifier))
   (color_statement
     color: (color_phrase
@@ -37,7 +38,7 @@ COLOR 7 PROMPT 3 field1 WITH FRAME f1.
     field: (identifier))
   (color_statement
     color: (color_phrase
-      foreground: (identifier))
+      (identifier))
     field: (identifier))
   (color_statement
     color: (color_phrase

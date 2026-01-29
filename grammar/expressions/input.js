@@ -1,9 +1,9 @@
 module.exports = ({ kw, tkw }) => ({
   input_expression: ($) =>
-    prec(
+    prec.dynamic(
       -1,
       seq(
-        kw("INPUT"),
+        tkw("INPUT"),
         optional(seq(tkw("FRAME"), field("frame", $.identifier))),
         field(
           "field",

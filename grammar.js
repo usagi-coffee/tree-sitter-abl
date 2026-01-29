@@ -60,6 +60,7 @@ module.exports = grammar({
 
     // Specific disambiguations
     [$._primary_expression, $.__in_frame_target],
+    [$._primary_expression, $.input_expression],
   ],
   inline: ($) => [],
 
@@ -267,7 +268,7 @@ module.exports = grammar({
         seq("(", optional(seq($.argument, repeat(seq(",", $.argument)))), ")"),
       argument: ($) =>
         seq(
-          optional(choice(kw("INPUT"), kw("OUTPUT"), kw("INPUT-OUTPUT"))),
+          optional(choice(tkw("INPUT"), tkw("OUTPUT"), tkw("INPUT-OUTPUT"))),
           optional(tkw("TABLE")),
           field("value", $._expression),
           optional(tkw("BY-REFERENCE")),
