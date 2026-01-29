@@ -1,5 +1,6 @@
 module.exports = ({ kw }) => ({
-  accumulate_statement: ($) => seq(kw("ACCUMULATE"), $._terminator),
+  accumulate_statement: ($) =>
+    seq(kw("ACCUMULATE"), $.__accumulate_body, $._terminator),
 
   __accumulate_body: ($) =>
     seq(

@@ -1070,6 +1070,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "__accumulate_body"
+        },
+        {
+          "type": "SYMBOL",
           "name": "_terminator"
         }
       ]
