@@ -9,23 +9,23 @@ ANNOTATION
 --------------------------------------------------------------------------------
 
 (source_code
-  (annotation_statement
-    name: (annotation_name))
-  (annotation_statement
-    name: (annotation_name)
-    (annotation_attribute_list
-      (annotation_attribute
-        name: (annotation_name)
+  (annotation
+    name: (identifier))
+  (annotation
+    name: (identifier)
+    (attributes
+      (attribute
+        name: (identifier)
         value: (string_literal))
-      (annotation_attribute
-        name: (annotation_name)
+      (attribute
+        name: (identifier)
         value: (string_literal))))
-  (annotation_statement
-    name: (annotation_name)
-    (annotation_attribute_list
-      (annotation_attribute
-        name: (annotation_name)
+  (annotation
+    name: (identifier)
+    (attributes
+      (attribute
+        name: (identifier)
         value: (string_literal))
-      (annotation_attribute
-        name: (annotation_name)
+      (attribute
+        name: (identifier)
         value: (string_literal)))))

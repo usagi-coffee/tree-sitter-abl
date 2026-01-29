@@ -1,18 +1,22 @@
 module.exports = () => ({
-  annotation_statement: ($) =>
+  __annotation_name: () => token(/[^0-9\s()=,\.][^\s()=,\.]*/),
+  annotation: ($) => seq("@", $.__annotation_body, $._terminator),
+  __annotation_body: ($) =>
     seq(
-      "@",
-      field("name", $.annotation_name),
-      optional(seq("(", optional($.annotation_attribute_list), ")")),
-      $._terminator,
+      field("name", alias($.__annotation_name, $.identifier)),
+      optional(
+        seq("(", optional(alias($.__annotation_attributes, $.attributes)), ")"),
+      ),
     ),
-  annotation_attribute_list: ($) =>
-    seq($.annotation_attribute, repeat(seq(",", $.annotation_attribute))),
-  annotation_attribute: ($) =>
+  __annotation_attributes: ($) =>
     seq(
-      field("name", $.annotation_name),
+      alias($.__annotation_attribute, $.attribute),
+      repeat(seq(",", alias($.__annotation_attribute, $.attribute))),
+    ),
+  __annotation_attribute: ($) =>
+    seq(
+      field("name", alias($.__annotation_name, $.identifier)),
       "=",
       field("value", $.string_literal),
     ),
-  annotation_name: () => token(/[^0-9\s()=,\.][^\s()=,\.]*/),
 });

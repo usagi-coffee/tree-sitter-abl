@@ -103,7 +103,7 @@ module.exports = () => ({
       $.release_external_statement,
       $.get_statement,
       $.underline_statement,
-      $.annotation_statement,
+      $.annotation,
       $.assign_statement,
       $.error_scope_statement,
       $.release_object_statement,
