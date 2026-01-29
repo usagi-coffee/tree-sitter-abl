@@ -78,16 +78,15 @@ END.
 
 (source_code
   (for_each_statement
-    (for_record_list
-      (for_record
-        table: (identifier)
-        (where_phrase
-          (binary_expression
-            (qualified_name
-              left: (identifier)
-              right: (identifier))
-            (number_literal)))
-        (exclusive_lock)))
+    (record
+      table: (identifier)
+      (where_phrase
+        (binary_expression
+          (qualified_name
+            left: (identifier)
+            right: (identifier))
+          (number_literal)))
+      (exclusive_lock))
     (body
       (delete_statement
         record: (identifier)))))

@@ -54,9 +54,9 @@ module.exports = ({ kw, tkw }) => ({
         repeat($.__method_modifier_no_abstract),
         $.__method_return_type,
         field("name", $.identifier),
-        $.method_parameter_list,
+        alias($.__method_parameters, $.parameters),
         choice($._colon, $._terminator_dot),
-        $.method_body,
+        alias($.__method_body, $.body),
       ),
       seq(
         kw("METHOD"),
@@ -65,7 +65,7 @@ module.exports = ({ kw, tkw }) => ({
         repeat($.__method_modifier_no_abstract),
         $.__method_return_type,
         field("name", $.identifier),
-        $.method_parameter_list,
+        alias($.__method_parameters, $.parameters),
         $._terminator_dot,
       ),
     ),
@@ -75,9 +75,9 @@ module.exports = ({ kw, tkw }) => ({
       kw("CONSTRUCTOR"),
       repeat($.__constructor_modifier),
       field("name", $.identifier),
-      $.method_parameter_list,
+      alias($.__method_parameters, $.parameters),
       $._colon,
-      $.constructor_body,
+      alias($.__constructor_body, $.body),
     ),
 
   destructor_definition: ($) =>
@@ -85,19 +85,24 @@ module.exports = ({ kw, tkw }) => ({
       kw("DESTRUCTOR"),
       optional($.__destructor_access),
       field("name", $.identifier),
-      $.destructor_parameter_list,
+      alias($.__destructor_parameters, $.parameters),
       $._colon,
-      $.destructor_body,
+      alias($.__destructor_body, $.body),
     ),
 
-  method_parameter_list: ($) =>
+  __method_parameters: ($) =>
     seq(
       "(",
-      optional(seq($.method_parameter, repeat(seq(",", $.method_parameter)))),
+      optional(
+        seq(
+          alias($.__method_parameter, $.parameter),
+          repeat(seq(",", alias($.__method_parameter, $.parameter))),
+        ),
+      ),
       ")",
     ),
 
-  method_parameter: ($) =>
+  __method_parameter: ($) =>
     choice(
       seq(
         optional(choice(kw("INPUT"), kw("OUTPUT"), kw("INPUT-OUTPUT"))),
@@ -108,7 +113,7 @@ module.exports = ({ kw, tkw }) => ({
       $.__method_table_parameter,
     ),
 
-  method_body: ($) =>
+  __method_body: ($) =>
     seq(
       repeat($._statement),
       tkw("END"),
@@ -116,7 +121,7 @@ module.exports = ({ kw, tkw }) => ({
       $._terminator,
     ),
 
-  constructor_body: ($) =>
+  __constructor_body: ($) =>
     seq(
       repeat($._statement),
       tkw("END"),
@@ -124,7 +129,7 @@ module.exports = ({ kw, tkw }) => ({
       $._terminator,
     ),
 
-  destructor_body: ($) =>
+  __destructor_body: ($) =>
     seq(
       repeat($._statement),
       tkw("END"),
@@ -132,7 +137,7 @@ module.exports = ({ kw, tkw }) => ({
       $._terminator,
     ),
 
-  destructor_parameter_list: ($) => seq("(", ")"),
+  __destructor_parameters: ($) => seq("(", ")"),
 
   property_definition: ($) =>
     seq(
@@ -229,7 +234,7 @@ module.exports = ({ kw, tkw }) => ({
   __property_initial_option: ($) =>
     seq(
       $.__property_initial_keyword,
-      choice($._expression, seq("[", optional($._expression_list), "]")),
+      choice($._expression, seq("[", optional($._expressions), "]")),
     ),
 
   __property_initial_keyword: ($) =>

@@ -79,7 +79,7 @@ module.exports = ({ kw, tkw }) => ({
       $.__variable_initial_keyword,
       field(
         "value",
-        choice($._expression, seq("[", optional($._expression_list), "]")),
+        choice($._expression, seq("[", optional($._expressions), "]")),
       ),
     ),
 

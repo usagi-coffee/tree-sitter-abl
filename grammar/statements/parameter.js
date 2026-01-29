@@ -55,7 +55,7 @@ module.exports = ({ kw, tkw }) => ({
   __parameter_initial_option: ($) =>
     seq(
       choice(kw("INITIAL"), alias(token(seq(/INIT(IAL)?/i, /\s+/)), "INITIAL")),
-      choice($._expression, seq("[", optional($._expression_list), "]")),
+      choice($._expression, seq("[", optional($._expression), "]")),
     ),
   __parameter_label_option: ($) =>
     seq(kw("LABEL"), $.string_literal, repeat(seq(",", $.string_literal))),

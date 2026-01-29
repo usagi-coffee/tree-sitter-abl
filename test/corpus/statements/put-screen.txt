@@ -83,10 +83,9 @@ PUT SCREEN COLOR VALUE(cColor) ROW 1 COLUMN 1 "Hdr".
     (format_option
       (string_literal)))
   (for_each_statement
-    (for_record_list
-      (for_record
-        (identifier)
-        (no_lock)))
+    (record
+      (identifier)
+      (no_lock))
     (body
       (assignment_statement
         (identifier)

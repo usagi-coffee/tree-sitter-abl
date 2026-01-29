@@ -87,8 +87,8 @@ END CLASS.
       name: (identifier))
     (method_definition
       name: (identifier)
-      (method_parameter_list)
-      (method_body
+      (parameters)
+      (body
         (assignment_statement
           left: (identifier)
           operator: (assignment_operator)
@@ -130,26 +130,26 @@ END CLASS.
       (property_accessor))
     (method_definition
       name: (identifier)
-      (method_parameter_list
-        (method_parameter
+      (parameters
+        (parameter
           name: (identifier)
           type: (identifier))
-        (method_parameter
+        (parameter
           table_handle: (identifier)))
-      (method_body
+      (body
         (return_statement))))
   (class_definition
     name: (identifier)
     (constructor_definition
       name: (identifier)
-      (method_parameter_list)
-      (constructor_body
+      (parameters)
+      (body
         (message_statement
           (string_literal))))
     (destructor_definition
       name: (identifier)
-      (destructor_parameter_list)
-      (destructor_body
+      (parameters)
+      (body
         (message_statement
           (string_literal)))))
   (interface_definition
@@ -157,31 +157,30 @@ END CLASS.
       left: (identifier)
       right: (identifier)
       right: (identifier))
-    (interface_body_item
-      (method_definition
-        type: (identifier)
-        name: (identifier)
-        (method_parameter_list
-          (method_parameter
-            name: (identifier)
-            type: (identifier))))))
+    (method_definition
+      type: (identifier)
+      name: (identifier)
+      (parameters
+        (parameter
+          name: (identifier)
+          type: (identifier)))))
   (class_definition
     name: (identifier)
     (constructor_definition
       name: (identifier)
-      (method_parameter_list
-        (method_parameter
+      (parameters
+        (parameter
           name: (identifier)
           type: (identifier)))
-      (constructor_body
+      (body
         (message_statement
           (binary_expression
             (string_literal)
             (identifier)))))
     (method_definition
       name: (identifier)
-      (method_parameter_list)
-      (method_body
+      (parameters)
+      (body
         (message_statement
           (string_literal))))))
 

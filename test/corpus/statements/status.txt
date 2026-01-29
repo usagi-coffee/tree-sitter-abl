@@ -49,20 +49,18 @@ STATUS INPUT OFF IN WINDOW hWin.
               (string_literal)))))
       (string_literal)))
   (for_each_statement
-    (for_record_list
-      (for_record
-        (identifier)))
+    (record
+      (identifier))
     (body
       (display_statement
         (qualified_name
           (identifier)
           (identifier)))
       (for_each_statement
-        (for_record_list
-          (for_record
-            (identifier)
-            (of_phrase
-              (identifier))))
+        (record
+          (identifier)
+          (of_phrase
+            (identifier)))
         (body
           (update_statement
             (update_item

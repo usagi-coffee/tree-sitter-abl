@@ -33,14 +33,13 @@ END.
 
 (source_code
   (for_each_statement
-    (for_record_list
-      (for_record
-        (identifier)
-        (no_lock)
-        (by_phrase
-          (qualified_name
-            (identifier)
-            (identifier)))))
+    (record
+      (identifier)
+      (no_lock)
+      (by_phrase
+        (qualified_name
+          (identifier)
+          (identifier))))
     (body
       (if_statement
         (binary_expression

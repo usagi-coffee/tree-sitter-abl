@@ -73,10 +73,9 @@ END.
   (output_statement
     (identifier))
   (for_each_statement
-    (for_record_list
-      (for_record
-        (identifier)
-        (no_lock)))
+    (record
+      (identifier)
+      (no_lock))
     (body
       (display_statement
         (qualified_name

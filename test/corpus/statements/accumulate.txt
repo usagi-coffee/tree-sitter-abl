@@ -24,10 +24,9 @@ END.
 
 (source_code
   (for_each_statement
-    (for_record_list
-      (for_record
-        table: (identifier)
-        (no_lock)))
+    (record
+      table: (identifier)
+      (no_lock))
     (body
       (accumulate_statement
         (accumulate_item
@@ -42,10 +41,9 @@ END.
             (aggregate_item
               operation: (aggregate_operation)))))))
   (for_each_statement
-    (for_record_list
-      (for_record
-        table: (identifier)
-        (no_lock)))
+    (record
+      table: (identifier)
+      (no_lock))
     (body
       (display_statement
         (qualified_name
@@ -74,17 +72,16 @@ END.
           (aggregate_item
             operation: (aggregate_operation))))))
   (for_each_statement
-    (for_record_list
-      (for_record
-        table: (identifier)
-        (no_lock)
-        (break_by
-          (qualified_name
-            left: (identifier)
-            right: (identifier))
-          (qualified_name
-            left: (identifier)
-            right: (identifier)))))
+    (record
+      table: (identifier)
+      (no_lock)
+      (break_by
+        (qualified_name
+          left: (identifier)
+          right: (identifier))
+        (qualified_name
+          left: (identifier)
+          right: (identifier))))
     (body
       (accumulate_statement
         (accumulate_item
@@ -103,10 +100,9 @@ END.
                   left: (identifier)
                   right: (identifier)))))))))
   (for_each_statement
-    (for_record_list
-      (for_record
-        table: (identifier)
-        (no_lock)))
+    (record
+      table: (identifier)
+      (no_lock))
     (body
       (accumulate_statement
         (accumulate_item

@@ -31,7 +31,7 @@ module.exports = ({ kw, tkw }) => ({
   __find_no_wait: ($) => tkw("NO-WAIT"),
   __find_no_prefetch: ($) => tkw("NO-PREFETCH"),
   __find_exclusive_lock: ($) => tkw("EXCLUSIVE-LOCK"),
-  __find_using_phrase: ($) => seq(kw("USING"), $._expression_list),
+  __find_using_phrase: ($) => seq(kw("USING"), $._expressions),
   __find_use_index: ($) =>
     seq(kw("USE-INDEX"), field("index", $.__find_index_name)),
   __find_index_name: ($) => choice($.identifier, $.qualified_name),

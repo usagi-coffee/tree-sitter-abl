@@ -148,10 +148,9 @@ END.
       (message_statement
         (identifier))))
   (for_each_statement
-    (for_record_list
-      (for_record
-        table: (identifier)
-        (no_lock)))
+    (record
+      table: (identifier)
+      (no_lock))
     (body
       (display_statement
         (qualified_name

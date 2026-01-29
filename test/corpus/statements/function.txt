@@ -17,11 +17,11 @@ END FUNCTION.
   (function_definition
     name: (identifier)
     type: (identifier)
-    (function_parameter_list
-      (function_parameter
+    (parameters
+      (parameter
         name: (identifier)
         type: (identifier))
-      (function_parameter
+      (parameter
         name: (identifier)
         type: (identifier)))
     (return_statement
@@ -47,8 +47,8 @@ END.
   (function_definition
     name: (identifier)
     type: (identifier)
-    (function_parameter_list
-      (function_parameter
+    (parameters
+      (parameter
         name: (identifier)
         type: (identifier)))
     (return_statement
@@ -71,8 +71,8 @@ END FUNCTION.
       left: (identifier)
       right: (identifier)
       right: (identifier))
-    (function_parameter_list
-      (function_parameter
+    (parameters
+      (parameter
         name: (identifier)
         type: (identifier)))
     (return_statement
@@ -98,8 +98,8 @@ END FUNCTION.
   (function_definition
     name: (identifier)
     type: (identifier)
-    (function_parameter_list
-      (function_parameter
+    (parameters
+      (parameter
         name: (identifier)
         type: (identifier)
         (number_literal)))
@@ -120,8 +120,8 @@ END.
   (function_definition
     name: (identifier)
     type: (identifier)
-    (function_parameter_list
-      (function_parameter
+    (parameters
+      (parameter
         name: (identifier)
         type: (identifier)
         (no_undo)))
@@ -149,8 +149,8 @@ END FUNCTION.
   (function_definition
     name: (identifier)
     type: (identifier)
-    (function_parameter_list
-      (function_parameter
+    (parameters
+      (parameter
         name: (identifier)
         type: (identifier)
         (no_undo)))
@@ -176,11 +176,11 @@ END.
   (function_definition
     name: (identifier)
     type: (identifier)
-    (function_parameter_list
-      (function_parameter
+    (parameters
+      (parameter
         name: (identifier)
         type: (identifier))
-      (function_parameter
+      (parameter
         name: (identifier)
         type: (identifier)))
     (assignment_statement
@@ -207,13 +207,13 @@ END.
   (function_definition
     name: (identifier)
     type: (identifier)
-    (function_parameter_list
-      (function_parameter
+    (parameters
+      (parameter
         name: (identifier)
         like: (qualified_name
           left: (identifier)
           right: (identifier)))
-      (function_parameter
+      (parameter
         name: (identifier)
         type: (identifier)
         (no_undo)))
@@ -242,14 +242,14 @@ END.
   (function_definition
     name: (identifier)
     type: (identifier)
-    (function_parameter_list
-      (function_parameter
+    (parameters
+      (parameter
         name: (identifier)
         type: (identifier))
-      (function_parameter
+      (parameter
         name: (identifier)
         type: (identifier))
-      (function_parameter
+      (parameter
         name: (identifier)
         type: (identifier)
         (no_undo)))
@@ -274,8 +274,8 @@ END.
   (function_definition
     name: (identifier)
     type: (identifier)
-    (function_parameter_list
-      (function_parameter
+    (parameters
+      (parameter
         name: (identifier)
         type: (identifier)
         (null_literal)))
@@ -300,8 +300,8 @@ END.
   (function_definition
     name: (identifier)
     type: (identifier)
-    (function_parameter_list
-      (function_parameter
+    (parameters
+      (parameter
         name: (identifier)
         type: (identifier)
         (constant
@@ -325,7 +325,7 @@ DEFINE FUNCTION f2 RETURN LOGICAL ().
   (function_forward_definition
     name: (identifier)
     type: (identifier)
-    (function_parameter_list)))
+    (parameters)))
 
 ================================================================================
 FUNCTION - DELEGATE return
@@ -344,8 +344,8 @@ END.
       left: (identifier)
       right: (identifier)
       right: (identifier))
-    (function_parameter_list
-      (function_parameter
+    (parameters
+      (parameter
         name: (identifier)
         type: (identifier)))
     (return_statement
@@ -367,8 +367,8 @@ DEFINE FUNCTION getInfo RETURNS HANDLE (INPUT id AS INTEGER NO-UNDO).
   (function_forward_definition
     name: (identifier)
     type: (identifier)
-    (function_parameter_list
-      (function_parameter
+    (parameters
+      (parameter
         name: (identifier)
         type: (identifier)
         (no_undo)))))
@@ -387,14 +387,14 @@ END.
   (function_definition
     name: (identifier)
     type: (identifier)
-    (function_parameter_list
-      (function_parameter
+    (parameters
+      (parameter
         name: (identifier)
         like: (qualified_name
           left: (identifier)
           right: (identifier)
           right: (identifier)))
-      (function_parameter
+      (parameter
         name: (identifier)
         type: (identifier)))
     (return_statement
@@ -419,8 +419,8 @@ END FUNCTION.
   (function_definition
     name: (identifier)
     type: (identifier)
-    (function_parameter_list
-      (function_parameter
+    (parameters
+      (parameter
         name: (identifier)
         type: (identifier)
         (no_undo)))
@@ -455,8 +455,8 @@ FUNCTION getData RETURNS INTEGER (pcFile AS CHAR) IN ContextHandle.
   (function_forward_definition
     name: (identifier)
     type: (identifier)
-    (function_parameter_list
-      (function_parameter
+    (parameters
+      (parameter
         name: (identifier)
         type: (identifier)))
     (in_phrase
@@ -474,8 +474,8 @@ FUNCTION doubler RETURNS INTEGER (INPUT parm1 AS INTEGER) FORWARD.
   (function_forward_definition
     name: (identifier)
     type: (identifier)
-    (function_parameter_list
-      (function_parameter
+    (parameters
+      (parameter
         name: (identifier)
         type: (identifier)))
     (forward_phrase)))
@@ -492,8 +492,8 @@ DEFINE FUNCTION fmtId RETURNS CHARACTER (INPUT id AS INTEGER) FORWARD.
   (function_forward_definition
     name: (identifier)
     type: (identifier)
-    (function_parameter_list
-      (function_parameter
+    (parameters
+      (parameter
         name: (identifier)
         type: (identifier)))
     (forward_phrase)))
@@ -557,8 +557,8 @@ FUNCTION getDefault RETURNS INTEGER (INPUT customerId AS INTEGER) IN SUPER.
   (function_forward_definition
     name: (identifier)
     type: (identifier)
-    (function_parameter_list
-      (function_parameter
+    (parameters
+      (parameter
         name: (identifier)
         type: (identifier)))
     (in_phrase
@@ -576,8 +576,8 @@ FUNCTION GetCustomer RETURNS CHARACTER (INPUT custNum AS INTEGER) IN hPortType.
   (function_forward_definition
     name: (identifier)
     type: (identifier)
-    (function_parameter_list
-      (function_parameter
+    (parameters
+      (parameter
         name: (identifier)
         type: (identifier)))
     (in_phrase

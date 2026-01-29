@@ -83,11 +83,10 @@ END PROCEDURE.
     (parameter_definition
       dataset: (identifier))
     (for_each_statement
-      (for_record_list
-        (for_record
-          table: (identifier)
-          (of_phrase
-            (identifier))))
+      (record
+        table: (identifier)
+        (of_phrase
+          (identifier)))
       (body
         (display_statement
           (qualified_name

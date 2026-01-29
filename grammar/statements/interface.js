@@ -6,12 +6,12 @@ module.exports = ({ kw, tkw }) => ({
     seq(
       field("name", $._type_name),
       choice($._colon, $._terminator_dot),
-      repeat($.interface_body_item),
+      repeat($.__interface_body_item),
       tkw("END"),
       optional(tkw("INTERFACE")),
     ),
 
-  interface_body_item: ($) =>
+  __interface_body_item: ($) =>
     choice(
       alias($.interface_method_definition, $.method_definition),
       $.property_definition,
@@ -25,7 +25,7 @@ module.exports = ({ kw, tkw }) => ({
       repeat($.__method_modifier_no_abstract),
       $.__method_return_type,
       field("name", $.identifier),
-      $.method_parameter_list,
+      alias($.__method_parameters, $.parameters),
       $._terminator_dot,
     ),
 });

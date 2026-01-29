@@ -11510,617 +11510,6 @@
     "fields": {}
   },
   {
-    "type": "constructor_body",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "accumulate_statement",
-          "named": true
-        },
-        {
-          "type": "aggregate_statement",
-          "named": true
-        },
-        {
-          "type": "annotation",
-          "named": true
-        },
-        {
-          "type": "apply_statement",
-          "named": true
-        },
-        {
-          "type": "assign_statement",
-          "named": true
-        },
-        {
-          "type": "assignment_statement",
-          "named": true
-        },
-        {
-          "type": "bell_statement",
-          "named": true
-        },
-        {
-          "type": "browse_definition",
-          "named": true
-        },
-        {
-          "type": "buffer_compare_statement",
-          "named": true
-        },
-        {
-          "type": "buffer_copy_statement",
-          "named": true
-        },
-        {
-          "type": "buffer_definition",
-          "named": true
-        },
-        {
-          "type": "button_definition",
-          "named": true
-        },
-        {
-          "type": "call_statement",
-          "named": true
-        },
-        {
-          "type": "case_statement",
-          "named": true
-        },
-        {
-          "type": "catch_statement",
-          "named": true
-        },
-        {
-          "type": "choose_statement",
-          "named": true
-        },
-        {
-          "type": "class_definition",
-          "named": true
-        },
-        {
-          "type": "clear_statement",
-          "named": true
-        },
-        {
-          "type": "close_query_statement",
-          "named": true
-        },
-        {
-          "type": "close_stored_procedure_statement",
-          "named": true
-        },
-        {
-          "type": "color_statement",
-          "named": true
-        },
-        {
-          "type": "compile_statement",
-          "named": true
-        },
-        {
-          "type": "connect_statement",
-          "named": true
-        },
-        {
-          "type": "convert_statement",
-          "named": true
-        },
-        {
-          "type": "copy_lob_statement",
-          "named": true
-        },
-        {
-          "type": "create_socket_statement",
-          "named": true
-        },
-        {
-          "type": "create_statement",
-          "named": true
-        },
-        {
-          "type": "data_source_definition",
-          "named": true
-        },
-        {
-          "type": "dataset_definition",
-          "named": true
-        },
-        {
-          "type": "delete_object_statement",
-          "named": true
-        },
-        {
-          "type": "delete_statement",
-          "named": true
-        },
-        {
-          "type": "dictionary_statement",
-          "named": true
-        },
-        {
-          "type": "disable_statement",
-          "named": true
-        },
-        {
-          "type": "disable_triggers_statement",
-          "named": true
-        },
-        {
-          "type": "disconnect_statement",
-          "named": true
-        },
-        {
-          "type": "display_statement",
-          "named": true
-        },
-        {
-          "type": "do_block",
-          "named": true
-        },
-        {
-          "type": "dos_statement",
-          "named": true
-        },
-        {
-          "type": "down_statement",
-          "named": true
-        },
-        {
-          "type": "empty_statement",
-          "named": true
-        },
-        {
-          "type": "empty_temp_table_statement",
-          "named": true
-        },
-        {
-          "type": "enable_statement",
-          "named": true
-        },
-        {
-          "type": "enum_statement",
-          "named": true
-        },
-        {
-          "type": "error_scope_statement",
-          "named": true
-        },
-        {
-          "type": "event_definition",
-          "named": true
-        },
-        {
-          "type": "export_statement",
-          "named": true
-        },
-        {
-          "type": "expression_statement",
-          "named": true
-        },
-        {
-          "type": "finally_statement",
-          "named": true
-        },
-        {
-          "type": "find_statement",
-          "named": true
-        },
-        {
-          "type": "fix_codepage_statement",
-          "named": true
-        },
-        {
-          "type": "for_each_statement",
-          "named": true
-        },
-        {
-          "type": "form_statement",
-          "named": true
-        },
-        {
-          "type": "frame_definition",
-          "named": true
-        },
-        {
-          "type": "function_definition",
-          "named": true
-        },
-        {
-          "type": "function_forward_definition",
-          "named": true
-        },
-        {
-          "type": "get_key_value_statement",
-          "named": true
-        },
-        {
-          "type": "get_statement",
-          "named": true
-        },
-        {
-          "type": "hide_statement",
-          "named": true
-        },
-        {
-          "type": "if_statement",
-          "named": true
-        },
-        {
-          "type": "image_definition",
-          "named": true
-        },
-        {
-          "type": "import_statement",
-          "named": true
-        },
-        {
-          "type": "include",
-          "named": true
-        },
-        {
-          "type": "input_clear_statement",
-          "named": true
-        },
-        {
-          "type": "input_output_statement",
-          "named": true
-        },
-        {
-          "type": "input_statement",
-          "named": true
-        },
-        {
-          "type": "input_through_statement",
-          "named": true
-        },
-        {
-          "type": "insert_statement",
-          "named": true
-        },
-        {
-          "type": "interface_definition",
-          "named": true
-        },
-        {
-          "type": "leave_statement",
-          "named": true
-        },
-        {
-          "type": "load_picture_statement",
-          "named": true
-        },
-        {
-          "type": "load_statement",
-          "named": true
-        },
-        {
-          "type": "menu_definition",
-          "named": true
-        },
-        {
-          "type": "message_statement",
-          "named": true
-        },
-        {
-          "type": "next_prompt_statement",
-          "named": true
-        },
-        {
-          "type": "next_statement",
-          "named": true
-        },
-        {
-          "type": "on_statement",
-          "named": true
-        },
-        {
-          "type": "open_query_statement",
-          "named": true
-        },
-        {
-          "type": "os_append_statement",
-          "named": true
-        },
-        {
-          "type": "os_command_statement",
-          "named": true
-        },
-        {
-          "type": "os_copy_statement",
-          "named": true
-        },
-        {
-          "type": "os_create_dir_statement",
-          "named": true
-        },
-        {
-          "type": "os_delete_statement",
-          "named": true
-        },
-        {
-          "type": "os_rename_statement",
-          "named": true
-        },
-        {
-          "type": "output_statement",
-          "named": true
-        },
-        {
-          "type": "overlay_statement",
-          "named": true
-        },
-        {
-          "type": "page_statement",
-          "named": true
-        },
-        {
-          "type": "parameter_definition",
-          "named": true
-        },
-        {
-          "type": "pause_statement",
-          "named": true
-        },
-        {
-          "type": "preprocessor_directive",
-          "named": true
-        },
-        {
-          "type": "procedure_definition",
-          "named": true
-        },
-        {
-          "type": "procedure_forward_definition",
-          "named": true
-        },
-        {
-          "type": "process_events_statement",
-          "named": true
-        },
-        {
-          "type": "prompt_for_statement",
-          "named": true
-        },
-        {
-          "type": "promsgs_statement",
-          "named": true
-        },
-        {
-          "type": "propath_statement",
-          "named": true
-        },
-        {
-          "type": "publish_statement",
-          "named": true
-        },
-        {
-          "type": "put_cursor_statement",
-          "named": true
-        },
-        {
-          "type": "put_key_value_statement",
-          "named": true
-        },
-        {
-          "type": "put_screen_statement",
-          "named": true
-        },
-        {
-          "type": "put_statement",
-          "named": true
-        },
-        {
-          "type": "query_definition",
-          "named": true
-        },
-        {
-          "type": "quit_statement",
-          "named": true
-        },
-        {
-          "type": "raw_transfer_statement",
-          "named": true
-        },
-        {
-          "type": "readkey_statement",
-          "named": true
-        },
-        {
-          "type": "rectangle_definition",
-          "named": true
-        },
-        {
-          "type": "release_external_statement",
-          "named": true
-        },
-        {
-          "type": "release_object_statement",
-          "named": true
-        },
-        {
-          "type": "release_statement",
-          "named": true
-        },
-        {
-          "type": "repeat_statement",
-          "named": true
-        },
-        {
-          "type": "reposition_statement",
-          "named": true
-        },
-        {
-          "type": "return_statement",
-          "named": true
-        },
-        {
-          "type": "run_statement",
-          "named": true
-        },
-        {
-          "type": "run_stored_procedure_statement",
-          "named": true
-        },
-        {
-          "type": "save_cache_statement",
-          "named": true
-        },
-        {
-          "type": "scroll_statement",
-          "named": true
-        },
-        {
-          "type": "seek_statement",
-          "named": true
-        },
-        {
-          "type": "set_byte_order_statement",
-          "named": true
-        },
-        {
-          "type": "set_pointer_value_statement",
-          "named": true
-        },
-        {
-          "type": "set_size_statement",
-          "named": true
-        },
-        {
-          "type": "set_statement",
-          "named": true
-        },
-        {
-          "type": "show_stats_statement",
-          "named": true
-        },
-        {
-          "type": "status_statement",
-          "named": true
-        },
-        {
-          "type": "stop_statement",
-          "named": true
-        },
-        {
-          "type": "stream_definition",
-          "named": true
-        },
-        {
-          "type": "submenu_definition",
-          "named": true
-        },
-        {
-          "type": "subscribe_statement",
-          "named": true
-        },
-        {
-          "type": "system_dialog_color_statement",
-          "named": true
-        },
-        {
-          "type": "system_dialog_font_statement",
-          "named": true
-        },
-        {
-          "type": "system_dialog_get_dir_statement",
-          "named": true
-        },
-        {
-          "type": "system_dialog_get_file_statement",
-          "named": true
-        },
-        {
-          "type": "system_dialog_printer_setup_statement",
-          "named": true
-        },
-        {
-          "type": "temp_table_definition",
-          "named": true
-        },
-        {
-          "type": "terminal_statement",
-          "named": true
-        },
-        {
-          "type": "transaction_mode_statement",
-          "named": true
-        },
-        {
-          "type": "underline_statement",
-          "named": true
-        },
-        {
-          "type": "undo_statement",
-          "named": true
-        },
-        {
-          "type": "unix_statement",
-          "named": true
-        },
-        {
-          "type": "unload_statement",
-          "named": true
-        },
-        {
-          "type": "unsubscribe_statement",
-          "named": true
-        },
-        {
-          "type": "up_statement",
-          "named": true
-        },
-        {
-          "type": "update_statement",
-          "named": true
-        },
-        {
-          "type": "use_statement",
-          "named": true
-        },
-        {
-          "type": "using_statement",
-          "named": true
-        },
-        {
-          "type": "validate_statement",
-          "named": true
-        },
-        {
-          "type": "var_statement",
-          "named": true
-        },
-        {
-          "type": "variable_definition",
-          "named": true
-        },
-        {
-          "type": "view_statement",
-          "named": true
-        },
-        {
-          "type": "wait_for_statement",
-          "named": true
-        },
-        {
-          "type": "work_table_definition",
-          "named": true
-        },
-        {
-          "type": "workfile_definition",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "constructor_definition",
     "named": true,
     "fields": {
@@ -12140,11 +11529,11 @@
       "required": true,
       "types": [
         {
-          "type": "constructor_body",
+          "type": "body",
           "named": true
         },
         {
-          "type": "method_parameter_list",
+          "type": "parameters",
           "named": true
         }
       ]
@@ -12967,617 +12356,6 @@
     }
   },
   {
-    "type": "destructor_body",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "accumulate_statement",
-          "named": true
-        },
-        {
-          "type": "aggregate_statement",
-          "named": true
-        },
-        {
-          "type": "annotation",
-          "named": true
-        },
-        {
-          "type": "apply_statement",
-          "named": true
-        },
-        {
-          "type": "assign_statement",
-          "named": true
-        },
-        {
-          "type": "assignment_statement",
-          "named": true
-        },
-        {
-          "type": "bell_statement",
-          "named": true
-        },
-        {
-          "type": "browse_definition",
-          "named": true
-        },
-        {
-          "type": "buffer_compare_statement",
-          "named": true
-        },
-        {
-          "type": "buffer_copy_statement",
-          "named": true
-        },
-        {
-          "type": "buffer_definition",
-          "named": true
-        },
-        {
-          "type": "button_definition",
-          "named": true
-        },
-        {
-          "type": "call_statement",
-          "named": true
-        },
-        {
-          "type": "case_statement",
-          "named": true
-        },
-        {
-          "type": "catch_statement",
-          "named": true
-        },
-        {
-          "type": "choose_statement",
-          "named": true
-        },
-        {
-          "type": "class_definition",
-          "named": true
-        },
-        {
-          "type": "clear_statement",
-          "named": true
-        },
-        {
-          "type": "close_query_statement",
-          "named": true
-        },
-        {
-          "type": "close_stored_procedure_statement",
-          "named": true
-        },
-        {
-          "type": "color_statement",
-          "named": true
-        },
-        {
-          "type": "compile_statement",
-          "named": true
-        },
-        {
-          "type": "connect_statement",
-          "named": true
-        },
-        {
-          "type": "convert_statement",
-          "named": true
-        },
-        {
-          "type": "copy_lob_statement",
-          "named": true
-        },
-        {
-          "type": "create_socket_statement",
-          "named": true
-        },
-        {
-          "type": "create_statement",
-          "named": true
-        },
-        {
-          "type": "data_source_definition",
-          "named": true
-        },
-        {
-          "type": "dataset_definition",
-          "named": true
-        },
-        {
-          "type": "delete_object_statement",
-          "named": true
-        },
-        {
-          "type": "delete_statement",
-          "named": true
-        },
-        {
-          "type": "dictionary_statement",
-          "named": true
-        },
-        {
-          "type": "disable_statement",
-          "named": true
-        },
-        {
-          "type": "disable_triggers_statement",
-          "named": true
-        },
-        {
-          "type": "disconnect_statement",
-          "named": true
-        },
-        {
-          "type": "display_statement",
-          "named": true
-        },
-        {
-          "type": "do_block",
-          "named": true
-        },
-        {
-          "type": "dos_statement",
-          "named": true
-        },
-        {
-          "type": "down_statement",
-          "named": true
-        },
-        {
-          "type": "empty_statement",
-          "named": true
-        },
-        {
-          "type": "empty_temp_table_statement",
-          "named": true
-        },
-        {
-          "type": "enable_statement",
-          "named": true
-        },
-        {
-          "type": "enum_statement",
-          "named": true
-        },
-        {
-          "type": "error_scope_statement",
-          "named": true
-        },
-        {
-          "type": "event_definition",
-          "named": true
-        },
-        {
-          "type": "export_statement",
-          "named": true
-        },
-        {
-          "type": "expression_statement",
-          "named": true
-        },
-        {
-          "type": "finally_statement",
-          "named": true
-        },
-        {
-          "type": "find_statement",
-          "named": true
-        },
-        {
-          "type": "fix_codepage_statement",
-          "named": true
-        },
-        {
-          "type": "for_each_statement",
-          "named": true
-        },
-        {
-          "type": "form_statement",
-          "named": true
-        },
-        {
-          "type": "frame_definition",
-          "named": true
-        },
-        {
-          "type": "function_definition",
-          "named": true
-        },
-        {
-          "type": "function_forward_definition",
-          "named": true
-        },
-        {
-          "type": "get_key_value_statement",
-          "named": true
-        },
-        {
-          "type": "get_statement",
-          "named": true
-        },
-        {
-          "type": "hide_statement",
-          "named": true
-        },
-        {
-          "type": "if_statement",
-          "named": true
-        },
-        {
-          "type": "image_definition",
-          "named": true
-        },
-        {
-          "type": "import_statement",
-          "named": true
-        },
-        {
-          "type": "include",
-          "named": true
-        },
-        {
-          "type": "input_clear_statement",
-          "named": true
-        },
-        {
-          "type": "input_output_statement",
-          "named": true
-        },
-        {
-          "type": "input_statement",
-          "named": true
-        },
-        {
-          "type": "input_through_statement",
-          "named": true
-        },
-        {
-          "type": "insert_statement",
-          "named": true
-        },
-        {
-          "type": "interface_definition",
-          "named": true
-        },
-        {
-          "type": "leave_statement",
-          "named": true
-        },
-        {
-          "type": "load_picture_statement",
-          "named": true
-        },
-        {
-          "type": "load_statement",
-          "named": true
-        },
-        {
-          "type": "menu_definition",
-          "named": true
-        },
-        {
-          "type": "message_statement",
-          "named": true
-        },
-        {
-          "type": "next_prompt_statement",
-          "named": true
-        },
-        {
-          "type": "next_statement",
-          "named": true
-        },
-        {
-          "type": "on_statement",
-          "named": true
-        },
-        {
-          "type": "open_query_statement",
-          "named": true
-        },
-        {
-          "type": "os_append_statement",
-          "named": true
-        },
-        {
-          "type": "os_command_statement",
-          "named": true
-        },
-        {
-          "type": "os_copy_statement",
-          "named": true
-        },
-        {
-          "type": "os_create_dir_statement",
-          "named": true
-        },
-        {
-          "type": "os_delete_statement",
-          "named": true
-        },
-        {
-          "type": "os_rename_statement",
-          "named": true
-        },
-        {
-          "type": "output_statement",
-          "named": true
-        },
-        {
-          "type": "overlay_statement",
-          "named": true
-        },
-        {
-          "type": "page_statement",
-          "named": true
-        },
-        {
-          "type": "parameter_definition",
-          "named": true
-        },
-        {
-          "type": "pause_statement",
-          "named": true
-        },
-        {
-          "type": "preprocessor_directive",
-          "named": true
-        },
-        {
-          "type": "procedure_definition",
-          "named": true
-        },
-        {
-          "type": "procedure_forward_definition",
-          "named": true
-        },
-        {
-          "type": "process_events_statement",
-          "named": true
-        },
-        {
-          "type": "prompt_for_statement",
-          "named": true
-        },
-        {
-          "type": "promsgs_statement",
-          "named": true
-        },
-        {
-          "type": "propath_statement",
-          "named": true
-        },
-        {
-          "type": "publish_statement",
-          "named": true
-        },
-        {
-          "type": "put_cursor_statement",
-          "named": true
-        },
-        {
-          "type": "put_key_value_statement",
-          "named": true
-        },
-        {
-          "type": "put_screen_statement",
-          "named": true
-        },
-        {
-          "type": "put_statement",
-          "named": true
-        },
-        {
-          "type": "query_definition",
-          "named": true
-        },
-        {
-          "type": "quit_statement",
-          "named": true
-        },
-        {
-          "type": "raw_transfer_statement",
-          "named": true
-        },
-        {
-          "type": "readkey_statement",
-          "named": true
-        },
-        {
-          "type": "rectangle_definition",
-          "named": true
-        },
-        {
-          "type": "release_external_statement",
-          "named": true
-        },
-        {
-          "type": "release_object_statement",
-          "named": true
-        },
-        {
-          "type": "release_statement",
-          "named": true
-        },
-        {
-          "type": "repeat_statement",
-          "named": true
-        },
-        {
-          "type": "reposition_statement",
-          "named": true
-        },
-        {
-          "type": "return_statement",
-          "named": true
-        },
-        {
-          "type": "run_statement",
-          "named": true
-        },
-        {
-          "type": "run_stored_procedure_statement",
-          "named": true
-        },
-        {
-          "type": "save_cache_statement",
-          "named": true
-        },
-        {
-          "type": "scroll_statement",
-          "named": true
-        },
-        {
-          "type": "seek_statement",
-          "named": true
-        },
-        {
-          "type": "set_byte_order_statement",
-          "named": true
-        },
-        {
-          "type": "set_pointer_value_statement",
-          "named": true
-        },
-        {
-          "type": "set_size_statement",
-          "named": true
-        },
-        {
-          "type": "set_statement",
-          "named": true
-        },
-        {
-          "type": "show_stats_statement",
-          "named": true
-        },
-        {
-          "type": "status_statement",
-          "named": true
-        },
-        {
-          "type": "stop_statement",
-          "named": true
-        },
-        {
-          "type": "stream_definition",
-          "named": true
-        },
-        {
-          "type": "submenu_definition",
-          "named": true
-        },
-        {
-          "type": "subscribe_statement",
-          "named": true
-        },
-        {
-          "type": "system_dialog_color_statement",
-          "named": true
-        },
-        {
-          "type": "system_dialog_font_statement",
-          "named": true
-        },
-        {
-          "type": "system_dialog_get_dir_statement",
-          "named": true
-        },
-        {
-          "type": "system_dialog_get_file_statement",
-          "named": true
-        },
-        {
-          "type": "system_dialog_printer_setup_statement",
-          "named": true
-        },
-        {
-          "type": "temp_table_definition",
-          "named": true
-        },
-        {
-          "type": "terminal_statement",
-          "named": true
-        },
-        {
-          "type": "transaction_mode_statement",
-          "named": true
-        },
-        {
-          "type": "underline_statement",
-          "named": true
-        },
-        {
-          "type": "undo_statement",
-          "named": true
-        },
-        {
-          "type": "unix_statement",
-          "named": true
-        },
-        {
-          "type": "unload_statement",
-          "named": true
-        },
-        {
-          "type": "unsubscribe_statement",
-          "named": true
-        },
-        {
-          "type": "up_statement",
-          "named": true
-        },
-        {
-          "type": "update_statement",
-          "named": true
-        },
-        {
-          "type": "use_statement",
-          "named": true
-        },
-        {
-          "type": "using_statement",
-          "named": true
-        },
-        {
-          "type": "validate_statement",
-          "named": true
-        },
-        {
-          "type": "var_statement",
-          "named": true
-        },
-        {
-          "type": "variable_definition",
-          "named": true
-        },
-        {
-          "type": "view_statement",
-          "named": true
-        },
-        {
-          "type": "wait_for_statement",
-          "named": true
-        },
-        {
-          "type": "work_table_definition",
-          "named": true
-        },
-        {
-          "type": "workfile_definition",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "destructor_definition",
     "named": true,
     "fields": {
@@ -13597,20 +12375,15 @@
       "required": true,
       "types": [
         {
-          "type": "destructor_body",
+          "type": "body",
           "named": true
         },
         {
-          "type": "destructor_parameter_list",
+          "type": "parameters",
           "named": true
         }
       ]
     }
-  },
-  {
-    "type": "destructor_parameter_list",
-    "named": true,
-    "fields": {}
   },
   {
     "type": "dictionary_statement",
@@ -18245,176 +17018,9 @@
     "type": "for_each_statement",
     "named": true,
     "fields": {
-      "label": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "body",
-          "named": true
-        },
-        {
-          "type": "for_record_list",
-          "named": true
-        },
-        {
-          "type": "for_variable_loop",
-          "named": true
-        },
-        {
-          "type": "on_endkey_phrase",
-          "named": true
-        },
-        {
-          "type": "on_error_phrase",
-          "named": true
-        },
-        {
-          "type": "on_quit_phrase",
-          "named": true
-        },
-        {
-          "type": "on_stop_phrase",
-          "named": true
-        },
-        {
-          "type": "stop_after_phrase",
-          "named": true
-        },
-        {
-          "type": "while_phrase",
-          "named": true
-        },
-        {
-          "type": "with_frame_phrase",
-          "named": true
-        },
-        {
-          "type": "with_stream_io_phrase",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "for_phrase",
-    "named": true,
-    "fields": {
-      "record": {
-        "multiple": true,
-        "required": true,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          },
-          {
-            "type": "qualified_name",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "for_record",
-    "named": true,
-    "fields": {
-      "table": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          },
-          {
-            "type": "qualified_name",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "break_by",
-          "named": true
-        },
-        {
-          "type": "by_phrase",
-          "named": true
-        },
-        {
-          "type": "collate_phrase",
-          "named": true
-        },
-        {
-          "type": "exclusive_lock",
-          "named": true
-        },
-        {
-          "type": "no_lock",
-          "named": true
-        },
-        {
-          "type": "no_prefetch",
-          "named": true
-        },
-        {
-          "type": "of_phrase",
-          "named": true
-        },
-        {
-          "type": "share_lock",
-          "named": true
-        },
-        {
-          "type": "use_index",
-          "named": true
-        },
-        {
-          "type": "where_phrase",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "for_record_list",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "for_record",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "for_variable_loop",
-    "named": true,
-    "fields": {
       "end": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "accum_expression",
@@ -18530,9 +17136,19 @@
           }
         ]
       },
+      "label": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
       "start": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "accum_expression",
@@ -18768,10 +17384,76 @@
       },
       "variable": {
         "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "body",
+          "named": true
+        },
+        {
+          "type": "on_endkey_phrase",
+          "named": true
+        },
+        {
+          "type": "on_error_phrase",
+          "named": true
+        },
+        {
+          "type": "on_quit_phrase",
+          "named": true
+        },
+        {
+          "type": "on_stop_phrase",
+          "named": true
+        },
+        {
+          "type": "record",
+          "named": true
+        },
+        {
+          "type": "stop_after_phrase",
+          "named": true
+        },
+        {
+          "type": "while_phrase",
+          "named": true
+        },
+        {
+          "type": "with_frame_phrase",
+          "named": true
+        },
+        {
+          "type": "with_stream_io_phrase",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "for_phrase",
+    "named": true,
+    "fields": {
+      "record": {
+        "multiple": true,
         "required": true,
         "types": [
           {
             "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "qualified_name",
             "named": true
           }
         ]
@@ -19959,10 +18641,6 @@
           "named": true
         },
         {
-          "type": "function_parameter_list",
-          "named": true
-        },
-        {
           "type": "get_key_value_statement",
           "named": true
         },
@@ -20088,6 +18766,10 @@
         },
         {
           "type": "parameter_definition",
+          "named": true
+        },
+        {
+          "type": "parameters",
           "named": true
         },
         {
@@ -20391,108 +19073,11 @@
           "named": true
         },
         {
-          "type": "function_parameter_list",
-          "named": true
-        },
-        {
           "type": "in_phrase",
           "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "function_parameter",
-    "named": true,
-    "fields": {
-      "like": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          },
-          {
-            "type": "qualified_name",
-            "named": true
-          }
-        ]
-      },
-      "name": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "type": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "generic_type",
-            "named": true
-          },
-          {
-            "type": "identifier",
-            "named": true
-          },
-          {
-            "type": "qualified_name",
-            "named": true
-          },
-          {
-            "type": "scoped_name",
-            "named": true
-          },
-          {
-            "type": "string_literal",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "constant",
-          "named": true
         },
         {
-          "type": "identifier",
-          "named": true
-        },
-        {
-          "type": "no_undo",
-          "named": true
-        },
-        {
-          "type": "null_literal",
-          "named": true
-        },
-        {
-          "type": "number_literal",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "function_parameter_list",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "function_parameter",
+          "type": "parameters",
           "named": true
         }
       ]
@@ -24055,33 +22640,6 @@
     }
   },
   {
-    "type": "interface_body_item",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "include",
-          "named": true
-        },
-        {
-          "type": "method_definition",
-          "named": true
-        },
-        {
-          "type": "preprocessor_directive",
-          "named": true
-        },
-        {
-          "type": "property_definition",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "interface_definition",
     "named": true,
     "fields": {
@@ -24113,7 +22671,19 @@
       "required": false,
       "types": [
         {
-          "type": "interface_body_item",
+          "type": "include",
+          "named": true
+        },
+        {
+          "type": "method_definition",
+          "named": true
+        },
+        {
+          "type": "preprocessor_directive",
+          "named": true
+        },
+        {
+          "type": "property_definition",
           "named": true
         }
       ]
@@ -26108,617 +24678,6 @@
     }
   },
   {
-    "type": "method_body",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "accumulate_statement",
-          "named": true
-        },
-        {
-          "type": "aggregate_statement",
-          "named": true
-        },
-        {
-          "type": "annotation",
-          "named": true
-        },
-        {
-          "type": "apply_statement",
-          "named": true
-        },
-        {
-          "type": "assign_statement",
-          "named": true
-        },
-        {
-          "type": "assignment_statement",
-          "named": true
-        },
-        {
-          "type": "bell_statement",
-          "named": true
-        },
-        {
-          "type": "browse_definition",
-          "named": true
-        },
-        {
-          "type": "buffer_compare_statement",
-          "named": true
-        },
-        {
-          "type": "buffer_copy_statement",
-          "named": true
-        },
-        {
-          "type": "buffer_definition",
-          "named": true
-        },
-        {
-          "type": "button_definition",
-          "named": true
-        },
-        {
-          "type": "call_statement",
-          "named": true
-        },
-        {
-          "type": "case_statement",
-          "named": true
-        },
-        {
-          "type": "catch_statement",
-          "named": true
-        },
-        {
-          "type": "choose_statement",
-          "named": true
-        },
-        {
-          "type": "class_definition",
-          "named": true
-        },
-        {
-          "type": "clear_statement",
-          "named": true
-        },
-        {
-          "type": "close_query_statement",
-          "named": true
-        },
-        {
-          "type": "close_stored_procedure_statement",
-          "named": true
-        },
-        {
-          "type": "color_statement",
-          "named": true
-        },
-        {
-          "type": "compile_statement",
-          "named": true
-        },
-        {
-          "type": "connect_statement",
-          "named": true
-        },
-        {
-          "type": "convert_statement",
-          "named": true
-        },
-        {
-          "type": "copy_lob_statement",
-          "named": true
-        },
-        {
-          "type": "create_socket_statement",
-          "named": true
-        },
-        {
-          "type": "create_statement",
-          "named": true
-        },
-        {
-          "type": "data_source_definition",
-          "named": true
-        },
-        {
-          "type": "dataset_definition",
-          "named": true
-        },
-        {
-          "type": "delete_object_statement",
-          "named": true
-        },
-        {
-          "type": "delete_statement",
-          "named": true
-        },
-        {
-          "type": "dictionary_statement",
-          "named": true
-        },
-        {
-          "type": "disable_statement",
-          "named": true
-        },
-        {
-          "type": "disable_triggers_statement",
-          "named": true
-        },
-        {
-          "type": "disconnect_statement",
-          "named": true
-        },
-        {
-          "type": "display_statement",
-          "named": true
-        },
-        {
-          "type": "do_block",
-          "named": true
-        },
-        {
-          "type": "dos_statement",
-          "named": true
-        },
-        {
-          "type": "down_statement",
-          "named": true
-        },
-        {
-          "type": "empty_statement",
-          "named": true
-        },
-        {
-          "type": "empty_temp_table_statement",
-          "named": true
-        },
-        {
-          "type": "enable_statement",
-          "named": true
-        },
-        {
-          "type": "enum_statement",
-          "named": true
-        },
-        {
-          "type": "error_scope_statement",
-          "named": true
-        },
-        {
-          "type": "event_definition",
-          "named": true
-        },
-        {
-          "type": "export_statement",
-          "named": true
-        },
-        {
-          "type": "expression_statement",
-          "named": true
-        },
-        {
-          "type": "finally_statement",
-          "named": true
-        },
-        {
-          "type": "find_statement",
-          "named": true
-        },
-        {
-          "type": "fix_codepage_statement",
-          "named": true
-        },
-        {
-          "type": "for_each_statement",
-          "named": true
-        },
-        {
-          "type": "form_statement",
-          "named": true
-        },
-        {
-          "type": "frame_definition",
-          "named": true
-        },
-        {
-          "type": "function_definition",
-          "named": true
-        },
-        {
-          "type": "function_forward_definition",
-          "named": true
-        },
-        {
-          "type": "get_key_value_statement",
-          "named": true
-        },
-        {
-          "type": "get_statement",
-          "named": true
-        },
-        {
-          "type": "hide_statement",
-          "named": true
-        },
-        {
-          "type": "if_statement",
-          "named": true
-        },
-        {
-          "type": "image_definition",
-          "named": true
-        },
-        {
-          "type": "import_statement",
-          "named": true
-        },
-        {
-          "type": "include",
-          "named": true
-        },
-        {
-          "type": "input_clear_statement",
-          "named": true
-        },
-        {
-          "type": "input_output_statement",
-          "named": true
-        },
-        {
-          "type": "input_statement",
-          "named": true
-        },
-        {
-          "type": "input_through_statement",
-          "named": true
-        },
-        {
-          "type": "insert_statement",
-          "named": true
-        },
-        {
-          "type": "interface_definition",
-          "named": true
-        },
-        {
-          "type": "leave_statement",
-          "named": true
-        },
-        {
-          "type": "load_picture_statement",
-          "named": true
-        },
-        {
-          "type": "load_statement",
-          "named": true
-        },
-        {
-          "type": "menu_definition",
-          "named": true
-        },
-        {
-          "type": "message_statement",
-          "named": true
-        },
-        {
-          "type": "next_prompt_statement",
-          "named": true
-        },
-        {
-          "type": "next_statement",
-          "named": true
-        },
-        {
-          "type": "on_statement",
-          "named": true
-        },
-        {
-          "type": "open_query_statement",
-          "named": true
-        },
-        {
-          "type": "os_append_statement",
-          "named": true
-        },
-        {
-          "type": "os_command_statement",
-          "named": true
-        },
-        {
-          "type": "os_copy_statement",
-          "named": true
-        },
-        {
-          "type": "os_create_dir_statement",
-          "named": true
-        },
-        {
-          "type": "os_delete_statement",
-          "named": true
-        },
-        {
-          "type": "os_rename_statement",
-          "named": true
-        },
-        {
-          "type": "output_statement",
-          "named": true
-        },
-        {
-          "type": "overlay_statement",
-          "named": true
-        },
-        {
-          "type": "page_statement",
-          "named": true
-        },
-        {
-          "type": "parameter_definition",
-          "named": true
-        },
-        {
-          "type": "pause_statement",
-          "named": true
-        },
-        {
-          "type": "preprocessor_directive",
-          "named": true
-        },
-        {
-          "type": "procedure_definition",
-          "named": true
-        },
-        {
-          "type": "procedure_forward_definition",
-          "named": true
-        },
-        {
-          "type": "process_events_statement",
-          "named": true
-        },
-        {
-          "type": "prompt_for_statement",
-          "named": true
-        },
-        {
-          "type": "promsgs_statement",
-          "named": true
-        },
-        {
-          "type": "propath_statement",
-          "named": true
-        },
-        {
-          "type": "publish_statement",
-          "named": true
-        },
-        {
-          "type": "put_cursor_statement",
-          "named": true
-        },
-        {
-          "type": "put_key_value_statement",
-          "named": true
-        },
-        {
-          "type": "put_screen_statement",
-          "named": true
-        },
-        {
-          "type": "put_statement",
-          "named": true
-        },
-        {
-          "type": "query_definition",
-          "named": true
-        },
-        {
-          "type": "quit_statement",
-          "named": true
-        },
-        {
-          "type": "raw_transfer_statement",
-          "named": true
-        },
-        {
-          "type": "readkey_statement",
-          "named": true
-        },
-        {
-          "type": "rectangle_definition",
-          "named": true
-        },
-        {
-          "type": "release_external_statement",
-          "named": true
-        },
-        {
-          "type": "release_object_statement",
-          "named": true
-        },
-        {
-          "type": "release_statement",
-          "named": true
-        },
-        {
-          "type": "repeat_statement",
-          "named": true
-        },
-        {
-          "type": "reposition_statement",
-          "named": true
-        },
-        {
-          "type": "return_statement",
-          "named": true
-        },
-        {
-          "type": "run_statement",
-          "named": true
-        },
-        {
-          "type": "run_stored_procedure_statement",
-          "named": true
-        },
-        {
-          "type": "save_cache_statement",
-          "named": true
-        },
-        {
-          "type": "scroll_statement",
-          "named": true
-        },
-        {
-          "type": "seek_statement",
-          "named": true
-        },
-        {
-          "type": "set_byte_order_statement",
-          "named": true
-        },
-        {
-          "type": "set_pointer_value_statement",
-          "named": true
-        },
-        {
-          "type": "set_size_statement",
-          "named": true
-        },
-        {
-          "type": "set_statement",
-          "named": true
-        },
-        {
-          "type": "show_stats_statement",
-          "named": true
-        },
-        {
-          "type": "status_statement",
-          "named": true
-        },
-        {
-          "type": "stop_statement",
-          "named": true
-        },
-        {
-          "type": "stream_definition",
-          "named": true
-        },
-        {
-          "type": "submenu_definition",
-          "named": true
-        },
-        {
-          "type": "subscribe_statement",
-          "named": true
-        },
-        {
-          "type": "system_dialog_color_statement",
-          "named": true
-        },
-        {
-          "type": "system_dialog_font_statement",
-          "named": true
-        },
-        {
-          "type": "system_dialog_get_dir_statement",
-          "named": true
-        },
-        {
-          "type": "system_dialog_get_file_statement",
-          "named": true
-        },
-        {
-          "type": "system_dialog_printer_setup_statement",
-          "named": true
-        },
-        {
-          "type": "temp_table_definition",
-          "named": true
-        },
-        {
-          "type": "terminal_statement",
-          "named": true
-        },
-        {
-          "type": "transaction_mode_statement",
-          "named": true
-        },
-        {
-          "type": "underline_statement",
-          "named": true
-        },
-        {
-          "type": "undo_statement",
-          "named": true
-        },
-        {
-          "type": "unix_statement",
-          "named": true
-        },
-        {
-          "type": "unload_statement",
-          "named": true
-        },
-        {
-          "type": "unsubscribe_statement",
-          "named": true
-        },
-        {
-          "type": "up_statement",
-          "named": true
-        },
-        {
-          "type": "update_statement",
-          "named": true
-        },
-        {
-          "type": "use_statement",
-          "named": true
-        },
-        {
-          "type": "using_statement",
-          "named": true
-        },
-        {
-          "type": "validate_statement",
-          "named": true
-        },
-        {
-          "type": "var_statement",
-          "named": true
-        },
-        {
-          "type": "variable_definition",
-          "named": true
-        },
-        {
-          "type": "view_statement",
-          "named": true
-        },
-        {
-          "type": "wait_for_statement",
-          "named": true
-        },
-        {
-          "type": "work_table_definition",
-          "named": true
-        },
-        {
-          "type": "workfile_definition",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "method_definition",
     "named": true,
     "fields": {
@@ -26764,135 +24723,9 @@
       "required": true,
       "types": [
         {
-          "type": "constant",
+          "type": "body",
           "named": true
         },
-        {
-          "type": "identifier",
-          "named": true
-        },
-        {
-          "type": "method_body",
-          "named": true
-        },
-        {
-          "type": "method_parameter_list",
-          "named": true
-        },
-        {
-          "type": "number_literal",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "method_parameter",
-    "named": true,
-    "fields": {
-      "dataset": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          },
-          {
-            "type": "qualified_name",
-            "named": true
-          }
-        ]
-      },
-      "dataset_handle": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "like": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          },
-          {
-            "type": "qualified_name",
-            "named": true
-          }
-        ]
-      },
-      "name": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "table": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          },
-          {
-            "type": "qualified_name",
-            "named": true
-          }
-        ]
-      },
-      "table_handle": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "type": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "generic_type",
-            "named": true
-          },
-          {
-            "type": "identifier",
-            "named": true
-          },
-          {
-            "type": "qualified_name",
-            "named": true
-          },
-          {
-            "type": "scoped_name",
-            "named": true
-          },
-          {
-            "type": "string_literal",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
         {
           "type": "constant",
           "named": true
@@ -26902,26 +24735,11 @@
           "named": true
         },
         {
-          "type": "no_undo",
+          "type": "number_literal",
           "named": true
         },
         {
-          "type": "number_literal",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "method_parameter_list",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "method_parameter",
+          "type": "parameters",
           "named": true
         }
       ]
@@ -31166,6 +28984,136 @@
     }
   },
   {
+    "type": "parameter",
+    "named": true,
+    "fields": {
+      "dataset": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "qualified_name",
+            "named": true
+          }
+        ]
+      },
+      "dataset_handle": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "like": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "qualified_name",
+            "named": true
+          }
+        ]
+      },
+      "name": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "table": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "qualified_name",
+            "named": true
+          }
+        ]
+      },
+      "table_handle": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "type": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "generic_type",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "qualified_name",
+            "named": true
+          },
+          {
+            "type": "scoped_name",
+            "named": true
+          },
+          {
+            "type": "string_literal",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "constant",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "no_undo",
+          "named": true
+        },
+        {
+          "type": "null_literal",
+          "named": true
+        },
+        {
+          "type": "number_literal",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "parameter_definition",
     "named": true,
     "fields": {
@@ -31443,6 +29391,21 @@
           }
         ]
       }
+    }
+  },
+  {
+    "type": "parameters",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "parameter",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -36514,6 +34477,72 @@
       "types": [
         {
           "type": "stream_phrase",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "record",
+    "named": true,
+    "fields": {
+      "table": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "qualified_name",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "break_by",
+          "named": true
+        },
+        {
+          "type": "by_phrase",
+          "named": true
+        },
+        {
+          "type": "collate_phrase",
+          "named": true
+        },
+        {
+          "type": "exclusive_lock",
+          "named": true
+        },
+        {
+          "type": "no_lock",
+          "named": true
+        },
+        {
+          "type": "no_prefetch",
+          "named": true
+        },
+        {
+          "type": "of_phrase",
+          "named": true
+        },
+        {
+          "type": "share_lock",
+          "named": true
+        },
+        {
+          "type": "use_index",
+          "named": true
+        },
+        {
+          "type": "where_phrase",
           "named": true
         }
       ]

@@ -182,8 +182,7 @@ module.exports = grammar({
 
       // Expressions
       parenthesized_expression: ($) => seq("(", $._expression, ")"),
-      _expression_list: ($) =>
-        seq($._expression, repeat(seq(",", $._expression))),
+      _expressions: ($) => seq($._expression, repeat(seq(",", $._expression))),
       unary_expression: ($) =>
         choice(
           prec(PREC.UNARY, seq(choice("+", "-"), $._expression)),
@@ -238,7 +237,7 @@ module.exports = grammar({
         ),
 
       // Array
-      array_initializer: ($) => seq("[", optional($._expression_list), "]"),
+      array_initializer: ($) => seq("[", optional($._expressions), "]"),
       _array_target: ($) =>
         choice($.identifier, $.qualified_name, $.object_access, $.scoped_name),
 
@@ -251,7 +250,7 @@ module.exports = grammar({
         ),
       _array_subscript: ($) =>
         choice(
-          $._expression_list,
+          $._expressions,
           seq(
             field("start", $._expression),
             kw("FOR"),

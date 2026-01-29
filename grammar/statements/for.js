@@ -12,7 +12,7 @@ module.exports = ({ kw, tkw }) => ({
 
   __for_body: ($) =>
     seq(
-      choice($.for_record_list, $.for_variable_loop),
+      choice($.__for_records, $.__for_variables),
       optional(alias($.__for_while_phrase, $.while_phrase)),
       optional(tkw("TRANSACTION")),
       optional(alias($.__for_stop_after_phrase, $.stop_after_phrase)),
@@ -31,9 +31,13 @@ module.exports = ({ kw, tkw }) => ({
       tkw("END"),
     ),
 
-  for_record_list: ($) => seq($.for_record, repeat(seq(",", $.for_record))),
+  __for_records: ($) =>
+    seq(
+      alias($.__for_record, $.record),
+      repeat(seq(",", alias($.__for_record, $.record))),
+    ),
 
-  for_record: ($) =>
+  __for_record: ($) =>
     seq(
       optional(choice(kw("EACH"), kw("FIRST"), kw("LAST"))),
       field("table", $.__for_record_name),
@@ -53,7 +57,7 @@ module.exports = ({ kw, tkw }) => ({
       alias($.__for_break_by, $.break_by),
     ),
 
-  for_variable_loop: ($) =>
+  __for_variables: ($) =>
     seq(
       field("variable", $.identifier),
       "=",

@@ -25,7 +25,12 @@ const prevHash = await Bun.file("abl.hash")
   .catch(() => "");
 
 if (hash !== prevHash) {
-  await $`tree-sitter generate`;
+  try {
+    await $`tree-sitter generate`;
+  } catch (error) {
+    process.exit(1);
+  }
+
   await Bun.write("abl.hash", hash);
 }
 

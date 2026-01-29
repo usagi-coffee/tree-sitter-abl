@@ -123,7 +123,7 @@ module.exports = ({ kw, tkw }) => ({
       seq(kw("HELP"), $.string_literal),
       seq(
         kw("INITIAL"),
-        choice($._expression, seq("[", optional($._expression_list), "]")),
+        choice($._expression, seq("[", optional($._expressions), "]")),
       ),
       seq(kw("LABEL"), $.__temp_table_label_list),
       seq(kw("MOUSE-POINTER"), $._expression),

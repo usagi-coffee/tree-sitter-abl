@@ -32,9 +32,8 @@ UP STREAM-HANDLE hS 3 WITH FRAME f1.
 
 (source_code
   (for_each_statement
-    (for_record_list
-      (for_record
-        (identifier)))
+    (record
+      (identifier))
     (body
       (up_statement
         (number_literal))

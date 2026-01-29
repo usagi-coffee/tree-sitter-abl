@@ -123,8 +123,8 @@ RETURN NO-APPLY.
   (function_definition
     (identifier)
     (identifier)
-    (function_parameter_list
-      (function_parameter
+    (parameters
+      (parameter
         (identifier)
         (identifier)))
     (return_statement
@@ -236,5 +236,4 @@ RETURN NO-APPLY.
       (identifier)))
   (return_statement
     (string_literal))
-  (return_statement
-    (identifier)))
+  (return_statement))

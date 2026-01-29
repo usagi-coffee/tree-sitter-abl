@@ -96,7 +96,7 @@ module.exports = ({ kw, tkw }) => ({
   __procedure_initial_option: ($) =>
     seq(
       kw("INITIAL"),
-      choice($._expression, seq("[", optional($._expression_list), "]")),
+      choice($._expression, seq("[", optional($._expressions), "]")),
     ),
 
   __procedure_no_undo: ($) => tkw("NO-UNDO"),

@@ -10,9 +10,8 @@ END.
 
 (source_code
   (for_each_statement
-    (for_record_list
-      (for_record
-        table: (identifier)))
+    (record
+      table: (identifier))
     (body
       (display_statement
         (qualified_name
@@ -31,16 +30,15 @@ END.
 
 (source_code
   (for_each_statement
-    (for_record_list
-      (for_record
-        table: (identifier)
-        (where_phrase
-          (binary_expression
-            (qualified_name
-              left: (identifier)
-              right: (identifier))
-            (number_literal)))
-        (no_lock)))
+    (record
+      table: (identifier)
+      (where_phrase
+        (binary_expression
+          (qualified_name
+            left: (identifier)
+            right: (identifier))
+          (number_literal)))
+      (no_lock))
     (body
       (display_statement
         (qualified_name
@@ -59,9 +57,8 @@ END.
 
 (source_code
   (for_each_statement
-    (for_record_list
-      (for_record
-        table: (identifier)))
+    (record
+      table: (identifier))
     (on_error_phrase)
     (body
       (display_statement
@@ -81,25 +78,24 @@ END.
 
 (source_code
   (for_each_statement
-    (for_record_list
-      (for_record
-        table: (identifier)
-        (where_phrase
-          (binary_expression
-            (qualified_name
-              left: (identifier)
-              right: (identifier))
-            (string_literal)))
-        (no_lock)
-        (use_index
-          index: (identifier))
-        (break_by
+    (record
+      table: (identifier)
+      (where_phrase
+        (binary_expression
           (qualified_name
             left: (identifier)
             right: (identifier))
-          (qualified_name
-            left: (identifier)
-            right: (identifier)))))
+          (string_literal)))
+      (no_lock)
+      (use_index
+        index: (identifier))
+      (break_by
+        (qualified_name
+          left: (identifier)
+          right: (identifier))
+        (qualified_name
+          left: (identifier)
+          right: (identifier))))
     (body
       (display_statement
         (qualified_name
@@ -118,14 +114,13 @@ END.
 
 (source_code
   (for_each_statement
-    (for_record_list
-      (for_record
-        table: (identifier)
-        (no_lock)
-        (by_phrase
-          (qualified_name
-            left: (identifier)
-            right: (identifier)))))
+    (record
+      table: (identifier)
+      (no_lock)
+      (by_phrase
+        (qualified_name
+          left: (identifier)
+          right: (identifier))))
     (body
       (display_statement
         (qualified_name
@@ -144,10 +139,9 @@ END.
 
 (source_code
   (for_each_statement
-    (for_record_list
-      (for_record
-        table: (identifier)
-        (no_lock)))
+    (record
+      table: (identifier)
+      (no_lock))
     (with_frame_phrase
       name: (identifier)
       (number_literal))
@@ -171,10 +165,9 @@ END.
 (source_code
   (for_each_statement
     label: (identifier)
-    (for_record_list
-      (for_record
-        table: (identifier)
-        (no_lock)))
+    (record
+      table: (identifier)
+      (no_lock))
     (body
       (display_statement
         (qualified_name
@@ -193,9 +186,8 @@ END.
 
 (source_code
   (for_each_statement
-    (for_record_list
-      (for_record
-        table: (identifier)))
+    (record
+      table: (identifier))
     (on_endkey_phrase
       (undo_phrase))
     (body
@@ -216,14 +208,13 @@ END.
 
 (source_code
   (for_each_statement
-    (for_record_list
-      (for_record
-        table: (identifier)
-        (where_phrase
-          (binary_expression
-            (identifier)
-            (string_literal)))
-        (exclusive_lock)))
+    (record
+      table: (identifier)
+      (where_phrase
+        (binary_expression
+          (identifier)
+          (string_literal)))
+      (exclusive_lock))
     (body
       (display_statement
         (qualified_name
@@ -242,11 +233,10 @@ END.
 
 (source_code
   (for_each_statement
-    (for_record_list
-      (for_record
-        table: (identifier)
-        (share_lock)
-        (no_prefetch)))
+    (record
+      table: (identifier)
+      (share_lock)
+      (no_prefetch))
     (body
       (display_statement
         (qualified_name
@@ -265,10 +255,9 @@ END.
 
 (source_code
   (for_each_statement
-    (for_record_list
-      (for_record
-        table: (identifier)
-        (no_lock)))
+    (record
+      table: (identifier)
+      (no_lock))
     (body
       (display_statement
         (qualified_name
@@ -287,10 +276,9 @@ END.
 
 (source_code
   (for_each_statement
-    (for_record_list
-      (for_record
-        table: (identifier)
-        (no_lock)))
+    (record
+      table: (identifier)
+      (no_lock))
     (body
       (display_statement
         (qualified_name
@@ -309,15 +297,14 @@ END.
 
 (source_code
   (for_each_statement
-    (for_record_list
-      (for_record
-        table: (identifier)
-        (no_lock))
-      (for_record
-        table: (identifier)
-        (of_phrase
-          (identifier))
-        (no_lock)))
+    (record
+      table: (identifier)
+      (no_lock))
+    (record
+      table: (identifier)
+      (of_phrase
+        (identifier))
+      (no_lock))
     (body
       (display_statement
         (qualified_name
@@ -339,29 +326,28 @@ END.
 
 (source_code
   (for_each_statement
-    (for_record_list
-      (for_record
-        table: (identifier)
-        (no_lock)
-        (where_phrase
+    (record
+      table: (identifier)
+      (no_lock)
+      (where_phrase
+        (binary_expression
           (binary_expression
-            (binary_expression
-              (qualified_name
-                left: (identifier)
-                right: (identifier))
-              (number_literal))
-            (binary_expression
-              (qualified_name
-                left: (identifier)
-                right: (identifier))
-              (string_literal))))
-        (by_phrase
-          (qualified_name
-            left: (identifier)
-            right: (identifier))
-          (qualified_name
-            left: (identifier)
-            right: (identifier)))))
+            (qualified_name
+              left: (identifier)
+              right: (identifier))
+            (number_literal))
+          (binary_expression
+            (qualified_name
+              left: (identifier)
+              right: (identifier))
+            (string_literal))))
+      (by_phrase
+        (qualified_name
+          left: (identifier)
+          right: (identifier))
+        (qualified_name
+          left: (identifier)
+          right: (identifier))))
     (body
       (display_statement
         (qualified_name
@@ -383,15 +369,14 @@ END.
 
 (source_code
   (for_each_statement
-    (for_record_list
-      (for_record
-        table: (identifier)
-        (no_lock))
-      (for_record
-        table: (identifier)
-        (of_phrase
-          (identifier))
-        (no_lock)))
+    (record
+      table: (identifier)
+      (no_lock))
+    (record
+      table: (identifier)
+      (of_phrase
+        (identifier))
+      (no_lock))
     (body
       (display_statement
         (qualified_name
@@ -417,19 +402,17 @@ END.
 
 (source_code
   (for_each_statement
-    (for_variable_loop
-      variable: (identifier)
-      start: (number_literal)
-      end: (number_literal))
+    variable: (identifier)
+    start: (number_literal)
+    end: (number_literal)
     (body
       (display_statement
         (identifier))))
   (for_each_statement
-    (for_variable_loop
-      variable: (identifier)
-      start: (number_literal)
-      end: (number_literal)
-      step: (number_literal))
+    variable: (identifier)
+    start: (number_literal)
+    end: (number_literal)
+    step: (number_literal)
     (body
       (display_statement
         (identifier)))))
@@ -450,9 +433,8 @@ END.
 
 (source_code
   (for_each_statement
-    (for_record_list
-      (for_record
-        table: (identifier)))
+    (record
+      table: (identifier))
     (while_phrase
       condition: (binary_expression
         (identifier)
@@ -461,9 +443,8 @@ END.
       (display_statement
         (identifier))))
   (for_each_statement
-    (for_record_list
-      (for_record
-        table: (identifier)))
+    (record
+      table: (identifier))
     (stop_after_phrase
       time: (number_literal))
     (body
@@ -490,25 +471,22 @@ END.
 
 (source_code
   (for_each_statement
-    (for_record_list
-      (for_record
-        table: (identifier)))
+    (record
+      table: (identifier))
     (on_error_phrase)
     (body
       (display_statement
         (identifier))))
   (for_each_statement
-    (for_record_list
-      (for_record
-        table: (identifier)))
+    (record
+      table: (identifier))
     (on_quit_phrase)
     (body
       (display_statement
         (identifier))))
   (for_each_statement
-    (for_record_list
-      (for_record
-        table: (identifier)))
+    (record
+      table: (identifier))
     (on_stop_phrase)
     (body
       (display_statement
@@ -546,106 +524,102 @@ END.
 
 (source_code
   (for_each_statement
-    (for_record_list
-      (for_record
-        (identifier)
-        (no_lock)
-        (by_phrase
-          (qualified_name
-            (identifier)
-            (identifier)))))
+    (record
+      (identifier)
+      (no_lock)
+      (by_phrase
+        (qualified_name
+          (identifier)
+          (identifier))))
     (body
       (display_statement
         (identifier))
       (leave_statement)))
   (for_each_statement
-    (for_record_list
-      (for_record
-        (identifier)
-        (no_lock)
-        (where_phrase
-          (binary_expression
-            (qualified_name
-              (identifier)
-              (identifier))
-            (number_literal)))
-        (by_phrase
-          (qualified_name
-            (identifier)
-            (identifier)))))
-    (body
-      (display_statement
-        (qualified_name
-          (identifier)
-          (identifier))
-        (qualified_name
-          (identifier)
-          (identifier))
-        (qualified_name
-          (identifier)
-          (identifier))
-        (qualified_name
-          (identifier)
-          (identifier)))))
-  (for_each_statement
-    (for_record_list
-      (for_record
-        (identifier)
-        (no_lock))
-      (for_record
-        (identifier)
-        (of_phrase
-          (identifier))
-        (no_lock))
-      (for_record
-        (identifier)
-        (of_phrase
-          (identifier))
-        (no_lock))
-      (for_record
-        (identifier)
-        (of_phrase
-          (identifier))
-        (no_lock)
-        (by_phrase
+    (record
+      (identifier)
+      (no_lock)
+      (where_phrase
+        (binary_expression
           (qualified_name
             (identifier)
             (identifier))
-          (qualified_name
-            (identifier)
-            (identifier))
-          (qualified_name
-            (identifier)
-            (identifier)))))
-    (body
-      (display_statement
+          (number_literal)))
+      (by_phrase
         (qualified_name
           (identifier)
-          (identifier))
-        (qualified_name
-          (identifier)
-          (identifier))
-        (qualified_name
-          (identifier)
-          (identifier))
-        (qualified_name
-          (identifier)
-          (identifier))
-        (qualified_name
-          (identifier)
-          (identifier))
-        (qualified_name
-          (identifier)
-          (identifier)))))
-  (for_each_statement
-    (for_record_list
-      (for_record
-        (identifier)
-        (no_lock))
-      (for_record
-        (identifier)
-        (of_phrase
           (identifier))))
+    (body
+      (display_statement
+        (qualified_name
+          (identifier)
+          (identifier))
+        (qualified_name
+          (identifier)
+          (identifier))
+        (qualified_name
+          (identifier)
+          (identifier))
+        (qualified_name
+          (identifier)
+          (identifier)))))
+  (for_each_statement
+    (record
+      (identifier)
+      (no_lock))
+    (record
+      (identifier)
+      (of_phrase
+        (identifier))
+      (no_lock))
+    (record
+      (identifier)
+      (of_phrase
+        (identifier))
+      (no_lock))
+    (record
+      (identifier)
+      (of_phrase
+        (identifier))
+      (no_lock)
+      (by_phrase
+        (qualified_name
+          (identifier)
+          (identifier))
+        (qualified_name
+          (identifier)
+          (identifier))
+        (qualified_name
+          (identifier)
+          (identifier))))
+    (body
+      (display_statement
+        (qualified_name
+          (identifier)
+          (identifier))
+        (qualified_name
+          (identifier)
+          (identifier))
+        (qualified_name
+          (identifier)
+          (identifier))
+        (qualified_name
+          (identifier)
+          (identifier))
+        (qualified_name
+          (identifier)
+          (identifier))
+        (qualified_name
+          (identifier)
+          (identifier)))))
+  (for_each_statement
+    (record
+      (identifier)
+      (no_lock))
+    (record
+      (identifier)
+      (of_phrase
+        (identifier)))
     (body
       (display_statement
         (qualified_name

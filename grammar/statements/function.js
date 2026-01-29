@@ -7,7 +7,7 @@ module.exports = ({ kw, tkw }) => ({
       choice(kw("RETURNS"), kw("RETURN")),
       optional(kw("CLASS")),
       field("type", $._type_name),
-      optional($.function_parameter_list),
+      optional(alias($.__function_parameters, $.parameters)),
       choice($._terminator, $._colon),
       repeat($._statement),
       tkw("END"),
@@ -31,7 +31,7 @@ module.exports = ({ kw, tkw }) => ({
       choice(kw("RETURNS"), kw("RETURN")),
       optional(kw("CLASS")),
       field("type", $._type_name),
-      optional($.function_parameter_list),
+      optional(alias($.__function_parameters, $.parameters)),
       optional($.__function_forward_option),
     ),
 
@@ -41,20 +41,23 @@ module.exports = ({ kw, tkw }) => ({
       choice(kw("RETURNS"), kw("RETURN")),
       optional(kw("CLASS")),
       field("type", $._type_name),
-      optional($.function_parameter_list),
+      optional(alias($.__function_parameters, $.parameters)),
       $.__function_forward_option,
     ),
 
-  function_parameter_list: ($) =>
+  __function_parameters: ($) =>
     seq(
       "(",
       optional(
-        seq($.function_parameter, repeat(seq(",", $.function_parameter))),
+        seq(
+          alias($.__function_parameter, $.parameter),
+          repeat(seq(",", alias($.__function_parameter, $.parameter))),
+        ),
       ),
       ")",
     ),
 
-  function_parameter: ($) =>
+  __function_parameter: ($) =>
     seq(
       optional(choice(kw("INPUT"), kw("OUTPUT"), kw("INPUT-OUTPUT"))),
       field("name", $.identifier),
