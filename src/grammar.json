@@ -46002,19 +46002,6 @@
                         "type": "TOKEN",
                         "content": {
                           "type": "PATTERN",
-                          "value": "RETURN",
-                          "flags": "i"
-                        }
-                      },
-                      "named": false,
-                      "value": "RETURN"
-                    },
-                    {
-                      "type": "ALIAS",
-                      "content": {
-                        "type": "TOKEN",
-                        "content": {
-                          "type": "PATTERN",
                           "value": "ERROR",
                           "flags": "i"
                         }
@@ -46035,6 +46022,19 @@
                       ]
                     }
                   ]
+                },
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "TOKEN",
+                    "content": {
+                      "type": "PATTERN",
+                      "value": "NO-APPLY",
+                      "flags": "i"
+                    }
+                  },
+                  "named": false,
+                  "value": "NO-APPLY"
                 }
               ]
             },

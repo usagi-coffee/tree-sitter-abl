@@ -5,7 +5,8 @@ module.exports = ({ kw, tkw }) => ({
       optional(
         choice(
           $._expression,
-          seq(tkw("RETURN"), tkw("ERROR"), optional($._expression)),
+          seq(tkw("ERROR"), optional($._expression)),
+          tkw("NO-APPLY"),
         ),
       ),
       $._terminator,
