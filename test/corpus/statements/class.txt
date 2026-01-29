@@ -83,8 +83,8 @@ END CLASS.
       type: (identifier)
       (variable
         name: (identifier)))
-    (annotation_statement
-      name: (annotation_name))
+    (annotation
+      name: (identifier))
     (method_definition
       name: (identifier)
       (method_parameter_list)

@@ -77,8 +77,8 @@ COLOR PROMPT INPUT field1 field2 WITH FRAME f1.
   (color_statement
     (color_phrase
       (identifier))
-    (identifier)
-    (identifier)
+    (input_expression
+      (identifier))
     (identifier)
     (frame_phrase
       (identifier))))
