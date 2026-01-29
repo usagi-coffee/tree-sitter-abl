@@ -3,6 +3,12 @@ module.exports = ({ kw, tkw }) => ({
     seq(
       kw("RUN"),
       kw("STORED-PROCEDURE"),
+      $.__run_stored_procedure_body,
+      $._terminator,
+    ),
+
+  __run_stored_procedure_body: ($) =>
+    seq(
       field("procedure", choice($.identifier, $.string_literal)),
       optional(
         choice(
@@ -18,7 +24,6 @@ module.exports = ({ kw, tkw }) => ({
       ),
       optional(tkw("NO-ERROR")),
       optional(alias($.__run_stored_procedure_params, $.parameter_list)),
-      $._terminator,
     ),
 
   __run_stored_procedure_params: ($) =>

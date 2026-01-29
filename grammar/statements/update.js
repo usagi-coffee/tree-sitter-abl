@@ -1,14 +1,14 @@
 module.exports = ({ kw, tkw }) => ({
-  update_statement: ($) =>
+  update_statement: ($) => seq(tkw("UPDATE"), $.__update_body, $._terminator),
+
+  __update_body: ($) =>
     seq(
-      tkw("UPDATE"),
       optional(tkw("UNLESS-HIDDEN")),
       repeat1(alias($.__update_item, $.update_item)),
       optional(alias($.__update_go_on, $.go_on_phrase)),
       optional(alias($.__update_frame_phrase, $.frame_phrase)),
       optional(alias($.__update_editing_phrase, $.editing_phrase)),
       optional(tkw("NO-ERROR")),
-      $._terminator,
     ),
   __update_item: ($) =>
     choice(
@@ -45,9 +45,7 @@ module.exports = ({ kw, tkw }) => ({
       kw("FORMAT"),
       $._escaped_string,
       optional(
-        token.immediate(
-          /:(?:[RLCT](?:U)?(?:[0-9]+)?|U(?:[0-9]+)?|[0-9]+)/i,
-        ),
+        token.immediate(/:(?:[RLCT](?:U)?(?:[0-9]+)?|U(?:[0-9]+)?|[0-9]+)/i),
       ),
     ),
   __update_at_phrase: ($) => seq(kw("AT"), token(/[0-9]+(\.[0-9]+)?/)),

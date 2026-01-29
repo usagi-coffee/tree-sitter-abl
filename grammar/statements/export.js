@@ -1,7 +1,8 @@
 module.exports = ({ kw, tkw }) => ({
-  export_statement: ($) =>
+  export_statement: ($) => seq(kw("EXPORT"), $.__export_body, $._terminator),
+
+  __export_body: ($) =>
     seq(
-      kw("EXPORT"),
       optional(
         choice(
           alias($.__export_stream_phrase, $.stream_phrase),
@@ -10,7 +11,6 @@ module.exports = ({ kw, tkw }) => ({
       ),
       $.__export_fields_phrase,
       optional(alias($.__export_no_lobs, $.no_lobs)),
-      $._terminator,
     ),
 
   __export_fields_phrase: ($) =>

@@ -1,12 +1,13 @@
 module.exports = ({ kw, tkw }) => ({
   aggregate_statement: ($) =>
+    seq(kw("AGGREGATE"), $.__aggregate_body, $._terminator),
+
+  __aggregate_body: ($) =>
     seq(
-      kw("AGGREGATE"),
       repeat1($.__aggregate_assignment),
       kw("FOR"),
       field("table", choice($.identifier, $.qualified_name)),
       optional(alias($.__aggregate_where_phrase, $.where_phrase)),
-      $._terminator,
     ),
 
   __aggregate_assignment: ($) =>

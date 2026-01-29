@@ -1,14 +1,14 @@
 module.exports = ({ kw, tkw }) => ({
-  case_statement: ($) =>
+  case_statement: ($) => seq(kw("CASE"), $.__case_body, $._terminator),
+
+  __case_body: ($) =>
     seq(
-      kw("CASE"),
       optional($._expression),
       $._colon,
       repeat1($.case_when_phrase),
       optional($.case_otherwise_phrase),
       tkw("END"),
       optional(tkw("CASE")),
-      $._terminator,
     ),
 
   case_when_phrase: ($) =>

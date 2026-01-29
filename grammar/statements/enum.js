@@ -1,14 +1,14 @@
 module.exports = ({ kw, tkw }) => ({
-  enum_statement: ($) =>
+  enum_statement: ($) => seq(kw("ENUM"), $.__enum_body, $._terminator),
+
+  __enum_body: ($) =>
     seq(
-      kw("ENUM"),
       field("name", $.identifier),
       optional(prec(1, tkw("FLAGS"))),
       $._colon,
       $.enum_body,
       tkw("END"),
       tkw("ENUM"),
-      $._terminator,
     ),
 
   enum_body: ($) =>

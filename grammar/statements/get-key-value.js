@@ -1,7 +1,8 @@
 module.exports = ({ kw, tkw }) => ({
   get_key_value_statement: ($) =>
+    seq(kw("GET-KEY-VALUE"), $.__get_key_value_body, $._terminator),
+  __get_key_value_body: ($) =>
     seq(
-      kw("GET-KEY-VALUE"),
       kw("SECTION"),
       field("section", $._expression),
       choice(
@@ -13,6 +14,5 @@ module.exports = ({ kw, tkw }) => ({
         ),
         tkw("DEFAULT"),
       ),
-      $._terminator,
     ),
 });

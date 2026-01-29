@@ -1,9 +1,8 @@
 module.exports = ({ kw }) => ({
-  call_statement: ($) =>
+  call_statement: ($) => seq(kw("CALL"), $.__call_body, $._terminator),
+  __call_body: ($) =>
     seq(
-      kw("CALL"),
       field("routine", $.identifier),
       repeat(field("argument", $._expression)),
-      $._terminator,
     ),
 });

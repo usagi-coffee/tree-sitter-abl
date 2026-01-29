@@ -1,12 +1,15 @@
 module.exports = ({ tkw }) => ({
-  undo_statement: ($) =>
+  undo_statement: ($) => seq(tkw("UNDO"), $.__undo_body, $._terminator),
+
+  __undo_body: ($) =>
     seq(
-      tkw("UNDO"),
       choice(
         seq(",", $.__undo_action),
-        seq(field("undo_label", $.identifier), optional(seq(",", $.__undo_action))),
+        seq(
+          field("undo_label", $.identifier),
+          optional(seq(",", $.__undo_action)),
+        ),
       ),
-      $._terminator,
     ),
   __undo_action: ($) =>
     choice(

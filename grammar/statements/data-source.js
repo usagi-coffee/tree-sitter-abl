@@ -9,6 +9,12 @@ module.exports = ({ kw, tkw }) => ({
         ),
       ),
       kw("DATA-SOURCE"),
+      $.__data_source_body,
+      $._terminator,
+    ),
+
+  __data_source_body: ($) =>
+    seq(
       field("name", $.identifier),
       optional(seq(kw("QUERY"), field("query", $.identifier))),
       optional(
@@ -18,7 +24,6 @@ module.exports = ({ kw, tkw }) => ({
           repeat(seq(",", $.__data_source_buffer_phrase)),
         ),
       ),
-      $._terminator,
     ),
 
   __data_source_buffer_phrase: ($) =>

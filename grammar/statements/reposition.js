@@ -1,7 +1,9 @@
 module.exports = ({ kw, tkw }) => ({
   reposition_statement: ($) =>
+    seq(tkw("REPOSITION"), $.__reposition_body, $._terminator),
+
+  __reposition_body: ($) =>
     seq(
-      tkw("REPOSITION"),
       field("query", $.identifier),
       choice(
         seq(
@@ -24,6 +26,5 @@ module.exports = ({ kw, tkw }) => ({
         seq(tkw("FORWARDS"), field("count", $._expression)),
         seq(tkw("BACKWARDS"), field("count", $._expression)),
       ),
-      $._terminator,
     ),
 });

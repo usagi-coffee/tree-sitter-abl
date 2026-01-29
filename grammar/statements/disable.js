@@ -1,7 +1,9 @@
 module.exports = ({ kw, tkw }) => ({
   disable_statement: ($) =>
+    seq(tkw("DISABLE"), $.__disable_body, $._terminator),
+
+  __disable_body: ($) =>
     seq(
-      tkw("DISABLE"),
       optional(tkw("UNLESS-HIDDEN")),
       choice(
         seq(
@@ -11,7 +13,6 @@ module.exports = ({ kw, tkw }) => ({
         repeat1(alias($.__disable_item, $.disable_item)),
       ),
       optional(alias($.__disable_frame_phrase, $.frame_phrase)),
-      $._terminator,
     ),
   __disable_item: ($) =>
     choice(
@@ -42,13 +43,10 @@ module.exports = ({ kw, tkw }) => ({
       kw("FORMAT"),
       $._escaped_string,
       optional(
-        token.immediate(
-          /:(?:[RLCT](?:U)?(?:[0-9]+)?|U(?:[0-9]+)?|[0-9]+)/i,
-        ),
+        token.immediate(/:(?:[RLCT](?:U)?(?:[0-9]+)?|U(?:[0-9]+)?|[0-9]+)/i),
       ),
     ),
-  __disable_at_phrase: ($) =>
-    seq(kw("AT"), token(/[0-9]+(\.[0-9]+)?/)),
+  __disable_at_phrase: ($) => seq(kw("AT"), token(/[0-9]+(\.[0-9]+)?/)),
   __disable_constant_option: ($) =>
     choice(
       seq(kw("BGCOLOR"), token(/[0-9]+(\.[0-9]+)?/)),

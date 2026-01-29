@@ -1,7 +1,7 @@
 module.exports = ({ kw, tkw }) => ({
-  enable_statement: ($) =>
+  enable_statement: ($) => seq(tkw("ENABLE"), $.__enable_body, $._terminator),
+  __enable_body: ($) =>
     seq(
-      tkw("ENABLE"),
       optional(tkw("UNLESS-HIDDEN")),
       choice(
         seq(
@@ -12,7 +12,6 @@ module.exports = ({ kw, tkw }) => ({
       ),
       optional(seq(kw("IN"), kw("WINDOW"), field("window", $._expression))),
       optional(alias($.__enable_frame_phrase, $.frame_phrase)),
-      $._terminator,
     ),
   __enable_item: ($) =>
     choice(
@@ -43,13 +42,10 @@ module.exports = ({ kw, tkw }) => ({
       kw("FORMAT"),
       $._escaped_string,
       optional(
-        token.immediate(
-          /:(?:[RLCT](?:U)?(?:[0-9]+)?|U(?:[0-9]+)?|[0-9]+)/i,
-        ),
+        token.immediate(/:(?:[RLCT](?:U)?(?:[0-9]+)?|U(?:[0-9]+)?|[0-9]+)/i),
       ),
     ),
-  __enable_at_phrase: ($) =>
-    seq(kw("AT"), token(/[0-9]+(\.[0-9]+)?/)),
+  __enable_at_phrase: ($) => seq(kw("AT"), token(/[0-9]+(\.[0-9]+)?/)),
   __enable_constant_option: ($) =>
     choice(
       seq(kw("BGCOLOR"), token(/[0-9]+(\.[0-9]+)?/)),

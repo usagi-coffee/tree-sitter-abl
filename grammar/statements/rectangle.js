@@ -4,6 +4,12 @@ module.exports = ({ kw, tkw }) => ({
       choice(kw("DEFINE"), kw("DEF")),
       optional(kw("PRIVATE")),
       kw("RECTANGLE"),
+      $.__rectangle_body,
+      $._terminator,
+    ),
+
+  __rectangle_body: ($) =>
+    seq(
       field("name", $.identifier),
       repeat(
         choice(
@@ -23,7 +29,6 @@ module.exports = ({ kw, tkw }) => ({
           // $.on_phrase, // TODO: add trigger support
         ),
       ),
-      $._terminator,
     ),
 
   __rectangle_like: ($) => seq(kw("LIKE"), field("like", $.identifier)),

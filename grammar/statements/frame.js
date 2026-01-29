@@ -4,6 +4,12 @@ module.exports = ({ kw, tkw }) => ({
       choice(kw("DEFINE"), kw("DEF")),
       optional(choice(seq(optional(kw("NEW")), kw("SHARED")), kw("PRIVATE"))),
       kw("FRAME"),
+      $.__frame_body,
+      $._terminator,
+    ),
+
+  __frame_body: ($) =>
+    seq(
       field(
         "name",
         choice($.identifier, alias($.constant_expression, $.constant)),
@@ -18,7 +24,6 @@ module.exports = ({ kw, tkw }) => ({
       ),
       optional($.__frame_header_section),
       optional($.frame_phrase),
-      $._terminator,
     ),
 
   __frame_header_section: ($) =>

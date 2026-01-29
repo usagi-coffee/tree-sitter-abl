@@ -3,6 +3,12 @@ module.exports = ({ kw }) => ({
     seq(
       choice(kw("DEFINE"), kw("DEF")),
       kw("DATASET"),
+      $.__dataset_body,
+      $._terminator,
+    ),
+
+  __dataset_body: ($) =>
+    seq(
       field("name", $.identifier),
       optional(
         seq(
@@ -11,6 +17,5 @@ module.exports = ({ kw }) => ({
           repeat(seq(",", field("table", $.identifier))),
         ),
       ),
-      $._terminator,
     ),
 });

@@ -13,8 +13,6 @@ module.exports = ({ kw, tkw }) => ({
           ),
         ),
         kw("TEMP-TABLE"),
-        field("name", $.identifier),
-        optional(alias($.__temp_table_no_undo, $.no_undo)),
         $.__temp_table_body,
         $._terminator,
       ),
@@ -22,6 +20,8 @@ module.exports = ({ kw, tkw }) => ({
 
   __temp_table_body: ($) =>
     seq(
+      field("name", $.identifier),
+      optional(alias($.__temp_table_no_undo, $.no_undo)),
       optional(
         seq(kw("NAMESPACE-URI"), field("namespace_uri", $.string_literal)),
       ),

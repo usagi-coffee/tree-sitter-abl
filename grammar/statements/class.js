@@ -1,18 +1,18 @@
 module.exports = ({ kw, tkw }) => ({
   class_definition: ($) =>
+    seq(repeat($.__class_option), kw("CLASS"), $.__class_body, $._terminator),
+
+  __class_body: ($) =>
     seq(
-      repeat($.__class_option),
-      kw("CLASS"),
       field("name", $._type_name),
       repeat($.__class_option),
       choice($._colon, $._terminator_dot),
-      repeat($.class_body_item),
+      repeat($.__class_body_item),
       tkw("END"),
       optional(tkw("CLASS")),
-      $._terminator,
     ),
 
-  class_body_item: ($) =>
+  __class_body_item: ($) =>
     choice(
       $.variable_definition,
       $.temp_table_definition,

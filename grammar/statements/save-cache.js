@@ -1,8 +1,9 @@
 module.exports = ({ kw, tkw }) => ({
   save_cache_statement: ($) =>
+    seq(kw("SAVE"), kw("CACHE"), $.__save_cache_body, $._terminator),
+
+  __save_cache_body: ($) =>
     seq(
-      kw("SAVE"),
-      kw("CACHE"),
       choice(tkw("CURRENT"), tkw("COMPLETE")),
       choice(
         field("database", $.identifier),
@@ -14,6 +15,5 @@ module.exports = ({ kw, tkw }) => ({
         seq(tkw("VALUE"), "(", field("path", $._expression), ")"),
       ),
       optional(tkw("NO-ERROR")),
-      $._terminator,
     ),
 });

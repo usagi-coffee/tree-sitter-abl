@@ -6,6 +6,7 @@ module.exports = ({ kw, tkw }) => ({
       optional(seq(kw("PAUSE"), field("pause", $._expression))),
       $._terminator,
     ),
+
   __readkey_stream_phrase: ($) =>
     choice(
       seq(kw("STREAM"), field("stream", $.identifier)),

@@ -1,7 +1,8 @@
 module.exports = ({ kw, tkw }) => ({
   function_definition: ($) =>
+    seq(kw("FUNCTION"), $.__function_body, $._terminator),
+  __function_body: ($) =>
     seq(
-      kw("FUNCTION"),
       field("name", $.identifier),
       choice(kw("RETURNS"), kw("RETURN")),
       optional(kw("CLASS")),
@@ -11,7 +12,6 @@ module.exports = ({ kw, tkw }) => ({
       repeat($._statement),
       tkw("END"),
       optional(tkw("FUNCTION")),
-      $._terminator,
     ),
 
   function_forward_definition: ($) =>
@@ -19,24 +19,30 @@ module.exports = ({ kw, tkw }) => ({
       seq(
         choice(kw("DEFINE"), kw("DEF")),
         kw("FUNCTION"),
-        field("name", $.identifier),
-        choice(kw("RETURNS"), kw("RETURN")),
-        optional(kw("CLASS")),
-        field("type", $._type_name),
-        optional($.function_parameter_list),
-        optional($.__function_forward_option),
+        $.__function_forward_body_1,
         $._terminator,
       ),
-      seq(
-        kw("FUNCTION"),
-        field("name", $.identifier),
-        choice(kw("RETURNS"), kw("RETURN")),
-        optional(kw("CLASS")),
-        field("type", $._type_name),
-        optional($.function_parameter_list),
-        $.__function_forward_option,
-        $._terminator,
-      ),
+      seq(kw("FUNCTION"), $.__function_forward_body_2, $._terminator),
+    ),
+
+  __function_forward_body_1: ($) =>
+    seq(
+      field("name", $.identifier),
+      choice(kw("RETURNS"), kw("RETURN")),
+      optional(kw("CLASS")),
+      field("type", $._type_name),
+      optional($.function_parameter_list),
+      optional($.__function_forward_option),
+    ),
+
+  __function_forward_body_2: ($) =>
+    seq(
+      field("name", $.identifier),
+      choice(kw("RETURNS"), kw("RETURN")),
+      optional(kw("CLASS")),
+      field("type", $._type_name),
+      optional($.function_parameter_list),
+      $.__function_forward_option,
     ),
 
   function_parameter_list: ($) =>

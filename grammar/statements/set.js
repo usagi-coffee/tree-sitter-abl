@@ -1,7 +1,8 @@
 module.exports = ({ kw, tkw }) => ({
-  set_statement: ($) =>
+  set_statement: ($) => seq(tkw("SET"), $.__set_body, $._terminator),
+
+  __set_body: ($) =>
     seq(
-      tkw("SET"),
       optional(alias($.__set_stream_phrase, $.stream_phrase)),
       optional(tkw("UNLESS-HIDDEN")),
       repeat1(alias($.__set_item, $.set_item)),
@@ -9,7 +10,6 @@ module.exports = ({ kw, tkw }) => ({
       optional(alias($.__set_frame_phrase, $.frame_phrase)),
       optional(alias($.__set_editing_phrase, $.editing_phrase)),
       optional(tkw("NO-ERROR")),
-      $._terminator,
     ),
   __set_stream_phrase: ($) =>
     choice(
@@ -49,9 +49,7 @@ module.exports = ({ kw, tkw }) => ({
       kw("FORMAT"),
       $._escaped_string,
       optional(
-        token.immediate(
-          /:(?:[RLCT](?:U)?(?:[0-9]+)?|U(?:[0-9]+)?|[0-9]+)/i,
-        ),
+        token.immediate(/:(?:[RLCT](?:U)?(?:[0-9]+)?|U(?:[0-9]+)?|[0-9]+)/i),
       ),
     ),
   __set_at_phrase: ($) => seq(kw("AT"), token(/[0-9]+(\.[0-9]+)?/)),

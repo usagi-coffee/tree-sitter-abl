@@ -1,12 +1,12 @@
 module.exports = ({ kw, tkw }) => ({
-  find_statement: ($) =>
+  find_statement: ($) => seq(kw("FIND"), $.__find_body, $._terminator),
+
+  __find_body: ($) =>
     seq(
-      kw("FIND"),
       optional(choice(kw("FIRST"), kw("LAST"), kw("CURRENT"))),
       field("table", $.__find_record_name),
       optional(alias($.__find_of_phrase, $.of_phrase)),
       repeat($._find_record_option_or_where),
-      $._terminator,
     ),
 
   _find_record_option: ($) =>

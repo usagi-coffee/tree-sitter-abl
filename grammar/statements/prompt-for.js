@@ -1,7 +1,9 @@
 module.exports = ({ kw, tkw }) => ({
   prompt_for_statement: ($) =>
+    seq(tkw("PROMPT-FOR"), $.__prompt_for_body, $._terminator),
+
+  __prompt_for_body: ($) =>
     seq(
-      tkw("PROMPT-FOR"),
       optional(alias($.__prompt_for_stream_phrase, $.stream_phrase)),
       optional(tkw("UNLESS-HIDDEN")),
       repeat1(alias($.__prompt_for_item, $.prompt_for_item)),
@@ -9,7 +11,6 @@ module.exports = ({ kw, tkw }) => ({
       optional(seq(kw("IN"), tkw("WINDOW"), field("window", $._expression))),
       optional(alias($.__prompt_for_frame_phrase, $.frame_phrase)),
       optional(alias($.__prompt_for_editing_phrase, $.editing_phrase)),
-      $._terminator,
     ),
   __prompt_for_stream_phrase: ($) =>
     choice(
@@ -44,9 +45,7 @@ module.exports = ({ kw, tkw }) => ({
       kw("FORMAT"),
       $._escaped_string,
       optional(
-        token.immediate(
-          /:(?:[RLCT](?:U)?(?:[0-9]+)?|U(?:[0-9]+)?|[0-9]+)/i,
-        ),
+        token.immediate(/:(?:[RLCT](?:U)?(?:[0-9]+)?|U(?:[0-9]+)?|[0-9]+)/i),
       ),
     ),
   __prompt_for_at_phrase: ($) => seq(kw("AT"), token(/[0-9]+(\.[0-9]+)?/)),

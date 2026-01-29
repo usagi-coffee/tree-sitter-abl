@@ -1,12 +1,14 @@
 module.exports = ({ kw, tkw }) => ({
-  catch_statement: ($) =>
+  catch_statement: ($) => seq(kw("CATCH"), $.__catch_body, $._terminator),
+
+  __catch_body: ($) =>
     seq(
-      kw("CATCH"),
       field("name", $.identifier),
-      optional(seq(kw("AS"), optional(kw("CLASS")), field("type", $.qualified_name))),
+      optional(
+        seq(kw("AS"), optional(kw("CLASS")), field("type", $.qualified_name)),
+      ),
       $.body,
       tkw("END"),
       optional(tkw("CATCH")),
-      $._terminator,
     ),
 });

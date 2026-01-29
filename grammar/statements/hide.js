@@ -14,6 +14,7 @@ module.exports = ({ kw, tkw }) => ({
       optional(seq(kw("IN"), kw("WINDOW"), field("window", $._expression))),
       $._terminator,
     ),
+
   __hide_stream_phrase: ($) =>
     choice(
       seq(kw("STREAM"), field("stream", $.identifier)),

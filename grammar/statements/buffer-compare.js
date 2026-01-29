@@ -1,7 +1,9 @@
 module.exports = ({ kw, tkw }) => ({
   buffer_compare_statement: ($) =>
+    seq(kw("BUFFER-COMPARE"), $.__buffer_compare_body, $._terminator),
+
+  __buffer_compare_body: ($) =>
     seq(
-      kw("BUFFER-COMPARE"),
       field("source", $._expression),
       optional($.__buffer_compare_field_phrase),
       kw("TO"),
@@ -11,9 +13,7 @@ module.exports = ({ kw, tkw }) => ({
       optional(alias($.__buffer_compare_compares_block, $.compares_block)),
       optional(tkw("NO-LOBS")),
       optional(tkw("NO-ERROR")),
-      $._terminator,
     ),
-
   __buffer_compare_field_phrase: ($) =>
     seq(
       choice(kw("EXCEPT"), kw("USING")),

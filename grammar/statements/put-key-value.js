@@ -1,7 +1,9 @@
 module.exports = ({ kw, tkw }) => ({
   put_key_value_statement: ($) =>
+    seq(kw("PUT-KEY-VALUE"), $.__put_key_value_body, $._terminator),
+
+  __put_key_value_body: ($) =>
     seq(
-      kw("PUT-KEY-VALUE"),
       choice(
         seq(
           kw("SECTION"),
@@ -17,6 +19,5 @@ module.exports = ({ kw, tkw }) => ({
         ),
       ),
       optional(tkw("NO-ERROR")),
-      $._terminator,
     ),
 });

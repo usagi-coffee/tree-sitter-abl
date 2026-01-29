@@ -1,7 +1,9 @@
 module.exports = ({ tkw }) => ({
   overlay_statement: ($) =>
+    seq(tkw("OVERLAY"), $.__overlay_body, $._terminator),
+
+  __overlay_body: ($) =>
     seq(
-      tkw("OVERLAY"),
       "(",
       field("target", $._expression),
       ",",
@@ -23,6 +25,5 @@ module.exports = ({ tkw }) => ({
       ")",
       "=",
       field("value", $._expression),
-      $._terminator,
     ),
 });

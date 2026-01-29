@@ -1,7 +1,9 @@
 module.exports = ({ kw, tkw }) => ({
   input_output_statement: ($) =>
+    seq(kw("INPUT-OUTPUT"), $.__input_output_body, $._terminator),
+
+  __input_output_body: ($) =>
     seq(
-      kw("INPUT-OUTPUT"),
       optional(
         choice(
           alias($.__input_output_stream_phrase, $.stream_phrase),
@@ -17,7 +19,6 @@ module.exports = ({ kw, tkw }) => ({
           repeat($.__input_output_through_option),
         ),
       ),
-      $._terminator,
     ),
 
   __input_output_stream_phrase: ($) =>

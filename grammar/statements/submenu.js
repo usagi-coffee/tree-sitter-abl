@@ -4,6 +4,12 @@ module.exports = ({ kw, tkw }) => ({
       choice(kw("DEFINE"), kw("DEF")),
       optional(kw("PRIVATE")),
       tkw("SUB-MENU"),
+      $.__submenu_body,
+      $._terminator,
+    ),
+
+  __submenu_body: ($) =>
+    seq(
       field("name", $.identifier),
       repeat(
         choice(
@@ -17,7 +23,6 @@ module.exports = ({ kw, tkw }) => ({
           alias($.__submenu_element, $.menu_element),
         ),
       ),
-      $._terminator,
     ),
 
   __submenu_bgcolor: ($) => seq(kw("BGCOLOR"), $._expression),

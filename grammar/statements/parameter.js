@@ -5,6 +5,12 @@ module.exports = ({ kw, tkw }) => ({
       optional(choice(kw("INPUT"), kw("OUTPUT"), kw("INPUT-OUTPUT"))),
       optional(kw("RETURN")),
       kw("PARAMETER"),
+      $.__parameter_body,
+      $._terminator,
+    ),
+
+  __parameter_body: ($) =>
+    seq(
       field("name", $.identifier),
       optional(
         choice(
@@ -30,7 +36,6 @@ module.exports = ({ kw, tkw }) => ({
           alias($.__parameter_no_undo, $.no_undo),
         ),
       ),
-      $._terminator,
     ),
 
   __parameter_append_option: ($) => tkw("APPEND"),

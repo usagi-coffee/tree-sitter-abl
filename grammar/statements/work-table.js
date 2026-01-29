@@ -3,6 +3,12 @@ module.exports = ({ kw, tkw }) => ({
     seq(
       choice(kw("DEFINE"), kw("DEF")),
       kw("WORK-TABLE"),
+      $.__work_table_body,
+      $._terminator,
+    ),
+
+  __work_table_body: ($) =>
+    seq(
       field("name", $.identifier),
       optional(alias($.__temp_table_like_phrase, $.like_phrase)),
       optional(alias($.__temp_table_no_undo, $.no_undo)),
@@ -12,6 +18,5 @@ module.exports = ({ kw, tkw }) => ({
           alias($.__temp_table_index, $.work_table_index),
         ),
       ),
-      $._terminator,
     ),
 });

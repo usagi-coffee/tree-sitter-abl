@@ -1,7 +1,7 @@
 module.exports = ({ kw, tkw }) => ({
-  color_statement: ($) =>
+  color_statement: ($) => seq(tkw("COLOR"), $.__color_body, $._terminator),
+  __color_body: ($) =>
     seq(
-      tkw("COLOR"),
       optional(kw("DISPLAY")),
       field("color", alias($.__color_color_phrase, $.color_phrase)),
       optional(
@@ -12,7 +12,6 @@ module.exports = ({ kw, tkw }) => ({
       ),
       repeat1(field("field", $._expression)),
       optional(alias($.__color_frame_phrase, $.frame_phrase)),
-      $._terminator,
     ),
   __color_frame_phrase: ($) =>
     seq(kw("WITH"), kw("FRAME"), field("frame", $.identifier)),

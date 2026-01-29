@@ -1,7 +1,8 @@
 module.exports = ({ kw, tkw }) => ({
-  output_statement: ($) =>
+  output_statement: ($) => seq(kw("OUTPUT"), $.__output_body, $._terminator),
+
+  __output_body: ($) =>
     seq(
-      kw("OUTPUT"),
       choice(
         seq(
           optional(
@@ -36,7 +37,6 @@ module.exports = ({ kw, tkw }) => ({
           repeat($.__output_through_option),
         ),
       ),
-      $._terminator,
     ),
 
   __output_append_phrase: ($) => tkw("APPEND"),

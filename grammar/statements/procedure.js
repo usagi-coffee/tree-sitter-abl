@@ -3,12 +3,12 @@ module.exports = ({ kw, tkw }) => ({
     seq(
       kw("PROCEDURE"),
       field("name", $.identifier),
-      $._colon,
-      repeat($._statement),
-      tkw("END"),
-      optional(tkw("PROCEDURE")),
+      $.__procedure_body,
       $._terminator,
     ),
+
+  __procedure_body: ($) =>
+    seq($._colon, repeat($._statement), tkw("END"), optional(tkw("PROCEDURE"))),
 
   procedure_forward_definition: ($) =>
     seq(kw("PROCEDURE"), field("name", $.identifier), $._terminator),

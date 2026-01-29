@@ -1,7 +1,8 @@
 module.exports = ({ kw, tkw }) => ({
-  put_statement: ($) =>
+  put_statement: ($) => seq(kw("PUT"), $.__put_body, $._terminator),
+
+  __put_body: ($) =>
     seq(
-      kw("PUT"),
       optional(
         choice(
           alias($.__put_stream_phrase, $.stream_phrase),
@@ -12,7 +13,6 @@ module.exports = ({ kw, tkw }) => ({
         seq(optional(kw("UNFORMATTED")), repeat1($.__put_item)),
         seq(kw("CONTROL"), repeat1(field("control", $._expression))),
       ),
-      $._terminator,
     ),
 
   __put_stream_phrase: ($) => seq(kw("STREAM"), field("name", $.identifier)),

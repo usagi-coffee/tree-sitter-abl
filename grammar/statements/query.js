@@ -12,20 +12,22 @@ module.exports = ({ kw, tkw }) => ({
         ),
       ),
       kw("QUERY"),
+      $.__query_body,
+      $._terminator,
+    ),
+
+  __query_body: ($) =>
+    seq(
       field("name", $.identifier),
       kw("FOR"),
       $.query_table_list,
       optional(seq(kw("CACHE"), field("cache", $.number_literal))),
       optional(tkw("SCROLLING")),
       optional(tkw("RCODE-INFORMATION")),
-      $._terminator,
     ),
 
   query_table_list: ($) =>
-    seq(
-      $.__query_table_entry,
-      repeat(seq(",", $.__query_table_entry)),
-    ),
+    seq($.__query_table_entry, repeat(seq(",", $.__query_table_entry))),
 
   __query_table_entry: ($) =>
     seq(

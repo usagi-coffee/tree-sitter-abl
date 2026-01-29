@@ -1,7 +1,8 @@
 module.exports = ({ kw }) => ({
-  var_statement: ($) =>
+  var_statement: ($) => seq(kw("VAR"), $.__var_body, $._terminator),
+
+  __var_body: ($) =>
     seq(
-      kw("VAR"),
       optional(alias($.__var_access_modifier, $.access_modifier)),
       optional(
         choice(
@@ -12,7 +13,6 @@ module.exports = ({ kw }) => ({
       $._var_type,
       alias($.__var_variable, $.variable),
       repeat(seq(",", alias($.__var_variable, $.variable))),
-      $._terminator,
     ),
 
   _var_type: ($) =>

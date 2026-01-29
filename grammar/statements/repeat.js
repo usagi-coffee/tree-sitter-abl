@@ -3,6 +3,12 @@ module.exports = ({ kw, tkw }) => ({
     seq(
       optional(seq(field("label", $.identifier), $._colon)),
       tkw("REPEAT"),
+      $.__repeat_body,
+      $._terminator,
+    ),
+
+  __repeat_body: ($) =>
+    seq(
       optional(
         choice(
           seq(choice(kw("WHILE"), kw("UNTIL")), $._expression),
@@ -20,7 +26,6 @@ module.exports = ({ kw, tkw }) => ({
       ),
       $.body,
       tkw("END"),
-      $._terminator,
     ),
 
   __repeat_on_stop_phrase: ($) =>
@@ -30,7 +35,11 @@ module.exports = ({ kw, tkw }) => ({
     seq(kw("ON"), kw("ERROR"), alias($.__repeat_undo_phrase, $.undo_phrase)),
 
   __repeat_on_endkey_phrase: ($) =>
-    seq(kw("ON"), kw("ENDKEY"), alias($.__repeat_on_endkey_undo, $.undo_phrase)),
+    seq(
+      kw("ON"),
+      kw("ENDKEY"),
+      alias($.__repeat_on_endkey_undo, $.undo_phrase),
+    ),
   __repeat_on_endkey_undo: ($) =>
     seq(
       tkw("UNDO"),

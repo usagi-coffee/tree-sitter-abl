@@ -9,11 +9,7 @@ module.exports = ({ kw, tkw }) => ({
         field("object", $.__on_database_object),
         optional(alias($.__on_referencing_phrase, $.referencing_phrase)),
         optional(alias($.__on_override, $.override)),
-        choice(
-          seq(tkw("REVERT"), $._terminator),
-          $.do_block,
-          $._statement,
-        ),
+        choice(seq(tkw("REVERT"), $._terminator), $.do_block, $._statement),
       ),
     ),
 
@@ -31,10 +27,6 @@ module.exports = ({ kw, tkw }) => ({
         optional(kw("BUFFER")),
         field("old_record", $.identifier),
       ),
-      seq(
-        kw("OLD"),
-        optional(kw("VALUE")),
-        field("old_field", $.identifier),
-      ),
+      seq(kw("OLD"), optional(kw("VALUE")), field("old_field", $.identifier)),
     ),
 });

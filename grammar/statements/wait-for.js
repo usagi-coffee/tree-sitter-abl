@@ -4,6 +4,12 @@ module.exports = ({ kw }) => ({
       kw("WAIT-FOR"),
       field("events", $.__wait_for_event_list),
       kw("OF"),
+      $.__wait_for_body,
+      $._terminator,
+    ),
+
+  __wait_for_body: ($) =>
+    seq(
       field("widgets", $.__wait_for_widget_list),
       repeat(
         seq(
@@ -15,7 +21,6 @@ module.exports = ({ kw }) => ({
       ),
       optional(seq(kw("FOCUS"), field("focus", $.__wait_for_widget))),
       optional(seq(kw("PAUSE"), field("duration", $._expression))),
-      $._terminator,
     ),
 
   __wait_for_event_list: ($) =>

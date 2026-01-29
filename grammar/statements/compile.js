@@ -1,11 +1,11 @@
 module.exports = ({ kw, tkw }) => ({
   compile_statement: ($) =>
+    seq(tkw("COMPILE"), $.__compile_body, $._terminator),
+  __compile_body: ($) =>
     seq(
-      tkw("COMPILE"),
       field("file", $._expression),
       repeat(alias($.__compile_option, $.compile_option)),
       optional(tkw("NO-ERROR")),
-      $._terminator,
     ),
   __compile_option: ($) =>
     choice(

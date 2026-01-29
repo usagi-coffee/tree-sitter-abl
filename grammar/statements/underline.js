@@ -1,11 +1,12 @@
 module.exports = ({ kw, tkw }) => ({
   underline_statement: ($) =>
+    seq(tkw("UNDERLINE"), $.__underline_body, $._terminator),
+
+  __underline_body: ($) =>
     seq(
-      tkw("UNDERLINE"),
       optional(alias($.__underline_stream_phrase, $.stream_phrase)),
       repeat1(field("field", $._expression)),
       optional(alias($.__underline_frame_phrase, $.frame_phrase)),
-      $._terminator,
     ),
   __underline_stream_phrase: ($) =>
     choice(

@@ -1,7 +1,8 @@
 module.exports = ({ kw, tkw }) => ({
-  message_statement: ($) =>
+  message_statement: ($) => seq(kw("MESSAGE"), $.__message_body, $._terminator),
+
+  __message_body: ($) =>
     seq(
-      kw("MESSAGE"),
       repeat1(
         choice(
           alias($.__message_color_phrase, $.color_phrase),
@@ -12,7 +13,6 @@ module.exports = ({ kw, tkw }) => ({
       optional(alias($.__message_view_as_phrase, $.view_as_phrase)),
       optional(alias($.__message_set_update_phrase, $.set_update_phrase)),
       optional(seq(kw("IN"), kw("WINDOW"), field("window", $._expression))),
-      $._terminator,
     ),
 
   __message_view_as_phrase: ($) =>

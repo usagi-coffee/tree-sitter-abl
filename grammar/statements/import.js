@@ -1,7 +1,8 @@
 module.exports = ({ kw, tkw }) => ({
-  import_statement: ($) =>
+  import_statement: ($) => seq(kw("IMPORT"), $.__import_body, $._terminator),
+
+  __import_body: ($) =>
     seq(
-      kw("IMPORT"),
       optional(
         choice(
           alias($.__import_stream_phrase, $.stream_phrase),
@@ -14,7 +15,6 @@ module.exports = ({ kw, tkw }) => ({
       ),
       optional(alias($.__import_no_lobs, $.no_lobs)),
       optional(alias($.__import_no_error, $.no_error)),
-      $._terminator,
     ),
 
   __import_stream_phrase: ($) => seq(kw("STREAM"), field("name", $.identifier)),

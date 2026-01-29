@@ -4,9 +4,14 @@ module.exports = ({ kw, tkw }) => ({
       choice(kw("DEFINE"), kw("DEF")),
       optional(kw("PRIVATE")),
       kw("BUTTON"),
+      $.__button_body,
+      $._terminator,
+    ),
+
+  __button_body: ($) =>
+    seq(
       field("name", $.identifier),
       repeat(alias($.__button_option, $.button_option)),
-      $._terminator,
     ),
 
   __button_option: ($) =>
@@ -46,14 +51,19 @@ module.exports = ({ kw, tkw }) => ({
   __button_image_down: ($) => seq(tkw("IMAGE-DOWN"), $.__button_image_phrase),
   __button_image: ($) => seq(kw("IMAGE"), $.__button_image_phrase),
   __button_image_up: ($) => seq(tkw("IMAGE-UP"), $.__button_image_phrase),
-  __button_image_insensitive: ($) => seq(tkw("IMAGE-INSENSITIVE"), $.__button_image_phrase),
+  __button_image_insensitive: ($) =>
+    seq(tkw("IMAGE-INSENSITIVE"), $.__button_image_phrase),
   __button_image_phrase: ($) =>
     seq(
       kw("FILE"),
       field("filename", $._expression),
       optional(
         seq(
-          choice(tkw("IMAGE-SIZE"), tkw("IMAGE-SIZE-CHARS"), tkw("IMAGE-SIZE-PIXELS")),
+          choice(
+            tkw("IMAGE-SIZE"),
+            tkw("IMAGE-SIZE-CHARS"),
+            tkw("IMAGE-SIZE-PIXELS"),
+          ),
           field("width", $._expression),
           kw("BY"),
           field("height", $._expression),
@@ -70,7 +80,8 @@ module.exports = ({ kw, tkw }) => ({
       ),
     ),
   __button_mouse_pointer: ($) => seq(tkw("MOUSE-POINTER"), $._expression),
-  __button_label: ($) => seq(kw("LABEL"), field("label", choice($.string_literal, $.identifier))),
+  __button_label: ($) =>
+    seq(kw("LABEL"), field("label", choice($.string_literal, $.identifier))),
   __button_like: ($) => seq(kw("LIKE"), field("like", $.identifier)),
   __button_pfcolor: ($) => seq(kw("PFCOLOR"), $._expression),
   __button_size: ($) =>

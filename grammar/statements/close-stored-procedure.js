@@ -3,13 +3,15 @@ module.exports = ({ kw, tkw }) => ({
     seq(
       tkw("CLOSE"),
       kw("STORED-PROCEDURE"),
+      $.__close_stored_procedure_body,
+      $._terminator,
+    ),
+
+  __close_stored_procedure_body: ($) =>
+    seq(
       field("procedure", $._expression),
       optional(
-        seq(
-          field("status_var", $._expression),
-          "=",
-          tkw("PROC-STATUS"),
-        ),
+        seq(field("status_var", $._expression), "=", tkw("PROC-STATUS")),
       ),
       optional(
         seq(
@@ -19,6 +21,5 @@ module.exports = ({ kw, tkw }) => ({
           field("handle", $._expression),
         ),
       ),
-      $._terminator,
     ),
 });

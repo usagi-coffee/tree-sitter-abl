@@ -1,13 +1,14 @@
 module.exports = ({ kw, tkw }) => ({
   interface_definition: ($) =>
+    seq(kw("INTERFACE"), $.__interface_body, $._terminator),
+
+  __interface_body: ($) =>
     seq(
-      kw("INTERFACE"),
       field("name", $._type_name),
       choice($._colon, $._terminator_dot),
       repeat($.interface_body_item),
       tkw("END"),
       optional(tkw("INTERFACE")),
-      $._terminator,
     ),
 
   interface_body_item: ($) =>

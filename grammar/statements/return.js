@@ -1,8 +1,13 @@
 module.exports = ({ kw, tkw }) => ({
   return_statement: ($) =>
-    choice(
-      seq(tkw("RETURN"), $._terminator),
-      seq(kw("RETURN"), tkw("ERROR"), optional($._expression), $._terminator),
-      seq(kw("RETURN"), $._expression, $._terminator),
+    seq(
+      tkw("RETURN"),
+      optional(
+        choice(
+          $._expression,
+          seq(tkw("RETURN"), tkw("ERROR"), optional($._expression)),
+        ),
+      ),
+      $._terminator,
     ),
 });

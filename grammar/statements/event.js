@@ -4,9 +4,14 @@ module.exports = ({ kw, tkw }) => ({
       choice(kw("DEFINE"), kw("DEF")),
       repeat($.__event_modifier),
       kw("EVENT"),
+      $.__event_body,
+      $._terminator,
+    ),
+
+  __event_body: ($) =>
+    seq(
       field("name", $.identifier),
       optional(alias($.__event_signature, $.signature)),
-      $._terminator,
     ),
 
   __event_signature: ($) =>
@@ -28,10 +33,7 @@ module.exports = ({ kw, tkw }) => ({
     ),
 
   __event_parameter_list: ($) =>
-    seq(
-      $.__event_parameter,
-      repeat(seq(",", $.__event_parameter)),
-    ),
+    seq($.__event_parameter, repeat(seq(",", $.__event_parameter))),
 
   __event_parameter: ($) =>
     seq(

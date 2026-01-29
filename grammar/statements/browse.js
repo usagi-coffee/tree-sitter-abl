@@ -4,15 +4,15 @@ module.exports = ({ kw, tkw }) => ({
       choice(kw("DEFINE"), kw("DEF")),
       optional(choice(seq(optional(kw("NEW")), kw("SHARED")), kw("PRIVATE"))),
       kw("BROWSE"),
-      field("name", $.identifier),
-      kw("QUERY"),
-      field("query", $.identifier),
       $.__browse_body,
       $._terminator,
     ),
 
   __browse_body: ($) =>
     seq(
+      field("name", $.identifier),
+      kw("QUERY"),
+      field("query", $.identifier),
       optional(
         choice(tkw("SHARE-LOCK"), tkw("EXCLUSIVE-LOCK"), tkw("NO-LOCK")),
       ),
@@ -183,12 +183,7 @@ module.exports = ({ kw, tkw }) => ({
     seq(
       field(
         "field",
-        choice(
-          $.identifier,
-          $.qualified_name,
-          $.object_access,
-          $.scoped_name,
-        ),
+        choice($.identifier, $.qualified_name, $.object_access, $.scoped_name),
       ),
       optional(seq("[", optional($._array_subscript), "]")),
     ),

@@ -1,7 +1,9 @@
 module.exports = ({ kw, tkw }) => ({
   raw_transfer_statement: ($) =>
+    seq(tkw("RAW-TRANSFER"), $.__raw_transfer_body, $._terminator),
+
+  __raw_transfer_body: ($) =>
     seq(
-      tkw("RAW-TRANSFER"),
       choice(
         seq(
           field("source_field", $.identifier),
@@ -16,6 +18,5 @@ module.exports = ({ kw, tkw }) => ({
         ),
       ),
       optional(tkw("NO-ERROR")),
-      $._terminator,
     ),
 });

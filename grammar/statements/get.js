@@ -1,10 +1,16 @@
 module.exports = ({ kw, tkw }) => ({
-  get_statement: ($) =>
+  get_statement: ($) => seq(tkw("GET"), $.__get_body, $._terminator),
+  __get_body: ($) =>
     seq(
-      tkw("GET"),
       field(
         "direction",
-        choice(tkw("FIRST"), tkw("NEXT"), tkw("PREV"), tkw("LAST"), tkw("CURRENT")),
+        choice(
+          tkw("FIRST"),
+          tkw("NEXT"),
+          tkw("PREV"),
+          tkw("LAST"),
+          tkw("CURRENT"),
+        ),
       ),
       field("query", $.identifier),
       optional(
@@ -14,6 +20,5 @@ module.exports = ({ kw, tkw }) => ({
         ),
       ),
       optional(tkw("NO-WAIT")),
-      $._terminator,
     ),
 });

@@ -14,16 +14,16 @@ module.exports = ({ kw, tkw }) => ({
       ),
     ),
 
-  assign_statement: ($) =>
+  assign_statement: ($) => seq(kw("ASSIGN"), $.__assign_body, $._terminator),
+
+  __assign_body: ($) =>
     seq(
-      kw("ASSIGN"),
-      $.assign_pair,
-      repeat($.assign_pair),
+      alias($.__assign_pair, $.assign_pair),
+      repeat(alias($.__assign_pair, $.assign_pair)),
       optional(alias($.__assign_no_error, $.no_error)),
-      $._terminator,
     ),
 
-  assign_pair: ($) =>
+  __assign_pair: ($) =>
     seq(
       field("left", $._assignable),
       "=",

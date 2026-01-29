@@ -18,6 +18,12 @@ module.exports = ({ kw, tkw }) => ({
         ),
       ),
       choice(kw("VARIABLE"), kw("VAR")),
+      $.__variable_body,
+      $._terminator,
+    ),
+
+  __variable_body: ($) =>
+    seq(
       field("name", $.identifier),
       $._variable_type_phrase,
       repeat(
@@ -43,7 +49,6 @@ module.exports = ({ kw, tkw }) => ({
           alias($.__variable_trigger_phrase, $.trigger_phrase),
         ),
       ),
-      $._terminator,
     ),
 
   __variable_shared_variable_scope: ($) =>
@@ -125,10 +130,7 @@ module.exports = ({ kw, tkw }) => ({
   __variable_list_items: ($) =>
     seq($._expression, repeat(seq(",", $._expression))),
   __variable_radio_buttons: ($) =>
-    seq(
-      $.__variable_radio_button,
-      repeat(seq(",", $.__variable_radio_button)),
-    ),
+    seq($.__variable_radio_button, repeat(seq(",", $.__variable_radio_button))),
   __variable_radio_button: ($) => seq($._expression, ",", $._expression),
   __variable_label_list: ($) =>
     seq($.string_literal, repeat(seq(",", $.string_literal))),

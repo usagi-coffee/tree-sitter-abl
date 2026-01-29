@@ -2,13 +2,14 @@ module.exports = ({ kw, tkw }) => ({
   menu_definition: ($) =>
     seq(
       choice(kw("DEFINE"), kw("DEF")),
-      optional(
-        choice(
-          seq(optional(kw("NEW")), kw("SHARED")),
-          kw("PRIVATE"),
-        ),
-      ),
+      optional(choice(seq(optional(kw("NEW")), kw("SHARED")), kw("PRIVATE"))),
       kw("MENU"),
+      $.__menu_body,
+      $._terminator,
+    ),
+
+  __menu_body: ($) =>
+    seq(
       field("name", $.identifier),
       repeat(
         choice(
@@ -23,7 +24,6 @@ module.exports = ({ kw, tkw }) => ({
           alias($.__menu_element, $.menu_element),
         ),
       ),
-      $._terminator,
     ),
 
   __menu_fgcolor: ($) => seq(kw("FGCOLOR"), $._expression),

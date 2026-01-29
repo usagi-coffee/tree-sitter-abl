@@ -1,10 +1,9 @@
 module.exports = ({ kw, tkw }) => ({
-  form_statement: ($) =>
+  form_statement: ($) => seq(tkw("FORM"), $.__form_body, $._terminator),
+  __form_body: ($) =>
     seq(
-      tkw("FORM"),
       repeat1(alias($.__form_item, $.form_item)),
       optional(alias($.__form_frame_phrase, $.frame_phrase)),
-      $._terminator,
     ),
   __form_item: ($) =>
     prec.right(

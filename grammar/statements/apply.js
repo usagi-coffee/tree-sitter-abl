@@ -1,9 +1,9 @@
 module.exports = ({ kw, tkw }) => ({
-  apply_statement: ($) =>
+  apply_statement: ($) => seq(tkw("APPLY"), $.__apply_body, $._terminator),
+
+  __apply_body: ($) =>
     seq(
-      tkw("APPLY"),
       field("event", $._expression),
       optional(seq(kw("TO"), field("widget", $._expression))),
-      $._terminator,
     ),
 });

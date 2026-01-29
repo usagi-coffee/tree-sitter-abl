@@ -1,14 +1,14 @@
 module.exports = ({ kw }) => ({
   buffer_copy_statement: ($) =>
+    seq(kw("BUFFER-COPY"), $.__buffer_copy_body, $._terminator),
+
+  __buffer_copy_body: ($) =>
     seq(
-      kw("BUFFER-COPY"),
       field("source", $.__buffer_copy_record_name),
       optional(alias($.__buffer_copy_except_phrase, $.except_phrase)),
       kw("TO"),
       field("target", $.__buffer_copy_record_name),
-      $._terminator,
     ),
-
   __buffer_copy_record_name: ($) => choice($.identifier, $.qualified_name),
   __buffer_copy_except_phrase: ($) =>
     seq(

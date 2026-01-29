@@ -5,25 +5,30 @@ module.exports = ({ kw, tkw }) => ({
       seq(
         optional(seq(field("label", $.identifier), $._colon)),
         kw("FOR"),
-        choice($.for_record_list, $.for_variable_loop),
-        optional(alias($.__for_while_phrase, $.while_phrase)),
-        optional(tkw("TRANSACTION")),
-        optional(alias($.__for_stop_after_phrase, $.stop_after_phrase)),
-        // FIXME: this shouldn't be repeat but we need to save on state counts
-        repeat(
-          choice(
-            alias($.__for_on_error_phrase, $.on_error_phrase),
-            alias($.__for_on_endkey_phrase, $.on_endkey_phrase),
-            alias($.__for_on_quit_phrase, $.on_quit_phrase),
-            alias($.__for_on_stop_phrase, $.on_stop_phrase),
-            alias($.__for_with_frame_phrase, $.with_frame_phrase),
-            alias($.__for_with_stream_io_phrase, $.with_stream_io_phrase),
-          ),
-        ),
-        $.body,
-        tkw("END"),
+        $.__for_body,
         $._terminator,
       ),
+    ),
+
+  __for_body: ($) =>
+    seq(
+      choice($.for_record_list, $.for_variable_loop),
+      optional(alias($.__for_while_phrase, $.while_phrase)),
+      optional(tkw("TRANSACTION")),
+      optional(alias($.__for_stop_after_phrase, $.stop_after_phrase)),
+      // FIXME: this shouldn't be repeat but we need to save on state counts
+      repeat(
+        choice(
+          alias($.__for_on_error_phrase, $.on_error_phrase),
+          alias($.__for_on_endkey_phrase, $.on_endkey_phrase),
+          alias($.__for_on_quit_phrase, $.on_quit_phrase),
+          alias($.__for_on_stop_phrase, $.on_stop_phrase),
+          alias($.__for_with_frame_phrase, $.with_frame_phrase),
+          alias($.__for_with_stream_io_phrase, $.with_stream_io_phrase),
+        ),
+      ),
+      $.body,
+      tkw("END"),
     ),
 
   for_record_list: ($) => seq($.for_record, repeat(seq(",", $.for_record))),

@@ -1,10 +1,11 @@
 module.exports = ({ kw, tkw }) => ({
   os_command_statement: ($) =>
+    seq(kw("OS-COMMAND"), $.__os_command_body, $._terminator),
+
+  __os_command_body: ($) =>
     seq(
-      kw("OS-COMMAND"),
       optional(choice(kw("SILENT"), tkw("NO-WAIT"), tkw("NO-CONSOLE"))),
       repeat1(choice($.__os_command_value_target, $.__os_command_token)),
-      $._terminator,
     ),
 
   __os_command_value_target: ($) => seq(tkw("VALUE"), "(", $._expression, ")"),

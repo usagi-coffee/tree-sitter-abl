@@ -4,13 +4,13 @@ module.exports = ({ kw, tkw }) => ({
       choice(kw("DEFINE"), kw("DEF")),
       optional(kw("PRIVATE")),
       kw("IMAGE"),
-      field("name", $.identifier),
       $.__image_body,
       $._terminator,
     ),
 
   __image_body: ($) =>
     seq(
+      field("name", $.identifier),
       repeat1(
         choice(
           alias($.__image_phrase, $.image_phrase),
@@ -21,7 +21,12 @@ module.exports = ({ kw, tkw }) => ({
       optional(seq(kw("BGCOLOR"), $._expression)),
       optional(seq(kw("FGCOLOR"), $._expression)),
       optional(tkw("CONVERT-3D-COLORS")),
-      optional(seq(kw("TOOLTIP"), field("tooltip", choice($.string_literal, $.identifier)))),
+      optional(
+        seq(
+          kw("TOOLTIP"),
+          field("tooltip", choice($.string_literal, $.identifier)),
+        ),
+      ),
       optional(seq(tkw("STRETCH-TO-FIT"), optional(tkw("RETAIN-SHAPE")))),
       optional(tkw("TRANSPARENT")),
     ),

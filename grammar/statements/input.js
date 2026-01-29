@@ -1,19 +1,14 @@
 module.exports = ({ kw, tkw }) => ({
-  input_statement: ($) =>
+  input_statement: ($) => seq(kw("INPUT"), $.__input_body, $._terminator),
+
+  __input_body: ($) =>
     seq(
-      kw("INPUT"),
       optional(
         choice(
           alias($.__input_stream_phrase, $.stream_phrase),
           alias($.__input_stream_handle_phrase, $.stream_handle_phrase),
         ),
       ),
-      $.__input_body,
-      $._terminator,
-    ),
-
-  __input_body: ($) =>
-    seq(
       choice(tkw("CLOSE"), seq(kw("FROM"), $.__input_from_target)),
       optional(alias($.__input_lob_dir_phrase, $.lob_dir_phrase)),
       optional(kw("BINARY")),
