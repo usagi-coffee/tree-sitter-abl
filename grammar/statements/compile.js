@@ -3,14 +3,21 @@ module.exports = ({ kw, tkw }) => ({
     seq(tkw("COMPILE"), $.__compile_body, $._terminator),
   __compile_body: ($) =>
     seq(
-      field("file", $._expression),
+      field("file", $.__compile_file),
       repeat(alias($.__compile_option, $.compile_option)),
       optional(tkw("NO-ERROR")),
+    ),
+  __compile_file: ($) =>
+    choice(
+      $.identifier,
+      $.qualified_name,
+      $.string_literal,
+      seq(tkw("VALUE"), "(", $._expression, ")"),
     ),
   __compile_option: ($) =>
     choice(
       seq(
-        kw("SAVE"),
+        tkw("SAVE"),
         optional(seq("=", field("save", $._expression))),
         optional(seq(kw("INTO"), field("into", $._expression))),
       ),
@@ -23,13 +30,24 @@ module.exports = ({ kw, tkw }) => ({
       seq(kw("PREPROCESS"), field("preprocess", $._expression)),
       seq(kw("OPTIONS"), field("options", $._expression)),
       seq(kw("OPTIONS-FILE"), field("options_file", $._expression)),
-      seq(kw("MIN-SIZE"), field("min_size", $._expression)),
-      seq(kw("LANGUAGES"), "(", repeat1($._expression), ")"),
-      seq(kw("TEXT-SEG-GROWTH"), field("text_seg_growth", $._expression)),
+      seq(
+        tkw("MIN-SIZE"),
+        optional(seq("=", field("min_size", $._expression))),
+      ),
+      seq(
+        tkw("DEFAULT-UNTRANSLATABLE"),
+        optional(seq("=", field("default_untranslatable", $._expression))),
+      ),
+      // TODO: languages
+      // seq(tkw("LANGUAGES"), "(", $.__compile_language_list, ")"),
+      seq(kw("TEXT-SEG-GROW"), field("text_seg_grow", $._expression)),
       tkw("ATTR-SPACE"),
       tkw("NO-ATTR-SPACE"),
-      tkw("STREAM-IO"),
-      tkw("V6FRAME"),
+      seq(
+        tkw("STREAM-IO"),
+        optional(seq("=", field("stream_io", $._expression))),
+      ),
+      seq(tkw("V6FRAME"), optional(seq("=", field("v6frame", $._expression)))),
       tkw("USE-REVVIDEO"),
       tkw("USE-UNDERLINE"),
       tkw("GENERATE-MD5"),

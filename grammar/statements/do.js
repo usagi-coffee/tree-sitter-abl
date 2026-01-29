@@ -134,8 +134,17 @@ module.exports = ({ kw, tkw }) => ({
   __do_undo_phrase: ($) =>
     seq(
       tkw("UNDO"),
+      optional(field("undo_label", $.identifier)),
       ",",
-      choice(tkw("THROW"), tkw("LEAVE"), tkw("NEXT"), tkw("RETRY")),
+      $.__do_on_undo_action,
+    ),
+  __do_on_undo_action: ($) =>
+    choice(
+      seq(tkw("THROW"), optional(field("throw_value", $._expression))),
+      seq(tkw("LEAVE"), optional(field("leave_label", $.identifier))),
+      seq(tkw("NEXT"), optional(field("next_label", $.identifier))),
+      seq(tkw("RETRY"), optional(field("retry_label", $.identifier))),
+      $.__do_on_quit_return,
     ),
   __do_undo_throw_phrase: ($) => seq(tkw("UNDO"), ",", tkw("THROW")),
   __do_undo_leave_phrase: ($) =>
