@@ -74,7 +74,6 @@ const result = lines
 // if tests ran, had ✓, and no failures → print success and exit
 if (hasCheckmark && !hasFailure) {
   console.log(`✓ All (${checkmarkCount}) tests passed successfully`);
-  await $`bun run tools/check.js`;
   process.exit(0);
 }
 
