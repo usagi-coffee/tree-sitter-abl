@@ -158,6 +158,7 @@ module.exports = grammar({
       null_literal: ($) => "?",
       boolean_literal: ($) => token(/TRUE|FALSE|YES|NO/i),
       file_name: ($) => /[A-Za-z0-9_\/.-]+\.i/i,
+      procedure_name: ($) => /[A-Za-z0-9_\/.-]+\.p/i,
 
       // Types
       generic_type: ($) =>

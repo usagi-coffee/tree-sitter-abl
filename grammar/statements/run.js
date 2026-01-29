@@ -1,6 +1,4 @@
 module.exports = ({ kw, tkw }) => ({
-  procedure_name: ($) => /[A-Za-z0-9_\/.-]+\.p/i,
-
   run_statement: ($) => seq(kw("RUN"), $.__run_body, $._terminator),
 
   __run_body: ($) =>
