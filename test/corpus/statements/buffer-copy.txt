@@ -60,4 +60,4 @@ BUFFER-COPY bSrc EXCEPT Field3 TO bTgt ASSIGN Field1 = 1 NO-LOBS NO-ERROR.
 
 --------------------------------------------------------------------------------
 
-
+(source_code)

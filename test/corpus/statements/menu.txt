@@ -435,7 +435,7 @@ DEFINE MENU mnuComplete
   MENU-ITEM miFile LABEL "File" ACCELERATOR "Ctrl+F"
   MENU-ITEM miEdit LABEL "Edit" DISABLED
   RULE
-  SUB-MENU smOptions LABEL "Options" 
+  SUB-MENU smOptions LABEL "Options"
   RULE
   MENU-ITEM miExit LABEL "Exit".
 
@@ -525,4 +525,4 @@ WAIT-FOR CHOOSE OF MENU-ITEM quititem.
 
 --------------------------------------------------------------------------------
 
-
+(source_code)

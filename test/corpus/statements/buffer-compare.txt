@@ -111,8 +111,3 @@ BUFFER-COMPARE bSrc TO bTgt
       value: (identifier)
       action: (message_statement
         (string_literal)))))
-
-
---------------------------------------------------------------------------------
-
-

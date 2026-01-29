@@ -131,4 +131,4 @@ DELETE Customer VALIDATE(NOT(CAN-FIND(Order OF Customer)),
 
 --------------------------------------------------------------------------------
 
-
+(source_code)

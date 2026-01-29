@@ -53,9 +53,9 @@ DEF FRAME fOrder Sales.Order EXCEPT Status HiddenFlag.
 FRAME - String Items
 ================================================================================
 
-DEFINE FRAME strings 
-  "Header: " Customer.Name 
-  "Record ID: " Customer.CustNum 
+DEFINE FRAME strings
+  "Header: " Customer.Name
+  "Record ID: " Customer.CustNum
   "Total: " Sales.Order.Total.
 
 --------------------------------------------------------------------------------
@@ -404,8 +404,8 @@ DEFINE FRAME toPhrase
 FRAME - String with BGCOLOR
 ================================================================================
 
-DEFINE FRAME strBg 
-  "Header" BGCOLOR 7 
+DEFINE FRAME strBg
+  "Header" BGCOLOR 7
   Customer.Name.
 
 --------------------------------------------------------------------------------
@@ -678,4 +678,4 @@ WAIT-FOR WINDOW-CLOSE OF FRAME cust-fr.
 
 --------------------------------------------------------------------------------
 
-
+(source_code)

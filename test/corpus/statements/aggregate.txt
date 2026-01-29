@@ -60,6 +60,3 @@ AGGREGATE dTotal = TOTAL(Customer.Balance) FOR Customer WHERE Country EQ "USA" A
           (string_literal))))))
 
 
---------------------------------------------------------------------------------
-
-

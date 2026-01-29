@@ -86,8 +86,3 @@ APPLY "CHOOSE" TO order-but IN FRAME x.
     widget: (in_frame_expression
       value: (identifier)
       frame: (identifier))))
-
-
---------------------------------------------------------------------------------
-
-
