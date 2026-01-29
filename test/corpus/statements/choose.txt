@@ -90,10 +90,12 @@ CHOOSE FIELD field1 field2 AUTO-RETURN.
 
 (source_code
   (choose_statement
-    field: (identifier))
+    field: (identifier)
+    (auto_return))
   (choose_statement
     field: (identifier)
-    field: (identifier)))
+    field: (identifier)
+    (auto_return)))
 
 ================================================================================
 CHOOSE - COLOR
@@ -140,15 +142,17 @@ CHOOSE FIELD field1 GO-ON(F1 F2 F3 RETURN).
 (source_code
   (choose_statement
     field: (identifier)
-    (identifier)
-    (identifier)
-    (identifier))
+    (go_on
+      (identifier)
+      (identifier)
+      (identifier)))
   (choose_statement
     field: (identifier)
-    (identifier)
-    (identifier)
-    (identifier)
-    (identifier)))
+    (go_on
+      (identifier)
+      (identifier)
+      (identifier)
+      (identifier))))
 
 ================================================================================
 CHOOSE - KEYS
@@ -178,9 +182,11 @@ CHOOSE FIELD field1 NO-ERROR.
 
 (source_code
   (choose_statement
-    field: (identifier))
+    field: (identifier)
+    (no_error))
   (choose_statement
-    field: (identifier)))
+    field: (identifier)
+    (no_error)))
 
 ================================================================================
 CHOOSE - PAUSE
@@ -230,9 +236,11 @@ CHOOSE ROW fieldName HELP "Help text" AUTO-RETURN COLOR NORMAL KEYS keyVar NO-ER
   (choose_statement
     field: (identifier)
     (string_literal)
+    (auto_return)
     color: (color_phrase
       (identifier))
-    keys: (identifier)))
+    keys: (identifier)
+    (no_error)))
 
 ================================================================================
 CHOOSE - FIELD combined options
@@ -247,6 +255,7 @@ CHOOSE FIELD field1 field2 HELP "Multiple field help" AUTO-RETURN COLOR NORMAL.
     field: (identifier)
     field: (identifier)
     (string_literal)
+    (auto_return)
     color: (color_phrase
       (identifier))))
 
@@ -261,8 +270,9 @@ CHOOSE ROW field1 GO-ON (KEY1 KEY2) KEYS keyVar PAUSE 30.
 (source_code
   (choose_statement
     field: (identifier)
-    (identifier)
-    (identifier)
+    (go_on
+      (identifier)
+      (identifier))
     keys: (identifier)
     pause: (number_literal)))
 
@@ -278,11 +288,14 @@ CHOOSE ROW fieldName HELP "Help for field" AUTO-RETURN COLOR NORMAL GO-ON (F1 F2
   (choose_statement
     field: (identifier)
     (string_literal)
+    (auto_return)
     color: (color_phrase
       (identifier))
-    (identifier)
-    (identifier)
+    (go_on
+      (identifier)
+      (identifier))
     keys: (identifier)
+    (no_error)
     pause: (number_literal)
     (frame_phrase
       frame: (identifier))))
@@ -387,7 +400,8 @@ CHOOSE ROW field1 GO-ON (F1).
 (source_code
   (choose_statement
     field: (identifier)
-    (identifier)))
+    (go_on
+      (identifier))))
 
 ================================================================================
 CHOOSE - KEYS with short variable
@@ -440,9 +454,11 @@ CHOOSE ROW field1 AUTO-RETURN COLOR NORMAL KEYS k NO-ERROR PAUSE 10 WITH FRAME f
 (source_code
   (choose_statement
     field: (identifier)
+    (auto_return)
     color: (color_phrase
       (identifier))
     keys: (identifier)
+    (no_error)
     pause: (number_literal)
     (frame_phrase
       frame: (identifier))))
@@ -473,9 +489,10 @@ CHOOSE ROW field1 GO-ON (KEYCODE RETURN END-ERROR).
 (source_code
   (choose_statement
     field: (identifier)
-    (identifier)
-    (identifier)
-    (identifier)))
+    (go_on
+      (identifier)
+      (identifier)
+      (identifier))))
 
 ================================================================================
 CHOOSE - HELP with longer text
@@ -506,13 +523,16 @@ CHOOSE FIELD option1 HELP "First option" option2 HELP "Second option" option3 HE
     (string_literal)
     field: (identifier)
     (string_literal)
+    (auto_return)
     color: (color_phrase
       (identifier))
-    (identifier)
-    (identifier)
-    (identifier)
-    (identifier)
+    (go_on
+      (identifier)
+      (identifier)
+      (identifier)
+      (identifier))
     keys: (identifier)
+    (no_error)
     pause: (number_literal)
     (frame_phrase
       frame: (identifier))))
@@ -523,7 +543,13 @@ CHOOSE - Reference snippet
 
 CHOOSE FIELD menu GO-ON (F5) AUTO-RETURN WITH FRAME f-menu.
 
-
 --------------------------------------------------------------------------------
 
-(source_code)
+(source_code
+  (choose_statement
+    field: (identifier)
+    (go_on
+      (identifier))
+    (auto_return)
+    (frame_phrase
+      frame: (identifier))))
