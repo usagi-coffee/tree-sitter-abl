@@ -29,7 +29,10 @@ CLOSE STORED-PROCEDURE - Reference snippet
 
 CLOSE STORED-PROC p1 st = PROC-STATUS WHERE PROC-HANDLE = h.
 
-
 --------------------------------------------------------------------------------
 
-(source_code)
+(source_code
+  (close_stored_procedure_statement
+    procedure: (identifier)
+    status_var: (identifier)
+    handle: (identifier)))

@@ -10854,27 +10854,57 @@
           "value": "CLOSE"
         },
         {
-          "type": "SEQ",
+          "type": "CHOICE",
           "members": [
             {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "PATTERN",
-                  "value": "STORED-PROCEDURE",
-                  "flags": "i"
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "TOKEN",
+                    "content": {
+                      "type": "PATTERN",
+                      "value": "STORED-PROCEDURE",
+                      "flags": "i"
+                    }
+                  },
+                  "named": false,
+                  "value": "STORED-PROCEDURE"
+                },
+                {
+                  "type": "IMMEDIATE_TOKEN",
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "\\s+"
+                  }
                 }
-              },
-              "named": false,
-              "value": "STORED-PROCEDURE"
+              ]
             },
             {
-              "type": "IMMEDIATE_TOKEN",
-              "content": {
-                "type": "PATTERN",
-                "value": "\\s+"
-              }
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "TOKEN",
+                    "content": {
+                      "type": "PATTERN",
+                      "value": "STORED-PROC",
+                      "flags": "i"
+                    }
+                  },
+                  "named": false,
+                  "value": "STORED-PROC"
+                },
+                {
+                  "type": "IMMEDIATE_TOKEN",
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "\\s+"
+                  }
+                }
+              ]
             }
           ]
         },
@@ -62154,13 +62184,6 @@
       "__buffer_access_modifier",
       "__data_source_access_modifier",
       "__event_access_modifier",
-      "__query_access_modifier",
-      "__temp_table_access_modifier",
-      "__variable_access_modifier"
-    ],
-    [
-      "__buffer_access_modifier",
-      "__data_source_access_modifier",
       "__query_access_modifier",
       "__temp_table_access_modifier",
       "__variable_access_modifier"

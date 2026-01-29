@@ -47,13 +47,6 @@ module.exports = grammar({
       $.__temp_table_access_modifier,
       $.__variable_access_modifier,
     ],
-    [
-      $.__buffer_access_modifier,
-      $.__data_source_access_modifier,
-      $.__query_access_modifier,
-      $.__temp_table_access_modifier,
-      $.__variable_access_modifier,
-    ],
     [$.__event_access_modifier, $.__variable_access_modifier],
     [$.__temp_table_access_modifier, $.__variable_access_modifier],
     [$.__temp_table_static_modifier, $.__variable_static_modifier],

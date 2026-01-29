@@ -51062,6 +51062,10 @@
     "named": false
   },
   {
+    "type": "STORED-PROC",
+    "named": false
+  },
+  {
     "type": "STORED-PROCEDURE",
     "named": false
   },
