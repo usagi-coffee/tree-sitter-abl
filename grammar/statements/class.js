@@ -36,7 +36,7 @@ module.exports = ({ kw, tkw }) => ({
       $.destructor_definition,
       $.on_statement,
       $.using_statement,
-      $.annotation_statement,
+      $.annotation,
       $.preprocessor_directive,
       alias($.include_expression, $.include),
     ),
