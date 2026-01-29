@@ -1,18 +1,25 @@
 module.exports = ({ kw, tkw }) => ({
-  choose_statement: ($) =>
-    seq(
-      tkw("CHOOSE"),
-      $.__choose_body,
-      $._terminator,
-    ),
+  choose_statement: ($) => seq(tkw("CHOOSE"), $.__choose_body, $._terminator),
   __choose_body: ($) =>
     seq(
       choice(
-        seq(kw("ROW"), field("field", $.identifier), optional(seq(kw("HELP"), $.string_literal))),
-        seq(kw("FIELD"), repeat1(seq(field("field", $.identifier), optional(seq(kw("HELP"), $.string_literal))))),
+        seq(
+          kw("ROW"),
+          field("field", $.identifier),
+          optional(seq(kw("HELP"), $.string_literal)),
+        ),
+        seq(
+          kw("FIELD"),
+          repeat1(
+            seq(
+              field("field", $.identifier),
+              optional(seq(kw("HELP"), $.string_literal)),
+            ),
+          ),
+        ),
       ),
       optional(tkw("AUTO-RETURN")),
-      optional(seq(kw("COLOR"), field("color", $.__choose_color_value))),
+      optional(seq(kw("COLOR"), field("color", $.color_phrase))),
       optional(seq(tkw("GO-ON"), "(", repeat1($.identifier), ")")),
       optional(seq(kw("KEYS"), field("keys", $.identifier))),
       optional(tkw("NO-ERROR")),

@@ -107,10 +107,12 @@ CHOOSE FIELD field1 COLOR INPUT.
 (source_code
   (choose_statement
     field: (identifier)
-    color: (identifier))
+    color: (color_phrase
+      (identifier)))
   (choose_statement
     field: (identifier)
-    color: (identifier)))
+    color: (color_phrase
+      (identifier))))
 
 ================================================================================
 CHOOSE - COLOR VALUE expression
@@ -123,11 +125,8 @@ CHOOSE ROW field1 COLOR VALUE(myColor).
 (source_code
   (choose_statement
     field: (identifier)
-    color: (function_call
-      function: (identifier)
-      (arguments
-        (argument
-          value: (identifier))))))
+    color: (color_phrase
+      value: (identifier))))
 
 ================================================================================
 CHOOSE - GO-ON
@@ -231,7 +230,8 @@ CHOOSE ROW fieldName HELP "Help text" AUTO-RETURN COLOR NORMAL KEYS keyVar NO-ER
   (choose_statement
     field: (identifier)
     (string_literal)
-    color: (identifier)
+    color: (color_phrase
+      (identifier))
     keys: (identifier)))
 
 ================================================================================
@@ -247,7 +247,8 @@ CHOOSE FIELD field1 field2 HELP "Multiple field help" AUTO-RETURN COLOR NORMAL.
     field: (identifier)
     field: (identifier)
     (string_literal)
-    color: (identifier)))
+    color: (color_phrase
+      (identifier))))
 
 ================================================================================
 CHOOSE - with GO-ON and KEYS
@@ -277,7 +278,8 @@ CHOOSE ROW fieldName HELP "Help for field" AUTO-RETURN COLOR NORMAL GO-ON (F1 F2
   (choose_statement
     field: (identifier)
     (string_literal)
-    color: (identifier)
+    color: (color_phrase
+      (identifier))
     (identifier)
     (identifier)
     keys: (identifier)
@@ -313,7 +315,8 @@ CHOOSE ROW field1 COLOR MESSAGES.
 (source_code
   (choose_statement
     field: (identifier)
-    color: (identifier)))
+    color: (color_phrase
+      (identifier))))
 
 ================================================================================
 CHOOSE - many fields with HELP
@@ -423,7 +426,8 @@ CHOOSE ROW field1 COLOR colorVar.
 (source_code
   (choose_statement
     field: (identifier)
-    color: (identifier)))
+    color: (color_phrase
+      (identifier))))
 
 ================================================================================
 CHOOSE - all options without HELP/GO-ON
@@ -436,7 +440,8 @@ CHOOSE ROW field1 AUTO-RETURN COLOR NORMAL KEYS k NO-ERROR PAUSE 10 WITH FRAME f
 (source_code
   (choose_statement
     field: (identifier)
-    color: (identifier)
+    color: (color_phrase
+      (identifier))
     keys: (identifier)
     pause: (number_literal)
     (frame_phrase
@@ -501,7 +506,8 @@ CHOOSE FIELD option1 HELP "First option" option2 HELP "Second option" option3 HE
     (string_literal)
     field: (identifier)
     (string_literal)
-    color: (identifier)
+    color: (color_phrase
+      (identifier))
     (identifier)
     (identifier)
     (identifier)

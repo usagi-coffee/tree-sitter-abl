@@ -1,6 +1,6 @@
 module.exports = ({ kw, tkw }) => ({
   input_expression: ($) =>
-    prec.dynamic(
+    prec(
       -1,
       seq(
         tkw("INPUT"),

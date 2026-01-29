@@ -60,7 +60,6 @@ module.exports = grammar({
 
     // Specific disambiguations
     [$._primary_expression, $.__in_frame_target],
-    [$._primary_expression, $.input_expression],
   ],
   inline: ($) => [],
 
@@ -141,6 +140,7 @@ module.exports = grammar({
       // Re-exports
       ...require("./grammar/statements")(ctx),
       ...require("./grammar/expressions")(ctx),
+      ...require("./grammar/phrases")(ctx),
 
       // Literals
       number_literal: ($) => token(prec(-1, /[0-9]+(\.[0-9]+)?/)),
