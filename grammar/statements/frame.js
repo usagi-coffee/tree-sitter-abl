@@ -18,7 +18,7 @@ module.exports = ({ kw, tkw }) => ({
         seq(
           field("record", choice($.qualified_name, $.identifier)),
           kw("EXCEPT"),
-          repeat1(field("field", $.identifier)),
+          repeat1(field("field", choice($.identifier, $.qualified_name))),
         ),
         repeat($.__frame_form_item),
       ),
@@ -123,26 +123,5 @@ module.exports = ({ kw, tkw }) => ({
         ),
       ),
       seq(kw("AT"), $._expression),
-    ),
-
-  frame_phrase: ($) => seq(kw("WITH"), repeat($.__frame_option)),
-
-  __frame_option: ($) =>
-    choice(
-      seq(kw("FRAME"), field("frame", $.identifier)),
-      seq(kw("WIDTH"), $._expression),
-      seq(kw("DOWN"), optional($._expression)),
-      seq(kw("SIZE"), $._expression, kw("BY"), $._expression),
-      seq(tkw("SIZE-CHARS"), $._expression, kw("BY"), $._expression),
-      seq(tkw("SIZE-PIXELS"), $._expression, kw("BY"), $._expression),
-      tkw("OVERLAY"),
-      seq(kw("ROW"), $._expression),
-      seq(kw("COLUMN"), $._expression),
-      tkw("NO-LABELS"),
-      tkw("SIDE-LABELS"),
-      tkw("CENTERED"),
-      tkw("NO-BOX"),
-      seq(kw("FONT"), $._expression),
-      seq(kw("BGCOLOR"), $._expression),
     ),
 });

@@ -230,11 +230,8 @@ DISPLAY STREAM rpt ItemNum ItemName WITH NO-LABELS NO-BOX.
   (display_statement
     (stream_phrase
       (identifier))
-    (function_call
-      (identifier)
-      (arguments
-        (argument
-          (number_literal))))
+    (parenthesized_expression
+      (number_literal))
     (identifier)
     (frame_phrase
       (identifier)
@@ -242,8 +239,9 @@ DISPLAY STREAM rpt ItemNum ItemName WITH NO-LABELS NO-BOX.
   (display_statement
     (stream_phrase
       (identifier))
-    (frame_phrase
-      (identifier)))
+    (identifier)
+    (identifier)
+    (identifier))
   (output_statement
     (stream_phrase
       (identifier)))

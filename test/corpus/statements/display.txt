@@ -151,12 +151,11 @@ DISPLAY Customer EXCEPT Comments PrivateNotes WITH FRAME fCust NO-ERROR.
 
 (source_code
   (display_statement
-    (identifier)
-    (identifier)
-    (identifier)
-    (identifier)
+    record: (identifier)
+    except: (identifier)
+    except: (identifier)
     (frame_phrase
-      (identifier))))
+      frame: (identifier))))
 
 ================================================================================
 DISPLAY with format, WHEN, and @ base-field

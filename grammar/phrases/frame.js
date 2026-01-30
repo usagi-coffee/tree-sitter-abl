@@ -6,12 +6,8 @@ module.exports = ({ kw, tkw }) => ({
         choice(
           seq(kw("FRAME"), field("frame", $.identifier)),
           seq(kw("BROWSE"), field("browse", $.identifier)),
-          seq(
-            choice(tkw("SIZE"), tkw("SIZE-CHARS"), tkw("SIZE-PIXELS")),
-            $._expression,
-            kw("BY"),
-            $._expression,
-          ),
+          alias($.__frame_option_size, $.frame_option),
+          alias($.__frame_option_at, $.frame_option),
           alias($.__frame_option_no_labels, $.frame_option),
           alias($.__frame_option_side_labels, $.frame_option),
           alias($.__frame_option_centered, $.frame_option),
@@ -31,6 +27,21 @@ module.exports = ({ kw, tkw }) => ({
         ),
       ),
     ),
+  __frame_option_size: ($) =>
+    seq(
+      choice(tkw("SIZE"), tkw("SIZE-CHARS"), tkw("SIZE-PIXELS")),
+      $._expression,
+      kw("BY"),
+      $._expression,
+    ),
+  __frame_option_at: ($) =>
+    seq(
+      kw("AT"),
+      choice(
+        seq(kw("COLUMN"), $._expression, kw("ROW"), $._expression),
+        seq(kw("X"), $._expression, kw("Y"), $._expression),
+      ),
+    ),
   __frame_option_no_labels: ($) => tkw("NO-LABELS"),
   __frame_option_side_labels: ($) => tkw("SIDE-LABELS"),
   __frame_option_centered: ($) => tkw("CENTERED"),
@@ -41,8 +52,8 @@ module.exports = ({ kw, tkw }) => ({
   __frame_option_use_text: ($) => tkw("USE-TEXT"),
   __frame_option_down: ($) =>
     choice(
-      prec(1, seq($._expression, tkw("DOWN"))),
-      seq(tkw("DOWN"), $._expression),
+      prec(1, seq($.number_literal, tkw("DOWN"))),
+      seq(tkw("DOWN"), optional($._expression)),
       tkw("DOWN"),
     ),
   __frame_option_column_count: ($) => seq($.number_literal, tkw("COLUMN")),

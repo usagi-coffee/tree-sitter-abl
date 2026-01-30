@@ -9,6 +9,7 @@ const ambiguousExpression = require("./ambiguous");
 const inFrameExpression = require("./in-frame");
 const inputExpression = require("./input");
 const accumExpression = require("./accum");
+const frameExpression = require("./frame");
 
 module.exports = (ctx) => ({
   ...conditionalExpression(ctx),
@@ -22,4 +23,5 @@ module.exports = (ctx) => ({
   ...accumExpression(ctx),
   ...inputExpression(ctx),
   ...inFrameExpression(ctx),
+  ...frameExpression(ctx),
 });

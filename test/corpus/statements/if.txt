@@ -269,11 +269,8 @@ OUTPUT STREAM due CLOSE.
       (identifier))
     (string_literal)
     (identifier)
-    (function_call
-      (identifier)
-      (arguments
-        (argument
-          (number_literal))))
+    (parenthesized_expression
+      (number_literal))
     (frame_phrase
       (frame_option)
       (frame_option)

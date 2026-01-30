@@ -609,7 +609,6 @@ WAIT-FOR CHOOSE OF MENU-ITEM quititem.
     (identifier)
     (display_statement
       (identifier)
-      (identifier)
       (qualified_name
         (identifier)
         (identifier))

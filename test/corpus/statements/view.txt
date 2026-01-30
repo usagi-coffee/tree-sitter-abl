@@ -70,11 +70,8 @@ VIEW STREAM-HANDLE hS FRAME f1.
           (identifier)
           (string_literal)))
       (display_statement
-        (function_call
-          (identifier)
-          (arguments
-            (argument
-              (number_literal))))
+        (parenthesized_expression
+          (number_literal))
         (qualified_name
           (identifier)
           (identifier))

@@ -16,6 +16,7 @@ module.exports = (ctx) => ({
       $.ambiguous_expression,
       $.accum_expression,
       $.locked_expression,
+      $.frame_expression,
       $.object_access_expression,
       $.new_expression,
       $.dataset_reference,

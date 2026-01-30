@@ -204,6 +204,7 @@ module.exports = grammar({
           $.array_access,
           $.function_call,
           $.in_frame_expression,
+          $.frame_expression,
         ),
 
       // Expressions

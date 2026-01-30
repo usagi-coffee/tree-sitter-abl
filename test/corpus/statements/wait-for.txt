@@ -122,7 +122,6 @@ WAIT-FOR PROCEDURE-COMPLETE OF hRequest.
     (identifier)
     (display_statement
       (identifier)
-      (identifier)
       (qualified_name
         (identifier)
         (identifier))
@@ -228,7 +227,6 @@ WAIT-FOR PROCEDURE-COMPLETE OF hRequest.
     (do_block
       (body
         (display_statement
-          (identifier)
           (identifier)
           (qualified_name
             (identifier)

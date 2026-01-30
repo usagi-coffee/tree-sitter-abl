@@ -126,11 +126,8 @@ OUTPUT TO TERMINAL.
         (qualified_name
           (identifier)
           (identifier))
-        (function_call
-          (identifier)
-          (arguments
-            (argument
-              (number_literal))))
+        (parenthesized_expression
+          (number_literal))
         (frame_phrase
           (frame_option
             (number_literal))
