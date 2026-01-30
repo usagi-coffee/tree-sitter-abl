@@ -77,7 +77,7 @@ DELETE WIDGET new_win.
   (display_statement
     (identifier)
     (frame_phrase
-      (frame_option))
+      (no_labels))
     (frame_phrase
       (identifier)))
   (pause_statement)
@@ -93,7 +93,7 @@ DELETE WIDGET new_win.
     (identifier)
     (identifier)
     (frame_phrase
-      (frame_option))
+      (no_labels))
     (frame_phrase
       (identifier)))
   (pause_statement)

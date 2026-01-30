@@ -82,7 +82,7 @@ VIEW STREAM-HANDLE hS FRAME f1.
           (identifier)
           (identifier))
         (frame_phrase
-          (frame_option)))
+          (no_labels)))
       (form_statement
         (form_item
           (identifier))
@@ -107,7 +107,7 @@ VIEW STREAM-HANDLE hS FRAME f1.
           (number_literal))
         (frame_phrase
           (identifier)
-          (frame_option)))
+          (page_top)))
       (view_statement
         (widget_phrase
           (identifier)))

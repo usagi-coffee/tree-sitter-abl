@@ -601,7 +601,7 @@ WAIT-FOR CHOOSE OF MENU-ITEM quititem.
         (identifier))
       (frame_phrase
         (identifier)
-        (frame_option)
+        (no_labels)
         (frame_option
           (number_literal)))))
   (on_statement
@@ -632,7 +632,7 @@ WAIT-FOR CHOOSE OF MENU-ITEM quititem.
         (identifier))
       (frame_phrase
         (identifier)
-        (frame_option))))
+        (side_labels))))
   (on_statement
     (identifier)
     (identifier)

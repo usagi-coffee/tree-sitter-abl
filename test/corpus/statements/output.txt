@@ -129,9 +129,8 @@ OUTPUT TO TERMINAL.
         (skip_phrase
           (number_literal))
         (frame_phrase
-          (frame_option
-            (number_literal))
-          (frame_option)))))
+          (number_literal)
+          (side_labels)))))
   (output_statement)
   (display_statement
     (string_literal))
@@ -192,8 +191,8 @@ OUTPUT TO TERMINAL.
           (number_literal))
         (frame_phrase
           (identifier)
-          (frame_option)
-          (frame_option)))
+          (page_top)
+          (centered)))
       (view_statement
         (widget_phrase
           (identifier)))
@@ -214,7 +213,7 @@ OUTPUT TO TERMINAL.
         (identifier)
         (string_literal)
         (frame_phrase
-          (frame_option)))
+          (centered)))
       (if_statement
         (function_call
           (identifier)

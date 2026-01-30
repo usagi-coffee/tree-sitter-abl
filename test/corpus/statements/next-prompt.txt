@@ -104,8 +104,7 @@ UPDATE a b.
       (update_statement
         (identifier)
         (frame_phrase
-          (frame_option
-            (number_literal))))
+          (number_literal)))
       (if_statement
         (binary_expression
           (qualified_name

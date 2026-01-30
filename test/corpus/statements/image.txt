@@ -538,8 +538,7 @@ UPDATE animate WITH FRAME y.
     (identifier)
     (frame_phrase
       (identifier)
-      (frame_option
-        (string_literal))))
+      (string_literal)))
   (on_statement
     (identifier)
     (identifier)

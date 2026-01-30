@@ -33,7 +33,7 @@ IF ans THEN DICTIONARY.
         (number_literal))
       (frame_option
         (number_literal))
-      (frame_option)))
+      (no_labels)))
   (update_statement
     (identifier))
   (if_statement

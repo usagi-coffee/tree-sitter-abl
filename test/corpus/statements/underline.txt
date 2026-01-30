@@ -48,7 +48,7 @@ UNDERLINE STREAM-HANDLE hS Customer.Name WITH FRAME f1.
           (identifier)
           (identifier))))
     (frame_phrase
-      (frame_option))
+      (use_text))
     (body
       (display_statement
         (qualified_name

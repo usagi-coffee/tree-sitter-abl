@@ -36,8 +36,8 @@ END.
         (label_option
           (string_literal))))
     (frame_phrase
-      (frame_option)
-      (frame_option)))
+      (side_labels)
+      (centered)))
   (for_each_statement
     (record
       (identifier))
@@ -66,5 +66,5 @@ END.
           (identifier)
           (identifier))
         (frame_phrase
-          (frame_option)
-          (frame_option))))))
+          (centered)
+          (use_text))))))

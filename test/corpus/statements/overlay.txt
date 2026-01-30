@@ -129,11 +129,10 @@ OVERLAY(cLong, 1, 5, "COLUMN") = "Hi".
   (display_statement
     (identifier)
     (frame_phrase
-      (frame_option)
+      (centered)
       (identifier)
-      (frame_option)
-      (frame_option
-        (string_literal))
+      (no_labels)
+      (string_literal)
       (frame_option
         (number_literal))))
   (repeat_statement
@@ -151,8 +150,8 @@ OVERLAY(cLong, 1, 5, "COLUMN") = "Hi".
               (string_literal))))
         (frame_phrase
           (identifier)
-          (frame_option)
-          (frame_option)))
+          (side_labels)
+          (centered)))
       (assignment_statement
         (identifier)
         (assignment_operator)

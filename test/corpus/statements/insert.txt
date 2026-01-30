@@ -64,8 +64,7 @@ INSERT Customer USING RECID(2) NO-ERROR.
   (insert_statement
     (identifier)
     (frame_phrase
-      (frame_option
-        (number_literal))))
+      (number_literal)))
   (repeat_statement
     (body
       (create_statement

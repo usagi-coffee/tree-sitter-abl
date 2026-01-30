@@ -273,11 +273,11 @@ OUTPUT STREAM due CLOSE.
     (skip_phrase
       (number_literal))
     (frame_phrase
-      (frame_option)
-      (frame_option)
-      (frame_option)
+      (no_box)
+      (no_labels)
+      (centered)
       (identifier)
-      (frame_option)))
+      (page_top)))
   (for_each_statement
     (record
       (identifier))
@@ -396,8 +396,8 @@ OUTPUT STREAM due CLOSE.
                     (identifier)
                     (number_literal)
                     (frame_phrase
-                      (frame_option)
-                      (frame_option)
+                      (no_box)
+                      (down)
                       (identifier)))))))))))
   (output_statement
     (stream_phrase

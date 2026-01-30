@@ -128,7 +128,7 @@ RELEASE sports.Customer NO-ERROR.
             right: (identifier))
           (frame_phrase
             frame: (identifier)
-            (frame_option)))
+            (side_labels)))
         (assignment_statement
           left: (identifier)
           operator: (assignment_operator)
@@ -158,8 +158,7 @@ RELEASE sports.Customer NO-ERROR.
           (frame_phrase
             frame: (identifier)
             (frame_option)
-            (frame_option
-              title: (string_literal))))
+            title: (string_literal)))
         (assignment_statement
           left: (identifier)
           operator: (assignment_operator)
@@ -175,7 +174,7 @@ RELEASE sports.Customer NO-ERROR.
             right: (identifier))
           (frame_phrase
             frame: (identifier)
-            (frame_option)))
+            (side_labels)))
         (release_statement
           record: (identifier)))))
   (enable_statement

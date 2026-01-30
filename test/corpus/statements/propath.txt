@@ -88,13 +88,11 @@ PROPATH += ",/myNewAppDir1,/myNewAppDir2".
       (display_statement
         (identifier)
         (frame_phrase
-          (frame_option
-            (string_literal))
-          (frame_option
+          (string_literal)
+          (number_literal)
+          (down
             (number_literal))
-          (frame_option
-            (number_literal))
-          (frame_option)
+          (no_labels)
           (frame_option
             (number_literal))))
       (choose_statement

@@ -83,6 +83,8 @@ module.exports = grammar({
     [$.frame_access, $._assignable],
     [$.__frame_option_down],
     [$.menu_item_access],
+    [$.__frame_option_skip],
+    [$.frame_phrase],
   ],
   inline: ($) => [],
 

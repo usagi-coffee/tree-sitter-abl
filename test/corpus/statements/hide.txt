@@ -59,7 +59,7 @@ HIDE ALL NO-PAUSE IN WINDOW w1.
         (number_literal))
       (frame_option
         (number_literal))
-      (frame_option
+      (down
         (number_literal))))
   (message_statement
     (string_literal))

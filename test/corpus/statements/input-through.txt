@@ -72,8 +72,8 @@ INPUT CLOSE.
       (identifier))
     (frame_phrase
       (identifier)
-      (frame_option)
-      (frame_option)))
+      (no_box)
+      (no_labels)))
   (display_statement
     (identifier)
     (identifier)
@@ -97,7 +97,7 @@ INPUT CLOSE.
     (form_item
       (identifier))
     (frame_phrase
-      (frame_option)
+      (down)
       (identifier)))
   (input_through_statement
     (identifier))
@@ -119,8 +119,8 @@ INPUT CLOSE.
       (set_statement
         (identifier)
         (frame_phrase
-          (frame_option)
-          (frame_option)
+          (no_box)
+          (no_labels)
           (identifier)))
       (display_statement
         (identifier)

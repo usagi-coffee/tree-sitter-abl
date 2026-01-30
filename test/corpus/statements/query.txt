@@ -493,9 +493,8 @@ DEFINE QUERY qExceptAll FOR Customer EXCEPT ().
         right: (identifier)))
     (frame_phrase
       frame: (identifier)
-      (frame_option)
-      (frame_option
-        title: (string_literal))))
+      (side_labels)
+      title: (string_literal)))
   (form_statement
     (form_item
       field: (identifier))
@@ -558,10 +557,9 @@ DEFINE QUERY qExceptAll FOR Customer EXCEPT ().
         right: (identifier))
       (frame_phrase
         frame: (identifier)
-        (frame_option)
-        (frame_option)
-        (frame_option
-          title: (string_literal))))
+        (centered)
+        (side_labels)
+        title: (string_literal)))
     (open_query_statement
       query: (identifier)
       (record_phrase

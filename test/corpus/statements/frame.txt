@@ -158,7 +158,7 @@ DEFINE FRAME centered Customer.CustNum WITH CENTERED.
       left: (identifier)
       right: (identifier))
     (frame_phrase
-      (frame_option))))
+      (centered))))
 
 ================================================================================
 FRAME - WITH SIZE
@@ -178,9 +178,9 @@ DEFINE FRAME sized Customer.Name Customer.Address WITH SIZE 80 BY 20.
       left: (identifier)
       right: (identifier))
     (frame_phrase
-      (frame_option
-        (number_literal)
-        (number_literal)))))
+      (size
+        size: (number_literal)
+        by: (number_literal)))))
 
 ================================================================================
 FRAME - WITH DOWN
@@ -197,7 +197,7 @@ DEFINE FRAME down Customer.CustNum WITH DOWN 10.
       left: (identifier)
       right: (identifier))
     (frame_phrase
-      (frame_option
+      (down
         (number_literal)))))
 
 ================================================================================
@@ -234,7 +234,7 @@ DEFINE FRAME overlay Sales.Order.OrderNum WITH OVERLAY.
       right: (identifier)
       right: (identifier))
     (frame_phrase
-      (frame_option))))
+      (overlay))))
 
 ================================================================================
 FRAME - WITH ROW and COLUMN
@@ -271,7 +271,7 @@ DEFINE FRAME noLabels Customer.CustNum WITH NO-LABELS.
       left: (identifier)
       right: (identifier))
     (frame_phrase
-      (frame_option))))
+      (no_labels))))
 
 ================================================================================
 FRAME - WITH SIDE-LABELS
@@ -288,7 +288,7 @@ DEFINE FRAME sideLabels Customer.CustNum WITH SIDE-LABELS.
       left: (identifier)
       right: (identifier))
     (frame_phrase
-      (frame_option))))
+      (side_labels))))
 
 ================================================================================
 FRAME - String with AT phrase COLUMN
@@ -580,12 +580,12 @@ DEFINE FRAME combined
     (number_literal)
     (number_literal)
     (frame_phrase
-      (frame_option
-        (number_literal)
+      (size
+        size: (number_literal)
+        by: (number_literal))
+      (down
         (number_literal))
-      (frame_option
-        (number_literal))
-      (frame_option))))
+      (centered))))
 
 ================================================================================
 FRAME - Minimal
@@ -719,12 +719,11 @@ WAIT-FOR WINDOW-CLOSE OF FRAME cust-fr.
       (identifier))
     (identifier)
     (frame_phrase
-      (frame_option)
+      (centered)
       (frame_option
         (number_literal))
-      (frame_option
-        (string_literal))
-      (frame_option)))
+      (string_literal)
+      (use_text)))
   (for_each_statement
     (record
       (identifier)
@@ -780,7 +779,7 @@ WAIT-FOR WINDOW-CLOSE OF FRAME cust-fr.
       (identifier)
       (identifier))
     (frame_phrase
-      (frame_option)
+      (centered)
       (frame_option
         (number_literal))))
   (frame_definition
@@ -796,7 +795,7 @@ WAIT-FOR WINDOW-CLOSE OF FRAME cust-fr.
       (identifier)
       (identifier))
     (frame_phrase
-      (frame_option)
+      (side_labels)
       (frame_option
         (number_literal))
       (frame_option
@@ -912,10 +911,9 @@ WAIT-FOR WINDOW-CLOSE OF FRAME cust-fr.
     (number_literal)
     (number_literal)
     (frame_phrase
-      (frame_option)
-      (frame_option
-        (string_literal))
-      (frame_option
+      (side_labels)
+      (string_literal)
+      (size
         (number_literal)
         (number_literal))
       (frame_option)))
@@ -963,13 +961,12 @@ WAIT-FOR WINDOW-CLOSE OF FRAME cust-fr.
     (identifier)
     (number_literal)
     (frame_phrase
-      (frame_option)
-      (frame_option
-        (string_literal))
-      (frame_option
+      (side_labels)
+      (string_literal)
+      (size
         (number_literal)
         (number_literal))
-      (frame_option
+      (at
         (number_literal)
         (number_literal))))
   (frame_definition
@@ -979,12 +976,11 @@ WAIT-FOR WINDOW-CLOSE OF FRAME cust-fr.
     (identifier)
     (identifier)
     (frame_phrase
-      (frame_option
-        (string_literal))
-      (frame_option
+      (string_literal)
+      (size
         (number_literal)
         (number_literal))
-      (frame_option
+      (at
         (number_literal)
         (number_literal))))
   (frame_definition
@@ -1011,13 +1007,12 @@ WAIT-FOR WINDOW-CLOSE OF FRAME cust-fr.
     (identifier)
     (number_literal)
     (frame_phrase
-      (frame_option)
-      (frame_option
-        (string_literal))
-      (frame_option
+      (side_labels)
+      (string_literal)
+      (size
         (number_literal)
         (number_literal))
-      (frame_option
+      (at
         (number_literal)
         (number_literal))))
   (assignment_statement

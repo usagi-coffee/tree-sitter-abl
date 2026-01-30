@@ -39,7 +39,7 @@ PAUSE BEFORE-HIDE NO-MESSAGE.
       (identifier)
       (no_lock))
     (frame_phrase
-      (frame_option
+      (down
         (number_literal)))
     (body
       (display_statement

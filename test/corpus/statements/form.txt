@@ -176,10 +176,10 @@ END.
         (form_item
           (identifier))
         (frame_phrase
-          (frame_option)
-          (frame_option
+          (side_labels)
+          (down
             (number_literal))
-          (frame_option)))
+          (centered)))
       (prompt_for_statement
         (prompt_for_item
           (qualified_name
@@ -187,8 +187,8 @@ END.
             (identifier)))
         (frame_phrase
           (identifier)
-          (frame_option)
-          (frame_option)))
+          (side_labels)
+          (centered)))
       (find_statement
         (identifier)
         (using_phrase
@@ -243,7 +243,7 @@ END.
         (identifier))
       (frame_option
         (identifier))
-      (frame_option
+      (down
         (identifier))))
   (do_block
     (identifier)

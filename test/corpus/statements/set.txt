@@ -255,10 +255,9 @@ SET Customer EXCEPT Comments WITH FRAME fCust NO-ERROR.
       field: (number_literal))
     (frame_phrase
       frame: (identifier)
-      (frame_option)
-      (frame_option)
-      (frame_option
-        title: (string_literal))))
+      (centered)
+      (no_labels)
+      title: (string_literal)))
   (for_each_statement
     (record
       table: (identifier)
@@ -286,7 +285,7 @@ SET Customer EXCEPT Comments WITH FRAME fCust NO-ERROR.
           right: (identifier))
         (frame_phrase
           frame: (identifier)
-          (frame_option)))
+          (centered)))
       (update_statement
         (update_item
           field: (qualified_name

@@ -73,7 +73,7 @@ END.
         (identifier)
         (frame_phrase
           frame: (identifier)
-          (frame_option)))
+          (side_labels)))
       (pause_statement)
       (get_statement
         query: (identifier)))))

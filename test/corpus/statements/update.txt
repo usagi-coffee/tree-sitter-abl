@@ -266,9 +266,8 @@ UPDATE field1 SPACE(2) SKIP(1) ^.
             (identifier)
             (identifier)))
         (frame_phrase
-          (frame_option
-            (number_literal))
-          (frame_option
+          (number_literal)
+          (down
             (number_literal))))))
   (variable_definition
     (identifier)
@@ -312,10 +311,9 @@ UPDATE field1 SPACE(2) SKIP(1) ^.
       (number_literal))
     (frame_phrase
       (identifier)
-      (frame_option)
-      (frame_option)
-      (frame_option
-        (string_literal))))
+      (centered)
+      (no_labels)
+      (string_literal)))
   (for_each_statement
     (record
       (identifier)
@@ -343,7 +341,7 @@ UPDATE field1 SPACE(2) SKIP(1) ^.
           (identifier))
         (frame_phrase
           (identifier)
-          (frame_option)))
+          (centered)))
       (update_statement
         (update_item
           (qualified_name

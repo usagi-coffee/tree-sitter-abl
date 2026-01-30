@@ -48,7 +48,7 @@ END.
       (set_statement
         (identifier)
         (frame_phrase
-          (frame_option)))
+          (side_labels)))
       (if_statement
         (binary_expression
           (function_call

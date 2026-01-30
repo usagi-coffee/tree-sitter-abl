@@ -181,7 +181,7 @@ DISPLAY STREAM rpt ItemNum ItemName WITH NO-LABELS NO-BOX.
         (label_option
           (string_literal))))
     (frame_phrase
-      (frame_option)
+      (side_labels)
       (identifier)))
   (output_statement
     (stream_phrase
@@ -218,7 +218,7 @@ DISPLAY STREAM rpt ItemNum ItemName WITH NO-LABELS NO-BOX.
                 (identifier))
               (frame_phrase
                 (identifier)
-                (frame_option)))
+                (down)))
             (assignment_statement
               (identifier)
               (assignment_operator)
@@ -235,7 +235,7 @@ DISPLAY STREAM rpt ItemNum ItemName WITH NO-LABELS NO-BOX.
     (identifier)
     (frame_phrase
       (identifier)
-      (frame_option)))
+      (side_labels)))
   (display_statement
     (stream_phrase
       (identifier))
@@ -260,5 +260,5 @@ DISPLAY STREAM rpt ItemNum ItemName WITH NO-LABELS NO-BOX.
     (identifier)
     (identifier)
     (frame_phrase
-      (frame_option)
-      (frame_option))))
+      (no_labels)
+      (no_box))))

@@ -383,9 +383,9 @@ DISPLAY SPACE(2) Customer.Name SKIP(1) Customer.City.
         (skip_phrase
           (number_literal))
         (frame_phrase
-          (frame_option)
-          (frame_option)
-          (frame_option)))))
+          (no_box)
+          (no_labels)
+          (use_text)))))
   (display_statement
     (identifier)
     (qualified_name

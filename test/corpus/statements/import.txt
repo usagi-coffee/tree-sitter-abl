@@ -142,12 +142,12 @@ INPUT CLOSE.
       (display_statement
         (identifier)
         (frame_phrase
-          (frame_option)
+          (down)
           (identifier)))
       (down_statement
         (frame_phrase
           (identifier)
-          (frame_option)))))
+          (no_labels)))))
   (input_statement)
   (variable_definition
     (identifier)
