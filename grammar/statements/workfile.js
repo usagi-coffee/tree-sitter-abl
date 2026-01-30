@@ -1,16 +1,16 @@
 module.exports = ({ kw }) => ({
+  // Workfile is equivalent to WORK-TABLE
   workfile_definition: ($) =>
     seq(
       choice(kw("DEFINE"), kw("DEF")),
+      optional(
+        choice(
+          alias($.__work_table_shared_scope, $.shared_variable_scope),
+          alias($.__work_table_access_modifier, $.access_modifier)
+        )
+      ),
       kw("WORKFILE"),
-      $.__workfile_body,
-      $._terminator,
-    ),
-
-  __workfile_body: ($) =>
-    seq(
-      field("name", $.identifier),
-      optional(alias($.__temp_table_like_phrase, $.like_phrase)),
-      optional(alias($.__temp_table_no_undo, $.no_undo)),
+      $.__work_table_body,
+      $._terminator
     ),
 });

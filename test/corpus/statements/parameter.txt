@@ -321,10 +321,18 @@ PARAMETER DEFINITION - BUFFER Parameters
 
 DEFINE PARAMETER BUFFER pCust FOR Customer.
 DEFINE PARAMETER BUFFER pTemp FOR TEMP-TABLE ttOrder PRESELECT.
+DEFINE PARAMETER BUFFER bufCustomer FOR Customer PRESELECT.
+DEFINE PARAMETER BUFFER bufTemp FOR TEMP-TABLE ttData PRESELECT.
 
 --------------------------------------------------------------------------------
 
 (source_code
+  (parameter_definition
+    name: (identifier)
+    table: (identifier))
+  (parameter_definition
+    name: (identifier)
+    table: (identifier))
   (parameter_definition
     name: (identifier)
     table: (identifier))

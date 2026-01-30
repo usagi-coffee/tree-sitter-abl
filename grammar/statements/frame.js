@@ -31,8 +31,8 @@ module.exports = ({ kw, tkw }) => ({
 
   __frame_head_item: ($) =>
     choice(
-      kw("SPACE"),
-      kw("SKIP"),
+      prec.left(1, seq(kw("SPACE"), optional(seq("(", optional($._expression), ")")))),
+      prec.left(1, seq(kw("SKIP"), optional(seq("(", optional($._expression), ")")))),
       seq(
         $._expression,
         optional($.__frame_at_phrase),
@@ -129,6 +129,7 @@ module.exports = ({ kw, tkw }) => ({
 
   __frame_option: ($) =>
     choice(
+      seq(kw("FRAME"), field("frame", $.identifier)),
       seq(kw("WIDTH"), $._expression),
       seq(kw("DOWN"), optional($._expression)),
       seq(kw("SIZE"), $._expression, kw("BY"), $._expression),

@@ -42,7 +42,7 @@ module.exports = ({ kw, tkw }) => ({
         field("constant", $.string_literal),
         alias($.__set_at_phrase, $.at_phrase),
       ),
-      tkw("SKIP"),
+      $.__set_skip_phrase,
     ),
   __set_field_target: ($) => choice($.identifier, $.qualified_name),
   __set_format_phrase: ($) =>
@@ -62,6 +62,8 @@ module.exports = ({ kw, tkw }) => ({
     ),
   __set_label_option: ($) => seq(kw("LABEL"), $._expression),
   __set_at_phrase: ($) => seq(kw("AT"), token(/[0-9]+(\.[0-9]+)?/)),
+  __set_skip_phrase: ($) =>
+    seq(tkw("SKIP"), optional(seq("(", field("lines", $._expression), ")"))),
   __set_help_phrase: ($) => seq(kw("HELP"), $.string_literal),
   __set_editing_phrase: ($) =>
     seq(tkw("EDITING"), $._colon, repeat1($._statement), tkw("END")),

@@ -128,4 +128,22 @@ DEFINE PRIVATE WORKFILE wfPrivate FIELD f1 AS INTEGER.
 
 --------------------------------------------------------------------------------
 
-(source_code)
+(source_code
+  (workfile_definition
+    (shared_variable_scope)
+    (identifier)
+    (field
+      (identifier)
+      (identifier)))
+  (workfile_definition
+    (shared_variable_scope)
+    (identifier)
+    (field
+      (identifier)
+      (identifier)))
+  (workfile_definition
+    (access_modifier)
+    (identifier)
+    (field
+      (identifier)
+      (identifier))))

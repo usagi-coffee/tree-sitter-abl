@@ -73,13 +73,11 @@ DISPLAY "Back to 80 columns." WITH CENTERED.
     (body
       (display_statement
         (identifier)
-        (identifier)
-        (identifier)
-        (number_literal))))
+        (frame_phrase
+          (number_literal)))))
   (output_statement)
   (terminal_statement
     (string_literal))
   (display_statement
     (string_literal)
-    (identifier)
-    (identifier)))
+    (frame_phrase)))

@@ -173,51 +173,59 @@ DEFINE DATA-SOURCE dsThree FOR bHeader, bDetail, bLine.
 DATA-SOURCE DEFINITION - Access Modifiers
 ================================================================================
 
-DEFINE PRIVATE DATA-SOURCE dsPriv FOR bCust.
-DEFINE PROTECTED DATA-SOURCE dsProt FOR bOrder.
-DEF PRIVATE DATA-SOURCE dsQuery QUERY qMain.
+CLASS x:
+  DEFINE PRIVATE DATA-SOURCE dsPriv FOR bCust.
+  DEFINE PROTECTED DATA-SOURCE dsProt FOR bOrder.
+  DEF PRIVATE DATA-SOURCE dsQuery QUERY qMain.
+END CLASS.
 
 --------------------------------------------------------------------------------
 
 (source_code
-  (data_source_definition
-    (access_modifier)
+  (class_definition
     name: (identifier)
-    buffer: (identifier))
-  (data_source_definition
-    (access_modifier)
-    name: (identifier)
-    buffer: (identifier))
-  (data_source_definition
-    (access_modifier)
-    name: (identifier)
-    query: (identifier)))
+    (data_source_definition
+      (access_modifier)
+      name: (identifier)
+      buffer: (identifier))
+    (data_source_definition
+      (access_modifier)
+      name: (identifier)
+      buffer: (identifier))
+    (data_source_definition
+      (access_modifier)
+      name: (identifier)
+      query: (identifier))))
 
 ================================================================================
 DATA-SOURCE DEFINITION - STATIC Modifier
 ================================================================================
 
-DEFINE STATIC DATA-SOURCE dsStatic FOR bCust.
-DEF PROTECTED STATIC DATA-SOURCE dsProtStatic FOR bOrder.
-DEFINE PRIVATE STATIC DATA-SOURCE dsPrivStatic QUERY qMain.
+CLASS x:
+  DEFINE STATIC DATA-SOURCE dsStatic FOR bCust.
+  DEF PROTECTED STATIC DATA-SOURCE dsProtStatic FOR bOrder.
+  DEFINE PRIVATE STATIC DATA-SOURCE dsPrivStatic QUERY qMain.
+END.
 
 --------------------------------------------------------------------------------
 
 (source_code
-  (data_source_definition
-    (static_modifier)
+  (class_definition
     name: (identifier)
-    buffer: (identifier))
-  (data_source_definition
-    (access_modifier)
-    (static_modifier)
-    name: (identifier)
-    buffer: (identifier))
-  (data_source_definition
-    (access_modifier)
-    (static_modifier)
-    name: (identifier)
-    query: (identifier)))
+    (data_source_definition
+      (static_modifier)
+      name: (identifier)
+      buffer: (identifier))
+    (data_source_definition
+      (access_modifier)
+      (static_modifier)
+      name: (identifier)
+      buffer: (identifier))
+    (data_source_definition
+      (access_modifier)
+      (static_modifier)
+      name: (identifier)
+      query: (identifier))))
 
 ================================================================================
 DATA-SOURCE DEFINITION - Combinations
@@ -259,18 +267,12 @@ DEF DATA-SOURCE d FOR buf.
 DATA-SOURCE DEFINITION - Reference snippet variations
 ================================================================================
 
-DEFINE PRIVATE STATIC DATA-SOURCE dsStaticPriv FOR bCust.
 DEFINE DATA-SOURCE dsQueryOnly QUERY qMain.
 DEFINE DATA-SOURCE dsKeyRowid FOR bCust KEYS (ROWID).
 
 --------------------------------------------------------------------------------
 
 (source_code
-  (data_source_definition
-    (access_modifier)
-    (static_modifier)
-    name: (identifier)
-    buffer: (identifier))
   (data_source_definition
     name: (identifier)
     query: (identifier))

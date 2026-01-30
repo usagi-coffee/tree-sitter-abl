@@ -29,7 +29,7 @@ module.exports = ({ kw, tkw }) => ({
           alias($.__do_on_stop_phrase, $.on_stop_phrase),
         ),
       ),
-      optional($.frame_phrase),
+      repeat($.frame_phrase),
       $.body,
     ),
 

@@ -31,8 +31,7 @@ INITIAL ["sales.p","acctg.p","per.p","exit.p"].
 DEFINE VARIABLE ppath AS CHARACTER NO-UNDO EXTENT 4
 INITIAL ["sales/s-procs","acctg/a-procs","per/p-procs",","] .
 REPEAT:
-DISPLAY menu WITH TITLE " M A I N
-1 COLUMN 1 DOWN NO-LABELS ROW 8.
+DISPLAY menu WITH TITLE " M A I N   M E N U " 1 COLUMN 1 DOWN NO-LABELS ROW 8.
 CHOOSE FIELD menu AUTO-RETURN.
 HIDE.
 PROPATH = ppath[FRAME-INDEX].
@@ -46,4 +45,79 @@ PROPATH += ",/myNewAppDir1,/myNewAppDir2".
 
 --------------------------------------------------------------------------------
 
-(source_code)
+(source_code
+  (variable_definition
+    (identifier)
+    (identifier)
+    (no_undo)
+    (extent_phrase
+      (number_literal))
+    (format_option
+      (string_literal))
+    (initial_option
+      (string_literal)
+      (string_literal)
+      (string_literal)
+      (string_literal)))
+  (variable_definition
+    (identifier)
+    (identifier)
+    (no_undo)
+    (extent_phrase
+      (number_literal))
+    (format_option
+      (string_literal))
+    (initial_option
+      (string_literal)
+      (string_literal)
+      (string_literal)
+      (string_literal)))
+  (variable_definition
+    (identifier)
+    (identifier)
+    (no_undo)
+    (extent_phrase
+      (number_literal))
+    (initial_option
+      (string_literal)
+      (string_literal)
+      (string_literal)
+      (string_literal)))
+  (repeat_statement
+    (body
+      (display_statement
+        (identifier)
+        (frame_phrase
+          (string_literal)
+          (number_literal)
+          (number_literal)
+          (number_literal)))
+      (choose_statement
+        (identifier)
+        (auto_return))
+      (hide_statement)
+      (propath_statement
+        (array_access
+          (identifier)
+          (identifier)))
+      (run_statement
+        (identifier)
+        (arguments
+          (argument
+            (array_access
+              (identifier)
+              (identifier)))))))
+  (propath_statement
+    (binary_expression
+      (function_call
+        (identifier)
+        (arguments
+          (argument
+            (number_literal))
+          (argument
+            (identifier))))
+      (string_literal)))
+  (display_statement
+    (identifier))
+  (propath_statement
+    (string_literal)))

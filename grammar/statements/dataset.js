@@ -2,10 +2,16 @@ module.exports = ({ kw, tkw }) => ({
   dataset_definition: ($) =>
     seq(
       choice(kw("DEFINE"), kw("DEF")),
-      optional(alias($.__dataset_shared_scope, $.shared_variable_scope)),
-      optional(alias($.__dataset_access_modifier, $.access_modifier)),
-      optional(alias($.__dataset_static_modifier, $.static_modifier)),
-      optional(alias($.__dataset_serialization_modifier, $.serialization_modifier)),
+      optional(
+        choice(
+          alias($.__dataset_shared_scope, $.shared_variable_scope),
+          seq(
+            optional(alias($.__dataset_access_modifier, $.access_modifier)),
+            optional(alias($.__dataset_static_modifier, $.static_modifier)),
+            optional(alias($.__dataset_serialization_modifier, $.serialization_modifier)),
+          ),
+        ),
+      ),
       kw("DATASET"),
       $.__dataset_body,
       $._terminator,
@@ -41,7 +47,7 @@ module.exports = ({ kw, tkw }) => ({
     choice(kw("PRIVATE"), kw("PROTECTED")),
   __dataset_static_modifier: ($) => kw("STATIC"),
   __dataset_serialization_modifier: ($) =>
-    choice(tkw("SERIALIZABLE"), tkw("NON-SERIALIZABLE")),
+    choice(kw("SERIALIZABLE"), kw("NON-SERIALIZABLE")),
 
   __dataset_data_relation: ($) =>
     seq(

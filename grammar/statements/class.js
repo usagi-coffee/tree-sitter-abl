@@ -21,7 +21,7 @@ module.exports = ({ kw, tkw }) => ({
       $.stream_definition,
       $.image_definition,
       $.buffer_definition,
-      $.data_source_definition,
+      alias($.data_source_class_definition, $.data_source_definition),
       $.query_definition,
       $.dataset_definition,
       $.button_definition,

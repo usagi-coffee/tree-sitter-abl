@@ -39,4 +39,61 @@ DELETE WIDGET new_win.
 
 --------------------------------------------------------------------------------
 
-(source_code)
+(source_code
+  (variable_definition
+    (identifier)
+    (identifier)
+    (no_undo)
+    (view_as_phrase
+      (identifier))
+    (font_option
+      (number_literal))
+    (format_option
+      (string_literal))
+    (initial_option
+      (string_literal)))
+  (variable_definition
+    (identifier)
+    (identifier)
+    (no_undo)
+    (view_as_phrase
+      (identifier))
+    (font_option
+      (number_literal))
+    (format_option
+      (string_literal))
+    (initial_option
+      (string_literal)))
+  (variable_definition
+    (identifier)
+    (identifier)
+    (no_undo))
+  (load_statement
+    (string_literal))
+  (load_statement
+    (string_literal))
+  (use_statement
+    (string_literal))
+  (display_statement
+    (identifier)
+    (frame_phrase)
+    (frame_phrase
+      (identifier)))
+  (pause_statement)
+  (use_statement
+    (string_literal))
+  (create_statement
+    (identifier))
+  (assignment_statement
+    (identifier)
+    (assignment_operator)
+    (identifier))
+  (display_statement
+    (identifier)
+    (identifier)
+    (frame_phrase)
+    (frame_phrase
+      (identifier)))
+  (pause_statement)
+  (delete_widget_statement
+    (identifier)))

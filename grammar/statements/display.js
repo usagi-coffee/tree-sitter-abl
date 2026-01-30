@@ -42,6 +42,7 @@ module.exports = ({ kw, tkw }) => ({
       repeat(
         choice(
           seq(kw("FRAME"), field("frame", $.identifier)),
+          seq(kw("BROWSE"), field("browse", $.identifier)),
           tkw("NO-LABELS"),
           tkw("SIDE-LABELS"),
           tkw("CENTERED"),
@@ -53,6 +54,10 @@ module.exports = ({ kw, tkw }) => ({
           seq($.number_literal, tkw("COLUMN")),
           seq($.number_literal, tkw("COLUMNS")),
           tkw("OVERLAY"),
+          tkw("PAGE-TOP"),
+          tkw("PAGE-BOTTOM"),
+          seq(kw("WIDTH"), field("width", $._expression)),
+          tkw("USE-TEXT"),
         ),
       ),
     ),

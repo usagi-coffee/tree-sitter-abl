@@ -265,8 +265,8 @@ OUTPUT STREAM due CLOSE.
       (identifier)
       (identifier)))
   (display_statement
-    (identifier)
-    (identifier)
+    (stream_phrase
+      (identifier))
     (string_literal)
     (identifier)
     (function_call
@@ -274,13 +274,8 @@ OUTPUT STREAM due CLOSE.
       (arguments
         (argument
           (number_literal))))
-    (identifier)
-    (identifier)
-    (identifier)
-    (identifier)
-    (identifier)
-    (identifier)
-    (identifier))
+    (frame_phrase
+      (identifier)))
   (for_each_statement
     (record
       (identifier))
@@ -378,8 +373,8 @@ OUTPUT STREAM due CLOSE.
               (do_block
                 (body
                   (display_statement
-                    (identifier)
-                    (identifier)
+                    (stream_phrase
+                      (identifier))
                     (qualified_name
                       (identifier)
                       (identifier))
@@ -400,11 +395,8 @@ OUTPUT STREAM due CLOSE.
                       (identifier))
                     (identifier)
                     (number_literal)
-                    (identifier)
-                    (identifier)
-                    (identifier)
-                    (identifier)
-                    (identifier))))))))))
+                    (frame_phrase
+                      (identifier)))))))))))
   (output_statement
     (stream_phrase
       (identifier))))

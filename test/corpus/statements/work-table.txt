@@ -12,10 +12,10 @@ DEFINE WORK-TABLE wtCustomer NO-UNDO
   (work_table_definition
     name: (identifier)
     (no_undo)
-    (work_table_field
+    (field
       name: (identifier)
       type: (identifier))
-    (work_table_field
+    (field
       name: (identifier)
       type: (identifier))))
 
@@ -80,14 +80,14 @@ DEFINE WORK-TABLE wtOpt NO-UNDO
   (work_table_definition
     name: (identifier)
     (no_undo)
-    (work_table_field
+    (field
       name: (identifier)
       type: (identifier)
       (field_option
         (string_literal))
       (field_option
         (string_literal)))
-    (work_table_field
+    (field
       name: (identifier)
       type: (identifier)
       (field_option
@@ -110,13 +110,13 @@ DEFINE WORK-TABLE wtIdx NO-UNDO
   (work_table_definition
     name: (identifier)
     (no_undo)
-    (work_table_field
+    (field
       name: (identifier)
       type: (identifier))
-    (work_table_field
+    (field
       name: (identifier)
       type: (identifier))
-    (work_table_index
+    (index
       name: (identifier)
       field: (identifier))))
 
@@ -132,12 +132,12 @@ DEF WORK-TABLE wt FIELD x AS CHARACTER.
 (source_code
   (work_table_definition
     name: (identifier)
-    (work_table_field
+    (field
       name: (identifier)
       type: (identifier)))
   (work_table_definition
     name: (identifier)
-    (work_table_field
+    (field
       name: (identifier)
       type: (identifier))))
 
@@ -156,7 +156,7 @@ DEFINE WORK-TABLE wtCustomer LIKE Customer NO-UNDO
     (like_phrase
       like: (identifier))
     (no_undo)
-    (work_table_index
+    (index
       name: (identifier)
       field: (identifier))))
 

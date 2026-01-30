@@ -63,6 +63,4 @@ END.
         (qualified_name
           (identifier)
           (identifier))
-        (identifier)
-        (identifier)
-        (identifier)))))
+        (frame_phrase)))))

@@ -110,11 +110,11 @@ DEFINE NEW SHARED DATASET dsShared FOR ttCustomer.
 DEFINE SHARED DATASET dsUse FOR ttCustomer.
 DEFINE PRIVATE STATIC DATASET dsPrivStatic FOR ttCustomer.
 DEFINE PROTECTED DATASET dsProt FOR ttCustomer.
-DEFINE DATASET dsSer SERIALIZABLE FOR ttCustomer.
-DEFINE DATASET dsNonSer NON-SERIALIZABLE FOR ttCustomer.
+DEFINE SERIALIZABLE DATASET dsSer FOR ttCustomer.
+DEFINE NON-SERIALIZABLE DATASET dsNonSer FOR ttCustomer.
 DEFINE DATASET dsRef REFERENCE-ONLY FOR ttCustomer.
-DEFINE DATASET dsNs FOR ttCustomer NAMESPACE-URI "http://example.com" NAMESPACE-PREFIX "ex".
-DEFINE DATASET dsXml FOR ttCustomer XML-NODE-NAME "cust" SERIALIZE-NAME "custNode" XML-NODE-TYPE "HIDDEN" SERIALIZE-HIDDEN.
+DEFINE DATASET dsNs NAMESPACE-URI "http://example.com" NAMESPACE-PREFIX "ex" FOR ttCustomer.
+DEFINE DATASET dsXml XML-NODE-NAME "cust" SERIALIZE-NAME "custNode" XML-NODE-TYPE "HIDDEN" SERIALIZE-HIDDEN FOR ttCustomer.
 DEFINE DATASET dsRel FOR ttParent, ttChild DATA-RELATION FOR ttParent, ttChild RELATION-FIELDS (parentId, childId).
 DEFINE DATASET dsRelNested FOR ttParent, ttChild DATA-RELATION FOR ttParent, ttChild RELATION-FIELDS (parentId, childId) NESTED FOREIGN-KEY-HIDDEN.
 DEFINE DATASET dsRelRepos FOR ttParent, ttChild DATA-RELATION FOR ttParent, ttChild RELATION-FIELDS (parentId, childId) REPOSITION.
@@ -125,4 +125,107 @@ DEFINE DATASET dsPidFields FOR ttParent, ttChild PARENT-ID-RELATION FOR ttParent
 
 --------------------------------------------------------------------------------
 
-(source_code)
+(source_code
+  (dataset_definition
+    (shared_variable_scope)
+    name: (identifier)
+    table: (identifier))
+  (dataset_definition
+    (shared_variable_scope)
+    name: (identifier)
+    table: (identifier))
+  (dataset_definition
+    (access_modifier)
+    (static_modifier)
+    name: (identifier)
+    table: (identifier))
+  (dataset_definition
+    (access_modifier)
+    name: (identifier)
+    table: (identifier))
+  (dataset_definition
+    (serialization_modifier)
+    name: (identifier)
+    table: (identifier))
+  (dataset_definition
+    (serialization_modifier)
+    name: (identifier)
+    table: (identifier))
+  (dataset_definition
+    name: (identifier)
+    table: (identifier))
+  (dataset_definition
+    name: (identifier)
+    namespace_uri: (string_literal)
+    namespace_prefix: (string_literal)
+    table: (identifier))
+  (dataset_definition
+    name: (identifier)
+    xml_node_name: (string_literal)
+    serialize_name: (string_literal)
+    xml_node_type: (string_literal)
+    table: (identifier))
+  (dataset_definition
+    name: (identifier)
+    table: (identifier)
+    table: (identifier)
+    (data_relation
+      parent_buffer: (identifier)
+      child_buffer: (identifier)
+      parent_field: (identifier)
+      child_field: (identifier)))
+  (dataset_definition
+    name: (identifier)
+    table: (identifier)
+    table: (identifier)
+    (data_relation
+      parent_buffer: (identifier)
+      child_buffer: (identifier)
+      parent_field: (identifier)
+      child_field: (identifier)))
+  (dataset_definition
+    name: (identifier)
+    table: (identifier)
+    table: (identifier)
+    (data_relation
+      parent_buffer: (identifier)
+      child_buffer: (identifier)
+      parent_field: (identifier)
+      child_field: (identifier)))
+  (dataset_definition
+    name: (identifier)
+    table: (identifier)
+    table: (identifier)
+    (data_relation
+      relation_name: (identifier)
+      parent_buffer: (identifier)
+      child_buffer: (identifier)
+      parent_field: (identifier)
+      child_field: (identifier)))
+  (dataset_definition
+    name: (identifier)
+    table: (identifier)
+    table: (identifier)
+    (data_relation
+      parent_buffer: (identifier)
+      child_buffer: (identifier)
+      parent_field: (identifier)
+      child_field: (identifier)))
+  (dataset_definition
+    name: (identifier)
+    table: (identifier)
+    table: (identifier)
+    (parent_id_relation
+      parent_buffer: (identifier)
+      child_buffer: (identifier)
+      parent_id_field: (identifier)))
+  (dataset_definition
+    name: (identifier)
+    table: (identifier)
+    table: (identifier)
+    (parent_id_relation
+      parent_buffer: (identifier)
+      child_buffer: (identifier)
+      parent_id_field: (identifier)
+      before_field: (identifier)
+      after_field: (identifier))))

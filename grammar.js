@@ -48,13 +48,22 @@ module.exports = grammar({
       $.__temp_table_access_modifier,
       $.__variable_access_modifier,
     ],
-    [$.__event_access_modifier, $.__variable_access_modifier],
+    [
+      $.__buffer_access_modifier,
+      $.__dataset_access_modifier,
+      $.__event_access_modifier,
+      $.__query_access_modifier,
+      $.__temp_table_access_modifier,
+      $.__variable_access_modifier,
+    ],
     [
       $.__dataset_access_modifier,
       $.__temp_table_access_modifier,
       $.__variable_access_modifier,
     ],
-    [$.__dataset_shared_scope, $.__temp_table_shared_scope],
+    [$.__data_source_access_modifier, $.__event_access_modifier],
+    [$.__data_source_static_modifier, $.__event_static_modifier],
+    [$.__event_access_modifier, $.__variable_access_modifier],
     [$.__event_static_modifier, $.__variable_static_modifier],
     [
       $.__dataset_static_modifier,
@@ -166,8 +175,8 @@ module.exports = grammar({
         ),
       null_literal: ($) => "?",
       boolean_literal: ($) => token(/TRUE|FALSE|YES|NO/i),
-      file_name: ($) => /[A-Za-z0-9_\/.-]+\.i/i,
-      procedure_name: ($) => /[A-Za-z0-9_\/.-]+\.p/i,
+      file_name: ($) => /[A-Za-z0-9_\\/.-]+\.i/i,
+      procedure_name: ($) => /[A-Za-z0-9_\\/.-]+\.p/i,
 
       // Types
       generic_type: ($) =>
