@@ -7,6 +7,7 @@ module.exports = ({ kw, tkw }) => ({
       choice(kw("RETURNS"), kw("RETURN")),
       optional(kw("CLASS")),
       field("type", $._type_name),
+      optional(alias($.__function_access_modifier, $.access_modifier)),
       optional(alias($.__function_parameters, $.parameters)),
       choice($._terminator, $._colon),
       repeat($._statement),
@@ -32,7 +33,15 @@ module.exports = ({ kw, tkw }) => ({
       optional(kw("CLASS")),
       field("type", $._type_name),
       optional(alias($.__function_parameters, $.parameters)),
-      optional($.__function_forward_option),
+      optional(
+        choice(
+          seq(
+            optional(alias($.__function_map_phrase, $.map_phrase)),
+            alias($.__function_in_phrase, $.in_phrase),
+          ),
+          alias($.__function_forward_phrase, $.forward_phrase),
+        ),
+      ),
     ),
 
   __function_forward_body_2: ($) =>
@@ -42,7 +51,13 @@ module.exports = ({ kw, tkw }) => ({
       optional(kw("CLASS")),
       field("type", $._type_name),
       optional(alias($.__function_parameters, $.parameters)),
-      $.__function_forward_option,
+      choice(
+        seq(
+          optional(alias($.__function_map_phrase, $.map_phrase)),
+          alias($.__function_in_phrase, $.in_phrase),
+        ),
+        alias($.__function_forward_phrase, $.forward_phrase),
+      ),
     ),
 
   __function_parameters: ($) =>
@@ -76,6 +91,7 @@ module.exports = ({ kw, tkw }) => ({
 
   __function_extent_phrase: ($) =>
     seq(tkw("EXTENT"), optional($.__function_extent_size)),
+  __function_map_phrase: ($) => seq(kw("MAP"), kw("TO"), field("actual", $.identifier)),
   __function_in_phrase: ($) => seq(kw("IN"), field("context", $._expression)),
   __function_forward_phrase: ($) => tkw("FORWARD"),
   __function_forward_option: ($) =>
@@ -92,4 +108,5 @@ module.exports = ({ kw, tkw }) => ({
       $.null_literal,
     ),
   __function_field_name: ($) => choice($.qualified_name, $.identifier),
+  __function_access_modifier: ($) => choice(kw("PRIVATE"), kw("PROTECTED"), kw("PUBLIC")),
 });

@@ -11,6 +11,11 @@ module.exports = ({ kw, tkw }) => ({
     seq(
       optional(
         choice(
+          seq(
+            kw("FOR"),
+            field("record", $.identifier),
+            repeat(seq(",", field("record", $.identifier))),
+          ),
           seq(choice(kw("WHILE"), kw("UNTIL")), $._expression),
           seq(kw("PRESELECT"), $.preselect_record_list),
         ),

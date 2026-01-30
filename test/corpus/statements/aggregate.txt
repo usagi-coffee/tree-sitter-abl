@@ -58,5 +58,3 @@ AGGREGATE dTotal = TOTAL(Customer.Balance) FOR Customer WHERE Country EQ "USA" A
         (binary_expression
           (identifier)
           (string_literal))))))
-
-

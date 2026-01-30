@@ -39,8 +39,82 @@ RUN VALUE(proc).
 END.
 END.
 
-UNIX "cp usr/myfile.".
+UNIX VALUE("cp usr/myfile.").
 
 --------------------------------------------------------------------------------
 
-(source_code)
+(source_code
+  (if_statement
+    (binary_expression
+      (identifier)
+      (string_literal))
+    (unix_statement
+      (identifier))
+    (if_statement
+      (binary_expression
+        (identifier)
+        (string_literal))
+      (dos_statement
+        (identifier))
+      (display_statement
+        (identifier)
+        (string_literal))))
+  (variable_definition
+    (identifier)
+    (identifier)
+    (no_undo)
+    (format_option
+      (string_literal)))
+  (repeat_statement
+    (body
+      (display_statement
+        (string_literal)
+        (frame_phrase
+          (number_literal)
+          (identifier)))
+      (set_statement
+        (set_item
+          (identifier)
+          (format_phrase
+            (label_option
+              (string_literal))))
+        (frame_phrase
+          (frame_option
+            (number_literal))
+          (frame_option)
+          (identifier)))
+      (if_statement
+        (binary_expression
+          (identifier)
+          (string_literal))
+        (if_statement
+          (binary_expression
+            (identifier)
+            (string_literal))
+          (unix_statement
+            (identifier))
+          (if_statement
+            (binary_expression
+              (identifier)
+              (string_literal))
+            (dos_statement
+              (identifier))
+            (display_statement
+              (string_literal)
+              (identifier)
+              (string_literal))))
+        (do_block
+          (body
+            (hide_statement
+              (widget_phrase
+                (identifier)))
+            (hide_statement
+              (widget_phrase
+                (identifier)))
+            (run_statement
+              (identifier)
+              (arguments
+                (argument
+                  (identifier)))))))))
+  (unix_statement
+    (string_literal)))

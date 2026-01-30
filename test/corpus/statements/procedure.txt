@@ -302,7 +302,7 @@ END PROCEDURE.
 PROCEDURE - PRIVATE with CATCH/FINALLY
 ================================================================================
 
-PROCEDURE calcTotals PRIVATE:
+PROCEDURE PRIVATE calcTotals:
   DEFINE VARIABLE i AS INTEGER NO-UNDO.
   DO ON ERROR UNDO, THROW:
     i = i + 1.
@@ -343,9 +343,10 @@ END PROCEDURE.
         right: (identifier))
       (body
         (message_statement
-          (object_access_expression
-            left: (identifier)
-            right: (identifier)
+          (function_call
+            function: (object_access
+              left: (identifier)
+              right: (identifier))
             (arguments
               (argument
                 value: (number_literal)))))))

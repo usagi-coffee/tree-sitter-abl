@@ -49,15 +49,20 @@ module.exports = grammar({
       $.__variable_access_modifier,
     ],
     [$.__event_access_modifier, $.__variable_access_modifier],
+    [$.__dataset_access_modifier, $.__temp_table_access_modifier],
     [$.__dataset_access_modifier, $.__temp_table_access_modifier, $.__variable_access_modifier],
+    [$.__dataset_access_modifier, $.__event_access_modifier, $.__temp_table_access_modifier],
+    [$.__dataset_access_modifier, $.__event_access_modifier, $.__temp_table_access_modifier, $.__variable_access_modifier],
     [$.__dataset_shared_scope, $.__temp_table_shared_scope],
     [$.__event_static_modifier, $.__variable_static_modifier],
+    [$.__dataset_static_modifier, $.__temp_table_static_modifier],
     [$.__dataset_static_modifier, $.__temp_table_static_modifier, $.__variable_static_modifier],
     [$.__property_modifier, $.__event_abstract_modifier],
     [$.__property_modifier, $.__event_override_modifier],
 
     // Specific disambiguations
     [$._primary_expression, $.__in_frame_target],
+    [$.__prompt_for_record_body, $.__prompt_for_field_target],
   ],
   inline: ($) => [],
 
@@ -219,7 +224,19 @@ module.exports = grammar({
         ),
 
       // Accessors
-      object_access: ($) => accessor($, $._namecolon, token.immediate("?:")),
+      object_access: ($) =>
+        prec(
+          1,
+          seq(
+            field("left", choice($.identifier, $.qualified_name)),
+            repeat1(
+              seq(
+                choice($._namecolon, token.immediate("?:")),
+                field("right", alias($._identifier_immediate, $.identifier)),
+              ),
+            ),
+          ),
+        ),
       scoped_name: ($) => accessor($, $._namedoublecolon),
       qualified_name: ($) => accessor($, $._namedot),
 

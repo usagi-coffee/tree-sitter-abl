@@ -118,6 +118,8 @@ module.exports = () => ({
       $.call_statement,
       $.create_socket_statement,
       $.delete_object_statement,
+      $.delete_procedure_statement,
+      $.delete_widget_statement,
       $.empty_temp_table_statement,
       $.finally_statement,
       $.os_delete_statement,

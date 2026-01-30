@@ -45,4 +45,60 @@ UNDO, RETURN ERROR errObj.
 
 --------------------------------------------------------------------------------
 
-(source_code)
+(source_code
+  (find_statement
+    (identifier)
+    (number_literal)
+    (no_error))
+  (if_statement
+    (object_access
+      (identifier)
+      (identifier))
+    (undo_statement
+      (new_expression
+        (qualified_name
+          (identifier)
+          (identifier)
+          (identifier))
+        (arguments
+          (argument
+            (string_literal))
+          (argument
+            (number_literal))))))
+  (message_statement
+    (qualified_name
+      (identifier)
+      (identifier)))
+  (catch_statement
+    (identifier)
+    (qualified_name
+      (identifier)
+      (identifier)
+      (identifier))
+    (body
+      (message_statement
+        (function_call
+          (object_access
+            (identifier)
+            (identifier))
+          (arguments
+            (argument
+              (number_literal))))
+        (function_call
+          (object_access
+            (identifier)
+            (identifier))
+          (arguments
+            (argument
+              (number_literal)))))))
+  (repeat_statement
+    (identifier)
+    (body
+      (do_block
+        (body
+          (undo_statement
+            (identifier))))))
+  (undo_statement
+    (identifier))
+  (undo_statement
+    (identifier)))

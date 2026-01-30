@@ -86,6 +86,7 @@ END CLASS.
     (annotation
       name: (identifier))
     (method_definition
+      type: (identifier)
       name: (identifier)
       (parameters)
       (body
@@ -129,6 +130,7 @@ END CLASS.
       (property_accessor)
       (property_accessor))
     (method_definition
+      type: (identifier)
       name: (identifier)
       (parameters
         (parameter
@@ -157,13 +159,14 @@ END CLASS.
       left: (identifier)
       right: (identifier)
       right: (identifier))
-    (method_definition
-      type: (identifier)
-      name: (identifier)
-      (parameters
-        (parameter
-          name: (identifier)
-          type: (identifier)))))
+    (interface_body_item
+      (method_definition
+        type: (identifier)
+        name: (identifier)
+        (parameters
+          (parameter
+            name: (identifier)
+            type: (identifier))))))
   (class_definition
     name: (identifier)
     (constructor_definition
@@ -178,6 +181,7 @@ END CLASS.
             (string_literal)
             (identifier)))))
     (method_definition
+      type: (identifier)
       name: (identifier)
       (parameters)
       (body

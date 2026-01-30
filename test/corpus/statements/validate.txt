@@ -39,4 +39,54 @@ VALIDATE sports.Item NO-ERROR.
 
 -------------------------------------------------------------------------------
 
-(source_code)
+(source_code
+  (repeat_statement
+    (identifier)
+    (body
+      (prompt_for_statement
+        (prompt_for_item
+          (qualified_name
+            (identifier)
+            (identifier))))
+      (find_statement
+        (identifier)
+        (using_phrase
+          (qualified_name
+            (identifier)
+            (identifier)))
+        (no_error))
+      (if_statement
+        (unary_expression
+          (available_expression
+            (identifier)))
+        (do_block
+          (body
+            (create_statement
+              (identifier))
+            (assign_statement
+              (assign_pair
+                (qualified_name
+                  (identifier)
+                  (identifier))))
+            (update_statement
+              (update_item
+                (qualified_name
+                  (identifier)
+                  (identifier)))
+              (update_item
+                (qualified_name
+                  (identifier)
+                  (identifier))))
+            (validate_statement
+              (identifier))))
+        (display_statement
+          (qualified_name
+            (identifier)
+            (identifier))
+          (qualified_name
+            (identifier)
+            (identifier))))))
+  (validate_statement
+    (qualified_name
+      (identifier)
+      (identifier))))

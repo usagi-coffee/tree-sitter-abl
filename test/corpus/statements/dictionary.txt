@@ -28,12 +28,9 @@ IF ans THEN DICTIONARY.
     (no_undo))
   (display_statement
     (string_literal)
-    (identifier)
-    (identifier)
-    (number_literal)
-    (identifier)
-    (number_literal)
-    (identifier))
+    (frame_phrase
+      (number_literal)
+      (number_literal)))
   (update_statement
     (update_item
       (identifier)))

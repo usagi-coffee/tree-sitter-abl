@@ -84,8 +84,7 @@ VIEW STREAM-HANDLE hS FRAME f1.
         (qualified_name
           (identifier)
           (identifier))
-        (identifier)
-        (identifier))
+        (frame_phrase))
       (form_statement
         (form_item
           (identifier))

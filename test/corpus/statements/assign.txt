@@ -290,18 +290,18 @@ c = "Trim":T.
   (assignment_statement
     left: (identifier)
     operator: (assignment_operator)
-    right: (in_frame_expression
-      value: (object_access
-        left: (identifier)
-        right: (identifier))
+    right: (object_access
+      left: (identifier)
+      right: (identifier))
+    (in_frame_phrase
       frame: (identifier)))
   (assignment_statement
     left: (identifier)
     operator: (assignment_operator)
     right: (unary_expression
-      (in_frame_expression
-        value: (identifier)
-        frame: (identifier))))
+      (identifier))
+    (in_frame_phrase
+      frame: (identifier)))
   (assignment_statement
     left: (identifier)
     operator: (assignment_operator)

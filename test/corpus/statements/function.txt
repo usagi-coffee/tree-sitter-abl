@@ -510,11 +510,11 @@ END FUNCTION.
 
 (source_code
   (function_definition
-    (access_modifier)
     name: (identifier)
     type: (identifier)
-    (function_parameter_list
-      (function_parameter
+    (access_modifier)
+    (parameters
+      (parameter
         name: (identifier)
         type: (identifier)))
     (return_statement
@@ -536,8 +536,8 @@ FUNCTION calcTotal RETURNS DECIMAL (INPUT orderNum AS INTEGER) MAP TO getTotal I
   (function_forward_definition
     name: (identifier)
     type: (identifier)
-    (function_parameter_list
-      (function_parameter
+    (parameters
+      (parameter
         name: (identifier)
         type: (identifier)))
     (map_phrase

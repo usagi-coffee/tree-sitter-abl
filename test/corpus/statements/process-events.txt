@@ -28,4 +28,41 @@ END.
 
 --------------------------------------------------------------------------------
 
-(source_code)
+(source_code
+  (variable_definition
+    (identifier)
+    (identifier)
+    (no_undo))
+  (variable_definition
+    (identifier)
+    (identifier)
+    (no_undo))
+  (button_definition
+    (identifier)
+    (button_option
+      (string_literal)))
+  (display_statement
+    (identifier))
+  (on_statement
+    (identifier)
+    (identifier)
+    (assignment_statement
+      (identifier)
+      (assignment_operator)
+      (boolean_literal)))
+  (enable_statement
+    (enable_item
+      (identifier)))
+  (do_block
+    (identifier)
+    (number_literal)
+    (number_literal)
+    (body
+      (display_statement
+        (identifier)
+        (identifier)
+        (identifier))
+      (process_events_statement)
+      (if_statement
+        (identifier)
+        (leave_statement)))))

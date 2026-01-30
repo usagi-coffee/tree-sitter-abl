@@ -13,5 +13,10 @@ module.exports = ({ kw, tkw }) => ({
       seq(kw("STREAM-HANDLE"), field("handle", $._expression)),
     ),
   __down_frame_phrase: ($) =>
-    seq(kw("WITH"), kw("FRAME"), field("frame", $.identifier)),
+    seq(
+      kw("WITH"),
+      kw("FRAME"),
+      field("frame", $.identifier),
+      optional(tkw("NO-LABELS")),
+    ),
 });

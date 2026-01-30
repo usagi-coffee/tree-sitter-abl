@@ -156,10 +156,8 @@ DISPLAY Customer EXCEPT Comments PrivateNotes WITH FRAME fCust NO-ERROR.
     (identifier)
     (identifier)
     (identifier)
-    (identifier)
-    (identifier)
-    (identifier)
-    (identifier)))
+    (frame_phrase
+      (identifier))))
 
 ================================================================================
 DISPLAY with format, WHEN, and @ base-field
@@ -171,13 +169,12 @@ DISPLAY orderTotal FORMAT "->>>,>>9.99" WHEN showTotal @ baseTotal.
 
 (source_code
   (display_statement
-    (display_item
-      value: (identifier)
-      (format_phrase
-        (format_option
-          (string_literal)))
-      when: (identifier)
-      base: (identifier))))
+    (identifier)
+    (format_phrase
+      (format_option
+        (string_literal)))
+    when: (identifier)
+    base: (identifier)))
 
 ================================================================================
 DISPLAY - Reference snippets

@@ -84,6 +84,7 @@ module.exports = ({ kw, tkw }) => ({
           tkw("NO-BOX"),
           seq(kw("ROW"), $._expression),
           seq(kw("COLUMN"), $._expression),
+          seq(kw("VIEW-AS"), tkw("DIALOG-BOX")),
         ),
       ),
     ),

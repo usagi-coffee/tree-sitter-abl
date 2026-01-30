@@ -26,6 +26,7 @@ module.exports = ({ tkw }) => ({
         ),
       ),
       seq(tkw("LEAVE"), optional(field("leave_label", $.identifier))),
+      seq(tkw("NEXT"), optional(field("next_label", $.identifier))),
       seq(tkw("RETRY"), optional(field("retry_label", $.identifier))),
       seq(
         tkw("RETURN"),

@@ -8,22 +8,46 @@ module.exports = ({ kw, tkw }) => ({
       $._terminator,
     ),
   __open_query_body: ($) =>
-    seq(
-      choice(kw("FOR"), tkw("PRESELECT")),
-      tkw("EACH"),
-      alias($.__open_query_record_phrase, $.record_phrase),
-      repeat(
-        seq(
-          ",",
-          choice(tkw("EACH"), tkw("FIRST"), tkw("LAST")),
-          alias($.__open_query_record_phrase, $.record_phrase),
+    choice(
+      seq(
+        choice(kw("FOR"), tkw("PRESELECT")),
+        tkw("EACH"),
+        alias($.__open_query_record_phrase, $.record_phrase),
+        repeat(
+          seq(
+            ",",
+            choice(tkw("EACH"), tkw("FIRST"), tkw("LAST")),
+            alias($.__open_query_record_phrase, $.record_phrase),
+          ),
         ),
+        optional(alias($.__open_query_tuning, $.query_tuning)),
+        tkw("BREAK"),
+        repeat(alias($.__open_query_by_phrase, $.by_phrase)),
+        optional(
+          field(
+            "lock",
+            choice(tkw("SHARE-LOCK"), tkw("EXCLUSIVE-LOCK"), tkw("NO-LOCK")),
+          ),
+        ),
+        optional(tkw("INDEXED-REPOSITION")),
+        optional(seq(kw("MAX-ROWS"), field("max_rows", $._expression))),
       ),
-      optional(alias($.__open_query_tuning, $.query_tuning)),
-      optional(tkw("BREAK")),
-      repeat(alias($.__open_query_by_phrase, $.by_phrase)),
-      optional(tkw("INDEXED-REPOSITION")),
-      optional(seq(kw("MAX-ROWS"), field("max_rows", $._expression))),
+      seq(
+        choice(kw("FOR"), tkw("PRESELECT")),
+        tkw("EACH"),
+        alias($.__open_query_record_phrase, $.record_phrase),
+        repeat(
+          seq(
+            ",",
+            choice(tkw("EACH"), tkw("FIRST"), tkw("LAST")),
+            alias($.__open_query_record_phrase, $.record_phrase),
+          ),
+        ),
+        optional(alias($.__open_query_tuning, $.query_tuning)),
+        repeat(alias($.__open_query_by_phrase, $.by_phrase)),
+        optional(tkw("INDEXED-REPOSITION")),
+        optional(seq(kw("MAX-ROWS"), field("max_rows", $._expression))),
+      ),
     ),
   __open_query_record_phrase: ($) =>
     seq(

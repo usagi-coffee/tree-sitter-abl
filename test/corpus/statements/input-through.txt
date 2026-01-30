@@ -71,12 +71,15 @@ INPUT CLOSE.
     (set_item
       (identifier))
     (frame_phrase
-      (identifier)))
+      (identifier)
+      (frame_option)
+      (frame_option)))
   (display_statement
     (identifier)
     (identifier)
-    (identifier)
-    (string_literal))
+    (format_phrase
+      (format_option
+        (string_literal))))
   (input_statement)
   (variable_definition
     (identifier)
@@ -117,14 +120,15 @@ INPUT CLOSE.
         (set_item
           (identifier))
         (frame_phrase
+          (frame_option)
+          (frame_option)
           (identifier)))
       (display_statement
         (identifier)
         (identifier)
         (identifier)
-        (identifier)
-        (identifier)
-        (identifier))
+        (frame_phrase
+          (identifier)))
       (down_statement
         (frame_phrase
           (identifier)))))

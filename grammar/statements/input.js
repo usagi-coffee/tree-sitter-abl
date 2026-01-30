@@ -60,8 +60,16 @@ module.exports = ({ kw, tkw }) => ({
       tkw("NO-CONVERT"),
       seq(
         kw("CONVERT"),
-        optional(seq(kw("TARGET"), field("target", $.string_literal))),
-        optional(seq(kw("SOURCE"), field("source", $.string_literal))),
+        choice(
+          seq(
+            optional(seq(kw("TARGET"), field("target", $.string_literal))),
+            optional(seq(kw("SOURCE"), field("source", $.string_literal))),
+          ),
+          seq(
+            optional(seq(kw("SOURCE"), field("source", $.string_literal))),
+            optional(seq(kw("TARGET"), field("target", $.string_literal))),
+          ),
+        ),
       ),
     ),
   __input_stream_phrase: ($) => seq(kw("STREAM"), field("name", $.identifier)),

@@ -44,7 +44,7 @@ module.exports = ({ kw, tkw }) => ({
     choice(
       alias($.__output_lob_dir_phrase, $.lob_dir_phrase),
       alias($.__output_num_copies_phrase, $.num_copies_phrase),
-      kw("COLLATE"),
+      tkw("COLLATE"),
       choice(kw("LANDSCAPE"), kw("PORTRAIT")),
       alias($.__output_append_phrase, $.append_phrase),
       kw("BINARY"),
@@ -108,7 +108,12 @@ module.exports = ({ kw, tkw }) => ({
         seq(tkw("VALUE"), "(", $._expression, ")"),
       ),
     ),
-  __output_map_entry: ($) => choice($.identifier, $.string_literal),
+  __output_map_entry: ($) =>
+    choice(
+      seq($.identifier, repeat(seq("/", $.identifier))),
+      $.identifier,
+      $.string_literal,
+    ),
   __output_to_target: ($) =>
     choice(
       seq(kw("PRINTER"), optional(field("printer", $.__output_printer_target))),

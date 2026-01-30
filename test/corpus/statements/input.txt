@@ -48,4 +48,44 @@ INPUT FROM VALUE(cPath) CONVERT SOURCE "ibm850" TARGET "utf-8".
 
 --------------------------------------------------------------------------------
 
-(source_code)
+(source_code
+  (input_statement
+    (function_call
+      (identifier)
+      (arguments
+        (argument
+          (string_literal)))))
+  (repeat_statement
+    (body
+      (prompt_for_statement
+        (prompt_for_item
+          (qualified_name
+            (identifier)
+            (identifier)))
+        (prompt_for_item
+          (qualified_name
+            (identifier)
+            (identifier))))
+      (find_statement
+        (identifier)
+        (using_phrase
+          (input_expression
+            (qualified_name
+              (identifier)
+              (identifier)))))
+      (assign_statement
+        (assign_pair
+          (qualified_name
+            (identifier)
+            (identifier))))))
+  (input_statement)
+  (input_statement
+    (string_literal))
+  (input_statement
+    (string_literal))
+  (input_statement)
+  (input_statement
+    (identifier)
+    (convert_phrase
+      (string_literal)
+      (string_literal))))

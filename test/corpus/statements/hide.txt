@@ -45,24 +45,17 @@ HIDE ALL NO-PAUSE IN WINDOW w1.
       (identifier)))
   (display_statement
     (string_literal)
-    (identifier)
-    (identifier)
-    (identifier)
-    (identifier)
-    (number_literal)
-    (identifier)
-    (number_literal))
+    (frame_phrase
+      (identifier)
+      (number_literal)
+      (number_literal)))
   (display_statement
     (string_literal)
-    (identifier)
-    (identifier)
-    (identifier)
-    (identifier)
-    (number_literal)
-    (identifier)
-    (number_literal)
-    (number_literal)
-    (identifier))
+    (frame_phrase
+      (identifier)
+      (number_literal)
+      (number_literal)
+      (number_literal)))
   (message_statement
     (string_literal))
   (update_statement

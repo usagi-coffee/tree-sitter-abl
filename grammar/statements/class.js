@@ -280,7 +280,7 @@ module.exports = ({ kw, tkw }) => ({
 
   __method_return_type: ($) =>
     choice(
-      tkw("VOID"),
+      field("type", alias(tkw("VOID"), $.identifier)),
       seq(
         optional(kw("CLASS")),
         field("type", $._type_or_string),

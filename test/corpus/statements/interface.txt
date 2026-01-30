@@ -46,9 +46,9 @@ END INTERFACE.
       (method_definition
         type: (identifier)
         name: (identifier)
-        (method_parameter_list
-          (method_parameter
+        (parameters
+          (parameter
             name: (identifier)
             type: (identifier))
-          (method_parameter
+          (parameter
             dataset: (identifier)))))))

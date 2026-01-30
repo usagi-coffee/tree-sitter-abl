@@ -44,9 +44,9 @@ REPEAT:
 END.
 INPUT CLOSE.
 
-DEFINE VARIABLE cnum NO-UNDO LIKE Customer.CustNum.
-DEFINE VARIABLE cname NO-UNDO LIKE Customer.Name.
-DEFINE VARIABLE cmax NO-UNDO LIKE Customer.CreditLimit.
+DEFINE VARIABLE cnum LIKE Customer.CustNum NO-UNDO.
+DEFINE VARIABLE cname LIKE Customer.Name NO-UNDO.
+DEFINE VARIABLE cmax LIKE Customer.CreditLimit NO-UNDO.
 INPUT FROM custdump2.
 FOR EACH Customer:
   IMPORT DELIMITER ";" cnum cname cmax.
@@ -71,4 +71,105 @@ INPUT CLOSE.
 
 --------------------------------------------------------------------------------
 
-(source_code)
+(source_code
+  (input_statement
+    (qualified_name
+      (identifier)
+      (identifier)))
+  (disable_triggers_statement
+    (identifier))
+  (repeat_statement
+    (body
+      (create_statement
+        (identifier))
+      (import_statement
+        (identifier))))
+  (input_statement)
+  (variable_definition
+    (identifier)
+    (qualified_name
+      (identifier)
+      (identifier))
+    (no_undo))
+  (variable_definition
+    (identifier)
+    (qualified_name
+      (identifier)
+      (identifier))
+    (no_undo))
+  (variable_definition
+    (identifier)
+    (qualified_name
+      (identifier)
+      (identifier))
+    (no_undo))
+  (input_statement
+    (identifier))
+  (for_each_statement
+    (record
+      (identifier))
+    (body
+      (import_statement
+        (delimiter_phrase
+          (string_literal))
+        (identifier)
+        (identifier)
+        (identifier))
+      (display_statement
+        (identifier)
+        (identifier)
+        (identifier))))
+  (input_statement)
+  (variable_definition
+    (identifier)
+    (identifier)
+    (no_undo)
+    (format_option
+      (string_literal)))
+  (input_statement
+    (function_call
+      (identifier)
+      (arguments
+        (argument
+          (string_literal)))))
+  (do_block
+    (boolean_literal)
+    (on_endkey_phrase
+      (undo_phrase))
+    (body
+      (import_statement
+        (unformatted_phrase
+          (identifier)))
+      (display_statement
+        (identifier)
+        (frame_phrase
+          (identifier)))
+      (down_statement
+        (frame_phrase
+          (identifier)))))
+  (input_statement)
+  (variable_definition
+    (identifier)
+    (identifier)
+    (no_undo))
+  (assign_statement
+    (assign_pair
+      (object_access
+        (identifier)
+        (identifier))
+      (string_literal))
+    (assign_pair
+      (function_call
+        (identifier)
+        (arguments
+          (argument
+            (identifier))))
+      (object_access
+        (identifier)
+        (identifier))))
+  (input_statement
+    (string_literal)
+    (convert_phrase))
+  (import_statement
+    (identifier))
+  (input_statement))

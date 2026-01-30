@@ -57,9 +57,8 @@ READKEY PAUSE 0.5.
         (qualified_name
           (identifier)
           (identifier))
-        (identifier)
-        (number_literal)
-        (identifier))
+        (frame_phrase
+          (number_literal)))
       (message_statement
         (string_literal))
       (message_statement

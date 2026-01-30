@@ -6,6 +6,7 @@ module.exports = ({ kw, tkw }) => ({
         field("left", $._assignable),
         field("operator", $.assignment_operator),
         field("right", choice($.array_initializer, $._expression)),
+        optional(alias($.__assignment_in_frame, $.in_frame_phrase)),
         optional(alias($.__assignment_no_error, $.no_error)),
         $._terminator,
       ),
@@ -23,8 +24,12 @@ module.exports = ({ kw, tkw }) => ({
   __assign_pair: ($) =>
     seq(
       field("left", $._assignable),
-      "=",
-      field("right", choice($.array_initializer, $._expression)),
+      optional(
+        seq(
+          "=",
+          field("right", choice($.array_initializer, $._expression)),
+        ),
+      ),
       optional(
         alias($.__assign_when_available_phrase, $.when_available_phrase),
       ),
@@ -35,4 +40,6 @@ module.exports = ({ kw, tkw }) => ({
   __assign_record_name: ($) => choice($.identifier, $.qualified_name),
   __assign_no_error: ($) => tkw("NO-ERROR"),
   __assignment_no_error: ($) => tkw("NO-ERROR"),
+  __assignment_in_frame: ($) =>
+    seq(kw("IN"), kw("FRAME"), field("frame", $.identifier)),
 });

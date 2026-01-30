@@ -2,20 +2,18 @@ module.exports = ({ kw, tkw }) => ({
   temp_table_definition: ($) =>
     seq(
       choice(kw("DEFINE"), kw("DEF")),
-      seq(
-        optional(alias($.__temp_table_shared_scope, $.shared_variable_scope)),
-        optional(alias($.__temp_table_access_modifier, $.access_modifier)),
-        optional(alias($.__temp_table_static_modifier, $.static_modifier)),
-        optional(
-          alias(
-            $.__temp_table_serialization_modifier,
-            $.serialization_modifier,
-          ),
+      optional(alias($.__temp_table_shared_scope, $.shared_variable_scope)),
+      optional(alias($.__temp_table_access_modifier, $.access_modifier)),
+      optional(alias($.__temp_table_static_modifier, $.static_modifier)),
+      optional(
+        alias(
+          $.__temp_table_serialization_modifier,
+          $.serialization_modifier,
         ),
-        kw("TEMP-TABLE"),
-        $.__temp_table_body,
-        $._terminator,
       ),
+      kw("TEMP-TABLE"),
+      $.__temp_table_body,
+      $._terminator,
     ),
 
   __temp_table_body: ($) =>
@@ -48,7 +46,7 @@ module.exports = ({ kw, tkw }) => ({
           alias($.__temp_table_before_table_phrase, $.before_table_phrase),
         ),
       ),
-      repeat1(
+      repeat(
         choice(
           alias($.__temp_table_field, $.temp_table_field),
           alias($.__temp_table_index, $.temp_table_index),

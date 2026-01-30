@@ -67,15 +67,12 @@ END.
         (qualified_name
           left: (identifier)
           right: (identifier))
-        (identifier)
-        (identifier)
-        (identifier))
+        (frame_phrase
+          frame: (identifier)))
       (display_statement
         (identifier)
-        (identifier)
-        (identifier)
-        (identifier)
-        (identifier))
+        (frame_phrase
+          frame: (identifier)))
       (pause_statement)
       (get_statement
         query: (identifier)))))
