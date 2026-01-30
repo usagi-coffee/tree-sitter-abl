@@ -6374,7 +6374,7 @@
     }
   },
   {
-    "type": "cdecl_option",
+    "type": "cdecl",
     "named": true,
     "fields": {}
   },
@@ -33694,7 +33694,7 @@
     }
   },
   {
-    "type": "ordinal_option",
+    "type": "ordinal_phrase",
     "named": true,
     "fields": {},
     "children": {
@@ -36642,6 +36642,11 @@
     }
   },
   {
+    "type": "pascal",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "pause_statement",
     "named": true,
     "fields": {
@@ -36916,6 +36921,11 @@
         ]
       }
     }
+  },
+  {
+    "type": "persistent",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "persistent_option",
@@ -37365,7 +37375,7 @@
           "named": true
         },
         {
-          "type": "cdecl_option",
+          "type": "cdecl",
           "named": true
         },
         {
@@ -37629,7 +37639,7 @@
           "named": true
         },
         {
-          "type": "ordinal_option",
+          "type": "ordinal_phrase",
           "named": true
         },
         {
@@ -37673,11 +37683,15 @@
           "named": true
         },
         {
+          "type": "pascal",
+          "named": true
+        },
+        {
           "type": "pause_statement",
           "named": true
         },
         {
-          "type": "persistent_option",
+          "type": "persistent",
           "named": true
         },
         {
@@ -37817,6 +37831,10 @@
           "named": true
         },
         {
+          "type": "stdcall",
+          "named": true
+        },
+        {
           "type": "stop_statement",
           "named": true
         },
@@ -37861,7 +37879,7 @@
           "named": true
         },
         {
-          "type": "thread_safe_option",
+          "type": "thread_safe",
           "named": true
         },
         {
@@ -48601,6 +48619,11 @@
     }
   },
   {
+    "type": "stdcall",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "stop_after_phrase",
     "named": true,
     "fields": {
@@ -52064,7 +52087,7 @@
     }
   },
   {
-    "type": "thread_safe_option",
+    "type": "thread_safe",
     "named": true,
     "fields": {}
   },
@@ -58913,6 +58936,10 @@
     "named": false
   },
   {
+    "type": "PASCAL",
+    "named": false
+  },
+  {
     "type": "PAUSE",
     "named": false
   },
@@ -59310,6 +59337,10 @@
   },
   {
     "type": "STATUS",
+    "named": false
+  },
+  {
+    "type": "STDCALL",
     "named": false
   },
   {

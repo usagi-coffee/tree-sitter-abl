@@ -42086,23 +42086,6 @@
           }
         },
         {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "SYMBOL",
-                "name": "__procedure_external_phrase"
-              },
-              "named": true,
-              "value": "external_phrase"
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
-        },
-        {
           "type": "SYMBOL",
           "name": "_colon"
         },
@@ -42243,7 +42226,7 @@
             "name": "__procedure_cdecl_option"
           },
           "named": true,
-          "value": "cdecl_option"
+          "value": "cdecl"
         },
         {
           "type": "ALIAS",
@@ -42252,7 +42235,7 @@
             "name": "__procedure_ordinal_option"
           },
           "named": true,
-          "value": "ordinal_option"
+          "value": "ordinal_phrase"
         },
         {
           "type": "ALIAS",
@@ -42261,7 +42244,7 @@
             "name": "__procedure_persistent_option"
           },
           "named": true,
-          "value": "persistent_option"
+          "value": "persistent"
         },
         {
           "type": "ALIAS",
@@ -42270,7 +42253,34 @@
             "name": "__procedure_thread_safe_option"
           },
           "named": true,
-          "value": "thread_safe_option"
+          "value": "thread_safe"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "__procedure_external_phrase"
+          },
+          "named": true,
+          "value": "external_phrase"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "__procedure_pascal_option"
+          },
+          "named": true,
+          "value": "pascal"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "__procedure_stdcall_option"
+          },
+          "named": true,
+          "value": "stdcall"
         }
       ]
     },
@@ -42286,6 +42296,19 @@
       },
       "named": false,
       "value": "CDECL"
+    },
+    "__procedure_stdcall_option": {
+      "type": "ALIAS",
+      "content": {
+        "type": "TOKEN",
+        "content": {
+          "type": "PATTERN",
+          "value": "STDCALL",
+          "flags": "i"
+        }
+      },
+      "named": false,
+      "value": "STDCALL"
     },
     "__procedure_ordinal_option": {
       "type": "SEQ",
@@ -42321,6 +42344,19 @@
       },
       "named": false,
       "value": "PERSISTENT"
+    },
+    "__procedure_pascal_option": {
+      "type": "ALIAS",
+      "content": {
+        "type": "TOKEN",
+        "content": {
+          "type": "PATTERN",
+          "value": "PASCAL",
+          "flags": "i"
+        }
+      },
+      "named": false,
+      "value": "PASCAL"
     },
     "__procedure_thread_safe_option": {
       "type": "ALIAS",

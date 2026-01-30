@@ -398,11 +398,11 @@ PROCEDURE doSuper IN SUPER.
       type: (identifier)))
   (procedure_definition
     name: (identifier)
-    (cdecl_option)
-    (ordinal_option
+    (cdecl)
+    (ordinal_phrase
       (number_literal))
-    (persistent_option)
-    (thread_safe_option)
+    (persistent)
+    (thread_safe)
     (external_phrase
       library: (string_literal))
     (parameter_definition
