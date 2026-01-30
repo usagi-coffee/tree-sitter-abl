@@ -25,10 +25,10 @@ module.exports = ({ kw, tkw }) => ({
 
   __display_item: ($) =>
     choice(
-      tkw("SKIP"),
-      tkw("SPACE"),
-      seq(kw("SKIP"), "(", optional($._expression), ")"),
-      seq(kw("SPACE"), "(", optional($._expression), ")"),
+      prec(1, seq(kw("SKIP"), "(", optional($._expression), ")")),
+      prec(1, seq(kw("SPACE"), "(", optional($._expression), ")")),
+      kw("SKIP"),
+      kw("SPACE"),
       seq(
         choice(
           $._expression,
