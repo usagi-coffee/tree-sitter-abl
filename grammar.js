@@ -32,7 +32,7 @@ module.exports = grammar({
   ],
   word: ($) => $.identifier,
   conflicts: ($) => [
-    // Core disambiguates
+    // Core disambiguations
     [$._statement, $.if_statement],
     [$._expression, $._statement_expression],
     [$._primary_expression, $._assignable],
@@ -49,14 +49,18 @@ module.exports = grammar({
       $.__variable_access_modifier,
     ],
     [$.__event_access_modifier, $.__variable_access_modifier],
-    [$.__dataset_access_modifier, $.__temp_table_access_modifier],
-    [$.__dataset_access_modifier, $.__temp_table_access_modifier, $.__variable_access_modifier],
-    [$.__dataset_access_modifier, $.__event_access_modifier, $.__temp_table_access_modifier],
-    [$.__dataset_access_modifier, $.__event_access_modifier, $.__temp_table_access_modifier, $.__variable_access_modifier],
+    [
+      $.__dataset_access_modifier,
+      $.__temp_table_access_modifier,
+      $.__variable_access_modifier,
+    ],
     [$.__dataset_shared_scope, $.__temp_table_shared_scope],
     [$.__event_static_modifier, $.__variable_static_modifier],
-    [$.__dataset_static_modifier, $.__temp_table_static_modifier],
-    [$.__dataset_static_modifier, $.__temp_table_static_modifier, $.__variable_static_modifier],
+    [
+      $.__dataset_static_modifier,
+      $.__temp_table_static_modifier,
+      $.__variable_static_modifier,
+    ],
     [$.__property_modifier, $.__event_abstract_modifier],
     [$.__property_modifier, $.__event_override_modifier],
 
@@ -147,7 +151,8 @@ module.exports = grammar({
 
       // Literals
       number_literal: ($) => token(prec(-1, /([0-9]+(\.[0-9]+)?|\.[0-9]+)/)),
-      _signed_number_literal: ($) => token(prec(1, /[+-]([0-9]+(\.[0-9]+)?|\.[0-9]+)/)),
+      _signed_number_literal: ($) =>
+        token(prec(1, /[+-]([0-9]+(\.[0-9]+)?|\.[0-9]+)/)),
       date_literal: ($) =>
         token(prec(1, /[0-9]{1,2}[./][0-9]{1,2}[./][0-9]{2,4}/)),
       string_literal: ($) =>

@@ -69498,21 +69498,6 @@
     ],
     [
       "__dataset_access_modifier",
-      "__temp_table_access_modifier"
-    ],
-    [
-      "__dataset_access_modifier",
-      "__temp_table_access_modifier",
-      "__variable_access_modifier"
-    ],
-    [
-      "__dataset_access_modifier",
-      "__event_access_modifier",
-      "__temp_table_access_modifier"
-    ],
-    [
-      "__dataset_access_modifier",
-      "__event_access_modifier",
       "__temp_table_access_modifier",
       "__variable_access_modifier"
     ],
@@ -69523,10 +69508,6 @@
     [
       "__event_static_modifier",
       "__variable_static_modifier"
-    ],
-    [
-      "__dataset_static_modifier",
-      "__temp_table_static_modifier"
     ],
     [
       "__dataset_static_modifier",
