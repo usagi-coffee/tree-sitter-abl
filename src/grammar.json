@@ -64066,40 +64066,6 @@
                 "type": "TOKEN",
                 "content": {
                   "type": "PATTERN",
-                  "value": "THROW",
-                  "flags": "i"
-                }
-              },
-              "named": false,
-              "value": "THROW"
-            },
-            {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "FIELD",
-                  "name": "throw_value",
-                  "content": {
-                    "type": "SYMBOL",
-                    "name": "_expression"
-                  }
-                },
-                {
-                  "type": "BLANK"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "type": "SEQ",
-          "members": [
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "PATTERN",
                   "value": "LEAVE",
                   "flags": "i"
                 }

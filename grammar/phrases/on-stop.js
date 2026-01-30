@@ -10,7 +10,6 @@ module.exports = ({ kw, tkw }) => ({
     ),
   __on_stop_action: ($) =>
     choice(
-      seq(tkw("THROW"), optional(field("throw_value", $._expression))),
       seq(tkw("LEAVE"), optional(field("leave_label", $.identifier))),
       seq(tkw("NEXT"), optional(field("next_label", $.identifier))),
       seq(tkw("RETRY"), optional(field("retry_label", $.identifier))),
