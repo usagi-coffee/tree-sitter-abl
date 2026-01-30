@@ -43,7 +43,7 @@
   - Example: `bun run reference '*statement*'`: Returns all statements entries that include `statement` (names only).
   - Example: `bun run reference '*'`: Returns all entries (names only).
 
-Strongly prefer using these commands as they have helpful side-effects like returning `STATE_COUNT`.
+Strongly prefer using these commands as they have helpful side-effects like returning `STATE_COUNT` or `ACTION_COUNT`.
 
 ## Conventions
 
@@ -59,7 +59,7 @@ Strongly prefer using these commands as they have helpful side-effects like retu
 - Treat `(ERROR)` and `(MISSING)` nodes in the test output aserrors that need to be fixed.
 - Use compact rule formatting: keep one-line rules adjacent with no blank lines, avoid blank lines between consecutive one-line rules.
 - The grammar should avoid permissive or catch-all rules that allow invalid syntax to be parsed successfully.
-- ABL grammar is filled with optionals, be careful not to explode `tree-sitter`'s `STATE_COUNT`, always check modification's impact on `STATE_COUNT`.
+- ABL grammar is filled with optionals, be careful not to explode `tree-sitter`'s `STATE_COUNT` AND `ACTION_COUNT`, always check modification's impact on `STATE_COUNT`.
 - Do not adjust or remove tests just to satisfy test passing, just fix the underlying parsing issue or ask me first to remove if it's really not supported.
 - Don't do unnecessary comments like `// something is above`.
 
@@ -71,7 +71,7 @@ Strongly prefer using these commands as they have helpful side-effects like retu
 - Never use `tree-sitter` CLI directly, use workflow commands.
 - Parser generation can take up to 1 minute so adjust timeout accordingly.
 - `bun run test` returns only failed cases and failed syntax tree OR a message that everything went well.
-- Parser does not build after reaching the hard limit of 65,535 `STATE_COUNT` but bugs might occur at the top-end of the limit (anything above ~60,000) e.g `tree-sitter test` might return status `0` but produce no output or return `ts_parser_parse: Assertion 'self->finished_tree.ptr' failed.` error.
+- Parser does not build after reaching the hard limit of 65,535 `STATE_COUNT` or `ACTION_COUNT` but bugs might occur at the top-end of the limit (anything above ~60,000) e.g `tree-sitter test` might return status `0` but produce no output or return `ts_parser_parse: Assertion 'self->finished_tree.ptr' failed.` error.
 - When using `alias`, `tree-sitter` handles undefined rules by using the property name as the symbol name so it's okay to alias to `$.something_that_wasn't defined`.
 - `terminator`, `terminator_dot` or rules prefixed with `_` (unless aliased) should never be visible in the syntax tree output.
 - `tkw` and `kw` are passed down, to access them unpack it inside the statement module e.g `module.exports = ({ kw, tkw }) => ({`.
