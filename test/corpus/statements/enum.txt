@@ -40,99 +40,136 @@ END ENUM.
 (source_code
   (enum_statement
     (identifier)
-    (enum_body
-      (enum_member
-        (identifier))
-      (enum_member
-        (identifier)
-        (enum_member_value
-          (identifier)))
-      (enum_member
-        (identifier))
-      (enum_member
-        (identifier))
-      (enum_member
-        (identifier))))
+    (member
+      (identifier))
+    (member
+      (identifier)
+      (identifier))
+    (member
+      (identifier))
+    (member
+      (identifier))
+    (member
+      (identifier)))
   (enum_statement
     (identifier)
-    (enum_body
-      (enum_member
-        (identifier)
-        (enum_member_value
-          (number_literal)))
-      (enum_member
-        (identifier))
-      (enum_member
-        (identifier))
-      (enum_member
-        (identifier)
-        (enum_member_value
-          (identifier)))
-      (enum_member
-        (identifier)
-        (enum_member_value
-          (enum_member_value_list
-            (identifier)
-            (identifier))))
-      (enum_member
-        (identifier))
-      (enum_member
-        (identifier))
-      (enum_member
-        (identifier))))
+    (member
+      (identifier)
+      (number_literal))
+    (member
+      (identifier))
+    (member
+      (identifier))
+    (member
+      (identifier)
+      (identifier))
+    (member
+      (identifier)
+      (identifier)
+      (identifier))
+    (member
+      (identifier))
+    (member
+      (identifier))
+    (member
+      (identifier)))
   (enum_statement
     (identifier)
-    (enum_body
-      (enum_member
-        (identifier))
-      (enum_member
-        (identifier))
-      (enum_member
-        (identifier))
-      (enum_member
-        (identifier))))
+    (member
+      (identifier))
+    (member
+      (identifier))
+    (member
+      (identifier))
+    (member
+      (identifier)))
   (enum_statement
     (identifier)
-    (enum_body
-      (enum_member
-        (identifier)
-        (enum_member_value
-          (number_literal)))
-      (enum_member
-        (identifier))
-      (enum_member
-        (identifier)
-        (enum_member_value
-          (identifier)))
-      (enum_member
-        (identifier)
-        (enum_member_value
-          (enum_member_value_list
-            (identifier)
-            (identifier)))))))
+    (member
+      (identifier)
+      (number_literal))
+    (member
+      (identifier))
+    (member
+      (identifier)
+      (identifier))
+    (member
+      (identifier)
+      (identifier)
+      (identifier))))
 
 ================================================================================
 ENUM - Reference snippets and split DEFINE ENUM
 ================================================================================
 
 ENUM Direction:
-DEFINE ENUM North
-South.
-DEFINE ENUM East
-West.
+  DEFINE ENUM North
+  South.
+  DEFINE ENUM East
+  West.
 END ENUM.
 
 ENUM Permission FLAGS:
-DEFINE ENUM None = 0
-Read = 0x01
-Write = 0x02
-Update = 0x02
-ReadWrite = 0x03
-Create = 0x04
-Delete = 0x08
-Execute = 0x10.
+  DEFINE ENUM None = 0
+  Read = 0x01
+  Write = 0x02
+  Update = 0x02
+  ReadWrite = 0x03
+  Create = 0x04
+  Delete = 0x08
+  Execute = 0x10.
 END ENUM.
 
 --------------------------------------------------------------------------------
 
-(source_code)
+(source_code
+  (enum_statement
+    (identifier)
+    (member
+      (identifier))
+    (member
+      (identifier))
+    (member
+      (identifier))
+    (member
+      (identifier)))
+  (enum_statement
+    (identifier)
+    (member
+      (identifier)
+      (number_literal))
+    (member
+      (identifier)
+      (number_literal))
+    (member
+      (identifier))
+    (member
+      (identifier)
+      (number_literal))
+    (member
+      (identifier))
+    (member
+      (identifier)
+      (number_literal))
+    (member
+      (identifier))
+    (member
+      (identifier)
+      (number_literal))
+    (member
+      (identifier))
+    (member
+      (identifier)
+      (number_literal))
+    (member
+      (identifier))
+    (member
+      (identifier)
+      (number_literal))
+    (member
+      (identifier))
+    (member
+      (identifier)
+      (number_literal))
+    (member
+      (identifier))))

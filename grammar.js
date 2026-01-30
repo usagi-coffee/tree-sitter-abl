@@ -37,6 +37,7 @@ module.exports = grammar({
     [$._expression, $._statement_expression],
     [$._primary_expression, $._assignable],
     [$._primary_expression, $.function_call],
+    [$._primary_expression, $.__display_item, $.function_call],
 
     // DEFINE * disambiguation
     [

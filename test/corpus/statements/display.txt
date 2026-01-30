@@ -48,12 +48,11 @@ DISPLAY Customer.Balance (TOTAL).
 
 (source_code
   (display_statement
-    (qualified_name
+    field: (qualified_name
       left: (identifier)
       right: (identifier))
     (aggregate_phrase
-      (aggregate_item
-        operation: (aggregate_operation)))))
+      operation: (aggregate_operation))))
 
 ================================================================================
 DISPLAY abbreviated
@@ -335,12 +334,13 @@ DISPLAY SPACE(2) Customer.Name SKIP(1) Customer.City.
               (qualified_name
                 (identifier)
                 (identifier))
-              (qualified_name
-                (identifier)
-                (identifier)))
-            (aggregate_phrase
-              (aggregate_item
-                (aggregate_operation)))
+              (function_call
+                (qualified_name
+                  (identifier)
+                  (identifier))
+                (arguments
+                  (argument
+                    (identifier)))))
             (identifier)
             (string_literal))))))
   (for_each_statement

@@ -4,27 +4,32 @@ module.exports = ({ kw, tkw }) => ({
   __enum_body: ($) =>
     seq(
       field("name", $.identifier),
-      optional(prec(1, tkw("FLAGS"))),
+      optional(tkw("FLAGS")),
       $._colon,
-      $.enum_body,
+      repeat(
+        seq(
+          kw("DEFINE"),
+          tkw("ENUM"),
+          alias($.__enum_member, $.member),
+          repeat(alias($.__enum_member, $.member)),
+          $._terminator,
+        ),
+      ),
       tkw("END"),
       tkw("ENUM"),
     ),
 
-  enum_body: ($) =>
-    seq(kw("DEFINE"), kw("ENUM"), $.enum_member, repeat($.enum_member), "."),
+  __enum_member: ($) =>
+    seq(field("name", $.identifier), optional(seq("=", $.__enum_member_value))),
 
-  enum_member: ($) =>
-    seq(field("name", $.identifier), optional(seq("=", $.enum_member_value))),
-
-  enum_member_value: ($) =>
+  __enum_member_value: ($) =>
     choice(
       $.number_literal,
       $.identifier,
       $.null_literal,
-      $.enum_member_value_list,
+      $.__enum_member_value_list,
     ),
 
-  enum_member_value_list: ($) =>
+  __enum_member_value_list: ($) =>
     seq($.identifier, repeat1(seq(",", $.identifier))),
 });

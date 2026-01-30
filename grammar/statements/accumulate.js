@@ -1,13 +1,13 @@
-module.exports = ({ kw }) => ({
+module.exports = ({ kw, tkw }) => ({
   accumulate_statement: ($) =>
-    seq(kw("ACCUMULATE"), $.__accumulate_body, $._terminator),
+    seq(tkw("ACCUMULATE"), $.__accumulate_body, $._terminator),
 
   __accumulate_body: ($) =>
     seq(
-      alias($.__accumulate_item, $.accumulate_item),
-      repeat(alias($.__accumulate_item, $.accumulate_item)),
+      alias($.__accumulate_item, $.accumulate),
+      repeat(alias($.__accumulate_item, $.accumulate)),
     ),
 
   __accumulate_item: ($) =>
-    seq(field("value", $._expression), field("aggregate", $.aggregate_phrase)),
+    seq(field("target", $._expression), "(", repeat1($.aggregate_phrase), ")"),
 });

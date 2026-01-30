@@ -132,23 +132,7 @@
         ]
       },
       "operation": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "aggregate_operation",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "accumulate_item",
-    "named": true,
-    "fields": {
-      "aggregate": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
           {
@@ -156,8 +140,14 @@
             "named": true
           }
         ]
-      },
-      "value": {
+      }
+    }
+  },
+  {
+    "type": "accumulate",
+    "named": true,
+    "fields": {
+      "target": {
         "multiple": false,
         "required": true,
         "types": [
@@ -275,6 +265,16 @@
           }
         ]
       }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "aggregate_phrase",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -286,14 +286,19 @@
       "required": true,
       "types": [
         {
-          "type": "accumulate_item",
+          "type": "accumulate",
           "named": true
         }
       ]
     }
   },
   {
-    "type": "aggregate_item",
+    "type": "aggregate_operation",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "aggregate_phrase",
     "named": true,
     "fields": {
       "operation": {
@@ -317,26 +322,6 @@
         },
         {
           "type": "label_phrase",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "aggregate_operation",
-    "named": true,
-    "fields": {}
-  },
-  {
-    "type": "aggregate_phrase",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "aggregate_item",
           "named": true
         }
       ]
@@ -15298,6 +15283,20 @@
           }
         ]
       },
+      "field": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "qualified_name",
+            "named": true
+          }
+        ]
+      },
       "when": {
         "multiple": true,
         "required": false,
@@ -15537,7 +15536,7 @@
     },
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "accum_expression",
@@ -17913,89 +17912,6 @@
     }
   },
   {
-    "type": "enum_body",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "enum_member",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "enum_member",
-    "named": true,
-    "fields": {
-      "name": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": false,
-      "required": false,
-      "types": [
-        {
-          "type": "enum_member_value",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "enum_member_value",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "enum_member_value_list",
-          "named": true
-        },
-        {
-          "type": "identifier",
-          "named": true
-        },
-        {
-          "type": "null_literal",
-          "named": true
-        },
-        {
-          "type": "number_literal",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "enum_member_value_list",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "identifier",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "enum_statement",
     "named": true,
     "fields": {
@@ -18011,11 +17927,11 @@
       }
     },
     "children": {
-      "multiple": false,
-      "required": true,
+      "multiple": true,
+      "required": false,
       "types": [
         {
-          "type": "enum_body",
+          "type": "member",
           "named": true
         }
       ]
@@ -28430,6 +28346,40 @@
         },
         {
           "type": "unary_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "member",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "null_literal",
+          "named": true
+        },
+        {
+          "type": "number_literal",
           "named": true
         }
       ]

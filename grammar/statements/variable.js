@@ -25,6 +25,7 @@ module.exports = ({ kw, tkw }) => ({
   __variable_body: ($) =>
     seq(
       field("name", $.identifier),
+      optional(alias($.__variable_no_undo, $.no_undo)),
       $._variable_type_phrase,
       repeat(
         choice(

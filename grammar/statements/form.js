@@ -27,7 +27,8 @@ module.exports = ({ kw, tkw }) => ({
         choice(
           seq(kw("FRAME"), field("frame", $.identifier)),
           tkw("CENTERED"),
-          seq(optional($.number_literal), tkw("DOWN")),
+          tkw("DOWN"),
+          seq($.number_literal, tkw("DOWN")),
           seq(kw("TITLE"), field("title", $._expression)),
           seq(kw("WIDTH"), $.number_literal),
           tkw("SIDE-LABELS"),
