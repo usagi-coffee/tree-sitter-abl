@@ -11,6 +11,7 @@ const inputExpression = require("./input");
 const accumExpression = require("./accum");
 const frameExpression = require("./frame");
 const menuExpression = require("./menu");
+const queryExpression = require("./query");
 
 module.exports = (ctx) => ({
   ...conditionalExpression(ctx),
@@ -26,4 +27,5 @@ module.exports = (ctx) => ({
   ...inFrameExpression(ctx),
   ...frameExpression(ctx),
   ...menuExpression(ctx),
+  ...queryExpression(ctx),
 });

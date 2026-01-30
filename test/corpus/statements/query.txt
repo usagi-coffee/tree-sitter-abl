@@ -578,10 +578,9 @@ DEFINE QUERY qExceptAll FOR Customer EXCEPT ().
   (assignment_statement
     left: (identifier)
     operator: (assignment_operator)
-    right: (object_access
-      left: (identifier)
-      (identifier))
-    right: (identifier))
+    right: (query_expression
+      query: (identifier)
+      attribute: (identifier)))
   (open_query_statement
     query: (identifier)
     (record_phrase
@@ -589,20 +588,18 @@ DEFINE QUERY qExceptAll FOR Customer EXCEPT ().
     (by_phrase
       by: (qualified_name
         left: (identifier)
-        right: (identifier)))
-    (message_statement
-      (object_access
-        left: (identifier)
-        right: (identifier))
-      (query_definition
-        name: (identifier)
-        (query_table_list
-          table: (identifier)
-          (field_list
-            (identifier)))
-        (query_definition
-          name: (identifier)
-          (query_table_list
-            table: (identifier)
-            (field_list
-              (identifier))))
+        right: (identifier))))
+  (message_statement
+    (object_access
+      left: (identifier)
+      right: (identifier)))
+  (query_definition
+    name: (identifier)
+    (query_table_list
+      table: (identifier)
+      (field_list)))
+  (query_definition
+    name: (identifier)
+    (query_table_list
+      table: (identifier)
+      (field_list))))

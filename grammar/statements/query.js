@@ -38,8 +38,10 @@ module.exports = ({ kw, tkw }) => ({
     seq(
       choice(kw("FIELDS"), kw("EXCEPT")),
       "(",
-      $.__query_field_name,
-      repeat(choice(seq(",", $.__query_field_name), $.__query_field_name)),
+      optional(seq(
+        $.__query_field_name,
+        repeat(choice(seq(",", $.__query_field_name), $.__query_field_name)),
+      )),
       ")",
     ),
   __query_shared_scope: ($) =>
