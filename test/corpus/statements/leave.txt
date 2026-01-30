@@ -32,4 +32,51 @@ END.
 
 --------------------------------------------------------------------------------
 
-(source_code)
+(source_code
+  (variable_definition
+    (identifier)
+    (identifier)
+    (no_undo)
+    (initial_option
+      (string_literal)))
+  (variable_definition
+    (identifier)
+    (identifier)
+    (no_undo)
+    (format_option
+      (string_literal)))
+  (repeat_statement
+    (identifier)
+    (body
+      (ERROR)
+      (repeat_statement
+        (on_endkey_phrase
+          (undo_phrase
+            (identifier)))
+        (body
+          (message_statement
+            (string_literal))
+          (update_statement
+            (update_item
+              (identifier))
+            (update_item
+              (identifier)))
+          (if_statement
+            (binary_expression
+              (function_call
+                (identifier)
+                (arguments
+                  (argument
+                    (identifier))
+                  (argument
+                    (identifier))))
+              (number_literal))
+            (leave_statement
+              (identifier)))
+          (bell_statement)))
+      (if_statement
+        (binary_expression
+          (identifier)
+          (string_literal))
+        (leave_statement
+          (identifier))))))

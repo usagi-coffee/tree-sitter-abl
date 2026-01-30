@@ -487,4 +487,344 @@ DEFINE INPUT PARAMETER pExtent0 AS INTEGER EXTENT 0.
 
 --------------------------------------------------------------------------------
 
-(source_code)
+(source_code
+  (run_statement
+    procedure: (procedure_name)
+    (arguments
+      (argument
+        value: (number_literal))))
+  (parameter_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (display_statement
+    (identifier)
+    (identifier)
+    (string_literal)
+    (frame_phrase
+      (frame_option)))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo)
+    (format_option
+      (string_literal)))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo)
+    (initial_option
+      value: (number_literal)))
+  (run_statement
+    procedure: (procedure_name)
+    (arguments
+      (argument
+        value: (identifier))
+      (argument
+        value: (number_literal))
+      (argument
+        value: (identifier))
+      (argument
+        value: (identifier))))
+  (display_statement
+    (identifier)
+    (identifier)
+    (string_literal)
+    (identifier)
+    (identifier)
+    (string_literal)
+    (frame_phrase
+      (frame_option)))
+  (parameter_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (parameter_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (parameter_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (parameter_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (for_each_statement
+    (record
+      table: (identifier)
+      (no_lock))
+    (body
+      (assignment_statement
+        left: (identifier)
+        operator: (assignment_operator)
+        right: (binary_expression
+          (identifier)
+          (qualified_name
+            left: (identifier)
+            right: (identifier))))))
+  (display_statement
+    (identifier)
+    (identifier)
+    (string_literal)
+    (frame_phrase
+      (frame_option)))
+  (assign_statement
+    (assign_pair
+      left: (identifier)
+      right: (binary_expression
+        (binary_expression
+          (identifier)
+          (identifier))
+        (identifier)))
+    (assign_pair
+      left: (identifier)
+      right: (string_literal)))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (for_each_statement
+    (record
+      table: (identifier))
+    (body
+      (display_statement
+        (qualified_name
+          left: (identifier)
+          right: (identifier))
+        (qualified_name
+          left: (identifier)
+          right: (identifier))
+        (frame_phrase
+          (frame_option
+            (number_literal))))
+      (assignment_statement
+        left: (identifier)
+        operator: (assignment_operator)
+        right: (qualified_name
+          left: (identifier)
+          right: (identifier)))
+      (run_statement
+        procedure: (procedure_name)
+        (arguments
+          (argument
+            value: (identifier))))
+      (assignment_statement
+        left: (qualified_name
+          left: (identifier)
+          right: (identifier))
+        operator: (assignment_operator)
+        right: (identifier))
+      (display_statement
+        (identifier)
+        (identifier)
+        (string_literal))))
+  (parameter_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (prompt_for_statement
+    (prompt_for_item
+      field: (identifier)
+      (format_phrase
+        (label_option
+          (string_literal)))))
+  (assign_statement
+    (assign_pair
+      left: (identifier)))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (binary_expression
+      (identifier)
+      (identifier)))
+  (button_definition
+    name: (identifier)
+    (button_option
+      label: (string_literal)))
+  (do_block
+    (frame_phrase
+      frame: (identifier))
+    (frame_phrase
+      (frame_option))
+    (body
+      (enable_statement
+        (enable_item
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (enable_item
+          field: (identifier)))
+      (on_statement
+        event: (identifier)
+        widget: (identifier)
+        (do_block
+          (body
+            (run_statement
+              procedure: (identifier)
+              (arguments
+                (argument
+                  value: (object_access
+                    left: (qualified_name
+                      left: (identifier)
+                      right: (identifier))
+                    right: (identifier)))
+                (ERROR
+                  (identifier))
+                (argument
+                  value: (identifier))))
+            (if_statement
+              (unary_expression
+                (object_access
+                  left: (identifier)
+                  right: (identifier)))
+              then: (display_statement
+                record: (identifier)
+                except: (qualified_name
+                  left: (identifier)
+                  right: (identifier))
+                (frame_phrase
+                  (frame_option)))))))
+      (on_statement
+        event: (identifier)
+        widget: (identifier)
+        (empty_statement))
+      (expression_statement
+        (identifier))
+      (hide_statement)))
+  (wait_for_statement
+    events: (identifier)
+    widgets: (identifier))
+  (procedure_definition
+    name: (identifier)
+    (parameter_definition
+      name: (identifier)
+      type: (identifier)
+      (no_undo))
+    (parameter_definition
+      name: (identifier)
+      table: (identifier))
+    (find_statement
+      table: (identifier)
+      (where_phrase
+        (binary_expression
+          (qualified_name
+            left: (identifier)
+            right: (identifier))
+          (function_call
+            function: (identifier)
+            (arguments
+              (argument
+                value: (object_access
+                  left: (identifier)
+                  right: (identifier)))))))
+      (no_lock)
+      (no_error))
+    (if_statement
+      (unary_expression
+        (available_expression
+          record: (identifier)))
+      then: (do_block
+        (body
+          (message_statement
+            (string_literal)
+            (view_as_phrase))
+          (return_statement)))))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (message_statement
+    (string_literal)
+    (view_as_phrase
+      (buttons_phrase)
+      title: (string_literal)))
+  (run_statement
+    procedure: (identifier)
+    (arguments
+      (argument
+        value: (number_literal))
+      (argument
+        value: (string_literal))
+      (argument
+        value: (string_literal))
+      (argument
+        value: (number_literal))
+      (argument
+        value: (identifier))))
+  (procedure_definition
+    name: (identifier)
+    (external_phrase
+      library: (string_literal))
+    (parameter_definition
+      name: (identifier)
+      type: (identifier))
+    (parameter_definition
+      name: (identifier)
+      type: (identifier))
+    (parameter_definition
+      name: (identifier)
+      type: (identifier))
+    (parameter_definition
+      name: (identifier)
+      type: (identifier))
+    (parameter_definition
+      name: (identifier)
+      type: (identifier)))
+  (parameter_definition
+    name: (identifier)
+    type: (identifier)
+    (case_sensitive))
+  (parameter_definition
+    name: (identifier)
+    type: (identifier)
+    (case_sensitive))
+  (parameter_definition
+    name: (identifier)
+    type: (identifier)
+    (column_label
+      (string_literal)))
+  (parameter_definition
+    name: (identifier)
+    type: (identifier)
+    (decimals
+      (number_literal)))
+  (parameter_definition
+    name: (identifier)
+    type: (identifier)
+    (identifier))
+  (parameter_definition
+    name: (identifier)
+    type: (qualified_name
+      left: (identifier)
+      right: (identifier)
+      right: (identifier)))
+  (parameter_definition
+    table_handle: (identifier)
+    (by_value_option)
+    (bind_option))
+  (parameter_definition
+    table_handle: (identifier)
+    (by_value_option))
+  (parameter_definition
+    dataset: (identifier)
+    (append_option)
+    (by_value_option))
+  (parameter_definition
+    dataset_handle: (identifier)
+    (bind_option)
+    (by_value_option))
+  (parameter_definition
+    name: (identifier)
+    type: (identifier)
+    (extent_phrase
+      (number_literal))))
