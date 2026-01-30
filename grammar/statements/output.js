@@ -45,12 +45,12 @@ module.exports = ({ kw, tkw }) => ({
       alias($.__output_lob_dir_phrase, $.lob_dir_phrase),
       alias($.__output_num_copies_phrase, $.num_copies_phrase),
       tkw("COLLATE"),
-      choice(kw("LANDSCAPE"), kw("PORTRAIT")),
+      choice(tkw("LANDSCAPE"), tkw("PORTRAIT")),
       alias($.__output_append_phrase, $.append_phrase),
-      kw("BINARY"),
+      tkw("BINARY"),
       tkw("ECHO"),
       tkw("NO-ECHO"),
-      kw("KEEP-MESSAGES"),
+      tkw("KEEP-MESSAGES"),
       seq(kw("MAP"), field("map", $.__output_map_entry)),
       tkw("NO-MAP"),
       tkw("PAGED"),
@@ -73,7 +73,7 @@ module.exports = ({ kw, tkw }) => ({
     choice(
       tkw("NO-CONVERT"),
       seq(
-        kw("CONVERT"),
+        tkw("CONVERT"),
         repeat(
           choice(
             seq(kw("TARGET"), field("target", $.string_literal)),
@@ -116,7 +116,10 @@ module.exports = ({ kw, tkw }) => ({
     ),
   __output_to_target: ($) =>
     choice(
-      seq(kw("PRINTER"), optional(field("printer", $.__output_printer_target))),
+      seq(
+        tkw("PRINTER"),
+        optional(field("printer", $.__output_printer_target)),
+      ),
       field(
         "file",
         choice(

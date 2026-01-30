@@ -41059,54 +41059,30 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "SEQ",
-              "members": [
-                {
-                  "type": "ALIAS",
-                  "content": {
-                    "type": "TOKEN",
-                    "content": {
-                      "type": "PATTERN",
-                      "value": "LANDSCAPE",
-                      "flags": "i"
-                    }
-                  },
-                  "named": false,
-                  "value": "LANDSCAPE"
-                },
-                {
-                  "type": "IMMEDIATE_TOKEN",
-                  "content": {
-                    "type": "PATTERN",
-                    "value": "\\s+"
-                  }
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PATTERN",
+                  "value": "LANDSCAPE",
+                  "flags": "i"
                 }
-              ]
+              },
+              "named": false,
+              "value": "LANDSCAPE"
             },
             {
-              "type": "SEQ",
-              "members": [
-                {
-                  "type": "ALIAS",
-                  "content": {
-                    "type": "TOKEN",
-                    "content": {
-                      "type": "PATTERN",
-                      "value": "PORTRAIT",
-                      "flags": "i"
-                    }
-                  },
-                  "named": false,
-                  "value": "PORTRAIT"
-                },
-                {
-                  "type": "IMMEDIATE_TOKEN",
-                  "content": {
-                    "type": "PATTERN",
-                    "value": "\\s+"
-                  }
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PATTERN",
+                  "value": "PORTRAIT",
+                  "flags": "i"
                 }
-              ]
+              },
+              "named": false,
+              "value": "PORTRAIT"
             }
           ]
         },
@@ -41120,29 +41096,17 @@
           "value": "append_phrase"
         },
         {
-          "type": "SEQ",
-          "members": [
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "PATTERN",
-                  "value": "BINARY",
-                  "flags": "i"
-                }
-              },
-              "named": false,
-              "value": "BINARY"
-            },
-            {
-              "type": "IMMEDIATE_TOKEN",
-              "content": {
-                "type": "PATTERN",
-                "value": "\\s+"
-              }
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PATTERN",
+              "value": "BINARY",
+              "flags": "i"
             }
-          ]
+          },
+          "named": false,
+          "value": "BINARY"
         },
         {
           "type": "ALIAS",
@@ -41171,29 +41135,17 @@
           "value": "NO-ECHO"
         },
         {
-          "type": "SEQ",
-          "members": [
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "PATTERN",
-                  "value": "KEEP-MESSAGES",
-                  "flags": "i"
-                }
-              },
-              "named": false,
-              "value": "KEEP-MESSAGES"
-            },
-            {
-              "type": "IMMEDIATE_TOKEN",
-              "content": {
-                "type": "PATTERN",
-                "value": "\\s+"
-              }
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PATTERN",
+              "value": "KEEP-MESSAGES",
+              "flags": "i"
             }
-          ]
+          },
+          "named": false,
+          "value": "KEEP-MESSAGES"
         },
         {
           "type": "SEQ",
@@ -41438,29 +41390,17 @@
           "type": "SEQ",
           "members": [
             {
-              "type": "SEQ",
-              "members": [
-                {
-                  "type": "ALIAS",
-                  "content": {
-                    "type": "TOKEN",
-                    "content": {
-                      "type": "PATTERN",
-                      "value": "CONVERT",
-                      "flags": "i"
-                    }
-                  },
-                  "named": false,
-                  "value": "CONVERT"
-                },
-                {
-                  "type": "IMMEDIATE_TOKEN",
-                  "content": {
-                    "type": "PATTERN",
-                    "value": "\\s+"
-                  }
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PATTERN",
+                  "value": "CONVERT",
+                  "flags": "i"
                 }
-              ]
+              },
+              "named": false,
+              "value": "CONVERT"
             },
             {
               "type": "REPEAT",
@@ -41825,29 +41765,17 @@
           "type": "SEQ",
           "members": [
             {
-              "type": "SEQ",
-              "members": [
-                {
-                  "type": "ALIAS",
-                  "content": {
-                    "type": "TOKEN",
-                    "content": {
-                      "type": "PATTERN",
-                      "value": "PRINTER",
-                      "flags": "i"
-                    }
-                  },
-                  "named": false,
-                  "value": "PRINTER"
-                },
-                {
-                  "type": "IMMEDIATE_TOKEN",
-                  "content": {
-                    "type": "PATTERN",
-                    "value": "\\s+"
-                  }
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PATTERN",
+                  "value": "PRINTER",
+                  "flags": "i"
                 }
-              ]
+              },
+              "named": false,
+              "value": "PRINTER"
             },
             {
               "type": "CHOICE",
