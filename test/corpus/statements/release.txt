@@ -55,4 +55,141 @@ RELEASE sports.Customer NO-ERROR.
 
 --------------------------------------------------------------------------------
 
-(source_code)
+(source_code
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (button_definition
+    name: (identifier)
+    (button_option
+      label: (string_literal)))
+  (button_definition
+    name: (identifier)
+    (button_option
+      label: (string_literal)))
+  (query_definition
+    name: (identifier)
+    (query_table_list
+      table: (identifier)))
+  (browse_definition
+    name: (identifier)
+    query: (identifier)
+    column: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    column: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (down_option
+      (number_literal)))
+  (form_statement
+    (form_item
+      field: (identifier))
+    (form_item
+      field: (identifier))
+    (form_item
+      (number_literal))
+    (form_item
+      field: (identifier))
+    (frame_phrase
+      frame: (identifier)))
+  (form_statement
+    (form_item
+      field: (identifier))
+    (form_item
+      field: (identifier))
+    (form_item
+      field: (qualified_name
+        left: (identifier)
+        right: (identifier)))
+    (frame_phrase
+      frame: (identifier)
+      (frame_option
+        column: (number_literal))))
+  (open_query_statement
+    query: (identifier)
+    (record_phrase
+      record: (identifier)))
+  (on_statement
+    event: (identifier)
+    widget: (identifier)
+    (do_block
+      (body
+        (display_statement
+          record: (identifier)
+          except: (qualified_name
+            left: (identifier)
+            right: (identifier))
+          (frame_phrase
+            frame: (identifier)
+            (frame_option)))
+        (assignment_statement
+          left: (identifier)
+          operator: (assignment_operator)
+          right: (function_call
+            function: (identifier)
+            (arguments
+              (argument
+                value: (identifier))))))))
+  (on_statement
+    event: (identifier)
+    widget: (identifier)
+    (do_block
+      (body
+        (find_statement
+          table: (identifier)
+          (where_phrase
+            (binary_expression
+              (function_call
+                function: (identifier)
+                (arguments
+                  (argument
+                    value: (identifier))))
+              (identifier)))
+          (exclusive_lock))
+        (update_statement
+          record: (identifier)
+          (frame_phrase
+            frame: (identifier)
+            (frame_option)
+            (frame_option
+              title: (string_literal))))
+        (assignment_statement
+          left: (identifier)
+          operator: (assignment_operator)
+          right: (function_call
+            function: (object_access
+              left: (identifier)
+              right: (identifier))
+            (arguments)))
+        (display_statement
+          record: (identifier)
+          except: (qualified_name
+            left: (identifier)
+            right: (identifier))
+          (frame_phrase
+            frame: (identifier)
+            (frame_option)))
+        (release_statement
+          record: (identifier)))))
+  (enable_statement
+    (frame_phrase
+      frame: (identifier)))
+  (apply_statement
+    event: (string_literal)
+    widget: (identifier))
+  (pause_statement
+    duration: (number_literal))
+  (wait_for_statement
+    events: (identifier)
+    widgets: (identifier)
+    events: (identifier)
+    widgets: (identifier))
+  (release_statement
+    record: (qualified_name
+      left: (identifier))

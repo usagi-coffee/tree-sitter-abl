@@ -86,18 +86,6 @@ OPEN QUERY qCust FOR EACH Customer BY COLLATE(Customer.Name, "CASE-INSENSITIVE")
         (qualified_name
           (identifier)
           (identifier))
-        (identifier)
-        (qualified_name
-          (identifier)
-          (identifier))
-        (identifier)
-        (qualified_name
-          (identifier)
-          (identifier))
-        (qualified_name
-          (identifier)
-          (identifier))
-        (identifier)
         (qualified_name
           (identifier)
           (identifier))
@@ -107,14 +95,21 @@ OPEN QUERY qCust FOR EACH Customer BY COLLATE(Customer.Name, "CASE-INSENSITIVE")
         (qualified_name
           (identifier)
           (identifier))
-        (identifier)
         (qualified_name
           (identifier)
           (identifier))
         (qualified_name
           (identifier)
           (identifier))
-        (identifier)
+        (qualified_name
+          (identifier)
+          (identifier))
+        (qualified_name
+          (identifier)
+          (identifier))
+        (qualified_name
+          (identifier)
+          (identifier))
         (qualified_name
           (identifier)
           (identifier))

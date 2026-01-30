@@ -153,4 +153,204 @@ PROMPT-FOR STREAM-HANDLE hS field1 field2 IN WINDOW wMain WITH FRAME fMain.
 
 --------------------------------------------------------------------------------
 
-(source_code)
+(source_code
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo)
+    (initial_option
+      value: (number_literal)))
+  (prompt_for_statement
+    record: (identifier))
+  (message_statement
+    (string_literal)
+    (identifier)
+    (skip
+      count: (number_literal))
+    (string_literal)
+    (input_expression
+      field: (identifier)))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo)
+    (format_option
+      (string_literal))
+    (extent_phrase
+      (number_literal)))
+  (form_statement
+    (form_item
+      field: (string_literal))
+    (form_item
+      field: (qualified_name
+        left: (identifier)
+        right: (identifier)))
+    (form_item
+      field: (identifier))
+    (form_item
+      field: (number_literal))
+    (form_item)
+    (form_item
+      field: (string_literal))
+    (form_item
+      field: (qualified_name
+        left: (identifier)
+        right: (identifier)))
+    (form_item
+      field: (identifier))
+    (form_item
+      field: (number_literal))
+    (form_item
+      (number_literal))
+    (form_item
+      field: (string_literal))
+    (form_item
+      field: (identifier))
+    (form_item
+      field: (identifier))
+    (form_item
+      field: (number_literal))
+    (frame_phrase
+      frame: (identifier)
+      (frame_option)
+      (frame_option)
+      (frame_option
+        title: (string_literal))))
+  (for_each_statement
+    (record
+      table: (identifier)
+      (no_lock))
+    (record
+      table: (identifier)
+      (of_phrase
+        (identifier)))
+    (body
+      (display_statement
+        (qualified_name
+          left: (identifier)
+          right: (identifier))
+        (qualified_name
+          left: (identifier)
+          right: (identifier))
+        (qualified_name
+          left: (identifier)
+          right: (identifier))
+        (qualified_name
+          left: (identifier)
+          right: (identifier))
+        (qualified_name
+          left: (identifier)
+          right: (identifier))
+        (frame_phrase
+          frame: (identifier)
+          (frame_option)))
+      (update_statement
+        (update_item
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (update_item
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (update_item
+          field: (identifier))
+        (frame_phrase
+          frame: (identifier)))
+      (assignment_statement
+        left: (identifier)
+        operator: (assignment_operator)
+        right: (string_literal))))
+  (repeat_statement
+    (body
+      (prompt_for_statement
+        (prompt_for_item
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier))))
+      (find_statement
+        table: (identifier)
+        (using_phrase
+          (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (no_error))
+      (if_statement
+        (unary_expression
+          (available_expression
+            record: (identifier)))
+        then: (do_block
+          (body
+            (message_statement
+              (string_literal))
+            (undo_statement))))
+      (display_statement
+        (qualified_name
+          left: (identifier)
+          right: (identifier))
+        (qualified_name
+          left: (identifier)
+          right: (identifier))
+        (qualified_name
+          left: (identifier)
+          right: (identifier)))))
+  (repeat_statement
+    (body
+      (prompt_for_statement
+        (prompt_for_item
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier))
+          (format_phrase
+            (label_option
+              (string_literal))))
+        (frame_phrase
+          frame: (identifier)
+          (frame_option
+            row: (number_literal))
+          (frame_option)))
+      (find_statement
+        table: (identifier)
+        (no_lock)
+        (using_phrase
+          (qualified_name
+            left: (identifier)
+            right: (identifier))))
+      (display_statement
+        (qualified_name
+          left: (identifier)
+          right: (identifier))
+        (qualified_name
+          left: (identifier)
+          right: (identifier))
+        (qualified_name
+          left: (identifier)
+          right: (identifier))
+        (frame_phrase
+          (frame_option
+            (number_literal)))
+        (ERROR
+          (identifier)))))
+  (prompt_for_statement
+    (stream_phrase
+      stream: (identifier))
+    (prompt_for_item
+      field: (identifier))
+    (prompt_for_item
+      (number_literal))
+    (prompt_for_item
+      (number_literal))
+    (prompt_for_item)
+    (go_on_phrase
+      (identifier)
+      (identifier)))
+  (prompt_for_statement
+    (stream_phrase
+      handle: (identifier))
+    (prompt_for_item
+      field: (identifier))
+    (prompt_for_item
+      field: (identifier))
+    window: (identifier)
+    (frame_phrase
+      frame: (identifier))))

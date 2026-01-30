@@ -36,4 +36,51 @@ END PROCEDURE.
 
 --------------------------------------------------------------------------------
 
-(source_code)
+(source_code
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (set_size_statement
+    buffer: (identifier)
+    size: (number_literal))
+  (run_statement
+    procedure: (identifier)
+    (arguments
+      (argument
+        value: (identifier))))
+  (set_pointer_value_statement
+    target: (identifier)
+    value: (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          value: (identifier))
+        (argument
+          value: (number_literal)))))
+  (display_statement
+    (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          value: (identifier))
+        (argument
+          value: (number_literal))))
+    (format_phrase
+      (format_option
+        (string_literal))))
+  (set_size_statement
+    buffer: (identifier)
+    size: (number_literal))
+  (procedure_definition
+    name: (identifier)
+    (external_phrase
+      library: (string_literal))
+    (ERROR)
+    (parameter_definition
+      name: (identifier)
+      type: (identifier))))

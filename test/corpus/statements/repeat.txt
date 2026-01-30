@@ -96,4 +96,161 @@ END.
 
 --------------------------------------------------------------------------------
 
-(source_code)
+(source_code
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo)
+    (format_option
+      (string_literal)))
+  (form_statement
+    (form_item
+      (number_literal))
+    (form_item
+      field: (string_literal))
+    (form_item
+      field: (identifier))
+    (form_item
+      field: (number_literal))
+    (form_item
+      field: (string_literal))
+    (form_item
+      field: (identifier))
+    (form_item
+      field: (number_literal))
+    (form_item
+      field: (string_literal))
+    (form_item
+      field: (identifier))
+    (form_item
+      field: (number_literal))
+    (form_item
+      field: (string_literal))
+    (form_item
+      field: (identifier))
+    (form_item
+      field: (number_literal))
+    (form_item
+      field: (string_literal))
+    (form_item
+      field: (identifier))
+    (form_item
+      field: (number_literal))
+    (form_item
+      field: (string_literal))
+    (form_item
+      field: (identifier))
+    (form_item
+      field: (number_literal))
+    (form_item
+      field: (identifier))
+    (form_item
+      field: (identifier))
+    (form_item
+      field: (identifier))
+    (form_item
+      field: (string_literal))
+    (form_item
+      field: (string_literal))
+    (form_item
+      field: (identifier))
+    (form_item
+      field: (number_literal))
+    (frame_phrase
+      (frame_option)
+      (frame_option)
+      (frame_option)
+      frame: (identifier)))
+  (ERROR
+    (string_literal)
+    (number_literal))
+  (repeat_statement
+    (on_endkey_phrase
+      (undo_phrase))
+    (body
+      (update_statement
+        record: (identifier)
+        (frame_phrase
+          frame: (identifier)))
+      (hide_statement
+        (widget_phrase
+          frame: (identifier)))
+      (ERROR
+        (parenthesized_expression
+          (identifier))
+        (number_literal))
+      (leave_statement)
+      (ERROR
+        (identifier)
+        (number_literal))
+      (run_statement
+        procedure: (procedure_name))
+      (ERROR
+        (identifier)
+        (number_literal))
+      (run_statement
+        procedure: (procedure_name))
+      (ERROR
+        (identifier)
+        (number_literal))
+      (run_statement
+        procedure: (procedure_name))
+      (ERROR
+        (identifier)
+        (number_literal))
+      (run_statement
+        procedure: (procedure_name))
+      (expression_statement
+        (identifier))
+      (do_block
+        (body
+          (bell_statement)
+          (message_statement
+            (string_literal)))))
+    (ERROR))
+  (expression_statement
+    (identifier))
+  (repeat_statement
+    (ERROR
+      (identifier))
+    (preselect_record_list
+      (preselect_record
+        table: (qualified_name
+          left: (identifier)
+          (ERROR
+            (identifier))
+          right: (identifier))))
+    (body
+      (find_statement
+        table: (identifier))
+      (update_statement
+        record: (qualified_name
+          left: (identifier)
+          right: (identifier)))))
+  (ERROR
+    (identifier)
+    (assignment_operator)
+    (ERROR
+      (number_literal)
+      (number_literal))
+    (number_literal)
+    (identifier)
+    (number_literal))
+  (on_statement
+    event: (identifier)
+    (undo_statement
+      (ERROR
+        (identifier))))
+  (expression_statement
+    (identifier))
+  (ERROR
+    (parenthesized_expression
+      (identifier)
+      (ERROR
+        (number_literal)
+        (identifier)
+        (identifier))))
+  (display_statement
+    (string_literal))
+  (expression_statement
+    (identifier)))

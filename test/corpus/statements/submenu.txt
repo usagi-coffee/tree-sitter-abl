@@ -415,4 +415,224 @@ DELETE WIDGET mywin.
 
 --------------------------------------------------------------------------------
 
-(source_code)
+(source_code
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (submenu_definition
+    name: (identifier)
+    (menu_element
+      (menu_item
+        name: (identifier)
+        (string_literal)))
+    (menu_element
+      (menu_item
+        name: (identifier)
+        (string_literal)))
+    (menu_element
+      (menu_item
+        name: (identifier)
+        (string_literal))))
+  (submenu_definition
+    name: (identifier)
+    (menu_element
+      (menu_item
+        name: (identifier)
+        (string_literal)))
+    (menu_element
+      (menu_item
+        name: (identifier)
+        (string_literal)))
+    (menu_element
+      (menu_item
+        name: (identifier)
+        (string_literal)))
+    (menu_element
+      (menu_item
+        name: (identifier)
+        (string_literal))))
+  (submenu_definition
+    name: (identifier)
+    (menu_element
+      (submenu_item
+        name: (identifier)
+        (string_literal)))
+    (menu_element
+      (menu_item
+        name: (identifier)
+        (string_literal)))
+    (menu_element
+      (menu_item
+        name: (identifier)
+        (string_literal))))
+  (menu_definition
+    name: (identifier)
+    (menubar)
+    (menu_element
+      (submenu_item
+        name: (identifier)
+        (string_literal)))
+    (menu_element
+      (submenu_item
+        name: (identifier)
+        (string_literal))))
+  (create_statement
+    window: (identifier))
+  (assign_statement
+    (assign_pair
+      left: (identifier)
+      right: (identifier))
+    (assign_pair
+      left: (object_access
+        left: (identifier)
+        right: (identifier))))
+  (button_definition
+    name: (identifier)
+    (button_option
+      label: (string_literal)))
+  (button_definition
+    name: (identifier)
+    (button_option
+      label: (string_literal)))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (identifier))
+  (form_statement
+    (form_item
+      field: (identifier))
+    (form_item
+      field: (identifier))
+    (form_item
+      field: (identifier))
+    (form_item
+      field: (number_literal))
+    (form_item
+      field: (identifier))
+    (form_item
+      field: (number_literal))
+    (form_item
+      field: (identifier))
+    (form_item
+      field: (identifier))
+    (form_item
+      field: (identifier))
+    (form_item
+      field: (number_literal))
+    (form_item
+      field: (identifier))
+    (form_item
+      field: (number_literal))
+    (frame_phrase
+      frame: (identifier)))
+  (enable_statement
+    (enable_item
+      field: (identifier))
+    (enable_item
+      field: (identifier))
+    (frame_phrase
+      frame: (identifier)))
+  (on_statement
+    event: (identifier)
+    widget: (identifier)
+    (in_frame_phrase
+      frame: (identifier))
+    (do_block
+      (body
+        (ERROR
+          (object_access
+            left: (identifier)
+            (ERROR
+              (identifier))
+            right: (identifier))
+          (identifier)
+          (identifier))
+        (expression_statement
+          (boolean_literal))
+        (ERROR
+          (object_access
+            left: (identifier)
+            (ERROR
+              (identifier))
+            right: (identifier))
+          (identifier)
+          (identifier))
+        (expression_statement
+          (boolean_literal))
+        (ERROR
+          (object_access
+            left: (identifier)
+            (ERROR
+              (identifier))
+            right: (identifier))
+          (identifier)
+          (identifier))
+        (expression_statement
+          (boolean_literal))
+        (ERROR
+          (object_access
+            left: (identifier)
+            (ERROR
+              (identifier))
+            right: (identifier))
+          (identifier)
+          (identifier))
+        (expression_statement
+          (boolean_literal)))))
+  (on_statement
+    event: (identifier)
+    widget: (identifier)
+    (in_frame_phrase
+      frame: (identifier))
+    (do_block
+      (body
+        (ERROR
+          (object_access
+            left: (identifier)
+            (ERROR
+              (identifier))
+            right: (identifier))
+          (identifier)
+          (identifier))
+        (expression_statement
+          (boolean_literal))
+        (ERROR
+          (object_access
+            left: (identifier)
+            (ERROR
+              (identifier))
+            right: (identifier))
+          (identifier)
+          (identifier))
+        (expression_statement
+          (boolean_literal))
+        (ERROR
+          (object_access
+            left: (identifier)
+            (ERROR
+              (identifier))
+            right: (identifier))
+          (identifier)
+          (identifier))
+        (expression_statement
+          (boolean_literal))
+        (ERROR
+          (object_access
+            left: (identifier)
+            (ERROR
+              (identifier))
+            right: (identifier))
+          (identifier)
+          (identifier))
+        (expression_statement
+          (boolean_literal)))))
+  (wait_for_statement
+    events: (identifier)
+    widgets: (identifier)
+    widgets: (identifier)
+    widgets: (identifier)
+    widgets: (identifier)
+    widgets: (identifier))
+  (delete_widget_statement
+    widget: (identifier)))

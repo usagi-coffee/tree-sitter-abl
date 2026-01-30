@@ -127,4 +127,203 @@ SET Customer EXCEPT Comments WITH FRAME fCust NO-ERROR.
 
 --------------------------------------------------------------------------------
 
-(source_code)
+(source_code
+  (for_each_statement
+    (record
+      table: (identifier))
+    (body
+      (display_statement
+        (qualified_name
+          left: (identifier)
+          right: (identifier)))
+      (set_statement
+        (set_item
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (set_item
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (set_item
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (set_item
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier))))))
+  (for_each_statement
+    (record
+      table: (identifier))
+    (body
+      (display_statement
+        (qualified_name
+          left: (identifier)
+          right: (identifier))
+        (qualified_name
+          left: (identifier)
+          right: (identifier))
+        (qualified_name
+          left: (identifier)
+          right: (identifier)))
+      (set_statement
+        (set_item
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (set_item
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (set_item
+          field: (identifier)))
+      (expression_statement
+        (parenthesized_expression
+          (binary_expression
+            (qualified_name
+              left: (identifier)
+              right: (identifier))
+            (number_literal))
+          (ERROR))
+        (ERROR))
+      (repeat_statement
+        (body
+          (create_statement
+            table: (identifier))
+          (assignment_statement
+            left: (qualified_name
+              left: (identifier)
+              right: (identifier))
+            operator: (assignment_operator)
+            right: (qualified_name
+              left: (identifier)
+              right: (identifier)))
+          (set_statement
+            (set_item
+              field: (qualified_name
+                left: (identifier)
+                right: (identifier)))
+            (set_item
+              field: (qualified_name
+                left: (identifier)
+                right: (identifier)))
+            (set_item
+              field: (identifier)))
+          (expression_statement
+            (parenthesized_expression
+              (binary_expression
+                (qualified_name
+                  left: (identifier)
+                  right: (identifier))
+                (identifier))
+              (ERROR)))))))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo)
+    (format_option
+      (string_literal))
+    (extent_phrase
+      (number_literal)))
+  (form_statement
+    (form_item
+      field: (string_literal))
+    (form_item
+      field: (qualified_name
+        left: (identifier)
+        right: (identifier)))
+    (form_item
+      field: (identifier))
+    (form_item
+      field: (number_literal))
+    (form_item)
+    (form_item
+      field: (string_literal))
+    (form_item
+      field: (qualified_name
+        left: (identifier)
+        right: (identifier)))
+    (form_item
+      field: (identifier))
+    (form_item
+      field: (number_literal))
+    (form_item
+      (number_literal))
+    (form_item
+      field: (string_literal))
+    (form_item
+      field: (identifier))
+    (form_item
+      field: (identifier))
+    (form_item
+      field: (number_literal))
+    (frame_phrase
+      frame: (identifier)
+      (frame_option)
+      (frame_option)
+      (frame_option
+        title: (string_literal))))
+  (for_each_statement
+    (record
+      table: (identifier)
+      (no_lock))
+    (record
+      table: (identifier)
+      (of_phrase
+        (identifier)))
+    (body
+      (display_statement
+        (qualified_name
+          left: (identifier)
+          right: (identifier))
+        (qualified_name
+          left: (identifier)
+          right: (identifier))
+        (qualified_name
+          left: (identifier)
+          right: (identifier))
+        (qualified_name
+          left: (identifier)
+          right: (identifier))
+        (qualified_name
+          left: (identifier)
+          right: (identifier))
+        (frame_phrase
+          frame: (identifier)
+          (frame_option)))
+      (update_statement
+        (update_item
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (update_item
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (update_item
+          field: (identifier))
+        (frame_phrase
+          frame: (identifier)))
+      (assignment_statement
+        left: (identifier)
+        operator: (assignment_operator)
+        right: (string_literal))))
+  (set_statement
+    (stream_phrase
+      handle: (identifier))
+    (set_item
+      field: (identifier))
+    (set_item
+      (number_literal))
+    (set_item
+      (number_literal))
+    (set_item)
+    (go_on_phrase
+      (identifier)
+      (identifier)))
+  (set_statement
+    record: (identifier)
+    except: (identifier)
+    (frame_phrase
+      frame: (identifier))))

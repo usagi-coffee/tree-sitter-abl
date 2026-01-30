@@ -69,4 +69,62 @@ USING Acme.BusObjs.* FROM PROPATH.
 
 -------------------------------------------------------------------------------
 
-(source_code)
+(source_code
+  (using_statement)
+  (variable_definition
+    name: (identifier)
+    type: (identifier))
+  (variable_definition
+    name: (identifier)
+    type: (qualified_name
+      left: (identifier)
+      right: (identifier)
+      right: (identifier)))
+  (using_statement)
+  (variable_definition
+    name: (identifier)
+    type: (identifier))
+  (variable_definition
+    name: (identifier)
+    type: (qualified_name
+      left: (identifier)
+      right: (identifier)
+      right: (identifier)))
+  (using_statement
+    (from_clause))
+  (variable_definition
+    name: (identifier)
+    type: (identifier))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (initial_option
+      value: (unary_expression
+        (identifier))))
+  (using_statement)
+  (variable_definition
+    name: (identifier)
+    type: (identifier))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (new_expression
+      type: (identifier)
+      (arguments)))
+  (using_statement)
+  (using_statement)
+  (using_statement)
+  (variable_definition
+    name: (identifier)
+    type: (generic_type
+      (identifier)
+      (identifier))
+    (no_undo))
+  (variable_definition
+    name: (identifier)
+    type: (generic_type
+      (identifier)
+      (identifier))
+    (no_undo))
+  (using_statement
+    (from_clause)))
