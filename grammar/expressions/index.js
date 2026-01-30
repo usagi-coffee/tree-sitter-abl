@@ -12,7 +12,7 @@ const accumExpression = require("./accum");
 const frameExpression = require("./frame");
 const menuExpression = require("./menu");
 const queryExpression = require("./query");
-const menuItemExpression = require("./menu-item");
+const menu_item_access = require("./menu-item");
 
 module.exports = (ctx) => ({
   ...conditionalExpression(ctx),
@@ -29,5 +29,5 @@ module.exports = (ctx) => ({
   ...frameExpression(ctx),
   ...menuExpression(ctx),
   ...queryExpression(ctx),
-  ...menuItemExpression(ctx),
+  ...menu_item_access(ctx),
 });

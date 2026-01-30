@@ -64521,7 +64521,7 @@
         }
       ]
     },
-    "menu_item_expression": {
+    "menu_item_access": {
       "type": "SEQ",
       "members": [
         {
@@ -64568,77 +64568,77 @@
             "type": "SYMBOL",
             "name": "identifier"
           }
-        }
-      ]
-    },
-    "in_menu_expression": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "FIELD",
-          "name": "menu_item",
-          "content": {
-            "type": "SYMBOL",
-            "name": "menu_item_expression"
-          }
         },
         {
-          "type": "SEQ",
+          "type": "CHOICE",
           "members": [
             {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "PATTERN",
-                  "value": "IN",
-                  "flags": "i"
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "SEQ",
+                  "members": [
+                    {
+                      "type": "ALIAS",
+                      "content": {
+                        "type": "TOKEN",
+                        "content": {
+                          "type": "PATTERN",
+                          "value": "IN",
+                          "flags": "i"
+                        }
+                      },
+                      "named": false,
+                      "value": "IN"
+                    },
+                    {
+                      "type": "IMMEDIATE_TOKEN",
+                      "content": {
+                        "type": "PATTERN",
+                        "value": "\\s+"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "SEQ",
+                  "members": [
+                    {
+                      "type": "ALIAS",
+                      "content": {
+                        "type": "TOKEN",
+                        "content": {
+                          "type": "PATTERN",
+                          "value": "MENU",
+                          "flags": "i"
+                        }
+                      },
+                      "named": false,
+                      "value": "MENU"
+                    },
+                    {
+                      "type": "IMMEDIATE_TOKEN",
+                      "content": {
+                        "type": "PATTERN",
+                        "value": "\\s+"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "FIELD",
+                  "name": "menu",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "identifier"
+                  }
                 }
-              },
-              "named": false,
-              "value": "IN"
+              ]
             },
             {
-              "type": "IMMEDIATE_TOKEN",
-              "content": {
-                "type": "PATTERN",
-                "value": "\\s+"
-              }
+              "type": "BLANK"
             }
           ]
-        },
-        {
-          "type": "SEQ",
-          "members": [
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "PATTERN",
-                  "value": "MENU",
-                  "flags": "i"
-                }
-              },
-              "named": false,
-              "value": "MENU"
-            },
-            {
-              "type": "IMMEDIATE_TOKEN",
-              "content": {
-                "type": "PATTERN",
-                "value": "\\s+"
-              }
-            }
-          ]
-        },
-        {
-          "type": "FIELD",
-          "name": "menu",
-          "content": {
-            "type": "SYMBOL",
-            "name": "identifier"
-          }
         }
       ]
     },
@@ -66479,7 +66479,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "in_menu_expression"
+          "name": "menu_item_access"
         },
         {
           "type": "SYMBOL",
@@ -67854,15 +67854,7 @@
           "value": -1,
           "content": {
             "type": "SYMBOL",
-            "name": "menu_item_expression"
-          }
-        },
-        {
-          "type": "PREC",
-          "value": -1,
-          "content": {
-            "type": "SYMBOL",
-            "name": "in_menu_expression"
+            "name": "menu_item_access"
           }
         },
         {
@@ -68672,6 +68664,9 @@
     [
       "__set_record_body",
       "__set_field_target"
+    ],
+    [
+      "menu_item_access"
     ]
   ],
   "precedences": [],

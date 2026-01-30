@@ -81,6 +81,9 @@ module.exports = grammar({
     [$.__frame_option_down],
     [$.__update_record_body, $.__update_field_target],
     [$.__set_record_body, $.__set_field_target],
+
+    // menu_item_access with optional IN MENU suffix conflicts with IN FRAME
+    [$.menu_item_access],
   ],
   inline: ($) => [],
 
@@ -205,7 +208,7 @@ module.exports = grammar({
           $.object_access,
           $.array_access,
           $.function_call,
-          $.in_menu_expression,
+          $.menu_item_access,
           $.in_frame_expression,
           $.frame_expression,
         ),
