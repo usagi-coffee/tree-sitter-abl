@@ -99,8 +99,7 @@ END.
     (binary_expression
       (identifier)
       (number_literal))
-    (on_error_phrase
-      (undo_phrase))
+    (on_error_phrase)
     (body
       (assignment_statement
         left: (identifier)
@@ -121,8 +120,7 @@ END.
 
 (source_code
   (do_block
-    (on_error_phrase
-      (undo_phrase))
+    (on_error_phrase)
     (body
       (assignment_statement
         left: (identifier)
@@ -141,8 +139,7 @@ END.
 
 (source_code
   (do_block
-    (on_stop_phrase
-      (undo_phrase))
+    (on_stop_phrase)
     (body
       (assignment_statement
         left: (identifier)
@@ -236,8 +233,7 @@ END.
 (source_code
   (do_block
     (boolean_literal)
-    (on_endkey_phrase
-      (undo_phrase))
+    (on_endkey_phrase)
     (body
       (message_statement
         (string_literal)))))
@@ -297,9 +293,8 @@ END.
     label: (identifier)
     (boolean_literal)
     (on_endkey_phrase
-      (undo_phrase
-        undo_label: (identifier)
-        leave_label: (identifier)))
+      undo_label: (identifier)
+      leave_label: (identifier))
     (body
       (assignment_statement
         left: (identifier)
@@ -374,8 +369,7 @@ END.
       record: (identifier))
     (stop_after_phrase
       time: (number_literal))
-    (on_error_phrase
-      (undo_phrase))
+    (on_error_phrase)
     (body
       (assignment_statement
         left: (identifier)

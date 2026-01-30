@@ -43,8 +43,7 @@ END.
       (string_literal)))
   (do_block
     (identifier)
-    (on_error_phrase
-      (undo_phrase))
+    (on_error_phrase)
     (body
       (set_statement
         (identifier)

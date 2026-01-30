@@ -326,8 +326,7 @@ END PROCEDURE.
       type: (identifier)
       (no_undo))
     (do_block
-      (on_error_phrase
-        (undo_phrase))
+      (on_error_phrase)
       (body
         (assignment_statement
           left: (identifier)

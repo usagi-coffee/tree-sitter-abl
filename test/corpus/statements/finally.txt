@@ -96,8 +96,7 @@ MESSAGE "Out of DO block." VIEW-AS ALERT-BOX BUTTONS OK.
 
 (source_code
   (do_block
-    (on_error_phrase
-      (undo_phrase))
+    (on_error_phrase)
     (body
       (find_statement
         (identifier)
@@ -118,8 +117,7 @@ MESSAGE "Out of DO block." VIEW-AS ALERT-BOX BUTTONS OK.
     (view_as_phrase
       (buttons_phrase)))
   (do_block
-    (on_error_phrase
-      (undo_phrase))
+    (on_error_phrase)
     (body
       (find_statement
         (identifier)

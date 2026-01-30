@@ -134,6 +134,7 @@ module.exports = () => ({
       $.promsgs_statement,
       $.return_statement,
       $.unload_statement,
+      $.create_window_statement,
       $.create_statement,
       $.delete_statement,
       $.release_statement,

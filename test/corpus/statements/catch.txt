@@ -43,8 +43,7 @@ END.
 
 (source_code
   (do_block
-    (on_error_phrase
-      (undo_phrase))
+    (on_error_phrase)
     (body
       (find_statement
         (identifier)
@@ -69,8 +68,7 @@ END.
                   (number_literal))))
             (view_as_phrase))))))
   (do_block
-    (on_error_phrase
-      (undo_phrase))
+    (on_error_phrase)
     (body
       (find_statement
         (identifier)

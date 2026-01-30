@@ -134,8 +134,7 @@ INPUT CLOSE.
           (string_literal)))))
   (do_block
     (boolean_literal)
-    (on_endkey_phrase
-      (undo_phrase))
+    (on_endkey_phrase)
     (body
       (import_statement
         (unformatted_phrase

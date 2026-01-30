@@ -5,7 +5,7 @@ module.exports = ({ kw, tkw }) => ({
       optional(alias($.__hide_stream_phrase, $.stream_phrase)),
       optional(
         choice(
-          alias($.__hide_widget_phrase, $.widget_phrase),
+          $.widget_phrase,
           tkw("MESSAGE"),
           tkw("ALL"),
         ),
@@ -20,9 +20,5 @@ module.exports = ({ kw, tkw }) => ({
       seq(kw("STREAM"), field("stream", $.identifier)),
       seq(kw("STREAM-HANDLE"), field("handle", $._expression)),
     ),
-  __hide_widget_phrase: ($) =>
-    choice(
-      seq(kw("FRAME"), field("frame", $.identifier)),
-      field("widget", $.identifier),
-    ),
+
 });

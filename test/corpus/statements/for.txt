@@ -189,8 +189,7 @@ END.
   (for_each_statement
     (record
       table: (identifier))
-    (on_endkey_phrase
-      (undo_phrase))
+    (on_endkey_phrase)
     (body
       (display_statement
         (qualified_name

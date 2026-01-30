@@ -44,9 +44,8 @@ END.
   (repeat_statement
     label: (identifier)
     (on_stop_phrase
-      (undo_phrase))
-    (on_error_phrase
-      (undo_phrase))
+      error_value: (string_literal))
+    (on_error_phrase)
     (body
       (leave_statement))))
 

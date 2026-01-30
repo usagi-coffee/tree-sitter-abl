@@ -139,6 +139,7 @@ const varStatement = require("./var");
 const viewStatement = require("./view");
 const waitForStatement = require("./wait-for");
 const expressionStatement = require("./expression");
+const createWindowStaetment = require("./create-window");
 
 module.exports = (ctx) => ({
   ...aggregateStatement(ctx),
@@ -282,4 +283,5 @@ module.exports = (ctx) => ({
   ...viewStatement(ctx),
   ...waitForStatement(ctx),
   ...expressionStatement(ctx),
+  ...createWindowStaetment(ctx),
 });

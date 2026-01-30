@@ -3,7 +3,7 @@ module.exports = ({ kw, tkw }) => ({
     seq(
       tkw("VIEW"),
       optional(alias($.__view_stream_phrase, $.stream_phrase)),
-      optional(alias($.__view_widget_phrase, $.widget_phrase)),
+      optional($.widget_phrase),
       optional(seq(kw("IN"), kw("WINDOW"), field("window", $._expression))),
       $._terminator,
     ),
@@ -12,9 +12,5 @@ module.exports = ({ kw, tkw }) => ({
       seq(kw("STREAM"), field("stream", $.identifier)),
       seq(kw("STREAM-HANDLE"), field("handle", $._expression)),
     ),
-  __view_widget_phrase: ($) =>
-    choice(
-      seq(kw("FRAME"), field("frame", $.identifier)),
-      field("widget", $.identifier),
-    ),
+
 });

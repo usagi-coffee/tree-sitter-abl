@@ -19,7 +19,7 @@ module.exports = ({ kw, tkw }) => ({
       repeat1(alias($.__update_item, $.update_item)),
       optional(alias($.__update_go_on, $.go_on_phrase)),
       optional($.frame_phrase),
-      optional(alias($.__update_editing_phrase, $.editing_phrase)),
+      optional($.editing_phrase),
       optional(tkw("NO-ERROR")),
     ),
   __update_item: ($) =>
@@ -82,7 +82,6 @@ module.exports = ({ kw, tkw }) => ({
     ),
   __update_at_phrase: ($) =>
     seq(choice(kw("AT"), kw("TO")), token(/[0-9]+(\.[0-9]+)?/)),
-  __update_editing_phrase: ($) =>
-    seq(tkw("EDITING"), $._colon, repeat1($._statement), tkw("END")),
+
   __update_go_on: ($) => seq(tkw("GO-ON"), "(", repeat1($.identifier), ")"),
 });

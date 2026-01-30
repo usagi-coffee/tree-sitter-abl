@@ -26,7 +26,7 @@ module.exports = ({ kw, tkw }) => ({
       optional(alias($.__prompt_for_go_on, $.go_on_phrase)),
       optional(seq(kw("IN"), tkw("WINDOW"), field("window", $._expression))),
       optional($.frame_phrase),
-      optional(alias($.__prompt_for_editing_phrase, $.editing_phrase)),
+      optional($.editing_phrase),
     ),
   __prompt_for_stream_phrase: ($) =>
     choice(
@@ -99,7 +99,6 @@ module.exports = ({ kw, tkw }) => ({
   __prompt_for_fgcolor_option: ($) => seq(tkw("FGCOLOR"), $._expression),
   __prompt_for_bgcolor_option: ($) => seq(tkw("BGCOLOR"), $._expression),
   __prompt_for_font_option: ($) => seq(tkw("FONT"), $._expression),
-  __prompt_for_editing_phrase: ($) =>
-    seq(tkw("EDITING"), $._colon, repeat1($._statement), tkw("END")),
+
   __prompt_for_go_on: ($) => seq(tkw("GO-ON"), "(", repeat1($.identifier), ")"),
 });
