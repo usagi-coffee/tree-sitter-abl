@@ -25,10 +25,7 @@ module.exports = ({ kw, tkw }) => ({
     seq(
       field("left", $._assignable),
       optional(
-        seq(
-          "=",
-          field("right", choice($.array_initializer, $._expression)),
-        ),
+        seq("=", field("right", choice($.array_initializer, $._expression))),
       ),
       optional(
         alias($.__assign_when_available_phrase, $.when_available_phrase),

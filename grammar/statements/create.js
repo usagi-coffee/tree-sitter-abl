@@ -3,11 +3,6 @@ module.exports = ({ kw, tkw }) => ({
 
   __create_body: ($) =>
     choice(
-      seq(
-        kw("WINDOW"),
-        field("window", $.identifier),
-        optional($.__create_window_assign),
-      ),
       seq(kw("SERVER"), field("server", $.identifier)),
       seq(
         field("table", $.__create_record_name),
@@ -24,9 +19,5 @@ module.exports = ({ kw, tkw }) => ({
         optional(tkw("NO-ERROR")),
       ),
     ),
-  __create_window_assign: ($) =>
-    seq(tkw("ASSIGN"), repeat1($.__create_window_assignment)),
-  __create_window_assignment: ($) =>
-    seq(field("attribute", $.identifier), "=", field("value", $._expression)),
   __create_record_name: ($) => choice($.identifier, $.qualified_name),
 });

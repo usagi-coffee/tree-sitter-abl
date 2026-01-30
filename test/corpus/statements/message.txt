@@ -166,15 +166,12 @@ MESSAGE COLOR RED "Color message".
 
 (source_code
   (message_statement
-    (color_phrase)
     (binary_expression
       (string_literal)
       (identifier)))
   (message_statement
-    (color_phrase)
     (string_literal))
   (message_statement
-    (color_phrase)
     (string_literal))
   (message_statement
     (color_phrase
@@ -213,7 +210,6 @@ MESSAGE COLOR NORMAL "Export done: " + fileName SKIP(2) VIEW-AS ALERT-BOX INFORM
 
 (source_code
   (message_statement
-    (color_phrase)
     (binary_expression
       (string_literal)
       (identifier))

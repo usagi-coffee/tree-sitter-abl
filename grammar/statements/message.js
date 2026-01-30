@@ -5,7 +5,7 @@ module.exports = ({ kw, tkw }) => ({
     seq(
       repeat1(
         choice(
-          alias($.__message_color_phrase, $.color_phrase),
+          seq(kw("COLOR"), $.__message_color_value),
           $._expression,
           alias($.__message_skip_item, $.skip),
         ),
@@ -13,6 +13,13 @@ module.exports = ({ kw, tkw }) => ({
       optional(alias($.__message_view_as_phrase, $.view_as_phrase)),
       optional(alias($.__message_set_update_phrase, $.set_update_phrase)),
       optional(seq(kw("IN"), kw("WINDOW"), field("window", $._expression))),
+    ),
+  __message_color_value: ($) =>
+    choice(
+      tkw("NORMAL"),
+      tkw("INPUT"),
+      tkw("MESSAGES"),
+      $.color_phrase,
     ),
 
   __message_view_as_phrase: ($) =>
@@ -51,31 +58,7 @@ module.exports = ({ kw, tkw }) => ({
         tkw("SKIP"),
       ),
     ),
-  __message_color_phrase: ($) =>
-    seq(
-      kw("COLOR"),
-      choice(
-        kw("NORMAL"),
-        kw("INPUT"),
-        kw("MESSAGES"),
-        $.number_literal,
-        $.string_literal,
-        seq(tkw("VALUE"), "(", field("value", $._expression), ")"),
-        seq(
-          optional(
-            repeat1(
-              choice(
-                tkw("BLINK-"),
-                tkw("BRIGHT-"),
-                tkw("RVV-"),
-                tkw("UNDERLINE-"),
-              ),
-            ),
-          ),
-          field("foreground", $.identifier),
-        ),
-      ),
-    ),
+
   __message_set_update_phrase: ($) =>
     seq(
       choice(kw("SET"), kw("UPDATE")),

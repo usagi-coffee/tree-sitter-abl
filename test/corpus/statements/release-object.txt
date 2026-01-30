@@ -47,57 +47,55 @@ RELEASE OBJECT controlHdl NO-ERROR.
     (identifier)
     (identifier)
     (no_undo))
-  (identifier)
-  (identifier)
-  (assign_statement
-    (assign_pair
-      (frame_access
-        (identifier)
-        (identifier)))
-    (assign_pair
+  (create_widget_statement
+    (identifier)
+    (identifier)
+    (frame_access
       (identifier)
-      (string_literal))
-    (assignment_statement
+      (identifier))
+    (identifier)
+    (string_literal))
+  (assignment_statement
+    (identifier)
+    (assignment_operator)
+    (object_access
       (identifier)
-      (assignment_operator)
+      (identifier)))
+  (expression_statement
+    (function_call
       (object_access
         (identifier)
         (identifier))
-      (expression_statement
-        (function_call
-          (object_access
+      (arguments
+        (argument
+          (qualified_name
             (identifier)
-            (identifier))
-          (arguments
-            (argument
-              (qualified_name
-                (identifier)
-                (identifier)))
-            (argument
-              (string_literal))))
-        (assignment_statement
-          (identifier)
-          (assignment_operator)
-          (object_access
-            (identifier)
-            (identifier))
-          (assignment_statement
-            (object_access
-              (identifier)
-              (identifier))
-            (assignment_operator)
-            (function_call
-              (identifier)
-              (arguments
-                (argument
-                  (number_literal))
-                (argument
-                  (number_literal))
-                (argument
-                  (number_literal))))
-            (release_object_statement
-              (identifier)
-              (delete_widget_statement
-                (identifier)
-                (release_object_statement
-                  (identifier))
+            (identifier)))
+        (argument
+          (string_literal)))))
+  (assignment_statement
+    (identifier)
+    (assignment_operator)
+    (object_access
+      (identifier)
+      (identifier)))
+  (assignment_statement
+    (object_access
+      (identifier)
+      (identifier))
+    (assignment_operator)
+    (function_call
+      (identifier)
+      (arguments
+        (argument
+          (number_literal))
+        (argument
+          (number_literal))
+        (argument
+          (number_literal)))))
+  (release_object_statement
+    (identifier))
+  (delete_widget_statement
+    (identifier))
+  (release_object_statement
+    (identifier)))

@@ -83,7 +83,7 @@ DELETE WIDGET new_win.
   (pause_statement)
   (use_statement
     (string_literal))
-  (create_statement
+  (create_widget_statement
     (identifier))
   (assignment_statement
     (identifier)

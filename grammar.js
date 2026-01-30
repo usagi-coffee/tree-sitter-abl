@@ -84,7 +84,6 @@ module.exports = grammar({
 
     // menu_item_access with optional IN MENU suffix conflicts with IN FRAME
     [$.menu_item_access],
-    [$.create_window_statement],
   ],
   inline: ($) => [],
 
