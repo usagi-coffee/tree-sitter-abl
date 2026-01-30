@@ -78,6 +78,8 @@ module.exports = grammar({
     [$._primary_expression, $.__in_frame_target],
     [$.__prompt_for_record_body, $.__prompt_for_field_target],
     [$.__frame_option_down],
+    [$.__update_record_body, $.__update_field_target],
+    [$.__set_record_body, $.__set_field_target],
   ],
   inline: ($) => [],
 

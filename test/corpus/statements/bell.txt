@@ -47,8 +47,7 @@ END.
       (undo_phrase))
     (body
       (set_statement
-        (set_item
-          (identifier))
+        (identifier)
         (frame_phrase
           (frame_option)))
       (if_statement

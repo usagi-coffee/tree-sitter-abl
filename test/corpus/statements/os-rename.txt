@@ -73,8 +73,7 @@ OS-RENAME "a.txt" VALUE("b.txt").
         (leave_statement
           (identifier)))
       (update_statement
-        (update_item
-          (identifier))
+        (identifier)
         (frame_phrase
           (identifier)))
       (os_rename_statement

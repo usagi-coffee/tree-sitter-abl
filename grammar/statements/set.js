@@ -2,6 +2,20 @@ module.exports = ({ kw, tkw }) => ({
   set_statement: ($) => seq(tkw("SET"), $.__set_body, $._terminator),
 
   __set_body: ($) =>
+    choice(
+      prec.dynamic(1, $.__set_record_body),
+      $.__set_fields_body,
+    ),
+  __set_record_body: ($) =>
+    seq(
+      optional(alias($.__set_stream_phrase, $.stream_phrase)),
+      optional(tkw("UNLESS-HIDDEN")),
+      field("record", choice($.identifier, $.qualified_name)),
+      optional(seq(kw("EXCEPT"), repeat1(field("except", $.identifier)))),
+      optional($.frame_phrase),
+      optional(tkw("NO-ERROR")),
+    ),
+  __set_fields_body: ($) =>
     seq(
       optional(alias($.__set_stream_phrase, $.stream_phrase)),
       optional(tkw("UNLESS-HIDDEN")),
@@ -34,15 +48,21 @@ module.exports = ({ kw, tkw }) => ({
       seq(
         tkw("TEXT"),
         "(",
-        token(/[A-Za-z_][A-Za-z0-9_-]*/),
-        alias($.__set_format_phrase, $.format_phrase),
+        repeat1(
+          seq(
+            field("field", choice($.identifier, $.qualified_name)),
+            optional(alias($.__set_format_phrase, $.format_phrase)),
+          ),
+        ),
         ")",
       ),
       seq(
         field("constant", $.string_literal),
         alias($.__set_at_phrase, $.at_phrase),
       ),
-      $.__set_skip_phrase,
+      seq(tkw("SKIP"), optional(seq("(", $._expression, ")"))),
+      seq(tkw("SPACE"), optional(seq("(", $._expression, ")"))),
+      "^",
     ),
   __set_field_target: ($) => choice($.identifier, $.qualified_name),
   __set_format_phrase: ($) =>
@@ -62,8 +82,6 @@ module.exports = ({ kw, tkw }) => ({
     ),
   __set_label_option: ($) => seq(kw("LABEL"), $._expression),
   __set_at_phrase: ($) => seq(kw("AT"), token(/[0-9]+(\.[0-9]+)?/)),
-  __set_skip_phrase: ($) =>
-    seq(tkw("SKIP"), optional(seq("(", field("lines", $._expression), ")"))),
   __set_help_phrase: ($) => seq(kw("HELP"), $.string_literal),
   __set_editing_phrase: ($) =>
     seq(tkw("EDITING"), $._colon, repeat1($._statement), tkw("END")),

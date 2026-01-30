@@ -53,10 +53,9 @@ END.
           (identifier)
           (identifier)))
       (update_statement
-        (update_item
-          (qualified_name
-            (identifier)
-            (identifier))))
+        (qualified_name
+          (identifier)
+          (identifier)))
       (assignment_statement
         (identifier)
         (assignment_operator)
@@ -87,10 +86,9 @@ END.
           (identifier)
           (identifier)))
       (update_statement
-        (update_item
-          (qualified_name
-            (identifier)
-            (identifier))))
+        (qualified_name
+          (identifier)
+          (identifier)))
       (assignment_statement
         (identifier)
         (assignment_operator)

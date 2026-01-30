@@ -80,10 +80,9 @@ STATUS INPUT OFF IN WINDOW hWin.
                 (identifier)
                 (identifier))))))
       (update_statement
-        (update_item
-          (qualified_name
-            (identifier)
-            (identifier))))))
+        (qualified_name
+          (identifier)
+          (identifier)))))
   (status_statement
     (string_literal)
     (identifier))

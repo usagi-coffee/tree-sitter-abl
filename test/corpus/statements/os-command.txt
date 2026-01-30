@@ -41,8 +41,7 @@ OS-COMMAND VALUE("echo") "ok".
   (repeat_statement
     (body
       (update_statement
-        (update_item
-          (identifier)))
+        (identifier))
       (os_command_statement
         (identifier))))
   (os_command_statement

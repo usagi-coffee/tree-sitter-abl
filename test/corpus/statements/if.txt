@@ -331,10 +331,9 @@ OUTPUT STREAM due CLOSE.
                       (null_literal))
                     (body
                       (update_statement
-                        (update_item
-                          (qualified_name
-                            (identifier)
-                            (identifier)))
+                        (qualified_name
+                          (identifier)
+                          (identifier))
                         (frame_phrase
                           (identifier))))))))
             (assignment_statement
@@ -355,10 +354,9 @@ OUTPUT STREAM due CLOSE.
                   (null_literal))
                 (body
                   (update_statement
-                    (update_item
-                      (qualified_name
-                        (identifier)
-                        (identifier)))
+                    (qualified_name
+                      (identifier)
+                      (identifier))
                     (frame_phrase
                       (identifier))))))))
         (do_block

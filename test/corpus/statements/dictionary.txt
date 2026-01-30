@@ -35,8 +35,7 @@ IF ans THEN DICTIONARY.
         (number_literal))
       (frame_option)))
   (update_statement
-    (update_item
-      (identifier)))
+    (identifier))
   (if_statement
     (identifier)
     (dictionary_statement)))

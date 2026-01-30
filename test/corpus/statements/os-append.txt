@@ -70,8 +70,7 @@ END.
         (leave_statement
           (identifier)))
       (update_statement
-        (update_item
-          (identifier))
+        (identifier)
         (frame_phrase
           (identifier)))
       (os_append_statement

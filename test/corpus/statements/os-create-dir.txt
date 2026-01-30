@@ -44,8 +44,7 @@ OS-CREATE-DIR VALUE("tmp") "logs".
     (label_option
       (string_literal)))
   (update_statement
-    (update_item
-      (identifier)))
+    (identifier))
   (os_create_dir_statement
     (function_call
       (identifier)

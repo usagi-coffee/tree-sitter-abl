@@ -2,6 +2,18 @@ module.exports = ({ kw, tkw }) => ({
   update_statement: ($) => seq(tkw("UPDATE"), $.__update_body, $._terminator),
 
   __update_body: ($) =>
+    choice(
+      prec.dynamic(1, $.__update_record_body),
+      $.__update_fields_body,
+    ),
+  __update_record_body: ($) =>
+    seq(
+      field("record", choice($.identifier, $.qualified_name)),
+      optional(seq(kw("EXCEPT"), repeat1(field("except", $.identifier)))),
+      optional($.frame_phrase),
+      optional(tkw("NO-ERROR")),
+    ),
+  __update_fields_body: ($) =>
     seq(
       optional(tkw("UNLESS-HIDDEN")),
       repeat1(alias($.__update_item, $.update_item)),
@@ -27,15 +39,21 @@ module.exports = ({ kw, tkw }) => ({
       seq(
         tkw("TEXT"),
         "(",
-        token(/[A-Za-z_][A-Za-z0-9_-]*/),
-        alias($.__update_format_phrase, $.format_phrase),
+        repeat1(
+          seq(
+            field("field", choice($.identifier, $.qualified_name)),
+            optional(alias($.__update_format_phrase, $.format_phrase)),
+          ),
+        ),
         ")",
       ),
       seq(
         field("constant", $.string_literal),
         optional(alias($.__update_at_phrase, $.at_phrase)),
       ),
-      tkw("SKIP"),
+      seq(tkw("SKIP"), optional(seq("(", $._expression, ")"))),
+      seq(tkw("SPACE"), optional(seq("(", $._expression, ")"))),
+      "^",
     ),
   __update_field_target: ($) => choice($.identifier, $.qualified_name),
   __update_format_phrase: ($) =>

@@ -102,8 +102,7 @@ UPDATE a b.
       (identifier))
     (body
       (update_statement
-        (update_item
-          (identifier))
+        (identifier)
         (frame_phrase
           (frame_option
             (number_literal))))

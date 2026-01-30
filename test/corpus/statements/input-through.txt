@@ -102,8 +102,7 @@ INPUT CLOSE.
   (input_through_statement
     (identifier))
   (set_statement
-    (set_item
-      (identifier)))
+    (identifier))
   (input_statement)
   (assignment_statement
     (in_frame_expression
@@ -118,8 +117,7 @@ INPUT CLOSE.
   (repeat_statement
     (body
       (set_statement
-        (set_item
-          (identifier))
+        (identifier)
         (frame_phrase
           (frame_option)
           (frame_option)

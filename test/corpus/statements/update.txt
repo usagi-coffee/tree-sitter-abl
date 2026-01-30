@@ -14,8 +14,7 @@ UPDATE field1 GO-ON(f1 f2).
 
 (source_code
   (update_statement
-    (update_item
-      field: (identifier)))
+    record: (identifier))
   (update_statement
     (update_item
       field: (identifier))
@@ -33,13 +32,11 @@ UPDATE field1 GO-ON(f1 f2).
     (update_item
       field: (identifier)))
   (update_statement
-    (update_item
-      field: (identifier))
+    record: (identifier)
     (frame_phrase
       frame: (identifier)))
   (update_statement
-    (update_item
-      field: (identifier))
+    record: (identifier)
     (frame_phrase
       frame: (identifier)))
   (update_statement
@@ -72,6 +69,7 @@ UPDATE field1 FORMAT "x(10)" WHEN ok
         (format_option))
       when: (identifier))
     (update_item
+      field: (identifier)
       (format_phrase
         (format_option)))
     (update_item
@@ -95,14 +93,9 @@ UPDATE "Header" TO 30 Customer.Name.
 
 (source_code
   (update_statement
-    (update_item
-      field: (identifier))
-    (update_item
-      field: (identifier))
-    (update_item
-      field: (identifier))
-    (update_item
-      field: (identifier))
+    record: (identifier)
+    except: (identifier)
+    except: (identifier)
     (frame_phrase
       frame: (identifier)))
   (update_statement
@@ -160,4 +153,224 @@ UPDATE field1 SPACE(2) SKIP(1) ^.
 
 --------------------------------------------------------------------------------
 
-(source_code)
+(source_code
+  (for_each_statement
+    (record
+      (identifier))
+    (body
+      (update_statement
+        (update_item
+          (qualified_name
+            (identifier)
+            (identifier)))
+        (update_item
+          (qualified_name
+            (identifier)
+            (identifier)))
+        (update_item
+          (qualified_name
+            (identifier)
+            (identifier)))
+        (update_item
+          (qualified_name
+            (identifier)
+            (identifier)))
+        (update_item
+          (qualified_name
+            (identifier)
+            (identifier))))))
+  (for_each_statement
+    (record
+      (identifier))
+    (body
+      (update_statement
+        (update_item
+          (qualified_name
+            (identifier)
+            (identifier)))
+        (update_item
+          (qualified_name
+            (identifier)
+            (identifier))
+          (format_phrase
+            (validate_option
+              (binary_expression
+                (qualified_name
+                  (identifier)
+                  (identifier))
+                (number_literal))
+              (string_literal))))
+        (update_item
+          (identifier))
+        (update_item
+          (string_literal)))
+      (for_each_statement
+        (record
+          (identifier)
+          (of_phrase
+            (identifier)))
+        (body
+          (display_statement
+            (qualified_name
+              (identifier)
+              (identifier)))
+          (update_statement
+            (update_item
+              (qualified_name
+                (identifier)
+                (identifier)))
+            (update_item
+              (qualified_name
+                (identifier)
+                (identifier))
+              (format_phrase
+                (validate_option
+                  (binary_expression
+                    (qualified_name
+                      (identifier)
+                      (identifier))
+                    (identifier))
+                  (string_literal)))))))))
+  (repeat_statement
+    (body
+      (prompt_for_statement
+        (prompt_for_item
+          (qualified_name
+            (identifier)
+            (identifier))))
+      (find_statement
+        (identifier)
+        (using_phrase
+          (qualified_name
+            (identifier)
+            (identifier))))
+      (update_statement
+        (update_item
+          (qualified_name
+            (identifier)
+            (identifier)))
+        (update_item
+          (qualified_name
+            (identifier)
+            (identifier)))
+        (update_item
+          (qualified_name
+            (identifier)
+            (identifier)))
+        (update_item
+          (qualified_name
+            (identifier)
+            (identifier)))
+        (update_item
+          (qualified_name
+            (identifier)
+            (identifier)))
+        (frame_phrase
+          (frame_option
+            (number_literal))
+          (frame_option
+            (number_literal))))))
+  (variable_definition
+    (identifier)
+    (identifier)
+    (no_undo)
+    (format_option
+      (string_literal))
+    (extent_phrase
+      (number_literal)))
+  (form_statement
+    (form_item
+      (string_literal))
+    (form_item
+      (qualified_name
+        (identifier)
+        (identifier)))
+    (form_item
+      (identifier))
+    (form_item
+      (number_literal))
+    (form_item)
+    (form_item
+      (string_literal))
+    (form_item
+      (qualified_name
+        (identifier)
+        (identifier)))
+    (form_item
+      (identifier))
+    (form_item
+      (number_literal))
+    (form_item
+      (number_literal))
+    (form_item
+      (string_literal))
+    (form_item
+      (identifier))
+    (form_item
+      (identifier))
+    (form_item
+      (number_literal))
+    (frame_phrase
+      (identifier)
+      (frame_option)
+      (frame_option)
+      (frame_option
+        (string_literal))))
+  (for_each_statement
+    (record
+      (identifier)
+      (no_lock))
+    (record
+      (identifier)
+      (of_phrase
+        (identifier)))
+    (body
+      (display_statement
+        (qualified_name
+          (identifier)
+          (identifier))
+        (qualified_name
+          (identifier)
+          (identifier))
+        (qualified_name
+          (identifier)
+          (identifier))
+        (qualified_name
+          (identifier)
+          (identifier))
+        (qualified_name
+          (identifier)
+          (identifier))
+        (frame_phrase
+          (identifier)
+          (frame_option)))
+      (update_statement
+        (update_item
+          (qualified_name
+            (identifier)
+            (identifier)))
+        (update_item
+          (qualified_name
+            (identifier)
+            (identifier)))
+        (update_item
+          (identifier))
+        (frame_phrase
+          (identifier)))
+      (assignment_statement
+        (identifier)
+        (assignment_operator)
+        (string_literal))))
+  (update_statement
+    (identifier)
+    (identifier)
+    (frame_phrase
+      (identifier)))
+  (update_statement
+    (update_item
+      (identifier))
+    (update_item
+      (number_literal))
+    (update_item
+      (number_literal))
+    (update_item)))
