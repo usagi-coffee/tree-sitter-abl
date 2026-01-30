@@ -693,18 +693,21 @@ END.
       (arguments
         (argument
           (number_literal))))
+    (skip_phrase)
     (string_literal)
     (function_call
       (identifier)
       (arguments
         (argument
           (number_literal))))
+    (skip_phrase)
     (string_literal)
     (function_call
       (identifier)
       (arguments
         (argument
-          (number_literal)))))
+          (number_literal))))
+    (skip_phrase))
   (delete_procedure_statement
     (identifier))
   (function_definition

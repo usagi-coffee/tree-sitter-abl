@@ -25,10 +25,8 @@ module.exports = ({ kw, tkw }) => ({
 
   __display_item: ($) =>
     choice(
-      prec(1, seq(kw("SKIP"), "(", optional($._expression), ")")),
-      prec(1, seq(kw("SPACE"), "(", optional($._expression), ")")),
-      kw("SKIP"),
-      kw("SPACE"),
+      alias($.__display_skip_phrase, $.skip_phrase),
+      alias($.__display_space_phrase, $.space_phrase),
       seq(
         choice(
           $._expression,
@@ -43,6 +41,18 @@ module.exports = ({ kw, tkw }) => ({
         optional(seq(tkw("WHEN"), field("when", $._expression))),
         optional(seq("@", field("base", choice($.identifier, $.qualified_name)))),
       ),
+    ),
+
+  __display_skip_phrase: ($) =>
+    choice(
+      prec(1, seq(tkw("SKIP"), "(", optional($._expression), ")")),
+      tkw("SKIP"),
+    ),
+
+  __display_space_phrase: ($) =>
+    choice(
+      prec(1, seq(tkw("SPACE"), "(", optional($._expression), ")")),
+      tkw("SPACE"),
     ),
 
   __display_stream_phrase: ($) =>

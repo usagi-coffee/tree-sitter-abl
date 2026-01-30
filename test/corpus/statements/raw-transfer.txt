@@ -43,70 +43,49 @@ RAW-TRANSFER BUFFER srcBuf TO FIELD rawField NO-ERROR.
 --------------------------------------------------------------------------------
 
 (source_code
-  (ERROR
-    (ERROR
-      (identifier))
-    (record
-      table: (identifier)
-      (of_phrase
-        (identifier)))
-    (body
-      (create_statement
-        table: (identifier))
-      (assign_statement
-        (assign_pair
-          left: (qualified_name
-            left: (identifier)
-            right: (identifier))
-          right: (function_call
-            function: (identifier)
-            (arguments
+  (identifier))(record
+  table: (identifier)
+  (of_phrase
+    (identifier)))(body
+  (create_statement
+    table: (identifier))
+  (assign_statement
+    (assign_pair
+      left: (qualified_name
+        left: (identifier)
+        right: (identifier))
+      right: (function_call
+        function: (identifier)
+        (arguments
+          (argument
+            value: (function_call
+              function: (identifier)
+              (arguments
+                (identifier))
               (argument
-                value: (function_call
-                  function: (identifier)
-                  (arguments
-                    (ERROR
-                      (identifier))
-                    (argument
-                      value: (identifier))))))))
-        (assign_pair
-          left: (qualified_name
-            left: (identifier)
-            right: (identifier))
-          right: (string_literal))
-        (assign_pair
-          left: (qualified_name
-            left: (identifier)
-            right: (identifier))
-          right: (string_literal)))
-      (raw_transfer_statement
-        source_field: (identifier)
-        target: (identifier))
-      (expression_statement
-        (identifier))
-      (raw_transfer_statement
-        (ERROR
-          (identifier))
-        source_field: (identifier)
-        (ERROR
-          (identifier))
-        target: (identifier))
-      (raw_transfer_statement
-        source_field: (identifier)
-        target_field: (identifier)
-        (ERROR
-          (identifier)))
-      (raw_transfer_statement
-        (ERROR
-          (identifier))
-        source_field: (identifier)
-        target: (identifier)
-        (ERROR
-          (identifier)))
-      (raw_transfer_statement
-        (ERROR
-          (identifier))
-        source_field: (identifier)
-        (ERROR
-          (identifier))
-        target: (identifier)))))
+                value: (identifier))))))))
+  (assign_pair
+    left: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    right: (string_literal))
+  (assign_pair
+    left: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    right: (string_literal)))(raw_transfer_statement
+  source_field: (identifier)
+  target: (identifier))(expression_statement
+  (identifier))(raw_transfer_statement
+  (identifier))
+source_field: (identifier)(identifier)
+target: (identifier)(raw_transfer_statement
+  source_field: (identifier)
+  target_field: (identifier)
+  (identifier))(raw_transfer_statement
+  (identifier))
+source_field: (identifier)
+target: (identifier)(identifier)(raw_transfer_statement
+  (identifier))
+source_field: (identifier)(identifier)
+target: (identifier)

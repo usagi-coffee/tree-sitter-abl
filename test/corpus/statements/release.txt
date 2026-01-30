@@ -9,7 +9,8 @@ RELEASE order_hdr.
 
 (source_code
   (release_statement
-    record: (identifier))
+    record: (identifier)
+    (no_error))
   (release_statement
     record: (identifier)))
 
@@ -192,4 +193,6 @@ RELEASE sports.Customer NO-ERROR.
     widgets: (identifier))
   (release_statement
     record: (qualified_name
-      left: (identifier))
+      left: (identifier)
+      right: (identifier))
+    (no_error)))

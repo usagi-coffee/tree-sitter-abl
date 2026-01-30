@@ -52,7 +52,7 @@ module.exports = ({ kw, tkw }) => ({
   __frame_option_use_text: ($) => tkw("USE-TEXT"),
   __frame_option_down: ($) =>
     choice(
-      prec(1, seq($.number_literal, tkw("DOWN"))),
+      prec(1, seq($._expression, tkw("DOWN"))),
       seq(tkw("DOWN"), optional($._expression)),
       tkw("DOWN"),
     ),

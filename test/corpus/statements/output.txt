@@ -126,7 +126,7 @@ OUTPUT TO TERMINAL.
         (qualified_name
           (identifier)
           (identifier))
-        (parenthesized_expression
+        (skip_phrase
           (number_literal))
         (frame_phrase
           (frame_option

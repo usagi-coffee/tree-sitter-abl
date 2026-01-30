@@ -517,120 +517,118 @@ Item.OnHand * Item.Price @ item-tot.
 --------------------------------------------------------------------------------
 
 (source_code
-  (ERROR
-    (variable_definition
-      name: (identifier)
-      type: (identifier)
-      (no_undo)
-      (label_option
-        (string_literal)))
-    (rectangle_definition
-      name: (identifier)
-      (size_phrase
-        width: (number_literal)
-        height: (number_literal))
-      (edge_pixels
-        (number_literal)))
-    (rectangle_definition
-      name: (identifier)
-      (like_option
-        like: (identifier)))
-    (rectangle_definition
-      name: (identifier)
-      (like_option
-        like: (identifier)))
-    (rectangle_definition
-      name: (identifier)
-      (like_option
-        like: (identifier)))
-    (rectangle_definition
-      name: (identifier)
-      (like_option
-        like: (identifier)))
-    (rectangle_definition
-      name: (identifier)
-      (like_option
-        like: (identifier)))
-    (rectangle_definition
-      name: (identifier)
-      (size_phrase
-        width: (number_literal)
-        height: (number_literal))
-      (edge_pixels
-        (number_literal)))
-    (frame_definition
-      name: (identifier)
-      field: (qualified_name
-        left: (identifier)
-        right: (identifier))
-      field: (qualified_name
-        left: (identifier)
-        right: (identifier))
-      field: (qualified_name
-        left: (identifier)
-        right: (identifier))
-      field: (qualified_name
-        left: (identifier)
-        right: (identifier))
-      field: (qualified_name
-        left: (identifier)
-        right: (identifier))
-      field: (qualified_name
-        left: (identifier)
-        right: (identifier))
-      field: (identifier)
-      (ERROR)
-      (parenthesized_expression
-        (number_literal))
-      (identifier)
-      (identifier)
-      (number_literal)
-      (identifier)
-      (number_literal)
-      (identifier)
-      (number_literal)
-      (identifier)
-      (number_literal)
-      (identifier)
-      (number_literal)
-      (identifier)
-      (number_literal)
-      (frame_phrase
-        (frame_option
-          title: (string_literal))
-        (frame_option)
-        (frame_option)
-        (frame_option
-          (number_literal))))
-    (record
-      table: (identifier)
-      (no_lock))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo)
+    (label_option
+      (string_literal)))
+  (rectangle_definition
+    name: (identifier)
+    (size_phrase
+      width: (number_literal)
+      height: (number_literal))
+    (edge_pixels
+      (number_literal)))
+  (rectangle_definition
+    name: (identifier)
+    (like_option
+      like: (identifier)))
+  (rectangle_definition
+    name: (identifier)
+    (like_option
+      like: (identifier)))
+  (rectangle_definition
+    name: (identifier)
+    (like_option
+      like: (identifier)))
+  (rectangle_definition
+    name: (identifier)
+    (like_option
+      like: (identifier)))
+  (rectangle_definition
+    name: (identifier)
+    (like_option
+      like: (identifier)))
+  (rectangle_definition
+    name: (identifier)
+    (size_phrase
+      width: (number_literal)
+      height: (number_literal))
+    (edge_pixels
+      (number_literal)))
+  (frame_definition
+    name: (identifier)
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    field: (identifier)
+    (parenthesized_expression
+      (number_literal))
+    (identifier)
+    (identifier)
+    (number_literal)
+    (identifier)
+    (number_literal)
+    (identifier)
+    (number_literal)
+    (identifier)
+    (number_literal)
+    (identifier)
+    (number_literal)
+    (identifier)
+    (number_literal)
     (frame_phrase
-      frame: (identifier))
-    (display_statement
+      (frame_option
+        title: (string_literal))
+      (frame_option)
+      (frame_option)
+      (frame_option
+        (number_literal))))
+  (record
+    table: (identifier)
+    (no_lock))
+  (frame_phrase
+    frame: (identifier))
+  (display_statement
+    (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (binary_expression
       (qualified_name
         left: (identifier)
         right: (identifier))
       (qualified_name
         left: (identifier)
-        right: (identifier))
-      (qualified_name
-        left: (identifier)
-        right: (identifier))
-      (qualified_name
-        left: (identifier)
-        right: (identifier))
-      (qualified_name
-        left: (identifier)
-        right: (identifier))
-      (qualified_name
-        left: (identifier)
-        right: (identifier))
-      (binary_expression
-        (qualified_name
-          left: (identifier)
-          right: (identifier))
-        (qualified_name
-          left: (identifier)
-          right: (identifier)))
-      base: (identifier))))
+        right: (identifier)))
+    base: (identifier)))

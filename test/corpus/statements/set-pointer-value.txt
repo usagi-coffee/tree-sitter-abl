@@ -80,7 +80,6 @@ END PROCEDURE.
     name: (identifier)
     (external_phrase
       library: (string_literal))
-    (ERROR)
     (parameter_definition
       name: (identifier)
       type: (identifier))))

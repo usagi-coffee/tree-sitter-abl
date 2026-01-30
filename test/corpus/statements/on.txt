@@ -141,13 +141,11 @@ ON F5 ENDKEY.
     field: (qualified_name
       left: (identifier)
       right: (identifier))
-    (ERROR)
     (number_literal)
     field: (identifier)
     field: (qualified_name
       left: (identifier)
       right: (identifier))
-    (ERROR)
     (number_literal)
     (frame_phrase
       (frame_option)
@@ -155,72 +153,62 @@ ON F5 ENDKEY.
         title: (string_literal))
       (frame_option
         row: (number_literal)))
-    (ERROR
-      (number_literal)
-      (identifier)))
-  (on_statement
-    event: (identifier)
-    widget: (identifier)
-    widget: (identifier)
-    (do_block
-      (body
-        (if_statement
-          (binary_expression
-            (object_access
-              left: (identifier)
-              right: (identifier))
-            (string_literal))
-          then: (find_statement
-            table: (identifier)
-            (no_lock))
-          else: (find_statement
-            table: (identifier)
-            (no_lock)))
-        (display_statement
-          (qualified_name
+    (number_literal)
+    (identifier)))(on_statement
+  event: (identifier)
+  widget: (identifier)
+  widget: (identifier)
+  (do_block
+    (body
+      (if_statement
+        (binary_expression
+          (object_access
             left: (identifier)
             right: (identifier))
-          (qualified_name
-            left: (identifier)
-            right: (identifier))
-          (frame_phrase
-            frame: (identifier))))))
-  (enable_statement
-    (enable_item
-      field: (identifier))
-    (enable_item
-      field: (identifier))
-    (frame_phrase
-      frame: (identifier)))
-  (enable_statement
-    (enable_item
-      field: (identifier))
-    (frame_phrase
-      frame: (identifier)))
-  (wait_for_statement
-    events: (identifier)
-    widgets: (identifier)
-    widgets: (identifier)
-    events: (identifier)
-    widgets: (identifier)
-    widgets: (identifier)
-    widgets: (identifier)
-    widgets: (identifier)
-    focus: (identifier)
-    (ERROR
-      (identifier)))
-  (on_statement
-    event: (identifier)
-    (expression_statement
-      (identifier)))
-  (on_statement
-    event: (identifier)
-    (expression_statement
-      (identifier)))
-  (on_statement
-    event: (identifier)
-    (bell_statement))
-  (on_statement
-    event: (identifier)
-    (expression_statement
-      (identifier))))
+          (string_literal))
+        then: (find_statement
+          table: (identifier)
+          (no_lock))
+        else: (find_statement
+          table: (identifier)
+          (no_lock)))
+      (display_statement
+        (qualified_name
+          left: (identifier)
+          right: (identifier))
+        (qualified_name
+          left: (identifier)
+          right: (identifier))
+        (frame_phrase
+          frame: (identifier))))))(enable_statement
+  (enable_item
+    field: (identifier))
+  (enable_item
+    field: (identifier))
+  (frame_phrase
+    frame: (identifier)))(enable_statement
+  (enable_item
+    field: (identifier))
+  (frame_phrase
+    frame: (identifier)))(wait_for_statement
+  events: (identifier)
+  widgets: (identifier)
+  widgets: (identifier)
+  events: (identifier)
+  widgets: (identifier)
+  widgets: (identifier)
+  widgets: (identifier)
+  widgets: (identifier)
+  focus: (identifier)
+  (identifier))(on_statement
+  event: (identifier)
+  (expression_statement
+    (identifier)))(on_statement
+  event: (identifier)
+  (expression_statement
+    (identifier)))(on_statement
+  event: (identifier)
+  (bell_statement))(on_statement
+  event: (identifier)
+  (expression_statement
+    (identifier)))

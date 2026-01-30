@@ -540,99 +540,60 @@ DELETE WIDGET mywin.
       frame: (identifier))
     (do_block
       (body
-        (ERROR
-          (object_access
-            left: (identifier)
-            (ERROR
-              (identifier))
-            right: (identifier))
-          (identifier)
+        (object_access
+          left: (identifier)
           (identifier))
-        (expression_statement
-          (boolean_literal))
-        (ERROR
-          (object_access
-            left: (identifier)
-            (ERROR
-              (identifier))
-            right: (identifier))
-          (identifier)
-          (identifier))
-        (expression_statement
-          (boolean_literal))
-        (ERROR
-          (object_access
-            left: (identifier)
-            (ERROR
-              (identifier))
-            right: (identifier))
-          (identifier)
-          (identifier))
-        (expression_statement
-          (boolean_literal))
-        (ERROR
-          (object_access
-            left: (identifier)
-            (ERROR
-              (identifier))
-            right: (identifier))
-          (identifier)
-          (identifier))
-        (expression_statement
-          (boolean_literal)))))
-  (on_statement
-    event: (identifier)
-    widget: (identifier)
-    (in_frame_phrase
-      frame: (identifier))
-    (do_block
-      (body
-        (ERROR
-          (object_access
-            left: (identifier)
-            (ERROR
-              (identifier))
-            right: (identifier))
-          (identifier)
-          (identifier))
-        (expression_statement
-          (boolean_literal))
-        (ERROR
-          (object_access
-            left: (identifier)
-            (ERROR
-              (identifier))
-            right: (identifier))
-          (identifier)
-          (identifier))
-        (expression_statement
-          (boolean_literal))
-        (ERROR
-          (object_access
-            left: (identifier)
-            (ERROR
-              (identifier))
-            right: (identifier))
-          (identifier)
-          (identifier))
-        (expression_statement
-          (boolean_literal))
-        (ERROR
-          (object_access
-            left: (identifier)
-            (ERROR
-              (identifier))
-            right: (identifier))
-          (identifier)
-          (identifier))
-        (expression_statement
-          (boolean_literal)))))
-  (wait_for_statement
-    events: (identifier)
-    widgets: (identifier)
-    widgets: (identifier)
-    widgets: (identifier)
-    widgets: (identifier)
-    widgets: (identifier))
-  (delete_widget_statement
-    widget: (identifier)))
+        right: (identifier))
+      (identifier)
+      (identifier))
+    (expression_statement
+      (boolean_literal))
+    (object_access
+      left: (identifier)
+      (identifier))
+    right: (identifier))
+  (identifier)
+  (identifier))(expression_statement
+  (boolean_literal))(object_access
+  left: (identifier)
+  (identifier))
+right: (identifier)(identifier)(identifier)(expression_statement
+  (boolean_literal))(object_access
+  left: (identifier)
+  (identifier))
+right: (identifier)(identifier)(identifier)(expression_statement
+  (boolean_literal))(on_statement
+  event: (identifier)
+  widget: (identifier)
+  (in_frame_phrase
+    frame: (identifier))
+  (do_block
+    (body
+      (object_access
+        left: (identifier)
+        (identifier))
+      right: (identifier))
+    (identifier)
+    (identifier))
+  (expression_statement
+    (boolean_literal))
+  (object_access
+    left: (identifier)
+    (identifier))
+  right: (identifier))(identifier)(identifier)(expression_statement
+  (boolean_literal))(object_access
+  left: (identifier)
+  (identifier))
+right: (identifier)(identifier)(identifier)(expression_statement
+  (boolean_literal))(object_access
+  left: (identifier)
+  (identifier))
+right: (identifier)(identifier)(identifier)(expression_statement
+  (boolean_literal))(wait_for_statement
+  events: (identifier)
+  widgets: (identifier)
+  widgets: (identifier)
+  widgets: (identifier)
+  widgets: (identifier)
+  widgets: (identifier))(delete_widget_statement
+  widget: (identifier))

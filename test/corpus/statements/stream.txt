@@ -230,7 +230,7 @@ DISPLAY STREAM rpt ItemNum ItemName WITH NO-LABELS NO-BOX.
   (display_statement
     (stream_phrase
       (identifier))
-    (parenthesized_expression
+    (skip_phrase
       (number_literal))
     (identifier)
     (frame_phrase

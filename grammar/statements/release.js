@@ -3,7 +3,7 @@ module.exports = ({ kw, tkw }) => ({
     seq(
       kw("RELEASE"),
       field("record", $.__release_record_name),
-      optional($.__release_no_error),
+      optional(alias($.__release_no_error, $.no_error)),
       $._terminator,
     ),
 

@@ -269,7 +269,7 @@ OUTPUT STREAM due CLOSE.
       (identifier))
     (string_literal)
     (identifier)
-    (parenthesized_expression
+    (skip_phrase
       (number_literal))
     (frame_phrase
       (frame_option)

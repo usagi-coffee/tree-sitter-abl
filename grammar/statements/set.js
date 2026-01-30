@@ -21,6 +21,7 @@ module.exports = ({ kw, tkw }) => ({
       optional(tkw("UNLESS-HIDDEN")),
       repeat1(alias($.__set_item, $.set_item)),
       optional(alias($.__set_go_on, $.go_on_phrase)),
+      optional(alias($.__set_validate_option, $.validate_option)),
       optional(alias($.__set_help_phrase, $.help_phrase)),
       optional($.frame_phrase),
       optional(alias($.__set_editing_phrase, $.editing_phrase)),
@@ -86,4 +87,13 @@ module.exports = ({ kw, tkw }) => ({
   __set_editing_phrase: ($) =>
     seq(tkw("EDITING"), $._colon, repeat1($._statement), tkw("END")),
   __set_go_on: ($) => seq(tkw("GO-ON"), "(", repeat1($.identifier), ")"),
+  __set_validate_option: ($) =>
+    seq(
+      tkw("VALIDATE"),
+      "(",
+      field("condition", $._expression),
+      ",",
+      field("message", $._expression),
+      ")",
+    ),
 });

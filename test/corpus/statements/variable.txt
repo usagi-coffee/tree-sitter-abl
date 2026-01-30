@@ -734,158 +734,152 @@ END.
         title: (string_literal)))
     (body
       (display_statement
-        (ERROR)
-        (parenthesized_expression
-          (number_literal)))
-      (update_statement
-        (update_item
-          field: (identifier))
-        (update_item
-          field: (identifier))
-        (update_item
-          constant: (string_literal)))
-      (display_statement
-        (array_access
-          array: (identifier)
-          (function_call
-            function: (identifier)
-            (arguments
-              (argument
-                value: (identifier)))))
-        (identifier)
-        (string_literal))))
-  (variable_definition
-    name: (identifier)
-    type: (identifier)
-    (no_undo))
+        (number_literal)))
+    (update_statement
+      (update_item
+        field: (identifier))
+      (update_item
+        field: (identifier))
+      (update_item
+        constant: (string_literal)))
+    (display_statement
+      (array_access
+        array: (identifier)
+        (function_call
+          function: (identifier)
+          (arguments
+            (argument
+              value: (identifier)))))
+      (identifier)
+      (string_literal)))
   (variable_definition
     name: (identifier)
     type: (identifier)
     (no_undo)
-    (view_as_phrase
-      widget: (identifier)
-      (number_literal)
-      (number_literal))
-    (ERROR
+    (variable_definition
+      name: (identifier)
+      type: (identifier)
+      (no_undo)
+      (view_as_phrase
+        widget: (identifier)
+        (number_literal)
+        (number_literal))
       (identifier)
       (identifier)
-      (identifier))
-    (label_option
-      (string_literal))
-    (ERROR)
-    (trigger_phrase
-      (identifier)))
-  (do_block
-    (body
-      (if_statement
-        (binary_expression
-          (object_access
-            left: (identifier)
-            right: (identifier))
-          (string_literal))
-        then: (do_block
-          variable: (identifier)
-          start: (number_literal)
-          end: (function_call
-            function: (identifier)
-            (arguments
-              (argument
-                value: (object_access
-                  left: (identifier)
-                  right: (identifier)))))
-          (body
-            (display_statement
-              (function_call
-                function: (identifier)
-                (arguments
-                  (argument
-                    value: (identifier))
-                  (argument
-                    value: (object_access
-                      left: (identifier)
-                      right: (identifier)))))
-              (format_phrase
-                (format_option
-                  (string_literal)))
-              (ERROR
+      (identifier)
+      (label_option
+        (string_literal)
+        (trigger_phrase
+          (identifier)
+          (do_block
+            (body
+              (if_statement
+                (binary_expression
+                  (object_access
+                    left: (identifier)
+                    right: (identifier))
+                  (string_literal))
+                then: (do_block
+                  variable: (identifier)
+                  start: (number_literal)
+                  end: (function_call
+                    function: (identifier)
+                    (arguments
+                      (argument
+                        value: (object_access
+                          left: (identifier)
+                          right: (identifier)))))
+                  (body
+                    (display_statement
+                      (function_call
+                        function: (identifier)
+                        (arguments
+                          (argument
+                            value: (identifier))
+                          (argument
+                            value: (object_access
+                              left: (identifier)
+                              right: (identifier)))))
+                      (format_phrase
+                        (format_option
+                          (string_literal)))
+                      (frame_phrase
+                        frame: (identifier)
+                        (frame_option)))
+                    (binary_expression
+                      (function_call
+                        function: (identifier)
+                        (arguments
+                          (argument
+                            value: (object_access
+                              left: (identifier)
+                              right: (identifier)))))
+                      (number_literal))
+                    (identifier)
+                    (identifier)
+                    (string_literal)
+                    (identifier))
+                  (down_statement
+                    count: (number_literal)
+                    (frame_phrase
+                      frame: (identifier))))))
+            (expression_statement
+              (identifier)
+              (enable_statement
+                (enable_item
+                  field: (identifier))
                 (frame_phrase
                   frame: (identifier)
-                  (frame_option)))
-              (binary_expression
-                (function_call
-                  function: (identifier)
-                  (arguments
-                    (argument
-                      value: (object_access
+                  (frame_option
+                    title: (string_literal))))
+              (wait_for_statement
+                events: (identifier)
+                widgets: (identifier))
+              (variable_definition
+                name: (identifier)
+                type: (identifier)
+                (no_undo)
+                (column_label_option
+                  (string_literal)))
+              (for_each_statement
+                (record
+                  table: (identifier))
+                (body
+                  (display_statement
+                    (qualified_name
+                      left: (identifier)
+                      right: (identifier))
+                    (qualified_name
+                      left: (identifier)
+                      right: (identifier)))
+                  (set_statement
+                    record: (identifier))
+                  (assignment_statement
+                    left: (qualified_name
+                      left: (identifier)
+                      right: (identifier))
+                    operator: (assignment_operator)
+                    right: (binary_expression
+                      (parenthesized_expression
+                        (binary_expression
+                          (qualified_name
+                            left: (identifier)
+                            right: (identifier))
+                          (parenthesized_expression
+                            (binary_expression
+                              (identifier)
+                              (number_literal)))))
+                      (qualified_name
                         left: (identifier)
-                        right: (identifier)))))
-                (number_literal))
-              (identifier)
-              (identifier)
-              (string_literal)
-              (identifier))
-            (down_statement
-              count: (number_literal)
-              (frame_phrase
-                frame: (identifier))))))))
-  (expression_statement
-    (identifier)
-    (ERROR))
-  (enable_statement
-    (enable_item
-      field: (identifier))
-    (frame_phrase
-      frame: (identifier)
-      (frame_option
-        title: (string_literal))))
-  (wait_for_statement
-    events: (identifier)
-    widgets: (identifier))
-  (variable_definition
-    name: (identifier)
-    type: (identifier)
-    (no_undo)
-    (column_label_option
-      (string_literal)))
-  (for_each_statement
-    (record
-      table: (identifier))
-    (body
-      (display_statement
-        (qualified_name
-          left: (identifier)
-          right: (identifier))
-        (qualified_name
-          left: (identifier)
-          right: (identifier)))
-      (set_statement
-        record: (identifier))
-      (assignment_statement
-        left: (qualified_name
-          left: (identifier)
-          right: (identifier))
-        operator: (assignment_operator)
-        right: (binary_expression
-          (parenthesized_expression
-            (binary_expression
-              (qualified_name
-                left: (identifier)
-                right: (identifier))
-              (parenthesized_expression
-                (binary_expression
-                  (identifier)
-                  (number_literal)))))
-          (qualified_name
-            left: (identifier)
-            right: (identifier))))
-      (display_statement
-        (qualified_name
-          left: (identifier)
-          right: (identifier))
-        base: (identifier)
-        (identifier)
-        (qualified_name
-          left: (identifier)
-          right: (identifier))
-        (identifier)
-        (string_literal)))))
+                        right: (identifier))))
+                  (display_statement
+                    (qualified_name
+                      left: (identifier)
+                      right: (identifier))
+                    base: (identifier)
+                    (identifier)
+                    (qualified_name
+                      left: (identifier)
+                      right: (identifier))
+                    (identifier)
+                    (string_literal)))))

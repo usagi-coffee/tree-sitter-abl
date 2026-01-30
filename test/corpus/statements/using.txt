@@ -97,10 +97,9 @@ USING Acme.BusObjs.* FROM PROPATH.
     type: (identifier))
   (variable_definition
     name: (identifier)
-    type: (identifier)
-    (initial_option
-      value: (unary_expression
-        (identifier))))
+    type: (nested_type_name
+      left: (identifier)
+      right: (identifier)))
   (using_statement)
   (variable_definition
     name: (identifier)

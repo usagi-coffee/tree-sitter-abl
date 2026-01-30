@@ -12,6 +12,8 @@ module.exports = ({ kw, tkw }) => ({
         ),
       ),
       optional(alias($.__run_in_phrase, $.in_phrase)),
+      optional(alias($.__run_on_server, $.on_server_phrase)),
+      optional(alias($.__run_asynchronous, $.asynchronous_phrase)),
       optional($.arguments),
       optional(tkw("NO-ERROR")),
     ),
@@ -24,4 +26,13 @@ module.exports = ({ kw, tkw }) => ({
   __run_singleton: ($) =>
     seq(tkw("SINGLETON"), optional(seq(kw("SET"), field("handle", $.identifier)))),
   __run_in_phrase: ($) => seq(kw("IN"), field("context", $._expression)),
+  __run_on_server: ($) =>
+    seq(kw("ON"), kw("SERVER"), field("server", $._expression)),
+  __run_asynchronous: ($) =>
+    seq(
+      tkw("ASYNCHRONOUS"),
+      optional(seq(kw("SET"), field("handle", $.identifier))),
+      optional(seq(kw("EVENT-HANDLER"), field("event_handler", $._expression))),
+      optional(seq(kw("EVENT-HANDLER-CONTEXT"), field("context", $._expression))),
+    ),
 });

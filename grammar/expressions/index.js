@@ -10,6 +10,7 @@ const inFrameExpression = require("./in-frame");
 const inputExpression = require("./input");
 const accumExpression = require("./accum");
 const frameExpression = require("./frame");
+const menuExpression = require("./menu");
 
 module.exports = (ctx) => ({
   ...conditionalExpression(ctx),
@@ -24,4 +25,5 @@ module.exports = (ctx) => ({
   ...inputExpression(ctx),
   ...inFrameExpression(ctx),
   ...frameExpression(ctx),
+  ...menuExpression(ctx),
 });

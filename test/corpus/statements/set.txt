@@ -176,17 +176,15 @@ SET Customer EXCEPT Comments WITH FRAME fCust NO-ERROR.
           field: (qualified_name
             left: (identifier)
             right: (identifier)))
-        (set_item
-          field: (identifier)))
-      (expression_statement
-        (parenthesized_expression
-          (binary_expression
+        (validate_option
+          condition: (binary_expression
             (qualified_name
               left: (identifier)
               right: (identifier))
             (number_literal))
-          (ERROR))
-        (ERROR))
+          message: (string_literal))
+        (help_phrase
+          (string_literal)))
       (repeat_statement
         (body
           (create_statement
@@ -208,16 +206,13 @@ SET Customer EXCEPT Comments WITH FRAME fCust NO-ERROR.
               field: (qualified_name
                 left: (identifier)
                 right: (identifier)))
-            (set_item
-              field: (identifier)))
-          (expression_statement
-            (parenthesized_expression
-              (binary_expression
+            (validate_option
+              condition: (binary_expression
                 (qualified_name
                   left: (identifier)
                   right: (identifier))
                 (identifier))
-              (ERROR)))))))
+              message: (string_literal)))))))
   (variable_definition
     name: (identifier)
     type: (identifier)

@@ -351,15 +351,15 @@ DISPLAY SPACE(2) Customer.Name SKIP(1) Customer.City.
         (qualified_name
           (identifier)
           (identifier))
-        (identifier)
+        (skip_phrase)
         (qualified_name
           (identifier)
           (identifier))
-        (identifier)
+        (skip_phrase)
         (qualified_name
           (identifier)
           (identifier))
-        (identifier)
+        (skip_phrase)
         (binary_expression
           (binary_expression
             (qualified_name
@@ -380,25 +380,20 @@ DISPLAY SPACE(2) Customer.Name SKIP(1) Customer.City.
             (identifier)
             (identifier))
           (string_literal))
-        (function_call
-          (identifier)
-          (arguments
-            (argument
-              (number_literal))))
+        (skip_phrase
+          (number_literal))
         (frame_phrase
           (frame_option)
           (frame_option)
           (frame_option)))))
   (display_statement
     (identifier)
-    (identifier)
     (qualified_name
       (identifier)
       (identifier))
     (frame_phrase
       (identifier)))
   (display_statement
-    (identifier)
     (identifier)
     (qualified_name
       (identifier)
@@ -425,24 +420,17 @@ DISPLAY SPACE(2) Customer.Name SKIP(1) Customer.City.
       (identifier)
       (identifier)))
   (display_statement
-    (identifier)
     (qualified_name
       (identifier)
       (identifier)))
   (display_statement
-    (function_call
-      (identifier)
-      (arguments
-        (argument
-          (number_literal))))
+    (space_phrase
+      (number_literal))
     (qualified_name
       (identifier)
       (identifier))
-    (function_call
-      (identifier)
-      (arguments
-        (argument
-          (number_literal))))
+    (skip_phrase
+      (number_literal))
     (qualified_name
       (identifier)
       (identifier))))

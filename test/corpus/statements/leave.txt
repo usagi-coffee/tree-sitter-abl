@@ -48,7 +48,6 @@ END.
   (repeat_statement
     (identifier)
     (body
-      (ERROR)
       (repeat_statement
         (on_endkey_phrase
           (undo_phrase

@@ -5,6 +5,7 @@ enum TokenType {
   NAMEDOT,
   NAMECOLON,
   NAMEDOUBLECOLON,
+  NAMEPLUS,
   COLON,
   TERMINATOR_DOT,
   ESCAPED_STRING,
@@ -38,7 +39,7 @@ bool tree_sitter_abl_external_scanner_scan(
   const bool *valid_symbols
 ) {
   if (valid_symbols[NAMEDOT] || valid_symbols[NAMECOLON] || valid_symbols[NAMEDOUBLECOLON] ||
-      valid_symbols[COLON] || valid_symbols[TERMINATOR_DOT]) {
+      valid_symbols[NAMEPLUS] || valid_symbols[COLON] || valid_symbols[TERMINATOR_DOT]) {
     if (lexer->lookahead == '.') {
       lexer->advance(lexer, false);
       lexer->mark_end(lexer);
@@ -50,6 +51,16 @@ bool tree_sitter_abl_external_scanner_scan(
 
       if (valid_symbols[TERMINATOR_DOT]) {
         lexer->result_symbol = TERMINATOR_DOT;
+        return true;
+      }
+    }
+
+    if (lexer->lookahead == '+' && valid_symbols[NAMEPLUS]) {
+      lexer->advance(lexer, false);
+      lexer->mark_end(lexer);
+
+      if (iswalpha(lexer->lookahead) || lexer->lookahead == '_') {
+        lexer->result_symbol = NAMEPLUS;
         return true;
       }
     }

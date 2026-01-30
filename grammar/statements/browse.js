@@ -153,7 +153,7 @@ module.exports = ({ kw, tkw }) => ({
   __browse_pfcolor_option: ($) => seq(kw("PFCOLOR"), $._expression),
   __browse_title_option: ($) => seq(kw("TITLE"), $.string_literal),
   __browse_down_option: ($) =>
-    choice(seq($.number_literal, kw("DOWN")), seq(kw("DOWN"), $._expression)),
+    choice(seq($.number_literal, tkw("DOWN")), seq(tkw("DOWN"), $._expression)),
   __browse_no_empty_space_option: ($) => tkw("NO-EMPTY-SPACE"),
   __browse_fit_last_column_option: ($) => tkw("FIT-LAST-COLUMN"),
   __browse_multiple_option: ($) => tkw("MULTIPLE"),

@@ -64,7 +64,6 @@ FORM SKIP(3)
 "Enter Choice" TO 30 Selection AUTO-RETURN
 HEADER "Application Name" "Master Menu" AT 34
 WITH NO-BOX NO-LABELS CENTERED FRAME menu.
-"Company" TO 79
 REPEAT ON ENDKEY UNDO, RETRY:
 UPDATE Selection WITH FRAME menu.
 HIDE FRAME menu.
@@ -161,96 +160,53 @@ END.
       (frame_option)
       (frame_option)
       frame: (identifier)))
-  (ERROR
-    (string_literal)
-    (number_literal))
-  (repeat_statement
-    (on_endkey_phrase
-      (undo_phrase))
-    (body
-      (update_statement
-        record: (identifier)
-        (frame_phrase
-          frame: (identifier)))
-      (hide_statement
-        (widget_phrase
-          frame: (identifier)))
-      (ERROR
-        (parenthesized_expression
-          (identifier))
-        (number_literal))
-      (leave_statement)
-      (ERROR
-        (identifier)
-        (number_literal))
-      (run_statement
-        procedure: (procedure_name))
-      (ERROR
-        (identifier)
-        (number_literal))
-      (run_statement
-        procedure: (procedure_name))
-      (ERROR
-        (identifier)
-        (number_literal))
-      (run_statement
-        procedure: (procedure_name))
-      (ERROR
-        (identifier)
-        (number_literal))
-      (run_statement
-        procedure: (procedure_name))
-      (expression_statement
-        (identifier))
-      (do_block
-        (body
-          (bell_statement)
-          (message_statement
-            (string_literal)))))
-    (ERROR))
-  (expression_statement
-    (identifier))
-  (repeat_statement
-    (ERROR
-      (identifier))
-    (preselect_record_list
-      (preselect_record
-        table: (qualified_name
-          left: (identifier)
-          (ERROR
-            (identifier))
-          right: (identifier))))
-    (body
-      (find_statement
-        table: (identifier))
-      (update_statement
-        record: (qualified_name
-          left: (identifier)
-          right: (identifier)))))
-  (ERROR
-    (identifier)
-    (assignment_operator)
-    (ERROR
-      (number_literal)
-      (number_literal))
-    (number_literal)
-    (identifier)
-    (number_literal))
-  (on_statement
-    event: (identifier)
-    (undo_statement
-      (ERROR
-        (identifier))))
-  (expression_statement
-    (identifier))
-  (ERROR
+  (string_literal)
+  (number_literal))(repeat_statement
+  (on_endkey_phrase
+    (undo_phrase))
+  (body
+    (update_statement
+      record: (identifier)
+      (frame_phrase
+        frame: (identifier)))
+    (hide_statement
+      (widget_phrase
+        frame: (identifier)))
     (parenthesized_expression
-      (identifier)
-      (ERROR
-        (number_literal)
-        (identifier)
-        (identifier))))
-  (display_statement
-    (string_literal))
-  (expression_statement
-    (identifier)))
+      (identifier))
+    (number_literal))
+  (leave_statement)
+  (identifier)
+  (number_literal))(run_statement
+  procedure: (procedure_name))(identifier)(number_literal)(run_statement
+  procedure: (procedure_name))(identifier)(number_literal)(run_statement
+  procedure: (procedure_name))(identifier)(number_literal)(run_statement
+  procedure: (procedure_name))(expression_statement
+  (identifier))(do_block
+  (body
+    (bell_statement)
+    (message_statement
+      (string_literal))))(expression_statement
+  (identifier))(repeat_statement
+  (identifier))(preselect_record_list
+  (preselect_record
+    table: (qualified_name
+      left: (identifier)
+      (identifier))
+    right: (identifier)))(body
+  (find_statement
+    table: (identifier))
+  (update_statement
+    record: (qualified_name
+      left: (identifier)
+      right: (identifier))))(identifier)(assignment_operator)(number_literal)(number_literal)(number_literal)(identifier)(number_literal)(on_statement
+  event: (identifier)
+  (undo_statement
+    (identifier)))(expression_statement
+  (identifier))(parenthesized_expression
+  (identifier)
+  (number_literal)
+  (identifier)
+  (identifier))(display_statement
+  (string_literal))(expression_statement
+  (identifier))

@@ -19,6 +19,7 @@ module.exports = grammar({
     $._namedot,
     $._namecolon,
     $._namedoublecolon,
+    $._nameplus,
     $._colon,
     $._terminator_dot,
     $._escaped_string,
@@ -185,8 +186,9 @@ module.exports = grammar({
       // Types
       generic_type: ($) =>
         seq($._simple_type_name, "<", $._simple_type_name, ">"),
+      nested_type_name: ($) => accessor($, $._nameplus),
       _simple_type_name: ($) =>
-        choice($.scoped_name, $.qualified_name, $.identifier),
+        choice($.scoped_name, $.qualified_name, $.nested_type_name, $.identifier),
       _type_name: ($) => choice($.generic_type, $._simple_type_name),
       _type_or_string: ($) => choice($._type_name, $.string_literal),
 
@@ -307,7 +309,7 @@ module.exports = grammar({
           // Regular arguments with optional direction
           seq(
             optional(choice(tkw("INPUT"), tkw("OUTPUT"), tkw("INPUT-OUTPUT"))),
-            optional(tkw("TABLE")),
+            optional(choice(tkw("TABLE"), tkw("BUFFER"))),
             field("value", $._expression),
             optional(tkw("BY-REFERENCE")),
           ),

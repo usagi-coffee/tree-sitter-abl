@@ -524,13 +524,10 @@ WAIT-FOR CHOOSE OF cancel-butt OR WINDOW-CLOSE OF CURRENT-WINDOW.
       field: (identifier))
     (form_item
       field: (string_literal))
-    (ERROR)
     (form_item
       field: (number_literal))
-    (ERROR)
     (form_item
       field: (string_literal))
-    (ERROR)
     (form_item
       field: (number_literal))
     (form_item)
