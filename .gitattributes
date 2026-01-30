@@ -31,4 +31,3 @@ Package.resolved linguist-generated
 bindings/zig/* linguist-generated
 build.zig linguist-generated
 build.zig.zon linguist-generated
-src/parser.c filter=lfs diff=lfs merge=lfs -text
