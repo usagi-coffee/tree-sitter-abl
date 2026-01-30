@@ -6,8 +6,6 @@ module.exports = ({ kw, tkw }) => ({
       field("color", $.color_phrase),
       optional(seq(kw("PROMPT"), field("prompt_color", $.color_phrase))),
       repeat1(field("field", $._expression)),
-      optional(alias($.__color_frame_phrase, $.frame_phrase)),
+      optional($.frame_phrase),
     ),
-  __color_frame_phrase: ($) =>
-    seq(kw("WITH"), kw("FRAME"), field("frame", $.identifier)),
 });

@@ -157,7 +157,8 @@ DEFINE FRAME centered Customer.CustNum WITH CENTERED.
     field: (qualified_name
       left: (identifier)
       right: (identifier))
-    (frame_phrase)))
+    (frame_phrase
+      (frame_option))))
 
 ================================================================================
 FRAME - WITH SIZE
@@ -195,7 +196,8 @@ DEFINE FRAME down Customer.CustNum WITH DOWN 10.
       left: (identifier)
       right: (identifier))
     (frame_phrase
-      (number_literal))))
+      (frame_option
+        (number_literal)))))
 
 ================================================================================
 FRAME - WITH WIDTH
@@ -212,7 +214,8 @@ DEFINE FRAME width Customer.Name WITH WIDTH 60.
       left: (identifier)
       right: (identifier))
     (frame_phrase
-      (number_literal))))
+      (frame_option
+        width: (number_literal)))))
 
 ================================================================================
 FRAME - WITH OVERLAY
@@ -229,7 +232,8 @@ DEFINE FRAME overlay Sales.Order.OrderNum WITH OVERLAY.
       left: (identifier)
       right: (identifier)
       right: (identifier))
-    (frame_phrase)))
+    (frame_phrase
+      (frame_option))))
 
 ================================================================================
 FRAME - WITH ROW and COLUMN
@@ -246,8 +250,10 @@ DEFINE FRAME positioned Customer.CustNum WITH ROW 5 COLUMN 10.
       left: (identifier)
       right: (identifier))
     (frame_phrase
-      (number_literal)
-      (number_literal))))
+      (frame_option
+        row: (number_literal))
+      (frame_option
+        column: (number_literal)))))
 
 ================================================================================
 FRAME - WITH NO-LABELS
@@ -263,7 +269,8 @@ DEFINE FRAME noLabels Customer.CustNum WITH NO-LABELS.
     field: (qualified_name
       left: (identifier)
       right: (identifier))
-    (frame_phrase)))
+    (frame_phrase
+      (frame_option))))
 
 ================================================================================
 FRAME - WITH SIDE-LABELS
@@ -279,7 +286,8 @@ DEFINE FRAME sideLabels Customer.CustNum WITH SIDE-LABELS.
     field: (qualified_name
       left: (identifier)
       right: (identifier))
-    (frame_phrase)))
+    (frame_phrase
+      (frame_option))))
 
 ================================================================================
 FRAME - String with AT phrase COLUMN
@@ -573,7 +581,9 @@ DEFINE FRAME combined
     (frame_phrase
       (number_literal)
       (number_literal)
-      (number_literal))))
+      (frame_option
+        (number_literal))
+      (frame_option))))
 
 ================================================================================
 FRAME - Minimal

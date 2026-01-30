@@ -400,7 +400,8 @@ END.
     (query_tuning
       (number_literal))
     (frame_phrase
-      (number_literal))
+      (frame_option
+        width: (number_literal)))
     (body
       (display_statement
         (identifier)))))

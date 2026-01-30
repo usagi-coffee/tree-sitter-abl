@@ -35,7 +35,9 @@ END.
       (format_phrase
         (label_option
           (string_literal))))
-    (frame_phrase))
+    (frame_phrase
+      (frame_option)
+      (frame_option)))
   (for_each_statement
     (record
       (identifier))
@@ -63,4 +65,6 @@ END.
         (qualified_name
           (identifier)
           (identifier))
-        (frame_phrase)))))
+        (frame_phrase
+          (frame_option)
+          (frame_option))))))

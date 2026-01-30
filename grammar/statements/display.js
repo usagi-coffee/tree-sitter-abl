@@ -5,7 +5,7 @@ module.exports = ({ kw, tkw }) => ({
       optional(alias($.__display_stream_phrase, $.stream_phrase)),
       repeat($.__display_item),
       optional(seq(kw("IN"), tkw("WINDOW"), field("window", $._expression))),
-      repeat(alias($.__display_frame_phrase, $.frame_phrase)),
+      repeat($.frame_phrase),
       optional(tkw("NO-ERROR")),
       $._terminator,
     ),
@@ -36,30 +36,4 @@ module.exports = ({ kw, tkw }) => ({
     alias($.__display_format_option, $.format_option),
 
   __display_format_option: ($) => seq(kw("FORMAT"), $.string_literal),
-
-  __display_frame_phrase: ($) =>
-    seq(
-      kw("WITH"),
-      repeat(
-        choice(
-          seq(kw("FRAME"), field("frame", $.identifier)),
-          seq(kw("BROWSE"), field("browse", $.identifier)),
-          tkw("NO-LABELS"),
-          tkw("SIDE-LABELS"),
-          tkw("CENTERED"),
-          tkw("NO-BOX"),
-          seq(kw("TITLE"), field("title", $._expression)),
-          seq(kw("ROW"), field("row", $._expression)),
-          seq(kw("COLUMN"), field("column", $._expression)),
-          seq(optional($.number_literal), tkw("DOWN")),
-          seq($.number_literal, tkw("COLUMN")),
-          seq($.number_literal, tkw("COLUMNS")),
-          tkw("OVERLAY"),
-          tkw("PAGE-TOP"),
-          tkw("PAGE-BOTTOM"),
-          seq(kw("WIDTH"), field("width", $._expression)),
-          tkw("USE-TEXT"),
-        ),
-      ),
-    ),
 });

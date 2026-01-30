@@ -58,7 +58,8 @@ READKEY PAUSE 0.5.
           (identifier)
           (identifier))
         (frame_phrase
-          (number_literal)))
+          (frame_option
+            (number_literal))))
       (message_statement
         (string_literal))
       (message_statement

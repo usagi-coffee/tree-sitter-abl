@@ -70,7 +70,9 @@ UNIX VALUE("cp usr/myfile.").
       (display_statement
         (string_literal)
         (frame_phrase
-          (number_literal)
+          (frame_option
+            (number_literal))
+          (frame_option)
           (identifier)))
       (set_statement
         (set_item

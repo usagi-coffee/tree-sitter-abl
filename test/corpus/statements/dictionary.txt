@@ -29,8 +29,11 @@ IF ans THEN DICTIONARY.
   (display_statement
     (string_literal)
     (frame_phrase
-      (number_literal)
-      (number_literal)))
+      (frame_option
+        (number_literal))
+      (frame_option
+        (number_literal))
+      (frame_option)))
   (update_statement
     (update_item
       (identifier)))

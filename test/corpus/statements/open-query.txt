@@ -127,7 +127,10 @@ OPEN QUERY qCust FOR EACH Customer BY COLLATE(Customer.Name, "CASE-INSENSITIVE")
         (identifier)
         (frame_phrase
           (identifier)
-          (string_literal)))
+          (frame_option)
+          (frame_option)
+          (frame_option
+            (string_literal))))
       (assign_statement
         (assign_pair
           (in_frame_expression

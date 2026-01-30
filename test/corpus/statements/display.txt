@@ -386,7 +386,10 @@ DISPLAY SPACE(2) Customer.Name SKIP(1) Customer.City.
           (arguments
             (argument
               (number_literal))))
-        (frame_phrase))))
+        (frame_phrase
+          (frame_option)
+          (frame_option)
+          (frame_option)))))
   (display_statement
     (identifier)
     (identifier)

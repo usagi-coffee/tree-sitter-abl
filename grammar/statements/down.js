@@ -4,19 +4,12 @@ module.exports = ({ kw, tkw }) => ({
       tkw("DOWN"),
       optional(alias($.__down_stream_phrase, $.stream_phrase)),
       optional(field("count", $._expression)),
-      optional(alias($.__down_frame_phrase, $.frame_phrase)),
+      optional($.frame_phrase),
       $._terminator,
     ),
   __down_stream_phrase: ($) =>
     choice(
       seq(kw("STREAM"), field("stream", $.identifier)),
       seq(kw("STREAM-HANDLE"), field("handle", $._expression)),
-    ),
-  __down_frame_phrase: ($) =>
-    seq(
-      kw("WITH"),
-      kw("FRAME"),
-      field("frame", $.identifier),
-      optional(tkw("NO-LABELS")),
     ),
 });

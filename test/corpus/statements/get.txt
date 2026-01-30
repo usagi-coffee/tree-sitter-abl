@@ -72,7 +72,8 @@ END.
       (display_statement
         (identifier)
         (frame_phrase
-          frame: (identifier)))
+          frame: (identifier)
+          (frame_option)))
       (pause_statement)
       (get_statement
         query: (identifier)))))

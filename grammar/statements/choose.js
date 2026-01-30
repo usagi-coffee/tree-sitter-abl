@@ -28,10 +28,8 @@ module.exports = ({ kw, tkw }) => ({
           seq(kw("PAUSE"), field("pause", $._expression)),
         ),
       ),
-      optional(alias($.__choose_frame_phrase, $.frame_phrase)),
+      optional($.frame_phrase),
     ),
-  __choose_frame_phrase: ($) =>
-    seq(kw("WITH"), kw("FRAME"), field("frame", $.identifier)),
   __choose_auto_return: ($) => tkw("AUTO-RETURN"),
   __choose_go_on: ($) => seq(tkw("GO-ON"), "(", repeat1($.identifier), ")"),
   __choose_no_error: ($) => tkw("NO-ERROR"),

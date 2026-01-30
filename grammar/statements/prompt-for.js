@@ -15,7 +15,7 @@ module.exports = ({ kw, tkw }) => ({
       field("record", $.identifier),
       optional(seq(tkw("EXCEPT"), repeat1(field("field", $.__prompt_for_field_target)))),
       optional(seq(kw("IN"), tkw("WINDOW"), field("window", $._expression))),
-      optional(alias($.__prompt_for_frame_phrase, $.frame_phrase)),
+      optional($.frame_phrase),
     ),
 
   __prompt_for_fields_body: ($) =>
@@ -25,7 +25,7 @@ module.exports = ({ kw, tkw }) => ({
       repeat1(alias($.__prompt_for_item, $.prompt_for_item)),
       optional(alias($.__prompt_for_go_on, $.go_on_phrase)),
       optional(seq(kw("IN"), tkw("WINDOW"), field("window", $._expression))),
-      optional(alias($.__prompt_for_frame_phrase, $.frame_phrase)),
+      optional($.frame_phrase),
       optional(alias($.__prompt_for_editing_phrase, $.editing_phrase)),
     ),
   __prompt_for_stream_phrase: ($) =>
@@ -96,19 +96,4 @@ module.exports = ({ kw, tkw }) => ({
   __prompt_for_editing_phrase: ($) =>
     seq(tkw("EDITING"), $._colon, repeat1($._statement), tkw("END")),
   __prompt_for_go_on: ($) => seq(tkw("GO-ON"), "(", repeat1($.identifier), ")"),
-  __prompt_for_frame_phrase: ($) =>
-    seq(
-      kw("WITH"),
-      repeat(
-        choice(
-          seq(kw("FRAME"), field("frame", $.identifier)),
-          tkw("SIDE-LABELS"),
-          tkw("NO-LABELS"),
-          tkw("CENTERED"),
-          seq(kw("ROW"), field("row", $._expression)),
-          seq(kw("COLUMN"), field("column", $._expression)),
-          tkw("OVERLAY"),
-        ),
-      ),
-    ),
 });

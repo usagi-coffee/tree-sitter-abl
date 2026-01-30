@@ -12,7 +12,7 @@ module.exports = ({ kw, tkw }) => ({
         ),
         repeat1(alias($.__disable_item, $.disable_item)),
       ),
-      optional(alias($.__disable_frame_phrase, $.frame_phrase)),
+      optional($.frame_phrase),
     ),
   __disable_item: ($) =>
     choice(
@@ -52,6 +52,4 @@ module.exports = ({ kw, tkw }) => ({
       seq(kw("BGCOLOR"), token(/[0-9]+(\.[0-9]+)?/)),
       seq(tkw("VIEW-AS"), tkw("TEXT")),
     ),
-  __disable_frame_phrase: ($) =>
-    seq(kw("WITH"), kw("FRAME"), field("frame", $.identifier)),
 });

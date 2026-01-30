@@ -132,7 +132,9 @@ OUTPUT TO TERMINAL.
             (argument
               (number_literal))))
         (frame_phrase
-          (number_literal)))))
+          (frame_option
+            (number_literal))
+          (frame_option)))))
   (output_statement)
   (display_statement
     (string_literal))
@@ -192,7 +194,9 @@ OUTPUT TO TERMINAL.
         (form_item
           (number_literal))
         (frame_phrase
-          (identifier)))
+          (identifier)
+          (frame_option)
+          (frame_option)))
       (view_statement
         (widget_phrase
           (identifier)))
@@ -212,7 +216,8 @@ OUTPUT TO TERMINAL.
           (identifier))
         (identifier)
         (string_literal)
-        (frame_phrase))
+        (frame_phrase
+          (frame_option)))
       (if_statement
         (function_call
           (identifier)

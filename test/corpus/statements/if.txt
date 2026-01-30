@@ -275,7 +275,11 @@ OUTPUT STREAM due CLOSE.
         (argument
           (number_literal))))
     (frame_phrase
-      (identifier)))
+      (frame_option)
+      (frame_option)
+      (frame_option)
+      (identifier)
+      (frame_option)))
   (for_each_statement
     (record
       (identifier))
@@ -396,6 +400,8 @@ OUTPUT STREAM due CLOSE.
                     (identifier)
                     (number_literal)
                     (frame_phrase
+                      (frame_option)
+                      (frame_option)
                       (identifier)))))))))))
   (output_statement
     (stream_phrase

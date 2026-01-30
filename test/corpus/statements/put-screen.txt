@@ -123,7 +123,8 @@ PUT SCREEN COLOR VALUE(cColor) ROW 1 COLUMN 1 "Hdr".
         (identifier)
         (string_literal)
         (frame_phrase
-          (number_literal)))
+          (frame_option
+            (number_literal))))
       (if_statement
         (binary_expression
           (qualified_name

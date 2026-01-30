@@ -5,8 +5,6 @@ module.exports = ({ kw, tkw }) => ({
   __next_prompt_body: ($) =>
     seq(
       field("field", $._expression),
-      optional(alias($.__next_prompt_frame_phrase, $.frame_phrase)),
+      optional($.frame_phrase),
     ),
-  __next_prompt_frame_phrase: ($) =>
-    seq(kw("WITH"), kw("FRAME"), field("frame", $.identifier)),
 });

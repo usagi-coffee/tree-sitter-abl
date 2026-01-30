@@ -77,6 +77,7 @@ module.exports = grammar({
     // Specific disambiguations
     [$._primary_expression, $.__in_frame_target],
     [$.__prompt_for_record_body, $.__prompt_for_field_target],
+    [$.__frame_option_down],
   ],
   inline: ($) => [],
 

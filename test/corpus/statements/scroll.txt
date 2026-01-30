@@ -77,7 +77,9 @@ END.
         (identifier)))
     (frame_phrase
       (identifier)
-      (number_literal)))
+      (frame_option)
+      (frame_option
+        (number_literal))))
   (form_statement
     (form_item
       (string_literal))
@@ -95,7 +97,9 @@ END.
       (string_literal))
     (frame_phrase
       (identifier)
-      (string_literal)))
+      (frame_option)
+      (frame_option
+        (string_literal))))
   (view_statement
     (widget_phrase
       (identifier)))
@@ -127,7 +131,8 @@ END.
           (identifier))
         (frame_phrase
           (identifier)
-          (string_literal)))
+          (frame_option
+            (string_literal))))
       (down_statement
         (frame_phrase
           (identifier)))))
