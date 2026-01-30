@@ -19,5 +19,27 @@ module.exports = ({ kw, tkw }) => ({
         seq(tkw("SPACE"), optional(seq("(", $._expression, ")"))),
       ),
     ),
-  __form_view_as: ($) => seq(kw("VIEW-AS"), field("widget", $.identifier)),
+  __form_view_as: ($) =>
+    seq(
+      kw("VIEW-AS"),
+      choice(
+        field("widget", $.identifier),
+        seq(
+          kw("RADIO-SET"),
+          kw("RADIO-BUTTONS"),
+          $.__form_radio_button_list,
+        ),
+      ),
+    ),
+  __form_radio_button_list: ($) =>
+    seq(
+      $.__form_radio_button,
+      repeat(seq(",", $.__form_radio_button)),
+    ),
+  __form_radio_button: ($) =>
+    seq(
+      field("label", $.string_literal),
+      ",",
+      field("value", $._expression),
+    ),
 });
