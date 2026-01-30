@@ -78,7 +78,8 @@ if (hasCheckmark && !hasFailure) {
 }
 
 if (failureCount > 0) {
-  console.log(`✗ ${failureCount} tests failed`);
+  console.error(`✗ ${failureCount} tests failed`);
 }
 
 console.log(result);
+process.exit(1);
