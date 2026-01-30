@@ -65471,11 +65471,40 @@
         },
         {
           "type": "SYMBOL",
-          "name": "frame_access"
+          "name": "menu_item_access"
         },
         {
-          "type": "SYMBOL",
-          "name": "menu_item_access"
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PATTERN",
+                  "value": "FRAME",
+                  "flags": "i"
+                }
+              },
+              "named": false,
+              "value": "FRAME"
+            },
+            {
+              "type": "IMMEDIATE_TOKEN",
+              "content": {
+                "type": "PATTERN",
+                "value": "\\s+"
+              }
+            }
+          ]
+        },
+        {
+          "type": "PREC_RIGHT",
+          "value": -1,
+          "content": {
+            "type": "SYMBOL",
+            "name": "frame_access"
+          }
         }
       ]
     },
@@ -67651,15 +67680,19 @@
       "__prompt_for_field_target"
     ],
     [
-      "__frame_option_down"
-    ],
-    [
       "__update_record_body",
       "__update_field_target"
     ],
     [
       "__set_record_body",
       "__set_field_target"
+    ],
+    [
+      "frame_access",
+      "_assignable"
+    ],
+    [
+      "__frame_option_down"
     ],
     [
       "menu_item_access"

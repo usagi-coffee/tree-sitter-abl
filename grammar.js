@@ -78,11 +78,10 @@ module.exports = grammar({
     // Specific disambiguations
     [$._primary_expression, $.__in_frame_target],
     [$.__prompt_for_record_body, $.__prompt_for_field_target],
-    [$.__frame_option_down],
     [$.__update_record_body, $.__update_field_target],
     [$.__set_record_body, $.__set_field_target],
-
-    // menu_item_access with optional IN MENU suffix conflicts with IN FRAME
+    [$.frame_access, $._assignable],
+    [$.__frame_option_down],
     [$.menu_item_access],
   ],
   inline: ($) => [],
@@ -227,8 +226,10 @@ module.exports = grammar({
           $.array_access,
           $.function_call,
           $.in_frame_expression,
-          $.frame_access,
           $.menu_item_access,
+          /* Disambiguation */
+          kw("FRAME"),
+          prec.right(-1, $.frame_access),
         ),
 
       // Expressions

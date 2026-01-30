@@ -1692,6 +1692,10 @@
         "required": true,
         "types": [
           {
+            "type": "FRAME",
+            "named": false
+          },
+          {
             "type": "array_access",
             "named": true
           },
@@ -1918,6 +1922,10 @@
         "multiple": false,
         "required": true,
         "types": [
+          {
+            "type": "FRAME",
+            "named": false
+          },
           {
             "type": "array_access",
             "named": true
@@ -53678,6 +53686,10 @@
         "multiple": false,
         "required": false,
         "types": [
+          {
+            "type": "FRAME",
+            "named": false
+          },
           {
             "type": "array_access",
             "named": true

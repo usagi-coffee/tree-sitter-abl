@@ -49,12 +49,14 @@ RELEASE OBJECT controlHdl NO-ERROR.
     (no_undo))
   (create_widget_statement
     (identifier)
-    (identifier)
-    (frame_access
-      (identifier)
-      (identifier))
-    (identifier)
-    (string_literal))
+    (assign_phrase
+      (assign_pair
+        (frame_access
+          (identifier)
+          (identifier)))
+      (assign_pair
+        (identifier)
+        (string_literal))))
   (assignment_statement
     (identifier)
     (assignment_operator)
