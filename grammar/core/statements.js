@@ -135,6 +135,7 @@ module.exports = () => ({
       $.return_statement,
       $.unload_statement,
       $.create_widget_statement,
+      $.create_temp_table_statement,
       $.create_statement,
       $.delete_statement,
       $.release_statement,

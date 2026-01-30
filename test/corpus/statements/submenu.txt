@@ -477,16 +477,16 @@ DELETE WIDGET mywin.
       (submenu_item
         name: (identifier)
         (string_literal))))
-  (create_statement
-    window: (identifier))
-  (assign_statement
-    (assign_pair
-      left: (identifier)
-      right: (identifier))
-    (assign_pair
-      left: (object_access
+  (create_widget_statement
+    handle: (identifier)
+    (assign_phrase
+      (assign_pair
         left: (identifier)
-        right: (identifier))))
+        right: (identifier))
+      (assign_pair
+        left: (object_access
+          left: (identifier)
+          right: (identifier)))))
   (button_definition
     name: (identifier)
     (button_option
@@ -540,83 +540,75 @@ DELETE WIDGET mywin.
       frame: (identifier))
     (do_block
       (body
-        (object_access
-          left: (identifier)
-          (identifier))
-        right: (identifier))
-      (identifier)
-      (identifier))
-    (expression_statement
-      (boolean_literal))
-    (object_access
-      left: (identifier)
-      (identifier))
-    right: (identifier))
-  (identifier)
-  (identifier)
-  (expression_statement
-    (boolean_literal)
-    (object_access
-      left: (identifier)
-      (identifier))
-    right: (identifier
-      (identifier
-        (identifier
-          (expression_statement
-            (boolean_literal)
-            (object_access
-              left: (identifier)
-              (identifier))
-            right: (identifier
-              (identifier
-                (identifier
-                  (expression_statement
-                    (boolean_literal)
-                    (on_statement
-                      event: (identifier)
-                      widget: (identifier)
-                      (in_frame_phrase
-                        frame: (identifier))
-                      (do_block
-                        (body
-                          (object_access
-                            left: (identifier)
-                            (identifier))
-                          right: (identifier))
-                        (identifier)
-                        (identifier))
-                      (expression_statement
-                        (boolean_literal))
-                      (object_access
-                        left: (identifier)
-                        (identifier))
-                      right: (identifier)
-                      (identifier
-                        (identifier
-                          (expression_statement
-                            (boolean_literal)
-                            (object_access
-                              left: (identifier)
-                              (identifier))
-                            right: (identifier
-                              (identifier
-                                (identifier
-                                  (expression_statement
-                                    (boolean_literal)
-                                    (object_access
-                                      left: (identifier)
-                                      (identifier))
-                                    right: (identifier
-                                      (identifier
-                                        (identifier
-                                          (expression_statement
-                                            (boolean_literal)
-                                            (wait_for_statement
-                                              events: (identifier)
-                                              widgets: (identifier)
-                                              widgets: (identifier)
-                                              widgets: (identifier)
-                                              widgets: (identifier)
-                                              widgets: (identifier)
-                                              (delete_widget_statement
-                                                widget: (identifier))
+        (assignment_statement
+          left: (menu_item_access
+            menu_item: (identifier)
+            attribute: (identifier)
+            menu: (identifier))
+          operator: (assignment_operator)
+          right: (boolean_literal))
+        (assignment_statement
+          left: (menu_item_access
+            menu_item: (identifier)
+            attribute: (identifier)
+            menu: (identifier))
+          operator: (assignment_operator)
+          right: (boolean_literal))
+        (assignment_statement
+          left: (menu_item_access
+            menu_item: (identifier)
+            attribute: (identifier)
+            menu: (identifier))
+          operator: (assignment_operator)
+          right: (boolean_literal))
+        (assignment_statement
+          left: (menu_item_access
+            menu_item: (identifier)
+            attribute: (identifier)
+            menu: (identifier))
+          operator: (assignment_operator)
+          right: (boolean_literal)))))
+  (on_statement
+    event: (identifier)
+    widget: (identifier)
+    (in_frame_phrase
+      frame: (identifier))
+    (do_block
+      (body
+        (assignment_statement
+          left: (menu_item_access
+            menu_item: (identifier)
+            attribute: (identifier)
+            menu: (identifier))
+          operator: (assignment_operator)
+          right: (boolean_literal))
+        (assignment_statement
+          left: (menu_item_access
+            menu_item: (identifier)
+            attribute: (identifier)
+            menu: (identifier))
+          operator: (assignment_operator)
+          right: (boolean_literal))
+        (assignment_statement
+          left: (menu_item_access
+            menu_item: (identifier)
+            attribute: (identifier)
+            menu: (identifier))
+          operator: (assignment_operator)
+          right: (boolean_literal))
+        (assignment_statement
+          left: (menu_item_access
+            menu_item: (identifier)
+            attribute: (identifier)
+            menu: (identifier))
+          operator: (assignment_operator)
+          right: (boolean_literal)))))
+  (wait_for_statement
+    events: (identifier)
+    widgets: (identifier)
+    widgets: (identifier)
+    widgets: (identifier)
+    widgets: (identifier)
+    widgets: (identifier))
+  (delete_widget_statement
+    widget: (identifier)))

@@ -64,10 +64,11 @@ VALIDATE sports.Item NO-ERROR.
             (create_statement
               (identifier))
             (assign_statement
-              (assign_pair
-                (qualified_name
-                  (identifier)
-                  (identifier))))
+              (assign_phrase
+                (assign_pair
+                  (qualified_name
+                    (identifier)
+                    (identifier)))))
             (update_statement
               (update_item
                 (qualified_name

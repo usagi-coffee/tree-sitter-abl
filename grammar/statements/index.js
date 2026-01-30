@@ -139,7 +139,8 @@ const varStatement = require("./var");
 const viewStatement = require("./view");
 const waitForStatement = require("./wait-for");
 const expressionStatement = require("./expression");
-const createWidgetStatement = require("./widget");
+const createWidgetStatement = require("./create-widget");
+const createTempTableStatement = require("./create-temp-table");
 
 module.exports = (ctx) => ({
   ...aggregateStatement(ctx),
@@ -284,4 +285,5 @@ module.exports = (ctx) => ({
   ...waitForStatement(ctx),
   ...expressionStatement(ctx),
   ...createWidgetStatement(ctx),
+  ...createTempTableStatement(ctx),
 });

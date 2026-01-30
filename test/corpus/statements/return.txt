@@ -156,11 +156,12 @@ RETURN NO-APPLY.
     (identifier)
     (return_statement))
   (assign_statement
-    (assign_pair
-      (identifier)
-      (function_call
+    (assign_phrase
+      (assign_pair
         (identifier)
-        (arguments))))
+        (function_call
+          (identifier)
+          (arguments)))))
   (if_statement
     (binary_expression
       (identifier)

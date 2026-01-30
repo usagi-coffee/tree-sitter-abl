@@ -1882,6 +1882,10 @@
         {
           "type": "assign_pair",
           "named": true
+        },
+        {
+          "type": "no_error",
+          "named": true
         }
       ]
     }
@@ -1891,15 +1895,11 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
         {
-          "type": "assign_pair",
-          "named": true
-        },
-        {
-          "type": "no_error",
+          "type": "assign_phrase",
           "named": true
         }
       ]
@@ -3017,6 +3017,10 @@
         },
         {
           "type": "create_statement",
+          "named": true
+        },
+        {
+          "type": "create_temp_table_statement",
           "named": true
         },
         {
@@ -9053,6 +9057,10 @@
             "named": true
           },
           {
+            "type": "create_temp_table_statement",
+            "named": true
+          },
+          {
             "type": "create_widget_statement",
             "named": true
           },
@@ -14693,12 +14701,12 @@
     }
   },
   {
-    "type": "create_widget_statement",
+    "type": "create_temp_table_statement",
     "named": true,
     "fields": {
-      "attribute": {
-        "multiple": true,
-        "required": false,
+      "handle": {
+        "multiple": false,
+        "required": true,
         "types": [
           {
             "type": "identifier",
@@ -14706,6 +14714,22 @@
           }
         ]
       },
+      "pool": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "create_widget_statement",
+    "named": true,
+    "fields": {
       "event": {
         "multiple": true,
         "required": false,
@@ -14730,7 +14754,7 @@
       },
       "handle": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "identifier",
@@ -14744,136 +14768,6 @@
         "types": [
           {
             "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "value": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "accum_expression",
-            "named": true
-          },
-          {
-            "type": "ambiguous_expression",
-            "named": true
-          },
-          {
-            "type": "argument_reference",
-            "named": true
-          },
-          {
-            "type": "array_access",
-            "named": true
-          },
-          {
-            "type": "available_expression",
-            "named": true
-          },
-          {
-            "type": "binary_expression",
-            "named": true
-          },
-          {
-            "type": "boolean_literal",
-            "named": true
-          },
-          {
-            "type": "can_find_expression",
-            "named": true
-          },
-          {
-            "type": "conditional_expression",
-            "named": true
-          },
-          {
-            "type": "constant",
-            "named": true
-          },
-          {
-            "type": "current_changed_expression",
-            "named": true
-          },
-          {
-            "type": "dataset_reference",
-            "named": true
-          },
-          {
-            "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_access",
-            "named": true
-          },
-          {
-            "type": "function_call",
-            "named": true
-          },
-          {
-            "type": "identifier",
-            "named": true
-          },
-          {
-            "type": "in_frame_expression",
-            "named": true
-          },
-          {
-            "type": "input_expression",
-            "named": true
-          },
-          {
-            "type": "locked_expression",
-            "named": true
-          },
-          {
-            "type": "menu_item_access",
-            "named": true
-          },
-          {
-            "type": "new_expression",
-            "named": true
-          },
-          {
-            "type": "null_literal",
-            "named": true
-          },
-          {
-            "type": "number_literal",
-            "named": true
-          },
-          {
-            "type": "object_access",
-            "named": true
-          },
-          {
-            "type": "object_access_expression",
-            "named": true
-          },
-          {
-            "type": "parenthesized_expression",
-            "named": true
-          },
-          {
-            "type": "qualified_name",
-            "named": true
-          },
-          {
-            "type": "query_access",
-            "named": true
-          },
-          {
-            "type": "scoped_name",
-            "named": true
-          },
-          {
-            "type": "string_literal",
-            "named": true
-          },
-          {
-            "type": "unary_expression",
             "named": true
           }
         ]
@@ -15013,6 +14907,10 @@
       "multiple": true,
       "required": false,
       "types": [
+        {
+          "type": "assign_phrase",
+          "named": true
+        },
         {
           "type": "do_block",
           "named": true
@@ -18951,6 +18849,10 @@
         },
         {
           "type": "create_statement",
+          "named": true
+        },
+        {
+          "type": "create_temp_table_statement",
           "named": true
         },
         {
@@ -24220,6 +24122,10 @@
           "named": true
         },
         {
+          "type": "create_temp_table_statement",
+          "named": true
+        },
+        {
           "type": "create_widget_statement",
           "named": true
         },
@@ -25640,6 +25546,10 @@
             "named": true
           },
           {
+            "type": "create_temp_table_statement",
+            "named": true
+          },
+          {
             "type": "create_widget_statement",
             "named": true
           },
@@ -26255,6 +26165,10 @@
           },
           {
             "type": "create_statement",
+            "named": true
+          },
+          {
+            "type": "create_temp_table_statement",
             "named": true
           },
           {
@@ -33294,6 +33208,10 @@
           "named": true
         },
         {
+          "type": "create_temp_table_statement",
+          "named": true
+        },
+        {
           "type": "create_widget_statement",
           "named": true
         },
@@ -38034,6 +37952,10 @@
           "named": true
         },
         {
+          "type": "create_temp_table_statement",
+          "named": true
+        },
+        {
           "type": "create_widget_statement",
           "named": true
         },
@@ -39489,6 +39411,10 @@
         },
         {
           "type": "create_statement",
+          "named": true
+        },
+        {
+          "type": "create_temp_table_statement",
           "named": true
         },
         {
@@ -48186,6 +48112,10 @@
         },
         {
           "type": "create_statement",
+          "named": true
+        },
+        {
+          "type": "create_temp_table_statement",
           "named": true
         },
         {

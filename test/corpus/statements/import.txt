@@ -154,20 +154,21 @@ INPUT CLOSE.
     (identifier)
     (no_undo))
   (assign_statement
-    (assign_pair
-      (object_access
-        (identifier)
-        (identifier))
-      (string_literal))
-    (assign_pair
-      (function_call
-        (identifier)
-        (arguments
-          (argument
-            (identifier))))
-      (object_access
-        (identifier)
-        (identifier))))
+    (assign_phrase
+      (assign_pair
+        (object_access
+          (identifier)
+          (identifier))
+        (string_literal))
+      (assign_pair
+        (function_call
+          (identifier)
+          (arguments
+            (argument
+              (identifier))))
+        (object_access
+          (identifier)
+          (identifier)))))
   (input_statement
     (string_literal)
     (convert_phrase))

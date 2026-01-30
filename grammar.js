@@ -206,6 +206,19 @@ module.exports = grammar({
       _comparison_operator: ($) => choice("=", ...comparison_operators),
 
       // Assignabless
+      assignment_statement: ($) =>
+        prec.right(
+          1,
+          seq(
+            field("left", $._assignable),
+            field("operator", $.assignment_operator),
+            field("right", choice($.array_initializer, $._expression)),
+            optional(alias($.__assignment_in_frame, $.in_frame_phrase)),
+            optional(alias($.__assignment_no_error, $.no_error)),
+            $._terminator,
+          ),
+        ),
+
       _assignable: ($) =>
         choice(
           $.identifier,

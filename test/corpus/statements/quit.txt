@@ -93,20 +93,21 @@ WAIT-FOR WINDOW-CLOSE OF CURRENT-WINDOW.
     (identifier)
     (quit_statement))
   (assign_statement
-    (assign_pair
-      (object_access
-        (identifier)
+    (assign_phrase
+      (assign_pair
+        (object_access
+          (identifier)
+          (identifier))
         (identifier))
-      (identifier))
-    (assign_pair
-      (object_access
-        (identifier)
-        (identifier)))
-    (assign_pair
-      (object_access
-        (identifier)
-        (identifier))
-      (boolean_literal)))
+      (assign_pair
+        (object_access
+          (identifier)
+          (identifier)))
+      (assign_pair
+        (object_access
+          (identifier)
+          (identifier))
+        (boolean_literal))))
   (wait_for_statement
     (identifier)
     (identifier)))

@@ -8,8 +8,10 @@ const onQuitPhrase = require("./on-quit");
 const onStopPhrase = require("./on-stop");
 const stopAfterPhrase = require("./stop-after");
 const widgetPhrase = require("./widget");
+const assignPhrase = require("./assign");
 
 module.exports = (ctx) => ({
+  ...assignPhrase(ctx),
   ...aggregate(ctx),
   ...colorPhrase(ctx),
   ...editingPhrase(ctx),

@@ -103,9 +103,10 @@ BUFFER-COMPARE bSrc TO bTgt
       operator: (GE)
       value: (identifier)
       action: (assign_statement
-        (assign_pair
-          left: (identifier)
-          right: (boolean_literal)))
+        (assign_phrase
+          (assign_pair
+            left: (identifier)
+            right: (boolean_literal))))
       field: (identifier)
       operator: (LT)
       value: (identifier)

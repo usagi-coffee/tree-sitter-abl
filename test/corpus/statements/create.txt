@@ -92,11 +92,12 @@ END.
       (create_statement
         table: (identifier))
       (assign_statement
-        (assign_pair
-          left: (qualified_name
-            left: (identifier)
-            right: (identifier))
-          right: (string_literal))))))
+        (assign_phrase
+          (assign_pair
+            left: (qualified_name
+              left: (identifier)
+              right: (identifier))
+            right: (string_literal)))))))
 
 ================================================================================
 CREATE - Reference snippets and options

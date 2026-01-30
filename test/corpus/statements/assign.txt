@@ -10,17 +10,20 @@ ASSIGN flag = TRUE.
 
 (source_code
   (assign_statement
-    (assign_pair
-      left: (identifier)
-      right: (number_literal)))
+    (assign_phrase
+      (assign_pair
+        left: (identifier)
+        right: (number_literal))))
   (assign_statement
-    (assign_pair
-      left: (identifier)
-      right: (string_literal)))
+    (assign_phrase
+      (assign_pair
+        left: (identifier)
+        right: (string_literal))))
   (assign_statement
-    (assign_pair
-      left: (identifier)
-      right: (boolean_literal))))
+    (assign_phrase
+      (assign_pair
+        left: (identifier)
+        right: (boolean_literal)))))
 
 ================================================================================
 ASSIGN multiple pairs
@@ -36,18 +39,19 @@ ASSIGN
 
 (source_code
   (assign_statement
-    (assign_pair
-      left: (identifier)
-      right: (number_literal))
-    (assign_pair
-      left: (identifier)
-      right: (string_literal))
-    (assign_pair
-      left: (identifier)
-      right: (boolean_literal))
-    (assign_pair
-      left: (identifier)
-      right: (number_literal))))
+    (assign_phrase
+      (assign_pair
+        left: (identifier)
+        right: (number_literal))
+      (assign_pair
+        left: (identifier)
+        right: (string_literal))
+      (assign_pair
+        left: (identifier)
+        right: (boolean_literal))
+      (assign_pair
+        left: (identifier)
+        right: (number_literal)))))
 
 ================================================================================
 ASSIGN with WHEN AVAILABLE clause
@@ -62,21 +66,22 @@ ASSIGN
 
 (source_code
   (assign_statement
-    (assign_pair
-      left: (identifier)
-      right: (number_literal))
-    (assign_pair
-      left: (identifier)
-      right: (string_literal)
-      (when_available_phrase
-        (identifier)))
-    (assign_pair
-      left: (identifier)
-      right: (qualified_name
+    (assign_phrase
+      (assign_pair
         left: (identifier)
-        right: (identifier))
-      (when_available_phrase
-        (identifier)))))
+        right: (number_literal))
+      (assign_pair
+        left: (identifier)
+        right: (string_literal)
+        (when_available_phrase
+          (identifier)))
+      (assign_pair
+        left: (identifier)
+        right: (qualified_name
+          left: (identifier)
+          right: (identifier))
+        (when_available_phrase
+          (identifier))))))
 
 ================================================================================
 ASSIGN with NO-ERROR
@@ -89,22 +94,24 @@ ASSIGN a = 1 b = 2 NO-ERROR.
 
 (source_code
   (assign_statement
-    (assign_pair
-      left: (identifier)
-      right: (function_call
-        function: (identifier)
-        (arguments
-          (argument
-            value: (identifier)))))
-    (no_error))
+    (assign_phrase
+      (assign_pair
+        left: (identifier)
+        right: (function_call
+          function: (identifier)
+          (arguments
+            (argument
+              value: (identifier)))))
+      (no_error)))
   (assign_statement
-    (assign_pair
-      left: (identifier)
-      right: (number_literal))
-    (assign_pair
-      left: (identifier)
-      right: (number_literal))
-    (no_error)))
+    (assign_phrase
+      (assign_pair
+        left: (identifier)
+        right: (number_literal))
+      (assign_pair
+        left: (identifier)
+        right: (number_literal))
+      (no_error))))
 
 ================================================================================
 ASSIGN with comment
@@ -118,14 +125,15 @@ ASSIGN // note
 
 (source_code
   (assign_statement
-    (comment
-      (line_comment))
-    (assign_pair
-      left: (identifier)
-      right: (number_literal))
-    (assign_pair
-      left: (identifier)
-      right: (string_literal))))
+    (assign_phrase
+      (comment
+        (line_comment))
+      (assign_pair
+        left: (identifier)
+        right: (number_literal))
+      (assign_pair
+        left: (identifier)
+        right: (string_literal)))))
 
 ================================================================================
 ASSIGN with dataset reference
@@ -137,12 +145,13 @@ ASSIGN c = dataset BDebtorShipTo:handle.
 
 (source_code
   (assign_statement
-    (assign_pair
-      left: (identifier)
-      right: (dataset_reference
-        dataset: (object_access
-          left: (identifier)
-          right: (identifier))))))
+    (assign_phrase
+      (assign_pair
+        left: (identifier)
+        right: (dataset_reference
+          dataset: (object_access
+            left: (identifier)
+            right: (identifier)))))))
 
 ================================================================================
 ASSIGN with conditional expression
@@ -154,12 +163,13 @@ ASSIGN status = IF ok THEN "Y" ELSE "N".
 
 (source_code
   (assign_statement
-    (assign_pair
-      left: (identifier)
-      right: (conditional_expression
-        (identifier)
-        (string_literal)
-        (string_literal)))))
+    (assign_phrase
+      (assign_pair
+        left: (identifier)
+        right: (conditional_expression
+          (identifier)
+          (string_literal)
+          (string_literal))))))
 
 ================================================================================
 ASSIGN with qualified names
@@ -172,16 +182,17 @@ ASSIGN Customer.Name = "John"
 
 (source_code
   (assign_statement
-    (assign_pair
-      left: (qualified_name
-        left: (identifier)
-        right: (identifier))
-      right: (string_literal))
-    (assign_pair
-      left: (qualified_name
-        left: (identifier)
-        right: (identifier))
-      right: (number_literal))))
+    (assign_phrase
+      (assign_pair
+        left: (qualified_name
+          left: (identifier)
+          right: (identifier))
+        right: (string_literal))
+      (assign_pair
+        left: (qualified_name
+          left: (identifier)
+          right: (identifier))
+        right: (number_literal)))))
 
 ================================================================================
 Simple assignment statement
@@ -371,19 +382,20 @@ NO-ERROR.
 
 (source_code
   (assign_statement
-    (assign_pair
-      left: (identifier)
-      right: (number_literal))
-    (assign_pair
-      left: (qualified_name
+    (assign_phrase
+      (assign_pair
         left: (identifier)
-        right: (identifier))
-      right: (string_literal)
-      (when_available_phrase
-        (qualified_name
+        right: (number_literal))
+      (assign_pair
+        left: (qualified_name
           left: (identifier)
-          right: (identifier))))
-    (assign_pair
-      left: (identifier)
-      right: (number_literal))
-    (no_error)))
+          right: (identifier))
+        right: (string_literal)
+        (when_available_phrase
+          (qualified_name
+            left: (identifier)
+            right: (identifier))))
+      (assign_pair
+        left: (identifier)
+        right: (number_literal))
+      (no_error))))

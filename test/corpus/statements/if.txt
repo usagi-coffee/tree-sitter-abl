@@ -58,9 +58,10 @@ IF LOCKED bufOrder THEN RETURN TRUE.
     else: (do_block
       (body
         (assign_statement
-          (assign_pair
-            left: (identifier)
-            right: (string_literal))))))
+          (assign_phrase
+            (assign_pair
+              left: (identifier)
+              right: (string_literal)))))))
   (if_statement
     (unary_expression
       (available_expression

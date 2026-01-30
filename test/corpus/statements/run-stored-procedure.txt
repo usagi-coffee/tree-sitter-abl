@@ -221,19 +221,19 @@ DISPLAY "Succeeded".
   (variable_definition
     name: (identifier)
     type: (identifier))
-  (create_statement
-    table: (identifier)
-    (identifier))
+  (create_temp_table_statement
+    handle: (identifier))
+  (empty_statement)
   (run_stored_procedure_statement
     procedure: (identifier)
     result_handle: (identifier)
     status_var: (identifier)
     (parameter_list
-      value: (string_literal))
-    (if_statement
-      (parenthesized_expression
-        (binary_expression
-          (identifier)
-          (number_literal)))
-      then: (display_statement
-        (string_literal)))
+      value: (string_literal)))
+  (if_statement
+    (parenthesized_expression
+      (binary_expression
+        (identifier)
+        (number_literal)))
+    then: (display_statement
+      (string_literal))))
