@@ -51,7 +51,7 @@ RELEASE OBJECT controlHdl NO-ERROR.
   (identifier)
   (assign_statement
     (assign_pair
-      (frame_expression
+      (frame_access
         (identifier)
         (identifier)))
     (assign_pair

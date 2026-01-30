@@ -9,6 +9,7 @@ module.exports = (ctx) => ({
 
   _primary_expression: ($) =>
     choice(
+      alias($.constant_expression, $.constant),
       $.parenthesized_expression,
       $.available_expression,
       $.can_find_expression,
@@ -16,9 +17,6 @@ module.exports = (ctx) => ({
       $.ambiguous_expression,
       $.accum_expression,
       $.locked_expression,
-      prec(-1, $.frame_expression),
-      prec(-1, $.query_expression),
-      prec(-1, $.menu_item_access),
       $.object_access_expression,
       $.new_expression,
       $.dataset_reference,
@@ -34,8 +32,10 @@ module.exports = (ctx) => ({
       $.string_literal,
       $.boolean_literal,
       $.null_literal,
-      alias($.constant_expression, $.constant),
       $.in_frame_expression,
       $.input_expression,
+      prec(-1, $.query_access),
+      prec(-1, $.frame_access),
+      prec(-1, $.menu_item_access),
     ),
 });

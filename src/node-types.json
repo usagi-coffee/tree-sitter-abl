@@ -70,7 +70,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -126,7 +126,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -216,7 +216,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -272,7 +272,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -412,7 +412,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -468,7 +468,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -556,7 +556,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -612,7 +612,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -766,7 +766,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -822,7 +822,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -896,7 +896,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -952,7 +952,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -1040,7 +1040,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -1096,7 +1096,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -1213,7 +1213,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -1269,7 +1269,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -1343,7 +1343,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -1399,7 +1399,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -1474,7 +1474,7 @@
           "named": true
         },
         {
-          "type": "frame_expression",
+          "type": "frame_access",
           "named": true
         },
         {
@@ -1530,7 +1530,7 @@
           "named": true
         },
         {
-          "type": "query_expression",
+          "type": "query_access",
           "named": true
         },
         {
@@ -1609,7 +1609,7 @@
           "named": true
         },
         {
-          "type": "frame_expression",
+          "type": "frame_access",
           "named": true
         },
         {
@@ -1665,7 +1665,7 @@
           "named": true
         },
         {
-          "type": "query_expression",
+          "type": "query_access",
           "named": true
         },
         {
@@ -1696,7 +1696,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -1786,7 +1786,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -1842,7 +1842,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -1923,7 +1923,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -2023,7 +2023,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -2079,7 +2079,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -2173,7 +2173,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -2229,7 +2229,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -2303,7 +2303,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -2359,7 +2359,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -2554,7 +2554,7 @@
           "named": true
         },
         {
-          "type": "frame_expression",
+          "type": "frame_access",
           "named": true
         },
         {
@@ -2610,7 +2610,7 @@
           "named": true
         },
         {
-          "type": "query_expression",
+          "type": "query_access",
           "named": true
         },
         {
@@ -2689,7 +2689,7 @@
           "named": true
         },
         {
-          "type": "frame_expression",
+          "type": "frame_access",
           "named": true
         },
         {
@@ -2745,7 +2745,7 @@
           "named": true
         },
         {
-          "type": "query_expression",
+          "type": "query_access",
           "named": true
         },
         {
@@ -2824,7 +2824,7 @@
           "named": true
         },
         {
-          "type": "frame_expression",
+          "type": "frame_access",
           "named": true
         },
         {
@@ -2880,7 +2880,7 @@
           "named": true
         },
         {
-          "type": "query_expression",
+          "type": "query_access",
           "named": true
         },
         {
@@ -3583,7 +3583,7 @@
           "named": true
         },
         {
-          "type": "frame_expression",
+          "type": "frame_access",
           "named": true
         },
         {
@@ -3639,7 +3639,7 @@
           "named": true
         },
         {
-          "type": "query_expression",
+          "type": "query_access",
           "named": true
         },
         {
@@ -3744,7 +3744,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -3800,7 +3800,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -3890,7 +3890,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -3946,7 +3946,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -4050,7 +4050,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -4106,7 +4106,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -4386,7 +4386,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -4442,7 +4442,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -4516,7 +4516,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -4572,7 +4572,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -4850,7 +4850,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -4906,7 +4906,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -4980,7 +4980,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -5036,7 +5036,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -5134,7 +5134,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -5190,7 +5190,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -5265,7 +5265,7 @@
           "named": true
         },
         {
-          "type": "frame_expression",
+          "type": "frame_access",
           "named": true
         },
         {
@@ -5321,7 +5321,7 @@
           "named": true
         },
         {
-          "type": "query_expression",
+          "type": "query_access",
           "named": true
         },
         {
@@ -5405,7 +5405,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -5461,7 +5461,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -5535,7 +5535,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -5591,7 +5591,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -5666,7 +5666,7 @@
           "named": true
         },
         {
-          "type": "frame_expression",
+          "type": "frame_access",
           "named": true
         },
         {
@@ -5722,7 +5722,7 @@
           "named": true
         },
         {
-          "type": "query_expression",
+          "type": "query_access",
           "named": true
         },
         {
@@ -5811,7 +5811,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -5867,7 +5867,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -6120,7 +6120,7 @@
           "named": true
         },
         {
-          "type": "frame_expression",
+          "type": "frame_access",
           "named": true
         },
         {
@@ -6176,7 +6176,7 @@
           "named": true
         },
         {
-          "type": "query_expression",
+          "type": "query_access",
           "named": true
         },
         {
@@ -6263,7 +6263,7 @@
           "named": true
         },
         {
-          "type": "frame_expression",
+          "type": "frame_access",
           "named": true
         },
         {
@@ -6319,7 +6319,7 @@
           "named": true
         },
         {
-          "type": "query_expression",
+          "type": "query_access",
           "named": true
         },
         {
@@ -6473,7 +6473,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -6529,7 +6529,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -6881,7 +6881,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -6937,7 +6937,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -7011,7 +7011,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -7067,7 +7067,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -7141,7 +7141,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -7197,7 +7197,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -7277,7 +7277,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -7333,7 +7333,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -7407,7 +7407,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -7463,7 +7463,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -7537,7 +7537,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -7593,7 +7593,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -7673,7 +7673,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -7729,7 +7729,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -7813,7 +7813,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -7869,7 +7869,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -7977,7 +7977,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -8033,7 +8033,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -8133,7 +8133,7 @@
           "named": true
         },
         {
-          "type": "frame_expression",
+          "type": "frame_access",
           "named": true
         },
         {
@@ -8189,7 +8189,7 @@
           "named": true
         },
         {
-          "type": "query_expression",
+          "type": "query_access",
           "named": true
         },
         {
@@ -8268,7 +8268,7 @@
           "named": true
         },
         {
-          "type": "frame_expression",
+          "type": "frame_access",
           "named": true
         },
         {
@@ -8324,7 +8324,7 @@
           "named": true
         },
         {
-          "type": "query_expression",
+          "type": "query_access",
           "named": true
         },
         {
@@ -8403,7 +8403,7 @@
           "named": true
         },
         {
-          "type": "frame_expression",
+          "type": "frame_access",
           "named": true
         },
         {
@@ -8459,7 +8459,7 @@
           "named": true
         },
         {
-          "type": "query_expression",
+          "type": "query_access",
           "named": true
         },
         {
@@ -8538,7 +8538,7 @@
           "named": true
         },
         {
-          "type": "frame_expression",
+          "type": "frame_access",
           "named": true
         },
         {
@@ -8594,7 +8594,7 @@
           "named": true
         },
         {
-          "type": "query_expression",
+          "type": "query_access",
           "named": true
         },
         {
@@ -8703,7 +8703,7 @@
           "named": true
         },
         {
-          "type": "frame_expression",
+          "type": "frame_access",
           "named": true
         },
         {
@@ -8759,7 +8759,7 @@
           "named": true
         },
         {
-          "type": "query_expression",
+          "type": "query_access",
           "named": true
         },
         {
@@ -8838,7 +8838,7 @@
           "named": true
         },
         {
-          "type": "frame_expression",
+          "type": "frame_access",
           "named": true
         },
         {
@@ -8894,7 +8894,7 @@
           "named": true
         },
         {
-          "type": "query_expression",
+          "type": "query_access",
           "named": true
         },
         {
@@ -9599,7 +9599,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -9655,7 +9655,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -9747,7 +9747,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -9803,7 +9803,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -9879,7 +9879,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -9935,7 +9935,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -10009,7 +10009,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -10065,7 +10065,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -10139,7 +10139,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -10195,7 +10195,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -10269,7 +10269,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -10325,7 +10325,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -10399,7 +10399,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -10455,7 +10455,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -10529,7 +10529,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -10585,7 +10585,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -10659,7 +10659,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -10715,7 +10715,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -10789,7 +10789,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -10845,7 +10845,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -10919,7 +10919,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -10975,7 +10975,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -11049,7 +11049,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -11105,7 +11105,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -11179,7 +11179,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -11235,7 +11235,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -11309,7 +11309,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -11365,7 +11365,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -11439,7 +11439,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -11495,7 +11495,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -11569,7 +11569,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -11625,7 +11625,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -11699,7 +11699,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -11755,7 +11755,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -11829,7 +11829,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -11885,7 +11885,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -11959,7 +11959,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -12015,7 +12015,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -12089,7 +12089,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -12145,7 +12145,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -12219,7 +12219,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -12275,7 +12275,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -12349,7 +12349,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -12405,7 +12405,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -12497,7 +12497,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -12553,7 +12553,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -12643,7 +12643,7 @@
           "named": true
         },
         {
-          "type": "frame_expression",
+          "type": "frame_access",
           "named": true
         },
         {
@@ -12699,7 +12699,7 @@
           "named": true
         },
         {
-          "type": "query_expression",
+          "type": "query_access",
           "named": true
         },
         {
@@ -12936,7 +12936,7 @@
           "named": true
         },
         {
-          "type": "frame_expression",
+          "type": "frame_access",
           "named": true
         },
         {
@@ -12992,7 +12992,7 @@
           "named": true
         },
         {
-          "type": "query_expression",
+          "type": "query_access",
           "named": true
         },
         {
@@ -13081,7 +13081,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -13137,7 +13137,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -13221,7 +13221,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -13277,7 +13277,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -13383,7 +13383,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -13439,7 +13439,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -13513,7 +13513,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -13569,7 +13569,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -13643,7 +13643,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -13699,7 +13699,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -13773,7 +13773,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -13829,7 +13829,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -13903,7 +13903,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -13959,7 +13959,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -14033,7 +14033,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -14089,7 +14089,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -14163,7 +14163,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -14219,7 +14219,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -14335,7 +14335,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -14391,7 +14391,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -14465,7 +14465,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -14521,7 +14521,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -14619,7 +14619,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -14675,7 +14675,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -14749,7 +14749,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -14805,7 +14805,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -15057,7 +15057,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -15113,7 +15113,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -15187,7 +15187,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -15243,7 +15243,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -15317,7 +15317,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -15373,7 +15373,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -15457,7 +15457,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -15513,7 +15513,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -15587,7 +15587,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -15643,7 +15643,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -15777,7 +15777,7 @@
           "named": true
         },
         {
-          "type": "frame_expression",
+          "type": "frame_access",
           "named": true
         },
         {
@@ -15833,7 +15833,7 @@
           "named": true
         },
         {
-          "type": "query_expression",
+          "type": "query_access",
           "named": true
         },
         {
@@ -15912,7 +15912,7 @@
           "named": true
         },
         {
-          "type": "frame_expression",
+          "type": "frame_access",
           "named": true
         },
         {
@@ -15968,7 +15968,7 @@
           "named": true
         },
         {
-          "type": "query_expression",
+          "type": "query_access",
           "named": true
         },
         {
@@ -16093,7 +16093,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -16149,7 +16149,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -16259,7 +16259,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -16315,7 +16315,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -16460,7 +16460,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -16516,7 +16516,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -16590,7 +16590,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -16646,7 +16646,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -16808,7 +16808,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -16864,7 +16864,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -17000,7 +17000,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -17056,7 +17056,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -17130,7 +17130,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -17186,7 +17186,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -17269,7 +17269,7 @@
           "named": true
         },
         {
-          "type": "frame_expression",
+          "type": "frame_access",
           "named": true
         },
         {
@@ -17329,7 +17329,7 @@
           "named": true
         },
         {
-          "type": "query_expression",
+          "type": "query_access",
           "named": true
         },
         {
@@ -17420,7 +17420,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -17476,7 +17476,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -17560,7 +17560,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -17616,7 +17616,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -17690,7 +17690,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -17746,7 +17746,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -17839,7 +17839,7 @@
           "named": true
         },
         {
-          "type": "frame_expression",
+          "type": "frame_access",
           "named": true
         },
         {
@@ -17919,7 +17919,7 @@
           "named": true
         },
         {
-          "type": "query_expression",
+          "type": "query_access",
           "named": true
         },
         {
@@ -18006,7 +18006,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -18062,7 +18062,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -18152,7 +18152,7 @@
           "named": true
         },
         {
-          "type": "frame_expression",
+          "type": "frame_access",
           "named": true
         },
         {
@@ -18208,7 +18208,7 @@
           "named": true
         },
         {
-          "type": "query_expression",
+          "type": "query_access",
           "named": true
         },
         {
@@ -18287,7 +18287,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -18343,7 +18343,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -18442,7 +18442,7 @@
           "named": true
         },
         {
-          "type": "frame_expression",
+          "type": "frame_access",
           "named": true
         },
         {
@@ -18498,7 +18498,7 @@
           "named": true
         },
         {
-          "type": "query_expression",
+          "type": "query_access",
           "named": true
         },
         {
@@ -18577,7 +18577,7 @@
           "named": true
         },
         {
-          "type": "frame_expression",
+          "type": "frame_access",
           "named": true
         },
         {
@@ -18633,7 +18633,7 @@
           "named": true
         },
         {
-          "type": "query_expression",
+          "type": "query_access",
           "named": true
         },
         {
@@ -19362,7 +19362,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -19418,7 +19418,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -19492,7 +19492,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -19548,7 +19548,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -19656,7 +19656,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -19712,7 +19712,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -19926,7 +19926,7 @@
           "named": true
         },
         {
-          "type": "frame_expression",
+          "type": "frame_access",
           "named": true
         },
         {
@@ -19986,7 +19986,7 @@
           "named": true
         },
         {
-          "type": "query_expression",
+          "type": "query_access",
           "named": true
         },
         {
@@ -20073,7 +20073,7 @@
           "named": true
         },
         {
-          "type": "frame_expression",
+          "type": "frame_access",
           "named": true
         },
         {
@@ -20133,7 +20133,7 @@
           "named": true
         },
         {
-          "type": "query_expression",
+          "type": "query_access",
           "named": true
         },
         {
@@ -20255,7 +20255,7 @@
           "named": true
         },
         {
-          "type": "frame_expression",
+          "type": "frame_access",
           "named": true
         },
         {
@@ -20311,7 +20311,7 @@
           "named": true
         },
         {
-          "type": "query_expression",
+          "type": "query_access",
           "named": true
         },
         {
@@ -20390,7 +20390,7 @@
           "named": true
         },
         {
-          "type": "frame_expression",
+          "type": "frame_access",
           "named": true
         },
         {
@@ -20446,7 +20446,7 @@
           "named": true
         },
         {
-          "type": "query_expression",
+          "type": "query_access",
           "named": true
         },
         {
@@ -20596,7 +20596,7 @@
           "named": true
         },
         {
-          "type": "frame_expression",
+          "type": "frame_access",
           "named": true
         },
         {
@@ -20652,7 +20652,7 @@
           "named": true
         },
         {
-          "type": "query_expression",
+          "type": "query_access",
           "named": true
         },
         {
@@ -20731,7 +20731,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -20787,7 +20787,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -20861,7 +20861,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -20917,7 +20917,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -20991,7 +20991,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -21047,7 +21047,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -21142,7 +21142,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -21198,7 +21198,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -21339,7 +21339,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -21395,7 +21395,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -21469,7 +21469,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -21525,7 +21525,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -21605,7 +21605,7 @@
           "named": true
         },
         {
-          "type": "frame_expression",
+          "type": "frame_access",
           "named": true
         },
         {
@@ -21661,7 +21661,7 @@
           "named": true
         },
         {
-          "type": "query_expression",
+          "type": "query_access",
           "named": true
         },
         {
@@ -21740,7 +21740,7 @@
           "named": true
         },
         {
-          "type": "frame_expression",
+          "type": "frame_access",
           "named": true
         },
         {
@@ -21796,7 +21796,7 @@
           "named": true
         },
         {
-          "type": "query_expression",
+          "type": "query_access",
           "named": true
         },
         {
@@ -21875,7 +21875,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -21931,7 +21931,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -22015,7 +22015,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -22071,7 +22071,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -22145,7 +22145,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -22201,7 +22201,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -22357,7 +22357,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -22413,7 +22413,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -22487,7 +22487,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -22543,7 +22543,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -22638,7 +22638,7 @@
           "named": true
         },
         {
-          "type": "frame_expression",
+          "type": "frame_access",
           "named": true
         },
         {
@@ -22694,7 +22694,7 @@
           "named": true
         },
         {
-          "type": "query_expression",
+          "type": "query_access",
           "named": true
         },
         {
@@ -22796,7 +22796,7 @@
           "named": true
         },
         {
-          "type": "frame_expression",
+          "type": "frame_access",
           "named": true
         },
         {
@@ -22852,7 +22852,7 @@
           "named": true
         },
         {
-          "type": "query_expression",
+          "type": "query_access",
           "named": true
         },
         {
@@ -22908,6 +22908,32 @@
     "type": "forward_phrase",
     "named": true,
     "fields": {}
+  },
+  {
+    "type": "frame_access",
+    "named": true,
+    "fields": {
+      "attribute": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "frame": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    }
   },
   {
     "type": "frame_definition",
@@ -23023,7 +23049,7 @@
           "named": true
         },
         {
-          "type": "frame_expression",
+          "type": "frame_access",
           "named": true
         },
         {
@@ -23083,7 +23109,7 @@
           "named": true
         },
         {
-          "type": "query_expression",
+          "type": "query_access",
           "named": true
         },
         {
@@ -23099,32 +23125,6 @@
           "named": true
         }
       ]
-    }
-  },
-  {
-    "type": "frame_expression",
-    "named": true,
-    "fields": {
-      "attribute": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "frame": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      }
     }
   },
   {
@@ -23188,7 +23188,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -23244,7 +23244,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -23318,7 +23318,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -23374,7 +23374,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -23448,7 +23448,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -23504,7 +23504,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -23578,7 +23578,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -23634,7 +23634,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -23709,7 +23709,7 @@
           "named": true
         },
         {
-          "type": "frame_expression",
+          "type": "frame_access",
           "named": true
         },
         {
@@ -23765,7 +23765,7 @@
           "named": true
         },
         {
-          "type": "query_expression",
+          "type": "query_access",
           "named": true
         },
         {
@@ -24688,7 +24688,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -24744,7 +24744,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -24818,7 +24818,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -24874,7 +24874,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -24948,7 +24948,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -25004,7 +25004,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -25214,7 +25214,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -25270,7 +25270,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -26619,7 +26619,7 @@
           "named": true
         },
         {
-          "type": "frame_expression",
+          "type": "frame_access",
           "named": true
         },
         {
@@ -26675,7 +26675,7 @@
           "named": true
         },
         {
-          "type": "query_expression",
+          "type": "query_access",
           "named": true
         },
         {
@@ -26779,7 +26779,7 @@
           "named": true
         },
         {
-          "type": "frame_expression",
+          "type": "frame_access",
           "named": true
         },
         {
@@ -26843,7 +26843,7 @@
           "named": true
         },
         {
-          "type": "query_expression",
+          "type": "query_access",
           "named": true
         },
         {
@@ -27099,7 +27099,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -27155,7 +27155,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -27414,7 +27414,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -27470,7 +27470,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -27545,7 +27545,7 @@
           "named": true
         },
         {
-          "type": "frame_expression",
+          "type": "frame_access",
           "named": true
         },
         {
@@ -27601,7 +27601,7 @@
           "named": true
         },
         {
-          "type": "query_expression",
+          "type": "query_access",
           "named": true
         },
         {
@@ -27760,7 +27760,7 @@
           "named": true
         },
         {
-          "type": "frame_expression",
+          "type": "frame_access",
           "named": true
         },
         {
@@ -27816,7 +27816,7 @@
           "named": true
         },
         {
-          "type": "query_expression",
+          "type": "query_access",
           "named": true
         },
         {
@@ -27903,7 +27903,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -27959,7 +27959,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -28086,7 +28086,7 @@
           "named": true
         },
         {
-          "type": "frame_expression",
+          "type": "frame_access",
           "named": true
         },
         {
@@ -28146,7 +28146,7 @@
           "named": true
         },
         {
-          "type": "query_expression",
+          "type": "query_access",
           "named": true
         },
         {
@@ -28266,7 +28266,7 @@
           "named": true
         },
         {
-          "type": "frame_expression",
+          "type": "frame_access",
           "named": true
         },
         {
@@ -28322,7 +28322,7 @@
           "named": true
         },
         {
-          "type": "query_expression",
+          "type": "query_access",
           "named": true
         },
         {
@@ -28437,7 +28437,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -28493,7 +28493,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -28690,7 +28690,7 @@
           "named": true
         },
         {
-          "type": "frame_expression",
+          "type": "frame_access",
           "named": true
         },
         {
@@ -28746,7 +28746,7 @@
           "named": true
         },
         {
-          "type": "query_expression",
+          "type": "query_access",
           "named": true
         },
         {
@@ -28825,7 +28825,7 @@
           "named": true
         },
         {
-          "type": "frame_expression",
+          "type": "frame_access",
           "named": true
         },
         {
@@ -28881,7 +28881,7 @@
           "named": true
         },
         {
-          "type": "query_expression",
+          "type": "query_access",
           "named": true
         },
         {
@@ -28960,7 +28960,7 @@
           "named": true
         },
         {
-          "type": "frame_expression",
+          "type": "frame_access",
           "named": true
         },
         {
@@ -29016,7 +29016,7 @@
           "named": true
         },
         {
-          "type": "query_expression",
+          "type": "query_access",
           "named": true
         },
         {
@@ -29095,7 +29095,7 @@
           "named": true
         },
         {
-          "type": "frame_expression",
+          "type": "frame_access",
           "named": true
         },
         {
@@ -29151,7 +29151,7 @@
           "named": true
         },
         {
-          "type": "query_expression",
+          "type": "query_access",
           "named": true
         },
         {
@@ -29230,7 +29230,7 @@
           "named": true
         },
         {
-          "type": "frame_expression",
+          "type": "frame_access",
           "named": true
         },
         {
@@ -29286,7 +29286,7 @@
           "named": true
         },
         {
-          "type": "query_expression",
+          "type": "query_access",
           "named": true
         },
         {
@@ -29365,7 +29365,7 @@
           "named": true
         },
         {
-          "type": "frame_expression",
+          "type": "frame_access",
           "named": true
         },
         {
@@ -29421,7 +29421,7 @@
           "named": true
         },
         {
-          "type": "query_expression",
+          "type": "query_access",
           "named": true
         },
         {
@@ -29608,7 +29608,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -29664,7 +29664,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -29744,7 +29744,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -29800,7 +29800,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -29874,7 +29874,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -29930,7 +29930,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -30004,7 +30004,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -30060,7 +30060,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -30134,7 +30134,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -30190,7 +30190,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -30270,7 +30270,7 @@
           "named": true
         },
         {
-          "type": "frame_expression",
+          "type": "frame_access",
           "named": true
         },
         {
@@ -30326,7 +30326,7 @@
           "named": true
         },
         {
-          "type": "query_expression",
+          "type": "query_access",
           "named": true
         },
         {
@@ -30449,7 +30449,7 @@
           "named": true
         },
         {
-          "type": "frame_expression",
+          "type": "frame_access",
           "named": true
         },
         {
@@ -30505,7 +30505,7 @@
           "named": true
         },
         {
-          "type": "query_expression",
+          "type": "query_access",
           "named": true
         },
         {
@@ -30770,7 +30770,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -30826,7 +30826,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -30905,7 +30905,7 @@
           "named": true
         },
         {
-          "type": "frame_expression",
+          "type": "frame_access",
           "named": true
         },
         {
@@ -30961,7 +30961,7 @@
           "named": true
         },
         {
-          "type": "query_expression",
+          "type": "query_access",
           "named": true
         },
         {
@@ -31124,7 +31124,7 @@
           "named": true
         },
         {
-          "type": "frame_expression",
+          "type": "frame_access",
           "named": true
         },
         {
@@ -31180,7 +31180,7 @@
           "named": true
         },
         {
-          "type": "query_expression",
+          "type": "query_access",
           "named": true
         },
         {
@@ -31333,7 +31333,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -31389,7 +31389,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -31550,7 +31550,7 @@
           "named": true
         },
         {
-          "type": "frame_expression",
+          "type": "frame_access",
           "named": true
         },
         {
@@ -31606,7 +31606,7 @@
           "named": true
         },
         {
-          "type": "query_expression",
+          "type": "query_access",
           "named": true
         },
         {
@@ -31798,7 +31798,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -31854,7 +31854,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -31958,7 +31958,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -32014,7 +32014,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -32114,7 +32114,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -32170,7 +32170,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -32274,7 +32274,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -32330,7 +32330,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -32420,7 +32420,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -32476,7 +32476,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -33256,7 +33256,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -33312,7 +33312,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -33416,7 +33416,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -33472,7 +33472,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -33590,7 +33590,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -33646,7 +33646,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -33769,7 +33769,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -33825,7 +33825,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -33899,7 +33899,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -33955,7 +33955,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -34035,7 +34035,7 @@
           "named": true
         },
         {
-          "type": "frame_expression",
+          "type": "frame_access",
           "named": true
         },
         {
@@ -34091,7 +34091,7 @@
           "named": true
         },
         {
-          "type": "query_expression",
+          "type": "query_access",
           "named": true
         },
         {
@@ -34170,7 +34170,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -34226,7 +34226,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -34300,7 +34300,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -34356,7 +34356,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -34436,7 +34436,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -34492,7 +34492,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -34572,7 +34572,7 @@
           "named": true
         },
         {
-          "type": "frame_expression",
+          "type": "frame_access",
           "named": true
         },
         {
@@ -34628,7 +34628,7 @@
           "named": true
         },
         {
-          "type": "query_expression",
+          "type": "query_access",
           "named": true
         },
         {
@@ -34707,7 +34707,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -34763,7 +34763,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -34837,7 +34837,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -34893,7 +34893,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -35054,7 +35054,7 @@
           "named": true
         },
         {
-          "type": "frame_expression",
+          "type": "frame_access",
           "named": true
         },
         {
@@ -35122,7 +35122,7 @@
           "named": true
         },
         {
-          "type": "query_expression",
+          "type": "query_access",
           "named": true
         },
         {
@@ -35209,7 +35209,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -35265,7 +35265,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -35339,7 +35339,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -35395,7 +35395,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -35469,7 +35469,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -35525,7 +35525,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -35599,7 +35599,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -35655,7 +35655,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -35729,7 +35729,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -35785,7 +35785,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -35875,7 +35875,7 @@
           "named": true
         },
         {
-          "type": "frame_expression",
+          "type": "frame_access",
           "named": true
         },
         {
@@ -35931,7 +35931,7 @@
           "named": true
         },
         {
-          "type": "query_expression",
+          "type": "query_access",
           "named": true
         },
         {
@@ -36335,7 +36335,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -36391,7 +36391,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -36552,7 +36552,7 @@
           "named": true
         },
         {
-          "type": "frame_expression",
+          "type": "frame_access",
           "named": true
         },
         {
@@ -36608,7 +36608,7 @@
           "named": true
         },
         {
-          "type": "query_expression",
+          "type": "query_access",
           "named": true
         },
         {
@@ -36702,7 +36702,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -36758,7 +36758,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -36842,7 +36842,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -36898,7 +36898,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -36994,7 +36994,7 @@
           "named": true
         },
         {
-          "type": "frame_expression",
+          "type": "frame_access",
           "named": true
         },
         {
@@ -37050,7 +37050,7 @@
           "named": true
         },
         {
-          "type": "query_expression",
+          "type": "query_access",
           "named": true
         },
         {
@@ -37129,7 +37129,7 @@
           "named": true
         },
         {
-          "type": "frame_expression",
+          "type": "frame_access",
           "named": true
         },
         {
@@ -37185,7 +37185,7 @@
           "named": true
         },
         {
-          "type": "query_expression",
+          "type": "query_access",
           "named": true
         },
         {
@@ -38051,7 +38051,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -38107,7 +38107,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -38202,7 +38202,7 @@
           "named": true
         },
         {
-          "type": "frame_expression",
+          "type": "frame_access",
           "named": true
         },
         {
@@ -38258,7 +38258,7 @@
           "named": true
         },
         {
-          "type": "query_expression",
+          "type": "query_access",
           "named": true
         },
         {
@@ -38369,7 +38369,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -38425,7 +38425,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -38531,7 +38531,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -38587,7 +38587,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -38667,7 +38667,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -38723,7 +38723,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -39625,7 +39625,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -39681,7 +39681,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -39755,7 +39755,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -39811,7 +39811,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -39901,7 +39901,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -39957,7 +39957,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -40031,7 +40031,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -40087,7 +40087,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -40167,7 +40167,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -40223,7 +40223,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -40297,7 +40297,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -40353,7 +40353,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -40427,7 +40427,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -40483,7 +40483,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -40557,7 +40557,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -40613,7 +40613,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -40693,7 +40693,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -40749,7 +40749,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -40823,7 +40823,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -40879,7 +40879,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -40953,7 +40953,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -41009,7 +41009,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -41099,7 +41099,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -41155,7 +41155,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -41229,7 +41229,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -41285,7 +41285,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -41359,7 +41359,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -41415,7 +41415,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -41487,6 +41487,32 @@
     }
   },
   {
+    "type": "query_access",
+    "named": true,
+    "fields": {
+      "attribute": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "query": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "query_definition",
     "named": true,
     "fields": {
@@ -41532,32 +41558,6 @@
           "named": true
         }
       ]
-    }
-  },
-  {
-    "type": "query_expression",
-    "named": true,
-    "fields": {
-      "attribute": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "query": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      }
     }
   },
   {
@@ -41651,7 +41651,7 @@
           "named": true
         },
         {
-          "type": "frame_expression",
+          "type": "frame_access",
           "named": true
         },
         {
@@ -41707,7 +41707,7 @@
           "named": true
         },
         {
-          "type": "query_expression",
+          "type": "query_access",
           "named": true
         },
         {
@@ -41791,7 +41791,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -41847,7 +41847,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -41931,7 +41931,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -41987,7 +41987,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -42072,7 +42072,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -42128,7 +42128,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -42340,7 +42340,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -42396,7 +42396,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -42652,7 +42652,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -42708,7 +42708,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -42843,7 +42843,7 @@
           "named": true
         },
         {
-          "type": "frame_expression",
+          "type": "frame_access",
           "named": true
         },
         {
@@ -42923,7 +42923,7 @@
           "named": true
         },
         {
-          "type": "query_expression",
+          "type": "query_access",
           "named": true
         },
         {
@@ -43002,7 +43002,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -43058,7 +43058,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -43142,7 +43142,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -43198,7 +43198,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -43272,7 +43272,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -43328,7 +43328,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -43402,7 +43402,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -43458,7 +43458,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -43532,7 +43532,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -43588,7 +43588,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -43673,7 +43673,7 @@
           "named": true
         },
         {
-          "type": "frame_expression",
+          "type": "frame_access",
           "named": true
         },
         {
@@ -43729,7 +43729,7 @@
           "named": true
         },
         {
-          "type": "query_expression",
+          "type": "query_access",
           "named": true
         },
         {
@@ -43813,7 +43813,7 @@
           "named": true
         },
         {
-          "type": "frame_expression",
+          "type": "frame_access",
           "named": true
         },
         {
@@ -43869,7 +43869,7 @@
           "named": true
         },
         {
-          "type": "query_expression",
+          "type": "query_access",
           "named": true
         },
         {
@@ -44011,7 +44011,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -44067,7 +44067,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -44155,7 +44155,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -44211,7 +44211,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -44285,7 +44285,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -44341,7 +44341,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -44431,7 +44431,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -44487,7 +44487,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -44561,7 +44561,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -44617,7 +44617,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -44697,7 +44697,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -44753,7 +44753,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -44884,7 +44884,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -44940,7 +44940,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -45025,7 +45025,7 @@
           "named": true
         },
         {
-          "type": "frame_expression",
+          "type": "frame_access",
           "named": true
         },
         {
@@ -45081,7 +45081,7 @@
           "named": true
         },
         {
-          "type": "query_expression",
+          "type": "query_access",
           "named": true
         },
         {
@@ -45190,7 +45190,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -45246,7 +45246,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -45364,7 +45364,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -45420,7 +45420,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -45494,7 +45494,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -45550,7 +45550,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -45633,7 +45633,7 @@
           "named": true
         },
         {
-          "type": "frame_expression",
+          "type": "frame_access",
           "named": true
         },
         {
@@ -45689,7 +45689,7 @@
           "named": true
         },
         {
-          "type": "query_expression",
+          "type": "query_access",
           "named": true
         },
         {
@@ -45768,7 +45768,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -45824,7 +45824,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -45898,7 +45898,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -45954,7 +45954,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -46034,7 +46034,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -46090,7 +46090,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -46164,7 +46164,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -46220,7 +46220,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -46557,7 +46557,7 @@
           "named": true
         },
         {
-          "type": "frame_expression",
+          "type": "frame_access",
           "named": true
         },
         {
@@ -46613,7 +46613,7 @@
           "named": true
         },
         {
-          "type": "query_expression",
+          "type": "query_access",
           "named": true
         },
         {
@@ -46692,7 +46692,7 @@
           "named": true
         },
         {
-          "type": "frame_expression",
+          "type": "frame_access",
           "named": true
         },
         {
@@ -46748,7 +46748,7 @@
           "named": true
         },
         {
-          "type": "query_expression",
+          "type": "query_access",
           "named": true
         },
         {
@@ -46827,7 +46827,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -46883,7 +46883,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -46957,7 +46957,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -47013,7 +47013,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -47093,7 +47093,7 @@
           "named": true
         },
         {
-          "type": "frame_expression",
+          "type": "frame_access",
           "named": true
         },
         {
@@ -47149,7 +47149,7 @@
           "named": true
         },
         {
-          "type": "query_expression",
+          "type": "query_access",
           "named": true
         },
         {
@@ -47228,7 +47228,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -47284,7 +47284,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -47364,7 +47364,7 @@
           "named": true
         },
         {
-          "type": "frame_expression",
+          "type": "frame_access",
           "named": true
         },
         {
@@ -47420,7 +47420,7 @@
           "named": true
         },
         {
-          "type": "query_expression",
+          "type": "query_access",
           "named": true
         },
         {
@@ -48119,7 +48119,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -48175,7 +48175,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -48255,7 +48255,7 @@
           "named": true
         },
         {
-          "type": "frame_expression",
+          "type": "frame_access",
           "named": true
         },
         {
@@ -48311,7 +48311,7 @@
           "named": true
         },
         {
-          "type": "query_expression",
+          "type": "query_access",
           "named": true
         },
         {
@@ -48395,7 +48395,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -48451,7 +48451,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -48525,7 +48525,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -48581,7 +48581,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -48661,7 +48661,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -48717,7 +48717,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -48828,7 +48828,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -48884,7 +48884,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -48964,7 +48964,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -49020,7 +49020,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -49210,7 +49210,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -49266,7 +49266,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -49340,7 +49340,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -49396,7 +49396,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -49470,7 +49470,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -49526,7 +49526,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -49600,7 +49600,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -49656,7 +49656,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -49736,7 +49736,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -49792,7 +49792,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -49876,7 +49876,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -49932,7 +49932,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -50012,7 +50012,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -50068,7 +50068,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -50142,7 +50142,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -50198,7 +50198,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -50272,7 +50272,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -50328,7 +50328,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -50412,7 +50412,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -50468,7 +50468,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -50548,7 +50548,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -50604,7 +50604,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -50678,7 +50678,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -50734,7 +50734,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -50828,7 +50828,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -50884,7 +50884,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -50964,7 +50964,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -51020,7 +51020,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -51094,7 +51094,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -51150,7 +51150,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -51224,7 +51224,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -51280,7 +51280,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -51374,7 +51374,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -51430,7 +51430,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -51520,7 +51520,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -51576,7 +51576,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -51660,7 +51660,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -51716,7 +51716,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -51988,7 +51988,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -52044,7 +52044,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -52129,7 +52129,7 @@
           "named": true
         },
         {
-          "type": "frame_expression",
+          "type": "frame_access",
           "named": true
         },
         {
@@ -52185,7 +52185,7 @@
           "named": true
         },
         {
-          "type": "query_expression",
+          "type": "query_access",
           "named": true
         },
         {
@@ -52284,7 +52284,7 @@
           "named": true
         },
         {
-          "type": "frame_expression",
+          "type": "frame_access",
           "named": true
         },
         {
@@ -52340,7 +52340,7 @@
           "named": true
         },
         {
-          "type": "query_expression",
+          "type": "query_access",
           "named": true
         },
         {
@@ -52419,7 +52419,7 @@
           "named": true
         },
         {
-          "type": "frame_expression",
+          "type": "frame_access",
           "named": true
         },
         {
@@ -52475,7 +52475,7 @@
           "named": true
         },
         {
-          "type": "query_expression",
+          "type": "query_access",
           "named": true
         },
         {
@@ -52574,7 +52574,7 @@
           "named": true
         },
         {
-          "type": "frame_expression",
+          "type": "frame_access",
           "named": true
         },
         {
@@ -52630,7 +52630,7 @@
           "named": true
         },
         {
-          "type": "query_expression",
+          "type": "query_access",
           "named": true
         },
         {
@@ -52709,7 +52709,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -52765,7 +52765,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -52859,7 +52859,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -52915,7 +52915,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -53019,7 +53019,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -53075,7 +53075,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -53149,7 +53149,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -53205,7 +53205,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -53295,7 +53295,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -53351,7 +53351,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -53455,7 +53455,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -53511,7 +53511,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -53547,7 +53547,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -53671,7 +53671,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -53727,7 +53727,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -53817,7 +53817,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -53873,7 +53873,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -53953,7 +53953,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -54009,7 +54009,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -54083,7 +54083,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -54139,7 +54139,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -54213,7 +54213,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -54269,7 +54269,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -54349,7 +54349,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -54405,7 +54405,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -54523,7 +54523,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -54579,7 +54579,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -54653,7 +54653,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -54709,7 +54709,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -54792,7 +54792,7 @@
           "named": true
         },
         {
-          "type": "frame_expression",
+          "type": "frame_access",
           "named": true
         },
         {
@@ -54848,7 +54848,7 @@
           "named": true
         },
         {
-          "type": "query_expression",
+          "type": "query_access",
           "named": true
         },
         {
@@ -54999,7 +54999,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -55055,7 +55055,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -55150,7 +55150,7 @@
           "named": true
         },
         {
-          "type": "frame_expression",
+          "type": "frame_access",
           "named": true
         },
         {
@@ -55206,7 +55206,7 @@
           "named": true
         },
         {
-          "type": "query_expression",
+          "type": "query_access",
           "named": true
         },
         {
@@ -55300,7 +55300,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -55356,7 +55356,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -55430,7 +55430,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -55486,7 +55486,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -55561,7 +55561,7 @@
           "named": true
         },
         {
-          "type": "frame_expression",
+          "type": "frame_access",
           "named": true
         },
         {
@@ -55617,7 +55617,7 @@
           "named": true
         },
         {
-          "type": "query_expression",
+          "type": "query_access",
           "named": true
         },
         {
@@ -55834,7 +55834,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -55890,7 +55890,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -56158,7 +56158,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -56214,7 +56214,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -56303,7 +56303,7 @@
           "named": true
         },
         {
-          "type": "frame_expression",
+          "type": "frame_access",
           "named": true
         },
         {
@@ -56359,7 +56359,7 @@
           "named": true
         },
         {
-          "type": "query_expression",
+          "type": "query_access",
           "named": true
         },
         {
@@ -56438,7 +56438,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -56494,7 +56494,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -56588,7 +56588,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -56644,7 +56644,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -56813,7 +56813,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -56869,7 +56869,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -56944,7 +56944,7 @@
           "named": true
         },
         {
-          "type": "frame_expression",
+          "type": "frame_access",
           "named": true
         },
         {
@@ -57000,7 +57000,7 @@
           "named": true
         },
         {
-          "type": "query_expression",
+          "type": "query_access",
           "named": true
         },
         {
@@ -57079,7 +57079,7 @@
             "named": true
           },
           {
-            "type": "frame_expression",
+            "type": "frame_access",
             "named": true
           },
           {
@@ -57135,7 +57135,7 @@
             "named": true
           },
           {
-            "type": "query_expression",
+            "type": "query_access",
             "named": true
           },
           {
@@ -57241,7 +57241,7 @@
           "named": true
         },
         {
-          "type": "frame_expression",
+          "type": "frame_access",
           "named": true
         },
         {
@@ -57297,7 +57297,7 @@
           "named": true
         },
         {
-          "type": "query_expression",
+          "type": "query_access",
           "named": true
         },
         {

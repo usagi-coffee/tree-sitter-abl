@@ -578,7 +578,7 @@ DEFINE QUERY qExceptAll FOR Customer EXCEPT ().
   (assignment_statement
     left: (identifier)
     operator: (assignment_operator)
-    right: (query_expression
+    right: (query_access
       query: (identifier)
       attribute: (identifier)))
   (open_query_statement

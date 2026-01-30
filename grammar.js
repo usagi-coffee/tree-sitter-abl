@@ -191,7 +191,12 @@ module.exports = grammar({
         seq($._simple_type_name, "<", $._simple_type_name, ">"),
       nested_type_name: ($) => accessor($, $._nameplus),
       _simple_type_name: ($) =>
-        choice($.scoped_name, $.qualified_name, $.nested_type_name, $.identifier),
+        choice(
+          $.scoped_name,
+          $.qualified_name,
+          $.nested_type_name,
+          $.identifier,
+        ),
       _type_name: ($) => choice($.generic_type, $._simple_type_name),
       _type_or_string: ($) => choice($._type_name, $.string_literal),
 
@@ -208,9 +213,9 @@ module.exports = grammar({
           $.object_access,
           $.array_access,
           $.function_call,
-          $.menu_item_access,
           $.in_frame_expression,
-          $.frame_expression,
+          $.frame_access,
+          $.menu_item_access,
         ),
 
       // Expressions

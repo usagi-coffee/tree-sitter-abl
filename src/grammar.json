@@ -64371,7 +64371,7 @@
         }
       ]
     },
-    "frame_expression": {
+    "frame_access": {
       "type": "SEQ",
       "members": [
         {
@@ -64471,7 +64471,7 @@
         }
       ]
     },
-    "query_expression": {
+    "query_access": {
       "type": "SEQ",
       "members": [
         {
@@ -66479,15 +66479,15 @@
         },
         {
           "type": "SYMBOL",
-          "name": "menu_item_access"
-        },
-        {
-          "type": "SYMBOL",
           "name": "in_frame_expression"
         },
         {
           "type": "SYMBOL",
-          "name": "frame_expression"
+          "name": "frame_access"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "menu_item_access"
         }
       ]
     },
@@ -67806,6 +67806,15 @@
       "type": "CHOICE",
       "members": [
         {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "constant_expression"
+          },
+          "named": true,
+          "value": "constant"
+        },
+        {
           "type": "SYMBOL",
           "name": "parenthesized_expression"
         },
@@ -67838,23 +67847,7 @@
           "value": -1,
           "content": {
             "type": "SYMBOL",
-            "name": "frame_expression"
-          }
-        },
-        {
-          "type": "PREC",
-          "value": -1,
-          "content": {
-            "type": "SYMBOL",
-            "name": "query_expression"
-          }
-        },
-        {
-          "type": "PREC",
-          "value": -1,
-          "content": {
-            "type": "SYMBOL",
-            "name": "menu_item_access"
+            "name": "query_access"
           }
         },
         {
@@ -67918,21 +67911,28 @@
           "name": "null_literal"
         },
         {
-          "type": "ALIAS",
-          "content": {
-            "type": "SYMBOL",
-            "name": "constant_expression"
-          },
-          "named": true,
-          "value": "constant"
-        },
-        {
           "type": "SYMBOL",
           "name": "in_frame_expression"
         },
         {
           "type": "SYMBOL",
           "name": "input_expression"
+        },
+        {
+          "type": "PREC",
+          "value": -1,
+          "content": {
+            "type": "SYMBOL",
+            "name": "menu_item_access"
+          }
+        },
+        {
+          "type": "PREC",
+          "value": -1,
+          "content": {
+            "type": "SYMBOL",
+            "name": "frame_access"
+          }
         }
       ]
     },
