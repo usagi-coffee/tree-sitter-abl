@@ -66,6 +66,7 @@ PROMPT-FOR field1 FORMAT "x(10)" WHEN ok
         (format_option))
       when: (identifier))
     (prompt_for_item
+      field: (identifier)
       (format_phrase
         (format_option)))
     (prompt_for_item

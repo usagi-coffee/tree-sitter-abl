@@ -38,8 +38,9 @@ PAUSE BEFORE-HIDE NO-MESSAGE.
     (record
       (identifier)
       (no_lock))
-    (with_frame_phrase
-      (number_literal))
+    (frame_phrase
+      (frame_option
+        (number_literal)))
     (body
       (display_statement
         (qualified_name

@@ -23,7 +23,7 @@ module.exports = ({ kw, tkw }) => ({
           alias($.__for_on_endkey_phrase, $.on_endkey_phrase),
           alias($.__for_on_quit_phrase, $.on_quit_phrase),
           alias($.__for_on_stop_phrase, $.on_stop_phrase),
-          alias($.__for_with_frame_phrase, $.with_frame_phrase),
+          $.frame_phrase,
           alias($.__for_with_stream_io_phrase, $.with_stream_io_phrase),
         ),
       ),
@@ -157,22 +157,6 @@ module.exports = ({ kw, tkw }) => ({
           seq(tkw("ERROR"), optional(field("error_value", $._expression))),
           tkw("NO-APPLY"),
           field("return_value", $._expression),
-        ),
-      ),
-    ),
-  __for_with_frame_phrase: ($) =>
-    seq(
-      kw("WITH"),
-      repeat1(
-        choice(
-          seq(kw("FRAME"), optional(field("name", $.identifier))),
-          seq(kw("WIDTH"), $.number_literal),
-          seq($.number_literal, tkw("DOWN")),
-          tkw("CENTERED"),
-          seq(kw("TITLE"), $._expression),
-          tkw("USE-TEXT"),
-          seq(kw("COLUMN"), $._expression),
-          seq(kw("ROW"), $._expression),
         ),
       ),
     ),

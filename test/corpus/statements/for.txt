@@ -142,9 +142,10 @@ END.
     (record
       table: (identifier)
       (no_lock))
-    (with_frame_phrase
-      name: (identifier)
-      (number_literal))
+    (frame_phrase
+      frame: (identifier)
+      (frame_option
+        width: (number_literal)))
     (body
       (put_statement
         value: (qualified_name

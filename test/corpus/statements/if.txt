@@ -283,7 +283,7 @@ OUTPUT STREAM due CLOSE.
   (for_each_statement
     (record
       (identifier))
-    (with_frame_phrase
+    (frame_phrase
       (identifier))
     (body
       (find_statement

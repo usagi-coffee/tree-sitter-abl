@@ -45,8 +45,12 @@ module.exports = ({ kw, tkw }) => ({
       seq(
         tkw("TEXT"),
         "(",
-        token(/[A-Za-z_][A-Za-z0-9_-]*/),
-        alias($.__prompt_for_format_phrase, $.format_phrase),
+        repeat1(
+          seq(
+            field("field", choice($.identifier, $.qualified_name)),
+            optional(alias($.__prompt_for_format_phrase, $.format_phrase)),
+          ),
+        ),
         ")",
       ),
       seq(
@@ -62,7 +66,9 @@ module.exports = ({ kw, tkw }) => ({
         optional(alias($.__prompt_for_bgcolor_option, $.bgcolor_option)),
         optional(alias($.__prompt_for_font_option, $.font_option)),
       ),
-      tkw("SKIP"),
+      seq(tkw("SKIP"), optional(seq("(", $._expression, ")"))),
+      seq(tkw("SPACE"), optional(seq("(", $._expression, ")"))),
+      "^",
     ),
   __prompt_for_field_target: ($) => choice($.identifier, $.qualified_name),
   __prompt_for_format_phrase: ($) =>
