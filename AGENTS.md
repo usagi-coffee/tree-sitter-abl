@@ -62,6 +62,7 @@ Strongly prefer using these commands as they have helpful side-effects like retu
 - ABL grammar is filled with optionals, be careful not to explode `tree-sitter`'s `STATE_COUNT` AND `ACTION_COUNT`, always check modification's impact on `STATE_COUNT`.
 - Do not adjust or remove tests just to satisfy test passing, just fix the underlying parsing issue or ask me first to remove if it's really not supported.
 - Don't do unnecessary comments like `// something is above`.
+- Never add `(ERROR` nodes to expected syntax trees in tests, it's pointless, fix the grammar not the test itself.
 
 ## Notes
 
