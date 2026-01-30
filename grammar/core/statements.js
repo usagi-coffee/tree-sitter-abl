@@ -3,10 +3,10 @@
 module.exports = () => ({
   _statement: ($) =>
     choice(
-      // Extras-like
-      $.preprocessor_directive,
+      // Special
       alias($.include_expression, $.include),
-      $.empty_statement,
+      $.preprocessor_directive,
+      $.annotation,
 
       // Definitions
       $.image_definition,
@@ -103,7 +103,6 @@ module.exports = () => ({
       $.release_external_statement,
       $.get_statement,
       $.underline_statement,
-      $.annotation,
       $.assign_statement,
       $.error_scope_statement,
       $.release_object_statement,
@@ -160,5 +159,6 @@ module.exports = () => ({
       $.system_dialog_printer_setup_statement,
       $.system_dialog_get_dir_statement,
       $.system_dialog_color_statement,
+      $.empty_statement,
     ),
 });
