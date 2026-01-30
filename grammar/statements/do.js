@@ -3,7 +3,7 @@ module.exports = ({ kw, tkw }) => ({
     prec(
       1,
       seq(
-        optional(seq(field("label", $.identifier), $._colon)),
+        optional(seq(field("label", $.identifier), ":")),
         tkw("DO"),
         $.__do_body,
         tkw("END"),

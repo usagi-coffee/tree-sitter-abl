@@ -1,7 +1,7 @@
 module.exports = ({ kw, tkw }) => ({
   repeat_statement: ($) =>
     seq(
-      optional(seq(field("label", $.identifier), $._colon)),
+      optional(seq(field("label", $.identifier), ":")),
       tkw("REPEAT"),
       $.__repeat_body,
       $._terminator,

@@ -17825,8 +17825,8 @@
                     }
                   },
                   {
-                    "type": "SYMBOL",
-                    "name": "_colon"
+                    "type": "STRING",
+                    "value": ":"
                   }
                 ]
               },
@@ -22683,8 +22683,8 @@
                     }
                   },
                   {
-                    "type": "SYMBOL",
-                    "name": "_colon"
+                    "type": "STRING",
+                    "value": ":"
                   }
                 ]
               },
@@ -47353,8 +47353,8 @@
                   }
                 },
                 {
-                  "type": "SYMBOL",
-                  "name": "_colon"
+                  "type": "STRING",
+                  "value": ":"
                 }
               ]
             },
@@ -67843,14 +67843,6 @@
           "name": "locked_expression"
         },
         {
-          "type": "PREC",
-          "value": -1,
-          "content": {
-            "type": "SYMBOL",
-            "name": "query_access"
-          }
-        },
-        {
           "type": "SYMBOL",
           "name": "object_access_expression"
         },
@@ -67923,7 +67915,7 @@
           "value": -1,
           "content": {
             "type": "SYMBOL",
-            "name": "menu_item_access"
+            "name": "query_access"
           }
         },
         {
@@ -67932,6 +67924,14 @@
           "content": {
             "type": "SYMBOL",
             "name": "frame_access"
+          }
+        },
+        {
+          "type": "PREC",
+          "value": -1,
+          "content": {
+            "type": "SYMBOL",
+            "name": "menu_item_access"
           }
         }
       ]
