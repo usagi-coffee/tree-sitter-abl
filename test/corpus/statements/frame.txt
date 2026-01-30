@@ -1016,27 +1016,27 @@ WAIT-FOR WINDOW-CLOSE OF FRAME cust-fr.
         (number_literal)
         (number_literal))))
   (assignment_statement
-    (frame_access
+    (widget_access
       (identifier)
       (identifier))
     (assignment_operator)
-    (frame_access
+    (widget_access
       (identifier)
       (identifier)))
   (assignment_statement
-    (frame_access
+    (widget_access
       (identifier)
       (identifier))
     (assignment_operator)
-    (frame_access
+    (widget_access
       (identifier)
       (identifier)))
   (assignment_statement
-    (frame_access
+    (widget_access
       (identifier)
       (identifier))
     (assignment_operator)
-    (frame_access
+    (widget_access
       (identifier)
       (identifier)))
   (open_query_statement

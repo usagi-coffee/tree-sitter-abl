@@ -689,9 +689,7 @@ WAIT-FOR CHOOSE OF MENU-ITEM quititem.
         (object_access
           (identifier)
           (identifier))
-        (identifier))
-      (assign_pair
-        (object_access
+        (widget_access
           (identifier)
           (identifier)))))
   (wait_for_statement

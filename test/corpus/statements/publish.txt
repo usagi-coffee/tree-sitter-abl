@@ -130,7 +130,8 @@ PUBLISH cEventName FROM hPublisher (INPUT p1, INPUT-OUTPUT p2, OUTPUT p3).
       (string_literal)
       (arguments
         (argument
-          (identifier)))))
+          (input_expression
+            (identifier))))))
   (parameter_definition
     (identifier)
     (identifier)
@@ -165,7 +166,8 @@ PUBLISH cEventName FROM hPublisher (INPUT p1, INPUT-OUTPUT p2, OUTPUT p3).
       (identifier)
       (arguments
         (argument
-          (identifier))
+          (input_expression
+            (identifier)))
         (argument
           (identifier))
         (argument

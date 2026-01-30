@@ -1,13 +1,11 @@
 module.exports = ({ tkw }) => ({
-  locked_expression: ($) =>
+  locked_expression: ($) => seq(tkw("LOCKED"), $.__locked_body),
+
+  __locked_body: ($) =>
     seq(
-      tkw("LOCKED"),
       field(
         "record",
-        choice(
-          $.__locked_record_name,
-          seq("(", $.__locked_record_name, ")"),
-        ),
+        choice($.__locked_record_name, seq("(", $.__locked_record_name, ")")),
       ),
     ),
 

@@ -1,4 +1,4 @@
-module.exports = (ctx) => ({
+module.exports = ({ kw, ctx }) => ({
   _expression: ($) =>
     choice(
       $.conditional_expression,
@@ -34,8 +34,8 @@ module.exports = (ctx) => ({
       $.null_literal,
       $.in_frame_expression,
       $.input_expression,
-      prec(-1, $.query_access),
-      prec(-1, $.frame_access),
-      prec(-1, $.menu_item_access),
+
+      $.__widget_keywords,
+      prec(-1, $.widget_access),
     ),
 });

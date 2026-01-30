@@ -1,7 +1,9 @@
 module.exports = ({ tkw }) => ({
   ambiguous_expression: ($) =>
+    seq(tkw("AMBIGUOUS"), $.__ambiguous_expression_body),
+
+  __ambiguous_expression_body: ($) =>
     seq(
-      tkw("AMBIGUOUS"),
       field(
         "record",
         choice(

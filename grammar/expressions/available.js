@@ -1,7 +1,9 @@
 module.exports = ({ tkw }) => ({
   available_expression: ($) =>
+    seq(choice(tkw("AVAIL"), tkw("AVAILABLE")), $.__available_expression_body),
+
+  __available_expression_body: ($) =>
     seq(
-      choice(tkw("AVAIL"), tkw("AVAILABLE")),
       field(
         "record",
         choice(

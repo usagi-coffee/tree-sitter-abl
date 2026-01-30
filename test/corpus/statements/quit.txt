@@ -98,9 +98,7 @@ WAIT-FOR WINDOW-CLOSE OF CURRENT-WINDOW.
         (object_access
           (identifier)
           (identifier))
-        (identifier))
-      (assign_pair
-        (object_access
+        (widget_access
           (identifier)
           (identifier)))
       (assign_pair

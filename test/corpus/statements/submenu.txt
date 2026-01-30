@@ -482,11 +482,9 @@ DELETE WIDGET mywin.
     (assign_phrase
       (assign_pair
         left: (identifier)
-        right: (identifier))
-      (assign_pair
-        left: (object_access
-          left: (identifier)
-          right: (identifier)))))
+        right: (widget_access
+          query: (identifier)
+          attribute: (identifier)))))
   (button_definition
     name: (identifier)
     (button_option
@@ -541,29 +539,29 @@ DELETE WIDGET mywin.
     (do_block
       (body
         (assignment_statement
-          left: (menu_item_access
-            menu_item: (identifier)
+          left: (widget_access
+            query: (identifier)
             attribute: (identifier)
             menu: (identifier))
           operator: (assignment_operator)
           right: (boolean_literal))
         (assignment_statement
-          left: (menu_item_access
-            menu_item: (identifier)
+          left: (widget_access
+            query: (identifier)
             attribute: (identifier)
             menu: (identifier))
           operator: (assignment_operator)
           right: (boolean_literal))
         (assignment_statement
-          left: (menu_item_access
-            menu_item: (identifier)
+          left: (widget_access
+            query: (identifier)
             attribute: (identifier)
             menu: (identifier))
           operator: (assignment_operator)
           right: (boolean_literal))
         (assignment_statement
-          left: (menu_item_access
-            menu_item: (identifier)
+          left: (widget_access
+            query: (identifier)
             attribute: (identifier)
             menu: (identifier))
           operator: (assignment_operator)
@@ -576,29 +574,29 @@ DELETE WIDGET mywin.
     (do_block
       (body
         (assignment_statement
-          left: (menu_item_access
-            menu_item: (identifier)
+          left: (widget_access
+            query: (identifier)
             attribute: (identifier)
             menu: (identifier))
           operator: (assignment_operator)
           right: (boolean_literal))
         (assignment_statement
-          left: (menu_item_access
-            menu_item: (identifier)
+          left: (widget_access
+            query: (identifier)
             attribute: (identifier)
             menu: (identifier))
           operator: (assignment_operator)
           right: (boolean_literal))
         (assignment_statement
-          left: (menu_item_access
-            menu_item: (identifier)
+          left: (widget_access
+            query: (identifier)
             attribute: (identifier)
             menu: (identifier))
           operator: (assignment_operator)
           right: (boolean_literal))
         (assignment_statement
-          left: (menu_item_access
-            menu_item: (identifier)
+          left: (widget_access
+            query: (identifier)
             attribute: (identifier)
             menu: (identifier))
           operator: (assignment_operator)

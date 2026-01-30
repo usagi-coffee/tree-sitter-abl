@@ -1,7 +1,7 @@
 module.exports = ({ kw }) => ({
-  new_expression: ($) =>
+  new_expression: ($) => seq(kw("NEW"), $.__new_expression_body),
+  __new_expression_body: ($) =>
     seq(
-      kw("NEW"),
       field(
         "type",
         choice($.scoped_name, $.qualified_name, $.identifier, $.string_literal),

@@ -69,7 +69,8 @@ RUN process.p (1, "hello", TRUE).
     procedure: (procedure_name)
     (arguments
       (argument
-        value: (identifier))
+        value: (input_expression
+          field: (identifier)))
       (argument
         value: (identifier))
       (argument
@@ -116,7 +117,8 @@ RUN validateOrder (orderId, customerId).
     procedure: (identifier)
     (arguments
       (argument
-        value: (identifier))
+        value: (input_expression
+          field: (identifier)))
       (argument
         value: (identifier))))
   (run_statement

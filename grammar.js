@@ -36,9 +36,17 @@ module.exports = grammar({
     // Core disambiguations
     [$._statement, $.if_statement],
     [$._expression, $._statement_expression],
+
+    // Primary expression
     [$._primary_expression, $._assignable],
     [$._primary_expression, $.function_call],
+    [$._primary_expression, $.__input_expression_body],
     [$._primary_expression, $.__display_item, $.function_call],
+    [$._primary_expression, $.__in_frame_target],
+
+    // Accessors
+    [$.widget_access, $.__widget_keywords],
+    [$.__widget_access_body],
 
     // DEFINE * disambiguation
     [
@@ -76,13 +84,10 @@ module.exports = grammar({
     [$.__property_modifier, $.__event_override_modifier],
 
     // Specific disambiguations
-    [$._primary_expression, $.__in_frame_target],
     [$.__prompt_for_record_body, $.__prompt_for_field_target],
     [$.__update_record_body, $.__update_field_target],
     [$.__set_record_body, $.__set_field_target],
-    [$.frame_access, $._assignable],
     [$.__frame_option_down],
-    [$.menu_item_access],
     [$.__frame_option_skip],
     [$.frame_phrase],
   ],
@@ -228,10 +233,9 @@ module.exports = grammar({
           $.array_access,
           $.function_call,
           $.in_frame_expression,
-          $.menu_item_access,
-          /* Disambiguation */
-          kw("FRAME"),
-          prec.right(-1, $.frame_access),
+
+          $.__widget_keywords,
+          prec.right(-1, $.widget_access),
         ),
 
       // Expressions

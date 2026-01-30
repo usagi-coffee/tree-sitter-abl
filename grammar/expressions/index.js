@@ -1,3 +1,5 @@
+const widgetAccess = require("./widget");
+
 const availableExpression = require("./available");
 const canFindExpression = require("./can-find");
 const conditionalExpression = require("./conditional");
@@ -9,10 +11,6 @@ const ambiguousExpression = require("./ambiguous");
 const inFrameExpression = require("./in-frame");
 const inputExpression = require("./input");
 const accumExpression = require("./accum");
-const frameExpression = require("./frame");
-const menuExpression = require("./menu");
-const queryExpression = require("./query");
-const menu_item_access = require("./menu-item");
 
 module.exports = (ctx) => ({
   ...conditionalExpression(ctx),
@@ -26,8 +24,6 @@ module.exports = (ctx) => ({
   ...accumExpression(ctx),
   ...inputExpression(ctx),
   ...inFrameExpression(ctx),
-  ...frameExpression(ctx),
-  ...menuExpression(ctx),
-  ...queryExpression(ctx),
-  ...menu_item_access(ctx),
+  /* Access */
+  ...widgetAccess(ctx),
 });

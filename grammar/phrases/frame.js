@@ -22,6 +22,7 @@ module.exports = ({ kw, tkw }) => ({
           alias($.__frame_option_column, $.frame_option),
           alias($.__frame_option_width, $.frame_option),
           alias($.__frame_option_view_as, $.frame_option),
+          alias($.__frame_option_background, $.background),
           alias($.__frame_option_at, $.at),
           $.__frame_option_columns_count,
           $.__frame_option_column_count,

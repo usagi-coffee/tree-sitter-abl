@@ -1,7 +1,9 @@
 module.exports = ({ tkw }) => ({
   current_changed_expression: ($) =>
+    seq(tkw("CURRENT-CHANGED"), $.__current_changed_epxression_body),
+
+  __current_changed_epxression_body: ($) =>
     seq(
-      tkw("CURRENT-CHANGED"),
       field(
         "record",
         choice(
