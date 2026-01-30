@@ -43,49 +43,60 @@ RAW-TRANSFER BUFFER srcBuf TO FIELD rawField NO-ERROR.
 --------------------------------------------------------------------------------
 
 (source_code
-  (identifier))(record
-  table: (identifier)
-  (of_phrase
-    (identifier)))(body
-  (create_statement
-    table: (identifier))
-  (assign_statement
-    (assign_pair
-      left: (qualified_name
-        left: (identifier)
-        right: (identifier))
-      right: (function_call
-        function: (identifier)
-        (arguments
-          (argument
-            value: (function_call
-              function: (identifier)
-              (arguments
-                (identifier))
+  (identifier)
+  (record
+    table: (identifier)
+    (of_phrase
+      (identifier))
+    (body
+      (create_statement
+        table: (identifier))
+      (assign_statement
+        (assign_pair
+          left: (qualified_name
+            left: (identifier)
+            right: (identifier))
+          right: (function_call
+            function: (identifier)
+            (arguments
               (argument
-                value: (identifier))))))))
-  (assign_pair
-    left: (qualified_name
-      left: (identifier)
-      right: (identifier))
-    right: (string_literal))
-  (assign_pair
-    left: (qualified_name
-      left: (identifier)
-      right: (identifier))
-    right: (string_literal)))(raw_transfer_statement
-  source_field: (identifier)
-  target: (identifier))(expression_statement
-  (identifier))(raw_transfer_statement
-  (identifier))
-source_field: (identifier)(identifier)
-target: (identifier)(raw_transfer_statement
-  source_field: (identifier)
-  target_field: (identifier)
-  (identifier))(raw_transfer_statement
-  (identifier))
-source_field: (identifier)
-target: (identifier)(identifier)(raw_transfer_statement
-  (identifier))
-source_field: (identifier)(identifier)
-target: (identifier)
+                value: (function_call
+                  function: (identifier)
+                  (arguments
+                    (identifier))
+                  (argument
+                    value: (identifier))))))))
+      (assign_pair
+        left: (qualified_name
+          left: (identifier)
+          right: (identifier))
+        right: (string_literal))
+      (assign_pair
+        left: (qualified_name
+          left: (identifier)
+          right: (identifier))
+        right: (string_literal))
+      (raw_transfer_statement
+        source_field: (identifier)
+        target: (identifier)
+        (expression_statement
+          (identifier)
+          (raw_transfer_statement
+            (identifier))
+          source_field: (identifier
+            (identifier)
+            target: (identifier
+              (raw_transfer_statement
+                source_field: (identifier)
+                target_field: (identifier)
+                (identifier)
+                (raw_transfer_statement
+                  (identifier))
+                source_field: (identifier)
+                target: (identifier
+                  (identifier
+                    (raw_transfer_statement
+                      (identifier))
+                    source_field: (identifier
+                      (identifier)
+                      target: (identifier))

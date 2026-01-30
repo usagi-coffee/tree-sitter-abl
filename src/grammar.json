@@ -17188,19 +17188,6 @@
           ]
         },
         {
-          "type": "SYMBOL",
-          "name": "__display_body"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_terminator"
-        }
-      ]
-    },
-    "__display_body": {
-      "type": "SEQ",
-      "members": [
-        {
           "type": "CHOICE",
           "members": [
             {
@@ -17246,7 +17233,7 @@
               "name": "__display_record_form"
             },
             {
-              "type": "REPEAT1",
+              "type": "REPEAT",
               "content": {
                 "type": "SYMBOL",
                 "name": "__display_item"
@@ -17340,6 +17327,10 @@
               "type": "BLANK"
             }
           ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_terminator"
         }
       ]
     },

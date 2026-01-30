@@ -581,24 +581,28 @@ DEFINE QUERY qExceptAll FOR Customer EXCEPT ().
     right: (object_access
       left: (identifier)
       (identifier))
-    right: (identifier)))(open_query_statement
-  query: (identifier)
-  (record_phrase
-    record: (identifier))
-  (by_phrase
-    by: (qualified_name
-      left: (identifier)
-      right: (identifier))))(message_statement
-  (object_access
-    left: (identifier)
-    right: (identifier)))(query_definition
-  name: (identifier)
-  (query_table_list
-    table: (identifier)
-    (field_list
-      (identifier))))(query_definition
-  name: (identifier)
-  (query_table_list
-    table: (identifier)
-    (field_list
-      (identifier))))
+    right: (identifier))
+  (open_query_statement
+    query: (identifier)
+    (record_phrase
+      record: (identifier))
+    (by_phrase
+      by: (qualified_name
+        left: (identifier)
+        right: (identifier)))
+    (message_statement
+      (object_access
+        left: (identifier)
+        right: (identifier))
+      (query_definition
+        name: (identifier)
+        (query_table_list
+          table: (identifier)
+          (field_list
+            (identifier)))
+        (query_definition
+          name: (identifier)
+          (query_table_list
+            table: (identifier)
+            (field_list
+              (identifier))))

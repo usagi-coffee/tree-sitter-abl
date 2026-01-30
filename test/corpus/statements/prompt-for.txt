@@ -329,25 +329,27 @@ PROMPT-FOR STREAM-HANDLE hS field1 field2 IN WINDOW wMain WITH FRAME fMain.
         (frame_phrase
           (frame_option
             (number_literal)))
-        (identifier)))))(prompt_for_statement
-  (stream_phrase
-    stream: (identifier))
-  (prompt_for_item
-    field: (identifier))
-  (prompt_for_item
-    (number_literal))
-  (prompt_for_item
-    (number_literal))
-  (prompt_for_item)
-  (go_on_phrase
-    (identifier)
-    (identifier)))(prompt_for_statement
-  (stream_phrase
-    handle: (identifier))
-  (prompt_for_item
-    field: (identifier))
-  (prompt_for_item
-    field: (identifier))
-  window: (identifier)
-  (frame_phrase
-    frame: (identifier)))
+        (identifier))))
+  (prompt_for_statement
+    (stream_phrase
+      stream: (identifier))
+    (prompt_for_item
+      field: (identifier))
+    (prompt_for_item
+      (number_literal))
+    (prompt_for_item
+      (number_literal))
+    (prompt_for_item)
+    (go_on_phrase
+      (identifier)
+      (identifier))
+    (prompt_for_statement
+      (stream_phrase
+        handle: (identifier))
+      (prompt_for_item
+        field: (identifier))
+      (prompt_for_item
+        field: (identifier))
+      window: (identifier)
+      (frame_phrase
+        frame: (identifier)))

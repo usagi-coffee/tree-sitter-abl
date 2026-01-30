@@ -652,18 +652,27 @@ END PROCEDURE.
     (identifier))
   (parameter_definition
     name: (identifier)
-    type: (identifier)))(identifier)(in_super_phrase)(parameter_definition
-  name: (identifier)
-  type: (identifier))(expression_statement
-  (identifier))(procedure_definition
-  (access_modifier)
-  name: (identifier)
-  (parameter_definition
-    name: (identifier)
-    type: (identifier)))(procedure_forward_definition
-  name: (identifier))(expression_statement
-  (identifier))(procedure_forward_definition
-  name: (identifier))(expression_statement
-  (qualified_name
-    left: (identifier)
-    right: (identifier))
+    type: (identifier))
+  (identifier
+    (in_super_phrase
+      (parameter_definition
+        name: (identifier)
+        type: (identifier)
+        (expression_statement
+          (identifier)
+          (procedure_definition
+            (access_modifier)
+            name: (identifier)
+            (parameter_definition
+              name: (identifier)
+              type: (identifier))
+            (procedure_forward_definition
+              name: (identifier)
+              (expression_statement
+                (identifier)
+                (procedure_forward_definition
+                  name: (identifier)
+                  (expression_statement
+                    (qualified_name
+                      left: (identifier)
+                      right: (identifier))

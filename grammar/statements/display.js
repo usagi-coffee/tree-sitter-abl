@@ -2,18 +2,13 @@ module.exports = ({ kw, tkw }) => ({
   display_statement: ($) =>
     seq(
       choice(tkw("DISPLAY"), token(/DISP(LAY)?/i)),
-      $.__display_body,
-      $._terminator,
-    ),
-
-  __display_body: ($) =>
-    seq(
       optional(alias($.__display_stream_phrase, $.stream_phrase)),
       optional(tkw("UNLESS-HIDDEN")),
-      choice($.__display_record_form, repeat1($.__display_item)),
+      choice($.__display_record_form, repeat($.__display_item)),
       optional(seq(kw("IN"), tkw("WINDOW"), field("window", $._expression))),
       repeat($.frame_phrase),
       optional(tkw("NO-ERROR")),
+      $._terminator,
     ),
 
   __display_record_form: ($) =>
@@ -39,7 +34,9 @@ module.exports = ({ kw, tkw }) => ({
         ),
         optional(alias($.__display_format_phrase, $.format_phrase)),
         optional(seq(tkw("WHEN"), field("when", $._expression))),
-        optional(seq("@", field("base", choice($.identifier, $.qualified_name)))),
+        optional(
+          seq("@", field("base", choice($.identifier, $.qualified_name))),
+        ),
       ),
     ),
 

@@ -223,15 +223,17 @@ DISPLAY "Succeeded".
     type: (identifier))
   (create_statement
     table: (identifier)
-    (identifier)))(run_stored_procedure_statement
-  procedure: (identifier)
-  result_handle: (identifier)
-  status_var: (identifier)
-  (parameter_list
-    value: (string_literal)))(if_statement
-  (parenthesized_expression
-    (binary_expression
-      (identifier)
-      (number_literal)))
-  then: (display_statement
-    (string_literal)))
+    (identifier))
+  (run_stored_procedure_statement
+    procedure: (identifier)
+    result_handle: (identifier)
+    status_var: (identifier)
+    (parameter_list
+      value: (string_literal))
+    (if_statement
+      (parenthesized_expression
+        (binary_expression
+          (identifier)
+          (number_literal)))
+      then: (display_statement
+        (string_literal)))
