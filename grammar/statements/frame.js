@@ -33,17 +33,7 @@ module.exports = ({ kw, tkw }) => ({
     choice(
       prec.left(1, seq(kw("SPACE"), optional(seq("(", optional($._expression), ")")))),
       prec.left(1, seq(kw("SKIP"), optional(seq("(", optional($._expression), ")")))),
-      seq(
-        $._expression,
-        optional($.at_phrase),
-        optional(seq(kw("BGCOLOR"), $._expression)),
-        optional(seq(kw("DCOLOR"), $._expression)),
-        optional(seq(kw("FGCOLOR"), $._expression)),
-        optional(seq(kw("FONT"), $._expression)),
-        optional(seq(kw("PFCOLOR"), $._expression)),
-        optional(seq(tkw("VIEW-AS"), tkw("TEXT"))),
-        optional(seq(tkw("WIDGET-ID"), $._expression)),
-      ),
+      seq($._expression, optional($.at_phrase), repeat($.__frame_display_option)),
     ),
 
   __frame_form_item: ($) =>
@@ -52,32 +42,28 @@ module.exports = ({ kw, tkw }) => ({
       tkw("SKIP"),
       seq(tkw("SPACE"), "(", optional($._expression), ")"),
       seq(tkw("SKIP"), "(", optional($._expression), ")"),
-      seq(
-        field("field", choice($.qualified_name, $.identifier)),
-        optional($.at_phrase),
-      ),
+      seq(field("field", choice($.qualified_name, $.identifier)), optional($.at_phrase)),
       seq(
         $.string_literal,
         optional(choice($.at_phrase, seq(kw("TO"), $._expression))),
-        optional(seq(kw("BGCOLOR"), $._expression)),
-        optional(seq(kw("DCOLOR"), $._expression)),
-        optional(seq(kw("FGCOLOR"), $._expression)),
-        optional(seq(kw("FONT"), $._expression)),
-        optional(seq(kw("PFCOLOR"), $._expression)),
-        optional(seq(tkw("VIEW-AS"), kw("TEXT"))),
-        optional(seq(tkw("WIDGET-ID"), $._expression)),
+        repeat($.__frame_display_option),
       ),
       seq(
         $.number_literal,
         optional(choice($.at_phrase, seq(kw("TO"), $._expression))),
-        optional(seq(kw("BGCOLOR"), $._expression)),
-        optional(seq(kw("DCOLOR"), $._expression)),
-        optional(seq(kw("FGCOLOR"), $._expression)),
-        optional(seq(kw("FONT"), $._expression)),
-        optional(seq(kw("PFCOLOR"), $._expression)),
-        optional(seq(tkw("VIEW-AS"), kw("TEXT"))),
-        optional(seq(tkw("WIDGET-ID"), $._expression)),
+        repeat($.__frame_display_option),
       ),
+    ),
+
+  __frame_display_option: ($) =>
+    choice(
+      seq(kw("BGCOLOR"), $._expression),
+      seq(kw("DCOLOR"), $._expression),
+      seq(kw("FGCOLOR"), $._expression),
+      seq(kw("FONT"), $._expression),
+      seq(kw("PFCOLOR"), $._expression),
+      seq(tkw("VIEW-AS"), tkw("TEXT")),
+      seq(tkw("WIDGET-ID"), $._expression),
     ),
 
 });
