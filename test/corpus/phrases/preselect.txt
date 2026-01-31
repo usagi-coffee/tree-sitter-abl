@@ -1,0 +1,439 @@
+================================================================================
+PRESELECT phrase
+================================================================================
+
+Simple PRESELECT with EACH
+--------------------------------------------------------------------------------
+
+preselect each customer.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (preselect_phrase
+    (preselect_record_list
+      (preselect_record
+        table: (identifier)))))
+
+================================================================================
+
+PRESELECT with FIRST
+--------------------------------------------------------------------------------
+
+preselect first order.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (preselect_phrase
+    (preselect_record_list
+      (preselect_record
+        (first)
+        table: (identifier)))))
+
+================================================================================
+
+PRESELECT with LAST
+--------------------------------------------------------------------------------
+
+preselect last item.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (preselect_phrase
+    (preselect_record_list
+      (preselect_record
+        (last)
+        table: (identifier)))))
+
+================================================================================
+
+PRESELECT with WHERE clause
+--------------------------------------------------------------------------------
+
+preselect each customer where customer.balance > 1000.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (preselect_phrase
+    (preselect_record_list
+      (preselect_record
+        table: (identifier)
+        (where_phrase
+          condition: (binary_expression
+            left: (qualified_name
+              table: (identifier)
+              field: (identifier))
+            right: (number_literal)))))))
+
+================================================================================
+
+PRESELECT with multiple tables
+--------------------------------------------------------------------------------
+
+preselect each customer, each order of customer.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (preselect_phrase
+    (preselect_record_list
+      (preselect_record
+        table: (identifier))
+      (preselect_record
+        table: (identifier)
+        (of_phrase
+          of: (identifier))))))
+
+================================================================================
+
+PRESELECT with LEFT OUTER-JOIN
+--------------------------------------------------------------------------------
+
+preselect each customer left outer-join, each order of customer.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (preselect_phrase
+    (preselect_record_list
+      (preselect_record
+        table: (identifier)
+        (outer_join
+          left: (left)
+          (outer_join)))
+      (preselect_record
+        table: (identifier)
+        (of_phrase
+          of: (identifier))))))
+
+================================================================================
+
+PRESELECT with OUTER-JOIN (no LEFT)
+--------------------------------------------------------------------------------
+
+preselect each customer outer-join, each order of customer.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (preselect_phrase
+    (preselect_record_list
+      (preselect_record
+        table: (identifier)
+        (outer_join
+          (outer_join)))
+      (preselect_record
+        table: (identifier)
+        (of_phrase
+          of: (identifier))))))
+
+================================================================================
+
+PRESELECT with BREAK BY
+--------------------------------------------------------------------------------
+
+preselect each customer by customer.state by customer.city descending.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (preselect_phrase
+    (preselect_record_list
+      (preselect_record
+        table: (identifier)))
+    (break_by
+      (qualified_name
+        table: (identifier)
+        field: (identifier))
+      (qualified_name
+        table: (identifier)
+        field: (identifier))
+      (descending))))
+
+================================================================================
+
+PRESELECT with BREAK keyword
+--------------------------------------------------------------------------------
+
+preselect each customer break by customer.country.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (preselect_phrase
+    (preselect_record_list
+      (preselect_record
+        table: (identifier)))
+    (break_by
+      break: (break)
+      (qualified_name
+        table: (identifier)
+        field: (identifier)))))
+
+================================================================================
+
+PRESELECT with USE-INDEX
+--------------------------------------------------------------------------------
+
+preselect each customer use-index custname.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (preselect_phrase
+    (preselect_record_list
+      (preselect_record
+        table: (identifier)
+        (use_index
+          index: (identifier))))))
+
+================================================================================
+
+PRESELECT with TABLE-SCAN
+--------------------------------------------------------------------------------
+
+preselect each customer table-scan.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (preselect_phrase
+    (preselect_record_list
+      (preselect_record
+        table: (identifier)
+        (use_index
+          (table_scan))))))
+
+================================================================================
+
+PRESELECT with NO-LOCK
+--------------------------------------------------------------------------------
+
+preselect each customer no-lock.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (preselect_phrase
+    (preselect_record_list
+      (preselect_record
+        table: (identifier)
+        (lock
+          (no_lock))))))
+
+================================================================================
+
+PRESELECT with SHARE-LOCK
+--------------------------------------------------------------------------------
+
+preselect each customer share-lock.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (preselect_phrase
+    (preselect_record_list
+      (preselect_record
+        table: (identifier)
+        (lock
+          (share_lock))))))
+
+================================================================================
+
+PRESELECT with EXCLUSIVE-LOCK
+--------------------------------------------------------------------------------
+
+preselect each customer exclusive-lock.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (preselect_phrase
+    (preselect_record_list
+      (preselect_record
+        table: (identifier)
+        (lock
+          (exclusive_lock))))))
+
+================================================================================
+
+PRESELECT with NO-PREFETCH
+--------------------------------------------------------------------------------
+
+preselect each customer no-lock no-prefetch.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (preselect_phrase
+    (preselect_record_list
+      (preselect_record
+        table: (identifier)
+        (lock
+          (no_lock))
+        (no_prefetch)))))
+
+================================================================================
+
+PRESELECT with TENANT-WHERE
+--------------------------------------------------------------------------------
+
+preselect each customer tenant-where tenant-id = 1.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (preselect_phrase
+    (preselect_record_list
+      (preselect_record
+        table: (identifier)
+        (tenant_where_phrase
+          condition: (binary_expression
+            left: (qualified_name
+              table: (identifier)
+              field: (identifier))
+            right: (number_literal)))))))
+
+================================================================================
+
+PRESELECT with TENANT-WHERE and SKIP-GROUP-DUPLICATES
+--------------------------------------------------------------------------------
+
+preselect each customer tenant-where tenant-id = 1 skip-group-duplicates.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (preselect_phrase
+    (preselect_record_list
+      (preselect_record
+        table: (identifier)
+        (tenant_where_phrase
+          condition: (binary_expression
+            left: (qualified_name
+              table: (identifier)
+              field: (identifier))
+            right: (number_literal))
+          (skip_group_duplicates))))))
+
+================================================================================
+
+PRESELECT with USING single field
+--------------------------------------------------------------------------------
+
+preselect each customer using customer.custnum.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (preselect_phrase
+    (preselect_record_list
+      (preselect_record
+        table: (identifier)
+        (using_phrase
+          field: (qualified_name
+            table: (identifier)
+            field: (identifier)))))))
+
+================================================================================
+
+PRESELECT with USING and multiple fields
+--------------------------------------------------------------------------------
+
+preselect each customer using customer.custnum and customer.name.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (preselect_phrase
+    (preselect_record_list
+      (preselect_record
+        table: (identifier)
+        (using_phrase
+          field: (qualified_name
+            table: (identifier)
+            field: (identifier))
+          field: (qualified_name
+            table: (identifier)
+            field: (identifier)))))))
+
+================================================================================
+
+PRESELECT with USING and FRAME
+--------------------------------------------------------------------------------
+
+preselect each customer using frame a customer.custnum.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (preselect_phrase
+    (preselect_record_list
+      (preselect_record
+        table: (identifier)
+        (using_phrase
+          frame: (identifier)
+          field: (qualified_name
+            table: (identifier)
+            field: (identifier)))))))
+
+================================================================================
+
+PRESELECT with USING multiple FRAME fields
+--------------------------------------------------------------------------------
+
+preselect each customer using frame a customer.custnum and frame b customer.name.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (preselect_phrase
+    (preselect_record_list
+      (preselect_record
+        table: (identifier)
+        (using_phrase
+          frame: (identifier)
+          field: (qualified_name
+            table: (identifier)
+            field: (identifier))
+          frame: (identifier)
+          field: (qualified_name
+            table: (identifier)
+            field: (identifier)))))))
+
+================================================================================
+
+PRESELECT complex with multiple options
+--------------------------------------------------------------------------------
+
+preselect each customer of salesrep
+  where customer.balance > 1000
+  use-index custname
+  no-lock
+  no-prefetch.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (preselect_phrase
+    (preselect_record_list
+      (preselect_record
+        table: (identifier)
+        (of_phrase
+          of: (identifier))
+        (where_phrase
+          condition: (binary_expression
+            left: (qualified_name
+              table: (identifier)
+              field: (identifier))
+            right: (number_literal)))
+        (use_index
+          index: (identifier))
+        (lock
+          (no_lock))
+        (no_prefetch)))))
+
+================================================================================
