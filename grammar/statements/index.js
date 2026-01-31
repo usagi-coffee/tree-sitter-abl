@@ -120,6 +120,7 @@ const submenuDefinition = require("./submenu");
 const subscribeStatement = require("./subscribe");
 const systemDialogStatement = require("./system-dialog");
 const tempTableDefinition = require("./temp-table");
+const triggerProcedureStatement = require("./trigger-procedure");
 const workTableDefinition = require("./work-table");
 const workfileDefinition = require("./workfile");
 const terminalStatement = require("./terminal");
@@ -265,6 +266,7 @@ module.exports = (ctx) => ({
   ...subscribeStatement(ctx),
   ...systemDialogStatement(ctx),
   ...tempTableDefinition(ctx),
+  ...triggerProcedureStatement(ctx),
   ...workfileDefinition(ctx),
   ...workTableDefinition(ctx),
   ...terminalStatement(ctx),

@@ -4478,6 +4478,10 @@
           "named": true
         },
         {
+          "type": "trigger_procedure_statement",
+          "named": true
+        },
+        {
           "type": "underline_statement",
           "named": true
         },
@@ -10261,6 +10265,10 @@
           },
           {
             "type": "transaction_mode_statement",
+            "named": true
+          },
+          {
+            "type": "trigger_procedure_statement",
             "named": true
           },
           {
@@ -19690,6 +19698,10 @@
           "named": true
         },
         {
+          "type": "trigger_procedure_statement",
+          "named": true
+        },
+        {
           "type": "underline_statement",
           "named": true
         },
@@ -24654,6 +24666,10 @@
           "named": true
         },
         {
+          "type": "trigger_procedure_statement",
+          "named": true
+        },
+        {
           "type": "underline_statement",
           "named": true
         },
@@ -26042,6 +26058,10 @@
             "named": true
           },
           {
+            "type": "trigger_procedure_statement",
+            "named": true
+          },
+          {
             "type": "underline_statement",
             "named": true
           },
@@ -26661,6 +26681,10 @@
           },
           {
             "type": "transaction_mode_statement",
+            "named": true
+          },
+          {
+            "type": "trigger_procedure_statement",
             "named": true
           },
           {
@@ -33423,6 +33447,10 @@
           "named": true
         },
         {
+          "type": "trigger_procedure_statement",
+          "named": true
+        },
+        {
           "type": "underline_statement",
           "named": true
         },
@@ -38002,6 +38030,10 @@
           "named": true
         },
         {
+          "type": "trigger_procedure_statement",
+          "named": true
+        },
+        {
           "type": "underline_statement",
           "named": true
         },
@@ -39405,6 +39437,10 @@
         },
         {
           "type": "transaction_mode_statement",
+          "named": true
+        },
+        {
+          "type": "trigger_procedure_statement",
           "named": true
         },
         {
@@ -48056,6 +48092,10 @@
           "named": true
         },
         {
+          "type": "trigger_procedure_statement",
+          "named": true
+        },
+        {
           "type": "underline_statement",
           "named": true
         },
@@ -52340,6 +52380,86 @@
           "named": true
         }
       ]
+    }
+  },
+  {
+    "type": "trigger_procedure_statement",
+    "named": true,
+    "fields": {
+      "data_type": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "event": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "like_field": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "qualified_name",
+            "named": true
+          }
+        ]
+      },
+      "new_buffer": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "object": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "qualified_name",
+            "named": true
+          }
+        ]
+      },
+      "old_buffer": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "value": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -58863,6 +58983,10 @@
   },
   {
     "type": "TRANSPARENT",
+    "named": false
+  },
+  {
+    "type": "TRIGGER",
     "named": false
   },
   {

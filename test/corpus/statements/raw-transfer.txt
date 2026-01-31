@@ -43,60 +43,50 @@ RAW-TRANSFER BUFFER srcBuf TO FIELD rawField NO-ERROR.
 --------------------------------------------------------------------------------
 
 (source_code
-  (identifier)
-  (record
-    table: (identifier)
-    (of_phrase
-      (identifier))
-    (body
-      (create_statement
-        table: (identifier))
-      (assign_statement
-        (assign_pair
-          left: (qualified_name
-            left: (identifier)
-            right: (identifier))
-          right: (function_call
-            function: (identifier)
-            (arguments
-              (argument
-                value: (function_call
-                  function: (identifier)
-                  (arguments
-                    (identifier))
-                  (argument
-                    value: (identifier))))))))
+  (trigger_procedure_statement
+    (identifier)
+    (identifier))
+  (create_statement
+    (identifier))
+  (assign_statement
+    (assign_phrase
       (assign_pair
-        left: (qualified_name
-          left: (identifier)
-          right: (identifier))
-        right: (string_literal))
-      (assign_pair
-        left: (qualified_name
-          left: (identifier)
-          right: (identifier))
-        right: (string_literal))
-      (raw_transfer_statement
-        source_field: (identifier)
-        target: (identifier)
-        (expression_statement
+        (qualified_name
           (identifier)
-          (raw_transfer_statement
-            (identifier))
-          source_field: (identifier
-            (identifier)
-            target: (identifier
-              (raw_transfer_statement
-                source_field: (identifier)
-                target_field: (identifier)
+          (identifier))
+        (function_call
+          (identifier)
+          (arguments
+            (argument
+              (function_call
                 (identifier)
-                (raw_transfer_statement
-                  (identifier))
-                source_field: (identifier)
-                target: (identifier
-                  (identifier
-                    (raw_transfer_statement
-                      (identifier))
-                    source_field: (identifier
-                      (identifier)
-                      target: (identifier))
+                (arguments
+                  (argument
+                    (identifier))))))))
+      (assign_pair
+        (qualified_name
+          (identifier)
+          (identifier))
+        (string_literal))
+      (assign_pair
+        (qualified_name
+          (identifier)
+          (identifier))
+        (string_literal))))
+  (raw_transfer_statement
+    (identifier)
+    (identifier))
+  (expression_statement
+    (identifier))
+  (raw_transfer_statement
+    (identifier)
+    (identifier))
+  (raw_transfer_statement
+    (identifier)
+    (identifier))
+  (raw_transfer_statement
+    (identifier)
+    (identifier))
+  (raw_transfer_statement
+    (identifier)
+    (identifier)))

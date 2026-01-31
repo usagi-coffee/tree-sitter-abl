@@ -161,6 +161,7 @@ module.exports = () => ({
       $.system_dialog_printer_setup_statement,
       $.system_dialog_get_dir_statement,
       $.system_dialog_color_statement,
+      $.trigger_procedure_statement,
       $.empty_statement,
     ),
 });
