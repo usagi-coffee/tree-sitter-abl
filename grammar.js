@@ -90,9 +90,6 @@ module.exports = grammar({
     [$.__frame_option_down],
     [$.__frame_option_skip],
     [$.frame_phrase],
-
-    // Trigger phrase disambiguation - END keyword conflict between trigger_body and trigger_phrase
-    [$.trigger_phrase],
   ],
   inline: ($) => [],
 

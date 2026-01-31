@@ -138,23 +138,22 @@ ON F5 ENDKEY.
       right: (identifier))
     field: (identifier)
     (at_phrase
-      position: (identifier))
-    field: (qualified_name
-      left: (identifier)
-      right: (identifier))
-    (number_literal)
-    field: (identifier)
-    field: (qualified_name
-      left: (identifier)
-      right: (identifier))
-    (number_literal)
+      row_of: (binary_expression
+        (qualified_name
+          left: (identifier)
+          right: (identifier))
+        (number_literal))
+      column_of: (binary_expression
+        (qualified_name
+          left: (identifier)
+          right: (identifier))
+        (number_literal)))
     (frame_phrase
       (centered)
       title: (string_literal)
       (frame_option
-        row: (number_literal)))
-    (number_literal)
-    (identifier))
+        row: (number_literal))
+      column_count: (number_literal)))
   (on_statement
     event: (identifier)
     widget: (identifier)
@@ -208,15 +207,15 @@ ON F5 ENDKEY.
   (on_statement
     event: (identifier)
     (expression_statement
-      (identifier))
-    (on_statement
-      event: (identifier)
-      (expression_statement
-        (identifier))
-      (on_statement
-        event: (identifier)
-        (bell_statement)
-        (on_statement
-          event: (identifier)
-          (expression_statement
-            (identifier)))
+      (identifier)))
+  (on_statement
+    event: (identifier)
+    (expression_statement
+      (identifier)))
+  (on_statement
+    event: (identifier)
+    (bell_statement))
+  (on_statement
+    event: (identifier)
+    (expression_statement
+      (identifier))))

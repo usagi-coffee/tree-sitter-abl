@@ -2327,7 +2327,7 @@
     "named": true,
     "fields": {
       "column": {
-        "multiple": false,
+        "multiple": true,
         "required": false,
         "types": [
           {
@@ -2449,7 +2449,7 @@
         ]
       },
       "column_of": {
-        "multiple": false,
+        "multiple": true,
         "required": false,
         "types": [
           {
@@ -2693,7 +2693,7 @@
         ]
       },
       "row": {
-        "multiple": false,
+        "multiple": true,
         "required": false,
         "types": [
           {
@@ -2815,7 +2815,7 @@
         ]
       },
       "row_of": {
-        "multiple": false,
+        "multiple": true,
         "required": false,
         "types": [
           {
