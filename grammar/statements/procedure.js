@@ -3,7 +3,7 @@ module.exports = ({ kw, tkw }) => ({
     seq(
       kw("PROCEDURE"),
       optional(alias($.__procedure_access_modifier, $.access_modifier)),
-      field("name", $.identifier),
+      field("name", choice($.identifier, $.qualified_name)),
       repeat($.__procedure_option),
       $._colon,
       repeat($._statement),
@@ -38,7 +38,7 @@ module.exports = ({ kw, tkw }) => ({
   procedure_forward_definition: ($) =>
     seq(
       kw("PROCEDURE"),
-      field("name", $.identifier),
+      field("name", choice($.identifier, $.qualified_name)),
       optional(alias($.__procedure_in_super_phrase, $.in_super_phrase)),
       $._terminator,
     ),

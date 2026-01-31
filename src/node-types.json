@@ -37323,6 +37323,10 @@
           {
             "type": "identifier",
             "named": true
+          },
+          {
+            "type": "qualified_name",
+            "named": true
           }
         ]
       }
