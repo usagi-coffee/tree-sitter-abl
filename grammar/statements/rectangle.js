@@ -24,9 +24,8 @@ module.exports = ({ kw, tkw }) => ({
           alias($.__rectangle_pfcolor, $.pfcolor),
           alias($.__rectangle_rounded, $.rounded),
           alias($.__rectangle_group_box, $.group_box),
-          alias($.__rectangle_size, $.size_phrase),
           alias($.__rectangle_tooltip, $.tooltip),
-          // $.on_phrase, // TODO: add trigger support
+          $.size_phrase,
         ),
       ),
     ),

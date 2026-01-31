@@ -6,7 +6,7 @@ module.exports = ({ kw, tkw }) => ({
         choice(
           seq(kw("FRAME"), field("frame", $.identifier)),
           seq(kw("BROWSE"), field("browse", $.identifier)),
-          alias($.__frame_option_size, $.size),
+          $.size_phrase,
           alias($.__frame_option_no_labels, $.no_labels),
           alias($.__frame_option_side_labels, $.side_labels),
           alias($.__frame_option_centered, $.centered),
@@ -47,7 +47,10 @@ module.exports = ({ kw, tkw }) => ({
   __frame_option_skip: ($) =>
     seq(tkw("SKIP"), optional(seq("(", $._expression, ")"))),
   __frame_option_column_count: ($) =>
-    seq(field("column_count", $.number_literal), choice(tkw("COLUMN"), tkw("COL"))),
+    seq(
+      field("column_count", $.number_literal),
+      choice(tkw("COLUMN"), tkw("COL")),
+    ),
   __frame_option_columns_count: ($) =>
     seq(field("columns_count", $.number_literal), tkw("COLUMNS")),
   __frame_option_title: ($) => seq(kw("TITLE"), field("title", $._expression)),
@@ -60,12 +63,5 @@ module.exports = ({ kw, tkw }) => ({
       prec(1, seq($._expression, tkw("DOWN"))),
       seq(tkw("DOWN"), optional($._expression)),
       tkw("DOWN"),
-    ),
-  __frame_option_size: ($) =>
-    seq(
-      choice(tkw("SIZE"), tkw("SIZE-CHARS"), tkw("SIZE-PIXELS")),
-      field("size", $._expression),
-      kw("BY"),
-      field("by", $._expression),
     ),
 });

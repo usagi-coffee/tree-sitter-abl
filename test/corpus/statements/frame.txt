@@ -178,9 +178,9 @@ DEFINE FRAME sized Customer.Name Customer.Address WITH SIZE 80 BY 20.
       left: (identifier)
       right: (identifier))
     (frame_phrase
-      (size
-        size: (number_literal)
-        by: (number_literal)))))
+      (size_phrase
+        width: (number_literal)
+        height: (number_literal)))))
 
 ================================================================================
 FRAME - WITH DOWN
@@ -580,9 +580,9 @@ DEFINE FRAME combined
     (number_literal)
     (number_literal)
     (frame_phrase
-      (size
-        size: (number_literal)
-        by: (number_literal))
+      (size_phrase
+        width: (number_literal)
+        height: (number_literal))
       (down
         (number_literal))
       (centered))))
@@ -914,7 +914,7 @@ WAIT-FOR WINDOW-CLOSE OF FRAME cust-fr.
     (frame_phrase
       (side_labels)
       (string_literal)
-      (size
+      (size_phrase
         (number_literal)
         (number_literal))
       (frame_option)))
@@ -964,7 +964,7 @@ WAIT-FOR WINDOW-CLOSE OF FRAME cust-fr.
     (frame_phrase
       (side_labels)
       (string_literal)
-      (size
+      (size_phrase
         (number_literal)
         (number_literal))
       (at_phrase
@@ -979,7 +979,7 @@ WAIT-FOR WINDOW-CLOSE OF FRAME cust-fr.
     (identifier)
     (frame_phrase
       (string_literal)
-      (size
+      (size_phrase
         (number_literal)
         (number_literal))
       (at_phrase
@@ -1012,7 +1012,7 @@ WAIT-FOR WINDOW-CLOSE OF FRAME cust-fr.
     (frame_phrase
       (side_labels)
       (string_literal)
-      (size
+      (size_phrase
         (number_literal)
         (number_literal))
       (at_phrase

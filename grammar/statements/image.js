@@ -15,7 +15,7 @@ module.exports = ({ kw, tkw }) => ({
         choice(
           alias($.__image_phrase, $.image_phrase),
           alias($.__image_like_phrase, $.like_phrase),
-          alias($.__image_size_phrase, $.size_phrase),
+          $.size_phrase,
         ),
       ),
       optional(seq(kw("BGCOLOR"), $._expression)),
@@ -68,11 +68,4 @@ module.exports = ({ kw, tkw }) => ({
       ),
     ),
   __image_like_phrase: ($) => seq(kw("LIKE"), field("like", $.identifier)),
-  __image_size_phrase: ($) =>
-    seq(
-      choice(kw("SIZE"), kw("SIZE-CHARS"), kw("SIZE-PIXELS")),
-      field("width", $.number_literal),
-      kw("BY"),
-      field("height", $.number_literal),
-    ),
 });
