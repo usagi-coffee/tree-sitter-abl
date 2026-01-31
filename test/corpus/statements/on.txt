@@ -123,7 +123,7 @@ ON F5 ENDKEY.
     field: (identifier)
     field: (identifier)
     (frame_phrase
-      (frame_option)
+      (centered)
       (frame_option
         row: (binary_expression
           (identifier)
@@ -137,7 +137,8 @@ ON F5 ENDKEY.
       left: (identifier)
       right: (identifier))
     field: (identifier)
-    (identifier)
+    (at_phrase
+      position: (identifier))
     field: (qualified_name
       left: (identifier)
       right: (identifier))
@@ -148,9 +149,8 @@ ON F5 ENDKEY.
       right: (identifier))
     (number_literal)
     (frame_phrase
-      (frame_option)
-      (frame_option
-        title: (string_literal))
+      (centered)
+      title: (string_literal)
       (frame_option
         row: (number_literal)))
     (number_literal)
@@ -181,42 +181,42 @@ ON F5 ENDKEY.
             left: (identifier)
             right: (identifier))
           (frame_phrase
-            frame: (identifier)))))
-    (enable_statement
-      (enable_item
-        field: (identifier))
-      (enable_item
-        field: (identifier))
-      (frame_phrase
-        frame: (identifier))
-      (enable_statement
-        (enable_item
-          field: (identifier))
-        (frame_phrase
-          frame: (identifier))
-        (wait_for_statement
-          events: (identifier)
-          widgets: (identifier)
-          widgets: (identifier)
-          events: (identifier)
-          widgets: (identifier)
-          widgets: (identifier)
-          widgets: (identifier)
-          widgets: (identifier)
-          focus: (identifier)
-          (identifier)
-          (on_statement
-            event: (identifier)
-            (expression_statement
-              (identifier))
-            (on_statement
-              event: (identifier)
-              (expression_statement
-                (identifier))
-              (on_statement
-                event: (identifier)
-                (bell_statement)
-                (on_statement
-                  event: (identifier)
-                  (expression_statement
-                    (identifier)))
+            frame: (identifier))))))
+  (enable_statement
+    (enable_item
+      field: (identifier))
+    (enable_item
+      field: (identifier))
+    (frame_phrase
+      frame: (identifier)))
+  (enable_statement
+    (enable_item
+      field: (identifier))
+    (frame_phrase
+      frame: (identifier)))
+  (wait_for_statement
+    events: (identifier)
+    widgets: (identifier)
+    widgets: (identifier)
+    events: (identifier)
+    widgets: (identifier)
+    widgets: (identifier)
+    widgets: (identifier)
+    widgets: (identifier)
+    focus: (identifier)
+    (identifier))
+  (on_statement
+    event: (identifier)
+    (expression_statement
+      (identifier))
+    (on_statement
+      event: (identifier)
+      (expression_statement
+        (identifier))
+      (on_statement
+        event: (identifier)
+        (bell_statement)
+        (on_statement
+          event: (identifier)
+          (expression_statement
+            (identifier)))

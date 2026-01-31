@@ -502,7 +502,7 @@ DEFINE INPUT PARAMETER pExtent0 AS INTEGER EXTENT 0.
     (identifier)
     (string_literal)
     (frame_phrase
-      (frame_option)))
+      (side_labels)))
   (variable_definition
     name: (identifier)
     type: (identifier)
@@ -534,11 +534,12 @@ DEFINE INPUT PARAMETER pExtent0 AS INTEGER EXTENT 0.
     (identifier)
     (identifier)
     (string_literal)
+    (skip_phrase)
     (identifier)
     (identifier)
     (string_literal)
     (frame_phrase
-      (frame_option)))
+      (side_labels)))
   (parameter_definition
     name: (identifier)
     type: (identifier)
@@ -573,18 +574,19 @@ DEFINE INPUT PARAMETER pExtent0 AS INTEGER EXTENT 0.
     (identifier)
     (string_literal)
     (frame_phrase
-      (frame_option)))
+      (side_labels)))
   (assign_statement
-    (assign_pair
-      left: (identifier)
-      right: (binary_expression
-        (binary_expression
-          (identifier)
-          (identifier))
-        (identifier)))
-    (assign_pair
-      left: (identifier)
-      right: (string_literal)))
+    (assign_phrase
+      (assign_pair
+        left: (identifier)
+        right: (binary_expression
+          (binary_expression
+            (identifier)
+            (identifier))
+          (identifier)))
+      (assign_pair
+        left: (identifier)
+        right: (string_literal))))
   (variable_definition
     name: (identifier)
     type: (identifier)
@@ -601,7 +603,7 @@ DEFINE INPUT PARAMETER pExtent0 AS INTEGER EXTENT 0.
           left: (identifier)
           right: (identifier))
         (frame_phrase
-          (frame_option
+          (down
             (number_literal))))
       (assignment_statement
         left: (identifier)
@@ -639,8 +641,9 @@ DEFINE INPUT PARAMETER pExtent0 AS INTEGER EXTENT 0.
         (label_option
           (string_literal)))))
   (assign_statement
-    (assign_pair
-      left: (identifier)))
+    (assign_phrase
+      (assign_pair
+        left: (identifier))))
   (assignment_statement
     left: (identifier)
     operator: (assignment_operator)
@@ -655,7 +658,7 @@ DEFINE INPUT PARAMETER pExtent0 AS INTEGER EXTENT 0.
     (frame_phrase
       frame: (identifier))
     (frame_phrase
-      (frame_option))
+      (side_labels))
     (body
       (enable_statement
         (enable_item
