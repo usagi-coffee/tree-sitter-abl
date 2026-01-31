@@ -26,28 +26,16 @@ module.exports = ({ kw, tkw }) => ({
     seq(
       field("name", $.identifier),
       optional(alias($.__temp_table_no_undo, $.no_undo)),
-      optional(
-        seq(kw("NAMESPACE-URI"), field("namespace_uri", $.string_literal)),
-      ),
-      optional(
-        seq(
-          kw("NAMESPACE-PREFIX"),
-          field("namespace_prefix", $.string_literal),
-        ),
-      ),
+      optional(seq(kw("NAMESPACE-URI"), field("namespace_uri", $.string_literal))),
+      optional(seq(kw("NAMESPACE-PREFIX"), field("namespace_prefix", $.string_literal))),
       optional(seq(kw("XML-NODE-NAME"), field("node", $.string_literal))),
-      optional(
-        seq(kw("SERIALIZE-NAME"), field("serialize_name", $.string_literal)),
-      ),
+      optional(seq(kw("SERIALIZE-NAME"), field("serialize_name", $.string_literal))),
       optional(tkw("REFERENCE-ONLY")),
       repeat(
         choice(
           $.argument_reference,
           alias($.__temp_table_like_phrase, $.like_phrase),
-          alias(
-            $.__temp_table_like_sequential_phrase,
-            $.like_sequential_phrase,
-          ),
+          alias($.__temp_table_like_sequential_phrase, $.like_sequential_phrase),
           alias($.__temp_table_rcode_information, $.rcode_information),
           alias($.__temp_table_before_table_phrase, $.before_table_phrase),
         ),
@@ -75,16 +63,12 @@ module.exports = ({ kw, tkw }) => ({
     seq(
       kw("INDEX"),
       field("name", $.identifier),
-      optional(
-        seq(
-          choice(kw("AS"), kw("IS")),
-          optional(kw("UNIQUE")),
-          optional(kw("PRIMARY")),
-          optional(kw("WORD-INDEX")),
-        ),
-      ),
+      optional(seq(choice(kw("AS"), kw("IS")), repeat($.__temp_table_index_modifier))),
       repeat1($.__temp_table_index_field),
     ),
+
+  __temp_table_index_modifier: ($) =>
+    choice(kw("UNIQUE"), kw("PRIMARY"), kw("WORD-INDEX")),
   __temp_table_no_undo: ($) => tkw("NO-UNDO"),
   __temp_table_like_phrase: ($) =>
     seq(
