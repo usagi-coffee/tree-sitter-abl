@@ -7,7 +7,7 @@ module.exports = ({ kw, tkw }) => ({
           ":",
           repeat1($.__trigger_block),
           kw("END"),
-          optional(kw("TRIGGERS")),
+          optional(tkw("TRIGGERS")),
         ),
       ),
       seq(kw("ON"), $.__trigger_event_list),
@@ -29,12 +29,12 @@ module.exports = ({ kw, tkw }) => ({
 
   __trigger_body: ($) =>
     seq(
-      kw("DO"),
+      tkw("DO"),
       optional(seq(field("variable", $.identifier), "=", field("start", $._expression), kw("TO"), field("end", $._expression))),
       optional(seq(kw("DOWN"), optional(kw("TO")), optional($._expression))),
       ":",
-      optional($.body),
-      kw("END"),
+      repeat($._statement),
+      tkw("END"),
       ".",
     ),
 
