@@ -25,12 +25,16 @@ module.exports = ({ kw, tkw }) => ({
   __system_dialog_font_body: ($) =>
     seq(
       field("font", $._expression),
-      optional(tkw("ANSI-ONLY")),
-      optional(tkw("FIXED-ONLY")),
-      optional(seq(kw("MAX-SIZE"), field("max_size", $._expression))),
-      optional(seq(kw("MIN-SIZE"), field("min_size", $._expression))),
-      optional(seq(kw("UPDATE"), field("update", $.identifier))),
-      optional(seq(kw("IN"), kw("WINDOW"), field("window", $._expression))),
+      repeat(
+        choice(
+          tkw("ANSI-ONLY"),
+          tkw("FIXED-ONLY"),
+          seq(kw("MAX-SIZE"), field("max_size", $._expression)),
+          seq(kw("MIN-SIZE"), field("min_size", $._expression)),
+          seq(kw("UPDATE"), field("update", $.identifier)),
+          seq(kw("IN"), kw("WINDOW"), field("window", $._expression)),
+        ),
+      ),
     ),
 
   system_dialog_get_dir_statement: ($) =>
@@ -44,10 +48,14 @@ module.exports = ({ kw, tkw }) => ({
   __system_dialog_get_dir_body: ($) =>
     seq(
       field("variable", $.identifier),
-      optional(seq(kw("INITIAL-DIR"), field("initial_dir", $._expression))),
-      optional(seq(kw("TITLE"), field("title", $._expression))),
-      optional(seq(kw("UPDATE"), field("update", $.identifier))),
-      optional(seq(kw("IN"), kw("WINDOW"), field("window", $._expression))),
+      repeat(
+        choice(
+          seq(kw("INITIAL-DIR"), field("initial_dir", $._expression)),
+          seq(kw("TITLE"), field("title", $._expression)),
+          seq(kw("UPDATE"), field("update", $.identifier)),
+          seq(kw("IN"), kw("WINDOW"), field("window", $._expression)),
+        ),
+      ),
     ),
 
   system_dialog_get_file_statement: ($) =>
@@ -83,10 +91,15 @@ module.exports = ({ kw, tkw }) => ({
     seq(
       tkw("SYSTEM-DIALOG"),
       kw("PRINTER-SETUP"),
-      optional(seq(kw("NUM-COPIES"), field("copies", $._expression))),
-      optional(choice(kw("LANDSCAPE"), kw("PORTRAIT"))),
-      optional(seq(kw("UPDATE"), field("update", $.identifier))),
-      optional(seq(kw("IN"), kw("WINDOW"), field("window", $._expression))),
+      repeat(
+        choice(
+          seq(kw("NUM-COPIES"), field("copies", $._expression)),
+          kw("LANDSCAPE"),
+          kw("PORTRAIT"),
+          seq(kw("UPDATE"), field("update", $.identifier)),
+          seq(kw("IN"), kw("WINDOW"), field("window", $._expression)),
+        ),
+      ),
       $._terminator,
     ),
 

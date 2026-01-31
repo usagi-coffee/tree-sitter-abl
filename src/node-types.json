@@ -49957,7 +49957,7 @@
         ]
       },
       "max_size": {
-        "multiple": false,
+        "multiple": true,
         "required": false,
         "types": [
           {
@@ -50079,7 +50079,7 @@
         ]
       },
       "min_size": {
-        "multiple": false,
+        "multiple": true,
         "required": false,
         "types": [
           {
@@ -50201,7 +50201,7 @@
         ]
       },
       "update": {
-        "multiple": false,
+        "multiple": true,
         "required": false,
         "types": [
           {
@@ -50211,7 +50211,7 @@
         ]
       },
       "window": {
-        "multiple": false,
+        "multiple": true,
         "required": false,
         "types": [
           {
@@ -50339,7 +50339,7 @@
     "named": true,
     "fields": {
       "initial_dir": {
-        "multiple": false,
+        "multiple": true,
         "required": false,
         "types": [
           {
@@ -50461,7 +50461,7 @@
         ]
       },
       "title": {
-        "multiple": false,
+        "multiple": true,
         "required": false,
         "types": [
           {
@@ -50583,7 +50583,7 @@
         ]
       },
       "update": {
-        "multiple": false,
+        "multiple": true,
         "required": false,
         "types": [
           {
@@ -50603,7 +50603,7 @@
         ]
       },
       "window": {
-        "multiple": false,
+        "multiple": true,
         "required": false,
         "types": [
           {
@@ -51255,7 +51255,7 @@
     "named": true,
     "fields": {
       "copies": {
-        "multiple": false,
+        "multiple": true,
         "required": false,
         "types": [
           {
@@ -51377,7 +51377,7 @@
         ]
       },
       "update": {
-        "multiple": false,
+        "multiple": true,
         "required": false,
         "types": [
           {
@@ -51387,7 +51387,7 @@
         ]
       },
       "window": {
-        "multiple": false,
+        "multiple": true,
         "required": false,
         "types": [
           {
