@@ -15,8 +15,9 @@ jobs:
       # Compiling WASM takes a lot of ram
       - name: Increase swapfile
         run: |
+          sudo df -h
           sudo swapoff -a
-          sudo fallocate -l 15G /swapfile
+          sudo fallocate -l 28G /swapfile
           sudo chmod 600 /swapfile
           sudo mkswap /swapfile
           sudo swapon /swapfile
