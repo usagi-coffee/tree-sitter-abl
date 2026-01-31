@@ -17,7 +17,7 @@ jobs:
         run: |
           sudo df -h
           sudo swapoff -a
-          sudo fallocate -l 28G /swapfile
+          sudo fallocate -l 50G /swapfile
           sudo chmod 600 /swapfile
           sudo mkswap /swapfile
           sudo swapon /swapfile
