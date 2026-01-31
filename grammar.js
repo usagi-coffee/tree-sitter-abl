@@ -86,6 +86,7 @@ module.exports = grammar({
     [$.__prompt_for_record_body, $.__prompt_for_field_target],
     [$.__update_record_body, $.__update_field_target],
     [$.__set_record_body, $.__set_field_target],
+    [$.widget_access, $.__widget_keywords],
     [$.__frame_option_down],
     [$.__frame_option_skip],
     [$.frame_phrase],
@@ -233,8 +234,8 @@ module.exports = grammar({
           $.function_call,
           $.in_frame_expression,
 
-          prec.left(1, alias($.__widget_keywords, $.identifier)),
-          prec.right(-1, $.widget_access),
+          alias($.__widget_keywords, $.identifier),
+          prec.dynamic(1, $.widget_access),
         ),
 
       // Expressions

@@ -141,11 +141,11 @@ DISPLAY Customer.Name Customer.Phone Customer.SalesRep.
 END.
 
 REPEAT:
-PROMPT-FOR SalesRep.SalesRep LABEL "Sales rep's initials"
-WITH FRAME namefr ROW 2 SIDE-LABELS.
-FIND SalesRep NO-LOCK USING SalesRep.SalesRep.
-DISPLAY SalesRep.RepName SalesRep.Region SalesRep.MonthQuota
-WITH 1 DOWN NO-HIDE.
+  PROMPT-FOR SalesRep.SalesRep LABEL "Sales rep's initials"
+  WITH FRAME namefr ROW 2 SIDE-LABELS.
+  FIND SalesRep NO-LOCK USING SalesRep.SalesRep.
+  DISPLAY SalesRep.RepName SalesRep.Region SalesRep.MonthQuota
+  WITH 1 DOWN NO-HIDE.
 END.
 
 PROMPT-FOR STREAM s1 field1 SPACE(2) SKIP(1) ^ GO-ON(F2 F3).
@@ -212,10 +212,9 @@ PROMPT-FOR STREAM-HANDLE hS field1 field2 IN WINDOW wMain WITH FRAME fMain.
       field: (number_literal))
     (frame_phrase
       frame: (identifier)
-      (frame_option)
-      (frame_option)
-      (frame_option
-        title: (string_literal))))
+      (centered)
+      (no_labels)
+      title: (string_literal)))
   (for_each_statement
     (record
       table: (identifier)
@@ -243,7 +242,7 @@ PROMPT-FOR STREAM-HANDLE hS field1 field2 IN WINDOW wMain WITH FRAME fMain.
           right: (identifier))
         (frame_phrase
           frame: (identifier)
-          (frame_option)))
+          (centered)))
       (update_statement
         (update_item
           field: (qualified_name
@@ -308,7 +307,7 @@ PROMPT-FOR STREAM-HANDLE hS field1 field2 IN WINDOW wMain WITH FRAME fMain.
           frame: (identifier)
           (frame_option
             row: (number_literal))
-          (frame_option)))
+          (side_labels)))
       (find_statement
         table: (identifier)
         (no_lock)
@@ -327,9 +326,9 @@ PROMPT-FOR STREAM-HANDLE hS field1 field2 IN WINDOW wMain WITH FRAME fMain.
           left: (identifier)
           right: (identifier))
         (frame_phrase
-          (frame_option
-            (number_literal)))
-        (identifier))))
+          (down
+            (number_literal))
+          (no_hide)))))
   (prompt_for_statement
     (stream_phrase
       stream: (identifier))
@@ -342,14 +341,14 @@ PROMPT-FOR STREAM-HANDLE hS field1 field2 IN WINDOW wMain WITH FRAME fMain.
     (prompt_for_item)
     (go_on_phrase
       (identifier)
-      (identifier))
-    (prompt_for_statement
-      (stream_phrase
-        handle: (identifier))
-      (prompt_for_item
-        field: (identifier))
-      (prompt_for_item
-        field: (identifier))
-      window: (identifier)
-      (frame_phrase
-        frame: (identifier)))
+      (identifier)))
+  (prompt_for_statement
+    (stream_phrase
+      handle: (identifier))
+    (prompt_for_item
+      field: (identifier))
+    (prompt_for_item
+      field: (identifier))
+    window: (identifier)
+    (frame_phrase
+      frame: (identifier))))

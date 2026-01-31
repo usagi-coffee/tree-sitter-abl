@@ -35,7 +35,7 @@ module.exports = ({ kw, ctx }) => ({
       $.in_frame_expression,
       $.input_expression,
 
-      prec.left(alias($.__widget_keywords, $.identifier)),
-      prec.right(-1, $.widget_access),
+      alias($.__widget_keywords, $.identifier),
+      prec.dynamic(1, $.widget_access),
     ),
 });

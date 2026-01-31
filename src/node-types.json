@@ -23905,6 +23905,10 @@
           "named": true
         },
         {
+          "type": "no_hide",
+          "named": true
+        },
+        {
           "type": "no_labels",
           "named": true
         },
@@ -31306,6 +31310,11 @@
   },
   {
     "type": "no_fill",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "no_hide",
     "named": true,
     "fields": {}
   },
@@ -57813,6 +57822,10 @@
   },
   {
     "type": "NO-FOCUS",
+    "named": false
+  },
+  {
+    "type": "NO-HIDE",
     "named": false
   },
   {
