@@ -504,143 +504,106 @@ END PROCEDURE.
       (set_statement
         (set_item
           field: (identifier))
-        (set_item
-          field: (identifier)))
-      (expression_statement
-        (parenthesized_expression
-          (binary_expression
+        (validate_option
+          condition: (binary_expression
             (binary_expression
               (identifier)
               (number_literal))
             (binary_expression
               (identifier)
               (number_literal)))
-          (run_statement
-            procedure: (identifier)
-            (arguments
-              (argument
-                value: (identifier))
-              (argument
-                value: (identifier))))
-          (display_statement
-            (identifier))))
-      (procedure_definition
-        name: (identifier)
-        (parameter_definition
-          name: (identifier)
-          type: (identifier)
-          (no_undo))
-        (parameter_definition
-          name: (identifier)
-          type: (identifier)
-          (no_undo))
-        (variable_definition
-          name: (identifier)
-          type: (identifier)
-          (no_undo))
-        (if_statement
-          (binary_expression
-            (identifier)
-            (number_literal))
-          then: (do_block
-            (body
-              (assignment_statement
-                left: (identifier)
-                operator: (assignment_operator)
-                right: (number_literal))
-              (return_statement)))
-          else: (do_block
-            (body
-              (run_statement
-                procedure: (identifier)
-                (arguments
-                  (argument
-                    value: (binary_expression
-                      (identifier)
-                      (number_literal)))
-                  (argument
-                    value: (identifier))))
-              (assignment_statement
-                left: (identifier)
-                operator: (assignment_operator)
-                right: (binary_expression
-                  (identifier)
-                  (identifier)))))))
-      (variable_definition
-        name: (identifier)
-        type: (identifier)
-        (no_undo))
-      (message_statement
-        (string_literal)
-        (view_as_phrase
-          (buttons_phrase)
-          title: (string_literal)))
+          message: (string_literal)))
       (run_statement
         procedure: (identifier)
         (arguments
           (argument
-            value: (number_literal))
-          (argument
-            value: (string_literal))
-          (argument
-            value: (string_literal))
-          (argument
-            value: (number_literal))
+            value: (input_expression
+              field: (identifier)))
           (argument
             value: (identifier))))
-      (procedure_definition
-        name: (identifier)
-        (external_phrase
-          library: (string_literal))
-        (parameter_definition
-          name: (identifier)
-          type: (identifier))
-        (parameter_definition
-          name: (identifier)
-          type: (identifier))
-        (parameter_definition
-          name: (identifier)
-          type: (identifier))
-        (parameter_definition
-          name: (identifier)
-          type: (identifier))
-        (parameter_definition
-          name: (identifier)
-          type: (identifier)))
-      (procedure_definition
-        name: (identifier)
-        (external_phrase
-          library: (string_literal))
-        (parameter_definition
-          name: (identifier)
-          type: (identifier))
-        (parameter_definition
-          name: (identifier)
-          type: (identifier)))
-      (procedure_definition
-        name: (identifier)
-        (external_phrase
-          library: (string_literal))
-        (parameter_definition
-          name: (identifier)
-          type: (identifier)))
-      (procedure_definition
-        name: (identifier)
-        (external_phrase
-          library: (string_literal)))
-      (cdecl_option)
-      (ordinal_option
-        (number_literal))
-      (persistent_option)
-      (thread_safe_option)
-      (parameter_definition
-        name: (identifier)
-        type: (identifier)))
-    (procedure_definition
+      (display_statement
+        (identifier))))
+  (procedure_definition
+    name: (identifier)
+    (parameter_definition
       name: (identifier)
-      (external_phrase
-        library: (string_literal))
-      (identifier))
+      type: (identifier)
+      (no_undo))
+    (parameter_definition
+      name: (identifier)
+      type: (identifier)
+      (no_undo))
+    (variable_definition
+      name: (identifier)
+      type: (identifier)
+      (no_undo))
+    (if_statement
+      (binary_expression
+        (identifier)
+        (number_literal))
+      then: (do_block
+        (body
+          (assignment_statement
+            left: (identifier)
+            operator: (assignment_operator)
+            right: (number_literal))
+          (return_statement)))
+      else: (do_block
+        (body
+          (run_statement
+            procedure: (identifier)
+            (arguments
+              (argument
+                value: (binary_expression
+                  (input_expression
+                    field: (identifier))
+                  (number_literal)))
+              (argument
+                value: (identifier))))
+          (assignment_statement
+            left: (identifier)
+            operator: (assignment_operator)
+            right: (binary_expression
+              (identifier)
+              (identifier)))))))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (message_statement
+    (string_literal)
+    (view_as_phrase
+      (buttons_phrase)
+      title: (string_literal)))
+  (run_statement
+    procedure: (identifier)
+    (arguments
+      (argument
+        value: (number_literal))
+      (argument
+        value: (string_literal))
+      (argument
+        value: (string_literal))
+      (argument
+        value: (number_literal))
+      (argument
+        value: (identifier))))
+  (procedure_definition
+    name: (identifier)
+    (external_phrase
+      library: (string_literal))
+    (parameter_definition
+      name: (identifier)
+      type: (identifier))
+    (parameter_definition
+      name: (identifier)
+      type: (identifier))
+    (parameter_definition
+      name: (identifier)
+      type: (identifier))
+    (parameter_definition
+      name: (identifier)
+      type: (identifier))
     (parameter_definition
       name: (identifier)
       type: (identifier)))
@@ -648,30 +611,65 @@ END PROCEDURE.
     name: (identifier)
     (external_phrase
       library: (string_literal))
-    (identifier))
-  (parameter_definition
+    (parameter_definition
+      name: (identifier)
+      type: (identifier))
+    (parameter_definition
+      name: (identifier)
+      type: (identifier)))
+  (procedure_definition
     name: (identifier)
-    type: (identifier))
-  (identifier
-    (in_super_phrase
-      (parameter_definition
-        name: (identifier)
-        type: (identifier)
-        (expression_statement
-          (identifier)
-          (procedure_definition
-            (access_modifier)
-            name: (identifier)
-            (parameter_definition
-              name: (identifier)
-              type: (identifier))
-            (procedure_forward_definition
-              name: (identifier)
-              (expression_statement
-                (identifier)
-                (procedure_forward_definition
-                  name: (identifier)
-                  (expression_statement
-                    (qualified_name
-                      left: (identifier)
-                      right: (identifier))
+    (external_phrase
+      library: (string_literal))
+    (parameter_definition
+      name: (identifier)
+      type: (identifier)))
+  (procedure_definition
+    name: (identifier)
+    (external_phrase
+      library: (string_literal))
+    (cdecl)
+    (ordinal_phrase
+      (number_literal))
+    (persistent)
+    (thread_safe)
+    (parameter_definition
+      name: (identifier)
+      type: (identifier)))
+  (procedure_definition
+    name: (identifier)
+    (external_phrase
+      library: (string_literal))
+    (stdcall)
+    (parameter_definition
+      name: (identifier)
+      type: (identifier)))
+  (procedure_definition
+    name: (identifier)
+    (external_phrase
+      library: (string_literal))
+    (pascal)
+    (parameter_definition
+      name: (identifier)
+      type: (identifier)))
+  (procedure_definition
+    name: (identifier)
+    (in_super_phrase)
+    (parameter_definition
+      name: (identifier)
+      type: (identifier)))
+  (procedure_definition
+    (access_modifier)
+    name: (identifier)
+    (parameter_definition
+      name: (identifier)
+      type: (identifier)))
+  (procedure_forward_definition
+    name: (qualified_name
+      left: (identifier)
+      right: (identifier)))
+  (procedure_definition
+    name: (qualified_name
+      left: (identifier)
+      right: (identifier)
+      right: (identifier))))

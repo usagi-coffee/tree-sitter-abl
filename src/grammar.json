@@ -39028,6 +39028,23 @@
           }
         },
         {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "SYMBOL",
+                "name": "__procedure_in_super_phrase"
+              },
+              "named": true,
+              "value": "in_super_phrase"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
           "type": "SYMBOL",
           "name": "_colon"
         },

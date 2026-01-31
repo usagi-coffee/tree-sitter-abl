@@ -37608,6 +37608,10 @@
           "named": true
         },
         {
+          "type": "in_super_phrase",
+          "named": true
+        },
+        {
           "type": "include",
           "named": true
         },
@@ -37996,6 +38000,10 @@
         "types": [
           {
             "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "qualified_name",
             "named": true
           }
         ]

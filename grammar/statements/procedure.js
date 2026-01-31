@@ -5,6 +5,7 @@ module.exports = ({ kw, tkw }) => ({
       optional(alias($.__procedure_access_modifier, $.access_modifier)),
       field("name", choice($.identifier, $.qualified_name)),
       repeat($.__procedure_option),
+      optional(alias($.__procedure_in_super_phrase, $.in_super_phrase)),
       $._colon,
       repeat($._statement),
       tkw("END"),
