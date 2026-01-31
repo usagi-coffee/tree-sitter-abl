@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.13)
 
 project(tree-sitter-abl
-        VERSION "0.0.49"
+        VERSION "0.0.50"
         DESCRIPTION "Abl grammar for tree-sitter"
         HOMEPAGE_URL "https://github.com/tree-sitter/tree-sitter-abl"
         LANGUAGES C)

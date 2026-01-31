@@ -1,7 +1,7 @@
 [package]
 name = "tree-sitter-abl"
 description = "Abl grammar for tree-sitter"
-version = "0.0.49"
+version = "0.0.50"
 authors = ["Kamil Jakubus"]
 license = "MIT"
 readme = "README.md"

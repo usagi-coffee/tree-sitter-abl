@@ -1,6 +1,6 @@
 {
   "name": "@usagi-coffee/tree-sitter-abl",
-  "version": "0.0.49",
+  "version": "0.0.50",
   "description": "ABL grammar for tree-sitter",
   "repository": {
     "type": "git",
@@ -46,6 +46,7 @@
     "prestart": "tree-sitter build --wasm",
     "start": "tree-sitter playground",
     "test": "bun run tools/generate.js && bun run tools/test.js",
+    "generate:full": "tree-sitter generate",
     "generate": "bun run tools/generate.js",
     "check": "bun run tools/generate.js",
     "check:statements": "bun run tools/check_statements.js",

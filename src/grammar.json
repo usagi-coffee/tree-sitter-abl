@@ -26333,13 +26333,8 @@
                 "value": "like_phrase"
               },
               {
-                "type": "ALIAS",
-                "content": {
-                  "type": "SYMBOL",
-                  "name": "__image_size_phrase"
-                },
-                "named": true,
-                "value": "size_phrase"
+                "type": "SYMBOL",
+                "name": "size_phrase"
               }
             ]
           }
@@ -26965,132 +26960,6 @@
           "content": {
             "type": "SYMBOL",
             "name": "identifier"
-          }
-        }
-      ]
-    },
-    "__image_size_phrase": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SEQ",
-              "members": [
-                {
-                  "type": "ALIAS",
-                  "content": {
-                    "type": "TOKEN",
-                    "content": {
-                      "type": "PATTERN",
-                      "value": "SIZE",
-                      "flags": "i"
-                    }
-                  },
-                  "named": false,
-                  "value": "SIZE"
-                },
-                {
-                  "type": "IMMEDIATE_TOKEN",
-                  "content": {
-                    "type": "PATTERN",
-                    "value": "\\s+"
-                  }
-                }
-              ]
-            },
-            {
-              "type": "SEQ",
-              "members": [
-                {
-                  "type": "ALIAS",
-                  "content": {
-                    "type": "TOKEN",
-                    "content": {
-                      "type": "PATTERN",
-                      "value": "SIZE-CHARS",
-                      "flags": "i"
-                    }
-                  },
-                  "named": false,
-                  "value": "SIZE-CHARS"
-                },
-                {
-                  "type": "IMMEDIATE_TOKEN",
-                  "content": {
-                    "type": "PATTERN",
-                    "value": "\\s+"
-                  }
-                }
-              ]
-            },
-            {
-              "type": "SEQ",
-              "members": [
-                {
-                  "type": "ALIAS",
-                  "content": {
-                    "type": "TOKEN",
-                    "content": {
-                      "type": "PATTERN",
-                      "value": "SIZE-PIXELS",
-                      "flags": "i"
-                    }
-                  },
-                  "named": false,
-                  "value": "SIZE-PIXELS"
-                },
-                {
-                  "type": "IMMEDIATE_TOKEN",
-                  "content": {
-                    "type": "PATTERN",
-                    "value": "\\s+"
-                  }
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "type": "FIELD",
-          "name": "width",
-          "content": {
-            "type": "SYMBOL",
-            "name": "number_literal"
-          }
-        },
-        {
-          "type": "SEQ",
-          "members": [
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "PATTERN",
-                  "value": "BY",
-                  "flags": "i"
-                }
-              },
-              "named": false,
-              "value": "BY"
-            },
-            {
-              "type": "IMMEDIATE_TOKEN",
-              "content": {
-                "type": "PATTERN",
-                "value": "\\s+"
-              }
-            }
-          ]
-        },
-        {
-          "type": "FIELD",
-          "name": "height",
-          "content": {
-            "type": "SYMBOL",
-            "name": "number_literal"
           }
         }
       ]
@@ -42833,19 +42702,14 @@
                 "type": "ALIAS",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "__rectangle_size"
-                },
-                "named": true,
-                "value": "size_phrase"
-              },
-              {
-                "type": "ALIAS",
-                "content": {
-                  "type": "SYMBOL",
                   "name": "__rectangle_tooltip"
                 },
                 "named": true,
                 "value": "tooltip"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "size_phrase"
               }
             ]
           }
@@ -63899,13 +63763,8 @@
                 ]
               },
               {
-                "type": "ALIAS",
-                "content": {
-                  "type": "SYMBOL",
-                  "name": "__frame_option_size"
-                },
-                "named": true,
-                "value": "size"
+                "type": "SYMBOL",
+                "name": "size_phrase"
               },
               {
                 "type": "ALIAS",
@@ -64611,24 +64470,36 @@
         }
       ]
     },
-    "__frame_option_size": {
+    "size_phrase": {
       "type": "SEQ",
       "members": [
         {
           "type": "CHOICE",
           "members": [
             {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "PATTERN",
-                  "value": "SIZE",
-                  "flags": "i"
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "TOKEN",
+                    "content": {
+                      "type": "PATTERN",
+                      "value": "SIZE",
+                      "flags": "i"
+                    }
+                  },
+                  "named": false,
+                  "value": "SIZE"
+                },
+                {
+                  "type": "IMMEDIATE_TOKEN",
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "\\s+"
+                  }
                 }
-              },
-              "named": false,
-              "value": "SIZE"
+              ]
             },
             {
               "type": "ALIAS",
@@ -64660,7 +64531,7 @@
         },
         {
           "type": "FIELD",
-          "name": "size",
+          "name": "width",
           "content": {
             "type": "SYMBOL",
             "name": "_expression"
@@ -64693,7 +64564,7 @@
         },
         {
           "type": "FIELD",
-          "name": "by",
+          "name": "height",
           "content": {
             "type": "SYMBOL",
             "name": "_expression"
