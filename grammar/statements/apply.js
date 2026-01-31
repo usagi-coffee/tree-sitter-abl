@@ -4,6 +4,6 @@ module.exports = ({ kw, tkw }) => ({
   __apply_body: ($) =>
     seq(
       field("event", $._expression),
-      optional(seq(kw("TO"), field("widget", $._expression))),
+      optional(seq(tkw("TO"), field("widget", $._expression))),
     ),
 });

@@ -234,7 +234,7 @@ module.exports = grammar({
           $.function_call,
           $.in_frame_expression,
 
-          $.__widget_keywords,
+          prec.left(1, alias($.__widget_keywords, $.identifier)),
           prec.right(-1, $.widget_access),
         ),
 

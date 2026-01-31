@@ -18,22 +18,6 @@
         "required": true,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -171,22 +155,6 @@
         "multiple": false,
         "required": true,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -376,22 +344,6 @@
         "required": true,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -527,22 +479,6 @@
         "multiple": true,
         "required": true,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -746,22 +682,6 @@
         "required": true,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -883,22 +803,6 @@
         "multiple": false,
         "required": false,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -1028,27 +932,11 @@
         "required": true,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
             "type": "INPUT",
             "named": false
           },
           {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
             "type": "OUTPUT",
-            "named": false
-          },
-          {
-            "type": "QUERY",
             "named": false
           },
           {
@@ -1217,22 +1105,6 @@
         "required": false,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -1354,22 +1226,6 @@
         "multiple": false,
         "required": false,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -1748,22 +1604,6 @@
         "required": true,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "array_access",
             "named": true
           },
@@ -1797,22 +1637,6 @@
         "multiple": false,
         "required": false,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -1995,22 +1819,6 @@
         "required": true,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "array_access",
             "named": true
           },
@@ -2054,22 +1862,6 @@
         "multiple": false,
         "required": true,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -2217,22 +2009,6 @@
         "required": false,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -2354,22 +2130,6 @@
         "multiple": false,
         "required": false,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -2509,22 +2269,6 @@
         "required": false,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -2646,22 +2390,6 @@
         "multiple": false,
         "required": false,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -2785,22 +2513,6 @@
         "required": false,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -2922,22 +2634,6 @@
         "multiple": false,
         "required": false,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -3174,7 +2870,7 @@
     "fields": {},
     "children": {
       "multiple": false,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "accum_expression",
@@ -3301,7 +2997,7 @@
     "fields": {},
     "children": {
       "multiple": false,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "accum_expression",
@@ -4187,7 +3883,7 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "accum_expression",
@@ -4343,22 +4039,6 @@
         "required": false,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -4486,22 +4166,6 @@
           },
           {
             "type": "FOR",
-            "named": false
-          },
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
             "named": false
           },
           {
@@ -4664,22 +4328,6 @@
         "multiple": true,
         "required": false,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -5009,22 +4657,6 @@
         "required": true,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -5146,22 +4778,6 @@
         "multiple": false,
         "required": true,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -5489,22 +5105,6 @@
         "required": false,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -5626,22 +5226,6 @@
         "multiple": false,
         "required": false,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -5788,22 +5372,6 @@
         "multiple": false,
         "required": false,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -6060,22 +5628,6 @@
         "required": false,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -6197,22 +5749,6 @@
         "multiple": false,
         "required": false,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -6473,22 +6009,6 @@
         "multiple": true,
         "required": false,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -7133,22 +6653,6 @@
         "required": false,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -7549,22 +7053,6 @@
         "required": false,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -7687,22 +7175,6 @@
         "required": true,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -7824,22 +7296,6 @@
         "multiple": false,
         "required": false,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -7969,22 +7425,6 @@
         "required": false,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -8107,22 +7547,6 @@
         "required": true,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -8244,22 +7668,6 @@
         "multiple": false,
         "required": true,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -8388,22 +7796,6 @@
         "multiple": false,
         "required": false,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -8536,22 +7928,6 @@
         "multiple": false,
         "required": false,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -8709,22 +8085,6 @@
         "required": true,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -8870,7 +8230,7 @@
     "fields": {},
     "children": {
       "multiple": false,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "accum_expression",
@@ -8997,7 +8357,7 @@
     "fields": {},
     "children": {
       "multiple": false,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "accum_expression",
@@ -9124,7 +8484,7 @@
     "fields": {},
     "children": {
       "multiple": false,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "accum_expression",
@@ -9251,7 +8611,7 @@
     "fields": {},
     "children": {
       "multiple": false,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "accum_expression",
@@ -9408,7 +8768,7 @@
     "fields": {},
     "children": {
       "multiple": false,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "accum_expression",
@@ -9535,7 +8895,7 @@
     "fields": {},
     "children": {
       "multiple": false,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "accum_expression",
@@ -10307,22 +9667,6 @@
         "required": true,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -10463,22 +9807,6 @@
         "required": true,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -10594,22 +9922,6 @@
         "multiple": false,
         "required": false,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -10733,22 +10045,6 @@
         "required": false,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -10870,22 +10166,6 @@
         "multiple": false,
         "required": false,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -11009,22 +10289,6 @@
         "required": false,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -11146,22 +10410,6 @@
         "multiple": false,
         "required": false,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -11285,22 +10533,6 @@
         "required": false,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -11422,22 +10654,6 @@
         "multiple": false,
         "required": false,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -11561,22 +10777,6 @@
         "required": false,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -11698,22 +10898,6 @@
         "multiple": false,
         "required": false,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -11837,22 +11021,6 @@
         "required": false,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -11974,22 +11142,6 @@
         "multiple": false,
         "required": false,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -12113,22 +11265,6 @@
         "required": false,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -12250,22 +11386,6 @@
         "multiple": false,
         "required": false,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -12389,22 +11509,6 @@
         "required": false,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -12526,22 +11630,6 @@
         "multiple": false,
         "required": false,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -12665,22 +11753,6 @@
         "required": false,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -12802,22 +11874,6 @@
         "multiple": false,
         "required": false,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -12941,22 +11997,6 @@
         "required": false,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -13079,22 +12119,6 @@
         "required": false,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -13216,22 +12240,6 @@
         "multiple": false,
         "required": false,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -13366,22 +12374,6 @@
           },
           {
             "type": ")",
-            "named": false
-          },
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
             "named": false
           },
           {
@@ -13524,7 +12516,7 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "accum_expression",
@@ -13809,7 +12801,7 @@
     "fields": {},
     "children": {
       "multiple": false,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "accum_expression",
@@ -13949,22 +12941,6 @@
         "required": false,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -14096,22 +13072,6 @@
         "multiple": false,
         "required": false,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -14267,22 +13227,6 @@
         "required": false,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -14404,22 +13348,6 @@
         "multiple": false,
         "required": false,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -14543,22 +13471,6 @@
         "required": false,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -14680,22 +13592,6 @@
         "multiple": false,
         "required": false,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -14819,22 +13715,6 @@
         "required": false,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -14957,22 +13837,6 @@
         "required": false,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -15094,22 +13958,6 @@
         "multiple": false,
         "required": false,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -15265,22 +14113,6 @@
         "required": false,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -15402,22 +14234,6 @@
         "multiple": false,
         "required": false,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -15564,22 +14380,6 @@
         "multiple": false,
         "required": false,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -15776,22 +14576,6 @@
         "multiple": false,
         "required": false,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -16097,22 +14881,6 @@
         "required": false,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -16235,22 +15003,6 @@
         "required": false,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -16372,22 +15124,6 @@
         "multiple": false,
         "required": false,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -16521,22 +15257,6 @@
         "required": false,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -16658,22 +15378,6 @@
         "multiple": false,
         "required": false,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -16854,7 +15558,7 @@
     "fields": {},
     "children": {
       "multiple": false,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "accum_expression",
@@ -16981,7 +15685,7 @@
     "fields": {},
     "children": {
       "multiple": false,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "accum_expression",
@@ -17157,22 +15861,6 @@
         "required": true,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -17330,22 +16018,6 @@
         "multiple": true,
         "required": true,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -17540,22 +16212,6 @@
         "required": false,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -17677,22 +16333,6 @@
         "multiple": false,
         "required": false,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -17904,22 +16544,6 @@
         "required": true,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -18104,22 +16728,6 @@
         "required": false,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -18241,22 +16849,6 @@
         "multiple": false,
         "required": false,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -18532,22 +17124,6 @@
         "required": false,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -18680,22 +17256,6 @@
         "required": false,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -18817,22 +17377,6 @@
         "multiple": false,
         "required": false,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -19134,22 +17678,6 @@
         "required": false,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -19412,7 +17940,7 @@
     "fields": {},
     "children": {
       "multiple": false,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "accum_expression",
@@ -19541,22 +18069,6 @@
         "multiple": false,
         "required": false,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -19702,7 +18214,7 @@
     "fields": {},
     "children": {
       "multiple": false,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "accum_expression",
@@ -19829,7 +18341,7 @@
     "fields": {},
     "children": {
       "multiple": false,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "accum_expression",
@@ -20617,22 +19129,6 @@
         "required": false,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -20754,22 +19250,6 @@
         "multiple": false,
         "required": false,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -20926,22 +19406,6 @@
         "multiple": false,
         "required": false,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -21198,7 +19662,7 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "accum_expression",
@@ -21341,7 +19805,7 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "accum_expression",
@@ -21515,7 +19979,7 @@
     "fields": {},
     "children": {
       "multiple": false,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "accum_expression",
@@ -21642,7 +20106,7 @@
     "fields": {},
     "children": {
       "multiple": false,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "accum_expression",
@@ -21970,22 +20434,6 @@
         "required": false,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -22108,22 +20556,6 @@
         "required": true,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -22245,22 +20677,6 @@
         "multiple": true,
         "required": true,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -22404,22 +20820,6 @@
         "multiple": false,
         "required": false,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -22610,22 +21010,6 @@
         "required": true,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -22747,22 +21131,6 @@
         "multiple": false,
         "required": true,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -22889,7 +21257,7 @@
     "fields": {},
     "children": {
       "multiple": false,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "accum_expression",
@@ -23016,7 +21384,7 @@
     "fields": {},
     "children": {
       "multiple": false,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "accum_expression",
@@ -23145,22 +21513,6 @@
         "multiple": false,
         "required": false,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -23294,22 +21646,6 @@
         "required": false,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -23431,22 +21767,6 @@
         "multiple": false,
         "required": false,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -23652,22 +21972,6 @@
         "required": false,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -23789,22 +22093,6 @@
         "multiple": false,
         "required": false,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -24449,22 +22737,6 @@
         "required": false,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -24587,22 +22859,6 @@
         "required": false,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -24724,22 +22980,6 @@
         "multiple": false,
         "required": false,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -24918,22 +23158,6 @@
         "multiple": true,
         "required": false,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -25931,22 +24155,6 @@
         "required": false,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -26069,22 +24277,6 @@
         "required": true,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -26206,22 +24398,6 @@
         "multiple": false,
         "required": false,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -26480,22 +24656,6 @@
         "multiple": false,
         "required": false,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -27907,7 +26067,7 @@
     },
     "children": {
       "multiple": false,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "accum_expression",
@@ -28374,22 +26534,6 @@
         "required": true,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -28686,22 +26830,6 @@
         "types": [
           {
             "type": ",",
-            "named": false
-          },
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
             "named": false
           },
           {
@@ -29177,22 +27305,6 @@
         "multiple": false,
         "required": false,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -29704,22 +27816,6 @@
         "required": false,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -29962,7 +28058,7 @@
     "fields": {},
     "children": {
       "multiple": false,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "accum_expression",
@@ -30089,7 +28185,7 @@
     "fields": {},
     "children": {
       "multiple": false,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "accum_expression",
@@ -30216,7 +28312,7 @@
     "fields": {},
     "children": {
       "multiple": false,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "accum_expression",
@@ -30343,7 +28439,7 @@
     "fields": {},
     "children": {
       "multiple": false,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "accum_expression",
@@ -30470,7 +28566,7 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "accum_expression",
@@ -30597,7 +28693,7 @@
     "fields": {},
     "children": {
       "multiple": false,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "accum_expression",
@@ -30835,22 +28931,6 @@
         "required": false,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -30979,22 +29059,6 @@
         "required": false,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -31116,22 +29180,6 @@
         "multiple": false,
         "required": false,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -31255,22 +29303,6 @@
         "required": false,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -31392,22 +29424,6 @@
         "multiple": false,
         "required": true,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -31534,7 +29550,7 @@
     "fields": {},
     "children": {
       "multiple": false,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "accum_expression",
@@ -31705,7 +29721,7 @@
     "fields": {},
     "children": {
       "multiple": false,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "accum_expression",
@@ -31984,22 +30000,6 @@
         "multiple": false,
         "required": false,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -32336,7 +30336,7 @@
     "fields": {},
     "children": {
       "multiple": false,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "accum_expression",
@@ -32539,22 +30539,6 @@
         "multiple": false,
         "required": true,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -32772,7 +30756,7 @@
     "fields": {},
     "children": {
       "multiple": false,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "accum_expression",
@@ -33000,22 +30984,6 @@
         "required": false,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -33167,22 +31135,6 @@
         "multiple": false,
         "required": false,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -33322,22 +31274,6 @@
         "required": false,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -33490,22 +31426,6 @@
         "required": false,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -33627,22 +31547,6 @@
         "multiple": false,
         "required": false,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -33782,22 +31686,6 @@
         "required": false,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -33950,22 +31838,6 @@
         "required": false,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -34103,22 +31975,6 @@
         "multiple": false,
         "required": true,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -34956,22 +32812,6 @@
         "required": false,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -35123,22 +32963,6 @@
         "multiple": false,
         "required": false,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -35295,22 +33119,6 @@
         "multiple": false,
         "required": false,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -35483,22 +33291,6 @@
         "required": true,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -35620,22 +33412,6 @@
         "multiple": false,
         "required": true,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -35892,22 +33668,6 @@
         "required": true,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -36029,22 +33789,6 @@
         "multiple": false,
         "required": true,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -36173,22 +33917,6 @@
         "multiple": true,
         "required": true,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -36445,22 +34173,6 @@
         "required": true,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -36582,22 +34294,6 @@
         "multiple": false,
         "required": true,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -36960,22 +34656,6 @@
         "required": false,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -37097,22 +34777,6 @@
         "multiple": false,
         "required": true,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -37236,22 +34900,6 @@
         "required": true,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -37374,22 +35022,6 @@
         "required": false,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -37511,22 +35143,6 @@
         "multiple": false,
         "required": true,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -37668,7 +35284,7 @@
     "fields": {},
     "children": {
       "multiple": false,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "accum_expression",
@@ -38128,22 +35744,6 @@
         "required": false,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -38350,7 +35950,7 @@
     "fields": {},
     "children": {
       "multiple": false,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "accum_expression",
@@ -38500,22 +36100,6 @@
         "required": false,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -38647,22 +36231,6 @@
         "multiple": false,
         "required": false,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -38810,7 +36378,7 @@
     "fields": {},
     "children": {
       "multiple": false,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "accum_expression",
@@ -38937,7 +36505,7 @@
     "fields": {},
     "children": {
       "multiple": false,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "accum_expression",
@@ -39870,22 +37438,6 @@
         "required": false,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -40188,22 +37740,6 @@
         "required": false,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -40358,22 +37894,6 @@
         "required": true,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -40501,22 +38021,6 @@
         "multiple": false,
         "required": true,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -41476,22 +38980,6 @@
         "required": true,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -41613,22 +39101,6 @@
         "multiple": false,
         "required": false,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -41768,22 +39240,6 @@
         "required": false,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -41905,22 +39361,6 @@
         "multiple": false,
         "required": false,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -42050,22 +39490,6 @@
         "required": false,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -42187,22 +39611,6 @@
         "multiple": false,
         "required": false,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -42326,22 +39734,6 @@
         "required": false,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -42463,22 +39855,6 @@
         "multiple": false,
         "required": false,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -42608,22 +39984,6 @@
         "required": false,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -42746,22 +40106,6 @@
         "required": false,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -42883,22 +40227,6 @@
         "multiple": false,
         "required": true,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -43038,22 +40366,6 @@
         "required": false,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -43176,22 +40488,6 @@
         "required": false,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -43313,22 +40609,6 @@
         "multiple": true,
         "required": false,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -43720,22 +41000,6 @@
         "required": true,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -43867,22 +41131,6 @@
         "multiple": false,
         "required": false,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -44016,22 +41264,6 @@
         "multiple": false,
         "required": false,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -44292,22 +41524,6 @@
         "multiple": false,
         "required": false,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -44612,22 +41828,6 @@
         "multiple": false,
         "required": true,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -44963,22 +42163,6 @@
         "required": false,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -45111,22 +42295,6 @@
         "required": false,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -45248,22 +42416,6 @@
         "multiple": false,
         "required": false,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -45387,22 +42539,6 @@
         "required": false,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -45524,22 +42660,6 @@
         "multiple": false,
         "required": false,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -45803,7 +42923,7 @@
     "fields": {},
     "children": {
       "multiple": false,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "accum_expression",
@@ -45996,22 +43116,6 @@
         "required": false,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -46148,22 +43252,6 @@
         "required": false,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -46285,22 +43373,6 @@
         "multiple": false,
         "required": false,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -46440,22 +43512,6 @@
         "required": true,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -46577,22 +43633,6 @@
         "multiple": false,
         "required": true,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -46721,22 +43761,6 @@
         "multiple": false,
         "required": true,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -46916,22 +43940,6 @@
         "multiple": false,
         "required": false,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -47223,22 +44231,6 @@
         "required": true,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -47405,22 +44397,6 @@
         "required": false,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -47542,22 +44518,6 @@
         "multiple": false,
         "required": false,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -47817,22 +44777,6 @@
         "required": true,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -47954,22 +44898,6 @@
         "multiple": false,
         "required": true,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -48099,22 +45027,6 @@
         "required": true,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -48236,22 +45148,6 @@
         "multiple": false,
         "required": true,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -48643,22 +45539,6 @@
         "required": true,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -48780,22 +45660,6 @@
         "multiple": false,
         "required": true,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -48922,7 +45786,7 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "accum_expression",
@@ -49049,7 +45913,7 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "accum_expression",
@@ -49179,22 +46043,6 @@
         "required": true,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -49316,22 +46164,6 @@
         "multiple": false,
         "required": true,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -49458,7 +46290,7 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "accum_expression",
@@ -49587,22 +46419,6 @@
         "multiple": false,
         "required": false,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -50609,22 +47425,6 @@
         "required": false,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -50885,22 +47685,6 @@
         "required": false,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -51022,22 +47806,6 @@
         "multiple": false,
         "required": false,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -51171,22 +47939,6 @@
         "multiple": false,
         "required": true,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -51347,22 +48099,6 @@
         "required": true,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -51490,22 +48226,6 @@
         "multiple": false,
         "required": false,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -51745,22 +48465,6 @@
         "required": true,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -51882,22 +48586,6 @@
         "multiple": false,
         "required": false,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -52021,22 +48709,6 @@
         "required": false,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -52158,22 +48830,6 @@
         "multiple": false,
         "required": false,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -52303,22 +48959,6 @@
         "required": true,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -52450,22 +49090,6 @@
         "multiple": false,
         "required": false,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -52595,22 +49219,6 @@
         "required": true,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -52733,22 +49341,6 @@
         "required": false,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -52870,22 +49462,6 @@
         "multiple": false,
         "required": false,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -53018,22 +49594,6 @@
         "multiple": false,
         "required": false,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -53163,22 +49723,6 @@
         "required": false,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -53300,22 +49844,6 @@
         "multiple": false,
         "required": false,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -53458,22 +49986,6 @@
         "multiple": false,
         "required": false,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -53603,22 +50115,6 @@
         "required": false,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -53741,22 +50237,6 @@
         "required": false,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -53878,22 +50358,6 @@
         "multiple": true,
         "required": false,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -54036,22 +50500,6 @@
         "multiple": true,
         "required": false,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -54191,22 +50639,6 @@
         "required": false,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -54338,22 +50770,6 @@
         "multiple": false,
         "required": false,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -54675,22 +51091,6 @@
         "required": true,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -54821,7 +51221,7 @@
     "fields": {},
     "children": {
       "multiple": false,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "accum_expression",
@@ -54968,7 +51368,7 @@
     "fields": {},
     "children": {
       "multiple": false,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "accum_expression",
@@ -55095,7 +51495,7 @@
     "fields": {},
     "children": {
       "multiple": false,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "accum_expression",
@@ -55242,7 +51642,7 @@
     "fields": {},
     "children": {
       "multiple": false,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "accum_expression",
@@ -55371,22 +51771,6 @@
         "multiple": true,
         "required": true,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -55529,22 +51913,6 @@
         "multiple": false,
         "required": false,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -55698,22 +52066,6 @@
         "required": false,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -55846,22 +52198,6 @@
         "required": false,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "array_access",
             "named": true
           },
@@ -55933,22 +52269,6 @@
         "multiple": true,
         "required": false,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -56088,22 +52408,6 @@
         "required": true,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -56232,22 +52536,6 @@
         "required": false,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -56370,22 +52658,6 @@
         "required": false,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -56507,22 +52779,6 @@
         "multiple": false,
         "required": false,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -56651,22 +52907,6 @@
         "multiple": false,
         "required": false,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -56834,22 +53074,6 @@
         "required": false,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -56971,22 +53195,6 @@
         "multiple": false,
         "required": false,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -57318,22 +53526,6 @@
         "required": true,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -57624,22 +53816,6 @@
         "required": false,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -57761,22 +53937,6 @@
         "multiple": false,
         "required": false,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -58162,22 +54322,6 @@
             "named": false
           },
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -58498,22 +54642,6 @@
         "required": false,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -58778,22 +54906,6 @@
         "required": false,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -58935,22 +55047,6 @@
         "multiple": false,
         "required": false,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -59168,22 +55264,6 @@
         "multiple": false,
         "required": false,
         "types": [
-          {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
           {
             "type": "accum_expression",
             "named": true
@@ -59435,22 +55515,6 @@
         "required": true,
         "types": [
           {
-            "type": "FRAME",
-            "named": false
-          },
-          {
-            "type": "MENU",
-            "named": false
-          },
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          },
-          {
-            "type": "QUERY",
-            "named": false
-          },
-          {
             "type": "accum_expression",
             "named": true
           },
@@ -59638,7 +55702,7 @@
     "fields": {},
     "children": {
       "multiple": false,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "accum_expression",

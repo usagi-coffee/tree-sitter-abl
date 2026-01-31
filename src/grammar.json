@@ -1032,29 +1032,17 @@
               "type": "SEQ",
               "members": [
                 {
-                  "type": "SEQ",
-                  "members": [
-                    {
-                      "type": "ALIAS",
-                      "content": {
-                        "type": "TOKEN",
-                        "content": {
-                          "type": "PATTERN",
-                          "value": "TO",
-                          "flags": "i"
-                        }
-                      },
-                      "named": false,
-                      "value": "TO"
-                    },
-                    {
-                      "type": "IMMEDIATE_TOKEN",
-                      "content": {
-                        "type": "PATTERN",
-                        "value": "\\s+"
-                      }
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "TOKEN",
+                    "content": {
+                      "type": "PATTERN",
+                      "value": "TO",
+                      "flags": "i"
                     }
-                  ]
+                  },
+                  "named": false,
+                  "value": "TO"
                 },
                 {
                   "type": "FIELD",
@@ -65677,8 +65665,17 @@
           "name": "in_frame_expression"
         },
         {
-          "type": "SYMBOL",
-          "name": "__widget_keywords"
+          "type": "PREC_LEFT",
+          "value": 1,
+          "content": {
+            "type": "ALIAS",
+            "content": {
+              "type": "SYMBOL",
+              "name": "__widget_keywords"
+            },
+            "named": true,
+            "value": "identifier"
+          }
         },
         {
           "type": "PREC_RIGHT",
@@ -67110,11 +67107,20 @@
           "name": "input_expression"
         },
         {
-          "type": "SYMBOL",
-          "name": "__widget_keywords"
+          "type": "PREC_LEFT",
+          "value": 0,
+          "content": {
+            "type": "ALIAS",
+            "content": {
+              "type": "SYMBOL",
+              "name": "__widget_keywords"
+            },
+            "named": true,
+            "value": "identifier"
+          }
         },
         {
-          "type": "PREC",
+          "type": "PREC_RIGHT",
           "value": -1,
           "content": {
             "type": "SYMBOL",
@@ -67778,10 +67784,6 @@
       "_statement_expression"
     ],
     [
-      "_assignable",
-      "widget_access"
-    ],
-    [
       "_primary_expression",
       "_assignable"
     ],
@@ -67791,16 +67793,16 @@
     ],
     [
       "_primary_expression",
-      "widget_access"
-    ],
-    [
-      "_primary_expression",
       "__input_expression_body"
     ],
     [
       "_primary_expression",
       "__display_item",
       "function_call"
+    ],
+    [
+      "_primary_expression",
+      "__in_frame_target"
     ],
     [
       "widget_access",
@@ -67859,10 +67861,6 @@
     [
       "__property_modifier",
       "__event_override_modifier"
-    ],
-    [
-      "_primary_expression",
-      "__in_frame_target"
     ],
     [
       "__prompt_for_record_body",
