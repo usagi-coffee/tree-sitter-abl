@@ -29,11 +29,18 @@ module.exports = ({ kw }) => ({
   __wait_for_widget_list: ($) =>
     seq($.__wait_for_widget, repeat(seq(optional(","), $.__wait_for_widget))),
   __wait_for_widget: ($) =>
-    choice(
-      $.identifier,
-      $.qualified_name,
-      $.scoped_name,
-      $.object_access,
-      $.function_call,
+    seq(
+      choice(
+        $.identifier,
+        $.qualified_name,
+        $.scoped_name,
+        $.object_access,
+        $.function_call,
+      ),
+      optional(choice($.in_frame_phrase, $.in_menu_phrase)),
     ),
+  __wait_for_in_frame: ($) => seq(kw("IN"), kw("FRAME"), field("frame", $.identifier)),
+  __wait_for_in_menu: ($) => seq(kw("IN"), kw("MENU"), field("menu", $.identifier)),
+  in_frame_phrase: ($) => $.__wait_for_in_frame,
+  in_menu_phrase: ($) => $.__wait_for_in_menu,
 });

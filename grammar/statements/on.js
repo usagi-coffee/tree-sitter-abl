@@ -21,8 +21,10 @@ module.exports = ({ kw, tkw }) => ({
             seq(
               kw("OF"),
               optional(tkw("MENU-ITEM")),
-              field("widget", $.identifier),
-              repeat(seq(",", optional(tkw("MENU-ITEM")), field("widget", $.identifier))),
+              field("widget", $.__on_widget),
+              repeat(
+                seq(",", optional(tkw("MENU-ITEM")), field("widget", $.__on_widget)),
+              ),
               optional(alias($.__on_in_frame, $.in_frame_phrase)),
             ),
           ),
@@ -46,6 +48,7 @@ module.exports = ({ kw, tkw }) => ({
   __on_database_event: ($) =>
     choice(kw("CREATE"), kw("DELETE"), kw("FIND"), kw("WRITE"), kw("ASSIGN")),
   __on_ui_event: ($) => $.identifier,
+  __on_widget: ($) => choice($.identifier, $.qualified_name),
   __on_database_object: ($) => choice($.qualified_name, $.identifier),
   __on_override: ($) => kw("OVERRIDE"),
   __on_in_frame: ($) => seq(kw("IN"), kw("FRAME"), field("frame", $.identifier)),

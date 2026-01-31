@@ -1,5 +1,5 @@
 module.exports = ({ kw, tkw }) => ({
-  case_statement: ($) => seq(kw("CASE"), $.__case_body, $._terminator),
+  case_statement: ($) => seq(tkw("CASE"), $.__case_body, $._terminator),
 
   __case_body: ($) =>
     seq(

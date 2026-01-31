@@ -26,7 +26,7 @@ END.
       (display_statement
         (identifier))))
   (repeat_statement
-    (binary_expression
+    condition: (binary_expression
       (identifier)
       (number_literal))
     (body
@@ -37,7 +37,7 @@ END.
           (identifier)
           (number_literal)))))
   (repeat_statement
-    (identifier)
+    condition: (identifier)
     (body
       (display_statement
         (identifier))))
@@ -63,20 +63,21 @@ FORM SKIP(3)
 "Enter Choice" TO 30 Selection AUTO-RETURN
 HEADER "Application Name" "Master Menu" AT 34
 WITH NO-BOX NO-LABELS CENTERED FRAME menu.
+
 REPEAT ON ENDKEY UNDO, RETRY:
-UPDATE Selection WITH FRAME menu.
-HIDE FRAME menu.
-CASE(Selection):
-WHEN 0 THEN LEAVE.
-WHEN 1 THEN RUN custedit.p.
-WHEN 2 THEN RUN custrpt.p.
-WHEN 3 THEN RUN itemedit.p.
-WHEN 4 THEN RUN itemrpt.p.
-OTHERWISE DO:
-BELL.
-MESSAGE "Not a valid choice. Try again.".
-END.
-END CASE.
+  UPDATE Selection WITH FRAME menu.
+  HIDE FRAME menu.
+  CASE(Selection):
+    WHEN 0 THEN LEAVE.
+    WHEN 1 THEN RUN custedit.p.
+    WHEN 2 THEN RUN custrpt.p.
+    WHEN 3 THEN RUN itemedit.p.
+    WHEN 4 THEN RUN itemrpt.p.
+  OTHERWISE DO:
+    BELL.
+    MESSAGE "Not a valid choice. Try again.".
+    END.
+  END CASE.
 END.
 
 REPEAT FOR Customer PRESELECT EACH Customer BREAK BY Customer.Name:
@@ -94,4 +95,143 @@ END.
 
 --------------------------------------------------------------------------------
 
-(source_code)
+(source_code
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo)
+    (format_option
+      (string_literal)))
+  (form_statement
+    (form_item
+      (number_literal))
+    (form_item
+      field: (string_literal))
+    (form_item
+      field: (identifier))
+    (form_item
+      field: (number_literal))
+    (form_item
+      field: (string_literal))
+    (form_item
+      field: (identifier))
+    (form_item
+      field: (number_literal))
+    (form_item
+      field: (string_literal))
+    (form_item
+      field: (identifier))
+    (form_item
+      field: (number_literal))
+    (form_item
+      field: (string_literal))
+    (form_item
+      field: (identifier))
+    (form_item
+      field: (number_literal))
+    (form_item
+      field: (string_literal))
+    (form_item
+      field: (identifier))
+    (form_item
+      field: (number_literal))
+    (form_item
+      field: (string_literal))
+    (form_item
+      field: (identifier))
+    (form_item
+      field: (number_literal))
+    (form_item
+      field: (identifier))
+    (form_item
+      field: (identifier))
+    (form_item
+      field: (identifier))
+    (form_item
+      field: (string_literal))
+    (form_item
+      field: (string_literal))
+    (form_item
+      field: (identifier))
+    (form_item
+      field: (number_literal))
+    (frame_phrase
+      (no_box)
+      (no_labels)
+      (centered)
+      frame: (identifier)))
+  (repeat_statement
+    (on_endkey_phrase)
+    (body
+      (update_statement
+        record: (identifier)
+        (frame_phrase
+          frame: (identifier)))
+      (hide_statement
+        (widget_phrase
+          frame: (identifier)))
+      (case_statement
+        (parenthesized_expression
+          (identifier))
+        (case_when_phrase
+          (number_literal)
+          (case_phrase_statement
+            (expression_statement
+              (identifier))))
+        (case_when_phrase
+          (number_literal)
+          (case_phrase_statement
+            (run_statement
+              procedure: (procedure_name))))
+        (case_when_phrase
+          (number_literal)
+          (case_phrase_statement
+            (run_statement
+              procedure: (procedure_name))))
+        (case_when_phrase
+          (number_literal)
+          (case_phrase_statement
+            (run_statement
+              procedure: (procedure_name))))
+        (case_when_phrase
+          (number_literal)
+          (case_phrase_statement
+            (run_statement
+              procedure: (procedure_name))))
+        (case_otherwise_phrase
+          (do_block
+            (body
+              (bell_statement)
+              (message_statement
+                (string_literal))))))))
+  (repeat_statement
+    record: (identifier)
+    (preselect_record_list
+      (preselect_record
+        table: (identifier)))
+    (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (body
+      (find_statement
+        table: (identifier))
+      (update_statement
+        record: (qualified_name
+          left: (identifier)
+          right: (identifier)))))
+  (repeat_statement
+    variable: (identifier)
+    start: (number_literal)
+    end: (number_literal)
+    step: (number_literal)
+    (stop_after_phrase
+      time: (number_literal))
+    (on_quit_phrase)
+    (body
+      (display_statement
+        (identifier))))
+  (repeat_statement
+    (number_literal)
+    (body
+      (display_statement
+        (string_literal)))))

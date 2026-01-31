@@ -605,8 +605,7 @@ DELETE WIDGET mywin.
     events: (identifier)
     widgets: (identifier)
     widgets: (identifier)
-    widgets: (identifier)
-    widgets: (identifier)
-    widgets: (identifier))
+    widgets: (in_menu_phrase
+      menu: (identifier)))
   (delete_widget_statement
     widget: (identifier)))

@@ -199,11 +199,11 @@ ON F5 ENDKEY.
     widgets: (identifier)
     events: (identifier)
     widgets: (identifier)
-    widgets: (identifier)
-    widgets: (identifier)
-    widgets: (identifier)
+    widgets: (in_frame_phrase
+      frame: (identifier))
     focus: (identifier)
-    (identifier))
+    focus: (in_frame_phrase
+      frame: (identifier)))
   (on_statement
     event: (identifier)
     (expression_statement
