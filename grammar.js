@@ -45,7 +45,6 @@ module.exports = grammar({
     [$._primary_expression, $.__in_frame_target],
 
     // Accessors
-    [$.widget_access, $.__widget_keywords],
     [$.__widget_access_body],
 
     // DEFINE * disambiguation

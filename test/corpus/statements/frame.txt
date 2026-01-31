@@ -304,7 +304,8 @@ DEFINE FRAME atCol
   (frame_definition
     name: (identifier)
     (string_literal)
-    (identifier)
+    (at_phrase
+      column: (identifier))
     field: (qualified_name
       left: (identifier)
       right: (identifier))
@@ -312,7 +313,8 @@ DEFINE FRAME atCol
       left: (identifier)
       right: (identifier))
     (string_literal)
-    (identifier)
+    (at_phrase
+      column: (identifier))
     field: (qualified_name
       left: (identifier)
       right: (identifier))
@@ -333,7 +335,8 @@ DEFINE FRAME atRow
   (frame_definition
     name: (identifier)
     (string_literal)
-    (identifier)
+    (at_phrase
+      position: (identifier))
     field: (identifier)
     field: (qualified_name
       left: (identifier)
@@ -357,14 +360,16 @@ DEF FRAME atSimple2 "Label: " Customer.Name AT ROW 2 COLUMN 10.
     field: (qualified_name
       left: (identifier)
       right: (identifier))
-    (number_literal))
+    (at_phrase
+      column: (number_literal)))
   (frame_definition
     name: (identifier)
     (string_literal)
     field: (qualified_name
       left: (identifier)
       right: (identifier))
-    (identifier)
+    (at_phrase
+      position: (identifier))
     (number_literal)
     field: (identifier)
     (number_literal)))
@@ -382,8 +387,9 @@ DEFINE FRAME {&FRAME_NAME} bPolicy AT COLUMN 2 ROW 2.
     name: (constant
       (identifier))
     field: (identifier)
-    (number_literal)
-    (number_literal)))
+    (at_phrase
+      column: (number_literal)
+      row: (number_literal))))
 
 ================================================================================
 FRAME - TO phrase on string
@@ -908,8 +914,9 @@ WAIT-FOR WINDOW-CLOSE OF FRAME cust-fr.
     (qualified_name
       (identifier)
       (identifier))
-    (number_literal)
-    (number_literal)
+    (at_phrase
+      (number_literal)
+      (number_literal))
     (frame_phrase
       (side_labels)
       (string_literal)
@@ -966,8 +973,9 @@ WAIT-FOR WINDOW-CLOSE OF FRAME cust-fr.
       (size
         (number_literal)
         (number_literal))
-      (at
-        (number_literal)
+      (at_phrase
+        (number_literal))
+      (frame_option
         (number_literal))))
   (frame_definition
     (identifier)
@@ -980,8 +988,9 @@ WAIT-FOR WINDOW-CLOSE OF FRAME cust-fr.
       (size
         (number_literal)
         (number_literal))
-      (at
-        (number_literal)
+      (at_phrase
+        (number_literal))
+      (frame_option
         (number_literal))))
   (frame_definition
     (identifier)
@@ -1012,8 +1021,9 @@ WAIT-FOR WINDOW-CLOSE OF FRAME cust-fr.
       (size
         (number_literal)
         (number_literal))
-      (at
-        (number_literal)
+      (at_phrase
+        (number_literal))
+      (frame_option
         (number_literal))))
   (assignment_statement
     (widget_access

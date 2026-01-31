@@ -1,4 +1,5 @@
 const aggregate = require("./aggregate");
+const atPhrase = require("./at");
 const colorPhrase = require("./color");
 const editingPhrase = require("./editing");
 const framePhrase = require("./frame");
@@ -13,6 +14,7 @@ const assignPhrase = require("./assign");
 module.exports = (ctx) => ({
   ...assignPhrase(ctx),
   ...aggregate(ctx),
+  ...atPhrase(ctx),
   ...colorPhrase(ctx),
   ...editingPhrase(ctx),
   ...framePhrase(ctx),

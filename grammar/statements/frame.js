@@ -35,7 +35,7 @@ module.exports = ({ kw, tkw }) => ({
       prec.left(1, seq(kw("SKIP"), optional(seq("(", optional($._expression), ")")))),
       seq(
         $._expression,
-        optional($.__frame_at_phrase),
+        optional($.at_phrase),
         optional(seq(kw("BGCOLOR"), $._expression)),
         optional(seq(kw("DCOLOR"), $._expression)),
         optional(seq(kw("FGCOLOR"), $._expression)),
@@ -54,11 +54,11 @@ module.exports = ({ kw, tkw }) => ({
       seq(tkw("SKIP"), "(", optional($._expression), ")"),
       seq(
         field("field", choice($.qualified_name, $.identifier)),
-        optional($.__frame_at_phrase),
+        optional($.at_phrase),
       ),
       seq(
         $.string_literal,
-        optional(choice($.__frame_at_phrase, seq(kw("TO"), $._expression))),
+        optional(choice($.at_phrase, seq(kw("TO"), $._expression))),
         optional(seq(kw("BGCOLOR"), $._expression)),
         optional(seq(kw("DCOLOR"), $._expression)),
         optional(seq(kw("FGCOLOR"), $._expression)),
@@ -69,7 +69,7 @@ module.exports = ({ kw, tkw }) => ({
       ),
       seq(
         $.number_literal,
-        optional(choice($.__frame_at_phrase, seq(kw("TO"), $._expression))),
+        optional(choice($.at_phrase, seq(kw("TO"), $._expression))),
         optional(seq(kw("BGCOLOR"), $._expression)),
         optional(seq(kw("DCOLOR"), $._expression)),
         optional(seq(kw("FGCOLOR"), $._expression)),
@@ -80,48 +80,4 @@ module.exports = ({ kw, tkw }) => ({
       ),
     ),
 
-  __frame_at_phrase: ($) =>
-    choice(
-      seq(
-        kw("AT"),
-        choice(
-          seq(kw("COLUMN"), $._expression),
-          seq(tkw("COLUMN-OF"), field("ref", $.identifier)),
-        ),
-        optional(
-          choice(
-            seq(kw("ROW"), $._expression),
-            seq(tkw("ROW-OF"), field("ref", $.identifier)),
-          ),
-        ),
-        optional(
-          choice(
-            tkw("COLON-ALIGNED"),
-            tkw("LEFT-ALIGNED"),
-            tkw("RIGHT-ALIGNED"),
-          ),
-        ),
-      ),
-      seq(
-        kw("AT"),
-        choice(
-          seq(kw("X"), $._expression),
-          seq(tkw("X-OF"), field("ref", $.identifier)),
-        ),
-        optional(
-          choice(
-            seq(kw("Y"), $._expression),
-            seq(tkw("Y-OF"), field("ref", $.identifier)),
-          ),
-        ),
-        optional(
-          choice(
-            tkw("COLON-ALIGNED"),
-            tkw("LEFT-ALIGNED"),
-            tkw("RIGHT-ALIGNED"),
-          ),
-        ),
-      ),
-      seq(kw("AT"), $._expression),
-    ),
 });

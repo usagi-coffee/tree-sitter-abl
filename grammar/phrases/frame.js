@@ -23,7 +23,7 @@ module.exports = ({ kw, tkw }) => ({
           alias($.__frame_option_width, $.frame_option),
           alias($.__frame_option_view_as, $.frame_option),
           alias($.__frame_option_background, $.background),
-          alias($.__frame_option_at, $.at),
+          $.at_phrase,
           $.__frame_option_columns_count,
           $.__frame_option_column_count,
           $.__frame_option_title,
@@ -65,23 +65,5 @@ module.exports = ({ kw, tkw }) => ({
       field("size", $._expression),
       kw("BY"),
       field("by", $._expression),
-    ),
-  __frame_option_at: ($) =>
-    seq(
-      kw("AT"),
-      choice(
-        seq(
-          kw("COLUMN"),
-          field("column", $._expression),
-          kw("ROW"),
-          field("row", $._expression),
-        ),
-        seq(
-          kw("X"),
-          field("x", $._expression),
-          kw("Y"),
-          field("y", $._expression),
-        ),
-      ),
     ),
 });
