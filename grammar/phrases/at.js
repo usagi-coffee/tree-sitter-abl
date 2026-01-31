@@ -14,13 +14,29 @@ module.exports = ({ kw, tkw }) => ({
     prec.left(
       seq(
         choice(
-          seq(kw("COLUMN"), field("column", $._expression)),
-          seq(tkw("COLUMN-OF"), field("column_of", $._expression)),
-        ),
-        optional(
-          choice(
-            seq(kw("ROW"), field("row", $._expression)),
-            seq(tkw("ROW-OF"), field("row_of", $._expression)),
+          // COLUMN first, then ROW
+          seq(
+            choice(
+              seq(kw("COLUMN"), field("column", $._expression)),
+              seq(tkw("COLUMN-OF"), field("column_of", $._expression)),
+            ),
+            optional(
+              choice(
+                seq(kw("ROW"), field("row", $._expression)),
+                seq(tkw("ROW-OF"), field("row_of", $._expression)),
+              ),
+            ),
+          ),
+          // ROW first, then COLUMN
+          seq(
+            choice(
+              seq(kw("ROW"), field("row", $._expression)),
+              seq(tkw("ROW-OF"), field("row_of", $._expression)),
+            ),
+            choice(
+              seq(kw("COLUMN"), field("column", $._expression)),
+              seq(tkw("COLUMN-OF"), field("column_of", $._expression)),
+            ),
           ),
         ),
       ),

@@ -19,14 +19,14 @@ module.exports = ({ kw, tkw }) => ({
           alias($.__frame_option_down, $.down),
           alias($.__frame_option_skip, $.skip),
           alias($.__frame_option_row, $.frame_option),
+          $.__frame_option_columns_count,
+          $.__frame_option_column_count,
           alias($.__frame_option_column, $.frame_option),
           alias($.__frame_option_width, $.frame_option),
           alias($.__frame_option_view_as, $.frame_option),
           alias($.__frame_option_background, $.background),
           alias($.__frame_option_no_hide, $.no_hide),
           $.at_phrase,
-          $.__frame_option_columns_count,
-          $.__frame_option_column_count,
           $.__frame_option_title,
         ),
       ),
@@ -47,13 +47,13 @@ module.exports = ({ kw, tkw }) => ({
   __frame_option_skip: ($) =>
     seq(tkw("SKIP"), optional(seq("(", $._expression, ")"))),
   __frame_option_column_count: ($) =>
-    seq(field("column_count", $.number_literal), tkw("COLUMN")),
+    seq(field("column_count", $.number_literal), choice(tkw("COLUMN"), tkw("COL"))),
   __frame_option_columns_count: ($) =>
     seq(field("columns_count", $.number_literal), tkw("COLUMNS")),
   __frame_option_title: ($) => seq(kw("TITLE"), field("title", $._expression)),
   __frame_option_row: ($) => seq(kw("ROW"), field("row", $._expression)),
   __frame_option_column: ($) =>
-    seq(kw("COLUMN"), field("column", $._expression)),
+    seq(choice(kw("COLUMN"), tkw("COL")), field("column", $._expression)),
   __frame_option_width: ($) => seq(kw("WIDTH"), field("width", $._expression)),
   __frame_option_down: ($) =>
     choice(

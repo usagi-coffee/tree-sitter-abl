@@ -369,10 +369,8 @@ DEF FRAME atSimple2 "Label: " Customer.Name AT ROW 2 COLUMN 10.
       left: (identifier)
       right: (identifier))
     (at_phrase
-      position: (identifier))
-    (number_literal)
-    field: (identifier)
-    (number_literal)))
+      row: (number_literal)
+      column: (number_literal))))
 
 ================================================================================
 FRAME - Constant name with AT phrase

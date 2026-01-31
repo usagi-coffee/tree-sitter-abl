@@ -3,7 +3,7 @@ module.exports = ({ kw, tkw }) => ({
     choice(
       prec.right(1,
         seq(
-          kw("TRIGGERS"),
+          tkw("TRIGGERS"),
           ":",
           repeat1($.__trigger_block),
           kw("END"),
