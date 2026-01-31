@@ -20,11 +20,11 @@ DEFINE VARIABLE valid-choice AS CHARACTER NO-UNDO INITIAL "NPFQ".
 DEFINE VARIABLE selection AS CHARACTER NO-UNDO FORMAT "x".
 main-loop:
 REPEAT:
-choose:
-REPEAT ON ENDKEY UNDO choose, RETURN:
+label1:
+REPEAT ON ENDKEY UNDO label1, RETURN:
   MESSAGE "(N)ext (P)rev (F)ind (Q)uit".
   UPDATE selection AUTO-RETURN.
-  IF INDEX(valid-choice, selection) <> 0 THEN LEAVE choose.
+  IF INDEX(valid-choice, selection) <> 0 THEN LEAVE label1.
   BELL.
 END.
 IF selection = "Q" THEN LEAVE main-loop.
@@ -49,9 +49,9 @@ END.
     (identifier)
     (body
       (repeat_statement
+        (identifier)
         (on_endkey_phrase
-          (undo_phrase
-            (identifier)))
+          (identifier))
         (body
           (message_statement
             (string_literal))

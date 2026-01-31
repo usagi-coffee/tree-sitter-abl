@@ -18,7 +18,23 @@ module.exports = ({ kw, tkw }) => ({
       optional(tkw("NO-ERROR")),
     ),
 
-  _run_target: ($) => choice($.procedure_name, $.identifier, $.qualified_name),
+  _run_target: ($) =>
+    choice(
+      alias($.__run_value_expression, $.value_expression),
+      alias($.__run_library_member, $.library_member),
+      $.procedure_name,
+      $.identifier,
+      $.qualified_name,
+    ),
+  __run_value_expression: ($) => seq(tkw("VALUE"), "(", $._expression, ")"),
+  __run_library_member: ($) =>
+    seq(
+      field("library", $.procedure_name),
+      token.immediate("<<"),
+      field("member", $.__run_member_name),
+      ">>",
+    ),
+  __run_member_name: ($) => token(/[A-Za-z0-9_\\/.-]+\.r/i),
   __run_persistent: ($) =>
     seq(tkw("PERSISTENT"), optional(seq(kw("SET"), field("handle", $.identifier)))),
   __run_single_run: ($) =>
@@ -32,7 +48,27 @@ module.exports = ({ kw, tkw }) => ({
     seq(
       tkw("ASYNCHRONOUS"),
       optional(seq(kw("SET"), field("handle", $.identifier))),
-      optional(seq(kw("EVENT-HANDLER"), field("event_handler", $._expression))),
-      optional(seq(kw("EVENT-HANDLER-CONTEXT"), field("context", $._expression))),
+      optional(
+        choice(
+          seq(
+            kw("EVENT-PROCEDURE"),
+            field("event_procedure", $._expression),
+            optional(seq(kw("IN"), field("context", $.__run_context_value))),
+          ),
+          seq(
+            kw("EVENT-HANDLER"),
+            field("event_handler", $._expression),
+            optional(seq(kw("EVENT-HANDLER-CONTEXT"), field("context", $.__run_context_value))),
+          ),
+        ),
+      ),
+    ),
+  __run_context_value: ($) =>
+    choice(
+      alias(tkw("THIS-PROCEDURE"), $.this_procedure),
+      alias(tkw("THIS-OBJECT"), $.this_object),
+      $.object_access,
+      $.qualified_name,
+      $.identifier,
     ),
 });

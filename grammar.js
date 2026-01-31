@@ -190,7 +190,7 @@ module.exports = grammar({
       null_literal: ($) => "?",
       boolean_literal: ($) => token(/TRUE|FALSE|YES|NO/i),
       file_name: ($) => /[A-Za-z0-9_\\/.-]+\.i/i,
-      procedure_name: ($) => /[A-Za-z0-9_\\/.-]+\.p/i,
+      procedure_name: ($) => /[A-Za-z0-9_\\/.-]+\.pl?/i,
 
       // Types
       generic_type: ($) =>
@@ -335,6 +335,13 @@ module.exports = grammar({
         choice(
           // Stream keywords as values (e.g., SEEK(OUTPUT))
           field("value", choice(tkw("INPUT"), tkw("OUTPUT"))),
+          // Async OUTPUT parameter prototype: OUTPUT name AS type
+          seq(
+            tkw("OUTPUT"),
+            field("name", $.identifier),
+            kw("AS"),
+            field("type", $._type_name),
+          ),
           // Regular arguments with optional direction
           seq(
             optional(choice(tkw("INPUT"), tkw("OUTPUT"), tkw("INPUT-OUTPUT"))),

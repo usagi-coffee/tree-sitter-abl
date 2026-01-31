@@ -104,12 +104,10 @@ PROPATH += ",/myNewAppDir1,/myNewAppDir2".
           (identifier)
           (identifier)))
       (run_statement
-        (identifier)
-        (arguments
-          (argument
-            (array_access
-              (identifier)
-              (identifier)))))))
+        (value_expression
+          (array_access
+            (identifier)
+            (identifier))))))
   (propath_statement
     (binary_expression
       (function_call

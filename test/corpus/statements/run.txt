@@ -281,143 +281,133 @@ RUN methodProc IN hProc NO-ERROR.
         (argument
           value: (string_literal)))))
   (run_statement
-    procedure: (procedure_name))
-  (on_statement
-    event: (identifier)
-    (identifier)
-    (identifier))
-  (set_statement
-    (set_item
-      field: (identifier))
-    (set_item
-      field: (identifier))
-    (set_item
-      field: (identifier))
-    (set_item
-      field: (identifier)))
-  (identifier
-    (identifier
-      (identifier
-        (empty_statement
-          (return_statement
-            (procedure_definition
-              name: (identifier)
-              (parameter_definition
-                name: (identifier)
-                type: (identifier))
-              (if_statement
-                (binary_expression
-                  (object_access
-                    left: (identifier)
-                    right: (identifier))
-                  (object_access
-                    left: (identifier)
-                    right: (identifier)))
-                then: (message_statement
-                  (string_literal)
-                  (skip)
-                  (string_literal)
-                  (identifier)
-                  (string_literal)
-                  (skip)
-                  (string_literal)
-                  (function_call
-                    function: (object_access
-                      left: (identifier)
-                      right: (identifier))
-                    (arguments
-                      (argument
-                        value: (number_literal))))
-                  (view_as_phrase))
-                else: (message_statement
-                  (string_literal)
-                  (identifier)
-                  (skip)
-                  (string_literal)
-                  (skip)
-                  (identifier)
-                  (string_literal)
-                  (view_as_phrase)))
-              (expression_statement
-                (function_call
-                  function: (object_access
-                    left: (identifier)
-                    right: (identifier))
-                  (arguments)))
-              (delete_object_statement
-                name: (identifier))
-              (delete_object_statement
-                name: (identifier))
-              (run_statement
-                procedure: (procedure_name)
-                (single_run_option
-                  handle: (identifier))
-                (on_statement
-                  event: (identifier)
-                  (expression_statement
-                    (identifier))
-                  (run_statement
-                    procedure: (identifier)
-                    (in_phrase
-                      context: (function_call
-                        function: (identifier)
-                        (arguments
-                          (argument
-                            value: (identifier))
-                          (argument
-                            value: (identifier)))))
-                    (delete_procedure_statement
-                      handle: (identifier)
-                      (run_statement
-                        procedure: (procedure_name)
-                        (singleton_option
-                          handle: (identifier))
-                        (on_statement
-                          event: (identifier)
-                          (expression_statement
-                            (identifier))
-                          (run_statement
-                            procedure: (identifier)
-                            (in_phrase
-                              context: (function_call
-                                function: (identifier)
-                                (arguments
-                                  (argument
-                                    value: (identifier))
-                                  (argument
-                                    value: (identifier)))))
-                            (run_statement
-                              procedure: (identifier)
-                              (in_phrase
-                                context: (function_call
-                                  function: (identifier)
-                                  (arguments
-                                    (argument
-                                      value: (identifier))
-                                    (argument
-                                      value: (identifier)))))
-                              (delete_procedure_statement
-                                handle: (identifier)
-                                (run_statement
-                                  procedure: (procedure_name)
-                                  (identifier)
-                                  (identifier)
-                                  (identifier)
-                                  (run_statement
-                                    procedure: (identifier)
-                                    (arguments
-                                      (argument
-                                        value: (identifier)))
-                                    (persistent_option
-                                      handle: (identifier)
-                                      (run_statement
-                                        procedure: (identifier)
-                                        (in_phrase
-                                          (identifier)
-                                          (identifier)
-                                          (identifier)))
-                                      context: (identifier
-                                        (run_statement
-                                          procedure: (identifier)
-                                          (in_phrase
-                                            context: (identifier)))
+    procedure: (procedure_name)
+    (on_server_phrase
+      server: (identifier))
+    (asynchronous_phrase
+      handle: (identifier)
+      event_handler: (string_literal)
+      context: (this_procedure))
+    (arguments
+      (argument
+        value: (identifier))
+      (argument
+        name: (identifier)
+        type: (identifier))))
+  (return_statement)
+  (procedure_definition
+    name: (identifier)
+    (parameter_definition
+      name: (identifier)
+      type: (identifier))
+    (if_statement
+      (binary_expression
+        (object_access
+          left: (identifier)
+          right: (identifier))
+        (object_access
+          left: (identifier)
+          right: (identifier)))
+      then: (message_statement
+        (string_literal)
+        (skip)
+        (string_literal)
+        (identifier)
+        (string_literal)
+        (skip)
+        (string_literal)
+        (function_call
+          function: (object_access
+            left: (identifier)
+            right: (identifier))
+          (arguments
+            (argument
+              value: (number_literal))))
+        (view_as_phrase))
+      else: (message_statement
+        (string_literal)
+        (identifier)
+        (skip)
+        (string_literal)
+        (skip)
+        (identifier)
+        (string_literal)
+        (view_as_phrase)))
+    (expression_statement
+      (function_call
+        function: (object_access
+          left: (identifier)
+          right: (identifier))
+        (arguments)))
+    (delete_object_statement
+      name: (identifier))
+    (delete_object_statement
+      name: (identifier)))
+  (run_statement
+    procedure: (procedure_name)
+    (single_run_option
+      handle: (identifier))
+    (on_server_phrase
+      server: (identifier)))
+  (run_statement
+    procedure: (identifier)
+    (in_phrase
+      context: (function_call
+        function: (identifier)
+        (arguments
+          (argument
+            value: (input_expression
+              field: (identifier)))
+          (argument
+            value: (identifier))))))
+  (delete_procedure_statement
+    handle: (identifier))
+  (run_statement
+    procedure: (procedure_name)
+    (singleton_option
+      handle: (identifier))
+    (on_server_phrase
+      server: (identifier)))
+  (run_statement
+    procedure: (identifier)
+    (in_phrase
+      context: (function_call
+        function: (identifier)
+        (arguments
+          (argument
+            value: (input_expression
+              field: (identifier)))
+          (argument
+            value: (identifier))))))
+  (run_statement
+    procedure: (identifier)
+    (in_phrase
+      context: (function_call
+        function: (identifier)
+        (arguments
+          (argument
+            value: (input_expression
+              field: (identifier)))
+          (argument
+            value: (identifier))))))
+  (delete_procedure_statement
+    handle: (identifier))
+  (run_statement
+    procedure: (library_member
+      library: (procedure_name)))
+  (run_statement
+    procedure: (value_expression
+      (identifier))
+    (persistent_option
+      handle: (identifier)))
+  (run_statement
+    procedure: (identifier)
+    (in_phrase
+      context: (identifier))
+    (asynchronous_phrase
+      event_procedure: (string_literal)
+      context: (this_procedure)))
+  (run_statement
+    procedure: (identifier)
+    (in_phrase
+      context: (identifier))))

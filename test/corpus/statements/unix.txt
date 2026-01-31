@@ -114,9 +114,7 @@ UNIX VALUE("cp usr/myfile.").
               (widget_phrase
                 (identifier)))
             (run_statement
-              (identifier)
-              (arguments
-                (argument
-                  (identifier)))))))))
+              (value_expression
+                (identifier))))))))
   (unix_statement
     (string_literal)))

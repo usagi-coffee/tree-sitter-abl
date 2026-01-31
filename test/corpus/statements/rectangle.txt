@@ -505,14 +505,15 @@ vline5 AT 51
 vline6 AT 65
 WITH TITLE "Inventory Current Value" CENTERED USE-TEXT 5 DOWN.
 FOR EACH Item NO-LOCK WITH FRAME item-info:
-DISPLAY
-Item.ItemNum
-Item.ItemName
-Item.OnHand
-Item.ReOrder
-Item.OnOrder
-Item.Price
-Item.OnHand * Item.Price @ item-tot.
+  DISPLAY
+  Item.ItemNum
+  Item.ItemName
+  Item.OnHand
+  Item.ReOrder
+  Item.OnOrder
+  Item.Price
+  Item.OnHand * Item.Price @ item-tot.
+END.
 
 --------------------------------------------------------------------------------
 
@@ -578,57 +579,63 @@ Item.OnHand * Item.Price @ item-tot.
       left: (identifier)
       right: (identifier))
     field: (identifier)
-    (parenthesized_expression
-      (number_literal))
-    (identifier)
-    (identifier)
     (number_literal)
     (identifier)
-    (number_literal)
     (identifier)
-    (number_literal)
+    (at_phrase
+      position: (number_literal))
     (identifier)
-    (number_literal)
+    (at_phrase
+      position: (number_literal))
     (identifier)
-    (number_literal)
+    (at_phrase
+      position: (number_literal))
     (identifier)
-    (number_literal)
+    (at_phrase
+      position: (number_literal))
+    (identifier)
+    (at_phrase
+      position: (number_literal))
+    (identifier)
+    (at_phrase
+      position: (number_literal))
     (frame_phrase
-      (frame_option
-        title: (string_literal))
-      (frame_option)
-      (frame_option)
-      (frame_option
+      title: (string_literal)
+      (centered)
+      (use_text)
+      (down
         (number_literal))))
-  (record
-    table: (identifier)
-    (no_lock))
-  (frame_phrase
-    frame: (identifier))
-  (display_statement
-    (qualified_name
-      left: (identifier)
-      right: (identifier))
-    (qualified_name
-      left: (identifier)
-      right: (identifier))
-    (qualified_name
-      left: (identifier)
-      right: (identifier))
-    (qualified_name
-      left: (identifier)
-      right: (identifier))
-    (qualified_name
-      left: (identifier)
-      right: (identifier))
-    (qualified_name
-      left: (identifier)
-      right: (identifier))
-    (binary_expression
-      (qualified_name
-        left: (identifier)
-        right: (identifier))
-      (qualified_name
-        left: (identifier)
-        right: (identifier)))
-    base: (identifier)))
+  (for_statement
+    (record
+      table: (identifier)
+      (no_lock))
+    (frame_phrase
+      frame: (identifier))
+    (body
+      (display_statement
+        (qualified_name
+          left: (identifier)
+          right: (identifier))
+        (qualified_name
+          left: (identifier)
+          right: (identifier))
+        (qualified_name
+          left: (identifier)
+          right: (identifier))
+        (qualified_name
+          left: (identifier)
+          right: (identifier))
+        (qualified_name
+          left: (identifier)
+          right: (identifier))
+        (qualified_name
+          left: (identifier)
+          right: (identifier))
+        (binary_expression
+          (qualified_name
+            left: (identifier)
+            right: (identifier))
+          (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        base: (identifier)))))

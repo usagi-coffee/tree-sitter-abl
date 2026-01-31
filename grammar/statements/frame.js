@@ -27,12 +27,14 @@ module.exports = ({ kw, tkw }) => ({
     ),
 
   __frame_header_section: ($) =>
-    seq(choice(kw("HEADER"), kw("BACKGROUND")), repeat1($.__frame_head_item)),
+    prec(1, seq(choice(kw("HEADER"), kw("BACKGROUND")), repeat1($.__frame_head_item))),
 
   __frame_head_item: ($) =>
     choice(
-      prec.left(1, seq(kw("SPACE"), optional(seq("(", optional($._expression), ")")))),
-      prec.left(1, seq(kw("SKIP"), optional(seq("(", optional($._expression), ")")))),
+      prec(1, seq(tkw("SKIP"), "(", optional($._expression), ")")),
+      prec(1, seq(tkw("SPACE"), "(", optional($._expression), ")")),
+      tkw("SKIP"),
+      tkw("SPACE"),
       seq($._expression, optional($.at_phrase), repeat($.__frame_display_option)),
     ),
 
