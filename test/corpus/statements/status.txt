@@ -48,7 +48,7 @@ STATUS INPUT OFF IN WINDOW hWin.
             (argument
               (string_literal)))))
       (string_literal)))
-  (for_each_statement
+  (for_statement
     (record
       (identifier))
     (body
@@ -56,7 +56,7 @@ STATUS INPUT OFF IN WINDOW hWin.
         (qualified_name
           (identifier)
           (identifier)))
-      (for_each_statement
+      (for_statement
         (record
           (identifier)
           (of_phrase

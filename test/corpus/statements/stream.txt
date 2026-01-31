@@ -191,7 +191,7 @@ DISPLAY STREAM rpt ItemNum ItemName WITH NO-LABELS NO-BOX.
     (stream_phrase
       (identifier))
     (identifier))
-  (for_each_statement
+  (for_statement
     (record
       (identifier))
     (body

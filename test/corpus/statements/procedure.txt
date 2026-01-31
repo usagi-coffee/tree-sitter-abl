@@ -82,7 +82,7 @@ END PROCEDURE.
     name: (identifier)
     (parameter_definition
       dataset: (identifier))
-    (for_each_statement
+    (for_statement
       (record
         table: (identifier)
         (of_phrase

@@ -67,7 +67,7 @@ PUT CONTROL NULL(20).
     (qualified_name
       (identifier)
       (identifier)))
-  (for_each_statement
+  (for_statement
     (record
       (identifier)
       (no_lock))

@@ -38,7 +38,7 @@ END.
     (frame_phrase
       (side_labels)
       (centered)))
-  (for_each_statement
+  (for_statement
     (record
       (identifier))
     (body

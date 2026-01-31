@@ -535,7 +535,7 @@ WAIT-FOR CHOOSE OF cancel-butt OR WINDOW-CLOSE OF CURRENT-WINDOW.
         width: (number_literal))
       title: (string_literal)
       (frame_option)))
-  (for_each_statement
+  (for_statement
     (record
       table: (identifier)
       (break_by
@@ -612,7 +612,7 @@ WAIT-FOR CHOOSE OF cancel-butt OR WINDOW-CLOSE OF CURRENT-WINDOW.
           (binary_expression
             (identifier)
             (number_literal))
-          then: (for_each_statement
+          then: (for_statement
             (record
               table: (identifier)
               (use_index
@@ -629,7 +629,7 @@ WAIT-FOR CHOOSE OF cancel-butt OR WINDOW-CLOSE OF CURRENT-WINDOW.
                     left: (identifier)
                     right: (identifier))
                   (identifier)))))
-          else: (for_each_statement
+          else: (for_statement
             (record
               table: (identifier)
               (use_index

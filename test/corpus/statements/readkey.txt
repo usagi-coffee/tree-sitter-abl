@@ -37,7 +37,7 @@ READKEY PAUSE 0.5.
 --------------------------------------------------------------------------------
 
 (source_code
-  (for_each_statement
+  (for_statement
     (record
       (identifier))
     (body

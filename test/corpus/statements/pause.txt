@@ -34,7 +34,7 @@ PAUSE BEFORE-HIDE NO-MESSAGE.
   (pause_statement
     (number_literal)
     (string_literal))
-  (for_each_statement
+  (for_statement
     (record
       (identifier)
       (no_lock))

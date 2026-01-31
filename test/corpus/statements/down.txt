@@ -32,7 +32,7 @@ END.
 --------------------------------------------------------------------------------
 
 (source_code
-  (for_each_statement
+  (for_statement
     (record
       (identifier)
       (no_lock)

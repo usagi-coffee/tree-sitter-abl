@@ -214,7 +214,7 @@ DISPLAY SPACE(2) Customer.Name SKIP(1) Customer.City.
 --------------------------------------------------------------------------------
 
 (source_code
-  (for_each_statement
+  (for_statement
     (record
       (identifier)
       (no_lock)
@@ -236,7 +236,7 @@ DISPLAY SPACE(2) Customer.Name SKIP(1) Customer.City.
         (qualified_name
           (identifier)
           (identifier)))
-      (for_each_statement
+      (for_statement
         (record
           (identifier)
           (of_phrase
@@ -256,7 +256,7 @@ DISPLAY SPACE(2) Customer.Name SKIP(1) Customer.City.
             (qualified_name
               (identifier)
               (identifier)))
-          (for_each_statement
+          (for_statement
             (record
               (identifier)
               (of_phrase
@@ -281,7 +281,7 @@ DISPLAY SPACE(2) Customer.Name SKIP(1) Customer.City.
                 (qualified_name
                   (identifier)
                   (identifier)))))))))
-  (for_each_statement
+  (for_statement
     (record
       (identifier)
       (no_lock))
@@ -304,7 +304,7 @@ DISPLAY SPACE(2) Customer.Name SKIP(1) Customer.City.
         (qualified_name
           (identifier)
           (identifier)))
-      (for_each_statement
+      (for_statement
         (record
           (identifier)
           (of_phrase
@@ -342,7 +342,7 @@ DISPLAY SPACE(2) Customer.Name SKIP(1) Customer.City.
                     (identifier)))))
             (identifier)
             (string_literal))))))
-  (for_each_statement
+  (for_statement
     (record
       (identifier)
       (no_lock))

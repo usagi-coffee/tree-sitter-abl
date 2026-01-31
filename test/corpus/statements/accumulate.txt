@@ -23,7 +23,7 @@ END.
 --------------------------------------------------------------------------------
 
 (source_code
-  (for_each_statement
+  (for_statement
     (record
       table: (identifier)
       (no_lock))
@@ -39,7 +39,7 @@ END.
             operation: (aggregate_operation))
           (aggregate_phrase
             operation: (aggregate_operation))))))
-  (for_each_statement
+  (for_statement
     (record
       table: (identifier)
       (no_lock))
@@ -68,7 +68,7 @@ END.
           operation: (aggregate_operation))
         (aggregate_phrase
           operation: (aggregate_operation)))))
-  (for_each_statement
+  (for_statement
     (record
       table: (identifier)
       (no_lock)
@@ -95,7 +95,7 @@ END.
               group: (qualified_name
                 left: (identifier)
                 right: (identifier))))))))
-  (for_each_statement
+  (for_statement
     (record
       table: (identifier)
       (no_lock))

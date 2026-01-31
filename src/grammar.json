@@ -6451,7 +6451,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "for_each_statement"
+          "name": "for_statement"
         },
         {
           "type": "SYMBOL",
@@ -21601,7 +21601,7 @@
         }
       ]
     },
-    "for_each_statement": {
+    "for_statement": {
       "type": "PREC",
       "value": 1,
       "content": {
@@ -61455,15 +61455,6 @@
           ]
         },
         {
-          "type": "SYMBOL",
-          "name": "__widget_access_body"
-        }
-      ]
-    },
-    "__widget_access_body": {
-      "type": "SEQ",
-      "members": [
-        {
           "type": "FIELD",
           "name": "query",
           "content": {
@@ -66940,7 +66931,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "for_each_statement"
+          "name": "for_statement"
         },
         {
           "type": "SYMBOL",
@@ -67474,7 +67465,7 @@
       "__in_frame_target"
     ],
     [
-      "__widget_access_body"
+      "widget_access"
     ],
     [
       "__buffer_access_modifier",

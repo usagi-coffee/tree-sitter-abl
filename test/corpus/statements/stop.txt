@@ -41,7 +41,7 @@ END.
     (identifier)
     (identifier)
     (no_undo))
-  (for_each_statement
+  (for_statement
     (record
       (identifier))
     (body
@@ -73,7 +73,7 @@ END.
     (identifier)
     (identifier)
     (no_undo))
-  (for_each_statement
+  (for_statement
     (record
       (identifier))
     (on_stop_phrase)

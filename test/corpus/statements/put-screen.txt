@@ -82,7 +82,7 @@ PUT SCREEN COLOR VALUE(cColor) ROW 1 COLUMN 1 "Hdr".
     (no_undo)
     (format_option
       (string_literal)))
-  (for_each_statement
+  (for_statement
     (record
       (identifier)
       (no_lock))

@@ -100,7 +100,7 @@ ON F5 ENDKEY.
               (message_statement
                 (string_literal))
               (return_statement)))))))
-  (for_each_statement
+  (for_statement
     (record
       table: (identifier))
     (body

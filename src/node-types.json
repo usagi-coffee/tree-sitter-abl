@@ -4080,7 +4080,7 @@
           "named": true
         },
         {
-          "type": "for_each_statement",
+          "type": "for_statement",
           "named": true
         },
         {
@@ -6835,7 +6835,7 @@
           "named": true
         },
         {
-          "type": "for_each_statement",
+          "type": "for_statement",
           "named": true
         },
         {
@@ -9866,7 +9866,7 @@
             "named": true
           },
           {
-            "type": "for_each_statement",
+            "type": "for_statement",
             "named": true
           },
           {
@@ -19292,7 +19292,7 @@
           "named": true
         },
         {
-          "type": "for_each_statement",
+          "type": "for_statement",
           "named": true
         },
         {
@@ -22111,7 +22111,27 @@
     }
   },
   {
-    "type": "for_each_statement",
+    "type": "for_phrase",
+    "named": true,
+    "fields": {
+      "record": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "qualified_name",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "for_statement",
     "named": true,
     "fields": {
       "end": {
@@ -22546,26 +22566,6 @@
           "named": true
         }
       ]
-    }
-  },
-  {
-    "type": "for_phrase",
-    "named": true,
-    "fields": {
-      "record": {
-        "multiple": true,
-        "required": true,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          },
-          {
-            "type": "qualified_name",
-            "named": true
-          }
-        ]
-      }
     }
   },
   {
@@ -24252,7 +24252,7 @@
           "named": true
         },
         {
-          "type": "for_each_statement",
+          "type": "for_statement",
           "named": true
         },
         {
@@ -25644,7 +25644,7 @@
             "named": true
           },
           {
-            "type": "for_each_statement",
+            "type": "for_statement",
             "named": true
           },
           {
@@ -26266,7 +26266,7 @@
             "named": true
           },
           {
-            "type": "for_each_statement",
+            "type": "for_statement",
             "named": true
           },
           {
@@ -32997,7 +32997,7 @@
           "named": true
         },
         {
-          "type": "for_each_statement",
+          "type": "for_statement",
           "named": true
         },
         {
@@ -37560,7 +37560,7 @@
           "named": true
         },
         {
-          "type": "for_each_statement",
+          "type": "for_statement",
           "named": true
         },
         {
@@ -38978,7 +38978,7 @@
           "named": true
         },
         {
-          "type": "for_each_statement",
+          "type": "for_statement",
           "named": true
         },
         {
@@ -47622,7 +47622,7 @@
           "named": true
         },
         {
-          "type": "for_each_statement",
+          "type": "for_statement",
           "named": true
         },
         {

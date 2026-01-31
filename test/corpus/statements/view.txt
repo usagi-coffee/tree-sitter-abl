@@ -49,7 +49,7 @@ VIEW STREAM-HANDLE hS FRAME f1.
     (identifier)
     (page_size_phrase
       (number_literal)))
-  (for_each_statement
+  (for_statement
     (record
       (identifier)
       (no_lock))
@@ -111,7 +111,7 @@ VIEW STREAM-HANDLE hS FRAME f1.
       (view_statement
         (widget_phrase
           (identifier)))
-      (for_each_statement
+      (for_statement
         (record
           (identifier)
           (of_phrase

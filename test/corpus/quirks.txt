@@ -147,7 +147,7 @@ END.
     (body
       (message_statement
         (identifier))))
-  (for_each_statement
+  (for_statement
     (record
       table: (identifier)
       (no_lock))

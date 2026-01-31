@@ -41,7 +41,7 @@ module.exports = () => ({
       $.open_query_statement,
       $.do_block,
       $.buffer_compare_statement,
-      $.for_each_statement,
+      $.for_statement,
       $.hide_statement,
       $.subscribe_statement,
       $.prompt_for_statement,

@@ -213,7 +213,7 @@ DEFINE PRIVATE WORK-TABLE wtPrivate FIELD f1 AS INTEGER.
         (identifier))
       (field_option
         (string_literal))))
-  (for_each_statement
+  (for_statement
     (record
       (identifier))
     (record
@@ -279,7 +279,7 @@ DEFINE PRIVATE WORK-TABLE wtPrivate FIELD f1 AS INTEGER.
               (qualified_name
                 (identifier)
                 (identifier))))))))
-  (for_each_statement
+  (for_statement
     (record
       (identifier)
       (break_by

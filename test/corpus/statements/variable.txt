@@ -567,7 +567,7 @@ END.
     type: (identifier)
     (no_undo))
   (output_statement)
-  (for_each_statement
+  (for_statement
     (record
       table: (identifier)
       (where_phrase
@@ -583,7 +583,7 @@ END.
         right: (binary_expression
           (identifier)
           (number_literal)))
-      (for_each_statement
+      (for_statement
         (record
           table: (identifier)
           (of_phrase
@@ -841,7 +841,7 @@ END.
                 (no_undo)
                 (column_label_option
                   (string_literal)))
-              (for_each_statement
+              (for_statement
                 (record
                   table: (identifier))
                 (body

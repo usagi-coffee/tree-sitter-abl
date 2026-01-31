@@ -154,7 +154,7 @@ UPDATE field1 SPACE(2) SKIP(1) ^.
 --------------------------------------------------------------------------------
 
 (source_code
-  (for_each_statement
+  (for_statement
     (record
       (identifier))
     (body
@@ -179,7 +179,7 @@ UPDATE field1 SPACE(2) SKIP(1) ^.
           (qualified_name
             (identifier)
             (identifier))))))
-  (for_each_statement
+  (for_statement
     (record
       (identifier))
     (body
@@ -204,7 +204,7 @@ UPDATE field1 SPACE(2) SKIP(1) ^.
           (identifier))
         (update_item
           (string_literal)))
-      (for_each_statement
+      (for_statement
         (record
           (identifier)
           (of_phrase
@@ -314,7 +314,7 @@ UPDATE field1 SPACE(2) SKIP(1) ^.
       (centered)
       (no_labels)
       (string_literal)))
-  (for_each_statement
+  (for_statement
     (record
       (identifier)
       (no_lock))

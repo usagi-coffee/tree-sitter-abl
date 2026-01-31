@@ -77,7 +77,7 @@ END.
 --------------------------------------------------------------------------------
 
 (source_code
-  (for_each_statement
+  (for_statement
     (record
       table: (identifier)
       (where_phrase
@@ -131,7 +131,7 @@ DELETE Customer VALIDATE(NOT(CAN-FIND(Order OF Customer)),
 --------------------------------------------------------------------------------
 
 (source_code
-  (for_each_statement
+  (for_statement
     (record
       table: (identifier))
     (body

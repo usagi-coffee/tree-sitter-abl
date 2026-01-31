@@ -28,7 +28,7 @@ module.exports = ({ kw, tkw }) => ({
       $.enum_statement,
       $.var_statement,
       $.if_statement,
-      $.for_each_statement,
+      $.for_statement,
       $.find_statement,
       $.repeat_statement,
       $.display_statement,

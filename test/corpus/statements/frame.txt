@@ -730,7 +730,7 @@ WAIT-FOR WINDOW-CLOSE OF FRAME cust-fr.
         (number_literal))
       (string_literal)
       (use_text)))
-  (for_each_statement
+  (for_statement
     (record
       (identifier)
       (no_lock))
@@ -842,7 +842,7 @@ WAIT-FOR WINDOW-CLOSE OF FRAME cust-fr.
     (shared_variable_scope)
     (identifier)
     (identifier))
-  (for_each_statement
+  (for_statement
     (record
       (identifier)
       (where_phrase

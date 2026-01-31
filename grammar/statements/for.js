@@ -1,5 +1,5 @@
 module.exports = ({ kw, tkw }) => ({
-  for_each_statement: ($) =>
+  for_statement: ($) =>
     prec(
       1,
       seq(

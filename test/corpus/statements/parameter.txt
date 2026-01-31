@@ -555,7 +555,7 @@ DEFINE INPUT PARAMETER pExtent0 AS INTEGER EXTENT 0.
     name: (identifier)
     type: (identifier)
     (no_undo))
-  (for_each_statement
+  (for_statement
     (record
       table: (identifier)
       (no_lock))
@@ -589,7 +589,7 @@ DEFINE INPUT PARAMETER pExtent0 AS INTEGER EXTENT 0.
     name: (identifier)
     type: (identifier)
     (no_undo))
-  (for_each_statement
+  (for_statement
     (record
       table: (identifier))
     (body

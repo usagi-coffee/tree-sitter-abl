@@ -31,7 +31,7 @@ UP STREAM-HANDLE hS 3 WITH FRAME f1.
 --------------------------------------------------------------------------------
 
 (source_code
-  (for_each_statement
+  (for_statement
     (record
       (identifier))
     (body

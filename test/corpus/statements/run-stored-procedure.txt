@@ -129,7 +129,7 @@ DISPLAY "Succeeded".
       value: (number_literal)
       value: (number_literal)
       value: (number_literal)))
-  (for_each_statement
+  (for_statement
     (record
       table: (identifier)
       (where_phrase
@@ -156,7 +156,7 @@ DISPLAY "Succeeded".
     handle_var: (identifier)
     (parameter_list
       value: (string_literal)))
-  (for_each_statement
+  (for_statement
     (record
       table: (identifier)
       (where_phrase
