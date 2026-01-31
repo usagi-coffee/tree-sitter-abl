@@ -214,7 +214,7 @@
 (run_statement procedure: (procedure_name) @function.call)
 (run_statement procedure: (identifier) @function.call)
 (run_statement procedure: (qualified_name) @function.call)
-(function_parameter name: (identifier) @parameter)
+(parameter name: (identifier) @parameter)
 (parameter_definition name: (identifier) @parameter)
 (variable_definition name: (identifier) @variable.definition)
 (buffer_definition name: (identifier) @variable.definition)
@@ -224,9 +224,7 @@
 (temp_table_definition name: (identifier) @type)
 (work_table_definition name: (identifier) @type)
 (temp_table_field name: (identifier) @property)
-(work_table_field name: (identifier) @property)
 (temp_table_index name: (identifier) @property)
-(work_table_index name: (identifier) @property)
 (_ type: (_) @type)
 (access_modifier) @keyword
 (static_modifier) @keyword
