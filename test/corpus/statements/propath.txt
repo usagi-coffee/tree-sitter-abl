@@ -52,7 +52,7 @@ PROPATH += ",/myNewAppDir1,/myNewAppDir2".
     (no_undo)
     (extent_phrase
       (number_literal))
-    (format_option
+    (format_phrase
       (string_literal))
     (initial_option
       (string_literal)
@@ -65,7 +65,7 @@ PROPATH += ",/myNewAppDir1,/myNewAppDir2".
     (no_undo)
     (extent_phrase
       (number_literal))
-    (format_option
+    (format_phrase
       (string_literal))
     (initial_option
       (string_literal)

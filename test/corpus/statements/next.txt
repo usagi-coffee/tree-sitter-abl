@@ -32,9 +32,8 @@ END.
       (qualified_name
         (identifier)
         (identifier))
-      (format_phrase
-        (label_option
-          (string_literal))))
+      (label_option
+        (string_literal)))
     (frame_phrase
       (side_labels)
       (centered)))

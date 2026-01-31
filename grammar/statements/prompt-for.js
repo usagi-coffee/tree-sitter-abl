@@ -13,7 +13,12 @@ module.exports = ({ kw, tkw }) => ({
       optional(alias($.__prompt_for_stream_phrase, $.stream_phrase)),
       optional(tkw("UNLESS-HIDDEN")),
       field("record", $.identifier),
-      optional(seq(tkw("EXCEPT"), repeat1(field("field", $.__prompt_for_field_target)))),
+      optional(
+        seq(
+          tkw("EXCEPT"),
+          repeat1(field("field", $.__prompt_for_field_target)),
+        ),
+      ),
       optional(seq(kw("IN"), tkw("WINDOW"), field("window", $._expression))),
       optional($.frame_phrase),
     ),
@@ -38,7 +43,7 @@ module.exports = ({ kw, tkw }) => ({
       prec.right(
         seq(
           field("field", $.__prompt_for_field_target),
-          optional(alias($.__prompt_for_format_phrase, $.format_phrase)),
+          optional($.__prompt_for_field_phrase),
           optional(seq(kw("WHEN"), field("when", $._expression))),
         ),
       ),
@@ -48,7 +53,7 @@ module.exports = ({ kw, tkw }) => ({
         repeat1(
           seq(
             field("field", choice($.identifier, $.qualified_name)),
-            optional(alias($.__prompt_for_format_phrase, $.format_phrase)),
+            optional($.__prompt_for_field_phrase),
           ),
         ),
         ")",
@@ -71,19 +76,11 @@ module.exports = ({ kw, tkw }) => ({
       "^",
     ),
   __prompt_for_field_target: ($) => choice($.identifier, $.qualified_name),
-  __prompt_for_format_phrase: ($) =>
+  __prompt_for_field_phrase: ($) =>
     repeat1(
       choice(
-        alias($.__prompt_for_format_option, $.format_option),
+        $.format_phrase,
         alias($.__prompt_for_label_option, $.label_option),
-      ),
-    ),
-  __prompt_for_format_option: ($) =>
-    seq(
-      kw("FORMAT"),
-      $._escaped_string,
-      optional(
-        token.immediate(/:(?:[RLCT](?:U)?(?:[0-9]+)?|U(?:[0-9]+)?|[0-9]+)/i),
       ),
     ),
   __prompt_for_label_option: ($) =>

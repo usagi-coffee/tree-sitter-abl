@@ -27,18 +27,9 @@ module.exports = ({ kw, tkw }) => ({
   __put_expression_item: ($) =>
     seq(
       field("value", $._expression),
-      optional(alias($.__put_format_phrase, $.format_phrase)),
+      optional($.format_phrase),
       optional(
         seq(choice(kw("AT"), kw("TO")), field("position", $._expression)),
-      ),
-    ),
-  __put_format_phrase: ($) =>
-    choice(
-      seq(kw("FORMAT"), field("format", $.string_literal)),
-      seq(
-        alias(token(seq(/format/i, token.immediate("("))), "FORMAT"),
-        field("format", $.string_literal),
-        ")",
       ),
     ),
   __put_skip_item: ($) =>

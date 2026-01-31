@@ -63,12 +63,12 @@ PROMPT-FOR field1 FORMAT "x(10)" WHEN ok
     (prompt_for_item
       field: (identifier)
       (format_phrase
-        (format_option))
+        format: (string_literal))
       when: (identifier))
     (prompt_for_item
       field: (identifier)
       (format_phrase
-        (format_option)))
+        format: (string_literal)))
     (prompt_for_item
       constant: (string_literal)
       (at_phrase))
@@ -174,8 +174,8 @@ PROMPT-FOR STREAM-HANDLE hS field1 field2 IN WINDOW wMain WITH FRAME fMain.
     name: (identifier)
     type: (identifier)
     (no_undo)
-    (format_option
-      (string_literal))
+    (format_phrase
+      format: (string_literal))
     (extent_phrase
       (number_literal)))
   (form_statement
@@ -300,9 +300,8 @@ PROMPT-FOR STREAM-HANDLE hS field1 field2 IN WINDOW wMain WITH FRAME fMain.
           field: (qualified_name
             left: (identifier)
             right: (identifier))
-          (format_phrase
-            (label_option
-              (string_literal))))
+          (label_option
+            (string_literal)))
         (frame_phrase
           frame: (identifier)
           (frame_option

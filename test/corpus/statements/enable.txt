@@ -74,10 +74,12 @@ ENABLE field1 FORMAT "x(10)" WHEN ok
   (enable_statement
     (enable_item
       field: (identifier)
-      (format_phrase)
+      (format_phrase
+        format: (string_literal))
       when: (identifier))
     (enable_item
-      (format_phrase))
+      (format_phrase
+        format: (string_literal)))
     (enable_item
       constant: (string_literal)
       (at_phrase)

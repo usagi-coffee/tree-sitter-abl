@@ -69,10 +69,12 @@ DISABLE field1 FORMAT "x(10)" WHEN ok
   (disable_statement
     (disable_item
       field: (identifier)
-      (format_phrase)
+      (format_phrase
+        format: (string_literal))
       when: (identifier))
     (disable_item
-      (format_phrase))
+      (format_phrase
+        format: (string_literal)))
     (disable_item
       constant: (string_literal)
       (at_phrase)

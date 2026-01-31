@@ -36,7 +36,7 @@ OS-COMMAND VALUE("echo") "ok".
     (identifier)
     (identifier)
     (no_undo)
-    (format_option
+    (format_phrase
       (string_literal)))
   (repeat_statement
     (body

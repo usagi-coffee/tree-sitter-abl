@@ -32,7 +32,7 @@ module.exports = ({ kw, tkw }) => ({
             ")",
           ),
         ),
-        optional(alias($.__display_format_phrase, $.format_phrase)),
+        optional($.format_phrase),
         optional(seq(tkw("WHEN"), field("when", $._expression))),
         optional(
           seq("@", field("base", choice($.identifier, $.qualified_name))),
@@ -57,9 +57,4 @@ module.exports = ({ kw, tkw }) => ({
       seq(kw("STREAM"), field("stream", $.identifier)),
       seq(kw("STREAM-HANDLE"), field("handle", $._expression)),
     ),
-
-  __display_format_phrase: ($) =>
-    alias($.__display_format_option, $.format_option),
-
-  __display_format_option: ($) => seq(kw("FORMAT"), $.string_literal),
 });

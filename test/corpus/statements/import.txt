@@ -124,7 +124,7 @@ INPUT CLOSE.
     (identifier)
     (identifier)
     (no_undo)
-    (format_option
+    (format_phrase
       (string_literal)))
   (input_statement
     (function_call

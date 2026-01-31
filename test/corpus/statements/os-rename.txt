@@ -49,7 +49,7 @@ OS-RENAME "a.txt" VALUE("b.txt").
     (identifier)
     (identifier)
     (no_undo)
-    (format_option
+    (format_phrase
       (string_literal))
     (view_as_phrase
       (identifier)))

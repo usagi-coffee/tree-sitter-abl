@@ -190,13 +190,13 @@ DEFINE OUTPUT PARAMETER pNum AS DECIMAL FORMAT "z,zzz.99".
   (parameter_definition
     name: (identifier)
     type: (identifier)
-    (format_option
-      (string_literal)))
+    (format_phrase
+      format: (string_literal)))
   (parameter_definition
     name: (identifier)
     type: (identifier)
-    (format_option
-      (string_literal))))
+    (format_phrase
+      format: (string_literal))))
 
 ================================================================================
 PARAMETER DEFINITION - NO-UNDO Option
@@ -356,8 +356,8 @@ DEFINE RETURN PARAMETER pRes AS LOGICAL NO-UNDO.
   (parameter_definition
     name: (identifier)
     type: (identifier)
-    (format_option
-      (string_literal))
+    (format_phrase
+      format: (string_literal))
     (initial_option
       (number_literal))
     (label_option
@@ -374,8 +374,8 @@ DEFINE RETURN PARAMETER pRes AS LOGICAL NO-UNDO.
       (number_literal))
     (label_option
       (string_literal))
-    (format_option
-      (string_literal)))
+    (format_phrase
+      format: (string_literal)))
   (parameter_definition
     name: (identifier)
     like: (qualified_name
@@ -508,8 +508,8 @@ DEFINE INPUT PARAMETER pExtent0 AS INTEGER EXTENT 0.
     name: (identifier)
     type: (identifier)
     (no_undo)
-    (format_option
-      (string_literal)))
+    (format_phrase
+      format: (string_literal)))
   (variable_definition
     name: (identifier)
     type: (identifier)
@@ -638,9 +638,8 @@ DEFINE INPUT PARAMETER pExtent0 AS INTEGER EXTENT 0.
   (prompt_for_statement
     (prompt_for_item
       field: (identifier)
-      (format_phrase
-        (label_option
-          (string_literal)))))
+      (label_option
+        (string_literal))))
   (assign_statement
     (assign_phrase
       (assign_pair

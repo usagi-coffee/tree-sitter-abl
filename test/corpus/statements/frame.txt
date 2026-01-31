@@ -830,7 +830,7 @@ WAIT-FOR WINDOW-CLOSE OF FRAME cust-fr.
     (shared_variable_scope)
     (identifier)
     (identifier)
-    (format_option
+    (format_phrase
       (string_literal)))
   (buffer_definition
     (shared_variable_scope)

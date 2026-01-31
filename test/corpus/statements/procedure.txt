@@ -290,8 +290,8 @@ END PROCEDURE.
       name: (identifier)
       type: (identifier)
       (no_undo)
-      (format_option
-        (string_literal)))
+      (format_phrase
+        format: (string_literal)))
     (parameter_definition
       name: (identifier)
       like: (qualified_name
@@ -493,8 +493,8 @@ END PROCEDURE.
     name: (identifier)
     type: (identifier)
     (no_undo)
-    (format_option
-      (string_literal)))
+    (format_phrase
+      format: (string_literal)))
   (variable_definition
     name: (identifier)
     type: (identifier)

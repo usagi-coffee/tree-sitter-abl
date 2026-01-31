@@ -169,8 +169,7 @@ DISPLAY orderTotal FORMAT "->>>,>>9.99" WHEN showTotal @ baseTotal.
   (display_statement
     (identifier)
     (format_phrase
-      (format_option
-        (string_literal)))
+      format: (string_literal))
     when: (identifier)
     base: (identifier)))
 
@@ -370,8 +369,7 @@ DISPLAY SPACE(2) Customer.Name SKIP(1) Customer.City.
             (identifier)
             (identifier)))
         (format_phrase
-          (format_option
-            (string_literal)))
+          (string_literal))
         (qualified_name
           (identifier)
           (identifier))

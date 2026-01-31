@@ -66,12 +66,12 @@ UPDATE field1 FORMAT "x(10)" WHEN ok
     (update_item
       field: (identifier)
       (format_phrase
-        (format_option))
+        format: (string_literal))
       when: (identifier))
     (update_item
       field: (identifier)
       (format_phrase
-        (format_option)))
+        format: (string_literal)))
     (update_item
       constant: (string_literal)
       (at_phrase))
@@ -192,14 +192,13 @@ UPDATE field1 SPACE(2) SKIP(1) ^.
           (qualified_name
             (identifier)
             (identifier))
-          (format_phrase
-            (validate_option
-              (binary_expression
-                (qualified_name
-                  (identifier)
-                  (identifier))
-                (number_literal))
-              (string_literal))))
+          (validate_option
+            (binary_expression
+              (qualified_name
+                (identifier)
+                (identifier))
+              (number_literal))
+            (string_literal)))
         (update_item
           (identifier))
         (update_item
@@ -223,14 +222,13 @@ UPDATE field1 SPACE(2) SKIP(1) ^.
               (qualified_name
                 (identifier)
                 (identifier))
-              (format_phrase
-                (validate_option
-                  (binary_expression
-                    (qualified_name
-                      (identifier)
-                      (identifier))
+              (validate_option
+                (binary_expression
+                  (qualified_name
+                    (identifier)
                     (identifier))
-                  (string_literal)))))))))
+                  (identifier))
+                (string_literal))))))))
   (repeat_statement
     (body
       (prompt_for_statement
@@ -273,7 +271,7 @@ UPDATE field1 SPACE(2) SKIP(1) ^.
     (identifier)
     (identifier)
     (no_undo)
-    (format_option
+    (format_phrase
       (string_literal))
     (extent_phrase
       (number_literal)))

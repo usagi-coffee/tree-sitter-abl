@@ -22,7 +22,7 @@ module.exports = ({ kw, tkw }) => ({
           alias($.__parameter_column_label, $.column_label),
           alias($.__parameter_decimals, $.decimals),
           alias($.__parameter_initial_option, $.initial_option),
-          alias($.__parameter_format_option, $.format_option),
+          $.format_phrase,
           alias($.__parameter_label_option, $.label_option),
           alias($.__parameter_no_undo, $.no_undo),
         ),
@@ -98,7 +98,6 @@ module.exports = ({ kw, tkw }) => ({
     seq(optional(kw("NOT")), tkw("CASE-SENSITIVE")),
   __parameter_column_label: ($) => seq(tkw("COLUMN-LABEL"), $.string_literal),
   __parameter_decimals: ($) => seq(tkw("DECIMALS"), $.number_literal),
-  __parameter_format_option: ($) => seq(kw("FORMAT"), $.string_literal),
   __parameter_label_option: ($) =>
     seq(kw("LABEL"), $.string_literal, repeat(seq(",", $.string_literal))),
   __parameter_extent_size: ($) =>

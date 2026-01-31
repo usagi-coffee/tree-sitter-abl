@@ -52,7 +52,7 @@ module.exports = ({ kw, tkw }) => ({
 
   __browse_column_option: ($) =>
     choice(
-      alias($.__browse_format_option, $.format_option),
+      $.format_phrase,
       alias($.__browse_label_option, $.label_option),
       alias($.__browse_no_labels_option, $.no_labels_option),
       alias($.__browse_width_option, $.width_option),
@@ -111,7 +111,6 @@ module.exports = ({ kw, tkw }) => ({
       // $.on_phrase, // TODO: add trigger support
     ),
 
-  __browse_format_option: ($) => seq(kw("FORMAT"), $._expression),
   __browse_label_option: ($) => seq(kw("LABEL"), $.string_literal),
   __browse_no_labels_option: ($) => tkw("NO-LABELS"),
   __browse_width_option: ($) => seq(kw("WIDTH"), $._expression),

@@ -18,14 +18,14 @@ module.exports = ({ kw, tkw }) => ({
     choice(
       seq(
         field("field", $._expression),
-        optional(alias($.__disable_format_phrase, $.format_phrase)),
+        optional($.format_phrase),
         optional(seq(kw("WHEN"), field("when", $._expression))),
       ),
       seq(
         tkw("TEXT"),
         "(",
         token(/[A-Za-z_][A-Za-z0-9_-]*/),
-        alias($.__disable_format_phrase, $.format_phrase),
+        optional($.format_phrase),
         ")",
       ),
       seq(
@@ -37,14 +37,6 @@ module.exports = ({ kw, tkw }) => ({
         repeat(alias($.__disable_constant_option, $.constant_option)),
       ),
       tkw("SKIP"),
-    ),
-  __disable_format_phrase: ($) =>
-    seq(
-      kw("FORMAT"),
-      $._escaped_string,
-      optional(
-        token.immediate(/:(?:[RLCT](?:U)?(?:[0-9]+)?|U(?:[0-9]+)?|[0-9]+)/i),
-      ),
     ),
   __disable_at_phrase: ($) => seq(kw("AT"), token(/[0-9]+(\.[0-9]+)?/)),
   __disable_constant_option: ($) =>

@@ -48,7 +48,7 @@ DELETE WIDGET new_win.
       (identifier))
     (font_option
       (number_literal))
-    (format_option
+    (format_phrase
       (string_literal))
     (initial_option
       (string_literal)))
@@ -60,7 +60,7 @@ DELETE WIDGET new_win.
       (identifier))
     (font_option
       (number_literal))
-    (format_option
+    (format_phrase
       (string_literal))
     (initial_option
       (string_literal)))

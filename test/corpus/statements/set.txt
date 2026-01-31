@@ -70,12 +70,12 @@ SET field1 FORMAT "x(10)" WHEN ok
     (set_item
       field: (identifier)
       (format_phrase
-        (format_option))
+        format: (string_literal))
       when: (identifier))
     (set_item
       field: (identifier)
       (format_phrase
-        (format_option)))
+        format: (string_literal)))
     (set_item
       constant: (string_literal)
       (at_phrase))
@@ -217,8 +217,8 @@ SET Customer EXCEPT Comments WITH FRAME fCust NO-ERROR.
     name: (identifier)
     type: (identifier)
     (no_undo)
-    (format_option
-      (string_literal))
+    (format_phrase
+      format: (string_literal))
     (extent_phrase
       (number_literal)))
   (form_statement

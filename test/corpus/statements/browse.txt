@@ -64,8 +64,8 @@ WITH DOWN 10.
     name: (identifier)
     query: (identifier)
     column: (identifier)
-    (format_option
-      (string_literal))
+    (format_phrase
+      format: (string_literal))
     column: (identifier)
     (label_option
       (string_literal))
@@ -131,8 +131,8 @@ ENABLE ALL WITH SIZE 80 BY 10 SCROLLBAR-VERTICAL SEPARATORS NO-ROW-MARKERS.
     name: (identifier)
     query: (identifier)
     column: (identifier)
-    (format_option
-      (string_literal))
+    (format_phrase
+      format: (string_literal))
     (label_option
       (string_literal))
     (no_labels_option)

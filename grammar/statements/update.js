@@ -2,10 +2,7 @@ module.exports = ({ kw, tkw }) => ({
   update_statement: ($) => seq(tkw("UPDATE"), $.__update_body, $._terminator),
 
   __update_body: ($) =>
-    choice(
-      prec.dynamic(1, $.__update_record_body),
-      $.__update_fields_body,
-    ),
+    choice(prec.dynamic(1, $.__update_record_body), $.__update_fields_body),
   __update_record_body: ($) =>
     seq(
       field("record", choice($.identifier, $.qualified_name)),
@@ -27,7 +24,7 @@ module.exports = ({ kw, tkw }) => ({
       prec.right(
         seq(
           field("field", $.__update_field_target),
-          optional(alias($.__update_format_phrase, $.format_phrase)),
+          optional($.__update_field_phrase),
           optional(seq(kw("WHEN"), field("when", $._expression))),
         ),
       ),
@@ -42,7 +39,7 @@ module.exports = ({ kw, tkw }) => ({
         repeat1(
           seq(
             field("field", choice($.identifier, $.qualified_name)),
-            optional(alias($.__update_format_phrase, $.format_phrase)),
+            optional($.__update_field_phrase),
           ),
         ),
         ")",
@@ -56,19 +53,11 @@ module.exports = ({ kw, tkw }) => ({
       "^",
     ),
   __update_field_target: ($) => choice($.identifier, $.qualified_name),
-  __update_format_phrase: ($) =>
+  __update_field_phrase: ($) =>
     repeat1(
       choice(
-        alias($.__update_format_option, $.format_option),
+        $.format_phrase,
         alias($.__update_validate_option, $.validate_option),
-      ),
-    ),
-  __update_format_option: ($) =>
-    seq(
-      kw("FORMAT"),
-      $._escaped_string,
-      optional(
-        token.immediate(/:(?:[RLCT](?:U)?(?:[0-9]+)?|U(?:[0-9]+)?|[0-9]+)/i),
       ),
     ),
   __update_validate_option: ($) =>

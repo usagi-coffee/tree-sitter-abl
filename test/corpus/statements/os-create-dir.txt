@@ -39,7 +39,7 @@ OS-CREATE-DIR VALUE("tmp") "logs".
     (identifier)
     (identifier)
     (no_undo)
-    (format_option
+    (format_phrase
       (string_literal))
     (label_option
       (string_literal)))

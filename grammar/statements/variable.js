@@ -39,7 +39,6 @@ module.exports = ({ kw, tkw }) => ({
           alias($.__variable_extent_phrase, $.extent_phrase),
           alias($.__variable_font_option, $.font_option),
           alias($.__variable_fgcolor_option, $.fgcolor_option),
-          alias($.__variable_format_option, $.format_option),
           alias($.__variable_initial_option, $.initial_option),
           alias($.__variable_label_option, $.label_option),
           alias($.__variable_mouse_pointer_option, $.mouse_pointer_option),
@@ -48,6 +47,7 @@ module.exports = ({ kw, tkw }) => ({
           alias($.__variable_pfcolor_option, $.pfcolor_option),
           alias($.__variable_view_as_phrase, $.view_as_phrase),
           $.trigger_phrase,
+          $.format_phrase,
         ),
       ),
     ),
@@ -102,7 +102,6 @@ module.exports = ({ kw, tkw }) => ({
   __variable_drop_target_option: ($) => tkw("DROP-TARGET"),
   __variable_font_option: ($) => seq(kw("FONT"), $._expression),
   __variable_fgcolor_option: ($) => seq(kw("FGCOLOR"), $._expression),
-  __variable_format_option: ($) => seq(kw("FORMAT"), $.string_literal),
   __variable_label_option: ($) => seq(kw("LABEL"), $.__variable_label_list),
   __variable_pfcolor_option: ($) => seq(kw("PFCOLOR"), $._expression),
   __variable_view_as_phrase: ($) =>

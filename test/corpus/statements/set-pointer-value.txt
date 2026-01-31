@@ -71,8 +71,7 @@ END PROCEDURE.
         (argument
           value: (number_literal))))
     (format_phrase
-      (format_option
-        (string_literal))))
+      format: (string_literal)))
   (set_size_statement
     buffer: (identifier)
     size: (number_literal))

@@ -2,6 +2,7 @@ const aggregate = require("./aggregate");
 const atPhrase = require("./at");
 const colorPhrase = require("./color");
 const editingPhrase = require("./editing");
+const formatPhrase = require("./format");
 const framePhrase = require("./frame");
 const onEndkeyPhrase = require("./on-endkey");
 const onErrorPhrase = require("./on-error");
@@ -19,6 +20,7 @@ module.exports = (ctx) => ({
   ...atPhrase(ctx),
   ...colorPhrase(ctx),
   ...editingPhrase(ctx),
+  ...formatPhrase(ctx),
   ...framePhrase(ctx),
   ...onEndkeyPhrase(ctx),
   ...onErrorPhrase(ctx),

@@ -78,20 +78,19 @@ INPUT CLOSE.
     (identifier)
     (identifier)
     (format_phrase
-      (format_option
-        (string_literal))))
+      (string_literal)))
   (input_statement)
   (variable_definition
     (identifier)
     (identifier)
     (no_undo)
-    (format_option
+    (format_phrase
       (string_literal)))
   (variable_definition
     (identifier)
     (identifier)
     (no_undo)
-    (format_option
+    (format_phrase
       (string_literal)))
   (form_statement
     (form_item

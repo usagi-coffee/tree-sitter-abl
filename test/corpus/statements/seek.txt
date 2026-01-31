@@ -44,7 +44,7 @@ SEEK STREAM-HANDLE hS TO 100.
     (identifier)
     (identifier)
     (no_undo)
-    (format_option
+    (format_phrase
       (string_literal)))
   (output_statement
     (qualified_name

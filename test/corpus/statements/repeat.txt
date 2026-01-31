@@ -100,8 +100,8 @@ END.
     name: (identifier)
     type: (identifier)
     (no_undo)
-    (format_option
-      (string_literal)))
+    (format_phrase
+      format: (string_literal)))
   (form_statement
     (form_item
       (number_literal))

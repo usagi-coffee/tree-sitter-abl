@@ -71,8 +71,8 @@ DEFINE VARIABLE cView AS CHARACTER VIEW-AS FILL-IN.
       (string_literal))
     (column_label_option
       (string_literal))
-    (format_option
-      (string_literal)))
+    (format_phrase
+      format: (string_literal)))
   (variable_definition
     name: (identifier)
     type: (identifier)
@@ -578,7 +578,7 @@ END.
     (identifier)
     (identifier)
     (no_undo)
-    (format_option
+    (format_phrase
       (string_literal))
     (label_option
       (string_literal)))
@@ -713,7 +713,7 @@ END.
     (identifier)
     (identifier)
     (no_undo)
-    (format_option
+    (format_phrase
       (string_literal))
     (extent_phrase
       (number_literal))
@@ -816,8 +816,7 @@ END.
                         (identifier)
                         (identifier)))))
                 (format_phrase
-                  (format_option
-                    (string_literal)))
+                  (string_literal))
                 (frame_phrase
                   (identifier)
                   (centered)

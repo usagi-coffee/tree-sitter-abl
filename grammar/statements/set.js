@@ -2,10 +2,7 @@ module.exports = ({ kw, tkw }) => ({
   set_statement: ($) => seq(tkw("SET"), $.__set_body, $._terminator),
 
   __set_body: ($) =>
-    choice(
-      prec.dynamic(1, $.__set_record_body),
-      $.__set_fields_body,
-    ),
+    choice(prec.dynamic(1, $.__set_record_body), $.__set_fields_body),
   __set_record_body: ($) =>
     seq(
       optional(alias($.__set_stream_phrase, $.stream_phrase)),
@@ -37,7 +34,7 @@ module.exports = ({ kw, tkw }) => ({
       prec.right(
         seq(
           field("field", $.__set_field_target),
-          optional(alias($.__set_format_phrase, $.format_phrase)),
+          optional($.__set_field_phrase),
           optional(seq(kw("WHEN"), field("when", $._expression))),
         ),
       ),
@@ -52,7 +49,7 @@ module.exports = ({ kw, tkw }) => ({
         repeat1(
           seq(
             field("field", choice($.identifier, $.qualified_name)),
-            optional(alias($.__set_format_phrase, $.format_phrase)),
+            optional($.__set_field_phrase),
           ),
         ),
         ")",
@@ -66,21 +63,11 @@ module.exports = ({ kw, tkw }) => ({
       "^",
     ),
   __set_field_target: ($) => choice($.identifier, $.qualified_name),
-  __set_format_phrase: ($) =>
+  __set_field_phrase: ($) =>
     repeat1(
-      choice(
-        alias($.__set_format_option, $.format_option),
-        alias($.__set_label_option, $.label_option),
-      ),
+      choice($.format_phrase, alias($.__set_label_option, $.label_option)),
     ),
-  __set_format_option: ($) =>
-    seq(
-      kw("FORMAT"),
-      $._escaped_string,
-      optional(
-        token.immediate(/:(?:[RLCT](?:U)?(?:[0-9]+)?|U(?:[0-9]+)?|[0-9]+)/i),
-      ),
-    ),
+
   __set_label_option: ($) => seq(kw("LABEL"), $._expression),
   __set_at_phrase: ($) => seq(kw("AT"), token(/[0-9]+(\.[0-9]+)?/)),
   __set_help_phrase: ($) => seq(kw("HELP"), $.string_literal),
