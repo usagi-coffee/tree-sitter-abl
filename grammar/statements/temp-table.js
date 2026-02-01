@@ -153,5 +153,5 @@ module.exports = ({ kw }) => ({
   __temp_table_like_name: ($) => choice($.identifier, $.qualified_name),
   __temp_table_label_list: ($) =>
     seq($.string_literal, repeat(seq(",", $.string_literal))),
-  __temp_table_field_name: ($) => choice($.qualified_name, $.identifier),
+  __temp_table_field_name: ($) => choice($.identifier, $.qualified_name),
 });

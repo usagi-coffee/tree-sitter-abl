@@ -68,6 +68,7 @@ module.exports = grammar({
       $.__temp_table_static_modifier,
       $.__variable_static_modifier,
     ],
+
     [$.__property_modifier, $.__event_abstract_modifier],
     [$.__property_modifier, $.__event_override_modifier],
 
@@ -80,7 +81,15 @@ module.exports = grammar({
     [$.__frame_option_skip],
     [$.frame_phrase],
   ],
-  inline: ($) => [],
+  inline: ($) => [
+    $.__find_record_name,
+    $.__find_index_name,
+    $.__repeat_record,
+    $.__variable_field_name,
+    $.__assign_record_name,
+    $.__temp_table_field_name,
+    $.__temp_table_like_name,
+  ],
 
   rules: (() => {
     const ctx = { PREC, kw };

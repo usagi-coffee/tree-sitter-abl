@@ -43435,11 +43435,11 @@
       "members": [
         {
           "type": "SYMBOL",
-          "name": "qualified_name"
+          "name": "identifier"
         },
         {
           "type": "SYMBOL",
-          "name": "identifier"
+          "name": "qualified_name"
         }
       ]
     },
@@ -47472,11 +47472,11 @@
       "members": [
         {
           "type": "SYMBOL",
-          "name": "qualified_name"
+          "name": "identifier"
         },
         {
           "type": "SYMBOL",
-          "name": "identifier"
+          "name": "qualified_name"
         }
       ]
     },
@@ -56360,7 +56360,15 @@
       "name": "block_comment"
     }
   ],
-  "inline": [],
+  "inline": [
+    "__find_record_name",
+    "__find_index_name",
+    "__repeat_record",
+    "__variable_field_name",
+    "__assign_record_name",
+    "__temp_table_field_name",
+    "__temp_table_like_name"
+  ],
   "supertypes": [],
   "reserved": {}
 }

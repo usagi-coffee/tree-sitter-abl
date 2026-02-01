@@ -140,7 +140,7 @@ module.exports = ({ kw }) => ({
   __variable_radio_button: ($) => seq($._expression, ",", $._expression),
   __variable_label_list: ($) =>
     seq($.string_literal, repeat(seq(",", $.string_literal))),
-  __variable_field_name: ($) => choice($.qualified_name, $.identifier),
+  __variable_field_name: ($) => choice($.identifier, $.qualified_name),
   __variable_initial_keyword: ($) =>
     choice(kw("INITIAL"), alias(token(seq(/INIT(IAL)?/i, /\s+/)), "INITIAL")),
 });
