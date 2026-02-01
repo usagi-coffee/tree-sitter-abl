@@ -925,29 +925,7 @@
           "value": "ACCUMULATE"
         },
         {
-          "type": "SYMBOL",
-          "name": "__accumulate_body"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_terminator"
-        }
-      ]
-    },
-    "__accumulate_body": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "SYMBOL",
-            "name": "__accumulate_item"
-          },
-          "named": true,
-          "value": "accumulate"
-        },
-        {
-          "type": "REPEAT",
+          "type": "REPEAT1",
           "content": {
             "type": "ALIAS",
             "content": {
@@ -957,6 +935,10 @@
             "named": true,
             "value": "accumulate"
           }
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_terminator"
         }
       ]
     },
