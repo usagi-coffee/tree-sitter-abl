@@ -3,6 +3,7 @@ module.exports = ({ kw }) => ({
 
   __update_body: ($) =>
     choice(prec.dynamic(1, $.__update_record_body), $.__update_fields_body),
+
   __update_record_body: ($) =>
     seq(
       field("record", choice($.identifier, $.qualified_name)),

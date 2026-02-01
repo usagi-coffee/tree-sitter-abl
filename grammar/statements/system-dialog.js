@@ -1,29 +1,21 @@
 module.exports = ({ kw }) => ({
   system_dialog_color_statement: ($) =>
-    seq(
-      kw("SYSTEM-DIALOG"),
-      kw("COLOR"),
-      $.__system_dialog_color_body,
-      $._terminator,
-    ),
+    seq(kw("SYSTEM-DIALOG"), $.__system_dialog_color_body, $._terminator),
 
   __system_dialog_color_body: ($) =>
     seq(
+      kw("COLOR"),
       field("color", $._expression),
       optional(seq(kw("UPDATE"), field("update", $.identifier))),
       optional(seq(kw("IN"), kw("WINDOW"), field("window", $._expression))),
     ),
 
   system_dialog_font_statement: ($) =>
-    seq(
-      kw("SYSTEM-DIALOG"),
-      kw("FONT"),
-      $.__system_dialog_font_body,
-      $._terminator,
-    ),
+    seq(kw("SYSTEM-DIALOG"), $.__system_dialog_font_body, $._terminator),
 
   __system_dialog_font_body: ($) =>
     seq(
+      kw("FONT"),
       field("font", $._expression),
       repeat(
         choice(
@@ -38,15 +30,11 @@ module.exports = ({ kw }) => ({
     ),
 
   system_dialog_get_dir_statement: ($) =>
-    seq(
-      kw("SYSTEM-DIALOG"),
-      kw("GET-DIR"),
-      $.__system_dialog_get_dir_body,
-      $._terminator,
-    ),
+    seq(kw("SYSTEM-DIALOG"), $.__system_dialog_get_dir_body, $._terminator),
 
   __system_dialog_get_dir_body: ($) =>
     seq(
+      kw("GET-DIR"),
       field("variable", $.identifier),
       repeat(
         choice(
@@ -59,15 +47,11 @@ module.exports = ({ kw }) => ({
     ),
 
   system_dialog_get_file_statement: ($) =>
-    seq(
-      kw("SYSTEM-DIALOG"),
-      kw("GET-FILE"),
-      $.__system_dialog_get_file_body,
-      $._terminator,
-    ),
+    seq(kw("SYSTEM-DIALOG"), $.__system_dialog_get_file_body, $._terminator),
 
   __system_dialog_get_file_body: ($) =>
     seq(
+      kw("GET-FILE"),
       field("variable", $.identifier),
       repeat(
         choice(
@@ -90,6 +74,12 @@ module.exports = ({ kw }) => ({
   system_dialog_printer_setup_statement: ($) =>
     seq(
       kw("SYSTEM-DIALOG"),
+      $.__system_dialog_printer_setup_body,
+      $._terminator,
+    ),
+
+  __system_dialog_printer_setup_body: ($) =>
+    seq(
       kw("PRINTER-SETUP"),
       repeat(
         choice(
@@ -100,7 +90,6 @@ module.exports = ({ kw }) => ({
           seq(kw("IN"), kw("WINDOW"), field("window", $._expression)),
         ),
       ),
-      $._terminator,
     ),
 
   __system_dialog_filters: ($) =>

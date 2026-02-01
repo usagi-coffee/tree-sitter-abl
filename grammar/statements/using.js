@@ -1,11 +1,11 @@
 module.exports = ({ kw }) => ({
-  using_statement: ($) =>
+  using_statement: ($) => seq(kw("USING"), $.__using_body, $._terminator),
+
+  __using_body: ($) =>
     seq(
-      kw("USING"),
       $.__using_type_ref,
       repeat(seq(",", $.__using_type_ref)),
       optional(alias($.__using_from_clause, $.from_clause)),
-      $._terminator,
     ),
 
   __using_type_ref: ($) =>
@@ -28,5 +28,5 @@ module.exports = ({ kw }) => ({
     ),
 
   __using_from_clause: ($) =>
-    choice(seq(kw("FROM"), kw("ASSEMBLY")), seq(kw("FROM"), kw("PROPATH"))),
+    seq(kw("FROM"), choice(kw("ASSEMBLY"), kw("PROPATH"))),
 });

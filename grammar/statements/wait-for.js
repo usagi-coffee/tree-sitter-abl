@@ -1,15 +1,11 @@
 module.exports = ({ kw }) => ({
   wait_for_statement: ($) =>
-    seq(
-      kw("WAIT-FOR"),
-      field("events", $.__wait_for_event_list),
-      kw("OF"),
-      $.__wait_for_body,
-      $._terminator,
-    ),
+    seq(kw("WAIT-FOR"), $.__wait_for_body, $._terminator),
 
   __wait_for_body: ($) =>
     seq(
+      field("events", $.__wait_for_event_list),
+      kw("OF"),
       field("widgets", $.__wait_for_widget_list),
       repeat(
         seq(
@@ -39,8 +35,10 @@ module.exports = ({ kw }) => ({
       ),
       optional(choice($.in_frame_phrase, $.in_menu_phrase)),
     ),
-  __wait_for_in_frame: ($) => seq(kw("IN"), kw("FRAME"), field("frame", $.identifier)),
-  __wait_for_in_menu: ($) => seq(kw("IN"), kw("MENU"), field("menu", $.identifier)),
+  __wait_for_in_frame: ($) =>
+    seq(kw("IN"), kw("FRAME"), field("frame", $.identifier)),
+  __wait_for_in_menu: ($) =>
+    seq(kw("IN"), kw("MENU"), field("menu", $.identifier)),
   in_frame_phrase: ($) => $.__wait_for_in_frame,
   in_menu_phrase: ($) => $.__wait_for_in_menu,
 });

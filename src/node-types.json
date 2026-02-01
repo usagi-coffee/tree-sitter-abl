@@ -47738,11 +47738,6 @@
     "fields": {}
   },
   {
-    "type": "shared_variable_scope",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "show_stats_statement",
     "named": true,
     "fields": {}
@@ -50206,11 +50201,19 @@
       }
     },
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": false,
       "types": [
         {
-          "type": "shared_variable_scope",
+          "type": "access_modifier",
+          "named": true
+        },
+        {
+          "type": "new_modifier",
+          "named": true
+        },
+        {
+          "type": "scope_modifier",
           "named": true
         }
       ]
@@ -60782,10 +60785,6 @@
   },
   {
     "type": "GET-KEY-VALUE",
-    "named": false
-  },
-  {
-    "type": "GLOBAL",
     "named": false
   },
   {

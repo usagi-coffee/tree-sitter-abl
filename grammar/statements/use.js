@@ -1,9 +1,6 @@
 module.exports = ({ kw }) => ({
-  use_statement: ($) =>
-    seq(
-      kw("USE"),
-      field("environment", $._expression),
-      optional(kw("NO-ERROR")),
-      $._terminator,
-    ),
+  use_statement: ($) => seq(kw("USE"), $.__use_body, $._terminator),
+
+  __use_body: ($) =>
+    seq(field("environment", $._expression), optional(kw("NO-ERROR"))),
 });

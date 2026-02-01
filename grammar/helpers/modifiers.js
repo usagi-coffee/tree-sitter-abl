@@ -18,7 +18,7 @@
  */
 function definitionModifiers($, kw, options = {}) {
   const {
-    access = null,
+    access = [],
     new: hasNew = true,
     scope = [],
     static: hasStatic = false,
@@ -33,7 +33,7 @@ function definitionModifiers($, kw, options = {}) {
   if (scope.length > 0) {
     const scopePatterns = [];
 
-    if (scope.includes("GLOBAL") && scope.includes("SHARED") && hasNew) {
+    if (hasNew && scope.includes("GLOBAL") && scope.includes("SHARED")) {
       scopePatterns.push(
         seq(
           alias(kw("NEW"), $.new_modifier),
@@ -43,7 +43,7 @@ function definitionModifiers($, kw, options = {}) {
       );
     }
 
-    if (scope.includes("SHARED") && hasNew) {
+    if (hasNew && scope.includes("SHARED")) {
       scopePatterns.push(
         seq(
           alias(kw("NEW"), $.new_modifier),

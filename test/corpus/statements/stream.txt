@@ -24,10 +24,12 @@ DEF NEW SHARED STREAM sGlobal.
 
 (source_code
   (stream_definition
-    (shared_variable_scope)
+    (new_modifier)
+    (scope_modifier)
     name: (identifier))
   (stream_definition
-    (shared_variable_scope)
+    (new_modifier)
+    (scope_modifier)
     name: (identifier)))
 
 ================================================================================
@@ -41,10 +43,10 @@ DEF SHARED STREAM sOrder.
 
 (source_code
   (stream_definition
-    (shared_variable_scope)
+    (scope_modifier)
     name: (identifier))
   (stream_definition
-    (shared_variable_scope)
+    (scope_modifier)
     name: (identifier)))
 
 ================================================================================
@@ -58,10 +60,14 @@ DEF NEW GLOBAL SHARED STREAM sPersistent.
 
 (source_code
   (stream_definition
-    (shared_variable_scope)
+    (new_modifier)
+    (scope_modifier)
+    (scope_modifier)
     name: (identifier))
   (stream_definition
-    (shared_variable_scope)
+    (new_modifier)
+    (scope_modifier)
+    (scope_modifier)
     name: (identifier)))
 
 ================================================================================
@@ -75,10 +81,10 @@ DEF PRIVATE STREAM classStream.
 
 (source_code
   (stream_definition
-    (shared_variable_scope)
+    (access_modifier)
     name: (identifier))
   (stream_definition
-    (shared_variable_scope)
+    (access_modifier)
     name: (identifier)))
 
 ================================================================================
@@ -98,10 +104,11 @@ DEFINE PRIVATE STREAM out.
   (stream_definition
     name: (identifier))
   (stream_definition
-    (shared_variable_scope)
+    (new_modifier)
+    (scope_modifier)
     name: (identifier))
   (stream_definition
-    (shared_variable_scope)
+    (access_modifier)
     name: (identifier)))
 
 ================================================================================
@@ -164,7 +171,8 @@ DISPLAY STREAM rpt ItemNum ItemName WITH NO-LABELS NO-BOX.
     (identifier)
     (identifier))
   (stream_definition
-    (shared_variable_scope)
+    (new_modifier)
+    (scope_modifier)
     (identifier))
   (stream_definition
     (identifier))
@@ -247,7 +255,7 @@ DISPLAY STREAM rpt ItemNum ItemName WITH NO-LABELS NO-BOX.
     (stream_phrase
       (identifier)))
   (stream_definition
-    (shared_variable_scope)
+    (scope_modifier)
     (identifier))
   (buffer_definition
     (scope_modifier)
