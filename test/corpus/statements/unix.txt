@@ -57,8 +57,10 @@ UNIX VALUE("cp usr/myfile.").
       (dos_statement
         (identifier))
       (display_statement
-        (identifier)
-        (string_literal))))
+        (field
+          (identifier))
+        (field
+          (string_literal)))))
   (variable_definition
     (identifier)
     (identifier)
@@ -68,7 +70,8 @@ UNIX VALUE("cp usr/myfile.").
   (repeat_statement
     (body
       (display_statement
-        (string_literal)
+        (field
+          (string_literal))
         (frame_phrase
           (frame_option
             (number_literal))
@@ -101,9 +104,12 @@ UNIX VALUE("cp usr/myfile.").
             (dos_statement
               (identifier))
             (display_statement
-              (string_literal)
-              (identifier)
-              (string_literal))))
+              (field
+                (string_literal))
+              (field
+                (identifier))
+              (field
+                (string_literal)))))
         (do_block
           (body
             (hide_statement

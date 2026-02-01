@@ -499,9 +499,12 @@ DEFINE INPUT PARAMETER pExtent0 AS INTEGER EXTENT 0.
     type: (identifier)
     (no_undo))
   (display_statement
-    (identifier)
-    (identifier)
-    (string_literal)
+    (field
+      field: (identifier))
+    (field
+      field: (identifier))
+    (field
+      field: (string_literal))
     (frame_phrase
       (side_labels)))
   (variable_definition
@@ -532,13 +535,19 @@ DEFINE INPUT PARAMETER pExtent0 AS INTEGER EXTENT 0.
       (argument
         name: (identifier))))
   (display_statement
-    (identifier)
-    (identifier)
-    (string_literal)
+    (field
+      field: (identifier))
+    (field
+      field: (identifier))
+    (field
+      field: (string_literal))
     (skip_phrase)
-    (identifier)
-    (identifier)
-    (string_literal)
+    (field
+      field: (identifier))
+    (field
+      field: (identifier))
+    (field
+      field: (string_literal))
     (frame_phrase
       (side_labels)))
   (parameter_definition
@@ -571,9 +580,12 @@ DEFINE INPUT PARAMETER pExtent0 AS INTEGER EXTENT 0.
             left: (identifier)
             right: (identifier))))))
   (display_statement
-    (identifier)
-    (identifier)
-    (string_literal)
+    (field
+      field: (identifier))
+    (field
+      field: (identifier))
+    (field
+      field: (string_literal))
     (frame_phrase
       (side_labels)))
   (assign_statement
@@ -597,12 +609,14 @@ DEFINE INPUT PARAMETER pExtent0 AS INTEGER EXTENT 0.
       table: (identifier))
     (body
       (display_statement
-        (qualified_name
-          left: (identifier)
-          right: (identifier))
-        (qualified_name
-          left: (identifier)
-          right: (identifier))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (frame_phrase
           (down
             (number_literal))))
@@ -624,9 +638,12 @@ DEFINE INPUT PARAMETER pExtent0 AS INTEGER EXTENT 0.
         operator: (assignment_operator)
         right: (identifier))
       (display_statement
-        (identifier)
-        (identifier)
-        (string_literal))))
+        (field
+          field: (identifier))
+        (field
+          field: (identifier))
+        (field
+          field: (string_literal)))))
   (parameter_definition
     name: (identifier)
     type: (identifier)

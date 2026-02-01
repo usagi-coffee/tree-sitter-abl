@@ -363,12 +363,14 @@ END.
               (string_literal))
             (undo_statement)))
         (display_statement
-          (qualified_name
-            (identifier)
-            (identifier))
-          (qualified_name
-            (identifier)
-            (identifier))))))
+          (field
+            (qualified_name
+              (identifier)
+              (identifier)))
+          (field
+            (qualified_name
+              (identifier)
+              (identifier)))))))
   (variable_definition
     (identifier)
     (identifier)

@@ -7,7 +7,7 @@ module.exports = ({ kw }) => ({
       choice($.__display_record_form, repeat($.__display_item)),
       optional(seq(kw("IN"), kw("WINDOW"), field("window", $._expression))),
       repeat($.frame_phrase),
-      optional(kw("NO-ERROR")),
+      optional(alias(kw("NO-ERROR"), $.no_error)),
       $._terminator,
     ),
 
@@ -23,19 +23,25 @@ module.exports = ({ kw }) => ({
       alias($.__display_skip_phrase, $.skip_phrase),
       alias($.__display_space_phrase, $.space_phrase),
       seq(
-        choice(
-          $._expression,
-          seq(
-            field("field", choice($.identifier, $.qualified_name)),
-            "(",
-            repeat1($.aggregate_phrase),
-            ")",
-          ),
-        ),
+        alias($.__display_field, $.field),
         optional($.format_phrase),
         optional(seq(kw("WHEN"), field("when", $._expression))),
         optional(
           seq("@", field("base", choice($.identifier, $.qualified_name))),
+        ),
+      ),
+    ),
+
+  __display_field: ($) =>
+    prec(
+      1,
+      choice(
+        field("field", $._expression),
+        seq(
+          field("field", choice($.identifier, $.qualified_name)),
+          "(",
+          repeat1($.aggregate_phrase),
+          ")",
         ),
       ),
     ),

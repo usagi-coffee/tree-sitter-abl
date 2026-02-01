@@ -44,7 +44,8 @@ HIDE ALL NO-PAUSE IN WINDOW w1.
     (widget_phrase
       (identifier)))
   (display_statement
-    (string_literal)
+    (field
+      (string_literal))
     (frame_phrase
       (identifier)
       (frame_option
@@ -52,7 +53,8 @@ HIDE ALL NO-PAUSE IN WINDOW w1.
       (frame_option
         (number_literal))))
   (display_statement
-    (string_literal)
+    (field
+      (string_literal))
     (frame_phrase
       (identifier)
       (frame_option

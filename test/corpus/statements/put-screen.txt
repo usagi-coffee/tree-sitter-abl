@@ -113,15 +113,20 @@ PUT SCREEN COLOR VALUE(cColor) ROW 1 COLUMN 1 "Hdr".
           (assignment_operator)
           (string_literal)))
       (display_statement
-        (qualified_name
-          (identifier)
+        (field
+          (qualified_name
+            (identifier)
+            (identifier)))
+        (field
+          (qualified_name
+            (identifier)
+            (identifier)))
+        (field
           (identifier))
-        (qualified_name
-          (identifier)
+        (field
           (identifier))
-        (identifier)
-        (identifier)
-        (string_literal)
+        (field
+          (string_literal))
         (frame_phrase
           (down
             (number_literal))))

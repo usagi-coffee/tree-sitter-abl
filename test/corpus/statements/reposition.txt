@@ -179,19 +179,23 @@ REPOSITION qCust TO ROWID rTop, rChild FOR TENANT tenantId NO-ERROR.
           (get_statement
             (identifier)))))
     (display_statement
-      (qualified_name
-        (identifier)
-        (identifier))
-      (qualified_name
-        (identifier)
-        (identifier))
+      (field
+        (qualified_name
+          (identifier)
+          (identifier)))
+      (field
+        (qualified_name
+          (identifier)
+          (identifier)))
       (skip_phrase)
-      (qualified_name
-        (identifier)
-        (identifier))
-      (qualified_name
-        (identifier)
-        (identifier))
+      (field
+        (qualified_name
+          (identifier)
+          (identifier)))
+      (field
+        (qualified_name
+          (identifier)
+          (identifier)))
       (frame_phrase
         (identifier)
         (centered)

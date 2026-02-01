@@ -24,7 +24,8 @@ END.
   (repeat_statement
     (body
       (display_statement
-        (identifier))))
+        (field
+          field: (identifier)))))
   (repeat_statement
     condition: (binary_expression
       (identifier)
@@ -40,7 +41,8 @@ END.
     condition: (identifier)
     (body
       (display_statement
-        (identifier))))
+        (field
+          field: (identifier)))))
   (repeat_statement
     label: (identifier)
     (on_stop_phrase
@@ -229,9 +231,11 @@ END.
     (on_quit_phrase)
     (body
       (display_statement
-        (identifier))))
+        (field
+          field: (identifier)))))
   (repeat_statement
     (number_literal)
     (body
       (display_statement
-        (string_literal)))))
+        (field
+          field: (string_literal))))))

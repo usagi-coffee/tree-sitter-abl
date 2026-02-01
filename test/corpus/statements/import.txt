@@ -116,9 +116,12 @@ INPUT CLOSE.
         (identifier)
         (identifier))
       (display_statement
-        (identifier)
-        (identifier)
-        (identifier))))
+        (field
+          (identifier))
+        (field
+          (identifier))
+        (field
+          (identifier)))))
   (input_statement)
   (variable_definition
     (identifier)
@@ -140,7 +143,8 @@ INPUT CLOSE.
         (unformatted_phrase
           (identifier)))
       (display_statement
-        (identifier)
+        (field
+          (identifier))
         (frame_phrase
           (down)
           (identifier)))

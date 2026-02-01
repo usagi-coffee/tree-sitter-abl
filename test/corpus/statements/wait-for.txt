@@ -146,24 +146,28 @@ WAIT-FOR PROCEDURE-COMPLETE OF hRequest.
           (available_expression
             (identifier))
           (display_statement
-            (qualified_name
-              (identifier)
-              (identifier))
-            (qualified_name
-              (identifier)
-              (identifier))
+            (field
+              (qualified_name
+                (identifier)
+                (identifier)))
+            (field
+              (qualified_name
+                (identifier)
+                (identifier)))
             (frame_phrase
               (identifier)))))))
   (find_statement
     (identifier)
     (no_lock))
   (display_statement
-    (qualified_name
-      (identifier)
-      (identifier))
-    (qualified_name
-      (identifier)
-      (identifier))
+    (field
+      (qualified_name
+        (identifier)
+        (identifier)))
+    (field
+      (qualified_name
+        (identifier)
+        (identifier)))
     (frame_phrase
       (identifier)))
   (enable_statement
@@ -288,12 +292,14 @@ WAIT-FOR PROCEDURE-COMPLETE OF hRequest.
       (available_expression
         (identifier))
       (display_statement
-        (qualified_name
-          (identifier)
-          (identifier))
-        (qualified_name
-          (identifier)
-          (identifier))
+        (field
+          (qualified_name
+            (identifier)
+            (identifier)))
+        (field
+          (qualified_name
+            (identifier)
+            (identifier)))
         (frame_phrase
           (identifier)))))
   (wait_for_statement

@@ -80,51 +80,69 @@ OPEN QUERY qCust FOR EACH Customer BY COLLATE(Customer.Name, "CASE-INSENSITIVE")
       (identifier))
     (body
       (display_statement
-        (qualified_name
-          (identifier)
-          (identifier))
-        (qualified_name
-          (identifier)
-          (identifier))
+        (field
+          (qualified_name
+            (identifier)
+            (identifier)))
+        (field
+          (qualified_name
+            (identifier)
+            (identifier)))
         (skip_phrase)
-        (qualified_name
-          (identifier)
-          (identifier))
+        (field
+          (qualified_name
+            (identifier)
+            (identifier)))
         (skip_phrase)
-        (qualified_name
-          (identifier)
-          (identifier))
-        (qualified_name
-          (identifier)
-          (identifier))
+        (field
+          (qualified_name
+            (identifier)
+            (identifier)))
+        (field
+          (qualified_name
+            (identifier)
+            (identifier)))
         (skip_phrase)
-        (qualified_name
-          (identifier)
-          (identifier))
-        (qualified_name
-          (identifier)
-          (identifier))
-        (qualified_name
-          (identifier)
-          (identifier))
+        (field
+          (qualified_name
+            (identifier)
+            (identifier)))
+        (field
+          (qualified_name
+            (identifier)
+            (identifier)))
+        (field
+          (qualified_name
+            (identifier)
+            (identifier)))
         (skip_phrase)
-        (qualified_name
-          (identifier)
-          (identifier))
-        (qualified_name
-          (identifier)
-          (identifier))
+        (field
+          (qualified_name
+            (identifier)
+            (identifier)))
+        (field
+          (qualified_name
+            (identifier)
+            (identifier)))
         (skip_phrase)
-        (qualified_name
-          (identifier)
+        (field
+          (qualified_name
+            (identifier)
+            (identifier)))
+        (field
           (identifier))
-        (identifier)
-        (identifier)
-        (identifier)
-        (number_literal)
-        (identifier)
-        (number_literal)
-        (identifier)
+        (field
+          (identifier))
+        (field
+          (identifier))
+        (field
+          (number_literal))
+        (field
+          (identifier))
+        (field
+          (number_literal))
+        (field
+          (identifier))
         (frame_phrase
           (identifier)
           (centered)

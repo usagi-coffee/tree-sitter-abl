@@ -548,18 +548,22 @@ DEFINE QUERY qExceptAll FOR Customer EXCEPT ().
   (procedure_definition
     name: (identifier)
     (display_statement
-      (qualified_name
-        left: (identifier)
-        right: (identifier))
-      (qualified_name
-        left: (identifier)
-        right: (identifier))
-      (qualified_name
-        left: (identifier)
-        right: (identifier))
-      (qualified_name
-        left: (identifier)
-        right: (identifier))
+      (field
+        field: (qualified_name
+          left: (identifier)
+          right: (identifier)))
+      (field
+        field: (qualified_name
+          left: (identifier)
+          right: (identifier)))
+      (field
+        field: (qualified_name
+          left: (identifier)
+          right: (identifier)))
+      (field
+        field: (qualified_name
+          left: (identifier)
+          right: (identifier)))
       (frame_phrase
         frame: (identifier)
         (centered)

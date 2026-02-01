@@ -139,9 +139,10 @@ SET Customer EXCEPT Comments WITH FRAME fCust NO-ERROR.
       table: (identifier))
     (body
       (display_statement
-        (qualified_name
-          left: (identifier)
-          right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier))))
       (set_statement
         (field
           field: (qualified_name
@@ -164,15 +165,18 @@ SET Customer EXCEPT Comments WITH FRAME fCust NO-ERROR.
       table: (identifier))
     (body
       (display_statement
-        (qualified_name
-          left: (identifier)
-          right: (identifier))
-        (qualified_name
-          left: (identifier)
-          right: (identifier))
-        (qualified_name
-          left: (identifier)
-          right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier))))
       (set_statement
         (field
           field: (qualified_name
@@ -274,21 +278,26 @@ SET Customer EXCEPT Comments WITH FRAME fCust NO-ERROR.
         (identifier)))
     (body
       (display_statement
-        (qualified_name
-          left: (identifier)
-          right: (identifier))
-        (qualified_name
-          left: (identifier)
-          right: (identifier))
-        (qualified_name
-          left: (identifier)
-          right: (identifier))
-        (qualified_name
-          left: (identifier)
-          right: (identifier))
-        (qualified_name
-          left: (identifier)
-          right: (identifier))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (frame_phrase
           frame: (identifier)
           (centered)))

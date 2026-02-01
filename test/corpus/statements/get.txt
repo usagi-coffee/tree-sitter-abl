@@ -61,16 +61,19 @@ END.
       record: (identifier))
     (body
       (display_statement
-        (qualified_name
-          left: (identifier)
-          right: (identifier))
-        (qualified_name
-          left: (identifier)
-          right: (identifier))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (frame_phrase
           frame: (identifier)))
       (display_statement
-        (identifier)
+        (field
+          field: (identifier))
         (frame_phrase
           frame: (identifier)
           (side_labels)))

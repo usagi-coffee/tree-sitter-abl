@@ -77,14 +77,18 @@ INPUT-OUTPUT STREAM sIO THROUGH "filter" CONVERT SOURCE "ibm850" TARGET "utf-8".
           (number_literal))))
     (body
       (display_statement
-        (qualified_name
-          (identifier)
+        (field
+          (qualified_name
+            (identifier)
+            (identifier)))
+        (field
+          (qualified_name
+            (identifier)
+            (identifier)))
+        (field
           (identifier))
-        (qualified_name
-          (identifier)
-          (identifier))
-        (identifier)
-        (string_literal))))
+        (field
+          (string_literal)))))
   (input_output_statement
     (identifier))
   (for_statement
@@ -121,14 +125,18 @@ INPUT-OUTPUT STREAM sIO THROUGH "filter" CONVERT SOURCE "ibm850" TARGET "utf-8".
         (number_literal)))
     (body
       (display_statement
-        (qualified_name
-          (identifier)
+        (field
+          (qualified_name
+            (identifier)
+            (identifier)))
+        (field
+          (qualified_name
+            (identifier)
+            (identifier)))
+        (field
           (identifier))
-        (qualified_name
-          (identifier)
-          (identifier))
-        (identifier)
-        (string_literal))))
+        (field
+          (string_literal)))))
   (input_output_statement
     (identifier))
   (input_output_statement

@@ -43,12 +43,14 @@ PAUSE BEFORE-HIDE NO-MESSAGE.
         (number_literal)))
     (body
       (display_statement
-        (qualified_name
-          (identifier)
-          (identifier))
-        (qualified_name
-          (identifier)
-          (identifier)))))
+        (field
+          (qualified_name
+            (identifier)
+            (identifier)))
+        (field
+          (qualified_name
+            (identifier)
+            (identifier))))))
   (pause_statement
     (number_literal)
     (string_literal))

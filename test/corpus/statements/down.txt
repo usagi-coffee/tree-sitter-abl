@@ -62,15 +62,19 @@ END.
                 (identifier)
                 (identifier))))))
       (display_statement
-        (qualified_name
-          (identifier)
-          (identifier))
-        (qualified_name
-          (identifier)
-          (identifier))
-        (qualified_name
-          (identifier)
-          (identifier))
-        (qualified_name
-          (identifier)
-          (identifier))))))
+        (field
+          (qualified_name
+            (identifier)
+            (identifier)))
+        (field
+          (qualified_name
+            (identifier)
+            (identifier)))
+        (field
+          (qualified_name
+            (identifier)
+            (identifier)))
+        (field
+          (qualified_name
+            (identifier)
+            (identifier)))))))

@@ -75,8 +75,10 @@ INPUT CLOSE.
       (no_box)
       (no_labels)))
   (display_statement
-    (identifier)
-    (identifier)
+    (field
+      (identifier))
+    (field
+      (identifier))
     (format_phrase
       (string_literal)))
   (input_statement)
@@ -124,9 +126,12 @@ INPUT CLOSE.
           (no_labels)
           (identifier)))
       (display_statement
-        (identifier)
-        (identifier)
-        (identifier)
+        (field
+          (identifier))
+        (field
+          (identifier))
+        (field
+          (identifier))
         (frame_phrase
           (identifier)))
       (down_statement

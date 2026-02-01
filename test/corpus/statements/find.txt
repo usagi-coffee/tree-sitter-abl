@@ -296,12 +296,14 @@ END.
             left: (identifier)
             right: (identifier))))
       (display_statement
-        (qualified_name
-          left: (identifier)
-          right: (identifier))
-        (qualified_name
-          left: (identifier)
-          right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier))))
       (repeat_statement
         (body
           (find_statement
@@ -323,17 +325,20 @@ END.
                   left: (identifier)
                   right: (identifier)))))
           (display_statement
-            (qualified_name
-              left: (identifier)
-              right: (identifier))
-            (qualified_name
-              left: (identifier)
-              right: (identifier))
-            field: (qualified_name
-              left: (identifier)
-              right: (identifier))
-            (aggregate_phrase
-              operation: (aggregate_operation)))))))
+            (field
+              field: (qualified_name
+                left: (identifier)
+                right: (identifier)))
+            (field
+              field: (qualified_name
+                left: (identifier)
+                right: (identifier)))
+            (field
+              field: (qualified_name
+                left: (identifier)
+                right: (identifier))
+              (aggregate_phrase
+                operation: (aggregate_operation))))))))
   (variable_definition
     name: (identifier)
     (no_undo)
@@ -356,9 +361,10 @@ END.
       (repeat_statement
         (body
           (display_statement
-            (qualified_name
-              left: (identifier)
-              right: (identifier)))
+            (field
+              field: (qualified_name
+                left: (identifier)
+                right: (identifier))))
           (find_statement
             table: (identifier)
             (use_index

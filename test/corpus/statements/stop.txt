@@ -46,12 +46,14 @@ END.
       (identifier))
     (body
       (display_statement
-        (qualified_name
-          (identifier)
-          (identifier))
-        (qualified_name
-          (identifier)
-          (identifier)))
+        (field
+          (qualified_name
+            (identifier)
+            (identifier)))
+        (field
+          (qualified_name
+            (identifier)
+            (identifier))))
       (update_statement
         (qualified_name
           (identifier)
@@ -79,12 +81,14 @@ END.
     (on_stop_phrase)
     (body
       (display_statement
-        (qualified_name
-          (identifier)
-          (identifier))
-        (qualified_name
-          (identifier)
-          (identifier)))
+        (field
+          (qualified_name
+            (identifier)
+            (identifier)))
+        (field
+          (qualified_name
+            (identifier)
+            (identifier))))
       (update_statement
         (qualified_name
           (identifier)

@@ -211,18 +211,22 @@ DISPLAY STREAM rpt ItemNum ItemName WITH NO-LABELS NO-BOX.
             (display_statement
               (stream_phrase
                 (identifier))
-              (qualified_name
-                (identifier)
-                (identifier))
-              (qualified_name
-                (identifier)
-                (identifier))
-              (qualified_name
-                (identifier)
-                (identifier))
-              (qualified_name
-                (identifier)
-                (identifier))
+              (field
+                (qualified_name
+                  (identifier)
+                  (identifier)))
+              (field
+                (qualified_name
+                  (identifier)
+                  (identifier)))
+              (field
+                (qualified_name
+                  (identifier)
+                  (identifier)))
+              (field
+                (qualified_name
+                  (identifier)
+                  (identifier)))
               (frame_phrase
                 (identifier)
                 (down)))
@@ -239,7 +243,8 @@ DISPLAY STREAM rpt ItemNum ItemName WITH NO-LABELS NO-BOX.
       (identifier))
     (skip_phrase
       (number_literal))
-    (identifier)
+    (field
+      (identifier))
     (frame_phrase
       (identifier)
       (side_labels)))
@@ -264,8 +269,10 @@ DISPLAY STREAM rpt ItemNum ItemName WITH NO-LABELS NO-BOX.
   (display_statement
     (stream_phrase
       (identifier))
-    (identifier)
-    (identifier)
+    (field
+      (identifier))
+    (field
+      (identifier))
     (frame_phrase
       (no_labels)
       (no_box))))

@@ -583,28 +583,34 @@ WAIT-FOR CHOOSE OF MENU-ITEM quititem.
     (identifier)
     (identifier)
     (display_statement
-      (qualified_name
-        (identifier)
-        (identifier))))
+      (field
+        (qualified_name
+          (identifier)
+          (identifier)))))
   (on_statement
     (identifier)
     (identifier)
     (display_statement
-      (qualified_name
-        (identifier)
-        (identifier))
-      (qualified_name
-        (identifier)
-        (identifier))
-      (qualified_name
-        (identifier)
-        (identifier))
-      (qualified_name
-        (identifier)
-        (identifier))
-      (qualified_name
-        (identifier)
-        (identifier))
+      (field
+        (qualified_name
+          (identifier)
+          (identifier)))
+      (field
+        (qualified_name
+          (identifier)
+          (identifier)))
+      (field
+        (qualified_name
+          (identifier)
+          (identifier)))
+      (field
+        (qualified_name
+          (identifier)
+          (identifier)))
+      (field
+        (qualified_name
+          (identifier)
+          (identifier)))
       (frame_phrase
         (identifier)
         (no_labels)
@@ -654,9 +660,10 @@ WAIT-FOR CHOOSE OF MENU-ITEM quititem.
           (available_expression
             (identifier))
           (display_statement
-            (qualified_name
-              (identifier)
-              (identifier))
+            (field
+              (qualified_name
+                (identifier)
+                (identifier)))
             (frame_phrase
               (identifier)))))))
   (on_statement
@@ -674,19 +681,23 @@ WAIT-FOR CHOOSE OF MENU-ITEM quititem.
           (available_expression
             (identifier))
           (display_statement
-            (qualified_name
-              (identifier)
-              (identifier))
+            (field
+              (qualified_name
+                (identifier)
+                (identifier)))
             (frame_phrase
               (identifier)))))))
   (find_statement
     (identifier))
   (display_statement
-    (qualified_name
-      (identifier)
+    (field
+      (qualified_name
+        (identifier)
+        (identifier)))
+    (field
       (identifier))
-    (identifier)
-    (string_literal)
+    (field
+      (string_literal))
     (frame_phrase
       (identifier)))
   (assign_statement

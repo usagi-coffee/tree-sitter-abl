@@ -225,21 +225,26 @@ PROMPT-FOR STREAM-HANDLE hS field1 field2 IN WINDOW wMain WITH FRAME fMain.
         (identifier)))
     (body
       (display_statement
-        (qualified_name
-          left: (identifier)
-          right: (identifier))
-        (qualified_name
-          left: (identifier)
-          right: (identifier))
-        (qualified_name
-          left: (identifier)
-          right: (identifier))
-        (qualified_name
-          left: (identifier)
-          right: (identifier))
-        (qualified_name
-          left: (identifier)
-          right: (identifier))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (frame_phrase
           frame: (identifier)
           (centered)))
@@ -284,15 +289,18 @@ PROMPT-FOR STREAM-HANDLE hS field1 field2 IN WINDOW wMain WITH FRAME fMain.
               (string_literal))
             (undo_statement))))
       (display_statement
-        (qualified_name
-          left: (identifier)
-          right: (identifier))
-        (qualified_name
-          left: (identifier)
-          right: (identifier))
-        (qualified_name
-          left: (identifier)
-          right: (identifier)))))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier))))))
   (repeat_statement
     (body
       (prompt_for_statement
@@ -315,15 +323,18 @@ PROMPT-FOR STREAM-HANDLE hS field1 field2 IN WINDOW wMain WITH FRAME fMain.
             left: (identifier)
             right: (identifier))))
       (display_statement
-        (qualified_name
-          left: (identifier)
-          right: (identifier))
-        (qualified_name
-          left: (identifier)
-          right: (identifier))
-        (qualified_name
-          left: (identifier)
-          right: (identifier))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (frame_phrase
           (down
             (number_literal))

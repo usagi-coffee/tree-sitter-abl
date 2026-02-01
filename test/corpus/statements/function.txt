@@ -636,26 +636,32 @@ END.
         (identifier)))
     (forward_phrase))
   (display_statement
-    (string_literal)
-    (function_call
-      (identifier)
-      (arguments
-        (argument
-          (number_literal)))))
+    (field
+      (string_literal))
+    (field
+      (function_call
+        (identifier)
+        (arguments
+          (argument
+            (number_literal))))))
   (display_statement
-    (string_literal)
-    (function_call
-      (identifier)
-      (arguments
-        (argument
-          (number_literal)))))
+    (field
+      (string_literal))
+    (field
+      (function_call
+        (identifier)
+        (arguments
+          (argument
+            (number_literal))))))
   (display_statement
-    (string_literal)
-    (function_call
-      (identifier)
-      (arguments
-        (argument
-          (number_literal)))))
+    (field
+      (string_literal))
+    (field
+      (function_call
+        (identifier)
+        (arguments
+          (argument
+            (number_literal))))))
   (function_definition
     (identifier)
     (identifier)
@@ -686,26 +692,32 @@ END.
     (persistent_option
       (identifier)))
   (display_statement
-    (string_literal)
-    (function_call
-      (identifier)
-      (arguments
-        (argument
-          (number_literal))))
+    (field
+      (string_literal))
+    (field
+      (function_call
+        (identifier)
+        (arguments
+          (argument
+            (number_literal)))))
     (skip_phrase)
-    (string_literal)
-    (function_call
-      (identifier)
-      (arguments
-        (argument
-          (number_literal))))
+    (field
+      (string_literal))
+    (field
+      (function_call
+        (identifier)
+        (arguments
+          (argument
+            (number_literal)))))
     (skip_phrase)
-    (string_literal)
-    (function_call
-      (identifier)
-      (arguments
-        (argument
-          (number_literal))))
+    (field
+      (string_literal))
+    (field
+      (function_call
+        (identifier)
+        (arguments
+          (argument
+            (number_literal)))))
     (skip_phrase))
   (delete_procedure_statement
     (identifier))

@@ -63,13 +63,14 @@ END PROCEDURE.
         (argument
           name: (number_literal)))))
   (display_statement
-    (function_call
-      function: (identifier)
-      (arguments
-        (argument
-          name: (identifier))
-        (argument
-          name: (number_literal))))
+    (field
+      field: (function_call
+        function: (identifier)
+        (arguments
+          (argument
+            name: (identifier))
+          (argument
+            name: (number_literal)))))
     (format_phrase
       format: (string_literal)))
   (set_size_statement

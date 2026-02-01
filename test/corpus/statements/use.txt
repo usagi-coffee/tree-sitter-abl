@@ -75,7 +75,8 @@ DELETE WIDGET new_win.
   (use_statement
     (string_literal))
   (display_statement
-    (identifier)
+    (field
+      (identifier))
     (frame_phrase
       (no_labels))
     (frame_phrase
@@ -90,7 +91,8 @@ DELETE WIDGET new_win.
     (assignment_operator)
     (identifier))
   (display_statement
-    (identifier)
+    (field
+      (identifier))
     (identifier)
     (frame_phrase
       (no_labels))

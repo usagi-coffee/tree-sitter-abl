@@ -77,5 +77,6 @@ DISPLAY {&VAR1}.
         name: (identifier)
         value: (identifier))))
   (display_statement
-    (constant
-      (identifier))))
+    (field
+      field: (constant
+        (identifier)))))

@@ -81,12 +81,14 @@ VALIDATE sports.Item NO-ERROR.
             (validate_statement
               (identifier))))
         (display_statement
-          (qualified_name
-            (identifier)
-            (identifier))
-          (qualified_name
-            (identifier)
-            (identifier))))))
+          (field
+            (qualified_name
+              (identifier)
+              (identifier)))
+          (field
+            (qualified_name
+              (identifier)
+              (identifier)))))))
   (validate_statement
     (qualified_name
       (identifier)

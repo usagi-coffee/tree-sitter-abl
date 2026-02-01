@@ -737,25 +737,30 @@ WAIT-FOR WINDOW-CLOSE OF FRAME cust-fr.
       (identifier))
     (body
       (display_statement
-        (qualified_name
-          (identifier)
-          (identifier))
-        (qualified_name
-          (identifier)
-          (identifier))
-        (qualified_name
-          (identifier)
-          (identifier))
-        (qualified_name
-          (identifier)
-          (identifier))
-        (binary_expression
-          (qualified_name
-            (identifier)
-            (identifier))
+        (field
           (qualified_name
             (identifier)
             (identifier)))
+        (field
+          (qualified_name
+            (identifier)
+            (identifier)))
+        (field
+          (qualified_name
+            (identifier)
+            (identifier)))
+        (field
+          (qualified_name
+            (identifier)
+            (identifier)))
+        (field
+          (binary_expression
+            (qualified_name
+              (identifier)
+              (identifier))
+            (qualified_name
+              (identifier)
+              (identifier))))
         (identifier))))
   (button_definition
     (identifier)
@@ -856,37 +861,43 @@ WAIT-FOR WINDOW-CLOSE OF FRAME cust-fr.
           (number_literal))))
     (body
       (display_statement
-        (qualified_name
-          (identifier)
-          (identifier))
-        (qualified_name
-          (identifier)
-          (identifier))
-        (qualified_name
-          (identifier)
-          (identifier))
-        (qualified_name
-          (identifier)
-          (identifier))
-        (binary_expression
-          (binary_expression
-            (binary_expression
-              (binary_expression
-                (qualified_name
-                  (identifier)
-                  (identifier))
-                (string_literal))
-              (qualified_name
-                (identifier)
-                (identifier)))
-            (string_literal))
+        (field
           (qualified_name
             (identifier)
             (identifier)))
+        (field
+          (qualified_name
+            (identifier)
+            (identifier)))
+        (field
+          (qualified_name
+            (identifier)
+            (identifier)))
+        (field
+          (qualified_name
+            (identifier)
+            (identifier)))
+        (field
+          (binary_expression
+            (binary_expression
+              (binary_expression
+                (binary_expression
+                  (qualified_name
+                    (identifier)
+                    (identifier))
+                  (string_literal))
+                (qualified_name
+                  (identifier)
+                  (identifier)))
+              (string_literal))
+            (qualified_name
+              (identifier)
+              (identifier))))
         (identifier)
-        (qualified_name
-          (identifier)
-          (identifier))
+        (field
+          (qualified_name
+            (identifier)
+            (identifier)))
         (frame_phrase
           (identifier)))))
   (query_definition

@@ -536,8 +536,10 @@ UPDATE animate WITH FRAME y.
     (image_phrase
       (string_literal)))
   (display_statement
-    (identifier)
-    (identifier)
+    (field
+      (identifier))
+    (field
+      (identifier))
     (frame_phrase
       (identifier)
       (string_literal)))

@@ -105,27 +105,34 @@ OUTPUT TO TERMINAL.
       (no_lock))
     (body
       (display_statement
-        (qualified_name
-          (identifier)
-          (identifier))
-        (qualified_name
-          (identifier)
-          (identifier))
-        (qualified_name
-          (identifier)
-          (identifier))
-        (qualified_name
-          (identifier)
-          (identifier))
-        (qualified_name
-          (identifier)
-          (identifier))
-        (qualified_name
-          (identifier)
-          (identifier))
-        (qualified_name
-          (identifier)
-          (identifier))
+        (field
+          (qualified_name
+            (identifier)
+            (identifier)))
+        (field
+          (qualified_name
+            (identifier)
+            (identifier)))
+        (field
+          (qualified_name
+            (identifier)
+            (identifier)))
+        (field
+          (qualified_name
+            (identifier)
+            (identifier)))
+        (field
+          (qualified_name
+            (identifier)
+            (identifier)))
+        (field
+          (qualified_name
+            (identifier)
+            (identifier)))
+        (field
+          (qualified_name
+            (identifier)
+            (identifier)))
         (skip_phrase
           (number_literal))
         (frame_phrase
@@ -133,7 +140,8 @@ OUTPUT TO TERMINAL.
           (side_labels)))))
   (output_statement)
   (display_statement
-    (string_literal))
+    (field
+      (string_literal)))
   (variable_definition
     (identifier)
     (identifier)
@@ -197,21 +205,30 @@ OUTPUT TO TERMINAL.
         (widget_phrase
           (identifier)))
       (display_statement
-        (qualified_name
-          (identifier)
+        (field
+          (qualified_name
+            (identifier)
+            (identifier)))
+        (field
           (identifier))
-        (identifier)
-        (string_literal)
-        (qualified_name
-          (identifier)
+        (field
+          (string_literal))
+        (field
+          (qualified_name
+            (identifier)
+            (identifier)))
+        (field
           (identifier))
-        (identifier)
-        (string_literal)
-        (qualified_name
-          (identifier)
+        (field
+          (string_literal))
+        (field
+          (qualified_name
+            (identifier)
+            (identifier)))
+        (field
           (identifier))
-        (identifier)
-        (string_literal)
+        (field
+          (string_literal))
         (frame_phrase
           (centered)))
       (if_statement

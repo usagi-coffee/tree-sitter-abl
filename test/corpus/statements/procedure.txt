@@ -21,7 +21,8 @@ PROCEDURE forwardProc.
       name: (identifier)
       type: (identifier))
     (display_statement
-      (identifier)))
+      (field
+        field: (identifier))))
   (procedure_definition
     name: (identifier))
   (procedure_forward_definition
@@ -89,9 +90,10 @@ END PROCEDURE.
           (identifier)))
       (body
         (display_statement
-          (qualified_name
-            left: (identifier)
-            right: (identifier)))))))
+          (field
+            field: (qualified_name
+              left: (identifier)
+              right: (identifier))))))))
 
 ================================================================================
 PROCEDURE - DATASET-HANDLE parameter
@@ -519,7 +521,8 @@ END PROCEDURE.
           (argument
             name: (identifier))))
       (display_statement
-        (identifier))))
+        (field
+          field: (identifier)))))
   (procedure_definition
     name: (identifier)
     (parameter_definition

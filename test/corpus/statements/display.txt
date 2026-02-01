@@ -10,11 +10,14 @@ DISPLAY 123.
 
 (source_code
   (display_statement
-    (identifier))
+    (field
+      (identifier)))
   (display_statement
-    (string_literal))
+    (field
+      (string_literal)))
   (display_statement
-    (number_literal)))
+    (field
+      (number_literal))))
 
 ================================================================================
 DISPLAY multiple items
@@ -27,16 +30,21 @@ DISPLAY Customer.Name Customer.Balance.
 
 (source_code
   (display_statement
-    (identifier)
-    (identifier)
-    (identifier))
+    (field
+      field: (identifier))
+    (field
+      field: (identifier))
+    (field
+      field: (identifier)))
   (display_statement
-    (qualified_name
-      left: (identifier)
-      right: (identifier))
-    (qualified_name
-      left: (identifier)
-      right: (identifier))))
+    (field
+      field: (qualified_name
+        left: (identifier)
+        right: (identifier)))
+    (field
+      field: (qualified_name
+        left: (identifier)
+        right: (identifier)))))
 
 ================================================================================
 DISPLAY with aggregates
@@ -48,11 +56,12 @@ DISPLAY Customer.Balance (TOTAL).
 
 (source_code
   (display_statement
-    field: (qualified_name
-      left: (identifier)
-      right: (identifier))
-    (aggregate_phrase
-      operation: (aggregate_operation))))
+    (field
+      field: (qualified_name
+        left: (identifier)
+        right: (identifier))
+      (aggregate_phrase
+        operation: (aggregate_operation)))))
 
 ================================================================================
 DISPLAY abbreviated
@@ -65,11 +74,13 @@ disp Customer.Name.
 
 (source_code
   (display_statement
-    (identifier))
+    (field
+      field: (identifier)))
   (display_statement
-    (qualified_name
-      left: (identifier)
-      right: (identifier))))
+    (field
+      field: (qualified_name
+        left: (identifier)
+        right: (identifier)))))
 
 ================================================================================
 DISPLAY with expressions
@@ -83,27 +94,32 @@ DISPLAY Item.Qty * Item.Price LABEL "Extended".
 
 (source_code
   (display_statement
-    (binary_expression
-      (identifier)
-      (identifier)))
+    (field
+      field: (binary_expression
+        (identifier)
+        (identifier))))
   (display_statement
-    (binary_expression
-      (string_literal)
-      (function_call
-        function: (identifier)
-        (arguments
-          (argument
-            name: (identifier))))))
+    (field
+      field: (binary_expression
+        (string_literal)
+        (function_call
+          function: (identifier)
+          (arguments
+            (argument
+              name: (identifier)))))))
   (display_statement
-    (binary_expression
-      (qualified_name
-        left: (identifier)
-        right: (identifier))
-      (qualified_name
-        left: (identifier)
-        right: (identifier)))
-    (identifier)
-    (string_literal)))
+    (field
+      field: (binary_expression
+        (qualified_name
+          left: (identifier)
+          right: (identifier))
+        (qualified_name
+          left: (identifier)
+          right: (identifier))))
+    (field
+      field: (identifier))
+    (field
+      field: (string_literal))))
 
 ================================================================================
 DISPLAY with function calls
@@ -117,29 +133,32 @@ DISPLAY SUBSTRING(str, 1, 5).
 
 (source_code
   (display_statement
-    (function_call
-      function: (identifier)
-      (arguments
-        (argument
-          name: (identifier)))))
+    (field
+      field: (function_call
+        function: (identifier)
+        (arguments
+          (argument
+            name: (identifier))))))
   (display_statement
-    (function_call
-      function: (identifier)
-      (arguments
-        (argument
-          name: (qualified_name
-            left: (identifier)
-            right: (identifier))))))
+    (field
+      field: (function_call
+        function: (identifier)
+        (arguments
+          (argument
+            name: (qualified_name
+              left: (identifier)
+              right: (identifier)))))))
   (display_statement
-    (function_call
-      function: (identifier)
-      (arguments
-        (argument
-          name: (identifier))
-        (argument
-          name: (number_literal))
-        (argument
-          name: (number_literal))))))
+    (field
+      field: (function_call
+        function: (identifier)
+        (arguments
+          (argument
+            name: (identifier))
+          (argument
+            name: (number_literal))
+          (argument
+            name: (number_literal)))))))
 
 ================================================================================
 DISPLAY record with EXCEPT and frame phrase
@@ -155,7 +174,8 @@ DISPLAY Customer EXCEPT Comments PrivateNotes WITH FRAME fCust NO-ERROR.
     except: (identifier)
     except: (identifier)
     (frame_phrase
-      frame: (identifier))))
+      frame: (identifier))
+    (no_error)))
 
 ================================================================================
 DISPLAY with format, WHEN, and @ base-field
@@ -167,7 +187,8 @@ DISPLAY orderTotal FORMAT "->>>,>>9.99" WHEN showTotal @ baseTotal.
 
 (source_code
   (display_statement
-    (identifier)
+    (field
+      field: (identifier))
     (format_phrase
       format: (string_literal))
     when: (identifier)
@@ -226,15 +247,18 @@ DISPLAY SPACE(2) Customer.Name SKIP(1) Customer.City.
           (identifier))))
     (body
       (display_statement
-        (qualified_name
-          (identifier)
-          (identifier))
-        (qualified_name
-          (identifier)
-          (identifier))
-        (qualified_name
-          (identifier)
-          (identifier)))
+        (field
+          (qualified_name
+            (identifier)
+            (identifier)))
+        (field
+          (qualified_name
+            (identifier)
+            (identifier)))
+        (field
+          (qualified_name
+            (identifier)
+            (identifier))))
       (for_statement
         (record
           (identifier)
@@ -243,18 +267,22 @@ DISPLAY SPACE(2) Customer.Name SKIP(1) Customer.City.
           (no_lock))
         (body
           (display_statement
-            (qualified_name
-              (identifier)
-              (identifier))
-            (qualified_name
-              (identifier)
-              (identifier))
-            (qualified_name
-              (identifier)
-              (identifier))
-            (qualified_name
-              (identifier)
-              (identifier)))
+            (field
+              (qualified_name
+                (identifier)
+                (identifier)))
+            (field
+              (qualified_name
+                (identifier)
+                (identifier)))
+            (field
+              (qualified_name
+                (identifier)
+                (identifier)))
+            (field
+              (qualified_name
+                (identifier)
+                (identifier))))
           (for_statement
             (record
               (identifier)
@@ -268,18 +296,22 @@ DISPLAY SPACE(2) Customer.Name SKIP(1) Customer.City.
               (no_lock))
             (body
               (display_statement
-                (qualified_name
-                  (identifier)
-                  (identifier))
-                (qualified_name
-                  (identifier)
-                  (identifier))
-                (qualified_name
-                  (identifier)
-                  (identifier))
-                (qualified_name
-                  (identifier)
-                  (identifier)))))))))
+                (field
+                  (qualified_name
+                    (identifier)
+                    (identifier)))
+                (field
+                  (qualified_name
+                    (identifier)
+                    (identifier)))
+                (field
+                  (qualified_name
+                    (identifier)
+                    (identifier)))
+                (field
+                  (qualified_name
+                    (identifier)
+                    (identifier))))))))))
   (for_statement
     (record
       (identifier)
@@ -291,18 +323,22 @@ DISPLAY SPACE(2) Customer.Name SKIP(1) Customer.City.
       (no_lock))
     (body
       (display_statement
-        (qualified_name
-          (identifier)
-          (identifier))
-        (qualified_name
-          (identifier)
-          (identifier))
-        (qualified_name
-          (identifier)
-          (identifier))
-        (qualified_name
-          (identifier)
-          (identifier)))
+        (field
+          (qualified_name
+            (identifier)
+            (identifier)))
+        (field
+          (qualified_name
+            (identifier)
+            (identifier)))
+        (field
+          (qualified_name
+            (identifier)
+            (identifier)))
+        (field
+          (qualified_name
+            (identifier)
+            (identifier))))
       (for_statement
         (record
           (identifier)
@@ -316,63 +352,75 @@ DISPLAY SPACE(2) Customer.Name SKIP(1) Customer.City.
           (no_lock))
         (body
           (display_statement
-            (qualified_name
-              (identifier)
-              (identifier))
-            (qualified_name
-              (identifier)
-              (identifier))
-            (qualified_name
-              (identifier)
-              (identifier))
-            (qualified_name
-              (identifier)
-              (identifier))
-            (binary_expression
+            (field
               (qualified_name
                 (identifier)
-                (identifier))
-              (function_call
+                (identifier)))
+            (field
+              (qualified_name
+                (identifier)
+                (identifier)))
+            (field
+              (qualified_name
+                (identifier)
+                (identifier)))
+            (field
+              (qualified_name
+                (identifier)
+                (identifier)))
+            (field
+              (binary_expression
                 (qualified_name
                   (identifier)
                   (identifier))
-                (arguments
-                  (argument
-                    (identifier)))))
-            (identifier)
-            (string_literal))))))
+                (function_call
+                  (qualified_name
+                    (identifier)
+                    (identifier))
+                  (arguments
+                    (argument
+                      (identifier))))))
+            (field
+              (identifier))
+            (field
+              (string_literal)))))))
   (for_statement
     (record
       (identifier)
       (no_lock))
     (body
       (display_statement
-        (qualified_name
-          (identifier)
-          (identifier))
-        (skip_phrase)
-        (qualified_name
-          (identifier)
-          (identifier))
-        (skip_phrase)
-        (qualified_name
-          (identifier)
-          (identifier))
-        (skip_phrase)
-        (binary_expression
-          (binary_expression
-            (qualified_name
-              (identifier)
-              (identifier))
-            (string_literal))
+        (field
           (qualified_name
             (identifier)
             (identifier)))
+        (skip_phrase)
+        (field
+          (qualified_name
+            (identifier)
+            (identifier)))
+        (skip_phrase)
+        (field
+          (qualified_name
+            (identifier)
+            (identifier)))
+        (skip_phrase)
+        (field
+          (binary_expression
+            (binary_expression
+              (qualified_name
+                (identifier)
+                (identifier))
+              (string_literal))
+            (qualified_name
+              (identifier)
+              (identifier))))
         (format_phrase
           (string_literal))
-        (qualified_name
-          (identifier)
-          (identifier))
+        (field
+          (qualified_name
+            (identifier)
+            (identifier)))
         (binary_expression
           (qualified_name
             (identifier)
@@ -399,36 +447,43 @@ DISPLAY SPACE(2) Customer.Name SKIP(1) Customer.City.
     (frame_phrase
       (identifier)))
   (display_statement
-    (qualified_name
-      (identifier)
-      (identifier))
+    (field
+      (qualified_name
+        (identifier)
+        (identifier)))
     (identifier)
     (frame_phrase
-      (identifier)))
+      (identifier))
+    (no_error))
   (display_statement
     (stream_phrase
       (identifier))
-    (qualified_name
-      (identifier)
-      (identifier)))
+    (field
+      (qualified_name
+        (identifier)
+        (identifier))))
   (display_statement
     (stream_phrase
       (identifier))
-    (qualified_name
-      (identifier)
-      (identifier)))
+    (field
+      (qualified_name
+        (identifier)
+        (identifier))))
   (display_statement
-    (qualified_name
-      (identifier)
-      (identifier)))
+    (field
+      (qualified_name
+        (identifier)
+        (identifier))))
   (display_statement
     (space_phrase
       (number_literal))
-    (qualified_name
-      (identifier)
-      (identifier))
+    (field
+      (qualified_name
+        (identifier)
+        (identifier)))
     (skip_phrase
       (number_literal))
-    (qualified_name
-      (identifier)
-      (identifier))))
+    (field
+      (qualified_name
+        (identifier)
+        (identifier)))))

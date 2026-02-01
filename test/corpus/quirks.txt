@@ -153,10 +153,12 @@ END.
       (no_lock))
     (body
       (display_statement
-        (qualified_name
-          left: (identifier)
-          right: (identifier)))))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier))))))
   (repeat_statement
     (body
       (display_statement
-        (string_literal)))))
+        (field
+          field: (string_literal))))))

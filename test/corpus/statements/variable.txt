@@ -553,18 +553,22 @@ END.
             (identifier)))
         (body
           (display_statement
-            (qualified_name
-              (identifier)
-              (identifier))
-            (qualified_name
-              (identifier)
-              (identifier))
-            (qualified_name
-              (identifier)
-              (identifier))
-            (qualified_name
-              (identifier)
-              (identifier)))
+            (field
+              (qualified_name
+                (identifier)
+                (identifier)))
+            (field
+              (qualified_name
+                (identifier)
+                (identifier)))
+            (field
+              (qualified_name
+                (identifier)
+                (identifier)))
+            (field
+              (qualified_name
+                (identifier)
+                (identifier))))
           (if_statement
             (identifier)
             (delete_statement
@@ -761,15 +765,18 @@ END.
         (update_item
           (string_literal)))
       (display_statement
-        (array_access
-          (identifier)
-          (function_call
+        (field
+          (array_access
             (identifier)
-            (arguments
-              (argument
-                (identifier)))))
-        (identifier)
-        (string_literal))))
+            (function_call
+              (identifier)
+              (arguments
+                (argument
+                  (identifier))))))
+        (field
+          (identifier))
+        (field
+          (string_literal)))))
   (variable_definition
     (identifier)
     (identifier)
@@ -815,15 +822,16 @@ END.
                     (identifier)))))
             (body
               (display_statement
-                (function_call
-                  (identifier)
-                  (arguments
-                    (argument
-                      (identifier))
-                    (argument
-                      (object_access
-                        (identifier)
-                        (identifier)))))
+                (field
+                  (function_call
+                    (identifier)
+                    (arguments
+                      (argument
+                        (identifier))
+                      (argument
+                        (object_access
+                          (identifier)
+                          (identifier))))))
                 (format_phrase
                   (string_literal))
                 (frame_phrase
@@ -865,12 +873,14 @@ END.
       (identifier))
     (body
       (display_statement
-        (qualified_name
-          (identifier)
-          (identifier))
-        (qualified_name
-          (identifier)
-          (identifier)))
+        (field
+          (qualified_name
+            (identifier)
+            (identifier)))
+        (field
+          (qualified_name
+            (identifier)
+            (identifier))))
       (set_statement
         (field
           (identifier)))
@@ -893,13 +903,18 @@ END.
             (identifier)
             (identifier))))
       (display_statement
-        (qualified_name
-          (identifier)
+        (field
+          (qualified_name
+            (identifier)
+            (identifier)))
+        (identifier)
+        (field
           (identifier))
-        (identifier)
-        (identifier)
-        (qualified_name
-          (identifier)
+        (field
+          (qualified_name
+            (identifier)
+            (identifier)))
+        (field
           (identifier))
-        (identifier)
-        (string_literal)))))
+        (field
+          (string_literal))))))

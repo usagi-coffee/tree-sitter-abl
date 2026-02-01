@@ -48,5 +48,7 @@ ELSE DISPLAY OPSYS "is an unsupported operating system".
       then: (dos_statement
         command_token: (identifier))
       else: (display_statement
-        (identifier)
-        (string_literal)))))
+        (field
+          field: (identifier))
+        (field
+          field: (string_literal))))))

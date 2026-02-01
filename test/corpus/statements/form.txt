@@ -253,7 +253,8 @@ END.
       (identifier))
     (body
       (display_statement
-        (identifier))
+        (field
+          (identifier)))
       (hide_statement
         (widget_phrase
           (identifier))))))

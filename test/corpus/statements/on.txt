@@ -173,12 +173,14 @@ ON F5 ENDKEY.
             table: (identifier)
             (no_lock)))
         (display_statement
-          (qualified_name
-            left: (identifier)
-            right: (identifier))
-          (qualified_name
-            left: (identifier)
-            right: (identifier))
+          (field
+            field: (qualified_name
+              left: (identifier)
+              right: (identifier)))
+          (field
+            field: (qualified_name
+              left: (identifier)
+              right: (identifier)))
           (frame_phrase
             frame: (identifier))))))
   (enable_statement

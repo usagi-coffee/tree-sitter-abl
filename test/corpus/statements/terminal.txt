@@ -62,7 +62,8 @@ DISPLAY "Back to 80 columns." WITH CENTERED.
       (no_lock))
     (body
       (display_statement
-        (identifier))))
+        (field
+          (identifier)))))
   (terminal_statement
     (string_literal))
   (output_statement)
@@ -72,7 +73,8 @@ DISPLAY "Back to 80 columns." WITH CENTERED.
       (no_lock))
     (body
       (display_statement
-        (identifier)
+        (field
+          (identifier))
         (frame_phrase
           (frame_option
             (number_literal))))))
@@ -80,6 +82,7 @@ DISPLAY "Back to 80 columns." WITH CENTERED.
   (terminal_statement
     (string_literal))
   (display_statement
-    (string_literal)
+    (field
+      (string_literal))
     (frame_phrase
       (centered))))

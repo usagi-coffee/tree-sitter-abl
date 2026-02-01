@@ -212,9 +212,10 @@ UPDATE field1 SPACE(2) SKIP(1) ^.
             (identifier)))
         (body
           (display_statement
-            (qualified_name
-              (identifier)
-              (identifier)))
+            (field
+              (qualified_name
+                (identifier)
+                (identifier))))
           (update_statement
             (update_item
               (qualified_name
@@ -324,21 +325,26 @@ UPDATE field1 SPACE(2) SKIP(1) ^.
         (identifier)))
     (body
       (display_statement
-        (qualified_name
-          (identifier)
-          (identifier))
-        (qualified_name
-          (identifier)
-          (identifier))
-        (qualified_name
-          (identifier)
-          (identifier))
-        (qualified_name
-          (identifier)
-          (identifier))
-        (qualified_name
-          (identifier)
-          (identifier))
+        (field
+          (qualified_name
+            (identifier)
+            (identifier)))
+        (field
+          (qualified_name
+            (identifier)
+            (identifier)))
+        (field
+          (qualified_name
+            (identifier)
+            (identifier)))
+        (field
+          (qualified_name
+            (identifier)
+            (identifier)))
+        (field
+          (qualified_name
+            (identifier)
+            (identifier)))
         (frame_phrase
           (identifier)
           (centered)))

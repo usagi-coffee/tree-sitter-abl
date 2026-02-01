@@ -72,15 +72,18 @@ VIEW STREAM-HANDLE hS FRAME f1.
       (display_statement
         (skip_phrase
           (number_literal))
-        (qualified_name
-          (identifier)
-          (identifier))
-        (qualified_name
-          (identifier)
-          (identifier))
-        (qualified_name
-          (identifier)
-          (identifier))
+        (field
+          (qualified_name
+            (identifier)
+            (identifier)))
+        (field
+          (qualified_name
+            (identifier)
+            (identifier)))
+        (field
+          (qualified_name
+            (identifier)
+            (identifier)))
         (frame_phrase
           (no_labels)))
       (form_statement
@@ -119,21 +122,26 @@ VIEW STREAM-HANDLE hS FRAME f1.
           (no_lock))
         (body
           (display_statement
-            (qualified_name
-              (identifier)
-              (identifier))
-            (qualified_name
-              (identifier)
-              (identifier))
-            (qualified_name
-              (identifier)
-              (identifier))
-            (qualified_name
-              (identifier)
-              (identifier))
-            (qualified_name
-              (identifier)
-              (identifier)))))))
+            (field
+              (qualified_name
+                (identifier)
+                (identifier)))
+            (field
+              (qualified_name
+                (identifier)
+                (identifier)))
+            (field
+              (qualified_name
+                (identifier)
+                (identifier)))
+            (field
+              (qualified_name
+                (identifier)
+                (identifier)))
+            (field
+              (qualified_name
+                (identifier)
+                (identifier))))))))
   (view_statement
     (widget_phrase
       (identifier))

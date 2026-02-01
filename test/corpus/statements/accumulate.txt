@@ -45,29 +45,32 @@ END.
       (no_lock))
     (body
       (display_statement
-        (qualified_name
-          left: (identifier)
-          right: (identifier))
-        field: (qualified_name
-          left: (identifier)
-          right: (identifier))
-        (aggregate_phrase
-          operation: (aggregate_operation))
-        (aggregate_phrase
-          operation: (aggregate_operation))
-        (aggregate_phrase
-          operation: (aggregate_operation))
-        field: (qualified_name
-          left: (identifier)
-          right: (identifier))
-        (aggregate_phrase
-          operation: (aggregate_operation))
-        (aggregate_phrase
-          operation: (aggregate_operation))
-        (aggregate_phrase
-          operation: (aggregate_operation))
-        (aggregate_phrase
-          operation: (aggregate_operation)))))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier))
+          (aggregate_phrase
+            operation: (aggregate_operation))
+          (aggregate_phrase
+            operation: (aggregate_operation))
+          (aggregate_phrase
+            operation: (aggregate_operation)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier))
+          (aggregate_phrase
+            operation: (aggregate_operation))
+          (aggregate_phrase
+            operation: (aggregate_operation))
+          (aggregate_phrase
+            operation: (aggregate_operation))
+          (aggregate_phrase
+            operation: (aggregate_operation))))))
   (for_statement
     (record
       table: (identifier)

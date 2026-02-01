@@ -27,7 +27,8 @@ IF ans THEN DICTIONARY.
     (identifier)
     (no_undo))
   (display_statement
-    (string_literal)
+    (field
+      (string_literal))
     (frame_phrase
       (frame_option
         (number_literal))

@@ -628,10 +628,12 @@ WAIT-FOR CHOOSE OF cancel-butt OR WINDOW-CLOSE OF CURRENT-WINDOW.
                   (identifier)
                   (identifier))
                 then: (display_statement
-                  (qualified_name
-                    left: (identifier)
-                    right: (identifier))
-                  (identifier)))))
+                  (field
+                    field: (qualified_name
+                      left: (identifier)
+                      right: (identifier)))
+                  (field
+                    field: (identifier))))))
           else: (for_statement
             (record
               table: (identifier)
@@ -645,10 +647,12 @@ WAIT-FOR CHOOSE OF cancel-butt OR WINDOW-CLOSE OF CURRENT-WINDOW.
                   (identifier)
                   (identifier))
                 then: (display_statement
-                  (qualified_name
-                    left: (identifier)
-                    right: (identifier))
-                  (identifier))))))
+                  (field
+                    field: (qualified_name
+                      left: (identifier)
+                      right: (identifier)))
+                  (field
+                    field: (identifier)))))))
         (view_statement
           (widget_phrase
             frame: (identifier))))))

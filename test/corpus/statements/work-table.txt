@@ -299,20 +299,23 @@ DEFINE PRIVATE WORK-TABLE wtPrivate FIELD f1 AS INTEGER.
                 (identifier)
                 (identifier)))))
         (display_statement
-          (qualified_name
-            (identifier)
-            (identifier))))
-      (display_statement
-        (qualified_name
-          (identifier)
-          (identifier))
-        (identifier)
-        (aggregate_phrase
-          (aggregate_operation)
-          (by_phrase
+          (field
             (qualified_name
               (identifier)
-              (identifier)))))))
+              (identifier)))))
+      (display_statement
+        (field
+          (qualified_name
+            (identifier)
+            (identifier)))
+        (field
+          (identifier)
+          (aggregate_phrase
+            (aggregate_operation)
+            (by_phrase
+              (qualified_name
+                (identifier)
+                (identifier))))))))
   (work_table_definition
     (new_modifier)
     (scope_modifier)

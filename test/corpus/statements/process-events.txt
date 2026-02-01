@@ -42,7 +42,8 @@ END.
     (button_option
       (string_literal)))
   (display_statement
-    (identifier))
+    (field
+      (identifier)))
   (on_statement
     (identifier)
     (identifier)
@@ -59,9 +60,12 @@ END.
     (number_literal)
     (body
       (display_statement
-        (identifier)
-        (identifier)
-        (identifier))
+        (field
+          (identifier))
+        (field
+          (identifier))
+        (field
+          (identifier)))
       (process_events_statement)
       (if_statement
         (identifier)

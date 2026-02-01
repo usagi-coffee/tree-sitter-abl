@@ -616,29 +616,36 @@ END.
       frame: (identifier))
     (body
       (display_statement
-        (qualified_name
-          left: (identifier)
-          right: (identifier))
-        (qualified_name
-          left: (identifier)
-          right: (identifier))
-        (qualified_name
-          left: (identifier)
-          right: (identifier))
-        (qualified_name
-          left: (identifier)
-          right: (identifier))
-        (qualified_name
-          left: (identifier)
-          right: (identifier))
-        (qualified_name
-          left: (identifier)
-          right: (identifier))
-        (binary_expression
-          (qualified_name
-            left: (identifier)
-            right: (identifier))
-          (qualified_name
+        (field
+          field: (qualified_name
             left: (identifier)
             right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (binary_expression
+            (qualified_name
+              left: (identifier)
+              right: (identifier))
+            (qualified_name
+              left: (identifier)
+              right: (identifier))))
         base: (identifier)))))

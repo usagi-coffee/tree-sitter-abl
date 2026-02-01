@@ -138,7 +138,8 @@ DISPLAY "Succeeded".
           (identifier))))
     (body
       (display_statement
-        (identifier))))
+        (field
+          field: (identifier)))))
   (if_statement
     (object_access
       left: (identifier)
@@ -165,7 +166,8 @@ DISPLAY "Succeeded".
           (identifier))))
     (body
       (display_statement
-        (identifier))))
+        (field
+          field: (identifier)))))
   (close_stored_procedure_statement
     procedure: (identifier)
     handle: (identifier))
@@ -235,4 +237,5 @@ DISPLAY "Succeeded".
         (identifier)
         (number_literal)))
     then: (display_statement
-      (string_literal))))
+      (field
+        field: (string_literal)))))

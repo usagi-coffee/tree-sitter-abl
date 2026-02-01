@@ -92,9 +92,10 @@ IF LOCKED bufOrder THEN RETURN TRUE.
     then: (do_block
       (body
         (display_statement
-          (qualified_name
-            left: (identifier)
-            right: (identifier))))))
+          (field
+            field: (qualified_name
+              left: (identifier)
+              right: (identifier)))))))
   (if_statement
     (can_find_expression
       table: (identifier)
@@ -107,9 +108,10 @@ IF LOCKED bufOrder THEN RETURN TRUE.
     then: (do_block
       (body
         (display_statement
-          (qualified_name
-            left: (identifier)
-            right: (identifier))))))
+          (field
+            field: (qualified_name
+              left: (identifier)
+              right: (identifier)))))))
   (if_statement
     (can_find_expression
       table: (identifier)
@@ -124,21 +126,24 @@ IF LOCKED bufOrder THEN RETURN TRUE.
     then: (do_block
       (body
         (display_statement
-          (qualified_name
-            left: (identifier)
-            right: (identifier))))))
+          (field
+            field: (qualified_name
+              left: (identifier)
+              right: (identifier)))))))
   (if_statement
     (identifier)
     then: (do_block
       (body
         (display_statement
-          (identifier))))
+          (field
+            field: (identifier)))))
     (comment
       (block_comment))
     else: (if_statement
       (identifier)
       then: (display_statement
-        (identifier))))
+        (field
+          field: (identifier)))))
   (if_statement
     (identifier)
     then: (empty_statement))
@@ -265,8 +270,10 @@ OUTPUT STREAM due CLOSE.
   (display_statement
     (stream_phrase
       (identifier))
-    (string_literal)
-    (identifier)
+    (field
+      (string_literal))
+    (field
+      (identifier))
     (skip_phrase
       (number_literal))
     (frame_phrase
@@ -287,21 +294,26 @@ OUTPUT STREAM due CLOSE.
           (identifier))
         (no_lock))
       (display_statement
-        (qualified_name
-          (identifier)
-          (identifier))
-        (qualified_name
-          (identifier)
-          (identifier))
-        (qualified_name
-          (identifier)
-          (identifier))
-        (qualified_name
-          (identifier)
-          (identifier))
-        (qualified_name
-          (identifier)
-          (identifier)))
+        (field
+          (qualified_name
+            (identifier)
+            (identifier)))
+        (field
+          (qualified_name
+            (identifier)
+            (identifier)))
+        (field
+          (qualified_name
+            (identifier)
+            (identifier)))
+        (field
+          (qualified_name
+            (identifier)
+            (identifier)))
+        (field
+          (qualified_name
+            (identifier)
+            (identifier))))
       (if_statement
         (binary_expression
           (qualified_name
@@ -372,26 +384,38 @@ OUTPUT STREAM due CLOSE.
                   (display_statement
                     (stream_phrase
                       (identifier))
-                    (qualified_name
-                      (identifier)
+                    (field
+                      (qualified_name
+                        (identifier)
+                        (identifier)))
+                    (field
                       (identifier))
-                    (identifier)
-                    (number_literal)
-                    (qualified_name
-                      (identifier)
+                    (field
+                      (number_literal))
+                    (field
+                      (qualified_name
+                        (identifier)
+                        (identifier)))
+                    (field
                       (identifier))
-                    (identifier)
-                    (number_literal)
-                    (qualified_name
-                      (identifier)
+                    (field
+                      (number_literal))
+                    (field
+                      (qualified_name
+                        (identifier)
+                        (identifier)))
+                    (field
                       (identifier))
-                    (identifier)
-                    (number_literal)
-                    (qualified_name
-                      (identifier)
+                    (field
+                      (number_literal))
+                    (field
+                      (qualified_name
+                        (identifier)
+                        (identifier)))
+                    (field
                       (identifier))
-                    (identifier)
-                    (number_literal)
+                    (field
+                      (number_literal))
                     (frame_phrase
                       (no_box)
                       (down)

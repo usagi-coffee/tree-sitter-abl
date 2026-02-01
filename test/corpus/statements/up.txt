@@ -38,15 +38,18 @@ UP STREAM-HANDLE hS 3 WITH FRAME f1.
       (up_statement
         (number_literal))
       (display_statement
-        (qualified_name
-          (identifier)
-          (identifier))
-        (qualified_name
-          (identifier)
-          (identifier))
-        (qualified_name
-          (identifier)
-          (identifier)))))
+        (field
+          (qualified_name
+            (identifier)
+            (identifier)))
+        (field
+          (qualified_name
+            (identifier)
+            (identifier)))
+        (field
+          (qualified_name
+            (identifier)
+            (identifier))))))
   (up_statement
     (stream_phrase
       (identifier))
