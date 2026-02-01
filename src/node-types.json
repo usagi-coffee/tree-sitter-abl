@@ -39786,13 +39786,72 @@
     }
   },
   {
-    "type": "property_accessor",
+    "type": "property_definition",
     "named": true,
-    "fields": {},
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "serialize_name": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "string_literal",
+            "named": true
+          }
+        ]
+      },
+      "type": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "generic_type",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "nested_type_name",
+            "named": true
+          },
+          {
+            "type": "qualified_name",
+            "named": true
+          },
+          {
+            "type": "scoped_name",
+            "named": true
+          },
+          {
+            "type": "string_literal",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": true,
       "required": false,
       "types": [
+        {
+          "type": "abstract_modifier",
+          "named": true
+        },
+        {
+          "type": "access_modifier",
+          "named": true
+        },
         {
           "type": "accumulate_statement",
           "named": true
@@ -39883,6 +39942,10 @@
         },
         {
           "type": "connect_statement",
+          "named": true
+        },
+        {
+          "type": "constant",
           "named": true
         },
         {
@@ -40038,6 +40101,10 @@
           "named": true
         },
         {
+          "type": "identifier",
+          "named": true
+        },
+        {
           "type": "if_statement",
           "named": true
         },
@@ -40051,6 +40118,10 @@
         },
         {
           "type": "include",
+          "named": true
+        },
+        {
+          "type": "initial_option",
           "named": true
         },
         {
@@ -40103,6 +40174,14 @@
         },
         {
           "type": "next_statement",
+          "named": true
+        },
+        {
+          "type": "no_undo",
+          "named": true
+        },
+        {
+          "type": "number_literal",
           "named": true
         },
         {
@@ -40274,6 +40353,10 @@
           "named": true
         },
         {
+          "type": "serialization_modifier",
+          "named": true
+        },
+        {
           "type": "set_byte_order_statement",
           "named": true
         },
@@ -40291,6 +40374,10 @@
         },
         {
           "type": "show_stats_statement",
+          "named": true
+        },
+        {
+          "type": "static_modifier",
           "named": true
         },
         {
@@ -40411,104 +40498,6 @@
         },
         {
           "type": "workfile_definition",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "property_definition",
-    "named": true,
-    "fields": {
-      "name": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
-      "serialize_name": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "string_literal",
-            "named": true
-          }
-        ]
-      },
-      "type": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "generic_type",
-            "named": true
-          },
-          {
-            "type": "identifier",
-            "named": true
-          },
-          {
-            "type": "nested_type_name",
-            "named": true
-          },
-          {
-            "type": "qualified_name",
-            "named": true
-          },
-          {
-            "type": "scoped_name",
-            "named": true
-          },
-          {
-            "type": "string_literal",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "access_modifier",
-          "named": true
-        },
-        {
-          "type": "constant",
-          "named": true
-        },
-        {
-          "type": "identifier",
-          "named": true
-        },
-        {
-          "type": "initial_option",
-          "named": true
-        },
-        {
-          "type": "no_undo",
-          "named": true
-        },
-        {
-          "type": "number_literal",
-          "named": true
-        },
-        {
-          "type": "property_accessor",
-          "named": true
-        },
-        {
-          "type": "serialization_modifier",
-          "named": true
-        },
-        {
-          "type": "static_modifier",
           "named": true
         }
       ]

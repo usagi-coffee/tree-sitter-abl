@@ -148,10 +148,11 @@ module.exports = ({ kw }) => ({
           "PUBLIC",
         ],
         static: true,
+        abstract: true,
+        final: true,
         serializable: true,
       }),
       kw("PROPERTY"),
-      repeat($.__property_modifier),
       field("name", $.identifier),
       $.__property_type_phrase,
       repeat(
@@ -161,23 +162,11 @@ module.exports = ({ kw }) => ({
           alias($.__property_no_undo, $.no_undo),
         ),
       ),
-      repeat1($.property_accessor),
+      repeat1(choice($.__property_get_phrase, $.__property_set_phrase)),
     ),
-
-  property_accessor: ($) =>
-    choice($.__property_get_phrase, $.__property_set_phrase),
 
   __property_get_phrase: ($) =>
     seq(
-      optional(
-        choice(
-          kw("PRIVATE"),
-          kw("PACKAGE-PRIVATE"),
-          kw("PROTECTED"),
-          kw("PACKAGE-PROTECTED"),
-          kw("PUBLIC"),
-        ),
-      ),
       kw("GET"),
       choice(
         $._terminator_dot,
@@ -193,15 +182,6 @@ module.exports = ({ kw }) => ({
 
   __property_set_phrase: ($) =>
     seq(
-      optional(
-        choice(
-          kw("PRIVATE"),
-          kw("PACKAGE-PRIVATE"),
-          kw("PROTECTED"),
-          kw("PACKAGE-PROTECTED"),
-          kw("PUBLIC"),
-        ),
-      ),
       kw("SET"),
       optional($.property_set_parameter_list),
       choice(

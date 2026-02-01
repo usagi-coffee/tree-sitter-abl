@@ -31,10 +31,7 @@ module.exports = grammar({
     [$._primary_expression, $.function_call],
     [$._primary_expression, $.function_call, $.__display_item],
     [$.widget_access, $.__widget_keywords],
-
-    // TODO: These should be resolvable
     [$.frame_phrase],
-    [$.property_definition, $.__interface_event],
   ],
   inline: ($) => [
     $.__find_record_name,

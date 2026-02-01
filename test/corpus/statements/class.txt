@@ -100,35 +100,29 @@ END CLASS.
       (access_modifier)
       name: (identifier)
       type: (identifier)
-      (no_undo)
-      (property_accessor)
-      (property_accessor))
+      (no_undo))
     (property_definition
       (access_modifier)
       name: (identifier)
       type: (identifier)
       (no_undo)
-      (property_accessor
-        (return_statement
-          (identifier)))
-      (property_accessor
-        (property_set_parameter_list
-          (property_set_parameter
-            name: (identifier)
-            type: (identifier)))
-        (assignment_statement
-          left: (identifier)
-          operator: (assignment_operator)
-          right: (identifier))))
+      (return_statement
+        (identifier))
+      (property_set_parameter_list
+        (property_set_parameter
+          name: (identifier)
+          type: (identifier)))
+      (assignment_statement
+        left: (identifier)
+        operator: (assignment_operator)
+        right: (identifier)))
     (property_definition
       (access_modifier)
       name: (identifier)
       type: (identifier)
       (no_undo)
       (initial_option
-        (string_literal))
-      (property_accessor)
-      (property_accessor))
+        (string_literal)))
     (method_definition
       type: (identifier)
       name: (identifier)
