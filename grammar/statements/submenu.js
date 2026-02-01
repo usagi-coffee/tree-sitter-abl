@@ -1,9 +1,9 @@
-module.exports = ({ kw, tkw }) => ({
+module.exports = ({ kw }) => ({
   submenu_definition: ($) =>
     seq(
       choice(kw("DEFINE"), kw("DEF")),
       optional(kw("PRIVATE")),
-      tkw("SUB-MENU"),
+      kw("SUB-MENU"),
       $.__submenu_body,
       $._terminator,
     ),
@@ -30,7 +30,7 @@ module.exports = ({ kw, tkw }) => ({
   __submenu_fgcolor: ($) => seq(kw("FGCOLOR"), $._expression),
   __submenu_pfcolor: ($) => seq(kw("PFCOLOR"), $._expression),
   __submenu_font: ($) => seq(kw("FONT"), $._expression),
-  __submenu_help: ($) => tkw("SUB-MENU-HELP"),
+  __submenu_help: ($) => kw("SUB-MENU-HELP"),
   __submenu_like: ($) => seq(kw("LIKE"), field("like", $.identifier)),
   __submenu_element: ($) =>
     choice(
@@ -46,7 +46,7 @@ module.exports = ({ kw, tkw }) => ({
       repeat(
         choice(
           seq(kw("LABEL"), $.string_literal),
-          tkw("DISABLED"),
+          kw("DISABLED"),
           seq(kw("ACCELERATOR"), $.string_literal),
           // $.on_phrase, // TODO: add trigger support
         ),
@@ -54,11 +54,11 @@ module.exports = ({ kw, tkw }) => ({
     ),
   __submenu_submenu: ($) =>
     seq(
-      tkw("SUB-MENU"),
+      kw("SUB-MENU"),
       field("name", $.identifier),
       optional(kw("DISABLED")),
       optional(seq(kw("LABEL"), $.string_literal)),
     ),
-  __submenu_rule: ($) => tkw("RULE"),
-  __submenu_skip: ($) => tkw("SKIP"),
+  __submenu_rule: ($) => kw("RULE"),
+  __submenu_skip: ($) => kw("SKIP"),
 });

@@ -1,4 +1,10 @@
-module.exports = ({ kw, tkw }) => ({
+module.exports = ({ kw }) => ({
   create_socket_statement: ($) =>
-    seq(kw("CREATE"), kw("SOCKET"), field("name", $.identifier), optional(tkw("NO-ERROR")), $._terminator),
+    seq(
+      kw("CREATE"),
+      kw("SOCKET"),
+      field("name", $.identifier),
+      optional(kw("NO-ERROR")),
+      $._terminator,
+    ),
 });

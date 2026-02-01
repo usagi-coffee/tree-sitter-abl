@@ -1,10 +1,10 @@
-module.exports = ({ kw, tkw }) => ({
+module.exports = ({ kw }) => ({
   empty_temp_table_statement: ($) =>
     seq(
       kw("EMPTY"),
       kw("TEMP-TABLE"),
       field("name", $.identifier),
-      optional(tkw("NO-ERROR")),
+      optional(kw("NO-ERROR")),
       $._terminator,
     ),
 });

@@ -1,5 +1,5 @@
-module.exports = ({ kw, tkw }) => ({
-  status_statement: ($) => seq(tkw("STATUS"), $.__status_body, $._terminator),
+module.exports = ({ kw }) => ({
+  status_statement: ($) => seq(kw("STATUS"), $.__status_body, $._terminator),
 
   __status_body: ($) =>
     seq(
@@ -7,7 +7,7 @@ module.exports = ({ kw, tkw }) => ({
         seq(kw("DEFAULT"), optional(field("message", $._expression))),
         seq(
           kw("INPUT"),
-          optional(choice(tkw("OFF"), field("message", $._expression))),
+          optional(choice(kw("OFF"), field("message", $._expression))),
         ),
       ),
       optional(seq(kw("IN"), kw("WINDOW"), field("window", $._expression))),

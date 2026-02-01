@@ -1,16 +1,10 @@
-module.exports = ({ kw, tkw }) => ({
+module.exports = ({ kw }) => ({
   hide_statement: ($) =>
     seq(
-      tkw("HIDE"),
+      kw("HIDE"),
       optional(alias($.__hide_stream_phrase, $.stream_phrase)),
-      optional(
-        choice(
-          $.widget_phrase,
-          tkw("MESSAGE"),
-          tkw("ALL"),
-        ),
-      ),
-      optional(tkw("NO-PAUSE")),
+      optional(choice($.widget_phrase, kw("MESSAGE"), kw("ALL"))),
+      optional(kw("NO-PAUSE")),
       optional(seq(kw("IN"), kw("WINDOW"), field("window", $._expression))),
       $._terminator,
     ),
@@ -20,5 +14,4 @@ module.exports = ({ kw, tkw }) => ({
       seq(kw("STREAM"), field("stream", $.identifier)),
       seq(kw("STREAM-HANDLE"), field("handle", $._expression)),
     ),
-
 });

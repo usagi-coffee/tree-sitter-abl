@@ -1,4 +1,4 @@
-module.exports = ({ kw, tkw }) => ({
+module.exports = ({ kw }) => ({
   run_stored_procedure_statement: ($) =>
     seq(
       kw("RUN"),
@@ -16,13 +16,13 @@ module.exports = ({ kw, tkw }) => ({
             kw("LOAD-RESULT-INTO"),
             field("result_handle", $._expression),
             optional(
-              seq(field("status_var", $._expression), "=", tkw("PROC-STATUS")),
+              seq(field("status_var", $._expression), "=", kw("PROC-STATUS")),
             ),
           ),
-          seq(field("handle_var", $._expression), "=", tkw("PROC-HANDLE")),
+          seq(field("handle_var", $._expression), "=", kw("PROC-HANDLE")),
         ),
       ),
-      optional(tkw("NO-ERROR")),
+      optional(kw("NO-ERROR")),
       optional(alias($.__run_stored_procedure_params, $.parameter_list)),
     ),
 

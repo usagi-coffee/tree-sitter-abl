@@ -1,4 +1,4 @@
-module.exports = ({ kw, tkw }) => ({
+module.exports = ({ kw }) => ({
   rectangle_definition: ($) =>
     seq(
       choice(kw("DEFINE"), kw("DEF")),
@@ -31,19 +31,19 @@ module.exports = ({ kw, tkw }) => ({
     ),
 
   __rectangle_like: ($) => seq(kw("LIKE"), field("like", $.identifier)),
-  __rectangle_no_fill: ($) => tkw("NO-FILL"),
-  __rectangle_edge_chars: ($) => seq(tkw("EDGE-CHARS"), $._expression),
-  __rectangle_edge_pixels: ($) => seq(tkw("EDGE-PIXELS"), $._expression),
+  __rectangle_no_fill: ($) => kw("NO-FILL"),
+  __rectangle_edge_chars: ($) => seq(kw("EDGE-CHARS"), $._expression),
+  __rectangle_edge_pixels: ($) => seq(kw("EDGE-PIXELS"), $._expression),
   __rectangle_dcolor: ($) => seq(kw("DCOLOR"), $._expression),
   __rectangle_bgcolor: ($) => seq(kw("BGCOLOR"), $._expression),
   __rectangle_fgcolor: ($) => seq(kw("FGCOLOR"), $._expression),
-  __rectangle_graphic_edge: ($) => tkw("GRAPHIC-EDGE"),
+  __rectangle_graphic_edge: ($) => kw("GRAPHIC-EDGE"),
   __rectangle_pfcolor: ($) => seq(kw("PFCOLOR"), $._expression),
-  __rectangle_rounded: ($) => tkw("ROUNDED"),
-  __rectangle_group_box: ($) => tkw("GROUP-BOX"),
+  __rectangle_rounded: ($) => kw("ROUNDED"),
+  __rectangle_group_box: ($) => kw("GROUP-BOX"),
   __rectangle_size: ($) =>
     seq(
-      choice(kw("SIZE"), tkw("SIZE-CHARS"), tkw("SIZE-PIXELS")),
+      choice(kw("SIZE"), kw("SIZE-CHARS"), kw("SIZE-PIXELS")),
       field("width", $._expression),
       kw("BY"),
       field("height", $._expression),

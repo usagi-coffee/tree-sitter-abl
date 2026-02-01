@@ -1,7 +1,7 @@
-module.exports = ({ kw, tkw }) => ({
+module.exports = ({ kw }) => ({
   readkey_statement: ($) =>
     seq(
-      tkw("READKEY"),
+      kw("READKEY"),
       optional(alias($.__readkey_stream_phrase, $.stream_phrase)),
       optional(seq(kw("PAUSE"), field("pause", $._expression))),
       $._terminator,

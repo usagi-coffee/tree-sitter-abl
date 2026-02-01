@@ -1,9 +1,9 @@
-module.exports = ({ kw, tkw }) => ({
+module.exports = ({ kw }) => ({
   scroll_statement: ($) =>
     seq(
-      tkw("SCROLL"),
-      optional(tkw("FROM-CURRENT")),
-      optional(choice(tkw("UP"), tkw("DOWN"))),
+      kw("SCROLL"),
+      optional(kw("FROM-CURRENT")),
+      optional(choice(kw("UP"), kw("DOWN"))),
       optional($.frame_phrase),
       $._terminator,
     ),

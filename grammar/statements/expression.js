@@ -1,4 +1,4 @@
-module.exports = ({ kw, tkw }) => ({
+module.exports = ({ kw }) => ({
   expression_statement: ($) =>
     prec(
       -1,
@@ -8,5 +8,5 @@ module.exports = ({ kw, tkw }) => ({
         $._terminator,
       ),
     ),
-  __expression_no_error: ($) => tkw("NO-ERROR"),
+  __expression_no_error: ($) => kw("NO-ERROR"),
 });

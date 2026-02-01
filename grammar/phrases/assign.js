@@ -1,4 +1,4 @@
-module.exports = ({ kw, tkw }) => ({
+module.exports = ({ kw }) => ({
   assign_phrase: ($) => seq(kw("ASSIGN"), $.__assign_body),
 
   __assign_body: ($) =>
@@ -37,5 +37,5 @@ module.exports = ({ kw, tkw }) => ({
       ),
     ),
 
-  __assign_no_error: ($) => tkw("NO-ERROR"),
+  __assign_no_error: ($) => kw("NO-ERROR"),
 });

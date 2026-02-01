@@ -1,4 +1,4 @@
-module.exports = ({ kw, tkw }) => ({
+module.exports = ({ kw }) => ({
   seek_statement: ($) =>
     prec.right(seq(kw("SEEK"), $.__seek_body, $._terminator)),
 
@@ -11,6 +11,6 @@ module.exports = ({ kw, tkw }) => ({
         seq(kw("STREAM-HANDLE"), field("handle", $._expression)),
       ),
       kw("TO"),
-      choice(tkw("END"), $._expression),
+      choice(kw("END"), $._expression),
     ),
 });

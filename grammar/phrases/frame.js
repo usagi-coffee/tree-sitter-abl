@@ -1,4 +1,4 @@
-module.exports = ({ kw, tkw }) => ({
+module.exports = ({ kw }) => ({
   frame_phrase: ($) =>
     seq(
       kw("WITH"),
@@ -32,36 +32,36 @@ module.exports = ({ kw, tkw }) => ({
       ),
     ),
 
-  __frame_option_no_labels: ($) => tkw("NO-LABELS"),
-  __frame_option_side_labels: ($) => tkw("SIDE-LABELS"),
-  __frame_option_centered: ($) => tkw("CENTERED"),
-  __frame_option_no_box: ($) => tkw("NO-BOX"),
-  __frame_option_background: ($) => tkw("BACKGROUND"),
-  __frame_option_no_hide: ($) => tkw("NO-HIDE"),
-  __frame_option_overlay: ($) => tkw("OVERLAY"),
-  __frame_option_page_top: ($) => tkw("PAGE-TOP"),
-  __frame_option_page_bottom: ($) => tkw("PAGE-BOTTOM"),
-  __frame_option_use_text: ($) => tkw("USE-TEXT"),
-  __frame_option_view_as: ($) => seq(kw("VIEW-AS"), tkw("DIALOG-BOX")),
+  __frame_option_no_labels: ($) => kw("NO-LABELS"),
+  __frame_option_side_labels: ($) => kw("SIDE-LABELS"),
+  __frame_option_centered: ($) => kw("CENTERED"),
+  __frame_option_no_box: ($) => kw("NO-BOX"),
+  __frame_option_background: ($) => kw("BACKGROUND"),
+  __frame_option_no_hide: ($) => kw("NO-HIDE"),
+  __frame_option_overlay: ($) => kw("OVERLAY"),
+  __frame_option_page_top: ($) => kw("PAGE-TOP"),
+  __frame_option_page_bottom: ($) => kw("PAGE-BOTTOM"),
+  __frame_option_use_text: ($) => kw("USE-TEXT"),
+  __frame_option_view_as: ($) => seq(kw("VIEW-AS"), kw("DIALOG-BOX")),
 
   __frame_option_skip: ($) =>
-    seq(tkw("SKIP"), optional(seq("(", $._expression, ")"))),
+    seq(kw("SKIP"), optional(seq("(", $._expression, ")"))),
   __frame_option_column_count: ($) =>
     seq(
       field("column_count", $.number_literal),
-      choice(tkw("COLUMN"), tkw("COL")),
+      choice(kw("COLUMN"), kw("COL")),
     ),
   __frame_option_columns_count: ($) =>
-    seq(field("columns_count", $.number_literal), tkw("COLUMNS")),
+    seq(field("columns_count", $.number_literal), kw("COLUMNS")),
   __frame_option_title: ($) => seq(kw("TITLE"), field("title", $._expression)),
   __frame_option_row: ($) => seq(kw("ROW"), field("row", $._expression)),
   __frame_option_column: ($) =>
-    seq(choice(kw("COLUMN"), tkw("COL")), field("column", $._expression)),
+    seq(choice(kw("COLUMN"), kw("COL")), field("column", $._expression)),
   __frame_option_width: ($) => seq(kw("WIDTH"), field("width", $._expression)),
   __frame_option_down: ($) =>
     choice(
-      prec(1, seq($._expression, tkw("DOWN"))),
-      seq(tkw("DOWN"), optional($._expression)),
-      tkw("DOWN"),
+      prec(1, seq($._expression, kw("DOWN"))),
+      seq(kw("DOWN"), optional($._expression)),
+      kw("DOWN"),
     ),
 });

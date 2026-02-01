@@ -1,12 +1,11 @@
-module.exports = ({ kw, tkw }) => ({
+module.exports = ({ kw }) => ({
   os_delete_statement: ($) =>
     seq(
       kw("OS-DELETE"),
       repeat1(choice($.__os_delete_value_target, $._expression)),
-      optional(tkw("RECURSIVE")),
+      optional(kw("RECURSIVE")),
       $._terminator,
     ),
 
-  __os_delete_value_target: ($) =>
-    seq(tkw("VALUE"), "(", $._expression, ")"),
+  __os_delete_value_target: ($) => seq(kw("VALUE"), "(", $._expression, ")"),
 });

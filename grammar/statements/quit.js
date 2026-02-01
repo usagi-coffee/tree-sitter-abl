@@ -1,3 +1,3 @@
-module.exports = ({ tkw }) => ({
-  quit_statement: ($) => seq(tkw("QUIT"), $._terminator),
+module.exports = ({ kw }) => ({
+  quit_statement: ($) => seq(kw("QUIT"), $._terminator),
 });

@@ -1,7 +1,7 @@
-module.exports = ({ kw, tkw }) => ({
+module.exports = ({ kw }) => ({
   connect_statement: ($) =>
     seq(
-      tkw("CONNECT"),
+      kw("CONNECT"),
       optional(
         field(
           "database",
@@ -9,7 +9,7 @@ module.exports = ({ kw, tkw }) => ({
         ),
       ),
       repeat(alias($.__connect_option, $.connect_option)),
-      optional(tkw("NO-ERROR")),
+      optional(kw("NO-ERROR")),
       $._terminator,
     ),
 

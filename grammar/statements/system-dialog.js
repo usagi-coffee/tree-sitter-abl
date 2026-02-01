@@ -1,7 +1,7 @@
-module.exports = ({ kw, tkw }) => ({
+module.exports = ({ kw }) => ({
   system_dialog_color_statement: ($) =>
     seq(
-      tkw("SYSTEM-DIALOG"),
+      kw("SYSTEM-DIALOG"),
       kw("COLOR"),
       $.__system_dialog_color_body,
       $._terminator,
@@ -16,7 +16,7 @@ module.exports = ({ kw, tkw }) => ({
 
   system_dialog_font_statement: ($) =>
     seq(
-      tkw("SYSTEM-DIALOG"),
+      kw("SYSTEM-DIALOG"),
       kw("FONT"),
       $.__system_dialog_font_body,
       $._terminator,
@@ -27,8 +27,8 @@ module.exports = ({ kw, tkw }) => ({
       field("font", $._expression),
       repeat(
         choice(
-          tkw("ANSI-ONLY"),
-          tkw("FIXED-ONLY"),
+          kw("ANSI-ONLY"),
+          kw("FIXED-ONLY"),
           seq(kw("MAX-SIZE"), field("max_size", $._expression)),
           seq(kw("MIN-SIZE"), field("min_size", $._expression)),
           seq(kw("UPDATE"), field("update", $.identifier)),
@@ -39,7 +39,7 @@ module.exports = ({ kw, tkw }) => ({
 
   system_dialog_get_dir_statement: ($) =>
     seq(
-      tkw("SYSTEM-DIALOG"),
+      kw("SYSTEM-DIALOG"),
       kw("GET-DIR"),
       $.__system_dialog_get_dir_body,
       $._terminator,
@@ -60,7 +60,7 @@ module.exports = ({ kw, tkw }) => ({
 
   system_dialog_get_file_statement: ($) =>
     seq(
-      tkw("SYSTEM-DIALOG"),
+      kw("SYSTEM-DIALOG"),
       kw("GET-FILE"),
       $.__system_dialog_get_file_body,
       $._terminator,
@@ -72,15 +72,15 @@ module.exports = ({ kw, tkw }) => ({
       repeat(
         choice(
           alias($.__system_dialog_filters, $.filters_phrase),
-          tkw("ASK-OVERWRITE"),
-          tkw("CREATE-TEST-FILE"),
+          kw("ASK-OVERWRITE"),
+          kw("CREATE-TEST-FILE"),
           seq(kw("DEFAULT-EXTENSION"), field("extension", $._expression)),
           seq(kw("INITIAL-DIR"), field("initial_dir", $._expression)),
-          tkw("MUST-EXIST"),
-          tkw("RETURN-TO-START-DIR"),
-          tkw("SAVE-AS"),
+          kw("MUST-EXIST"),
+          kw("RETURN-TO-START-DIR"),
+          kw("SAVE-AS"),
           seq(kw("TITLE"), field("title", $._expression)),
-          tkw("USE-FILENAME"),
+          kw("USE-FILENAME"),
           seq(kw("UPDATE"), field("update", $.identifier)),
           seq(kw("IN"), kw("WINDOW"), field("window", $._expression)),
         ),
@@ -89,7 +89,7 @@ module.exports = ({ kw, tkw }) => ({
 
   system_dialog_printer_setup_statement: ($) =>
     seq(
-      tkw("SYSTEM-DIALOG"),
+      kw("SYSTEM-DIALOG"),
       kw("PRINTER-SETUP"),
       repeat(
         choice(

@@ -1,4 +1,4 @@
-module.exports = ({ tkw }) => ({
+module.exports = ({ kw }) => ({
   show_stats_statement: ($) =>
-    seq(tkw("SHOW-STATS"), optional(tkw("CLEAR")), $._terminator),
+    seq(kw("SHOW-STATS"), optional(kw("CLEAR")), $._terminator),
 });

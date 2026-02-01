@@ -1,4 +1,3 @@
-module.exports = ({ kw, tkw }) => ({
-  input_clear_statement: ($) =>
-    seq(kw("INPUT"), tkw("CLEAR"), $._terminator),
+module.exports = ({ kw }) => ({
+  input_clear_statement: ($) => seq(kw("INPUT"), kw("CLEAR"), $._terminator),
 });

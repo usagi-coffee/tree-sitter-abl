@@ -1,4 +1,4 @@
-module.exports = ({ kw, tkw }) => ({
+module.exports = ({ kw }) => ({
   aggregate_statement: ($) =>
     seq(kw("AGGREGATE"), $.__aggregate_body, $._terminator),
 
@@ -21,11 +21,11 @@ module.exports = ({ kw, tkw }) => ({
     ),
   __aggregate_operation: ($) =>
     choice(
-      tkw("COUNT"),
-      tkw("TOTAL"),
-      tkw("AVERAGE"),
-      tkw("MAXIMUM"),
-      tkw("MINIMUM"),
+      kw("COUNT"),
+      kw("TOTAL"),
+      kw("AVERAGE"),
+      kw("MAXIMUM"),
+      kw("MINIMUM"),
     ),
   __aggregate_where_phrase: ($) =>
     seq(kw("WHERE"), field("condition", $._expression)),

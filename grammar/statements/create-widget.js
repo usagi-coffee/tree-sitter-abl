@@ -1,4 +1,4 @@
-module.exports = ({ kw, tkw }) => ({
+module.exports = ({ kw }) => ({
   create_widget_statement: ($) =>
     prec.right(
       1,
@@ -23,7 +23,7 @@ module.exports = ({ kw, tkw }) => ({
           kw("TEXT"),
           kw("TOGGLE-BOX"),
           kw("WINDOW"),
-          seq(tkw("VALUE"), "(", field("widget_type", $._expression), ")"),
+          seq(kw("VALUE"), "(", field("widget_type", $._expression), ")"),
         ),
         optional(
           seq(
@@ -44,15 +44,15 @@ module.exports = ({ kw, tkw }) => ({
       kw("TRIGGERS"),
       $._colon,
       repeat1($.__create_widget_trigger_definition),
-      tkw("END"),
-      tkw("TRIGGERS"),
+      kw("END"),
+      kw("TRIGGERS"),
     ),
   __create_widget_trigger_definition: ($) =>
     seq(
       kw("ON"),
       field(
         "event",
-        choice(tkw("CHOOSE"), tkw("ENTRY"), tkw("LEAVE"), $.identifier),
+        choice(kw("CHOOSE"), kw("ENTRY"), kw("LEAVE"), $.identifier),
       ),
       $.do_block,
     ),

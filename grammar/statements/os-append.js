@@ -1,7 +1,7 @@
-module.exports = ({ kw, tkw }) => ({
+module.exports = ({ kw }) => ({
   os_append_statement: ($) =>
     seq(
-      tkw("OS-APPEND"),
+      kw("OS-APPEND"),
       field("source", $._expression),
       field("target", $._expression),
       $._terminator,

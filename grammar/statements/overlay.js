@@ -1,6 +1,5 @@
-module.exports = ({ tkw }) => ({
-  overlay_statement: ($) =>
-    seq(tkw("OVERLAY"), $.__overlay_body, $._terminator),
+module.exports = ({ kw }) => ({
+  overlay_statement: ($) => seq(kw("OVERLAY"), $.__overlay_body, $._terminator),
 
   __overlay_body: ($) =>
     seq(

@@ -1,4 +1,4 @@
-module.exports = ({ kw, tkw }) => ({
+module.exports = ({ kw }) => ({
   aggregate_phrase: ($) =>
     seq(
       field("operation", $.aggregate_operation),
@@ -8,16 +8,16 @@ module.exports = ({ kw, tkw }) => ({
 
   aggregate_operation: ($) =>
     choice(
-      tkw("AVERAGE"),
-      tkw("COUNT"),
-      tkw("MAXIMUM"),
-      tkw("MINIMUM"),
-      tkw("TOTAL"),
-      tkw("SUB-AVERAGE"),
-      tkw("SUB-COUNT"),
-      tkw("SUB-MAXIMUM"),
-      tkw("SUB-MINIMUM"),
-      tkw("SUB-TOTAL"),
+      kw("AVERAGE"),
+      kw("COUNT"),
+      kw("MAXIMUM"),
+      kw("MINIMUM"),
+      kw("TOTAL"),
+      kw("SUB-AVERAGE"),
+      kw("SUB-COUNT"),
+      kw("SUB-MAXIMUM"),
+      kw("SUB-MINIMUM"),
+      kw("SUB-TOTAL"),
     ),
 
   __aggregate_label_phrase: ($) =>

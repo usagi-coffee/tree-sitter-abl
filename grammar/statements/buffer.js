@@ -1,4 +1,4 @@
-module.exports = ({ kw, tkw }) => ({
+module.exports = ({ kw }) => ({
   buffer_definition: ($) =>
     seq(
       choice(kw("DEFINE"), kw("DEF")),
@@ -24,7 +24,7 @@ module.exports = ({ kw, tkw }) => ({
       field("table", $.__buffer_table_name),
       repeat(
         choice(
-          tkw("PRESELECT"),
+          kw("PRESELECT"),
           seq(kw("LABEL"), field("label", $.__buffer_name_or_string)),
           seq(kw("NAMESPACE-URI"), field("namespace_uri", $.string_literal)),
           seq(

@@ -1,10 +1,10 @@
-module.exports = ({ kw, tkw }) => ({
+module.exports = ({ kw }) => ({
   clear_statement: ($) =>
     seq(
-      tkw("CLEAR"),
+      kw("CLEAR"),
       optional(seq(kw("FRAME"), field("frame", $.identifier))),
-      optional(tkw("ALL")),
-      optional(tkw("NO-PAUSE")),
+      optional(kw("ALL")),
+      optional(kw("NO-PAUSE")),
       $._terminator,
     ),
 });

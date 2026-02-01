@@ -1,6 +1,5 @@
-module.exports = ({ kw, tkw }) => ({
-  finally_statement: ($) =>
-    seq(tkw("FINALLY"), $.__finally_body, $._terminator),
+module.exports = ({ kw }) => ({
+  finally_statement: ($) => seq(kw("FINALLY"), $.__finally_body, $._terminator),
 
-  __finally_body: ($) => seq($.body, tkw("END"), optional(tkw("FINALLY"))),
+  __finally_body: ($) => seq($.body, kw("END"), optional(kw("FINALLY"))),
 });

@@ -1,4 +1,4 @@
-module.exports = ({ kw, tkw }) => ({
+module.exports = ({ kw }) => ({
   buffer_compare_statement: ($) =>
     seq(kw("BUFFER-COMPARE"), $.__buffer_compare_body, $._terminator),
 
@@ -8,11 +8,11 @@ module.exports = ({ kw, tkw }) => ({
       optional($.__buffer_compare_field_phrase),
       kw("TO"),
       field("target", $._expression),
-      optional(choice(tkw("CASE-SENSITIVE"), tkw("BINARY"))),
+      optional(choice(kw("CASE-SENSITIVE"), kw("BINARY"))),
       optional(alias($.__buffer_compare_save_phrase, $.save_phrase)),
       optional(alias($.__buffer_compare_compares_block, $.compares_block)),
-      optional(tkw("NO-LOBS")),
-      optional(tkw("NO-ERROR")),
+      optional(kw("NO-LOBS")),
+      optional(kw("NO-ERROR")),
     ),
   __buffer_compare_field_phrase: ($) =>
     seq(
@@ -27,12 +27,12 @@ module.exports = ({ kw, tkw }) => ({
     ),
   __buffer_compare_compares_block: ($) =>
     seq(
-      optional(tkw("EXPLICIT")),
-      tkw("COMPARES"),
+      optional(kw("EXPLICIT")),
+      kw("COMPARES"),
       $._colon,
       repeat1($.__buffer_compare_when_phrase),
-      optional(tkw("COMPARES")),
-      tkw("END"),
+      optional(kw("COMPARES")),
+      kw("END"),
     ),
   __buffer_compare_when_phrase: ($) =>
     seq(

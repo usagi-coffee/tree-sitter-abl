@@ -1,25 +1,25 @@
-module.exports = ({ kw, tkw }) => ({
+module.exports = ({ kw }) => ({
   on_quit_phrase: ($) =>
     seq(
       kw("ON"),
-      tkw("QUIT"),
-      optional(seq(tkw("UNDO"), optional(field("undo_label", $.identifier)))),
+      kw("QUIT"),
+      optional(seq(kw("UNDO"), optional(field("undo_label", $.identifier)))),
       optional(seq(",", $.__on_quit_action)),
     ),
   __on_quit_action: ($) =>
     choice(
-      seq(tkw("LEAVE"), optional(field("leave_label", $.identifier))),
-      seq(tkw("NEXT"), optional(field("next_label", $.identifier))),
-      seq(tkw("RETRY"), optional(field("retry_label", $.identifier))),
+      seq(kw("LEAVE"), optional(field("leave_label", $.identifier))),
+      seq(kw("NEXT"), optional(field("next_label", $.identifier))),
+      seq(kw("RETRY"), optional(field("retry_label", $.identifier))),
       $.__on_quit_return,
     ),
   __on_quit_return: ($) =>
     seq(
-      tkw("RETURN"),
+      kw("RETURN"),
       optional(
         choice(
-          seq(tkw("ERROR"), optional(field("error_value", $._expression))),
-          tkw("NO-APPLY"),
+          seq(kw("ERROR"), optional(field("error_value", $._expression))),
+          kw("NO-APPLY"),
           field("return_value", $._expression),
         ),
       ),

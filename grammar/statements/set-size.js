@@ -1,6 +1,6 @@
-module.exports = ({ tkw }) => ({
+module.exports = ({ kw }) => ({
   set_size_statement: ($) =>
-    seq(tkw("SET-SIZE"), $.__set_size_body, $._terminator),
+    seq(kw("SET-SIZE"), $.__set_size_body, $._terminator),
 
   __set_size_body: ($) =>
     seq(

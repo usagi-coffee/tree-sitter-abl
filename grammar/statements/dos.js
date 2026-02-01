@@ -1,12 +1,12 @@
-module.exports = ({ kw, tkw }) => ({
+module.exports = ({ kw }) => ({
   dos_statement: ($) =>
     seq(
-      tkw("DOS"),
-      optional(tkw("SILENT")),
+      kw("DOS"),
+      optional(kw("SILENT")),
       repeat(
         choice(
           field("command_token", $.identifier),
-          seq(tkw("VALUE"), "(", field("command", $._expression), ")"),
+          seq(kw("VALUE"), "(", field("command", $._expression), ")"),
         ),
       ),
       $._terminator,

@@ -1,4 +1,4 @@
-module.exports = ({ kw, tkw }) => ({
+module.exports = ({ kw }) => ({
   put_statement: ($) => seq(kw("PUT"), $.__put_body, $._terminator),
 
   __put_body: ($) =>
@@ -35,15 +35,15 @@ module.exports = ({ kw, tkw }) => ({
   __put_skip_item: ($) =>
     prec.right(
       choice(
-        seq(tkw("SKIP"), "(", field("count", $._expression), ")"),
-        tkw("SKIP"),
+        seq(kw("SKIP"), "(", field("count", $._expression), ")"),
+        kw("SKIP"),
       ),
     ),
   __put_space_item: ($) =>
     prec.right(
       choice(
-        seq(tkw("SPACE"), "(", field("count", $._expression), ")"),
-        tkw("SPACE"),
+        seq(kw("SPACE"), "(", field("count", $._expression), ")"),
+        kw("SPACE"),
       ),
     ),
 });

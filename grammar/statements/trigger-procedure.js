@@ -1,6 +1,11 @@
-module.exports = ({ kw, tkw }) => ({
+module.exports = ({ kw }) => ({
   trigger_procedure_statement: ($) =>
-    seq(tkw("TRIGGER"), kw("PROCEDURE"), $.__trigger_procedure_body, $._terminator),
+    seq(
+      kw("TRIGGER"),
+      kw("PROCEDURE"),
+      $.__trigger_procedure_body,
+      $._terminator,
+    ),
 
   __trigger_procedure_body: ($) =>
     seq(
@@ -14,32 +19,32 @@ module.exports = ({ kw, tkw }) => ({
         ),
         // WRITE event with optional NEW and OLD buffers
         seq(
-          tkw("WRITE"),
+          kw("WRITE"),
           kw("OF"),
           field("object", $.identifier),
           optional(
             seq(
-              tkw("NEW"),
-              optional(tkw("BUFFER")),
+              kw("NEW"),
+              optional(kw("BUFFER")),
               field("new_buffer", $.identifier),
             ),
           ),
           optional(
             seq(
-              tkw("OLD"),
-              optional(tkw("BUFFER")),
+              kw("OLD"),
+              optional(kw("BUFFER")),
               field("old_buffer", $.identifier),
             ),
           ),
         ),
         // ASSIGN event
         seq(
-          tkw("ASSIGN"),
+          kw("ASSIGN"),
           choice(
             seq(kw("OF"), field("object", $.qualified_name)),
             seq(
-              tkw("NEW"),
-              optional(tkw("VALUE")),
+              kw("NEW"),
+              optional(kw("VALUE")),
               field("value", $.identifier),
               choice(
                 seq(kw("AS"), field("data_type", $.identifier)),

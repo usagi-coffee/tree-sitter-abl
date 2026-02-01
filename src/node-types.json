@@ -17181,7 +17181,7 @@
     "named": true,
     "fields": {
       "mode": {
-        "multiple": true,
+        "multiple": false,
         "required": true,
         "types": [
           {

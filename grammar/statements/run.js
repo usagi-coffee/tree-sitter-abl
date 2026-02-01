@@ -1,4 +1,4 @@
-module.exports = ({ kw, tkw }) => ({
+module.exports = ({ kw }) => ({
   run_statement: ($) => seq(kw("RUN"), $.__run_body, $._terminator),
 
   __run_body: ($) =>
@@ -15,7 +15,7 @@ module.exports = ({ kw, tkw }) => ({
       optional(alias($.__run_on_server, $.on_server_phrase)),
       optional(alias($.__run_asynchronous, $.asynchronous_phrase)),
       optional($.arguments),
-      optional(tkw("NO-ERROR")),
+      optional(kw("NO-ERROR")),
     ),
 
   _run_target: ($) =>
@@ -26,7 +26,7 @@ module.exports = ({ kw, tkw }) => ({
       $.identifier,
       $.qualified_name,
     ),
-  __run_value_expression: ($) => seq(tkw("VALUE"), "(", $._expression, ")"),
+  __run_value_expression: ($) => seq(kw("VALUE"), "(", $._expression, ")"),
   __run_library_member: ($) =>
     seq(
       field("library", $.procedure_name),
@@ -36,17 +36,26 @@ module.exports = ({ kw, tkw }) => ({
     ),
   __run_member_name: ($) => token(/[A-Za-z0-9_\\/.-]+\.r/i),
   __run_persistent: ($) =>
-    seq(tkw("PERSISTENT"), optional(seq(kw("SET"), field("handle", $.identifier)))),
+    seq(
+      kw("PERSISTENT"),
+      optional(seq(kw("SET"), field("handle", $.identifier))),
+    ),
   __run_single_run: ($) =>
-    seq(tkw("SINGLE-RUN"), optional(seq(kw("SET"), field("handle", $.identifier)))),
+    seq(
+      kw("SINGLE-RUN"),
+      optional(seq(kw("SET"), field("handle", $.identifier))),
+    ),
   __run_singleton: ($) =>
-    seq(tkw("SINGLETON"), optional(seq(kw("SET"), field("handle", $.identifier)))),
+    seq(
+      kw("SINGLETON"),
+      optional(seq(kw("SET"), field("handle", $.identifier))),
+    ),
   __run_in_phrase: ($) => seq(kw("IN"), field("context", $._expression)),
   __run_on_server: ($) =>
     seq(kw("ON"), kw("SERVER"), field("server", $._expression)),
   __run_asynchronous: ($) =>
     seq(
-      tkw("ASYNCHRONOUS"),
+      kw("ASYNCHRONOUS"),
       optional(seq(kw("SET"), field("handle", $.identifier))),
       optional(
         choice(
@@ -58,15 +67,20 @@ module.exports = ({ kw, tkw }) => ({
           seq(
             kw("EVENT-HANDLER"),
             field("event_handler", $._expression),
-            optional(seq(kw("EVENT-HANDLER-CONTEXT"), field("context", $.__run_context_value))),
+            optional(
+              seq(
+                kw("EVENT-HANDLER-CONTEXT"),
+                field("context", $.__run_context_value),
+              ),
+            ),
           ),
         ),
       ),
     ),
   __run_context_value: ($) =>
     choice(
-      alias(tkw("THIS-PROCEDURE"), $.this_procedure),
-      alias(tkw("THIS-OBJECT"), $.this_object),
+      alias(kw("THIS-PROCEDURE"), $.this_procedure),
+      alias(kw("THIS-OBJECT"), $.this_object),
       $.object_access,
       $.qualified_name,
       $.identifier,

@@ -1,4 +1,4 @@
-module.exports = ({ kw, tkw }) => ({
+module.exports = ({ kw }) => ({
   on_statement: ($) =>
     prec.right(
       1,
@@ -11,7 +11,7 @@ module.exports = ({ kw, tkw }) => ({
           field("object", $.__on_database_object),
           optional(alias($.__on_referencing_phrase, $.referencing_phrase)),
           optional(alias($.__on_override, $.override)),
-          choice(seq(tkw("REVERT"), $._terminator), $.do_block, $._statement),
+          choice(seq(kw("REVERT"), $._terminator), $.do_block, $._statement),
         ),
         // UI event: ON event-list [OF widget-list] [ANYWHERE]
         seq(
@@ -20,22 +20,26 @@ module.exports = ({ kw, tkw }) => ({
           optional(
             seq(
               kw("OF"),
-              optional(tkw("MENU-ITEM")),
+              optional(kw("MENU-ITEM")),
               field("widget", $.__on_widget),
               repeat(
-                seq(",", optional(tkw("MENU-ITEM")), field("widget", $.__on_widget)),
+                seq(
+                  ",",
+                  optional(kw("MENU-ITEM")),
+                  field("widget", $.__on_widget),
+                ),
               ),
               optional(alias($.__on_in_frame, $.in_frame_phrase)),
             ),
           ),
-          optional(tkw("ANYWHERE")),
+          optional(kw("ANYWHERE")),
           choice(
-            seq(tkw("REVERT"), $._terminator),
+            seq(kw("REVERT"), $._terminator),
             $.do_block,
             $._statement,
             seq(
-              tkw("PERSISTENT"),
-              tkw("RUN"),
+              kw("PERSISTENT"),
+              kw("RUN"),
               field("procedure", $.identifier),
               optional($.arguments),
               $._terminator,
@@ -51,7 +55,8 @@ module.exports = ({ kw, tkw }) => ({
   __on_widget: ($) => choice($.identifier, $.qualified_name),
   __on_database_object: ($) => choice($.qualified_name, $.identifier),
   __on_override: ($) => kw("OVERRIDE"),
-  __on_in_frame: ($) => seq(kw("IN"), kw("FRAME"), field("frame", $.identifier)),
+  __on_in_frame: ($) =>
+    seq(kw("IN"), kw("FRAME"), field("frame", $.identifier)),
   __on_referencing_phrase: ($) =>
     choice(
       seq(

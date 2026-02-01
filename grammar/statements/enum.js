@@ -1,22 +1,22 @@
-module.exports = ({ kw, tkw }) => ({
+module.exports = ({ kw }) => ({
   enum_statement: ($) => seq(kw("ENUM"), $.__enum_body, $._terminator),
 
   __enum_body: ($) =>
     seq(
       field("name", $.identifier),
-      optional(tkw("FLAGS")),
+      optional(kw("FLAGS")),
       $._colon,
       repeat(
         seq(
           kw("DEFINE"),
-          tkw("ENUM"),
+          kw("ENUM"),
           alias($.__enum_member, $.member),
           repeat(alias($.__enum_member, $.member)),
           $._terminator,
         ),
       ),
-      tkw("END"),
-      tkw("ENUM"),
+      kw("END"),
+      kw("ENUM"),
     ),
 
   __enum_member: ($) =>

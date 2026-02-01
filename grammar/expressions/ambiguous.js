@@ -1,6 +1,6 @@
-module.exports = ({ tkw }) => ({
+module.exports = ({ kw }) => ({
   ambiguous_expression: ($) =>
-    seq(tkw("AMBIGUOUS"), $.__ambiguous_expression_body),
+    seq(kw("AMBIGUOUS"), $.__ambiguous_expression_body),
 
   __ambiguous_expression_body: ($) =>
     seq(

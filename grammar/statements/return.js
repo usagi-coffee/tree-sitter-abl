@@ -1,12 +1,12 @@
-module.exports = ({ kw, tkw }) => ({
+module.exports = ({ kw }) => ({
   return_statement: ($) =>
     seq(
-      tkw("RETURN"),
+      kw("RETURN"),
       optional(
         choice(
           $._expression,
-          seq(tkw("ERROR"), optional($._expression)),
-          tkw("NO-APPLY"),
+          seq(kw("ERROR"), optional($._expression)),
+          kw("NO-APPLY"),
         ),
       ),
       $._terminator,

@@ -1,9 +1,9 @@
-module.exports = ({ kw, tkw }) => ({
+module.exports = ({ kw }) => ({
   accumulate_statement: ($) =>
     seq(
-      tkw("ACCUMULATE"),
+      kw("ACCUMULATE"),
       repeat1(alias($.__accumulate_item, $.accumulate)),
-      $._terminator
+      $._terminator,
     ),
 
   __accumulate_item: ($) =>

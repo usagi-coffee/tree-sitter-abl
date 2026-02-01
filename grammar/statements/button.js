@@ -1,4 +1,4 @@
-module.exports = ({ kw, tkw }) => ({
+module.exports = ({ kw }) => ({
   button_definition: ($) =>
     seq(
       choice(kw("DEFINE"), kw("DEF")),
@@ -39,20 +39,20 @@ module.exports = ({ kw, tkw }) => ({
       $.__button_tooltip,
       // $.on_phrase, // TODO: add trigger support
     ),
-  __button_auto_go: ($) => tkw("AUTO-GO"),
-  __button_auto_endkey: ($) => tkw("AUTO-ENDKEY"),
-  __button_default: ($) => tkw("DEFAULT"),
+  __button_auto_go: ($) => kw("AUTO-GO"),
+  __button_auto_endkey: ($) => kw("AUTO-ENDKEY"),
+  __button_default: ($) => kw("DEFAULT"),
   __button_bgcolor: ($) => seq(kw("BGCOLOR"), $._expression),
-  __button_context_help_id: ($) => seq(tkw("CONTEXT-HELP-ID"), $._expression),
+  __button_context_help_id: ($) => seq(kw("CONTEXT-HELP-ID"), $._expression),
   __button_dcolor: ($) => seq(kw("DCOLOR"), $._expression),
-  __button_drop_target: ($) => tkw("DROP-TARGET"),
+  __button_drop_target: ($) => kw("DROP-TARGET"),
   __button_fgcolor: ($) => seq(kw("FGCOLOR"), $._expression),
   __button_font: ($) => seq(kw("FONT"), $._expression),
-  __button_image_down: ($) => seq(tkw("IMAGE-DOWN"), $.__button_image_phrase),
+  __button_image_down: ($) => seq(kw("IMAGE-DOWN"), $.__button_image_phrase),
   __button_image: ($) => seq(kw("IMAGE"), $.__button_image_phrase),
-  __button_image_up: ($) => seq(tkw("IMAGE-UP"), $.__button_image_phrase),
+  __button_image_up: ($) => seq(kw("IMAGE-UP"), $.__button_image_phrase),
   __button_image_insensitive: ($) =>
-    seq(tkw("IMAGE-INSENSITIVE"), $.__button_image_phrase),
+    seq(kw("IMAGE-INSENSITIVE"), $.__button_image_phrase),
   __button_image_phrase: ($) =>
     seq(
       kw("FILE"),
@@ -60,9 +60,9 @@ module.exports = ({ kw, tkw }) => ({
       optional(
         seq(
           choice(
-            tkw("IMAGE-SIZE"),
-            tkw("IMAGE-SIZE-CHARS"),
-            tkw("IMAGE-SIZE-PIXELS"),
+            kw("IMAGE-SIZE"),
+            kw("IMAGE-SIZE-CHARS"),
+            kw("IMAGE-SIZE-PIXELS"),
           ),
           field("width", $._expression),
           kw("BY"),
@@ -79,19 +79,19 @@ module.exports = ({ kw, tkw }) => ({
         ),
       ),
     ),
-  __button_mouse_pointer: ($) => seq(tkw("MOUSE-POINTER"), $._expression),
+  __button_mouse_pointer: ($) => seq(kw("MOUSE-POINTER"), $._expression),
   __button_label: ($) =>
     seq(kw("LABEL"), field("label", choice($.string_literal, $.identifier))),
   __button_like: ($) => seq(kw("LIKE"), field("like", $.identifier)),
   __button_pfcolor: ($) => seq(kw("PFCOLOR"), $._expression),
   __button_size: ($) =>
     seq(
-      choice(kw("SIZE"), tkw("SIZE-CHARS"), tkw("SIZE-PIXELS")),
+      choice(kw("SIZE"), kw("SIZE-CHARS"), kw("SIZE-PIXELS")),
       field("width", $._expression),
       kw("BY"),
       field("height", $._expression),
     ),
-  __button_no_focus: ($) => seq(tkw("NO-FOCUS"), optional(tkw("FLAT-BUTTON"))),
-  __button_no_convert_3d_colors: ($) => tkw("NO-CONVERT-3D-COLORS"),
+  __button_no_focus: ($) => seq(kw("NO-FOCUS"), optional(kw("FLAT-BUTTON"))),
+  __button_no_convert_3d_colors: ($) => kw("NO-CONVERT-3D-COLORS"),
   __button_tooltip: ($) => seq(kw("TOOLTIP"), $._expression),
 });

@@ -1,4 +1,4 @@
-module.exports = ({ kw, tkw }) => ({
+module.exports = ({ kw }) => ({
   menu_definition: ($) =>
     seq(
       choice(kw("DEFINE"), kw("DEF")),
@@ -32,7 +32,7 @@ module.exports = ({ kw, tkw }) => ({
   __menu_pfcolor: ($) => seq(kw("PFCOLOR"), $._expression),
   __menu_font: ($) => seq(kw("FONT"), $._expression),
   __menu_title: ($) => seq(kw("TITLE"), $._expression),
-  __menu_menubar: ($) => tkw("MENUBAR"),
+  __menu_menubar: ($) => kw("MENUBAR"),
   __menu_like: ($) => seq(kw("LIKE"), field("like", $.identifier)),
   __menu_element: ($) =>
     choice(
@@ -48,7 +48,7 @@ module.exports = ({ kw, tkw }) => ({
       repeat(
         choice(
           seq(kw("LABEL"), $.string_literal),
-          tkw("DISABLED"),
+          kw("DISABLED"),
           seq(kw("ACCELERATOR"), $.string_literal),
           // $.on_phrase, // TODO: add trigger support
         ),
@@ -56,11 +56,11 @@ module.exports = ({ kw, tkw }) => ({
     ),
   __menu_submenu: ($) =>
     seq(
-      tkw("SUB-MENU"),
+      kw("SUB-MENU"),
       field("name", $.identifier),
       optional(kw("DISABLED")),
       optional(seq(kw("LABEL"), $.string_literal)),
     ),
-  __menu_rule: ($) => tkw("RULE"),
-  __menu_skip: ($) => tkw("SKIP"),
+  __menu_rule: ($) => kw("RULE"),
+  __menu_skip: ($) => kw("SKIP"),
 });

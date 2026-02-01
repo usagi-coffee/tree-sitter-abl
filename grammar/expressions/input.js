@@ -1,11 +1,11 @@
-module.exports = ({ kw, tkw }) => ({
-  input_expression: ($) => seq(tkw("INPUT"), $.__input_expression_body),
+module.exports = ({ kw }) => ({
+  input_expression: ($) => seq(kw("INPUT"), $.__input_expression_body),
 
   __input_expression_body: ($) =>
     prec(
       -1,
       seq(
-        optional(seq(tkw("FRAME"), field("frame", $.identifier))),
+        optional(seq(kw("FRAME"), field("frame", $.identifier))),
         field(
           "field",
           choice(

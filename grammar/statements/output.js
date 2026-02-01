@@ -1,4 +1,4 @@
-module.exports = ({ kw, tkw }) => ({
+module.exports = ({ kw }) => ({
   output_statement: ($) => seq(kw("OUTPUT"), $.__output_body, $._terminator),
 
   __output_body: ($) =>
@@ -11,7 +11,7 @@ module.exports = ({ kw, tkw }) => ({
               alias($.__output_stream_handle_phrase, $.stream_handle_phrase),
             ),
           ),
-          tkw("CLOSE"),
+          kw("CLOSE"),
         ),
         seq(
           optional(
@@ -39,41 +39,41 @@ module.exports = ({ kw, tkw }) => ({
       ),
     ),
 
-  __output_append_phrase: ($) => tkw("APPEND"),
+  __output_append_phrase: ($) => kw("APPEND"),
   __output_to_option: ($) =>
     choice(
       alias($.__output_lob_dir_phrase, $.lob_dir_phrase),
       alias($.__output_num_copies_phrase, $.num_copies_phrase),
-      tkw("COLLATE"),
-      choice(tkw("LANDSCAPE"), tkw("PORTRAIT")),
+      kw("COLLATE"),
+      choice(kw("LANDSCAPE"), kw("PORTRAIT")),
       alias($.__output_append_phrase, $.append_phrase),
-      tkw("BINARY"),
-      tkw("ECHO"),
-      tkw("NO-ECHO"),
-      tkw("KEEP-MESSAGES"),
+      kw("BINARY"),
+      kw("ECHO"),
+      kw("NO-ECHO"),
+      kw("KEEP-MESSAGES"),
       seq(kw("MAP"), field("map", $.__output_map_entry)),
-      tkw("NO-MAP"),
-      tkw("PAGED"),
+      kw("NO-MAP"),
+      kw("PAGED"),
       alias($.__output_page_size_phrase, $.page_size_phrase),
-      tkw("UNBUFFERED"),
+      kw("UNBUFFERED"),
       alias($.__output_convert_phrase, $.convert_phrase),
     ),
   __output_through_option: ($) =>
     choice(
-      tkw("ECHO"),
-      tkw("NO-ECHO"),
+      kw("ECHO"),
+      kw("NO-ECHO"),
       seq(kw("MAP"), field("map", $.__output_map_entry)),
-      tkw("NO-MAP"),
-      tkw("PAGED"),
+      kw("NO-MAP"),
+      kw("PAGED"),
       alias($.__output_page_size_phrase, $.page_size_phrase),
-      tkw("UNBUFFERED"),
+      kw("UNBUFFERED"),
       alias($.__output_convert_phrase, $.convert_phrase),
     ),
   __output_convert_phrase: ($) =>
     choice(
-      tkw("NO-CONVERT"),
+      kw("NO-CONVERT"),
       seq(
-        tkw("CONVERT"),
+        kw("CONVERT"),
         repeat(
           choice(
             seq(kw("TARGET"), field("target", $.string_literal)),
@@ -87,7 +87,7 @@ module.exports = ({ kw, tkw }) => ({
       kw("LOB-DIR"),
       choice(
         alias($.constant_expression, $.constant),
-        seq(tkw("VALUE"), "(", $._expression, ")"),
+        seq(kw("VALUE"), "(", $._expression, ")"),
       ),
     ),
   __output_num_copies_phrase: ($) =>
@@ -96,7 +96,7 @@ module.exports = ({ kw, tkw }) => ({
       choice(
         $.number_literal,
         alias($.constant_expression, $.constant),
-        seq(tkw("VALUE"), "(", $._expression, ")"),
+        seq(kw("VALUE"), "(", $._expression, ")"),
       ),
     ),
   __output_page_size_phrase: ($) =>
@@ -105,7 +105,7 @@ module.exports = ({ kw, tkw }) => ({
       choice(
         $.number_literal,
         alias($.constant_expression, $.constant),
-        seq(tkw("VALUE"), "(", $._expression, ")"),
+        seq(kw("VALUE"), "(", $._expression, ")"),
       ),
     ),
   __output_map_entry: ($) =>
@@ -116,10 +116,7 @@ module.exports = ({ kw, tkw }) => ({
     ),
   __output_to_target: ($) =>
     choice(
-      seq(
-        tkw("PRINTER"),
-        optional(field("printer", $.__output_printer_target)),
-      ),
+      seq(kw("PRINTER"), optional(field("printer", $.__output_printer_target))),
       field(
         "file",
         choice(
@@ -129,18 +126,18 @@ module.exports = ({ kw, tkw }) => ({
           $.qualified_name,
         ),
       ),
-      tkw("TERMINAL"),
-      seq(tkw("VALUE"), "(", $._expression, ")"),
-      token(/\"CLIPBOARD\"/i),
+      kw("TERMINAL"),
+      seq(kw("VALUE"), "(", $._expression, ")"),
+      token(kw("CLIPBOARD")),
     ),
   __output_through_program_target: ($) =>
     choice(
       field("program", $.identifier),
       field("program", $.string_literal),
-      seq(tkw("VALUE"), "(", $._expression, ")"),
+      seq(kw("VALUE"), "(", $._expression, ")"),
     ),
   __output_through_argument: ($) =>
-    choice($.__output_argument, seq(tkw("VALUE"), "(", $._expression, ")")),
+    choice($.__output_argument, seq(kw("VALUE"), "(", $._expression, ")")),
   __output_argument: ($) =>
     choice(
       $.string_literal,

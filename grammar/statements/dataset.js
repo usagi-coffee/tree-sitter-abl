@@ -1,4 +1,4 @@
-module.exports = ({ kw, tkw }) => ({
+module.exports = ({ kw }) => ({
   dataset_definition: ($) =>
     seq(
       choice(kw("DEFINE"), kw("DEF")),
@@ -8,7 +8,12 @@ module.exports = ({ kw, tkw }) => ({
           seq(
             optional(alias($.__dataset_access_modifier, $.access_modifier)),
             optional(alias($.__dataset_static_modifier, $.static_modifier)),
-            optional(alias($.__dataset_serialization_modifier, $.serialization_modifier)),
+            optional(
+              alias(
+                $.__dataset_serialization_modifier,
+                $.serialization_modifier,
+              ),
+            ),
           ),
         ),
       ),
@@ -21,12 +26,16 @@ module.exports = ({ kw, tkw }) => ({
     seq(
       field("name", $.identifier),
       optional(seq(kw("NAMESPACE-URI"), field("namespace_uri", $._expression))),
-      optional(seq(kw("NAMESPACE-PREFIX"), field("namespace_prefix", $._expression))),
+      optional(
+        seq(kw("NAMESPACE-PREFIX"), field("namespace_prefix", $._expression)),
+      ),
       optional(seq(kw("XML-NODE-NAME"), field("xml_node_name", $._expression))),
-      optional(seq(kw("SERIALIZE-NAME"), field("serialize_name", $._expression))),
+      optional(
+        seq(kw("SERIALIZE-NAME"), field("serialize_name", $._expression)),
+      ),
       optional(seq(kw("XML-NODE-TYPE"), field("xml_node_type", $._expression))),
-      optional(tkw("SERIALIZE-HIDDEN")),
-      optional(tkw("REFERENCE-ONLY")),
+      optional(kw("SERIALIZE-HIDDEN")),
+      optional(kw("REFERENCE-ONLY")),
       optional(
         seq(
           kw("FOR"),
@@ -39,12 +48,8 @@ module.exports = ({ kw, tkw }) => ({
     ),
 
   __dataset_shared_scope: ($) =>
-    choice(
-      seq(kw("NEW"), kw("SHARED")),
-      kw("SHARED"),
-    ),
-  __dataset_access_modifier: ($) =>
-    choice(kw("PRIVATE"), kw("PROTECTED")),
+    choice(seq(kw("NEW"), kw("SHARED")), kw("SHARED")),
+  __dataset_access_modifier: ($) => choice(kw("PRIVATE"), kw("PROTECTED")),
   __dataset_static_modifier: ($) => kw("STATIC"),
   __dataset_serialization_modifier: ($) =>
     choice(kw("SERIALIZABLE"), kw("NON-SERIALIZABLE")),
@@ -63,13 +68,20 @@ module.exports = ({ kw, tkw }) => ({
         field("parent_field", $.identifier),
         ",",
         field("child_field", $.identifier),
-        repeat(seq(",", field("parent_field", $.identifier), ",", field("child_field", $.identifier))),
+        repeat(
+          seq(
+            ",",
+            field("parent_field", $.identifier),
+            ",",
+            field("child_field", $.identifier),
+          ),
+        ),
         ")",
       ),
-      optional(tkw("REPOSITION")),
-      optional(seq(tkw("NESTED"), optional(tkw("FOREIGN-KEY-HIDDEN")))),
-      optional(tkw("NOT-ACTIVE")),
-      optional(tkw("RECURSIVE")),
+      optional(kw("REPOSITION")),
+      optional(seq(kw("NESTED"), optional(kw("FOREIGN-KEY-HIDDEN")))),
+      optional(kw("NOT-ACTIVE")),
+      optional(kw("RECURSIVE")),
     ),
 
   __dataset_parent_id_relation: ($) =>

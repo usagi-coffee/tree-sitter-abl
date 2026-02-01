@@ -1,4 +1,4 @@
-module.exports = ({ kw, tkw }) => ({
+module.exports = ({ kw }) => ({
   data_source_definition: ($) =>
     seq(
       choice(kw("DEFINE"), kw("DEF")),
@@ -48,7 +48,7 @@ module.exports = ({ kw, tkw }) => ({
           kw("KEYS"),
           "(",
           choice(
-            tkw("ROWID"),
+            kw("ROWID"),
             seq(
               field("field", $.__data_source_field_name),
               repeat(seq(",", field("field", $.__data_source_field_name))),

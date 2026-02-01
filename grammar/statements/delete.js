@@ -1,4 +1,4 @@
-module.exports = ({ kw, tkw }) => ({
+module.exports = ({ kw }) => ({
   delete_statement: ($) => seq(kw("DELETE"), $.__delete_body, $._terminator),
 
   __delete_body: ($) =>
@@ -23,7 +23,7 @@ module.exports = ({ kw, tkw }) => ({
   delete_widget_statement: ($) =>
     seq(
       kw("DELETE"),
-      tkw("WIDGET"),
+      kw("WIDGET"),
       field("widget", $._expression),
       repeat(seq(",", field("widget", $._expression))),
       optional($.__delete_no_error),
@@ -34,7 +34,7 @@ module.exports = ({ kw, tkw }) => ({
     seq(field("name", $.identifier), optional($.__delete_no_error)),
 
   __delete_validate_phrase: ($) =>
-    seq(tkw("VALIDATE"), "(", $._expression, ",", $._expression, ")"),
-  __delete_no_error: ($) => tkw("NO-ERROR"),
+    seq(kw("VALIDATE"), "(", $._expression, ",", $._expression, ")"),
+  __delete_no_error: ($) => kw("NO-ERROR"),
   __delete_record_name: ($) => choice($.identifier, $.qualified_name),
 });

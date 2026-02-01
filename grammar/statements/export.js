@@ -1,4 +1,4 @@
-module.exports = ({ kw, tkw }) => ({
+module.exports = ({ kw }) => ({
   export_statement: ($) => seq(kw("EXPORT"), $.__export_body, $._terminator),
 
   __export_body: ($) =>
@@ -26,5 +26,5 @@ module.exports = ({ kw, tkw }) => ({
   __export_stream_handle_phrase: ($) =>
     seq(kw("STREAM-HANDLE"), field("handle", $._expression)),
   __export_delimiter_phrase: ($) => seq(kw("DELIMITER"), $.string_literal),
-  __export_no_lobs: ($) => tkw("NO-LOBS"),
+  __export_no_lobs: ($) => kw("NO-LOBS"),
 });

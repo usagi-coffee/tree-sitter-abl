@@ -1,9 +1,9 @@
-module.exports = ({ kw, tkw }) => ({
+module.exports = ({ kw }) => ({
   in_frame_expression: ($) =>
     seq(
       field("value", $.__in_frame_target),
       kw("IN"),
-      tkw("FRAME"),
+      kw("FRAME"),
       field("frame", $.identifier),
     ),
   __in_frame_target: ($) =>

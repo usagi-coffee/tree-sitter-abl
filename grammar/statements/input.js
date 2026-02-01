@@ -1,4 +1,4 @@
-module.exports = ({ kw, tkw }) => ({
+module.exports = ({ kw }) => ({
   input_statement: ($) => seq(kw("INPUT"), $.__input_body, $._terminator),
 
   __input_body: ($) =>
@@ -9,15 +9,12 @@ module.exports = ({ kw, tkw }) => ({
           alias($.__input_stream_handle_phrase, $.stream_handle_phrase),
         ),
       ),
-      choice(tkw("CLOSE"), seq(kw("FROM"), $.__input_from_target)),
+      choice(kw("CLOSE"), seq(kw("FROM"), $.__input_from_target)),
       optional(alias($.__input_lob_dir_phrase, $.lob_dir_phrase)),
       optional(kw("BINARY")),
-      optional(choice(tkw("ECHO"), tkw("NO-ECHO"))),
+      optional(choice(kw("ECHO"), kw("NO-ECHO"))),
       optional(
-        choice(
-          seq(kw("MAP"), field("map", $.__input_map_entry)),
-          tkw("NO-MAP"),
-        ),
+        choice(seq(kw("MAP"), field("map", $.__input_map_entry)), kw("NO-MAP")),
       ),
       optional(kw("UNBUFFERED")),
       optional(alias($.__input_convert_phrase, $.convert_phrase)),
@@ -26,14 +23,14 @@ module.exports = ({ kw, tkw }) => ({
   __input_from_target: ($) =>
     choice(
       field("file", $.__input_file_target),
-      tkw("TERMINAL"),
-      seq(tkw("VALUE"), "(", $._expression, ")"),
+      kw("TERMINAL"),
+      seq(kw("VALUE"), "(", $._expression, ")"),
       seq(
-        tkw("OS-DIR"),
+        kw("OS-DIR"),
         "(",
         field("directory", $._expression),
         ")",
-        optional(tkw("NO-ATTR-LIST")),
+        optional(kw("NO-ATTR-LIST")),
       ),
     ),
   __input_file_target: ($) =>
@@ -51,13 +48,13 @@ module.exports = ({ kw, tkw }) => ({
       kw("LOB-DIR"),
       choice(
         alias($.constant_expression, $.constant),
-        seq(tkw("VALUE"), "(", $._expression, ")"),
+        seq(kw("VALUE"), "(", $._expression, ")"),
       ),
     ),
   __input_map_entry: ($) => choice($.identifier, $.string_literal),
   __input_convert_phrase: ($) =>
     choice(
-      tkw("NO-CONVERT"),
+      kw("NO-CONVERT"),
       seq(
         kw("CONVERT"),
         choice(

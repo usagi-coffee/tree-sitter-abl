@@ -1,9 +1,9 @@
-module.exports = ({ kw, tkw }) => ({
+module.exports = ({ kw }) => ({
   __widget_keywords: ($) =>
-    choice(tkw("FRAME"), tkw("MENU"), tkw("MENU-ITEM"), tkw("QUERY")),
+    choice(kw("FRAME"), kw("MENU"), kw("MENU-ITEM"), kw("QUERY")),
   widget_phrase: ($) =>
     choice(
-      seq(tkw("FRAME"), field("frame", $.identifier)),
+      seq(kw("FRAME"), field("frame", $.identifier)),
       field("widget", $.identifier),
     ),
 });

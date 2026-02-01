@@ -1,8 +1,8 @@
-module.exports = ({ kw, tkw }) => ({
+module.exports = ({ kw }) => ({
   disable_triggers_statement: ($) =>
     seq(
-      tkw("DISABLE"),
-      tkw("TRIGGERS"),
+      kw("DISABLE"),
+      kw("TRIGGERS"),
       $.__disable_treiggers_body,
       $._terminator,
     ),
@@ -13,7 +13,7 @@ module.exports = ({ kw, tkw }) => ({
       field("mode", choice(kw("DUMP"), kw("LOAD"))),
       kw("OF"),
       field("table", $.__disable_triggers_record_name),
-      optional(tkw("ALLOW-REPLICATION")),
+      optional(kw("ALLOW-REPLICATION")),
     ),
 
   __disable_triggers_record_name: ($) => choice($.identifier, $.qualified_name),

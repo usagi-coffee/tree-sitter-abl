@@ -1,10 +1,10 @@
-module.exports = ({ kw, tkw }) => ({
+module.exports = ({ kw }) => ({
   __widget_keywords: ($) =>
-    choice(tkw("FRAME"), tkw("MENU"), tkw("MENU-ITEM"), tkw("QUERY")),
+    choice(kw("FRAME"), kw("MENU"), kw("MENU-ITEM"), kw("QUERY")),
 
   widget_access: ($) =>
     seq(
-      choice(tkw("QUERY"), tkw("MENU-ITEM"), tkw("MENU"), tkw("FRAME")),
+      choice(kw("QUERY"), kw("MENU-ITEM"), kw("MENU"), kw("FRAME")),
       field("query", $.identifier),
       ":",
       field("attribute", $.identifier),

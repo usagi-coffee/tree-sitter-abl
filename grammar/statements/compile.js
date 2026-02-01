@@ -1,23 +1,22 @@
-module.exports = ({ kw, tkw }) => ({
-  compile_statement: ($) =>
-    seq(tkw("COMPILE"), $.__compile_body, $._terminator),
+module.exports = ({ kw }) => ({
+  compile_statement: ($) => seq(kw("COMPILE"), $.__compile_body, $._terminator),
   __compile_body: ($) =>
     seq(
       field("file", $.__compile_file),
       repeat(alias($.__compile_option, $.compile_option)),
-      optional(tkw("NO-ERROR")),
+      optional(kw("NO-ERROR")),
     ),
   __compile_file: ($) =>
     choice(
       $.identifier,
       $.qualified_name,
       $.string_literal,
-      seq(tkw("VALUE"), "(", $._expression, ")"),
+      seq(kw("VALUE"), "(", $._expression, ")"),
     ),
   __compile_option: ($) =>
     choice(
       seq(
-        tkw("SAVE"),
+        kw("SAVE"),
         optional(seq("=", field("save", $._expression))),
         optional(seq(kw("INTO"), field("into", $._expression))),
       ),
@@ -30,26 +29,23 @@ module.exports = ({ kw, tkw }) => ({
       seq(kw("PREPROCESS"), field("preprocess", $._expression)),
       seq(kw("OPTIONS"), field("options", $._expression)),
       seq(kw("OPTIONS-FILE"), field("options_file", $._expression)),
+      seq(kw("MIN-SIZE"), optional(seq("=", field("min_size", $._expression)))),
       seq(
-        tkw("MIN-SIZE"),
-        optional(seq("=", field("min_size", $._expression))),
-      ),
-      seq(
-        tkw("DEFAULT-UNTRANSLATABLE"),
+        kw("DEFAULT-UNTRANSLATABLE"),
         optional(seq("=", field("default_untranslatable", $._expression))),
       ),
-      seq(tkw("LANGUAGES"), "(", field("languages", $._expression), ")"),
+      seq(kw("LANGUAGES"), "(", field("languages", $._expression), ")"),
       seq(kw("TEXT-SEG-GROW"), field("text_seg_grow", $._expression)),
-      tkw("ATTR-SPACE"),
-      tkw("NO-ATTR-SPACE"),
+      kw("ATTR-SPACE"),
+      kw("NO-ATTR-SPACE"),
       seq(
-        tkw("STREAM-IO"),
+        kw("STREAM-IO"),
         optional(seq("=", field("stream_io", $._expression))),
       ),
-      seq(tkw("V6FRAME"), optional(seq("=", field("v6frame", $._expression)))),
-      tkw("USE-REVVIDEO"),
-      tkw("USE-UNDERLINE"),
-      tkw("GENERATE-MD5"),
+      seq(kw("V6FRAME"), optional(seq("=", field("v6frame", $._expression)))),
+      kw("USE-REVVIDEO"),
+      kw("USE-UNDERLINE"),
+      kw("GENERATE-MD5"),
     ),
 
   __compile_listing_option: ($) =>
@@ -57,7 +53,7 @@ module.exports = ({ kw, tkw }) => ({
       seq(
         kw("LISTING"),
         field("listing", $._expression),
-        tkw("APPEND"),
+        kw("APPEND"),
         optional(seq("=", field("append", $._expression))),
       ),
       seq(

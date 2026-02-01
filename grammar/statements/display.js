@@ -1,13 +1,13 @@
-module.exports = ({ kw, tkw }) => ({
+module.exports = ({ kw }) => ({
   display_statement: ($) =>
     seq(
-      choice(tkw("DISPLAY"), token(/DISP(LAY)?/i)),
+      choice(kw("DISPLAY"), token(/DISP(LAY)?/i)),
       optional(alias($.__display_stream_phrase, $.stream_phrase)),
-      optional(tkw("UNLESS-HIDDEN")),
+      optional(kw("UNLESS-HIDDEN")),
       choice($.__display_record_form, repeat($.__display_item)),
-      optional(seq(kw("IN"), tkw("WINDOW"), field("window", $._expression))),
+      optional(seq(kw("IN"), kw("WINDOW"), field("window", $._expression))),
       repeat($.frame_phrase),
-      optional(tkw("NO-ERROR")),
+      optional(kw("NO-ERROR")),
       $._terminator,
     ),
 
@@ -33,7 +33,7 @@ module.exports = ({ kw, tkw }) => ({
           ),
         ),
         optional($.format_phrase),
-        optional(seq(tkw("WHEN"), field("when", $._expression))),
+        optional(seq(kw("WHEN"), field("when", $._expression))),
         optional(
           seq("@", field("base", choice($.identifier, $.qualified_name))),
         ),
@@ -42,14 +42,14 @@ module.exports = ({ kw, tkw }) => ({
 
   __display_skip_phrase: ($) =>
     choice(
-      prec(1, seq(tkw("SKIP"), "(", optional($._expression), ")")),
-      tkw("SKIP"),
+      prec(1, seq(kw("SKIP"), "(", optional($._expression), ")")),
+      kw("SKIP"),
     ),
 
   __display_space_phrase: ($) =>
     choice(
-      prec(1, seq(tkw("SPACE"), "(", optional($._expression), ")")),
-      tkw("SPACE"),
+      prec(1, seq(kw("SPACE"), "(", optional($._expression), ")")),
+      kw("SPACE"),
     ),
 
   __display_stream_phrase: ($) =>

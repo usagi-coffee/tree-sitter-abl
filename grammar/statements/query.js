@@ -1,4 +1,4 @@
-module.exports = ({ kw, tkw }) => ({
+module.exports = ({ kw }) => ({
   query_definition: ($) =>
     seq(
       choice(kw("DEFINE"), kw("DEF")),
@@ -22,8 +22,8 @@ module.exports = ({ kw, tkw }) => ({
       kw("FOR"),
       $.query_table_list,
       optional(seq(kw("CACHE"), field("cache", $.number_literal))),
-      optional(tkw("SCROLLING")),
-      optional(tkw("RCODE-INFORMATION")),
+      optional(kw("SCROLLING")),
+      optional(kw("RCODE-INFORMATION")),
     ),
 
   query_table_list: ($) =>
@@ -38,10 +38,12 @@ module.exports = ({ kw, tkw }) => ({
     seq(
       choice(kw("FIELDS"), kw("EXCEPT")),
       "(",
-      optional(seq(
-        $.__query_field_name,
-        repeat(choice(seq(",", $.__query_field_name), $.__query_field_name)),
-      )),
+      optional(
+        seq(
+          $.__query_field_name,
+          repeat(choice(seq(",", $.__query_field_name), $.__query_field_name)),
+        ),
+      ),
       ")",
     ),
   __query_shared_scope: ($) =>

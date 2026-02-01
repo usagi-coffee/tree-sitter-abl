@@ -1,4 +1,4 @@
-module.exports = ({ kw, tkw }) => ({
+module.exports = ({ kw }) => ({
   terminal_statement: ($) =>
-    seq(tkw("TERMINAL"), "=", field("terminal", $._expression), $._terminator),
+    seq(kw("TERMINAL"), "=", field("terminal", $._expression), $._terminator),
 });

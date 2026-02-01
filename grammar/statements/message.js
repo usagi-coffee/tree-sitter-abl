@@ -1,4 +1,4 @@
-module.exports = ({ kw, tkw }) => ({
+module.exports = ({ kw }) => ({
   message_statement: ($) => seq(kw("MESSAGE"), $.__message_body, $._terminator),
 
   __message_body: ($) =>
@@ -15,25 +15,20 @@ module.exports = ({ kw, tkw }) => ({
       optional(seq(kw("IN"), kw("WINDOW"), field("window", $._expression))),
     ),
   __message_color_value: ($) =>
-    choice(
-      tkw("NORMAL"),
-      tkw("INPUT"),
-      tkw("MESSAGES"),
-      $.color_phrase,
-    ),
+    choice(kw("NORMAL"), kw("INPUT"), kw("MESSAGES"), $.color_phrase),
 
   __message_view_as_phrase: ($) =>
     seq(
       kw("VIEW-AS"),
-      tkw("ALERT-BOX"),
+      kw("ALERT-BOX"),
       optional(
         choice(
-          tkw("MESSAGE"),
-          tkw("QUESTION"),
-          tkw("INFORMATION"),
-          tkw("INFO"),
-          tkw("ERROR"),
-          tkw("WARNING"),
+          kw("MESSAGE"),
+          kw("QUESTION"),
+          kw("INFORMATION"),
+          kw("INFO"),
+          kw("ERROR"),
+          kw("WARNING"),
         ),
       ),
       optional(alias($.__message_buttons_phrase, $.buttons_phrase)),
@@ -44,18 +39,18 @@ module.exports = ({ kw, tkw }) => ({
     seq(
       kw("BUTTONS"),
       choice(
-        tkw("YES-NO"),
-        tkw("YES-NO-CANCEL"),
-        tkw("OK-CANCEL"),
-        tkw("RETRY-CANCEL"),
-        tkw("OK"),
+        kw("YES-NO"),
+        kw("YES-NO-CANCEL"),
+        kw("OK-CANCEL"),
+        kw("RETRY-CANCEL"),
+        kw("OK"),
       ),
     ),
   __message_skip_item: ($) =>
     prec.right(
       choice(
-        seq(tkw("SKIP"), "(", field("count", $._expression), ")"),
-        tkw("SKIP"),
+        seq(kw("SKIP"), "(", field("count", $._expression), ")"),
+        kw("SKIP"),
       ),
     ),
 
@@ -70,7 +65,7 @@ module.exports = ({ kw, tkw }) => ({
         ),
       ),
       optional(seq(kw("FORMAT"), field("format", $.string_literal))),
-      optional(tkw("AUTO-RETURN")),
+      optional(kw("AUTO-RETURN")),
     ),
   __message_field_name: ($) => choice($.identifier, $.qualified_name),
 });

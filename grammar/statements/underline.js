@@ -1,6 +1,6 @@
-module.exports = ({ kw, tkw }) => ({
+module.exports = ({ kw }) => ({
   underline_statement: ($) =>
-    seq(tkw("UNDERLINE"), $.__underline_body, $._terminator),
+    seq(kw("UNDERLINE"), $.__underline_body, $._terminator),
 
   __underline_body: ($) =>
     seq(

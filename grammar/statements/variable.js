@@ -1,4 +1,4 @@
-module.exports = ({ kw, tkw }) => ({
+module.exports = ({ kw }) => ({
   variable_definition: ($) =>
     seq(
       choice(kw("DEFINE"), kw("DEF")),
@@ -88,7 +88,7 @@ module.exports = ({ kw, tkw }) => ({
   __variable_serialization_modifier: ($) =>
     choice(kw("SERIALIZABLE"), kw("NON-SERIALIZABLE")),
   __variable_extent_phrase: ($) =>
-    seq(tkw("EXTENT"), optional($.__variable_extent_size)),
+    seq(kw("EXTENT"), optional($.__variable_extent_size)),
   __variable_serialize_name_option: ($) =>
     seq(kw("SERIALIZE-NAME"), field("name", $._name_or_string)),
   _name_or_string: ($) => choice($.identifier, $.string_literal),
@@ -99,7 +99,7 @@ module.exports = ({ kw, tkw }) => ({
     seq(kw("CONTEXT-HELP-ID"), $._expression),
   __variable_dcolor_option: ($) => seq(kw("DCOLOR"), $._expression),
   __variable_decimals_option: ($) => seq(kw("DECIMALS"), $.number_literal),
-  __variable_drop_target_option: ($) => tkw("DROP-TARGET"),
+  __variable_drop_target_option: ($) => kw("DROP-TARGET"),
   __variable_font_option: ($) => seq(kw("FONT"), $._expression),
   __variable_fgcolor_option: ($) => seq(kw("FGCOLOR"), $._expression),
   __variable_label_option: ($) => seq(kw("LABEL"), $.__variable_label_list),
@@ -112,21 +112,21 @@ module.exports = ({ kw, tkw }) => ({
     ),
   __variable_view_as_option: ($) =>
     choice(
-      tkw("HORIZONTAL"),
-      tkw("VERTICAL"),
-      tkw("SINGLE"),
-      tkw("MULTIPLE"),
-      seq(tkw("LIST-ITEMS"), $.__variable_list_items),
-      seq(tkw("RADIO-BUTTONS"), $.__variable_radio_buttons),
-      seq(tkw("SIZE"), $._expression, kw("BY"), $._expression),
-      tkw("SCROLLBAR-VERTICAL"),
-      tkw("NO-DRAG"),
+      kw("HORIZONTAL"),
+      kw("VERTICAL"),
+      kw("SINGLE"),
+      kw("MULTIPLE"),
+      seq(kw("LIST-ITEMS"), $.__variable_list_items),
+      seq(kw("RADIO-BUTTONS"), $.__variable_radio_buttons),
+      seq(kw("SIZE"), $._expression, kw("BY"), $._expression),
+      kw("SCROLLBAR-VERTICAL"),
+      kw("NO-DRAG"),
     ),
-  __variable_no_undo: ($) => tkw("NO-UNDO"),
+  __variable_no_undo: ($) => kw("NO-UNDO"),
   __variable_mouse_pointer_option: ($) =>
     seq(kw("MOUSE-POINTER"), $._expression),
   __variable_case_sensitive_option: ($) =>
-    seq(optional(kw("NOT")), tkw("CASE-SENSITIVE")),
+    seq(optional(kw("NOT")), kw("CASE-SENSITIVE")),
   __variable_extent_size: ($) =>
     choice(
       $.number_literal,

@@ -1,7 +1,7 @@
-module.exports = ({ kw, tkw }) => ({
+module.exports = ({ kw }) => ({
   open_query_statement: ($) =>
     seq(
-      tkw("OPEN"),
+      kw("OPEN"),
       kw("QUERY"),
       field("query", $.identifier),
       $.__open_query_body,
@@ -10,42 +10,42 @@ module.exports = ({ kw, tkw }) => ({
   __open_query_body: ($) =>
     choice(
       seq(
-        choice(kw("FOR"), tkw("PRESELECT")),
-        tkw("EACH"),
+        choice(kw("FOR"), kw("PRESELECT")),
+        kw("EACH"),
         alias($.__open_query_record_phrase, $.record_phrase),
         repeat(
           seq(
             ",",
-            choice(tkw("EACH"), tkw("FIRST"), tkw("LAST")),
+            choice(kw("EACH"), kw("FIRST"), kw("LAST")),
             alias($.__open_query_record_phrase, $.record_phrase),
           ),
         ),
         optional(alias($.__open_query_tuning, $.query_tuning)),
-        tkw("BREAK"),
+        kw("BREAK"),
         repeat(alias($.__open_query_by_phrase, $.by_phrase)),
         optional(
           field(
             "lock",
-            choice(tkw("SHARE-LOCK"), tkw("EXCLUSIVE-LOCK"), tkw("NO-LOCK")),
+            choice(kw("SHARE-LOCK"), kw("EXCLUSIVE-LOCK"), kw("NO-LOCK")),
           ),
         ),
-        optional(tkw("INDEXED-REPOSITION")),
+        optional(kw("INDEXED-REPOSITION")),
         optional(seq(kw("MAX-ROWS"), field("max_rows", $._expression))),
       ),
       seq(
-        choice(kw("FOR"), tkw("PRESELECT")),
-        tkw("EACH"),
+        choice(kw("FOR"), kw("PRESELECT")),
+        kw("EACH"),
         alias($.__open_query_record_phrase, $.record_phrase),
         repeat(
           seq(
             ",",
-            choice(tkw("EACH"), tkw("FIRST"), tkw("LAST")),
+            choice(kw("EACH"), kw("FIRST"), kw("LAST")),
             alias($.__open_query_record_phrase, $.record_phrase),
           ),
         ),
         optional(alias($.__open_query_tuning, $.query_tuning)),
         repeat(alias($.__open_query_by_phrase, $.by_phrase)),
-        optional(tkw("INDEXED-REPOSITION")),
+        optional(kw("INDEXED-REPOSITION")),
         optional(seq(kw("MAX-ROWS"), field("max_rows", $._expression))),
       ),
     ),
@@ -60,7 +60,7 @@ module.exports = ({ kw, tkw }) => ({
       optional(
         field(
           "lock",
-          choice(tkw("SHARE-LOCK"), tkw("EXCLUSIVE-LOCK"), tkw("NO-LOCK")),
+          choice(kw("SHARE-LOCK"), kw("EXCLUSIVE-LOCK"), kw("NO-LOCK")),
         ),
       ),
     ),
@@ -70,20 +70,20 @@ module.exports = ({ kw, tkw }) => ({
       "(",
       repeat1(
         choice(
-          seq(tkw("LOOKAHEAD"), optional(seq(kw("CACHE-SIZE"), $._expression))),
-          tkw("NO-LOOKAHEAD"),
-          seq(kw("DEBUG"), choice(tkw("SQL"), tkw("EXTENDED"))),
-          tkw("NO-DEBUG"),
-          tkw("SEPARATE-CONNECTION"),
-          tkw("NO-SEPARATE-CONNECTION"),
-          tkw("JOIN-BY-SQLDB"),
-          tkw("NO-JOIN-BY-SQLDB"),
-          tkw("BIND-WHERE"),
-          tkw("NO-BIND-WHERE"),
+          seq(kw("LOOKAHEAD"), optional(seq(kw("CACHE-SIZE"), $._expression))),
+          kw("NO-LOOKAHEAD"),
+          seq(kw("DEBUG"), choice(kw("SQL"), kw("EXTENDED"))),
+          kw("NO-DEBUG"),
+          kw("SEPARATE-CONNECTION"),
+          kw("NO-SEPARATE-CONNECTION"),
+          kw("JOIN-BY-SQLDB"),
+          kw("NO-JOIN-BY-SQLDB"),
+          kw("BIND-WHERE"),
+          kw("NO-BIND-WHERE"),
         ),
       ),
       ")",
     ),
   __open_query_by_phrase: ($) =>
-    seq(kw("BY"), field("by", $._expression), optional(tkw("DESCENDING"))),
+    seq(kw("BY"), field("by", $._expression), optional(kw("DESCENDING"))),
 });

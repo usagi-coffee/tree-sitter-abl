@@ -1,5 +1,5 @@
-module.exports = ({ tkw }) => ({
-  locked_expression: ($) => seq(tkw("LOCKED"), $.__locked_body),
+module.exports = ({ kw }) => ({
+  locked_expression: ($) => seq(kw("LOCKED"), $.__locked_body),
 
   __locked_body: ($) =>
     seq(

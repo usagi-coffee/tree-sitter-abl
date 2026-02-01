@@ -1,7 +1,7 @@
-module.exports = ({ kw, tkw }) => ({
+module.exports = ({ kw }) => ({
   os_create_dir_statement: ($) =>
     seq(
-      tkw("OS-CREATE-DIR"),
+      kw("OS-CREATE-DIR"),
       repeat1(field("directory", $._expression)),
       $._terminator,
     ),

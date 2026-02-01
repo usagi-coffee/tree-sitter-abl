@@ -1,6 +1,6 @@
-module.exports = ({ tkw }) => ({
+module.exports = ({ kw }) => ({
   set_byte_order_statement: ($) =>
-    seq(tkw("SET-BYTE-ORDER"), $.__set_byte_order_body, $._terminator),
+    seq(kw("SET-BYTE-ORDER"), $.__set_byte_order_body, $._terminator),
 
   __set_byte_order_body: ($) =>
     seq(

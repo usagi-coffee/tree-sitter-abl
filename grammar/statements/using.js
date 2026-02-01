@@ -1,4 +1,4 @@
-module.exports = ({ kw, tkw }) => ({
+module.exports = ({ kw }) => ({
   using_statement: ($) =>
     seq(
       kw("USING"),
@@ -10,10 +10,7 @@ module.exports = ({ kw, tkw }) => ({
 
   __using_type_ref: ($) =>
     prec.right(
-      seq(
-        $.__using_base_name,
-        optional(seq("<", $.__using_type_ref, ">")),
-      ),
+      seq($.__using_base_name, optional(seq("<", $.__using_type_ref, ">"))),
     ),
 
   __using_base_name: ($) =>
@@ -31,8 +28,5 @@ module.exports = ({ kw, tkw }) => ({
     ),
 
   __using_from_clause: ($) =>
-    choice(
-      seq(kw("FROM"), tkw("ASSEMBLY")),
-      seq(kw("FROM"), tkw("PROPATH")),
-    ),
+    choice(seq(kw("FROM"), kw("ASSEMBLY")), seq(kw("FROM"), kw("PROPATH"))),
 });

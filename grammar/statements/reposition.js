@@ -1,6 +1,6 @@
-module.exports = ({ kw, tkw }) => ({
+module.exports = ({ kw }) => ({
   reposition_statement: ($) =>
-    seq(tkw("REPOSITION"), $.__reposition_body, $._terminator),
+    seq(kw("REPOSITION"), $.__reposition_body, $._terminator),
 
   __reposition_body: ($) =>
     seq(
@@ -14,17 +14,17 @@ module.exports = ({ kw, tkw }) => ({
           optional(
             seq(kw("FOR"), kw("TENANT"), field("tenant", $._expression)),
           ),
-          optional(tkw("NO-ERROR")),
+          optional(kw("NO-ERROR")),
         ),
         seq(
           kw("TO"),
           kw("RECID"),
           field("recid", $._expression),
-          optional(tkw("NO-ERROR")),
+          optional(kw("NO-ERROR")),
         ),
         seq(kw("TO"), kw("ROW"), field("row", $._expression)),
-        seq(tkw("FORWARDS"), field("count", $._expression)),
-        seq(tkw("BACKWARDS"), field("count", $._expression)),
+        seq(kw("FORWARDS"), field("count", $._expression)),
+        seq(kw("BACKWARDS"), field("count", $._expression)),
       ),
     ),
 });

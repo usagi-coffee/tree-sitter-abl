@@ -1,4 +1,8 @@
-module.exports = ({ tkw }) => ({
+module.exports = ({ kw }) => ({
   load_picture_statement: ($) =>
-    seq(tkw("LOAD-PICTURE"), optional(field("image", $._expression)), $._terminator),
+    seq(
+      kw("LOAD-PICTURE"),
+      optional(field("image", $._expression)),
+      $._terminator,
+    ),
 });

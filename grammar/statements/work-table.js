@@ -1,16 +1,16 @@
-module.exports = ({ kw, tkw }) => ({
+module.exports = ({ kw }) => ({
   work_table_definition: ($) =>
     seq(
       choice(kw("DEFINE"), kw("DEF")),
       optional(
         choice(
           alias($.__work_table_shared_scope, $.shared_variable_scope),
-          alias($.__work_table_access_modifier, $.access_modifier)
-        )
+          alias($.__work_table_access_modifier, $.access_modifier),
+        ),
       ),
       kw("WORK-TABLE"),
       $.__work_table_body,
-      $._terminator
+      $._terminator,
     ),
 
   __work_table_body: ($) =>
@@ -18,7 +18,7 @@ module.exports = ({ kw, tkw }) => ({
       field("name", $.identifier),
       optional(alias($.__temp_table_like_phrase, $.like_phrase)),
       optional(alias($.__temp_table_no_undo, $.no_undo)),
-      repeat(alias($.__temp_table_field, $.field))
+      repeat(alias($.__temp_table_field, $.field)),
     ),
 
   __work_table_shared_scope: ($) =>
@@ -34,8 +34,8 @@ module.exports = ({ kw, tkw }) => ({
       repeat(
         choice(
           alias($.__temp_table_field, $.field),
-          alias($.__temp_table_index, $.index)
-        )
-      )
+          alias($.__temp_table_index, $.index),
+        ),
+      ),
     ),
 });

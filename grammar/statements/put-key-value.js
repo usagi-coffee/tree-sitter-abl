@@ -1,4 +1,4 @@
-module.exports = ({ kw, tkw }) => ({
+module.exports = ({ kw }) => ({
   put_key_value_statement: ($) =>
     seq(kw("PUT-KEY-VALUE"), $.__put_key_value_body, $._terminator),
 
@@ -9,15 +9,15 @@ module.exports = ({ kw, tkw }) => ({
           kw("SECTION"),
           field("section", $._expression),
           kw("KEY"),
-          choice(field("key", $._expression), tkw("DEFAULT")),
+          choice(field("key", $._expression), kw("DEFAULT")),
           kw("VALUE"),
           field("value", $._expression),
         ),
         seq(
           choice(kw("COLOR"), kw("FONT")),
-          choice(field("number", $._expression), tkw("ALL")),
+          choice(field("number", $._expression), kw("ALL")),
         ),
       ),
-      optional(tkw("NO-ERROR")),
+      optional(kw("NO-ERROR")),
     ),
 });

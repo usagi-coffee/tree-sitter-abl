@@ -1,3 +1,3 @@
-module.exports = ({ tkw }) => ({
-  dictionary_statement: ($) => seq(tkw("DICTIONARY"), $._terminator),
+module.exports = ({ kw }) => ({
+  dictionary_statement: ($) => seq(kw("DICTIONARY"), $._terminator),
 });

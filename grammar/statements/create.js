@@ -1,4 +1,4 @@
-module.exports = ({ kw, tkw }) => ({
+module.exports = ({ kw }) => ({
   create_statement: ($) => seq(kw("CREATE"), $.__create_body, $._terminator),
 
   __create_body: ($) =>
@@ -9,14 +9,14 @@ module.exports = ({ kw, tkw }) => ({
         optional(seq(kw("FOR"), kw("TENANT"), field("tenant", $._expression))),
         optional(
           seq(
-            tkw("USING"),
+            kw("USING"),
             choice(
-              seq(tkw("ROWID"), "(", field("rowid", $._expression), ")"),
-              seq(tkw("RECID"), "(", field("recid", $._expression), ")"),
+              seq(kw("ROWID"), "(", field("rowid", $._expression), ")"),
+              seq(kw("RECID"), "(", field("recid", $._expression), ")"),
             ),
           ),
         ),
-        optional(tkw("NO-ERROR")),
+        optional(kw("NO-ERROR")),
       ),
     ),
   __create_record_name: ($) => choice($.identifier, $.qualified_name),

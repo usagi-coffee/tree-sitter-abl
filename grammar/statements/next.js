@@ -1,10 +1,6 @@
-module.exports = ({ tkw }) => ({
+module.exports = ({ kw }) => ({
   next_statement: ($) =>
     prec.right(
-      seq(
-        tkw("NEXT"),
-        optional(field("label", $.identifier)),
-        $._terminator,
-      ),
+      seq(kw("NEXT"), optional(field("label", $.identifier)), $._terminator),
     ),
 });

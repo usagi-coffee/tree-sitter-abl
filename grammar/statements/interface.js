@@ -1,15 +1,15 @@
-module.exports = ({ kw, tkw }) => ({
+module.exports = ({ kw }) => ({
   interface_definition: ($) =>
     seq(kw("INTERFACE"), $.__interface_body, $._terminator),
 
   __interface_body: ($) =>
     seq(
       field("name", $._type_name),
-      optional(seq(tkw("INHERITS"), $.__interface_inherits_list)),
+      optional(seq(kw("INHERITS"), $.__interface_inherits_list)),
       choice($._colon, $._terminator_dot),
       repeat(alias($.__interface_body_item, $.interface_body_item)),
-      tkw("END"),
-      optional(tkw("INTERFACE")),
+      kw("END"),
+      optional(kw("INTERFACE")),
     ),
 
   __interface_inherits_list: ($) =>
@@ -30,10 +30,20 @@ module.exports = ({ kw, tkw }) => ({
     ),
 
   __interface_temp_table: ($) =>
-    seq(choice(kw("DEFINE"), kw("DEF")), kw("TEMP-TABLE"), $.__temp_table_body, $._terminator),
+    seq(
+      choice(kw("DEFINE"), kw("DEF")),
+      kw("TEMP-TABLE"),
+      $.__temp_table_body,
+      $._terminator,
+    ),
 
   __interface_dataset: ($) =>
-    seq(choice(kw("DEFINE"), kw("DEF")), kw("DATASET"), $.__dataset_body, $._terminator),
+    seq(
+      choice(kw("DEFINE"), kw("DEF")),
+      kw("DATASET"),
+      $.__dataset_body,
+      $._terminator,
+    ),
 
   __interface_event: ($) =>
     seq(

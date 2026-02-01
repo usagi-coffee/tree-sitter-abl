@@ -1,4 +1,4 @@
-module.exports = ({ kw, tkw }) => ({
+module.exports = ({ kw }) => ({
   input_through_statement: ($) =>
     seq(
       kw("INPUT"),
@@ -17,11 +17,11 @@ module.exports = ({ kw, tkw }) => ({
     seq(
       $.__input_through_program_target,
       repeat($.__input_through_argument),
-      optional(choice(tkw("ECHO"), tkw("NO-ECHO"))),
+      optional(choice(kw("ECHO"), kw("NO-ECHO"))),
       optional(
         choice(
           seq(kw("MAP"), field("map", $.__input_through_map_entry)),
-          tkw("NO-MAP"),
+          kw("NO-MAP"),
         ),
       ),
       optional(kw("UNBUFFERED")),
@@ -32,12 +32,12 @@ module.exports = ({ kw, tkw }) => ({
     choice(
       field("program", $.identifier),
       field("program", $.string_literal),
-      seq(tkw("VALUE"), "(", $._expression, ")"),
+      seq(kw("VALUE"), "(", $._expression, ")"),
     ),
   __input_through_argument: ($) =>
     choice(
       $.__input_through_arg_value,
-      seq(tkw("VALUE"), "(", $._expression, ")"),
+      seq(kw("VALUE"), "(", $._expression, ")"),
     ),
   __input_through_arg_value: ($) =>
     choice(
@@ -55,7 +55,7 @@ module.exports = ({ kw, tkw }) => ({
   __input_through_map_entry: ($) => choice($.identifier, $.string_literal),
   __input_through_convert_phrase: ($) =>
     choice(
-      tkw("NO-CONVERT"),
+      kw("NO-CONVERT"),
       seq(
         kw("CONVERT"),
         optional(seq(kw("TARGET"), field("target", $.string_literal))),

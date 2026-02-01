@@ -1,6 +1,6 @@
-module.exports = ({ tkw }) => ({
+module.exports = ({ kw }) => ({
   available_expression: ($) =>
-    seq(choice(tkw("AVAIL"), tkw("AVAILABLE")), $.__available_expression_body),
+    seq(choice(kw("AVAIL"), kw("AVAILABLE")), $.__available_expression_body),
 
   __available_expression_body: ($) =>
     seq(

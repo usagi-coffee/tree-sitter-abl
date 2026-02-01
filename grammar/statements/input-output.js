@@ -1,4 +1,4 @@
-module.exports = ({ kw, tkw }) => ({
+module.exports = ({ kw }) => ({
   input_output_statement: ($) =>
     seq(kw("INPUT-OUTPUT"), $.__input_output_body, $._terminator),
 
@@ -11,7 +11,7 @@ module.exports = ({ kw, tkw }) => ({
         ),
       ),
       choice(
-        tkw("CLOSE"),
+        kw("CLOSE"),
         seq(
           kw("THROUGH"),
           $.__input_output_through_target,
@@ -29,7 +29,7 @@ module.exports = ({ kw, tkw }) => ({
     choice(
       field("program", $.identifier),
       field("program", $.string_literal),
-      seq(tkw("VALUE"), "(", $._expression, ")"),
+      seq(kw("VALUE"), "(", $._expression, ")"),
     ),
   __input_output_through_argument: ($) =>
     choice(
@@ -37,20 +37,20 @@ module.exports = ({ kw, tkw }) => ({
       $.number_literal,
       $.identifier,
       alias($.constant_expression, $.constant),
-      seq(tkw("VALUE"), "(", $._expression, ")"),
+      seq(kw("VALUE"), "(", $._expression, ")"),
     ),
   __input_output_through_option: ($) =>
     choice(
-      tkw("ECHO"),
-      tkw("NO-ECHO"),
+      kw("ECHO"),
+      kw("NO-ECHO"),
       seq(kw("MAP"), field("map", choice($.identifier, $.string_literal))),
-      tkw("NO-MAP"),
-      tkw("UNBUFFERED"),
+      kw("NO-MAP"),
+      kw("UNBUFFERED"),
       alias($.__input_output_convert_phrase, $.convert_phrase),
     ),
   __input_output_convert_phrase: ($) =>
     choice(
-      tkw("NO-CONVERT"),
+      kw("NO-CONVERT"),
       seq(
         kw("CONVERT"),
         repeat(

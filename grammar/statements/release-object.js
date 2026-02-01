@@ -1,10 +1,10 @@
-module.exports = ({ kw, tkw }) => ({
+module.exports = ({ kw }) => ({
   release_object_statement: ($) =>
     seq(
       kw("RELEASE"),
-      tkw("OBJECT"),
+      kw("OBJECT"),
       field("handle", $._expression),
-      optional(tkw("NO-ERROR")),
+      optional(kw("NO-ERROR")),
       $._terminator,
     ),
 });

@@ -1,9 +1,9 @@
-module.exports = ({ kw, tkw }) => ({
+module.exports = ({ kw }) => ({
   transaction_mode_statement: ($) =>
     seq(
       kw("TRANSACTION-MODE"),
-      tkw("AUTOMATIC"),
-      optional(tkw("CHAINED")),
+      kw("AUTOMATIC"),
+      optional(kw("CHAINED")),
       $._terminator,
     ),
 });

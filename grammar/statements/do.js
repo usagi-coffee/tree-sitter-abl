@@ -1,12 +1,12 @@
-module.exports = ({ kw, tkw }) => ({
+module.exports = ({ kw }) => ({
   do_block: ($) =>
     prec(
       1,
       seq(
         optional(seq(field("label", $.identifier), ":")),
-        tkw("DO"),
+        kw("DO"),
         $.__do_body,
-        tkw("END"),
+        kw("END"),
         $._terminator,
       ),
     ),
@@ -50,26 +50,26 @@ module.exports = ({ kw, tkw }) => ({
   __do_record: ($) => field("record", choice($.identifier, $.qualified_name)),
   __do_preselect_phrase: ($) =>
     seq(token(/PRESELECT\s+/i), $.preselect_record_list),
-  __do_transaction_phrase: ($) => tkw("TRANSACTION"),
+  __do_transaction_phrase: ($) => kw("TRANSACTION"),
   __do_query_tuning_phrase: ($) =>
     seq(
       kw("QUERY-TUNING"),
       "(",
       repeat1(
         choice(
-          tkw("BIND-WHERE"),
-          tkw("NO-BIND-WHERE"),
+          kw("BIND-WHERE"),
+          kw("NO-BIND-WHERE"),
           seq(kw("CACHE-SIZE"), $._expression),
-          seq(kw("DEBUG"), choice(tkw("SQL"), tkw("EXTENDED"))),
-          tkw("NO-DEBUG"),
-          tkw("INDEX-HINT"),
-          tkw("NO-INDEX-HINT"),
-          tkw("JOIN-BY-SQLDB"),
-          tkw("NO-JOIN-BY-SQLDB"),
-          tkw("LOOKAHEAD"),
-          tkw("NO-LOOKAHEAD"),
-          tkw("SEPARATE-CONNECTION"),
-          tkw("NO-SEPARATE-CONNECTION"),
+          seq(kw("DEBUG"), choice(kw("SQL"), kw("EXTENDED"))),
+          kw("NO-DEBUG"),
+          kw("INDEX-HINT"),
+          kw("NO-INDEX-HINT"),
+          kw("JOIN-BY-SQLDB"),
+          kw("NO-JOIN-BY-SQLDB"),
+          kw("LOOKAHEAD"),
+          kw("NO-LOOKAHEAD"),
+          kw("SEPARATE-CONNECTION"),
+          kw("NO-SEPARATE-CONNECTION"),
         ),
       ),
       ")",
@@ -77,37 +77,37 @@ module.exports = ({ kw, tkw }) => ({
 
   __do_undo_phrase: ($) =>
     seq(
-      tkw("UNDO"),
+      kw("UNDO"),
       optional(field("undo_label", $.identifier)),
       ",",
       $.__do_on_undo_action,
     ),
   __do_on_undo_action: ($) =>
     choice(
-      seq(tkw("THROW"), optional(field("throw_value", $._expression))),
-      seq(tkw("LEAVE"), optional(field("leave_label", $.identifier))),
-      seq(tkw("NEXT"), optional(field("next_label", $.identifier))),
-      seq(tkw("RETRY"), optional(field("retry_label", $.identifier))),
+      seq(kw("THROW"), optional(field("throw_value", $._expression))),
+      seq(kw("LEAVE"), optional(field("leave_label", $.identifier))),
+      seq(kw("NEXT"), optional(field("next_label", $.identifier))),
+      seq(kw("RETRY"), optional(field("retry_label", $.identifier))),
       $.__do_on_undo_return,
     ),
   __do_on_undo_return: ($) =>
     seq(
-      tkw("RETURN"),
+      kw("RETURN"),
       optional(
         choice(
-          seq(tkw("ERROR"), optional(field("error_value", $._expression))),
-          tkw("NO-APPLY"),
+          seq(kw("ERROR"), optional(field("error_value", $._expression))),
+          kw("NO-APPLY"),
           field("return_value", $._expression),
         ),
       ),
     ),
-  __do_undo_throw_phrase: ($) => seq(tkw("UNDO"), ",", tkw("THROW")),
+  __do_undo_throw_phrase: ($) => seq(kw("UNDO"), ",", kw("THROW")),
   __do_undo_leave_phrase: ($) =>
     seq(
-      tkw("UNDO"),
+      kw("UNDO"),
       optional(field("undo_label", $.identifier)),
       ",",
-      tkw("LEAVE"),
+      kw("LEAVE"),
       optional(field("leave_label", $.identifier)),
     ),
 });

@@ -1,7 +1,7 @@
-module.exports = ({ kw, tkw }) => ({
+module.exports = ({ kw }) => ({
   format_phrase: ($) =>
     seq(
-      tkw("FORMAT"),
+      kw("FORMAT"),
       choice($.__format_phrase_string, seq("(", $.__format_phrase_string, ")")),
     ),
 

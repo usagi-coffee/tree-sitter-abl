@@ -1,4 +1,4 @@
-module.exports = ({ kw, tkw }) => ({
+module.exports = ({ kw }) => ({
   procedure_definition: ($) =>
     seq(
       kw("PROCEDURE"),
@@ -8,8 +8,8 @@ module.exports = ({ kw, tkw }) => ({
       optional(alias($.__procedure_in_super_phrase, $.in_super_phrase)),
       $._colon,
       repeat($._statement),
-      tkw("END"),
-      optional(tkw("PROCEDURE")),
+      kw("END"),
+      optional(kw("PROCEDURE")),
       $._terminator,
     ),
 
@@ -27,14 +27,14 @@ module.exports = ({ kw, tkw }) => ({
       alias($.__procedure_stdcall_option, $.stdcall),
     ),
 
-  __procedure_cdecl_option: ($) => tkw("CDECL"),
-  __procedure_stdcall_option: ($) => tkw("STDCALL"),
-  __procedure_ordinal_option: ($) => seq(tkw("ORDINAL"), $.number_literal),
-  __procedure_persistent_option: ($) => tkw("PERSISTENT"),
-  __procedure_pascal_option: ($) => tkw("PASCAL"),
-  __procedure_thread_safe_option: ($) => tkw("THREAD-SAFE"),
+  __procedure_cdecl_option: ($) => kw("CDECL"),
+  __procedure_stdcall_option: ($) => kw("STDCALL"),
+  __procedure_ordinal_option: ($) => seq(kw("ORDINAL"), $.number_literal),
+  __procedure_persistent_option: ($) => kw("PERSISTENT"),
+  __procedure_pascal_option: ($) => kw("PASCAL"),
+  __procedure_thread_safe_option: ($) => kw("THREAD-SAFE"),
   __procedure_external_phrase: ($) =>
-    seq(tkw("EXTERNAL"), field("library", $.string_literal)),
+    seq(kw("EXTERNAL"), field("library", $.string_literal)),
 
   procedure_forward_definition: ($) =>
     seq(
@@ -44,5 +44,5 @@ module.exports = ({ kw, tkw }) => ({
       $._terminator,
     ),
 
-  __procedure_in_super_phrase: ($) => seq(kw("IN"), tkw("SUPER")),
+  __procedure_in_super_phrase: ($) => seq(kw("IN"), kw("SUPER")),
 });

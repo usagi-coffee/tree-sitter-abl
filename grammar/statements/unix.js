@@ -1,12 +1,12 @@
-module.exports = ({ kw, tkw }) => ({
+module.exports = ({ kw }) => ({
   unix_statement: ($) =>
     seq(
-      tkw("UNIX"),
-      optional(tkw("SILENT")),
+      kw("UNIX"),
+      optional(kw("SILENT")),
       repeat(
         choice(
           field("command_token", $.identifier),
-          seq(tkw("VALUE"), "(", field("command", $._expression), ")"),
+          seq(kw("VALUE"), "(", field("command", $._expression), ")"),
         ),
       ),
       $._terminator,

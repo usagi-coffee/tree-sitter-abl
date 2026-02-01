@@ -1,5 +1,5 @@
-module.exports = ({ kw, tkw }) => ({
-  update_statement: ($) => seq(tkw("UPDATE"), $.__update_body, $._terminator),
+module.exports = ({ kw }) => ({
+  update_statement: ($) => seq(kw("UPDATE"), $.__update_body, $._terminator),
 
   __update_body: ($) =>
     choice(prec.dynamic(1, $.__update_record_body), $.__update_fields_body),
@@ -8,16 +8,16 @@ module.exports = ({ kw, tkw }) => ({
       field("record", choice($.identifier, $.qualified_name)),
       optional(seq(kw("EXCEPT"), repeat1(field("except", $.identifier)))),
       optional($.frame_phrase),
-      optional(tkw("NO-ERROR")),
+      optional(kw("NO-ERROR")),
     ),
   __update_fields_body: ($) =>
     seq(
-      optional(tkw("UNLESS-HIDDEN")),
+      optional(kw("UNLESS-HIDDEN")),
       repeat1(alias($.__update_item, $.update_item)),
       optional(alias($.__update_go_on, $.go_on_phrase)),
       optional($.frame_phrase),
       optional($.editing_phrase),
-      optional(tkw("NO-ERROR")),
+      optional(kw("NO-ERROR")),
     ),
   __update_item: ($) =>
     choice(
@@ -34,7 +34,7 @@ module.exports = ({ kw, tkw }) => ({
         field("value", $._expression),
       ),
       seq(
-        tkw("TEXT"),
+        kw("TEXT"),
         "(",
         repeat1(
           seq(
@@ -48,8 +48,8 @@ module.exports = ({ kw, tkw }) => ({
         field("constant", $.string_literal),
         optional(alias($.__update_at_phrase, $.at_phrase)),
       ),
-      seq(tkw("SKIP"), optional(seq("(", $._expression, ")"))),
-      seq(tkw("SPACE"), optional(seq("(", $._expression, ")"))),
+      seq(kw("SKIP"), optional(seq("(", $._expression, ")"))),
+      seq(kw("SPACE"), optional(seq("(", $._expression, ")"))),
       "^",
     ),
   __update_field_target: ($) => choice($.identifier, $.qualified_name),
@@ -62,7 +62,7 @@ module.exports = ({ kw, tkw }) => ({
     ),
   __update_validate_option: ($) =>
     seq(
-      tkw("VALIDATE"),
+      kw("VALIDATE"),
       "(",
       field("condition", $._expression),
       ",",
@@ -72,5 +72,5 @@ module.exports = ({ kw, tkw }) => ({
   __update_at_phrase: ($) =>
     seq(choice(kw("AT"), kw("TO")), token(/[0-9]+(\.[0-9]+)?/)),
 
-  __update_go_on: ($) => seq(tkw("GO-ON"), "(", repeat1($.identifier), ")"),
+  __update_go_on: ($) => seq(kw("GO-ON"), "(", repeat1($.identifier), ")"),
 });

@@ -1,7 +1,7 @@
-module.exports = ({ kw, tkw }) => ({
+module.exports = ({ kw }) => ({
   page_statement: ($) =>
     seq(
-      tkw("PAGE"),
+      kw("PAGE"),
       optional(alias($.__page_stream_phrase, $.stream_phrase)),
       $._terminator,
     ),

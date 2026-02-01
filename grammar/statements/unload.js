@@ -1,9 +1,9 @@
-module.exports = ({ kw, tkw }) => ({
+module.exports = ({ kw }) => ({
   unload_statement: ($) =>
     seq(
-      tkw("UNLOAD"),
+      kw("UNLOAD"),
       field("file", $._expression),
-      optional(tkw("NO-ERROR")),
+      optional(kw("NO-ERROR")),
       $._terminator,
     ),
 });

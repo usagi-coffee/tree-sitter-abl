@@ -1,5 +1,5 @@
-module.exports = ({ kw, tkw }) => ({
-  choose_statement: ($) => seq(tkw("CHOOSE"), $.__choose_body, $._terminator),
+module.exports = ({ kw }) => ({
+  choose_statement: ($) => seq(kw("CHOOSE"), $.__choose_body, $._terminator),
   __choose_body: ($) =>
     seq(
       choice(
@@ -30,8 +30,8 @@ module.exports = ({ kw, tkw }) => ({
       ),
       optional($.frame_phrase),
     ),
-  __choose_auto_return: ($) => tkw("AUTO-RETURN"),
-  __choose_go_on: ($) => seq(tkw("GO-ON"), "(", repeat1($.identifier), ")"),
-  __choose_no_error: ($) => tkw("NO-ERROR"),
+  __choose_auto_return: ($) => kw("AUTO-RETURN"),
+  __choose_go_on: ($) => seq(kw("GO-ON"), "(", repeat1($.identifier), ")"),
+  __choose_no_error: ($) => kw("NO-ERROR"),
   __choose_color_value: ($) => $._expression,
 });

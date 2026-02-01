@@ -1,4 +1,4 @@
-module.exports = ({ kw, tkw }) => ({
+module.exports = ({ kw }) => ({
   class_definition: ($) =>
     seq(repeat($.__class_option), kw("CLASS"), $.__class_body, $._terminator),
 
@@ -8,8 +8,8 @@ module.exports = ({ kw, tkw }) => ({
       repeat($.__class_option),
       choice($._colon, $._terminator_dot),
       repeat($.__class_body_item),
-      tkw("END"),
-      optional(tkw("CLASS")),
+      kw("END"),
+      optional(kw("CLASS")),
     ),
 
   __class_body_item: ($) =>
@@ -114,26 +114,21 @@ module.exports = ({ kw, tkw }) => ({
     ),
 
   __method_body: ($) =>
-    seq(
-      repeat($._statement),
-      tkw("END"),
-      optional(tkw("METHOD")),
-      $._terminator,
-    ),
+    seq(repeat($._statement), kw("END"), optional(kw("METHOD")), $._terminator),
 
   __constructor_body: ($) =>
     seq(
       repeat($._statement),
-      tkw("END"),
-      optional(choice(tkw("CONSTRUCTOR"), tkw("METHOD"))),
+      kw("END"),
+      optional(choice(kw("CONSTRUCTOR"), kw("METHOD"))),
       $._terminator,
     ),
 
   __destructor_body: ($) =>
     seq(
       repeat($._statement),
-      tkw("END"),
-      optional(tkw("DESTRUCTOR")),
+      kw("END"),
+      optional(kw("DESTRUCTOR")),
       $._terminator,
     ),
 
@@ -167,14 +162,14 @@ module.exports = ({ kw, tkw }) => ({
   __property_get_phrase: ($) =>
     seq(
       optional(alias($.__variable_access_modifier, $.access_modifier)),
-      tkw("GET"),
+      kw("GET"),
       choice(
         $._terminator_dot,
         seq(
           $._colon,
           repeat($._statement),
-          tkw("END"),
-          optional(tkw("GET")),
+          kw("END"),
+          optional(kw("GET")),
           $._terminator,
         ),
       ),
@@ -183,15 +178,15 @@ module.exports = ({ kw, tkw }) => ({
   __property_set_phrase: ($) =>
     seq(
       optional(alias($.__variable_access_modifier, $.access_modifier)),
-      tkw("SET"),
+      kw("SET"),
       optional($.property_set_parameter_list),
       choice(
         $._terminator_dot,
         seq(
           $._colon,
           repeat($._statement),
-          tkw("END"),
-          optional(tkw("SET")),
+          kw("END"),
+          optional(kw("SET")),
           $._terminator,
         ),
       ),
@@ -240,7 +235,7 @@ module.exports = ({ kw, tkw }) => ({
   __property_initial_keyword: ($) =>
     choice(kw("INITIAL"), alias(token(seq(/INIT(IAL)?/i, /\s+/)), "INITIAL")),
 
-  __property_no_undo: ($) => tkw("NO-UNDO"),
+  __property_no_undo: ($) => kw("NO-UNDO"),
 
   __method_modifier: ($) =>
     choice(
@@ -280,7 +275,7 @@ module.exports = ({ kw, tkw }) => ({
 
   __method_return_type: ($) =>
     choice(
-      field("type", alias(tkw("VOID"), $.identifier)),
+      field("type", alias(kw("VOID"), $.identifier)),
       seq(
         optional(kw("CLASS")),
         field("type", $._type_or_string),
@@ -306,7 +301,7 @@ module.exports = ({ kw, tkw }) => ({
       $.identifier,
     ),
   __method_field_name: ($) => choice($.qualified_name, $.identifier),
-  __method_no_undo: ($) => tkw("NO-UNDO"),
+  __method_no_undo: ($) => kw("NO-UNDO"),
   __method_table_parameter: ($) =>
     seq(
       optional(choice(kw("INPUT"), kw("OUTPUT"), kw("INPUT-OUTPUT"))),
@@ -337,7 +332,7 @@ module.exports = ({ kw, tkw }) => ({
     ),
   __method_record_name: ($) => choice($.qualified_name, $.identifier),
   __method_table_parameter_option: ($) =>
-    choice(tkw("APPEND"), tkw("BIND"), tkw("BY-VALUE"), tkw("BY-REFERENCE")),
+    choice(kw("APPEND"), kw("BIND"), kw("BY-VALUE"), kw("BY-REFERENCE")),
   __method_handle_parameter_option: ($) =>
-    choice(tkw("BIND"), tkw("BY-VALUE"), tkw("BY-REFERENCE")),
+    choice(kw("BIND"), kw("BY-VALUE"), kw("BY-REFERENCE")),
 });

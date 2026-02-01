@@ -1,4 +1,4 @@
-module.exports = ({ kw, tkw }) => ({
+module.exports = ({ kw }) => ({
   event_definition: ($) =>
     seq(
       choice(kw("DEFINE"), kw("DEF")),
@@ -37,7 +37,7 @@ module.exports = ({ kw, tkw }) => ({
 
   __event_parameter: ($) =>
     seq(
-      optional(choice(kw("INPUT"), kw("OUTPUT"), tkw("INPUT-OUTPUT"))),
+      optional(choice(kw("INPUT"), kw("OUTPUT"), kw("INPUT-OUTPUT"))),
       field("name", $.identifier),
       kw("AS"),
       optional(kw("CLASS")),

@@ -1,7 +1,7 @@
-module.exports = ({ kw, tkw }) => ({
+module.exports = ({ kw }) => ({
   down_statement: ($) =>
     seq(
-      tkw("DOWN"),
+      kw("DOWN"),
       optional(alias($.__down_stream_phrase, $.stream_phrase)),
       optional(field("count", $._expression)),
       optional($.frame_phrase),

@@ -1,5 +1,5 @@
-module.exports = ({ tkw }) => ({
-  undo_statement: ($) => seq(tkw("UNDO"), $.__undo_body, $._terminator),
+module.exports = ({ kw }) => ({
+  undo_statement: ($) => seq(kw("UNDO"), $.__undo_body, $._terminator),
 
   __undo_body: ($) =>
     seq(
@@ -14,7 +14,7 @@ module.exports = ({ tkw }) => ({
   __undo_action: ($) =>
     choice(
       seq(
-        tkw("THROW"),
+        kw("THROW"),
         field(
           "value",
           choice(
@@ -25,15 +25,15 @@ module.exports = ({ tkw }) => ({
           ),
         ),
       ),
-      seq(tkw("LEAVE"), optional(field("leave_label", $.identifier))),
-      seq(tkw("NEXT"), optional(field("next_label", $.identifier))),
-      seq(tkw("RETRY"), optional(field("retry_label", $.identifier))),
+      seq(kw("LEAVE"), optional(field("leave_label", $.identifier))),
+      seq(kw("NEXT"), optional(field("next_label", $.identifier))),
+      seq(kw("RETRY"), optional(field("retry_label", $.identifier))),
       seq(
-        tkw("RETURN"),
+        kw("RETURN"),
         optional(
           choice(
-            seq(tkw("ERROR"), field("error_value", $._expression)),
-            tkw("NO-APPLY"),
+            seq(kw("ERROR"), field("error_value", $._expression)),
+            kw("NO-APPLY"),
             field("return_value", $._expression),
           ),
         ),

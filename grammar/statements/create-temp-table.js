@@ -1,8 +1,8 @@
-module.exports = ({ kw, tkw }) => ({
+module.exports = ({ kw }) => ({
   create_temp_table_statement: ($) =>
     seq(
       kw("CREATE"),
-      tkw("TEMP-TABLE"),
+      kw("TEMP-TABLE"),
       field("handle", $.identifier),
       optional(seq(kw("IN"), kw("WIDGET-POOL"), field("pool", $.identifier))),
     ),

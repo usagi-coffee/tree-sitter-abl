@@ -1,4 +1,4 @@
-module.exports = ({ kw, tkw }) => ({
+module.exports = ({ kw }) => ({
   for_statement: ($) =>
     prec(
       1,
@@ -14,7 +14,7 @@ module.exports = ({ kw, tkw }) => ({
     seq(
       choice($.__for_records, $.__for_variables),
       optional(alias($.__for_while_phrase, $.while_phrase)),
-      optional(tkw("TRANSACTION")),
+      optional(kw("TRANSACTION")),
       optional($.stop_after_phrase),
       // FIXME: this shouldn't be repeat but we need to save on state counts
       repeat(
@@ -28,7 +28,7 @@ module.exports = ({ kw, tkw }) => ({
         ),
       ),
       $.body,
-      tkw("END"),
+      kw("END"),
     ),
 
   __for_records: ($) =>
@@ -73,10 +73,10 @@ module.exports = ({ kw, tkw }) => ({
   __for_where_phrase: ($) => seq(kw("WHERE"), $._expression),
   __for_of_phrase: ($) => seq(kw("OF"), $.__for_record_name),
   __for_record_name: ($) => choice($.identifier, $.qualified_name),
-  __for_no_lock: ($) => tkw("NO-LOCK"),
-  __for_exclusive_lock: ($) => tkw("EXCLUSIVE-LOCK"),
-  __for_share_lock: ($) => tkw("SHARE-LOCK"),
-  __for_no_prefetch: ($) => tkw("NO-PREFETCH"),
+  __for_no_lock: ($) => kw("NO-LOCK"),
+  __for_exclusive_lock: ($) => kw("EXCLUSIVE-LOCK"),
+  __for_share_lock: ($) => kw("SHARE-LOCK"),
+  __for_no_prefetch: ($) => kw("NO-PREFETCH"),
   __for_by_phrase: ($) =>
     prec.right(
       seq(
@@ -90,7 +90,7 @@ module.exports = ({ kw, tkw }) => ({
   __for_use_index: ($) =>
     choice(
       seq(kw("USE-INDEX"), field("index", $.__for_index_name)),
-      tkw("TABLE-SCAN"),
+      kw("TABLE-SCAN"),
     ),
 
   __for_break_by: ($) =>
@@ -105,7 +105,7 @@ module.exports = ({ kw, tkw }) => ({
     ),
 
   __for_index_name: ($) => choice($.identifier, $.qualified_name),
-  __for_with_stream_io_phrase: ($) => seq(kw("WITH"), tkw("STREAM-IO")),
+  __for_with_stream_io_phrase: ($) => seq(kw("WITH"), kw("STREAM-IO")),
   __for_sort_direction: ($) => token(/ASC(ENDING)?|DESC(ENDING)?/i),
 
   __for_collate_phrase: ($) =>

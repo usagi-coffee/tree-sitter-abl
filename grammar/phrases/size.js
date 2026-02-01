@@ -1,7 +1,7 @@
-module.exports = ({ kw, tkw }) => ({
+module.exports = ({ kw }) => ({
   size_phrase: ($) =>
     seq(
-      choice(kw("SIZE"), tkw("SIZE-CHARS"), tkw("SIZE-PIXELS")),
+      choice(kw("SIZE"), kw("SIZE-CHARS"), kw("SIZE-PIXELS")),
       field("width", $._expression),
       kw("BY"),
       field("height", $._expression),

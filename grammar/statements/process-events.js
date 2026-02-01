@@ -1,4 +1,4 @@
-module.exports = ({ kw, tkw }) => ({
+module.exports = ({ kw }) => ({
   process_events_statement: ($) =>
-    seq(tkw("PROCESS"), tkw("EVENTS"), $._terminator),
+    seq(kw("PROCESS"), kw("EVENTS"), $._terminator),
 });

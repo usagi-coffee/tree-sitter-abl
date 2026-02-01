@@ -1,7 +1,7 @@
-module.exports = ({ kw, tkw }) => ({
+module.exports = ({ kw }) => ({
   close_stored_procedure_statement: ($) =>
     seq(
-      tkw("CLOSE"),
+      kw("CLOSE"),
       choice(kw("STORED-PROCEDURE"), kw("STORED-PROC")),
       $.__close_stored_procedure_body,
       $._terminator,
@@ -10,9 +10,7 @@ module.exports = ({ kw, tkw }) => ({
   __close_stored_procedure_body: ($) =>
     seq(
       field("procedure", $._expression),
-      optional(
-        seq(field("status_var", $._expression), "=", tkw("PROC-STATUS")),
-      ),
+      optional(seq(field("status_var", $._expression), "=", kw("PROC-STATUS"))),
       optional(
         seq(
           kw("WHERE"),

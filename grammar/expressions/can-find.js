@@ -1,5 +1,5 @@
-module.exports = ({ kw, tkw }) => ({
-  can_find_expression: ($) => seq(tkw("CAN-FIND"), "(", $.record_query, ")"),
+module.exports = ({ kw }) => ({
+  can_find_expression: ($) => seq(kw("CAN-FIND"), "(", $.record_query, ")"),
 
   record_query: ($) =>
     prec.right(
@@ -27,7 +27,7 @@ module.exports = ({ kw, tkw }) => ({
       optional(field("frame", $.identifier)),
       field("field", $.identifier),
     ),
-  __record_query_lock_phrase: ($) => tkw("NO-LOCK"),
+  __record_query_lock_phrase: ($) => kw("NO-LOCK"),
   __record_query_use_index: ($) =>
     seq(kw("USE-INDEX"), field("index", $.__record_query_index_name)),
 

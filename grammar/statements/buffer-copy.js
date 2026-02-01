@@ -1,4 +1,4 @@
-module.exports = ({ kw, tkw }) => ({
+module.exports = ({ kw }) => ({
   buffer_copy_statement: ($) =>
     seq(kw("BUFFER-COPY"), $.__buffer_copy_body, $._terminator),
 
@@ -14,7 +14,7 @@ module.exports = ({ kw, tkw }) => ({
       kw("TO"),
       field("target", $.__buffer_copy_record_name),
       optional(alias($.__buffer_copy_assign_phrase, $.assign_phrase)),
-      optional(tkw("NO-LOBS")),
+      optional(kw("NO-LOBS")),
       optional(alias($.__buffer_copy_no_error, $.no_error)),
     ),
   __buffer_copy_record_name: ($) => choice($.identifier, $.qualified_name),
@@ -42,5 +42,5 @@ module.exports = ({ kw, tkw }) => ({
       choice("=", "+=", "-=", "*=", "/="),
       field("right", $._expression),
     ),
-  __buffer_copy_no_error: ($) => tkw("NO-ERROR"),
+  __buffer_copy_no_error: ($) => kw("NO-ERROR"),
 });

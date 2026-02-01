@@ -1,9 +1,9 @@
-module.exports = ({ kw, tkw }) => ({
+module.exports = ({ kw }) => ({
   validate_statement: ($) =>
     seq(
-      tkw("VALIDATE"),
+      kw("VALIDATE"),
       field("record", choice($.identifier, $.qualified_name)),
-      optional(tkw("NO-ERROR")),
+      optional(kw("NO-ERROR")),
       $._terminator,
     ),
 });

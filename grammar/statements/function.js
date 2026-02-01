@@ -1,4 +1,4 @@
-module.exports = ({ kw, tkw }) => ({
+module.exports = ({ kw }) => ({
   function_definition: ($) =>
     seq(kw("FUNCTION"), $.__function_body, $._terminator),
   __function_body: ($) =>
@@ -11,8 +11,8 @@ module.exports = ({ kw, tkw }) => ({
       optional(alias($.__function_parameters, $.parameters)),
       choice($._terminator, $._colon),
       repeat($._statement),
-      tkw("END"),
-      optional(tkw("FUNCTION")),
+      kw("END"),
+      optional(kw("FUNCTION")),
     ),
 
   function_forward_definition: ($) =>
@@ -90,16 +90,17 @@ module.exports = ({ kw, tkw }) => ({
     ),
 
   __function_extent_phrase: ($) =>
-    seq(tkw("EXTENT"), optional($.__function_extent_size)),
-  __function_map_phrase: ($) => seq(kw("MAP"), kw("TO"), field("actual", $.identifier)),
+    seq(kw("EXTENT"), optional($.__function_extent_size)),
+  __function_map_phrase: ($) =>
+    seq(kw("MAP"), kw("TO"), field("actual", $.identifier)),
   __function_in_phrase: ($) => seq(kw("IN"), field("context", $._expression)),
-  __function_forward_phrase: ($) => tkw("FORWARD"),
+  __function_forward_phrase: ($) => kw("FORWARD"),
   __function_forward_option: ($) =>
     choice(
       alias($.__function_in_phrase, $.in_phrase),
       alias($.__function_forward_phrase, $.forward_phrase),
     ),
-  __function_no_undo: ($) => tkw("NO-UNDO"),
+  __function_no_undo: ($) => kw("NO-UNDO"),
   __function_extent_size: ($) =>
     choice(
       $.number_literal,
@@ -108,5 +109,6 @@ module.exports = ({ kw, tkw }) => ({
       $.null_literal,
     ),
   __function_field_name: ($) => choice($.qualified_name, $.identifier),
-  __function_access_modifier: ($) => choice(kw("PRIVATE"), kw("PROTECTED"), kw("PUBLIC")),
+  __function_access_modifier: ($) =>
+    choice(kw("PRIVATE"), kw("PROTECTED"), kw("PUBLIC")),
 });
