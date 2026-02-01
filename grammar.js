@@ -27,10 +27,7 @@ module.exports = grammar({
     $.constant,
   ],
   word: ($) => $.identifier,
-  conflicts: ($) => [
-    [$._primary_expression, $.function_call],
-    [$.widget_access, $.__widget_keywords],
-  ],
+  conflicts: ($) => [[$._primary_expression, $.function_call]],
   inline: ($) => [
     $.__find_record_name,
     $.__find_index_name,
@@ -183,7 +180,7 @@ module.exports = grammar({
           $.in_frame_expression,
 
           alias($.__widget_keywords, $.identifier),
-          prec.dynamic(1, $.widget_access),
+          $.widget_access,
         ),
 
       // Expressions

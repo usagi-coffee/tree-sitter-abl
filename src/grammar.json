@@ -51021,70 +51021,74 @@
       ]
     },
     "widget_access": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
+      "type": "PREC",
+      "value": 1,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "ALIAS",
                 "content": {
-                  "type": "PATTERN",
-                  "value": "QUERY",
-                  "flags": "i"
-                }
+                  "type": "TOKEN",
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "QUERY",
+                    "flags": "i"
+                  }
+                },
+                "named": false,
+                "value": "QUERY"
               },
-              "named": false,
-              "value": "QUERY"
-            },
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
+              {
+                "type": "ALIAS",
                 "content": {
-                  "type": "PATTERN",
-                  "value": "MENU-ITEM",
-                  "flags": "i"
-                }
+                  "type": "TOKEN",
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "MENU-ITEM",
+                    "flags": "i"
+                  }
+                },
+                "named": false,
+                "value": "MENU-ITEM"
               },
-              "named": false,
-              "value": "MENU-ITEM"
-            },
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
+              {
+                "type": "ALIAS",
                 "content": {
-                  "type": "PATTERN",
-                  "value": "MENU",
-                  "flags": "i"
-                }
+                  "type": "TOKEN",
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "MENU",
+                    "flags": "i"
+                  }
+                },
+                "named": false,
+                "value": "MENU"
               },
-              "named": false,
-              "value": "MENU"
-            },
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
+              {
+                "type": "ALIAS",
                 "content": {
-                  "type": "PATTERN",
-                  "value": "FRAME",
-                  "flags": "i"
-                }
-              },
-              "named": false,
-              "value": "FRAME"
-            }
-          ]
-        },
-        {
-          "type": "SYMBOL",
-          "name": "__widget_access_body"
-        }
-      ]
+                  "type": "TOKEN",
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "FRAME",
+                    "flags": "i"
+                  }
+                },
+                "named": false,
+                "value": "FRAME"
+              }
+            ]
+          },
+          {
+            "type": "SYMBOL",
+            "name": "__widget_access_body"
+          }
+        ]
+      }
     },
     "__widget_access_body": {
       "type": "PREC_RIGHT",
@@ -55061,12 +55065,8 @@
           "value": "identifier"
         },
         {
-          "type": "PREC_DYNAMIC",
-          "value": 1,
-          "content": {
-            "type": "SYMBOL",
-            "name": "widget_access"
-          }
+          "type": "SYMBOL",
+          "name": "widget_access"
         }
       ]
     },
@@ -56333,12 +56333,8 @@
           "value": "identifier"
         },
         {
-          "type": "PREC_DYNAMIC",
-          "value": 1,
-          "content": {
-            "type": "SYMBOL",
-            "name": "widget_access"
-          }
+          "type": "SYMBOL",
+          "name": "widget_access"
         }
       ]
     },
@@ -56991,10 +56987,6 @@
     [
       "_primary_expression",
       "function_call"
-    ],
-    [
-      "widget_access",
-      "__widget_keywords"
     ]
   ],
   "precedences": [],

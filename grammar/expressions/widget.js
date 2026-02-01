@@ -3,9 +3,12 @@ module.exports = ({ kw }) => ({
     choice(kw("FRAME"), kw("MENU"), kw("MENU-ITEM"), kw("QUERY")),
 
   widget_access: ($) =>
-    seq(
-      choice(kw("QUERY"), kw("MENU-ITEM"), kw("MENU"), kw("FRAME")),
-      $.__widget_access_body,
+    prec(
+      1,
+      seq(
+        choice(kw("QUERY"), kw("MENU-ITEM"), kw("MENU"), kw("FRAME")),
+        $.__widget_access_body,
+      ),
     ),
 
   __widget_access_body: ($) =>

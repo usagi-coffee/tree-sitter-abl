@@ -37,6 +37,6 @@ module.exports = ({ kw, ctx }) => ({
       $.input_expression,
 
       alias($.__widget_keywords, $.identifier),
-      prec.dynamic(1, $.widget_access),
+      $.widget_access,
     ),
 });
