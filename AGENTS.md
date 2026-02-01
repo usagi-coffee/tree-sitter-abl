@@ -72,5 +72,5 @@ Strongly prefer using these commands as they have helpful side-effects like retu
 - `bun run test` returns only failed cases and failed syntax tree OR a message that everything went well.
 - When using `alias`, `tree-sitter` handles undefined rules by using the property name as the symbol name so it's okay to alias to `$.something_that_wasn't defined`.
 - `terminator`, `terminator_dot` or rules prefixed with `_` (unless aliased) should never be visible in the syntax tree output.
-- Always prefer `| head` when calling `bun run test` instead of `| tail`, retrieve at least `50` lines.
+- Always prefer `| head` when calling `bun run test` instead of `| tail`.
 - The `Permission denied (os error 13)` error occurs because the sandbox blocks writing outside the workspace, preventing tree-sitter from creating its lock file in the user's cache directory.

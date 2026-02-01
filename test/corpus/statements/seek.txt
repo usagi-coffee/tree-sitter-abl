@@ -54,10 +54,8 @@ SEEK STREAM-HANDLE hS TO 100.
   (assignment_statement
     (identifier)
     (assignment_operator)
-    (function_call
-      (identifier)
-      (arguments
-        (argument))))
+    (seek_expression
+      (identifier)))
   (put_statement
     (string_literal)
     (skip))

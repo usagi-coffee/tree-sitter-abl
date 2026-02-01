@@ -102,9 +102,9 @@ THROW NEW Progress.Lang.AppError("x", 1).
           right: (identifier))
         (arguments
           (argument
-            value: (string_literal))
+            name: (string_literal))
           (argument
-            value: (number_literal)))))))
+            name: (number_literal)))))))
 
 ================================================================================
 DOT AS BLOCK START

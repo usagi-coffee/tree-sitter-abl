@@ -96,30 +96,13 @@ module.exports = ({ kw }) => ({
       kw("UNDO"),
       ",",
       choice(
-        seq(
-          kw("RETURN"),
-          kw("ERROR"),
-          $._escaped_string,
-          optional(
-            token.immediate(
-              /:(?:[RLCT](?:U)?(?:[0-9]+)?|U(?:[0-9]+)?|[0-9]+)/i,
-            ),
-          ),
-        ),
+        seq(kw("RETURN"), kw("ERROR"), $.string_literal),
         kw("THROW"),
         kw("LEAVE"),
         kw("NEXT"),
         kw("RETRY"),
         seq(kw("RETURN"), kw("NO-APPLY")),
-        seq(
-          kw("RETURN"),
-          $._escaped_string,
-          optional(
-            token.immediate(
-              /:(?:[RLCT](?:U)?(?:[0-9]+)?|U(?:[0-9]+)?|[0-9]+)/i,
-            ),
-          ),
-        ),
+        seq(kw("RETURN"), $.string_literal),
       ),
     ),
   __repeat_undo_throw_phrase: ($) => seq(kw("UNDO"), ",", kw("THROW")),

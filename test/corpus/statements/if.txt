@@ -52,9 +52,9 @@ IF LOCKED bufOrder THEN RETURN TRUE.
               right: (identifier))
             (arguments
               (argument
-                value: (string_literal))
+                name: (string_literal))
               (argument
-                value: (number_literal)))))))
+                name: (number_literal)))))))
     else: (do_block
       (body
         (assign_statement
@@ -74,9 +74,9 @@ IF LOCKED bufOrder THEN RETURN TRUE.
           right: (identifier))
         (arguments
           (argument
-            value: (string_literal))
+            name: (string_literal))
           (argument
-            value: (number_literal))))))
+            name: (number_literal))))))
   (if_statement
     (unary_expression
       (can_find_expression

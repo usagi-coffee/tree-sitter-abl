@@ -17,7 +17,7 @@ SET-POINTER-VALUE(pBuffer) = GET-POINTER-VALUE(pSource).
       function: (identifier)
       (arguments
         (argument
-          value: (identifier))))))
+          name: (identifier))))))
 
 ================================================================================
 SET-POINTER-VALUE - reference snippet
@@ -52,24 +52,24 @@ END PROCEDURE.
     procedure: (identifier)
     (arguments
       (argument
-        value: (identifier))))
+        name: (identifier))))
   (set_pointer_value_statement
     target: (identifier)
     value: (function_call
       function: (identifier)
       (arguments
         (argument
-          value: (identifier))
+          name: (identifier))
         (argument
-          value: (number_literal)))))
+          name: (number_literal)))))
   (display_statement
     (function_call
       function: (identifier)
       (arguments
         (argument
-          value: (identifier))
+          name: (identifier))
         (argument
-          value: (number_literal))))
+          name: (number_literal))))
     (format_phrase
       format: (string_literal)))
   (set_size_statement

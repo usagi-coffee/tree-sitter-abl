@@ -201,14 +201,14 @@ DISPLAY "Succeeded".
               right: (identifier))
             (arguments
               (argument
-                value: (identifier))))
+                name: (identifier))))
           (function_call
             function: (object_access
               left: (identifier)
               right: (identifier))
             (arguments
               (argument
-                value: (identifier))))))))
+                name: (identifier))))))))
   (close_stored_procedure_statement
     procedure: (identifier)
     handle: (identifier))

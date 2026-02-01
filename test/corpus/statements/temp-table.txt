@@ -563,7 +563,7 @@ WAIT-FOR CHOOSE OF cancel-butt OR WINDOW-CLOSE OF CURRENT-WINDOW.
           function: (identifier)
           (arguments
             (argument
-              value: (qualified_name
+              name: (qualified_name
                 left: (identifier)
                 right: (identifier)))))
         then: (do_block

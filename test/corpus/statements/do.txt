@@ -218,7 +218,7 @@ END.
             right: (identifier))
           (arguments
             (argument
-              value: (identifier))))))))
+              name: (identifier))))))))
 
 ================================================================================
 DO WHILE with ON ENDKEY UNDO RETRY

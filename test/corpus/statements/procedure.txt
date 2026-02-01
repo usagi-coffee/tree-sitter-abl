@@ -348,7 +348,7 @@ END PROCEDURE.
               right: (identifier))
             (arguments
               (argument
-                value: (number_literal)))))))
+                name: (number_literal)))))))
     (finally_statement
       (body
         (message_statement
@@ -517,9 +517,9 @@ END PROCEDURE.
         procedure: (identifier)
         (arguments
           (argument
-            value: (identifier))
+            name: (identifier))
           (argument
-            value: (identifier))))
+            name: (identifier))))
       (display_statement
         (identifier))))
   (procedure_definition
@@ -553,11 +553,11 @@ END PROCEDURE.
             procedure: (identifier)
             (arguments
               (argument
-                value: (binary_expression
+                name: (binary_expression
                   (identifier)
                   (number_literal)))
               (argument
-                value: (identifier))))
+                name: (identifier))))
           (assignment_statement
             left: (identifier)
             operator: (assignment_operator)
@@ -577,15 +577,15 @@ END PROCEDURE.
     procedure: (identifier)
     (arguments
       (argument
-        value: (number_literal))
+        name: (number_literal))
       (argument
-        value: (string_literal))
+        name: (string_literal))
       (argument
-        value: (string_literal))
+        name: (string_literal))
       (argument
-        value: (number_literal))
+        name: (number_literal))
       (argument
-        value: (identifier))))
+        name: (identifier))))
   (procedure_definition
     name: (identifier)
     (external_phrase

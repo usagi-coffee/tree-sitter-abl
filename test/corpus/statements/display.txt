@@ -93,7 +93,7 @@ DISPLAY Item.Qty * Item.Price LABEL "Extended".
         function: (identifier)
         (arguments
           (argument
-            value: (identifier))))))
+            name: (identifier))))))
   (display_statement
     (binary_expression
       (qualified_name
@@ -121,13 +121,13 @@ DISPLAY SUBSTRING(str, 1, 5).
       function: (identifier)
       (arguments
         (argument
-          value: (identifier)))))
+          name: (identifier)))))
   (display_statement
     (function_call
       function: (identifier)
       (arguments
         (argument
-          value: (qualified_name
+          name: (qualified_name
             left: (identifier)
             right: (identifier))))))
   (display_statement
@@ -135,11 +135,11 @@ DISPLAY SUBSTRING(str, 1, 5).
       function: (identifier)
       (arguments
         (argument
-          value: (identifier))
+          name: (identifier))
         (argument
-          value: (number_literal))
+          name: (number_literal))
         (argument
-          value: (number_literal))))))
+          name: (number_literal))))))
 
 ================================================================================
 DISPLAY record with EXCEPT and frame phrase

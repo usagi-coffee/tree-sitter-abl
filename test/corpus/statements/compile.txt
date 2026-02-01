@@ -117,13 +117,13 @@ COMPILE myproc.p MIN-SIZE DEFAULT-UNTRANSLATABLE NO-ERROR.
         function: (identifier)
         (arguments
           (argument
-            value: (identifier)))))
+            name: (identifier)))))
     (compile_option
       into: (function_call
         function: (identifier)
         (arguments
           (argument
-            value: (identifier))))))
+            name: (identifier))))))
   (compile_statement
     file: (qualified_name
       left: (identifier)

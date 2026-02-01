@@ -34,9 +34,9 @@ new MyClass():Size.
         right: (identifier))
       (arguments
         (argument
-          value: (number_literal))
+          name: (number_literal))
         (argument
-          value: (number_literal)))))
+          name: (number_literal)))))
   (expression_statement
     (function_call
       function: (identifier)
@@ -63,7 +63,7 @@ new MyClass():Size.
         function: (identifier)
         (arguments
           (argument
-            value: (identifier))))
+            name: (identifier))))
       right: (identifier)))
   (expression_statement
     (object_access_expression

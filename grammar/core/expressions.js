@@ -20,6 +20,7 @@ module.exports = ({ kw, ctx }) => ({
       $.object_access_expression,
       $.new_expression,
       $.dataset_reference,
+      $.seek_expression,
       $.function_call,
       $.array_access,
       $.scoped_name,

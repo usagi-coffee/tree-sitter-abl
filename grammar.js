@@ -318,23 +318,12 @@ module.exports = grammar({
       arguments: ($) =>
         seq("(", optional(seq($.argument, repeat(seq(",", $.argument)))), ")"),
       argument: ($) =>
-        choice(
-          // Stream keywords as values (e.g., SEEK(OUTPUT))
-          field("value", choice(kw("INPUT"), kw("OUTPUT"))),
-          // Async OUTPUT parameter prototype: OUTPUT name AS type
-          seq(
-            kw("OUTPUT"),
-            field("name", $.identifier),
-            kw("AS"),
-            field("type", $._type_name),
-          ),
-          // Regular arguments with optional direction
-          seq(
-            optional(choice(kw("INPUT"), kw("OUTPUT"), kw("INPUT-OUTPUT"))),
-            optional(choice(kw("TABLE"), kw("BUFFER"))),
-            field("value", $._expression),
-            optional(kw("BY-REFERENCE")),
-          ),
+        seq(
+          optional(choice(kw("INPUT"), kw("OUTPUT"), kw("INPUT-OUTPUT"))),
+          optional(choice(kw("TABLE"), kw("BUFFER"))),
+          field("name", $._expression),
+          optional(seq(kw("AS"), field("type", $._type_name))),
+          optional(kw("BY-REFERENCE")),
         ),
 
       function_call: ($) =>

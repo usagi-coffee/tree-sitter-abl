@@ -493,7 +493,7 @@ DEFINE INPUT PARAMETER pExtent0 AS INTEGER EXTENT 0.
     procedure: (procedure_name)
     (arguments
       (argument
-        value: (number_literal))))
+        name: (number_literal))))
   (parameter_definition
     name: (identifier)
     type: (identifier)
@@ -524,13 +524,13 @@ DEFINE INPUT PARAMETER pExtent0 AS INTEGER EXTENT 0.
     procedure: (procedure_name)
     (arguments
       (argument
-        value: (identifier))
+        name: (identifier))
       (argument
-        value: (number_literal))
+        name: (number_literal))
       (argument
-        value: (identifier))
+        name: (identifier))
       (argument
-        value: (identifier))))
+        name: (identifier))))
   (display_statement
     (identifier)
     (identifier)
@@ -616,7 +616,7 @@ DEFINE INPUT PARAMETER pExtent0 AS INTEGER EXTENT 0.
         procedure: (procedure_name)
         (arguments
           (argument
-            value: (identifier))))
+            name: (identifier))))
       (assignment_statement
         left: (qualified_name
           left: (identifier)
@@ -676,13 +676,13 @@ DEFINE INPUT PARAMETER pExtent0 AS INTEGER EXTENT 0.
               procedure: (identifier)
               (arguments
                 (argument
-                  value: (object_access
+                  name: (object_access
                     left: (qualified_name
                       left: (identifier)
                       right: (identifier))
                     right: (identifier)))
                 (argument
-                  value: (identifier))))
+                  name: (identifier))))
             (if_statement
               (unary_expression
                 (object_access
@@ -726,7 +726,7 @@ DEFINE INPUT PARAMETER pExtent0 AS INTEGER EXTENT 0.
             function: (identifier)
             (arguments
               (argument
-                value: (object_access
+                name: (object_access
                   left: (identifier)
                   right: (identifier)))))))
       (no_lock)
@@ -754,15 +754,15 @@ DEFINE INPUT PARAMETER pExtent0 AS INTEGER EXTENT 0.
     procedure: (identifier)
     (arguments
       (argument
-        value: (number_literal))
+        name: (number_literal))
       (argument
-        value: (string_literal))
+        name: (string_literal))
       (argument
-        value: (string_literal))
+        name: (string_literal))
       (argument
-        value: (number_literal))
+        name: (number_literal))
       (argument
-        value: (identifier))))
+        name: (identifier))))
   (procedure_definition
     name: (identifier)
     (external_phrase

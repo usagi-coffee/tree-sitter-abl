@@ -101,7 +101,7 @@ ASSIGN a = 1 b = 2 NO-ERROR.
           function: (identifier)
           (arguments
             (argument
-              value: (identifier)))))
+              name: (identifier)))))
       (no_error)))
   (assign_statement
     (assign_phrase
@@ -251,9 +251,9 @@ PUT-STRING(workBuf, 1) = cmdValue.
       function: (identifier)
       (arguments
         (argument
-          value: (identifier))
+          name: (identifier))
         (argument
-          value: (number_literal))))
+          name: (number_literal))))
     operator: (assignment_operator)
     right: (identifier)))
 

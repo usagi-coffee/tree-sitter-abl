@@ -32,7 +32,7 @@ PUT UNFORMATTED x format("9999-99-99") ';'.
       function: (identifier)
       (arguments
         (argument
-          value: (number_literal))))
+          name: (number_literal))))
     control: (string_literal))
   (put_statement
     value: (identifier)

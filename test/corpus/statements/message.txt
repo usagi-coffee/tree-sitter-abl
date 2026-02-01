@@ -241,7 +241,7 @@ MESSAGE Customer.Name " - " Customer.Balance.
         function: (identifier)
         (arguments
           (argument
-            value: (identifier))))))
+            name: (identifier))))))
   (message_statement
     (string_literal)
     (identifier))
