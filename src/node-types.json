@@ -1,10 +1,5 @@
 [
   {
-    "type": "access_modifier",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "accum_expression",
     "named": true,
     "fields": {
@@ -5220,6 +5215,10 @@
       "required": false,
       "types": [
         {
+          "type": "access_modifier",
+          "named": true
+        },
+        {
           "type": "auto_return_option",
           "named": true
         },
@@ -5332,6 +5331,10 @@
           "named": true
         },
         {
+          "type": "new_modifier",
+          "named": true
+        },
+        {
           "type": "no_column_scrolling_option",
           "named": true
         },
@@ -5357,6 +5360,10 @@
         },
         {
           "type": "row_option",
+          "named": true
+        },
+        {
+          "type": "scope_modifier",
           "named": true
         },
         {
@@ -5869,6 +5876,10 @@
       "multiple": true,
       "required": false,
       "types": [
+        {
+          "type": "access_modifier",
+          "named": true
+        },
         {
           "type": "button_option",
           "named": true
@@ -6954,13 +6965,48 @@
   {
     "type": "can_find_expression",
     "named": true,
-    "fields": {},
+    "fields": {
+      "table": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "qualified_name",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
-      "multiple": false,
-      "required": true,
+      "multiple": true,
+      "required": false,
       "types": [
         {
-          "type": "record_query",
+          "type": "frame_phrase",
+          "named": true
+        },
+        {
+          "type": "no_lock",
+          "named": true
+        },
+        {
+          "type": "of_phrase",
+          "named": true
+        },
+        {
+          "type": "use_index",
+          "named": true
+        },
+        {
+          "type": "using_phrase",
+          "named": true
+        },
+        {
+          "type": "where_phrase",
           "named": true
         }
       ]
@@ -23685,6 +23731,10 @@
       "required": false,
       "types": [
         {
+          "type": "access_modifier",
+          "named": true
+        },
+        {
           "type": "accum_expression",
           "named": true
         },
@@ -23769,6 +23819,10 @@
           "named": true
         },
         {
+          "type": "new_modifier",
+          "named": true
+        },
+        {
           "type": "null_literal",
           "named": true
         },
@@ -23790,6 +23844,10 @@
         },
         {
           "type": "qualified_name",
+          "named": true
+        },
+        {
+          "type": "scope_modifier",
           "named": true
         },
         {
@@ -27344,6 +27402,10 @@
       "multiple": true,
       "required": false,
       "types": [
+        {
+          "type": "access_modifier",
+          "named": true
+        },
         {
           "type": "accum_expression",
           "named": true
@@ -31155,6 +31217,10 @@
       "required": false,
       "types": [
         {
+          "type": "access_modifier",
+          "named": true
+        },
+        {
           "type": "bgcolor",
           "named": true
         },
@@ -31183,7 +31249,15 @@
           "named": true
         },
         {
+          "type": "new_modifier",
+          "named": true
+        },
+        {
           "type": "pfcolor",
+          "named": true
+        },
+        {
+          "type": "scope_modifier",
           "named": true
         },
         {
@@ -43161,56 +43235,6 @@
           }
         ]
       }
-    }
-  },
-  {
-    "type": "record_query",
-    "named": true,
-    "fields": {
-      "table": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          },
-          {
-            "type": "qualified_name",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "frame_phrase",
-          "named": true
-        },
-        {
-          "type": "no_lock",
-          "named": true
-        },
-        {
-          "type": "of_phrase",
-          "named": true
-        },
-        {
-          "type": "use_index",
-          "named": true
-        },
-        {
-          "type": "using_phrase",
-          "named": true
-        },
-        {
-          "type": "where_phrase",
-          "named": true
-        }
-      ]
     }
   },
   {
@@ -61776,10 +61800,6 @@
     "named": false
   },
   {
-    "type": "SHARED",
-    "named": false
-  },
-  {
     "type": "SHOW-STATS",
     "named": false
   },
@@ -62277,6 +62297,10 @@
   },
   {
     "type": "abstract_modifier",
+    "named": true
+  },
+  {
+    "type": "access_modifier",
     "named": true
   },
   {

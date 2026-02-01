@@ -6,7 +6,6 @@ module.exports = ({ kw }) => ({
         optional(seq(field("label", $.identifier), ":")),
         kw("DO"),
         $.__do_body,
-        kw("END"),
         $._terminator,
       ),
     ),
@@ -31,6 +30,7 @@ module.exports = ({ kw }) => ({
       ),
       repeat($.frame_phrase),
       $.body,
+      kw("END"),
     ),
 
   body: ($) => seq(choice($._colon, $._terminator_dot), repeat($._statement)),

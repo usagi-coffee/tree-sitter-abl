@@ -1,5 +1,6 @@
 module.exports = ({ kw }) => ({
   enable_statement: ($) => seq(kw("ENABLE"), $.__enable_body, $._terminator),
+
   __enable_body: ($) =>
     seq(
       optional(kw("UNLESS-HIDDEN")),
@@ -13,6 +14,7 @@ module.exports = ({ kw }) => ({
       optional(seq(kw("IN"), kw("WINDOW"), field("window", $._expression))),
       optional($.frame_phrase),
     ),
+
   __enable_item: ($) =>
     choice(
       seq(
@@ -37,6 +39,7 @@ module.exports = ({ kw }) => ({
       ),
       kw("SKIP"),
     ),
+
   __enable_at_phrase: ($) => seq(kw("AT"), token(/[0-9]+(\.[0-9]+)?/)),
   __enable_constant_option: ($) =>
     choice(

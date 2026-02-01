@@ -30,11 +30,13 @@ module.exports = ({ kw }) => ({
       optional($.frame_phrase),
       optional($.editing_phrase),
     ),
+
   __prompt_for_stream_phrase: ($) =>
     choice(
       seq(kw("STREAM"), field("stream", $.identifier)),
       seq(kw("STREAM-HANDLE"), field("handle", $._expression)),
     ),
+
   __prompt_for_item: ($) =>
     choice(
       prec.right(
@@ -72,6 +74,7 @@ module.exports = ({ kw }) => ({
       seq(kw("SPACE"), optional(seq("(", $._expression, ")"))),
       "^",
     ),
+
   __prompt_for_field_target: ($) => choice($.identifier, $.qualified_name),
   __prompt_for_field_phrase: ($) =>
     repeat1(

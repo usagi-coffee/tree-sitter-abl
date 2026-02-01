@@ -7,6 +7,7 @@ module.exports = ({ kw }) => ({
       optional($.frame_phrase),
       $._terminator,
     ),
+
   __down_stream_phrase: ($) =>
     choice(
       seq(kw("STREAM"), field("stream", $.identifier)),

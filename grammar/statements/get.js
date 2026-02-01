@@ -1,5 +1,6 @@
 module.exports = ({ kw }) => ({
   get_statement: ($) => seq(kw("GET"), $.__get_body, $._terminator),
+
   __get_body: ($) =>
     seq(
       field(

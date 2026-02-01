@@ -528,11 +528,15 @@ DEF NEW SHARED FRAME sharedF2 Customer.Name Customer.Address.
 
 (source_code
   (frame_definition
+    (new_modifier)
+    (scope_modifier)
     name: (identifier)
     field: (qualified_name
       left: (identifier)
       right: (identifier)))
   (frame_definition
+    (new_modifier)
+    (scope_modifier)
     name: (identifier)
     field: (qualified_name
       left: (identifier)
@@ -551,6 +555,7 @@ DEFINE PRIVATE FRAME privF Customer.CustNum.
 
 (source_code
   (frame_definition
+    (access_modifier)
     name: (identifier)
     field: (qualified_name
       left: (identifier)
@@ -825,6 +830,8 @@ WAIT-FOR WINDOW-CLOSE OF FRAME cust-fr.
       (frame_phrase
         (identifier))))
   (frame_definition
+    (new_modifier)
+    (scope_modifier)
     (identifier))
   (variable_definition
     (new_modifier)

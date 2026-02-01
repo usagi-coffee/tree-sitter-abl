@@ -5,9 +5,16 @@ module.exports = ({ kw }) => ({
   widget_access: ($) =>
     seq(
       choice(kw("QUERY"), kw("MENU-ITEM"), kw("MENU"), kw("FRAME")),
-      field("query", $.identifier),
-      ":",
-      field("attribute", $.identifier),
-      optional(seq(kw("IN"), kw("MENU"), field("menu", $.identifier))),
+      $.__widget_access_body,
+    ),
+
+  __widget_access_body: ($) =>
+    prec.right(
+      seq(
+        field("query", $.identifier),
+        ":",
+        field("attribute", $.identifier),
+        optional(seq(kw("IN"), kw("MENU"), field("menu", $.identifier))),
+      ),
     ),
 });

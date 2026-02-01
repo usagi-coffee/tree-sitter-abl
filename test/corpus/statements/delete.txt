@@ -143,8 +143,7 @@ DELETE Customer VALIDATE(NOT(CAN-FIND(Order OF Customer)),
       (unary_expression
         (parenthesized_expression
           (can_find_expression
-            (record_query
-              table: (identifier)
-              (of_phrase
-                record: (identifier))))))
+            table: (identifier)
+            (of_phrase
+              record: (identifier)))))
       (string_literal))))

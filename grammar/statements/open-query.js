@@ -1,69 +1,52 @@
 module.exports = ({ kw }) => ({
   open_query_statement: ($) =>
+    seq(kw("OPEN"), $.__open_query_body, $._terminator),
+
+  __open_query_body: ($) =>
     seq(
-      kw("OPEN"),
       kw("QUERY"),
       field("query", $.identifier),
-      $.__open_query_body,
-      $._terminator,
-    ),
-  __open_query_body: ($) =>
-    choice(
-      seq(
-        choice(kw("FOR"), kw("PRESELECT")),
-        kw("EACH"),
-        alias($.__open_query_record_phrase, $.record_phrase),
-        repeat(
-          seq(
-            ",",
-            choice(kw("EACH"), kw("FIRST"), kw("LAST")),
-            alias($.__open_query_record_phrase, $.record_phrase),
-          ),
+      choice(kw("FOR"), kw("PRESELECT")),
+      kw("EACH"),
+      alias($.__open_query_record_phrase, $.record_phrase),
+      repeat(
+        seq(
+          ",",
+          choice(kw("EACH"), kw("FIRST"), kw("LAST")),
+          alias($.__open_query_record_phrase, $.record_phrase),
         ),
-        optional(alias($.__open_query_tuning, $.query_tuning)),
-        kw("BREAK"),
-        repeat(alias($.__open_query_by_phrase, $.by_phrase)),
-        optional(
-          field(
-            "lock",
-            choice(kw("SHARE-LOCK"), kw("EXCLUSIVE-LOCK"), kw("NO-LOCK")),
-          ),
-        ),
-        optional(kw("INDEXED-REPOSITION")),
-        optional(seq(kw("MAX-ROWS"), field("max_rows", $._expression))),
       ),
-      seq(
-        choice(kw("FOR"), kw("PRESELECT")),
-        kw("EACH"),
-        alias($.__open_query_record_phrase, $.record_phrase),
-        repeat(
-          seq(
-            ",",
-            choice(kw("EACH"), kw("FIRST"), kw("LAST")),
-            alias($.__open_query_record_phrase, $.record_phrase),
-          ),
-        ),
-        optional(alias($.__open_query_tuning, $.query_tuning)),
-        repeat(alias($.__open_query_by_phrase, $.by_phrase)),
-        optional(kw("INDEXED-REPOSITION")),
-        optional(seq(kw("MAX-ROWS"), field("max_rows", $._expression))),
-      ),
-    ),
-  __open_query_record_phrase: ($) =>
-    seq(
-      field("record", choice($.identifier, $.qualified_name)),
-      optional(
-        seq(kw("OF"), field("of", choice($.identifier, $.qualified_name))),
-      ),
-      optional(seq(kw("WHERE"), field("where", $._expression))),
-      optional(seq(kw("USE-INDEX"), field("index", $.identifier))),
+      optional(alias($.__open_query_tuning, $.query_tuning)),
+      optional(kw("BREAK")),
+      repeat(alias($.__open_query_by_phrase, $.by_phrase)),
       optional(
         field(
           "lock",
           choice(kw("SHARE-LOCK"), kw("EXCLUSIVE-LOCK"), kw("NO-LOCK")),
         ),
       ),
+      optional(kw("INDEXED-REPOSITION")),
+      optional(seq(kw("MAX-ROWS"), field("max_rows", $._expression))),
     ),
+
+  __open_query_record_phrase: ($) =>
+    prec.right(
+      seq(
+        field("record", choice($.identifier, $.qualified_name)),
+        optional(
+          seq(kw("OF"), field("of", choice($.identifier, $.qualified_name))),
+        ),
+        optional(seq(kw("WHERE"), field("where", $._expression))),
+        optional(seq(kw("USE-INDEX"), field("index", $.identifier))),
+        optional(
+          field(
+            "lock",
+            choice(kw("SHARE-LOCK"), kw("EXCLUSIVE-LOCK"), kw("NO-LOCK")),
+          ),
+        ),
+      ),
+    ),
+
   __open_query_tuning: ($) =>
     seq(
       kw("QUERY-TUNING"),

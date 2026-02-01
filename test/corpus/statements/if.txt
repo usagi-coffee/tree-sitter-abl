@@ -80,16 +80,15 @@ IF LOCKED bufOrder THEN RETURN TRUE.
   (if_statement
     (unary_expression
       (can_find_expression
-        (record_query
-          table: (identifier)
-          (where_phrase
-            (binary_expression
-              (qualified_name
-                left: (identifier)
-                right: (identifier))
-              (qualified_name
-                left: (identifier)
-                right: (identifier)))))))
+        table: (identifier)
+        (where_phrase
+          (binary_expression
+            (qualified_name
+              left: (identifier)
+              right: (identifier))
+            (qualified_name
+              left: (identifier)
+              right: (identifier))))))
     then: (do_block
       (body
         (display_statement
@@ -98,14 +97,13 @@ IF LOCKED bufOrder THEN RETURN TRUE.
             right: (identifier))))))
   (if_statement
     (can_find_expression
-      (record_query
-        table: (identifier)
-        (where_phrase
-          (binary_expression
-            (qualified_name
-              left: (identifier)
-              right: (identifier))
-            (number_literal)))))
+      table: (identifier)
+      (where_phrase
+        (binary_expression
+          (qualified_name
+            left: (identifier)
+            right: (identifier))
+          (number_literal))))
     then: (do_block
       (body
         (display_statement
@@ -114,16 +112,15 @@ IF LOCKED bufOrder THEN RETURN TRUE.
             right: (identifier))))))
   (if_statement
     (can_find_expression
-      (record_query
-        table: (identifier)
-        (where_phrase
-          (binary_expression
-            (qualified_name
-              left: (identifier)
-              right: (identifier))
-            (number_literal)))
-        (use_index
-          index: (identifier))))
+      table: (identifier)
+      (where_phrase
+        (binary_expression
+          (qualified_name
+            left: (identifier)
+            right: (identifier))
+          (number_literal)))
+      (use_index
+        index: (identifier)))
     then: (do_block
       (body
         (display_statement

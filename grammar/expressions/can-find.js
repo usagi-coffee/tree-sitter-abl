@@ -1,7 +1,8 @@
 module.exports = ({ kw }) => ({
-  can_find_expression: ($) => seq(kw("CAN-FIND"), "(", $.record_query, ")"),
+  can_find_expression: ($) =>
+    seq(kw("CAN-FIND"), "(", $.__can_find_record_query, ")"),
 
-  record_query: ($) =>
+  __can_find_record_query: ($) =>
     prec.right(
       seq(
         optional(choice(kw("FIRST"), kw("LAST"))),

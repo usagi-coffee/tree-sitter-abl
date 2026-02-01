@@ -8,6 +8,7 @@ module.exports = ({ kw }) => ({
       ",",
       $.__on_stop_action,
     ),
+
   __on_stop_action: ($) =>
     choice(
       seq(kw("LEAVE"), optional(field("leave_label", $.identifier))),
@@ -15,6 +16,7 @@ module.exports = ({ kw }) => ({
       seq(kw("RETRY"), optional(field("retry_label", $.identifier))),
       $.__on_stop_return,
     ),
+
   __on_stop_return: ($) =>
     seq(
       kw("RETURN"),

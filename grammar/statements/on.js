@@ -2,47 +2,48 @@ module.exports = ({ kw }) => ({
   on_statement: ($) =>
     prec.right(
       1,
-      choice(
-        // Database event: ON event OF database-object
-        seq(
-          kw("ON"),
-          field("event", $.__on_database_event),
-          kw("OF"),
-          field("object", $.__on_database_object),
-          optional(alias($.__on_referencing_phrase, $.referencing_phrase)),
-          optional(alias($.__on_override, $.override)),
-          choice(seq(kw("REVERT"), $._terminator), $.do_block, $._statement),
-        ),
-        // UI event: ON event-list [OF widget-list] [ANYWHERE]
-        seq(
-          kw("ON"),
-          field("event", $.__on_ui_event),
-          optional(
-            seq(
-              kw("OF"),
-              optional(kw("MENU-ITEM")),
-              field("widget", $.__on_widget),
-              repeat(
-                seq(
-                  ",",
-                  optional(kw("MENU-ITEM")),
-                  field("widget", $.__on_widget),
-                ),
-              ),
-              optional(alias($.__on_in_frame, $.in_frame_phrase)),
-            ),
+      seq(
+        kw("ON"),
+        choice(
+          // Database event: ON event OF database-object
+          seq(
+            field("event", $.__on_database_event),
+            kw("OF"),
+            field("object", $.__on_database_object),
+            optional(alias($.__on_referencing_phrase, $.referencing_phrase)),
+            optional(alias($.__on_override, $.override)),
+            choice(seq(kw("REVERT"), $._terminator), $.do_block, $._statement),
           ),
-          optional(kw("ANYWHERE")),
-          choice(
-            seq(kw("REVERT"), $._terminator),
-            $.do_block,
-            $._statement,
-            seq(
-              kw("PERSISTENT"),
-              kw("RUN"),
-              field("procedure", $.identifier),
-              optional($.arguments),
-              $._terminator,
+          // UI event: ON event-list [OF widget-list] [ANYWHERE]
+          seq(
+            field("event", $.__on_ui_event),
+            optional(
+              seq(
+                kw("OF"),
+                optional(kw("MENU-ITEM")),
+                field("widget", $.__on_widget),
+                repeat(
+                  seq(
+                    ",",
+                    optional(kw("MENU-ITEM")),
+                    field("widget", $.__on_widget),
+                  ),
+                ),
+                optional(alias($.__on_in_frame, $.in_frame_phrase)),
+              ),
+            ),
+            optional(kw("ANYWHERE")),
+            choice(
+              seq(kw("REVERT"), $._terminator),
+              $.do_block,
+              $._statement,
+              seq(
+                kw("PERSISTENT"),
+                kw("RUN"),
+                field("procedure", $.identifier),
+                optional($.arguments),
+                $._terminator,
+              ),
             ),
           ),
         ),

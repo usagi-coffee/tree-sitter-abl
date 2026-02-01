@@ -40,6 +40,7 @@ DEF BUTTON btnEnd AUTO-ENDKEY LIKE btnTestButton.
     (button_option
       label: (string_literal)))
   (button_definition
+    (access_modifier)
     name: (identifier)
     (button_option
       filename: (string_literal)
@@ -283,6 +284,7 @@ DEFINE PRIVATE BUTTON btnPriv LABEL "Private".
 
 (source_code
   (button_definition
+    (access_modifier)
     name: (identifier)
     (button_option
       label: (string_literal))))

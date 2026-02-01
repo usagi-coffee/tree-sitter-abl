@@ -426,10 +426,12 @@ DEF PRIVATE IMAGE privFile FILE "private.jpg" SIZE 10 BY 20.
 
 (source_code
   (image_definition
+    (access_modifier)
     name: (identifier)
     (image_phrase
       file: (string_literal)))
   (image_definition
+    (access_modifier)
     name: (identifier)
     (image_phrase
       file: (string_literal))

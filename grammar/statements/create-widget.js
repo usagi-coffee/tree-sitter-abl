@@ -38,7 +38,7 @@ module.exports = ({ kw }) => ({
         $._terminator,
       ),
     ),
-  create_window_statement: ($) => $.create_widget_statement,
+
   __create_widget_triggers: ($) =>
     seq(
       kw("TRIGGERS"),
@@ -47,6 +47,7 @@ module.exports = ({ kw }) => ({
       kw("END"),
       kw("TRIGGERS"),
     ),
+
   __create_widget_trigger_definition: ($) =>
     seq(
       kw("ON"),

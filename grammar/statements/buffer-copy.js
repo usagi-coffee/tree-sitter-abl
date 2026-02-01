@@ -17,6 +17,7 @@ module.exports = ({ kw }) => ({
       optional(kw("NO-LOBS")),
       optional(alias($.__buffer_copy_no_error, $.no_error)),
     ),
+
   __buffer_copy_record_name: ($) => choice($.identifier, $.qualified_name),
   __buffer_copy_except_phrase: ($) =>
     seq(

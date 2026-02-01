@@ -1,14 +1,10 @@
 module.exports = ({ kw }) => ({
   disable_triggers_statement: ($) =>
-    seq(
-      kw("DISABLE"),
-      kw("TRIGGERS"),
-      $.__disable_treiggers_body,
-      $._terminator,
-    ),
+    seq(kw("DISABLE"), $.__disable_treiggers_body, $._terminator),
 
   __disable_treiggers_body: ($) =>
     seq(
+      kw("TRIGGERS"),
       kw("FOR"),
       field("mode", choice(kw("DUMP"), kw("LOAD"))),
       kw("OF"),

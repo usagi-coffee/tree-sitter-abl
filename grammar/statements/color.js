@@ -1,5 +1,6 @@
 module.exports = ({ kw }) => ({
   color_statement: ($) => seq(kw("COLOR"), $.__color_body, $._terminator),
+
   __color_body: ($) =>
     seq(
       optional(kw("DISPLAY")),

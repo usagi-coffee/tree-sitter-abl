@@ -1,7 +1,9 @@
 module.exports = ({ kw }) => ({
   form_statement: ($) => seq(kw("FORM"), $.__form_body, $._terminator),
+
   __form_body: ($) =>
     seq(repeat1(alias($.__form_item, $.form_item)), optional($.frame_phrase)),
+
   __form_item: ($) =>
     prec.right(
       choice(
@@ -16,6 +18,7 @@ module.exports = ({ kw }) => ({
         seq(kw("SPACE"), optional(seq("(", $._expression, ")"))),
       ),
     ),
+
   __form_view_as: ($) =>
     seq(
       kw("VIEW-AS"),
@@ -24,6 +27,7 @@ module.exports = ({ kw }) => ({
         seq(kw("RADIO-SET"), kw("RADIO-BUTTONS"), $.__form_radio_button_list),
       ),
     ),
+
   __form_radio_button_list: ($) =>
     seq($.__form_radio_button, repeat(seq(",", $.__form_radio_button))),
   __form_radio_button: ($) =>

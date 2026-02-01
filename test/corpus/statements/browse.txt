@@ -81,6 +81,8 @@ DEFINE NEW SHARED BROWSE b1 QUERY q1 DISPLAY CustNum Name.
 
 (source_code
   (browse_definition
+    (new_modifier)
+    (scope_modifier)
     name: (identifier)
     query: (identifier)
     column: (identifier)
@@ -95,6 +97,7 @@ DEFINE PRIVATE BROWSE b1 QUERY q1 DISPLAY CustNum Name.
 
 (source_code
   (browse_definition
+    (access_modifier)
     name: (identifier)
     query: (identifier)
     column: (identifier)
@@ -172,6 +175,7 @@ CONTEXT-HELP-ID 42 DROP-TARGET TOOLTIP "Browse tip" ROW 3 COLUMN 5.
 
 (source_code
   (browse_definition
+    (access_modifier)
     name: (identifier)
     query: (identifier)
     column: (identifier)

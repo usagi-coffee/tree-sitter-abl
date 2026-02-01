@@ -1,6 +1,7 @@
 module.exports = ({ kw }) => ({
   copy_lob_statement: ($) =>
     seq(kw("COPY-LOB"), $.__copy_lob_body, $._terminator),
+
   __copy_lob_body: ($) =>
     seq(
       optional(kw("FROM")),

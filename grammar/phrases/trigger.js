@@ -1,17 +1,13 @@
 module.exports = ({ kw }) => ({
   trigger_phrase: ($) =>
     choice(
-      prec.right(
-        1,
-        seq(
-          kw("TRIGGERS"),
-          ":",
-          repeat1($.__trigger_block),
-          kw("END"),
-          optional(kw("TRIGGERS")),
-        ),
-      ),
+      seq(kw("TRIGGERS"), $.__triggers_body),
       seq(kw("ON"), $.__trigger_event_list),
+    ),
+
+  __triggers_body: ($) =>
+    prec.right(
+      seq(":", repeat1($.__trigger_block), kw("END"), optional(kw("TRIGGERS"))),
     ),
 
   __trigger_block: ($) =>

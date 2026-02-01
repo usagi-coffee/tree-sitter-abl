@@ -14,17 +14,20 @@ module.exports = ({ kw }) => ({
       optional(kw("NO-LOBS")),
       optional(kw("NO-ERROR")),
     ),
+
   __buffer_compare_field_phrase: ($) =>
     seq(
       choice(kw("EXCEPT"), kw("USING")),
       repeat1(field("field", choice($.identifier, $.qualified_name))),
     ),
+
   __buffer_compare_save_phrase: ($) =>
     seq(
       kw("SAVE"),
       optional(seq(kw("RESULT"), kw("IN"))),
       field("result", $._expression),
     ),
+
   __buffer_compare_compares_block: ($) =>
     seq(
       optional(kw("EXPLICIT")),
@@ -34,6 +37,7 @@ module.exports = ({ kw }) => ({
       optional(kw("COMPARES")),
       kw("END"),
     ),
+
   __buffer_compare_when_phrase: ($) =>
     seq(
       kw("WHEN"),
@@ -43,6 +47,7 @@ module.exports = ({ kw }) => ({
       kw("THEN"),
       field("action", $._statement),
     ),
+
   __buffer_compare_operator: ($) =>
     choice(
       alias("=", $.EQ),

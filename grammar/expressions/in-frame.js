@@ -6,6 +6,7 @@ module.exports = ({ kw }) => ({
       kw("FRAME"),
       field("frame", $.identifier),
     ),
+
   __in_frame_target: ($) =>
     choice(
       alias($.qualified_name, $.identifier),

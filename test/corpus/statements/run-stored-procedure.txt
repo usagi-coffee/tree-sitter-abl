@@ -223,7 +223,6 @@ DISPLAY "Succeeded".
     type: (identifier))
   (create_temp_table_statement
     handle: (identifier))
-  (empty_statement)
   (run_stored_procedure_statement
     procedure: (identifier)
     result_handle: (identifier)

@@ -1,6 +1,7 @@
 module.exports = () => ({
-  __annotation_name: () => token(/[^0-9\s()=,\.][^\s()=,\.]*/),
   annotation: ($) => seq("@", $.__annotation_body, $._terminator),
+
+  __annotation_name: () => token(/[^0-9\s()=,\.][^\s()=,\.]*/),
   __annotation_body: ($) =>
     seq(
       field("name", alias($.__annotation_name, $.identifier)),

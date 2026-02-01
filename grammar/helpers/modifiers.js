@@ -81,7 +81,7 @@ function definitionModifiers($, kw, options = {}) {
     }
   }
 
-  if (access.length > 0) {
+  if ((access.length === 1 && access[0] !== "PRIVATE") || access.length > 1) {
     if (hasStatic)
       modifiers.push(optional(alias(kw("STATIC"), $.static_modifier)));
     if (abstract)

@@ -33,9 +33,6 @@ module.exports = grammar({
     [$._primary_expression, $.__display_item, $.function_call],
     [$._primary_expression, $.__in_frame_target],
 
-    // Accessors
-    [$.widget_access],
-
     // Specific disambiguations
     [$.__prompt_for_record_body, $.__prompt_for_field_target],
     [$.__update_record_body, $.__update_field_target],

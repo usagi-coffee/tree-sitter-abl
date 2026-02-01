@@ -1,11 +1,13 @@
 module.exports = ({ kw }) => ({
   compile_statement: ($) => seq(kw("COMPILE"), $.__compile_body, $._terminator),
+
   __compile_body: ($) =>
     seq(
       field("file", $.__compile_file),
       repeat(alias($.__compile_option, $.compile_option)),
       optional(kw("NO-ERROR")),
     ),
+
   __compile_file: ($) =>
     choice(
       $.identifier,
@@ -13,6 +15,7 @@ module.exports = ({ kw }) => ({
       $.string_literal,
       seq(kw("VALUE"), "(", $._expression, ")"),
     ),
+
   __compile_option: ($) =>
     choice(
       seq(
@@ -72,6 +75,7 @@ module.exports = ({ kw }) => ({
       ),
       seq(kw("LISTING"), field("listing", $._expression)),
     ),
+
   __compile_xref_option: ($) =>
     seq(
       kw("XREF"),
@@ -80,6 +84,7 @@ module.exports = ({ kw }) => ({
         seq(kw("APPEND"), optional(seq("=", field("append", $._expression)))),
       ),
     ),
+
   __compile_string_xref_option: ($) =>
     seq(
       kw("STRING-XREF"),

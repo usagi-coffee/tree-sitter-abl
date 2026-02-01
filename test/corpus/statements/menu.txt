@@ -84,6 +84,8 @@ DEFINE NEW SHARED MENU mnuShared MENUBAR.
 
 (source_code
   (menu_definition
+    (new_modifier)
+    (scope_modifier)
     name: (identifier)
     (menubar)))
 
@@ -153,6 +155,8 @@ DEFINE NEW SHARED MENU mnuNS.
 
 (source_code
   (menu_definition
+    (new_modifier)
+    (scope_modifier)
     name: (identifier)))
 
 ================================================================================
@@ -165,6 +169,7 @@ DEFINE SHARED MENU mnuShared2.
 
 (source_code
   (menu_definition
+    (scope_modifier)
     name: (identifier)))
 
 ================================================================================
@@ -177,6 +182,7 @@ DEFINE PRIVATE MENU mnuPriv.
 
 (source_code
   (menu_definition
+    (access_modifier)
     name: (identifier)))
 
 ================================================================================

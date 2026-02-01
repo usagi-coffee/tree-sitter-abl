@@ -1,5 +1,6 @@
 module.exports = ({ kw }) => ({
   choose_statement: ($) => seq(kw("CHOOSE"), $.__choose_body, $._terminator),
+
   __choose_body: ($) =>
     seq(
       choice(
@@ -30,6 +31,7 @@ module.exports = ({ kw }) => ({
       ),
       optional($.frame_phrase),
     ),
+
   __choose_auto_return: ($) => kw("AUTO-RETURN"),
   __choose_go_on: ($) => seq(kw("GO-ON"), "(", repeat1($.identifier), ")"),
   __choose_no_error: ($) => kw("NO-ERROR"),

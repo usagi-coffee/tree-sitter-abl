@@ -1,8 +1,14 @@
+const { definitionModifiers } = require("../helpers/modifiers");
+
 module.exports = ({ kw }) => ({
   frame_definition: ($) =>
     seq(
       choice(kw("DEFINE"), kw("DEF")),
-      optional(choice(seq(optional(kw("NEW")), kw("SHARED")), kw("PRIVATE"))),
+      ...definitionModifiers($, kw, {
+        new: true,
+        scope: ["SHARED"],
+        access: ["PRIVATE"],
+      }),
       kw("FRAME"),
       $.__frame_body,
       $._terminator,

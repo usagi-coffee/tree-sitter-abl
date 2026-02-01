@@ -1,19 +1,14 @@
 module.exports = ({ kw }) => ({
   function_definition: ($) =>
     seq(kw("FUNCTION"), $.__function_body, $._terminator),
+
   __function_body: ($) =>
     seq(
       field("name", $.identifier),
       choice(kw("RETURNS"), kw("RETURN")),
       optional(kw("CLASS")),
       field("type", $._type_name),
-      optional(
-        choice(
-          kw("PRIVATE"),
-          kw("PROTECTED"),
-          kw("PUBLIC")
-        )
-      ),
+      optional(choice(kw("PRIVATE"), kw("PROTECTED"), kw("PUBLIC"))),
       optional(alias($.__function_parameters, $.parameters)),
       choice($._terminator, $._colon),
       repeat($._statement),

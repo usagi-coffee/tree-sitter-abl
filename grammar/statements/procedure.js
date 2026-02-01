@@ -1,8 +1,14 @@
+const { definitionModifiers } = require("../helpers/modifiers");
+
 module.exports = ({ kw }) => ({
   procedure_definition: ($) =>
+    seq(kw("PROCEDURE"), $.__procedure_body, $._terminator),
+
+  __procedure_body: ($) =>
     seq(
-      kw("PROCEDURE"),
-      optional(alias($.__procedure_access_modifier, $.access_modifier)),
+      ...definitionModifiers($, kw, {
+        access: ["PRIVATE", "PROTECTED", "PUBLIC"],
+      }),
       field("name", choice($.identifier, $.qualified_name)),
       repeat($.__procedure_option),
       optional(alias($.__procedure_in_super_phrase, $.in_super_phrase)),
@@ -10,7 +16,6 @@ module.exports = ({ kw }) => ({
       repeat($._statement),
       kw("END"),
       optional(kw("PROCEDURE")),
-      $._terminator,
     ),
 
   __procedure_access_modifier: ($) =>
