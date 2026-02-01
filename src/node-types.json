@@ -36091,9 +36091,21 @@
         ]
       },
       "type": {
-        "multiple": false,
+        "multiple": true,
         "required": false,
         "types": [
+          {
+            "type": "INPUT",
+            "named": false
+          },
+          {
+            "type": "INPUT-OUTPUT",
+            "named": false
+          },
+          {
+            "type": "OUTPUT",
+            "named": false
+          },
           {
             "type": "generic_type",
             "named": true

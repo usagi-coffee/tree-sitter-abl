@@ -40,7 +40,6 @@ module.exports = grammar({
     // Primary expression
     [$._primary_expression, $._assignable],
     [$._primary_expression, $.function_call],
-    [$._primary_expression, $.__input_expression_body],
     [$._primary_expression, $.__display_item, $.function_call],
     [$._primary_expression, $.__in_frame_target],
 

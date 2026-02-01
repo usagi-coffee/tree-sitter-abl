@@ -517,8 +517,7 @@ END PROCEDURE.
         procedure: (identifier)
         (arguments
           (argument
-            value: (input_expression
-              field: (identifier)))
+            value: (identifier))
           (argument
             value: (identifier))))
       (display_statement
@@ -555,8 +554,7 @@ END PROCEDURE.
             (arguments
               (argument
                 value: (binary_expression
-                  (input_expression
-                    field: (identifier))
+                  (identifier)
                   (number_literal)))
               (argument
                 value: (identifier))))

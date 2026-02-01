@@ -69,8 +69,7 @@ RUN process.p (1, "hello", TRUE).
     procedure: (procedure_name)
     (arguments
       (argument
-        value: (input_expression
-          field: (identifier)))
+        value: (identifier))
       (argument
         value: (identifier))
       (argument
@@ -117,8 +116,7 @@ RUN validateOrder (orderId, customerId).
     procedure: (identifier)
     (arguments
       (argument
-        value: (input_expression
-          field: (identifier)))
+        value: (identifier))
       (argument
         value: (identifier))))
   (run_statement
@@ -356,8 +354,7 @@ RUN methodProc IN hProc NO-ERROR.
         function: (identifier)
         (arguments
           (argument
-            value: (input_expression
-              field: (identifier)))
+            value: (identifier))
           (argument
             value: (identifier))))))
   (delete_procedure_statement
@@ -375,8 +372,7 @@ RUN methodProc IN hProc NO-ERROR.
         function: (identifier)
         (arguments
           (argument
-            value: (input_expression
-              field: (identifier)))
+            value: (identifier))
           (argument
             value: (identifier))))))
   (run_statement
@@ -386,8 +382,7 @@ RUN methodProc IN hProc NO-ERROR.
         function: (identifier)
         (arguments
           (argument
-            value: (input_expression
-              field: (identifier)))
+            value: (identifier))
           (argument
             value: (identifier))))))
   (delete_procedure_statement
