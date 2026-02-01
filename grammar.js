@@ -235,9 +235,7 @@ module.exports = grammar({
           prec(PREC.UNARY, seq(choice("+", "-"), $._expression)),
           prec(PREC.NOT, seq(kw("NOT"), $._expression)),
         ),
-      // Turns out this stupid split to __ reduces state counts dramatically
-      binary_expression: ($) => $.__binary_expression,
-      __binary_expression: ($) =>
+      binary_expression: ($) =>
         binary_expression($, $._expression, $._comparison_operator),
 
       // _statement_expression excludes `=` from comparison operators to disambiguate

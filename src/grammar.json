@@ -54364,10 +54364,6 @@
       ]
     },
     "binary_expression": {
-      "type": "SYMBOL",
-      "name": "__binary_expression"
-    },
-    "__binary_expression": {
       "type": "CHOICE",
       "members": [
         {
