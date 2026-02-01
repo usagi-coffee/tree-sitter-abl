@@ -127,20 +127,19 @@ DEFINE DATASET dsPidFields FOR ttParent, ttChild PARENT-ID-RELATION FOR ttParent
 
 (source_code
   (dataset_definition
-    (shared_variable_scope)
+    (new_modifier)
+    (scope_modifier)
     name: (identifier)
     table: (identifier))
   (dataset_definition
-    (shared_variable_scope)
+    (scope_modifier)
     name: (identifier)
     table: (identifier))
   (dataset_definition
-    (access_modifier)
     (static_modifier)
     name: (identifier)
     table: (identifier))
   (dataset_definition
-    (access_modifier)
     name: (identifier)
     table: (identifier))
   (dataset_definition

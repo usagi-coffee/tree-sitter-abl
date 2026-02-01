@@ -159,7 +159,8 @@ DISPLAY STREAM rpt ItemNum ItemName WITH NO-LABELS NO-BOX.
     (label_option
       (string_literal)))
   (buffer_definition
-    (shared_variable_scope)
+    (new_modifier)
+    (scope_modifier)
     (identifier)
     (identifier))
   (stream_definition
@@ -249,7 +250,7 @@ DISPLAY STREAM rpt ItemNum ItemName WITH NO-LABELS NO-BOX.
     (shared_variable_scope)
     (identifier))
   (buffer_definition
-    (shared_variable_scope)
+    (scope_modifier)
     (identifier)
     (identifier))
   (display_statement

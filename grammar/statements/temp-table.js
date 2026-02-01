@@ -1,22 +1,16 @@
+const { definitionModifiers } = require("../helpers/modifiers");
+
 module.exports = ({ kw }) => ({
   temp_table_definition: ($) =>
     seq(
       choice(kw("DEFINE"), kw("DEF")),
-      optional(
-        choice(
-          alias($.__temp_table_shared_scope, $.shared_variable_scope),
-          seq(
-            optional(alias($.__temp_table_access_modifier, $.access_modifier)),
-            optional(alias($.__temp_table_static_modifier, $.static_modifier)),
-            optional(
-              alias(
-                $.__temp_table_serialization_modifier,
-                $.serialization_modifier,
-              ),
-            ),
-          ),
-        ),
-      ),
+      ...definitionModifiers($, kw, {
+        access: ["PRIVATE", "PROTECTED"],
+        new: true,
+        scope: ["SHARED", "GLOBAL"],
+        static: true,
+        serializable: true,
+      }),
       kw("TEMP-TABLE"),
       $.__temp_table_body,
       $._terminator,
@@ -139,17 +133,6 @@ module.exports = ({ kw }) => ({
       seq(kw("XML-NODE-NAME"), $.string_literal),
       seq(kw("VIEW-AS"), $.identifier),
     ),
-  __temp_table_shared_scope: ($) =>
-    choice(
-      seq(kw("NEW"), kw("GLOBAL")),
-      seq(kw("NEW"), kw("GLOBAL"), kw("SHARED")),
-      seq(kw("NEW"), kw("SHARED")),
-      kw("SHARED"),
-    ),
-  __temp_table_access_modifier: ($) => choice(kw("PRIVATE"), kw("PROTECTED")),
-  __temp_table_static_modifier: ($) => kw("STATIC"),
-  __temp_table_serialization_modifier: ($) =>
-    choice(kw("SERIALIZABLE"), kw("NON-SERIALIZABLE")),
   __temp_table_like_name: ($) => choice($.identifier, $.qualified_name),
   __temp_table_label_list: ($) =>
     seq($.string_literal, repeat(seq(",", $.string_literal))),

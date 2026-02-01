@@ -314,13 +314,14 @@ DEFINE PRIVATE WORK-TABLE wtPrivate FIELD f1 AS INTEGER.
               (identifier)
               (identifier)))))))
   (work_table_definition
-    (shared_variable_scope)
+    (new_modifier)
+    (scope_modifier)
     (identifier)
     (field
       (identifier)
       (identifier)))
   (work_table_definition
-    (shared_variable_scope)
+    (scope_modifier)
     (identifier)
     (field
       (identifier)

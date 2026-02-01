@@ -79,7 +79,6 @@ END PROCEDURE.
     name: (identifier)
     (external_phrase
       library: (string_literal))
-    (persistent)
     (parameter_definition
       name: (identifier)
       type: (identifier))))

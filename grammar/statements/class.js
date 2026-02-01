@@ -1,3 +1,5 @@
+const { definitionModifiers } = require("../helpers/modifiers");
+
 module.exports = ({ kw }) => ({
   class_definition: ($) =>
     seq(repeat($.__class_option), kw("CLASS"), $.__class_body, $._terminator),
@@ -137,13 +139,19 @@ module.exports = ({ kw }) => ({
   property_definition: ($) =>
     seq(
       kw("DEFINE"),
-      optional(alias($.__variable_access_modifier, $.access_modifier)),
-      optional(alias($.__variable_static_modifier, $.static_modifier)),
-      optional(
-        alias($.__variable_serialization_modifier, $.serialization_modifier),
-      ),
-      repeat($.__property_modifier),
+      ...definitionModifiers($, kw, {
+        access: [
+          "PRIVATE",
+          "PACKAGE-PRIVATE",
+          "PROTECTED",
+          "PACKAGE-PROTECTED",
+          "PUBLIC",
+        ],
+        static: true,
+        serializable: true,
+      }),
       kw("PROPERTY"),
+      repeat($.__property_modifier),
       field("name", $.identifier),
       $.__property_type_phrase,
       repeat(
@@ -161,7 +169,15 @@ module.exports = ({ kw }) => ({
 
   __property_get_phrase: ($) =>
     seq(
-      optional(alias($.__variable_access_modifier, $.access_modifier)),
+      optional(
+        choice(
+          kw("PRIVATE"),
+          kw("PACKAGE-PRIVATE"),
+          kw("PROTECTED"),
+          kw("PACKAGE-PROTECTED"),
+          kw("PUBLIC"),
+        ),
+      ),
       kw("GET"),
       choice(
         $._terminator_dot,
@@ -177,7 +193,15 @@ module.exports = ({ kw }) => ({
 
   __property_set_phrase: ($) =>
     seq(
-      optional(alias($.__variable_access_modifier, $.access_modifier)),
+      optional(
+        choice(
+          kw("PRIVATE"),
+          kw("PACKAGE-PRIVATE"),
+          kw("PROTECTED"),
+          kw("PACKAGE-PROTECTED"),
+          kw("PUBLIC"),
+        ),
+      ),
       kw("SET"),
       optional($.property_set_parameter_list),
       choice(

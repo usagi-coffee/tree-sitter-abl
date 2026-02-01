@@ -37,7 +37,6 @@ END INTERFACE.
         table: (identifier)))
     (interface_body_item
       (event_definition
-        (access_modifier)
         name: (identifier)
         (signature
           name: (identifier)

@@ -112,21 +112,24 @@ DEFINE SHARED TEMP-TABLE tt3 NO-UNDO FIELD f3 AS INTEGER.
 
 (source_code
   (temp_table_definition
-    (shared_variable_scope)
+    (new_modifier)
+    (scope_modifier)
     name: (identifier)
     (no_undo)
     (temp_table_field
       name: (identifier)
       type: (identifier)))
   (temp_table_definition
-    (shared_variable_scope)
+    (new_modifier)
+    (scope_modifier)
+    (scope_modifier)
     name: (identifier)
     (no_undo)
     (temp_table_field
       name: (identifier)
       type: (identifier)))
   (temp_table_definition
-    (shared_variable_scope)
+    (scope_modifier)
     name: (identifier)
     (no_undo)
     (temp_table_field
@@ -145,21 +148,18 @@ DEFINE PRIVATE STATIC TEMP-TABLE tt3 NO-UNDO FIELD f3 AS LOGICAL.
 
 (source_code
   (temp_table_definition
-    (access_modifier)
     name: (identifier)
     (no_undo)
     (temp_table_field
       name: (identifier)
       type: (identifier)))
   (temp_table_definition
-    (access_modifier)
     name: (identifier)
     (no_undo)
     (temp_table_field
       name: (identifier)
       type: (identifier)))
   (temp_table_definition
-    (access_modifier)
     (static_modifier)
     name: (identifier)
     (no_undo)
@@ -193,7 +193,6 @@ DEFINE PRIVATE SERIALIZABLE TEMP-TABLE tt3 NO-UNDO FIELD f3 AS LOGICAL.
       name: (identifier)
       type: (identifier)))
   (temp_table_definition
-    (access_modifier)
     (serialization_modifier)
     name: (identifier)
     (no_undo)

@@ -130,13 +130,14 @@ DEFINE PRIVATE WORKFILE wfPrivate FIELD f1 AS INTEGER.
 
 (source_code
   (workfile_definition
-    (shared_variable_scope)
+    (new_modifier)
+    (scope_modifier)
     (identifier)
     (field
       (identifier)
       (identifier)))
   (workfile_definition
-    (shared_variable_scope)
+    (scope_modifier)
     (identifier)
     (field
       (identifier)

@@ -7,7 +7,13 @@ module.exports = ({ kw }) => ({
       choice(kw("RETURNS"), kw("RETURN")),
       optional(kw("CLASS")),
       field("type", $._type_name),
-      optional(alias($.__function_access_modifier, $.access_modifier)),
+      optional(
+        choice(
+          kw("PRIVATE"),
+          kw("PROTECTED"),
+          kw("PUBLIC")
+        )
+      ),
       optional(alias($.__function_parameters, $.parameters)),
       choice($._terminator, $._colon),
       repeat($._statement),
@@ -109,6 +115,4 @@ module.exports = ({ kw }) => ({
       $.null_literal,
     ),
   __function_field_name: ($) => choice($.qualified_name, $.identifier),
-  __function_access_modifier: ($) =>
-    choice(kw("PRIVATE"), kw("PROTECTED"), kw("PUBLIC")),
 });

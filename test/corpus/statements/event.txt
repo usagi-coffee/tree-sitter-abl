@@ -22,12 +22,10 @@ DEFINE PROTECTED ABSTRACT OVERRIDE EVENT onAbstract SIGNATURE VOID (INPUT reason
 
 (source_code
   (event_definition
-    (access_modifier)
     (static_modifier)
     name: (identifier)
     (signature))
   (event_definition
-    (access_modifier)
     (abstract_modifier)
     (override_modifier)
     name: (identifier)
@@ -98,7 +96,6 @@ DEFINE PRIVATE EVENT onPrivate SIGNATURE VOID ().
 
 (source_code
   (event_definition
-    (access_modifier)
     name: (identifier)
     (signature)))
 
@@ -112,7 +109,6 @@ DEFINE PACKAGE-PRIVATE EVENT onPackage SIGNATURE VOID (INPUT id AS INTEGER).
 
 (source_code
   (event_definition
-    (access_modifier)
     name: (identifier)
     (signature
       name: (identifier)
@@ -128,7 +124,6 @@ DEFINE PROTECTED EVENT onProtected SIGNATURE VOID ().
 
 (source_code
   (event_definition
-    (access_modifier)
     name: (identifier)
     (signature)))
 
@@ -142,7 +137,6 @@ DEFINE PACKAGE-PROTECTED EVENT onPackageProt SIGNATURE VOID ().
 
 (source_code
   (event_definition
-    (access_modifier)
     name: (identifier)
     (signature)))
 
@@ -175,7 +169,6 @@ DEFINE STATIC PRIVATE EVENT onStaticPriv SIGNATURE VOID ().
     (signature))
   (event_definition
     (static_modifier)
-    (access_modifier)
     name: (identifier)
     (signature)))
 
@@ -196,7 +189,6 @@ DEFINE PUBLIC ABSTRACT EVENT onPubAbs SIGNATURE VOID ().
       name: (identifier)
       type: (identifier)))
   (event_definition
-    (access_modifier)
     (abstract_modifier)
     name: (identifier)
     (signature)))
@@ -216,7 +208,6 @@ DEFINE PROTECTED OVERRIDE EVENT onProtOverride SIGNATURE VOID ().
     name: (identifier)
     (signature))
   (event_definition
-    (access_modifier)
     (override_modifier)
     name: (identifier)
     (signature)))
@@ -364,21 +355,18 @@ DEFINE PUBLIC STATIC ABSTRACT EVENT onInit SIGNATURE VOID (INPUT id AS INTEGER).
 
 (source_code
   (event_definition
-    (access_modifier)
     (static_modifier)
     name: (identifier)
     (signature
       name: (identifier)
       type: (identifier)))
   (event_definition
-    (access_modifier)
     (override_modifier)
     name: (identifier)
     (signature
       name: (identifier)
       type: (identifier)))
   (event_definition
-    (access_modifier)
     (static_modifier)
     (abstract_modifier)
     name: (identifier)
@@ -416,7 +404,6 @@ DEFINE EVENT onDelegate DELEGATE CLASS System.EventHandler.
 
 (source_code
   (event_definition
-    (access_modifier)
     (identifier)
     (signature
       (identifier)

@@ -1,19 +1,21 @@
+const { definitionModifiers } = require("../helpers/modifiers");
+
 module.exports = ({ kw }) => ({
   buffer_definition: ($) =>
-    seq(
-      choice(kw("DEFINE"), kw("DEF")),
-      optional(
-        choice(
-          alias($.__buffer_shared_variable_scope, $.shared_variable_scope),
-          seq(
-            optional(alias($.__buffer_access_modifier, $.access_modifier)),
-            optional(alias($.__buffer_static_modifier, $.static_modifier)),
-          ),
-        ),
+    prec.right(
+      1,
+      seq(
+        choice(kw("DEFINE"), kw("DEF")),
+        ...definitionModifiers($, kw, {
+          access: ["PRIVATE", "PROTECTED"],
+          new: true,
+          scope: ["SHARED"],
+          static: true,
+        }),
+        kw("BUFFER"),
+        $.__buffer_body,
+        $._terminator,
       ),
-      kw("BUFFER"),
-      $.__buffer_body,
-      $._terminator,
     ),
 
   __buffer_body: ($) =>
@@ -37,10 +39,6 @@ module.exports = ({ kw }) => ({
       ),
     ),
 
-  __buffer_shared_variable_scope: ($) =>
-    choice(seq(kw("NEW"), kw("SHARED")), kw("SHARED")),
-  __buffer_access_modifier: ($) => choice(kw("PRIVATE"), kw("PROTECTED")),
-  __buffer_static_modifier: ($) => kw("STATIC"),
   __buffer_name_or_string: ($) => choice($.identifier, $.string_literal),
   __buffer_table_name: ($) => choice($.identifier, $.qualified_name),
 });

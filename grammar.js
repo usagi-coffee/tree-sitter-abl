@@ -36,42 +36,6 @@ module.exports = grammar({
     // Accessors
     [$.widget_access],
 
-    // DEFINE * disambiguation
-    [
-      $.__buffer_access_modifier,
-      $.__data_source_access_modifier,
-      $.__dataset_access_modifier,
-      $.__event_access_modifier,
-      $.__query_access_modifier,
-      $.__temp_table_access_modifier,
-      $.__variable_access_modifier,
-    ],
-    [
-      $.__buffer_access_modifier,
-      $.__dataset_access_modifier,
-      $.__event_access_modifier,
-      $.__query_access_modifier,
-      $.__temp_table_access_modifier,
-      $.__variable_access_modifier,
-    ],
-    [
-      $.__dataset_access_modifier,
-      $.__temp_table_access_modifier,
-      $.__variable_access_modifier,
-    ],
-    [$.__data_source_access_modifier, $.__event_access_modifier],
-    [$.__data_source_static_modifier, $.__event_static_modifier],
-    [$.__event_access_modifier, $.__variable_access_modifier],
-    [$.__event_static_modifier, $.__variable_static_modifier],
-    [
-      $.__dataset_static_modifier,
-      $.__temp_table_static_modifier,
-      $.__variable_static_modifier,
-    ],
-
-    [$.__property_modifier, $.__event_abstract_modifier],
-    [$.__property_modifier, $.__event_override_modifier],
-
     // Specific disambiguations
     [$.__prompt_for_record_body, $.__prompt_for_field_target],
     [$.__update_record_body, $.__update_field_target],
@@ -80,6 +44,9 @@ module.exports = grammar({
     [$.__frame_option_down],
     [$.__frame_option_skip],
     [$.frame_phrase],
+
+    [$.property_definition, $.__interface_event],
+    [$.__procedure_external_phrase],
   ],
   inline: ($) => [
     $.__find_record_name,

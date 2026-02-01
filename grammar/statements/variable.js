@@ -1,22 +1,22 @@
+const { definitionModifiers } = require("../helpers/modifiers");
+
 module.exports = ({ kw }) => ({
   variable_definition: ($) =>
     seq(
       choice(kw("DEFINE"), kw("DEF")),
-      optional(
-        choice(
-          alias($.__variable_shared_variable_scope, $.shared_variable_scope),
-          seq(
-            optional(alias($.__variable_access_modifier, $.access_modifier)),
-            optional(alias($.__variable_static_modifier, $.static_modifier)),
-            optional(
-              alias(
-                $.__variable_serialization_modifier,
-                $.serialization_modifier,
-              ),
-            ),
-          ),
-        ),
-      ),
+      ...definitionModifiers($, kw, {
+        access: [
+          "PRIVATE",
+          "PACKAGE-PRIVATE",
+          "PROTECTED",
+          "PACKAGE-PROTECTED",
+          "PUBLIC",
+        ],
+        new: true,
+        scope: ["SHARED", "GLOBAL"],
+        static: true,
+        serializable: true,
+      }),
       choice(kw("VARIABLE"), kw("VAR")),
       $.__variable_body,
       $._terminator,
@@ -52,21 +52,6 @@ module.exports = ({ kw }) => ({
       ),
     ),
 
-  __variable_shared_variable_scope: ($) =>
-    choice(
-      seq(kw("NEW"), kw("GLOBAL"), kw("SHARED")),
-      seq(kw("NEW"), kw("SHARED")),
-      kw("SHARED"),
-    ),
-  __variable_access_modifier: ($) =>
-    choice(
-      kw("PRIVATE"),
-      kw("PACKAGE-PRIVATE"),
-      kw("PROTECTED"),
-      kw("PACKAGE-PROTECTED"),
-      kw("PUBLIC"),
-    ),
-
   _variable_type_phrase: ($) =>
     seq(
       choice(
@@ -84,9 +69,6 @@ module.exports = ({ kw }) => ({
       ),
     ),
 
-  __variable_static_modifier: ($) => kw("STATIC"),
-  __variable_serialization_modifier: ($) =>
-    choice(kw("SERIALIZABLE"), kw("NON-SERIALIZABLE")),
   __variable_extent_phrase: ($) =>
     seq(kw("EXTENT"), optional($.__variable_extent_size)),
   __variable_serialize_name_option: ($) =>

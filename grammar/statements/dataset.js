@@ -1,22 +1,16 @@
+const { definitionModifiers } = require("../helpers/modifiers");
+
 module.exports = ({ kw }) => ({
   dataset_definition: ($) =>
     seq(
       choice(kw("DEFINE"), kw("DEF")),
-      optional(
-        choice(
-          alias($.__dataset_shared_scope, $.shared_variable_scope),
-          seq(
-            optional(alias($.__dataset_access_modifier, $.access_modifier)),
-            optional(alias($.__dataset_static_modifier, $.static_modifier)),
-            optional(
-              alias(
-                $.__dataset_serialization_modifier,
-                $.serialization_modifier,
-              ),
-            ),
-          ),
-        ),
-      ),
+      ...definitionModifiers($, kw, {
+        access: ["PRIVATE", "PROTECTED"],
+        new: true,
+        scope: ["SHARED"],
+        static: true,
+        serializable: true,
+      }),
       kw("DATASET"),
       $.__dataset_body,
       $._terminator,
@@ -46,13 +40,6 @@ module.exports = ({ kw }) => ({
       repeat(alias($.__dataset_data_relation, $.data_relation)),
       repeat(alias($.__dataset_parent_id_relation, $.parent_id_relation)),
     ),
-
-  __dataset_shared_scope: ($) =>
-    choice(seq(kw("NEW"), kw("SHARED")), kw("SHARED")),
-  __dataset_access_modifier: ($) => choice(kw("PRIVATE"), kw("PROTECTED")),
-  __dataset_static_modifier: ($) => kw("STATIC"),
-  __dataset_serialization_modifier: ($) =>
-    choice(kw("SERIALIZABLE"), kw("NON-SERIALIZABLE")),
 
   __dataset_data_relation: ($) =>
     seq(

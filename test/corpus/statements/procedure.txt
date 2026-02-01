@@ -399,7 +399,7 @@ PROCEDURE doSuper IN SUPER.
     name: (identifier)
     (cdecl)
     (ordinal_phrase
-      (number_literal))
+      number: (number_literal))
     (persistent)
     (thread_safe)
     (external_phrase
@@ -625,12 +625,8 @@ END PROCEDURE.
   (procedure_definition
     name: (identifier)
     (external_phrase
-      library: (string_literal))
-    (cdecl)
-    (ordinal_phrase
+      library: (string_literal)
       (number_literal))
-    (persistent)
-    (thread_safe)
     (parameter_definition
       name: (identifier)
       type: (identifier)))
@@ -638,7 +634,6 @@ END PROCEDURE.
     name: (identifier)
     (external_phrase
       library: (string_literal))
-    (stdcall)
     (parameter_definition
       name: (identifier)
       type: (identifier)))
@@ -646,7 +641,6 @@ END PROCEDURE.
     name: (identifier)
     (external_phrase
       library: (string_literal))
-    (pascal)
     (parameter_definition
       name: (identifier)
       type: (identifier)))

@@ -48,7 +48,18 @@ module.exports = ({ kw }) => ({
   __interface_event: ($) =>
     seq(
       choice(kw("DEFINE"), kw("DEF")),
-      repeat($.__event_modifier),
+      repeat(
+        choice(
+          kw("PRIVATE"),
+          kw("PACKAGE-PRIVATE"),
+          kw("PROTECTED"),
+          kw("PACKAGE-PROTECTED"),
+          kw("PUBLIC"),
+          kw("STATIC"),
+          kw("ABSTRACT"),
+          kw("OVERRIDE")
+        )
+      ),
       kw("EVENT"),
       $.__event_body,
       $._terminator,

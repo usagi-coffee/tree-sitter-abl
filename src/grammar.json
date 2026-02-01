@@ -3694,122 +3694,271 @@
       "value": "NO-ERROR"
     },
     "buffer_definition": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
+      "type": "PREC_RIGHT",
+      "value": 1,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "ALIAS",
                 "content": {
-                  "type": "PATTERN",
-                  "value": "DEFINE",
-                  "flags": "i"
-                }
-              },
-              "named": false,
-              "value": "DEFINE"
-            },
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "PATTERN",
-                  "value": "DEF",
-                  "flags": "i"
-                }
-              },
-              "named": false,
-              "value": "DEF"
-            }
-          ]
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "ALIAS",
+                  "type": "TOKEN",
                   "content": {
-                    "type": "SYMBOL",
-                    "name": "__buffer_shared_variable_scope"
-                  },
-                  "named": true,
-                  "value": "shared_variable_scope"
+                    "type": "PATTERN",
+                    "value": "DEFINE",
+                    "flags": "i"
+                  }
                 },
-                {
-                  "type": "SEQ",
-                  "members": [
-                    {
+                "named": false,
+                "value": "DEFINE"
+              },
+              {
+                "type": "ALIAS",
+                "content": {
+                  "type": "TOKEN",
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "DEF",
+                    "flags": "i"
+                  }
+                },
+                "named": false,
+                "value": "DEF"
+              }
+            ]
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "CHOICE",
+                "members": [
+                  {
+                    "type": "SEQ",
+                    "members": [
+                      {
+                        "type": "ALIAS",
+                        "content": {
+                          "type": "ALIAS",
+                          "content": {
+                            "type": "TOKEN",
+                            "content": {
+                              "type": "PATTERN",
+                              "value": "NEW",
+                              "flags": "i"
+                            }
+                          },
+                          "named": false,
+                          "value": "NEW"
+                        },
+                        "named": true,
+                        "value": "new_modifier"
+                      },
+                      {
+                        "type": "ALIAS",
+                        "content": {
+                          "type": "ALIAS",
+                          "content": {
+                            "type": "TOKEN",
+                            "content": {
+                              "type": "PATTERN",
+                              "value": "SHARED",
+                              "flags": "i"
+                            }
+                          },
+                          "named": false,
+                          "value": "SHARED"
+                        },
+                        "named": true,
+                        "value": "scope_modifier"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "ALIAS",
+                    "content": {
+                      "type": "ALIAS",
+                      "content": {
+                        "type": "TOKEN",
+                        "content": {
+                          "type": "PATTERN",
+                          "value": "SHARED",
+                          "flags": "i"
+                        }
+                      },
+                      "named": false,
+                      "value": "SHARED"
+                    },
+                    "named": true,
+                    "value": "scope_modifier"
+                  }
+                ]
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "CHOICE",
+                "members": [
+                  {
+                    "type": "ALIAS",
+                    "content": {
                       "type": "CHOICE",
                       "members": [
                         {
                           "type": "ALIAS",
                           "content": {
-                            "type": "SYMBOL",
-                            "name": "__buffer_access_modifier"
+                            "type": "TOKEN",
+                            "content": {
+                              "type": "PATTERN",
+                              "value": "PRIVATE",
+                              "flags": "i"
+                            }
                           },
-                          "named": true,
-                          "value": "access_modifier"
+                          "named": false,
+                          "value": "PRIVATE"
                         },
                         {
-                          "type": "BLANK"
+                          "type": "ALIAS",
+                          "content": {
+                            "type": "TOKEN",
+                            "content": {
+                              "type": "PATTERN",
+                              "value": "PROTECTED",
+                              "flags": "i"
+                            }
+                          },
+                          "named": false,
+                          "value": "PROTECTED"
                         }
                       ]
                     },
-                    {
+                    "named": true,
+                    "value": "access_modifier"
+                  },
+                  {
+                    "type": "ALIAS",
+                    "content": {
+                      "type": "ALIAS",
+                      "content": {
+                        "type": "TOKEN",
+                        "content": {
+                          "type": "PATTERN",
+                          "value": "STATIC",
+                          "flags": "i"
+                        }
+                      },
+                      "named": false,
+                      "value": "STATIC"
+                    },
+                    "named": true,
+                    "value": "static_modifier"
+                  }
+                ]
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "CHOICE",
+                "members": [
+                  {
+                    "type": "ALIAS",
+                    "content": {
                       "type": "CHOICE",
                       "members": [
                         {
                           "type": "ALIAS",
                           "content": {
-                            "type": "SYMBOL",
-                            "name": "__buffer_static_modifier"
+                            "type": "TOKEN",
+                            "content": {
+                              "type": "PATTERN",
+                              "value": "PRIVATE",
+                              "flags": "i"
+                            }
                           },
-                          "named": true,
-                          "value": "static_modifier"
+                          "named": false,
+                          "value": "PRIVATE"
                         },
                         {
-                          "type": "BLANK"
+                          "type": "ALIAS",
+                          "content": {
+                            "type": "TOKEN",
+                            "content": {
+                              "type": "PATTERN",
+                              "value": "PROTECTED",
+                              "flags": "i"
+                            }
+                          },
+                          "named": false,
+                          "value": "PROTECTED"
                         }
                       ]
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "PATTERN",
-              "value": "BUFFER",
-              "flags": "i"
-            }
+                    },
+                    "named": true,
+                    "value": "access_modifier"
+                  },
+                  {
+                    "type": "ALIAS",
+                    "content": {
+                      "type": "ALIAS",
+                      "content": {
+                        "type": "TOKEN",
+                        "content": {
+                          "type": "PATTERN",
+                          "value": "STATIC",
+                          "flags": "i"
+                        }
+                      },
+                      "named": false,
+                      "value": "STATIC"
+                    },
+                    "named": true,
+                    "value": "static_modifier"
+                  }
+                ]
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
           },
-          "named": false,
-          "value": "BUFFER"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "__buffer_body"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_terminator"
-        }
-      ]
+          {
+            "type": "ALIAS",
+            "content": {
+              "type": "TOKEN",
+              "content": {
+                "type": "PATTERN",
+                "value": "BUFFER",
+                "flags": "i"
+              }
+            },
+            "named": false,
+            "value": "BUFFER"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "__buffer_body"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "_terminator"
+          }
+        ]
+      }
     },
     "__buffer_body": {
       "type": "SEQ",
@@ -4016,99 +4165,6 @@
           }
         }
       ]
-    },
-    "__buffer_shared_variable_scope": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SEQ",
-          "members": [
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "PATTERN",
-                  "value": "NEW",
-                  "flags": "i"
-                }
-              },
-              "named": false,
-              "value": "NEW"
-            },
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "PATTERN",
-                  "value": "SHARED",
-                  "flags": "i"
-                }
-              },
-              "named": false,
-              "value": "SHARED"
-            }
-          ]
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "PATTERN",
-              "value": "SHARED",
-              "flags": "i"
-            }
-          },
-          "named": false,
-          "value": "SHARED"
-        }
-      ]
-    },
-    "__buffer_access_modifier": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "PATTERN",
-              "value": "PRIVATE",
-              "flags": "i"
-            }
-          },
-          "named": false,
-          "value": "PRIVATE"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "PATTERN",
-              "value": "PROTECTED",
-              "flags": "i"
-            }
-          },
-          "named": false,
-          "value": "PROTECTED"
-        }
-      ]
-    },
-    "__buffer_static_modifier": {
-      "type": "ALIAS",
-      "content": {
-        "type": "TOKEN",
-        "content": {
-          "type": "PATTERN",
-          "value": "STATIC",
-          "flags": "i"
-        }
-      },
-      "named": false,
-      "value": "STATIC"
     },
     "__buffer_name_or_string": {
       "type": "CHOICE",
@@ -6787,13 +6843,102 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "ALIAS",
-              "content": {
-                "type": "SYMBOL",
-                "name": "__variable_access_modifier"
-              },
-              "named": true,
-              "value": "access_modifier"
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "CHOICE",
+                    "members": [
+                      {
+                        "type": "ALIAS",
+                        "content": {
+                          "type": "TOKEN",
+                          "content": {
+                            "type": "PATTERN",
+                            "value": "PRIVATE",
+                            "flags": "i"
+                          }
+                        },
+                        "named": false,
+                        "value": "PRIVATE"
+                      },
+                      {
+                        "type": "ALIAS",
+                        "content": {
+                          "type": "TOKEN",
+                          "content": {
+                            "type": "PATTERN",
+                            "value": "PACKAGE-PRIVATE",
+                            "flags": "i"
+                          }
+                        },
+                        "named": false,
+                        "value": "PACKAGE-PRIVATE"
+                      },
+                      {
+                        "type": "ALIAS",
+                        "content": {
+                          "type": "TOKEN",
+                          "content": {
+                            "type": "PATTERN",
+                            "value": "PROTECTED",
+                            "flags": "i"
+                          }
+                        },
+                        "named": false,
+                        "value": "PROTECTED"
+                      },
+                      {
+                        "type": "ALIAS",
+                        "content": {
+                          "type": "TOKEN",
+                          "content": {
+                            "type": "PATTERN",
+                            "value": "PACKAGE-PROTECTED",
+                            "flags": "i"
+                          }
+                        },
+                        "named": false,
+                        "value": "PACKAGE-PROTECTED"
+                      },
+                      {
+                        "type": "ALIAS",
+                        "content": {
+                          "type": "TOKEN",
+                          "content": {
+                            "type": "PATTERN",
+                            "value": "PUBLIC",
+                            "flags": "i"
+                          }
+                        },
+                        "named": false,
+                        "value": "PUBLIC"
+                      }
+                    ]
+                  },
+                  "named": true,
+                  "value": "access_modifier"
+                },
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "ALIAS",
+                    "content": {
+                      "type": "TOKEN",
+                      "content": {
+                        "type": "PATTERN",
+                        "value": "STATIC",
+                        "flags": "i"
+                      }
+                    },
+                    "named": false,
+                    "value": "STATIC"
+                  },
+                  "named": true,
+                  "value": "static_modifier"
+                }
+              ]
             },
             {
               "type": "BLANK"
@@ -6804,13 +6949,102 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "ALIAS",
-              "content": {
-                "type": "SYMBOL",
-                "name": "__variable_static_modifier"
-              },
-              "named": true,
-              "value": "static_modifier"
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "CHOICE",
+                    "members": [
+                      {
+                        "type": "ALIAS",
+                        "content": {
+                          "type": "TOKEN",
+                          "content": {
+                            "type": "PATTERN",
+                            "value": "PRIVATE",
+                            "flags": "i"
+                          }
+                        },
+                        "named": false,
+                        "value": "PRIVATE"
+                      },
+                      {
+                        "type": "ALIAS",
+                        "content": {
+                          "type": "TOKEN",
+                          "content": {
+                            "type": "PATTERN",
+                            "value": "PACKAGE-PRIVATE",
+                            "flags": "i"
+                          }
+                        },
+                        "named": false,
+                        "value": "PACKAGE-PRIVATE"
+                      },
+                      {
+                        "type": "ALIAS",
+                        "content": {
+                          "type": "TOKEN",
+                          "content": {
+                            "type": "PATTERN",
+                            "value": "PROTECTED",
+                            "flags": "i"
+                          }
+                        },
+                        "named": false,
+                        "value": "PROTECTED"
+                      },
+                      {
+                        "type": "ALIAS",
+                        "content": {
+                          "type": "TOKEN",
+                          "content": {
+                            "type": "PATTERN",
+                            "value": "PACKAGE-PROTECTED",
+                            "flags": "i"
+                          }
+                        },
+                        "named": false,
+                        "value": "PACKAGE-PROTECTED"
+                      },
+                      {
+                        "type": "ALIAS",
+                        "content": {
+                          "type": "TOKEN",
+                          "content": {
+                            "type": "PATTERN",
+                            "value": "PUBLIC",
+                            "flags": "i"
+                          }
+                        },
+                        "named": false,
+                        "value": "PUBLIC"
+                      }
+                    ]
+                  },
+                  "named": true,
+                  "value": "access_modifier"
+                },
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "ALIAS",
+                    "content": {
+                      "type": "TOKEN",
+                      "content": {
+                        "type": "PATTERN",
+                        "value": "STATIC",
+                        "flags": "i"
+                      }
+                    },
+                    "named": false,
+                    "value": "STATIC"
+                  },
+                  "named": true,
+                  "value": "static_modifier"
+                }
+              ]
             },
             {
               "type": "BLANK"
@@ -6821,25 +7055,50 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "ALIAS",
-              "content": {
-                "type": "SYMBOL",
-                "name": "__variable_serialization_modifier"
-              },
-              "named": true,
-              "value": "serialization_modifier"
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "ALIAS",
+                    "content": {
+                      "type": "TOKEN",
+                      "content": {
+                        "type": "PATTERN",
+                        "value": "SERIALIZABLE",
+                        "flags": "i"
+                      }
+                    },
+                    "named": false,
+                    "value": "SERIALIZABLE"
+                  },
+                  "named": true,
+                  "value": "serialization_modifier"
+                },
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "ALIAS",
+                    "content": {
+                      "type": "TOKEN",
+                      "content": {
+                        "type": "PATTERN",
+                        "value": "NON-SERIALIZABLE",
+                        "flags": "i"
+                      }
+                    },
+                    "named": false,
+                    "value": "NON-SERIALIZABLE"
+                  },
+                  "named": true,
+                  "value": "serialization_modifier"
+                }
+              ]
             },
             {
               "type": "BLANK"
             }
           ]
-        },
-        {
-          "type": "REPEAT",
-          "content": {
-            "type": "SYMBOL",
-            "name": "__property_modifier"
-          }
         },
         {
           "type": "ALIAS",
@@ -6853,6 +7112,13 @@
           },
           "named": false,
           "value": "PROPERTY"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "__property_modifier"
+          }
         },
         {
           "type": "FIELD",
@@ -6947,13 +7213,74 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "ALIAS",
-              "content": {
-                "type": "SYMBOL",
-                "name": "__variable_access_modifier"
-              },
-              "named": true,
-              "value": "access_modifier"
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "TOKEN",
+                    "content": {
+                      "type": "PATTERN",
+                      "value": "PRIVATE",
+                      "flags": "i"
+                    }
+                  },
+                  "named": false,
+                  "value": "PRIVATE"
+                },
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "TOKEN",
+                    "content": {
+                      "type": "PATTERN",
+                      "value": "PACKAGE-PRIVATE",
+                      "flags": "i"
+                    }
+                  },
+                  "named": false,
+                  "value": "PACKAGE-PRIVATE"
+                },
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "TOKEN",
+                    "content": {
+                      "type": "PATTERN",
+                      "value": "PROTECTED",
+                      "flags": "i"
+                    }
+                  },
+                  "named": false,
+                  "value": "PROTECTED"
+                },
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "TOKEN",
+                    "content": {
+                      "type": "PATTERN",
+                      "value": "PACKAGE-PROTECTED",
+                      "flags": "i"
+                    }
+                  },
+                  "named": false,
+                  "value": "PACKAGE-PROTECTED"
+                },
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "TOKEN",
+                    "content": {
+                      "type": "PATTERN",
+                      "value": "PUBLIC",
+                      "flags": "i"
+                    }
+                  },
+                  "named": false,
+                  "value": "PUBLIC"
+                }
+              ]
             },
             {
               "type": "BLANK"
@@ -7045,13 +7372,74 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "ALIAS",
-              "content": {
-                "type": "SYMBOL",
-                "name": "__variable_access_modifier"
-              },
-              "named": true,
-              "value": "access_modifier"
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "TOKEN",
+                    "content": {
+                      "type": "PATTERN",
+                      "value": "PRIVATE",
+                      "flags": "i"
+                    }
+                  },
+                  "named": false,
+                  "value": "PRIVATE"
+                },
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "TOKEN",
+                    "content": {
+                      "type": "PATTERN",
+                      "value": "PACKAGE-PRIVATE",
+                      "flags": "i"
+                    }
+                  },
+                  "named": false,
+                  "value": "PACKAGE-PRIVATE"
+                },
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "TOKEN",
+                    "content": {
+                      "type": "PATTERN",
+                      "value": "PROTECTED",
+                      "flags": "i"
+                    }
+                  },
+                  "named": false,
+                  "value": "PROTECTED"
+                },
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "TOKEN",
+                    "content": {
+                      "type": "PATTERN",
+                      "value": "PACKAGE-PROTECTED",
+                      "flags": "i"
+                    }
+                  },
+                  "named": false,
+                  "value": "PACKAGE-PROTECTED"
+                },
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "TOKEN",
+                    "content": {
+                      "type": "PATTERN",
+                      "value": "PUBLIC",
+                      "flags": "i"
+                    }
+                  },
+                  "named": false,
+                  "value": "PUBLIC"
+                }
+              ]
             },
             {
               "type": "BLANK"
@@ -11155,7 +11543,7 @@
           ]
         },
         {
-          "type": "SEQ",
+          "type": "CHOICE",
           "members": [
             {
               "type": "CHOICE",
@@ -11163,103 +11551,151 @@
                 {
                   "type": "ALIAS",
                   "content": {
-                    "type": "SYMBOL",
-                    "name": "__data_source_access_modifier"
+                    "type": "CHOICE",
+                    "members": [
+                      {
+                        "type": "ALIAS",
+                        "content": {
+                          "type": "TOKEN",
+                          "content": {
+                            "type": "PATTERN",
+                            "value": "PRIVATE",
+                            "flags": "i"
+                          }
+                        },
+                        "named": false,
+                        "value": "PRIVATE"
+                      },
+                      {
+                        "type": "ALIAS",
+                        "content": {
+                          "type": "TOKEN",
+                          "content": {
+                            "type": "PATTERN",
+                            "value": "PROTECTED",
+                            "flags": "i"
+                          }
+                        },
+                        "named": false,
+                        "value": "PROTECTED"
+                      }
+                    ]
                   },
                   "named": true,
                   "value": "access_modifier"
                 },
                 {
-                  "type": "BLANK"
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "ALIAS",
+                    "content": {
+                      "type": "TOKEN",
+                      "content": {
+                        "type": "PATTERN",
+                        "value": "STATIC",
+                        "flags": "i"
+                      }
+                    },
+                    "named": false,
+                    "value": "STATIC"
+                  },
+                  "named": true,
+                  "value": "static_modifier"
                 }
               ]
             },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
             {
               "type": "CHOICE",
               "members": [
                 {
                   "type": "ALIAS",
                   "content": {
-                    "type": "SYMBOL",
-                    "name": "__data_source_static_modifier"
+                    "type": "CHOICE",
+                    "members": [
+                      {
+                        "type": "ALIAS",
+                        "content": {
+                          "type": "TOKEN",
+                          "content": {
+                            "type": "PATTERN",
+                            "value": "PRIVATE",
+                            "flags": "i"
+                          }
+                        },
+                        "named": false,
+                        "value": "PRIVATE"
+                      },
+                      {
+                        "type": "ALIAS",
+                        "content": {
+                          "type": "TOKEN",
+                          "content": {
+                            "type": "PATTERN",
+                            "value": "PROTECTED",
+                            "flags": "i"
+                          }
+                        },
+                        "named": false,
+                        "value": "PROTECTED"
+                      }
+                    ]
+                  },
+                  "named": true,
+                  "value": "access_modifier"
+                },
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "ALIAS",
+                    "content": {
+                      "type": "TOKEN",
+                      "content": {
+                        "type": "PATTERN",
+                        "value": "STATIC",
+                        "flags": "i"
+                      }
+                    },
+                    "named": false,
+                    "value": "STATIC"
                   },
                   "named": true,
                   "value": "static_modifier"
-                },
-                {
-                  "type": "BLANK"
                 }
               ]
             },
             {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "SEQ",
-                  "members": [
-                    {
-                      "type": "CHOICE",
-                      "members": [
-                        {
-                          "type": "ALIAS",
-                          "content": {
-                            "type": "SYMBOL",
-                            "name": "__data_source_access_modifier"
-                          },
-                          "named": true,
-                          "value": "access_modifier"
-                        },
-                        {
-                          "type": "BLANK"
-                        }
-                      ]
-                    },
-                    {
-                      "type": "CHOICE",
-                      "members": [
-                        {
-                          "type": "ALIAS",
-                          "content": {
-                            "type": "SYMBOL",
-                            "name": "__data_source_static_modifier"
-                          },
-                          "named": true,
-                          "value": "static_modifier"
-                        },
-                        {
-                          "type": "BLANK"
-                        }
-                      ]
-                    }
-                  ]
-                },
-                {
-                  "type": "BLANK"
-                }
-              ]
-            },
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "PATTERN",
-                  "value": "DATA-SOURCE",
-                  "flags": "i"
-                }
-              },
-              "named": false,
-              "value": "DATA-SOURCE"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "__data_source_body"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "_terminator"
+              "type": "BLANK"
             }
           ]
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PATTERN",
+              "value": "DATA-SOURCE",
+              "flags": "i"
+            }
+          },
+          "named": false,
+          "value": "DATA-SOURCE"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "__data_source_body"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_terminator"
         }
       ]
     },
@@ -11454,50 +11890,6 @@
         }
       ]
     },
-    "__data_source_access_modifier": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "PATTERN",
-              "value": "PRIVATE",
-              "flags": "i"
-            }
-          },
-          "named": false,
-          "value": "PRIVATE"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "PATTERN",
-              "value": "PROTECTED",
-              "flags": "i"
-            }
-          },
-          "named": false,
-          "value": "PROTECTED"
-        }
-      ]
-    },
-    "__data_source_static_modifier": {
-      "type": "ALIAS",
-      "content": {
-        "type": "TOKEN",
-        "content": {
-          "type": "PATTERN",
-          "value": "STATIC",
-          "flags": "i"
-        }
-      },
-      "named": false,
-      "value": "STATIC"
-    },
     "__data_source_buffer_name": {
       "type": "CHOICE",
       "members": [
@@ -11565,69 +11957,246 @@
               "type": "CHOICE",
               "members": [
                 {
-                  "type": "ALIAS",
-                  "content": {
-                    "type": "SYMBOL",
-                    "name": "__dataset_shared_scope"
-                  },
-                  "named": true,
-                  "value": "shared_variable_scope"
-                },
-                {
                   "type": "SEQ",
                   "members": [
                     {
-                      "type": "CHOICE",
-                      "members": [
-                        {
-                          "type": "ALIAS",
+                      "type": "ALIAS",
+                      "content": {
+                        "type": "ALIAS",
+                        "content": {
+                          "type": "TOKEN",
                           "content": {
-                            "type": "SYMBOL",
-                            "name": "__dataset_access_modifier"
-                          },
-                          "named": true,
-                          "value": "access_modifier"
+                            "type": "PATTERN",
+                            "value": "NEW",
+                            "flags": "i"
+                          }
                         },
-                        {
-                          "type": "BLANK"
-                        }
-                      ]
+                        "named": false,
+                        "value": "NEW"
+                      },
+                      "named": true,
+                      "value": "new_modifier"
                     },
                     {
-                      "type": "CHOICE",
-                      "members": [
-                        {
-                          "type": "ALIAS",
+                      "type": "ALIAS",
+                      "content": {
+                        "type": "ALIAS",
+                        "content": {
+                          "type": "TOKEN",
                           "content": {
-                            "type": "SYMBOL",
-                            "name": "__dataset_static_modifier"
-                          },
-                          "named": true,
-                          "value": "static_modifier"
+                            "type": "PATTERN",
+                            "value": "SHARED",
+                            "flags": "i"
+                          }
                         },
-                        {
-                          "type": "BLANK"
-                        }
-                      ]
-                    },
-                    {
-                      "type": "CHOICE",
-                      "members": [
-                        {
-                          "type": "ALIAS",
-                          "content": {
-                            "type": "SYMBOL",
-                            "name": "__dataset_serialization_modifier"
-                          },
-                          "named": true,
-                          "value": "serialization_modifier"
-                        },
-                        {
-                          "type": "BLANK"
-                        }
-                      ]
+                        "named": false,
+                        "value": "SHARED"
+                      },
+                      "named": true,
+                      "value": "scope_modifier"
                     }
                   ]
+                },
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "ALIAS",
+                    "content": {
+                      "type": "TOKEN",
+                      "content": {
+                        "type": "PATTERN",
+                        "value": "SHARED",
+                        "flags": "i"
+                      }
+                    },
+                    "named": false,
+                    "value": "SHARED"
+                  },
+                  "named": true,
+                  "value": "scope_modifier"
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "CHOICE",
+                    "members": [
+                      {
+                        "type": "ALIAS",
+                        "content": {
+                          "type": "TOKEN",
+                          "content": {
+                            "type": "PATTERN",
+                            "value": "PRIVATE",
+                            "flags": "i"
+                          }
+                        },
+                        "named": false,
+                        "value": "PRIVATE"
+                      },
+                      {
+                        "type": "ALIAS",
+                        "content": {
+                          "type": "TOKEN",
+                          "content": {
+                            "type": "PATTERN",
+                            "value": "PROTECTED",
+                            "flags": "i"
+                          }
+                        },
+                        "named": false,
+                        "value": "PROTECTED"
+                      }
+                    ]
+                  },
+                  "named": true,
+                  "value": "access_modifier"
+                },
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "ALIAS",
+                    "content": {
+                      "type": "TOKEN",
+                      "content": {
+                        "type": "PATTERN",
+                        "value": "STATIC",
+                        "flags": "i"
+                      }
+                    },
+                    "named": false,
+                    "value": "STATIC"
+                  },
+                  "named": true,
+                  "value": "static_modifier"
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "CHOICE",
+                    "members": [
+                      {
+                        "type": "ALIAS",
+                        "content": {
+                          "type": "TOKEN",
+                          "content": {
+                            "type": "PATTERN",
+                            "value": "PRIVATE",
+                            "flags": "i"
+                          }
+                        },
+                        "named": false,
+                        "value": "PRIVATE"
+                      },
+                      {
+                        "type": "ALIAS",
+                        "content": {
+                          "type": "TOKEN",
+                          "content": {
+                            "type": "PATTERN",
+                            "value": "PROTECTED",
+                            "flags": "i"
+                          }
+                        },
+                        "named": false,
+                        "value": "PROTECTED"
+                      }
+                    ]
+                  },
+                  "named": true,
+                  "value": "access_modifier"
+                },
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "ALIAS",
+                    "content": {
+                      "type": "TOKEN",
+                      "content": {
+                        "type": "PATTERN",
+                        "value": "STATIC",
+                        "flags": "i"
+                      }
+                    },
+                    "named": false,
+                    "value": "STATIC"
+                  },
+                  "named": true,
+                  "value": "static_modifier"
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "ALIAS",
+                    "content": {
+                      "type": "TOKEN",
+                      "content": {
+                        "type": "PATTERN",
+                        "value": "SERIALIZABLE",
+                        "flags": "i"
+                      }
+                    },
+                    "named": false,
+                    "value": "SERIALIZABLE"
+                  },
+                  "named": true,
+                  "value": "serialization_modifier"
+                },
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "ALIAS",
+                    "content": {
+                      "type": "TOKEN",
+                      "content": {
+                        "type": "PATTERN",
+                        "value": "NON-SERIALIZABLE",
+                        "flags": "i"
+                      }
+                    },
+                    "named": false,
+                    "value": "NON-SERIALIZABLE"
+                  },
+                  "named": true,
+                  "value": "serialization_modifier"
                 }
               ]
             },
@@ -11959,130 +12528,6 @@
             "named": true,
             "value": "parent_id_relation"
           }
-        }
-      ]
-    },
-    "__dataset_shared_scope": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SEQ",
-          "members": [
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "PATTERN",
-                  "value": "NEW",
-                  "flags": "i"
-                }
-              },
-              "named": false,
-              "value": "NEW"
-            },
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "PATTERN",
-                  "value": "SHARED",
-                  "flags": "i"
-                }
-              },
-              "named": false,
-              "value": "SHARED"
-            }
-          ]
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "PATTERN",
-              "value": "SHARED",
-              "flags": "i"
-            }
-          },
-          "named": false,
-          "value": "SHARED"
-        }
-      ]
-    },
-    "__dataset_access_modifier": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "PATTERN",
-              "value": "PRIVATE",
-              "flags": "i"
-            }
-          },
-          "named": false,
-          "value": "PRIVATE"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "PATTERN",
-              "value": "PROTECTED",
-              "flags": "i"
-            }
-          },
-          "named": false,
-          "value": "PROTECTED"
-        }
-      ]
-    },
-    "__dataset_static_modifier": {
-      "type": "ALIAS",
-      "content": {
-        "type": "TOKEN",
-        "content": {
-          "type": "PATTERN",
-          "value": "STATIC",
-          "flags": "i"
-        }
-      },
-      "named": false,
-      "value": "STATIC"
-    },
-    "__dataset_serialization_modifier": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "PATTERN",
-              "value": "SERIALIZABLE",
-              "flags": "i"
-            }
-          },
-          "named": false,
-          "value": "SERIALIZABLE"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "PATTERN",
-              "value": "NON-SERIALIZABLE",
-              "flags": "i"
-            }
-          },
-          "named": false,
-          "value": "NON-SERIALIZABLE"
         }
       ]
     },
@@ -16253,11 +16698,268 @@
           ]
         },
         {
-          "type": "REPEAT",
-          "content": {
-            "type": "SYMBOL",
-            "name": "__event_modifier"
-          }
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "CHOICE",
+                    "members": [
+                      {
+                        "type": "ALIAS",
+                        "content": {
+                          "type": "TOKEN",
+                          "content": {
+                            "type": "PATTERN",
+                            "value": "PRIVATE",
+                            "flags": "i"
+                          }
+                        },
+                        "named": false,
+                        "value": "PRIVATE"
+                      },
+                      {
+                        "type": "ALIAS",
+                        "content": {
+                          "type": "TOKEN",
+                          "content": {
+                            "type": "PATTERN",
+                            "value": "PACKAGE-PRIVATE",
+                            "flags": "i"
+                          }
+                        },
+                        "named": false,
+                        "value": "PACKAGE-PRIVATE"
+                      },
+                      {
+                        "type": "ALIAS",
+                        "content": {
+                          "type": "TOKEN",
+                          "content": {
+                            "type": "PATTERN",
+                            "value": "PROTECTED",
+                            "flags": "i"
+                          }
+                        },
+                        "named": false,
+                        "value": "PROTECTED"
+                      },
+                      {
+                        "type": "ALIAS",
+                        "content": {
+                          "type": "TOKEN",
+                          "content": {
+                            "type": "PATTERN",
+                            "value": "PACKAGE-PROTECTED",
+                            "flags": "i"
+                          }
+                        },
+                        "named": false,
+                        "value": "PACKAGE-PROTECTED"
+                      },
+                      {
+                        "type": "ALIAS",
+                        "content": {
+                          "type": "TOKEN",
+                          "content": {
+                            "type": "PATTERN",
+                            "value": "PUBLIC",
+                            "flags": "i"
+                          }
+                        },
+                        "named": false,
+                        "value": "PUBLIC"
+                      }
+                    ]
+                  },
+                  "named": true,
+                  "value": "access_modifier"
+                },
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "ALIAS",
+                    "content": {
+                      "type": "TOKEN",
+                      "content": {
+                        "type": "PATTERN",
+                        "value": "STATIC",
+                        "flags": "i"
+                      }
+                    },
+                    "named": false,
+                    "value": "STATIC"
+                  },
+                  "named": true,
+                  "value": "static_modifier"
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "CHOICE",
+                    "members": [
+                      {
+                        "type": "ALIAS",
+                        "content": {
+                          "type": "TOKEN",
+                          "content": {
+                            "type": "PATTERN",
+                            "value": "PRIVATE",
+                            "flags": "i"
+                          }
+                        },
+                        "named": false,
+                        "value": "PRIVATE"
+                      },
+                      {
+                        "type": "ALIAS",
+                        "content": {
+                          "type": "TOKEN",
+                          "content": {
+                            "type": "PATTERN",
+                            "value": "PACKAGE-PRIVATE",
+                            "flags": "i"
+                          }
+                        },
+                        "named": false,
+                        "value": "PACKAGE-PRIVATE"
+                      },
+                      {
+                        "type": "ALIAS",
+                        "content": {
+                          "type": "TOKEN",
+                          "content": {
+                            "type": "PATTERN",
+                            "value": "PROTECTED",
+                            "flags": "i"
+                          }
+                        },
+                        "named": false,
+                        "value": "PROTECTED"
+                      },
+                      {
+                        "type": "ALIAS",
+                        "content": {
+                          "type": "TOKEN",
+                          "content": {
+                            "type": "PATTERN",
+                            "value": "PACKAGE-PROTECTED",
+                            "flags": "i"
+                          }
+                        },
+                        "named": false,
+                        "value": "PACKAGE-PROTECTED"
+                      },
+                      {
+                        "type": "ALIAS",
+                        "content": {
+                          "type": "TOKEN",
+                          "content": {
+                            "type": "PATTERN",
+                            "value": "PUBLIC",
+                            "flags": "i"
+                          }
+                        },
+                        "named": false,
+                        "value": "PUBLIC"
+                      }
+                    ]
+                  },
+                  "named": true,
+                  "value": "access_modifier"
+                },
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "ALIAS",
+                    "content": {
+                      "type": "TOKEN",
+                      "content": {
+                        "type": "PATTERN",
+                        "value": "STATIC",
+                        "flags": "i"
+                      }
+                    },
+                    "named": false,
+                    "value": "STATIC"
+                  },
+                  "named": true,
+                  "value": "static_modifier"
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "ALIAS",
+                "content": {
+                  "type": "TOKEN",
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "ABSTRACT",
+                    "flags": "i"
+                  }
+                },
+                "named": false,
+                "value": "ABSTRACT"
+              },
+              "named": true,
+              "value": "abstract_modifier"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "ALIAS",
+                "content": {
+                  "type": "TOKEN",
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "OVERRIDE",
+                    "flags": "i"
+                  }
+                },
+                "named": false,
+                "value": "OVERRIDE"
+              },
+              "named": true,
+              "value": "override_modifier"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         },
         {
           "type": "ALIAS",
@@ -16554,156 +17256,6 @@
           }
         }
       ]
-    },
-    "__event_modifier": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "SYMBOL",
-            "name": "__event_access_modifier"
-          },
-          "named": true,
-          "value": "access_modifier"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "SYMBOL",
-            "name": "__event_static_modifier"
-          },
-          "named": true,
-          "value": "static_modifier"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "SYMBOL",
-            "name": "__event_abstract_modifier"
-          },
-          "named": true,
-          "value": "abstract_modifier"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "SYMBOL",
-            "name": "__event_override_modifier"
-          },
-          "named": true,
-          "value": "override_modifier"
-        }
-      ]
-    },
-    "__event_access_modifier": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "PATTERN",
-              "value": "PRIVATE",
-              "flags": "i"
-            }
-          },
-          "named": false,
-          "value": "PRIVATE"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "PATTERN",
-              "value": "PACKAGE-PRIVATE",
-              "flags": "i"
-            }
-          },
-          "named": false,
-          "value": "PACKAGE-PRIVATE"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "PATTERN",
-              "value": "PROTECTED",
-              "flags": "i"
-            }
-          },
-          "named": false,
-          "value": "PROTECTED"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "PATTERN",
-              "value": "PACKAGE-PROTECTED",
-              "flags": "i"
-            }
-          },
-          "named": false,
-          "value": "PACKAGE-PROTECTED"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "PATTERN",
-              "value": "PUBLIC",
-              "flags": "i"
-            }
-          },
-          "named": false,
-          "value": "PUBLIC"
-        }
-      ]
-    },
-    "__event_static_modifier": {
-      "type": "ALIAS",
-      "content": {
-        "type": "TOKEN",
-        "content": {
-          "type": "PATTERN",
-          "value": "STATIC",
-          "flags": "i"
-        }
-      },
-      "named": false,
-      "value": "STATIC"
-    },
-    "__event_abstract_modifier": {
-      "type": "ALIAS",
-      "content": {
-        "type": "TOKEN",
-        "content": {
-          "type": "PATTERN",
-          "value": "ABSTRACT",
-          "flags": "i"
-        }
-      },
-      "named": false,
-      "value": "ABSTRACT"
-    },
-    "__event_override_modifier": {
-      "type": "ALIAS",
-      "content": {
-        "type": "TOKEN",
-        "content": {
-          "type": "PATTERN",
-          "value": "OVERRIDE",
-          "flags": "i"
-        }
-      },
-      "named": false,
-      "value": "OVERRIDE"
     },
     "export_statement": {
       "type": "SEQ",
@@ -19809,13 +20361,48 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "ALIAS",
-              "content": {
-                "type": "SYMBOL",
-                "name": "__function_access_modifier"
-              },
-              "named": true,
-              "value": "access_modifier"
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "TOKEN",
+                    "content": {
+                      "type": "PATTERN",
+                      "value": "PRIVATE",
+                      "flags": "i"
+                    }
+                  },
+                  "named": false,
+                  "value": "PRIVATE"
+                },
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "TOKEN",
+                    "content": {
+                      "type": "PATTERN",
+                      "value": "PROTECTED",
+                      "flags": "i"
+                    }
+                  },
+                  "named": false,
+                  "value": "PROTECTED"
+                },
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "TOKEN",
+                    "content": {
+                      "type": "PATTERN",
+                      "value": "PUBLIC",
+                      "flags": "i"
+                    }
+                  },
+                  "named": false,
+                  "value": "PUBLIC"
+                }
+              ]
             },
             {
               "type": "BLANK"
@@ -20678,50 +21265,6 @@
         {
           "type": "SYMBOL",
           "name": "identifier"
-        }
-      ]
-    },
-    "__function_access_modifier": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "PATTERN",
-              "value": "PRIVATE",
-              "flags": "i"
-            }
-          },
-          "named": false,
-          "value": "PRIVATE"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "PATTERN",
-              "value": "PROTECTED",
-              "flags": "i"
-            }
-          },
-          "named": false,
-          "value": "PROTECTED"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "PATTERN",
-              "value": "PUBLIC",
-              "flags": "i"
-            }
-          },
-          "named": false,
-          "value": "PUBLIC"
         }
       ]
     },
@@ -24539,8 +25082,113 @@
         {
           "type": "REPEAT",
           "content": {
-            "type": "SYMBOL",
-            "name": "__event_modifier"
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "ALIAS",
+                "content": {
+                  "type": "TOKEN",
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "PRIVATE",
+                    "flags": "i"
+                  }
+                },
+                "named": false,
+                "value": "PRIVATE"
+              },
+              {
+                "type": "ALIAS",
+                "content": {
+                  "type": "TOKEN",
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "PACKAGE-PRIVATE",
+                    "flags": "i"
+                  }
+                },
+                "named": false,
+                "value": "PACKAGE-PRIVATE"
+              },
+              {
+                "type": "ALIAS",
+                "content": {
+                  "type": "TOKEN",
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "PROTECTED",
+                    "flags": "i"
+                  }
+                },
+                "named": false,
+                "value": "PROTECTED"
+              },
+              {
+                "type": "ALIAS",
+                "content": {
+                  "type": "TOKEN",
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "PACKAGE-PROTECTED",
+                    "flags": "i"
+                  }
+                },
+                "named": false,
+                "value": "PACKAGE-PROTECTED"
+              },
+              {
+                "type": "ALIAS",
+                "content": {
+                  "type": "TOKEN",
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "PUBLIC",
+                    "flags": "i"
+                  }
+                },
+                "named": false,
+                "value": "PUBLIC"
+              },
+              {
+                "type": "ALIAS",
+                "content": {
+                  "type": "TOKEN",
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "STATIC",
+                    "flags": "i"
+                  }
+                },
+                "named": false,
+                "value": "STATIC"
+              },
+              {
+                "type": "ALIAS",
+                "content": {
+                  "type": "TOKEN",
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "ABSTRACT",
+                    "flags": "i"
+                  }
+                },
+                "named": false,
+                "value": "ABSTRACT"
+              },
+              {
+                "type": "ALIAS",
+                "content": {
+                  "type": "TOKEN",
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "OVERRIDE",
+                    "flags": "i"
+                  }
+                },
+                "named": false,
+                "value": "OVERRIDE"
+              }
+            ]
           }
         },
         {
@@ -31232,19 +31880,10 @@
           "type": "ALIAS",
           "content": {
             "type": "SYMBOL",
-            "name": "__procedure_pascal_option"
+            "name": "__procedure_map_option"
           },
           "named": true,
-          "value": "pascal"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "SYMBOL",
-            "name": "__procedure_stdcall_option"
-          },
-          "named": true,
-          "value": "stdcall"
+          "value": "map"
         }
       ]
     },
@@ -31260,19 +31899,6 @@
       },
       "named": false,
       "value": "CDECL"
-    },
-    "__procedure_stdcall_option": {
-      "type": "ALIAS",
-      "content": {
-        "type": "TOKEN",
-        "content": {
-          "type": "PATTERN",
-          "value": "STDCALL",
-          "flags": "i"
-        }
-      },
-      "named": false,
-      "value": "STDCALL"
     },
     "__procedure_ordinal_option": {
       "type": "SEQ",
@@ -31291,8 +31917,12 @@
           "value": "ORDINAL"
         },
         {
-          "type": "SYMBOL",
-          "name": "number_literal"
+          "type": "FIELD",
+          "name": "number",
+          "content": {
+            "type": "SYMBOL",
+            "name": "number_literal"
+          }
         }
       ]
     },
@@ -31309,31 +31939,44 @@
       "named": false,
       "value": "PERSISTENT"
     },
-    "__procedure_pascal_option": {
-      "type": "ALIAS",
-      "content": {
-        "type": "TOKEN",
-        "content": {
-          "type": "PATTERN",
-          "value": "PASCAL",
-          "flags": "i"
-        }
-      },
-      "named": false,
-      "value": "PASCAL"
-    },
     "__procedure_thread_safe_option": {
-      "type": "ALIAS",
-      "content": {
-        "type": "TOKEN",
-        "content": {
-          "type": "PATTERN",
-          "value": "THREAD-SAFE",
-          "flags": "i"
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PATTERN",
+              "value": "THREAD-SAFE",
+              "flags": "i"
+            }
+          },
+          "named": false,
+          "value": "THREAD-SAFE"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PATTERN",
+                  "value": "SAFE",
+                  "flags": "i"
+                }
+              },
+              "named": false,
+              "value": "SAFE"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         }
-      },
-      "named": false,
-      "value": "THREAD-SAFE"
+      ]
     },
     "__procedure_external_phrase": {
       "type": "SEQ",
@@ -31357,6 +32000,213 @@
           "content": {
             "type": "SYMBOL",
             "name": "string_literal"
+          }
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "TOKEN",
+                    "content": {
+                      "type": "PATTERN",
+                      "value": "CDECL",
+                      "flags": "i"
+                    }
+                  },
+                  "named": false,
+                  "value": "CDECL"
+                },
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "TOKEN",
+                    "content": {
+                      "type": "PATTERN",
+                      "value": "PASCAL",
+                      "flags": "i"
+                    }
+                  },
+                  "named": false,
+                  "value": "PASCAL"
+                },
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "TOKEN",
+                    "content": {
+                      "type": "PATTERN",
+                      "value": "STDCALL",
+                      "flags": "i"
+                    }
+                  },
+                  "named": false,
+                  "value": "STDCALL"
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "TOKEN",
+                    "content": {
+                      "type": "PATTERN",
+                      "value": "ORDINAL",
+                      "flags": "i"
+                    }
+                  },
+                  "named": false,
+                  "value": "ORDINAL"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "number_literal"
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PATTERN",
+                  "value": "PERSISTENT",
+                  "flags": "i"
+                }
+              },
+              "named": false,
+              "value": "PERSISTENT"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "TOKEN",
+                    "content": {
+                      "type": "PATTERN",
+                      "value": "THREAD-SAFE",
+                      "flags": "i"
+                    }
+                  },
+                  "named": false,
+                  "value": "THREAD-SAFE"
+                },
+                {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "ALIAS",
+                      "content": {
+                        "type": "TOKEN",
+                        "content": {
+                          "type": "PATTERN",
+                          "value": "SAFE",
+                          "flags": "i"
+                        }
+                      },
+                      "named": false,
+                      "value": "SAFE"
+                    },
+                    {
+                      "type": "BLANK"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
+    },
+    "__procedure_in_super_phrase": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PATTERN",
+              "value": "IN",
+              "flags": "i"
+            }
+          },
+          "named": false,
+          "value": "IN"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PATTERN",
+              "value": "SUPER",
+              "flags": "i"
+            }
+          },
+          "named": false,
+          "value": "SUPER"
+        }
+      ]
+    },
+    "__procedure_map_option": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PATTERN",
+              "value": "MAP",
+              "flags": "i"
+            }
+          },
+          "named": false,
+          "value": "MAP"
+        },
+        {
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "SYMBOL",
+            "name": "identifier"
           }
         }
       ]
@@ -31414,37 +32264,6 @@
         {
           "type": "SYMBOL",
           "name": "_terminator"
-        }
-      ]
-    },
-    "__procedure_in_super_phrase": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "PATTERN",
-              "value": "IN",
-              "flags": "i"
-            }
-          },
-          "named": false,
-          "value": "IN"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "PATTERN",
-              "value": "SUPER",
-              "flags": "i"
-            }
-          },
-          "named": false,
-          "value": "SUPER"
         }
       ]
     },
@@ -33763,52 +34582,197 @@
               "type": "CHOICE",
               "members": [
                 {
-                  "type": "ALIAS",
-                  "content": {
-                    "type": "SYMBOL",
-                    "name": "__query_shared_scope"
-                  },
-                  "named": true,
-                  "value": "shared_variable_scope"
-                },
-                {
                   "type": "SEQ",
                   "members": [
                     {
-                      "type": "CHOICE",
-                      "members": [
-                        {
-                          "type": "ALIAS",
+                      "type": "ALIAS",
+                      "content": {
+                        "type": "ALIAS",
+                        "content": {
+                          "type": "TOKEN",
                           "content": {
-                            "type": "SYMBOL",
-                            "name": "__query_access_modifier"
-                          },
-                          "named": true,
-                          "value": "access_modifier"
+                            "type": "PATTERN",
+                            "value": "NEW",
+                            "flags": "i"
+                          }
                         },
-                        {
-                          "type": "BLANK"
-                        }
-                      ]
+                        "named": false,
+                        "value": "NEW"
+                      },
+                      "named": true,
+                      "value": "new_modifier"
                     },
                     {
-                      "type": "CHOICE",
-                      "members": [
-                        {
-                          "type": "ALIAS",
+                      "type": "ALIAS",
+                      "content": {
+                        "type": "ALIAS",
+                        "content": {
+                          "type": "TOKEN",
                           "content": {
-                            "type": "SYMBOL",
-                            "name": "__query_static_modifier"
-                          },
-                          "named": true,
-                          "value": "static_modifier"
+                            "type": "PATTERN",
+                            "value": "SHARED",
+                            "flags": "i"
+                          }
                         },
-                        {
-                          "type": "BLANK"
-                        }
-                      ]
+                        "named": false,
+                        "value": "SHARED"
+                      },
+                      "named": true,
+                      "value": "scope_modifier"
                     }
                   ]
+                },
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "ALIAS",
+                    "content": {
+                      "type": "TOKEN",
+                      "content": {
+                        "type": "PATTERN",
+                        "value": "SHARED",
+                        "flags": "i"
+                      }
+                    },
+                    "named": false,
+                    "value": "SHARED"
+                  },
+                  "named": true,
+                  "value": "scope_modifier"
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "CHOICE",
+                    "members": [
+                      {
+                        "type": "ALIAS",
+                        "content": {
+                          "type": "TOKEN",
+                          "content": {
+                            "type": "PATTERN",
+                            "value": "PRIVATE",
+                            "flags": "i"
+                          }
+                        },
+                        "named": false,
+                        "value": "PRIVATE"
+                      },
+                      {
+                        "type": "ALIAS",
+                        "content": {
+                          "type": "TOKEN",
+                          "content": {
+                            "type": "PATTERN",
+                            "value": "PROTECTED",
+                            "flags": "i"
+                          }
+                        },
+                        "named": false,
+                        "value": "PROTECTED"
+                      }
+                    ]
+                  },
+                  "named": true,
+                  "value": "access_modifier"
+                },
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "ALIAS",
+                    "content": {
+                      "type": "TOKEN",
+                      "content": {
+                        "type": "PATTERN",
+                        "value": "STATIC",
+                        "flags": "i"
+                      }
+                    },
+                    "named": false,
+                    "value": "STATIC"
+                  },
+                  "named": true,
+                  "value": "static_modifier"
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "CHOICE",
+                    "members": [
+                      {
+                        "type": "ALIAS",
+                        "content": {
+                          "type": "TOKEN",
+                          "content": {
+                            "type": "PATTERN",
+                            "value": "PRIVATE",
+                            "flags": "i"
+                          }
+                        },
+                        "named": false,
+                        "value": "PRIVATE"
+                      },
+                      {
+                        "type": "ALIAS",
+                        "content": {
+                          "type": "TOKEN",
+                          "content": {
+                            "type": "PATTERN",
+                            "value": "PROTECTED",
+                            "flags": "i"
+                          }
+                        },
+                        "named": false,
+                        "value": "PROTECTED"
+                      }
+                    ]
+                  },
+                  "named": true,
+                  "value": "access_modifier"
+                },
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "ALIAS",
+                    "content": {
+                      "type": "TOKEN",
+                      "content": {
+                        "type": "PATTERN",
+                        "value": "STATIC",
+                        "flags": "i"
+                      }
+                    },
+                    "named": false,
+                    "value": "STATIC"
+                  },
+                  "named": true,
+                  "value": "static_modifier"
                 }
               ]
             },
@@ -34081,99 +35045,6 @@
           "value": ")"
         }
       ]
-    },
-    "__query_shared_scope": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SEQ",
-          "members": [
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "PATTERN",
-                  "value": "NEW",
-                  "flags": "i"
-                }
-              },
-              "named": false,
-              "value": "NEW"
-            },
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "PATTERN",
-                  "value": "SHARED",
-                  "flags": "i"
-                }
-              },
-              "named": false,
-              "value": "SHARED"
-            }
-          ]
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "PATTERN",
-              "value": "SHARED",
-              "flags": "i"
-            }
-          },
-          "named": false,
-          "value": "SHARED"
-        }
-      ]
-    },
-    "__query_access_modifier": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "PATTERN",
-              "value": "PRIVATE",
-              "flags": "i"
-            }
-          },
-          "named": false,
-          "value": "PRIVATE"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "PATTERN",
-              "value": "PROTECTED",
-              "flags": "i"
-            }
-          },
-          "named": false,
-          "value": "PROTECTED"
-        }
-      ]
-    },
-    "__query_static_modifier": {
-      "type": "ALIAS",
-      "content": {
-        "type": "TOKEN",
-        "content": {
-          "type": "PATTERN",
-          "value": "STATIC",
-          "flags": "i"
-        }
-      },
-      "named": false,
-      "value": "STATIC"
     },
     "__query_table_name": {
       "type": "CHOICE",
@@ -41794,69 +42665,305 @@
               "type": "CHOICE",
               "members": [
                 {
-                  "type": "ALIAS",
-                  "content": {
-                    "type": "SYMBOL",
-                    "name": "__temp_table_shared_scope"
-                  },
-                  "named": true,
-                  "value": "shared_variable_scope"
+                  "type": "SEQ",
+                  "members": [
+                    {
+                      "type": "ALIAS",
+                      "content": {
+                        "type": "ALIAS",
+                        "content": {
+                          "type": "TOKEN",
+                          "content": {
+                            "type": "PATTERN",
+                            "value": "NEW",
+                            "flags": "i"
+                          }
+                        },
+                        "named": false,
+                        "value": "NEW"
+                      },
+                      "named": true,
+                      "value": "new_modifier"
+                    },
+                    {
+                      "type": "ALIAS",
+                      "content": {
+                        "type": "ALIAS",
+                        "content": {
+                          "type": "TOKEN",
+                          "content": {
+                            "type": "PATTERN",
+                            "value": "GLOBAL",
+                            "flags": "i"
+                          }
+                        },
+                        "named": false,
+                        "value": "GLOBAL"
+                      },
+                      "named": true,
+                      "value": "scope_modifier"
+                    },
+                    {
+                      "type": "ALIAS",
+                      "content": {
+                        "type": "ALIAS",
+                        "content": {
+                          "type": "TOKEN",
+                          "content": {
+                            "type": "PATTERN",
+                            "value": "SHARED",
+                            "flags": "i"
+                          }
+                        },
+                        "named": false,
+                        "value": "SHARED"
+                      },
+                      "named": true,
+                      "value": "scope_modifier"
+                    }
+                  ]
                 },
                 {
                   "type": "SEQ",
                   "members": [
                     {
-                      "type": "CHOICE",
-                      "members": [
-                        {
-                          "type": "ALIAS",
+                      "type": "ALIAS",
+                      "content": {
+                        "type": "ALIAS",
+                        "content": {
+                          "type": "TOKEN",
                           "content": {
-                            "type": "SYMBOL",
-                            "name": "__temp_table_access_modifier"
-                          },
-                          "named": true,
-                          "value": "access_modifier"
+                            "type": "PATTERN",
+                            "value": "NEW",
+                            "flags": "i"
+                          }
                         },
-                        {
-                          "type": "BLANK"
-                        }
-                      ]
+                        "named": false,
+                        "value": "NEW"
+                      },
+                      "named": true,
+                      "value": "new_modifier"
                     },
                     {
-                      "type": "CHOICE",
-                      "members": [
-                        {
-                          "type": "ALIAS",
+                      "type": "ALIAS",
+                      "content": {
+                        "type": "ALIAS",
+                        "content": {
+                          "type": "TOKEN",
                           "content": {
-                            "type": "SYMBOL",
-                            "name": "__temp_table_static_modifier"
-                          },
-                          "named": true,
-                          "value": "static_modifier"
+                            "type": "PATTERN",
+                            "value": "SHARED",
+                            "flags": "i"
+                          }
                         },
-                        {
-                          "type": "BLANK"
-                        }
-                      ]
-                    },
-                    {
-                      "type": "CHOICE",
-                      "members": [
-                        {
-                          "type": "ALIAS",
-                          "content": {
-                            "type": "SYMBOL",
-                            "name": "__temp_table_serialization_modifier"
-                          },
-                          "named": true,
-                          "value": "serialization_modifier"
-                        },
-                        {
-                          "type": "BLANK"
-                        }
-                      ]
+                        "named": false,
+                        "value": "SHARED"
+                      },
+                      "named": true,
+                      "value": "scope_modifier"
                     }
                   ]
+                },
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "ALIAS",
+                    "content": {
+                      "type": "TOKEN",
+                      "content": {
+                        "type": "PATTERN",
+                        "value": "SHARED",
+                        "flags": "i"
+                      }
+                    },
+                    "named": false,
+                    "value": "SHARED"
+                  },
+                  "named": true,
+                  "value": "scope_modifier"
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "CHOICE",
+                    "members": [
+                      {
+                        "type": "ALIAS",
+                        "content": {
+                          "type": "TOKEN",
+                          "content": {
+                            "type": "PATTERN",
+                            "value": "PRIVATE",
+                            "flags": "i"
+                          }
+                        },
+                        "named": false,
+                        "value": "PRIVATE"
+                      },
+                      {
+                        "type": "ALIAS",
+                        "content": {
+                          "type": "TOKEN",
+                          "content": {
+                            "type": "PATTERN",
+                            "value": "PROTECTED",
+                            "flags": "i"
+                          }
+                        },
+                        "named": false,
+                        "value": "PROTECTED"
+                      }
+                    ]
+                  },
+                  "named": true,
+                  "value": "access_modifier"
+                },
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "ALIAS",
+                    "content": {
+                      "type": "TOKEN",
+                      "content": {
+                        "type": "PATTERN",
+                        "value": "STATIC",
+                        "flags": "i"
+                      }
+                    },
+                    "named": false,
+                    "value": "STATIC"
+                  },
+                  "named": true,
+                  "value": "static_modifier"
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "CHOICE",
+                    "members": [
+                      {
+                        "type": "ALIAS",
+                        "content": {
+                          "type": "TOKEN",
+                          "content": {
+                            "type": "PATTERN",
+                            "value": "PRIVATE",
+                            "flags": "i"
+                          }
+                        },
+                        "named": false,
+                        "value": "PRIVATE"
+                      },
+                      {
+                        "type": "ALIAS",
+                        "content": {
+                          "type": "TOKEN",
+                          "content": {
+                            "type": "PATTERN",
+                            "value": "PROTECTED",
+                            "flags": "i"
+                          }
+                        },
+                        "named": false,
+                        "value": "PROTECTED"
+                      }
+                    ]
+                  },
+                  "named": true,
+                  "value": "access_modifier"
+                },
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "ALIAS",
+                    "content": {
+                      "type": "TOKEN",
+                      "content": {
+                        "type": "PATTERN",
+                        "value": "STATIC",
+                        "flags": "i"
+                      }
+                    },
+                    "named": false,
+                    "value": "STATIC"
+                  },
+                  "named": true,
+                  "value": "static_modifier"
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "ALIAS",
+                    "content": {
+                      "type": "TOKEN",
+                      "content": {
+                        "type": "PATTERN",
+                        "value": "SERIALIZABLE",
+                        "flags": "i"
+                      }
+                    },
+                    "named": false,
+                    "value": "SERIALIZABLE"
+                  },
+                  "named": true,
+                  "value": "serialization_modifier"
+                },
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "ALIAS",
+                    "content": {
+                      "type": "TOKEN",
+                      "content": {
+                        "type": "PATTERN",
+                        "value": "NON-SERIALIZABLE",
+                        "flags": "i"
+                      }
+                    },
+                    "named": false,
+                    "value": "NON-SERIALIZABLE"
+                  },
+                  "named": true,
+                  "value": "serialization_modifier"
                 }
               ]
             },
@@ -43193,205 +44300,6 @@
         }
       ]
     },
-    "__temp_table_shared_scope": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SEQ",
-          "members": [
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "PATTERN",
-                  "value": "NEW",
-                  "flags": "i"
-                }
-              },
-              "named": false,
-              "value": "NEW"
-            },
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "PATTERN",
-                  "value": "GLOBAL",
-                  "flags": "i"
-                }
-              },
-              "named": false,
-              "value": "GLOBAL"
-            }
-          ]
-        },
-        {
-          "type": "SEQ",
-          "members": [
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "PATTERN",
-                  "value": "NEW",
-                  "flags": "i"
-                }
-              },
-              "named": false,
-              "value": "NEW"
-            },
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "PATTERN",
-                  "value": "GLOBAL",
-                  "flags": "i"
-                }
-              },
-              "named": false,
-              "value": "GLOBAL"
-            },
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "PATTERN",
-                  "value": "SHARED",
-                  "flags": "i"
-                }
-              },
-              "named": false,
-              "value": "SHARED"
-            }
-          ]
-        },
-        {
-          "type": "SEQ",
-          "members": [
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "PATTERN",
-                  "value": "NEW",
-                  "flags": "i"
-                }
-              },
-              "named": false,
-              "value": "NEW"
-            },
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "PATTERN",
-                  "value": "SHARED",
-                  "flags": "i"
-                }
-              },
-              "named": false,
-              "value": "SHARED"
-            }
-          ]
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "PATTERN",
-              "value": "SHARED",
-              "flags": "i"
-            }
-          },
-          "named": false,
-          "value": "SHARED"
-        }
-      ]
-    },
-    "__temp_table_access_modifier": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "PATTERN",
-              "value": "PRIVATE",
-              "flags": "i"
-            }
-          },
-          "named": false,
-          "value": "PRIVATE"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "PATTERN",
-              "value": "PROTECTED",
-              "flags": "i"
-            }
-          },
-          "named": false,
-          "value": "PROTECTED"
-        }
-      ]
-    },
-    "__temp_table_static_modifier": {
-      "type": "ALIAS",
-      "content": {
-        "type": "TOKEN",
-        "content": {
-          "type": "PATTERN",
-          "value": "STATIC",
-          "flags": "i"
-        }
-      },
-      "named": false,
-      "value": "STATIC"
-    },
-    "__temp_table_serialization_modifier": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "PATTERN",
-              "value": "SERIALIZABLE",
-              "flags": "i"
-            }
-          },
-          "named": false,
-          "value": "SERIALIZABLE"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "PATTERN",
-              "value": "NON-SERIALIZABLE",
-              "flags": "i"
-            }
-          },
-          "named": false,
-          "value": "NON-SERIALIZABLE"
-        }
-      ]
-    },
     "__temp_table_like_name": {
       "type": "CHOICE",
       "members": [
@@ -43882,24 +44790,91 @@
               "type": "CHOICE",
               "members": [
                 {
-                  "type": "ALIAS",
-                  "content": {
-                    "type": "SYMBOL",
-                    "name": "__work_table_shared_scope"
-                  },
-                  "named": true,
-                  "value": "shared_variable_scope"
+                  "type": "SEQ",
+                  "members": [
+                    {
+                      "type": "ALIAS",
+                      "content": {
+                        "type": "ALIAS",
+                        "content": {
+                          "type": "TOKEN",
+                          "content": {
+                            "type": "PATTERN",
+                            "value": "NEW",
+                            "flags": "i"
+                          }
+                        },
+                        "named": false,
+                        "value": "NEW"
+                      },
+                      "named": true,
+                      "value": "new_modifier"
+                    },
+                    {
+                      "type": "ALIAS",
+                      "content": {
+                        "type": "ALIAS",
+                        "content": {
+                          "type": "TOKEN",
+                          "content": {
+                            "type": "PATTERN",
+                            "value": "SHARED",
+                            "flags": "i"
+                          }
+                        },
+                        "named": false,
+                        "value": "SHARED"
+                      },
+                      "named": true,
+                      "value": "scope_modifier"
+                    }
+                  ]
                 },
                 {
                   "type": "ALIAS",
                   "content": {
-                    "type": "SYMBOL",
-                    "name": "__work_table_access_modifier"
+                    "type": "ALIAS",
+                    "content": {
+                      "type": "TOKEN",
+                      "content": {
+                        "type": "PATTERN",
+                        "value": "SHARED",
+                        "flags": "i"
+                      }
+                    },
+                    "named": false,
+                    "value": "SHARED"
                   },
                   "named": true,
-                  "value": "access_modifier"
+                  "value": "scope_modifier"
                 }
               ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "ALIAS",
+                "content": {
+                  "type": "TOKEN",
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "PRIVATE",
+                    "flags": "i"
+                  }
+                },
+                "named": false,
+                "value": "PRIVATE"
+              },
+              "named": true,
+              "value": "access_modifier"
             },
             {
               "type": "BLANK"
@@ -43970,24 +44945,91 @@
               "type": "CHOICE",
               "members": [
                 {
-                  "type": "ALIAS",
-                  "content": {
-                    "type": "SYMBOL",
-                    "name": "__work_table_shared_scope"
-                  },
-                  "named": true,
-                  "value": "shared_variable_scope"
+                  "type": "SEQ",
+                  "members": [
+                    {
+                      "type": "ALIAS",
+                      "content": {
+                        "type": "ALIAS",
+                        "content": {
+                          "type": "TOKEN",
+                          "content": {
+                            "type": "PATTERN",
+                            "value": "NEW",
+                            "flags": "i"
+                          }
+                        },
+                        "named": false,
+                        "value": "NEW"
+                      },
+                      "named": true,
+                      "value": "new_modifier"
+                    },
+                    {
+                      "type": "ALIAS",
+                      "content": {
+                        "type": "ALIAS",
+                        "content": {
+                          "type": "TOKEN",
+                          "content": {
+                            "type": "PATTERN",
+                            "value": "SHARED",
+                            "flags": "i"
+                          }
+                        },
+                        "named": false,
+                        "value": "SHARED"
+                      },
+                      "named": true,
+                      "value": "scope_modifier"
+                    }
+                  ]
                 },
                 {
                   "type": "ALIAS",
                   "content": {
-                    "type": "SYMBOL",
-                    "name": "__work_table_access_modifier"
+                    "type": "ALIAS",
+                    "content": {
+                      "type": "TOKEN",
+                      "content": {
+                        "type": "PATTERN",
+                        "value": "SHARED",
+                        "flags": "i"
+                      }
+                    },
+                    "named": false,
+                    "value": "SHARED"
                   },
                   "named": true,
-                  "value": "access_modifier"
+                  "value": "scope_modifier"
                 }
               ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "ALIAS",
+                "content": {
+                  "type": "TOKEN",
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "PRIVATE",
+                    "flags": "i"
+                  }
+                },
+                "named": false,
+                "value": "PRIVATE"
+              },
+              "named": true,
+              "value": "access_modifier"
             },
             {
               "type": "BLANK"
@@ -44089,68 +45131,6 @@
           }
         }
       ]
-    },
-    "__work_table_shared_scope": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SEQ",
-          "members": [
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "PATTERN",
-                  "value": "NEW",
-                  "flags": "i"
-                }
-              },
-              "named": false,
-              "value": "NEW"
-            },
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "PATTERN",
-                  "value": "SHARED",
-                  "flags": "i"
-                }
-              },
-              "named": false,
-              "value": "SHARED"
-            }
-          ]
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "PATTERN",
-              "value": "SHARED",
-              "flags": "i"
-            }
-          },
-          "named": false,
-          "value": "SHARED"
-        }
-      ]
-    },
-    "__work_table_access_modifier": {
-      "type": "ALIAS",
-      "content": {
-        "type": "TOKEN",
-        "content": {
-          "type": "PATTERN",
-          "value": "PRIVATE",
-          "flags": "i"
-        }
-      },
-      "named": false,
-      "value": "PRIVATE"
     },
     "terminal_statement": {
       "type": "SEQ",
@@ -46148,69 +47128,383 @@
               "type": "CHOICE",
               "members": [
                 {
-                  "type": "ALIAS",
-                  "content": {
-                    "type": "SYMBOL",
-                    "name": "__variable_shared_variable_scope"
-                  },
-                  "named": true,
-                  "value": "shared_variable_scope"
+                  "type": "SEQ",
+                  "members": [
+                    {
+                      "type": "ALIAS",
+                      "content": {
+                        "type": "ALIAS",
+                        "content": {
+                          "type": "TOKEN",
+                          "content": {
+                            "type": "PATTERN",
+                            "value": "NEW",
+                            "flags": "i"
+                          }
+                        },
+                        "named": false,
+                        "value": "NEW"
+                      },
+                      "named": true,
+                      "value": "new_modifier"
+                    },
+                    {
+                      "type": "ALIAS",
+                      "content": {
+                        "type": "ALIAS",
+                        "content": {
+                          "type": "TOKEN",
+                          "content": {
+                            "type": "PATTERN",
+                            "value": "GLOBAL",
+                            "flags": "i"
+                          }
+                        },
+                        "named": false,
+                        "value": "GLOBAL"
+                      },
+                      "named": true,
+                      "value": "scope_modifier"
+                    },
+                    {
+                      "type": "ALIAS",
+                      "content": {
+                        "type": "ALIAS",
+                        "content": {
+                          "type": "TOKEN",
+                          "content": {
+                            "type": "PATTERN",
+                            "value": "SHARED",
+                            "flags": "i"
+                          }
+                        },
+                        "named": false,
+                        "value": "SHARED"
+                      },
+                      "named": true,
+                      "value": "scope_modifier"
+                    }
+                  ]
                 },
                 {
                   "type": "SEQ",
                   "members": [
                     {
-                      "type": "CHOICE",
-                      "members": [
-                        {
-                          "type": "ALIAS",
+                      "type": "ALIAS",
+                      "content": {
+                        "type": "ALIAS",
+                        "content": {
+                          "type": "TOKEN",
                           "content": {
-                            "type": "SYMBOL",
-                            "name": "__variable_access_modifier"
-                          },
-                          "named": true,
-                          "value": "access_modifier"
+                            "type": "PATTERN",
+                            "value": "NEW",
+                            "flags": "i"
+                          }
                         },
-                        {
-                          "type": "BLANK"
-                        }
-                      ]
+                        "named": false,
+                        "value": "NEW"
+                      },
+                      "named": true,
+                      "value": "new_modifier"
                     },
                     {
-                      "type": "CHOICE",
-                      "members": [
-                        {
-                          "type": "ALIAS",
+                      "type": "ALIAS",
+                      "content": {
+                        "type": "ALIAS",
+                        "content": {
+                          "type": "TOKEN",
                           "content": {
-                            "type": "SYMBOL",
-                            "name": "__variable_static_modifier"
-                          },
-                          "named": true,
-                          "value": "static_modifier"
+                            "type": "PATTERN",
+                            "value": "SHARED",
+                            "flags": "i"
+                          }
                         },
-                        {
-                          "type": "BLANK"
-                        }
-                      ]
-                    },
-                    {
-                      "type": "CHOICE",
-                      "members": [
-                        {
-                          "type": "ALIAS",
-                          "content": {
-                            "type": "SYMBOL",
-                            "name": "__variable_serialization_modifier"
-                          },
-                          "named": true,
-                          "value": "serialization_modifier"
-                        },
-                        {
-                          "type": "BLANK"
-                        }
-                      ]
+                        "named": false,
+                        "value": "SHARED"
+                      },
+                      "named": true,
+                      "value": "scope_modifier"
                     }
                   ]
+                },
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "ALIAS",
+                    "content": {
+                      "type": "TOKEN",
+                      "content": {
+                        "type": "PATTERN",
+                        "value": "SHARED",
+                        "flags": "i"
+                      }
+                    },
+                    "named": false,
+                    "value": "SHARED"
+                  },
+                  "named": true,
+                  "value": "scope_modifier"
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "CHOICE",
+                    "members": [
+                      {
+                        "type": "ALIAS",
+                        "content": {
+                          "type": "TOKEN",
+                          "content": {
+                            "type": "PATTERN",
+                            "value": "PRIVATE",
+                            "flags": "i"
+                          }
+                        },
+                        "named": false,
+                        "value": "PRIVATE"
+                      },
+                      {
+                        "type": "ALIAS",
+                        "content": {
+                          "type": "TOKEN",
+                          "content": {
+                            "type": "PATTERN",
+                            "value": "PACKAGE-PRIVATE",
+                            "flags": "i"
+                          }
+                        },
+                        "named": false,
+                        "value": "PACKAGE-PRIVATE"
+                      },
+                      {
+                        "type": "ALIAS",
+                        "content": {
+                          "type": "TOKEN",
+                          "content": {
+                            "type": "PATTERN",
+                            "value": "PROTECTED",
+                            "flags": "i"
+                          }
+                        },
+                        "named": false,
+                        "value": "PROTECTED"
+                      },
+                      {
+                        "type": "ALIAS",
+                        "content": {
+                          "type": "TOKEN",
+                          "content": {
+                            "type": "PATTERN",
+                            "value": "PACKAGE-PROTECTED",
+                            "flags": "i"
+                          }
+                        },
+                        "named": false,
+                        "value": "PACKAGE-PROTECTED"
+                      },
+                      {
+                        "type": "ALIAS",
+                        "content": {
+                          "type": "TOKEN",
+                          "content": {
+                            "type": "PATTERN",
+                            "value": "PUBLIC",
+                            "flags": "i"
+                          }
+                        },
+                        "named": false,
+                        "value": "PUBLIC"
+                      }
+                    ]
+                  },
+                  "named": true,
+                  "value": "access_modifier"
+                },
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "ALIAS",
+                    "content": {
+                      "type": "TOKEN",
+                      "content": {
+                        "type": "PATTERN",
+                        "value": "STATIC",
+                        "flags": "i"
+                      }
+                    },
+                    "named": false,
+                    "value": "STATIC"
+                  },
+                  "named": true,
+                  "value": "static_modifier"
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "CHOICE",
+                    "members": [
+                      {
+                        "type": "ALIAS",
+                        "content": {
+                          "type": "TOKEN",
+                          "content": {
+                            "type": "PATTERN",
+                            "value": "PRIVATE",
+                            "flags": "i"
+                          }
+                        },
+                        "named": false,
+                        "value": "PRIVATE"
+                      },
+                      {
+                        "type": "ALIAS",
+                        "content": {
+                          "type": "TOKEN",
+                          "content": {
+                            "type": "PATTERN",
+                            "value": "PACKAGE-PRIVATE",
+                            "flags": "i"
+                          }
+                        },
+                        "named": false,
+                        "value": "PACKAGE-PRIVATE"
+                      },
+                      {
+                        "type": "ALIAS",
+                        "content": {
+                          "type": "TOKEN",
+                          "content": {
+                            "type": "PATTERN",
+                            "value": "PROTECTED",
+                            "flags": "i"
+                          }
+                        },
+                        "named": false,
+                        "value": "PROTECTED"
+                      },
+                      {
+                        "type": "ALIAS",
+                        "content": {
+                          "type": "TOKEN",
+                          "content": {
+                            "type": "PATTERN",
+                            "value": "PACKAGE-PROTECTED",
+                            "flags": "i"
+                          }
+                        },
+                        "named": false,
+                        "value": "PACKAGE-PROTECTED"
+                      },
+                      {
+                        "type": "ALIAS",
+                        "content": {
+                          "type": "TOKEN",
+                          "content": {
+                            "type": "PATTERN",
+                            "value": "PUBLIC",
+                            "flags": "i"
+                          }
+                        },
+                        "named": false,
+                        "value": "PUBLIC"
+                      }
+                    ]
+                  },
+                  "named": true,
+                  "value": "access_modifier"
+                },
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "ALIAS",
+                    "content": {
+                      "type": "TOKEN",
+                      "content": {
+                        "type": "PATTERN",
+                        "value": "STATIC",
+                        "flags": "i"
+                      }
+                    },
+                    "named": false,
+                    "value": "STATIC"
+                  },
+                  "named": true,
+                  "value": "static_modifier"
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "ALIAS",
+                    "content": {
+                      "type": "TOKEN",
+                      "content": {
+                        "type": "PATTERN",
+                        "value": "SERIALIZABLE",
+                        "flags": "i"
+                      }
+                    },
+                    "named": false,
+                    "value": "SERIALIZABLE"
+                  },
+                  "named": true,
+                  "value": "serialization_modifier"
+                },
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "ALIAS",
+                    "content": {
+                      "type": "TOKEN",
+                      "content": {
+                        "type": "PATTERN",
+                        "value": "NON-SERIALIZABLE",
+                        "flags": "i"
+                      }
+                    },
+                    "named": false,
+                    "value": "NON-SERIALIZABLE"
+                  },
+                  "named": true,
+                  "value": "serialization_modifier"
                 }
               ]
             },
@@ -46463,169 +47757,6 @@
         }
       ]
     },
-    "__variable_shared_variable_scope": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SEQ",
-          "members": [
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "PATTERN",
-                  "value": "NEW",
-                  "flags": "i"
-                }
-              },
-              "named": false,
-              "value": "NEW"
-            },
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "PATTERN",
-                  "value": "GLOBAL",
-                  "flags": "i"
-                }
-              },
-              "named": false,
-              "value": "GLOBAL"
-            },
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "PATTERN",
-                  "value": "SHARED",
-                  "flags": "i"
-                }
-              },
-              "named": false,
-              "value": "SHARED"
-            }
-          ]
-        },
-        {
-          "type": "SEQ",
-          "members": [
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "PATTERN",
-                  "value": "NEW",
-                  "flags": "i"
-                }
-              },
-              "named": false,
-              "value": "NEW"
-            },
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "PATTERN",
-                  "value": "SHARED",
-                  "flags": "i"
-                }
-              },
-              "named": false,
-              "value": "SHARED"
-            }
-          ]
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "PATTERN",
-              "value": "SHARED",
-              "flags": "i"
-            }
-          },
-          "named": false,
-          "value": "SHARED"
-        }
-      ]
-    },
-    "__variable_access_modifier": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "PATTERN",
-              "value": "PRIVATE",
-              "flags": "i"
-            }
-          },
-          "named": false,
-          "value": "PRIVATE"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "PATTERN",
-              "value": "PACKAGE-PRIVATE",
-              "flags": "i"
-            }
-          },
-          "named": false,
-          "value": "PACKAGE-PRIVATE"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "PATTERN",
-              "value": "PROTECTED",
-              "flags": "i"
-            }
-          },
-          "named": false,
-          "value": "PROTECTED"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "PATTERN",
-              "value": "PACKAGE-PROTECTED",
-              "flags": "i"
-            }
-          },
-          "named": false,
-          "value": "PACKAGE-PROTECTED"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "PATTERN",
-              "value": "PUBLIC",
-              "flags": "i"
-            }
-          },
-          "named": false,
-          "value": "PUBLIC"
-        }
-      ]
-    },
     "_variable_type_phrase": {
       "type": "SEQ",
       "members": [
@@ -46753,50 +47884,6 @@
               }
             ]
           }
-        }
-      ]
-    },
-    "__variable_static_modifier": {
-      "type": "ALIAS",
-      "content": {
-        "type": "TOKEN",
-        "content": {
-          "type": "PATTERN",
-          "value": "STATIC",
-          "flags": "i"
-        }
-      },
-      "named": false,
-      "value": "STATIC"
-    },
-    "__variable_serialization_modifier": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "PATTERN",
-              "value": "SERIALIZABLE",
-              "flags": "i"
-            }
-          },
-          "named": false,
-          "value": "SERIALIZABLE"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "PATTERN",
-              "value": "NON-SERIALIZABLE",
-              "flags": "i"
-            }
-          },
-          "named": false,
-          "value": "NON-SERIALIZABLE"
         }
       ]
     },
@@ -47553,13 +48640,102 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "ALIAS",
-              "content": {
-                "type": "SYMBOL",
-                "name": "__var_access_modifier"
-              },
-              "named": true,
-              "value": "access_modifier"
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "CHOICE",
+                    "members": [
+                      {
+                        "type": "ALIAS",
+                        "content": {
+                          "type": "TOKEN",
+                          "content": {
+                            "type": "PATTERN",
+                            "value": "PRIVATE",
+                            "flags": "i"
+                          }
+                        },
+                        "named": false,
+                        "value": "PRIVATE"
+                      },
+                      {
+                        "type": "ALIAS",
+                        "content": {
+                          "type": "TOKEN",
+                          "content": {
+                            "type": "PATTERN",
+                            "value": "PACKAGE-PRIVATE",
+                            "flags": "i"
+                          }
+                        },
+                        "named": false,
+                        "value": "PACKAGE-PRIVATE"
+                      },
+                      {
+                        "type": "ALIAS",
+                        "content": {
+                          "type": "TOKEN",
+                          "content": {
+                            "type": "PATTERN",
+                            "value": "PROTECTED",
+                            "flags": "i"
+                          }
+                        },
+                        "named": false,
+                        "value": "PROTECTED"
+                      },
+                      {
+                        "type": "ALIAS",
+                        "content": {
+                          "type": "TOKEN",
+                          "content": {
+                            "type": "PATTERN",
+                            "value": "PACKAGE-PROTECTED",
+                            "flags": "i"
+                          }
+                        },
+                        "named": false,
+                        "value": "PACKAGE-PROTECTED"
+                      },
+                      {
+                        "type": "ALIAS",
+                        "content": {
+                          "type": "TOKEN",
+                          "content": {
+                            "type": "PATTERN",
+                            "value": "PUBLIC",
+                            "flags": "i"
+                          }
+                        },
+                        "named": false,
+                        "value": "PUBLIC"
+                      }
+                    ]
+                  },
+                  "named": true,
+                  "value": "access_modifier"
+                },
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "ALIAS",
+                    "content": {
+                      "type": "TOKEN",
+                      "content": {
+                        "type": "PATTERN",
+                        "value": "STATIC",
+                        "flags": "i"
+                      }
+                    },
+                    "named": false,
+                    "value": "STATIC"
+                  },
+                  "named": true,
+                  "value": "static_modifier"
+                }
+              ]
             },
             {
               "type": "BLANK"
@@ -47575,17 +48751,141 @@
                 {
                   "type": "ALIAS",
                   "content": {
-                    "type": "SYMBOL",
-                    "name": "__var_static_modifier"
+                    "type": "CHOICE",
+                    "members": [
+                      {
+                        "type": "ALIAS",
+                        "content": {
+                          "type": "TOKEN",
+                          "content": {
+                            "type": "PATTERN",
+                            "value": "PRIVATE",
+                            "flags": "i"
+                          }
+                        },
+                        "named": false,
+                        "value": "PRIVATE"
+                      },
+                      {
+                        "type": "ALIAS",
+                        "content": {
+                          "type": "TOKEN",
+                          "content": {
+                            "type": "PATTERN",
+                            "value": "PACKAGE-PRIVATE",
+                            "flags": "i"
+                          }
+                        },
+                        "named": false,
+                        "value": "PACKAGE-PRIVATE"
+                      },
+                      {
+                        "type": "ALIAS",
+                        "content": {
+                          "type": "TOKEN",
+                          "content": {
+                            "type": "PATTERN",
+                            "value": "PROTECTED",
+                            "flags": "i"
+                          }
+                        },
+                        "named": false,
+                        "value": "PROTECTED"
+                      },
+                      {
+                        "type": "ALIAS",
+                        "content": {
+                          "type": "TOKEN",
+                          "content": {
+                            "type": "PATTERN",
+                            "value": "PACKAGE-PROTECTED",
+                            "flags": "i"
+                          }
+                        },
+                        "named": false,
+                        "value": "PACKAGE-PROTECTED"
+                      },
+                      {
+                        "type": "ALIAS",
+                        "content": {
+                          "type": "TOKEN",
+                          "content": {
+                            "type": "PATTERN",
+                            "value": "PUBLIC",
+                            "flags": "i"
+                          }
+                        },
+                        "named": false,
+                        "value": "PUBLIC"
+                      }
+                    ]
                   },
                   "named": true,
-                  "value": "static_modifier"
+                  "value": "access_modifier"
                 },
                 {
                   "type": "ALIAS",
                   "content": {
-                    "type": "SYMBOL",
-                    "name": "__var_serialization_modifier"
+                    "type": "ALIAS",
+                    "content": {
+                      "type": "TOKEN",
+                      "content": {
+                        "type": "PATTERN",
+                        "value": "STATIC",
+                        "flags": "i"
+                      }
+                    },
+                    "named": false,
+                    "value": "STATIC"
+                  },
+                  "named": true,
+                  "value": "static_modifier"
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "ALIAS",
+                    "content": {
+                      "type": "TOKEN",
+                      "content": {
+                        "type": "PATTERN",
+                        "value": "SERIALIZABLE",
+                        "flags": "i"
+                      }
+                    },
+                    "named": false,
+                    "value": "SERIALIZABLE"
+                  },
+                  "named": true,
+                  "value": "serialization_modifier"
+                },
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "ALIAS",
+                    "content": {
+                      "type": "TOKEN",
+                      "content": {
+                        "type": "PATTERN",
+                        "value": "NON-SERIALIZABLE",
+                        "flags": "i"
+                      }
+                    },
+                    "named": false,
+                    "value": "NON-SERIALIZABLE"
                   },
                   "named": true,
                   "value": "serialization_modifier"
@@ -47794,120 +49094,6 @@
         {
           "type": "SYMBOL",
           "name": "identifier"
-        }
-      ]
-    },
-    "__var_access_modifier": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "PATTERN",
-              "value": "PRIVATE",
-              "flags": "i"
-            }
-          },
-          "named": false,
-          "value": "PRIVATE"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "PATTERN",
-              "value": "PACKAGE-PRIVATE",
-              "flags": "i"
-            }
-          },
-          "named": false,
-          "value": "PACKAGE-PRIVATE"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "PATTERN",
-              "value": "PROTECTED",
-              "flags": "i"
-            }
-          },
-          "named": false,
-          "value": "PROTECTED"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "PATTERN",
-              "value": "PACKAGE-PROTECTED",
-              "flags": "i"
-            }
-          },
-          "named": false,
-          "value": "PACKAGE-PROTECTED"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "PATTERN",
-              "value": "PUBLIC",
-              "flags": "i"
-            }
-          },
-          "named": false,
-          "value": "PUBLIC"
-        }
-      ]
-    },
-    "__var_static_modifier": {
-      "type": "ALIAS",
-      "content": {
-        "type": "TOKEN",
-        "content": {
-          "type": "PATTERN",
-          "value": "STATIC",
-          "flags": "i"
-        }
-      },
-      "named": false,
-      "value": "STATIC"
-    },
-    "__var_serialization_modifier": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "PATTERN",
-              "value": "SERIALIZABLE",
-              "flags": "i"
-            }
-          },
-          "named": false,
-          "value": "SERIALIZABLE"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "PATTERN",
-              "value": "NON-SERIALIZABLE",
-              "flags": "i"
-            }
-          },
-          "named": false,
-          "value": "NON-SERIALIZABLE"
         }
       ]
     },
@@ -56249,57 +57435,6 @@
       "widget_access"
     ],
     [
-      "__buffer_access_modifier",
-      "__data_source_access_modifier",
-      "__dataset_access_modifier",
-      "__event_access_modifier",
-      "__query_access_modifier",
-      "__temp_table_access_modifier",
-      "__variable_access_modifier"
-    ],
-    [
-      "__buffer_access_modifier",
-      "__dataset_access_modifier",
-      "__event_access_modifier",
-      "__query_access_modifier",
-      "__temp_table_access_modifier",
-      "__variable_access_modifier"
-    ],
-    [
-      "__dataset_access_modifier",
-      "__temp_table_access_modifier",
-      "__variable_access_modifier"
-    ],
-    [
-      "__data_source_access_modifier",
-      "__event_access_modifier"
-    ],
-    [
-      "__data_source_static_modifier",
-      "__event_static_modifier"
-    ],
-    [
-      "__event_access_modifier",
-      "__variable_access_modifier"
-    ],
-    [
-      "__event_static_modifier",
-      "__variable_static_modifier"
-    ],
-    [
-      "__dataset_static_modifier",
-      "__temp_table_static_modifier",
-      "__variable_static_modifier"
-    ],
-    [
-      "__property_modifier",
-      "__event_abstract_modifier"
-    ],
-    [
-      "__property_modifier",
-      "__event_override_modifier"
-    ],
-    [
       "__prompt_for_record_body",
       "__prompt_for_field_target"
     ],
@@ -56323,6 +57458,13 @@
     ],
     [
       "frame_phrase"
+    ],
+    [
+      "property_definition",
+      "__interface_event"
+    ],
+    [
+      "__procedure_external_phrase"
     ]
   ],
   "precedences": [],

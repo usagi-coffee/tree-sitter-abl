@@ -1,16 +1,15 @@
+const { definitionModifiers } = require("../helpers/modifiers");
+
 module.exports = ({ kw }) => ({
   query_definition: ($) =>
     seq(
       choice(kw("DEFINE"), kw("DEF")),
-      optional(
-        choice(
-          alias($.__query_shared_scope, $.shared_variable_scope),
-          seq(
-            optional(alias($.__query_access_modifier, $.access_modifier)),
-            optional(alias($.__query_static_modifier, $.static_modifier)),
-          ),
-        ),
-      ),
+      ...definitionModifiers($, kw, {
+        access: ["PRIVATE", "PROTECTED"],
+        new: true,
+        scope: ["SHARED"],
+        static: true,
+      }),
       kw("QUERY"),
       $.__query_body,
       $._terminator,
@@ -46,10 +45,6 @@ module.exports = ({ kw }) => ({
       ),
       ")",
     ),
-  __query_shared_scope: ($) =>
-    choice(seq(kw("NEW"), kw("SHARED")), kw("SHARED")),
-  __query_access_modifier: ($) => choice(kw("PRIVATE"), kw("PROTECTED")),
-  __query_static_modifier: ($) => kw("STATIC"),
   __query_table_name: ($) => choice($.identifier, $.qualified_name),
   __query_field_name: ($) => choice($.identifier, $.qualified_name),
 });

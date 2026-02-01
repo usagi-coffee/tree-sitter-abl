@@ -512,7 +512,6 @@ END FUNCTION.
   (function_definition
     name: (identifier)
     type: (identifier)
-    (access_modifier)
     (parameters
       (parameter
         name: (identifier)

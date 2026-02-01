@@ -185,15 +185,12 @@ END CLASS.
   (class_definition
     name: (identifier)
     (data_source_definition
-      (access_modifier)
       name: (identifier)
       buffer: (identifier))
     (data_source_definition
-      (access_modifier)
       name: (identifier)
       buffer: (identifier))
     (data_source_definition
-      (access_modifier)
       name: (identifier)
       query: (identifier))))
 
@@ -217,12 +214,10 @@ END.
       name: (identifier)
       buffer: (identifier))
     (data_source_definition
-      (access_modifier)
       (static_modifier)
       name: (identifier)
       buffer: (identifier))
     (data_source_definition
-      (access_modifier)
       (static_modifier)
       name: (identifier)
       query: (identifier))))

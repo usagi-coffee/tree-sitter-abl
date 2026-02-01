@@ -37,12 +37,13 @@ DEFINE PRIVATE STATIC SERIALIZABLE VARIABLE cust AS CLASS Customer NO-UNDO.
       value: (string_literal)
       value: (string_literal)))
   (variable_definition
-    (shared_variable_scope)
+    (new_modifier)
+    (scope_modifier)
+    (scope_modifier)
     name: (identifier)
     type: (identifier)
     (no_undo))
   (variable_definition
-    (access_modifier)
     (static_modifier)
     (serialization_modifier)
     name: (identifier)
@@ -234,17 +235,20 @@ DEFINE SHARED VARIABLE v3 AS LOGICAL NO-UNDO.
 
 (source_code
   (variable_definition
-    (shared_variable_scope)
+    (new_modifier)
+    (scope_modifier)
     name: (identifier)
     type: (identifier)
     (no_undo))
   (variable_definition
-    (shared_variable_scope)
+    (new_modifier)
+    (scope_modifier)
+    (scope_modifier)
     name: (identifier)
     type: (identifier)
     (no_undo))
   (variable_definition
-    (shared_variable_scope)
+    (scope_modifier)
     name: (identifier)
     type: (identifier)
     (no_undo)))
@@ -263,27 +267,22 @@ DEFINE PACKAGE-PROTECTED VARIABLE v5 AS INTEGER NO-UNDO.
 
 (source_code
   (variable_definition
-    (access_modifier)
     name: (identifier)
     type: (identifier)
     (no_undo))
   (variable_definition
-    (access_modifier)
     name: (identifier)
     type: (identifier)
     (no_undo))
   (variable_definition
-    (access_modifier)
     name: (identifier)
     type: (identifier)
     (no_undo))
   (variable_definition
-    (access_modifier)
     name: (identifier)
     type: (identifier)
     (no_undo))
   (variable_definition
-    (access_modifier)
     name: (identifier)
     type: (identifier)
     (no_undo)))
@@ -300,19 +299,16 @@ DEFINE PROTECTED STATIC SERIALIZABLE VARIABLE v3 AS LOGICAL NO-UNDO.
 
 (source_code
   (variable_definition
-    (access_modifier)
     (serialization_modifier)
     name: (identifier)
     type: (identifier)
     (no_undo))
   (variable_definition
-    (access_modifier)
     (serialization_modifier)
     name: (identifier)
     type: (identifier)
     (no_undo))
   (variable_definition
-    (access_modifier)
     (static_modifier)
     (serialization_modifier)
     name: (identifier)
@@ -489,12 +485,14 @@ END.
 
 (source_code
   (variable_definition
-    (shared_variable_scope)
+    (new_modifier)
+    (scope_modifier)
     (identifier)
     (identifier)
     (no_undo))
   (variable_definition
-    (shared_variable_scope)
+    (new_modifier)
+    (scope_modifier)
     (identifier)
     (identifier)
     (no_undo))
@@ -513,12 +511,12 @@ END.
       (identifier)
       (string_literal)))
   (variable_definition
-    (shared_variable_scope)
+    (scope_modifier)
     (identifier)
     (identifier)
     (no_undo))
   (variable_definition
-    (shared_variable_scope)
+    (scope_modifier)
     (identifier)
     (identifier)
     (no_undo))
@@ -568,7 +566,9 @@ END.
           (identifier)))))
   (output_statement)
   (variable_definition
-    (shared_variable_scope)
+    (new_modifier)
+    (scope_modifier)
+    (scope_modifier)
     (identifier)
     (identifier)
     (no_undo)

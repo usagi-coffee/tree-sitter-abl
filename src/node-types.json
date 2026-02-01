@@ -1,10 +1,5 @@
 [
   {
-    "type": "abstract_modifier",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "access_modifier",
     "named": true,
     "fields": {}
@@ -5841,11 +5836,11 @@
       "required": false,
       "types": [
         {
-          "type": "access_modifier",
+          "type": "new_modifier",
           "named": true
         },
         {
-          "type": "shared_variable_scope",
+          "type": "scope_modifier",
           "named": true
         },
         {
@@ -15897,10 +15892,6 @@
       "required": false,
       "types": [
         {
-          "type": "access_modifier",
-          "named": true
-        },
-        {
           "type": "static_modifier",
           "named": true
         }
@@ -16567,11 +16558,11 @@
       "required": false,
       "types": [
         {
-          "type": "access_modifier",
+          "type": "data_relation",
           "named": true
         },
         {
-          "type": "data_relation",
+          "type": "new_modifier",
           "named": true
         },
         {
@@ -16579,11 +16570,11 @@
           "named": true
         },
         {
-          "type": "serialization_modifier",
+          "type": "scope_modifier",
           "named": true
         },
         {
-          "type": "shared_variable_scope",
+          "type": "serialization_modifier",
           "named": true
         },
         {
@@ -20775,10 +20766,6 @@
           "named": true
         },
         {
-          "type": "access_modifier",
-          "named": true
-        },
-        {
           "type": "override_modifier",
           "named": true
         },
@@ -21136,6 +21123,16 @@
           }
         ]
       }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "number_literal",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -24534,10 +24531,6 @@
       "multiple": true,
       "required": false,
       "types": [
-        {
-          "type": "access_modifier",
-          "named": true
-        },
         {
           "type": "accumulate_statement",
           "named": true
@@ -30954,6 +30947,22 @@
     }
   },
   {
+    "type": "map",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "map_phrase",
     "named": true,
     "fields": {
@@ -34605,16 +34614,17 @@
   {
     "type": "ordinal_phrase",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "number_literal",
-          "named": true
-        }
-      ]
+    "fields": {
+      "number": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "number_literal",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -36664,11 +36674,6 @@
     "fields": {}
   },
   {
-    "type": "override_modifier",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "page_bottom",
     "named": true,
     "fields": {}
@@ -37492,11 +37497,6 @@
         }
       ]
     }
-  },
-  {
-    "type": "pascal",
-    "named": true,
-    "fields": {}
   },
   {
     "type": "pause_statement",
@@ -38467,6 +38467,10 @@
           "named": true
         },
         {
+          "type": "map",
+          "named": true
+        },
+        {
           "type": "menu_definition",
           "named": true
         },
@@ -38532,10 +38536,6 @@
         },
         {
           "type": "parameter_definition",
-          "named": true
-        },
-        {
-          "type": "pascal",
           "named": true
         },
         {
@@ -38680,10 +38680,6 @@
         },
         {
           "type": "status_statement",
-          "named": true
-        },
-        {
-          "type": "stdcall",
           "named": true
         },
         {
@@ -39613,10 +39609,6 @@
       "required": false,
       "types": [
         {
-          "type": "access_modifier",
-          "named": true
-        },
-        {
           "type": "accumulate_statement",
           "named": true
         },
@@ -40302,10 +40294,6 @@
       "multiple": true,
       "required": true,
       "types": [
-        {
-          "type": "access_modifier",
-          "named": true
-        },
         {
           "type": "constant",
           "named": true
@@ -42334,7 +42322,7 @@
       "required": true,
       "types": [
         {
-          "type": "access_modifier",
+          "type": "new_modifier",
           "named": true
         },
         {
@@ -42342,7 +42330,7 @@
           "named": true
         },
         {
-          "type": "shared_variable_scope",
+          "type": "scope_modifier",
           "named": true
         },
         {
@@ -46509,11 +46497,6 @@
     "fields": {}
   },
   {
-    "type": "serialization_modifier",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "serialize_name_option",
     "named": true,
     "fields": {
@@ -49813,11 +49796,6 @@
     }
   },
   {
-    "type": "static_modifier",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "status_statement",
     "named": true,
     "fields": {
@@ -50074,11 +50052,6 @@
         ]
       }
     }
-  },
-  {
-    "type": "stdcall",
-    "named": true,
-    "fields": {}
   },
   {
     "type": "stop_after_phrase",
@@ -53187,10 +53160,6 @@
       "required": false,
       "types": [
         {
-          "type": "access_modifier",
-          "named": true
-        },
-        {
           "type": "argument_reference",
           "named": true
         },
@@ -53207,6 +53176,10 @@
           "named": true
         },
         {
+          "type": "new_modifier",
+          "named": true
+        },
+        {
           "type": "no_undo",
           "named": true
         },
@@ -53215,11 +53188,11 @@
           "named": true
         },
         {
-          "type": "serialization_modifier",
+          "type": "scope_modifier",
           "named": true
         },
         {
-          "type": "shared_variable_scope",
+          "type": "serialization_modifier",
           "named": true
         },
         {
@@ -58220,10 +58193,6 @@
       "required": true,
       "types": [
         {
-          "type": "access_modifier",
-          "named": true
-        },
-        {
           "type": "serialization_modifier",
           "named": true
         },
@@ -58478,10 +58447,6 @@
       "required": false,
       "types": [
         {
-          "type": "access_modifier",
-          "named": true
-        },
-        {
           "type": "bgcolor_option",
           "named": true
         },
@@ -58538,6 +58503,10 @@
           "named": true
         },
         {
+          "type": "new_modifier",
+          "named": true
+        },
+        {
           "type": "no_undo",
           "named": true
         },
@@ -58546,15 +58515,15 @@
           "named": true
         },
         {
+          "type": "scope_modifier",
+          "named": true
+        },
+        {
           "type": "serialization_modifier",
           "named": true
         },
         {
           "type": "serialize_name_option",
-          "named": true
-        },
-        {
-          "type": "shared_variable_scope",
           "named": true
         },
         {
@@ -59871,11 +59840,15 @@
           "named": true
         },
         {
+          "type": "new_modifier",
+          "named": true
+        },
+        {
           "type": "no_undo",
           "named": true
         },
         {
-          "type": "shared_variable_scope",
+          "type": "scope_modifier",
           "named": true
         }
       ]
@@ -59917,11 +59890,15 @@
           "named": true
         },
         {
+          "type": "new_modifier",
+          "named": true
+        },
+        {
           "type": "no_undo",
           "named": true
         },
         {
-          "type": "shared_variable_scope",
+          "type": "scope_modifier",
           "named": true
         }
       ]
@@ -61304,10 +61281,6 @@
     "named": false
   },
   {
-    "type": "NON-SERIALIZABLE",
-    "named": false
-  },
-  {
     "type": "NORMAL",
     "named": false
   },
@@ -61717,6 +61690,10 @@
   },
   {
     "type": "RVV-",
+    "named": false
+  },
+  {
+    "type": "SAFE",
     "named": false
   },
   {
@@ -62304,6 +62281,10 @@
     "named": false
   },
   {
+    "type": "abstract_modifier",
+    "named": true
+  },
+  {
     "type": "argument_reference",
     "named": true
   },
@@ -62328,11 +62309,19 @@
     "named": true
   },
   {
+    "type": "new_modifier",
+    "named": true
+  },
+  {
     "type": "null_literal",
     "named": true
   },
   {
     "type": "number_literal",
+    "named": true
+  },
+  {
+    "type": "override_modifier",
     "named": true
   },
   {
@@ -62344,11 +62333,23 @@
     "named": true
   },
   {
+    "type": "scope_modifier",
+    "named": true
+  },
+  {
+    "type": "serialization_modifier",
+    "named": true
+  },
+  {
     "type": "shell_variable",
     "named": true
   },
   {
     "type": "skip_field",
+    "named": true
+  },
+  {
+    "type": "static_modifier",
     "named": true
   },
   {
