@@ -1,16 +1,13 @@
 module.exports = ({ kw, tkw }) => ({
-  if_statement: ($) =>
+  if_statement: ($) => seq(tkw("IF"), $.__if_body),
+
+  __if_body: ($) =>
     prec.right(
       seq(
-        choice(
-          seq(kw("IF"), $._expression),
-          seq(tkw("IF"), "(", $._expression, ")"),
-        ),
-        kw("THEN"),
-        field("then", choice($.do_block, $._statement)),
-        optional(
-          seq(kw("ELSE"), field("else", choice($.do_block, $._statement))),
-        ),
-      ),
+        $._expression,
+        tkw("THEN"),
+        field("then", $._statement),
+        optional(seq(kw("ELSE"), field("else", $._statement)))
+      )
     ),
 });

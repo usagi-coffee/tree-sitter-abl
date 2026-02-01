@@ -20519,10 +20519,6 @@
           "named": true
         },
         {
-          "type": "conditional_expression",
-          "named": true
-        },
-        {
           "type": "constant",
           "named": true
         },
@@ -26611,7 +26607,7 @@
     },
     "children": {
       "multiple": false,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "accum_expression",
@@ -36091,21 +36087,9 @@
         ]
       },
       "type": {
-        "multiple": true,
+        "multiple": false,
         "required": false,
         "types": [
-          {
-            "type": "INPUT",
-            "named": false
-          },
-          {
-            "type": "INPUT-OUTPUT",
-            "named": false
-          },
-          {
-            "type": "OUTPUT",
-            "named": false
-          },
           {
             "type": "generic_type",
             "named": true
