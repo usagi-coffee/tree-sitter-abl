@@ -765,8 +765,7 @@ DEFINE INPUT PARAMETER pExtent0 AS INTEGER EXTENT 0.
         name: (identifier))))
   (procedure_definition
     name: (identifier)
-    (external_phrase
-      library: (string_literal))
+    (external_phrase)
     (parameter_definition
       name: (identifier)
       type: (identifier))

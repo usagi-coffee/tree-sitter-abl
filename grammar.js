@@ -35,7 +35,6 @@ module.exports = grammar({
     // TODO: These should be resolvable
     [$.frame_phrase],
     [$.property_definition, $.__interface_event],
-    [$.__procedure_external_phrase],
   ],
   inline: ($) => [
     $.__find_record_name,

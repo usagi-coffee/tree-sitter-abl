@@ -16,7 +16,7 @@ module.exports = ({ kw }) => ({
       kw("DELETE"),
       kw("PROCEDURE"),
       field("handle", $._expression),
-      optional($.__delete_no_error),
+      optional(alias($.__delete_no_error, $.no_error)),
       $._terminator,
     ),
 

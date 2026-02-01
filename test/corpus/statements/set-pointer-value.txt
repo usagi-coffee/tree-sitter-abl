@@ -77,8 +77,8 @@ END PROCEDURE.
     size: (number_literal))
   (procedure_definition
     name: (identifier)
-    (external_phrase
-      library: (string_literal))
+    (external_phrase)
+    (persistent)
     (parameter_definition
       name: (identifier)
       type: (identifier))))

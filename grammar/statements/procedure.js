@@ -12,7 +12,7 @@ module.exports = ({ kw }) => ({
       field("name", choice($.identifier, $.qualified_name)),
       repeat($.__procedure_option),
       optional(alias($.__procedure_in_super_phrase, $.in_super_phrase)),
-      $._colon,
+      ":",
       repeat($._statement),
       kw("END"),
       optional(kw("PROCEDURE")),
@@ -38,13 +38,15 @@ module.exports = ({ kw }) => ({
   __procedure_thread_safe_option: ($) =>
     seq(kw("THREAD-SAFE"), optional(kw("SAFE"))),
   __procedure_external_phrase: ($) =>
-    seq(
-      kw("EXTERNAL"),
-      field("library", $.string_literal),
-      optional(choice(kw("CDECL"), kw("PASCAL"), kw("STDCALL"))),
-      optional(seq(kw("ORDINAL"), $.number_literal)),
-      optional(kw("PERSISTENT")),
-      optional(seq(kw("THREAD-SAFE"), optional(kw("SAFE")))),
+    prec.left(
+      seq(
+        kw("EXTERNAL"),
+        field("library", $._escaped_string),
+        optional(choice(kw("CDECL"), kw("PASCAL"), kw("STDCALL"))),
+        optional(seq(kw("ORDINAL"), $.number_literal)),
+        optional(kw("PERSISTENT")),
+        optional(choice(kw("THREAD-SAFE"))),
+      ),
     ),
   __procedure_in_super_phrase: ($) => seq(kw("IN"), kw("SUPER")),
   __procedure_map_option: ($) => seq(kw("MAP"), field("name", $.identifier)),

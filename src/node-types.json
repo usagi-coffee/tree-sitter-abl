@@ -17110,6 +17110,16 @@
           }
         ]
       }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "no_error",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -21176,18 +21186,7 @@
   {
     "type": "external_phrase",
     "named": true,
-    "fields": {
-      "library": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "string_literal",
-            "named": true
-          }
-        ]
-      }
-    },
+    "fields": {},
     "children": {
       "multiple": false,
       "required": false,

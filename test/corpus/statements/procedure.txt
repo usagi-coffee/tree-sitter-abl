@@ -378,8 +378,7 @@ PROCEDURE doSuper IN SUPER.
 (source_code
   (procedure_definition
     name: (identifier)
-    (external_phrase
-      library: (string_literal))
+    (external_phrase)
     (parameter_definition
       name: (identifier)
       type: (identifier))
@@ -402,8 +401,7 @@ PROCEDURE doSuper IN SUPER.
       number: (number_literal))
     (persistent)
     (thread_safe)
-    (external_phrase
-      library: (string_literal))
+    (external_phrase)
     (parameter_definition
       name: (identifier)
       type: (identifier))
@@ -588,8 +586,7 @@ END PROCEDURE.
         name: (identifier))))
   (procedure_definition
     name: (identifier)
-    (external_phrase
-      library: (string_literal))
+    (external_phrase)
     (parameter_definition
       name: (identifier)
       type: (identifier))
@@ -607,8 +604,7 @@ END PROCEDURE.
       type: (identifier)))
   (procedure_definition
     name: (identifier)
-    (external_phrase
-      library: (string_literal))
+    (external_phrase)
     (parameter_definition
       name: (identifier)
       type: (identifier))
@@ -617,30 +613,30 @@ END PROCEDURE.
       type: (identifier)))
   (procedure_definition
     name: (identifier)
-    (external_phrase
-      library: (string_literal))
+    (external_phrase)
     (parameter_definition
       name: (identifier)
       type: (identifier)))
   (procedure_definition
     name: (identifier)
-    (external_phrase
-      library: (string_literal)
-      (number_literal))
+    (external_phrase)
+    (cdecl)
+    (ordinal_phrase
+      number: (number_literal))
+    (persistent)
+    (thread_safe)
     (parameter_definition
       name: (identifier)
       type: (identifier)))
   (procedure_definition
     name: (identifier)
-    (external_phrase
-      library: (string_literal))
+    (external_phrase)
     (parameter_definition
       name: (identifier)
       type: (identifier)))
   (procedure_definition
     name: (identifier)
-    (external_phrase
-      library: (string_literal))
+    (external_phrase)
     (parameter_definition
       name: (identifier)
       type: (identifier)))
