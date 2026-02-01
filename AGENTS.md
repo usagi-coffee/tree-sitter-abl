@@ -53,12 +53,12 @@ Strongly prefer using these commands as they have helpful side-effects like retu
 - Avoid creating a shared or generic code unless it is really a part of the core syntax, core grammar modifications require a confirmation unless experimenting.
 - We intentionally duplicate modifiers and tunings at the statement level so that most of the statement-specific context lives in a single file. To support this, each statement defines its own `__<statement>_rules`, which are later aliased to `$.rule` where needed. This intentional duplication favors locality, readability, and conflict isolation over DRY abstractions.
 - All statement-related modifiers, phrases, tunings that are not already part of core should be locally defined as `__<statement>_<rule>` rule and aliased to `$.<rule>`.
-- Conflicts must be resolved structurally whenever possible, adding a `conflicts` entry is a last resort and requires prior confirmation with a clear explanation of why structural fixes are insufficient. Your first solution should never be to try to add a conflict to keywords, if it's necessary give me an explanation and ask for a confirmation.
-- Prefer `kw` (requires whitespace after the keyword) and `tkw` (does not require whitespace) to use in-place of `token(/keyword/i)` function whenever dealing with keywords.
+- When resolving conflicts treat adding a `conflicts` entry as a last resort that requires prior confirmation with a clear explanation of why structural fixes are insufficient.
+- Prefer `tkw` (does not require whitespace) for keywords, and in some rare cases you can use `kw` (avoid if possible; requires whitespace after the keyword) to use in-place of `token(/keyword/i)`.
 - Treat `(ERROR)` and `(MISSING)` nodes in the test output aserrors that need to be fixed.
 - Use compact rule formatting: keep one-line rules adjacent with no blank lines, avoid blank lines between consecutive one-line rules.
 - The grammar should avoid permissive or catch-all rules that allow invalid syntax to be parsed successfully.
-- ABL grammar is filled with optionals, be careful not to explode `tree-sitter`'s `STATE_COUNT` AND `ACTION_COUNT`, always check modification's impact on `STATE_COUNT`.
+- ABL grammar is filled with optionals, be careful not to explode `tree-sitter`'s `ACTION_COUNT` AND `STATE_COUNT`, always check modification's impact on `ACTION_COUNT` and `STATE_COUNT`.
 - Do not adjust or remove tests just to satisfy test passing, just fix the underlying parsing issue or ask me first to remove if it's really not supported.
 - Don't do unnecessary comments like `// something is above`.
 - Never add `(ERROR` nodes to expected syntax trees in tests, it's pointless, fix the grammar not the test itself.
@@ -68,7 +68,7 @@ Strongly prefer using these commands as they have helpful side-effects like retu
 - `bun` instead of `npm`.
 - Never use `tree-sitter` CLI directly, use workflow commands.
 - Always prefer `tkw` over `kw`, `kw` are only needed usually for the starting keywords like `DEFINE`, `tkw` is a must for trailing keyword that happen before terminators.
-- There is no need to call `bun run build` during testing workflow, just use usual workflow commands like `bun run test` and `bun run parse:snippet`, they generate under the hood.
+- There is no need to call `bun run build` during testing workflow, just use usual workflow commands like `bun run test` and `bun run parse:snippet`, they build/generate under the hood.
 - Parser generation can take up to 1 minute so adjust timeout accordingly.
 - `bun run test` returns only failed cases and failed syntax tree OR a message that everything went well.
 - When using `alias`, `tree-sitter` handles undefined rules by using the property name as the symbol name so it's okay to alias to `$.something_that_wasn't defined`.
