@@ -193,14 +193,17 @@ DEF PRIVATE BUFFER bufTemp FOR TEMP-TABLE ttData.
 
 (source_code
   (buffer_definition
+    (access_modifier)
     name: (identifier)
     table: (identifier))
   (buffer_definition
+    (access_modifier)
     name: (identifier)
     table: (qualified_name
       left: (identifier)
       right: (identifier)))
   (buffer_definition
+    (access_modifier)
     name: (identifier)
     table: (identifier)))
 
@@ -220,12 +223,14 @@ DEF PRIVATE STATIC BUFFER bufPTS FOR TEMP-TABLE ttData.
     name: (identifier)
     table: (identifier))
   (buffer_definition
+    (access_modifier)
     (static_modifier)
     name: (identifier)
     table: (qualified_name
       left: (identifier)
       right: (identifier)))
   (buffer_definition
+    (access_modifier)
     (static_modifier)
     name: (identifier)
     table: (identifier)))
@@ -270,10 +275,12 @@ DEF PROTECTED STATIC BUFFER bufStatic FOR TEMP-TABLE ttData XML-NODE-NAME "node"
 
 (source_code
   (buffer_definition
+    (access_modifier)
     name: (identifier)
     table: (identifier)
     label: (string_literal))
   (buffer_definition
+    (access_modifier)
     name: (identifier)
     table: (qualified_name
       left: (identifier)
@@ -281,6 +288,7 @@ DEF PROTECTED STATIC BUFFER bufStatic FOR TEMP-TABLE ttData XML-NODE-NAME "node"
     namespace_uri: (string_literal)
     namespace_prefix: (string_literal))
   (buffer_definition
+    (access_modifier)
     (static_modifier)
     name: (identifier)
     table: (identifier)
@@ -388,6 +396,7 @@ DEFINE BUFFER procBuf FOR proc-text-buffer.
     name: (identifier)
     table: (identifier))
   (buffer_definition
+    (access_modifier)
     (static_modifier)
     name: (identifier)
     table: (identifier))

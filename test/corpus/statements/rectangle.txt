@@ -86,6 +86,7 @@ DEFINE PRIVATE RECTANGLE rectPrivate
 
 (source_code
   (rectangle_definition
+    (access_modifier)
     name: (identifier)
     (edge_chars
       (number_literal))
@@ -307,8 +308,10 @@ DEF PRIVATE RECTANGLE privBox LIKE rBox.
 
 (source_code
   (rectangle_definition
+    (access_modifier)
     name: (identifier))
   (rectangle_definition
+    (access_modifier)
     name: (identifier)
     (like_option
       like: (identifier))))

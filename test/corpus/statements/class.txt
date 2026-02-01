@@ -67,16 +67,19 @@ END CLASS.
       right: (identifier)
       right: (identifier))
     (var_statement
+      (access_modifier)
       type: (identifier)
       (variable
         name: (identifier)
         initializer: (number_literal)))
     (var_statement
+      (access_modifier)
       type: (identifier)
       (variable
         name: (identifier)
         initializer: (number_literal)))
     (var_statement
+      (access_modifier)
       type: (identifier)
       (variable
         name: (identifier)))
@@ -94,12 +97,14 @@ END CLASS.
             type: (identifier)
             (arguments)))))
     (property_definition
+      (access_modifier)
       name: (identifier)
       type: (identifier)
       (no_undo)
       (property_accessor)
       (property_accessor))
     (property_definition
+      (access_modifier)
       name: (identifier)
       type: (identifier)
       (no_undo)
@@ -116,6 +121,7 @@ END CLASS.
           operator: (assignment_operator)
           right: (identifier))))
     (property_definition
+      (access_modifier)
       name: (identifier)
       type: (identifier)
       (no_undo)
@@ -244,6 +250,7 @@ END CLASS.
         width: (number_literal)
         height: (number_literal)))
     (event_definition
+      (access_modifier)
       name: (identifier)
       (signature
         name: (identifier)

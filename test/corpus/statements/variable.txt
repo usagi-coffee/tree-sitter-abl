@@ -44,6 +44,7 @@ DEFINE PRIVATE STATIC SERIALIZABLE VARIABLE cust AS CLASS Customer NO-UNDO.
     type: (identifier)
     (no_undo))
   (variable_definition
+    (access_modifier)
     (static_modifier)
     (serialization_modifier)
     name: (identifier)
@@ -267,22 +268,27 @@ DEFINE PACKAGE-PROTECTED VARIABLE v5 AS INTEGER NO-UNDO.
 
 (source_code
   (variable_definition
+    (access_modifier)
     name: (identifier)
     type: (identifier)
     (no_undo))
   (variable_definition
+    (access_modifier)
     name: (identifier)
     type: (identifier)
     (no_undo))
   (variable_definition
+    (access_modifier)
     name: (identifier)
     type: (identifier)
     (no_undo))
   (variable_definition
+    (access_modifier)
     name: (identifier)
     type: (identifier)
     (no_undo))
   (variable_definition
+    (access_modifier)
     name: (identifier)
     type: (identifier)
     (no_undo)))
@@ -299,16 +305,19 @@ DEFINE PROTECTED STATIC SERIALIZABLE VARIABLE v3 AS LOGICAL NO-UNDO.
 
 (source_code
   (variable_definition
+    (access_modifier)
     (serialization_modifier)
     name: (identifier)
     type: (identifier)
     (no_undo))
   (variable_definition
+    (access_modifier)
     (serialization_modifier)
     name: (identifier)
     type: (identifier)
     (no_undo))
   (variable_definition
+    (access_modifier)
     (static_modifier)
     (serialization_modifier)
     name: (identifier)

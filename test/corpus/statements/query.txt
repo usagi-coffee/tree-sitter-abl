@@ -262,16 +262,19 @@ DEF PRIVATE QUERY qTemp FOR ttData.
 
 (source_code
   (query_definition
+    (access_modifier)
     name: (identifier)
     (query_table_list
       table: (identifier)))
   (query_definition
+    (access_modifier)
     name: (identifier)
     (query_table_list
       table: (qualified_name
         left: (identifier)
         right: (identifier))))
   (query_definition
+    (access_modifier)
     name: (identifier)
     (query_table_list
       table: (identifier))))
@@ -293,6 +296,7 @@ DEFINE PRIVATE STATIC QUERY qPrivStatic FOR ttData.
     (query_table_list
       table: (identifier)))
   (query_definition
+    (access_modifier)
     (static_modifier)
     name: (identifier)
     (query_table_list
@@ -300,6 +304,7 @@ DEFINE PRIVATE STATIC QUERY qPrivStatic FOR ttData.
         left: (identifier)
         right: (identifier))))
   (query_definition
+    (access_modifier)
     (static_modifier)
     name: (identifier)
     (query_table_list

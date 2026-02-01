@@ -4203,10 +4203,6 @@
           "named": true
         },
         {
-          "type": "event_definition",
-          "named": true
-        },
-        {
           "type": "export_statement",
           "named": true
         },
@@ -5835,6 +5831,10 @@
       "multiple": true,
       "required": false,
       "types": [
+        {
+          "type": "access_modifier",
+          "named": true
+        },
         {
           "type": "new_modifier",
           "named": true
@@ -10118,10 +10118,6 @@
           },
           {
             "type": "error_scope_statement",
-            "named": true
-          },
-          {
-            "type": "event_definition",
             "named": true
           },
           {
@@ -15892,6 +15888,10 @@
       "required": false,
       "types": [
         {
+          "type": "access_modifier",
+          "named": true
+        },
+        {
           "type": "static_modifier",
           "named": true
         }
@@ -16557,6 +16557,10 @@
       "multiple": true,
       "required": false,
       "types": [
+        {
+          "type": "access_modifier",
+          "named": true
+        },
         {
           "type": "data_relation",
           "named": true
@@ -19799,10 +19803,6 @@
           "named": true
         },
         {
-          "type": "event_definition",
-          "named": true
-        },
-        {
           "type": "export_statement",
           "named": true
         },
@@ -20763,6 +20763,10 @@
       "types": [
         {
           "type": "abstract_modifier",
+          "named": true
+        },
+        {
+          "type": "access_modifier",
           "named": true
         },
         {
@@ -24724,10 +24728,6 @@
           "named": true
         },
         {
-          "type": "event_definition",
-          "named": true
-        },
-        {
           "type": "export_statement",
           "named": true
         },
@@ -26136,10 +26136,6 @@
             "named": true
           },
           {
-            "type": "event_definition",
-            "named": true
-          },
-          {
             "type": "export_statement",
             "named": true
           },
@@ -26759,10 +26755,6 @@
           },
           {
             "type": "error_scope_statement",
-            "named": true
-          },
-          {
-            "type": "event_definition",
             "named": true
           },
           {
@@ -33693,10 +33685,6 @@
           "named": true
         },
         {
-          "type": "event_definition",
-          "named": true
-        },
-        {
           "type": "export_statement",
           "named": true
         },
@@ -38351,10 +38339,6 @@
           "named": true
         },
         {
-          "type": "event_definition",
-          "named": true
-        },
-        {
           "type": "export_statement",
           "named": true
         },
@@ -39801,10 +39785,6 @@
           "named": true
         },
         {
-          "type": "event_definition",
-          "named": true
-        },
-        {
           "type": "export_statement",
           "named": true
         },
@@ -40294,6 +40274,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "access_modifier",
+          "named": true
+        },
         {
           "type": "constant",
           "named": true
@@ -42322,6 +42306,10 @@
       "required": true,
       "types": [
         {
+          "type": "access_modifier",
+          "named": true
+        },
+        {
           "type": "new_modifier",
           "named": true
         },
@@ -43244,6 +43232,10 @@
       "multiple": true,
       "required": false,
       "types": [
+        {
+          "type": "access_modifier",
+          "named": true
+        },
         {
           "type": "bgcolor",
           "named": true
@@ -49097,10 +49089,6 @@
           "named": true
         },
         {
-          "type": "event_definition",
-          "named": true
-        },
-        {
           "type": "export_statement",
           "named": true
         },
@@ -53163,6 +53151,10 @@
       "required": false,
       "types": [
         {
+          "type": "access_modifier",
+          "named": true
+        },
+        {
           "type": "argument_reference",
           "named": true
         },
@@ -54363,10 +54355,6 @@
         },
         {
           "type": "error_scope_statement",
-          "named": true
-        },
-        {
-          "type": "event_definition",
           "named": true
         },
         {
@@ -58196,6 +58184,10 @@
       "required": true,
       "types": [
         {
+          "type": "access_modifier",
+          "named": true
+        },
+        {
           "type": "serialization_modifier",
           "named": true
         },
@@ -58449,6 +58441,10 @@
       "multiple": true,
       "required": false,
       "types": [
+        {
+          "type": "access_modifier",
+          "named": true
+        },
         {
           "type": "bgcolor_option",
           "named": true

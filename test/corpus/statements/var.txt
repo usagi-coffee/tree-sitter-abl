@@ -114,6 +114,7 @@ var List<Ant> ListOfAnts.
   (comment
     (block_comment))
   (var_statement
+    (access_modifier)
     (identifier)
     (variable
       (identifier))
@@ -373,10 +374,12 @@ VAR CLASS mypackage.subdir.myclass myobj4.
 
 (source_code
   (var_statement
+    (access_modifier)
     (identifier)
     (variable
       (identifier)))
   (var_statement
+    (access_modifier)
     (identifier)
     (variable
       (identifier)))

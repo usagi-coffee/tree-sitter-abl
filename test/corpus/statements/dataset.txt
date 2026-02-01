@@ -136,10 +136,12 @@ DEFINE DATASET dsPidFields FOR ttParent, ttChild PARENT-ID-RELATION FOR ttParent
     name: (identifier)
     table: (identifier))
   (dataset_definition
+    (access_modifier)
     (static_modifier)
     name: (identifier)
     table: (identifier))
   (dataset_definition
+    (access_modifier)
     name: (identifier)
     table: (identifier))
   (dataset_definition

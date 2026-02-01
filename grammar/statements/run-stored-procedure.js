@@ -1,14 +1,10 @@
 module.exports = ({ kw }) => ({
   run_stored_procedure_statement: ($) =>
-    seq(
-      kw("RUN"),
-      kw("STORED-PROCEDURE"),
-      $.__run_stored_procedure_body,
-      $._terminator,
-    ),
+    seq(kw("RUN"), $.__run_stored_procedure_body, $._terminator),
 
   __run_stored_procedure_body: ($) =>
     seq(
+      kw("STORED-PROCEDURE"),
       field("procedure", choice($.identifier, $.string_literal)),
       optional(
         choice(
@@ -28,11 +24,13 @@ module.exports = ({ kw }) => ({
 
   __run_stored_procedure_params: ($) =>
     seq("(", optional($.__run_stored_procedure_param_list), ")"),
+
   __run_stored_procedure_param_list: ($) =>
     seq(
       $.__run_stored_procedure_param,
       repeat(seq(",", $.__run_stored_procedure_param)),
     ),
+
   __run_stored_procedure_param: ($) =>
     prec(
       1,

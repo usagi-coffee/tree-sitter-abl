@@ -3,7 +3,7 @@
 
 /**
  * Creates definition modifier rule fragments that can be spread into a sequence.
- * Modifiers are returned in order: scope -> access -> static -> serializable -> abstract -> override
+ * Modifiers are returned in order: new -> scope -> access -> static -> serializable -> abstract -> override
  *
  * @param {Function} kw - The keyword helper function
  * @param {Object} options - Configuration options
@@ -18,9 +18,9 @@
  */
 function definitionModifiers($, kw, options = {}) {
   const {
-    access = [],
-    new: hasNew = true,
+    new: hasNew = false,
     scope = [],
+    access = [],
     static: hasStatic = false,
     serializable = false,
     abstract = false,
@@ -37,8 +37,22 @@ function definitionModifiers($, kw, options = {}) {
       scopePatterns.push(
         seq(
           alias(kw("NEW"), $.new_modifier),
+          choice(
+            alias(kw("GLOBAL"), $.scope_modifier),
+            seq(
+              alias(kw("GLOBAL"), $.scope_modifier),
+              alias(kw("SHARED"), $.scope_modifier),
+            ),
+          ),
+        ),
+      );
+    }
+
+    if (hasNew && scope.includes("GLOBAL") && !scope.includes("SHARED")) {
+      scopePatterns.push(
+        seq(
+          alias(kw("NEW"), $.new_modifier),
           alias(kw("GLOBAL"), $.scope_modifier),
-          alias(kw("SHARED"), $.scope_modifier),
         ),
       );
     }
@@ -67,42 +81,25 @@ function definitionModifiers($, kw, options = {}) {
     }
   }
 
-  // Access and Static modifiers - can appear in either order
-  if (access && access.length > 0 && hasStatic) {
-    const accessChoices = access.map((level) => kw(level));
-    const accessRule =
-      accessChoices.length > 1 ? choice(...accessChoices) : accessChoices[0];
-    // Allow both orderings: access [static] | static [access]
+  if (access.length > 0) {
+    if (hasStatic)
+      modifiers.push(optional(alias(kw("STATIC"), $.static_modifier)));
+    if (abstract)
+      modifiers.push(optional(alias(kw("ABSTRACT"), $.abstract_modifier)));
+  }
+
+  // Access modifiers
+  if (access.length > 1) {
     modifiers.push(
       optional(
-        choice(
-          alias(accessRule, $.access_modifier),
-          alias(kw("STATIC"), $.static_modifier),
-        ),
+        choice(...access.map((level) => alias(kw(level), $.access_modifier))),
       ),
     );
-    // Add the second optional modifier
-    modifiers.push(
-      optional(
-        choice(
-          alias(accessRule, $.access_modifier),
-          alias(kw("STATIC"), $.static_modifier),
-        ),
-      ),
-    );
-  } else if (access && access.length > 0) {
-    const accessChoices = access.map((level) => kw(level));
-    modifiers.push(
-      optional(
-        alias(
-          accessChoices.length > 1
-            ? choice(...accessChoices)
-            : accessChoices[0],
-          $.access_modifier,
-        ),
-      ),
-    );
-  } else if (hasStatic) {
+  } else if (access.length === 1) {
+    modifiers.push(optional(alias(kw(access[0]), $.access_modifier)));
+  }
+
+  if (hasStatic) {
     modifiers.push(optional(alias(kw("STATIC"), $.static_modifier)));
   }
 
