@@ -19,8 +19,13 @@ module.exports = ({ kw }) => ({
       field("name", $.identifier),
       kw("QUERY"),
       field("query", $.identifier),
-      optional(choice(kw("SHARE-LOCK"), kw("EXCLUSIVE-LOCK"), kw("NO-LOCK"))),
-      optional(kw("NO-WAIT")),
+      optional(
+        alias(
+          choice(kw("SHARE-LOCK"), kw("EXCLUSIVE-LOCK"), kw("NO-LOCK")),
+          $.lock,
+        ),
+      ),
+      optional(alias(kw("NO-WAIT"), $.no_wait)),
       kw("DISPLAY"),
       choice(
         repeat1(alias($.__browse_column, $.column)),
