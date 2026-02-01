@@ -9,8 +9,10 @@ DEFINE BROWSE b1 QUERY q1 DISPLAY CustNum Name.
   (browse_definition
     name: (identifier)
     query: (identifier)
-    column: (identifier)
-    column: (identifier)))
+    (column
+      column: (identifier))
+    (column
+      column: (identifier))))
 
 =============================
 Define Browse with Options
@@ -24,8 +26,10 @@ TITLE "Customer Browse" DOWN 10.
   (browse_definition
     name: (identifier)
     query: (identifier)
-    column: (identifier)
-    column: (identifier)
+    (column
+      column: (identifier))
+    (column
+      column: (identifier))
     (title_option
       (string_literal))
     (down_option
@@ -43,8 +47,10 @@ WITH DOWN 10 TITLE "Customer Browse".
   (browse_definition
     name: (identifier)
     query: (identifier)
-    column: (identifier)
-    column: (identifier)
+    (column
+      column: (identifier))
+    (column
+      column: (identifier))
     (down_option
       (number_literal))
     (title_option
@@ -63,12 +69,14 @@ WITH DOWN 10.
   (browse_definition
     name: (identifier)
     query: (identifier)
-    column: (identifier)
-    (format_phrase
-      format: (string_literal))
-    column: (identifier)
-    (label_option
-      (string_literal))
+    (column
+      column: (identifier)
+      (format_phrase
+        format: (string_literal)))
+    (column
+      column: (identifier)
+      (label_option
+        (string_literal)))
     (down_option
       (number_literal))))
 
@@ -85,8 +93,10 @@ DEFINE NEW SHARED BROWSE b1 QUERY q1 DISPLAY CustNum Name.
     (scope_modifier)
     name: (identifier)
     query: (identifier)
-    column: (identifier)
-    column: (identifier)))
+    (column
+      column: (identifier))
+    (column
+      column: (identifier))))
 
 =============================
 Define Browse Private
@@ -100,8 +110,10 @@ DEFINE PRIVATE BROWSE b1 QUERY q1 DISPLAY CustNum Name.
     (access_modifier)
     name: (identifier)
     query: (identifier)
-    column: (identifier)
-    column: (identifier)))
+    (column
+      column: (identifier))
+    (column
+      column: (identifier))))
 
 =============================
 Define Browse with EXCEPT
@@ -114,8 +126,9 @@ DEFINE BROWSE b1 QUERY q1 DISPLAY Customer EXCEPT Comments.
   (browse_definition
     name: (identifier)
     query: (identifier)
-    record: (identifier)
-    field: (identifier)))
+    (record
+      record: (identifier)
+      field: (identifier))))
 
 =============================
 Define Browse with Locks and Column Options
@@ -133,30 +146,32 @@ ENABLE ALL WITH SIZE 80 BY 10 SCROLLBAR-VERTICAL SEPARATORS NO-ROW-MARKERS.
   (browse_definition
     name: (identifier)
     query: (identifier)
-    column: (identifier)
-    (format_phrase
-      format: (string_literal))
-    (label_option
-      (string_literal))
-    (no_labels_option)
-    column: (identifier)
-    (column_label_option
-      (string_literal))
-    (column_bgcolor_option
-      (number_literal))
-    (label_fgcolor_option
-      (number_literal))
-    (help_option
-      (string_literal))
-    (validate_option
-      (binary_expression
-        (identifier)
+    (column
+      column: (identifier)
+      (format_phrase
+        format: (string_literal))
+      (label_option
+        (string_literal))
+      (no_labels_option))
+    (column
+      column: (identifier)
+      (column_label_option
+        (string_literal))
+      (column_bgcolor_option
         (number_literal))
-      (string_literal))
-    (auto_return_option)
-    (disable_auto_zap_option)
-    (moveable_option)
-    (resizable_option)
+      (label_fgcolor_option
+        (number_literal))
+      (help_option
+        (string_literal))
+      (validate_option
+        (binary_expression
+          (identifier)
+          (number_literal))
+        (string_literal))
+      (auto_return_option)
+      (disable_auto_zap_option)
+      (moveable_option)
+      (resizable_option))
     (size_option
       (number_literal)
       (number_literal))
@@ -178,8 +193,10 @@ CONTEXT-HELP-ID 42 DROP-TARGET TOOLTIP "Browse tip" ROW 3 COLUMN 5.
     (access_modifier)
     name: (identifier)
     query: (identifier)
-    column: (identifier)
-    column: (identifier)
+    (column
+      column: (identifier))
+    (column
+      column: (identifier))
     (down_option
       (number_literal))
     (title_option
@@ -216,8 +233,10 @@ DEFINE BROWSE bShare QUERY qShare SHARE-LOCK DISPLAY CustNum Name.
   (browse_definition
     name: (identifier)
     query: (identifier)
-    column: (identifier)
-    column: (identifier)))
+    (column
+      column: (identifier))
+    (column
+      column: (identifier))))
 
 ================================================================================
 BROWSE - EXCLUSIVE-LOCK
@@ -231,8 +250,10 @@ DEFINE BROWSE bExclusive QUERY qExclusive EXCLUSIVE-LOCK DISPLAY CustNum Name.
   (browse_definition
     name: (identifier)
     query: (identifier)
-    column: (identifier)
-    column: (identifier)))
+    (column
+      column: (identifier))
+    (column
+      column: (identifier))))
 
 ================================================================================
 BROWSE - NO-LOCK with NO-WAIT
@@ -248,8 +269,10 @@ DEFINE BROWSE bNoWait QUERY qNoWait NO-LOCK NO-WAIT
   (browse_definition
     name: (identifier)
     query: (identifier)
-    column: (identifier)
-    column: (identifier)
+    (column
+      column: (identifier))
+    (column
+      column: (identifier))
     (size_option
       (number_literal)
       (number_literal))))
@@ -268,8 +291,10 @@ DEFINE BROWSE bEnable QUERY qEnable DISPLAY CustNum Name
   (browse_definition
     name: (identifier)
     query: (identifier)
-    column: (identifier)
-    column: (identifier)
+    (column
+      column: (identifier))
+    (column
+      column: (identifier))
     field: (identifier)
     (size_option
       (number_literal)
@@ -290,12 +315,14 @@ DEFINE BROWSE bLabFont QUERY qQ DISPLAY
   (browse_definition
     name: (identifier)
     query: (identifier)
-    column: (identifier)
-    (label_font_option
-      (number_literal))
-    column: (identifier)
-    (label_font_option
-      (number_literal))
+    (column
+      column: (identifier)
+      (label_font_option
+        (number_literal)))
+    (column
+      column: (identifier)
+      (label_font_option
+        (number_literal)))
     (size_option
       (number_literal)
       (number_literal))))
@@ -315,12 +342,14 @@ DEFINE BROWSE bColDcolor QUERY qQ DISPLAY
   (browse_definition
     name: (identifier)
     query: (identifier)
-    column: (identifier)
-    (column_dcolor_option
-      (number_literal))
-    column: (identifier)
-    (column_dcolor_option
-      (number_literal))
+    (column
+      column: (identifier)
+      (column_dcolor_option
+        (number_literal)))
+    (column
+      column: (identifier)
+      (column_dcolor_option
+        (number_literal)))
     (size_option
       (number_literal)
       (number_literal))))
@@ -340,12 +369,14 @@ DEFINE BROWSE bLabDcolor QUERY qQ DISPLAY
   (browse_definition
     name: (identifier)
     query: (identifier)
-    column: (identifier)
-    (label_dcolor_option
-      (number_literal))
-    column: (identifier)
-    (label_dcolor_option
-      (number_literal))
+    (column
+      column: (identifier)
+      (label_dcolor_option
+        (number_literal)))
+    (column
+      column: (identifier)
+      (label_dcolor_option
+        (number_literal)))
     (size_option
       (number_literal)
       (number_literal))))
@@ -365,12 +396,14 @@ DEFINE BROWSE bColPfcolor QUERY qQ DISPLAY
   (browse_definition
     name: (identifier)
     query: (identifier)
-    column: (identifier)
-    (column_pfcolor_option
-      (number_literal))
-    column: (identifier)
-    (column_pfcolor_option
-      (number_literal))
+    (column
+      column: (identifier)
+      (column_pfcolor_option
+        (number_literal)))
+    (column
+      column: (identifier)
+      (column_pfcolor_option
+        (number_literal)))
     (size_option
       (number_literal)
       (number_literal))))
@@ -390,12 +423,14 @@ DEFINE BROWSE bLabPfcolor QUERY qQ DISPLAY
   (browse_definition
     name: (identifier)
     query: (identifier)
-    column: (identifier)
-    (label_pfcolor_option
-      (number_literal))
-    column: (identifier)
-    (label_pfcolor_option
-      (number_literal))
+    (column
+      column: (identifier)
+      (label_pfcolor_option
+        (number_literal)))
+    (column
+      column: (identifier)
+      (label_pfcolor_option
+        (number_literal)))
     (size_option
       (number_literal)
       (number_literal))))
@@ -415,12 +450,14 @@ DEFINE BROWSE bLabBgcolor QUERY qQ DISPLAY
   (browse_definition
     name: (identifier)
     query: (identifier)
-    column: (identifier)
-    (label_bgcolor_option
-      (number_literal))
-    column: (identifier)
-    (label_bgcolor_option
-      (number_literal))
+    (column
+      column: (identifier)
+      (label_bgcolor_option
+        (number_literal)))
+    (column
+      column: (identifier)
+      (label_bgcolor_option
+        (number_literal)))
     (size_option
       (number_literal)
       (number_literal))))
@@ -438,8 +475,10 @@ DEFINE BROWSE bSizeChars QUERY qQ DISPLAY CustNum Name
   (browse_definition
     name: (identifier)
     query: (identifier)
-    column: (identifier)
-    column: (identifier)
+    (column
+      column: (identifier))
+    (column
+      column: (identifier))
     (size_chars_option
       (number_literal)
       (number_literal))))
@@ -457,8 +496,10 @@ DEFINE BROWSE bSizePixels QUERY qQ DISPLAY CustNum Name
   (browse_definition
     name: (identifier)
     query: (identifier)
-    column: (identifier)
-    column: (identifier)
+    (column
+      column: (identifier))
+    (column
+      column: (identifier))
     (size_pixels_option
       (number_literal)
       (number_literal))))
@@ -476,8 +517,10 @@ DEFINE BROWSE bScrollH QUERY qQ DISPLAY CustNum Name
   (browse_definition
     name: (identifier)
     query: (identifier)
-    column: (identifier)
-    column: (identifier)
+    (column
+      column: (identifier))
+    (column
+      column: (identifier))
     (scrollbar_horizontal_option)
     (size_option
       (number_literal)
@@ -496,8 +539,10 @@ DEFINE BROWSE bNoEmpty QUERY qQ DISPLAY CustNum Name
   (browse_definition
     name: (identifier)
     query: (identifier)
-    column: (identifier)
-    column: (identifier)
+    (column
+      column: (identifier))
+    (column
+      column: (identifier))
     (no_empty_space_option)
     (size_option
       (number_literal)
@@ -516,8 +561,10 @@ DEFINE BROWSE bFitLast QUERY qQ DISPLAY CustNum Name
   (browse_definition
     name: (identifier)
     query: (identifier)
-    column: (identifier)
-    column: (identifier)
+    (column
+      column: (identifier))
+    (column
+      column: (identifier))
     (fit_last_column_option)
     (size_option
       (number_literal)
@@ -536,8 +583,10 @@ DEFINE BROWSE bMultiple QUERY qQ DISPLAY CustNum Name
   (browse_definition
     name: (identifier)
     query: (identifier)
-    column: (identifier)
-    column: (identifier)
+    (column
+      column: (identifier))
+    (column
+      column: (identifier))
     (multiple_option)
     (size_option
       (number_literal)
@@ -556,8 +605,10 @@ DEFINE BROWSE bNoColScroll QUERY qQ DISPLAY CustNum Name
   (browse_definition
     name: (identifier)
     query: (identifier)
-    column: (identifier)
-    column: (identifier)
+    (column
+      column: (identifier))
+    (column
+      column: (identifier))
     (no_column_scrolling_option)
     (size_option
       (number_literal)
@@ -576,8 +627,10 @@ DEFINE BROWSE bMaxData QUERY qQ DISPLAY CustNum Name
   (browse_definition
     name: (identifier)
     query: (identifier)
-    column: (identifier)
-    column: (identifier)
+    (column
+      column: (identifier))
+    (column
+      column: (identifier))
     (max_data_guess_option
       (number_literal))
     (size_option
@@ -596,11 +649,12 @@ DEFINE BROWSE bMultiExc QUERY qQ DISPLAY Customer EXCEPT Comments1 Comments2 Sta
   (browse_definition
     name: (identifier)
     query: (identifier)
-    record: (identifier)
-    field: (identifier)
-    field: (identifier)
-    field: (identifier)
-    field: (identifier)))
+    (record
+      record: (identifier)
+      field: (identifier)
+      field: (identifier)
+      field: (identifier)
+      field: (identifier))))
 
 ================================================================================
 BROWSE - WIDTH option on column
@@ -617,12 +671,14 @@ DEFINE BROWSE bWidth QUERY qQ DISPLAY
   (browse_definition
     name: (identifier)
     query: (identifier)
-    column: (identifier)
-    (width_option
-      (number_literal))
-    column: (identifier)
-    (width_option
-      (number_literal))
+    (column
+      column: (identifier)
+      (width_option
+        (number_literal)))
+    (column
+      column: (identifier)
+      (width_option
+        (number_literal)))
     (size_option
       (number_literal)
       (number_literal))))
@@ -640,12 +696,15 @@ DEF BROWSE browse QUERY q DISPLAY f1 f2.
   (browse_definition
     name: (identifier)
     query: (identifier)
-    column: (identifier))
+    (column
+      column: (identifier)))
   (browse_definition
     name: (identifier)
     query: (identifier)
-    column: (identifier)
-    column: (identifier)))
+    (column
+      column: (identifier))
+    (column
+      column: (identifier))))
 
 ================================================================================
 Define Browse with Qualified Columns and DOWN
@@ -662,16 +721,18 @@ DEFINE BROWSE bPolicy QUERY qPolicy
   (browse_definition
     name: (identifier)
     query: (identifier)
-    column: (qualified_name
-      left: (identifier)
-      right: (identifier))
-    (column_label_option
-      (string_literal))
-    column: (qualified_name
-      left: (identifier)
-      right: (identifier))
-    (column_label_option
-      (string_literal))
+    (column
+      column: (qualified_name
+        left: (identifier)
+        right: (identifier))
+      (column_label_option
+        (string_literal)))
+    (column
+      column: (qualified_name
+        left: (identifier)
+        right: (identifier))
+      (column_label_option
+        (string_literal)))
     (down_option
       (number_literal))
     (width_option
@@ -693,19 +754,21 @@ WITH DOWN 5.
   (browse_definition
     name: (identifier)
     query: (identifier)
-    column: (qualified_name
-      left: (identifier)
-      right: (identifier))
-    (column_font_option
-      (number_literal))
-    (column_fgcolor_option
-      (number_literal))
-    column: (qualified_name
-      left: (identifier)
-      right: (identifier))
-    (label_fgcolor_option
-      (number_literal))
-    (label_pfcolor_option
-      (number_literal))
+    (column
+      column: (qualified_name
+        left: (identifier)
+        right: (identifier))
+      (column_font_option
+        (number_literal))
+      (column_fgcolor_option
+        (number_literal)))
+    (column
+      column: (qualified_name
+        left: (identifier)
+        right: (identifier))
+      (label_fgcolor_option
+        (number_literal))
+      (label_pfcolor_option
+        (number_literal)))
     (down_option
       (number_literal))))

@@ -80,12 +80,14 @@ RELEASE sports.Customer NO-ERROR.
   (browse_definition
     name: (identifier)
     query: (identifier)
-    column: (qualified_name
-      left: (identifier)
-      right: (identifier))
-    column: (qualified_name
-      left: (identifier)
-      right: (identifier))
+    (column
+      column: (qualified_name
+        left: (identifier)
+        right: (identifier)))
+    (column
+      column: (qualified_name
+        left: (identifier)
+        right: (identifier)))
     (down_option
       (number_literal)))
   (form_statement

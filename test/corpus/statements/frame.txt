@@ -186,7 +186,7 @@ DEFINE FRAME sized Customer.Name Customer.Address WITH SIZE 80 BY 20.
 FRAME - WITH DOWN
 ================================================================================
 
-DEFINE FRAME down Customer.CustNum WITH DOWN 10.
+DEFINE FRAME down Customer.CustNum WITH 10 DOWN.
 
 --------------------------------------------------------------------------------
 
@@ -568,7 +568,7 @@ FRAME - Multiple options combined
 DEFINE FRAME combined
   Customer.CustNum
   Customer.Name BGCOLOR 7 FGCOLOR 15
-  WITH SIZE 80 BY 20 DOWN 10 CENTERED.
+  WITH SIZE 80 BY 20 10 DOWN CENTERED.
 
 --------------------------------------------------------------------------------
 

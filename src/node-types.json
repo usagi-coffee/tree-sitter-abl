@@ -4759,32 +4759,6 @@
     "type": "browse_definition",
     "named": true,
     "fields": {
-      "column": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "function_call",
-            "named": true
-          },
-          {
-            "type": "identifier",
-            "named": true
-          },
-          {
-            "type": "object_access",
-            "named": true
-          },
-          {
-            "type": "qualified_name",
-            "named": true
-          },
-          {
-            "type": "scoped_name",
-            "named": true
-          }
-        ]
-      },
       "count": {
         "multiple": true,
         "required": false,
@@ -5073,16 +5047,6 @@
           }
         ]
       },
-      "record": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
       "start": {
         "multiple": true,
         "required": false,
@@ -5212,14 +5176,10 @@
     },
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "access_modifier",
-          "named": true
-        },
-        {
-          "type": "auto_return_option",
           "named": true
         },
         {
@@ -5227,31 +5187,11 @@
           "named": true
         },
         {
-          "type": "column_bgcolor_option",
-          "named": true
-        },
-        {
-          "type": "column_dcolor_option",
-          "named": true
-        },
-        {
-          "type": "column_fgcolor_option",
-          "named": true
-        },
-        {
-          "type": "column_font_option",
-          "named": true
-        },
-        {
-          "type": "column_label_option",
+          "type": "column",
           "named": true
         },
         {
           "type": "column_option",
-          "named": true
-        },
-        {
-          "type": "column_pfcolor_option",
           "named": true
         },
         {
@@ -5260,10 +5200,6 @@
         },
         {
           "type": "dcolor_option",
-          "named": true
-        },
-        {
-          "type": "disable_auto_zap_option",
           "named": true
         },
         {
@@ -5287,43 +5223,7 @@
           "named": true
         },
         {
-          "type": "format_phrase",
-          "named": true
-        },
-        {
-          "type": "help_option",
-          "named": true
-        },
-        {
-          "type": "label_bgcolor_option",
-          "named": true
-        },
-        {
-          "type": "label_dcolor_option",
-          "named": true
-        },
-        {
-          "type": "label_fgcolor_option",
-          "named": true
-        },
-        {
-          "type": "label_font_option",
-          "named": true
-        },
-        {
-          "type": "label_option",
-          "named": true
-        },
-        {
-          "type": "label_pfcolor_option",
-          "named": true
-        },
-        {
           "type": "max_data_guess_option",
-          "named": true
-        },
-        {
-          "type": "moveable_option",
           "named": true
         },
         {
@@ -5343,10 +5243,6 @@
           "named": true
         },
         {
-          "type": "no_labels_option",
-          "named": true
-        },
-        {
           "type": "no_row_markers_option",
           "named": true
         },
@@ -5355,7 +5251,7 @@
           "named": true
         },
         {
-          "type": "resizable_option",
+          "type": "record",
           "named": true
         },
         {
@@ -5396,10 +5292,6 @@
         },
         {
           "type": "tooltip_option",
-          "named": true
-        },
-        {
-          "type": "validate_option",
           "named": true
         },
         {
@@ -9125,6 +9017,128 @@
       "types": [
         {
           "type": "frame_phrase",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "column",
+    "named": true,
+    "fields": {
+      "column": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "function_call",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "object_access",
+            "named": true
+          },
+          {
+            "type": "qualified_name",
+            "named": true
+          },
+          {
+            "type": "scoped_name",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "auto_return_option",
+          "named": true
+        },
+        {
+          "type": "column_bgcolor_option",
+          "named": true
+        },
+        {
+          "type": "column_dcolor_option",
+          "named": true
+        },
+        {
+          "type": "column_fgcolor_option",
+          "named": true
+        },
+        {
+          "type": "column_font_option",
+          "named": true
+        },
+        {
+          "type": "column_label_option",
+          "named": true
+        },
+        {
+          "type": "column_pfcolor_option",
+          "named": true
+        },
+        {
+          "type": "disable_auto_zap_option",
+          "named": true
+        },
+        {
+          "type": "format_phrase",
+          "named": true
+        },
+        {
+          "type": "help_option",
+          "named": true
+        },
+        {
+          "type": "label_bgcolor_option",
+          "named": true
+        },
+        {
+          "type": "label_dcolor_option",
+          "named": true
+        },
+        {
+          "type": "label_fgcolor_option",
+          "named": true
+        },
+        {
+          "type": "label_font_option",
+          "named": true
+        },
+        {
+          "type": "label_option",
+          "named": true
+        },
+        {
+          "type": "label_pfcolor_option",
+          "named": true
+        },
+        {
+          "type": "moveable_option",
+          "named": true
+        },
+        {
+          "type": "no_labels_option",
+          "named": true
+        },
+        {
+          "type": "resizable_option",
+          "named": true
+        },
+        {
+          "type": "validate_option",
+          "named": true
+        },
+        {
+          "type": "width_option",
           "named": true
         }
       ]
@@ -43101,9 +43115,29 @@
     "type": "record",
     "named": true,
     "fields": {
+      "field": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "record": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
       "table": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "identifier",

@@ -214,12 +214,14 @@ END CLASS.
       (access_modifier)
       name: (identifier)
       query: (identifier)
-      column: (qualified_name
-        left: (identifier)
-        right: (identifier))
-      column: (qualified_name
-        left: (identifier)
-        right: (identifier)))
+      (column
+        column: (qualified_name
+          left: (identifier)
+          right: (identifier)))
+      (column
+        column: (qualified_name
+          left: (identifier)
+          right: (identifier))))
     (frame_definition
       (access_modifier)
       name: (identifier)

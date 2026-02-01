@@ -23,18 +23,19 @@ module.exports = ({ kw }) => ({
       optional(kw("NO-WAIT")),
       kw("DISPLAY"),
       choice(
-        // Simple column list
-        repeat1($.__browse_column),
-        // Record with EXCEPT
-        seq(
-          field("record", $.identifier),
-          kw("EXCEPT"),
-          repeat1(field("field", $.identifier)),
-        ),
+        repeat1(alias($.__browse_column, $.column)),
+        alias($.__browse_record, $.record),
       ),
       optional($.__browse_enable_phrase),
       optional(kw("WITH")),
       repeat($.__browse_option),
+    ),
+
+  __browse_record: ($) =>
+    seq(
+      field("record", $.identifier),
+      kw("EXCEPT"),
+      repeat1(field("field", $.identifier)),
     ),
 
   __browse_column: ($) =>
@@ -112,7 +113,6 @@ module.exports = ({ kw }) => ({
       alias($.__browse_size_option, $.size_option),
       alias($.__browse_size_chars_option, $.size_chars_option),
       alias($.__browse_size_pixels_option, $.size_pixels_option),
-      // $.on_phrase, // TODO: add trigger support
     ),
 
   __browse_label_option: ($) => seq(kw("LABEL"), $.string_literal),

@@ -44,7 +44,7 @@ module.exports = ({ kw }) => ({
   __frame_option_view_as: ($) => seq(kw("VIEW-AS"), kw("DIALOG-BOX")),
 
   __frame_option_skip: ($) =>
-    seq(kw("SKIP"), optional(seq("(", $._expression, ")"))),
+    prec.left(1, seq(kw("SKIP"), optional(seq("(", $._expression, ")")))),
   __frame_option_column_count: ($) =>
     seq(
       field("column_count", $.number_literal),
@@ -57,10 +57,5 @@ module.exports = ({ kw }) => ({
   __frame_option_column: ($) =>
     seq(choice(kw("COLUMN"), kw("COL")), field("column", $._expression)),
   __frame_option_width: ($) => seq(kw("WIDTH"), field("width", $._expression)),
-  __frame_option_down: ($) =>
-    choice(
-      prec(1, seq($._expression, kw("DOWN"))),
-      seq(kw("DOWN"), optional($._expression)),
-      kw("DOWN"),
-    ),
+  __frame_option_down: ($) => seq(optional($._expression), kw("DOWN")),
 });

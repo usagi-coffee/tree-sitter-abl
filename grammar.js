@@ -28,16 +28,12 @@ module.exports = grammar({
   ],
   word: ($) => $.identifier,
   conflicts: ($) => [
-    // Primary expression
     [$._primary_expression, $.function_call],
-    [$._primary_expression, $.__display_item, $.function_call],
-
-    // Specific disambiguations
+    [$._primary_expression, $.function_call, $.__display_item],
     [$.widget_access, $.__widget_keywords],
-    [$.__frame_option_down],
-    [$.__frame_option_skip],
-    [$.frame_phrase],
 
+    // TODO: These should be resolvable
+    [$.frame_phrase],
     [$.property_definition, $.__interface_event],
     [$.__procedure_external_phrase],
   ],
