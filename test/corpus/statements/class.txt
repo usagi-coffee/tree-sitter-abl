@@ -228,14 +228,12 @@ END CLASS.
     (menu_definition
       name: (identifier)
       (menubar)
-      (menu_element
-        (menu_item
-          name: (identifier)
-          (string_literal)))
-      (menu_element
-        (menu_item
-          name: (identifier)
-          (string_literal))))
+      (menu_item
+        name: (identifier)
+        label: (string_literal))
+      (menu_item
+        name: (identifier)
+        label: (string_literal)))
     (submenu_definition
       name: (identifier)
       (menu_element

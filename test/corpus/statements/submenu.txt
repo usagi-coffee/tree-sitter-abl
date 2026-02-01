@@ -469,14 +469,12 @@ DELETE WIDGET mywin.
   (menu_definition
     name: (identifier)
     (menubar)
-    (menu_element
-      (submenu_item
-        name: (identifier)
-        (string_literal)))
-    (menu_element
-      (submenu_item
-        name: (identifier)
-        (string_literal))))
+    (submenu_item
+      name: (identifier)
+      label: (string_literal))
+    (submenu_item
+      name: (identifier)
+      label: (string_literal)))
   (create_widget_statement
     handle: (identifier)
     (assign_phrase

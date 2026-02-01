@@ -18,12 +18,14 @@ module.exports = ({ kw }) => ({
   __put_stream_phrase: ($) => seq(kw("STREAM"), field("name", $.identifier)),
   __put_stream_handle_phrase: ($) =>
     seq(kw("STREAM-HANDLE"), field("handle", $._expression)),
+
   __put_item: ($) =>
     choice(
       $.__put_expression_item,
       alias($.__put_skip_item, $.skip),
       alias($.__put_space_item, $.space),
     ),
+
   __put_expression_item: ($) =>
     seq(
       field("value", $._expression),
@@ -32,18 +34,14 @@ module.exports = ({ kw }) => ({
         seq(choice(kw("AT"), kw("TO")), field("position", $._expression)),
       ),
     ),
+
   __put_skip_item: ($) =>
     prec.right(
-      choice(
-        seq(kw("SKIP"), "(", field("count", $._expression), ")"),
-        kw("SKIP"),
-      ),
+      seq(kw("SKIP"), optional(seq("(", field("count", $._expression), ")"))),
     ),
+
   __put_space_item: ($) =>
     prec.right(
-      choice(
-        seq(kw("SPACE"), "(", field("count", $._expression), ")"),
-        kw("SPACE"),
-      ),
+      seq(kw("SPACE"), optional(seq("(", field("count", $._expression), ")"))),
     ),
 });

@@ -64,10 +64,9 @@ WAIT-FOR WINDOW-CLOSE OF CURRENT-WINDOW.
   (menu_definition
     (identifier)
     (menubar)
-    (menu_element
-      (submenu_item
-        (identifier)
-        (string_literal))))
+    (submenu_item
+      (identifier)
+      (string_literal)))
   (on_statement
     (identifier)
     (identifier)

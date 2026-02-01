@@ -12,14 +12,12 @@ DEFINE MENU mnuMain MENUBAR
   (menu_definition
     name: (identifier)
     (menubar)
-    (menu_element
-      (menu_item
-        name: (identifier)
-        (string_literal)))
-    (menu_element
-      (menu_item
-        name: (identifier)
-        (string_literal)))))
+    (menu_item
+      name: (identifier)
+      label: (string_literal))
+    (menu_item
+      name: (identifier)
+      label: (string_literal))))
 
 ================================================================================
 MENU with submenu
@@ -36,16 +34,13 @@ DEFINE MENU mnuBar MENUBAR
   (menu_definition
     name: (identifier)
     (menubar)
-    (menu_element
-      (submenu_item
-        name: (identifier)
-        (string_literal)))
-    (menu_element
-      (rule))
-    (menu_element
-      (menu_item
-        name: (identifier)
-        (string_literal)))))
+    (submenu_item
+      name: (identifier)
+      label: (string_literal))
+    (rule)
+    (menu_item
+      name: (identifier)
+      label: (string_literal))))
 
 ================================================================================
 MENU popup with title
@@ -61,18 +56,14 @@ DEFINE MENU mnuPopup TITLE "Context Menu"
 (source_code
   (menu_definition
     name: (identifier)
-    (title
-      (string_literal))
-    (menu_element
-      (menu_item
-        name: (identifier)
-        (string_literal)))
-    (menu_element
-      (skip))
-    (menu_element
-      (menu_item
-        name: (identifier)
-        (string_literal)))))
+    title: (string_literal)
+    (menu_item
+      name: (identifier)
+      label: (string_literal))
+    (skip)
+    (menu_item
+      name: (identifier)
+      label: (string_literal))))
 
 ================================================================================
 MENU shared definition
@@ -103,14 +94,11 @@ DEFINE MENU mnuColored
 (source_code
   (menu_definition
     name: (identifier)
-    (fgcolor
-      (number_literal))
-    (bgcolor
-      (number_literal))
-    (menu_element
-      (menu_item
-        name: (identifier)
-        (string_literal)))))
+    fgcolor: (number_literal)
+    bgcolor: (number_literal)
+    (menu_item
+      name: (identifier)
+      label: (string_literal))))
 
 ================================================================================
 MENU - LIKE option
@@ -123,8 +111,7 @@ DEFINE MENU mnuLike LIKE mnuMain.
 (source_code
   (menu_definition
     name: (identifier)
-    (like_option
-      like: (identifier))))
+    like: (identifier)))
 
 ================================================================================
 MENU - TITLE only
@@ -138,12 +125,10 @@ DEFINE MENU mnuTitle TITLE "My Menu"
 (source_code
   (menu_definition
     name: (identifier)
-    (title
-      (string_literal))
-    (menu_element
-      (menu_item
-        name: (identifier)
-        (string_literal)))))
+    title: (string_literal)
+    (menu_item
+      name: (identifier)
+      label: (string_literal))))
 
 ================================================================================
 MENU - NEW SHARED only
@@ -197,12 +182,10 @@ DEFINE MENU mnuDC DCOLOR 5
 (source_code
   (menu_definition
     name: (identifier)
-    (dcolor
-      (number_literal))
-    (menu_element
-      (menu_item
-        name: (identifier)
-        (string_literal)))))
+    dcolor: (number_literal)
+    (menu_item
+      name: (identifier)
+      label: (string_literal))))
 
 ================================================================================
 MENU - PFCOLOR only
@@ -216,12 +199,10 @@ DEFINE MENU mnuPF PFCOLOR 3
 (source_code
   (menu_definition
     name: (identifier)
-    (pfcolor
-      (number_literal))
-    (menu_element
-      (menu_item
-        name: (identifier)
-        (string_literal)))))
+    pfcolor: (number_literal)
+    (menu_item
+      name: (identifier)
+      label: (string_literal))))
 
 ================================================================================
 MENU - FONT only
@@ -235,12 +216,10 @@ DEFINE MENU mnuFont FONT 2
 (source_code
   (menu_definition
     name: (identifier)
-    (font
-      (number_literal))
-    (menu_element
-      (menu_item
-        name: (identifier)
-        (string_literal)))))
+    font: (number_literal)
+    (menu_item
+      name: (identifier)
+      label: (string_literal))))
 
 ================================================================================
 MENU - All colors
@@ -258,18 +237,13 @@ DEFINE MENU mnuAllColors
 (source_code
   (menu_definition
     name: (identifier)
-    (fgcolor
-      (number_literal))
-    (bgcolor
-      (number_literal))
-    (dcolor
-      (number_literal))
-    (pfcolor
-      (number_literal))
-    (menu_element
-      (menu_item
-        name: (identifier)
-        (string_literal)))))
+    fgcolor: (number_literal)
+    bgcolor: (number_literal)
+    dcolor: (number_literal)
+    pfcolor: (number_literal)
+    (menu_item
+      name: (identifier)
+      label: (string_literal))))
 
 ================================================================================
 MENU - MENU-ITEM without label
@@ -284,12 +258,10 @@ DEFINE MENU mnuNoLab
 (source_code
   (menu_definition
     name: (identifier)
-    (menu_element
-      (menu_item
-        name: (identifier)))
-    (menu_element
-      (menu_item
-        name: (identifier)))))
+    (menu_item
+      name: (identifier))
+    (menu_item
+      name: (identifier))))
 
 ================================================================================
 MENU - MENU-ITEM with ACCELERATOR
@@ -304,16 +276,14 @@ DEFINE MENU mnuAcc
 (source_code
   (menu_definition
     name: (identifier)
-    (menu_element
-      (menu_item
-        name: (identifier)
-        (string_literal)
-        (string_literal)))
-    (menu_element
-      (menu_item
-        name: (identifier)
-        (string_literal)
-        (string_literal)))))
+    (menu_item
+      name: (identifier)
+      label: (string_literal)
+      accelerator: (string_literal))
+    (menu_item
+      name: (identifier)
+      label: (string_literal)
+      accelerator: (string_literal))))
 
 ================================================================================
 MENU - SUB-MENU without label
@@ -328,13 +298,11 @@ DEFINE MENU mnuSl
 (source_code
   (menu_definition
     name: (identifier)
-    (menu_element
-      (submenu_item
-        name: (identifier)))
-    (menu_element
-      (submenu_item
-        name: (identifier)
-        (string_literal)))))
+    (submenu_item
+      name: (identifier))
+    (submenu_item
+      name: (identifier)
+      label: (string_literal))))
 
 ================================================================================
 MENU - SUB-MENU DISABLED
@@ -349,13 +317,11 @@ DEFINE MENU mnuSMD
 (source_code
   (menu_definition
     name: (identifier)
-    (menu_element
-      (submenu_item
-        name: (identifier)))
-    (menu_element
-      (submenu_item
-        name: (identifier)
-        (string_literal)))))
+    (submenu_item
+      name: (identifier))
+    (submenu_item
+      name: (identifier)
+      label: (string_literal))))
 
 ================================================================================
 MENU - MENU-ITEM DISABLED
@@ -370,14 +336,12 @@ DEFINE MENU mnuMID
 (source_code
   (menu_definition
     name: (identifier)
-    (menu_element
-      (menu_item
-        name: (identifier)
-        (string_literal)))
-    (menu_element
-      (menu_item
-        name: (identifier)
-        (string_literal)))))
+    (menu_item
+      name: (identifier)
+      label: (string_literal))
+    (menu_item
+      name: (identifier)
+      label: (string_literal))))
 
 ================================================================================
 MENU - Multiple RULEs
@@ -395,22 +359,16 @@ DEFINE MENU mnuMRules TITLE "Rules"
 (source_code
   (menu_definition
     name: (identifier)
-    (title
-      (string_literal))
-    (menu_element
-      (rule))
-    (menu_element
-      (rule))
-    (menu_element
-      (menu_item
-        name: (identifier)
-        (string_literal)))
-    (menu_element
-      (rule))
-    (menu_element
-      (menu_item
-        name: (identifier)
-        (string_literal)))))
+    title: (string_literal)
+    (rule)
+    (rule)
+    (menu_item
+      name: (identifier)
+      label: (string_literal))
+    (rule)
+    (menu_item
+      name: (identifier)
+      label: (string_literal))))
 
 ================================================================================
 MENU - Minimal
@@ -450,38 +408,27 @@ DEFINE MENU mnuComplete
 (source_code
   (menu_definition
     name: (identifier)
-    (fgcolor
-      (number_literal))
-    (bgcolor
-      (number_literal))
-    (dcolor
-      (number_literal))
-    (pfcolor
-      (number_literal))
-    (font
-      (number_literal))
+    fgcolor: (number_literal)
+    bgcolor: (number_literal)
+    dcolor: (number_literal)
+    pfcolor: (number_literal)
+    font: (number_literal)
     (menubar)
-    (menu_element
-      (menu_item
-        name: (identifier)
-        (string_literal)
-        (string_literal)))
-    (menu_element
-      (menu_item
-        name: (identifier)
-        (string_literal)))
-    (menu_element
-      (rule))
-    (menu_element
-      (submenu_item
-        name: (identifier)
-        (string_literal)))
-    (menu_element
-      (rule))
-    (menu_element
-      (menu_item
-        name: (identifier)
-        (string_literal)))))
+    (menu_item
+      name: (identifier)
+      label: (string_literal)
+      accelerator: (string_literal))
+    (menu_item
+      name: (identifier)
+      label: (string_literal))
+    (rule)
+    (submenu_item
+      name: (identifier)
+      label: (string_literal))
+    (rule)
+    (menu_item
+      name: (identifier)
+      label: (string_literal))))
 
 ================================================================================
 MENU - Reference snippet
@@ -567,18 +514,15 @@ WAIT-FOR CHOOSE OF MENU-ITEM quititem.
   (menu_definition
     (identifier)
     (menubar)
-    (menu_element
-      (submenu_item
-        (identifier)
-        (string_literal)))
-    (menu_element
-      (submenu_item
-        (identifier)
-        (string_literal)))
-    (menu_element
-      (submenu_item
-        (identifier)
-        (string_literal))))
+    (submenu_item
+      (identifier)
+      (string_literal))
+    (submenu_item
+      (identifier)
+      (string_literal))
+    (submenu_item
+      (identifier)
+      (string_literal)))
   (on_statement
     (identifier)
     (identifier)

@@ -24,7 +24,8 @@ PUT-KEY-VALUE SECTION "app" KEY "debug" VALUE "true" NO-ERROR.
   (put_key_value_statement
     section: (string_literal)
     key: (string_literal)
-    value: (string_literal)))
+    value: (string_literal)
+    (no_error)))
 
 ================================================================================
 PUT-KEY-VALUE - reference examples

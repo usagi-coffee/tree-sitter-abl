@@ -18,6 +18,6 @@ module.exports = ({ kw }) => ({
           choice(field("number", $._expression), kw("ALL")),
         ),
       ),
-      optional(kw("NO-ERROR")),
+      optional(alias(kw("NO-ERROR"), $.no_error)),
     ),
 });
