@@ -15,36 +15,42 @@ SET field1 GO-ON(f1 f2).
 
 (source_code
   (set_statement
-    record: (identifier))
-  (set_statement
-    (set_item
-      field: (identifier))
-    (set_item
-      field: (identifier))
-    (set_item
+    (field
       field: (identifier)))
   (set_statement
-    (set_item
+    (field
+      field: (identifier))
+    (field
+      field: (identifier))
+    (field
+      field: (identifier)))
+  (set_statement
+    (field
       field: (identifier)
       when: (binary_expression
         (identifier)
         (number_literal))))
   (set_statement
-    record: (identifier))
+    (field
+      field: (identifier)))
   (set_statement
     (stream_phrase
       stream: (identifier))
-    record: (identifier))
+    (field
+      field: (identifier)))
   (set_statement
-    record: (identifier)
+    (field
+      field: (identifier))
     (frame_phrase
       frame: (identifier)))
   (set_statement
-    record: (identifier)
+    (field
+      field: (identifier))
     (frame_phrase
-      frame: (identifier)))
+      frame: (identifier))
+    (no_error))
   (set_statement
-    (set_item
+    (field
       field: (identifier))
     (go_on_phrase
       (identifier)
@@ -67,22 +73,22 @@ SET field1 FORMAT "x(10)" WHEN ok
 
 (source_code
   (set_statement
-    (set_item
+    (field
       field: (identifier)
       (format_phrase
         format: (string_literal))
       when: (identifier))
-    (set_item
+    (field
       field: (identifier)
       (format_phrase
         format: (string_literal)))
-    (set_item
+    (field
       constant: (string_literal)
       (at_phrase))
-    (set_item
+    (field
       field: (identifier)
       value: (number_literal))
-    (set_item)
+    (field)
     (editing_phrase
       (readkey_statement))))
 
@@ -137,19 +143,19 @@ SET Customer EXCEPT Comments WITH FRAME fCust NO-ERROR.
           left: (identifier)
           right: (identifier)))
       (set_statement
-        (set_item
+        (field
           field: (qualified_name
             left: (identifier)
             right: (identifier)))
-        (set_item
+        (field
           field: (qualified_name
             left: (identifier)
             right: (identifier)))
-        (set_item
+        (field
           field: (qualified_name
             left: (identifier)
             right: (identifier)))
-        (set_item
+        (field
           field: (qualified_name
             left: (identifier)
             right: (identifier))))))
@@ -168,11 +174,11 @@ SET Customer EXCEPT Comments WITH FRAME fCust NO-ERROR.
           left: (identifier)
           right: (identifier)))
       (set_statement
-        (set_item
+        (field
           field: (qualified_name
             left: (identifier)
             right: (identifier)))
-        (set_item
+        (field
           field: (qualified_name
             left: (identifier)
             right: (identifier)))
@@ -198,11 +204,11 @@ SET Customer EXCEPT Comments WITH FRAME fCust NO-ERROR.
               left: (identifier)
               right: (identifier)))
           (set_statement
-            (set_item
+            (field
               field: (qualified_name
                 left: (identifier)
                 right: (identifier)))
-            (set_item
+            (field
               field: (qualified_name
                 left: (identifier)
                 right: (identifier)))
@@ -306,13 +312,13 @@ SET Customer EXCEPT Comments WITH FRAME fCust NO-ERROR.
   (set_statement
     (stream_phrase
       handle: (identifier))
-    (set_item
+    (field
       field: (identifier))
-    (set_item
+    (field
       (number_literal))
-    (set_item
+    (field
       (number_literal))
-    (set_item)
+    (field)
     (go_on_phrase
       (identifier)
       (identifier)))
@@ -320,4 +326,5 @@ SET Customer EXCEPT Comments WITH FRAME fCust NO-ERROR.
     record: (identifier)
     except: (identifier)
     (frame_phrase
-      frame: (identifier))))
+      frame: (identifier))
+    (no_error)))

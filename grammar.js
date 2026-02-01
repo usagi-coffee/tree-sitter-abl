@@ -31,12 +31,10 @@ module.exports = grammar({
     // Primary expression
     [$._primary_expression, $.function_call],
     [$._primary_expression, $.__display_item, $.function_call],
-    [$._primary_expression, $.__in_frame_target],
 
     // Specific disambiguations
     [$.__prompt_for_record_body, $.__prompt_for_field_target],
     [$.__update_record_body, $.__update_field_target],
-    [$.__set_record_body, $.__set_field_target],
     [$.widget_access, $.__widget_keywords],
     [$.__frame_option_down],
     [$.__frame_option_skip],

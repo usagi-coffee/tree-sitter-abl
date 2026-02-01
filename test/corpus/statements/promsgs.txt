@@ -70,7 +70,7 @@ END.
     (identifier)
     (no_undo))
   (set_statement
-    (set_item
+    (field
       (identifier))
     (help_phrase
       (string_literal)))

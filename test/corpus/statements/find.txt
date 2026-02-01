@@ -343,7 +343,8 @@ END.
   (repeat_statement
     (body
       (set_statement
-        record: (identifier))
+        (field
+          field: (identifier)))
       (find_statement
         table: (identifier)
         (where_phrase

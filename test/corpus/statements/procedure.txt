@@ -502,7 +502,7 @@ END PROCEDURE.
   (repeat_statement
     (body
       (set_statement
-        (set_item
+        (field
           field: (identifier))
         (validate_option
           condition: (binary_expression

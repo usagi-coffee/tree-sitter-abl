@@ -177,13 +177,13 @@ DISPLAY STREAM rpt ItemNum ItemName WITH NO-LABELS NO-BOX.
   (stream_definition
     (identifier))
   (set_statement
-    (set_item
+    (field
       (identifier)
       (label_option
         (string_literal)))
-    (set_item
+    (field
       (number_literal))
-    (set_item
+    (field
       (identifier)
       (label_option
         (string_literal)))

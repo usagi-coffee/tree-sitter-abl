@@ -66,9 +66,9 @@ INPUT CLOSE.
     (shell_variable)
     (shell_variable))
   (set_statement
-    (set_item
+    (field
       (identifier))
-    (set_item
+    (field
       (identifier))
     (frame_phrase
       (identifier)
@@ -101,7 +101,8 @@ INPUT CLOSE.
   (input_through_statement
     (identifier))
   (set_statement
-    (identifier))
+    (field
+      (identifier)))
   (input_statement)
   (assignment_statement
     (in_frame_expression
@@ -116,7 +117,8 @@ INPUT CLOSE.
   (repeat_statement
     (body
       (set_statement
-        (identifier)
+        (field
+          (identifier))
         (frame_phrase
           (no_box)
           (no_labels)

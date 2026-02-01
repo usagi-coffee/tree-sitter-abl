@@ -138,11 +138,11 @@ OVERLAY(cLong, 1, 5, "COLUMN") = "Hi".
   (repeat_statement
     (body
       (set_statement
-        (set_item
+        (field
           (identifier)
           (label_option
             (string_literal)))
-        (set_item
+        (field
           (identifier)
           (label_option
             (string_literal)))

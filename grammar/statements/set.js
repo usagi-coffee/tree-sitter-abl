@@ -1,35 +1,49 @@
 module.exports = ({ kw }) => ({
-  set_statement: ($) => seq(kw("SET"), $.__set_body, $._terminator),
+  set_statement: ($) =>
+    seq(
+      kw("SET"),
+      $.__set_body,
+      optional(alias(kw("NO-ERROR"), $.no_error)),
+      $._terminator,
+    ),
 
   __set_body: ($) =>
-    choice(prec.dynamic(1, $.__set_record_body), $.__set_fields_body),
+    seq(
+      optional(alias($.__set_stream_phrase, $.stream_phrase)),
+      optional(kw("UNLESS-HIDDEN")),
+      choice($.__set_record_body, $.__set_fields_body),
+    ),
+
   __set_record_body: ($) =>
-    seq(
-      optional(alias($.__set_stream_phrase, $.stream_phrase)),
-      optional(kw("UNLESS-HIDDEN")),
-      field("record", choice($.identifier, $.qualified_name)),
-      optional(seq(kw("EXCEPT"), repeat1(field("except", $.identifier)))),
-      optional($.frame_phrase),
-      optional(kw("NO-ERROR")),
+    prec(
+      -1,
+      seq(
+        field("record", choice($.identifier, $.qualified_name)),
+        optional(seq(kw("EXCEPT"), repeat1(field("except", $.identifier)))),
+        optional($.frame_phrase),
+      ),
     ),
+
   __set_fields_body: ($) =>
-    seq(
-      optional(alias($.__set_stream_phrase, $.stream_phrase)),
-      optional(kw("UNLESS-HIDDEN")),
-      repeat1(alias($.__set_item, $.set_item)),
-      optional(alias($.__set_go_on, $.go_on_phrase)),
-      optional(alias($.__set_validate_option, $.validate_option)),
-      optional(alias($.__set_help_phrase, $.help_phrase)),
-      optional($.frame_phrase),
-      optional($.editing_phrase),
-      optional(kw("NO-ERROR")),
+    prec(
+      -1,
+      seq(
+        repeat1(alias($.__set_field, $.field)),
+        optional(alias($.__set_go_on, $.go_on_phrase)),
+        optional(alias($.__set_validate_option, $.validate_option)),
+        optional(alias($.__set_help_phrase, $.help_phrase)),
+        optional($.frame_phrase),
+        optional($.editing_phrase),
+      ),
     ),
+
   __set_stream_phrase: ($) =>
     choice(
       seq(kw("STREAM"), field("stream", $.identifier)),
       seq(kw("STREAM-HANDLE"), field("handle", $._expression)),
     ),
-  __set_item: ($) =>
+
+  __set_field: ($) =>
     choice(
       prec.right(
         seq(
@@ -62,6 +76,7 @@ module.exports = ({ kw }) => ({
       seq(kw("SPACE"), optional(seq("(", $._expression, ")"))),
       "^",
     ),
+
   __set_field_target: ($) => choice($.identifier, $.qualified_name),
   __set_field_phrase: ($) =>
     repeat1(

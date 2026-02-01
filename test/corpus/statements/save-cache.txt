@@ -76,7 +76,7 @@ END.
       (string_literal))
     (body
       (set_statement
-        (set_item
+        (field
           (identifier)
           (label_option
             (string_literal)))

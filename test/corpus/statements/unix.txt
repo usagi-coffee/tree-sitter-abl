@@ -75,7 +75,7 @@ UNIX VALUE("cp usr/myfile.").
           (centered)
           (identifier)))
       (set_statement
-        (set_item
+        (field
           (identifier)
           (label_option
             (string_literal)))

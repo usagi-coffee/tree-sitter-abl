@@ -872,7 +872,8 @@ END.
           (identifier)
           (identifier)))
       (set_statement
-        (identifier))
+        (field
+          (identifier)))
       (assignment_statement
         (qualified_name
           (identifier)

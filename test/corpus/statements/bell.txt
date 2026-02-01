@@ -13,19 +13,21 @@ BELL.
 BELL - reference snippet
 ===============================================================================
 
-DEFINE VARIABLE outfile AS CHARACTER NO-UNDO FORMAT "x(8)"
-LABEL "Output file name".
+DEFINE VARIABLE outfile AS CHARACTER NO-UNDO FORMAT "x(8)" LABEL "Output file name".
+
 getfile:
 DO ON ERROR UNDO, RETRY:
-SET outfile WITH SIDE-LABELS.
-IF SEARCH(outfile) = outfile THEN DO:
-MESSAGE "A file named" outfile "already exists in your directory".
-MESSAGE "Please use another name".
-BELL.
-UNDO getfile, RETRY getfile.
+  SET outfile WITH SIDE-LABELS.
+  IF SEARCH(outfile) = outfile THEN DO:
+    MESSAGE "A file named" outfile "already exists in your directory".
+    MESSAGE "Please use another name".
+    BELL.
+    UNDO getfile, RETRY getfile.
+  END.
 END.
-END.
+
 OUTPUT TO VALUE(outfile).
+
 FOR EACH Customer NO-LOCK:
 DISPLAY Customer.Name Customer.CreditLimit.
 END.
@@ -46,7 +48,8 @@ END.
     (on_error_phrase)
     (body
       (set_statement
-        (identifier)
+        (field
+          (identifier))
         (frame_phrase
           (side_labels)))
       (if_statement

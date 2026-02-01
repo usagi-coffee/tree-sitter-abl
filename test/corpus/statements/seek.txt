@@ -67,7 +67,8 @@ SEEK STREAM-HANDLE hS TO 100.
   (seek_statement
     (identifier))
   (set_statement
-    (identifier))
+    (field
+      (identifier)))
   (display_statement
     (identifier))
   (input_statement)

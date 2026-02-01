@@ -8,10 +8,13 @@ module.exports = ({ kw }) => ({
     ),
 
   __in_frame_target: ($) =>
-    choice(
-      alias($.qualified_name, $.identifier),
-      $.identifier,
-      $.object_access,
-      $.scoped_name,
+    prec(
+      -1,
+      choice(
+        alias($.qualified_name, $.identifier),
+        $.identifier,
+        $.object_access,
+        $.scoped_name,
+      ),
     ),
 });
