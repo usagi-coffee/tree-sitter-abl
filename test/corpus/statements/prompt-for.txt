@@ -312,8 +312,7 @@ PROMPT-FOR STREAM-HANDLE hS field1 field2 IN WINDOW wMain WITH FRAME fMain.
             (string_literal)))
         (frame_phrase
           frame: (identifier)
-          (frame_option
-            row: (number_literal))
+          row: (number_literal)
           (side_labels)))
       (find_statement
         table: (identifier)
@@ -336,7 +335,7 @@ PROMPT-FOR STREAM-HANDLE hS field1 field2 IN WINDOW wMain WITH FRAME fMain.
             left: (identifier)
             right: (identifier)))
         (frame_phrase
-          (down
+          value: (down
             (number_literal))
           (no_hide)))))
   (prompt_for_statement

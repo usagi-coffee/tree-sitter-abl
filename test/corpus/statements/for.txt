@@ -149,8 +149,7 @@ END.
       (no_lock))
     (frame_phrase
       frame: (identifier)
-      (frame_option
-        width: (number_literal)))
+      width: (number_literal))
     (body
       (put_statement
         value: (qualified_name

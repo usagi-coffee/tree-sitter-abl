@@ -112,8 +112,7 @@ RELEASE sports.Customer NO-ERROR.
         right: (identifier)))
     (frame_phrase
       frame: (identifier)
-      (frame_option
-        column: (number_literal))))
+      column: (number_literal)))
   (open_query_statement
     query: (identifier)
     (record_phrase
@@ -159,7 +158,6 @@ RELEASE sports.Customer NO-ERROR.
           record: (identifier)
           (frame_phrase
             frame: (identifier)
-            (frame_option)
             title: (string_literal)))
         (assignment_statement
           left: (identifier)

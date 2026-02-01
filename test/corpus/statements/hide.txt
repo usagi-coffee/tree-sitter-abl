@@ -48,19 +48,15 @@ HIDE ALL NO-PAUSE IN WINDOW w1.
       (string_literal))
     (frame_phrase
       (identifier)
-      (frame_option
-        (number_literal))
-      (frame_option
-        (number_literal))))
+      (number_literal)
+      (number_literal)))
   (display_statement
     (field
       (string_literal))
     (frame_phrase
       (identifier)
-      (frame_option
-        (number_literal))
-      (frame_option
-        (number_literal))
+      (number_literal)
+      (number_literal)
       (down
         (number_literal))))
   (message_statement

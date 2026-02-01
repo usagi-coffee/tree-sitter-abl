@@ -30,7 +30,6 @@ module.exports = grammar({
   conflicts: ($) => [
     [$._primary_expression, $.function_call],
     [$.widget_access, $.__widget_keywords],
-    [$.frame_phrase],
   ],
   inline: ($) => [
     $.__find_record_name,
@@ -136,7 +135,7 @@ module.exports = grammar({
             ),
           ),
         ),
-      null_literal: ($) => "?",
+      null_literal: ($) => token("?"),
       boolean_literal: ($) => token(/TRUE|FALSE|YES|NO/i),
       file_name: ($) => /[A-Za-z0-9_\\/.-]+\.i/i,
       procedure_name: ($) => /[A-Za-z0-9_\\/.-]+\.pl?/i,

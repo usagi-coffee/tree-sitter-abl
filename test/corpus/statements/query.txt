@@ -509,8 +509,7 @@ DEFINE QUERY qExceptAll FOR Customer EXCEPT ().
       field: (identifier))
     (frame_phrase
       frame: (identifier)
-      (frame_option
-        column: (number_literal))))
+      column: (number_literal)))
   (on_statement
     event: (identifier)
     widget: (identifier)

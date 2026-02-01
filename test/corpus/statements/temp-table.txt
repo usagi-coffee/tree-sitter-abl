@@ -534,10 +534,8 @@ WAIT-FOR CHOOSE OF cancel-butt OR WINDOW-CLOSE OF CURRENT-WINDOW.
     (frame_phrase
       frame: (identifier)
       (side_labels)
-      (frame_option
-        width: (number_literal))
-      title: (string_literal)
-      (frame_option)))
+      width: (number_literal)
+      title: (string_literal)))
   (for_statement
     (record
       table: (identifier)

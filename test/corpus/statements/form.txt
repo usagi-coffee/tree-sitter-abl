@@ -239,10 +239,8 @@ END.
       (identifier))
     (frame_phrase
       (identifier)
-      (frame_option
-        (identifier))
-      (frame_option
-        (identifier))
+      (identifier)
+      (identifier)
       (down
         (identifier))))
   (do_block

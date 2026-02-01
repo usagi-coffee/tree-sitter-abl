@@ -98,8 +98,7 @@ REPOSITION qCust TO ROWID rTop, rChild FOR TENANT tenantId NO-ERROR.
       (identifier))
     (frame_phrase
       (identifier)
-      (frame_option
-        (number_literal))))
+      (number_literal)))
   (on_statement
     (identifier)
     (identifier)
@@ -114,8 +113,7 @@ REPOSITION qCust TO ROWID rTop, rChild FOR TENANT tenantId NO-ERROR.
           (frame_phrase
             (identifier)
             (centered)
-            (frame_option
-              (number_literal))
+            (number_literal)
             (overlay)))
         (hide_statement
           (widget_phrase
@@ -199,8 +197,7 @@ REPOSITION qCust TO ROWID rTop, rChild FOR TENANT tenantId NO-ERROR.
       (frame_phrase
         (identifier)
         (centered)
-        (frame_option
-          (number_literal))
+        (number_literal)
         (side_labels)
         (overlay))))
   (reposition_statement

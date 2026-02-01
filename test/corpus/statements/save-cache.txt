@@ -83,8 +83,7 @@ END.
         (frame_phrase
           (identifier)
           (side_labels)
-          (string_literal)
-          (frame_option)))
+          (string_literal)))
       (if_statement
         (binary_expression
           (identifier)

@@ -399,8 +399,7 @@ END.
     (query_tuning
       (number_literal))
     (frame_phrase
-      (frame_option
-        width: (number_literal)))
+      width: (number_literal))
     (body
       (display_statement
         (field

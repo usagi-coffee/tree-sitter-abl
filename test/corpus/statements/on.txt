@@ -124,10 +124,9 @@ ON F5 ENDKEY.
     field: (identifier)
     (frame_phrase
       (centered)
-      (frame_option
-        row: (binary_expression
-          (identifier)
-          (number_literal)))))
+      row: (binary_expression
+        (identifier)
+        (number_literal))))
   (frame_definition
     name: (identifier)
     field: (qualified_name
@@ -151,9 +150,8 @@ ON F5 ENDKEY.
     (frame_phrase
       (centered)
       title: (string_literal)
-      (frame_option
-        row: (number_literal))
-      column_count: (number_literal)))
+      row: (number_literal)
+      column: (number_literal)))
   (on_statement
     event: (identifier)
     widget: (identifier)

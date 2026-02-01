@@ -618,7 +618,7 @@ DEFINE INPUT PARAMETER pExtent0 AS INTEGER EXTENT 0.
             left: (identifier)
             right: (identifier)))
         (frame_phrase
-          (down
+          value: (down
             (number_literal))))
       (assignment_statement
         left: (identifier)

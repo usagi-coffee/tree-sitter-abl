@@ -73,8 +73,7 @@ UNIX VALUE("cp usr/myfile.").
         (field
           (string_literal))
         (frame_phrase
-          (frame_option
-            (number_literal))
+          (number_literal)
           (centered)
           (identifier)))
       (set_statement
@@ -83,8 +82,7 @@ UNIX VALUE("cp usr/myfile.").
           (label_option
             (string_literal)))
         (frame_phrase
-          (frame_option
-            (number_literal))
+          (number_literal)
           (centered)
           (identifier)))
       (if_statement

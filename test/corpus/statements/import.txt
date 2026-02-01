@@ -146,7 +146,6 @@ INPUT CLOSE.
         (field
           (identifier))
         (frame_phrase
-          (down)
           (identifier)))
       (down_statement
         (frame_phrase

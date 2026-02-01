@@ -76,8 +76,7 @@ DISPLAY "Back to 80 columns." WITH CENTERED.
         (field
           (identifier))
         (frame_phrase
-          (frame_option
-            (number_literal))))))
+          (number_literal)))))
   (output_statement)
   (terminal_statement
     (string_literal))

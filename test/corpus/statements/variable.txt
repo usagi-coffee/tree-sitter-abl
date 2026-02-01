@@ -617,8 +617,7 @@ END.
       (string_literal))
     (frame_phrase
       (centered)
-      (frame_option
-        (number_literal))
+      (number_literal)
       (identifier)))
   (repeat_statement
     (body
@@ -633,8 +632,7 @@ END.
         (frame_phrase
           (identifier)
           (centered)
-          (frame_option
-            (number_literal))
+          (number_literal)
           (side_labels)))
       (if_statement
         (binary_expression
@@ -750,8 +748,7 @@ END.
       (down
         (number_literal))
       (centered)
-      (frame_option
-        (number_literal))
+      (number_literal)
       (string_literal))
     (body
       (display_statement

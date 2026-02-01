@@ -418,7 +418,6 @@ OUTPUT STREAM due CLOSE.
                       (number_literal))
                     (frame_phrase
                       (no_box)
-                      (down)
                       (identifier)))))))))))
   (output_statement
     (stream_phrase
