@@ -44,7 +44,7 @@ VALIDATE sports.Item NO-ERROR.
     (identifier)
     (body
       (prompt_for_statement
-        (prompt_for_item
+        (field
           (qualified_name
             (identifier)
             (identifier))))

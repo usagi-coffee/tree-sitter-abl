@@ -636,7 +636,7 @@ DEFINE INPUT PARAMETER pExtent0 AS INTEGER EXTENT 0.
     type: (identifier)
     (no_undo))
   (prompt_for_statement
-    (prompt_for_item
+    (field
       field: (identifier)
       (label_option
         (string_literal))))

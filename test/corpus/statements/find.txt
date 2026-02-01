@@ -272,7 +272,7 @@ END.
     table: (identifier)
     constant: (number_literal))
   (prompt_for_statement
-    (prompt_for_item
+    (field
       field: (qualified_name
         left: (identifier)
         right: (identifier))))
@@ -285,7 +285,7 @@ END.
   (repeat_statement
     (body
       (prompt_for_statement
-        (prompt_for_item
+        (field
           field: (qualified_name
             left: (identifier)
             right: (identifier))))

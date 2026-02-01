@@ -16,14 +16,14 @@ PROMPT-FOR field1 GO-ON(f1 f2).
   (prompt_for_statement
     record: (identifier))
   (prompt_for_statement
-    (prompt_for_item
+    (field
       field: (identifier))
-    (prompt_for_item
+    (field
       field: (identifier))
-    (prompt_for_item
+    (field
       field: (identifier)))
   (prompt_for_statement
-    (prompt_for_item
+    (field
       field: (identifier)
       when: (binary_expression
         (identifier)
@@ -38,7 +38,7 @@ PROMPT-FOR field1 GO-ON(f1 f2).
     (frame_phrase
       frame: (identifier)))
   (prompt_for_statement
-    (prompt_for_item
+    (field
       field: (identifier))
     (go_on_phrase
       (identifier)
@@ -60,19 +60,19 @@ PROMPT-FOR field1 FORMAT "x(10)" WHEN ok
 
 (source_code
   (prompt_for_statement
-    (prompt_for_item
+    (field
       field: (identifier)
       (format_phrase
         format: (string_literal))
       when: (identifier))
-    (prompt_for_item
+    (field
       field: (identifier)
       (format_phrase
         format: (string_literal)))
-    (prompt_for_item
+    (field
       constant: (string_literal)
       (at_phrase))
-    (prompt_for_item)
+    (field)
     (editing_phrase
       (readkey_statement))))
 
@@ -93,7 +93,7 @@ PROMPT-FOR "Notes:" TO 20 VIEW-AS TEXT FGCOLOR 12 BGCOLOR 1 FONT 2 field1.
     (frame_phrase
       frame: (identifier)))
   (prompt_for_statement
-    (prompt_for_item
+    (field
       constant: (string_literal)
       (to_phrase)
       (view_as_phrase
@@ -104,7 +104,7 @@ PROMPT-FOR "Notes:" TO 20 VIEW-AS TEXT FGCOLOR 12 BGCOLOR 1 FONT 2 field1.
         (number_literal))
       (font_option
         (number_literal)))
-    (prompt_for_item
+    (field
       field: (identifier))))
 
 ================================================================================
@@ -263,7 +263,7 @@ PROMPT-FOR STREAM-HANDLE hS field1 field2 IN WINDOW wMain WITH FRAME fMain.
   (repeat_statement
     (body
       (prompt_for_statement
-        (prompt_for_item
+        (field
           field: (qualified_name
             left: (identifier)
             right: (identifier))))
@@ -296,7 +296,7 @@ PROMPT-FOR STREAM-HANDLE hS field1 field2 IN WINDOW wMain WITH FRAME fMain.
   (repeat_statement
     (body
       (prompt_for_statement
-        (prompt_for_item
+        (field
           field: (qualified_name
             left: (identifier)
             right: (identifier))
@@ -331,22 +331,22 @@ PROMPT-FOR STREAM-HANDLE hS field1 field2 IN WINDOW wMain WITH FRAME fMain.
   (prompt_for_statement
     (stream_phrase
       stream: (identifier))
-    (prompt_for_item
+    (field
       field: (identifier))
-    (prompt_for_item
+    (field
       (number_literal))
-    (prompt_for_item
+    (field
       (number_literal))
-    (prompt_for_item)
+    (field)
     (go_on_phrase
       (identifier)
       (identifier)))
   (prompt_for_statement
     (stream_phrase
       handle: (identifier))
-    (prompt_for_item
+    (field
       field: (identifier))
-    (prompt_for_item
+    (field
       field: (identifier))
     window: (identifier)
     (frame_phrase

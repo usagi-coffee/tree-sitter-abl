@@ -107,7 +107,7 @@ REPOSITION qCust TO ROWID rTop, rChild FOR TENANT tenantId NO-ERROR.
     (do_block
       (body
         (prompt_for_statement
-          (prompt_for_item
+          (field
             (identifier)
             (label_option
               (string_literal)))

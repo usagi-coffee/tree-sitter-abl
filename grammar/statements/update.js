@@ -2,15 +2,21 @@ module.exports = ({ kw }) => ({
   update_statement: ($) => seq(kw("UPDATE"), $.__update_body, $._terminator),
 
   __update_body: ($) =>
-    choice(prec.dynamic(1, $.__update_record_body), $.__update_fields_body),
+    seq(
+      choice($.__update_record_body, $.__update_fields_body),
+      optional(alias(kw("NO-ERROR"), $.no_error)),
+    ),
 
   __update_record_body: ($) =>
-    seq(
-      field("record", choice($.identifier, $.qualified_name)),
-      optional(seq(kw("EXCEPT"), repeat1(field("except", $.identifier)))),
-      optional($.frame_phrase),
-      optional(kw("NO-ERROR")),
+    prec(
+      1,
+      seq(
+        field("record", choice($.identifier, $.qualified_name)),
+        optional(seq(kw("EXCEPT"), repeat1(field("except", $.identifier)))),
+        optional($.frame_phrase),
+      ),
     ),
+
   __update_fields_body: ($) =>
     seq(
       optional(kw("UNLESS-HIDDEN")),
@@ -18,8 +24,8 @@ module.exports = ({ kw }) => ({
       optional(alias($.__update_go_on, $.go_on_phrase)),
       optional($.frame_phrase),
       optional($.editing_phrase),
-      optional(kw("NO-ERROR")),
     ),
+
   __update_item: ($) =>
     choice(
       prec.right(

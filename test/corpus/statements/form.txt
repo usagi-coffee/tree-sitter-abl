@@ -181,7 +181,7 @@ END.
             (number_literal))
           (centered)))
       (prompt_for_statement
-        (prompt_for_item
+        (field
           (qualified_name
             (identifier)
             (identifier)))

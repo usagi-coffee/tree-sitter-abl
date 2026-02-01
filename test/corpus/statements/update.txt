@@ -38,7 +38,8 @@ UPDATE field1 GO-ON(f1 f2).
   (update_statement
     record: (identifier)
     (frame_phrase
-      frame: (identifier)))
+      frame: (identifier))
+    (no_error))
   (update_statement
     (update_item
       field: (identifier))
@@ -97,7 +98,8 @@ UPDATE "Header" TO 30 Customer.Name.
     except: (identifier)
     except: (identifier)
     (frame_phrase
-      frame: (identifier)))
+      frame: (identifier))
+    (no_error))
   (update_statement
     (update_item
       constant: (string_literal)
@@ -232,7 +234,7 @@ UPDATE field1 SPACE(2) SKIP(1) ^.
   (repeat_statement
     (body
       (prompt_for_statement
-        (prompt_for_item
+        (field
           (qualified_name
             (identifier)
             (identifier))))

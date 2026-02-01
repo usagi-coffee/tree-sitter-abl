@@ -3,28 +3,31 @@ module.exports = ({ kw }) => ({
     seq(kw("PROMPT-FOR"), $.__prompt_for_body, $._terminator),
 
   __prompt_for_body: ($) =>
-    choice(
-      prec.dynamic(1, $.__prompt_for_record_body),
-      $.__prompt_for_fields_body,
-    ),
-
-  __prompt_for_record_body: ($) =>
     seq(
       optional(alias($.__prompt_for_stream_phrase, $.stream_phrase)),
       optional(kw("UNLESS-HIDDEN")),
-      field("record", $.identifier),
-      optional(
-        seq(kw("EXCEPT"), repeat1(field("field", $.__prompt_for_field_target))),
+      choice($.__prompt_for_record_body, $.__prompt_for_fields_body),
+    ),
+
+  __prompt_for_record_body: ($) =>
+    prec(
+      1,
+      seq(
+        field("record", $.identifier),
+        optional(
+          seq(
+            kw("EXCEPT"),
+            repeat1(field("field", $.__prompt_for_field_target)),
+          ),
+        ),
+        optional(seq(kw("IN"), kw("WINDOW"), field("window", $._expression))),
+        optional($.frame_phrase),
       ),
-      optional(seq(kw("IN"), kw("WINDOW"), field("window", $._expression))),
-      optional($.frame_phrase),
     ),
 
   __prompt_for_fields_body: ($) =>
     seq(
-      optional(alias($.__prompt_for_stream_phrase, $.stream_phrase)),
-      optional(kw("UNLESS-HIDDEN")),
-      repeat1(alias($.__prompt_for_item, $.prompt_for_item)),
+      repeat1(alias($.__prompt_for_field, $.field)),
       optional(alias($.__prompt_for_go_on, $.go_on_phrase)),
       optional(seq(kw("IN"), kw("WINDOW"), field("window", $._expression))),
       optional($.frame_phrase),
@@ -37,14 +40,12 @@ module.exports = ({ kw }) => ({
       seq(kw("STREAM-HANDLE"), field("handle", $._expression)),
     ),
 
-  __prompt_for_item: ($) =>
+  __prompt_for_field: ($) =>
     choice(
-      prec.right(
-        seq(
-          field("field", $.__prompt_for_field_target),
-          optional($.__prompt_for_field_phrase),
-          optional(seq(kw("WHEN"), field("when", $._expression))),
-        ),
+      seq(
+        field("field", $.__prompt_for_field_target),
+        optional($.__prompt_for_field_phrase),
+        optional(seq(kw("WHEN"), field("when", $._expression))),
       ),
       seq(
         kw("TEXT"),
