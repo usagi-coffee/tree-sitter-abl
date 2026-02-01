@@ -71,7 +71,6 @@ Strongly prefer using these commands as they have helpful side-effects like retu
 - There is no need to call `bun run build` during testing workflow, just use usual workflow commands like `bun run test` and `bun run parse:snippet`, they generate under the hood.
 - Parser generation can take up to 1 minute so adjust timeout accordingly.
 - `bun run test` returns only failed cases and failed syntax tree OR a message that everything went well.
-- Parser does not build after reaching the hard limit of 65,535 `STATE_COUNT` or `ACTION_COUNT` but bugs might occur at the top-end of the limit (anything above ~60,000) e.g `tree-sitter test` might return status `0` but produce no output or return `ts_parser_parse: Assertion 'self->finished_tree.ptr' failed.` error.
 - When using `alias`, `tree-sitter` handles undefined rules by using the property name as the symbol name so it's okay to alias to `$.something_that_wasn't defined`.
 - `terminator`, `terminator_dot` or rules prefixed with `_` (unless aliased) should never be visible in the syntax tree output.
 - `tkw` and `kw` are passed down, to access them unpack it inside the statement module e.g `module.exports = ({ kw, tkw }) => ({`.
