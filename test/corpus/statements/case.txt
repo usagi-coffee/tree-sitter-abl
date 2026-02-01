@@ -24,15 +24,13 @@ END CASE.
             (skip)))))
     (case_when_phrase
       (string_literal)
-      (case_phrase_statement
-        (put_statement
-          (string_literal)
-          (skip))))
+      (put_statement
+        (string_literal)
+        (skip)))
     (case_otherwise_phrase
-      (case_phrase_statement
-        (put_statement
-          (string_literal)
-          (skip))))))
+      (put_statement
+        (string_literal)
+        (skip)))))
 
 ================================================================================
 CASE END
@@ -50,17 +48,15 @@ END.
     (identifier)
     (case_when_phrase
       (string_literal)
-      (case_phrase_statement
-        (assignment_statement
-          (identifier)
-          (assignment_operator)
-          (number_literal))))
+      (assignment_statement
+        (identifier)
+        (assignment_operator)
+        (number_literal)))
     (case_otherwise_phrase
-      (case_phrase_statement
-        (assignment_statement
-          (identifier)
-          (assignment_operator)
-          (number_literal))))))
+      (assignment_statement
+        (identifier)
+        (assignment_operator)
+        (number_literal)))))
 
 ================================================================================
 CASE - Reference snippet and OR WHEN
@@ -86,13 +82,12 @@ END CASE.
   (case_statement
     (identifier)
     (case_when_phrase
-      (number_literal)
-      (case_phrase_statement
-        (message_statement
-          (string_literal))))
+      condition: (number_literal)
+      (message_statement
+        (string_literal)))
     (case_when_phrase
-      (number_literal)
-      (number_literal)
+      condition: (number_literal)
+      condition: (number_literal)
       (do_block
         (body
           (message_statement

@@ -1172,48 +1172,53 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "ALIAS",
-                  "content": {
-                    "type": "TOKEN",
+              "type": "ALIAS",
+              "content": {
+                "type": "CHOICE",
+                "members": [
+                  {
+                    "type": "ALIAS",
                     "content": {
-                      "type": "PATTERN",
-                      "value": "SHARE-LOCK",
-                      "flags": "i"
-                    }
+                      "type": "TOKEN",
+                      "content": {
+                        "type": "PATTERN",
+                        "value": "SHARE-LOCK",
+                        "flags": "i"
+                      }
+                    },
+                    "named": false,
+                    "value": "SHARE-LOCK"
                   },
-                  "named": false,
-                  "value": "SHARE-LOCK"
-                },
-                {
-                  "type": "ALIAS",
-                  "content": {
-                    "type": "TOKEN",
+                  {
+                    "type": "ALIAS",
                     "content": {
-                      "type": "PATTERN",
-                      "value": "EXCLUSIVE-LOCK",
-                      "flags": "i"
-                    }
+                      "type": "TOKEN",
+                      "content": {
+                        "type": "PATTERN",
+                        "value": "EXCLUSIVE-LOCK",
+                        "flags": "i"
+                      }
+                    },
+                    "named": false,
+                    "value": "EXCLUSIVE-LOCK"
                   },
-                  "named": false,
-                  "value": "EXCLUSIVE-LOCK"
-                },
-                {
-                  "type": "ALIAS",
-                  "content": {
-                    "type": "TOKEN",
+                  {
+                    "type": "ALIAS",
                     "content": {
-                      "type": "PATTERN",
-                      "value": "NO-LOCK",
-                      "flags": "i"
-                    }
-                  },
-                  "named": false,
-                  "value": "NO-LOCK"
-                }
-              ]
+                      "type": "TOKEN",
+                      "content": {
+                        "type": "PATTERN",
+                        "value": "NO-LOCK",
+                        "flags": "i"
+                      }
+                    },
+                    "named": false,
+                    "value": "NO-LOCK"
+                  }
+                ]
+              },
+              "named": true,
+              "value": "lock"
             },
             {
               "type": "BLANK"
@@ -1226,15 +1231,20 @@
             {
               "type": "ALIAS",
               "content": {
-                "type": "TOKEN",
+                "type": "ALIAS",
                 "content": {
-                  "type": "PATTERN",
-                  "value": "NO-WAIT",
-                  "flags": "i"
-                }
+                  "type": "TOKEN",
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "NO-WAIT",
+                    "flags": "i"
+                  }
+                },
+                "named": false,
+                "value": "NO-WAIT"
               },
-              "named": false,
-              "value": "NO-WAIT"
+              "named": true,
+              "value": "no_wait"
             },
             {
               "type": "BLANK"
@@ -5298,8 +5308,12 @@
           "value": "WHEN"
         },
         {
-          "type": "SYMBOL",
-          "name": "__case_when_expression_list"
+          "type": "FIELD",
+          "name": "condition",
+          "content": {
+            "type": "SYMBOL",
+            "name": "__case_when_expression_list"
+          }
         },
         {
           "type": "ALIAS",
@@ -5315,17 +5329,8 @@
           "value": "THEN"
         },
         {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "do_block"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "case_phrase_statement"
-            }
-          ]
+          "type": "SYMBOL",
+          "name": "_statement"
         }
       ]
     },
@@ -5346,122 +5351,8 @@
           "value": "OTHERWISE"
         },
         {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "do_block"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "case_phrase_statement"
-            }
-          ]
-        }
-      ]
-    },
-    "case_phrase_statement": {
-      "type": "CHOICE",
-      "members": [
-        {
           "type": "SYMBOL",
-          "name": "enum_statement"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "var_statement"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "if_statement"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "for_statement"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "find_statement"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "repeat_statement"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "display_statement"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "empty_temp_table_statement"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "export_statement"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "assign_statement"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "run_statement"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "create_statement"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "delete_statement"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "buffer_copy_statement"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "put_statement"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "output_statement"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "os_command_statement"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "message_statement"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "next_statement"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "release_statement"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "catch_statement"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "return_statement"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "undo_statement"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "assignment_statement"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "expression_statement"
+          "name": "_statement"
         }
       ]
     },
@@ -5504,8 +5395,12 @@
                 "value": "WHEN"
               },
               {
-                "type": "SYMBOL",
-                "name": "_expression"
+                "type": "FIELD",
+                "name": "condition",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "_expression"
+                }
               }
             ]
           }

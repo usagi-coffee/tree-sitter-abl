@@ -146,6 +146,7 @@ ENABLE ALL WITH SIZE 80 BY 10 SCROLLBAR-VERTICAL SEPARATORS NO-ROW-MARKERS.
   (browse_definition
     name: (identifier)
     query: (identifier)
+    (no_wait)
     (column
       column: (identifier)
       (format_phrase
@@ -269,6 +270,7 @@ DEFINE BROWSE bNoWait QUERY qNoWait NO-LOCK NO-WAIT
   (browse_definition
     name: (identifier)
     query: (identifier)
+    (no_wait)
     (column
       column: (identifier))
     (column

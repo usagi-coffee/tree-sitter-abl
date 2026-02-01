@@ -176,30 +176,24 @@ END.
         (parenthesized_expression
           (identifier))
         (case_when_phrase
-          (number_literal)
-          (case_phrase_statement
-            (expression_statement
-              (identifier))))
+          condition: (number_literal)
+          (leave_statement))
         (case_when_phrase
-          (number_literal)
-          (case_phrase_statement
-            (run_statement
-              procedure: (procedure_name))))
+          condition: (number_literal)
+          (run_statement
+            procedure: (procedure_name)))
         (case_when_phrase
-          (number_literal)
-          (case_phrase_statement
-            (run_statement
-              procedure: (procedure_name))))
+          condition: (number_literal)
+          (run_statement
+            procedure: (procedure_name)))
         (case_when_phrase
-          (number_literal)
-          (case_phrase_statement
-            (run_statement
-              procedure: (procedure_name))))
+          condition: (number_literal)
+          (run_statement
+            procedure: (procedure_name)))
         (case_when_phrase
-          (number_literal)
-          (case_phrase_statement
-            (run_statement
-              procedure: (procedure_name))))
+          condition: (number_literal)
+          (run_statement
+            procedure: (procedure_name)))
         (case_otherwise_phrase
           (do_block
             (body

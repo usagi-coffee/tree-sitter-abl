@@ -301,6 +301,7 @@ module.exports = grammar({
       identifier: ($) => token(/[_\p{L}][\p{L}\p{N}_\-&]*/u),
       _identifier_immediate: ($) => token.immediate(/[_\p{L}][\p{L}\p{N}_-]*/u),
       parenthesized_identifier: ($) => seq("(", $.identifier, ")"),
+
       _terminator: ($) => choice($._terminator_dot, ";"),
 
       // Contains $._expression and $._primary_expression aggregates

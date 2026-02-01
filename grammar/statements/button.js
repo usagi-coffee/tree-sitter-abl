@@ -39,8 +39,8 @@ module.exports = ({ kw }) => ({
       $.__button_no_focus,
       $.__button_no_convert_3d_colors,
       $.__button_tooltip,
-      // $.on_phrase, // TODO: add trigger support
     ),
+
   __button_auto_go: ($) => kw("AUTO-GO"),
   __button_auto_endkey: ($) => kw("AUTO-ENDKEY"),
   __button_default: ($) => kw("DEFAULT"),

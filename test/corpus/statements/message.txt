@@ -440,6 +440,4 @@ END.
                     (buttons_phrase)))
                 (return_statement))))
           (case_otherwise_phrase
-            (case_phrase_statement
-              (expression_statement
-                (identifier)))))))))
+            (stop_statement)))))))

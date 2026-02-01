@@ -14,44 +14,16 @@ module.exports = ({ kw }) => ({
   case_when_phrase: ($) =>
     seq(
       kw("WHEN"),
-      $.__case_when_expression_list,
+      field("condition", $.__case_when_expression_list),
       kw("THEN"),
-      choice($.do_block, $.case_phrase_statement),
+      $._statement,
     ),
 
-  case_otherwise_phrase: ($) =>
-    seq(kw("OTHERWISE"), choice($.do_block, $.case_phrase_statement)),
-
-  // TODO: why this instead of using _statement here?
-  case_phrase_statement: ($) =>
-    choice(
-      $.enum_statement,
-      $.var_statement,
-      $.if_statement,
-      $.for_statement,
-      $.find_statement,
-      $.repeat_statement,
-      $.display_statement,
-      $.empty_temp_table_statement,
-      $.export_statement,
-      $.assign_statement,
-      $.run_statement,
-      $.create_statement,
-      $.delete_statement,
-      $.buffer_copy_statement,
-      $.put_statement,
-      $.output_statement,
-      $.os_command_statement,
-      $.message_statement,
-      $.next_statement,
-      $.release_statement,
-      $.catch_statement,
-      $.return_statement,
-      $.undo_statement,
-      $.assignment_statement,
-      $.expression_statement,
-    ),
+  case_otherwise_phrase: ($) => seq(kw("OTHERWISE"), $._statement),
 
   __case_when_expression_list: ($) =>
-    seq($._expression, repeat(seq(kw("OR"), kw("WHEN"), $._expression))),
+    seq(
+      $._expression,
+      repeat(seq(kw("OR"), kw("WHEN"), field("condition", $._expression))),
+    ),
 });

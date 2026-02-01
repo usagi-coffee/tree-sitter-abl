@@ -56,7 +56,6 @@ module.exports = ({ kw }) => ({
           seq(kw("LABEL"), $.string_literal),
           kw("DISABLED"),
           seq(kw("ACCELERATOR"), $.string_literal),
-          // $.on_phrase, // TODO: add trigger support
         ),
       ),
     ),
