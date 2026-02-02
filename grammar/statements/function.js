@@ -5,7 +5,7 @@ module.exports = ({ kw }) => ({
   __function_body: ($) =>
     seq(
       field("name", $.identifier),
-      choice(kw("RETURNS"), kw("RETURN")),
+      kw("RETURNS", { offset: 5 }),
       optional(kw("CLASS")),
       field("type", $._type_name),
       optional(choice(kw("PRIVATE"), kw("PROTECTED"), kw("PUBLIC"))),
@@ -30,7 +30,7 @@ module.exports = ({ kw }) => ({
   __function_forward_body_1: ($) =>
     seq(
       field("name", $.identifier),
-      choice(kw("RETURNS"), kw("RETURN")),
+      kw("RETURNS", { offset: 5 }),
       optional(kw("CLASS")),
       field("type", $._type_name),
       optional(alias($.__function_parameters, $.parameters)),
@@ -48,7 +48,7 @@ module.exports = ({ kw }) => ({
   __function_forward_body_2: ($) =>
     seq(
       field("name", $.identifier),
-      choice(kw("RETURNS"), kw("RETURN")),
+      kw("RETURNS", { offset: 5 }),
       optional(kw("CLASS")),
       field("type", $._type_name),
       optional(alias($.__function_parameters, $.parameters)),

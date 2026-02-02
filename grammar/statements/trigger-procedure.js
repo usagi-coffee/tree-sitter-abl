@@ -2,7 +2,7 @@ module.exports = ({ kw }) => ({
   trigger_procedure_statement: ($) =>
     seq(
       kw("TRIGGER"),
-      kw("PROCEDURE"),
+      kw("PROCEDURE", { offset: 4 }),
       $.__trigger_procedure_body,
       $._terminator,
     ),

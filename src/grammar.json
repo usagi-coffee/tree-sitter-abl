@@ -12709,7 +12709,7 @@
             "type": "TOKEN",
             "content": {
               "type": "PATTERN",
-              "value": "PROCEDURE",
+              "value": "PROC(E(D(U(R(E)?)?)?)?)?",
               "flags": "i"
             }
           },
@@ -19801,35 +19801,17 @@
           }
         },
         {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "PATTERN",
-                  "value": "RETURNS",
-                  "flags": "i"
-                }
-              },
-              "named": false,
-              "value": "RETURNS"
-            },
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "PATTERN",
-                  "value": "RETURN",
-                  "flags": "i"
-                }
-              },
-              "named": false,
-              "value": "RETURN"
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PATTERN",
+              "value": "RETUR(N(S)?)?",
+              "flags": "i"
             }
-          ]
+          },
+          "named": false,
+          "value": "RETURNS"
         },
         {
           "type": "CHOICE",
@@ -20067,35 +20049,17 @@
           }
         },
         {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "PATTERN",
-                  "value": "RETURNS",
-                  "flags": "i"
-                }
-              },
-              "named": false,
-              "value": "RETURNS"
-            },
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "PATTERN",
-                  "value": "RETURN",
-                  "flags": "i"
-                }
-              },
-              "named": false,
-              "value": "RETURN"
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PATTERN",
+              "value": "RETUR(N(S)?)?",
+              "flags": "i"
             }
-          ]
+          },
+          "named": false,
+          "value": "RETURNS"
         },
         {
           "type": "CHOICE",
@@ -20210,35 +20174,17 @@
           }
         },
         {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "PATTERN",
-                  "value": "RETURNS",
-                  "flags": "i"
-                }
-              },
-              "named": false,
-              "value": "RETURNS"
-            },
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "PATTERN",
-                  "value": "RETURN",
-                  "flags": "i"
-                }
-              },
-              "named": false,
-              "value": "RETURN"
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PATTERN",
+              "value": "RETUR(N(S)?)?",
+              "flags": "i"
             }
-          ]
+          },
+          "named": false,
+          "value": "RETURNS"
         },
         {
           "type": "CHOICE",
@@ -30554,7 +30500,7 @@
             "type": "TOKEN",
             "content": {
               "type": "PATTERN",
-              "value": "PROCEDURE",
+              "value": "PROC(E(D(U(R(E)?)?)?)?)?",
               "flags": "i"
             }
           },
@@ -30715,7 +30661,7 @@
                 "type": "TOKEN",
                 "content": {
                   "type": "PATTERN",
-                  "value": "PROCEDURE",
+                  "value": "PROC(E(D(U(R(E)?)?)?)?)?",
                   "flags": "i"
                 }
               },
@@ -31148,7 +31094,7 @@
             "type": "TOKEN",
             "content": {
               "type": "PATTERN",
-              "value": "PROCEDURE",
+              "value": "PROC(E(D(U(R(E)?)?)?)?)?",
               "flags": "i"
             }
           },
@@ -35038,7 +34984,7 @@
                 "type": "TOKEN",
                 "content": {
                   "type": "PATTERN",
-                  "value": "PROCEDURE",
+                  "value": "PROC(E(D(U(R(E)?)?)?)?)?",
                   "flags": "i"
                 }
               },
@@ -40214,7 +40160,7 @@
                     "type": "TOKEN",
                     "content": {
                       "type": "PATTERN",
-                      "value": "PROCEDURE",
+                      "value": "PROC(E(D(U(R(E)?)?)?)?)?",
                       "flags": "i"
                     }
                   },
@@ -43140,7 +43086,7 @@
             "type": "TOKEN",
             "content": {
               "type": "PATTERN",
-              "value": "PROCEDURE",
+              "value": "PROC(E(D(U(R(E)?)?)?)?)?",
               "flags": "i"
             }
           },
@@ -44275,7 +44221,7 @@
                     "type": "TOKEN",
                     "content": {
                       "type": "PATTERN",
-                      "value": "PROCEDURE",
+                      "value": "PROC(E(D(U(R(E)?)?)?)?)?",
                       "flags": "i"
                     }
                   },

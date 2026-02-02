@@ -5,7 +5,7 @@ module.exports = ({ kw }) => ({
   __release_external_body: ($) =>
     seq(
       kw("EXTERNAL"),
-      optional(kw("PROCEDURE")),
+      optional(kw("PROCEDURE", { offset: 4 })),
       field("library", $.string_literal),
     ),
 });

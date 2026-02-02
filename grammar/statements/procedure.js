@@ -2,7 +2,7 @@ const { definitionModifiers } = require("../helpers/modifiers");
 
 module.exports = ({ kw }) => ({
   procedure_definition: ($) =>
-    seq(kw("PROCEDURE"), $.__procedure_body, $._terminator),
+    seq(kw("PROCEDURE", { offset: 4 }), $.__procedure_body, $._terminator),
 
   __procedure_body: ($) =>
     seq(
@@ -15,7 +15,7 @@ module.exports = ({ kw }) => ({
       ":",
       repeat($._statement),
       kw("END"),
-      optional(kw("PROCEDURE")),
+      optional(kw("PROCEDURE", { offset: 4 })),
     ),
 
   __procedure_access_modifier: ($) =>
@@ -53,7 +53,7 @@ module.exports = ({ kw }) => ({
 
   procedure_forward_definition: ($) =>
     seq(
-      kw("PROCEDURE"),
+      kw("PROCEDURE", { offset: 4 }),
       field("name", choice($.identifier, $.qualified_name)),
       optional(alias($.__procedure_in_super_phrase, $.in_super_phrase)),
       $._terminator,

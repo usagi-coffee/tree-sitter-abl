@@ -4,7 +4,9 @@ module.exports = ({ kw }) => ({
 
   __subscribe_body: ($) =>
     seq(
-      optional(seq(kw("PROCEDURE"), field("subscriber", $._expression))),
+      optional(
+        seq(kw("PROCEDURE", { offset: 4 }), field("subscriber", $._expression)),
+      ),
       optional(kw("TO")),
       field("event", $._expression),
       choice(seq(kw("IN"), field("publisher", $._expression)), kw("ANYWHERE")),

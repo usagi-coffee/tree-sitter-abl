@@ -14,7 +14,7 @@ module.exports = ({ kw }) => ({
   delete_procedure_statement: ($) =>
     seq(
       kw("DELETE"),
-      kw("PROCEDURE"),
+      kw("PROCEDURE", { offset: 4 }),
       field("handle", $._expression),
       optional(alias($.__delete_no_error, $.no_error)),
       $._terminator,
