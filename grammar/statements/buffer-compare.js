@@ -42,19 +42,9 @@ module.exports = ({ kw }) => ({
     seq(
       kw("WHEN"),
       field("field", $._primary_expression),
-      field("operator", $.__buffer_compare_operator),
+      field("operator", $._comparison_operator),
       field("value", $._primary_expression),
       kw("THEN"),
       field("action", $._statement),
-    ),
-
-  __buffer_compare_operator: ($) =>
-    choice(
-      alias("=", $.EQ),
-      alias("<>", $.NE),
-      alias(">", $.GT),
-      alias("<", $.LT),
-      alias(">=", $.GE),
-      alias("<=", $.LE),
     ),
 });

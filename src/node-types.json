@@ -11834,28 +11834,60 @@
         "required": true,
         "types": [
           {
+            "type": "<",
+            "named": false
+          },
+          {
+            "type": "<=",
+            "named": false
+          },
+          {
+            "type": "<>",
+            "named": false
+          },
+          {
+            "type": "=",
+            "named": false
+          },
+          {
+            "type": ">",
+            "named": false
+          },
+          {
+            "type": ">=",
+            "named": false
+          },
+          {
+            "type": "BEGINS",
+            "named": false
+          },
+          {
             "type": "EQ",
-            "named": true
+            "named": false
           },
           {
             "type": "GE",
-            "named": true
+            "named": false
           },
           {
             "type": "GT",
-            "named": true
+            "named": false
           },
           {
             "type": "LE",
-            "named": true
+            "named": false
           },
           {
             "type": "LT",
-            "named": true
+            "named": false
+          },
+          {
+            "type": "MATCHES",
+            "named": false
           },
           {
             "type": "NE",
-            "named": true
+            "named": false
           }
         ]
       },
@@ -61728,10 +61760,6 @@
     "named": false
   },
   {
-    "type": "EQ",
-    "named": true
-  },
-  {
     "type": "ERROR",
     "named": false
   },
@@ -61896,10 +61924,6 @@
     "named": false
   },
   {
-    "type": "GE",
-    "named": true
-  },
-  {
     "type": "GENERATE-MD5",
     "named": false
   },
@@ -61934,10 +61958,6 @@
   {
     "type": "GT",
     "named": false
-  },
-  {
-    "type": "GT",
-    "named": true
   },
   {
     "type": "HEADER",
@@ -62116,10 +62136,6 @@
     "named": false
   },
   {
-    "type": "LE",
-    "named": true
-  },
-  {
     "type": "LEAVE",
     "named": false
   },
@@ -62170,10 +62186,6 @@
   {
     "type": "LT",
     "named": false
-  },
-  {
-    "type": "LT",
-    "named": true
   },
   {
     "type": "MAP",
@@ -62262,10 +62274,6 @@
   {
     "type": "NE",
     "named": false
-  },
-  {
-    "type": "NE",
-    "named": true
   },
   {
     "type": "NESTED",

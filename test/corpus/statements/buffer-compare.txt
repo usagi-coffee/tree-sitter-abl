@@ -77,7 +77,6 @@ BUFFER-COMPARE bSrc TO bTgt
     target: (identifier)
     (compares_block
       field: (identifier)
-      operator: (NE)
       value: (identifier)
       action: (message_statement
         (string_literal)))))
@@ -100,7 +99,6 @@ BUFFER-COMPARE bSrc TO bTgt
     target: (identifier)
     (compares_block
       field: (identifier)
-      operator: (GE)
       value: (identifier)
       action: (assign_statement
         (assign_phrase
@@ -108,7 +106,6 @@ BUFFER-COMPARE bSrc TO bTgt
             left: (identifier)
             right: (boolean_literal))))
       field: (identifier)
-      operator: (LT)
       value: (identifier)
       action: (message_statement
         (string_literal)))))

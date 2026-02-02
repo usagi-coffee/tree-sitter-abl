@@ -3286,7 +3286,7 @@
           "name": "operator",
           "content": {
             "type": "SYMBOL",
-            "name": "__buffer_compare_operator"
+            "name": "_comparison_operator"
           }
         },
         {
@@ -3317,65 +3317,6 @@
             "type": "SYMBOL",
             "name": "_statement"
           }
-        }
-      ]
-    },
-    "__buffer_compare_operator": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "STRING",
-            "value": "="
-          },
-          "named": true,
-          "value": "EQ"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "STRING",
-            "value": "<>"
-          },
-          "named": true,
-          "value": "NE"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "STRING",
-            "value": ">"
-          },
-          "named": true,
-          "value": "GT"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "STRING",
-            "value": "<"
-          },
-          "named": true,
-          "value": "LT"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "STRING",
-            "value": ">="
-          },
-          "named": true,
-          "value": "GE"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "STRING",
-            "value": "<="
-          },
-          "named": true,
-          "value": "LE"
         }
       ]
     },
