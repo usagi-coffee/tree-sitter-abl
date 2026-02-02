@@ -101,14 +101,16 @@ REPOSITION qCust TO ROWID rTop, rChild FOR TENANT tenantId NO-ERROR.
       (number_literal)))
   (on_statement
     (identifier)
-    (identifier)
-    (identifier)
+    (widget_phrase
+      (identifier))
+    (widget_phrase
+      (identifier))
     (do_block
       (body
         (prompt_for_statement
           (field
             (identifier)
-            (label_option
+            (format_phrase
               (string_literal)))
           (frame_phrase
             (identifier)
@@ -158,9 +160,11 @@ REPOSITION qCust TO ROWID rTop, rChild FOR TENANT tenantId NO-ERROR.
       (identifier)))
   (wait_for_statement
     (identifier)
+    (widget_phrase
+      (identifier))
     (identifier)
-    (identifier)
-    (identifier))
+    (widget_phrase
+      (system_handle)))
   (procedure_definition
     (identifier)
     (get_statement
@@ -185,7 +189,6 @@ REPOSITION qCust TO ROWID rTop, rChild FOR TENANT tenantId NO-ERROR.
         (qualified_name
           (identifier)
           (identifier)))
-      (skip_phrase)
       (field
         (qualified_name
           (identifier)

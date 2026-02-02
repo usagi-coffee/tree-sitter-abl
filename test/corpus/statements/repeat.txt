@@ -24,8 +24,7 @@ END.
   (repeat_statement
     (body
       (display_statement
-        (field
-          field: (identifier)))))
+        record: (identifier))))
   (repeat_statement
     condition: (binary_expression
       (identifier)
@@ -41,8 +40,7 @@ END.
     condition: (identifier)
     (body
       (display_statement
-        (field
-          field: (identifier)))))
+        record: (identifier))))
   (repeat_statement
     label: (identifier)
     (on_stop_phrase
@@ -166,7 +164,8 @@ END.
     (on_endkey_phrase)
     (body
       (update_statement
-        record: (identifier)
+        (field
+          field: (identifier))
         (frame_phrase
           frame: (identifier)))
       (hide_statement
@@ -212,9 +211,10 @@ END.
       (find_statement
         table: (identifier))
       (update_statement
-        record: (qualified_name
-          left: (identifier)
-          right: (identifier)))))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier))))))
   (repeat_statement
     variable: (identifier)
     start: (number_literal)
@@ -225,8 +225,7 @@ END.
     (on_quit_phrase)
     (body
       (display_statement
-        (field
-          field: (identifier)))))
+        record: (identifier))))
   (repeat_statement
     (number_literal)
     (body

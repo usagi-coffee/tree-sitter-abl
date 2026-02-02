@@ -8,7 +8,8 @@
 
 - `grammar.js`: core grammar rules.
 - `grammar/core/{expressions,statements}.js`: core aggregation rules ($.\_statement, $.\_expression; mostly plumbing).
-- `grammar/{expressions, statements, phrases}/index.js`: aggregator files that collect and re-export all rules from their respective categories.
+- `grammar/{expressions, statements, phrases, precedences}/index.js`: aggregator files that collect and re-export from their respective categories.
+- `grammar/precedences/*.js`: precedences definitions
 - `grammar/expressions/*.js`: expression rules (available, locked, aggregate, conditional; non-core/non-shared specific expressions).
 - `grammar/statements/*.js`: statements rules (`bun run reference '*statement'`).
 - `grammar/phrases/*.js`: phrases rules (`bun run reference '*phrase'`).
@@ -62,6 +63,7 @@ Strongly prefer using these commands as they have helpful side-effects like retu
 - Do not adjust or remove tests just to satisfy test passing, just fix the underlying parsing issue or ask me first to remove if it's really not supported.
 - Don't do unnecessary comments like `// something is above`.
 - Never add `(ERROR` nodes to expected syntax trees in tests, it's pointless, fix the grammar not the test itself.
+- Prefer not using `_list` suffix for rules e.g `_format_label_list` should be `_format_labels`.
 
 ## Notes
 

@@ -10,7 +10,7 @@ module.exports = ({ kw }) => ({
 
   __assign_pair: ($) =>
     seq(
-      field("left", $._assignable),
+      field("left", choice($._assignable, $.__assign_keyword_identifier)),
       optional(
         seq("=", field("right", choice($.array_initializer, $._expression))),
       ),
@@ -28,7 +28,7 @@ module.exports = ({ kw }) => ({
 
   __assign_pair: ($) =>
     seq(
-      field("left", $._assignable),
+      field("left", choice($._assignable, $.__assign_keyword_identifier)),
       optional(
         seq("=", field("right", choice($.array_initializer, $._expression))),
       ),
@@ -36,6 +36,7 @@ module.exports = ({ kw }) => ({
         alias($.__assign_when_available_phrase, $.when_available_phrase),
       ),
     ),
+  __assign_keyword_identifier: ($) => alias(kw("FRAME"), $.identifier),
 
   __assign_no_error: ($) => kw("NO-ERROR"),
 });

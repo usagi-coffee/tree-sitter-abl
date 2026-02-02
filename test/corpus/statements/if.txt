@@ -92,10 +92,9 @@ IF LOCKED bufOrder THEN RETURN TRUE.
     then: (do_block
       (body
         (display_statement
-          (field
-            field: (qualified_name
-              left: (identifier)
-              right: (identifier)))))))
+          record: (qualified_name
+            left: (identifier)
+            right: (identifier))))))
   (if_statement
     (can_find_expression
       table: (identifier)
@@ -108,10 +107,9 @@ IF LOCKED bufOrder THEN RETURN TRUE.
     then: (do_block
       (body
         (display_statement
-          (field
-            field: (qualified_name
-              left: (identifier)
-              right: (identifier)))))))
+          record: (qualified_name
+            left: (identifier)
+            right: (identifier))))))
   (if_statement
     (can_find_expression
       table: (identifier)
@@ -126,24 +124,21 @@ IF LOCKED bufOrder THEN RETURN TRUE.
     then: (do_block
       (body
         (display_statement
-          (field
-            field: (qualified_name
-              left: (identifier)
-              right: (identifier)))))))
+          record: (qualified_name
+            left: (identifier)
+            right: (identifier))))))
   (if_statement
     (identifier)
     then: (do_block
       (body
         (display_statement
-          (field
-            field: (identifier)))))
+          record: (identifier))))
     (comment
       (block_comment))
     else: (if_statement
       (identifier)
       then: (display_statement
-        (field
-          field: (identifier)))))
+        record: (identifier))))
   (if_statement
     (identifier)
     then: (empty_statement))
@@ -272,8 +267,9 @@ OUTPUT STREAM due CLOSE.
       (string_literal))
     (field
       (identifier))
-    (skip_phrase
-      (number_literal))
+    (field
+      (parenthesized_expression
+        (number_literal)))
     (frame_phrase
       (no_box)
       (no_labels)
@@ -336,9 +332,10 @@ OUTPUT STREAM due CLOSE.
                       (null_literal))
                     (body
                       (update_statement
-                        (qualified_name
-                          (identifier)
-                          (identifier))
+                        (field
+                          (qualified_name
+                            (identifier)
+                            (identifier)))
                         (frame_phrase
                           (identifier))))))))
             (assignment_statement
@@ -359,9 +356,10 @@ OUTPUT STREAM due CLOSE.
                   (null_literal))
                 (body
                   (update_statement
-                    (qualified_name
-                      (identifier)
-                      (identifier))
+                    (field
+                      (qualified_name
+                        (identifier)
+                        (identifier)))
                     (frame_phrase
                       (identifier))))))))
         (do_block
@@ -385,34 +383,23 @@ OUTPUT STREAM due CLOSE.
                       (qualified_name
                         (identifier)
                         (identifier)))
-                    (field
-                      (identifier))
-                    (field
+                    (format_phrase
                       (number_literal))
                     (field
                       (qualified_name
                         (identifier)
                         (identifier)))
-                    (field
-                      (identifier))
-                    (field
-                      (number_literal))
+                    (format_phrase)
                     (field
                       (qualified_name
                         (identifier)
                         (identifier)))
-                    (field
-                      (identifier))
-                    (field
-                      (number_literal))
+                    (format_phrase)
                     (field
                       (qualified_name
                         (identifier)
                         (identifier)))
-                    (field
-                      (identifier))
-                    (field
-                      (number_literal))
+                    (format_phrase)
                     (frame_phrase
                       (no_box)
                       (identifier)))))))))))

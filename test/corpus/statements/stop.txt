@@ -55,9 +55,10 @@ END.
             (identifier)
             (identifier))))
       (update_statement
-        (qualified_name
-          (identifier)
-          (identifier)))
+        (field
+          (qualified_name
+            (identifier)
+            (identifier))))
       (assignment_statement
         (identifier)
         (assignment_operator)
@@ -90,9 +91,10 @@ END.
             (identifier)
             (identifier))))
       (update_statement
-        (qualified_name
-          (identifier)
-          (identifier)))
+        (field
+          (qualified_name
+            (identifier)
+            (identifier))))
       (assignment_statement
         (identifier)
         (assignment_operator)

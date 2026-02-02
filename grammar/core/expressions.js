@@ -9,7 +9,8 @@ module.exports = ({ kw, ctx }) => ({
 
   _primary_expression: ($) =>
     choice(
-      alias($.constant_expression, $.constant),
+      prec(-1, alias($.constant_expression, $.constant)),
+      choice($.identifier, $.qualified_name, $.frame_qualified_name),
       $.parenthesized_expression,
       $.available_expression,
       $.can_find_expression,
@@ -24,19 +25,13 @@ module.exports = ({ kw, ctx }) => ({
       $.function_call,
       $.array_access,
       $.scoped_name,
-      $.qualified_name,
       $.object_access,
       $.argument_reference,
-      $.identifier,
       $.number_literal,
       $.date_literal,
       $.string_literal,
       $.boolean_literal,
       $.null_literal,
-      $.in_frame_expression,
       $.input_expression,
-
-      alias($.__widget_keywords, $.identifier),
-      $.widget_access,
     ),
 });

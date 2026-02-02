@@ -123,9 +123,7 @@ PUT SCREEN COLOR VALUE(cColor) ROW 1 COLUMN 1 "Hdr".
             (identifier)))
         (field
           (identifier))
-        (field
-          (identifier))
-        (field
+        (format_phrase
           (string_literal))
         (frame_phrase
           (down

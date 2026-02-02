@@ -4,6 +4,8 @@ module.exports = ({ kw }) => ({
   __call_body: ($) =>
     seq(
       field("routine", $.identifier),
-      repeat(field("argument", $._expression)),
+      repeat(alias($.__call_argument, $.argument)),
     ),
+
+  __call_argument: ($) => $._expression,
 });

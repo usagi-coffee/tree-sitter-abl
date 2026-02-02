@@ -63,17 +63,16 @@ END.
     (no_undo)
     (format_phrase
       (string_literal))
-    (label_option
-      (string_literal)))
+    (string_literal))
   (variable_definition
     (identifier)
     (identifier)
     (no_undo))
   (set_statement
     (field
-      (identifier))
-    (help_phrase
-      (string_literal)))
+      (identifier)
+      (format_phrase
+        (string_literal))))
   (if_statement
     (binary_expression
       (identifier)

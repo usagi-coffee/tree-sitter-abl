@@ -1,7 +1,6 @@
 module.exports = ({ kw }) => ({
   on_statement: ($) =>
     prec.right(
-      1,
       seq(
         kw("ON"),
         choice(
@@ -12,7 +11,7 @@ module.exports = ({ kw }) => ({
             field("object", $.__on_database_object),
             optional(alias($.__on_referencing_phrase, $.referencing_phrase)),
             optional(alias($.__on_override, $.override)),
-            choice(seq(kw("REVERT"), $._terminator), $.do_block, $._statement),
+            choice(seq(kw("REVERT"), $._terminator), $._statement),
           ),
           // UI event: ON event-list [OF widget-list] [ANYWHERE]
           seq(
@@ -21,21 +20,19 @@ module.exports = ({ kw }) => ({
               seq(
                 kw("OF"),
                 optional(kw("MENU-ITEM")),
-                field("widget", $.__on_widget),
+                field("widget", $.widget_phrase),
                 repeat(
                   seq(
                     ",",
                     optional(kw("MENU-ITEM")),
-                    field("widget", $.__on_widget),
+                    field("widget", $.widget_phrase),
                   ),
                 ),
-                optional(alias($.__on_in_frame, $.in_frame_phrase)),
               ),
             ),
             optional(kw("ANYWHERE")),
             choice(
               seq(kw("REVERT"), $._terminator),
-              $.do_block,
               $._statement,
               seq(
                 kw("PERSISTENT"),
@@ -53,11 +50,8 @@ module.exports = ({ kw }) => ({
   __on_database_event: ($) =>
     choice(kw("CREATE"), kw("DELETE"), kw("FIND"), kw("WRITE"), kw("ASSIGN")),
   __on_ui_event: ($) => $.identifier,
-  __on_widget: ($) => choice($.identifier, $.qualified_name),
   __on_database_object: ($) => choice($.qualified_name, $.identifier),
   __on_override: ($) => kw("OVERRIDE"),
-  __on_in_frame: ($) =>
-    seq(kw("IN"), kw("FRAME"), field("frame", $.identifier)),
   __on_referencing_phrase: ($) =>
     choice(
       seq(

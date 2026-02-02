@@ -5,11 +5,14 @@ module.exports = ({ kw }) => ({
   __message_body: ($) =>
     seq(
       optional(seq(kw("COLOR"), $.__message_color_value)),
-      repeat1(choice($._expression, alias($.__message_skip_item, $.skip))),
+      repeat1($.__message_expression),
       optional(alias($.__message_view_as_phrase, $.view_as_phrase)),
       optional(alias($.__message_set_update_phrase, $.set_update_phrase)),
       optional(seq(kw("IN"), kw("WINDOW"), field("window", $._expression))),
     ),
+
+  __message_expression: ($) =>
+    choice($._expression, alias($.__message_skip_item, $.skip)),
 
   __message_color_value: ($) =>
     choice(kw("NORMAL"), kw("INPUT"), kw("MESSAGES"), $.color_phrase),

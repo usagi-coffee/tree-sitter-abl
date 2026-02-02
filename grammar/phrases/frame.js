@@ -1,7 +1,7 @@
 module.exports = ({ kw }) => ({
   frame_phrase: ($) =>
     seq(
-      kw("WITH"),
+      prec(1, kw("WITH")),
       repeat1(
         choice(
           $.at_phrase,
@@ -16,13 +16,13 @@ module.exports = ({ kw }) => ({
           alias(kw("USE-TEXT"), $.use_text),
           alias(kw("BACKGROUND"), $.background),
           alias(kw("NO-HIDE"), $.no_hide),
-          seq(kw("FRAME"), field("frame", $.identifier)),
-          seq(kw("BROWSE"), field("browse", $.identifier)),
-          seq(kw("ROW"), field("row", $._expression)),
-          seq(kw("WIDTH"), field("width", $._expression)),
+          seq(kw("FRAME"), field("frame", $.__frame_identifier)),
+          seq(kw("BROWSE"), field("browse", $.__frame_identifier)),
+          seq(kw("ROW"), field("row", $.__frame_expression)),
+          seq(kw("WIDTH"), field("width", $.__frame_expression)),
           seq(kw("FONT"), field("font", $.number_literal)),
           seq(kw("BGCOLOR"), field("bgcolor", $.number_literal)),
-          seq(kw("TITLE"), field("title", $._expression)),
+          seq(kw("TITLE"), field("title", $.__frame_expression)),
           choice(
             seq(
               field("column", $.number_literal),
@@ -30,25 +30,30 @@ module.exports = ({ kw }) => ({
             ),
             seq(
               choice(kw("COLUMN"), kw("COLUMNS"), kw("COL")),
-              field("column", $._expression),
+              field("column", $.__frame_expression),
             ),
           ),
           alias(
             seq(kw("VIEW-AS"), field("widget", kw("DIALOG-BOX"))),
             $.view_as_phrase,
           ),
-          prec.left(
-            1,
-            seq(
-              kw("SKIP"),
-              optional(field("skip", seq("(", $._expression, ")"))),
-            ),
-          ),
           alias(
-            seq(optional(field("value", $._expression)), kw("DOWN")),
+            seq(optional(field("value", $.__frame_expression)), kw("DOWN")),
             $.down,
           ),
+          $.__frame_skip_phrase,
         ),
       ),
     ),
+
+  __frame_skip_phrase: ($) =>
+    prec.left(
+      seq(
+        kw("SKIP"),
+        optional(field("skip", seq("(", $.__frame_expression, ")"))),
+      ),
+    ),
+
+  __frame_identifier: ($) => $.identifier,
+  __frame_expression: ($) => $._expression,
 });

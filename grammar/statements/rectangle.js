@@ -50,5 +50,6 @@ module.exports = ({ kw }) => ({
       kw("BY"),
       field("height", $._expression),
     ),
-  __rectangle_tooltip: ($) => seq(kw("TOOLTIP"), $._expression),
+  __rectangle_tooltip: ($) =>
+    seq(kw("TOOLTIP"), choice($.identifier, $.string_literal, $.null_literal)),
 });

@@ -179,8 +179,8 @@ END.
 END.
 FOR EACH showsales BREAK BY showsales.region BY showsales.state:
 IF FIRST-OF(showsales.region) THEN
-DISPLAY showsales.region.
-DISPLAY showsales.state tot-sales (TOTAL BY showsales.region).
+  DISPLAY showsales.region.
+  DISPLAY showsales.state tot-sales (TOTAL BY showsales.region).
 END.
 
 DEFINE NEW SHARED WORK-TABLE wtShared FIELD f1 AS INTEGER.
@@ -299,10 +299,9 @@ DEFINE PRIVATE WORK-TABLE wtPrivate FIELD f1 AS INTEGER.
                 (identifier)
                 (identifier)))))
         (display_statement
-          (field
-            (qualified_name
-              (identifier)
-              (identifier)))))
+          (qualified_name
+            (identifier)
+            (identifier))))
       (display_statement
         (field
           (qualified_name

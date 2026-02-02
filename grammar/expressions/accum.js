@@ -3,7 +3,10 @@ module.exports = ({ kw }) => ({
 
   __accum_expression_body: ($) =>
     seq(
-      field("operation", repeat1($.aggregate_phrase)),
-      field("field", $._expression),
+      field("operation", repeat1($.__accum_aggregate)),
+      field("field", $.__accum_expression),
     ),
+
+  __accum_aggregate: ($) => $.aggregate_phrase,
+  __accum_expression: ($) => $._expression,
 });

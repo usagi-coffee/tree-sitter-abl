@@ -483,7 +483,7 @@ WAIT-FOR CHOOSE OF cancel-butt OR WINDOW-CLOSE OF CURRENT-WINDOW.
     type: (identifier)
     (no_undo)
     (initial_option
-      value: (number_literal)))
+      (number_literal)))
   (button_definition
     name: (identifier)
     (button_option
@@ -603,7 +603,8 @@ WAIT-FOR CHOOSE OF cancel-butt OR WINDOW-CLOSE OF CURRENT-WINDOW.
               right: (identifier)))))))
   (on_statement
     event: (identifier)
-    widget: (identifier)
+    widget: (widget_phrase
+      handle: (identifier))
     (do_block
       (body
         (hide_statement
@@ -659,6 +660,8 @@ WAIT-FOR CHOOSE OF cancel-butt OR WINDOW-CLOSE OF CURRENT-WINDOW.
       frame: (identifier)))
   (wait_for_statement
     events: (identifier)
-    widgets: (identifier)
+    widgets: (widget_phrase
+      handle: (identifier))
     events: (identifier)
-    widgets: (identifier)))
+    widgets: (widget_phrase
+      system_handle: (system_handle))))

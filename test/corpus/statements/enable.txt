@@ -82,9 +82,8 @@ ENABLE field1 FORMAT "x(10)" WHEN ok
         format: (string_literal)))
     (enable_item
       constant: (string_literal)
-      (at_phrase)
-      (constant_option)
-      (constant_option))
+      (format_phrase
+        bgcolor: (number_literal)))
     (enable_item)))
 
 ================================================================================

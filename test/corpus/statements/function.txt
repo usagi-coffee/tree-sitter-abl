@@ -700,7 +700,6 @@ END.
         (arguments
           (argument
             (number_literal)))))
-    (skip_phrase)
     (field
       (string_literal))
     (field
@@ -709,7 +708,6 @@ END.
         (arguments
           (argument
             (number_literal)))))
-    (skip_phrase)
     (field
       (string_literal))
     (field
@@ -717,8 +715,7 @@ END.
         (identifier)
         (arguments
           (argument
-            (number_literal)))))
-    (skip_phrase))
+            (number_literal))))))
   (delete_procedure_statement
     (identifier))
   (function_definition

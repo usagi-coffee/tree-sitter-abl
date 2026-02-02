@@ -133,7 +133,7 @@ END.
     type: (identifier)
     (no_undo)
     (initial_option
-      value: (number_literal)))
+      (number_literal)))
   (variable_definition
     name: (identifier)
     type: (identifier)
@@ -153,10 +153,9 @@ END.
       (no_lock))
     (body
       (display_statement
-        (field
-          field: (qualified_name
-            left: (identifier)
-            right: (identifier))))))
+        record: (qualified_name
+          left: (identifier)
+          right: (identifier)))))
   (repeat_statement
     (body
       (display_statement

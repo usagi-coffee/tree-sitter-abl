@@ -105,7 +105,8 @@ ON F5 ENDKEY.
       table: (identifier))
     (body
       (update_statement
-        record: (identifier))))
+        (field
+          field: (identifier)))))
   (button_definition
     name: (identifier)
     (button_option
@@ -154,8 +155,10 @@ ON F5 ENDKEY.
       column: (number_literal)))
   (on_statement
     event: (identifier)
-    widget: (identifier)
-    widget: (identifier)
+    widget: (widget_phrase
+      handle: (identifier))
+    widget: (widget_phrase
+      handle: (identifier))
     (do_block
       (body
         (if_statement
@@ -195,14 +198,16 @@ ON F5 ENDKEY.
       frame: (identifier)))
   (wait_for_statement
     events: (identifier)
-    widgets: (identifier)
-    widgets: (identifier)
-    events: (identifier)
-    widgets: (identifier)
-    widgets: (in_frame_phrase
+    widgets: (widget_phrase
       frame: (identifier))
-    focus: (identifier)
-    focus: (in_frame_phrase
+    events: (identifier)
+    widgets: (widget_phrase
+      field: (identifier)
+      frame: (identifier))
+    widgets: (widget_phrase
+      system_handle: (system_handle))
+    widgets: (widget_phrase
+      field: (identifier)
       frame: (identifier)))
   (on_statement
     event: (identifier)

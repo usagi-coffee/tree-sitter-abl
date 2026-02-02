@@ -8,32 +8,27 @@ module.exports = ({ kw }) => ({
     ),
 
   __update_record_body: ($) =>
-    prec(
-      1,
-      seq(
-        field("record", choice($.identifier, $.qualified_name)),
-        optional(seq(kw("EXCEPT"), repeat1(field("except", $.identifier)))),
-        optional($.frame_phrase),
-      ),
+    seq(
+      field("record", $.__update_record),
+      optional(seq(kw("EXCEPT"), repeat1(field("except", $.identifier)))),
+      optional($.frame_phrase),
     ),
 
   __update_fields_body: ($) =>
     seq(
       optional(kw("UNLESS-HIDDEN")),
-      repeat1(alias($.__update_item, $.update_item)),
+      repeat1(alias($.__update_field, $.field)),
       optional(alias($.__update_go_on, $.go_on_phrase)),
       optional($.frame_phrase),
       optional($.editing_phrase),
     ),
 
-  __update_item: ($) =>
+  __update_field: ($) =>
     choice(
-      prec.right(
-        seq(
-          field("field", $.__update_field_target),
-          optional($.__update_field_phrase),
-          optional(seq(kw("WHEN"), field("when", $._expression))),
-        ),
+      seq(
+        field("field", $.__update_field_target),
+        optional($.format_phrase),
+        optional(seq(kw("WHEN"), field("when", $._expression))),
       ),
       seq(
         field("field", $.__update_field_target),
@@ -46,7 +41,7 @@ module.exports = ({ kw }) => ({
         repeat1(
           seq(
             field("field", choice($.identifier, $.qualified_name)),
-            optional($.__update_field_phrase),
+            optional($.format_phrase),
           ),
         ),
         ")",
@@ -59,23 +54,10 @@ module.exports = ({ kw }) => ({
       seq(kw("SPACE"), optional(seq("(", $._expression, ")"))),
       "^",
     ),
+
+  __update_record: ($) => choice($.identifier, $.qualified_name),
   __update_field_target: ($) => choice($.identifier, $.qualified_name),
-  __update_field_phrase: ($) =>
-    repeat1(
-      choice(
-        $.format_phrase,
-        alias($.__update_validate_option, $.validate_option),
-      ),
-    ),
-  __update_validate_option: ($) =>
-    seq(
-      kw("VALIDATE"),
-      "(",
-      field("condition", $._expression),
-      ",",
-      field("message", $._expression),
-      ")",
-    ),
+
   __update_at_phrase: ($) =>
     seq(choice(kw("AT"), kw("TO")), token(/[0-9]+(\.[0-9]+)?/)),
 

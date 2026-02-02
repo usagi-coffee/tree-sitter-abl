@@ -53,10 +53,9 @@ STATUS INPUT OFF IN WINDOW hWin.
       (identifier))
     (body
       (display_statement
-        (field
-          (qualified_name
-            (identifier)
-            (identifier))))
+        (qualified_name
+          (identifier)
+          (identifier)))
       (for_statement
         (record
           (identifier)
@@ -64,26 +63,27 @@ STATUS INPUT OFF IN WINDOW hWin.
             (identifier)))
         (body
           (update_statement
-            (update_item
+            (field
               (qualified_name
                 (identifier)
                 (identifier)))
-            (update_item
+            (field
               (qualified_name
                 (identifier)
                 (identifier)))
-            (update_item
+            (field
               (qualified_name
                 (identifier)
                 (identifier)))
-            (update_item
+            (field
               (qualified_name
                 (identifier)
                 (identifier))))))
       (update_statement
-        (qualified_name
-          (identifier)
-          (identifier)))))
+        (field
+          (qualified_name
+            (identifier)
+            (identifier))))))
   (status_statement
     (string_literal)
     (identifier))

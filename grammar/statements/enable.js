@@ -18,8 +18,8 @@ module.exports = ({ kw }) => ({
   __enable_item: ($) =>
     choice(
       seq(
-        field("field", $._expression),
-        optional($.format_phrase),
+        field("field", choice($.identifier, $.qualified_name)),
+        repeat($.format_phrase),
         optional(seq(kw("WHEN"), field("when", $._expression))),
       ),
       seq(
@@ -29,21 +29,7 @@ module.exports = ({ kw }) => ({
         $.format_phrase,
         ")",
       ),
-      seq(
-        field("constant", $.string_literal),
-        choice(
-          alias($.__enable_at_phrase, $.at_phrase),
-          alias($.__enable_constant_option, $.constant_option),
-        ),
-        repeat(alias($.__enable_constant_option, $.constant_option)),
-      ),
+      seq(field("constant", $.string_literal), repeat($.format_phrase)),
       kw("SKIP"),
-    ),
-
-  __enable_at_phrase: ($) => seq(kw("AT"), token(/[0-9]+(\.[0-9]+)?/)),
-  __enable_constant_option: ($) =>
-    choice(
-      seq(kw("BGCOLOR"), token(/[0-9]+(\.[0-9]+)?/)),
-      seq(kw("VIEW-AS"), kw("TEXT")),
     ),
 });

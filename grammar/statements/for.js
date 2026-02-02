@@ -1,13 +1,10 @@
 module.exports = ({ kw }) => ({
   for_statement: ($) =>
-    prec(
-      1,
-      seq(
-        optional(seq(field("label", $.identifier), ":")),
-        kw("FOR"),
-        $.__for_body,
-        $._terminator,
-      ),
+    seq(
+      optional(seq(field("label", $.identifier), ":")),
+      kw("FOR"),
+      $.__for_body,
+      $._terminator,
     ),
 
   __for_body: ($) =>

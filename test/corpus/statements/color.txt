@@ -17,41 +17,41 @@ COLOR 7 PROMPT 3 field1 WITH FRAME f1.
   (color_statement
     color: (color_phrase
       (number_literal))
-    field: (identifier))
+    (identifier))
   (color_statement
     color: (color_phrase
       (number_literal))
-    field: (identifier)
-    field: (identifier)
-    field: (identifier))
+    (identifier)
+    (identifier)
+    (identifier))
   (color_statement
     color: (color_phrase
       (identifier))
-    field: (identifier))
+    (identifier))
   (color_statement
     color: (color_phrase
       value: (identifier))
-    field: (identifier))
+    (identifier))
   (color_statement
     color: (color_phrase
       (string_literal))
-    field: (identifier))
+    (identifier))
   (color_statement
     color: (color_phrase
-      (identifier))
-    field: (identifier))
-  (color_statement
-    color: (color_phrase
-      (number_literal))
-    prompt_color: (color_phrase
-      (number_literal))
-    field: (identifier))
+      foreground: (identifier))
+    (identifier))
   (color_statement
     color: (color_phrase
       (number_literal))
     prompt_color: (color_phrase
       (number_literal))
-    field: (identifier)
+    (identifier))
+  (color_statement
+    color: (color_phrase
+      (number_literal))
+    prompt_color: (color_phrase
+      (number_literal))
+    (identifier)
     (frame_phrase
       frame: (identifier))))
 
@@ -78,8 +78,7 @@ COLOR PROMPT INPUT field1 field2 WITH FRAME f1.
   (color_statement
     (color_phrase
       (identifier))
-    (input_expression
-      (identifier))
+    (identifier)
     (identifier)
     (frame_phrase
       (identifier))))

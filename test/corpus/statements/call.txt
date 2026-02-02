@@ -13,12 +13,16 @@ CALL updateRecord iId cName dDate.
     routine: (identifier))
   (call_statement
     routine: (identifier)
-    argument: (string_literal))
+    (argument
+      (string_literal)))
   (call_statement
     routine: (identifier)
-    argument: (identifier)
-    argument: (identifier)
-    argument: (identifier)))
+    (argument
+      (identifier))
+    (argument
+      (identifier))
+    (argument
+      (identifier))))
 
 ================================================================================
 CALL - argument expressions
@@ -33,19 +37,24 @@ CALL runCalc (a + b) func(arg1, arg2).
 (source_code
   (call_statement
     (identifier)
-    (number_literal)
-    (string_literal)
-    (identifier))
+    (argument
+      (number_literal))
+    (argument
+      (string_literal))
+    (argument
+      (identifier)))
   (call_statement
     (identifier)
-    (parenthesized_expression
-      (binary_expression
+    (argument
+      (parenthesized_expression
+        (binary_expression
+          (identifier)
+          (identifier))))
+    (argument
+      (function_call
         (identifier)
-        (identifier)))
-    (function_call
-      (identifier)
-      (arguments
-        (argument
-          (identifier))
-        (argument
-          (identifier))))))
+        (arguments
+          (argument
+            (identifier))
+          (argument
+            (identifier)))))))

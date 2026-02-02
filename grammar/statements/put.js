@@ -6,9 +6,11 @@ module.exports = ({ kw }) => ({
       optional($.__put_stream),
       choice(
         seq(optional(kw("UNFORMATTED")), repeat1($.__put_item)),
-        seq(kw("CONTROL"), repeat1(field("control", $._expression))),
+        seq(kw("CONTROL"), repeat1($.__put_control)),
       ),
     ),
+
+  __put_control: ($) => $._expression,
 
   __put_stream: ($) =>
     seq(
@@ -24,11 +26,13 @@ module.exports = ({ kw }) => ({
     ),
 
   __put_expression_item: ($) =>
-    seq(
-      field("value", $._expression),
-      optional($.format_phrase),
-      optional(
-        seq(choice(kw("AT"), kw("TO")), field("position", $._expression)),
+    prec.left(
+      seq(
+        field("value", $._expression),
+        optional($.format_phrase),
+        optional(
+          seq(choice(kw("AT"), kw("TO")), field("position", $._expression)),
+        ),
       ),
     ),
 

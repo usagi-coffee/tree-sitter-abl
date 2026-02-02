@@ -69,8 +69,9 @@ VIEW STREAM-HANDLE hS FRAME f1.
           (identifier)
           (string_literal)))
       (display_statement
-        (skip_phrase
-          (number_literal))
+        (field
+          (parenthesized_expression
+            (number_literal)))
         (field
           (qualified_name
             (identifier)

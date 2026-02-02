@@ -62,7 +62,7 @@ DEF BUTTON btnEnd AUTO-ENDKEY LIKE btnTestButton.
     (button_option)
     (button_option)
     (button_option
-      (string_literal))
+      tooltip: (string_literal))
     (button_option))
   (button_definition
     name: (identifier)
@@ -268,11 +268,11 @@ DEF BUTTON btnTT TOOLTIP text.
   (button_definition
     name: (identifier)
     (button_option
-      (string_literal)))
+      tooltip: (string_literal)))
   (button_definition
     name: (identifier)
     (button_option
-      (identifier))))
+      tooltip: (identifier))))
 
 ================================================================================
 BUTTON - PRIVATE Modifier
@@ -479,7 +479,7 @@ DEFINE BUTTON btnFull
     (button_option)
     (button_option)
     (button_option
-      (string_literal))
+      tooltip: (string_literal))
     (button_option)))
 
 ================================================================================

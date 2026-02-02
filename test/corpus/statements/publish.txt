@@ -108,16 +108,19 @@ PUBLISH cEventName FROM hPublisher (INPUT p1, INPUT-OUTPUT p2, OUTPUT p3).
       (identifier)))
   (on_statement
     (identifier)
-    (identifier)
+    (widget_phrase
+      (identifier))
     (run_statement
       (identifier)
       (in_phrase
         (identifier))))
   (wait_for_statement
     (identifier)
+    (widget_phrase
+      (identifier))
     (identifier)
-    (identifier)
-    (identifier))
+    (widget_phrase
+      (system_handle)))
   (procedure_definition
     (identifier)
     (variable_definition

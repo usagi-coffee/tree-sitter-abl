@@ -127,8 +127,7 @@ OVERLAY(cLong, 1, 5, "COLUMN") = "Hi".
       (string_literal)
       (string_literal)))
   (display_statement
-    (field
-      (identifier))
+    (identifier)
     (frame_phrase
       (centered)
       (identifier)
@@ -140,11 +139,11 @@ OVERLAY(cLong, 1, 5, "COLUMN") = "Hi".
       (set_statement
         (field
           (identifier)
-          (label_option
+          (format_phrase
             (string_literal)))
         (field
           (identifier)
-          (label_option
+          (format_phrase
             (string_literal)))
         (frame_phrase
           (identifier)

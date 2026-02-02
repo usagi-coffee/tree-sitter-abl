@@ -33,17 +33,12 @@ module.exports = ({ kw }) => ({
     ),
 
   __frame_header_section: ($) =>
-    prec(
-      1,
-      seq(choice(kw("HEADER"), kw("BACKGROUND")), repeat1($.__frame_head_item)),
-    ),
+    seq(choice(kw("HEADER"), kw("BACKGROUND")), repeat1($.__frame_head_item)),
 
   __frame_head_item: ($) =>
     choice(
-      prec(1, seq(kw("SKIP"), "(", optional($._expression), ")")),
-      prec(1, seq(kw("SPACE"), "(", optional($._expression), ")")),
-      kw("SKIP"),
-      kw("SPACE"),
+      $.__frame_skip_phrase,
+      $.__frame_space_phrase,
       seq(
         $._expression,
         optional($.at_phrase),
@@ -82,5 +77,14 @@ module.exports = ({ kw }) => ({
       seq(kw("PFCOLOR"), $._expression),
       seq(kw("VIEW-AS"), kw("TEXT")),
       seq(kw("WIDGET-ID"), $._expression),
+    ),
+
+  __frame_skip_phrase: ($) =>
+    prec.left(
+      seq(kw("SKIP"), optional(field("skip", seq("(", $._expression, ")")))),
+    ),
+  __frame_space_phrase: ($) =>
+    prec.left(
+      seq(kw("SPACE"), optional(field("space", seq("(", $._expression, ")")))),
     ),
 });

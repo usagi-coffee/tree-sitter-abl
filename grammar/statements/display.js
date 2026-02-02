@@ -1,14 +1,10 @@
 module.exports = ({ kw }) => ({
   display_statement: ($) =>
-    seq(
-      kw("DISPLAY", { offset: 3 }),
-      optional($.__display_stream),
-      optional(kw("UNLESS-HIDDEN")),
-      choice($.__display_record_form, repeat($.__display_item)),
-      optional(seq(kw("IN"), kw("WINDOW"), field("window", $._expression))),
-      repeat($.frame_phrase),
-      optional(alias(kw("NO-ERROR"), $.no_error)),
-      $._terminator,
+    prec.left(
+      seq(
+        kw("DISPLAY", { offset: 3 }),
+        choice($.__display_browse_body, $.__display_fields_body, $._terminator),
+      ),
     ),
 
   __display_stream: ($) =>
@@ -17,50 +13,110 @@ module.exports = ({ kw }) => ({
       field("stream", $.identifier),
     ),
 
-  __display_record_form: ($) =>
-    seq(
-      field("record", choice($.identifier, $.qualified_name)),
-      kw("EXCEPT"),
-      repeat1(field("except", choice($.identifier, $.qualified_name))),
+  __display_fields_body: ($) =>
+    choice(
+      prec(
+        2,
+        seq(
+          $.__display_stream,
+          optional(kw("UNLESS-HIDDEN")),
+          optional(seq(kw("IN"), kw("WINDOW"), field("window", $._expression))),
+          $.__display_frame_phrases,
+          optional(alias(kw("NO-ERROR"), $.no_error)),
+          $._terminator,
+        ),
+      ),
+      prec(
+        1,
+        seq(
+          optional($.__display_stream),
+          optional(kw("UNLESS-HIDDEN")),
+        $.__display_items,
+        optional(seq(kw("IN"), kw("WINDOW"), field("window", $._expression))),
+        $.__display_frame_phrases,
+          optional(alias(kw("NO-ERROR"), $.no_error)),
+          $._terminator,
+        ),
+      ),
+      seq(
+        optional($.__display_stream),
+        optional(kw("UNLESS-HIDDEN")),
+        $.__display_items,
+        optional(seq(kw("IN"), kw("WINDOW"), field("window", $._expression))),
+        optional(alias(kw("NO-ERROR"), $.no_error)),
+        $._terminator,
+      ),
     ),
 
-  __display_item: ($) =>
+  __display_items: ($) =>
     choice(
-      alias($.__display_skip_phrase, $.skip_phrase),
-      alias($.__display_space_phrase, $.space_phrase),
       seq(
-        alias($.__display_field, $.field),
-        optional($.format_phrase),
-        optional(seq(kw("WHEN"), field("when", $._expression))),
+        field("record", $.__display_record),
         optional(
-          seq("@", field("base", choice($.identifier, $.qualified_name))),
+          seq(
+            kw("EXCEPT"),
+            repeat1(field("except", choice($.identifier, $.qualified_name))),
+          ),
+        ),
+      ),
+      prec.right(
+        repeat1(
+          choice(
+            seq(
+              alias($.__display_field, $.field),
+              optional($.format_phrase),
+              optional(
+                seq(kw("WHEN"), field("when", $.__display_when_expression)),
+              ),
+              optional(
+                seq(
+                  "@",
+                  field("base", choice($.identifier, $.qualified_name)),
+                ),
+              ),
+            ),
+            $.__display_skip_phrase,
+            $.__display_space_phrase,
+          ),
         ),
       ),
     ),
+
+  __display_when_expression: ($) => $._expression,
 
   __display_field: ($) =>
-    prec(
-      1,
-      choice(
-        field("field", $._expression),
-        seq(
-          field("field", choice($.identifier, $.qualified_name)),
-          "(",
-          repeat1($.aggregate_phrase),
-          ")",
+    prec.right(
+      seq(
+        field("field", choice($.__display_keyword_identifier, $._expression)),
+        optional(
+          prec.dynamic(1, seq("(", repeat1($.aggregate_phrase), ")")),
         ),
       ),
     ),
+  __display_keyword_identifier: ($) => alias(kw("MENU"), $.identifier),
+
+  __display_record: ($) => choice($.identifier, $.qualified_name),
 
   __display_skip_phrase: ($) =>
-    choice(
-      prec(1, seq(kw("SKIP"), "(", optional($._expression), ")")),
-      kw("SKIP"),
+    prec.left(
+      seq(kw("SKIP"), optional(field("skip", seq("(", $._expression, ")")))),
+    ),
+  __display_space_phrase: ($) =>
+    prec.left(
+      seq(kw("SPACE"), optional(field("space", seq("(", $._expression, ")")))),
     ),
 
-  __display_space_phrase: ($) =>
-    choice(
-      prec(1, seq(kw("SPACE"), "(", optional($._expression), ")")),
-      kw("SPACE"),
+  __display_frame_phrases: ($) =>
+    seq($.frame_phrase, optional($.frame_phrase)),
+
+  // Second branch
+  __display_browse_body: ($) =>
+    seq(
+      $.__display_items,
+      kw("WITH"),
+      kw("BROWSE"),
+      field("browse", $.identifier),
+      optional(alias(kw("NO-ERROR"), $.no_error)),
+      $._terminator,
     ),
 });

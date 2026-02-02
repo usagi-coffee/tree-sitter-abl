@@ -34,7 +34,8 @@ IF ans THEN DICTIONARY.
       (number_literal)
       (no_labels)))
   (update_statement
-    (identifier))
+    (field
+      (identifier)))
   (if_statement
     (identifier)
     (dictionary_statement)))

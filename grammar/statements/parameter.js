@@ -19,10 +19,10 @@ module.exports = ({ kw }) => ({
       repeat(
         choice(
           alias($.__parameter_case_sensitive, $.case_sensitive),
+          alias($.__parameter_format, $.format),
           alias($.__parameter_column_label, $.column_label),
           alias($.__parameter_decimals, $.decimals),
           alias($.__parameter_initial_option, $.initial_option),
-          $.format_phrase,
           alias($.__parameter_label_option, $.label_option),
           alias($.__parameter_no_undo, $.no_undo),
         ),
@@ -98,6 +98,7 @@ module.exports = ({ kw }) => ({
     seq(optional(kw("NOT")), kw("CASE-SENSITIVE")),
   __parameter_column_label: ($) => seq(kw("COLUMN-LABEL"), $.string_literal),
   __parameter_decimals: ($) => seq(kw("DECIMALS"), $.number_literal),
+  __parameter_format: ($) => seq(kw("FORMAT"), $.string_literal),
   __parameter_label_option: ($) =>
     seq(kw("LABEL"), $.string_literal, repeat(seq(",", $.string_literal))),
   __parameter_extent_size: ($) =>

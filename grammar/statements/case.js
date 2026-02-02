@@ -22,8 +22,7 @@ module.exports = ({ kw }) => ({
   case_otherwise_phrase: ($) => seq(kw("OTHERWISE"), $._statement),
 
   __case_when_expression_list: ($) =>
-    seq(
-      $._expression,
-      repeat(seq(kw("OR"), kw("WHEN"), field("condition", $._expression))),
-    ),
+    seq($._expression, optional($.__case_when_expression_list_tail)),
+  __case_when_expression_list_tail: ($) =>
+    repeat1(seq(kw("OR"), kw("WHEN"), field("condition", $._expression))),
 });

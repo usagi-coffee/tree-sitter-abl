@@ -72,8 +72,7 @@ END.
         (frame_phrase
           frame: (identifier)))
       (display_statement
-        (field
-          field: (identifier))
+        record: (identifier)
         (frame_phrase
           frame: (identifier)
           (side_labels)))

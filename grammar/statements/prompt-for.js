@@ -16,19 +16,16 @@ module.exports = ({ kw }) => ({
     ),
 
   __prompt_for_record_body: ($) =>
-    prec(
-      1,
-      seq(
-        field("record", $.identifier),
-        optional(
-          seq(
-            kw("EXCEPT"),
-            repeat1(field("field", $.__prompt_for_field_target)),
-          ),
+    seq(
+      field("record", $.identifier),
+      optional(
+        seq(
+          kw("EXCEPT"),
+          repeat1(alias(choice($.identifier, $.qualified_name), $.field)),
         ),
-        optional(seq(kw("IN"), kw("WINDOW"), field("window", $._expression))),
-        optional($.frame_phrase),
       ),
+      optional(seq(kw("IN"), kw("WINDOW"), field("window", $._expression))),
+      optional($.frame_phrase),
     ),
 
   __prompt_for_fields_body: ($) =>
@@ -43,8 +40,8 @@ module.exports = ({ kw }) => ({
   __prompt_for_field: ($) =>
     choice(
       seq(
-        field("field", $.__prompt_for_field_target),
-        optional($.__prompt_for_field_phrase),
+        field("field", choice($.identifier, $.qualified_name)),
+        optional($.format_phrase),
         optional(seq(kw("WHEN"), field("when", $._expression))),
       ),
       seq(
@@ -53,7 +50,7 @@ module.exports = ({ kw }) => ({
         repeat1(
           seq(
             field("field", choice($.identifier, $.qualified_name)),
-            optional($.__prompt_for_field_phrase),
+            optional($.format_phrase),
           ),
         ),
         ")",
@@ -76,14 +73,6 @@ module.exports = ({ kw }) => ({
       "^",
     ),
 
-  __prompt_for_field_target: ($) => choice($.identifier, $.qualified_name),
-  __prompt_for_field_phrase: ($) =>
-    repeat1(
-      choice(
-        $.format_phrase,
-        alias($.__prompt_for_label_option, $.label_option),
-      ),
-    ),
   __prompt_for_label_option: ($) =>
     seq(
       kw("LABEL"),

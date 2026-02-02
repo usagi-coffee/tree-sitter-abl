@@ -138,8 +138,7 @@ DISPLAY "Succeeded".
           (identifier))))
     (body
       (display_statement
-        (field
-          field: (identifier)))))
+        record: (identifier))))
   (if_statement
     (object_access
       left: (identifier)
@@ -166,8 +165,7 @@ DISPLAY "Succeeded".
           (identifier))))
     (body
       (display_statement
-        (field
-          field: (identifier)))))
+        record: (identifier))))
   (close_stored_procedure_statement
     procedure: (identifier)
     handle: (identifier))
@@ -219,7 +217,7 @@ DISPLAY "Succeeded".
     type: (identifier)
     (no_undo)
     (initial_option
-      value: (number_literal)))
+      (number_literal)))
   (variable_definition
     name: (identifier)
     type: (identifier))

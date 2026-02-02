@@ -1,17 +1,12 @@
 module.exports = ({ kw }) => ({
-  set_statement: ($) =>
-    seq(
-      kw("SET"),
-      $.__set_body,
-      optional(alias(kw("NO-ERROR"), $.no_error)),
-      $._terminator,
-    ),
+  set_statement: ($) => seq(kw("SET"), $.__set_body, $._terminator),
 
   __set_body: ($) =>
     seq(
       optional($.__set_stream),
       optional(kw("UNLESS-HIDDEN")),
       choice($.__set_record_body, $.__set_fields_body),
+      optional(alias(kw("NO-ERROR"), $.no_error)),
     ),
 
   __set_stream: ($) =>
@@ -20,40 +15,27 @@ module.exports = ({ kw }) => ({
       field("stream", $.identifier),
     ),
 
-  __set_record_body: ($) =>
-    prec(
-      -1,
-      seq(
-        field("record", choice($.identifier, $.qualified_name)),
-        optional(seq(kw("EXCEPT"), repeat1(field("except", $.identifier)))),
-        optional($.frame_phrase),
-      ),
-    ),
-
   __set_fields_body: ($) =>
-    prec(
-      -1,
-      seq(
-        repeat1(alias($.__set_field, $.field)),
-        optional(alias($.__set_go_on, $.go_on_phrase)),
-        optional(alias($.__set_validate_option, $.validate_option)),
-        optional(alias($.__set_help_phrase, $.help_phrase)),
-        optional($.frame_phrase),
-        optional($.editing_phrase),
-      ),
+    seq(
+      repeat1(alias($.__set_field, $.field)),
+      optional(alias($.__set_go_on, $.go_on_phrase)),
+      optional(alias($.__set_validate_option, $.validate_option)),
+      optional(alias($.__set_help_phrase, $.help_phrase)),
+      optional($.frame_phrase),
+      optional($.editing_phrase),
     ),
 
   __set_field: ($) =>
     choice(
       prec.right(
         seq(
-          field("field", $.__set_field_target),
-          optional($.__set_field_phrase),
+          field("field", choice($.identifier, $.qualified_name)),
+          optional($.format_phrase),
           optional(seq(kw("WHEN"), field("when", $._expression))),
         ),
       ),
       seq(
-        field("field", $.__set_field_target),
+        field("field", choice($.identifier, $.qualified_name)),
         "=",
         field("value", $._expression),
       ),
@@ -63,7 +45,7 @@ module.exports = ({ kw }) => ({
         repeat1(
           seq(
             field("field", choice($.identifier, $.qualified_name)),
-            optional($.__set_field_phrase),
+            optional($.format_phrase),
           ),
         ),
         ")",
@@ -77,13 +59,15 @@ module.exports = ({ kw }) => ({
       "^",
     ),
 
-  __set_field_target: ($) => choice($.identifier, $.qualified_name),
-  __set_field_phrase: ($) =>
-    repeat1(
-      choice($.format_phrase, alias($.__set_label_option, $.label_option)),
+  __set_record_body: ($) =>
+    seq(
+      field("record", $.__set_record),
+      optional(seq(kw("EXCEPT"), repeat1(field("except", $.identifier)))),
+      optional($.frame_phrase),
     ),
 
-  __set_label_option: ($) => seq(kw("LABEL"), $._expression),
+  __set_record: ($) => choice($.identifier, $.qualified_name),
+
   __set_at_phrase: ($) => seq(kw("AT"), token(/[0-9]+(\.[0-9]+)?/)),
   __set_help_phrase: ($) => seq(kw("HELP"), $.string_literal),
 

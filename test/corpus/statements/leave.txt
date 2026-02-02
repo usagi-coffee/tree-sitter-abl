@@ -56,10 +56,9 @@ END.
           (message_statement
             (string_literal))
           (update_statement
-            (update_item
-              (identifier))
-            (update_item
-              (identifier)))
+            (field
+              (identifier)
+              (format_phrase)))
           (if_statement
             (binary_expression
               (function_call

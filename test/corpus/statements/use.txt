@@ -41,63 +41,57 @@ DELETE WIDGET new_win.
 
 (source_code
   (variable_definition
-    (identifier)
-    (identifier)
+    name: (identifier)
+    type: (identifier)
     (no_undo)
-    (view_as_phrase
-      (identifier))
-    (font_option
-      (number_literal))
+    widget: (identifier)
+    font: (number_literal)
     (format_phrase
-      (string_literal))
+      format: (string_literal))
     (initial_option
       (string_literal)))
   (variable_definition
-    (identifier)
-    (identifier)
+    name: (identifier)
+    type: (identifier)
     (no_undo)
-    (view_as_phrase
-      (identifier))
-    (font_option
-      (number_literal))
+    widget: (identifier)
+    font: (number_literal)
     (format_phrase
-      (string_literal))
+      format: (string_literal))
     (initial_option
       (string_literal)))
   (variable_definition
-    (identifier)
-    (identifier)
+    name: (identifier)
+    type: (identifier)
     (no_undo))
   (load_statement
-    (string_literal))
+    file: (string_literal))
   (load_statement
-    (string_literal))
+    file: (string_literal))
   (use_statement
-    (string_literal))
+    environment: (string_literal))
   (display_statement
-    (field
-      (identifier))
+    record: (identifier)
     (frame_phrase
       (no_labels))
     (frame_phrase
-      (identifier)))
+      frame: (identifier)))
   (pause_statement)
   (use_statement
-    (string_literal))
+    environment: (string_literal))
   (create_widget_statement
-    (identifier))
+    handle: (identifier))
   (assignment_statement
-    (identifier)
-    (assignment_operator)
-    (identifier))
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (identifier))
   (display_statement
-    (field
-      (identifier))
-    (identifier)
+    record: (identifier)
+    window: (identifier)
     (frame_phrase
       (no_labels))
     (frame_phrase
-      (identifier)))
+      frame: (identifier)))
   (pause_statement)
   (delete_widget_statement
-    (identifier)))
+    widget: (identifier)))

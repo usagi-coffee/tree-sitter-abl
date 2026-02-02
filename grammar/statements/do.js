@@ -1,13 +1,10 @@
 module.exports = ({ kw }) => ({
   do_block: ($) =>
-    prec(
-      1,
-      seq(
-        optional(seq(field("label", $.identifier), ":")),
-        kw("DO"),
-        $.__do_body,
-        $._terminator,
-      ),
+    seq(
+      optional(seq(field("label", $.identifier), ":")),
+      kw("DO"),
+      $.__do_body,
+      $._terminator,
     ),
 
   __do_body: ($) =>

@@ -62,7 +62,7 @@ module.exports = ({ kw }) => ({
 
   __browse_column_option: ($) =>
     choice(
-      $.format_phrase,
+      alias($.__browse_format_phrase, $.format_phrase),
       alias($.__browse_label_option, $.label_option),
       alias($.__browse_no_labels_option, $.no_labels_option),
       alias($.__browse_width_option, $.width_option),
@@ -84,6 +84,8 @@ module.exports = ({ kw }) => ({
       alias($.__browse_moveable_option, $.moveable_option),
       alias($.__browse_resizable_option, $.resizable_option),
     ),
+  __browse_format_phrase: ($) =>
+    seq(kw("FORMAT"), field("format", $.string_literal)),
 
   __browse_option: ($) =>
     choice(

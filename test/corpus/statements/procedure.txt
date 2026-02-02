@@ -21,8 +21,7 @@ PROCEDURE forwardProc.
       name: (identifier)
       type: (identifier))
     (display_statement
-      (field
-        field: (identifier))))
+      record: (identifier)))
   (procedure_definition
     name: (identifier))
   (procedure_forward_definition
@@ -90,10 +89,9 @@ END PROCEDURE.
           (identifier)))
       (body
         (display_statement
-          (field
-            field: (qualified_name
-              left: (identifier)
-              right: (identifier))))))))
+          record: (qualified_name
+            left: (identifier)
+            right: (identifier)))))))
 
 ================================================================================
 PROCEDURE - DATASET-HANDLE parameter
@@ -292,8 +290,8 @@ END PROCEDURE.
       name: (identifier)
       type: (identifier)
       (no_undo)
-      (format_phrase
-        format: (string_literal)))
+      (format
+        (string_literal)))
     (parameter_definition
       name: (identifier)
       like: (qualified_name
@@ -503,16 +501,16 @@ END PROCEDURE.
     (body
       (set_statement
         (field
-          field: (identifier))
-        (validate_option
-          condition: (binary_expression
-            (binary_expression
-              (identifier)
-              (number_literal))
-            (binary_expression
-              (identifier)
-              (number_literal)))
-          message: (string_literal)))
+          field: (identifier)
+          (format_phrase
+            condition: (binary_expression
+              (binary_expression
+                (identifier)
+                (number_literal))
+              (binary_expression
+                (identifier)
+                (number_literal)))
+            message: (string_literal))))
       (run_statement
         procedure: (identifier)
         (arguments
@@ -521,8 +519,7 @@ END PROCEDURE.
           (argument
             name: (identifier))))
       (display_statement
-        (field
-          field: (identifier)))))
+        record: (identifier))))
   (procedure_definition
     name: (identifier)
     (parameter_definition

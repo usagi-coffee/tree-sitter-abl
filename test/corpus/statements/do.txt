@@ -47,8 +47,7 @@ END.
     step: (number_literal)
     (body
       (display_statement
-        (field
-          field: (identifier))))))
+        record: (identifier)))))
 
 ================================================================================
 DO WHILE
@@ -327,8 +326,7 @@ END.
     end: (identifier)
     (body
       (display_statement
-        (field
-          field: (identifier)))))
+        record: (identifier))))
   (do_block
     variable: (identifier)
     start: (function_call
@@ -342,8 +340,7 @@ END.
       (arguments))
     (body
       (display_statement
-        (field
-          field: (identifier))))))
+        record: (identifier)))))
 
 ================================================================================
 DO with empty body using dot terminator
@@ -402,8 +399,7 @@ END.
       width: (number_literal))
     (body
       (display_statement
-        (field
-          field: (identifier))))))
+        record: (identifier)))))
 
 ================================================================================
 DO - Reference snippet

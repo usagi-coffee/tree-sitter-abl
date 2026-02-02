@@ -141,8 +141,7 @@ INPUT CLOSE.
         (unformatted_phrase
           (identifier)))
       (display_statement
-        (field
-          (identifier))
+        (identifier)
         (frame_phrase
           (identifier)))
       (down_statement

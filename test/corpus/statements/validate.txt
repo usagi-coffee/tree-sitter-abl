@@ -70,11 +70,11 @@ VALIDATE sports.Item NO-ERROR.
                     (identifier)
                     (identifier)))))
             (update_statement
-              (update_item
+              (field
                 (qualified_name
                   (identifier)
                   (identifier)))
-              (update_item
+              (field
                 (qualified_name
                   (identifier)
                   (identifier))))

@@ -480,9 +480,10 @@ DELETE WIDGET mywin.
     (assign_phrase
       (assign_pair
         left: (identifier)
-        right: (widget_access
-          query: (identifier)
-          attribute: (identifier)))))
+        right: (object_access
+          widget: (identifier)
+          left: (identifier)
+          right: (identifier)))))
   (button_definition
     name: (identifier)
     (button_option
@@ -531,79 +532,86 @@ DELETE WIDGET mywin.
       frame: (identifier)))
   (on_statement
     event: (identifier)
-    widget: (identifier)
-    (in_frame_phrase
+    widget: (widget_phrase
+      field: (identifier)
       frame: (identifier))
     (do_block
       (body
         (assignment_statement
-          left: (widget_access
-            query: (identifier)
-            attribute: (identifier)
-            menu: (identifier))
+          left: (object_access
+            widget: (identifier)
+            left: (identifier)
+            right: (identifier)
+            in: (identifier))
           operator: (assignment_operator)
           right: (boolean_literal))
         (assignment_statement
-          left: (widget_access
-            query: (identifier)
-            attribute: (identifier)
-            menu: (identifier))
+          left: (object_access
+            widget: (identifier)
+            left: (identifier)
+            right: (identifier)
+            in: (identifier))
           operator: (assignment_operator)
           right: (boolean_literal))
         (assignment_statement
-          left: (widget_access
-            query: (identifier)
-            attribute: (identifier)
-            menu: (identifier))
+          left: (object_access
+            widget: (identifier)
+            left: (identifier)
+            right: (identifier)
+            in: (identifier))
           operator: (assignment_operator)
           right: (boolean_literal))
         (assignment_statement
-          left: (widget_access
-            query: (identifier)
-            attribute: (identifier)
-            menu: (identifier))
+          left: (object_access
+            widget: (identifier)
+            left: (identifier)
+            right: (identifier)
+            in: (identifier))
           operator: (assignment_operator)
           right: (boolean_literal)))))
   (on_statement
     event: (identifier)
-    widget: (identifier)
-    (in_frame_phrase
+    widget: (widget_phrase
+      field: (identifier)
       frame: (identifier))
     (do_block
       (body
         (assignment_statement
-          left: (widget_access
-            query: (identifier)
-            attribute: (identifier)
-            menu: (identifier))
+          left: (object_access
+            widget: (identifier)
+            left: (identifier)
+            right: (identifier)
+            in: (identifier))
           operator: (assignment_operator)
           right: (boolean_literal))
         (assignment_statement
-          left: (widget_access
-            query: (identifier)
-            attribute: (identifier)
-            menu: (identifier))
+          left: (object_access
+            widget: (identifier)
+            left: (identifier)
+            right: (identifier)
+            in: (identifier))
           operator: (assignment_operator)
           right: (boolean_literal))
         (assignment_statement
-          left: (widget_access
-            query: (identifier)
-            attribute: (identifier)
-            menu: (identifier))
+          left: (object_access
+            widget: (identifier)
+            left: (identifier)
+            right: (identifier)
+            in: (identifier))
           operator: (assignment_operator)
           right: (boolean_literal))
         (assignment_statement
-          left: (widget_access
-            query: (identifier)
-            attribute: (identifier)
-            menu: (identifier))
+          left: (object_access
+            widget: (identifier)
+            left: (identifier)
+            right: (identifier)
+            in: (identifier))
           operator: (assignment_operator)
           right: (boolean_literal)))))
   (wait_for_statement
     events: (identifier)
-    widgets: (identifier)
-    widgets: (identifier)
-    widgets: (in_menu_phrase
+    widgets: (widget_phrase
+      item: (identifier)
       menu: (identifier)))
   (delete_widget_statement
     widget: (identifier)))

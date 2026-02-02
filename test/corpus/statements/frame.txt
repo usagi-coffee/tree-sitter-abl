@@ -698,8 +698,7 @@ WAIT-FOR WINDOW-CLOSE OF FRAME cust-fr.
     (qualified_name
       (identifier)
       (identifier))
-    (column_label_option
-      (string_literal))
+    (string_literal)
     (no_undo))
   (frame_definition
     (identifier)
@@ -812,7 +811,8 @@ WAIT-FOR WINDOW-CLOSE OF FRAME cust-fr.
       (number_literal)))
   (on_statement
     (identifier)
-    (identifier)
+    (widget_phrase
+      (identifier))
     (display_statement
       (identifier)
       (qualified_name
@@ -1028,27 +1028,33 @@ WAIT-FOR WINDOW-CLOSE OF FRAME cust-fr.
         (number_literal))
       (number_literal)))
   (assignment_statement
-    (widget_access
+    (object_access
+      (identifier)
       (identifier)
       (identifier))
     (assignment_operator)
-    (widget_access
+    (object_access
+      (identifier)
       (identifier)
       (identifier)))
   (assignment_statement
-    (widget_access
+    (object_access
+      (identifier)
       (identifier)
       (identifier))
     (assignment_operator)
-    (widget_access
+    (object_access
+      (identifier)
       (identifier)
       (identifier)))
   (assignment_statement
-    (widget_access
+    (object_access
+      (identifier)
       (identifier)
       (identifier))
     (assignment_operator)
-    (widget_access
+    (object_access
+      (identifier)
       (identifier)
       (identifier)))
   (open_query_statement
@@ -1066,5 +1072,5 @@ WAIT-FOR WINDOW-CLOSE OF FRAME cust-fr.
       (identifier)))
   (wait_for_statement
     (identifier)
-    (identifier)
-    (identifier)))
+    (widget_phrase
+      (identifier))))

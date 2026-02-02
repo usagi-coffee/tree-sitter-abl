@@ -236,8 +236,7 @@ module.exports = ({ kw }) => ({
       choice($._expression, seq("[", optional($._expressions), "]")),
     ),
 
-  __property_initial_keyword: ($) =>
-    choice(kw("INITIAL"), alias(token(seq(/INIT(IAL)?/i, /\s+/)), "INITIAL")),
+  __property_initial_keyword: ($) => kw("INITIAL", { offset: 4 }),
 
   __property_no_undo: ($) => kw("NO-UNDO"),
 

@@ -25,104 +25,107 @@ module.exports = ({ kw }) => ({
   __variable_body: ($) =>
     seq(
       field("name", $.identifier),
-      optional(alias($.__variable_no_undo, $.no_undo)),
-      $._variable_type_phrase,
+      optional(alias(kw("NO-UNDO"), $.no_undo)),
+
+      seq(
+        choice(
+          seq(
+            kw("AS"),
+            optional(kw("CLASS")),
+            field("type", $._type_or_string),
+          ),
+          seq(
+            kw("LIKE"),
+            field("like", choice($.identifier, $.qualified_name)),
+          ),
+        ),
+      ),
+
       repeat(
         choice(
-          alias($.__variable_serialize_name_option, $.serialize_name_option),
-          alias($.__variable_bgcolor_option, $.bgcolor_option),
-          alias($.__variable_column_label_option, $.column_label_option),
-          alias($.__variable_context_help_id_option, $.context_help_id_option),
-          alias($.__variable_dcolor_option, $.dcolor_option),
-          alias($.__variable_decimals_option, $.decimals_option),
-          alias($.__variable_drop_target_option, $.drop_target_option),
           alias($.__variable_extent_phrase, $.extent_phrase),
-          alias($.__variable_font_option, $.font_option),
-          alias($.__variable_fgcolor_option, $.fgcolor_option),
+          seq(
+            kw("SERIALIZE-NAME"),
+            field("serialize_name", choice($.identifier, $.string_literal)),
+          ),
+          alias($.__variable_format_phrase, $.format_phrase),
+          seq(kw("BGCOLOR"), field("bgcolor", $._expression)),
+          seq(
+            kw("COLUMN-LABEL"),
+            field("column_label", $.__format_labels),
+          ),
+          seq(kw("CONTEXT-HELP-ID"), field("context_help_id", $._expression)),
+          seq(kw("DCOLOR"), field("dcolor", $._expression)),
+          seq(kw("DECIMALS"), field("decimals", $.number_literal)),
+          kw("DROP-TARGET"),
+          seq(kw("FONT"), field("font", $._expression)),
+          seq(kw("FGCOLOR"), field("fgcolor", $._expression)),
+          seq(kw("LABEL"), field("label", $.__format_labels)),
+          seq(kw("PFCOLOR"), field("pfcolor", $._expression)),
+          seq(kw("MOUSE-POINTER"), field("mouse_pointer", $._expression)),
+
           alias($.__variable_initial_option, $.initial_option),
-          alias($.__variable_label_option, $.label_option),
-          alias($.__variable_mouse_pointer_option, $.mouse_pointer_option),
-          alias($.__variable_no_undo, $.no_undo),
-          alias($.__variable_case_sensitive_option, $.case_sensitive_option),
-          alias($.__variable_pfcolor_option, $.pfcolor_option),
-          alias($.__variable_view_as_phrase, $.view_as_phrase),
+
+          seq(
+            kw("VIEW-AS"),
+            field("widget", $.identifier),
+            repeat(
+              choice(
+                kw("HORIZONTAL"),
+                kw("VERTICAL"),
+                kw("SINGLE"),
+                kw("MULTIPLE"),
+                seq(
+                  kw("LIST-ITEMS"),
+                  field("list_items", $.__variable_list_items),
+                ),
+                seq(
+                  kw("RADIO-BUTTONS"),
+                  field("radio_buttons", $.__variable_radio_buttons),
+                ),
+                seq(
+                  kw("SIZE"),
+                  field("width", $._expression),
+                  kw("BY"),
+                  field("height", $._expression),
+                ),
+                kw("SCROLLBAR-VERTICAL"),
+                kw("NO-DRAG"),
+              ),
+            ),
+          ),
+
+          seq(optional(kw("NOT")), kw("CASE-SENSITIVE")),
+          alias(kw("NO-UNDO"), $.no_undo),
           $.trigger_phrase,
-          $.format_phrase,
         ),
       ),
     ),
 
-  _variable_type_phrase: ($) =>
-    seq(
-      choice(
-        seq(kw("AS"), optional(kw("CLASS")), field("type", $._type_or_string)),
-        seq(kw("LIKE"), field("like", $.__variable_field_name)),
-      ),
-    ),
-
-  __variable_initial_option: ($) =>
-    seq(
-      $.__variable_initial_keyword,
-      field(
-        "value",
-        choice($._expression, seq("[", optional($._expressions), "]")),
-      ),
-    ),
-
-  __variable_extent_phrase: ($) =>
-    seq(kw("EXTENT"), optional($.__variable_extent_size)),
-  __variable_serialize_name_option: ($) =>
-    seq(kw("SERIALIZE-NAME"), field("name", $._name_or_string)),
-  _name_or_string: ($) => choice($.identifier, $.string_literal),
-  __variable_bgcolor_option: ($) => seq(kw("BGCOLOR"), $._expression),
-  __variable_column_label_option: ($) =>
-    seq(kw("COLUMN-LABEL"), $.__variable_label_list),
-  __variable_context_help_id_option: ($) =>
-    seq(kw("CONTEXT-HELP-ID"), $._expression),
-  __variable_dcolor_option: ($) => seq(kw("DCOLOR"), $._expression),
-  __variable_decimals_option: ($) => seq(kw("DECIMALS"), $.number_literal),
-  __variable_drop_target_option: ($) => kw("DROP-TARGET"),
-  __variable_font_option: ($) => seq(kw("FONT"), $._expression),
-  __variable_fgcolor_option: ($) => seq(kw("FGCOLOR"), $._expression),
-  __variable_label_option: ($) => seq(kw("LABEL"), $.__variable_label_list),
-  __variable_pfcolor_option: ($) => seq(kw("PFCOLOR"), $._expression),
-  __variable_view_as_phrase: ($) =>
-    seq(
-      kw("VIEW-AS"),
-      field("widget", $.identifier),
-      repeat($.__variable_view_as_option),
-    ),
-  __variable_view_as_option: ($) =>
-    choice(
-      kw("HORIZONTAL"),
-      kw("VERTICAL"),
-      kw("SINGLE"),
-      kw("MULTIPLE"),
-      seq(kw("LIST-ITEMS"), $.__variable_list_items),
-      seq(kw("RADIO-BUTTONS"), $.__variable_radio_buttons),
-      seq(kw("SIZE"), $._expression, kw("BY"), $._expression),
-      kw("SCROLLBAR-VERTICAL"),
-      kw("NO-DRAG"),
-    ),
-  __variable_no_undo: ($) => kw("NO-UNDO"),
-  __variable_mouse_pointer_option: ($) =>
-    seq(kw("MOUSE-POINTER"), $._expression),
-  __variable_case_sensitive_option: ($) =>
-    seq(optional(kw("NOT")), kw("CASE-SENSITIVE")),
   __variable_extent_size: ($) =>
     choice(
       $.number_literal,
       alias($.constant_expression, $.constant),
       $.identifier,
     ),
+
   __variable_list_items: ($) =>
     seq($._expression, repeat(seq(",", $._expression))),
+
   __variable_radio_buttons: ($) =>
     seq($.__variable_radio_button, repeat(seq(",", $.__variable_radio_button))),
+
   __variable_radio_button: ($) => seq($._expression, ",", $._expression),
-  __variable_label_list: ($) =>
-    seq($.string_literal, repeat(seq(",", $.string_literal))),
-  __variable_field_name: ($) => choice($.identifier, $.qualified_name),
-  __variable_initial_keyword: ($) =>
-    choice(kw("INITIAL"), alias(token(seq(/INIT(IAL)?/i, /\s+/)), "INITIAL")),
+
+  __variable_extent_phrase: ($) =>
+    seq(kw("EXTENT"), optional($.__variable_extent_size)),
+
+  __variable_format_phrase: ($) =>
+    seq(kw("FORMAT"), field("format", $.string_literal)),
+
+  __variable_initial_option: ($) =>
+    seq(
+      kw("INITIAL", { offset: 4 }),
+      choice($._expression, seq("[", optional($._expressions), "]")),
+    ),
 });

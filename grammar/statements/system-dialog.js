@@ -95,7 +95,11 @@ module.exports = ({ kw }) => ({
   __system_dialog_filters: ($) =>
     seq(
       kw("FILTERS"),
-      repeat1(seq(field("name", $._expression), field("spec", $._expression))),
+      $.__system_dialog_filters_pairs,
       optional(seq(kw("INITIAL-FILTER"), field("initial", $._expression))),
     ),
+  __system_dialog_filters_pairs: ($) =>
+    repeat1($.__system_dialog_filter_pair),
+  __system_dialog_filter_pair: ($) =>
+    seq(field("name", $._expression), field("spec", $._expression)),
 });

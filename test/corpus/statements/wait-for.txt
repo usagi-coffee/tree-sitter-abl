@@ -10,14 +10,20 @@ WAIT-FOR WINDOW-CLOSE OF CURRENT-WINDOW OR READ-RESPONSE OF hSocket FOCUS hSocke
 (source_code
   (wait_for_statement
     events: (identifier)
-    widgets: (identifier)
+    widgets: (widget_phrase
+      handle: (identifier))
     duration: (number_literal))
   (wait_for_statement
     events: (identifier)
-    widgets: (identifier)
+    widgets: (widget_phrase
+      system_handle: (system_handle))
     events: (identifier)
-    widgets: (identifier)
-    focus: (identifier)
+    widgets: (widget_phrase
+      handle: (identifier))
+    widgets: (widget_phrase
+      system_handle: (system_handle))
+    widgets: (widget_phrase
+      handle: (identifier))
     duration: (number_literal)))
 
 ================================================================================
@@ -119,7 +125,8 @@ WAIT-FOR PROCEDURE-COMPLETE OF hRequest.
       (identifier)))
   (on_statement
     (identifier)
-    (identifier)
+    (widget_phrase
+      (identifier))
     (display_statement
       (identifier)
       (qualified_name
@@ -132,7 +139,8 @@ WAIT-FOR PROCEDURE-COMPLETE OF hRequest.
         (identifier))))
   (on_statement
     (identifier)
-    (identifier)
+    (widget_phrase
+      (identifier))
     (do_block
       (body
         (hide_statement
@@ -179,8 +187,12 @@ WAIT-FOR PROCEDURE-COMPLETE OF hRequest.
       (identifier)))
   (wait_for_statement
     (identifier)
-    (identifier)
-    (identifier))
+    (widget_phrase
+      (system_handle))
+    (widget_phrase
+      (system_handle))
+    (widget_phrase
+      (identifier)))
   (variable_definition
     (identifier)
     (identifier)
@@ -227,7 +239,8 @@ WAIT-FOR PROCEDURE-COMPLETE OF hRequest.
       (identifier)))
   (on_statement
     (identifier)
-    (identifier)
+    (widget_phrase
+      (identifier))
     (do_block
       (body
         (display_statement
@@ -246,7 +259,8 @@ WAIT-FOR PROCEDURE-COMPLETE OF hRequest.
           (boolean_literal)))))
   (on_statement
     (identifier)
-    (identifier)
+    (widget_phrase
+      (identifier))
     (do_block
       (body
         (assignment_statement
@@ -255,7 +269,8 @@ WAIT-FOR PROCEDURE-COMPLETE OF hRequest.
           (boolean_literal)))))
   (on_statement
     (identifier)
-    (identifier)
+    (widget_phrase
+      (system_handle))
     (do_block
       (body
         (quit_statement))))
@@ -275,10 +290,15 @@ WAIT-FOR PROCEDURE-COMPLETE OF hRequest.
           (identifier)))
       (wait_for_statement
         (identifier)
+        (widget_phrase
+          (system_handle))
         (identifier)
-        (identifier)
-        (identifier)
-        (identifier)
+        (widget_phrase
+          (identifier))
+        (widget_phrase
+          (system_handle))
+        (widget_phrase
+          (identifier))
         (number_literal))))
   (procedure_definition
     (identifier)
@@ -304,4 +324,5 @@ WAIT-FOR PROCEDURE-COMPLETE OF hRequest.
           (identifier)))))
   (wait_for_statement
     (identifier)
-    (identifier)))
+    (widget_phrase
+      (identifier))))

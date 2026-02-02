@@ -1,7 +1,6 @@
 module.exports = ({ kw }) => ({
   create_widget_statement: ($) =>
     prec.right(
-      1,
       seq(
         kw("CREATE"),
         choice(

@@ -32,7 +32,7 @@ END.
       (qualified_name
         (identifier)
         (identifier))
-      (label_option
+      (format_phrase
         (string_literal)))
     (frame_phrase
       (side_labels)

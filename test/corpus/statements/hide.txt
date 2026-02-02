@@ -62,11 +62,11 @@ HIDE ALL NO-PAUSE IN WINDOW w1.
   (message_statement
     (string_literal))
   (update_statement
-    (update_item
+    (field
       (string_literal))
-    (update_item
+    (field
       (identifier)
-      (validate_option
+      (format_phrase
         (binary_expression
           (binary_expression
             (number_literal)
@@ -75,8 +75,6 @@ HIDE ALL NO-PAUSE IN WINDOW w1.
             (identifier)
             (number_literal)))
         (string_literal)))
-    (update_item
-      (identifier))
     (frame_phrase
       (identifier)))
   (if_statement

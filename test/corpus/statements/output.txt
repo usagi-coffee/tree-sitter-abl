@@ -132,8 +132,9 @@ OUTPUT TO TERMINAL.
           (qualified_name
             (identifier)
             (identifier)))
-        (skip_phrase
-          (number_literal))
+        (field
+          (parenthesized_expression
+            (number_literal)))
         (frame_phrase
           (number_literal)
           (side_labels)))))
@@ -208,25 +209,19 @@ OUTPUT TO TERMINAL.
           (qualified_name
             (identifier)
             (identifier)))
-        (field
-          (identifier))
-        (field
+        (format_phrase
           (string_literal))
         (field
           (qualified_name
             (identifier)
             (identifier)))
-        (field
-          (identifier))
-        (field
+        (format_phrase
           (string_literal))
         (field
           (qualified_name
             (identifier)
             (identifier)))
-        (field
-          (identifier))
-        (field
+        (format_phrase
           (string_literal))
         (frame_phrase
           (centered)))

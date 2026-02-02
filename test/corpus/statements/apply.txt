@@ -14,7 +14,8 @@ APPLY "ERROR".
     event: (string_literal))
   (apply_statement
     event: (string_literal)
-    widget: (identifier))
+    to: (widget
+      handle: (identifier)))
   (apply_statement
     event: (identifier))
   (apply_statement
@@ -34,16 +35,17 @@ APply "CLOSE" TO window.
 (source_code
   (apply_statement
     event: (string_literal)
-    widget: (identifier))
+    to: (widget
+      handle: (identifier)))
   (apply_statement
     event: (identifier)
-    widget: (identifier))
+    to: (widget))
   (apply_statement
     event: (string_literal)
-    widget: (identifier))
+    to: (widget))
   (apply_statement
     event: (string_literal)
-    widget: (identifier)))
+    to: (widget)))
 
 ===============================================================================
 APPLY statement with widget expressions
@@ -58,15 +60,18 @@ APPLY "CHOOSE" TO CURRENT-WINDOW.
 (source_code
   (apply_statement
     event: (string_literal)
-    widget: (qualified_name
-      left: (identifier)
-      right: (identifier)))
+    to: (widget
+      handle: (qualified_name
+        left: (identifier)
+        right: (identifier))))
   (apply_statement
     event: (identifier)
-    widget: (identifier))
+    to: (widget
+      handle: (identifier)))
   (apply_statement
     event: (string_literal)
-    widget: (identifier)))
+    to: (widget
+      system_handle: (system_handle))))
 
 ===============================================================================
 APPLY statement with keycode and frame widget-phrase
@@ -80,9 +85,10 @@ APPLY "CHOOSE" TO order-but IN FRAME x.
 (source_code
   (apply_statement
     event: (number_literal)
-    widget: (identifier))
+    to: (widget
+      handle: (identifier)))
   (apply_statement
     event: (string_literal)
-    widget: (in_frame_expression
-      value: (identifier)
+    to: (widget
+      field: (identifier)
       frame: (identifier))))

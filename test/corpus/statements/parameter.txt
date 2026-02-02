@@ -190,13 +190,13 @@ DEFINE OUTPUT PARAMETER pNum AS DECIMAL FORMAT "z,zzz.99".
   (parameter_definition
     name: (identifier)
     type: (identifier)
-    (format_phrase
-      format: (string_literal)))
+    (format
+      (string_literal)))
   (parameter_definition
     name: (identifier)
     type: (identifier)
-    (format_phrase
-      format: (string_literal))))
+    (format
+      (string_literal))))
 
 ================================================================================
 PARAMETER DEFINITION - NO-UNDO Option
@@ -356,8 +356,8 @@ DEFINE RETURN PARAMETER pRes AS LOGICAL NO-UNDO.
   (parameter_definition
     name: (identifier)
     type: (identifier)
-    (format_phrase
-      format: (string_literal))
+    (format
+      (string_literal))
     (initial_option
       (number_literal))
     (label_option
@@ -374,8 +374,8 @@ DEFINE RETURN PARAMETER pRes AS LOGICAL NO-UNDO.
       (number_literal))
     (label_option
       (string_literal))
-    (format_phrase
-      format: (string_literal)))
+    (format
+      (string_literal)))
   (parameter_definition
     name: (identifier)
     like: (qualified_name
@@ -501,10 +501,8 @@ DEFINE INPUT PARAMETER pExtent0 AS INTEGER EXTENT 0.
   (display_statement
     (field
       field: (identifier))
-    (field
-      field: (identifier))
-    (field
-      field: (string_literal))
+    (format_phrase
+      label: (string_literal))
     (frame_phrase
       (side_labels)))
   (variable_definition
@@ -522,7 +520,7 @@ DEFINE INPUT PARAMETER pExtent0 AS INTEGER EXTENT 0.
     type: (identifier)
     (no_undo)
     (initial_option
-      value: (number_literal)))
+      (number_literal)))
   (run_statement
     procedure: (procedure_name)
     (arguments
@@ -537,17 +535,12 @@ DEFINE INPUT PARAMETER pExtent0 AS INTEGER EXTENT 0.
   (display_statement
     (field
       field: (identifier))
+    (format_phrase
+      label: (string_literal))
     (field
       field: (identifier))
-    (field
-      field: (string_literal))
-    (skip_phrase)
-    (field
-      field: (identifier))
-    (field
-      field: (identifier))
-    (field
-      field: (string_literal))
+    (format_phrase
+      label: (string_literal))
     (frame_phrase
       (side_labels)))
   (parameter_definition
@@ -582,10 +575,8 @@ DEFINE INPUT PARAMETER pExtent0 AS INTEGER EXTENT 0.
   (display_statement
     (field
       field: (identifier))
-    (field
-      field: (identifier))
-    (field
-      field: (string_literal))
+    (format_phrase
+      label: (string_literal))
     (frame_phrase
       (side_labels)))
   (assign_statement
@@ -640,10 +631,8 @@ DEFINE INPUT PARAMETER pExtent0 AS INTEGER EXTENT 0.
       (display_statement
         (field
           field: (identifier))
-        (field
-          field: (identifier))
-        (field
-          field: (string_literal)))))
+        (format_phrase
+          label: (string_literal)))))
   (parameter_definition
     name: (identifier)
     type: (identifier)
@@ -655,8 +644,8 @@ DEFINE INPUT PARAMETER pExtent0 AS INTEGER EXTENT 0.
   (prompt_for_statement
     (field
       field: (identifier)
-      (label_option
-        (string_literal))))
+      (format_phrase
+        label: (string_literal))))
   (assign_statement
     (assign_phrase
       (assign_pair
@@ -686,7 +675,8 @@ DEFINE INPUT PARAMETER pExtent0 AS INTEGER EXTENT 0.
           field: (identifier)))
       (on_statement
         event: (identifier)
-        widget: (identifier)
+        widget: (widget_phrase
+          handle: (identifier))
         (do_block
           (body
             (run_statement
@@ -714,15 +704,17 @@ DEFINE INPUT PARAMETER pExtent0 AS INTEGER EXTENT 0.
                   (side_labels)))))))
       (on_statement
         event: (identifier)
-        widget: (qualified_name
-          left: (identifier)
-          right: (identifier))
+        widget: (widget_phrase
+          handle: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (do_block
           (body
             (hide_statement))))
       (wait_for_statement
         events: (identifier)
-        widgets: (identifier))))
+        widgets: (widget_phrase
+          system_handle: (system_handle)))))
   (procedure_definition
     name: (identifier)
     (parameter_definition

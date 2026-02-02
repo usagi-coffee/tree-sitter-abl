@@ -14,10 +14,9 @@ END.
       table: (identifier))
     (body
       (display_statement
-        (field
-          field: (qualified_name
-            left: (identifier)
-            right: (identifier)))))))
+        record: (qualified_name
+          left: (identifier)
+          right: (identifier))))))
 
 ================================================================================
 FOR EACH with WHERE clause
@@ -42,10 +41,9 @@ END.
       (no_lock))
     (body
       (display_statement
-        (field
-          field: (qualified_name
-            left: (identifier)
-            right: (identifier)))))))
+        record: (qualified_name
+          left: (identifier)
+          right: (identifier))))))
 
 ================================================================================
 FOR EACH with ON ERROR UNDO THROW
@@ -64,10 +62,9 @@ END.
     (on_error_phrase)
     (body
       (display_statement
-        (field
-          field: (qualified_name
-            left: (identifier)
-            right: (identifier)))))))
+        record: (qualified_name
+          left: (identifier)
+          right: (identifier))))))
 
 ================================================================================
 FOR EACH with USE-INDEX and BREAK BY
@@ -101,10 +98,9 @@ END.
           right: (identifier))))
     (body
       (display_statement
-        (field
-          field: (qualified_name
-            left: (identifier)
-            right: (identifier)))))))
+        record: (qualified_name
+          left: (identifier)
+          right: (identifier))))))
 
 ================================================================================
 FOR EACH with BY clause and DESC
@@ -127,10 +123,9 @@ END.
           right: (identifier))))
     (body
       (display_statement
-        (field
-          field: (qualified_name
-            left: (identifier)
-            right: (identifier)))))))
+        record: (qualified_name
+          left: (identifier)
+          right: (identifier))))))
 
 ================================================================================
 FOR EACH with frame clause
@@ -175,10 +170,9 @@ END.
       (no_lock))
     (body
       (display_statement
-        (field
-          field: (qualified_name
-            left: (identifier)
-            right: (identifier)))))))
+        record: (qualified_name
+          left: (identifier)
+          right: (identifier))))))
 
 ================================================================================
 FOR EACH with ON ENDKEY UNDO RETRY
@@ -197,10 +191,9 @@ END.
     (on_endkey_phrase)
     (body
       (display_statement
-        (field
-          field: (qualified_name
-            left: (identifier)
-            right: (identifier)))))))
+        record: (qualified_name
+          left: (identifier)
+          right: (identifier))))))
 
 ================================================================================
 FOR EACH with EXCLUSIVE-LOCK
@@ -223,10 +216,9 @@ END.
       (exclusive_lock))
     (body
       (display_statement
-        (field
-          field: (qualified_name
-            left: (identifier)
-            right: (identifier)))))))
+        record: (qualified_name
+          left: (identifier)
+          right: (identifier))))))
 
 ================================================================================
 FOR EACH with SHARE-LOCK and NO-PREFETCH
@@ -246,10 +238,9 @@ END.
       (no_prefetch))
     (body
       (display_statement
-        (field
-          field: (qualified_name
-            left: (identifier)
-            right: (identifier)))))))
+        record: (qualified_name
+          left: (identifier)
+          right: (identifier))))))
 
 ================================================================================
 FOR FIRST
@@ -268,10 +259,9 @@ END.
       (no_lock))
     (body
       (display_statement
-        (field
-          field: (qualified_name
-            left: (identifier)
-            right: (identifier)))))))
+        record: (qualified_name
+          left: (identifier)
+          right: (identifier))))))
 
 ================================================================================
 FOR LAST
@@ -290,10 +280,9 @@ END.
       (no_lock))
     (body
       (display_statement
-        (field
-          field: (qualified_name
-            left: (identifier)
-            right: (identifier)))))))
+        record: (qualified_name
+          left: (identifier)
+          right: (identifier))))))
 
 ================================================================================
 FOR EACH with multiple tables (join)
@@ -423,8 +412,7 @@ END.
     end: (number_literal)
     (body
       (display_statement
-        (field
-          field: (identifier)))))
+        record: (identifier))))
   (for_statement
     variable: (identifier)
     start: (number_literal)
@@ -432,8 +420,7 @@ END.
     step: (number_literal)
     (body
       (display_statement
-        (field
-          field: (identifier))))))
+        record: (identifier)))))
 
 ================================================================================
 FOR WHILE and STOP-AFTER
@@ -459,8 +446,7 @@ END.
         (number_literal)))
     (body
       (display_statement
-        (field
-          field: (identifier)))))
+        record: (identifier))))
   (for_statement
     (record
       table: (identifier))
@@ -468,8 +454,7 @@ END.
       time: (number_literal))
     (body
       (display_statement
-        (field
-          field: (identifier))))))
+        record: (identifier)))))
 
 ================================================================================
 FOR error handlers
@@ -496,24 +481,21 @@ END.
     (on_error_phrase)
     (body
       (display_statement
-        (field
-          field: (identifier)))))
+        record: (identifier))))
   (for_statement
     (record
       table: (identifier))
     (on_quit_phrase)
     (body
       (display_statement
-        (field
-          field: (identifier)))))
+        record: (identifier))))
   (for_statement
     (record
       table: (identifier))
     (on_stop_phrase)
     (body
       (display_statement
-        (field
-          field: (identifier))))))
+        record: (identifier)))))
 
 ================================================================================
 FOR - Reference snippets
@@ -556,8 +538,7 @@ END.
           (identifier))))
     (body
       (display_statement
-        (field
-          (identifier)))
+        (identifier))
       (leave_statement)))
   (for_statement
     (record
@@ -685,7 +666,6 @@ END.
         (assignment_operator)
         (string_literal))
       (display_statement
-        (field
-          (qualified_name
-            (identifier)
-            (identifier)))))))
+        (qualified_name
+          (identifier)
+          (identifier))))))

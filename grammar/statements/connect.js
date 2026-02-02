@@ -19,7 +19,7 @@ module.exports = ({ kw }) => ({
       "-",
       field(
         "parameter",
-        alias(token.immediate(/[\p{L}\p{N}_]+/u), $.identifier),
+        alias(token.immediate(/[\p{L}\p{N}_]+/i), $.identifier),
       ),
       optional(
         field(

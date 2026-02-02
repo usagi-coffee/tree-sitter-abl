@@ -10,8 +10,7 @@ DISPLAY 123.
 
 (source_code
   (display_statement
-    (field
-      (identifier)))
+    (identifier))
   (display_statement
     (field
       (string_literal)))
@@ -74,13 +73,11 @@ disp Customer.Name.
 
 (source_code
   (display_statement
-    (field
-      field: (identifier)))
+    record: (identifier))
   (display_statement
-    (field
-      field: (qualified_name
-        left: (identifier)
-        right: (identifier)))))
+    record: (qualified_name
+      left: (identifier)
+      right: (identifier))))
 
 ================================================================================
 DISPLAY with expressions
@@ -116,10 +113,8 @@ DISPLAY Item.Qty * Item.Price LABEL "Extended".
         (qualified_name
           left: (identifier)
           right: (identifier))))
-    (field
-      field: (identifier))
-    (field
-      field: (string_literal))))
+    (format_phrase
+      label: (string_literal))))
 
 ================================================================================
 DISPLAY with function calls
@@ -373,16 +368,12 @@ DISPLAY SPACE(2) Customer.Name SKIP(1) Customer.City.
                 (qualified_name
                   (identifier)
                   (identifier))
-                (function_call
-                  (qualified_name
-                    (identifier)
-                    (identifier))
-                  (arguments
-                    (argument
-                      (identifier))))))
-            (field
-              (identifier))
-            (field
+                (qualified_name
+                  (identifier)
+                  (identifier)))
+              (aggregate_phrase
+                (aggregate_operation)))
+            (format_phrase
               (string_literal)))))))
   (for_statement
     (record
@@ -394,17 +385,14 @@ DISPLAY SPACE(2) Customer.Name SKIP(1) Customer.City.
           (qualified_name
             (identifier)
             (identifier)))
-        (skip_phrase)
         (field
           (qualified_name
             (identifier)
             (identifier)))
-        (skip_phrase)
         (field
           (qualified_name
             (identifier)
             (identifier)))
-        (skip_phrase)
         (field
           (binary_expression
             (binary_expression
@@ -426,8 +414,9 @@ DISPLAY SPACE(2) Customer.Name SKIP(1) Customer.City.
             (identifier)
             (identifier))
           (string_literal))
-        (skip_phrase
-          (number_literal))
+        (field
+          (parenthesized_expression
+            (number_literal)))
         (frame_phrase
           (no_box)
           (no_labels)
@@ -444,43 +433,40 @@ DISPLAY SPACE(2) Customer.Name SKIP(1) Customer.City.
     (qualified_name
       (identifier)
       (identifier))
-    (frame_phrase
-      (identifier)))
+    (identifier))
   (display_statement
-    (field
-      (qualified_name
-        (identifier)
-        (identifier)))
+    (qualified_name
+      (identifier)
+      (identifier))
     (identifier)
     (frame_phrase
       (identifier))
     (no_error))
   (display_statement
     (identifier)
-    (field
-      (qualified_name
-        (identifier)
-        (identifier))))
+    (qualified_name
+      (identifier)
+      (identifier)))
   (display_statement
     (identifier)
-    (field
-      (qualified_name
-        (identifier)
-        (identifier))))
+    (qualified_name
+      (identifier)
+      (identifier)))
+  (display_statement
+    (qualified_name
+      (identifier)
+      (identifier)))
   (display_statement
     (field
-      (qualified_name
-        (identifier)
-        (identifier))))
-  (display_statement
-    (space_phrase
-      (number_literal))
+      (parenthesized_expression
+        (number_literal)))
     (field
       (qualified_name
         (identifier)
         (identifier)))
-    (skip_phrase
-      (number_literal))
+    (field
+      (parenthesized_expression
+        (number_literal)))
     (field
       (qualified_name
         (identifier)

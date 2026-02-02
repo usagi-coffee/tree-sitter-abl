@@ -95,5 +95,9 @@ module.exports = ({ kw }) => ({
     ),
   __button_no_focus: ($) => seq(kw("NO-FOCUS"), optional(kw("FLAT-BUTTON"))),
   __button_no_convert_3d_colors: ($) => kw("NO-CONVERT-3D-COLORS"),
-  __button_tooltip: ($) => seq(kw("TOOLTIP"), $._expression),
+  __button_tooltip: ($) =>
+    seq(
+      kw("TOOLTIP"),
+      field("tooltip", choice($.identifier, $.string_literal, $.null_literal)),
+    ),
 });

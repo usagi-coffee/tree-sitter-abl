@@ -78,7 +78,7 @@ END CASE.
     type: (identifier)
     (no_undo)
     (initial_option
-      value: (number_literal)))
+      (number_literal)))
   (case_statement
     (identifier)
     (case_when_phrase

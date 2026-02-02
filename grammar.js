@@ -1,10 +1,10 @@
 /// <reference types="tree-sitter-cli/dsl" />
 
 const { kw } = require("./grammar/helpers/keywords");
+const precedences = require("./grammar/precedences");
 
 // prettier-ignore
 const comparison_operators = [ "<>", ">", "<", ">=", "<=", kw("BEGINS"), kw("MATCHES"), kw("EQ"), kw("NE"), kw("GT"), kw("LT"), kw("GE"), kw("LE")];
-const PREC = { LOGICAL: 1, NOT: 2, COMPARE: 3, ADD: 4, MULT: 5, UNARY: 6 };
 
 module.exports = grammar({
   name: "abl",
@@ -26,19 +26,34 @@ module.exports = grammar({
     $.constant,
   ],
   word: ($) => $.identifier,
-  conflicts: ($) => [[$._primary_expression, $.function_call]],
+  conflicts: ($) => [
+    [$._primary_expression, $.function_call],
+    [$.object_access],
+
+    // DISPLAY x IN WINDOW w ; DISPLAY x IN FRAME y - both can work
+    [$.__display_record, $._in_frame_target, $._primary_expression],
+    // DISPLAY items vs frame phrase (WITH ...)
+    [$.__display_items, $.frame_phrase],
+    // Field / Column / Handle can be just an identifier
+    [$.__widget_entry],
+
+    // Just IDENTIFIER + optionals
+    [$.__prompt_for_record_body, $.__prompt_for_fields_body],
+    [$.__update_field, $.__update_record],
+  ],
   inline: ($) => [
     $.__find_record_name,
     $.__find_index_name,
     $.__repeat_record,
-    $.__variable_field_name,
     $.__assign_record_name,
     $.__temp_table_field_name,
     $.__temp_table_like_name,
   ],
 
+  precedences: ($) => precedences($),
+
   rules: (() => {
-    const ctx = { PREC, kw };
+    const ctx = { kw };
     return {
       source_code: ($) => repeat($._statement),
 
@@ -117,11 +132,9 @@ module.exports = grammar({
       ...require("./grammar/phrases")(ctx),
 
       // Literals
-      number_literal: ($) => token(prec(-1, /([0-9]+(\.[0-9]+)?|\.[0-9]+)/)),
-      _signed_number_literal: ($) =>
-        token(prec(1, /[+-]([0-9]+(\.[0-9]+)?|\.[0-9]+)/)),
-      date_literal: ($) =>
-        token(prec(1, /[0-9]{1,2}[./][0-9]{1,2}[./][0-9]{2,4}/)),
+      number_literal: ($) => token(/([0-9]+(\.[0-9]+)?|\.[0-9]+)/),
+      _signed_number_literal: ($) => token(/[+-]([0-9]+(\.[0-9]+)?|\.[0-9]+)/),
+      date_literal: ($) => token(/[0-9]{1,2}[./][0-9]{1,2}[./][0-9]{2,4}/),
       string_literal: ($) =>
         seq(
           $._escaped_string,
@@ -139,7 +152,6 @@ module.exports = grammar({
       // Types
       generic_type: ($) =>
         seq($._simple_type_name, "<", $._simple_type_name, ">"),
-      nested_type_name: ($) => accessor($, $._nameplus),
       _simple_type_name: ($) =>
         choice(
           $.scoped_name,
@@ -150,6 +162,34 @@ module.exports = grammar({
       _type_name: ($) => choice($.generic_type, $._simple_type_name),
       _type_or_string: ($) => choice($._type_name, $.string_literal),
 
+      _widgets: ($) =>
+        prec.right(
+          alias(
+            choice(
+              kw("WINDOW"),
+              kw("FRAME"),
+              kw("BUTTON"),
+              kw("FILL-IN"),
+              kw("TOGGLE-BOX"),
+              kw("RADIO-SET"),
+              kw("EDITOR"),
+              kw("SELECTION-LIST"),
+              kw("COMBO-BOX"),
+              kw("SLIDER"),
+              kw("RECTANGLE"),
+              kw("TEXT"),
+              kw("IMAGE"),
+              kw("BROWSE"),
+              kw("QUERY"),
+              kw("SUB-MENU"),
+              kw("MENU-ITEM"),
+              kw("MENU"),
+            ),
+            $.identifier,
+          ),
+        ),
+      _events: ($) => choice($.identifier, $.string_literal, $.number_literal),
+
       // Operators
       assignment_operator: ($) => choice("=", "+=", "-=", "*=", "/="),
       _logical_operator: ($) => choice(kw("AND"), kw("OR")),
@@ -158,13 +198,12 @@ module.exports = grammar({
       // Assignabless
       assignment_statement: ($) =>
         prec.right(
-          1,
           seq(
             field("left", $._assignable),
             field("operator", $.assignment_operator),
             field("right", choice($.array_initializer, $._expression)),
-            optional(alias($.__assignment_in_frame, $.in_frame_phrase)),
-            optional(alias($.__assignment_no_error, $.no_error)),
+            optional($.widget_phrase),
+            optional(alias(kw("NO-ERROR"), $.no_error)),
             $._terminator,
           ),
         ),
@@ -176,10 +215,6 @@ module.exports = grammar({
           $.object_access,
           $.array_access,
           $.function_call,
-          $.in_frame_expression,
-
-          alias($.__widget_keywords, $.identifier),
-          $.widget_access,
         ),
 
       // Expressions
@@ -187,8 +222,8 @@ module.exports = grammar({
       _expressions: ($) => seq($._expression, repeat(seq(",", $._expression))),
       unary_expression: ($) =>
         choice(
-          prec(PREC.UNARY, seq(choice("+", "-"), $._expression)),
-          prec(PREC.NOT, seq(kw("NOT"), $._expression)),
+          prec("unary", seq(choice("+", "-"), $._expression)),
+          prec("not", seq(kw("NOT"), $._expression)),
         ),
       binary_expression: ($) =>
         binary_expression($, $._expression, $._comparison_operator),
@@ -216,35 +251,62 @@ module.exports = grammar({
 
       // Accessors
       object_access: ($) =>
-        prec(
-          1,
-          seq(
-            field("left", choice($.identifier, $.qualified_name)),
-            repeat1(
-              seq(
-                choice($._namecolon, token.immediate("?:")),
-                field("right", alias($._identifier_immediate, $.identifier)),
-              ),
+        seq(
+          optional(field("widget", alias($._widgets, $.identifier))),
+          field("left", choice($.identifier, $.qualified_name)),
+          repeat1(
+            seq(
+              choice($._namecolon, token.immediate("?:")),
+              field("right", alias($._identifier_immediate, $.identifier)),
+            ),
+          ),
+          optional(seq(kw("IN"), $._widgets, field("in", $.identifier))),
+        ),
+
+      scoped_name: ($) =>
+        seq(
+          field("left", $.identifier),
+          repeat1(
+            seq(
+              $._namedoublecolon,
+              field("right", alias($._identifier_immediate, $.identifier)),
             ),
           ),
         ),
-      scoped_name: ($) => accessor($, $._namedoublecolon),
-      qualified_name: ($) => accessor($, $._namedot),
+
+      qualified_name: ($) =>
+        seq(
+          field("left", $.identifier),
+          repeat1(
+            seq(
+              $._namedot,
+              field("right", alias($._identifier_immediate, $.identifier)),
+            ),
+          ),
+        ),
+
+      nested_type_name: ($) =>
+        seq(
+          field("left", $.identifier),
+          repeat1(
+            seq(
+              $._nameplus,
+              field("right", alias($._identifier_immediate, $.identifier)),
+            ),
+          ),
+        ),
 
       object_access_expression: ($) =>
-        prec(
-          1,
-          seq(
-            field(
-              "left",
-              choice(
-                $.function_call,
-                $.parenthesized_expression,
-                $.new_expression,
-              ),
+        seq(
+          field(
+            "left",
+            choice(
+              $.function_call,
+              $.parenthesized_expression,
+              $.new_expression,
             ),
-            repeat1(seq($._namecolon, field("right", $.identifier))),
           ),
+          repeat1(seq($._namecolon, field("right", $.identifier))),
         ),
 
       // Array
@@ -295,10 +357,27 @@ module.exports = grammar({
           $.arguments,
         ),
 
+      frame_qualified_name: ($) =>
+        seq(
+          $._in_frame_target,
+          kw("IN"),
+          kw("FRAME"),
+          field("frame", $.identifier),
+        ),
+
+      _in_frame_target: ($) =>
+        choice(
+          $.qualified_name,
+          $.identifier,
+          $.scoped_name,
+          $.object_access,
+          $.function_call,
+        ),
+
       // Identifiers
       // BE CAREFUL MODIFYING HERE, IDENTIFIER ORDER FOR SOME REASON MATTERS!
-      identifier: ($) => token(/[_\p{L}][\p{L}\p{N}_\-&]*/u),
-      _identifier_immediate: ($) => token.immediate(/[_\p{L}][\p{L}\p{N}_-]*/u),
+      identifier: ($) => token(/[_\p{L}][\p{L}\p{N}_\-&]*/i),
+      _identifier_immediate: ($) => token.immediate(/[_\p{L}][\p{L}\p{N}_-]*/i),
       parenthesized_identifier: ($) => seq("(", $.identifier, ")"),
 
       _terminator: ($) => choice($._terminator_dot, ";"),
@@ -313,29 +392,14 @@ module.exports = grammar({
 
 // Helpers
 
-function accessor($, ...separators) {
-  return prec(
-    1,
-    seq(
-      field("left", $.identifier),
-      repeat1(
-        seq(
-          separators.length > 1 ? choice(...separators) : separators[0],
-          field("right", alias($._identifier_immediate, $.identifier)),
-        ),
-      ),
-    ),
-  );
-}
-
 function binary_expression($, expression, comparison_operator) {
   return choice(
     prec.left(
-      PREC.MULT,
+      "multiplication",
       seq(expression, choice("*", "/", kw("MOD"), kw("MODULO")), expression),
     ),
-    prec.left(PREC.ADD, seq(expression, choice("+", "-"), expression)),
-    prec.left(PREC.COMPARE, seq(expression, comparison_operator, expression)),
-    prec.left(PREC.LOGICAL, seq(expression, $._logical_operator, expression)),
+    prec.left("add", seq(expression, choice("+", "-"), expression)),
+    prec.left("compare", seq(expression, comparison_operator, expression)),
+    prec.left("logical", seq(expression, $._logical_operator, expression)),
   );
 }

@@ -48,8 +48,7 @@ END.
     (no_undo)
     (format_phrase
       (string_literal))
-    (view_as_phrase
-      (identifier)))
+    (identifier))
   (variable_definition
     (identifier)
     (identifier)
@@ -70,7 +69,8 @@ END.
         (leave_statement
           (identifier)))
       (update_statement
-        (identifier)
+        (field
+          (identifier))
         (frame_phrase
           (identifier)))
       (os_append_statement

@@ -82,9 +82,7 @@ INPUT-OUTPUT STREAM sIO THROUGH "filter" CONVERT SOURCE "ibm850" TARGET "utf-8".
           (qualified_name
             (identifier)
             (identifier)))
-        (field
-          (identifier))
-        (field
+        (format_phrase
           (string_literal)))))
   (input_output_statement
     (identifier))
@@ -129,9 +127,7 @@ INPUT-OUTPUT STREAM sIO THROUGH "filter" CONVERT SOURCE "ibm850" TARGET "utf-8".
           (qualified_name
             (identifier)
             (identifier)))
-        (field
-          (identifier))
-        (field
+        (format_phrase
           (string_literal)))))
   (input_output_statement
     (identifier))

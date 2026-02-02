@@ -14,7 +14,8 @@ PROMPT-FOR field1 GO-ON(f1 f2).
 
 (source_code
   (prompt_for_statement
-    record: (identifier))
+    (field
+      field: (identifier)))
   (prompt_for_statement
     (field
       field: (identifier))
@@ -29,12 +30,15 @@ PROMPT-FOR field1 GO-ON(f1 f2).
         (identifier)
         (number_literal))))
   (prompt_for_statement
-    record: (identifier))
+    (field
+      field: (identifier)))
   (prompt_for_statement
-    record: (identifier)
+    (field
+      field: (identifier))
     window: (identifier))
   (prompt_for_statement
-    record: (identifier)
+    (field
+      field: (identifier))
     (frame_phrase
       frame: (identifier)))
   (prompt_for_statement
@@ -88,8 +92,8 @@ PROMPT-FOR "Notes:" TO 20 VIEW-AS TEXT FGCOLOR 12 BGCOLOR 1 FONT 2 field1.
 (source_code
   (prompt_for_statement
     record: (identifier)
-    field: (identifier)
-    field: (identifier)
+    (field)
+    (field)
     (frame_phrase
       frame: (identifier)))
   (prompt_for_statement
@@ -159,9 +163,10 @@ PROMPT-FOR STREAM-HANDLE hS field1 field2 IN WINDOW wMain WITH FRAME fMain.
     type: (identifier)
     (no_undo)
     (initial_option
-      value: (number_literal)))
+      (number_literal)))
   (prompt_for_statement
-    record: (identifier))
+    (field
+      field: (identifier)))
   (message_statement
     (string_literal)
     (identifier)
@@ -249,15 +254,15 @@ PROMPT-FOR STREAM-HANDLE hS field1 field2 IN WINDOW wMain WITH FRAME fMain.
           frame: (identifier)
           (centered)))
       (update_statement
-        (update_item
+        (field
           field: (qualified_name
             left: (identifier)
             right: (identifier)))
-        (update_item
+        (field
           field: (qualified_name
             left: (identifier)
             right: (identifier)))
-        (update_item
+        (field
           field: (identifier))
         (frame_phrase
           frame: (identifier)))
@@ -308,8 +313,8 @@ PROMPT-FOR STREAM-HANDLE hS field1 field2 IN WINDOW wMain WITH FRAME fMain.
           field: (qualified_name
             left: (identifier)
             right: (identifier))
-          (label_option
-            (string_literal)))
+          (format_phrase
+            label: (string_literal)))
         (frame_phrase
           frame: (identifier)
           row: (number_literal)

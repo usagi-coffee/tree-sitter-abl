@@ -32,10 +32,10 @@ DEFINE PRIVATE STATIC SERIALIZABLE VARIABLE cust AS CLASS Customer NO-UNDO.
     (extent_phrase
       (number_literal))
     (initial_option
-      value: (string_literal)
-      value: (string_literal)
-      value: (string_literal)
-      value: (string_literal)))
+      (string_literal)
+      (string_literal)
+      (string_literal)
+      (string_literal)))
   (variable_definition
     (new_modifier)
     (scope_modifier)
@@ -69,30 +69,24 @@ DEFINE VARIABLE cView AS CHARACTER VIEW-AS FILL-IN.
     like: (qualified_name
       left: (identifier)
       right: (identifier))
-    (label_option
-      (string_literal))
-    (column_label_option
-      (string_literal))
+    label: (string_literal)
+    label: (string_literal)
     (format_phrase
       format: (string_literal)))
   (variable_definition
     name: (identifier)
-    type: (identifier)
-    (case_sensitive_option))
+    type: (identifier))
+  (variable_definition
+    name: (identifier)
+    type: (identifier))
   (variable_definition
     name: (identifier)
     type: (identifier)
-    (drop_target_option))
+    serialize_name: (string_literal))
   (variable_definition
     name: (identifier)
     type: (identifier)
-    (serialize_name_option
-      name: (string_literal)))
-  (variable_definition
-    name: (identifier)
-    type: (identifier)
-    (view_as_phrase
-      widget: (identifier))))
+    widget: (identifier)))
 
 ================================================================================
 VARIABLE DEFINITION - Color and Visual Options
@@ -109,29 +103,22 @@ DEFINE VARIABLE v4 AS CHARACTER CONTEXT-HELP-ID 123.
   (variable_definition
     name: (identifier)
     type: (identifier)
-    (bgcolor_option
-      (number_literal))
-    (fgcolor_option
-      (number_literal)))
+    bgcolor: (number_literal)
+    fgcolor: (number_literal))
   (variable_definition
     name: (identifier)
     type: (identifier)
-    (dcolor_option
-      (number_literal))
-    (pfcolor_option
-      (number_literal)))
+    dcolor: (number_literal)
+    pfcolor: (number_literal))
   (variable_definition
     name: (identifier)
     type: (identifier)
-    (font_option
-      (number_literal))
-    (mouse_pointer_option
-      (number_literal)))
+    font: (number_literal)
+    mouse_pointer: (number_literal))
   (variable_definition
     name: (identifier)
     type: (identifier)
-    (context_help_id_option
-      (number_literal))))
+    context_help_id: (number_literal)))
 
 ================================================================================
 VARIABLE DEFINITION - DECIMALS Option
@@ -146,16 +133,14 @@ DEFINE VARIABLE rate AS DECIMAL DECIMALS 4 INITIAL 0.0525.
   (variable_definition
     name: (identifier)
     type: (identifier)
-    (decimals_option
-      (number_literal))
+    decimals: (number_literal)
     (no_undo))
   (variable_definition
     name: (identifier)
     type: (identifier)
-    (decimals_option
-      (number_literal))
+    decimals: (number_literal)
     (initial_option
-      value: (number_literal))))
+      (number_literal))))
 
 ================================================================================
 VARIABLE DEFINITION - EXTENT Variations
@@ -202,27 +187,27 @@ DEFINE VARIABLE dtDate AS DATE INITIAL TODAY.
     name: (identifier)
     type: (identifier)
     (initial_option
-      value: (number_literal)))
+      (number_literal)))
   (variable_definition
     name: (identifier)
     type: (identifier)
     (initial_option
-      value: (number_literal)))
+      (number_literal)))
   (variable_definition
     name: (identifier)
     type: (identifier)
     (initial_option
-      value: (string_literal)))
+      (string_literal)))
   (variable_definition
     name: (identifier)
     type: (identifier)
     (initial_option
-      value: (boolean_literal)))
+      (boolean_literal)))
   (variable_definition
     name: (identifier)
     type: (identifier)
     (initial_option
-      value: (identifier))))
+      (identifier))))
 
 ================================================================================
 VARIABLE DEFINITION - Shared Variations
@@ -593,8 +578,7 @@ END.
     (no_undo)
     (format_phrase
       (string_literal))
-    (label_option
-      (string_literal)))
+    (string_literal))
   (if_statement
     (identifier)
     (do_block
@@ -625,10 +609,9 @@ END.
         (widget_phrase
           (identifier)))
       (update_statement
-        (update_item
-          (identifier))
-        (update_item
-          (identifier))
+        (field
+          (identifier)
+          (format_phrase))
         (frame_phrase
           (identifier)
           (centered)
@@ -752,15 +735,14 @@ END.
       (string_literal))
     (body
       (display_statement
-        (skip_phrase
-          (number_literal)))
+        (field
+          (parenthesized_expression
+            (number_literal))))
       (update_statement
-        (update_item
-          (identifier))
-        (update_item
-          (identifier))
-        (update_item
-          (string_literal)))
+        (field
+          (identifier)
+          (format_phrase
+            (string_literal))))
       (display_statement
         (field
           (array_access
@@ -770,9 +752,7 @@ END.
               (arguments
                 (argument
                   (identifier))))))
-        (field
-          (identifier))
-        (field
+        (format_phrase
           (string_literal)))))
   (variable_definition
     (identifier)
@@ -782,22 +762,20 @@ END.
     (identifier)
     (identifier)
     (no_undo)
-    (view_as_phrase
-      (identifier)
-      (number_literal)
-      (number_literal)
-      (string_literal)
-      (string_literal)
-      (string_literal)
-      (string_literal)
-      (string_literal)
-      (string_literal)
-      (string_literal)
-      (string_literal)
-      (string_literal)
-      (string_literal))
-    (label_option
-      (string_literal))
+    (identifier)
+    (number_literal)
+    (number_literal)
+    (string_literal)
+    (string_literal)
+    (string_literal)
+    (string_literal)
+    (string_literal)
+    (string_literal)
+    (string_literal)
+    (string_literal)
+    (string_literal)
+    (string_literal)
+    (string_literal)
     (trigger_phrase
       (identifier)
       (trigger_body
@@ -858,13 +836,13 @@ END.
       (string_literal)))
   (wait_for_statement
     (identifier)
-    (identifier))
+    (widget_phrase
+      (system_handle)))
   (variable_definition
     (identifier)
     (identifier)
     (no_undo)
-    (column_label_option
-      (string_literal)))
+    (string_literal))
   (for_statement
     (record
       (identifier))
@@ -911,7 +889,5 @@ END.
           (qualified_name
             (identifier)
             (identifier)))
-        (field
-          (identifier))
-        (field
+        (format_phrase
           (string_literal))))))

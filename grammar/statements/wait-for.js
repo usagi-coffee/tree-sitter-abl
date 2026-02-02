@@ -15,30 +15,20 @@ module.exports = ({ kw }) => ({
           field("widgets", $.__wait_for_widget_list),
         ),
       ),
-      optional(seq(kw("FOCUS"), field("focus", $.__wait_for_widget))),
+      optional(
+        seq(
+          kw("FOCUS"),
+          field("focus", choice($.identifier, $.qualified_name)),
+        ),
+      ),
       optional(seq(kw("PAUSE"), field("duration", $._expression))),
     ),
 
-  __wait_for_event_list: ($) =>
-    seq($.__wait_for_event, repeat(seq(optional(","), $.__wait_for_event))),
   __wait_for_event: ($) => $.identifier,
   __wait_for_widget_list: ($) =>
-    seq($.__wait_for_widget, repeat(seq(optional(","), $.__wait_for_widget))),
-  __wait_for_widget: ($) =>
-    seq(
-      choice(
-        $.identifier,
-        $.qualified_name,
-        $.scoped_name,
-        $.object_access,
-        $.function_call,
-      ),
-      optional(choice($.in_frame_phrase, $.in_menu_phrase)),
+    prec.right(
+      seq($.widget_phrase, repeat(seq(optional(","), $.widget_phrase))),
     ),
-  __wait_for_in_frame: ($) =>
-    seq(kw("IN"), kw("FRAME"), field("frame", $.identifier)),
-  __wait_for_in_menu: ($) =>
-    seq(kw("IN"), kw("MENU"), field("menu", $.identifier)),
-  in_frame_phrase: ($) => $.__wait_for_in_frame,
-  in_menu_phrase: ($) => $.__wait_for_in_menu,
+  __wait_for_event_list: ($) =>
+    seq($.__wait_for_event, repeat(seq(optional(","), $.__wait_for_event))),
 });

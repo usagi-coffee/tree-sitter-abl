@@ -21,18 +21,17 @@ PUT UNFORMATTED x format("9999-99-99") ';'.
     value: (string_literal)
     (format_phrase
       format: (string_literal))
-    position: (number_literal)
     (space
       count: (number_literal))
     (skip
       count: (number_literal)))
   (put_statement
-    control: (function_call
+    (function_call
       function: (identifier)
       (arguments
         (argument
           name: (number_literal))))
-    control: (string_literal))
+    (string_literal))
   (put_statement
     value: (identifier)
     (format_phrase
@@ -85,7 +84,7 @@ PUT CONTROL NULL(20).
   (put_statement
     (identifier)
     (identifier)
-    (number_literal)
+    (format_phrase)
     (skip
       (number_literal)))
   (put_statement

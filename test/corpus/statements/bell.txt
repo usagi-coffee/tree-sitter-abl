@@ -41,8 +41,7 @@ END.
     (no_undo)
     (format_phrase
       (string_literal))
-    (label_option
-      (string_literal)))
+    (string_literal))
   (do_block
     (identifier)
     (on_error_phrase)

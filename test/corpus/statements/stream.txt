@@ -148,122 +148,122 @@ DISPLAY STREAM rpt ItemNum ItemName WITH NO-LABELS NO-BOX.
 
 (source_code
   (variable_definition
-    (identifier)
-    (identifier)
+    name: (identifier)
+    type: (identifier)
     (no_undo)
     (format_phrase
-      (string_literal)))
+      format: (string_literal)))
   (variable_definition
-    (identifier)
-    (identifier)
+    name: (identifier)
+    type: (identifier)
     (no_undo)
     (format_phrase
-      (string_literal)))
+      format: (string_literal)))
   (variable_definition
-    (identifier)
-    (identifier)
+    name: (identifier)
+    type: (identifier)
     (no_undo)
-    (label_option
-      (string_literal)))
+    label: (string_literal))
   (buffer_definition
     (new_modifier)
     (scope_modifier)
-    (identifier)
-    (identifier))
+    name: (identifier)
+    table: (identifier))
   (stream_definition
     (new_modifier)
     (scope_modifier)
-    (identifier))
+    name: (identifier))
   (stream_definition
-    (identifier))
+    name: (identifier))
   (set_statement
     (field
-      (identifier)
-      (label_option
-        (string_literal)))
+      field: (identifier)
+      (format_phrase
+        label: (string_literal)))
     (field
       (number_literal))
     (field
-      (identifier)
-      (label_option
-        (string_literal)))
+      field: (identifier)
+      (format_phrase
+        label: (string_literal)))
     (frame_phrase
       (side_labels)
-      (identifier)))
+      frame: (identifier)))
   (output_statement
-    (identifier)
+    name: (identifier)
     (identifier))
   (output_statement
-    (identifier)
+    name: (identifier)
     (identifier))
   (for_statement
     (record
-      (identifier))
+      table: (identifier))
     (body
       (if_statement
         (binary_expression
           (identifier)
           (identifier))
-        (do_block
+        then: (do_block
           (body
             (display_statement
-              (identifier)
+              stream: (identifier)
               (field
-                (qualified_name
-                  (identifier)
-                  (identifier)))
+                field: (qualified_name
+                  left: (identifier)
+                  right: (identifier)))
               (field
-                (qualified_name
-                  (identifier)
-                  (identifier)))
+                field: (qualified_name
+                  left: (identifier)
+                  right: (identifier)))
               (field
-                (qualified_name
-                  (identifier)
-                  (identifier)))
+                field: (qualified_name
+                  left: (identifier)
+                  right: (identifier)))
               (field
-                (qualified_name
-                  (identifier)
-                  (identifier)))
+                field: (qualified_name
+                  left: (identifier)
+                  right: (identifier)))
               (frame_phrase
-                (identifier)))
+                frame: (identifier)))
             (assignment_statement
-              (identifier)
-              (assignment_operator)
-              (binary_expression
+              left: (identifier)
+              operator: (assignment_operator)
+              right: (binary_expression
                 (identifier)
                 (number_literal))))))
       (run_statement
-        (procedure_name))))
+        procedure: (procedure_name))))
   (display_statement
-    (identifier)
-    (skip_phrase
-      (number_literal))
+    stream: (identifier)
     (field
-      (identifier))
+      field: (parenthesized_expression
+        (number_literal)))
+    (field
+      field: (identifier))
     (frame_phrase
-      (identifier)
+      frame: (identifier)
       (side_labels)))
   (display_statement
-    (identifier)
+    stream: (identifier)
     (frame_phrase
-      (identifier)))
+      frame: (identifier)))
   (output_statement
-    (identifier))
+    name: (identifier))
   (output_statement
-    (identifier))
+    name: (identifier))
   (stream_definition
     (scope_modifier)
-    (identifier))
+    name: (identifier))
   (buffer_definition
     (scope_modifier)
-    (identifier)
-    (identifier))
+    name: (identifier)
+    table: (identifier))
   (display_statement
-    (identifier)
+    stream: (identifier)
     (field
-      (identifier))
+      field: (identifier))
     (field
-      (identifier))
+      field: (identifier))
     (frame_phrase
       (no_labels)
       (no_box))))

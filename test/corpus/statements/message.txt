@@ -367,12 +367,10 @@ END.
     (identifier)
     (identifier)
     (no_undo)
-    (view_as_phrase
-      (identifier)
-      (number_literal)
-      (number_literal))
-    (label_option
-      (string_literal)))
+    (identifier)
+    (number_literal)
+    (number_literal)
+    (string_literal))
   (variable_definition
     (identifier)
     (identifier)
@@ -384,7 +382,8 @@ END.
       (identifier)))
   (on_statement
     (identifier)
-    (identifier)
+    (widget_phrase
+      (identifier))
     (do_block
       (body
         (message_statement

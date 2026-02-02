@@ -525,8 +525,7 @@ END.
     name: (identifier)
     type: (identifier)
     (no_undo)
-    (label_option
-      (string_literal)))
+    label: (string_literal))
   (rectangle_definition
     name: (identifier)
     (size_phrase
@@ -582,7 +581,8 @@ END.
       left: (identifier)
       right: (identifier))
     field: (identifier)
-    (number_literal)
+    (parenthesized_expression
+      (number_literal))
     (identifier)
     (identifier)
     (at_phrase

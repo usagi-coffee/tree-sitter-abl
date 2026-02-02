@@ -4,9 +4,12 @@ module.exports = ({ kw }) => ({
       kw("VIEW"),
       optional($.__view_stream),
       optional($.widget_phrase),
-      optional(seq(kw("IN"), kw("WINDOW"), field("window", $._expression))),
+      optional($.__view_in_window),
       $._terminator,
     ),
+
+  __view_in_window: ($) =>
+    seq(kw("IN"), kw("WINDOW"), field("window", $._expression)),
 
   __view_stream: ($) =>
     seq(

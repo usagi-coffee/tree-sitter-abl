@@ -545,8 +545,8 @@ UPDATE animate WITH FRAME y.
       (string_literal)))
   (on_statement
     (identifier)
-    (identifier)
-    (in_frame_phrase
+    (widget_phrase
+      (identifier)
       (identifier))
     (do_block
       (body
@@ -563,24 +563,25 @@ UPDATE animate WITH FRAME y.
                 (assignment_statement
                   (identifier)
                   (assignment_operator)
-                  (function_call
-                    (object_access
-                      (identifier)
-                      (identifier))
-                    (arguments
-                      (argument
-                        (binary_expression
-                          (string_literal)
-                          (function_call
-                            (identifier)
-                            (arguments
-                              (argument
-                                (identifier))
-                              (argument
-                                (string_literal))))))))
-                  (in_frame_phrase
+                  (frame_qualified_name
+                    (function_call
+                      (object_access
+                        (identifier)
+                        (identifier))
+                      (arguments
+                        (argument
+                          (binary_expression
+                            (string_literal)
+                            (function_call
+                              (identifier)
+                              (arguments
+                                (argument
+                                  (identifier))
+                                (argument
+                                  (string_literal))))))))
                     (identifier))))))))))
   (update_statement
-    (identifier)
+    (field
+      (identifier))
     (frame_phrase
       (identifier))))

@@ -79,7 +79,7 @@ UNIX VALUE("cp usr/myfile.").
       (set_statement
         (field
           (identifier)
-          (label_option
+          (format_phrase
             (string_literal)))
         (frame_phrase
           (number_literal)

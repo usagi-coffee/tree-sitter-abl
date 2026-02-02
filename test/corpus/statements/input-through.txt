@@ -56,10 +56,9 @@ INPUT CLOSE.
     (identifier)
     (identifier)
     (no_undo)
-    (view_as_phrase
-      (identifier)
-      (number_literal)
-      (number_literal)))
+    (identifier)
+    (number_literal)
+    (number_literal))
   (input_through_statement
     (identifier)
     (shell_variable)
@@ -105,10 +104,9 @@ INPUT CLOSE.
       (identifier)))
   (input_statement)
   (assignment_statement
-    (in_frame_expression
-      (object_access
-        (identifier)
-        (identifier))
+    (object_access
+      (identifier)
+      (identifier)
       (identifier))
     (assignment_operator)
     (identifier))
@@ -126,10 +124,7 @@ INPUT CLOSE.
       (display_statement
         (field
           (identifier))
-        (field
-          (identifier))
-        (field
-          (identifier))
+        (format_phrase)
         (frame_phrase
           (identifier)))
       (down_statement

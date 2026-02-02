@@ -3,7 +3,12 @@ module.exports = ({ kw }) => ({
 
   __apply_body: ($) =>
     seq(
-      field("event", $._expression),
-      optional(seq(kw("TO"), field("widget", $._expression))),
+      field("event", $._events),
+      optional(
+        seq(
+          kw("TO"),
+          field("to", alias(choice($._widgets, $.widget_phrase), $.widget)),
+        ),
+      ),
     ),
 });

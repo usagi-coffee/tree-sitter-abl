@@ -3,7 +3,6 @@ const { definitionModifiers } = require("../helpers/modifiers");
 module.exports = ({ kw }) => ({
   buffer_definition: ($) =>
     prec.right(
-      1,
       seq(
         kw("DEFINE", { offset: 3 }),
         ...definitionModifiers($, kw, {

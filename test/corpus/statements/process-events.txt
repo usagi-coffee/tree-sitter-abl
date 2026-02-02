@@ -19,11 +19,12 @@ DEFINE BUTTON stop-it LABEL "STOP".
 DISPLAY stop-it.
 ON CHOOSE OF stop-it
 stop-sel = TRUE.
+
 ENABLE stop-it.
 DO ix = 1 TO 1000:
-DISPLAY ix VIEW-AS TEXT.
-PROCESS EVENTS.
-IF stop-sel THEN LEAVE.
+  DISPLAY ix VIEW-AS TEXT.
+  PROCESS EVENTS.
+  IF stop-sel THEN LEAVE.
 END.
 
 --------------------------------------------------------------------------------
@@ -42,11 +43,11 @@ END.
     (button_option
       (string_literal)))
   (display_statement
-    (field
-      (identifier)))
+    (identifier))
   (on_statement
     (identifier)
-    (identifier)
+    (widget_phrase
+      (identifier))
     (assignment_statement
       (identifier)
       (assignment_operator)
@@ -62,10 +63,7 @@ END.
       (display_statement
         (field
           (identifier))
-        (field
-          (identifier))
-        (field
-          (identifier)))
+        (format_phrase))
       (process_events_statement)
       (if_statement
         (identifier)

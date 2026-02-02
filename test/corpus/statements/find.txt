@@ -361,10 +361,9 @@ END.
       (repeat_statement
         (body
           (display_statement
-            (field
-              field: (qualified_name
-                left: (identifier)
-                right: (identifier))))
+            record: (qualified_name
+              left: (identifier)
+              right: (identifier)))
           (find_statement
             table: (identifier)
             (use_index

@@ -5,12 +5,29 @@ module.exports = ({ kw }) => ({
   __subscribe_body: ($) =>
     seq(
       optional(
-        seq(kw("PROCEDURE", { offset: 4 }), field("subscriber", $._expression)),
+        seq(
+          kw("PROCEDURE", { offset: 4 }),
+          field("subscriber", $.__subscribe_expression),
+        ),
       ),
       optional(kw("TO")),
-      field("event", $._expression),
-      choice(seq(kw("IN"), field("publisher", $._expression)), kw("ANYWHERE")),
-      optional(seq(kw("RUN-PROCEDURE"), field("procedure", $._expression))),
+      field("event", $.__subscribe_expression),
+      choice(
+        seq(kw("IN"), field("publisher", $.__subscribe_expression)),
+        kw("ANYWHERE"),
+      ),
+      optional(
+        seq(kw("RUN-PROCEDURE"), field("procedure", $.__subscribe_expression)),
+      ),
       optional(kw("NO-ERROR")),
+    ),
+  __subscribe_expression: ($) =>
+    choice(
+      $.string_literal,
+      $.identifier,
+      $.qualified_name,
+      $.scoped_name,
+      $.object_access,
+      $.function_call,
     ),
 });

@@ -512,7 +512,8 @@ DEFINE QUERY qExceptAll FOR Customer EXCEPT ().
       column: (number_literal)))
   (on_statement
     event: (identifier)
-    widget: (identifier)
+    widget: (widget_phrase
+      handle: (identifier))
     (do_block
       (body
         (get_statement
@@ -543,7 +544,8 @@ DEFINE QUERY qExceptAll FOR Customer EXCEPT ().
       frame: (identifier)))
   (wait_for_statement
     events: (identifier)
-    widgets: (identifier))
+    widgets: (widget_phrase
+      system_handle: (system_handle)))
   (procedure_definition
     name: (identifier)
     (display_statement
@@ -584,9 +586,10 @@ DEFINE QUERY qExceptAll FOR Customer EXCEPT ().
   (assignment_statement
     left: (identifier)
     operator: (assignment_operator)
-    right: (widget_access
-      query: (identifier)
-      attribute: (identifier)))
+    right: (object_access
+      widget: (identifier)
+      left: (identifier)
+      right: (identifier)))
   (open_query_statement
     query: (identifier)
     (record_phrase

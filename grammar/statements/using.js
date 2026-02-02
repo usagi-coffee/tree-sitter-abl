@@ -16,11 +16,11 @@ module.exports = ({ kw }) => ({
   __using_base_name: ($) =>
     token(
       seq(
-        /[_\p{L}][\p{L}\p{N}_-]*/u,
+        /[_\p{L}][\p{L}\p{N}_-]*/i,
         repeat(
           choice(
-            seq(".", /[_\p{L}][\p{L}\p{N}_-]*/u),
-            seq("+", /[_\p{L}][\p{L}\p{N}_-]*/u),
+            seq(".", /[_\p{L}][\p{L}\p{N}_-]*/i),
+            seq("+", /[_\p{L}][\p{L}\p{N}_-]*/i),
           ),
         ),
         optional(seq(".", "*")),

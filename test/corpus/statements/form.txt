@@ -196,31 +196,31 @@ END.
             (identifier)
             (identifier))))
       (update_statement
-        (update_item
+        (field
           (qualified_name
             (identifier)
             (identifier)))
-        (update_item
+        (field
           (qualified_name
             (identifier)
             (identifier)))
-        (update_item
+        (field
           (qualified_name
             (identifier)
             (identifier)))
-        (update_item
+        (field
           (qualified_name
             (identifier)
             (identifier)))
-        (update_item
+        (field
           (qualified_name
             (identifier)
             (identifier)))
-        (update_item
+        (field
           (qualified_name
             (identifier)
             (identifier)))
-        (update_item
+        (field
           (qualified_name
             (identifier)
             (identifier))))))
@@ -251,8 +251,7 @@ END.
       (identifier))
     (body
       (display_statement
-        (field
-          (identifier)))
+        (identifier))
       (hide_statement
         (widget_phrase
           (identifier))))))

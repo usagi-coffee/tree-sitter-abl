@@ -14,34 +14,37 @@ UPDATE field1 GO-ON(f1 f2).
 
 (source_code
   (update_statement
-    record: (identifier))
-  (update_statement
-    (update_item
-      field: (identifier))
-    (update_item
-      field: (identifier))
-    (update_item
+    (field
       field: (identifier)))
   (update_statement
-    (update_item
+    (field
+      field: (identifier))
+    (field
+      field: (identifier))
+    (field
+      field: (identifier)))
+  (update_statement
+    (field
       field: (identifier)
       when: (binary_expression
         (identifier)
         (number_literal))))
   (update_statement
-    (update_item
+    (field
       field: (identifier)))
   (update_statement
-    record: (identifier)
+    (field
+      field: (identifier))
     (frame_phrase
       frame: (identifier)))
   (update_statement
-    record: (identifier)
+    (field
+      field: (identifier))
     (frame_phrase
       frame: (identifier))
     (no_error))
   (update_statement
-    (update_item
+    (field
       field: (identifier))
     (go_on_phrase
       (identifier)
@@ -64,22 +67,22 @@ UPDATE field1 FORMAT "x(10)" WHEN ok
 
 (source_code
   (update_statement
-    (update_item
+    (field
       field: (identifier)
       (format_phrase
         format: (string_literal))
       when: (identifier))
-    (update_item
+    (field
       field: (identifier)
       (format_phrase
         format: (string_literal)))
-    (update_item
+    (field
       constant: (string_literal)
       (at_phrase))
-    (update_item
+    (field
       field: (identifier)
       value: (number_literal))
-    (update_item)
+    (field)
     (editing_phrase
       (readkey_statement))))
 
@@ -101,10 +104,10 @@ UPDATE "Header" TO 30 Customer.Name.
       frame: (identifier))
     (no_error))
   (update_statement
-    (update_item
+    (field
       constant: (string_literal)
       (at_phrase))
-    (update_item
+    (field
       field: (qualified_name
         left: (identifier)
         right: (identifier)))))
@@ -161,23 +164,23 @@ UPDATE field1 SPACE(2) SKIP(1) ^.
       (identifier))
     (body
       (update_statement
-        (update_item
+        (field
           (qualified_name
             (identifier)
             (identifier)))
-        (update_item
+        (field
           (qualified_name
             (identifier)
             (identifier)))
-        (update_item
+        (field
           (qualified_name
             (identifier)
             (identifier)))
-        (update_item
+        (field
           (qualified_name
             (identifier)
             (identifier)))
-        (update_item
+        (field
           (qualified_name
             (identifier)
             (identifier))))))
@@ -186,25 +189,22 @@ UPDATE field1 SPACE(2) SKIP(1) ^.
       (identifier))
     (body
       (update_statement
-        (update_item
+        (field
           (qualified_name
             (identifier)
             (identifier)))
-        (update_item
+        (field
           (qualified_name
             (identifier)
             (identifier))
-          (validate_option
+          (format_phrase
             (binary_expression
               (qualified_name
                 (identifier)
                 (identifier))
               (number_literal))
-            (string_literal)))
-        (update_item
-          (identifier))
-        (update_item
-          (string_literal)))
+            (string_literal)
+            (string_literal))))
       (for_statement
         (record
           (identifier)
@@ -212,20 +212,19 @@ UPDATE field1 SPACE(2) SKIP(1) ^.
             (identifier)))
         (body
           (display_statement
+            (qualified_name
+              (identifier)
+              (identifier)))
+          (update_statement
             (field
               (qualified_name
                 (identifier)
-                (identifier))))
-          (update_statement
-            (update_item
-              (qualified_name
-                (identifier)
                 (identifier)))
-            (update_item
+            (field
               (qualified_name
                 (identifier)
                 (identifier))
-              (validate_option
+              (format_phrase
                 (binary_expression
                   (qualified_name
                     (identifier)
@@ -246,23 +245,23 @@ UPDATE field1 SPACE(2) SKIP(1) ^.
             (identifier)
             (identifier))))
       (update_statement
-        (update_item
+        (field
           (qualified_name
             (identifier)
             (identifier)))
-        (update_item
+        (field
           (qualified_name
             (identifier)
             (identifier)))
-        (update_item
+        (field
           (qualified_name
             (identifier)
             (identifier)))
-        (update_item
+        (field
           (qualified_name
             (identifier)
             (identifier)))
-        (update_item
+        (field
           (qualified_name
             (identifier)
             (identifier)))
@@ -349,15 +348,15 @@ UPDATE field1 SPACE(2) SKIP(1) ^.
           (identifier)
           (centered)))
       (update_statement
-        (update_item
+        (field
           (qualified_name
             (identifier)
             (identifier)))
-        (update_item
+        (field
           (qualified_name
             (identifier)
             (identifier)))
-        (update_item
+        (field
           (identifier))
         (frame_phrase
           (identifier)))
@@ -371,10 +370,10 @@ UPDATE field1 SPACE(2) SKIP(1) ^.
     (frame_phrase
       (identifier)))
   (update_statement
-    (update_item
+    (field
       (identifier))
-    (update_item
+    (field
       (number_literal))
-    (update_item
+    (field
       (number_literal))
-    (update_item)))
+    (field)))

@@ -53,7 +53,8 @@ RELEASE OBJECT controlHdl NO-ERROR.
     (assign_phrase
       (assign_pair
         (identifier)
-        (widget_access
+        (object_access
+          (identifier)
           (identifier)
           (identifier)))
       (assign_pair

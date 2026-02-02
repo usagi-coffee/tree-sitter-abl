@@ -138,10 +138,9 @@ SET Customer EXCEPT Comments WITH FRAME fCust NO-ERROR.
       table: (identifier))
     (body
       (display_statement
-        (field
-          field: (qualified_name
-            left: (identifier)
-            right: (identifier))))
+        record: (qualified_name
+          left: (identifier)
+          right: (identifier)))
       (set_statement
         (field
           field: (qualified_name
@@ -184,16 +183,15 @@ SET Customer EXCEPT Comments WITH FRAME fCust NO-ERROR.
         (field
           field: (qualified_name
             left: (identifier)
-            right: (identifier)))
-        (validate_option
-          condition: (binary_expression
-            (qualified_name
-              left: (identifier)
-              right: (identifier))
-            (number_literal))
-          message: (string_literal))
-        (help_phrase
-          (string_literal)))
+            right: (identifier))
+          (format_phrase
+            condition: (binary_expression
+              (qualified_name
+                left: (identifier)
+                right: (identifier))
+              (number_literal))
+            message: (string_literal)
+            help: (string_literal))))
       (repeat_statement
         (body
           (create_statement
@@ -214,14 +212,14 @@ SET Customer EXCEPT Comments WITH FRAME fCust NO-ERROR.
             (field
               field: (qualified_name
                 left: (identifier)
-                right: (identifier)))
-            (validate_option
-              condition: (binary_expression
-                (qualified_name
-                  left: (identifier)
-                  right: (identifier))
-                (identifier))
-              message: (string_literal)))))))
+                right: (identifier))
+              (format_phrase
+                condition: (binary_expression
+                  (qualified_name
+                    left: (identifier)
+                    right: (identifier))
+                  (identifier))
+                message: (string_literal))))))))
   (variable_definition
     name: (identifier)
     type: (identifier)
@@ -301,15 +299,15 @@ SET Customer EXCEPT Comments WITH FRAME fCust NO-ERROR.
           frame: (identifier)
           (centered)))
       (update_statement
-        (update_item
+        (field
           field: (qualified_name
             left: (identifier)
             right: (identifier)))
-        (update_item
+        (field
           field: (qualified_name
             left: (identifier)
             right: (identifier)))
-        (update_item
+        (field
           field: (identifier))
         (frame_phrase
           frame: (identifier)))
