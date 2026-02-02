@@ -72,8 +72,7 @@ MESSAGE "Done" VIEW-AS ALERT-BOX INFO BUTTONS OK.
     (view_as_phrase))
   (message_statement
     (string_literal)
-    (view_as_phrase
-      (buttons_phrase))))
+    (view_as_phrase)))
 
 ================================================================================
 MESSAGE with BUTTONS
@@ -90,24 +89,19 @@ MESSAGE "Retry?" VIEW-AS ALERT-BOX BUTTONS RETRY-CANCEL.
 (source_code
   (message_statement
     (string_literal)
-    (view_as_phrase
-      (buttons_phrase)))
+    (view_as_phrase))
   (message_statement
     (string_literal)
-    (view_as_phrase
-      (buttons_phrase)))
+    (view_as_phrase))
   (message_statement
     (string_literal)
-    (view_as_phrase
-      (buttons_phrase)))
+    (view_as_phrase))
   (message_statement
     (string_literal)
-    (view_as_phrase
-      (buttons_phrase)))
+    (view_as_phrase))
   (message_statement
     (string_literal)
-    (view_as_phrase
-      (buttons_phrase))))
+    (view_as_phrase)))
 
 ================================================================================
 MESSAGE with TITLE
@@ -140,8 +134,7 @@ MESSAGE "Input" VIEW-AS ALERT-BOX UPDATE response AS CHARACTER.
 (source_code
   (message_statement
     (string_literal)
-    (view_as_phrase
-      (buttons_phrase))
+    (view_as_phrase)
     (set_update_phrase
       field: (identifier)
       type: (identifier)))
@@ -216,7 +209,6 @@ MESSAGE COLOR NORMAL "Export done: " + fileName SKIP(2) VIEW-AS ALERT-BOX INFORM
     (skip
       count: (number_literal))
     (view_as_phrase
-      (buttons_phrase)
       title: (string_literal))
     (set_update_phrase
       field: (identifier)
@@ -406,7 +398,6 @@ END.
             (number_literal))
           (string_literal)
           (view_as_phrase
-            (buttons_phrase)
             (string_literal))
           (set_update_phrase
             (identifier)
@@ -436,8 +427,7 @@ END.
               (body
                 (message_statement
                   (string_literal)
-                  (view_as_phrase
-                    (buttons_phrase)))
+                  (view_as_phrase))
                 (return_statement))))
           (case_otherwise_phrase
             (stop_statement)))))))

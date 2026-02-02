@@ -17,8 +17,7 @@ UNDERLINE field1 WITH FRAME f1.
     field: (identifier)
     field: (identifier))
   (underline_statement
-    (stream_phrase
-      stream: (identifier))
+    stream: (identifier)
     field: (identifier))
   (underline_statement
     field: (identifier)
@@ -76,8 +75,7 @@ UNDERLINE STREAM-HANDLE hS Customer.Name WITH FRAME f1.
             (identifier)
             (identifier))))))
   (underline_statement
-    (stream_phrase
-      (identifier))
+    (identifier)
     (qualified_name
       (identifier)
       (identifier))

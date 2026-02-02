@@ -3,34 +3,11 @@ module.exports = ({ kw }) => ({
 
   __output_body: ($) =>
     seq(
+      optional($.__output_stream),
       choice(
+        seq(kw("CLOSE")),
+        seq(kw("TO"), $.__output_to_target, repeat($.__output_to_option)),
         seq(
-          optional(
-            choice(
-              alias($.__output_stream_phrase, $.stream_phrase),
-              alias($.__output_stream_handle_phrase, $.stream_handle_phrase),
-            ),
-          ),
-          kw("CLOSE"),
-        ),
-        seq(
-          optional(
-            choice(
-              alias($.__output_stream_phrase, $.stream_phrase),
-              alias($.__output_stream_handle_phrase, $.stream_handle_phrase),
-            ),
-          ),
-          kw("TO"),
-          $.__output_to_target,
-          repeat($.__output_to_option),
-        ),
-        seq(
-          optional(
-            choice(
-              alias($.__output_stream_phrase, $.stream_phrase),
-              alias($.__output_stream_handle_phrase, $.stream_handle_phrase),
-            ),
-          ),
           kw("THROUGH"),
           $.__output_through_program_target,
           repeat($.__output_through_argument),
@@ -38,6 +15,9 @@ module.exports = ({ kw }) => ({
         ),
       ),
     ),
+
+  __output_stream: ($) =>
+    seq(choice(kw("STREAM"), kw("STREAM-HANDLE")), field("name", $.identifier)),
 
   __output_append_phrase: ($) => kw("APPEND"),
   __output_to_option: ($) =>
@@ -58,6 +38,7 @@ module.exports = ({ kw }) => ({
       kw("UNBUFFERED"),
       alias($.__output_convert_phrase, $.convert_phrase),
     ),
+
   __output_through_option: ($) =>
     choice(
       kw("ECHO"),
@@ -69,6 +50,7 @@ module.exports = ({ kw }) => ({
       kw("UNBUFFERED"),
       alias($.__output_convert_phrase, $.convert_phrase),
     ),
+
   __output_convert_phrase: ($) =>
     choice(
       kw("NO-CONVERT"),
@@ -82,6 +64,7 @@ module.exports = ({ kw }) => ({
         ),
       ),
     ),
+
   __output_lob_dir_phrase: ($) =>
     seq(
       kw("LOB-DIR"),
@@ -90,6 +73,7 @@ module.exports = ({ kw }) => ({
         seq(kw("VALUE"), "(", $._expression, ")"),
       ),
     ),
+
   __output_num_copies_phrase: ($) =>
     seq(
       kw("NUM-COPIES"),
@@ -99,6 +83,7 @@ module.exports = ({ kw }) => ({
         seq(kw("VALUE"), "(", $._expression, ")"),
       ),
     ),
+
   __output_page_size_phrase: ($) =>
     seq(
       kw("PAGE-SIZE"),
@@ -108,12 +93,14 @@ module.exports = ({ kw }) => ({
         seq(kw("VALUE"), "(", $._expression, ")"),
       ),
     ),
+
   __output_map_entry: ($) =>
     choice(
       seq($.identifier, repeat(seq("/", $.identifier))),
       $.identifier,
       $.string_literal,
     ),
+
   __output_to_target: ($) =>
     choice(
       seq(kw("PRINTER"), optional(field("printer", $.__output_printer_target))),
@@ -130,14 +117,17 @@ module.exports = ({ kw }) => ({
       seq(kw("VALUE"), "(", $._expression, ")"),
       token(kw("CLIPBOARD")),
     ),
+
   __output_through_program_target: ($) =>
     choice(
       field("program", $.identifier),
       field("program", $.string_literal),
       seq(kw("VALUE"), "(", $._expression, ")"),
     ),
+
   __output_through_argument: ($) =>
     choice($.__output_argument, seq(kw("VALUE"), "(", $._expression, ")")),
+
   __output_argument: ($) =>
     choice(
       $.string_literal,
@@ -145,9 +135,7 @@ module.exports = ({ kw }) => ({
       $.identifier,
       alias($.constant_expression, $.constant),
     ),
-  __output_stream_phrase: ($) => seq(kw("STREAM"), field("name", $.identifier)),
-  __output_stream_handle_phrase: ($) =>
-    seq(kw("STREAM-HANDLE"), field("handle", $._expression)),
+
   __output_printer_target: ($) =>
     choice(
       $.string_literal,

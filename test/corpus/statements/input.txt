@@ -15,8 +15,7 @@ INPUT STREAM-HANDLE hStream CLOSE.
   (input_statement
     (convert_phrase))
   (input_statement
-    (stream_phrase
-      name: (identifier))
+    name: (identifier)
     directory: (string_literal)
     (lob_dir_phrase
       (constant
@@ -26,8 +25,7 @@ INPUT STREAM-HANDLE hStream CLOSE.
       target: (string_literal)
       source: (string_literal)))
   (input_statement
-    (stream_handle_phrase
-      handle: (identifier))))
+    name: (identifier)))
 
 ================================================================================
 INPUT - Reference snippet

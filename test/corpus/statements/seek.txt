@@ -11,7 +11,7 @@ SEEK STREAM outStream TO END.
   (seek_statement
     (identifier))
   (seek_statement
-    name: (identifier)))
+    stream: (identifier)))
 
 ================================================================================
 SEEK - reference snippet and variants

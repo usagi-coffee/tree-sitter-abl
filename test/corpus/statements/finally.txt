@@ -110,12 +110,10 @@ MESSAGE "Out of DO block." VIEW-AS ALERT-BOX BUTTONS OK.
         (body
           (message_statement
             (string_literal)
-            (view_as_phrase
-              (buttons_phrase)))))))
+            (view_as_phrase))))))
   (message_statement
     (string_literal)
-    (view_as_phrase
-      (buttons_phrase)))
+    (view_as_phrase))
   (do_block
     (on_error_phrase)
     (body
@@ -134,15 +132,12 @@ MESSAGE "Out of DO block." VIEW-AS ALERT-BOX BUTTONS OK.
         (body
           (message_statement
             (string_literal)
-            (view_as_phrase
-              (buttons_phrase)))))
+            (view_as_phrase))))
       (finally_statement
         (body
           (message_statement
             (string_literal)
-            (view_as_phrase
-              (buttons_phrase)))))))
+            (view_as_phrase))))))
   (message_statement
     (string_literal)
-    (view_as_phrase
-      (buttons_phrase))))
+    (view_as_phrase)))

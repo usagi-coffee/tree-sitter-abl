@@ -1,36 +1,36 @@
 module.exports = ({ kw }) => ({
   input_output_statement: ($) =>
-    seq(kw("INPUT-OUTPUT"), $.__input_output_body, $._terminator),
+    seq(
+      kw("INPUT-OUTPUT"),
+      optional($.__input_output_stream),
+      $.__input_output_body,
+      $._terminator,
+    ),
+
+  __input_output_stream: ($) =>
+    seq(
+      choice(kw("STREAM"), kw("STREAM-HANDLE")),
+      field("stream", $.identifier),
+    ),
 
   __input_output_body: ($) =>
-    seq(
-      optional(
-        choice(
-          alias($.__input_output_stream_phrase, $.stream_phrase),
-          alias($.__input_output_stream_handle_phrase, $.stream_handle_phrase),
-        ),
-      ),
-      choice(
-        kw("CLOSE"),
-        seq(
-          kw("THROUGH"),
-          $.__input_output_through_target,
-          repeat($.__input_output_through_argument),
-          repeat($.__input_output_through_option),
-        ),
+    choice(
+      kw("CLOSE"),
+      seq(
+        kw("THROUGH"),
+        $.__input_output_through_target,
+        repeat($.__input_output_through_argument),
+        repeat($.__input_output_through_option),
       ),
     ),
 
-  __input_output_stream_phrase: ($) =>
-    seq(kw("STREAM"), field("name", $.identifier)),
-  __input_output_stream_handle_phrase: ($) =>
-    seq(kw("STREAM-HANDLE"), field("handle", $._expression)),
   __input_output_through_target: ($) =>
     choice(
       field("program", $.identifier),
       field("program", $.string_literal),
       seq(kw("VALUE"), "(", $._expression, ")"),
     ),
+
   __input_output_through_argument: ($) =>
     choice(
       $.string_literal,
@@ -39,6 +39,7 @@ module.exports = ({ kw }) => ({
       alias($.constant_expression, $.constant),
       seq(kw("VALUE"), "(", $._expression, ")"),
     ),
+
   __input_output_through_option: ($) =>
     choice(
       kw("ECHO"),
@@ -48,6 +49,7 @@ module.exports = ({ kw }) => ({
       kw("UNBUFFERED"),
       alias($.__input_output_convert_phrase, $.convert_phrase),
     ),
+
   __input_output_convert_phrase: ($) =>
     choice(
       kw("NO-CONVERT"),

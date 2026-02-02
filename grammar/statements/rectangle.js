@@ -3,7 +3,7 @@ const { definitionModifiers } = require("../helpers/modifiers");
 module.exports = ({ kw }) => ({
   rectangle_definition: ($) =>
     seq(
-      choice(kw("DEFINE"), kw("DEF")),
+      kw("DEFINE", { offset: 3 }),
       ...definitionModifiers($, kw, { new: false, access: ["PRIVATE"] }),
       kw("RECTANGLE"),
       $.__rectangle_body,

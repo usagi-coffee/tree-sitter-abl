@@ -3,7 +3,7 @@ const { definitionModifiers } = require("../helpers/modifiers");
 module.exports = ({ kw }) => ({
   variable_definition: ($) =>
     seq(
-      choice(kw("DEFINE"), kw("DEF")),
+      kw("DEFINE", { offset: 3 }),
       ...definitionModifiers($, kw, {
         access: [
           "PRIVATE",
@@ -17,7 +17,7 @@ module.exports = ({ kw }) => ({
         static: true,
         serializable: true,
       }),
-      choice(kw("VARIABLE"), kw("VAR")),
+      kw("VARIABLE", { offset: 3 }),
       $.__variable_body,
       $._terminator,
     ),

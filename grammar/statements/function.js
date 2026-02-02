@@ -19,7 +19,7 @@ module.exports = ({ kw }) => ({
   function_forward_definition: ($) =>
     choice(
       seq(
-        choice(kw("DEFINE"), kw("DEF")),
+        kw("DEFINE", { offset: 3 }),
         kw("FUNCTION"),
         $.__function_forward_body_1,
         $._terminator,

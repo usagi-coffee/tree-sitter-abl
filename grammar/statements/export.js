@@ -3,14 +3,15 @@ module.exports = ({ kw }) => ({
 
   __export_body: ($) =>
     seq(
-      optional(
-        choice(
-          alias($.__export_stream_phrase, $.stream_phrase),
-          alias($.__export_stream_handle_phrase, $.stream_handle_phrase),
-        ),
-      ),
+      optional($.__export_stream),
       $.__export_fields_phrase,
       optional(alias($.__export_no_lobs, $.no_lobs)),
+    ),
+
+  __export_stream: ($) =>
+    seq(
+      choice(kw("STREAM"), kw("STREAM-HANDLE")),
+      field("stream", $.identifier),
     ),
 
   __export_fields_phrase: ($) =>
@@ -22,9 +23,6 @@ module.exports = ({ kw }) => ({
       ),
     ),
   __export_field_name: ($) => choice($.identifier, $.qualified_name),
-  __export_stream_phrase: ($) => seq(kw("STREAM"), field("name", $.identifier)),
-  __export_stream_handle_phrase: ($) =>
-    seq(kw("STREAM-HANDLE"), field("handle", $._expression)),
   __export_delimiter_phrase: ($) => seq(kw("DELIMITER"), $.string_literal),
   __export_no_lobs: ($) => kw("NO-LOBS"),
 });

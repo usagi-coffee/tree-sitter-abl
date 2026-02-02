@@ -34,8 +34,7 @@ SET field1 GO-ON(f1 f2).
     (field
       field: (identifier)))
   (set_statement
-    (stream_phrase
-      stream: (identifier))
+    stream: (identifier)
     (field
       field: (identifier)))
   (set_statement
@@ -319,8 +318,7 @@ SET Customer EXCEPT Comments WITH FRAME fCust NO-ERROR.
         operator: (assignment_operator)
         right: (string_literal))))
   (set_statement
-    (stream_phrase
-      handle: (identifier))
+    stream: (identifier)
     (field
       field: (identifier))
     (field

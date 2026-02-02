@@ -14,8 +14,7 @@ VIEW STREAM sOut FRAME myframe.
     (widget_phrase
       frame: (identifier)))
   (view_statement
-    (stream_phrase
-      stream: (identifier))
+    stream: (identifier)
     (widget_phrase
       frame: (identifier))))
 
@@ -147,7 +146,6 @@ VIEW STREAM-HANDLE hS FRAME f1.
       (identifier))
     (identifier))
   (view_statement
-    (stream_phrase
-      (identifier))
+    (identifier)
     (widget_phrase
       (identifier))))

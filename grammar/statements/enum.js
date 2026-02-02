@@ -8,7 +8,7 @@ module.exports = ({ kw }) => ({
       $._colon,
       repeat(
         seq(
-          kw("DEFINE"),
+          kw("DEFINE", { offset: 3 }),
           kw("ENUM"),
           alias($.__enum_member, $.member),
           repeat(alias($.__enum_member, $.member)),

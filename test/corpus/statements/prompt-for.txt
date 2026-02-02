@@ -339,8 +339,7 @@ PROMPT-FOR STREAM-HANDLE hS field1 field2 IN WINDOW wMain WITH FRAME fMain.
             (number_literal))
           (no_hide)))))
   (prompt_for_statement
-    (stream_phrase
-      stream: (identifier))
+    stream: (identifier)
     (field
       field: (identifier))
     (field
@@ -352,8 +351,7 @@ PROMPT-FOR STREAM-HANDLE hS field1 field2 IN WINDOW wMain WITH FRAME fMain.
       (identifier)
       (identifier)))
   (prompt_for_statement
-    (stream_phrase
-      handle: (identifier))
+    stream: (identifier)
     (field
       field: (identifier))
     (field

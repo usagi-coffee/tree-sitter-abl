@@ -11,8 +11,7 @@ IMPORT STREAM-HANDLE hStream mPtrData.
 
 (source_code
   (import_statement
-    (stream_phrase
-      name: (identifier))
+    stream: (identifier)
     (unformatted_phrase
       field: (identifier)))
   (import_statement
@@ -28,8 +27,7 @@ IMPORT STREAM-HANDLE hStream mPtrData.
     (identifier)
     (identifier))
   (import_statement
-    (stream_handle_phrase
-      handle: (identifier))
+    stream: (identifier)
     (identifier)))
 
 ================================================================================

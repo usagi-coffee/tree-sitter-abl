@@ -262,14 +262,12 @@ OUTPUT STREAM due CLOSE.
   (stream_definition
     (identifier))
   (output_statement
-    (stream_phrase
-      (identifier))
+    (identifier)
     (qualified_name
       (identifier)
       (identifier)))
   (display_statement
-    (stream_phrase
-      (identifier))
+    (identifier)
     (field
       (string_literal))
     (field
@@ -382,8 +380,7 @@ OUTPUT STREAM due CLOSE.
               (do_block
                 (body
                   (display_statement
-                    (stream_phrase
-                      (identifier))
+                    (identifier)
                     (field
                       (qualified_name
                         (identifier)
@@ -420,5 +417,4 @@ OUTPUT STREAM due CLOSE.
                       (no_box)
                       (identifier)))))))))))
   (output_statement
-    (stream_phrase
-      (identifier))))
+    (identifier)))

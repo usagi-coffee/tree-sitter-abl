@@ -5,7 +5,7 @@ module.exports = ({ kw }) => ({
     prec.right(
       1,
       seq(
-        choice(kw("DEFINE"), kw("DEF")),
+        kw("DEFINE", { offset: 3 }),
         ...definitionModifiers($, kw, {
           access: ["PRIVATE", "PROTECTED"],
           new: true,

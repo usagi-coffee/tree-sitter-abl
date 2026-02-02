@@ -31,7 +31,7 @@ module.exports = ({ kw }) => ({
 
   __interface_temp_table: ($) =>
     seq(
-      choice(kw("DEFINE"), kw("DEF")),
+      kw("DEFINE", { offset: 3 }),
       kw("TEMP-TABLE"),
       $.__temp_table_body,
       $._terminator,
@@ -39,7 +39,7 @@ module.exports = ({ kw }) => ({
 
   __interface_dataset: ($) =>
     seq(
-      choice(kw("DEFINE"), kw("DEF")),
+      kw("DEFINE", { offset: 3 }),
       kw("DATASET"),
       $.__dataset_body,
       $._terminator,
@@ -47,7 +47,7 @@ module.exports = ({ kw }) => ({
 
   __interface_event: ($) =>
     seq(
-      choice(kw("DEFINE"), kw("DEF")),
+      kw("DEFINE", { offset: 3 }),
       optional(kw("PUBLIC")),
       kw("EVENT"),
       $.__event_body,

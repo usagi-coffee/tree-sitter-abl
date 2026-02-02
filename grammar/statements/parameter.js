@@ -1,7 +1,7 @@
 module.exports = ({ kw }) => ({
   parameter_definition: ($) =>
     seq(
-      choice(kw("DEFINE"), kw("DEF")),
+      kw("DEFINE", { offset: 3 }),
       choice(
         $.__parameter_standard_parameter,
         $.__parameter_table_parameter,
@@ -13,7 +13,7 @@ module.exports = ({ kw }) => ({
   __parameter_standard_parameter: ($) =>
     seq(
       choice(kw("INPUT"), kw("OUTPUT"), kw("INPUT-OUTPUT"), kw("RETURN")),
-      kw("PARAM(ETER)?", "PARAMETER"),
+      kw("PARAMETER", { offset: 5 }),
       field("name", $.identifier),
       $.__parameter_variable_type_phrase,
       repeat(
@@ -32,7 +32,7 @@ module.exports = ({ kw }) => ({
   __parameter_table_parameter: ($) =>
     seq(
       choice(kw("INPUT"), kw("OUTPUT"), kw("INPUT-OUTPUT")),
-      kw("PARAM(ETER)?", "PARAMETER"),
+      kw("PARAMETER", { offset: 5 }),
       choice(
         seq(
           kw("TABLE"),
@@ -61,7 +61,7 @@ module.exports = ({ kw }) => ({
 
   __parameter_buffer_parameter: ($) =>
     seq(
-      kw("PARAMETER"),
+      kw("PARAMETER", { offset: 5 }),
       kw("BUFFER"),
       field("name", $.identifier),
       kw("FOR"),

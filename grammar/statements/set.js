@@ -9,9 +9,15 @@ module.exports = ({ kw }) => ({
 
   __set_body: ($) =>
     seq(
-      optional(alias($.__set_stream_phrase, $.stream_phrase)),
+      optional($.__set_stream),
       optional(kw("UNLESS-HIDDEN")),
       choice($.__set_record_body, $.__set_fields_body),
+    ),
+
+  __set_stream: ($) =>
+    seq(
+      choice(kw("STREAM"), kw("STREAM-HANDLE")),
+      field("stream", $.identifier),
     ),
 
   __set_record_body: ($) =>
@@ -35,12 +41,6 @@ module.exports = ({ kw }) => ({
         optional($.frame_phrase),
         optional($.editing_phrase),
       ),
-    ),
-
-  __set_stream_phrase: ($) =>
-    choice(
-      seq(kw("STREAM"), field("stream", $.identifier)),
-      seq(kw("STREAM-HANDLE"), field("handle", $._expression)),
     ),
 
   __set_field: ($) =>

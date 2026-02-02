@@ -456,15 +456,13 @@ DISPLAY SPACE(2) Customer.Name SKIP(1) Customer.City.
       (identifier))
     (no_error))
   (display_statement
-    (stream_phrase
-      (identifier))
+    (identifier)
     (field
       (qualified_name
         (identifier)
         (identifier))))
   (display_statement
-    (stream_phrase
-      (identifier))
+    (identifier)
     (field
       (qualified_name
         (identifier)

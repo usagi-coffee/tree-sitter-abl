@@ -2,14 +2,14 @@ module.exports = ({ kw }) => ({
   readkey_statement: ($) =>
     seq(
       kw("READKEY"),
-      optional(alias($.__readkey_stream_phrase, $.stream_phrase)),
+      optional($.__readkey_stream),
       optional(seq(kw("PAUSE"), field("pause", $._expression))),
       $._terminator,
     ),
 
-  __readkey_stream_phrase: ($) =>
-    choice(
-      seq(kw("STREAM"), field("stream", $.identifier)),
-      seq(kw("STREAM-HANDLE"), field("handle", $._expression)),
+  __readkey_stream: ($) =>
+    seq(
+      choice(kw("STREAM"), kw("STREAM-HANDLE")),
+      field("stream", $.identifier),
     ),
 });

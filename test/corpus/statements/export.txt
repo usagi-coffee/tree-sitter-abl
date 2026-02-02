@@ -21,8 +21,7 @@ EXPORT STREAM-HANDLE hOut memptrBuf.
     (identifier)
     (no_lobs))
   (export_statement
-    (stream_handle_phrase
-      handle: (identifier))
+    stream: (identifier)
     (identifier)))
 
 ================================================================================
@@ -87,12 +86,10 @@ EXPORT STREAM-HANDLE hOut memptrBuf.
   (export_statement
     (identifier))
   (export_statement
-    (stream_phrase
-      name: (identifier))
+    stream: (identifier)
     (qualified_name
       left: (identifier)
       right: (identifier)))
   (export_statement
-    (stream_handle_phrase
-      handle: (identifier))
+    stream: (identifier)
     (identifier)))

@@ -13,8 +13,7 @@ READKEY STREAM sIn PAUSE 10.
   (readkey_statement
     pause: (number_literal))
   (readkey_statement
-    (stream_phrase
-      stream: (identifier))
+    stream: (identifier)
     pause: (number_literal)))
 
 ================================================================================
@@ -90,8 +89,7 @@ READKEY PAUSE 0.5.
             (string_literal))
           (leave_statement)))))
   (readkey_statement
-    (stream_phrase
-      (identifier))
+    (identifier)
     (number_literal))
   (readkey_statement
     (number_literal)))

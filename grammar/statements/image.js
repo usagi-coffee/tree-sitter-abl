@@ -3,7 +3,7 @@ const { definitionModifiers } = require("../helpers/modifiers");
 module.exports = ({ kw }) => ({
   image_definition: ($) =>
     seq(
-      choice(kw("DEFINE"), kw("DEF")),
+      kw("DEFINE", { offset: 3 }),
       ...definitionModifiers($, kw, { access: ["PRIVATE"] }),
       kw("IMAGE"),
       $.__image_body,

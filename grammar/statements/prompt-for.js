@@ -4,9 +4,15 @@ module.exports = ({ kw }) => ({
 
   __prompt_for_body: ($) =>
     seq(
-      optional(alias($.__prompt_for_stream_phrase, $.stream_phrase)),
+      optional($.__prompt_stream),
       optional(kw("UNLESS-HIDDEN")),
       choice($.__prompt_for_record_body, $.__prompt_for_fields_body),
+    ),
+
+  __prompt_stream: ($) =>
+    seq(
+      choice(kw("STREAM"), kw("STREAM-HANDLE")),
+      field("stream", $.identifier),
     ),
 
   __prompt_for_record_body: ($) =>
@@ -32,12 +38,6 @@ module.exports = ({ kw }) => ({
       optional(seq(kw("IN"), kw("WINDOW"), field("window", $._expression))),
       optional($.frame_phrase),
       optional($.editing_phrase),
-    ),
-
-  __prompt_for_stream_phrase: ($) =>
-    choice(
-      seq(kw("STREAM"), field("stream", $.identifier)),
-      seq(kw("STREAM-HANDLE"), field("handle", $._expression)),
     ),
 
   __prompt_for_field: ($) =>

@@ -191,12 +191,10 @@ DISPLAY STREAM rpt ItemNum ItemName WITH NO-LABELS NO-BOX.
       (side_labels)
       (identifier)))
   (output_statement
-    (stream_phrase
-      (identifier))
+    (identifier)
     (identifier))
   (output_statement
-    (stream_phrase
-      (identifier))
+    (identifier)
     (identifier))
   (for_statement
     (record
@@ -209,8 +207,7 @@ DISPLAY STREAM rpt ItemNum ItemName WITH NO-LABELS NO-BOX.
         (do_block
           (body
             (display_statement
-              (stream_phrase
-                (identifier))
+              (identifier)
               (field
                 (qualified_name
                   (identifier)
@@ -238,8 +235,7 @@ DISPLAY STREAM rpt ItemNum ItemName WITH NO-LABELS NO-BOX.
       (run_statement
         (procedure_name))))
   (display_statement
-    (stream_phrase
-      (identifier))
+    (identifier)
     (skip_phrase
       (number_literal))
     (field
@@ -248,16 +244,13 @@ DISPLAY STREAM rpt ItemNum ItemName WITH NO-LABELS NO-BOX.
       (identifier)
       (side_labels)))
   (display_statement
-    (stream_phrase
-      (identifier))
+    (identifier)
     (frame_phrase
       (identifier)))
   (output_statement
-    (stream_phrase
-      (identifier)))
+    (identifier))
   (output_statement
-    (stream_phrase
-      (identifier)))
+    (identifier))
   (stream_definition
     (scope_modifier)
     (identifier))
@@ -266,8 +259,7 @@ DISPLAY STREAM rpt ItemNum ItemName WITH NO-LABELS NO-BOX.
     (identifier)
     (identifier))
   (display_statement
-    (stream_phrase
-      (identifier))
+    (identifier)
     (field
       (identifier))
     (field

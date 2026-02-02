@@ -765,7 +765,6 @@ DEFINE INPUT PARAMETER pExtent0 AS INTEGER EXTENT 0.
   (message_statement
     (string_literal)
     (view_as_phrase
-      (buttons_phrase)
       title: (string_literal)))
   (run_statement
     procedure: (identifier)

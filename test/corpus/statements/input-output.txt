@@ -11,11 +11,9 @@ INPUT-OUTPUT STREAM-HANDLE hStream CLOSE.
 (source_code
   (input_output_statement)
   (input_output_statement
-    (stream_phrase
-      name: (identifier)))
+    stream: (identifier))
   (input_output_statement
-    (stream_handle_phrase
-      handle: (identifier))))
+    stream: (identifier)))
 
 ================================================================================
 INPUT-OUTPUT THROUGH
@@ -38,8 +36,7 @@ INPUT-OUTPUT STREAM sIO THROUGH "filter" UNBUFFERED.
   (input_output_statement
     (identifier))
   (input_output_statement
-    (stream_phrase
-      name: (identifier))
+    stream: (identifier)
     program: (string_literal)))
 
 ================================================================================
@@ -139,13 +136,11 @@ INPUT-OUTPUT STREAM sIO THROUGH "filter" CONVERT SOURCE "ibm850" TARGET "utf-8".
   (input_output_statement
     (identifier))
   (input_output_statement
-    (stream_phrase
-      (identifier))
+    (identifier)
     (string_literal)
     (convert_phrase))
   (input_output_statement
-    (stream_phrase
-      (identifier))
+    (identifier)
     (string_literal)
     (convert_phrase
       (string_literal)

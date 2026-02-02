@@ -3,12 +3,7 @@ module.exports = ({ kw }) => ({
 
   __input_body: ($) =>
     seq(
-      optional(
-        choice(
-          alias($.__input_stream_phrase, $.stream_phrase),
-          alias($.__input_stream_handle_phrase, $.stream_handle_phrase),
-        ),
-      ),
+      optional($.__input_stream),
       choice(kw("CLOSE"), seq(kw("FROM"), $.__input_from_target)),
       optional(alias($.__input_lob_dir_phrase, $.lob_dir_phrase)),
       optional(kw("BINARY")),
@@ -19,6 +14,9 @@ module.exports = ({ kw }) => ({
       optional(kw("UNBUFFERED")),
       optional(alias($.__input_convert_phrase, $.convert_phrase)),
     ),
+
+  __input_stream: ($) =>
+    seq(choice(kw("STREAM"), kw("STREAM-HANDLE")), field("name", $.identifier)),
 
   __input_from_target: ($) =>
     choice(
@@ -69,7 +67,4 @@ module.exports = ({ kw }) => ({
         ),
       ),
     ),
-  __input_stream_phrase: ($) => seq(kw("STREAM"), field("name", $.identifier)),
-  __input_stream_handle_phrase: ($) =>
-    seq(kw("STREAM-HANDLE"), field("handle", $._expression)),
 });

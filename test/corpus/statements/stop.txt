@@ -100,8 +100,7 @@ END.
       (message_statement
         (string_literal)
         (string_literal)
-        (view_as_phrase
-          (buttons_phrase))
+        (view_as_phrase)
         (set_update_phrase
           (identifier)))
       (if_statement

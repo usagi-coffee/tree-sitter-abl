@@ -3,21 +3,18 @@ module.exports = ({ kw }) => ({
 
   __put_body: ($) =>
     seq(
-      optional(
-        choice(
-          alias($.__put_stream_phrase, $.stream_phrase),
-          alias($.__put_stream_handle_phrase, $.stream_handle_phrase),
-        ),
-      ),
+      optional($.__put_stream),
       choice(
         seq(optional(kw("UNFORMATTED")), repeat1($.__put_item)),
         seq(kw("CONTROL"), repeat1(field("control", $._expression))),
       ),
     ),
 
-  __put_stream_phrase: ($) => seq(kw("STREAM"), field("name", $.identifier)),
-  __put_stream_handle_phrase: ($) =>
-    seq(kw("STREAM-HANDLE"), field("handle", $._expression)),
+  __put_stream: ($) =>
+    seq(
+      choice(kw("STREAM"), kw("STREAM-HANDLE")),
+      field("stream", $.identifier),
+    ),
 
   __put_item: ($) =>
     choice(

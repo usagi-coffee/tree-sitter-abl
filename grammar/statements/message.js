@@ -1,19 +1,16 @@
 module.exports = ({ kw }) => ({
-  message_statement: ($) => seq(kw("MESSAGE"), $.__message_body, $._terminator),
+  message_statement: ($) =>
+    seq(kw("MESSAGE"), optional($.__message_body), $._terminator),
 
   __message_body: ($) =>
     seq(
-      repeat1(
-        choice(
-          seq(kw("COLOR"), $.__message_color_value),
-          $._expression,
-          alias($.__message_skip_item, $.skip),
-        ),
-      ),
+      optional(seq(kw("COLOR"), $.__message_color_value)),
+      repeat1(choice($._expression, alias($.__message_skip_item, $.skip))),
       optional(alias($.__message_view_as_phrase, $.view_as_phrase)),
       optional(alias($.__message_set_update_phrase, $.set_update_phrase)),
       optional(seq(kw("IN"), kw("WINDOW"), field("window", $._expression))),
     ),
+
   __message_color_value: ($) =>
     choice(kw("NORMAL"), kw("INPUT"), kw("MESSAGES"), $.color_phrase),
 
@@ -22,30 +19,36 @@ module.exports = ({ kw }) => ({
       kw("VIEW-AS"),
       kw("ALERT-BOX"),
       optional(
-        choice(
-          kw("MESSAGE"),
-          kw("QUESTION"),
-          kw("INFORMATION"),
-          kw("INFO"),
-          kw("ERROR"),
-          kw("WARNING"),
+        alias(
+          choice(
+            kw("MESSAGE"),
+            kw("QUESTION"),
+            kw("INFORMATION"),
+            kw("INFO"),
+            kw("ERROR"),
+            kw("WARNING"),
+          ),
+          $.alert_type,
         ),
       ),
-      optional(alias($.__message_buttons_phrase, $.buttons_phrase)),
+      optional(
+        seq(
+          kw("BUTTONS"),
+          field(
+            "buttons",
+            choice(
+              kw("YES-NO"),
+              kw("YES-NO-CANCEL"),
+              kw("OK-CANCEL"),
+              kw("RETRY-CANCEL"),
+              kw("OK"),
+            ),
+          ),
+        ),
+      ),
       optional(seq(kw("TITLE"), field("title", $.string_literal))),
     ),
 
-  __message_buttons_phrase: ($) =>
-    seq(
-      kw("BUTTONS"),
-      choice(
-        kw("YES-NO"),
-        kw("YES-NO-CANCEL"),
-        kw("OK-CANCEL"),
-        kw("RETRY-CANCEL"),
-        kw("OK"),
-      ),
-    ),
   __message_skip_item: ($) =>
     prec.right(
       choice(

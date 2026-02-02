@@ -138,7 +138,7 @@ module.exports = ({ kw }) => ({
 
   property_definition: ($) =>
     seq(
-      kw("DEFINE"),
+      kw("DEFINE", { offset: 3 }),
       ...definitionModifiers($, kw, {
         access: [
           "PRIVATE",

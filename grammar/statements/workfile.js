@@ -4,7 +4,7 @@ module.exports = ({ kw }) => ({
   // Workfile is equivalent to WORK-TABLE
   workfile_definition: ($) =>
     seq(
-      choice(kw("DEFINE"), kw("DEF")),
+      kw("DEFINE", { offset: 3 }),
       ...definitionModifiers($, kw, {
         access: ["PRIVATE"],
         new: true,

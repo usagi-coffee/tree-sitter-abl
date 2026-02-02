@@ -10,8 +10,7 @@ PAGE STREAM sOut.
 (source_code
   (page_statement)
   (page_statement
-    (stream_phrase
-      stream: (identifier))))
+    stream: (identifier)))
 
 ===============================================================================
 PAGE statement with STREAM-HANDLE
@@ -23,8 +22,7 @@ PAGE STREAM-HANDLE hStream.
 
 (source_code
   (page_statement
-    (stream_phrase
-      handle: (identifier))))
+    stream: (identifier)))
 
 ===============================================================================
 PAGE - reference snippet

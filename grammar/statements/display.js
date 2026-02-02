@@ -1,14 +1,20 @@
 module.exports = ({ kw }) => ({
   display_statement: ($) =>
     seq(
-      choice(kw("DISPLAY"), token(/DISP(LAY)?/i)),
-      optional(alias($.__display_stream_phrase, $.stream_phrase)),
+      kw("DISPLAY", { offset: 3 }),
+      optional($.__display_stream),
       optional(kw("UNLESS-HIDDEN")),
       choice($.__display_record_form, repeat($.__display_item)),
       optional(seq(kw("IN"), kw("WINDOW"), field("window", $._expression))),
       repeat($.frame_phrase),
       optional(alias(kw("NO-ERROR"), $.no_error)),
       $._terminator,
+    ),
+
+  __display_stream: ($) =>
+    seq(
+      choice(kw("STREAM"), kw("STREAM-HANDLE")),
+      field("stream", $.identifier),
     ),
 
   __display_record_form: ($) =>
@@ -56,11 +62,5 @@ module.exports = ({ kw }) => ({
     choice(
       prec(1, seq(kw("SPACE"), "(", optional($._expression), ")")),
       kw("SPACE"),
-    ),
-
-  __display_stream_phrase: ($) =>
-    choice(
-      seq(kw("STREAM"), field("stream", $.identifier)),
-      seq(kw("STREAM-HANDLE"), field("handle", $._expression)),
     ),
 });

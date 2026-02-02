@@ -17,8 +17,7 @@ PUT UNFORMATTED x format("9999-99-99") ';'.
       right: (identifier))
     (skip))
   (put_statement
-    (stream_phrase
-      name: (identifier))
+    stream: (identifier)
     value: (string_literal)
     (format_phrase
       format: (string_literal))
@@ -62,8 +61,7 @@ PUT CONTROL NULL(20).
   (stream_definition
     (identifier))
   (output_statement
-    (stream_phrase
-      (identifier))
+    (identifier)
     (qualified_name
       (identifier)
       (identifier)))
@@ -73,23 +71,19 @@ PUT CONTROL NULL(20).
       (no_lock))
     (body
       (put_statement
-        (stream_phrase
-          (identifier))
+        (identifier)
         (identifier)
         (string_literal))))
   (output_statement
-    (stream_phrase
-      (identifier)))
+    (identifier))
   (put_statement
-    (stream_phrase
-      (identifier))
+    (identifier)
     (string_literal)
     (number_literal)
     (space)
     (skip))
   (put_statement
-    (stream_handle_phrase
-      (identifier))
+    (identifier)
     (identifier)
     (number_literal)
     (skip

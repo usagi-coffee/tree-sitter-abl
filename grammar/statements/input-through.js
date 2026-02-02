@@ -2,15 +2,16 @@ module.exports = ({ kw }) => ({
   input_through_statement: ($) =>
     seq(
       kw("INPUT"),
-      optional(
-        choice(
-          alias($.__input_through_stream_phrase, $.stream_phrase),
-          alias($.__input_through_stream_handle_phrase, $.stream_handle_phrase),
-        ),
-      ),
+      optional($.__input_through_stream),
       kw("THROUGH"),
       $.__input_through_body,
       $._terminator,
+    ),
+
+  __input_through_stream: ($) =>
+    seq(
+      choice(kw("STREAM"), kw("STREAM-HANDLE")),
+      field("stream", $.identifier),
     ),
 
   __input_through_body: ($) =>
@@ -62,8 +63,4 @@ module.exports = ({ kw }) => ({
         optional(seq(kw("SOURCE"), field("source", $.string_literal))),
       ),
     ),
-  __input_through_stream_phrase: ($) =>
-    seq(kw("STREAM"), field("name", $.identifier)),
-  __input_through_stream_handle_phrase: ($) =>
-    seq(kw("STREAM-HANDLE"), field("handle", $._expression)),
 });

@@ -16,8 +16,7 @@ INPUT STREAM sIn THROUGH VALUE(cmd) ECHO.
       target: (string_literal)
       source: (string_literal)))
   (input_through_statement
-    (stream_phrase
-      name: (identifier))
+    stream: (identifier)
     (identifier)))
 
 ================================================================================

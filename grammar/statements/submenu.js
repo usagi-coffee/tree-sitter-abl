@@ -1,7 +1,7 @@
 module.exports = ({ kw }) => ({
   submenu_definition: ($) =>
     seq(
-      choice(kw("DEFINE"), kw("DEF")),
+      kw("DEFINE", { offset: 3 }),
       optional(kw("PRIVATE")),
       kw("SUB-MENU"),
       $.__submenu_body,

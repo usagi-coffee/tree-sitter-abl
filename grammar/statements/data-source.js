@@ -3,7 +3,7 @@ const { definitionModifiers } = require("../helpers/modifiers");
 module.exports = ({ kw }) => ({
   data_source_definition: ($) =>
     seq(
-      choice(kw("DEFINE"), kw("DEF")),
+      kw("DEFINE", { offset: 3 }),
       kw("DATA-SOURCE"),
       $.__data_source_body,
       $._terminator,
@@ -12,7 +12,7 @@ module.exports = ({ kw }) => ({
   // For classes - with modifiers
   data_source_class_definition: ($) =>
     seq(
-      choice(kw("DEFINE"), kw("DEF")),
+      kw("DEFINE", { offset: 3 }),
       ...definitionModifiers($, kw, {
         access: ["PRIVATE", "PROTECTED"],
         static: true,

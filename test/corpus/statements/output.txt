@@ -16,8 +16,7 @@ OUTPUT TO "out.txt" CONVERT TARGET "1250".
 (source_code
   (output_statement)
   (output_statement
-    (stream_phrase
-      name: (identifier)))
+    name: (identifier))
   (output_statement
     (binary_expression
       (identifier)
@@ -279,15 +278,12 @@ OUTPUT TO TERMINAL.
     (page_size_phrase
       (number_literal)))
   (output_statement
-    (stream_phrase
-      (identifier))
+    (identifier)
     (string_literal))
   (output_statement
-    (stream_phrase
-      (identifier))
+    (identifier)
     (string_literal))
   (output_statement
-    (stream_handle_phrase
-      (identifier))
+    (identifier)
     (identifier))
   (output_statement))
