@@ -8,6 +8,7 @@ PUT-BYTES(rawBuf, 1, 4) = memPtr.
 
 (source_code
   (put_assign_statement
+    type: (identifier)
     buffer: (identifier)
     position: (number_literal)
     length: (number_literal)

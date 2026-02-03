@@ -8,6 +8,7 @@ PUT-UNSIGNED-LONG(rawBuf, 1) = 4294967295.
 
 (source_code
   (put_assign_statement
+    type: (identifier)
     buffer: (identifier)
     position: (number_literal)
     value: (number_literal)))

@@ -9,17 +9,17 @@ module.exports = ({ kw }) => ({
 
   __put_assign_type: ($) =>
     choice(
-      kw("PUT-BYTE"),
-      kw("PUT-BYTES"),
-      kw("PUT-BITS"),
-      kw("PUT-SHORT"),
-      kw("PUT-LONG"),
-      kw("PUT-UNSIGNED-SHORT"),
-      kw("PUT-UNSIGNED-LONG"),
-      kw("PUT-INT64"),
-      kw("PUT-FLOAT"),
-      kw("PUT-DOUBLE"),
-      kw("PUT-STRING"),
+      alias(kw("PUT-BYTE"), $.identifier),
+      alias(kw("PUT-BYTES"), $.identifier),
+      alias(kw("PUT-BITS"), $.identifier),
+      alias(kw("PUT-SHORT"), $.identifier),
+      alias(kw("PUT-LONG"), $.identifier),
+      alias(kw("PUT-UNSIGNED-SHORT"), $.identifier),
+      alias(kw("PUT-UNSIGNED-LONG"), $.identifier),
+      alias(kw("PUT-INT64"), $.identifier),
+      alias(kw("PUT-FLOAT"), $.identifier),
+      alias(kw("PUT-DOUBLE"), $.identifier),
+      alias(kw("PUT-STRING"), $.identifier),
     ),
   __put_assign_args_2: ($) =>
     seq(

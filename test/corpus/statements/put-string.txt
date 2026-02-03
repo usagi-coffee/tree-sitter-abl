@@ -8,6 +8,7 @@ PUT-STRING(rawBuf, 1) = "hi".
 
 (source_code
   (put_assign_statement
+    type: (identifier)
     buffer: (identifier)
     position: (number_literal)
     value: (string_literal)))

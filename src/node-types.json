@@ -50177,48 +50177,8 @@
         "required": true,
         "types": [
           {
-            "type": "PUT-BITS",
-            "named": false
-          },
-          {
-            "type": "PUT-BYTE",
-            "named": false
-          },
-          {
-            "type": "PUT-BYTES",
-            "named": false
-          },
-          {
-            "type": "PUT-DOUBLE",
-            "named": false
-          },
-          {
-            "type": "PUT-FLOAT",
-            "named": false
-          },
-          {
-            "type": "PUT-INT64",
-            "named": false
-          },
-          {
-            "type": "PUT-LONG",
-            "named": false
-          },
-          {
-            "type": "PUT-SHORT",
-            "named": false
-          },
-          {
-            "type": "PUT-STRING",
-            "named": false
-          },
-          {
-            "type": "PUT-UNSIGNED-LONG",
-            "named": false
-          },
-          {
-            "type": "PUT-UNSIGNED-SHORT",
-            "named": false
+            "type": "identifier",
+            "named": true
           }
         ]
       },
@@ -70362,51 +70322,7 @@
     "named": false
   },
   {
-    "type": "PUT-BITS",
-    "named": false
-  },
-  {
-    "type": "PUT-BYTE",
-    "named": false
-  },
-  {
-    "type": "PUT-BYTES",
-    "named": false
-  },
-  {
-    "type": "PUT-DOUBLE",
-    "named": false
-  },
-  {
-    "type": "PUT-FLOAT",
-    "named": false
-  },
-  {
-    "type": "PUT-INT64",
-    "named": false
-  },
-  {
     "type": "PUT-KEY-VALUE",
-    "named": false
-  },
-  {
-    "type": "PUT-LONG",
-    "named": false
-  },
-  {
-    "type": "PUT-SHORT",
-    "named": false
-  },
-  {
-    "type": "PUT-STRING",
-    "named": false
-  },
-  {
-    "type": "PUT-UNSIGNED-LONG",
-    "named": false
-  },
-  {
-    "type": "PUT-UNSIGNED-SHORT",
     "named": false
   },
   {

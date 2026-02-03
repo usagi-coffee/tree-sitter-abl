@@ -8,6 +8,7 @@ PUT-BITS(rawBuf, 1, 8) = 255.
 
 (source_code
   (put_assign_statement
+    type: (identifier)
     buffer: (identifier)
     position: (number_literal)
     length: (number_literal)

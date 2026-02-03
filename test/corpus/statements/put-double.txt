@@ -8,6 +8,7 @@ PUT-DOUBLE(rawBuf, 1) = 3.14.
 
 (source_code
   (put_assign_statement
+    type: (identifier)
     buffer: (identifier)
     position: (number_literal)
     value: (number_literal)))

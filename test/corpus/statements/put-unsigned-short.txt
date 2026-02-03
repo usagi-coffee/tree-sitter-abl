@@ -8,6 +8,7 @@ PUT-UNSIGNED-SHORT(rawBuf, 1) = 65535.
 
 (source_code
   (put_assign_statement
+    type: (identifier)
     buffer: (identifier)
     position: (number_literal)
     value: (number_literal)))

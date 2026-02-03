@@ -8,6 +8,7 @@ PUT-INT64(rawBuf, 1) = 123456789.
 
 (source_code
   (put_assign_statement
+    type: (identifier)
     buffer: (identifier)
     position: (number_literal)
     value: (number_literal)))
