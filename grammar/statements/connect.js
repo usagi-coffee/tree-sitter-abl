@@ -13,7 +13,6 @@ module.exports = ({ kw }) => ({
       $._terminator,
     ),
 
-  __connect_database: ($) => choice($.__connect_option, $.string_literal),
   __connect_option: ($) =>
     seq(
       "-",

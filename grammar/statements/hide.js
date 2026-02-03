@@ -10,9 +10,5 @@ module.exports = ({ kw }) => ({
     ),
 
   __hide_option: ($) => choice(kw("MESSAGE"), kw("ALL")),
-  __hide_stream: ($) =>
-    seq(
-      choice(kw("STREAM"), kw("STREAM-HANDLE")),
-      field("stream", $.identifier),
-    ),
+  __hide_stream: ($) => $._stream_phrase,
 });

@@ -7,11 +7,7 @@ module.exports = ({ kw }) => ({
       ),
     ),
 
-  __display_stream: ($) =>
-    seq(
-      choice(kw("STREAM"), kw("STREAM-HANDLE")),
-      field("stream", $.identifier),
-    ),
+  __display_stream: ($) => $._stream_phrase,
 
   __display_fields_body: ($) =>
     choice(

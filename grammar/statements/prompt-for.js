@@ -9,11 +9,7 @@ module.exports = ({ kw }) => ({
       choice(prec(1, $.__prompt_for_fields_body), $.__prompt_for_record_body),
     ),
 
-  __prompt_stream: ($) =>
-    seq(
-      choice(kw("STREAM"), kw("STREAM-HANDLE")),
-      field("stream", $.identifier),
-    ),
+  __prompt_stream: ($) => $._stream_phrase,
 
   __prompt_for_record_body: ($) =>
     seq(

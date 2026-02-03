@@ -10583,19 +10583,6 @@
         }
       ]
     },
-    "__connect_database": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "__connect_option"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "string_literal"
-        }
-      ]
-    },
     "__connect_option": {
       "type": "SEQ",
       "members": [
@@ -16208,48 +16195,8 @@
       }
     },
     "__display_stream": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "PATTERN",
-                  "value": "STREAM",
-                  "flags": "i"
-                }
-              },
-              "named": false,
-              "value": "STREAM"
-            },
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "PATTERN",
-                  "value": "STREAM-HANDLE",
-                  "flags": "i"
-                }
-              },
-              "named": false,
-              "value": "STREAM-HANDLE"
-            }
-          ]
-        },
-        {
-          "type": "FIELD",
-          "name": "stream",
-          "content": {
-            "type": "SYMBOL",
-            "name": "identifier"
-          }
-        }
-      ]
+      "type": "SYMBOL",
+      "name": "_stream_phrase"
     },
     "__display_fields_body": {
       "type": "CHOICE",
@@ -19565,48 +19512,8 @@
       ]
     },
     "__export_stream": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "PATTERN",
-                  "value": "STREAM",
-                  "flags": "i"
-                }
-              },
-              "named": false,
-              "value": "STREAM"
-            },
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "PATTERN",
-                  "value": "STREAM-HANDLE",
-                  "flags": "i"
-                }
-              },
-              "named": false,
-              "value": "STREAM-HANDLE"
-            }
-          ]
-        },
-        {
-          "type": "FIELD",
-          "name": "stream",
-          "content": {
-            "type": "SYMBOL",
-            "name": "identifier"
-          }
-        }
-      ]
+      "type": "SYMBOL",
+      "name": "_stream_phrase"
     },
     "__export_expressions_body": {
       "type": "SEQ",
@@ -23817,48 +23724,8 @@
       ]
     },
     "__hide_stream": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "PATTERN",
-                  "value": "STREAM",
-                  "flags": "i"
-                }
-              },
-              "named": false,
-              "value": "STREAM"
-            },
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "PATTERN",
-                  "value": "STREAM-HANDLE",
-                  "flags": "i"
-                }
-              },
-              "named": false,
-              "value": "STREAM-HANDLE"
-            }
-          ]
-        },
-        {
-          "type": "FIELD",
-          "name": "stream",
-          "content": {
-            "type": "SYMBOL",
-            "name": "identifier"
-          }
-        }
-      ]
+      "type": "SYMBOL",
+      "name": "_stream_phrase"
     },
     "if_statement": {
       "type": "SEQ",
@@ -25301,48 +25168,8 @@
       ]
     },
     "__input_output_stream": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "PATTERN",
-                  "value": "STREAM",
-                  "flags": "i"
-                }
-              },
-              "named": false,
-              "value": "STREAM"
-            },
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "PATTERN",
-                  "value": "STREAM-HANDLE",
-                  "flags": "i"
-                }
-              },
-              "named": false,
-              "value": "STREAM-HANDLE"
-            }
-          ]
-        },
-        {
-          "type": "FIELD",
-          "name": "stream",
-          "content": {
-            "type": "SYMBOL",
-            "name": "identifier"
-          }
-        }
-      ]
+      "type": "SYMBOL",
+      "name": "_stream_phrase"
     },
     "__input_output_body": {
       "type": "CHOICE",
@@ -25754,48 +25581,8 @@
       ]
     },
     "__input_through_stream": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "PATTERN",
-                  "value": "STREAM",
-                  "flags": "i"
-                }
-              },
-              "named": false,
-              "value": "STREAM"
-            },
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "PATTERN",
-                  "value": "STREAM-HANDLE",
-                  "flags": "i"
-                }
-              },
-              "named": false,
-              "value": "STREAM-HANDLE"
-            }
-          ]
-        },
-        {
-          "type": "FIELD",
-          "name": "stream",
-          "content": {
-            "type": "SYMBOL",
-            "name": "identifier"
-          }
-        }
-      ]
+      "type": "SYMBOL",
+      "name": "_stream_phrase"
     },
     "__input_through_body": {
       "type": "SEQ",
@@ -26299,48 +26086,8 @@
       ]
     },
     "__import_stream": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "PATTERN",
-                  "value": "STREAM",
-                  "flags": "i"
-                }
-              },
-              "named": false,
-              "value": "STREAM"
-            },
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "PATTERN",
-                  "value": "STREAM-HANDLE",
-                  "flags": "i"
-                }
-              },
-              "named": false,
-              "value": "STREAM-HANDLE"
-            }
-          ]
-        },
-        {
-          "type": "FIELD",
-          "name": "stream",
-          "content": {
-            "type": "SYMBOL",
-            "name": "identifier"
-          }
-        }
-      ]
+      "type": "SYMBOL",
+      "name": "_stream_phrase"
     },
     "__import_delimiter_phrase": {
       "type": "SEQ",
@@ -32030,48 +31777,8 @@
       ]
     },
     "__page_stream": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "PATTERN",
-                  "value": "STREAM",
-                  "flags": "i"
-                }
-              },
-              "named": false,
-              "value": "STREAM"
-            },
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "PATTERN",
-                  "value": "STREAM-HANDLE",
-                  "flags": "i"
-                }
-              },
-              "named": false,
-              "value": "STREAM-HANDLE"
-            }
-          ]
-        },
-        {
-          "type": "FIELD",
-          "name": "stream",
-          "content": {
-            "type": "SYMBOL",
-            "name": "identifier"
-          }
-        }
-      ]
+      "type": "SYMBOL",
+      "name": "_stream_phrase"
     },
     "parameter_definition": {
       "type": "SEQ",
@@ -34363,48 +34070,8 @@
       ]
     },
     "__prompt_stream": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "PATTERN",
-                  "value": "STREAM",
-                  "flags": "i"
-                }
-              },
-              "named": false,
-              "value": "STREAM"
-            },
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "PATTERN",
-                  "value": "STREAM-HANDLE",
-                  "flags": "i"
-                }
-              },
-              "named": false,
-              "value": "STREAM-HANDLE"
-            }
-          ]
-        },
-        {
-          "type": "FIELD",
-          "name": "stream",
-          "content": {
-            "type": "SYMBOL",
-            "name": "identifier"
-          }
-        }
-      ]
+      "type": "SYMBOL",
+      "name": "_stream_phrase"
     },
     "__prompt_for_record_body": {
       "type": "SEQ",
@@ -35700,48 +35367,8 @@
       "name": "_expression"
     },
     "__put_stream": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "PATTERN",
-                  "value": "STREAM",
-                  "flags": "i"
-                }
-              },
-              "named": false,
-              "value": "STREAM"
-            },
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "PATTERN",
-                  "value": "STREAM-HANDLE",
-                  "flags": "i"
-                }
-              },
-              "named": false,
-              "value": "STREAM-HANDLE"
-            }
-          ]
-        },
-        {
-          "type": "FIELD",
-          "name": "stream",
-          "content": {
-            "type": "SYMBOL",
-            "name": "identifier"
-          }
-        }
-      ]
+      "type": "SYMBOL",
+      "name": "_stream_phrase"
     },
     "__put_item": {
       "type": "CHOICE",
@@ -37558,48 +37185,8 @@
       ]
     },
     "__readkey_stream": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "PATTERN",
-                  "value": "STREAM",
-                  "flags": "i"
-                }
-              },
-              "named": false,
-              "value": "STREAM"
-            },
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "PATTERN",
-                  "value": "STREAM-HANDLE",
-                  "flags": "i"
-                }
-              },
-              "named": false,
-              "value": "STREAM-HANDLE"
-            }
-          ]
-        },
-        {
-          "type": "FIELD",
-          "name": "stream",
-          "content": {
-            "type": "SYMBOL",
-            "name": "identifier"
-          }
-        }
-      ]
+      "type": "SYMBOL",
+      "name": "_stream_phrase"
     },
     "rectangle_definition": {
       "type": "SEQ",
@@ -41461,48 +41048,8 @@
       ]
     },
     "__set_stream": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "PATTERN",
-                  "value": "STREAM",
-                  "flags": "i"
-                }
-              },
-              "named": false,
-              "value": "STREAM"
-            },
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "PATTERN",
-                  "value": "STREAM-HANDLE",
-                  "flags": "i"
-                }
-              },
-              "named": false,
-              "value": "STREAM-HANDLE"
-            }
-          ]
-        },
-        {
-          "type": "FIELD",
-          "name": "stream",
-          "content": {
-            "type": "SYMBOL",
-            "name": "identifier"
-          }
-        }
-      ]
+      "type": "SYMBOL",
+      "name": "_stream_phrase"
     },
     "__set_fields_body": {
       "type": "SEQ",
@@ -42153,48 +41700,8 @@
       ]
     },
     "__seek_stream": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "PATTERN",
-                  "value": "STREAM",
-                  "flags": "i"
-                }
-              },
-              "named": false,
-              "value": "STREAM"
-            },
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "PATTERN",
-                  "value": "STREAM-HANDLE",
-                  "flags": "i"
-                }
-              },
-              "named": false,
-              "value": "STREAM-HANDLE"
-            }
-          ]
-        },
-        {
-          "type": "FIELD",
-          "name": "stream",
-          "content": {
-            "type": "SYMBOL",
-            "name": "identifier"
-          }
-        }
-      ]
+      "type": "SYMBOL",
+      "name": "_stream_phrase"
     },
     "seek_expression": {
       "type": "SEQ",
@@ -47344,48 +46851,8 @@
       "name": "_expression"
     },
     "__underline_stream": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "PATTERN",
-                  "value": "STREAM",
-                  "flags": "i"
-                }
-              },
-              "named": false,
-              "value": "STREAM"
-            },
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "PATTERN",
-                  "value": "STREAM-HANDLE",
-                  "flags": "i"
-                }
-              },
-              "named": false,
-              "value": "STREAM-HANDLE"
-            }
-          ]
-        },
-        {
-          "type": "FIELD",
-          "name": "stream",
-          "content": {
-            "type": "SYMBOL",
-            "name": "identifier"
-          }
-        }
-      ]
+      "type": "SYMBOL",
+      "name": "_stream_phrase"
     },
     "unix_statement": {
       "type": "SEQ",
@@ -50933,48 +50400,8 @@
       ]
     },
     "__view_stream": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "PATTERN",
-                  "value": "STREAM",
-                  "flags": "i"
-                }
-              },
-              "named": false,
-              "value": "STREAM"
-            },
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "PATTERN",
-                  "value": "STREAM-HANDLE",
-                  "flags": "i"
-                }
-              },
-              "named": false,
-              "value": "STREAM-HANDLE"
-            }
-          ]
-        },
-        {
-          "type": "FIELD",
-          "name": "stream",
-          "content": {
-            "type": "SYMBOL",
-            "name": "identifier"
-          }
-        }
-      ]
+      "type": "SYMBOL",
+      "name": "_stream_phrase"
     },
     "wait_for_statement": {
       "type": "SEQ",
@@ -59483,6 +58910,50 @@
         "named": true,
         "value": "identifier"
       }
+    },
+    "_stream_phrase": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PATTERN",
+                  "value": "STREAM",
+                  "flags": "i"
+                }
+              },
+              "named": false,
+              "value": "STREAM"
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PATTERN",
+                  "value": "STREAM-HANDLE",
+                  "flags": "i"
+                }
+              },
+              "named": false,
+              "value": "STREAM-HANDLE"
+            }
+          ]
+        },
+        {
+          "type": "FIELD",
+          "name": "stream",
+          "content": {
+            "type": "SYMBOL",
+            "name": "identifier"
+          }
+        }
+      ]
     },
     "_events": {
       "type": "CHOICE",

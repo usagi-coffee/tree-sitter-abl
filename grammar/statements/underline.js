@@ -11,9 +11,5 @@ module.exports = ({ kw }) => ({
 
   __underline_field: ($) => $._expression,
 
-  __underline_stream: ($) =>
-    seq(
-      choice(kw("STREAM"), kw("STREAM-HANDLE")),
-      field("stream", $.identifier),
-    ),
+  __underline_stream: ($) => $._stream_phrase,
 });

@@ -7,9 +7,5 @@ module.exports = ({ kw }) => ({
       $._terminator,
     ),
 
-  __readkey_stream: ($) =>
-    seq(
-      choice(kw("STREAM"), kw("STREAM-HANDLE")),
-      field("stream", $.identifier),
-    ),
+  __readkey_stream: ($) => $._stream_phrase,
 });

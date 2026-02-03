@@ -12,11 +12,7 @@ module.exports = ({ kw }) => ({
       optional(alias($.__import_no_error, $.no_error)),
     ),
 
-  __import_stream: ($) =>
-    seq(
-      choice(kw("STREAM"), kw("STREAM-HANDLE")),
-      field("stream", $.identifier),
-    ),
+  __import_stream: ($) => $._stream_phrase,
 
   __import_delimiter_phrase: ($) => seq(kw("DELIMITER"), $.string_literal),
   __import_fields_phrase: ($) =>

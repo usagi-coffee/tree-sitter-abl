@@ -9,11 +9,7 @@ module.exports = ({ kw }) => ({
       optional(alias(kw("NO-ERROR"), $.no_error)),
     ),
 
-  __set_stream: ($) =>
-    seq(
-      choice(kw("STREAM"), kw("STREAM-HANDLE")),
-      field("stream", $.identifier),
-    ),
+  __set_stream: ($) => $._stream_phrase,
 
   __set_fields_body: ($) =>
     seq(

@@ -11,9 +11,5 @@ module.exports = ({ kw }) => ({
   __view_in_window: ($) =>
     seq(kw("IN"), kw("WINDOW"), field("window", $._window_handle)),
 
-  __view_stream: ($) =>
-    seq(
-      choice(kw("STREAM"), kw("STREAM-HANDLE")),
-      field("stream", $.identifier),
-    ),
+  __view_stream: ($) => $._stream_phrase,
 });

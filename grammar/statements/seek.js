@@ -9,11 +9,7 @@ module.exports = ({ kw }) => ({
       choice(kw("END"), $._expression),
     ),
 
-  __seek_stream: ($) =>
-    seq(
-      choice(kw("STREAM"), kw("STREAM-HANDLE")),
-      field("stream", $.identifier),
-    ),
+  __seek_stream: ($) => $._stream_phrase,
 
   // SEEK expression: SEEK(INPUT) or SEEK(OUTPUT) or SEEK(name) or SEEK(STREAM-HANDLE handle) - returns current stream position
   seek_expression: ($) =>

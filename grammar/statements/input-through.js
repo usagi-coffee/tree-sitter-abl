@@ -8,11 +8,7 @@ module.exports = ({ kw }) => ({
       $._terminator,
     ),
 
-  __input_through_stream: ($) =>
-    seq(
-      choice(kw("STREAM"), kw("STREAM-HANDLE")),
-      field("stream", $.identifier),
-    ),
+  __input_through_stream: ($) => $._stream_phrase,
 
   __input_through_body: ($) =>
     seq(

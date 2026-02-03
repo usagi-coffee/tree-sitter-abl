@@ -236,6 +236,11 @@ module.exports = grammar({
             $.identifier
           )
         ),
+      _stream_phrase: ($) =>
+        seq(
+          choice(kw("STREAM"), kw("STREAM-HANDLE")),
+          field("stream", $.identifier)
+        ),
       _events: ($) =>
         choice(
           $.identifier,

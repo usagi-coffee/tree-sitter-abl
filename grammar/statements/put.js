@@ -12,11 +12,7 @@ module.exports = ({ kw }) => ({
 
   __put_control: ($) => $._expression,
 
-  __put_stream: ($) =>
-    seq(
-      choice(kw("STREAM"), kw("STREAM-HANDLE")),
-      field("stream", $.identifier),
-    ),
+  __put_stream: ($) => $._stream_phrase,
 
   __put_item: ($) =>
     choice(
