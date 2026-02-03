@@ -94,8 +94,10 @@ PROMPT-FOR "Notes:" TO 20 VIEW-AS TEXT FGCOLOR 12 BGCOLOR 1 FONT 2 field1.
 (source_code
   (prompt_for_statement
     record: (identifier)
-    (field)
-    (field)
+    (field
+      (identifier))
+    (field
+      (identifier))
     (frame_phrase
       frame: (identifier)))
   (prompt_for_statement

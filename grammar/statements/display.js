@@ -78,7 +78,7 @@ module.exports = ({ kw }) => ({
     ),
   __display_keyword_identifier: ($) => alias(kw("MENU"), $.identifier),
 
-  __display_record: ($) => choice($.identifier, $.qualified_name),
+  __display_record: ($) => $._identifier_or_qualified_name,
 
   __display_skip_phrase: ($) =>
     prec.left(

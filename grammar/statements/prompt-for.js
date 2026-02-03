@@ -15,9 +15,7 @@ module.exports = ({ kw }) => ({
       optional(
         seq(
           kw("EXCEPT"),
-          repeat1(
-            alias(choice($.identifier, $.qualified_name), $.field),
-          ),
+          repeat1(alias($._identifier_or_qualified_name, $.field)),
         ),
       ),
       optional($.in_window_phrase),

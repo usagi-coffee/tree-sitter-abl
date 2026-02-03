@@ -1544,11 +1544,7 @@
       "members": [
         {
           "type": "SYMBOL",
-          "name": "identifier"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "qualified_name"
+          "name": "_identifier_or_qualified_name"
         },
         {
           "type": "SYMBOL",
@@ -16616,17 +16612,8 @@
       "value": "identifier"
     },
     "__display_record": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "identifier"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "qualified_name"
-        }
-      ]
+      "type": "SYMBOL",
+      "name": "_identifier_or_qualified_name"
     },
     "__display_skip_phrase": {
       "type": "PREC_LEFT",
@@ -33822,17 +33809,8 @@
                   "content": {
                     "type": "ALIAS",
                     "content": {
-                      "type": "CHOICE",
-                      "members": [
-                        {
-                          "type": "SYMBOL",
-                          "name": "identifier"
-                        },
-                        {
-                          "type": "SYMBOL",
-                          "name": "qualified_name"
-                        }
-                      ]
+                      "type": "SYMBOL",
+                      "name": "_identifier_or_qualified_name"
                     },
                     "named": true,
                     "value": "field"
