@@ -1,10 +1,6 @@
 module.exports = ({ kw }) => ({
   aggregate_phrase: ($) =>
-    seq(
-      field("operation", $.aggregate_operation),
-      optional(alias($.__aggregate_label_phrase, $.label_phrase)),
-      repeat(alias($.__aggregate_by_phrase, $.by_phrase)),
-    ),
+    prec.right(repeat1(alias($.__aggregate_option, $.aggregate_option))),
 
   aggregate_operation: ($) =>
     choice(
@@ -18,6 +14,13 @@ module.exports = ({ kw }) => ({
       kw("SUB-MAXIMUM"),
       kw("SUB-MINIMUM"),
       kw("SUB-TOTAL"),
+    ),
+
+  __aggregate_option: ($) =>
+    seq(
+      field("operation", $.aggregate_operation),
+      optional(alias($.__aggregate_label_phrase, $.label_phrase)),
+      repeat(alias($.__aggregate_by_phrase, $.by_phrase)),
     ),
 
   __aggregate_label_phrase: ($) =>

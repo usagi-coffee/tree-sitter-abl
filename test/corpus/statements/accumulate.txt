@@ -34,11 +34,12 @@ END.
             left: (identifier)
             right: (identifier))
           (aggregate_phrase
-            operation: (aggregate_operation))
-          (aggregate_phrase
-            operation: (aggregate_operation))
-          (aggregate_phrase
-            operation: (aggregate_operation))))))
+            (aggregate_option
+              operation: (aggregate_operation))
+            (aggregate_option
+              operation: (aggregate_operation))
+            (aggregate_option
+              operation: (aggregate_operation)))))))
   (for_statement
     (record
       table: (identifier)
@@ -54,23 +55,25 @@ END.
             left: (identifier)
             right: (identifier))
           (aggregate_phrase
-            operation: (aggregate_operation))
-          (aggregate_phrase
-            operation: (aggregate_operation))
-          (aggregate_phrase
-            operation: (aggregate_operation)))
+            (aggregate_option
+              operation: (aggregate_operation))
+            (aggregate_option
+              operation: (aggregate_operation))
+            (aggregate_option
+              operation: (aggregate_operation))))
         (field
           field: (qualified_name
             left: (identifier)
             right: (identifier))
           (aggregate_phrase
-            operation: (aggregate_operation))
-          (aggregate_phrase
-            operation: (aggregate_operation))
-          (aggregate_phrase
-            operation: (aggregate_operation))
-          (aggregate_phrase
-            operation: (aggregate_operation))))))
+            (aggregate_option
+              operation: (aggregate_operation))
+            (aggregate_option
+              operation: (aggregate_operation))
+            (aggregate_option
+              operation: (aggregate_operation))
+            (aggregate_option
+              operation: (aggregate_operation)))))))
   (for_statement
     (record
       table: (identifier)
@@ -89,15 +92,16 @@ END.
             left: (identifier)
             right: (identifier))
           (aggregate_phrase
-            operation: (aggregate_operation)
-            (by_phrase
-              group: (qualified_name
-                left: (identifier)
-                right: (identifier)))
-            (by_phrase
-              group: (qualified_name
-                left: (identifier)
-                right: (identifier))))))))
+            (aggregate_option
+              operation: (aggregate_operation)
+              (by_phrase
+                group: (qualified_name
+                  left: (identifier)
+                  right: (identifier)))
+              (by_phrase
+                group: (qualified_name
+                  left: (identifier)
+                  right: (identifier)))))))))
   (for_statement
     (record
       table: (identifier)
@@ -113,8 +117,9 @@ END.
               left: (identifier)
               right: (identifier)))
           (aggregate_phrase
-            operation: (aggregate_operation))
-          (aggregate_phrase
-            operation: (aggregate_operation))
-          (aggregate_phrase
-            operation: (aggregate_operation)))))))
+            (aggregate_option
+              operation: (aggregate_operation))
+            (aggregate_option
+              operation: (aggregate_operation))
+            (aggregate_option
+              operation: (aggregate_operation))))))))

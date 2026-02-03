@@ -554,11 +554,12 @@ WAIT-FOR CHOOSE OF cancel-butt OR WINDOW-CLOSE OF CURRENT-WINDOW.
               left: (identifier)
               right: (identifier)))
           (aggregate_phrase
-            operation: (aggregate_operation)
-            (by_phrase
-              group: (qualified_name
-                left: (identifier)
-                right: (identifier))))))
+            (aggregate_option
+              operation: (aggregate_operation)
+              (by_phrase
+                group: (qualified_name
+                  left: (identifier)
+                  right: (identifier)))))))
       (if_statement
         (function_call
           function: (identifier)
@@ -574,11 +575,12 @@ WAIT-FOR CHOOSE OF cancel-butt OR WINDOW-CLOSE OF CURRENT-WINDOW.
               operator: (assignment_operator)
               right: (accum_expression
                 operation: (aggregate_phrase
-                  operation: (aggregate_operation)
-                  (by_phrase
-                    group: (qualified_name
-                      left: (identifier)
-                      right: (identifier))))
+                  (aggregate_option
+                    operation: (aggregate_operation)
+                    (by_phrase
+                      group: (qualified_name
+                        left: (identifier)
+                        right: (identifier)))))
                 field: (parenthesized_expression
                   (binary_expression
                     (qualified_name

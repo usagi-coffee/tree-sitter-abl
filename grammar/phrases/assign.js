@@ -36,7 +36,7 @@ module.exports = ({ kw }) => ({
         alias($.__assign_when_available_phrase, $.when_available_phrase),
       ),
     ),
-  __assign_keyword_identifier: ($) => alias(kw("FRAME"), $.identifier),
+  __assign_keyword_identifier: ($) => alias($._widgets, $.identifier),
 
   __assign_no_error: ($) => kw("NO-ERROR"),
 });

@@ -606,8 +606,8 @@ END.
       title: (string_literal)
       (centered)
       (use_text)
-      value: (down
-        (number_literal))))
+      (down
+        value: (number_literal))))
   (for_statement
     (record
       table: (identifier)

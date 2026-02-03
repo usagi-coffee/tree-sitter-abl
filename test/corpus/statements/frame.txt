@@ -197,8 +197,8 @@ DEFINE FRAME down Customer.CustNum WITH 10 DOWN.
       left: (identifier)
       right: (identifier))
     (frame_phrase
-      value: (down
-        (number_literal)))))
+      (down
+        value: (number_literal)))))
 
 ================================================================================
 FRAME - WITH WIDTH
@@ -585,8 +585,8 @@ DEFINE FRAME combined
       (size_phrase
         width: (number_literal)
         height: (number_literal))
-      value: (down
-        (number_literal))
+      (down
+        value: (number_literal))
       (centered))))
 
 ================================================================================

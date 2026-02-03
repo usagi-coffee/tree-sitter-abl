@@ -143,6 +143,7 @@ INPUT CLOSE.
       (display_statement
         (identifier)
         (frame_phrase
+          (down)
           (identifier)))
       (down_statement
         (frame_phrase

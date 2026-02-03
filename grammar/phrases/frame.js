@@ -37,10 +37,9 @@ module.exports = ({ kw }) => ({
             seq(kw("VIEW-AS"), field("widget", kw("DIALOG-BOX"))),
             $.view_as_phrase,
           ),
-          alias(
-            seq(optional(field("value", $.__frame_expression)), kw("DOWN")),
-            $.down,
-          ),
+          alias($.__frame_down_count, $.down),
+          alias($.__frame_down_value, $.down),
+          alias($.__frame_down_plain, $.down),
           $.__frame_skip_phrase,
         ),
       ),
@@ -56,4 +55,11 @@ module.exports = ({ kw }) => ({
 
   __frame_identifier: ($) => $.identifier,
   __frame_expression: ($) => $._expression,
+  __frame_down_value: ($) =>
+    seq(field("value", $.__frame_expression), kw("DOWN")),
+  __frame_down_count: ($) =>
+    prec.right(1, seq(kw("DOWN"), field("count", $.__frame_down_expression))),
+  __frame_down_plain: ($) => prec(-1, seq(kw("DOWN"))),
+  __frame_down_expression: ($) =>
+    choice($.number_literal, $.parenthesized_expression),
 });

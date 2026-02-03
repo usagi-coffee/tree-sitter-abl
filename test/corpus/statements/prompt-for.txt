@@ -340,8 +340,8 @@ PROMPT-FOR STREAM-HANDLE hS field1 field2 IN WINDOW wMain WITH FRAME fMain.
             left: (identifier)
             right: (identifier)))
         (frame_phrase
-          value: (down
-            (number_literal))
+          (down
+            value: (number_literal))
           (no_hide)))))
   (prompt_for_statement
     stream: (identifier)

@@ -96,6 +96,7 @@ INPUT CLOSE.
     (form_item
       (identifier))
     (frame_phrase
+      (down)
       (identifier)))
   (input_through_statement
     (identifier))

@@ -60,7 +60,8 @@ DISPLAY Customer.Balance (TOTAL).
         left: (identifier)
         right: (identifier))
       (aggregate_phrase
-        operation: (aggregate_operation)))))
+        (aggregate_option
+          operation: (aggregate_operation))))))
 
 ================================================================================
 DISPLAY abbreviated
@@ -231,243 +232,244 @@ DISPLAY SPACE(2) Customer.Name SKIP(1) Customer.City.
 (source_code
   (for_statement
     (record
-      (identifier)
+      table: (identifier)
       (no_lock)
       (by_phrase
         (qualified_name
-          (identifier)
-          (identifier))
+          left: (identifier)
+          right: (identifier))
         (qualified_name
-          (identifier)
-          (identifier))))
+          left: (identifier)
+          right: (identifier))))
     (body
       (display_statement
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (field
-          (qualified_name
-            (identifier)
-            (identifier))))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier))))
       (for_statement
         (record
-          (identifier)
+          table: (identifier)
           (of_phrase
             (identifier))
           (no_lock))
         (body
           (display_statement
             (field
-              (qualified_name
-                (identifier)
-                (identifier)))
+              field: (qualified_name
+                left: (identifier)
+                right: (identifier)))
             (field
-              (qualified_name
-                (identifier)
-                (identifier)))
+              field: (qualified_name
+                left: (identifier)
+                right: (identifier)))
             (field
-              (qualified_name
-                (identifier)
-                (identifier)))
+              field: (qualified_name
+                left: (identifier)
+                right: (identifier)))
             (field
-              (qualified_name
-                (identifier)
-                (identifier))))
+              field: (qualified_name
+                left: (identifier)
+                right: (identifier))))
           (for_statement
             (record
-              (identifier)
+              table: (identifier)
               (of_phrase
                 (identifier))
               (no_lock))
             (record
-              (identifier)
+              table: (identifier)
               (of_phrase
                 (identifier))
               (no_lock))
             (body
               (display_statement
                 (field
-                  (qualified_name
-                    (identifier)
-                    (identifier)))
+                  field: (qualified_name
+                    left: (identifier)
+                    right: (identifier)))
                 (field
-                  (qualified_name
-                    (identifier)
-                    (identifier)))
+                  field: (qualified_name
+                    left: (identifier)
+                    right: (identifier)))
                 (field
-                  (qualified_name
-                    (identifier)
-                    (identifier)))
+                  field: (qualified_name
+                    left: (identifier)
+                    right: (identifier)))
                 (field
-                  (qualified_name
-                    (identifier)
-                    (identifier))))))))))
+                  field: (qualified_name
+                    left: (identifier)
+                    right: (identifier))))))))))
   (for_statement
     (record
-      (identifier)
+      table: (identifier)
       (no_lock))
     (record
-      (identifier)
+      table: (identifier)
       (of_phrase
         (identifier))
       (no_lock))
     (body
       (display_statement
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (field
-          (qualified_name
-            (identifier)
-            (identifier))))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier))))
       (for_statement
         (record
-          (identifier)
+          table: (identifier)
           (of_phrase
             (identifier))
           (no_lock))
         (record
-          (identifier)
+          table: (identifier)
           (of_phrase
             (identifier))
           (no_lock))
         (body
           (display_statement
             (field
-              (qualified_name
-                (identifier)
-                (identifier)))
+              field: (qualified_name
+                left: (identifier)
+                right: (identifier)))
             (field
-              (qualified_name
-                (identifier)
-                (identifier)))
+              field: (qualified_name
+                left: (identifier)
+                right: (identifier)))
             (field
-              (qualified_name
-                (identifier)
-                (identifier)))
+              field: (qualified_name
+                left: (identifier)
+                right: (identifier)))
             (field
-              (qualified_name
-                (identifier)
-                (identifier)))
+              field: (qualified_name
+                left: (identifier)
+                right: (identifier)))
             (field
-              (binary_expression
+              field: (binary_expression
                 (qualified_name
-                  (identifier)
-                  (identifier))
+                  left: (identifier)
+                  right: (identifier))
                 (qualified_name
-                  (identifier)
-                  (identifier)))
+                  left: (identifier)
+                  right: (identifier)))
               (aggregate_phrase
-                (aggregate_operation)))
+                (aggregate_option
+                  operation: (aggregate_operation))))
             (format_phrase
-              (string_literal)))))))
+              label: (string_literal)))))))
   (for_statement
     (record
-      (identifier)
+      table: (identifier)
       (no_lock))
     (body
       (display_statement
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (field
-          (binary_expression
+          field: (binary_expression
             (binary_expression
               (qualified_name
-                (identifier)
-                (identifier))
+                left: (identifier)
+                right: (identifier))
               (string_literal))
             (qualified_name
-              (identifier)
-              (identifier))))
+              left: (identifier)
+              right: (identifier))))
         (format_phrase
+          format: (string_literal))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        when: (binary_expression
+          (qualified_name
+            left: (identifier)
+            right: (identifier))
           (string_literal))
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
-        (binary_expression
-          (qualified_name
-            (identifier)
-            (identifier))
-          (string_literal))
-        (field
-          (parenthesized_expression
+          field: (parenthesized_expression
             (number_literal)))
         (frame_phrase
           (no_box)
           (no_labels)
           (use_text)))))
   (display_statement
-    (identifier)
-    (qualified_name
-      (identifier)
-      (identifier))
+    record: (identifier)
+    except: (qualified_name
+      left: (identifier)
+      right: (identifier))
     (frame_phrase
-      (identifier)))
+      frame: (identifier)))
   (display_statement
-    (identifier)
-    (qualified_name
-      (identifier)
-      (identifier))
-    (identifier))
+    record: (identifier)
+    except: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    browse: (identifier))
   (display_statement
-    (qualified_name
-      (identifier)
-      (identifier))
-    (identifier)
+    record: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    window: (identifier)
     (frame_phrase
-      (identifier))
+      frame: (identifier))
     (no_error))
   (display_statement
-    (identifier)
-    (qualified_name
-      (identifier)
-      (identifier)))
+    stream: (identifier)
+    record: (qualified_name
+      left: (identifier)
+      right: (identifier)))
   (display_statement
-    (identifier)
-    (qualified_name
-      (identifier)
-      (identifier)))
+    stream: (identifier)
+    record: (qualified_name
+      left: (identifier)
+      right: (identifier)))
   (display_statement
-    (qualified_name
-      (identifier)
-      (identifier)))
+    record: (qualified_name
+      left: (identifier)
+      right: (identifier)))
   (display_statement
     (field
-      (parenthesized_expression
+      field: (parenthesized_expression
         (number_literal)))
     (field
-      (qualified_name
-        (identifier)
-        (identifier)))
+      field: (qualified_name
+        left: (identifier)
+        right: (identifier)))
     (field
-      (parenthesized_expression
+      field: (parenthesized_expression
         (number_literal)))
     (field
-      (qualified_name
-        (identifier)
-        (identifier)))))
+      field: (qualified_name
+        left: (identifier)
+        right: (identifier)))))

@@ -92,8 +92,8 @@ PROPATH += ",/myNewAppDir1,/myNewAppDir2".
         (frame_phrase
           title: (string_literal)
           column: (number_literal)
-          value: (down
-            (number_literal))
+          (down
+            value: (number_literal))
           (no_labels)
           row: (number_literal)))
       (choose_statement

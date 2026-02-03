@@ -191,146 +191,149 @@ DEFINE PRIVATE WORK-TABLE wtPrivate FIELD f1 AS INTEGER.
 
 (source_code
   (work_table_definition
-    (identifier)
+    name: (identifier)
     (field
-      (identifier)
-      (qualified_name
-        (identifier)
-        (identifier))
+      name: (identifier)
+      type: (qualified_name
+        left: (identifier)
+        right: (identifier))
       (field_option
         (string_literal)))
     (field
-      (identifier)
-      (qualified_name
-        (identifier)
-        (identifier))
+      name: (identifier)
+      type: (qualified_name
+        left: (identifier)
+        right: (identifier))
       (field_option
         (string_literal)))
     (field
-      (identifier)
-      (qualified_name
-        (identifier)
-        (identifier))
+      name: (identifier)
+      type: (qualified_name
+        left: (identifier)
+        right: (identifier))
       (field_option
         (string_literal))))
   (for_statement
     (record
-      (identifier))
+      table: (identifier))
     (record
-      (identifier)
+      table: (identifier)
       (of_phrase
         (identifier))
       (break_by
         (qualified_name
-          (identifier)
-          (identifier))))
+          left: (identifier)
+          right: (identifier))))
     (body
       (accumulate_statement
         (accumulate
-          (qualified_name
-            (identifier)
-            (identifier))
+          target: (qualified_name
+            left: (identifier)
+            right: (identifier))
           (aggregate_phrase
-            (aggregate_operation)
-            (by_phrase
-              (qualified_name
-                (identifier)
-                (identifier))))))
+            (aggregate_option
+              operation: (aggregate_operation)
+              (by_phrase
+                group: (qualified_name
+                  left: (identifier)
+                  right: (identifier)))))))
       (if_statement
         (function_call
-          (identifier)
+          function: (identifier)
           (arguments
             (argument
-              (qualified_name
-                (identifier)
-                (identifier)))))
-        (do_block
+              name: (qualified_name
+                left: (identifier)
+                right: (identifier)))))
+        then: (do_block
           (body
             (create_statement
-              (identifier))
+              table: (identifier))
             (assignment_statement
-              (qualified_name
-                (identifier)
-                (identifier))
-              (assignment_operator)
-              (qualified_name
-                (identifier)
-                (identifier)))
+              left: (qualified_name
+                left: (identifier)
+                right: (identifier))
+              operator: (assignment_operator)
+              right: (qualified_name
+                left: (identifier)
+                right: (identifier)))
             (assignment_statement
-              (qualified_name
-                (identifier)
-                (identifier))
-              (assignment_operator)
-              (accum_expression
-                (aggregate_phrase
-                  (aggregate_operation)
-                  (by_phrase
-                    (qualified_name
-                      (identifier)
-                      (identifier))))
-                (qualified_name
-                  (identifier)
-                  (identifier))))
+              left: (qualified_name
+                left: (identifier)
+                right: (identifier))
+              operator: (assignment_operator)
+              right: (accum_expression
+                operation: (aggregate_phrase
+                  (aggregate_option
+                    operation: (aggregate_operation)
+                    (by_phrase
+                      group: (qualified_name
+                        left: (identifier)
+                        right: (identifier)))))
+                field: (qualified_name
+                  left: (identifier)
+                  right: (identifier))))
             (assignment_statement
-              (qualified_name
-                (identifier)
-                (identifier))
-              (assignment_operator)
-              (qualified_name
-                (identifier)
-                (identifier))))))))
+              left: (qualified_name
+                left: (identifier)
+                right: (identifier))
+              operator: (assignment_operator)
+              right: (qualified_name
+                left: (identifier)
+                right: (identifier))))))))
   (for_statement
     (record
-      (identifier)
+      table: (identifier)
       (break_by
         (qualified_name
-          (identifier)
-          (identifier))
+          left: (identifier)
+          right: (identifier))
         (qualified_name
-          (identifier)
-          (identifier))))
+          left: (identifier)
+          right: (identifier))))
     (body
       (if_statement
         (function_call
-          (identifier)
+          function: (identifier)
           (arguments
             (argument
-              (qualified_name
-                (identifier)
-                (identifier)))))
-        (display_statement
-          (qualified_name
-            (identifier)
-            (identifier))))
+              name: (qualified_name
+                left: (identifier)
+                right: (identifier)))))
+        then: (display_statement
+          record: (qualified_name
+            left: (identifier)
+            right: (identifier))))
       (display_statement
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (field
-          (identifier)
+          field: (identifier)
           (aggregate_phrase
-            (aggregate_operation)
-            (by_phrase
-              (qualified_name
-                (identifier)
-                (identifier))))))))
+            (aggregate_option
+              operation: (aggregate_operation)
+              (by_phrase
+                group: (qualified_name
+                  left: (identifier)
+                  right: (identifier)))))))))
   (work_table_definition
     (new_modifier)
     (scope_modifier)
-    (identifier)
+    name: (identifier)
     (field
-      (identifier)
-      (identifier)))
+      name: (identifier)
+      type: (identifier)))
   (work_table_definition
     (scope_modifier)
-    (identifier)
+    name: (identifier)
     (field
-      (identifier)
-      (identifier)))
+      name: (identifier)
+      type: (identifier)))
   (work_table_definition
     (access_modifier)
-    (identifier)
+    name: (identifier)
     (field
-      (identifier)
-      (identifier))))
+      name: (identifier)
+      type: (identifier))))

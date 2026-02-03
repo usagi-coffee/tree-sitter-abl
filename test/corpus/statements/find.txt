@@ -338,7 +338,8 @@ END.
                 left: (identifier)
                 right: (identifier))
               (aggregate_phrase
-                operation: (aggregate_operation))))))))
+                (aggregate_option
+                  operation: (aggregate_operation)))))))))
   (variable_definition
     name: (identifier)
     (no_undo)

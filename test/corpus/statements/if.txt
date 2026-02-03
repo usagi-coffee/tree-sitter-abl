@@ -402,6 +402,7 @@ OUTPUT STREAM due CLOSE.
                     (format_phrase)
                     (frame_phrase
                       (no_box)
+                      (down)
                       (identifier)))))))))))
   (output_statement
     (identifier)))
