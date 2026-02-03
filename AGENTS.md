@@ -64,6 +64,10 @@ Strongly prefer using these commands as they have helpful side-effects like retu
 - Don't do unnecessary comments like `// something is above`.
 - Never add `(ERROR` nodes to expected syntax trees in tests, it's pointless, fix the grammar not the test itself.
 - Prefer not using `_list` suffix for rules e.g `_format_label_list` should be `_format_labels`.
+- Prefer precedences over `prec(...)`.
+- Avoid hacks like cramming `FRAME` into regex to avoid the issue.
+- Add purpose + example comments before each precedence group when modifying precedences; add reference notes for each precedence entry.
+- If needed, refactor rules to be easier to target in precedence (e.g you can't target repeat(some_rule), its fine to refactor into e.g `__statement_expression: ($) => $._expression`.
 
 ## Notes
 
@@ -76,3 +80,4 @@ Strongly prefer using these commands as they have helpful side-effects like retu
 - `terminator`, `terminator_dot` or rules prefixed with `_` (unless aliased) should never be visible in the syntax tree output.
 - Always prefer `| head` when calling `bun run test` instead of `| tail`.
 - The `Permission denied (os error 13)` error occurs because the sandbox blocks writing outside the workspace, preventing tree-sitter from creating its lock file in the user's cache directory.
+- When receiving a conflict error trust keyword tokens in {…}; ignore deduplicated rule names like __browse_body_token7.
