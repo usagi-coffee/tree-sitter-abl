@@ -1,10 +1,30 @@
 module.exports = ({ kw }) => ({
-  current_language_statement: ($) =>
-    seq(kw("CURRENT-LANGUAGE"), "=", $._expression, $._terminator),
-
-  current_value_statement: ($) =>
+  value_assignment_statement: ($) =>
     seq(
-      kw("CURRENT-VALUE"),
+      choice(
+        $.__value_assignment_current_language,
+        $.__value_assignment_current_value,
+        $.__value_assignment_dynamic_current_value,
+        $.__value_assignment_dynamic_property,
+        $.__value_assignment_frame_value,
+        $.__value_assignment_entry,
+        $.__value_assignment_length,
+        $.__value_assignment_raw,
+        $.__value_assignment_substring,
+      ),
+      $._terminator,
+    ),
+
+  __value_assignment_current_language: ($) =>
+    seq(
+      field("type", alias(kw("CURRENT-LANGUAGE"), $.identifier)),
+      "=",
+      field("value", $._expression),
+    ),
+
+  __value_assignment_current_value: ($) =>
+    seq(
+      field("type", alias(kw("CURRENT-VALUE"), $.identifier)),
       "(",
       field("sequence", $._expression),
       optional(
@@ -17,12 +37,11 @@ module.exports = ({ kw }) => ({
       ")",
       "=",
       field("value", $._expression),
-      $._terminator,
     ),
 
-  dynamic_current_value_statement: ($) =>
+  __value_assignment_dynamic_current_value: ($) =>
     seq(
-      kw("DYNAMIC-CURRENT-VALUE"),
+      field("type", alias(kw("DYNAMIC-CURRENT-VALUE"), $.identifier)),
       "(",
       field("sequence", $._expression),
       optional(
@@ -35,12 +54,11 @@ module.exports = ({ kw }) => ({
       ")",
       "=",
       field("value", $._expression),
-      $._terminator,
     ),
 
-  dynamic_property_statement: ($) =>
+  __value_assignment_dynamic_property: ($) =>
     seq(
-      kw("DYNAMIC-PROPERTY"),
+      field("type", alias(kw("DYNAMIC-PROPERTY"), $.identifier)),
       "(",
       field("object", $._expression),
       ",",
@@ -48,22 +66,20 @@ module.exports = ({ kw }) => ({
       ")",
       "=",
       field("value", $._expression),
-      optional(kw("NO-ERROR")),
-      $._terminator,
+      optional(alias(kw("NO-ERROR"), $.no_error)),
     ),
 
-  frame_value_statement: ($) =>
+  __value_assignment_frame_value: ($) =>
     seq(
-      kw("FRAME-VALUE"),
+      field("type", alias(kw("FRAME-VALUE"), $.identifier)),
       "=",
       field("value", $._expression),
-      optional(kw("NO-ERROR")),
-      $._terminator,
+      optional(alias(kw("NO-ERROR"), $.no_error)),
     ),
 
-  entry_statement: ($) =>
+  __value_assignment_entry: ($) =>
     seq(
-      kw("ENTRY"),
+      field("type", alias(kw("ENTRY"), $.identifier)),
       "(",
       field("element", $._expression),
       ",",
@@ -72,23 +88,21 @@ module.exports = ({ kw }) => ({
       ")",
       "=",
       field("value", $._expression),
-      $._terminator,
     ),
 
-  length_statement: ($) =>
+  __value_assignment_length: ($) =>
     seq(
-      kw("LENGTH"),
+      field("type", alias(kw("LENGTH"), $.identifier)),
       "(",
       field("value", $._expression),
       ")",
       "=",
       field("length", $._expression),
-      $._terminator,
     ),
 
-  raw_statement: ($) =>
+  __value_assignment_raw: ($) =>
     seq(
-      kw("RAW"),
+      field("type", alias(kw("RAW"), $.identifier)),
       "(",
       field("field", $._expression),
       optional(
@@ -101,12 +115,11 @@ module.exports = ({ kw }) => ({
       ")",
       "=",
       field("value", $._expression),
-      $._terminator,
     ),
 
-  substring_statement: ($) =>
+  __value_assignment_substring: ($) =>
     seq(
-      kw("SUBSTRING"),
+      field("type", alias(kw("SUBSTRING"), $.identifier)),
       "(",
       field("string", $._expression),
       ",",
@@ -115,7 +128,6 @@ module.exports = ({ kw }) => ({
       ")",
       "=",
       field("value", $._expression),
-      optional(kw("NO-ERROR")),
-      $._terminator,
+      optional(alias(kw("NO-ERROR"), $.no_error)),
     ),
 });

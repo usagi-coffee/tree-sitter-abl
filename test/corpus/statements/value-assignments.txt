@@ -15,39 +15,51 @@ SUBSTRING("abc", 2, 1) = "d" NO-ERROR.
 --------------------------------------------------------------------------------
 
 (source_code
-  (current_language_statement
-    (string_literal))
-  (current_value_statement
+  (value_assignment_statement
+    type: (identifier)
+    value: (string_literal))
+  (value_assignment_statement
+    type: (identifier)
     sequence: (identifier)
     database: (string_literal)
     tenant: (number_literal)
     value: (number_literal))
-  (dynamic_current_value_statement
+  (value_assignment_statement
+    type: (identifier)
     sequence: (string_literal)
     database: (string_literal)
     tenant: (number_literal)
     value: (number_literal))
-  (dynamic_property_statement
+  (value_assignment_statement
+    type: (identifier)
     object: (identifier)
     property: (string_literal)
-    value: (number_literal))
-  (frame_value_statement
-    value: (string_literal))
-  (entry_statement
+    value: (number_literal)
+    (no_error))
+  (value_assignment_statement
+    type: (identifier)
+    value: (string_literal)
+    (no_error))
+  (value_assignment_statement
+    type: (identifier)
     element: (number_literal)
     list: (string_literal)
     delimiter: (string_literal)
     value: (string_literal))
-  (length_statement
+  (value_assignment_statement
+    type: (identifier)
     value: (identifier)
     length: (number_literal))
-  (raw_statement
+  (value_assignment_statement
+    type: (identifier)
     field: (identifier)
     position: (number_literal)
     length: (number_literal)
     value: (string_literal))
-  (substring_statement
+  (value_assignment_statement
+    type: (identifier)
     string: (string_literal)
     position: (number_literal)
     length: (number_literal)
-    value: (string_literal)))
+    value: (string_literal)
+    (no_error)))
