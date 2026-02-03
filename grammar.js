@@ -252,12 +252,7 @@ module.exports = grammar({
           seq(
             optional(field("widget", alias($._widgets, $.identifier))),
             field("left", $._identifier_or_qualified_name),
-            repeat1(
-              seq(
-                choice($._namecolon, token.immediate("?:")),
-                field("right", alias($._identifier_immediate, $.identifier)),
-              ),
-            ),
+            $._object_access_tail,
             optional(seq(kw("IN"), $._widgets, field("in", $.identifier))),
           ),
         ),
@@ -305,7 +300,7 @@ module.exports = grammar({
               $.new_expression,
             ),
           ),
-          repeat1(seq($._namecolon, field("right", $.identifier))),
+          $._object_access_tail,
         ),
 
       // Array
@@ -335,15 +330,24 @@ module.exports = grammar({
         ),
 
       // Callables
-      arguments: ($) =>
-        seq("(", optional(seq($.argument, repeat(seq(",", $.argument)))), ")"),
+      arguments: ($) => seq("(", optional($._argument_list), ")"),
+      _argument_list: ($) =>
+        seq($.argument, repeat(seq(",", $.argument))),
       argument: ($) =>
-        seq(
-          optional(choice(kw("INPUT"), kw("OUTPUT"), kw("INPUT-OUTPUT"))),
-          optional(choice(kw("TABLE"), kw("BUFFER"))),
-          field("name", $._expression),
-          optional(seq(kw("AS"), field("type", $._type_name))),
-          optional(kw("BY-REFERENCE")),
+        choice(
+          seq(
+            optional(choice(kw("INPUT"), kw("OUTPUT"), kw("INPUT-OUTPUT"))),
+            choice(kw("TABLE"), kw("BUFFER")),
+            field("name", $._identifier_or_qualified_name),
+            optional(seq(kw("AS"), field("type", $._type_name))),
+            optional(kw("BY-REFERENCE")),
+          ),
+          seq(
+            optional(choice(kw("INPUT"), kw("OUTPUT"), kw("INPUT-OUTPUT"))),
+            field("name", $._expression),
+            optional(seq(kw("AS"), field("type", $._type_name))),
+            optional(kw("BY-REFERENCE")),
+          ),
         ),
 
       function_call: ($) =>
@@ -380,6 +384,13 @@ module.exports = grammar({
       identifier: ($) => token(/[_\p{L}][\p{L}\p{N}_\-&]*/i),
       _identifier_immediate: ($) => token.immediate(/[_\p{L}][\p{L}\p{N}_-]*/i),
       parenthesized_identifier: ($) => seq("(", $.identifier, ")"),
+      _object_access_tail: ($) =>
+        repeat1(
+          seq(
+            choice($._namecolon, token.immediate("?:")),
+            field("right", alias($._identifier_immediate, $.identifier)),
+          ),
+        ),
 
       _terminator: ($) => choice($._terminator_dot, ";"),
 
