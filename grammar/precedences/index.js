@@ -2,7 +2,9 @@
 // Purpose: compose all precedence groups in a stable, readable order.
 const binary = require("./binary");
 const caseStatement = require("./case");
+const create = require("./create");
 const display = require("./display");
+const deleteStatement = require("./delete");
 const enable = require("./enable");
 const assign = require("./assign");
 const exportStatement = require("./export");
@@ -18,6 +20,8 @@ const inFrame = require("./in-frame");
 module.exports = ($) => [
   ["unary", "multiplication", "add", "compare", "not", "logical"],
   ...binary($),
+  ...create($),
+  ...deleteStatement($),
   ...caseStatement($),
   ...assign($),
   ...set($),

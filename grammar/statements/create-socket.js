@@ -3,5 +3,12 @@ module.exports = ({ kw }) => ({
     seq(kw("CREATE"), $.__create_socket_body, $._terminator),
 
   __create_socket_body: ($) =>
-    seq(kw("SOCKET"), field("name", $.identifier), optional(kw("NO-ERROR"))),
+    choice(
+      seq(kw("SOCKET"), field("name", $.identifier), optional(kw("NO-ERROR"))),
+      seq(
+        kw("SERVER-SOCKET"),
+        field("name", $.identifier),
+        optional(kw("NO-ERROR")),
+      ),
+    ),
 });

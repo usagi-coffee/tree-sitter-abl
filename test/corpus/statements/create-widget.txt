@@ -58,3 +58,20 @@ CREATE DIALOG-BOX hDlg IN WIDGET-POOL wp.
   (create_widget_statement
     handle: (identifier)
     pool: (identifier)))
+
+================================================================================
+CREATE WIDGET - browse
+================================================================================
+
+CREATE BROWSE hBr IN WIDGET-POOL wp ASSIGN TITLE = "t".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (create_widget_statement
+    handle: (identifier)
+    pool: (identifier)
+    (assign_phrase
+      (assign_pair
+        left: (identifier)
+        right: (string_literal)))))

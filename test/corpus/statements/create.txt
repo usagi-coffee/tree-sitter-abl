@@ -17,7 +17,7 @@ CREATE SERVER appSrv.
   (create_statement
     table: (identifier))
   (create_statement
-    server: (identifier)))
+    handle: (identifier)))
 
 ================================================================================
 CREATE with qualified name
@@ -128,3 +128,89 @@ CREATE Customer USING RECID(2).
   (create_statement
     table: (identifier)
     recid: (number_literal)))
+
+================================================================================
+CREATE - Handles and objects
+================================================================================
+
+CREATE ALIAS myalias FOR DATABASE mydb NO-ERROR.
+CREATE BUFFER hBuf FOR TABLE Customer BUFFER-NAME mybuf IN WIDGET-POOL wp.
+CREATE CALL hCall IN WIDGET-POOL wp NO-ERROR.
+CREATE CLIENT-PRINCIPAL hCP IN WIDGET-POOL wp.
+CREATE QUERY hQ IN WIDGET-POOL wp.
+CREATE DATASET hDS IN WIDGET-POOL wp.
+CREATE DATA-SOURCE hDSrc IN WIDGET-POOL wp.
+CREATE X-DOCUMENT hX IN WIDGET-POOL wp.
+CREATE X-NODEREF hN IN WIDGET-POOL wp.
+CREATE SOAP-HEADER hSH IN WIDGET-POOL wp.
+CREATE SOAP-HEADER-ENTRYREF hSHE IN WIDGET-POOL wp.
+CREATE SAX-READER hSR IN WIDGET-POOL wp NO-ERROR.
+CREATE SAX-WRITER hSW IN WIDGET-POOL wp NO-ERROR.
+CREATE SAX-ATTRIBUTES hSA IN WIDGET-POOL wp NO-ERROR.
+CREATE WIDGET-POOL wp PERSISTENT NO-ERROR.
+CREATE SERVER hSrv ASSIGN SERVER-CONNECTION-ID = 1.
+CREATE DATABASE "newdb" FROM "olddb" NEW-INSTANCE REPLACE NO-ERROR.
+CREATE "Excel.Application" hExcel CONNECT TO "file.xls" NO-ERROR.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (create_statement
+    alias: (identifier)
+    database: (identifier))
+  (create_statement
+    handle: (identifier)
+    table: (identifier)
+    name: (identifier)
+    pool: (identifier))
+  (create_statement
+    handle: (identifier)
+    pool: (identifier))
+  (create_statement
+    handle: (identifier)
+    pool: (identifier))
+  (create_statement
+    handle: (identifier)
+    pool: (identifier))
+  (create_statement
+    handle: (identifier)
+    pool: (identifier))
+  (create_statement
+    handle: (identifier)
+    pool: (identifier))
+  (create_statement
+    handle: (identifier)
+    pool: (identifier))
+  (create_statement
+    handle: (identifier)
+    pool: (identifier))
+  (create_statement
+    handle: (identifier)
+    pool: (identifier))
+  (create_statement
+    handle: (identifier)
+    pool: (identifier))
+  (create_statement
+    handle: (identifier)
+    pool: (identifier))
+  (create_statement
+    handle: (identifier)
+    pool: (identifier))
+  (create_statement
+    handle: (identifier)
+    pool: (identifier))
+  (create_statement
+    pool: (identifier))
+  (create_statement
+    handle: (identifier)
+    (assign_phrase
+      (assign_pair
+        left: (identifier)
+        right: (number_literal))))
+  (create_statement
+    new_database: (string_literal)
+    old_database: (string_literal))
+  (create_statement
+    progid: (string_literal)
+    handle: (identifier)
+    target: (string_literal)))

@@ -1,0 +1,45 @@
+================================================================================
+DDE
+================================================================================
+
+DDE ADVISE 1 START ITEM "x" TIME 5 NO-ERROR.
+DDE EXECUTE 1 COMMAND "x" TIME 5 NO-ERROR.
+DDE GET 1 TARGET fld ITEM "x" TIME 5 NO-ERROR.
+DDE INITIATE 1 FRAME f APPLICATION "app" TOPIC "topic" NO-ERROR.
+DDE REQUEST 1 TARGET fld ITEM "x" TIME 5 NO-ERROR.
+DDE SEND 1 SOURCE "data" ITEM "x" TIME 5 NO-ERROR.
+DDE TERMINATE 1 NO-ERROR.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (dde_advise_statement
+    ddeid: (number_literal)
+    item: (string_literal)
+    time: (number_literal))
+  (dde_execute_statement
+    ddeid: (number_literal)
+    command: (string_literal)
+    time: (number_literal))
+  (dde_get_statement
+    ddeid: (number_literal)
+    target: (identifier)
+    item: (string_literal)
+    time: (number_literal))
+  (dde_initiate_statement
+    ddeid: (number_literal)
+    frame: (identifier)
+    application: (string_literal)
+    topic: (string_literal))
+  (dde_request_statement
+    ddeid: (number_literal)
+    target: (identifier)
+    item: (string_literal)
+    time: (number_literal))
+  (dde_send_statement
+    ddeid: (number_literal)
+    source: (string_literal)
+    item: (string_literal)
+    time: (number_literal))
+  (dde_terminate_statement
+    ddeid: (number_literal)))

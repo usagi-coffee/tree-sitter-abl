@@ -269,7 +269,7 @@ RUN methodProc IN hProc NO-ERROR.
     type: (identifier)
     (no_undo))
   (create_statement
-    server: (identifier))
+    handle: (identifier))
   (expression_statement
     (function_call
       function: (object_access

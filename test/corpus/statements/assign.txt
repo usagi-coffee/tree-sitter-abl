@@ -84,6 +84,27 @@ ASSIGN
           (identifier))))))
 
 ================================================================================
+ASSIGN record/input
+================================================================================
+
+ASSIGN Customer EXCEPT Name NO-ERROR.
+ASSIGN INPUT FRAME frm Cust.Name = "x" WHEN TRUE NO-ERROR.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assign_statement
+    record: (identifier)
+    field: (identifier))
+  (assign_statement
+    frame: (identifier)
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    value: (string_literal)
+    when: (boolean_literal)))
+
+================================================================================
 ASSIGN with NO-ERROR
 ================================================================================
 
@@ -125,9 +146,9 @@ ASSIGN // note
 
 (source_code
   (assign_statement
+    (comment
+      (line_comment))
     (assign_phrase
-      (comment
-        (line_comment))
       (assign_pair
         left: (identifier)
         right: (number_literal))
@@ -246,16 +267,10 @@ PUT-STRING(workBuf, 1) = cmdValue.
 --------------------------------------------------------------------------------
 
 (source_code
-  (assignment_statement
-    left: (function_call
-      function: (identifier)
-      (arguments
-        (argument
-          name: (identifier))
-        (argument
-          name: (number_literal))))
-    operator: (assignment_operator)
-    right: (identifier)))
+  (put_assign_statement
+    buffer: (identifier)
+    position: (number_literal)
+    value: (identifier)))
 
 ================================================================================
 Expression statement with NO-ERROR

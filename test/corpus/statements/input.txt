@@ -72,11 +72,9 @@ INPUT FROM VALUE(cPath) CONVERT SOURCE "ibm850" TARGET "utf-8".
               (identifier)
               (identifier)))))
       (assign_statement
-        (assign_phrase
-          (assign_pair
-            (qualified_name
-              (identifier)
-              (identifier)))))))
+        (qualified_name
+          (identifier)
+          (identifier)))))
   (input_statement)
   (input_statement
     (string_literal))

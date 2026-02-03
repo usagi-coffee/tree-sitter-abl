@@ -1,13 +1,11 @@
 ================================================================================
-PUT-LONG
+SYSTEM-HELP
 ================================================================================
 
-PUT-LONG(rawBuf, 1) = 1024.
+SYSTEM-HELP "help" NO-ERROR.
 
 --------------------------------------------------------------------------------
 
 (source_code
-  (put_assign_statement
-    buffer: (identifier)
-    position: (number_literal)
-    value: (number_literal)))
+  (system_help_statement
+    topic: (string_literal)))

@@ -647,9 +647,7 @@ DEFINE INPUT PARAMETER pExtent0 AS INTEGER EXTENT 0.
       (format_phrase
         label: (string_literal))))
   (assign_statement
-    (assign_phrase
-      (assign_pair
-        left: (identifier))))
+    record: (identifier))
   (assignment_statement
     left: (identifier)
     operator: (assignment_operator)

@@ -7,13 +7,7 @@ PUT-INT64(rawBuf, 1) = 123456789.
 --------------------------------------------------------------------------------
 
 (source_code
-  (assignment_statement
-    left: (function_call
-      function: (identifier)
-      (arguments
-        (argument
-          name: (identifier))
-        (argument
-          name: (number_literal))))
-    operator: (assignment_operator)
-    right: (number_literal)))
+  (put_assign_statement
+    buffer: (identifier)
+    position: (number_literal)
+    value: (number_literal)))

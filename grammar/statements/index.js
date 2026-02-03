@@ -26,7 +26,10 @@ const createSocketStatement = require("./create-socket");
 const convertStatement = require("./convert");
 const dataSourceDefinition = require("./data-source");
 const datasetDefinition = require("./dataset");
+const ddeStatement = require("./dde");
+const deleteAliasStatement = require("./delete-alias");
 const deleteStatement = require("./delete");
+const deleteWidgetPoolStatement = require("./delete-widget-pool");
 const dictionaryStatement = require("./dictionary");
 const disableStatement = require("./disable");
 const disableTriggersStatement = require("./disable-triggers");
@@ -66,6 +69,7 @@ const loadStatement = require("./load");
 const loadPictureStatement = require("./load-picture");
 const menuDefinition = require("./menu");
 const messageStatement = require("./message");
+const objectConstructorsStatement = require("./object-constructors");
 const nextStatement = require("./next");
 const nextPromptStatement = require("./next-prompt");
 const onStatement = require("./on");
@@ -88,6 +92,7 @@ const preselectRules = require("./preselect");
 const processEventsStatement = require("./process-events");
 const promptForStatement = require("./prompt-for");
 const publishStatement = require("./publish");
+const putAssignStatement = require("./put-assign");
 const putStatement = require("./put");
 const putCursorStatement = require("./put-cursor");
 const putKeyValueStatement = require("./put-key-value");
@@ -118,6 +123,7 @@ const stopStatement = require("./stop");
 const streamDefinition = require("./stream");
 const submenuDefinition = require("./submenu");
 const subscribeStatement = require("./subscribe");
+const systemHelpStatement = require("./system-help");
 const systemDialogStatement = require("./system-dialog");
 const tempTableDefinition = require("./temp-table");
 const triggerProcedureStatement = require("./trigger-procedure");
@@ -139,6 +145,7 @@ const variableDefinition = require("./variable");
 const varStatement = require("./var");
 const viewStatement = require("./view");
 const waitForStatement = require("./wait-for");
+const valueAssignmentsStatement = require("./value-assignments");
 const expressionStatement = require("./expression");
 const createWidgetStatement = require("./create-widget");
 const createTempTableStatement = require("./create-temp-table");
@@ -172,7 +179,10 @@ module.exports = (ctx) => ({
   ...convertStatement(ctx),
   ...dataSourceDefinition(ctx),
   ...datasetDefinition(ctx),
+  ...ddeStatement(ctx),
+  ...deleteAliasStatement(ctx),
   ...deleteStatement(ctx),
+  ...deleteWidgetPoolStatement(ctx),
   ...dictionaryStatement(ctx),
   ...disableStatement(ctx),
   ...disableTriggersStatement(ctx),
@@ -212,6 +222,7 @@ module.exports = (ctx) => ({
   ...loadPictureStatement(ctx),
   ...menuDefinition(ctx),
   ...messageStatement(ctx),
+  ...objectConstructorsStatement(ctx),
   ...nextStatement(ctx),
   ...nextPromptStatement(ctx),
   ...onStatement(ctx),
@@ -234,6 +245,7 @@ module.exports = (ctx) => ({
   ...processEventsStatement(ctx),
   ...promptForStatement(ctx),
   ...publishStatement(ctx),
+  ...putAssignStatement(ctx),
   ...putStatement(ctx),
   ...putCursorStatement(ctx),
   ...putKeyValueStatement(ctx),
@@ -264,6 +276,7 @@ module.exports = (ctx) => ({
   ...streamDefinition(ctx),
   ...submenuDefinition(ctx),
   ...subscribeStatement(ctx),
+  ...systemHelpStatement(ctx),
   ...systemDialogStatement(ctx),
   ...tempTableDefinition(ctx),
   ...triggerProcedureStatement(ctx),
@@ -285,6 +298,7 @@ module.exports = (ctx) => ({
   ...varStatement(ctx),
   ...viewStatement(ctx),
   ...waitForStatement(ctx),
+  ...valueAssignmentsStatement(ctx),
   ...expressionStatement(ctx),
   ...createWidgetStatement(ctx),
   ...createTempTableStatement(ctx),

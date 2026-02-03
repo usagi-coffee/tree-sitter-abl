@@ -5,6 +5,7 @@ module.exports = ({ kw }) => ({
         kw("CREATE"),
         choice(
           kw("BUTTON"),
+          kw("BROWSE"),
           kw("COMBO-BOX"),
           kw("CONTROL-FRAME"),
           kw("DIALOG-BOX"),

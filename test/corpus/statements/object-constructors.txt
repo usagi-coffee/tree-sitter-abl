@@ -1,0 +1,27 @@
+================================================================================
+OBJECT CONSTRUCTORS
+================================================================================
+
+obj = NEW MyClass() NO-ERROR.
+obj = DYNAMIC-NEW "MyClass" () NO-ERROR.
+THIS-OBJECT().
+SUPER().
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (new_expression
+      type: (identifier)
+      (arguments))
+    (no_error))
+  (dynamic_new_statement
+    target: (identifier)
+    class: (string_literal)
+    (arguments))
+  (this_object_statement
+    (arguments))
+  (super_statement
+    (arguments)))

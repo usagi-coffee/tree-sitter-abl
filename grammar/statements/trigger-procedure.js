@@ -43,16 +43,44 @@ module.exports = ({ kw }) => ({
           choice(
             seq(kw("OF"), field("object", $.qualified_name)),
             seq(
-              kw("NEW"),
-              optional(kw("VALUE")),
-              field("value", $.identifier),
-              choice(
-                seq(kw("AS"), field("data_type", $.identifier)),
-                seq(kw("LIKE"), field("like_field", $.qualified_name)),
-              ),
+              $.__trigger_procedure_new_value,
+              optional($.__trigger_procedure_old_value),
             ),
           ),
         ),
       ),
+    ),
+
+  __trigger_procedure_new_value: ($) =>
+    seq(
+      kw("NEW"),
+      optional(kw("VALUE")),
+      field("value", $.identifier),
+      choice(
+        seq(kw("AS"), field("data_type", $.identifier)),
+        seq(kw("LIKE"), field("like_field", $.qualified_name)),
+      ),
+      repeat($.__trigger_procedure_value_option),
+    ),
+
+  __trigger_procedure_old_value: ($) =>
+    seq(
+      kw("OLD"),
+      optional(kw("VALUE")),
+      field("value", $.identifier),
+      choice(
+        seq(kw("AS"), field("data_type", $.identifier)),
+        seq(kw("LIKE"), field("like_field", $.qualified_name)),
+      ),
+      repeat($.__trigger_procedure_value_option),
+    ),
+
+  __trigger_procedure_value_option: ($) =>
+    choice(
+      seq(kw("COLUMN-LABEL"), field("label", $.string_literal)),
+      seq(kw("FORMAT"), field("format", $.string_literal)),
+      seq(kw("INITIAL"), field("initial", $._expression)),
+      seq(kw("LABEL"), field("label", $.string_literal)),
+      kw("NO-UNDO"),
     ),
 });
