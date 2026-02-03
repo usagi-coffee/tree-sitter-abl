@@ -2,7 +2,6 @@ module.exports = ({ kw }) => ({
   do_block: ($) =>
     seq(
       optional(seq(field("label", $.identifier), ":")),
-      kw("DO"),
       $.__do_body,
       kw("END"),
       $._terminator,
@@ -10,6 +9,7 @@ module.exports = ({ kw }) => ({
 
   __do_body: ($) =>
     seq(
+      kw("DO"),
       optional(alias($.__do_for_phrase, $.for_phrase)),
       optional(alias($.__do_preselect_phrase, $.preselect_phrase)),
       optional(alias($.__do_query_tuning_phrase, $.query_tuning)),

@@ -16840,19 +16840,6 @@
           ]
         },
         {
-          "type": "ALIAS",
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "PATTERN",
-              "value": "DO",
-              "flags": "i"
-            }
-          },
-          "named": false,
-          "value": "DO"
-        },
-        {
           "type": "SYMBOL",
           "name": "__do_body"
         },
@@ -16878,6 +16865,19 @@
     "__do_body": {
       "type": "SEQ",
       "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PATTERN",
+              "value": "DO",
+              "flags": "i"
+            }
+          },
+          "named": false,
+          "value": "DO"
+        },
         {
           "type": "CHOICE",
           "members": [
@@ -20036,19 +20036,6 @@
           ]
         },
         {
-          "type": "ALIAS",
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "PATTERN",
-              "value": "FOR",
-              "flags": "i"
-            }
-          },
-          "named": false,
-          "value": "FOR"
-        },
-        {
           "type": "SYMBOL",
           "name": "__for_body"
         },
@@ -20074,6 +20061,19 @@
     "__for_body": {
       "type": "SEQ",
       "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PATTERN",
+              "value": "FOR",
+              "flags": "i"
+            }
+          },
+          "named": false,
+          "value": "FOR"
+        },
         {
           "type": "CHOICE",
           "members": [
@@ -37574,19 +37574,6 @@
           ]
         },
         {
-          "type": "ALIAS",
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "PATTERN",
-              "value": "REPEAT",
-              "flags": "i"
-            }
-          },
-          "named": false,
-          "value": "REPEAT"
-        },
-        {
           "type": "SYMBOL",
           "name": "__repeat_body"
         },
@@ -37612,6 +37599,19 @@
     "__repeat_body": {
       "type": "SEQ",
       "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PATTERN",
+              "value": "REPEAT",
+              "flags": "i"
+            }
+          },
+          "named": false,
+          "value": "REPEAT"
+        },
         {
           "type": "CHOICE",
           "members": [

@@ -2,7 +2,6 @@ module.exports = ({ kw }) => ({
   repeat_statement: ($) =>
     seq(
       optional(seq(field("label", $.identifier), ":")),
-      kw("REPEAT"),
       $.__repeat_body,
       kw("END"),
       $._terminator,
@@ -10,6 +9,7 @@ module.exports = ({ kw }) => ({
 
   __repeat_body: ($) =>
     seq(
+      kw("REPEAT"),
       optional(seq(kw("FOR"), $.__repeat_records)),
       optional($.__repeat_preselect_phrase),
       optional($.__repeat_query_tuning_phrase),
