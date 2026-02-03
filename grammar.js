@@ -262,6 +262,18 @@ module.exports = grammar({
             optional(seq(kw("IN"), $._widgets, field("in", $.identifier))),
           ),
         ),
+      object_access_expression: ($) =>
+        seq(
+          field(
+            "left",
+            choice(
+              $.function_call,
+              $.parenthesized_expression,
+              $.new_expression,
+            ),
+          ),
+          $._object_access_tail,
+        ),
 
       scoped_name: ($) =>
         seq(
@@ -294,19 +306,6 @@ module.exports = grammar({
               field("right", alias($._identifier_immediate, $.identifier)),
             ),
           ),
-        ),
-
-      object_access_expression: ($) =>
-        seq(
-          field(
-            "left",
-            choice(
-              $.function_call,
-              $.parenthesized_expression,
-              $.new_expression,
-            ),
-          ),
-          $._object_access_tail,
         ),
 
       // Array

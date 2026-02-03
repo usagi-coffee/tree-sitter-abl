@@ -1,14 +1,8 @@
-const { definitionModifiers } = require("../helpers/modifiers");
-
 module.exports = ({ kw }) => ({
   browse_definition: ($) =>
     seq(
       kw("DEFINE", { offset: 3 }),
-      ...definitionModifiers($, kw, {
-        new: true,
-        scope: ["SHARED"],
-        access: ["PRIVATE"],
-      }),
+      optional($.__browse_modifier),
       kw("BROWSE"),
       $.__browse_body,
       $._terminator,
@@ -189,12 +183,17 @@ module.exports = ({ kw }) => ({
     seq(
       field(
         "field",
-        choice(
-          $._identifier_or_qualified_name,
-          $.object_access,
-          $.scoped_name,
-        ),
+        choice($._identifier_or_qualified_name, $.object_access, $.scoped_name),
       ),
       optional(seq("[", optional($._array_subscript), "]")),
+    ),
+  __browse_modifier: ($) =>
+    choice(
+      seq(
+        alias(kw("NEW"), $.new_modifier),
+        alias(kw("SHARED"), $.scope_modifier),
+      ),
+      alias(kw("SHARED"), $.scope_modifier),
+      alias(kw("PRIVATE"), $.access_modifier),
     ),
 });

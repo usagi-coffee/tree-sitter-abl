@@ -1,14 +1,8 @@
-const { definitionModifiers } = require("../helpers/modifiers");
-
 module.exports = ({ kw }) => ({
   menu_definition: ($) =>
     seq(
       kw("DEFINE", { offset: 3 }),
-      ...definitionModifiers($, kw, {
-        new: true,
-        scope: ["SHARED"],
-        access: ["PRIVATE"],
-      }),
+      optional($.__menu_modifier),
       kw("MENU"),
       $.__menu_body,
       $._terminator,
@@ -54,5 +48,14 @@ module.exports = ({ kw }) => ({
       field("name", $.identifier),
       optional(kw("DISABLED")),
       optional(seq(kw("LABEL"), field("label", $.string_literal))),
+    ),
+  __menu_modifier: ($) =>
+    choice(
+      seq(
+        alias(kw("NEW"), $.new_modifier),
+        alias(kw("SHARED"), $.scope_modifier),
+      ),
+      alias(kw("SHARED"), $.scope_modifier),
+      alias(kw("PRIVATE"), $.access_modifier),
     ),
 });

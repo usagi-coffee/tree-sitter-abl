@@ -1,14 +1,8 @@
-const { definitionModifiers } = require("../helpers/modifiers");
-
 module.exports = ({ kw }) => ({
   work_table_definition: ($) =>
     seq(
       kw("DEFINE", { offset: 3 }),
-      ...definitionModifiers($, kw, {
-        access: ["PRIVATE"],
-        new: true,
-        scope: ["SHARED"],
-      }),
+      optional($.__work_table_modifier),
       kw("WORK-TABLE"),
       $.__work_table_body,
       $._terminator,
@@ -25,5 +19,14 @@ module.exports = ({ kw }) => ({
           alias($.__temp_table_index, $.index),
         ),
       ),
+    ),
+  __work_table_modifier: ($) =>
+    choice(
+      seq(
+        alias(kw("NEW"), $.new_modifier),
+        alias(kw("SHARED"), $.scope_modifier),
+      ),
+      alias(kw("SHARED"), $.scope_modifier),
+      alias(kw("PRIVATE"), $.access_modifier),
     ),
 });

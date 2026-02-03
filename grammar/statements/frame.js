@@ -1,14 +1,8 @@
-const { definitionModifiers } = require("../helpers/modifiers");
-
 module.exports = ({ kw }) => ({
   frame_definition: ($) =>
     seq(
       kw("DEFINE", { offset: 3 }),
-      ...definitionModifiers($, kw, {
-        new: true,
-        scope: ["SHARED"],
-        access: ["PRIVATE"],
-      }),
+      optional($.__frame_modifier),
       kw("FRAME"),
       $.__frame_body,
       $._terminator,
@@ -86,5 +80,14 @@ module.exports = ({ kw }) => ({
   __frame_space_phrase: ($) =>
     prec.left(
       seq(kw("SPACE"), optional(field("space", seq("(", $._expression, ")")))),
+    ),
+  __frame_modifier: ($) =>
+    choice(
+      seq(
+        alias(kw("NEW"), $.new_modifier),
+        alias(kw("SHARED"), $.scope_modifier),
+      ),
+      alias(kw("SHARED"), $.scope_modifier),
+      alias(kw("PRIVATE"), $.access_modifier),
     ),
 });

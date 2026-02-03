@@ -34,10 +34,7 @@ module.exports = ({ kw }) => ({
             optional(kw("CLASS")),
             field("type", $._type_or_string),
           ),
-          seq(
-            kw("LIKE"),
-            field("like", $._identifier_or_qualified_name),
-          ),
+          seq(kw("LIKE"), field("like", $._identifier_or_qualified_name)),
         ),
       ),
 
@@ -50,10 +47,7 @@ module.exports = ({ kw }) => ({
           ),
           alias($.__variable_format_phrase, $.format_phrase),
           seq(kw("BGCOLOR"), field("bgcolor", $._expression)),
-          seq(
-            kw("COLUMN-LABEL"),
-            field("column_label", $.__format_labels),
-          ),
+          seq(kw("COLUMN-LABEL"), field("column_label", $.__format_labels)),
           seq(kw("CONTEXT-HELP-ID"), field("context_help_id", $._expression)),
           seq(kw("DCOLOR"), field("dcolor", $._expression)),
           seq(kw("DECIMALS"), field("decimals", $.number_literal)),
