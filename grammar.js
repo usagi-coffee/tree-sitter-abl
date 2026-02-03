@@ -252,28 +252,16 @@ module.exports = grammar({
       // Accessors
       object_access: ($) =>
         prec.right(
-          choice(
-            seq(
-              field("widget", alias($._widgets, $.identifier)),
-              field("left", choice($.identifier, $.qualified_name)),
-              repeat1(
-                seq(
-                  choice($._namecolon, token.immediate("?:")),
-                  field("right", alias($._identifier_immediate, $.identifier)),
-                ),
+          seq(
+            optional(field("widget", alias($._widgets, $.identifier))),
+            field("left", $._identifier_or_qualified_name),
+            repeat1(
+              seq(
+                choice($._namecolon, token.immediate("?:")),
+                field("right", alias($._identifier_immediate, $.identifier)),
               ),
-              optional(seq(kw("IN"), $._widgets, field("in", $.identifier))),
             ),
-            seq(
-              field("left", choice($.identifier, $.qualified_name)),
-              repeat1(
-                seq(
-                  choice($._namecolon, token.immediate("?:")),
-                  field("right", alias($._identifier_immediate, $.identifier)),
-                ),
-              ),
-              optional(seq(kw("IN"), $._widgets, field("in", $.identifier))),
-            ),
+            optional(seq(kw("IN"), $._widgets, field("in", $.identifier))),
           ),
         ),
 
