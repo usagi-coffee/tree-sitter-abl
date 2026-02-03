@@ -1,0 +1,15 @@
+================================================================================
+TRIGGERS
+================================================================================
+
+DEFINE VARIABLE v AS CHARACTER TRIGGERS: ON GO DO: END. END TRIGGERS.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (trigger_phrase
+      event: (identifier)
+      (trigger_body))))

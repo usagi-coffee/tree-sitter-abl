@@ -1,0 +1,15 @@
+================================================================================
+FORMAT phrase
+================================================================================
+
+DEFINE VARIABLE x AS CHARACTER FORMAT "x(10)" LABEL "Name".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (format_phrase
+      format: (string_literal))
+    label: (string_literal)))

@@ -1,0 +1,20 @@
+================================================================================
+WIDGET phrase
+================================================================================
+
+HIDE FRAME f.
+HIDE MENU m.
+HIDE CURRENT-WINDOW.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (hide_statement
+    (widget_phrase
+      frame: (identifier)))
+  (hide_statement
+    (widget_phrase
+      menu: (identifier)))
+  (hide_statement
+    (widget_phrase
+      system_handle: (system_handle))))

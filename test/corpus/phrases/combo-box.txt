@@ -1,0 +1,19 @@
+================================================================================
+VIEW-AS COMBO-BOX
+================================================================================
+
+DEFINE VARIABLE v AS CHARACTER VIEW-AS COMBO-BOX LIST-ITEMS "a", "b" SIZE 10 BY 1 AUTO-COMPLETION UNIQUE-MATCH.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (view_as_phrase
+      (combo_box_phrase
+        items: (string_literal)
+        items: (string_literal)
+        (size_phrase
+          width: (number_literal)
+          height: (number_literal))))))

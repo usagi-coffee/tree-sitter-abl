@@ -1,0 +1,39 @@
+================================================================================
+FORM AT column
+================================================================================
+
+FORM "Label" AT 10.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (form_statement
+    (form_item
+      field: (string_literal))
+    (form_item
+      field: (identifier))
+    (form_item
+      field: (number_literal))))
+
+================================================================================
+FORM AT row column
+================================================================================
+
+FORM "Label" AT ROW 2 COLUMN 3.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (form_statement
+    (form_item
+      field: (string_literal))
+    (form_item
+      field: (identifier))
+    (form_item
+      field: (identifier))
+    (form_item
+      field: (number_literal))
+    (form_item
+      field: (identifier))
+    (form_item
+      field: (number_literal))))

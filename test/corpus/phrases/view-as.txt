@@ -1,0 +1,26 @@
+================================================================================
+VIEW-AS variants
+================================================================================
+
+DEFINE VARIABLE a AS CHARACTER VIEW-AS TEXT.
+DEFINE VARIABLE b AS LOGICAL VIEW-AS TOGGLE-BOX.
+DEFINE VARIABLE c AS CHARACTER VIEW-AS FILL-IN NATIVE SIZE 10 BY 1.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (view_as_phrase))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (view_as_phrase))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (view_as_phrase
+      (size_phrase
+        width: (number_literal)
+        height: (number_literal)))))

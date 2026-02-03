@@ -1,0 +1,16 @@
+================================================================================
+VIEW-AS RADIO-SET
+================================================================================
+
+DEFINE VARIABLE v AS LOGICAL VIEW-AS RADIO-SET RADIO-BUTTONS "A", 1.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (view_as_phrase
+      (radio_set_phrase
+        label: (string_literal)
+        value: (number_literal)))))

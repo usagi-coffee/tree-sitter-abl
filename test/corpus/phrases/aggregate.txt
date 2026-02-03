@@ -1,0 +1,19 @@
+================================================================================
+ACCUMULATE - TOTAL and BY
+================================================================================
+
+ACCUMULATE price (TOTAL LABEL "Total" BY category).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (accumulate_statement
+    (accumulate
+      target: (identifier)
+      (aggregate_phrase
+        (aggregate_option
+          operation: (aggregate_operation)
+          (label_phrase
+            label: (string_literal))
+          (by_phrase
+            group: (identifier)))))))

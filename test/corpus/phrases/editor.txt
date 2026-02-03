@@ -1,0 +1,17 @@
+================================================================================
+VIEW-AS EDITOR
+================================================================================
+
+DEFINE VARIABLE v AS CHARACTER VIEW-AS EDITOR SIZE 10 BY 2 SCROLLBAR-VERTICAL.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (view_as_phrase
+      (editor_phrase
+        (size_phrase
+          width: (number_literal)
+          height: (number_literal))))))

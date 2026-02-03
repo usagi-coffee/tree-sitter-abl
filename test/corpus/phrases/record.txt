@@ -1,0 +1,14 @@
+================================================================================
+PRESELECT record-phrase
+================================================================================
+
+PRESELECT EACH Customer NO-LOCK.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (preselect_statement
+    (preselect_record_list
+      (preselect_record
+        (record_phrase
+          record: (identifier))))))

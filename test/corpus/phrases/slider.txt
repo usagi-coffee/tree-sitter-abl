@@ -1,0 +1,17 @@
+================================================================================
+VIEW-AS SLIDER
+================================================================================
+
+DEFINE VARIABLE v AS INTEGER VIEW-AS SLIDER MAX-VALUE 10 MIN-VALUE 1 TIC-MARKS BOTH FREQUENCY 2.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (view_as_phrase
+      (slider_phrase
+        max: (number_literal)
+        min: (number_literal)
+        frequency: (number_literal)))))

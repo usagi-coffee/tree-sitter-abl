@@ -1,0 +1,19 @@
+================================================================================
+VIEW-AS SELECTION-LIST
+================================================================================
+
+DEFINE VARIABLE v AS CHARACTER VIEW-AS SELECTION-LIST SIZE 20 BY 5 MULTIPLE SCROLLBAR-VERTICAL NO-DRAG LIST-ITEMS "A", "B" SORT.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (view_as_phrase
+      (selection_list_phrase
+        (size_phrase
+          width: (number_literal)
+          height: (number_literal))
+        items: (string_literal)
+        items: (string_literal)))))
