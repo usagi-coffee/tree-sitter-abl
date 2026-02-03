@@ -129,9 +129,10 @@ INPUT CLOSE.
       (identifier)))
   (input_statement)
   (assignment_statement
-    (object_access
-      (identifier)
-      (identifier)
+    (frame_qualified_name
+      (object_access
+        (identifier)
+        (identifier))
       (identifier))
     (assignment_operator)
     (identifier))

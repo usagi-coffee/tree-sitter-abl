@@ -11,6 +11,7 @@ module.exports = ({ kw, ctx }) => ({
     choice(
       prec(-1, alias($.constant_expression, $.constant)),
       choice($._identifier_or_qualified_name, $.frame_qualified_name),
+      $.widget_qualified_name,
       $.parenthesized_expression,
       $.available_expression,
       $.can_find_expression,

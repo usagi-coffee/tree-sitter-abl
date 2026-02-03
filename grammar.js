@@ -236,6 +236,31 @@ module.exports = grammar({
             $.identifier
           )
         ),
+      _widgets_no_frame: ($) =>
+        prec.right(
+          alias(
+            choice(
+              kw("WINDOW"),
+              kw("BUTTON"),
+              kw("FILL-IN"),
+              kw("TOGGLE-BOX"),
+              kw("RADIO-SET"),
+              kw("EDITOR"),
+              kw("SELECTION-LIST"),
+              kw("COMBO-BOX"),
+              kw("SLIDER"),
+              kw("RECTANGLE"),
+              kw("TEXT"),
+              kw("IMAGE"),
+              kw("BROWSE"),
+              kw("QUERY"),
+              kw("SUB-MENU"),
+              kw("MENU-ITEM"),
+              kw("MENU")
+            ),
+            $.identifier
+          )
+        ),
       _stream_phrase: ($) =>
         seq(
           choice(kw("STREAM"), kw("STREAM-HANDLE")),
@@ -271,6 +296,8 @@ module.exports = grammar({
         choice(
           $._identifier_or_qualified_name,
           $.object_access,
+          $.frame_qualified_name,
+          $.widget_qualified_name,
           $.array_access,
           $.function_call
         ),
@@ -308,15 +335,19 @@ module.exports = grammar({
         ),
 
       // Accessors
+      _object_access_plain: ($) =>
+        seq(field("left", $._identifier_or_qualified_name), $._object_access_tail),
+      _object_access_widget: ($) =>
+        seq(
+          field("widget", alias($._widgets, $.identifier)),
+          field("left", $._identifier_or_qualified_name),
+          $._object_access_tail
+        ),
       object_access: ($) =>
         prec.right(
           choice(
-            seq(
-              optional(field("widget", alias($._widgets, $.identifier))),
-              field("left", $._identifier_or_qualified_name),
-              $._object_access_tail,
-              optional(seq(kw("IN"), $._widgets, field("in", $.identifier)))
-            ),
+            $._object_access_widget,
+            $._object_access_plain,
             seq(
               field(
                 "left",
@@ -414,6 +445,17 @@ module.exports = grammar({
             )
           ),
           $.arguments
+        ),
+
+      widget_qualified_name: ($) =>
+        seq(
+          field(
+            "target",
+            alias($._object_access_widget, $.object_access)
+          ),
+          kw("IN"),
+          $._widgets_no_frame,
+          field("widget", $.identifier)
         ),
 
       frame_qualified_name: ($) =>

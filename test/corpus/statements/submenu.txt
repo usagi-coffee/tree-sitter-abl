@@ -538,35 +538,39 @@ DELETE WIDGET mywin.
     (do_block
       (body
         (assignment_statement
-          left: (object_access
-            widget: (identifier)
-            left: (identifier)
-            right: (identifier)
-            in: (identifier))
+          left: (widget_qualified_name
+            target: (object_access
+              widget: (identifier)
+              left: (identifier)
+              right: (identifier))
+            widget: (identifier))
           operator: (assignment_operator)
           right: (boolean_literal))
         (assignment_statement
-          left: (object_access
-            widget: (identifier)
-            left: (identifier)
-            right: (identifier)
-            in: (identifier))
+          left: (widget_qualified_name
+            target: (object_access
+              widget: (identifier)
+              left: (identifier)
+              right: (identifier))
+            widget: (identifier))
           operator: (assignment_operator)
           right: (boolean_literal))
         (assignment_statement
-          left: (object_access
-            widget: (identifier)
-            left: (identifier)
-            right: (identifier)
-            in: (identifier))
+          left: (widget_qualified_name
+            target: (object_access
+              widget: (identifier)
+              left: (identifier)
+              right: (identifier))
+            widget: (identifier))
           operator: (assignment_operator)
           right: (boolean_literal))
         (assignment_statement
-          left: (object_access
-            widget: (identifier)
-            left: (identifier)
-            right: (identifier)
-            in: (identifier))
+          left: (widget_qualified_name
+            target: (object_access
+              widget: (identifier)
+              left: (identifier)
+              right: (identifier))
+            widget: (identifier))
           operator: (assignment_operator)
           right: (boolean_literal)))))
   (on_statement
@@ -577,35 +581,39 @@ DELETE WIDGET mywin.
     (do_block
       (body
         (assignment_statement
-          left: (object_access
-            widget: (identifier)
-            left: (identifier)
-            right: (identifier)
-            in: (identifier))
+          left: (widget_qualified_name
+            target: (object_access
+              widget: (identifier)
+              left: (identifier)
+              right: (identifier))
+            widget: (identifier))
           operator: (assignment_operator)
           right: (boolean_literal))
         (assignment_statement
-          left: (object_access
-            widget: (identifier)
-            left: (identifier)
-            right: (identifier)
-            in: (identifier))
+          left: (widget_qualified_name
+            target: (object_access
+              widget: (identifier)
+              left: (identifier)
+              right: (identifier))
+            widget: (identifier))
           operator: (assignment_operator)
           right: (boolean_literal))
         (assignment_statement
-          left: (object_access
-            widget: (identifier)
-            left: (identifier)
-            right: (identifier)
-            in: (identifier))
+          left: (widget_qualified_name
+            target: (object_access
+              widget: (identifier)
+              left: (identifier)
+              right: (identifier))
+            widget: (identifier))
           operator: (assignment_operator)
           right: (boolean_literal))
         (assignment_statement
-          left: (object_access
-            widget: (identifier)
-            left: (identifier)
-            right: (identifier)
-            in: (identifier))
+          left: (widget_qualified_name
+            target: (object_access
+              widget: (identifier)
+              left: (identifier)
+              right: (identifier))
+            widget: (identifier))
           operator: (assignment_operator)
           right: (boolean_literal)))))
   (wait_for_statement
