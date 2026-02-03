@@ -5,7 +5,7 @@ module.exports = ({ kw }) => ({
   __set_size_body: ($) =>
     seq(
       "(",
-      field("buffer", $._expression),
+      field("buffer", $._identifier_or_qualified_name),
       ")",
       "=",
       field("size", $._expression),

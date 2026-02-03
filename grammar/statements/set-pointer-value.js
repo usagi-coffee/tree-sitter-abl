@@ -5,7 +5,10 @@ module.exports = ({ kw }) => ({
   __set_pointer_value_body: ($) =>
     seq(
       "(",
-      field("target", $._expression),
+      field(
+        "target",
+        choice($._identifier_or_qualified_name, $.object_access),
+      ),
       ")",
       "=",
       field("value", $._expression),

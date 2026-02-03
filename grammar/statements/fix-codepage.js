@@ -5,7 +5,7 @@ module.exports = ({ kw }) => ({
   __fix_codepage_body: ($) =>
     seq(
       "(",
-      field("target", $._expression),
+      field("target", $._identifier_or_qualified_name),
       ")",
       "=",
       field("codepage", $._expression),

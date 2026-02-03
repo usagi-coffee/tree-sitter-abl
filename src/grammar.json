@@ -17375,7 +17375,7 @@
           "name": "target",
           "content": {
             "type": "SYMBOL",
-            "name": "_expression"
+            "name": "_identifier_or_qualified_name"
           }
         },
         {
