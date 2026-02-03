@@ -49,7 +49,6 @@ module.exports = ({ kw }) => ({
     choice(
       $.identifier,
       $.qualified_name,
-      $.scoped_name,
       $.object_access,
       $.function_call,
     ),
@@ -183,7 +182,7 @@ module.exports = ({ kw }) => ({
     seq(
       field(
         "field",
-        choice($._identifier_or_qualified_name, $.object_access, $.scoped_name),
+        choice($._identifier_or_qualified_name, $.object_access),
       ),
       optional(seq("[", optional($._array_subscript), "]")),
     ),

@@ -4,13 +4,7 @@ module.exports = ({ kw }) => ({
   dataset_definition: ($) =>
     seq(
       kw("DEFINE", { offset: 3 }),
-      ...definitionModifiers($, kw, {
-        access: ["PRIVATE", "PROTECTED"],
-        new: true,
-        scope: ["SHARED"],
-        static: true,
-        serializable: true,
-      }),
+      optional($.__dataset_modifier),
       kw("DATASET"),
       $.__dataset_body,
       $._terminator,
@@ -98,5 +92,27 @@ module.exports = ({ kw }) => ({
           ")",
         ),
       ),
+    ),
+  __dataset_modifier: ($) =>
+    choice(
+      seq(
+        alias(kw("NEW"), $.new_modifier),
+        alias(kw("SHARED"), $.scope_modifier),
+      ),
+      alias(kw("SHARED"), $.scope_modifier),
+      seq(
+        choice(
+          alias(kw("PRIVATE"), $.access_modifier),
+          alias(kw("PROTECTED"), $.access_modifier),
+        ),
+        optional(alias(kw("STATIC"), $.static_modifier)),
+        optional($.__dataset_serialization_modifier),
+      ),
+      $.__dataset_serialization_modifier,
+    ),
+  __dataset_serialization_modifier: ($) =>
+    choice(
+      alias(kw("SERIALIZABLE"), $.serialization_modifier),
+      alias(kw("NON-SERIALIZABLE"), $.serialization_modifier),
     ),
 });

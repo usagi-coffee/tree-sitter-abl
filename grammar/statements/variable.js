@@ -4,19 +4,7 @@ module.exports = ({ kw }) => ({
   variable_definition: ($) =>
     seq(
       kw("DEFINE", { offset: 3 }),
-      ...definitionModifiers($, kw, {
-        access: [
-          "PRIVATE",
-          "PACKAGE-PRIVATE",
-          "PROTECTED",
-          "PACKAGE-PROTECTED",
-          "PUBLIC",
-        ],
-        new: true,
-        scope: ["SHARED", "GLOBAL"],
-        static: true,
-        serializable: true,
-      }),
+      optional($.__variable_modifier),
       kw("VARIABLE", { offset: 3 }),
       $.__variable_body,
       $._terminator,
@@ -121,5 +109,44 @@ module.exports = ({ kw }) => ({
     seq(
       kw("INITIAL", { offset: 4 }),
       choice($._expression, seq("[", optional($._expressions), "]")),
+    ),
+  __variable_modifier: ($) =>
+    choice(
+      seq(
+        alias(kw("NEW"), $.new_modifier),
+        optional(alias(kw("GLOBAL"), $.scope_modifier)),
+        alias(kw("SHARED"), $.scope_modifier),
+      ),
+      alias(kw("SHARED"), $.scope_modifier),
+      seq(
+        choice(
+          alias(kw("PRIVATE"), $.access_modifier),
+          alias(kw("PACKAGE-PRIVATE"), $.access_modifier),
+          alias(kw("PROTECTED"), $.access_modifier),
+          alias(kw("PACKAGE-PROTECTED"), $.access_modifier),
+          alias(kw("PUBLIC"), $.access_modifier),
+        ),
+        optional(alias(kw("STATIC"), $.static_modifier)),
+        optional($.__variable_serialization_modifier),
+      ),
+      seq(
+        alias(kw("STATIC"), $.static_modifier),
+        optional(
+          choice(
+            alias(kw("PRIVATE"), $.access_modifier),
+            alias(kw("PACKAGE-PRIVATE"), $.access_modifier),
+            alias(kw("PROTECTED"), $.access_modifier),
+            alias(kw("PACKAGE-PROTECTED"), $.access_modifier),
+            alias(kw("PUBLIC"), $.access_modifier),
+          ),
+        ),
+        optional($.__variable_serialization_modifier),
+      ),
+      $.__variable_serialization_modifier,
+    ),
+  __variable_serialization_modifier: ($) =>
+    choice(
+      alias(kw("SERIALIZABLE"), $.serialization_modifier),
+      alias(kw("NON-SERIALIZABLE"), $.serialization_modifier),
     ),
 });

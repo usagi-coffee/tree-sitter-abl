@@ -140,12 +140,18 @@ module.exports = ({ kw }) => ({
       ),
       alias(kw("SHARED"), $.scope_modifier),
       seq(
-        alias(choice(kw("PRIVATE"), kw("PROTECTED")), $.access_modifier),
+        choice(
+          alias(kw("PRIVATE"), $.access_modifier),
+          alias(kw("PROTECTED"), $.access_modifier),
+        ),
         optional(alias(kw("STATIC"), $.static_modifier)),
-        optional(alias($.__temp_table_serialization, $.serialization_modifier)),
+        optional($.__temp_table_serialization_modifier),
       ),
-      alias($.__temp_table_serialization, $.serialization_modifier),
+      $.__temp_table_serialization_modifier,
     ),
-  __temp_table_serialization: ($) =>
-    choice(kw("SERIALIZABLE"), kw("NON-SERIALIZABLE")),
+  __temp_table_serialization_modifier: ($) =>
+    choice(
+      alias(kw("SERIALIZABLE"), $.serialization_modifier),
+      alias(kw("NON-SERIALIZABLE"), $.serialization_modifier),
+    ),
 });
