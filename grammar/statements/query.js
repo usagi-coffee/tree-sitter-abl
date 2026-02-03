@@ -27,8 +27,23 @@ module.exports = ({ kw }) => ({
       optional(alias($.__query_field_list, $.field_list)),
     ),
   __query_field_list: ($) =>
+    choice(
+      seq(
+        $.__query_fields_list,
+        optional($.__query_except_list),
+      ),
+      $.__query_except_list,
+    ),
+  __query_fields_list: ($) =>
     seq(
-      choice(kw("FIELDS"), kw("EXCEPT")),
+      kw("FIELDS"),
+      "(",
+      optional($.__query_field_names),
+      ")",
+    ),
+  __query_except_list: ($) =>
+    seq(
+      kw("EXCEPT"),
       "(",
       optional($.__query_field_names),
       ")",

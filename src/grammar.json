@@ -8983,10 +8983,6 @@
         },
         {
           "type": "SYMBOL",
-          "name": "scoped_name"
-        },
-        {
-          "type": "SYMBOL",
           "name": "input_expression"
         }
       ]
@@ -22153,10 +22149,6 @@
         },
         {
           "type": "SYMBOL",
-          "name": "scoped_name"
-        },
-        {
-          "type": "SYMBOL",
           "name": "object_access"
         },
         {
@@ -23268,10 +23260,6 @@
         {
           "type": "SYMBOL",
           "name": "qualified_name"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "scoped_name"
         },
         {
           "type": "SYMBOL",
@@ -27368,10 +27356,6 @@
         {
           "type": "SYMBOL",
           "name": "object_access"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "scoped_name"
         }
       ]
     },
@@ -27606,10 +27590,6 @@
         {
           "type": "SYMBOL",
           "name": "object_access"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "scoped_name"
         }
       ]
     },
@@ -27668,10 +27648,6 @@
         {
           "type": "SYMBOL",
           "name": "object_access"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "scoped_name"
         }
       ]
     },
@@ -27795,10 +27771,6 @@
         {
           "type": "SYMBOL",
           "name": "object_access"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "scoped_name"
         }
       ]
     },
@@ -27867,10 +27839,6 @@
         {
           "type": "SYMBOL",
           "name": "object_access"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "scoped_name"
         }
       ]
     },
@@ -33454,38 +33422,88 @@
       ]
     },
     "__query_field_list": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "__query_fields_list"
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "__query_except_list"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "__query_except_list"
+        }
+      ]
+    },
+    "__query_fields_list": {
       "type": "SEQ",
       "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PATTERN",
+              "value": "FIELDS",
+              "flags": "i"
+            }
+          },
+          "named": false,
+          "value": "FIELDS"
+        },
+        {
+          "type": "STRING",
+          "value": "("
+        },
         {
           "type": "CHOICE",
           "members": [
             {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "PATTERN",
-                  "value": "FIELDS",
-                  "flags": "i"
-                }
-              },
-              "named": false,
-              "value": "FIELDS"
+              "type": "SYMBOL",
+              "name": "__query_field_names"
             },
             {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "PATTERN",
-                  "value": "EXCEPT",
-                  "flags": "i"
-                }
-              },
-              "named": false,
-              "value": "EXCEPT"
+              "type": "BLANK"
             }
           ]
+        },
+        {
+          "type": "STRING",
+          "value": ")"
+        }
+      ]
+    },
+    "__query_except_list": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PATTERN",
+              "value": "EXCEPT",
+              "flags": "i"
+            }
+          },
+          "named": false,
+          "value": "EXCEPT"
         },
         {
           "type": "STRING",
@@ -40167,10 +40185,6 @@
         {
           "type": "SYMBOL",
           "name": "qualified_name"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "scoped_name"
         },
         {
           "type": "SYMBOL",

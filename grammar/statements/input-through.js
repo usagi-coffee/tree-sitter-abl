@@ -46,7 +46,6 @@ module.exports = ({ kw }) => ({
       $.number_literal,
       $.identifier,
       $.qualified_name,
-      $.scoped_name,
       $.object_access,
       $.function_call,
       alias($.constant_expression, $.constant),

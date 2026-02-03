@@ -14,6 +14,5 @@ module.exports = ({ kw }) => ({
       $._identifier_or_qualified_name,
       $.function_call,
       $.object_access,
-      $.scoped_name,
     ),
 });

@@ -9191,10 +9191,6 @@
         {
           "type": "qualified_name",
           "named": true
-        },
-        {
-          "type": "scoped_name",
-          "named": true
         }
       ]
     }
@@ -31567,10 +31563,6 @@
             "named": true
           },
           {
-            "type": "scoped_name",
-            "named": true
-          },
-          {
             "type": "string_literal",
             "named": true
           }
@@ -37783,10 +37775,6 @@
             "named": true
           },
           {
-            "type": "scoped_name",
-            "named": true
-          },
-          {
             "type": "string_literal",
             "named": true
           }
@@ -37810,10 +37798,6 @@
           },
           {
             "type": "qualified_name",
-            "named": true
-          },
-          {
-            "type": "scoped_name",
             "named": true
           },
           {
@@ -37976,10 +37960,6 @@
             "named": true
           },
           {
-            "type": "scoped_name",
-            "named": true
-          },
-          {
             "type": "string_literal",
             "named": true
           }
@@ -38003,10 +37983,6 @@
           },
           {
             "type": "qualified_name",
-            "named": true
-          },
-          {
-            "type": "scoped_name",
             "named": true
           },
           {
@@ -38042,10 +38018,6 @@
             "named": true
           },
           {
-            "type": "scoped_name",
-            "named": true
-          },
-          {
             "type": "string_literal",
             "named": true
           }
@@ -38078,10 +38050,6 @@
             "named": true
           },
           {
-            "type": "scoped_name",
-            "named": true
-          },
-          {
             "type": "string_literal",
             "named": true
           }
@@ -38106,10 +38074,6 @@
         },
         {
           "type": "qualified_name",
-          "named": true
-        },
-        {
-          "type": "scoped_name",
           "named": true
         },
         {
@@ -38144,10 +38108,6 @@
             "named": true
           },
           {
-            "type": "scoped_name",
-            "named": true
-          },
-          {
             "type": "string_literal",
             "named": true
           }
@@ -38171,10 +38131,6 @@
           },
           {
             "type": "qualified_name",
-            "named": true
-          },
-          {
-            "type": "scoped_name",
             "named": true
           },
           {
@@ -50227,10 +50183,6 @@
             "named": true
           },
           {
-            "type": "scoped_name",
-            "named": true
-          },
-          {
             "type": "string_literal",
             "named": true
           }
@@ -50254,10 +50206,6 @@
           },
           {
             "type": "qualified_name",
-            "named": true
-          },
-          {
-            "type": "scoped_name",
             "named": true
           },
           {
@@ -50287,10 +50235,6 @@
             "named": true
           },
           {
-            "type": "scoped_name",
-            "named": true
-          },
-          {
             "type": "string_literal",
             "named": true
           }
@@ -50314,10 +50258,6 @@
           },
           {
             "type": "qualified_name",
-            "named": true
-          },
-          {
-            "type": "scoped_name",
             "named": true
           },
           {
