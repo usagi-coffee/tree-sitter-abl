@@ -58030,19 +58030,6 @@
                 "type": "TOKEN",
                 "content": {
                   "type": "PATTERN",
-                  "value": "FRAME",
-                  "flags": "i"
-                }
-              },
-              "named": false,
-              "value": "FRAME"
-            },
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "PATTERN",
                   "value": "BUTTON",
                   "flags": "i"
                 }
@@ -58244,6 +58231,19 @@
               },
               "named": false,
               "value": "MENU"
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PATTERN",
+                  "value": "FRAME",
+                  "flags": "i"
+                }
+              },
+              "named": false,
+              "value": "FRAME"
             }
           ]
         },
@@ -58841,8 +58841,13 @@
           "name": "object_access"
         },
         {
-          "type": "SYMBOL",
-          "name": "frame_qualified_name"
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_frame_qualified_name"
+          },
+          "named": true,
+          "value": "widget_qualified_name"
         },
         {
           "type": "SYMBOL",
@@ -59992,7 +59997,7 @@
         }
       ]
     },
-    "frame_qualified_name": {
+    "_frame_qualified_name": {
       "type": "SEQ",
       "members": [
         {
@@ -60027,7 +60032,7 @@
         },
         {
           "type": "FIELD",
-          "name": "frame",
+          "name": "widget",
           "content": {
             "type": "SYMBOL",
             "name": "identifier"
@@ -60205,8 +60210,13 @@
               "name": "_identifier_or_qualified_name"
             },
             {
-              "type": "SYMBOL",
-              "name": "frame_qualified_name"
+              "type": "ALIAS",
+              "content": {
+                "type": "SYMBOL",
+                "name": "_frame_qualified_name"
+              },
+              "named": true,
+              "value": "widget_qualified_name"
             }
           ]
         },

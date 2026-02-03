@@ -141,22 +141,22 @@ OPEN QUERY qCust FOR EACH Customer QUERY-TUNING(JOIN-BY-SQLDB NO-BIND-WHERE) NO-
       (assign_statement
         (assign_phrase
           (assign_pair
-            left: (frame_qualified_name
+            left: (widget_qualified_name
               (object_access
                 left: (qualified_name
                   left: (identifier)
                   right: (identifier))
                 right: (identifier))
-              frame: (identifier))
+              widget: (identifier))
             right: (boolean_literal))
           (assign_pair
-            left: (frame_qualified_name
+            left: (widget_qualified_name
               (object_access
                 left: (qualified_name
                   left: (identifier)
                   right: (identifier))
                 right: (identifier))
-              frame: (identifier))
+              widget: (identifier))
             right: (boolean_literal))))
       (pause_statement)
       (get_statement

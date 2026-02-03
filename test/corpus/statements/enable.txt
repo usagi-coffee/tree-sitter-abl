@@ -58,7 +58,6 @@ ENABLE field1 IN WINDOW w1.
     (enable_item
       field: (identifier))
     (in_window_phrase
-
       window: (identifier))))
 
 ================================================================================

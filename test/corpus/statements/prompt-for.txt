@@ -36,7 +36,6 @@ PROMPT-FOR field1 GO-ON(f1 f2).
     (field
       field: (identifier))
     (in_window_phrase
-
       window: (identifier)))
   (prompt_for_statement
     (field
@@ -366,7 +365,6 @@ PROMPT-FOR STREAM-HANDLE hS field1 field2 IN WINDOW wMain WITH FRAME fMain.
     (field
       field: (identifier))
     (in_window_phrase
-
       window: (identifier))
     (frame_phrase
       frame: (identifier))))

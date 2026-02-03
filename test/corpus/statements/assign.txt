@@ -317,18 +317,18 @@ c = "Trim":T.
   (assignment_statement
     left: (identifier)
     operator: (assignment_operator)
-    right: (frame_qualified_name
+    right: (widget_qualified_name
       (object_access
         left: (identifier)
         right: (identifier))
-      frame: (identifier)))
+      widget: (identifier)))
   (assignment_statement
     left: (identifier)
     operator: (assignment_operator)
     right: (unary_expression
-      (frame_qualified_name
+      (widget_qualified_name
         (identifier)
-        frame: (identifier))))
+        widget: (identifier))))
   (assignment_statement
     left: (identifier)
     operator: (assignment_operator)

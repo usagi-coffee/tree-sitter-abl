@@ -104,7 +104,6 @@ DELETE WIDGET new_win.
   (display_statement
     record: (identifier)
     (in_window_phrase
-
       window: (identifier))
     (frame_phrase
       (no_labels))

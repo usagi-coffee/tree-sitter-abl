@@ -563,7 +563,7 @@ UPDATE animate WITH FRAME y.
                 (assignment_statement
                   (identifier)
                   (assignment_operator)
-                  (frame_qualified_name
+                  (widget_qualified_name
                     (function_call
                       (object_access
                         (identifier)

@@ -60,10 +60,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -195,10 +191,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -401,10 +393,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -534,10 +522,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -773,10 +757,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -919,10 +899,6 @@
         },
         {
           "type": "date_literal",
-          "named": true
-        },
-        {
-          "type": "frame_qualified_name",
           "named": true
         },
         {
@@ -1086,10 +1062,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -1205,10 +1177,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -1328,10 +1296,6 @@
         },
         {
           "type": "date_literal",
-          "named": true
-        },
-        {
-          "type": "frame_qualified_name",
           "named": true
         },
         {
@@ -1458,10 +1422,6 @@
           "named": true
         },
         {
-          "type": "frame_qualified_name",
-          "named": true
-        },
-        {
           "type": "function_call",
           "named": true
         },
@@ -1534,10 +1494,6 @@
         "types": [
           {
             "type": "array_access",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -1620,10 +1576,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -1742,10 +1694,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -1845,10 +1793,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -1970,10 +1914,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -2062,10 +2002,6 @@
         "types": [
           {
             "type": "array_access",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -2158,10 +2094,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -2329,10 +2261,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -2448,10 +2376,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -2589,10 +2513,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -2708,10 +2628,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -2833,10 +2749,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -2952,10 +2864,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -3077,10 +2985,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -3196,10 +3100,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -3321,10 +3221,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -3443,10 +3339,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -3562,10 +3454,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -3793,10 +3681,6 @@
           "named": true
         },
         {
-          "type": "frame_qualified_name",
-          "named": true
-        },
-        {
           "type": "function_call",
           "named": true
         },
@@ -3920,10 +3804,6 @@
           "named": true
         },
         {
-          "type": "frame_qualified_name",
-          "named": true
-        },
-        {
           "type": "function_call",
           "named": true
         },
@@ -4044,10 +3924,6 @@
         },
         {
           "type": "date_literal",
-          "named": true
-        },
-        {
-          "type": "frame_qualified_name",
           "named": true
         },
         {
@@ -4846,10 +4722,6 @@
           "named": true
         },
         {
-          "type": "frame_qualified_name",
-          "named": true
-        },
-        {
           "type": "function_call",
           "named": true
         },
@@ -4970,10 +4842,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -5108,10 +4976,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -5250,10 +5114,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -5525,10 +5385,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -5644,10 +5500,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -5981,10 +5833,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -6100,10 +5948,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -6267,10 +6111,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -6387,10 +6227,6 @@
         },
         {
           "type": "date_literal",
-          "named": true
-        },
-        {
-          "type": "frame_qualified_name",
           "named": true
         },
         {
@@ -6514,10 +6350,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -6651,10 +6483,6 @@
         },
         {
           "type": "date_literal",
-          "named": true
-        },
-        {
-          "type": "frame_qualified_name",
           "named": true
         },
         {
@@ -7547,10 +7375,6 @@
           "named": true
         },
         {
-          "type": "frame_qualified_name",
-          "named": true
-        },
-        {
           "type": "function_call",
           "named": true
         },
@@ -7679,10 +7503,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -8547,10 +8367,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -8995,10 +8811,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -9117,10 +8929,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -9236,10 +9044,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -9364,10 +9168,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -9496,10 +9296,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -9815,10 +9611,6 @@
           "named": true
         },
         {
-          "type": "frame_qualified_name",
-          "named": true
-        },
-        {
           "type": "function_call",
           "named": true
         },
@@ -9939,10 +9731,6 @@
         },
         {
           "type": "date_literal",
-          "named": true
-        },
-        {
-          "type": "frame_qualified_name",
           "named": true
         },
         {
@@ -10069,10 +9857,6 @@
           "named": true
         },
         {
-          "type": "frame_qualified_name",
-          "named": true
-        },
-        {
           "type": "function_call",
           "named": true
         },
@@ -10193,10 +9977,6 @@
         },
         {
           "type": "date_literal",
-          "named": true
-        },
-        {
-          "type": "frame_qualified_name",
           "named": true
         },
         {
@@ -10353,10 +10133,6 @@
           "named": true
         },
         {
-          "type": "frame_qualified_name",
-          "named": true
-        },
-        {
           "type": "function_call",
           "named": true
         },
@@ -10477,10 +10253,6 @@
         },
         {
           "type": "date_literal",
-          "named": true
-        },
-        {
-          "type": "frame_qualified_name",
           "named": true
         },
         {
@@ -11281,10 +11053,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -11453,10 +11221,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -11574,10 +11338,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -11699,10 +11459,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -11818,10 +11574,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -11943,10 +11695,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -12062,10 +11810,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -12187,10 +11931,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -12306,10 +12046,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -12431,10 +12167,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -12550,10 +12282,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -12675,10 +12403,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -12794,10 +12518,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -12919,10 +12639,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -13038,10 +12754,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -13163,10 +12875,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -13282,10 +12990,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -13407,10 +13111,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -13526,10 +13226,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -13651,10 +13347,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -13773,10 +13465,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -13892,10 +13580,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -14035,10 +13719,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -14170,10 +13850,6 @@
         },
         {
           "type": "date_literal",
-          "named": true
-        },
-        {
-          "type": "frame_qualified_name",
           "named": true
         },
         {
@@ -14453,10 +14129,6 @@
           "named": true
         },
         {
-          "type": "frame_qualified_name",
-          "named": true
-        },
-        {
           "type": "function_call",
           "named": true
         },
@@ -14590,10 +14262,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -14719,10 +14387,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -14876,10 +14540,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -14995,10 +14655,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -15120,10 +14776,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -15239,10 +14891,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -15364,10 +15012,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -15486,10 +15130,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -15605,10 +15245,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -15774,10 +15410,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -15905,10 +15537,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -16050,10 +15678,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -16169,10 +15793,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -16304,10 +15924,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -16426,10 +16042,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -16545,10 +16157,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -16692,10 +16300,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -16811,10 +16415,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -17017,10 +16617,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -17324,10 +16920,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -17446,10 +17038,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -17565,10 +17153,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -17700,10 +17284,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -17819,10 +17399,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -18008,10 +17584,6 @@
           "named": true
         },
         {
-          "type": "frame_qualified_name",
-          "named": true
-        },
-        {
           "type": "function_call",
           "named": true
         },
@@ -18132,10 +17704,6 @@
         },
         {
           "type": "date_literal",
-          "named": true
-        },
-        {
-          "type": "frame_qualified_name",
           "named": true
         },
         {
@@ -18272,10 +17840,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -18394,10 +17958,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -18513,10 +18073,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -18645,10 +18201,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -18784,10 +18336,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -18855,10 +18403,6 @@
         "types": [
           {
             "type": "array_access",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -18937,10 +18481,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -19059,10 +18599,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -19217,10 +18753,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -19358,10 +18890,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -19542,10 +19070,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -19752,10 +19276,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -19954,10 +19474,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -20142,10 +19658,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -20269,10 +19781,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -20401,10 +19909,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -20558,10 +20062,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -20690,10 +20190,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -20809,10 +20305,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -20954,10 +20446,6 @@
         },
         {
           "type": "frame_phrase",
-          "named": true
-        },
-        {
-          "type": "frame_qualified_name",
           "named": true
         },
         {
@@ -21112,10 +20600,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -21264,10 +20748,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -21392,10 +20872,6 @@
           "named": true
         },
         {
-          "type": "frame_qualified_name",
-          "named": true
-        },
-        {
           "type": "function_call",
           "named": true
         },
@@ -21516,10 +20992,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -21672,10 +21144,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -21743,10 +21211,6 @@
         "types": [
           {
             "type": "array_access",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -21841,10 +21305,6 @@
         },
         {
           "type": "date_literal",
-          "named": true
-        },
-        {
-          "type": "frame_qualified_name",
           "named": true
         },
         {
@@ -21968,10 +21428,6 @@
         },
         {
           "type": "date_literal",
-          "named": true
-        },
-        {
-          "type": "frame_qualified_name",
           "named": true
         },
         {
@@ -22825,10 +22281,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -23005,10 +22457,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -23311,10 +22759,6 @@
           "named": true
         },
         {
-          "type": "frame_qualified_name",
-          "named": true
-        },
-        {
           "type": "function_call",
           "named": true
         },
@@ -23435,10 +22879,6 @@
         },
         {
           "type": "date_literal",
-          "named": true
-        },
-        {
-          "type": "frame_qualified_name",
           "named": true
         },
         {
@@ -23611,10 +23051,6 @@
           "named": true
         },
         {
-          "type": "frame_qualified_name",
-          "named": true
-        },
-        {
           "type": "function_call",
           "named": true
         },
@@ -23735,10 +23171,6 @@
         },
         {
           "type": "date_literal",
-          "named": true
-        },
-        {
-          "type": "frame_qualified_name",
           "named": true
         },
         {
@@ -23872,10 +23304,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -24033,10 +23461,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -24152,10 +23576,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -24303,10 +23723,6 @@
         },
         {
           "type": "format_phrase",
-          "named": true
-        },
-        {
-          "type": "frame_qualified_name",
           "named": true
         },
         {
@@ -24460,10 +23876,6 @@
           "named": true
         },
         {
-          "type": "frame_qualified_name",
-          "named": true
-        },
-        {
           "type": "function_call",
           "named": true
         },
@@ -24587,10 +23999,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -24709,10 +24117,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -24828,10 +24232,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -24971,10 +24371,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -25163,10 +24559,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -25305,10 +24697,6 @@
           "named": true
         },
         {
-          "type": "frame_qualified_name",
-          "named": true
-        },
-        {
           "type": "function_call",
           "named": true
         },
@@ -25429,10 +24817,6 @@
         },
         {
           "type": "date_literal",
-          "named": true
-        },
-        {
-          "type": "frame_qualified_name",
           "named": true
         },
         {
@@ -25579,10 +24963,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -25711,10 +25091,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -25830,10 +25206,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -26017,10 +25389,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -26136,10 +25504,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -26279,10 +25643,6 @@
         },
         {
           "type": "date_literal",
-          "named": true
-        },
-        {
-          "type": "frame_qualified_name",
           "named": true
         },
         {
@@ -26457,10 +25817,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -26576,10 +25932,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -26701,10 +26053,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -26820,10 +26168,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -26945,10 +26289,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -27064,10 +26404,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -27189,10 +26525,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -27311,10 +26643,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -27430,10 +26758,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -27565,10 +26889,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -27684,10 +27004,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -27823,10 +27139,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -27942,10 +27254,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -28067,10 +27375,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -28186,10 +27490,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -28311,10 +27611,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -28430,10 +27726,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -28555,10 +27847,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -28674,10 +27962,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -28799,10 +28083,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -28918,10 +28198,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -29114,10 +28390,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -29241,10 +28513,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -29376,10 +28644,6 @@
         },
         {
           "type": "frame_phrase",
-          "named": true
-        },
-        {
-          "type": "frame_qualified_name",
           "named": true
         },
         {
@@ -29534,10 +28798,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -29686,10 +28946,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -29816,10 +29072,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -29935,10 +29187,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -30070,10 +29318,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -30190,48 +29434,6 @@
         },
         {
           "type": "use_text",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "frame_qualified_name",
-    "named": true,
-    "fields": {
-      "frame": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "function_call",
-          "named": true
-        },
-        {
-          "type": "identifier",
-          "named": true
-        },
-        {
-          "type": "object_access",
-          "named": true
-        },
-        {
-          "type": "qualified_name",
-          "named": true
-        },
-        {
-          "type": "scoped_name",
           "named": true
         }
       ]
@@ -31140,10 +30342,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -31262,10 +30460,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -31381,10 +30575,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -33002,10 +32192,6 @@
           "named": true
         },
         {
-          "type": "frame_qualified_name",
-          "named": true
-        },
-        {
           "type": "function_call",
           "named": true
         },
@@ -33155,10 +32341,6 @@
         },
         {
           "type": "date_literal",
-          "named": true
-        },
-        {
-          "type": "frame_qualified_name",
           "named": true
         },
         {
@@ -33420,10 +32602,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -33750,10 +32928,6 @@
           "named": true
         },
         {
-          "type": "frame_qualified_name",
-          "named": true
-        },
-        {
           "type": "function_call",
           "named": true
         },
@@ -33963,10 +33137,6 @@
           "named": true
         },
         {
-          "type": "frame_qualified_name",
-          "named": true
-        },
-        {
           "type": "function_call",
           "named": true
         },
@@ -34087,10 +33257,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -34271,10 +33437,6 @@
           "named": true
         },
         {
-          "type": "frame_qualified_name",
-          "named": true
-        },
-        {
           "type": "function_call",
           "named": true
         },
@@ -34445,10 +33607,6 @@
           "named": true
         },
         {
-          "type": "frame_qualified_name",
-          "named": true
-        },
-        {
           "type": "function_call",
           "named": true
         },
@@ -34597,10 +33755,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -34845,10 +33999,6 @@
           "named": true
         },
         {
-          "type": "frame_qualified_name",
-          "named": true
-        },
-        {
           "type": "function_call",
           "named": true
         },
@@ -34969,10 +34119,6 @@
         },
         {
           "type": "date_literal",
-          "named": true
-        },
-        {
-          "type": "frame_qualified_name",
           "named": true
         },
         {
@@ -35099,10 +34245,6 @@
           "named": true
         },
         {
-          "type": "frame_qualified_name",
-          "named": true
-        },
-        {
           "type": "function_call",
           "named": true
         },
@@ -35223,10 +34365,6 @@
         },
         {
           "type": "date_literal",
-          "named": true
-        },
-        {
-          "type": "frame_qualified_name",
           "named": true
         },
         {
@@ -35365,10 +34503,6 @@
         },
         {
           "type": "date_literal",
-          "named": true
-        },
-        {
-          "type": "frame_qualified_name",
           "named": true
         },
         {
@@ -35619,10 +34753,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -35747,10 +34877,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -35866,10 +34992,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -35991,10 +35113,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -36110,10 +35228,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -36238,10 +35352,6 @@
         },
         {
           "type": "date_literal",
-          "named": true
-        },
-        {
-          "type": "frame_qualified_name",
           "named": true
         },
         {
@@ -36428,10 +35538,6 @@
           "named": true
         },
         {
-          "type": "frame_qualified_name",
-          "named": true
-        },
-        {
           "type": "function_call",
           "named": true
         },
@@ -36589,10 +35695,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -36708,10 +35810,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -36833,10 +35931,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -36952,10 +36046,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -37097,10 +36187,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -37216,10 +36302,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -37459,10 +36541,6 @@
         },
         {
           "type": "date_literal",
-          "named": true
-        },
-        {
-          "type": "frame_qualified_name",
           "named": true
         },
         {
@@ -37852,10 +36930,6 @@
           "named": true
         },
         {
-          "type": "frame_qualified_name",
-          "named": true
-        },
-        {
           "type": "function_call",
           "named": true
         },
@@ -38065,10 +37139,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -38214,10 +37284,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -38355,10 +37421,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -38507,10 +37569,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -38626,10 +37684,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -38767,10 +37821,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -38919,10 +37969,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -39054,10 +38100,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -39929,10 +38971,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -40078,10 +39116,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -40234,10 +39268,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -40464,10 +39494,6 @@
         },
         {
           "type": "date_literal",
-          "named": true
-        },
-        {
-          "type": "frame_qualified_name",
           "named": true
         },
         {
@@ -40891,10 +39917,6 @@
           "named": true
         },
         {
-          "type": "frame_qualified_name",
-          "named": true
-        },
-        {
           "type": "function_call",
           "named": true
         },
@@ -41030,10 +40052,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -41149,10 +40167,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -41274,10 +40288,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -41396,10 +40406,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -41515,10 +40521,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -41648,10 +40650,6 @@
         },
         {
           "type": "date_literal",
-          "named": true
-        },
-        {
-          "type": "frame_qualified_name",
           "named": true
         },
         {
@@ -42104,10 +41102,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -42313,10 +41307,6 @@
           "named": true
         },
         {
-          "type": "frame_qualified_name",
-          "named": true
-        },
-        {
           "type": "function_call",
           "named": true
         },
@@ -42452,10 +41442,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -42624,10 +41610,6 @@
           "named": true
         },
         {
-          "type": "frame_qualified_name",
-          "named": true
-        },
-        {
           "type": "function_call",
           "named": true
         },
@@ -42748,10 +41730,6 @@
         },
         {
           "type": "date_literal",
-          "named": true
-        },
-        {
-          "type": "frame_qualified_name",
           "named": true
         },
         {
@@ -43772,10 +42750,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -43897,10 +42871,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -44891,10 +43861,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -45010,10 +43976,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -45151,10 +44113,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -45273,10 +44231,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -45392,10 +44346,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -45527,10 +44477,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -45655,10 +44601,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -45774,10 +44716,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -45905,10 +44843,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -46024,10 +44958,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -46149,10 +45079,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -46268,10 +45194,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -46409,10 +45331,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -46531,10 +45449,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -46650,10 +45564,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -46791,10 +45701,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -46923,10 +45829,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -47047,10 +45949,6 @@
         },
         {
           "type": "format_phrase",
-          "named": true
-        },
-        {
-          "type": "frame_qualified_name",
           "named": true
         },
         {
@@ -47293,10 +46191,6 @@
           "named": true
         },
         {
-          "type": "frame_qualified_name",
-          "named": true
-        },
-        {
           "type": "function_call",
           "named": true
         },
@@ -47422,10 +46316,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -47557,10 +46447,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -47687,10 +46573,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -47970,10 +46852,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -48228,10 +47106,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -48386,10 +47260,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -48505,10 +47375,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -48654,10 +47520,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -48773,10 +47635,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -48914,10 +47772,6 @@
         },
         {
           "type": "frame_phrase",
-          "named": true
-        },
-        {
-          "type": "frame_qualified_name",
           "named": true
         },
         {
@@ -49068,10 +47922,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -49200,10 +48050,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -49319,10 +48165,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -49444,10 +48286,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -49563,10 +48401,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -49699,10 +48533,6 @@
           "named": true
         },
         {
-          "type": "frame_qualified_name",
-          "named": true
-        },
-        {
           "type": "function_call",
           "named": true
         },
@@ -49828,10 +48658,6 @@
         },
         {
           "type": "date_literal",
-          "named": true
-        },
-        {
-          "type": "frame_qualified_name",
           "named": true
         },
         {
@@ -50101,10 +48927,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -50220,10 +49042,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -50348,10 +49166,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -50599,10 +49413,6 @@
           "named": true
         },
         {
-          "type": "frame_qualified_name",
-          "named": true
-        },
-        {
           "type": "function_call",
           "named": true
         },
@@ -50728,10 +49538,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -50891,10 +49697,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -51030,10 +49832,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -51423,10 +50221,6 @@
           "named": true
         },
         {
-          "type": "frame_qualified_name",
-          "named": true
-        },
-        {
           "type": "function_call",
           "named": true
         },
@@ -51547,10 +50341,6 @@
         },
         {
           "type": "date_literal",
-          "named": true
-        },
-        {
-          "type": "frame_qualified_name",
           "named": true
         },
         {
@@ -51677,10 +50467,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -51796,10 +50582,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -51927,10 +50709,6 @@
           "named": true
         },
         {
-          "type": "frame_qualified_name",
-          "named": true
-        },
-        {
           "type": "function_call",
           "named": true
         },
@@ -52051,10 +50829,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -52850,10 +51624,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -52975,10 +51745,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -53113,10 +51879,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -53508,10 +52270,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -53656,10 +52414,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -53778,10 +52532,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -53897,10 +52647,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -54048,10 +52794,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -54167,10 +52909,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -54328,10 +53066,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -54450,10 +53184,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -54569,10 +53299,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -54734,10 +53460,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -54884,10 +53606,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -55211,10 +53929,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -55402,10 +54116,6 @@
           "named": true
         },
         {
-          "type": "frame_qualified_name",
-          "named": true
-        },
-        {
           "type": "function_call",
           "named": true
         },
@@ -55534,10 +54244,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -55653,10 +54359,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -56026,10 +54728,6 @@
         },
         {
           "type": "frame_definition",
-          "named": true
-        },
-        {
-          "type": "frame_qualified_name",
           "named": true
         },
         {
@@ -56586,10 +55284,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -56712,10 +55406,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -56831,10 +55521,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -57003,10 +55689,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -57198,10 +55880,6 @@
           "named": true
         },
         {
-          "type": "frame_qualified_name",
-          "named": true
-        },
-        {
           "type": "function_call",
           "named": true
         },
@@ -57322,10 +56000,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -57470,10 +56144,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -57625,10 +56295,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -57706,10 +56372,6 @@
         "types": [
           {
             "type": "array_access",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -57826,10 +56488,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -57967,10 +56625,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -58095,10 +56749,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -58217,10 +56867,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -58336,10 +56982,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -58464,10 +57106,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -58691,10 +57329,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -58831,10 +57465,6 @@
         },
         {
           "type": "date_literal",
-          "named": true
-        },
-        {
-          "type": "frame_qualified_name",
           "named": true
         },
         {
@@ -58976,10 +57606,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -59095,10 +57721,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -59218,10 +57840,6 @@
         },
         {
           "type": "date_literal",
-          "named": true
-        },
-        {
-          "type": "frame_qualified_name",
           "named": true
         },
         {
@@ -59368,10 +57986,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -59487,10 +58101,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -59612,10 +58222,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -59731,10 +58337,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -59856,10 +58458,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -59975,10 +58573,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -60100,10 +58694,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -60219,10 +58809,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -60344,10 +58930,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -60463,10 +59045,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -60588,10 +59166,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -60707,10 +59281,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -60839,10 +59409,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -60977,10 +59543,6 @@
         },
         {
           "type": "date_literal",
-          "named": true
-        },
-        {
-          "type": "frame_qualified_name",
           "named": true
         },
         {
@@ -61225,10 +59787,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -61363,10 +59921,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -61489,10 +60043,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -61611,10 +60161,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -61730,10 +60276,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -61865,10 +60407,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -61987,10 +60525,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -62106,10 +60640,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -62232,10 +60762,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -62375,10 +60901,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -62494,10 +61016,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -62629,10 +61147,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -62752,10 +61266,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -62928,10 +61438,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -63151,10 +61657,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -63316,10 +61818,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -63508,10 +62006,6 @@
             "named": true
           },
           {
-            "type": "frame_qualified_name",
-            "named": true
-          },
-          {
             "type": "function_call",
             "named": true
           },
@@ -63628,10 +62122,6 @@
         },
         {
           "type": "date_literal",
-          "named": true
-        },
-        {
-          "type": "frame_qualified_name",
           "named": true
         },
         {
@@ -63755,10 +62245,6 @@
           },
           {
             "type": "date_literal",
-            "named": true
-          },
-          {
-            "type": "frame_qualified_name",
             "named": true
           },
           {
@@ -64035,7 +62521,7 @@
     "fields": {
       "target": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "object_access",
@@ -64053,6 +62539,32 @@
           }
         ]
       }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "function_call",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "object_access",
+          "named": true
+        },
+        {
+          "type": "qualified_name",
+          "named": true
+        },
+        {
+          "type": "scoped_name",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -64113,10 +62625,6 @@
         },
         {
           "type": "date_literal",
-          "named": true
-        },
-        {
-          "type": "frame_qualified_name",
           "named": true
         },
         {

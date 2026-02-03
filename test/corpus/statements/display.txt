@@ -441,7 +441,6 @@ DISPLAY SPACE(2) Customer.Name SKIP(1) Customer.City.
       left: (identifier)
       right: (identifier))
     (in_window_phrase
-
       window: (identifier))
     (frame_phrase
       frame: (identifier))

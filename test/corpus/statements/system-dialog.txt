@@ -18,7 +18,6 @@ SYSTEM-DIALOG PRINTER-SETUP PORTRAIT UPDATE pset IN WINDOW winH.
     color: (number_literal)
     update: (identifier)
     (in_window_phrase
-
       window: (identifier)))
   (system_dialog_font_statement
     font: (identifier)
@@ -28,7 +27,6 @@ SYSTEM-DIALOG PRINTER-SETUP PORTRAIT UPDATE pset IN WINDOW winH.
   (system_dialog_font_statement
     font: (identifier)
     (in_window_phrase
-
       window: (identifier)))
   (system_dialog_get_file_statement
     variable: (identifier)
@@ -49,5 +47,4 @@ SYSTEM-DIALOG PRINTER-SETUP PORTRAIT UPDATE pset IN WINDOW winH.
   (system_dialog_printer_setup_statement
     update: (identifier)
     (in_window_phrase
-
       window: (identifier))))
