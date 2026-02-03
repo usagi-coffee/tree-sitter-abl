@@ -28,7 +28,6 @@ module.exports = grammar({
   word: ($) => $.identifier,
   conflicts: ($) => [
     [$._primary_expression, $.function_call],
-    [$.object_access],
 
     // DISPLAY x IN WINDOW w ; DISPLAY x IN FRAME y - both can work
     [$.__display_record, $._in_frame_target, $._primary_expression],
@@ -251,16 +250,30 @@ module.exports = grammar({
 
       // Accessors
       object_access: ($) =>
-        seq(
-          optional(field("widget", alias($._widgets, $.identifier))),
-          field("left", choice($.identifier, $.qualified_name)),
-          repeat1(
+        prec.right(
+          choice(
             seq(
-              choice($._namecolon, token.immediate("?:")),
-              field("right", alias($._identifier_immediate, $.identifier)),
+              field("widget", alias($._widgets, $.identifier)),
+              field("left", choice($.identifier, $.qualified_name)),
+              repeat1(
+                seq(
+                  choice($._namecolon, token.immediate("?:")),
+                  field("right", alias($._identifier_immediate, $.identifier)),
+                ),
+              ),
+              optional(seq(kw("IN"), $._widgets, field("in", $.identifier))),
+            ),
+            seq(
+              field("left", choice($.identifier, $.qualified_name)),
+              repeat1(
+                seq(
+                  choice($._namecolon, token.immediate("?:")),
+                  field("right", alias($._identifier_immediate, $.identifier)),
+                ),
+              ),
+              optional(seq(kw("IN"), $._widgets, field("in", $.identifier))),
             ),
           ),
-          optional(seq(kw("IN"), $._widgets, field("in", $.identifier))),
         ),
 
       scoped_name: ($) =>
