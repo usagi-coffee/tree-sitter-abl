@@ -44,7 +44,7 @@
   - Example: `bun run reference '*statement*'`: Returns all statements entries that include `statement` (names only).
   - Example: `bun run reference '*'`: Returns all entries in reference (names only).
 
-Strongly prefer using these commands as they have helpful side-effects like returning `STATE_COUNT` or `ACTION_COUNT`.
+Strongly prefer using these commands as they have helpful side-effects like returning `ACTION_COUNT`, `STATE_COUNT` and `LARGE_STATE_COUNT`.
 
 ## Conventions
 
@@ -59,7 +59,8 @@ Strongly prefer using these commands as they have helpful side-effects like retu
 - Treat `(ERROR)` and `(MISSING)` nodes in the test output aserrors that need to be fixed.
 - Use compact rule formatting: keep one-line rules adjacent with no blank lines, avoid blank lines between consecutive one-line rules.
 - The grammar should avoid permissive or catch-all rules that allow invalid syntax to be parsed successfully.
-- ABL grammar is filled with optionals, be careful not to explode `tree-sitter`'s `ACTION_COUNT` AND `STATE_COUNT`, always check modification's impact on `ACTION_COUNT` and `STATE_COUNT`.
+- ABL grammar is filled with optionals, be careful not to explode `tree-sitter`'s `ACTION_COUNT`, `STATE_COUNT` and `LARGE_STATE_COUNT` always check modification's impact on these.
+- When weighing the impact of the modifications on `ACTION_COUNT`, `LARGE_STATE_COUNT` and `STATE_COUNT` prefer biggest reductions to `ACTION_COUNT` but don't treat it as absolute, if `ACTION_COUNT` goes up by a small amount but `LARGE_STATE_COUNT` goes down by a few hundred then keep the changes anyway.
 - Do not adjust or remove tests just to satisfy test passing, just fix the underlying parsing issue or ask me first to remove if it's really not supported.
 - Don't do unnecessary comments like `// something is above`.
 - Never add `(ERROR` nodes to expected syntax trees in tests, it's pointless, fix the grammar not the test itself.
@@ -68,6 +69,7 @@ Strongly prefer using these commands as they have helpful side-effects like retu
 - Avoid hacks like cramming `FRAME` into regex to avoid the issue.
 - Add purpose + example comments before each precedence group when modifying precedences; add reference notes for each precedence entry.
 - If needed, refactor rules to be easier to target in precedence (e.g you can't target repeat(some_rule), its fine to refactor into e.g `__statement_expression: ($) => $._expression`.
+-
 
 ## Notes
 

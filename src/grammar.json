@@ -13595,7 +13595,7 @@
                         "name": "window",
                         "content": {
                           "type": "SYMBOL",
-                          "name": "_expression"
+                          "name": "_window_handle"
                         }
                       }
                     ]
@@ -13719,7 +13719,7 @@
                       "name": "window",
                       "content": {
                         "type": "SYMBOL",
-                        "name": "_expression"
+                        "name": "_window_handle"
                       }
                     }
                   ]
@@ -15629,7 +15629,7 @@
                   "name": "window",
                   "content": {
                     "type": "SYMBOL",
-                    "name": "_expression"
+                    "name": "_window_handle"
                   }
                 }
               ]
@@ -21012,7 +21012,7 @@
                   "name": "window",
                   "content": {
                     "type": "SYMBOL",
-                    "name": "_expression"
+                    "name": "_window_handle"
                   }
                 }
               ]
@@ -25297,7 +25297,7 @@
                   "name": "window",
                   "content": {
                     "type": "SYMBOL",
-                    "name": "_expression"
+                    "name": "_window_handle"
                   }
                 }
               ]
@@ -30407,7 +30407,7 @@
                   "name": "window",
                   "content": {
                     "type": "SYMBOL",
-                    "name": "_expression"
+                    "name": "_window_handle"
                   }
                 }
               ]
@@ -31629,7 +31629,7 @@
                   "name": "window",
                   "content": {
                     "type": "SYMBOL",
-                    "name": "_expression"
+                    "name": "_window_handle"
                   }
                 }
               ]
@@ -31722,7 +31722,7 @@
                   "name": "window",
                   "content": {
                     "type": "SYMBOL",
-                    "name": "_expression"
+                    "name": "_window_handle"
                   }
                 }
               ]
@@ -39251,7 +39251,7 @@
                   "name": "window",
                   "content": {
                     "type": "SYMBOL",
-                    "name": "_expression"
+                    "name": "_window_handle"
                   }
                 }
               ]
@@ -40328,7 +40328,7 @@
                   "name": "window",
                   "content": {
                     "type": "SYMBOL",
-                    "name": "_expression"
+                    "name": "_window_handle"
                   }
                 }
               ]
@@ -40533,7 +40533,7 @@
                     "name": "window",
                     "content": {
                       "type": "SYMBOL",
-                      "name": "_expression"
+                      "name": "_window_handle"
                     }
                   }
                 ]
@@ -40710,7 +40710,7 @@
                     "name": "window",
                     "content": {
                       "type": "SYMBOL",
-                      "name": "_expression"
+                      "name": "_window_handle"
                     }
                   }
                 ]
@@ -41000,7 +41000,7 @@
                     "name": "window",
                     "content": {
                       "type": "SYMBOL",
-                      "name": "_expression"
+                      "name": "_window_handle"
                     }
                   }
                 ]
@@ -41169,7 +41169,7 @@
                     "name": "window",
                     "content": {
                       "type": "SYMBOL",
-                      "name": "_expression"
+                      "name": "_window_handle"
                     }
                   }
                 ]
@@ -47396,7 +47396,7 @@
           "name": "window",
           "content": {
             "type": "SYMBOL",
-            "name": "_expression"
+            "name": "_window_handle"
           }
         }
       ]
@@ -56712,6 +56712,27 @@
         {
           "type": "SYMBOL",
           "name": "function_call"
+        }
+      ]
+    },
+    "_window_handle": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "_identifier_or_qualified_name"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "object_access"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "function_call"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "scoped_name"
         }
       ]
     },

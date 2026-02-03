@@ -10,7 +10,7 @@ module.exports = ({ kw }) => ({
           kw("NO-MESSAGE"),
         ),
       ),
-      optional(seq(kw("IN"), kw("WINDOW"), field("window", $._expression))),
+      optional(seq(kw("IN"), kw("WINDOW"), field("window", $._window_handle))),
       $._terminator,
     ),
 });

@@ -4,13 +4,7 @@ module.exports = ({ kw }) => ({
   temp_table_definition: ($) =>
     seq(
       kw("DEFINE", { offset: 3 }),
-      ...definitionModifiers($, kw, {
-        access: ["PRIVATE", "PROTECTED"],
-        new: true,
-        scope: ["SHARED", "GLOBAL"],
-        static: true,
-        serializable: true,
-      }),
+      optional($.__temp_table_modifier),
       kw("TEMP-TABLE"),
       $.__temp_table_body,
       $._terminator,
@@ -137,4 +131,21 @@ module.exports = ({ kw }) => ({
   __temp_table_label_list: ($) =>
     seq($.string_literal, repeat(seq(",", $.string_literal))),
   __temp_table_field_name: ($) => $._identifier_or_qualified_name,
+  __temp_table_modifier: ($) =>
+    choice(
+      seq(
+        alias(kw("NEW"), $.new_modifier),
+        optional(alias(kw("GLOBAL"), $.scope_modifier)),
+        alias(kw("SHARED"), $.scope_modifier),
+      ),
+      alias(kw("SHARED"), $.scope_modifier),
+      seq(
+        alias(choice(kw("PRIVATE"), kw("PROTECTED")), $.access_modifier),
+        optional(alias(kw("STATIC"), $.static_modifier)),
+        optional(alias($.__temp_table_serialization, $.serialization_modifier)),
+      ),
+      alias($.__temp_table_serialization, $.serialization_modifier),
+    ),
+  __temp_table_serialization: ($) =>
+    choice(kw("SERIALIZABLE"), kw("NON-SERIALIZABLE")),
 });

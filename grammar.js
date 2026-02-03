@@ -383,6 +383,13 @@ module.exports = grammar({
           $.object_access,
           $.function_call,
         ),
+      _window_handle: ($) =>
+        choice(
+          $._identifier_or_qualified_name,
+          $.object_access,
+          $.function_call,
+          $.scoped_name,
+        ),
 
       // Identifiers
       // BE CAREFUL MODIFYING HERE, IDENTIFIER ORDER FOR SOME REASON MATTERS!

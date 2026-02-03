@@ -9,7 +9,7 @@ module.exports = ({ kw }) => ({
     ),
 
   __view_in_window: ($) =>
-    seq(kw("IN"), kw("WINDOW"), field("window", $._expression)),
+    seq(kw("IN"), kw("WINDOW"), field("window", $._window_handle)),
 
   __view_stream: ($) =>
     seq(

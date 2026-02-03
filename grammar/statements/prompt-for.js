@@ -26,7 +26,7 @@ module.exports = ({ kw }) => ({
           ),
         ),
       ),
-      optional(seq(kw("IN"), kw("WINDOW"), field("window", $._expression))),
+      optional(seq(kw("IN"), kw("WINDOW"), field("window", $._window_handle))),
       optional($.frame_phrase),
     ),
 
@@ -34,7 +34,7 @@ module.exports = ({ kw }) => ({
     seq(
       repeat1(alias($.__prompt_for_field, $.field)),
       optional(alias($.__prompt_for_go_on, $.go_on_phrase)),
-      optional(seq(kw("IN"), kw("WINDOW"), field("window", $._expression))),
+        optional(seq(kw("IN"), kw("WINDOW"), field("window", $._window_handle))),
       optional($.frame_phrase),
       optional($.editing_phrase),
     ),
