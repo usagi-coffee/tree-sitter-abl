@@ -85,8 +85,7 @@ module.exports = grammar({
         ),
       _include_argument_value: ($) =>
         choice(
-          $.qualified_name,
-          $.identifier,
+          $._identifier_or_qualified_name,
           $.string_literal,
           $.number_literal,
           alias($._signed_number_literal, $.number_literal),
@@ -112,8 +111,7 @@ module.exports = grammar({
         ),
       __constant_value: ($) =>
         choice(
-          $.qualified_name,
-          $.identifier,
+          $._identifier_or_qualified_name,
           $.string_literal,
           $.number_literal,
           alias($._signed_number_literal, $.number_literal),
@@ -210,8 +208,7 @@ module.exports = grammar({
 
       _assignable: ($) =>
         choice(
-          $.identifier,
-          $.qualified_name,
+          $._identifier_or_qualified_name,
           $.object_access,
           $.array_access,
           $.function_call,

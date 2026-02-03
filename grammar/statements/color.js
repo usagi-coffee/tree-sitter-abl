@@ -24,5 +24,5 @@ module.exports = ({ kw }) => ({
     ),
 
   __color_field: ($) =>
-    choice($.qualified_name, $.scoped_name, $.identifier, $.input_expression),
+    choice($._identifier_or_qualified_name, $.scoped_name, $.input_expression),
 });

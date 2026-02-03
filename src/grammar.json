@@ -161,11 +161,7 @@
       "members": [
         {
           "type": "SYMBOL",
-          "name": "qualified_name"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "identifier"
+          "name": "_identifier_or_qualified_name"
         },
         {
           "type": "SYMBOL",
@@ -295,11 +291,7 @@
       "members": [
         {
           "type": "SYMBOL",
-          "name": "qualified_name"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "identifier"
+          "name": "_identifier_or_qualified_name"
         },
         {
           "type": "SYMBOL",
@@ -2788,11 +2780,7 @@
             "members": [
               {
                 "type": "SYMBOL",
-                "name": "identifier"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "qualified_name"
+                "name": "_identifier_or_qualified_name"
               },
               {
                 "type": "SYMBOL",
@@ -8878,15 +8866,11 @@
       "members": [
         {
           "type": "SYMBOL",
-          "name": "qualified_name"
+          "name": "_identifier_or_qualified_name"
         },
         {
           "type": "SYMBOL",
           "name": "scoped_name"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "identifier"
         },
         {
           "type": "SYMBOL",
@@ -55078,11 +55062,7 @@
       "members": [
         {
           "type": "SYMBOL",
-          "name": "identifier"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "qualified_name"
+          "name": "_identifier_or_qualified_name"
         },
         {
           "type": "SYMBOL",
