@@ -1,47 +1,67 @@
 module.exports = ({ kw }) => ({
-  dde_advise_statement: ($) =>
+  dde_statement: ($) =>
     seq(
       kw("DDE"),
-      kw("ADVISE"),
-      field("ddeid", $._expression),
-      field("action", choice(kw("START"), kw("STOP"))),
-      kw("ITEM"),
-      field("item", $._expression),
-      optional(seq(kw("TIME"), field("time", $._expression))),
+      choice(
+        seq(
+          field("action", alias(kw("ADVISE"), $.identifier)),
+          $.__dde_advise_body,
+        ),
+        seq(
+          field("action", alias(kw("EXECUTE"), $.identifier)),
+          $.__dde_execute_body,
+        ),
+        seq(
+          field("action", alias(kw("GET"), $.identifier)),
+          $.__dde_get_body,
+        ),
+        seq(
+          field("action", alias(kw("INITIATE"), $.identifier)),
+          $.__dde_initiate_body,
+        ),
+        seq(
+          field("action", alias(kw("REQUEST"), $.identifier)),
+          $.__dde_request_body,
+        ),
+        seq(
+          field("action", alias(kw("SEND"), $.identifier)),
+          $.__dde_send_body,
+        ),
+        seq(
+          field("action", alias(kw("TERMINATE"), $.identifier)),
+          $.__dde_terminate_body,
+        ),
+      ),
       optional(kw("NO-ERROR")),
       $._terminator,
     ),
 
-  dde_execute_statement: ($) =>
+  __dde_advise_body: ($) =>
     seq(
-      kw("DDE"),
-      kw("EXECUTE"),
+      field("ddeid", $._expression),
+      field("mode", alias(choice(kw("START"), kw("STOP")), $.identifier)),
+      kw("ITEM"),
+      field("item", $._expression),
+      optional(seq(kw("TIME"), field("time", $._expression))),
+    ),
+  __dde_execute_body: ($) =>
+    seq(
       field("ddeid", $._expression),
       kw("COMMAND"),
       field("command", $._expression),
       optional(seq(kw("TIME"), field("time", $._expression))),
-      optional(kw("NO-ERROR")),
-      $._terminator,
     ),
-
-  dde_get_statement: ($) =>
+  __dde_get_body: ($) =>
     seq(
-      kw("DDE"),
-      kw("GET"),
       field("ddeid", $._expression),
       kw("TARGET"),
       field("target", $._assignable),
       kw("ITEM"),
       field("item", $._expression),
       optional(seq(kw("TIME"), field("time", $._expression))),
-      optional(kw("NO-ERROR")),
-      $._terminator,
     ),
-
-  dde_initiate_statement: ($) =>
+  __dde_initiate_body: ($) =>
     seq(
-      kw("DDE"),
-      kw("INITIATE"),
       field("ddeid", $._expression),
       kw("FRAME"),
       field("frame", $.identifier),
@@ -49,44 +69,24 @@ module.exports = ({ kw }) => ({
       field("application", $._expression),
       kw("TOPIC"),
       field("topic", $._expression),
-      optional(kw("NO-ERROR")),
-      $._terminator,
     ),
-
-  dde_request_statement: ($) =>
+  __dde_request_body: ($) =>
     seq(
-      kw("DDE"),
-      kw("REQUEST"),
       field("ddeid", $._expression),
       kw("TARGET"),
       field("target", $._assignable),
       kw("ITEM"),
       field("item", $._expression),
       optional(seq(kw("TIME"), field("time", $._expression))),
-      optional(kw("NO-ERROR")),
-      $._terminator,
     ),
-
-  dde_send_statement: ($) =>
+  __dde_send_body: ($) =>
     seq(
-      kw("DDE"),
-      kw("SEND"),
       field("ddeid", $._expression),
       kw("SOURCE"),
       field("source", $._expression),
       kw("ITEM"),
       field("item", $._expression),
       optional(seq(kw("TIME"), field("time", $._expression))),
-      optional(kw("NO-ERROR")),
-      $._terminator,
     ),
-
-  dde_terminate_statement: ($) =>
-    seq(
-      kw("DDE"),
-      kw("TERMINATE"),
-      field("ddeid", $._expression),
-      optional(kw("NO-ERROR")),
-      $._terminator,
-    ),
+  __dde_terminate_body: ($) => seq(field("ddeid", $._expression)),
 });

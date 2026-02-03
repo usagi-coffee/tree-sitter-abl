@@ -14221,7 +14221,7 @@
         }
       ]
     },
-    "dde_advise_statement": {
+    "dde_statement": {
       "type": "SEQ",
       "members": [
         {
@@ -14238,18 +14238,257 @@
           "value": "DDE"
         },
         {
-          "type": "ALIAS",
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "PATTERN",
-              "value": "ADVISE",
-              "flags": "i"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "FIELD",
+                  "name": "action",
+                  "content": {
+                    "type": "ALIAS",
+                    "content": {
+                      "type": "ALIAS",
+                      "content": {
+                        "type": "TOKEN",
+                        "content": {
+                          "type": "PATTERN",
+                          "value": "ADVISE",
+                          "flags": "i"
+                        }
+                      },
+                      "named": false,
+                      "value": "ADVISE"
+                    },
+                    "named": true,
+                    "value": "identifier"
+                  }
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "__dde_advise_body"
+                }
+              ]
+            },
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "FIELD",
+                  "name": "action",
+                  "content": {
+                    "type": "ALIAS",
+                    "content": {
+                      "type": "ALIAS",
+                      "content": {
+                        "type": "TOKEN",
+                        "content": {
+                          "type": "PATTERN",
+                          "value": "EXECUTE",
+                          "flags": "i"
+                        }
+                      },
+                      "named": false,
+                      "value": "EXECUTE"
+                    },
+                    "named": true,
+                    "value": "identifier"
+                  }
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "__dde_execute_body"
+                }
+              ]
+            },
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "FIELD",
+                  "name": "action",
+                  "content": {
+                    "type": "ALIAS",
+                    "content": {
+                      "type": "ALIAS",
+                      "content": {
+                        "type": "TOKEN",
+                        "content": {
+                          "type": "PATTERN",
+                          "value": "GET",
+                          "flags": "i"
+                        }
+                      },
+                      "named": false,
+                      "value": "GET"
+                    },
+                    "named": true,
+                    "value": "identifier"
+                  }
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "__dde_get_body"
+                }
+              ]
+            },
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "FIELD",
+                  "name": "action",
+                  "content": {
+                    "type": "ALIAS",
+                    "content": {
+                      "type": "ALIAS",
+                      "content": {
+                        "type": "TOKEN",
+                        "content": {
+                          "type": "PATTERN",
+                          "value": "INITIATE",
+                          "flags": "i"
+                        }
+                      },
+                      "named": false,
+                      "value": "INITIATE"
+                    },
+                    "named": true,
+                    "value": "identifier"
+                  }
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "__dde_initiate_body"
+                }
+              ]
+            },
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "FIELD",
+                  "name": "action",
+                  "content": {
+                    "type": "ALIAS",
+                    "content": {
+                      "type": "ALIAS",
+                      "content": {
+                        "type": "TOKEN",
+                        "content": {
+                          "type": "PATTERN",
+                          "value": "REQUEST",
+                          "flags": "i"
+                        }
+                      },
+                      "named": false,
+                      "value": "REQUEST"
+                    },
+                    "named": true,
+                    "value": "identifier"
+                  }
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "__dde_request_body"
+                }
+              ]
+            },
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "FIELD",
+                  "name": "action",
+                  "content": {
+                    "type": "ALIAS",
+                    "content": {
+                      "type": "ALIAS",
+                      "content": {
+                        "type": "TOKEN",
+                        "content": {
+                          "type": "PATTERN",
+                          "value": "SEND",
+                          "flags": "i"
+                        }
+                      },
+                      "named": false,
+                      "value": "SEND"
+                    },
+                    "named": true,
+                    "value": "identifier"
+                  }
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "__dde_send_body"
+                }
+              ]
+            },
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "FIELD",
+                  "name": "action",
+                  "content": {
+                    "type": "ALIAS",
+                    "content": {
+                      "type": "ALIAS",
+                      "content": {
+                        "type": "TOKEN",
+                        "content": {
+                          "type": "PATTERN",
+                          "value": "TERMINATE",
+                          "flags": "i"
+                        }
+                      },
+                      "named": false,
+                      "value": "TERMINATE"
+                    },
+                    "named": true,
+                    "value": "identifier"
+                  }
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "__dde_terminate_body"
+                }
+              ]
             }
-          },
-          "named": false,
-          "value": "ADVISE"
+          ]
         },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PATTERN",
+                  "value": "NO-ERROR",
+                  "flags": "i"
+                }
+              },
+              "named": false,
+              "value": "NO-ERROR"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_terminator"
+        }
+      ]
+    },
+    "__dde_advise_body": {
+      "type": "SEQ",
+      "members": [
         {
           "type": "FIELD",
           "name": "ddeid",
@@ -14260,37 +14499,42 @@
         },
         {
           "type": "FIELD",
-          "name": "action",
+          "name": "mode",
           "content": {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "ALIAS",
-                "content": {
-                  "type": "TOKEN",
+            "type": "ALIAS",
+            "content": {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "ALIAS",
                   "content": {
-                    "type": "PATTERN",
-                    "value": "START",
-                    "flags": "i"
-                  }
+                    "type": "TOKEN",
+                    "content": {
+                      "type": "PATTERN",
+                      "value": "START",
+                      "flags": "i"
+                    }
+                  },
+                  "named": false,
+                  "value": "START"
                 },
-                "named": false,
-                "value": "START"
-              },
-              {
-                "type": "ALIAS",
-                "content": {
-                  "type": "TOKEN",
+                {
+                  "type": "ALIAS",
                   "content": {
-                    "type": "PATTERN",
-                    "value": "STOP",
-                    "flags": "i"
-                  }
-                },
-                "named": false,
-                "value": "STOP"
-              }
-            ]
+                    "type": "TOKEN",
+                    "content": {
+                      "type": "PATTERN",
+                      "value": "STOP",
+                      "flags": "i"
+                    }
+                  },
+                  "named": false,
+                  "value": "STOP"
+                }
+              ]
+            },
+            "named": true,
+            "value": "identifier"
           }
         },
         {
@@ -14347,63 +14591,12 @@
               "type": "BLANK"
             }
           ]
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "PATTERN",
-                  "value": "NO-ERROR",
-                  "flags": "i"
-                }
-              },
-              "named": false,
-              "value": "NO-ERROR"
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_terminator"
         }
       ]
     },
-    "dde_execute_statement": {
+    "__dde_execute_body": {
       "type": "SEQ",
       "members": [
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "PATTERN",
-              "value": "DDE",
-              "flags": "i"
-            }
-          },
-          "named": false,
-          "value": "DDE"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "PATTERN",
-              "value": "EXECUTE",
-              "flags": "i"
-            }
-          },
-          "named": false,
-          "value": "EXECUTE"
-        },
         {
           "type": "FIELD",
           "name": "ddeid",
@@ -14466,63 +14659,12 @@
               "type": "BLANK"
             }
           ]
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "PATTERN",
-                  "value": "NO-ERROR",
-                  "flags": "i"
-                }
-              },
-              "named": false,
-              "value": "NO-ERROR"
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_terminator"
         }
       ]
     },
-    "dde_get_statement": {
+    "__dde_get_body": {
       "type": "SEQ",
       "members": [
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "PATTERN",
-              "value": "DDE",
-              "flags": "i"
-            }
-          },
-          "named": false,
-          "value": "DDE"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "PATTERN",
-              "value": "GET",
-              "flags": "i"
-            }
-          },
-          "named": false,
-          "value": "GET"
-        },
         {
           "type": "FIELD",
           "name": "ddeid",
@@ -14606,63 +14748,12 @@
               "type": "BLANK"
             }
           ]
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "PATTERN",
-                  "value": "NO-ERROR",
-                  "flags": "i"
-                }
-              },
-              "named": false,
-              "value": "NO-ERROR"
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_terminator"
         }
       ]
     },
-    "dde_initiate_statement": {
+    "__dde_initiate_body": {
       "type": "SEQ",
       "members": [
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "PATTERN",
-              "value": "DDE",
-              "flags": "i"
-            }
-          },
-          "named": false,
-          "value": "DDE"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "PATTERN",
-              "value": "INITIATE",
-              "flags": "i"
-            }
-          },
-          "named": false,
-          "value": "INITIATE"
-        },
         {
           "type": "FIELD",
           "name": "ddeid",
@@ -14733,63 +14824,12 @@
             "type": "SYMBOL",
             "name": "_expression"
           }
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "PATTERN",
-                  "value": "NO-ERROR",
-                  "flags": "i"
-                }
-              },
-              "named": false,
-              "value": "NO-ERROR"
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_terminator"
         }
       ]
     },
-    "dde_request_statement": {
+    "__dde_request_body": {
       "type": "SEQ",
       "members": [
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "PATTERN",
-              "value": "DDE",
-              "flags": "i"
-            }
-          },
-          "named": false,
-          "value": "DDE"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "PATTERN",
-              "value": "REQUEST",
-              "flags": "i"
-            }
-          },
-          "named": false,
-          "value": "REQUEST"
-        },
         {
           "type": "FIELD",
           "name": "ddeid",
@@ -14873,63 +14913,12 @@
               "type": "BLANK"
             }
           ]
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "PATTERN",
-                  "value": "NO-ERROR",
-                  "flags": "i"
-                }
-              },
-              "named": false,
-              "value": "NO-ERROR"
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_terminator"
         }
       ]
     },
-    "dde_send_statement": {
+    "__dde_send_body": {
       "type": "SEQ",
       "members": [
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "PATTERN",
-              "value": "DDE",
-              "flags": "i"
-            }
-          },
-          "named": false,
-          "value": "DDE"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "PATTERN",
-              "value": "SEND",
-              "flags": "i"
-            }
-          },
-          "named": false,
-          "value": "SEND"
-        },
         {
           "type": "FIELD",
           "name": "ddeid",
@@ -15013,63 +15002,12 @@
               "type": "BLANK"
             }
           ]
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "PATTERN",
-                  "value": "NO-ERROR",
-                  "flags": "i"
-                }
-              },
-              "named": false,
-              "value": "NO-ERROR"
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_terminator"
         }
       ]
     },
-    "dde_terminate_statement": {
+    "__dde_terminate_body": {
       "type": "SEQ",
       "members": [
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "PATTERN",
-              "value": "DDE",
-              "flags": "i"
-            }
-          },
-          "named": false,
-          "value": "DDE"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "PATTERN",
-              "value": "TERMINATE",
-              "flags": "i"
-            }
-          },
-          "named": false,
-          "value": "TERMINATE"
-        },
         {
           "type": "FIELD",
           "name": "ddeid",
@@ -15077,31 +15015,6 @@
             "type": "SYMBOL",
             "name": "_expression"
           }
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "PATTERN",
-                  "value": "NO-ERROR",
-                  "flags": "i"
-                }
-              },
-              "named": false,
-              "value": "NO-ERROR"
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_terminator"
         }
       ]
     },
@@ -61501,31 +61414,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "dde_advise_statement"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "dde_execute_statement"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "dde_get_statement"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "dde_initiate_statement"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "dde_request_statement"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "dde_send_statement"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "dde_terminate_statement"
+          "name": "dde_statement"
         },
         {
           "type": "SYMBOL",

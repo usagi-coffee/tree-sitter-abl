@@ -13,33 +13,40 @@ DDE TERMINATE 1 NO-ERROR.
 --------------------------------------------------------------------------------
 
 (source_code
-  (dde_advise_statement
+  (dde_statement
+    action: (identifier)
     ddeid: (number_literal)
     item: (string_literal)
     time: (number_literal))
-  (dde_execute_statement
+  (dde_statement
+    action: (identifier)
     ddeid: (number_literal)
     command: (string_literal)
     time: (number_literal))
-  (dde_get_statement
+  (dde_statement
+    action: (identifier)
     ddeid: (number_literal)
     target: (identifier)
     item: (string_literal)
     time: (number_literal))
-  (dde_initiate_statement
+  (dde_statement
+    action: (identifier)
     ddeid: (number_literal)
     frame: (identifier)
     application: (string_literal)
     topic: (string_literal))
-  (dde_request_statement
+  (dde_statement
+    action: (identifier)
     ddeid: (number_literal)
     target: (identifier)
     item: (string_literal)
     time: (number_literal))
-  (dde_send_statement
+  (dde_statement
+    action: (identifier)
     ddeid: (number_literal)
     source: (string_literal)
     item: (string_literal)
     time: (number_literal))
-  (dde_terminate_statement
+  (dde_statement
+    action: (identifier)
     ddeid: (number_literal)))
