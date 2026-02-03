@@ -62236,30 +62236,7 @@
       "_primary_expression"
     ],
     [
-      "__display_items",
-      "frame_phrase"
-    ],
-    [
       "__widget_entry"
-    ],
-    [
-      "__prompt_for_record_body",
-      "__prompt_for_fields_body"
-    ],
-    [
-      "__update_field",
-      "__update_record"
-    ],
-    [
-      "__browse_modifier",
-      "__buffer_modifier",
-      "__data_source_modifier",
-      "__dataset_modifier",
-      "__event_modifier",
-      "__property_definition_modifier",
-      "__query_modifier",
-      "__temp_table_modifier",
-      "__variable_modifier"
     ],
     [
       "__buffer_modifier",

@@ -47,7 +47,7 @@ const LABEL_KEYWORD_WORDS = collect_keyword_words(
     "SOURCE-PROCEDURE",
     "TARGET-PROCEDURE",
     "THIS-PROCEDURE",
-  ],
+  ]
 );
 
 const WIDGETS = [
@@ -116,27 +116,11 @@ module.exports = grammar({
     [$._primary_expression, $.function_call],
     // DISPLAY x IN WINDOW w ; DISPLAY x IN FRAME y - both can work
     [$.__display_record, $.widget_qualified_name, $._primary_expression],
-    // DISPLAY items vs frame phrase (WITH ...)
-    [$.__display_items, $.frame_phrase],
     // Field / Column / Handle can be just an identifier
     [$.__widget_entry],
-    // Just IDENTIFIER + optionals
-    [$.__prompt_for_record_body, $.__prompt_for_fields_body],
-    [$.__update_field, $.__update_record],
 
     // DEFINE modifiers prefix conflicts
     // Conflicts approach has slightly better state reduction (~500) than doing it conflicts free
-    [
-      $.__browse_modifier,
-      $.__buffer_modifier,
-      $.__data_source_modifier,
-      $.__dataset_modifier,
-      $.__event_modifier,
-      $.__property_definition_modifier,
-      $.__query_modifier,
-      $.__temp_table_modifier,
-      $.__variable_modifier,
-    ],
     [
       $.__buffer_modifier,
       $.__property_access_modifier,
@@ -202,8 +186,8 @@ module.exports = grammar({
         token(
           choice(
             /\{\{&[^}\r\n]+\}[^\s}\r\n]*\.i[ \t]*\}\.?[ \t]*\r?\n/i,
-            /\{[^\s}\r\n]*\.i[ \t]*\}\.?[ \t]*\r?\n/i,
-          ),
+            /\{[^\s}\r\n]*\.i[ \t]*\}\.?[ \t]*\r?\n/i
+          )
         ),
       include_expression: ($) =>
         seq(
@@ -211,7 +195,7 @@ module.exports = grammar({
           field("file", $._include_file_reference),
           repeat(field("argument", $.include_argument)),
           "}",
-          optional("."),
+          optional(".")
         ),
       include_argument: ($) =>
         choice($.include_named_argument, $._include_argument_value),
@@ -219,7 +203,7 @@ module.exports = grammar({
         seq(
           "&",
           field("name", $.identifier),
-          optional(seq("=", field("value", $._include_argument_value))),
+          optional(seq("=", field("value", $._include_argument_value)))
         ),
       _include_argument_value: ($) =>
         choice(
@@ -230,7 +214,7 @@ module.exports = grammar({
           $.boolean_literal,
           alias($.constant_expression, $.constant),
           $.argument_reference,
-          $.parenthesized_identifier,
+          $.parenthesized_identifier
         ),
 
       // Preprocessor
@@ -245,7 +229,7 @@ module.exports = grammar({
           "{&",
           $.identifier,
           optional(seq("=", field("value", $.__constant_value))),
-          "}",
+          "}"
         ),
       __constant_value: ($) =>
         choice(
@@ -256,7 +240,7 @@ module.exports = grammar({
           $.boolean_literal,
           alias($.constant_expression, $.constant),
           $.argument_reference,
-          $.parenthesized_identifier,
+          $.parenthesized_identifier
         ),
       argument_reference: ($) => token(/\{[0-9A-Za-z_-]+\}/),
 
@@ -273,10 +257,8 @@ module.exports = grammar({
         seq(
           $._escaped_string,
           optional(
-            token.immediate(
-              /:(?:[RLCT](?:U)?(?:[0-9]+)?|U(?:[0-9]+)?|[0-9]+)/i,
-            ),
-          ),
+            token.immediate(/:(?:[RLCT](?:U)?(?:[0-9]+)?|U(?:[0-9]+)?|[0-9]+)/i)
+          )
         ),
       null_literal: ($) => token("?"),
       boolean_literal: ($) => token(/TRUE|FALSE|YES|NO/i),
@@ -291,7 +273,7 @@ module.exports = grammar({
           $.scoped_name,
           $.qualified_name,
           $.nested_type_name,
-          $.identifier,
+          $.identifier
         ),
       _type_name: ($) => choice($.generic_type, $._simple_type_name),
       _type_or_string: ($) => choice($._type_name, $.string_literal),
@@ -303,14 +285,14 @@ module.exports = grammar({
       _stream_phrase: ($) =>
         seq(
           choice(kw("STREAM"), kw("STREAM-HANDLE")),
-          field("stream", $.identifier),
+          field("stream", $.identifier)
         ),
       _events: ($) =>
         choice(
           $.identifier,
           $.string_literal,
           $.number_literal,
-          alias($._signed_number_literal, $.number_literal),
+          alias($._signed_number_literal, $.number_literal)
         ),
 
       // Operators
@@ -327,8 +309,8 @@ module.exports = grammar({
             field("right", choice($.array_initializer, $._expression)),
             optional($.widget_phrase),
             optional(alias(kw("NO-ERROR"), $.no_error)),
-            $._terminator,
-          ),
+            $._terminator
+          )
         ),
 
       _assignable: ($) =>
@@ -338,7 +320,7 @@ module.exports = grammar({
           $.widget_qualified_name,
           $.array_access,
           $.function_call,
-          $.system_handle_identifier,
+          $.system_handle_identifier
         ),
 
       // Expressions
@@ -347,7 +329,7 @@ module.exports = grammar({
       unary_expression: ($) =>
         choice(
           prec("unary", seq(choice("+", "-"), $._expression)),
-          prec("not", seq(kw("NOT"), $._expression)),
+          prec("not", seq(kw("NOT"), $._expression))
         ),
       binary_expression: ($) =>
         binary_expression($, $._expression, $._comparison_operator),
@@ -361,7 +343,7 @@ module.exports = grammar({
         choice(
           alias($.binary_expression_no_eq, $.binary_expression),
           $.unary_expression,
-          $._primary_expression,
+          $._primary_expression
         ),
       // excludes `=` to disambiguate assignment vs equality comparison at statement level.
       _comparison_operator_no_eq: ($) => choice(...COMPARISON_OPERATORS),
@@ -370,7 +352,7 @@ module.exports = grammar({
         binary_expression(
           $,
           $._statement_expression,
-          $._comparison_operator_no_eq,
+          $._comparison_operator_no_eq
         ),
 
       // Accessors
@@ -378,15 +360,15 @@ module.exports = grammar({
         seq(
           field(
             "left",
-            choice($._identifier_or_qualified_name, $.system_handle_identifier),
+            choice($._identifier_or_qualified_name, $.system_handle_identifier)
           ),
-          $._object_access_tail,
+          $._object_access_tail
         ),
       _object_access_widget: ($) =>
         seq(
           field("widget", alias($._widgets, $.identifier)),
           field("left", $._identifier_or_qualified_name),
-          $._object_access_tail,
+          $._object_access_tail
         ),
       object_access: ($) =>
         choice(
@@ -398,11 +380,11 @@ module.exports = grammar({
               choice(
                 $.function_call,
                 $.parenthesized_expression,
-                $.new_expression,
-              ),
+                $.new_expression
+              )
             ),
-            $._object_access_tail,
-          ),
+            $._object_access_tail
+          )
         ),
 
       scoped_name: ($) =>
@@ -411,9 +393,9 @@ module.exports = grammar({
           repeat1(
             seq(
               $._namedoublecolon,
-              field("right", alias($._identifier_immediate, $.identifier)),
-            ),
-          ),
+              field("right", alias($._identifier_immediate, $.identifier))
+            )
+          )
         ),
 
       qualified_name: ($) =>
@@ -422,9 +404,9 @@ module.exports = grammar({
           repeat1(
             seq(
               $._namedot,
-              field("right", alias($._identifier_immediate, $.identifier)),
-            ),
-          ),
+              field("right", alias($._identifier_immediate, $.identifier))
+            )
+          )
         ),
 
       nested_type_name: ($) =>
@@ -433,9 +415,9 @@ module.exports = grammar({
           repeat1(
             seq(
               $._nameplus,
-              field("right", alias($._identifier_immediate, $.identifier)),
-            ),
-          ),
+              field("right", alias($._identifier_immediate, $.identifier))
+            )
+          )
         ),
 
       // Array
@@ -448,7 +430,7 @@ module.exports = grammar({
           field("array", $._array_target),
           "[",
           optional($._array_subscript),
-          "]",
+          "]"
         ),
       _array_subscript: ($) =>
         choice(
@@ -456,8 +438,8 @@ module.exports = grammar({
           seq(
             field("start", $._expression),
             kw("FOR"),
-            field("count", $._expression),
-          ),
+            field("count", $._expression)
+          )
         ),
 
       // Callables
@@ -469,12 +451,12 @@ module.exports = grammar({
           choice(
             seq(
               choice(kw("TABLE"), kw("BUFFER")),
-              field("name", $._identifier_or_qualified_name),
+              field("name", $._identifier_or_qualified_name)
             ),
-            field("name", $._expression),
+            field("name", $._expression)
           ),
           optional(seq(kw("AS"), field("type", $._type_name))),
-          optional(kw("BY-REFERENCE")),
+          optional(kw("BY-REFERENCE"))
         ),
 
       function_call: ($) =>
@@ -484,10 +466,10 @@ module.exports = grammar({
             choice(
               $._identifier_or_qualified_name,
               $.object_access,
-              $.scoped_name,
-            ),
+              $.scoped_name
+            )
           ),
-          $.arguments,
+          $.arguments
         ),
 
       widget_qualified_name: ($) =>
@@ -498,12 +480,12 @@ module.exports = grammar({
               $._identifier_or_qualified_name,
               $.scoped_name,
               $.object_access,
-              $.function_call,
-            ),
+              $.function_call
+            )
           ),
           kw("IN"),
           $._widgets,
-          field("widget", $.identifier),
+          field("widget", $.identifier)
         ),
 
       _window_handle: ($) =>
@@ -511,7 +493,7 @@ module.exports = grammar({
           $._identifier_or_qualified_name,
           $.object_access,
           $.function_call,
-          $.scoped_name,
+          $.scoped_name
         ),
 
       // Identifiers
@@ -523,9 +505,9 @@ module.exports = grammar({
             1,
             new RegExp(
               `(${LABEL_KEYWORD_WORDS.map(escape_regex).join("|")})\\s*:`,
-              "i",
-            ),
-          ),
+              "i"
+            )
+          )
         ),
       system_handle_identifier: ($) =>
         alias(
@@ -534,11 +516,11 @@ module.exports = grammar({
               1,
               new RegExp(
                 `(${SYSTEM_HANDLE_WORDS.map(escape_regex).join("|")})`,
-                "i",
-              ),
-            ),
+                "i"
+              )
+            )
           ),
-          $.identifier,
+          $.identifier
         ),
       _label_identifier: ($) => $.identifier,
       _label: ($) =>
@@ -546,8 +528,8 @@ module.exports = grammar({
           1,
           choice(
             seq(field("label", $.identifier), $._colon),
-            field("label", alias($.label_keyword, $.identifier)),
-          ),
+            field("label", alias($.label_keyword, $.identifier))
+          )
         ),
       _identifier_immediate: ($) => token.immediate(/[_\p{L}][\p{L}\p{N}_-]*/i),
       parenthesized_identifier: ($) => seq("(", $.identifier, ")"),
@@ -555,8 +537,8 @@ module.exports = grammar({
         repeat1(
           seq(
             choice($._namecolon, token.immediate("?:")),
-            field("right", alias($._identifier_immediate, $.identifier)),
-          ),
+            field("right", alias($._identifier_immediate, $.identifier))
+          )
         ),
 
       _terminator: ($) => choice($._terminator_dot, ";"),
@@ -578,10 +560,10 @@ function binary_expression($, expression, comparison_operator) {
   return choice(
     prec.left(
       "multiplication",
-      seq(expression, choice("*", "/", kw("MOD"), kw("MODULO")), expression),
+      seq(expression, choice("*", "/", kw("MOD"), kw("MODULO")), expression)
     ),
     prec.left("add", seq(expression, choice("+", "-"), expression)),
     prec.left("compare", seq(expression, comparison_operator, expression)),
-    prec.left("logical", seq(expression, $._logical_operator, expression)),
+    prec.left("logical", seq(expression, $._logical_operator, expression))
   );
 }
