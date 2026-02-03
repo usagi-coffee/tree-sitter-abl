@@ -36796,11 +36796,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "qualified_name"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "identifier"
+          "name": "_identifier_or_qualified_name"
         }
       ]
     },

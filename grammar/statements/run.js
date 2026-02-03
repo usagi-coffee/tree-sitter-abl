@@ -86,7 +86,6 @@ module.exports = ({ kw }) => ({
       alias(kw("THIS-PROCEDURE"), $.this_procedure),
       alias(kw("THIS-OBJECT"), $.this_object),
       $.object_access,
-      $.qualified_name,
-      $.identifier,
+      $._identifier_or_qualified_name,
     ),
 });
