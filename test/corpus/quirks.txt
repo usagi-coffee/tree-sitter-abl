@@ -149,8 +149,8 @@ END.
         (identifier))))
   (for_statement
     (record
-      table: (identifier)
-      (no_lock))
+      (record
+        record: (identifier)))
     (body
       (display_statement
         record: (qualified_name

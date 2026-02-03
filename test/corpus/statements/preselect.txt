@@ -12,15 +12,15 @@ PRESELECT Order, EACH OrderLine OF Order NO-LOCK.
   (preselect_statement
     (preselect_record_list
       (preselect_record
-        table: (identifier)
-        (no_lock))))
+        (record_phrase
+          record: (identifier)))))
   (preselect_statement
     (preselect_record_list
       (preselect_record
-        table: (identifier)
-        of: (identifier)
-        (where_phrase
-          (binary_expression
+        (record_phrase
+          record: (identifier)
+          of: (identifier)
+          where: (binary_expression
             (qualified_name
               left: (identifier)
               right: (identifier))
@@ -28,8 +28,9 @@ PRESELECT Order, EACH OrderLine OF Order NO-LOCK.
   (preselect_statement
     (preselect_record_list
       (preselect_record
-        table: (identifier))
+        (record_phrase
+          record: (identifier)))
       (preselect_record
-        table: (identifier)
-        of: (identifier)
-        (no_lock)))))
+        (record_phrase
+          record: (identifier)
+          of: (identifier))))))

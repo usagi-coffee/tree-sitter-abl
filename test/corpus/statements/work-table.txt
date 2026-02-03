@@ -215,11 +215,12 @@ DEFINE PRIVATE WORK-TABLE wtPrivate FIELD f1 AS INTEGER.
         (string_literal))))
   (for_statement
     (record
-      table: (identifier))
+      (record
+        record: (identifier)))
     (record
-      table: (identifier)
-      (of_phrase
-        (identifier))
+      (record
+        record: (identifier)
+        of: (identifier))
       (break_by
         (qualified_name
           left: (identifier)
@@ -283,7 +284,8 @@ DEFINE PRIVATE WORK-TABLE wtPrivate FIELD f1 AS INTEGER.
                 right: (identifier))))))))
   (for_statement
     (record
-      table: (identifier)
+      (record
+        record: (identifier))
       (break_by
         (qualified_name
           left: (identifier)

@@ -75,8 +75,8 @@ END.
     (identifier))
   (for_statement
     (record
-      (identifier)
-      (no_lock))
+      (record
+        (identifier)))
     (body
       (display_statement
         (field

@@ -99,7 +99,8 @@ UPDATE a b.
 (source_code
   (for_statement
     (record
-      (identifier))
+      (record
+        (identifier)))
     (body
       (update_statement
         (field

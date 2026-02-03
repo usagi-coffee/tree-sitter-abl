@@ -11,7 +11,8 @@ END.
 (source_code
   (for_statement
     (record
-      table: (identifier))
+      (record
+        record: (identifier)))
     (body
       (display_statement
         record: (qualified_name
@@ -31,14 +32,13 @@ END.
 (source_code
   (for_statement
     (record
-      table: (identifier)
-      (where_phrase
-        (binary_expression
+      (record
+        record: (identifier)
+        where: (binary_expression
           (qualified_name
             left: (identifier)
             right: (identifier))
-          (number_literal)))
-      (no_lock))
+          (number_literal))))
     (body
       (display_statement
         record: (qualified_name
@@ -58,7 +58,8 @@ END.
 (source_code
   (for_statement
     (record
-      table: (identifier))
+      (record
+        record: (identifier)))
     (on_error_phrase)
     (body
       (display_statement
@@ -79,15 +80,13 @@ END.
 (source_code
   (for_statement
     (record
-      table: (identifier)
-      (where_phrase
-        (binary_expression
+      (record
+        record: (identifier)
+        where: (binary_expression
           (qualified_name
             left: (identifier)
             right: (identifier))
-          (string_literal)))
-      (no_lock)
-      (use_index
+          (string_literal))
         index: (identifier))
       (break_by
         (qualified_name
@@ -115,8 +114,8 @@ END.
 (source_code
   (for_statement
     (record
-      table: (identifier)
-      (no_lock)
+      (record
+        record: (identifier))
       (by_phrase
         (qualified_name
           left: (identifier)
@@ -140,8 +139,8 @@ END.
 (source_code
   (for_statement
     (record
-      table: (identifier)
-      (no_lock))
+      (record
+        record: (identifier)))
     (frame_phrase
       frame: (identifier)
       width: (number_literal))
@@ -166,8 +165,8 @@ END.
   (for_statement
     label: (identifier)
     (record
-      table: (identifier)
-      (no_lock))
+      (record
+        record: (identifier)))
     (body
       (display_statement
         record: (qualified_name
@@ -187,7 +186,8 @@ END.
 (source_code
   (for_statement
     (record
-      table: (identifier))
+      (record
+        record: (identifier)))
     (on_endkey_phrase)
     (body
       (display_statement
@@ -208,12 +208,11 @@ END.
 (source_code
   (for_statement
     (record
-      table: (identifier)
-      (where_phrase
-        (binary_expression
+      (record
+        record: (identifier)
+        where: (binary_expression
           (identifier)
-          (string_literal)))
-      (exclusive_lock))
+          (string_literal))))
     (body
       (display_statement
         record: (qualified_name
@@ -233,9 +232,8 @@ END.
 (source_code
   (for_statement
     (record
-      table: (identifier)
-      (share_lock)
-      (no_prefetch))
+      (record
+        record: (identifier)))
     (body
       (display_statement
         record: (qualified_name
@@ -255,8 +253,8 @@ END.
 (source_code
   (for_statement
     (record
-      table: (identifier)
-      (no_lock))
+      (record
+        record: (identifier)))
     (body
       (display_statement
         record: (qualified_name
@@ -276,8 +274,8 @@ END.
 (source_code
   (for_statement
     (record
-      table: (identifier)
-      (no_lock))
+      (record
+        record: (identifier)))
     (body
       (display_statement
         record: (qualified_name
@@ -297,13 +295,12 @@ END.
 (source_code
   (for_statement
     (record
-      table: (identifier)
-      (no_lock))
+      (record
+        record: (identifier)))
     (record
-      table: (identifier)
-      (of_phrase
-        (identifier))
-      (no_lock))
+      (record
+        record: (identifier)
+        of: (identifier)))
     (body
       (display_statement
         (field
@@ -328,10 +325,9 @@ END.
 (source_code
   (for_statement
     (record
-      table: (identifier)
-      (no_lock)
-      (where_phrase
-        (binary_expression
+      (record
+        record: (identifier)
+        where: (binary_expression
           (binary_expression
             (qualified_name
               left: (identifier)
@@ -373,13 +369,12 @@ END.
 (source_code
   (for_statement
     (record
-      table: (identifier)
-      (no_lock))
+      (record
+        record: (identifier)))
     (record
-      table: (identifier)
-      (of_phrase
-        (identifier))
-      (no_lock))
+      (record
+        record: (identifier)
+        of: (identifier)))
     (body
       (display_statement
         (field
@@ -439,7 +434,8 @@ END.
 (source_code
   (for_statement
     (record
-      table: (identifier))
+      (record
+        record: (identifier)))
     (while_phrase
       condition: (binary_expression
         (identifier)
@@ -449,7 +445,8 @@ END.
         record: (identifier))))
   (for_statement
     (record
-      table: (identifier))
+      (record
+        record: (identifier)))
     (stop_after_phrase
       time: (number_literal))
     (body
@@ -477,21 +474,24 @@ END.
 (source_code
   (for_statement
     (record
-      table: (identifier))
+      (record
+        record: (identifier)))
     (on_error_phrase)
     (body
       (display_statement
         record: (identifier))))
   (for_statement
     (record
-      table: (identifier))
+      (record
+        record: (identifier)))
     (on_quit_phrase)
     (body
       (display_statement
         record: (identifier))))
   (for_statement
     (record
-      table: (identifier))
+      (record
+        record: (identifier)))
     (on_stop_phrase)
     (body
       (display_statement
@@ -530,8 +530,8 @@ END.
 (source_code
   (for_statement
     (record
-      (identifier)
-      (no_lock)
+      (record
+        (identifier))
       (by_phrase
         (qualified_name
           (identifier)
@@ -542,9 +542,8 @@ END.
       (leave_statement)))
   (for_statement
     (record
-      (identifier)
-      (no_lock)
-      (where_phrase
+      (record
+        (identifier)
         (binary_expression
           (qualified_name
             (identifier)
@@ -574,23 +573,20 @@ END.
             (identifier))))))
   (for_statement
     (record
-      (identifier)
-      (no_lock))
+      (record
+        (identifier)))
     (record
-      (identifier)
-      (of_phrase
-        (identifier))
-      (no_lock))
+      (record
+        (identifier)
+        (identifier)))
     (record
-      (identifier)
-      (of_phrase
-        (identifier))
-      (no_lock))
+      (record
+        (identifier)
+        (identifier)))
     (record
-      (identifier)
-      (of_phrase
+      (record
+        (identifier)
         (identifier))
-      (no_lock)
       (by_phrase
         (qualified_name
           (identifier)
@@ -629,11 +625,11 @@ END.
             (identifier))))))
   (for_statement
     (record
-      (identifier)
-      (no_lock))
+      (record
+        (identifier)))
     (record
-      (identifier)
-      (of_phrase
+      (record
+        (identifier)
         (identifier)))
     (body
       (display_statement

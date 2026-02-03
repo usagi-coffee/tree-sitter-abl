@@ -197,7 +197,8 @@ DISPLAY STREAM rpt ItemNum ItemName WITH NO-LABELS NO-BOX.
     (identifier))
   (for_statement
     (record
-      table: (identifier))
+      (record
+        record: (identifier)))
     (body
       (if_statement
         (binary_expression

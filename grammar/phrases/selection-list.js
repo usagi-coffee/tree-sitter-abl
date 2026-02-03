@@ -2,18 +2,15 @@ module.exports = ({ kw }) => ({
   selection_list_phrase: ($) =>
     seq(
       kw("SELECTION-LIST"),
-      optional(choice(kw("SINGLE"), kw("MULTIPLE"))),
-      optional(kw("NO-DRAG")),
-      optional(
+      repeat(
         choice(
+          kw("SINGLE"),
+          kw("MULTIPLE"),
+          kw("NO-DRAG"),
           $.__selection_list_items,
           $.__selection_list_item_pairs,
-        ),
-      ),
-      optional(kw("SCROLLBAR-HORIZONTAL")),
-      optional(kw("SCROLLBAR-VERTICAL")),
-      optional(
-        choice(
+          kw("SCROLLBAR-HORIZONTAL"),
+          kw("SCROLLBAR-VERTICAL"),
           $.size_phrase,
           seq(
             kw("INNER-CHARS"),
@@ -21,10 +18,10 @@ module.exports = ({ kw }) => ({
             kw("INNER-LINES"),
             field("inner_lines", $.number_literal),
           ),
+          kw("SORT"),
+          seq(kw("TOOLTIP"), field("tooltip", $._expression)),
         ),
       ),
-      optional(kw("SORT")),
-      optional(seq(kw("TOOLTIP"), field("tooltip", $._expression))),
     ),
 
   __selection_list_items: ($) =>

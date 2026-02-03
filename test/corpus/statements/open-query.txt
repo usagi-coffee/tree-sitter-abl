@@ -217,11 +217,11 @@ OPEN QUERY qCust FOR EACH Customer QUERY-TUNING(JOIN-BY-SQLDB NO-BIND-WHERE) NO-
     query: (identifier)
     (record_phrase
       record: (identifier))
-    (query_tuning
-      (number_literal)))
+    (query_tuning_phrase
+      cache_size: (number_literal)))
   (open_query_statement
     query: (identifier)
     (record_phrase
       record: (identifier))
-    (query_tuning)
+    (query_tuning_phrase)
     max_rows: (number_literal)))

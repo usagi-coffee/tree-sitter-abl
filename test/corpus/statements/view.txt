@@ -54,8 +54,8 @@ VIEW STREAM-HANDLE hS FRAME f1.
       (number_literal)))
   (for_statement
     (record
-      table: (identifier)
-      (no_lock))
+      (record
+        record: (identifier)))
     (body
       (page_statement)
       (form_statement
@@ -120,10 +120,9 @@ VIEW STREAM-HANDLE hS FRAME f1.
           frame: (identifier)))
       (for_statement
         (record
-          table: (identifier)
-          (of_phrase
-            (identifier))
-          (no_lock))
+          (record
+            record: (identifier)
+            of: (identifier)))
         (body
           (display_statement
             (field

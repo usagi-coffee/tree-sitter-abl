@@ -726,8 +726,8 @@ WAIT-FOR WINDOW-CLOSE OF FRAME cust-fr.
       (use_text)))
   (for_statement
     (record
-      (identifier)
-      (no_lock))
+      (record
+        (identifier)))
     (frame_phrase
       (identifier))
     (body
@@ -844,8 +844,8 @@ WAIT-FOR WINDOW-CLOSE OF FRAME cust-fr.
     (identifier))
   (for_statement
     (record
-      (identifier)
-      (where_phrase
+      (record
+        (identifier)
         (binary_expression
           (qualified_name
             (identifier)

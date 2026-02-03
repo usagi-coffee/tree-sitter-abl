@@ -80,9 +80,11 @@ INPUT CLOSE.
     name: (identifier)
     type: (identifier)
     (no_undo)
-    widget: (identifier)
-    width: (number_literal)
-    height: (number_literal))
+    (view_as_phrase
+      (editor_phrase
+        (size_phrase
+          width: (number_literal)
+          height: (number_literal)))))
   (input_through_statement
     program: (identifier)
     (shell_variable)

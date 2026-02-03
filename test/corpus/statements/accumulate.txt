@@ -34,8 +34,8 @@ END.
 (source_code
   (for_statement
     (record
-      table: (identifier)
-      (no_lock))
+      (record
+        record: (identifier)))
     (body
       (accumulate_statement
         (accumulate
@@ -51,8 +51,8 @@ END.
               operation: (aggregate_operation)))))))
   (for_statement
     (record
-      table: (identifier)
-      (no_lock))
+      (record
+        record: (identifier)))
     (body
       (display_statement
         (field
@@ -85,8 +85,8 @@ END.
               operation: (aggregate_operation)))))))
   (for_statement
     (record
-      table: (identifier)
-      (no_lock)
+      (record
+        record: (identifier))
       (break_by
         (qualified_name
           left: (identifier)
@@ -113,8 +113,8 @@ END.
                   right: (identifier)))))))))
   (for_statement
     (record
-      table: (identifier)
-      (no_lock))
+      (record
+        record: (identifier)))
     (body
       (accumulate_statement
         (accumulate
@@ -134,8 +134,8 @@ END.
               operation: (aggregate_operation)))))))
   (for_statement
     (record
-      table: (identifier)
-      (no_lock))
+      (record
+        record: (identifier)))
     (body
       (accumulate_statement
         (accumulate
@@ -155,8 +155,8 @@ END.
               operation: (aggregate_operation)))))))
   (for_statement
     (record
-      table: (identifier)
-      (no_lock)
+      (record
+        record: (identifier))
       (break_by
         (qualified_name
           left: (identifier)

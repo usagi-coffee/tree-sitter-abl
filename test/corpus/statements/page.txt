@@ -48,8 +48,8 @@ END.
   (output_statement)
   (for_statement
     (record
-      (identifier)
-      (no_lock)
+      (record
+        (identifier))
       (by_phrase
         (qualified_name
           (identifier)

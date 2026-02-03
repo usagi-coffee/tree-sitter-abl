@@ -60,7 +60,7 @@ DELETE WIDGET new_win.
     name: (identifier)
     type: (identifier)
     (no_undo)
-    widget: (identifier)
+    (view_as_phrase)
     font: (number_literal)
     (format_phrase
       format: (string_literal))
@@ -70,7 +70,7 @@ DELETE WIDGET new_win.
     name: (identifier)
     type: (identifier)
     (no_undo)
-    widget: (identifier)
+    (view_as_phrase)
     font: (number_literal)
     (format_phrase
       format: (string_literal))

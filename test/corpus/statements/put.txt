@@ -66,8 +66,8 @@ PUT CONTROL NULL(20).
       (identifier)))
   (for_statement
     (record
-      (identifier)
-      (no_lock))
+      (record
+        (identifier)))
     (body
       (put_statement
         (identifier)

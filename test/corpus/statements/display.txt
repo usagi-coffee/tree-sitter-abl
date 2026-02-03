@@ -232,8 +232,8 @@ DISPLAY SPACE(2) Customer.Name SKIP(1) Customer.City.
 (source_code
   (for_statement
     (record
-      table: (identifier)
-      (no_lock)
+      (record
+        record: (identifier))
       (by_phrase
         (qualified_name
           left: (identifier)
@@ -257,10 +257,9 @@ DISPLAY SPACE(2) Customer.Name SKIP(1) Customer.City.
             right: (identifier))))
       (for_statement
         (record
-          table: (identifier)
-          (of_phrase
-            (identifier))
-          (no_lock))
+          (record
+            record: (identifier)
+            of: (identifier)))
         (body
           (display_statement
             (field
@@ -281,15 +280,13 @@ DISPLAY SPACE(2) Customer.Name SKIP(1) Customer.City.
                 right: (identifier))))
           (for_statement
             (record
-              table: (identifier)
-              (of_phrase
-                (identifier))
-              (no_lock))
+              (record
+                record: (identifier)
+                of: (identifier)))
             (record
-              table: (identifier)
-              (of_phrase
-                (identifier))
-              (no_lock))
+              (record
+                record: (identifier)
+                of: (identifier)))
             (body
               (display_statement
                 (field
@@ -310,13 +307,12 @@ DISPLAY SPACE(2) Customer.Name SKIP(1) Customer.City.
                     right: (identifier))))))))))
   (for_statement
     (record
-      table: (identifier)
-      (no_lock))
+      (record
+        record: (identifier)))
     (record
-      table: (identifier)
-      (of_phrase
-        (identifier))
-      (no_lock))
+      (record
+        record: (identifier)
+        of: (identifier)))
     (body
       (display_statement
         (field
@@ -337,15 +333,13 @@ DISPLAY SPACE(2) Customer.Name SKIP(1) Customer.City.
             right: (identifier))))
       (for_statement
         (record
-          table: (identifier)
-          (of_phrase
-            (identifier))
-          (no_lock))
+          (record
+            record: (identifier)
+            of: (identifier)))
         (record
-          table: (identifier)
-          (of_phrase
-            (identifier))
-          (no_lock))
+          (record
+            record: (identifier)
+            of: (identifier)))
         (body
           (display_statement
             (field
@@ -379,8 +373,8 @@ DISPLAY SPACE(2) Customer.Name SKIP(1) Customer.City.
               label: (string_literal)))))))
   (for_statement
     (record
-      table: (identifier)
-      (no_lock))
+      (record
+        record: (identifier)))
     (body
       (display_statement
         (field

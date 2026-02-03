@@ -208,7 +208,8 @@ END.
     (preselect_phrase
       (preselect_record_list
         (preselect_record
-          table: (identifier)))
+          (record_phrase
+            record: (identifier))))
       by: (qualified_name
         left: (identifier)
         right: (identifier)))

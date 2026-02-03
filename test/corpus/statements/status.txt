@@ -56,7 +56,8 @@ STATUS INPUT OFF IN WINDOW hWin.
       (string_literal)))
   (for_statement
     (record
-      table: (identifier))
+      (record
+        record: (identifier)))
     (body
       (display_statement
         record: (qualified_name
@@ -64,9 +65,9 @@ STATUS INPUT OFF IN WINDOW hWin.
           right: (identifier)))
       (for_statement
         (record
-          table: (identifier)
-          (of_phrase
-            (identifier)))
+          (record
+            record: (identifier)
+            of: (identifier)))
         (body
           (update_statement
             (field

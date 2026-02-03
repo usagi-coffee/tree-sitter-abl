@@ -51,7 +51,7 @@ OS-COPY "a.txt" VALUE("b.txt").
     (no_undo)
     (format_phrase
       (string_literal))
-    (identifier))
+    (view_as_phrase))
   (variable_definition
     (identifier)
     (identifier)

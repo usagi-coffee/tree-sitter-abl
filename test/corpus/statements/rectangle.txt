@@ -610,8 +610,8 @@ END.
         value: (number_literal))))
   (for_statement
     (record
-      table: (identifier)
-      (no_lock))
+      (record
+        record: (identifier)))
     (frame_phrase
       frame: (identifier))
     (body

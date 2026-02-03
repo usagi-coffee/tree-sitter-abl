@@ -35,20 +35,14 @@ module.exports = ({ kw }) => ({
   __for_record: ($) =>
     seq(
       optional(choice(kw("EACH"), kw("FIRST"), kw("LAST"))),
-      field("table", $.__for_record_name),
-      optional(alias($.__for_of_phrase, $.of_phrase)),
-      repeat($._for_record_option_or_where),
+      alias($.record_phrase, $.record),
+      repeat($.__for_record_option),
     ),
 
-  _for_record_option: ($) =>
+  __for_record_option: ($) =>
     choice(
-      alias($.__for_no_lock, $.no_lock),
-      alias($.__for_exclusive_lock, $.exclusive_lock),
-      alias($.__for_share_lock, $.share_lock),
-      alias($.__for_no_prefetch, $.no_prefetch),
       alias($.__for_by_phrase, $.by_phrase),
       alias($.__for_collate_phrase, $.collate_phrase),
-      alias($.__for_use_index, $.use_index),
       alias($.__for_break_by, $.break_by),
     ),
 
@@ -62,16 +56,6 @@ module.exports = ({ kw }) => ({
       optional(seq(kw("BY"), field("step", $._expression))),
     ),
 
-  _for_record_option_or_where: ($) =>
-    choice($._for_record_option, alias($.__for_where_phrase, $.where_phrase)),
-
-  __for_where_phrase: ($) => seq(kw("WHERE"), $._expression),
-  __for_of_phrase: ($) => seq(kw("OF"), $.__for_record_name),
-  __for_record_name: ($) => $._identifier_or_qualified_name,
-  __for_no_lock: ($) => kw("NO-LOCK"),
-  __for_exclusive_lock: ($) => kw("EXCLUSIVE-LOCK"),
-  __for_share_lock: ($) => kw("SHARE-LOCK"),
-  __for_no_prefetch: ($) => kw("NO-PREFETCH"),
   __for_by_phrase: ($) =>
     prec.right(
       seq(

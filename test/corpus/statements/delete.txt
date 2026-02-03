@@ -83,14 +83,13 @@ END.
 (source_code
   (for_statement
     (record
-      table: (identifier)
-      (where_phrase
-        (binary_expression
+      (record
+        record: (identifier)
+        where: (binary_expression
           (qualified_name
             left: (identifier)
             right: (identifier))
-          (number_literal)))
-      (exclusive_lock))
+          (number_literal))))
     (body
       (delete_statement
         record: (identifier)))))
@@ -152,7 +151,8 @@ DELETE Customer VALIDATE(NOT(CAN-FIND(Order OF Customer)),
 (source_code
   (for_statement
     (record
-      table: (identifier))
+      (record
+        record: (identifier)))
     (body
       (delete_statement
         record: (identifier))))

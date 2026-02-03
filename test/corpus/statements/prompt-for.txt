@@ -225,12 +225,12 @@ PROMPT-FOR STREAM-HANDLE hS field1 field2 IN WINDOW wMain WITH FRAME fMain.
       title: (string_literal)))
   (for_statement
     (record
-      table: (identifier)
-      (no_lock))
+      (record
+        record: (identifier)))
     (record
-      table: (identifier)
-      (of_phrase
-        (identifier)))
+      (record
+        record: (identifier)
+        of: (identifier)))
     (body
       (display_statement
         (field

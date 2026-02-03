@@ -135,7 +135,8 @@ SET Customer EXCEPT Comments WITH FRAME fCust NO-ERROR.
 (source_code
   (for_statement
     (record
-      table: (identifier))
+      (record
+        record: (identifier)))
     (body
       (display_statement
         record: (qualified_name
@@ -160,7 +161,8 @@ SET Customer EXCEPT Comments WITH FRAME fCust NO-ERROR.
             right: (identifier))))))
   (for_statement
     (record
-      table: (identifier))
+      (record
+        record: (identifier)))
     (body
       (display_statement
         (field
@@ -267,12 +269,12 @@ SET Customer EXCEPT Comments WITH FRAME fCust NO-ERROR.
       title: (string_literal)))
   (for_statement
     (record
-      table: (identifier)
-      (no_lock))
+      (record
+        record: (identifier)))
     (record
-      table: (identifier)
-      (of_phrase
-        (identifier)))
+      (record
+        record: (identifier)
+        of: (identifier)))
     (body
       (display_statement
         (field

@@ -43,19 +43,22 @@ DEF BUTTON btnEnd AUTO-ENDKEY LIKE btnTestButton.
     (access_modifier)
     name: (identifier)
     (button_option
-      filename: (string_literal)
-      width: (number_literal)
-      height: (number_literal)
-      (number_literal)
-      (number_literal))
+      (image_phrase
+        file: (string_literal)
+        width: (number_literal)
+        height: (number_literal)
+        row: (number_literal)
+        column: (number_literal)))
     (button_option
-      filename: (string_literal)
-      width: (number_literal)
-      height: (number_literal)
-      (number_literal)
-      (number_literal))
+      (image_phrase
+        file: (string_literal)
+        width: (number_literal)
+        height: (number_literal)
+        x: (number_literal)
+        y: (number_literal)))
     (button_option
-      filename: (string_literal))
+      (image_phrase
+        file: (string_literal)))
     (button_option
       width: (number_literal)
       height: (number_literal))
@@ -174,11 +177,13 @@ DEF BUTTON btnImg2 IMAGE-UP FILE "up.png".
   (button_definition
     name: (identifier)
     (button_option
-      filename: (string_literal)))
+      (image_phrase
+        file: (string_literal))))
   (button_definition
     name: (identifier)
     (button_option
-      filename: (string_literal))))
+      (image_phrase
+        file: (string_literal)))))
 
 ================================================================================
 BUTTON - IMAGE-DOWN Only
@@ -192,7 +197,8 @@ DEFINE BUTTON btnDown IMAGE-DOWN FILE "down.png".
   (button_definition
     name: (identifier)
     (button_option
-      filename: (string_literal))))
+      (image_phrase
+        file: (string_literal)))))
 
 ================================================================================
 BUTTON - IMAGE-INSENSITIVE Only
@@ -206,7 +212,8 @@ DEFINE BUTTON btnIns IMAGE-INSENSITIVE FILE "ins.png".
   (button_definition
     name: (identifier)
     (button_option
-      filename: (string_literal))))
+      (image_phrase
+        file: (string_literal)))))
 
 ================================================================================
 BUTTON - NO-FOCUS Only
@@ -382,11 +389,12 @@ DEFINE BUTTON btnImgXY IMAGE FILE "img.png" IMAGE-SIZE 50 BY 50 FROM X 10 Y 20.
   (button_definition
     name: (identifier)
     (button_option
-      filename: (string_literal)
-      width: (number_literal)
-      height: (number_literal)
-      (number_literal)
-      (number_literal))))
+      (image_phrase
+        file: (string_literal)
+        width: (number_literal)
+        height: (number_literal)
+        x: (number_literal)
+        y: (number_literal)))))
 
 ================================================================================
 BUTTON - IMAGE with FROM ROW COLUMN
@@ -400,9 +408,10 @@ DEFINE BUTTON btnImgRC IMAGE FILE "img.png" FROM ROW 5 COLUMN 10.
   (button_definition
     name: (identifier)
     (button_option
-      filename: (string_literal)
-      (number_literal)
-      (number_literal))))
+      (image_phrase
+        file: (string_literal)
+        row: (number_literal)
+        column: (number_literal)))))
 
 ================================================================================
 BUTTON - Minimal
@@ -466,13 +475,15 @@ DEFINE BUTTON btnFull
     (button_option
       label: (string_literal))
     (button_option
-      filename: (string_literal)
-      width: (number_literal)
-      height: (number_literal))
+      (image_phrase
+        file: (string_literal)
+        width: (number_literal)
+        height: (number_literal)))
     (button_option
-      filename: (string_literal)
-      width: (number_literal)
-      height: (number_literal))
+      (image_phrase
+        file: (string_literal)
+        width: (number_literal)
+        height: (number_literal)))
     (button_option
       width: (number_literal)
       height: (number_literal))

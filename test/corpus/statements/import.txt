@@ -105,7 +105,8 @@ INPUT CLOSE.
     (identifier))
   (for_statement
     (record
-      (identifier))
+      (record
+        (identifier)))
     (body
       (import_statement
         (delimiter_phrase

@@ -43,7 +43,8 @@ END.
     (no_undo))
   (for_statement
     (record
-      (identifier))
+      (record
+        (identifier)))
     (body
       (display_statement
         (field
@@ -78,7 +79,8 @@ END.
     (no_undo))
   (for_statement
     (record
-      (identifier))
+      (record
+        (identifier)))
     (on_stop_phrase)
     (body
       (display_statement

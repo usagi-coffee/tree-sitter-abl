@@ -370,9 +370,11 @@ END.
     (identifier)
     (identifier)
     (no_undo)
-    (identifier)
-    (number_literal)
-    (number_literal)
+    (view_as_phrase
+      (selection_list_phrase
+        (size_phrase
+          (number_literal)
+          (number_literal))))
     (string_literal))
   (variable_definition
     (identifier)

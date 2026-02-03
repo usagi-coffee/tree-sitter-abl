@@ -46,34 +46,7 @@ module.exports = ({ kw }) => ({
 
           alias($.__variable_initial_option, $.initial_option),
 
-          seq(
-            kw("VIEW-AS"),
-            field("widget", $.identifier),
-            repeat(
-              choice(
-                kw("HORIZONTAL"),
-                kw("VERTICAL"),
-                kw("SINGLE"),
-                kw("MULTIPLE"),
-                seq(
-                  kw("LIST-ITEMS"),
-                  field("list_items", $.__variable_list_items),
-                ),
-                seq(
-                  kw("RADIO-BUTTONS"),
-                  field("radio_buttons", $.__variable_radio_buttons),
-                ),
-                seq(
-                  kw("SIZE"),
-                  field("width", $._expression),
-                  kw("BY"),
-                  field("height", $._expression),
-                ),
-                kw("SCROLLBAR-VERTICAL"),
-                kw("NO-DRAG"),
-              ),
-            ),
-          ),
+          $.view_as_phrase,
 
           seq(optional(kw("NOT")), kw("CASE-SENSITIVE")),
           alias(kw("NO-UNDO"), $.no_undo),

@@ -131,9 +131,9 @@ DISPLAY "Succeeded".
       value: (number_literal)))
   (for_statement
     (record
-      table: (identifier)
-      (where_phrase
-        (binary_expression
+      (record
+        record: (identifier)
+        where: (binary_expression
           (identifier)
           (identifier))))
     (body
@@ -158,9 +158,9 @@ DISPLAY "Succeeded".
       value: (string_literal)))
   (for_statement
     (record
-      table: (identifier)
-      (where_phrase
-        (binary_expression
+      (record
+        record: (identifier)
+        where: (binary_expression
           (identifier)
           (identifier))))
     (body

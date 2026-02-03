@@ -161,7 +161,8 @@ UPDATE field1 SPACE(2) SKIP(1) ^.
 (source_code
   (for_statement
     (record
-      (identifier))
+      (record
+        (identifier)))
     (body
       (update_statement
         (field
@@ -186,7 +187,8 @@ UPDATE field1 SPACE(2) SKIP(1) ^.
             (identifier))))))
   (for_statement
     (record
-      (identifier))
+      (record
+        (identifier)))
     (body
       (update_statement
         (field
@@ -207,8 +209,8 @@ UPDATE field1 SPACE(2) SKIP(1) ^.
             (string_literal))))
       (for_statement
         (record
-          (identifier)
-          (of_phrase
+          (record
+            (identifier)
             (identifier)))
         (body
           (display_statement
@@ -316,11 +318,11 @@ UPDATE field1 SPACE(2) SKIP(1) ^.
       (string_literal)))
   (for_statement
     (record
-      (identifier)
-      (no_lock))
+      (record
+        (identifier)))
     (record
-      (identifier)
-      (of_phrase
+      (record
+        (identifier)
         (identifier)))
     (body
       (display_statement

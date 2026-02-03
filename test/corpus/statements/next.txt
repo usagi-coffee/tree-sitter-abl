@@ -39,7 +39,8 @@ END.
       (centered)))
   (for_statement
     (record
-      (identifier))
+      (record
+        (identifier)))
     (body
       (if_statement
         (binary_expression

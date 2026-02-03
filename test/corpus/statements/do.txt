@@ -433,8 +433,8 @@ END.
     (preselect_phrase
       (preselect_record_list
         (preselect_record
-          table: (identifier)
-          (no_lock))))
+          (record_phrase
+            record: (identifier)))))
     (body
       (display_statement
         record: (qualified_name
@@ -459,8 +459,8 @@ END.
 (source_code
   (for_statement
     (record
-      (identifier)
-      (no_lock))
+      (record
+        (identifier)))
     (body
       (display_statement
         (field

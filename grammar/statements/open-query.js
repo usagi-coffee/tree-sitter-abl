@@ -16,7 +16,7 @@ module.exports = ({ kw }) => ({
           alias($.__open_query_record_phrase, $.record_phrase),
         ),
       ),
-      optional(alias($.__open_query_tuning, $.query_tuning)),
+      optional($.query_tuning_phrase),
       optional(kw("BREAK")),
       repeat(alias($.__open_query_by_phrase, $.by_phrase)),
       optional(
@@ -47,27 +47,7 @@ module.exports = ({ kw }) => ({
       ),
     ),
 
-  __open_query_tuning: ($) =>
-    seq(
-      kw("QUERY-TUNING"),
-      "(",
-      repeat1(
-        choice(
-          seq(kw("LOOKAHEAD"), optional(seq(kw("CACHE-SIZE"), $._expression))),
-          kw("NO-LOOKAHEAD"),
-          seq(kw("DEBUG"), choice(kw("SQL"), kw("EXTENDED"))),
-          kw("NO-DEBUG"),
-          kw("SEPARATE-CONNECTION"),
-          kw("NO-SEPARATE-CONNECTION"),
-          kw("JOIN-BY-SQLDB"),
-          kw("NO-JOIN-BY-SQLDB"),
-          kw("BIND-WHERE"),
-          kw("NO-BIND-WHERE"),
-          kw("NO-INDEX-HINT"),
-        ),
-      ),
-      ")",
-    ),
+
   __open_query_by_phrase: ($) =>
     seq(kw("BY"), field("by", $._expression), optional(kw("DESCENDING"))),
 });

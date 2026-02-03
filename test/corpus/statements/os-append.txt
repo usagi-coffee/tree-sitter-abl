@@ -48,7 +48,7 @@ END.
     (no_undo)
     (format_phrase
       (string_literal))
-    (identifier))
+    (view_as_phrase))
   (variable_definition
     (identifier)
     (identifier)

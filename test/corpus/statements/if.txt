@@ -278,7 +278,8 @@ OUTPUT STREAM due CLOSE.
       (page_top)))
   (for_statement
     (record
-      (identifier))
+      (record
+        (identifier)))
     (frame_phrase
       (identifier))
     (body

@@ -54,8 +54,8 @@ EXPORT STREAM-HANDLE hOut memptrBuf.
       right: (identifier)))
   (for_statement
     (record
-      table: (identifier)
-      (no_lock))
+      (record
+        record: (identifier)))
     (body
       (export_statement
         (identifier))))
@@ -64,8 +64,8 @@ EXPORT STREAM-HANDLE hOut memptrBuf.
     file: (identifier))
   (for_statement
     (record
-      table: (identifier)
-      (no_lock))
+      (record
+        record: (identifier)))
     (body
       (export_statement
         (delimiter_phrase

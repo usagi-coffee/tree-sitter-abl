@@ -99,9 +99,9 @@ END PROCEDURE.
       dataset: (identifier))
     (for_statement
       (record
-        table: (identifier)
-        (of_phrase
-          (identifier)))
+        (record
+          record: (identifier)
+          of: (identifier)))
       (body
         (display_statement
           record: (qualified_name

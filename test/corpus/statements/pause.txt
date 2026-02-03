@@ -37,8 +37,8 @@ PAUSE BEFORE-HIDE NO-MESSAGE.
     (string_literal))
   (for_statement
     (record
-      (identifier)
-      (no_lock))
+      (record
+        (identifier)))
     (frame_phrase
       (down
         (number_literal)))

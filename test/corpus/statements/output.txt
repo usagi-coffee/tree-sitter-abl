@@ -129,8 +129,8 @@ OUTPUT TO TERMINAL.
       (identifier)))
   (for_statement
     (record
-      (identifier)
-      (no_lock))
+      (record
+        (identifier)))
     (body
       (display_statement
         (field
@@ -178,8 +178,8 @@ OUTPUT TO TERMINAL.
   (output_statement)
   (for_statement
     (record
-      (identifier)
-      (no_lock)
+      (record
+        (identifier))
       (break_by
         (qualified_name
           (identifier)

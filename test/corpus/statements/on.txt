@@ -124,7 +124,8 @@ ON F5 ENDKEY.
               (return_statement)))))))
   (for_statement
     (record
-      table: (identifier))
+      (record
+        record: (identifier)))
     (body
       (update_statement
         (field

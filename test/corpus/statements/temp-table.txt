@@ -548,7 +548,8 @@ WAIT-FOR CHOOSE OF cancel-butt OR WINDOW-CLOSE OF CURRENT-WINDOW.
       title: (string_literal)))
   (for_statement
     (record
-      table: (identifier)
+      (record
+        record: (identifier))
       (break_by
         (qualified_name
           left: (identifier)
@@ -628,8 +629,8 @@ WAIT-FOR CHOOSE OF cancel-butt OR WINDOW-CLOSE OF CURRENT-WINDOW.
             (number_literal))
           then: (for_statement
             (record
-              table: (identifier)
-              (use_index
+              (record
+                record: (identifier)
                 index: (identifier)))
             (frame_phrase
               frame: (identifier))
@@ -647,8 +648,8 @@ WAIT-FOR CHOOSE OF cancel-butt OR WINDOW-CLOSE OF CURRENT-WINDOW.
                     field: (identifier))))))
           else: (for_statement
             (record
-              table: (identifier)
-              (use_index
+              (record
+                record: (identifier)
                 index: (identifier)))
             (frame_phrase
               frame: (identifier))

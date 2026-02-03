@@ -98,8 +98,8 @@ INPUT-OUTPUT STREAM sIO THROUGH "filter" CONVERT SOURCE "ibm850" TARGET "utf-8".
 (source_code
   (for_statement
     (record
-      (identifier)
-      (where_phrase
+      (record
+        (identifier)
         (binary_expression
           (qualified_name
             (identifier)
@@ -121,8 +121,8 @@ INPUT-OUTPUT STREAM sIO THROUGH "filter" CONVERT SOURCE "ibm850" TARGET "utf-8".
     (identifier))
   (for_statement
     (record
-      (identifier)
-      (where_phrase
+      (record
+        (identifier)
         (binary_expression
           (qualified_name
             (identifier)
@@ -141,8 +141,8 @@ INPUT-OUTPUT STREAM sIO THROUGH "filter" CONVERT SOURCE "ibm850" TARGET "utf-8".
   (input_output_statement)
   (for_statement
     (record
-      (identifier)
-      (where_phrase
+      (record
+        (identifier)
         (binary_expression
           (qualified_name
             (identifier)

@@ -48,37 +48,11 @@ module.exports = ({ kw }) => ({
   __button_drop_target: ($) => kw("DROP-TARGET"),
   __button_fgcolor: ($) => seq(kw("FGCOLOR"), $._expression),
   __button_font: ($) => seq(kw("FONT"), $._expression),
-  __button_image_down: ($) => seq(kw("IMAGE-DOWN"), $.__button_image_phrase),
-  __button_image: ($) => seq(kw("IMAGE"), $.__button_image_phrase),
-  __button_image_up: ($) => seq(kw("IMAGE-UP"), $.__button_image_phrase),
+  __button_image_down: ($) => seq(kw("IMAGE-DOWN"), $.image_phrase),
+  __button_image: ($) => seq(kw("IMAGE"), $.image_phrase),
+  __button_image_up: ($) => seq(kw("IMAGE-UP"), $.image_phrase),
   __button_image_insensitive: ($) =>
-    seq(kw("IMAGE-INSENSITIVE"), $.__button_image_phrase),
-  __button_image_phrase: ($) =>
-    seq(
-      kw("FILE"),
-      field("filename", $._expression),
-      optional(
-        seq(
-          choice(
-            kw("IMAGE-SIZE"),
-            kw("IMAGE-SIZE-CHARS"),
-            kw("IMAGE-SIZE-PIXELS"),
-          ),
-          field("width", $._expression),
-          kw("BY"),
-          field("height", $._expression),
-        ),
-      ),
-      optional(
-        seq(
-          kw("FROM"),
-          choice(
-            seq(kw("X"), $._expression, kw("Y"), $._expression),
-            seq(kw("ROW"), $._expression, kw("COLUMN"), $._expression),
-          ),
-        ),
-      ),
-    ),
+    seq(kw("IMAGE-INSENSITIVE"), $.image_phrase),
   __button_mouse_pointer: ($) => seq(kw("MOUSE-POINTER"), $._expression),
   __button_label: ($) =>
     seq(kw("LABEL"), field("label", choice($.string_literal, $.identifier))),

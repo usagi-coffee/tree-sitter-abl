@@ -86,7 +86,7 @@ DEFINE VARIABLE cView AS CHARACTER VIEW-AS FILL-IN.
   (variable_definition
     name: (identifier)
     type: (identifier)
-    widget: (identifier)))
+    (view_as_phrase)))
 
 ================================================================================
 VARIABLE DEFINITION - Color and Visual Options
@@ -517,8 +517,8 @@ END.
   (output_statement)
   (for_statement
     (record
-      (identifier)
-      (where_phrase
+      (record
+        (identifier)
         (binary_expression
           (qualified_name
             (identifier)
@@ -533,8 +533,8 @@ END.
           (number_literal)))
       (for_statement
         (record
-          (identifier)
-          (of_phrase
+          (record
+            (identifier)
             (identifier)))
         (body
           (display_statement
@@ -762,19 +762,21 @@ END.
     (identifier)
     (identifier)
     (no_undo)
-    (identifier)
-    (number_literal)
-    (number_literal)
-    (string_literal)
-    (string_literal)
-    (string_literal)
-    (string_literal)
-    (string_literal)
-    (string_literal)
-    (string_literal)
-    (string_literal)
-    (string_literal)
-    (string_literal)
+    (view_as_phrase
+      (selection_list_phrase
+        (size_phrase
+          (number_literal)
+          (number_literal))
+        (string_literal)
+        (string_literal)
+        (string_literal)
+        (string_literal)
+        (string_literal)
+        (string_literal)
+        (string_literal)
+        (string_literal)
+        (string_literal)
+        (string_literal)))
     (string_literal)
     (trigger_phrase
       (identifier)
@@ -845,7 +847,8 @@ END.
     (string_literal))
   (for_statement
     (record
-      (identifier))
+      (record
+        (identifier)))
     (body
       (display_statement
         (field
