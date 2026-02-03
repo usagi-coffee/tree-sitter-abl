@@ -17,7 +17,9 @@ SYSTEM-DIALOG PRINTER-SETUP PORTRAIT UPDATE pset IN WINDOW winH.
   (system_dialog_color_statement
     color: (number_literal)
     update: (identifier)
-    window: (identifier))
+    (in_window_phrase
+
+      window: (identifier)))
   (system_dialog_font_statement
     font: (identifier)
     max_size: (number_literal)
@@ -25,7 +27,9 @@ SYSTEM-DIALOG PRINTER-SETUP PORTRAIT UPDATE pset IN WINDOW winH.
     update: (identifier))
   (system_dialog_font_statement
     font: (identifier)
-    window: (identifier))
+    (in_window_phrase
+
+      window: (identifier)))
   (system_dialog_get_file_statement
     variable: (identifier)
     (filters_phrase
@@ -44,4 +48,6 @@ SYSTEM-DIALOG PRINTER-SETUP PORTRAIT UPDATE pset IN WINDOW winH.
     copies: (number_literal))
   (system_dialog_printer_setup_statement
     update: (identifier)
-    window: (identifier)))
+    (in_window_phrase
+
+      window: (identifier))))

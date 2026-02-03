@@ -3,6 +3,12 @@ module.exports = ($) => [
   // Purpose: prefer function call when identifier is followed by args.
   // Example: ACCUMULATE myFunc(x).
   [$.function_call, $._primary_expression],
+  // Purpose: prefer function call over bare identifier when '(' follows.
+  // Example: OS-APPEND myFunc() target.
+  [$.function_call, $._identifier_or_qualified_name],
+  // Purpose: prefer function call over DATASET reference when '(' follows.
+  // Example: ACCUMULATE DATASET myFunc().
+  [$.function_call, $.dataset_reference],
   // Purpose: prefer ACCUMULATE aggregate list over treating as function call.
   // Example: ACCUMULATE balance (TOTAL).
   [$.__accumulate_item, $.function_call],

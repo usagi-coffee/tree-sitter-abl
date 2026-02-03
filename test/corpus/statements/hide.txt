@@ -10,6 +10,8 @@ HIDE ALL NO-PAUSE.
 HIDE STREAM s1.
 HIDE STREAM-HANDLE hS FRAME f1 NO-PAUSE.
 
+
+
 --------------------------------------------------------------------------------
 
 (source_code
@@ -45,72 +47,75 @@ ELSE IF selection = 4 THEN HIDE FRAME x.
 HIDE MESSAGE.
 HIDE ALL NO-PAUSE IN WINDOW w1.
 
+
+
 --------------------------------------------------------------------------------
 
 (source_code
   (view_statement
     (widget_phrase
-      (identifier)))
+      frame: (identifier)))
   (display_statement
     (field
-      (string_literal))
+      field: (string_literal))
     (frame_phrase
-      (identifier)
-      (number_literal)
-      (number_literal)))
+      frame: (identifier)
+      row: (number_literal)
+      column: (number_literal)))
   (display_statement
     (field
-      (string_literal))
+      field: (string_literal))
     (frame_phrase
-      (identifier)
-      (number_literal)
-      (number_literal)
+      frame: (identifier)
+      row: (number_literal)
+      column: (number_literal)
       (down
-        (number_literal))))
+        value: (number_literal))))
   (message_statement
     (string_literal))
   (update_statement
     (field
-      (string_literal))
+      constant: (string_literal))
     (field
-      (identifier)
+      field: (identifier)
       (format_phrase
-        (binary_expression
+        condition: (binary_expression
           (binary_expression
             (number_literal)
             (identifier))
           (binary_expression
             (identifier)
             (number_literal)))
-        (string_literal)))
+        message: (string_literal)))
     (frame_phrase
-      (identifier)))
+      frame: (identifier)))
   (if_statement
     (binary_expression
       (identifier)
       (number_literal))
-    (hide_statement
+    then: (hide_statement
       (widget_phrase
-        (identifier)))
-    (if_statement
+        frame: (identifier)))
+    else: (if_statement
       (binary_expression
         (identifier)
         (number_literal))
-      (hide_statement
+      then: (hide_statement
         (widget_phrase
-          (identifier)))
-      (if_statement
+          frame: (identifier)))
+      else: (if_statement
         (binary_expression
           (identifier)
           (number_literal))
-        (hide_statement)
-        (if_statement
+        then: (hide_statement)
+        else: (if_statement
           (binary_expression
             (identifier)
             (number_literal))
-          (hide_statement
+          then: (hide_statement
             (widget_phrase
-              (identifier)))))))
+              frame: (identifier)))))))
   (hide_statement)
   (hide_statement
-    (identifier)))
+    (in_window_phrase
+      window: (identifier))))

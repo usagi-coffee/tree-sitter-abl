@@ -11,7 +11,7 @@ module.exports = ({ kw }) => ({
         ),
         repeat1(alias($.__enable_item, $.enable_item)),
       ),
-      optional($._in_window_phrase),
+      optional($.in_window_phrase),
       optional($.frame_phrase),
     ),
 

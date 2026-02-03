@@ -10,6 +10,6 @@ module.exports = ({ kw }) => ({
           optional(choice(kw("OFF"), field("message", $._expression))),
         ),
       ),
-      optional($._in_window_phrase),
+      optional($.in_window_phrase),
     ),
 });

@@ -7,26 +7,24 @@ module.exports = ({ kw }) => ({
       ),
     ),
 
-  __display_stream: ($) => $._stream_phrase,
-
   __display_fields_body: ($) =>
     choice(
       prec(
         2,
         seq(
-          $.__display_stream,
+          $._stream_phrase,
           optional(kw("UNLESS-HIDDEN")),
-          optional($._in_window_phrase),
+          optional($.in_window_phrase),
           $.__display_frame_phrases,
           optional(alias(kw("NO-ERROR"), $.no_error)),
           $._terminator,
         ),
       ),
       seq(
-        optional($.__display_stream),
+        optional($._stream_phrase),
         optional(kw("UNLESS-HIDDEN")),
         $.__display_items,
-        optional($._in_window_phrase),
+        optional($.in_window_phrase),
         optional($.__display_frame_phrases),
         optional(alias(kw("NO-ERROR"), $.no_error)),
         $._terminator,

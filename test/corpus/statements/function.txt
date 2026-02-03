@@ -126,7 +126,7 @@ END.
         type: (identifier)
         (no_undo)))
     (return_statement
-      (object_access_expression
+      (object_access
         left: (function_call
           function: (identifier)
           (arguments

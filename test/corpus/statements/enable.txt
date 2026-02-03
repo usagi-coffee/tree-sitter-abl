@@ -57,7 +57,9 @@ ENABLE field1 IN WINDOW w1.
   (enable_statement
     (enable_item
       field: (identifier))
-    window: (identifier)))
+    (in_window_phrase
+
+      window: (identifier))))
 
 ================================================================================
 ENABLE with format, text, and constants

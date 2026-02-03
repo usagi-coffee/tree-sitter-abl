@@ -2,12 +2,10 @@ module.exports = ({ kw }) => ({
   export_statement: ($) =>
     seq(
       kw("EXPORT"),
-      optional($.__export_stream),
+      optional($._stream_phrase),
       optional(choice($.__export_expressions_body, $._expression)),
       $._terminator,
     ),
-
-  __export_stream: ($) => $._stream_phrase,
 
   __export_expressions_body: ($) =>
     seq(

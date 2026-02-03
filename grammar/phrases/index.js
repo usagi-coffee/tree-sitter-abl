@@ -13,11 +13,13 @@ const stopAfterPhrase = require("./stop-after");
 const widgetPhrase = require("./widget");
 const assignPhrase = require("./assign");
 const triggerPhrase = require("./trigger");
+const inWindowPhrase = require("./in-window");
 
 module.exports = (ctx) => ({
   ...assignPhrase(ctx),
   ...aggregate(ctx),
   ...triggerPhrase(ctx),
+  ...inWindowPhrase(ctx),
   ...atPhrase(ctx),
   ...colorPhrase(ctx),
   ...editingPhrase(ctx),

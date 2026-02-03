@@ -2,12 +2,10 @@ module.exports = ({ kw }) => ({
   input_output_statement: ($) =>
     seq(
       kw("INPUT-OUTPUT"),
-      optional($.__input_output_stream),
+      optional($._stream_phrase),
       $.__input_output_body,
       $._terminator,
     ),
-
-  __input_output_stream: ($) => $._stream_phrase,
 
   __input_output_body: ($) =>
     choice(

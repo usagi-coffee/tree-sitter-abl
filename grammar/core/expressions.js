@@ -18,7 +18,6 @@ module.exports = ({ kw, ctx }) => ({
       $.ambiguous_expression,
       $.accum_expression,
       $.locked_expression,
-      $.object_access_expression,
       $.new_expression,
       $.dataset_reference,
       $.seek_expression,

@@ -6,6 +6,8 @@ VIEW.
 VIEW FRAME myframe.
 VIEW STREAM sOut FRAME myframe.
 
+
+
 --------------------------------------------------------------------------------
 
 (source_code
@@ -41,112 +43,115 @@ END.
 VIEW FRAME f1 IN WINDOW w1.
 VIEW STREAM-HANDLE hS FRAME f1.
 
+
+
 --------------------------------------------------------------------------------
 
 (source_code
   (output_statement
-    (identifier)
+    file: (identifier)
     (page_size_phrase
       (number_literal)))
   (for_statement
     (record
-      (identifier)
+      table: (identifier)
       (no_lock))
     (body
       (page_statement)
       (form_statement
         (form_item
-          (identifier))
+          field: (identifier))
         (form_item
-          (string_literal))
+          field: (string_literal))
         (form_item
-          (string_literal))
+          field: (string_literal))
         (form_item
-          (identifier))
+          field: (identifier))
         (form_item
-          (number_literal))
+          field: (number_literal))
         (form_item
-          (identifier)
-          (string_literal)))
+          field: (identifier)
+          format: (string_literal)))
       (display_statement
         (field
-          (parenthesized_expression
+          field: (parenthesized_expression
             (number_literal)))
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (frame_phrase
           (no_labels)))
       (form_statement
         (form_item
-          (identifier))
+          field: (identifier))
         (form_item
-          (string_literal))
+          field: (string_literal))
         (form_item
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (form_item
-          (string_literal))
+          field: (string_literal))
         (form_item
-          (string_literal))
+          field: (string_literal))
         (form_item
-          (identifier))
+          field: (identifier))
         (form_item
-          (number_literal))
+          field: (number_literal))
         (form_item
-          (identifier)
-          (string_literal))
+          field: (identifier)
+          format: (string_literal))
         (form_item
           (number_literal))
         (frame_phrase
-          (identifier)
+          frame: (identifier)
           (page_top)))
       (view_statement
         (widget_phrase
-          (identifier)))
+          frame: (identifier)))
       (for_statement
         (record
-          (identifier)
+          table: (identifier)
           (of_phrase
             (identifier))
           (no_lock))
         (body
           (display_statement
             (field
-              (qualified_name
-                (identifier)
-                (identifier)))
+              field: (qualified_name
+                left: (identifier)
+                right: (identifier)))
             (field
-              (qualified_name
-                (identifier)
-                (identifier)))
+              field: (qualified_name
+                left: (identifier)
+                right: (identifier)))
             (field
-              (qualified_name
-                (identifier)
-                (identifier)))
+              field: (qualified_name
+                left: (identifier)
+                right: (identifier)))
             (field
-              (qualified_name
-                (identifier)
-                (identifier)))
+              field: (qualified_name
+                left: (identifier)
+                right: (identifier)))
             (field
-              (qualified_name
-                (identifier)
-                (identifier))))))))
+              field: (qualified_name
+                left: (identifier)
+                right: (identifier))))))))
   (view_statement
     (widget_phrase
-      (identifier))
-    (identifier))
+      frame: (identifier))
+    (in_window_phrase
+      window: (identifier)))
   (view_statement
-    (identifier)
+    stream: (identifier)
     (widget_phrase
-      (identifier))))
+      frame: (identifier))))

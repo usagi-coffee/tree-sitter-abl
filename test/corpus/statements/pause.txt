@@ -14,7 +14,9 @@ PAUSE NO-MESSAGE IN WINDOW hWin.
     duration: (number_literal)
     message: (string_literal))
   (pause_statement
-    window: (identifier)))
+    (in_window_phrase
+
+      window: (identifier))))
 
 ================================================================================
 PAUSE - reference snippet and variants

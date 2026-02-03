@@ -3,7 +3,7 @@ module.exports = ({ kw }) => ({
 
   __import_body: ($) =>
     seq(
-      optional($.__import_stream),
+      optional($._stream_phrase),
       choice(
         $.__import_fields_phrase,
         alias($.__import_unformatted_phrase, $.unformatted_phrase),
@@ -11,8 +11,6 @@ module.exports = ({ kw }) => ({
       optional(alias($.__import_no_lobs, $.no_lobs)),
       optional(alias($.__import_no_error, $.no_error)),
     ),
-
-  __import_stream: ($) => $._stream_phrase,
 
   __import_delimiter_phrase: ($) => seq(kw("DELIMITER"), $.string_literal),
   __import_fields_phrase: ($) =>

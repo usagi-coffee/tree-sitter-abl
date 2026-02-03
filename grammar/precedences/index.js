@@ -5,14 +5,18 @@ const caseStatement = require("./case");
 const create = require("./create");
 const display = require("./display");
 const deleteStatement = require("./delete");
+const browse = require("./browse");
+const dataset = require("./dataset");
 const enable = require("./enable");
 const assign = require("./assign");
 const exportStatement = require("./export");
 const input = require("./input");
+const os = require("./os");
 const put = require("./put");
 const promptFor = require("./prompt-for");
 const run = require("./run");
 const set = require("./set");
+const subscribe = require("./subscribe");
 const update = require("./update");
 const widget = require("./widget");
 const inFrame = require("./in-frame");
@@ -20,6 +24,9 @@ const inFrame = require("./in-frame");
 module.exports = ($) => [
   ["unary", "multiplication", "add", "compare", "not", "logical"],
   ...binary($),
+  ...os($),
+  ...dataset($),
+  ...browse($),
   ...create($),
   ...deleteStatement($),
   ...caseStatement($),
@@ -34,5 +41,6 @@ module.exports = ($) => [
   ...exportStatement($),
   ...input($),
   ...run($),
+  ...subscribe($),
   ...update($),
 ];

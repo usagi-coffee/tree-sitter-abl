@@ -4,12 +4,11 @@ module.exports = ({ kw }) => ({
 
   __underline_body: ($) =>
     seq(
-      optional($.__underline_stream),
+      optional($._stream_phrase),
       repeat1(field("field", $.__underline_field)),
       optional($.frame_phrase),
     ),
 
   __underline_field: ($) => $._expression,
 
-  __underline_stream: ($) => $._stream_phrase,
 });

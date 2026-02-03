@@ -241,8 +241,6 @@ module.exports = grammar({
           choice(kw("STREAM"), kw("STREAM-HANDLE")),
           field("stream", $.identifier)
         ),
-      _in_window_phrase: ($) =>
-        seq(kw("IN"), kw("WINDOW"), field("window", $._window_handle)),
       _events: ($) =>
         choice(
           $.identifier,
@@ -312,24 +310,25 @@ module.exports = grammar({
       // Accessors
       object_access: ($) =>
         prec.right(
-          seq(
-            optional(field("widget", alias($._widgets, $.identifier))),
-            field("left", $._identifier_or_qualified_name),
-            $._object_access_tail,
-            optional(seq(kw("IN"), $._widgets, field("in", $.identifier)))
-          )
-        ),
-      object_access_expression: ($) =>
-        seq(
-          field(
-            "left",
-            choice(
-              $.function_call,
-              $.parenthesized_expression,
-              $.new_expression
+          choice(
+            seq(
+              optional(field("widget", alias($._widgets, $.identifier))),
+              field("left", $._identifier_or_qualified_name),
+              $._object_access_tail,
+              optional(seq(kw("IN"), $._widgets, field("in", $.identifier)))
+            ),
+            seq(
+              field(
+                "left",
+                choice(
+                  $.function_call,
+                  $.parenthesized_expression,
+                  $.new_expression
+                )
+              ),
+              $._object_access_tail
             )
-          ),
-          $._object_access_tail
+          )
         ),
 
       scoped_name: ($) =>
@@ -391,20 +390,17 @@ module.exports = grammar({
       arguments: ($) => seq("(", optional($._argument_list), ")"),
       _argument_list: ($) => seq($.argument, repeat(seq(",", $.argument))),
       argument: ($) =>
-        choice(
-          seq(
-            optional(choice(kw("INPUT"), kw("OUTPUT"), kw("INPUT-OUTPUT"))),
-            choice(kw("TABLE"), kw("BUFFER")),
-            field("name", $._identifier_or_qualified_name),
-            optional(seq(kw("AS"), field("type", $._type_name))),
-            optional(kw("BY-REFERENCE"))
+        seq(
+          optional(choice(kw("INPUT"), kw("OUTPUT"), kw("INPUT-OUTPUT"))),
+          choice(
+            seq(
+              choice(kw("TABLE"), kw("BUFFER")),
+              field("name", $._identifier_or_qualified_name)
+            ),
+            field("name", $._expression)
           ),
-          seq(
-            optional(choice(kw("INPUT"), kw("OUTPUT"), kw("INPUT-OUTPUT"))),
-            field("name", $._expression),
-            optional(seq(kw("AS"), field("type", $._type_name))),
-            optional(kw("BY-REFERENCE"))
-          )
+          optional(seq(kw("AS"), field("type", $._type_name))),
+          optional(kw("BY-REFERENCE"))
         ),
 
       function_call: ($) =>

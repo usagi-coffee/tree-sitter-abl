@@ -3,13 +3,11 @@ module.exports = ({ kw }) => ({
 
   __set_body: ($) =>
     seq(
-      optional($.__set_stream),
+      optional($._stream_phrase),
       optional(kw("UNLESS-HIDDEN")),
       choice($.__set_record_body, $.__set_fields_body),
       optional(alias(kw("NO-ERROR"), $.no_error)),
     ),
-
-  __set_stream: ($) => $._stream_phrase,
 
   __set_fields_body: ($) =>
     seq(

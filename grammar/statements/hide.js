@@ -2,13 +2,12 @@ module.exports = ({ kw }) => ({
   hide_statement: ($) =>
     seq(
       kw("HIDE"),
-      optional($.__hide_stream),
+      optional($._stream_phrase),
       optional(choice($.__hide_option, $.widget_phrase)),
       optional(kw("NO-PAUSE")),
-      optional($._in_window_phrase),
+      optional($.in_window_phrase),
       $._terminator,
     ),
 
   __hide_option: ($) => choice(kw("MESSAGE"), kw("ALL")),
-  __hide_stream: ($) => $._stream_phrase,
 });

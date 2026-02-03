@@ -4,12 +4,10 @@ module.exports = ({ kw }) => ({
 
   __prompt_for_body: ($) =>
     seq(
-      optional($.__prompt_stream),
+      optional($._stream_phrase),
       optional(kw("UNLESS-HIDDEN")),
       choice(prec(1, $.__prompt_for_fields_body), $.__prompt_for_record_body),
     ),
-
-  __prompt_stream: ($) => $._stream_phrase,
 
   __prompt_for_record_body: ($) =>
     seq(
@@ -22,7 +20,7 @@ module.exports = ({ kw }) => ({
           ),
         ),
       ),
-      optional($._in_window_phrase),
+      optional($.in_window_phrase),
       optional($.frame_phrase),
     ),
 
@@ -30,7 +28,7 @@ module.exports = ({ kw }) => ({
     seq(
       repeat1(alias($.__prompt_for_field, $.field)),
       optional(alias($.__prompt_for_go_on, $.go_on_phrase)),
-        optional($._in_window_phrase),
+        optional($.in_window_phrase),
       optional($.frame_phrase),
       optional($.editing_phrase),
     ),

@@ -7,6 +7,8 @@ STATUS INPUT "Enter data".
 STATUS INPUT OFF.
 STATUS DEFAULT.
 
+
+
 --------------------------------------------------------------------------------
 
 (source_code
@@ -35,59 +37,63 @@ END.
 STATUS DEFAULT "Ready" IN WINDOW hWin.
 STATUS INPUT OFF IN WINDOW hWin.
 
+
+
 --------------------------------------------------------------------------------
 
 (source_code
   (status_statement
-    (string_literal))
+    message: (string_literal))
   (status_statement
-    (binary_expression
+    message: (binary_expression
       (binary_expression
         (string_literal)
         (function_call
-          (identifier)
+          function: (identifier)
           (arguments
             (argument
-              (string_literal)))))
+              name: (string_literal)))))
       (string_literal)))
   (for_statement
     (record
-      (identifier))
+      table: (identifier))
     (body
       (display_statement
-        (qualified_name
-          (identifier)
-          (identifier)))
+        record: (qualified_name
+          left: (identifier)
+          right: (identifier)))
       (for_statement
         (record
-          (identifier)
+          table: (identifier)
           (of_phrase
             (identifier)))
         (body
           (update_statement
             (field
-              (qualified_name
-                (identifier)
-                (identifier)))
+              field: (qualified_name
+                left: (identifier)
+                right: (identifier)))
             (field
-              (qualified_name
-                (identifier)
-                (identifier)))
+              field: (qualified_name
+                left: (identifier)
+                right: (identifier)))
             (field
-              (qualified_name
-                (identifier)
-                (identifier)))
+              field: (qualified_name
+                left: (identifier)
+                right: (identifier)))
             (field
-              (qualified_name
-                (identifier)
-                (identifier))))))
+              field: (qualified_name
+                left: (identifier)
+                right: (identifier))))))
       (update_statement
         (field
-          (qualified_name
-            (identifier)
-            (identifier))))))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier))))))
   (status_statement
-    (string_literal)
-    (identifier))
+    message: (string_literal)
+    (in_window_phrase
+      window: (identifier)))
   (status_statement
-    (identifier)))
+    (in_window_phrase
+      window: (identifier))))

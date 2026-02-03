@@ -9,6 +9,9 @@ module.exports = ($) => [
   // Purpose: prefer record form in ASSIGN when EXCEPT is present.
   // Example: ASSIGN Customer EXCEPT Name.
   [$.__assign_record_body, $._assignable],
+  // Purpose: treat identifier + '(' as a function call assignable.
+  // Example: ASSIGN SomeFunc() = 1.
+  [$.function_call, $._assignable],
   // Purpose: prefer ASSIGN statement over generic assignment.
   // Example: ASSIGN Customer EXCEPT Name.
   [$.assign_statement, $.assignment_statement],

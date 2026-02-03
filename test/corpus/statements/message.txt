@@ -187,11 +187,15 @@ MESSAGE "World" VIEW-AS ALERT-BOX IN WINDOW hMainWindow.
 (source_code
   (message_statement
     (string_literal)
-    window: (identifier))
+    (in_window_phrase
+
+      window: (identifier)))
   (message_statement
     (string_literal)
     (view_as_phrase)
-    window: (identifier)))
+    (in_window_phrase
+
+      window: (identifier))))
 
 ================================================================================
 MESSAGE complex example
@@ -213,7 +217,9 @@ MESSAGE COLOR NORMAL "Export done: " + fileName SKIP(2) VIEW-AS ALERT-BOX INFORM
     (set_update_phrase
       field: (identifier)
       type: (identifier))
-    window: (identifier)))
+    (in_window_phrase
+
+      window: (identifier))))
 
 ================================================================================
 MESSAGE with expressions

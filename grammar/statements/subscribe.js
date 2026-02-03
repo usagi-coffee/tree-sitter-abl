@@ -24,8 +24,7 @@ module.exports = ({ kw }) => ({
   __subscribe_expression: ($) =>
     choice(
       $.string_literal,
-      $.identifier,
-      $.qualified_name,
+      $._identifier_or_qualified_name,
       $.object_access,
       $.function_call,
     ),

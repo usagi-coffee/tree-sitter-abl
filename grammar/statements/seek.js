@@ -4,12 +4,10 @@ module.exports = ({ kw }) => ({
 
   __seek_body: ($) =>
     seq(
-      choice(kw("INPUT"), kw("OUTPUT"), $.__seek_stream),
+      choice(kw("INPUT"), kw("OUTPUT"), $._stream_phrase),
       kw("TO"),
       choice(kw("END"), $._expression),
     ),
-
-  __seek_stream: ($) => $._stream_phrase,
 
   // SEEK expression: SEEK(INPUT) or SEEK(OUTPUT) or SEEK(name) or SEEK(STREAM-HANDLE handle) - returns current stream position
   seek_expression: ($) =>

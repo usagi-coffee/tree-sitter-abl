@@ -2,13 +2,11 @@ module.exports = ({ kw }) => ({
   input_through_statement: ($) =>
     seq(
       kw("INPUT"),
-      optional($.__input_through_stream),
+      optional($._stream_phrase),
       kw("THROUGH"),
       $.__input_through_body,
       $._terminator,
     ),
-
-  __input_through_stream: ($) => $._stream_phrase,
 
   __input_through_body: ($) =>
     seq(
@@ -40,10 +38,9 @@ module.exports = ({ kw }) => ({
     choice(
       $.string_literal,
       $.number_literal,
-      $.identifier,
-      $.qualified_name,
+      prec(1, $.function_call),
       $.object_access,
-      $.function_call,
+      $._identifier_or_qualified_name,
       alias($.constant_expression, $.constant),
       alias($.__input_through_shell_variable, $.shell_variable),
     ),

@@ -10,7 +10,7 @@ module.exports = ({ kw }) => ({
           kw("NO-MESSAGE"),
         ),
       ),
-      optional($._in_window_phrase),
+      optional($.in_window_phrase),
       $._terminator,
     ),
 });

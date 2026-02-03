@@ -3,7 +3,7 @@ module.exports = ({ kw }) => ({
 
   __put_body: ($) =>
     seq(
-      optional($.__put_stream),
+      optional($._stream_phrase),
       choice(
         seq(optional(kw("UNFORMATTED")), repeat1($.__put_item)),
         seq(kw("CONTROL"), repeat1($.__put_control)),
@@ -11,8 +11,6 @@ module.exports = ({ kw }) => ({
     ),
 
   __put_control: ($) => $._expression,
-
-  __put_stream: ($) => $._stream_phrase,
 
   __put_item: ($) =>
     choice(
