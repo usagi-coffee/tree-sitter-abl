@@ -56,6 +56,27 @@ const WIDGETS = [
   kw("MENU"),
 ];
 
+const SYSTEM_HANDLE_WORDS = [
+  "ACTIVE-WINDOW",
+  "CLIPBOARD",
+  "COLOR-TABLE",
+  "COMPILER",
+  "CURRENT-WINDOW",
+  "DEBUGGER",
+  "DEFAULT-WINDOW",
+  "ERROR-STATUS",
+  "FILE-INFO",
+  "FOCUS",
+  "FONT-TABLE",
+  "LAST-EVENT",
+  "RCODE-INFO",
+  "SELF",
+  "SESSION",
+  "SOURCE-PROCEDURE",
+  "TARGET-PROCEDURE",
+  "THIS-PROCEDURE",
+];
+
 module.exports = grammar({
   name: "abl",
 
@@ -148,6 +169,7 @@ module.exports = grammar({
     $.__assign_record_name,
     $.__temp_table_field_name,
     $.__temp_table_like_name,
+    $.system_handle_identifier,
   ],
 
   precedences: ($) => precedences($),
@@ -302,6 +324,7 @@ module.exports = grammar({
           $.widget_qualified_name,
           $.array_access,
           $.function_call,
+          $.system_handle_identifier,
         ),
 
       // Expressions
@@ -339,7 +362,10 @@ module.exports = grammar({
       // Accessors
       _object_access_plain: ($) =>
         seq(
-          field("left", $._identifier_or_qualified_name),
+          field(
+            "left",
+            choice($._identifier_or_qualified_name, $.system_handle_identifier),
+          ),
           $._object_access_tail,
         ),
       _object_access_widget: ($) =>
@@ -481,6 +507,15 @@ module.exports = grammar({
         choice(
           ...LABEL_KEYWORD_WORDS.map((word) =>
             token(prec(1, new RegExp(`${escape_regex(word)}\\s*:`, "i"))),
+          ),
+        ),
+      system_handle_identifier: ($) =>
+        choice(
+          ...SYSTEM_HANDLE_WORDS.map((word) =>
+            alias(
+              token(prec(1, new RegExp(escape_regex(word), "i"))),
+              $.identifier,
+            ),
           ),
         ),
       _label_identifier: ($) => $.identifier,
