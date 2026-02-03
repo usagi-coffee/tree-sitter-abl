@@ -18,6 +18,7 @@ module.exports = ({ kw }) => ({
         ),
       ),
       optional($.frame_phrase),
+      optional($.__for_with_stream_io_phrase),
       $.body,
     ),
 
