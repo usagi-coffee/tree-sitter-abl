@@ -3,15 +3,29 @@ module.exports = ({ kw }) => ({
     seq(
       kw("ON"),
       kw("QUIT"),
-      optional(seq(kw("UNDO"), optional(field("undo_label", $.identifier)))),
+      optional(
+        seq(
+          kw("UNDO"),
+          optional(field("undo_label", $.identifier)),
+        ),
+      ),
       optional(seq(",", $.__on_quit_action)),
     ),
 
   __on_quit_action: ($) =>
     choice(
-      seq(kw("LEAVE"), optional(field("leave_label", $.identifier))),
-      seq(kw("NEXT"), optional(field("next_label", $.identifier))),
-      seq(kw("RETRY"), optional(field("retry_label", $.identifier))),
+      seq(
+        kw("LEAVE"),
+        optional(field("leave_label", $.identifier)),
+      ),
+      seq(
+        kw("NEXT"),
+        optional(field("next_label", $.identifier)),
+      ),
+      seq(
+        kw("RETRY"),
+        optional(field("retry_label", $.identifier)),
+      ),
       $.__on_quit_return,
     ),
 

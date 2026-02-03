@@ -12,9 +12,18 @@ module.exports = ({ kw }) => ({
   __on_error_action: ($) =>
     choice(
       seq(kw("THROW"), optional(field("throw_value", $._expression))),
-      seq(kw("LEAVE"), optional(field("leave_label", $.identifier))),
-      seq(kw("NEXT"), optional(field("next_label", $.identifier))),
-      seq(kw("RETRY"), optional(field("retry_label", $.identifier))),
+      seq(
+        kw("LEAVE"),
+        optional(field("leave_label", $.identifier)),
+      ),
+      seq(
+        kw("NEXT"),
+        optional(field("next_label", $.identifier)),
+      ),
+      seq(
+        kw("RETRY"),
+        optional(field("retry_label", $.identifier)),
+      ),
       $.__on_error_return,
     ),
 

@@ -27,3 +27,39 @@ export function kw(word, options) {
   const pattern = required + buildProgressiveOptional(rest);
   return alias(token(new RegExp(pattern, "i")), aliasName);
 }
+
+// Utility to grab every keyword from the grammar source code
+import fs from "node:fs";
+import path from "node:path";
+
+export function collect_keyword_words(rootDir, excludedWords = []) {
+  const files = [];
+  const stack = [rootDir];
+  while (stack.length) {
+    const dir = stack.pop();
+    const entries = fs.readdirSync(dir, { withFileTypes: true });
+    for (const entry of entries) {
+      const fullPath = path.join(dir, entry.name);
+      if (entry.isDirectory()) {
+        stack.push(fullPath);
+      } else if (entry.isFile() && entry.name.endsWith(".js")) {
+        files.push(fullPath);
+      }
+    }
+  }
+
+  const keywords = new Set();
+  const regex = /kw\(\s*["']([^"']+)["']\s*(?:,|\))/g;
+  for (const file of files) {
+    const content = fs.readFileSync(file, "utf8");
+    let match;
+    while ((match = regex.exec(content))) {
+      keywords.add(match[1]);
+    }
+  }
+
+  const excluded = new Set(excludedWords.map((word) => word.toUpperCase()));
+  return Array.from(keywords).filter(
+    (word) => !excluded.has(word.toUpperCase()),
+  );
+}

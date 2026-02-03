@@ -1,11 +1,6 @@
 module.exports = ({ kw }) => ({
   for_statement: ($) =>
-    seq(
-      optional(seq(field("label", $.identifier), ":")),
-      $.__for_body,
-      kw("END"),
-      $._terminator,
-    ),
+    seq(optional($._label), $.__for_body, kw("END"), $._terminator),
 
   __for_body: ($) =>
     seq(

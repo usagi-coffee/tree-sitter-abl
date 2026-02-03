@@ -1,10 +1,40 @@
 /// <reference types="tree-sitter-cli/dsl" />
 
-const { kw } = require("./grammar/helpers/keywords");
+const path = require("path");
+const { kw, collect_keyword_words } = require("./grammar/helpers/keywords");
 const precedences = require("./grammar/precedences");
 
-// prettier-ignore
-const comparison_operators = [ "<>", ">", "<", ">=", "<=", kw("BEGINS"), kw("MATCHES"), kw("EQ"), kw("NE"), kw("GT"), kw("LT"), kw("GE"), kw("LE")];
+const COMPARISON_OPERATORS = [
+  "<>",
+  ">",
+  "<",
+  ">=",
+  "<=",
+  kw("BEGINS"),
+  kw("MATCHES"),
+  kw("EQ"),
+  kw("NE"),
+  kw("GT"),
+  kw("LT"),
+  kw("GE"),
+  kw("LE"),
+];
+
+const LABEL_KEYWORD_WORDS = collect_keyword_words(
+  path.join(__dirname, "grammar"),
+  [
+    "DO",
+    "FOR",
+    "REPEAT",
+    "FINALLY",
+    "PROCEDURE",
+    "FUNCTION",
+    "CATCH",
+    "CASE",
+    "CLASS",
+    "METHOD",
+  ],
+);
 
 const WIDGETS = [
   kw("WINDOW"),
@@ -250,7 +280,7 @@ module.exports = grammar({
       // Operators
       assignment_operator: ($) => choice("=", "+=", "-=", "*=", "/="),
       _logical_operator: ($) => choice(kw("AND"), kw("OR")),
-      _comparison_operator: ($) => choice("=", ...comparison_operators),
+      _comparison_operator: ($) => choice("=", ...COMPARISON_OPERATORS),
 
       // Assignabless
       assignment_statement: ($) =>
@@ -297,7 +327,7 @@ module.exports = grammar({
           $._primary_expression,
         ),
       // excludes `=` to disambiguate assignment vs equality comparison at statement level.
-      _comparison_operator_no_eq: ($) => choice(...comparison_operators),
+      _comparison_operator_no_eq: ($) => choice(...COMPARISON_OPERATORS),
       // binary_expression without `=` comparison.
       binary_expression_no_eq: ($) =>
         binary_expression(
@@ -447,6 +477,21 @@ module.exports = grammar({
       // Identifiers
       // BE CAREFUL MODIFYING HERE, IDENTIFIER ORDER FOR SOME REASON MATTERS!
       identifier: ($) => token(/[_\p{L}][\p{L}\p{N}_\-&]*/i),
+      label_keyword: ($) =>
+        choice(
+          ...LABEL_KEYWORD_WORDS.map((word) =>
+            token(prec(1, new RegExp(`${escape_regex(word)}\\s*:`, "i"))),
+          ),
+        ),
+      _label_identifier: ($) => $.identifier,
+      _label: ($) =>
+        prec.right(
+          1,
+          choice(
+            seq(field("label", $.identifier), ":"),
+            field("label", alias($.label_keyword, $.identifier)),
+          ),
+        ),
       _identifier_immediate: ($) => token.immediate(/[_\p{L}][\p{L}\p{N}_-]*/i),
       parenthesized_identifier: ($) => seq("(", $.identifier, ")"),
       _object_access_tail: ($) =>
@@ -468,6 +513,9 @@ module.exports = grammar({
 });
 
 // Helpers
+function escape_regex(value) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
 
 function binary_expression($, expression, comparison_operator) {
   return choice(

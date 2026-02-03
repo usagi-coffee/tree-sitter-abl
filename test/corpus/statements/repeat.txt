@@ -18,6 +18,10 @@ main: REPEAT ON STOP UNDO, RETURN ERROR "x" ON ERROR UNDO, THROW:
   LEAVE.
 END.
 
+CHOOSE: REPEAT:
+  MESSAGE "ok".
+END.
+
 --------------------------------------------------------------------------------
 
 (source_code
@@ -47,7 +51,12 @@ END.
       error_value: (string_literal))
     (on_error_phrase)
     (body
-      (leave_statement))))
+      (leave_statement)))
+  (repeat_statement
+    label: (identifier)
+    (body
+      (message_statement
+        (string_literal)))))
 
 ================================================================================
 REPEAT - reference snippet and options

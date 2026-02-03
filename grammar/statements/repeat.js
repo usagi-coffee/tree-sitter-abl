@@ -1,11 +1,6 @@
 module.exports = ({ kw }) => ({
   repeat_statement: ($) =>
-    seq(
-      optional(seq(field("label", $.identifier), ":")),
-      $.__repeat_body,
-      kw("END"),
-      $._terminator,
-    ),
+    seq(optional($._label), $.__repeat_body, kw("END"), $._terminator),
 
   __repeat_body: ($) =>
     seq(

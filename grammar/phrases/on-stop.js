@@ -11,9 +11,18 @@ module.exports = ({ kw }) => ({
 
   __on_stop_action: ($) =>
     choice(
-      seq(kw("LEAVE"), optional(field("leave_label", $.identifier))),
-      seq(kw("NEXT"), optional(field("next_label", $.identifier))),
-      seq(kw("RETRY"), optional(field("retry_label", $.identifier))),
+      seq(
+        kw("LEAVE"),
+        optional(field("leave_label", $.identifier)),
+      ),
+      seq(
+        kw("NEXT"),
+        optional(field("next_label", $.identifier)),
+      ),
+      seq(
+        kw("RETRY"),
+        optional(field("retry_label", $.identifier)),
+      ),
       $.__on_stop_return,
     ),
 
