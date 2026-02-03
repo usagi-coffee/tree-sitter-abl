@@ -1,21 +1,9 @@
-const { definitionModifiers } = require("../helpers/modifiers");
-
 module.exports = ({ kw }) => ({
   var_statement: ($) => seq(kw("VAR"), $.__var_body, $._terminator),
 
   __var_body: ($) =>
     seq(
-      ...definitionModifiers($, kw, {
-        access: [
-          "PRIVATE",
-          "PACKAGE-PRIVATE",
-          "PROTECTED",
-          "PACKAGE-PROTECTED",
-          "PUBLIC",
-        ],
-        static: true,
-        serializable: true,
-      }),
+      optional($.__var_modifier),
       $._var_type,
       alias($.__var_variable, $.variable),
       repeat(seq(",", alias($.__var_variable, $.variable))),
@@ -43,5 +31,24 @@ module.exports = ({ kw }) => ({
       $.number_literal,
       alias($.constant_expression, $.constant),
       $.identifier,
+    ),
+  __var_modifier: ($) =>
+    choice(
+      seq($.__var_access_modifier, optional($.__var_storage_modifier)),
+      $.__var_storage_modifier,
+    ),
+  __var_access_modifier: ($) =>
+    choice(
+      alias(kw("PRIVATE"), $.access_modifier),
+      alias(kw("PACKAGE-PRIVATE"), $.access_modifier),
+      alias(kw("PROTECTED"), $.access_modifier),
+      alias(kw("PACKAGE-PROTECTED"), $.access_modifier),
+      alias(kw("PUBLIC"), $.access_modifier),
+    ),
+  __var_storage_modifier: ($) =>
+    choice(
+      alias(kw("STATIC"), $.static_modifier),
+      alias(kw("SERIALIZABLE"), $.serialization_modifier),
+      alias(kw("NON-SERIALIZABLE"), $.serialization_modifier),
     ),
 });

@@ -47061,6 +47061,10 @@
           "named": true
         },
         {
+          "type": "final_modifier",
+          "named": true
+        },
+        {
           "type": "finally_statement",
           "named": true
         },
@@ -47234,6 +47238,10 @@
         },
         {
           "type": "overlay_statement",
+          "named": true
+        },
+        {
+          "type": "override_modifier",
           "named": true
         },
         {
@@ -69205,6 +69213,10 @@
   },
   {
     "type": "file_name",
+    "named": true
+  },
+  {
+    "type": "final_modifier",
     "named": true
   },
   {

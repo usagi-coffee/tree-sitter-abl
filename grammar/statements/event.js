@@ -1,21 +1,8 @@
-const { definitionModifiers } = require("../helpers/modifiers");
-
 module.exports = ({ kw }) => ({
   event_definition: ($) =>
     seq(
       kw("DEFINE", { offset: 3 }),
-      ...definitionModifiers($, kw, {
-        access: [
-          "PRIVATE",
-          "PACKAGE-PRIVATE",
-          "PROTECTED",
-          "PACKAGE-PROTECTED",
-          "PUBLIC",
-        ],
-        static: true,
-        abstract: true,
-        override: true,
-      }),
+      optional($.__event_modifier),
       kw("EVENT"),
       $.__event_body,
       $._terminator,
@@ -55,5 +42,32 @@ module.exports = ({ kw }) => ({
       kw("AS"),
       optional(kw("CLASS")),
       field("type", $._type_or_string),
+    ),
+  __event_modifier: ($) =>
+    choice(
+      seq(
+        $.__event_access_modifier,
+        repeat($.__event_type_modifier),
+        optional(alias(kw("OVERRIDE"), $.override_modifier)),
+      ),
+      seq(
+        repeat1($.__event_type_modifier),
+        optional($.__event_access_modifier),
+        optional(alias(kw("OVERRIDE"), $.override_modifier)),
+      ),
+      alias(kw("OVERRIDE"), $.override_modifier),
+    ),
+  __event_access_modifier: ($) =>
+    choice(
+      alias(kw("PRIVATE"), $.access_modifier),
+      alias(kw("PACKAGE-PRIVATE"), $.access_modifier),
+      alias(kw("PROTECTED"), $.access_modifier),
+      alias(kw("PACKAGE-PROTECTED"), $.access_modifier),
+      alias(kw("PUBLIC"), $.access_modifier),
+    ),
+  __event_type_modifier: ($) =>
+    choice(
+      alias(kw("STATIC"), $.static_modifier),
+      alias(kw("ABSTRACT"), $.abstract_modifier),
     ),
 });

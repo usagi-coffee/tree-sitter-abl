@@ -1,5 +1,3 @@
-const { definitionModifiers } = require("../helpers/modifiers");
-
 module.exports = ({ kw }) => ({
   temp_table_definition: ($) =>
     seq(

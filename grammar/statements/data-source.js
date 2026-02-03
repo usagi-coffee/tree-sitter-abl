@@ -1,5 +1,3 @@
-const { definitionModifiers } = require("../helpers/modifiers");
-
 module.exports = ({ kw }) => ({
   data_source_definition: ($) =>
     seq(
@@ -13,10 +11,7 @@ module.exports = ({ kw }) => ({
   data_source_class_definition: ($) =>
     seq(
       kw("DEFINE", { offset: 3 }),
-      ...definitionModifiers($, kw, {
-        access: ["PRIVATE", "PROTECTED"],
-        static: true,
-      }),
+      optional($.__data_source_modifier),
       kw("DATA-SOURCE"),
       $.__data_source_body,
       $._terminator,
@@ -56,4 +51,16 @@ module.exports = ({ kw }) => ({
 
   __data_source_buffer_name: ($) => $._identifier_or_qualified_name,
   __data_source_field_name: ($) => $._identifier_or_qualified_name,
+  __data_source_modifier: ($) =>
+    choice(
+      seq($.__data_source_access_modifier, optional($.__data_source_static)),
+      $.__data_source_static,
+      seq($.__data_source_static, $.__data_source_access_modifier),
+    ),
+  __data_source_access_modifier: ($) =>
+    choice(
+      alias(kw("PRIVATE"), $.access_modifier),
+      alias(kw("PROTECTED"), $.access_modifier),
+    ),
+  __data_source_static: ($) => alias(kw("STATIC"), $.static_modifier),
 });

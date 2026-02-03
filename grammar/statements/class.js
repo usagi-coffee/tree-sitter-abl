@@ -1,5 +1,3 @@
-const { definitionModifiers } = require("../helpers/modifiers");
-
 module.exports = ({ kw }) => ({
   class_definition: ($) =>
     seq(repeat($.__class_option), kw("CLASS"), $.__class_body, $._terminator),
@@ -139,19 +137,7 @@ module.exports = ({ kw }) => ({
   property_definition: ($) =>
     seq(
       kw("DEFINE", { offset: 3 }),
-      ...definitionModifiers($, kw, {
-        access: [
-          "PRIVATE",
-          "PACKAGE-PRIVATE",
-          "PROTECTED",
-          "PACKAGE-PROTECTED",
-          "PUBLIC",
-        ],
-        static: true,
-        abstract: true,
-        final: true,
-        serializable: true,
-      }),
+      optional($.__property_definition_modifier),
       kw("PROPERTY"),
       field("name", $.identifier),
       $.__property_type_phrase,
@@ -221,6 +207,45 @@ module.exports = ({ kw }) => ({
 
   __property_modifier: ($) =>
     choice(kw("ABSTRACT"), kw("FINAL"), kw("OVERRIDE")),
+  __property_definition_modifier: ($) =>
+    choice(
+      seq(
+        $.__property_access_modifier,
+        optional($.__property_class_modifier),
+        optional(alias(kw("OVERRIDE"), $.override_modifier)),
+        optional($.__property_serialization_modifier),
+      ),
+      seq(
+        $.__property_class_modifier,
+        optional($.__property_access_modifier),
+        optional(alias(kw("OVERRIDE"), $.override_modifier)),
+        optional($.__property_serialization_modifier),
+      ),
+      seq(
+        alias(kw("OVERRIDE"), $.override_modifier),
+        optional($.__property_serialization_modifier),
+      ),
+      $.__property_serialization_modifier,
+    ),
+  __property_access_modifier: ($) =>
+    choice(
+      alias(kw("PRIVATE"), $.access_modifier),
+      alias(kw("PACKAGE-PRIVATE"), $.access_modifier),
+      alias(kw("PROTECTED"), $.access_modifier),
+      alias(kw("PACKAGE-PROTECTED"), $.access_modifier),
+      alias(kw("PUBLIC"), $.access_modifier),
+    ),
+  __property_class_modifier: ($) =>
+    choice(
+      alias(kw("STATIC"), $.static_modifier),
+      alias(kw("ABSTRACT"), $.abstract_modifier),
+      alias(kw("FINAL"), $.final_modifier),
+    ),
+  __property_serialization_modifier: ($) =>
+    choice(
+      alias(kw("SERIALIZABLE"), $.serialization_modifier),
+      alias(kw("NON-SERIALIZABLE"), $.serialization_modifier),
+    ),
 
   __property_type_phrase: ($) =>
     seq(

@@ -1,10 +1,8 @@
-const { definitionModifiers } = require("../helpers/modifiers");
-
 module.exports = ({ kw }) => ({
   rectangle_definition: ($) =>
     seq(
       kw("DEFINE", { offset: 3 }),
-      ...definitionModifiers($, kw, { new: false, access: ["PRIVATE"] }),
+      optional($.__rectangle_modifier),
       kw("RECTANGLE"),
       $.__rectangle_body,
       $._terminator,
@@ -52,4 +50,5 @@ module.exports = ({ kw }) => ({
     ),
   __rectangle_tooltip: ($) =>
     seq(kw("TOOLTIP"), choice($.identifier, $.string_literal, $.null_literal)),
+  __rectangle_modifier: ($) => alias(kw("PRIVATE"), $.access_modifier),
 });

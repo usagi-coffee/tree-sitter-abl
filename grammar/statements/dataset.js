@@ -1,5 +1,3 @@
-const { definitionModifiers } = require("../helpers/modifiers");
-
 module.exports = ({ kw }) => ({
   dataset_definition: ($) =>
     seq(

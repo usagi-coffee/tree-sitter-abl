@@ -1,10 +1,8 @@
-const { definitionModifiers } = require("../helpers/modifiers");
-
 module.exports = ({ kw }) => ({
   button_definition: ($) =>
     seq(
       kw("DEFINE", { offset: 3 }),
-      ...definitionModifiers($, kw, { access: ["PRIVATE"] }),
+      optional($.__button_modifier),
       kw("BUTTON"),
       $.__button_body,
       $._terminator,
@@ -100,4 +98,5 @@ module.exports = ({ kw }) => ({
       kw("TOOLTIP"),
       field("tooltip", choice($.identifier, $.string_literal, $.null_literal)),
     ),
+  __button_modifier: ($) => alias(kw("PRIVATE"), $.access_modifier),
 });

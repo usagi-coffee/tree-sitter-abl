@@ -1,10 +1,8 @@
-const { definitionModifiers } = require("../helpers/modifiers");
-
 module.exports = ({ kw }) => ({
   image_definition: ($) =>
     seq(
       kw("DEFINE", { offset: 3 }),
-      ...definitionModifiers($, kw, { access: ["PRIVATE"] }),
+      optional($.__image_modifier),
       kw("IMAGE"),
       $.__image_body,
       $._terminator,
@@ -70,4 +68,5 @@ module.exports = ({ kw }) => ({
       ),
     ),
   __image_like_phrase: ($) => seq(kw("LIKE"), field("like", $.identifier)),
+  __image_modifier: ($) => alias(kw("PRIVATE"), $.access_modifier),
 });

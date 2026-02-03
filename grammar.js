@@ -38,6 +38,58 @@ module.exports = grammar({
     // Just IDENTIFIER + optionals
     [$.__prompt_for_record_body, $.__prompt_for_fields_body],
     [$.__update_field, $.__update_record],
+
+    // DEFINE modifiers prefix conflicts
+    // Conflicts approach has slightly better state reduction (~500) than doing it conflicts free
+    [
+      $.__browse_modifier,
+      $.__buffer_modifier,
+      $.__data_source_modifier,
+      $.__dataset_modifier,
+      $.__event_modifier,
+      $.__property_definition_modifier,
+      $.__query_modifier,
+      $.__temp_table_modifier,
+      $.__variable_modifier,
+    ],
+    [
+      $.__buffer_modifier,
+      $.__property_access_modifier,
+      $.__data_source_access_modifier,
+      $.__dataset_modifier,
+      $.__event_access_modifier,
+      $.__query_modifier,
+      $.__temp_table_modifier,
+      $.__variable_modifier,
+    ],
+    [$.__property_access_modifier, $.__event_access_modifier],
+    [
+      $.__property_access_modifier,
+      $.__dataset_modifier,
+      $.__temp_table_modifier,
+      $.__variable_modifier,
+    ],
+    [$.__property_access_modifier, $.__variable_modifier],
+    [
+      $.__property_access_modifier,
+      $.__event_access_modifier,
+      $.__variable_modifier,
+    ],
+    [
+      $.__buffer_modifier,
+      $.__property_class_modifier,
+      $.__data_source_static,
+      $.__event_type_modifier,
+      $.__query_modifier,
+      $.__variable_modifier,
+    ],
+    [$.__property_class_modifier, $.__variable_modifier],
+    [$.__property_class_modifier, $.__event_type_modifier],
+    [
+      $.__property_class_modifier,
+      $.__event_type_modifier,
+      $.__variable_modifier,
+    ],
   ],
   inline: ($) => [
     $.__find_record_name,
@@ -64,8 +116,8 @@ module.exports = grammar({
         token(
           choice(
             /\{\{&[^}\r\n]+\}[^\s}\r\n]*\.i[ \t]*\}\.?[ \t]*\r?\n/i,
-            /\{[^\s}\r\n]*\.i[ \t]*\}\.?[ \t]*\r?\n/i,
-          ),
+            /\{[^\s}\r\n]*\.i[ \t]*\}\.?[ \t]*\r?\n/i
+          )
         ),
       include_expression: ($) =>
         seq(
@@ -73,7 +125,7 @@ module.exports = grammar({
           field("file", $._include_file_reference),
           repeat(field("argument", $.include_argument)),
           "}",
-          optional("."),
+          optional(".")
         ),
       include_argument: ($) =>
         choice($.include_named_argument, $._include_argument_value),
@@ -81,7 +133,7 @@ module.exports = grammar({
         seq(
           "&",
           field("name", $.identifier),
-          optional(seq("=", field("value", $._include_argument_value))),
+          optional(seq("=", field("value", $._include_argument_value)))
         ),
       _include_argument_value: ($) =>
         choice(
@@ -92,7 +144,7 @@ module.exports = grammar({
           $.boolean_literal,
           alias($.constant_expression, $.constant),
           $.argument_reference,
-          $.parenthesized_identifier,
+          $.parenthesized_identifier
         ),
 
       // Preprocessor
@@ -107,7 +159,7 @@ module.exports = grammar({
           "{&",
           $.identifier,
           optional(seq("=", field("value", $.__constant_value))),
-          "}",
+          "}"
         ),
       __constant_value: ($) =>
         choice(
@@ -118,7 +170,7 @@ module.exports = grammar({
           $.boolean_literal,
           alias($.constant_expression, $.constant),
           $.argument_reference,
-          $.parenthesized_identifier,
+          $.parenthesized_identifier
         ),
       argument_reference: ($) => token(/\{[0-9A-Za-z_-]+\}/),
 
@@ -135,10 +187,8 @@ module.exports = grammar({
         seq(
           $._escaped_string,
           optional(
-            token.immediate(
-              /:(?:[RLCT](?:U)?(?:[0-9]+)?|U(?:[0-9]+)?|[0-9]+)/i,
-            ),
-          ),
+            token.immediate(/:(?:[RLCT](?:U)?(?:[0-9]+)?|U(?:[0-9]+)?|[0-9]+)/i)
+          )
         ),
       null_literal: ($) => token("?"),
       boolean_literal: ($) => token(/TRUE|FALSE|YES|NO/i),
@@ -153,7 +203,7 @@ module.exports = grammar({
           $.scoped_name,
           $.qualified_name,
           $.nested_type_name,
-          $.identifier,
+          $.identifier
         ),
       _type_name: ($) => choice($.generic_type, $._simple_type_name),
       _type_or_string: ($) => choice($._type_name, $.string_literal),
@@ -181,17 +231,17 @@ module.exports = grammar({
               kw("QUERY"),
               kw("SUB-MENU"),
               kw("MENU-ITEM"),
-              kw("MENU"),
+              kw("MENU")
             ),
-            $.identifier,
-          ),
+            $.identifier
+          )
         ),
       _events: ($) =>
         choice(
           $.identifier,
           $.string_literal,
           $.number_literal,
-          alias($._signed_number_literal, $.number_literal),
+          alias($._signed_number_literal, $.number_literal)
         ),
 
       // Operators
@@ -208,8 +258,8 @@ module.exports = grammar({
             field("right", choice($.array_initializer, $._expression)),
             optional($.widget_phrase),
             optional(alias(kw("NO-ERROR"), $.no_error)),
-            $._terminator,
-          ),
+            $._terminator
+          )
         ),
 
       _assignable: ($) =>
@@ -217,7 +267,7 @@ module.exports = grammar({
           $._identifier_or_qualified_name,
           $.object_access,
           $.array_access,
-          $.function_call,
+          $.function_call
         ),
 
       // Expressions
@@ -226,7 +276,7 @@ module.exports = grammar({
       unary_expression: ($) =>
         choice(
           prec("unary", seq(choice("+", "-"), $._expression)),
-          prec("not", seq(kw("NOT"), $._expression)),
+          prec("not", seq(kw("NOT"), $._expression))
         ),
       binary_expression: ($) =>
         binary_expression($, $._expression, $._comparison_operator),
@@ -240,7 +290,7 @@ module.exports = grammar({
         choice(
           alias($.binary_expression_no_eq, $.binary_expression),
           $.unary_expression,
-          $._primary_expression,
+          $._primary_expression
         ),
       // excludes `=` to disambiguate assignment vs equality comparison at statement level.
       _comparison_operator_no_eq: ($) => choice(...comparison_operators),
@@ -249,7 +299,7 @@ module.exports = grammar({
         binary_expression(
           $,
           $._statement_expression,
-          $._comparison_operator_no_eq,
+          $._comparison_operator_no_eq
         ),
 
       // Accessors
@@ -259,8 +309,8 @@ module.exports = grammar({
             optional(field("widget", alias($._widgets, $.identifier))),
             field("left", $._identifier_or_qualified_name),
             $._object_access_tail,
-            optional(seq(kw("IN"), $._widgets, field("in", $.identifier))),
-          ),
+            optional(seq(kw("IN"), $._widgets, field("in", $.identifier)))
+          )
         ),
       object_access_expression: ($) =>
         seq(
@@ -269,10 +319,10 @@ module.exports = grammar({
             choice(
               $.function_call,
               $.parenthesized_expression,
-              $.new_expression,
-            ),
+              $.new_expression
+            )
           ),
-          $._object_access_tail,
+          $._object_access_tail
         ),
 
       scoped_name: ($) =>
@@ -281,9 +331,9 @@ module.exports = grammar({
           repeat1(
             seq(
               $._namedoublecolon,
-              field("right", alias($._identifier_immediate, $.identifier)),
-            ),
-          ),
+              field("right", alias($._identifier_immediate, $.identifier))
+            )
+          )
         ),
 
       qualified_name: ($) =>
@@ -292,9 +342,9 @@ module.exports = grammar({
           repeat1(
             seq(
               $._namedot,
-              field("right", alias($._identifier_immediate, $.identifier)),
-            ),
-          ),
+              field("right", alias($._identifier_immediate, $.identifier))
+            )
+          )
         ),
 
       nested_type_name: ($) =>
@@ -303,26 +353,22 @@ module.exports = grammar({
           repeat1(
             seq(
               $._nameplus,
-              field("right", alias($._identifier_immediate, $.identifier)),
-            ),
-          ),
+              field("right", alias($._identifier_immediate, $.identifier))
+            )
+          )
         ),
 
       // Array
       array_initializer: ($) => seq("[", optional($._expressions), "]"),
       _array_target: ($) =>
-        choice(
-          $._identifier_or_qualified_name,
-          $.object_access,
-          $.scoped_name,
-        ),
+        choice($._identifier_or_qualified_name, $.object_access, $.scoped_name),
 
       array_access: ($) =>
         seq(
           field("array", $._array_target),
           "[",
           optional($._array_subscript),
-          "]",
+          "]"
         ),
       _array_subscript: ($) =>
         choice(
@@ -330,14 +376,13 @@ module.exports = grammar({
           seq(
             field("start", $._expression),
             kw("FOR"),
-            field("count", $._expression),
-          ),
+            field("count", $._expression)
+          )
         ),
 
       // Callables
       arguments: ($) => seq("(", optional($._argument_list), ")"),
-      _argument_list: ($) =>
-        seq($.argument, repeat(seq(",", $.argument))),
+      _argument_list: ($) => seq($.argument, repeat(seq(",", $.argument))),
       argument: ($) =>
         choice(
           seq(
@@ -345,14 +390,14 @@ module.exports = grammar({
             choice(kw("TABLE"), kw("BUFFER")),
             field("name", $._identifier_or_qualified_name),
             optional(seq(kw("AS"), field("type", $._type_name))),
-            optional(kw("BY-REFERENCE")),
+            optional(kw("BY-REFERENCE"))
           ),
           seq(
             optional(choice(kw("INPUT"), kw("OUTPUT"), kw("INPUT-OUTPUT"))),
             field("name", $._expression),
             optional(seq(kw("AS"), field("type", $._type_name))),
-            optional(kw("BY-REFERENCE")),
-          ),
+            optional(kw("BY-REFERENCE"))
+          )
         ),
 
       function_call: ($) =>
@@ -362,10 +407,10 @@ module.exports = grammar({
             choice(
               $._identifier_or_qualified_name,
               $.object_access,
-              $.scoped_name,
-            ),
+              $.scoped_name
+            )
           ),
-          $.arguments,
+          $.arguments
         ),
 
       frame_qualified_name: ($) =>
@@ -373,7 +418,7 @@ module.exports = grammar({
           $._in_frame_target,
           kw("IN"),
           kw("FRAME"),
-          field("frame", $.identifier),
+          field("frame", $.identifier)
         ),
 
       _in_frame_target: ($) =>
@@ -381,14 +426,14 @@ module.exports = grammar({
           $._identifier_or_qualified_name,
           $.scoped_name,
           $.object_access,
-          $.function_call,
+          $.function_call
         ),
       _window_handle: ($) =>
         choice(
           $._identifier_or_qualified_name,
           $.object_access,
           $.function_call,
-          $.scoped_name,
+          $.scoped_name
         ),
 
       // Identifiers
@@ -400,8 +445,8 @@ module.exports = grammar({
         repeat1(
           seq(
             choice($._namecolon, token.immediate("?:")),
-            field("right", alias($._identifier_immediate, $.identifier)),
-          ),
+            field("right", alias($._identifier_immediate, $.identifier))
+          )
         ),
 
       _terminator: ($) => choice($._terminator_dot, ";"),
@@ -420,10 +465,10 @@ function binary_expression($, expression, comparison_operator) {
   return choice(
     prec.left(
       "multiplication",
-      seq(expression, choice("*", "/", kw("MOD"), kw("MODULO")), expression),
+      seq(expression, choice("*", "/", kw("MOD"), kw("MODULO")), expression)
     ),
     prec.left("add", seq(expression, choice("+", "-"), expression)),
     prec.left("compare", seq(expression, comparison_operator, expression)),
-    prec.left("logical", seq(expression, $._logical_operator, expression)),
+    prec.left("logical", seq(expression, $._logical_operator, expression))
   );
 }
