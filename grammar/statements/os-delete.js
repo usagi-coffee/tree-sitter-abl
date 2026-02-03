@@ -6,5 +6,17 @@ module.exports = ({ kw }) => ({
     seq(repeat1($.__os_delete_target), optional(kw("RECURSIVE"))),
 
   __os_delete_target: ($) =>
-    choice($._expression, seq(kw("VALUE"), "(", $._expression, ")")),
+    choice(
+      $.__os_delete_filename,
+      seq(kw("VALUE"), "(", field("value", $.__os_delete_filename), ")"),
+    ),
+
+  __os_delete_filename: ($) =>
+    choice(
+      $.string_literal,
+      $._identifier_or_qualified_name,
+      $.function_call,
+      $.object_access,
+      $.scoped_name,
+    ),
 });

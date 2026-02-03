@@ -27249,7 +27249,7 @@
           "name": "source",
           "content": {
             "type": "SYMBOL",
-            "name": "_expression"
+            "name": "__os_append_filename"
           }
         },
         {
@@ -27257,8 +27257,33 @@
           "name": "target",
           "content": {
             "type": "SYMBOL",
-            "name": "_expression"
+            "name": "__os_append_filename"
           }
+        }
+      ]
+    },
+    "__os_append_filename": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "string_literal"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_identifier_or_qualified_name"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "function_call"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "object_access"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "scoped_name"
         }
       ]
     },
@@ -27462,7 +27487,7 @@
           "name": "source",
           "content": {
             "type": "SYMBOL",
-            "name": "_expression"
+            "name": "__os_copy_filename"
           }
         },
         {
@@ -27470,8 +27495,33 @@
           "name": "target",
           "content": {
             "type": "SYMBOL",
-            "name": "_expression"
+            "name": "__os_copy_filename"
           }
+        }
+      ]
+    },
+    "__os_copy_filename": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "string_literal"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_identifier_or_qualified_name"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "function_call"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "object_access"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "scoped_name"
         }
       ]
     },
@@ -27509,8 +27559,33 @@
       "name": "directory",
       "content": {
         "type": "SYMBOL",
-        "name": "_expression"
+        "name": "__os_create_dir_name"
       }
+    },
+    "__os_create_dir_name": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "string_literal"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_identifier_or_qualified_name"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "function_call"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "object_access"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "scoped_name"
+        }
+      ]
     },
     "os_delete_statement": {
       "type": "SEQ",
@@ -27576,7 +27651,7 @@
       "members": [
         {
           "type": "SYMBOL",
-          "name": "_expression"
+          "name": "__os_delete_filename"
         },
         {
           "type": "SEQ",
@@ -27599,14 +27674,43 @@
               "value": "("
             },
             {
-              "type": "SYMBOL",
-              "name": "_expression"
+              "type": "FIELD",
+              "name": "value",
+              "content": {
+                "type": "SYMBOL",
+                "name": "__os_delete_filename"
+              }
             },
             {
               "type": "STRING",
               "value": ")"
             }
           ]
+        }
+      ]
+    },
+    "__os_delete_filename": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "string_literal"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_identifier_or_qualified_name"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "function_call"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "object_access"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "scoped_name"
         }
       ]
     },
@@ -27644,7 +27748,7 @@
           "name": "source",
           "content": {
             "type": "SYMBOL",
-            "name": "_expression"
+            "name": "__os_rename_filename"
           }
         },
         {
@@ -27652,8 +27756,33 @@
           "name": "target",
           "content": {
             "type": "SYMBOL",
-            "name": "_expression"
+            "name": "__os_rename_filename"
           }
+        }
+      ]
+    },
+    "__os_rename_filename": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "string_literal"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_identifier_or_qualified_name"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "function_call"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "object_access"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "scoped_name"
         }
       ]
     },

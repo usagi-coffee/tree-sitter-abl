@@ -3,5 +3,17 @@ module.exports = ({ kw }) => ({
     seq(kw("OS-APPEND"), $.__os_append_body, $._terminator),
 
   __os_append_body: ($) =>
-    seq(field("source", $._expression), field("target", $._expression)),
+    seq(
+      field("source", $.__os_append_filename),
+      field("target", $.__os_append_filename),
+    ),
+
+  __os_append_filename: ($) =>
+    choice(
+      $.string_literal,
+      $._identifier_or_qualified_name,
+      $.function_call,
+      $.object_access,
+      $.scoped_name,
+    ),
 });
