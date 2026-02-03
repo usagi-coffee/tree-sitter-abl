@@ -16,20 +16,20 @@ module.exports = ({ kw }) => ({
 
   __view_as_fill_in: ($) =>
     seq(
-      kw("FILL-IN"),
+      field("widget", kw("FILL-IN")),
       optional(kw("NATIVE")),
       optional($.size_phrase),
       optional(seq(kw("TOOLTIP"), field("tooltip", $._expression))),
     ),
   __view_as_text: ($) =>
     seq(
-      kw("TEXT"),
+      field("widget", kw("TEXT")),
       optional($.size_phrase),
       optional(seq(kw("TOOLTIP"), field("tooltip", $._expression))),
     ),
   __view_as_toggle_box: ($) =>
     seq(
-      kw("TOGGLE-BOX"),
+      field("widget", kw("TOGGLE-BOX")),
       optional($.size_phrase),
       optional(seq(kw("TOOLTIP"), field("tooltip", $._expression))),
     ),

@@ -10825,6 +10825,16 @@
             "named": true
           }
         ]
+      },
+      "widget": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "COMBO-BOX",
+            "named": false
+          }
+        ]
       }
     },
     "children": {
@@ -64018,6 +64028,18 @@
         "multiple": false,
         "required": false,
         "types": [
+          {
+            "type": "FILL-IN",
+            "named": false
+          },
+          {
+            "type": "TEXT",
+            "named": false
+          },
+          {
+            "type": "TOGGLE-BOX",
+            "named": false
+          },
           {
             "type": "identifier",
             "named": true

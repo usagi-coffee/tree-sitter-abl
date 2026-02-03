@@ -52150,17 +52150,21 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "ALIAS",
+          "type": "FIELD",
+          "name": "widget",
           "content": {
-            "type": "TOKEN",
+            "type": "ALIAS",
             "content": {
-              "type": "PATTERN",
-              "value": "COMBO-BOX",
-              "flags": "i"
-            }
-          },
-          "named": false,
-          "value": "COMBO-BOX"
+              "type": "TOKEN",
+              "content": {
+                "type": "PATTERN",
+                "value": "COMBO-BOX",
+                "flags": "i"
+              }
+            },
+            "named": false,
+            "value": "COMBO-BOX"
+          }
         },
         {
           "type": "CHOICE",
@@ -58525,17 +58529,21 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "ALIAS",
+          "type": "FIELD",
+          "name": "widget",
           "content": {
-            "type": "TOKEN",
+            "type": "ALIAS",
             "content": {
-              "type": "PATTERN",
-              "value": "FILL-IN",
-              "flags": "i"
-            }
-          },
-          "named": false,
-          "value": "FILL-IN"
+              "type": "TOKEN",
+              "content": {
+                "type": "PATTERN",
+                "value": "FILL-IN",
+                "flags": "i"
+              }
+            },
+            "named": false,
+            "value": "FILL-IN"
+          }
         },
         {
           "type": "CHOICE",
@@ -58610,17 +58618,21 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "ALIAS",
+          "type": "FIELD",
+          "name": "widget",
           "content": {
-            "type": "TOKEN",
+            "type": "ALIAS",
             "content": {
-              "type": "PATTERN",
-              "value": "TEXT",
-              "flags": "i"
-            }
-          },
-          "named": false,
-          "value": "TEXT"
+              "type": "TOKEN",
+              "content": {
+                "type": "PATTERN",
+                "value": "TEXT",
+                "flags": "i"
+              }
+            },
+            "named": false,
+            "value": "TEXT"
+          }
         },
         {
           "type": "CHOICE",
@@ -58674,17 +58686,21 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "ALIAS",
+          "type": "FIELD",
+          "name": "widget",
           "content": {
-            "type": "TOKEN",
+            "type": "ALIAS",
             "content": {
-              "type": "PATTERN",
-              "value": "TOGGLE-BOX",
-              "flags": "i"
-            }
-          },
-          "named": false,
-          "value": "TOGGLE-BOX"
+              "type": "TOKEN",
+              "content": {
+                "type": "PATTERN",
+                "value": "TOGGLE-BOX",
+                "flags": "i"
+              }
+            },
+            "named": false,
+            "value": "TOGGLE-BOX"
+          }
         },
         {
           "type": "CHOICE",
