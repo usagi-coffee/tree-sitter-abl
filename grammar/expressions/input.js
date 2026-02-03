@@ -7,8 +7,7 @@ module.exports = ({ kw }) => ({
       field(
         "field",
         choice(
-          $.identifier,
-          $.qualified_name,
+          $._identifier_or_qualified_name,
           $.object_access,
           $.array_access,
           $.scoped_name,

@@ -4,7 +4,7 @@ module.exports = ({ kw }) => ({
     seq(
       field(
         "type",
-        choice($.scoped_name, $.qualified_name, $.identifier, $.string_literal),
+        choice($.scoped_name, $._identifier_or_qualified_name, $.string_literal),
       ),
       $.arguments,
     ),

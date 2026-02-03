@@ -314,7 +314,11 @@ module.exports = grammar({
       // Array
       array_initializer: ($) => seq("[", optional($._expressions), "]"),
       _array_target: ($) =>
-        choice($.identifier, $.qualified_name, $.object_access, $.scoped_name),
+        choice(
+          $._identifier_or_qualified_name,
+          $.object_access,
+          $.scoped_name,
+        ),
 
       array_access: ($) =>
         seq(
@@ -350,8 +354,7 @@ module.exports = grammar({
           field(
             "function",
             choice(
-              $.identifier,
-              $.qualified_name,
+              $._identifier_or_qualified_name,
               $.object_access,
               $.scoped_name,
             ),
@@ -369,8 +372,7 @@ module.exports = grammar({
 
       _in_frame_target: ($) =>
         choice(
-          $.qualified_name,
-          $.identifier,
+          $._identifier_or_qualified_name,
           $.scoped_name,
           $.object_access,
           $.function_call,

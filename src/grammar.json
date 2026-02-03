@@ -48622,11 +48622,7 @@
               },
               {
                 "type": "SYMBOL",
-                "name": "qualified_name"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "identifier"
+                "name": "_identifier_or_qualified_name"
               },
               {
                 "type": "SYMBOL",
@@ -48669,11 +48665,7 @@
               },
               {
                 "type": "SYMBOL",
-                "name": "qualified_name"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "identifier"
+                "name": "_identifier_or_qualified_name"
               }
             ]
           }
@@ -48923,11 +48915,7 @@
             "members": [
               {
                 "type": "SYMBOL",
-                "name": "identifier"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "qualified_name"
+                "name": "_identifier_or_qualified_name"
               },
               {
                 "type": "SYMBOL",
@@ -55929,11 +55917,7 @@
       "members": [
         {
           "type": "SYMBOL",
-          "name": "identifier"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "qualified_name"
+          "name": "_identifier_or_qualified_name"
         },
         {
           "type": "SYMBOL",
@@ -56237,11 +56221,7 @@
             "members": [
               {
                 "type": "SYMBOL",
-                "name": "identifier"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "qualified_name"
+                "name": "_identifier_or_qualified_name"
               },
               {
                 "type": "SYMBOL",
@@ -56308,11 +56288,7 @@
       "members": [
         {
           "type": "SYMBOL",
-          "name": "qualified_name"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "identifier"
+          "name": "_identifier_or_qualified_name"
         },
         {
           "type": "SYMBOL",
@@ -56416,11 +56392,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "identifier"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "qualified_name"
+              "name": "_identifier_or_qualified_name"
             },
             {
               "type": "SYMBOL",
@@ -57402,6 +57374,16 @@
       {
         "type": "SYMBOL",
         "name": "_primary_expression"
+      }
+    ],
+    [
+      {
+        "type": "SYMBOL",
+        "name": "__display_record"
+      },
+      {
+        "type": "SYMBOL",
+        "name": "_identifier_or_qualified_name"
       }
     ],
     [

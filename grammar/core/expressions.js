@@ -10,7 +10,7 @@ module.exports = ({ kw, ctx }) => ({
   _primary_expression: ($) =>
     choice(
       prec(-1, alias($.constant_expression, $.constant)),
-      choice($.identifier, $.qualified_name, $.frame_qualified_name),
+      choice($._identifier_or_qualified_name, $.frame_qualified_name),
       $.parenthesized_expression,
       $.available_expression,
       $.can_find_expression,

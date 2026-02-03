@@ -3,6 +3,9 @@ module.exports = ($) => [
   // Purpose: prefer record parsing over plain expressions.
   // Example: DISPLAY Customer EXCEPT Customer.Comments WITH FRAME f2.
   [$.__display_record, $._primary_expression],
+  // Purpose: prefer record parsing over identifier/qualified name.
+  // Example: DISPLAY Customer WITH BROWSE b.
+  [$.__display_record, $._identifier_or_qualified_name],
   // Purpose: prefer browse form when WITH BROWSE is present.
   // Example: DISPLAY Customer EXCEPT Customer.Comments WITH BROWSE b1.
   [$.__display_browse_body, $.__frame_identifier],
