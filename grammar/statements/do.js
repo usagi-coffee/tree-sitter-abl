@@ -4,6 +4,7 @@ module.exports = ({ kw }) => ({
       optional(seq(field("label", $.identifier), ":")),
       kw("DO"),
       $.__do_body,
+      kw("END"),
       $._terminator,
     ),
 
@@ -16,18 +17,16 @@ module.exports = ({ kw }) => ({
       optional(choice($.__do_while_phrase, $.__do_loop_phrase)),
       optional($.__do_transaction_phrase),
       optional($.stop_after_phrase),
-      // FIXME: this shouldn't be repeat but we need to save on state counts
       repeat(
         choice(
           $.on_endkey_phrase,
+          $.on_stop_phrase,
           $.on_error_phrase,
           $.on_quit_phrase,
-          $.on_stop_phrase,
         ),
       ),
       repeat($.frame_phrase),
       $.body,
-      kw("END"),
     ),
 
   body: ($) => seq(choice($._colon, $._terminator_dot), repeat($._statement)),

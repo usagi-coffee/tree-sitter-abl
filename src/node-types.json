@@ -25320,10 +25320,6 @@
         {
           "type": "while_phrase",
           "named": true
-        },
-        {
-          "type": "with_stream_io_phrase",
-          "named": true
         }
       ]
     }
@@ -62679,11 +62675,6 @@
         }
       ]
     }
-  },
-  {
-    "type": "with_stream_io_phrase",
-    "named": true,
-    "fields": {}
   },
   {
     "type": "work_table_definition",

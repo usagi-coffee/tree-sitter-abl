@@ -16857,6 +16857,19 @@
           "name": "__do_body"
         },
         {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PATTERN",
+              "value": "END",
+              "flags": "i"
+            }
+          },
+          "named": false,
+          "value": "END"
+        },
+        {
           "type": "SYMBOL",
           "name": "_terminator"
         }
@@ -16984,15 +16997,15 @@
               },
               {
                 "type": "SYMBOL",
+                "name": "on_stop_phrase"
+              },
+              {
+                "type": "SYMBOL",
                 "name": "on_error_phrase"
               },
               {
                 "type": "SYMBOL",
                 "name": "on_quit_phrase"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "on_stop_phrase"
               }
             ]
           }
@@ -17007,19 +17020,6 @@
         {
           "type": "SYMBOL",
           "name": "body"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "PATTERN",
-              "value": "END",
-              "flags": "i"
-            }
-          },
-          "named": false,
-          "value": "END"
         }
       ]
     },
@@ -20053,6 +20053,19 @@
           "name": "__for_body"
         },
         {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PATTERN",
+              "value": "END",
+              "flags": "i"
+            }
+          },
+          "named": false,
+          "value": "END"
+        },
+        {
           "type": "SYMBOL",
           "name": "_terminator"
         }
@@ -20131,15 +20144,7 @@
             "members": [
               {
                 "type": "SYMBOL",
-                "name": "on_error_phrase"
-              },
-              {
-                "type": "SYMBOL",
                 "name": "on_endkey_phrase"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "on_quit_phrase"
               },
               {
                 "type": "SYMBOL",
@@ -20147,36 +20152,30 @@
               },
               {
                 "type": "SYMBOL",
-                "name": "frame_phrase"
+                "name": "on_error_phrase"
               },
               {
-                "type": "ALIAS",
-                "content": {
-                  "type": "SYMBOL",
-                  "name": "__for_with_stream_io_phrase"
-                },
-                "named": true,
-                "value": "with_stream_io_phrase"
+                "type": "SYMBOL",
+                "name": "on_quit_phrase"
               }
             ]
           }
         },
         {
-          "type": "SYMBOL",
-          "name": "body"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "frame_phrase"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         },
         {
-          "type": "ALIAS",
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "PATTERN",
-              "value": "END",
-              "flags": "i"
-            }
-          },
-          "named": false,
-          "value": "END"
+          "type": "SYMBOL",
+          "name": "body"
         }
       ]
     },
@@ -37592,6 +37591,19 @@
           "name": "__repeat_body"
         },
         {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PATTERN",
+              "value": "END",
+              "flags": "i"
+            }
+          },
+          "named": false,
+          "value": "END"
+        },
+        {
           "type": "SYMBOL",
           "name": "_terminator"
         }
@@ -37740,30 +37752,25 @@
               {
                 "type": "SYMBOL",
                 "name": "on_quit_phrase"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "frame_phrase"
               }
             ]
           }
         },
         {
-          "type": "SYMBOL",
-          "name": "body"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "frame_phrase"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         },
         {
-          "type": "ALIAS",
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "PATTERN",
-              "value": "END",
-              "flags": "i"
-            }
-          },
-          "named": false,
-          "value": "END"
+          "type": "SYMBOL",
+          "name": "body"
         }
       ]
     },

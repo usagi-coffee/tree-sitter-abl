@@ -4,6 +4,7 @@ module.exports = ({ kw }) => ({
       optional(seq(field("label", $.identifier), ":")),
       kw("FOR"),
       $.__for_body,
+      kw("END"),
       $._terminator,
     ),
 
@@ -13,19 +14,16 @@ module.exports = ({ kw }) => ({
       optional(alias($.__for_while_phrase, $.while_phrase)),
       optional(kw("TRANSACTION")),
       optional($.stop_after_phrase),
-      // FIXME: this shouldn't be repeat but we need to save on state counts
       repeat(
         choice(
-          $.on_error_phrase,
           $.on_endkey_phrase,
-          $.on_quit_phrase,
           $.on_stop_phrase,
-          $.frame_phrase,
-          alias($.__for_with_stream_io_phrase, $.with_stream_io_phrase),
+          $.on_error_phrase,
+          $.on_quit_phrase,
         ),
       ),
+      optional($.frame_phrase),
       $.body,
-      kw("END"),
     ),
 
   __for_records: ($) =>
