@@ -16236,43 +16236,8 @@
                 "type": "CHOICE",
                 "members": [
                   {
-                    "type": "SEQ",
-                    "members": [
-                      {
-                        "type": "ALIAS",
-                        "content": {
-                          "type": "TOKEN",
-                          "content": {
-                            "type": "PATTERN",
-                            "value": "IN",
-                            "flags": "i"
-                          }
-                        },
-                        "named": false,
-                        "value": "IN"
-                      },
-                      {
-                        "type": "ALIAS",
-                        "content": {
-                          "type": "TOKEN",
-                          "content": {
-                            "type": "PATTERN",
-                            "value": "WINDOW",
-                            "flags": "i"
-                          }
-                        },
-                        "named": false,
-                        "value": "WINDOW"
-                      },
-                      {
-                        "type": "FIELD",
-                        "name": "window",
-                        "content": {
-                          "type": "SYMBOL",
-                          "name": "_window_handle"
-                        }
-                      }
-                    ]
+                    "type": "SYMBOL",
+                    "name": "_in_window_phrase"
                   },
                   {
                     "type": "BLANK"
@@ -16360,43 +16325,8 @@
               "type": "CHOICE",
               "members": [
                 {
-                  "type": "SEQ",
-                  "members": [
-                    {
-                      "type": "ALIAS",
-                      "content": {
-                        "type": "TOKEN",
-                        "content": {
-                          "type": "PATTERN",
-                          "value": "IN",
-                          "flags": "i"
-                        }
-                      },
-                      "named": false,
-                      "value": "IN"
-                    },
-                    {
-                      "type": "ALIAS",
-                      "content": {
-                        "type": "TOKEN",
-                        "content": {
-                          "type": "PATTERN",
-                          "value": "WINDOW",
-                          "flags": "i"
-                        }
-                      },
-                      "named": false,
-                      "value": "WINDOW"
-                    },
-                    {
-                      "type": "FIELD",
-                      "name": "window",
-                      "content": {
-                        "type": "SYMBOL",
-                        "name": "_window_handle"
-                      }
-                    }
-                  ]
+                  "type": "SYMBOL",
+                  "name": "_in_window_phrase"
                 },
                 {
                   "type": "BLANK"
@@ -18270,43 +18200,8 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "SEQ",
-              "members": [
-                {
-                  "type": "ALIAS",
-                  "content": {
-                    "type": "TOKEN",
-                    "content": {
-                      "type": "PATTERN",
-                      "value": "IN",
-                      "flags": "i"
-                    }
-                  },
-                  "named": false,
-                  "value": "IN"
-                },
-                {
-                  "type": "ALIAS",
-                  "content": {
-                    "type": "TOKEN",
-                    "content": {
-                      "type": "PATTERN",
-                      "value": "WINDOW",
-                      "flags": "i"
-                    }
-                  },
-                  "named": false,
-                  "value": "WINDOW"
-                },
-                {
-                  "type": "FIELD",
-                  "name": "window",
-                  "content": {
-                    "type": "SYMBOL",
-                    "name": "_window_handle"
-                  }
-                }
-              ]
+              "type": "SYMBOL",
+              "name": "_in_window_phrase"
             },
             {
               "type": "BLANK"
@@ -23643,43 +23538,8 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "SEQ",
-              "members": [
-                {
-                  "type": "ALIAS",
-                  "content": {
-                    "type": "TOKEN",
-                    "content": {
-                      "type": "PATTERN",
-                      "value": "IN",
-                      "flags": "i"
-                    }
-                  },
-                  "named": false,
-                  "value": "IN"
-                },
-                {
-                  "type": "ALIAS",
-                  "content": {
-                    "type": "TOKEN",
-                    "content": {
-                      "type": "PATTERN",
-                      "value": "WINDOW",
-                      "flags": "i"
-                    }
-                  },
-                  "named": false,
-                  "value": "WINDOW"
-                },
-                {
-                  "type": "FIELD",
-                  "name": "window",
-                  "content": {
-                    "type": "SYMBOL",
-                    "name": "_window_handle"
-                  }
-                }
-              ]
+              "type": "SYMBOL",
+              "name": "_in_window_phrase"
             },
             {
               "type": "BLANK"
@@ -27764,43 +27624,8 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "SEQ",
-              "members": [
-                {
-                  "type": "ALIAS",
-                  "content": {
-                    "type": "TOKEN",
-                    "content": {
-                      "type": "PATTERN",
-                      "value": "IN",
-                      "flags": "i"
-                    }
-                  },
-                  "named": false,
-                  "value": "IN"
-                },
-                {
-                  "type": "ALIAS",
-                  "content": {
-                    "type": "TOKEN",
-                    "content": {
-                      "type": "PATTERN",
-                      "value": "WINDOW",
-                      "flags": "i"
-                    }
-                  },
-                  "named": false,
-                  "value": "WINDOW"
-                },
-                {
-                  "type": "FIELD",
-                  "name": "window",
-                  "content": {
-                    "type": "SYMBOL",
-                    "name": "_window_handle"
-                  }
-                }
-              ]
+              "type": "SYMBOL",
+              "name": "_in_window_phrase"
             },
             {
               "type": "BLANK"
@@ -32949,43 +32774,8 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "SEQ",
-              "members": [
-                {
-                  "type": "ALIAS",
-                  "content": {
-                    "type": "TOKEN",
-                    "content": {
-                      "type": "PATTERN",
-                      "value": "IN",
-                      "flags": "i"
-                    }
-                  },
-                  "named": false,
-                  "value": "IN"
-                },
-                {
-                  "type": "ALIAS",
-                  "content": {
-                    "type": "TOKEN",
-                    "content": {
-                      "type": "PATTERN",
-                      "value": "WINDOW",
-                      "flags": "i"
-                    }
-                  },
-                  "named": false,
-                  "value": "WINDOW"
-                },
-                {
-                  "type": "FIELD",
-                  "name": "window",
-                  "content": {
-                    "type": "SYMBOL",
-                    "name": "_window_handle"
-                  }
-                }
-              ]
+              "type": "SYMBOL",
+              "name": "_in_window_phrase"
             },
             {
               "type": "BLANK"
@@ -34135,43 +33925,8 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "SEQ",
-              "members": [
-                {
-                  "type": "ALIAS",
-                  "content": {
-                    "type": "TOKEN",
-                    "content": {
-                      "type": "PATTERN",
-                      "value": "IN",
-                      "flags": "i"
-                    }
-                  },
-                  "named": false,
-                  "value": "IN"
-                },
-                {
-                  "type": "ALIAS",
-                  "content": {
-                    "type": "TOKEN",
-                    "content": {
-                      "type": "PATTERN",
-                      "value": "WINDOW",
-                      "flags": "i"
-                    }
-                  },
-                  "named": false,
-                  "value": "WINDOW"
-                },
-                {
-                  "type": "FIELD",
-                  "name": "window",
-                  "content": {
-                    "type": "SYMBOL",
-                    "name": "_window_handle"
-                  }
-                }
-              ]
+              "type": "SYMBOL",
+              "name": "_in_window_phrase"
             },
             {
               "type": "BLANK"
@@ -34228,43 +33983,8 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "SEQ",
-              "members": [
-                {
-                  "type": "ALIAS",
-                  "content": {
-                    "type": "TOKEN",
-                    "content": {
-                      "type": "PATTERN",
-                      "value": "IN",
-                      "flags": "i"
-                    }
-                  },
-                  "named": false,
-                  "value": "IN"
-                },
-                {
-                  "type": "ALIAS",
-                  "content": {
-                    "type": "TOKEN",
-                    "content": {
-                      "type": "PATTERN",
-                      "value": "WINDOW",
-                      "flags": "i"
-                    }
-                  },
-                  "named": false,
-                  "value": "WINDOW"
-                },
-                {
-                  "type": "FIELD",
-                  "name": "window",
-                  "content": {
-                    "type": "SYMBOL",
-                    "name": "_window_handle"
-                  }
-                }
-              ]
+              "type": "SYMBOL",
+              "name": "_in_window_phrase"
             },
             {
               "type": "BLANK"
@@ -41974,43 +41694,8 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "SEQ",
-              "members": [
-                {
-                  "type": "ALIAS",
-                  "content": {
-                    "type": "TOKEN",
-                    "content": {
-                      "type": "PATTERN",
-                      "value": "IN",
-                      "flags": "i"
-                    }
-                  },
-                  "named": false,
-                  "value": "IN"
-                },
-                {
-                  "type": "ALIAS",
-                  "content": {
-                    "type": "TOKEN",
-                    "content": {
-                      "type": "PATTERN",
-                      "value": "WINDOW",
-                      "flags": "i"
-                    }
-                  },
-                  "named": false,
-                  "value": "WINDOW"
-                },
-                {
-                  "type": "FIELD",
-                  "name": "window",
-                  "content": {
-                    "type": "SYMBOL",
-                    "name": "_window_handle"
-                  }
-                }
-              ]
+              "type": "SYMBOL",
+              "name": "_in_window_phrase"
             },
             {
               "type": "BLANK"
@@ -43098,43 +42783,8 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "SEQ",
-              "members": [
-                {
-                  "type": "ALIAS",
-                  "content": {
-                    "type": "TOKEN",
-                    "content": {
-                      "type": "PATTERN",
-                      "value": "IN",
-                      "flags": "i"
-                    }
-                  },
-                  "named": false,
-                  "value": "IN"
-                },
-                {
-                  "type": "ALIAS",
-                  "content": {
-                    "type": "TOKEN",
-                    "content": {
-                      "type": "PATTERN",
-                      "value": "WINDOW",
-                      "flags": "i"
-                    }
-                  },
-                  "named": false,
-                  "value": "WINDOW"
-                },
-                {
-                  "type": "FIELD",
-                  "name": "window",
-                  "content": {
-                    "type": "SYMBOL",
-                    "name": "_window_handle"
-                  }
-                }
-              ]
+              "type": "SYMBOL",
+              "name": "_in_window_phrase"
             },
             {
               "type": "BLANK"
@@ -43303,43 +42953,8 @@
                 ]
               },
               {
-                "type": "SEQ",
-                "members": [
-                  {
-                    "type": "ALIAS",
-                    "content": {
-                      "type": "TOKEN",
-                      "content": {
-                        "type": "PATTERN",
-                        "value": "IN",
-                        "flags": "i"
-                      }
-                    },
-                    "named": false,
-                    "value": "IN"
-                  },
-                  {
-                    "type": "ALIAS",
-                    "content": {
-                      "type": "TOKEN",
-                      "content": {
-                        "type": "PATTERN",
-                        "value": "WINDOW",
-                        "flags": "i"
-                      }
-                    },
-                    "named": false,
-                    "value": "WINDOW"
-                  },
-                  {
-                    "type": "FIELD",
-                    "name": "window",
-                    "content": {
-                      "type": "SYMBOL",
-                      "name": "_window_handle"
-                    }
-                  }
-                ]
+                "type": "SYMBOL",
+                "name": "_in_window_phrase"
               }
             ]
           }
@@ -43480,43 +43095,8 @@
                 ]
               },
               {
-                "type": "SEQ",
-                "members": [
-                  {
-                    "type": "ALIAS",
-                    "content": {
-                      "type": "TOKEN",
-                      "content": {
-                        "type": "PATTERN",
-                        "value": "IN",
-                        "flags": "i"
-                      }
-                    },
-                    "named": false,
-                    "value": "IN"
-                  },
-                  {
-                    "type": "ALIAS",
-                    "content": {
-                      "type": "TOKEN",
-                      "content": {
-                        "type": "PATTERN",
-                        "value": "WINDOW",
-                        "flags": "i"
-                      }
-                    },
-                    "named": false,
-                    "value": "WINDOW"
-                  },
-                  {
-                    "type": "FIELD",
-                    "name": "window",
-                    "content": {
-                      "type": "SYMBOL",
-                      "name": "_window_handle"
-                    }
-                  }
-                ]
+                "type": "SYMBOL",
+                "name": "_in_window_phrase"
               }
             ]
           }
@@ -43770,43 +43350,8 @@
                 ]
               },
               {
-                "type": "SEQ",
-                "members": [
-                  {
-                    "type": "ALIAS",
-                    "content": {
-                      "type": "TOKEN",
-                      "content": {
-                        "type": "PATTERN",
-                        "value": "IN",
-                        "flags": "i"
-                      }
-                    },
-                    "named": false,
-                    "value": "IN"
-                  },
-                  {
-                    "type": "ALIAS",
-                    "content": {
-                      "type": "TOKEN",
-                      "content": {
-                        "type": "PATTERN",
-                        "value": "WINDOW",
-                        "flags": "i"
-                      }
-                    },
-                    "named": false,
-                    "value": "WINDOW"
-                  },
-                  {
-                    "type": "FIELD",
-                    "name": "window",
-                    "content": {
-                      "type": "SYMBOL",
-                      "name": "_window_handle"
-                    }
-                  }
-                ]
+                "type": "SYMBOL",
+                "name": "_in_window_phrase"
               }
             ]
           }
@@ -43939,43 +43484,8 @@
                 ]
               },
               {
-                "type": "SEQ",
-                "members": [
-                  {
-                    "type": "ALIAS",
-                    "content": {
-                      "type": "TOKEN",
-                      "content": {
-                        "type": "PATTERN",
-                        "value": "IN",
-                        "flags": "i"
-                      }
-                    },
-                    "named": false,
-                    "value": "IN"
-                  },
-                  {
-                    "type": "ALIAS",
-                    "content": {
-                      "type": "TOKEN",
-                      "content": {
-                        "type": "PATTERN",
-                        "value": "WINDOW",
-                        "flags": "i"
-                      }
-                    },
-                    "named": false,
-                    "value": "WINDOW"
-                  },
-                  {
-                    "type": "FIELD",
-                    "name": "window",
-                    "content": {
-                      "type": "SYMBOL",
-                      "name": "_window_handle"
-                    }
-                  }
-                ]
+                "type": "SYMBOL",
+                "name": "_in_window_phrase"
               }
             ]
           }
@@ -50361,43 +49871,8 @@
       ]
     },
     "__view_in_window": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "PATTERN",
-              "value": "IN",
-              "flags": "i"
-            }
-          },
-          "named": false,
-          "value": "IN"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "PATTERN",
-              "value": "WINDOW",
-              "flags": "i"
-            }
-          },
-          "named": false,
-          "value": "WINDOW"
-        },
-        {
-          "type": "FIELD",
-          "name": "window",
-          "content": {
-            "type": "SYMBOL",
-            "name": "_window_handle"
-          }
-        }
-      ]
+      "type": "SYMBOL",
+      "name": "_in_window_phrase"
     },
     "__view_stream": {
       "type": "SYMBOL",
@@ -58951,6 +58426,45 @@
           "content": {
             "type": "SYMBOL",
             "name": "identifier"
+          }
+        }
+      ]
+    },
+    "_in_window_phrase": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PATTERN",
+              "value": "IN",
+              "flags": "i"
+            }
+          },
+          "named": false,
+          "value": "IN"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PATTERN",
+              "value": "WINDOW",
+              "flags": "i"
+            }
+          },
+          "named": false,
+          "value": "WINDOW"
+        },
+        {
+          "type": "FIELD",
+          "name": "window",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_window_handle"
           }
         }
       ]

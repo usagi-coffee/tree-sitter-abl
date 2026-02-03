@@ -5,7 +5,7 @@ module.exports = ({ kw }) => ({
       optional($.__hide_stream),
       optional(choice($.__hide_option, $.widget_phrase)),
       optional(kw("NO-PAUSE")),
-      optional(seq(kw("IN"), kw("WINDOW"), field("window", $._window_handle))),
+      optional($._in_window_phrase),
       $._terminator,
     ),
 

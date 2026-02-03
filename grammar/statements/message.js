@@ -8,7 +8,7 @@ module.exports = ({ kw }) => ({
       repeat1($.__message_expression),
       optional(alias($.__message_view_as_phrase, $.view_as_phrase)),
       optional(alias($.__message_set_update_phrase, $.set_update_phrase)),
-      optional(seq(kw("IN"), kw("WINDOW"), field("window", $._window_handle))),
+      optional($._in_window_phrase),
     ),
 
   __message_expression: ($) =>

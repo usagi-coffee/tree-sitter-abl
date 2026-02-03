@@ -11,7 +11,7 @@ module.exports = ({ kw }) => ({
         ),
         repeat1(alias($.__enable_item, $.enable_item)),
       ),
-      optional(seq(kw("IN"), kw("WINDOW"), field("window", $._window_handle))),
+      optional($._in_window_phrase),
       optional($.frame_phrase),
     ),
 

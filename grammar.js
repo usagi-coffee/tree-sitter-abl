@@ -241,6 +241,8 @@ module.exports = grammar({
           choice(kw("STREAM"), kw("STREAM-HANDLE")),
           field("stream", $.identifier)
         ),
+      _in_window_phrase: ($) =>
+        seq(kw("IN"), kw("WINDOW"), field("window", $._window_handle)),
       _events: ($) =>
         choice(
           $.identifier,

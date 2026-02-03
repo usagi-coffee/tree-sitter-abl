@@ -16,7 +16,7 @@ module.exports = ({ kw }) => ({
         seq(
           $.__display_stream,
           optional(kw("UNLESS-HIDDEN")),
-          optional(seq(kw("IN"), kw("WINDOW"), field("window", $._window_handle))),
+          optional($._in_window_phrase),
           $.__display_frame_phrases,
           optional(alias(kw("NO-ERROR"), $.no_error)),
           $._terminator,
@@ -26,7 +26,7 @@ module.exports = ({ kw }) => ({
         optional($.__display_stream),
         optional(kw("UNLESS-HIDDEN")),
         $.__display_items,
-        optional(seq(kw("IN"), kw("WINDOW"), field("window", $._window_handle))),
+        optional($._in_window_phrase),
         optional($.__display_frame_phrases),
         optional(alias(kw("NO-ERROR"), $.no_error)),
         $._terminator,
