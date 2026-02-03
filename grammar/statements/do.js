@@ -44,7 +44,7 @@ module.exports = ({ kw }) => ({
   __do_while_phrase: ($) => seq(kw("WHILE"), $._expression),
   __do_for_phrase: ($) => seq(kw("FOR"), $.__do_record_list),
   __do_record_list: ($) => seq($.__do_record, repeat(seq(",", $.__do_record))),
-  __do_record: ($) => field("record", choice($.identifier, $.qualified_name)),
+  __do_record: ($) => field("record", $._identifier_or_qualified_name),
   __do_preselect_phrase: ($) =>
     seq(token(/PRESELECT\s+/i), $.preselect_record_list),
   __do_transaction_phrase: ($) => kw("TRANSACTION"),

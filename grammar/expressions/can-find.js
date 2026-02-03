@@ -32,6 +32,6 @@ module.exports = ({ kw }) => ({
   __record_query_use_index: ($) =>
     seq(kw("USE-INDEX"), field("index", $.__record_query_index_name)),
 
-  __record_query_record_name: ($) => choice($.identifier, $.qualified_name),
-  __record_query_index_name: ($) => choice($.identifier, $.qualified_name),
+  __record_query_record_name: ($) => $._identifier_or_qualified_name,
+  __record_query_index_name: ($) => $._identifier_or_qualified_name,
 });

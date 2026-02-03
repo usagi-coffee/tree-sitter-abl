@@ -19,5 +19,5 @@ module.exports = ({ kw }) => ({
         optional(kw("NO-ERROR")),
       ),
     ),
-  __create_record_name: ($) => choice($.identifier, $.qualified_name),
+  __create_record_name: ($) => $._identifier_or_qualified_name,
 });

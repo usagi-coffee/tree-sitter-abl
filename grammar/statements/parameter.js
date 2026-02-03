@@ -108,8 +108,8 @@ module.exports = ({ kw }) => ({
       $.identifier,
       $.null_literal,
     ),
-  __parameter_field_name: ($) => choice($.qualified_name, $.identifier),
-  __parameter_record_name: ($) => choice($.qualified_name, $.identifier),
+  __parameter_field_name: ($) => $._identifier_or_qualified_name,
+  __parameter_record_name: ($) => $._identifier_or_qualified_name,
   __parameter_table_parameter_option: ($) =>
     choice(
       alias($.__parameter_append_option, $.append_option),

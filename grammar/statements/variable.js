@@ -36,7 +36,7 @@ module.exports = ({ kw }) => ({
           ),
           seq(
             kw("LIKE"),
-            field("like", choice($.identifier, $.qualified_name)),
+            field("like", $._identifier_or_qualified_name),
           ),
         ),
       ),

@@ -36,5 +36,5 @@ module.exports = ({ kw }) => ({
   __delete_validate_phrase: ($) =>
     seq(kw("VALIDATE"), "(", $._expression, ",", $._expression, ")"),
   __delete_no_error: ($) => kw("NO-ERROR"),
-  __delete_record_name: ($) => choice($.identifier, $.qualified_name),
+  __delete_record_name: ($) => $._identifier_or_qualified_name,
 });

@@ -18,7 +18,7 @@ module.exports = ({ kw }) => ({
       optional(alias($.__buffer_copy_no_error, $.no_error)),
     ),
 
-  __buffer_copy_record_name: ($) => choice($.identifier, $.qualified_name),
+  __buffer_copy_record_name: ($) => $._identifier_or_qualified_name,
   __buffer_copy_except_phrase: ($) =>
     seq(
       kw("EXCEPT"),
@@ -31,7 +31,7 @@ module.exports = ({ kw }) => ({
       $.__buffer_copy_field_name,
       repeat(seq(optional(","), $.__buffer_copy_field_name)),
     ),
-  __buffer_copy_field_name: ($) => choice($.identifier, $.qualified_name),
+  __buffer_copy_field_name: ($) => $._identifier_or_qualified_name,
   __buffer_copy_assign_phrase: ($) =>
     seq(
       kw("ASSIGN"),

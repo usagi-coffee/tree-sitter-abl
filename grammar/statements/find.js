@@ -28,7 +28,7 @@ module.exports = ({ kw }) => ({
 
   __find_of_phrase: ($) => seq(kw("OF"), $.__find_record_name),
   __find_where_phrase: ($) => seq(kw("WHERE"), $._expression),
-  __find_record_name: ($) => choice($.identifier, $.qualified_name),
+  __find_record_name: ($) => $._identifier_or_qualified_name,
   __find_no_lock: ($) => kw("NO-LOCK"),
   __find_no_error: ($) => kw("NO-ERROR"),
   __find_no_wait: ($) => kw("NO-WAIT"),
@@ -37,5 +37,5 @@ module.exports = ({ kw }) => ({
   __find_using_phrase: ($) => seq(kw("USING"), $._expressions),
   __find_use_index: ($) =>
     seq(kw("USE-INDEX"), field("index", $.__find_index_name)),
-  __find_index_name: ($) => choice($.identifier, $.qualified_name),
+  __find_index_name: ($) => $._identifier_or_qualified_name,
 });

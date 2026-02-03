@@ -6,7 +6,7 @@ module.exports = ({ kw }) => ({
     seq(
       optional($.__prompt_stream),
       optional(kw("UNLESS-HIDDEN")),
-      choice($.__prompt_for_record_body, $.__prompt_for_fields_body),
+      choice(prec(1, $.__prompt_for_fields_body), $.__prompt_for_record_body),
     ),
 
   __prompt_stream: ($) =>
@@ -21,7 +21,9 @@ module.exports = ({ kw }) => ({
       optional(
         seq(
           kw("EXCEPT"),
-          repeat1(alias(choice($.identifier, $.qualified_name), $.field)),
+          repeat1(
+            alias(choice($.identifier, $.qualified_name), $.field),
+          ),
         ),
       ),
       optional(seq(kw("IN"), kw("WINDOW"), field("window", $._expression))),
@@ -40,7 +42,7 @@ module.exports = ({ kw }) => ({
   __prompt_for_field: ($) =>
     choice(
       seq(
-        field("field", choice($.identifier, $.qualified_name)),
+        field("field", $._identifier_or_qualified_name),
         optional($.format_phrase),
         optional(seq(kw("WHEN"), field("when", $._expression))),
       ),
@@ -49,7 +51,7 @@ module.exports = ({ kw }) => ({
         "(",
         repeat1(
           seq(
-            field("field", choice($.identifier, $.qualified_name)),
+            field("field", $._identifier_or_qualified_name),
             optional($.format_phrase),
           ),
         ),

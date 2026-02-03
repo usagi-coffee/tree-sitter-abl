@@ -39,5 +39,5 @@ module.exports = ({ kw }) => ({
     ),
 
   __buffer_name_or_string: ($) => choice($.identifier, $.string_literal),
-  __buffer_table_name: ($) => choice($.identifier, $.qualified_name),
+  __buffer_table_name: ($) => $._identifier_or_qualified_name,
 });

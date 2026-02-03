@@ -13,5 +13,5 @@ module.exports = ({ kw }) => ({
       ),
     ),
 
-  __ambiguous_record_name: ($) => choice($.identifier, $.qualified_name),
+  __ambiguous_record_name: ($) => $._identifier_or_qualified_name,
 });

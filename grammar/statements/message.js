@@ -73,5 +73,5 @@ module.exports = ({ kw }) => ({
       optional(seq(kw("FORMAT"), field("format", $.string_literal))),
       optional(kw("AUTO-RETURN")),
     ),
-  __message_field_name: ($) => choice($.identifier, $.qualified_name),
+  __message_field_name: ($) => $._identifier_or_qualified_name,
 });

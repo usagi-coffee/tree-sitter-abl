@@ -25,7 +25,7 @@ module.exports = ({ kw }) => ({
 
   __export_expression: ($) => $._expression,
 
-  __export_field_name: ($) => choice($.identifier, $.qualified_name),
+  __export_field_name: ($) => $._identifier_or_qualified_name,
   __export_delimiter_phrase: ($) => seq(kw("DELIMITER"), $.string_literal),
   __export_no_lobs: ($) => kw("NO-LOBS"),
 });

@@ -32,7 +32,7 @@ module.exports = ({ kw }) => ({
     seq(kw("UNFORMATTED"), field("field", $.__import_field_name)),
   __import_field_or_skip: ($) =>
     choice($.__import_field_name, alias("^", $.skip_field)),
-  __import_field_name: ($) => choice($.identifier, $.qualified_name),
+  __import_field_name: ($) => $._identifier_or_qualified_name,
   __import_no_lobs: ($) => kw("NO-LOBS"),
   __import_no_error: ($) => kw("NO-ERROR"),
 });

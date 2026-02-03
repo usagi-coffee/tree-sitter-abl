@@ -109,5 +109,5 @@ module.exports = ({ kw }) => ({
       $.identifier,
       $.null_literal,
     ),
-  __function_field_name: ($) => choice($.qualified_name, $.identifier),
+  __function_field_name: ($) => $._identifier_or_qualified_name,
 });

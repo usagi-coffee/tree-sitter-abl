@@ -133,8 +133,8 @@ module.exports = ({ kw }) => ({
       seq(kw("XML-NODE-NAME"), $.string_literal),
       seq(kw("VIEW-AS"), $.identifier),
     ),
-  __temp_table_like_name: ($) => choice($.identifier, $.qualified_name),
+  __temp_table_like_name: ($) => $._identifier_or_qualified_name,
   __temp_table_label_list: ($) =>
     seq($.string_literal, repeat(seq(",", $.string_literal))),
-  __temp_table_field_name: ($) => choice($.identifier, $.qualified_name),
+  __temp_table_field_name: ($) => $._identifier_or_qualified_name,
 });

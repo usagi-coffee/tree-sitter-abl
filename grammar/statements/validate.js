@@ -4,7 +4,7 @@ module.exports = ({ kw }) => ({
 
   __validate_body: ($) =>
     seq(
-      field("record", choice($.identifier, $.qualified_name)),
+      field("record", $._identifier_or_qualified_name),
       optional(kw("NO-ERROR")),
     ),
 });

@@ -18,7 +18,7 @@ module.exports = ({ kw }) => ({
       optional(
         seq(
           kw("FOCUS"),
-          field("focus", choice($.identifier, $.qualified_name)),
+          field("focus", $._identifier_or_qualified_name),
         ),
       ),
       optional(seq(kw("PAUSE"), field("duration", $._expression))),

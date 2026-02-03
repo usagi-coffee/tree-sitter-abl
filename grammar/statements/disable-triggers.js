@@ -12,5 +12,5 @@ module.exports = ({ kw }) => ({
       optional(kw("ALLOW-REPLICATION")),
     ),
 
-  __disable_triggers_record_name: ($) => choice($.identifier, $.qualified_name),
+  __disable_triggers_record_name: ($) => $._identifier_or_qualified_name,
 });

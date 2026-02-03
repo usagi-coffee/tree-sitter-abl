@@ -35,7 +35,7 @@ module.exports = ({ kw }) => ({
       field("record", $.__repeat_record),
       repeat(seq(",", field("record", $.__repeat_record))),
     ),
-  __repeat_record: ($) => choice($.identifier, $.qualified_name),
+  __repeat_record: ($) => $._identifier_or_qualified_name,
   __repeat_preselect_phrase: ($) =>
     seq(
       kw("PRESELECT"),

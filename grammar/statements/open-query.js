@@ -32,9 +32,9 @@ module.exports = ({ kw }) => ({
   __open_query_record_phrase: ($) =>
     prec.right(
       seq(
-        field("record", choice($.identifier, $.qualified_name)),
+        field("record", $._identifier_or_qualified_name),
         optional(
-          seq(kw("OF"), field("of", choice($.identifier, $.qualified_name))),
+          seq(kw("OF"), field("of", $._identifier_or_qualified_name)),
         ),
         optional(seq(kw("WHERE"), field("where", $._expression))),
         optional(seq(kw("USE-INDEX"), field("index", $.identifier))),

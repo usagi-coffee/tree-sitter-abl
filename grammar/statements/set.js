@@ -29,13 +29,13 @@ module.exports = ({ kw }) => ({
     choice(
       prec.right(
         seq(
-          field("field", choice($.identifier, $.qualified_name)),
+          field("field", $._identifier_or_qualified_name),
           optional($.format_phrase),
           optional(seq(kw("WHEN"), field("when", $._expression))),
         ),
       ),
       seq(
-        field("field", choice($.identifier, $.qualified_name)),
+        field("field", $._identifier_or_qualified_name),
         "=",
         field("value", $._expression),
       ),
@@ -44,7 +44,7 @@ module.exports = ({ kw }) => ({
         "(",
         repeat1(
           seq(
-            field("field", choice($.identifier, $.qualified_name)),
+            field("field", $._identifier_or_qualified_name),
             optional($.format_phrase),
           ),
         ),
@@ -66,7 +66,7 @@ module.exports = ({ kw }) => ({
       optional($.frame_phrase),
     ),
 
-  __set_record: ($) => choice($.identifier, $.qualified_name),
+  __set_record: ($) => $._identifier_or_qualified_name,
 
   __set_at_phrase: ($) => seq(kw("AT"), token(/[0-9]+(\.[0-9]+)?/)),
   __set_help_phrase: ($) => seq(kw("HELP"), $.string_literal),

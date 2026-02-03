@@ -26,23 +26,12 @@ module.exports = ({ kw }) => ({
           $._terminator,
         ),
       ),
-      prec(
-        1,
-        seq(
-          optional($.__display_stream),
-          optional(kw("UNLESS-HIDDEN")),
-        $.__display_items,
-        optional(seq(kw("IN"), kw("WINDOW"), field("window", $._expression))),
-        $.__display_frame_phrases,
-          optional(alias(kw("NO-ERROR"), $.no_error)),
-          $._terminator,
-        ),
-      ),
       seq(
         optional($.__display_stream),
         optional(kw("UNLESS-HIDDEN")),
         $.__display_items,
         optional(seq(kw("IN"), kw("WINDOW"), field("window", $._expression))),
+        optional($.__display_frame_phrases),
         optional(alias(kw("NO-ERROR"), $.no_error)),
         $._terminator,
       ),
@@ -55,7 +44,7 @@ module.exports = ({ kw }) => ({
         optional(
           seq(
             kw("EXCEPT"),
-            repeat1(field("except", choice($.identifier, $.qualified_name))),
+            repeat1(field("except", $._identifier_or_qualified_name)),
           ),
         ),
       ),
@@ -71,7 +60,7 @@ module.exports = ({ kw }) => ({
               optional(
                 seq(
                   "@",
-                  field("base", choice($.identifier, $.qualified_name)),
+                  field("base", $._identifier_or_qualified_name),
                 ),
               ),
             ),

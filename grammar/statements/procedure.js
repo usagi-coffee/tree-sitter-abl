@@ -9,7 +9,7 @@ module.exports = ({ kw }) => ({
       ...definitionModifiers($, kw, {
         access: ["PRIVATE", "PROTECTED", "PUBLIC"],
       }),
-      field("name", choice($.identifier, $.qualified_name)),
+      field("name", $._identifier_or_qualified_name),
       repeat($.__procedure_option),
       optional(alias($.__procedure_in_super_phrase, $.in_super_phrase)),
       ":",
@@ -54,7 +54,7 @@ module.exports = ({ kw }) => ({
   procedure_forward_definition: ($) =>
     seq(
       kw("PROCEDURE", { offset: 4 }),
-      field("name", choice($.identifier, $.qualified_name)),
+      field("name", $._identifier_or_qualified_name),
       optional(alias($.__procedure_in_super_phrase, $.in_super_phrase)),
       $._terminator,
     ),

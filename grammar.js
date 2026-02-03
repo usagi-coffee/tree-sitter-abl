@@ -29,14 +29,12 @@ module.exports = grammar({
   conflicts: ($) => [
     // There are many statements where x ( ) has different meanings (aggregate/accum)
     [$._primary_expression, $.function_call],
-
     // DISPLAY x IN WINDOW w ; DISPLAY x IN FRAME y - both can work
     [$.__display_record, $._in_frame_target, $._primary_expression],
     // DISPLAY items vs frame phrase (WITH ...)
     [$.__display_items, $.frame_phrase],
     // Field / Column / Handle can be just an identifier
     [$.__widget_entry],
-
     // Just IDENTIFIER + optionals
     [$.__prompt_for_record_body, $.__prompt_for_fields_body],
     [$.__update_field, $.__update_record],
@@ -161,6 +159,8 @@ module.exports = grammar({
         ),
       _type_name: ($) => choice($.generic_type, $._simple_type_name),
       _type_or_string: ($) => choice($._type_name, $.string_literal),
+      _identifier_or_qualified_name: ($) =>
+        choice($.identifier, $.qualified_name),
 
       _widgets: ($) =>
         prec.right(

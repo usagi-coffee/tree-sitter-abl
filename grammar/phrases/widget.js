@@ -5,22 +5,22 @@ module.exports = ({ kw }) => ({
   __widget_frame: ($) => seq(kw("FRAME"), field("frame", $.identifier)),
 
   __widget_handle: ($) =>
-    seq(field("handle", choice($.identifier, $.qualified_name))),
+    seq(field("handle", $._identifier_or_qualified_name)),
 
   __widget_entry: ($) =>
     choice(
       seq(
         optional(kw("FIELD")),
-        field("field", choice($.identifier, $.qualified_name)),
+        field("field", $._identifier_or_qualified_name),
         optional(seq(kw("IN"), kw("FRAME"), field("frame", $.identifier))),
       ),
       seq(
-        field("column", choice($.identifier, $.qualified_name)),
+        field("column", $._identifier_or_qualified_name),
         seq(kw("IN"), kw("BROWSE"), field("browse", $.identifier)),
       ),
       seq(
         kw("MENU-ITEM"),
-        field("item", choice($.identifier, $.qualified_name)),
+        field("item", $._identifier_or_qualified_name),
         optional($.__widget_in_menu),
       ),
       field("system_handle", alias($.__widget_system_handle, $.system_handle)),

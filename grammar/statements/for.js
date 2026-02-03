@@ -69,7 +69,7 @@ module.exports = ({ kw }) => ({
 
   __for_where_phrase: ($) => seq(kw("WHERE"), $._expression),
   __for_of_phrase: ($) => seq(kw("OF"), $.__for_record_name),
-  __for_record_name: ($) => choice($.identifier, $.qualified_name),
+  __for_record_name: ($) => $._identifier_or_qualified_name,
   __for_no_lock: ($) => kw("NO-LOCK"),
   __for_exclusive_lock: ($) => kw("EXCLUSIVE-LOCK"),
   __for_share_lock: ($) => kw("SHARE-LOCK"),
@@ -101,7 +101,7 @@ module.exports = ({ kw }) => ({
       ),
     ),
 
-  __for_index_name: ($) => choice($.identifier, $.qualified_name),
+  __for_index_name: ($) => $._identifier_or_qualified_name,
   __for_with_stream_io_phrase: ($) => seq(kw("WITH"), kw("STREAM-IO")),
   __for_sort_direction: ($) => token(/ASC(ENDING)?|DESC(ENDING)?/i),
 

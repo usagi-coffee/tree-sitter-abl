@@ -40,7 +40,7 @@ module.exports = ({ kw }) => ({
         "(",
         repeat1(
           seq(
-            field("field", choice($.identifier, $.qualified_name)),
+            field("field", $._identifier_or_qualified_name),
             optional($.format_phrase),
           ),
         ),
@@ -55,8 +55,8 @@ module.exports = ({ kw }) => ({
       "^",
     ),
 
-  __update_record: ($) => choice($.identifier, $.qualified_name),
-  __update_field_target: ($) => choice($.identifier, $.qualified_name),
+  __update_record: ($) => $._identifier_or_qualified_name,
+  __update_field_target: ($) => $._identifier_or_qualified_name,
 
   __update_at_phrase: ($) =>
     seq(choice(kw("AT"), kw("TO")), token(/[0-9]+(\.[0-9]+)?/)),

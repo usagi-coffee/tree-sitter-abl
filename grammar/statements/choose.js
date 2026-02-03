@@ -6,14 +6,14 @@ module.exports = ({ kw }) => ({
       choice(
         seq(
           kw("ROW"),
-          field("field", choice($.identifier, $.qualified_name)),
+          field("field", $._identifier_or_qualified_name),
           optional(seq(kw("HELP"), $.string_literal)),
         ),
         seq(
           kw("FIELD"),
           repeat1(
             seq(
-              field("field", choice($.identifier, $.qualified_name)),
+              field("field", $._identifier_or_qualified_name),
               optional(seq(kw("HELP"), $.string_literal)),
             ),
           ),

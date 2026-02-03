@@ -18,7 +18,7 @@ module.exports = ({ kw }) => ({
   __buffer_compare_field_phrase: ($) =>
     seq(
       choice(kw("EXCEPT"), kw("USING")),
-      repeat1(field("field", choice($.identifier, $.qualified_name))),
+      repeat1(field("field", $._identifier_or_qualified_name)),
     ),
 
   __buffer_compare_save_phrase: ($) =>

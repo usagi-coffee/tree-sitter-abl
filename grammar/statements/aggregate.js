@@ -6,7 +6,7 @@ module.exports = ({ kw }) => ({
     seq(
       repeat1($.__aggregate_assignment),
       kw("FOR"),
-      field("table", choice($.identifier, $.qualified_name)),
+      field("table", $._identifier_or_qualified_name),
       optional(alias($.__aggregate_where_phrase, $.where_phrase)),
     ),
 

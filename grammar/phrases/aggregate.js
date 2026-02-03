@@ -27,5 +27,5 @@ module.exports = ({ kw }) => ({
     seq(kw("LABEL"), field("label", $.string_literal)),
 
   __aggregate_by_phrase: ($) =>
-    seq(kw("BY"), field("group", choice($.identifier, $.qualified_name))),
+    seq(kw("BY"), field("group", $._identifier_or_qualified_name)),
 });

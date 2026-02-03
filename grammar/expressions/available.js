@@ -13,5 +13,5 @@ module.exports = ({ kw }) => ({
       ),
     ),
 
-  __available_record_name: ($) => choice($.identifier, $.qualified_name),
+  __available_record_name: ($) => $._identifier_or_qualified_name,
 });

@@ -303,7 +303,7 @@ module.exports = ({ kw }) => ({
       alias($.constant_expression, $.constant),
       $.identifier,
     ),
-  __method_field_name: ($) => choice($.qualified_name, $.identifier),
+  __method_field_name: ($) => $._identifier_or_qualified_name,
   __method_no_undo: ($) => kw("NO-UNDO"),
   __method_table_parameter: ($) =>
     seq(
@@ -333,7 +333,7 @@ module.exports = ({ kw }) => ({
         ),
       ),
     ),
-  __method_record_name: ($) => choice($.qualified_name, $.identifier),
+  __method_record_name: ($) => $._identifier_or_qualified_name,
   __method_table_parameter_option: ($) =>
     choice(kw("APPEND"), kw("BIND"), kw("BY-VALUE"), kw("BY-REFERENCE")),
   __method_handle_parameter_option: ($) =>

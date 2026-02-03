@@ -54,6 +54,6 @@ module.exports = ({ kw }) => ({
       ),
     ),
 
-  __data_source_buffer_name: ($) => choice($.identifier, $.qualified_name),
-  __data_source_field_name: ($) => choice($.identifier, $.qualified_name),
+  __data_source_buffer_name: ($) => $._identifier_or_qualified_name,
+  __data_source_field_name: ($) => $._identifier_or_qualified_name,
 });

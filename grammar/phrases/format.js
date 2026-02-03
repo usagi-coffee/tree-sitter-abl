@@ -74,7 +74,7 @@ module.exports = ({ kw }) => ({
   __format_as_like: ($) =>
     choice(
       seq(kw("AS"), field("as", $.identifier)),
-      seq(kw("LIKE"), field("like", choice($.identifier, $.qualified_name))),
+      seq(kw("LIKE"), field("like", $._identifier_or_qualified_name)),
     ),
 
   __format_colon_to: ($) =>

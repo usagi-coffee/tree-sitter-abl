@@ -8,5 +8,5 @@ module.exports = ({ kw }) => ({
     ),
 
   __release_no_error: ($) => kw("NO-ERROR"),
-  __release_record_name: ($) => choice($.identifier, $.qualified_name),
+  __release_record_name: ($) => $._identifier_or_qualified_name,
 });

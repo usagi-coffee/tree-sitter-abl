@@ -22,9 +22,9 @@ module.exports = ({ kw }) => ({
       ),
       choice(
         seq(
-          field("record", choice($.qualified_name, $.identifier)),
+          field("record", $._identifier_or_qualified_name),
           kw("EXCEPT"),
-          repeat1(field("field", choice($.identifier, $.qualified_name))),
+          repeat1(field("field", $._identifier_or_qualified_name)),
         ),
         repeat($.__frame_form_item),
       ),
@@ -53,7 +53,7 @@ module.exports = ({ kw }) => ({
       seq(kw("SPACE"), "(", optional($._expression), ")"),
       seq(kw("SKIP"), "(", optional($._expression), ")"),
       seq(
-        field("field", choice($.qualified_name, $.identifier)),
+        field("field", $._identifier_or_qualified_name),
         optional($.at_phrase),
       ),
       seq(

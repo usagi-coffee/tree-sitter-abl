@@ -17,5 +17,5 @@ module.exports = ({ kw }) => ({
 
   __preselect_where_phrase: ($) => seq(kw("WHERE"), $._expression),
   __preselect_no_lock: ($) => kw("NO-LOCK"),
-  __preselect_record_name: ($) => choice($.identifier, $.qualified_name),
+  __preselect_record_name: ($) => $._identifier_or_qualified_name,
 });

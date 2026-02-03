@@ -16,6 +16,9 @@ module.exports = ($) => [
   // Purpose: prefer aggregate expression path in DISPLAY before generic expression.
   // Example: DISPLAY x (TOTAL).
   [$.__display_aggregate_expression, $._expression],
+  // Purpose: prefer identifier/qualified name where it competes with primary expression.
+  // Example: DISPLAY customer WITH BROWSE b.
+  [$._identifier_or_qualified_name, $._primary_expression],
   // Purpose: prefer object access over plain identifier/qualified name when ':' follows.
   // Example: MENU:ITEM.
   [$.object_access, $.qualified_name, $.identifier],

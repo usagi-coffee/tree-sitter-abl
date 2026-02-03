@@ -45,6 +45,6 @@ module.exports = ({ kw }) => ({
       ),
       ")",
     ),
-  __query_table_name: ($) => choice($.identifier, $.qualified_name),
-  __query_field_name: ($) => choice($.identifier, $.qualified_name),
+  __query_table_name: ($) => $._identifier_or_qualified_name,
+  __query_field_name: ($) => $._identifier_or_qualified_name,
 });

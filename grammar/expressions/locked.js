@@ -9,5 +9,5 @@ module.exports = ({ kw }) => ({
       ),
     ),
 
-  __locked_record_name: ($) => choice($.identifier, $.qualified_name),
+  __locked_record_name: ($) => $._identifier_or_qualified_name,
 });
