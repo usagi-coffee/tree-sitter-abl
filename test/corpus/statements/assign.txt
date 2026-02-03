@@ -318,7 +318,7 @@ c = "Trim":T.
     left: (identifier)
     operator: (assignment_operator)
     right: (widget_qualified_name
-      (object_access
+      target: (object_access
         left: (identifier)
         right: (identifier))
       widget: (identifier)))
@@ -327,7 +327,7 @@ c = "Trim":T.
     operator: (assignment_operator)
     right: (unary_expression
       (widget_qualified_name
-        (identifier)
+        target: (identifier)
         widget: (identifier))))
   (assignment_statement
     left: (identifier)

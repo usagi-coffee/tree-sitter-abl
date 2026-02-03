@@ -102,9 +102,10 @@ DELETE WIDGET new_win.
     operator: (assignment_operator)
     right: (identifier))
   (display_statement
-    record: (identifier)
-    (in_window_phrase
-      window: (identifier))
+    (field
+      field: (widget_qualified_name
+        target: (identifier)
+        widget: (identifier)))
     (frame_phrase
       (no_labels))
     (frame_phrase

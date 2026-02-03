@@ -9,7 +9,10 @@ module.exports = ($) => [
   // Purpose: prefer bare handles over field/column entries.
   // Example: ON CHOOSE OF btnFind DO:
   [$.__widget_handle, $.__widget_entry],
-  // Purpose: treat IN FRAME as widget qualifier here, not expression.
-  // Example: ON CHOOSE OF btn foo IN FRAME f.
-  [$.__widget_entry, $._in_frame_target],
+  // Purpose: prefer widget-qualified name when IN <widget> follows object access.
+  // Example: MENU-ITEM m1:SENSITIVE IN MENU mymenu = TRUE.
+  [$.widget_qualified_name, $.object_access],
+  // Purpose: prefer widget-qualified name when IN <widget> follows identifier.
+  // Example: x IN FRAME f.
+  [$.widget_qualified_name, $._primary_expression],
 ];

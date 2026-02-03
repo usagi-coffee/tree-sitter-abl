@@ -73,87 +73,87 @@ INPUT CLOSE.
 
 (source_code
   (variable_definition
-    (identifier)
-    (identifier)
+    name: (identifier)
+    type: (identifier)
     (no_undo))
   (variable_definition
-    (identifier)
-    (identifier)
+    name: (identifier)
+    type: (identifier)
     (no_undo)
-    (identifier)
-    (number_literal)
-    (number_literal))
+    widget: (identifier)
+    width: (number_literal)
+    height: (number_literal))
   (input_through_statement
-    (identifier)
+    program: (identifier)
     (shell_variable)
     (shell_variable))
   (set_statement
     (field
-      (identifier))
+      field: (identifier))
     (field
-      (identifier))
+      field: (identifier))
     (frame_phrase
-      (identifier)
+      frame: (identifier)
       (no_box)
       (no_labels)))
   (display_statement
     (field
-      (identifier))
+      field: (identifier))
     (field
-      (identifier))
+      field: (identifier))
     (format_phrase
-      (string_literal)))
+      format: (string_literal)))
   (input_statement)
   (variable_definition
-    (identifier)
-    (identifier)
+    name: (identifier)
+    type: (identifier)
     (no_undo)
     (format_phrase
-      (string_literal)))
+      format: (string_literal)))
   (variable_definition
-    (identifier)
-    (identifier)
+    name: (identifier)
+    type: (identifier)
     (no_undo)
     (format_phrase
-      (string_literal)))
+      format: (string_literal)))
   (form_statement
     (form_item
-      (identifier))
+      field: (identifier))
     (frame_phrase
       (down)
-      (identifier)))
+      frame: (identifier)))
   (input_through_statement
-    (identifier))
+    program: (identifier))
   (set_statement
     (field
-      (identifier)))
+      field: (identifier)))
   (input_statement)
   (assignment_statement
-    (widget_qualified_name
-      (object_access
-        (identifier)
-        (identifier))
-      (identifier))
-    (assignment_operator)
-    (identifier))
+    left: (widget_qualified_name
+      target: (object_access
+        left: (identifier)
+        right: (identifier))
+      widget: (identifier))
+    operator: (assignment_operator)
+    right: (identifier))
   (input_through_statement
-    (identifier))
+    program: (identifier))
   (repeat_statement
     (body
       (set_statement
         (field
-          (identifier))
+          field: (identifier))
         (frame_phrase
           (no_box)
           (no_labels)
-          (identifier)))
+          frame: (identifier)))
       (display_statement
         (field
-          (identifier))
+          field: (identifier))
         (format_phrase)
         (frame_phrase
-          (identifier)))
+          frame: (identifier)))
       (down_statement
         (frame_phrase
-          (identifier)))))
+          frame: (identifier)))))
   (input_statement))

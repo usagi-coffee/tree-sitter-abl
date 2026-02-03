@@ -50,7 +50,7 @@ module.exports = grammar({
     // There are many statements where x ( ) has different meanings (aggregate/accum)
     [$._primary_expression, $.function_call],
     // DISPLAY x IN WINDOW w ; DISPLAY x IN FRAME y - both can work
-    [$.__display_record, $._in_frame_target, $._primary_expression],
+    [$.__display_record, $.widget_qualified_name, $._primary_expression],
     // DISPLAY items vs frame phrase (WITH ...)
     [$.__display_items, $.frame_phrase],
     // Field / Column / Handle can be just an identifier
@@ -234,8 +234,6 @@ module.exports = grammar({
 
       _widgets: ($) =>
         prec.right(alias(choice(...WIDGETS, kw("FRAME")), $.identifier)),
-      _widgets_no_frame: ($) =>
-        prec.right(alias(choice(...WIDGETS), $.identifier)),
       _stream_phrase: ($) =>
         seq(
           choice(kw("STREAM"), kw("STREAM-HANDLE")),
@@ -271,7 +269,6 @@ module.exports = grammar({
         choice(
           $._identifier_or_qualified_name,
           $.object_access,
-          alias($._frame_qualified_name, $.widget_qualified_name),
           $.widget_qualified_name,
           $.array_access,
           $.function_call,
@@ -322,21 +319,19 @@ module.exports = grammar({
           $._object_access_tail,
         ),
       object_access: ($) =>
-        prec.right(
-          choice(
-            $._object_access_widget,
-            $._object_access_plain,
-            seq(
-              field(
-                "left",
-                choice(
-                  $.function_call,
-                  $.parenthesized_expression,
-                  $.new_expression,
-                ),
+        choice(
+          $._object_access_widget,
+          $._object_access_plain,
+          seq(
+            field(
+              "left",
+              choice(
+                $.function_call,
+                $.parenthesized_expression,
+                $.new_expression,
               ),
-              $._object_access_tail,
             ),
+            $._object_access_tail,
           ),
         ),
 
@@ -427,27 +422,20 @@ module.exports = grammar({
 
       widget_qualified_name: ($) =>
         seq(
-          field("target", alias($._object_access_widget, $.object_access)),
+          field(
+            "target",
+            choice(
+              $._identifier_or_qualified_name,
+              $.scoped_name,
+              $.object_access,
+              $.function_call,
+            ),
+          ),
           kw("IN"),
-          $._widgets_no_frame,
+          $._widgets,
           field("widget", $.identifier),
         ),
 
-      _frame_qualified_name: ($) =>
-        seq(
-          $._in_frame_target,
-          kw("IN"),
-          kw("FRAME"),
-          field("widget", $.identifier),
-        ),
-
-      _in_frame_target: ($) =>
-        choice(
-          $._identifier_or_qualified_name,
-          $.scoped_name,
-          $.object_access,
-          $.function_call,
-        ),
       _window_handle: ($) =>
         choice(
           $._identifier_or_qualified_name,

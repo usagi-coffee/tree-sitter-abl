@@ -62521,10 +62521,26 @@
     "fields": {
       "target": {
         "multiple": false,
-        "required": false,
+        "required": true,
         "types": [
           {
+            "type": "function_call",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
             "type": "object_access",
+            "named": true
+          },
+          {
+            "type": "qualified_name",
+            "named": true
+          },
+          {
+            "type": "scoped_name",
             "named": true
           }
         ]
@@ -62539,32 +62555,6 @@
           }
         ]
       }
-    },
-    "children": {
-      "multiple": false,
-      "required": false,
-      "types": [
-        {
-          "type": "function_call",
-          "named": true
-        },
-        {
-          "type": "identifier",
-          "named": true
-        },
-        {
-          "type": "object_access",
-          "named": true
-        },
-        {
-          "type": "qualified_name",
-          "named": true
-        },
-        {
-          "type": "scoped_name",
-          "named": true
-        }
-      ]
     }
   },
   {

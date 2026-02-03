@@ -19,7 +19,6 @@ const set = require("./set");
 const subscribe = require("./subscribe");
 const update = require("./update");
 const widget = require("./widget");
-const inFrame = require("./in-frame");
 
 module.exports = ($) => [
   ["unary", "multiplication", "add", "compare", "not", "logical"],
@@ -32,7 +31,6 @@ module.exports = ($) => [
   ...caseStatement($),
   ...assign($),
   ...set($),
-  ...inFrame($),
   ...enable($),
   ...display($),
   ...widget($),

@@ -437,11 +437,12 @@ DISPLAY SPACE(2) Customer.Name SKIP(1) Customer.City.
       right: (identifier))
     browse: (identifier))
   (display_statement
-    record: (qualified_name
-      left: (identifier)
-      right: (identifier))
-    (in_window_phrase
-      window: (identifier))
+    (field
+      field: (widget_qualified_name
+        target: (qualified_name
+          left: (identifier)
+          right: (identifier))
+        widget: (identifier)))
     (frame_phrase
       frame: (identifier))
     (no_error))
