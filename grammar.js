@@ -27,6 +27,7 @@ module.exports = grammar({
   ],
   word: ($) => $.identifier,
   conflicts: ($) => [
+    // There are many statements where x ( ) has different meanings (aggregate/accum)
     [$._primary_expression, $.function_call],
 
     // DISPLAY x IN WINDOW w ; DISPLAY x IN FRAME y - both can work
