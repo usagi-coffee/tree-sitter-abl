@@ -45,6 +45,14 @@ and3 = 4.
 or4 = 5.
 formattedDate = test.
 
+CHOOSE: REPEAT:
+  MESSAGE "ok".
+END.
+
+PRESELECT : REPEAT:
+  MESSAGE "ok".
+END.
+
 --------------------------------------------------------------------------------
 
 (source_code
@@ -67,7 +75,17 @@ formattedDate = test.
   (assignment_statement
     left: (identifier)
     operator: (assignment_operator)
-    right: (identifier)))
+    right: (identifier))
+  (repeat_statement
+    label: (identifier)
+    (body
+      (message_statement
+        (string_literal))))
+  (repeat_statement
+    label: (identifier)
+    (body
+      (message_statement
+        (string_literal)))))
 
 ================================================================================
 WEIRD WHITESPACE

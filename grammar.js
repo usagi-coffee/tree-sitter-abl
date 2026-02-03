@@ -22,17 +22,31 @@ const COMPARISON_OPERATORS = [
 
 const LABEL_KEYWORD_WORDS = collect_keyword_words(
   path.join(__dirname, "grammar"),
+  // Label exceptions
   [
     "DO",
     "FOR",
     "REPEAT",
     "FINALLY",
-    "PROCEDURE",
-    "FUNCTION",
-    "CATCH",
     "CASE",
-    "CLASS",
-    "METHOD",
+    "ACTIVE-WINDOW",
+    "CLIPBOARD",
+    "COLOR-TABLE",
+    "COMPILER",
+    "CURRENT-WINDOW",
+    "DEBUGGER",
+    "DEFAULT-WINDOW",
+    "ERROR-STATUS",
+    "FILE-INFO",
+    "FOCUS",
+    "FONT-TABLE",
+    "LAST-EVENT",
+    "RCODE-INFO",
+    "SELF",
+    "SESSION",
+    "SOURCE-PROCEDURE",
+    "TARGET-PROCEDURE",
+    "THIS-PROCEDURE",
   ],
 );
 
@@ -504,26 +518,34 @@ module.exports = grammar({
       // BE CAREFUL MODIFYING HERE, IDENTIFIER ORDER FOR SOME REASON MATTERS!
       identifier: ($) => token(/[_\p{L}][\p{L}\p{N}_\-&]*/i),
       label_keyword: ($) =>
-        choice(
-          ...LABEL_KEYWORD_WORDS.map((word) =>
-            token(prec(1, new RegExp(`${escape_regex(word)}\\s*:`, "i"))),
+        token(
+          prec(
+            1,
+            new RegExp(
+              `(${LABEL_KEYWORD_WORDS.map(escape_regex).join("|")})\\s*:`,
+              "i",
+            ),
           ),
         ),
       system_handle_identifier: ($) =>
-        choice(
-          ...SYSTEM_HANDLE_WORDS.map((word) =>
-            alias(
-              token(prec(1, new RegExp(escape_regex(word), "i"))),
-              $.identifier,
+        alias(
+          token(
+            prec(
+              1,
+              new RegExp(
+                `(${SYSTEM_HANDLE_WORDS.map(escape_regex).join("|")})`,
+                "i",
+              ),
             ),
           ),
+          $.identifier,
         ),
       _label_identifier: ($) => $.identifier,
       _label: ($) =>
         prec.right(
           1,
           choice(
-            seq(field("label", $.identifier), ":"),
+            seq(field("label", $.identifier), $._colon),
             field("label", alias($.label_keyword, $.identifier)),
           ),
         ),
