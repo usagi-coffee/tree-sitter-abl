@@ -299,3 +299,227 @@ x = - -f().
         (function_call
           function: (identifier)
           (arguments))))))
+
+================================================================================
+ARITHMETIC ASSOCIATIVITY
+================================================================================
+
+a = 1 + 2 * 3 + 4.
+b = 10 / 2 * 5 / 2.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (binary_expression
+      (binary_expression
+        (number_literal)
+        (binary_expression
+          (number_literal)
+          (number_literal)))
+      (number_literal)))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (binary_expression
+      (binary_expression
+        (binary_expression
+          (number_literal)
+          (number_literal))
+        (number_literal))
+      (number_literal))))
+
+================================================================================
+BOOLEAN ASSOCIATIVITY
+================================================================================
+
+c = YES OR NO AND YES.
+d = 1 = 2 OR 3 = 4 AND 5 = 6.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (binary_expression
+      (binary_expression
+        (boolean_literal)
+        (boolean_literal))
+      (boolean_literal)))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (binary_expression
+      (binary_expression
+        (binary_expression
+          (number_literal)
+          (number_literal))
+        (binary_expression
+          (number_literal)
+          (number_literal)))
+      (binary_expression
+        (number_literal)
+        (number_literal)))))
+
+================================================================================
+NOT PRECEDENCE WITH COMPARISON
+================================================================================
+
+e = NOT 1 = 2 AND 3 = 4.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (binary_expression
+      (unary_expression
+        (binary_expression
+          (number_literal)
+          (number_literal)))
+      (binary_expression
+        (number_literal)
+        (number_literal)))))
+
+================================================================================
+CHAINED COMPARISON
+================================================================================
+
+f = 1 < 2 < 3.
+g = (1 < 2) < 3.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (binary_expression
+      (binary_expression
+        (number_literal)
+        (number_literal))
+      (number_literal)))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (binary_expression
+      (parenthesized_expression
+        (binary_expression
+          (number_literal)
+          (number_literal)))
+      (number_literal))))
+
+================================================================================
+MIXED PRECEDENCE
+================================================================================
+
+h = 1 + 2 * 3 < 4 OR 5 = 6 AND 7 <> 8.
+i = 1 + 2 * 3 = 7.
+j = 1 + 2 * 3 = 7 OR 0 = 1 AND 2 = 3.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (binary_expression
+      (binary_expression
+        (binary_expression
+          (binary_expression
+            (number_literal)
+            (binary_expression
+              (number_literal)
+              (number_literal)))
+          (number_literal))
+        (binary_expression
+          (number_literal)
+          (number_literal)))
+      (binary_expression
+        (number_literal)
+        (number_literal))))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (binary_expression
+      (binary_expression
+        (number_literal)
+        (binary_expression
+          (number_literal)
+          (number_literal)))
+      (number_literal)))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (binary_expression
+      (binary_expression
+        (binary_expression
+          (binary_expression
+            (number_literal)
+            (binary_expression
+              (number_literal)
+              (number_literal)))
+          (number_literal))
+        (binary_expression
+          (number_literal)
+          (number_literal)))
+      (binary_expression
+        (number_literal)
+        (number_literal)))))
+
+================================================================================
+INPUT EXPRESSIONS
+================================================================================
+
+x = INPUT field1.
+y = INPUT FRAME fr field2.
+z = func(INPUT FRAME fr field2).
+w = func(INPUT field1:sub).
+s = INPUT FRAME fr SESSION:NUMERIC-FORMAT.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (input_expression
+      field: (identifier)))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (input_expression
+      frame: (identifier)
+      field: (identifier)))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (input_expression
+            frame: (identifier)
+            field: (identifier))))))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (object_access
+            left: (identifier)
+            right: (identifier))))))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (input_expression
+      frame: (identifier)
+      field: (object_access
+        left: (identifier)
+        right: (identifier)))))
