@@ -11,8 +11,8 @@ module.exports = ({ kw }) => ({
     seq(
       kw("DO"),
       optional(alias($.__do_for_phrase, $.for_phrase)),
-      optional(alias($.__do_preselect_phrase, $.preselect_phrase)),
-      optional(alias($.__do_query_tuning_phrase, $.query_tuning)),
+      optional($.preselect_phrase),
+      optional($.query_tuning_phrase),
       optional($.__do_transaction_phrase),
       optional(choice($.__do_while_phrase, $.__do_loop_phrase)),
       optional($.__do_transaction_phrase),
@@ -44,33 +44,7 @@ module.exports = ({ kw }) => ({
   __do_for_phrase: ($) => seq(kw("FOR"), $.__do_record_list),
   __do_record_list: ($) => seq($.__do_record, repeat(seq(",", $.__do_record))),
   __do_record: ($) => field("record", $._identifier_or_qualified_name),
-  __do_preselect_phrase: ($) =>
-    seq(token(/PRESELECT\s+/i), $.preselect_record_list),
   __do_transaction_phrase: ($) => kw("TRANSACTION"),
-  __do_query_tuning_phrase: ($) =>
-    seq(
-      kw("QUERY-TUNING"),
-      "(",
-      repeat1(
-        choice(
-          kw("BIND-WHERE"),
-          kw("NO-BIND-WHERE"),
-          seq(kw("CACHE-SIZE"), $._expression),
-          seq(kw("DEBUG"), choice(kw("SQL"), kw("EXTENDED"))),
-          kw("NO-DEBUG"),
-          kw("INDEX-HINT"),
-          kw("NO-INDEX-HINT"),
-          kw("JOIN-BY-SQLDB"),
-          kw("NO-JOIN-BY-SQLDB"),
-          kw("LOOKAHEAD"),
-          kw("NO-LOOKAHEAD"),
-          kw("SEPARATE-CONNECTION"),
-          kw("NO-SEPARATE-CONNECTION"),
-        ),
-      ),
-      ")",
-    ),
-
   __do_undo_phrase: ($) =>
     seq(
       kw("UNDO"),

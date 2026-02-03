@@ -205,12 +205,13 @@ END.
                 (string_literal))))))))
   (repeat_statement
     record: (identifier)
-    (preselect_record_list
-      (preselect_record
-        table: (identifier)))
-    (qualified_name
-      left: (identifier)
-      right: (identifier))
+    (preselect_phrase
+      (preselect_record_list
+        (preselect_record
+          table: (identifier)))
+      by: (qualified_name
+        left: (identifier)
+        right: (identifier)))
     (body
       (find_statement
         table: (identifier))
@@ -231,7 +232,8 @@ END.
       (display_statement
         record: (identifier))))
   (repeat_statement
-    (number_literal)
+    (query_tuning_phrase
+      cache_size: (number_literal))
     (body
       (display_statement
         (field

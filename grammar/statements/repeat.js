@@ -11,8 +11,8 @@ module.exports = ({ kw }) => ({
     seq(
       kw("REPEAT"),
       optional(seq(kw("FOR"), $.__repeat_records)),
-      optional($.__repeat_preselect_phrase),
-      optional($.__repeat_query_tuning_phrase),
+      optional($.preselect_phrase),
+      optional($.query_tuning_phrase),
       optional($.__repeat_loop_phrase),
       optional(choice($.__repeat_while_phrase, $.__repeat_until_phrase)),
       optional(kw("TRANSACTION")),
@@ -35,12 +35,6 @@ module.exports = ({ kw }) => ({
       repeat(seq(",", field("record", $.__repeat_record))),
     ),
   __repeat_record: ($) => $._identifier_or_qualified_name,
-  __repeat_preselect_phrase: ($) =>
-    seq(
-      kw("PRESELECT"),
-      $.preselect_record_list,
-      optional($.__repeat_break_by_phrase),
-    ),
   __repeat_break_by_phrase: ($) =>
     prec.right(
       seq(
@@ -52,29 +46,6 @@ module.exports = ({ kw }) => ({
           seq(kw("BY"), $._expression, optional($.__repeat_sort_direction)),
         ),
       ),
-    ),
-  __repeat_query_tuning_phrase: ($) =>
-    seq(
-      kw("QUERY-TUNING"),
-      "(",
-      repeat1(
-        choice(
-          kw("BIND-WHERE"),
-          kw("NO-BIND-WHERE"),
-          seq(kw("CACHE-SIZE"), $._expression),
-          seq(kw("DEBUG"), choice(kw("SQL"), kw("EXTENDED"))),
-          kw("NO-DEBUG"),
-          kw("INDEX-HINT"),
-          kw("NO-INDEX-HINT"),
-          kw("JOIN-BY-SQLDB"),
-          kw("NO-JOIN-BY-SQLDB"),
-          kw("LOOKAHEAD"),
-          kw("NO-LOOKAHEAD"),
-          kw("SEPARATE-CONNECTION"),
-          kw("NO-SEPARATE-CONNECTION"),
-        ),
-      ),
-      ")",
     ),
   __repeat_loop_phrase: ($) =>
     seq(

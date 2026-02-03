@@ -410,8 +410,8 @@ END.
     (for_phrase
       record: (identifier)
       record: (identifier))
-    (query_tuning
-      (number_literal))
+    (query_tuning_phrase
+      cache_size: (number_literal))
     (frame_phrase
       width: (number_literal))
     (body

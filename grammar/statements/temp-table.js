@@ -123,7 +123,7 @@ module.exports = ({ kw }) => ({
       seq(kw("XML-DATA-TYPE"), $.string_literal),
       seq(kw("XML-NODE-TYPE"), $.string_literal),
       seq(kw("XML-NODE-NAME"), $.string_literal),
-      seq(kw("VIEW-AS"), $.identifier),
+      $.view_as_phrase,
     ),
   __temp_table_like_name: ($) => $._identifier_or_qualified_name,
   __temp_table_label_list: ($) =>
