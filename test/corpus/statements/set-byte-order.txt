@@ -31,3 +31,18 @@ SET-BYTE-ORDER(bufData) = LITTLE-ENDIAN.
   (set_byte_order_statement
     (identifier)
     (identifier)))
+
+================================================================================
+SET-BYTE-ORDER - object access buffer
+================================================================================
+
+SET-BYTE-ORDER(hBuf:HANDLE) = HOST-BYTE-ORDER.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (set_byte_order_statement
+    buffer: (object_access
+      left: (identifier)
+      right: (identifier))
+    order: (identifier)))

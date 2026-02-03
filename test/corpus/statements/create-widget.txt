@@ -1,0 +1,60 @@
+================================================================================
+CREATE WIDGET
+================================================================================
+
+CREATE BUTTON hBtn IN WIDGET-POOL wp ASSIGN WIDTH = 10 HEIGHT = 2.
+CREATE VALUE("MY-WIDGET") ASSIGN SENSITIVE = TRUE.
+CREATE FRAME hFrame TRIGGERS:
+  ON CHOOSE DO:
+    MESSAGE "ok".
+  END.
+  ON ENTRY DO:
+    MESSAGE "entry".
+  END.
+END TRIGGERS.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (create_widget_statement
+    handle: (identifier)
+    pool: (identifier)
+    (assign_phrase
+      (assign_pair
+        left: (identifier)
+        right: (number_literal))
+      (assign_pair
+        left: (identifier)
+        right: (number_literal))))
+  (create_widget_statement
+    widget_type: (string_literal)
+    (assign_phrase
+      (assign_pair
+        left: (identifier)
+        right: (boolean_literal))))
+  (create_widget_statement
+    handle: (identifier)
+    (do_block
+      (body
+        (message_statement
+          (string_literal))))
+    (do_block
+      (body
+        (message_statement
+          (string_literal))))))
+
+================================================================================
+CREATE WIDGET - window and dialog-box
+================================================================================
+
+CREATE WINDOW hWin.
+CREATE DIALOG-BOX hDlg IN WIDGET-POOL wp.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (create_widget_statement
+    handle: (identifier))
+  (create_widget_statement
+    handle: (identifier)
+    pool: (identifier)))

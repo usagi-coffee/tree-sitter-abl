@@ -92,3 +92,20 @@ APPLY "CHOOSE" TO order-but IN FRAME x.
     to: (widget
       field: (identifier)
       frame: (identifier))))
+
+===============================================================================
+APPLY statement with negative keycode and implicit target
+===============================================================================
+
+APPLY -2.
+APPLY "ERROR" TO THIS-PROCEDURE.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (apply_statement
+    event: (number_literal))
+  (apply_statement
+    event: (string_literal)
+    to: (widget
+      system_handle: (system_handle))))

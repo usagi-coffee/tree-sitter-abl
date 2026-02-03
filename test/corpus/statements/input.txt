@@ -88,3 +88,35 @@ INPUT FROM VALUE(cPath) CONVERT SOURCE "ibm850" TARGET "utf-8".
     (convert_phrase
       (string_literal)
       (string_literal))))
+
+================================================================================
+INPUT - NO-MAP and NO-CONVERT
+================================================================================
+
+INPUT FROM "data.txt" NO-MAP NO-CONVERT.
+INPUT STREAM sIn FROM VALUE(cPath) ECHO.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (input_statement
+    file: (string_literal)
+    (convert_phrase))
+  (input_statement
+    name: (identifier)
+    (identifier)))
+
+================================================================================
+INPUT - MAP with string and CONVERT SOURCE
+================================================================================
+
+INPUT FROM "data.txt" MAP "hp2/spanish" CONVERT SOURCE "ibm850".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (input_statement
+    file: (string_literal)
+    map: (string_literal)
+    (convert_phrase
+      source: (string_literal))))

@@ -11,17 +11,20 @@ module.exports = ({ kw }) => ({
         ),
       ),
     ),
+
   __undo_action: ($) =>
     choice(
       seq(
         kw("THROW"),
-        field(
-          "value",
-          choice(
-            $.new_expression,
-            $._assignable,
-            $.string_literal,
-            $.number_literal,
+        optional(
+          field(
+            "value",
+            choice(
+              $.new_expression,
+              $._assignable,
+              $.string_literal,
+              $.number_literal,
+            ),
           ),
         ),
       ),

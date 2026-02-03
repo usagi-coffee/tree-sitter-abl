@@ -20,6 +20,15 @@ FOR EACH Item NO-LOCK:
   ACCUMULATE Item.OnHand * Item.Price (SUB-TOTAL SUB-COUNT SUB-AVERAGE).
 END.
 
+FOR EACH Order NO-LOCK:
+  ACCUMULATE Order.Total (TOTAL) Order.OrderDate (COUNT).
+END.
+
+FOR EACH Customer NO-LOCK BREAK BY Customer.Country:
+  ACCUMULATE Customer.Balance (TOTAL BY Customer.Country)
+             Customer.CreditLimit (MAXIMUM).
+END.
+
 --------------------------------------------------------------------------------
 
 (source_code
@@ -121,5 +130,54 @@ END.
               operation: (aggregate_operation))
             (aggregate_option
               operation: (aggregate_operation))
+            (aggregate_option
+              operation: (aggregate_operation)))))))
+  (for_statement
+    (record
+      table: (identifier)
+      (no_lock))
+    (body
+      (accumulate_statement
+        (accumulate
+          target: (binary_expression
+            (function_call
+              function: (qualified_name
+                left: (identifier)
+                right: (identifier))
+              (arguments
+                (argument
+                  name: (identifier))))
+            (qualified_name
+              left: (identifier)
+              right: (identifier)))
+          (aggregate_phrase
+            (aggregate_option
+              operation: (aggregate_operation)))))))
+  (for_statement
+    (record
+      table: (identifier)
+      (no_lock)
+      (break_by
+        (qualified_name
+          left: (identifier)
+          right: (identifier))))
+    (body
+      (accumulate_statement
+        (accumulate
+          target: (qualified_name
+            left: (identifier)
+            right: (identifier))
+          (aggregate_phrase
+            (aggregate_option
+              operation: (aggregate_operation)
+              (by_phrase
+                group: (qualified_name
+                  left: (identifier)
+                  right: (identifier))))))
+        (accumulate
+          target: (qualified_name
+            left: (identifier)
+            right: (identifier))
+          (aggregate_phrase
             (aggregate_option
               operation: (aggregate_operation))))))))

@@ -38,6 +38,7 @@ module.exports = () => ({
       $.choose_statement,
       $.input_through_statement,
       $.open_query_statement,
+      $.preselect_statement,
       $.do_block,
       $.buffer_compare_statement,
       $.for_statement,

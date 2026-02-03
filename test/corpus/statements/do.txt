@@ -239,6 +239,23 @@ END.
         (string_literal)))))
 
 ================================================================================
+DO ON ENDKEY UNDO RETURN NO-APPLY
+================================================================================
+
+DO ON ENDKEY UNDO, RETURN NO-APPLY:
+  MESSAGE "x".
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (do_block
+    (on_endkey_phrase)
+    (body
+      (message_statement
+        (string_literal)))))
+
+================================================================================
 DO with label
 ================================================================================
 
@@ -382,7 +399,7 @@ END.
 DO FOR with QUERY-TUNING and FRAME options
 ================================================================================
 
-DO FOR rec1, rec2 QUERY-TUNING (NO-LOOKAHEAD CACHE-SIZE 10) WITH WIDTH 40:
+DO FOR rec1, rec2 QUERY-TUNING (LOOKAHEAD NO-LOOKAHEAD CACHE-SIZE 10 INDEX-HINT NO-INDEX-HINT SEPARATE-CONNECTION NO-SEPARATE-CONNECTION DEBUG SQL NO-DEBUG JOIN-BY-SQLDB NO-JOIN-BY-SQLDB BIND-WHERE NO-BIND-WHERE) WITH WIDTH 40:
   DISPLAY rec1.
 END.
 
@@ -400,6 +417,29 @@ END.
     (body
       (display_statement
         record: (identifier)))))
+
+================================================================================
+DO PRESELECT
+================================================================================
+
+DO PRESELECT EACH Customer NO-LOCK:
+  DISPLAY Customer.Name.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (do_block
+    (preselect_phrase
+      (preselect_record_list
+        (preselect_record
+          table: (identifier)
+          (no_lock))))
+    (body
+      (display_statement
+        record: (qualified_name
+          left: (identifier)
+          right: (identifier))))))
 
 ================================================================================
 DO - Reference snippet

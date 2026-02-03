@@ -80,3 +80,20 @@ SET-SIZE(ElipRegion) = 0.
   (set_size_statement
     (identifier)
     (number_literal)))
+
+================================================================================
+SET-SIZE - expression size
+================================================================================
+
+SET-SIZE(bufData) = LENGTH(cData).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (set_size_statement
+    buffer: (identifier)
+    size: (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (identifier))))))

@@ -89,8 +89,12 @@ REPEAT i = 1 TO 10 BY 2 TRANSACTION STOP-AFTER 5 ON QUIT UNDO, LEAVE:
 DISPLAY i.
 END.
 
-REPEAT QUERY-TUNING (CACHE-SIZE 10 NO-LOOKAHEAD NO-BIND-WHERE):
+REPEAT QUERY-TUNING (CACHE-SIZE 10 LOOKAHEAD NO-LOOKAHEAD NO-BIND-WHERE INDEX-HINT NO-INDEX-HINT SEPARATE-CONNECTION NO-SEPARATE-CONNECTION DEBUG EXTENDED NO-DEBUG JOIN-BY-SQLDB NO-JOIN-BY-SQLDB):
 DISPLAY "q".
+END.
+
+REPEAT ON ENDKEY UNDO, RETURN NO-APPLY:
+  MESSAGE "x".
 END.
 
 --------------------------------------------------------------------------------
@@ -231,4 +235,9 @@ END.
     (body
       (display_statement
         (field
-          field: (string_literal))))))
+          field: (string_literal)))))
+  (repeat_statement
+    (on_endkey_phrase)
+    (body
+      (message_statement
+        (string_literal)))))

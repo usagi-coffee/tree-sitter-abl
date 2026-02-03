@@ -37,6 +37,8 @@ x = 1 + 2.
 x = ?.
 x = +5.
 x = 1.31.2022.
+x = 42 NO-ERROR.
+obj:prop = "value" FIELD Cust.Name IN FRAME frm.
 
 --------------------------------------------------------------------------------
 
@@ -69,4 +71,20 @@ x = 1.31.2022.
   (assignment_statement
     left: (identifier)
     operator: (assignment_operator)
-    right: (date_literal)))
+    right: (date_literal))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (number_literal)
+    (no_error))
+  (assignment_statement
+    left: (object_access
+      left: (identifier)
+      right: (identifier))
+    operator: (assignment_operator)
+    right: (string_literal)
+    (widget_phrase
+      field: (qualified_name
+        left: (identifier)
+        right: (identifier))
+      frame: (identifier))))

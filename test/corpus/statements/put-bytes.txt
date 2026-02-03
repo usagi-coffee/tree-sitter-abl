@@ -1,0 +1,21 @@
+================================================================================
+PUT-BYTES
+================================================================================
+
+PUT-BYTES(rawBuf, 1, 4) = memPtr.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assignment_statement
+    left: (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (identifier))
+        (argument
+          name: (number_literal))
+        (argument
+          name: (number_literal))))
+    operator: (assignment_operator)
+    right: (identifier)))

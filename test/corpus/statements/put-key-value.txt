@@ -28,6 +28,32 @@ PUT-KEY-VALUE SECTION "app" KEY "debug" VALUE "true" NO-ERROR.
     (no_error)))
 
 ================================================================================
+PUT-KEY-VALUE - VALUE expressions
+================================================================================
+
+PUT-KEY-VALUE SECTION VALUE(cSection) KEY VALUE(cKey) VALUE VALUE(cValue).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (put_key_value_statement
+    section: (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (identifier))))
+    key: (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (identifier))))
+    value: (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (identifier))))))
+
+================================================================================
 PUT-KEY-VALUE - reference examples
 ================================================================================
 

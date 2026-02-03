@@ -20,6 +20,21 @@ SET-POINTER-VALUE(pBuffer) = GET-POINTER-VALUE(pSource).
           name: (identifier))))))
 
 ================================================================================
+SET-POINTER-VALUE - object access target
+================================================================================
+
+SET-POINTER-VALUE(hBuf:HANDLE) = pOther.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (set_pointer_value_statement
+    target: (object_access
+      left: (identifier)
+      right: (identifier))
+    value: (identifier)))
+
+================================================================================
 SET-POINTER-VALUE - reference snippet
 ================================================================================
 

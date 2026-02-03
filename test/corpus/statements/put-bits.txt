@@ -1,0 +1,21 @@
+================================================================================
+PUT-BITS
+================================================================================
+
+PUT-BITS(rawBuf, 1, 8) = 255.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assignment_statement
+    left: (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (identifier))
+        (argument
+          name: (number_literal))
+        (argument
+          name: (number_literal))))
+    operator: (assignment_operator)
+    right: (number_literal)))

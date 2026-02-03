@@ -21,6 +21,28 @@ GET-KEY-VALUE SECTION "startup" DEFAULT.
     section: (string_literal)))
 
 ================================================================================
+GET-KEY-VALUE - VALUE expressions
+================================================================================
+
+GET-KEY-VALUE SECTION VALUE(cSection) KEY VALUE(cKey) VALUE cValue.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (get_key_value_statement
+    section: (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (identifier))))
+    key: (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (identifier))))
+    value: (identifier)))
+
+================================================================================
 GET-KEY-VALUE - Reference snippets
 ================================================================================
 

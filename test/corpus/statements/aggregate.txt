@@ -6,6 +6,8 @@ AGGREGATE iCount = COUNT(CustNum) FOR Customer.
 AGGREGATE dTotal = TOTAL(Balance) iCount = COUNT(CustNum) FOR Customer.
 AGGREGATE dAvg = AVERAGE(Amount) FOR Order WHERE Status = "A".
 AGGREGATE iMax = MAXIMUM(Qty) iMin = MINIMUM(Qty) FOR OrderLine.
+AGGREGATE Stats.TotalBalance = TOTAL(Customer.Balance) FOR Customer WHERE Customer.Active = TRUE.
+AGGREGATE iCount = COUNT(CustNum) FOR Customer WHERE CustNum > 0.
 
 --------------------------------------------------------------------------------
 
@@ -33,7 +35,29 @@ AGGREGATE iMax = MAXIMUM(Qty) iMin = MINIMUM(Qty) FOR OrderLine.
     field: (identifier)
     target: (identifier)
     field: (identifier)
-    table: (identifier)))
+    table: (identifier))
+  (aggregate_statement
+    target: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    table: (identifier)
+    (where_phrase
+      condition: (binary_expression
+        (qualified_name
+          left: (identifier)
+          right: (identifier))
+        (boolean_literal))))
+  (aggregate_statement
+    target: (identifier)
+    field: (identifier)
+    table: (identifier)
+    (where_phrase
+      condition: (binary_expression
+        (identifier)
+        (number_literal)))))
 
 ================================================================================
 AGGREGATE with qualified field and compound WHERE

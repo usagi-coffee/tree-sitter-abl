@@ -26,10 +26,7 @@ module.exports = ({ kw }) => ({
           kw("INPUT"),
           kw("OUTPUT"),
           field("name", $.identifier),
-          seq(
-            kw("STREAM-HANDLE"),
-            field("handle", $._primary_expression),
-          ),
+          seq(kw("STREAM-HANDLE"), field("handle", $._expression)),
         ),
       ),
       ")",

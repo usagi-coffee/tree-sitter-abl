@@ -40,6 +40,39 @@ INPUT-OUTPUT STREAM sIO THROUGH "filter" UNBUFFERED.
     program: (string_literal)))
 
 ================================================================================
+INPUT-OUTPUT THROUGH - MAP and NO-CONVERT variants
+================================================================================
+
+INPUT-OUTPUT STREAM-HANDLE hIO THROUGH VALUE(cmd) MAP "laserwriter/french" NO-CONVERT.
+INPUT-OUTPUT THROUGH myprog VALUE(arg1) NO-MAP CONVERT TARGET "utf-8".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (input_output_statement
+    stream: (identifier)
+    (identifier)
+    map: (string_literal)
+    (convert_phrase))
+  (input_output_statement
+    program: (identifier)
+    (identifier)
+    (convert_phrase
+      target: (string_literal))))
+
+================================================================================
+INPUT-OUTPUT THROUGH - ECHO option
+================================================================================
+
+INPUT-OUTPUT THROUGH "filter" ECHO.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (input_output_statement
+    program: (string_literal)))
+
+================================================================================
 INPUT-OUTPUT - Reference snippets
 ================================================================================
 

@@ -58,6 +58,31 @@ CLASS Testings:
   END METHOD.
 END CLASS.
 
+CLASS Base:
+  METHOD PUBLIC VOID work():
+    RETURN.
+  END METHOD.
+END CLASS.
+
+CLASS Derived INHERITS Base:
+  METHOD PUBLIC OVERRIDE VOID work():
+    RETURN.
+  END METHOD.
+END CLASS.
+
+CLASS TableMethodOpts:
+  METHOD PUBLIC VOID useTable(
+      OUTPUT TABLE FOR tt APPEND BIND BY-VALUE BY-REFERENCE):
+    RETURN.
+  END METHOD.
+END CLASS.
+
+CLASS DatasetHandleMethod:
+  METHOD PUBLIC VOID useDs(INPUT-OUTPUT DATASET-HANDLE hDs):
+    RETURN.
+  END METHOD.
+END CLASS.
+
 --------------------------------------------------------------------------------
 
 (source_code
@@ -180,7 +205,44 @@ END CLASS.
       (parameters)
       (body
         (message_statement
-          (string_literal))))))
+          (string_literal)))))
+  (class_definition
+    name: (identifier)
+    (method_definition
+      type: (identifier)
+      name: (identifier)
+      (parameters)
+      (body
+        (return_statement))))
+  (class_definition
+    name: (identifier)
+    super: (identifier)
+    (method_definition
+      type: (identifier)
+      name: (identifier)
+      (parameters)
+      (body
+        (return_statement))))
+  (class_definition
+    name: (identifier)
+    (method_definition
+      type: (identifier)
+      name: (identifier)
+      (parameters
+        (parameter
+          table: (identifier)))
+      (body
+        (return_statement))))
+  (class_definition
+    name: (identifier)
+    (method_definition
+      type: (identifier)
+      name: (identifier)
+      (parameters
+        (parameter
+          dataset_handle: (identifier)))
+      (body
+        (return_statement)))))
 
 ================================================================================
 CLASS - Events and Widget Definitions
@@ -251,3 +313,30 @@ END CLASS.
       (signature
         name: (identifier)
         type: (identifier)))))
+
+================================================================================
+CLASS - Options and ABSTRACT method
+================================================================================
+
+ABSTRACT SERIALIZABLE CLASS MyPkg.Tools.AbstractThing
+  INHERITS BaseThing
+  IMPLEMENTS IFoo, IBar
+  USE-WIDGET-POOL:
+  METHOD PUBLIC ABSTRACT VOID DoIt().
+END CLASS.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (class_definition
+    name: (qualified_name
+      left: (identifier)
+      right: (identifier)
+      right: (identifier))
+    super: (identifier)
+    interface: (identifier)
+    interface: (identifier)
+    (method_definition
+      type: (identifier)
+      name: (identifier)
+      (parameters))))

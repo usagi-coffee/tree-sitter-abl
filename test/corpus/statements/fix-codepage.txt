@@ -16,6 +16,21 @@ FIX-CODEPAGE(mRaw) = cCodepage.
     codepage: (identifier)))
 
 ================================================================================
+FIX-CODEPAGE - object access codepage
+================================================================================
+
+FIX-CODEPAGE(mData) = SESSION:CHARSET.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (fix_codepage_statement
+    target: (identifier)
+    codepage: (object_access
+      left: (identifier)
+      right: (identifier))))
+
+================================================================================
 FIX-CODEPAGE - Reference snippets
 ================================================================================
 

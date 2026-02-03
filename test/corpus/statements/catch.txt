@@ -38,6 +38,13 @@ DO ON ERROR UNDO, LEAVE:
   END CATCH.
 END.
 
+DO TRANSACTION ON ERROR UNDO, THROW:
+  RUN DoWork.
+  CATCH err AS Progress.Lang.SysError:
+    UNDO, THROW.
+  END.
+END.
+
 
 --------------------------------------------------------------------------------
 
@@ -90,4 +97,17 @@ END.
                 (identifier))
               (arguments
                 (argument
-                  (number_literal))))))))))
+                  (number_literal)))))))))
+  (do_block
+    (on_error_phrase)
+    (body
+      (run_statement
+        (identifier))
+      (catch_statement
+        (identifier)
+        (qualified_name
+          (identifier)
+          (identifier)
+          (identifier))
+        (body
+          (undo_statement))))))

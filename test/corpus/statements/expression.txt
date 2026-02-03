@@ -1,0 +1,23 @@
+================================================================================
+EXPRESSION STATEMENT
+================================================================================
+
+doWork().
+myFunc(1, "x") NO-ERROR.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (expression_statement
+    (function_call
+      function: (identifier)
+      (arguments)))
+  (expression_statement
+    (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (number_literal))
+        (argument
+          name: (string_literal))))
+    (no_error)))

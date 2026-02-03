@@ -56,6 +56,7 @@ BUFFER-COPY with USING, ASSIGN, and options
 BUFFER-COPY bSrc USING Field1 Field2 TO bTgt.
 BUFFER-COPY bSrc TO bTgt ASSIGN Field1 = 1 Field2 += 2.
 BUFFER-COPY bSrc EXCEPT Field3 TO bTgt ASSIGN Field1 = 1 NO-LOBS NO-ERROR.
+BUFFER-COPY bSrc TO bTgt ASSIGN Cust.Name = "X" Cust.Balance -= 10.
 
 --------------------------------------------------------------------------------
 
@@ -85,4 +86,18 @@ BUFFER-COPY bSrc EXCEPT Field3 TO bTgt ASSIGN Field1 = 1 NO-LOBS NO-ERROR.
       (assign_pair
         left: (identifier)
         right: (number_literal)))
-    (no_error)))
+    (no_error))
+  (buffer_copy_statement
+    source: (identifier)
+    target: (identifier)
+    (assign_phrase
+      (assign_pair
+        left: (qualified_name
+          left: (identifier)
+          right: (identifier))
+        right: (string_literal))
+      (assign_pair
+        left: (qualified_name
+          left: (identifier)
+          right: (identifier))
+        right: (number_literal)))))

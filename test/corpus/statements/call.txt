@@ -30,6 +30,7 @@ CALL - argument expressions
 
 CALL myRoutine 1 "arg" TODAY.
 CALL runCalc (a + b) func(arg1, arg2).
+CALL doWork ? TODAY.
 
 
 --------------------------------------------------------------------------------
@@ -57,4 +58,10 @@ CALL runCalc (a + b) func(arg1, arg2).
           (argument
             (identifier))
           (argument
-            (identifier)))))))
+            (identifier))))))
+  (call_statement
+    (identifier)
+    (argument
+      (null_literal))
+    (argument
+      (identifier))))

@@ -8,10 +8,16 @@ GET PREV qCustomer.
 GET LAST qCustomer.
 GET CURRENT qCustomer NO-LOCK.
 GET NEXT qOrder EXCLUSIVE-LOCK NO-WAIT.
+GET FIRST qCustomer SHARE-LOCK.
+GET NEXT qCustomer NO-WAIT.
 
 --------------------------------------------------------------------------------
 
 (source_code
+  (get_statement
+    query: (identifier))
+  (get_statement
+    query: (identifier))
   (get_statement
     query: (identifier))
   (get_statement

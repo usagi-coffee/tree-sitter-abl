@@ -1,0 +1,19 @@
+================================================================================
+PUT-FLOAT
+================================================================================
+
+PUT-FLOAT(rawBuf, 1) = 2.5.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assignment_statement
+    left: (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (identifier))
+        (argument
+          name: (number_literal))))
+    operator: (assignment_operator)
+    right: (number_literal)))

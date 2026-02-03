@@ -398,3 +398,30 @@ NO-ERROR.
         left: (identifier)
         right: (number_literal))
       (no_error))))
+
+================================================================================
+ASSIGN without expressions and keyword targets
+================================================================================
+
+ASSIGN Customer.Name Customer.Balance.
+ASSIGN CURRENT-WINDOW = hWin NO-ERROR.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assign_statement
+    (assign_phrase
+      (assign_pair
+        left: (qualified_name
+          left: (identifier)
+          right: (identifier)))
+      (assign_pair
+        left: (qualified_name
+          left: (identifier)
+          right: (identifier)))))
+  (assign_statement
+    (assign_phrase
+      (assign_pair
+        left: (identifier)
+        right: (identifier))
+      (no_error))))

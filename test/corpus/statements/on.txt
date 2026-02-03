@@ -7,6 +7,11 @@ ON WRITE OF Customer NEW new-cust OLD old-cust DO:
 END.
 
 ON ASSIGN OF Customer.Name OLD VALUE old-name REVERT.
+ON FIND OF Customer OVERRIDE REVERT.
+ON CHOOSE ANYWHERE DO:
+  MESSAGE "x".
+END.
+ON CHOOSE OF btn PERSISTENT RUN onChoose (INPUT 1).
 
 --------------------------------------------------------------------------------
 
@@ -27,7 +32,24 @@ ON ASSIGN OF Customer.Name OLD VALUE old-name REVERT.
       left: (identifier)
       right: (identifier))
     (referencing_phrase
-      old_field: (identifier))))
+      old_field: (identifier)))
+  (on_statement
+    object: (identifier)
+    (override))
+  (on_statement
+    event: (identifier)
+    (do_block
+      (body
+        (message_statement
+          (string_literal)))))
+  (on_statement
+    event: (identifier)
+    widget: (widget_phrase
+      handle: (identifier))
+    procedure: (identifier)
+    (arguments
+      (argument
+        name: (number_literal)))))
 
 ================================================================================
 ON - Reference snippets

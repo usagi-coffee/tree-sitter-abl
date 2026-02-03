@@ -1,0 +1,35 @@
+================================================================================
+PRESELECT
+================================================================================
+
+PRESELECT EACH Customer NO-LOCK.
+PRESELECT FIRST Order OF Customer WHERE Order.Status = "OPEN".
+PRESELECT Order, EACH OrderLine OF Order NO-LOCK.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (preselect_statement
+    (preselect_record_list
+      (preselect_record
+        table: (identifier)
+        (no_lock))))
+  (preselect_statement
+    (preselect_record_list
+      (preselect_record
+        table: (identifier)
+        of: (identifier)
+        (where_phrase
+          (binary_expression
+            (qualified_name
+              left: (identifier)
+              right: (identifier))
+            (string_literal))))))
+  (preselect_statement
+    (preselect_record_list
+      (preselect_record
+        table: (identifier))
+      (preselect_record
+        table: (identifier)
+        of: (identifier)
+        (no_lock)))))

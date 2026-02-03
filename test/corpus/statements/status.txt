@@ -5,6 +5,7 @@ STATUS statement
 STATUS DEFAULT "Processing...".
 STATUS INPUT "Enter data".
 STATUS INPUT OFF.
+STATUS DEFAULT.
 
 --------------------------------------------------------------------------------
 
@@ -13,6 +14,7 @@ STATUS INPUT OFF.
     message: (string_literal))
   (status_statement
     message: (string_literal))
+  (status_statement)
   (status_statement))
 
 ================================================================================

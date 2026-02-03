@@ -63,6 +63,7 @@ module.exports = ({ kw }) => ({
           kw("NO-JOIN-BY-SQLDB"),
           kw("BIND-WHERE"),
           kw("NO-BIND-WHERE"),
+          kw("NO-INDEX-HINT"),
         ),
       ),
       ")",

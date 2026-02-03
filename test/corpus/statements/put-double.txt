@@ -1,0 +1,19 @@
+================================================================================
+PUT-DOUBLE
+================================================================================
+
+PUT-DOUBLE(rawBuf, 1) = 3.14.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assignment_statement
+    left: (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (identifier))
+        (argument
+          name: (number_literal))))
+    operator: (assignment_operator)
+    right: (number_literal)))

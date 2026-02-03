@@ -33,6 +33,7 @@ BUFFER-COMPARE bSrc TO bTgt SAVE lResult.
 BUFFER-COMPARE bSrc TO bTgt SAVE RESULT IN cDiff.
 BUFFER-COMPARE bSrc TO bTgt NO-LOBS.
 BUFFER-COMPARE bSrc TO bTgt NO-ERROR.
+BUFFER-COMPARE bSrc TO bTgt SAVE RESULT IN obj:prop NO-ERROR.
 
 --------------------------------------------------------------------------------
 
@@ -58,7 +59,14 @@ BUFFER-COMPARE bSrc TO bTgt NO-ERROR.
     target: (identifier))
   (buffer_compare_statement
     source: (identifier)
-    target: (identifier)))
+    target: (identifier))
+  (buffer_compare_statement
+    source: (identifier)
+    target: (identifier)
+    (save_phrase
+      result: (object_access
+        left: (identifier)
+        right: (identifier)))))
 
 ================================================================================
 BUFFER-COMPARE with COMPARES block
@@ -80,6 +88,32 @@ BUFFER-COMPARE bSrc TO bTgt
       value: (identifier)
       action: (message_statement
         (string_literal)))))
+
+================================================================================
+BUFFER-COMPARE with COMPARES and inner END COMPARES
+================================================================================
+
+BUFFER-COMPARE bSrc TO bTgt
+  COMPARES:
+    WHEN Field1 = Field2 THEN APPLY "CHOOSE".
+    WHEN Field3 BEGINS "A" THEN RUN DoWork.
+  COMPARES END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (buffer_compare_statement
+    source: (identifier)
+    target: (identifier)
+    (compares_block
+      field: (identifier)
+      value: (identifier)
+      action: (apply_statement
+        event: (string_literal))
+      field: (identifier)
+      value: (string_literal)
+      action: (run_statement
+        procedure: (identifier)))))
 
 ================================================================================
 BUFFER-COMPARE with EXPLICIT COMPARES and operators

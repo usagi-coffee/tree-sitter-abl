@@ -5,6 +5,7 @@ UP statement
 UP.
 UP 2.
 UP 1 WITH FRAME myframe.
+UP STREAM sOut 2.
 
 --------------------------------------------------------------------------------
 
@@ -15,7 +16,10 @@ UP 1 WITH FRAME myframe.
   (up_statement
     count: (number_literal)
     (frame_phrase
-      frame: (identifier))))
+      frame: (identifier)))
+  (up_statement
+    stream: (identifier)
+    count: (number_literal)))
 
 ================================================================================
 UP - reference snippet and variants

@@ -1,0 +1,47 @@
+================================================================================
+SYSTEM-DIALOG
+================================================================================
+
+SYSTEM-DIALOG COLOR 7 UPDATE colorSel IN WINDOW winH.
+SYSTEM-DIALOG FONT fontId MAX-SIZE 14 MIN-SIZE 8 UPDATE fontSel.
+SYSTEM-DIALOG FONT fontId ANSI-ONLY FIXED-ONLY IN WINDOW winH.
+SYSTEM-DIALOG GET-FILE cFile FILTERS "Images" "*.png" INITIAL-FILTER "Images" MUST-EXIST TITLE "Pick".
+SYSTEM-DIALOG GET-FILE cOut SAVE-AS ASK-OVERWRITE DEFAULT-EXTENSION "txt" RETURN-TO-START-DIR USE-FILENAME.
+SYSTEM-DIALOG GET-DIR cDir INITIAL-DIR "C:\\tmp" TITLE "Pick Dir".
+SYSTEM-DIALOG PRINTER-SETUP NUM-COPIES 2 LANDSCAPE.
+SYSTEM-DIALOG PRINTER-SETUP PORTRAIT UPDATE pset IN WINDOW winH.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (system_dialog_color_statement
+    color: (number_literal)
+    update: (identifier)
+    window: (identifier))
+  (system_dialog_font_statement
+    font: (identifier)
+    max_size: (number_literal)
+    min_size: (number_literal)
+    update: (identifier))
+  (system_dialog_font_statement
+    font: (identifier)
+    window: (identifier))
+  (system_dialog_get_file_statement
+    variable: (identifier)
+    (filters_phrase
+      name: (string_literal)
+      spec: (string_literal)
+      initial: (string_literal))
+    title: (string_literal))
+  (system_dialog_get_file_statement
+    variable: (identifier)
+    extension: (string_literal))
+  (system_dialog_get_dir_statement
+    variable: (identifier)
+    initial_dir: (string_literal)
+    title: (string_literal))
+  (system_dialog_printer_setup_statement
+    copies: (number_literal))
+  (system_dialog_printer_setup_statement
+    update: (identifier)
+    window: (identifier)))

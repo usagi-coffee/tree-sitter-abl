@@ -37,6 +37,37 @@ LOAD "myapp.r" DIR "/usr/lib" APPLICATION "app1" NEW.
     app: (string_literal)))
 
 ================================================================================
+LOAD - VALUE expressions
+================================================================================
+
+LOAD VALUE(cFile) DIR VALUE(cDir) APPLICATION VALUE(cApp) NEW BASE-KEY VALUE(cKey) NO-ERROR.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (load_statement
+    file: (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (identifier))))
+    dir: (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (identifier))))
+    app: (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (identifier))))
+    base_key: (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (identifier))))))
+
+================================================================================
 LOAD - Reference snippet
 ================================================================================
 

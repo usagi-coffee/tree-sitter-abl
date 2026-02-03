@@ -1,0 +1,43 @@
+================================================================================
+TRIGGER PROCEDURE
+================================================================================
+
+TRIGGER PROCEDURE FOR CREATE OF Customer.
+TRIGGER PROCEDURE FOR WRITE OF Order.
+TRIGGER PROCEDURE FOR WRITE OF Order NEW BUFFER bNew OLD BUFFER bOld.
+TRIGGER PROCEDURE FOR ASSIGN NEW VALUE vNew AS CHARACTER.
+TRIGGER PROCEDURE FOR ASSIGN NEW vNew AS CHARACTER.
+TRIGGER PROCEDURE FOR ASSIGN OF Customer.Name.
+TRIGGER PROCEDURE FOR ASSIGN NEW VALUE vLike LIKE Customer.Name.
+TRIGGER PROCEDURE FOR REPLICATION-CREATE OF Customer.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (trigger_procedure_statement
+    event: (identifier)
+    object: (identifier))
+  (trigger_procedure_statement
+    object: (identifier))
+  (trigger_procedure_statement
+    object: (identifier)
+    new_buffer: (identifier)
+    old_buffer: (identifier))
+  (trigger_procedure_statement
+    value: (identifier)
+    data_type: (identifier))
+  (trigger_procedure_statement
+    value: (identifier)
+    data_type: (identifier))
+  (trigger_procedure_statement
+    object: (qualified_name
+      left: (identifier)
+      right: (identifier)))
+  (trigger_procedure_statement
+    value: (identifier)
+    like_field: (qualified_name
+      left: (identifier)
+      right: (identifier)))
+  (trigger_procedure_statement
+    event: (identifier)
+    object: (identifier)))

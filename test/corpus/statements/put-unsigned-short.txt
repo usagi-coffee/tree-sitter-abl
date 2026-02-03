@@ -1,0 +1,19 @@
+================================================================================
+PUT-UNSIGNED-SHORT
+================================================================================
+
+PUT-UNSIGNED-SHORT(rawBuf, 1) = 65535.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assignment_statement
+    left: (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (identifier))
+        (argument
+          name: (number_literal))))
+    operator: (assignment_operator)
+    right: (number_literal)))

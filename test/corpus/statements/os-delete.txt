@@ -63,3 +63,16 @@ OS-DELETE VALUE("tmp") RECURSIVE.
           (identifier)))))
   (os_delete_statement
     (string_literal)))
+
+================================================================================
+OS-DELETE - multiple targets with RECURSIVE
+================================================================================
+
+OS-DELETE VALUE(cPath) "tmp" RECURSIVE.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (os_delete_statement
+    (identifier)
+    (string_literal)))

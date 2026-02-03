@@ -4,17 +4,22 @@ OUTPUT
 
 OUTPUT CLOSE.
 OUTPUT STREAM outStream CLOSE.
+OUTPUT STREAM-HANDLE hOut CLOSE.
 OUTPUT TO VALUE(outPath + "/data.xml") APPEND.
 OUTPUT TO PRINTER "HP" NUM-COPIES 2 LANDSCAPE PAGED PAGE-SIZE 60 NO-ECHO NO-MAP UNBUFFERED NO-CONVERT.
 OUTPUT THROUGH "crypt" mypass NO-ECHO.
 OUTPUT TO "file.log".
 OUTPUT TO VALUE(path) CONVERT SOURCE "UTF-8" TARGET "1250".
 OUTPUT TO "out.txt" CONVERT TARGET "1250".
+OUTPUT TO PRINTER pName PORTRAIT.
+OUTPUT TO TERMINAL NO-ECHO PAGED PAGE-SIZE 24.
 
 --------------------------------------------------------------------------------
 
 (source_code
   (output_statement)
+  (output_statement
+    name: (identifier))
   (output_statement
     name: (identifier))
   (output_statement
@@ -41,6 +46,30 @@ OUTPUT TO "out.txt" CONVERT TARGET "1250".
       target: (string_literal)))
   (output_statement
     file: (string_literal)
+    (convert_phrase
+      target: (string_literal)))
+  (output_statement
+    printer: (identifier))
+  (output_statement
+    (page_size_phrase
+      (number_literal))))
+
+================================================================================
+OUTPUT THROUGH - MAP and NO-CONVERT variants
+================================================================================
+
+OUTPUT THROUGH VALUE(cmd) MAP "hp2/spanish" NO-CONVERT.
+OUTPUT THROUGH myprog NO-MAP CONVERT TARGET "utf-8".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (output_statement
+    (identifier)
+    map: (string_literal)
+    (convert_phrase))
+  (output_statement
+    program: (identifier)
     (convert_phrase
       target: (string_literal))))
 

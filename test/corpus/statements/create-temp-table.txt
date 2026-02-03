@@ -1,0 +1,15 @@
+================================================================================
+CREATE TEMP-TABLE
+================================================================================
+
+CREATE TEMP-TABLE ttHandle.
+CREATE TEMP-TABLE ttHandle IN WIDGET-POOL pool1.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (create_temp_table_statement
+    handle: (identifier))
+  (create_temp_table_statement
+    handle: (identifier)
+    pool: (identifier)))

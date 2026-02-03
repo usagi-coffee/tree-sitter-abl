@@ -50,3 +50,22 @@ OS-COMMAND VALUE("echo") "ok".
   (os_command_statement
     (string_literal)
     (string_literal)))
+
+================================================================================
+OS-COMMAND - extra command tokens
+================================================================================
+
+OS-COMMAND NO-WAIT VALUE("echo") "done" 1 /q.
+OS-COMMAND SILENT "ping" "localhost" /n 1.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (os_command_statement
+    (string_literal)
+    (string_literal)
+    (number_literal))
+  (os_command_statement
+    (string_literal)
+    (string_literal)
+    (number_literal)))

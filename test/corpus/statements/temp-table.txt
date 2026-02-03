@@ -276,7 +276,8 @@ TEMP-TABLE DEFINITION - Field Options
 DEFINE TEMP-TABLE tt NO-UNDO
   FIELD f1 AS CHARACTER EXTENT 10
   FIELD f2 AS DECIMAL DECIMALS 2 INITIAL 10.50
-  FIELD f3 AS INTEGER BGCOLOR 15 FGCOLOR 1
+  FIELD f3 AS INTEGER BGCOLOR 15 FGCOLOR 1 FONT 2
+  FIELD f9 AS CHARACTER DCOLOR 3 PFCOLOR 4
   FIELD f4 AS CHARACTER HELP "Help text"
   FIELD f5 AS LOGICAL SERIALIZE-HIDDEN
   FIELD f6 AS CHARACTER SERIALIZE-NAME "SerName"
@@ -300,6 +301,15 @@ DEFINE TEMP-TABLE tt NO-UNDO
     (temp_table_field
       name: (identifier)
       type: (identifier)
+      (field_option
+        (number_literal))
+      (field_option
+        (number_literal)))
+    (temp_table_field
+      name: (identifier)
+      type: (identifier)
+      (field_option
+        (number_literal))
       (field_option
         (number_literal))
       (field_option

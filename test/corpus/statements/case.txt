@@ -92,3 +92,28 @@ END CASE.
         (body
           (message_statement
             (string_literal)))))))
+
+================================================================================
+CASE with expression and no OTHERWISE
+================================================================================
+
+CASE Order.Status:
+  WHEN "OPEN" THEN RUN OpenOrder.
+  WHEN "HOLD" THEN RUN HoldOrder.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (case_statement
+    (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (case_when_phrase
+      condition: (string_literal)
+      (run_statement
+        procedure: (identifier)))
+    (case_when_phrase
+      condition: (string_literal)
+      (run_statement
+        procedure: (identifier)))))

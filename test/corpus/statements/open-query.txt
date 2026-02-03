@@ -49,6 +49,11 @@ OPEN QUERY qCust FOR EACH Customer BREAK BY Customer.State NO-LOCK.
 OPEN QUERY qCust FOR EACH Customer NO-LOCK INDEXED-REPOSITION MAX-ROWS 10.
 OPEN QUERY qCust PRESELECT EACH Customer NO-LOCK.
 OPEN QUERY qCust FOR EACH Customer BY COLLATE(Customer.Name, "CASE-INSENSITIVE") DESCENDING.
+OPEN QUERY qCust FOR EACH Customer WHERE Customer.CustNum > 0 USE-INDEX CustNum SHARE-LOCK.
+OPEN QUERY qCust FOR EACH Customer EXCLUSIVE-LOCK.
+OPEN QUERY qCust FOR EACH Customer, FIRST Order OF Customer NO-LOCK.
+OPEN QUERY qCust FOR EACH Customer QUERY-TUNING(LOOKAHEAD CACHE-SIZE 5 SEPARATE-CONNECTION NO-SEPARATE-CONNECTION DEBUG SQL NO-DEBUG NO-JOIN-BY-SQLDB NO-LOOKAHEAD NO-INDEX-HINT).
+OPEN QUERY qCust FOR EACH Customer QUERY-TUNING(JOIN-BY-SQLDB NO-BIND-WHERE) NO-LOCK INDEXED-REPOSITION MAX-ROWS 100.
 
 --------------------------------------------------------------------------------
 
@@ -184,4 +189,37 @@ OPEN QUERY qCust FOR EACH Customer BY COLLATE(Customer.Name, "CASE-INSENSITIVE")
               left: (identifier)
               right: (identifier)))
           (argument
-            name: (string_literal)))))))
+            name: (string_literal))))))
+  (open_query_statement
+    query: (identifier)
+    (record_phrase
+      record: (identifier)
+      where: (binary_expression
+        (qualified_name
+          left: (identifier)
+          right: (identifier))
+        (number_literal))
+      index: (identifier)))
+  (open_query_statement
+    query: (identifier)
+    (record_phrase
+      record: (identifier)))
+  (open_query_statement
+    query: (identifier)
+    (record_phrase
+      record: (identifier))
+    (record_phrase
+      record: (identifier)
+      of: (identifier)))
+  (open_query_statement
+    query: (identifier)
+    (record_phrase
+      record: (identifier))
+    (query_tuning
+      (number_literal)))
+  (open_query_statement
+    query: (identifier)
+    (record_phrase
+      record: (identifier))
+    (query_tuning)
+    max_rows: (number_literal)))

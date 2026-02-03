@@ -5,6 +5,7 @@ CREATE basic
 CREATE Customer NO-ERROR.
 CREATE Order.
 CREATE tDebtorShipTo.
+CREATE SERVER appSrv.
 
 --------------------------------------------------------------------------------
 
@@ -14,7 +15,9 @@ CREATE tDebtorShipTo.
   (create_statement
     table: (identifier))
   (create_statement
-    table: (identifier)))
+    table: (identifier))
+  (create_statement
+    server: (identifier)))
 
 ================================================================================
 CREATE with qualified name

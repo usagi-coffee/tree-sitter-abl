@@ -47,3 +47,19 @@ UNLOAD cPathVariable + ".r".
     file: (binary_expression
       (identifier)
       (string_literal))))
+
+===============================================================================
+UNLOAD - VALUE expression
+===============================================================================
+
+UNLOAD VALUE(cFile) NO-ERROR.
+
+-------------------------------------------------------------------------------
+
+(source_code
+  (unload_statement
+    file: (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (identifier))))))

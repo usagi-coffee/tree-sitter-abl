@@ -48,6 +48,24 @@ PUT SCREEN COLOR BLINK-RED "Blink".
     value: (string_literal)))
 
 ================================================================================
+PUT SCREEN - row/column expressions
+================================================================================
+
+PUT SCREEN ROW iRow + 1 COLUMN iCol + 2 "Text".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (put_screen_statement
+    row: (binary_expression
+      (identifier)
+      (number_literal))
+    column: (binary_expression
+      (identifier)
+      (number_literal))
+    value: (string_literal)))
+
+================================================================================
 PUT SCREEN - reference snippet
 ================================================================================
 

@@ -22,3 +22,20 @@ PUT CURSOR ROW iRow COLUMN iCol.
   (put_cursor_statement
     row: (identifier)
     column: (identifier)))
+
+================================================================================
+PUT CURSOR - expressions
+================================================================================
+
+PUT CURSOR ROW iRow + 1 COLUMN iCol - 1.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (put_cursor_statement
+    row: (binary_expression
+      (identifier)
+      (number_literal))
+    column: (binary_expression
+      (identifier)
+      (number_literal))))

@@ -53,6 +53,7 @@ DELETE OBJECT hSocket.
 DELETE OBJECT hQuery.
 DELETE OBJECT myWidget.
 DELETE OBJECT hSocket NO-ERROR.
+DELETE WIDGET w1, w2 NO-ERROR.
 
 --------------------------------------------------------------------------------
 
@@ -64,7 +65,10 @@ DELETE OBJECT hSocket NO-ERROR.
   (delete_object_statement
     name: (identifier))
   (delete_object_statement
-    name: (identifier)))
+    name: (identifier))
+  (delete_widget_statement
+    widget: (identifier)
+    widget: (identifier)))
 
 ================================================================================
 DELETE in FOR EACH loop

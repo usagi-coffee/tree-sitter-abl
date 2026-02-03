@@ -186,7 +186,13 @@ module.exports = grammar({
             $.identifier,
           ),
         ),
-      _events: ($) => choice($.identifier, $.string_literal, $.number_literal),
+      _events: ($) =>
+        choice(
+          $.identifier,
+          $.string_literal,
+          $.number_literal,
+          alias($._signed_number_literal, $.number_literal),
+        ),
 
       // Operators
       assignment_operator: ($) => choice("=", "+=", "-=", "*=", "/="),

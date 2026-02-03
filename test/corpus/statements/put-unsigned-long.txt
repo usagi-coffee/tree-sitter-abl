@@ -1,0 +1,19 @@
+================================================================================
+PUT-UNSIGNED-LONG
+================================================================================
+
+PUT-UNSIGNED-LONG(rawBuf, 1) = 4294967295.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assignment_statement
+    left: (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (identifier))
+        (argument
+          name: (number_literal))))
+    operator: (assignment_operator)
+    right: (number_literal)))

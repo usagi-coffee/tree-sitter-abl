@@ -7,6 +7,8 @@ HIDE FRAME myframe.
 HIDE MESSAGE.
 HIDE ALL.
 HIDE ALL NO-PAUSE.
+HIDE STREAM s1.
+HIDE STREAM-HANDLE hS FRAME f1 NO-PAUSE.
 
 --------------------------------------------------------------------------------
 
@@ -17,7 +19,13 @@ HIDE ALL NO-PAUSE.
       frame: (identifier)))
   (hide_statement)
   (hide_statement)
-  (hide_statement))
+  (hide_statement)
+  (hide_statement
+    stream: (identifier))
+  (hide_statement
+    stream: (identifier)
+    (widget_phrase
+      frame: (identifier))))
 
 ================================================================================
 HIDE - Reference snippet

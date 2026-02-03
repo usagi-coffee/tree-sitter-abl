@@ -29,3 +29,17 @@ DISABLE TRIGGERS FOR LOAD OF Customer.
     (identifier))
   (disable_triggers_statement
     (identifier)))
+
+================================================================================
+DISABLE TRIGGERS - ALLOW-REPLICATION with DUMP
+================================================================================
+
+DISABLE TRIGGERS FOR DUMP OF db.Customer ALLOW-REPLICATION.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (disable_triggers_statement
+    table: (qualified_name
+      left: (identifier)
+      right: (identifier))))

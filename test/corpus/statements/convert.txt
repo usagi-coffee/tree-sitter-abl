@@ -10,3 +10,16 @@ CONVERT SOURCE CODEPAGE "1250" TARGET CODEPAGE "UTF-8".
   (convert_statement
     source: (string_literal)
     target: (string_literal)))
+
+================================================================================
+CONVERT - different literals
+================================================================================
+
+CONVERT SOURCE CODEPAGE "ibm850" TARGET CODEPAGE "utf-8".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (convert_statement
+    source: (string_literal)
+    target: (string_literal)))

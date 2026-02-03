@@ -4166,6 +4166,10 @@
           "named": true
         },
         {
+          "type": "preselect_statement",
+          "named": true
+        },
+        {
           "type": "procedure_definition",
           "named": true
         },
@@ -6814,6 +6818,10 @@
           "named": true
         },
         {
+          "type": "preselect_statement",
+          "named": true
+        },
+        {
           "type": "procedure_definition",
           "named": true
         },
@@ -7709,6 +7717,10 @@
         },
         {
           "type": "preprocessor_directive",
+          "named": true
+        },
+        {
+          "type": "preselect_statement",
           "named": true
         },
         {
@@ -10819,6 +10831,10 @@
           },
           {
             "type": "preprocessor_directive",
+            "named": true
+          },
+          {
+            "type": "preselect_statement",
             "named": true
           },
           {
@@ -20321,6 +20337,10 @@
           "named": true
         },
         {
+          "type": "preselect_statement",
+          "named": true
+        },
+        {
           "type": "procedure_definition",
           "named": true
         },
@@ -28811,6 +28831,10 @@
           "named": true
         },
         {
+          "type": "preselect_statement",
+          "named": true
+        },
+        {
           "type": "procedure_definition",
           "named": true
         },
@@ -30184,6 +30208,10 @@
             "named": true
           },
           {
+            "type": "preselect_statement",
+            "named": true
+          },
+          {
             "type": "procedure_definition",
             "named": true
           },
@@ -30803,6 +30831,10 @@
           },
           {
             "type": "preprocessor_directive",
+            "named": true
+          },
+          {
+            "type": "preselect_statement",
             "named": true
           },
           {
@@ -37920,6 +37952,10 @@
           "named": true
         },
         {
+          "type": "preselect_statement",
+          "named": true
+        },
+        {
           "type": "procedure_definition",
           "named": true
         },
@@ -42055,6 +42091,21 @@
     }
   },
   {
+    "type": "preselect_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "preselect_record_list",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "procedure_definition",
     "named": true,
     "fields": {
@@ -42471,6 +42522,10 @@
         },
         {
           "type": "preprocessor_directive",
+          "named": true
+        },
+        {
+          "type": "preselect_statement",
           "named": true
         },
         {
@@ -43642,6 +43697,10 @@
         },
         {
           "type": "preprocessor_directive",
+          "named": true
+        },
+        {
+          "type": "preselect_statement",
           "named": true
         },
         {
@@ -51813,6 +51872,10 @@
           "named": true
         },
         {
+          "type": "preselect_statement",
+          "named": true
+        },
+        {
           "type": "procedure_definition",
           "named": true
         },
@@ -56008,6 +56071,10 @@
         },
         {
           "type": "preprocessor_directive",
+          "named": true
+        },
+        {
+          "type": "preselect_statement",
           "named": true
         },
         {

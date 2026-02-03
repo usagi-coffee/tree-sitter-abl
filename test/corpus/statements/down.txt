@@ -5,6 +5,8 @@ DOWN statement
 DOWN.
 DOWN 1.
 DOWN 2 WITH FRAME cust.
+DOWN STREAM-HANDLE hOut 3.
+DOWN STREAM sOut.
 
 --------------------------------------------------------------------------------
 
@@ -15,7 +17,12 @@ DOWN 2 WITH FRAME cust.
   (down_statement
     count: (number_literal)
     (frame_phrase
-      frame: (identifier))))
+      frame: (identifier)))
+  (down_statement
+    stream: (identifier)
+    count: (number_literal))
+  (down_statement
+    stream: (identifier)))
 
 ================================================================================
 DOWN - Reference snippet
