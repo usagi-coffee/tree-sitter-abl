@@ -8592,7 +8592,7 @@
           "name": "procedure",
           "content": {
             "type": "SYMBOL",
-            "name": "_expression"
+            "name": "__close_stored_procedure_target"
           }
         },
         {
@@ -8606,7 +8606,7 @@
                   "name": "status_var",
                   "content": {
                     "type": "SYMBOL",
-                    "name": "_expression"
+                    "name": "__close_stored_procedure_target"
                   }
                 },
                 {
@@ -8674,7 +8674,7 @@
                   "name": "handle",
                   "content": {
                     "type": "SYMBOL",
-                    "name": "_expression"
+                    "name": "__close_stored_procedure_target"
                   }
                 }
               ]
@@ -8685,6 +8685,10 @@
           ]
         }
       ]
+    },
+    "__close_stored_procedure_target": {
+      "type": "SYMBOL",
+      "name": "_identifier_or_qualified_name"
     },
     "color_statement": {
       "type": "SEQ",
@@ -37015,7 +37019,7 @@
                       "name": "result_handle",
                       "content": {
                         "type": "SYMBOL",
-                        "name": "_expression"
+                        "name": "_identifier_or_qualified_name"
                       }
                     },
                     {
@@ -37029,7 +37033,7 @@
                               "name": "status_var",
                               "content": {
                                 "type": "SYMBOL",
-                                "name": "_expression"
+                                "name": "_identifier_or_qualified_name"
                               }
                             },
                             {
@@ -37066,7 +37070,7 @@
                       "name": "handle_var",
                       "content": {
                         "type": "SYMBOL",
-                        "name": "_expression"
+                        "name": "_identifier_or_qualified_name"
                       }
                     },
                     {

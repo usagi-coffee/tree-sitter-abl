@@ -10,12 +10,20 @@ module.exports = ({ kw }) => ({
         choice(
           seq(
             kw("LOAD-RESULT-INTO"),
-            field("result_handle", $._expression),
+            field("result_handle", $._identifier_or_qualified_name),
             optional(
-              seq(field("status_var", $._expression), "=", kw("PROC-STATUS")),
+              seq(
+                field("status_var", $._identifier_or_qualified_name),
+                "=",
+                kw("PROC-STATUS"),
+              ),
             ),
           ),
-          seq(field("handle_var", $._expression), "=", kw("PROC-HANDLE")),
+          seq(
+            field("handle_var", $._identifier_or_qualified_name),
+            "=",
+            kw("PROC-HANDLE"),
+          ),
         ),
       ),
       optional(kw("NO-ERROR")),
