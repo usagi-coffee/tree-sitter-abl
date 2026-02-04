@@ -11,9 +11,7 @@ module.exports = ({ kw }) => ({
       seq(
         optional(kw("BREAK")),
         choice($.__preselect_by_phrase, $.__preselect_collate_phrase),
-        repeat(
-          choice($.__preselect_by_phrase, $.__preselect_collate_phrase),
-        ),
+        repeat(choice($.__preselect_by_phrase, $.__preselect_collate_phrase)),
       ),
     ),
   __preselect_by_phrase: ($) =>
@@ -33,5 +31,5 @@ module.exports = ({ kw }) => ({
       ")",
       optional($.__preselect_sort_direction),
     ),
-  __preselect_sort_direction: ($) => token(/ASC(ENDING)?|DESC(ENDING)?/i),
+  __preselect_sort_direction: ($) => kw("DESCENDING", { offset: 4 }),
 });

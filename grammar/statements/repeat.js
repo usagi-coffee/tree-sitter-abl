@@ -55,7 +55,7 @@ module.exports = ({ kw }) => ({
     seq(kw("WHILE"), field("condition", $._expression)),
   __repeat_until_phrase: ($) =>
     seq(kw("UNTIL"), field("condition", $._expression)),
-  __repeat_sort_direction: ($) => token(/ASC(ENDING)?|DESC(ENDING)?/i),
+  __repeat_sort_direction: ($) => kw("DESCENDING", { offset: 4 }),
   __repeat_undo_phrase: ($) =>
     seq(
       kw("UNDO"),

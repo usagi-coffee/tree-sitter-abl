@@ -4662,6 +4662,11 @@
     }
   },
   {
+    "type": "boolean_literal",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "break_by",
     "named": true,
     "fields": {},
@@ -65973,6 +65978,10 @@
     "named": false
   },
   {
+    "type": "FALSE",
+    "named": false
+  },
+  {
     "type": "FGCOLOR",
     "named": false
   },
@@ -66514,6 +66523,10 @@
   },
   {
     "type": "NEXT-PROMPT",
+    "named": false
+  },
+  {
+    "type": "NO",
     "named": false
   },
   {
@@ -67513,6 +67526,10 @@
     "named": false
   },
   {
+    "type": "TRUE",
+    "named": false
+  },
+  {
     "type": "TTCODEPAGE",
     "named": false
   },
@@ -67749,6 +67766,10 @@
     "named": false
   },
   {
+    "type": "YES",
+    "named": false
+  },
+  {
     "type": "YES-NO",
     "named": false
   },
@@ -67786,10 +67807,6 @@
   },
   {
     "type": "block_comment",
-    "named": true
-  },
-  {
-    "type": "boolean_literal",
     "named": true
   },
   {

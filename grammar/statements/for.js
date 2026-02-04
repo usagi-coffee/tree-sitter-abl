@@ -81,7 +81,7 @@ module.exports = ({ kw }) => ({
 
   __for_index_name: ($) => $._identifier_or_qualified_name,
   __for_with_stream_io_phrase: ($) => seq(kw("WITH"), kw("STREAM-IO")),
-  __for_sort_direction: ($) => token(/ASC(ENDING)?|DESC(ENDING)?/i),
+  __for_sort_direction: ($) => kw("DESCENDING", { offset: 4 }),
 
   __for_collate_phrase: ($) =>
     seq(

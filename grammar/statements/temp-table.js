@@ -96,7 +96,9 @@ module.exports = ({ kw }) => ({
   __temp_table_index_field: ($) =>
     seq(
       field("field", $.__temp_table_field_name),
-      optional(choice(kw("ASCENDING"), kw("DESCENDING"))),
+      optional(
+        choice(kw("DESCENDING", { offset: 4 }), kw("ASCENDING", { offset: 3 })),
+      ),
     ),
   __temp_table_field_option: ($) =>
     choice(

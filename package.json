@@ -46,6 +46,7 @@
     "prestart": "tree-sitter build --wasm",
     "start": "tree-sitter playground",
     "test": "bun run tools/generate.js && bun run tools/test.js",
+    "test:queries": "tree-sitter test",
     "test:update": "bun run tools/generate.js && bun run tools/test.js",
     "generate:full": "tree-sitter generate",
     "generate": "bun run tools/generate.js",
