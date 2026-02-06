@@ -5,8 +5,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 GRAMMAR_DIR = ROOT
 
-KW_RE = re.compile(r"\bkw\(\s*(['\"])([^'\"]+)\1\s*(?:,\s*([^)]*))?\)")
-ALIAS_CALL_RE = re.compile(r"\balias\(")
+KW_CALL_RE = re.compile(r"\bkw\s*\(")
+ALIAS_CALL_RE = re.compile(r"\balias\s*\(")
 TOKEN_RE = re.compile(r"\btoken\(\s*/([^/]+)/i\s*\)")
 
 
@@ -49,6 +49,213 @@ def split_top_level(s: str, sep: str = "|") -> list[str]:
         buf.append(ch)
     parts.append("".join(buf))
     return parts
+
+
+def parse_call_body(text: str, open_paren_index: int) -> int | None:
+    depth = 1
+    i = open_paren_index + 1
+    in_single = False
+    in_double = False
+    in_template = False
+    in_line_comment = False
+    in_block_comment = False
+    escape = False
+
+    while i < len(text):
+        ch = text[i]
+        nxt = text[i + 1] if i + 1 < len(text) else ""
+
+        if in_line_comment:
+            if ch == "\n":
+                in_line_comment = False
+            i += 1
+            continue
+        if in_block_comment:
+            if ch == "*" and nxt == "/":
+                in_block_comment = False
+                i += 2
+                continue
+            i += 1
+            continue
+
+        if in_single:
+            if escape:
+                escape = False
+            elif ch == "\\":
+                escape = True
+            elif ch == "'":
+                in_single = False
+            i += 1
+            continue
+        if in_double:
+            if escape:
+                escape = False
+            elif ch == "\\":
+                escape = True
+            elif ch == '"':
+                in_double = False
+            i += 1
+            continue
+        if in_template:
+            if escape:
+                escape = False
+            elif ch == "\\":
+                escape = True
+            elif ch == "`":
+                in_template = False
+            i += 1
+            continue
+
+        if ch == "/" and nxt == "/":
+            in_line_comment = True
+            i += 2
+            continue
+        if ch == "/" and nxt == "*":
+            in_block_comment = True
+            i += 2
+            continue
+        if ch == "'":
+            in_single = True
+            i += 1
+            continue
+        if ch == '"':
+            in_double = True
+            i += 1
+            continue
+        if ch == "`":
+            in_template = True
+            i += 1
+            continue
+        if ch == "(":
+            depth += 1
+        elif ch == ")":
+            depth -= 1
+            if depth == 0:
+                return i
+        i += 1
+    return None
+
+
+def split_args(s: str) -> list[str]:
+    parts = []
+    buf = []
+    depth = 0
+    in_single = False
+    in_double = False
+    in_template = False
+    in_line_comment = False
+    in_block_comment = False
+    escape = False
+
+    i = 0
+    while i < len(s):
+        ch = s[i]
+        nxt = s[i + 1] if i + 1 < len(s) else ""
+
+        if in_line_comment:
+            buf.append(ch)
+            if ch == "\n":
+                in_line_comment = False
+            i += 1
+            continue
+        if in_block_comment:
+            buf.append(ch)
+            if ch == "*" and nxt == "/":
+                buf.append(nxt)
+                in_block_comment = False
+                i += 2
+                continue
+            i += 1
+            continue
+
+        if in_single:
+            buf.append(ch)
+            if escape:
+                escape = False
+            elif ch == "\\":
+                escape = True
+            elif ch == "'":
+                in_single = False
+            i += 1
+            continue
+        if in_double:
+            buf.append(ch)
+            if escape:
+                escape = False
+            elif ch == "\\":
+                escape = True
+            elif ch == '"':
+                in_double = False
+            i += 1
+            continue
+        if in_template:
+            buf.append(ch)
+            if escape:
+                escape = False
+            elif ch == "\\":
+                escape = True
+            elif ch == "`":
+                in_template = False
+            i += 1
+            continue
+
+        if ch == "/" and nxt == "/":
+            buf.append(ch)
+            buf.append(nxt)
+            in_line_comment = True
+            i += 2
+            continue
+        if ch == "/" and nxt == "*":
+            buf.append(ch)
+            buf.append(nxt)
+            in_block_comment = True
+            i += 2
+            continue
+        if ch == "'":
+            in_single = True
+            buf.append(ch)
+            i += 1
+            continue
+        if ch == '"':
+            in_double = True
+            buf.append(ch)
+            i += 1
+            continue
+        if ch == "`":
+            in_template = True
+            buf.append(ch)
+            i += 1
+            continue
+        if ch in "([{":
+            depth += 1
+            buf.append(ch)
+            i += 1
+            continue
+        if ch in ")]}":
+            depth = max(depth - 1, 0)
+            buf.append(ch)
+            i += 1
+            continue
+        if ch == "," and depth == 0:
+            parts.append("".join(buf).strip())
+            buf = []
+            i += 1
+            continue
+        buf.append(ch)
+        i += 1
+    parts.append("".join(buf).strip())
+    return parts
+
+
+def iter_calls(text: str, call_re: re.Pattern[str]) -> list[tuple[int, int]]:
+    calls = []
+    for match in call_re.finditer(text):
+        open_paren = match.end() - 1
+        close_paren = parse_call_body(text, open_paren)
+        if close_paren is None:
+            continue
+        calls.append((open_paren, close_paren))
+    return calls
 
 
 def expand_optional_suffix(part: str) -> set[str]:
@@ -94,26 +301,26 @@ def main() -> int:
             continue
         text = path.read_text(encoding="utf-8")
         aliased = set()
-        for alias_match in ALIAS_CALL_RE.finditer(text):
-            start = alias_match.end()
-            depth = 1
-            i = start
-            while i < len(text) and depth > 0:
-                ch = text[i]
-                if ch == "(":
-                    depth += 1
-                elif ch == ")":
-                    depth -= 1
-                i += 1
-            if depth != 0:
-                continue
-            alias_body = text[start : i - 1]
-            for match in KW_RE.finditer(alias_body):
-                aliased.add(match.group(2))
+        for open_paren, close_paren in iter_calls(text, ALIAS_CALL_RE):
+            alias_body = text[open_paren + 1 : close_paren]
+            for kw_open, kw_close in iter_calls(alias_body, KW_CALL_RE):
+                kw_args = split_args(alias_body[kw_open + 1 : kw_close])
+                if not kw_args:
+                    continue
+                kw_match = re.match(r"\s*(['\"])([^'\"]+)\1\s*$", kw_args[0])
+                if not kw_match:
+                    continue
+                aliased.add(kw_match.group(2))
 
-        for match in KW_RE.finditer(text):
-            keyword = match.group(2)
-            options = match.group(3) or ""
+        for kw_open, kw_close in iter_calls(text, KW_CALL_RE):
+            kw_args = split_args(text[kw_open + 1 : kw_close])
+            if not kw_args:
+                continue
+            kw_match = re.match(r"\s*(['\"])([^'\"]+)\1\s*$", kw_args[0])
+            if not kw_match:
+                continue
+            keyword = kw_match.group(2)
+            options = kw_args[1] if len(kw_args) > 1 else ""
             if re.search(r"\balias\b\s*:", options):
                 continue
             if keyword in aliased:

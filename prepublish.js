@@ -1,6 +1,6 @@
 import { $ } from "bun";
 
-const { exitCode} = await $`npm whoami`;
+const { exitCode } = await $`npm whoami`;
 if (exitCode !== 0) {
   console.error("Authenticate on npm before publishing");
   process.exit(1);
@@ -16,7 +16,7 @@ if (file.trim() !== "src/parser.c") {
 
 if (status.trim() !== "H") {
   console.error(
-    "src/parser.c is most likely skipped, undo worktree before deploying, aborting..."
+    "src/parser.c is most likely skipped, undo worktree before deploying, aborting...",
   );
   process.exit(1);
 }
