@@ -190,6 +190,7 @@ bool tree_sitter_abl_external_scanner_scan(
           lexer->advance(lexer, false);
           depth--;
           if (depth == 0) {
+            lexer->mark_end(lexer);
             lexer->result_symbol = BLOCK_COMMENT;
             return true;
           }
