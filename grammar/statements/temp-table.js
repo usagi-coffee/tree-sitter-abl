@@ -48,7 +48,7 @@ module.exports = ({ kw }) => ({
 
   __temp_table_field: ($) =>
     seq(
-      kw("FIELD"),
+      kw("FIELDS", { alias: "FIELD", offset: 5 }),
       field("name", $.identifier),
       choice(
         seq(kw("AS"), field("type", $._type_name)),

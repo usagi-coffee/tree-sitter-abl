@@ -101,6 +101,26 @@ DEFINE TEMP-TABLE tt_idx LIKE base_tbl USE-INDEX idx1 USE-INDEX idx2 AS PRIMARY
       type: (identifier))))
 
 ================================================================================
+TEMP-TABLE DEFINITION - FIELDS keyword variant
+================================================================================
+
+DEFINE TEMP-TABLE tLine
+  FIELDS t-line AS INTEGER
+  FIELDS t-data AS CHARACTER.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (temp_table_definition
+    name: (identifier)
+    (temp_table_field
+      name: (identifier)
+      type: (identifier))
+    (temp_table_field
+      name: (identifier)
+      type: (identifier))))
+
+================================================================================
 TEMP-TABLE DEFINITION - Shared Variations
 ================================================================================
 
