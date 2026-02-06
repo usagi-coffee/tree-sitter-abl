@@ -55,7 +55,7 @@ Strongly prefer using these commands as they have helpful side-effects like retu
 - We intentionally duplicate modifiers and tunings at the statement level so that most of the statement-specific context lives in a single file. To support this, each statement defines its own `__<statement>_rules`, which are later aliased to `$.rule` where needed. This intentional duplication favors locality, readability, and conflict isolation over DRY abstractions.
 - All statement-related modifiers, phrases, tunings that are not already part of core should be locally defined as `__<statement>_<rule>` rule and aliased to `$.<rule>`.
 - When resolving conflicts treat adding a `conflicts` entry as a last resort that requires prior confirmation with a clear explanation of why structural fixes are insufficient.
-- Prefer `kw` for keywords in place of `token(/keyword/i)`.
+- Prefer `kw` for keywords in place of `token(/keyword/i)`, when the syntax supports partial keyword like `DEFINE` can be `DEF`, `DEFI`, `DEFIN` and `DEFINE` please use `kw("DEFINE", { offset: 3 })`, for scenario where it can be longer do alias e.g`kw("FIELDS", { alias: 'FIELD', offset: 5)`.
 - Treat `(ERROR)` and `(MISSING)` nodes in the test output aserrors that need to be fixed.
 - Use compact rule formatting: keep one-line rules adjacent with no blank lines, avoid blank lines between consecutive one-line rules.
 - The grammar should avoid permissive or catch-all rules that allow invalid syntax to be parsed successfully.
