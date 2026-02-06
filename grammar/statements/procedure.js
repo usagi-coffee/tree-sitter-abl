@@ -8,7 +8,7 @@ module.exports = ({ kw }) => ({
       field("name", $._identifier_or_qualified_name),
       repeat($.__procedure_option),
       optional(alias($.__procedure_in_super_phrase, $.in_super_phrase)),
-      ":",
+      alias($._colon, ":"),
       repeat($._statement),
       kw("END"),
       optional(kw("PROCEDURE", { offset: 4 })),

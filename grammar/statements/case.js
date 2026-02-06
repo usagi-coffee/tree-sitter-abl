@@ -4,7 +4,7 @@ module.exports = ({ kw }) => ({
   __case_body: ($) =>
     seq(
       optional($._expression),
-      $._colon,
+      alias($._colon, ":"),
       repeat1($.case_when_phrase),
       optional($.case_otherwise_phrase),
       kw("END"),

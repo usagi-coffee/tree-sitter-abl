@@ -10,7 +10,7 @@ module.exports = ({ kw }) => ({
       field("type", $._type_name),
       optional(choice(kw("PRIVATE"), kw("PROTECTED"), kw("PUBLIC"))),
       optional(alias($.__function_parameters, $.parameters)),
-      choice($._terminator, $._colon),
+      choice(alias($._colon, ":"), $._terminator),
       repeat($._statement),
       kw("END"),
       optional(kw("FUNCTION")),

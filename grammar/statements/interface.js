@@ -6,7 +6,7 @@ module.exports = ({ kw }) => ({
     seq(
       field("name", $._type_name),
       optional(seq(kw("INHERITS"), $.__interface_inherits_list)),
-      choice($._colon, $._terminator_dot),
+      choice(alias($._colon, ":"), $._terminator_dot),
       repeat(alias($.__interface_body_item, $.interface_body_item)),
       kw("END"),
       optional(kw("INTERFACE")),

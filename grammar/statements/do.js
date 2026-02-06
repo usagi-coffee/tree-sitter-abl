@@ -25,7 +25,12 @@ module.exports = ({ kw }) => ({
     ),
 
   body: ($) =>
-    prec.right(seq(choice($._colon, $._terminator_dot), repeat($._statement))),
+    prec.right(
+      seq(
+        choice(alias($._colon, ":"), $._terminator_dot),
+        repeat($._statement),
+      ),
+    ),
 
   __do_loop_phrase: ($) =>
     seq(

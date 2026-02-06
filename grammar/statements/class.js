@@ -6,7 +6,7 @@ module.exports = ({ kw }) => ({
     seq(
       field("name", $._type_name),
       repeat($.__class_option),
-      choice($._colon, $._terminator_dot),
+      choice(alias($._colon, ":"), $._terminator_dot),
       repeat($.__class_body_item),
       kw("END"),
       optional(kw("CLASS")),
@@ -55,7 +55,7 @@ module.exports = ({ kw }) => ({
         $.__method_return_type,
         field("name", $.identifier),
         alias($.__method_parameters, $.parameters),
-        choice($._colon, $._terminator_dot),
+        choice(alias($._colon, ":"), $._terminator_dot),
         alias($.__method_body, $.body),
       ),
       seq(
@@ -76,7 +76,7 @@ module.exports = ({ kw }) => ({
       repeat($.__constructor_modifier),
       field("name", $.identifier),
       alias($.__method_parameters, $.parameters),
-      $._colon,
+      alias($._colon, ":"),
       alias($.__constructor_body, $.body),
     ),
 
@@ -86,7 +86,7 @@ module.exports = ({ kw }) => ({
       optional($.__destructor_access),
       field("name", $.identifier),
       alias($.__destructor_parameters, $.parameters),
-      $._colon,
+      alias($._colon, ":"),
       alias($.__destructor_body, $.body),
     ),
 
@@ -157,7 +157,7 @@ module.exports = ({ kw }) => ({
       choice(
         $._terminator_dot,
         seq(
-          $._colon,
+          alias($._colon, ":"),
           repeat($._statement),
           kw("END"),
           optional(kw("GET")),
@@ -173,7 +173,7 @@ module.exports = ({ kw }) => ({
       choice(
         $._terminator_dot,
         seq(
-          $._colon,
+          alias($._colon, ":"),
           repeat($._statement),
           kw("END"),
           optional(kw("SET")),

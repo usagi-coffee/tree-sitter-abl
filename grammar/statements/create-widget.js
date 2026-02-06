@@ -42,7 +42,7 @@ module.exports = ({ kw }) => ({
   __create_widget_triggers: ($) =>
     seq(
       kw("TRIGGERS"),
-      $._colon,
+      alias($._colon, ":"),
       repeat1($.__create_widget_trigger_definition),
       kw("END"),
       kw("TRIGGERS"),

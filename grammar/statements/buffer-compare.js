@@ -32,7 +32,7 @@ module.exports = ({ kw }) => ({
     seq(
       optional(kw("EXPLICIT")),
       kw("COMPARES"),
-      $._colon,
+      alias($._colon, ":"),
       repeat1($.__buffer_compare_when_phrase),
       optional(kw("COMPARES")),
       kw("END"),

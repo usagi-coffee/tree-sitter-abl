@@ -5,7 +5,7 @@ module.exports = ({ kw }) => ({
     seq(
       field("name", $.identifier),
       optional(kw("FLAGS")),
-      $._colon,
+      alias($._colon, ":"),
       repeat(
         seq(
           kw("DEFINE", { offset: 3 }),

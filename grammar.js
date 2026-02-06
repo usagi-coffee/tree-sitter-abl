@@ -530,7 +530,7 @@ module.exports = grammar({
         prec.right(
           1,
           choice(
-            seq(field("label", $.identifier), $._colon),
+            seq(field("label", $.identifier), alias($._colon, ":")),
             field("label", alias($.label_keyword, $.identifier)),
           ),
         ),
