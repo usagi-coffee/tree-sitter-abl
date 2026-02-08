@@ -107,6 +107,7 @@ module.exports = grammar({
   extras: ($) => [
     /[\s\f\uFEFF\u2060\u200B]|\\\r?\n/,
     $.comment,
+    $.constant,
     $.include,
     $.argument_reference,
   ],
