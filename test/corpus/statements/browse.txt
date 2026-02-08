@@ -35,6 +35,32 @@ TITLE "Customer Browse" DOWN 10.
     (down_option
       (number_literal))))
 
+================================================================================
+Define Browse with NO-ASSIGN and NO-BOX
+================================================================================
+
+DEFINE BROWSE bNoAssign QUERY qNoAssign
+  DISPLAY ttOrder.OrderNum
+  WITH SIZE 77 BY 10 NO-ASSIGN NO-ROW-MARKERS NO-BOX SEPARATORS.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (browse_definition
+    name: (identifier)
+    query: (identifier)
+    (column
+      column: (qualified_name
+        left: (identifier)
+        right: (identifier)))
+    (size_option
+      (number_literal)
+      (number_literal))
+    (no_assign_option)
+    (no_row_markers_option)
+    (no_box_option)
+    (separators_option)))
+
 =============================
 Define Browse with WITH and Options
 =============================

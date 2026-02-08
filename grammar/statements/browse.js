@@ -96,6 +96,8 @@ module.exports = ({ kw }) => ({
       alias($.__browse_fit_last_column_option, $.fit_last_column_option),
       alias($.__browse_multiple_option, $.multiple_option),
       alias($.__browse_separators_option, $.separators_option),
+      alias($.__browse_no_assign_option, $.no_assign_option),
+      alias($.__browse_no_box_option, $.no_box_option),
       alias($.__browse_no_row_markers_option, $.no_row_markers_option),
       alias(
         $.__browse_no_column_scrolling_option,
@@ -156,6 +158,8 @@ module.exports = ({ kw }) => ({
   __browse_fit_last_column_option: ($) => kw("FIT-LAST-COLUMN"),
   __browse_multiple_option: ($) => kw("MULTIPLE"),
   __browse_separators_option: ($) => kw("SEPARATORS"),
+  __browse_no_assign_option: ($) => kw("NO-ASSIGN"),
+  __browse_no_box_option: ($) => kw("NO-BOX"),
   __browse_no_row_markers_option: ($) => kw("NO-ROW-MARKERS"),
   __browse_no_column_scrolling_option: ($) => kw("NO-COLUMN-SCROLLING"),
   __browse_max_data_guess_option: ($) =>
