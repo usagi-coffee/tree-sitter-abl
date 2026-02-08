@@ -86,6 +86,9 @@ FORM with frame phrase
 
 FORM customer-name WITH FRAME A.
 FORM customer-name customer-balance WITH FRAME B.
+FORM WITH FRAME only DOWN WIDTH 80.
+FORM customer-name LABEL {us/t0/t001.i} FORMAT "x(10)".
+FORM customer-name WITH SIDE-LABELS WITH FRAME cForm.
 
 --------------------------------------------------------------------------------
 
@@ -101,7 +104,42 @@ FORM customer-name customer-balance WITH FRAME B.
     (form_item
       field: (identifier))
     (frame_phrase
+      frame: (identifier)))
+  (form_statement
+    (frame_phrase
+      frame: (identifier)
+      (down)
+      width: (number_literal)))
+  (form_statement
+    (form_item
+      field: (identifier)
+      label: (include_expression
+        file: (file_name))
+      format: (string_literal)))
+  (form_statement
+    (form_item
+      field: (identifier))
+    (frame_phrase
+      (side_labels))
+    (frame_phrase
       frame: (identifier))))
+
+================================================================================
+FORM with MENU item
+================================================================================
+
+FORM Menu NO-LABEL WITH FRAME a SIDE-LABELS.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (form_statement
+    (form_item
+      (identifier)
+      (no_label))
+    (frame_phrase
+      frame: (identifier)
+      (side_labels))))
 
 ================================================================================
 FORM - Reference snippets

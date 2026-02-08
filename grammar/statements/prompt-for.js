@@ -26,8 +26,9 @@ module.exports = ({ kw }) => ({
     seq(
       repeat1(alias($.__prompt_for_field, $.field)),
       optional(alias($.__prompt_for_go_on, $.go_on_phrase)),
-        optional($.in_window_phrase),
+      optional($.in_window_phrase),
       optional($.frame_phrase),
+      optional(alias($.__prompt_for_no_validate_phrase, $.no_validate_phrase)),
       optional($.editing_phrase),
     ),
 
@@ -82,4 +83,5 @@ module.exports = ({ kw }) => ({
   __prompt_for_font_option: ($) => seq(kw("FONT"), $._expression),
 
   __prompt_for_go_on: ($) => seq(kw("GO-ON"), "(", repeat1($.identifier), ")"),
+  __prompt_for_no_validate_phrase: ($) => seq(kw("WITH"), kw("NO-VALIDATE")),
 });

@@ -149,6 +149,7 @@ VARIABLE DEFINITION - EXTENT Variations
 DEFINE VARIABLE arr1 AS INTEGER EXTENT.
 DEFINE VARIABLE arr2 AS CHARACTER EXTENT 10 NO-UNDO.
 DEFINE VARIABLE arr3 AS DECIMAL EXTENT {&MAX_SIZE}.
+DEFINE VARIABLE arr4 EXTENT 7 LIKE ad_name NO-UNDO.
 
 --------------------------------------------------------------------------------
 
@@ -168,7 +169,13 @@ DEFINE VARIABLE arr3 AS DECIMAL EXTENT {&MAX_SIZE}.
     type: (identifier)
     (extent_phrase
       (constant
-        (identifier)))))
+        (identifier))))
+  (variable_definition
+    name: (identifier)
+    (extent_phrase
+      (number_literal))
+    like: (identifier)
+    (no_undo)))
 
 ================================================================================
 VARIABLE DEFINITION - INITIAL with Different Types

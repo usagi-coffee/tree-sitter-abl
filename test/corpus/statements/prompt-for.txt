@@ -368,3 +368,21 @@ PROMPT-FOR STREAM-HANDLE hS field1 field2 IN WINDOW wMain WITH FRAME fMain.
       window: (identifier))
     (frame_phrase
       frame: (identifier))))
+
+================================================================================
+PROMPT-FOR with NO-VALIDATE + EDITING
+================================================================================
+
+PROMPT-FOR cp_cust WITH NO-VALIDATE EDITING:
+  READKEY.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (prompt_for_statement
+    (field
+      field: (identifier))
+    (no_validate_phrase)
+    (editing_phrase
+      (readkey_statement))))

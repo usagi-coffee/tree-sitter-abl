@@ -34,5 +34,6 @@ module.exports = ({ kw, ctx }) => ({
       $.boolean_literal,
       $.null_literal,
       $.input_expression,
+      $.include_expression,
     ),
 });

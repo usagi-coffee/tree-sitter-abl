@@ -2,15 +2,27 @@ module.exports = ({ kw }) => ({
   form_statement: ($) => seq(kw("FORM"), $.__form_body, $._terminator),
 
   __form_body: ($) =>
-    seq(repeat1(alias($.__form_item, $.form_item)), optional($.frame_phrase)),
+    choice(
+      seq(repeat1(alias($.__form_item, $.form_item)), repeat($.frame_phrase)),
+      repeat1($.frame_phrase),
+    ),
 
   __form_item: ($) =>
     prec.right(
       choice(
+        prec(
+          1,
+          seq(
+            alias(kw("MENU"), $.identifier),
+            optional(alias(kw("NO-LABEL"), $.no_label)),
+            optional(alias(kw("NO-LABELS"), $.no_labels)),
+            optional(seq(kw("FORMAT"), field("format", $.string_literal))),
+          ),
+        ),
         seq(
           field("field", $._expression),
           optional(seq(kw("COLON"), field("colon", $._expression))),
-          optional(seq(kw("LABEL"), field("label", $.string_literal))),
+          optional(seq(kw("LABEL"), field("label", $.__form_label))),
           optional(seq(kw("FORMAT"), field("format", $.string_literal))),
           optional(alias($.__form_view_as, $.view_as_phrase)),
         ),
@@ -32,4 +44,11 @@ module.exports = ({ kw }) => ({
     seq($.__form_radio_button, repeat(seq(",", $.__form_radio_button))),
   __form_radio_button: ($) =>
     seq(field("label", $.string_literal), ",", field("value", $._expression)),
+  __form_label: ($) =>
+    choice(
+      $.include_expression,
+      alias($.constant_expression, $.constant),
+      $.string_literal,
+      $._identifier_or_qualified_name,
+    ),
 });

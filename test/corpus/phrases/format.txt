@@ -13,3 +13,31 @@ DEFINE VARIABLE x AS CHARACTER FORMAT "x(10)" LABEL "Name".
     (format_phrase
       format: (string_literal))
     label: (string_literal)))
+
+================================================================================
+FORMAT phrase with identifier-like targets
+================================================================================
+
+PUT x FORMAT decF.
+PUT x FORMAT f.v.
+PUT x FORMAT hFmt:Value.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (put_statement
+    value: (identifier)
+    (format_phrase
+      format: (identifier)))
+  (put_statement
+    value: (identifier)
+    (format_phrase
+      format: (qualified_name
+        left: (identifier)
+        right: (identifier))))
+  (put_statement
+    value: (identifier)
+    (format_phrase
+      format: (object_access
+        left: (identifier)
+        right: (identifier)))))

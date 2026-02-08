@@ -11,6 +11,7 @@ module.exports = ({ kw }) => ({
   __variable_body: ($) =>
     seq(
       field("name", $.identifier),
+      repeat(alias($.__variable_extent_phrase, $.extent_phrase)),
       optional(alias(kw("NO-UNDO"), $.no_undo)),
 
       seq(

@@ -89,6 +89,16 @@ module.exports = ({ kw }) => ({
       choice(
         field("format", $.string_literal),
         seq("(", field("format", $.string_literal), ")"),
+        field(
+          "format",
+          choice(
+            $.identifier,
+            $.qualified_name,
+            $.object_access,
+            alias($.constant_expression, $.constant),
+            $.argument_reference,
+          ),
+        ),
       ),
     ),
 

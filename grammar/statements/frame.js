@@ -23,7 +23,7 @@ module.exports = ({ kw }) => ({
         repeat($.__frame_form_item),
       ),
       optional($.__frame_header_section),
-      optional($.frame_phrase),
+      repeat($.frame_phrase),
     ),
 
   __frame_header_section: ($) =>

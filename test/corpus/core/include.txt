@@ -17,72 +17,75 @@ DISPLAY {&VAR1}.
 
 (source_code
   (include
-    file: (file_name)
-    argument: (include_argument
-      (identifier))
-    argument: (include_argument
-      (include_named_argument
-        name: (identifier)
-        value: (string_literal)))
-    argument: (include_argument
-      (identifier))
-    argument: (include_argument
-      (string_literal))
-    argument: (include_argument
-      (include_named_argument
-        name: (identifier)
-        value: (identifier))))
+    (include
+      file: (file_name)
+      argument: (include_argument
+        (identifier))
+      argument: (include_argument
+        (include_named_argument
+          name: (identifier)
+          value: (string_literal)))
+      argument: (include_argument
+        (identifier))
+      argument: (include_argument
+        (string_literal))
+      argument: (include_argument
+        (include_named_argument
+          name: (identifier)
+          value: (identifier)))))
   (include
-    file: (constant
-      (identifier))
-    file: (file_name)
-    argument: (include_argument
-      (identifier)))
+    (include
+      file: (constant
+        (identifier))
+      file: (file_name)
+      argument: (include_argument
+        (identifier))))
   (include)
   (include
-    file: (constant
-      (identifier))
-    file: (file_name)
-    argument: (include_argument
-      (include_named_argument
-        name: (identifier)
-        value: (identifier)))
-    argument: (include_argument
-      (include_named_argument
-        name: (identifier)
-        value: (identifier)))
-    argument: (include_argument
-      (include_named_argument
-        name: (identifier)
-        value: (qualified_name
-          left: (identifier)
-          right: (identifier))))
-    argument: (include_argument
-      (include_named_argument
-        name: (identifier)
-        value: (qualified_name
-          left: (identifier)
-          right: (identifier))))
-    argument: (include_argument
-      (include_named_argument
-        name: (identifier)
-        value: (identifier)))
-    argument: (include_argument
-      (include_named_argument
-        name: (identifier)
-        value: (identifier)))
-    argument: (include_argument
-      (include_named_argument
-        name: (identifier)
-        value: (identifier)))
-    argument: (include_argument
-      (include_named_argument
-        name: (identifier)
-        value: (string_literal)))
-    argument: (include_argument
-      (include_named_argument
-        name: (identifier)
-        value: (identifier))))
+    (include
+      file: (constant
+        (identifier))
+      file: (file_name)
+      argument: (include_argument
+        (include_named_argument
+          name: (identifier)
+          value: (identifier)))
+      argument: (include_argument
+        (include_named_argument
+          name: (identifier)
+          value: (identifier)))
+      argument: (include_argument
+        (include_named_argument
+          name: (identifier)
+          value: (qualified_name
+            left: (identifier)
+            right: (identifier))))
+      argument: (include_argument
+        (include_named_argument
+          name: (identifier)
+          value: (qualified_name
+            left: (identifier)
+            right: (identifier))))
+      argument: (include_argument
+        (include_named_argument
+          name: (identifier)
+          value: (identifier)))
+      argument: (include_argument
+        (include_named_argument
+          name: (identifier)
+          value: (identifier)))
+      argument: (include_argument
+        (include_named_argument
+          name: (identifier)
+          value: (identifier)))
+      argument: (include_argument
+        (include_named_argument
+          name: (identifier)
+          value: (string_literal)))
+      argument: (include_argument
+        (include_named_argument
+          name: (identifier)
+          value: (identifier)))))
   (display_statement
     (field
       field: (constant
@@ -98,8 +101,9 @@ INCLUDE with WINDOW positional argument
 
 (source_code
   (include
-    file: (file_name)
-    argument: (include_argument
-      (identifier))
-    argument: (include_argument
-      (number_literal))))
+    (include
+      file: (file_name)
+      argument: (include_argument
+        (identifier))
+      argument: (include_argument
+        (number_literal)))))

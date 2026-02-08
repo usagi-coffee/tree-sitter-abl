@@ -469,3 +469,20 @@ DISPLAY SPACE(2) Customer.Name SKIP(1) Customer.City.
       field: (qualified_name
         left: (identifier)
         right: (identifier)))))
+
+================================================================================
+DISPLAY with frame only
+================================================================================
+
+DISPLAY WITH FRAME a 1 DOWN NO-LABEL OVERLAY.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (display_statement
+    (frame_phrase
+      frame: (identifier)
+      (down
+        value: (number_literal))
+      (no_label)
+      (overlay))))

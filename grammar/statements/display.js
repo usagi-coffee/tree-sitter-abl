@@ -10,6 +10,14 @@ module.exports = ({ kw }) => ({
   __display_fields_body: ($) =>
     choice(
       prec(
+        3,
+        seq(
+          $.__display_frame_phrases,
+          optional(alias(kw("NO-ERROR"), $.no_error)),
+          $._terminator,
+        ),
+      ),
+      prec(
         2,
         seq(
           $._stream_phrase,

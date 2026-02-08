@@ -108,7 +108,6 @@ module.exports = grammar({
     /[\s\f\uFEFF\u2060\u200B]|\\\r?\n/,
     $.comment,
     $.include,
-    $.constant,
     $.argument_reference,
   ],
   word: ($) => $.identifier,
@@ -186,8 +185,8 @@ module.exports = grammar({
       include: ($) =>
         token(
           choice(
-            /\{\{&[^}\r\n]+\}[^\s}\r\n]*\.i[ \t]*\}\.?[ \t]*\r?\n/i,
-            /\{[^\s}\r\n]*\.i[ \t]*\}\.?[ \t]*\r?\n/i,
+            /\{\{&[^}\r\n]+\}[^\s}\r\n]*\.i[ \t]*\}[ \t]*\r?\n/i,
+            /\{[^\s}\r\n]*\.i[ \t]*\}[ \t]*\r?\n/i,
           ),
         ),
       include_expression: ($) =>
@@ -198,6 +197,7 @@ module.exports = grammar({
           "}",
           optional("."),
         ),
+      include_statement: ($) => seq(alias($.include_expression, $.include)),
       include_argument: ($) =>
         choice($.include_named_argument, $._include_argument_value),
       include_named_argument: ($) =>
@@ -291,7 +291,14 @@ module.exports = grammar({
       _type_name: ($) => choice($.generic_type, $._simple_type_name),
       _type_or_string: ($) => choice($._type_name, $.string_literal),
       _identifier_or_qualified_name: ($) =>
-        choice($.identifier, $.qualified_name, alias(kw("INTERFACE"), $.identifier)),
+        choice(
+          $.macro_concatenated_name,
+          $.identifier,
+          $.qualified_name,
+          alias(kw("INTERFACE"), $.identifier),
+        ),
+      macro_concatenated_name: ($) =>
+        token(/[_\p{L}][\p{L}\p{N}_\-&]*(\{(?:&[0-9A-Za-z_-]+|[0-9A-Za-z_-]+)\})+/i),
 
       _widgets: ($) =>
         prec.right(alias(choice(...WIDGETS, kw("FRAME")), $.identifier)),

@@ -430,3 +430,18 @@ RUN buildBuffer (BUFFER ttReportOptions:HANDLE).
         name: (object_access
           left: (identifier)
           right: (identifier))))))
+
+================================================================================
+RUN with macro-concatenated argument identifier
+================================================================================
+
+RUN x (INPUT oid_{&QXO-TABLE}).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (run_statement
+    procedure: (identifier)
+    (arguments
+      (argument
+        name: (macro_concatenated_name)))))

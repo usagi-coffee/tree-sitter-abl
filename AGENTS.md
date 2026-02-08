@@ -53,6 +53,7 @@ Strongly prefer using these commands as they have helpful side-effects like retu
 - Before working on a statement, first consult its reference to ensure you understand the available syntax and it's proper usage.
 - Grammar changes without thorough corpus coverage and testing are unacceptable.
 - Avoid creating a shared or generic code unless it is really a part of the core syntax, core grammar modifications require a confirmation unless experimenting.
+- Always prefere adding to `precedences` over using `prec(`.
 - We intentionally duplicate modifiers and tunings at the statement level so that most of the statement-specific context lives in a single file. To support this, each statement defines its own `__<statement>_rules`, which are later aliased to `$.rule` where needed. This intentional duplication favors locality, readability, and conflict isolation over DRY abstractions.
 - All statement-related modifiers, phrases, tunings that are not already part of core should be locally defined as `__<statement>_<rule>` rule and aliased to `$.<rule>`.
 - When resolving conflicts treat adding a `conflicts` entry as a last resort that requires prior confirmation with a clear explanation of why structural fixes are insufficient.

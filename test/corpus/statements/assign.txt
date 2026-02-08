@@ -442,3 +442,19 @@ ASSIGN CURRENT-WINDOW = hWin NO-ERROR.
         left: (identifier)
         right: (identifier))
       (no_error))))
+
+================================================================================
+ASSIGN with include expression value
+================================================================================
+
+ASSIGN a = {us/t0/t001.i}.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assign_statement
+    (assign_phrase
+      (assign_pair
+        left: (identifier)
+        right: (include_expression
+          file: (file_name))))))

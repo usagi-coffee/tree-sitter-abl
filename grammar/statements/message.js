@@ -12,7 +12,11 @@ module.exports = ({ kw }) => ({
     ),
 
   __message_expression: ($) =>
-    choice($._expression, alias($.__message_skip_item, $.skip)),
+    choice(
+      $._expression,
+      alias($.__message_skip_item, $.skip),
+      alias(kw("MENU"), $.identifier),
+    ),
 
   __message_color_value: ($) =>
     choice(kw("NORMAL"), kw("INPUT"), kw("MESSAGES"), $.color_phrase),

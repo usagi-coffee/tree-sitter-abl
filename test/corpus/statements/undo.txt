@@ -8,6 +8,7 @@ UNDO, RETRY.
 UNDO, RETURN "done".
 UNDO, RETURN ERROR "bad".
 UNDO, RETURN NO-APPLY.
+UNDO.
 
 --------------------------------------------------------------------------------
 
@@ -20,6 +21,7 @@ UNDO, RETURN NO-APPLY.
     return_value: (string_literal))
   (undo_statement
     error_value: (string_literal))
+  (undo_statement)
   (undo_statement))
 
 ================================================================================

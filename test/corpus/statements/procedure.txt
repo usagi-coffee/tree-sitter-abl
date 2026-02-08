@@ -299,9 +299,7 @@ END.
 (source_code
   (procedure_definition
     name: (identifier)
-    (forward))
-  (expression_statement
-    (identifier))
+    (body))
   (procedure_definition
     name: (identifier)
     (body)))
@@ -456,9 +454,7 @@ END.
   (procedure_definition
     name: (identifier)
     (in_super_phrase)
-    (forward))
-  (expression_statement
-    (identifier)))
+    (body)))
 
 ================================================================================
 PROCEDURE - reference snippets and EXTERNAL options
@@ -713,9 +709,7 @@ END PROCEDURE.
     name: (qualified_name
       left: (identifier)
       right: (identifier))
-    (forward))
-  (expression_statement
-    (identifier))
+    (body))
   (procedure_definition
     name: (qualified_name
       left: (identifier)

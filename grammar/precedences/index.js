@@ -10,6 +10,7 @@ const dataset = require("./dataset");
 const enable = require("./enable");
 const assign = require("./assign");
 const exportStatement = require("./export");
+const format = require("./format");
 const input = require("./input");
 const os = require("./os");
 const put = require("./put");
@@ -19,6 +20,8 @@ const set = require("./set");
 const subscribe = require("./subscribe");
 const update = require("./update");
 const widget = require("./widget");
+const include = require("./include");
+const message = require("./message");
 
 module.exports = ($) => [
   ["unary", "multiplication", "add", "compare", "not", "logical"],
@@ -26,6 +29,7 @@ module.exports = ($) => [
   ...os($),
   ...dataset($),
   ...browse($),
+  ...include($),
   ...create($),
   ...deleteStatement($),
   ...caseStatement($),
@@ -34,6 +38,8 @@ module.exports = ($) => [
   ...enable($),
   ...display($),
   ...widget($),
+  ...message($),
+  ...format($),
   ...put($),
   ...promptFor($),
   ...exportStatement($),

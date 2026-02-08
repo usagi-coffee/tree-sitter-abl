@@ -6,6 +6,8 @@ FIND Customer.
 FIND Customer NO-LOCK.
 FIND Customer EXCLUSIVE-LOCK.
 FIND Customer SHARE-LOCK.
+FIND Customer EXCLUSIVE.
+FIND Customer SHARE.
 
 --------------------------------------------------------------------------------
 
@@ -15,6 +17,12 @@ FIND Customer SHARE-LOCK.
   (find_statement
     table: (identifier)
     (no_lock))
+  (find_statement
+    table: (identifier)
+    (exclusive_lock))
+  (find_statement
+    table: (identifier)
+    (share_lock))
   (find_statement
     table: (identifier)
     (exclusive_lock))

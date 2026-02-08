@@ -1,5 +1,5 @@
 module.exports = ({ kw }) => ({
-  undo_statement: ($) => seq(kw("UNDO"), $.__undo_body, $._terminator),
+  undo_statement: ($) => seq(kw("UNDO"), optional($.__undo_body), $._terminator),
 
   __undo_body: ($) =>
     seq(
