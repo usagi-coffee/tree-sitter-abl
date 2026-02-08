@@ -14,17 +14,6 @@ jobs:
       && !startsWith(github.event.head_commit.message, 'tools:')
     runs-on: ubuntu-latest
     steps:
-      # Compiling WASM takes a lot of ram
-      - name: Increase swapfile
-        run: |
-          sudo df -h
-          sudo swapoff -a
-          sudo fallocate -l 50G /swapfile
-          sudo chmod 600 /swapfile
-          sudo mkswap /swapfile
-          sudo swapon /swapfile
-          sudo swapon --show
-
       - name: Checkout
         uses: actions/checkout@v4
 
