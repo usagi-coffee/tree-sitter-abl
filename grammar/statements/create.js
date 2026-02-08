@@ -87,6 +87,7 @@ module.exports = ({ kw }) => ({
       kw("QUERY"),
       field("handle", $.identifier),
       optional($.__create_in_widget_pool),
+      optional(kw("NO-ERROR")),
     ),
   __create_x_document: ($) =>
     seq(
