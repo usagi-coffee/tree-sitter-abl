@@ -10,6 +10,7 @@ module.exports = ({ kw }) => ({
           alias(kw("SIDE-LABELS"), $.side_labels),
           alias(kw("CENTERED"), $.centered),
           alias(kw("NO-BOX"), $.no_box),
+          alias(kw("ATTR-SPACE"), $.attr_space),
           alias(kw("OVERLAY"), $.overlay),
           alias(kw("PAGE-TOP"), $.page_top),
           alias(kw("PAGE-BOTTOM"), $.page_bottom),

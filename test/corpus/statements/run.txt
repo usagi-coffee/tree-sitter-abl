@@ -406,3 +406,26 @@ RUN methodProc IN hProc NO-ERROR.
     procedure: (identifier)
     (in_phrase
       context: (identifier))))
+
+================================================================================
+RUN with DATASET-HANDLE output and BUFFER handle argument
+================================================================================
+
+RUN RunReport (OUTPUT DATASET-HANDLE phReportResults).
+RUN buildBuffer (BUFFER ttReportOptions:HANDLE).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (run_statement
+    procedure: (identifier)
+    (arguments
+      (argument
+        name: (identifier))))
+  (run_statement
+    procedure: (identifier)
+    (arguments
+      (argument
+        name: (object_access
+          left: (identifier)
+          right: (identifier))))))
