@@ -83,3 +83,39 @@ THIS-PROCEDURE:PRIVATE-DATA.
     (object_access
       left: (identifier)
       right: (identifier))))
+
+================================================================================
+ACCESSORS - assignment variants
+================================================================================
+
+hUS::SessionStatus = "Active".
+zmd_key1:label = getTermLabel("X",15).
+HTT = TEMP-TABLE ttPH:HANDLE.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assignment_statement
+    left: (scoped_name
+      left: (identifier)
+      right: (identifier))
+    operator: (assignment_operator)
+    right: (string_literal))
+  (assignment_statement
+    left: (object_access
+      left: (identifier)
+      right: (identifier))
+    operator: (assignment_operator)
+    right: (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (string_literal))
+        (argument
+          name: (number_literal)))))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (handle_reference
+      name: (identifier)
+      right: (identifier))))

@@ -3,6 +3,7 @@ INCLUDE
 ================================================================================
 
 {include_file.i arg1 &arg2="test" arg3 "NEW" &ABC=variable}
+{{&US_ET}etdcrvar.i new}
 {{&INC}file.i}
 {{&INC}file_with_args.i
   &PARM1=var_one &PARM2=var_two
@@ -31,6 +32,12 @@ DISPLAY {&VAR1}.
       (include_named_argument
         name: (identifier)
         value: (identifier))))
+  (include
+    file: (constant
+      (identifier))
+    file: (file_name)
+    argument: (include_argument
+      (identifier)))
   (include)
   (include
     file: (constant

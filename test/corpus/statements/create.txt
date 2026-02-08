@@ -135,6 +135,7 @@ CREATE - Handles and objects
 
 CREATE ALIAS myalias FOR DATABASE mydb NO-ERROR.
 CREATE BUFFER hBuf FOR TABLE Customer BUFFER-NAME mybuf IN WIDGET-POOL wp.
+CREATE BUFFER hBuf2 FOR TABLE Customer NO-ERROR.
 CREATE CALL hCall IN WIDGET-POOL wp NO-ERROR.
 CREATE CLIENT-PRINCIPAL hCP IN WIDGET-POOL wp.
 CREATE QUERY hQ IN WIDGET-POOL wp.
@@ -163,6 +164,9 @@ CREATE "Excel.Application" hExcel CONNECT TO "file.xls" NO-ERROR.
     table: (identifier)
     name: (identifier)
     pool: (identifier))
+  (create_statement
+    handle: (identifier)
+    table: (identifier))
   (create_statement
     handle: (identifier)
     pool: (identifier))

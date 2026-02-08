@@ -12,3 +12,22 @@ DISPLAY x WITH FRAME f NO-LABELS.
     (frame_phrase
       frame: (identifier)
       (no_labels))))
+
+================================================================================
+FRAME phrase with ATTR-SPACE
+================================================================================
+
+FORM a COLON 20 WITH FRAME fA ROW 3 SIDE-LABELS ATTR-SPACE.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (form_statement
+    (form_item
+      field: (identifier)
+      colon: (number_literal))
+    (frame_phrase
+      frame: (identifier)
+      row: (number_literal)
+      (side_labels)
+      (attr_space))))

@@ -142,6 +142,23 @@ DEF WORK-TABLE wt FIELD x AS CHARACTER.
       type: (identifier))))
 
 ================================================================================
+WORK-TABLE DEFINITION - EXTENT before LIKE
+================================================================================
+
+DEFINE WORK-TABLE wtExt FIELD tng_nabyw EXTENT 7 LIKE ad_name.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (work_table_definition
+    name: (identifier)
+    (field
+      name: (identifier)
+      (field_option
+        (number_literal))
+      type: (identifier))))
+
+================================================================================
 WORK-TABLE DEFINITION - LIKE with Index
 ================================================================================
 
