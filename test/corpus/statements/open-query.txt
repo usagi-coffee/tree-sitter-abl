@@ -22,6 +22,24 @@ OPEN QUERY qCust FOR EACH Customer NO-LOCK BY Customer.Name.
         right: (identifier)))))
 
 ================================================================================
+OPEN QUERY with DESC short form
+================================================================================
+
+OPEN QUERY q1 FOR EACH zr BY zr_procent DESC BY zr_wyd DESC.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (open_query_statement
+    query: (identifier)
+    (record_phrase
+      record: (identifier))
+    (by_phrase
+      by: (identifier))
+    (by_phrase
+      by: (identifier))))
+
+================================================================================
 OPEN QUERY - Reference snippet
 ================================================================================
 

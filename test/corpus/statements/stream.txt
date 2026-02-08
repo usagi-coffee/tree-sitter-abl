@@ -181,7 +181,8 @@ DISPLAY STREAM rpt ItemNum ItemName WITH NO-LABELS NO-BOX.
       (format_phrase
         label: (string_literal)))
     (field
-      (number_literal))
+      (skip_phrase
+        (number_literal)))
     (field
       field: (identifier)
       (format_phrase

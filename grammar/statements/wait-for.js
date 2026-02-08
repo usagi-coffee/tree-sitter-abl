@@ -18,16 +18,16 @@ module.exports = ({ kw }) => ({
       optional(
         seq(
           kw("FOCUS"),
-          field("focus", $._identifier_or_qualified_name),
+          field("focus", $.widget_phrase),
         ),
       ),
       optional(seq(kw("PAUSE"), field("duration", $._expression))),
     ),
 
-  __wait_for_event: ($) => $.identifier,
+  __wait_for_event: ($) => $._events,
   __wait_for_widget_list: ($) =>
     prec.right(
-      seq($.widget_phrase, repeat(seq(optional(","), $.widget_phrase))),
+      seq($.widget_phrase, repeat(seq(",", $.widget_phrase))),
     ),
   __wait_for_event_list: ($) =>
     seq($.__wait_for_event, repeat(seq(optional(","), $.__wait_for_event))),

@@ -9,6 +9,7 @@ SET UNLESS-HIDDEN field1.
 SET STREAM s1 field1.
 SET field1 WITH FRAME f1.
 SET field1 WITH FRAME f1 NO-ERROR.
+SET tng_dostawa[1] = so_ship tng_nabyw[1] = so_cust.
 SET field1 GO-ON(f1 f2).
 
 --------------------------------------------------------------------------------
@@ -50,10 +51,37 @@ SET field1 GO-ON(f1 f2).
     (no_error))
   (set_statement
     (field
+      field: (array_access
+        array: (identifier)
+        (number_literal))
+      value: (identifier))
+    (field
+      field: (array_access
+        array: (identifier)
+        (number_literal))
+      value: (identifier)))
+  (set_statement
+    (field
       field: (identifier))
     (go_on_phrase
       (identifier)
       (identifier))))
+
+================================================================================
+SET GO-ON with comma-separated strings
+================================================================================
+
+SET field1 GO-ON("F5","CTRL-D").
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (set_statement
+    (field
+      field: (identifier))
+    (go_on_phrase
+      (string_literal)
+      (string_literal))))
 
 ================================================================================
 SET with format, text, constants, and editing
@@ -87,7 +115,8 @@ SET field1 FORMAT "x(10)" WHEN ok
     (field
       field: (identifier)
       value: (number_literal))
-    (field)
+    (field
+      (skip_phrase))
     (editing_phrase
       (readkey_statement))))
 
@@ -322,9 +351,11 @@ SET Customer EXCEPT Comments WITH FRAME fCust NO-ERROR.
     (field
       field: (identifier))
     (field
-      (number_literal))
+      (space_phrase
+        (number_literal)))
     (field
-      (number_literal))
+      (skip_phrase
+        (number_literal)))
     (field)
     (go_on_phrase
       (identifier)

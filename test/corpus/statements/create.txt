@@ -218,3 +218,16 @@ CREATE "Excel.Application" hExcel CONNECT TO "file.xls" NO-ERROR.
     progid: (string_literal)
     handle: (identifier)
     target: (string_literal)))
+
+================================================================================
+CREATE BUFFER with string table target
+================================================================================
+
+CREATE BUFFER hUS FOR TABLE "UserSession".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (create_statement
+    handle: (identifier)
+    table: (string_literal)))

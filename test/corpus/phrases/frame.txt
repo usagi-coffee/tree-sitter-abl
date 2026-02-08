@@ -18,6 +18,8 @@ FRAME phrase with ATTR-SPACE
 ================================================================================
 
 FORM a COLON 20 WITH FRAME fA ROW 3 SIDE-LABELS ATTR-SPACE.
+FORM a COLON 20 WITH FRAME fA WITH ROW 3 SIDE-LABELS.
+FORM a COLON 25 WITH SIZE 79 BY 11 NO-LABEL THREE-D CENTERED.
 
 --------------------------------------------------------------------------------
 
@@ -30,4 +32,40 @@ FORM a COLON 20 WITH FRAME fA ROW 3 SIDE-LABELS ATTR-SPACE.
       frame: (identifier)
       row: (number_literal)
       (side_labels)
-      (attr_space))))
+      (attr_space)))
+  (form_statement
+    (form_item
+      field: (identifier)
+      colon: (number_literal))
+    (frame_phrase
+      frame: (identifier)
+      row: (number_literal)
+      (side_labels)))
+  (form_statement
+    (form_item
+      field: (identifier)
+      colon: (number_literal))
+    (frame_phrase
+      (size_phrase
+        width: (number_literal)
+        height: (number_literal))
+      (no_label)
+      (three_d)
+      (centered))))
+
+================================================================================
+FRAME phrase with NO-ATTR-SPACE
+================================================================================
+
+DISPLAY x WITH FRAME f WIDTH 10 NO-BOX NO-ATTR-SPACE.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (display_statement
+    record: (identifier)
+    (frame_phrase
+      frame: (identifier)
+      width: (number_literal)
+      (no_box)
+      (no_attr_space))))

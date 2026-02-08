@@ -49,7 +49,7 @@ module.exports = ({ kw }) => ({
 
   __on_database_event: ($) =>
     choice(kw("CREATE"), kw("DELETE"), kw("FIND"), kw("WRITE"), kw("ASSIGN")),
-  __on_ui_event: ($) => $.identifier,
+  __on_ui_event: ($) => $._events,
   __on_database_object: ($) => $._identifier_or_qualified_name,
   __on_override: ($) => kw("OVERRIDE"),
   __on_referencing_phrase: ($) =>

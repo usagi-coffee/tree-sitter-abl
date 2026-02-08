@@ -87,3 +87,19 @@ DISPLAY {&VAR1}.
     (field
       field: (constant
         (identifier)))))
+
+================================================================================
+INCLUDE with WINDOW positional argument
+================================================================================
+
+{us/mf/mfselbpr.i window 132}
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (include
+    file: (file_name)
+    argument: (include_argument
+      (identifier))
+    argument: (include_argument
+      (number_literal))))

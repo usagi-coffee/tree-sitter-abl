@@ -47,6 +47,7 @@ module.exports = ({ kw }) => ({
       field("table", $.__create_buffer_target),
       optional(seq(kw("BUFFER-NAME"), field("name", $.identifier))),
       optional($.__create_in_widget_pool),
+      optional(kw("NO-ERROR")),
     ),
   __create_buffer_target: ($) =>
     choice(
@@ -54,6 +55,7 @@ module.exports = ({ kw }) => ({
       $.object_access,
       $.function_call,
       $.identifier,
+      $.string_literal,
     ),
   __create_call: ($) =>
     seq(

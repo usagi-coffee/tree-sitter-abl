@@ -52,7 +52,17 @@ module.exports = ({ kw }) => ({
       field("name", $.identifier),
       choice(
         seq(kw("AS"), field("type", $._type_name)),
-        seq(kw("LIKE"), field("type", $._type_name), optional(kw("VALIDATE"))),
+        seq(
+          kw("LIKE"),
+          field("type", $.__temp_table_like_name),
+          optional(kw("VALIDATE")),
+        ),
+        seq(
+          alias($.__temp_table_extent_option, $.field_option),
+          kw("LIKE"),
+          field("type", $.__temp_table_like_name),
+          optional(kw("VALIDATE")),
+        ),
       ),
       repeat(alias($.__temp_table_field_option, $.field_option)),
     ),
@@ -106,7 +116,7 @@ module.exports = ({ kw }) => ({
       seq(kw("COLUMN-LABEL"), $.__temp_table_label_list),
       seq(kw("DCOLOR"), $._expression),
       seq(kw("DECIMALS"), $.number_literal),
-      seq(kw("EXTENT"), $.number_literal),
+      $.__temp_table_extent_option,
       seq(kw("FONT"), $._expression),
       seq(kw("FGCOLOR"), $._expression),
       seq(kw("FORMAT"), $.string_literal),
@@ -127,7 +137,9 @@ module.exports = ({ kw }) => ({
       seq(kw("XML-NODE-NAME"), $.string_literal),
       $.view_as_phrase,
     ),
-  __temp_table_like_name: ($) => $._identifier_or_qualified_name,
+  __temp_table_extent_option: ($) => seq(kw("EXTENT"), $.number_literal),
+  __temp_table_like_name: ($) =>
+    choice($._identifier_or_qualified_name, $.array_access),
   __temp_table_label_list: ($) =>
     seq($.string_literal, repeat(seq(",", $.string_literal))),
   __temp_table_field_name: ($) => $._identifier_or_qualified_name,

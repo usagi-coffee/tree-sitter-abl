@@ -109,3 +109,17 @@ APPLY "ERROR" TO THIS-PROCEDURE.
     event: (string_literal)
     to: (widget
       system_handle: (system_handle))))
+
+===============================================================================
+APPLY statement to named BROWSE widget
+===============================================================================
+
+APPLY "VALUE-CHANGED" TO BROWSE b1.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (apply_statement
+    event: (string_literal)
+    to: (widget)
+    handle: (widget)))

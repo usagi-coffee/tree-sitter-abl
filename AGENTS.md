@@ -49,6 +49,7 @@ Strongly prefer using these commands as they have helpful side-effects like retu
 ## Conventions
 
 - Always run tests after modifications.
+- Do not remove tests unless it is illegal syntax.
 - Before working on a statement, first consult its reference to ensure you understand the available syntax and it's proper usage.
 - Grammar changes without thorough corpus coverage and testing are unacceptable.
 - Avoid creating a shared or generic code unless it is really a part of the core syntax, core grammar modifications require a confirmation unless experimenting.

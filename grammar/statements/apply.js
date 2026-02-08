@@ -7,7 +7,16 @@ module.exports = ({ kw }) => ({
       optional(
         seq(
           kw("TO"),
-          field("to", alias(choice($._widgets, $.widget_phrase), $.widget)),
+          field(
+            "to",
+            alias(
+              choice(
+                $.widget_phrase,
+                seq($._widgets, optional(field("handle", $.identifier))),
+              ),
+              $.widget,
+            ),
+          ),
         ),
       ),
     ),

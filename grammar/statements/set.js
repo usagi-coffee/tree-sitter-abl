@@ -21,6 +21,8 @@ module.exports = ({ kw }) => ({
 
   __set_field: ($) =>
     choice(
+      alias($.__set_skip_phrase, $.skip_phrase),
+      alias($.__set_space_phrase, $.space_phrase),
       prec.right(
         seq(
           field("field", $._identifier_or_qualified_name),
@@ -30,6 +32,11 @@ module.exports = ({ kw }) => ({
       ),
       seq(
         field("field", $._identifier_or_qualified_name),
+        "=",
+        field("value", $._expression),
+      ),
+      seq(
+        field("field", $.array_access),
         "=",
         field("value", $._expression),
       ),
@@ -48,8 +55,6 @@ module.exports = ({ kw }) => ({
         field("constant", $.string_literal),
         alias($.__set_at_phrase, $.at_phrase),
       ),
-      seq(kw("SKIP"), optional(seq("(", $._expression, ")"))),
-      seq(kw("SPACE"), optional(seq("(", $._expression, ")"))),
       "^",
     ),
 
@@ -61,11 +66,34 @@ module.exports = ({ kw }) => ({
     ),
 
   __set_record: ($) => $._identifier_or_qualified_name,
+  __set_skip_phrase: ($) =>
+    choice(
+      prec.right(1, seq(kw("SKIP"), "(", $._expression, ")")),
+      prec(-1, seq(kw("SKIP"))),
+    ),
+  __set_space_phrase: ($) =>
+    choice(
+      prec.right(1, seq(kw("SPACE"), "(", $._expression, ")")),
+      prec(-1, seq(kw("SPACE"))),
+    ),
 
   __set_at_phrase: ($) => seq(kw("AT"), token(/[0-9]+(\.[0-9]+)?/)),
   __set_help_phrase: ($) => seq(kw("HELP"), $.string_literal),
 
-  __set_go_on: ($) => seq(kw("GO-ON"), "(", repeat1($.identifier), ")"),
+  __set_go_on: ($) =>
+    seq(
+      kw("GO-ON"),
+      "(",
+      choice(
+        $.identifier,
+        $.string_literal,
+        seq(
+          choice($.identifier, $.string_literal),
+          repeat(seq(optional(","), choice($.identifier, $.string_literal))),
+        ),
+      ),
+      ")",
+    ),
   __set_validate_option: ($) =>
     seq(
       kw("VALIDATE"),

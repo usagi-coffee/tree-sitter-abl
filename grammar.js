@@ -206,15 +206,24 @@ module.exports = grammar({
           optional(seq("=", field("value", $._include_argument_value))),
         ),
       _include_argument_value: ($) =>
-        choice(
-          $._identifier_or_qualified_name,
-          $.string_literal,
-          $.number_literal,
-          alias($._signed_number_literal, $.number_literal),
-          $.boolean_literal,
-          alias($.constant_expression, $.constant),
-          $.argument_reference,
-          $.parenthesized_identifier,
+        prec(
+          1,
+          choice(
+            $.function_call,
+            $.binary_expression,
+            $.parenthesized_expression,
+            $._identifier_or_qualified_name,
+            alias(kw("NEW"), $.identifier),
+            alias(kw("WINDOW"), $.identifier),
+            $.object_access,
+            $.array_access,
+            $.string_literal,
+            $.number_literal,
+            alias($._signed_number_literal, $.number_literal),
+            $.boolean_literal,
+            alias($.constant_expression, $.constant),
+            $.argument_reference,
+          ),
         ),
 
       // Preprocessor
@@ -281,7 +290,7 @@ module.exports = grammar({
       _type_name: ($) => choice($.generic_type, $._simple_type_name),
       _type_or_string: ($) => choice($._type_name, $.string_literal),
       _identifier_or_qualified_name: ($) =>
-        choice($.identifier, $.qualified_name),
+        choice($.identifier, $.qualified_name, alias(kw("INTERFACE"), $.identifier)),
 
       _widgets: ($) =>
         prec.right(alias(choice(...WIDGETS, kw("FRAME")), $.identifier)),
@@ -318,8 +327,9 @@ module.exports = grammar({
 
       _assignable: ($) =>
         choice(
-          $._identifier_or_qualified_name,
           $.object_access,
+          $._identifier_or_qualified_name,
+          $.scoped_name,
           $.widget_qualified_name,
           $.array_access,
           $.function_call,
@@ -453,8 +463,16 @@ module.exports = grammar({
           optional(choice(kw("INPUT"), kw("OUTPUT"), kw("INPUT-OUTPUT"))),
           choice(
             seq(
-              choice(kw("TABLE"), kw("BUFFER")),
-              field("name", $._identifier_or_qualified_name),
+              choice(
+                kw("TABLE"),
+                kw("BUFFER"),
+                kw("TABLE-HANDLE"),
+                kw("DATASET-HANDLE"),
+              ),
+              field(
+                "name",
+                choice($._identifier_or_qualified_name, $.object_access),
+              ),
             ),
             field("name", $._expression),
           ),
@@ -542,6 +560,12 @@ module.exports = grammar({
             choice($._namecolon, token.immediate("?:")),
             field("right", alias($._identifier_immediate, $.identifier)),
           ),
+        ),
+      handle_reference: ($) =>
+        seq(
+          kw("TEMP-TABLE"),
+          field("name", $._identifier_or_qualified_name),
+          $._object_access_tail,
         ),
 
       _terminator: ($) => choice($._terminator_dot, ";"),

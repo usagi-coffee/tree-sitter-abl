@@ -38,6 +38,7 @@ module.exports = ({ kw }) => ({
   __for_record_option: ($) =>
     choice(
       alias($.__for_by_phrase, $.by_phrase),
+      alias($.__for_group_by_phrase, $.group_by_phrase),
       alias($.__for_collate_phrase, $.collate_phrase),
       alias($.__for_break_by, $.break_by),
     ),
@@ -55,6 +56,16 @@ module.exports = ({ kw }) => ({
   __for_by_phrase: ($) =>
     prec.right(
       seq(
+        kw("BY"),
+        $._expression,
+        optional($.__for_sort_direction),
+        repeat(seq(kw("BY"), $._expression, optional($.__for_sort_direction))),
+      ),
+    ),
+  __for_group_by_phrase: ($) =>
+    prec.right(
+      seq(
+        kw("GROUP"),
         kw("BY"),
         $._expression,
         optional($.__for_sort_direction),

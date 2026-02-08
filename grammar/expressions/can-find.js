@@ -10,8 +10,18 @@ module.exports = ({ kw }) => ({
         optional(alias($.__record_query_of_phrase, $.of_phrase)),
         optional(alias($.__record_query_using_phrase, $.using_phrase)),
         optional(alias($.__record_query_frame_phrase, $.frame_phrase)),
-        optional(alias($.__record_query_where_phrase, $.where_phrase)),
-        optional(alias($.__record_query_lock_phrase, $.no_lock)),
+        optional(
+          choice(
+            seq(
+              alias($.__record_query_where_phrase, $.where_phrase),
+              optional(alias($.__record_query_lock_phrase, $.no_lock)),
+            ),
+            seq(
+              alias($.__record_query_lock_phrase, $.no_lock),
+              optional(alias($.__record_query_where_phrase, $.where_phrase)),
+            ),
+          ),
+        ),
         optional(alias($.__record_query_use_index, $.use_index)),
       ),
     ),

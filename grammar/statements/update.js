@@ -25,6 +25,8 @@ module.exports = ({ kw }) => ({
 
   __update_field: ($) =>
     choice(
+      alias($.__update_skip_phrase, $.skip_phrase),
+      alias($.__update_space_phrase, $.space_phrase),
       seq(
         field("field", $.__update_field_target),
         optional($.format_phrase),
@@ -50,16 +52,38 @@ module.exports = ({ kw }) => ({
         field("constant", $.string_literal),
         optional(alias($.__update_at_phrase, $.at_phrase)),
       ),
-      seq(kw("SKIP"), optional(seq("(", $._expression, ")"))),
-      seq(kw("SPACE"), optional(seq("(", $._expression, ")"))),
       "^",
     ),
 
   __update_record: ($) => $._identifier_or_qualified_name,
-  __update_field_target: ($) => $._identifier_or_qualified_name,
+  __update_field_target: ($) =>
+    choice(prec(1, $._identifier_or_qualified_name), $.array_access),
+  __update_skip_phrase: ($) =>
+    choice(
+      prec.right(1, seq(kw("SKIP"), "(", $._expression, ")")),
+      prec(-1, seq(kw("SKIP"))),
+    ),
+  __update_space_phrase: ($) =>
+    choice(
+      prec.right(1, seq(kw("SPACE"), "(", $._expression, ")")),
+      prec(-1, seq(kw("SPACE"))),
+    ),
 
   __update_at_phrase: ($) =>
     seq(choice(kw("AT"), kw("TO")), token(/[0-9]+(\.[0-9]+)?/)),
 
-  __update_go_on: ($) => seq(kw("GO-ON"), "(", repeat1($.identifier), ")"),
+  __update_go_on: ($) =>
+    seq(
+      kw("GO-ON"),
+      "(",
+      choice(
+        $.identifier,
+        $.string_literal,
+        seq(
+          choice($.identifier, $.string_literal),
+          repeat(seq(optional(","), choice($.identifier, $.string_literal))),
+        ),
+      ),
+      ")",
+    ),
 });

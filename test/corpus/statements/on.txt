@@ -227,9 +227,7 @@ ON F5 ENDKEY.
     widgets: (widget_phrase
       field: (identifier)
       frame: (identifier))
-    widgets: (widget_phrase
-      system_handle: (system_handle))
-    widgets: (widget_phrase
+    focus: (widget_phrase
       field: (identifier)
       frame: (identifier)))
   (on_statement

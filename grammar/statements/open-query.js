@@ -49,5 +49,9 @@ module.exports = ({ kw }) => ({
 
 
   __open_query_by_phrase: ($) =>
-    seq(kw("BY"), field("by", $._expression), optional(kw("DESCENDING"))),
+    seq(
+      kw("BY"),
+      field("by", $._expression),
+      optional(kw("DESCENDING", { offset: 4 })),
+    ),
 });

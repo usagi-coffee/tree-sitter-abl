@@ -20,9 +20,27 @@ WAIT-FOR WINDOW-CLOSE OF CURRENT-WINDOW OR READ-RESPONSE OF hSocket FOCUS hSocke
     events: (identifier)
     widgets: (widget_phrase
       handle: (identifier))
+    focus: (widget_phrase
+      handle: (identifier))
+    duration: (number_literal)))
+
+================================================================================
+WAIT-FOR with string event and focus/pause
+================================================================================
+
+WAIT-FOR WINDOW-CLOSE OF CURRENT-WINDOW OR "F6" OF b1 FOCUS b1 PAUSE 60.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (wait_for_statement
+    events: (identifier)
     widgets: (widget_phrase
       system_handle: (system_handle))
+    events: (string_literal)
     widgets: (widget_phrase
+      handle: (identifier))
+    focus: (widget_phrase
       handle: (identifier))
     duration: (number_literal)))
 
@@ -190,8 +208,6 @@ WAIT-FOR PROCEDURE-COMPLETE OF hRequest.
     (widget_phrase
       (system_handle))
     (widget_phrase
-      (system_handle))
-    (widget_phrase
       (identifier)))
   (variable_definition
     (identifier)
@@ -295,8 +311,6 @@ WAIT-FOR PROCEDURE-COMPLETE OF hRequest.
         (identifier)
         (widget_phrase
           (identifier))
-        (widget_phrase
-          (system_handle))
         (widget_phrase
           (identifier))
         (number_literal))))

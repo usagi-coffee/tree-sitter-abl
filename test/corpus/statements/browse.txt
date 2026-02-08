@@ -206,6 +206,29 @@ ENABLE ALL WITH SIZE 80 BY 10 SCROLLBAR-VERTICAL SEPARATORS NO-ROW-MARKERS.
     (separators_option)
     (no_row_markers_option)))
 
+================================================================================
+BROWSE - widget-level NO-LABELS, NO-VALIDATE, OVERLAY
+================================================================================
+
+DEF BROWSE b1 QUERY q1 DISPLAY c1
+WITH SIZE 70 BY 18 NO-LABELS SEPARATORS NO-VALIDATE OVERLAY.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (browse_definition
+    name: (identifier)
+    query: (identifier)
+    (column
+      column: (identifier))
+    (size_option
+      (number_literal)
+      (number_literal))
+    (no_labels_option)
+    (separators_option)
+    (no_validate_option)
+    (overlay_option)))
+
 =============================
 Define Browse with Widget Options
 =============================
