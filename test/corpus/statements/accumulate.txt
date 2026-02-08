@@ -139,17 +139,16 @@ END.
     (body
       (accumulate_statement
         (accumulate
-          target: (binary_expression
-            (function_call
-              function: (qualified_name
-                left: (identifier)
-                right: (identifier))
-              (arguments
-                (argument
-                  name: (identifier))))
-            (qualified_name
-              left: (identifier)
-              right: (identifier)))
+          target: (qualified_name
+            left: (identifier)
+            right: (identifier))
+          (aggregate_phrase
+            (aggregate_option
+              operation: (aggregate_operation))))
+        (accumulate
+          target: (qualified_name
+            left: (identifier)
+            right: (identifier))
           (aggregate_phrase
             (aggregate_option
               operation: (aggregate_operation)))))))

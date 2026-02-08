@@ -20,7 +20,7 @@ const COMPARISON_OPERATORS = [
   kw("LE"),
 ];
 
-const LABEL_KEYWORD_WORDS = collect_keyword_words(
+const KEYWORD_IDENTIFIER = collect_keyword_words(
   path.join(__dirname, "grammar"),
   // Label exceptions
   [
@@ -293,15 +293,10 @@ module.exports = grammar({
         ),
       _type_name: ($) => choice($.generic_type, $._simple_type_name),
       _type_or_string: ($) => choice($._type_name, $.string_literal),
+
       _identifier_or_qualified_name: ($) =>
-        choice(
-          $.macro_concatenated_name,
-          $.identifier,
-          $.qualified_name,
-          alias(kw("PROC"), $.identifier),
-          alias(kw("PROCEDURE", { offset: 4 }), $.identifier),
-          alias(kw("INTERFACE"), $.identifier),
-        ),
+        choice($.macro_concatenated_name, $.identifier, $.qualified_name),
+
       macro_concatenated_name: ($) =>
         token(
           /[_\p{L}][\p{L}\p{N}_\-&]*(\{(?:&[0-9A-Za-z_-]+|[0-9A-Za-z_-]+)\})+/i,
@@ -534,13 +529,22 @@ module.exports = grammar({
 
       // Identifiers
       // BE CAREFUL MODIFYING HERE, IDENTIFIER ORDER FOR SOME REASON MATTERS!
-      identifier: ($) => token(/[_\p{L}][\p{L}\p{N}_\-&]*/i),
+      identifier: ($) =>
+        token(
+          new RustRegex(
+            "(" +
+              KEYWORD_IDENTIFIER.map(escape_regex).join("|") +
+              "|[_\\p{L}][\\p{L}\\p{N}_\\-&]*)",
+            "i",
+          ),
+        ),
+
       label_keyword: ($) =>
         token(
           prec(
             1,
             new RegExp(
-              `(${LABEL_KEYWORD_WORDS.map(escape_regex).join("|")})\\s*:`,
+              `(${KEYWORD_IDENTIFIER.map(escape_regex).join("|")})\\s*:`,
               "i",
             ),
           ),
