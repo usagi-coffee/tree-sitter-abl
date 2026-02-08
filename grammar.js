@@ -109,6 +109,7 @@ module.exports = grammar({
     $.comment,
     $.include,
     $.constant,
+    $.argument_reference,
   ],
   word: ($) => $.identifier,
   conflicts: ($) => [

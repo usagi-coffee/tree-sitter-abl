@@ -37,13 +37,15 @@ module.exports = ({ kw }) => ({
           seq(kw("OF"), field("of", $._identifier_or_qualified_name)),
         ),
         optional(seq(kw("WHERE"), field("where", $._expression))),
-        optional(seq(kw("USE-INDEX"), field("index", $.identifier))),
-        optional(
-          field(
-            "lock",
-            choice(kw("SHARE-LOCK"), kw("EXCLUSIVE-LOCK"), kw("NO-LOCK")),
-          ),
-        ),
+        repeat($.__open_query_record_option),
+      ),
+    ),
+  __open_query_record_option: ($) =>
+    choice(
+      seq(kw("USE-INDEX"), field("index", $.identifier)),
+      field(
+        "lock",
+        choice(kw("SHARE-LOCK"), kw("EXCLUSIVE-LOCK"), kw("NO-LOCK")),
       ),
     ),
 

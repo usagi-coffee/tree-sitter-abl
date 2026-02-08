@@ -2,10 +2,17 @@
 ARGUMENT REFERENCE
 ================================================================================
 
-{1}.
+DEF {1} VAR x AS INTEGER.
+x = {2}.
 
 --------------------------------------------------------------------------------
 
 (source_code
-  (expression_statement
-    (argument_reference)))
+  (variable_definition
+    (argument_reference)
+    name: (identifier)
+    type: (identifier))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (argument_reference)))

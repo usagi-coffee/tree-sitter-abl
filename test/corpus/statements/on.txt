@@ -12,6 +12,9 @@ ON CHOOSE ANYWHERE DO:
   MESSAGE "x".
 END.
 ON CHOOSE OF btn PERSISTENT RUN onChoose (INPUT 1).
+ON RETURN OF BROWSE br1 DO:
+  MESSAGE "browse-return".
+END.
 
 --------------------------------------------------------------------------------
 
@@ -49,7 +52,15 @@ ON CHOOSE OF btn PERSISTENT RUN onChoose (INPUT 1).
     procedure: (identifier)
     (arguments
       (argument
-        name: (number_literal)))))
+        name: (number_literal))))
+  (on_statement
+    event: (identifier)
+    widget: (widget_phrase
+      browse: (identifier))
+    (do_block
+      (body
+        (message_statement
+          (string_literal))))))
 
 ================================================================================
 ON - Reference snippets

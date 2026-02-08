@@ -10,22 +10,29 @@ END PROCEDURE.
 PROCEDURE emptyProc:
 END PROCEDURE.
 
-PROCEDURE forwardProc.
+PROCEDURE dotProc.
+  MESSAGE "x".
+END PROCEDURE.
 
 --------------------------------------------------------------------------------
 
 (source_code
   (procedure_definition
     name: (identifier)
-    (parameter_definition
-      name: (identifier)
-      type: (identifier))
-    (display_statement
-      record: (identifier)))
+    (body
+      (parameter_definition
+        name: (identifier)
+        type: (identifier))
+      (display_statement
+        record: (identifier))))
   (procedure_definition
-    name: (identifier))
-  (procedure_forward_definition
-    name: (identifier)))
+    name: (identifier)
+    (body))
+  (procedure_definition
+    name: (identifier)
+    (body
+      (message_statement
+        (string_literal)))))
 
 ================================================================================
 PROCEDURE - MAP option
@@ -40,7 +47,8 @@ END PROCEDURE.
   (procedure_definition
     name: (identifier)
     (map
-      name: (identifier))))
+      name: (identifier))
+    (body)))
 
 ================================================================================
 PROCEDURE - TABLE parameter
@@ -56,11 +64,12 @@ END PROCEDURE.
 (source_code
   (procedure_definition
     name: (identifier)
-    (parameter_definition
-      table: (identifier))
-    (find_statement
-      table: (identifier)
-      (no_lock))))
+    (body
+      (parameter_definition
+        table: (identifier))
+      (find_statement
+        table: (identifier)
+        (no_lock)))))
 
 ================================================================================
 PROCEDURE - TABLE-HANDLE parameter
@@ -75,9 +84,10 @@ END PROCEDURE.
 (source_code
   (procedure_definition
     name: (identifier)
-    (parameter_definition
-      table_handle: (identifier)
-      (no_undo))))
+    (body
+      (parameter_definition
+        table_handle: (identifier)
+        (no_undo)))))
 
 ================================================================================
 PROCEDURE - DATASET parameter
@@ -95,18 +105,19 @@ END PROCEDURE.
 (source_code
   (procedure_definition
     name: (identifier)
-    (parameter_definition
-      dataset: (identifier))
-    (for_statement
-      (record
+    (body
+      (parameter_definition
+        dataset: (identifier))
+      (for_statement
         (record
-          record: (identifier)
-          of: (identifier)))
-      (body
-        (display_statement
-          record: (qualified_name
-            left: (identifier)
-            right: (identifier)))))))
+          (record
+            record: (identifier)
+            of: (identifier)))
+        (body
+          (display_statement
+            record: (qualified_name
+              left: (identifier)
+              right: (identifier))))))))
 
 ================================================================================
 PROCEDURE - DATASET-HANDLE parameter
@@ -121,8 +132,9 @@ END PROCEDURE.
 (source_code
   (procedure_definition
     name: (identifier)
-    (parameter_definition
-      dataset_handle: (identifier))))
+    (body
+      (parameter_definition
+        dataset_handle: (identifier)))))
 
 ================================================================================
 PROCEDURE - BUFFER parameter
@@ -138,12 +150,13 @@ END PROCEDURE.
 (source_code
   (procedure_definition
     name: (identifier)
-    (parameter_definition
-      name: (identifier)
-      table: (identifier))
-    (find_statement
-      table: (identifier)
-      (no_lock))))
+    (body
+      (parameter_definition
+        name: (identifier)
+        table: (identifier))
+      (find_statement
+        table: (identifier)
+        (no_lock)))))
 
 ================================================================================
 PROCEDURE - BUFFER TEMP-TABLE parameter
@@ -158,9 +171,10 @@ END PROCEDURE.
 (source_code
   (procedure_definition
     name: (identifier)
-    (parameter_definition
-      name: (identifier)
-      table: (identifier))))
+    (body
+      (parameter_definition
+        name: (identifier)
+        table: (identifier)))))
 
 ================================================================================
 PROCEDURE - TABLE with APPEND
@@ -175,9 +189,10 @@ END PROCEDURE.
 (source_code
   (procedure_definition
     name: (identifier)
-    (parameter_definition
-      table: (identifier)
-      (append_option))))
+    (body
+      (parameter_definition
+        table: (identifier)
+        (append_option)))))
 
 ================================================================================
 PROCEDURE - TABLE with BIND
@@ -192,9 +207,10 @@ END PROCEDURE.
 (source_code
   (procedure_definition
     name: (identifier)
-    (parameter_definition
-      table: (identifier)
-      (bind_option))))
+    (body
+      (parameter_definition
+        table: (identifier)
+        (bind_option)))))
 
 ================================================================================
 PROCEDURE - TABLE with BY-VALUE
@@ -209,9 +225,10 @@ END PROCEDURE.
 (source_code
   (procedure_definition
     name: (identifier)
-    (parameter_definition
-      table: (identifier)
-      (by_value_option))))
+    (body
+      (parameter_definition
+        table: (identifier)
+        (by_value_option)))))
 
 ================================================================================
 PROCEDURE - DATASET with APPEND
@@ -226,9 +243,10 @@ END PROCEDURE.
 (source_code
   (procedure_definition
     name: (identifier)
-    (parameter_definition
-      dataset: (identifier)
-      (append_option))))
+    (body
+      (parameter_definition
+        dataset: (identifier)
+        (append_option)))))
 
 ================================================================================
 PROCEDURE - TABLE-HANDLE with BIND
@@ -243,10 +261,11 @@ END PROCEDURE.
 (source_code
   (procedure_definition
     name: (identifier)
-    (parameter_definition
-      table_handle: (identifier)
-      (bind_option)
-      (no_undo))))
+    (body
+      (parameter_definition
+        table_handle: (identifier)
+        (bind_option)
+        (no_undo)))))
 
 ================================================================================
 PROCEDURE - DATASET-HANDLE with BIND
@@ -261,25 +280,31 @@ END PROCEDURE.
 (source_code
   (procedure_definition
     name: (identifier)
-    (parameter_definition
-      dataset_handle: (identifier)
-      (bind_option))))
+    (body
+      (parameter_definition
+        dataset_handle: (identifier)
+        (bind_option)))))
 
 ================================================================================
-PROCEDURE - FORWARD declaration
+PROCEDURE - Dot Header
 ================================================================================
 
-PROCEDURE forwardProc.
-PROCEDURE forwardProc:
+PROCEDURE dotBody.
+END.
+PROCEDURE colonBody:
 END.
 
 --------------------------------------------------------------------------------
 
 (source_code
-  (procedure_forward_definition
-    name: (identifier))
   (procedure_definition
-    name: (identifier)))
+    name: (identifier)
+    (forward))
+  (expression_statement
+    (identifier))
+  (procedure_definition
+    name: (identifier)
+    (body)))
 
 ================================================================================
 PROCEDURE - STANDARD parameter combinations
@@ -296,22 +321,23 @@ END PROCEDURE.
 (source_code
   (procedure_definition
     name: (identifier)
-    (parameter_definition
-      name: (identifier)
-      type: (identifier)
-      (initial_option
-        (number_literal)))
-    (parameter_definition
-      name: (identifier)
-      type: (identifier)
-      (no_undo)
-      (format
-        (string_literal)))
-    (parameter_definition
-      name: (identifier)
-      like: (qualified_name
-        left: (identifier)
-        right: (identifier)))))
+    (body
+      (parameter_definition
+        name: (identifier)
+        type: (identifier)
+        (initial_option
+          (number_literal)))
+      (parameter_definition
+        name: (identifier)
+        type: (identifier)
+        (no_undo)
+        (format
+          (string_literal)))
+      (parameter_definition
+        name: (identifier)
+        like: (qualified_name
+          left: (identifier)
+          right: (identifier))))))
 
 ================================================================================
 PROCEDURE - PRIVATE with CATCH/FINALLY
@@ -336,38 +362,39 @@ END PROCEDURE.
   (procedure_definition
     (access_modifier)
     name: (identifier)
-    (variable_definition
-      name: (identifier)
-      type: (identifier)
-      (no_undo))
-    (do_block
-      (on_error_phrase)
-      (body
-        (assignment_statement
+    (body
+      (variable_definition
+        name: (identifier)
+        type: (identifier)
+        (no_undo))
+      (do_block
+        (on_error_phrase)
+        (body
+          (assignment_statement
+            left: (identifier)
+            operator: (assignment_operator)
+            right: (binary_expression
+              (identifier)
+              (number_literal)))))
+      (catch_statement
+        name: (identifier)
+        type: (qualified_name
           left: (identifier)
-          operator: (assignment_operator)
-          right: (binary_expression
-            (identifier)
-            (number_literal)))))
-    (catch_statement
-      name: (identifier)
-      type: (qualified_name
-        left: (identifier)
-        right: (identifier)
-        right: (identifier))
-      (body
-        (message_statement
-          (function_call
-            function: (object_access
-              left: (identifier)
-              right: (identifier))
-            (arguments
-              (argument
-                name: (number_literal)))))))
-    (finally_statement
-      (body
-        (message_statement
-          (string_literal))))))
+          right: (identifier)
+          right: (identifier))
+        (body
+          (message_statement
+            (function_call
+              function: (object_access
+                left: (identifier)
+                right: (identifier))
+              (arguments
+                (argument
+                  name: (number_literal)))))))
+      (finally_statement
+        (body
+          (message_statement
+            (string_literal)))))))
 
 ================================================================================
 PROCEDURE - EXTERNAL and IN SUPER prototypes
@@ -387,6 +414,7 @@ PROCEDURE calcTax CDECL ORDINAL 5 PERSISTENT THREAD-SAFE EXTERNAL "tax.dll":
 END PROCEDURE.
 
 PROCEDURE doSuper IN SUPER.
+END.
 
 --------------------------------------------------------------------------------
 
@@ -394,21 +422,22 @@ PROCEDURE doSuper IN SUPER.
   (procedure_definition
     name: (identifier)
     (external_phrase)
-    (parameter_definition
-      name: (identifier)
-      type: (identifier))
-    (parameter_definition
-      name: (identifier)
-      type: (identifier))
-    (parameter_definition
-      name: (identifier)
-      type: (identifier))
-    (parameter_definition
-      name: (identifier)
-      type: (identifier))
-    (parameter_definition
-      name: (identifier)
-      type: (identifier)))
+    (body
+      (parameter_definition
+        name: (identifier)
+        type: (identifier))
+      (parameter_definition
+        name: (identifier)
+        type: (identifier))
+      (parameter_definition
+        name: (identifier)
+        type: (identifier))
+      (parameter_definition
+        name: (identifier)
+        type: (identifier))
+      (parameter_definition
+        name: (identifier)
+        type: (identifier))))
   (procedure_definition
     name: (identifier)
     (cdecl)
@@ -417,15 +446,19 @@ PROCEDURE doSuper IN SUPER.
     (persistent)
     (thread_safe)
     (external_phrase)
-    (parameter_definition
-      name: (identifier)
-      type: (identifier))
-    (parameter_definition
-      name: (identifier)
-      type: (identifier)))
-  (procedure_forward_definition
+    (body
+      (parameter_definition
+        name: (identifier)
+        type: (identifier))
+      (parameter_definition
+        name: (identifier)
+        type: (identifier))))
+  (procedure_definition
     name: (identifier)
-    (in_super_phrase)))
+    (in_super_phrase)
+    (forward))
+  (expression_statement
+    (identifier)))
 
 ================================================================================
 PROCEDURE - reference snippets and EXTERNAL options
@@ -496,6 +529,7 @@ DEFINE INPUT PARAMETER p1 AS INTEGER.
 END PROCEDURE.
 
 PROCEDURE ANYWHERE.Click.
+END.
 PROCEDURE frCtrl.myOcx.Click:
 END PROCEDURE.
 
@@ -537,46 +571,47 @@ END PROCEDURE.
         record: (identifier))))
   (procedure_definition
     name: (identifier)
-    (parameter_definition
-      name: (identifier)
-      type: (identifier)
-      (no_undo))
-    (parameter_definition
-      name: (identifier)
-      type: (identifier)
-      (no_undo))
-    (variable_definition
-      name: (identifier)
-      type: (identifier)
-      (no_undo))
-    (if_statement
-      (binary_expression
-        (identifier)
-        (number_literal))
-      then: (do_block
-        (body
-          (assignment_statement
-            left: (identifier)
-            operator: (assignment_operator)
-            right: (number_literal))
-          (return_statement)))
-      else: (do_block
-        (body
-          (run_statement
-            procedure: (identifier)
-            (arguments
-              (argument
-                name: (binary_expression
-                  (identifier)
-                  (number_literal)))
-              (argument
-                name: (identifier))))
-          (assignment_statement
-            left: (identifier)
-            operator: (assignment_operator)
-            right: (binary_expression
-              (identifier)
-              (identifier)))))))
+    (body
+      (parameter_definition
+        name: (identifier)
+        type: (identifier)
+        (no_undo))
+      (parameter_definition
+        name: (identifier)
+        type: (identifier)
+        (no_undo))
+      (variable_definition
+        name: (identifier)
+        type: (identifier)
+        (no_undo))
+      (if_statement
+        (binary_expression
+          (identifier)
+          (number_literal))
+        then: (do_block
+          (body
+            (assignment_statement
+              left: (identifier)
+              operator: (assignment_operator)
+              right: (number_literal))
+            (return_statement)))
+        else: (do_block
+          (body
+            (run_statement
+              procedure: (identifier)
+              (arguments
+                (argument
+                  name: (binary_expression
+                    (identifier)
+                    (number_literal)))
+                (argument
+                  name: (identifier))))
+            (assignment_statement
+              left: (identifier)
+              operator: (assignment_operator)
+              right: (binary_expression
+                (identifier)
+                (identifier))))))))
   (variable_definition
     name: (identifier)
     type: (identifier)
@@ -601,36 +636,39 @@ END PROCEDURE.
   (procedure_definition
     name: (identifier)
     (external_phrase)
-    (parameter_definition
-      name: (identifier)
-      type: (identifier))
-    (parameter_definition
-      name: (identifier)
-      type: (identifier))
-    (parameter_definition
-      name: (identifier)
-      type: (identifier))
-    (parameter_definition
-      name: (identifier)
-      type: (identifier))
-    (parameter_definition
-      name: (identifier)
-      type: (identifier)))
+    (body
+      (parameter_definition
+        name: (identifier)
+        type: (identifier))
+      (parameter_definition
+        name: (identifier)
+        type: (identifier))
+      (parameter_definition
+        name: (identifier)
+        type: (identifier))
+      (parameter_definition
+        name: (identifier)
+        type: (identifier))
+      (parameter_definition
+        name: (identifier)
+        type: (identifier))))
   (procedure_definition
     name: (identifier)
     (external_phrase)
-    (parameter_definition
-      name: (identifier)
-      type: (identifier))
-    (parameter_definition
-      name: (identifier)
-      type: (identifier)))
+    (body
+      (parameter_definition
+        name: (identifier)
+        type: (identifier))
+      (parameter_definition
+        name: (identifier)
+        type: (identifier))))
   (procedure_definition
     name: (identifier)
     (external_phrase)
-    (parameter_definition
-      name: (identifier)
-      type: (identifier)))
+    (body
+      (parameter_definition
+        name: (identifier)
+        type: (identifier))))
   (procedure_definition
     name: (identifier)
     (external_phrase)
@@ -639,39 +677,48 @@ END PROCEDURE.
       number: (number_literal))
     (persistent)
     (thread_safe)
-    (parameter_definition
-      name: (identifier)
-      type: (identifier)))
+    (body
+      (parameter_definition
+        name: (identifier)
+        type: (identifier))))
   (procedure_definition
     name: (identifier)
     (external_phrase)
-    (parameter_definition
-      name: (identifier)
-      type: (identifier)))
+    (body
+      (parameter_definition
+        name: (identifier)
+        type: (identifier))))
   (procedure_definition
     name: (identifier)
     (external_phrase)
-    (parameter_definition
-      name: (identifier)
-      type: (identifier)))
+    (body
+      (parameter_definition
+        name: (identifier)
+        type: (identifier))))
   (procedure_definition
     name: (identifier)
     (in_super_phrase)
-    (parameter_definition
-      name: (identifier)
-      type: (identifier)))
+    (body
+      (parameter_definition
+        name: (identifier)
+        type: (identifier))))
   (procedure_definition
     (access_modifier)
     name: (identifier)
-    (parameter_definition
-      name: (identifier)
-      type: (identifier)))
-  (procedure_forward_definition
+    (body
+      (parameter_definition
+        name: (identifier)
+        type: (identifier))))
+  (procedure_definition
     name: (qualified_name
       left: (identifier)
-      right: (identifier)))
+      right: (identifier))
+    (forward))
+  (expression_statement
+    (identifier))
   (procedure_definition
     name: (qualified_name
       left: (identifier)
       right: (identifier)
-      right: (identifier))))
+      right: (identifier))
+    (body)))

@@ -716,39 +716,40 @@ DEFINE INPUT PARAMETER pExtent0 AS INTEGER EXTENT 0.
           system_handle: (system_handle)))))
   (procedure_definition
     name: (identifier)
-    (parameter_definition
-      name: (identifier)
-      type: (identifier)
-      (no_undo))
-    (parameter_definition
-      name: (identifier)
-      table: (identifier))
-    (find_statement
-      table: (identifier)
-      (where_phrase
-        (binary_expression
-          (qualified_name
-            left: (identifier)
-            right: (identifier))
-          (function_call
-            function: (identifier)
-            (arguments
-              (argument
-                name: (object_access
-                  left: (identifier)
-                  right: (identifier)))))))
-      (no_lock)
-      (no_error))
-    (if_statement
-      (unary_expression
-        (available_expression
-          record: (identifier)))
-      then: (do_block
-        (body
-          (message_statement
-            (string_literal)
-            (view_as_phrase))
-          (return_statement)))))
+    (body
+      (parameter_definition
+        name: (identifier)
+        type: (identifier)
+        (no_undo))
+      (parameter_definition
+        name: (identifier)
+        table: (identifier))
+      (find_statement
+        table: (identifier)
+        (where_phrase
+          (binary_expression
+            (qualified_name
+              left: (identifier)
+              right: (identifier))
+            (function_call
+              function: (identifier)
+              (arguments
+                (argument
+                  name: (object_access
+                    left: (identifier)
+                    right: (identifier)))))))
+        (no_lock)
+        (no_error))
+      (if_statement
+        (unary_expression
+          (available_expression
+            record: (identifier)))
+        then: (do_block
+          (body
+            (message_statement
+              (string_literal)
+              (view_as_phrase))
+            (return_statement))))))
   (variable_definition
     name: (identifier)
     type: (identifier)
@@ -773,21 +774,22 @@ DEFINE INPUT PARAMETER pExtent0 AS INTEGER EXTENT 0.
   (procedure_definition
     name: (identifier)
     (external_phrase)
-    (parameter_definition
-      name: (identifier)
-      type: (identifier))
-    (parameter_definition
-      name: (identifier)
-      type: (identifier))
-    (parameter_definition
-      name: (identifier)
-      type: (identifier))
-    (parameter_definition
-      name: (identifier)
-      type: (identifier))
-    (parameter_definition
-      name: (identifier)
-      type: (identifier)))
+    (body
+      (parameter_definition
+        name: (identifier)
+        type: (identifier))
+      (parameter_definition
+        name: (identifier)
+        type: (identifier))
+      (parameter_definition
+        name: (identifier)
+        type: (identifier))
+      (parameter_definition
+        name: (identifier)
+        type: (identifier))
+      (parameter_definition
+        name: (identifier)
+        type: (identifier))))
   (parameter_definition
     name: (identifier)
     type: (identifier)

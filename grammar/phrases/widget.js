@@ -1,8 +1,15 @@
 module.exports = ({ kw }) => ({
   widget_phrase: ($) =>
-    choice($.__widget_frame, $.__widget_handle, $.__widget_entry, $.__widget_menu),
+    choice(
+      $.__widget_frame,
+      $.__widget_browse,
+      $.__widget_handle,
+      $.__widget_entry,
+      $.__widget_menu,
+    ),
 
   __widget_frame: ($) => seq(kw("FRAME"), field("frame", $.identifier)),
+  __widget_browse: ($) => seq(kw("BROWSE"), field("browse", $.identifier)),
 
   __widget_handle: ($) =>
     seq(field("handle", $._identifier_or_qualified_name)),

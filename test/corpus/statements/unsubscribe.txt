@@ -36,15 +36,16 @@ UNSUBSCRIBE ALL IN hPub.
 (source_code
   (procedure_definition
     (identifier)
-    (parameter_definition
-      (identifier)
-      (identifier)
-      (no_undo))
-    (message_statement
-      (string_literal)
-      (identifier)
-      (view_as_phrase))
-    (unsubscribe_statement))
+    (body
+      (parameter_definition
+        (identifier)
+        (identifier)
+        (no_undo))
+      (message_statement
+        (string_literal)
+        (identifier)
+        (view_as_phrase))
+      (unsubscribe_statement)))
   (unsubscribe_statement
     (identifier)
     (string_literal)

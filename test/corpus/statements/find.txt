@@ -5,6 +5,7 @@ FIND basic
 FIND Customer.
 FIND Customer NO-LOCK.
 FIND Customer EXCLUSIVE-LOCK.
+FIND Customer SHARE-LOCK.
 
 --------------------------------------------------------------------------------
 
@@ -16,7 +17,10 @@ FIND Customer EXCLUSIVE-LOCK.
     (no_lock))
   (find_statement
     table: (identifier)
-    (exclusive_lock)))
+    (exclusive_lock))
+  (find_statement
+    table: (identifier)
+    (share_lock)))
 
 ================================================================================
 FIND with WHERE clause

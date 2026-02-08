@@ -95,6 +95,7 @@ END PROCEDURE.
     name: (identifier)
     (external_phrase)
     (persistent)
-    (parameter_definition
-      name: (identifier)
-      type: (identifier))))
+    (body
+      (parameter_definition
+        name: (identifier)
+        type: (identifier)))))

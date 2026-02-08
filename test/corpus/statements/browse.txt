@@ -19,7 +19,7 @@ Define Browse with Options
 =============================
 
 DEFINE BROWSE b1 QUERY q1 DISPLAY CustNum Name
-TITLE "Customer Browse" DOWN 10.
+WITH TITLE "Customer Browse" DOWN 10.
 ---
 
 (source_code
@@ -270,6 +270,29 @@ CONTEXT-HELP-ID 42 DROP-TARGET TOOLTIP "Browse tip" ROW 3 COLUMN 5.
       (number_literal))
     (column_option
       (number_literal))))
+
+================================================================================
+BROWSE - Computed Column Expression
+================================================================================
+
+DEFINE BROWSE bExpr QUERY qExpr
+  DISPLAY -1 * ttr_hist.tr_qty_loc LABEL "Ilosc".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (browse_definition
+    name: (identifier)
+    query: (identifier)
+    (column
+      column: (binary_expression
+        (unary_expression
+          (number_literal))
+        (qualified_name
+          left: (identifier)
+          right: (identifier)))
+      (label_option
+        (string_literal)))))
 
 ================================================================================
 BROWSE - SHARE-LOCK

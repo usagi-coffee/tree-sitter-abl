@@ -28,7 +28,6 @@
 (function_definition name: (identifier) @function.definition)
 (function_forward_definition name: (identifier) @function.definition)
 (procedure_definition name: (identifier) @function.definition)
-(procedure_forward_definition name: (identifier) @function.definition)
 (function_call function: (identifier) @function.call)
 (function_call function: (qualified_name) @function.call)
 (function_call function: (object_access) @function.call)

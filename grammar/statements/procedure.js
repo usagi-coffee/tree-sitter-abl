@@ -1,17 +1,21 @@
 module.exports = ({ kw }) => ({
   procedure_definition: ($) =>
-    seq(kw("PROCEDURE", { offset: 4 }), $.__procedure_body, $._terminator),
-
-  __procedure_body: ($) =>
     seq(
+      kw("PROCEDURE", { offset: 4 }),
       optional($.__procedure_modifier),
       field("name", $._identifier_or_qualified_name),
       repeat($.__procedure_option),
       optional(alias($.__procedure_in_super_phrase, $.in_super_phrase)),
-      alias($._colon, ":"),
+      alias($.__procedure_body, $.body),
+    ),
+
+  __procedure_body: ($) =>
+    seq(
+      choice(alias($._colon, ":"), alias($._terminator_dot, ".")),
       repeat($._statement),
       kw("END"),
       optional(kw("PROCEDURE", { offset: 4 })),
+      $._terminator,
     ),
 
   __procedure_access_modifier: ($) =>
@@ -52,12 +56,4 @@ module.exports = ({ kw }) => ({
     ),
   __procedure_in_super_phrase: ($) => seq(kw("IN"), kw("SUPER")),
   __procedure_map_option: ($) => seq(kw("MAP"), field("name", $.identifier)),
-
-  procedure_forward_definition: ($) =>
-    seq(
-      kw("PROCEDURE", { offset: 4 }),
-      field("name", $._identifier_or_qualified_name),
-      optional(alias($.__procedure_in_super_phrase, $.in_super_phrase)),
-      $._terminator,
-    ),
 });

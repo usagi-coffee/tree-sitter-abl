@@ -31,7 +31,6 @@ module.exports = () => ({
       $.function_forward_definition,
       $.stream_definition,
       $.parameter_definition,
-      $.procedure_forward_definition,
 
       // ABL Statements
       $.input_statement,

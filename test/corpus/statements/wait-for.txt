@@ -316,26 +316,27 @@ WAIT-FOR PROCEDURE-COMPLETE OF hRequest.
         (number_literal))))
   (procedure_definition
     (identifier)
-    (hide_statement
-      (widget_phrase
-        (identifier)))
-    (find_statement
-      (identifier)
-      (no_error))
-    (if_statement
-      (available_expression
-        (identifier))
-      (display_statement
-        (field
-          (qualified_name
-            (identifier)
-            (identifier)))
-        (field
-          (qualified_name
-            (identifier)
-            (identifier)))
-        (frame_phrase
-          (identifier)))))
+    (body
+      (hide_statement
+        (widget_phrase
+          (identifier)))
+      (find_statement
+        (identifier)
+        (no_error))
+      (if_statement
+        (available_expression
+          (identifier))
+        (display_statement
+          (field
+            (qualified_name
+              (identifier)
+              (identifier)))
+          (field
+            (qualified_name
+              (identifier)
+              (identifier)))
+          (frame_phrase
+            (identifier))))))
   (wait_for_statement
     (identifier)
     (widget_phrase

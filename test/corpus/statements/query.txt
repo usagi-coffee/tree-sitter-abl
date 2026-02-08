@@ -567,33 +567,34 @@ DEFINE QUERY qExceptAll FOR Customer EXCEPT ().
       system_handle: (system_handle)))
   (procedure_definition
     name: (identifier)
-    (display_statement
-      (field
-        field: (qualified_name
-          left: (identifier)
-          right: (identifier)))
-      (field
-        field: (qualified_name
-          left: (identifier)
-          right: (identifier)))
-      (field
-        field: (qualified_name
-          left: (identifier)
-          right: (identifier)))
-      (field
-        field: (qualified_name
-          left: (identifier)
-          right: (identifier)))
-      (frame_phrase
-        frame: (identifier)
-        (centered)
-        (side_labels)
-        title: (string_literal)))
-    (open_query_statement
-      query: (identifier)
-      (record_phrase
-        record: (identifier)
-        of: (identifier))))
+    (body
+      (display_statement
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (frame_phrase
+          frame: (identifier)
+          (centered)
+          (side_labels)
+          title: (string_literal)))
+      (open_query_statement
+        query: (identifier)
+        (record_phrase
+          record: (identifier)
+          of: (identifier)))))
   (variable_definition
     name: (identifier)
     type: (identifier)

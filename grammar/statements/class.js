@@ -32,7 +32,6 @@ module.exports = ({ kw }) => ({
       $.rectangle_definition,
       $.event_definition,
       $.procedure_definition,
-      $.procedure_forward_definition,
       $.function_definition,
       $.function_forward_definition,
       $.var_statement,

@@ -204,37 +204,38 @@ RETURN NO-APPLY.
                     (identifier))))))))))
   (procedure_definition
     (identifier)
-    (variable_definition
-      (identifier)
-      (qualified_name
+    (body
+      (variable_definition
         (identifier)
-        (identifier)
-        (identifier)))
-    (assignment_statement
-      (identifier)
-      (assignment_operator)
-      (new_expression
         (qualified_name
           (identifier)
           (identifier)
-          (identifier))
-        (arguments
-          (argument
-            (string_literal))
-          (argument
-            (number_literal)))))
-    (expression_statement
-      (function_call
-        (object_access
-          (identifier)
-          (identifier))
-        (arguments
-          (argument
-            (string_literal))
-          (argument
-            (number_literal)))))
-    (return_statement
-      (identifier)))
+          (identifier)))
+      (assignment_statement
+        (identifier)
+        (assignment_operator)
+        (new_expression
+          (qualified_name
+            (identifier)
+            (identifier)
+            (identifier))
+          (arguments
+            (argument
+              (string_literal))
+            (argument
+              (number_literal)))))
+      (expression_statement
+        (function_call
+          (object_access
+            (identifier)
+            (identifier))
+          (arguments
+            (argument
+              (string_literal))
+            (argument
+              (number_literal)))))
+      (return_statement
+        (identifier))))
   (return_statement
     (string_literal))
   (return_statement))

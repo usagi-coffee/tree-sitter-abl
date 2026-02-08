@@ -40,6 +40,26 @@ OPEN QUERY q1 FOR EACH zr BY zr_procent DESC BY zr_wyd DESC.
       by: (identifier))))
 
 ================================================================================
+OPEN QUERY with lock before USE-INDEX
+================================================================================
+
+OPEN QUERY q1 FOR EACH tr_hist WHERE tr_type = "RCT-TR" NO-LOCK USE-INDEX tr_nbr_eff BY tr_trnbr DESC.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (open_query_statement
+    query: (identifier)
+    (record_phrase
+      record: (identifier)
+      where: (binary_expression
+        (identifier)
+        (string_literal))
+      index: (identifier))
+    (by_phrase
+      by: (identifier))))
+
+================================================================================
 OPEN QUERY - Reference snippet
 ================================================================================
 
