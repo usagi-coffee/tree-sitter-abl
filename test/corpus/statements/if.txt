@@ -407,3 +407,21 @@ OUTPUT STREAM due CLOSE.
                       (identifier)))))))))))
   (output_statement
     (identifier)))
+
+================================================================================
+IF with PROC variable name
+================================================================================
+
+IF x > 0 THEN proc = 1.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (if_statement
+    (binary_expression
+      (identifier)
+      (number_literal))
+    then: (assignment_statement
+      left: (identifier)
+      operator: (assignment_operator)
+      right: (number_literal))))

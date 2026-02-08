@@ -60816,6 +60816,42 @@
               "type": "TOKEN",
               "content": {
                 "type": "PATTERN",
+                "value": "PROC",
+                "flags": "i"
+              }
+            },
+            "named": false,
+            "value": "PROC"
+          },
+          "named": true,
+          "value": "identifier"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "ALIAS",
+            "content": {
+              "type": "TOKEN",
+              "content": {
+                "type": "PATTERN",
+                "value": "PROC(E(D(U(R(E)?)?)?)?)?",
+                "flags": "i"
+              }
+            },
+            "named": false,
+            "value": "PROCEDURE"
+          },
+          "named": true,
+          "value": "identifier"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "ALIAS",
+            "content": {
+              "type": "TOKEN",
+              "content": {
+                "type": "PATTERN",
                 "value": "INTERFACE",
                 "flags": "i"
               }
@@ -63739,6 +63775,14 @@
       "__property_class_modifier",
       "__event_type_modifier",
       "__variable_modifier"
+    ],
+    [
+      "__subscribe_body",
+      "_identifier_or_qualified_name"
+    ],
+    [
+      "__unsubscribe_body",
+      "_identifier_or_qualified_name"
     ]
   ],
   "precedences": [
@@ -64410,6 +64454,16 @@
       {
         "type": "SYMBOL",
         "name": "__subscribe_expression"
+      }
+    ],
+    [
+      {
+        "type": "SYMBOL",
+        "name": "__subscribe_body"
+      },
+      {
+        "type": "SYMBOL",
+        "name": "_identifier_or_qualified_name"
       }
     ],
     [

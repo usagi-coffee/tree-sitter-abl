@@ -159,6 +159,9 @@ module.exports = grammar({
       $.__event_type_modifier,
       $.__variable_modifier,
     ],
+    // SUBSCRIBE/UNSUBSCRIBE can start with PROCEDURE/PROC which may also be parsed as identifier-like expression.
+    [$.__subscribe_body, $._identifier_or_qualified_name],
+    [$.__unsubscribe_body, $._identifier_or_qualified_name],
   ],
   inline: ($) => [
     $.__find_record_name,
@@ -295,10 +298,14 @@ module.exports = grammar({
           $.macro_concatenated_name,
           $.identifier,
           $.qualified_name,
+          alias(kw("PROC"), $.identifier),
+          alias(kw("PROCEDURE", { offset: 4 }), $.identifier),
           alias(kw("INTERFACE"), $.identifier),
         ),
       macro_concatenated_name: ($) =>
-        token(/[_\p{L}][\p{L}\p{N}_\-&]*(\{(?:&[0-9A-Za-z_-]+|[0-9A-Za-z_-]+)\})+/i),
+        token(
+          /[_\p{L}][\p{L}\p{N}_\-&]*(\{(?:&[0-9A-Za-z_-]+|[0-9A-Za-z_-]+)\})+/i,
+        ),
 
       _widgets: ($) =>
         prec.right(alias(choice(...WIDGETS, kw("FRAME")), $.identifier)),
