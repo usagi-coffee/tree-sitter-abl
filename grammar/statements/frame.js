@@ -56,6 +56,11 @@ module.exports = ({ kw }) => ({
         ),
       ),
       seq(
+        alias($.constant_expression, $.constant),
+        optional(choice($.at_phrase, seq(kw("TO"), $._expression))),
+        repeat($.__frame_display_option),
+      ),
+      seq(
         $.string_literal,
         optional(choice($.at_phrase, seq(kw("TO"), $._expression))),
         repeat($.__frame_display_option),
