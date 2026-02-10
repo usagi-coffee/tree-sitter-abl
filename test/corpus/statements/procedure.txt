@@ -365,7 +365,7 @@ END PROCEDURE.
         name: (identifier)
         type: (identifier)
         (no_undo))
-      (do_block
+      (do_statement
         (on_error_phrase)
         (body
           (assignment_statement
@@ -584,14 +584,14 @@ END PROCEDURE.
         (binary_expression
           (identifier)
           (number_literal))
-        then: (do_block
+        then: (do_statement
           (body
             (assignment_statement
               left: (identifier)
               operator: (assignment_operator)
               right: (number_literal))
             (return_statement)))
-        else: (do_block
+        else: (do_statement
           (body
             (run_statement
               procedure: (identifier)

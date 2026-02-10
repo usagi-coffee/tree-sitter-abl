@@ -42,7 +42,7 @@ IF LOCKED bufOrder THEN RETURN TRUE.
     (binary_expression
       (identifier)
       (string_literal))
-    then: (do_block
+    then: (do_statement
       (body
         (undo_statement
           value: (new_expression
@@ -55,7 +55,7 @@ IF LOCKED bufOrder THEN RETURN TRUE.
                 name: (string_literal))
               (argument
                 name: (number_literal)))))))
-    else: (do_block
+    else: (do_statement
       (body
         (assign_statement
           (assign_phrase
@@ -89,7 +89,7 @@ IF LOCKED bufOrder THEN RETURN TRUE.
             (qualified_name
               left: (identifier)
               right: (identifier))))))
-    then: (do_block
+    then: (do_statement
       (body
         (display_statement
           record: (qualified_name
@@ -104,7 +104,7 @@ IF LOCKED bufOrder THEN RETURN TRUE.
             left: (identifier)
             right: (identifier))
           (number_literal))))
-    then: (do_block
+    then: (do_statement
       (body
         (display_statement
           record: (qualified_name
@@ -121,7 +121,7 @@ IF LOCKED bufOrder THEN RETURN TRUE.
           (number_literal)))
       (use_index
         index: (identifier)))
-    then: (do_block
+    then: (do_statement
       (body
         (display_statement
           record: (qualified_name
@@ -129,7 +129,7 @@ IF LOCKED bufOrder THEN RETURN TRUE.
             right: (identifier))))))
   (if_statement
     (identifier)
-    then: (do_block
+    then: (do_statement
       (body
         (display_statement
           record: (identifier))))
@@ -200,7 +200,7 @@ END.
       left: (identifier)
       operator: (assignment_operator)
       right: (number_literal))
-    else: (do_block
+    else: (do_statement
       (body
         (assignment_statement
           left: (identifier)
@@ -315,7 +315,7 @@ OUTPUT STREAM due CLOSE.
             (identifier)
             (identifier))
           (null_literal))
-        (do_block
+        (do_statement
           (body
             (if_statement
               (binary_expression
@@ -323,7 +323,7 @@ OUTPUT STREAM due CLOSE.
                   (identifier)
                   (identifier))
                 (null_literal))
-              (do_block
+              (do_statement
                 (body
                   (message_statement
                     (string_literal))
@@ -363,7 +363,7 @@ OUTPUT STREAM due CLOSE.
                         (identifier)))
                     (frame_phrase
                       (identifier))))))))
-        (do_block
+        (do_statement
           (body
             (assignment_statement
               (identifier)
@@ -376,7 +376,7 @@ OUTPUT STREAM due CLOSE.
             (if_statement
               (unary_expression
                 (identifier))
-              (do_block
+              (do_statement
                 (body
                   (display_statement
                     (identifier)

@@ -17,7 +17,7 @@ END CASE.
     (identifier)
     (case_when_phrase
       (string_literal)
-      (do_block
+      (do_statement
         (body
           (put_statement
             (string_literal)
@@ -88,7 +88,7 @@ END CASE.
     (case_when_phrase
       condition: (number_literal)
       condition: (number_literal)
-      (do_block
+      (do_statement
         (body
           (message_statement
             (string_literal)))))))

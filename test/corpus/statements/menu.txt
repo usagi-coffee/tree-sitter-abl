@@ -594,7 +594,7 @@ WAIT-FOR CHOOSE OF MENU-ITEM quititem.
     (identifier)
     (widget_phrase
       (identifier))
-    (do_block
+    (do_statement
       (body
         (hide_statement)
         (clear_statement
@@ -615,7 +615,7 @@ WAIT-FOR CHOOSE OF MENU-ITEM quititem.
     (identifier)
     (widget_phrase
       (identifier))
-    (do_block
+    (do_statement
       (body
         (hide_statement)
         (clear_statement

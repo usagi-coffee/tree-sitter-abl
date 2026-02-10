@@ -7,6 +7,6 @@ DO ON ENDKEY UNDO, LEAVE: END.
 --------------------------------------------------------------------------------
 
 (source_code
-  (do_block
+  (do_statement
     (on_endkey_phrase)
     (body)))

@@ -428,7 +428,7 @@ END FUNCTION.
       (binary_expression
         (identifier)
         (number_literal))
-      then: (do_block
+      then: (do_statement
         (body
           (return_statement
             (function_call
@@ -438,7 +438,7 @@ END FUNCTION.
                   name: (string_literal))
                 (argument
                   name: (identifier)))))))
-      else: (do_block
+      else: (do_statement
         (body
           (return_statement
             (string_literal)))))))

@@ -115,7 +115,7 @@ PUT SCREEN COLOR VALUE(cColor) ROW 1 COLUMN 1 "Hdr".
         (binary_expression
           (identifier)
           (number_literal))
-        (do_block
+        (do_statement
           (body
             (assignment_statement
               (identifier)

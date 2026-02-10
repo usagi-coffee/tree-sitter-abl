@@ -11,7 +11,7 @@ x
 --------------------------------------------------------------------------------
 
 (source_code
-  (do_block
+  (do_statement
     (body
       (assignment_statement
         left: (identifier)
@@ -156,7 +156,7 @@ END.
     name: (identifier)
     type: (identifier)
     (no_undo))
-  (do_block
+  (do_statement
     variable: (identifier)
     start: (number_literal)
     end: (binary_expression

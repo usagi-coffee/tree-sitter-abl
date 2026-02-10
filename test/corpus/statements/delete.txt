@@ -106,7 +106,7 @@ END.
 --------------------------------------------------------------------------------
 
 (source_code
-  (do_block
+  (do_statement
     (body
       (find_statement
         table: (identifier)

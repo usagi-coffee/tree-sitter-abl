@@ -107,14 +107,14 @@ END.
           (argument
             (identifier))))
       (null_literal))
-    (do_block
+    (do_statement
       (body
         (promsgs_statement
           (identifier))
         (message_statement
           (string_literal)
           (identifier))))
-    (do_block
+    (do_statement
       (body
         (message_statement
           (string_literal)

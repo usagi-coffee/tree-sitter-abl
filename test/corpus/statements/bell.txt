@@ -42,7 +42,7 @@ END.
     (format_phrase
       (string_literal))
     (string_literal))
-  (do_block
+  (do_statement
     (identifier)
     (on_error_phrase)
     (body
@@ -59,7 +59,7 @@ END.
               (argument
                 (identifier))))
           (identifier))
-        (do_block
+        (do_statement
           (body
             (message_statement
               (string_literal)

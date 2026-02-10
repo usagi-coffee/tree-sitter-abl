@@ -7,6 +7,6 @@ DO ON QUIT UNDO, LEAVE: END.
 --------------------------------------------------------------------------------
 
 (source_code
-  (do_block
+  (do_statement
     (on_quit_phrase)
     (body)))

@@ -205,7 +205,7 @@ DISPLAY STREAM rpt ItemNum ItemName WITH NO-LABELS NO-BOX.
         (binary_expression
           (identifier)
           (identifier))
-        then: (do_block
+        then: (do_statement
           (body
             (display_statement
               stream: (identifier)

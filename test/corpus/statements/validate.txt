@@ -59,7 +59,7 @@ VALIDATE sports.Item NO-ERROR.
         (unary_expression
           (available_expression
             (identifier)))
-        (do_block
+        (do_statement
           (body
             (create_statement
               (identifier))

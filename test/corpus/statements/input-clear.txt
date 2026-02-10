@@ -55,7 +55,7 @@ END.
               (argument
                 (string_literal)))))
         (quit_statement)
-        (do_block
+        (do_statement
           (body
             (message_statement
               (string_literal))

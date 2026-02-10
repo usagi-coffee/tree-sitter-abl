@@ -54,7 +54,7 @@ END.
             (identifier)
             (identifier))
           (identifier))
-        (do_block
+        (do_statement
           (body
             (if_statement
               (binary_expression

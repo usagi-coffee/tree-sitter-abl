@@ -588,7 +588,7 @@ END.
     (string_literal))
   (if_statement
     (identifier)
-    (do_block
+    (do_statement
       (body
         (run_statement
           (procedure_name))
@@ -628,7 +628,7 @@ END.
         (binary_expression
           (identifier)
           (number_literal))
-        (do_block
+        (do_statement
           (body
             (hide_statement
               (widget_phrase
@@ -642,7 +642,7 @@ END.
           (binary_expression
             (identifier)
             (number_literal))
-          (do_block
+          (do_statement
             (body
               (hide_statement
                 (widget_phrase
@@ -652,7 +652,7 @@ END.
                   (identifier)))
               (run_statement
                 (procedure_name))))
-          (do_block
+          (do_statement
             (body
               (message_statement
                 (string_literal))
@@ -794,7 +794,7 @@ END.
               (identifier)
               (identifier))
             (string_literal))
-          (do_block
+          (do_statement
             (identifier)
             (number_literal)
             (function_call

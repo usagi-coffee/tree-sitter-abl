@@ -533,7 +533,7 @@ DEFINE QUERY qExceptAll FOR Customer EXCEPT ().
     event: (identifier)
     widget: (widget_phrase
       handle: (identifier))
-    (do_block
+    (do_statement
       (body
         (get_statement
           query: (identifier))

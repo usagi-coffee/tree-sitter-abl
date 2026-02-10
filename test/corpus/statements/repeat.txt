@@ -207,7 +207,7 @@ END.
           (run_statement
             procedure: (procedure_name)))
         (case_otherwise_phrase
-          (do_block
+          (do_statement
             (body
               (bell_statement)
               (message_statement

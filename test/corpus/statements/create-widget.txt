@@ -34,11 +34,11 @@ END TRIGGERS.
         right: (boolean_literal))))
   (create_widget_statement
     handle: (identifier)
-    (do_block
+    (do_statement
       (body
         (message_statement
           (string_literal))))
-    (do_block
+    (do_statement
       (body
         (message_statement
           (string_literal))))))

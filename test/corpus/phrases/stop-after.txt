@@ -7,7 +7,7 @@ DO STOP-AFTER 10: END.
 --------------------------------------------------------------------------------
 
 (source_code
-  (do_block
+  (do_statement
     (stop_after_phrase
       time: (number_literal))
     (body)))

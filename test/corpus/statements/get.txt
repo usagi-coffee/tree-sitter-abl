@@ -62,7 +62,7 @@ END.
       of: (identifier)))
   (get_statement
     query: (identifier))
-  (do_block
+  (do_statement
     (available_expression
       record: (identifier))
     (body

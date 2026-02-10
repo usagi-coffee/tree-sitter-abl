@@ -263,7 +263,7 @@ DEFINE PRIVATE WORK-TABLE wtPrivate FIELD f1 AS INTEGER.
               name: (qualified_name
                 left: (identifier)
                 right: (identifier)))))
-        then: (do_block
+        then: (do_statement
           (body
             (create_statement
               table: (identifier))

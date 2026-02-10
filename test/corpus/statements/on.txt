@@ -24,7 +24,7 @@ END.
     (referencing_phrase
       new_record: (identifier)
       old_record: (identifier))
-    (do_block
+    (do_statement
       (body
         (assignment_statement
           left: (identifier)
@@ -41,7 +41,7 @@ END.
     (override))
   (on_statement
     event: (identifier)
-    (do_block
+    (do_statement
       (body
         (message_statement
           (string_literal)))))
@@ -57,7 +57,7 @@ END.
     event: (identifier)
     widget: (widget_phrase
       browse: (identifier))
-    (do_block
+    (do_statement
       (body
         (message_statement
           (string_literal))))))
@@ -110,7 +110,7 @@ ON F5 ENDKEY.
     (referencing_phrase
       new_record: (identifier)
       old_record: (identifier))
-    (do_block
+    (do_statement
       (body
         (if_statement
           (binary_expression
@@ -128,7 +128,7 @@ ON F5 ENDKEY.
               (qualified_name
                 left: (identifier)
                 right: (identifier))))
-          then: (do_block
+          then: (do_statement
             (body
               (message_statement
                 (string_literal))
@@ -193,7 +193,7 @@ ON F5 ENDKEY.
       handle: (identifier))
     widget: (widget_phrase
       handle: (identifier))
-    (do_block
+    (do_statement
       (body
         (if_statement
           (binary_expression

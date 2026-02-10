@@ -7,7 +7,7 @@ DO QUERY-TUNING(CACHE-SIZE 10 DEBUG SQL NO-DEBUG): END.
 --------------------------------------------------------------------------------
 
 (source_code
-  (do_block
+  (do_statement
     (query_tuning_phrase
       cache_size: (number_literal))
     (body)))

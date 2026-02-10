@@ -55,6 +55,6 @@ module.exports = ({ kw }) => ({
         "event",
         choice(kw("CHOOSE"), kw("ENTRY"), kw("LEAVE"), $.identifier),
       ),
-      $.do_block,
+      $.do_statement,
     ),
 });

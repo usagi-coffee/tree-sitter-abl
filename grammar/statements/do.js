@@ -1,5 +1,5 @@
 module.exports = ({ kw }) => ({
-  do_block: ($) =>
+  do_statement: ($) =>
     seq(optional($._label), $.__do_body, kw("END"), $._terminator),
 
   __do_body: ($) =>

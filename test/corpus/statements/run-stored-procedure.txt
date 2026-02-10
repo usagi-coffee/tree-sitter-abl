@@ -186,7 +186,7 @@ DISPLAY "Succeeded".
     (object_access
       left: (identifier)
       right: (identifier))
-    then: (do_block
+    then: (do_statement
       variable: (identifier)
       start: (number_literal)
       end: (object_access

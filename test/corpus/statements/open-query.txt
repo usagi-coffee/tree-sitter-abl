@@ -118,7 +118,7 @@ OPEN QUERY qCust FOR EACH Customer QUERY-TUNING(JOIN-BY-SQLDB NO-BIND-WHERE) NO-
       of: (identifier)))
   (get_statement
     query: (identifier))
-  (do_block
+  (do_statement
     (available_expression
       record: (identifier))
     (body

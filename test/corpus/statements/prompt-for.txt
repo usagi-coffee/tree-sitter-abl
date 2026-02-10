@@ -291,7 +291,7 @@ PROMPT-FOR STREAM-HANDLE hS field1 field2 IN WINDOW wMain WITH FRAME fMain.
         (unary_expression
           (available_expression
             record: (identifier)))
-        then: (do_block
+        then: (do_statement
           (body
             (message_statement
               (string_literal))

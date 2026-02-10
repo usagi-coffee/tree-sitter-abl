@@ -599,7 +599,7 @@ WAIT-FOR CHOOSE OF cancel-butt OR WINDOW-CLOSE OF CURRENT-WINDOW.
               name: (qualified_name
                 left: (identifier)
                 right: (identifier)))))
-        then: (do_block
+        then: (do_statement
           (body
             (assignment_statement
               left: (identifier)
@@ -638,7 +638,7 @@ WAIT-FOR CHOOSE OF cancel-butt OR WINDOW-CLOSE OF CURRENT-WINDOW.
     event: (identifier)
     widget: (widget_phrase
       handle: (identifier))
-    (do_block
+    (do_statement
       (body
         (hide_statement
           (widget_phrase

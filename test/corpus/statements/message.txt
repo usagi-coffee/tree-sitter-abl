@@ -359,7 +359,7 @@ END.
         (unary_expression
           (available_expression
             (identifier)))
-        (do_block
+        (do_statement
           (body
             (message_statement
               (string_literal)
@@ -401,7 +401,7 @@ END.
     (identifier)
     (widget_phrase
       (identifier))
-    (do_block
+    (do_statement
       (body
         (message_statement
           (string_literal)
@@ -422,7 +422,7 @@ END.
           (identifier)
           (case_when_phrase
             (boolean_literal)
-            (do_block
+            (do_statement
               (body
                 (find_statement
                   (identifier)
@@ -439,7 +439,7 @@ END.
                   (identifier)))))
           (case_when_phrase
             (boolean_literal)
-            (do_block
+            (do_statement
               (body
                 (message_statement
                   (string_literal)

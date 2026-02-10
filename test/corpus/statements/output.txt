@@ -262,7 +262,7 @@ OUTPUT TO TERMINAL.
               (qualified_name
                 (identifier)
                 (identifier)))))
-        (do_block
+        (do_statement
           (body
             (assignment_statement
               (identifier)

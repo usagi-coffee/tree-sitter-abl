@@ -96,7 +96,7 @@ UNDO, RETURN ERROR errObj.
   (repeat_statement
     (identifier)
     (body
-      (do_block
+      (do_statement
         (body
           (undo_statement
             (identifier))))))

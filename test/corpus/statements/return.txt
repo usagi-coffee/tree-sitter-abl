@@ -178,9 +178,9 @@ RETURN NO-APPLY.
     (object_access
       (identifier)
       (identifier))
-    (do_block
+    (do_statement
       (body
-        (do_block
+        (do_statement
           (identifier)
           (number_literal)
           (object_access

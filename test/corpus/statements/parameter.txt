@@ -659,7 +659,7 @@ DEFINE INPUT PARAMETER pExtent0 AS INTEGER EXTENT 0.
     name: (identifier)
     (button_option
       label: (string_literal)))
-  (do_block
+  (do_statement
     (frame_phrase
       frame: (identifier))
     (frame_phrase
@@ -676,7 +676,7 @@ DEFINE INPUT PARAMETER pExtent0 AS INTEGER EXTENT 0.
         event: (identifier)
         widget: (widget_phrase
           handle: (identifier))
-        (do_block
+        (do_statement
           (body
             (run_statement
               procedure: (identifier)
@@ -707,7 +707,7 @@ DEFINE INPUT PARAMETER pExtent0 AS INTEGER EXTENT 0.
           handle: (qualified_name
             left: (identifier)
             right: (identifier)))
-        (do_block
+        (do_statement
           (body
             (hide_statement))))
       (wait_for_statement
@@ -744,7 +744,7 @@ DEFINE INPUT PARAMETER pExtent0 AS INTEGER EXTENT 0.
         (unary_expression
           (available_expression
             record: (identifier)))
-        then: (do_block
+        then: (do_statement
           (body
             (message_statement
               (string_literal)

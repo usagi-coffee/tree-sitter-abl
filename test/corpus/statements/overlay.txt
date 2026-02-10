@@ -167,7 +167,7 @@ OVERLAY(cLong, 1, 5, "COLUMN") = "Hi".
                 (arguments
                   (argument
                     (identifier))))))))
-      (do_block
+      (do_statement
         (identifier)
         (number_literal)
         (number_literal)
@@ -176,7 +176,7 @@ OVERLAY(cLong, 1, 5, "COLUMN") = "Hi".
             (identifier)
             (assignment_operator)
             (number_literal))
-          (do_block
+          (do_statement
             (identifier)
             (number_literal)
             (function_call
@@ -213,7 +213,7 @@ OVERLAY(cLong, 1, 5, "COLUMN") = "Hi".
                 (binary_expression
                   (identifier)
                   (number_literal))
-                (do_block
+                (do_statement
                   (body
                     (assignment_statement
                       (identifier)

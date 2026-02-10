@@ -548,14 +548,14 @@ UPDATE animate WITH FRAME y.
     (widget_phrase
       (identifier)
       (identifier))
-    (do_block
+    (do_statement
       (body
-        (do_block
+        (do_statement
           (identifier)
           (number_literal)
           (number_literal)
           (body
-            (do_block
+            (do_statement
               (identifier)
               (number_literal)
               (number_literal)

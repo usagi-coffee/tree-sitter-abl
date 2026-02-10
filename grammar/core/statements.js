@@ -33,12 +33,12 @@ module.exports = () => ({
       $.parameter_definition,
 
       // ABL Statements
+      $.do_statement,
       $.input_statement,
       $.choose_statement,
       $.input_through_statement,
       $.open_query_statement,
       $.preselect_statement,
-      $.do_block,
       $.buffer_compare_statement,
       $.for_statement,
       $.hide_statement,

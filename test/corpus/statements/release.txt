@@ -121,7 +121,7 @@ RELEASE sports.Customer NO-ERROR.
     event: (identifier)
     widget: (widget_phrase
       handle: (identifier))
-    (do_block
+    (do_statement
       (body
         (display_statement
           record: (identifier)
@@ -143,7 +143,7 @@ RELEASE sports.Customer NO-ERROR.
     event: (identifier)
     widget: (widget_phrase
       handle: (identifier))
-    (do_block
+    (do_statement
       (body
         (find_statement
           table: (identifier)

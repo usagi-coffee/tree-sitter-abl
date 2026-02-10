@@ -95,7 +95,7 @@ MESSAGE "Out of DO block." VIEW-AS ALERT-BOX BUTTONS OK.
 --------------------------------------------------------------------------------
 
 (source_code
-  (do_block
+  (do_statement
     (on_error_phrase)
     (body
       (find_statement
@@ -114,7 +114,7 @@ MESSAGE "Out of DO block." VIEW-AS ALERT-BOX BUTTONS OK.
   (message_statement
     (string_literal)
     (view_as_phrase))
-  (do_block
+  (do_statement
     (on_error_phrase)
     (body
       (find_statement

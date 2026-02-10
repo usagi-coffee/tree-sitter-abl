@@ -49,7 +49,7 @@ END.
 --------------------------------------------------------------------------------
 
 (source_code
-  (do_block
+  (do_statement
     (on_error_phrase)
     (body
       (find_statement
@@ -74,7 +74,7 @@ END.
                 (argument
                   (number_literal))))
             (view_as_phrase))))))
-  (do_block
+  (do_statement
     (on_error_phrase)
     (body
       (find_statement
@@ -98,7 +98,7 @@ END.
               (arguments
                 (argument
                   (number_literal)))))))))
-  (do_block
+  (do_statement
     (on_error_phrase)
     (body
       (run_statement

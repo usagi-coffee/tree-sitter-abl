@@ -70,7 +70,7 @@ END.
     (identifier)
     (identifier)
     (no_undo))
-  (do_block
+  (do_statement
     (binary_expression
       (identifier)
       (string_literal))
@@ -102,7 +102,7 @@ END.
           (object_access
             (identifier)
             (identifier)))
-        (do_block
+        (do_statement
           (body
             (save_cache_statement
               (identifier)
@@ -121,10 +121,10 @@ END.
                 (binary_expression
                   (identifier)
                   (string_literal)))
-              (do_block
+              (do_statement
                 (body
                   (bell_statement)
-                  (do_block
+                  (do_statement
                     (identifier)
                     (number_literal)
                     (object_access
@@ -140,10 +140,10 @@ END.
                             (argument
                               (identifier))))
                         (view_as_phrase)))))))))
-        (do_block
+        (do_statement
           (body
             (bell_statement)
-            (do_block
+            (do_statement
               (identifier)
               (number_literal)
               (object_access

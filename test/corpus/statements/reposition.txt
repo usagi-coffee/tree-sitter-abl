@@ -105,7 +105,7 @@ REPOSITION qCust TO ROWID rTop, rChild FOR TENANT tenantId NO-ERROR.
       (identifier))
     (widget_phrase
       (identifier))
-    (do_block
+    (do_statement
       (body
         (prompt_for_statement
           (field
@@ -174,7 +174,7 @@ REPOSITION qCust TO ROWID rTop, rChild FOR TENANT tenantId NO-ERROR.
         (unary_expression
           (available_expression
             (identifier)))
-        (do_block
+        (do_statement
           (body
             (reposition_statement
               (identifier)

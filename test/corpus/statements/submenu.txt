@@ -535,7 +535,7 @@ DELETE WIDGET mywin.
     widget: (widget_phrase
       field: (identifier)
       frame: (identifier))
-    (do_block
+    (do_statement
       (body
         (assignment_statement
           left: (widget_qualified_name
@@ -578,7 +578,7 @@ DELETE WIDGET mywin.
     widget: (widget_phrase
       field: (identifier)
       frame: (identifier))
-    (do_block
+    (do_statement
       (body
         (assignment_statement
           left: (widget_qualified_name

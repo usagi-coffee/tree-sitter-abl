@@ -4593,7 +4593,7 @@
           "named": true
         },
         {
-          "type": "do_block",
+          "type": "do_statement",
           "named": true
         },
         {
@@ -7296,7 +7296,7 @@
           "named": true
         },
         {
-          "type": "do_block",
+          "type": "do_statement",
           "named": true
         },
         {
@@ -8246,7 +8246,7 @@
           "named": true
         },
         {
-          "type": "do_block",
+          "type": "do_statement",
           "named": true
         },
         {
@@ -11992,7 +11992,7 @@
             "named": true
           },
           {
-            "type": "do_block",
+            "type": "do_statement",
             "named": true
           },
           {
@@ -18758,7 +18758,7 @@
           "named": true
         },
         {
-          "type": "do_block",
+          "type": "do_statement",
           "named": true
         }
       ]
@@ -22381,7 +22381,7 @@
     }
   },
   {
-    "type": "do_block",
+    "type": "do_statement",
     "named": true,
     "fields": {
       "end": {
@@ -24193,7 +24193,7 @@
           "named": true
         },
         {
-          "type": "do_block",
+          "type": "do_statement",
           "named": true
         },
         {
@@ -32985,7 +32985,7 @@
           "named": true
         },
         {
-          "type": "do_block",
+          "type": "do_statement",
           "named": true
         },
         {
@@ -34477,7 +34477,7 @@
             "named": true
           },
           {
-            "type": "do_block",
+            "type": "do_statement",
             "named": true
           },
           {
@@ -35135,7 +35135,7 @@
             "named": true
           },
           {
-            "type": "do_block",
+            "type": "do_statement",
             "named": true
           },
           {
@@ -42634,7 +42634,7 @@
           "named": true
         },
         {
-          "type": "do_block",
+          "type": "do_statement",
           "named": true
         },
         {
@@ -47490,7 +47490,7 @@
           "named": true
         },
         {
-          "type": "do_block",
+          "type": "do_statement",
           "named": true
         },
         {
@@ -57862,7 +57862,7 @@
           "named": true
         },
         {
-          "type": "do_block",
+          "type": "do_statement",
           "named": true
         },
         {
@@ -61823,7 +61823,7 @@
           "named": true
         },
         {
-          "type": "do_block",
+          "type": "do_statement",
           "named": true
         },
         {

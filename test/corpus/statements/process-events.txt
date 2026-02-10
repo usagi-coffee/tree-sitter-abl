@@ -55,7 +55,7 @@ END.
   (enable_statement
     (enable_item
       (identifier)))
-  (do_block
+  (do_statement
     (identifier)
     (number_literal)
     (number_literal)

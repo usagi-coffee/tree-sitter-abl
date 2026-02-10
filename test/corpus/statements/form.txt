@@ -281,7 +281,7 @@ END.
       (identifier)
       (down
         (identifier))))
-  (do_block
+  (do_statement
     (identifier)
     (number_literal)
     (number_literal)

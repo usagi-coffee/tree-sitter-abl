@@ -134,7 +134,7 @@ INPUT CLOSE.
       (arguments
         (argument
           (string_literal)))))
-  (do_block
+  (do_statement
     (boolean_literal)
     (on_endkey_phrase)
     (body

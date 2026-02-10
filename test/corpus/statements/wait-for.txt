@@ -159,7 +159,7 @@ WAIT-FOR PROCEDURE-COMPLETE OF hRequest.
     (identifier)
     (widget_phrase
       (identifier))
-    (do_block
+    (do_statement
       (body
         (hide_statement
           (widget_phrase
@@ -257,7 +257,7 @@ WAIT-FOR PROCEDURE-COMPLETE OF hRequest.
     (identifier)
     (widget_phrase
       (identifier))
-    (do_block
+    (do_statement
       (body
         (display_statement
           (identifier)
@@ -277,7 +277,7 @@ WAIT-FOR PROCEDURE-COMPLETE OF hRequest.
     (identifier)
     (widget_phrase
       (identifier))
-    (do_block
+    (do_statement
       (body
         (assignment_statement
           (identifier)
@@ -287,7 +287,7 @@ WAIT-FOR PROCEDURE-COMPLETE OF hRequest.
     (identifier)
     (widget_phrase
       (system_handle))
-    (do_block
+    (do_statement
       (body
         (quit_statement))))
   (enable_statement
@@ -297,7 +297,7 @@ WAIT-FOR PROCEDURE-COMPLETE OF hRequest.
       (identifier))
     (frame_phrase
       (identifier)))
-  (do_block
+  (do_statement
     (boolean_literal)
     (body
       (if_statement

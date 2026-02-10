@@ -108,7 +108,7 @@ UNIX VALUE("cp usr/myfile.").
                 (identifier))
               (field
                 (string_literal)))))
-        (do_block
+        (do_statement
           (body
             (hide_statement
               (widget_phrase

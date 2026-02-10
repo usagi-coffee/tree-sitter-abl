@@ -16945,7 +16945,7 @@
         }
       ]
     },
-    "do_block": {
+    "do_statement": {
       "type": "SEQ",
       "members": [
         {
@@ -50625,7 +50625,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "do_block"
+          "name": "do_statement"
         }
       ]
     },
@@ -63142,6 +63142,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "do_statement"
+        },
+        {
+          "type": "SYMBOL",
           "name": "input_statement"
         },
         {
@@ -63159,10 +63163,6 @@
         {
           "type": "SYMBOL",
           "name": "preselect_statement"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "do_block"
         },
         {
           "type": "SYMBOL",

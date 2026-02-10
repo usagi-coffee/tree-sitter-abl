@@ -113,7 +113,7 @@ UPDATE a b.
             (identifier)
             (identifier))
           (string_literal))
-        (do_block
+        (do_statement
           (body
             (message_statement
               (string_literal))
