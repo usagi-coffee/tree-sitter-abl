@@ -123,7 +123,8 @@ object :property = 5.
   (assignment_statement
     left: (identifier)
     operator: (assignment_operator)
-    right: (handle_reference
+    right: (object_access
+      handle: (identifier)
       name: (identifier)
       right: (identifier)))
   (assignment_statement

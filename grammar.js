@@ -399,9 +399,27 @@ module.exports = grammar({
           field("left", $._identifier_or_qualified_name),
           $._object_access_tail,
         ),
+      _object_access_handle: ($) =>
+        prec.right(
+          1,
+          seq(
+            field("handle", $.__object_access_handle_type),
+            field("name", $._identifier_or_qualified_name),
+            $._object_access_tail,
+          ),
+        ),
+      __object_access_handle_type: ($) =>
+        prec(
+          -1,
+          choice(
+            alias(kw("TEMP-TABLE"), $.identifier),
+            alias(kw("BUFFER"), $.identifier),
+          ),
+        ),
       object_access: ($) =>
         choice(
           $._object_access_widget,
+          $._object_access_handle,
           $._object_access_plain,
           seq(
             field(
@@ -577,13 +595,6 @@ module.exports = grammar({
             field("right", alias($._identifier_immediate, $.identifier)),
           ),
         ),
-      handle_reference: ($) =>
-        seq(
-          kw("TEMP-TABLE"),
-          field("name", $._identifier_or_qualified_name),
-          $._object_access_tail,
-        ),
-
       _terminator: ($) => choice($._terminator_dot, ";"),
 
       // Contains $._expression and $._primary_expression aggregates

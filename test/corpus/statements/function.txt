@@ -111,7 +111,7 @@ FUNCTION - NO-UNDO parameters
 ================================================================================
 
 FUNCTION getBuffer RETURNS HANDLE (INPUT name AS CHARACTER NO-UNDO).
-  RETURN BUFFER(name):HANDLE.
+  RETURN BUFFER name:HANDLE.
 END.
 
 --------------------------------------------------------------------------------
@@ -127,11 +127,8 @@ END.
         (no_undo)))
     (return_statement
       (object_access
-        left: (function_call
-          function: (identifier)
-          (arguments
-            (argument
-              name: (identifier))))
+        handle: (identifier)
+        name: (identifier)
         right: (identifier)))))
 
 ================================================================================
