@@ -8,16 +8,16 @@ module.exports = ({ kw }) => ({
       choice($.__for_records, $.__for_variables),
       optional(alias($.__for_while_phrase, $.while_phrase)),
       optional(kw("TRANSACTION")),
-      optional($.stop_after_phrase),
       repeat(
         choice(
+          $.stop_after_phrase,
           $.on_endkey_phrase,
           $.on_stop_phrase,
           $.on_error_phrase,
           $.on_quit_phrase,
+          $.frame_phrase,
         ),
       ),
-      optional($.frame_phrase),
       optional($.__for_with_stream_io_phrase),
       $.body,
     ),

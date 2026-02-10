@@ -106,6 +106,10 @@ REPEAT ON ENDKEY UNDO, RETURN NO-APPLY:
   MESSAGE "x".
 END.
 
+REPEAT WITH FRAME fA ON END-KEY UNDO, LEAVE:
+  HIDE FRAME fA.
+END.
+
 --------------------------------------------------------------------------------
 
 (source_code
@@ -252,4 +256,12 @@ END.
     (on_endkey_phrase)
     (body
       (message_statement
-        (string_literal)))))
+        (string_literal))))
+  (repeat_statement
+    (frame_phrase
+      frame: (identifier))
+    (on_endkey_phrase)
+    (body
+      (hide_statement
+        (widget_phrase
+          frame: (identifier))))))

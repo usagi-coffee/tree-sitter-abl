@@ -11,16 +11,16 @@ module.exports = ({ kw }) => ({
       optional($.__repeat_loop_phrase),
       optional(choice($.__repeat_while_phrase, $.__repeat_until_phrase)),
       optional(kw("TRANSACTION")),
-      optional($.stop_after_phrase),
       repeat(
         choice(
+          $.stop_after_phrase,
           $.on_endkey_phrase,
           $.on_stop_phrase,
           $.on_error_phrase,
           $.on_quit_phrase,
+          $.frame_phrase,
         ),
       ),
-      optional($.frame_phrase),
       $.body,
     ),
 
