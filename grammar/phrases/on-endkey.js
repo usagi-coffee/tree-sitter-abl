@@ -2,7 +2,7 @@ module.exports = ({ kw }) => ({
   on_endkey_phrase: ($) =>
     seq(
       kw("ON"),
-      kw("ENDKEY"),
+      choice(kw("ENDKEY"), kw("END-KEY")),
       kw("UNDO"),
       optional(field("undo_label", $.identifier)),
       optional(seq(",", $.__on_endkey_action)),

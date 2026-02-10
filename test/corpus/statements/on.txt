@@ -256,3 +256,37 @@ ON F5 ENDKEY.
     event: (identifier)
     (expression_statement
       (identifier))))
+
+================================================================================
+ON - OR event/widget clauses
+================================================================================
+
+ON 'z' OF kodkk OR 'Z' OF kodkk DO:
+END.
+
+ON LEAVE OF FIELD lvd_tara IN FRAME wr OR LEAVE OF FIELD lvd_brutto IN FRAME wr DO:
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (on_statement
+    event: (string_literal)
+    widget: (widget_phrase
+      handle: (identifier))
+    event: (string_literal)
+    widget: (widget_phrase
+      handle: (identifier))
+    (do_statement
+      (body)))
+  (on_statement
+    event: (identifier)
+    widget: (widget_phrase
+      field: (identifier)
+      frame: (identifier))
+    event: (identifier)
+    widget: (widget_phrase
+      field: (identifier)
+      frame: (identifier))
+    (do_statement
+      (body))))

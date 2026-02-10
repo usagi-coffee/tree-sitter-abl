@@ -3,10 +3,14 @@ ON ENDKEY
 ================================================================================
 
 DO ON ENDKEY UNDO, LEAVE: END.
+DO ON END-KEY UNDO, LEAVE: END.
 
 --------------------------------------------------------------------------------
 
 (source_code
+  (do_statement
+    (on_endkey_phrase)
+    (body))
   (do_statement
     (on_endkey_phrase)
     (body)))

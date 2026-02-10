@@ -28218,108 +28218,33 @@
                 "type": "SEQ",
                 "members": [
                   {
-                    "type": "FIELD",
-                    "name": "event",
-                    "content": {
-                      "type": "SYMBOL",
-                      "name": "__on_ui_event"
-                    }
+                    "type": "SYMBOL",
+                    "name": "__on_ui_event_widgets"
                   },
                   {
-                    "type": "CHOICE",
-                    "members": [
-                      {
-                        "type": "SEQ",
-                        "members": [
-                          {
-                            "type": "ALIAS",
+                    "type": "REPEAT",
+                    "content": {
+                      "type": "SEQ",
+                      "members": [
+                        {
+                          "type": "ALIAS",
+                          "content": {
+                            "type": "TOKEN",
                             "content": {
-                              "type": "TOKEN",
-                              "content": {
-                                "type": "PATTERN",
-                                "value": "OF",
-                                "flags": "i"
-                              }
-                            },
-                            "named": false,
-                            "value": "OF"
-                          },
-                          {
-                            "type": "CHOICE",
-                            "members": [
-                              {
-                                "type": "ALIAS",
-                                "content": {
-                                  "type": "TOKEN",
-                                  "content": {
-                                    "type": "PATTERN",
-                                    "value": "MENU-ITEM",
-                                    "flags": "i"
-                                  }
-                                },
-                                "named": false,
-                                "value": "MENU-ITEM"
-                              },
-                              {
-                                "type": "BLANK"
-                              }
-                            ]
-                          },
-                          {
-                            "type": "FIELD",
-                            "name": "widget",
-                            "content": {
-                              "type": "SYMBOL",
-                              "name": "widget_phrase"
+                              "type": "PATTERN",
+                              "value": "OR",
+                              "flags": "i"
                             }
                           },
-                          {
-                            "type": "REPEAT",
-                            "content": {
-                              "type": "SEQ",
-                              "members": [
-                                {
-                                  "type": "STRING",
-                                  "value": ","
-                                },
-                                {
-                                  "type": "CHOICE",
-                                  "members": [
-                                    {
-                                      "type": "ALIAS",
-                                      "content": {
-                                        "type": "TOKEN",
-                                        "content": {
-                                          "type": "PATTERN",
-                                          "value": "MENU-ITEM",
-                                          "flags": "i"
-                                        }
-                                      },
-                                      "named": false,
-                                      "value": "MENU-ITEM"
-                                    },
-                                    {
-                                      "type": "BLANK"
-                                    }
-                                  ]
-                                },
-                                {
-                                  "type": "FIELD",
-                                  "name": "widget",
-                                  "content": {
-                                    "type": "SYMBOL",
-                                    "name": "widget_phrase"
-                                  }
-                                }
-                              ]
-                            }
-                          }
-                        ]
-                      },
-                      {
-                        "type": "BLANK"
-                      }
-                    ]
+                          "named": false,
+                          "value": "OR"
+                        },
+                        {
+                          "type": "SYMBOL",
+                          "name": "__on_ui_event_widgets"
+                        }
+                      ]
+                    }
                   },
                   {
                     "type": "CHOICE",
@@ -28508,6 +28433,144 @@
     "__on_ui_event": {
       "type": "SYMBOL",
       "name": "_events"
+    },
+    "__on_ui_events": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "event",
+          "content": {
+            "type": "SYMBOL",
+            "name": "__on_ui_event"
+          }
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "STRING",
+                "value": ","
+              },
+              {
+                "type": "FIELD",
+                "name": "event",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "__on_ui_event"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "__on_ui_event_widgets": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "__on_ui_events"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "TOKEN",
+                    "content": {
+                      "type": "PATTERN",
+                      "value": "OF",
+                      "flags": "i"
+                    }
+                  },
+                  "named": false,
+                  "value": "OF"
+                },
+                {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "ALIAS",
+                      "content": {
+                        "type": "TOKEN",
+                        "content": {
+                          "type": "PATTERN",
+                          "value": "MENU-ITEM",
+                          "flags": "i"
+                        }
+                      },
+                      "named": false,
+                      "value": "MENU-ITEM"
+                    },
+                    {
+                      "type": "BLANK"
+                    }
+                  ]
+                },
+                {
+                  "type": "FIELD",
+                  "name": "widget",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "widget_phrase"
+                  }
+                },
+                {
+                  "type": "REPEAT",
+                  "content": {
+                    "type": "SEQ",
+                    "members": [
+                      {
+                        "type": "STRING",
+                        "value": ","
+                      },
+                      {
+                        "type": "CHOICE",
+                        "members": [
+                          {
+                            "type": "ALIAS",
+                            "content": {
+                              "type": "TOKEN",
+                              "content": {
+                                "type": "PATTERN",
+                                "value": "MENU-ITEM",
+                                "flags": "i"
+                              }
+                            },
+                            "named": false,
+                            "value": "MENU-ITEM"
+                          },
+                          {
+                            "type": "BLANK"
+                          }
+                        ]
+                      },
+                      {
+                        "type": "FIELD",
+                        "name": "widget",
+                        "content": {
+                          "type": "SYMBOL",
+                          "name": "widget_phrase"
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
     },
     "__on_database_object": {
       "type": "SYMBOL",
@@ -58572,17 +58635,35 @@
           "value": "ON"
         },
         {
-          "type": "ALIAS",
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "PATTERN",
-              "value": "ENDKEY",
-              "flags": "i"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PATTERN",
+                  "value": "ENDKEY",
+                  "flags": "i"
+                }
+              },
+              "named": false,
+              "value": "ENDKEY"
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PATTERN",
+                  "value": "END-KEY",
+                  "flags": "i"
+                }
+              },
+              "named": false,
+              "value": "END-KEY"
             }
-          },
-          "named": false,
-          "value": "ENDKEY"
+          ]
         },
         {
           "type": "ALIAS",
@@ -62690,7 +62771,7 @@
         "value": 1,
         "content": {
           "type": "PATTERN",
-          "value": "(ACCUMULATE|AGGREGATE|COUNT|TOTAL|AVERAGE|MAXIMUM|MINIMUM|WHERE|APPLY|TO|ASSIGN|EXCEPT|NO-ERROR|INPUT|FRAME|BROWSE|WHEN|AVAILABLE|BELL|DEFINE|QUERY|SHARE-LOCK|EXCLUSIVE-LOCK|NO-LOCK|NO-WAIT|DISPLAY|WITH|FORMAT|LABEL|NO-LABELS|WIDTH|COLUMN-FONT|COLUMN-LABEL|COLUMN-DCOLOR|COLUMN-BGCOLOR|COLUMN-FGCOLOR|COLUMN-PFCOLOR|LABEL-FONT|LABEL-DCOLOR|LABEL-BGCOLOR|LABEL-FGCOLOR|LABEL-PFCOLOR|HELP|VALIDATE|AUTO-RETURN|DISABLE-AUTO-ZAP|MOVEABLE|RESIZABLE|CONTEXT-HELP-ID|DROP-TARGET|TOOLTIP|BGCOLOR|DCOLOR|FGCOLOR|FONT|PFCOLOR|TITLE|DOWN|NO-EMPTY-SPACE|FIT-LAST-COLUMN|MULTIPLE|SEPARATORS|NO-ASSIGN|NO-VALIDATE|NO-BOX|NO-ROW-MARKERS|OVERLAY|NO-COLUMN-SCROLLING|MAX-DATA-GUESS|ROW|COLUMN|SCROLLBAR-HORIZONTAL|SCROLLBAR-VERTICAL|SIZE|BY|SIZE-CHARS|SIZE-PIXELS|ENABLE|ALL|NEW|SHARED|PRIVATE|BUFFER-COMPARE|CASE-SENSITIVE|BINARY|NO-LOBS|USING|SAVE|RESULT|IN|EXPLICIT|COMPARES|END|THEN|BUFFER-COPY|BUFFER|TEMP-TABLE|PRESELECT|NAMESPACE-URI|NAMESPACE-PREFIX|XML-NODE-NAME|SERIALIZE-NAME|PROTECTED|STATIC|BUTTON|AUTO-GO|AUTO-ENDKEY|DEFAULT|IMAGE-DOWN|IMAGE|IMAGE-UP|IMAGE-INSENSITIVE|MOUSE-POINTER|LIKE|NO-FOCUS|FLAT-BUTTON|NO-CONVERT-3D-COLORS|CALL|OTHERWISE|OR|CATCH|AS|CLASS|CHOOSE|FIELD|COLOR|KEYS|PAUSE|GO-ON|METHOD|ABSTRACT|CONSTRUCTOR|DESTRUCTOR|OUTPUT|INPUT-OUTPUT|PROPERTY|GET|SET|INHERITS|IMPLEMENTS|USE-WIDGET-POOL|FINAL|SERIALIZABLE|OVERRIDE|PACKAGE-PRIVATE|PACKAGE-PROTECTED|PUBLIC|NON-SERIALIZABLE|INITIAL|NO-UNDO|VOID|EXTENT|TABLE|TABLE-HANDLE|DATASET|DATASET-HANDLE|APPEND|BIND|BY-VALUE|BY-REFERENCE|CLEAR|NO-PAUSE|CLOSE|STORED-PROCEDURE|STORED-PROC|PROC-STATUS|PROC-HANDLE|PROMPT|COMPILE|VALUE|INTO|XCODE|XREF-XML|DEBUG-LIST|PREPROCESS|OPTIONS|OPTIONS-FILE|MIN-SIZE|DEFAULT-UNTRANSLATABLE|LANGUAGES|TEXT-SEG-GROW|ATTR-SPACE|NO-ATTR-SPACE|STREAM-IO|V6FRAME|USE-REVVIDEO|USE-UNDERLINE|GENERATE-MD5|LISTING|PAGE-SIZE|PAGE-WIDTH|XREF|STRING-XREF|CONNECT|CONVERT|SOURCE|CODEPAGE|TARGET|COPY-LOB|FROM|FILE|STARTING|AT|TRIM|NO-CONVERT|CREATE|SOCKET|SERVER-SOCKET|WIDGET-POOL|COMBO-BOX|CONTROL-FRAME|DIALOG-BOX|EDITOR|FILL-IN|MENU|MENU-ITEM|RADIO-SET|RECTANGLE|SELECTION-LIST|SLIDER|SUB-MENU|TEXT|TOGGLE-BOX|WINDOW|TRIGGERS|ON|ENTRY|LEAVE|ALIAS|DATABASE|BUFFER-NAME|CLIENT-PRINCIPAL|DATA-SOURCE|X-DOCUMENT|X-NODEREF|SOAP-HEADER|SOAP-HEADER-ENTRYREF|SAX-READER|SAX-WRITER|SAX-ATTRIBUTES|PERSISTENT|SERVER|NEW-INSTANCE|REPLACE|TENANT|ROWID|RECID|XML-NODE-TYPE|SERIALIZE-HIDDEN|REFERENCE-ONLY|DATA-RELATION|RELATION-FIELDS|REPOSITION|NESTED|FOREIGN-KEY-HIDDEN|NOT-ACTIVE|RECURSIVE|PARENT-ID-RELATION|PARENT-ID-FIELD|PARENT-FIELDS-BEFORE|PARENT-FIELDS-AFTER|DDE|ADVISE|EXECUTE|INITIATE|REQUEST|SEND|TERMINATE|START|STOP|ITEM|TIME|COMMAND|APPLICATION|TOPIC|DELETE|PROCEDURE|WIDGET|DICTIONARY|DISABLE|DUMP|LOAD|OF|ALLOW-REPLICATION|UNLESS-HIDDEN|SKIP|DISCONNECT|SPACE|WHILE|TRANSACTION|UNDO|THROW|NEXT|RETRY|RETURN|ERROR|NO-APPLY|DOS|SILENT|EMPTY|ENUM|FLAGS|BLOCK-LEVEL|ROUTINE-LEVEL|EVENT|SIGNATURE|DELEGATE|EXPORT|DELIMITER|FIND|FIRST|LAST|PREV|CURRENT|NO-PREFETCH|SHARE|EXCLUSIVE|USE-INDEX|FIX-CODEPAGE|EACH|GROUP|TABLE-SCAN|BREAK|DESCENDING|COLLATE|FORM|NO-LABEL|COLON|VIEW-AS|RADIO-BUTTONS|HEADER|BACKGROUND|WIDGET-ID|FUNCTION|RETURNS|MAP|FORWARD|GET-KEY-VALUE|SECTION|KEY|HIDE|MESSAGE|IF|ELSE|CONVERT-3D-COLORS|STRETCH-TO-FIT|RETAIN-SHAPE|TRANSPARENT|IMPORT|UNFORMATTED|THROUGH|ECHO|NO-ECHO|NO-MAP|UNBUFFERED|STREAM|STREAM-HANDLE|TERMINAL|OS-DIR|NO-ATTR-LIST|LOB-DIR|INSERT|INTERFACE|LOAD-PICTURE|DIR|BASE-KEY|MENUBAR|RULE|DISABLED|ACCELERATOR|NORMAL|MESSAGES|ALERT-BOX|QUESTION|INFORMATION|INFO|WARNING|BUTTONS|YES-NO|YES-NO-CANCEL|OK-CANCEL|RETRY-CANCEL|OK|UPDATE|NEXT-PROMPT|DYNAMIC-NEW|THIS-OBJECT|SUPER|REVERT|ANYWHERE|RUN|WRITE|OLD|OPEN|INDEXED-REPOSITION|MAX-ROWS|OS-APPEND|OS-COMMAND|NO-CONSOLE|OS-COPY|OS-CREATE-DIR|OS-DELETE|OS-RENAME|LANDSCAPE|PORTRAIT|KEEP-MESSAGES|PAGED|NUM-COPIES|PRINTER|PAGE|PARAMETER|NOT|DECIMALS|BEFORE-HIDE|NO-MESSAGE|CDECL|ORDINAL|THREAD-SAFE|SAFE|EXTERNAL|PASCAL|STDCALL|PROCESS|EVENTS|PROMPT-FOR|PROMSGS|PROPATH|PUBLISH|PUT-BYTE|PUT-BYTES|PUT-BITS|PUT-SHORT|PUT-LONG|PUT-UNSIGNED-SHORT|PUT-UNSIGNED-LONG|PUT-INT64|PUT-FLOAT|PUT-DOUBLE|PUT-STRING|PUT|CURSOR|OFF|PUT-KEY-VALUE|SCREEN|CONTROL|CACHE|SCROLLING|RCODE-INFORMATION|FIELDS|QUIT|RAW-TRANSFER|READKEY|NO-FILL|EDGE-CHARS|EDGE-PIXELS|GRAPHIC-EDGE|ROUNDED|GROUP-BOX|RELEASE|UNTIL|FORWARDS|BACKWARDS|LOAD-RESULT-INTO|PARAM|SINGLE-RUN|SINGLETON|ASYNCHRONOUS|EVENT-PROCEDURE|EVENT-HANDLER|EVENT-HANDLER-CONTEXT|COMPLETE|SCROLL|FROM-CURRENT|UP|SEEK|SET-BYTE-ORDER|SET-POINTER-VALUE|SET-SIZE|SHOW-STATS|STATUS|GLOBAL|SUB-MENU-HELP|SUBSCRIBE|RUN-PROCEDURE|SYSTEM-DIALOG|ANSI-ONLY|FIXED-ONLY|MAX-SIZE|GET-DIR|INITIAL-DIR|GET-FILE|ASK-OVERWRITE|CREATE-TEST-FILE|DEFAULT-EXTENSION|MUST-EXIST|RETURN-TO-START-DIR|SAVE-AS|USE-FILENAME|PRINTER-SETUP|FILTERS|INITIAL-FILTER|SYSTEM-HELP|INDEX|IS|UNIQUE|PRIMARY|WORD-INDEX|LIKE-SEQUENTIAL|BEFORE-TABLE|ASCENDING|TTCODEPAGE|COLUMN-CODEPAGE|XML-DATA-TYPE|TRANSACTION-MODE|AUTOMATIC|CHAINED|TRIGGER|UNDERLINE|UNIX|UNLOAD|UNSUBSCRIBE|USE|ASSEMBLY|CURRENT-LANGUAGE|CURRENT-VALUE|DYNAMIC-CURRENT-VALUE|DYNAMIC-PROPERTY|FRAME-VALUE|LENGTH|RAW|SUBSTRING|VAR|VARIABLE|VIEW|WAIT-FOR|WORK-TABLE|WORKFILE|SUB-AVERAGE|SUB-COUNT|SUB-MAXIMUM|SUB-MINIMUM|SUB-TOTAL|COLUMN-OF|ROW-OF|X|X-OF|Y|Y-OF|COLON-ALIGNED|LEFT-ALIGNED|RIGHT-ALIGNED|BLINK-|BRIGHT-|RVV-|UNDERLINE-|INNER-LINES|SORT|SIMPLE|DROP-DOWN|DROP-DOWN-LIST|MAX-CHARS|AUTO-COMPLETION|UNIQUE-MATCH|LIST-ITEMS|LIST-ITEM-PAIRS|EDITING|INNER-CHARS|BUFFER-CHARS|BUFFER-LINES|LARGE|NO-WORD-WRAP|BLANK|DEBLANK|NO-TAB-STOP|SIDE-LABELS|CENTERED|THREE-D|PAGE-TOP|PAGE-BOTTOM|USE-TEXT|NO-HIDE|COLUMNS|COL|IMAGE-SIZE|IMAGE-SIZE-CHARS|IMAGE-SIZE-PIXELS|ENDKEY|QUERY-TUNING|ARRAY-MESSAGE|NO-ARRAY-MESSAGE|BIND-WHERE|NO-BIND-WHERE|CACHE-SIZE|BYTE|DEBUG|SQL|EXTENDED|NO-DEBUG|INDEX-HINT|NO-INDEX-HINT|JOIN-BY-SQLDB|NO-JOIN-BY-SQLDB|LOOKAHEAD|NO-LOOKAHEAD|ORDERED-JOIN|REVERSE-FROM|SEPARATE-CONNECTION|NO-SEPARATE-CONNECTION|DATA-BIND|PERFORMANCE|VERBOSE|HORIZONTAL|EXPAND|VERTICAL|TENANT-WHERE|SKIP-GROUP-DUPLICATES|LEFT|OUTER-JOIN|AND|SINGLE|NO-DRAG|MAX-VALUE|MIN-VALUE|NO-CURRENT-VALUE|LARGE-TO-SMALL|TIC-MARKS|NONE|TOP|BOTTOM|RIGHT|BOTH|FREQUENCY|STOP-AFTER|NATIVE|ACCUM|AMBIGUOUS|AVAIL|CAN-FIND|CURRENT-CHANGED|LOCKED)\\s*:",
+          "value": "(ACCUMULATE|AGGREGATE|COUNT|TOTAL|AVERAGE|MAXIMUM|MINIMUM|WHERE|APPLY|TO|ASSIGN|EXCEPT|NO-ERROR|INPUT|FRAME|BROWSE|WHEN|AVAILABLE|BELL|DEFINE|QUERY|SHARE-LOCK|EXCLUSIVE-LOCK|NO-LOCK|NO-WAIT|DISPLAY|WITH|FORMAT|LABEL|NO-LABELS|WIDTH|COLUMN-FONT|COLUMN-LABEL|COLUMN-DCOLOR|COLUMN-BGCOLOR|COLUMN-FGCOLOR|COLUMN-PFCOLOR|LABEL-FONT|LABEL-DCOLOR|LABEL-BGCOLOR|LABEL-FGCOLOR|LABEL-PFCOLOR|HELP|VALIDATE|AUTO-RETURN|DISABLE-AUTO-ZAP|MOVEABLE|RESIZABLE|CONTEXT-HELP-ID|DROP-TARGET|TOOLTIP|BGCOLOR|DCOLOR|FGCOLOR|FONT|PFCOLOR|TITLE|DOWN|NO-EMPTY-SPACE|FIT-LAST-COLUMN|MULTIPLE|SEPARATORS|NO-ASSIGN|NO-VALIDATE|NO-BOX|NO-ROW-MARKERS|OVERLAY|NO-COLUMN-SCROLLING|MAX-DATA-GUESS|ROW|COLUMN|SCROLLBAR-HORIZONTAL|SCROLLBAR-VERTICAL|SIZE|BY|SIZE-CHARS|SIZE-PIXELS|ENABLE|ALL|NEW|SHARED|PRIVATE|BUFFER-COMPARE|CASE-SENSITIVE|BINARY|NO-LOBS|USING|SAVE|RESULT|IN|EXPLICIT|COMPARES|END|THEN|BUFFER-COPY|BUFFER|TEMP-TABLE|PRESELECT|NAMESPACE-URI|NAMESPACE-PREFIX|XML-NODE-NAME|SERIALIZE-NAME|PROTECTED|STATIC|BUTTON|AUTO-GO|AUTO-ENDKEY|DEFAULT|IMAGE-DOWN|IMAGE|IMAGE-UP|IMAGE-INSENSITIVE|MOUSE-POINTER|LIKE|NO-FOCUS|FLAT-BUTTON|NO-CONVERT-3D-COLORS|CALL|OTHERWISE|OR|CATCH|AS|CLASS|CHOOSE|FIELD|COLOR|KEYS|PAUSE|GO-ON|METHOD|ABSTRACT|CONSTRUCTOR|DESTRUCTOR|OUTPUT|INPUT-OUTPUT|PROPERTY|GET|SET|INHERITS|IMPLEMENTS|USE-WIDGET-POOL|FINAL|SERIALIZABLE|OVERRIDE|PACKAGE-PRIVATE|PACKAGE-PROTECTED|PUBLIC|NON-SERIALIZABLE|INITIAL|NO-UNDO|VOID|EXTENT|TABLE|TABLE-HANDLE|DATASET|DATASET-HANDLE|APPEND|BIND|BY-VALUE|BY-REFERENCE|CLEAR|NO-PAUSE|CLOSE|STORED-PROCEDURE|STORED-PROC|PROC-STATUS|PROC-HANDLE|PROMPT|COMPILE|VALUE|INTO|XCODE|XREF-XML|DEBUG-LIST|PREPROCESS|OPTIONS|OPTIONS-FILE|MIN-SIZE|DEFAULT-UNTRANSLATABLE|LANGUAGES|TEXT-SEG-GROW|ATTR-SPACE|NO-ATTR-SPACE|STREAM-IO|V6FRAME|USE-REVVIDEO|USE-UNDERLINE|GENERATE-MD5|LISTING|PAGE-SIZE|PAGE-WIDTH|XREF|STRING-XREF|CONNECT|CONVERT|SOURCE|CODEPAGE|TARGET|COPY-LOB|FROM|FILE|STARTING|AT|TRIM|NO-CONVERT|CREATE|SOCKET|SERVER-SOCKET|WIDGET-POOL|COMBO-BOX|CONTROL-FRAME|DIALOG-BOX|EDITOR|FILL-IN|MENU|MENU-ITEM|RADIO-SET|RECTANGLE|SELECTION-LIST|SLIDER|SUB-MENU|TEXT|TOGGLE-BOX|WINDOW|TRIGGERS|ON|ENTRY|LEAVE|ALIAS|DATABASE|BUFFER-NAME|CLIENT-PRINCIPAL|DATA-SOURCE|X-DOCUMENT|X-NODEREF|SOAP-HEADER|SOAP-HEADER-ENTRYREF|SAX-READER|SAX-WRITER|SAX-ATTRIBUTES|PERSISTENT|SERVER|NEW-INSTANCE|REPLACE|TENANT|ROWID|RECID|XML-NODE-TYPE|SERIALIZE-HIDDEN|REFERENCE-ONLY|DATA-RELATION|RELATION-FIELDS|REPOSITION|NESTED|FOREIGN-KEY-HIDDEN|NOT-ACTIVE|RECURSIVE|PARENT-ID-RELATION|PARENT-ID-FIELD|PARENT-FIELDS-BEFORE|PARENT-FIELDS-AFTER|DDE|ADVISE|EXECUTE|INITIATE|REQUEST|SEND|TERMINATE|START|STOP|ITEM|TIME|COMMAND|APPLICATION|TOPIC|DELETE|PROCEDURE|WIDGET|DICTIONARY|DISABLE|DUMP|LOAD|OF|ALLOW-REPLICATION|UNLESS-HIDDEN|SKIP|DISCONNECT|SPACE|WHILE|TRANSACTION|UNDO|THROW|NEXT|RETRY|RETURN|ERROR|NO-APPLY|DOS|SILENT|EMPTY|ENUM|FLAGS|BLOCK-LEVEL|ROUTINE-LEVEL|EVENT|SIGNATURE|DELEGATE|EXPORT|DELIMITER|FIND|FIRST|LAST|PREV|CURRENT|NO-PREFETCH|SHARE|EXCLUSIVE|USE-INDEX|FIX-CODEPAGE|EACH|GROUP|TABLE-SCAN|BREAK|DESCENDING|COLLATE|FORM|NO-LABEL|COLON|VIEW-AS|RADIO-BUTTONS|HEADER|BACKGROUND|WIDGET-ID|FUNCTION|RETURNS|MAP|FORWARD|GET-KEY-VALUE|SECTION|KEY|HIDE|MESSAGE|IF|ELSE|CONVERT-3D-COLORS|STRETCH-TO-FIT|RETAIN-SHAPE|TRANSPARENT|IMPORT|UNFORMATTED|THROUGH|ECHO|NO-ECHO|NO-MAP|UNBUFFERED|STREAM|STREAM-HANDLE|TERMINAL|OS-DIR|NO-ATTR-LIST|LOB-DIR|INSERT|INTERFACE|LOAD-PICTURE|DIR|BASE-KEY|MENUBAR|RULE|DISABLED|ACCELERATOR|NORMAL|MESSAGES|ALERT-BOX|QUESTION|INFORMATION|INFO|WARNING|BUTTONS|YES-NO|YES-NO-CANCEL|OK-CANCEL|RETRY-CANCEL|OK|UPDATE|NEXT-PROMPT|DYNAMIC-NEW|THIS-OBJECT|SUPER|REVERT|ANYWHERE|RUN|WRITE|OLD|OPEN|INDEXED-REPOSITION|MAX-ROWS|OS-APPEND|OS-COMMAND|NO-CONSOLE|OS-COPY|OS-CREATE-DIR|OS-DELETE|OS-RENAME|LANDSCAPE|PORTRAIT|KEEP-MESSAGES|PAGED|NUM-COPIES|PRINTER|PAGE|PARAMETER|NOT|DECIMALS|BEFORE-HIDE|NO-MESSAGE|CDECL|ORDINAL|THREAD-SAFE|SAFE|EXTERNAL|PASCAL|STDCALL|PROCESS|EVENTS|PROMPT-FOR|PROMSGS|PROPATH|PUBLISH|PUT-BYTE|PUT-BYTES|PUT-BITS|PUT-SHORT|PUT-LONG|PUT-UNSIGNED-SHORT|PUT-UNSIGNED-LONG|PUT-INT64|PUT-FLOAT|PUT-DOUBLE|PUT-STRING|PUT|CURSOR|OFF|PUT-KEY-VALUE|SCREEN|CONTROL|CACHE|SCROLLING|RCODE-INFORMATION|FIELDS|QUIT|RAW-TRANSFER|READKEY|NO-FILL|EDGE-CHARS|EDGE-PIXELS|GRAPHIC-EDGE|ROUNDED|GROUP-BOX|RELEASE|UNTIL|FORWARDS|BACKWARDS|LOAD-RESULT-INTO|PARAM|SINGLE-RUN|SINGLETON|ASYNCHRONOUS|EVENT-PROCEDURE|EVENT-HANDLER|EVENT-HANDLER-CONTEXT|COMPLETE|SCROLL|FROM-CURRENT|UP|SEEK|SET-BYTE-ORDER|SET-POINTER-VALUE|SET-SIZE|SHOW-STATS|STATUS|GLOBAL|SUB-MENU-HELP|SUBSCRIBE|RUN-PROCEDURE|SYSTEM-DIALOG|ANSI-ONLY|FIXED-ONLY|MAX-SIZE|GET-DIR|INITIAL-DIR|GET-FILE|ASK-OVERWRITE|CREATE-TEST-FILE|DEFAULT-EXTENSION|MUST-EXIST|RETURN-TO-START-DIR|SAVE-AS|USE-FILENAME|PRINTER-SETUP|FILTERS|INITIAL-FILTER|SYSTEM-HELP|INDEX|IS|UNIQUE|PRIMARY|WORD-INDEX|LIKE-SEQUENTIAL|BEFORE-TABLE|ASCENDING|TTCODEPAGE|COLUMN-CODEPAGE|XML-DATA-TYPE|TRANSACTION-MODE|AUTOMATIC|CHAINED|TRIGGER|UNDERLINE|UNIX|UNLOAD|UNSUBSCRIBE|USE|ASSEMBLY|CURRENT-LANGUAGE|CURRENT-VALUE|DYNAMIC-CURRENT-VALUE|DYNAMIC-PROPERTY|FRAME-VALUE|LENGTH|RAW|SUBSTRING|VAR|VARIABLE|VIEW|WAIT-FOR|WORK-TABLE|WORKFILE|SUB-AVERAGE|SUB-COUNT|SUB-MAXIMUM|SUB-MINIMUM|SUB-TOTAL|COLUMN-OF|ROW-OF|X|X-OF|Y|Y-OF|COLON-ALIGNED|LEFT-ALIGNED|RIGHT-ALIGNED|BLINK-|BRIGHT-|RVV-|UNDERLINE-|INNER-LINES|SORT|SIMPLE|DROP-DOWN|DROP-DOWN-LIST|MAX-CHARS|AUTO-COMPLETION|UNIQUE-MATCH|LIST-ITEMS|LIST-ITEM-PAIRS|EDITING|INNER-CHARS|BUFFER-CHARS|BUFFER-LINES|LARGE|NO-WORD-WRAP|BLANK|DEBLANK|NO-TAB-STOP|SIDE-LABELS|CENTERED|THREE-D|PAGE-TOP|PAGE-BOTTOM|USE-TEXT|NO-HIDE|COLUMNS|COL|IMAGE-SIZE|IMAGE-SIZE-CHARS|IMAGE-SIZE-PIXELS|ENDKEY|END-KEY|QUERY-TUNING|ARRAY-MESSAGE|NO-ARRAY-MESSAGE|BIND-WHERE|NO-BIND-WHERE|CACHE-SIZE|BYTE|DEBUG|SQL|EXTENDED|NO-DEBUG|INDEX-HINT|NO-INDEX-HINT|JOIN-BY-SQLDB|NO-JOIN-BY-SQLDB|LOOKAHEAD|NO-LOOKAHEAD|ORDERED-JOIN|REVERSE-FROM|SEPARATE-CONNECTION|NO-SEPARATE-CONNECTION|DATA-BIND|PERFORMANCE|VERBOSE|HORIZONTAL|EXPAND|VERTICAL|TENANT-WHERE|SKIP-GROUP-DUPLICATES|LEFT|OUTER-JOIN|AND|SINGLE|NO-DRAG|MAX-VALUE|MIN-VALUE|NO-CURRENT-VALUE|LARGE-TO-SMALL|TIC-MARKS|NONE|TOP|BOTTOM|RIGHT|BOTH|FREQUENCY|STOP-AFTER|NATIVE|ACCUM|AMBIGUOUS|AVAIL|CAN-FIND|CURRENT-CHANGED|LOCKED)\\s*:",
           "flags": "i"
         }
       }
@@ -62852,6 +62933,58 @@
         }
       ]
     },
+    "buffer_handle_reference": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PATTERN",
+              "value": "BUFFER",
+              "flags": "i"
+            }
+          },
+          "named": false,
+          "value": "BUFFER"
+        },
+        {
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_identifier_or_qualified_name"
+          }
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_namecolon"
+        },
+        {
+          "type": "FIELD",
+          "name": "right",
+          "content": {
+            "type": "ALIAS",
+            "content": {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PATTERN",
+                  "value": "HANDLE",
+                  "flags": "i"
+                }
+              },
+              "named": false,
+              "value": "HANDLE"
+            },
+            "named": true,
+            "value": "identifier"
+          }
+        }
+      ]
+    },
     "_terminator": {
       "type": "CHOICE",
       "members": [
@@ -62905,6 +63038,10 @@
         {
           "type": "SYMBOL",
           "name": "handle_reference"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "buffer_handle_reference"
         },
         {
           "type": "SYMBOL",

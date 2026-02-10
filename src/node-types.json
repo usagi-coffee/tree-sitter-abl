@@ -36,6 +36,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -179,6 +183,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -393,6 +401,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -538,6 +550,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -799,6 +815,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -953,6 +973,10 @@
         },
         {
           "type": "boolean_literal",
+          "named": true
+        },
+        {
+          "type": "buffer_handle_reference",
           "named": true
         },
         {
@@ -1132,6 +1156,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -1259,6 +1287,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -1390,6 +1422,10 @@
         },
         {
           "type": "boolean_literal",
+          "named": true
+        },
+        {
+          "type": "buffer_handle_reference",
           "named": true
         },
         {
@@ -1525,6 +1561,10 @@
         },
         {
           "type": "boolean_literal",
+          "named": true
+        },
+        {
+          "type": "buffer_handle_reference",
           "named": true
         },
         {
@@ -1702,6 +1742,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -1946,6 +1990,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -2073,6 +2121,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -2279,6 +2331,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -2459,6 +2515,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -2586,6 +2646,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -2735,6 +2799,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -2862,6 +2930,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -2995,6 +3067,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -3122,6 +3198,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -3255,6 +3335,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -3382,6 +3466,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -3515,6 +3603,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -3645,6 +3737,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -3772,6 +3868,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -4039,6 +4139,10 @@
           "named": true
         },
         {
+          "type": "buffer_handle_reference",
+          "named": true
+        },
+        {
           "type": "can_find_expression",
           "named": true
         },
@@ -4174,6 +4278,10 @@
           "named": true
         },
         {
+          "type": "buffer_handle_reference",
+          "named": true
+        },
+        {
           "type": "can_find_expression",
           "named": true
         },
@@ -4306,6 +4414,10 @@
         },
         {
           "type": "boolean_literal",
+          "named": true
+        },
+        {
+          "type": "buffer_handle_reference",
           "named": true
         },
         {
@@ -5117,6 +5229,10 @@
           "named": true
         },
         {
+          "type": "buffer_handle_reference",
+          "named": true
+        },
+        {
           "type": "can_find_expression",
           "named": true
         },
@@ -5249,6 +5365,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -5395,6 +5515,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -5545,6 +5669,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -5852,6 +5980,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -5979,6 +6111,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -6270,6 +6406,40 @@
     }
   },
   {
+    "type": "buffer_handle_reference",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "macro_concatenated_name",
+            "named": true
+          },
+          {
+            "type": "qualified_name",
+            "named": true
+          }
+        ]
+      },
+      "right": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "button_definition",
     "named": true,
     "fields": {
@@ -6333,6 +6503,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -6508,6 +6682,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -6636,6 +6814,10 @@
         },
         {
           "type": "boolean_literal",
+          "named": true
+        },
+        {
+          "type": "buffer_handle_reference",
           "named": true
         },
         {
@@ -6775,6 +6957,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -6924,6 +7110,10 @@
         },
         {
           "type": "boolean_literal",
+          "named": true
+        },
+        {
+          "type": "buffer_handle_reference",
           "named": true
         },
         {
@@ -7834,6 +8024,10 @@
           "named": true
         },
         {
+          "type": "buffer_handle_reference",
+          "named": true
+        },
+        {
           "type": "can_find_expression",
           "named": true
         },
@@ -7982,6 +8176,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -8858,6 +9056,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -9322,6 +9524,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -9452,6 +9658,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -9579,6 +9789,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -9715,6 +9929,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -9855,6 +10073,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -10065,6 +10287,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -10298,6 +10524,10 @@
           "named": true
         },
         {
+          "type": "buffer_handle_reference",
+          "named": true
+        },
+        {
           "type": "can_find_expression",
           "named": true
         },
@@ -10430,6 +10660,10 @@
         },
         {
           "type": "boolean_literal",
+          "named": true
+        },
+        {
+          "type": "buffer_handle_reference",
           "named": true
         },
         {
@@ -10568,6 +10802,10 @@
           "named": true
         },
         {
+          "type": "buffer_handle_reference",
+          "named": true
+        },
+        {
           "type": "can_find_expression",
           "named": true
         },
@@ -10700,6 +10938,10 @@
         },
         {
           "type": "boolean_literal",
+          "named": true
+        },
+        {
+          "type": "buffer_handle_reference",
           "named": true
         },
         {
@@ -10868,6 +11110,10 @@
           "named": true
         },
         {
+          "type": "buffer_handle_reference",
+          "named": true
+        },
+        {
           "type": "can_find_expression",
           "named": true
         },
@@ -11000,6 +11246,10 @@
         },
         {
           "type": "boolean_literal",
+          "named": true
+        },
+        {
+          "type": "buffer_handle_reference",
           "named": true
         },
         {
@@ -11152,6 +11402,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -11279,6 +11533,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -11426,6 +11684,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -11556,6 +11818,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -11683,6 +11949,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -12516,6 +12786,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -12696,6 +12970,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -12821,6 +13099,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -12954,6 +13236,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -13081,6 +13367,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -13214,6 +13504,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -13341,6 +13635,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -13474,6 +13772,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -13601,6 +13903,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -13734,6 +14040,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -13861,6 +14171,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -13994,6 +14308,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -14121,6 +14439,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -14254,6 +14576,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -14381,6 +14707,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -14514,6 +14844,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -14641,6 +14975,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -14774,6 +15112,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -14901,6 +15243,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -15034,6 +15380,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -15164,6 +15514,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -15291,6 +15645,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -15442,6 +15800,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -15585,6 +15947,10 @@
         },
         {
           "type": "boolean_literal",
+          "named": true
+        },
+        {
+          "type": "buffer_handle_reference",
           "named": true
         },
         {
@@ -15938,6 +16304,10 @@
           "named": true
         },
         {
+          "type": "buffer_handle_reference",
+          "named": true
+        },
+        {
           "type": "can_find_expression",
           "named": true
         },
@@ -16083,6 +16453,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -16220,6 +16594,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -16385,6 +16763,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -16512,6 +16894,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -16645,6 +17031,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -16772,6 +17162,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -16905,6 +17299,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -17035,6 +17433,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -17162,6 +17564,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -17339,6 +17745,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -17478,6 +17888,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -17631,6 +18045,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -17758,6 +18176,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -17901,6 +18323,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -18031,6 +18457,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -18158,6 +18588,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -18321,6 +18755,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -18448,6 +18886,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -18662,6 +19104,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -18989,6 +19435,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -19119,6 +19569,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -19246,6 +19700,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -19389,6 +19847,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -19516,6 +19978,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -19717,6 +20183,10 @@
           "named": true
         },
         {
+          "type": "buffer_handle_reference",
+          "named": true
+        },
+        {
           "type": "can_find_expression",
           "named": true
         },
@@ -19849,6 +20319,10 @@
         },
         {
           "type": "boolean_literal",
+          "named": true
+        },
+        {
+          "type": "buffer_handle_reference",
           "named": true
         },
         {
@@ -19997,6 +20471,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -20127,6 +20605,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -20254,6 +20736,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -20394,6 +20880,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -20538,6 +21028,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -20709,6 +21203,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -20836,6 +21334,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -21002,6 +21504,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -21151,6 +21657,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -21347,6 +21857,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -21569,6 +22083,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -21783,6 +22301,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -21991,6 +22513,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -22126,6 +22652,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -22266,6 +22796,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -22431,6 +22965,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -22571,6 +23109,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -22698,6 +23240,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -22843,6 +23389,10 @@
         },
         {
           "type": "boolean_literal",
+          "named": true
+        },
+        {
+          "type": "buffer_handle_reference",
           "named": true
         },
         {
@@ -23017,6 +23567,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -23177,6 +23731,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -23313,6 +23871,10 @@
           "named": true
         },
         {
+          "type": "buffer_handle_reference",
+          "named": true
+        },
+        {
           "type": "can_find_expression",
           "named": true
         },
@@ -23445,6 +24007,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -23606,6 +24172,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -23793,6 +24363,10 @@
           "named": true
         },
         {
+          "type": "buffer_handle_reference",
+          "named": true
+        },
+        {
           "type": "can_find_expression",
           "named": true
         },
@@ -23925,6 +24499,10 @@
         },
         {
           "type": "boolean_literal",
+          "named": true
+        },
+        {
+          "type": "buffer_handle_reference",
           "named": true
         },
         {
@@ -24786,6 +25364,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -24988,6 +25570,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -25302,6 +25888,10 @@
           "named": true
         },
         {
+          "type": "buffer_handle_reference",
+          "named": true
+        },
+        {
           "type": "can_find_expression",
           "named": true
         },
@@ -25442,6 +26032,10 @@
         },
         {
           "type": "boolean_literal",
+          "named": true
+        },
+        {
+          "type": "buffer_handle_reference",
           "named": true
         },
         {
@@ -25622,6 +26216,10 @@
           "named": true
         },
         {
+          "type": "buffer_handle_reference",
+          "named": true
+        },
+        {
           "type": "can_find_expression",
           "named": true
         },
@@ -25754,6 +26352,10 @@
         },
         {
           "type": "boolean_literal",
+          "named": true
+        },
+        {
+          "type": "buffer_handle_reference",
           "named": true
         },
         {
@@ -25899,6 +26501,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -26076,6 +26682,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -26203,6 +26813,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -26346,6 +26960,10 @@
         },
         {
           "type": "boolean_literal",
+          "named": true
+        },
+        {
+          "type": "buffer_handle_reference",
           "named": true
         },
         {
@@ -26539,6 +27157,10 @@
           "named": true
         },
         {
+          "type": "buffer_handle_reference",
+          "named": true
+        },
+        {
           "type": "can_find_expression",
           "named": true
         },
@@ -26678,6 +27300,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -26808,6 +27434,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -26935,6 +27565,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -27086,6 +27720,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -27308,6 +27946,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -27462,6 +28104,10 @@
           "named": true
         },
         {
+          "type": "buffer_handle_reference",
+          "named": true
+        },
+        {
           "type": "can_find_expression",
           "named": true
         },
@@ -27594,6 +28240,10 @@
         },
         {
           "type": "boolean_literal",
+          "named": true
+        },
+        {
+          "type": "buffer_handle_reference",
           "named": true
         },
         {
@@ -27756,6 +28406,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -27896,6 +28550,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -28023,6 +28681,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -28214,6 +28876,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -28341,6 +29007,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -28512,6 +29182,10 @@
         },
         {
           "type": "boolean_literal",
+          "named": true
+        },
+        {
+          "type": "buffer_handle_reference",
           "named": true
         },
         {
@@ -28706,6 +29380,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -28833,6 +29511,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -28966,6 +29648,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -29093,6 +29779,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -29226,6 +29916,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -29353,6 +30047,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -29486,6 +30184,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -29616,6 +30318,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -29743,6 +30449,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -29906,6 +30616,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -30033,6 +30747,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -30184,6 +30902,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -30311,6 +31033,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -30444,6 +31170,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -30571,6 +31301,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -30704,6 +31438,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -30831,6 +31569,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -30964,6 +31706,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -31091,6 +31837,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -31224,6 +31974,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -31351,6 +32105,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -31563,6 +32321,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -31698,6 +32460,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -31837,6 +32603,10 @@
         },
         {
           "type": "boolean_literal",
+          "named": true
+        },
+        {
+          "type": "buffer_handle_reference",
           "named": true
         },
         {
@@ -32007,6 +32777,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -32167,6 +32941,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -32305,6 +33083,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -32432,6 +33214,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -32572,6 +33358,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -33627,6 +34417,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -33757,6 +34551,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -33884,6 +34682,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -34124,6 +34926,10 @@
         },
         {
           "type": "boolean_literal",
+          "named": true
+        },
+        {
+          "type": "buffer_handle_reference",
           "named": true
         },
         {
@@ -35678,6 +36484,10 @@
           "named": true
         },
         {
+          "type": "buffer_handle_reference",
+          "named": true
+        },
+        {
           "type": "can_find_expression",
           "named": true
         },
@@ -35842,6 +36652,10 @@
           "named": true
         },
         {
+          "type": "buffer_handle_reference",
+          "named": true
+        },
+        {
           "type": "can_find_expression",
           "named": true
         },
@@ -35996,6 +36810,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -36236,6 +37054,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -36662,6 +37484,10 @@
           "named": true
         },
         {
+          "type": "buffer_handle_reference",
+          "named": true
+        },
+        {
           "type": "can_find_expression",
           "named": true
         },
@@ -36883,6 +37709,10 @@
           "named": true
         },
         {
+          "type": "buffer_handle_reference",
+          "named": true
+        },
+        {
           "type": "can_find_expression",
           "named": true
         },
@@ -37019,6 +37849,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -37207,6 +38041,10 @@
           "named": true
         },
         {
+          "type": "buffer_handle_reference",
+          "named": true
+        },
+        {
           "type": "can_find_expression",
           "named": true
         },
@@ -37389,6 +38227,10 @@
           "named": true
         },
         {
+          "type": "buffer_handle_reference",
+          "named": true
+        },
+        {
           "type": "can_find_expression",
           "named": true
         },
@@ -37557,6 +38399,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -37813,6 +38659,10 @@
           "named": true
         },
         {
+          "type": "buffer_handle_reference",
+          "named": true
+        },
+        {
           "type": "can_find_expression",
           "named": true
         },
@@ -37945,6 +38795,10 @@
         },
         {
           "type": "boolean_literal",
+          "named": true
+        },
+        {
+          "type": "buffer_handle_reference",
           "named": true
         },
         {
@@ -38083,6 +38937,10 @@
           "named": true
         },
         {
+          "type": "buffer_handle_reference",
+          "named": true
+        },
+        {
           "type": "can_find_expression",
           "named": true
         },
@@ -38215,6 +39073,10 @@
         },
         {
           "type": "boolean_literal",
+          "named": true
+        },
+        {
+          "type": "buffer_handle_reference",
           "named": true
         },
         {
@@ -38365,6 +39227,10 @@
         },
         {
           "type": "boolean_literal",
+          "named": true
+        },
+        {
+          "type": "buffer_handle_reference",
           "named": true
         },
         {
@@ -38643,6 +39509,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -38779,6 +39649,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -38906,6 +39780,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -39039,6 +39917,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -39166,6 +40048,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -39302,6 +40188,10 @@
         },
         {
           "type": "boolean_literal",
+          "named": true
+        },
+        {
+          "type": "buffer_handle_reference",
           "named": true
         },
         {
@@ -39504,6 +40394,10 @@
           "named": true
         },
         {
+          "type": "buffer_handle_reference",
+          "named": true
+        },
+        {
           "type": "can_find_expression",
           "named": true
         },
@@ -39673,6 +40567,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -39800,6 +40698,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -39933,6 +40835,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -40060,6 +40966,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -40213,6 +41123,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -40340,6 +41254,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -40587,6 +41505,10 @@
         },
         {
           "type": "boolean_literal",
+          "named": true
+        },
+        {
+          "type": "buffer_handle_reference",
           "named": true
         },
         {
@@ -41020,6 +41942,10 @@
           "named": true
         },
         {
+          "type": "buffer_handle_reference",
+          "named": true
+        },
+        {
           "type": "can_find_expression",
           "named": true
         },
@@ -41253,6 +42179,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -41410,6 +42340,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -41559,6 +42493,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -41719,6 +42657,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -41846,6 +42788,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -41995,6 +42941,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -42155,6 +43105,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -42301,6 +43255,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -42405,7 +43363,7 @@
     "named": true,
     "fields": {
       "event": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
           {
@@ -43189,6 +44147,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -43346,6 +44308,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -43510,6 +44476,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -43756,6 +44726,10 @@
         },
         {
           "type": "boolean_literal",
+          "named": true
+        },
+        {
+          "type": "buffer_handle_reference",
           "named": true
         },
         {
@@ -44215,6 +45189,10 @@
           "named": true
         },
         {
+          "type": "buffer_handle_reference",
+          "named": true
+        },
+        {
           "type": "can_find_expression",
           "named": true
         },
@@ -44371,6 +45349,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -44498,6 +45480,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -44631,6 +45617,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -44761,6 +45751,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -44888,6 +45882,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -45029,6 +46027,10 @@
         },
         {
           "type": "boolean_literal",
+          "named": true
+        },
+        {
+          "type": "buffer_handle_reference",
           "named": true
         },
         {
@@ -45517,6 +46519,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -45734,6 +46740,10 @@
           "named": true
         },
         {
+          "type": "buffer_handle_reference",
+          "named": true
+        },
+        {
           "type": "can_find_expression",
           "named": true
         },
@@ -45881,6 +46891,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -46061,6 +47075,10 @@
           "named": true
         },
         {
+          "type": "buffer_handle_reference",
+          "named": true
+        },
+        {
           "type": "can_find_expression",
           "named": true
         },
@@ -46193,6 +47211,10 @@
         },
         {
           "type": "boolean_literal",
+          "named": true
+        },
+        {
+          "type": "buffer_handle_reference",
           "named": true
         },
         {
@@ -46331,6 +47353,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -46458,6 +47484,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -46591,6 +47621,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -46718,6 +47752,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -47039,6 +48077,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -47172,6 +48214,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -48174,6 +49220,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -48301,6 +49351,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -48450,6 +49504,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -48580,6 +49638,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -48707,6 +49769,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -48850,6 +49916,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -48986,6 +50056,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -49113,6 +50187,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -49252,6 +50330,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -49379,6 +50461,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -49512,6 +50598,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -49639,6 +50729,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -49788,6 +50882,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -49918,6 +51016,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -50045,6 +51147,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -50194,6 +51300,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -50334,6 +51444,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -50462,6 +51576,10 @@
         },
         {
           "type": "boolean_literal",
+          "named": true
+        },
+        {
+          "type": "buffer_handle_reference",
           "named": true
         },
         {
@@ -50749,6 +51867,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -50876,6 +51998,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -51009,6 +52135,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -51136,6 +52266,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -51285,6 +52419,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -51422,6 +52560,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -51563,6 +52705,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -51808,6 +52954,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -51935,6 +53085,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -52218,6 +53372,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -52345,6 +53503,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -52624,6 +53786,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -52794,6 +53960,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -52921,6 +54091,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -53082,6 +54256,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -53209,6 +54387,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -53400,6 +54582,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -53540,6 +54726,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -53667,6 +54857,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -53800,6 +54994,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -53927,6 +55125,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -54071,6 +55273,10 @@
           "named": true
         },
         {
+          "type": "buffer_handle_reference",
+          "named": true
+        },
+        {
           "type": "can_find_expression",
           "named": true
         },
@@ -54208,6 +55414,10 @@
         },
         {
           "type": "boolean_literal",
+          "named": true
+        },
+        {
+          "type": "buffer_handle_reference",
           "named": true
         },
         {
@@ -54501,6 +55711,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -54628,6 +55842,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -54764,6 +55982,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -55027,6 +56249,10 @@
           "named": true
         },
         {
+          "type": "buffer_handle_reference",
+          "named": true
+        },
+        {
           "type": "can_find_expression",
           "named": true
         },
@@ -55186,6 +56412,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -55313,6 +56543,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -55450,6 +56684,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -55580,6 +56818,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -55707,6 +56949,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -55858,6 +57104,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -56033,6 +57283,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -56184,6 +57438,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -56597,6 +57855,10 @@
           "named": true
         },
         {
+          "type": "buffer_handle_reference",
+          "named": true
+        },
+        {
           "type": "can_find_expression",
           "named": true
         },
@@ -56729,6 +57991,10 @@
         },
         {
           "type": "boolean_literal",
+          "named": true
+        },
+        {
+          "type": "buffer_handle_reference",
           "named": true
         },
         {
@@ -56867,6 +58133,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -56994,6 +58264,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -57133,6 +58407,10 @@
           "named": true
         },
         {
+          "type": "buffer_handle_reference",
+          "named": true
+        },
+        {
           "type": "can_find_expression",
           "named": true
         },
@@ -57265,6 +58543,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -57401,6 +58683,10 @@
         },
         {
           "type": "boolean_literal",
+          "named": true
+        },
+        {
+          "type": "buffer_handle_reference",
           "named": true
         },
         {
@@ -57596,6 +58882,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -58409,6 +59699,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -58545,6 +59839,10 @@
           "named": true
         },
         {
+          "type": "buffer_handle_reference",
+          "named": true
+        },
+        {
           "type": "can_find_expression",
           "named": true
         },
@@ -58677,6 +59975,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -58823,6 +60125,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -59242,6 +60548,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -59398,6 +60708,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -59528,6 +60842,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -59655,6 +60973,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -59814,6 +61136,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -59941,6 +61267,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -60110,6 +61440,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -60240,6 +61574,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -60367,6 +61705,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -60540,6 +61882,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -60698,6 +62044,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -61045,6 +62395,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -61244,6 +62598,10 @@
           "named": true
         },
         {
+          "type": "buffer_handle_reference",
+          "named": true
+        },
+        {
           "type": "can_find_expression",
           "named": true
         },
@@ -61384,6 +62742,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -61511,6 +62873,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -61696,6 +63062,10 @@
         },
         {
           "type": "buffer_definition",
+          "named": true
+        },
+        {
+          "type": "buffer_handle_reference",
           "named": true
         },
         {
@@ -62456,6 +63826,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -62590,6 +63964,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -62717,6 +64095,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -62897,6 +64279,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -63100,6 +64486,10 @@
           "named": true
         },
         {
+          "type": "buffer_handle_reference",
+          "named": true
+        },
+        {
           "type": "can_find_expression",
           "named": true
         },
@@ -63232,6 +64622,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -63388,6 +64782,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -63548,6 +64946,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -63771,6 +65173,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -63917,6 +65323,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -64053,6 +65463,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -64183,6 +65597,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -64310,6 +65728,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -64446,6 +65868,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -64665,6 +66091,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -64820,6 +66250,10 @@
           "named": true
         },
         {
+          "type": "buffer_handle_reference",
+          "named": true
+        },
+        {
           "type": "can_find_expression",
           "named": true
         },
@@ -64970,6 +66404,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -65097,6 +66535,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -65228,6 +66670,10 @@
         },
         {
           "type": "boolean_literal",
+          "named": true
+        },
+        {
+          "type": "buffer_handle_reference",
           "named": true
         },
         {
@@ -65390,6 +66836,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -65517,6 +66967,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -65650,6 +67104,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -65777,6 +67235,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -65910,6 +67372,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -66037,6 +67503,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -66170,6 +67640,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -66297,6 +67771,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -66430,6 +67908,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -66557,6 +68039,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -66690,6 +68176,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -66817,6 +68307,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -66957,6 +68451,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -67103,6 +68601,10 @@
         },
         {
           "type": "boolean_literal",
+          "named": true
+        },
+        {
+          "type": "buffer_handle_reference",
           "named": true
         },
         {
@@ -67359,6 +68861,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -67505,6 +69011,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -67639,6 +69149,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -67769,6 +69283,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -67896,6 +69414,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -68039,6 +69561,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -68166,6 +69692,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -68300,6 +69830,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -68451,6 +69985,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -68588,6 +70126,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -68867,6 +70409,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -68994,6 +70540,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -69215,6 +70765,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -69420,6 +70974,10 @@
             "named": true
           },
           {
+            "type": "buffer_handle_reference",
+            "named": true
+          },
+          {
             "type": "can_find_expression",
             "named": true
           },
@@ -69548,6 +71106,10 @@
         },
         {
           "type": "boolean_literal",
+          "named": true
+        },
+        {
+          "type": "buffer_handle_reference",
           "named": true
         },
         {
@@ -69683,6 +71245,10 @@
           },
           {
             "type": "boolean_literal",
+            "named": true
+          },
+          {
+            "type": "buffer_handle_reference",
             "named": true
           },
           {
@@ -70101,6 +71667,10 @@
         },
         {
           "type": "boolean_literal",
+          "named": true
+        },
+        {
+          "type": "buffer_handle_reference",
           "named": true
         },
         {
@@ -71068,6 +72638,10 @@
   },
   {
     "type": "END",
+    "named": false
+  },
+  {
+    "type": "END-KEY",
     "named": false
   },
   {
