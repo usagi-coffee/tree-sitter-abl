@@ -106,7 +106,7 @@ module.exports = grammar({
     $.block_comment,
   ],
   extras: ($) => [
-    /[\s\f\uFEFF\u2060\u200B]|\\\r?\n/,
+    /[\s\f\uFEFF\u2060\u200B]|\\\r?\n|~[ \t]*\r?\n/,
     $.comment,
     $.constant,
     $.include,
