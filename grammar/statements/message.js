@@ -74,7 +74,9 @@ module.exports = ({ kw }) => ({
           seq(kw("LIKE"), field("like", $.__message_field_name)),
         ),
       ),
-      optional(seq(kw("FORMAT"), field("format", $.string_literal))),
+      optional(
+        seq(kw("FORMAT", { offset: 4 }), field("format", $.string_literal)),
+      ),
       optional(kw("AUTO-RETURN")),
     ),
   __message_field_name: ($) => $._identifier_or_qualified_name,

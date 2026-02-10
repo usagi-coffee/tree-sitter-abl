@@ -75,7 +75,7 @@ module.exports = ({ kw }) => ({
       alias($.__browse_resizable_option, $.resizable_option),
     ),
   __browse_format_phrase: ($) =>
-    seq(kw("FORMAT"), field("format", $.string_literal)),
+    seq(kw("FORMAT", { offset: 4 }), field("format", $.string_literal)),
   __browse_option_expression: ($) => prec.right($._expression),
 
   __browse_option: ($) =>
@@ -120,8 +120,7 @@ module.exports = ({ kw }) => ({
 
   __browse_label_option: ($) => seq(kw("LABEL"), $.string_literal),
   __browse_no_labels_option: ($) => kw("NO-LABELS"),
-  __browse_width_option: ($) =>
-    seq(kw("WIDTH"), $.__browse_option_expression),
+  __browse_width_option: ($) => seq(kw("WIDTH"), $.__browse_option_expression),
   __browse_column_font_option: ($) =>
     seq(kw("COLUMN-FONT"), $.__browse_option_expression),
   __browse_column_label_option: ($) =>
@@ -226,10 +225,7 @@ module.exports = ({ kw }) => ({
 
   __browse_enable_field: ($) =>
     seq(
-      field(
-        "field",
-        choice($._identifier_or_qualified_name, $.object_access),
-      ),
+      field("field", choice($._identifier_or_qualified_name, $.object_access)),
       optional(seq("[", optional($._array_subscript), "]")),
     ),
   __browse_modifier: ($) =>

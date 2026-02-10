@@ -119,7 +119,7 @@ module.exports = ({ kw }) => ({
       $.__temp_table_extent_option,
       seq(kw("FONT"), $._expression),
       seq(kw("FGCOLOR"), $._expression),
-      seq(kw("FORMAT"), $.string_literal),
+      seq(kw("FORMAT", { offset: 4 }), $.string_literal),
       seq(kw("HELP"), $.string_literal),
       seq(
         kw("INITIAL"),

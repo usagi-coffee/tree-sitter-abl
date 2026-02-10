@@ -1884,7 +1884,7 @@
             "type": "TOKEN",
             "content": {
               "type": "PATTERN",
-              "value": "FORMAT",
+              "value": "FORM(A(T)?)?",
               "flags": "i"
             }
           },
@@ -20928,7 +20928,7 @@
                             "type": "TOKEN",
                             "content": {
                               "type": "PATTERN",
-                              "value": "FORMAT",
+                              "value": "FORM(A(T)?)?",
                               "flags": "i"
                             }
                           },
@@ -21044,7 +21044,7 @@
                           "type": "TOKEN",
                           "content": {
                             "type": "PATTERN",
-                            "value": "FORMAT",
+                            "value": "FORM(A(T)?)?",
                             "flags": "i"
                           }
                         },
@@ -27816,7 +27816,7 @@
                     "type": "TOKEN",
                     "content": {
                       "type": "PATTERN",
-                      "value": "FORMAT",
+                      "value": "FORM(A(T)?)?",
                       "flags": "i"
                     }
                   },
@@ -31865,7 +31865,7 @@
             "type": "TOKEN",
             "content": {
               "type": "PATTERN",
-              "value": "FORMAT",
+              "value": "FORM(A(T)?)?",
               "flags": "i"
             }
           },
@@ -43775,7 +43775,7 @@
                 "type": "TOKEN",
                 "content": {
                   "type": "PATTERN",
-                  "value": "FORMAT",
+                  "value": "FORM(A(T)?)?",
                   "flags": "i"
                 }
               },
@@ -44972,7 +44972,7 @@
                 "type": "TOKEN",
                 "content": {
                   "type": "PATTERN",
-                  "value": "FORMAT",
+                  "value": "FORM(A(T)?)?",
                   "flags": "i"
                 }
               },
@@ -48009,7 +48009,7 @@
             "type": "TOKEN",
             "content": {
               "type": "PATTERN",
-              "value": "FORMAT",
+              "value": "FORM(A(T)?)?",
               "flags": "i"
             }
           },
@@ -54750,7 +54750,7 @@
             "type": "TOKEN",
             "content": {
               "type": "PATTERN",
-              "value": "FORMAT",
+              "value": "FORM(A(T)?)?",
               "flags": "i"
             }
           },
@@ -55438,7 +55438,7 @@
                     "type": "TOKEN",
                     "content": {
                       "type": "PATTERN",
-                      "value": "SIDE-LABELS",
+                      "value": "SIDE-LABEL(S)?",
                       "flags": "i"
                     }
                   },
@@ -55456,7 +55456,7 @@
                     "type": "TOKEN",
                     "content": {
                       "type": "PATTERN",
-                      "value": "CENTERED",
+                      "value": "CENTER(E(D)?)?",
                       "flags": "i"
                     }
                   },

@@ -16,14 +16,21 @@ module.exports = ({ kw }) => ({
             alias(kw("MENU"), $.identifier),
             optional(alias(kw("NO-LABEL"), $.no_label)),
             optional(alias(kw("NO-LABELS"), $.no_labels)),
-            optional(seq(kw("FORMAT"), field("format", $.string_literal))),
+            optional(
+              seq(
+                kw("FORMAT", { offset: 4 }),
+                field("format", $.string_literal),
+              ),
+            ),
           ),
         ),
         seq(
           field("field", $._expression),
           optional(seq(kw("COLON"), field("colon", $._expression))),
           optional(seq(kw("LABEL"), field("label", $.__form_label))),
-          optional(seq(kw("FORMAT"), field("format", $.string_literal))),
+          optional(
+            seq(kw("FORMAT", { offset: 4 }), field("format", $.string_literal)),
+          ),
           optional(alias($.__form_view_as, $.view_as_phrase)),
         ),
         seq(kw("SKIP"), optional(seq("(", $._expression, ")"))),

@@ -75,7 +75,7 @@ module.exports = ({ kw }) => ({
     seq(kw("EXTENT"), optional($.__variable_extent_size)),
 
   __variable_format_phrase: ($) =>
-    seq(kw("FORMAT"), field("format", $.string_literal)),
+    seq(kw("FORMAT", { offset: 4 }), field("format", $.string_literal)),
 
   __variable_initial_option: ($) =>
     seq(

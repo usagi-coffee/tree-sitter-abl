@@ -98,7 +98,7 @@ module.exports = ({ kw }) => ({
     seq(optional(kw("NOT")), kw("CASE-SENSITIVE")),
   __parameter_column_label: ($) => seq(kw("COLUMN-LABEL"), $.string_literal),
   __parameter_decimals: ($) => seq(kw("DECIMALS"), $.number_literal),
-  __parameter_format: ($) => seq(kw("FORMAT"), $.string_literal),
+  __parameter_format: ($) => seq(kw("FORMAT", { offset: 4 }), $.string_literal),
   __parameter_label_option: ($) =>
     seq(kw("LABEL"), $.string_literal, repeat(seq(",", $.string_literal))),
   __parameter_extent_size: ($) =>

@@ -901,3 +901,18 @@ END.
             (identifier)))
         (format_phrase
           (string_literal))))))
+
+================================================================================
+VARIABLE - FORMAT abbreviation
+================================================================================
+
+DEF VAR l_linii AS INTEGER FORMA ">>9".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    (identifier)
+    (identifier)
+    (format_phrase
+      (string_literal))))

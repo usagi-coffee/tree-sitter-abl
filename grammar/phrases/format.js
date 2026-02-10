@@ -85,7 +85,7 @@ module.exports = ({ kw }) => ({
 
   __format_format: ($) =>
     seq(
-      kw("FORMAT"),
+      kw("FORMAT", { offset: 4 }),
       choice(
         field("format", $.string_literal),
         seq("(", field("format", $.string_literal), ")"),
@@ -106,8 +106,7 @@ module.exports = ({ kw }) => ({
     choice(seq(kw("LABEL"), $.__format_labels), kw("NO-LABELS")),
   __format_labels: ($) =>
     seq(field("label", $._expression), optional($.__format_labels_tail)),
-  __format_labels_tail: ($) =>
-    repeat1(seq(",", field("label", $._expression))),
+  __format_labels_tail: ($) => repeat1(seq(",", field("label", $._expression))),
 
   __format_validate: ($) =>
     seq(
