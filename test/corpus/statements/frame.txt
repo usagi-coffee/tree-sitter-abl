@@ -353,7 +353,7 @@ DEF FRAME atSimple2 "Label: " Customer.Name AT ROW 2 COLUMN 10.
     field: (qualified_name
       left: (identifier)
       right: (identifier))
-    (at_phrase
+    (format_phrase
       column: (number_literal)))
   (frame_definition
     name: (identifier)
@@ -361,7 +361,7 @@ DEF FRAME atSimple2 "Label: " Customer.Name AT ROW 2 COLUMN 10.
     field: (qualified_name
       left: (identifier)
       right: (identifier))
-    (at_phrase
+    (format_phrase
       row: (number_literal)
       column: (number_literal))))
 
@@ -378,7 +378,7 @@ DEFINE FRAME {&FRAME_NAME} bPolicy AT COLUMN 2 ROW 2.
     name: (constant
       (identifier))
     field: (identifier)
-    (at_phrase
+    (format_phrase
       column: (number_literal)
       row: (number_literal))))
 
@@ -398,13 +398,13 @@ DEFINE FRAME toPhrase
     field: (qualified_name
       left: (identifier)
       right: (identifier))
-    field: (identifier)
-    (number_literal)
+    (format_phrase
+      to: (number_literal))
     field: (qualified_name
       left: (identifier)
       right: (identifier))
-    field: (identifier)
-    (number_literal)))
+    (format_phrase
+      to: (number_literal))))
 
 ================================================================================
 FRAME - String with BGCOLOR
@@ -578,9 +578,9 @@ DEFINE FRAME combined
     field: (qualified_name
       left: (identifier)
       right: (identifier))
-    field: (identifier)
-    (number_literal)
-    (number_literal)
+    (format_phrase
+      bgcolor: (number_literal)
+      fgcolor: (number_literal))
     (frame_phrase
       (size_phrase
         width: (number_literal)
@@ -708,13 +708,13 @@ WAIT-FOR WINDOW-CLOSE OF FRAME cust-fr.
     (qualified_name
       (identifier)
       (identifier))
-    (identifier)
-    (string_literal)
+    (format_phrase
+      (string_literal))
     (qualified_name
       (identifier)
       (identifier))
-    (identifier)
-    (string_literal)
+    (format_phrase
+      (string_literal))
     (qualified_name
       (identifier)
       (identifier))
@@ -778,8 +778,8 @@ WAIT-FOR WINDOW-CLOSE OF FRAME cust-fr.
     (qualified_name
       (identifier)
       (identifier))
-    (identifier)
-    (string_literal)
+    (format_phrase
+      (string_literal))
     (qualified_name
       (identifier)
       (identifier))
@@ -920,7 +920,7 @@ WAIT-FOR WINDOW-CLOSE OF FRAME cust-fr.
     (qualified_name
       (identifier)
       (identifier))
-    (at_phrase
+    (format_phrase
       (number_literal)
       (number_literal))
     (frame_phrase
@@ -935,43 +935,43 @@ WAIT-FOR WINDOW-CLOSE OF FRAME cust-fr.
     (qualified_name
       (identifier)
       (identifier))
-    (identifier)
-    (number_literal)
+    (format_phrase
+      (number_literal))
     (qualified_name
       (identifier)
       (identifier))
-    (identifier)
-    (number_literal)
+    (format_phrase
+      (number_literal))
     (qualified_name
       (identifier)
       (identifier))
-    (identifier)
-    (number_literal)
+    (format_phrase
+      (number_literal))
     (qualified_name
       (identifier)
       (identifier))
-    (identifier)
-    (number_literal)
+    (format_phrase
+      (number_literal))
     (qualified_name
       (identifier)
       (identifier))
-    (identifier)
-    (number_literal)
+    (format_phrase
+      (number_literal))
     (qualified_name
       (identifier)
       (identifier))
-    (identifier)
-    (number_literal)
+    (format_phrase
+      (number_literal))
     (qualified_name
       (identifier)
       (identifier))
-    (identifier)
-    (number_literal)
+    (format_phrase
+      (number_literal))
     (qualified_name
       (identifier)
       (identifier))
-    (identifier)
-    (number_literal)
+    (format_phrase
+      (number_literal))
     (frame_phrase
       (side_labels)
       (string_literal)
@@ -1001,23 +1001,23 @@ WAIT-FOR WINDOW-CLOSE OF FRAME cust-fr.
     (qualified_name
       (identifier)
       (identifier))
-    (identifier)
-    (number_literal)
+    (format_phrase
+      (number_literal))
     (qualified_name
       (identifier)
       (identifier))
-    (identifier)
-    (number_literal)
+    (format_phrase
+      (number_literal))
     (qualified_name
       (identifier)
       (identifier))
-    (identifier)
-    (number_literal)
+    (format_phrase
+      (number_literal))
     (qualified_name
       (identifier)
       (identifier))
-    (identifier)
-    (number_literal)
+    (format_phrase
+      (number_literal))
     (frame_phrase
       (side_labels)
       (string_literal)

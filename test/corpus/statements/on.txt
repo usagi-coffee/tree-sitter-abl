@@ -171,7 +171,7 @@ ON F5 ENDKEY.
       left: (identifier)
       right: (identifier))
     field: (identifier)
-    (at_phrase
+    (format_phrase
       row_of: (binary_expression
         (qualified_name
           left: (identifier)

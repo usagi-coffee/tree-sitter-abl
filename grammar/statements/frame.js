@@ -48,7 +48,12 @@ module.exports = ({ kw }) => ({
       seq(kw("SKIP"), "(", optional($._expression), ")"),
       seq(
         field("field", $._identifier_or_qualified_name),
-        optional($.at_phrase),
+        optional(
+          choice(
+            alias($.at_phrase, $.format_phrase),
+            alias($.__frame_field_format_phrase, $.format_phrase),
+          ),
+        ),
       ),
       seq(
         $.string_literal,
@@ -71,6 +76,32 @@ module.exports = ({ kw }) => ({
       seq(kw("PFCOLOR"), $._expression),
       seq(kw("VIEW-AS"), kw("TEXT")),
       seq(kw("WIDGET-ID"), $._expression),
+    ),
+  __frame_field_format_phrase: ($) =>
+    prec.right(
+      repeat1(
+        choice(
+          $.__format_as_like,
+          kw("AUTO-RETURN"),
+          seq(kw("BGCOLOR"), field("bgcolor", $._expression)),
+          kw("BLANK"),
+          $.__format_colon_to,
+          seq(kw("COLUMN-LABEL"), field("column_label", $._expression)),
+          kw("DEBLANK"),
+          seq(kw("DCOLOR"), field("dcolor", $._expression)),
+          kw("DISABLE-AUTO-ZAP"),
+          seq(kw("FGCOLOR"), field("fgcolor", $._expression)),
+          seq(kw("FONT"), field("font", $._expression)),
+          $.__format_format,
+          seq(kw("HELP"), field("help", $._expression)),
+          $.__format_label,
+          kw("NO-TAB-STOP"),
+          seq(kw("PFCOLOR"), field("pfcolor", $._expression)),
+          $.__format_validate,
+          $.__format_view_as,
+          seq(kw("WIDGET-ID"), field("widget_id", $._expression)),
+        ),
+      ),
     ),
 
   __frame_skip_phrase: ($) =>
