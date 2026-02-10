@@ -5,6 +5,7 @@ DISPLAY basic
 DISPLAY x.
 DISPLAY "Hello".
 DISPLAY 123.
+DISP SKIP(1) "x".
 
 --------------------------------------------------------------------------------
 
@@ -16,7 +17,13 @@ DISPLAY 123.
       (string_literal)))
   (display_statement
     (field
-      (number_literal))))
+      (number_literal)))
+  (display_statement
+    (field
+      (parenthesized_expression
+        (number_literal)))
+    (field
+      (string_literal))))
 
 ================================================================================
 DISPLAY multiple items

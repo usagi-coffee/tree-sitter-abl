@@ -2,7 +2,7 @@ module.exports = ({ kw }) => ({
   display_statement: ($) =>
     prec.left(
       seq(
-        kw("DISPLAY", { offset: 3 }),
+        kw("DISPLAY", { offset: 4 }),
         choice($.__display_browse_body, $.__display_fields_body, $._terminator),
       ),
     ),
@@ -60,10 +60,7 @@ module.exports = ({ kw }) => ({
                 seq(kw("WHEN"), field("when", $.__display_when_expression)),
               ),
               optional(
-                seq(
-                  "@",
-                  field("base", $._identifier_or_qualified_name),
-                ),
+                seq("@", field("base", $._identifier_or_qualified_name)),
               ),
             ),
             $.__display_skip_phrase,
@@ -79,9 +76,7 @@ module.exports = ({ kw }) => ({
     prec.right(
       seq(
         field("field", choice($.__display_keyword_identifier, $._expression)),
-        optional(
-          prec.dynamic(1, seq("(", repeat1($.aggregate_phrase), ")")),
-        ),
+        optional(prec.dynamic(1, seq("(", repeat1($.aggregate_phrase), ")"))),
       ),
     ),
   __display_keyword_identifier: ($) => alias(kw("MENU"), $.identifier),
@@ -97,8 +92,7 @@ module.exports = ({ kw }) => ({
       seq(kw("SPACE"), optional(field("space", seq("(", $._expression, ")")))),
     ),
 
-  __display_frame_phrases: ($) =>
-    seq($.frame_phrase, optional($.frame_phrase)),
+  __display_frame_phrases: ($) => seq($.frame_phrase, optional($.frame_phrase)),
 
   // Second branch
   __display_browse_body: ($) =>
