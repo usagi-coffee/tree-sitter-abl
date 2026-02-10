@@ -71,7 +71,7 @@ Strongly prefer using these commands as they have helpful side-effects like retu
 - Avoid hacks like cramming `FRAME` into regex to avoid the issue.
 - Add purpose + example comments before each precedence group when modifying precedences; add reference notes for each precedence entry.
 - If needed, refactor rules to be easier to target in precedence (e.g you can't target repeat(some_rule), its fine to refactor into e.g `__statement_expression: ($) => $._expression`.
--
+- Any newly added grammar warrants adding a tests for it, please write tests for new grammar constructs.
 
 ## Notes
 

@@ -63,6 +63,15 @@ module.exports = ({ kw }) => ({
                 seq("@", field("base", $._identifier_or_qualified_name)),
               ),
             ),
+            seq(
+              alias($.__display_field, $.field),
+              optional($.format_phrase),
+              seq("@", field("base", $._identifier_or_qualified_name)),
+              $.format_phrase,
+              optional(
+                seq(kw("WHEN"), field("when", $.__display_when_expression)),
+              ),
+            ),
             $.__display_skip_phrase,
             $.__display_space_phrase,
           ),

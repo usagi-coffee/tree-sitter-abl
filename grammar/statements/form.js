@@ -27,7 +27,8 @@ module.exports = ({ kw }) => ({
         seq(
           field("field", $._expression),
           optional(seq(kw("COLON"), field("colon", $._expression))),
-          optional(seq(kw("LABEL"), field("label", $.__form_label))),
+          optional(seq(kw("LABEL"), optional(field("label", $.__form_label)))),
+          optional(alias($.__form_validate_phrase, $.validate_phrase)),
           optional(
             seq(kw("FORMAT", { offset: 4 }), field("format", $.string_literal)),
           ),
@@ -51,6 +52,14 @@ module.exports = ({ kw }) => ({
     seq($.__form_radio_button, repeat(seq(",", $.__form_radio_button))),
   __form_radio_button: ($) =>
     seq(field("label", $.string_literal), ",", field("value", $._expression)),
+  __form_validate_phrase: ($) =>
+    seq(
+      kw("VALIDATE", { offset: 4 }),
+      "(",
+      field("expression", $._expression),
+      repeat(seq(",", field("expression", $._expression))),
+      ")",
+    ),
   __form_label: ($) =>
     choice(
       $.include_expression,

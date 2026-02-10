@@ -893,13 +893,10 @@ END.
             (identifier)
             (identifier)))
         (identifier)
-        (field
-          (identifier))
-        (field
+        (format_phrase
           (qualified_name
             (identifier)
-            (identifier)))
-        (format_phrase
+            (identifier))
           (string_literal))))))
 
 ================================================================================
