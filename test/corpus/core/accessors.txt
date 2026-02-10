@@ -8,6 +8,7 @@ obj?:prop.
 obj:method(1, 2).
 Func().
 some_object:root.
+some_object :root.
 some_object:chained_property:chained_another:method().
 oObject:Length -= String(pcMessage):Size.
 new MyClass():Size.
@@ -43,6 +44,10 @@ THIS-PROCEDURE:PRIVATE-DATA.
     (function_call
       function: (identifier)
       (arguments)))
+  (expression_statement
+    (object_access
+      left: (identifier)
+      right: (identifier)))
   (expression_statement
     (object_access
       left: (identifier)
@@ -92,6 +97,7 @@ hUS::SessionStatus = "Active".
 zmd_key1:label = getTermLabel("X",15).
 HTT = TEMP-TABLE ttPH:HANDLE.
 interface = zmd_wkfl.zmd_chr02.
+object :property = 5.
 
 --------------------------------------------------------------------------------
 
@@ -125,4 +131,10 @@ interface = zmd_wkfl.zmd_chr02.
     operator: (assignment_operator)
     right: (qualified_name
       left: (identifier)
-      right: (identifier))))
+      right: (identifier)))
+  (assignment_statement
+    left: (object_access
+      left: (identifier)
+      right: (identifier))
+    operator: (assignment_operator)
+    right: (number_literal)))

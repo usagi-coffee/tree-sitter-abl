@@ -89,7 +89,7 @@ bool tree_sitter_abl_external_scanner_scan(
       }
     }
 
-    if (valid_symbols[COLON]) {
+    if (valid_symbols[NAMECOLON] || valid_symbols[NAMEDOUBLECOLON] || valid_symbols[COLON]) {
       while (!lexer->eof(lexer) && iswspace(lexer->lookahead)) {
         lexer->advance(lexer, true);
       }
@@ -97,8 +97,26 @@ bool tree_sitter_abl_external_scanner_scan(
       if (lexer->lookahead == ':') {
         lexer->advance(lexer, false);
         lexer->mark_end(lexer);
-        lexer->result_symbol = COLON;
-        return true;
+
+        if (lexer->lookahead == ':' && valid_symbols[NAMEDOUBLECOLON]) {
+          lexer->advance(lexer, false);
+          if (iswalpha(lexer->lookahead) || lexer->lookahead == '_') {
+            lexer->mark_end(lexer);
+            lexer->result_symbol = NAMEDOUBLECOLON;
+            return true;
+          }
+        }
+
+        if ((iswalpha(lexer->lookahead) || lexer->lookahead == '_') &&
+            valid_symbols[NAMECOLON]) {
+          lexer->result_symbol = NAMECOLON;
+          return true;
+        }
+
+        if (valid_symbols[COLON]) {
+          lexer->result_symbol = COLON;
+          return true;
+        }
       }
     }
 
