@@ -56,7 +56,7 @@ Strongly prefer using these commands as they have helpful side-effects like retu
 - Always prefere adding to `precedences` over using `prec(`.
 - We intentionally duplicate modifiers and tunings at the statement level so that most of the statement-specific context lives in a single file. To support this, each statement defines its own `__<statement>_rules`, which are later aliased to `$.rule` where needed. This intentional duplication favors locality, readability, and conflict isolation over DRY abstractions.
 - All statement-related modifiers, phrases, tunings that are not already part of core should be locally defined as `__<statement>_<rule>` rule and aliased to `$.<rule>`.
-- When resolving conflicts treat adding a `conflicts` entry as a last resort that requires prior confirmation with a clear explanation of why structural fixes are insufficient.
+- When resolving conflicts treat adding a `conflicts` entry as a last resort that requires prior confirmation with a clear explanation of why associativity/precedence are not enough.
 - Prefer `kw` for keywords in place of `token(/keyword/i)`, when the syntax supports partial keyword like `DEFINE` can be `DEF`, `DEFI`, `DEFIN` and `DEFINE` please use `kw("DEFINE", { offset: 3 })`, for scenario where it can be longer do alias e.g`kw("FIELDS", { alias: 'FIELD', offset: 5)`.
 - Treat `(ERROR)` and `(MISSING)` nodes in the test output aserrors that need to be fixed.
 - Use compact rule formatting: keep one-line rules adjacent with no blank lines, avoid blank lines between consecutive one-line rules.
@@ -84,4 +84,4 @@ Strongly prefer using these commands as they have helpful side-effects like retu
 - `terminator`, `terminator_dot` or rules prefixed with `_` (unless aliased) should never be visible in the syntax tree output.
 - Always prefer `| head` when calling `bun run test` instead of `| tail`.
 - The `Permission denied (os error 13)` error occurs because the sandbox blocks writing outside the workspace, preventing tree-sitter from creating its lock file in the user's cache directory.
-- When receiving a conflict error trust keyword tokens in {…}; ignore deduplicated rule names like __browse_body_token7.
+- When reading a conflict error trust keyword tokens in {…}; ignore deduplicated rule names like __browse_body_token7.
