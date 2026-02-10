@@ -26,7 +26,7 @@ module.exports = ({ kw }) => ({
       ),
     ),
 
-  __record_query_where_phrase: ($) => seq(kw("WHERE"), $._expression),
+  __record_query_where_phrase: ($) => seq(kw("WHERE"), optional($._expression)),
   __record_query_of_phrase: ($) =>
     seq(kw("OF"), field("record", $.__record_query_record_name)),
   __record_query_using_phrase: ($) =>

@@ -22,6 +22,7 @@ const update = require("./update");
 const widget = require("./widget");
 const include = require("./include");
 const message = require("./message");
+const record = require("./record");
 
 module.exports = ($) => [
   ["unary", "multiplication", "add", "compare", "not", "logical"],
@@ -39,6 +40,7 @@ module.exports = ($) => [
   ...display($),
   ...widget($),
   ...message($),
+  ...record($),
   ...format($),
   ...put($),
   ...promptFor($),

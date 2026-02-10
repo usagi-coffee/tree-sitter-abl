@@ -11,7 +11,7 @@ module.exports = ({ kw }) => ({
     choice(
       $.__record_outer_join,
       seq(kw("OF"), field("of", $._identifier_or_qualified_name)),
-      seq(kw("WHERE"), field("where", $._expression)),
+      prec.right(seq(kw("WHERE"), field("where", optional($._expression)))),
       seq(
         kw("TENANT-WHERE"),
         field("tenant_where", $._expression),
@@ -23,8 +23,7 @@ module.exports = ({ kw }) => ({
       kw("NO-PREFETCH"),
     ),
 
-  __record_outer_join: ($) =>
-    seq(optional(kw("LEFT")), kw("OUTER-JOIN")),
+  __record_outer_join: ($) => seq(optional(kw("LEFT")), kw("OUTER-JOIN")),
   __record_use_index: ($) =>
     choice(
       seq(kw("USE-INDEX"), field("index", $._identifier_or_qualified_name)),
@@ -52,6 +51,9 @@ module.exports = ({ kw }) => ({
   __record_except_list: ($) =>
     seq(kw("EXCEPT"), "(", optional($.__record_field_names), ")"),
   __record_field_names: ($) =>
-    seq($.__record_field_name, repeat(seq(optional(","), $.__record_field_name))),
+    seq(
+      $.__record_field_name,
+      repeat(seq(optional(","), $.__record_field_name)),
+    ),
   __record_field_name: ($) => $._identifier_or_qualified_name,
 });

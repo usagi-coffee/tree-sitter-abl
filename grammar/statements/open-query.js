@@ -47,7 +47,6 @@ module.exports = ({ kw }) => ({
       ),
     ),
 
-
   __open_query_by_phrase: ($) =>
     seq(
       kw("BY"),

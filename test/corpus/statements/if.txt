@@ -22,6 +22,9 @@ END.
 IF CAN-FIND(FIRST LogTable WHERE LogTable.Log_ID = 10 USE-INDEX log_idx) THEN DO:
   DISPLAY LogTable.Log_ID.
 END.
+IF CAN-FIND(FIRST Contact WHERE) THEN DO:
+  DISPLAY Contact.ContactName.
+END.
 
 IF hasFlag THEN DO:
   DISPLAY hasFlag.
@@ -120,6 +123,16 @@ IF LOCKED bufOrder THEN RETURN TRUE.
             right: (identifier))
           (number_literal)))
       index: (identifier))
+    then: (do_statement
+      (body
+        (display_statement
+          record: (qualified_name
+            left: (identifier)
+            right: (identifier))))))
+  (if_statement
+    (can_find_expression
+      table: (identifier)
+      (where_phrase))
     then: (do_statement
       (body
         (display_statement

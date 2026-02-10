@@ -241,6 +241,27 @@ END.
           right: (identifier))))))
 
 ================================================================================
+FOR EACH with optional WHERE and BY
+================================================================================
+
+FOR EACH x WHERE BY x:
+  DISPLAY x.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (for_statement
+    (record
+      (record
+        record: (identifier))
+      (by_phrase
+        (identifier)))
+    (body
+      (display_statement
+        record: (identifier)))))
+
+================================================================================
 FOR EACH with SHARE-LOCK and NO-PREFETCH
 ================================================================================
 
