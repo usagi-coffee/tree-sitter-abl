@@ -22,7 +22,7 @@ module.exports = ({ kw }) => ({
             ),
           ),
         ),
-        optional(alias($.__record_query_use_index, $.use_index)),
+        optional($.__record_query_use_index),
       ),
     ),
 

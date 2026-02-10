@@ -19624,13 +19624,8 @@
           "value": "using_phrase"
         },
         {
-          "type": "ALIAS",
-          "content": {
-            "type": "SYMBOL",
-            "name": "__find_use_index"
-          },
-          "named": true,
-          "value": "use_index"
+          "type": "SYMBOL",
+          "name": "__find_use_index"
         }
       ]
     },
@@ -51076,13 +51071,8 @@
             "type": "CHOICE",
             "members": [
               {
-                "type": "ALIAS",
-                "content": {
-                  "type": "SYMBOL",
-                  "name": "__record_query_use_index"
-                },
-                "named": true,
-                "value": "use_index"
+                "type": "SYMBOL",
+                "name": "__record_query_use_index"
               },
               {
                 "type": "BLANK"

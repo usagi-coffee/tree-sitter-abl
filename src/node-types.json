@@ -7065,6 +7065,24 @@
     "type": "can_find_expression",
     "named": true,
     "fields": {
+      "index": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "macro_concatenated_name",
+            "named": true
+          },
+          {
+            "type": "qualified_name",
+            "named": true
+          }
+        ]
+      },
       "table": {
         "multiple": false,
         "required": true,
@@ -7098,10 +7116,6 @@
         },
         {
           "type": "of_phrase",
-          "named": true
-        },
-        {
-          "type": "use_index",
           "named": true
         },
         {
@@ -27172,6 +27186,24 @@
           }
         ]
       },
+      "index": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "macro_concatenated_name",
+            "named": true
+          },
+          {
+            "type": "qualified_name",
+            "named": true
+          }
+        ]
+      },
       "table": {
         "multiple": false,
         "required": true,
@@ -27221,10 +27253,6 @@
         },
         {
           "type": "share_lock",
-          "named": true
-        },
-        {
-          "type": "use_index",
           "named": true
         },
         {
@@ -64598,30 +64626,6 @@
           "named": true
         }
       ]
-    }
-  },
-  {
-    "type": "use_index",
-    "named": true,
-    "fields": {
-      "index": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          },
-          {
-            "type": "macro_concatenated_name",
-            "named": true
-          },
-          {
-            "type": "qualified_name",
-            "named": true
-          }
-        ]
-      }
     }
   },
   {

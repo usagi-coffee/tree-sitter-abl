@@ -119,8 +119,7 @@ IF LOCKED bufOrder THEN RETURN TRUE.
             left: (identifier)
             right: (identifier))
           (number_literal)))
-      (use_index
-        index: (identifier)))
+      index: (identifier))
     then: (do_statement
       (body
         (display_statement

@@ -21,7 +21,7 @@ module.exports = ({ kw }) => ({
       alias($.__find_no_error, $.no_error),
       alias($.__find_no_prefetch, $.no_prefetch),
       alias($.__find_using_phrase, $.using_phrase),
-      alias($.__find_use_index, $.use_index),
+      $.__find_use_index,
     ),
 
   _find_record_option_or_where: ($) =>
@@ -34,10 +34,8 @@ module.exports = ({ kw }) => ({
   __find_no_error: ($) => kw("NO-ERROR"),
   __find_no_wait: ($) => kw("NO-WAIT"),
   __find_no_prefetch: ($) => kw("NO-PREFETCH"),
-  __find_share_lock: ($) =>
-    choice(kw("SHARE-LOCK"), kw("SHARE")),
-  __find_exclusive_lock: ($) =>
-    choice(kw("EXCLUSIVE-LOCK"), kw("EXCLUSIVE")),
+  __find_share_lock: ($) => choice(kw("SHARE-LOCK"), kw("SHARE")),
+  __find_exclusive_lock: ($) => choice(kw("EXCLUSIVE-LOCK"), kw("EXCLUSIVE")),
   __find_using_phrase: ($) => seq(kw("USING"), $._expressions),
   __find_use_index: ($) =>
     seq(kw("USE-INDEX"), field("index", $.__find_index_name)),

@@ -150,14 +150,12 @@ FIND Customer USE-INDEX CustNum.
           left: (identifier)
           right: (identifier))
         (number_literal)))
-    (use_index
-      index: (identifier))
+    index: (identifier)
     (no_lock)
     (no_error))
   (find_statement
     table: (identifier)
-    (use_index
-      index: (identifier))))
+    index: (identifier)))
 
 ================================================================================
 FIND with NO-PREFETCH
@@ -241,8 +239,7 @@ FIND FIRST Customer WHERE Customer.Balance > 1000 USE-INDEX Balance NO-LOCK NO-E
           left: (identifier)
           right: (identifier))
         (number_literal)))
-    (use_index
-      index: (identifier))
+    index: (identifier)
     (no_lock)
     (no_error)
     (no_wait)))
@@ -379,5 +376,4 @@ END.
               right: (identifier)))
           (find_statement
             table: (identifier)
-            (use_index
-              index: (identifier))))))))
+            index: (identifier)))))))
