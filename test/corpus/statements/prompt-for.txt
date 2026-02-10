@@ -386,3 +386,23 @@ END.
     (no_validate_phrase)
     (editing_phrase
       (readkey_statement))))
+
+================================================================================
+PROMPT-FOR - GO-ON with quoted keys
+================================================================================
+
+PROMPT-FOR code_fldname GO-ON("F5" "CTRL-D") EDITING:
+  READKEY.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (prompt_for_statement
+    (field
+      field: (identifier))
+    (go_on_phrase
+      (string_literal)
+      (string_literal))
+    (editing_phrase
+      (readkey_statement))))

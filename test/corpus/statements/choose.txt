@@ -553,3 +553,18 @@ CHOOSE FIELD menu GO-ON (F5) AUTO-RETURN WITH FRAME f-menu.
     (auto_return)
     (frame_phrase
       frame: (identifier))))
+
+================================================================================
+CHOOSE - GO-ON with quoted keys
+================================================================================
+
+CHOOSE ROW field1 GO-ON ("F5" "CTRL-D").
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (choose_statement
+    field: (identifier)
+    (go_on
+      (string_literal)
+      (string_literal))))

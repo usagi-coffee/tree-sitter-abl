@@ -33,7 +33,20 @@ module.exports = ({ kw }) => ({
     ),
 
   __choose_auto_return: ($) => kw("AUTO-RETURN"),
-  __choose_go_on: ($) => seq(kw("GO-ON"), "(", repeat1($.identifier), ")"),
+  __choose_go_on: ($) =>
+    seq(
+      kw("GO-ON"),
+      "(",
+      choice(
+        $.identifier,
+        $.string_literal,
+        seq(
+          choice($.identifier, $.string_literal),
+          repeat(seq(optional(","), choice($.identifier, $.string_literal))),
+        ),
+      ),
+      ")",
+    ),
   __choose_no_error: ($) => kw("NO-ERROR"),
   __choose_color_value: ($) => $._expression,
 });

@@ -82,6 +82,19 @@ module.exports = ({ kw }) => ({
   __prompt_for_bgcolor_option: ($) => seq(kw("BGCOLOR"), $._expression),
   __prompt_for_font_option: ($) => seq(kw("FONT"), $._expression),
 
-  __prompt_for_go_on: ($) => seq(kw("GO-ON"), "(", repeat1($.identifier), ")"),
+  __prompt_for_go_on: ($) =>
+    seq(
+      kw("GO-ON"),
+      "(",
+      choice(
+        $.identifier,
+        $.string_literal,
+        seq(
+          choice($.identifier, $.string_literal),
+          repeat(seq(optional(","), choice($.identifier, $.string_literal))),
+        ),
+      ),
+      ")",
+    ),
   __prompt_for_no_validate_phrase: ($) => seq(kw("WITH"), kw("NO-VALIDATE")),
 });
