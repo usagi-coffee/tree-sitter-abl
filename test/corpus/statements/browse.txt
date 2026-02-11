@@ -30,10 +30,8 @@ WITH TITLE "Customer Browse" DOWN 10.
       column: (identifier))
     (column
       column: (identifier))
-    (title_option
-      (string_literal))
-    (down_option
-      (number_literal))))
+    title: (string_literal)
+    down: (number_literal)))
 
 ================================================================================
 Define Browse with NO-ASSIGN and NO-BOX
@@ -53,13 +51,12 @@ DEFINE BROWSE bNoAssign QUERY qNoAssign
       column: (qualified_name
         left: (identifier)
         right: (identifier)))
-    (size_option
-      (number_literal)
-      (number_literal))
-    (no_assign_option)
-    (no_row_markers_option)
-    (no_box_option)
-    (separators_option)))
+    width: (number_literal)
+    height: (number_literal)
+    (no_assign)
+    (no_row_markers)
+    (no_box)
+    (separators)))
 
 =============================
 Define Browse with WITH and Options
@@ -77,10 +74,8 @@ WITH DOWN 10 TITLE "Customer Browse".
       column: (identifier))
     (column
       column: (identifier))
-    (down_option
-      (number_literal))
-    (title_option
-      (string_literal))))
+    down: (number_literal)
+    title: (string_literal)))
 
 =============================
 Define Browse with Column Options
@@ -97,14 +92,11 @@ WITH DOWN 10.
     query: (identifier)
     (column
       column: (identifier)
-      (format_phrase
-        format: (string_literal)))
+      format: (string_literal))
     (column
       column: (identifier)
-      (label_option
-        (string_literal)))
-    (down_option
-      (number_literal))))
+      label: (string_literal))
+    down: (number_literal)))
 
 =============================
 Define Browse Shared
@@ -175,36 +167,28 @@ ENABLE ALL WITH SIZE 80 BY 10 SCROLLBAR-VERTICAL SEPARATORS NO-ROW-MARKERS.
     (no_wait)
     (column
       column: (identifier)
-      (format_phrase
-        format: (string_literal))
-      (label_option
-        (string_literal))
-      (no_labels_option))
+      format: (string_literal)
+      label: (string_literal)
+      (no_labels))
     (column
       column: (identifier)
-      (column_label_option
-        (string_literal))
-      (column_bgcolor_option
+      column_label: (string_literal)
+      column_bgcolor: (number_literal)
+      label_fgcolor: (number_literal)
+      help: (string_literal)
+      validate: (binary_expression
+        (identifier)
         (number_literal))
-      (label_fgcolor_option
-        (number_literal))
-      (help_option
-        (string_literal))
-      (validate_option
-        (binary_expression
-          (identifier)
-          (number_literal))
-        (string_literal))
-      (auto_return_option)
-      (disable_auto_zap_option)
-      (moveable_option)
-      (resizable_option))
-    (size_option
-      (number_literal)
-      (number_literal))
-    (scrollbar_vertical_option)
-    (separators_option)
-    (no_row_markers_option)))
+      message: (string_literal)
+      (auto_return)
+      (disable_auto_zap)
+      (moveable)
+      (resizable))
+    width: (number_literal)
+    height: (number_literal)
+    (scrollbar_vertical)
+    (separators)
+    (no_row_markers)))
 
 ================================================================================
 BROWSE - widget-level NO-LABELS, NO-VALIDATE, OVERLAY
@@ -221,13 +205,12 @@ WITH SIZE 70 BY 18 NO-LABELS SEPARATORS NO-VALIDATE OVERLAY.
     query: (identifier)
     (column
       column: (identifier))
-    (size_option
-      (number_literal)
-      (number_literal))
-    (no_labels_option)
-    (separators_option)
-    (no_validate_option)
-    (overlay_option)))
+    width: (number_literal)
+    height: (number_literal)
+    (no_labels)
+    (separators)
+    (no_validate)
+    (overlay)))
 
 =============================
 Define Browse with Widget Options
@@ -247,29 +230,18 @@ CONTEXT-HELP-ID 42 DROP-TARGET TOOLTIP "Browse tip" ROW 3 COLUMN 5.
       column: (identifier))
     (column
       column: (identifier))
-    (down_option
-      (number_literal))
-    (title_option
-      (string_literal))
-    (bgcolor_option
-      (number_literal))
-    (dcolor_option
-      (number_literal))
-    (fgcolor_option
-      (number_literal))
-    (pfcolor_option
-      (number_literal))
-    (font_option
-      (number_literal))
-    (context_help_id_option
-      (number_literal))
-    (drop_target_option)
-    (tooltip_option
-      (string_literal))
-    (row_option
-      (number_literal))
-    (column_option
-      (number_literal))))
+    down: (number_literal)
+    title: (string_literal)
+    bgcolor: (number_literal)
+    dcolor: (number_literal)
+    fgcolor: (number_literal)
+    pfcolor: (number_literal)
+    font: (number_literal)
+    context_help_id: (number_literal)
+    (drop_target)
+    tooltip: (string_literal)
+    row: (number_literal)
+    column: (number_literal)))
 
 ================================================================================
 BROWSE - Computed Column Expression
@@ -291,8 +263,7 @@ DEFINE BROWSE bExpr QUERY qExpr
         (qualified_name
           left: (identifier)
           right: (identifier)))
-      (label_option
-        (string_literal)))))
+      label: (string_literal))))
 
 ================================================================================
 BROWSE - SHARE-LOCK
@@ -347,9 +318,8 @@ DEFINE BROWSE bNoWait QUERY qNoWait NO-LOCK NO-WAIT
       column: (identifier))
     (column
       column: (identifier))
-    (size_option
-      (number_literal)
-      (number_literal))))
+    width: (number_literal)
+    height: (number_literal)))
 
 ================================================================================
 BROWSE - ENABLE phrase with specific fields
@@ -370,9 +340,8 @@ DEFINE BROWSE bEnable QUERY qEnable DISPLAY CustNum Name
     (column
       column: (identifier))
     field: (identifier)
-    (size_option
-      (number_literal)
-      (number_literal))))
+    width: (number_literal)
+    height: (number_literal)))
 
 ================================================================================
 BROWSE - LABEL-FONT option
@@ -391,15 +360,12 @@ DEFINE BROWSE bLabFont QUERY qQ DISPLAY
     query: (identifier)
     (column
       column: (identifier)
-      (label_font_option
-        (number_literal)))
+      label_font: (number_literal))
     (column
       column: (identifier)
-      (label_font_option
-        (number_literal)))
-    (size_option
-      (number_literal)
-      (number_literal))))
+      label_font: (number_literal))
+    width: (number_literal)
+    height: (number_literal)))
 
 ================================================================================
 BROWSE - COLUMN-DCOLOR option
@@ -418,15 +384,12 @@ DEFINE BROWSE bColDcolor QUERY qQ DISPLAY
     query: (identifier)
     (column
       column: (identifier)
-      (column_dcolor_option
-        (number_literal)))
+      column_dcolor: (number_literal))
     (column
       column: (identifier)
-      (column_dcolor_option
-        (number_literal)))
-    (size_option
-      (number_literal)
-      (number_literal))))
+      column_dcolor: (number_literal))
+    width: (number_literal)
+    height: (number_literal)))
 
 ================================================================================
 BROWSE - LABEL-DCOLOR option
@@ -445,15 +408,12 @@ DEFINE BROWSE bLabDcolor QUERY qQ DISPLAY
     query: (identifier)
     (column
       column: (identifier)
-      (label_dcolor_option
-        (number_literal)))
+      label_dcolor: (number_literal))
     (column
       column: (identifier)
-      (label_dcolor_option
-        (number_literal)))
-    (size_option
-      (number_literal)
-      (number_literal))))
+      label_dcolor: (number_literal))
+    width: (number_literal)
+    height: (number_literal)))
 
 ================================================================================
 BROWSE - COLUMN-PFCOLOR option
@@ -472,15 +432,12 @@ DEFINE BROWSE bColPfcolor QUERY qQ DISPLAY
     query: (identifier)
     (column
       column: (identifier)
-      (column_pfcolor_option
-        (number_literal)))
+      column_pfcolor: (number_literal))
     (column
       column: (identifier)
-      (column_pfcolor_option
-        (number_literal)))
-    (size_option
-      (number_literal)
-      (number_literal))))
+      column_pfcolor: (number_literal))
+    width: (number_literal)
+    height: (number_literal)))
 
 ================================================================================
 BROWSE - LABEL-PFCOLOR option
@@ -499,15 +456,12 @@ DEFINE BROWSE bLabPfcolor QUERY qQ DISPLAY
     query: (identifier)
     (column
       column: (identifier)
-      (label_pfcolor_option
-        (number_literal)))
+      label_pfcolor: (number_literal))
     (column
       column: (identifier)
-      (label_pfcolor_option
-        (number_literal)))
-    (size_option
-      (number_literal)
-      (number_literal))))
+      label_pfcolor: (number_literal))
+    width: (number_literal)
+    height: (number_literal)))
 
 ================================================================================
 BROWSE - LABEL-BGCOLOR option
@@ -526,15 +480,12 @@ DEFINE BROWSE bLabBgcolor QUERY qQ DISPLAY
     query: (identifier)
     (column
       column: (identifier)
-      (label_bgcolor_option
-        (number_literal)))
+      label_bgcolor: (number_literal))
     (column
       column: (identifier)
-      (label_bgcolor_option
-        (number_literal)))
-    (size_option
-      (number_literal)
-      (number_literal))))
+      label_bgcolor: (number_literal))
+    width: (number_literal)
+    height: (number_literal)))
 
 ================================================================================
 BROWSE - SIZE-CHARS option
@@ -553,9 +504,8 @@ DEFINE BROWSE bSizeChars QUERY qQ DISPLAY CustNum Name
       column: (identifier))
     (column
       column: (identifier))
-    (size_chars_option
-      (number_literal)
-      (number_literal))))
+    width_chars: (number_literal)
+    height_chars: (number_literal)))
 
 ================================================================================
 BROWSE - SIZE-PIXELS option
@@ -574,9 +524,8 @@ DEFINE BROWSE bSizePixels QUERY qQ DISPLAY CustNum Name
       column: (identifier))
     (column
       column: (identifier))
-    (size_pixels_option
-      (number_literal)
-      (number_literal))))
+    width_pixels: (number_literal)
+    height_pixels: (number_literal)))
 
 ================================================================================
 BROWSE - SCROLLBAR-HORIZONTAL option
@@ -595,10 +544,9 @@ DEFINE BROWSE bScrollH QUERY qQ DISPLAY CustNum Name
       column: (identifier))
     (column
       column: (identifier))
-    (scrollbar_horizontal_option)
-    (size_option
-      (number_literal)
-      (number_literal))))
+    (scrollbar_horizontal)
+    width: (number_literal)
+    height: (number_literal)))
 
 ================================================================================
 BROWSE - NO-EMPTY-SPACE option
@@ -617,10 +565,9 @@ DEFINE BROWSE bNoEmpty QUERY qQ DISPLAY CustNum Name
       column: (identifier))
     (column
       column: (identifier))
-    (no_empty_space_option)
-    (size_option
-      (number_literal)
-      (number_literal))))
+    (no_empty_space)
+    width: (number_literal)
+    height: (number_literal)))
 
 ================================================================================
 BROWSE - FIT-LAST-COLUMN option
@@ -639,10 +586,9 @@ DEFINE BROWSE bFitLast QUERY qQ DISPLAY CustNum Name
       column: (identifier))
     (column
       column: (identifier))
-    (fit_last_column_option)
-    (size_option
-      (number_literal)
-      (number_literal))))
+    (fit_last_column)
+    width: (number_literal)
+    height: (number_literal)))
 
 ================================================================================
 BROWSE - MULTIPLE option
@@ -661,10 +607,9 @@ DEFINE BROWSE bMultiple QUERY qQ DISPLAY CustNum Name
       column: (identifier))
     (column
       column: (identifier))
-    (multiple_option)
-    (size_option
-      (number_literal)
-      (number_literal))))
+    (multiple)
+    width: (number_literal)
+    height: (number_literal)))
 
 ================================================================================
 BROWSE - NO-COLUMN-SCROLLING option
@@ -683,10 +628,9 @@ DEFINE BROWSE bNoColScroll QUERY qQ DISPLAY CustNum Name
       column: (identifier))
     (column
       column: (identifier))
-    (no_column_scrolling_option)
-    (size_option
-      (number_literal)
-      (number_literal))))
+    (no_column_scrolling)
+    width: (number_literal)
+    height: (number_literal)))
 
 ================================================================================
 BROWSE - MAX-DATA-GUESS option
@@ -705,11 +649,9 @@ DEFINE BROWSE bMaxData QUERY qQ DISPLAY CustNum Name
       column: (identifier))
     (column
       column: (identifier))
-    (max_data_guess_option
-      (number_literal))
-    (size_option
-      (number_literal)
-      (number_literal))))
+    max_data_guess: (number_literal)
+    width: (number_literal)
+    height: (number_literal)))
 
 ================================================================================
 BROWSE - Multiple EXCEPT fields
@@ -747,15 +689,12 @@ DEFINE BROWSE bWidth QUERY qQ DISPLAY
     query: (identifier)
     (column
       column: (identifier)
-      (width_option
-        (number_literal)))
+      width: (number_literal))
     (column
       column: (identifier)
-      (width_option
-        (number_literal)))
-    (size_option
-      (number_literal)
-      (number_literal))))
+      width: (number_literal))
+    width: (number_literal)
+    height: (number_literal)))
 
 ================================================================================
 BROWSE - Minimal
@@ -799,19 +738,15 @@ DEFINE BROWSE bPolicy QUERY qPolicy
       column: (qualified_name
         left: (identifier)
         right: (identifier))
-      (column_label_option
-        (string_literal)))
+      column_label: (string_literal))
     (column
       column: (qualified_name
         left: (identifier)
         right: (identifier))
-      (column_label_option
-        (string_literal)))
-    (down_option
-      (number_literal))
-    (width_option
-      (number_literal))
-    (multiple_option)))
+      column_label: (string_literal))
+    down: (number_literal)
+    width: (number_literal)
+    (multiple)))
 
 ================================================================================
 BROWSE - Additional column color/font options
@@ -832,17 +767,12 @@ WITH DOWN 5.
       column: (qualified_name
         left: (identifier)
         right: (identifier))
-      (column_font_option
-        (number_literal))
-      (column_fgcolor_option
-        (number_literal)))
+      column_font: (number_literal)
+      column_fgcolor: (number_literal))
     (column
       column: (qualified_name
         left: (identifier)
         right: (identifier))
-      (label_fgcolor_option
-        (number_literal))
-      (label_pfcolor_option
-        (number_literal)))
-    (down_option
-      (number_literal))))
+      label_fgcolor: (number_literal)
+      label_pfcolor: (number_literal))
+    down: (number_literal)))

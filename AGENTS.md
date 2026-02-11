@@ -54,7 +54,6 @@ Strongly prefer using these commands as they have helpful side-effects like retu
 - Grammar changes without thorough corpus coverage and testing are unacceptable.
 - Avoid creating a shared or generic code unless it is really a part of the core syntax, core grammar modifications require a confirmation unless experimenting.
 - Always prefere adding to `precedences` over using `prec(`.
-- We intentionally duplicate modifiers and tunings at the statement level so that most of the statement-specific context lives in a single file. To support this, each statement defines its own `__<statement>_rules`, which are later aliased to `$.rule` where needed. This intentional duplication favors locality, readability, and conflict isolation over DRY abstractions.
 - All statement-related modifiers, phrases, tunings that are not already part of core should be locally defined as `__<statement>_<rule>` rule and aliased to `$.<rule>`.
 - When resolving conflicts treat adding a `conflicts` entry as a last resort that requires prior confirmation with a clear explanation of why associativity/precedence are not enough.
 - Prefer `kw` for keywords in place of `token(/keyword/i)`, when the syntax supports partial keyword like `DEFINE` can be `DEF`, `DEFI`, `DEFIN` and `DEFINE` please use `kw("DEFINE", { offset: 3 })`, for scenario where it can be longer do alias e.g`kw("FIELDS", { alias: 'FIELD', offset: 5)`.
@@ -70,8 +69,37 @@ Strongly prefer using these commands as they have helpful side-effects like retu
 - Prefer precedences over `prec(...)`.
 - Avoid hacks like cramming `FRAME` into regex to avoid the issue.
 - Add purpose + example comments before each precedence group when modifying precedences; add reference notes for each precedence entry.
-- If needed, refactor rules to be easier to target in precedence (e.g you can't target repeat(some_rule), its fine to refactor into e.g `__statement_expression: ($) => $._expression`.
+- *Only* if needed, refactor rules to be easier to target in precedence (e.g you can't target repeat(some_rule), its fine to refactor into e.g `__statement_expression: ($) => $._expression`.
 - Any newly added grammar warrants adding a tests for it, please write tests for new grammar constructs.
+- For options of statement with values prefer e.g `seq(kw("ROW"), field("row", ...))` for those that can have expressions and e.g `alias(kw("NO-LABELS", $.no_labels))` for those that do not have expressions.
+- Do not use e.g `no_labels_options` as an alias, just use `no_labels` to keep it clean.
+
+### Clean tree example
+
+
+```js
+// Good
+__browse_option: ($) => choice(
+  seq(kw("FORMAT", { offset: 4 }), field("format", $.string_literal)),
+  seq(kw("LABEL"), field("label", $.string_literal)),
+  alias(kw("NO-LABELS"), $.no_labels),
+  ...
+)
+
+
+// Bad
+__browse_option: choice(
+  alias($.__browse_format, $.format), // Bad: should've been inline with field() instead of a node
+  seq(kw("LABEL"), $.string_literal), // Bad: no field()
+  alias($.__browse_no_labels, $.no_labels_option), // Bad: _option suffix, unnecesary __rule
+  ...
+)
+
+__browse_format: ($) =>
+  seq(kw("FORMAT", { offset: 4 }), $.string_literal)),
+__browse_no_labels: ($) => kw("NO-LABELS")
+```
+
 
 ## Notes
 

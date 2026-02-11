@@ -485,10 +485,8 @@ DEFINE QUERY qExceptAll FOR Customer EXCEPT ().
       column: (qualified_name
         left: (identifier)
         right: (identifier)))
-    (down_option
-      (number_literal))
-    (title_option
-      (string_literal)))
+    down: (number_literal)
+    title: (string_literal))
   (button_definition
     name: (identifier)
     (button_option

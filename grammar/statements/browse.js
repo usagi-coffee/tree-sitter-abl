@@ -52,169 +52,120 @@ module.exports = ({ kw }) => ({
 
   __browse_column_option: ($) =>
     choice(
-      alias($.__browse_format_phrase, $.format_phrase),
-      alias($.__browse_label_option, $.label_option),
-      alias($.__browse_no_labels_option, $.no_labels_option),
-      alias($.__browse_width_option, $.width_option),
-      alias($.__browse_column_font_option, $.column_font_option),
-      alias($.__browse_column_label_option, $.column_label_option),
-      alias($.__browse_column_dcolor_option, $.column_dcolor_option),
-      alias($.__browse_column_bgcolor_option, $.column_bgcolor_option),
-      alias($.__browse_column_fgcolor_option, $.column_fgcolor_option),
-      alias($.__browse_column_pfcolor_option, $.column_pfcolor_option),
-      alias($.__browse_label_font_option, $.label_font_option),
-      alias($.__browse_label_dcolor_option, $.label_dcolor_option),
-      alias($.__browse_label_bgcolor_option, $.label_bgcolor_option),
-      alias($.__browse_label_fgcolor_option, $.label_fgcolor_option),
-      alias($.__browse_label_pfcolor_option, $.label_pfcolor_option),
-      alias($.__browse_help_option, $.help_option),
-      alias($.__browse_validate_option, $.validate_option),
-      alias($.__browse_auto_return_option, $.auto_return_option),
-      alias($.__browse_disable_auto_zap_option, $.disable_auto_zap_option),
-      alias($.__browse_moveable_option, $.moveable_option),
-      alias($.__browse_resizable_option, $.resizable_option),
+      seq(kw("FORMAT", { offset: 4 }), field("format", $.string_literal)),
+      seq(kw("LABEL"), field("label", $.string_literal)),
+      alias(kw("NO-LABELS"), $.no_labels),
+      seq(kw("WIDTH"), field("width", $.__browse_option_expression)),
+      seq(
+        kw("COLUMN-FONT"),
+        field("column_font", $.__browse_option_expression),
+      ),
+      seq(kw("COLUMN-LABEL"), field("column_label", $.string_literal)),
+      seq(
+        kw("COLUMN-DCOLOR"),
+        field("column_dcolor", $.__browse_option_expression),
+      ),
+      seq(
+        kw("COLUMN-BGCOLOR"),
+        field("column_bgcolor", $.__browse_option_expression),
+      ),
+      seq(
+        kw("COLUMN-FGCOLOR"),
+        field("column_fgcolor", $.__browse_option_expression),
+      ),
+      seq(
+        kw("COLUMN-PFCOLOR"),
+        field("column_pfcolor", $.__browse_option_expression),
+      ),
+      seq(kw("LABEL-FONT"), field("label_font", $.__browse_option_expression)),
+      seq(
+        kw("LABEL-DCOLOR"),
+        field("label_dcolor", $.__browse_option_expression),
+      ),
+      seq(
+        kw("LABEL-BGCOLOR"),
+        field("label_bgcolor", $.__browse_option_expression),
+      ),
+      seq(
+        kw("LABEL-FGCOLOR"),
+        field("label_fgcolor", $.__browse_option_expression),
+      ),
+      seq(
+        kw("LABEL-PFCOLOR"),
+        field("label_pfcolor", $.__browse_option_expression),
+      ),
+      seq(kw("HELP"), field("help", $.string_literal)),
+      seq(
+        kw("VALIDATE"),
+        "(",
+        field("validate", $.__browse_option_expression),
+        ",",
+        field("message", $.__browse_option_expression),
+        ")",
+      ),
+      alias(kw("AUTO-RETURN"), $.auto_return),
+      alias(kw("DISABLE-AUTO-ZAP"), $.disable_auto_zap),
+      alias(kw("MOVEABLE"), $.moveable),
+      alias(kw("RESIZABLE"), $.resizable),
     ),
-  __browse_format_phrase: ($) =>
-    seq(kw("FORMAT", { offset: 4 }), field("format", $.string_literal)),
   __browse_option_expression: ($) => prec.right($._expression),
 
   __browse_option: ($) =>
     choice(
-      alias($.__browse_context_help_id_option, $.context_help_id_option),
-      alias($.__browse_drop_target_option, $.drop_target_option),
-      alias($.__browse_tooltip_option, $.tooltip_option),
-      alias($.__browse_bgcolor_option, $.bgcolor_option),
-      alias($.__browse_dcolor_option, $.dcolor_option),
-      alias($.__browse_fgcolor_option, $.fgcolor_option),
-      alias($.__browse_font_option, $.font_option),
-      alias($.__browse_pfcolor_option, $.pfcolor_option),
-      alias($.__browse_title_option, $.title_option),
-      alias($.__browse_width_option, $.width_option),
-      alias($.__browse_down_option, $.down_option),
-      alias($.__browse_no_labels_option, $.no_labels_option),
-      alias($.__browse_no_empty_space_option, $.no_empty_space_option),
-      alias($.__browse_fit_last_column_option, $.fit_last_column_option),
-      alias($.__browse_multiple_option, $.multiple_option),
-      alias($.__browse_separators_option, $.separators_option),
-      alias($.__browse_no_assign_option, $.no_assign_option),
-      alias($.__browse_no_validate_option, $.no_validate_option),
-      alias($.__browse_no_box_option, $.no_box_option),
-      alias($.__browse_no_row_markers_option, $.no_row_markers_option),
-      alias($.__browse_overlay_option, $.overlay_option),
-      alias(
-        $.__browse_no_column_scrolling_option,
-        $.no_column_scrolling_option,
+      seq(
+        kw("CONTEXT-HELP-ID"),
+        field("context_help_id", $.__browse_option_expression),
       ),
-      alias($.__browse_max_data_guess_option, $.max_data_guess_option),
-      alias($.__browse_row_option, $.row_option),
-      alias($.__browse_column_setting, $.column_option),
-      alias(
-        $.__browse_scrollbar_horizontal_option,
-        $.scrollbar_horizontal_option,
+      alias(kw("DROP-TARGET"), $.drop_target),
+      seq(kw("TOOLTIP"), field("tooltip", $.__browse_option_expression)),
+      seq(kw("BGCOLOR"), field("bgcolor", $.__browse_option_expression)),
+      seq(kw("DCOLOR"), field("dcolor", $.__browse_option_expression)),
+      seq(kw("FGCOLOR"), field("fgcolor", $.__browse_option_expression)),
+      seq(kw("FONT"), field("font", $.__browse_option_expression)),
+      seq(kw("PFCOLOR"), field("pfcolor", $.__browse_option_expression)),
+      seq(kw("TITLE"), field("title", $.string_literal)),
+      seq(kw("WIDTH"), field("width", $.__browse_option_expression)),
+      choice(
+        seq(field("down", $.number_literal), kw("DOWN")),
+        seq(kw("DOWN"), field("down", $.__browse_option_expression)),
       ),
-      alias($.__browse_scrollbar_vertical_option, $.scrollbar_vertical_option),
-      alias($.__browse_size_option, $.size_option),
-      alias($.__browse_size_chars_option, $.size_chars_option),
-      alias($.__browse_size_pixels_option, $.size_pixels_option),
-    ),
-
-  __browse_label_option: ($) => seq(kw("LABEL"), $.string_literal),
-  __browse_no_labels_option: ($) => kw("NO-LABELS"),
-  __browse_width_option: ($) => seq(kw("WIDTH"), $.__browse_option_expression),
-  __browse_column_font_option: ($) =>
-    seq(kw("COLUMN-FONT"), $.__browse_option_expression),
-  __browse_column_label_option: ($) =>
-    seq(kw("COLUMN-LABEL"), $.string_literal),
-  __browse_column_dcolor_option: ($) =>
-    seq(kw("COLUMN-DCOLOR"), $.__browse_option_expression),
-  __browse_column_bgcolor_option: ($) =>
-    seq(kw("COLUMN-BGCOLOR"), $.__browse_option_expression),
-  __browse_column_fgcolor_option: ($) =>
-    seq(kw("COLUMN-FGCOLOR"), $.__browse_option_expression),
-  __browse_column_pfcolor_option: ($) =>
-    seq(kw("COLUMN-PFCOLOR"), $.__browse_option_expression),
-  __browse_label_font_option: ($) =>
-    seq(kw("LABEL-FONT"), $.__browse_option_expression),
-  __browse_label_dcolor_option: ($) =>
-    seq(kw("LABEL-DCOLOR"), $.__browse_option_expression),
-  __browse_label_bgcolor_option: ($) =>
-    seq(kw("LABEL-BGCOLOR"), $.__browse_option_expression),
-  __browse_label_fgcolor_option: ($) =>
-    seq(kw("LABEL-FGCOLOR"), $.__browse_option_expression),
-  __browse_label_pfcolor_option: ($) =>
-    seq(kw("LABEL-PFCOLOR"), $.__browse_option_expression),
-  __browse_help_option: ($) => seq(kw("HELP"), $.string_literal),
-  __browse_validate_option: ($) =>
-    seq(
-      kw("VALIDATE"),
-      "(",
-      $.__browse_option_expression,
-      ",",
-      $.__browse_option_expression,
-      ")",
-    ),
-  __browse_auto_return_option: ($) => kw("AUTO-RETURN"),
-  __browse_disable_auto_zap_option: ($) => kw("DISABLE-AUTO-ZAP"),
-  __browse_moveable_option: ($) => kw("MOVEABLE"),
-  __browse_resizable_option: ($) => kw("RESIZABLE"),
-
-  __browse_context_help_id_option: ($) =>
-    seq(kw("CONTEXT-HELP-ID"), $.__browse_option_expression),
-  __browse_drop_target_option: ($) => kw("DROP-TARGET"),
-  __browse_tooltip_option: ($) =>
-    seq(kw("TOOLTIP"), $.__browse_option_expression),
-  __browse_bgcolor_option: ($) =>
-    seq(kw("BGCOLOR"), $.__browse_option_expression),
-  __browse_dcolor_option: ($) =>
-    seq(kw("DCOLOR"), $.__browse_option_expression),
-  __browse_fgcolor_option: ($) =>
-    seq(kw("FGCOLOR"), $.__browse_option_expression),
-  __browse_font_option: ($) => seq(kw("FONT"), $.__browse_option_expression),
-  __browse_pfcolor_option: ($) =>
-    seq(kw("PFCOLOR"), $.__browse_option_expression),
-  __browse_title_option: ($) => seq(kw("TITLE"), $.string_literal),
-  __browse_down_option: ($) =>
-    choice(
-      seq($.number_literal, kw("DOWN")),
-      seq(kw("DOWN"), $.__browse_option_expression),
-    ),
-  __browse_no_empty_space_option: ($) => kw("NO-EMPTY-SPACE"),
-  __browse_fit_last_column_option: ($) => kw("FIT-LAST-COLUMN"),
-  __browse_multiple_option: ($) => kw("MULTIPLE"),
-  __browse_separators_option: ($) => kw("SEPARATORS"),
-  __browse_no_assign_option: ($) => kw("NO-ASSIGN"),
-  __browse_no_validate_option: ($) => kw("NO-VALIDATE"),
-  __browse_no_box_option: ($) => kw("NO-BOX"),
-  __browse_no_row_markers_option: ($) => kw("NO-ROW-MARKERS"),
-  __browse_overlay_option: ($) => kw("OVERLAY"),
-  __browse_no_column_scrolling_option: ($) => kw("NO-COLUMN-SCROLLING"),
-  __browse_max_data_guess_option: ($) =>
-    seq(kw("MAX-DATA-GUESS"), $.__browse_option_expression),
-  __browse_row_option: ($) => seq(kw("ROW"), $.__browse_option_expression),
-  __browse_column_setting: ($) =>
-    seq(kw("COLUMN"), $.__browse_option_expression),
-  __browse_scrollbar_horizontal_option: ($) => kw("SCROLLBAR-HORIZONTAL"),
-  __browse_scrollbar_vertical_option: ($) => kw("SCROLLBAR-VERTICAL"),
-  __browse_size_option: ($) =>
-    seq(
-      kw("SIZE"),
-      $.__browse_option_expression,
-      kw("BY"),
-      $.__browse_option_expression,
-    ),
-  __browse_size_chars_option: ($) =>
-    seq(
-      kw("SIZE-CHARS"),
-      $.__browse_option_expression,
-      kw("BY"),
-      $.__browse_option_expression,
-    ),
-  __browse_size_pixels_option: ($) =>
-    seq(
-      kw("SIZE-PIXELS"),
-      $.__browse_option_expression,
-      kw("BY"),
-      $.__browse_option_expression,
+      alias(kw("NO-LABELS"), $.no_labels),
+      alias(kw("NO-EMPTY-SPACE"), $.no_empty_space),
+      alias(kw("FIT-LAST-COLUMN"), $.fit_last_column),
+      alias(kw("MULTIPLE"), $.multiple),
+      alias(kw("SEPARATORS"), $.separators),
+      alias(kw("NO-ASSIGN"), $.no_assign),
+      alias(kw("NO-VALIDATE"), $.no_validate),
+      alias(kw("NO-BOX"), $.no_box),
+      alias(kw("NO-ROW-MARKERS"), $.no_row_markers),
+      alias(kw("OVERLAY"), $.overlay),
+      alias(kw("NO-COLUMN-SCROLLING"), $.no_column_scrolling),
+      seq(
+        kw("MAX-DATA-GUESS"),
+        field("max_data_guess", $.__browse_option_expression),
+      ),
+      seq(kw("ROW"), field("row", $.__browse_option_expression)),
+      seq(kw("COLUMN"), field("column", $.__browse_option_expression)),
+      alias(kw("SCROLLBAR-HORIZONTAL"), $.scrollbar_horizontal),
+      alias(kw("SCROLLBAR-VERTICAL"), $.scrollbar_vertical),
+      seq(
+        kw("SIZE"),
+        field("width", $.__browse_option_expression),
+        kw("BY"),
+        field("height", $.__browse_option_expression),
+      ),
+      seq(
+        kw("SIZE-CHARS"),
+        field("width_chars", $.__browse_option_expression),
+        kw("BY"),
+        field("height_chars", $.__browse_option_expression),
+      ),
+      seq(
+        kw("SIZE-PIXELS"),
+        field("width_pixels", $.__browse_option_expression),
+        kw("BY"),
+        field("height_pixels", $.__browse_option_expression),
+      ),
     ),
 
   __browse_enable_phrase: ($) =>

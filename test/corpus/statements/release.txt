@@ -88,8 +88,7 @@ RELEASE sports.Customer NO-ERROR.
       column: (qualified_name
         left: (identifier)
         right: (identifier)))
-    (down_option
-      (number_literal)))
+    down: (number_literal))
   (form_statement
     (form_item
       field: (identifier))
