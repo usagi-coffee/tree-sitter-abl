@@ -84,6 +84,53 @@
 ] @operator
 
 [
+  (abstract_modifier)
+  (access_modifier)
+  (attr_space)
+  (auto_return)
+  (background)
+  (centered)
+  (disable_auto_zap)
+  (drop_target)
+  (final_modifier)
+  (fit_last_column)
+  (identifier)
+  (menubar)
+  (moveable)
+  (multiple)
+  (new_modifier)
+  (no_assign)
+  (no_attr_space)
+  (no_box)
+  (no_column_scrolling)
+  (no_empty_space)
+  (no_error)
+  (no_hide)
+  (no_label)
+  (no_labels)
+  (no_row_markers)
+  (no_undo)
+  (no_validate)
+  (no_wait)
+  (overlay)
+  (override_modifier)
+  (page_bottom)
+  (page_top)
+  (resizable)
+  (rule)
+  (scope_modifier)
+  (scrollbar_horizontal)
+  (scrollbar_vertical)
+  (separators)
+  (serialization_modifier)
+  (side_labels)
+  (skip)
+  (static_modifier)
+  (this_object)
+  (this_procedure)
+  (three_d)
+  (use_text)
+  "ABSTRACT"
   "ACCELERATOR"
   "ACCUM"
   "ACCUMULATE"
@@ -250,6 +297,7 @@
   "EMPTY"
   "ENABLE"
   "END"
+  "END-KEY"
   "ENDKEY"
   "ENTRY"
   "ENUM"
@@ -262,6 +310,7 @@
   "EVENT-PROCEDURE"
   "EVENTS"
   "EXCEPT"
+  "EXCLUSIVE"
   "EXCLUSIVE-LOCK"
   "EXPAND"
   "EXPLICIT"
@@ -269,6 +318,7 @@
   "EXTENDED"
   "EXTENT"
   "EXTERNAL"
+  "FALSE"
   "FGCOLOR"
   "FIELD"
   "FIELDS"
@@ -276,10 +326,10 @@
   "FILE-INFO"
   "FILL-IN"
   "FILTERS"
+  "FINAL"
   "FINALLY"
   "FIND"
   "FIRST"
-  "FIT-LAST-COLUMN"
   "FIX-CODEPAGE"
   "FIXED-ONLY"
   "FLAGS"
@@ -306,6 +356,7 @@
   "GET-KEY-VALUE"
   "GO-ON"
   "GRAPHIC-EDGE"
+  "GROUP"
   "GROUP-BOX"
   "GT"
   "HEADER"
@@ -390,7 +441,6 @@
   "MOD"
   "MODULO"
   "MOUSE-POINTER"
-  "MOVEABLE"
   "MULTIPLE"
   "MUST-EXIST"
   "NAMESPACE-PREFIX"
@@ -402,13 +452,13 @@
   "NEW-INSTANCE"
   "NEXT"
   "NEXT-PROMPT"
+  "NO"
   "NO-APPLY"
   "NO-ARRAY-MESSAGE"
   "NO-ATTR-LIST"
   "NO-ATTR-SPACE"
   "NO-BIND-WHERE"
   "NO-BOX"
-  "NO-COLUMN-SCROLLING"
   "NO-CONSOLE"
   "NO-CONVERT"
   "NO-CONVERT-3D-COLORS"
@@ -416,7 +466,6 @@
   "NO-DEBUG"
   "NO-DRAG"
   "NO-ECHO"
-  "NO-EMPTY-SPACE"
   "NO-ERROR"
   "NO-FILL"
   "NO-FOCUS"
@@ -430,10 +479,10 @@
   "NO-MESSAGE"
   "NO-PAUSE"
   "NO-PREFETCH"
-  "NO-ROW-MARKERS"
   "NO-SEPARATE-CONNECTION"
   "NO-TAB-STOP"
   "NO-UNDO"
+  "NO-VALIDATE"
   "NO-WAIT"
   "NO-WORD-WRAP"
   "NONE"
@@ -466,6 +515,8 @@
   "OUTPUT"
   "OVERLAY"
   "OVERRIDE"
+  "PACKAGE-PRIVATE"
+  "PACKAGE-PROTECTED"
   "PAGE"
   "PAGE-SIZE"
   "PAGE-WIDTH"
@@ -521,7 +572,6 @@
   "REPEAT"
   "REPLACE"
   "REPOSITION"
-  "RESIZABLE"
   "RESULT"
   "RETAIN-SHAPE"
   "RETRY"
@@ -554,10 +604,11 @@
   "SCROLLBAR-VERTICAL"
   "SCROLLING"
   "SECTION"
+  "SEEK"
   "SELECTION-LIST"
   "SELF"
   "SEPARATE-CONNECTION"
-  "SEPARATORS"
+  "SERIALIZABLE"
   "SERIALIZE-HIDDEN"
   "SERIALIZE-NAME"
   "SERVER"
@@ -567,6 +618,7 @@
   "SET-BYTE-ORDER"
   "SET-POINTER-VALUE"
   "SET-SIZE"
+  "SHARE"
   "SHARE-LOCK"
   "SHOW-STATS"
   "SIGNATURE"
@@ -590,6 +642,7 @@
   "SPACE"
   "SQL"
   "STARTING"
+  "STATIC"
   "STATUS"
   "STDCALL"
   "STOP"
@@ -644,6 +697,7 @@
   "TRIGGER"
   "TRIGGERS"
   "TRIM"
+  "TRUE"
   "TTCODEPAGE"
   "UNBUFFERED"
   "UNDERLINE"
