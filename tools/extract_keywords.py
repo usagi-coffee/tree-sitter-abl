@@ -247,14 +247,15 @@ def split_args(s: str) -> list[str]:
     return parts
 
 
-def iter_calls(text: str, call_re: re.Pattern[str]) -> list[tuple[int, int]]:
+def iter_calls(text: str, call_re: re.Pattern[str]) -> list[tuple[int, int, int]]:
     calls = []
     for match in call_re.finditer(text):
+        call_start = match.start()
         open_paren = match.end() - 1
         close_paren = parse_call_body(text, open_paren)
         if close_paren is None:
             continue
-        calls.append((open_paren, close_paren))
+        calls.append((call_start, open_paren, close_paren))
     return calls
 
 
@@ -296,23 +297,38 @@ def main() -> int:
     paths.extend(sorted((GRAMMAR_DIR / "grammar").rglob("*.js")))
 
     keywords = set()
+    aliased_nodes = set()
     for path in paths:
         if not path.exists():
             continue
         text = path.read_text(encoding="utf-8")
-        aliased = set()
-        for open_paren, close_paren in iter_calls(text, ALIAS_CALL_RE):
+        kw_calls_in_alias = set()
+        for _, open_paren, close_paren in iter_calls(text, ALIAS_CALL_RE):
             alias_body = text[open_paren + 1 : close_paren]
-            for kw_open, kw_close in iter_calls(alias_body, KW_CALL_RE):
+            alias_args = split_args(alias_body)
+            alias_target = alias_args[1].strip() if len(alias_args) > 1 else ""
+            alias_first = alias_args[0].lstrip() if alias_args else ""
+
+            for _, kw_open, kw_close in iter_calls(alias_body, KW_CALL_RE):
                 kw_args = split_args(alias_body[kw_open + 1 : kw_close])
                 if not kw_args:
                     continue
                 kw_match = re.match(r"\s*(['\"])([^'\"]+)\1\s*$", kw_args[0])
                 if not kw_match:
                     continue
-                aliased.add(kw_match.group(2))
+                abs_kw_open = open_paren + 1 + kw_open
+                abs_kw_close = open_paren + 1 + kw_close
+                kw_calls_in_alias.add((abs_kw_open, abs_kw_close))
 
-        for kw_open, kw_close in iter_calls(text, KW_CALL_RE):
+            # Capture direct alias(kw("..."), $.name) as a named query node.
+            # We intentionally do not emit nodes for broad wrappers like alias(choice(...), $.identifier).
+            target_match = re.fullmatch(r"\s*\$\.(\w+)\s*", alias_target)
+            if target_match and alias_first.startswith("kw("):
+                aliased_nodes.add(target_match.group(1))
+
+        for _, kw_open, kw_close in iter_calls(text, KW_CALL_RE):
+            if (kw_open, kw_close) in kw_calls_in_alias:
+                continue
             kw_args = split_args(text[kw_open + 1 : kw_close])
             if not kw_args:
                 continue
@@ -323,12 +339,12 @@ def main() -> int:
             options = kw_args[1] if len(kw_args) > 1 else ""
             if re.search(r"\balias\b\s*:", options):
                 continue
-            if keyword in aliased:
-                continue
             keywords.add(keyword)
         for match in TOKEN_RE.finditer(text):
             keywords.update(extract_from_regex(match.group(1)))
 
+    for node in sorted(aliased_nodes, key=str.upper):
+        print(f"({node})")
     for keyword in sorted(keywords, key=str.upper):
         print(f"\"{keyword}\"")
     return 0
