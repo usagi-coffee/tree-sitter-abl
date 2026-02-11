@@ -81,7 +81,7 @@ module.exports = ({ kw }) => ({
 
   __function_parameter: ($) =>
     seq(
-      optional(choice(kw("INPUT"), kw("OUTPUT"), kw("INPUT-OUTPUT"))),
+      optional(field("direction", choice(kw("INPUT"), kw("OUTPUT"), kw("INPUT-OUTPUT")))),
       field("name", $.identifier),
       $.__function_variable_type_phrase,
       optional(alias(kw("NO-UNDO"), $.no_undo)),

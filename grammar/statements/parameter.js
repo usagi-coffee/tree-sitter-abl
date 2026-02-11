@@ -12,7 +12,7 @@ module.exports = ({ kw }) => ({
 
   __parameter_standard_parameter: ($) =>
     seq(
-      choice(kw("INPUT"), kw("OUTPUT"), kw("INPUT-OUTPUT"), kw("RETURN")),
+      field("direction", choice(kw("INPUT"), kw("OUTPUT"), kw("INPUT-OUTPUT"), kw("RETURN"))),
       kw("PARAMETER", { offset: 5 }),
       field("name", $.identifier),
       $.__parameter_variable_type_phrase,
@@ -38,7 +38,7 @@ module.exports = ({ kw }) => ({
 
   __parameter_table_parameter: ($) =>
     seq(
-      choice(kw("INPUT"), kw("OUTPUT"), kw("INPUT-OUTPUT")),
+      field("direction", choice(kw("INPUT"), kw("OUTPUT"), kw("INPUT-OUTPUT"))),
       kw("PARAMETER", { offset: 5 }),
       choice(
         seq(
@@ -72,7 +72,7 @@ module.exports = ({ kw }) => ({
       kw("BUFFER"),
       field("name", $.identifier),
       kw("FOR"),
-      optional(alias(kw("TEMP-TABLE"), $.temp_table)),
+      optional(field("for", kw("TEMP-TABLE"))),
       field("table", $._identifier_or_qualified_name),
       optional(alias(kw("PRESELECT"), $.preselect)),
     ),

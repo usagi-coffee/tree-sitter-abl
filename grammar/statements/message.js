@@ -4,7 +4,7 @@ module.exports = ({ kw }) => ({
 
   __message_body: ($) =>
     seq(
-      optional(seq(kw("COLOR"), $.__message_color_value)),
+      optional(seq(kw("COLOR"), field("color", $.__message_color_value))),
       repeat1($.__message_expression),
       optional(alias($.__message_view_as_phrase, $.view_as_phrase)),
       optional(alias($.__message_set_update_phrase, $.set_update_phrase)),
@@ -66,7 +66,7 @@ module.exports = ({ kw }) => ({
 
   __message_set_update_phrase: ($) =>
     seq(
-      choice(kw("SET"), kw("UPDATE")),
+      field("mode", choice(kw("SET"), kw("UPDATE"))),
       field("field", $._identifier_or_qualified_name),
       optional(
         choice(

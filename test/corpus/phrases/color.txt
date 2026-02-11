@@ -8,7 +8,7 @@ MESSAGE COLOR 5 "x".
 
 (source_code
   (message_statement
-    (color_phrase
+    color: (color_phrase
       (number_literal))
     (string_literal)))
 
@@ -22,6 +22,6 @@ MESSAGE COLOR VALUE(5) "x".
 
 (source_code
   (message_statement
-    (color_phrase
+    color: (color_phrase
       value: (number_literal))
     (string_literal)))

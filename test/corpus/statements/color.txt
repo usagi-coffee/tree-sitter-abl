@@ -15,6 +15,7 @@ COLOR 7 PROMPT 3 field1 WITH FRAME f1.
 
 (source_code
   (color_statement
+    (display)
     color: (color_phrase
       (number_literal))
     (identifier))
@@ -25,18 +26,22 @@ COLOR 7 PROMPT 3 field1 WITH FRAME f1.
     (identifier)
     (identifier))
   (color_statement
+    (display)
     color: (color_phrase
       (identifier))
     (identifier))
   (color_statement
+    (display)
     color: (color_phrase
       value: (identifier))
     (identifier))
   (color_statement
+    (display)
     color: (color_phrase
       (string_literal))
     (identifier))
   (color_statement
+    (display)
     color: (color_phrase
       foreground: (identifier))
     (identifier))
@@ -67,6 +72,7 @@ COLOR PROMPT INPUT field1 field2 WITH FRAME f1.
 
 (source_code
   (color_statement
+    (display)
     color: (color_phrase
       value: (identifier))
     (qualified_name

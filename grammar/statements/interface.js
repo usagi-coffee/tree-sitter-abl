@@ -48,7 +48,7 @@ module.exports = ({ kw }) => ({
   __interface_event: ($) =>
     seq(
       kw("DEFINE", { offset: 3 }),
-      optional(kw("PUBLIC")),
+      optional(alias(kw("PUBLIC"), $.access_modifier)),
       kw("EVENT"),
       $.__event_body,
       $._terminator,

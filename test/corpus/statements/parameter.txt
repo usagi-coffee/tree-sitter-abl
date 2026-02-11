@@ -323,13 +323,16 @@ DEFINE PARAMETER BUFFER bufTemp FOR TEMP-TABLE ttData PRESELECT.
     table: (identifier))
   (parameter_definition
     name: (identifier)
-    table: (identifier))
+    table: (identifier)
+    (preselect))
   (parameter_definition
     name: (identifier)
-    table: (identifier))
+    table: (identifier)
+    (preselect))
   (parameter_definition
     name: (identifier)
-    table: (identifier)))
+    table: (identifier)
+    (preselect)))
 
 ================================================================================
 PARAMETER DEFINITION - Combinations

@@ -179,11 +179,11 @@ MESSAGE COLOR RED "Color message".
   (message_statement
     (string_literal))
   (message_statement
-    (color_phrase
+    color: (color_phrase
       (string_literal))
     (string_literal))
   (message_statement
-    (color_phrase
+    color: (color_phrase
       (identifier))
     (string_literal)))
 

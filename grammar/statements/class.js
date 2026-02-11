@@ -104,7 +104,7 @@ module.exports = ({ kw }) => ({
   __method_parameter: ($) =>
     choice(
       seq(
-        optional(choice(kw("INPUT"), kw("OUTPUT"), kw("INPUT-OUTPUT"))),
+        optional(field("direction", choice(kw("INPUT"), kw("OUTPUT"), kw("INPUT-OUTPUT")))),
         field("name", $.identifier),
         $.__method_variable_type_phrase,
         optional(alias(kw("NO-UNDO"), $.no_undo)),
@@ -315,7 +315,7 @@ module.exports = ({ kw }) => ({
     ),
 
   __method_extent_phrase: ($) =>
-    prec.right(seq(kw("EXTENT"), optional($.__method_extent_size))),
+    prec.right(seq(kw("EXTENT"), optional(field("size", $.__method_extent_size)))),
   __method_extent_size: ($) =>
     choice(
       $.number_literal,
@@ -324,11 +324,11 @@ module.exports = ({ kw }) => ({
     ),
   __method_table_parameter: ($) =>
     seq(
-      optional(choice(kw("INPUT"), kw("OUTPUT"), kw("INPUT-OUTPUT"))),
+      optional(field("direction", choice(kw("INPUT"), kw("OUTPUT"), kw("INPUT-OUTPUT")))),
       choice(
         seq(
           kw("TABLE"),
-          optional(kw("FOR")),
+          optional(field("for", kw("FOR"))),
           field("table", $._identifier_or_qualified_name),
           repeat($.__method_table_parameter_option),
         ),
@@ -339,7 +339,7 @@ module.exports = ({ kw }) => ({
         ),
         seq(
           kw("DATASET"),
-          optional(kw("FOR")),
+          optional(field("for", kw("FOR"))),
           field("dataset", $._identifier_or_qualified_name),
           repeat($.__method_table_parameter_option),
         ),

@@ -66,6 +66,7 @@ DEF PRIVATE SUB-MENU smPrivate
 
 (source_code
   (submenu_definition
+    (access_modifier)
     name: (identifier)
     (menu_element
       (menu_item

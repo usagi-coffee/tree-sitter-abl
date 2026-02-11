@@ -1,6 +1,6 @@
 module.exports = ({ kw }) => ({
   propath_statement: ($) =>
-    seq(kw("PROPATH"), $.__propath__body, $._terminator),
+    seq(kw("PROPATH"), $.__propath_body, $._terminator),
 
-  __propath__body: ($) => seq(choice("=", "+="), field("value", $._expression)),
+  __propath_body: ($) => seq(choice("=", "+="), field("value", $._expression)),
 });

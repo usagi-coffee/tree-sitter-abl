@@ -34,15 +34,18 @@ DEFINE BUFFER bufTemp FOR TEMP-TABLE ttData PRESELECT.
 (source_code
   (buffer_definition
     name: (identifier)
-    table: (identifier))
+    table: (identifier)
+    (preselect))
   (buffer_definition
     name: (identifier)
     table: (qualified_name
       left: (identifier)
-      right: (identifier)))
+      right: (identifier))
+    (preselect))
   (buffer_definition
     name: (identifier)
-    table: (identifier)))
+    table: (identifier)
+    (preselect)))
 
 ================================================================================
 BUFFER DEFINITION - LABEL Option
@@ -250,18 +253,21 @@ DEFINE NEW SHARED BUFFER bufTemp FOR TEMP-TABLE ttData PRESELECT.
     (new_modifier)
     (scope_modifier)
     name: (identifier)
-    table: (identifier))
+    table: (identifier)
+    (preselect))
   (buffer_definition
     (scope_modifier)
     name: (identifier)
     table: (qualified_name
       left: (identifier)
-      right: (identifier)))
+      right: (identifier))
+    (preselect))
   (buffer_definition
     (new_modifier)
     (scope_modifier)
     name: (identifier)
-    table: (identifier)))
+    table: (identifier)
+    (preselect)))
 
 ================================================================================
 BUFFER DEFINITION - Private/Protected with Options
@@ -278,7 +284,8 @@ DEF PROTECTED STATIC BUFFER bufStatic FOR TEMP-TABLE ttData XML-NODE-NAME "node"
     (access_modifier)
     name: (identifier)
     table: (identifier)
-    label: (string_literal))
+    label: (string_literal)
+    (preselect))
   (buffer_definition
     (access_modifier)
     name: (identifier)
@@ -341,6 +348,7 @@ DEFINE BUFFER bufTemp FOR TEMP-TABLE ttOrder
   (buffer_definition
     name: (identifier)
     table: (identifier)
+    (preselect)
     label: (string_literal)
     namespace_uri: (string_literal)
     namespace_prefix: (string_literal)
@@ -368,7 +376,8 @@ DEF NEW SHARED BUFFER b2 FOR Customer PRESELECT.
     (new_modifier)
     (scope_modifier)
     name: (identifier)
-    table: (identifier)))
+    table: (identifier)
+    (preselect)))
 
 ================================================================================
 BUFFER DEFINITION - Reference snippets and ordering
@@ -390,11 +399,13 @@ DEFINE BUFFER procBuf FOR proc-text-buffer.
     (new_modifier)
     (scope_modifier)
     name: (identifier)
-    table: (identifier))
+    table: (identifier)
+    (preselect))
   (buffer_definition
     (scope_modifier)
     name: (identifier)
-    table: (identifier))
+    table: (identifier)
+    (preselect))
   (buffer_definition
     (access_modifier)
     (static_modifier)

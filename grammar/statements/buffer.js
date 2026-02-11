@@ -14,7 +14,7 @@ module.exports = ({ kw }) => ({
     seq(
       field("name", $.identifier),
       kw("FOR"),
-      optional(alias(kw("TEMP-TABLE"), $.temp_table)),
+      optional(field("for", kw("TEMP-TABLE"))),
       field("table", $._identifier_or_qualified_name),
       repeat(
         choice(

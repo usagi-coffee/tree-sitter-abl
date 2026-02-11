@@ -53,6 +53,7 @@ END ENUM.
       name: (identifier)))
   (enum_statement
     name: (identifier)
+    (flags)
     (member
       name: (identifier)
       (number_literal))
@@ -135,6 +136,7 @@ END ENUM.
       name: (identifier)))
   (enum_statement
     name: (identifier)
+    (flags)
     (member
       name: (identifier)
       (number_literal))

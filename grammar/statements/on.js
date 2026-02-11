@@ -47,9 +47,15 @@ module.exports = ({ kw }) => ({
   __on_of_phrase: ($) =>
     seq(
       kw("OF"),
-      optional(kw("MENU-ITEM")),
+      optional(field("of", kw("MENU-ITEM"))),
       field("widget", $.widget_phrase),
-      repeat(seq(",", optional(kw("MENU-ITEM")), field("widget", $.widget_phrase))),
+      repeat(
+        seq(
+          ",",
+          optional(field("of", kw("MENU-ITEM"))),
+          field("widget", $.widget_phrase),
+        ),
+      ),
     ),
   __on_referencing_phrase: ($) =>
     choice(

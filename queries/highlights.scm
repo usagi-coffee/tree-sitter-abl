@@ -113,6 +113,7 @@
   (cdecl)
   (centered)
   (chained)
+  (clear)
   (clipboard)
   (close)
   (collate)
@@ -126,6 +127,7 @@
   (default)
   (disabled)
   (disable_auto_zap)
+  (display)
   (down)
   (drop_down)
   (drop_down_list)
@@ -139,6 +141,7 @@
   (first)
   (fit_last_column)
   (fixed_only)
+  (flags)
   (flat_button)
   (foreign_key_hidden)
   (forward)
@@ -215,6 +218,7 @@
   (performance)
   (persistent)
   (portrait)
+  (preselect)
   (prev)
   (primary)
   (rcode_information)
@@ -448,7 +452,6 @@
   "FIND"
   "FIRST"
   "FIX-CODEPAGE"
-  "FLAGS"
   "FOCUS"
   "FONT"
   "FONT-TABLE"
@@ -606,7 +609,6 @@
   "PREV"
   "PRINTER"
   "PRINTER-SETUP"
-  "PRIVATE"
   "PROC-HANDLE"
   "PROC-STATUS"
   "PROCEDURE"
@@ -616,7 +618,6 @@
   "PROMSGS"
   "PROPATH"
   "PROPERTY"
-  "PUBLIC"
   "PUBLISH"
   "PUT"
   "PUT-KEY-VALUE"
@@ -740,7 +741,6 @@
   "UNDO"
   "UNFORMATTED"
   "UNIX"
-  "UNLESS-HIDDEN"
   "UNLOAD"
   "UNSUBSCRIBE"
   "UNTIL"
