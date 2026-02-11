@@ -90,6 +90,16 @@ seq(kw("DELIMITER"), field("delimiter", $.string_literal))
 ```
 
 2. Alias trivial flags and avoid `_option` suffix.
+
+Trivial flags are:
+ - "NO-ERROR", "NO-LOBS", etc
+ - any `optional(kw("..."))`
+
+Trivial flags are NOT:
+ - starting statement keywords
+ - keywords before terminatotor e.g `optional(kw("CASE"))`.
+ - `choice(kw("1"), kw("2"), ...)`, those should be moved into a separate rule/phrase
+
 ```js
 // Bad
 alias($.__no_labels, $.no_labels_option)
@@ -100,7 +110,13 @@ alias(kw("NO-LABELS"), $.no_labels),
 
 3. Remove trivial* helpers
 
-> choice rules like `__error_scope_type: ($) => choice(kw("BLOCK-LEVEL"), kw("ROUTINE-LEVEL")),` are non-trivial, do not remove them!
+Trivial rules are:
+ - rules like `__statement_no_error: ($) => kw("NO-ERROR")`
+ - rules like `__statement_format: ($) => seq(kw("FORMAT"), $.string_literal)`
+
+Trivial rules are NOT rules that:
+ - are choice rules like `__error_scope_type: ($) => choice(kw("BLOCK-LEVEL"), kw("ROUTINE-LEVEL")),` are non-trivial, do not remove them!
+ - are main `_body` rules of the statement e.g `__input_clear_body`, those need to stay as they get optimized better.
 
 ```js
 // Bad
