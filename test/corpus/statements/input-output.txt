@@ -107,83 +107,83 @@ INPUT-OUTPUT STREAM sIO THROUGH "filter" CONVERT SOURCE "ibm850" TARGET "utf-8".
   (for_statement
     (record
       (record
-        (identifier)
-        (binary_expression
+        record: (identifier)
+        where: (binary_expression
           (qualified_name
-            (identifier)
-            (identifier))
+            left: (identifier)
+            right: (identifier))
           (number_literal))))
     (body
       (display_statement
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (format_phrase
-          (string_literal)))))
+          label: (string_literal)))))
   (input_output_statement
-    (identifier)
+    program: (identifier)
     (unbuffered))
   (for_statement
     (record
       (record
-        (identifier)
-        (binary_expression
+        record: (identifier)
+        where: (binary_expression
           (qualified_name
-            (identifier)
-            (identifier))
+            left: (identifier)
+            right: (identifier))
           (number_literal))))
     (body
       (export_statement
         (qualified_name
-          (identifier)
-          (identifier)))
+          left: (identifier)
+          right: (identifier)))
       (set_statement
         (field
-          (qualified_name
-            (identifier)
-            (identifier))))))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier))))))
   (input_output_statement
     (close))
   (for_statement
     (record
       (record
-        (identifier)
-        (binary_expression
+        record: (identifier)
+        where: (binary_expression
           (qualified_name
-            (identifier)
-            (identifier))
+            left: (identifier)
+            right: (identifier))
           (number_literal))))
     (frame_phrase
-      (number_literal))
+      column: (number_literal))
     (body
       (display_statement
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (format_phrase
-          (string_literal)))))
+          label: (string_literal)))))
   (input_output_statement
-    (identifier)
+    value: (identifier)
     (no_echo))
   (input_output_statement
-    (identifier)
-    (string_literal)
+    stream: (identifier)
+    program: (string_literal)
     (unbuffered)
     (convert_phrase
       (no_convert)))
   (input_output_statement
-    (identifier)
-    (string_literal)
+    stream: (identifier)
+    program: (string_literal)
     (convert_phrase
-      (string_literal)
-      (string_literal))))
+      source: (string_literal)
+      target: (string_literal))))

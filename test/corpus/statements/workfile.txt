@@ -134,19 +134,19 @@ DEFINE PRIVATE WORKFILE wfPrivate FIELD f1 AS INTEGER.
   (workfile_definition
     (new_modifier)
     (scope_modifier)
-    (identifier)
+    name: (identifier)
     (field
-      (identifier)
-      (identifier)))
+      name: (identifier)
+      type: (identifier)))
   (workfile_definition
     (scope_modifier)
-    (identifier)
+    name: (identifier)
     (field
-      (identifier)
-      (identifier)))
+      name: (identifier)
+      type: (identifier)))
   (workfile_definition
     (access_modifier)
-    (identifier)
+    name: (identifier)
     (field
-      (identifier)
-      (identifier))))
+      name: (identifier)
+      type: (identifier))))

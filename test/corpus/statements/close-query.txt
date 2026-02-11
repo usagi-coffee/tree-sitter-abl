@@ -24,4 +24,4 @@ CLOSE QUERY q-cust.
 
 (source_code
   (close_query_statement
-    (identifier)))
+    query: (identifier)))

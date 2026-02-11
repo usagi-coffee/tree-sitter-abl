@@ -39,12 +39,12 @@ item.item = ipcItem NO-LOCK.
   (preprocessor_directive)
   (preprocessor_directive)
   (variable_definition
-    (identifier)
-    (identifier))
+    name: (identifier)
+    type: (identifier))
   (preprocessor_directive)
   (parameter_definition
-    (identifier)
-    (identifier))
+    name: (identifier)
+    type: (identifier))
   (preprocessor_directive)
   (preprocessor_directive)
   (preprocessor_directive))

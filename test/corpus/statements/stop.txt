@@ -38,75 +38,75 @@ END.
 
 (source_code
   (variable_definition
-    (identifier)
-    (identifier)
+    name: (identifier)
+    type: (identifier)
     (no_undo))
   (for_statement
     (record
       (record
-        (identifier)))
+        record: (identifier)))
     (body
       (display_statement
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (field
-          (qualified_name
-            (identifier)
-            (identifier))))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier))))
       (update_statement
         (field
-          (qualified_name
-            (identifier)
-            (identifier))))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier))))
       (assignment_statement
-        (identifier)
-        (assignment_operator)
-        (boolean_literal))
+        left: (identifier)
+        operator: (assignment_operator)
+        right: (boolean_literal))
       (message_statement
         (string_literal))
       (message_statement
         (string_literal)
         (set_update_phrase
-          (identifier)))
+          field: (identifier)))
       (if_statement
         (identifier)
-        (stop_statement))))
+        then: (stop_statement))))
   (variable_definition
-    (identifier)
-    (identifier)
+    name: (identifier)
+    type: (identifier)
     (no_undo))
   (for_statement
     (record
       (record
-        (identifier)))
+        record: (identifier)))
     (on_stop_phrase)
     (body
       (display_statement
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (field
-          (qualified_name
-            (identifier)
-            (identifier))))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier))))
       (update_statement
         (field
-          (qualified_name
-            (identifier)
-            (identifier))))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier))))
       (assignment_statement
-        (identifier)
-        (assignment_operator)
-        (boolean_literal))
+        left: (identifier)
+        operator: (assignment_operator)
+        right: (boolean_literal))
       (message_statement
         (string_literal)
         (string_literal)
         (view_as_phrase)
         (set_update_phrase
-          (identifier)))
+          field: (identifier)))
       (if_statement
         (identifier)
-        (stop_statement)))))
+        then: (stop_statement)))))

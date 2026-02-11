@@ -194,222 +194,222 @@ UPDATE field1 SPACE(2) SKIP(1) ^.
   (for_statement
     (record
       (record
-        (identifier)))
+        record: (identifier)))
     (body
       (update_statement
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (field
-          (qualified_name
-            (identifier)
-            (identifier))))))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier))))))
   (for_statement
     (record
       (record
-        (identifier)))
+        record: (identifier)))
     (body
       (update_statement
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (field
-          (qualified_name
-            (identifier)
-            (identifier))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier))
           (format_phrase
-            (binary_expression
+            condition: (binary_expression
               (qualified_name
-                (identifier)
-                (identifier))
+                left: (identifier)
+                right: (identifier))
               (number_literal))
-            (string_literal)
-            (string_literal))))
+            message: (string_literal)
+            help: (string_literal))))
       (for_statement
         (record
           (record
-            (identifier)
-            (identifier)))
+            record: (identifier)
+            of: (identifier)))
         (body
           (display_statement
-            (qualified_name
-              (identifier)
-              (identifier)))
+            record: (qualified_name
+              left: (identifier)
+              right: (identifier)))
           (update_statement
             (field
-              (qualified_name
-                (identifier)
-                (identifier)))
+              field: (qualified_name
+                left: (identifier)
+                right: (identifier)))
             (field
-              (qualified_name
-                (identifier)
-                (identifier))
+              field: (qualified_name
+                left: (identifier)
+                right: (identifier))
               (format_phrase
-                (binary_expression
+                condition: (binary_expression
                   (qualified_name
-                    (identifier)
-                    (identifier))
+                    left: (identifier)
+                    right: (identifier))
                   (identifier))
-                (string_literal))))))))
+                message: (string_literal))))))))
   (repeat_statement
     (body
       (prompt_for_statement
         (field
-          (qualified_name
-            (identifier)
-            (identifier))))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier))))
       (find_statement
-        (identifier)
-        (qualified_name
-          (identifier)
-          (identifier)))
+        table: (identifier)
+        values: (qualified_name
+          left: (identifier)
+          right: (identifier)))
       (update_statement
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (frame_phrase
-          (number_literal)
+          column: (number_literal)
           (down
-            (number_literal))))))
+            value: (number_literal))))))
   (variable_definition
-    (identifier)
-    (identifier)
+    name: (identifier)
+    type: (identifier)
     (no_undo)
     (format_phrase
-      (string_literal))
+      format: (string_literal))
     (extent_phrase
-      (number_literal)))
+      size: (number_literal)))
   (form_statement
     (form_item
-      (string_literal))
+      field: (string_literal))
     (form_item
-      (qualified_name
-        (identifier)
-        (identifier)))
+      field: (qualified_name
+        left: (identifier)
+        right: (identifier)))
     (form_item
-      (identifier))
+      field: (identifier))
     (form_item
-      (number_literal))
+      field: (number_literal))
     (form_item)
     (form_item
-      (string_literal))
+      field: (string_literal))
     (form_item
-      (qualified_name
-        (identifier)
-        (identifier)))
+      field: (qualified_name
+        left: (identifier)
+        right: (identifier)))
     (form_item
-      (identifier))
+      field: (identifier))
     (form_item
-      (number_literal))
+      field: (number_literal))
     (form_item
-      (number_literal))
+      skip: (number_literal))
     (form_item
-      (string_literal))
+      field: (string_literal))
     (form_item
-      (identifier))
+      field: (identifier))
     (form_item
-      (identifier))
+      field: (identifier))
     (form_item
-      (number_literal))
+      field: (number_literal))
     (frame_phrase
-      (identifier)
+      frame: (identifier)
       (centered)
       (no_labels)
-      (string_literal)))
+      title: (string_literal)))
   (for_statement
     (record
       (record
-        (identifier)
+        record: (identifier)
         (no_lock)))
     (record
       (record
-        (identifier)
-        (identifier)))
+        record: (identifier)
+        of: (identifier)))
     (body
       (display_statement
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (frame_phrase
-          (identifier)
+          frame: (identifier)
           (centered)))
       (update_statement
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (field
-          (identifier))
+          field: (identifier))
         (frame_phrase
-          (identifier)))
+          frame: (identifier)))
       (assignment_statement
-        (identifier)
-        (assignment_operator)
-        (string_literal))))
+        left: (identifier)
+        operator: (assignment_operator)
+        right: (string_literal))))
   (update_statement
-    (identifier)
-    (identifier)
+    record: (identifier)
+    except: (identifier)
     (frame_phrase
-      (identifier)))
+      frame: (identifier)))
   (update_statement
     (field
-      (identifier))
+      field: (identifier))
     (field
       (space_phrase
-        (number_literal)))
+        space: (number_literal)))
     (field
       (skip_phrase
-        (number_literal)))
+        skip: (number_literal)))
     (field)))

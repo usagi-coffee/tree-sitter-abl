@@ -39,62 +39,62 @@ END ENUM.
 
 (source_code
   (enum_statement
-    (identifier)
+    name: (identifier)
     (member
+      name: (identifier))
+    (member
+      name: (identifier)
       (identifier))
     (member
-      (identifier)
-      (identifier))
+      name: (identifier))
     (member
-      (identifier))
+      name: (identifier))
     (member
-      (identifier))
-    (member
-      (identifier)))
+      name: (identifier)))
   (enum_statement
-    (identifier)
+    name: (identifier)
     (member
-      (identifier)
+      name: (identifier)
       (number_literal))
     (member
+      name: (identifier))
+    (member
+      name: (identifier))
+    (member
+      name: (identifier)
       (identifier))
     (member
-      (identifier))
-    (member
+      name: (identifier)
       (identifier)
       (identifier))
     (member
-      (identifier)
-      (identifier)
-      (identifier))
+      name: (identifier))
     (member
-      (identifier))
+      name: (identifier))
     (member
-      (identifier))
-    (member
-      (identifier)))
+      name: (identifier)))
   (enum_statement
-    (identifier)
+    name: (identifier)
     (member
-      (identifier))
+      name: (identifier))
     (member
-      (identifier))
+      name: (identifier))
     (member
-      (identifier))
+      name: (identifier))
     (member
-      (identifier)))
+      name: (identifier)))
   (enum_statement
-    (identifier)
+    name: (identifier)
     (member
-      (identifier)
+      name: (identifier)
       (number_literal))
     (member
+      name: (identifier))
+    (member
+      name: (identifier)
       (identifier))
     (member
-      (identifier)
-      (identifier))
-    (member
-      (identifier)
+      name: (identifier)
       (identifier)
       (identifier))))
 
@@ -124,52 +124,52 @@ END ENUM.
 
 (source_code
   (enum_statement
-    (identifier)
+    name: (identifier)
     (member
-      (identifier))
+      name: (identifier))
     (member
-      (identifier))
+      name: (identifier))
     (member
-      (identifier))
+      name: (identifier))
     (member
-      (identifier)))
+      name: (identifier)))
   (enum_statement
-    (identifier)
+    name: (identifier)
     (member
-      (identifier)
+      name: (identifier)
       (number_literal))
     (member
-      (identifier)
+      name: (identifier)
       (number_literal))
     (member
-      (identifier))
+      name: (identifier))
     (member
-      (identifier)
+      name: (identifier)
       (number_literal))
     (member
-      (identifier))
+      name: (identifier))
     (member
-      (identifier)
+      name: (identifier)
       (number_literal))
     (member
-      (identifier))
+      name: (identifier))
     (member
-      (identifier)
+      name: (identifier)
       (number_literal))
     (member
-      (identifier))
+      name: (identifier))
     (member
-      (identifier)
+      name: (identifier)
       (number_literal))
     (member
-      (identifier))
+      name: (identifier))
     (member
-      (identifier)
+      name: (identifier)
       (number_literal))
     (member
-      (identifier))
+      name: (identifier))
     (member
-      (identifier)
+      name: (identifier)
       (number_literal))
     (member
-      (identifier))))
+      name: (identifier))))

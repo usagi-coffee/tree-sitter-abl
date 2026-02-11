@@ -72,9 +72,9 @@ module.exports = ({ kw }) => ({
       kw("BUFFER"),
       field("name", $.identifier),
       kw("FOR"),
-      optional(kw("TEMP-TABLE")),
+      optional(alias(kw("TEMP-TABLE"), $.temp_table)),
       field("table", $._identifier_or_qualified_name),
-      optional(kw("PRESELECT")),
+      optional(alias(kw("PRESELECT"), $.preselect)),
     ),
 
   __parameter_variable_type_phrase: ($) =>

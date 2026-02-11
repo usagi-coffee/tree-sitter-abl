@@ -60,106 +60,106 @@ END.
 
 (source_code
   (variable_definition
-    (identifier)
-    (identifier)
+    name: (identifier)
+    type: (identifier)
     (no_undo)
     (format_phrase
-      (string_literal))
-    (null_literal))
+      format: (string_literal))
+    initial: (null_literal))
   (variable_definition
-    (identifier)
-    (identifier)
+    name: (identifier)
+    type: (identifier)
     (no_undo))
   (do_statement
-    (binary_expression
+    condition: (binary_expression
       (identifier)
       (string_literal))
     (body
       (set_statement
         (field
-          (identifier)
+          field: (identifier)
           (format_phrase
-            (string_literal)))
+            label: (string_literal)))
         (frame_phrase
-          (identifier)
+          frame: (identifier)
           (side_labels)
-          (string_literal)))
+          title: (string_literal)))
       (if_statement
         (binary_expression
           (identifier)
           (string_literal))
-        (connect_statement
-          (function_call
-            (identifier)
+        then: (connect_statement
+          database: (function_call
+            function: (identifier)
             (arguments
               (argument
-                (identifier))))
-          (identifier)
+                name: (identifier))))
+          parameter: (identifier)
           (no_error))
-        (leave_statement))
+        else: (leave_statement))
       (if_statement
         (unary_expression
           (object_access
-            (identifier)
-            (identifier)))
-        (do_statement
+            left: (identifier)
+            right: (identifier)))
+        then: (do_statement
           (body
             (save_cache_statement
-              (identifier)
-              (binary_expression
+              database: (identifier)
+              path: (binary_expression
                 (identifier)
                 (string_literal))
               (no_error))
             (if_statement
               (unary_expression
                 (object_access
-                  (identifier)
-                  (identifier)))
-              (message_statement
+                  left: (identifier)
+                  right: (identifier)))
+              then: (message_statement
                 (string_literal)
                 (identifier)
                 (string_literal)
                 (binary_expression
                   (identifier)
                   (string_literal)))
-              (do_statement
+              else: (do_statement
                 (body
                   (bell_statement)
                   (do_statement
-                    (identifier)
-                    (number_literal)
-                    (object_access
-                      (identifier)
-                      (identifier))
+                    variable: (identifier)
+                    start: (number_literal)
+                    end: (object_access
+                      left: (identifier)
+                      right: (identifier))
                     (body
                       (message_statement
                         (function_call
-                          (object_access
-                            (identifier)
-                            (identifier))
+                          function: (object_access
+                            left: (identifier)
+                            right: (identifier))
                           (arguments
                             (argument
-                              (identifier))))
+                              name: (identifier))))
                         (view_as_phrase)))))))))
-        (do_statement
+        else: (do_statement
           (body
             (bell_statement)
             (do_statement
-              (identifier)
-              (number_literal)
-              (object_access
-                (identifier)
-                (identifier))
+              variable: (identifier)
+              start: (number_literal)
+              end: (object_access
+                left: (identifier)
+                right: (identifier))
               (body
                 (message_statement
                   (function_call
-                    (object_access
-                      (identifier)
-                      (identifier))
+                    function: (object_access
+                      left: (identifier)
+                      right: (identifier))
                     (arguments
                       (argument
-                        (identifier))))
+                        name: (identifier))))
                   (view_as_phrase)))))))
       (disconnect_statement
-        (identifier)
+        database: (identifier)
         (no_error)))))

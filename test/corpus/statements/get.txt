@@ -25,11 +25,13 @@ GET NEXT qCustomer NO-WAIT.
   (get_statement
     query: (identifier))
   (get_statement
-    query: (identifier))
+    query: (identifier)
+    (no_wait))
   (get_statement
     query: (identifier))
   (get_statement
-    query: (identifier)))
+    query: (identifier)
+    (no_wait)))
 
 ================================================================================
 GET - Reference snippet

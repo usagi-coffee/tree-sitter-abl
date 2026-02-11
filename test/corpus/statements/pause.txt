@@ -12,8 +12,10 @@ PAUSE NO-MESSAGE IN WINDOW hWin.
   (pause_statement)
   (pause_statement
     duration: (number_literal)
+    (before_hide)
     message: (string_literal))
   (pause_statement
+    (no_message)
     (in_window_phrase
       window: (identifier))))
 
@@ -33,27 +35,30 @@ PAUSE BEFORE-HIDE NO-MESSAGE.
 
 (source_code
   (pause_statement
-    (number_literal)
-    (string_literal))
+    duration: (number_literal)
+    (before_hide)
+    message: (string_literal))
   (for_statement
     (record
       (record
-        (identifier)
+        record: (identifier)
         (no_lock)))
     (frame_phrase
       (down
-        (number_literal)))
+        value: (number_literal)))
     (body
       (display_statement
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (field
-          (qualified_name
-            (identifier)
-            (identifier))))))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier))))))
   (pause_statement
-    (number_literal)
-    (string_literal))
-  (pause_statement))
+    duration: (number_literal)
+    message: (string_literal))
+  (pause_statement
+    (before_hide)
+    (no_message)))

@@ -100,9 +100,9 @@ MESSAGE "Out of DO block." VIEW-AS ALERT-BOX BUTTONS OK.
     (on_error_phrase)
     (body
       (find_statement
-        (identifier)
+        table: (identifier)
         (where_phrase
-          (binary_expression
+          where: (binary_expression
             (identifier)
             (number_literal))))
       (message_statement
@@ -119,17 +119,17 @@ MESSAGE "Out of DO block." VIEW-AS ALERT-BOX BUTTONS OK.
     (on_error_phrase)
     (body
       (find_statement
-        (identifier)
+        table: (identifier)
         (where_phrase
-          (binary_expression
+          where: (binary_expression
             (identifier)
             (number_literal))))
       (catch_statement
-        (identifier)
-        (qualified_name
-          (identifier)
-          (identifier)
-          (identifier))
+        name: (identifier)
+        type: (qualified_name
+          left: (identifier)
+          right: (identifier)
+          right: (identifier))
         (body
           (message_statement
             (string_literal)

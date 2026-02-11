@@ -13,15 +13,20 @@ INPUT STREAM-HANDLE hStream CLOSE.
   (input_statement
     value: (identifier))
   (input_statement
+    (terminal)
     (convert_phrase
       (no_convert)))
   (input_statement
     name: (identifier)
     directory: (string_literal)
+    (no_attr_list)
     (lob_dir_phrase
       directory: (preprocessor_reference
         (identifier)))
+    (binary)
+    (no_echo)
     map: (identifier)
+    (unbuffered)
     (convert_phrase
       target: (string_literal)
       source: (string_literal)))
@@ -49,43 +54,46 @@ INPUT FROM VALUE(cPath) CONVERT SOURCE "ibm850" TARGET "utf-8".
 
 (source_code
   (input_statement
-    (function_call
-      (identifier)
+    value: (function_call
+      function: (identifier)
       (arguments
         (argument
-          (string_literal)))))
+          name: (string_literal)))))
   (repeat_statement
     (body
       (prompt_for_statement
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (field
-          (qualified_name
-            (identifier)
-            (identifier))))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier))))
       (find_statement
-        (identifier)
-        (input_expression
-          (qualified_name
-            (identifier)
-            (identifier))))
+        table: (identifier)
+        values: (input_expression
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier))))
       (assign_statement
-        (qualified_name
-          (identifier)
-          (identifier)))))
+        record: (qualified_name
+          left: (identifier)
+          right: (identifier)))))
   (input_statement)
   (input_statement
-    (string_literal))
+    directory: (string_literal)
+    (no_attr_list))
   (input_statement
-    (string_literal))
-  (input_statement)
+    value: (string_literal)
+    (no_echo))
   (input_statement
-    (identifier)
+    (terminal))
+  (input_statement
+    value: (identifier)
     (convert_phrase
-      (string_literal)
-      (string_literal))))
+      source: (string_literal)
+      target: (string_literal))))
 
 ================================================================================
 INPUT - NO-MAP and NO-CONVERT
@@ -99,11 +107,13 @@ INPUT STREAM sIn FROM VALUE(cPath) ECHO.
 (source_code
   (input_statement
     file: (string_literal)
+    (no_map)
     (convert_phrase
       (no_convert)))
   (input_statement
     name: (identifier)
-    value: (identifier)))
+    value: (identifier)
+    (echo)))
 
 ================================================================================
 INPUT - MAP with string and CONVERT SOURCE

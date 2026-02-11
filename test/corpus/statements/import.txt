@@ -71,108 +71,109 @@ INPUT CLOSE.
 
 (source_code
   (input_statement
-    (qualified_name
-      (identifier)
-      (identifier)))
+    file: (qualified_name
+      left: (identifier)
+      right: (identifier)))
   (disable_triggers_statement
-    (identifier))
+    table: (identifier))
   (repeat_statement
     (body
       (create_statement
-        (identifier))
+        table: (identifier))
       (import_statement
         (identifier))))
   (input_statement)
   (variable_definition
-    (identifier)
-    (qualified_name
-      (identifier)
-      (identifier))
+    name: (identifier)
+    like: (qualified_name
+      left: (identifier)
+      right: (identifier))
     (no_undo))
   (variable_definition
-    (identifier)
-    (qualified_name
-      (identifier)
-      (identifier))
+    name: (identifier)
+    like: (qualified_name
+      left: (identifier)
+      right: (identifier))
     (no_undo))
   (variable_definition
-    (identifier)
-    (qualified_name
-      (identifier)
-      (identifier))
+    name: (identifier)
+    like: (qualified_name
+      left: (identifier)
+      right: (identifier))
     (no_undo))
   (input_statement
-    (identifier))
+    file: (identifier))
   (for_statement
     (record
       (record
-        (identifier)))
+        record: (identifier)))
     (body
       (import_statement
         (delimiter_phrase
-          (string_literal))
+          delimiter: (string_literal))
         (identifier)
         (identifier)
         (identifier))
       (display_statement
         (field
-          (identifier))
+          field: (identifier))
         (field
-          (identifier))
+          field: (identifier))
         (field
-          (identifier)))))
+          field: (identifier)))))
   (input_statement)
   (variable_definition
-    (identifier)
-    (identifier)
+    name: (identifier)
+    type: (identifier)
     (no_undo)
     (format_phrase
-      (string_literal)))
+      format: (string_literal)))
   (input_statement
-    (function_call
-      (identifier)
+    value: (function_call
+      function: (identifier)
       (arguments
         (argument
-          (string_literal)))))
+          name: (string_literal)))))
   (do_statement
-    (boolean_literal)
+    condition: (boolean_literal)
     (on_endkey_phrase)
     (body
       (import_statement
         (unformatted_phrase
-          (identifier)))
+          field: (identifier)))
       (display_statement
-        (identifier)
+        record: (identifier)
         (frame_phrase
           (down)
-          (identifier)))
+          frame: (identifier)))
       (down_statement
         (frame_phrase
-          (identifier)
+          frame: (identifier)
           (no_labels)))))
   (input_statement)
   (variable_definition
-    (identifier)
-    (identifier)
+    name: (identifier)
+    type: (identifier)
     (no_undo))
   (assign_statement
     (assign_phrase
       (assign_pair
-        (object_access
-          (identifier)
-          (identifier))
-        (string_literal))
+        left: (object_access
+          left: (identifier)
+          right: (identifier))
+        right: (string_literal))
       (assign_pair
-        (function_call
-          (identifier)
+        left: (function_call
+          function: (identifier)
           (arguments
             (argument
-              (identifier))))
-        (object_access
-          (identifier)
-          (identifier)))))
+              name: (identifier))))
+        right: (object_access
+          left: (identifier)
+          right: (identifier)))))
   (input_statement
-    (string_literal)
+    file: (string_literal)
+    (binary)
     (convert_phrase
       (no_convert)))
   (import_statement

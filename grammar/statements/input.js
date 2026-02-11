@@ -6,12 +6,15 @@ module.exports = ({ kw }) => ({
       optional($.__input_stream),
       choice(kw("CLOSE"), seq(kw("FROM"), $.__input_from_target)),
       optional(alias($.__input_lob_dir_phrase, $.lob_dir_phrase)),
-      optional(kw("BINARY")),
-      optional(choice(kw("ECHO"), kw("NO-ECHO"))),
+      optional(alias(kw("BINARY"), $.binary)),
+      optional(choice(alias(kw("ECHO"), $.echo), alias(kw("NO-ECHO"), $.no_echo))),
       optional(
-        choice(seq(kw("MAP"), field("map", $.__input_map_entry)), kw("NO-MAP")),
+        choice(
+          seq(kw("MAP"), field("map", $.__input_map_entry)),
+          alias(kw("NO-MAP"), $.no_map),
+        ),
       ),
-      optional(kw("UNBUFFERED")),
+      optional(alias(kw("UNBUFFERED"), $.unbuffered)),
       optional(alias($.__input_convert_phrase, $.convert_phrase)),
     ),
 
@@ -21,14 +24,14 @@ module.exports = ({ kw }) => ({
   __input_from_target: ($) =>
     choice(
       field("file", $.__input_file_target),
-      kw("TERMINAL"),
+      alias(kw("TERMINAL"), $.terminal),
       seq(kw("VALUE"), "(", field("value", $._expression), ")"),
       seq(
         kw("OS-DIR"),
         "(",
         field("directory", $._expression),
         ")",
-        optional(kw("NO-ATTR-LIST")),
+        optional(alias(kw("NO-ATTR-LIST"), $.no_attr_list)),
       ),
     ),
   __input_file_target: ($) =>

@@ -23,19 +23,19 @@ IF ans THEN DICTIONARY.
 
 (source_code
   (variable_definition
-    (identifier)
-    (identifier)
+    name: (identifier)
+    type: (identifier)
     (no_undo))
   (display_statement
     (field
-      (string_literal))
+      field: (string_literal))
     (frame_phrase
-      (number_literal)
-      (number_literal)
+      row: (number_literal)
+      column: (number_literal)
       (no_labels)))
   (update_statement
     (field
-      (identifier)))
+      field: (identifier)))
   (if_statement
     (identifier)
-    (dictionary_statement)))
+    then: (dictionary_statement)))

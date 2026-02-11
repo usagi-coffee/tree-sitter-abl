@@ -144,7 +144,7 @@ module.exports = ({ kw }) => ({
         choice(
           seq(
             kw("INITIAL", { offset: 4 }),
-            choice($._expression, seq("[", optional($._expressions), "]")),
+            field("initial", choice($._expression, seq("[", optional($._expressions), "]"))),
           ),
           seq(kw("SERIALIZE-NAME"), field("serialize_name", $.string_literal)),
           alias(kw("NO-UNDO"), $.no_undo),

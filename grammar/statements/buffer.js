@@ -14,11 +14,11 @@ module.exports = ({ kw }) => ({
     seq(
       field("name", $.identifier),
       kw("FOR"),
-      optional(kw("TEMP-TABLE")),
+      optional(alias(kw("TEMP-TABLE"), $.temp_table)),
       field("table", $._identifier_or_qualified_name),
       repeat(
         choice(
-          kw("PRESELECT"),
+          alias(kw("PRESELECT"), $.preselect),
           seq(kw("LABEL"), field("label", choice($.identifier, $.string_literal))),
           seq(kw("NAMESPACE-URI"), field("namespace_uri", $.string_literal)),
           seq(

@@ -44,52 +44,52 @@ SUBSCRIBE TO "spaced event" ANYWHERE RUN-PROCEDURE "spaced event".
 
 (source_code
   (variable_definition
-    (identifier)
-    (identifier)
+    name: (identifier)
+    type: (identifier)
     (no_undo))
   (variable_definition
-    (identifier)
-    (identifier)
+    name: (identifier)
+    type: (identifier)
     (no_undo))
   (variable_definition
-    (identifier)
-    (identifier)
+    name: (identifier)
+    type: (identifier)
     (no_undo))
   (run_statement
-    (procedure_name)
-    (persistent))
+    procedure: (procedure_name)
+    handle: (persistent))
   (run_statement
-    (procedure_name)
-    (persistent)
+    procedure: (procedure_name)
+    handle: (persistent)
     (arguments
       (argument
-        (identifier))))
+        name: (identifier))))
   (run_statement
-    (procedure_name)
-    (persistent))
+    procedure: (procedure_name)
+    handle: (persistent))
   (subscribe_statement
-    (identifier)
-    (string_literal)
+    subscriber: (identifier)
+    event: (string_literal)
     (in_phrase
-      (identifier)))
+      publisher: (identifier)))
   (parameter_definition
-    (identifier)
-    (identifier)
+    name: (identifier)
+    type: (identifier)
     (no_undo))
   (subscribe_statement
-    (string_literal)
+    event: (string_literal)
     (in_phrase
-      (identifier)))
+      publisher: (identifier)))
   (subscribe_statement
-    (identifier)
-    (identifier)
+    subscriber: (identifier)
+    event: (identifier)
     (in_phrase
-      (identifier))
+      publisher: (identifier))
     (run_procedure_phrase
-      (string_literal))
+      procedure: (string_literal))
     (no_error))
   (subscribe_statement
-    (string_literal)
+    event: (string_literal)
     (anywhere)
     (run_procedure_phrase
-      (string_literal))))
+      procedure: (string_literal))))

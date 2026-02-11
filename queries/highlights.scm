@@ -88,16 +88,19 @@
   (abstract_modifier)
   (access_modifier)
   (all)
+  (allow_replication)
+  (ansi_only)
   (anywhere)
   (append)
   (array_message)
-  (ascending)
+  (ask_overwrite)
   (attr_space)
   (auto_endkey)
   (auto_go)
   (auto_return)
   (background)
   (backwards)
+  (before_hide)
   (binary)
   (bind)
   (bind_where)
@@ -113,28 +116,34 @@
   (clipboard)
   (close)
   (collate)
+  (compares)
+  (convert_3d_colors)
+  (create_test_file)
   (current)
   (cursor)
   (data_bind)
   (deblank)
   (default)
-  (descending)
   (disabled)
   (disable_auto_zap)
+  (down)
   (drop_down)
   (drop_down_list)
   (drop_target)
   (echo)
   (exclusive)
   (exclusive_lock)
+  (explicit)
   (final)
   (final_modifier)
   (first)
   (fit_last_column)
+  (fixed_only)
   (flat_button)
   (foreign_key_hidden)
   (forward)
   (forwards)
+  (from_current)
   (generate_md5)
   (graphic_edge)
   (group_box)
@@ -152,7 +161,10 @@
   (message)
   (moveable)
   (multiple)
+  (must_exist)
   (nested)
+  (new)
+  (new_instance)
   (new_modifier)
   (next)
   (not)
@@ -160,6 +172,7 @@
   (no_apply)
   (no_array_message)
   (no_assign)
+  (no_attr_list)
   (no_attr_space)
   (no_bind_where)
   (no_box)
@@ -181,6 +194,8 @@
   (no_lock)
   (no_lookahead)
   (no_map)
+  (no_message)
+  (no_pause)
   (no_prefetch)
   (no_row_markers)
   (no_separate_connection)
@@ -205,12 +220,16 @@
   (rcode_information)
   (recursive)
   (reference_only)
+  (replace)
   (reposition)
   (resizable)
+  (retain_shape)
+  (return_to_start_dir)
   (reverse_from)
   (rounded)
   (row)
   (rule)
+  (save_as)
   (scope_modifier)
   (scrollbar_horizontal)
   (scrollbar_vertical)
@@ -223,6 +242,7 @@
   (share)
   (share_lock)
   (side_labels)
+  (silent)
   (simple)
   (skip)
   (skip_group_duplicates)
@@ -232,6 +252,7 @@
   (static_modifier)
   (stdcall)
   (stream_io)
+  (stretch_to_fit)
   (submenu_help)
   (table_scan)
   (terminal)
@@ -241,15 +262,20 @@
   (thread_safe)
   (three_d)
   (transaction)
+  (transparent)
+  (trim)
   (unbuffered)
   (unformatted)
   (unique)
   (unique_match)
   (unless_hidden)
+  (up)
+  (use_filename)
   (use_revvideo)
   (use_text)
   (use_underline)
   (use_widget_pool)
+  (validate)
   (verbose)
   (word_index)
   "ABSTRACT"
@@ -261,16 +287,13 @@
   "ALERT-BOX"
   "ALIAS"
   "ALL"
-  "ALLOW-REPLICATION"
   "AMBIGUOUS"
   "AND"
-  "ANSI-ONLY"
-  "ANYWHERE"
   "APPEND"
   "APPLICATION"
   "APPLY"
   "AS"
-  "ASK-OVERWRITE"
+  "ASCENDING"
   "ASSEMBLY"
   "ASSIGN"
   "ASYNCHRONOUS"
@@ -282,12 +305,10 @@
   "AVAILABLE"
   "AVERAGE"
   "BASE-KEY"
-  "BEFORE-HIDE"
   "BEFORE-TABLE"
   "BEGINS"
   "BELL"
   "BGCOLOR"
-  "BINARY"
   "BLANK"
   "BLINK-"
   "BLOCK-LEVEL"
@@ -311,7 +332,6 @@
   "CALL"
   "CAN-FIND"
   "CASE"
-  "CASE-SENSITIVE"
   "CATCH"
   "CHOOSE"
   "CLASS"
@@ -338,7 +358,6 @@
   "COLUMNS"
   "COMBO-BOX"
   "COMMAND"
-  "COMPARES"
   "COMPILE"
   "COMPILER"
   "COMPLETE"
@@ -348,11 +367,9 @@
   "CONTROL"
   "CONTROL-FRAME"
   "CONVERT"
-  "CONVERT-3D-COLORS"
   "COPY-LOB"
   "COUNT"
   "CREATE"
-  "CREATE-TEST-FILE"
   "CURRENT"
   "CURRENT-CHANGED"
   "CURRENT-WINDOW"
@@ -389,11 +406,9 @@
   "DO"
   "DOS"
   "DOWN"
-  "DROP-TARGET"
   "DUMP"
   "DYNAMIC-NEW"
   "EACH"
-  "ECHO"
   "EDGE-CHARS"
   "EDGE-PIXELS"
   "EDITING"
@@ -417,7 +432,6 @@
   "EXCEPT"
   "EXCLUSIVE-LOCK"
   "EXPAND"
-  "EXPLICIT"
   "EXPORT"
   "EXTENDED"
   "EXTENT"
@@ -434,7 +448,6 @@
   "FIND"
   "FIRST"
   "FIX-CODEPAGE"
-  "FIXED-ONLY"
   "FLAGS"
   "FOCUS"
   "FONT"
@@ -445,7 +458,6 @@
   "FRAME"
   "FREQUENCY"
   "FROM"
-  "FROM-CURRENT"
   "FUNCTION"
   "GE"
   "GET"
@@ -491,7 +503,6 @@
   "LABEL-FGCOLOR"
   "LABEL-FONT"
   "LABEL-PFCOLOR"
-  "LANDSCAPE"
   "LANGUAGES"
   "LARGE"
   "LARGE-TO-SMALL"
@@ -532,31 +543,22 @@
   "MODULO"
   "MOUSE-POINTER"
   "MULTIPLE"
-  "MUST-EXIST"
   "NAMESPACE-PREFIX"
   "NAMESPACE-URI"
   "NATIVE"
   "NE"
   "NEW"
-  "NEW-INSTANCE"
   "NEXT"
   "NEXT-PROMPT"
   "NO"
   "NO-APPLY"
-  "NO-ATTR-LIST"
   "NO-BOX"
   "NO-CONSOLE"
-  "NO-CONVERT"
   "NO-CURRENT-VALUE"
   "NO-DRAG"
-  "NO-ECHO"
   "NO-ERROR"
   "NO-LABELS"
-  "NO-LOBS"
   "NO-LOCK"
-  "NO-MAP"
-  "NO-MESSAGE"
-  "NO-PAUSE"
   "NO-TAB-STOP"
   "NO-WAIT"
   "NO-WORD-WRAP"
@@ -599,11 +601,9 @@
   "PAUSE"
   "PERSISTENT"
   "PFCOLOR"
-  "PORTRAIT"
   "PREPROCESS"
   "PRESELECT"
   "PREV"
-  "PRIMARY"
   "PRINTER"
   "PRINTER-SETUP"
   "PRIVATE"
@@ -630,19 +630,14 @@
   "READKEY"
   "RECID"
   "RECTANGLE"
-  "RECURSIVE"
-  "REFERENCE-ONLY"
   "RELATION-FIELDS"
   "RELEASE"
   "REPEAT"
-  "REPLACE"
   "REPOSITION"
   "RESULT"
-  "RETAIN-SHAPE"
   "RETRY"
   "RETRY-CANCEL"
   "RETURN"
-  "RETURN-TO-START-DIR"
   "RETURNS"
   "REVERT"
   "RIGHT"
@@ -655,7 +650,6 @@
   "RUN-PROCEDURE"
   "RVV-"
   "SAVE"
-  "SAVE-AS"
   "SAX-ATTRIBUTES"
   "SAX-READER"
   "SAX-WRITER"
@@ -701,7 +695,6 @@
   "STREAM"
   "STREAM-HANDLE"
   "STREAM-IO"
-  "STRETCH-TO-FIT"
   "STRING-XREF"
   "SUB-AVERAGE"
   "SUB-COUNT"
@@ -738,13 +731,10 @@
   "TOPIC"
   "TOTAL"
   "TRANSACTION-MODE"
-  "TRANSPARENT"
   "TRIGGER"
   "TRIGGERS"
-  "TRIM"
   "TRUE"
   "TTCODEPAGE"
-  "UNBUFFERED"
   "UNDERLINE"
   "UNDERLINE-"
   "UNDO"
@@ -757,7 +747,6 @@
   "UP"
   "UPDATE"
   "USE"
-  "USE-FILENAME"
   "USE-INDEX"
   "USING"
   "V6FRAME"

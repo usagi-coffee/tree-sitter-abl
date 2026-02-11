@@ -458,12 +458,12 @@ DEFINE BUTTON button-1 LABEL "Drop Here" DROP-TARGET.
 
 (source_code
   (button_definition
-    (identifier)
-    (string_literal))
+    name: (identifier)
+    label: (string_literal))
   (button_definition
-    (identifier)
-    (string_literal))
+    name: (identifier)
+    label: (string_literal))
   (button_definition
-    (identifier)
-    (string_literal)
+    name: (identifier)
+    label: (string_literal)
     (drop_target)))

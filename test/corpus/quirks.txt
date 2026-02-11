@@ -150,7 +150,7 @@ END.
     name: (identifier)
     type: (identifier)
     (no_undo)
-    (number_literal))
+    initial: (number_literal))
   (variable_definition
     name: (identifier)
     type: (identifier)

@@ -9,7 +9,8 @@ SHOW-STATS CLEAR.
 
 (source_code
   (show_stats_statement)
-  (show_stats_statement))
+  (show_stats_statement
+    (clear)))
 
 ================================================================================
 SHOW-STATS - reference snippet
@@ -22,5 +23,5 @@ SHOW-STATS.
 
 (source_code
   (run_statement
-    (procedure_name))
+    procedure: (procedure_name))
   (show_stats_statement))

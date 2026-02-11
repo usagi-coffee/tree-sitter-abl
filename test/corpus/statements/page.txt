@@ -42,57 +42,57 @@ END.
 
 (source_code
   (variable_definition
-    (identifier)
-    (identifier)
+    name: (identifier)
+    type: (identifier)
     (no_undo))
   (output_statement)
   (for_statement
     (record
       (record
-        (identifier)
+        record: (identifier)
         (no_lock))
       (by_phrase
-        (qualified_name
-          (identifier)
-          (identifier))))
+        by: (qualified_name
+          left: (identifier)
+          right: (identifier))))
     (body
       (if_statement
         (binary_expression
           (qualified_name
-            (identifier)
-            (identifier))
+            left: (identifier)
+            right: (identifier))
           (identifier))
-        (do_statement
+        then: (do_statement
           (body
             (if_statement
               (binary_expression
                 (identifier)
                 (string_literal))
-              (page_statement))
+              then: (page_statement))
             (assignment_statement
-              (identifier)
-              (assignment_operator)
-              (qualified_name
-                (identifier)
-                (identifier))))))
+              left: (identifier)
+              operator: (assignment_operator)
+              right: (qualified_name
+                left: (identifier)
+                right: (identifier))))))
       (display_statement
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))))))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))))))

@@ -700,391 +700,392 @@ WAIT-FOR WINDOW-CLOSE OF FRAME cust-fr.
 
 (source_code
   (variable_definition
-    (identifier)
-    (qualified_name
-      (identifier)
-      (identifier))
-    (string_literal)
+    name: (identifier)
+    like: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    label: (string_literal)
     (no_undo))
   (frame_definition
-    (identifier)
-    (qualified_name
-      (identifier)
-      (identifier))
-    (qualified_name
-      (identifier)
-      (identifier))
+    name: (identifier)
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
     (format_phrase
-      (string_literal))
-    (qualified_name
-      (identifier)
-      (identifier))
+      format: (string_literal))
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
     (format_phrase
-      (string_literal))
-    (qualified_name
-      (identifier)
-      (identifier))
-    (identifier)
+      label: (string_literal))
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    field: (identifier)
     (frame_phrase
       (centered)
-      (number_literal)
-      (string_literal)
+      row: (number_literal)
+      title: (string_literal)
       (use_text)))
   (for_statement
     (record
       (record
-        (identifier)
+        record: (identifier)
         (no_lock)))
     (frame_phrase
-      (identifier))
+      frame: (identifier))
     (body
       (display_statement
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (field
-          (binary_expression
+          field: (binary_expression
             (qualified_name
-              (identifier)
-              (identifier))
+              left: (identifier)
+              right: (identifier))
             (qualified_name
-              (identifier)
-              (identifier))))
-        (identifier))))
+              left: (identifier)
+              right: (identifier))))
+        base: (identifier))))
   (button_definition
-    (identifier)
-    (string_literal))
+    name: (identifier)
+    label: (string_literal))
   (button_definition
-    (identifier)
-    (string_literal))
+    name: (identifier)
+    label: (string_literal))
   (button_definition
-    (identifier)
-    (string_literal)
+    name: (identifier)
+    label: (string_literal)
     (auto_endkey))
   (frame_definition
-    (identifier)
-    (qualified_name
-      (identifier)
-      (identifier))
-    (qualified_name
-      (identifier)
-      (identifier))
+    name: (identifier)
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
     (format_phrase
-      (string_literal))
-    (qualified_name
-      (identifier)
-      (identifier))
+      format: (string_literal))
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
     (frame_phrase
       (centered)
-      (number_literal)))
+      row: (number_literal)))
   (frame_definition
-    (identifier)
-    (identifier)
-    (qualified_name
-      (identifier)
-      (identifier))
-    (qualified_name
-      (identifier)
-      (identifier))
-    (qualified_name
-      (identifier)
-      (identifier))
+    name: (identifier)
+    record: (identifier)
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
     (frame_phrase
       (side_labels)
-      (number_literal)
-      (number_literal)))
+      row: (number_literal)
+      width: (number_literal)))
   (frame_definition
-    (identifier)
-    (identifier)
-    (identifier)
-    (identifier)
+    name: (identifier)
+    field: (identifier)
+    field: (identifier)
+    field: (identifier)
     (frame_phrase
-      (number_literal)))
+      row: (number_literal)))
   (on_statement
-    (identifier)
+    event: (identifier)
     (of_phrase
-      (widget_phrase
-        (identifier)))
+      widget: (widget_phrase
+        handle: (identifier)))
     (display_statement
-      (identifier)
-      (qualified_name
-        (identifier)
-        (identifier))
-      (qualified_name
-        (identifier)
-        (identifier))
-      (qualified_name
-        (identifier)
-        (identifier))
+      record: (identifier)
+      except: (qualified_name
+        left: (identifier)
+        right: (identifier))
+      except: (qualified_name
+        left: (identifier)
+        right: (identifier))
+      except: (qualified_name
+        left: (identifier)
+        right: (identifier))
       (frame_phrase
-        (identifier))))
+        frame: (identifier))))
   (frame_definition
     (new_modifier)
     (scope_modifier)
-    (identifier))
+    name: (identifier))
   (variable_definition
     (new_modifier)
     (scope_modifier)
-    (identifier)
-    (identifier)
+    name: (identifier)
+    type: (identifier)
     (format_phrase
-      (string_literal)))
+      format: (string_literal)))
   (buffer_definition
     (new_modifier)
     (scope_modifier)
-    (identifier)
-    (identifier))
+    name: (identifier)
+    table: (identifier))
   (for_statement
     (record
       (record
-        (identifier)
-        (binary_expression
+        record: (identifier)
+        where: (binary_expression
           (qualified_name
-            (identifier)
-            (identifier))
+            left: (identifier)
+            right: (identifier))
           (number_literal))))
     (body
       (display_statement
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (field
-          (binary_expression
+          field: (binary_expression
             (binary_expression
               (binary_expression
                 (binary_expression
                   (qualified_name
-                    (identifier)
-                    (identifier))
+                    left: (identifier)
+                    right: (identifier))
                   (string_literal))
                 (qualified_name
-                  (identifier)
-                  (identifier)))
+                  left: (identifier)
+                  right: (identifier)))
               (string_literal))
             (qualified_name
-              (identifier)
-              (identifier))))
-        (identifier)
+              left: (identifier)
+              right: (identifier))))
+        base: (identifier)
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (frame_phrase
-          (identifier)))))
+          frame: (identifier)))))
   (query_definition
-    (identifier)
+    name: (identifier)
     (query_table_list
-      (identifier)))
+      table: (identifier)))
   (button_definition
-    (identifier)
-    (string_literal))
+    name: (identifier)
+    label: (string_literal))
   (button_definition
-    (identifier)
-    (string_literal))
+    name: (identifier)
+    label: (string_literal))
   (frame_definition
-    (identifier)
-    (number_literal)
-    (number_literal)
-    (qualified_name
-      (identifier)
-      (identifier))
-    (qualified_name
-      (identifier)
-      (identifier))
-    (qualified_name
-      (identifier)
-      (identifier))
-    (qualified_name
-      (identifier)
-      (identifier))
+    name: (identifier)
+    skip: (number_literal)
+    space: (number_literal)
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
     (format_phrase
-      (number_literal)
-      (number_literal))
+      column: (number_literal)
+      row: (number_literal))
     (frame_phrase
       (side_labels)
-      (string_literal)
+      title: (string_literal)
       (size_phrase
-        (number_literal)
-        (number_literal))))
+        width: (number_literal)
+        height: (number_literal))))
   (frame_definition
-    (identifier)
-    (number_literal)
-    (qualified_name
-      (identifier)
-      (identifier))
+    name: (identifier)
+    skip: (number_literal)
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
     (format_phrase
-      (number_literal))
+      colon: (number_literal))
     (skip)
-    (qualified_name
-      (identifier)
-      (identifier))
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
     (format_phrase
-      (number_literal))
+      colon: (number_literal))
     (skip)
-    (qualified_name
-      (identifier)
-      (identifier))
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
     (format_phrase
-      (number_literal))
+      colon: (number_literal))
     (skip)
-    (qualified_name
-      (identifier)
-      (identifier))
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
     (format_phrase
-      (number_literal))
+      colon: (number_literal))
     (skip)
-    (qualified_name
-      (identifier)
-      (identifier))
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
     (format_phrase
-      (number_literal))
+      colon: (number_literal))
     (skip)
-    (qualified_name
-      (identifier)
-      (identifier))
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
     (format_phrase
-      (number_literal))
+      colon: (number_literal))
     (skip)
-    (qualified_name
-      (identifier)
-      (identifier))
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
     (format_phrase
-      (number_literal))
+      colon: (number_literal))
     (skip)
-    (qualified_name
-      (identifier)
-      (identifier))
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
     (format_phrase
-      (number_literal))
+      colon: (number_literal))
     (frame_phrase
       (side_labels)
-      (string_literal)
+      title: (string_literal)
       (size_phrase
-        (number_literal)
-        (number_literal))
+        width: (number_literal)
+        height: (number_literal))
       (at_phrase
-        (number_literal))
-      (number_literal)))
+        column: (number_literal))
+      row: (number_literal)))
   (frame_definition
-    (identifier)
-    (number_literal)
-    (number_literal)
-    (identifier)
-    (identifier)
+    name: (identifier)
+    skip: (number_literal)
+    space: (number_literal)
+    field: (identifier)
+    field: (identifier)
     (frame_phrase
-      (string_literal)
+      title: (string_literal)
       (size_phrase
-        (number_literal)
-        (number_literal))
+        width: (number_literal)
+        height: (number_literal))
       (at_phrase
-        (number_literal))
-      (number_literal)))
+        column: (number_literal))
+      row: (number_literal)))
   (frame_definition
-    (identifier)
-    (number_literal)
-    (qualified_name
-      (identifier)
-      (identifier))
+    name: (identifier)
+    skip: (number_literal)
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
     (format_phrase
-      (number_literal))
+      colon: (number_literal))
     (skip)
-    (qualified_name
-      (identifier)
-      (identifier))
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
     (format_phrase
-      (number_literal))
+      colon: (number_literal))
     (skip)
-    (qualified_name
-      (identifier)
-      (identifier))
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
     (format_phrase
-      (number_literal))
+      colon: (number_literal))
     (skip)
-    (qualified_name
-      (identifier)
-      (identifier))
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
     (format_phrase
-      (number_literal))
+      colon: (number_literal))
     (frame_phrase
       (side_labels)
-      (string_literal)
+      title: (string_literal)
       (size_phrase
-        (number_literal)
-        (number_literal))
+        width: (number_literal)
+        height: (number_literal))
       (at_phrase
-        (number_literal))
-      (number_literal)))
+        column: (number_literal))
+      row: (number_literal)))
   (assignment_statement
-    (object_access
-      (identifier)
-      (identifier)
-      (identifier))
-    (assignment_operator)
-    (object_access
-      (identifier)
-      (identifier)
-      (identifier)))
+    left: (object_access
+      widget: (identifier)
+      left: (identifier)
+      right: (identifier))
+    operator: (assignment_operator)
+    right: (object_access
+      widget: (identifier)
+      left: (identifier)
+      right: (identifier)))
   (assignment_statement
-    (object_access
-      (identifier)
-      (identifier)
-      (identifier))
-    (assignment_operator)
-    (object_access
-      (identifier)
-      (identifier)
-      (identifier)))
+    left: (object_access
+      widget: (identifier)
+      left: (identifier)
+      right: (identifier))
+    operator: (assignment_operator)
+    right: (object_access
+      widget: (identifier)
+      left: (identifier)
+      right: (identifier)))
   (assignment_statement
-    (object_access
-      (identifier)
-      (identifier)
-      (identifier))
-    (assignment_operator)
-    (object_access
-      (identifier)
-      (identifier)
-      (identifier)))
+    left: (object_access
+      widget: (identifier)
+      left: (identifier)
+      right: (identifier))
+    operator: (assignment_operator)
+    right: (object_access
+      widget: (identifier)
+      left: (identifier)
+      right: (identifier)))
   (open_query_statement
-    (identifier)
+    query: (identifier)
     (record_phrase
-      (identifier))
+      record: (identifier))
     (by_phrase
-      (qualified_name
-        (identifier)
-        (identifier))))
+      by: (qualified_name
+        left: (identifier)
+        right: (identifier))))
   (get_statement
-    (identifier))
+    query: (identifier))
   (enable_statement
+    (all)
     (frame_phrase
-      (identifier)))
+      frame: (identifier)))
   (wait_for_statement
     (of_phrase
-      (identifier)
-      (widget_phrase
-        (identifier)))))
+      events: (identifier)
+      widgets: (widget_phrase
+        frame: (identifier)))))

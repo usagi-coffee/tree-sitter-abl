@@ -3,10 +3,10 @@ module.exports = ({ kw }) => ({
 
   __disable_body: ($) =>
     seq(
-      optional(kw("UNLESS-HIDDEN")),
+      optional(alias(kw("UNLESS-HIDDEN"), $.unless_hidden)),
       choice(
         seq(
-          kw("ALL"),
+          alias(kw("ALL"), $.all),
           optional(seq(kw("EXCEPT"), repeat1(field("except", $.identifier)))),
         ),
         repeat1(alias($.__disable_item, $.disable_item)),
@@ -29,7 +29,7 @@ module.exports = ({ kw }) => ({
         ")",
       ),
       seq(field("constant", $.__disable_constant), repeat($.format_phrase)),
-      kw("SKIP"),
+      alias(kw("SKIP"), $.skip),
     ),
 
   __disable_constant: ($) => $.string_literal,

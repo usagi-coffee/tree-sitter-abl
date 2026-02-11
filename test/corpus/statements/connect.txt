@@ -66,16 +66,16 @@ CONNECT VALUE("-db C:\\OpenEdge\\WRK\\db\\Sports2020 -H dbserver -S 1900") NO-ER
 
 (source_code
   (connect_statement
-    (identifier)
-    (identifier)
-    (identifier)
-    (identifier)
-    (identifier)
+    database: (identifier)
+    parameter: (identifier)
+    parameter: (identifier)
+    value: (identifier)
+    parameter: (identifier)
     (no_error))
   (connect_statement
-    (function_call
-      (identifier)
+    database: (function_call
+      function: (identifier)
       (arguments
         (argument
-          (string_literal))))
+          name: (string_literal))))
     (no_error)))

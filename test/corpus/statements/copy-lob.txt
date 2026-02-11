@@ -9,14 +9,14 @@ COPY-LOB FROM FILE inPath TO targetPtr CONVERT SOURCE CODEPAGE "1250" TARGET COD
 
 (source_code
   (copy_lob_statement
-    (identifier)
-    (identifier))
+    source_file: (identifier)
+    target: (identifier))
   (copy_lob_statement
-    (identifier)
-    (identifier)
+    source_file: (identifier)
+    target: (identifier)
     (convert_phrase
-      (string_literal)
-      (string_literal))))
+      source_codepage: (string_literal)
+      target_codepage: (string_literal))))
 
 ================================================================================
 COPY-LOB - Additional phrases
@@ -33,16 +33,19 @@ COPY-LOB FROM FILE inPath TO targetPtr NO-ERROR.
 (source_code
   (copy_lob_statement
     source: (identifier)
-    target: (identifier))
+    target: (identifier)
+    (no_convert))
   (copy_lob_statement
     source_file: (identifier)
     starting_at: (number_literal)
     for_length: (number_literal)
-    target_file: (identifier))
+    target_file: (identifier)
+    (append))
   (copy_lob_statement
     source: (identifier)
     target: (identifier)
-    overlay_at: (number_literal))
+    overlay_at: (number_literal)
+    (trim))
   (copy_lob_statement
     source_file: (identifier)
     target: (identifier)

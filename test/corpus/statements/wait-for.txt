@@ -114,250 +114,250 @@ WAIT-FOR PROCEDURE-COMPLETE OF hRequest.
 
 (source_code
   (button_definition
-    (identifier)
-    (string_literal))
+    name: (identifier)
+    label: (string_literal))
   (button_definition
-    (identifier)
-    (string_literal))
+    name: (identifier)
+    label: (string_literal))
   (form_statement
     (form_item
-      (qualified_name
-        (identifier)
-        (identifier)))
+      field: (qualified_name
+        left: (identifier)
+        right: (identifier)))
     (form_item
-      (qualified_name
-        (identifier)
-        (identifier)))
+      field: (qualified_name
+        left: (identifier)
+        right: (identifier)))
     (form_item
-      (identifier))
+      field: (identifier))
     (form_item
-      (identifier))
+      field: (identifier))
     (frame_phrase
-      (identifier)))
+      frame: (identifier)))
   (form_statement
     (form_item
-      (identifier))
+      field: (identifier))
     (form_item
-      (identifier))
+      field: (identifier))
     (form_item
-      (qualified_name
-        (identifier)
-        (identifier)))
+      field: (qualified_name
+        left: (identifier)
+        right: (identifier)))
     (form_item
-      (qualified_name
-        (identifier)
-        (identifier)))
+      field: (qualified_name
+        left: (identifier)
+        right: (identifier)))
     (frame_phrase
-      (identifier)))
+      frame: (identifier)))
   (on_statement
-    (identifier)
+    event: (identifier)
     (of_phrase
-      (widget_phrase
-        (identifier)))
+      widget: (widget_phrase
+        handle: (identifier)))
     (display_statement
-      (identifier)
-      (qualified_name
-        (identifier)
-        (identifier))
-      (qualified_name
-        (identifier)
-        (identifier))
+      record: (identifier)
+      except: (qualified_name
+        left: (identifier)
+        right: (identifier))
+      except: (qualified_name
+        left: (identifier)
+        right: (identifier))
       (frame_phrase
-        (identifier))))
+        frame: (identifier))))
   (on_statement
-    (identifier)
+    event: (identifier)
     (of_phrase
-      (widget_phrase
-        (identifier)))
+      widget: (widget_phrase
+        handle: (identifier)))
     (do_statement
       (body
         (hide_statement
           (widget_phrase
-            (identifier)))
+            frame: (identifier)))
         (find_statement
           (next)
-          (identifier)
+          table: (identifier)
           (no_lock)
           (no_error))
         (if_statement
           (available_expression
-            (identifier))
-          (display_statement
+            record: (identifier))
+          then: (display_statement
             (field
-              (qualified_name
-                (identifier)
-                (identifier)))
+              field: (qualified_name
+                left: (identifier)
+                right: (identifier)))
             (field
-              (qualified_name
-                (identifier)
-                (identifier)))
+              field: (qualified_name
+                left: (identifier)
+                right: (identifier)))
             (frame_phrase
-              (identifier)))))))
+              frame: (identifier)))))))
   (find_statement
     (first)
-    (identifier)
+    table: (identifier)
     (no_lock))
   (display_statement
     (field
-      (qualified_name
-        (identifier)
-        (identifier)))
+      field: (qualified_name
+        left: (identifier)
+        right: (identifier)))
     (field
-      (qualified_name
-        (identifier)
-        (identifier)))
+      field: (qualified_name
+        left: (identifier)
+        right: (identifier)))
     (frame_phrase
-      (identifier)))
+      frame: (identifier)))
   (enable_statement
     (enable_item
-      (identifier))
+      field: (identifier))
     (enable_item
-      (identifier))
+      field: (identifier))
     (frame_phrase
-      (identifier)))
+      frame: (identifier)))
   (wait_for_statement
     (of_phrase
-      (identifier)
-      (widget_phrase
-        (system_handle)))
+      events: (identifier)
+      widgets: (widget_phrase
+        system_handle: (system_handle)))
     (focus_phrase
-      (widget_phrase
-        (identifier))))
+      focus: (widget_phrase
+        handle: (identifier))))
   (variable_definition
-    (identifier)
-    (identifier)
+    name: (identifier)
+    type: (identifier)
     (no_undo)
-    (boolean_literal))
+    initial: (boolean_literal))
   (button_definition
-    (identifier)
-    (string_literal))
+    name: (identifier)
+    label: (string_literal))
   (button_definition
-    (identifier)
-    (string_literal))
+    name: (identifier)
+    label: (string_literal))
   (form_statement
     (form_item
-      (qualified_name
-        (identifier)
-        (identifier)))
+      field: (qualified_name
+        left: (identifier)
+        right: (identifier)))
     (form_item
-      (qualified_name
-        (identifier)
-        (identifier)))
+      field: (qualified_name
+        left: (identifier)
+        right: (identifier)))
     (form_item
-      (identifier))
+      field: (identifier))
     (form_item
-      (identifier))
+      field: (identifier))
     (frame_phrase
-      (identifier)))
+      frame: (identifier)))
   (form_statement
     (form_item
-      (identifier))
+      field: (identifier))
     (form_item
-      (identifier))
+      field: (identifier))
     (form_item
-      (qualified_name
-        (identifier)
-        (identifier)))
+      field: (qualified_name
+        left: (identifier)
+        right: (identifier)))
     (form_item
-      (qualified_name
-        (identifier)
-        (identifier)))
+      field: (qualified_name
+        left: (identifier)
+        right: (identifier)))
     (frame_phrase
-      (identifier)))
+      frame: (identifier)))
   (on_statement
-    (identifier)
+    event: (identifier)
     (of_phrase
-      (widget_phrase
-        (identifier)))
+      widget: (widget_phrase
+        handle: (identifier)))
     (do_statement
       (body
         (display_statement
-          (identifier)
-          (qualified_name
-            (identifier)
-            (identifier))
-          (qualified_name
-            (identifier)
-            (identifier))
+          record: (identifier)
+          except: (qualified_name
+            left: (identifier)
+            right: (identifier))
+          except: (qualified_name
+            left: (identifier)
+            right: (identifier))
           (frame_phrase
-            (identifier)))
+            frame: (identifier)))
         (assignment_statement
-          (identifier)
-          (assignment_operator)
-          (boolean_literal)))))
+          left: (identifier)
+          operator: (assignment_operator)
+          right: (boolean_literal)))))
   (on_statement
-    (identifier)
+    event: (identifier)
     (of_phrase
-      (widget_phrase
-        (identifier)))
+      widget: (widget_phrase
+        handle: (identifier)))
     (do_statement
       (body
         (assignment_statement
-          (identifier)
-          (assignment_operator)
-          (boolean_literal)))))
+          left: (identifier)
+          operator: (assignment_operator)
+          right: (boolean_literal)))))
   (on_statement
-    (identifier)
+    event: (identifier)
     (of_phrase
-      (widget_phrase
-        (system_handle)))
+      widget: (widget_phrase
+        system_handle: (system_handle)))
     (do_statement
       (body
         (quit_statement))))
   (enable_statement
     (enable_item
-      (identifier))
+      field: (identifier))
     (enable_item
-      (identifier))
+      field: (identifier))
     (frame_phrase
-      (identifier)))
+      frame: (identifier)))
   (do_statement
-    (boolean_literal)
+    condition: (boolean_literal)
     (body
       (if_statement
         (identifier)
-        (run_statement
-          (identifier)))
+        then: (run_statement
+          procedure: (identifier)))
       (wait_for_statement
         (of_phrase
-          (identifier)
-          (widget_phrase
-            (system_handle)))
+          events: (identifier)
+          widgets: (widget_phrase
+            system_handle: (system_handle)))
         (of_phrase
-          (identifier)
-          (widget_phrase
-            (identifier)))
+          events: (identifier)
+          widgets: (widget_phrase
+            handle: (identifier)))
         (focus_phrase
-          (widget_phrase
-            (identifier)))
+          focus: (widget_phrase
+            handle: (identifier)))
         (pause_phrase
-          (number_literal)))))
+          duration: (number_literal)))))
   (procedure_definition
-    (identifier)
+    name: (identifier)
     (body
       (hide_statement
         (widget_phrase
-          (identifier)))
+          frame: (identifier)))
       (find_statement
         (next)
-        (identifier)
+        table: (identifier)
         (no_error))
       (if_statement
         (available_expression
-          (identifier))
-        (display_statement
+          record: (identifier))
+        then: (display_statement
           (field
-            (qualified_name
-              (identifier)
-              (identifier)))
+            field: (qualified_name
+              left: (identifier)
+              right: (identifier)))
           (field
-            (qualified_name
-              (identifier)
-              (identifier)))
+            field: (qualified_name
+              left: (identifier)
+              right: (identifier)))
           (frame_phrase
-            (identifier))))))
+            frame: (identifier))))))
   (wait_for_statement
     (of_phrase
-      (identifier)
-      (widget_phrase
-        (identifier)))))
+      events: (identifier)
+      widgets: (widget_phrase
+        handle: (identifier)))))

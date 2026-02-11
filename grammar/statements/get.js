@@ -14,6 +14,6 @@ module.exports = ({ kw }) => ({
           choice(kw("SHARE-LOCK"), kw("EXCLUSIVE-LOCK"), kw("NO-LOCK")),
         ),
       ),
-      optional(kw("NO-WAIT")),
+      optional(alias(kw("NO-WAIT"), $.no_wait)),
     ),
 });

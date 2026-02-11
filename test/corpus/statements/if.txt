@@ -263,162 +263,162 @@ OUTPUT STREAM due CLOSE.
 
 (source_code
   (variable_definition
-    (identifier)
-    (identifier)
+    name: (identifier)
+    type: (identifier)
     (no_undo))
   (stream_definition
-    (identifier))
+    name: (identifier))
   (output_statement
-    (identifier)
-    (qualified_name
-      (identifier)
-      (identifier)))
+    name: (identifier)
+    file: (qualified_name
+      left: (identifier)
+      right: (identifier)))
   (display_statement
-    (identifier)
+    stream: (identifier)
     (field
-      (string_literal))
+      field: (string_literal))
     (field
-      (identifier))
+      field: (identifier))
     (field
-      (parenthesized_expression
+      field: (parenthesized_expression
         (number_literal)))
     (frame_phrase
       (no_box)
       (no_labels)
       (centered)
-      (identifier)
+      frame: (identifier)
       (page_top)))
   (for_statement
     (record
       (record
-        (identifier)))
+        record: (identifier)))
     (frame_phrase
-      (identifier))
+      frame: (identifier))
     (body
       (find_statement
-        (identifier)
+        table: (identifier)
         (of_phrase
-          (identifier))
+          record: (identifier))
         (no_lock))
       (display_statement
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (field
-          (qualified_name
-            (identifier)
-            (identifier))))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier))))
       (if_statement
         (binary_expression
           (qualified_name
-            (identifier)
-            (identifier))
+            left: (identifier)
+            right: (identifier))
           (null_literal))
-        (do_statement
+        then: (do_statement
           (body
             (if_statement
               (binary_expression
                 (qualified_name
-                  (identifier)
-                  (identifier))
+                  left: (identifier)
+                  right: (identifier))
                 (null_literal))
-              (do_statement
+              then: (do_statement
                 (body
                   (message_statement
                     (string_literal))
                   (repeat_statement
-                    (binary_expression
+                    condition: (binary_expression
                       (identifier)
                       (null_literal))
                     (body
                       (update_statement
                         (field
-                          (qualified_name
-                            (identifier)
-                            (identifier)))
+                          field: (qualified_name
+                            left: (identifier)
+                            right: (identifier)))
                         (frame_phrase
-                          (identifier))))))))
+                          frame: (identifier))))))))
             (assignment_statement
-              (identifier)
-              (assignment_operator)
-              (boolean_literal))
+              left: (identifier)
+              operator: (assignment_operator)
+              right: (boolean_literal))
             (message_statement
               (string_literal)
               (set_update_phrase
-                (identifier)))
+                field: (identifier)))
             (if_statement
               (identifier)
-              (repeat_statement
-                (binary_expression
+              then: (repeat_statement
+                condition: (binary_expression
                   (qualified_name
-                    (identifier)
-                    (identifier))
+                    left: (identifier)
+                    right: (identifier))
                   (null_literal))
                 (body
                   (update_statement
                     (field
-                      (qualified_name
-                        (identifier)
-                        (identifier)))
+                      field: (qualified_name
+                        left: (identifier)
+                        right: (identifier)))
                     (frame_phrase
-                      (identifier))))))))
-        (do_statement
+                      frame: (identifier))))))))
+        else: (do_statement
           (body
             (assignment_statement
-              (identifier)
-              (assignment_operator)
-              (boolean_literal))
+              left: (identifier)
+              operator: (assignment_operator)
+              right: (boolean_literal))
             (message_statement
               (string_literal)
               (set_update_phrase
-                (identifier)))
+                field: (identifier)))
             (if_statement
               (unary_expression
                 (identifier))
-              (do_statement
+              then: (do_statement
                 (body
                   (display_statement
-                    (identifier)
+                    stream: (identifier)
                     (field
-                      (qualified_name
-                        (identifier)
-                        (identifier)))
+                      field: (qualified_name
+                        left: (identifier)
+                        right: (identifier)))
                     (format_phrase
-                      (number_literal))
+                      to: (number_literal))
                     (field
-                      (qualified_name
-                        (identifier)
-                        (identifier)))
+                      field: (qualified_name
+                        left: (identifier)
+                        right: (identifier)))
                     (format_phrase)
                     (field
-                      (qualified_name
-                        (identifier)
-                        (identifier)))
+                      field: (qualified_name
+                        left: (identifier)
+                        right: (identifier)))
                     (format_phrase)
                     (field
-                      (qualified_name
-                        (identifier)
-                        (identifier)))
+                      field: (qualified_name
+                        left: (identifier)
+                        right: (identifier)))
                     (format_phrase)
                     (frame_phrase
                       (no_box)
                       (down)
-                      (identifier)))))))))))
+                      frame: (identifier)))))))))))
   (output_statement
-    (identifier)
+    name: (identifier)
     (close)))
 
 ================================================================================

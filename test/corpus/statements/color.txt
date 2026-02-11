@@ -67,18 +67,18 @@ COLOR PROMPT INPUT field1 field2 WITH FRAME f1.
 
 (source_code
   (color_statement
-    (color_phrase
-      (identifier))
+    color: (color_phrase
+      value: (identifier))
     (qualified_name
-      (identifier)
-      (identifier))
+      left: (identifier)
+      right: (identifier))
     (qualified_name
-      (identifier)
-      (identifier)))
+      left: (identifier)
+      right: (identifier)))
   (color_statement
-    (color_phrase
+    color: (color_phrase
       (identifier))
     (identifier)
     (identifier)
     (frame_phrase
-      (identifier))))
+      frame: (identifier))))

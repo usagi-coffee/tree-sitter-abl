@@ -38,25 +38,25 @@ UP STREAM-HANDLE hS 3 WITH FRAME f1.
   (for_statement
     (record
       (record
-        (identifier)))
+        record: (identifier)))
     (body
       (up_statement
-        (number_literal))
+        count: (number_literal))
       (display_statement
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (field
-          (qualified_name
-            (identifier)
-            (identifier))))))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier))))))
   (up_statement
-    (identifier)
-    (number_literal)
+    stream: (identifier)
+    count: (number_literal)
     (frame_phrase
-      (identifier))))
+      frame: (identifier))))

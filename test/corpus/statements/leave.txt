@@ -34,46 +34,46 @@ END.
 
 (source_code
   (variable_definition
-    (identifier)
-    (identifier)
+    name: (identifier)
+    type: (identifier)
     (no_undo)
-    (string_literal))
+    initial: (string_literal))
   (variable_definition
-    (identifier)
-    (identifier)
+    name: (identifier)
+    type: (identifier)
     (no_undo)
     (format_phrase
-      (string_literal)))
+      format: (string_literal)))
   (repeat_statement
-    (identifier)
+    label: (identifier)
     (body
       (repeat_statement
-        (identifier)
+        label: (identifier)
         (on_endkey_phrase
-          (identifier))
+          undo_label: (identifier))
         (body
           (message_statement
             (string_literal))
           (update_statement
             (field
-              (identifier)
+              field: (identifier)
               (format_phrase)))
           (if_statement
             (binary_expression
               (function_call
-                (identifier)
+                function: (identifier)
                 (arguments
                   (argument
-                    (identifier))
+                    name: (identifier))
                   (argument
-                    (identifier))))
+                    name: (identifier))))
               (number_literal))
-            (leave_statement
-              (identifier)))
+            then: (leave_statement
+              label: (identifier)))
           (bell_statement)))
       (if_statement
         (binary_expression
           (identifier)
           (string_literal))
-        (leave_statement
-          (identifier))))))
+        then: (leave_statement
+          label: (identifier))))))

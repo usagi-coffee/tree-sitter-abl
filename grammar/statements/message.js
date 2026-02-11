@@ -77,6 +77,6 @@ module.exports = ({ kw }) => ({
       optional(
         seq(kw("FORMAT", { offset: 4 }), field("format", $.string_literal)),
       ),
-      optional(kw("AUTO-RETURN")),
+      optional(alias(kw("AUTO-RETURN"), $.auto_return)),
     ),
 });

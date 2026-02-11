@@ -40,84 +40,84 @@ WAIT-FOR WINDOW-CLOSE OF CURRENT-WINDOW.
 
 (source_code
   (submenu_definition
-    (identifier)
+    name: (identifier)
     (menu_element
       (menu_item
-        (identifier)
-        (string_literal)))
+        name: (identifier)
+        label: (string_literal)))
     (menu_element
       (menu_item
-        (identifier)
-        (string_literal)))
+        name: (identifier)
+        label: (string_literal)))
     (menu_element
       (menu_item
-        (identifier)
-        (string_literal)))
+        name: (identifier)
+        label: (string_literal)))
     (menu_element
       (menu_item
-        (identifier)
-        (string_literal)))
+        name: (identifier)
+        label: (string_literal)))
     (menu_element
       (menu_item
-        (identifier)
-        (string_literal))))
+        name: (identifier)
+        label: (string_literal))))
   (menu_definition
-    (identifier)
+    name: (identifier)
     (menubar)
     (submenu_item
-      (identifier)
-      (string_literal)))
+      name: (identifier)
+      label: (string_literal)))
   (on_statement
-    (identifier)
+    event: (identifier)
     (of_phrase
-      (widget_phrase
-        (identifier)))
+      widget: (widget_phrase
+        handle: (identifier)))
     (run_statement
-      (procedure_name)))
+      procedure: (procedure_name)))
   (on_statement
-    (identifier)
+    event: (identifier)
     (of_phrase
-      (widget_phrase
-        (identifier)))
+      widget: (widget_phrase
+        handle: (identifier)))
     (run_statement
-      (procedure_name)))
+      procedure: (procedure_name)))
   (on_statement
-    (identifier)
+    event: (identifier)
     (of_phrase
-      (widget_phrase
-        (identifier)))
+      widget: (widget_phrase
+        handle: (identifier)))
     (run_statement
-      (procedure_name)))
+      procedure: (procedure_name)))
   (on_statement
-    (identifier)
+    event: (identifier)
     (of_phrase
-      (widget_phrase
-        (identifier)))
+      widget: (widget_phrase
+        handle: (identifier)))
     (run_statement
-      (procedure_name)))
+      procedure: (procedure_name)))
   (on_statement
-    (identifier)
+    event: (identifier)
     (of_phrase
-      (widget_phrase
-        (identifier)))
+      widget: (widget_phrase
+        handle: (identifier)))
     (quit_statement))
   (assign_statement
     (assign_phrase
       (assign_pair
-        (object_access
-          (identifier)
-          (identifier))
-        (object_access
-          (identifier)
-          (identifier)
-          (identifier)))
+        left: (object_access
+          left: (identifier)
+          right: (identifier))
+        right: (object_access
+          widget: (identifier)
+          left: (identifier)
+          right: (identifier)))
       (assign_pair
-        (object_access
-          (identifier)
-          (identifier))
-        (boolean_literal))))
+        left: (object_access
+          left: (identifier)
+          right: (identifier))
+        right: (boolean_literal))))
   (wait_for_statement
     (of_phrase
-      (identifier)
-      (widget_phrase
-        (system_handle)))))
+      events: (identifier)
+      widgets: (widget_phrase
+        system_handle: (system_handle)))))

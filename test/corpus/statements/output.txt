@@ -140,58 +140,58 @@ OUTPUT TO TERMINAL.
 
 (source_code
   (output_statement
-    (qualified_name
-      (identifier)
-      (identifier)))
+    file: (qualified_name
+      left: (identifier)
+      right: (identifier)))
   (for_statement
     (record
       (record
-        (identifier)
+        record: (identifier)
         (no_lock)))
     (body
       (display_statement
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (field
-          (parenthesized_expression
+          field: (parenthesized_expression
             (number_literal)))
         (frame_phrase
-          (number_literal)
+          column: (number_literal)
           (side_labels)))))
   (output_statement
     (close))
   (display_statement
     (field
-      (string_literal)))
+      field: (string_literal)))
   (variable_definition
-    (identifier)
-    (identifier)
+    name: (identifier)
+    type: (identifier)
     (no_undo))
   (output_statement
     (terminal)
@@ -199,149 +199,149 @@ OUTPUT TO TERMINAL.
   (for_statement
     (record
       (record
-        (identifier)
+        record: (identifier)
         (no_lock))
       (break_by
-        (qualified_name
-          (identifier)
-          (identifier))))
+        by: (qualified_name
+          left: (identifier)
+          right: (identifier))))
     (body
       (find_statement
-        (identifier)
+        table: (identifier)
         (of_phrase
-          (identifier))
+          record: (identifier))
         (no_lock))
       (form_statement
         (form_item
-          (identifier))
+          field: (identifier))
         (form_item
-          (identifier))
+          field: (identifier))
         (form_item
-          (string_literal))
+          field: (string_literal))
         (form_item
-          (identifier))
+          field: (identifier))
         (form_item
-          (number_literal))
+          field: (number_literal))
         (form_item
-          (string_literal))
+          field: (string_literal))
         (form_item
-          (identifier))
+          field: (identifier))
         (form_item
-          (number_literal))
+          field: (number_literal))
         (form_item
-          (binary_expression
+          field: (binary_expression
             (identifier)
             (identifier)))
         (form_item
-          (identifier))
+          field: (identifier))
         (form_item
-          (number_literal)
-          (string_literal))
+          field: (number_literal)
+          format: (string_literal))
         (form_item
-          (parenthesized_expression
+          field: (parenthesized_expression
             (qualified_name
-              (identifier)
-              (identifier)))
-          (string_literal))
+              left: (identifier)
+              right: (identifier)))
+          format: (string_literal))
         (form_item
-          (identifier))
+          field: (identifier))
         (form_item
-          (number_literal))
+          field: (number_literal))
         (frame_phrase
-          (identifier)
+          frame: (identifier)
           (page_top)
           (centered)))
       (view_statement
         (widget_phrase
-          (identifier)))
+          frame: (identifier)))
       (display_statement
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (format_phrase
-          (string_literal))
+          column_label: (string_literal))
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (format_phrase
-          (string_literal))
+          label: (string_literal))
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (format_phrase
-          (string_literal))
+          column_label: (string_literal))
         (frame_phrase
           (centered)))
       (if_statement
         (function_call
-          (identifier)
+          function: (identifier)
           (arguments
             (argument
-              (qualified_name
-                (identifier)
-                (identifier)))))
-        (do_statement
+              name: (qualified_name
+                left: (identifier)
+                right: (identifier)))))
+        then: (do_statement
           (body
             (assignment_statement
-              (identifier)
-              (assignment_operator)
-              (identifier))
+              left: (identifier)
+              operator: (assignment_operator)
+              right: (identifier))
             (page_statement))))))
   (output_statement
     (close))
   (output_statement
     (num_copies_phrase
-      (number_literal)))
+      copies: (number_literal)))
   (output_statement
     (landscape)
     (num_copies_phrase
-      (number_literal)))
+      copies: (number_literal)))
   (output_statement
     (portrait)
     (num_copies_phrase
-      (identifier))
+      value: (identifier))
     (collate))
   (output_statement
-    (string_literal)
+    printer: (string_literal)
     (page_size_phrase
-      (identifier)))
+      value: (identifier)))
   (output_statement
-    (string_literal)
+    file: (string_literal)
     (lob_dir_phrase
-      (identifier))
+      value: (identifier))
     (append))
   (output_statement
-    (string_literal)
+    file: (string_literal)
     (binary)
     (convert_phrase
       (no_convert)))
   (output_statement
-    (string_literal)
+    file: (string_literal)
     (echo)
     (keep_messages))
   (output_statement
-    (string_literal)
+    file: (string_literal)
     (no_echo)
-    (identifier)
-    (identifier))
+    map: (identifier)
+    map: (identifier))
   (output_statement
-    (string_literal)
+    file: (string_literal)
     (paged)
     (page_size_phrase
-      (number_literal)))
+      page_size: (number_literal)))
   (output_statement
-    (identifier)
-    (string_literal)
+    name: (identifier)
+    file: (string_literal)
     (unbuffered))
   (output_statement
-    (identifier)
-    (string_literal))
+    name: (identifier)
+    file: (string_literal))
   (output_statement
-    (identifier)
-    (identifier)
+    name: (identifier)
+    value: (identifier)
     (no_map))
   (output_statement
     (terminal)))

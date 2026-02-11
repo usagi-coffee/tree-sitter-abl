@@ -226,7 +226,8 @@ MESSAGE COLOR NORMAL "Export done: " + fileName SKIP(2) VIEW-AS ALERT-BOX INFORM
       title: (string_literal))
     (set_update_phrase
       field: (identifier)
-      type: (identifier))
+      type: (identifier)
+      (auto_return))
     (in_window_phrase
       window: (identifier))))
 
@@ -345,100 +346,100 @@ END.
     (body
       (prompt_for_statement
         (field
-          (qualified_name
-            (identifier)
-            (identifier))))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier))))
       (find_statement
-        (identifier)
-        (qualified_name
-          (identifier)
-          (identifier))
+        table: (identifier)
+        values: (qualified_name
+          left: (identifier)
+          right: (identifier))
         (no_error))
       (if_statement
         (unary_expression
           (available_expression
-            (identifier)))
-        (do_statement
+            record: (identifier)))
+        then: (do_statement
           (body
             (message_statement
               (string_literal)
               (input_expression
-                (qualified_name
-                  (identifier)
-                  (identifier)))
+                field: (qualified_name
+                  left: (identifier)
+                  right: (identifier)))
               (string_literal))
             (undo_statement)))
-        (display_statement
+        else: (display_statement
           (field
-            (qualified_name
-              (identifier)
-              (identifier)))
+            field: (qualified_name
+              left: (identifier)
+              right: (identifier)))
           (field
-            (qualified_name
-              (identifier)
-              (identifier)))))))
+            field: (qualified_name
+              left: (identifier)
+              right: (identifier)))))))
   (variable_definition
-    (identifier)
-    (identifier)
+    name: (identifier)
+    type: (identifier)
     (no_undo)
     (view_as_phrase
       (selection_list_phrase
         (size_phrase
-          (number_literal)
-          (number_literal))))
-    (string_literal))
+          width: (number_literal)
+          height: (number_literal))))
+    label: (string_literal))
   (variable_definition
-    (identifier)
-    (identifier)
+    name: (identifier)
+    type: (identifier)
     (no_undo))
   (form_statement
     (form_item
-      (identifier))
+      field: (identifier))
     (frame_phrase
-      (identifier)))
+      frame: (identifier)))
   (on_statement
-    (identifier)
+    event: (identifier)
     (of_phrase
-      (widget_phrase
-        (identifier)))
+      widget: (widget_phrase
+        handle: (identifier)))
     (do_statement
       (body
         (message_statement
           (string_literal)
           (binary_expression
             (object_access
-              (identifier)
-              (identifier))
+              left: (identifier)
+              right: (identifier))
             (string_literal))
           (skip
-            (number_literal))
+            count: (number_literal))
           (string_literal)
           (view_as_phrase
-            (string_literal))
+            title: (string_literal))
           (set_update_phrase
-            (identifier)
-            (identifier)))
+            field: (identifier)
+            type: (identifier)))
         (case_statement
           (identifier)
           (case_when_phrase
-            (boolean_literal)
+            condition: (boolean_literal)
             (do_statement
               (body
                 (find_statement
-                  (identifier)
+                  table: (identifier)
                   (where_phrase
-                    (binary_expression
+                    where: (binary_expression
                       (qualified_name
-                        (identifier)
-                        (identifier))
+                        left: (identifier)
+                        right: (identifier))
                       (object_access
-                        (identifier)
-                        (identifier))))
+                        left: (identifier)
+                        right: (identifier))))
                   (exclusive_lock))
                 (delete_statement
-                  (identifier)))))
+                  record: (identifier)))))
           (case_when_phrase
-            (boolean_literal)
+            condition: (boolean_literal)
             (do_statement
               (body
                 (message_statement

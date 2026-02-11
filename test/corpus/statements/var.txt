@@ -77,64 +77,64 @@ var List<Ant> ListOfAnts.
   (comment
     (block_comment))
   (var_statement
-    (identifier)
+    type: (identifier)
     (variable
-      (identifier))
+      name: (identifier))
     (variable
-      (identifier))
+      name: (identifier))
     (variable
-      (identifier))
+      name: (identifier))
     (variable
-      (identifier)))
+      name: (identifier)))
   (comment
     (block_comment))
   (comment
     (block_comment))
   (var_statement
-    (identifier)
+    type: (identifier)
     (variable
-      (identifier))
+      name: (identifier))
     (variable
-      (identifier))
+      name: (identifier))
     (variable
-      (identifier)
-      (number_literal)))
+      name: (identifier)
+      initializer: (number_literal)))
   (comment
     (block_comment))
   (var_statement
-    (identifier)
+    type: (identifier)
     (variable
-      (identifier))
+      name: (identifier))
     (variable
-      (identifier)
-      (date_literal))
+      name: (identifier)
+      initializer: (date_literal))
     (variable
-      (identifier)
-      (identifier)))
+      name: (identifier)
+      initializer: (identifier)))
   (comment
     (block_comment))
   (var_statement
     (access_modifier)
-    (identifier)
+    type: (identifier)
     (variable
-      (identifier))
+      name: (identifier))
     (variable
-      (identifier)
-      (date_literal)))
+      name: (identifier)
+      initializer: (date_literal)))
   (comment
     (block_comment))
   (var_statement
     (static_modifier)
-    (identifier)
+    type: (identifier)
     (variable
-      (identifier)))
+      name: (identifier)))
   (comment
     (block_comment))
   (var_statement
     (serialization_modifier)
-    (identifier)
+    type: (identifier)
     (variable
-      (identifier)))
+      name: (identifier)))
   (comment
     (block_comment))
   (comment
@@ -142,212 +142,212 @@ var List<Ant> ListOfAnts.
   (comment
     (block_comment))
   (var_statement
-    (identifier)
-    (number_literal)
+    type: (identifier)
+    extent: (number_literal)
     (variable
-      (identifier)
-      (array_initializer
+      name: (identifier)
+      initializer: (array_initializer
         (number_literal)
         (number_literal)))
     (variable
-      (identifier))
+      name: (identifier))
     (variable
-      (identifier)
-      (array_initializer
+      name: (identifier)
+      initializer: (array_initializer
         (number_literal)
         (number_literal)
         (number_literal))))
   (comment
     (block_comment))
   (var_statement
-    (identifier)
+    type: (identifier)
     (variable
-      (identifier))
+      name: (identifier))
     (variable
-      (identifier)
-      (array_initializer
+      name: (identifier)
+      initializer: (array_initializer
         (number_literal)
         (number_literal)
         (number_literal))))
   (comment
     (block_comment))
   (var_statement
-    (string_literal)
+    type: (string_literal)
     (variable
-      (identifier)))
+      name: (identifier)))
   (comment
     (block_comment))
   (var_statement
-    (qualified_name
-      (identifier)
-      (identifier)
-      (identifier))
+    type: (qualified_name
+      left: (identifier)
+      right: (identifier)
+      right: (identifier))
     (variable
-      (identifier))
+      name: (identifier))
     (variable
-      (identifier))
+      name: (identifier))
     (variable
-      (identifier)))
+      name: (identifier)))
   (comment
     (block_comment))
   (var_statement
-    (qualified_name
-      (identifier)
-      (identifier)
-      (identifier))
+    type: (qualified_name
+      left: (identifier)
+      right: (identifier)
+      right: (identifier))
     (variable
-      (identifier)))
+      name: (identifier)))
   (comment
     (block_comment))
   (var_statement
-    (identifier)
-    (number_literal)
+    type: (identifier)
+    extent: (number_literal)
     (variable
-      (identifier)))
+      name: (identifier)))
   (comment
     (block_comment))
   (var_statement
-    (identifier)
+    type: (identifier)
     (variable
-      (identifier)
-      (new_expression
-        (identifier)
+      name: (identifier)
+      initializer: (new_expression
+        type: (identifier)
         (arguments))))
   (var_statement
-    (identifier)
+    type: (identifier)
     (variable
-      (identifier)
-      (new_expression
-        (identifier)
+      name: (identifier)
+      initializer: (new_expression
+        type: (identifier)
         (arguments
           (argument
-            (string_literal))
+            name: (string_literal))
           (argument
-            (number_literal))
+            name: (number_literal))
           (argument
-            (null_literal))))))
+            name: (null_literal))))))
   (comment
     (block_comment))
   (var_statement
-    (identifier)
+    type: (identifier)
     (variable
-      (identifier)
-      (new_expression
-        (identifier)
+      name: (identifier)
+      initializer: (new_expression
+        type: (identifier)
         (arguments
           (argument
-            (string_literal)))))
+            name: (string_literal)))))
     (variable
-      (identifier)
-      (new_expression
-        (identifier)
+      name: (identifier)
+      initializer: (new_expression
+        type: (identifier)
         (arguments
           (argument
-            (string_literal)))))
+            name: (string_literal)))))
     (variable
-      (identifier)
-      (new_expression
-        (identifier)
+      name: (identifier)
+      initializer: (new_expression
+        type: (identifier)
         (arguments
           (argument
-            (string_literal))))))
+            name: (string_literal))))))
   (comment
     (block_comment))
   (var_statement
-    (identifier)
+    type: (identifier)
     (variable
-      (identifier)
-      (new_expression
-        (identifier)
+      name: (identifier)
+      initializer: (new_expression
+        type: (identifier)
         (arguments)))
     (variable
-      (identifier)
-      (new_expression
-        (identifier)
+      name: (identifier)
+      initializer: (new_expression
+        type: (identifier)
         (arguments
           (argument
-            (string_literal))))))
+            name: (string_literal))))))
   (comment
     (block_comment))
   (var_statement
-    (identifier)
+    type: (identifier)
     (variable
-      (identifier)
-      (new_expression
-        (identifier)
+      name: (identifier)
+      initializer: (new_expression
+        type: (identifier)
         (arguments
           (argument
-            (string_literal)))))
+            name: (string_literal)))))
     (variable
-      (identifier)
-      (new_expression
-        (identifier)
+      name: (identifier)
+      initializer: (new_expression
+        type: (identifier)
         (arguments
           (argument
-            (string_literal))))))
+            name: (string_literal))))))
   (comment
     (block_comment))
   (var_statement
-    (identifier)
-    (number_literal)
+    type: (identifier)
+    extent: (number_literal)
     (variable
-      (identifier)
-      (array_initializer
+      name: (identifier)
+      initializer: (array_initializer
         (new_expression
-          (identifier)
+          type: (identifier)
           (arguments
             (argument
-              (string_literal))))
+              name: (string_literal))))
         (new_expression
-          (identifier)
+          type: (identifier)
           (arguments
             (argument
-              (string_literal)))))))
+              name: (string_literal)))))))
   (comment
     (block_comment))
   (var_statement
-    (identifier)
+    type: (identifier)
     (variable
-      (identifier)
-      (array_initializer
+      name: (identifier)
+      initializer: (array_initializer
         (new_expression
-          (identifier)
+          type: (identifier)
           (arguments
             (argument
-              (string_literal))))
+              name: (string_literal))))
         (new_expression
-          (identifier)
+          type: (identifier)
           (arguments
             (argument
-              (string_literal)))))))
+              name: (string_literal)))))))
   (comment
     (block_comment))
   (var_statement
-    (identifier)
+    type: (identifier)
     (variable
-      (identifier)
-      (binary_expression
+      name: (identifier)
+      initializer: (binary_expression
         (identifier)
         (identifier)))
     (variable
-      (identifier)
-      (binary_expression
+      name: (identifier)
+      initializer: (binary_expression
         (identifier)
         (identifier)))
     (variable
-      (identifier)
-      (binary_expression
+      name: (identifier)
+      initializer: (binary_expression
         (identifier)
         (identifier))))
   (comment
     (block_comment))
   (var_statement
-    (identifier)
+    type: (identifier)
     (variable
-      (identifier)
-      (array_initializer
+      name: (identifier)
+      initializer: (array_initializer
         (function_call
-          (identifier)
+          function: (identifier)
           (arguments))
         (binary_expression
           (identifier)
@@ -355,11 +355,11 @@ var List<Ant> ListOfAnts.
   (comment
     (block_comment))
   (var_statement
-    (generic_type
+    type: (generic_type
       (identifier)
       (identifier))
     (variable
-      (identifier))))
+      name: (identifier))))
 
 ================================================================================
 VAR statement - additional access/serialization variants
@@ -375,23 +375,23 @@ VAR CLASS mypackage.subdir.myclass myobj4.
 (source_code
   (var_statement
     (access_modifier)
-    (identifier)
+    type: (identifier)
     (variable
-      (identifier)))
+      name: (identifier)))
   (var_statement
     (access_modifier)
-    (identifier)
+    type: (identifier)
     (variable
-      (identifier)))
+      name: (identifier)))
   (var_statement
     (serialization_modifier)
-    (identifier)
+    type: (identifier)
     (variable
-      (identifier)))
+      name: (identifier)))
   (var_statement
-    (qualified_name
-      (identifier)
-      (identifier)
-      (identifier))
+    type: (qualified_name
+      left: (identifier)
+      right: (identifier)
+      right: (identifier))
     (variable
-      (identifier))))
+      name: (identifier))))

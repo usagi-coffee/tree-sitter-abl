@@ -41,32 +41,32 @@ READKEY PAUSE 0.5.
   (for_statement
     (record
       (record
-        (identifier)))
+        record: (identifier)))
     (body
       (display_statement
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (frame_phrase
           (down
-            (number_literal))))
+            value: (number_literal))))
       (message_statement
         (string_literal))
       (message_statement
@@ -75,26 +75,26 @@ READKEY PAUSE 0.5.
       (if_statement
         (binary_expression
           (function_call
-            (identifier)
+            function: (identifier)
             (arguments
               (argument
-                (identifier))))
+                name: (identifier))))
           (string_literal))
-        (delete_statement
-          (identifier))
-        (if_statement
+        then: (delete_statement
+          record: (identifier))
+        else: (if_statement
           (binary_expression
             (function_call
-              (identifier)
+              function: (identifier)
               (arguments
                 (argument
-                  (identifier))))
+                  name: (identifier))))
             (string_literal))
-          (leave_statement)))))
+          then: (leave_statement)))))
   (readkey_statement
-    (identifier)
+    stream: (identifier)
     (pause_phrase
-      (number_literal)))
+      pause: (number_literal)))
   (readkey_statement
     (pause_phrase
-      (number_literal))))
+      pause: (number_literal))))

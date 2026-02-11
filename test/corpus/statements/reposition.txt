@@ -69,155 +69,156 @@ REPOSITION qCust TO ROWID rTop, rChild FOR TENANT tenantId NO-ERROR.
 
 (source_code
   (variable_definition
-    (identifier)
-    (identifier)
+    name: (identifier)
+    type: (identifier)
     (no_undo)
-    (number_literal))
+    initial: (number_literal))
   (query_definition
-    (identifier)
+    name: (identifier)
     (query_table_list
-      (identifier)
-      (identifier))
+      table: (identifier)
+      table: (identifier))
     (scrolling))
   (button_definition
-    (identifier)
-    (string_literal))
+    name: (identifier)
+    label: (string_literal))
   (button_definition
-    (identifier)
-    (string_literal))
+    name: (identifier)
+    label: (string_literal))
   (button_definition
-    (identifier)
-    (string_literal))
+    name: (identifier)
+    label: (string_literal))
   (form_statement
     (form_item
-      (identifier))
+      field: (identifier))
     (form_item
-      (identifier))
+      field: (identifier))
     (form_item
-      (identifier))
+      field: (identifier))
     (frame_phrase
-      (identifier)
-      (number_literal)))
+      frame: (identifier)
+      row: (number_literal)))
   (on_statement
-    (identifier)
+    event: (identifier)
     (of_phrase
-      (widget_phrase
-        (identifier))
-      (widget_phrase
-        (identifier)))
+      widget: (widget_phrase
+        handle: (identifier))
+      widget: (widget_phrase
+        handle: (identifier)))
     (do_statement
       (body
         (prompt_for_statement
           (field
-            (identifier)
+            field: (identifier)
             (format_phrase
-              (string_literal)))
+              label: (string_literal)))
           (frame_phrase
-            (identifier)
+            frame: (identifier)
             (centered)
-            (number_literal)
+            row: (number_literal)
             (overlay)))
         (hide_statement
           (widget_phrase
-            (identifier)))
+            frame: (identifier))
+          (no_pause))
         (if_statement
           (binary_expression
             (object_access
-              (identifier)
-              (identifier))
+              left: (identifier)
+              right: (identifier))
             (string_literal))
-          (reposition_statement
-            (identifier)
+          then: (reposition_statement
+            query: (identifier)
             (backwards)
-            (binary_expression
+            count: (binary_expression
               (input_expression
-                (identifier))
+                field: (identifier))
               (number_literal)))
-          (reposition_statement
-            (identifier)
+          else: (reposition_statement
+            query: (identifier)
             (forwards)
-            (binary_expression
+            count: (binary_expression
               (input_expression
-                (identifier))
+                field: (identifier))
               (number_literal))))
         (run_statement
-          (identifier)))))
+          procedure: (identifier)))))
   (open_query_statement
-    (identifier)
+    query: (identifier)
     (record_phrase
-      (identifier)
-      (no_lock))
+      record: (identifier)
+      lock: (no_lock))
     (record_phrase
-      (identifier)
-      (identifier)
-      (no_lock)))
+      record: (identifier)
+      of: (identifier)
+      lock: (no_lock)))
   (run_statement
-    (identifier))
+    procedure: (identifier))
   (enable_statement
     (enable_item
-      (identifier))
+      field: (identifier))
     (enable_item
-      (identifier))
+      field: (identifier))
     (enable_item
-      (identifier))
+      field: (identifier))
     (frame_phrase
-      (identifier)))
+      frame: (identifier)))
   (wait_for_statement
     (of_phrase
-      (identifier)
-      (widget_phrase
-        (identifier)))
+      events: (identifier)
+      widgets: (widget_phrase
+        handle: (identifier)))
     (of_phrase
-      (identifier)
-      (widget_phrase
-        (system_handle))))
+      events: (identifier)
+      widgets: (widget_phrase
+        system_handle: (system_handle))))
   (procedure_definition
-    (identifier)
+    name: (identifier)
     (body
       (get_statement
-        (identifier))
+        query: (identifier))
       (if_statement
         (unary_expression
           (available_expression
-            (identifier)))
-        (do_statement
+            record: (identifier)))
+        then: (do_statement
           (body
             (reposition_statement
-              (identifier)
+              query: (identifier)
               (backwards)
-              (number_literal))
+              count: (number_literal))
             (get_statement
-              (identifier)))))
+              query: (identifier)))))
       (display_statement
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (frame_phrase
-          (identifier)
+          frame: (identifier)
           (centered)
-          (number_literal)
+          row: (number_literal)
           (side_labels)
           (overlay)))))
   (reposition_statement
-    (identifier)
-    (identifier)
+    query: (identifier)
+    recid: (identifier)
     (no_error))
   (reposition_statement
-    (identifier)
-    (identifier)
-    (identifier)
-    (identifier)
+    query: (identifier)
+    rowid: (identifier)
+    rowid: (identifier)
+    tenant: (identifier)
     (no_error)))

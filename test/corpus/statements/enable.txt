@@ -16,10 +16,13 @@ ENABLE field1 IN WINDOW w1.
 --------------------------------------------------------------------------------
 
 (source_code
-  (enable_statement)
   (enable_statement
+    (all))
+  (enable_statement
+    (all)
     except: (identifier))
   (enable_statement
+    (all)
     except: (identifier)
     except: (identifier))
   (enable_statement
@@ -33,6 +36,7 @@ ENABLE field1 IN WINDOW w1.
     (enable_item
       field: (identifier)))
   (enable_statement
+    (unless_hidden)
     (enable_item
       field: (identifier)))
   (enable_statement
@@ -85,7 +89,8 @@ ENABLE field1 FORMAT "x(10)" WHEN ok
       constant: (string_literal)
       (format_phrase
         bgcolor: (number_literal)))
-    (enable_item)))
+    (enable_item
+      (skip))))
 
 ================================================================================
 ENABLE - Reference snippet
@@ -100,16 +105,17 @@ ENABLE ALL WITH FRAME butt-frame.
 (source_code
   (enable_statement
     (enable_item
-      (qualified_name
-        (identifier)
-        (identifier)))
+      field: (qualified_name
+        left: (identifier)
+        right: (identifier)))
     (frame_phrase
-      (identifier)))
+      frame: (identifier)))
   (enable_statement
     (enable_item
-      (identifier))
+      field: (identifier))
     (frame_phrase
-      (identifier)))
+      frame: (identifier)))
   (enable_statement
+    (all)
     (frame_phrase
-      (identifier))))
+      frame: (identifier))))

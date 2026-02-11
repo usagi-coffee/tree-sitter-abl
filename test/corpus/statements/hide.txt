@@ -24,13 +24,15 @@ HIDE STREAM-HANDLE hS FRAME f1 NO-PAUSE.
   (hide_statement
     (all))
   (hide_statement
-    (all))
+    (all)
+    (no_pause))
   (hide_statement
     stream: (identifier))
   (hide_statement
     stream: (identifier)
     (widget_phrase
-      frame: (identifier))))
+      frame: (identifier))
+    (no_pause)))
 
 ================================================================================
 HIDE - Reference snippet
@@ -123,5 +125,6 @@ HIDE ALL NO-PAUSE IN WINDOW w1.
     (message))
   (hide_statement
     (all)
+    (no_pause)
     (in_window_phrase
       window: (identifier))))

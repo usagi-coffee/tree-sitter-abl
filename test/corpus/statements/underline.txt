@@ -41,44 +41,44 @@ UNDERLINE STREAM-HANDLE hS Customer.Name WITH FRAME f1.
   (for_statement
     (record
       (record
-        (identifier)
+        record: (identifier)
         (no_lock))
       (break_by
-        (qualified_name
-          (identifier)
-          (identifier))))
+        by: (qualified_name
+          left: (identifier)
+          right: (identifier))))
     (frame_phrase
       (use_text))
     (body
       (display_statement
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (field
-          (qualified_name
-            (identifier)
-            (identifier))))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier))))
       (if_statement
         (function_call
-          (identifier)
+          function: (identifier)
           (arguments
             (argument
-              (qualified_name
-                (identifier)
-                (identifier)))))
-        (underline_statement
-          (qualified_name
-            (identifier)
-            (identifier))))))
+              name: (qualified_name
+                left: (identifier)
+                right: (identifier)))))
+        then: (underline_statement
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier))))))
   (underline_statement
-    (identifier)
-    (qualified_name
-      (identifier)
-      (identifier))
+    stream: (identifier)
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
     (frame_phrase
-      (identifier))))
+      frame: (identifier))))

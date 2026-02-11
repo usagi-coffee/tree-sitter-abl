@@ -503,7 +503,7 @@ DEFINE INPUT PARAMETER pExtent0 AS INTEGER EXTENT 0.
     name: (identifier)
     type: (identifier)
     (no_undo)
-    (number_literal))
+    initial: (number_literal))
   (run_statement
     procedure: (procedure_name)
     (arguments

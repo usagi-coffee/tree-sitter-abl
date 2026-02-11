@@ -42,53 +42,53 @@ VALIDATE sports.Item NO-ERROR.
 
 (source_code
   (repeat_statement
-    (identifier)
+    record: (identifier)
     (body
       (prompt_for_statement
         (field
-          (qualified_name
-            (identifier)
-            (identifier))))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier))))
       (find_statement
-        (identifier)
-        (qualified_name
-          (identifier)
-          (identifier))
+        table: (identifier)
+        values: (qualified_name
+          left: (identifier)
+          right: (identifier))
         (no_error))
       (if_statement
         (unary_expression
           (available_expression
-            (identifier)))
-        (do_statement
+            record: (identifier)))
+        then: (do_statement
           (body
             (create_statement
-              (identifier))
+              table: (identifier))
             (assign_statement
-              (qualified_name
-                (identifier)
-                (identifier)))
+              record: (qualified_name
+                left: (identifier)
+                right: (identifier)))
             (update_statement
               (field
-                (qualified_name
-                  (identifier)
-                  (identifier)))
+                field: (qualified_name
+                  left: (identifier)
+                  right: (identifier)))
               (field
-                (qualified_name
-                  (identifier)
-                  (identifier))))
+                field: (qualified_name
+                  left: (identifier)
+                  right: (identifier))))
             (validate_statement
-              (identifier))))
-        (display_statement
+              record: (identifier))))
+        else: (display_statement
           (field
-            (qualified_name
-              (identifier)
-              (identifier)))
+            field: (qualified_name
+              left: (identifier)
+              right: (identifier)))
           (field
-            (qualified_name
-              (identifier)
-              (identifier)))))))
+            field: (qualified_name
+              left: (identifier)
+              right: (identifier)))))))
   (validate_statement
-    (qualified_name
-      (identifier)
-      (identifier))
+    record: (qualified_name
+      left: (identifier)
+      right: (identifier))
     (no_error)))

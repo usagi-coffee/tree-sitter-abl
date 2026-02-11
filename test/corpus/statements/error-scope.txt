@@ -29,8 +29,8 @@ DEFINE VARIABLE x AS INTEGER.
     (error_scope_type)
     (on_error_phrase))
   (variable_definition
-    (identifier)
-    (identifier)))
+    name: (identifier)
+    type: (identifier)))
 
 ================================================================================
 ERROR SCOPE - Reference snippets

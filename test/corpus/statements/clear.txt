@@ -15,10 +15,14 @@ CLEAR FRAME myframe ALL NO-PAUSE.
   (clear_statement
     frame: (identifier))
   (clear_statement
-    frame: (identifier))
-  (clear_statement)
+    frame: (identifier)
+    (no_pause))
   (clear_statement
-    frame: (identifier)))
+    (all))
+  (clear_statement
+    frame: (identifier)
+    (all)
+    (no_pause)))
 
 ================================================================================
 CLEAR - Reference snippet
@@ -31,4 +35,5 @@ CLEAR FRAME ex NO-PAUSE.
 
 (source_code
   (clear_statement
-    (identifier)))
+    frame: (identifier)
+    (no_pause)))

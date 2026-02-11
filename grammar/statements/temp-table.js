@@ -133,11 +133,17 @@ module.exports = ({ kw }) => ({
       seq(kw("HELP"), field("help", $.string_literal)),
       seq(
         kw("INITIAL"),
-        field("initial", choice($._expression, seq("[", optional($._expressions), "]"))),
+        field(
+          "initial",
+          choice($._expression, seq("[", optional($._expressions), "]")),
+        ),
       ),
       seq(kw("LABEL"), field("label", $.__temp_table_label_list)),
       seq(kw("MOUSE-POINTER"), field("mouse_pointer", $._expression)),
-      seq(optional(alias(kw("NOT"), $.not)), alias(kw("CASE-SENSITIVE"), $.case_sensitive)),
+      seq(
+        optional(alias(kw("NOT"), $.not)),
+        alias(kw("CASE-SENSITIVE"), $.case_sensitive),
+      ),
       seq(kw("PFCOLOR"), field("pfcolor", $._expression)),
       alias(kw("SERIALIZE-HIDDEN"), $.serialize_hidden),
       seq(kw("SERIALIZE-NAME"), field("serialize_name", $.string_literal)),

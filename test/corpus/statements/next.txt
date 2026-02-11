@@ -29,46 +29,46 @@ END.
 (source_code
   (prompt_for_statement
     (field
-      (qualified_name
-        (identifier)
-        (identifier))
+      field: (qualified_name
+        left: (identifier)
+        right: (identifier))
       (format_phrase
-        (string_literal)))
+        label: (string_literal)))
     (frame_phrase
       (side_labels)
       (centered)))
   (for_statement
     (record
       (record
-        (identifier)))
+        record: (identifier)))
     (body
       (if_statement
         (binary_expression
           (qualified_name
-            (identifier)
-            (identifier))
+            left: (identifier)
+            right: (identifier))
           (input_expression
-            (qualified_name
-              (identifier)
-              (identifier))))
-        (next_statement))
+            field: (qualified_name
+              left: (identifier)
+              right: (identifier))))
+        then: (next_statement))
       (display_statement
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (frame_phrase
           (centered)
           (use_text))))))

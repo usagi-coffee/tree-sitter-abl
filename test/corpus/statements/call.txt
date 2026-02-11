@@ -37,7 +37,7 @@ CALL doWork ? TODAY.
 
 (source_code
   (call_statement
-    (identifier)
+    routine: (identifier)
     (argument
       (number_literal))
     (argument
@@ -45,7 +45,7 @@ CALL doWork ? TODAY.
     (argument
       (identifier)))
   (call_statement
-    (identifier)
+    routine: (identifier)
     (argument
       (parenthesized_expression
         (binary_expression
@@ -53,14 +53,14 @@ CALL doWork ? TODAY.
           (identifier))))
     (argument
       (function_call
-        (identifier)
+        function: (identifier)
         (arguments
           (argument
-            (identifier))
+            name: (identifier))
           (argument
-            (identifier))))))
+            name: (identifier))))))
   (call_statement
-    (identifier)
+    routine: (identifier)
     (argument
       (null_literal))
     (argument

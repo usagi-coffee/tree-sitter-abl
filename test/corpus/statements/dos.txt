@@ -13,12 +13,14 @@ DOS NOWAIT VALUE("dir").
 
 (source_code
   (dos_statement)
-  (dos_statement)
+  (dos_statement
+    (silent))
   (dos_statement
     command_token: (identifier))
   (dos_statement
     command: (string_literal))
   (dos_statement
+    (silent)
     command: (string_literal))
   (dos_statement
     command_token: (identifier)

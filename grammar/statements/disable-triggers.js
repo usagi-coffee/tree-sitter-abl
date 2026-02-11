@@ -9,6 +9,6 @@ module.exports = ({ kw }) => ({
       field("mode", choice(kw("DUMP"), kw("LOAD"))),
       kw("OF"),
       field("table", $._identifier_or_qualified_name),
-      optional(kw("ALLOW-REPLICATION")),
+      optional(alias(kw("ALLOW-REPLICATION"), $.allow_replication)),
     ),
 });

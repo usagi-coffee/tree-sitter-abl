@@ -102,7 +102,7 @@ END FUNCTION.
       (parameter
         name: (identifier)
         type: (identifier)
-        (number_literal)))
+        size: (number_literal)))
     (return_statement
       value: (boolean_literal))))
 
@@ -275,7 +275,7 @@ END.
       (parameter
         name: (identifier)
         type: (identifier)
-        (null_literal)))
+        size: (null_literal)))
     (return_statement
       value: (function_call
         function: (identifier)
@@ -301,7 +301,7 @@ END.
       (parameter
         name: (identifier)
         type: (identifier)
-        (preprocessor_reference
+        size: (preprocessor_reference
           (identifier))))
     (return_statement
       value: (string_literal))))
@@ -614,133 +614,133 @@ END.
 
 (source_code
   (function_definition
-    (identifier)
-    (identifier)
+    name: (identifier)
+    type: (identifier)
     (parameters
       (parameter
-        (identifier)
-        (identifier)))
+        name: (identifier)
+        type: (identifier)))
     (return_statement
-      (parenthesized_expression
+      value: (parenthesized_expression
         (binary_expression
           (number_literal)
           (identifier)))))
   (function_forward_definition
-    (identifier)
-    (identifier)
+    name: (identifier)
+    type: (identifier)
     (parameters
       (parameter
-        (identifier)
-        (identifier)))
+        name: (identifier)
+        type: (identifier)))
     (forward))
   (display_statement
     (field
-      (string_literal))
+      field: (string_literal))
     (field
-      (function_call
-        (identifier)
+      field: (function_call
+        function: (identifier)
         (arguments
           (argument
-            (number_literal))))))
+            name: (number_literal))))))
   (display_statement
     (field
-      (string_literal))
+      field: (string_literal))
     (field
-      (function_call
-        (identifier)
+      field: (function_call
+        function: (identifier)
         (arguments
           (argument
-            (number_literal))))))
+            name: (number_literal))))))
   (display_statement
     (field
-      (string_literal))
+      field: (string_literal))
     (field
-      (function_call
-        (identifier)
+      field: (function_call
+        function: (identifier)
         (arguments
           (argument
-            (number_literal))))))
+            name: (number_literal))))))
   (function_definition
-    (identifier)
-    (identifier)
+    name: (identifier)
+    type: (identifier)
     (parameters
       (parameter
-        (identifier)
-        (identifier)))
+        name: (identifier)
+        type: (identifier)))
     (return_statement
-      (parenthesized_expression
+      value: (parenthesized_expression
         (binary_expression
           (number_literal)
           (identifier)))))
   (variable_definition
-    (identifier)
-    (identifier)
+    name: (identifier)
+    type: (identifier)
     (no_undo))
   (function_forward_definition
-    (identifier)
-    (identifier)
+    name: (identifier)
+    type: (identifier)
     (parameters
       (parameter
-        (identifier)
-        (identifier)))
+        name: (identifier)
+        type: (identifier)))
     (in_phrase
-      (identifier)))
+      context: (identifier)))
   (run_statement
-    (procedure_name)
-    (persistent))
+    procedure: (procedure_name)
+    handle: (persistent))
   (display_statement
     (field
-      (string_literal))
+      field: (string_literal))
     (field
-      (function_call
-        (identifier)
+      field: (function_call
+        function: (identifier)
         (arguments
           (argument
-            (number_literal)))))
+            name: (number_literal)))))
     (field
-      (string_literal))
+      field: (string_literal))
     (field
-      (function_call
-        (identifier)
+      field: (function_call
+        function: (identifier)
         (arguments
           (argument
-            (number_literal)))))
+            name: (number_literal)))))
     (field
-      (string_literal))
+      field: (string_literal))
     (field
-      (function_call
-        (identifier)
+      field: (function_call
+        function: (identifier)
         (arguments
           (argument
-            (number_literal))))))
+            name: (number_literal))))))
   (delete_procedure_statement
-    (identifier))
+    handle: (identifier))
   (function_definition
-    (identifier)
-    (identifier)
+    name: (identifier)
+    type: (identifier)
     (parameters
       (parameter
-        (identifier)
-        (identifier)))
+        name: (identifier)
+        type: (identifier)))
     (if_statement
       (binary_expression
         (identifier)
         (number_literal))
-      (return_statement
-        (number_literal)))
+      then: (return_statement
+        value: (number_literal)))
     (if_statement
       (binary_expression
         (identifier)
         (number_literal))
-      (return_statement
-        (number_literal)))
+      then: (return_statement
+        value: (number_literal)))
     (return_statement
-      (binary_expression
+      value: (binary_expression
         (identifier)
         (function_call
-          (identifier)
+          function: (identifier)
           (arguments
             (argument
-              (binary_expression
+              name: (binary_expression
                 (identifier)
                 (number_literal)))))))))

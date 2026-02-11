@@ -52,71 +52,71 @@ RELEASE OBJECT controlHdl NO-ERROR.
 
 (source_code
   (variable_definition
-    (identifier)
-    (identifier)
+    name: (identifier)
+    type: (identifier)
     (no_undo))
   (variable_definition
-    (identifier)
-    (identifier)
+    name: (identifier)
+    type: (identifier)
     (no_undo))
   (variable_definition
-    (identifier)
-    (identifier)
+    name: (identifier)
+    type: (identifier)
     (no_undo))
   (create_widget_statement
-    (identifier)
+    handle: (identifier)
     (assign_phrase
       (assign_pair
-        (identifier)
-        (object_access
-          (identifier)
-          (identifier)
-          (identifier)))
+        left: (identifier)
+        right: (object_access
+          widget: (identifier)
+          left: (identifier)
+          right: (identifier)))
       (assign_pair
-        (identifier)
-        (string_literal))))
+        left: (identifier)
+        right: (string_literal))))
   (assignment_statement
-    (identifier)
-    (assignment_operator)
-    (object_access
-      (identifier)
-      (identifier)))
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (object_access
+      left: (identifier)
+      right: (identifier)))
   (expression_statement
     (function_call
-      (object_access
-        (identifier)
-        (identifier))
+      function: (object_access
+        left: (identifier)
+        right: (identifier))
       (arguments
         (argument
-          (qualified_name
-            (identifier)
-            (identifier)))
+          name: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (argument
-          (string_literal)))))
+          name: (string_literal)))))
   (assignment_statement
-    (identifier)
-    (assignment_operator)
-    (object_access
-      (identifier)
-      (identifier)))
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (object_access
+      left: (identifier)
+      right: (identifier)))
   (assignment_statement
-    (object_access
-      (identifier)
-      (identifier))
-    (assignment_operator)
-    (function_call
-      (identifier)
+    left: (object_access
+      left: (identifier)
+      right: (identifier))
+    operator: (assignment_operator)
+    right: (function_call
+      function: (identifier)
       (arguments
         (argument
-          (number_literal))
+          name: (number_literal))
         (argument
-          (number_literal))
+          name: (number_literal))
         (argument
-          (number_literal)))))
+          name: (number_literal)))))
   (release_object_statement
-    (identifier))
+    handle: (identifier))
   (delete_widget_statement
-    (identifier))
+    widget: (identifier))
   (release_object_statement
-    (identifier)
+    handle: (identifier)
     (no_error)))

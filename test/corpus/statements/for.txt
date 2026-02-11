@@ -590,144 +590,145 @@ END.
   (for_statement
     (record
       (record
-        (identifier)
+        record: (identifier)
         (no_lock))
       (by_phrase
-        (qualified_name
-          (identifier)
-          (identifier))))
+        by: (qualified_name
+          left: (identifier)
+          right: (identifier))))
     (body
       (display_statement
-        (identifier))
+        record: (identifier))
       (leave_statement)))
   (for_statement
     (record
       (record
-        (identifier)
+        record: (identifier)
         (no_lock)
-        (binary_expression
+        where: (binary_expression
           (qualified_name
-            (identifier)
-            (identifier))
+            left: (identifier)
+            right: (identifier))
           (number_literal)))
       (by_phrase
-        (qualified_name
-          (identifier)
-          (identifier))))
+        by: (qualified_name
+          left: (identifier)
+          right: (identifier))))
     (body
       (display_statement
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (field
-          (qualified_name
-            (identifier)
-            (identifier))))))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier))))))
   (for_statement
     (record
       (record
-        (identifier)
+        record: (identifier)
         (no_lock)))
     (record
       (record
-        (identifier)
-        (identifier)
+        record: (identifier)
+        of: (identifier)
         (no_lock)))
     (record
       (record
-        (identifier)
-        (identifier)
+        record: (identifier)
+        of: (identifier)
         (no_lock)))
     (record
       (record
-        (identifier)
-        (identifier)
+        record: (identifier)
+        of: (identifier)
         (no_lock))
       (by_phrase
-        (qualified_name
-          (identifier)
-          (identifier))
-        (qualified_name
-          (identifier)
-          (identifier))
-        (qualified_name
-          (identifier)
-          (identifier))))
+        by: (qualified_name
+          left: (identifier)
+          right: (identifier))
+        by: (qualified_name
+          left: (identifier)
+          right: (identifier))
+        by: (qualified_name
+          left: (identifier)
+          right: (identifier))))
     (body
       (display_statement
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (field
-          (qualified_name
-            (identifier)
-            (identifier))))))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier))))))
   (for_statement
     (record
       (record
-        (identifier)
+        record: (identifier)
         (no_lock)))
     (record
       (record
-        (identifier)
-        (identifier)))
+        record: (identifier)
+        of: (identifier)))
     (body
       (display_statement
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (field
-          (qualified_name
-            (identifier)
-            (identifier))))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier))))
       (pause_statement
-        (number_literal))
+        duration: (number_literal)
+        (no_message))
       (assignment_statement
-        (qualified_name
-          (identifier)
-          (identifier))
-        (assignment_operator)
-        (string_literal))
+        left: (qualified_name
+          left: (identifier)
+          right: (identifier))
+        operator: (assignment_operator)
+        right: (string_literal))
       (display_statement
-        (qualified_name
-          (identifier)
-          (identifier))))))
+        record: (qualified_name
+          left: (identifier)
+          right: (identifier))))))

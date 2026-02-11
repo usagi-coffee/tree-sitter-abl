@@ -37,11 +37,11 @@ UNSUBSCRIBE ALL IN hPub.
 
 (source_code
   (procedure_definition
-    (identifier)
+    name: (identifier)
     (body
       (parameter_definition
-        (identifier)
-        (identifier)
+        name: (identifier)
+        type: (identifier)
         (no_undo))
       (message_statement
         (string_literal)
@@ -50,14 +50,14 @@ UNSUBSCRIBE ALL IN hPub.
       (unsubscribe_statement
         (all))))
   (unsubscribe_statement
-    (identifier)
-    (string_literal)
+    subscriber: (identifier)
+    event: (string_literal)
     (in_phrase
-      (identifier)))
+      publisher: (identifier)))
   (unsubscribe_statement
-    (identifier)
-    (identifier))
+    subscriber: (identifier)
+    event: (identifier))
   (unsubscribe_statement
     (all)
     (in_phrase
-      (identifier))))
+      publisher: (identifier))))

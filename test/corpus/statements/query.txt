@@ -570,6 +570,7 @@ DEFINE QUERY qExceptAll FOR Customer EXCEPT ().
     (frame_phrase
       frame: (identifier)))
   (enable_statement
+    (all)
     (frame_phrase
       frame: (identifier)))
   (wait_for_statement

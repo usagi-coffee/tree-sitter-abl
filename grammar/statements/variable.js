@@ -13,16 +13,13 @@ module.exports = ({ kw }) => ({
       field("name", $.identifier),
       repeat(alias($.__variable_extent_phrase, $.extent_phrase)),
       optional(alias(kw("NO-UNDO"), $.no_undo)),
-
-      seq(
-        choice(
-          seq(
-            kw("AS"),
-            optional(kw("CLASS")),
-            field("type", $._type_or_string),
-          ),
-          seq(kw("LIKE"), field("like", $._identifier_or_qualified_name)),
+      choice(
+        seq(
+          kw("AS"),
+          optional(kw("CLASS")),
+          field("type", $._type_or_string),
         ),
+        seq(kw("LIKE"), field("like", $._identifier_or_qualified_name)),
       ),
 
       repeat(
@@ -38,7 +35,7 @@ module.exports = ({ kw }) => ({
           seq(kw("CONTEXT-HELP-ID"), field("context_help_id", $._expression)),
           seq(kw("DCOLOR"), field("dcolor", $._expression)),
           seq(kw("DECIMALS"), field("decimals", $.number_literal)),
-          kw("DROP-TARGET"),
+          alias(kw("DROP-TARGET"), $.drop_target),
           seq(kw("FONT"), field("font", $._expression)),
           seq(kw("FGCOLOR"), field("fgcolor", $._expression)),
           seq(kw("LABEL"), field("label", $.__format_labels)),
@@ -46,11 +43,10 @@ module.exports = ({ kw }) => ({
           seq(kw("MOUSE-POINTER"), field("mouse_pointer", $._expression)),
           seq(
             kw("INITIAL", { offset: 4 }),
-            choice($._expression, seq("[", optional($._expressions), "]")),
+            field("initial", choice($._expression, seq("[", optional($._expressions), "]"))),
           ),
           $.view_as_phrase,
-
-          seq(optional(kw("NOT")), kw("CASE-SENSITIVE")),
+          alias(seq(optional(kw("NOT")), kw("CASE-SENSITIVE")), $.case_sensitive),
           alias(kw("NO-UNDO"), $.no_undo),
           $.trigger_phrase,
         ),

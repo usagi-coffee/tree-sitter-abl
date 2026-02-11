@@ -10,11 +10,11 @@ OS-COMMAND SILENT VALUE(cmd).
 
 (source_code
   (os_command_statement
-    (string_literal))
+    value: (string_literal))
   (os_command_statement
     (identifier))
   (os_command_statement
-    (identifier)))
+    value: (identifier)))
 
 ================================================================================
 OS-COMMAND - reference snippets and options
@@ -33,22 +33,22 @@ OS-COMMAND VALUE("echo") "ok".
 
 (source_code
   (variable_definition
-    (identifier)
-    (identifier)
+    name: (identifier)
+    type: (identifier)
     (no_undo)
     (format_phrase
-      (string_literal)))
+      format: (string_literal)))
   (repeat_statement
     (body
       (update_statement
         (field
-          (identifier)))
+          field: (identifier)))
       (os_command_statement
-        (identifier))))
+        value: (identifier))))
   (os_command_statement
-    (string_literal))
+    value: (string_literal))
   (os_command_statement
-    (string_literal)
+    value: (string_literal)
     (string_literal)))
 
 ================================================================================
@@ -62,7 +62,7 @@ OS-COMMAND SILENT "ping" "localhost" /n 1.
 
 (source_code
   (os_command_statement
-    (string_literal)
+    value: (string_literal)
     (string_literal)
     (number_literal))
   (os_command_statement

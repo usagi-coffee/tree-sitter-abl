@@ -170,125 +170,125 @@ END.
 
 (source_code
   (repeat_statement
-    (identifier)
+    record: (identifier)
     (body
       (form_statement
         (form_item
-          (qualified_name
-            (identifier)
-            (identifier))
-          (number_literal))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier))
+          colon: (number_literal))
         (form_item
-          (qualified_name
-            (identifier)
-            (identifier))
-          (number_literal))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier))
+          colon: (number_literal))
         (form_item
-          (qualified_name
-            (identifier)
-            (identifier))
-          (number_literal))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier))
+          colon: (number_literal))
         (form_item
-          (qualified_name
-            (identifier)
-            (identifier))
-          (number_literal))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier))
+          colon: (number_literal))
         (form_item)
         (form_item
-          (qualified_name
-            (identifier)
-            (identifier))
-          (number_literal))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier))
+          colon: (number_literal))
         (form_item
-          (identifier))
+          field: (identifier))
         (form_item
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (form_item
-          (identifier))
+          field: (identifier))
         (form_item
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (form_item
-          (identifier))
+          field: (identifier))
         (frame_phrase
           (side_labels)
           (down
-            (number_literal))
+            value: (number_literal))
           (centered)))
       (prompt_for_statement
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (frame_phrase
-          (identifier)
+          frame: (identifier)
           (side_labels)
           (centered)))
       (find_statement
-        (identifier)
-        (qualified_name
-          (identifier)
-          (identifier)))
+        table: (identifier)
+        values: (qualified_name
+          left: (identifier)
+          right: (identifier)))
       (update_statement
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (field
-          (qualified_name
-            (identifier)
-            (identifier))))))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier))))))
   (variable_definition
-    (identifier)
-    (identifier)
+    name: (identifier)
+    type: (identifier)
     (no_undo)
     (format_phrase
-      (string_literal)))
+      format: (string_literal)))
   (form_statement
     (form_item
-      (identifier))
+      field: (identifier))
     (form_item
-      (string_literal))
+      field: (string_literal))
     (form_item
-      (identifier))
+      field: (identifier))
     (frame_phrase
-      (identifier)
-      (identifier)
-      (identifier)
+      frame: (identifier)
+      row: (identifier)
+      column: (identifier)
       (down
-        (identifier))))
+        value: (identifier))))
   (do_statement
-    (identifier)
-    (number_literal)
-    (number_literal)
+    variable: (identifier)
+    start: (number_literal)
+    end: (number_literal)
     (frame_phrase
-      (identifier))
+      frame: (identifier))
     (body
       (display_statement
-        (identifier))
+        record: (identifier))
       (hide_statement
         (widget_phrase
-          (identifier))))))
+          frame: (identifier))))))

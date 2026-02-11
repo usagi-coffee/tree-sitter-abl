@@ -11,19 +11,19 @@ DISP SKIP(1) "x".
 
 (source_code
   (display_statement
-    (identifier))
+    record: (identifier))
   (display_statement
     (field
-      (string_literal)))
+      field: (string_literal)))
   (display_statement
     (field
-      (number_literal)))
+      field: (number_literal)))
   (display_statement
     (field
-      (parenthesized_expression
+      field: (parenthesized_expression
         (number_literal)))
     (field
-      (string_literal))))
+      field: (string_literal))))
 
 ================================================================================
 DISPLAY multiple items

@@ -97,7 +97,7 @@ module.exports = ({ kw }) => ({
     ),
 
   __function_extent_phrase: ($) =>
-    seq(kw("EXTENT"), optional($.__function_extent_size)),
+    seq(kw("EXTENT"), optional(field("size", $.__function_extent_size))),
   __function_map_phrase: ($) =>
     seq(kw("MAP"), kw("TO"), field("actual", $.identifier)),
   __function_in_phrase: ($) => seq(kw("IN"), field("context", $._expression)),

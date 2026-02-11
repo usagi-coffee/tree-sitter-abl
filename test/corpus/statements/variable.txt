@@ -31,10 +31,10 @@ DEFINE PRIVATE STATIC SERIALIZABLE VARIABLE cust AS CLASS Customer NO-UNDO.
     type: (identifier)
     (extent_phrase
       size: (number_literal))
-    (string_literal)
-    (string_literal)
-    (string_literal)
-    (string_literal))
+    initial: (string_literal)
+    initial: (string_literal)
+    initial: (string_literal)
+    initial: (string_literal))
   (variable_definition
     (new_modifier)
     (scope_modifier)
@@ -77,7 +77,8 @@ DEFINE VARIABLE cView AS CHARACTER VIEW-AS FILL-IN.
     type: (identifier))
   (variable_definition
     name: (identifier)
-    type: (identifier))
+    type: (identifier)
+    (drop_target))
   (variable_definition
     name: (identifier)
     type: (identifier)
@@ -138,7 +139,7 @@ DEFINE VARIABLE rate AS DECIMAL DECIMALS 4 INITIAL 0.0525.
     name: (identifier)
     type: (identifier)
     decimals: (number_literal)
-    (number_literal)))
+    initial: (number_literal)))
 
 ================================================================================
 VARIABLE DEFINITION - EXTENT Variations
@@ -191,23 +192,23 @@ DEFINE VARIABLE dtDate AS DATE INITIAL TODAY.
   (variable_definition
     name: (identifier)
     type: (identifier)
-    (number_literal))
+    initial: (number_literal))
   (variable_definition
     name: (identifier)
     type: (identifier)
-    (number_literal))
+    initial: (number_literal))
   (variable_definition
     name: (identifier)
     type: (identifier)
-    (string_literal))
+    initial: (string_literal))
   (variable_definition
     name: (identifier)
     type: (identifier)
-    (boolean_literal))
+    initial: (boolean_literal))
   (variable_definition
     name: (identifier)
     type: (identifier)
-    (identifier)))
+    initial: (identifier)))
 
 ================================================================================
 VARIABLE DEFINITION - Shared Variations
@@ -481,171 +482,171 @@ END.
   (variable_definition
     (new_modifier)
     (scope_modifier)
-    (identifier)
-    (identifier)
+    name: (identifier)
+    type: (identifier)
     (no_undo))
   (variable_definition
     (new_modifier)
     (scope_modifier)
-    (identifier)
-    (identifier)
+    name: (identifier)
+    type: (identifier)
     (no_undo))
   (message_statement
     (string_literal)
     (set_update_phrase
-      (identifier)))
+      field: (identifier)))
   (run_statement
-    (procedure_name))
+    procedure: (procedure_name))
   (if_statement
     (identifier)
-    (message_statement
+    then: (message_statement
       (identifier)
       (string_literal))
-    (message_statement
+    else: (message_statement
       (identifier)
       (string_literal)))
   (variable_definition
     (scope_modifier)
-    (identifier)
-    (identifier)
+    name: (identifier)
+    type: (identifier)
     (no_undo))
   (variable_definition
     (scope_modifier)
-    (identifier)
-    (identifier)
+    name: (identifier)
+    type: (identifier)
     (no_undo))
   (output_statement)
   (for_statement
     (record
       (record
-        (identifier)
-        (binary_expression
+        record: (identifier)
+        where: (binary_expression
           (qualified_name
-            (identifier)
-            (identifier))
+            left: (identifier)
+            right: (identifier))
           (null_literal))))
     (body
       (assignment_statement
-        (identifier)
-        (assignment_operator)
-        (binary_expression
+        left: (identifier)
+        operator: (assignment_operator)
+        right: (binary_expression
           (identifier)
           (number_literal)))
       (for_statement
         (record
           (record
-            (identifier)
-            (identifier)))
+            record: (identifier)
+            of: (identifier)))
         (body
           (display_statement
             (field
-              (qualified_name
-                (identifier)
-                (identifier)))
+              field: (qualified_name
+                left: (identifier)
+                right: (identifier)))
             (field
-              (qualified_name
-                (identifier)
-                (identifier)))
+              field: (qualified_name
+                left: (identifier)
+                right: (identifier)))
             (field
-              (qualified_name
-                (identifier)
-                (identifier)))
+              field: (qualified_name
+                left: (identifier)
+                right: (identifier)))
             (field
-              (qualified_name
-                (identifier)
-                (identifier))))
+              field: (qualified_name
+                left: (identifier)
+                right: (identifier))))
           (if_statement
             (identifier)
-            (delete_statement
-              (identifier)))))
+            then: (delete_statement
+              record: (identifier)))))
       (if_statement
         (identifier)
-        (delete_statement
-          (identifier)))))
+        then: (delete_statement
+          record: (identifier)))))
   (output_statement
     (close))
   (variable_definition
     (new_modifier)
     (scope_modifier)
     (scope_modifier)
-    (identifier)
-    (identifier)
+    name: (identifier)
+    type: (identifier)
     (no_undo)
-    (boolean_literal))
+    initial: (boolean_literal))
   (variable_definition
-    (identifier)
-    (identifier)
+    name: (identifier)
+    type: (identifier)
     (no_undo)
     (format_phrase
-      (string_literal))
-    (string_literal))
+      format: (string_literal))
+    label: (string_literal))
   (if_statement
     (identifier)
-    (do_statement
+    then: (do_statement
       (body
         (run_statement
-          (procedure_name))
+          procedure: (procedure_name))
         (assignment_statement
-          (identifier)
-          (assignment_operator)
-          (boolean_literal)))))
+          left: (identifier)
+          operator: (assignment_operator)
+          right: (boolean_literal)))))
   (form_statement
     (form_item
-      (string_literal))
+      field: (string_literal))
     (form_item
-      (number_literal))
+      skip: (number_literal))
     (form_item
-      (string_literal))
+      field: (string_literal))
     (form_item)
     (form_item
-      (string_literal))
+      field: (string_literal))
     (frame_phrase
       (centered)
-      (number_literal)
-      (identifier)))
+      row: (number_literal)
+      frame: (identifier)))
   (repeat_statement
     (body
       (view_statement
         (widget_phrase
-          (identifier)))
+          frame: (identifier)))
       (update_statement
         (field
-          (identifier)
+          field: (identifier)
           (format_phrase))
         (frame_phrase
-          (identifier)
+          frame: (identifier)
           (centered)
-          (number_literal)
+          row: (number_literal)
           (side_labels)))
       (if_statement
         (binary_expression
           (identifier)
           (number_literal))
-        (do_statement
+        then: (do_statement
           (body
             (hide_statement
               (widget_phrase
-                (identifier)))
+                frame: (identifier)))
             (hide_statement
               (widget_phrase
-                (identifier)))
+                frame: (identifier)))
             (run_statement
-              (procedure_name))))
-        (if_statement
+              procedure: (procedure_name))))
+        else: (if_statement
           (binary_expression
             (identifier)
             (number_literal))
-          (do_statement
+          then: (do_statement
             (body
               (hide_statement
                 (widget_phrase
-                  (identifier)))
+                  frame: (identifier)))
               (hide_statement
                 (widget_phrase
-                  (identifier)))
+                  frame: (identifier)))
               (run_statement
-                (procedure_name))))
-          (do_statement
+                procedure: (procedure_name))))
+          else: (do_statement
             (body
               (message_statement
                 (string_literal))
@@ -704,192 +705,192 @@ END.
 
 (source_code
   (variable_definition
-    (identifier)
-    (identifier)
+    name: (identifier)
+    type: (identifier)
     (no_undo)
     (format_phrase
-      (string_literal))
+      format: (string_literal))
     (extent_phrase
-      (number_literal))
-    (string_literal)
-    (string_literal)
-    (string_literal)
-    (string_literal)
-    (string_literal)
-    (string_literal)
-    (string_literal))
+      size: (number_literal))
+    initial: (string_literal)
+    initial: (string_literal)
+    initial: (string_literal)
+    initial: (string_literal)
+    initial: (string_literal)
+    initial: (string_literal)
+    initial: (string_literal))
   (variable_definition
-    (identifier)
-    (identifier)
+    name: (identifier)
+    type: (identifier)
     (no_undo)
-    (identifier))
+    initial: (identifier))
   (repeat_statement
     (frame_phrase
       (side_labels)
       (down
-        (number_literal))
+        value: (number_literal))
       (centered)
-      (number_literal)
-      (string_literal))
+      row: (number_literal)
+      title: (string_literal))
     (body
       (display_statement
         (field
-          (parenthesized_expression
+          field: (parenthesized_expression
             (number_literal))))
       (update_statement
         (field
-          (identifier)
+          field: (identifier)
           (format_phrase
-            (string_literal))))
+            label: (string_literal))))
       (display_statement
         (field
-          (array_access
-            (identifier)
+          field: (array_access
+            array: (identifier)
             (function_call
-              (identifier)
+              function: (identifier)
               (arguments
                 (argument
-                  (identifier))))))
+                  name: (identifier))))))
         (format_phrase
-          (string_literal)))))
+          label: (string_literal)))))
   (variable_definition
-    (identifier)
-    (identifier)
+    name: (identifier)
+    type: (identifier)
     (no_undo))
   (variable_definition
-    (identifier)
-    (identifier)
+    name: (identifier)
+    type: (identifier)
     (no_undo)
     (view_as_phrase
       (selection_list_phrase
         (size_phrase
-          (number_literal)
-          (number_literal))
-        (string_literal)
-        (string_literal)
-        (string_literal)
-        (string_literal)
-        (string_literal)
-        (string_literal)
-        (string_literal)
-        (string_literal)
-        (string_literal)
-        (string_literal)))
-    (string_literal)
+          width: (number_literal)
+          height: (number_literal))
+        items: (string_literal)
+        items: (string_literal)
+        items: (string_literal)
+        items: (string_literal)
+        items: (string_literal)
+        items: (string_literal)
+        items: (string_literal)
+        items: (string_literal)
+        items: (string_literal)
+        items: (string_literal)))
+    label: (string_literal)
     (trigger_phrase
-      (identifier)
+      event: (identifier)
       (trigger_body
         (if_statement
           (binary_expression
             (object_access
-              (identifier)
-              (identifier))
+              left: (identifier)
+              right: (identifier))
             (string_literal))
-          (do_statement
-            (identifier)
-            (number_literal)
-            (function_call
-              (identifier)
+          then: (do_statement
+            variable: (identifier)
+            start: (number_literal)
+            end: (function_call
+              function: (identifier)
               (arguments
                 (argument
-                  (object_access
-                    (identifier)
-                    (identifier)))))
+                  name: (object_access
+                    left: (identifier)
+                    right: (identifier)))))
             (body
               (display_statement
                 (field
-                  (function_call
-                    (identifier)
+                  field: (function_call
+                    function: (identifier)
                     (arguments
                       (argument
-                        (identifier))
+                        name: (identifier))
                       (argument
-                        (object_access
-                          (identifier)
-                          (identifier))))))
+                        name: (object_access
+                          left: (identifier)
+                          right: (identifier))))))
                 (format_phrase
-                  (string_literal))
+                  format: (string_literal))
                 (frame_phrase
-                  (identifier)
+                  frame: (identifier)
                   (centered)
                   (down
-                    (binary_expression
+                    value: (binary_expression
                       (function_call
-                        (identifier)
+                        function: (identifier)
                         (arguments
                           (argument
-                            (object_access
-                              (identifier)
-                              (identifier)))))
+                            name: (object_access
+                              left: (identifier)
+                              right: (identifier)))))
                       (number_literal)))
-                  (string_literal)
+                  title: (string_literal)
                   (use_text)))
               (down_statement
-                (number_literal)
+                count: (number_literal)
                 (frame_phrase
-                  (identifier)))))))))
+                  frame: (identifier)))))))))
   (enable_statement
     (enable_item
-      (identifier))
+      field: (identifier))
     (frame_phrase
-      (identifier)
-      (string_literal)))
+      frame: (identifier)
+      title: (string_literal)))
   (wait_for_statement
     (of_phrase
-      (identifier)
-      (widget_phrase
-        (system_handle))))
+      events: (identifier)
+      widgets: (widget_phrase
+        system_handle: (system_handle))))
   (variable_definition
-    (identifier)
-    (identifier)
+    name: (identifier)
+    type: (identifier)
     (no_undo)
-    (string_literal))
+    label: (string_literal))
   (for_statement
     (record
       (record
-        (identifier)))
+        record: (identifier)))
     (body
       (display_statement
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (field
-          (qualified_name
-            (identifier)
-            (identifier))))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier))))
       (set_statement
         (field
-          (identifier)))
+          field: (identifier)))
       (assignment_statement
-        (qualified_name
-          (identifier)
-          (identifier))
-        (assignment_operator)
-        (binary_expression
+        left: (qualified_name
+          left: (identifier)
+          right: (identifier))
+        operator: (assignment_operator)
+        right: (binary_expression
           (parenthesized_expression
             (binary_expression
               (qualified_name
-                (identifier)
-                (identifier))
+                left: (identifier)
+                right: (identifier))
               (parenthesized_expression
                 (binary_expression
                   (identifier)
                   (number_literal)))))
           (qualified_name
-            (identifier)
-            (identifier))))
+            left: (identifier)
+            right: (identifier))))
       (display_statement
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
-        (identifier)
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        base: (identifier)
         (format_phrase
-          (qualified_name
-            (identifier)
-            (identifier))
-          (string_literal))))))
+          like: (qualified_name
+            left: (identifier)
+            right: (identifier))
+          label: (string_literal))))))
 
 ================================================================================
 VARIABLE - FORMAT abbreviation
@@ -901,7 +902,7 @@ DEF VAR l_linii AS INTEGER FORMA ">>9".
 
 (source_code
   (variable_definition
-    (identifier)
-    (identifier)
+    name: (identifier)
+    type: (identifier)
     (format_phrase
-      (string_literal))))
+      format: (string_literal))))

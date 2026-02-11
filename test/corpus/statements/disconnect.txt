@@ -41,7 +41,7 @@ DISCONNECT VALUE("mydb") NO-ERROR.
 
 (source_code
   (disconnect_statement
-    (identifier))
+    database: (identifier))
   (disconnect_statement
-    (string_literal)
+    database: (string_literal)
     (no_error)))

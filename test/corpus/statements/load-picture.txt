@@ -28,24 +28,24 @@ chControl:Picture = chPic.
 
 (source_code
   (variable_definition
-    (identifier)
-    (identifier)
+    name: (identifier)
+    type: (identifier)
     (no_undo))
   (variable_definition
-    (identifier)
-    (identifier)
+    name: (identifier)
+    type: (identifier)
     (no_undo))
   (assignment_statement
-    (identifier)
-    (assignment_operator)
-    (function_call
-      (identifier)
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (function_call
+      function: (identifier)
       (arguments
         (argument
-          (string_literal)))))
+          name: (string_literal)))))
   (assignment_statement
-    (object_access
-      (identifier)
-      (identifier))
-    (assignment_operator)
-    (identifier)))
+    left: (object_access
+      left: (identifier)
+      right: (identifier))
+    operator: (assignment_operator)
+    right: (identifier)))

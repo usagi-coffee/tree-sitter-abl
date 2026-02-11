@@ -147,7 +147,7 @@ END CLASS.
       name: (identifier)
       type: (identifier)
       (no_undo)
-      (string_literal))
+      initial: (string_literal))
     (method_definition
       (access_modifier)
       type: (identifier)

@@ -506,19 +506,19 @@ END.
 
 (source_code
   (class_definition
-    (identifier)
+    name: (identifier)
     (event_definition
       (access_modifier)
-      (identifier)
+      name: (identifier)
       (signature
-        (identifier)
-        (identifier)))
+        name: (identifier)
+        type: (identifier)))
     (event_definition
-      (identifier)
+      name: (identifier)
       (signature))
     (event_definition
-      (identifier)
+      name: (identifier)
       (signature
-        (qualified_name
-          (identifier)
-          (identifier))))))
+        delegate_type: (qualified_name
+          left: (identifier)
+          right: (identifier))))))

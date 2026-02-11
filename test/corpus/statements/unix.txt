@@ -10,7 +10,8 @@ UNIX VALUE("ls -la").
 
 (source_code
   (unix_statement)
-  (unix_statement)
+  (unix_statement
+    (silent))
   (unix_statement
     command: (string_literal)))
 
@@ -48,76 +49,76 @@ UNIX VALUE("cp usr/myfile.").
     (binary_expression
       (identifier)
       (string_literal))
-    (unix_statement
-      (identifier))
-    (if_statement
+    then: (unix_statement
+      command_token: (identifier))
+    else: (if_statement
       (binary_expression
         (identifier)
         (string_literal))
-      (dos_statement
-        (identifier))
-      (display_statement
+      then: (dos_statement
+        command_token: (identifier))
+      else: (display_statement
         (field
-          (identifier))
+          field: (identifier))
         (field
-          (string_literal)))))
+          field: (string_literal)))))
   (variable_definition
-    (identifier)
-    (identifier)
+    name: (identifier)
+    type: (identifier)
     (no_undo)
     (format_phrase
-      (string_literal)))
+      format: (string_literal)))
   (repeat_statement
     (body
       (display_statement
         (field
-          (string_literal))
+          field: (string_literal))
         (frame_phrase
-          (number_literal)
+          row: (number_literal)
           (centered)
-          (identifier)))
+          frame: (identifier)))
       (set_statement
         (field
-          (identifier)
+          field: (identifier)
           (format_phrase
-            (string_literal)))
+            label: (string_literal)))
         (frame_phrase
-          (number_literal)
+          row: (number_literal)
           (centered)
-          (identifier)))
+          frame: (identifier)))
       (if_statement
         (binary_expression
           (identifier)
           (string_literal))
-        (if_statement
+        then: (if_statement
           (binary_expression
             (identifier)
             (string_literal))
-          (unix_statement
-            (identifier))
-          (if_statement
+          then: (unix_statement
+            command_token: (identifier))
+          else: (if_statement
             (binary_expression
               (identifier)
               (string_literal))
-            (dos_statement
-              (identifier))
-            (display_statement
+            then: (dos_statement
+              command_token: (identifier))
+            else: (display_statement
               (field
-                (string_literal))
+                field: (string_literal))
               (field
-                (identifier))
+                field: (identifier))
               (field
-                (string_literal)))))
-        (do_statement
+                field: (string_literal)))))
+        else: (do_statement
           (body
             (hide_statement
               (widget_phrase
-                (identifier)))
+                frame: (identifier)))
             (hide_statement
               (widget_phrase
-                (identifier)))
+                frame: (identifier)))
             (run_statement
-              (value_expression
-                (identifier))))))))
+              procedure: (value_expression
+                value: (identifier))))))))
   (unix_statement
-    (string_literal)))
+    command: (string_literal)))

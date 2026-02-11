@@ -8,7 +8,12 @@ module.exports = ({ kw }) => ({
       optional($.__buffer_compare_field_phrase),
       kw("TO"),
       field("target", $._expression),
-      optional(choice(kw("CASE-SENSITIVE"), kw("BINARY"))),
+      optional(
+        choice(
+          alias(kw("CASE-SENSITIVE"), $.case_sensitive),
+          alias(kw("BINARY"), $.binary),
+        ),
+      ),
       optional(alias($.__buffer_compare_save_phrase, $.save_phrase)),
       optional(alias($.__buffer_compare_compares_block, $.compares_block)),
       optional(alias(kw("NO-LOBS"), $.no_lobs)),
@@ -30,11 +35,11 @@ module.exports = ({ kw }) => ({
 
   __buffer_compare_compares_block: ($) =>
     seq(
-      optional(kw("EXPLICIT")),
-      kw("COMPARES"),
+      optional(alias(kw("EXPLICIT"), $.explicit)),
+      alias(kw("COMPARES"), $.compares),
       alias($._colon, ":"),
       repeat1($.__buffer_compare_when_phrase),
-      optional(kw("COMPARES")),
+      optional(alias(kw("COMPARES"), $.compares)),
       kw("END"),
     ),
 

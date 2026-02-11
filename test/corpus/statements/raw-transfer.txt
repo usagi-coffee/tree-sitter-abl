@@ -46,50 +46,50 @@ RAW-TRANSFER BUFFER srcBuf TO FIELD rawField NO-ERROR.
 
 (source_code
   (trigger_procedure_statement
-    (identifier)
-    (identifier))
+    event: (identifier)
+    object: (identifier))
   (create_statement
-    (identifier))
+    table: (identifier))
   (assign_statement
     (assign_phrase
       (assign_pair
-        (qualified_name
-          (identifier)
-          (identifier))
-        (function_call
-          (identifier)
+        left: (qualified_name
+          left: (identifier)
+          right: (identifier))
+        right: (function_call
+          function: (identifier)
           (arguments
             (argument
-              (function_call
-                (identifier)
+              name: (function_call
+                function: (identifier)
                 (arguments
                   (argument
-                    (identifier))))))))
+                    name: (identifier))))))))
       (assign_pair
-        (qualified_name
-          (identifier)
-          (identifier))
-        (string_literal))
+        left: (qualified_name
+          left: (identifier)
+          right: (identifier))
+        right: (string_literal))
       (assign_pair
-        (qualified_name
-          (identifier)
-          (identifier))
-        (string_literal))))
+        left: (qualified_name
+          left: (identifier)
+          right: (identifier))
+        right: (string_literal))))
   (raw_transfer_statement
-    (identifier)
-    (identifier))
+    source_field: (identifier)
+    target: (identifier))
   (expression_statement
     (identifier))
   (raw_transfer_statement
-    (identifier)
-    (identifier))
+    source_field: (identifier)
+    target_field: (identifier))
   (raw_transfer_statement
-    (identifier)
-    (identifier))
+    source_field: (identifier)
+    target_field: (identifier))
   (raw_transfer_statement
-    (identifier)
-    (identifier))
+    source_field: (identifier)
+    target_field: (identifier))
   (raw_transfer_statement
-    (identifier)
-    (identifier)
+    source_field: (identifier)
+    target_field: (identifier)
     (no_error)))

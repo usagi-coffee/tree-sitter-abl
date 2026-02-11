@@ -85,15 +85,15 @@ LOAD "myenv" BASE-KEY "HKEY_CURRENT_USER".
 
 (source_code
   (load_statement
-    (string_literal))
+    file: (string_literal))
   (load_statement
-    (string_literal)
-    (string_literal))
+    file: (string_literal)
+    dir: (string_literal))
   (load_statement
-    (string_literal)
+    file: (string_literal)
     (new)
-    (string_literal)
+    base_key: (string_literal)
     (no_error))
   (load_statement
-    (string_literal)
-    (string_literal)))
+    file: (string_literal)
+    base_key: (string_literal)))

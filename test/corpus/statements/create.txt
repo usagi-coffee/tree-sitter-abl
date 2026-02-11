@@ -214,6 +214,7 @@ CREATE "Excel.Application" hExcel CONNECT TO "file.xls" NO-ERROR.
     (no_error))
   (create_statement
     pool: (identifier)
+    (persistent)
     (no_error))
   (create_statement
     handle: (identifier)
@@ -224,6 +225,8 @@ CREATE "Excel.Application" hExcel CONNECT TO "file.xls" NO-ERROR.
   (create_statement
     new_database: (string_literal)
     old_database: (string_literal)
+    (new_instance)
+    (replace)
     (no_error))
   (create_statement
     progid: (string_literal)

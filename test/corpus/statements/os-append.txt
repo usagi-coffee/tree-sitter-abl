@@ -39,50 +39,50 @@ END.
 
 (source_code
   (variable_definition
-    (identifier)
-    (identifier)
+    name: (identifier)
+    type: (identifier)
     (no_undo))
   (variable_definition
-    (identifier)
-    (identifier)
+    name: (identifier)
+    type: (identifier)
     (no_undo)
     (format_phrase
-      (string_literal))
+      format: (string_literal))
     (view_as_phrase))
   (variable_definition
-    (identifier)
-    (identifier)
+    name: (identifier)
+    type: (identifier)
     (no_undo)
-    (boolean_literal))
+    initial: (boolean_literal))
   (repeat_statement
-    (identifier)
+    label: (identifier)
     (body
       (system_dialog_get_file_statement
-        (identifier)
-        (string_literal)
+        variable: (identifier)
+        title: (string_literal)
         (must_exist)
         (use_filename)
         (update_phrase
-          (identifier)))
+          update: (identifier)))
       (if_statement
         (binary_expression
           (identifier)
           (boolean_literal))
-        (leave_statement
-          (identifier)))
+        then: (leave_statement
+          label: (identifier)))
       (update_statement
         (field
-          (identifier))
+          field: (identifier))
         (frame_phrase
-          (identifier)))
+          frame: (identifier)))
       (os_append_statement
-        (function_call
-          (identifier)
+        source: (function_call
+          function: (identifier)
           (arguments
             (argument
-              (identifier))))
-        (function_call
-          (identifier)
+              name: (identifier))))
+        target: (function_call
+          function: (identifier)
           (arguments
             (argument
-              (identifier))))))))
+              name: (identifier))))))))

@@ -235,7 +235,7 @@ END.
 
 (source_code
   (do_statement
-    (boolean_literal)
+    condition: (boolean_literal)
     (on_endkey_phrase)
     (body
       (message_statement
@@ -477,40 +477,40 @@ END.
   (for_statement
     (record
       (record
-        (identifier)
+        record: (identifier)
         (no_lock)))
     (body
       (display_statement
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (field
-          (qualified_name
-            (identifier)
-            (identifier))))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier))))
       (pause_statement
-        (number_literal))
+        duration: (number_literal))
       (if_statement
         (binary_expression
           (qualified_name
-            (identifier)
-            (identifier))
+            left: (identifier)
+            right: (identifier))
           (number_literal))
-        (do_statement
+        then: (do_statement
           (body
             (assignment_statement
-              (qualified_name
-                (identifier)
-                (identifier))
-              (assignment_operator)
-              (number_literal))
+              left: (qualified_name
+                left: (identifier)
+                right: (identifier))
+              operator: (assignment_operator)
+              right: (number_literal))
             (display_statement
               (field
-                (qualified_name
-                  (identifier)
-                  (identifier)))
+                field: (qualified_name
+                  left: (identifier)
+                  right: (identifier)))
               (field
-                (qualified_name
-                  (identifier)
-                  (identifier))))))))))
+                field: (qualified_name
+                  left: (identifier)
+                  right: (identifier))))))))))

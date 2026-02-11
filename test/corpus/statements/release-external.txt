@@ -24,6 +24,6 @@ RELEASE EXTERNAL "libc.so.1".
 
 (source_code
   (release_external_statement
-    (string_literal))
+    library: (string_literal))
   (release_external_statement
-    (string_literal)))
+    library: (string_literal)))

@@ -3,8 +3,8 @@ module.exports = ({ kw }) => ({
     seq(
       kw("CLEAR"),
       optional(seq(kw("FRAME"), field("frame", $.identifier))),
-      optional(kw("ALL")),
-      optional(kw("NO-PAUSE")),
+      optional(alias(kw("ALL"), $.all)),
+      optional(alias(kw("NO-PAUSE"), $.no_pause)),
       $._terminator,
     ),
 });

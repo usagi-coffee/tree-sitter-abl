@@ -40,10 +40,12 @@ BUFFER-COMPARE bSrc TO bTgt SAVE RESULT IN obj:prop NO-ERROR.
 (source_code
   (buffer_compare_statement
     source: (identifier)
-    target: (identifier))
+    target: (identifier)
+    (case_sensitive))
   (buffer_compare_statement
     source: (identifier)
-    target: (identifier))
+    target: (identifier)
+    (binary))
   (buffer_compare_statement
     source: (identifier)
     target: (identifier)
@@ -87,6 +89,7 @@ BUFFER-COMPARE bSrc TO bTgt
     source: (identifier)
     target: (identifier)
     (compares_block
+      (compares)
       field: (identifier)
       value: (identifier)
       action: (message_statement
@@ -109,6 +112,7 @@ BUFFER-COMPARE bSrc TO bTgt
     source: (identifier)
     target: (identifier)
     (compares_block
+      (compares)
       field: (identifier)
       value: (identifier)
       action: (apply_statement
@@ -116,7 +120,8 @@ BUFFER-COMPARE bSrc TO bTgt
       field: (identifier)
       value: (string_literal)
       action: (run_statement
-        procedure: (identifier)))))
+        procedure: (identifier))
+      (compares))))
 
 ================================================================================
 BUFFER-COMPARE with EXPLICIT COMPARES and operators
@@ -135,6 +140,8 @@ BUFFER-COMPARE bSrc TO bTgt
     source: (identifier)
     target: (identifier)
     (compares_block
+      (explicit)
+      (compares)
       field: (identifier)
       value: (identifier)
       action: (assign_statement

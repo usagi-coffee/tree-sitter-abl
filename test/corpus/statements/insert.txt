@@ -63,56 +63,56 @@ INSERT Customer USING RECID(2) NO-ERROR.
 
 (source_code
   (insert_statement
-    (identifier)
+    record: (identifier)
     (frame_phrase
-      (number_literal)))
+      column: (number_literal)))
   (repeat_statement
     (body
       (create_statement
-        (identifier))
+        table: (identifier))
       (assignment_statement
-        (qualified_name
-          (identifier)
-          (identifier))
-        (assignment_operator)
-        (qualified_name
-          (identifier)
-          (identifier)))
+        left: (qualified_name
+          left: (identifier)
+          right: (identifier))
+        operator: (assignment_operator)
+        right: (qualified_name
+          left: (identifier)
+          right: (identifier)))
       (update_statement
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (field
-          (qualified_name
-            (identifier)
-            (identifier))))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier))))
       (find_statement
-        (identifier)
+        table: (identifier)
         (of_phrase
-          (identifier)))))
+          record: (identifier)))))
   (expression_statement
     (identifier))
   (insert_statement
-    (identifier)
-    (function_call
-      (identifier)
+    record: (identifier)
+    using: (function_call
+      function: (identifier)
       (arguments
         (argument
-          (number_literal)))))
+          name: (number_literal)))))
   (insert_statement
-    (identifier)
-    (function_call
-      (identifier)
+    record: (identifier)
+    using: (function_call
+      function: (identifier)
       (arguments
         (argument
-          (number_literal))))
+          name: (number_literal))))
     (no_error)))

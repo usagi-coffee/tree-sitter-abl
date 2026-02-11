@@ -100,40 +100,40 @@ UPDATE a b.
   (for_statement
     (record
       (record
-        (identifier)))
+        record: (identifier)))
     (body
       (update_statement
         (field
-          (identifier))
+          field: (identifier))
         (frame_phrase
-          (number_literal)))
+          column: (number_literal)))
       (if_statement
         (binary_expression
           (qualified_name
-            (identifier)
-            (identifier))
+            left: (identifier)
+            right: (identifier))
           (string_literal))
-        (do_statement
+        then: (do_statement
           (body
             (message_statement
               (string_literal))
             (next_prompt_statement
-              (qualified_name
-                (identifier)
-                (identifier)))
+              field: (qualified_name
+                left: (identifier)
+                right: (identifier)))
             (undo_statement))))))
   (variable_definition
-    (identifier)
-    (identifier)
+    name: (identifier)
+    type: (identifier)
     (no_undo))
   (variable_definition
-    (identifier)
-    (identifier)
+    name: (identifier)
+    type: (identifier)
     (no_undo))
   (next_prompt_statement
-    (identifier))
+    field: (identifier))
   (update_statement
     (field
-      (identifier))
+      field: (identifier))
     (field
-      (identifier))))
+      field: (identifier))))

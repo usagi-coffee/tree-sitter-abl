@@ -31,40 +31,40 @@ END.
 
 (source_code
   (variable_definition
-    (identifier)
-    (identifier)
+    name: (identifier)
+    type: (identifier)
     (no_undo))
   (variable_definition
-    (identifier)
-    (identifier)
+    name: (identifier)
+    type: (identifier)
     (no_undo))
   (button_definition
-    (identifier)
-    (string_literal))
+    name: (identifier)
+    label: (string_literal))
   (display_statement
-    (identifier))
+    record: (identifier))
   (on_statement
-    (identifier)
+    event: (identifier)
     (of_phrase
-      (widget_phrase
-        (identifier)))
+      widget: (widget_phrase
+        handle: (identifier)))
     (assignment_statement
-      (identifier)
-      (assignment_operator)
-      (boolean_literal)))
+      left: (identifier)
+      operator: (assignment_operator)
+      right: (boolean_literal)))
   (enable_statement
     (enable_item
-      (identifier)))
+      field: (identifier)))
   (do_statement
-    (identifier)
-    (number_literal)
-    (number_literal)
+    variable: (identifier)
+    start: (number_literal)
+    end: (number_literal)
     (body
       (display_statement
         (field
-          (identifier))
+          field: (identifier))
         (format_phrase))
       (process_events_statement)
       (if_statement
         (identifier)
-        (leave_statement)))))
+        then: (leave_statement)))))

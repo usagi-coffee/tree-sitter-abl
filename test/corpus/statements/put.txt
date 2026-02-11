@@ -61,38 +61,38 @@ PUT CONTROL NULL(20).
 
 (source_code
   (stream_definition
-    (identifier))
+    name: (identifier))
   (output_statement
-    (identifier)
-    (qualified_name
-      (identifier)
-      (identifier)))
+    name: (identifier)
+    file: (qualified_name
+      left: (identifier)
+      right: (identifier)))
   (for_statement
     (record
       (record
-        (identifier)
+        record: (identifier)
         (no_lock)))
     (body
       (put_statement
-        (identifier)
-        (identifier)
-        (string_literal))))
+        stream: (identifier)
+        value: (identifier)
+        value: (string_literal))))
   (output_statement
-    (identifier)
+    name: (identifier)
     (close))
   (put_statement
-    (identifier)
-    (string_literal)
-    (number_literal)
+    stream: (identifier)
+    value: (string_literal)
+    position: (number_literal)
     (space)
     (skip))
   (put_statement
-    (identifier)
+    stream: (identifier)
     (unformatted)
-    (identifier)
+    value: (identifier)
     (format_phrase)
     (skip
-      (number_literal)))
+      count: (number_literal)))
   (put_statement
     (control_phrase
       (string_literal)
@@ -100,7 +100,7 @@ PUT CONTROL NULL(20).
   (put_statement
     (control_phrase
       (function_call
-        (identifier)
+        function: (identifier)
         (arguments
           (argument
-            (number_literal)))))))
+            name: (number_literal)))))))

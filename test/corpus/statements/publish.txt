@@ -59,106 +59,107 @@ PUBLISH cEventName FROM hPublisher (INPUT p1, INPUT-OUTPUT p2, OUTPUT p3).
 
 (source_code
   (variable_definition
-    (identifier)
-    (identifier)
+    name: (identifier)
+    type: (identifier)
     (no_undo))
   (variable_definition
-    (identifier)
-    (identifier)
+    name: (identifier)
+    type: (identifier)
     (no_undo))
   (variable_definition
-    (identifier)
-    (identifier)
+    name: (identifier)
+    type: (identifier)
     (no_undo))
   (button_definition
-    (identifier)
-    (string_literal))
+    name: (identifier)
+    label: (string_literal))
   (button_definition
-    (identifier)
-    (string_literal))
+    name: (identifier)
+    label: (string_literal))
   (run_statement
-    (procedure_name)
-    (persistent))
+    procedure: (procedure_name)
+    handle: (persistent))
   (run_statement
-    (procedure_name)
-    (persistent)
+    procedure: (procedure_name)
+    handle: (persistent)
     (arguments
       (argument
-        (identifier))))
+        name: (identifier))))
   (run_statement
-    (procedure_name)
-    (persistent))
+    procedure: (procedure_name)
+    handle: (persistent))
   (subscribe_statement
-    (identifier)
-    (string_literal)
+    subscriber: (identifier)
+    event: (string_literal)
     (in_phrase
-      (identifier)))
+      publisher: (identifier)))
   (form_statement
     (form_item
-      (identifier))
+      field: (identifier))
     (form_item
-      (identifier))
+      field: (identifier))
     (frame_phrase
-      (identifier)))
+      frame: (identifier)))
   (enable_statement
+    (all)
     (frame_phrase
-      (identifier)))
+      frame: (identifier)))
   (on_statement
-    (identifier)
+    event: (identifier)
     (of_phrase
-      (widget_phrase
-        (identifier)))
+      widget: (widget_phrase
+        handle: (identifier)))
     (run_statement
-      (identifier)
+      procedure: (identifier)
       (in_phrase
-        (identifier))))
+        context: (identifier))))
   (wait_for_statement
     (of_phrase
-      (identifier)
-      (widget_phrase
-        (identifier)))
+      events: (identifier)
+      widgets: (widget_phrase
+        handle: (identifier)))
     (of_phrase
-      (identifier)
-      (widget_phrase
-        (system_handle))))
+      events: (identifier)
+      widgets: (widget_phrase
+        system_handle: (system_handle))))
   (procedure_definition
-    (identifier)
+    name: (identifier)
     (body
       (variable_definition
-        (identifier)
-        (identifier)
+        name: (identifier)
+        type: (identifier)
         (no_undo)
-        (string_literal))
+        initial: (string_literal))
       (publish_statement
-        (string_literal)
+        event: (string_literal)
         (arguments
           (argument
-            (identifier))))))
+            name: (identifier))))))
   (parameter_definition
-    (identifier)
-    (identifier)
+    name: (identifier)
+    type: (identifier)
     (no_undo))
   (subscribe_statement
-    (string_literal)
+    event: (string_literal)
     (in_phrase
-      (identifier)))
+      publisher: (identifier)))
   (procedure_definition
-    (identifier)
+    name: (identifier)
     (body
       (parameter_definition
-        (identifier)
-        (identifier)
+        name: (identifier)
+        type: (identifier)
         (no_undo))
       (message_statement
         (string_literal)
         (identifier)
         (view_as_phrase))))
   (procedure_definition
-    (identifier)
+    name: (identifier)
     (body
       (parameter_definition
-        (identifier)
-        (identifier)
+        name: (identifier)
+        type: (identifier)
         (no_undo))
       (message_statement
         (string_literal)
@@ -167,14 +168,14 @@ PUBLISH cEventName FROM hPublisher (INPUT p1, INPUT-OUTPUT p2, OUTPUT p3).
       (unsubscribe_statement
         (all))))
   (publish_statement
-    (identifier)
+    event: (identifier)
     (from_phrase
-      (function_call
-        (identifier)
+      publisher: (function_call
+        function: (identifier)
         (arguments
           (argument
-            (identifier))
+            name: (identifier))
           (argument
-            (identifier))
+            name: (identifier))
           (argument
-            (identifier)))))))
+            name: (identifier)))))))

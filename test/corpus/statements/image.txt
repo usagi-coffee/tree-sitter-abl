@@ -248,14 +248,14 @@ DEF IMAGE imgBg2 FILE "pic.jpg" IMAGE-SIZE 50 BY 50 BGCOLOR 15.
     name: (identifier)
     (image_phrase
       file: (string_literal))
-    (number_literal))
+    bgcolor: (number_literal))
   (image_definition
     name: (identifier)
     (image_phrase
       file: (string_literal)
       width: (number_literal)
       height: (number_literal))
-    (number_literal)))
+    bgcolor: (number_literal)))
 
 ================================================================================
 IMAGE DEFINITION - FGCOLOR
@@ -271,14 +271,14 @@ DEF IMAGE imgFg2 FILE "pic.jpg" IMAGE-SIZE 50 BY 50 FGCOLOR 10.
     name: (identifier)
     (image_phrase
       file: (string_literal))
-    (number_literal))
+    fgcolor: (number_literal))
   (image_definition
     name: (identifier)
     (image_phrase
       file: (string_literal)
       width: (number_literal)
       height: (number_literal))
-    (number_literal)))
+    fgcolor: (number_literal)))
 
 ================================================================================
 IMAGE DEFINITION - Both Colors
@@ -294,15 +294,15 @@ DEF IMAGE imgBoth SIZE 20 BY 30 BGCOLOR 5 FGCOLOR 10.
     name: (identifier)
     (image_phrase
       file: (string_literal))
-    (number_literal)
-    (number_literal))
+    bgcolor: (number_literal)
+    fgcolor: (number_literal))
   (image_definition
     name: (identifier)
     (size_phrase
       width: (number_literal)
       height: (number_literal))
-    (number_literal)
-    (number_literal)))
+    bgcolor: (number_literal)
+    fgcolor: (number_literal)))
 
 ================================================================================
 IMAGE DEFINITION - CONVERT-3D-COLORS
@@ -317,14 +317,16 @@ DEF IMAGE imgConv FILE "pic.jpg" SIZE 20 BY 30 CONVERT-3D-COLORS.
   (image_definition
     name: (identifier)
     (image_phrase
-      file: (string_literal)))
+      file: (string_literal))
+    (convert_3d_colors))
   (image_definition
     name: (identifier)
     (image_phrase
       file: (string_literal))
     (size_phrase
       width: (number_literal)
-      height: (number_literal))))
+      height: (number_literal))
+    (convert_3d_colors)))
 
 ================================================================================
 IMAGE DEFINITION - TOOLTIP
@@ -360,14 +362,16 @@ DEF IMAGE imgSt FILE "pic.jpg" SIZE 30 BY 40 STRETCH-TO-FIT.
   (image_definition
     name: (identifier)
     (image_phrase
-      file: (string_literal)))
+      file: (string_literal))
+    (stretch_to_fit))
   (image_definition
     name: (identifier)
     (image_phrase
       file: (string_literal))
     (size_phrase
       width: (number_literal)
-      height: (number_literal))))
+      height: (number_literal))
+    (stretch_to_fit)))
 
 ================================================================================
 IMAGE DEFINITION - STRETCH-TO-FIT with RETAIN-SHAPE
@@ -382,14 +386,18 @@ DEF IMAGE imgRS FILE "pic.jpg" SIZE 20 BY 25 STRETCH-TO-FIT RETAIN-SHAPE.
   (image_definition
     name: (identifier)
     (image_phrase
-      file: (string_literal)))
+      file: (string_literal))
+    (stretch_to_fit)
+    (retain_shape))
   (image_definition
     name: (identifier)
     (image_phrase
       file: (string_literal))
     (size_phrase
       width: (number_literal)
-      height: (number_literal))))
+      height: (number_literal))
+    (stretch_to_fit)
+    (retain_shape)))
 
 ================================================================================
 IMAGE DEFINITION - TRANSPARENT
@@ -404,14 +412,16 @@ DEF IMAGE imgTrans FILE "pic.jpg" SIZE 20 BY 30 TRANSPARENT.
   (image_definition
     name: (identifier)
     (image_phrase
-      file: (string_literal)))
+      file: (string_literal))
+    (transparent))
   (image_definition
     name: (identifier)
     (image_phrase
       file: (string_literal))
     (size_phrase
       width: (number_literal)
-      height: (number_literal))))
+      height: (number_literal))
+    (transparent)))
 
 ================================================================================
 IMAGE DEFINITION - PRIVATE Modifier
@@ -462,9 +472,13 @@ DEFINE IMAGE imgComplete FILE "complete.png"
       height: (number_literal)
       x: (number_literal)
       y: (number_literal))
-    (number_literal)
-    (number_literal)
-    tooltip: (string_literal)))
+    bgcolor: (number_literal)
+    fgcolor: (number_literal)
+    (convert_3d_colors)
+    tooltip: (string_literal)
+    (stretch_to_fit)
+    (retain_shape)
+    (transparent)))
 
 ================================================================================
 IMAGE DEFINITION - Minimal Required
@@ -513,72 +527,72 @@ UPDATE animate WITH FRAME y.
 
 (source_code
   (variable_definition
-    (identifier)
-    (identifier)
+    name: (identifier)
+    type: (identifier)
     (no_undo))
   (variable_definition
-    (identifier)
-    (identifier)
+    name: (identifier)
+    type: (identifier)
     (no_undo))
   (variable_definition
-    (identifier)
-    (identifier)
+    name: (identifier)
+    type: (identifier)
     (no_undo))
   (button_definition
-    (identifier)
-    (string_literal))
+    name: (identifier)
+    label: (string_literal))
   (image_definition
-    (identifier)
+    name: (identifier)
     (image_phrase
-      (string_literal)))
+      file: (string_literal)))
   (display_statement
     (field
-      (identifier))
+      field: (identifier))
     (field
-      (identifier))
+      field: (identifier))
     (frame_phrase
-      (identifier)
-      (string_literal)))
+      frame: (identifier)
+      title: (string_literal)))
   (on_statement
-    (identifier)
+    event: (identifier)
     (of_phrase
-      (widget_phrase
-        (identifier)
-        (identifier)))
+      widget: (widget_phrase
+        field: (identifier)
+        frame: (identifier)))
     (do_statement
       (body
         (do_statement
-          (identifier)
-          (number_literal)
-          (number_literal)
+          variable: (identifier)
+          start: (number_literal)
+          end: (number_literal)
           (body
             (do_statement
-              (identifier)
-              (number_literal)
-              (number_literal)
+              variable: (identifier)
+              start: (number_literal)
+              end: (number_literal)
               (body
                 (assignment_statement
-                  (identifier)
-                  (assignment_operator)
-                  (widget_qualified_name
-                    (function_call
-                      (object_access
-                        (identifier)
-                        (identifier))
+                  left: (identifier)
+                  operator: (assignment_operator)
+                  right: (widget_qualified_name
+                    target: (function_call
+                      function: (object_access
+                        left: (identifier)
+                        right: (identifier))
                       (arguments
                         (argument
-                          (binary_expression
+                          name: (binary_expression
                             (string_literal)
                             (function_call
-                              (identifier)
+                              function: (identifier)
                               (arguments
                                 (argument
-                                  (identifier))
+                                  name: (identifier))
                                 (argument
-                                  (string_literal))))))))
-                    (identifier))))))))))
+                                  name: (string_literal))))))))
+                    widget: (identifier))))))))))
   (update_statement
     (field
-      (identifier))
+      field: (identifier))
     (frame_phrase
-      (identifier))))
+      frame: (identifier))))

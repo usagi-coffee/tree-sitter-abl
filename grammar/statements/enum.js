@@ -4,7 +4,7 @@ module.exports = ({ kw }) => ({
   __enum_body: ($) =>
     seq(
       field("name", $.identifier),
-      optional(kw("FLAGS")),
+      optional(alias(kw("FLAGS"), $.flags)),
       alias($._colon, ":"),
       repeat(
         seq(

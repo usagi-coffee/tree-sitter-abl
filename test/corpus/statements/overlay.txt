@@ -85,172 +85,172 @@ OVERLAY(cLong, 1, 5, "COLUMN") = "Hi".
 
 (source_code
   (variable_definition
-    (identifier)
-    (identifier)
+    name: (identifier)
+    type: (identifier)
     (no_undo))
   (variable_definition
-    (identifier)
-    (identifier)
+    name: (identifier)
+    type: (identifier)
     (no_undo))
   (variable_definition
-    (identifier)
-    (identifier)
+    name: (identifier)
+    type: (identifier)
     (no_undo))
   (variable_definition
-    (identifier)
-    (identifier)
+    name: (identifier)
+    type: (identifier)
     (no_undo))
   (variable_definition
-    (identifier)
-    (identifier)
+    name: (identifier)
+    type: (identifier)
     (no_undo))
   (variable_definition
-    (identifier)
-    (identifier)
+    name: (identifier)
+    type: (identifier)
     (no_undo))
   (variable_definition
-    (identifier)
-    (identifier)
+    name: (identifier)
+    type: (identifier)
     (no_undo))
   (variable_definition
-    (identifier)
-    (identifier)
+    name: (identifier)
+    type: (identifier)
     (no_undo)
     (format_phrase
-      (string_literal))
+      format: (string_literal))
     (extent_phrase
-      (number_literal))
-    (string_literal)
-    (string_literal)
-    (string_literal)
-    (string_literal)
-    (string_literal))
+      size: (number_literal))
+    initial: (string_literal)
+    initial: (string_literal)
+    initial: (string_literal)
+    initial: (string_literal)
+    initial: (string_literal))
   (display_statement
-    (identifier)
+    record: (identifier)
     (frame_phrase
       (centered)
-      (identifier)
+      frame: (identifier)
       (no_labels)
-      (string_literal)
-      (number_literal)))
+      title: (string_literal)
+      row: (number_literal)))
   (repeat_statement
     (body
       (set_statement
         (field
-          (identifier)
+          field: (identifier)
           (format_phrase
-            (string_literal)))
+            label: (string_literal)))
         (field
-          (identifier)
+          field: (identifier)
           (format_phrase
-            (string_literal)))
+            label: (string_literal)))
         (frame_phrase
-          (identifier)
+          frame: (identifier)
           (side_labels)
           (centered)))
       (assignment_statement
-        (identifier)
-        (assignment_operator)
-        (function_call
-          (identifier)
+        left: (identifier)
+        operator: (assignment_operator)
+        right: (function_call
+          function: (identifier)
           (arguments
             (argument
-              (function_call
-                (identifier)
+              name: (function_call
+                function: (identifier)
                 (arguments
                   (argument
-                    (identifier)))))
+                    name: (identifier)))))
             (argument
-              (function_call
-                (identifier)
+              name: (function_call
+                function: (identifier)
                 (arguments
                   (argument
-                    (identifier))))))))
+                    name: (identifier))))))))
       (do_statement
-        (identifier)
-        (number_literal)
-        (number_literal)
+        variable: (identifier)
+        start: (number_literal)
+        end: (number_literal)
         (body
           (assignment_statement
-            (identifier)
-            (assignment_operator)
-            (number_literal))
+            left: (identifier)
+            operator: (assignment_operator)
+            right: (number_literal))
           (do_statement
-            (identifier)
-            (number_literal)
-            (function_call
-              (identifier)
+            variable: (identifier)
+            start: (number_literal)
+            end: (function_call
+              function: (identifier)
               (arguments
                 (argument
-                  (array_access
-                    (identifier)
+                  name: (array_access
+                    array: (identifier)
                     (identifier)))))
             (body
               (assignment_statement
-                (identifier)
-                (assignment_operator)
-                (function_call
-                  (identifier)
+                left: (identifier)
+                operator: (assignment_operator)
+                right: (function_call
+                  function: (identifier)
                   (arguments
                     (argument
-                      (array_access
-                        (identifier)
+                      name: (array_access
+                        array: (identifier)
                         (identifier)))
                     (argument
-                      (identifier)))))
+                      name: (identifier)))))
               (assignment_statement
-                (identifier)
-                (assignment_operator)
-                (function_call
-                  (identifier)
+                left: (identifier)
+                operator: (assignment_operator)
+                right: (function_call
+                  function: (identifier)
                   (arguments
                     (argument
-                      (identifier))
+                      name: (identifier))
                     (argument
-                      (identifier)))))
+                      name: (identifier)))))
               (if_statement
                 (binary_expression
                   (identifier)
                   (number_literal))
-                (do_statement
+                then: (do_statement
                   (body
                     (assignment_statement
-                      (identifier)
-                      (assignment_operator)
-                      (binary_expression
+                      left: (identifier)
+                      operator: (assignment_operator)
+                      right: (binary_expression
                         (binary_expression
                           (identifier)
                           (identifier))
                         (number_literal)))
                     (overlay_statement
-                      (array_access
-                        (identifier)
+                      target: (array_access
+                        array: (identifier)
                         (identifier))
-                      (identifier)
-                      (identifier)
-                      (string_literal)
-                      (identifier))
+                      position: (identifier)
+                      length: (identifier)
+                      type: (string_literal)
+                      value: (identifier))
                     (assignment_statement
-                      (identifier)
-                      (assignment_operator)
-                      (identifier)))))))
+                      left: (identifier)
+                      operator: (assignment_operator)
+                      right: (identifier)))))))
           (display_statement
             (field
-              (array_access
-                (identifier)
+              field: (array_access
+                array: (identifier)
                 (identifier)))
             (frame_phrase
-              (identifier)))))))
+              frame: (identifier)))))))
   (overlay_statement
-    (identifier)
-    (number_literal)
-    (unary_expression
+    target: (identifier)
+    position: (number_literal)
+    length: (unary_expression
       (number_literal))
-    (string_literal)
-    (identifier))
+    type: (string_literal)
+    value: (identifier))
   (overlay_statement
-    (identifier)
-    (number_literal)
-    (number_literal)
-    (string_literal)
-    (string_literal)))
+    target: (identifier)
+    position: (number_literal)
+    length: (number_literal)
+    type: (string_literal)
+    value: (string_literal)))

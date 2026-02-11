@@ -41,8 +41,8 @@ FIX-CODEPAGE(mData) = ?.
 
 (source_code
   (fix_codepage_statement
-    (identifier)
-    (string_literal))
+    target: (identifier)
+    codepage: (string_literal))
   (fix_codepage_statement
-    (identifier)
-    (null_literal)))
+    target: (identifier)
+    codepage: (null_literal)))

@@ -10,7 +10,7 @@ RETURN myValue.
 (source_code
   (return_statement)
   (return_statement
-    (identifier)))
+    value: (identifier)))
 
 ===============================================================================
 RETURN with various expression types
@@ -26,15 +26,15 @@ RETURN rValue.
 
 (source_code
   (return_statement
-    (boolean_literal))
+    value: (boolean_literal))
   (return_statement
-    (boolean_literal))
+    value: (boolean_literal))
   (return_statement
-    (identifier))
+    value: (identifier))
   (return_statement
-    (identifier))
+    value: (identifier))
   (return_statement
-    (identifier)))
+    value: (identifier)))
 
 ===============================================================================
 RETURN with complex expressions
@@ -48,15 +48,15 @@ RETURN nIndex + 1.
 
 (source_code
   (return_statement
-    (identifier))
+    value: (identifier))
   (return_statement
-    (binary_expression
+    value: (binary_expression
       (binary_expression
         (identifier)
         (string_literal))
       (identifier)))
   (return_statement
-    (binary_expression
+    value: (binary_expression
       (identifier)
       (number_literal))))
 
@@ -115,19 +115,19 @@ RETURN NO-APPLY.
 
 (source_code
   (variable_definition
-    (identifier)
-    (identifier)
+    name: (identifier)
+    type: (identifier)
     (no_undo)
-    (number_literal))
+    initial: (number_literal))
   (function_definition
-    (identifier)
-    (identifier)
+    name: (identifier)
+    type: (identifier)
     (parameters
       (parameter
-        (identifier)
-        (identifier)))
+        name: (identifier)
+        type: (identifier)))
     (return_statement
-      (binary_expression
+      value: (binary_expression
         (parenthesized_expression
           (binary_expression
             (identifier)
@@ -137,105 +137,105 @@ RETURN NO-APPLY.
     (identifier)
     (string_literal)
     (function_call
-      (identifier)
+      function: (identifier)
       (arguments
         (argument
-          (identifier))))
+          name: (identifier))))
     (string_literal)
     (skip)
     (view_as_phrase))
   (variable_definition
-    (identifier)
-    (identifier)
-    (number_literal)
+    name: (identifier)
+    type: (identifier)
+    initial: (number_literal)
     (no_undo))
   (function_definition
-    (identifier)
-    (identifier)
+    name: (identifier)
+    type: (identifier)
     (return_statement))
   (assign_statement
     (assign_phrase
       (assign_pair
-        (identifier)
-        (function_call
-          (identifier)
+        left: (identifier)
+        right: (function_call
+          function: (identifier)
           (arguments)))))
   (if_statement
     (binary_expression
       (identifier)
       (null_literal))
-    (message_statement
+    then: (message_statement
       (string_literal)
       (view_as_phrase)))
   (variable_definition
-    (identifier)
-    (identifier))
+    name: (identifier)
+    type: (identifier))
   (run_statement
-    (identifier)
+    procedure: (identifier)
     (no_error))
   (if_statement
     (object_access
-      (identifier)
-      (identifier))
-    (do_statement
+      left: (identifier)
+      right: (identifier))
+    then: (do_statement
       (body
         (do_statement
-          (identifier)
-          (number_literal)
-          (object_access
-            (identifier)
-            (identifier))
+          variable: (identifier)
+          start: (number_literal)
+          end: (object_access
+            left: (identifier)
+            right: (identifier))
           (body
             (message_statement
               (function_call
-                (object_access
-                  (identifier)
-                  (identifier))
+                function: (object_access
+                  left: (identifier)
+                  right: (identifier))
                 (arguments
                   (argument
-                    (identifier))))
+                    name: (identifier))))
               (function_call
-                (object_access
-                  (identifier)
-                  (identifier))
+                function: (object_access
+                  left: (identifier)
+                  right: (identifier))
                 (arguments
                   (argument
-                    (identifier))))))))))
+                    name: (identifier))))))))))
   (procedure_definition
-    (identifier)
+    name: (identifier)
     (body
       (variable_definition
-        (identifier)
-        (qualified_name
-          (identifier)
-          (identifier)
-          (identifier)))
+        name: (identifier)
+        type: (qualified_name
+          left: (identifier)
+          right: (identifier)
+          right: (identifier)))
       (assignment_statement
-        (identifier)
-        (assignment_operator)
-        (new_expression
-          (qualified_name
-            (identifier)
-            (identifier)
-            (identifier))
+        left: (identifier)
+        operator: (assignment_operator)
+        right: (new_expression
+          type: (qualified_name
+            left: (identifier)
+            right: (identifier)
+            right: (identifier))
           (arguments
             (argument
-              (string_literal))
+              name: (string_literal))
             (argument
-              (number_literal)))))
+              name: (number_literal)))))
       (expression_statement
         (function_call
-          (object_access
-            (identifier)
-            (identifier))
+          function: (object_access
+            left: (identifier)
+            right: (identifier))
           (arguments
             (argument
-              (string_literal))
+              name: (string_literal))
             (argument
-              (number_literal)))))
+              name: (number_literal)))))
       (return_statement
-        (identifier))))
+        error_value: (identifier))))
   (return_statement
-    (string_literal))
+    error_value: (string_literal))
   (return_statement
     (no_apply)))

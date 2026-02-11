@@ -62,7 +62,6 @@ DEFINE TEMP-TABLE tt_ship NO-UNDO
       (unique)
       (primary)
       field: (identifier)
-      sort_order: (descending)
       field: (identifier))))
 
 ================================================================================
@@ -406,13 +405,11 @@ DEFINE TEMP-TABLE tt NO-UNDO
     (temp_table_index
       name: (identifier)
       (unique)
-      field: (identifier)
-      sort_order: (ascending))
+      field: (identifier))
     (temp_table_index
       name: (identifier)
       (primary)
-      field: (identifier)
-      sort_order: (descending))
+      field: (identifier))
     (temp_table_index
       name: (identifier)
       (unique)
@@ -491,12 +488,10 @@ WAIT-FOR CHOOSE OF cancel-butt OR WINDOW-CLOSE OF CURRENT-WINDOW.
     (temp_table_index
       name: (identifier)
       (primary)
-      field: (identifier)
-      sort_order: (ascending))
+      field: (identifier))
     (temp_table_index
       name: (identifier)
-      field: (identifier)
-      sort_order: (descending)))
+      field: (identifier)))
   (variable_definition
     name: (identifier)
     (no_undo)
@@ -513,7 +508,7 @@ WAIT-FOR CHOOSE OF cancel-butt OR WINDOW-CLOSE OF CURRENT-WINDOW.
     name: (identifier)
     type: (identifier)
     (no_undo)
-    (number_literal))
+    initial: (number_literal))
   (button_definition
     name: (identifier)
     label: (string_literal)
@@ -686,6 +681,7 @@ WAIT-FOR CHOOSE OF cancel-butt OR WINDOW-CLOSE OF CURRENT-WINDOW.
           (widget_phrase
             frame: (identifier))))))
   (enable_statement
+    (all)
     (frame_phrase
       frame: (identifier)))
   (wait_for_statement

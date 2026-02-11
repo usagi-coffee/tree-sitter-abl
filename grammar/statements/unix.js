@@ -2,7 +2,7 @@ module.exports = ({ kw }) => ({
   unix_statement: ($) =>
     seq(
       kw("UNIX"),
-      optional(kw("SILENT")),
+      optional(alias(kw("SILENT"), $.silent)),
       repeat(
         choice(
           field("command_token", $.identifier),

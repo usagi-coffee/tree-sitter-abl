@@ -8,7 +8,7 @@ module.exports = ({ kw }) => ({
 
   __color_body: ($) =>
     seq(
-      optional(kw("DISPLAY")),
+      optional(alias(kw("DISPLAY"), $.display)),
       field("color", $.color_phrase),
       optional(seq(kw("PROMPT"), field("prompt_color", $.color_phrase))),
       repeat1($.__color_field),

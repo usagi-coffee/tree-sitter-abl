@@ -137,7 +137,12 @@ module.exports = ({ kw }) => ({
   __create_widget_pool: ($) =>
     seq(
       kw("WIDGET-POOL"),
-      optional(seq(field("pool", $.identifier), optional(kw("PERSISTENT")))),
+      optional(
+        seq(
+          field("pool", $.identifier),
+          optional(alias(kw("PERSISTENT"), $.persistent)),
+        ),
+      ),
       optional(alias(kw("NO-ERROR"), $.no_error)),
     ),
   __create_server: ($) =>
@@ -150,10 +155,10 @@ module.exports = ({ kw }) => ({
         seq(
           kw("FROM"),
           field("old_database", $._expression),
-          optional(kw("NEW-INSTANCE")),
+          optional(alias(kw("NEW-INSTANCE"), $.new_instance)),
         ),
       ),
-      optional(kw("REPLACE")),
+      optional(alias(kw("REPLACE"), $.replace)),
       optional(alias(kw("NO-ERROR"), $.no_error)),
     ),
   __create_automation_object: ($) =>

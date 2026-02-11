@@ -54,63 +54,63 @@ END.
     (on_error_phrase)
     (body
       (find_statement
-        (identifier)
+        table: (identifier)
         (where_phrase
-          (binary_expression
+          where: (binary_expression
             (identifier)
             (number_literal))))
       (catch_statement
-        (identifier)
-        (qualified_name
-          (identifier)
-          (identifier)
-          (identifier))
+        name: (identifier)
+        type: (qualified_name
+          left: (identifier)
+          right: (identifier)
+          right: (identifier))
         (body
           (message_statement
             (function_call
-              (object_access
-                (identifier)
-                (identifier))
+              function: (object_access
+                left: (identifier)
+                right: (identifier))
               (arguments
                 (argument
-                  (number_literal))))
+                  name: (number_literal))))
             (view_as_phrase))))))
   (do_statement
     (on_error_phrase)
     (body
       (find_statement
         (first)
-        (identifier)
+        table: (identifier)
         (where_phrase
-          (binary_expression
+          where: (binary_expression
             (identifier)
             (number_literal))))
       (catch_statement
-        (identifier)
-        (qualified_name
-          (identifier)
-          (identifier)
-          (identifier))
+        name: (identifier)
+        type: (qualified_name
+          left: (identifier)
+          right: (identifier)
+          right: (identifier))
         (body
           (message_statement
             (function_call
-              (object_access
-                (identifier)
-                (identifier))
+              function: (object_access
+                left: (identifier)
+                right: (identifier))
               (arguments
                 (argument
-                  (number_literal)))))))))
+                  name: (number_literal)))))))))
   (do_statement
     (transaction)
     (on_error_phrase)
     (body
       (run_statement
-        (identifier))
+        procedure: (identifier))
       (catch_statement
-        (identifier)
-        (qualified_name
-          (identifier)
-          (identifier)
-          (identifier))
+        name: (identifier)
+        type: (qualified_name
+          left: (identifier)
+          right: (identifier)
+          right: (identifier))
         (body
           (undo_statement))))))

@@ -76,36 +76,36 @@ PUT-KEY-VALUE FONT 2.
 
 (source_code
   (put_key_value_statement
-    (string_literal)
-    (string_literal)
-    (identifier))
+    section: (string_literal)
+    key: (string_literal)
+    value: (identifier))
   (put_key_value_statement
-    (string_literal)
-    (string_literal)
-    (identifier))
+    section: (string_literal)
+    key: (string_literal)
+    value: (identifier))
   (put_key_value_statement
-    (string_literal)
-    (string_literal)
-    (identifier))
+    section: (string_literal)
+    key: (string_literal)
+    value: (identifier))
   (put_key_value_statement
-    (string_literal)
-    (string_literal)
-    (string_literal))
+    section: (string_literal)
+    key: (string_literal)
+    value: (string_literal))
   (put_key_value_statement
-    (string_literal)
-    (string_literal)
-    (null_literal))
+    section: (string_literal)
+    key: (string_literal)
+    value: (null_literal))
   (put_key_value_statement
-    (string_literal)
-    (string_literal)
-    (null_literal))
+    section: (string_literal)
+    key: (string_literal)
+    value: (null_literal))
   (put_key_value_statement
-    (string_literal)
-    (string_literal)
-    (string_literal))
+    section: (string_literal)
+    key: (string_literal)
+    value: (string_literal))
   (put_key_value_statement
-    (string_literal)
-    (string_literal))
+    section: (string_literal)
+    value: (string_literal))
   (put_key_value_statement)
   (put_key_value_statement
-    (number_literal)))
+    number: (number_literal)))

@@ -16,23 +16,23 @@ END CASE.
   (case_statement
     (identifier)
     (case_when_phrase
-      (string_literal)
+      condition: (string_literal)
       (do_statement
         (body
           (put_statement
             (unformatted)
-            (string_literal)
+            value: (string_literal)
             (skip)))))
     (case_when_phrase
-      (string_literal)
+      condition: (string_literal)
       (put_statement
         (unformatted)
-        (string_literal)
+        value: (string_literal)
         (skip)))
     (case_otherwise_phrase
       (put_statement
         (unformatted)
-        (string_literal)
+        value: (string_literal)
         (skip)))))
 
 ================================================================================
@@ -50,16 +50,16 @@ END.
   (case_statement
     (identifier)
     (case_when_phrase
-      (string_literal)
+      condition: (string_literal)
       (assignment_statement
-        (identifier)
-        (assignment_operator)
-        (number_literal)))
+        left: (identifier)
+        operator: (assignment_operator)
+        right: (number_literal)))
     (case_otherwise_phrase
       (assignment_statement
-        (identifier)
-        (assignment_operator)
-        (number_literal)))))
+        left: (identifier)
+        operator: (assignment_operator)
+        right: (number_literal)))))
 
 ================================================================================
 CASE - Reference snippet and OR WHEN
@@ -80,7 +80,7 @@ END CASE.
     name: (identifier)
     type: (identifier)
     (no_undo)
-    (number_literal))
+    initial: (number_literal))
   (case_statement
     (identifier)
     (case_when_phrase

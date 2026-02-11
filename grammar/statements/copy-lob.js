@@ -23,19 +23,19 @@ module.exports = ({ kw }) => ({
               kw("OVERLAY"),
               kw("AT"),
               field("overlay_at", $._expression),
-              optional(kw("TRIM")),
+              optional(alias(kw("TRIM"), $.trim)),
             ),
           ),
         ),
         seq(
           kw("FILE"),
           field("target_file", $._expression),
-          optional(kw("APPEND")),
+          optional(alias(kw("APPEND"), $.append)),
         ),
       ),
       optional(
         choice(
-          kw("NO-CONVERT"),
+          alias(kw("NO-CONVERT"), $.no_convert),
           alias($.__copy_lob_convert_phrase, $.convert_phrase),
         ),
       ),

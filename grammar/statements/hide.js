@@ -10,7 +10,7 @@ module.exports = ({ kw }) => ({
           $.widget_phrase,
         ),
       ),
-      optional(kw("NO-PAUSE")),
+      optional(alias(kw("NO-PAUSE"), $.no_pause)),
       optional($.in_window_phrase),
       $._terminator,
     ),

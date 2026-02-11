@@ -36,30 +36,30 @@ END.
 
 (source_code
   (variable_definition
-    (identifier)
-    (identifier)
+    name: (identifier)
+    type: (identifier)
     (no_undo)
     (format_phrase
-      (string_literal))
-    (string_literal))
+      format: (string_literal))
+    label: (string_literal))
   (do_statement
-    (identifier)
+    label: (identifier)
     (on_error_phrase)
     (body
       (set_statement
         (field
-          (identifier))
+          field: (identifier))
         (frame_phrase
           (side_labels)))
       (if_statement
         (binary_expression
           (function_call
-            (identifier)
+            function: (identifier)
             (arguments
               (argument
-                (identifier))))
+                name: (identifier))))
           (identifier))
-        (do_statement
+        then: (do_statement
           (body
             (message_statement
               (string_literal)
@@ -69,22 +69,22 @@ END.
               (string_literal))
             (bell_statement)
             (undo_statement
-              (identifier)
-              (identifier)))))))
+              undo_label: (identifier)
+              retry_label: (identifier)))))))
   (output_statement
-    (identifier))
+    value: (identifier))
   (for_statement
     (record
       (record
-        (identifier)
+        record: (identifier)
         (no_lock)))
     (body
       (display_statement
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
         (field
-          (qualified_name
-            (identifier)
-            (identifier)))))))
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))))))

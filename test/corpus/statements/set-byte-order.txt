@@ -26,11 +26,11 @@ SET-BYTE-ORDER(bufData) = LITTLE-ENDIAN.
 
 (source_code
   (set_byte_order_statement
-    (identifier)
-    (identifier))
+    buffer: (identifier)
+    order: (identifier))
   (set_byte_order_statement
-    (identifier)
-    (identifier)))
+    buffer: (identifier)
+    order: (identifier)))
 
 ================================================================================
 SET-BYTE-ORDER - object access buffer

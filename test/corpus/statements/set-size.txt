@@ -29,57 +29,57 @@ SET-SIZE(ElipRegion) = 0.
 
 (source_code
   (variable_definition
-    (identifier)
-    (identifier)
+    name: (identifier)
+    type: (identifier)
     (no_undo))
   (assign_statement
     (assign_phrase
       (assign_pair
-        (function_call
-          (identifier)
+        left: (function_call
+          function: (identifier)
           (arguments
             (argument
-              (identifier))))
-        (number_literal))
+              name: (identifier))))
+        right: (number_literal))
       (assign_pair
-        (function_call
-          (identifier)
+        left: (function_call
+          function: (identifier)
           (arguments
             (argument
-              (identifier))
+              name: (identifier))
             (argument
-              (number_literal))))
-        (number_literal))
+              name: (number_literal))))
+        right: (number_literal))
       (assign_pair
-        (function_call
-          (identifier)
+        left: (function_call
+          function: (identifier)
           (arguments
             (argument
-              (identifier))
+              name: (identifier))
             (argument
-              (number_literal))))
-        (number_literal))
+              name: (number_literal))))
+        right: (number_literal))
       (assign_pair
-        (function_call
-          (identifier)
+        left: (function_call
+          function: (identifier)
           (arguments
             (argument
-              (identifier))
+              name: (identifier))
             (argument
-              (number_literal))))
-        (number_literal))
+              name: (number_literal))))
+        right: (number_literal))
       (assign_pair
-        (function_call
-          (identifier)
+        left: (function_call
+          function: (identifier)
           (arguments
             (argument
-              (identifier))
+              name: (identifier))
             (argument
-              (number_literal))))
-        (number_literal))))
+              name: (number_literal))))
+        right: (number_literal))))
   (set_size_statement
-    (identifier)
-    (number_literal)))
+    buffer: (identifier)
+    size: (number_literal)))
 
 ================================================================================
 SET-SIZE - expression size

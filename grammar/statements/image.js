@@ -18,16 +18,21 @@ module.exports = ({ kw }) => ({
           $.size_phrase,
         ),
       ),
-      optional(seq(kw("BGCOLOR"), $._expression)),
-      optional(seq(kw("FGCOLOR"), $._expression)),
-      optional(kw("CONVERT-3D-COLORS")),
+      optional(seq(kw("BGCOLOR"), field("bgcolor", $._expression))),
+      optional(seq(kw("FGCOLOR"), field("fgcolor", $._expression))),
+      optional(alias(kw("CONVERT-3D-COLORS"), $.convert_3d_colors)),
       optional(
         seq(
           kw("TOOLTIP"),
           field("tooltip", choice($.string_literal, $.identifier)),
         ),
       ),
-      optional(seq(kw("STRETCH-TO-FIT"), optional(kw("RETAIN-SHAPE")))),
-      optional(kw("TRANSPARENT")),
+      optional(
+        seq(
+          alias(kw("STRETCH-TO-FIT"), $.stretch_to_fit),
+          optional(alias(kw("RETAIN-SHAPE"), $.retain_shape)),
+        ),
+      ),
+      optional(alias(kw("TRANSPARENT"), $.transparent)),
     ),
 });

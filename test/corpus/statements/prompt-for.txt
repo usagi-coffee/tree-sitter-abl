@@ -163,7 +163,7 @@ PROMPT-FOR STREAM-HANDLE hS field1 field2 IN WINDOW wMain WITH FRAME fMain.
     name: (identifier)
     type: (identifier)
     (no_undo)
-    (number_literal))
+    initial: (number_literal))
   (prompt_for_statement
     (field
       field: (identifier)))

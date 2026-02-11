@@ -9,10 +9,11 @@ OS-DELETE tmpFile tmpDir RECURSIVE.
 
 (source_code
   (os_delete_statement
-    (identifier))
+    value: (identifier))
   (os_delete_statement
     (identifier)
-    (identifier)))
+    (identifier)
+    (recursive)))
 
 ================================================================================
 OS-DELETE - reference snippets and RECURSIVE
@@ -37,34 +38,35 @@ OS-DELETE VALUE("tmp") RECURSIVE.
 
 (source_code
   (variable_definition
-    (identifier)
-    (identifier)
+    name: (identifier)
+    type: (identifier)
     (no_undo))
   (variable_definition
-    (identifier)
-    (identifier)
+    name: (identifier)
+    type: (identifier)
     (no_undo)
-    (boolean_literal))
+    initial: (boolean_literal))
   (repeat_statement
-    (identifier)
+    label: (identifier)
     (body
       (system_dialog_get_file_statement
-        (identifier)
-        (string_literal)
+        variable: (identifier)
+        title: (string_literal)
         (must_exist)
         (use_filename)
         (update_phrase
-          (identifier)))
+          update: (identifier)))
       (if_statement
         (binary_expression
           (identifier)
           (boolean_literal))
-        (leave_statement
-          (identifier))
-        (os_delete_statement
-          (identifier)))))
+        then: (leave_statement
+          label: (identifier))
+        else: (os_delete_statement
+          value: (identifier)))))
   (os_delete_statement
-    (string_literal)))
+    value: (string_literal)
+    (recursive)))
 
 ================================================================================
 OS-DELETE - multiple targets with RECURSIVE
@@ -76,5 +78,6 @@ OS-DELETE VALUE(cPath) "tmp" RECURSIVE.
 
 (source_code
   (os_delete_statement
-    (identifier)
-    (string_literal)))
+    value: (identifier)
+    (string_literal)
+    (recursive)))

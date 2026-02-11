@@ -58,63 +58,63 @@ END.
 
 (source_code
   (variable_definition
-    (identifier)
-    (identifier)
+    name: (identifier)
+    type: (identifier)
     (no_undo)
     (format_phrase
-      (string_literal))
-    (string_literal))
+      format: (string_literal))
+    label: (string_literal))
   (variable_definition
-    (identifier)
-    (identifier)
+    name: (identifier)
+    type: (identifier)
     (no_undo))
   (set_statement
     (field
-      (identifier)
+      field: (identifier)
       (format_phrase
-        (string_literal))))
+        help: (string_literal))))
   (if_statement
     (binary_expression
       (identifier)
       (string_literal))
-    (assignment_statement
-      (identifier)
-      (assignment_operator)
-      (string_literal))
-    (assignment_statement
-      (identifier)
-      (assignment_operator)
-      (binary_expression
+    then: (assignment_statement
+      left: (identifier)
+      operator: (assignment_operator)
+      right: (string_literal))
+    else: (assignment_statement
+      left: (identifier)
+      operator: (assignment_operator)
+      right: (binary_expression
         (string_literal)
         (function_call
-          (identifier)
+          function: (identifier)
           (arguments
             (argument
-              (function_call
-                (identifier)
+              name: (function_call
+                function: (identifier)
                 (arguments
                   (argument
-                    (identifier))
+                    name: (identifier))
                   (argument
-                    (number_literal))
+                    name: (number_literal))
                   (argument
-                    (number_literal))))))))))
+                    name: (number_literal))))))))))
   (if_statement
     (binary_expression
       (function_call
-        (identifier)
+        function: (identifier)
         (arguments
           (argument
-            (identifier))))
+            name: (identifier))))
       (null_literal))
-    (do_statement
+    then: (do_statement
       (body
         (promsgs_statement
-          (identifier))
+          value: (identifier))
         (message_statement
           (string_literal)
           (identifier))))
-    (do_statement
+    else: (do_statement
       (body
         (message_statement
           (string_literal)
