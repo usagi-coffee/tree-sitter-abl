@@ -13,25 +13,17 @@ module.exports = ({ kw }) => ({
       field("name", $.identifier),
       repeat(
         choice(
-          alias($.__submenu_bgcolor, $.bgcolor),
-          alias($.__submenu_dcolor, $.dcolor),
-          alias($.__submenu_fgcolor, $.fgcolor),
-          alias($.__submenu_pfcolor, $.pfcolor),
-          alias($.__submenu_font, $.font),
-          alias($.__submenu_help, $.submenu_help),
-          alias($.__submenu_like, $.like_option),
+          seq(kw("BGCOLOR"), field("bgcolor", $._expression)),
+          seq(kw("DCOLOR"), field("dcolor", $._expression)),
+          seq(kw("FGCOLOR"), field("fgcolor", $._expression)),
+          seq(kw("PFCOLOR"), field("pfcolor", $._expression)),
+          seq(kw("FONT"), field("font", $._expression)),
+          alias(kw("SUB-MENU-HELP"), $.submenu_help),
+          seq(kw("LIKE"), field("like", $.identifier)),
           alias($.__submenu_element, $.menu_element),
         ),
       ),
     ),
-
-  __submenu_bgcolor: ($) => seq(kw("BGCOLOR"), $._expression),
-  __submenu_dcolor: ($) => seq(kw("DCOLOR"), $._expression),
-  __submenu_fgcolor: ($) => seq(kw("FGCOLOR"), $._expression),
-  __submenu_pfcolor: ($) => seq(kw("PFCOLOR"), $._expression),
-  __submenu_font: ($) => seq(kw("FONT"), $._expression),
-  __submenu_help: ($) => kw("SUB-MENU-HELP"),
-  __submenu_like: ($) => seq(kw("LIKE"), field("like", $.identifier)),
   __submenu_element: ($) =>
     choice(
       alias($.__submenu_item, $.menu_item),

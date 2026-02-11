@@ -44,9 +44,10 @@ module.exports = ({ kw }) => ({
           seq(kw("LABEL"), field("label", $.__format_labels)),
           seq(kw("PFCOLOR"), field("pfcolor", $._expression)),
           seq(kw("MOUSE-POINTER"), field("mouse_pointer", $._expression)),
-
-          alias($.__variable_initial_option, $.initial_option),
-
+          seq(
+            kw("INITIAL", { offset: 4 }),
+            choice($._expression, seq("[", optional($._expressions), "]")),
+          ),
           $.view_as_phrase,
 
           seq(optional(kw("NOT")), kw("CASE-SENSITIVE")),
@@ -77,11 +78,6 @@ module.exports = ({ kw }) => ({
   __variable_format_phrase: ($) =>
     seq(kw("FORMAT", { offset: 4 }), field("format", $.string_literal)),
 
-  __variable_initial_option: ($) =>
-    seq(
-      kw("INITIAL", { offset: 4 }),
-      choice($._expression, seq("[", optional($._expressions), "]")),
-    ),
   __variable_modifier: ($) =>
     choice(
       seq(

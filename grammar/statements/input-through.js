@@ -12,14 +12,14 @@ module.exports = ({ kw }) => ({
     seq(
       $.__input_through_program_target,
       repeat($.__input_through_argument),
-      optional(choice(kw("ECHO"), kw("NO-ECHO"))),
+      optional(choice(alias(kw("ECHO"), $.echo), alias(kw("NO-ECHO"), $.no_echo))),
       optional(
         choice(
-          seq(kw("MAP"), field("map", $.__input_through_map_entry)),
-          kw("NO-MAP"),
+          seq(kw("MAP"), field("map", choice($.identifier, $.string_literal))),
+          alias(kw("NO-MAP"), $.no_map),
         ),
       ),
-      optional(kw("UNBUFFERED")),
+      optional(alias(kw("UNBUFFERED"), $.unbuffered)),
       optional(alias($.__input_through_convert_phrase, $.convert_phrase)),
     ),
 
@@ -45,10 +45,9 @@ module.exports = ({ kw }) => ({
       alias($.__input_through_shell_variable, $.shell_variable),
     ),
   __input_through_shell_variable: ($) => token(/\$+[A-Za-z_0-9]*/),
-  __input_through_map_entry: ($) => choice($.identifier, $.string_literal),
   __input_through_convert_phrase: ($) =>
     choice(
-      kw("NO-CONVERT"),
+      alias(kw("NO-CONVERT"), $.no_convert),
       seq(
         kw("CONVERT"),
         optional(seq(kw("TARGET"), field("target", $.string_literal))),

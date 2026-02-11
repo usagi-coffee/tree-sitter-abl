@@ -14,8 +14,8 @@ module.exports = ({ kw }) => ({
       kw("FOR"),
       $.query_table_list,
       optional(seq(kw("CACHE"), field("cache", $.number_literal))),
-      optional(kw("SCROLLING")),
-      optional(kw("RCODE-INFORMATION")),
+      optional(alias(kw("SCROLLING"), $.scrolling)),
+      optional(alias(kw("RCODE-INFORMATION"), $.rcode_information)),
     ),
 
   query_table_list: ($) =>

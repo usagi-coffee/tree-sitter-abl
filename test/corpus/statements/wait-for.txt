@@ -105,12 +105,10 @@ WAIT-FOR PROCEDURE-COMPLETE OF hRequest.
 (source_code
   (button_definition
     (identifier)
-    (button_option
-      (string_literal)))
+    (string_literal))
   (button_definition
     (identifier)
-    (button_option
-      (string_literal)))
+    (string_literal))
   (form_statement
     (form_item
       (qualified_name
@@ -165,6 +163,7 @@ WAIT-FOR PROCEDURE-COMPLETE OF hRequest.
           (widget_phrase
             (identifier)))
         (find_statement
+          (next)
           (identifier)
           (no_lock)
           (no_error))
@@ -183,6 +182,7 @@ WAIT-FOR PROCEDURE-COMPLETE OF hRequest.
             (frame_phrase
               (identifier)))))))
   (find_statement
+    (first)
     (identifier)
     (no_lock))
   (display_statement
@@ -213,16 +213,13 @@ WAIT-FOR PROCEDURE-COMPLETE OF hRequest.
     (identifier)
     (identifier)
     (no_undo)
-    (initial_option
-      (boolean_literal)))
+    (boolean_literal))
   (button_definition
     (identifier)
-    (button_option
-      (string_literal)))
+    (string_literal))
   (button_definition
     (identifier)
-    (button_option
-      (string_literal)))
+    (string_literal))
   (form_statement
     (form_item
       (qualified_name
@@ -321,6 +318,7 @@ WAIT-FOR PROCEDURE-COMPLETE OF hRequest.
         (widget_phrase
           (identifier)))
       (find_statement
+        (next)
         (identifier)
         (no_error))
       (if_statement

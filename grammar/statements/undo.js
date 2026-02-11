@@ -45,7 +45,7 @@ module.exports = ({ kw }) => ({
         optional(
           choice(
             seq(kw("ERROR"), field("error_value", $._expression)),
-            kw("NO-APPLY"),
+            alias(kw("NO-APPLY"), $.no_apply),
             field("return_value", $._expression),
           ),
         ),

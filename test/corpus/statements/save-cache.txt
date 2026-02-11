@@ -64,8 +64,7 @@ END.
     (no_undo)
     (format_phrase
       (string_literal))
-    (initial_option
-      (null_literal)))
+    (null_literal))
   (variable_definition
     (identifier)
     (identifier)
@@ -94,8 +93,8 @@ END.
             (arguments
               (argument
                 (identifier))))
-          (connect_option
-            (identifier)))
+          (identifier)
+          (no_error))
         (leave_statement))
       (if_statement
         (unary_expression

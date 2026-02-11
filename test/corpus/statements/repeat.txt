@@ -121,7 +121,7 @@ END.
       format: (string_literal)))
   (form_statement
     (form_item
-      (number_literal))
+      skip: (number_literal))
     (form_item
       field: (string_literal))
     (form_item
@@ -228,6 +228,7 @@ END.
         right: (identifier)))
     (body
       (find_statement
+        (next)
         table: (identifier))
       (update_statement
         (field
@@ -239,6 +240,7 @@ END.
     start: (number_literal)
     end: (number_literal)
     step: (number_literal)
+    (transaction)
     (stop_after_phrase
       time: (number_literal))
     (on_quit_phrase)
@@ -247,7 +249,17 @@ END.
         record: (identifier))))
   (repeat_statement
     (query_tuning_phrase
-      cache_size: (number_literal))
+      cache_size: (number_literal)
+      (lookahead)
+      (no_lookahead)
+      (no_bind_where)
+      (index_hint)
+      (no_index_hint)
+      (separate_connection)
+      (no_separate_connection)
+      (no_debug)
+      (join_by_sqldb)
+      (no_join_by_sqldb))
     (body
       (display_statement
         (field

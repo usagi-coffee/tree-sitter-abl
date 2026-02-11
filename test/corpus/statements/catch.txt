@@ -17,6 +17,7 @@ END.
       right: (identifier))
     (body
       (put_statement
+        (unformatted)
         value: (string_literal)
         (skip)))))
 
@@ -78,6 +79,7 @@ END.
     (on_error_phrase)
     (body
       (find_statement
+        (first)
         (identifier)
         (where_phrase
           (binary_expression
@@ -99,6 +101,7 @@ END.
                 (argument
                   (number_literal)))))))))
   (do_statement
+    (transaction)
     (on_error_phrase)
     (body
       (run_statement

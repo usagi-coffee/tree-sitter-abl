@@ -83,17 +83,13 @@ DEFINE WORK-TABLE wtOpt NO-UNDO
     (field
       name: (identifier)
       type: (identifier)
-      (field_option
-        (string_literal))
-      (field_option
-        (string_literal)))
+      format: (string_literal)
+      label: (string_literal))
     (field
       name: (identifier)
       type: (identifier)
-      (field_option
-        (number_literal))
-      (field_option
-        (number_literal)))))
+      decimals: (number_literal)
+      initial: (number_literal))))
 
 ================================================================================
 WORK-TABLE DEFINITION - WITH Index
@@ -118,6 +114,7 @@ DEFINE WORK-TABLE wtIdx NO-UNDO
       type: (identifier))
     (index
       name: (identifier)
+      (primary)
       field: (identifier))))
 
 ================================================================================
@@ -154,8 +151,7 @@ DEFINE WORK-TABLE wtExt FIELD tng_nabyw EXTENT 7 LIKE ad_name.
     name: (identifier)
     (field
       name: (identifier)
-      (field_option
-        (number_literal))
+      extent: (number_literal)
       type: (identifier))))
 
 ================================================================================
@@ -175,6 +171,7 @@ DEFINE WORK-TABLE wtCustomer LIKE Customer NO-UNDO
     (no_undo)
     (index
       name: (identifier)
+      (primary)
       field: (identifier))))
 
 ================================================================================
@@ -214,22 +211,19 @@ DEFINE PRIVATE WORK-TABLE wtPrivate FIELD f1 AS INTEGER.
       type: (qualified_name
         left: (identifier)
         right: (identifier))
-      (field_option
-        (string_literal)))
+      label: (string_literal))
     (field
       name: (identifier)
       type: (qualified_name
         left: (identifier)
         right: (identifier))
-      (field_option
-        (string_literal)))
+      label: (string_literal))
     (field
       name: (identifier)
       type: (qualified_name
         left: (identifier)
         right: (identifier))
-      (field_option
-        (string_literal))))
+      column_label: (string_literal)))
   (for_statement
     (record
       (record
@@ -239,7 +233,7 @@ DEFINE PRIVATE WORK-TABLE wtPrivate FIELD f1 AS INTEGER.
         record: (identifier)
         of: (identifier))
       (break_by
-        (qualified_name
+        by: (qualified_name
           left: (identifier)
           right: (identifier))))
     (body
@@ -249,12 +243,11 @@ DEFINE PRIVATE WORK-TABLE wtPrivate FIELD f1 AS INTEGER.
             left: (identifier)
             right: (identifier))
           (aggregate_phrase
-            (aggregate_option
-              operation: (aggregate_operation)
-              (by_phrase
-                group: (qualified_name
-                  left: (identifier)
-                  right: (identifier)))))))
+            operation: (aggregate_operation)
+            (by_phrase
+              group: (qualified_name
+                left: (identifier)
+                right: (identifier))))))
       (if_statement
         (function_call
           function: (identifier)
@@ -282,12 +275,11 @@ DEFINE PRIVATE WORK-TABLE wtPrivate FIELD f1 AS INTEGER.
               operator: (assignment_operator)
               right: (accum_expression
                 operation: (aggregate_phrase
-                  (aggregate_option
-                    operation: (aggregate_operation)
-                    (by_phrase
-                      group: (qualified_name
-                        left: (identifier)
-                        right: (identifier)))))
+                  operation: (aggregate_operation)
+                  (by_phrase
+                    group: (qualified_name
+                      left: (identifier)
+                      right: (identifier))))
                 field: (qualified_name
                   left: (identifier)
                   right: (identifier))))
@@ -304,10 +296,10 @@ DEFINE PRIVATE WORK-TABLE wtPrivate FIELD f1 AS INTEGER.
       (record
         record: (identifier))
       (break_by
-        (qualified_name
+        by: (qualified_name
           left: (identifier)
           right: (identifier))
-        (qualified_name
+        by: (qualified_name
           left: (identifier)
           right: (identifier))))
     (body
@@ -331,12 +323,11 @@ DEFINE PRIVATE WORK-TABLE wtPrivate FIELD f1 AS INTEGER.
         (field
           field: (identifier)
           (aggregate_phrase
-            (aggregate_option
-              operation: (aggregate_operation)
-              (by_phrase
-                group: (qualified_name
-                  left: (identifier)
-                  right: (identifier)))))))))
+            operation: (aggregate_operation)
+            (by_phrase
+              group: (qualified_name
+                left: (identifier)
+                right: (identifier))))))))
   (work_table_definition
     (new_modifier)
     (scope_modifier)

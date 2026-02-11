@@ -21,7 +21,7 @@ module.exports = ({ kw }) => ({
         2,
         seq(
           $._stream_phrase,
-          optional(kw("UNLESS-HIDDEN")),
+          optional(alias(kw("UNLESS-HIDDEN"), $.unless_hidden)),
           optional($.in_window_phrase),
           $.__display_frame_phrases,
           optional(alias(kw("NO-ERROR"), $.no_error)),
@@ -30,7 +30,7 @@ module.exports = ({ kw }) => ({
       ),
       seq(
         optional($._stream_phrase),
-        optional(kw("UNLESS-HIDDEN")),
+        optional(alias(kw("UNLESS-HIDDEN"), $.unless_hidden)),
         $.__display_items,
         optional($.in_window_phrase),
         optional($.__display_frame_phrases),
@@ -89,7 +89,6 @@ module.exports = ({ kw }) => ({
       ),
     ),
   __display_keyword_identifier: ($) => alias(kw("MENU"), $.identifier),
-
   __display_record: ($) => $._identifier_or_qualified_name,
 
   __display_skip_phrase: ($) =>

@@ -40,8 +40,7 @@ END.
     (no_undo))
   (button_definition
     (identifier)
-    (button_option
-      (string_literal)))
+    (string_literal))
   (display_statement
     (identifier))
   (on_statement

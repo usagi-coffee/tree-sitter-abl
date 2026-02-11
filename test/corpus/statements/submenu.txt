@@ -113,14 +113,10 @@ DEFINE SUB-MENU smColors
 (source_code
   (submenu_definition
     name: (identifier)
-    (bgcolor
-      (number_literal))
-    (fgcolor
-      (number_literal))
-    (dcolor
-      (number_literal))
-    (pfcolor
-      (number_literal))
+    bgcolor: (number_literal)
+    fgcolor: (number_literal)
+    dcolor: (number_literal)
+    pfcolor: (number_literal)
     (menu_element
       (menu_item
         name: (identifier)
@@ -139,8 +135,7 @@ DEFINE SUB-MENU smFont
 (source_code
   (submenu_definition
     name: (identifier)
-    (font
-      (number_literal))
+    font: (number_literal)
     (menu_element
       (menu_item
         name: (identifier)
@@ -176,8 +171,7 @@ DEFINE SUB-MENU smLike LIKE smOriginal.
 (source_code
   (submenu_definition
     name: (identifier)
-    (like_option
-      like: (identifier))))
+    like: (identifier)))
 
 ================================================================================
 SUBMENU - MENU-ITEM without label
@@ -336,16 +330,11 @@ DEFINE SUB-MENU smColors2
 (source_code
   (submenu_definition
     name: (identifier)
-    (bgcolor
-      (number_literal))
-    (fgcolor
-      (number_literal))
-    (dcolor
-      (number_literal))
-    (pfcolor
-      (number_literal))
-    (font
-      (number_literal))
+    bgcolor: (number_literal)
+    fgcolor: (number_literal)
+    dcolor: (number_literal)
+    pfcolor: (number_literal)
+    font: (number_literal)
     (submenu_help)
     (menu_element
       (menu_item
@@ -486,12 +475,10 @@ DELETE WIDGET mywin.
           right: (identifier)))))
   (button_definition
     name: (identifier)
-    (button_option
-      label: (string_literal)))
+    label: (string_literal))
   (button_definition
     name: (identifier)
-    (button_option
-      label: (string_literal)))
+    label: (string_literal))
   (assignment_statement
     left: (identifier)
     operator: (assignment_operator)

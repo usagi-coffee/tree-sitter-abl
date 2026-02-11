@@ -50,16 +50,19 @@ SEEK STREAM-HANDLE hS TO 100.
     (qualified_name
       (identifier)
       (identifier))
-    (append_phrase))
+    (append)
+    (no_echo))
   (assignment_statement
     (identifier)
     (assignment_operator)
     (seek_expression
       (identifier)))
   (put_statement
+    (unformatted)
     (string_literal)
     (skip))
-  (output_statement)
+  (output_statement
+    (close))
   (input_statement
     (qualified_name
       (identifier)

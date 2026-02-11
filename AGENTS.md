@@ -73,8 +73,8 @@ Strongly prefer using these commands as they have helpful side-effects like retu
 - *Only* if needed, refactor rules to be easier to target in precedence (e.g you can't target repeat(some_rule), its fine to refactor into e.g `__statement_expression: ($) => $._expression`.
 - Any newly added grammar warrants adding a tests for it, please write tests for new grammar constructs.
 - For options of statement with values prefer e.g `seq(kw("ROW"), field("row", ...))` for those that can have expressions and e.g `alias(kw("NO-LABELS", $.no_labels))` for those that do not have expressions.
-- Do not use e.g `no_labels_options` as an alias, just use `no_labels` to keep it clean.
-- Big blocks of `repeat` options for the statement record/column/field/whatever should prefer inlining the options instead of duplication.
+- Do not use e.g `no_labels_option` as an alias, just use `no_labels` to keep it clean, avoid `_option` suffix.
+- Big blocks of `repeat(choice(` rules for the statement record/column/field/whatever should prefer inlining instead of duplication as it offers modest state reduction.
 
 ### Clean tree example
 

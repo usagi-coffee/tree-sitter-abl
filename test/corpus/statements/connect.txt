@@ -9,7 +9,8 @@ CONNECT VALUE("-db mydb -H localhost").
 
 (source_code
   (connect_statement
-    database: (identifier))
+    database: (identifier)
+    (no_error))
   (connect_statement
     database: (function_call
       function: (identifier)
@@ -29,37 +30,29 @@ CONNECT mydb1 -1 -db mydb2 -1 NO-ERROR.
 
 (source_code
   (connect_statement
-    (connect_option
-      parameter: (identifier)
-      value: (identifier))
-    (connect_option
-      parameter: (identifier)
-      value: (identifier))
-    (connect_option
-      parameter: (identifier)
-      value: (number_literal))
-    (connect_option
-      parameter: (identifier)
-      value: (identifier))
-    (connect_option
-      parameter: (identifier)
-      value: (identifier)))
+    parameter: (identifier)
+    value: (identifier)
+    parameter: (identifier)
+    value: (identifier)
+    parameter: (identifier)
+    value: (number_literal)
+    parameter: (identifier)
+    value: (identifier)
+    parameter: (identifier)
+    value: (identifier)
+    (no_error))
   (connect_statement
-    (connect_option
-      parameter: (identifier)
-      value: (identifier))
-    (connect_option
-      parameter: (identifier)
-      value: (identifier)))
+    parameter: (identifier)
+    value: (identifier)
+    parameter: (identifier)
+    value: (identifier))
   (connect_statement
     database: (identifier)
-    (connect_option
-      parameter: (identifier))
-    (connect_option
-      parameter: (identifier)
-      value: (identifier))
-    (connect_option
-      parameter: (identifier))))
+    parameter: (identifier)
+    parameter: (identifier)
+    value: (identifier)
+    parameter: (identifier)
+    (no_error)))
 
 ================================================================================
 CONNECT - Reference snippets
@@ -74,16 +67,15 @@ CONNECT VALUE("-db C:\\OpenEdge\\WRK\\db\\Sports2020 -H dbserver -S 1900") NO-ER
 (source_code
   (connect_statement
     (identifier)
-    (connect_option
-      (identifier))
-    (connect_option
-      (identifier)
-      (identifier))
-    (connect_option
-      (identifier)))
+    (identifier)
+    (identifier)
+    (identifier)
+    (identifier)
+    (no_error))
   (connect_statement
     (function_call
       (identifier)
       (arguments
         (argument
-          (string_literal))))))
+          (string_literal))))
+    (no_error)))

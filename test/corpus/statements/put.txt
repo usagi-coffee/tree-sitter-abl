@@ -11,6 +11,7 @@ PUT UNFORMATTED x format("9999-99-99") ';'.
 
 (source_code
   (put_statement
+    (unformatted)
     value: (string_literal)
     value: (qualified_name
       left: (identifier)
@@ -26,13 +27,15 @@ PUT UNFORMATTED x format("9999-99-99") ';'.
     (skip
       count: (number_literal)))
   (put_statement
-    (function_call
-      function: (identifier)
-      (arguments
-        (argument
-          name: (number_literal))))
-    (string_literal))
+    (control_phrase
+      (function_call
+        function: (identifier)
+        (arguments
+          (argument
+            name: (number_literal))))
+      (string_literal)))
   (put_statement
+    (unformatted)
     value: (identifier)
     (format_phrase
       format: (string_literal))
@@ -67,14 +70,16 @@ PUT CONTROL NULL(20).
   (for_statement
     (record
       (record
-        (identifier)))
+        (identifier)
+        (no_lock)))
     (body
       (put_statement
         (identifier)
         (identifier)
         (string_literal))))
   (output_statement
-    (identifier))
+    (identifier)
+    (close))
   (put_statement
     (identifier)
     (string_literal)
@@ -83,16 +88,19 @@ PUT CONTROL NULL(20).
     (skip))
   (put_statement
     (identifier)
+    (unformatted)
     (identifier)
     (format_phrase)
     (skip
       (number_literal)))
   (put_statement
-    (string_literal)
-    (identifier))
+    (control_phrase
+      (string_literal)
+      (identifier)))
   (put_statement
-    (function_call
-      (identifier)
-      (arguments
-        (argument
-          (number_literal))))))
+    (control_phrase
+      (function_call
+        (identifier)
+        (arguments
+          (argument
+            (number_literal)))))))

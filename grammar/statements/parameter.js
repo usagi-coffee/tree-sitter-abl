@@ -22,8 +22,15 @@ module.exports = ({ kw }) => ({
           alias($.__parameter_format, $.format),
           alias($.__parameter_column_label, $.column_label),
           alias($.__parameter_decimals, $.decimals),
-          alias($.__parameter_initial_option, $.initial_option),
-          alias($.__parameter_label_option, $.label_option),
+          seq(
+            kw("INITIAL"),
+            choice($._expression, seq("[", optional($._expressions), "]")),
+          ),
+          seq(
+            kw("LABEL"),
+            $.string_literal,
+            repeat(seq(",", $.string_literal)),
+          ),
           alias($.__parameter_no_undo, $.no_undo),
         ),
       ),
@@ -87,20 +94,12 @@ module.exports = ({ kw }) => ({
   __parameter_extent_phrase: ($) =>
     seq(kw("EXTENT"), optional($.__parameter_extent_size)),
 
-  __parameter_initial_option: ($) =>
-    seq(
-      kw("INITIAL"),
-      choice($._expression, seq("[", optional($._expressions), "]")),
-    ),
-
   __parameter_no_undo: ($) => kw("NO-UNDO"),
   __parameter_case_sensitive: ($) =>
     seq(optional(kw("NOT")), kw("CASE-SENSITIVE")),
   __parameter_column_label: ($) => seq(kw("COLUMN-LABEL"), $.string_literal),
   __parameter_decimals: ($) => seq(kw("DECIMALS"), $.number_literal),
   __parameter_format: ($) => seq(kw("FORMAT", { offset: 4 }), $.string_literal),
-  __parameter_label_option: ($) =>
-    seq(kw("LABEL"), $.string_literal, repeat(seq(",", $.string_literal))),
   __parameter_extent_size: ($) =>
     choice(
       $.number_literal,
@@ -112,20 +111,16 @@ module.exports = ({ kw }) => ({
   __parameter_record_name: ($) => $._identifier_or_qualified_name,
   __parameter_table_parameter_option: ($) =>
     choice(
-      alias($.__parameter_append_option, $.append_option),
-      alias($.__parameter_bind_option, $.bind_option),
-      alias($.__parameter_by_value_option, $.by_value_option),
-      alias($.__parameter_no_undo, $.no_undo),
+      alias(kw("APPEND"), $.append),
+      alias(kw("BIND"), $.bind),
+      alias(kw("BY-VALUE"), $.by_value),
+      alias(kw("NO-UNDO"), $.no_undo),
     ),
-  __parameter_append_option: ($) => kw("APPEND"),
   __parameter_handle_parameter_option: ($) =>
     choice(
-      alias($.__parameter_bind_option, $.bind_option),
-      alias($.__parameter_by_value_option, $.by_value_option),
-      alias($.__parameter_by_reference_option, $.by_reference_option),
-      alias($.__parameter_no_undo, $.no_undo),
+      alias(kw("BIND"), $.bind),
+      alias(kw("BY-VALUE"), $.by_value),
+      alias(kw("BY-REFERENCE"), $.by_reference),
+      alias(kw("NO-UNDO"), $.no_undo),
     ),
-  __parameter_bind_option: ($) => kw("BIND"),
-  __parameter_by_value_option: ($) => kw("BY-VALUE"),
-  __parameter_by_reference_option: ($) => kw("BY-REFERENCE"),
 });

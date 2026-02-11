@@ -59,23 +59,28 @@ DISPLAY "Back to 80 columns." WITH CENTERED.
   (for_statement
     (record
       (record
-        (identifier)))
+        (identifier)
+        (no_lock)))
     (body
       (display_statement
         (identifier))))
   (terminal_statement
     (string_literal))
-  (output_statement)
+  (output_statement
+    (terminal)
+    (paged))
   (for_statement
     (record
       (record
-        (identifier)))
+        (identifier)
+        (no_lock)))
     (body
       (display_statement
         (identifier)
         (frame_phrase
           (number_literal)))))
-  (output_statement)
+  (output_statement
+    (close))
   (terminal_statement
     (string_literal))
   (display_statement

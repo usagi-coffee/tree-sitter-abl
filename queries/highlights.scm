@@ -84,52 +84,171 @@
 ] @operator
 
 [
+  (abstract)
   (abstract_modifier)
   (access_modifier)
+  (all)
+  (anywhere)
+  (append)
+  (array_message)
+  (ascending)
   (attr_space)
+  (auto_endkey)
+  (auto_go)
   (auto_return)
   (background)
+  (backwards)
+  (binary)
+  (bind)
+  (bind_where)
+  (blank)
+  (break)
+  (byte)
+  (by_reference)
+  (by_value)
+  (case_sensitive)
+  (cdecl)
   (centered)
+  (clipboard)
+  (close)
+  (collate)
+  (current)
+  (cursor)
+  (data_bind)
+  (deblank)
+  (default)
+  (descending)
+  (disabled)
   (disable_auto_zap)
+  (drop_down)
+  (drop_down_list)
   (drop_target)
+  (echo)
+  (exclusive)
+  (exclusive_lock)
+  (final)
   (final_modifier)
+  (first)
   (fit_last_column)
+  (flat_button)
+  (foreign_key_hidden)
+  (forward)
+  (forwards)
+  (generate_md5)
+  (graphic_edge)
+  (group_box)
+  (header)
   (identifier)
+  (indexed_reposition)
+  (index_hint)
+  (join_by_sqldb)
+  (keep_messages)
+  (landscape)
+  (large)
+  (last)
+  (lookahead)
   (menubar)
+  (message)
   (moveable)
   (multiple)
+  (nested)
   (new_modifier)
+  (next)
+  (not)
+  (not_active)
+  (no_apply)
+  (no_array_message)
   (no_assign)
   (no_attr_space)
+  (no_bind_where)
   (no_box)
   (no_column_scrolling)
+  (no_convert)
+  (no_convert_3d_colors)
+  (no_debug)
+  (no_echo)
   (no_empty_space)
   (no_error)
+  (no_fill)
+  (no_focus)
   (no_hide)
+  (no_index_hint)
+  (no_join_by_sqldb)
   (no_label)
   (no_labels)
+  (no_lock)
+  (no_lookahead)
+  (no_map)
+  (no_prefetch)
   (no_row_markers)
+  (no_separate_connection)
+  (no_tab_stop)
   (no_undo)
   (no_validate)
   (no_wait)
+  (no_word_wrap)
+  (ordered_join)
   (overlay)
   (override_modifier)
+  (paged)
   (page_bottom)
   (page_top)
+  (pascal)
+  (performance)
+  (persistent)
+  (portrait)
+  (prev)
+  (primary)
+  (rcode_information)
+  (recursive)
+  (reference_only)
+  (reposition)
   (resizable)
+  (reverse_from)
+  (rounded)
+  (row)
   (rule)
   (scope_modifier)
   (scrollbar_horizontal)
   (scrollbar_vertical)
+  (scrolling)
+  (separate_connection)
   (separators)
+  (serializable)
   (serialization_modifier)
+  (serialize_hidden)
+  (share)
+  (share_lock)
   (side_labels)
+  (simple)
   (skip)
+  (skip_group_duplicates)
+  (sort)
+  (space)
+  (sql)
   (static_modifier)
+  (stdcall)
+  (stream_io)
+  (submenu_help)
+  (table_scan)
+  (terminal)
+  (text)
   (this_object)
   (this_procedure)
+  (thread_safe)
   (three_d)
+  (transaction)
+  (unbuffered)
+  (unformatted)
+  (unique)
+  (unique_match)
+  (unless_hidden)
+  (use_revvideo)
   (use_text)
+  (use_underline)
+  (use_widget_pool)
+  (verbose)
+  (word_index)
   "ABSTRACT"
   "ACCELERATOR"
   "ACCUM"
@@ -147,25 +266,18 @@
   "APPEND"
   "APPLICATION"
   "APPLY"
-  "ARRAY-MESSAGE"
   "AS"
-  "ASCENDING"
   "ASK-OVERWRITE"
   "ASSEMBLY"
   "ASSIGN"
   "ASYNCHRONOUS"
   "AT"
-  "ATTR-SPACE"
   "AUTO-COMPLETION"
-  "AUTO-ENDKEY"
-  "AUTO-GO"
   "AUTO-RETURN"
   "AUTOMATIC"
   "AVAIL"
   "AVAILABLE"
   "AVERAGE"
-  "BACKGROUND"
-  "BACKWARDS"
   "BASE-KEY"
   "BEFORE-HIDE"
   "BEFORE-TABLE"
@@ -173,8 +285,6 @@
   "BELL"
   "BGCOLOR"
   "BINARY"
-  "BIND"
-  "BIND-WHERE"
   "BLANK"
   "BLINK-"
   "BLOCK-LEVEL"
@@ -193,8 +303,6 @@
   "BUTTONS"
   "BY"
   "BY-REFERENCE"
-  "BY-VALUE"
-  "BYTE"
   "CACHE"
   "CACHE-SIZE"
   "CALL"
@@ -202,7 +310,6 @@
   "CASE"
   "CASE-SENSITIVE"
   "CATCH"
-  "CDECL"
   "CHAINED"
   "CHOOSE"
   "CLASS"
@@ -248,7 +355,6 @@
   "CURRENT-CHANGED"
   "CURRENT-WINDOW"
   "CURSOR"
-  "DATA-BIND"
   "DATA-RELATION"
   "DATA-SOURCE"
   "DATABASE"
@@ -282,8 +388,6 @@
   "DO"
   "DOS"
   "DOWN"
-  "DROP-DOWN"
-  "DROP-DOWN-LIST"
   "DROP-TARGET"
   "DUMP"
   "DYNAMIC-NEW"
@@ -310,7 +414,6 @@
   "EVENT-PROCEDURE"
   "EVENTS"
   "EXCEPT"
-  "EXCLUSIVE"
   "EXCLUSIVE-LOCK"
   "EXPAND"
   "EXPLICIT"
@@ -326,40 +429,31 @@
   "FILE-INFO"
   "FILL-IN"
   "FILTERS"
-  "FINAL"
   "FINALLY"
   "FIND"
   "FIRST"
   "FIX-CODEPAGE"
   "FIXED-ONLY"
   "FLAGS"
-  "FLAT-BUTTON"
   "FOCUS"
   "FONT"
   "FONT-TABLE"
   "FOR"
-  "FOREIGN-KEY-HIDDEN"
   "FORM"
   "FORMAT"
-  "FORWARD"
-  "FORWARDS"
   "FRAME"
   "FREQUENCY"
   "FROM"
   "FROM-CURRENT"
   "FUNCTION"
   "GE"
-  "GENERATE-MD5"
   "GET"
   "GET-DIR"
   "GET-FILE"
   "GET-KEY-VALUE"
   "GO-ON"
-  "GRAPHIC-EDGE"
   "GROUP"
-  "GROUP-BOX"
   "GT"
-  "HEADER"
   "HELP"
   "HIDE"
   "HORIZONTAL"
@@ -375,8 +469,6 @@
   "IMPORT"
   "IN"
   "INDEX"
-  "INDEX-HINT"
-  "INDEXED-REPOSITION"
   "INHERITS"
   "INITIAL"
   "INITIAL-DIR"
@@ -390,8 +482,6 @@
   "INTO"
   "IS"
   "ITEM"
-  "JOIN-BY-SQLDB"
-  "KEEP-MESSAGES"
   "KEY"
   "KEYS"
   "LABEL"
@@ -420,7 +510,6 @@
   "LOAD-RESULT-INTO"
   "LOB-DIR"
   "LOCKED"
-  "LOOKAHEAD"
   "LT"
   "MAP"
   "MATCHES"
@@ -447,48 +536,33 @@
   "NAMESPACE-URI"
   "NATIVE"
   "NE"
-  "NESTED"
   "NEW"
   "NEW-INSTANCE"
   "NEXT"
   "NEXT-PROMPT"
   "NO"
   "NO-APPLY"
-  "NO-ARRAY-MESSAGE"
   "NO-ATTR-LIST"
-  "NO-ATTR-SPACE"
-  "NO-BIND-WHERE"
   "NO-BOX"
   "NO-CONSOLE"
   "NO-CONVERT"
-  "NO-CONVERT-3D-COLORS"
   "NO-CURRENT-VALUE"
-  "NO-DEBUG"
   "NO-DRAG"
   "NO-ECHO"
   "NO-ERROR"
-  "NO-FILL"
-  "NO-FOCUS"
-  "NO-INDEX-HINT"
-  "NO-JOIN-BY-SQLDB"
   "NO-LABELS"
   "NO-LOBS"
   "NO-LOCK"
-  "NO-LOOKAHEAD"
   "NO-MAP"
   "NO-MESSAGE"
   "NO-PAUSE"
-  "NO-PREFETCH"
-  "NO-SEPARATE-CONNECTION"
   "NO-TAB-STOP"
   "NO-UNDO"
-  "NO-VALIDATE"
   "NO-WAIT"
   "NO-WORD-WRAP"
   "NONE"
   "NORMAL"
   "NOT"
-  "NOT-ACTIVE"
   "NUM-COPIES"
   "OBJECT"
   "OF"
@@ -501,7 +575,6 @@
   "OPTIONS"
   "OPTIONS-FILE"
   "OR"
-  "ORDERED-JOIN"
   "ORDINAL"
   "OS-APPEND"
   "OS-COMMAND"
@@ -515,21 +588,16 @@
   "OUTPUT"
   "OVERLAY"
   "OVERRIDE"
-  "PACKAGE-PRIVATE"
-  "PACKAGE-PROTECTED"
   "PAGE"
   "PAGE-SIZE"
   "PAGE-WIDTH"
-  "PAGED"
   "PARAM"
   "PARAMETER"
   "PARENT-FIELDS-AFTER"
   "PARENT-FIELDS-BEFORE"
   "PARENT-ID-FIELD"
   "PARENT-ID-RELATION"
-  "PASCAL"
   "PAUSE"
-  "PERFORMANCE"
   "PERSISTENT"
   "PFCOLOR"
   "PORTRAIT"
@@ -549,7 +617,6 @@
   "PROMSGS"
   "PROPATH"
   "PROPERTY"
-  "PROTECTED"
   "PUBLIC"
   "PUBLISH"
   "PUT"
@@ -561,7 +628,6 @@
   "RADIO-SET"
   "RAW-TRANSFER"
   "RCODE-INFO"
-  "RCODE-INFORMATION"
   "READKEY"
   "RECID"
   "RECTANGLE"
@@ -579,11 +645,9 @@
   "RETURN"
   "RETURN-TO-START-DIR"
   "RETURNS"
-  "REVERSE-FROM"
   "REVERT"
   "RIGHT"
   "RIGHT-ALIGNED"
-  "ROUNDED"
   "ROUTINE-LEVEL"
   "ROW"
   "ROW-OF"
@@ -592,7 +656,6 @@
   "RUN"
   "RUN-PROCEDURE"
   "RVV-"
-  "SAFE"
   "SAVE"
   "SAVE-AS"
   "SAX-ATTRIBUTES"
@@ -602,14 +665,10 @@
   "SCROLL"
   "SCROLLBAR-HORIZONTAL"
   "SCROLLBAR-VERTICAL"
-  "SCROLLING"
   "SECTION"
   "SEEK"
   "SELECTION-LIST"
   "SELF"
-  "SEPARATE-CONNECTION"
-  "SERIALIZABLE"
-  "SERIALIZE-HIDDEN"
   "SERIALIZE-NAME"
   "SERVER"
   "SERVER-SOCKET"
@@ -618,20 +677,15 @@
   "SET-BYTE-ORDER"
   "SET-POINTER-VALUE"
   "SET-SIZE"
-  "SHARE"
   "SHARE-LOCK"
   "SHOW-STATS"
   "SIGNATURE"
   "SILENT"
-  "SIMPLE"
   "SINGLE"
-  "SINGLE-RUN"
-  "SINGLETON"
   "SIZE"
   "SIZE-CHARS"
   "SIZE-PIXELS"
   "SKIP"
-  "SKIP-GROUP-DUPLICATES"
   "SLIDER"
   "SOAP-HEADER"
   "SOAP-HEADER-ENTRYREF"
@@ -640,11 +694,8 @@
   "SOURCE"
   "SOURCE-PROCEDURE"
   "SPACE"
-  "SQL"
   "STARTING"
-  "STATIC"
   "STATUS"
-  "STDCALL"
   "STOP"
   "STOP-AFTER"
   "STORED-PROC"
@@ -658,7 +709,6 @@
   "SUB-COUNT"
   "SUB-MAXIMUM"
   "SUB-MENU"
-  "SUB-MENU-HELP"
   "SUB-MINIMUM"
   "SUB-TOTAL"
   "SUBSCRIBE"
@@ -667,7 +717,6 @@
   "SYSTEM-HELP"
   "TABLE"
   "TABLE-HANDLE"
-  "TABLE-SCAN"
   "TARGET"
   "TARGET-PROCEDURE"
   "TEMP-TABLE"
@@ -679,7 +728,6 @@
   "THEN"
   "THIS-OBJECT"
   "THIS-PROCEDURE"
-  "THREAD-SAFE"
   "THROUGH"
   "THROW"
   "TIC-MARKS"
@@ -691,7 +739,6 @@
   "TOP"
   "TOPIC"
   "TOTAL"
-  "TRANSACTION"
   "TRANSACTION-MODE"
   "TRANSPARENT"
   "TRIGGER"
@@ -704,8 +751,6 @@
   "UNDERLINE-"
   "UNDO"
   "UNFORMATTED"
-  "UNIQUE"
-  "UNIQUE-MATCH"
   "UNIX"
   "UNLESS-HIDDEN"
   "UNLOAD"
@@ -716,16 +761,12 @@
   "USE"
   "USE-FILENAME"
   "USE-INDEX"
-  "USE-REVVIDEO"
-  "USE-UNDERLINE"
-  "USE-WIDGET-POOL"
   "USING"
   "V6FRAME"
   "VALIDATE"
   "VALUE"
   "VAR"
   "VARIABLE"
-  "VERBOSE"
   "VERTICAL"
   "VIEW"
   "VIEW-AS"
@@ -740,7 +781,6 @@
   "WIDTH"
   "WINDOW"
   "WITH"
-  "WORD-INDEX"
   "WORK-TABLE"
   "WORKFILE"
   "WRITE"

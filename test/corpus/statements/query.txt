@@ -190,13 +190,15 @@ DEF QUERY qScroll2 FOR Sales.Order SCROLLING.
   (query_definition
     name: (identifier)
     (query_table_list
-      table: (identifier)))
+      table: (identifier))
+    (scrolling))
   (query_definition
     name: (identifier)
     (query_table_list
       table: (qualified_name
         left: (identifier)
-        right: (identifier)))))
+        right: (identifier)))
+    (scrolling)))
 
 ================================================================================
 QUERY DEFINITION - RCODE-INFORMATION Option
@@ -211,13 +213,16 @@ DEF QUERY qRcode2 FOR Sales.Order SCROLLING RCODE-INFORMATION.
   (query_definition
     name: (identifier)
     (query_table_list
-      table: (identifier)))
+      table: (identifier))
+    (rcode_information))
   (query_definition
     name: (identifier)
     (query_table_list
       table: (qualified_name
         left: (identifier)
-        right: (identifier)))))
+        right: (identifier)))
+    (scrolling)
+    (rcode_information)))
 
 ================================================================================
 QUERY DEFINITION - All Options Combined
@@ -238,7 +243,9 @@ DEFINE QUERY qFull FOR Customer FIELDS (CustNum, Name)
       (field_list
         (identifier)
         (identifier)))
-    cache: (number_literal)))
+    cache: (number_literal)
+    (scrolling)
+    (rcode_information)))
 
 ================================================================================
 QUERY DEFINITION - Shared Scopes
@@ -414,7 +421,9 @@ DEFINE QUERY qComplex FOR Customer FIELDS (CustNum, Name)
       (field_list
         (identifier)
         (identifier)))
-    cache: (number_literal)))
+    cache: (number_literal)
+    (scrolling)
+    (rcode_information)))
 
 ================================================================================
 QUERY DEFINITION - reference snippets
@@ -489,13 +498,11 @@ DEFINE QUERY qExceptAll FOR Customer EXCEPT ().
     title: (string_literal))
   (button_definition
     name: (identifier)
-    (button_option
-      label: (string_literal)))
+    label: (string_literal))
   (button_definition
     name: (identifier)
-    (button_option
-      label: (string_literal))
-    (button_option))
+    label: (string_literal)
+    (auto_endkey))
   (form_statement
     (form_item
       field: (qualified_name
@@ -521,7 +528,7 @@ DEFINE QUERY qExceptAll FOR Customer EXCEPT ().
     (form_item
       field: (identifier))
     (form_item
-      (number_literal))
+      space: (number_literal))
     (form_item
       field: (identifier))
     (frame_phrase
@@ -546,7 +553,8 @@ DEFINE QUERY qExceptAll FOR Customer EXCEPT ().
   (open_query_statement
     query: (identifier)
     (record_phrase
-      record: (identifier)))
+      record: (identifier)
+      lock: (no_lock)))
   (get_statement
     query: (identifier))
   (run_statement
@@ -592,7 +600,8 @@ DEFINE QUERY qExceptAll FOR Customer EXCEPT ().
         query: (identifier)
         (record_phrase
           record: (identifier)
-          of: (identifier)))))
+          of: (identifier)
+          lock: (no_lock)))))
   (variable_definition
     name: (identifier)
     type: (identifier)
@@ -600,7 +609,8 @@ DEFINE QUERY qExceptAll FOR Customer EXCEPT ().
   (query_definition
     name: (identifier)
     (query_table_list
-      table: (identifier)))
+      table: (identifier))
+    (rcode_information))
   (assignment_statement
     left: (identifier)
     operator: (assignment_operator)

@@ -32,6 +32,7 @@ SET field1 GO-ON(f1 f2).
         (identifier)
         (number_literal))))
   (set_statement
+    (unless_hidden)
     (field
       field: (identifier)))
   (set_statement
@@ -63,9 +64,11 @@ SET field1 GO-ON(f1 f2).
   (set_statement
     (field
       field: (identifier))
+    (go_on_phrase)
+    (go_on_phrase)
     (go_on_phrase
-      (identifier)
-      (identifier))))
+      (identifier))
+    (go_on_phrase)))
 
 ================================================================================
 SET GO-ON with comma-separated strings
@@ -79,9 +82,11 @@ SET field1 GO-ON("F5","CTRL-D").
   (set_statement
     (field
       field: (identifier))
+    (go_on_phrase)
+    (go_on_phrase)
     (go_on_phrase
-      (string_literal)
-      (string_literal))))
+      (string_literal))
+    (go_on_phrase)))
 
 ================================================================================
 SET with format, text, constants, and editing
@@ -111,7 +116,7 @@ SET field1 FORMAT "x(10)" WHEN ok
         format: (string_literal)))
     (field
       constant: (string_literal)
-      (at_phrase))
+      position: (at_phrase))
     (field
       field: (identifier)
       value: (number_literal))
@@ -282,7 +287,7 @@ SET Customer EXCEPT Comments WITH FRAME fCust NO-ERROR.
     (form_item
       field: (number_literal))
     (form_item
-      (number_literal))
+      skip: (number_literal))
     (form_item
       field: (string_literal))
     (form_item
@@ -299,7 +304,8 @@ SET Customer EXCEPT Comments WITH FRAME fCust NO-ERROR.
   (for_statement
     (record
       (record
-        record: (identifier)))
+        record: (identifier)
+        (no_lock)))
     (record
       (record
         record: (identifier)
@@ -352,14 +358,16 @@ SET Customer EXCEPT Comments WITH FRAME fCust NO-ERROR.
       field: (identifier))
     (field
       (space_phrase
-        (number_literal)))
+        space: (number_literal)))
     (field
       (skip_phrase
-        (number_literal)))
+        skip: (number_literal)))
     (field)
+    (go_on_phrase)
+    (go_on_phrase)
     (go_on_phrase
-      (identifier)
-      (identifier)))
+      (identifier))
+    (go_on_phrase))
   (set_statement
     record: (identifier)
     except: (identifier)

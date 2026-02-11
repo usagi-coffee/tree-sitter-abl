@@ -34,8 +34,8 @@ module.exports = ({ kw }) => ({
           ),
           optional(alias($.__form_view_as, $.view_as_phrase)),
         ),
-        seq(kw("SKIP"), optional(seq("(", $._expression, ")"))),
-        seq(kw("SPACE"), optional(seq("(", $._expression, ")"))),
+        seq(kw("SKIP"), optional(field("skip", seq("(", $._expression, ")")))),
+        seq(kw("SPACE"), optional(field("space", seq("(", $._expression, ")")))),
       ),
     ),
 

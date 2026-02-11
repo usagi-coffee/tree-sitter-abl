@@ -8,8 +8,8 @@ module.exports = ({ kw }) => ({
           choice($.identifier, $.string_literal, $.function_call),
         ),
       ),
-      repeat(alias($.__connect_option, $.connect_option)),
-      optional(kw("NO-ERROR")),
+      repeat($.__connect_option),
+      optional(alias(kw("NO-ERROR"), $.no_error)),
       $._terminator,
     ),
 

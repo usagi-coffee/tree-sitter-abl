@@ -65,7 +65,7 @@ END.
 
 (source_code
   (do_statement
-    (binary_expression
+    condition: (binary_expression
       (identifier)
       (number_literal))
     (body
@@ -76,7 +76,7 @@ END.
           (identifier)
           (number_literal)))))
   (do_statement
-    (unary_expression
+    condition: (unary_expression
       (identifier))
     (body
       (assignment_statement
@@ -96,7 +96,7 @@ END.
 
 (source_code
   (do_statement
-    (binary_expression
+    condition: (binary_expression
       (identifier)
       (number_literal))
     (on_error_phrase)
@@ -181,8 +181,10 @@ END.
 
 (source_code
   (do_statement
+    (transaction)
     (body))
   (do_statement
+    (transaction)
     (body
       (create_statement
         table: (identifier))
@@ -205,7 +207,8 @@ END.
 
 (source_code
   (do_statement
-    (function_call
+    (transaction)
+    condition: (function_call
       function: (object_access
         left: (identifier)
         right: (identifier))
@@ -310,7 +313,7 @@ END.
 (source_code
   (do_statement
     label: (identifier)
-    (boolean_literal)
+    condition: (boolean_literal)
     (on_endkey_phrase
       undo_label: (identifier)
       leave_label: (identifier))
@@ -384,8 +387,9 @@ END.
 
 (source_code
   (do_statement
-    (for_phrase
-      record: (identifier))
+    record: (for_phrase
+      (identifier))
+    (transaction)
     (stop_after_phrase
       time: (number_literal))
     (on_error_phrase)
@@ -407,11 +411,24 @@ END.
 
 (source_code
   (do_statement
+    record: (for_phrase
+      (identifier))
     (for_phrase
-      record: (identifier)
       record: (identifier))
     (query_tuning_phrase
-      cache_size: (number_literal))
+      (lookahead)
+      (no_lookahead)
+      cache_size: (number_literal)
+      (index_hint)
+      (no_index_hint)
+      (separate_connection)
+      (no_separate_connection)
+      (sql)
+      (no_debug)
+      (join_by_sqldb)
+      (no_join_by_sqldb)
+      (bind_where)
+      (no_bind_where))
     (frame_phrase
       width: (number_literal))
     (body
@@ -434,7 +451,8 @@ END.
       (preselect_record_list
         (preselect_record
           (record_phrase
-            record: (identifier)))))
+            record: (identifier)
+            (no_lock)))))
     (body
       (display_statement
         record: (qualified_name
@@ -460,7 +478,8 @@ END.
   (for_statement
     (record
       (record
-        (identifier)))
+        (identifier)
+        (no_lock)))
     (body
       (display_statement
         (field

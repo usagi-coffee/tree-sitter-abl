@@ -11,7 +11,8 @@ UNSUBSCRIBE TO "MyEvent" IN hPub.
 (source_code
   (unsubscribe_statement
     event: (string_literal))
-  (unsubscribe_statement)
+  (unsubscribe_statement
+    (all))
   (unsubscribe_statement
     event: (string_literal)
     publisher: (identifier)))
@@ -45,7 +46,8 @@ UNSUBSCRIBE ALL IN hPub.
         (string_literal)
         (identifier)
         (view_as_phrase))
-      (unsubscribe_statement)))
+      (unsubscribe_statement
+        (all))))
   (unsubscribe_statement
     (identifier)
     (string_literal)
@@ -54,4 +56,5 @@ UNSUBSCRIBE ALL IN hPub.
     (identifier)
     (identifier))
   (unsubscribe_statement
+    (all)
     (identifier)))

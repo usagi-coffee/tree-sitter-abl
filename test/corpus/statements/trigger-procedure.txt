@@ -44,6 +44,7 @@ TRIGGER PROCEDURE FOR REPLICATION-CREATE OF Customer.
     data_type: (identifier)
     format: (string_literal)
     label: (string_literal)
+    (no_undo)
     value: (identifier)
     data_type: (identifier)
     label: (string_literal))

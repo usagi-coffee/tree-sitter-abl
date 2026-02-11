@@ -9,7 +9,7 @@ module.exports = ({ kw }) => ({
 
   __input_output_body: ($) =>
     choice(
-      kw("CLOSE"),
+      alias(kw("CLOSE"), $.close),
       seq(
         kw("THROUGH"),
         $.__input_output_through_target,
@@ -36,17 +36,17 @@ module.exports = ({ kw }) => ({
 
   __input_output_through_option: ($) =>
     choice(
-      kw("ECHO"),
-      kw("NO-ECHO"),
+      alias(kw("ECHO"), $.echo),
+      alias(kw("NO-ECHO"), $.no_echo),
       seq(kw("MAP"), field("map", choice($.identifier, $.string_literal))),
-      kw("NO-MAP"),
-      kw("UNBUFFERED"),
+      alias(kw("NO-MAP"), $.no_map),
+      alias(kw("UNBUFFERED"), $.unbuffered),
       alias($.__input_output_convert_phrase, $.convert_phrase),
     ),
 
   __input_output_convert_phrase: ($) =>
     choice(
-      kw("NO-CONVERT"),
+      alias(kw("NO-CONVERT"), $.no_convert),
       seq(
         kw("CONVERT"),
         repeat(

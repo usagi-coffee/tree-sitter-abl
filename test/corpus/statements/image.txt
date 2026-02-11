@@ -529,8 +529,7 @@ UPDATE animate WITH FRAME y.
     (no_undo))
   (button_definition
     (identifier)
-    (button_option
-      (string_literal)))
+    (string_literal))
   (image_definition
     (identifier)
     (image_phrase

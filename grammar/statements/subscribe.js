@@ -14,12 +14,12 @@ module.exports = ({ kw }) => ({
       field("event", $.__subscribe_expression),
       choice(
         seq(kw("IN"), field("publisher", $.__subscribe_expression)),
-        kw("ANYWHERE"),
+        alias(kw("ANYWHERE"), $.anywhere),
       ),
       optional(
         seq(kw("RUN-PROCEDURE"), field("procedure", $.__subscribe_expression)),
       ),
-      optional(kw("NO-ERROR")),
+      optional(alias(kw("NO-ERROR"), $.no_error)),
     ),
   __subscribe_expression: ($) =>
     choice(

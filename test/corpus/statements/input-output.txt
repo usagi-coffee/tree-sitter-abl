@@ -9,11 +9,14 @@ INPUT-OUTPUT STREAM-HANDLE hStream CLOSE.
 --------------------------------------------------------------------------------
 
 (source_code
-  (input_output_statement)
   (input_output_statement
-    stream: (identifier))
+    (close))
   (input_output_statement
-    stream: (identifier)))
+    stream: (identifier)
+    (close))
+  (input_output_statement
+    stream: (identifier)
+    (close)))
 
 ================================================================================
 INPUT-OUTPUT THROUGH
@@ -34,10 +37,12 @@ INPUT-OUTPUT STREAM sIO THROUGH "filter" UNBUFFERED.
     (identifier)
     (identifier))
   (input_output_statement
-    (identifier))
+    (identifier)
+    (no_echo))
   (input_output_statement
     stream: (identifier)
-    program: (string_literal)))
+    program: (string_literal)
+    (unbuffered)))
 
 ================================================================================
 INPUT-OUTPUT THROUGH - MAP and NO-CONVERT variants
@@ -53,10 +58,12 @@ INPUT-OUTPUT THROUGH myprog VALUE(arg1) NO-MAP CONVERT TARGET "utf-8".
     stream: (identifier)
     (identifier)
     map: (string_literal)
-    (convert_phrase))
+    (convert_phrase
+      (no_convert)))
   (input_output_statement
     program: (identifier)
     (identifier)
+    (no_map)
     (convert_phrase
       target: (string_literal))))
 
@@ -70,7 +77,8 @@ INPUT-OUTPUT THROUGH "filter" ECHO.
 
 (source_code
   (input_output_statement
-    program: (string_literal)))
+    program: (string_literal)
+    (echo)))
 
 ================================================================================
 INPUT-OUTPUT - Reference snippets
@@ -118,7 +126,8 @@ INPUT-OUTPUT STREAM sIO THROUGH "filter" CONVERT SOURCE "ibm850" TARGET "utf-8".
         (format_phrase
           (string_literal)))))
   (input_output_statement
-    (identifier))
+    (identifier)
+    (unbuffered))
   (for_statement
     (record
       (record
@@ -138,7 +147,8 @@ INPUT-OUTPUT STREAM sIO THROUGH "filter" CONVERT SOURCE "ibm850" TARGET "utf-8".
           (qualified_name
             (identifier)
             (identifier))))))
-  (input_output_statement)
+  (input_output_statement
+    (close))
   (for_statement
     (record
       (record
@@ -163,11 +173,14 @@ INPUT-OUTPUT STREAM sIO THROUGH "filter" CONVERT SOURCE "ibm850" TARGET "utf-8".
         (format_phrase
           (string_literal)))))
   (input_output_statement
-    (identifier))
+    (identifier)
+    (no_echo))
   (input_output_statement
     (identifier)
     (string_literal)
-    (convert_phrase))
+    (unbuffered)
+    (convert_phrase
+      (no_convert)))
   (input_output_statement
     (identifier)
     (string_literal)

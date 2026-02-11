@@ -20,15 +20,18 @@ END CASE.
       (do_statement
         (body
           (put_statement
+            (unformatted)
             (string_literal)
             (skip)))))
     (case_when_phrase
       (string_literal)
       (put_statement
+        (unformatted)
         (string_literal)
         (skip)))
     (case_otherwise_phrase
       (put_statement
+        (unformatted)
         (string_literal)
         (skip)))))
 
@@ -77,8 +80,7 @@ END CASE.
     name: (identifier)
     type: (identifier)
     (no_undo)
-    (initial_option
-      (number_literal)))
+    (number_literal))
   (case_statement
     (identifier)
     (case_when_phrase

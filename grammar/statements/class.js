@@ -142,9 +142,12 @@ module.exports = ({ kw }) => ({
       $.__property_type_phrase,
       repeat(
         choice(
-          alias($.__property_initial_option, $.initial_option),
+          seq(
+            kw("INITIAL", { offset: 4 }),
+            choice($._expression, seq("[", optional($._expressions), "]")),
+          ),
           seq(kw("SERIALIZE-NAME"), field("serialize_name", $.string_literal)),
-          alias($.__property_no_undo, $.no_undo),
+          $.__property_no_undo,
         ),
       ),
       repeat1(choice($.__property_get_phrase, $.__property_set_phrase)),
@@ -198,14 +201,18 @@ module.exports = ({ kw }) => ({
         field("interface", $._type_name),
         repeat(seq(",", field("interface", $._type_name))),
       ),
-      kw("USE-WIDGET-POOL"),
-      kw("ABSTRACT"),
-      kw("FINAL"),
-      kw("SERIALIZABLE"),
+      alias(kw("USE-WIDGET-POOL"), $.use_widget_pool),
+      alias(kw("ABSTRACT"), $.abstract),
+      alias(kw("FINAL"), $.final),
+      alias(kw("SERIALIZABLE"), $.serializable),
     ),
 
   __property_modifier: ($) =>
-    choice(kw("ABSTRACT"), kw("FINAL"), kw("OVERRIDE")),
+    choice(
+      alias(kw("ABSTRACT"), $.abstract_modifier),
+      alias(kw("FINAL"), $.final_modifier),
+      alias(kw("OVERRIDE"), $.override_modifier),
+    ),
   __property_definition_modifier: ($) =>
     choice(
       seq(
@@ -254,51 +261,43 @@ module.exports = ({ kw }) => ({
       optional($.__method_extent_phrase),
     ),
 
-  __property_initial_option: ($) =>
-    seq(
-      $.__property_initial_keyword,
-      choice($._expression, seq("[", optional($._expressions), "]")),
-    ),
-
-  __property_initial_keyword: ($) => kw("INITIAL", { offset: 4 }),
-
-  __property_no_undo: ($) => kw("NO-UNDO"),
+  __property_no_undo: ($) => alias(kw("NO-UNDO"), $.no_undo),
 
   __method_modifier: ($) =>
     choice(
-      kw("PRIVATE"),
-      kw("PACKAGE-PRIVATE"),
-      kw("PROTECTED"),
-      kw("PACKAGE-PROTECTED"),
-      kw("PUBLIC"),
-      kw("STATIC"),
-      kw("ABSTRACT"),
-      kw("OVERRIDE"),
-      kw("FINAL"),
+      alias(kw("PRIVATE"), $.access_modifier),
+      alias(kw("PACKAGE-PRIVATE"), $.access_modifier),
+      alias(kw("PROTECTED"), $.access_modifier),
+      alias(kw("PACKAGE-PROTECTED"), $.access_modifier),
+      alias(kw("PUBLIC"), $.access_modifier),
+      alias(kw("STATIC"), $.static_modifier),
+      alias(kw("ABSTRACT"), $.abstract_modifier),
+      alias(kw("OVERRIDE"), $.override_modifier),
+      alias(kw("FINAL"), $.final_modifier),
     ),
   __method_modifier_no_abstract: ($) =>
     choice(
-      kw("PRIVATE"),
-      kw("PACKAGE-PRIVATE"),
-      kw("PROTECTED"),
-      kw("PACKAGE-PROTECTED"),
-      kw("PUBLIC"),
-      kw("STATIC"),
-      kw("OVERRIDE"),
-      kw("FINAL"),
+      alias(kw("PRIVATE"), $.access_modifier),
+      alias(kw("PACKAGE-PRIVATE"), $.access_modifier),
+      alias(kw("PROTECTED"), $.access_modifier),
+      alias(kw("PACKAGE-PROTECTED"), $.access_modifier),
+      alias(kw("PUBLIC"), $.access_modifier),
+      alias(kw("STATIC"), $.static_modifier),
+      alias(kw("OVERRIDE"), $.override_modifier),
+      alias(kw("FINAL"), $.final_modifier),
     ),
 
   __constructor_modifier: ($) =>
     choice(
-      kw("PRIVATE"),
-      kw("PACKAGE-PRIVATE"),
-      kw("PROTECTED"),
-      kw("PACKAGE-PROTECTED"),
-      kw("PUBLIC"),
-      kw("STATIC"),
+      alias(kw("PRIVATE"), $.access_modifier),
+      alias(kw("PACKAGE-PRIVATE"), $.access_modifier),
+      alias(kw("PROTECTED"), $.access_modifier),
+      alias(kw("PACKAGE-PROTECTED"), $.access_modifier),
+      alias(kw("PUBLIC"), $.access_modifier),
+      alias(kw("STATIC"), $.static_modifier),
     ),
 
-  __destructor_access: ($) => kw("PUBLIC"),
+  __destructor_access: ($) => alias(kw("PUBLIC"), $.access_modifier),
 
   __method_return_type: ($) =>
     choice(
@@ -359,7 +358,16 @@ module.exports = ({ kw }) => ({
     ),
   __method_record_name: ($) => $._identifier_or_qualified_name,
   __method_table_parameter_option: ($) =>
-    choice(kw("APPEND"), kw("BIND"), kw("BY-VALUE"), kw("BY-REFERENCE")),
+    choice(
+      alias(kw("APPEND"), $.append),
+      alias(kw("BIND"), $.bind),
+      alias(kw("BY-VALUE"), $.by_value),
+      alias(kw("BY-REFERENCE"), $.by_reference),
+    ),
   __method_handle_parameter_option: ($) =>
-    choice(kw("BIND"), kw("BY-VALUE"), kw("BY-REFERENCE")),
+    choice(
+      alias(kw("BIND"), $.bind),
+      alias(kw("BY-VALUE"), $.by_value),
+      alias(kw("BY-REFERENCE"), $.by_reference),
+    ),
 });

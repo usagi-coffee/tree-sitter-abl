@@ -11,11 +11,13 @@ OPEN QUERY qCust FOR EACH Customer NO-LOCK BY Customer.Name.
   (open_query_statement
     query: (identifier)
     (record_phrase
-      record: (identifier)))
+      record: (identifier)
+      lock: (no_lock)))
   (open_query_statement
     query: (identifier)
     (record_phrase
-      record: (identifier))
+      record: (identifier)
+      lock: (no_lock))
     (by_phrase
       by: (qualified_name
         left: (identifier)
@@ -56,6 +58,7 @@ OPEN QUERY q1 FOR EACH tr_hist NO-LOCK WHERE tr_type = "RCT-TR" BY tr_trnbr.
       where: (binary_expression
         (identifier)
         (string_literal))
+      lock: (no_lock)
       index: (identifier))
     (by_phrase
       by: (identifier)))
@@ -63,6 +66,7 @@ OPEN QUERY q1 FOR EACH tr_hist NO-LOCK WHERE tr_type = "RCT-TR" BY tr_trnbr.
     query: (identifier)
     (record_phrase
       record: (identifier)
+      lock: (no_lock)
       where: (binary_expression
         (identifier)
         (string_literal)))
@@ -125,11 +129,12 @@ OPEN QUERY qCust FOR EACH Customer QUERY-TUNING(JOIN-BY-SQLDB NO-BIND-WHERE) NO-
       of: (identifier))
     (record_phrase
       record: (identifier)
-      of: (identifier)))
+      of: (identifier)
+      lock: (no_lock)))
   (get_statement
     query: (identifier))
   (do_statement
-    (available_expression
+    condition: (available_expression
       record: (identifier))
     (body
       (display_statement
@@ -213,19 +218,24 @@ OPEN QUERY qCust FOR EACH Customer QUERY-TUNING(JOIN-BY-SQLDB NO-BIND-WHERE) NO-
     query: (identifier)
     (record_phrase
       record: (identifier))
+    (break)
     (by_phrase
       by: (qualified_name
         left: (identifier)
-        right: (identifier))))
+        right: (identifier)))
+    lock: (no_lock))
   (open_query_statement
     query: (identifier)
     (record_phrase
-      record: (identifier))
+      record: (identifier)
+      lock: (no_lock))
+    (indexed_reposition)
     max_rows: (number_literal))
   (open_query_statement
     query: (identifier)
     (record_phrase
-      record: (identifier)))
+      record: (identifier)
+      lock: (no_lock)))
   (open_query_statement
     query: (identifier)
     (record_phrase
@@ -249,27 +259,42 @@ OPEN QUERY qCust FOR EACH Customer QUERY-TUNING(JOIN-BY-SQLDB NO-BIND-WHERE) NO-
           left: (identifier)
           right: (identifier))
         (number_literal))
-      index: (identifier)))
+      index: (identifier)
+      lock: (share_lock)))
   (open_query_statement
     query: (identifier)
     (record_phrase
-      record: (identifier)))
+      record: (identifier)
+      lock: (exclusive_lock)))
   (open_query_statement
     query: (identifier)
     (record_phrase
       record: (identifier))
     (record_phrase
       record: (identifier)
-      of: (identifier)))
+      of: (identifier)
+      lock: (no_lock)))
   (open_query_statement
     query: (identifier)
     (record_phrase
       record: (identifier))
     (query_tuning_phrase
-      cache_size: (number_literal)))
+      (lookahead)
+      cache_size: (number_literal)
+      (separate_connection)
+      (no_separate_connection)
+      (sql)
+      (no_debug)
+      (no_join_by_sqldb)
+      (no_lookahead)
+      (no_index_hint)))
   (open_query_statement
     query: (identifier)
     (record_phrase
       record: (identifier))
-    (query_tuning_phrase)
+    (query_tuning_phrase
+      (join_by_sqldb)
+      (no_bind_where))
+    lock: (no_lock)
+    (indexed_reposition)
     max_rows: (number_literal)))

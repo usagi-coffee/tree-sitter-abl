@@ -36,7 +36,7 @@ module.exports = ({ kw }) => ({
       repeat(
         choice(
           seq(kw("LABEL"), field("label", $.string_literal)),
-          kw("DISABLED"),
+          alias(kw("DISABLED"), $.disabled),
           seq(kw("ACCELERATOR"), field("accelerator", $.string_literal)),
         ),
       ),
@@ -46,7 +46,7 @@ module.exports = ({ kw }) => ({
     seq(
       kw("SUB-MENU"),
       field("name", $.identifier),
-      optional(kw("DISABLED")),
+      optional(alias(kw("DISABLED"), $.disabled)),
       optional(seq(kw("LABEL"), field("label", $.string_literal))),
     ),
   __menu_modifier: ($) =>

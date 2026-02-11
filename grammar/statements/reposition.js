@@ -14,17 +14,17 @@ module.exports = ({ kw }) => ({
           optional(
             seq(kw("FOR"), kw("TENANT"), field("tenant", $._expression)),
           ),
-          optional(kw("NO-ERROR")),
+          optional(alias(kw("NO-ERROR"), $.no_error)),
         ),
         seq(
           kw("TO"),
           kw("RECID"),
           field("recid", $._expression),
-          optional(kw("NO-ERROR")),
+          optional(alias(kw("NO-ERROR"), $.no_error)),
         ),
         seq(kw("TO"), kw("ROW"), field("row", $._expression)),
-        seq(kw("FORWARDS"), field("count", $._expression)),
-        seq(kw("BACKWARDS"), field("count", $._expression)),
+        seq(alias(kw("FORWARDS"), $.forwards), field("count", $._expression)),
+        seq(alias(kw("BACKWARDS"), $.backwards), field("count", $._expression)),
       ),
     ),
 });

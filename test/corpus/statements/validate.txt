@@ -50,10 +50,9 @@ VALIDATE sports.Item NO-ERROR.
             (identifier))))
       (find_statement
         (identifier)
-        (using_phrase
-          (qualified_name
-            (identifier)
-            (identifier)))
+        (qualified_name
+          (identifier)
+          (identifier))
         (no_error))
       (if_statement
         (unary_expression

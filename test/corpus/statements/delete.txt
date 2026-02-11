@@ -18,13 +18,17 @@ DELETE Customer VALIDATE (Customer.CustNum > 0, "Bad") NO-ERROR.
     record: (identifier))
   (delete_statement
     record: (identifier)
-    (validate_option
+    (validate)
+    condition: (validate
       (binary_expression
         (qualified_name
           left: (identifier)
           right: (identifier))
-        (number_literal))
-      (string_literal))))
+        (number_literal)))
+    (validate)
+    message: (validate
+      (string_literal))
+    (validate)))
 
 ================================================================================
 DELETE with qualified name
@@ -89,7 +93,8 @@ END.
           (qualified_name
             left: (identifier)
             right: (identifier))
-          (number_literal))))
+          (number_literal))
+        (exclusive_lock)))
     (body
       (delete_statement
         record: (identifier)))))
@@ -107,11 +112,12 @@ END.
 
 (source_code
   (do_statement
+    (transaction)
     (body
       (find_statement
         table: (identifier)
         (where_phrase
-          (binary_expression
+          where: (binary_expression
             (qualified_name
               left: (identifier)
               right: (identifier))
@@ -158,11 +164,15 @@ DELETE Customer VALIDATE(NOT(CAN-FIND(Order OF Customer)),
         record: (identifier))))
   (delete_statement
     record: (identifier)
-    (validate_option
+    (validate)
+    condition: (validate
       (unary_expression
         (parenthesized_expression
           (can_find_expression
             table: (identifier)
             (of_phrase
-              record: (identifier)))))
-      (string_literal))))
+              record: (identifier))))))
+    (validate)
+    message: (validate
+      (string_literal))
+    (validate)))

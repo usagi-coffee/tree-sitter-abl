@@ -20,8 +20,8 @@ module.exports = ({ kw }) => ({
         seq(kw("SERIALIZE-NAME"), field("serialize_name", $._expression)),
       ),
       optional(seq(kw("XML-NODE-TYPE"), field("xml_node_type", $._expression))),
-      optional(kw("SERIALIZE-HIDDEN")),
-      optional(kw("REFERENCE-ONLY")),
+      optional(alias(kw("SERIALIZE-HIDDEN"), $.serialize_hidden)),
+      optional(alias(kw("REFERENCE-ONLY"), $.reference_only)),
       optional(
         seq(
           kw("FOR"),
@@ -57,10 +57,15 @@ module.exports = ({ kw }) => ({
         ),
         ")",
       ),
-      optional(kw("REPOSITION")),
-      optional(seq(kw("NESTED"), optional(kw("FOREIGN-KEY-HIDDEN")))),
-      optional(kw("NOT-ACTIVE")),
-      optional(kw("RECURSIVE")),
+      optional(alias(kw("REPOSITION"), $.reposition)),
+      optional(
+        seq(
+          alias(kw("NESTED"), $.nested),
+          optional(alias(kw("FOREIGN-KEY-HIDDEN"), $.foreign_key_hidden)),
+        ),
+      ),
+      optional(alias(kw("NOT-ACTIVE"), $.not_active)),
+      optional(alias(kw("RECURSIVE"), $.recursive)),
     ),
 
   __dataset_parent_id_relation: ($) =>

@@ -63,15 +63,15 @@ DEFINE FRAME strings
 (source_code
   (frame_definition
     name: (identifier)
-    (string_literal)
+    value: (string_literal)
     field: (qualified_name
       left: (identifier)
       right: (identifier))
-    (string_literal)
+    value: (string_literal)
     field: (qualified_name
       left: (identifier)
       right: (identifier))
-    (string_literal)
+    value: (string_literal)
     field: (qualified_name
       left: (identifier)
       right: (identifier)
@@ -89,11 +89,13 @@ DEF FRAME space2 SPACE.
 (source_code
   (frame_definition
     name: (identifier)
-    (string_literal)
-    (number_literal)
-    (number_literal))
+    (space)
+    value: (string_literal)
+    value: (number_literal)
+    value: (number_literal))
   (frame_definition
-    name: (identifier)))
+    name: (identifier)
+    (space)))
 
 ================================================================================
 FRAME - SKIP clause
@@ -107,9 +109,11 @@ DEF FRAME skip2 SKIP.
 (source_code
   (frame_definition
     name: (identifier)
-    (number_literal))
+    (skip)
+    value: (number_literal))
   (frame_definition
-    name: (identifier)))
+    name: (identifier)
+    (skip)))
 
 ================================================================================
 FRAME - HEADER with string
@@ -122,7 +126,8 @@ DEFINE FRAME headered HEADER "Customer Header".
 (source_code
   (frame_definition
     name: (identifier)
-    (string_literal)))
+    (header)
+    value: (string_literal)))
 
 ================================================================================
 FRAME - BACKGROUND with SPACE
@@ -137,7 +142,8 @@ DEFINE FRAME bg1
 (source_code
   (frame_definition
     name: (identifier)
-    (number_literal))
+    (background)
+    value: (number_literal))
   (expression_statement
     (qualified_name
       left: (identifier)
@@ -300,7 +306,7 @@ DEFINE FRAME atCol
 (source_code
   (frame_definition
     name: (identifier)
-    (string_literal)
+    value: (string_literal)
     (at_phrase
       column_of: (qualified_name
         left: (identifier)
@@ -308,7 +314,7 @@ DEFINE FRAME atCol
     field: (qualified_name
       left: (identifier)
       right: (identifier))
-    (string_literal)
+    value: (string_literal)
     (at_phrase
       column_of: (qualified_name
         left: (identifier)
@@ -329,7 +335,7 @@ DEFINE FRAME atRow
 (source_code
   (frame_definition
     name: (identifier)
-    (string_literal)
+    value: (string_literal)
     (at_phrase
       row_of: (qualified_name
         left: (identifier)
@@ -357,7 +363,7 @@ DEF FRAME atSimple2 "Label: " Customer.Name AT ROW 2 COLUMN 10.
       column: (number_literal)))
   (frame_definition
     name: (identifier)
-    (string_literal)
+    value: (string_literal)
     field: (qualified_name
       left: (identifier)
       right: (identifier))
@@ -419,8 +425,8 @@ DEFINE FRAME strBg
 (source_code
   (frame_definition
     name: (identifier)
-    (string_literal)
-    (number_literal)
+    value: (string_literal)
+    bgcolor: (number_literal)
     field: (qualified_name
       left: (identifier)
       right: (identifier))))
@@ -438,8 +444,8 @@ DEFINE FRAME strDc
 (source_code
   (frame_definition
     name: (identifier)
-    (string_literal)
-    (number_literal)
+    value: (string_literal)
+    dcolor: (number_literal)
     field: (qualified_name
       left: (identifier)
       right: (identifier))))
@@ -457,8 +463,8 @@ DEFINE FRAME strFg
 (source_code
   (frame_definition
     name: (identifier)
-    (string_literal)
-    (number_literal)
+    value: (string_literal)
+    fgcolor: (number_literal)
     field: (qualified_name
       left: (identifier)
       right: (identifier))))
@@ -476,8 +482,8 @@ DEFINE FRAME strPf
 (source_code
   (frame_definition
     name: (identifier)
-    (string_literal)
-    (number_literal)
+    value: (string_literal)
+    pfcolor: (number_literal)
     field: (qualified_name
       left: (identifier)
       right: (identifier))))
@@ -495,8 +501,8 @@ DEFINE FRAME strFont
 (source_code
   (frame_definition
     name: (identifier)
-    (string_literal)
-    (number_literal)
+    value: (string_literal)
+    font: (number_literal)
     field: (qualified_name
       left: (identifier)
       right: (identifier))))
@@ -512,7 +518,7 @@ DEFINE FRAME fStr "Test".
 (source_code
   (frame_definition
     name: (identifier)
-    (string_literal)))
+    value: (string_literal)))
 
 ================================================================================
 FRAME - NEW SHARED
@@ -727,7 +733,8 @@ WAIT-FOR WINDOW-CLOSE OF FRAME cust-fr.
   (for_statement
     (record
       (record
-        (identifier)))
+        (identifier)
+        (no_lock)))
     (frame_phrase
       (identifier))
     (body
@@ -759,17 +766,14 @@ WAIT-FOR WINDOW-CLOSE OF FRAME cust-fr.
         (identifier))))
   (button_definition
     (identifier)
-    (button_option
-      (string_literal)))
+    (string_literal))
   (button_definition
     (identifier)
-    (button_option
-      (string_literal)))
+    (string_literal))
   (button_definition
     (identifier)
-    (button_option
-      (string_literal))
-    (button_option))
+    (string_literal)
+    (auto_endkey))
   (frame_definition
     (identifier)
     (qualified_name
@@ -898,12 +902,10 @@ WAIT-FOR WINDOW-CLOSE OF FRAME cust-fr.
       (identifier)))
   (button_definition
     (identifier)
-    (button_option
-      (string_literal)))
+    (string_literal))
   (button_definition
     (identifier)
-    (button_option
-      (string_literal)))
+    (string_literal))
   (frame_definition
     (identifier)
     (number_literal)
@@ -937,36 +939,43 @@ WAIT-FOR WINDOW-CLOSE OF FRAME cust-fr.
       (identifier))
     (format_phrase
       (number_literal))
+    (skip)
     (qualified_name
       (identifier)
       (identifier))
     (format_phrase
       (number_literal))
+    (skip)
     (qualified_name
       (identifier)
       (identifier))
     (format_phrase
       (number_literal))
+    (skip)
     (qualified_name
       (identifier)
       (identifier))
     (format_phrase
       (number_literal))
+    (skip)
     (qualified_name
       (identifier)
       (identifier))
     (format_phrase
       (number_literal))
+    (skip)
     (qualified_name
       (identifier)
       (identifier))
     (format_phrase
       (number_literal))
+    (skip)
     (qualified_name
       (identifier)
       (identifier))
     (format_phrase
       (number_literal))
+    (skip)
     (qualified_name
       (identifier)
       (identifier))
@@ -1003,16 +1012,19 @@ WAIT-FOR WINDOW-CLOSE OF FRAME cust-fr.
       (identifier))
     (format_phrase
       (number_literal))
+    (skip)
     (qualified_name
       (identifier)
       (identifier))
     (format_phrase
       (number_literal))
+    (skip)
     (qualified_name
       (identifier)
       (identifier))
     (format_phrase
       (number_literal))
+    (skip)
     (qualified_name
       (identifier)
       (identifier))

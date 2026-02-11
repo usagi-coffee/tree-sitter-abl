@@ -120,12 +120,11 @@ OVERLAY(cLong, 1, 5, "COLUMN") = "Hi".
       (string_literal))
     (extent_phrase
       (number_literal))
-    (initial_option
-      (string_literal)
-      (string_literal)
-      (string_literal)
-      (string_literal)
-      (string_literal)))
+    (string_literal)
+    (string_literal)
+    (string_literal)
+    (string_literal)
+    (string_literal))
   (display_statement
     (identifier)
     (frame_phrase

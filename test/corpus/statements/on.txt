@@ -143,16 +143,13 @@ ON F5 ENDKEY.
           field: (identifier)))))
   (button_definition
     name: (identifier)
-    (button_option
-      label: (string_literal)))
+    label: (string_literal))
   (button_definition
     name: (identifier)
-    (button_option
-      label: (string_literal)))
+    label: (string_literal))
   (button_definition
     name: (identifier)
-    (button_option
-      label: (string_literal)))
+    label: (string_literal))
   (frame_definition
     name: (identifier)
     field: (identifier)
@@ -202,9 +199,11 @@ ON F5 ENDKEY.
               right: (identifier))
             (string_literal))
           then: (find_statement
+            (next)
             table: (identifier)
             (no_lock))
           else: (find_statement
+            (prev)
             table: (identifier)
             (no_lock)))
         (display_statement

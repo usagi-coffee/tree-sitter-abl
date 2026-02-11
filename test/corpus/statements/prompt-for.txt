@@ -30,6 +30,7 @@ PROMPT-FOR field1 GO-ON(f1 f2).
         (identifier)
         (number_literal))))
   (prompt_for_statement
+    (unless_hidden)
     (field
       field: (identifier)))
   (prompt_for_statement
@@ -105,11 +106,11 @@ PROMPT-FOR "Notes:" TO 20 VIEW-AS TEXT FGCOLOR 12 BGCOLOR 1 FONT 2 field1.
       (to_phrase)
       (view_as_phrase
         widget: (identifier))
-      (fgcolor_option
+      fgcolor: (fgcolor
         (number_literal))
-      (bgcolor_option
+      bgcolor: (bgcolor
         (number_literal))
-      (font_option
+      font: (font
         (number_literal)))
     (field
       field: (identifier))))
@@ -165,8 +166,7 @@ PROMPT-FOR STREAM-HANDLE hS field1 field2 IN WINDOW wMain WITH FRAME fMain.
     name: (identifier)
     type: (identifier)
     (no_undo)
-    (initial_option
-      (number_literal)))
+    (number_literal))
   (prompt_for_statement
     (field
       field: (identifier)))
@@ -209,7 +209,7 @@ PROMPT-FOR STREAM-HANDLE hS field1 field2 IN WINDOW wMain WITH FRAME fMain.
     (form_item
       field: (number_literal))
     (form_item
-      (number_literal))
+      skip: (number_literal))
     (form_item
       field: (string_literal))
     (form_item
@@ -226,7 +226,8 @@ PROMPT-FOR STREAM-HANDLE hS field1 field2 IN WINDOW wMain WITH FRAME fMain.
   (for_statement
     (record
       (record
-        record: (identifier)))
+        record: (identifier)
+        (no_lock)))
     (record
       (record
         record: (identifier)
@@ -282,10 +283,9 @@ PROMPT-FOR STREAM-HANDLE hS field1 field2 IN WINDOW wMain WITH FRAME fMain.
             right: (identifier))))
       (find_statement
         table: (identifier)
-        (using_phrase
-          (qualified_name
-            left: (identifier)
-            right: (identifier)))
+        values: (qualified_name
+          left: (identifier)
+          right: (identifier))
         (no_error))
       (if_statement
         (unary_expression
@@ -325,10 +325,9 @@ PROMPT-FOR STREAM-HANDLE hS field1 field2 IN WINDOW wMain WITH FRAME fMain.
       (find_statement
         table: (identifier)
         (no_lock)
-        (using_phrase
-          (qualified_name
-            left: (identifier)
-            right: (identifier))))
+        values: (qualified_name
+          left: (identifier)
+          right: (identifier)))
       (display_statement
         (field
           field: (qualified_name
@@ -351,9 +350,9 @@ PROMPT-FOR STREAM-HANDLE hS field1 field2 IN WINDOW wMain WITH FRAME fMain.
     (field
       field: (identifier))
     (field
-      (number_literal))
+      space: (number_literal))
     (field
-      (number_literal))
+      skip: (number_literal))
     (field)
     (go_on_phrase
       (identifier)
@@ -383,7 +382,7 @@ END.
   (prompt_for_statement
     (field
       field: (identifier))
-    (no_validate_phrase)
+    (no_validate)
     (editing_phrase
       (readkey_statement))))
 

@@ -8,7 +8,13 @@ module.exports = ({ kw }) => ({
       kw("RETURNS", { offset: 5 }),
       optional(kw("CLASS")),
       field("type", $._type_name),
-      optional(choice(kw("PRIVATE"), kw("PROTECTED"), kw("PUBLIC"))),
+      optional(
+        choice(
+          alias(kw("PRIVATE"), $.access_modifier),
+          alias(kw("PROTECTED"), $.access_modifier),
+          alias(kw("PUBLIC"), $.access_modifier),
+        ),
+      ),
       optional(alias($.__function_parameters, $.parameters)),
       choice(alias($._colon, ":"), $._terminator),
       repeat($._statement),
@@ -40,7 +46,7 @@ module.exports = ({ kw }) => ({
             optional(alias($.__function_map_phrase, $.map_phrase)),
             alias($.__function_in_phrase, $.in_phrase),
           ),
-          alias($.__function_forward_phrase, $.forward_phrase),
+          alias(kw("FORWARD"), $.forward),
         ),
       ),
     ),
@@ -57,7 +63,7 @@ module.exports = ({ kw }) => ({
           optional(alias($.__function_map_phrase, $.map_phrase)),
           alias($.__function_in_phrase, $.in_phrase),
         ),
-        alias($.__function_forward_phrase, $.forward_phrase),
+        alias(kw("FORWARD"), $.forward),
       ),
     ),
 
@@ -78,7 +84,7 @@ module.exports = ({ kw }) => ({
       optional(choice(kw("INPUT"), kw("OUTPUT"), kw("INPUT-OUTPUT"))),
       field("name", $.identifier),
       $.__function_variable_type_phrase,
-      optional(alias($.__function_no_undo, $.no_undo)),
+      optional(alias(kw("NO-UNDO"), $.no_undo)),
     ),
 
   __function_variable_type_phrase: ($) =>
@@ -95,13 +101,6 @@ module.exports = ({ kw }) => ({
   __function_map_phrase: ($) =>
     seq(kw("MAP"), kw("TO"), field("actual", $.identifier)),
   __function_in_phrase: ($) => seq(kw("IN"), field("context", $._expression)),
-  __function_forward_phrase: ($) => kw("FORWARD"),
-  __function_forward_option: ($) =>
-    choice(
-      alias($.__function_in_phrase, $.in_phrase),
-      alias($.__function_forward_phrase, $.forward_phrase),
-    ),
-  __function_no_undo: ($) => kw("NO-UNDO"),
   __function_extent_size: ($) =>
     choice(
       $.number_literal,

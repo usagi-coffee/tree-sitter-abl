@@ -1,6 +1,6 @@
 module.exports = ({ kw }) => ({
   aggregate_phrase: ($) =>
-    prec.right(repeat1(alias($.__aggregate_option, $.aggregate_option))),
+    prec.right(repeat1($.__aggregate_option)),
 
   aggregate_operation: ($) =>
     choice(

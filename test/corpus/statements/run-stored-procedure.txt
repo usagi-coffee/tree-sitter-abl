@@ -216,8 +216,7 @@ DISPLAY "Succeeded".
     name: (identifier)
     type: (identifier)
     (no_undo)
-    (initial_option
-      (number_literal)))
+    (number_literal))
   (variable_definition
     name: (identifier)
     type: (identifier))

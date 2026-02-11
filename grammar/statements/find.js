@@ -4,7 +4,13 @@ module.exports = ({ kw }) => ({
   __find_body: ($) =>
     seq(
       optional(
-        choice(kw("FIRST"), kw("LAST"), kw("NEXT"), kw("PREV"), kw("CURRENT")),
+        choice(
+          alias(kw("FIRST"), $.first),
+          alias(kw("LAST"), $.last),
+          alias(kw("NEXT"), $.next),
+          alias(kw("PREV"), $.prev),
+          alias(kw("CURRENT"), $.current),
+        ),
       ),
       field("table", $.__find_record_name),
       optional(field("constant", $._expression)),
@@ -14,30 +20,27 @@ module.exports = ({ kw }) => ({
 
   _find_record_option: ($) =>
     choice(
-      alias($.__find_no_lock, $.no_lock),
-      alias($.__find_share_lock, $.share_lock),
-      alias($.__find_exclusive_lock, $.exclusive_lock),
-      alias($.__find_no_wait, $.no_wait),
-      alias($.__find_no_error, $.no_error),
-      alias($.__find_no_prefetch, $.no_prefetch),
-      alias($.__find_using_phrase, $.using_phrase),
-      $.__find_use_index,
+      alias(kw("NO-LOCK"), $.no_lock),
+      choice(
+        alias(kw("SHARE-LOCK"), $.share_lock),
+        alias(kw("SHARE"), $.share),
+      ),
+      choice(
+        alias(kw("EXCLUSIVE-LOCK"), $.exclusive_lock),
+        alias(kw("EXCLUSIVE"), $.exclusive),
+      ),
+      alias(kw("NO-WAIT"), $.no_wait),
+      alias(kw("NO-ERROR"), $.no_error),
+      alias(kw("NO-PREFETCH"), $.no_prefetch),
+      seq(kw("USING"), field("values", $._expressions)),
+      seq(kw("USE-INDEX"), field("index", $.__find_index_name)),
     ),
 
   _find_record_option_or_where: ($) =>
     choice($._find_record_option, alias($.__find_where_phrase, $.where_phrase)),
 
   __find_of_phrase: ($) => seq(kw("OF"), $.__find_record_name),
-  __find_where_phrase: ($) => seq(kw("WHERE"), $._expression),
+  __find_where_phrase: ($) => seq(kw("WHERE"), field("where", $._expression)),
   __find_record_name: ($) => $._identifier_or_qualified_name,
-  __find_no_lock: ($) => kw("NO-LOCK"),
-  __find_no_error: ($) => kw("NO-ERROR"),
-  __find_no_wait: ($) => kw("NO-WAIT"),
-  __find_no_prefetch: ($) => kw("NO-PREFETCH"),
-  __find_share_lock: ($) => choice(kw("SHARE-LOCK"), kw("SHARE")),
-  __find_exclusive_lock: ($) => choice(kw("EXCLUSIVE-LOCK"), kw("EXCLUSIVE")),
-  __find_using_phrase: ($) => seq(kw("USING"), $._expressions),
-  __find_use_index: ($) =>
-    seq(kw("USE-INDEX"), field("index", $.__find_index_name)),
   __find_index_name: ($) => $._identifier_or_qualified_name,
 });

@@ -184,6 +184,7 @@ ENABLE ALL WITH SIZE 80 BY 10 SCROLLBAR-VERTICAL SEPARATORS NO-ROW-MARKERS.
       (disable_auto_zap)
       (moveable)
       (resizable))
+    (all)
     width: (number_literal)
     height: (number_literal)
     (scrollbar_vertical)

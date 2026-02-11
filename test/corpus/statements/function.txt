@@ -25,7 +25,7 @@ END FUNCTION.
         name: (identifier)
         type: (identifier)))
     (return_statement
-      (binary_expression
+      value: (binary_expression
         (identifier)
         (identifier)))))
 
@@ -52,7 +52,7 @@ END.
         name: (identifier)
         type: (identifier)))
     (return_statement
-      (boolean_literal))))
+      value: (boolean_literal))))
 
 ================================================================================
 FUNCTION - with CLASS return type
@@ -76,7 +76,7 @@ END FUNCTION.
         name: (identifier)
         type: (identifier)))
     (return_statement
-      (function_call
+      value: (function_call
         function: (identifier)
         (arguments
           (argument
@@ -104,7 +104,7 @@ END FUNCTION.
         type: (identifier)
         (number_literal)))
     (return_statement
-      (boolean_literal))))
+      value: (boolean_literal))))
 
 ================================================================================
 FUNCTION - NO-UNDO parameters
@@ -126,7 +126,7 @@ END.
         type: (identifier)
         (no_undo)))
     (return_statement
-      (object_access
+      value: (object_access
         handle: (identifier)
         name: (identifier)
         right: (identifier)))))
@@ -156,7 +156,7 @@ END FUNCTION.
       operator: (assignment_operator)
       right: (string_literal))
     (return_statement
-      (identifier))))
+      value: (identifier))))
 
 ================================================================================
 FUNCTION - OUTPUT parameters
@@ -187,7 +187,7 @@ END.
         (identifier)
         (number_literal)))
     (return_statement
-      (identifier))))
+      value: (identifier))))
 
 ================================================================================
 FUNCTION - LIKE parameter type
@@ -219,7 +219,7 @@ END.
       operator: (assignment_operator)
       right: (identifier))
     (return_statement
-      (boolean_literal))))
+      value: (boolean_literal))))
 
 ================================================================================
 FUNCTION - Multiple parameters
@@ -251,7 +251,7 @@ END.
         type: (identifier)
         (no_undo)))
     (return_statement
-      (function_call
+      value: (function_call
         function: (identifier)
         (arguments
           (argument
@@ -277,7 +277,7 @@ END.
         type: (identifier)
         (null_literal)))
     (return_statement
-      (function_call
+      value: (function_call
         function: (identifier)
         (arguments
           (argument
@@ -304,7 +304,7 @@ END.
         (preprocessor_reference
           (identifier))))
     (return_statement
-      (string_literal))))
+      value: (string_literal))))
 
 ================================================================================
 FUNCTION - Minimal
@@ -346,7 +346,7 @@ END.
         name: (identifier)
         type: (identifier)))
     (return_statement
-      (function_call
+      value: (function_call
         function: (identifier)
         (arguments
           (argument
@@ -395,7 +395,7 @@ END.
         name: (identifier)
         type: (identifier)))
     (return_statement
-      (boolean_literal))))
+      value: (boolean_literal))))
 
 ================================================================================
 FUNCTION - Complex body with multiple statements
@@ -428,7 +428,7 @@ END FUNCTION.
       then: (do_statement
         (body
           (return_statement
-            (function_call
+            value: (function_call
               function: (identifier)
               (arguments
                 (argument
@@ -438,7 +438,7 @@ END FUNCTION.
       else: (do_statement
         (body
           (return_statement
-            (string_literal)))))))
+            value: (string_literal)))))))
 
 ================================================================================
 FUNCTION - IN phrase prototype
@@ -475,7 +475,7 @@ FUNCTION doubler RETURNS INTEGER (INPUT parm1 AS INTEGER) FORWARD.
       (parameter
         name: (identifier)
         type: (identifier)))
-    (forward_phrase)))
+    (forward)))
 
 ================================================================================
 FUNCTION - DEFINE FORWARD prototype
@@ -493,7 +493,7 @@ DEFINE FUNCTION fmtId RETURNS CHARACTER (INPUT id AS INTEGER) FORWARD.
       (parameter
         name: (identifier)
         type: (identifier)))
-    (forward_phrase)))
+    (forward)))
 
 ================================================================================
 FUNCTION - PRIVATE definition
@@ -509,12 +509,13 @@ END FUNCTION.
   (function_definition
     name: (identifier)
     type: (identifier)
+    (access_modifier)
     (parameters
       (parameter
         name: (identifier)
         type: (identifier)))
     (return_statement
-      (function_call
+      value: (function_call
         function: (identifier)
         (arguments
           (argument
@@ -631,7 +632,7 @@ END.
       (parameter
         (identifier)
         (identifier)))
-    (forward_phrase))
+    (forward))
   (display_statement
     (field
       (string_literal))
@@ -686,8 +687,7 @@ END.
       (identifier)))
   (run_statement
     (procedure_name)
-    (persistent_option
-      (identifier)))
+    (persistent))
   (display_statement
     (field
       (string_literal))

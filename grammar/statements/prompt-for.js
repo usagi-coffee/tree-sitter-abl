@@ -5,7 +5,7 @@ module.exports = ({ kw }) => ({
   __prompt_for_body: ($) =>
     seq(
       optional($._stream_phrase),
-      optional(kw("UNLESS-HIDDEN")),
+      optional(alias(kw("UNLESS-HIDDEN"), $.unless_hidden)),
       choice(prec(1, $.__prompt_for_fields_body), $.__prompt_for_record_body),
     ),
 
@@ -28,7 +28,7 @@ module.exports = ({ kw }) => ({
       optional(alias($.__prompt_for_go_on, $.go_on_phrase)),
       optional($.in_window_phrase),
       optional($.frame_phrase),
-      optional(alias($.__prompt_for_no_validate_phrase, $.no_validate_phrase)),
+      optional(seq(kw("WITH"), alias(kw("NO-VALIDATE"), $.no_validate))),
       optional($.editing_phrase),
     ),
 
@@ -59,28 +59,19 @@ module.exports = ({ kw }) => ({
           ),
         ),
         optional(alias($.__prompt_for_view_as_phrase, $.view_as_phrase)),
-        optional(alias($.__prompt_for_fgcolor_option, $.fgcolor_option)),
-        optional(alias($.__prompt_for_bgcolor_option, $.bgcolor_option)),
-        optional(alias($.__prompt_for_font_option, $.font_option)),
+        optional(alias(seq(kw("FGCOLOR"), field("fgcolor", $._expression)), $.fgcolor)),
+        optional(alias(seq(kw("BGCOLOR"), field("bgcolor", $._expression)), $.bgcolor)),
+        optional(alias(seq(kw("FONT"), field("font", $._expression)), $.font)),
       ),
-      seq(kw("SKIP"), optional(seq("(", $._expression, ")"))),
-      seq(kw("SPACE"), optional(seq("(", $._expression, ")"))),
+      seq(kw("SKIP"), optional(field("skip", seq("(", $._expression, ")")))),
+      seq(kw("SPACE"), optional(field("space", seq("(", $._expression, ")")))),
       "^",
     ),
 
-  __prompt_for_label_option: ($) =>
-    seq(
-      kw("LABEL"),
-      choice($.string_literal, $.identifier),
-      repeat(seq(",", choice($.string_literal, $.identifier))),
-    ),
   __prompt_for_at_phrase: ($) => seq(kw("AT"), token(/[0-9]+(\.[0-9]+)?/)),
   __prompt_for_to_phrase: ($) => seq(kw("TO"), token(/[0-9]+(\.[0-9]+)?/)),
   __prompt_for_view_as_phrase: ($) =>
     seq(kw("VIEW-AS"), field("widget", $.identifier)),
-  __prompt_for_fgcolor_option: ($) => seq(kw("FGCOLOR"), $._expression),
-  __prompt_for_bgcolor_option: ($) => seq(kw("BGCOLOR"), $._expression),
-  __prompt_for_font_option: ($) => seq(kw("FONT"), $._expression),
 
   __prompt_for_go_on: ($) =>
     seq(
@@ -96,5 +87,4 @@ module.exports = ({ kw }) => ({
       ),
       ")",
     ),
-  __prompt_for_no_validate_phrase: ($) => seq(kw("WITH"), kw("NO-VALIDATE")),
 });

@@ -182,7 +182,7 @@ DISPLAY STREAM rpt ItemNum ItemName WITH NO-LABELS NO-BOX.
         label: (string_literal)))
     (field
       (skip_phrase
-        (number_literal)))
+        skip: (number_literal)))
     (field
       field: (identifier)
       (format_phrase
@@ -192,10 +192,12 @@ DISPLAY STREAM rpt ItemNum ItemName WITH NO-LABELS NO-BOX.
       frame: (identifier)))
   (output_statement
     name: (identifier)
-    (identifier))
+    (identifier)
+    (paged))
   (output_statement
     name: (identifier)
-    (identifier))
+    (identifier)
+    (paged))
   (for_statement
     (record
       (record
@@ -251,9 +253,11 @@ DISPLAY STREAM rpt ItemNum ItemName WITH NO-LABELS NO-BOX.
     (frame_phrase
       frame: (identifier)))
   (output_statement
-    name: (identifier))
+    name: (identifier)
+    (close))
   (output_statement
-    name: (identifier))
+    name: (identifier)
+    (close))
   (stream_definition
     (scope_modifier)
     name: (identifier))

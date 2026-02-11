@@ -81,6 +81,6 @@ module.exports = ({ kw }) => ({
       seq(kw("FORMAT", { offset: 4 }), field("format", $.string_literal)),
       seq(kw("INITIAL"), field("initial", $._expression)),
       seq(kw("LABEL"), field("label", $.string_literal)),
-      kw("NO-UNDO"),
+      alias(kw("NO-UNDO"), $.no_undo),
     ),
 });

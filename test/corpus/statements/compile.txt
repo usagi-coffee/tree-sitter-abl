@@ -11,11 +11,9 @@ COMPILE myproc.p OPTIONS-FILE "compile.opts" SAVE = TRUE INTO "r".
     file: (qualified_name
       left: (identifier)
       right: (identifier))
-    (compile_option
-      options_file: (string_literal))
-    (compile_option
-      save: (boolean_literal)
-      into: (string_literal))))
+    options_file: (string_literal)
+    save: (boolean_literal)
+    into: (string_literal)))
 
 ================================================================================
 COMPILE - LISTING with APPEND and PAGE options
@@ -31,17 +29,15 @@ COMPILE myproc.p LISTING "out.lst" PAGE-SIZE 80 PAGE-WIDTH 132.
     file: (qualified_name
       left: (identifier)
       right: (identifier))
-    (compile_option
-      listing: (string_literal)
-      append: (boolean_literal)))
+    listing: (string_literal)
+    append: (boolean_literal))
   (compile_statement
     file: (qualified_name
       left: (identifier)
       right: (identifier))
-    (compile_option
-      listing: (string_literal)
-      page_size: (number_literal)
-      page_width: (number_literal))))
+    listing: (string_literal)
+    page_size: (number_literal)
+    page_width: (number_literal)))
 
 ================================================================================
 COMPILE - XREF and STRING-XREF with APPEND
@@ -56,12 +52,10 @@ COMPILE myproc.p XREF "xref.txt" APPEND = FALSE STRING-XREF "sxref.txt" APPEND =
     file: (qualified_name
       left: (identifier)
       right: (identifier))
-    (compile_option
-      xref: (string_literal)
-      append: (boolean_literal))
-    (compile_option
-      string_xref: (string_literal)
-      append: (boolean_literal))))
+    xref: (string_literal)
+    append: (boolean_literal)
+    string_xref: (string_literal)
+    append: (boolean_literal)))
 
 ================================================================================
 COMPILE - Reference snippets and additional options
@@ -85,91 +79,73 @@ COMPILE myproc.p MIN-SIZE DEFAULT-UNTRANSLATABLE NO-ERROR.
 
 (source_code
   (compile_statement
-    file: (identifier)
-    (compile_option))
+    file: (identifier))
   (compile_statement
     file: (qualified_name
       left: (identifier)
       right: (identifier))
-    (compile_option)
-    (compile_option
-      listing: (qualified_name
-        left: (identifier)
-        right: (identifier)))
-    (compile_option
-      xref: (qualified_name
-        left: (identifier)
-        right: (identifier)))
-    (compile_option
-      debug_list: (qualified_name
-        left: (identifier)
-        right: (identifier))))
+    listing: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    xref: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    debug_list: (qualified_name
+      left: (identifier)
+      right: (identifier)))
   (compile_statement
     file: (string_literal)
-    (compile_option
-      options: (string_literal)))
+    options: (string_literal))
   (compile_statement
     file: (qualified_name
       left: (identifier)
       right: (identifier))
-    (compile_option
-      options_file: (function_call
-        function: (identifier)
-        (arguments
-          (argument
-            name: (identifier)))))
-    (compile_option
-      into: (function_call
-        function: (identifier)
-        (arguments
-          (argument
-            name: (identifier))))))
+    options_file: (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (identifier))))
+    into: (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (identifier)))))
   (compile_statement
     file: (qualified_name
       left: (identifier)
       right: (identifier))
-    (compile_option
-      xcode: (string_literal)))
+    xcode: (string_literal))
   (compile_statement
     file: (qualified_name
       left: (identifier)
       right: (identifier))
-    (compile_option
-      xref_xml: (string_literal)))
+    xref_xml: (string_literal))
+  (compile_statement
+    file: (qualified_name
+      left: (identifier)
+      right: (identifier)))
   (compile_statement
     file: (qualified_name
       left: (identifier)
       right: (identifier))
-    (compile_option))
+    languages: (string_literal)
+    text_seg_grow: (number_literal))
   (compile_statement
     file: (qualified_name
       left: (identifier)
       right: (identifier))
-    (compile_option
-      languages: (string_literal))
-    (compile_option
-      text_seg_grow: (number_literal)))
+    preprocess: (string_literal))
   (compile_statement
     file: (qualified_name
       left: (identifier)
       right: (identifier))
-    (compile_option
-      preprocess: (string_literal)))
+    (use_revvideo))
   (compile_statement
     file: (qualified_name
       left: (identifier)
       right: (identifier))
-    (compile_option)
-    (compile_option))
+    (use_underline))
   (compile_statement
     file: (qualified_name
       left: (identifier)
-      right: (identifier))
-    (compile_option)
-    (compile_option))
-  (compile_statement
-    file: (qualified_name
-      left: (identifier)
-      right: (identifier))
-    (compile_option)
-    (compile_option)))
+      right: (identifier))))

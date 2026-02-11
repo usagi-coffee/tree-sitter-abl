@@ -28,11 +28,9 @@ DEFINE RECTANGLE rectBorder
 (source_code
   (rectangle_definition
     name: (identifier)
-    (edge_pixels
-      (number_literal))
+    edge_pixels: (number_literal)
     (no_fill)
-    (fgcolor
-      (number_literal))
+    fgcolor: (number_literal)
     (size_phrase
       width: (number_literal)
       height: (number_literal))))
@@ -48,8 +46,7 @@ DEFINE RECTANGLE rect2 LIKE rect1 ROUNDED.
 (source_code
   (rectangle_definition
     name: (identifier)
-    (like_option
-      like: (identifier))
+    like: (identifier)
     (rounded)))
 
 ================================================================================
@@ -70,8 +67,7 @@ DEF RECTANGLE rectGroup
     (size_phrase
       width: (number_literal)
       height: (number_literal))
-    (bgcolor
-      (number_literal))))
+    bgcolor: (number_literal)))
 
 ================================================================================
 RECTANGLE private with tooltip
@@ -88,10 +84,8 @@ DEFINE PRIVATE RECTANGLE rectPrivate
   (rectangle_definition
     (access_modifier)
     name: (identifier)
-    (edge_chars
-      (number_literal))
-    (tooltip
-      (string_literal))
+    edge_chars: (number_literal)
+    tooltip: (string_literal)
     (size_phrase
       width: (number_literal)
       height: (number_literal))))
@@ -140,12 +134,10 @@ DEF RECTANGLE rEdge2 EDGE-CHARS 1.
 (source_code
   (rectangle_definition
     name: (identifier)
-    (edge_chars
-      (number_literal)))
+    edge_chars: (number_literal))
   (rectangle_definition
     name: (identifier)
-    (edge_chars
-      (number_literal))))
+    edge_chars: (number_literal)))
 
 ================================================================================
 RECTANGLE - EDGE-PIXELS
@@ -159,12 +151,10 @@ DEF RECTANGLE rEP2 EDGE-PIXELS 5.
 (source_code
   (rectangle_definition
     name: (identifier)
-    (edge_pixels
-      (number_literal)))
+    edge_pixels: (number_literal))
   (rectangle_definition
     name: (identifier)
-    (edge_pixels
-      (number_literal))))
+    edge_pixels: (number_literal)))
 
 ================================================================================
 RECTANGLE - DCOLOR
@@ -178,12 +168,10 @@ DEF RECTANGLE rDC DCOLOR 10.
 (source_code
   (rectangle_definition
     name: (identifier)
-    (dcolor
-      (number_literal)))
+    dcolor: (number_literal))
   (rectangle_definition
     name: (identifier)
-    (dcolor
-      (number_literal))))
+    dcolor: (number_literal)))
 
 ================================================================================
 RECTANGLE - BGCOLOR
@@ -197,12 +185,10 @@ DEF RECTANGLE rBgColor BGCOLOR 7.
 (source_code
   (rectangle_definition
     name: (identifier)
-    (bgcolor
-      (number_literal)))
+    bgcolor: (number_literal))
   (rectangle_definition
     name: (identifier)
-    (bgcolor
-      (number_literal))))
+    bgcolor: (number_literal)))
 
 ================================================================================
 RECTANGLE - FGCOLOR
@@ -216,12 +202,10 @@ DEF RECTANGLE rFgColor FGCOLOR 15.
 (source_code
   (rectangle_definition
     name: (identifier)
-    (fgcolor
-      (number_literal)))
+    fgcolor: (number_literal))
   (rectangle_definition
     name: (identifier)
-    (fgcolor
-      (number_literal))))
+    fgcolor: (number_literal)))
 
 ================================================================================
 RECTANGLE - GRAPHIC-EDGE
@@ -253,12 +237,10 @@ DEF RECTANGLE rPF PFCOLOR 8.
 (source_code
   (rectangle_definition
     name: (identifier)
-    (pfcolor
-      (number_literal)))
+    pfcolor: (number_literal))
   (rectangle_definition
     name: (identifier)
-    (pfcolor
-      (number_literal))))
+    pfcolor: (number_literal)))
 
 ================================================================================
 RECTANGLE - ROUNDED
@@ -290,12 +272,10 @@ DEF RECTANGLE rTT TOOLTIP text.
 (source_code
   (rectangle_definition
     name: (identifier)
-    (tooltip
-      (string_literal)))
+    tooltip: (string_literal))
   (rectangle_definition
     name: (identifier)
-    (tooltip
-      (identifier))))
+    tooltip: (identifier)))
 
 ================================================================================
 RECTANGLE - PRIVATE Modifier
@@ -313,8 +293,7 @@ DEF PRIVATE RECTANGLE privBox LIKE rBox.
   (rectangle_definition
     (access_modifier)
     name: (identifier)
-    (like_option
-      like: (identifier))))
+    like: (identifier)))
 
 ================================================================================
 RECTANGLE - Color Combinations
@@ -329,21 +308,15 @@ DEF RECTANGLE rMix GRAPHIC-EDGE BGCOLOR 5 PFCOLOR 6.
   (rectangle_definition
     name: (identifier)
     (no_fill)
-    (bgcolor
-      (number_literal))
-    (fgcolor
-      (number_literal))
-    (pfcolor
-      (number_literal))
-    (dcolor
-      (number_literal)))
+    bgcolor: (number_literal)
+    fgcolor: (number_literal)
+    pfcolor: (number_literal)
+    dcolor: (number_literal))
   (rectangle_definition
     name: (identifier)
     (graphic_edge)
-    (bgcolor
-      (number_literal))
-    (pfcolor
-      (number_literal))))
+    bgcolor: (number_literal)
+    pfcolor: (number_literal)))
 
 ================================================================================
 RECTANGLE - LIKE with Other Options
@@ -357,16 +330,12 @@ DEF RECTANGLE rCopy2 LIKE rFrame NO-FILL SIZE 20 BY 30.
 (source_code
   (rectangle_definition
     name: (identifier)
-    (like_option
-      like: (identifier))
-    (bgcolor
-      (number_literal))
-    (fgcolor
-      (number_literal)))
+    like: (identifier)
+    bgcolor: (number_literal)
+    fgcolor: (number_literal))
   (rectangle_definition
     name: (identifier)
-    (like_option
-      like: (identifier))
+    like: (identifier)
     (no_fill)
     (size_phrase
       width: (number_literal)
@@ -385,16 +354,12 @@ DEF RECTANGLE rEdge3 GRAPHIC-EDGE ROUNDED.
 (source_code
   (rectangle_definition
     name: (identifier)
-    (edge_chars
-      (number_literal))
-    (bgcolor
-      (number_literal)))
+    edge_chars: (number_literal)
+    bgcolor: (number_literal))
   (rectangle_definition
     name: (identifier)
-    (edge_pixels
-      (number_literal))
-    (fgcolor
-      (number_literal))
+    edge_pixels: (number_literal)
+    fgcolor: (number_literal)
     (no_fill))
   (rectangle_definition
     name: (identifier)
@@ -422,22 +387,16 @@ DEFINE RECTANGLE rComplete
   (rectangle_definition
     name: (identifier)
     (no_fill)
-    (edge_chars
-      (number_literal))
-    (bgcolor
-      (number_literal))
-    (fgcolor
-      (number_literal))
-    (pfcolor
-      (number_literal))
-    (dcolor
-      (number_literal))
+    edge_chars: (number_literal)
+    bgcolor: (number_literal)
+    fgcolor: (number_literal)
+    pfcolor: (number_literal)
+    dcolor: (number_literal)
     (rounded)
     (size_phrase
       width: (number_literal)
       height: (number_literal))
-    (tooltip
-      (string_literal))))
+    tooltip: (string_literal)))
 
 ================================================================================
 RECTANGLE - Edge Zero
@@ -451,12 +410,10 @@ DEF RECTANGLE rNoEdge2 EDGE-PIXELS 0.
 (source_code
   (rectangle_definition
     name: (identifier)
-    (edge_chars
-      (number_literal)))
+    edge_chars: (number_literal))
   (rectangle_definition
     name: (identifier)
-    (edge_pixels
-      (number_literal))))
+    edge_pixels: (number_literal)))
 
 ================================================================================
 RECTANGLE - Minimal
@@ -473,8 +430,7 @@ DEF RECTANGLE r3 NO-FILL.
     name: (identifier))
   (rectangle_definition
     name: (identifier)
-    (like_option
-      like: (identifier)))
+    like: (identifier))
   (rectangle_definition
     name: (identifier)
     (no_fill)))
@@ -531,35 +487,28 @@ END.
     (size_phrase
       width: (number_literal)
       height: (number_literal))
-    (edge_pixels
-      (number_literal)))
+    edge_pixels: (number_literal))
   (rectangle_definition
     name: (identifier)
-    (like_option
-      like: (identifier)))
+    like: (identifier))
   (rectangle_definition
     name: (identifier)
-    (like_option
-      like: (identifier)))
+    like: (identifier))
   (rectangle_definition
     name: (identifier)
-    (like_option
-      like: (identifier)))
+    like: (identifier))
   (rectangle_definition
     name: (identifier)
-    (like_option
-      like: (identifier)))
+    like: (identifier))
   (rectangle_definition
     name: (identifier)
-    (like_option
-      like: (identifier)))
+    like: (identifier))
   (rectangle_definition
     name: (identifier)
     (size_phrase
       width: (number_literal)
       height: (number_literal))
-    (edge_pixels
-      (number_literal)))
+    edge_pixels: (number_literal))
   (frame_definition
     name: (identifier)
     field: (qualified_name
@@ -581,25 +530,26 @@ END.
       left: (identifier)
       right: (identifier))
     field: (identifier)
-    (parenthesized_expression
+    (background)
+    value: (parenthesized_expression
       (number_literal))
-    (identifier)
-    (identifier)
+    value: (identifier)
+    value: (identifier)
     (at_phrase
       position: (number_literal))
-    (identifier)
+    value: (identifier)
     (at_phrase
       position: (number_literal))
-    (identifier)
+    value: (identifier)
     (at_phrase
       position: (number_literal))
-    (identifier)
+    value: (identifier)
     (at_phrase
       position: (number_literal))
-    (identifier)
+    value: (identifier)
     (at_phrase
       position: (number_literal))
-    (identifier)
+    value: (identifier)
     (at_phrase
       position: (number_literal))
     (frame_phrase
@@ -611,7 +561,8 @@ END.
   (for_statement
     (record
       (record
-        record: (identifier)))
+        record: (identifier)
+        (no_lock)))
     (frame_phrase
       frame: (identifier))
     (body

@@ -11,4 +11,5 @@ PRESELECT EACH Customer NO-LOCK.
     (preselect_record_list
       (preselect_record
         (record_phrase
-          record: (identifier))))))
+          record: (identifier)
+          (no_lock))))))

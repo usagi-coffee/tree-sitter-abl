@@ -111,6 +111,7 @@ END CLASS.
     (annotation
       name: (identifier))
     (method_definition
+      (access_modifier)
       type: (identifier)
       name: (identifier)
       (parameters)
@@ -132,7 +133,7 @@ END CLASS.
       type: (identifier)
       (no_undo)
       (return_statement
-        (identifier))
+        value: (identifier))
       (property_set_parameter_list
         (property_set_parameter
           name: (identifier)
@@ -146,9 +147,9 @@ END CLASS.
       name: (identifier)
       type: (identifier)
       (no_undo)
-      (initial_option
-        (string_literal)))
+      (string_literal))
     (method_definition
+      (access_modifier)
       type: (identifier)
       name: (identifier)
       (parameters
@@ -162,12 +163,14 @@ END CLASS.
   (class_definition
     name: (identifier)
     (constructor_definition
+      (access_modifier)
       name: (identifier)
       (parameters)
       (body
         (message_statement
           (string_literal))))
     (destructor_definition
+      (access_modifier)
       name: (identifier)
       (parameters)
       (body
@@ -180,6 +183,7 @@ END CLASS.
       right: (identifier))
     (interface_body_item
       (method_definition
+        (access_modifier)
         type: (identifier)
         name: (identifier)
         (parameters
@@ -189,6 +193,7 @@ END CLASS.
   (class_definition
     name: (identifier)
     (constructor_definition
+      (access_modifier)
       name: (identifier)
       (parameters
         (parameter
@@ -200,6 +205,7 @@ END CLASS.
             (string_literal)
             (identifier)))))
     (method_definition
+      (access_modifier)
       type: (identifier)
       name: (identifier)
       (parameters)
@@ -209,6 +215,7 @@ END CLASS.
   (class_definition
     name: (identifier)
     (method_definition
+      (access_modifier)
       type: (identifier)
       name: (identifier)
       (parameters)
@@ -218,6 +225,8 @@ END CLASS.
     name: (identifier)
     super: (identifier)
     (method_definition
+      (access_modifier)
+      (override_modifier)
       type: (identifier)
       name: (identifier)
       (parameters)
@@ -226,16 +235,22 @@ END CLASS.
   (class_definition
     name: (identifier)
     (method_definition
+      (access_modifier)
       type: (identifier)
       name: (identifier)
       (parameters
         (parameter
-          table: (identifier)))
+          table: (identifier)
+          (append)
+          (bind)
+          (by_value)
+          (by_reference)))
       (body
         (return_statement))))
   (class_definition
     name: (identifier)
     (method_definition
+      (access_modifier)
       type: (identifier)
       name: (identifier)
       (parameters
@@ -329,6 +344,8 @@ END CLASS.
 
 (source_code
   (class_definition
+    (abstract)
+    (serializable)
     name: (qualified_name
       left: (identifier)
       right: (identifier)
@@ -336,7 +353,9 @@ END CLASS.
     super: (identifier)
     interface: (identifier)
     interface: (identifier)
+    (use_widget_pool)
     (method_definition
+      (access_modifier)
       type: (identifier)
       name: (identifier)
       (parameters))))

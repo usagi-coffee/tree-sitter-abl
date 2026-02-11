@@ -46,8 +46,7 @@ END PROCEDURE.
 (source_code
   (procedure_definition
     name: (identifier)
-    (map
-      name: (identifier))
+    name: (map)
     (body)))
 
 ================================================================================
@@ -68,6 +67,7 @@ END PROCEDURE.
       (parameter_definition
         table: (identifier))
       (find_statement
+        (first)
         table: (identifier)
         (no_lock)))))
 
@@ -155,6 +155,7 @@ END PROCEDURE.
         name: (identifier)
         table: (identifier))
       (find_statement
+        (first)
         table: (identifier)
         (no_lock)))))
 
@@ -192,7 +193,7 @@ END PROCEDURE.
     (body
       (parameter_definition
         table: (identifier)
-        (append_option)))))
+        (append)))))
 
 ================================================================================
 PROCEDURE - TABLE with BIND
@@ -210,7 +211,7 @@ END PROCEDURE.
     (body
       (parameter_definition
         table: (identifier)
-        (bind_option)))))
+        (bind)))))
 
 ================================================================================
 PROCEDURE - TABLE with BY-VALUE
@@ -228,7 +229,7 @@ END PROCEDURE.
     (body
       (parameter_definition
         table: (identifier)
-        (by_value_option)))))
+        (by_value)))))
 
 ================================================================================
 PROCEDURE - DATASET with APPEND
@@ -246,7 +247,7 @@ END PROCEDURE.
     (body
       (parameter_definition
         dataset: (identifier)
-        (append_option)))))
+        (append)))))
 
 ================================================================================
 PROCEDURE - TABLE-HANDLE with BIND
@@ -264,7 +265,7 @@ END PROCEDURE.
     (body
       (parameter_definition
         table_handle: (identifier)
-        (bind_option)
+        (bind)
         (no_undo)))))
 
 ================================================================================
@@ -283,7 +284,7 @@ END PROCEDURE.
     (body
       (parameter_definition
         dataset_handle: (identifier)
-        (bind_option)))))
+        (bind)))))
 
 ================================================================================
 PROCEDURE - Dot Header
@@ -323,8 +324,7 @@ END PROCEDURE.
       (parameter_definition
         name: (identifier)
         type: (identifier)
-        (initial_option
-          (number_literal)))
+        (number_literal))
       (parameter_definition
         name: (identifier)
         type: (identifier)
@@ -439,10 +439,8 @@ END.
   (procedure_definition
     name: (identifier)
     (cdecl)
-    (ordinal_phrase
-      number: (number_literal))
+    number: (ordinal_phrase)
     (persistent)
-    (thread_safe)
     (external_phrase)
     (body
       (parameter_definition
@@ -453,7 +451,6 @@ END.
         type: (identifier))))
   (procedure_definition
     name: (identifier)
-    (in_super_phrase)
     (body)))
 
 ================================================================================
@@ -669,31 +666,30 @@ END PROCEDURE.
     name: (identifier)
     (external_phrase)
     (cdecl)
-    (ordinal_phrase
-      number: (number_literal))
+    number: (ordinal_phrase)
     (persistent)
-    (thread_safe)
     (body
       (parameter_definition
         name: (identifier)
         type: (identifier))))
   (procedure_definition
     name: (identifier)
-    (external_phrase)
+    (external_phrase
+      (stdcall))
     (body
       (parameter_definition
         name: (identifier)
         type: (identifier))))
   (procedure_definition
     name: (identifier)
-    (external_phrase)
+    (external_phrase
+      (pascal))
     (body
       (parameter_definition
         name: (identifier)
         type: (identifier))))
   (procedure_definition
     name: (identifier)
-    (in_super_phrase)
     (body
       (parameter_definition
         name: (identifier)

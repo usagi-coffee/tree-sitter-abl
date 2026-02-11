@@ -4,7 +4,7 @@ module.exports = ({ kw }) => ({
   __compile_body: ($) =>
     seq(
       field("file", $.__compile_file),
-      repeat(alias($.__compile_option, $.compile_option)),
+      repeat($.__compile_option),
       optional(kw("NO-ERROR")),
     ),
 
@@ -23,11 +23,45 @@ module.exports = ({ kw }) => ({
         optional(seq("=", field("save", $._expression))),
         optional(seq(kw("INTO"), field("into", $._expression))),
       ),
-      $.__compile_listing_option,
+      choice(
+        seq(
+          kw("LISTING"),
+          field("listing", $._expression),
+          kw("APPEND"),
+          optional(seq("=", field("append", $._expression))),
+        ),
+        seq(
+          kw("LISTING"),
+          field("listing", $._expression),
+          kw("PAGE-SIZE"),
+          field("page_size", $._expression),
+          optional(seq(kw("PAGE-WIDTH"), field("page_width", $._expression))),
+        ),
+        seq(
+          kw("LISTING"),
+          field("listing", $._expression),
+          kw("PAGE-WIDTH"),
+          field("page_width", $._expression),
+          optional(seq(kw("PAGE-SIZE"), field("page_size", $._expression))),
+        ),
+        seq(kw("LISTING"), field("listing", $._expression)),
+      ),
       seq(kw("XCODE"), field("xcode", $._expression)),
-      $.__compile_xref_option,
+      seq(
+        kw("XREF"),
+        field("xref", $._expression),
+        optional(
+          seq(kw("APPEND"), optional(seq("=", field("append", $._expression)))),
+        ),
+      ),
       seq(kw("XREF-XML"), field("xref_xml", $._expression)),
-      $.__compile_string_xref_option,
+      seq(
+        kw("STRING-XREF"),
+        field("string_xref", $._expression),
+        optional(
+          seq(kw("APPEND"), optional(seq("=", field("append", $._expression)))),
+        ),
+      ),
       seq(kw("DEBUG-LIST"), field("debug_list", $._expression)),
       seq(kw("PREPROCESS"), field("preprocess", $._expression)),
       seq(kw("OPTIONS"), field("options", $._expression)),
@@ -39,58 +73,15 @@ module.exports = ({ kw }) => ({
       ),
       seq(kw("LANGUAGES"), "(", field("languages", $._expression), ")"),
       seq(kw("TEXT-SEG-GROW"), field("text_seg_grow", $._expression)),
-      kw("ATTR-SPACE"),
-      kw("NO-ATTR-SPACE"),
+      alias(kw("ATTR-SPACE"), $.attr_space),
+      alias(kw("NO-ATTR-SPACE"), $.no_attr_space),
       seq(
         kw("STREAM-IO"),
         optional(seq("=", field("stream_io", $._expression))),
       ),
       seq(kw("V6FRAME"), optional(seq("=", field("v6frame", $._expression)))),
-      kw("USE-REVVIDEO"),
-      kw("USE-UNDERLINE"),
-      kw("GENERATE-MD5"),
-    ),
-
-  __compile_listing_option: ($) =>
-    choice(
-      seq(
-        kw("LISTING"),
-        field("listing", $._expression),
-        kw("APPEND"),
-        optional(seq("=", field("append", $._expression))),
-      ),
-      seq(
-        kw("LISTING"),
-        field("listing", $._expression),
-        kw("PAGE-SIZE"),
-        field("page_size", $._expression),
-        optional(seq(kw("PAGE-WIDTH"), field("page_width", $._expression))),
-      ),
-      seq(
-        kw("LISTING"),
-        field("listing", $._expression),
-        kw("PAGE-WIDTH"),
-        field("page_width", $._expression),
-        optional(seq(kw("PAGE-SIZE"), field("page_size", $._expression))),
-      ),
-      seq(kw("LISTING"), field("listing", $._expression)),
-    ),
-
-  __compile_xref_option: ($) =>
-    seq(
-      kw("XREF"),
-      field("xref", $._expression),
-      optional(
-        seq(kw("APPEND"), optional(seq("=", field("append", $._expression)))),
-      ),
-    ),
-
-  __compile_string_xref_option: ($) =>
-    seq(
-      kw("STRING-XREF"),
-      field("string_xref", $._expression),
-      optional(
-        seq(kw("APPEND"), optional(seq("=", field("append", $._expression)))),
-      ),
+      alias(kw("USE-REVVIDEO"), $.use_revvideo),
+      alias(kw("USE-UNDERLINE"), $.use_underline),
+      alias(kw("GENERATE-MD5"), $.generate_md5),
     ),
 });

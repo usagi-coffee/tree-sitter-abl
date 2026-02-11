@@ -64,8 +64,7 @@ DELETE WIDGET new_win.
     font: (number_literal)
     (format_phrase
       format: (string_literal))
-    (initial_option
-      (string_literal)))
+    (string_literal))
   (variable_definition
     name: (identifier)
     type: (identifier)
@@ -74,8 +73,7 @@ DELETE WIDGET new_win.
     font: (number_literal)
     (format_phrase
       format: (string_literal))
-    (initial_option
-      (string_literal)))
+    (string_literal))
   (variable_definition
     name: (identifier)
     type: (identifier)

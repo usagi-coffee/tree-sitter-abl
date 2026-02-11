@@ -16,9 +16,26 @@ module.exports = ({ kw }) => ({
 
   __update_fields_body: ($) =>
     seq(
-      optional(kw("UNLESS-HIDDEN")),
+      optional(alias(kw("UNLESS-HIDDEN"), $.unless_hidden)),
       repeat1(alias($.__update_field, $.field)),
-      optional(alias($.__update_go_on, $.go_on_phrase)),
+      optional(
+        alias(
+          seq(
+            kw("GO-ON"),
+            "(",
+            choice(
+              $.identifier,
+              $.string_literal,
+              seq(
+                choice($.identifier, $.string_literal),
+                repeat(seq(optional(","), choice($.identifier, $.string_literal))),
+              ),
+            ),
+            ")",
+          ),
+          $.go_on_phrase,
+        ),
+      ),
       optional($.frame_phrase),
       optional($.editing_phrase),
     ),
@@ -50,7 +67,15 @@ module.exports = ({ kw }) => ({
       ),
       seq(
         field("constant", $.string_literal),
-        optional(alias($.__update_at_phrase, $.at_phrase)),
+        optional(
+          alias(
+            seq(
+              choice(kw("AT"), kw("TO")),
+              field("position", token(/[0-9]+(\.[0-9]+)?/)),
+            ),
+            $.at_phrase,
+          ),
+        ),
       ),
       "^",
     ),
@@ -60,30 +85,12 @@ module.exports = ({ kw }) => ({
     choice(prec(1, $._identifier_or_qualified_name), $.array_access),
   __update_skip_phrase: ($) =>
     choice(
-      prec.right(1, seq(kw("SKIP"), "(", $._expression, ")")),
+      prec.right(1, seq(kw("SKIP"), "(", field("skip", $._expression), ")")),
       prec(-1, seq(kw("SKIP"))),
     ),
   __update_space_phrase: ($) =>
     choice(
-      prec.right(1, seq(kw("SPACE"), "(", $._expression, ")")),
+      prec.right(1, seq(kw("SPACE"), "(", field("space", $._expression), ")")),
       prec(-1, seq(kw("SPACE"))),
-    ),
-
-  __update_at_phrase: ($) =>
-    seq(choice(kw("AT"), kw("TO")), token(/[0-9]+(\.[0-9]+)?/)),
-
-  __update_go_on: ($) =>
-    seq(
-      kw("GO-ON"),
-      "(",
-      choice(
-        $.identifier,
-        $.string_literal,
-        seq(
-          choice($.identifier, $.string_literal),
-          repeat(seq(optional(","), choice($.identifier, $.string_literal))),
-        ),
-      ),
-      ")",
     ),
 });

@@ -14,4 +14,5 @@ DEFINE VARIABLE v AS CHARACTER VIEW-AS EDITOR SIZE 10 BY 2 SCROLLBAR-VERTICAL.
       (editor_phrase
         (size_phrase
           width: (number_literal)
-          height: (number_literal))))))
+          height: (number_literal))
+        (scrollbar_vertical)))))

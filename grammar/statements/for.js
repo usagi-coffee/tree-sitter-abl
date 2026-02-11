@@ -7,7 +7,7 @@ module.exports = ({ kw }) => ({
       kw("FOR"),
       choice($.__for_records, $.__for_variables),
       optional(alias($.__for_while_phrase, $.while_phrase)),
-      optional(kw("TRANSACTION")),
+      optional(alias(kw("TRANSACTION"), $.transaction)),
       repeat(
         choice(
           $.stop_after_phrase,
@@ -57,9 +57,15 @@ module.exports = ({ kw }) => ({
     prec.right(
       seq(
         kw("BY"),
-        $._expression,
+        field("by", $._expression),
         optional($.__for_sort_direction),
-        repeat(seq(kw("BY"), $._expression, optional($.__for_sort_direction))),
+        repeat(
+          seq(
+            kw("BY"),
+            field("by", $._expression),
+            optional($.__for_sort_direction),
+          ),
+        ),
       ),
     ),
   __for_group_by_phrase: ($) =>
@@ -67,16 +73,16 @@ module.exports = ({ kw }) => ({
       seq(
         kw("GROUP"),
         kw("BY"),
-        $._expression,
+        field("by", $._expression),
         optional($.__for_sort_direction),
-        repeat(seq(kw("BY"), $._expression, optional($.__for_sort_direction))),
+        repeat(
+          seq(
+            kw("BY"),
+            field("by", $._expression),
+            optional($.__for_sort_direction),
+          ),
+        ),
       ),
-    ),
-
-  __for_use_index: ($) =>
-    choice(
-      seq(kw("USE-INDEX"), field("index", $.__for_index_name)),
-      kw("TABLE-SCAN"),
     ),
 
   __for_break_by: ($) =>
@@ -84,14 +90,21 @@ module.exports = ({ kw }) => ({
       seq(
         kw("BREAK"),
         kw("BY"),
-        $._expression,
+        field("by", $._expression),
         optional($.__for_sort_direction),
-        repeat(seq(kw("BY"), $._expression, optional($.__for_sort_direction))),
+        repeat(
+          seq(
+            kw("BY"),
+            field("by", $._expression),
+            optional($.__for_sort_direction),
+          ),
+        ),
       ),
     ),
 
   __for_index_name: ($) => $._identifier_or_qualified_name,
-  __for_with_stream_io_phrase: ($) => seq(kw("WITH"), kw("STREAM-IO")),
+  __for_with_stream_io_phrase: ($) =>
+    seq(kw("WITH"), alias(kw("STREAM-IO"), $.stream_io)),
   __for_sort_direction: ($) => kw("DESCENDING", { offset: 4 }),
 
   __for_collate_phrase: ($) =>

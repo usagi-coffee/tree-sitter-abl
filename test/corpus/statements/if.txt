@@ -166,7 +166,7 @@ IF LOCKED bufOrder THEN RETURN TRUE.
     (locked_expression
       record: (identifier))
     then: (return_statement
-      (boolean_literal))))
+      value: (boolean_literal))))
 
 ================================================================================
 IF - Inline THEN/ELSE
@@ -418,7 +418,8 @@ OUTPUT STREAM due CLOSE.
                       (down)
                       (identifier)))))))))))
   (output_statement
-    (identifier)))
+    (identifier)
+    (close)))
 
 ================================================================================
 IF with PROC variable name

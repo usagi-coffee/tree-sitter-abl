@@ -6,9 +6,27 @@ module.exports = ({ kw }) => ({
       field("procedure", $._run_target),
       optional(
         choice(
-          alias($.__run_persistent, $.persistent_option),
-          alias($.__run_single_run, $.single_run_option),
-          alias($.__run_singleton, $.singleton_option),
+          alias(
+            seq(
+              kw("PERSISTENT"),
+              optional(seq(kw("SET"), field("handle", $.identifier))),
+            ),
+            $.persistent,
+          ),
+          alias(
+            seq(
+              kw("SINGLE-RUN"),
+              optional(seq(kw("SET"), field("handle", $.identifier))),
+            ),
+            $.single_run,
+          ),
+          alias(
+            seq(
+              kw("SINGLETON"),
+              optional(seq(kw("SET"), field("handle", $.identifier))),
+            ),
+            $.singleton,
+          ),
         ),
       ),
       optional(alias($.__run_in_phrase, $.in_phrase)),
@@ -36,21 +54,6 @@ module.exports = ({ kw }) => ({
       ">>",
     ),
   __run_member_name: ($) => token(/[A-Za-z0-9_\\/.-]+\.r/i),
-  __run_persistent: ($) =>
-    seq(
-      kw("PERSISTENT"),
-      optional(seq(kw("SET"), field("handle", $.identifier))),
-    ),
-  __run_single_run: ($) =>
-    seq(
-      kw("SINGLE-RUN"),
-      optional(seq(kw("SET"), field("handle", $.identifier))),
-    ),
-  __run_singleton: ($) =>
-    seq(
-      kw("SINGLETON"),
-      optional(seq(kw("SET"), field("handle", $.identifier))),
-    ),
 
   __run_in_phrase: ($) => seq(kw("IN"), field("context", $._expression)),
   __run_on_server: ($) =>

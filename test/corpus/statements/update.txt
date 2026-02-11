@@ -31,6 +31,7 @@ UPDATE field1 GO-ON(f1 f2).
         (identifier)
         (number_literal))))
   (update_statement
+    (unless_hidden)
     (field
       field: (identifier)))
   (update_statement
@@ -58,9 +59,11 @@ UPDATE field1 GO-ON(f1 f2).
   (update_statement
     (field
       field: (identifier))
+    (go_on_phrase)
+    (go_on_phrase)
     (go_on_phrase
-      (identifier)
-      (identifier))))
+      (identifier))
+    (go_on_phrase)))
 
 ================================================================================
 UPDATE GO-ON with comma-separated strings
@@ -74,9 +77,11 @@ UPDATE field1 GO-ON("F5","CTRL-D").
   (update_statement
     (field
       field: (identifier))
+    (go_on_phrase)
+    (go_on_phrase)
     (go_on_phrase
-      (string_literal)
-      (string_literal))))
+      (string_literal))
+    (go_on_phrase)))
 
 ================================================================================
 UPDATE with format, text, constants, and editing
@@ -106,7 +111,7 @@ UPDATE field1 FORMAT "x(10)" WHEN ok
         format: (string_literal)))
     (field
       constant: (string_literal)
-      (at_phrase))
+      position: (at_phrase))
     (field
       field: (identifier)
       value: (number_literal))
@@ -135,7 +140,7 @@ UPDATE "Header" TO 30 Customer.Name.
   (update_statement
     (field
       constant: (string_literal)
-      (at_phrase))
+      position: (at_phrase))
     (field
       field: (qualified_name
         left: (identifier)
@@ -271,10 +276,9 @@ UPDATE field1 SPACE(2) SKIP(1) ^.
             (identifier))))
       (find_statement
         (identifier)
-        (using_phrase
-          (qualified_name
-            (identifier)
-            (identifier))))
+        (qualified_name
+          (identifier)
+          (identifier)))
       (update_statement
         (field
           (qualified_name
@@ -348,7 +352,8 @@ UPDATE field1 SPACE(2) SKIP(1) ^.
   (for_statement
     (record
       (record
-        (identifier)))
+        (identifier)
+        (no_lock)))
     (record
       (record
         (identifier)

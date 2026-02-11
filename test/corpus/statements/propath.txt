@@ -55,11 +55,10 @@ PROPATH += ",/myNewAppDir1,/myNewAppDir2".
       (number_literal))
     (format_phrase
       format: (string_literal))
-    (initial_option
-      (string_literal)
-      (string_literal)
-      (string_literal)
-      (string_literal)))
+    (string_literal)
+    (string_literal)
+    (string_literal)
+    (string_literal))
   (variable_definition
     name: (identifier)
     type: (identifier)
@@ -68,22 +67,20 @@ PROPATH += ",/myNewAppDir1,/myNewAppDir2".
       (number_literal))
     (format_phrase
       format: (string_literal))
-    (initial_option
-      (string_literal)
-      (string_literal)
-      (string_literal)
-      (string_literal)))
+    (string_literal)
+    (string_literal)
+    (string_literal)
+    (string_literal))
   (variable_definition
     name: (identifier)
     type: (identifier)
     (no_undo)
     (extent_phrase
       (number_literal))
-    (initial_option
-      (string_literal)
-      (string_literal)
-      (string_literal)
-      (string_literal)))
+    (string_literal)
+    (string_literal)
+    (string_literal)
+    (string_literal))
   (repeat_statement
     (body
       (display_statement

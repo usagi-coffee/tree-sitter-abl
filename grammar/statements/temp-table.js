@@ -11,7 +11,7 @@ module.exports = ({ kw }) => ({
   __temp_table_body: ($) =>
     seq(
       field("name", $.identifier),
-      optional(alias($.__temp_table_no_undo, $.no_undo)),
+      optional($.__temp_table_no_undo),
       optional(
         seq(kw("NAMESPACE-URI"), field("namespace_uri", $.string_literal)),
       ),
@@ -34,7 +34,7 @@ module.exports = ({ kw }) => ({
             $.__temp_table_like_sequential_phrase,
             $.like_sequential_phrase,
           ),
-          alias($.__temp_table_rcode_information, $.rcode_information),
+          $.__temp_table_rcode_information,
           alias($.__temp_table_before_table_phrase, $.before_table_phrase),
         ),
       ),
@@ -58,13 +58,13 @@ module.exports = ({ kw }) => ({
           optional(kw("VALIDATE")),
         ),
         seq(
-          alias($.__temp_table_extent_option, $.field_option),
+          $.__temp_table_extent_option,
           kw("LIKE"),
           field("type", $.__temp_table_like_name),
           optional(kw("VALIDATE")),
         ),
       ),
-      repeat(alias($.__temp_table_field_option, $.field_option)),
+      repeat($.__temp_table_field_option),
     ),
 
   __temp_table_index: ($) =>
@@ -78,8 +78,12 @@ module.exports = ({ kw }) => ({
     ),
 
   __temp_table_index_modifier: ($) =>
-    choice(kw("UNIQUE"), kw("PRIMARY"), kw("WORD-INDEX")),
-  __temp_table_no_undo: ($) => kw("NO-UNDO"),
+    choice(
+      alias(kw("UNIQUE"), $.unique),
+      alias(kw("PRIMARY"), $.primary),
+      alias(kw("WORD-INDEX"), $.word_index),
+    ),
+  __temp_table_no_undo: ($) => alias(kw("NO-UNDO"), $.no_undo),
   __temp_table_like_phrase: ($) =>
     seq(
       kw("LIKE"),
@@ -100,44 +104,50 @@ module.exports = ({ kw }) => ({
       field("index", $.identifier),
       optional(seq(kw("AS"), kw("PRIMARY"))),
     ),
-  __temp_table_rcode_information: ($) => kw("RCODE-INFORMATION"),
+  __temp_table_rcode_information: ($) =>
+    alias(kw("RCODE-INFORMATION"), $.rcode_information),
   __temp_table_before_table_phrase: ($) =>
     seq(kw("BEFORE-TABLE"), field("before", $.identifier)),
   __temp_table_index_field: ($) =>
     seq(
       field("field", $.__temp_table_field_name),
       optional(
-        choice(kw("DESCENDING", { offset: 4 }), kw("ASCENDING", { offset: 3 })),
+        choice(
+          alias(kw("DESCENDING", { offset: 4 }), $.descending),
+          alias(kw("ASCENDING", { offset: 3 }), $.ascending),
+        ),
       ),
     ),
   __temp_table_field_option: ($) =>
     choice(
-      seq(kw("BGCOLOR"), $._expression),
-      seq(kw("COLUMN-LABEL"), $.__temp_table_label_list),
-      seq(kw("DCOLOR"), $._expression),
-      seq(kw("DECIMALS"), $.number_literal),
+      seq(kw("BGCOLOR"), field("bgcolor", $._expression)),
+      seq(kw("COLUMN-LABEL"), field("column_label", $.__temp_table_label_list)),
+      seq(kw("DCOLOR"), field("dcolor", $._expression)),
+      seq(kw("DECIMALS"), field("decimals", $.number_literal)),
       $.__temp_table_extent_option,
-      seq(kw("FONT"), $._expression),
-      seq(kw("FGCOLOR"), $._expression),
-      seq(kw("FORMAT", { offset: 4 }), $.string_literal),
-      seq(kw("HELP"), $.string_literal),
+      seq(kw("FONT"), field("font", $._expression)),
+      seq(kw("FGCOLOR"), field("fgcolor", $._expression)),
+      seq(kw("FORMAT", { offset: 4 }), field("format", $.string_literal)),
+      seq(kw("HELP"), field("help", $.string_literal)),
       seq(
         kw("INITIAL"),
-        choice($._expression, seq("[", optional($._expressions), "]")),
+        field("initial", choice($._expression, seq("[", optional($._expressions), "]"))),
       ),
-      seq(kw("LABEL"), $.__temp_table_label_list),
-      seq(kw("MOUSE-POINTER"), $._expression),
-      seq(optional(kw("NOT")), kw("CASE-SENSITIVE")),
-      seq(kw("PFCOLOR"), $._expression),
-      kw("SERIALIZE-HIDDEN"),
-      seq(kw("SERIALIZE-NAME"), $.string_literal),
-      seq(choice(kw("TTCODEPAGE"), kw("COLUMN-CODEPAGE")), $.string_literal),
-      seq(kw("XML-DATA-TYPE"), $.string_literal),
-      seq(kw("XML-NODE-TYPE"), $.string_literal),
-      seq(kw("XML-NODE-NAME"), $.string_literal),
+      seq(kw("LABEL"), field("label", $.__temp_table_label_list)),
+      seq(kw("MOUSE-POINTER"), field("mouse_pointer", $._expression)),
+      seq(optional(alias(kw("NOT"), $.not)), alias(kw("CASE-SENSITIVE"), $.case_sensitive)),
+      seq(kw("PFCOLOR"), field("pfcolor", $._expression)),
+      alias(kw("SERIALIZE-HIDDEN"), $.serialize_hidden),
+      seq(kw("SERIALIZE-NAME"), field("serialize_name", $.string_literal)),
+      seq(kw("TTCODEPAGE"), field("ttcodepage", $.string_literal)),
+      seq(kw("COLUMN-CODEPAGE"), field("column_codepage", $.string_literal)),
+      seq(kw("XML-DATA-TYPE"), field("xml_data_type", $.string_literal)),
+      seq(kw("XML-NODE-TYPE"), field("xml_node_type", $.string_literal)),
+      seq(kw("XML-NODE-NAME"), field("xml_node_name", $.string_literal)),
       $.view_as_phrase,
     ),
-  __temp_table_extent_option: ($) => seq(kw("EXTENT"), $.number_literal),
+  __temp_table_extent_option: ($) =>
+    seq(kw("EXTENT"), field("extent", $.number_literal)),
   __temp_table_like_name: ($) =>
     choice($._identifier_or_qualified_name, $.array_access),
   __temp_table_label_list: ($) =>

@@ -70,7 +70,7 @@ RETURN CalculateResult().
 
 (source_code
   (return_statement
-    (function_call
+    value: (function_call
       function: (identifier)
       (arguments))))
 
@@ -118,8 +118,7 @@ RETURN NO-APPLY.
     (identifier)
     (identifier)
     (no_undo)
-    (initial_option
-      (number_literal)))
+    (number_literal))
   (function_definition
     (identifier)
     (identifier)
@@ -148,8 +147,7 @@ RETURN NO-APPLY.
   (variable_definition
     (identifier)
     (identifier)
-    (initial_option
-      (number_literal))
+    (number_literal)
     (no_undo))
   (function_definition
     (identifier)
@@ -238,4 +236,5 @@ RETURN NO-APPLY.
         (identifier))))
   (return_statement
     (string_literal))
-  (return_statement))
+  (return_statement
+    (no_apply)))

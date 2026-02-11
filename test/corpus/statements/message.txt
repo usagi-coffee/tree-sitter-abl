@@ -350,10 +350,9 @@ END.
             (identifier))))
       (find_statement
         (identifier)
-        (using_phrase
-          (qualified_name
-            (identifier)
-            (identifier)))
+        (qualified_name
+          (identifier)
+          (identifier))
         (no_error))
       (if_statement
         (unary_expression
@@ -444,6 +443,7 @@ END.
                 (message_statement
                   (string_literal)
                   (view_as_phrase))
-                (return_statement))))
+                (return_statement
+                  (no_apply)))))
           (case_otherwise_phrase
             (stop_statement)))))))

@@ -43,6 +43,7 @@ END INTERFACE.
           type: (identifier))))
     (interface_body_item
       (method_definition
+        (access_modifier)
         type: (identifier)
         name: (identifier)
         (parameters

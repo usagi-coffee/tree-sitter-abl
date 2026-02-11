@@ -67,12 +67,10 @@ RELEASE sports.Customer NO-ERROR.
     (no_undo))
   (button_definition
     name: (identifier)
-    (button_option
-      label: (string_literal)))
+    label: (string_literal))
   (button_definition
     name: (identifier)
-    (button_option
-      label: (string_literal)))
+    label: (string_literal))
   (query_definition
     name: (identifier)
     (query_table_list
@@ -95,7 +93,7 @@ RELEASE sports.Customer NO-ERROR.
     (form_item
       field: (identifier))
     (form_item
-      (number_literal))
+      skip: (number_literal))
     (form_item
       field: (identifier))
     (frame_phrase
@@ -147,7 +145,7 @@ RELEASE sports.Customer NO-ERROR.
         (find_statement
           table: (identifier)
           (where_phrase
-            (binary_expression
+            where: (binary_expression
               (function_call
                 function: (identifier)
                 (arguments

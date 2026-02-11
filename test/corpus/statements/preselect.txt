@@ -13,7 +13,8 @@ PRESELECT Order, EACH OrderLine OF Order NO-LOCK.
     (preselect_record_list
       (preselect_record
         (record_phrase
-          record: (identifier)))))
+          record: (identifier)
+          (no_lock)))))
   (preselect_statement
     (preselect_record_list
       (preselect_record
@@ -33,4 +34,5 @@ PRESELECT Order, EACH OrderLine OF Order NO-LOCK.
       (preselect_record
         (record_phrase
           record: (identifier)
-          of: (identifier))))))
+          of: (identifier)
+          (no_lock))))))

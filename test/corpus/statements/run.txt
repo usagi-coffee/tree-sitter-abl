@@ -344,8 +344,7 @@ RUN methodProc IN hProc NO-ERROR.
         name: (identifier))))
   (run_statement
     procedure: (procedure_name)
-    (single_run_option
-      handle: (identifier))
+    handle: (single_run)
     (on_server_phrase
       server: (identifier)))
   (run_statement
@@ -362,8 +361,7 @@ RUN methodProc IN hProc NO-ERROR.
     handle: (identifier))
   (run_statement
     procedure: (procedure_name)
-    (singleton_option
-      handle: (identifier))
+    handle: (singleton)
     (on_server_phrase
       server: (identifier)))
   (run_statement
@@ -394,8 +392,7 @@ RUN methodProc IN hProc NO-ERROR.
   (run_statement
     procedure: (value_expression
       (identifier))
-    (persistent_option
-      handle: (identifier)))
+    handle: (persistent))
   (run_statement
     procedure: (identifier)
     (in_phrase

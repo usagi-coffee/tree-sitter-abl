@@ -15,9 +15,11 @@ REPOSITION qCust TO ROWID rCust.
     row: (number_literal))
   (reposition_statement
     query: (identifier)
+    (forwards)
     count: (number_literal))
   (reposition_statement
     query: (identifier)
+    (backwards)
     count: (number_literal))
   (reposition_statement
     query: (identifier)
@@ -70,25 +72,22 @@ REPOSITION qCust TO ROWID rTop, rChild FOR TENANT tenantId NO-ERROR.
     (identifier)
     (identifier)
     (no_undo)
-    (initial_option
-      (number_literal)))
+    (number_literal))
   (query_definition
     (identifier)
     (query_table_list
       (identifier)
-      (identifier)))
+      (identifier))
+    (scrolling))
   (button_definition
     (identifier)
-    (button_option
-      (string_literal)))
+    (string_literal))
   (button_definition
     (identifier)
-    (button_option
-      (string_literal)))
+    (string_literal))
   (button_definition
     (identifier)
-    (button_option
-      (string_literal)))
+    (string_literal))
   (form_statement
     (form_item
       (identifier))
@@ -128,12 +127,14 @@ REPOSITION qCust TO ROWID rTop, rChild FOR TENANT tenantId NO-ERROR.
             (string_literal))
           (reposition_statement
             (identifier)
+            (backwards)
             (binary_expression
               (input_expression
                 (identifier))
               (number_literal)))
           (reposition_statement
             (identifier)
+            (forwards)
             (binary_expression
               (input_expression
                 (identifier))
@@ -143,10 +144,12 @@ REPOSITION qCust TO ROWID rTop, rChild FOR TENANT tenantId NO-ERROR.
   (open_query_statement
     (identifier)
     (record_phrase
-      (identifier))
+      (identifier)
+      (no_lock))
     (record_phrase
       (identifier)
-      (identifier)))
+      (identifier)
+      (no_lock)))
   (run_statement
     (identifier))
   (enable_statement
@@ -178,6 +181,7 @@ REPOSITION qCust TO ROWID rTop, rChild FOR TENANT tenantId NO-ERROR.
           (body
             (reposition_statement
               (identifier)
+              (backwards)
               (number_literal))
             (get_statement
               (identifier)))))
@@ -206,9 +210,11 @@ REPOSITION qCust TO ROWID rTop, rChild FOR TENANT tenantId NO-ERROR.
           (overlay)))))
   (reposition_statement
     (identifier)
-    (identifier))
+    (identifier)
+    (no_error))
   (reposition_statement
     (identifier)
     (identifier)
     (identifier)
-    (identifier)))
+    (identifier)
+    (no_error)))

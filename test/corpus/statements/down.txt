@@ -42,7 +42,8 @@ END.
   (for_statement
     (record
       (record
-        (identifier))
+        (identifier)
+        (no_lock))
       (by_phrase
         (qualified_name
           (identifier)

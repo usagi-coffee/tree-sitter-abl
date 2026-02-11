@@ -4,9 +4,9 @@ module.exports = ({ kw }) => ({
       kw("RETURN"),
       optional(
         choice(
-          $._expression,
-          seq(kw("ERROR"), optional($._expression)),
-          kw("NO-APPLY"),
+          field("value", $._expression),
+          seq(kw("ERROR"), optional(field("error_value", $._expression))),
+          alias(kw("NO-APPLY"), $.no_apply),
         ),
       ),
       $._terminator,

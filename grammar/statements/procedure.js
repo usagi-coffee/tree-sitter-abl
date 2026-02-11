@@ -5,7 +5,7 @@ module.exports = ({ kw }) => ({
       optional($.__procedure_modifier),
       field("name", $._identifier_or_qualified_name),
       repeat($.__procedure_option),
-      optional(alias($.__procedure_in_super_phrase, $.in_super_phrase)),
+      optional(alias(seq(kw("IN"), kw("SUPER")), $.in_super_phrase)),
       alias($.__procedure_body, $.body),
     ),
 
@@ -18,8 +18,6 @@ module.exports = ({ kw }) => ({
       $._terminator,
     ),
 
-  __procedure_access_modifier: ($) =>
-    choice(kw("PRIVATE"), kw("PROTECTED"), kw("PUBLIC")),
   __procedure_modifier: ($) =>
     choice(
       alias(kw("PRIVATE"), $.access_modifier),
@@ -29,31 +27,29 @@ module.exports = ({ kw }) => ({
 
   __procedure_option: ($) =>
     choice(
-      alias($.__procedure_cdecl_option, $.cdecl),
-      alias($.__procedure_ordinal_option, $.ordinal_phrase),
-      alias($.__procedure_persistent_option, $.persistent),
-      alias($.__procedure_thread_safe_option, $.thread_safe),
+      alias(kw("CDECL"), $.cdecl),
+      alias(seq(kw("ORDINAL"), field("number", $.number_literal)), $.ordinal_phrase),
+      alias(kw("PERSISTENT"), $.persistent),
+      alias(seq(kw("THREAD-SAFE"), optional(kw("SAFE"))), $.thread_safe),
       alias($.__procedure_external_phrase, $.external_phrase),
-      alias($.__procedure_map_option, $.map),
+      alias(seq(kw("MAP"), field("name", $.identifier)), $.map),
     ),
 
-  __procedure_cdecl_option: ($) => kw("CDECL"),
-  __procedure_ordinal_option: ($) =>
-    seq(kw("ORDINAL"), field("number", $.number_literal)),
-  __procedure_persistent_option: ($) => kw("PERSISTENT"),
-  __procedure_thread_safe_option: ($) =>
-    seq(kw("THREAD-SAFE"), optional(kw("SAFE"))),
   __procedure_external_phrase: ($) =>
     prec.left(
       seq(
         kw("EXTERNAL"),
         field("library", $._escaped_string),
-        optional(choice(kw("CDECL"), kw("PASCAL"), kw("STDCALL"))),
+        optional(
+          choice(
+            alias(kw("CDECL"), $.cdecl),
+            alias(kw("PASCAL"), $.pascal),
+            alias(kw("STDCALL"), $.stdcall),
+          ),
+        ),
         optional(seq(kw("ORDINAL"), $.number_literal)),
-        optional(kw("PERSISTENT")),
-        optional(choice(kw("THREAD-SAFE"))),
+        optional(alias(kw("PERSISTENT"), $.persistent)),
+        optional(alias(kw("THREAD-SAFE"), $.thread_safe)),
       ),
     ),
-  __procedure_in_super_phrase: ($) => seq(kw("IN"), kw("SUPER")),
-  __procedure_map_option: ($) => seq(kw("MAP"), field("name", $.identifier)),
 });

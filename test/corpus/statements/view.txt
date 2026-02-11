@@ -50,12 +50,14 @@ VIEW STREAM-HANDLE hS FRAME f1.
 (source_code
   (output_statement
     file: (identifier)
+    (paged)
     (page_size_phrase
       (number_literal)))
   (for_statement
     (record
       (record
-        record: (identifier)))
+        record: (identifier)
+        (no_lock)))
     (body
       (page_statement)
       (form_statement
@@ -111,7 +113,7 @@ VIEW STREAM-HANDLE hS FRAME f1.
           field: (identifier)
           format: (string_literal))
         (form_item
-          (number_literal))
+          skip: (number_literal))
         (frame_phrase
           frame: (identifier)
           (page_top)))
@@ -122,7 +124,8 @@ VIEW STREAM-HANDLE hS FRAME f1.
         (record
           (record
             record: (identifier)
-            of: (identifier)))
+            of: (identifier)
+            (no_lock)))
         (body
           (display_statement
             (field

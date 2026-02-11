@@ -11,9 +11,8 @@ ACCUMULATE price (TOTAL LABEL "Total" BY category).
     (accumulate
       target: (identifier)
       (aggregate_phrase
-        (aggregate_option
-          operation: (aggregate_operation)
-          (label_phrase
-            label: (string_literal))
-          (by_phrase
-            group: (identifier)))))))
+        operation: (aggregate_operation)
+        (label_phrase
+          label: (string_literal))
+        (by_phrase
+          group: (identifier))))))

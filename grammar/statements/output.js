@@ -5,64 +5,64 @@ module.exports = ({ kw }) => ({
     seq(
       optional($.__output_stream),
       choice(
-        seq(kw("CLOSE")),
+        alias(kw("CLOSE"), $.close),
         seq(kw("TO"), $.__output_to_target, repeat($.__output_to_option)),
         seq(
           kw("THROUGH"),
           $.__output_through_program_target,
           repeat($.__output_through_argument),
-          repeat($.__output_through_option),
-        ),
-      ),
+          repeat($.__output_through_option)
+        )
+      )
     ),
 
   __output_stream: ($) =>
     seq(choice(kw("STREAM"), kw("STREAM-HANDLE")), field("name", $.identifier)),
 
-  __output_append_phrase: ($) => kw("APPEND"),
   __output_to_option: ($) =>
     choice(
       alias($.__output_lob_dir_phrase, $.lob_dir_phrase),
       alias($.__output_num_copies_phrase, $.num_copies_phrase),
-      kw("COLLATE"),
-      choice(kw("LANDSCAPE"), kw("PORTRAIT")),
-      alias($.__output_append_phrase, $.append_phrase),
-      kw("BINARY"),
-      kw("ECHO"),
-      kw("NO-ECHO"),
-      kw("KEEP-MESSAGES"),
+      alias(kw("COLLATE"), $.collate),
+      alias(kw("LANDSCAPE"), $.landscape),
+      alias(kw("PORTRAIT"), $.portrait),
+      alias(kw("APPEND"), $.append),
+      alias(kw("BINARY"), $.binary),
+      alias(kw("ECHO"), $.echo),
+      alias(kw("NO-ECHO"), $.no_echo),
+      alias(kw("KEEP-MESSAGES"), $.keep_messages),
       seq(kw("MAP"), field("map", $.__output_map_entry)),
-      kw("NO-MAP"),
-      kw("PAGED"),
+      alias(kw("NO-MAP"), $.no_map),
+      alias(kw("PAGED"), $.paged),
       alias($.__output_page_size_phrase, $.page_size_phrase),
-      kw("UNBUFFERED"),
-      alias($.__output_convert_phrase, $.convert_phrase),
+      alias(kw("UNBUFFERED"), $.unbuffered),
+      alias($.__output_convert_phrase, $.convert_phrase)
     ),
 
   __output_through_option: ($) =>
     choice(
-      kw("ECHO"),
-      kw("NO-ECHO"),
+      alias(kw("ECHO"), $.echo),
+      alias(kw("NO-ECHO"), $.no_echo),
       seq(kw("MAP"), field("map", $.__output_map_entry)),
-      kw("NO-MAP"),
-      kw("PAGED"),
+      alias(kw("NO-MAP"), $.no_map),
+      alias(kw("PAGED"), $.paged),
       alias($.__output_page_size_phrase, $.page_size_phrase),
-      kw("UNBUFFERED"),
-      alias($.__output_convert_phrase, $.convert_phrase),
+      alias(kw("UNBUFFERED"), $.unbuffered),
+      alias($.__output_convert_phrase, $.convert_phrase)
     ),
 
   __output_convert_phrase: ($) =>
     choice(
-      kw("NO-CONVERT"),
+      alias(kw("NO-CONVERT"), $.no_convert),
       seq(
         kw("CONVERT"),
         repeat(
           choice(
             seq(kw("TARGET"), field("target", $.string_literal)),
-            seq(kw("SOURCE"), field("source", $.string_literal)),
-          ),
-        ),
-      ),
+            seq(kw("SOURCE"), field("source", $.string_literal))
+          )
+        )
+      )
     ),
 
   __output_lob_dir_phrase: ($) =>
@@ -70,8 +70,8 @@ module.exports = ({ kw }) => ({
       kw("LOB-DIR"),
       choice(
         alias($.constant_expression, $.preprocessor_reference),
-        seq(kw("VALUE"), "(", $._expression, ")"),
-      ),
+        seq(kw("VALUE"), "(", $._expression, ")")
+      )
     ),
 
   __output_num_copies_phrase: ($) =>
@@ -80,8 +80,8 @@ module.exports = ({ kw }) => ({
       choice(
         $.number_literal,
         alias($.constant_expression, $.preprocessor_reference),
-        seq(kw("VALUE"), "(", $._expression, ")"),
-      ),
+        seq(kw("VALUE"), "(", $._expression, ")")
+      )
     ),
 
   __output_page_size_phrase: ($) =>
@@ -90,15 +90,15 @@ module.exports = ({ kw }) => ({
       choice(
         $.number_literal,
         alias($.constant_expression, $.preprocessor_reference),
-        seq(kw("VALUE"), "(", $._expression, ")"),
-      ),
+        seq(kw("VALUE"), "(", $._expression, ")")
+      )
     ),
 
   __output_map_entry: ($) =>
     choice(
       seq($.identifier, repeat(seq("/", $.identifier))),
       $.identifier,
-      $.string_literal,
+      $.string_literal
     ),
 
   __output_to_target: ($) =>
@@ -110,36 +110,34 @@ module.exports = ({ kw }) => ({
           $.string_literal,
           alias($.constant_expression, $.preprocessor_reference),
           $.identifier,
-          $.qualified_name,
-        ),
+          $.qualified_name
+        )
       ),
-      kw("TERMINAL"),
+      alias(kw("TERMINAL"), $.terminal),
       seq(kw("VALUE"), "(", $._expression, ")"),
-      token(kw("CLIPBOARD")),
+      alias(kw("CLIPBOARD"), $.clipboard)
     ),
 
   __output_through_program_target: ($) =>
     choice(
       field("program", $.identifier),
       field("program", $.string_literal),
-      seq(kw("VALUE"), "(", $._expression, ")"),
+      seq(kw("VALUE"), "(", $._expression, ")")
     ),
 
   __output_through_argument: ($) =>
-    choice($.__output_argument, seq(kw("VALUE"), "(", $._expression, ")")),
-
-  __output_argument: ($) =>
     choice(
       $.string_literal,
       $.number_literal,
       $.identifier,
       alias($.constant_expression, $.preprocessor_reference),
+      seq(kw("VALUE"), "(", $._expression, ")")
     ),
 
   __output_printer_target: ($) =>
     choice(
       $.string_literal,
       $.identifier,
-      alias($.constant_expression, $.preprocessor_reference),
+      alias($.constant_expression, $.preprocessor_reference)
     ),
 });

@@ -25,10 +25,10 @@ FIND Customer SHARE.
     (share_lock))
   (find_statement
     table: (identifier)
-    (exclusive_lock))
+    (exclusive))
   (find_statement
     table: (identifier)
-    (share_lock)))
+    (share)))
 
 ================================================================================
 FIND with WHERE clause
@@ -43,7 +43,7 @@ FIND Customer WHERE Customer.Name = "John" AND Customer.Balance > 0.
   (find_statement
     table: (identifier)
     (where_phrase
-      (binary_expression
+      where: (binary_expression
         (qualified_name
           left: (identifier)
           right: (identifier))
@@ -52,7 +52,7 @@ FIND Customer WHERE Customer.Name = "John" AND Customer.Balance > 0.
   (find_statement
     table: (identifier)
     (where_phrase
-      (binary_expression
+      where: (binary_expression
         (binary_expression
           (qualified_name
             left: (identifier)
@@ -76,15 +76,18 @@ FIND FIRST DebtorShipTo WHERE DebtorShipTo.Code = par_code NO-LOCK NO-ERROR.
 
 (source_code
   (find_statement
+    (first)
     table: (identifier)
     (no_lock))
   (find_statement
+    (last)
     table: (identifier)
     (no_lock))
   (find_statement
+    (first)
     table: (identifier)
     (where_phrase
-      (binary_expression
+      where: (binary_expression
         (qualified_name
           left: (identifier)
           right: (identifier))
@@ -103,9 +106,11 @@ FIND CURRENT Customer EXCLUSIVE-LOCK.
 
 (source_code
   (find_statement
+    (current)
     table: (identifier)
     (no_error))
   (find_statement
+    (current)
     table: (identifier)
     (exclusive_lock)))
 
@@ -143,9 +148,10 @@ FIND Customer USE-INDEX CustNum.
 
 (source_code
   (find_statement
+    (first)
     table: (identifier)
     (where_phrase
-      (binary_expression
+      where: (binary_expression
         (qualified_name
           left: (identifier)
           right: (identifier))
@@ -167,6 +173,7 @@ FIND FIRST Customer NO-LOCK NO-PREFETCH.
 
 (source_code
   (find_statement
+    (first)
     table: (identifier)
     (no_lock)
     (no_prefetch)))
@@ -183,17 +190,15 @@ FIND Order USING Order.OrderNum EXCLUSIVE-LOCK.
 (source_code
   (find_statement
     table: (identifier)
-    (using_phrase
-      (qualified_name
-        left: (identifier)
-        right: (identifier)))
+    values: (qualified_name
+      left: (identifier)
+      right: (identifier))
     (no_error))
   (find_statement
     table: (identifier)
-    (using_phrase
-      (qualified_name
-        left: (identifier)
-        right: (identifier)))
+    values: (qualified_name
+      left: (identifier)
+      right: (identifier))
     (exclusive_lock)))
 
 ================================================================================
@@ -216,7 +221,7 @@ FIND db.tablename WHERE tablename.field = 1.
       left: (identifier)
       right: (identifier))
     (where_phrase
-      (binary_expression
+      where: (binary_expression
         (qualified_name
           left: (identifier)
           right: (identifier))
@@ -232,9 +237,10 @@ FIND FIRST Customer WHERE Customer.Balance > 1000 USE-INDEX Balance NO-LOCK NO-E
 
 (source_code
   (find_statement
+    (first)
     table: (identifier)
     (where_phrase
-      (binary_expression
+      where: (binary_expression
         (qualified_name
           left: (identifier)
           right: (identifier))
@@ -287,10 +293,9 @@ END.
         right: (identifier))))
   (find_statement
     table: (identifier)
-    (using_phrase
-      (qualified_name
-        left: (identifier)
-        right: (identifier))))
+    values: (qualified_name
+      left: (identifier)
+      right: (identifier)))
   (repeat_statement
     (body
       (prompt_for_statement
@@ -300,10 +305,9 @@ END.
             right: (identifier))))
       (find_statement
         table: (identifier)
-        (using_phrase
-          (qualified_name
-            left: (identifier)
-            right: (identifier))))
+        values: (qualified_name
+          left: (identifier)
+          right: (identifier)))
       (display_statement
         (field
           field: (qualified_name
@@ -316,6 +320,7 @@ END.
       (repeat_statement
         (body
           (find_statement
+            (next)
             table: (identifier)
             (of_phrase
               (identifier)))
@@ -326,7 +331,7 @@ END.
           (find_statement
             table: (identifier)
             (where_phrase
-              (binary_expression
+              where: (binary_expression
                 (qualified_name
                   left: (identifier)
                   right: (identifier))
@@ -347,8 +352,7 @@ END.
                 left: (identifier)
                 right: (identifier))
               (aggregate_phrase
-                (aggregate_option
-                  operation: (aggregate_operation)))))))))
+                operation: (aggregate_operation))))))))
   (variable_definition
     name: (identifier)
     (no_undo)
@@ -361,9 +365,10 @@ END.
         (field
           field: (identifier)))
       (find_statement
+        (first)
         table: (identifier)
         (where_phrase
-          (binary_expression
+          where: (binary_expression
             (qualified_name
               left: (identifier)
               right: (identifier))
@@ -375,5 +380,6 @@ END.
               left: (identifier)
               right: (identifier)))
           (find_statement
+            (next)
             table: (identifier)
             index: (identifier)))))))

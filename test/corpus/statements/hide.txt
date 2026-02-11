@@ -19,9 +19,12 @@ HIDE STREAM-HANDLE hS FRAME f1 NO-PAUSE.
   (hide_statement
     (widget_phrase
       frame: (identifier)))
-  (hide_statement)
-  (hide_statement)
-  (hide_statement)
+  (hide_statement
+    (message))
+  (hide_statement
+    (all))
+  (hide_statement
+    (all))
   (hide_statement
     stream: (identifier))
   (hide_statement
@@ -107,7 +110,8 @@ HIDE ALL NO-PAUSE IN WINDOW w1.
         (binary_expression
           (identifier)
           (number_literal))
-        then: (hide_statement)
+        then: (hide_statement
+          (all))
         else: (if_statement
           (binary_expression
             (identifier)
@@ -115,7 +119,9 @@ HIDE ALL NO-PAUSE IN WINDOW w1.
           then: (hide_statement
             (widget_phrase
               frame: (identifier)))))))
-  (hide_statement)
   (hide_statement
+    (message))
+  (hide_statement
+    (all)
     (in_window_phrase
       window: (identifier))))

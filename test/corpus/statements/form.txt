@@ -76,9 +76,9 @@ FORM customer-name SKIP(1) SPACE(2).
     (form_item
       field: (identifier))
     (form_item
-      (number_literal))
+      skip: (number_literal))
     (form_item
-      (number_literal))))
+      space: (number_literal))))
 
 ================================================================================
 FORM with frame phrase
@@ -229,10 +229,9 @@ END.
           (centered)))
       (find_statement
         (identifier)
-        (using_phrase
-          (qualified_name
-            (identifier)
-            (identifier))))
+        (qualified_name
+          (identifier)
+          (identifier)))
       (update_statement
         (field
           (qualified_name

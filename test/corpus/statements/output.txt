@@ -17,26 +17,36 @@ OUTPUT TO TERMINAL NO-ECHO PAGED PAGE-SIZE 24.
 --------------------------------------------------------------------------------
 
 (source_code
-  (output_statement)
   (output_statement
-    name: (identifier))
+    (close))
   (output_statement
-    name: (identifier))
+    name: (identifier)
+    (close))
+  (output_statement
+    name: (identifier)
+    (close))
   (output_statement
     (binary_expression
       (identifier)
       (string_literal))
-    (append_phrase))
+    (append))
   (output_statement
     printer: (string_literal)
     (num_copies_phrase
       (number_literal))
+    (landscape)
+    (paged)
     (page_size_phrase
       (number_literal))
-    (convert_phrase))
+    (no_echo)
+    (no_map)
+    (unbuffered)
+    (convert_phrase
+      (no_convert)))
   (output_statement
     program: (string_literal)
-    (identifier))
+    (identifier)
+    (no_echo))
   (output_statement
     file: (string_literal))
   (output_statement
@@ -49,8 +59,12 @@ OUTPUT TO TERMINAL NO-ECHO PAGED PAGE-SIZE 24.
     (convert_phrase
       target: (string_literal)))
   (output_statement
-    printer: (identifier))
+    printer: (identifier)
+    (portrait))
   (output_statement
+    (terminal)
+    (no_echo)
+    (paged)
     (page_size_phrase
       (number_literal))))
 
@@ -67,9 +81,11 @@ OUTPUT THROUGH myprog NO-MAP CONVERT TARGET "utf-8".
   (output_statement
     (identifier)
     map: (string_literal)
-    (convert_phrase))
+    (convert_phrase
+      (no_convert)))
   (output_statement
     program: (identifier)
+    (no_map)
     (convert_phrase
       target: (string_literal))))
 
@@ -130,7 +146,8 @@ OUTPUT TO TERMINAL.
   (for_statement
     (record
       (record
-        (identifier)))
+        (identifier)
+        (no_lock)))
     (body
       (display_statement
         (field
@@ -167,7 +184,8 @@ OUTPUT TO TERMINAL.
         (frame_phrase
           (number_literal)
           (side_labels)))))
-  (output_statement)
+  (output_statement
+    (close))
   (display_statement
     (field
       (string_literal)))
@@ -175,11 +193,14 @@ OUTPUT TO TERMINAL.
     (identifier)
     (identifier)
     (no_undo))
-  (output_statement)
+  (output_statement
+    (terminal)
+    (paged))
   (for_statement
     (record
       (record
-        (identifier))
+        (identifier)
+        (no_lock))
       (break_by
         (qualified_name
           (identifier)
@@ -269,16 +290,20 @@ OUTPUT TO TERMINAL.
               (assignment_operator)
               (identifier))
             (page_statement))))))
-  (output_statement)
+  (output_statement
+    (close))
   (output_statement
     (num_copies_phrase
       (number_literal)))
   (output_statement
+    (landscape)
     (num_copies_phrase
       (number_literal)))
   (output_statement
+    (portrait)
     (num_copies_phrase
-      (identifier)))
+      (identifier))
+    (collate))
   (output_statement
     (string_literal)
     (page_size_phrase
@@ -287,27 +312,36 @@ OUTPUT TO TERMINAL.
     (string_literal)
     (lob_dir_phrase
       (identifier))
-    (append_phrase))
+    (append))
   (output_statement
     (string_literal)
-    (convert_phrase))
-  (output_statement
-    (string_literal))
+    (binary)
+    (convert_phrase
+      (no_convert)))
   (output_statement
     (string_literal)
+    (echo)
+    (keep_messages))
+  (output_statement
+    (string_literal)
+    (no_echo)
     (identifier)
     (identifier))
   (output_statement
     (string_literal)
+    (paged)
     (page_size_phrase
       (number_literal)))
   (output_statement
     (identifier)
-    (string_literal))
+    (string_literal)
+    (unbuffered))
   (output_statement
     (identifier)
     (string_literal))
   (output_statement
     (identifier)
-    (identifier))
-  (output_statement))
+    (identifier)
+    (no_map))
+  (output_statement
+    (terminal)))

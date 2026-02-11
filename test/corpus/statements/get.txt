@@ -63,7 +63,7 @@ END.
   (get_statement
     query: (identifier))
   (do_statement
-    (available_expression
+    condition: (available_expression
       record: (identifier))
     (body
       (display_statement

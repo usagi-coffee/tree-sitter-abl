@@ -150,8 +150,7 @@ END.
     name: (identifier)
     type: (identifier)
     (no_undo)
-    (initial_option
-      (number_literal)))
+    (number_literal))
   (variable_definition
     name: (identifier)
     type: (identifier)
@@ -168,7 +167,8 @@ END.
   (for_statement
     (record
       (record
-        record: (identifier)))
+        record: (identifier)
+        (no_lock)))
     (body
       (display_statement
         record: (qualified_name

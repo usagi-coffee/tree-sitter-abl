@@ -116,6 +116,7 @@ END.
             (identifier)))))
     (body
       (find_statement
+        (next)
         (identifier)
         (no_lock))
       (display_statement

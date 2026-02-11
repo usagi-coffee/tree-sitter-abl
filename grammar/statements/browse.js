@@ -171,7 +171,7 @@ module.exports = ({ kw }) => ({
   __browse_enable_phrase: ($) =>
     seq(
       kw("ENABLE"),
-      choice(kw("ALL"), repeat1(field("field", $.__browse_enable_field))),
+      choice(alias(kw("ALL"), $.all), repeat1(field("field", $.__browse_enable_field))),
     ),
 
   __browse_enable_field: ($) =>

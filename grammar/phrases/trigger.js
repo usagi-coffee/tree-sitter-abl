@@ -14,7 +14,7 @@ module.exports = ({ kw }) => ({
     seq(
       kw("ON"),
       field("event", $.__trigger_event_list),
-      optional(kw("ANYWHERE")),
+      optional(alias(kw("ANYWHERE"), $.anywhere)),
       choice(alias($.__trigger_body, $.trigger_body), $.__persistent_trigger),
     ),
 
@@ -33,7 +33,13 @@ module.exports = ({ kw }) => ({
           field("end", $._expression),
         ),
       ),
-      optional(seq(kw("DOWN"), optional(kw("TO")), optional($._expression))),
+      optional(
+        seq(
+          kw("DOWN"),
+          optional(kw("TO")),
+          optional(field("down", $._expression)),
+        ),
+      ),
       ":",
       repeat($._statement),
       kw("END"),

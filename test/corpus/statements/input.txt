@@ -66,11 +66,10 @@ INPUT FROM VALUE(cPath) CONVERT SOURCE "ibm850" TARGET "utf-8".
             (identifier))))
       (find_statement
         (identifier)
-        (using_phrase
-          (input_expression
-            (qualified_name
-              (identifier)
-              (identifier)))))
+        (input_expression
+          (qualified_name
+            (identifier)
+            (identifier))))
       (assign_statement
         (qualified_name
           (identifier)

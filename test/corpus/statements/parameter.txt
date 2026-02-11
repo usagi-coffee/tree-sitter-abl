@@ -127,32 +127,27 @@ DEF INPUT PARAMETER pNull AS CHARACTER INITIAL ?.
   (parameter_definition
     name: (identifier)
     type: (identifier)
-    (initial_option
-      (string_literal)))
+    (string_literal))
   (parameter_definition
     name: (identifier)
     type: (identifier)
-    (initial_option
-      (number_literal)))
+    (number_literal))
   (parameter_definition
     name: (identifier)
     type: (identifier)
     (extent_phrase
       (number_literal))
-    (initial_option
-      (number_literal)
-      (number_literal)
-      (number_literal)))
+    (number_literal)
+    (number_literal)
+    (number_literal))
   (parameter_definition
     name: (identifier)
     type: (identifier)
-    (initial_option)
     (no_undo))
   (parameter_definition
     name: (identifier)
     type: (identifier)
-    (initial_option
-      (null_literal))))
+    (null_literal)))
 
 ================================================================================
 PARAMETER DEFINITION - LABEL Option
@@ -167,15 +162,13 @@ DEFINE OUTPUT PARAMETER pMulti AS INTEGER LABEL "First", "Second", "Third".
   (parameter_definition
     name: (identifier)
     type: (identifier)
-    (label_option
-      (string_literal)))
+    (string_literal))
   (parameter_definition
     name: (identifier)
     type: (identifier)
-    (label_option
-      (string_literal)
-      (string_literal)
-      (string_literal))))
+    (string_literal)
+    (string_literal)
+    (string_literal)))
 
 ================================================================================
 PARAMETER DEFINITION - FORMAT Option
@@ -229,10 +222,10 @@ DEFINE INPUT-OUTPUT PARAMETER DATASET-HANDLE hData BY-VALUE NO-UNDO.
 (source_code
   (parameter_definition
     table_handle: (identifier)
-    (by_value_option))
+    (by_value))
   (parameter_definition
     dataset_handle: (identifier)
-    (by_value_option)
+    (by_value)
     (no_undo)))
 
 ================================================================================
@@ -247,11 +240,11 @@ DEFINE INPUT-OUTPUT PARAMETER DATASET-HANDLE hData BY-REFERENCE BIND.
 (source_code
   (parameter_definition
     table_handle: (identifier)
-    (by_reference_option))
+    (by_reference))
   (parameter_definition
     dataset_handle: (identifier)
-    (by_reference_option)
-    (bind_option)))
+    (by_reference)
+    (bind)))
 
 ================================================================================
 PARAMETER DEFINITION - APPEND Option
@@ -265,11 +258,11 @@ DEFINE OUTPUT PARAMETER DATASET FOR dsAudit APPEND BIND.
 (source_code
   (parameter_definition
     table: (identifier)
-    (append_option))
+    (append))
   (parameter_definition
     dataset: (identifier)
-    (append_option)
-    (bind_option)))
+    (append)
+    (bind)))
 
 ================================================================================
 PARAMETER DEFINITION - BIND Option
@@ -283,10 +276,10 @@ DEFINE OUTPUT PARAMETER DATASET-HANDLE hData BIND NO-UNDO.
 (source_code
   (parameter_definition
     table_handle: (identifier)
-    (bind_option))
+    (bind))
   (parameter_definition
     dataset_handle: (identifier)
-    (bind_option)
+    (bind)
     (no_undo)))
 
 ================================================================================
@@ -358,22 +351,18 @@ DEFINE RETURN PARAMETER pRes AS LOGICAL NO-UNDO.
     type: (identifier)
     (format
       (string_literal))
-    (initial_option
-      (number_literal))
-    (label_option
-      (string_literal))
+    (number_literal)
+    (string_literal)
     (no_undo))
   (parameter_definition
     name: (identifier)
     type: (identifier)
     (extent_phrase
       (number_literal))
-    (initial_option
-      (number_literal)
-      (number_literal)
-      (number_literal))
-    (label_option
-      (string_literal))
+    (number_literal)
+    (number_literal)
+    (number_literal)
+    (string_literal)
     (format
       (string_literal)))
   (parameter_definition
@@ -381,8 +370,7 @@ DEFINE RETURN PARAMETER pRes AS LOGICAL NO-UNDO.
     like: (qualified_name
       left: (identifier)
       right: (identifier))
-    (initial_option
-      (string_literal))
+    (string_literal)
     (no_undo))
   (parameter_definition
     name: (identifier)
@@ -519,8 +507,7 @@ DEFINE INPUT PARAMETER pExtent0 AS INTEGER EXTENT 0.
     name: (identifier)
     type: (identifier)
     (no_undo)
-    (initial_option
-      (number_literal)))
+    (number_literal))
   (run_statement
     procedure: (procedure_name)
     (arguments
@@ -562,7 +549,8 @@ DEFINE INPUT PARAMETER pExtent0 AS INTEGER EXTENT 0.
   (for_statement
     (record
       (record
-        record: (identifier)))
+        record: (identifier)
+        (no_lock)))
     (body
       (assignment_statement
         left: (identifier)
@@ -657,8 +645,7 @@ DEFINE INPUT PARAMETER pExtent0 AS INTEGER EXTENT 0.
       (identifier)))
   (button_definition
     name: (identifier)
-    (button_option
-      label: (string_literal)))
+    label: (string_literal))
   (do_statement
     (frame_phrase
       frame: (identifier))
@@ -709,7 +696,8 @@ DEFINE INPUT PARAMETER pExtent0 AS INTEGER EXTENT 0.
             right: (identifier)))
         (do_statement
           (body
-            (hide_statement))))
+            (hide_statement
+              (message)))))
       (wait_for_statement
         events: (identifier)
         widgets: (widget_phrase
@@ -727,7 +715,7 @@ DEFINE INPUT PARAMETER pExtent0 AS INTEGER EXTENT 0.
       (find_statement
         table: (identifier)
         (where_phrase
-          (binary_expression
+          where: (binary_expression
             (qualified_name
               left: (identifier)
               right: (identifier))
@@ -820,19 +808,19 @@ DEFINE INPUT PARAMETER pExtent0 AS INTEGER EXTENT 0.
       right: (identifier)))
   (parameter_definition
     table_handle: (identifier)
-    (by_value_option)
-    (bind_option))
+    (by_value)
+    (bind))
   (parameter_definition
     table_handle: (identifier)
-    (by_value_option))
+    (by_value))
   (parameter_definition
     dataset: (identifier)
-    (append_option)
-    (by_value_option))
+    (append)
+    (by_value))
   (parameter_definition
     dataset_handle: (identifier)
-    (bind_option)
-    (by_value_option))
+    (bind)
+    (by_value))
   (parameter_definition
     name: (identifier)
     type: (identifier)

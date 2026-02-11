@@ -56,8 +56,7 @@ OS-COPY "a.txt" VALUE("b.txt").
     (identifier)
     (identifier)
     (no_undo)
-    (initial_option
-      (boolean_literal)))
+    (boolean_literal))
   (repeat_statement
     (identifier)
     (body

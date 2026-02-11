@@ -67,8 +67,7 @@ DISPLAY Customer.Balance (TOTAL).
         left: (identifier)
         right: (identifier))
       (aggregate_phrase
-        (aggregate_option
-          operation: (aggregate_operation))))))
+        operation: (aggregate_operation)))))
 
 ================================================================================
 DISPLAY abbreviated
@@ -240,12 +239,13 @@ DISPLAY SPACE(2) Customer.Name SKIP(1) Customer.City.
   (for_statement
     (record
       (record
-        record: (identifier))
+        record: (identifier)
+        (no_lock))
       (by_phrase
-        (qualified_name
+        by: (qualified_name
           left: (identifier)
           right: (identifier))
-        (qualified_name
+        by: (qualified_name
           left: (identifier)
           right: (identifier))))
     (body
@@ -266,7 +266,8 @@ DISPLAY SPACE(2) Customer.Name SKIP(1) Customer.City.
         (record
           (record
             record: (identifier)
-            of: (identifier)))
+            of: (identifier)
+            (no_lock)))
         (body
           (display_statement
             (field
@@ -289,11 +290,13 @@ DISPLAY SPACE(2) Customer.Name SKIP(1) Customer.City.
             (record
               (record
                 record: (identifier)
-                of: (identifier)))
+                of: (identifier)
+                (no_lock)))
             (record
               (record
                 record: (identifier)
-                of: (identifier)))
+                of: (identifier)
+                (no_lock)))
             (body
               (display_statement
                 (field
@@ -315,11 +318,13 @@ DISPLAY SPACE(2) Customer.Name SKIP(1) Customer.City.
   (for_statement
     (record
       (record
-        record: (identifier)))
+        record: (identifier)
+        (no_lock)))
     (record
       (record
         record: (identifier)
-        of: (identifier)))
+        of: (identifier)
+        (no_lock)))
     (body
       (display_statement
         (field
@@ -342,11 +347,13 @@ DISPLAY SPACE(2) Customer.Name SKIP(1) Customer.City.
         (record
           (record
             record: (identifier)
-            of: (identifier)))
+            of: (identifier)
+            (no_lock)))
         (record
           (record
             record: (identifier)
-            of: (identifier)))
+            of: (identifier)
+            (no_lock)))
         (body
           (display_statement
             (field
@@ -374,14 +381,14 @@ DISPLAY SPACE(2) Customer.Name SKIP(1) Customer.City.
                   left: (identifier)
                   right: (identifier)))
               (aggregate_phrase
-                (aggregate_option
-                  operation: (aggregate_operation))))
+                operation: (aggregate_operation)))
             (format_phrase
               label: (string_literal)))))))
   (for_statement
     (record
       (record
-        record: (identifier)))
+        record: (identifier)
+        (no_lock)))
     (body
       (display_statement
         (field
@@ -458,6 +465,7 @@ DISPLAY SPACE(2) Customer.Name SKIP(1) Customer.City.
       left: (identifier)
       right: (identifier)))
   (display_statement
+    (unless_hidden)
     record: (qualified_name
       left: (identifier)
       right: (identifier)))

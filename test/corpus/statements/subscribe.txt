@@ -13,7 +13,8 @@ SUBSCRIBE PROCEDURE hSub TO "MyEvent" IN hPub.
     event: (string_literal)
     publisher: (identifier))
   (subscribe_statement
-    event: (string_literal))
+    event: (string_literal)
+    (anywhere))
   (subscribe_statement
     subscriber: (identifier)
     event: (string_literal)
@@ -54,19 +55,16 @@ SUBSCRIBE TO "spaced event" ANYWHERE RUN-PROCEDURE "spaced event".
     (no_undo))
   (run_statement
     (procedure_name)
-    (persistent_option
-      (identifier)))
+    (persistent))
   (run_statement
     (procedure_name)
-    (persistent_option
-      (identifier))
+    (persistent)
     (arguments
       (argument
         (identifier))))
   (run_statement
     (procedure_name)
-    (persistent_option
-      (identifier)))
+    (persistent))
   (subscribe_statement
     (identifier)
     (string_literal)
@@ -82,7 +80,9 @@ SUBSCRIBE TO "spaced event" ANYWHERE RUN-PROCEDURE "spaced event".
     (identifier)
     (identifier)
     (identifier)
-    (string_literal))
+    (string_literal)
+    (no_error))
   (subscribe_statement
     (string_literal)
+    (anywhere)
     (string_literal)))

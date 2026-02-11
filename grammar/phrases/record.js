@@ -15,19 +15,21 @@ module.exports = ({ kw }) => ({
       seq(
         kw("TENANT-WHERE"),
         field("tenant_where", $._expression),
-        optional(kw("SKIP-GROUP-DUPLICATES")),
+        optional(alias(kw("SKIP-GROUP-DUPLICATES"), $.skip_group_duplicates)),
       ),
       $.__record_use_index,
       $.__record_using_phrase,
-      choice(kw("SHARE-LOCK"), kw("EXCLUSIVE-LOCK"), kw("NO-LOCK")),
-      kw("NO-PREFETCH"),
+      alias(kw("SHARE-LOCK"), $.share_lock),
+      alias(kw("EXCLUSIVE-LOCK"), $.exclusive_lock),
+      alias(kw("NO-LOCK"), $.no_lock),
+      alias(kw("NO-PREFETCH"), $.no_prefetch),
     ),
 
   __record_outer_join: ($) => seq(optional(kw("LEFT")), kw("OUTER-JOIN")),
   __record_use_index: ($) =>
     choice(
       seq(kw("USE-INDEX"), field("index", $._identifier_or_qualified_name)),
-      kw("TABLE-SCAN"),
+      alias(kw("TABLE-SCAN"), $.table_scan),
     ),
   __record_using_phrase: ($) =>
     seq(

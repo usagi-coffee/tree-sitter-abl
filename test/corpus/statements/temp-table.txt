@@ -35,12 +35,9 @@ DEFINE TEMP-TABLE tt_ship NO-UNDO
     (temp_table_field
       name: (identifier)
       type: (identifier)
-      (field_option
-        (string_literal))
-      (field_option
-        (string_literal))
-      (field_option
-        (string_literal)))
+      format: (string_literal)
+      label: (string_literal)
+      serialize_name: (string_literal))
     (temp_table_field
       name: (identifier)
       type: (identifier))
@@ -50,16 +47,17 @@ DEFINE TEMP-TABLE tt_ship NO-UNDO
     (temp_table_field
       name: (identifier)
       type: (identifier)
-      (field_option
-        (number_literal)))
+      initial: (number_literal))
     (temp_table_field
       name: (identifier)
       type: (identifier)
-      (field_option
-        (boolean_literal)))
+      initial: (boolean_literal))
     (temp_table_index
       name: (identifier)
+      (unique)
+      (primary)
       field: (identifier)
+      (descending)
       field: (identifier))))
 
 ================================================================================
@@ -316,69 +314,56 @@ DEFINE TEMP-TABLE tt NO-UNDO
     (temp_table_field
       name: (identifier)
       type: (identifier)
-      (field_option
-        (number_literal)))
+      extent: (number_literal))
     (temp_table_field
       name: (identifier)
       type: (identifier)
-      (field_option
-        (number_literal))
-      (field_option
-        (number_literal)))
+      decimals: (number_literal)
+      initial: (number_literal))
     (temp_table_field
       name: (identifier)
       type: (identifier)
-      (field_option
-        (number_literal))
-      (field_option
-        (number_literal))
-      (field_option
-        (number_literal)))
+      bgcolor: (number_literal)
+      fgcolor: (number_literal)
+      font: (number_literal))
     (temp_table_field
       name: (identifier)
       type: (identifier)
-      (field_option
-        (number_literal))
-      (field_option
-        (number_literal)))
+      dcolor: (number_literal)
+      pfcolor: (number_literal))
     (temp_table_field
       name: (identifier)
       type: (identifier)
-      (field_option
-        (string_literal)))
+      help: (string_literal))
     (temp_table_field
       name: (identifier)
       type: (identifier)
-      (field_option))
+      (serialize_hidden))
     (temp_table_field
       name: (identifier)
       type: (identifier)
-      (field_option
-        (string_literal)))
+      serialize_name: (string_literal))
     (temp_table_field
       name: (identifier)
       type: (identifier)
-      (field_option
-        (string_literal)))
+      column_label: (string_literal))
     (temp_table_field
       name: (identifier)
       type: (identifier)
-      (field_option
-        (string_literal)))
+      xml_data_type: (string_literal))
     (temp_table_field
       name: (identifier)
       type: (identifier)
-      (field_option
-        (string_literal)))
+      xml_node_type: (string_literal))
     (temp_table_field
       name: (identifier)
       type: (identifier)
-      (field_option
-        (string_literal)))
+      xml_node_name: (string_literal))
     (temp_table_field
       name: (identifier)
       type: (identifier)
-      (field_option))))
+      (not)
+      (case_sensitive))))
 
 ================================================================================
 TEMP-TABLE DEFINITION - Index Variations
@@ -413,12 +398,19 @@ DEFINE TEMP-TABLE tt NO-UNDO
       field: (identifier))
     (temp_table_index
       name: (identifier)
-      field: (identifier))
+      (unique)
+      field: (identifier)
+      (ascending))
     (temp_table_index
       name: (identifier)
-      field: (identifier))
+      (primary)
+      field: (identifier)
+      (descending))
     (temp_table_index
       name: (identifier)
+      (unique)
+      (primary)
+      (word_index)
       field: (identifier)
       field: (identifier))))
 
@@ -488,14 +480,16 @@ WAIT-FOR CHOOSE OF cancel-butt OR WINDOW-CLOSE OF CURRENT-WINDOW.
       type: (qualified_name
         left: (identifier)
         right: (identifier))
-      (field_option
-        (string_literal)))
+      label: (string_literal))
     (temp_table_index
       name: (identifier)
-      field: (identifier))
+      (primary)
+      field: (identifier)
+      (ascending))
     (temp_table_index
       name: (identifier)
-      field: (identifier)))
+      field: (identifier)
+      (descending)))
   (variable_definition
     name: (identifier)
     (no_undo)
@@ -512,18 +506,15 @@ WAIT-FOR CHOOSE OF cancel-butt OR WINDOW-CLOSE OF CURRENT-WINDOW.
     name: (identifier)
     type: (identifier)
     (no_undo)
-    (initial_option
-      (number_literal)))
+    (number_literal))
   (button_definition
     name: (identifier)
-    (button_option
-      label: (string_literal))
-    (button_option))
+    label: (string_literal)
+    (auto_go))
   (button_definition
     name: (identifier)
-    (button_option
-      label: (string_literal))
-    (button_option))
+    label: (string_literal)
+    (auto_endkey))
   (form_statement
     (form_item
       field: (identifier)
@@ -571,7 +562,7 @@ WAIT-FOR CHOOSE OF cancel-butt OR WINDOW-CLOSE OF CURRENT-WINDOW.
       (record
         record: (identifier))
       (break_by
-        (qualified_name
+        by: (qualified_name
           left: (identifier)
           right: (identifier))))
     (body
@@ -585,12 +576,11 @@ WAIT-FOR CHOOSE OF cancel-butt OR WINDOW-CLOSE OF CURRENT-WINDOW.
               left: (identifier)
               right: (identifier)))
           (aggregate_phrase
-            (aggregate_option
-              operation: (aggregate_operation)
-              (by_phrase
-                group: (qualified_name
-                  left: (identifier)
-                  right: (identifier)))))))
+            operation: (aggregate_operation)
+            (by_phrase
+              group: (qualified_name
+                left: (identifier)
+                right: (identifier))))))
       (if_statement
         (function_call
           function: (identifier)
@@ -606,12 +596,11 @@ WAIT-FOR CHOOSE OF cancel-butt OR WINDOW-CLOSE OF CURRENT-WINDOW.
               operator: (assignment_operator)
               right: (accum_expression
                 operation: (aggregate_phrase
-                  (aggregate_option
-                    operation: (aggregate_operation)
-                    (by_phrase
-                      group: (qualified_name
-                        left: (identifier)
-                        right: (identifier)))))
+                  operation: (aggregate_operation)
+                  (by_phrase
+                    group: (qualified_name
+                      left: (identifier)
+                      right: (identifier))))
                 field: (parenthesized_expression
                   (binary_expression
                     (qualified_name

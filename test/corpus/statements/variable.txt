@@ -31,11 +31,10 @@ DEFINE PRIVATE STATIC SERIALIZABLE VARIABLE cust AS CLASS Customer NO-UNDO.
     type: (identifier)
     (extent_phrase
       (number_literal))
-    (initial_option
-      (string_literal)
-      (string_literal)
-      (string_literal)
-      (string_literal)))
+    (string_literal)
+    (string_literal)
+    (string_literal)
+    (string_literal))
   (variable_definition
     (new_modifier)
     (scope_modifier)
@@ -139,8 +138,7 @@ DEFINE VARIABLE rate AS DECIMAL DECIMALS 4 INITIAL 0.0525.
     name: (identifier)
     type: (identifier)
     decimals: (number_literal)
-    (initial_option
-      (number_literal))))
+    (number_literal)))
 
 ================================================================================
 VARIABLE DEFINITION - EXTENT Variations
@@ -193,28 +191,23 @@ DEFINE VARIABLE dtDate AS DATE INITIAL TODAY.
   (variable_definition
     name: (identifier)
     type: (identifier)
-    (initial_option
-      (number_literal)))
+    (number_literal))
   (variable_definition
     name: (identifier)
     type: (identifier)
-    (initial_option
-      (number_literal)))
+    (number_literal))
   (variable_definition
     name: (identifier)
     type: (identifier)
-    (initial_option
-      (string_literal)))
+    (string_literal))
   (variable_definition
     name: (identifier)
     type: (identifier)
-    (initial_option
-      (boolean_literal)))
+    (boolean_literal))
   (variable_definition
     name: (identifier)
     type: (identifier)
-    (initial_option
-      (identifier))))
+    (identifier)))
 
 ================================================================================
 VARIABLE DEFINITION - Shared Variations
@@ -569,7 +562,8 @@ END.
         (identifier)
         (delete_statement
           (identifier)))))
-  (output_statement)
+  (output_statement
+    (close))
   (variable_definition
     (new_modifier)
     (scope_modifier)
@@ -577,8 +571,7 @@ END.
     (identifier)
     (identifier)
     (no_undo)
-    (initial_option
-      (boolean_literal)))
+    (boolean_literal))
   (variable_definition
     (identifier)
     (identifier)
@@ -718,20 +711,18 @@ END.
       (string_literal))
     (extent_phrase
       (number_literal))
-    (initial_option
-      (string_literal)
-      (string_literal)
-      (string_literal)
-      (string_literal)
-      (string_literal)
-      (string_literal)
-      (string_literal)))
+    (string_literal)
+    (string_literal)
+    (string_literal)
+    (string_literal)
+    (string_literal)
+    (string_literal)
+    (string_literal))
   (variable_definition
     (identifier)
     (identifier)
     (no_undo)
-    (initial_option
-      (identifier)))
+    (identifier))
   (repeat_statement
     (frame_phrase
       (side_labels)

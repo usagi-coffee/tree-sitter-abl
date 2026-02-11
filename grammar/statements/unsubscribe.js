@@ -8,7 +8,7 @@ module.exports = ({ kw }) => ({
         seq(kw("PROCEDURE", { offset: 4 }), field("subscriber", $._expression)),
       ),
       optional(kw("TO")),
-      choice(field("event", $._expression), kw("ALL")),
+      choice(field("event", $._expression), alias(kw("ALL"), $.all)),
       optional(seq(kw("IN"), field("publisher", $._expression))),
     ),
 });
