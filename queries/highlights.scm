@@ -151,7 +151,6 @@
   (graphic_edge)
   (group_box)
   (header)
-  (identifier)
   (indexed_reposition)
   (index_hint)
   (join_by_sqldb)
