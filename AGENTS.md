@@ -54,7 +54,7 @@ Strongly prefer using these commands as they have helpful side-effects like retu
 - Grammar changes without thorough corpus coverage and testing are unacceptable.
 - Avoid creating a shared or generic code unless it is really a part of the core syntax, core grammar modifications require a confirmation unless experimenting.
 - Always prefere adding to `precedences` over using `prec(`.
-- We intentionally duplicate modifiers and tunings at the statement level so that most of the statement-specific context lives in a single file. To support this, each statement defines its own `__<statement>_rules`, which are later aliased to `$.rule` where needed. This intentional duplication favors locality, readability, and conflict isolation over DRY abstractions. Keep in mind we don't do these for trivial cases, check `Clean tree examples`.
+- We intentionally duplicate modifiers and tunings at the statement level so that most of the statement-specific context lives in a single file. To support this, each statement defines its own `__<statement>_rules`, which are later aliased to `$.rule` where needed. This intentional duplication favors locality, readability, and conflict isolation over DRY abstractions. Keep in mind we don't do these for trivial cases, see`Clean tree conventions`.
 - All statement-related modifiers, phrases, tunings that are not already part of core should be locally defined as `__<statement>_<rule>` rule and aliased to `$.<rule>`.
 - When resolving conflicts treat adding a `conflicts` entry as a last resort that requires prior confirmation with a clear explanation of why associativity/precedence are not enough.
 - Prefer `kw` for keywords in place of `token(/keyword/i)`, when the syntax supports partial keyword like `DEFINE` can be `DEF`, `DEFI`, `DEFIN` and `DEFINE` please use `kw("DEFINE", { offset: 3 })`, for scenario where it can be longer do alias e.g`kw("FIELDS", { alias: 'FIELD', offset: 5)`.
@@ -76,7 +76,10 @@ Strongly prefer using these commands as they have helpful side-effects like retu
 - Do not use e.g `no_labels_option` as an alias, just use `no_labels` to keep it clean, avoid `_option` suffix.
 - Big blocks of `repeat(choice(` rules for the statement record/column/field/whatever should prefer inlining instead of duplication as it offers modest state reduction.
 
-### Clean tree examples
+## Clean tree conventions
+
+We want to keep the syntax tree output lean, prefer `field` for non-repeating rules and `alias` for flags.
+
 
 1. Add fields for modifiers that take value.
 ```js
@@ -132,6 +135,33 @@ __input_through_shell_variable: ($) => alias(token(/\$+[A-Za-z_0-9]*/), $.shell_
 // Good
 alias($.__input_through_shell_variable, $.shell_variable),
 __input_through_shell_variable: ($) => token(/\$+[A-Za-z_0-9]*/),
+```
+
+6. Phrases-like rules should be kept in a separate rule and aliased
+```js
+// Bad
+optional($.__find_of_phrase),
+__find_of_phrase: ($) => seq(kw("OF"), $.__find_record_name),
+
+// Good
+optional(alias($.__find_of_phrase, $.of_phrase)),
+__find_of_phrase: ($) => seq(kw("OF"), field("record", $.__find_record_name)),
+```
+
+7. Do not alias `field`'ed compound modifiers unless the fields are inside a `repeat`
+```js
+// Bad
+alias(
+   seq(kw("COLUMN-LABEL"), field("column_label", $.string_literal)),
+   $.column_label,
+),
+
+// Good
+seq(kw("COLUMN-LABEL"), field("column_label", $.string_literal)),
+alias(
+   seq(kw("COLUMN-LABEL"), field("column_label", repeat1($.string_literal))),
+   $.column_label,
+),
 ```
 
 ## Notes
