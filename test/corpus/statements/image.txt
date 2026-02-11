@@ -166,12 +166,10 @@ DEF IMAGE img2 LIKE icon1.
 (source_code
   (image_definition
     name: (identifier)
-    (like_phrase
-      like: (identifier)))
+    like: (identifier))
   (image_definition
     name: (identifier)
-    (like_phrase
-      like: (identifier))))
+    like: (identifier)))
 
 ================================================================================
 IMAGE DEFINITION - SIZE
@@ -485,8 +483,7 @@ DEF IMAGE i3 SIZE 10 BY 20.
       file: (string_literal)))
   (image_definition
     name: (identifier)
-    (like_phrase
-      like: (identifier)))
+    like: (identifier))
   (image_definition
     name: (identifier)
     (size_phrase

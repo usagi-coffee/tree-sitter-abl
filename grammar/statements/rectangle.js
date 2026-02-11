@@ -2,7 +2,7 @@ module.exports = ({ kw }) => ({
   rectangle_definition: ($) =>
     seq(
       kw("DEFINE", { offset: 3 }),
-      optional($.__rectangle_modifier),
+      optional(alias(kw("PRIVATE"), $.access_modifier)),
       kw("RECTANGLE"),
       $.__rectangle_body,
       $._terminator,
@@ -35,5 +35,4 @@ module.exports = ({ kw }) => ({
         ),
       ),
     ),
-  __rectangle_modifier: ($) => alias(kw("PRIVATE"), $.access_modifier),
 });

@@ -2,7 +2,7 @@ module.exports = ({ kw }) => ({
   image_definition: ($) =>
     seq(
       kw("DEFINE", { offset: 3 }),
-      optional($.__image_modifier),
+      optional(alias(kw("PRIVATE"), $.access_modifier)),
       kw("IMAGE"),
       $.__image_body,
       $._terminator,
@@ -14,7 +14,7 @@ module.exports = ({ kw }) => ({
       repeat1(
         choice(
           $.image_phrase,
-          alias($.__image_like_phrase, $.like_phrase),
+          seq(kw("LIKE"), field("like", $.identifier)),
           $.size_phrase,
         ),
       ),
@@ -30,7 +30,4 @@ module.exports = ({ kw }) => ({
       optional(seq(kw("STRETCH-TO-FIT"), optional(kw("RETAIN-SHAPE")))),
       optional(kw("TRANSPARENT")),
     ),
-
-  __image_like_phrase: ($) => seq(kw("LIKE"), field("like", $.identifier)),
-  __image_modifier: ($) => alias(kw("PRIVATE"), $.access_modifier),
 });
