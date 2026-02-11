@@ -45,4 +45,5 @@ COPY-LOB FROM FILE inPath TO targetPtr NO-ERROR.
     overlay_at: (number_literal))
   (copy_lob_statement
     source_file: (identifier)
-    target: (identifier)))
+    target: (identifier)
+    (no_error)))

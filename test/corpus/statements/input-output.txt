@@ -37,7 +37,7 @@ INPUT-OUTPUT STREAM sIO THROUGH "filter" UNBUFFERED.
     (identifier)
     (identifier))
   (input_output_statement
-    (identifier)
+    value: (identifier)
     (no_echo))
   (input_output_statement
     stream: (identifier)
@@ -56,13 +56,13 @@ INPUT-OUTPUT THROUGH myprog VALUE(arg1) NO-MAP CONVERT TARGET "utf-8".
 (source_code
   (input_output_statement
     stream: (identifier)
-    (identifier)
+    value: (identifier)
     map: (string_literal)
     (convert_phrase
       (no_convert)))
   (input_output_statement
     program: (identifier)
-    (identifier)
+    value: (identifier)
     (no_map)
     (convert_phrase
       target: (string_literal))))

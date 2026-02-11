@@ -6,6 +6,6 @@ module.exports = ({ kw }) => ({
       optional(seq(kw("EXCEPT"), repeat1(field("except", $.identifier)))),
       optional(seq(kw("USING"), field("using", $._expression))),
       optional($.frame_phrase),
-      optional(kw("NO-ERROR")),
+      optional(alias(kw("NO-ERROR"), $.no_error)),
     ),
 });

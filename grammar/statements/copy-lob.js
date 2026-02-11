@@ -39,7 +39,7 @@ module.exports = ({ kw }) => ({
           alias($.__copy_lob_convert_phrase, $.convert_phrase),
         ),
       ),
-      optional(kw("NO-ERROR")),
+      optional(alias(kw("NO-ERROR"), $.no_error)),
     ),
 
   __copy_lob_convert_phrase: ($) =>

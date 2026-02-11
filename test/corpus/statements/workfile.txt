@@ -94,13 +94,15 @@ DEF WORKFILE wfOrder LIKE Sales.Order VALIDATE NO-UNDO.
   (workfile_definition
     name: (identifier)
     (like_phrase
-      like: (identifier)))
+      like: (identifier)
+      (validate)))
   (workfile_definition
     name: (identifier)
     (like_phrase
       like: (qualified_name
         left: (identifier)
-        right: (identifier)))
+        right: (identifier))
+      (validate))
     (no_undo)))
 
 ================================================================================

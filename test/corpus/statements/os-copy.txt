@@ -63,7 +63,10 @@ OS-COPY "a.txt" VALUE("b.txt").
       (system_dialog_get_file_statement
         (identifier)
         (string_literal)
-        (identifier))
+        (must_exist)
+        (use_filename)
+        (update_phrase
+          (identifier)))
       (if_statement
         (binary_expression
           (identifier)

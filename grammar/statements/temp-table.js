@@ -11,7 +11,7 @@ module.exports = ({ kw }) => ({
   __temp_table_body: ($) =>
     seq(
       field("name", $.identifier),
-      optional($.__temp_table_no_undo),
+      optional(alias(kw("NO-UNDO"), $.no_undo)),
       optional(
         seq(kw("NAMESPACE-URI"), field("namespace_uri", $.string_literal)),
       ),
@@ -25,7 +25,7 @@ module.exports = ({ kw }) => ({
       optional(
         seq(kw("SERIALIZE-NAME"), field("serialize_name", $.string_literal)),
       ),
-      optional(kw("REFERENCE-ONLY")),
+      optional(alias(kw("REFERENCE-ONLY"), $.reference_only)),
       repeat(
         choice(
           $.argument_reference,
@@ -34,7 +34,7 @@ module.exports = ({ kw }) => ({
             $.__temp_table_like_sequential_phrase,
             $.like_sequential_phrase,
           ),
-          $.__temp_table_rcode_information,
+          alias(kw("RCODE-INFORMATION"), $.rcode_information),
           alias($.__temp_table_before_table_phrase, $.before_table_phrase),
         ),
       ),
@@ -55,13 +55,13 @@ module.exports = ({ kw }) => ({
         seq(
           kw("LIKE"),
           field("type", $.__temp_table_like_name),
-          optional(kw("VALIDATE")),
+          optional(alias(kw("VALIDATE"), $.validate)),
         ),
         seq(
           $.__temp_table_extent_option,
           kw("LIKE"),
           field("type", $.__temp_table_like_name),
-          optional(kw("VALIDATE")),
+          optional(alias(kw("VALIDATE"), $.validate)),
         ),
       ),
       repeat($.__temp_table_field_option),
@@ -83,38 +83,40 @@ module.exports = ({ kw }) => ({
       alias(kw("PRIMARY"), $.primary),
       alias(kw("WORD-INDEX"), $.word_index),
     ),
-  __temp_table_no_undo: ($) => alias(kw("NO-UNDO"), $.no_undo),
   __temp_table_like_phrase: ($) =>
     seq(
       kw("LIKE"),
       field("like", $.__temp_table_like_name),
-      optional(kw("VALIDATE")),
+      optional(alias(kw("VALIDATE"), $.validate)),
       repeat($.__temp_table_use_index_phrase),
     ),
   __temp_table_like_sequential_phrase: ($) =>
     seq(
       kw("LIKE-SEQUENTIAL"),
       field("like", $.__temp_table_like_name),
-      optional(kw("VALIDATE")),
+      optional(alias(kw("VALIDATE"), $.validate)),
       repeat($.__temp_table_use_index_phrase),
     ),
   __temp_table_use_index_phrase: ($) =>
     seq(
       kw("USE-INDEX"),
       field("index", $.identifier),
-      optional(seq(kw("AS"), kw("PRIMARY"))),
+      optional(alias($.__temp_table_as_primary_phrase, $.as_primary_phrase)),
     ),
-  __temp_table_rcode_information: ($) =>
-    alias(kw("RCODE-INFORMATION"), $.rcode_information),
+  __temp_table_as_primary_phrase: ($) =>
+    seq(kw("AS"), alias(kw("PRIMARY"), $.primary)),
   __temp_table_before_table_phrase: ($) =>
     seq(kw("BEFORE-TABLE"), field("before", $.identifier)),
   __temp_table_index_field: ($) =>
     seq(
-      field("field", $.__temp_table_field_name),
+      field("field", $._identifier_or_qualified_name),
       optional(
-        choice(
-          alias(kw("DESCENDING", { offset: 4 }), $.descending),
-          alias(kw("ASCENDING", { offset: 3 }), $.ascending),
+        field(
+          "sort_order",
+          choice(
+            kw("DESCENDING", { offset: 4 }),
+            kw("ASCENDING", { offset: 3 }),
+          ),
         ),
       ),
     ),
@@ -152,7 +154,6 @@ module.exports = ({ kw }) => ({
     choice($._identifier_or_qualified_name, $.array_access),
   __temp_table_label_list: ($) =>
     seq($.string_literal, repeat(seq(",", $.string_literal))),
-  __temp_table_field_name: ($) => $._identifier_or_qualified_name,
   __temp_table_modifier: ($) =>
     choice(
       seq(

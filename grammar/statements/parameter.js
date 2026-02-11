@@ -24,12 +24,12 @@ module.exports = ({ kw }) => ({
           seq(kw("DECIMALS"), field("decimals", $.number_literal)),
           seq(
             kw("INITIAL"),
-            choice($._expression, seq("[", optional($._expressions), "]")),
+            field("initial", choice($._expression, seq("[", optional($._expressions), "]"))),
           ),
           seq(
             kw("LABEL"),
-            $.string_literal,
-            repeat(seq(",", $.string_literal)),
+            field("label", $.string_literal),
+            repeat(seq(",", field("label", $.string_literal))),
           ),
           alias(kw("NO-UNDO"), $.no_undo),
         ),
@@ -44,7 +44,7 @@ module.exports = ({ kw }) => ({
         seq(
           kw("TABLE"),
           kw("FOR"),
-          field("table", $.__parameter_record_name),
+          field("table", $._identifier_or_qualified_name),
           repeat($.__parameter_table_parameter_option),
         ),
         seq(
@@ -55,7 +55,7 @@ module.exports = ({ kw }) => ({
         seq(
           kw("DATASET"),
           kw("FOR"),
-          field("dataset", $.__parameter_record_name),
+          field("dataset", $._identifier_or_qualified_name),
           repeat($.__parameter_table_parameter_option),
         ),
         seq(
@@ -73,7 +73,7 @@ module.exports = ({ kw }) => ({
       field("name", $.identifier),
       kw("FOR"),
       optional(kw("TEMP-TABLE")),
-      field("table", $.__parameter_record_name),
+      field("table", $._identifier_or_qualified_name),
       optional(kw("PRESELECT")),
     ),
 
@@ -84,9 +84,9 @@ module.exports = ({ kw }) => ({
           kw("AS"),
           optional(kw("CLASS")),
           field("type", $._type_or_string),
-          optional(seq(kw("TO"), $.identifier)),
+          optional(seq(kw("TO"), field("target", $.identifier))),
         ),
-        seq(kw("LIKE"), field("like", $.__parameter_field_name)),
+        seq(kw("LIKE"), field("like", $._identifier_or_qualified_name)),
       ),
       optional(alias($.__parameter_extent_phrase, $.extent_phrase)),
     ),
@@ -101,8 +101,6 @@ module.exports = ({ kw }) => ({
       $.identifier,
       $.null_literal,
     ),
-  __parameter_field_name: ($) => $._identifier_or_qualified_name,
-  __parameter_record_name: ($) => $._identifier_or_qualified_name,
   __parameter_table_parameter_option: ($) =>
     choice(
       alias(kw("APPEND"), $.append),

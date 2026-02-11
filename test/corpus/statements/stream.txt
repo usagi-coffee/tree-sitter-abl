@@ -192,11 +192,11 @@ DISPLAY STREAM rpt ItemNum ItemName WITH NO-LABELS NO-BOX.
       frame: (identifier)))
   (output_statement
     name: (identifier)
-    (identifier)
+    value: (identifier)
     (paged))
   (output_statement
     name: (identifier)
-    (identifier)
+    value: (identifier)
     (paged))
   (for_statement
     (record

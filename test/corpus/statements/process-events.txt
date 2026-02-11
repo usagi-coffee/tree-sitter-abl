@@ -45,8 +45,9 @@ END.
     (identifier))
   (on_statement
     (identifier)
-    (widget_phrase
-      (identifier))
+    (of_phrase
+      (widget_phrase
+        (identifier)))
     (assignment_statement
       (identifier)
       (assignment_operator)

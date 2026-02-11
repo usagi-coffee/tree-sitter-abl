@@ -835,9 +835,10 @@ END.
       (identifier)
       (string_literal)))
   (wait_for_statement
-    (identifier)
-    (widget_phrase
-      (system_handle)))
+    (of_phrase
+      (identifier)
+      (widget_phrase
+        (system_handle))))
   (variable_definition
     (identifier)
     (identifier)

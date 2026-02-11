@@ -403,7 +403,8 @@ RUN methodProc IN hProc NO-ERROR.
   (run_statement
     procedure: (identifier)
     (in_phrase
-      context: (identifier))))
+      context: (identifier))
+    (no_error)))
 
 ================================================================================
 RUN with DATASET-HANDLE output and BUFFER handle argument

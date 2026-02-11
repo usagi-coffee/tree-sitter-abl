@@ -530,16 +530,18 @@ WAIT-FOR CHOOSE OF MENU-ITEM quititem.
       (string_literal)))
   (on_statement
     (identifier)
-    (widget_phrase
-      (identifier))
+    (of_phrase
+      (widget_phrase
+        (identifier)))
     (display_statement
       (qualified_name
         (identifier)
         (identifier))))
   (on_statement
     (identifier)
-    (widget_phrase
-      (identifier))
+    (of_phrase
+      (widget_phrase
+        (identifier)))
     (display_statement
       (field
         (qualified_name
@@ -567,8 +569,9 @@ WAIT-FOR CHOOSE OF MENU-ITEM quititem.
         (number_literal))))
   (on_statement
     (identifier)
-    (widget_phrase
-      (identifier))
+    (of_phrase
+      (widget_phrase
+        (identifier)))
     (display_statement
       (identifier)
       (qualified_name
@@ -597,8 +600,9 @@ WAIT-FOR CHOOSE OF MENU-ITEM quititem.
         (side_labels))))
   (on_statement
     (identifier)
-    (widget_phrase
-      (identifier))
+    (of_phrase
+      (widget_phrase
+        (identifier)))
     (do_statement
       (body
         (hide_statement
@@ -620,8 +624,9 @@ WAIT-FOR CHOOSE OF MENU-ITEM quititem.
               (identifier)))))))
   (on_statement
     (identifier)
-    (widget_phrase
-      (identifier))
+    (of_phrase
+      (widget_phrase
+        (identifier)))
     (do_statement
       (body
         (hide_statement
@@ -664,6 +669,7 @@ WAIT-FOR CHOOSE OF MENU-ITEM quititem.
           (identifier)
           (identifier)))))
   (wait_for_statement
-    (identifier)
-    (widget_phrase
-      (identifier))))
+    (of_phrase
+      (identifier)
+      (widget_phrase
+        (identifier)))))

@@ -9,7 +9,8 @@ TRANSACTION-MODE AUTOMATIC CHAINED.
 
 (source_code
   (transaction_mode_statement)
-  (transaction_mode_statement))
+  (transaction_mode_statement
+    (chained)))
 
 ================================================================================
 TRANSACTION-MODE - CHAINED variant
@@ -20,4 +21,5 @@ TRANSACTION-MODE AUTOMATIC CHAINED.
 --------------------------------------------------------------------------------
 
 (source_code
-  (transaction_mode_statement))
+  (transaction_mode_statement
+    (chained)))

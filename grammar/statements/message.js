@@ -67,11 +67,11 @@ module.exports = ({ kw }) => ({
   __message_set_update_phrase: ($) =>
     seq(
       choice(kw("SET"), kw("UPDATE")),
-      field("field", $.__message_field_name),
+      field("field", $._identifier_or_qualified_name),
       optional(
         choice(
           seq(kw("AS"), field("type", $._type_name)),
-          seq(kw("LIKE"), field("like", $.__message_field_name)),
+          seq(kw("LIKE"), field("like", $._identifier_or_qualified_name)),
         ),
       ),
       optional(
@@ -79,5 +79,4 @@ module.exports = ({ kw }) => ({
       ),
       optional(kw("AUTO-RETURN")),
     ),
-  __message_field_name: ($) => $._identifier_or_qualified_name,
 });

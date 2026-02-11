@@ -11,7 +11,7 @@ INPUT STREAM sIn THROUGH VALUE(cmd) ECHO.
   (input_through_statement
     program: (string_literal)
     (identifier)
-    (identifier)
+    value: (identifier)
     (no_echo)
     (no_map)
     (unbuffered)
@@ -20,7 +20,7 @@ INPUT STREAM sIn THROUGH VALUE(cmd) ECHO.
       source: (string_literal)))
   (input_through_statement
     stream: (identifier)
-    (identifier)
+    value: (identifier)
     (echo)))
 
 ================================================================================
@@ -35,13 +35,13 @@ INPUT THROUGH myprog VALUE(arg1) Func() NO-MAP UNBUFFERED CONVERT SOURCE "ibm850
 (source_code
   (input_through_statement
     stream: (identifier)
-    (identifier)
+    value: (identifier)
     map: (string_literal)
     (convert_phrase
       (no_convert)))
   (input_through_statement
     program: (identifier)
-    (identifier)
+    value: (identifier)
     (function_call
       function: (identifier)
       (arguments))

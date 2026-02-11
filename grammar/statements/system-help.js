@@ -3,7 +3,7 @@ module.exports = ({ kw }) => ({
     seq(
       kw("SYSTEM-HELP"),
       field("topic", $._expression),
-      optional(kw("NO-ERROR")),
+      optional(alias(kw("NO-ERROR"), $.no_error)),
       $._terminator,
     ),
 });

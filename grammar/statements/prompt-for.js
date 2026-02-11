@@ -28,7 +28,7 @@ module.exports = ({ kw }) => ({
       optional(alias($.__prompt_for_go_on, $.go_on_phrase)),
       optional($.in_window_phrase),
       optional($.frame_phrase),
-      optional(seq(kw("WITH"), alias(kw("NO-VALIDATE"), $.no_validate))),
+      optional(alias($.__prompt_for_with_phrase, $.with_phrase)),
       optional($.editing_phrase),
     ),
 
@@ -74,6 +74,8 @@ module.exports = ({ kw }) => ({
     seq(kw("TO"), field("position", token(/[0-9]+(\.[0-9]+)?/))),
   __prompt_for_view_as_phrase: ($) =>
     seq(kw("VIEW-AS"), field("widget", $.identifier)),
+  __prompt_for_with_phrase: ($) =>
+    seq(kw("WITH"), alias(kw("NO-VALIDATE"), $.no_validate)),
 
   __prompt_for_go_on: ($) =>
     seq(

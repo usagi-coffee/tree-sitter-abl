@@ -324,7 +324,7 @@ END PROCEDURE.
       (parameter_definition
         name: (identifier)
         type: (identifier)
-        (number_literal))
+        initial: (number_literal))
       (parameter_definition
         name: (identifier)
         type: (identifier)
@@ -438,7 +438,7 @@ END.
   (procedure_definition
     name: (identifier)
     (cdecl)
-    number: (number_literal)
+    ordinal: (number_literal)
     (persistent)
     (external_phrase)
     (body
@@ -450,6 +450,7 @@ END.
         type: (identifier))))
   (procedure_definition
     name: (identifier)
+    (in_super_phrase)
     (body)))
 
 ================================================================================
@@ -665,7 +666,7 @@ END PROCEDURE.
     name: (identifier)
     (external_phrase)
     (cdecl)
-    number: (number_literal)
+    ordinal: (number_literal)
     (persistent)
     (body
       (parameter_definition
@@ -689,6 +690,7 @@ END PROCEDURE.
         type: (identifier))))
   (procedure_definition
     name: (identifier)
+    (in_super_phrase)
     (body
       (parameter_definition
         name: (identifier)

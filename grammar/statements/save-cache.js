@@ -14,6 +14,6 @@ module.exports = ({ kw }) => ({
         field("path", $.string_literal),
         seq(kw("VALUE"), "(", field("path", $._expression), ")"),
       ),
-      optional(kw("NO-ERROR")),
+      optional(alias(kw("NO-ERROR"), $.no_error)),
     ),
 });

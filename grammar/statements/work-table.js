@@ -12,7 +12,7 @@ module.exports = ({ kw }) => ({
     seq(
       field("name", $.identifier),
       optional(alias($.__temp_table_like_phrase, $.like_phrase)),
-      optional($.__temp_table_no_undo),
+      optional(alias(kw("NO-UNDO"), $.no_undo)),
       repeat(
         choice(
           alias($.__temp_table_field, $.field),

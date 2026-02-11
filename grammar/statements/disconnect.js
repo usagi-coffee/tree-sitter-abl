@@ -8,6 +8,6 @@ module.exports = ({ kw }) => ({
         seq(kw("VALUE"), "(", field("database", $._expression), ")"),
         field("database", $.identifier),
       ),
-      optional(kw("NO-ERROR")),
+      optional(alias(kw("NO-ERROR"), $.no_error)),
     ),
 });

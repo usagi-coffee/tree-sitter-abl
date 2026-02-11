@@ -379,7 +379,8 @@ END.
   (prompt_for_statement
     (field
       field: (identifier))
-    (no_validate)
+    (with_phrase
+      (no_validate))
     (editing_phrase
       (readkey_statement))))
 

@@ -11,7 +11,8 @@ CREATE SERVER appSrv.
 
 (source_code
   (create_statement
-    table: (identifier))
+    table: (identifier)
+    (no_error))
   (create_statement
     table: (identifier))
   (create_statement
@@ -125,7 +126,8 @@ CREATE Customer USING RECID(2).
     tenant: (number_literal))
   (create_statement
     table: (identifier)
-    rowid: (number_literal))
+    rowid: (number_literal)
+    (no_error))
   (create_statement
     table: (identifier)
     recid: (number_literal)))
@@ -159,7 +161,8 @@ CREATE "Excel.Application" hExcel CONNECT TO "file.xls" NO-ERROR.
 (source_code
   (create_statement
     alias: (identifier)
-    database: (identifier))
+    database: (identifier)
+    (no_error))
   (create_statement
     handle: (identifier)
     table: (identifier)
@@ -167,7 +170,12 @@ CREATE "Excel.Application" hExcel CONNECT TO "file.xls" NO-ERROR.
     pool: (identifier))
   (create_statement
     handle: (identifier)
-    table: (identifier))
+    table: (identifier)
+    (no_error))
+  (create_statement
+    handle: (identifier)
+    pool: (identifier)
+    (no_error))
   (create_statement
     handle: (identifier)
     pool: (identifier))
@@ -194,18 +202,19 @@ CREATE "Excel.Application" hExcel CONNECT TO "file.xls" NO-ERROR.
     pool: (identifier))
   (create_statement
     handle: (identifier)
-    pool: (identifier))
+    pool: (identifier)
+    (no_error))
   (create_statement
     handle: (identifier)
-    pool: (identifier))
+    pool: (identifier)
+    (no_error))
   (create_statement
     handle: (identifier)
-    pool: (identifier))
+    pool: (identifier)
+    (no_error))
   (create_statement
-    handle: (identifier)
-    pool: (identifier))
-  (create_statement
-    pool: (identifier))
+    pool: (identifier)
+    (no_error))
   (create_statement
     handle: (identifier)
     (assign_phrase
@@ -214,11 +223,13 @@ CREATE "Excel.Application" hExcel CONNECT TO "file.xls" NO-ERROR.
         right: (number_literal))))
   (create_statement
     new_database: (string_literal)
-    old_database: (string_literal))
+    old_database: (string_literal)
+    (no_error))
   (create_statement
     progid: (string_literal)
     handle: (identifier)
-    target: (string_literal)))
+    target: (string_literal)
+    (no_error)))
 
 ================================================================================
 CREATE BUFFER with string table target

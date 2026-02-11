@@ -91,7 +91,7 @@ module.exports = ({ kw }) => ({
     seq(
       choice(
         seq(kw("AS"), optional(kw("CLASS")), field("type", $._type_or_string)),
-        seq(kw("LIKE"), field("like", $.__function_field_name)),
+        seq(kw("LIKE"), field("like", $._identifier_or_qualified_name)),
       ),
       optional($.__function_extent_phrase),
     ),
@@ -108,5 +108,4 @@ module.exports = ({ kw }) => ({
       $.identifier,
       $.null_literal,
     ),
-  __function_field_name: ($) => $._identifier_or_qualified_name,
 });

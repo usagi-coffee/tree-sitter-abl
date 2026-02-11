@@ -50,6 +50,6 @@ module.exports = ({ kw }) => ({
           field("target_field", $.identifier),
         ),
       ),
-      optional(kw("NO-ERROR")),
+      optional(alias(kw("NO-ERROR"), $.no_error)),
     ),
 });

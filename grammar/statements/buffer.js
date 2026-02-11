@@ -15,11 +15,11 @@ module.exports = ({ kw }) => ({
       field("name", $.identifier),
       kw("FOR"),
       optional(kw("TEMP-TABLE")),
-      field("table", $.__buffer_table_name),
+      field("table", $._identifier_or_qualified_name),
       repeat(
         choice(
           kw("PRESELECT"),
-          seq(kw("LABEL"), field("label", $.__buffer_name_or_string)),
+          seq(kw("LABEL"), field("label", choice($.identifier, $.string_literal))),
           seq(kw("NAMESPACE-URI"), field("namespace_uri", $.string_literal)),
           seq(
             kw("NAMESPACE-PREFIX"),
@@ -30,9 +30,6 @@ module.exports = ({ kw }) => ({
         ),
       ),
     ),
-
-  __buffer_name_or_string: ($) => choice($.identifier, $.string_literal),
-  __buffer_table_name: ($) => $._identifier_or_qualified_name,
   __buffer_modifier: ($) =>
     choice(
       seq(

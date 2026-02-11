@@ -15,15 +15,15 @@ DEFINE SUB-MENU smFile
     (menu_element
       (menu_item
         name: (identifier)
-        (string_literal)))
+        label: (string_literal)))
     (menu_element
       (menu_item
         name: (identifier)
-        (string_literal)))
+        label: (string_literal)))
     (menu_element
       (menu_item
         name: (identifier)
-        (string_literal)))))
+        label: (string_literal)))))
 
 ================================================================================
 SUB-MENU with nested submenu
@@ -43,17 +43,17 @@ DEFINE SUB-MENU smMain
     (menu_element
       (menu_item
         name: (identifier)
-        (string_literal)))
+        label: (string_literal)))
     (menu_element
       (submenu_item
         name: (identifier)
-        (string_literal)))
+        label: (string_literal)))
     (menu_element
       (rule))
     (menu_element
       (menu_item
         name: (identifier)
-        (string_literal)))))
+        label: (string_literal)))))
 
 ================================================================================
 SUB-MENU private definition
@@ -70,7 +70,7 @@ DEF PRIVATE SUB-MENU smPrivate
     (menu_element
       (menu_item
         name: (identifier)
-        (string_literal)))))
+        label: (string_literal)))))
 
 ================================================================================
 SUB-MENU with SKIP
@@ -89,13 +89,13 @@ DEFINE SUB-MENU smWithSkip
     (menu_element
       (menu_item
         name: (identifier)
-        (string_literal)))
+        label: (string_literal)))
     (menu_element
       (skip))
     (menu_element
       (menu_item
         name: (identifier)
-        (string_literal)))))
+        label: (string_literal)))))
 
 ================================================================================
 SUBMENU - WITH BACKGROUND COLORS
@@ -120,7 +120,7 @@ DEFINE SUB-MENU smColors
     (menu_element
       (menu_item
         name: (identifier)
-        (string_literal)))))
+        label: (string_literal)))))
 
 ================================================================================
 SUBMENU - WITH FONT
@@ -139,7 +139,7 @@ DEFINE SUB-MENU smFont
     (menu_element
       (menu_item
         name: (identifier)
-        (string_literal)))))
+        label: (string_literal)))))
 
 ================================================================================
 SUBMENU - SUB-MENU-HELP
@@ -158,7 +158,7 @@ DEFINE SUB-MENU smHelp
     (menu_element
       (menu_item
         name: (identifier)
-        (string_literal)))))
+        label: (string_literal)))))
 
 ================================================================================
 SUBMENU - LIKE option
@@ -215,13 +215,13 @@ DEFINE SUB-MENU smAcc
     (menu_element
       (menu_item
         name: (identifier)
-        (string_literal)
-        (string_literal)))
+        label: (string_literal)
+        accelerator: (string_literal)))
     (menu_element
       (menu_item
         name: (identifier)
-        (string_literal)
-        (string_literal)))))
+        label: (string_literal)
+        accelerator: (string_literal)))))
 
 ================================================================================
 SUBMENU - SUB-MENU DISABLED
@@ -238,11 +238,13 @@ DEFINE SUB-MENU smSub
     name: (identifier)
     (menu_element
       (submenu_item
-        name: (identifier)))
+        name: (identifier)
+        (disabled)))
     (menu_element
       (submenu_item
         name: (identifier)
-        (string_literal)))))
+        (disabled)
+        label: (string_literal)))))
 
 ================================================================================
 SUBMENU - MENU-ITEM DISABLED
@@ -261,15 +263,17 @@ DEFINE SUB-MENU SM-ITEM-DISABLED
     (menu_element
       (menu_item
         name: (identifier)
-        (string_literal)))
+        (disabled)
+        label: (string_literal)))
     (menu_element
       (menu_item
         name: (identifier)
-        (string_literal)))
+        label: (string_literal)))
     (menu_element
       (menu_item
         name: (identifier)
-        (string_literal)))))
+        label: (string_literal)
+        (disabled)))))
 
 ================================================================================
 SUBMENU - RULE and SKIP
@@ -292,25 +296,25 @@ DEFINE SUB-MENU smMixed
     (menu_element
       (menu_item
         name: (identifier)
-        (string_literal)))
+        label: (string_literal)))
     (menu_element
       (rule))
     (menu_element
       (menu_item
         name: (identifier)
-        (string_literal)))
+        label: (string_literal)))
     (menu_element
       (skip))
     (menu_element
       (menu_item
         name: (identifier)
-        (string_literal)))
+        label: (string_literal)))
     (menu_element
       (rule))
     (menu_element
       (menu_item
         name: (identifier)
-        (string_literal)))))
+        label: (string_literal)))))
 
 ================================================================================
 SUBMENU - All color options
@@ -339,7 +343,7 @@ DEFINE SUB-MENU smColors2
     (menu_element
       (menu_item
         name: (identifier)
-        (string_literal)))))
+        label: (string_literal)))))
 
 ================================================================================
 SUBMENU - Minimal
@@ -414,47 +418,47 @@ DELETE WIDGET mywin.
     (menu_element
       (menu_item
         name: (identifier)
-        (string_literal)))
+        label: (string_literal)))
     (menu_element
       (menu_item
         name: (identifier)
-        (string_literal)))
+        label: (string_literal)))
     (menu_element
       (menu_item
         name: (identifier)
-        (string_literal))))
+        label: (string_literal))))
   (submenu_definition
     name: (identifier)
     (menu_element
       (menu_item
         name: (identifier)
-        (string_literal)))
+        label: (string_literal)))
     (menu_element
       (menu_item
         name: (identifier)
-        (string_literal)))
+        label: (string_literal)))
     (menu_element
       (menu_item
         name: (identifier)
-        (string_literal)))
+        label: (string_literal)))
     (menu_element
       (menu_item
         name: (identifier)
-        (string_literal))))
+        label: (string_literal))))
   (submenu_definition
     name: (identifier)
     (menu_element
       (submenu_item
         name: (identifier)
-        (string_literal)))
+        label: (string_literal)))
     (menu_element
       (menu_item
         name: (identifier)
-        (string_literal)))
+        label: (string_literal)))
     (menu_element
       (menu_item
         name: (identifier)
-        (string_literal))))
+        label: (string_literal))))
   (menu_definition
     name: (identifier)
     (menubar)
@@ -519,9 +523,10 @@ DELETE WIDGET mywin.
       frame: (identifier)))
   (on_statement
     event: (identifier)
-    widget: (widget_phrase
-      field: (identifier)
-      frame: (identifier))
+    (of_phrase
+      widget: (widget_phrase
+        field: (identifier)
+        frame: (identifier)))
     (do_statement
       (body
         (assignment_statement
@@ -562,9 +567,10 @@ DELETE WIDGET mywin.
           right: (boolean_literal)))))
   (on_statement
     event: (identifier)
-    widget: (widget_phrase
-      field: (identifier)
-      frame: (identifier))
+    (of_phrase
+      widget: (widget_phrase
+        field: (identifier)
+        frame: (identifier)))
     (do_statement
       (body
         (assignment_statement
@@ -604,9 +610,10 @@ DELETE WIDGET mywin.
           operator: (assignment_operator)
           right: (boolean_literal)))))
   (wait_for_statement
-    events: (identifier)
-    widgets: (widget_phrase
-      item: (identifier)
-      menu: (identifier)))
+    (of_phrase
+      events: (identifier)
+      widgets: (widget_phrase
+        item: (identifier)
+        menu: (identifier))))
   (delete_widget_statement
     widget: (identifier)))

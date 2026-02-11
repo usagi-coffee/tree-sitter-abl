@@ -5,7 +5,7 @@ module.exports = ({ kw }) => ({
     seq(
       field("file", $.__compile_file),
       repeat($.__compile_option),
-      optional(kw("NO-ERROR")),
+      optional(alias(kw("NO-ERROR"), $.no_error)),
     ),
 
   __compile_file: ($) =>

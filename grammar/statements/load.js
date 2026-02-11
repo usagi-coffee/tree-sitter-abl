@@ -6,8 +6,8 @@ module.exports = ({ kw }) => ({
       field("file", $._expression),
       optional(seq(kw("DIR"), field("dir", $._expression))),
       optional(seq(kw("APPLICATION"), field("app", $._expression))),
-      optional(kw("NEW")),
+      optional(alias(kw("NEW"), $.new)),
       optional(seq(kw("BASE-KEY"), field("base_key", $._expression))),
-      optional(kw("NO-ERROR")),
+      optional(alias(kw("NO-ERROR"), $.no_error)),
     ),
 });

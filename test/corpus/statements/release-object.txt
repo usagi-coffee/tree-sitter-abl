@@ -11,7 +11,8 @@ RELEASE OBJECT hBuffer NO-ERROR.
   (release_object_statement
     handle: (identifier))
   (release_object_statement
-    handle: (identifier)))
+    handle: (identifier)
+    (no_error)))
 
 ================================================================================
 RELEASE OBJECT - object access handle
@@ -117,4 +118,5 @@ RELEASE OBJECT controlHdl NO-ERROR.
   (delete_widget_statement
     (identifier))
   (release_object_statement
-    (identifier)))
+    (identifier)
+    (no_error)))

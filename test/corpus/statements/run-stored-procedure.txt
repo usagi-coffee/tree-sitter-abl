@@ -68,6 +68,7 @@ RUN STORED-PROCEDURE sp_Query NO-ERROR (1, 2, 3).
       value: (identifier)))
   (run_stored_procedure_statement
     procedure: (identifier)
+    (no_error)
     (parameter_list
       value: (number_literal)
       value: (number_literal)
@@ -125,6 +126,7 @@ DISPLAY "Succeeded".
   (run_stored_procedure_statement
     procedure: (identifier)
     handle_var: (identifier)
+    (no_error)
     (parameter_list
       value: (number_literal)
       value: (number_literal)
@@ -180,6 +182,7 @@ DISPLAY "Succeeded".
   (run_stored_procedure_statement
     procedure: (identifier)
     handle_var: (identifier)
+    (no_error)
     (parameter_list
       value: (string_literal)))
   (if_statement

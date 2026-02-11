@@ -24,9 +24,11 @@ UNLOAD cFile NO-ERROR.
 
 (source_code
   (unload_statement
-    file: (string_literal))
+    file: (string_literal)
+    (no_error))
   (unload_statement
-    file: (identifier)))
+    file: (identifier)
+    (no_error)))
 
 ===============================================================================
 UNLOAD statement with different expression types
@@ -62,4 +64,5 @@ UNLOAD VALUE(cFile) NO-ERROR.
       function: (identifier)
       (arguments
         (argument
-          name: (identifier))))))
+          name: (identifier))))
+    (no_error)))

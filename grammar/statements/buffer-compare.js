@@ -11,8 +11,8 @@ module.exports = ({ kw }) => ({
       optional(choice(kw("CASE-SENSITIVE"), kw("BINARY"))),
       optional(alias($.__buffer_compare_save_phrase, $.save_phrase)),
       optional(alias($.__buffer_compare_compares_block, $.compares_block)),
-      optional(kw("NO-LOBS")),
-      optional(kw("NO-ERROR")),
+      optional(alias(kw("NO-LOBS"), $.no_lobs)),
+      optional(alias(kw("NO-ERROR"), $.no_error)),
     ),
 
   __buffer_compare_field_phrase: ($) =>

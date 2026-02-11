@@ -4,25 +4,26 @@ module.exports = ({ kw }) => ({
 
   __wait_for_body: ($) =>
     seq(
-      field("events", $.__wait_for_event_list),
-      kw("OF"),
-      field("widgets", $.__wait_for_widget_list),
+      alias($.__wait_for_of_phrase, $.of_phrase),
       repeat(
         seq(
           kw("OR"),
-          field("events", $.__wait_for_event_list),
-          kw("OF"),
-          field("widgets", $.__wait_for_widget_list),
+          alias($.__wait_for_of_phrase, $.of_phrase),
         ),
       ),
-      optional(
-        seq(
-          kw("FOCUS"),
-          field("focus", $.widget_phrase),
-        ),
-      ),
-      optional(seq(kw("PAUSE"), field("duration", $._expression))),
+      optional(alias($.__wait_for_focus_phrase, $.focus_phrase)),
+      optional(alias($.__wait_for_pause_phrase, $.pause_phrase)),
     ),
+  __wait_for_of_phrase: ($) =>
+    seq(
+      field("events", $.__wait_for_event_list),
+      kw("OF"),
+      field("widgets", $.__wait_for_widget_list),
+    ),
+  __wait_for_focus_phrase: ($) =>
+    seq(kw("FOCUS"), field("focus", $.widget_phrase)),
+  __wait_for_pause_phrase: ($) =>
+    seq(kw("PAUSE"), field("duration", $._expression)),
 
   __wait_for_event: ($) => $._events,
   __wait_for_widget_list: ($) =>

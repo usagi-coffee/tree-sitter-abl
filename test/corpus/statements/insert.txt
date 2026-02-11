@@ -39,7 +39,8 @@ INSERT Customer NO-ERROR.
     (frame_phrase
       frame: (identifier)))
   (insert_statement
-    record: (identifier)))
+    record: (identifier)
+    (no_error)))
 
 ================================================================================
 INSERT - Reference snippet
@@ -113,4 +114,5 @@ INSERT Customer USING RECID(2) NO-ERROR.
       (identifier)
       (arguments
         (argument
-          (number_literal))))))
+          (number_literal))))
+    (no_error)))

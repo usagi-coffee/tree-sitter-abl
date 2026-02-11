@@ -5,10 +5,10 @@ module.exports = ({ kw }) => ({
   __close_stored_procedure_body: ($) =>
     seq(
       choice(kw("STORED-PROCEDURE"), kw("STORED-PROC")),
-      field("procedure", $.__close_stored_procedure_target),
+      field("procedure", $._identifier_or_qualified_name),
       optional(
         seq(
-          field("status_var", $.__close_stored_procedure_target),
+          field("status_var", $._identifier_or_qualified_name),
           "=",
           kw("PROC-STATUS"),
         ),
@@ -18,10 +18,8 @@ module.exports = ({ kw }) => ({
           kw("WHERE"),
           kw("PROC-HANDLE"),
           "=",
-          field("handle", $.__close_stored_procedure_target),
+          field("handle", $._identifier_or_qualified_name),
         ),
       ),
     ),
-
-  __close_stored_procedure_target: ($) => $._identifier_or_qualified_name,
 });

@@ -8,7 +8,7 @@ module.exports = ({ kw }) => ({
           seq(
             field("event", $.__on_database_event),
             kw("OF"),
-            field("object", $.__on_database_object),
+            field("object", $._identifier_or_qualified_name),
             optional(alias($.__on_referencing_phrase, $.referencing_phrase)),
             optional(alias(kw("OVERRIDE"), $.override)),
             choice(seq(kw("REVERT"), $._terminator), $._statement),
@@ -17,7 +17,7 @@ module.exports = ({ kw }) => ({
           seq(
             $.__on_ui_event_widgets,
             repeat(seq(kw("OR"), $.__on_ui_event_widgets)),
-            optional(kw("ANYWHERE")),
+            optional(alias(kw("ANYWHERE"), $.anywhere)),
             choice(
               seq(kw("REVERT"), $._terminator),
               $._statement,
@@ -42,16 +42,15 @@ module.exports = ({ kw }) => ({
   __on_ui_event_widgets: ($) =>
     seq(
       $.__on_ui_events,
-      optional(
-        seq(
-          kw("OF"),
-          optional(kw("MENU-ITEM")),
-          field("widget", $.widget_phrase),
-          repeat(seq(",", optional(kw("MENU-ITEM")), field("widget", $.widget_phrase))),
-        ),
-      ),
+      optional(alias($.__on_of_phrase, $.of_phrase)),
     ),
-  __on_database_object: ($) => $._identifier_or_qualified_name,
+  __on_of_phrase: ($) =>
+    seq(
+      kw("OF"),
+      optional(kw("MENU-ITEM")),
+      field("widget", $.widget_phrase),
+      repeat(seq(",", optional(kw("MENU-ITEM")), field("widget", $.widget_phrase))),
+    ),
   __on_referencing_phrase: ($) =>
     choice(
       seq(

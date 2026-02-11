@@ -13,17 +13,19 @@ module.exports = ({ kw }) => ({
       field("name", $.identifier),
       kw("FOR"),
       $.query_table_list,
-      optional(seq(kw("CACHE"), field("cache", $.number_literal))),
+      optional(alias($.__query_cache_phrase, $.cache_phrase)),
       optional(alias(kw("SCROLLING"), $.scrolling)),
       optional(alias(kw("RCODE-INFORMATION"), $.rcode_information)),
     ),
+  __query_cache_phrase: ($) =>
+    seq(kw("CACHE"), field("cache", $.number_literal)),
 
   query_table_list: ($) =>
     seq($.__query_table_entry, repeat(seq(",", $.__query_table_entry))),
 
   __query_table_entry: ($) =>
     seq(
-      field("table", $.__query_table_name),
+      field("table", $._identifier_or_qualified_name),
       optional(alias($.__query_field_list, $.field_list)),
     ),
   __query_field_list: ($) =>
@@ -49,9 +51,10 @@ module.exports = ({ kw }) => ({
       ")",
     ),
   __query_field_names: ($) =>
-    seq($.__query_field_name, repeat(seq(optional(","), $.__query_field_name))),
-  __query_table_name: ($) => $._identifier_or_qualified_name,
-  __query_field_name: ($) => $._identifier_or_qualified_name,
+    seq(
+      $._identifier_or_qualified_name,
+      repeat(seq(optional(","), $._identifier_or_qualified_name)),
+    ),
   __query_modifier: ($) =>
     choice(
       seq(

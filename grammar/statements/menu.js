@@ -49,6 +49,7 @@ module.exports = ({ kw }) => ({
       optional(alias(kw("DISABLED"), $.disabled)),
       optional(seq(kw("LABEL"), field("label", $.string_literal))),
     ),
+
   __menu_modifier: ($) =>
     choice(
       seq(

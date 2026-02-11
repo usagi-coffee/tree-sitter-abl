@@ -32,7 +32,7 @@ module.exports = ({ kw }) => ({
 
   __data_source_buffer_phrase: ($) =>
     seq(
-      field("buffer", $.__data_source_buffer_name),
+      field("buffer", $._identifier_or_qualified_name),
       optional(
         seq(
           kw("KEYS"),
@@ -40,17 +40,14 @@ module.exports = ({ kw }) => ({
           choice(
             kw("ROWID"),
             seq(
-              field("field", $.__data_source_field_name),
-              repeat(seq(",", field("field", $.__data_source_field_name))),
+              field("field", $._identifier_or_qualified_name),
+              repeat(seq(",", field("field", $._identifier_or_qualified_name))),
             ),
           ),
           ")",
         ),
       ),
     ),
-
-  __data_source_buffer_name: ($) => $._identifier_or_qualified_name,
-  __data_source_field_name: ($) => $._identifier_or_qualified_name,
   __data_source_modifier: ($) =>
     choice(
       seq($.__data_source_access_modifier, optional($.__data_source_static)),

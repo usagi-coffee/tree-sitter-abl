@@ -12,7 +12,8 @@ PUBLISH "MyEvent" FROM hPublisher.
     event: (string_literal))
   (publish_statement
     event: (string_literal)
-    publisher: (identifier)))
+    (from_phrase
+      publisher: (identifier))))
 
 ================================================================================
 PUBLISH - reference snippets and parameters
@@ -90,7 +91,8 @@ PUBLISH cEventName FROM hPublisher (INPUT p1, INPUT-OUTPUT p2, OUTPUT p3).
   (subscribe_statement
     (identifier)
     (string_literal)
-    (identifier))
+    (in_phrase
+      (identifier)))
   (form_statement
     (form_item
       (identifier))
@@ -103,19 +105,22 @@ PUBLISH cEventName FROM hPublisher (INPUT p1, INPUT-OUTPUT p2, OUTPUT p3).
       (identifier)))
   (on_statement
     (identifier)
-    (widget_phrase
-      (identifier))
+    (of_phrase
+      (widget_phrase
+        (identifier)))
     (run_statement
       (identifier)
       (in_phrase
         (identifier))))
   (wait_for_statement
-    (identifier)
-    (widget_phrase
-      (identifier))
-    (identifier)
-    (widget_phrase
-      (system_handle)))
+    (of_phrase
+      (identifier)
+      (widget_phrase
+        (identifier)))
+    (of_phrase
+      (identifier)
+      (widget_phrase
+        (system_handle))))
   (procedure_definition
     (identifier)
     (body
@@ -135,7 +140,8 @@ PUBLISH cEventName FROM hPublisher (INPUT p1, INPUT-OUTPUT p2, OUTPUT p3).
     (no_undo))
   (subscribe_statement
     (string_literal)
-    (identifier))
+    (in_phrase
+      (identifier)))
   (procedure_definition
     (identifier)
     (body
@@ -162,12 +168,13 @@ PUBLISH cEventName FROM hPublisher (INPUT p1, INPUT-OUTPUT p2, OUTPUT p3).
         (all))))
   (publish_statement
     (identifier)
-    (function_call
-      (identifier)
-      (arguments
-        (argument
-          (identifier))
-        (argument
-          (identifier))
-        (argument
-          (identifier))))))
+    (from_phrase
+      (function_call
+        (identifier)
+        (arguments
+          (argument
+            (identifier))
+          (argument
+            (identifier))
+          (argument
+            (identifier)))))))

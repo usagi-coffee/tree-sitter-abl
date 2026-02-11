@@ -62,5 +62,5 @@ module.exports = ({ kw }) => ({
   __repeat_until_phrase: ($) =>
     seq(kw("UNTIL"), field("condition", $._expression)),
   __repeat_sort_direction: ($) =>
-    alias(kw("DESCENDING", { offset: 4 }), $.descending),
+    field("sort_order", kw("DESCENDING", { offset: 4 })),
 });

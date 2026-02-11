@@ -9,20 +9,26 @@ WAIT-FOR WINDOW-CLOSE OF CURRENT-WINDOW OR READ-RESPONSE OF hSocket FOCUS hSocke
 
 (source_code
   (wait_for_statement
-    events: (identifier)
-    widgets: (widget_phrase
-      handle: (identifier))
-    duration: (number_literal))
+    (of_phrase
+      events: (identifier)
+      widgets: (widget_phrase
+        handle: (identifier)))
+    (pause_phrase
+      duration: (number_literal)))
   (wait_for_statement
-    events: (identifier)
-    widgets: (widget_phrase
-      system_handle: (system_handle))
-    events: (identifier)
-    widgets: (widget_phrase
-      handle: (identifier))
-    focus: (widget_phrase
-      handle: (identifier))
-    duration: (number_literal)))
+    (of_phrase
+      events: (identifier)
+      widgets: (widget_phrase
+        system_handle: (system_handle)))
+    (of_phrase
+      events: (identifier)
+      widgets: (widget_phrase
+        handle: (identifier)))
+    (focus_phrase
+      focus: (widget_phrase
+        handle: (identifier)))
+    (pause_phrase
+      duration: (number_literal))))
 
 ================================================================================
 WAIT-FOR with string event and focus/pause
@@ -34,15 +40,19 @@ WAIT-FOR WINDOW-CLOSE OF CURRENT-WINDOW OR "F6" OF b1 FOCUS b1 PAUSE 60.
 
 (source_code
   (wait_for_statement
-    events: (identifier)
-    widgets: (widget_phrase
-      system_handle: (system_handle))
-    events: (string_literal)
-    widgets: (widget_phrase
-      handle: (identifier))
-    focus: (widget_phrase
-      handle: (identifier))
-    duration: (number_literal)))
+    (of_phrase
+      events: (identifier)
+      widgets: (widget_phrase
+        system_handle: (system_handle)))
+    (of_phrase
+      events: (string_literal)
+      widgets: (widget_phrase
+        handle: (identifier)))
+    (focus_phrase
+      focus: (widget_phrase
+        handle: (identifier)))
+    (pause_phrase
+      duration: (number_literal))))
 
 ================================================================================
 WAIT-FOR - reference snippets
@@ -141,8 +151,9 @@ WAIT-FOR PROCEDURE-COMPLETE OF hRequest.
       (identifier)))
   (on_statement
     (identifier)
-    (widget_phrase
-      (identifier))
+    (of_phrase
+      (widget_phrase
+        (identifier)))
     (display_statement
       (identifier)
       (qualified_name
@@ -155,8 +166,9 @@ WAIT-FOR PROCEDURE-COMPLETE OF hRequest.
         (identifier))))
   (on_statement
     (identifier)
-    (widget_phrase
-      (identifier))
+    (of_phrase
+      (widget_phrase
+        (identifier)))
     (do_statement
       (body
         (hide_statement
@@ -204,11 +216,13 @@ WAIT-FOR PROCEDURE-COMPLETE OF hRequest.
     (frame_phrase
       (identifier)))
   (wait_for_statement
-    (identifier)
-    (widget_phrase
-      (system_handle))
-    (widget_phrase
-      (identifier)))
+    (of_phrase
+      (identifier)
+      (widget_phrase
+        (system_handle)))
+    (focus_phrase
+      (widget_phrase
+        (identifier))))
   (variable_definition
     (identifier)
     (identifier)
@@ -252,8 +266,9 @@ WAIT-FOR PROCEDURE-COMPLETE OF hRequest.
       (identifier)))
   (on_statement
     (identifier)
-    (widget_phrase
-      (identifier))
+    (of_phrase
+      (widget_phrase
+        (identifier)))
     (do_statement
       (body
         (display_statement
@@ -272,8 +287,9 @@ WAIT-FOR PROCEDURE-COMPLETE OF hRequest.
           (boolean_literal)))))
   (on_statement
     (identifier)
-    (widget_phrase
-      (identifier))
+    (of_phrase
+      (widget_phrase
+        (identifier)))
     (do_statement
       (body
         (assignment_statement
@@ -282,8 +298,9 @@ WAIT-FOR PROCEDURE-COMPLETE OF hRequest.
           (boolean_literal)))))
   (on_statement
     (identifier)
-    (widget_phrase
-      (system_handle))
+    (of_phrase
+      (widget_phrase
+        (system_handle)))
     (do_statement
       (body
         (quit_statement))))
@@ -302,15 +319,19 @@ WAIT-FOR PROCEDURE-COMPLETE OF hRequest.
         (run_statement
           (identifier)))
       (wait_for_statement
-        (identifier)
-        (widget_phrase
-          (system_handle))
-        (identifier)
-        (widget_phrase
-          (identifier))
-        (widget_phrase
-          (identifier))
-        (number_literal))))
+        (of_phrase
+          (identifier)
+          (widget_phrase
+            (system_handle)))
+        (of_phrase
+          (identifier)
+          (widget_phrase
+            (identifier)))
+        (focus_phrase
+          (widget_phrase
+            (identifier)))
+        (pause_phrase
+          (number_literal)))))
   (procedure_definition
     (identifier)
     (body
@@ -336,6 +357,7 @@ WAIT-FOR PROCEDURE-COMPLETE OF hRequest.
           (frame_phrase
             (identifier))))))
   (wait_for_statement
-    (identifier)
-    (widget_phrase
-      (identifier))))
+    (of_phrase
+      (identifier)
+      (widget_phrase
+        (identifier)))))

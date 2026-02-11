@@ -127,19 +127,19 @@ DEF INPUT PARAMETER pNull AS CHARACTER INITIAL ?.
   (parameter_definition
     name: (identifier)
     type: (identifier)
-    (string_literal))
+    initial: (string_literal))
   (parameter_definition
     name: (identifier)
     type: (identifier)
-    (number_literal))
+    initial: (number_literal))
   (parameter_definition
     name: (identifier)
     type: (identifier)
     (extent_phrase
       size: (number_literal))
-    (number_literal)
-    (number_literal)
-    (number_literal))
+    initial: (number_literal)
+    initial: (number_literal)
+    initial: (number_literal))
   (parameter_definition
     name: (identifier)
     type: (identifier)
@@ -147,7 +147,7 @@ DEF INPUT PARAMETER pNull AS CHARACTER INITIAL ?.
   (parameter_definition
     name: (identifier)
     type: (identifier)
-    (null_literal)))
+    initial: (null_literal)))
 
 ================================================================================
 PARAMETER DEFINITION - LABEL Option
@@ -162,13 +162,13 @@ DEFINE OUTPUT PARAMETER pMulti AS INTEGER LABEL "First", "Second", "Third".
   (parameter_definition
     name: (identifier)
     type: (identifier)
-    (string_literal))
+    label: (string_literal))
   (parameter_definition
     name: (identifier)
     type: (identifier)
-    (string_literal)
-    (string_literal)
-    (string_literal)))
+    label: (string_literal)
+    label: (string_literal)
+    label: (string_literal)))
 
 ================================================================================
 PARAMETER DEFINITION - FORMAT Option
@@ -348,25 +348,25 @@ DEFINE RETURN PARAMETER pRes AS LOGICAL NO-UNDO.
     name: (identifier)
     type: (identifier)
     format: (string_literal)
-    (number_literal)
-    (string_literal)
+    initial: (number_literal)
+    label: (string_literal)
     (no_undo))
   (parameter_definition
     name: (identifier)
     type: (identifier)
     (extent_phrase
       size: (number_literal))
-    (number_literal)
-    (number_literal)
-    (number_literal)
-    (string_literal)
+    initial: (number_literal)
+    initial: (number_literal)
+    initial: (number_literal)
+    label: (string_literal)
     format: (string_literal))
   (parameter_definition
     name: (identifier)
     like: (qualified_name
       left: (identifier)
       right: (identifier))
-    (string_literal)
+    initial: (string_literal)
     (no_undo))
   (parameter_definition
     name: (identifier)
@@ -657,8 +657,9 @@ DEFINE INPUT PARAMETER pExtent0 AS INTEGER EXTENT 0.
           field: (identifier)))
       (on_statement
         event: (identifier)
-        widget: (widget_phrase
-          handle: (identifier))
+        (of_phrase
+          widget: (widget_phrase
+            handle: (identifier)))
         (do_statement
           (body
             (run_statement
@@ -686,18 +687,20 @@ DEFINE INPUT PARAMETER pExtent0 AS INTEGER EXTENT 0.
                   (side_labels)))))))
       (on_statement
         event: (identifier)
-        widget: (widget_phrase
-          handle: (qualified_name
-            left: (identifier)
-            right: (identifier)))
+        (of_phrase
+          widget: (widget_phrase
+            handle: (qualified_name
+              left: (identifier)
+              right: (identifier))))
         (do_statement
           (body
             (hide_statement
               (message)))))
       (wait_for_statement
-        events: (identifier)
-        widgets: (widget_phrase
-          system_handle: (system_handle)))))
+        (of_phrase
+          events: (identifier)
+          widgets: (widget_phrase
+            system_handle: (system_handle))))))
   (procedure_definition
     name: (identifier)
     (body
@@ -791,7 +794,7 @@ DEFINE INPUT PARAMETER pExtent0 AS INTEGER EXTENT 0.
   (parameter_definition
     name: (identifier)
     type: (identifier)
-    (identifier))
+    target: (identifier))
   (parameter_definition
     name: (identifier)
     type: (qualified_name

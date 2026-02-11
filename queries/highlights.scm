@@ -109,6 +109,7 @@
   (case_sensitive)
   (cdecl)
   (centered)
+  (chained)
   (clipboard)
   (close)
   (collate)
@@ -176,6 +177,7 @@
   (no_join_by_sqldb)
   (no_label)
   (no_labels)
+  (no_lobs)
   (no_lock)
   (no_lookahead)
   (no_map)
@@ -189,6 +191,7 @@
   (no_word_wrap)
   (ordered_join)
   (overlay)
+  (override)
   (override_modifier)
   (paged)
   (page_bottom)
@@ -310,7 +313,6 @@
   "CASE"
   "CASE-SENSITIVE"
   "CATCH"
-  "CHAINED"
   "CHOOSE"
   "CLASS"
   "CLEAR"
@@ -382,7 +384,6 @@
   "DIR"
   "DISABLE"
   "DISABLE-AUTO-ZAP"
-  "DISABLED"
   "DISCONNECT"
   "DISPLAY"
   "DO"
@@ -557,7 +558,6 @@
   "NO-MESSAGE"
   "NO-PAUSE"
   "NO-TAB-STOP"
-  "NO-UNDO"
   "NO-WAIT"
   "NO-WORD-WRAP"
   "NONE"
@@ -587,7 +587,6 @@
   "OUTER-JOIN"
   "OUTPUT"
   "OVERLAY"
-  "OVERRIDE"
   "PAGE"
   "PAGE-SIZE"
   "PAGE-WIDTH"
@@ -652,7 +651,6 @@
   "ROW"
   "ROW-OF"
   "ROWID"
-  "RULE"
   "RUN"
   "RUN-PROCEDURE"
   "RVV-"

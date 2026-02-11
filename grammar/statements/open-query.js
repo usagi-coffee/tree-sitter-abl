@@ -59,6 +59,6 @@ module.exports = ({ kw }) => ({
     seq(
       kw("BY"),
       field("by", $._expression),
-      optional(kw("DESCENDING", { offset: 4 })),
+      optional(field("sort_order", kw("DESCENDING", { offset: 4 }))),
     ),
 });

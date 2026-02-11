@@ -26,7 +26,7 @@ OUTPUT TO TERMINAL NO-ECHO PAGED PAGE-SIZE 24.
     name: (identifier)
     (close))
   (output_statement
-    (binary_expression
+    value: (binary_expression
       (identifier)
       (string_literal))
     (append))
@@ -50,7 +50,7 @@ OUTPUT TO TERMINAL NO-ECHO PAGED PAGE-SIZE 24.
   (output_statement
     file: (string_literal))
   (output_statement
-    (identifier)
+    value: (identifier)
     (convert_phrase
       source: (string_literal)
       target: (string_literal)))
@@ -79,7 +79,7 @@ OUTPUT THROUGH myprog NO-MAP CONVERT TARGET "utf-8".
 
 (source_code
   (output_statement
-    (identifier)
+    value: (identifier)
     map: (string_literal)
     (convert_phrase
       (no_convert)))

@@ -8,4 +8,5 @@ SYSTEM-HELP "help" NO-ERROR.
 
 (source_code
   (system_help_statement
-    topic: (string_literal)))
+    topic: (string_literal)
+    (no_error)))

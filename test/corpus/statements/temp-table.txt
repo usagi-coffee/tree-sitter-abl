@@ -26,9 +26,13 @@ DEFINE TEMP-TABLE tt_ship NO-UNDO
     namespace_prefix: (string_literal)
     node: (string_literal)
     serialize_name: (string_literal)
+    (reference_only)
     (like_phrase
       like: (identifier)
-      index: (identifier))
+      (validate)
+      index: (identifier)
+      (as_primary_phrase
+        (primary)))
     (rcode_information)
     (before_table_phrase
       before: (identifier))
@@ -43,7 +47,8 @@ DEFINE TEMP-TABLE tt_ship NO-UNDO
       type: (identifier))
     (temp_table_field
       name: (identifier)
-      type: (identifier))
+      type: (identifier)
+      (validate))
     (temp_table_field
       name: (identifier)
       type: (identifier)
@@ -57,7 +62,7 @@ DEFINE TEMP-TABLE tt_ship NO-UNDO
       (unique)
       (primary)
       field: (identifier)
-      (descending)
+      sort_order: (descending)
       field: (identifier))))
 
 ================================================================================
@@ -93,7 +98,9 @@ DEFINE TEMP-TABLE tt_idx LIKE base_tbl USE-INDEX idx1 USE-INDEX idx2 AS PRIMARY
     (like_phrase
       like: (identifier)
       index: (identifier)
-      index: (identifier))
+      index: (identifier)
+      (as_primary_phrase
+        (primary)))
     (temp_table_field
       name: (identifier)
       type: (identifier))))
@@ -400,12 +407,12 @@ DEFINE TEMP-TABLE tt NO-UNDO
       name: (identifier)
       (unique)
       field: (identifier)
-      (ascending))
+      sort_order: (ascending))
     (temp_table_index
       name: (identifier)
       (primary)
       field: (identifier)
-      (descending))
+      sort_order: (descending))
     (temp_table_index
       name: (identifier)
       (unique)
@@ -485,11 +492,11 @@ WAIT-FOR CHOOSE OF cancel-butt OR WINDOW-CLOSE OF CURRENT-WINDOW.
       name: (identifier)
       (primary)
       field: (identifier)
-      (ascending))
+      sort_order: (ascending))
     (temp_table_index
       name: (identifier)
       field: (identifier)
-      (descending)))
+      sort_order: (descending)))
   (variable_definition
     name: (identifier)
     (no_undo)
@@ -625,8 +632,9 @@ WAIT-FOR CHOOSE OF cancel-butt OR WINDOW-CLOSE OF CURRENT-WINDOW.
               right: (identifier)))))))
   (on_statement
     event: (identifier)
-    widget: (widget_phrase
-      handle: (identifier))
+    (of_phrase
+      widget: (widget_phrase
+        handle: (identifier)))
     (do_statement
       (body
         (hide_statement
@@ -681,9 +689,11 @@ WAIT-FOR CHOOSE OF cancel-butt OR WINDOW-CLOSE OF CURRENT-WINDOW.
     (frame_phrase
       frame: (identifier)))
   (wait_for_statement
-    events: (identifier)
-    widgets: (widget_phrase
-      handle: (identifier))
-    events: (identifier)
-    widgets: (widget_phrase
-      system_handle: (system_handle))))
+    (of_phrase
+      events: (identifier)
+      widgets: (widget_phrase
+        handle: (identifier)))
+    (of_phrase
+      events: (identifier)
+      widgets: (widget_phrase
+        system_handle: (system_handle)))))

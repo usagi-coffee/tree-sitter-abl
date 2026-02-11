@@ -68,40 +68,40 @@ module.exports = ({ kw }) => ({
   __output_lob_dir_phrase: ($) =>
     seq(
       kw("LOB-DIR"),
-      field(
-        "directory",
-        choice(
-          alias($.constant_expression, $.preprocessor_reference),
-          seq(kw("VALUE"), "(", $._expression, ")")
+        field(
+          "directory",
+          choice(
+            alias($.constant_expression, $.preprocessor_reference),
+            seq(kw("VALUE"), "(", field("value", $._expression), ")")
+          )
         )
-      )
-    ),
+      ),
 
   __output_num_copies_phrase: ($) =>
     seq(
       kw("NUM-COPIES"),
-      field(
-        "copies",
-        choice(
-          $.number_literal,
-          alias($.constant_expression, $.preprocessor_reference),
-          seq(kw("VALUE"), "(", $._expression, ")")
+        field(
+          "copies",
+          choice(
+            $.number_literal,
+            alias($.constant_expression, $.preprocessor_reference),
+            seq(kw("VALUE"), "(", field("value", $._expression), ")")
+          )
         )
-      )
-    ),
+      ),
 
   __output_page_size_phrase: ($) =>
     seq(
       kw("PAGE-SIZE"),
-      field(
-        "page_size",
-        choice(
-          $.number_literal,
-          alias($.constant_expression, $.preprocessor_reference),
-          seq(kw("VALUE"), "(", $._expression, ")")
+        field(
+          "page_size",
+          choice(
+            $.number_literal,
+            alias($.constant_expression, $.preprocessor_reference),
+            seq(kw("VALUE"), "(", field("value", $._expression), ")")
+          )
         )
-      )
-    ),
+      ),
 
   __output_map_entry: ($) =>
     choice(
@@ -123,7 +123,7 @@ module.exports = ({ kw }) => ({
         )
       ),
       alias(kw("TERMINAL"), $.terminal),
-      seq(kw("VALUE"), "(", $._expression, ")"),
+      seq(kw("VALUE"), "(", field("value", $._expression), ")"),
       alias(kw("CLIPBOARD"), $.clipboard)
     ),
 
@@ -131,7 +131,7 @@ module.exports = ({ kw }) => ({
     choice(
       field("program", $.identifier),
       field("program", $.string_literal),
-      seq(kw("VALUE"), "(", $._expression, ")")
+      seq(kw("VALUE"), "(", field("value", $._expression), ")")
     ),
 
   __output_through_argument: ($) =>
@@ -140,7 +140,7 @@ module.exports = ({ kw }) => ({
       $.number_literal,
       $.identifier,
       alias($.constant_expression, $.preprocessor_reference),
-      seq(kw("VALUE"), "(", $._expression, ")")
+      seq(kw("VALUE"), "(", field("value", $._expression), ")")
     ),
 
   __output_printer_target: ($) =>

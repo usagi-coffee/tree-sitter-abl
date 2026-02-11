@@ -168,14 +168,16 @@ DEF QUERY qCache2 FOR Sales.Order CACHE 50.
     name: (identifier)
     (query_table_list
       table: (identifier))
-    cache: (number_literal))
+    (cache_phrase
+      cache: (number_literal)))
   (query_definition
     name: (identifier)
     (query_table_list
       table: (qualified_name
         left: (identifier)
         right: (identifier)))
-    cache: (number_literal)))
+    (cache_phrase
+      cache: (number_literal))))
 
 ================================================================================
 QUERY DEFINITION - SCROLLING Option
@@ -243,7 +245,8 @@ DEFINE QUERY qFull FOR Customer FIELDS (CustNum, Name)
       (field_list
         (identifier)
         (identifier)))
-    cache: (number_literal)
+    (cache_phrase
+      cache: (number_literal))
     (scrolling)
     (rcode_information)))
 
@@ -421,7 +424,8 @@ DEFINE QUERY qComplex FOR Customer FIELDS (CustNum, Name)
       (field_list
         (identifier)
         (identifier)))
-    cache: (number_literal)
+    (cache_phrase
+      cache: (number_literal))
     (scrolling)
     (rcode_information)))
 
@@ -536,8 +540,9 @@ DEFINE QUERY qExceptAll FOR Customer EXCEPT ().
       column: (number_literal)))
   (on_statement
     event: (identifier)
-    widget: (widget_phrase
-      handle: (identifier))
+    (of_phrase
+      widget: (widget_phrase
+        handle: (identifier)))
     (do_statement
       (body
         (get_statement
@@ -568,9 +573,10 @@ DEFINE QUERY qExceptAll FOR Customer EXCEPT ().
     (frame_phrase
       frame: (identifier)))
   (wait_for_statement
-    events: (identifier)
-    widgets: (widget_phrase
-      system_handle: (system_handle)))
+    (of_phrase
+      events: (identifier)
+      widgets: (widget_phrase
+        system_handle: (system_handle))))
   (procedure_definition
     name: (identifier)
     (body

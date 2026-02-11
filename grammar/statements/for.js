@@ -58,12 +58,12 @@ module.exports = ({ kw }) => ({
       seq(
         kw("BY"),
         field("by", $._expression),
-        optional($.__for_sort_direction),
+        optional(field("sort_order", kw("DESCENDING", { offset: 4 }))),
         repeat(
           seq(
             kw("BY"),
             field("by", $._expression),
-            optional($.__for_sort_direction),
+            optional(field("sort_order", kw("DESCENDING", { offset: 4 }))),
           ),
         ),
       ),
@@ -74,12 +74,12 @@ module.exports = ({ kw }) => ({
         kw("GROUP"),
         kw("BY"),
         field("by", $._expression),
-        optional($.__for_sort_direction),
+        optional(field("sort_order", kw("DESCENDING", { offset: 4 }))),
         repeat(
           seq(
             kw("BY"),
             field("by", $._expression),
-            optional($.__for_sort_direction),
+            optional(field("sort_order", kw("DESCENDING", { offset: 4 }))),
           ),
         ),
       ),
@@ -91,21 +91,19 @@ module.exports = ({ kw }) => ({
         kw("BREAK"),
         kw("BY"),
         field("by", $._expression),
-        optional($.__for_sort_direction),
+        optional(field("sort_order", kw("DESCENDING", { offset: 4 }))),
         repeat(
           seq(
             kw("BY"),
             field("by", $._expression),
-            optional($.__for_sort_direction),
+            optional(field("sort_order", kw("DESCENDING", { offset: 4 }))),
           ),
         ),
       ),
     ),
 
-  __for_index_name: ($) => $._identifier_or_qualified_name,
   __for_with_stream_io_phrase: ($) =>
     seq(kw("WITH"), alias(kw("STREAM-IO"), $.stream_io)),
-  __for_sort_direction: ($) => kw("DESCENDING", { offset: 4 }),
 
   __for_collate_phrase: ($) =>
     seq(
@@ -116,7 +114,7 @@ module.exports = ({ kw }) => ({
       field("strength", $._expression),
       optional(seq(",", field("collation", $._expression))),
       ")",
-      optional($.__for_sort_direction),
+      optional(field("sort_order", kw("DESCENDING", { offset: 4 }))),
     ),
 
   __for_while_phrase: ($) =>

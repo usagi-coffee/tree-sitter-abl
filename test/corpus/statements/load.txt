@@ -25,16 +25,19 @@ LOAD "myapp.r" DIR "/usr/lib" APPLICATION "app1" NEW.
     file: (string_literal)
     app: (string_literal))
   (load_statement
-    file: (string_literal))
+    file: (string_literal)
+    (new))
   (load_statement
     file: (string_literal)
     base_key: (string_literal))
   (load_statement
-    file: (string_literal))
+    file: (string_literal)
+    (no_error))
   (load_statement
     file: (string_literal)
     dir: (string_literal)
-    app: (string_literal)))
+    app: (string_literal)
+    (new)))
 
 ================================================================================
 LOAD - VALUE expressions
@@ -61,11 +64,13 @@ LOAD VALUE(cFile) DIR VALUE(cDir) APPLICATION VALUE(cApp) NEW BASE-KEY VALUE(cKe
       (arguments
         (argument
           name: (identifier))))
+    (new)
     base_key: (function_call
       function: (identifier)
       (arguments
         (argument
-          name: (identifier))))))
+          name: (identifier))))
+    (no_error)))
 
 ================================================================================
 LOAD - Reference snippet
@@ -86,7 +91,9 @@ LOAD "myenv" BASE-KEY "HKEY_CURRENT_USER".
     (string_literal))
   (load_statement
     (string_literal)
-    (string_literal))
+    (new)
+    (string_literal)
+    (no_error))
   (load_statement
     (string_literal)
     (string_literal)))

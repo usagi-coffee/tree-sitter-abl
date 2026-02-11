@@ -95,14 +95,16 @@ ASSIGN INPUT FRAME frm Cust.Name = "x" WHEN TRUE NO-ERROR.
 (source_code
   (assign_statement
     record: (identifier)
-    field: (identifier))
+    field: (identifier)
+    (no_error))
   (assign_statement
     frame: (identifier)
     field: (qualified_name
       left: (identifier)
       right: (identifier))
     value: (string_literal)
-    when: (boolean_literal)))
+    when: (boolean_literal)
+    (no_error)))
 
 ================================================================================
 ASSIGN with NO-ERROR

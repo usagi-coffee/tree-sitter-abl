@@ -11,14 +11,16 @@ SUBSCRIBE PROCEDURE hSub TO "MyEvent" IN hPub.
 (source_code
   (subscribe_statement
     event: (string_literal)
-    publisher: (identifier))
+    (in_phrase
+      publisher: (identifier)))
   (subscribe_statement
     event: (string_literal)
     (anywhere))
   (subscribe_statement
     subscriber: (identifier)
     event: (string_literal)
-    publisher: (identifier)))
+    (in_phrase
+      publisher: (identifier))))
 
 ================================================================================
 SUBSCRIBE - reference snippets and variants
@@ -68,21 +70,26 @@ SUBSCRIBE TO "spaced event" ANYWHERE RUN-PROCEDURE "spaced event".
   (subscribe_statement
     (identifier)
     (string_literal)
-    (identifier))
+    (in_phrase
+      (identifier)))
   (parameter_definition
     (identifier)
     (identifier)
     (no_undo))
   (subscribe_statement
     (string_literal)
-    (identifier))
+    (in_phrase
+      (identifier)))
   (subscribe_statement
     (identifier)
     (identifier)
-    (identifier)
-    (string_literal)
+    (in_phrase
+      (identifier))
+    (run_procedure_phrase
+      (string_literal))
     (no_error))
   (subscribe_statement
     (string_literal)
     (anywhere)
-    (string_literal)))
+    (run_procedure_phrase
+      (string_literal))))

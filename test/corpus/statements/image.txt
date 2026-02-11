@@ -541,9 +541,10 @@ UPDATE animate WITH FRAME y.
       (string_literal)))
   (on_statement
     (identifier)
-    (widget_phrase
-      (identifier)
-      (identifier))
+    (of_phrase
+      (widget_phrase
+        (identifier)
+        (identifier)))
     (do_statement
       (body
         (do_statement

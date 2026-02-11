@@ -26,7 +26,7 @@ module.exports = ({ kw }) => ({
           ),
         ),
       ),
-      optional(kw("NO-ERROR")),
+      optional(alias(kw("NO-ERROR"), $.no_error)),
       optional(alias($.__run_stored_procedure_params, $.parameter_list)),
     ),
 

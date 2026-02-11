@@ -6,6 +6,6 @@ module.exports = ({ kw }) => ({
     seq(
       kw("TEMP-TABLE"),
       field("name", $.identifier),
-      optional(kw("NO-ERROR")),
+      optional(alias(kw("NO-ERROR"), $.no_error)),
     ),
 });

@@ -5,7 +5,7 @@ module.exports = ({ kw }) => ({
   __delete_alias_body: ($) =>
     seq(
       field("alias", $.__delete_alias_name),
-      optional(kw("NO-ERROR")),
+      optional(alias(kw("NO-ERROR"), $.no_error)),
     ),
 
   __delete_alias_name: ($) =>

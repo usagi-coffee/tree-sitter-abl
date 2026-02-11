@@ -6,7 +6,7 @@ module.exports = ({ kw }) => ({
       kw("DYNAMIC-NEW"),
       field("class", $._expression),
       $.arguments,
-      optional(kw("NO-ERROR")),
+      optional(alias(kw("NO-ERROR"), $.no_error)),
       $._terminator,
     ),
 

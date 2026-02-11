@@ -12,4 +12,5 @@ CREATE TEMP-TABLE ttHandle IN WIDGET-POOL pool1.
     handle: (identifier))
   (create_temp_table_statement
     handle: (identifier)
-    pool: (identifier)))
+    (in_widget_pool_phrase
+      pool: (identifier))))

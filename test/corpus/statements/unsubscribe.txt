@@ -15,7 +15,8 @@ UNSUBSCRIBE TO "MyEvent" IN hPub.
     (all))
   (unsubscribe_statement
     event: (string_literal)
-    publisher: (identifier)))
+    (in_phrase
+      publisher: (identifier))))
 
 ================================================================================
 UNSUBSCRIBE - reference snippets and variants
@@ -51,10 +52,12 @@ UNSUBSCRIBE ALL IN hPub.
   (unsubscribe_statement
     (identifier)
     (string_literal)
-    (identifier))
+    (in_phrase
+      (identifier)))
   (unsubscribe_statement
     (identifier)
     (identifier))
   (unsubscribe_statement
     (all)
-    (identifier)))
+    (in_phrase
+      (identifier))))

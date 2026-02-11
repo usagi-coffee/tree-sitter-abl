@@ -22,7 +22,7 @@ module.exports = ({ kw }) => ({
     choice(
       field("program", $.identifier),
       field("program", $.string_literal),
-      seq(kw("VALUE"), "(", $._expression, ")"),
+      seq(kw("VALUE"), "(", field("value", $._expression), ")"),
     ),
 
   __input_output_through_argument: ($) =>
@@ -31,7 +31,7 @@ module.exports = ({ kw }) => ({
       $.number_literal,
       $.identifier,
       alias($.constant_expression, $.preprocessor_reference),
-      seq(kw("VALUE"), "(", $._expression, ")"),
+      seq(kw("VALUE"), "(", field("value", $._expression), ")"),
     ),
 
   __input_output_through_option: ($) =>

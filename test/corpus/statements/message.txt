@@ -398,8 +398,9 @@ END.
       (identifier)))
   (on_statement
     (identifier)
-    (widget_phrase
-      (identifier))
+    (of_phrase
+      (widget_phrase
+        (identifier)))
     (do_statement
       (body
         (message_statement

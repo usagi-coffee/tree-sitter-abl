@@ -21,7 +21,7 @@ CHOOSE ROW fieldName HELP "Help text for this field".
 (source_code
   (choose_statement
     field: (identifier)
-    (string_literal)))
+    help: (string_literal)))
 
 ================================================================================
 CHOOSE - FIELD single
@@ -60,7 +60,7 @@ CHOOSE FIELD fieldName HELP "Help for this field".
 (source_code
   (choose_statement
     field: (identifier)
-    (string_literal)))
+    help: (string_literal)))
 
 ================================================================================
 CHOOSE - FIELD multiple with Help
@@ -73,11 +73,11 @@ CHOOSE FIELD field1 HELP "First field help" field2 HELP "Second field help" fiel
 (source_code
   (choose_statement
     field: (identifier)
-    (string_literal)
+    help: (string_literal)
     field: (identifier)
-    (string_literal)
+    help: (string_literal)
     field: (identifier)
-    (string_literal)))
+    help: (string_literal)))
 
 ================================================================================
 CHOOSE - AUTO-RETURN
@@ -235,7 +235,7 @@ CHOOSE ROW fieldName HELP "Help text" AUTO-RETURN COLOR NORMAL KEYS keyVar NO-ER
 (source_code
   (choose_statement
     field: (identifier)
-    (string_literal)
+    help: (string_literal)
     (auto_return)
     color: (color_phrase
       (identifier))
@@ -254,7 +254,7 @@ CHOOSE FIELD field1 field2 HELP "Multiple field help" AUTO-RETURN COLOR NORMAL.
   (choose_statement
     field: (identifier)
     field: (identifier)
-    (string_literal)
+    help: (string_literal)
     (auto_return)
     color: (color_phrase
       (identifier))))
@@ -287,7 +287,7 @@ CHOOSE ROW fieldName HELP "Help for field" AUTO-RETURN COLOR NORMAL GO-ON (F1 F2
 (source_code
   (choose_statement
     field: (identifier)
-    (string_literal)
+    help: (string_literal)
     (auto_return)
     color: (color_phrase
       (identifier))
@@ -342,15 +342,15 @@ CHOOSE FIELD f1 HELP "First" f2 HELP "Second" f3 HELP "Third" f4 HELP "Fourth" f
 (source_code
   (choose_statement
     field: (identifier)
-    (string_literal)
+    help: (string_literal)
     field: (identifier)
-    (string_literal)
+    help: (string_literal)
     field: (identifier)
-    (string_literal)
+    help: (string_literal)
     field: (identifier)
-    (string_literal)
+    help: (string_literal)
     field: (identifier)
-    (string_literal)))
+    help: (string_literal)))
 
 ================================================================================
 CHOOSE - FIELD with all HELP
@@ -363,15 +363,15 @@ CHOOSE FIELD opt1 HELP "Option 1" opt2 HELP "Option 2" opt3 HELP "Option 3" opt4
 (source_code
   (choose_statement
     field: (identifier)
-    (string_literal)
+    help: (string_literal)
     field: (identifier)
-    (string_literal)
+    help: (string_literal)
     field: (identifier)
-    (string_literal)
+    help: (string_literal)
     field: (identifier)
-    (string_literal)
+    help: (string_literal)
     field: (identifier)
-    (string_literal)))
+    help: (string_literal)))
 
 ================================================================================
 CHOOSE - FIELD with mixed HELP and no HELP
@@ -384,10 +384,10 @@ CHOOSE FIELD fieldWithHelp HELP "Has help" fieldNoHelp fieldMoreHelp HELP "Also 
 (source_code
   (choose_statement
     field: (identifier)
-    (string_literal)
+    help: (string_literal)
     field: (identifier)
     field: (identifier)
-    (string_literal)))
+    help: (string_literal)))
 
 ================================================================================
 CHOOSE - GO-ON single key
@@ -505,7 +505,7 @@ CHOOSE ROW field1 HELP "This is a longer help text description for the field tha
 (source_code
   (choose_statement
     field: (identifier)
-    (string_literal)))
+    help: (string_literal)))
 
 ================================================================================
 CHOOSE - comprehensive test
@@ -518,11 +518,11 @@ CHOOSE FIELD option1 HELP "First option" option2 HELP "Second option" option3 HE
 (source_code
   (choose_statement
     field: (identifier)
-    (string_literal)
+    help: (string_literal)
     field: (identifier)
-    (string_literal)
+    help: (string_literal)
     field: (identifier)
-    (string_literal)
+    help: (string_literal)
     (auto_return)
     color: (color_phrase
       (identifier))

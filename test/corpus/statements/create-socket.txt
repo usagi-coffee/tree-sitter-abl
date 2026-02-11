@@ -20,7 +20,8 @@ CREATE SERVER-SOCKET hSS NO-ERROR.
 
 (source_code
   (create_socket_statement
-    name: (identifier)))
+    name: (identifier)
+    (no_error)))
 
 ================================================================================
 CREATE SOCKET - NO-ERROR
@@ -32,4 +33,5 @@ CREATE SOCKET sock NO-ERROR.
 
 (source_code
   (create_socket_statement
-    name: (identifier)))
+    name: (identifier)
+    (no_error)))

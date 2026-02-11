@@ -69,32 +69,37 @@ WAIT-FOR WINDOW-CLOSE OF CURRENT-WINDOW.
       (string_literal)))
   (on_statement
     (identifier)
-    (widget_phrase
-      (identifier))
+    (of_phrase
+      (widget_phrase
+        (identifier)))
     (run_statement
       (procedure_name)))
   (on_statement
     (identifier)
-    (widget_phrase
-      (identifier))
+    (of_phrase
+      (widget_phrase
+        (identifier)))
     (run_statement
       (procedure_name)))
   (on_statement
     (identifier)
-    (widget_phrase
-      (identifier))
+    (of_phrase
+      (widget_phrase
+        (identifier)))
     (run_statement
       (procedure_name)))
   (on_statement
     (identifier)
-    (widget_phrase
-      (identifier))
+    (of_phrase
+      (widget_phrase
+        (identifier)))
     (run_statement
       (procedure_name)))
   (on_statement
     (identifier)
-    (widget_phrase
-      (identifier))
+    (of_phrase
+      (widget_phrase
+        (identifier)))
     (quit_statement))
   (assign_statement
     (assign_phrase
@@ -112,6 +117,7 @@ WAIT-FOR WINDOW-CLOSE OF CURRENT-WINDOW.
           (identifier))
         (boolean_literal))))
   (wait_for_statement
-    (identifier)
-    (widget_phrase
-      (system_handle))))
+    (of_phrase
+      (identifier)
+      (widget_phrase
+        (system_handle)))))

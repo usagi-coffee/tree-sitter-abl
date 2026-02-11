@@ -86,6 +86,7 @@ BUFFER-COPY bSrc TO bTgt ASSIGN Cust.Name = "X" Cust.Balance -= 10.
       (assign_pair
         left: (identifier)
         right: (number_literal)))
+    (no_lobs)
     (no_error))
   (buffer_copy_statement
     source: (identifier)

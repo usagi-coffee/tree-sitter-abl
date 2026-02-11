@@ -56,17 +56,20 @@ BUFFER-COMPARE bSrc TO bTgt SAVE RESULT IN obj:prop NO-ERROR.
       result: (identifier)))
   (buffer_compare_statement
     source: (identifier)
-    target: (identifier))
+    target: (identifier)
+    (no_lobs))
   (buffer_compare_statement
     source: (identifier)
-    target: (identifier))
+    target: (identifier)
+    (no_error))
   (buffer_compare_statement
     source: (identifier)
     target: (identifier)
     (save_phrase
       result: (object_access
         left: (identifier)
-        right: (identifier)))))
+        right: (identifier)))
+    (no_error)))
 
 ================================================================================
 BUFFER-COMPARE with COMPARES block

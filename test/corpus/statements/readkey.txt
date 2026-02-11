@@ -11,10 +11,12 @@ READKEY STREAM sIn PAUSE 10.
 (source_code
   (readkey_statement)
   (readkey_statement
-    pause: (number_literal))
+    (pause_phrase
+      pause: (number_literal)))
   (readkey_statement
     stream: (identifier)
-    pause: (number_literal)))
+    (pause_phrase
+      pause: (number_literal))))
 
 ================================================================================
 READKEY - reference snippet and variants
@@ -91,6 +93,8 @@ READKEY PAUSE 0.5.
           (leave_statement)))))
   (readkey_statement
     (identifier)
-    (number_literal))
+    (pause_phrase
+      (number_literal)))
   (readkey_statement
-    (number_literal)))
+    (pause_phrase
+      (number_literal))))

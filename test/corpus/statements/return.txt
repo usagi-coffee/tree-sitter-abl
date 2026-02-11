@@ -171,7 +171,8 @@ RETURN NO-APPLY.
     (identifier)
     (identifier))
   (run_statement
-    (identifier))
+    (identifier)
+    (no_error))
   (if_statement
     (object_access
       (identifier)

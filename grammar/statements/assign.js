@@ -16,11 +16,13 @@ module.exports = ({ kw }) => ({
       optional(
         seq(
           kw("EXCEPT"),
-          field("field", $.__assign_record_field),
-          repeat(seq(optional(","), field("field", $.__assign_record_field))),
+          field("field", $._identifier_or_qualified_name),
+          repeat(
+            seq(optional(","), field("field", $._identifier_or_qualified_name)),
+          ),
         ),
       ),
-      optional(kw("NO-ERROR")),
+      optional(alias(kw("NO-ERROR"), $.no_error)),
     ),
 
   __assign_input_body: ($) =>
@@ -31,7 +33,7 @@ module.exports = ({ kw }) => ({
         seq(kw("BROWSE"), field("browse", $.identifier)),
       ),
       repeat1($.__assign_input_item),
-      optional(kw("NO-ERROR")),
+      optional(alias(kw("NO-ERROR"), $.no_error)),
     ),
 
   __assign_input_item: ($) =>
@@ -45,5 +47,4 @@ module.exports = ({ kw }) => ({
     seq(kw("WHEN"), kw("AVAILABLE"), $.__assign_record_name),
 
   __assign_record_name: ($) => $._identifier_or_qualified_name,
-  __assign_record_field: ($) => $._identifier_or_qualified_name,
 });

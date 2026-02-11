@@ -135,7 +135,8 @@ DELETE WIDGET-POOL wp.
 
 (source_code
   (delete_alias_statement
-    alias: (identifier))
+    alias: (identifier)
+    (no_error))
   (delete_widget_pool_statement
     pool: (identifier)))
 

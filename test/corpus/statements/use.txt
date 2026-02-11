@@ -14,7 +14,8 @@ USE "testing" NO-ERROR.
   (use_statement
     environment: (identifier))
   (use_statement
-    environment: (string_literal)))
+    environment: (string_literal)
+    (no_error)))
 
 ================================================================================
 USE - VALUE expression
@@ -30,7 +31,8 @@ USE VALUE(cEnv) NO-ERROR.
       function: (identifier)
       (arguments
         (argument
-          name: (identifier))))))
+          name: (identifier))))
+    (no_error)))
 
 ================================================================================
 USE - reference snippet

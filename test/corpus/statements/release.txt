@@ -116,8 +116,9 @@ RELEASE sports.Customer NO-ERROR.
       record: (identifier)))
   (on_statement
     event: (identifier)
-    widget: (widget_phrase
-      handle: (identifier))
+    (of_phrase
+      widget: (widget_phrase
+        handle: (identifier)))
     (do_statement
       (body
         (display_statement
@@ -138,8 +139,9 @@ RELEASE sports.Customer NO-ERROR.
                 name: (identifier))))))))
   (on_statement
     event: (identifier)
-    widget: (widget_phrase
-      handle: (identifier))
+    (of_phrase
+      widget: (widget_phrase
+        handle: (identifier)))
     (do_statement
       (body
         (find_statement
@@ -187,12 +189,14 @@ RELEASE sports.Customer NO-ERROR.
   (pause_statement
     duration: (number_literal))
   (wait_for_statement
-    events: (identifier)
-    widgets: (widget_phrase
-      handle: (identifier))
-    events: (identifier)
-    widgets: (widget_phrase
-      system_handle: (system_handle)))
+    (of_phrase
+      events: (identifier)
+      widgets: (widget_phrase
+        handle: (identifier)))
+    (of_phrase
+      events: (identifier)
+      widgets: (widget_phrase
+        system_handle: (system_handle))))
   (release_statement
     record: (qualified_name
       left: (identifier)

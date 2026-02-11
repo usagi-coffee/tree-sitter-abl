@@ -4,11 +4,15 @@ module.exports = ({ kw }) => ({
 
   __create_socket_body: ($) =>
     choice(
-      seq(kw("SOCKET"), field("name", $.identifier), optional(kw("NO-ERROR"))),
+      seq(
+        kw("SOCKET"),
+        field("name", $.identifier),
+        optional(alias(kw("NO-ERROR"), $.no_error)),
+      ),
       seq(
         kw("SERVER-SOCKET"),
         field("name", $.identifier),
-        optional(kw("NO-ERROR")),
+        optional(alias(kw("NO-ERROR"), $.no_error)),
       ),
     ),
 });

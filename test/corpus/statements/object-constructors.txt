@@ -20,7 +20,8 @@ SUPER().
   (dynamic_new_statement
     target: (identifier)
     class: (string_literal)
-    (arguments))
+    (arguments)
+    (no_error))
   (this_object_statement
     (arguments))
   (super_statement

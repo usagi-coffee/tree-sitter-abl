@@ -11,10 +11,7 @@ module.exports = ({ kw }) => ({
           field("action", alias(kw("EXECUTE"), $.identifier)),
           $.__dde_execute_body,
         ),
-        seq(
-          field("action", alias(kw("GET"), $.identifier)),
-          $.__dde_get_body,
-        ),
+        seq(field("action", alias(kw("GET"), $.identifier)), $.__dde_get_body),
         seq(
           field("action", alias(kw("INITIATE"), $.identifier)),
           $.__dde_initiate_body,
@@ -32,7 +29,7 @@ module.exports = ({ kw }) => ({
           $.__dde_terminate_body,
         ),
       ),
-      optional(kw("NO-ERROR")),
+      optional(alias(kw("NO-ERROR"), $.no_error)),
       $._terminator,
     ),
 

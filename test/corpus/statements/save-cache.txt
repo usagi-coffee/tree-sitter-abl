@@ -21,7 +21,8 @@ SAVE CACHE COMPLETE mydb TO "/tmp/cache" NO-ERROR.
     path: (identifier))
   (save_cache_statement
     database: (identifier)
-    path: (string_literal)))
+    path: (string_literal)
+    (no_error)))
 
 ================================================================================
 SAVE CACHE - reference snippet
@@ -107,7 +108,8 @@ END.
               (identifier)
               (binary_expression
                 (identifier)
-                (string_literal)))
+                (string_literal))
+              (no_error))
             (if_statement
               (unary_expression
                 (object_access
@@ -159,4 +161,5 @@ END.
                         (identifier))))
                   (view_as_phrase)))))))
       (disconnect_statement
-        (identifier)))))
+        (identifier)
+        (no_error)))))

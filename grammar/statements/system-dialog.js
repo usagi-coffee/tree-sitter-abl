@@ -6,7 +6,7 @@ module.exports = ({ kw }) => ({
     seq(
       kw("COLOR"),
       field("color", $._expression),
-      optional(seq(kw("UPDATE"), field("update", $.identifier))),
+      optional(alias($.__system_dialog_update_phrase, $.update_phrase)),
       optional($.in_window_phrase),
     ),
 
@@ -19,11 +19,11 @@ module.exports = ({ kw }) => ({
       field("font", $._expression),
       repeat(
         choice(
-          kw("ANSI-ONLY"),
-          kw("FIXED-ONLY"),
+          alias(kw("ANSI-ONLY"), $.ansi_only),
+          alias(kw("FIXED-ONLY"), $.fixed_only),
           seq(kw("MAX-SIZE"), field("max_size", $._expression)),
           seq(kw("MIN-SIZE"), field("min_size", $._expression)),
-          seq(kw("UPDATE"), field("update", $.identifier)),
+          alias($.__system_dialog_update_phrase, $.update_phrase),
           $.in_window_phrase,
         ),
       ),
@@ -40,7 +40,7 @@ module.exports = ({ kw }) => ({
         choice(
           seq(kw("INITIAL-DIR"), field("initial_dir", $._expression)),
           seq(kw("TITLE"), field("title", $._expression)),
-          seq(kw("UPDATE"), field("update", $.identifier)),
+          alias($.__system_dialog_update_phrase, $.update_phrase),
           $.in_window_phrase,
         ),
       ),
@@ -56,16 +56,16 @@ module.exports = ({ kw }) => ({
       repeat(
         choice(
           alias($.__system_dialog_filters, $.filters_phrase),
-          kw("ASK-OVERWRITE"),
-          kw("CREATE-TEST-FILE"),
+          alias(kw("ASK-OVERWRITE"), $.ask_overwrite),
+          alias(kw("CREATE-TEST-FILE"), $.create_test_file),
           seq(kw("DEFAULT-EXTENSION"), field("extension", $._expression)),
           seq(kw("INITIAL-DIR"), field("initial_dir", $._expression)),
-          kw("MUST-EXIST"),
-          kw("RETURN-TO-START-DIR"),
-          kw("SAVE-AS"),
+          alias(kw("MUST-EXIST"), $.must_exist),
+          alias(kw("RETURN-TO-START-DIR"), $.return_to_start_dir),
+          alias(kw("SAVE-AS"), $.save_as),
           seq(kw("TITLE"), field("title", $._expression)),
-          kw("USE-FILENAME"),
-          seq(kw("UPDATE"), field("update", $.identifier)),
+          alias(kw("USE-FILENAME"), $.use_filename),
+          alias($.__system_dialog_update_phrase, $.update_phrase),
           $.in_window_phrase,
         ),
       ),
@@ -84,9 +84,9 @@ module.exports = ({ kw }) => ({
       repeat(
         choice(
           seq(kw("NUM-COPIES"), field("copies", $._expression)),
-          kw("LANDSCAPE"),
-          kw("PORTRAIT"),
-          seq(kw("UPDATE"), field("update", $.identifier)),
+          alias(kw("LANDSCAPE"), $.landscape),
+          alias(kw("PORTRAIT"), $.portrait),
+          alias($.__system_dialog_update_phrase, $.update_phrase),
           $.in_window_phrase,
         ),
       ),
@@ -96,8 +96,12 @@ module.exports = ({ kw }) => ({
     seq(
       kw("FILTERS"),
       $.__system_dialog_filters_pairs,
-      optional(seq(kw("INITIAL-FILTER"), field("initial", $._expression))),
+      optional(alias($.__system_dialog_initial_filter_phrase, $.initial_filter_phrase)),
     ),
+  __system_dialog_update_phrase: ($) =>
+    seq(kw("UPDATE"), field("update", $.identifier)),
+  __system_dialog_initial_filter_phrase: ($) =>
+    seq(kw("INITIAL-FILTER"), field("initial", $._expression)),
   __system_dialog_filters_pairs: ($) =>
     repeat1($.__system_dialog_filter_pair),
   __system_dialog_filter_pair: ($) =>

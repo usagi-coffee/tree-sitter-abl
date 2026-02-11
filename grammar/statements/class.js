@@ -82,7 +82,7 @@ module.exports = ({ kw }) => ({
   destructor_definition: ($) =>
     seq(
       kw("DESTRUCTOR"),
-      optional($.__destructor_access),
+      optional(alias(kw("PUBLIC"), $.access_modifier)),
       field("name", $.identifier),
       alias($.__destructor_parameters, $.parameters),
       alias($._colon, ":"),
@@ -147,7 +147,7 @@ module.exports = ({ kw }) => ({
             choice($._expression, seq("[", optional($._expressions), "]")),
           ),
           seq(kw("SERIALIZE-NAME"), field("serialize_name", $.string_literal)),
-          $.__property_no_undo,
+          alias(kw("NO-UNDO"), $.no_undo),
         ),
       ),
       repeat1(choice($.__property_get_phrase, $.__property_set_phrase)),
@@ -261,8 +261,6 @@ module.exports = ({ kw }) => ({
       optional($.__method_extent_phrase),
     ),
 
-  __property_no_undo: ($) => alias(kw("NO-UNDO"), $.no_undo),
-
   __method_modifier: ($) =>
     choice(
       alias(kw("PRIVATE"), $.access_modifier),
@@ -297,8 +295,6 @@ module.exports = ({ kw }) => ({
       alias(kw("STATIC"), $.static_modifier),
     ),
 
-  __destructor_access: ($) => alias(kw("PUBLIC"), $.access_modifier),
-
   __method_return_type: ($) =>
     choice(
       field("type", alias(kw("VOID"), $.identifier)),
@@ -313,7 +309,7 @@ module.exports = ({ kw }) => ({
     seq(
       choice(
         seq(kw("AS"), optional(kw("CLASS")), field("type", $._type_or_string)),
-        seq(kw("LIKE"), field("like", $.__method_field_name)),
+        seq(kw("LIKE"), field("like", $._identifier_or_qualified_name)),
       ),
       optional($.__method_extent_phrase),
     ),
@@ -326,7 +322,6 @@ module.exports = ({ kw }) => ({
       alias($.constant_expression, $.preprocessor_reference),
       $.identifier,
     ),
-  __method_field_name: ($) => $._identifier_or_qualified_name,
   __method_table_parameter: ($) =>
     seq(
       optional(choice(kw("INPUT"), kw("OUTPUT"), kw("INPUT-OUTPUT"))),
@@ -334,7 +329,7 @@ module.exports = ({ kw }) => ({
         seq(
           kw("TABLE"),
           optional(kw("FOR")),
-          field("table", $.__method_record_name),
+          field("table", $._identifier_or_qualified_name),
           repeat($.__method_table_parameter_option),
         ),
         seq(
@@ -345,7 +340,7 @@ module.exports = ({ kw }) => ({
         seq(
           kw("DATASET"),
           optional(kw("FOR")),
-          field("dataset", $.__method_record_name),
+          field("dataset", $._identifier_or_qualified_name),
           repeat($.__method_table_parameter_option),
         ),
         seq(
@@ -355,7 +350,6 @@ module.exports = ({ kw }) => ({
         ),
       ),
     ),
-  __method_record_name: ($) => $._identifier_or_qualified_name,
   __method_table_parameter_option: ($) =>
     choice(
       alias(kw("APPEND"), $.append),

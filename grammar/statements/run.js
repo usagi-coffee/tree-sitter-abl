@@ -33,7 +33,7 @@ module.exports = ({ kw }) => ({
       optional(alias($.__run_on_server, $.on_server_phrase)),
       optional(alias($.__run_asynchronous, $.asynchronous_phrase)),
       optional($.arguments),
-      optional(kw("NO-ERROR")),
+      optional(alias(kw("NO-ERROR"), $.no_error)),
     ),
 
   _run_target: ($) =>

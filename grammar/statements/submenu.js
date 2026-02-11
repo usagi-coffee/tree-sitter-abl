@@ -37,9 +37,9 @@ module.exports = ({ kw }) => ({
       field("name", $.identifier),
       repeat(
         choice(
-          seq(kw("LABEL"), $.string_literal),
-          kw("DISABLED"),
-          seq(kw("ACCELERATOR"), $.string_literal),
+          seq(kw("LABEL"), field("label", $.string_literal)),
+          alias(kw("DISABLED"), $.disabled),
+          seq(kw("ACCELERATOR"), field("accelerator", $.string_literal)),
         ),
       ),
     ),
@@ -47,7 +47,7 @@ module.exports = ({ kw }) => ({
     seq(
       kw("SUB-MENU"),
       field("name", $.identifier),
-      optional(kw("DISABLED")),
-      optional(seq(kw("LABEL"), $.string_literal)),
+      optional(alias(kw("DISABLED"), $.disabled)),
+      optional(seq(kw("LABEL"), field("label", $.string_literal))),
     ),
 });

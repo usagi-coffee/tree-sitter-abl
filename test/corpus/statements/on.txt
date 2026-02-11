@@ -41,22 +41,25 @@ END.
     (override))
   (on_statement
     event: (identifier)
+    (anywhere)
     (do_statement
       (body
         (message_statement
           (string_literal)))))
   (on_statement
     event: (identifier)
-    widget: (widget_phrase
-      handle: (identifier))
+    (of_phrase
+      widget: (widget_phrase
+        handle: (identifier)))
     procedure: (identifier)
     (arguments
       (argument
         name: (number_literal))))
   (on_statement
     event: (identifier)
-    widget: (widget_phrase
-      browse: (identifier))
+    (of_phrase
+      widget: (widget_phrase
+        browse: (identifier)))
     (do_statement
       (body
         (message_statement
@@ -186,10 +189,11 @@ ON F5 ENDKEY.
       column: (number_literal)))
   (on_statement
     event: (identifier)
-    widget: (widget_phrase
-      handle: (identifier))
-    widget: (widget_phrase
-      handle: (identifier))
+    (of_phrase
+      widget: (widget_phrase
+        handle: (identifier))
+      widget: (widget_phrase
+        handle: (identifier)))
     (do_statement
       (body
         (if_statement
@@ -230,16 +234,19 @@ ON F5 ENDKEY.
     (frame_phrase
       frame: (identifier)))
   (wait_for_statement
-    events: (identifier)
-    widgets: (widget_phrase
-      frame: (identifier))
-    events: (identifier)
-    widgets: (widget_phrase
-      field: (identifier)
-      frame: (identifier))
-    focus: (widget_phrase
-      field: (identifier)
-      frame: (identifier)))
+    (of_phrase
+      events: (identifier)
+      widgets: (widget_phrase
+        frame: (identifier)))
+    (of_phrase
+      events: (identifier)
+      widgets: (widget_phrase
+        field: (identifier)
+        frame: (identifier)))
+    (focus_phrase
+      focus: (widget_phrase
+        field: (identifier)
+        frame: (identifier))))
   (on_statement
     event: (identifier)
     (expression_statement
@@ -271,21 +278,25 @@ END.
 (source_code
   (on_statement
     event: (string_literal)
-    widget: (widget_phrase
-      handle: (identifier))
+    (of_phrase
+      widget: (widget_phrase
+        handle: (identifier)))
     event: (string_literal)
-    widget: (widget_phrase
-      handle: (identifier))
+    (of_phrase
+      widget: (widget_phrase
+        handle: (identifier)))
     (do_statement
       (body)))
   (on_statement
     event: (identifier)
-    widget: (widget_phrase
-      field: (identifier)
-      frame: (identifier))
+    (of_phrase
+      widget: (widget_phrase
+        field: (identifier)
+        frame: (identifier)))
     event: (identifier)
-    widget: (widget_phrase
-      field: (identifier)
-      frame: (identifier))
+    (of_phrase
+      widget: (widget_phrase
+        field: (identifier)
+        frame: (identifier)))
     (do_statement
       (body))))

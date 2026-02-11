@@ -387,8 +387,8 @@ END.
 
 (source_code
   (do_statement
-    record: (for_phrase
-      (identifier))
+    (for_phrase
+      record: (identifier))
     (transaction)
     (stop_after_phrase
       time: (number_literal))
@@ -411,9 +411,8 @@ END.
 
 (source_code
   (do_statement
-    record: (for_phrase
-      (identifier))
     (for_phrase
+      record: (identifier)
       record: (identifier))
     (query_tuning_phrase
       (lookahead)

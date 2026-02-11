@@ -12,7 +12,8 @@ VALIDATE db1.Customer.
   (validate_statement
     record: (identifier))
   (validate_statement
-    record: (identifier))
+    record: (identifier)
+    (no_error))
   (validate_statement
     record: (qualified_name
       left: (identifier)
@@ -89,4 +90,5 @@ VALIDATE sports.Item NO-ERROR.
   (validate_statement
     (qualified_name
       (identifier)
-      (identifier))))
+      (identifier))
+    (no_error)))

@@ -316,7 +316,7 @@ END CLASS.
       (menu_element
         (menu_item
           name: (identifier)
-          (string_literal))))
+          label: (string_literal))))
     (rectangle_definition
       name: (identifier)
       (size_phrase

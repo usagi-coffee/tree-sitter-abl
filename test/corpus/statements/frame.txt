@@ -815,8 +815,9 @@ WAIT-FOR WINDOW-CLOSE OF FRAME cust-fr.
       (number_literal)))
   (on_statement
     (identifier)
-    (widget_phrase
-      (identifier))
+    (of_phrase
+      (widget_phrase
+        (identifier)))
     (display_statement
       (identifier)
       (qualified_name
@@ -1083,6 +1084,7 @@ WAIT-FOR WINDOW-CLOSE OF FRAME cust-fr.
     (frame_phrase
       (identifier)))
   (wait_for_statement
-    (identifier)
-    (widget_phrase
-      (identifier))))
+    (of_phrase
+      (identifier)
+      (widget_phrase
+        (identifier)))))

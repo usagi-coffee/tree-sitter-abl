@@ -4,7 +4,7 @@ module.exports = ({ kw }) => ({
 
   __buffer_copy_body: ($) =>
     seq(
-      field("source", $.__buffer_copy_record_name),
+      field("source", $._identifier_or_qualified_name),
       optional(
         choice(
           alias($.__buffer_copy_except_phrase, $.except_phrase),
@@ -12,26 +12,23 @@ module.exports = ({ kw }) => ({
         ),
       ),
       kw("TO"),
-      field("target", $.__buffer_copy_record_name),
+      field("target", $._identifier_or_qualified_name),
       optional(alias($.__buffer_copy_assign_phrase, $.assign_phrase)),
-      optional(kw("NO-LOBS")),
+      optional(alias(kw("NO-LOBS"), $.no_lobs)),
       optional(alias(kw("NO-ERROR"), $.no_error)),
     ),
-
-  __buffer_copy_record_name: ($) => $._identifier_or_qualified_name,
   __buffer_copy_except_phrase: ($) =>
     seq(
       kw("EXCEPT"),
-      $.__buffer_copy_field_name,
-      repeat(seq(optional(","), $.__buffer_copy_field_name)),
+      $._identifier_or_qualified_name,
+      repeat(seq(optional(","), $._identifier_or_qualified_name)),
     ),
   __buffer_copy_using_phrase: ($) =>
     seq(
       kw("USING"),
-      $.__buffer_copy_field_name,
-      repeat(seq(optional(","), $.__buffer_copy_field_name)),
+      $._identifier_or_qualified_name,
+      repeat(seq(optional(","), $._identifier_or_qualified_name)),
     ),
-  __buffer_copy_field_name: ($) => $._identifier_or_qualified_name,
   __buffer_copy_assign_phrase: ($) =>
     seq(
       kw("ASSIGN"),

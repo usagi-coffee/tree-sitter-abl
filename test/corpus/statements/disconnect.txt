@@ -12,7 +12,8 @@ DISCONNECT VALUE(cDbName).
   (disconnect_statement
     database: (identifier))
   (disconnect_statement
-    database: (identifier))
+    database: (identifier)
+    (no_error))
   (disconnect_statement
     database: (identifier)))
 
@@ -26,7 +27,8 @@ DISCONNECT VALUE(cDb) NO-ERROR.
 
 (source_code
   (disconnect_statement
-    database: (identifier)))
+    database: (identifier)
+    (no_error)))
 
 ================================================================================
 DISCONNECT - Reference snippet
@@ -41,4 +43,5 @@ DISCONNECT VALUE("mydb") NO-ERROR.
   (disconnect_statement
     (identifier))
   (disconnect_statement
-    (string_literal)))
+    (string_literal)
+    (no_error)))

@@ -11,7 +11,7 @@ INPUT STREAM-HANDLE hStream CLOSE.
 
 (source_code
   (input_statement
-    (identifier))
+    value: (identifier))
   (input_statement
     (convert_phrase
       (no_convert)))
@@ -103,7 +103,7 @@ INPUT STREAM sIn FROM VALUE(cPath) ECHO.
       (no_convert)))
   (input_statement
     name: (identifier)
-    (identifier)))
+    value: (identifier)))
 
 ================================================================================
 INPUT - MAP with string and CONVERT SOURCE

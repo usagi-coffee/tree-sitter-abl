@@ -7,14 +7,14 @@ module.exports = ({ kw }) => ({
         seq(
           kw("ROW"),
           field("field", $._identifier_or_qualified_name),
-          optional(seq(kw("HELP"), $.string_literal)),
+          optional(seq(kw("HELP"), field("help", $.string_literal))),
         ),
         seq(
           kw("FIELD"),
           repeat1(
             seq(
               field("field", $._identifier_or_qualified_name),
-              optional(seq(kw("HELP"), $.string_literal)),
+              optional(seq(kw("HELP"), field("help", $.string_literal))),
             ),
           ),
         ),
@@ -46,5 +46,4 @@ module.exports = ({ kw }) => ({
       ),
       ")",
     ),
-  __choose_color_value: ($) => $._expression,
 });

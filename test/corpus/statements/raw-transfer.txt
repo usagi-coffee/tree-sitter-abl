@@ -18,10 +18,12 @@ RAW-TRANSFER FIELD source TO dest NO-ERROR.
     target_field: (identifier))
   (raw_transfer_statement
     source_field: (identifier)
-    target: (identifier))
+    target: (identifier)
+    (no_error))
   (raw_transfer_statement
     source_field: (identifier)
-    target_field: (identifier)))
+    target_field: (identifier)
+    (no_error)))
 
 ================================================================================
 RAW-TRANSFER - reference example and variants
@@ -89,4 +91,5 @@ RAW-TRANSFER BUFFER srcBuf TO FIELD rawField NO-ERROR.
     (identifier))
   (raw_transfer_statement
     (identifier)
-    (identifier)))
+    (identifier)
+    (no_error)))

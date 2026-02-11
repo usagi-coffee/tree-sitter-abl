@@ -20,12 +20,15 @@ module.exports = ({ kw }) => ({
       $.__import_field_or_skip,
       repeat($.__import_field_or_skip),
       optional(
-        seq(kw("EXCEPT"), $.__import_field_name, repeat($.__import_field_name)),
+        seq(
+          kw("EXCEPT"),
+          $._identifier_or_qualified_name,
+          repeat($._identifier_or_qualified_name),
+        ),
       ),
     ),
   __import_unformatted_phrase: ($) =>
-    seq(kw("UNFORMATTED"), field("field", $.__import_field_name)),
+    seq(kw("UNFORMATTED"), field("field", $._identifier_or_qualified_name)),
   __import_field_or_skip: ($) =>
-    choice($.__import_field_name, alias("^", $.skip_field)),
-  __import_field_name: ($) => $._identifier_or_qualified_name,
+    choice($._identifier_or_qualified_name, alias("^", $.skip_field)),
 });

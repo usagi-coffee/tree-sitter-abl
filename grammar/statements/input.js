@@ -22,7 +22,7 @@ module.exports = ({ kw }) => ({
     choice(
       field("file", $.__input_file_target),
       kw("TERMINAL"),
-      seq(kw("VALUE"), "(", $._expression, ")"),
+      seq(kw("VALUE"), "(", field("value", $._expression), ")"),
       seq(
         kw("OS-DIR"),
         "(",
@@ -47,7 +47,7 @@ module.exports = ({ kw }) => ({
         "directory",
         choice(
           alias($.constant_expression, $.preprocessor_reference),
-          seq(kw("VALUE"), "(", $._expression, ")"),
+          seq(kw("VALUE"), "(", field("value", $._expression), ")"),
         ),
       ),
     ),
