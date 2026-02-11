@@ -76,32 +76,49 @@ Strongly prefer using these commands as they have helpful side-effects like retu
 - Do not use e.g `no_labels_option` as an alias, just use `no_labels` to keep it clean, avoid `_option` suffix.
 - Big blocks of `repeat(choice(` rules for the statement record/column/field/whatever should prefer inlining instead of duplication as it offers modest state reduction.
 
-### Clean tree example
+### Clean tree examples
 
-
+1. Add fields for modifiers that take value.
 ```js
-// Good
-__browse_option: ($) => choice(
-  seq(kw("FORMAT", { offset: 4 }), field("format", $.string_literal)),
-  seq(kw("LABEL"), field("label", $.string_literal)),
-  alias(kw("NO-LABELS"), $.no_labels),
-  ...
-)
-
-
 // Bad
-__browse_option: choice(
-  alias($.__browse_format, $.format), // Bad: should've been inline with field() instead of a node
-  seq(kw("LABEL"), $.string_literal), // Bad: no field()
-  alias($.__browse_no_labels, $.no_labels_option), // Bad: _option suffix, unnecesary __rule
-  ...
-)
+seq(kw("DELIMITER"), $.string_literal),
 
-__browse_format: ($) =>
-  seq(kw("FORMAT", { offset: 4 }), $.string_literal)),
-__browse_no_labels: ($) => kw("NO-LABELS")
+// Good
+seq(kw("DELIMITER"), field("delimiter", $.string_literal))
 ```
 
+2. Alias trivial flags and avoid `_option` suffix.
+```js
+// Bad
+alias($.__no_labels, $.no_labels_option)
+
+// Good
+alias(kw("NO-LABELS"), $.no_labels),
+```
+
+3. Remove trivial helpers
+```js
+// Bad
+__option: ($) => choice(
+    alias($.__option_no_labels, $.no_labels_option)
+  ),
+__option_no_labels ($) => alias(kw("NO-LABELS", $.no_labels))
+
+// Good 
+__option: ($) => choice(
+    alias(kw("NO-LABELS"), $.no_labels),
+  ),
+```
+
+4. Redundant double-alias nesting
+```js
+// Bad
+optional(alias($.__x_no_undo, $.no_undo)),
+__x_no_undo: ($) => alias(kw("NO-UNDO"), $.no_undo),
+
+// Good
+optional(alias(kw("NO-UNDO"), $.no_undo)),
+```
 
 ## Notes
 
