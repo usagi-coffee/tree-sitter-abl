@@ -162,15 +162,12 @@ module.exports = grammar({
       $.__variable_modifier,
     ],
     // SUBSCRIBE/UNSUBSCRIBE can start with PROCEDURE/PROC which may also be parsed as identifier-like expression.
-    [$.__subscribe_body, $._identifier_or_qualified_name],
     [$.__unsubscribe_body, $._identifier_or_qualified_name],
   ],
   inline: ($) => [
     $.__find_record_name,
     $.__find_index_name,
-    $.__repeat_record,
     $.__assign_record_name,
-    $.__temp_table_field_name,
     $.__temp_table_like_name,
     $.system_handle_identifier,
   ],
@@ -202,7 +199,8 @@ module.exports = grammar({
           "}",
           optional("."),
         ),
-      include_statement: ($) => seq(alias($.include_expression, $.include_reference)),
+      include_statement: ($) =>
+        seq(alias($.include_expression, $.include_reference)),
       include_argument: ($) =>
         choice($.include_named_argument, $._include_argument_value),
       include_named_argument: ($) =>
@@ -235,7 +233,10 @@ module.exports = grammar({
       // Preprocessor
       preprocessor_directive: ($) => token(/&[^\n]*(?:~\s*\n[^\n]*)*/i),
       _include_file_reference: ($) =>
-        seq(optional(alias($.constant_expression, $.preprocessor_reference)), $.file_name),
+        seq(
+          optional(alias($.constant_expression, $.preprocessor_reference)),
+          $.file_name,
+        ),
 
       // Constants
       constant: ($) => token(/\{&[^\}\r\n]+\}[ \t]*\r?\n/),
