@@ -98,7 +98,10 @@ alias($.__no_labels, $.no_labels_option)
 alias(kw("NO-LABELS"), $.no_labels),
 ```
 
-3. Remove trivial helpers
+3. Remove trivial* helpers
+
+> choice rules like `__error_scope_type: ($) => choice(kw("BLOCK-LEVEL"), kw("ROUTINE-LEVEL")),` are non-trivial, do not remove them!
+
 ```js
 // Bad
 __option: ($) => choice(
@@ -111,6 +114,7 @@ __option: ($) => choice(
     alias(kw("NO-LABELS"), $.no_labels),
   ),
 ```
+
 
 4. Redundant double-alias nesting
 ```js
@@ -162,6 +166,19 @@ alias(
    $.column_label,
 ),
 ```
+    seq(
+    4 -      alias($.__error_scope_type, $.error_scope_type),
+    4 +      alias(choice(kw("BLOCK-LEVEL"), kw("ROUTINE-LEVEL")), $.error_scope_type),
+    5        alias($.__error_scope_on_error_phrase, $.on_error_phrase),
+      ⋮
+    8
+    9 -  __error_scope_type: ($) => choice(kw("BLOCK-LEVEL"), kw("ROUTINE-LEVEL")),
+    9    __error_scope_on_error_phrase: ($) =>
+
+• Edited grammar/statements/choose.js (+0 -1)
+    48      ),
+    49 -  __choose_color_value: ($) => $._expression,
+    49  });
 
 ## Notes
 
