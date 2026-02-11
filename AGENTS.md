@@ -166,19 +166,6 @@ alias(
    $.column_label,
 ),
 ```
-    seq(
-    4 -      alias($.__error_scope_type, $.error_scope_type),
-    4 +      alias(choice(kw("BLOCK-LEVEL"), kw("ROUTINE-LEVEL")), $.error_scope_type),
-    5        alias($.__error_scope_on_error_phrase, $.on_error_phrase),
-      ⋮
-    8
-    9 -  __error_scope_type: ($) => choice(kw("BLOCK-LEVEL"), kw("ROUTINE-LEVEL")),
-    9    __error_scope_on_error_phrase: ($) =>
-
-• Edited grammar/statements/choose.js (+0 -1)
-    48      ),
-    49 -  __choose_color_value: ($) => $._expression,
-    49  });
 
 ## Notes
 
