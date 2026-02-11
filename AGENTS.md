@@ -54,7 +54,7 @@ Strongly prefer using these commands as they have helpful side-effects like retu
 - Grammar changes without thorough corpus coverage and testing are unacceptable.
 - Avoid creating a shared or generic code unless it is really a part of the core syntax, core grammar modifications require a confirmation unless experimenting.
 - Always prefere adding to `precedences` over using `prec(`.
-- We intentionally duplicate modifiers and tunings at the statement level so that most of the statement-specific context lives in a single file. To support this, each statement defines its own `__<statement>_rules`, which are later aliased to `$.rule` where needed. This intentional duplication favors locality, readability, and conflict isolation over DRY abstractions.
+- We intentionally duplicate modifiers and tunings at the statement level so that most of the statement-specific context lives in a single file. To support this, each statement defines its own `__<statement>_rules`, which are later aliased to `$.rule` where needed. This intentional duplication favors locality, readability, and conflict isolation over DRY abstractions. Keep in mind we don't do these for trivial cases, check `Clean tree examples`.
 - All statement-related modifiers, phrases, tunings that are not already part of core should be locally defined as `__<statement>_<rule>` rule and aliased to `$.<rule>`.
 - When resolving conflicts treat adding a `conflicts` entry as a last resort that requires prior confirmation with a clear explanation of why associativity/precedence are not enough.
 - Prefer `kw` for keywords in place of `token(/keyword/i)`, when the syntax supports partial keyword like `DEFINE` can be `DEF`, `DEFI`, `DEFIN` and `DEFINE` please use `kw("DEFINE", { offset: 3 })`, for scenario where it can be longer do alias e.g`kw("FIELDS", { alias: 'FIELD', offset: 5)`.
@@ -118,6 +118,20 @@ __x_no_undo: ($) => alias(kw("NO-UNDO"), $.no_undo),
 
 // Good
 optional(alias(kw("NO-UNDO"), $.no_undo)),
+```
+
+5. Keep lexical-token aliasing at callsite (do not move alias into helper)
+```js
+// Bad
+__rule: ($) seq($.__input_through_shell_variable),
+__input_through_shell_variable: ($) => alias(token(/\$+[A-Za-z_0-9]*/), $.shell_variable),
+// Also Bad
+__input_through_shell_variable: ($) => alias(token(/\$+[A-Za-z_0-9]*/), $.shell_variable)
+
+
+// Good
+alias($.__input_through_shell_variable, $.shell_variable),
+__input_through_shell_variable: ($) => token(/\$+[A-Za-z_0-9]*/),
 ```
 
 ## Notes
