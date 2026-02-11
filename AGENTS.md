@@ -24,8 +24,7 @@
   - `bun run test`
 - Run a specific test:
   - `bun run test --include 'TEST NAME'`
-  - Example: `bun run test --include 'WORKFILE DEFINITION - Shared/Private variants'`
-- Parse a file:
+  - Example: `bun run test --include 'WORKFILE DEFINITION - Shared/Private variants'` Parse a file:
   - `bun run parse <file>`
   - Example: `bun run parse example.p`
 - Parse a snippet:
@@ -182,6 +181,28 @@ alias(
    $.column_label,
 ),
 ```
+
+8. Use phrase-scoping alias when optional valued subparts belong to one semantic option
+
+```js
+// Bad
+seq(
+  alias(kw("PERSISTENT"), $.persistent),
+  optional(seq(kw("SET"), field("handle", $.identifier))),
+),
+
+// Good
+alias(
+  seq(
+    kw("PERSISTENT"),
+    optional(seq(kw("SET"), field("handle", $.identifier))),
+  ),
+  $.persistent,
+)
+```
+
+Reason: without phrase-level alias, `handle` may bind to a broader parent node
+instead of the `persistent` option.
 
 ## Notes
 
