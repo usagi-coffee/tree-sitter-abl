@@ -13,7 +13,7 @@ module.exports = ({ kw }) => ({
       $.identifier,
       $.qualified_name,
       $.string_literal,
-      seq(kw("VALUE"), "(", $._expression, ")"),
+      seq(kw("VALUE"), "(", field("value", $._expression), ")"),
     ),
 
   __compile_option: ($) =>

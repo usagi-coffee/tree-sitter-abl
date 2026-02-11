@@ -52,7 +52,7 @@ VIEW STREAM-HANDLE hS FRAME f1.
     file: (identifier)
     (paged)
     (page_size_phrase
-      (number_literal)))
+      page_size: (number_literal)))
   (for_statement
     (record
       (record

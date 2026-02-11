@@ -94,7 +94,7 @@ COMPILE myproc.p MIN-SIZE DEFAULT-UNTRANSLATABLE NO-ERROR.
       left: (identifier)
       right: (identifier)))
   (compile_statement
-    file: (string_literal)
+    value: (string_literal)
     options: (string_literal))
   (compile_statement
     file: (qualified_name

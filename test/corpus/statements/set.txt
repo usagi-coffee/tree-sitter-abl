@@ -115,8 +115,7 @@ SET field1 FORMAT "x(10)" WHEN ok
       (format_phrase
         format: (string_literal)))
     (field
-      constant: (string_literal)
-      position: (at_phrase))
+      constant: (string_literal))
     (field
       field: (identifier)
       value: (number_literal))
@@ -263,7 +262,7 @@ SET Customer EXCEPT Comments WITH FRAME fCust NO-ERROR.
     (format_phrase
       format: (string_literal))
     (extent_phrase
-      (number_literal)))
+      size: (number_literal)))
   (form_statement
     (form_item
       field: (string_literal))

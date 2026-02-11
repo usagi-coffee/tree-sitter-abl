@@ -16,7 +16,7 @@ IMPORT STREAM-HANDLE hStream mPtrData.
       field: (identifier)))
   (import_statement
     (delimiter_phrase
-      (string_literal))
+      delimiter: (string_literal))
     (identifier)
     (skip_field)
     (identifier)
@@ -173,7 +173,8 @@ INPUT CLOSE.
           (identifier)))))
   (input_statement
     (string_literal)
-    (convert_phrase))
+    (convert_phrase
+      (no_convert)))
   (import_statement
     (identifier))
   (input_statement))

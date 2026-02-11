@@ -28,11 +28,11 @@ module.exports = ({ kw }) => ({
   __procedure_option: ($) =>
     choice(
       alias(kw("CDECL"), $.cdecl),
-      alias(seq(kw("ORDINAL"), field("number", $.number_literal)), $.ordinal_phrase),
+      seq(kw("ORDINAL"), field("number", $.number_literal)),
       alias(kw("PERSISTENT"), $.persistent),
       alias(seq(kw("THREAD-SAFE"), optional(kw("SAFE"))), $.thread_safe),
       alias($.__procedure_external_phrase, $.external_phrase),
-      alias(seq(kw("MAP"), field("name", $.identifier)), $.map),
+      seq(kw("MAP"), field("name", $.identifier)),
     ),
 
   __procedure_external_phrase: ($) =>

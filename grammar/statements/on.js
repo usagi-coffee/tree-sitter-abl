@@ -10,7 +10,7 @@ module.exports = ({ kw }) => ({
             kw("OF"),
             field("object", $.__on_database_object),
             optional(alias($.__on_referencing_phrase, $.referencing_phrase)),
-            optional(alias($.__on_override, $.override)),
+            optional(alias(kw("OVERRIDE"), $.override)),
             choice(seq(kw("REVERT"), $._terminator), $._statement),
           ),
           // UI event: ON event-list [OF widget-list] [ANYWHERE]
@@ -52,7 +52,6 @@ module.exports = ({ kw }) => ({
       ),
     ),
   __on_database_object: ($) => $._identifier_or_qualified_name,
-  __on_override: ($) => kw("OVERRIDE"),
   __on_referencing_phrase: ($) =>
     choice(
       seq(

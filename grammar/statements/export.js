@@ -14,12 +14,12 @@ module.exports = ({ kw }) => ({
       optional(
         seq(kw("EXCEPT"), $.__export_field_name, repeat($.__export_field_name)),
       ),
-      optional(alias($.__export_no_lobs, $.no_lobs)),
+      optional(alias(kw("NO-LOBS"), $.no_lobs)),
     ),
 
   __export_expression: ($) => $._expression,
 
   __export_field_name: ($) => $._identifier_or_qualified_name,
-  __export_delimiter_phrase: ($) => seq(kw("DELIMITER"), $.string_literal),
-  __export_no_lobs: ($) => kw("NO-LOBS"),
+  __export_delimiter_phrase: ($) =>
+    seq(kw("DELIMITER"), field("delimiter", $.string_literal)),
 });

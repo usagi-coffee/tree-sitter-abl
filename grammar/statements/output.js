@@ -68,29 +68,38 @@ module.exports = ({ kw }) => ({
   __output_lob_dir_phrase: ($) =>
     seq(
       kw("LOB-DIR"),
-      choice(
-        alias($.constant_expression, $.preprocessor_reference),
-        seq(kw("VALUE"), "(", $._expression, ")")
+      field(
+        "directory",
+        choice(
+          alias($.constant_expression, $.preprocessor_reference),
+          seq(kw("VALUE"), "(", $._expression, ")")
+        )
       )
     ),
 
   __output_num_copies_phrase: ($) =>
     seq(
       kw("NUM-COPIES"),
-      choice(
-        $.number_literal,
-        alias($.constant_expression, $.preprocessor_reference),
-        seq(kw("VALUE"), "(", $._expression, ")")
+      field(
+        "copies",
+        choice(
+          $.number_literal,
+          alias($.constant_expression, $.preprocessor_reference),
+          seq(kw("VALUE"), "(", $._expression, ")")
+        )
       )
     ),
 
   __output_page_size_phrase: ($) =>
     seq(
       kw("PAGE-SIZE"),
-      choice(
-        $.number_literal,
-        alias($.constant_expression, $.preprocessor_reference),
-        seq(kw("VALUE"), "(", $._expression, ")")
+      field(
+        "page_size",
+        choice(
+          $.number_literal,
+          alias($.constant_expression, $.preprocessor_reference),
+          seq(kw("VALUE"), "(", $._expression, ")")
+        )
       )
     ),
 

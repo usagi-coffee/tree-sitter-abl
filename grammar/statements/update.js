@@ -68,12 +68,9 @@ module.exports = ({ kw }) => ({
       seq(
         field("constant", $.string_literal),
         optional(
-          alias(
-            seq(
-              choice(kw("AT"), kw("TO")),
-              field("position", token(/[0-9]+(\.[0-9]+)?/)),
-            ),
-            $.at_phrase,
+          seq(
+            choice(kw("AT"), kw("TO")),
+            field("position", token(/[0-9]+(\.[0-9]+)?/)),
           ),
         ),
       ),

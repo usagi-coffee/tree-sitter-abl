@@ -8,11 +8,12 @@ module.exports = ({ kw }) => ({
         $.__import_fields_phrase,
         alias($.__import_unformatted_phrase, $.unformatted_phrase),
       ),
-      optional(alias($.__import_no_lobs, $.no_lobs)),
-      optional(alias($.__import_no_error, $.no_error)),
+      optional(alias(kw("NO-LOBS"), $.no_lobs)),
+      optional(alias(kw("NO-ERROR"), $.no_error)),
     ),
 
-  __import_delimiter_phrase: ($) => seq(kw("DELIMITER"), $.string_literal),
+  __import_delimiter_phrase: ($) =>
+    seq(kw("DELIMITER"), field("delimiter", $.string_literal)),
   __import_fields_phrase: ($) =>
     seq(
       optional(alias($.__import_delimiter_phrase, $.delimiter_phrase)),
@@ -27,6 +28,4 @@ module.exports = ({ kw }) => ({
   __import_field_or_skip: ($) =>
     choice($.__import_field_name, alias("^", $.skip_field)),
   __import_field_name: ($) => $._identifier_or_qualified_name,
-  __import_no_lobs: ($) => kw("NO-LOBS"),
-  __import_no_error: ($) => kw("NO-ERROR"),
 });

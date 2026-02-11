@@ -59,17 +59,19 @@ module.exports = ({ kw }) => ({
           ),
         ),
         optional(alias($.__prompt_for_view_as_phrase, $.view_as_phrase)),
-        optional(alias(seq(kw("FGCOLOR"), field("fgcolor", $._expression)), $.fgcolor)),
-        optional(alias(seq(kw("BGCOLOR"), field("bgcolor", $._expression)), $.bgcolor)),
-        optional(alias(seq(kw("FONT"), field("font", $._expression)), $.font)),
+        optional(seq(kw("FGCOLOR"), field("fgcolor", $._expression))),
+        optional(seq(kw("BGCOLOR"), field("bgcolor", $._expression))),
+        optional(seq(kw("FONT"), field("font", $._expression))),
       ),
       seq(kw("SKIP"), optional(field("skip", seq("(", $._expression, ")")))),
       seq(kw("SPACE"), optional(field("space", seq("(", $._expression, ")")))),
       "^",
     ),
 
-  __prompt_for_at_phrase: ($) => seq(kw("AT"), token(/[0-9]+(\.[0-9]+)?/)),
-  __prompt_for_to_phrase: ($) => seq(kw("TO"), token(/[0-9]+(\.[0-9]+)?/)),
+  __prompt_for_at_phrase: ($) =>
+    seq(kw("AT"), field("position", token(/[0-9]+(\.[0-9]+)?/))),
+  __prompt_for_to_phrase: ($) =>
+    seq(kw("TO"), field("position", token(/[0-9]+(\.[0-9]+)?/))),
   __prompt_for_view_as_phrase: ($) =>
     seq(kw("VIEW-AS"), field("widget", $.identifier)),
 

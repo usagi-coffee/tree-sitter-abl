@@ -106,12 +106,9 @@ PROMPT-FOR "Notes:" TO 20 VIEW-AS TEXT FGCOLOR 12 BGCOLOR 1 FONT 2 field1.
       (to_phrase)
       (view_as_phrase
         widget: (identifier))
-      fgcolor: (fgcolor
-        (number_literal))
-      bgcolor: (bgcolor
-        (number_literal))
-      font: (font
-        (number_literal)))
+      fgcolor: (number_literal)
+      bgcolor: (number_literal)
+      font: (number_literal))
     (field
       field: (identifier))))
 
@@ -185,7 +182,7 @@ PROMPT-FOR STREAM-HANDLE hS field1 field2 IN WINDOW wMain WITH FRAME fMain.
     (format_phrase
       format: (string_literal))
     (extent_phrase
-      (number_literal)))
+      size: (number_literal)))
   (form_statement
     (form_item
       field: (string_literal))

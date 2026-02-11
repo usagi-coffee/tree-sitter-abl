@@ -127,14 +127,14 @@ FIND Order OF Customer NO-LOCK.
   (find_statement
     table: (identifier)
     (of_phrase
-      (identifier))
+      record: (identifier))
     (exclusive_lock)
     (no_error)
     (no_wait))
   (find_statement
     table: (identifier)
     (of_phrase
-      (identifier))
+      record: (identifier))
     (no_lock)))
 
 ================================================================================
@@ -323,11 +323,11 @@ END.
             (next)
             table: (identifier)
             (of_phrase
-              (identifier)))
+              record: (identifier)))
           (find_statement
             table: (identifier)
             (of_phrase
-              (identifier)))
+              record: (identifier)))
           (find_statement
             table: (identifier)
             (where_phrase

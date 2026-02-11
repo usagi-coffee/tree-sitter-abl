@@ -8,7 +8,8 @@ module.exports = ({ kw }) => ({
       repeat1(choice($.__os_command_value_target, $.__os_command_token)),
     ),
 
-  __os_command_value_target: ($) => seq(kw("VALUE"), "(", $._expression, ")"),
+  __os_command_value_target: ($) =>
+    seq(kw("VALUE"), "(", field("value", $._expression), ")"),
   __os_command_token: ($) =>
     choice(
       $.identifier,

@@ -30,7 +30,7 @@ DEFINE PRIVATE STATIC SERIALIZABLE VARIABLE cust AS CLASS Customer NO-UNDO.
     name: (identifier)
     type: (identifier)
     (extent_phrase
-      (number_literal))
+      size: (number_literal))
     (string_literal)
     (string_literal)
     (string_literal)
@@ -160,18 +160,18 @@ DEFINE VARIABLE arr4 EXTENT 7 LIKE ad_name NO-UNDO.
     name: (identifier)
     type: (identifier)
     (extent_phrase
-      (number_literal))
+      size: (number_literal))
     (no_undo))
   (variable_definition
     name: (identifier)
     type: (identifier)
     (extent_phrase
-      (preprocessor_reference
+      size: (preprocessor_reference
         (identifier))))
   (variable_definition
     name: (identifier)
     (extent_phrase
-      (number_literal))
+      size: (number_literal))
     like: (identifier)
     (no_undo)))
 

@@ -52,7 +52,7 @@ PROPATH += ",/myNewAppDir1,/myNewAppDir2".
     type: (identifier)
     (no_undo)
     (extent_phrase
-      (number_literal))
+      size: (number_literal))
     (format_phrase
       format: (string_literal))
     (string_literal)
@@ -64,7 +64,7 @@ PROPATH += ",/myNewAppDir1,/myNewAppDir2".
     type: (identifier)
     (no_undo)
     (extent_phrase
-      (number_literal))
+      size: (number_literal))
     (format_phrase
       format: (string_literal))
     (string_literal)
@@ -76,7 +76,7 @@ PROPATH += ",/myNewAppDir1,/myNewAppDir2".
     type: (identifier)
     (no_undo)
     (extent_phrase
-      (number_literal))
+      size: (number_literal))
     (string_literal)
     (string_literal)
     (string_literal)
@@ -103,7 +103,7 @@ PROPATH += ",/myNewAppDir1,/myNewAppDir2".
           (identifier)))
       (run_statement
         procedure: (value_expression
-          (array_access
+          value: (array_access
             array: (identifier)
             (identifier))))))
   (propath_statement

@@ -4,9 +4,8 @@ module.exports = ({ kw }) => ({
   __release_body: ($) =>
     seq(
       field("record", $.__release_record_name),
-      optional(alias($.__release_no_error, $.no_error)),
+      optional(alias(kw("NO-ERROR"), $.no_error)),
     ),
 
-  __release_no_error: ($) => kw("NO-ERROR"),
   __release_record_name: ($) => $._identifier_or_qualified_name,
 });

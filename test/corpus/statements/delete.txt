@@ -18,17 +18,13 @@ DELETE Customer VALIDATE (Customer.CustNum > 0, "Bad") NO-ERROR.
     record: (identifier))
   (delete_statement
     record: (identifier)
-    (validate)
-    condition: (validate
-      (binary_expression
-        (qualified_name
-          left: (identifier)
-          right: (identifier))
-        (number_literal)))
-    (validate)
-    message: (validate
-      (string_literal))
-    (validate)))
+    condition: (binary_expression
+      (qualified_name
+        left: (identifier)
+        right: (identifier))
+      (number_literal))
+    message: (string_literal)
+    (no_error)))
 
 ================================================================================
 DELETE with qualified name
@@ -69,10 +65,12 @@ DELETE WIDGET w1, w2 NO-ERROR.
   (delete_object_statement
     name: (identifier))
   (delete_object_statement
-    name: (identifier))
+    name: (identifier)
+    (no_error))
   (delete_widget_statement
     widget: (identifier)
-    widget: (identifier)))
+    widget: (identifier)
+    (no_error)))
 
 ================================================================================
 DELETE in FOR EACH loop
@@ -164,15 +162,10 @@ DELETE Customer VALIDATE(NOT(CAN-FIND(Order OF Customer)),
         record: (identifier))))
   (delete_statement
     record: (identifier)
-    (validate)
-    condition: (validate
-      (unary_expression
-        (parenthesized_expression
-          (can_find_expression
-            table: (identifier)
-            (of_phrase
-              record: (identifier))))))
-    (validate)
-    message: (validate
-      (string_literal))
-    (validate)))
+    condition: (unary_expression
+      (parenthesized_expression
+        (can_find_expression
+          table: (identifier)
+          (of_phrase
+            record: (identifier)))))
+    message: (string_literal)))

@@ -36,7 +36,7 @@ module.exports = ({ kw }) => ({
     choice(
       $.identifier,
       $.string_literal,
-      seq(kw("VALUE"), "(", $._expression, ")"),
+      seq(kw("VALUE"), "(", field("value", $._expression), ")"),
     ),
   __create_buffer: ($) =>
     seq(

@@ -13,12 +13,13 @@ INPUT STREAM-HANDLE hStream CLOSE.
   (input_statement
     (identifier))
   (input_statement
-    (convert_phrase))
+    (convert_phrase
+      (no_convert)))
   (input_statement
     name: (identifier)
     directory: (string_literal)
     (lob_dir_phrase
-      (preprocessor_reference
+      directory: (preprocessor_reference
         (identifier)))
     map: (identifier)
     (convert_phrase
@@ -98,7 +99,8 @@ INPUT STREAM sIn FROM VALUE(cPath) ECHO.
 (source_code
   (input_statement
     file: (string_literal)
-    (convert_phrase))
+    (convert_phrase
+      (no_convert)))
   (input_statement
     name: (identifier)
     (identifier)))

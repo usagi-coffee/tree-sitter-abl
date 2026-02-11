@@ -46,7 +46,7 @@ END PROCEDURE.
 (source_code
   (procedure_definition
     name: (identifier)
-    name: (map)
+    name: (identifier)
     (body)))
 
 ================================================================================
@@ -329,8 +329,7 @@ END PROCEDURE.
         name: (identifier)
         type: (identifier)
         (no_undo)
-        (format
-          (string_literal)))
+        format: (string_literal))
       (parameter_definition
         name: (identifier)
         like: (qualified_name
@@ -439,7 +438,7 @@ END.
   (procedure_definition
     name: (identifier)
     (cdecl)
-    number: (ordinal_phrase)
+    number: (number_literal)
     (persistent)
     (external_phrase)
     (body
@@ -666,7 +665,7 @@ END PROCEDURE.
     name: (identifier)
     (external_phrase)
     (cdecl)
-    number: (ordinal_phrase)
+    number: (number_literal)
     (persistent)
     (body
       (parameter_definition

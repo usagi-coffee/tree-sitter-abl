@@ -31,19 +31,16 @@ module.exports = ({ kw }) => ({
         ),
       ),
       optional(
-        alias(
-          seq(
-            kw("VALIDATE"),
-            "(",
-            field("condition", $._expression),
-            ",",
-            field("message", $._expression),
-            ")",
-          ),
-          $.validate,
+        seq(
+          kw("VALIDATE"),
+          "(",
+          field("condition", $._expression),
+          ",",
+          field("message", $._expression),
+          ")",
         ),
       ),
-      optional(alias(seq(kw("HELP"), field("help", $.string_literal)), $.help_phrase)),
+      optional(seq(kw("HELP"), field("help", $.string_literal))),
       optional($.frame_phrase),
       optional($.editing_phrase),
     ),
@@ -82,7 +79,7 @@ module.exports = ({ kw }) => ({
       ),
       seq(
         field("constant", $.string_literal),
-        alias(seq(kw("AT"), field("position", token(/[0-9]+(\.[0-9]+)?/))), $.at_phrase),
+        seq(kw("AT"), field("position", token(/[0-9]+(\.[0-9]+)?/))),
       ),
       "^",
     ),

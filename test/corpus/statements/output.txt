@@ -33,11 +33,11 @@ OUTPUT TO TERMINAL NO-ECHO PAGED PAGE-SIZE 24.
   (output_statement
     printer: (string_literal)
     (num_copies_phrase
-      (number_literal))
+      copies: (number_literal))
     (landscape)
     (paged)
     (page_size_phrase
-      (number_literal))
+      page_size: (number_literal))
     (no_echo)
     (no_map)
     (unbuffered)
@@ -66,7 +66,7 @@ OUTPUT TO TERMINAL NO-ECHO PAGED PAGE-SIZE 24.
     (no_echo)
     (paged)
     (page_size_phrase
-      (number_literal))))
+      page_size: (number_literal))))
 
 ================================================================================
 OUTPUT THROUGH - MAP and NO-CONVERT variants

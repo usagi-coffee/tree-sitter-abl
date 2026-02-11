@@ -18,10 +18,10 @@ module.exports = ({ kw }) => ({
       $.__parameter_variable_type_phrase,
       repeat(
         choice(
-          alias($.__parameter_case_sensitive, $.case_sensitive),
-          alias($.__parameter_format, $.format),
-          alias($.__parameter_column_label, $.column_label),
-          alias($.__parameter_decimals, $.decimals),
+          alias(seq(optional(kw("NOT")), kw("CASE-SENSITIVE")), $.case_sensitive),
+          seq(kw("FORMAT", { offset: 4 }), field("format", $.string_literal)),
+          seq(kw("COLUMN-LABEL"), field("column_label", $.string_literal)),
+          seq(kw("DECIMALS"), field("decimals", $.number_literal)),
           seq(
             kw("INITIAL"),
             choice($._expression, seq("[", optional($._expressions), "]")),
@@ -31,7 +31,7 @@ module.exports = ({ kw }) => ({
             $.string_literal,
             repeat(seq(",", $.string_literal)),
           ),
-          alias($.__parameter_no_undo, $.no_undo),
+          alias(kw("NO-UNDO"), $.no_undo),
         ),
       ),
     ),
@@ -92,14 +92,8 @@ module.exports = ({ kw }) => ({
     ),
 
   __parameter_extent_phrase: ($) =>
-    seq(kw("EXTENT"), optional($.__parameter_extent_size)),
+    seq(kw("EXTENT"), optional(field("size", $.__parameter_extent_size))),
 
-  __parameter_no_undo: ($) => kw("NO-UNDO"),
-  __parameter_case_sensitive: ($) =>
-    seq(optional(kw("NOT")), kw("CASE-SENSITIVE")),
-  __parameter_column_label: ($) => seq(kw("COLUMN-LABEL"), $.string_literal),
-  __parameter_decimals: ($) => seq(kw("DECIMALS"), $.number_literal),
-  __parameter_format: ($) => seq(kw("FORMAT", { offset: 4 }), $.string_literal),
   __parameter_extent_size: ($) =>
     choice(
       $.number_literal,

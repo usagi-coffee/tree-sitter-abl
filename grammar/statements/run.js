@@ -45,7 +45,8 @@ module.exports = ({ kw }) => ({
       $.qualified_name,
     ),
 
-  __run_value_expression: ($) => seq(kw("VALUE"), "(", $._expression, ")"),
+  __run_value_expression: ($) =>
+    seq(kw("VALUE"), "(", field("value", $._expression), ")"),
   __run_library_member: ($) =>
     seq(
       field("library", $.procedure_name),

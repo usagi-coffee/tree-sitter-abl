@@ -21,18 +21,17 @@ module.exports = ({ kw }) => ({
       ),
       repeat(
         choice(
-          alias($.__choose_auto_return, $.auto_return),
+          alias(kw("AUTO-RETURN"), $.auto_return),
           seq(kw("COLOR"), field("color", $.color_phrase)),
           alias($.__choose_go_on, $.go_on),
           seq(kw("KEYS"), field("keys", $.identifier)),
-          alias($.__choose_no_error, $.no_error),
+          alias(kw("NO-ERROR"), $.no_error),
           seq(kw("PAUSE"), field("pause", $._expression)),
         ),
       ),
       optional($.frame_phrase),
     ),
 
-  __choose_auto_return: ($) => kw("AUTO-RETURN"),
   __choose_go_on: ($) =>
     seq(
       kw("GO-ON"),
@@ -47,6 +46,5 @@ module.exports = ({ kw }) => ({
       ),
       ")",
     ),
-  __choose_no_error: ($) => kw("NO-ERROR"),
   __choose_color_value: ($) => $._expression,
 });

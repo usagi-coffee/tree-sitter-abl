@@ -98,18 +98,18 @@ DEFINE INPUT-OUTPUT PARAMETER pIds AS INTEGER EXTENT ?.
     name: (identifier)
     type: (identifier)
     (extent_phrase
-      (number_literal)))
+      size: (number_literal)))
   (parameter_definition
     name: (identifier)
     type: (identifier)
     (extent_phrase
-      (preprocessor_reference
+      size: (preprocessor_reference
         (identifier))))
   (parameter_definition
     name: (identifier)
     type: (identifier)
     (extent_phrase
-      (null_literal))))
+      size: (null_literal))))
 
 ================================================================================
 PARAMETER DEFINITION - INITIAL Option
@@ -136,7 +136,7 @@ DEF INPUT PARAMETER pNull AS CHARACTER INITIAL ?.
     name: (identifier)
     type: (identifier)
     (extent_phrase
-      (number_literal))
+      size: (number_literal))
     (number_literal)
     (number_literal)
     (number_literal))
@@ -183,13 +183,11 @@ DEFINE OUTPUT PARAMETER pNum AS DECIMAL FORMAT "z,zzz.99".
   (parameter_definition
     name: (identifier)
     type: (identifier)
-    (format
-      (string_literal)))
+    format: (string_literal))
   (parameter_definition
     name: (identifier)
     type: (identifier)
-    (format
-      (string_literal))))
+    format: (string_literal)))
 
 ================================================================================
 PARAMETER DEFINITION - NO-UNDO Option
@@ -349,8 +347,7 @@ DEFINE RETURN PARAMETER pRes AS LOGICAL NO-UNDO.
   (parameter_definition
     name: (identifier)
     type: (identifier)
-    (format
-      (string_literal))
+    format: (string_literal)
     (number_literal)
     (string_literal)
     (no_undo))
@@ -358,13 +355,12 @@ DEFINE RETURN PARAMETER pRes AS LOGICAL NO-UNDO.
     name: (identifier)
     type: (identifier)
     (extent_phrase
-      (number_literal))
+      size: (number_literal))
     (number_literal)
     (number_literal)
     (number_literal)
     (string_literal)
-    (format
-      (string_literal)))
+    format: (string_literal))
   (parameter_definition
     name: (identifier)
     like: (qualified_name
@@ -780,22 +776,18 @@ DEFINE INPUT PARAMETER pExtent0 AS INTEGER EXTENT 0.
         type: (identifier))))
   (parameter_definition
     name: (identifier)
-    type: (identifier)
-    (case_sensitive))
+    type: (identifier))
+  (parameter_definition
+    name: (identifier)
+    type: (identifier))
   (parameter_definition
     name: (identifier)
     type: (identifier)
-    (case_sensitive))
+    column_label: (string_literal))
   (parameter_definition
     name: (identifier)
     type: (identifier)
-    (column_label
-      (string_literal)))
-  (parameter_definition
-    name: (identifier)
-    type: (identifier)
-    (decimals
-      (number_literal)))
+    decimals: (number_literal))
   (parameter_definition
     name: (identifier)
     type: (identifier)
@@ -825,4 +817,4 @@ DEFINE INPUT PARAMETER pExtent0 AS INTEGER EXTENT 0.
     name: (identifier)
     type: (identifier)
     (extent_phrase
-      (number_literal))))
+      size: (number_literal))))

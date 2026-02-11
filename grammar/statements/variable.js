@@ -73,7 +73,7 @@ module.exports = ({ kw }) => ({
   __variable_radio_button: ($) => seq($._expression, ",", $._expression),
 
   __variable_extent_phrase: ($) =>
-    seq(kw("EXTENT"), optional($.__variable_extent_size)),
+    seq(kw("EXTENT"), optional(field("size", $.__variable_extent_size))),
 
   __variable_format_phrase: ($) =>
     seq(kw("FORMAT", { offset: 4 }), field("format", $.string_literal)),

@@ -5,19 +5,16 @@ module.exports = ({ kw }) => ({
     seq(
       field("record", $.__delete_record_name),
       optional(
-        alias(
-          seq(
-            kw("VALIDATE"),
-            "(",
-            field("condition", $._expression),
-            ",",
-            field("message", $._expression),
-            ")",
-          ),
-          $.validate,
+        seq(
+          kw("VALIDATE"),
+          "(",
+          field("condition", $._expression),
+          ",",
+          field("message", $._expression),
+          ")",
         ),
       ),
-      optional($.__delete_no_error),
+      optional(alias(kw("NO-ERROR"), $.no_error)),
     ),
 
   delete_object_statement: ($) =>
@@ -28,7 +25,7 @@ module.exports = ({ kw }) => ({
       kw("DELETE"),
       kw("PROCEDURE", { offset: 4 }),
       field("handle", $._expression),
-      optional(alias($.__delete_no_error, $.no_error)),
+      optional(alias(kw("NO-ERROR"), $.no_error)),
       $._terminator,
     ),
 
@@ -38,13 +35,12 @@ module.exports = ({ kw }) => ({
       kw("WIDGET"),
       field("widget", $._expression),
       repeat(seq(",", field("widget", $._expression))),
-      optional($.__delete_no_error),
+      optional(alias(kw("NO-ERROR"), $.no_error)),
       $._terminator,
     ),
 
   __delete_object_body: ($) =>
-    seq(field("name", $.identifier), optional($.__delete_no_error)),
+    seq(field("name", $.identifier), optional(alias(kw("NO-ERROR"), $.no_error))),
 
-  __delete_no_error: ($) => kw("NO-ERROR"),
   __delete_record_name: ($) => $._identifier_or_qualified_name,
 });

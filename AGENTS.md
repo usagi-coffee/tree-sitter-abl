@@ -78,8 +78,7 @@ Strongly prefer using these commands as they have helpful side-effects like retu
 
 ## Clean tree conventions
 
-We want to keep the syntax tree output lean, prefer `field` for non-repeating rules and `alias` for flags.
-
+We want the syntax tree output to be flattened unless necessary, prefer `field` for non-repeating rules and `alias` for flags.
 
 1. Add fields for modifiers that take value.
 ```js
@@ -159,7 +158,7 @@ alias(
 // Good
 seq(kw("COLUMN-LABEL"), field("column_label", $.string_literal)),
 alias(
-   seq(kw("COLUMN-LABEL"), field("column_label", repeat1($.string_literal))),
+   seq(kw("COLUMN-LABEL"), repeat1(field("column_label", $.string_literal))),
    $.column_label,
 ),
 ```

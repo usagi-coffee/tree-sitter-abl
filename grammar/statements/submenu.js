@@ -28,8 +28,8 @@ module.exports = ({ kw }) => ({
     choice(
       alias($.__submenu_item, $.menu_item),
       alias($.__submenu_submenu, $.submenu_item),
-      alias($.__submenu_rule, $.rule),
-      alias($.__submenu_skip, $.skip),
+      alias(kw("RULE"), $.rule),
+      alias(kw("SKIP"), $.skip),
     ),
   __submenu_item: ($) =>
     seq(
@@ -50,6 +50,4 @@ module.exports = ({ kw }) => ({
       optional(kw("DISABLED")),
       optional(seq(kw("LABEL"), $.string_literal)),
     ),
-  __submenu_rule: ($) => kw("RULE"),
-  __submenu_skip: ($) => kw("SKIP"),
 });

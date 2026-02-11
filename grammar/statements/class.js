@@ -107,7 +107,7 @@ module.exports = ({ kw }) => ({
         optional(choice(kw("INPUT"), kw("OUTPUT"), kw("INPUT-OUTPUT"))),
         field("name", $.identifier),
         $.__method_variable_type_phrase,
-        optional(alias($.__method_no_undo, $.no_undo)),
+        optional(alias(kw("NO-UNDO"), $.no_undo)),
       ),
       $.__method_table_parameter,
     ),
@@ -190,7 +190,7 @@ module.exports = ({ kw }) => ({
     seq(
       field("name", $.identifier),
       $.__method_variable_type_phrase,
-      optional(alias($.__method_no_undo, $.no_undo)),
+      optional(alias(kw("NO-UNDO"), $.no_undo)),
     ),
 
   __class_option: ($) =>
@@ -327,7 +327,6 @@ module.exports = ({ kw }) => ({
       $.identifier,
     ),
   __method_field_name: ($) => $._identifier_or_qualified_name,
-  __method_no_undo: ($) => kw("NO-UNDO"),
   __method_table_parameter: ($) =>
     seq(
       optional(choice(kw("INPUT"), kw("OUTPUT"), kw("INPUT-OUTPUT"))),

@@ -15,7 +15,7 @@ EXPORT STREAM-HANDLE hOut memptrBuf.
     (identifier))
   (export_statement
     (delimiter_phrase
-      (string_literal))
+      delimiter: (string_literal))
     (identifier)
     (identifier)
     (identifier)
@@ -72,7 +72,7 @@ EXPORT STREAM-HANDLE hOut memptrBuf.
     (body
       (export_statement
         (delimiter_phrase
-          (string_literal))
+          delimiter: (string_literal))
         (qualified_name
           left: (identifier)
           right: (identifier))

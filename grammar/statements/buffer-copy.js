@@ -15,7 +15,7 @@ module.exports = ({ kw }) => ({
       field("target", $.__buffer_copy_record_name),
       optional(alias($.__buffer_copy_assign_phrase, $.assign_phrase)),
       optional(kw("NO-LOBS")),
-      optional(alias($.__buffer_copy_no_error, $.no_error)),
+      optional(alias(kw("NO-ERROR"), $.no_error)),
     ),
 
   __buffer_copy_record_name: ($) => $._identifier_or_qualified_name,
@@ -43,5 +43,4 @@ module.exports = ({ kw }) => ({
       choice("=", "+=", "-=", "*=", "/="),
       field("right", $._expression),
     ),
-  __buffer_copy_no_error: ($) => kw("NO-ERROR"),
 });

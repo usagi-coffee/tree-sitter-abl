@@ -43,15 +43,18 @@ module.exports = ({ kw }) => ({
   __input_lob_dir_phrase: ($) =>
     seq(
       kw("LOB-DIR"),
-      choice(
-        alias($.constant_expression, $.preprocessor_reference),
-        seq(kw("VALUE"), "(", $._expression, ")"),
+      field(
+        "directory",
+        choice(
+          alias($.constant_expression, $.preprocessor_reference),
+          seq(kw("VALUE"), "(", $._expression, ")"),
+        ),
       ),
     ),
   __input_map_entry: ($) => choice($.identifier, $.string_literal),
   __input_convert_phrase: ($) =>
     choice(
-      kw("NO-CONVERT"),
+      alias(kw("NO-CONVERT"), $.no_convert),
       seq(
         kw("CONVERT"),
         choice(

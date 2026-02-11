@@ -391,7 +391,7 @@ RUN methodProc IN hProc NO-ERROR.
       library: (procedure_name)))
   (run_statement
     procedure: (value_expression
-      (identifier))
+      value: (identifier))
     handle: (persistent))
   (run_statement
     procedure: (identifier)
