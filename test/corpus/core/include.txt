@@ -16,8 +16,8 @@ DISPLAY {&VAR1}.
 --------------------------------------------------------------------------------
 
 (source_code
-  (include
-    (include
+  (include_reference
+    (include_reference
       file: (file_name)
       argument: (include_argument
         (identifier))
@@ -33,17 +33,17 @@ DISPLAY {&VAR1}.
         (include_named_argument
           name: (identifier)
           value: (identifier)))))
-  (include
-    (include
-      file: (constant
+  (include_reference
+    (include_reference
+      file: (preprocessor_reference
         (identifier))
       file: (file_name)
       argument: (include_argument
         (identifier))))
   (include)
-  (include
-    (include
-      file: (constant
+  (include_reference
+    (include_reference
+      file: (preprocessor_reference
         (identifier))
       file: (file_name)
       argument: (include_argument
@@ -88,7 +88,7 @@ DISPLAY {&VAR1}.
           value: (identifier)))))
   (display_statement
     (field
-      field: (constant
+      field: (preprocessor_reference
         (identifier)))))
 
 ================================================================================
@@ -100,8 +100,8 @@ INCLUDE with WINDOW positional argument
 --------------------------------------------------------------------------------
 
 (source_code
-  (include
-    (include
+  (include_reference
+    (include_reference
       file: (file_name)
       argument: (include_argument
         (identifier))

@@ -29,7 +29,7 @@ module.exports = ({ kw }) => ({
   __var_extent_size: ($) =>
     choice(
       $.number_literal,
-      alias($.constant_expression, $.constant),
+      alias($.constant_expression, $.preprocessor_reference),
       $.identifier,
     ),
   __var_modifier: ($) =>

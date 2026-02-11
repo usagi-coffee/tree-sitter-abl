@@ -14,7 +14,7 @@ module.exports = ({ kw }) => ({
       $.identifier,
       $.string_literal,
       $.number_literal,
-      alias($.constant_expression, $.constant),
+      alias($.constant_expression, $.preprocessor_reference),
       $.__os_command_switch,
     ),
   __os_command_switch: () => token(/\/[^\s.]+/),

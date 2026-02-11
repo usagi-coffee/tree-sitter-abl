@@ -41,7 +41,7 @@ module.exports = ({ kw }) => ({
       prec(1, $.function_call),
       $.object_access,
       $._identifier_or_qualified_name,
-      alias($.constant_expression, $.constant),
+      alias($.constant_expression, $.preprocessor_reference),
       alias($.__input_through_shell_variable, $.shell_variable),
     ),
   __input_through_shell_variable: ($) => token(/\$+[A-Za-z_0-9]*/),

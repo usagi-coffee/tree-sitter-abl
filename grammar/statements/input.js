@@ -38,13 +38,13 @@ module.exports = ({ kw }) => ({
       $.qualified_name,
       $.object_access,
       $.function_call,
-      alias($.constant_expression, $.constant),
+      alias($.constant_expression, $.preprocessor_reference),
     ),
   __input_lob_dir_phrase: ($) =>
     seq(
       kw("LOB-DIR"),
       choice(
-        alias($.constant_expression, $.constant),
+        alias($.constant_expression, $.preprocessor_reference),
         seq(kw("VALUE"), "(", $._expression, ")"),
       ),
     ),

@@ -69,7 +69,7 @@ module.exports = ({ kw }) => ({
     seq(
       kw("LOB-DIR"),
       choice(
-        alias($.constant_expression, $.constant),
+        alias($.constant_expression, $.preprocessor_reference),
         seq(kw("VALUE"), "(", $._expression, ")"),
       ),
     ),
@@ -79,7 +79,7 @@ module.exports = ({ kw }) => ({
       kw("NUM-COPIES"),
       choice(
         $.number_literal,
-        alias($.constant_expression, $.constant),
+        alias($.constant_expression, $.preprocessor_reference),
         seq(kw("VALUE"), "(", $._expression, ")"),
       ),
     ),
@@ -89,7 +89,7 @@ module.exports = ({ kw }) => ({
       kw("PAGE-SIZE"),
       choice(
         $.number_literal,
-        alias($.constant_expression, $.constant),
+        alias($.constant_expression, $.preprocessor_reference),
         seq(kw("VALUE"), "(", $._expression, ")"),
       ),
     ),
@@ -108,7 +108,7 @@ module.exports = ({ kw }) => ({
         "file",
         choice(
           $.string_literal,
-          alias($.constant_expression, $.constant),
+          alias($.constant_expression, $.preprocessor_reference),
           $.identifier,
           $.qualified_name,
         ),
@@ -133,13 +133,13 @@ module.exports = ({ kw }) => ({
       $.string_literal,
       $.number_literal,
       $.identifier,
-      alias($.constant_expression, $.constant),
+      alias($.constant_expression, $.preprocessor_reference),
     ),
 
   __output_printer_target: ($) =>
     choice(
       $.string_literal,
       $.identifier,
-      alias($.constant_expression, $.constant),
+      alias($.constant_expression, $.preprocessor_reference),
     ),
 });

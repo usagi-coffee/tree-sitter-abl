@@ -3,7 +3,7 @@ module.exports = ({ kw }) => ({
     seq(
       field("record", $._identifier_or_qualified_name),
       optional(alias($.__record_field_list, $.field_list)),
-      optional(field("constant", $.constant_expression)),
+      optional(alias($.constant_expression, $.preprocessor_reference)),
       repeat($.__record_option),
     ),
 

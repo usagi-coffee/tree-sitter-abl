@@ -301,7 +301,7 @@ END.
       (parameter
         name: (identifier)
         type: (identifier)
-        (constant
+        (preprocessor_reference
           (identifier))))
     (return_statement
       (string_literal))))

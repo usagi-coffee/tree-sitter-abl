@@ -104,7 +104,7 @@ module.exports = ({ kw }) => ({
   __parameter_extent_size: ($) =>
     choice(
       $.number_literal,
-      alias($.constant_expression, $.constant),
+      alias($.constant_expression, $.preprocessor_reference),
       $.identifier,
       $.null_literal,
     ),

@@ -202,7 +202,7 @@ module.exports = grammar({
           "}",
           optional("."),
         ),
-      include_statement: ($) => seq(alias($.include_expression, $.include)),
+      include_statement: ($) => seq(alias($.include_expression, $.include_reference)),
       include_argument: ($) =>
         choice($.include_named_argument, $._include_argument_value),
       include_named_argument: ($) =>
@@ -227,7 +227,7 @@ module.exports = grammar({
             $.number_literal,
             alias($._signed_number_literal, $.number_literal),
             $.boolean_literal,
-            alias($.constant_expression, $.constant),
+            alias($.constant_expression, $.preprocessor_reference),
             $.argument_reference,
           ),
         ),
@@ -235,7 +235,7 @@ module.exports = grammar({
       // Preprocessor
       preprocessor_directive: ($) => token(/&[^\n]*(?:~\s*\n[^\n]*)*/i),
       _include_file_reference: ($) =>
-        seq(optional(alias($.constant_expression, $.constant)), $.file_name),
+        seq(optional(alias($.constant_expression, $.preprocessor_reference)), $.file_name),
 
       // Constants
       constant: ($) => token(/\{&[^\}\r\n]+\}[ \t]*\r?\n/),
@@ -253,7 +253,7 @@ module.exports = grammar({
           $.number_literal,
           alias($._signed_number_literal, $.number_literal),
           $.boolean_literal,
-          alias($.constant_expression, $.constant),
+          alias($.constant_expression, $.preprocessor_reference),
           $.argument_reference,
           $.parenthesized_identifier,
         ),

@@ -9,7 +9,7 @@ module.exports = ({ kw, ctx }) => ({
 
   _primary_expression: ($) =>
     choice(
-      prec(-1, alias($.constant_expression, $.constant)),
+      prec(-1, alias($.constant_expression, $.preprocessor_reference)),
       $._identifier_or_qualified_name,
       $.widget_qualified_name,
       $.parenthesized_expression,
@@ -33,6 +33,6 @@ module.exports = ({ kw, ctx }) => ({
       $.boolean_literal,
       $.null_literal,
       $.input_expression,
-      $.include_expression,
+      alias($.include_expression, $.include_reference),
     ),
 });

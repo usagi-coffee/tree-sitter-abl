@@ -168,7 +168,7 @@ DEFINE VARIABLE arr4 EXTENT 7 LIKE ad_name NO-UNDO.
     name: (identifier)
     type: (identifier)
     (extent_phrase
-      (constant
+      (preprocessor_reference
         (identifier))))
   (variable_definition
     name: (identifier)

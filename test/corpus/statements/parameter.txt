@@ -103,7 +103,7 @@ DEFINE INPUT-OUTPUT PARAMETER pIds AS INTEGER EXTENT ?.
     name: (identifier)
     type: (identifier)
     (extent_phrase
-      (constant
+      (preprocessor_reference
         (identifier))))
   (parameter_definition
     name: (identifier)

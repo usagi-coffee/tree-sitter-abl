@@ -375,7 +375,7 @@ DEFINE FRAME {&FRAME_NAME} bPolicy AT COLUMN 2 ROW 2.
 
 (source_code
   (frame_definition
-    name: (constant
+    name: (preprocessor_reference
       (identifier))
     field: (identifier)
     (format_phrase

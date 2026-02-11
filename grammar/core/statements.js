@@ -4,7 +4,7 @@ module.exports = () => ({
   _statement: ($) =>
     choice(
       // Special
-      alias($.include_statement, $.include),
+      alias($.include_statement, $.include_reference),
       $.preprocessor_directive,
       $.annotation,
 

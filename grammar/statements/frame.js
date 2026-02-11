@@ -12,7 +12,7 @@ module.exports = ({ kw }) => ({
     seq(
       field(
         "name",
-        choice($.identifier, alias($.constant_expression, $.constant)),
+        choice($.identifier, alias($.constant_expression, $.preprocessor_reference)),
       ),
       choice(
         seq(
@@ -56,7 +56,7 @@ module.exports = ({ kw }) => ({
         ),
       ),
       seq(
-        alias($.constant_expression, $.constant),
+        alias($.constant_expression, $.preprocessor_reference),
         optional(choice($.at_phrase, seq(kw("TO"), $._expression))),
         repeat($.__frame_display_option),
       ),

@@ -18,7 +18,7 @@ INPUT STREAM-HANDLE hStream CLOSE.
     name: (identifier)
     directory: (string_literal)
     (lob_dir_phrase
-      (constant
+      (preprocessor_reference
         (identifier)))
     map: (identifier)
     (convert_phrase

@@ -95,7 +95,7 @@ module.exports = ({ kw }) => ({
             $.identifier,
             $.qualified_name,
             $.object_access,
-            alias($.constant_expression, $.constant),
+            alias($.constant_expression, $.preprocessor_reference),
             $.argument_reference,
           ),
         ),

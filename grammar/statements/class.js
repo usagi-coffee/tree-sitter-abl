@@ -43,7 +43,7 @@ module.exports = ({ kw }) => ({
       $.using_statement,
       $.annotation,
       $.preprocessor_directive,
-      alias($.include_expression, $.include),
+      alias($.include_expression, $.include_reference),
     ),
 
   method_definition: ($) =>
@@ -324,7 +324,7 @@ module.exports = ({ kw }) => ({
   __method_extent_size: ($) =>
     choice(
       $.number_literal,
-      alias($.constant_expression, $.constant),
+      alias($.constant_expression, $.preprocessor_reference),
       $.identifier,
     ),
   __method_field_name: ($) => $._identifier_or_qualified_name,
