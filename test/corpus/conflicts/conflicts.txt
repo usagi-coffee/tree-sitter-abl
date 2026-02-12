@@ -1,0 +1,185 @@
+================================================================================
+CONFLICT - primary expression vs function call
+================================================================================
+
+x = myFunc(1).
+x = obj:method().
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assignment_statement
+    (identifier)
+    (assignment_operator)
+    (function_call
+      (identifier)
+      (arguments
+        (argument
+          (number_literal)))))
+  (assignment_statement
+    (identifier)
+    (assignment_operator)
+    (function_call
+      (object_access
+        (identifier)
+        (identifier))
+      (arguments))))
+
+================================================================================
+CONFLICT - DISPLAY record vs widget-qualified/value
+================================================================================
+
+DISPLAY Customer IN WINDOW w.
+DISPLAY Customer EXCEPT Comments WITH FRAME f.
+DISPLAY Customer.Name.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (display_statement
+    (field
+      (widget_qualified_name
+        (identifier)
+        (identifier))))
+  (display_statement
+    (identifier)
+    (identifier)
+    (frame_phrase
+      (identifier)))
+  (display_statement
+    (qualified_name
+      (identifier)
+      (identifier))))
+
+================================================================================
+CONFLICT - widget entry vs identifier-like values
+================================================================================
+
+ON CHOOSE OF btnFind DO:
+  MESSAGE "ok".
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (on_statement
+    (identifier)
+    (of_phrase
+      (widget_phrase
+        (identifier)))
+    (do_statement
+      (body
+        (message_statement
+          (string_literal))))))
+
+================================================================================
+CONFLICT - DEFINE modifier prefix matrix
+================================================================================
+
+DEFINE NEW SHARED BUFFER bCust FOR Customer.
+DEFINE PRIVATE STATIC VARIABLE v AS INTEGER NO-UNDO.
+DEFINE PRIVATE STATIC QUERY q FOR Customer.
+CLASS X:
+  DEFINE PRIVATE STATIC DATA-SOURCE ds FOR bCust.
+  DEFINE PRIVATE STATIC DATASET dsOrder FOR ttOrder.
+  DEFINE PRIVATE STATIC TEMP-TABLE tt FIELD id AS INTEGER.
+  DEFINE PRIVATE STATIC PROPERTY p AS INTEGER NO-UNDO GET. SET.
+  DEFINE PRIVATE STATIC EVENT onChanged SIGNATURE VOID ().
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (buffer_definition
+    (new_modifier)
+    (scope_modifier)
+    (identifier)
+    (identifier))
+  (variable_definition
+    (access_modifier)
+    (static_modifier)
+    (identifier)
+    (identifier)
+    (no_undo))
+  (query_definition
+    (access_modifier)
+    (static_modifier)
+    (identifier)
+    (query_table_list
+      (identifier)))
+  (class_definition
+    (identifier)
+    (data_source_definition
+      (access_modifier)
+      (static_modifier)
+      (identifier)
+      (identifier))
+    (dataset_definition
+      (access_modifier)
+      (static_modifier)
+      (identifier)
+      (identifier))
+    (temp_table_definition
+      (access_modifier)
+      (static_modifier)
+      (identifier)
+      (temp_table_field
+        (identifier)
+        (identifier)))
+    (property_definition
+      (access_modifier)
+      (static_modifier)
+      (identifier)
+      (identifier)
+      (no_undo))
+    (event_definition
+      (access_modifier)
+      (static_modifier)
+      (identifier)
+      (signature))))
+
+================================================================================
+CONFLICT - property/event/variable modifier overlap
+================================================================================
+
+CLASS X:
+  DEFINE PROTECTED ABSTRACT OVERRIDE EVENT onAbstract SIGNATURE VOID (INPUT reason AS CHARACTER).
+END.
+DEFINE PACKAGE-PRIVATE VARIABLE vPkg AS INTEGER NO-UNDO.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (class_definition
+    (identifier)
+    (event_definition
+      (access_modifier)
+      (abstract_modifier)
+      (override_modifier)
+      (identifier)
+      (signature
+        (identifier)
+        (identifier))))
+  (variable_definition
+    (access_modifier)
+    (identifier)
+    (identifier)
+    (no_undo)))
+
+================================================================================
+CONFLICT - unsubscribe body vs identifier expression
+================================================================================
+
+UNSUBSCRIBE PROCEDURE hSub TO cEvent.
+UNSUBSCRIBE TO "MyEvent" IN hPub.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (unsubscribe_statement
+    (identifier)
+    (identifier))
+  (unsubscribe_statement
+    (string_literal)
+    (in_phrase
+      (identifier))))

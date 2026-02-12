@@ -1,0 +1,912 @@
+================================================================================
+PRECEDENCE 01 - operator ladder unary/multiplication/add/compare/not/logical
+================================================================================
+
+x = NOT a + b * c = d OR e = f.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assignment_statement
+    (identifier)
+    (assignment_operator)
+    (binary_expression
+      (unary_expression
+        (binary_expression
+          (binary_expression
+            (identifier)
+            (binary_expression
+              (identifier)
+              (identifier)))
+          (identifier)))
+      (binary_expression
+        (identifier)
+        (identifier)))))
+
+================================================================================
+PRECEDENCE 02 - binary expression in statement expression slots
+================================================================================
+
+MESSAGE a + b.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (message_statement
+    (binary_expression
+      (identifier)
+      (identifier))))
+
+================================================================================
+PRECEDENCE 03 - os function_call over os filename target
+================================================================================
+
+OS-APPEND myFunc() target.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (os_append_statement
+    (function_call
+      (identifier)
+      (arguments))
+    (identifier)))
+
+================================================================================
+PRECEDENCE 04 - dataset function_call over dataset_reference
+================================================================================
+
+ASSIGN c = DATASET myFunc:HANDLE.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assign_statement
+    (assign_phrase
+      (assign_pair
+        (identifier)
+        (dataset_reference
+          (object_access
+            (identifier)
+            (identifier)))))))
+
+================================================================================
+PRECEDENCE 05 - browse enable field function_call disambiguation
+================================================================================
+
+DEFINE BROWSE b1 QUERY q1 DISPLAY myFunc() ENABLE field1.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (browse_definition
+    (identifier)
+    (identifier)
+    (column
+      (function_call
+        (identifier)
+        (arguments)))
+    (identifier)))
+
+================================================================================
+PRECEDENCE 06 - include statement over primary expression start
+================================================================================
+
+{inc.i}
+a = 1.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (include)
+  (assignment_statement
+    (identifier)
+    (assignment_operator)
+    (number_literal)))
+
+================================================================================
+PRECEDENCE 07 - create buffer over object_access handle type
+================================================================================
+
+CREATE BUFFER hBuf FOR TABLE Customer.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (create_statement
+    (identifier)
+    (identifier)))
+
+================================================================================
+PRECEDENCE 08 - create temp-table over object_access handle type
+================================================================================
+
+CREATE TEMP-TABLE tt.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (create_temp_table_statement
+    (identifier)))
+
+================================================================================
+PRECEDENCE 09 - create buffer target over identifier
+================================================================================
+
+CREATE BUFFER hBuf FOR TABLE Customer IN WIDGET-POOL wp.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (create_statement
+    (identifier)
+    (identifier)
+    (identifier)))
+
+================================================================================
+PRECEDENCE 10 - delete alias over generic delete
+================================================================================
+
+DELETE ALIAS myalias NO-ERROR.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (delete_alias_statement
+    (identifier)
+    (no_error)))
+
+================================================================================
+PRECEDENCE 11 - delete widget-pool over generic delete
+================================================================================
+
+DELETE WIDGET-POOL wp.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (delete_widget_pool_statement
+    (identifier)))
+
+================================================================================
+PRECEDENCE 12 - case OR WHEN list separator over binary expression
+================================================================================
+
+CASE x:
+  WHEN a OR WHEN b THEN MESSAGE "m".
+END CASE.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (case_statement
+    (identifier)
+    (case_when_phrase
+      (identifier)
+      (identifier)
+      (message_statement
+        (string_literal)))))
+
+================================================================================
+PRECEDENCE 13 - assign keyword identifier over widgets
+================================================================================
+
+ASSIGN FRAME = FRAME foo:HANDLE.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assign_statement
+    (assign_phrase
+      (assign_pair
+        (identifier)
+        (object_access
+          (identifier)
+          (identifier)
+          (identifier))))))
+
+================================================================================
+PRECEDENCE 14 - assign object_access over assign keyword identifier
+================================================================================
+
+ASSIGN x = FRAME foo:HANDLE.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assign_statement
+    (assign_phrase
+      (assign_pair
+        (identifier)
+        (object_access
+          (identifier)
+          (identifier)
+          (identifier))))))
+
+================================================================================
+PRECEDENCE 15 - assign object_access_widget over assign keyword identifier
+================================================================================
+
+ASSIGN x = MENU-ITEM m1:SENSITIVE.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assign_statement
+    (assign_phrase
+      (assign_pair
+        (identifier)
+        (object_access
+          (identifier)
+          (identifier)
+          (identifier))))))
+
+================================================================================
+PRECEDENCE 16 - assign record body over assignable
+================================================================================
+
+ASSIGN Customer EXCEPT Name.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assign_statement
+    (identifier)
+    (identifier)))
+
+================================================================================
+PRECEDENCE 17 - assign function_call over assignable
+================================================================================
+
+ASSIGN SomeFunc() = 1.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assign_statement
+    (assign_phrase
+      (assign_pair
+        (function_call
+          (identifier)
+          (arguments))
+        (number_literal)))))
+
+================================================================================
+PRECEDENCE 18 - assign statement over generic assignment statement
+================================================================================
+
+ASSIGN a = 1.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assign_statement
+    (assign_phrase
+      (assign_pair
+        (identifier)
+        (number_literal)))))
+
+================================================================================
+PRECEDENCE 19 - set field over set record
+================================================================================
+
+SET Customer WITH FRAME f.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (set_statement
+    (field
+      (identifier))
+    (frame_phrase
+      (identifier))))
+
+================================================================================
+PRECEDENCE 20 - enable item over primary expression
+================================================================================
+
+ENABLE field1 FORMAT "x(10)" WHEN ok.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (enable_statement
+    (enable_item
+      (identifier)
+      (format_phrase
+        (string_literal))
+      (identifier))))
+
+================================================================================
+PRECEDENCE 21 - display record over primary expression
+================================================================================
+
+DISPLAY Customer EXCEPT Comments.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (display_statement
+    (identifier)
+    (identifier)))
+
+================================================================================
+PRECEDENCE 22 - display record over identifier_or_qualified_name
+================================================================================
+
+DISPLAY Customer WITH BROWSE b.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (display_statement
+    (identifier)
+    (identifier)))
+
+================================================================================
+PRECEDENCE 23 - display browse body over frame identifier
+================================================================================
+
+DISPLAY Customer EXCEPT Comments WITH BROWSE b1.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (display_statement
+    (identifier)
+    (identifier)
+    (identifier)))
+
+================================================================================
+PRECEDENCE 24 - display field over function_call
+================================================================================
+
+DISPLAY Customer.Name.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (display_statement
+    (qualified_name
+      (identifier)
+      (identifier))))
+
+================================================================================
+PRECEDENCE 25 - display skip phrase over function_call
+================================================================================
+
+DISPLAY SKIP(1) Customer.Name.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (display_statement
+    (field
+      (parenthesized_expression
+        (number_literal)))
+    (field
+      (qualified_name
+        (identifier)
+        (identifier)))))
+
+================================================================================
+PRECEDENCE 26 - display space phrase over function_call
+================================================================================
+
+DISPLAY SPACE(2) Customer.Name.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (display_statement
+    (field
+      (parenthesized_expression
+        (number_literal)))
+    (field
+      (qualified_name
+        (identifier)
+        (identifier)))))
+
+================================================================================
+PRECEDENCE 27 - display skip phrase over primary expression
+================================================================================
+
+DISPLAY SKIP(1) x.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (display_statement
+    (field
+      (parenthesized_expression
+        (number_literal)))
+    (field
+      (identifier))))
+
+================================================================================
+PRECEDENCE 28 - display space phrase over primary expression
+================================================================================
+
+DISPLAY SPACE(2) x.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (display_statement
+    (field
+      (parenthesized_expression
+        (number_literal)))
+    (field
+      (identifier))))
+
+================================================================================
+PRECEDENCE 29 - display field over display record
+================================================================================
+
+DISPLAY Customer.Name IN WINDOW hWin.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (display_statement
+    (field
+      (widget_qualified_name
+        (qualified_name
+          (identifier)
+          (identifier))
+        (identifier)))))
+
+================================================================================
+PRECEDENCE 30 - display item skip over frame skip
+================================================================================
+
+DISPLAY x SKIP y.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (display_statement
+    (field
+      (identifier))
+    (field
+      (identifier))))
+
+================================================================================
+PRECEDENCE 31 - frame_phrase over display_field
+================================================================================
+
+DISPLAY menu WITH TITLE "t".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (display_statement
+    (field
+      (identifier))
+    (frame_phrase
+      (string_literal))))
+
+================================================================================
+PRECEDENCE 32 - frame_phrase over display_items
+================================================================================
+
+DISPLAY x WITH FRAME f.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (display_statement
+    (identifier)
+    (frame_phrase
+      (identifier))))
+
+================================================================================
+PRECEDENCE 33 - frame_phrase over identifier
+================================================================================
+
+DISPLAY x WITH NO-BOX.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (display_statement
+    (identifier)
+    (frame_phrase
+      (no_box))))
+
+================================================================================
+PRECEDENCE 34 - display keyword identifier over widgets
+================================================================================
+
+DISPLAY menu.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (display_statement
+    (field
+      (identifier))))
+
+================================================================================
+PRECEDENCE 35 - widget entry over primary expression
+================================================================================
+
+ON CHOOSE OF btnFind DO:
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (on_statement
+    (identifier)
+    (of_phrase
+      (widget_phrase
+        (identifier)))
+    (do_statement
+      (body))))
+
+================================================================================
+PRECEDENCE 36 - function_call over widget entry
+================================================================================
+
+RUN internalProc IN myFunc().
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (run_statement
+    (identifier)
+    (in_phrase
+      (function_call
+        (identifier)
+        (arguments)))))
+
+================================================================================
+PRECEDENCE 37 - widget handle over widget entry
+================================================================================
+
+ON CHOOSE OF btnFind DO:
+  MESSAGE "ok".
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (on_statement
+    (identifier)
+    (of_phrase
+      (widget_phrase
+        (identifier)))
+    (do_statement
+      (body
+        (message_statement
+          (string_literal))))))
+
+================================================================================
+PRECEDENCE 38 - widget qualified name over object_access
+================================================================================
+
+ASSIGN MENU-ITEM m1:SENSITIVE IN MENU mymenu = TRUE.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assign_statement
+    (assign_phrase
+      (assign_pair
+        (widget_qualified_name
+          (object_access
+            (identifier)
+            (identifier)
+            (identifier))
+          (identifier))
+        (boolean_literal)))))
+
+================================================================================
+PRECEDENCE 39 - widget qualified name over primary expression
+================================================================================
+
+DISPLAY x IN FRAME f.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (display_statement
+    (field
+      (widget_qualified_name
+        (identifier)
+        (identifier)))))
+
+================================================================================
+PRECEDENCE 40 - message expression over widget tokens
+================================================================================
+
+MESSAGE MENU.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (message_statement
+    (identifier)))
+
+================================================================================
+PRECEDENCE 41 - aggregate where phrase over record phrase
+================================================================================
+
+FOR EACH customer WHERE customer.custnum > 0 BY customer.custnum:
+  DISPLAY customer.custnum.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (for_statement
+    (record
+      (record
+        (identifier)
+        (binary_expression
+          (qualified_name
+            (identifier)
+            (identifier))
+          (number_literal)))
+      (by_phrase
+        (qualified_name
+          (identifier)
+          (identifier))))
+    (body
+      (display_statement
+        (qualified_name
+          (identifier)
+          (identifier))))))
+
+================================================================================
+PRECEDENCE 42 - format target over primary expression
+================================================================================
+
+PUT x FORMAT ("x(10)").
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (put_statement
+    (identifier)
+    (format_phrase
+      (string_literal))))
+
+================================================================================
+PRECEDENCE 43 - format target over identifier_or_qualified_name
+================================================================================
+
+PUT x FORMAT decF.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (put_statement
+    (identifier)
+    (format_phrase
+      (identifier))))
+
+================================================================================
+PRECEDENCE 44 - format target over function_call
+================================================================================
+
+PUT x FORMAT hFmt:Value.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (put_statement
+    (identifier)
+    (format_phrase
+      (object_access
+        (identifier)
+        (identifier)))))
+
+================================================================================
+PRECEDENCE 45 - put expression item over format colon/to
+================================================================================
+
+PUT a TO b.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (put_statement
+    (identifier)
+    (identifier)))
+
+================================================================================
+PRECEDENCE 46 - prompt-for field over prompt-for record
+================================================================================
+
+PROMPT-FOR Customer.Name WITH FRAME f.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (prompt_for_statement
+    (field
+      (qualified_name
+        (identifier)
+        (identifier)))
+    (frame_phrase
+      (identifier))))
+
+================================================================================
+PRECEDENCE 47 - prompt-for identifier over prompt-for record
+================================================================================
+
+PROMPT-FOR Customer WITH FRAME f.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (prompt_for_statement
+    (field
+      (identifier))
+    (frame_phrase
+      (identifier))))
+
+================================================================================
+PRECEDENCE 48 - export statement over export expression
+================================================================================
+
+EXPORT a.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (export_statement
+    (identifier)))
+
+================================================================================
+PRECEDENCE 49 - input expression over input named parameter body
+================================================================================
+
+COLOR PROMPT INPUT field1 field2.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (color_statement
+    (color_phrase
+      (identifier))
+    (identifier)
+    (identifier)))
+
+================================================================================
+PRECEDENCE 50 - function_call over input expression body
+================================================================================
+
+INPUT THROUGH prog myFunc().
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (input_through_statement
+    (identifier)
+    (function_call
+      (identifier)
+      (arguments))))
+
+================================================================================
+PRECEDENCE 51 - input-through arg value over identifier_or_qualified_name
+================================================================================
+
+INPUT THROUGH prog arg1.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (input_through_statement
+    (identifier)
+    (identifier)))
+
+================================================================================
+PRECEDENCE 52 - function_call over input-through arg value
+================================================================================
+
+INPUT THROUGH prog myFunc().
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (input_through_statement
+    (identifier)
+    (function_call
+      (identifier)
+      (arguments))))
+
+================================================================================
+PRECEDENCE 53 - input expression over identifier
+================================================================================
+
+RUN STORED-PROCEDURE p (INPUT x = 1).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (run_stored_procedure_statement
+    (identifier)
+    (parameter_list
+      (binary_expression
+        (identifier)
+        (number_literal)))))
+
+================================================================================
+PRECEDENCE 54 - run stored-procedure param over parenthesized expression
+================================================================================
+
+RUN STORED-PROCEDURE sp_Insert (INPUT "John", INPUT 25).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (run_stored_procedure_statement
+    (identifier)
+    (parameter_list
+      (string_literal)
+      (number_literal))))
+
+================================================================================
+PRECEDENCE 55 - function_call over run context value
+================================================================================
+
+RUN internalProc IN myFunc().
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (run_statement
+    (identifier)
+    (in_phrase
+      (function_call
+        (identifier)
+        (arguments)))))
+
+================================================================================
+PRECEDENCE 56 - subscribe function_call over subscribe expression
+================================================================================
+
+SUBSCRIBE TO myFunc() IN hPub.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (subscribe_statement
+    (function_call
+      (identifier)
+      (arguments))
+    (in_phrase
+      (identifier))))
+
+================================================================================
+PRECEDENCE 57 - subscribe body over identifier_or_qualified_name
+================================================================================
+
+SUBSCRIBE PROCEDURE hSub TO "evt" IN hPub.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (subscribe_statement
+    (identifier)
+    (string_literal)
+    (in_phrase
+      (identifier))))
+
+================================================================================
+PRECEDENCE 58 - update field target over update record
+================================================================================
+
+UPDATE Customer WITH FRAME f.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (update_statement
+    (field
+      (identifier))
+    (frame_phrase
+      (identifier))))

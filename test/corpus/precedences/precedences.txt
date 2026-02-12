@@ -1,0 +1,554 @@
+================================================================================
+PRECEDENCE - Binary operator ladder
+================================================================================
+
+x = 1 + 2 * 3.
+y = NOT a = b OR c = d.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assignment_statement
+    (identifier)
+    (assignment_operator)
+    (binary_expression
+      (number_literal)
+      (binary_expression
+        (number_literal)
+        (number_literal))))
+  (assignment_statement
+    (identifier)
+    (assignment_operator)
+    (binary_expression
+      (unary_expression
+        (binary_expression
+          (identifier)
+          (identifier)))
+      (binary_expression
+        (identifier)
+        (identifier)))))
+
+================================================================================
+PRECEDENCE - ASSIGN disambiguation
+================================================================================
+
+ASSIGN FRAME = FRAME foo:HANDLE.
+ASSIGN Customer EXCEPT Name NO-ERROR.
+ASSIGN SomeFunc() = 1.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assign_statement
+    (assign_phrase
+      (assign_pair
+        (identifier)
+        (object_access
+          (identifier)
+          (identifier)
+          (identifier)))))
+  (assign_statement
+    (identifier)
+    (identifier)
+    (no_error))
+  (assign_statement
+    (assign_phrase
+      (assign_pair
+        (function_call
+          (identifier)
+          (arguments))
+        (number_literal)))))
+
+================================================================================
+PRECEDENCE - BROWSE enable function call
+================================================================================
+
+DEFINE QUERY q FOR Customer.
+DEFINE BROWSE b1 QUERY q1 DISPLAY CustNum Name.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (query_definition
+    (identifier)
+    (query_table_list
+      (identifier)))
+  (browse_definition
+    (identifier)
+    (identifier)
+    (column
+      (identifier))
+    (column
+      (identifier))))
+
+================================================================================
+PRECEDENCE - CASE OR WHEN separator
+================================================================================
+
+CASE x:
+  WHEN a OR WHEN b THEN MESSAGE "m".
+END CASE.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (case_statement
+    (identifier)
+    (case_when_phrase
+      (identifier)
+      (identifier)
+      (message_statement
+        (string_literal)))))
+
+================================================================================
+PRECEDENCE - CREATE statement forms
+================================================================================
+
+CREATE BUFFER hBuf FOR TABLE Customer IN WIDGET-POOL wp.
+CREATE TEMP-TABLE tt.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (create_statement
+    (identifier)
+    (identifier)
+    (identifier))
+  (create_temp_table_statement
+    (identifier)))
+
+================================================================================
+PRECEDENCE - DATASET reference vs function call
+================================================================================
+
+ASSIGN c = dataset BDebtorShipTo:handle.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assign_statement
+    (assign_phrase
+      (assign_pair
+        (identifier)
+        (dataset_reference
+          (object_access
+            (identifier)
+            (identifier)))))))
+
+================================================================================
+PRECEDENCE - DELETE specialized statements
+================================================================================
+
+DELETE ALIAS myalias NO-ERROR.
+DELETE WIDGET-POOL wp.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (delete_alias_statement
+    (identifier)
+    (no_error))
+  (delete_widget_pool_statement
+    (identifier)))
+
+================================================================================
+PRECEDENCE - DISPLAY ambiguity matrix
+================================================================================
+
+DISPLAY Customer WITH BROWSE b.
+DISPLAY Customer.Name.
+DISPLAY SPACE(2) Customer.Name SKIP(1) Customer.City.
+DISPLAY outParam LABEL "Updated" SKIP newParam.
+DISPLAY menu WITH TITLE "t".
+DISPLAY menu.
+DISPLAY Customer.Name IN WINDOW hWin WITH FRAME f1 NO-ERROR.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (display_statement
+    (identifier)
+    (identifier))
+  (display_statement
+    (qualified_name
+      (identifier)
+      (identifier)))
+  (display_statement
+    (field
+      (parenthesized_expression
+        (number_literal)))
+    (field
+      (qualified_name
+        (identifier)
+        (identifier)))
+    (field
+      (parenthesized_expression
+        (number_literal)))
+    (field
+      (qualified_name
+        (identifier)
+        (identifier))))
+  (display_statement
+    (field
+      (identifier))
+    (format_phrase
+      (string_literal))
+    (field
+      (identifier)))
+  (display_statement
+    (field
+      (identifier))
+    (frame_phrase
+      (string_literal)))
+  (display_statement
+    (field
+      (identifier)))
+  (display_statement
+    (field
+      (widget_qualified_name
+        (qualified_name
+          (identifier)
+          (identifier))
+        (identifier)))
+    (frame_phrase
+      (identifier))
+    (no_error)))
+
+================================================================================
+PRECEDENCE - ENABLE expression item
+================================================================================
+
+ENABLE field1.
+ENABLE field1 FORMAT "x(10)" WHEN ok.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (enable_statement
+    (enable_item
+      (identifier)))
+  (enable_statement
+    (enable_item
+      (identifier)
+      (format_phrase
+        (string_literal))
+      (identifier))))
+
+================================================================================
+PRECEDENCE - EXPORT statement binding
+================================================================================
+
+EXPORT a.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (export_statement
+    (identifier)))
+
+================================================================================
+PRECEDENCE - FORMAT phrase disambiguation
+================================================================================
+
+PUT x FORMAT ("x(10)").
+PUT x FORMAT decF.
+SET field1 FORMAT "x(10)" WHEN ok.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (put_statement
+    (identifier)
+    (format_phrase
+      (string_literal)))
+  (put_statement
+    (identifier)
+    (format_phrase
+      (identifier)))
+  (set_statement
+    (field
+      (identifier)
+      (format_phrase
+        (string_literal))
+      (identifier))))
+
+================================================================================
+PRECEDENCE - INCLUDE as statement
+================================================================================
+
+{inc.i}
+a = 1.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (include)
+  (assignment_statement
+    (identifier)
+    (assignment_operator)
+    (number_literal)))
+
+================================================================================
+PRECEDENCE - INPUT family disambiguation
+================================================================================
+
+RUN STORED-PROCEDURE p (INPUT x = 1).
+INPUT THROUGH prog arg1.
+INPUT THROUGH prog myFunc().
+COLOR PROMPT INPUT field1 field2.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (run_stored_procedure_statement
+    (identifier)
+    (parameter_list
+      (binary_expression
+        (identifier)
+        (number_literal))))
+  (input_through_statement
+    (identifier)
+    (identifier))
+  (input_through_statement
+    (identifier)
+    (function_call
+      (identifier)
+      (arguments)))
+  (color_statement
+    (color_phrase
+      (identifier))
+    (identifier)
+    (identifier)))
+
+================================================================================
+PRECEDENCE - MESSAGE widget keyword value
+================================================================================
+
+MESSAGE MENU.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (message_statement
+    (identifier)))
+
+================================================================================
+PRECEDENCE - OS filename expressions
+================================================================================
+
+OS-APPEND myFunc() target.
+OS-DELETE VALUE(cFile).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (os_append_statement
+    (function_call
+      (identifier)
+      (arguments))
+    (identifier))
+  (os_delete_statement
+    (identifier)))
+
+================================================================================
+PRECEDENCE - PROMPT-FOR field vs record
+================================================================================
+
+PROMPT-FOR Customer.Name WITH FRAME f.
+PROMPT-FOR Customer WITH FRAME f.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (prompt_for_statement
+    (field
+      (qualified_name
+        (identifier)
+        (identifier)))
+    (frame_phrase
+      (identifier)))
+  (prompt_for_statement
+    (field
+      (identifier))
+    (frame_phrase
+      (identifier))))
+
+================================================================================
+PRECEDENCE - PUT TO binds to item
+================================================================================
+
+PUT a TO b.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (put_statement
+    (identifier)
+    (identifier)))
+
+================================================================================
+PRECEDENCE - RECORD phrase where option
+================================================================================
+
+FOR EACH customer WHERE customer.custnum > 0 BY customer.custnum:
+  DISPLAY customer.custnum.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (for_statement
+    (record
+      (record
+        (identifier)
+        (binary_expression
+          (qualified_name
+            (identifier)
+            (identifier))
+          (number_literal)))
+      (by_phrase
+        (qualified_name
+          (identifier)
+          (identifier))))
+    (body
+      (display_statement
+        (qualified_name
+          (identifier)
+          (identifier))))))
+
+================================================================================
+PRECEDENCE - RUN STORED-PROCEDURE and run context
+================================================================================
+
+RUN STORED-PROCEDURE sp_Insert (INPUT "John", INPUT 25).
+RUN internalProc IN myFunc().
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (run_stored_procedure_statement
+    (identifier)
+    (parameter_list
+      (string_literal)
+      (number_literal)))
+  (run_statement
+    (identifier)
+    (in_phrase
+      (function_call
+        (identifier)
+        (arguments)))))
+
+================================================================================
+PRECEDENCE - SET field vs record
+================================================================================
+
+SET Customer WITH FRAME f.
+SET Customer.Name WITH FRAME f.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (set_statement
+    (field
+      (identifier))
+    (frame_phrase
+      (identifier)))
+  (set_statement
+    (field
+      (qualified_name
+        (identifier)
+        (identifier)))
+    (frame_phrase
+      (identifier))))
+
+================================================================================
+PRECEDENCE - SUBSCRIBE expression and body
+================================================================================
+
+SUBSCRIBE TO myFunc() IN hPub.
+SUBSCRIBE PROCEDURE hSub TO "evt" IN hPub.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (subscribe_statement
+    (function_call
+      (identifier)
+      (arguments))
+    (in_phrase
+      (identifier)))
+  (subscribe_statement
+    (identifier)
+    (string_literal)
+    (in_phrase
+      (identifier))))
+
+================================================================================
+PRECEDENCE - UPDATE field vs record
+================================================================================
+
+UPDATE Customer WITH FRAME f.
+UPDATE Customer.Name WITH FRAME f.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (update_statement
+    (field
+      (identifier))
+    (frame_phrase
+      (identifier)))
+  (update_statement
+    (field
+      (qualified_name
+        (identifier)
+        (identifier)))
+    (frame_phrase
+      (identifier))))
+
+================================================================================
+PRECEDENCE - Widget phrase disambiguation
+================================================================================
+
+ON CHOOSE OF btnFind DO:
+  MESSAGE "ok".
+END.
+ON CHOOSE OF btnFind DO:
+END.
+ASSIGN MENU-ITEM m1:SENSITIVE IN MENU mymenu = TRUE.
+DISPLAY x IN FRAME f.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (on_statement
+    (identifier)
+    (of_phrase
+      (widget_phrase
+        (identifier)))
+    (do_statement
+      (body
+        (message_statement
+          (string_literal)))))
+  (on_statement
+    (identifier)
+    (of_phrase
+      (widget_phrase
+        (identifier)))
+    (do_statement
+      (body)))
+  (assign_statement
+    (assign_phrase
+      (assign_pair
+        (widget_qualified_name
+          (object_access
+            (identifier)
+            (identifier)
+            (identifier))
+          (identifier))
+        (boolean_literal))))
+  (display_statement
+    (field
+      (widget_qualified_name
+        (identifier)
+        (identifier)))))

@@ -1,0 +1,308 @@
+================================================================================
+CONFLICT - primary_expression vs function_call
+================================================================================
+
+x = myFunc(1).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assignment_statement
+    (identifier)
+    (assignment_operator)
+    (function_call
+      (identifier)
+      (arguments
+        (argument
+          (number_literal))))))
+
+================================================================================
+CONFLICT - display record vs widget-qualified/primary expression
+================================================================================
+
+DISPLAY Customer IN WINDOW w.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (display_statement
+    (field
+      (widget_qualified_name
+        (identifier)
+        (identifier)))))
+
+================================================================================
+CONFLICT - widget_entry ambiguous with identifier-like forms
+================================================================================
+
+ON CHOOSE OF btnFind DO:
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (on_statement
+    (identifier)
+    (of_phrase
+      (widget_phrase
+        (identifier)))
+    (do_statement
+      (body))))
+
+================================================================================
+CONFLICT - define modifier prefix matrix (buffer/property/data-source/dataset/event/query/temp-table/variable)
+================================================================================
+
+DEFINE NEW SHARED BUFFER bCust FOR Customer.
+DEFINE PRIVATE STATIC VARIABLE v AS INTEGER NO-UNDO.
+DEFINE PRIVATE STATIC QUERY q FOR Customer.
+CLASS X:
+  DEFINE PRIVATE STATIC DATA-SOURCE ds FOR bCust.
+  DEFINE PRIVATE STATIC DATASET dsOrder FOR ttOrder.
+  DEFINE PRIVATE STATIC TEMP-TABLE tt FIELD id AS INTEGER.
+  DEFINE PRIVATE STATIC PROPERTY p AS INTEGER NO-UNDO GET. SET.
+  DEFINE PRIVATE STATIC EVENT onChanged SIGNATURE VOID ().
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (buffer_definition
+    (new_modifier)
+    (scope_modifier)
+    (identifier)
+    (identifier))
+  (variable_definition
+    (access_modifier)
+    (static_modifier)
+    (identifier)
+    (identifier)
+    (no_undo))
+  (query_definition
+    (access_modifier)
+    (static_modifier)
+    (identifier)
+    (query_table_list
+      (identifier)))
+  (class_definition
+    (identifier)
+    (data_source_definition
+      (access_modifier)
+      (static_modifier)
+      (identifier)
+      (identifier))
+    (dataset_definition
+      (access_modifier)
+      (static_modifier)
+      (identifier)
+      (identifier))
+    (temp_table_definition
+      (access_modifier)
+      (static_modifier)
+      (identifier)
+      (temp_table_field
+        (identifier)
+        (identifier)))
+    (property_definition
+      (access_modifier)
+      (static_modifier)
+      (identifier)
+      (identifier)
+      (no_undo))
+    (event_definition
+      (access_modifier)
+      (static_modifier)
+      (identifier)
+      (signature))))
+
+================================================================================
+CONFLICT - property_access_modifier vs event_access_modifier
+================================================================================
+
+CLASS X:
+  DEFINE PUBLIC PROPERTY p AS INTEGER NO-UNDO GET. SET.
+  DEFINE PUBLIC EVENT onE SIGNATURE VOID ().
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (class_definition
+    (identifier)
+    (property_definition
+      (access_modifier)
+      (identifier)
+      (identifier)
+      (no_undo))
+    (event_definition
+      (access_modifier)
+      (identifier)
+      (signature))))
+
+================================================================================
+CONFLICT - property_access_modifier vs dataset/temp-table/variable modifiers
+================================================================================
+
+CLASS X:
+  DEFINE PRIVATE PROPERTY p AS INTEGER NO-UNDO GET. SET.
+END.
+DEFINE PRIVATE VARIABLE v AS INTEGER NO-UNDO.
+DEFINE PRIVATE DATASET ds FOR ttOrder.
+DEFINE PRIVATE TEMP-TABLE tt FIELD id AS INTEGER.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (class_definition
+    (identifier)
+    (property_definition
+      (access_modifier)
+      (identifier)
+      (identifier)
+      (no_undo)))
+  (variable_definition
+    (access_modifier)
+    (identifier)
+    (identifier)
+    (no_undo))
+  (dataset_definition
+    (access_modifier)
+    (identifier)
+    (identifier))
+  (temp_table_definition
+    (access_modifier)
+    (identifier)
+    (temp_table_field
+      (identifier)
+      (identifier))))
+
+================================================================================
+CONFLICT - property_access_modifier vs variable_modifier
+================================================================================
+
+CLASS X:
+  DEFINE PROTECTED PROPERTY p AS INTEGER NO-UNDO GET. SET.
+END.
+DEFINE PROTECTED VARIABLE v AS INTEGER NO-UNDO.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (class_definition
+    (identifier)
+    (property_definition
+      (access_modifier)
+      (identifier)
+      (identifier)
+      (no_undo)))
+  (variable_definition
+    (access_modifier)
+    (identifier)
+    (identifier)
+    (no_undo)))
+
+================================================================================
+CONFLICT - property_access_modifier vs event_access_modifier vs variable_modifier
+================================================================================
+
+CLASS X:
+  DEFINE PACKAGE-PRIVATE PROPERTY p AS INTEGER NO-UNDO GET. SET.
+  DEFINE PACKAGE-PRIVATE EVENT onPkg SIGNATURE VOID ().
+END.
+DEFINE PACKAGE-PRIVATE VARIABLE vPkg AS INTEGER NO-UNDO.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (class_definition
+    (identifier)
+    (property_definition
+      (access_modifier)
+      (identifier)
+      (identifier)
+      (no_undo))
+    (event_definition
+      (access_modifier)
+      (identifier)
+      (signature)))
+  (variable_definition
+    (access_modifier)
+    (identifier)
+    (identifier)
+    (no_undo)))
+
+================================================================================
+CONFLICT - buffer/property_class/data_source_static/event_type/query/variable modifiers overlap
+================================================================================
+
+DEFINE PRIVATE STATIC BUFFER bCust FOR Customer.
+DEFINE PRIVATE STATIC QUERY q FOR Customer.
+DEFINE PRIVATE STATIC VARIABLE v AS INTEGER NO-UNDO.
+CLASS X:
+  DEFINE PRIVATE STATIC DATA-SOURCE ds FOR bCust.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (buffer_definition
+    (access_modifier)
+    (static_modifier)
+    (identifier)
+    (identifier))
+  (query_definition
+    (access_modifier)
+    (static_modifier)
+    (identifier)
+    (query_table_list
+      (identifier)))
+  (variable_definition
+    (access_modifier)
+    (static_modifier)
+    (identifier)
+    (identifier)
+    (no_undo))
+  (class_definition
+    (identifier)
+    (data_source_definition
+      (access_modifier)
+      (static_modifier)
+      (identifier)
+      (identifier))))
+
+================================================================================
+CONFLICT - property_class_modifier vs event_type_modifier
+================================================================================
+
+CLASS X:
+  DEFINE ABSTRACT PROPERTY p AS INTEGER NO-UNDO GET. SET.
+  DEFINE ABSTRACT EVENT onAbs SIGNATURE VOID ().
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (class_definition
+    (identifier)
+    (property_definition
+      (abstract_modifier)
+      (identifier)
+      (identifier)
+      (no_undo))
+    (event_definition
+      (abstract_modifier)
+      (identifier)
+      (signature))))
+
+================================================================================
+CONFLICT - unsubscribe body vs identifier-like expression
+================================================================================
+
+UNSUBSCRIBE PROCEDURE hSub TO cEvent.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (unsubscribe_statement
+    (identifier)
+    (identifier)))
