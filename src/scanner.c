@@ -17,12 +17,15 @@ void *tree_sitter_abl_external_scanner_create() {
 }
 
 void tree_sitter_abl_external_scanner_destroy(void *payload) {
+  (void)payload;
 }
 
 unsigned int tree_sitter_abl_external_scanner_serialize(
   void *payload,
   char *buffer
 ) {
+  (void)payload;
+  (void)buffer;
   return 0u;
 }
 
@@ -31,6 +34,9 @@ void tree_sitter_abl_external_scanner_deserialize(
   const char *buffer,
   unsigned int length
 ) {
+  (void)payload;
+  (void)buffer;
+  (void)length;
 }
 
 bool tree_sitter_abl_external_scanner_scan(
@@ -38,6 +44,7 @@ bool tree_sitter_abl_external_scanner_scan(
   TSLexer *lexer,
   const bool *valid_symbols
 ) {
+  (void)payload;
   if (valid_symbols[NAMEDOT] || valid_symbols[NAMECOLON] || valid_symbols[NAMEDOUBLECOLON] ||
       valid_symbols[NAMEPLUS] || valid_symbols[COLON] || valid_symbols[TERMINATOR_DOT]) {
     if (lexer->lookahead == '.') {
