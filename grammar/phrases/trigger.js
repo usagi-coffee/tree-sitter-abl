@@ -19,7 +19,7 @@ module.exports = ({ kw }) => ({
     ),
 
   __trigger_event_list: ($) =>
-    seq($.identifier, repeat(seq(",", $.identifier))),
+    seq($._events, repeat(seq(",", $._events))),
 
   __trigger_body: ($) =>
     seq(

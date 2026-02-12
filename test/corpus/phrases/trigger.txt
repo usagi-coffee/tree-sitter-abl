@@ -3,6 +3,7 @@ TRIGGERS
 ================================================================================
 
 DEFINE VARIABLE v AS CHARACTER TRIGGERS: ON GO DO: END. END TRIGGERS.
+DEFINE VARIABLE v2 AS CHARACTER TRIGGERS: ON "RETURN", 13 DO: END. END TRIGGERS.
 
 --------------------------------------------------------------------------------
 
@@ -12,4 +13,11 @@ DEFINE VARIABLE v AS CHARACTER TRIGGERS: ON GO DO: END. END TRIGGERS.
     type: (identifier)
     (trigger_phrase
       event: (identifier)
+      (trigger_body)))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (trigger_phrase
+      event: (string_literal)
+      event: (number_literal)
       (trigger_body))))

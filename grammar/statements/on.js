@@ -4,46 +4,71 @@ module.exports = ({ kw }) => ({
       seq(
         kw("ON"),
         choice(
-          // Database event: ON event OF database-object
-          seq(
-            field("event", $.__on_database_event),
-            kw("OF"),
-            field("object", $._identifier_or_qualified_name),
-            optional(alias($.__on_referencing_phrase, $.referencing_phrase)),
-            optional(alias(kw("OVERRIDE"), $.override)),
-            choice(seq(kw("REVERT"), $._terminator), $._statement),
-          ),
-          // UI event: ON event-list [OF widget-list] [ANYWHERE]
-          seq(
-            $.__on_ui_event_widgets,
-            repeat(seq(kw("OR"), $.__on_ui_event_widgets)),
-            optional(alias(kw("ANYWHERE"), $.anywhere)),
-            choice(
-              seq(kw("REVERT"), $._terminator),
-              $._statement,
-              seq(
-                kw("PERSISTENT"),
-                kw("RUN"),
-                field("procedure", $.identifier),
-                optional($.arguments),
-                $._terminator,
-              ),
-            ),
-          ),
+          $.__on_ui_event_branch,
+          $.__on_database_event_branch,
+          $.__on_key_label_branch,
+          $.__on_web_notify_branch,
         ),
+      ),
+    ),
+  __on_ui_event_branch: ($) =>
+    choice($.__on_ui_anywhere_branch, $.__on_ui_of_branch),
+  __on_ui_anywhere_branch: ($) =>
+    seq(
+      $.__on_ui_events,
+      alias(kw("ANYWHERE"), $.anywhere),
+      $.__on_trigger_action,
+    ),
+  __on_ui_of_branch: ($) =>
+    seq(
+      $.__on_ui_event_widgets,
+      repeat(seq(kw("OR"), $.__on_ui_event_widgets)),
+      optional(alias(kw("ANYWHERE"), $.anywhere)),
+      $.__on_trigger_action,
+    ),
+  __on_database_event_branch: ($) =>
+    seq(
+      field("event", $.__on_database_event_name),
+      kw("OF"),
+      field("object", $._identifier_or_qualified_name),
+      optional(alias($.__on_referencing_phrase, $.referencing_phrase)),
+      optional(alias(kw("OVERRIDE"), $.override)),
+      choice(seq(kw("REVERT"), $._terminator), $._statement),
+    ),
+  __on_key_label_branch: ($) =>
+    seq(field("event", $.__on_key_label), $._statement),
+  __on_web_notify_branch: ($) =>
+    seq(
+      field("event", $.__on_web_notify_event),
+      alias(kw("ANYWHERE"), $.anywhere),
+      $._statement,
+    ),
+  __on_trigger_action: ($) =>
+    choice(
+      seq(kw("REVERT"), $._terminator),
+      $._statement,
+      seq(
+        kw("PERSISTENT"),
+        kw("RUN"),
+        field("procedure", $.identifier),
+        optional($.arguments),
+        $._terminator,
       ),
     ),
 
   __on_database_event: ($) =>
     choice(kw("CREATE"), kw("DELETE"), kw("FIND"), kw("WRITE"), kw("ASSIGN")),
+  __on_database_event_name: ($) => $.__on_database_event,
+  __on_key_label: ($) => $._events,
+  __on_web_notify_event: ($) => $.string_literal,
   __on_ui_event: ($) => $._events,
   __on_ui_events: ($) =>
-    seq(field("event", $.__on_ui_event), repeat(seq(",", field("event", $.__on_ui_event)))),
-  __on_ui_event_widgets: ($) =>
     seq(
-      $.__on_ui_events,
-      optional(alias($.__on_of_phrase, $.of_phrase)),
+      field("event", $.__on_ui_event),
+      repeat(seq(",", field("event", $.__on_ui_event))),
     ),
+  __on_ui_event_widgets: ($) =>
+    seq($.__on_ui_events, alias($.__on_of_phrase, $.of_phrase)),
   __on_of_phrase: ($) =>
     seq(
       kw("OF"),
