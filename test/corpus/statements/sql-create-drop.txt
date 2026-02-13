@@ -1,0 +1,92 @@
+================================================================================
+SQL CREATE / DROP
+================================================================================
+
+CREATE DOMAIN yes_no AS CHARACTER(1);
+CREATE GROUP report_group;
+CREATE INDEX idx_customer_name ON customer(name);
+CREATE SEQUENCE seq_invoice START WITH 100;
+CREATE SUPER-TENANT root_tenant;
+CREATE SYNONYM cust FOR pub.customer;
+CREATE TABLE customer (custnum INTEGER, name VARCHAR(80));
+CREATE TENANT tenant_b;
+CREATE TRIGGER trg_customer_audit BEFORE INSERT ON customer FOR EACH ROW;
+CREATE USER app_user;
+CREATE VIEW v_customer AS SELECT custnum, name FROM customer;
+DROP DOMAIN yes_no;
+DROP GROUP report_group;
+DROP INDEX idx_customer_name;
+DROP PROCEDURE "p_calc";
+DROP SEQUENCE seq_invoice;
+DROP SYNONYM cust;
+DROP TABLE customer;
+DROP TENANT tenant_b;
+DROP TRIGGER trg_customer_audit;
+DROP USER app_user;
+DROP VIEW v_customer;
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (sql_create_domain_statement
+    (identifier)
+    (identifier)
+    (number_literal))
+  (sql_create_group_statement
+    (identifier))
+  (sql_create_index_statement
+    (identifier)
+    (identifier)
+    (identifier))
+  (sql_create_sequence_statement
+    (identifier)
+    (number_literal))
+  (sql_create_super_tenant_statement
+    (identifier))
+  (sql_create_synonym_statement
+    (identifier)
+    (qualified_name
+      (identifier)
+      (identifier)))
+  (sql_create_table_statement
+    (identifier)
+    (identifier)
+    (identifier)
+    (identifier)
+    (number_literal))
+  (sql_create_tenant_statement
+    (identifier))
+  (sql_create_trigger_statement
+    (identifier)
+    (identifier)
+    (identifier)
+    (identifier))
+  (sql_create_user_statement
+    (identifier))
+  (sql_create_view_statement
+    (identifier)
+    (identifier)
+    (identifier)
+    (identifier))
+  (sql_drop_domain_statement
+    (identifier))
+  (sql_drop_group_statement
+    (identifier))
+  (sql_drop_index_statement
+    (identifier))
+  (sql_drop_procedure_statement
+    (string_literal))
+  (sql_drop_sequence_statement
+    (identifier))
+  (sql_drop_synonym_statement
+    (identifier))
+  (sql_drop_table_statement
+    (identifier))
+  (sql_drop_tenant_statement
+    (identifier))
+  (sql_drop_trigger_statement
+    (identifier))
+  (sql_drop_user_statement
+    (identifier))
+  (sql_drop_view_statement
+    (identifier)))

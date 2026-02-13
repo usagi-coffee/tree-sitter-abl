@@ -1,0 +1,54 @@
+================================================================================
+SQL SET / SHOW
+================================================================================
+
+SET CATALOG pub;
+SET DATABASE DEFAULT AREA 6;
+SET PRO_CONNECT LOG 1;
+SET PRO_CONNECT QUERY_TIMEOUT 120;
+SET PRO_SERVER QUERY_TIMEOUT 30;
+SET PRO_SERVER LOG 2;
+SET ROWCOUNT 100;
+SET SCHEMA pub;
+SET TRANSACTION ISOLATION LEVEL READ COMMITTED;
+SHOW CATALOGS;
+SHOW DATABASE DEFAULT AREA;
+SHOW GROUP report_group;
+SHOW PARTITION p1;
+SHOW ROWCOUNT;
+SHOW TENANT tenant_a;
+SHOW ENCRYPT ON customer;
+SHOW COLUMN STATISTICS CIPHER;
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (sql_set_catalog_statement
+    (identifier))
+  (sql_set_database_default_area_statement
+    (number_literal))
+  (sql_set_pro_connect_log_statement
+    (number_literal))
+  (sql_set_pro_connect_query_timeout_statement
+    (number_literal))
+  (sql_set_pro_server_query_timeout_statement
+    (number_literal))
+  (sql_set_pro_server_log_statement
+    (number_literal))
+  (sql_set_rowcount_statement
+    (number_literal))
+  (sql_set_schema_statement
+    (identifier))
+  (sql_set_transaction_isolation_level_statement)
+  (sql_show_catalogs_statement)
+  (sql_show_database_default_area_statement)
+  (sql_show_group_statement
+    (identifier))
+  (sql_show_partition_statement
+    (identifier))
+  (sql_show_rowcount_statement)
+  (sql_show_tenant_statement
+    (identifier))
+  (sql_show_encrypt_on_statement
+    (identifier))
+  (sql_show_column_statistics_cipher_statement))

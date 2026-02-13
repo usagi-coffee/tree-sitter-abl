@@ -1,0 +1,55 @@
+================================================================================
+SQL DML / QUERY
+================================================================================
+
+CALL proc_rebuild_stats 1 "ALL";
+DELETE FROM customer WHERE custnum = 1;
+GRANT SELECT ON customer TO app_user;
+INSERT INTO customer (custnum, name) VALUES (1, 'Acme');
+LOCK TABLE customer IN EXCLUSIVE MODE;
+REVOKE SELECT ON customer FROM app_user;
+SELECT custnum, name FROM customer WHERE custnum > 0;
+UPDATE customer SET name = 'Acme 2' WHERE custnum = 1;
+UPDATE STATISTICS customer;
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (call_statement
+    (identifier)
+    (argument
+      (number_literal))
+    (argument
+      (string_literal)))
+  (sql_delete_statement
+    (identifier)
+    (identifier)
+    (number_literal))
+  (sql_grant_statement
+    (identifier)
+    (identifier))
+  (sql_insert_statement
+    (identifier)
+    (identifier)
+    (identifier)
+    (number_literal)
+    (string_literal))
+  (sql_lock_table_statement
+    (identifier))
+  (sql_revoke_statement
+    (identifier)
+    (identifier))
+  (sql_select_statement
+    (identifier)
+    (identifier)
+    (identifier)
+    (identifier)
+    (number_literal))
+  (sql_update_statement
+    (identifier)
+    (identifier)
+    (string_literal)
+    (identifier)
+    (number_literal))
+  (sql_update_statistics_statement
+    (identifier)))

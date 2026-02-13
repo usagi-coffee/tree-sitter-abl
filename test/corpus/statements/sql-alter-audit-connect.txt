@@ -1,0 +1,63 @@
+================================================================================
+SQL ALTER / AUDIT / CONNECT
+================================================================================
+
+ALTER DATABASE SET PRO_ENABLE_LARGE_KEYS 'Y';
+ALTER DATABASE SET PRO_ENABLE_64BIT_SEQUENCES 'Y';
+ALTER DATABASE SET COLUMN STATISTICS CIPHER 'AES_CFB_256';
+ALTER DATABASE SET COLUMN STATISTICS CIPHER 'AES_CFB_128' WITH DELETE;
+ALTER GROUP sales_group ADD USER app_user;
+ALTER SEQUENCE seq_order INCREMENT BY 10;
+ALTER TABLE customer ADD COLUMN nickname VARCHAR(40);
+ALTER TENANT tenant_a SET ACTIVE;
+ALTER USER app_user PASSWORD 'secret';
+AUDIT INSERT ON customer;
+AUDIT SET POLICY strict_mode;
+COMMIT;
+COMMIT WORK;
+CONNECT AS CATALOG pub;
+DISCONNECT CATALOG pub;
+ROLLBACK;
+ROLLBACK WORK;
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (sql_alter_database_set_pro_enable_large_keys_statement
+    (string_literal))
+  (sql_alter_database_set_pro_enable_64bit_sequences_statement
+    (string_literal))
+  (sql_alter_database_set_column_statistics_statement
+    (string_literal))
+  (sql_alter_database_set_column_statistics_statement
+    (string_literal))
+  (sql_alter_group_statement
+    (identifier)
+    (identifier))
+  (sql_alter_sequence_statement
+    (identifier)
+    (number_literal))
+  (sql_alter_table_statement
+    (identifier)
+    (identifier)
+    (number_literal))
+  (sql_alter_tenant_statement
+    (identifier)
+    (identifier))
+  (sql_alter_user_statement
+    (identifier)
+    (string_literal))
+  (sql_audit_insert_statement
+    (identifier))
+  (sql_audit_set_statement
+    (identifier))
+  (sql_commit_statement)
+  (sql_commit_statement
+    (identifier))
+  (sql_connect_as_catalog_statement
+    (identifier))
+  (sql_disconnect_catalog_statement
+    (identifier))
+  (sql_rollback_statement)
+  (sql_rollback_statement
+    (identifier)))
