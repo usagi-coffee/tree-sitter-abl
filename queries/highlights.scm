@@ -169,6 +169,7 @@
   (index_hint)
   (join_by_sqldb)
   (keep_messages)
+  (key_function)
   (landscape)
   (large)
   (last)
@@ -653,7 +654,6 @@
   "RETRY-CANCEL"
   "RETURN"
   "RETURNS"
-  "REVERT"
   "RIGHT"
   "RIGHT-ALIGNED"
   "ROUTINE-LEVEL"

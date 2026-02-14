@@ -36,15 +36,18 @@ END.
       left: (identifier)
       right: (identifier))
     (referencing_phrase
-      old_field: (identifier)))
+      old_field: (identifier))
+    (revert))
   (on_statement
     object: (identifier)
-    (override))
+    (override)
+    (revert))
   (on_statement
     event: (string_literal)
     (of_phrase
       widget: (widget_phrase
-        handle: (identifier))))
+        handle: (identifier)))
+    (revert))
   (on_statement
     event: (identifier)
     (anywhere)
@@ -254,19 +257,16 @@ ON F5 ENDKEY.
         frame: (identifier))))
   (on_statement
     event: (identifier)
-    (expression_statement
-      (identifier)))
+    function: (key_function))
   (on_statement
     event: (identifier)
-    (expression_statement
-      (identifier)))
+    function: (key_function))
   (on_statement
     event: (identifier)
-    (bell_statement))
+    function: (key_function))
   (on_statement
     event: (identifier)
-    (expression_statement
-      (identifier))))
+    function: (key_function)))
 
 ================================================================================
 ON - OR event/widget clauses
@@ -305,3 +305,155 @@ END.
         frame: (identifier)))
     (do_statement
       (body))))
+
+================================================================================
+ON - Branch: UI ANYWHERE + REVERT
+================================================================================
+
+ON CHOOSE ANYWHERE REVERT.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (on_statement
+    event: (identifier)
+    (anywhere)
+    (revert)))
+
+================================================================================
+ON - Branch: UI OF + ANYWHERE + REVERT
+================================================================================
+
+ON CHOOSE OF btn1 ANYWHERE REVERT.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (on_statement
+    event: (identifier)
+    (of_phrase
+      widget: (widget_phrase
+        handle: (identifier)))
+    (anywhere)
+    (revert)))
+
+================================================================================
+ON - Branch: UI OF widget-list with MENU-ITEM entries
+================================================================================
+
+ON CHOOSE OF MENU-ITEM mi1, MENU-ITEM mi2 DO:
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (on_statement
+    event: (identifier)
+    (of_phrase
+      widget: (widget_phrase
+        handle: (identifier))
+      widget: (widget_phrase
+        handle: (identifier)))
+    (do_statement
+      (body))))
+
+================================================================================
+ON - Branch: UI OF/OR + ANYWHERE + PERSISTENT RUN
+================================================================================
+
+ON CHOOSE OF btn1 OR LEAVE OF btn2 ANYWHERE PERSISTENT RUN hProc (INPUT 1).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (on_statement
+    event: (identifier)
+    (of_phrase
+      widget: (widget_phrase
+        handle: (identifier)))
+    event: (identifier)
+    (of_phrase
+      widget: (widget_phrase
+        handle: (identifier)))
+    (anywhere)
+    procedure: (identifier)
+    (arguments
+      (argument
+        name: (number_literal)))))
+
+================================================================================
+ON - Branch: database event with REVERT
+================================================================================
+
+ON WRITE OF Customer REVERT.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (on_statement
+    object: (identifier)
+    (revert)))
+
+================================================================================
+ON - Branch: database event with referencing phrase + block
+================================================================================
+
+ON ASSIGN OF Customer.Name OLD VALUE oldVal DO:
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (on_statement
+    object: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (referencing_phrase
+      old_field: (identifier))
+    (do_statement
+      (body))))
+
+================================================================================
+ON - Branch: WEB-NOTIFY
+================================================================================
+
+ON "WEB-NOTIFY" ANYWHERE DO:
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (on_statement
+    event: (string_literal)
+    (anywhere)
+    (do_statement
+      (body))))
+
+================================================================================
+ON - Branch: key-label + key-function
+================================================================================
+
+ON F10 HELP.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (on_statement
+    event: (identifier)
+    function: (key_function)))
+
+================================================================================
+ON - Branch: OF + key-function action
+================================================================================
+
+ON "X" OF btn GO.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (on_statement
+    event: (string_literal)
+    (of_phrase
+      widget: (widget_phrase
+        handle: (identifier)))
+    function: (key_function)))
