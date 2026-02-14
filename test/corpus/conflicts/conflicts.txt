@@ -9,20 +9,20 @@ x = obj:method().
 
 (source_code
   (assignment_statement
-    (identifier)
-    (assignment_operator)
-    (function_call
-      (identifier)
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (function_call
+      function: (identifier)
       (arguments
         (argument
-          (number_literal)))))
+          name: (number_literal)))))
   (assignment_statement
-    (identifier)
-    (assignment_operator)
-    (function_call
-      (object_access
-        (identifier)
-        (identifier))
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (function_call
+      function: (object_access
+        left: (identifier)
+        right: (identifier))
       (arguments))))
 
 ================================================================================
@@ -38,18 +38,18 @@ DISPLAY Customer.Name.
 (source_code
   (display_statement
     (field
-      (widget_qualified_name
-        (identifier)
-        (identifier))))
+      field: (widget_qualified_name
+        target: (identifier)
+        widget: (identifier))))
   (display_statement
-    (identifier)
-    (identifier)
+    record: (identifier)
+    except: (identifier)
     (frame_phrase
-      (identifier)))
+      frame: (identifier)))
   (display_statement
-    (qualified_name
-      (identifier)
-      (identifier))))
+    record: (qualified_name
+      left: (identifier)
+      right: (identifier))))
 
 ================================================================================
 CONFLICT - widget entry vs identifier-like values
@@ -63,10 +63,10 @@ END.
 
 (source_code
   (on_statement
-    (identifier)
+    event: (identifier)
     (of_phrase
-      (widget_phrase
-        (identifier)))
+      widget: (widget_phrase
+        handle: (identifier)))
     (do_statement
       (body
         (message_statement
@@ -93,49 +93,49 @@ END.
   (buffer_definition
     (new_modifier)
     (scope_modifier)
-    (identifier)
-    (identifier))
+    name: (identifier)
+    table: (identifier))
   (variable_definition
     (access_modifier)
     (static_modifier)
-    (identifier)
-    (identifier)
+    name: (identifier)
+    type: (identifier)
     (no_undo))
   (query_definition
     (access_modifier)
     (static_modifier)
-    (identifier)
+    name: (identifier)
     (query_table_list
-      (identifier)))
+      table: (identifier)))
   (class_definition
-    (identifier)
+    name: (identifier)
     (data_source_definition
       (access_modifier)
       (static_modifier)
-      (identifier)
-      (identifier))
+      name: (identifier)
+      buffer: (identifier))
     (dataset_definition
       (access_modifier)
       (static_modifier)
-      (identifier)
-      (identifier))
+      name: (identifier)
+      table: (identifier))
     (temp_table_definition
       (access_modifier)
       (static_modifier)
-      (identifier)
+      name: (identifier)
       (temp_table_field
-        (identifier)
-        (identifier)))
+        name: (identifier)
+        type: (identifier)))
     (property_definition
       (access_modifier)
       (static_modifier)
-      (identifier)
-      (identifier)
+      name: (identifier)
+      type: (identifier)
       (no_undo))
     (event_definition
       (access_modifier)
       (static_modifier)
-      (identifier)
+      name: (identifier)
       (signature))))
 
 ================================================================================
@@ -151,19 +151,19 @@ DEFINE PACKAGE-PRIVATE VARIABLE vPkg AS INTEGER NO-UNDO.
 
 (source_code
   (class_definition
-    (identifier)
+    name: (identifier)
     (event_definition
       (access_modifier)
       (abstract_modifier)
       (override_modifier)
-      (identifier)
+      name: (identifier)
       (signature
-        (identifier)
-        (identifier))))
+        name: (identifier)
+        type: (identifier))))
   (variable_definition
     (access_modifier)
-    (identifier)
-    (identifier)
+    name: (identifier)
+    type: (identifier)
     (no_undo)))
 
 ================================================================================
@@ -177,9 +177,9 @@ UNSUBSCRIBE TO "MyEvent" IN hPub.
 
 (source_code
   (unsubscribe_statement
-    (identifier)
-    (identifier))
+    subscriber: (identifier)
+    event: (identifier))
   (unsubscribe_statement
-    (string_literal)
+    event: (string_literal)
     (in_phrase
-      (identifier))))
+      publisher: (identifier))))

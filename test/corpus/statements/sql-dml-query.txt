@@ -16,40 +16,40 @@ UPDATE STATISTICS customer;
 
 (source_code
   (call_statement
-    (identifier)
+    routine: (identifier)
     (argument
       (number_literal))
     (argument
       (string_literal)))
   (sql_delete_statement
-    (identifier)
-    (identifier)
-    (number_literal))
+    table: (identifier)
+    body: (identifier)
+    body: (number_literal))
   (sql_grant_statement
-    (identifier)
-    (identifier))
+    body: (identifier)
+    body: (identifier))
   (sql_insert_statement
-    (identifier)
-    (identifier)
-    (identifier)
-    (number_literal)
-    (string_literal))
+    table: (identifier)
+    body: (identifier)
+    body: (identifier)
+    body: (number_literal)
+    body: (string_literal))
   (sql_lock_table_statement
-    (identifier))
+    table: (identifier))
   (sql_revoke_statement
-    (identifier)
-    (identifier))
+    body: (identifier)
+    body: (identifier))
   (sql_select_statement
-    (identifier)
-    (identifier)
-    (identifier)
-    (identifier)
-    (number_literal))
+    body: (identifier)
+    body: (identifier)
+    body: (identifier)
+    body: (identifier)
+    body: (number_literal))
   (sql_update_statement
-    (identifier)
-    (identifier)
-    (string_literal)
-    (identifier)
-    (number_literal))
+    table: (identifier)
+    body: (identifier)
+    body: (string_literal)
+    body: (identifier)
+    body: (number_literal))
   (sql_update_statistics_statement
-    (identifier)))
+    body: (identifier)))

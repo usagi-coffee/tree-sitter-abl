@@ -24,31 +24,31 @@ SHOW COLUMN STATISTICS CIPHER;
 
 (source_code
   (sql_set_catalog_statement
-    (identifier))
+    catalog: (identifier))
   (sql_set_database_default_area_statement
-    (number_literal))
+    area: (number_literal))
   (sql_set_pro_connect_log_statement
-    (number_literal))
+    value: (number_literal))
   (sql_set_pro_connect_query_timeout_statement
-    (number_literal))
+    value: (number_literal))
   (sql_set_pro_server_query_timeout_statement
-    (number_literal))
+    value: (number_literal))
   (sql_set_pro_server_log_statement
-    (number_literal))
+    value: (number_literal))
   (sql_set_rowcount_statement
-    (number_literal))
+    value: (number_literal))
   (sql_set_schema_statement
-    (identifier))
+    schema: (identifier))
   (sql_set_transaction_isolation_level_statement)
   (sql_show_catalogs_statement)
   (sql_show_database_default_area_statement)
   (sql_show_group_statement
-    (identifier))
+    group: (identifier))
   (sql_show_partition_statement
-    (identifier))
+    partition: (identifier))
   (sql_show_rowcount_statement)
   (sql_show_tenant_statement
-    (identifier))
+    tenant: (identifier))
   (sql_show_encrypt_on_statement
-    (identifier))
+    body: (identifier))
   (sql_show_column_statistics_cipher_statement))

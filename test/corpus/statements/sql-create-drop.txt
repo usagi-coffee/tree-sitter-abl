@@ -29,64 +29,64 @@ DROP VIEW v_customer;
 
 (source_code
   (sql_create_domain_statement
-    (identifier)
-    (identifier)
-    (number_literal))
+    domain: (identifier)
+    body: (identifier)
+    body: (number_literal))
   (sql_create_group_statement
-    (identifier))
+    group: (identifier))
   (sql_create_index_statement
-    (identifier)
-    (identifier)
-    (identifier))
+    index: (identifier)
+    body: (identifier)
+    body: (identifier))
   (sql_create_sequence_statement
-    (identifier)
-    (number_literal))
+    sequence: (identifier)
+    body: (number_literal))
   (sql_create_super_tenant_statement
-    (identifier))
+    tenant: (identifier))
   (sql_create_synonym_statement
-    (identifier)
-    (qualified_name
-      (identifier)
-      (identifier)))
+    synonym: (identifier)
+    body: (qualified_name
+      left: (identifier)
+      right: (identifier)))
   (sql_create_table_statement
-    (identifier)
-    (identifier)
-    (identifier)
-    (identifier)
-    (number_literal))
+    table: (identifier)
+    body: (identifier)
+    body: (identifier)
+    body: (identifier)
+    body: (number_literal))
   (sql_create_tenant_statement
-    (identifier))
+    tenant: (identifier))
   (sql_create_trigger_statement
-    (identifier)
-    (identifier)
-    (identifier)
-    (identifier))
+    trigger: (identifier)
+    body: (identifier)
+    body: (identifier)
+    body: (identifier))
   (sql_create_user_statement
-    (identifier))
+    user: (identifier))
   (sql_create_view_statement
-    (identifier)
-    (identifier)
-    (identifier)
-    (identifier))
+    view: (identifier)
+    body: (identifier)
+    body: (identifier)
+    body: (identifier))
   (sql_drop_domain_statement
-    (identifier))
+    domain: (identifier))
   (sql_drop_group_statement
-    (identifier))
+    group: (identifier))
   (sql_drop_index_statement
-    (identifier))
+    index: (identifier))
   (sql_drop_procedure_statement
-    (string_literal))
+    procedure: (string_literal))
   (sql_drop_sequence_statement
-    (identifier))
+    sequence: (identifier))
   (sql_drop_synonym_statement
-    (identifier))
+    synonym: (identifier))
   (sql_drop_table_statement
-    (identifier))
+    table: (identifier))
   (sql_drop_tenant_statement
-    (identifier))
+    tenant: (identifier))
   (sql_drop_trigger_statement
-    (identifier))
+    trigger: (identifier))
   (sql_drop_user_statement
-    (identifier))
+    user: (identifier))
   (sql_drop_view_statement
-    (identifier)))
+    view: (identifier)))

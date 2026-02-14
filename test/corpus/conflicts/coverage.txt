@@ -8,13 +8,13 @@ x = myFunc(1).
 
 (source_code
   (assignment_statement
-    (identifier)
-    (assignment_operator)
-    (function_call
-      (identifier)
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (function_call
+      function: (identifier)
       (arguments
         (argument
-          (number_literal))))))
+          name: (number_literal))))))
 
 ================================================================================
 CONFLICT - display record vs widget-qualified/primary expression
@@ -27,9 +27,9 @@ DISPLAY Customer IN WINDOW w.
 (source_code
   (display_statement
     (field
-      (widget_qualified_name
-        (identifier)
-        (identifier)))))
+      field: (widget_qualified_name
+        target: (identifier)
+        widget: (identifier)))))
 
 ================================================================================
 CONFLICT - widget_entry ambiguous with identifier-like forms
@@ -42,10 +42,10 @@ END.
 
 (source_code
   (on_statement
-    (identifier)
+    event: (identifier)
     (of_phrase
-      (widget_phrase
-        (identifier)))
+      widget: (widget_phrase
+        handle: (identifier)))
     (do_statement
       (body))))
 
@@ -70,49 +70,49 @@ END.
   (buffer_definition
     (new_modifier)
     (scope_modifier)
-    (identifier)
-    (identifier))
+    name: (identifier)
+    table: (identifier))
   (variable_definition
     (access_modifier)
     (static_modifier)
-    (identifier)
-    (identifier)
+    name: (identifier)
+    type: (identifier)
     (no_undo))
   (query_definition
     (access_modifier)
     (static_modifier)
-    (identifier)
+    name: (identifier)
     (query_table_list
-      (identifier)))
+      table: (identifier)))
   (class_definition
-    (identifier)
+    name: (identifier)
     (data_source_definition
       (access_modifier)
       (static_modifier)
-      (identifier)
-      (identifier))
+      name: (identifier)
+      buffer: (identifier))
     (dataset_definition
       (access_modifier)
       (static_modifier)
-      (identifier)
-      (identifier))
+      name: (identifier)
+      table: (identifier))
     (temp_table_definition
       (access_modifier)
       (static_modifier)
-      (identifier)
+      name: (identifier)
       (temp_table_field
-        (identifier)
-        (identifier)))
+        name: (identifier)
+        type: (identifier)))
     (property_definition
       (access_modifier)
       (static_modifier)
-      (identifier)
-      (identifier)
+      name: (identifier)
+      type: (identifier)
       (no_undo))
     (event_definition
       (access_modifier)
       (static_modifier)
-      (identifier)
+      name: (identifier)
       (signature))))
 
 ================================================================================
@@ -128,15 +128,15 @@ END.
 
 (source_code
   (class_definition
-    (identifier)
+    name: (identifier)
     (property_definition
       (access_modifier)
-      (identifier)
-      (identifier)
+      name: (identifier)
+      type: (identifier)
       (no_undo))
     (event_definition
       (access_modifier)
-      (identifier)
+      name: (identifier)
       (signature))))
 
 ================================================================================
@@ -154,27 +154,27 @@ DEFINE PRIVATE TEMP-TABLE tt FIELD id AS INTEGER.
 
 (source_code
   (class_definition
-    (identifier)
+    name: (identifier)
     (property_definition
       (access_modifier)
-      (identifier)
-      (identifier)
+      name: (identifier)
+      type: (identifier)
       (no_undo)))
   (variable_definition
     (access_modifier)
-    (identifier)
-    (identifier)
+    name: (identifier)
+    type: (identifier)
     (no_undo))
   (dataset_definition
     (access_modifier)
-    (identifier)
-    (identifier))
+    name: (identifier)
+    table: (identifier))
   (temp_table_definition
     (access_modifier)
-    (identifier)
+    name: (identifier)
     (temp_table_field
-      (identifier)
-      (identifier))))
+      name: (identifier)
+      type: (identifier))))
 
 ================================================================================
 CONFLICT - property_access_modifier vs variable_modifier
@@ -189,16 +189,16 @@ DEFINE PROTECTED VARIABLE v AS INTEGER NO-UNDO.
 
 (source_code
   (class_definition
-    (identifier)
+    name: (identifier)
     (property_definition
       (access_modifier)
-      (identifier)
-      (identifier)
+      name: (identifier)
+      type: (identifier)
       (no_undo)))
   (variable_definition
     (access_modifier)
-    (identifier)
-    (identifier)
+    name: (identifier)
+    type: (identifier)
     (no_undo)))
 
 ================================================================================
@@ -215,20 +215,20 @@ DEFINE PACKAGE-PRIVATE VARIABLE vPkg AS INTEGER NO-UNDO.
 
 (source_code
   (class_definition
-    (identifier)
+    name: (identifier)
     (property_definition
       (access_modifier)
-      (identifier)
-      (identifier)
+      name: (identifier)
+      type: (identifier)
       (no_undo))
     (event_definition
       (access_modifier)
-      (identifier)
+      name: (identifier)
       (signature)))
   (variable_definition
     (access_modifier)
-    (identifier)
-    (identifier)
+    name: (identifier)
+    type: (identifier)
     (no_undo)))
 
 ================================================================================
@@ -248,27 +248,27 @@ END.
   (buffer_definition
     (access_modifier)
     (static_modifier)
-    (identifier)
-    (identifier))
+    name: (identifier)
+    table: (identifier))
   (query_definition
     (access_modifier)
     (static_modifier)
-    (identifier)
+    name: (identifier)
     (query_table_list
-      (identifier)))
+      table: (identifier)))
   (variable_definition
     (access_modifier)
     (static_modifier)
-    (identifier)
-    (identifier)
+    name: (identifier)
+    type: (identifier)
     (no_undo))
   (class_definition
-    (identifier)
+    name: (identifier)
     (data_source_definition
       (access_modifier)
       (static_modifier)
-      (identifier)
-      (identifier))))
+      name: (identifier)
+      buffer: (identifier))))
 
 ================================================================================
 CONFLICT - property_class_modifier vs event_type_modifier
@@ -283,15 +283,15 @@ END.
 
 (source_code
   (class_definition
-    (identifier)
+    name: (identifier)
     (property_definition
       (abstract_modifier)
-      (identifier)
-      (identifier)
+      name: (identifier)
+      type: (identifier)
       (no_undo))
     (event_definition
       (abstract_modifier)
-      (identifier)
+      name: (identifier)
       (signature))))
 
 ================================================================================
@@ -304,5 +304,5 @@ UNSUBSCRIBE PROCEDURE hSub TO cEvent.
 
 (source_code
   (unsubscribe_statement
-    (identifier)
-    (identifier)))
+    subscriber: (identifier)
+    event: (identifier)))

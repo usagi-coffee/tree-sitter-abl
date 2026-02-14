@@ -25,7 +25,11 @@ module.exports = ({ kw }) => ({
       alias($.__interface_temp_table, $.temp_table_definition),
       alias($.__interface_dataset, $.dataset_definition),
       alias($.__interface_event, $.event_definition),
-      $.preprocessor_directive,
+      $.global_define_preprocessor_directive,
+      $.scoped_define_preprocessor_directive,
+      alias($.if_preprocessor_directive_statement, $.if_preprocessor_directive),
+      $.message_preprocessor_directive,
+      $.undefine_preprocessor_directive,
       alias($.include_expression, $.include_reference),
     ),
 

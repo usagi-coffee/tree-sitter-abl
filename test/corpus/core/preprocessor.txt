@@ -1,24 +1,34 @@
 ================================================================================
-PREPROCESSOR DIRECTIVES
+PREPROCESSOR GLOBAL-DEFINE
 ================================================================================
 
 &GLOBAL-DEFINE APP-NAME "demo"
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (global_define_preprocessor_directive
+    name: (identifier)
+    value: (preprocessor_value)))
+
+================================================================================
+PREPROCESSOR GLOBAL-DEFINE with path value
+================================================================================
+
+&GLOBAL-DEFINE ZM_INC /zmd/dev/INC/
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (global_define_preprocessor_directive
+    name: (identifier)
+    value: (preprocessor_value)))
+
+================================================================================
+PREPROCESSOR SCOPED-DEFINE
+================================================================================
+
 &SCOPED-DEFINE FLAG YES
-&UNDEFINE FLAG
-&MESSAGE "hello"
-&IF DEFINED (FLAG) EQ 0 &THEN
-&IF TRUE
-&THEN
-&ELSEIF FALSE
-&ELSE
-&ENDIF
-
-&if DEFINED(is_Running) <> 0 &THEN
-  DEFINE VARIABLE cParm AS CHARACTER.
-&ELSE
-  DEFINE INPUT PARAMETER cParm AS CHARACTER.
-&ENDIF
-
 &Scoped-define OPEN-QUERY-DEFAULT-FRAME OPEN QUERY DEFAULT-FRAME FOR EACH ITEM ~
       WHERE item.system_id = ipcItemSysid AND ~
 item.item = ipcItem NO-LOCK.
@@ -27,24 +37,109 @@ item.item = ipcItem NO-LOCK.
 --------------------------------------------------------------------------------
 
 (source_code
-  (preprocessor_directive)
-  (preprocessor_directive)
-  (preprocessor_directive)
-  (preprocessor_directive)
-  (preprocessor_directive)
-  (preprocessor_directive)
-  (preprocessor_directive)
-  (preprocessor_directive)
-  (preprocessor_directive)
-  (preprocessor_directive)
-  (preprocessor_directive)
+  (scoped_define_preprocessor_directive
+    name: (identifier)
+    value: (preprocessor_value))
+  (scoped_define_preprocessor_directive
+    name: (identifier)
+    value: (preprocessor_value))
+  (scoped_define_preprocessor_directive
+    name: (identifier)
+    value: (preprocessor_value)))
+
+================================================================================
+PREPROCESSOR UNDEFINE
+================================================================================
+
+&UNDEFINE FLAG
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (undefine_preprocessor_directive
+    name: (identifier)))
+
+================================================================================
+PREPROCESSOR MESSAGE
+================================================================================
+
+&MESSAGE "hello"
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (message_preprocessor_directive
+    value: (preprocessor_value)))
+
+================================================================================
+PREPROCESSOR IF DIRECTIVES - single-line forms
+================================================================================
+
+&IF DEFINED (FLAG) EQ 0 &THEN
+&IF TRUE
+&THEN
+&ELSEIF FALSE
+&ELSE
+&ENDIF
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (if_preprocessor_directive
+    (if_branch
+      condition: (binary_expression
+        (function_call
+          function: (identifier)
+          (arguments
+            (argument
+              name: (identifier))))
+        (number_literal))))
+  (if_preprocessor_directive
+    (then_branch))
+  (if_preprocessor_directive
+    (if_branch
+      condition: (boolean_literal)))
+  (if_preprocessor_directive
+    (then_branch))
+  (if_preprocessor_directive
+    (elseif_branch
+      condition: (boolean_literal)))
+  (if_preprocessor_directive
+    (else_branch))
+  (if_preprocessor_directive
+    (endif_branch)))
+
+================================================================================
+PREPROCESSOR IF DIRECTIVES - mixed with statements
+================================================================================
+
+&if DEFINED(is_Running) <> 0 &THEN
+  DEFINE VARIABLE cParm AS CHARACTER.
+&ELSE
+  DEFINE INPUT PARAMETER cParm AS CHARACTER.
+&ENDIF
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (if_preprocessor_directive
+    (if_branch
+      condition: (binary_expression
+        (function_call
+          function: (identifier)
+          (arguments
+            (argument
+              name: (identifier))))
+        (number_literal))))
+  (if_preprocessor_directive
+    (then_branch))
   (variable_definition
     name: (identifier)
     type: (identifier))
-  (preprocessor_directive)
+  (if_preprocessor_directive
+    (else_branch))
   (parameter_definition
     name: (identifier)
     type: (identifier))
-  (preprocessor_directive)
-  (preprocessor_directive)
-  (preprocessor_directive))
+  (if_preprocessor_directive
+    (endif_branch)))

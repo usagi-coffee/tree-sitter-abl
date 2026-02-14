@@ -9,17 +9,17 @@ y = NOT a = b OR c = d.
 
 (source_code
   (assignment_statement
-    (identifier)
-    (assignment_operator)
-    (binary_expression
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (binary_expression
       (number_literal)
       (binary_expression
         (number_literal)
         (number_literal))))
   (assignment_statement
-    (identifier)
-    (assignment_operator)
-    (binary_expression
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (binary_expression
       (unary_expression
         (binary_expression
           (identifier)
@@ -42,22 +42,22 @@ ASSIGN SomeFunc() = 1.
   (assign_statement
     (assign_phrase
       (assign_pair
-        (identifier)
-        (object_access
-          (identifier)
-          (identifier)
-          (identifier)))))
+        left: (identifier)
+        right: (object_access
+          widget: (identifier)
+          left: (identifier)
+          right: (identifier)))))
   (assign_statement
-    (identifier)
-    (identifier)
+    record: (identifier)
+    field: (identifier)
     (no_error))
   (assign_statement
     (assign_phrase
       (assign_pair
-        (function_call
-          (identifier)
+        left: (function_call
+          function: (identifier)
           (arguments))
-        (number_literal)))))
+        right: (number_literal)))))
 
 ================================================================================
 PRECEDENCE - BROWSE enable function call
@@ -70,16 +70,16 @@ DEFINE BROWSE b1 QUERY q1 DISPLAY CustNum Name.
 
 (source_code
   (query_definition
-    (identifier)
+    name: (identifier)
     (query_table_list
-      (identifier)))
+      table: (identifier)))
   (browse_definition
-    (identifier)
-    (identifier)
+    name: (identifier)
+    query: (identifier)
     (column
-      (identifier))
+      column: (identifier))
     (column
-      (identifier))))
+      column: (identifier))))
 
 ================================================================================
 PRECEDENCE - CASE OR WHEN separator
@@ -95,8 +95,8 @@ END CASE.
   (case_statement
     (identifier)
     (case_when_phrase
-      (identifier)
-      (identifier)
+      condition: (identifier)
+      condition: (identifier)
       (message_statement
         (string_literal)))))
 
@@ -111,11 +111,11 @@ CREATE TEMP-TABLE tt.
 
 (source_code
   (create_statement
-    (identifier)
-    (identifier)
-    (identifier))
+    handle: (identifier)
+    table: (identifier)
+    pool: (identifier))
   (create_temp_table_statement
-    (identifier)))
+    handle: (identifier)))
 
 ================================================================================
 PRECEDENCE - DATASET reference vs function call
@@ -129,11 +129,11 @@ ASSIGN c = dataset BDebtorShipTo:handle.
   (assign_statement
     (assign_phrase
       (assign_pair
-        (identifier)
-        (dataset_reference
-          (object_access
-            (identifier)
-            (identifier)))))))
+        left: (identifier)
+        right: (dataset_reference
+          dataset: (object_access
+            left: (identifier)
+            right: (identifier)))))))
 
 ================================================================================
 PRECEDENCE - DELETE specialized statements
@@ -146,10 +146,10 @@ DELETE WIDGET-POOL wp.
 
 (source_code
   (delete_alias_statement
-    (identifier)
+    alias: (identifier)
     (no_error))
   (delete_widget_pool_statement
-    (identifier)))
+    pool: (identifier)))
 
 ================================================================================
 PRECEDENCE - DISPLAY ambiguity matrix
@@ -167,51 +167,51 @@ DISPLAY Customer.Name IN WINDOW hWin WITH FRAME f1 NO-ERROR.
 
 (source_code
   (display_statement
-    (identifier)
-    (identifier))
+    record: (identifier)
+    browse: (identifier))
   (display_statement
-    (qualified_name
-      (identifier)
-      (identifier)))
+    record: (qualified_name
+      left: (identifier)
+      right: (identifier)))
   (display_statement
     (field
-      (parenthesized_expression
+      field: (parenthesized_expression
         (number_literal)))
     (field
-      (qualified_name
-        (identifier)
-        (identifier)))
+      field: (qualified_name
+        left: (identifier)
+        right: (identifier)))
     (field
-      (parenthesized_expression
+      field: (parenthesized_expression
         (number_literal)))
     (field
-      (qualified_name
-        (identifier)
-        (identifier))))
+      field: (qualified_name
+        left: (identifier)
+        right: (identifier))))
   (display_statement
     (field
-      (identifier))
+      field: (identifier))
     (format_phrase
-      (string_literal))
+      label: (string_literal))
     (field
-      (identifier)))
+      field: (identifier)))
   (display_statement
     (field
-      (identifier))
+      field: (identifier))
     (frame_phrase
-      (string_literal)))
+      title: (string_literal)))
   (display_statement
     (field
-      (identifier)))
+      field: (identifier)))
   (display_statement
     (field
-      (widget_qualified_name
-        (qualified_name
-          (identifier)
-          (identifier))
-        (identifier)))
+      field: (widget_qualified_name
+        target: (qualified_name
+          left: (identifier)
+          right: (identifier))
+        widget: (identifier)))
     (frame_phrase
-      (identifier))
+      frame: (identifier))
     (no_error)))
 
 ================================================================================
@@ -226,13 +226,13 @@ ENABLE field1 FORMAT "x(10)" WHEN ok.
 (source_code
   (enable_statement
     (enable_item
-      (identifier)))
+      field: (identifier)))
   (enable_statement
     (enable_item
-      (identifier)
+      field: (identifier)
       (format_phrase
-        (string_literal))
-      (identifier))))
+        format: (string_literal))
+      when: (identifier))))
 
 ================================================================================
 PRECEDENCE - EXPORT statement binding
@@ -258,19 +258,19 @@ SET field1 FORMAT "x(10)" WHEN ok.
 
 (source_code
   (put_statement
-    (identifier)
+    value: (identifier)
     (format_phrase
-      (string_literal)))
+      format: (string_literal)))
   (put_statement
-    (identifier)
+    value: (identifier)
     (format_phrase
-      (identifier)))
+      format: (identifier)))
   (set_statement
     (field
-      (identifier)
+      field: (identifier)
       (format_phrase
-        (string_literal))
-      (identifier))))
+        format: (string_literal))
+      when: (identifier))))
 
 ================================================================================
 PRECEDENCE - INCLUDE as statement
@@ -284,9 +284,9 @@ a = 1.
 (source_code
   (include)
   (assignment_statement
-    (identifier)
-    (assignment_operator)
-    (number_literal)))
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (number_literal)))
 
 ================================================================================
 PRECEDENCE - INPUT family disambiguation
@@ -301,21 +301,21 @@ COLOR PROMPT INPUT field1 field2.
 
 (source_code
   (run_stored_procedure_statement
-    (identifier)
+    procedure: (identifier)
     (parameter_list
-      (binary_expression
+      value: (binary_expression
         (identifier)
         (number_literal))))
   (input_through_statement
-    (identifier)
+    program: (identifier)
     (identifier))
   (input_through_statement
-    (identifier)
+    program: (identifier)
     (function_call
-      (identifier)
+      function: (identifier)
       (arguments)))
   (color_statement
-    (color_phrase
+    color: (color_phrase
       (identifier))
     (identifier)
     (identifier)))
@@ -343,12 +343,12 @@ OS-DELETE VALUE(cFile).
 
 (source_code
   (os_append_statement
-    (function_call
-      (identifier)
+    source: (function_call
+      function: (identifier)
       (arguments))
-    (identifier))
+    target: (identifier))
   (os_delete_statement
-    (identifier)))
+    value: (identifier)))
 
 ================================================================================
 PRECEDENCE - PROMPT-FOR field vs record
@@ -362,16 +362,16 @@ PROMPT-FOR Customer WITH FRAME f.
 (source_code
   (prompt_for_statement
     (field
-      (qualified_name
-        (identifier)
-        (identifier)))
+      field: (qualified_name
+        left: (identifier)
+        right: (identifier)))
     (frame_phrase
-      (identifier)))
+      frame: (identifier)))
   (prompt_for_statement
     (field
-      (identifier))
+      field: (identifier))
     (frame_phrase
-      (identifier))))
+      frame: (identifier))))
 
 ================================================================================
 PRECEDENCE - PUT TO binds to item
@@ -383,8 +383,8 @@ PUT a TO b.
 
 (source_code
   (put_statement
-    (identifier)
-    (identifier)))
+    value: (identifier)
+    position: (identifier)))
 
 ================================================================================
 PRECEDENCE - RECORD phrase where option
@@ -400,21 +400,21 @@ END.
   (for_statement
     (record
       (record
-        (identifier)
-        (binary_expression
+        record: (identifier)
+        where: (binary_expression
           (qualified_name
-            (identifier)
-            (identifier))
+            left: (identifier)
+            right: (identifier))
           (number_literal)))
       (by_phrase
-        (qualified_name
-          (identifier)
-          (identifier))))
+        by: (qualified_name
+          left: (identifier)
+          right: (identifier))))
     (body
       (display_statement
-        (qualified_name
-          (identifier)
-          (identifier))))))
+        record: (qualified_name
+          left: (identifier)
+          right: (identifier))))))
 
 ================================================================================
 PRECEDENCE - RUN STORED-PROCEDURE and run context
@@ -427,14 +427,14 @@ RUN internalProc IN myFunc().
 
 (source_code
   (run_stored_procedure_statement
-    (identifier)
+    procedure: (identifier)
     (parameter_list
-      (string_literal)
-      (number_literal)))
+      value: (string_literal)
+      value: (number_literal)))
   (run_statement
-    (identifier)
+    procedure: (identifier)
     (in_phrase
-      (identifier))
+      context: (identifier))
     (arguments)))
 
 ================================================================================
@@ -449,16 +449,16 @@ SET Customer.Name WITH FRAME f.
 (source_code
   (set_statement
     (field
-      (identifier))
+      field: (identifier))
     (frame_phrase
-      (identifier)))
+      frame: (identifier)))
   (set_statement
     (field
-      (qualified_name
-        (identifier)
-        (identifier)))
+      field: (qualified_name
+        left: (identifier)
+        right: (identifier)))
     (frame_phrase
-      (identifier))))
+      frame: (identifier))))
 
 ================================================================================
 PRECEDENCE - SUBSCRIBE expression and body
@@ -471,16 +471,16 @@ SUBSCRIBE PROCEDURE hSub TO "evt" IN hPub.
 
 (source_code
   (subscribe_statement
-    (function_call
-      (identifier)
+    event: (function_call
+      function: (identifier)
       (arguments))
     (in_phrase
-      (identifier)))
+      publisher: (identifier)))
   (subscribe_statement
-    (identifier)
-    (string_literal)
+    subscriber: (identifier)
+    event: (string_literal)
     (in_phrase
-      (identifier))))
+      publisher: (identifier))))
 
 ================================================================================
 PRECEDENCE - UPDATE field vs record
@@ -494,16 +494,16 @@ UPDATE Customer.Name WITH FRAME f.
 (source_code
   (update_statement
     (field
-      (identifier))
+      field: (identifier))
     (frame_phrase
-      (identifier)))
+      frame: (identifier)))
   (update_statement
     (field
-      (qualified_name
-        (identifier)
-        (identifier)))
+      field: (qualified_name
+        left: (identifier)
+        right: (identifier)))
     (frame_phrase
-      (identifier))))
+      frame: (identifier))))
 
 ================================================================================
 PRECEDENCE - Widget phrase disambiguation
@@ -521,33 +521,33 @@ DISPLAY x IN FRAME f.
 
 (source_code
   (on_statement
-    (identifier)
+    event: (identifier)
     (of_phrase
-      (widget_phrase
-        (identifier)))
+      widget: (widget_phrase
+        handle: (identifier)))
     (do_statement
       (body
         (message_statement
           (string_literal)))))
   (on_statement
-    (identifier)
+    event: (identifier)
     (of_phrase
-      (widget_phrase
-        (identifier)))
+      widget: (widget_phrase
+        handle: (identifier)))
     (do_statement
       (body)))
   (assign_statement
     (assign_phrase
       (assign_pair
-        (widget_qualified_name
-          (object_access
-            (identifier)
-            (identifier)
-            (identifier))
-          (identifier))
-        (boolean_literal))))
+        left: (widget_qualified_name
+          target: (object_access
+            widget: (identifier)
+            left: (identifier)
+            right: (identifier))
+          widget: (identifier))
+        right: (boolean_literal))))
   (display_statement
     (field
-      (widget_qualified_name
-        (identifier)
-        (identifier)))))
+      field: (widget_qualified_name
+        target: (identifier)
+        widget: (identifier)))))

@@ -8,9 +8,9 @@ x = NOT a + b * c = d OR e = f.
 
 (source_code
   (assignment_statement
-    (identifier)
-    (assignment_operator)
-    (binary_expression
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (binary_expression
       (unary_expression
         (binary_expression
           (binary_expression
@@ -47,10 +47,10 @@ OS-APPEND myFunc() target.
 
 (source_code
   (os_append_statement
-    (function_call
-      (identifier)
+    source: (function_call
+      function: (identifier)
       (arguments))
-    (identifier)))
+    target: (identifier)))
 
 ================================================================================
 PRECEDENCE 04 - dataset function_call over dataset_reference
@@ -64,11 +64,11 @@ ASSIGN c = DATASET myFunc:HANDLE.
   (assign_statement
     (assign_phrase
       (assign_pair
-        (identifier)
-        (dataset_reference
-          (object_access
-            (identifier)
-            (identifier)))))))
+        left: (identifier)
+        right: (dataset_reference
+          dataset: (object_access
+            left: (identifier)
+            right: (identifier)))))))
 
 ================================================================================
 PRECEDENCE 05 - browse enable field function_call disambiguation
@@ -80,13 +80,13 @@ DEFINE BROWSE b1 QUERY q1 DISPLAY myFunc() ENABLE field1.
 
 (source_code
   (browse_definition
-    (identifier)
-    (identifier)
+    name: (identifier)
+    query: (identifier)
     (column
-      (function_call
-        (identifier)
+      column: (function_call
+        function: (identifier)
         (arguments)))
-    (identifier)))
+    field: (identifier)))
 
 ================================================================================
 PRECEDENCE 06 - include statement over primary expression start
@@ -100,9 +100,9 @@ a = 1.
 (source_code
   (include)
   (assignment_statement
-    (identifier)
-    (assignment_operator)
-    (number_literal)))
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (number_literal)))
 
 ================================================================================
 PRECEDENCE 07 - create buffer over object_access handle type
@@ -114,8 +114,8 @@ CREATE BUFFER hBuf FOR TABLE Customer.
 
 (source_code
   (create_statement
-    (identifier)
-    (identifier)))
+    handle: (identifier)
+    table: (identifier)))
 
 ================================================================================
 PRECEDENCE 08 - create temp-table over object_access handle type
@@ -127,7 +127,7 @@ CREATE TEMP-TABLE tt.
 
 (source_code
   (create_temp_table_statement
-    (identifier)))
+    handle: (identifier)))
 
 ================================================================================
 PRECEDENCE 09 - create buffer target over identifier
@@ -139,9 +139,9 @@ CREATE BUFFER hBuf FOR TABLE Customer IN WIDGET-POOL wp.
 
 (source_code
   (create_statement
-    (identifier)
-    (identifier)
-    (identifier)))
+    handle: (identifier)
+    table: (identifier)
+    pool: (identifier)))
 
 ================================================================================
 PRECEDENCE 10 - delete alias over generic delete
@@ -153,7 +153,7 @@ DELETE ALIAS myalias NO-ERROR.
 
 (source_code
   (delete_alias_statement
-    (identifier)
+    alias: (identifier)
     (no_error)))
 
 ================================================================================
@@ -166,7 +166,7 @@ DELETE WIDGET-POOL wp.
 
 (source_code
   (delete_widget_pool_statement
-    (identifier)))
+    pool: (identifier)))
 
 ================================================================================
 PRECEDENCE 12 - case OR WHEN list separator over binary expression
@@ -182,8 +182,8 @@ END CASE.
   (case_statement
     (identifier)
     (case_when_phrase
-      (identifier)
-      (identifier)
+      condition: (identifier)
+      condition: (identifier)
       (message_statement
         (string_literal)))))
 
@@ -199,11 +199,11 @@ ASSIGN FRAME = FRAME foo:HANDLE.
   (assign_statement
     (assign_phrase
       (assign_pair
-        (identifier)
-        (object_access
-          (identifier)
-          (identifier)
-          (identifier))))))
+        left: (identifier)
+        right: (object_access
+          widget: (identifier)
+          left: (identifier)
+          right: (identifier))))))
 
 ================================================================================
 PRECEDENCE 14 - assign object_access over assign keyword identifier
@@ -217,11 +217,11 @@ ASSIGN x = FRAME foo:HANDLE.
   (assign_statement
     (assign_phrase
       (assign_pair
-        (identifier)
-        (object_access
-          (identifier)
-          (identifier)
-          (identifier))))))
+        left: (identifier)
+        right: (object_access
+          widget: (identifier)
+          left: (identifier)
+          right: (identifier))))))
 
 ================================================================================
 PRECEDENCE 15 - assign object_access_widget over assign keyword identifier
@@ -235,11 +235,11 @@ ASSIGN x = MENU-ITEM m1:SENSITIVE.
   (assign_statement
     (assign_phrase
       (assign_pair
-        (identifier)
-        (object_access
-          (identifier)
-          (identifier)
-          (identifier))))))
+        left: (identifier)
+        right: (object_access
+          widget: (identifier)
+          left: (identifier)
+          right: (identifier))))))
 
 ================================================================================
 PRECEDENCE 16 - assign record body over assignable
@@ -251,8 +251,8 @@ ASSIGN Customer EXCEPT Name.
 
 (source_code
   (assign_statement
-    (identifier)
-    (identifier)))
+    record: (identifier)
+    field: (identifier)))
 
 ================================================================================
 PRECEDENCE 17 - assign function_call over assignable
@@ -266,10 +266,10 @@ ASSIGN SomeFunc() = 1.
   (assign_statement
     (assign_phrase
       (assign_pair
-        (function_call
-          (identifier)
+        left: (function_call
+          function: (identifier)
           (arguments))
-        (number_literal)))))
+        right: (number_literal)))))
 
 ================================================================================
 PRECEDENCE 18 - assign statement over generic assignment statement
@@ -283,8 +283,8 @@ ASSIGN a = 1.
   (assign_statement
     (assign_phrase
       (assign_pair
-        (identifier)
-        (number_literal)))))
+        left: (identifier)
+        right: (number_literal)))))
 
 ================================================================================
 PRECEDENCE 19 - set field over set record
@@ -297,9 +297,9 @@ SET Customer WITH FRAME f.
 (source_code
   (set_statement
     (field
-      (identifier))
+      field: (identifier))
     (frame_phrase
-      (identifier))))
+      frame: (identifier))))
 
 ================================================================================
 PRECEDENCE 20 - enable item over primary expression
@@ -312,10 +312,10 @@ ENABLE field1 FORMAT "x(10)" WHEN ok.
 (source_code
   (enable_statement
     (enable_item
-      (identifier)
+      field: (identifier)
       (format_phrase
-        (string_literal))
-      (identifier))))
+        format: (string_literal))
+      when: (identifier))))
 
 ================================================================================
 PRECEDENCE 21 - display record over primary expression
@@ -327,8 +327,8 @@ DISPLAY Customer EXCEPT Comments.
 
 (source_code
   (display_statement
-    (identifier)
-    (identifier)))
+    record: (identifier)
+    except: (identifier)))
 
 ================================================================================
 PRECEDENCE 22 - display record over identifier_or_qualified_name
@@ -340,8 +340,8 @@ DISPLAY Customer WITH BROWSE b.
 
 (source_code
   (display_statement
-    (identifier)
-    (identifier)))
+    record: (identifier)
+    browse: (identifier)))
 
 ================================================================================
 PRECEDENCE 23 - display browse body over frame identifier
@@ -353,9 +353,9 @@ DISPLAY Customer EXCEPT Comments WITH BROWSE b1.
 
 (source_code
   (display_statement
-    (identifier)
-    (identifier)
-    (identifier)))
+    record: (identifier)
+    except: (identifier)
+    browse: (identifier)))
 
 ================================================================================
 PRECEDENCE 24 - display field over function_call
@@ -367,9 +367,9 @@ DISPLAY Customer.Name.
 
 (source_code
   (display_statement
-    (qualified_name
-      (identifier)
-      (identifier))))
+    record: (qualified_name
+      left: (identifier)
+      right: (identifier))))
 
 ================================================================================
 PRECEDENCE 25 - display skip phrase over function_call
@@ -382,12 +382,12 @@ DISPLAY SKIP(1) Customer.Name.
 (source_code
   (display_statement
     (field
-      (parenthesized_expression
+      field: (parenthesized_expression
         (number_literal)))
     (field
-      (qualified_name
-        (identifier)
-        (identifier)))))
+      field: (qualified_name
+        left: (identifier)
+        right: (identifier)))))
 
 ================================================================================
 PRECEDENCE 26 - display space phrase over function_call
@@ -400,12 +400,12 @@ DISPLAY SPACE(2) Customer.Name.
 (source_code
   (display_statement
     (field
-      (parenthesized_expression
+      field: (parenthesized_expression
         (number_literal)))
     (field
-      (qualified_name
-        (identifier)
-        (identifier)))))
+      field: (qualified_name
+        left: (identifier)
+        right: (identifier)))))
 
 ================================================================================
 PRECEDENCE 27 - display skip phrase over primary expression
@@ -418,10 +418,10 @@ DISPLAY SKIP(1) x.
 (source_code
   (display_statement
     (field
-      (parenthesized_expression
+      field: (parenthesized_expression
         (number_literal)))
     (field
-      (identifier))))
+      field: (identifier))))
 
 ================================================================================
 PRECEDENCE 28 - display space phrase over primary expression
@@ -434,10 +434,10 @@ DISPLAY SPACE(2) x.
 (source_code
   (display_statement
     (field
-      (parenthesized_expression
+      field: (parenthesized_expression
         (number_literal)))
     (field
-      (identifier))))
+      field: (identifier))))
 
 ================================================================================
 PRECEDENCE 29 - display field over display record
@@ -450,11 +450,11 @@ DISPLAY Customer.Name IN WINDOW hWin.
 (source_code
   (display_statement
     (field
-      (widget_qualified_name
-        (qualified_name
-          (identifier)
-          (identifier))
-        (identifier)))))
+      field: (widget_qualified_name
+        target: (qualified_name
+          left: (identifier)
+          right: (identifier))
+        widget: (identifier)))))
 
 ================================================================================
 PRECEDENCE 30 - display item skip over frame skip
@@ -467,9 +467,9 @@ DISPLAY x SKIP y.
 (source_code
   (display_statement
     (field
-      (identifier))
+      field: (identifier))
     (field
-      (identifier))))
+      field: (identifier))))
 
 ================================================================================
 PRECEDENCE 31 - frame_phrase over display_field
@@ -482,9 +482,9 @@ DISPLAY menu WITH TITLE "t".
 (source_code
   (display_statement
     (field
-      (identifier))
+      field: (identifier))
     (frame_phrase
-      (string_literal))))
+      title: (string_literal))))
 
 ================================================================================
 PRECEDENCE 32 - frame_phrase over display_items
@@ -496,9 +496,9 @@ DISPLAY x WITH FRAME f.
 
 (source_code
   (display_statement
-    (identifier)
+    record: (identifier)
     (frame_phrase
-      (identifier))))
+      frame: (identifier))))
 
 ================================================================================
 PRECEDENCE 33 - frame_phrase over identifier
@@ -510,7 +510,7 @@ DISPLAY x WITH NO-BOX.
 
 (source_code
   (display_statement
-    (identifier)
+    record: (identifier)
     (frame_phrase
       (no_box))))
 
@@ -525,7 +525,7 @@ DISPLAY menu.
 (source_code
   (display_statement
     (field
-      (identifier))))
+      field: (identifier))))
 
 ================================================================================
 PRECEDENCE 35 - widget entry over primary expression
@@ -538,10 +538,10 @@ END.
 
 (source_code
   (on_statement
-    (identifier)
+    event: (identifier)
     (of_phrase
-      (widget_phrase
-        (identifier)))
+      widget: (widget_phrase
+        handle: (identifier)))
     (do_statement
       (body))))
 
@@ -555,9 +555,9 @@ RUN internalProc IN myFunc().
 
 (source_code
   (run_statement
-    (identifier)
+    procedure: (identifier)
     (in_phrase
-      (identifier))
+      context: (identifier))
     (arguments)))
 
 ================================================================================
@@ -572,10 +572,10 @@ END.
 
 (source_code
   (on_statement
-    (identifier)
+    event: (identifier)
     (of_phrase
-      (widget_phrase
-        (identifier)))
+      widget: (widget_phrase
+        handle: (identifier)))
     (do_statement
       (body
         (message_statement
@@ -593,13 +593,13 @@ ASSIGN MENU-ITEM m1:SENSITIVE IN MENU mymenu = TRUE.
   (assign_statement
     (assign_phrase
       (assign_pair
-        (widget_qualified_name
-          (object_access
-            (identifier)
-            (identifier)
-            (identifier))
-          (identifier))
-        (boolean_literal)))))
+        left: (widget_qualified_name
+          target: (object_access
+            widget: (identifier)
+            left: (identifier)
+            right: (identifier))
+          widget: (identifier))
+        right: (boolean_literal)))))
 
 ================================================================================
 PRECEDENCE 39 - widget qualified name over primary expression
@@ -612,9 +612,9 @@ DISPLAY x IN FRAME f.
 (source_code
   (display_statement
     (field
-      (widget_qualified_name
-        (identifier)
-        (identifier)))))
+      field: (widget_qualified_name
+        target: (identifier)
+        widget: (identifier)))))
 
 ================================================================================
 PRECEDENCE 40 - message expression over widget tokens
@@ -642,21 +642,21 @@ END.
   (for_statement
     (record
       (record
-        (identifier)
-        (binary_expression
+        record: (identifier)
+        where: (binary_expression
           (qualified_name
-            (identifier)
-            (identifier))
+            left: (identifier)
+            right: (identifier))
           (number_literal)))
       (by_phrase
-        (qualified_name
-          (identifier)
-          (identifier))))
+        by: (qualified_name
+          left: (identifier)
+          right: (identifier))))
     (body
       (display_statement
-        (qualified_name
-          (identifier)
-          (identifier))))))
+        record: (qualified_name
+          left: (identifier)
+          right: (identifier))))))
 
 ================================================================================
 PRECEDENCE 42 - format target over primary expression
@@ -668,9 +668,9 @@ PUT x FORMAT ("x(10)").
 
 (source_code
   (put_statement
-    (identifier)
+    value: (identifier)
     (format_phrase
-      (string_literal))))
+      format: (string_literal))))
 
 ================================================================================
 PRECEDENCE 43 - format target over identifier_or_qualified_name
@@ -682,9 +682,9 @@ PUT x FORMAT decF.
 
 (source_code
   (put_statement
-    (identifier)
+    value: (identifier)
     (format_phrase
-      (identifier))))
+      format: (identifier))))
 
 ================================================================================
 PRECEDENCE 44 - format target over function_call
@@ -696,11 +696,11 @@ PUT x FORMAT hFmt:Value.
 
 (source_code
   (put_statement
-    (identifier)
+    value: (identifier)
     (format_phrase
-      (object_access
-        (identifier)
-        (identifier)))))
+      format: (object_access
+        left: (identifier)
+        right: (identifier)))))
 
 ================================================================================
 PRECEDENCE 45 - put expression item over format colon/to
@@ -712,8 +712,8 @@ PUT a TO b.
 
 (source_code
   (put_statement
-    (identifier)
-    (identifier)))
+    value: (identifier)
+    position: (identifier)))
 
 ================================================================================
 PRECEDENCE 46 - prompt-for field over prompt-for record
@@ -726,11 +726,11 @@ PROMPT-FOR Customer.Name WITH FRAME f.
 (source_code
   (prompt_for_statement
     (field
-      (qualified_name
-        (identifier)
-        (identifier)))
+      field: (qualified_name
+        left: (identifier)
+        right: (identifier)))
     (frame_phrase
-      (identifier))))
+      frame: (identifier))))
 
 ================================================================================
 PRECEDENCE 47 - prompt-for identifier over prompt-for record
@@ -743,9 +743,9 @@ PROMPT-FOR Customer WITH FRAME f.
 (source_code
   (prompt_for_statement
     (field
-      (identifier))
+      field: (identifier))
     (frame_phrase
-      (identifier))))
+      frame: (identifier))))
 
 ================================================================================
 PRECEDENCE 48 - export statement over export expression
@@ -769,7 +769,7 @@ COLOR PROMPT INPUT field1 field2.
 
 (source_code
   (color_statement
-    (color_phrase
+    color: (color_phrase
       (identifier))
     (identifier)
     (identifier)))
@@ -784,9 +784,9 @@ INPUT THROUGH prog myFunc().
 
 (source_code
   (input_through_statement
-    (identifier)
+    program: (identifier)
     (function_call
-      (identifier)
+      function: (identifier)
       (arguments))))
 
 ================================================================================
@@ -799,7 +799,7 @@ INPUT THROUGH prog arg1.
 
 (source_code
   (input_through_statement
-    (identifier)
+    program: (identifier)
     (identifier)))
 
 ================================================================================
@@ -812,9 +812,9 @@ INPUT THROUGH prog myFunc().
 
 (source_code
   (input_through_statement
-    (identifier)
+    program: (identifier)
     (function_call
-      (identifier)
+      function: (identifier)
       (arguments))))
 
 ================================================================================
@@ -827,9 +827,9 @@ RUN STORED-PROCEDURE p (INPUT x = 1).
 
 (source_code
   (run_stored_procedure_statement
-    (identifier)
+    procedure: (identifier)
     (parameter_list
-      (binary_expression
+      value: (binary_expression
         (identifier)
         (number_literal)))))
 
@@ -843,10 +843,10 @@ RUN STORED-PROCEDURE sp_Insert (INPUT "John", INPUT 25).
 
 (source_code
   (run_stored_procedure_statement
-    (identifier)
+    procedure: (identifier)
     (parameter_list
-      (string_literal)
-      (number_literal))))
+      value: (string_literal)
+      value: (number_literal))))
 
 ================================================================================
 PRECEDENCE 55 - function_call over run context value
@@ -858,9 +858,9 @@ RUN internalProc IN myFunc().
 
 (source_code
   (run_statement
-    (identifier)
+    procedure: (identifier)
     (in_phrase
-      (identifier))
+      context: (identifier))
     (arguments)))
 
 ================================================================================
@@ -873,11 +873,11 @@ SUBSCRIBE TO myFunc() IN hPub.
 
 (source_code
   (subscribe_statement
-    (function_call
-      (identifier)
+    event: (function_call
+      function: (identifier)
       (arguments))
     (in_phrase
-      (identifier))))
+      publisher: (identifier))))
 
 ================================================================================
 PRECEDENCE 57 - subscribe body over identifier_or_qualified_name
@@ -889,10 +889,10 @@ SUBSCRIBE PROCEDURE hSub TO "evt" IN hPub.
 
 (source_code
   (subscribe_statement
-    (identifier)
-    (string_literal)
+    subscriber: (identifier)
+    event: (string_literal)
     (in_phrase
-      (identifier))))
+      publisher: (identifier))))
 
 ================================================================================
 PRECEDENCE 58 - update field target over update record
@@ -905,6 +905,6 @@ UPDATE Customer WITH FRAME f.
 (source_code
   (update_statement
     (field
-      (identifier))
+      field: (identifier))
     (frame_phrase
-      (identifier))))
+      frame: (identifier))))

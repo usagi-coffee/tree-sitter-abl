@@ -24,40 +24,40 @@ ROLLBACK WORK;
 
 (source_code
   (sql_alter_database_set_pro_enable_large_keys_statement
-    (string_literal))
+    value: (string_literal))
   (sql_alter_database_set_pro_enable_64bit_sequences_statement
-    (string_literal))
+    value: (string_literal))
   (sql_alter_database_set_column_statistics_statement
-    (string_literal))
+    cipher: (string_literal))
   (sql_alter_database_set_column_statistics_statement
-    (string_literal))
+    cipher: (string_literal))
   (sql_alter_group_statement
-    (identifier)
-    (identifier))
+    group: (identifier)
+    body: (identifier))
   (sql_alter_sequence_statement
-    (identifier)
-    (number_literal))
+    sequence: (identifier)
+    body: (number_literal))
   (sql_alter_table_statement
-    (identifier)
-    (identifier)
-    (number_literal))
+    table: (identifier)
+    body: (identifier)
+    body: (number_literal))
   (sql_alter_tenant_statement
-    (identifier)
-    (identifier))
+    tenant: (identifier)
+    body: (identifier))
   (sql_alter_user_statement
-    (identifier)
-    (string_literal))
+    user: (identifier)
+    body: (string_literal))
   (sql_audit_insert_statement
-    (identifier))
+    body: (identifier))
   (sql_audit_set_statement
-    (identifier))
+    body: (identifier))
   (sql_commit_statement)
   (sql_commit_statement
-    (identifier))
+    body: (identifier))
   (sql_connect_as_catalog_statement
-    (identifier))
+    catalog: (identifier))
   (sql_disconnect_catalog_statement
-    (identifier))
+    catalog: (identifier))
   (sql_rollback_statement)
   (sql_rollback_statement
-    (identifier)))
+    body: (identifier)))

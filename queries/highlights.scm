@@ -1,7 +1,21 @@
 (comment) @comment
 (line_comment) @comment
 (block_comment) @comment
-(preprocessor_directive) @preproc
+(global_define_preprocessor_directive) @preproc
+(scoped_define_preprocessor_directive) @preproc
+(if_preprocessor_directive) @preproc
+(message_preprocessor_directive) @preproc
+(undefine_preprocessor_directive) @preproc
+(if_branch) @preproc
+(then_branch) @preproc
+(elseif_branch) @preproc
+(else_branch) @preproc
+(endif_branch) @preproc
+(global_define_preprocessor_directive name: (identifier) @constant)
+(scoped_define_preprocessor_directive name: (identifier) @constant)
+(undefine_preprocessor_directive name: (identifier) @constant)
+(preprocessor_value) @string.special
+(preprocessor_name) @macro
 (include) @include
 (include) @preproc
 (file_name) @string

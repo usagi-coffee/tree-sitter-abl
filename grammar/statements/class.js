@@ -42,7 +42,11 @@ module.exports = ({ kw }) => ({
       $.on_statement,
       $.using_statement,
       $.annotation,
-      $.preprocessor_directive,
+      $.global_define_preprocessor_directive,
+      $.scoped_define_preprocessor_directive,
+      alias($.if_preprocessor_directive_statement, $.if_preprocessor_directive),
+      $.message_preprocessor_directive,
+      $.undefine_preprocessor_directive,
       alias($.include_expression, $.include_reference),
     ),
 

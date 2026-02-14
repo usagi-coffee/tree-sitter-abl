@@ -120,7 +120,74 @@ PUT UNFORMATTED
 (source_code
   (put_statement
     (unformatted)
-    (preprocessor_directive)
-    (preprocessor_directive)
-    (preprocessor_directive)
+    value: (if_preprocessor_directive
+      condition: (binary_expression
+        (function_call
+          function: (identifier)
+          (arguments
+            (argument
+              name: (identifier))))
+        (number_literal))
+      value: (string_literal)
+      value: (string_literal)
+      value: (preprocessor_name
+        (identifier))
+      value: (string_literal))
+    value: (if_preprocessor_directive
+      condition: (binary_expression
+        (function_call
+          function: (identifier)
+          (arguments
+            (argument
+              name: (identifier))))
+        (number_literal))
+      value: (string_literal)
+      value: (string_literal)
+      value: (preprocessor_name
+        (identifier))
+      value: (string_literal))
+    value: (if_preprocessor_directive
+      condition: (binary_expression
+        (function_call
+          function: (identifier)
+          (arguments
+            (argument
+              name: (identifier))))
+        (number_literal))
+      value: (string_literal)
+      value: (string_literal)
+      value: (preprocessor_name
+        (identifier))
+      value: (string_literal))
+    (skip)))
+
+================================================================================
+PUT UNFORMATTED with inline IF/ELSEIF/ELSE preprocessor directive
+================================================================================
+
+PUT UNFORMATTED &IF DEFINED(X) EQ 0 &THEN "a" &ELSEIF DEFINED(Y) EQ 1 &THEN "b" &ELSE "c" &ENDIF SKIP.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (put_statement
+    (unformatted)
+    value: (if_preprocessor_directive
+      condition: (binary_expression
+        (function_call
+          function: (identifier)
+          (arguments
+            (argument
+              name: (identifier))))
+        (number_literal))
+      value: (string_literal)
+      condition: (binary_expression
+        (function_call
+          function: (identifier)
+          (arguments
+            (argument
+              name: (identifier))))
+        (number_literal))
+      value: (string_literal)
+      value: (string_literal))
     (skip)))
