@@ -195,7 +195,8 @@ module.exports = grammar({
       __include_file_reference: ($) =>
         seq(
           "{",
-          field("file", $._include_file_reference),
+          optional($.preprocessor_name),
+          field("file", $.__include_file_target),
           optional(field("arguments", $.__include_arguments)),
           "}",
           optional("."),
@@ -306,12 +307,12 @@ module.exports = grammar({
       undefine_preprocessor_directive: ($) =>
         seq(token(prec(1, /&UNDEFINE/i)), field("name", $.identifier)),
       preprocessor_value: ($) => token(/[^\n]+(?:~\s*\n[^\n]+)*/),
-      _include_file_reference: ($) =>
+      __include_file_target: ($) =>
         choice(
-          seq(optional($.preprocessor_name), $.file_name),
-          $.preprocessor_name,
+          alias($.__include_file_name, $.identifier),
           $.argument_reference,
         ),
+      __include_file_name: ($) => /[A-Za-z0-9_\\/.-]+\.i/i,
 
       // Constants
       constant: ($) => token(/\{&[^\}\r\n]+\}[ \t]*\r?\n/),
@@ -359,7 +360,6 @@ module.exports = grammar({
       null_literal: ($) => token("?"),
       boolean_literal: ($) =>
         choice(kw("TRUE"), kw("FALSE"), kw("YES"), kw("NO")),
-      file_name: ($) => /[A-Za-z0-9_\\/.-]+\.i/i,
       procedure_name: ($) => /[A-Za-z0-9_\\/.-]+\.pl?/i,
 
       // Types

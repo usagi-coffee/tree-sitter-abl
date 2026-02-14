@@ -18,7 +18,7 @@
 (preprocessor_name) @macro
 (include_file_reference) @include
 (include_file_reference) @preproc
-(file_name) @string
+(include_file_reference file: (identifier) @string)
 (include_named_argument name: (identifier) @attribute)
 (include_named_argument name: (identifier) @parameter)
 (constant) @constant
