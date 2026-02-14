@@ -6,7 +6,7 @@
       "camelcase": "abl",
       "title": "abl",
       "scope": "source.abl",
-      "file-types": ["cls", "p", "i"],
+      "file-types": ["cls", "p", "i", "w"],
       "injection-regex": "^abl$",
       "class-name": "TreeSitterAbl",
       "highlights": "queries/highlights.scm"
