@@ -109,7 +109,6 @@ module.exports = grammar({
     /[\s\f\uFEFF\u2060\u200B]|\\\r?\n|~[ \t]*/,
     $.comment,
     $.constant,
-    $.include,
     $.argument_reference,
   ],
   word: ($) => $.identifier,
@@ -191,23 +190,28 @@ module.exports = grammar({
             /\{[^\s}\r\n]*\.i[ \t]*\}[ \t]*\r?\n/i
           )
         ),
-      include_expression: ($) =>
+      include_file_reference: ($) =>
+        $.__include_file_reference,
+      __include_file_reference: ($) =>
         seq(
           "{",
           field("file", $._include_file_reference),
-          repeat(field("argument", $.include_argument)),
+          optional(field("arguments", $.__include_arguments)),
           "}",
-          optional(".")
+          optional("."),
         ),
-      include_statement: ($) =>
-        seq(alias($.include_expression, $.include_reference)),
-      include_argument: ($) =>
-        choice($.include_named_argument, $._include_argument_value),
+      include_expression: ($) => prec(1, $.__include_file_reference),
+      include_statement: ($) => $.__include_file_reference,
+      __include_arguments: ($) =>
+        choice(
+          repeat1(field("argument", alias($._include_argument_value, $.include_argument))),
+          repeat1(field("argument", alias($.include_named_argument, $.include_argument))),
+        ),
       include_named_argument: ($) =>
         seq(
           "&",
           field("name", $.identifier),
-          optional(seq("=", field("value", $._include_argument_value)))
+          seq("=", field("value", $._include_argument_value)),
         ),
       _include_argument_value: ($) =>
         prec(
@@ -303,18 +307,26 @@ module.exports = grammar({
         seq(token(prec(1, /&UNDEFINE/i)), field("name", $.identifier)),
       preprocessor_value: ($) => token(/[^\n]+(?:~\s*\n[^\n]+)*/),
       _include_file_reference: ($) =>
-        seq(optional($.preprocessor_name), $.file_name),
+        choice(
+          seq(optional($.preprocessor_name), $.file_name),
+          $.preprocessor_name,
+          $.argument_reference,
+        ),
 
       // Constants
       constant: ($) => token(/\{&[^\}\r\n]+\}[ \t]*\r?\n/),
       preprocessor_name: ($) =>
-        seq(
-          "{&",
-          $.identifier,
-          optional(seq("=", field("value", $.__constant_value))),
-          "}"
+        prec(
+          1,
+          seq(
+            "{",
+            "&",
+            $.identifier,
+            optional(seq("=", field("value", $.__preprocessor_name_value))),
+            "}",
+          ),
         ),
-      __constant_value: ($) =>
+      __preprocessor_name_value: ($) =>
         choice(
           $._identifier_or_qualified_name,
           $.string_literal,
@@ -325,7 +337,8 @@ module.exports = grammar({
           $.argument_reference,
           $.parenthesized_identifier
         ),
-      argument_reference: ($) => token(/\{[0-9A-Za-z_-]+\}/),
+      argument_reference: ($) =>
+        token(/\{(?:[0-9]+|\*)\}/),
 
       // Re-exports
       ...require("./grammar/statements")(ctx),

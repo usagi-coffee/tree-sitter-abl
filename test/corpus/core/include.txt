@@ -1,95 +1,130 @@
 ================================================================================
-INCLUDE
+INCLUDE positional arguments
 ================================================================================
 
-{include_file.i arg1 &arg2="test" arg3 "NEW" &ABC=variable}
+{include_positional.i arg1 arg2 "NEW"}
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (include_file_reference
+    file: (file_name)
+    argument: (include_argument
+      (identifier))
+    argument: (include_argument
+      (identifier))
+    argument: (include_argument
+      (string_literal))))
+
+================================================================================
+INCLUDE named arguments
+================================================================================
+
+{include_named.i &arg2="test" &ABC=variable}
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (include_file_reference
+    file: (file_name)
+    argument: (include_argument
+      name: (identifier)
+      value: (string_literal))
+    argument: (include_argument
+      name: (identifier)
+      value: (identifier))))
+
+================================================================================
+INCLUDE preprocessor file prefix with positional argument
+================================================================================
+
 {{&US_ET}etdcrvar.i new}
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (include_file_reference
+    file: (preprocessor_name
+      (identifier))
+    file: (file_name)
+    argument: (include_argument
+      (identifier))))
+
+================================================================================
+INCLUDE preprocessor file prefix only
+================================================================================
+
 {{&INC}file.i}
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (include_file_reference
+    file: (preprocessor_name
+      (identifier))
+    file: (file_name)))
+
+================================================================================
+INCLUDE file from argument reference
+================================================================================
+
+{{1}}
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (include_file_reference
+    file: (argument_reference)))
+
+================================================================================
+INCLUDE multiline named arguments
+================================================================================
+
 {{&INC}file_with_args.i
   &PARM1=var_one &PARM2=var_two
   &SITE=tbl_one.col_one &LOC=tbl_one.col_two
   &ORDER=param_order
   &ITEM=param_item &QTY=qty_val &LOT='N' &PRICE=price_val
 }
-DISPLAY {&VAR1}.
 
 --------------------------------------------------------------------------------
 
 (source_code
-  (include_reference
-    (include_reference
-      file: (file_name)
-      argument: (include_argument
-        (identifier))
-      argument: (include_argument
-        (include_named_argument
-          name: (identifier)
-          value: (string_literal)))
-      argument: (include_argument
-        (identifier))
-      argument: (include_argument
-        (string_literal))
-      argument: (include_argument
-        (include_named_argument
-          name: (identifier)
-          value: (identifier)))))
-  (include_reference
-    (include_reference
-      file: (preprocessor_name
-        (identifier))
-      file: (file_name)
-      argument: (include_argument
-        (identifier))))
-  (include)
-  (include_reference
-    (include_reference
-      file: (preprocessor_name
-        (identifier))
-      file: (file_name)
-      argument: (include_argument
-        (include_named_argument
-          name: (identifier)
-          value: (identifier)))
-      argument: (include_argument
-        (include_named_argument
-          name: (identifier)
-          value: (identifier)))
-      argument: (include_argument
-        (include_named_argument
-          name: (identifier)
-          value: (qualified_name
-            left: (identifier)
-            right: (identifier))))
-      argument: (include_argument
-        (include_named_argument
-          name: (identifier)
-          value: (qualified_name
-            left: (identifier)
-            right: (identifier))))
-      argument: (include_argument
-        (include_named_argument
-          name: (identifier)
-          value: (identifier)))
-      argument: (include_argument
-        (include_named_argument
-          name: (identifier)
-          value: (identifier)))
-      argument: (include_argument
-        (include_named_argument
-          name: (identifier)
-          value: (identifier)))
-      argument: (include_argument
-        (include_named_argument
-          name: (identifier)
-          value: (string_literal)))
-      argument: (include_argument
-        (include_named_argument
-          name: (identifier)
-          value: (identifier)))))
-  (display_statement
-    (field
-      field: (preprocessor_name
-        (identifier)))))
+  (include_file_reference
+    file: (preprocessor_name
+      (identifier))
+    file: (file_name)
+    argument: (include_argument
+      name: (identifier)
+      value: (identifier))
+    argument: (include_argument
+      name: (identifier)
+      value: (identifier))
+    argument: (include_argument
+      name: (identifier)
+      value: (qualified_name
+        left: (identifier)
+        right: (identifier)))
+    argument: (include_argument
+      name: (identifier)
+      value: (qualified_name
+        left: (identifier)
+        right: (identifier)))
+    argument: (include_argument
+      name: (identifier)
+      value: (identifier))
+    argument: (include_argument
+      name: (identifier)
+      value: (identifier))
+    argument: (include_argument
+      name: (identifier)
+      value: (identifier))
+    argument: (include_argument
+      name: (identifier)
+      value: (string_literal))
+    argument: (include_argument
+      name: (identifier)
+      value: (identifier))))
 
 ================================================================================
 INCLUDE with WINDOW positional argument
@@ -100,10 +135,9 @@ INCLUDE with WINDOW positional argument
 --------------------------------------------------------------------------------
 
 (source_code
-  (include_reference
-    (include_reference
-      file: (file_name)
-      argument: (include_argument
-        (identifier))
-      argument: (include_argument
-        (number_literal)))))
+  (include_file_reference
+    file: (file_name)
+    argument: (include_argument
+      (identifier))
+    argument: (include_argument
+      (number_literal))))

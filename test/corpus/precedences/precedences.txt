@@ -282,7 +282,8 @@ a = 1.
 --------------------------------------------------------------------------------
 
 (source_code
-  (include)
+  (include_file_reference
+    file: (file_name))
   (assignment_statement
     left: (identifier)
     operator: (assignment_operator)

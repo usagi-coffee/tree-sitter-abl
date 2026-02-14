@@ -458,5 +458,5 @@ ASSIGN a = {us/t0/t001.i}.
     (assign_phrase
       (assign_pair
         left: (identifier)
-        right: (include_reference
+        right: (include_file_reference
           file: (file_name))))))

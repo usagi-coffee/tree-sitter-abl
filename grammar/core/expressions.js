@@ -34,6 +34,6 @@ module.exports = ({ kw, ctx }) => ({
       $.boolean_literal,
       $.null_literal,
       $.input_expression,
-      alias($.include_expression, $.include_reference),
+      alias($.include_expression, $.include_file_reference),
     ),
 });

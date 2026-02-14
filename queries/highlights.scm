@@ -16,8 +16,8 @@
 (undefine_preprocessor_directive name: (identifier) @constant)
 (preprocessor_value) @string.special
 (preprocessor_name) @macro
-(include) @include
-(include) @preproc
+(include_file_reference) @include
+(include_file_reference) @preproc
 (file_name) @string
 (include_named_argument name: (identifier) @attribute)
 (include_named_argument name: (identifier) @parameter)

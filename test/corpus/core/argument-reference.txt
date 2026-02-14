@@ -16,3 +16,18 @@ x = {2}.
     left: (identifier)
     operator: (assignment_operator)
     right: (argument_reference)))
+
+================================================================================
+ARGUMENT REFERENCE positional and all arguments
+================================================================================
+
+{1}.
+{*}.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (expression_statement
+    (argument_reference))
+  (expression_statement
+    (argument_reference)))

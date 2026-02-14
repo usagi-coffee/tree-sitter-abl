@@ -47,7 +47,7 @@ module.exports = ({ kw }) => ({
       alias($.if_preprocessor_directive_statement, $.if_preprocessor_directive),
       $.message_preprocessor_directive,
       $.undefine_preprocessor_directive,
-      alias($.include_expression, $.include_reference),
+      $.include_file_reference,
     ),
 
   method_definition: ($) =>
