@@ -104,3 +104,23 @@ PUT CONTROL NULL(20).
         (arguments
           (argument
             name: (number_literal)))))))
+
+================================================================================
+PUT UNFORMATTED with inline preprocessor directives
+================================================================================
+
+PUT UNFORMATTED
+  &IF DEFINED (Description) EQ 0 &THEN ' - ' &ELSE ' "' {&Description} '"' &ENDIF
+  &IF DEFINED (StatusText) EQ 0 &THEN ' - ' &ELSE ' "' {&StatusText} '"' &ENDIF
+  &IF DEFINED (Project) EQ 0 &THEN ' - ' &ELSE ' "' {&Project} '"' &ENDIF
+  SKIP.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (put_statement
+    (unformatted)
+    (preprocessor_directive)
+    (preprocessor_directive)
+    (preprocessor_directive)
+    (skip)))

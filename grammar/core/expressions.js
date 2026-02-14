@@ -9,6 +9,7 @@ module.exports = ({ kw, ctx }) => ({
 
   _primary_expression: ($) =>
     choice(
+      prec(-2, alias($.preprocessor_expression_directive, $.preprocessor_directive)),
       prec(-1, alias($.constant_expression, $.preprocessor_reference)),
       $._identifier_or_qualified_name,
       $.widget_qualified_name,

@@ -232,6 +232,8 @@ module.exports = grammar({
 
       // Preprocessor
       preprocessor_directive: ($) => token(/&[^\n]*(?:~\s*\n[^\n]*)*/i),
+      preprocessor_expression_directive: ($) =>
+        token(/&(IF|THEN|ELSEIF|ELSE|ENDIF)[^\n]*(?:~\s*\n[^\n]*)*/i),
       _include_file_reference: ($) =>
         seq(
           optional(alias($.constant_expression, $.preprocessor_reference)),
