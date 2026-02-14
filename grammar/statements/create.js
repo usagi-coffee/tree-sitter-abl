@@ -51,10 +51,7 @@ module.exports = ({ kw }) => ({
     ),
   __create_buffer_target: ($) =>
     choice(
-      $._identifier_or_qualified_name,
-      $.object_access,
-      $.function_call,
-      $.identifier,
+      $._identifier_or_access_or_call,
       $.string_literal,
     ),
   __create_call: ($) =>

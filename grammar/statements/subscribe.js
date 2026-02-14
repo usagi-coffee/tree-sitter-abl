@@ -23,8 +23,6 @@ module.exports = ({ kw }) => ({
   __subscribe_expression: ($) =>
     choice(
       $.string_literal,
-      $._identifier_or_qualified_name,
-      $.object_access,
-      $.function_call,
+      $._identifier_or_access_or_call,
     ),
 });

@@ -37,10 +37,7 @@ module.exports = ({ kw }) => ({
   __input_file_target: ($) =>
     choice(
       $.string_literal,
-      $.identifier,
-      $.qualified_name,
-      $.object_access,
-      $.function_call,
+      $._identifier_or_access_or_call,
       $.preprocessor_name,
     ),
   __input_lob_dir_phrase: ($) =>

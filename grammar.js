@@ -162,6 +162,8 @@ module.exports = grammar({
     ],
     // SUBSCRIBE/UNSUBSCRIBE can start with PROCEDURE/PROC which may also be parsed as identifier-like expression.
     [$.__unsubscribe_body, $._identifier_or_qualified_name],
+    // Shared identifier/access/call wrapper can compete with direct function call parse at `identifier(` sites.
+    [$._identifier_or_access_or_call, $.function_call],
   ],
   inline: ($) => [
     $.__find_record_name,
@@ -385,6 +387,12 @@ module.exports = grammar({
           $.qualified_name,
           alias(kw("PROCEDURE", { offset: 4 }), $.identifier),
           alias(kw("INTERFACE"), $.identifier)
+        ),
+      _identifier_or_access_or_call: ($) =>
+        choice(
+          $._identifier_or_qualified_name,
+          $.object_access,
+          $.function_call
         ),
       macro_concatenated_name: ($) =>
         token(

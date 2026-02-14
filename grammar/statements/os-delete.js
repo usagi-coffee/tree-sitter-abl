@@ -14,8 +14,6 @@ module.exports = ({ kw }) => ({
   __os_delete_filename: ($) =>
     choice(
       $.string_literal,
-      $._identifier_or_qualified_name,
-      $.function_call,
-      $.object_access,
+      $._identifier_or_access_or_call,
     ),
 });
