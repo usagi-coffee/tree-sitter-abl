@@ -517,14 +517,13 @@ END.
     (no_undo))
   (output_statement)
   (for_statement
-    (record
-      (record
-        record: (identifier)
-        where: (binary_expression
-          (qualified_name
-            left: (identifier)
-            right: (identifier))
-          (null_literal))))
+    (record_phrase
+      record: (identifier)
+      where: (binary_expression
+        (qualified_name
+          left: (identifier)
+          right: (identifier))
+        (null_literal)))
     (body
       (assignment_statement
         left: (identifier)
@@ -533,10 +532,9 @@ END.
           (identifier)
           (number_literal)))
       (for_statement
-        (record
-          (record
-            record: (identifier)
-            of: (identifier)))
+        (record_phrase
+          record: (identifier)
+          of: (identifier))
         (body
           (display_statement
             (field
@@ -846,9 +844,8 @@ END.
     (no_undo)
     label: (string_literal))
   (for_statement
-    (record
-      (record
-        record: (identifier)))
+    (record_phrase
+      record: (identifier))
     (body
       (display_statement
         (field

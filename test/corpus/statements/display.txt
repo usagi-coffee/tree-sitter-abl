@@ -237,17 +237,16 @@ DISPLAY SPACE(2) Customer.Name SKIP(1) Customer.City.
 
 (source_code
   (for_statement
-    (record
-      (record
-        record: (identifier)
-        (no_lock))
-      (by_phrase
-        by: (qualified_name
-          left: (identifier)
-          right: (identifier))
-        by: (qualified_name
-          left: (identifier)
-          right: (identifier))))
+    (record_phrase
+      record: (identifier)
+      (no_lock))
+    (by_phrase
+      by: (qualified_name
+        left: (identifier)
+        right: (identifier))
+      by: (qualified_name
+        left: (identifier)
+        right: (identifier)))
     (body
       (display_statement
         (field
@@ -263,11 +262,10 @@ DISPLAY SPACE(2) Customer.Name SKIP(1) Customer.City.
             left: (identifier)
             right: (identifier))))
       (for_statement
-        (record
-          (record
-            record: (identifier)
-            of: (identifier)
-            (no_lock)))
+        (record_phrase
+          record: (identifier)
+          of: (identifier)
+          (no_lock))
         (body
           (display_statement
             (field
@@ -287,16 +285,14 @@ DISPLAY SPACE(2) Customer.Name SKIP(1) Customer.City.
                 left: (identifier)
                 right: (identifier))))
           (for_statement
-            (record
-              (record
-                record: (identifier)
-                of: (identifier)
-                (no_lock)))
-            (record
-              (record
-                record: (identifier)
-                of: (identifier)
-                (no_lock)))
+            (record_phrase
+              record: (identifier)
+              of: (identifier)
+              (no_lock))
+            (record_phrase
+              record: (identifier)
+              of: (identifier)
+              (no_lock))
             (body
               (display_statement
                 (field
@@ -316,15 +312,13 @@ DISPLAY SPACE(2) Customer.Name SKIP(1) Customer.City.
                     left: (identifier)
                     right: (identifier))))))))))
   (for_statement
-    (record
-      (record
-        record: (identifier)
-        (no_lock)))
-    (record
-      (record
-        record: (identifier)
-        of: (identifier)
-        (no_lock)))
+    (record_phrase
+      record: (identifier)
+      (no_lock))
+    (record_phrase
+      record: (identifier)
+      of: (identifier)
+      (no_lock))
     (body
       (display_statement
         (field
@@ -344,16 +338,14 @@ DISPLAY SPACE(2) Customer.Name SKIP(1) Customer.City.
             left: (identifier)
             right: (identifier))))
       (for_statement
-        (record
-          (record
-            record: (identifier)
-            of: (identifier)
-            (no_lock)))
-        (record
-          (record
-            record: (identifier)
-            of: (identifier)
-            (no_lock)))
+        (record_phrase
+          record: (identifier)
+          of: (identifier)
+          (no_lock))
+        (record_phrase
+          record: (identifier)
+          of: (identifier)
+          (no_lock))
         (body
           (display_statement
             (field
@@ -385,10 +377,9 @@ DISPLAY SPACE(2) Customer.Name SKIP(1) Customer.City.
             (format_phrase
               label: (string_literal)))))))
   (for_statement
-    (record
-      (record
-        record: (identifier)
-        (no_lock)))
+    (record_phrase
+      record: (identifier)
+      (no_lock))
     (body
       (display_statement
         (field

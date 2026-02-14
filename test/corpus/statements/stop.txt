@@ -42,9 +42,8 @@ END.
     type: (identifier)
     (no_undo))
   (for_statement
-    (record
-      (record
-        record: (identifier)))
+    (record_phrase
+      record: (identifier))
     (body
       (display_statement
         (field
@@ -78,9 +77,8 @@ END.
     type: (identifier)
     (no_undo))
   (for_statement
-    (record
-      (record
-        record: (identifier)))
+    (record_phrase
+      record: (identifier))
     (on_stop_phrase)
     (body
       (display_statement

@@ -40,14 +40,13 @@ END.
 
 (source_code
   (for_statement
-    (record
-      (record
-        record: (identifier)
-        (no_lock))
-      (by_phrase
-        by: (qualified_name
-          left: (identifier)
-          right: (identifier))))
+    (record_phrase
+      record: (identifier)
+      (no_lock))
+    (by_phrase
+      by: (qualified_name
+        left: (identifier)
+        right: (identifier)))
     (body
       (if_statement
         (binary_expression

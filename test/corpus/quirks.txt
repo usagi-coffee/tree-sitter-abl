@@ -165,10 +165,9 @@ END.
       (message_statement
         (identifier))))
   (for_statement
-    (record
-      (record
-        record: (identifier)
-        (no_lock)))
+    (record_phrase
+      record: (identifier)
+      (no_lock))
     (body
       (display_statement
         record: (qualified_name

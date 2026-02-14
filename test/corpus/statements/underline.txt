@@ -39,14 +39,13 @@ UNDERLINE STREAM-HANDLE hS Customer.Name WITH FRAME f1.
 
 (source_code
   (for_statement
-    (record
-      (record
-        record: (identifier)
-        (no_lock))
-      (break_by
-        by: (qualified_name
-          left: (identifier)
-          right: (identifier))))
+    (record_phrase
+      record: (identifier)
+      (no_lock))
+    (break_by
+      by: (qualified_name
+        left: (identifier)
+        right: (identifier)))
     (frame_phrase
       (use_text))
     (body

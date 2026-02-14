@@ -33,10 +33,9 @@ END.
 
 (source_code
   (for_statement
-    (record
-      (record
-        record: (identifier)
-        (no_lock)))
+    (record_phrase
+      record: (identifier)
+      (no_lock))
     (body
       (accumulate_statement
         (accumulate
@@ -48,10 +47,9 @@ END.
             operation: (aggregate_operation)
             operation: (aggregate_operation))))))
   (for_statement
-    (record
-      (record
-        record: (identifier)
-        (no_lock)))
+    (record_phrase
+      record: (identifier)
+      (no_lock))
     (body
       (display_statement
         (field
@@ -76,17 +74,16 @@ END.
             operation: (aggregate_operation)
             operation: (aggregate_operation))))))
   (for_statement
-    (record
-      (record
-        record: (identifier)
-        (no_lock))
-      (break_by
-        by: (qualified_name
-          left: (identifier)
-          right: (identifier))
-        by: (qualified_name
-          left: (identifier)
-          right: (identifier))))
+    (record_phrase
+      record: (identifier)
+      (no_lock))
+    (break_by
+      by: (qualified_name
+        left: (identifier)
+        right: (identifier))
+      by: (qualified_name
+        left: (identifier)
+        right: (identifier)))
     (body
       (accumulate_statement
         (accumulate
@@ -104,10 +101,9 @@ END.
                 left: (identifier)
                 right: (identifier))))))))
   (for_statement
-    (record
-      (record
-        record: (identifier)
-        (no_lock)))
+    (record_phrase
+      record: (identifier)
+      (no_lock))
     (body
       (accumulate_statement
         (accumulate
@@ -123,10 +119,9 @@ END.
             operation: (aggregate_operation)
             operation: (aggregate_operation))))))
   (for_statement
-    (record
-      (record
-        record: (identifier)
-        (no_lock)))
+    (record_phrase
+      record: (identifier)
+      (no_lock))
     (body
       (accumulate_statement
         (accumulate
@@ -144,14 +139,13 @@ END.
           (aggregate_phrase
             operation: (aggregate_operation))))))
   (for_statement
-    (record
-      (record
-        record: (identifier)
-        (no_lock))
-      (break_by
-        by: (qualified_name
-          left: (identifier)
-          right: (identifier))))
+    (record_phrase
+      record: (identifier)
+      (no_lock))
+    (break_by
+      by: (qualified_name
+        left: (identifier)
+        right: (identifier)))
     (body
       (accumulate_statement
         (accumulate

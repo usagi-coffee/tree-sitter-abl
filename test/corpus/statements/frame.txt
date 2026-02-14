@@ -731,10 +731,9 @@ WAIT-FOR WINDOW-CLOSE OF FRAME cust-fr.
       title: (string_literal)
       (use_text)))
   (for_statement
-    (record
-      (record
-        record: (identifier)
-        (no_lock)))
+    (record_phrase
+      record: (identifier)
+      (no_lock))
     (frame_phrase
       frame: (identifier))
     (body
@@ -848,14 +847,13 @@ WAIT-FOR WINDOW-CLOSE OF FRAME cust-fr.
     name: (identifier)
     table: (identifier))
   (for_statement
-    (record
-      (record
-        record: (identifier)
-        where: (binary_expression
-          (qualified_name
-            left: (identifier)
-            right: (identifier))
-          (number_literal))))
+    (record_phrase
+      record: (identifier)
+      where: (binary_expression
+        (qualified_name
+          left: (identifier)
+          right: (identifier))
+        (number_literal)))
     (body
       (display_statement
         (field

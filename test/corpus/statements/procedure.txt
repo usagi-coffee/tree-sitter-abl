@@ -109,10 +109,9 @@ END PROCEDURE.
       (parameter_definition
         dataset: (identifier))
       (for_statement
-        (record
-          (record
-            record: (identifier)
-            of: (identifier)))
+        (record_phrase
+          record: (identifier)
+          of: (identifier))
         (body
           (display_statement
             record: (qualified_name

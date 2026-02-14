@@ -225,17 +225,15 @@ DEFINE PRIVATE WORK-TABLE wtPrivate FIELD f1 AS INTEGER.
         right: (identifier))
       column_label: (string_literal)))
   (for_statement
-    (record
-      (record
-        record: (identifier)))
-    (record
-      (record
-        record: (identifier)
-        of: (identifier))
-      (break_by
-        by: (qualified_name
-          left: (identifier)
-          right: (identifier))))
+    (record_phrase
+      record: (identifier))
+    (record_phrase
+      record: (identifier)
+      of: (identifier))
+    (break_by
+      by: (qualified_name
+        left: (identifier)
+        right: (identifier)))
     (body
       (accumulate_statement
         (accumulate
@@ -292,16 +290,15 @@ DEFINE PRIVATE WORK-TABLE wtPrivate FIELD f1 AS INTEGER.
                 left: (identifier)
                 right: (identifier))))))))
   (for_statement
-    (record
-      (record
-        record: (identifier))
-      (break_by
-        by: (qualified_name
-          left: (identifier)
-          right: (identifier))
-        by: (qualified_name
-          left: (identifier)
-          right: (identifier))))
+    (record_phrase
+      record: (identifier))
+    (break_by
+      by: (qualified_name
+        left: (identifier)
+        right: (identifier))
+      by: (qualified_name
+        left: (identifier)
+        right: (identifier)))
     (body
       (if_statement
         (function_call

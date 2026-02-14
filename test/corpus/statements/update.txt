@@ -192,9 +192,8 @@ UPDATE field1 SPACE(2) SKIP(1) ^.
 
 (source_code
   (for_statement
-    (record
-      (record
-        record: (identifier)))
+    (record_phrase
+      record: (identifier))
     (body
       (update_statement
         (field
@@ -218,9 +217,8 @@ UPDATE field1 SPACE(2) SKIP(1) ^.
             left: (identifier)
             right: (identifier))))))
   (for_statement
-    (record
-      (record
-        record: (identifier)))
+    (record_phrase
+      record: (identifier))
     (body
       (update_statement
         (field
@@ -240,10 +238,9 @@ UPDATE field1 SPACE(2) SKIP(1) ^.
             message: (string_literal)
             help: (string_literal))))
       (for_statement
-        (record
-          (record
-            record: (identifier)
-            of: (identifier)))
+        (record_phrase
+          record: (identifier)
+          of: (identifier))
         (body
           (display_statement
             record: (qualified_name
@@ -348,14 +345,12 @@ UPDATE field1 SPACE(2) SKIP(1) ^.
       (no_labels)
       title: (string_literal)))
   (for_statement
-    (record
-      (record
-        record: (identifier)
-        (no_lock)))
-    (record
-      (record
-        record: (identifier)
-        of: (identifier)))
+    (record_phrase
+      record: (identifier)
+      (no_lock))
+    (record_phrase
+      record: (identifier)
+      of: (identifier))
     (body
       (display_statement
         (field

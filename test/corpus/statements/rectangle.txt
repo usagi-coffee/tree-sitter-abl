@@ -559,10 +559,9 @@ END.
       (down
         value: (number_literal))))
   (for_statement
-    (record
-      (record
-        record: (identifier)
-        (no_lock)))
+    (record_phrase
+      record: (identifier)
+      (no_lock))
     (frame_phrase
       frame: (identifier))
     (body

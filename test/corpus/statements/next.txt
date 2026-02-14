@@ -38,9 +38,8 @@ END.
       (side_labels)
       (centered)))
   (for_statement
-    (record
-      (record
-        record: (identifier)))
+    (record_phrase
+      record: (identifier))
     (body
       (if_statement
         (binary_expression

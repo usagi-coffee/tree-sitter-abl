@@ -159,10 +159,9 @@ OUTPUT TO TERMINAL.
       left: (identifier)
       right: (identifier)))
   (for_statement
-    (record
-      (record
-        record: (identifier)
-        (no_lock)))
+    (record_phrase
+      record: (identifier)
+      (no_lock))
     (body
       (display_statement
         (field
@@ -212,14 +211,13 @@ OUTPUT TO TERMINAL.
     (terminal)
     (paged))
   (for_statement
-    (record
-      (record
-        record: (identifier)
-        (no_lock))
-      (break_by
-        by: (qualified_name
-          left: (identifier)
-          right: (identifier))))
+    (record_phrase
+      record: (identifier)
+      (no_lock))
+    (break_by
+      by: (qualified_name
+        left: (identifier)
+        right: (identifier)))
     (body
       (find_statement
         table: (identifier)

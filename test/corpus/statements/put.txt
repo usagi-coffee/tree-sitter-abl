@@ -68,10 +68,9 @@ PUT CONTROL NULL(20).
       left: (identifier)
       right: (identifier)))
   (for_statement
-    (record
-      (record
-        record: (identifier)
-        (no_lock)))
+    (record_phrase
+      record: (identifier)
+      (no_lock))
     (body
       (put_statement
         stream: (identifier)

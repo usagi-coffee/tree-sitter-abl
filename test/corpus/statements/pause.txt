@@ -39,10 +39,9 @@ PAUSE BEFORE-HIDE NO-MESSAGE.
     (before_hide)
     message: (string_literal))
   (for_statement
-    (record
-      (record
-        record: (identifier)
-        (no_lock)))
+    (record_phrase
+      record: (identifier)
+      (no_lock))
     (frame_phrase
       (down
         value: (number_literal)))

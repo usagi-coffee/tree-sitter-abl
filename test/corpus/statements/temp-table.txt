@@ -560,13 +560,12 @@ WAIT-FOR CHOOSE OF cancel-butt OR WINDOW-CLOSE OF CURRENT-WINDOW.
       width: (number_literal)
       title: (string_literal)))
   (for_statement
-    (record
-      (record
-        record: (identifier))
-      (break_by
-        by: (qualified_name
-          left: (identifier)
-          right: (identifier))))
+    (record_phrase
+      record: (identifier))
+    (break_by
+      by: (qualified_name
+        left: (identifier)
+        right: (identifier)))
     (body
       (accumulate_statement
         (accumulate
@@ -640,10 +639,9 @@ WAIT-FOR CHOOSE OF cancel-butt OR WINDOW-CLOSE OF CURRENT-WINDOW.
             (identifier)
             (number_literal))
           then: (for_statement
-            (record
-              (record
-                record: (identifier)
-                index: (identifier)))
+            (record_phrase
+              record: (identifier)
+              index: (identifier))
             (frame_phrase
               frame: (identifier))
             (body
@@ -659,10 +657,9 @@ WAIT-FOR CHOOSE OF cancel-butt OR WINDOW-CLOSE OF CURRENT-WINDOW.
                   (field
                     field: (identifier))))))
           else: (for_statement
-            (record
-              (record
-                record: (identifier)
-                index: (identifier)))
+            (record_phrase
+              record: (identifier)
+              index: (identifier))
             (frame_phrase
               frame: (identifier))
             (body

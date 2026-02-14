@@ -57,10 +57,9 @@ DISPLAY "Back to 80 columns." WITH CENTERED.
 
 (source_code
   (for_statement
-    (record
-      (record
-        record: (identifier)
-        (no_lock)))
+    (record_phrase
+      record: (identifier)
+      (no_lock))
     (body
       (display_statement
         record: (identifier))))
@@ -70,10 +69,9 @@ DISPLAY "Back to 80 columns." WITH CENTERED.
     (terminal)
     (paged))
   (for_statement
-    (record
-      (record
-        record: (identifier)
-        (no_lock)))
+    (record_phrase
+      record: (identifier)
+      (no_lock))
     (body
       (display_statement
         record: (identifier)

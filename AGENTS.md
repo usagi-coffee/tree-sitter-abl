@@ -50,6 +50,7 @@ Strongly prefer using these commands as they have helpful side-effects like retu
 - Always run tests after modifications.
 - Do not remove tests unless it is illegal syntax.
 - Before working on a statement, first consult its reference to ensure you understand the available syntax and it's proper usage.
+- Keep grammar rule naming as close as possible to the language reference terminology (statement names, phrase names, and option names) unless there is a clear technical reason not to.
 - Grammar changes without thorough corpus coverage and testing are unacceptable.
 - Avoid creating a shared or generic code unless it is really a part of the core syntax, core grammar modifications require a confirmation unless experimenting.
 - Always prefere adding to `precedences` over using `prec(`.

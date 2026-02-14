@@ -39,9 +39,8 @@ READKEY PAUSE 0.5.
 
 (source_code
   (for_statement
-    (record
-      (record
-        record: (identifier)))
+    (record_phrase
+      record: (identifier))
     (body
       (display_statement
         (field

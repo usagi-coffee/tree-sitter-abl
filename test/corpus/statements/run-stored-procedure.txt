@@ -132,12 +132,11 @@ DISPLAY "Succeeded".
       value: (number_literal)
       value: (number_literal)))
   (for_statement
-    (record
-      (record
-        record: (identifier)
-        where: (binary_expression
-          (identifier)
-          (identifier))))
+    (record_phrase
+      record: (identifier)
+      where: (binary_expression
+        (identifier)
+        (identifier)))
     (body
       (display_statement
         record: (identifier))))
@@ -159,12 +158,11 @@ DISPLAY "Succeeded".
     (parameter_list
       value: (string_literal)))
   (for_statement
-    (record
-      (record
-        record: (identifier)
-        where: (binary_expression
-          (identifier)
-          (identifier))))
+    (record_phrase
+      record: (identifier)
+      where: (binary_expression
+        (identifier)
+        (identifier)))
     (body
       (display_statement
         record: (identifier))))

@@ -400,18 +400,17 @@ END.
 
 (source_code
   (for_statement
-    (record
-      (record
-        record: (identifier)
-        where: (binary_expression
-          (qualified_name
-            left: (identifier)
-            right: (identifier))
-          (number_literal)))
-      (by_phrase
-        by: (qualified_name
+    (record_phrase
+      record: (identifier)
+      where: (binary_expression
+        (qualified_name
           left: (identifier)
-          right: (identifier))))
+          right: (identifier))
+        (number_literal)))
+    (by_phrase
+      by: (qualified_name
+        left: (identifier)
+        right: (identifier)))
     (body
       (display_statement
         record: (qualified_name

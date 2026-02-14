@@ -143,9 +143,8 @@ ON F5 ENDKEY.
                 (string_literal))
               (return_statement)))))))
   (for_statement
-    (record
-      (record
-        record: (identifier)))
+    (record_phrase
+      record: (identifier))
     (body
       (update_statement
         (field
