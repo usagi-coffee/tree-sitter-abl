@@ -8,7 +8,8 @@ INCLUDE positional arguments
 
 (source_code
   (include_file_reference
-    file: (identifier)
+    file: (include_file_path
+      (identifier))
     argument: (include_argument
       (identifier))
     argument: (include_argument
@@ -26,7 +27,8 @@ INCLUDE named arguments
 
 (source_code
   (include_file_reference
-    file: (identifier)
+    file: (include_file_path
+      (identifier))
     argument: (include_argument
       name: (identifier)
       value: (string_literal))
@@ -44,9 +46,10 @@ INCLUDE preprocessor file prefix with positional argument
 
 (source_code
   (include_file_reference
-    (preprocessor_name
+    file: (include_file_path
+      (preprocessor_name
+        (identifier))
       (identifier))
-    file: (identifier)
     argument: (include_argument
       (identifier))))
 
@@ -60,9 +63,10 @@ INCLUDE preprocessor file prefix only
 
 (source_code
   (include_file_reference
-    (preprocessor_name
-      (identifier))
-    file: (identifier)))
+    file: (include_file_path
+      (preprocessor_name
+        (identifier))
+      (identifier))))
 
 ================================================================================
 INCLUDE file from argument reference
@@ -91,9 +95,10 @@ INCLUDE multiline named arguments
 
 (source_code
   (include_file_reference
-    (preprocessor_name
+    file: (include_file_path
+      (preprocessor_name
+        (identifier))
       (identifier))
-    file: (identifier)
     argument: (include_argument
       name: (identifier)
       value: (identifier))
@@ -136,7 +141,8 @@ INCLUDE with WINDOW positional argument
 
 (source_code
   (include_file_reference
-    file: (identifier)
+    file: (include_file_path
+      (identifier))
     argument: (include_argument
       (identifier))
     argument: (include_argument

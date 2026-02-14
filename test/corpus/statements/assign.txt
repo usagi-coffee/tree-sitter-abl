@@ -459,4 +459,5 @@ ASSIGN a = {us/t0/t001.i}.
       (assign_pair
         left: (identifier)
         right: (include_file_reference
-          file: (identifier))))))
+          file: (include_file_path
+            (identifier)))))))

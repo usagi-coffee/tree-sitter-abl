@@ -195,7 +195,6 @@ module.exports = grammar({
       __include_file_reference: ($) =>
         seq(
           "{",
-          optional($.preprocessor_name),
           field("file", $.__include_file_target),
           optional(field("arguments", $.__include_arguments)),
           "}",
@@ -309,8 +308,13 @@ module.exports = grammar({
       preprocessor_value: ($) => token(/[^\n]+(?:~\s*\n[^\n]+)*/),
       __include_file_target: ($) =>
         choice(
-          alias($.__include_file_name, $.identifier),
+          $.include_file_path,
           $.argument_reference,
+        ),
+      include_file_path: ($) =>
+        seq(
+          optional($.preprocessor_name),
+          alias($.__include_file_name, $.identifier),
         ),
       __include_file_name: ($) => /[A-Za-z0-9_\\/.-]+\.i/i,
 

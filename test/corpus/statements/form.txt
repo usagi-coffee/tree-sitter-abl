@@ -114,7 +114,8 @@ FORM customer-name WITH SIDE-LABELS WITH FRAME cForm.
     (form_item
       field: (identifier)
       label: (include_file_reference
-        file: (identifier))
+        file: (include_file_path
+          (identifier)))
       format: (string_literal)))
   (form_statement
     (form_item

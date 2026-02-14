@@ -99,7 +99,8 @@ a = 1.
 
 (source_code
   (include_file_reference
-    file: (identifier))
+    file: (include_file_path
+      (identifier)))
   (assignment_statement
     left: (identifier)
     operator: (assignment_operator)
