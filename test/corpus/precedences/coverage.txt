@@ -557,9 +557,8 @@ RUN internalProc IN myFunc().
   (run_statement
     (identifier)
     (in_phrase
-      (function_call
-        (identifier)
-        (arguments)))))
+      (identifier))
+    (arguments)))
 
 ================================================================================
 PRECEDENCE 37 - widget handle over widget entry
@@ -861,9 +860,8 @@ RUN internalProc IN myFunc().
   (run_statement
     (identifier)
     (in_phrase
-      (function_call
-        (identifier)
-        (arguments)))))
+      (identifier))
+    (arguments)))
 
 ================================================================================
 PRECEDENCE 56 - subscribe function_call over subscribe expression

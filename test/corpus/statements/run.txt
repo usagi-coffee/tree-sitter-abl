@@ -350,13 +350,12 @@ RUN methodProc IN hProc NO-ERROR.
   (run_statement
     procedure: (identifier)
     (in_phrase
-      context: (function_call
-        function: (identifier)
-        (arguments
-          (argument
-            name: (identifier))
-          (argument
-            name: (identifier))))))
+      context: (identifier))
+    (arguments
+      (argument
+        name: (identifier))
+      (argument
+        name: (identifier))))
   (delete_procedure_statement
     handle: (identifier))
   (run_statement
@@ -367,23 +366,21 @@ RUN methodProc IN hProc NO-ERROR.
   (run_statement
     procedure: (identifier)
     (in_phrase
-      context: (function_call
-        function: (identifier)
-        (arguments
-          (argument
-            name: (identifier))
-          (argument
-            name: (identifier))))))
+      context: (identifier))
+    (arguments
+      (argument
+        name: (identifier))
+      (argument
+        name: (identifier))))
   (run_statement
     procedure: (identifier)
     (in_phrase
-      context: (function_call
-        function: (identifier)
-        (arguments
-          (argument
-            name: (identifier))
-          (argument
-            name: (identifier))))))
+      context: (identifier))
+    (arguments
+      (argument
+        name: (identifier))
+      (argument
+        name: (identifier))))
   (delete_procedure_statement
     handle: (identifier))
   (run_statement
@@ -405,6 +402,26 @@ RUN methodProc IN hProc NO-ERROR.
     (in_phrase
       context: (identifier))
     (no_error)))
+
+================================================================================
+RUN IN handle with multiline arguments
+================================================================================
+
+RUN CreateBufferHeader IN reportHandle
+  (bufferName, "Sales Order Header").
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (run_statement
+    procedure: (identifier)
+    (in_phrase
+      context: (identifier))
+    (arguments
+      (argument
+        name: (identifier))
+      (argument
+        name: (string_literal)))))
 
 ================================================================================
 RUN with DATASET-HANDLE output and BUFFER handle argument

@@ -434,9 +434,8 @@ RUN internalProc IN myFunc().
   (run_statement
     (identifier)
     (in_phrase
-      (function_call
-        (identifier)
-        (arguments)))))
+      (identifier))
+    (arguments)))
 
 ================================================================================
 PRECEDENCE - SET field vs record
