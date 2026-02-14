@@ -19,8 +19,8 @@
 (include_file_reference) @include
 (include_file_reference) @preproc
 (include_file_path (identifier) @string)
-(include_named_argument name: (identifier) @attribute)
-(include_named_argument name: (identifier) @parameter)
+(include_argument name: (identifier) @attribute)
+(include_argument name: (identifier) @parameter)
 (constant) @constant
 (constant) @constant.builtin
 (constant) @macro
