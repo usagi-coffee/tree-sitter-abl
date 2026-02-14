@@ -221,6 +221,7 @@ module.exports = ({ kw }) => ({
     choice(
       alias($.__on_ui_event_name, $.identifier),
       prec(-1, $.string_literal),
+      prec(-2, $.__on_key_label),
     ),
   __on_ui_events: ($) =>
     seq(
