@@ -451,7 +451,7 @@ module.exports = grammar({
         choice(
           alias($.binary_expression_no_eq, $.binary_expression),
           $.unary_expression,
-          $._primary_expression
+          $._statement_primary_expression
         ),
       // excludes `=` to disambiguate assignment vs equality comparison at statement level.
       _comparison_operator_no_eq: ($) => choice(...COMPARISON_OPERATORS),

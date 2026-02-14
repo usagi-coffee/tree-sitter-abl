@@ -27,7 +27,7 @@ ARGUMENT REFERENCE positional and all arguments
 --------------------------------------------------------------------------------
 
 (source_code
-  (expression_statement
-    (argument_reference))
-  (expression_statement
-    (argument_reference)))
+  (argument_reference)
+  (empty_statement)
+  (argument_reference)
+  (empty_statement))
