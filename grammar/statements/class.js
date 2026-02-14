@@ -319,7 +319,7 @@ module.exports = ({ kw }) => ({
   __method_extent_size: ($) =>
     choice(
       $.number_literal,
-      alias($.constant_expression, $.preprocessor_reference),
+      $.preprocessor_name,
       $.identifier,
     ),
   __method_table_parameter: ($) =>

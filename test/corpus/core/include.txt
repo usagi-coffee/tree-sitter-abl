@@ -35,7 +35,7 @@ DISPLAY {&VAR1}.
           value: (identifier)))))
   (include_reference
     (include_reference
-      file: (preprocessor_reference
+      file: (preprocessor_name
         (identifier))
       file: (file_name)
       argument: (include_argument
@@ -43,7 +43,7 @@ DISPLAY {&VAR1}.
   (include)
   (include_reference
     (include_reference
-      file: (preprocessor_reference
+      file: (preprocessor_name
         (identifier))
       file: (file_name)
       argument: (include_argument
@@ -88,7 +88,7 @@ DISPLAY {&VAR1}.
           value: (identifier)))))
   (display_statement
     (field
-      field: (preprocessor_reference
+      field: (preprocessor_name
         (identifier)))))
 
 ================================================================================

@@ -8,7 +8,7 @@ CONSTANT
 
 (source_code
   (expression_statement
-    (preprocessor_reference
+    (preprocessor_name
       (identifier))))
 
 ================================================================================

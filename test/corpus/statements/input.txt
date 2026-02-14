@@ -21,7 +21,7 @@ INPUT STREAM-HANDLE hStream CLOSE.
     directory: (string_literal)
     (no_attr_list)
     (lob_dir_phrase
-      directory: (preprocessor_reference
+      directory: (preprocessor_name
         (identifier)))
     (binary)
     (no_echo)

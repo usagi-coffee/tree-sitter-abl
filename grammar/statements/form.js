@@ -63,7 +63,7 @@ module.exports = ({ kw }) => ({
   __form_label: ($) =>
     choice(
       alias($.include_expression, $.include_reference),
-      alias($.constant_expression, $.preprocessor_reference),
+      $.preprocessor_name,
       $.string_literal,
       $._identifier_or_qualified_name,
     ),

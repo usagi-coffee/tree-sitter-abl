@@ -90,6 +90,21 @@ OUTPUT THROUGH myprog NO-MAP CONVERT TARGET "utf-8".
       target: (string_literal))))
 
 ================================================================================
+OUTPUT TO VALUE with preprocessor name option
+================================================================================
+
+OUTPUT TO VALUE({&OUT}) {&OUTPUT-ARGS}.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (output_statement
+    value: (preprocessor_name
+      (identifier))
+    (preprocessor_name
+      (identifier))))
+
+================================================================================
 OUTPUT - reference snippets and options
 ================================================================================
 

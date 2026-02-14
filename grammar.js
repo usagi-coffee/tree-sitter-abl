@@ -225,7 +225,7 @@ module.exports = grammar({
             $.number_literal,
             alias($._signed_number_literal, $.number_literal),
             $.boolean_literal,
-            alias($.constant_expression, $.preprocessor_reference),
+            $.preprocessor_name,
             $.argument_reference,
           ),
         ),
@@ -236,13 +236,13 @@ module.exports = grammar({
         token(/&(IF|THEN|ELSEIF|ELSE|ENDIF)[^\n]*(?:~\s*\n[^\n]*)*/i),
       _include_file_reference: ($) =>
         seq(
-          optional(alias($.constant_expression, $.preprocessor_reference)),
+          optional($.preprocessor_name),
           $.file_name,
         ),
 
       // Constants
       constant: ($) => token(/\{&[^\}\r\n]+\}[ \t]*\r?\n/),
-      constant_expression: ($) =>
+      preprocessor_name: ($) =>
         seq(
           "{&",
           $.identifier,
@@ -256,7 +256,7 @@ module.exports = grammar({
           $.number_literal,
           alias($._signed_number_literal, $.number_literal),
           $.boolean_literal,
-          alias($.constant_expression, $.preprocessor_reference),
+          $.preprocessor_name,
           $.argument_reference,
           $.parenthesized_identifier,
         ),

@@ -41,7 +41,7 @@ module.exports = ({ kw }) => ({
       $.qualified_name,
       $.object_access,
       $.function_call,
-      alias($.constant_expression, $.preprocessor_reference),
+      $.preprocessor_name,
     ),
   __input_lob_dir_phrase: ($) =>
     seq(
@@ -49,7 +49,7 @@ module.exports = ({ kw }) => ({
       field(
         "directory",
         choice(
-          alias($.constant_expression, $.preprocessor_reference),
+          $.preprocessor_name,
           seq(kw("VALUE"), "(", field("value", $._expression), ")"),
         ),
       ),

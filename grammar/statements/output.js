@@ -21,6 +21,7 @@ module.exports = ({ kw }) => ({
 
   __output_to_option: ($) =>
     choice(
+      $.preprocessor_name,
       alias($.__output_lob_dir_phrase, $.lob_dir_phrase),
       alias($.__output_num_copies_phrase, $.num_copies_phrase),
       alias(kw("COLLATE"), $.collate),
@@ -71,7 +72,7 @@ module.exports = ({ kw }) => ({
         field(
           "directory",
           choice(
-            alias($.constant_expression, $.preprocessor_reference),
+            $.preprocessor_name,
             seq(kw("VALUE"), "(", field("value", $._expression), ")")
           )
         )
@@ -84,7 +85,7 @@ module.exports = ({ kw }) => ({
           "copies",
           choice(
             $.number_literal,
-            alias($.constant_expression, $.preprocessor_reference),
+            $.preprocessor_name,
             seq(kw("VALUE"), "(", field("value", $._expression), ")")
           )
         )
@@ -97,7 +98,7 @@ module.exports = ({ kw }) => ({
           "page_size",
           choice(
             $.number_literal,
-            alias($.constant_expression, $.preprocessor_reference),
+            $.preprocessor_name,
             seq(kw("VALUE"), "(", field("value", $._expression), ")")
           )
         )
@@ -112,12 +113,12 @@ module.exports = ({ kw }) => ({
 
   __output_to_target: ($) =>
     choice(
-      seq(kw("PRINTER"), optional(field("printer", $.__output_printer_target))),
+      prec.right(seq(kw("PRINTER"), optional(field("printer", $.__output_printer_target)))),
       field(
         "file",
         choice(
           $.string_literal,
-          alias($.constant_expression, $.preprocessor_reference),
+          $.preprocessor_name,
           $.identifier,
           $.qualified_name
         )
@@ -139,7 +140,7 @@ module.exports = ({ kw }) => ({
       $.string_literal,
       $.number_literal,
       $.identifier,
-      alias($.constant_expression, $.preprocessor_reference),
+      $.preprocessor_name,
       seq(kw("VALUE"), "(", field("value", $._expression), ")")
     ),
 
@@ -147,6 +148,6 @@ module.exports = ({ kw }) => ({
     choice(
       $.string_literal,
       $.identifier,
-      alias($.constant_expression, $.preprocessor_reference)
+      $.preprocessor_name
     ),
 });
