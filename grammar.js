@@ -1,7 +1,6 @@
 /// <reference types="tree-sitter-cli/dsl" />
 
-const path = require("path");
-const { kw, collect_keyword_words } = require("./grammar/helpers/keywords");
+const { kw } = require("./grammar/helpers/keywords");
 const precedences = require("./grammar/precedences");
 
 const COMPARISON_OPERATORS = [
@@ -19,37 +18,6 @@ const COMPARISON_OPERATORS = [
   kw("GE"),
   kw("LE"),
 ];
-
-const LABEL_KEYWORD_WORDS = collect_keyword_words(
-  path.join(__dirname, "grammar"),
-  // Label exceptions
-  [
-    "DO",
-    "FOR",
-    "REPEAT",
-    "FINALLY",
-    "CASE",
-    "OBJECT",
-    "ACTIVE-WINDOW",
-    "CLIPBOARD",
-    "COLOR-TABLE",
-    "COMPILER",
-    "CURRENT-WINDOW",
-    "DEBUGGER",
-    "DEFAULT-WINDOW",
-    "ERROR-STATUS",
-    "FILE-INFO",
-    "FOCUS",
-    "FONT-TABLE",
-    "LAST-EVENT",
-    "RCODE-INFO",
-    "SELF",
-    "SESSION",
-    "SOURCE-PROCEDURE",
-    "TARGET-PROCEDURE",
-    "THIS-PROCEDURE",
-  ]
-);
 
 const WIDGETS = [
   kw("WINDOW"),
@@ -645,16 +613,6 @@ module.exports = grammar({
       // Identifiers
       // BE CAREFUL MODIFYING HERE, IDENTIFIER ORDER FOR SOME REASON MATTERS!
       identifier: ($) => token(/[_\p{L}][\p{L}\p{N}_\-&]*/i),
-      label_keyword: ($) =>
-        token(
-          prec(
-            1,
-            new RegExp(
-              `(${LABEL_KEYWORD_WORDS.map(escape_regex).join("|")})\\s*:`,
-              "i"
-            )
-          )
-        ),
       system_handle_identifier: ($) =>
         alias(
           token(
@@ -670,13 +628,7 @@ module.exports = grammar({
         ),
       _label_identifier: ($) => $.identifier,
       _label: ($) =>
-        prec.right(
-          1,
-          choice(
-            seq(field("label", $.identifier), alias($._colon, ":")),
-            field("label", alias($.label_keyword, $.identifier))
-          )
-        ),
+        prec.right(1, seq(field("label", $.identifier), alias($._colon, ":"))),
       _identifier_immediate: ($) => token.immediate(/[_\p{L}][\p{L}\p{N}_-]*/i),
       parenthesized_identifier: ($) => seq("(", $.identifier, ")"),
       _object_access_tail: ($) =>

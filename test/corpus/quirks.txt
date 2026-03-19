@@ -45,11 +45,11 @@ and3 = 4.
 or4 = 5.
 formattedDate = test.
 
-CHOOSE: REPEAT:
+choose_label: REPEAT:
   MESSAGE "ok".
 END.
 
-PRESELECT : REPEAT:
+preselect_label : REPEAT:
   MESSAGE "ok".
 END.
 
