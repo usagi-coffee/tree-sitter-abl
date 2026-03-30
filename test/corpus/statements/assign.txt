@@ -73,15 +73,15 @@ ASSIGN
       (assign_pair
         left: (identifier)
         right: (string_literal)
-        (when_available_phrase
-          (identifier)))
+        when: (available_expression
+          record: (identifier)))
       (assign_pair
         left: (identifier)
         right: (qualified_name
           left: (identifier)
           right: (identifier))
-        (when_available_phrase
-          (identifier))))))
+        when: (available_expression
+          record: (identifier))))))
 
 ================================================================================
 ASSIGN record/input
@@ -409,8 +409,8 @@ NO-ERROR.
           left: (identifier)
           right: (identifier))
         right: (string_literal)
-        (when_available_phrase
-          (qualified_name
+        when: (available_expression
+          record: (qualified_name
             left: (identifier)
             right: (identifier))))
       (assign_pair
