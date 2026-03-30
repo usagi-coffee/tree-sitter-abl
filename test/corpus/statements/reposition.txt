@@ -62,6 +62,8 @@ Order.OrderNum Order.OrderDate
 WITH FRAME order-info CENTERED ROW 5 SIDE-LABELS OVERLAY.
 END PROCEDURE.
 
+REPOSITION qCust FORWARD 5.
+REPOSITION qCust BACKWARD (n - 1).
 REPOSITION qCust TO RECID rCust NO-ERROR.
 REPOSITION qCust TO ROWID rTop, rChild FOR TENANT tenantId NO-ERROR.
 
@@ -212,6 +214,17 @@ REPOSITION qCust TO ROWID rTop, rChild FOR TENANT tenantId NO-ERROR.
           row: (number_literal)
           (side_labels)
           (overlay)))))
+  (reposition_statement
+    query: (identifier)
+    (forwards)
+    count: (number_literal))
+  (reposition_statement
+    query: (identifier)
+    (backwards)
+    count: (parenthesized_expression
+      (binary_expression
+        (identifier)
+        (number_literal))))
   (reposition_statement
     query: (identifier)
     recid: (identifier)

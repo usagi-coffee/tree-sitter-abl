@@ -23,8 +23,8 @@ module.exports = ({ kw }) => ({
           optional(alias(kw("NO-ERROR"), $.no_error)),
         ),
         seq(kw("TO"), kw("ROW"), field("row", $._expression)),
-        seq(alias(kw("FORWARDS"), $.forwards), field("count", $._expression)),
-        seq(alias(kw("BACKWARDS"), $.backwards), field("count", $._expression)),
+        seq(alias(kw("FORWARDS", { alias: 'FORWARD', offset: 7 }), $.forwards), field("count", $._expression)),
+        seq(alias(kw("BACKWARDS", { alias: 'BACKWARD', offset: 8 }), $.backwards), field("count", $._expression)),
       ),
     ),
 });
