@@ -18,5 +18,5 @@ arr[1, 2];
   (expression_statement
     (array_access
       array: (identifier)
-      (number_literal)
-      (number_literal))))
+      index: (number_literal)
+      index: (number_literal))))

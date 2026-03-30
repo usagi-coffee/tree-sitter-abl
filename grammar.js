@@ -124,6 +124,7 @@ module.exports = grammar({
     [$.__unsubscribe_body, $._identifier_or_qualified_name],
     // Shared identifier/access/call wrapper can compete with direct function call parse at `identifier(` sites.
     [$._identifier_or_access_or_call, $.function_call],
+    [$._identifier_or_access, $.function_call],
     // ON TAB TAB. vs ON TAB OF widget: both start with a UI event name token.
     // Requires runtime dispatch since disambiguation needs 2-token lookahead.
     [$.__on_key_label, $.__on_ui_event],
@@ -133,6 +134,7 @@ module.exports = grammar({
     $.__find_index_name,
     $.__assign_record_name,
     $.__temp_table_like_name,
+    $._identifier_or_array_access,
     $.system_handle_identifier,
   ],
 
@@ -254,7 +256,7 @@ module.exports = grammar({
       __include_file_name: ($) => /[A-Za-z0-9_\\/.-]+\.[A-Za-z][A-Za-z0-9]*/,
 
       // Constants
-      constant: ($) => token(/\{&[^\}\r\n]+\}[ \t]*\r?\n/),
+      constant: ($) => token(/\{&[^}\r\n]+\}[ \t]*\r?\n/),
       preprocessor_name: ($) =>
         prec(
           1,
@@ -311,8 +313,10 @@ module.exports = grammar({
           alias(kw("PROCEDURE", { offset: 4 }), $.identifier),
           alias(kw("INTERFACE"), $.identifier),
         ),
-      _identifier_or_access_or_call: ($) =>
-        choice($._identifier_or_qualified_name, $.object_access, $.function_call),
+      _identifier_or_array_access: ($) => choice($._identifier_or_qualified_name, $.array_access),
+      _identifier_or_access: ($) =>
+        choice($._identifier_or_qualified_name, $.array_access, $.object_access),
+      _identifier_or_access_or_call: ($) => choice($._identifier_or_access, $.function_call),
       macro_concatenated_name: ($) =>
         token(/[_\p{L}][\p{L}\p{N}_\-&]*(\{(?:&[0-9A-Za-z_-]+|[0-9A-Za-z_-]+)\})+/i),
 
@@ -442,7 +446,12 @@ module.exports = grammar({
       _array_target: ($) => choice($._identifier_or_qualified_name, $.object_access, $.scoped_name),
 
       array_access: ($) =>
-        seq(field("array", $._array_target), "[", optional($._array_subscript), "]"),
+        seq(
+          field("array", $._array_target),
+          "[",
+          field("index", optional($._array_subscript)),
+          "]",
+        ),
       _array_subscript: ($) =>
         choice(
           $._expressions,

@@ -17,13 +17,11 @@ module.exports = ({ kw }) => ({
     choice(
       seq(
         optional(kw("FIELD")),
-        field("field", $._identifier_or_qualified_name),
-        optional(seq("[", field("subscript", $._expression), "]")),
+        field("field", $._identifier_or_array_access),
         optional(seq(kw("IN"), kw("FRAME"), field("frame", $.identifier))),
       ),
       seq(
-        field("column", $._identifier_or_qualified_name),
-        optional(seq("[", field("subscript", $._expression), "]")),
+        field("column", $._identifier_or_array_access),
         seq(kw("IN"), kw("BROWSE"), field("browse", $.identifier)),
       ),
       seq(

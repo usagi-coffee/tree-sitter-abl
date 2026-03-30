@@ -278,6 +278,9 @@ END.
 ON LEAVE OF FIELD lvd_tara IN FRAME wr OR LEAVE OF FIELD lvd_brutto IN FRAME wr DO:
 END.
 
+ON LEAVE OF FIELD arr[1] IN FRAME wr DO:
+END.
+
 --------------------------------------------------------------------------------
 
 (source_code
@@ -302,6 +305,16 @@ END.
     (of_phrase
       widget: (widget_phrase
         field: (identifier)
+        frame: (identifier)))
+    (do_statement
+      (body)))
+  (on_statement
+    event: (identifier)
+    (of_phrase
+      widget: (widget_phrase
+        field: (array_access
+          array: (identifier)
+          index: (number_literal))
         frame: (identifier)))
     (do_statement
       (body))))

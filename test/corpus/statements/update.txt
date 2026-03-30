@@ -49,12 +49,12 @@ UPDATE field1 GO-ON(f1 f2).
     (field
       field: (array_access
         array: (identifier)
-        (number_literal))
+        index: (number_literal))
       value: (identifier))
     (field
       field: (array_access
         array: (identifier)
-        (number_literal))
+        index: (number_literal))
       value: (identifier)))
   (update_statement
     (field

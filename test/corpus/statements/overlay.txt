@@ -184,7 +184,7 @@ OVERLAY(cLong, 1, 5, "COLUMN") = "Hi".
                 (argument
                   name: (array_access
                     array: (identifier)
-                    (identifier)))))
+                    index: (identifier)))))
             (body
               (assignment_statement
                 left: (identifier)
@@ -195,7 +195,7 @@ OVERLAY(cLong, 1, 5, "COLUMN") = "Hi".
                     (argument
                       name: (array_access
                         array: (identifier)
-                        (identifier)))
+                        index: (identifier)))
                     (argument
                       name: (identifier)))))
               (assignment_statement
@@ -225,7 +225,7 @@ OVERLAY(cLong, 1, 5, "COLUMN") = "Hi".
                     (overlay_statement
                       target: (array_access
                         array: (identifier)
-                        (identifier))
+                        index: (identifier))
                       position: (identifier)
                       length: (identifier)
                       type: (string_literal)
@@ -238,7 +238,7 @@ OVERLAY(cLong, 1, 5, "COLUMN") = "Hi".
             (field
               field: (array_access
                 array: (identifier)
-                (identifier)))
+                index: (identifier)))
             (frame_phrase
               frame: (identifier)))))))
   (overlay_statement

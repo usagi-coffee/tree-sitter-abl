@@ -12,12 +12,12 @@ arr[1 FOR 4].
   (expression_statement
     (array_access
       array: (identifier)
-      (number_literal)))
+      index: (number_literal)))
   (expression_statement
     (array_access
       array: (identifier)
-      (number_literal)
-      (number_literal)))
+      index: (number_literal)
+      index: (number_literal)))
   (expression_statement
     (array_access
       array: (identifier)

@@ -16,6 +16,10 @@ module.exports = ($) => [
   // Example: ON CHOOSE OF btn foo().
   // Reference: Widget phrase.
   [$.function_call, $.__widget_entry],
+  // Purpose: prefer function calls only when explicitly called, even for bare handle branch.
+  // Example: ON CHOOSE OF myFunc().
+  // Reference: Widget phrase.
+  [$.function_call, $.__widget_handle],
   // Purpose: prefer bare handles over field/column entries.
   // Example: ON CHOOSE OF btnFind DO:
   // Reference: Widget phrase.

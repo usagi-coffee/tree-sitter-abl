@@ -11,6 +11,7 @@ const enable = require("./enable");
 const assign = require("./assign");
 const exportStatement = require("./export");
 const format = require("./format");
+const frame = require("./frame");
 const input = require("./input");
 const os = require("./os");
 const put = require("./put");
@@ -41,6 +42,7 @@ module.exports = ($) => [
   ...widget($),
   ...message($),
   ...record($),
+  ...frame($),
   ...format($),
   ...put($),
   ...promptFor($),

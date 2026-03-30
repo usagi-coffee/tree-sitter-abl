@@ -744,7 +744,7 @@ END.
         (field
           field: (array_access
             array: (identifier)
-            (function_call
+            index: (function_call
               function: (identifier)
               (arguments
                 (argument
@@ -917,16 +917,18 @@ DEFINE VARIABLE y EXTENT 3 LIKE ttRecord.fieldArr[2] NO-UNDO.
   (variable_definition
     name: (identifier)
     (no_undo)
-    like: (qualified_name
-      left: (identifier)
-      right: (identifier))
-    like_subscript: (number_literal))
+    like: (array_access
+      array: (qualified_name
+        left: (identifier)
+        right: (identifier))
+      index: (number_literal)))
   (variable_definition
     name: (identifier)
     (extent_phrase
       size: (number_literal))
-    like: (qualified_name
-      left: (identifier)
-      right: (identifier))
-    like_subscript: (number_literal)
+    like: (array_access
+      array: (qualified_name
+        left: (identifier)
+        right: (identifier))
+      index: (number_literal))
     (no_undo)))

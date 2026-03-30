@@ -15,11 +15,7 @@ module.exports = ({ kw }) => ({
       optional(alias(kw("NO-UNDO"), $.no_undo)),
       choice(
         seq(kw("AS"), optional(kw("CLASS")), field("type", $._type_or_string)),
-        seq(
-          kw("LIKE"),
-          field("like", $._identifier_or_qualified_name),
-          optional(seq("[", field("like_subscript", $._expression), "]")),
-        ),
+        seq(kw("LIKE"), field("like", $._identifier_or_array_access)),
       ),
 
       repeat(

@@ -38,13 +38,12 @@ module.exports = ({ kw }) => ({
 
   __frame_form_item: ($) =>
     choice(
-      alias(kw("SPACE"), $.space),
-      alias(kw("SKIP"), $.skip),
-      seq(kw("SPACE"), "(", optional(field("space", $._expression)), ")"),
-      seq(kw("SKIP"), "(", optional(field("skip", $._expression)), ")"),
+      prec.right(1, seq(kw("SPACE"), "(", optional(field("space", $._expression)), ")")),
+      prec.right(1, seq(kw("SKIP"), "(", optional(field("skip", $._expression)), ")")),
+      prec(-1, alias(kw("SPACE"), $.space)),
+      prec(-1, alias(kw("SKIP"), $.skip)),
       seq(
-        field("field", $._identifier_or_qualified_name),
-        optional(seq("[", field("subscript", $._expression), "]")),
+        field("field", $._identifier_or_array_access),
         optional(
           choice(
             alias($.at_phrase, $.format_phrase),
