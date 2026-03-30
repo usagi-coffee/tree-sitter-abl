@@ -4,6 +4,7 @@ const availableExpression = require("./available");
 const canFindExpression = require("./can-find");
 const conditionalExpression = require("./conditional");
 const datasetExpression = require("./dataset");
+const enteredExpression = require("./entered");
 const lockedExpression = require("./locked");
 const newExpression = require("./new");
 const currentChangedExpression = require("./current-changed");
@@ -17,6 +18,7 @@ module.exports = (ctx) => ({
   ...canFindExpression(ctx),
   ...lockedExpression(ctx),
   ...newExpression(ctx),
+  ...enteredExpression(ctx),
   ...datasetExpression(ctx),
   ...currentChangedExpression(ctx),
   ...ambiguousExpression(ctx),
