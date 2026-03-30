@@ -40,7 +40,7 @@ module.exports = ({ kw }) => ({
       ),
       optional(
         seq(
-          kw("BUTTONS"),
+          kw("BUTTONS", { alias: "BUTTON", offset: 6 }),
           field(
             "buttons",
             choice(
