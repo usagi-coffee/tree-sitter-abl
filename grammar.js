@@ -132,6 +132,9 @@ module.exports = grammar({
     [$.__unsubscribe_body, $._identifier_or_qualified_name],
     // Shared identifier/access/call wrapper can compete with direct function call parse at `identifier(` sites.
     [$._identifier_or_access_or_call, $.function_call],
+    // ON TAB TAB. vs ON TAB OF widget: both start with a UI event name token.
+    // Requires runtime dispatch since disambiguation needs 2-token lookahead.
+    [$.__on_key_label, $.__on_ui_event],
   ],
   inline: ($) => [
     $.__find_record_name,
@@ -286,7 +289,7 @@ module.exports = grammar({
           optional($.preprocessor_name),
           alias($.__include_file_name, $.identifier),
         ),
-      __include_file_name: ($) => /[A-Za-z0-9_\\/.-]+\.i/i,
+      __include_file_name: ($) => /[A-Za-z0-9_\\/.-]+\.[A-Za-z][A-Za-z0-9]*/,
 
       // Constants
       constant: ($) => token(/\{&[^\}\r\n]+\}[ \t]*\r?\n/),
@@ -612,7 +615,7 @@ module.exports = grammar({
 
       // Identifiers
       // BE CAREFUL MODIFYING HERE, IDENTIFIER ORDER FOR SOME REASON MATTERS!
-      identifier: ($) => token(/[_\p{L}][\p{L}\p{N}_\-&]*/i),
+      identifier: ($) => token(/[_\p{L}][\p{L}\p{N}_\-&#]*/i),
       system_handle_identifier: ($) =>
         alias(
           token(
