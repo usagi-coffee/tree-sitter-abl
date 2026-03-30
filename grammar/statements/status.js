@@ -5,10 +5,7 @@ module.exports = ({ kw }) => ({
     seq(
       choice(
         seq(kw("DEFAULT"), optional(field("message", $._expression))),
-        seq(
-          kw("INPUT"),
-          optional(choice(kw("OFF"), field("message", $._expression))),
-        ),
+        seq(kw("INPUT"), optional(choice(kw("OFF"), field("message", $._expression)))),
       ),
       optional($.in_window_phrase),
     ),

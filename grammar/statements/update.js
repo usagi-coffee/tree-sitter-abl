@@ -49,37 +49,22 @@ module.exports = ({ kw }) => ({
         optional($.format_phrase),
         optional(seq(kw("WHEN"), field("when", $._expression))),
       ),
-      seq(
-        field("field", $.__update_field_target),
-        "=",
-        field("value", $._expression),
-      ),
+      seq(field("field", $.__update_field_target), "=", field("value", $._expression)),
       seq(
         kw("TEXT"),
         "(",
-        repeat1(
-          seq(
-            field("field", $._identifier_or_qualified_name),
-            optional($.format_phrase),
-          ),
-        ),
+        repeat1(seq(field("field", $._identifier_or_qualified_name), optional($.format_phrase))),
         ")",
       ),
       seq(
         field("constant", $.string_literal),
-        optional(
-          seq(
-            choice(kw("AT"), kw("TO")),
-            field("position", token(/[0-9]+(\.[0-9]+)?/)),
-          ),
-        ),
+        optional(seq(choice(kw("AT"), kw("TO")), field("position", token(/[0-9]+(\.[0-9]+)?/)))),
       ),
       "^",
     ),
 
   __update_record: ($) => $._identifier_or_qualified_name,
-  __update_field_target: ($) =>
-    choice(prec(1, $._identifier_or_qualified_name), $.array_access),
+  __update_field_target: ($) => choice(prec(1, $._identifier_or_qualified_name), $.array_access),
   __update_skip_phrase: ($) =>
     choice(
       prec.right(1, seq(kw("SKIP"), "(", field("skip", $._expression), ")")),

@@ -10,9 +10,7 @@ async function check_skipped(src) {
   }
 
   if (status.trim() !== "H") {
-    console.error(
-      `${src} is most likely skipped, undo worktree before deploying, aborting...`
-    );
+    console.error(`${src} is most likely skipped, undo worktree before deploying, aborting...`);
 
     process.exit(1);
   }

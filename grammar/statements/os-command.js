@@ -1,6 +1,5 @@
 module.exports = ({ kw }) => ({
-  os_command_statement: ($) =>
-    seq(kw("OS-COMMAND"), $.__os_command_body, $._terminator),
+  os_command_statement: ($) => seq(kw("OS-COMMAND"), $.__os_command_body, $._terminator),
 
   __os_command_body: ($) =>
     seq(
@@ -8,8 +7,7 @@ module.exports = ({ kw }) => ({
       repeat1(choice($.__os_command_value_target, $.__os_command_token)),
     ),
 
-  __os_command_value_target: ($) =>
-    seq(kw("VALUE"), "(", field("value", $._expression), ")"),
+  __os_command_value_target: ($) => seq(kw("VALUE"), "(", field("value", $._expression), ")"),
   __os_command_token: ($) =>
     choice(
       $.identifier,

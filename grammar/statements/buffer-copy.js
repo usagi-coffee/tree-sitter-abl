@@ -1,6 +1,5 @@
 module.exports = ({ kw }) => ({
-  buffer_copy_statement: ($) =>
-    seq(kw("BUFFER-COPY"), $.__buffer_copy_body, $._terminator),
+  buffer_copy_statement: ($) => seq(kw("BUFFER-COPY"), $.__buffer_copy_body, $._terminator),
 
   __buffer_copy_body: ($) =>
     seq(
@@ -30,10 +29,7 @@ module.exports = ({ kw }) => ({
       repeat(seq(optional(","), $._identifier_or_qualified_name)),
     ),
   __buffer_copy_assign_phrase: ($) =>
-    seq(
-      kw("ASSIGN"),
-      repeat1(alias($.__buffer_copy_assign_pair, $.assign_pair)),
-    ),
+    seq(kw("ASSIGN"), repeat1(alias($.__buffer_copy_assign_pair, $.assign_pair))),
   __buffer_copy_assign_pair: ($) =>
     seq(
       field("left", $._assignable),

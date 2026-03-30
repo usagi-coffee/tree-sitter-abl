@@ -1,6 +1,5 @@
 module.exports = ({ kw }) => ({
-  disconnect_statement: ($) =>
-    seq(kw("DISCONNECT"), $.__disconnect_body, $._terminator),
+  disconnect_statement: ($) => seq(kw("DISCONNECT"), $.__disconnect_body, $._terminator),
 
   __disconnect_body: ($) =>
     seq(

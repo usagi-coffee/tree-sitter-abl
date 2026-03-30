@@ -1,6 +1,5 @@
 module.exports = ({ kw }) => ({
-  aggregate_phrase: ($) =>
-    prec.right(repeat1($.__aggregate_option)),
+  aggregate_phrase: ($) => prec.right(repeat1($.__aggregate_option)),
 
   aggregate_operation: ($) =>
     choice(
@@ -23,9 +22,7 @@ module.exports = ({ kw }) => ({
       repeat(alias($.__aggregate_by_phrase, $.by_phrase)),
     ),
 
-  __aggregate_label_phrase: ($) =>
-    seq(kw("LABEL"), field("label", $.string_literal)),
+  __aggregate_label_phrase: ($) => seq(kw("LABEL"), field("label", $.string_literal)),
 
-  __aggregate_by_phrase: ($) =>
-    seq(kw("BY"), field("group", $._identifier_or_qualified_name)),
+  __aggregate_by_phrase: ($) => seq(kw("BY"), field("group", $._identifier_or_qualified_name)),
 });

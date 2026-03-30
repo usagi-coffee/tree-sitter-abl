@@ -108,11 +108,7 @@ module.exports = grammar({
       $.__variable_modifier,
     ],
     [$.__property_access_modifier, $.__variable_modifier],
-    [
-      $.__property_access_modifier,
-      $.__event_access_modifier,
-      $.__variable_modifier,
-    ],
+    [$.__property_access_modifier, $.__event_access_modifier, $.__variable_modifier],
     [
       $.__buffer_modifier,
       $.__property_class_modifier,
@@ -123,11 +119,7 @@ module.exports = grammar({
     ],
     [$.__property_class_modifier, $.__variable_modifier],
     [$.__property_class_modifier, $.__event_type_modifier],
-    [
-      $.__property_class_modifier,
-      $.__event_type_modifier,
-      $.__variable_modifier,
-    ],
+    [$.__property_class_modifier, $.__event_type_modifier, $.__variable_modifier],
     // SUBSCRIBE/UNSUBSCRIBE can start with PROCEDURE/PROC which may also be parsed as identifier-like expression.
     [$.__unsubscribe_body, $._identifier_or_qualified_name],
     // Shared identifier/access/call wrapper can compete with direct function call parse at `identifier(` sites.
@@ -160,11 +152,10 @@ module.exports = grammar({
         token(
           choice(
             /\{\{&[^}\r\n]+\}[^\s}\r\n]*\.i[ \t]*\}[ \t]*\r?\n/i,
-            /\{[^\s}\r\n]*\.i[ \t]*\}[ \t]*\r?\n/i
-          )
+            /\{[^\s}\r\n]*\.i[ \t]*\}[ \t]*\r?\n/i,
+          ),
         ),
-      include_file_reference: ($) =>
-        $.__include_file_reference,
+      include_file_reference: ($) => $.__include_file_reference,
       __include_file_reference: ($) =>
         seq(
           "{",
@@ -181,11 +172,7 @@ module.exports = grammar({
           repeat1(field("argument", alias($.include_named_argument, $.include_argument))),
         ),
       include_named_argument: ($) =>
-        seq(
-          "&",
-          field("name", $.identifier),
-          seq("=", field("value", $._include_argument_value)),
-        ),
+        seq("&", field("name", $.identifier), seq("=", field("value", $._include_argument_value))),
       _include_argument_value: ($) =>
         prec(
           1,
@@ -203,8 +190,8 @@ module.exports = grammar({
             alias($._signed_number_literal, $.number_literal),
             $.boolean_literal,
             $.preprocessor_name,
-            $.argument_reference
-          )
+            $.argument_reference,
+          ),
         ),
 
       // Preprocessor
@@ -212,26 +199,23 @@ module.exports = grammar({
         seq(
           token(prec(1, /&GLOBAL-DEFINE/i)),
           field("name", $.identifier),
-          field("value", $.preprocessor_value)
+          field("value", $.preprocessor_value),
         ),
       scoped_define_preprocessor_directive: ($) =>
         seq(
           token(prec(1, /&SCOPED-DEFINE/i)),
           field("name", $.identifier),
-          field("value", $.preprocessor_value)
+          field("value", $.preprocessor_value),
         ),
       if_preprocessor_directive: ($) =>
         seq(
           token(/&IF/i),
           field("condition", $._expression),
           token(/&THEN/i),
-          field(
-            "then_branch",
-            repeat1(field("value", $.__if_preprocessor_branch_value))
-          ),
+          field("then_branch", repeat1(field("value", $.__if_preprocessor_branch_value))),
           repeat(field("elseif_branch", $.__if_preprocessor_elseif_branch)),
           optional(field("else_branch", $.__if_preprocessor_else_branch)),
-          token(/&ENDIF/i)
+          token(/&ENDIF/i),
         ),
       if_preprocessor_directive_statement: ($) =>
         choice(
@@ -239,17 +223,13 @@ module.exports = grammar({
           alias($.__if_preprocessor_then_statement, $.then_branch),
           alias($.__if_preprocessor_elseif_statement, $.elseif_branch),
           alias($.__if_preprocessor_else_statement, $.else_branch),
-          alias($.__if_preprocessor_endif_statement, $.endif_branch)
+          alias($.__if_preprocessor_endif_statement, $.endif_branch),
         ),
       __if_preprocessor_if_statement: ($) =>
-        prec.right(
-          seq(token(prec(1, /&IF/i)), field("condition", $._expression))
-        ),
+        prec.right(seq(token(prec(1, /&IF/i)), field("condition", $._expression))),
       __if_preprocessor_then_statement: ($) => token(prec(1, /&THEN/i)),
       __if_preprocessor_elseif_statement: ($) =>
-        prec.right(
-          seq(token(prec(1, /&ELSEIF/i)), field("condition", $._expression))
-        ),
+        prec.right(seq(token(prec(1, /&ELSEIF/i)), field("condition", $._expression))),
       __if_preprocessor_else_statement: ($) => token(prec(1, /&ELSE/i)),
       __if_preprocessor_endif_statement: ($) => token(prec(1, /&ENDIF/i)),
       __if_preprocessor_elseif_branch: ($) =>
@@ -257,38 +237,20 @@ module.exports = grammar({
           token(/&ELSEIF/i),
           field("condition", $._expression),
           token(/&THEN/i),
-          field(
-            "then_branch",
-            repeat1(field("value", $.__if_preprocessor_branch_value))
-          )
+          field("then_branch", repeat1(field("value", $.__if_preprocessor_branch_value))),
         ),
       __if_preprocessor_else_branch: ($) =>
-        seq(
-          token(/&ELSE/i),
-          repeat1(field("value", $.__if_preprocessor_branch_value))
-        ),
+        seq(token(/&ELSE/i), repeat1(field("value", $.__if_preprocessor_branch_value))),
       __if_preprocessor_branch_value: ($) =>
-        choice(
-          $.string_literal,
-          $.preprocessor_name,
-          $.argument_reference,
-          $.number_literal
-        ),
+        choice($.string_literal, $.preprocessor_name, $.argument_reference, $.number_literal),
       message_preprocessor_directive: ($) =>
         seq(token(prec(1, /&MESSAGE/i)), field("value", $.preprocessor_value)),
       undefine_preprocessor_directive: ($) =>
         seq(token(prec(1, /&UNDEFINE/i)), field("name", $.identifier)),
       preprocessor_value: ($) => token(/[^\n]+(?:~\s*\n[^\n]+)*/),
-      __include_file_target: ($) =>
-        choice(
-          $.include_file_path,
-          $.argument_reference,
-        ),
+      __include_file_target: ($) => choice($.include_file_path, $.argument_reference),
       include_file_path: ($) =>
-        seq(
-          optional($.preprocessor_name),
-          alias($.__include_file_name, $.identifier),
-        ),
+        seq(optional($.preprocessor_name), alias($.__include_file_name, $.identifier)),
       __include_file_name: ($) => /[A-Za-z0-9_\\/.-]+\.[A-Za-z][A-Za-z0-9]*/,
 
       // Constants
@@ -313,10 +275,9 @@ module.exports = grammar({
           $.boolean_literal,
           $.preprocessor_name,
           $.argument_reference,
-          $.parenthesized_identifier
+          $.parenthesized_identifier,
         ),
-      argument_reference: ($) =>
-        token(/\{(?:[0-9]+|\*)\}/),
+      argument_reference: ($) => token(/\{(?:[0-9]+|\*)\}/),
 
       // Re-exports
       ...require("./grammar/statements")(ctx),
@@ -330,25 +291,16 @@ module.exports = grammar({
       string_literal: ($) =>
         seq(
           $._escaped_string,
-          optional(
-            token.immediate(/:(?:[RLCT](?:U)?(?:[0-9]+)?|U(?:[0-9]+)?|[0-9]+)/i)
-          )
+          optional(token.immediate(/:(?:[RLCT](?:U)?(?:[0-9]+)?|U(?:[0-9]+)?|[0-9]+)/i)),
         ),
       null_literal: ($) => token("?"),
-      boolean_literal: ($) =>
-        choice(kw("TRUE"), kw("FALSE"), kw("YES"), kw("NO")),
+      boolean_literal: ($) => choice(kw("TRUE"), kw("FALSE"), kw("YES"), kw("NO")),
       procedure_name: ($) => /[A-Za-z0-9_\\/.-]+\.pl?/i,
 
       // Types
-      generic_type: ($) =>
-        seq($._simple_type_name, "<", $._simple_type_name, ">"),
+      generic_type: ($) => seq($._simple_type_name, "<", $._simple_type_name, ">"),
       _simple_type_name: ($) =>
-        choice(
-          $.scoped_name,
-          $.qualified_name,
-          $.nested_type_name,
-          $.identifier
-        ),
+        choice($.scoped_name, $.qualified_name, $.nested_type_name, $.identifier),
       _type_name: ($) => choice($.generic_type, $._simple_type_name),
       _type_or_string: ($) => choice($._type_name, $.string_literal),
       _identifier_or_qualified_name: ($) =>
@@ -357,32 +309,22 @@ module.exports = grammar({
           $.identifier,
           $.qualified_name,
           alias(kw("PROCEDURE", { offset: 4 }), $.identifier),
-          alias(kw("INTERFACE"), $.identifier)
+          alias(kw("INTERFACE"), $.identifier),
         ),
       _identifier_or_access_or_call: ($) =>
-        choice(
-          $._identifier_or_qualified_name,
-          $.object_access,
-          $.function_call
-        ),
+        choice($._identifier_or_qualified_name, $.object_access, $.function_call),
       macro_concatenated_name: ($) =>
-        token(
-          /[_\p{L}][\p{L}\p{N}_\-&]*(\{(?:&[0-9A-Za-z_-]+|[0-9A-Za-z_-]+)\})+/i
-        ),
+        token(/[_\p{L}][\p{L}\p{N}_\-&]*(\{(?:&[0-9A-Za-z_-]+|[0-9A-Za-z_-]+)\})+/i),
 
-      _widgets: ($) =>
-        prec.right(alias(choice(...WIDGETS, kw("FRAME")), $.identifier)),
+      _widgets: ($) => prec.right(alias(choice(...WIDGETS, kw("FRAME")), $.identifier)),
       _stream_phrase: ($) =>
-        seq(
-          choice(kw("STREAM"), kw("STREAM-HANDLE")),
-          field("stream", $.identifier)
-        ),
+        seq(choice(kw("STREAM"), kw("STREAM-HANDLE")), field("stream", $.identifier)),
       _events: ($) =>
         choice(
           $.identifier,
           $.string_literal,
           $.number_literal,
-          alias($._signed_number_literal, $.number_literal)
+          alias($._signed_number_literal, $.number_literal),
         ),
 
       // Operators
@@ -399,8 +341,8 @@ module.exports = grammar({
             field("right", choice($.array_initializer, $._expression)),
             optional($.widget_phrase),
             optional(alias(kw("NO-ERROR"), $.no_error)),
-            $._terminator
-          )
+            $._terminator,
+          ),
         ),
 
       _assignable: ($) =>
@@ -411,7 +353,7 @@ module.exports = grammar({
           $.widget_qualified_name,
           $.array_access,
           $.function_call,
-          $.system_handle_identifier
+          $.system_handle_identifier,
         ),
 
       // Expressions
@@ -420,10 +362,9 @@ module.exports = grammar({
       unary_expression: ($) =>
         choice(
           prec("unary", seq(choice("+", "-"), $._expression)),
-          prec("not", seq(kw("NOT"), $._expression))
+          prec("not", seq(kw("NOT"), $._expression)),
         ),
-      binary_expression: ($) =>
-        binary_expression($, $._expression, $._comparison_operator),
+      binary_expression: ($) => binary_expression($, $._expression, $._comparison_operator),
 
       // _statement_expression excludes `=` from comparison operators to disambiguate
       // assignment vs equality at the statement level. Without this, `x = 5.` could
@@ -434,32 +375,25 @@ module.exports = grammar({
         choice(
           alias($.binary_expression_no_eq, $.binary_expression),
           $.unary_expression,
-          $._statement_primary_expression
+          $._statement_primary_expression,
         ),
       // excludes `=` to disambiguate assignment vs equality comparison at statement level.
       _comparison_operator_no_eq: ($) => choice(...COMPARISON_OPERATORS),
       // binary_expression without `=` comparison.
       binary_expression_no_eq: ($) =>
-        binary_expression(
-          $,
-          $._statement_expression,
-          $._comparison_operator_no_eq
-        ),
+        binary_expression($, $._statement_expression, $._comparison_operator_no_eq),
 
       // Accessors
       _object_access_plain: ($) =>
         seq(
-          field(
-            "left",
-            choice($._identifier_or_qualified_name, $.system_handle_identifier)
-          ),
-          $._object_access_tail
+          field("left", choice($._identifier_or_qualified_name, $.system_handle_identifier)),
+          $._object_access_tail,
         ),
       _object_access_widget: ($) =>
         seq(
           field("widget", alias($._widgets, $.identifier)),
           field("left", $._identifier_or_qualified_name),
-          $._object_access_tail
+          $._object_access_tail,
         ),
       _object_access_handle: ($) =>
         prec.right(
@@ -467,88 +401,52 @@ module.exports = grammar({
           seq(
             field("handle", $.__object_access_handle_type),
             field("name", $._identifier_or_qualified_name),
-            $._object_access_tail
-          )
+            $._object_access_tail,
+          ),
         ),
       __object_access_handle_type: ($) =>
-        prec(
-          -1,
-          choice(
-            alias(kw("TEMP-TABLE"), $.identifier),
-            alias(kw("BUFFER"), $.identifier)
-          )
-        ),
+        prec(-1, choice(alias(kw("TEMP-TABLE"), $.identifier), alias(kw("BUFFER"), $.identifier))),
       object_access: ($) =>
         choice(
           $._object_access_widget,
           $._object_access_handle,
           $._object_access_plain,
           seq(
-            field(
-              "left",
-              choice(
-                $.function_call,
-                $.parenthesized_expression,
-                $.new_expression
-              )
-            ),
-            $._object_access_tail
-          )
+            field("left", choice($.function_call, $.parenthesized_expression, $.new_expression)),
+            $._object_access_tail,
+          ),
         ),
 
       scoped_name: ($) =>
         seq(
           field("left", $.identifier),
           repeat1(
-            seq(
-              $._namedoublecolon,
-              field("right", alias($._identifier_immediate, $.identifier))
-            )
-          )
+            seq($._namedoublecolon, field("right", alias($._identifier_immediate, $.identifier))),
+          ),
         ),
 
       qualified_name: ($) =>
         seq(
           field("left", $.identifier),
-          repeat1(
-            seq(
-              $._namedot,
-              field("right", alias($._identifier_immediate, $.identifier))
-            )
-          )
+          repeat1(seq($._namedot, field("right", alias($._identifier_immediate, $.identifier)))),
         ),
 
       nested_type_name: ($) =>
         seq(
           field("left", $.identifier),
-          repeat1(
-            seq(
-              $._nameplus,
-              field("right", alias($._identifier_immediate, $.identifier))
-            )
-          )
+          repeat1(seq($._nameplus, field("right", alias($._identifier_immediate, $.identifier)))),
         ),
 
       // Array
       array_initializer: ($) => seq("[", optional($._expressions), "]"),
-      _array_target: ($) =>
-        choice($._identifier_or_qualified_name, $.object_access, $.scoped_name),
+      _array_target: ($) => choice($._identifier_or_qualified_name, $.object_access, $.scoped_name),
 
       array_access: ($) =>
-        seq(
-          field("array", $._array_target),
-          "[",
-          optional($._array_subscript),
-          "]"
-        ),
+        seq(field("array", $._array_target), "[", optional($._array_subscript), "]"),
       _array_subscript: ($) =>
         choice(
           $._expressions,
-          seq(
-            field("start", $._expression),
-            kw("FOR"),
-            field("count", $._expression)
-          )
+          seq(field("start", $._expression), kw("FOR"), field("count", $._expression)),
         ),
 
       // Callables
@@ -559,34 +457,22 @@ module.exports = grammar({
           optional(choice(kw("INPUT"), kw("OUTPUT"), kw("INPUT-OUTPUT"))),
           choice(
             seq(
-              choice(
-                kw("TABLE"),
-                kw("BUFFER"),
-                kw("TABLE-HANDLE"),
-                kw("DATASET-HANDLE")
-              ),
-              field(
-                "name",
-                choice($._identifier_or_qualified_name, $.object_access)
-              )
+              choice(kw("TABLE"), kw("BUFFER"), kw("TABLE-HANDLE"), kw("DATASET-HANDLE")),
+              field("name", choice($._identifier_or_qualified_name, $.object_access)),
             ),
-            field("name", $._expression)
+            field("name", $._expression),
           ),
           optional(seq(kw("AS"), field("type", $._type_name))),
-          optional(kw("BY-REFERENCE"))
+          optional(kw("BY-REFERENCE")),
         ),
 
       function_call: ($) =>
         seq(
           field(
             "function",
-            choice(
-              $._identifier_or_qualified_name,
-              $.object_access,
-              $.scoped_name
-            )
+            choice($._identifier_or_qualified_name, $.object_access, $.scoped_name),
           ),
-          $.arguments
+          $.arguments,
         ),
 
       widget_qualified_name: ($) =>
@@ -597,49 +483,35 @@ module.exports = grammar({
               $._identifier_or_qualified_name,
               $.scoped_name,
               $.object_access,
-              $.function_call
-            )
+              $.function_call,
+            ),
           ),
           kw("IN"),
           $._widgets,
-          field("widget", $.identifier)
+          field("widget", $.identifier),
         ),
 
       _window_handle: ($) =>
-        choice(
-          $._identifier_or_qualified_name,
-          $.object_access,
-          $.function_call,
-          $.scoped_name
-        ),
+        choice($._identifier_or_qualified_name, $.object_access, $.function_call, $.scoped_name),
 
       // Identifiers
       // BE CAREFUL MODIFYING HERE, IDENTIFIER ORDER FOR SOME REASON MATTERS!
       identifier: ($) => token(/[_\p{L}][\p{L}\p{N}_\-&#]*/i),
       system_handle_identifier: ($) =>
         alias(
-          token(
-            prec(
-              1,
-              new RegExp(
-                `(${SYSTEM_HANDLE_WORDS.map(escape_regex).join("|")})`,
-                "i"
-              )
-            )
-          ),
-          $.identifier
+          token(prec(1, new RegExp(`(${SYSTEM_HANDLE_WORDS.map(escape_regex).join("|")})`, "i"))),
+          $.identifier,
         ),
       _label_identifier: ($) => $.identifier,
-      _label: ($) =>
-        prec.right(1, seq(field("label", $.identifier), alias($._colon, ":"))),
+      _label: ($) => prec.right(1, seq(field("label", $.identifier), alias($._colon, ":"))),
       _identifier_immediate: ($) => token.immediate(/[_\p{L}][\p{L}\p{N}_-]*/i),
       parenthesized_identifier: ($) => seq("(", $.identifier, ")"),
       _object_access_tail: ($) =>
         repeat1(
           seq(
             choice($._namecolon, token.immediate("?:")),
-            field("right", alias($._identifier_immediate, $.identifier))
-          )
+            field("right", alias($._identifier_immediate, $.identifier)),
+          ),
         ),
       _terminator: ($) => choice($._terminator_dot, ";"),
 
@@ -660,10 +532,10 @@ function binary_expression($, expression, comparison_operator) {
   return choice(
     prec.left(
       "multiplication",
-      seq(expression, choice("*", "/", kw("MOD"), kw("MODULO")), expression)
+      seq(expression, choice("*", "/", kw("MOD"), kw("MODULO")), expression),
     ),
     prec.left("add", seq(expression, choice("+", "-"), expression)),
     prec.left("compare", seq(expression, comparison_operator, expression)),
-    prec.left("logical", seq(expression, $._logical_operator, expression))
+    prec.left("logical", seq(expression, $._logical_operator, expression)),
   );
 }

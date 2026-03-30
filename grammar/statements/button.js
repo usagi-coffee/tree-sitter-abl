@@ -8,11 +8,7 @@ module.exports = ({ kw }) => ({
       $._terminator,
     ),
 
-  __button_body: ($) =>
-    seq(
-      field("name", $.identifier),
-      repeat($.__button_option),
-    ),
+  __button_body: ($) => seq(field("name", $.identifier), repeat($.__button_option)),
 
   __button_option: ($) =>
     choice(
@@ -39,14 +35,8 @@ module.exports = ({ kw }) => ({
         kw("BY"),
         field("height", $._expression),
       ),
-      seq(
-        alias(kw("NO-FOCUS"), $.no_focus),
-        optional(alias(kw("FLAT-BUTTON"), $.flat_button)),
-      ),
+      seq(alias(kw("NO-FOCUS"), $.no_focus), optional(alias(kw("FLAT-BUTTON"), $.flat_button))),
       alias(kw("NO-CONVERT-3D-COLORS"), $.no_convert_3d_colors),
-      seq(
-        kw("TOOLTIP"),
-        field("tooltip", choice($.identifier, $.string_literal, $.null_literal)),
-      ),
+      seq(kw("TOOLTIP"), field("tooltip", choice($.identifier, $.string_literal, $.null_literal))),
     ),
 });

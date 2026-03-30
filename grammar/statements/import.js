@@ -4,31 +4,22 @@ module.exports = ({ kw }) => ({
   __import_body: ($) =>
     seq(
       optional($._stream_phrase),
-      choice(
-        $.__import_fields_phrase,
-        alias($.__import_unformatted_phrase, $.unformatted_phrase),
-      ),
+      choice($.__import_fields_phrase, alias($.__import_unformatted_phrase, $.unformatted_phrase)),
       optional(alias(kw("NO-LOBS"), $.no_lobs)),
       optional(alias(kw("NO-ERROR"), $.no_error)),
     ),
 
-  __import_delimiter_phrase: ($) =>
-    seq(kw("DELIMITER"), field("delimiter", $.string_literal)),
+  __import_delimiter_phrase: ($) => seq(kw("DELIMITER"), field("delimiter", $.string_literal)),
   __import_fields_phrase: ($) =>
     seq(
       optional(alias($.__import_delimiter_phrase, $.delimiter_phrase)),
       $.__import_field_or_skip,
       repeat($.__import_field_or_skip),
       optional(
-        seq(
-          kw("EXCEPT"),
-          $._identifier_or_qualified_name,
-          repeat($._identifier_or_qualified_name),
-        ),
+        seq(kw("EXCEPT"), $._identifier_or_qualified_name, repeat($._identifier_or_qualified_name)),
       ),
     ),
   __import_unformatted_phrase: ($) =>
     seq(kw("UNFORMATTED"), field("field", $._identifier_or_qualified_name)),
-  __import_field_or_skip: ($) =>
-    choice($._identifier_or_qualified_name, alias("^", $.skip_field)),
+  __import_field_or_skip: ($) => choice($._identifier_or_qualified_name, alias("^", $.skip_field)),
 });

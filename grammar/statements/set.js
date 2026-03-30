@@ -56,25 +56,12 @@ module.exports = ({ kw }) => ({
           optional(seq(kw("WHEN"), field("when", $._expression))),
         ),
       ),
-      seq(
-        field("field", $._identifier_or_qualified_name),
-        "=",
-        field("value", $._expression),
-      ),
-      seq(
-        field("field", $.array_access),
-        "=",
-        field("value", $._expression),
-      ),
+      seq(field("field", $._identifier_or_qualified_name), "=", field("value", $._expression)),
+      seq(field("field", $.array_access), "=", field("value", $._expression)),
       seq(
         kw("TEXT"),
         "(",
-        repeat1(
-          seq(
-            field("field", $._identifier_or_qualified_name),
-            optional($.format_phrase),
-          ),
-        ),
+        repeat1(seq(field("field", $._identifier_or_qualified_name), optional($.format_phrase))),
         ")",
       ),
       seq(

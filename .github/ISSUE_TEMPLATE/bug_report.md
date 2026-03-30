@@ -1,9 +1,9 @@
 ---
 name: Bug Report
 about: Report a parsing issue or unexpected behavior
-title: ''
+title: ""
 labels: bug
-assignees: ''
+assignees: ""
 ---
 
 ## ABL Code

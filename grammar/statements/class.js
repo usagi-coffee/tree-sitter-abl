@@ -116,8 +116,7 @@ module.exports = ({ kw }) => ({
       $.__method_table_parameter,
     ),
 
-  __method_body: ($) =>
-    seq(repeat($._statement), kw("END"), optional(kw("METHOD")), $._terminator),
+  __method_body: ($) => seq(repeat($._statement), kw("END"), optional(kw("METHOD")), $._terminator),
 
   __constructor_body: ($) =>
     seq(
@@ -128,12 +127,7 @@ module.exports = ({ kw }) => ({
     ),
 
   __destructor_body: ($) =>
-    seq(
-      repeat($._statement),
-      kw("END"),
-      optional(kw("DESTRUCTOR")),
-      $._terminator,
-    ),
+    seq(repeat($._statement), kw("END"), optional(kw("DESTRUCTOR")), $._terminator),
 
   __destructor_parameters: ($) => seq("(", ")"),
 
@@ -320,12 +314,7 @@ module.exports = ({ kw }) => ({
 
   __method_extent_phrase: ($) =>
     prec.right(seq(kw("EXTENT"), optional(field("size", $.__method_extent_size)))),
-  __method_extent_size: ($) =>
-    choice(
-      $.number_literal,
-      $.preprocessor_name,
-      $.identifier,
-    ),
+  __method_extent_size: ($) => choice($.number_literal, $.preprocessor_name, $.identifier),
   __method_table_parameter: ($) =>
     seq(
       optional(field("direction", choice(kw("INPUT"), kw("OUTPUT"), kw("INPUT-OUTPUT")))),

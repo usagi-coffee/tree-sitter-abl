@@ -6,9 +6,7 @@ module.exports = ({ kw }) => ({
       seq(kw("VALUE"), "(", field("value", $._expression), ")"),
       field("foreground", alias($.__color_prefixed_identifier, $.identifier)),
       seq(
-        repeat1(
-          choice(kw("BLINK-"), kw("BRIGHT-"), kw("RVV-"), kw("UNDERLINE-")),
-        ),
+        repeat1(choice(kw("BLINK-"), kw("BRIGHT-"), kw("RVV-"), kw("UNDERLINE-"))),
         field("foreground", $.identifier),
       ),
       $.identifier,

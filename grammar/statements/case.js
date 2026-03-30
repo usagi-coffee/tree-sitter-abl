@@ -12,12 +12,7 @@ module.exports = ({ kw }) => ({
     ),
 
   case_when_phrase: ($) =>
-    seq(
-      kw("WHEN"),
-      field("condition", $.__case_when_expression_list),
-      kw("THEN"),
-      $._statement,
-    ),
+    seq(kw("WHEN"), field("condition", $.__case_when_expression_list), kw("THEN"), $._statement),
 
   case_otherwise_phrase: ($) => seq(kw("OTHERWISE"), $._statement),
 

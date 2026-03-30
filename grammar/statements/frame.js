@@ -10,10 +10,7 @@ module.exports = ({ kw }) => ({
 
   __frame_body: ($) =>
     seq(
-      field(
-        "name",
-        choice($.identifier, $.preprocessor_name),
-      ),
+      field("name", choice($.identifier, $.preprocessor_name)),
       choice(
         seq(
           field("record", $._identifier_or_qualified_name),
@@ -36,11 +33,7 @@ module.exports = ({ kw }) => ({
     choice(
       $.__frame_skip_phrase,
       $.__frame_space_phrase,
-      seq(
-        field("value", $._expression),
-        optional($.at_phrase),
-        repeat($.__frame_display_option),
-      ),
+      seq(field("value", $._expression), optional($.at_phrase), repeat($.__frame_display_option)),
     ),
 
   __frame_form_item: ($) =>
@@ -114,19 +107,12 @@ module.exports = ({ kw }) => ({
     ),
 
   __frame_skip_phrase: ($) =>
-    prec.left(
-      seq(kw("SKIP"), optional(field("skip", seq("(", $._expression, ")")))),
-    ),
+    prec.left(seq(kw("SKIP"), optional(field("skip", seq("(", $._expression, ")"))))),
   __frame_space_phrase: ($) =>
-    prec.left(
-      seq(kw("SPACE"), optional(field("space", seq("(", $._expression, ")")))),
-    ),
+    prec.left(seq(kw("SPACE"), optional(field("space", seq("(", $._expression, ")"))))),
   __frame_modifier: ($) =>
     choice(
-      seq(
-        alias(kw("NEW"), $.new_modifier),
-        alias(kw("SHARED"), $.scope_modifier),
-      ),
+      seq(alias(kw("NEW"), $.new_modifier), alias(kw("SHARED"), $.scope_modifier)),
       alias(kw("SHARED"), $.scope_modifier),
       alias(kw("PRIVATE"), $.access_modifier),
     ),

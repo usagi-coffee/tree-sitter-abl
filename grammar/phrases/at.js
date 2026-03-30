@@ -34,6 +34,5 @@ module.exports = ({ kw }) => ({
       ),
     ),
 
-  __at_alignment: ($) =>
-    choice(kw("COLON-ALIGNED"), kw("LEFT-ALIGNED"), kw("RIGHT-ALIGNED")),
+  __at_alignment: ($) => choice(kw("COLON-ALIGNED"), kw("LEFT-ALIGNED"), kw("RIGHT-ALIGNED")),
 });

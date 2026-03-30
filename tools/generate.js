@@ -140,7 +140,7 @@ await $`grep -E "#define.*STATE_COUNT" src/parser.c`;
 
 if ((testOut + testErr).trim() === "") {
   console.error(
-    "Parser failed internally and returned no output, this indicates some rule broke the parser (tests are not the issue), try to revert your latest changes until you see an output. This is a confirmed parser bug, don't investigate into this error."
+    "Parser failed internally and returned no output, this indicates some rule broke the parser (tests are not the issue), try to revert your latest changes until you see an output. This is a confirmed parser bug, don't investigate into this error.",
   );
   process.exit(1);
 }

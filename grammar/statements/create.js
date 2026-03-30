@@ -49,11 +49,7 @@ module.exports = ({ kw }) => ({
       optional($.__create_in_widget_pool),
       optional(alias(kw("NO-ERROR"), $.no_error)),
     ),
-  __create_buffer_target: ($) =>
-    choice(
-      $._identifier_or_access_or_call,
-      $.string_literal,
-    ),
+  __create_buffer_target: ($) => choice($._identifier_or_access_or_call, $.string_literal),
   __create_call: ($) =>
     seq(
       kw("CALL"),
@@ -62,23 +58,11 @@ module.exports = ({ kw }) => ({
       optional(alias(kw("NO-ERROR"), $.no_error)),
     ),
   __create_client_principal: ($) =>
-    seq(
-      kw("CLIENT-PRINCIPAL"),
-      field("handle", $.identifier),
-      optional($.__create_in_widget_pool),
-    ),
+    seq(kw("CLIENT-PRINCIPAL"), field("handle", $.identifier), optional($.__create_in_widget_pool)),
   __create_data_source: ($) =>
-    seq(
-      kw("DATA-SOURCE"),
-      field("handle", $.identifier),
-      optional($.__create_in_widget_pool),
-    ),
+    seq(kw("DATA-SOURCE"), field("handle", $.identifier), optional($.__create_in_widget_pool)),
   __create_dataset: ($) =>
-    seq(
-      kw("DATASET"),
-      field("handle", $.identifier),
-      optional($.__create_in_widget_pool),
-    ),
+    seq(kw("DATASET"), field("handle", $.identifier), optional($.__create_in_widget_pool)),
   __create_query: ($) =>
     seq(
       kw("QUERY"),
@@ -87,23 +71,11 @@ module.exports = ({ kw }) => ({
       optional(alias(kw("NO-ERROR"), $.no_error)),
     ),
   __create_x_document: ($) =>
-    seq(
-      kw("X-DOCUMENT"),
-      field("handle", $.identifier),
-      optional($.__create_in_widget_pool),
-    ),
+    seq(kw("X-DOCUMENT"), field("handle", $.identifier), optional($.__create_in_widget_pool)),
   __create_x_noderef: ($) =>
-    seq(
-      kw("X-NODEREF"),
-      field("handle", $.identifier),
-      optional($.__create_in_widget_pool),
-    ),
+    seq(kw("X-NODEREF"), field("handle", $.identifier), optional($.__create_in_widget_pool)),
   __create_soap_header: ($) =>
-    seq(
-      kw("SOAP-HEADER"),
-      field("handle", $.identifier),
-      optional($.__create_in_widget_pool),
-    ),
+    seq(kw("SOAP-HEADER"), field("handle", $.identifier), optional($.__create_in_widget_pool)),
   __create_soap_header_entryref: ($) =>
     seq(
       kw("SOAP-HEADER-ENTRYREF"),
@@ -134,12 +106,7 @@ module.exports = ({ kw }) => ({
   __create_widget_pool: ($) =>
     seq(
       kw("WIDGET-POOL"),
-      optional(
-        seq(
-          field("pool", $.identifier),
-          optional(alias(kw("PERSISTENT"), $.persistent)),
-        ),
-      ),
+      optional(seq(field("pool", $.identifier), optional(alias(kw("PERSISTENT"), $.persistent)))),
       optional(alias(kw("NO-ERROR"), $.no_error)),
     ),
   __create_server: ($) =>
@@ -162,12 +129,7 @@ module.exports = ({ kw }) => ({
     seq(
       field("progid", $._expression),
       field("handle", $.identifier),
-      optional(
-        seq(
-          kw("CONNECT"),
-          optional(seq(kw("TO"), field("target", $._expression))),
-        ),
-      ),
+      optional(seq(kw("CONNECT"), optional(seq(kw("TO"), field("target", $._expression))))),
       optional(alias(kw("NO-ERROR"), $.no_error)),
     ),
   __create_record: ($) =>
@@ -185,6 +147,5 @@ module.exports = ({ kw }) => ({
       ),
       optional(alias(kw("NO-ERROR"), $.no_error)),
     ),
-  __create_in_widget_pool: ($) =>
-    seq(kw("IN"), kw("WIDGET-POOL"), field("pool", $.identifier)),
+  __create_in_widget_pool: ($) => seq(kw("IN"), kw("WIDGET-POOL"), field("pool", $.identifier)),
 });

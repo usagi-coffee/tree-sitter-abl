@@ -52,10 +52,7 @@ module.exports = ({ kw }) => ({
 
   __menu_modifier: ($) =>
     choice(
-      seq(
-        alias(kw("NEW"), $.new_modifier),
-        alias(kw("SHARED"), $.scope_modifier),
-      ),
+      seq(alias(kw("NEW"), $.new_modifier), alias(kw("SHARED"), $.scope_modifier)),
       alias(kw("SHARED"), $.scope_modifier),
       alias(kw("PRIVATE"), $.access_modifier),
     ),

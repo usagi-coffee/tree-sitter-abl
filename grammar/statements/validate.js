@@ -1,6 +1,5 @@
 module.exports = ({ kw }) => ({
-  validate_statement: ($) =>
-    seq(kw("VALIDATE"), $.__validate_body, $._terminator),
+  validate_statement: ($) => seq(kw("VALIDATE"), $.__validate_body, $._terminator),
 
   __validate_body: ($) =>
     seq(

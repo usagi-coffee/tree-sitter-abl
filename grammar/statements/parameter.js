@@ -95,12 +95,7 @@ module.exports = ({ kw }) => ({
     seq(kw("EXTENT"), optional(field("size", $.__parameter_extent_size))),
 
   __parameter_extent_size: ($) =>
-    choice(
-      $.number_literal,
-      $.preprocessor_name,
-      $.identifier,
-      $.null_literal,
-    ),
+    choice($.number_literal, $.preprocessor_name, $.identifier, $.null_literal),
   __parameter_table_parameter_option: ($) =>
     choice(
       alias(kw("APPEND"), $.append),

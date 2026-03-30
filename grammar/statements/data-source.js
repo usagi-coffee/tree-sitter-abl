@@ -1,11 +1,6 @@
 module.exports = ({ kw }) => ({
   data_source_definition: ($) =>
-    seq(
-      kw("DEFINE", { offset: 3 }),
-      kw("DATA-SOURCE"),
-      $.__data_source_body,
-      $._terminator,
-    ),
+    seq(kw("DEFINE", { offset: 3 }), kw("DATA-SOURCE"), $.__data_source_body, $._terminator),
 
   // For classes - with modifiers
   data_source_class_definition: ($) =>
@@ -55,9 +50,6 @@ module.exports = ({ kw }) => ({
       seq($.__data_source_static, $.__data_source_access_modifier),
     ),
   __data_source_access_modifier: ($) =>
-    choice(
-      alias(kw("PRIVATE"), $.access_modifier),
-      alias(kw("PROTECTED"), $.access_modifier),
-    ),
+    choice(alias(kw("PRIVATE"), $.access_modifier), alias(kw("PROTECTED"), $.access_modifier)),
   __data_source_static: ($) => alias(kw("STATIC"), $.static_modifier),
 });

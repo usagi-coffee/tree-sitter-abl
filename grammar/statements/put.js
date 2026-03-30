@@ -10,8 +10,7 @@ module.exports = ({ kw }) => ({
       ),
     ),
 
-  __put_control_phrase: ($) =>
-    seq(kw("CONTROL"), repeat1($.__put_control)),
+  __put_control_phrase: ($) => seq(kw("CONTROL"), repeat1($.__put_control)),
   __put_control: ($) => $._expression,
 
   __put_item: ($) =>
@@ -26,19 +25,13 @@ module.exports = ({ kw }) => ({
       seq(
         field("value", $._expression),
         optional($.format_phrase),
-        optional(
-          seq(choice(kw("AT"), kw("TO")), field("position", $._expression)),
-        ),
+        optional(seq(choice(kw("AT"), kw("TO")), field("position", $._expression))),
       ),
     ),
 
   __put_skip_item: ($) =>
-    prec.right(
-      seq(kw("SKIP"), optional(seq("(", field("count", $._expression), ")"))),
-    ),
+    prec.right(seq(kw("SKIP"), optional(seq("(", field("count", $._expression), ")")))),
 
   __put_space_item: ($) =>
-    prec.right(
-      seq(kw("SPACE"), optional(seq("(", field("count", $._expression), ")"))),
-    ),
+    prec.right(seq(kw("SPACE"), optional(seq("(", field("count", $._expression), ")")))),
 });

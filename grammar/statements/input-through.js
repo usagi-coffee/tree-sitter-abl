@@ -30,10 +30,7 @@ module.exports = ({ kw }) => ({
       seq(kw("VALUE"), "(", field("value", $._expression), ")"),
     ),
   __input_through_argument: ($) =>
-    choice(
-      $.__input_through_arg_value,
-      seq(kw("VALUE"), "(", field("value", $._expression), ")"),
-    ),
+    choice($.__input_through_arg_value, seq(kw("VALUE"), "(", field("value", $._expression), ")")),
   __input_through_arg_value: ($) =>
     choice(
       $.string_literal,

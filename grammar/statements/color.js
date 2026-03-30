@@ -1,10 +1,6 @@
 module.exports = ({ kw }) => ({
   color_statement: ($) =>
-    seq(
-      kw("COLOR"),
-      optional(choice($.__color_body, $.__color_prompt_body)),
-      $._terminator,
-    ),
+    seq(kw("COLOR"), optional(choice($.__color_body, $.__color_prompt_body)), $._terminator),
 
   __color_body: ($) =>
     seq(
@@ -23,6 +19,5 @@ module.exports = ({ kw }) => ({
       optional($.frame_phrase),
     ),
 
-  __color_field: ($) =>
-    choice($._identifier_or_qualified_name, $.scoped_name, $.input_expression),
+  __color_field: ($) => choice($._identifier_or_qualified_name, $.scoped_name, $.input_expression),
 });

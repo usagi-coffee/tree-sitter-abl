@@ -1,6 +1,5 @@
 module.exports = ({ kw }) => ({
-  prompt_for_statement: ($) =>
-    seq(kw("PROMPT-FOR"), $.__prompt_for_body, $._terminator),
+  prompt_for_statement: ($) => seq(kw("PROMPT-FOR"), $.__prompt_for_body, $._terminator),
 
   __prompt_for_body: ($) =>
     seq(
@@ -12,12 +11,7 @@ module.exports = ({ kw }) => ({
   __prompt_for_record_body: ($) =>
     seq(
       field("record", $.identifier),
-      optional(
-        seq(
-          kw("EXCEPT"),
-          repeat1(alias($._identifier_or_qualified_name, $.field)),
-        ),
-      ),
+      optional(seq(kw("EXCEPT"), repeat1(alias($._identifier_or_qualified_name, $.field)))),
       optional($.in_window_phrase),
       optional($.frame_phrase),
     ),
@@ -42,12 +36,7 @@ module.exports = ({ kw }) => ({
       seq(
         kw("TEXT"),
         "(",
-        repeat1(
-          seq(
-            field("field", $._identifier_or_qualified_name),
-            optional($.format_phrase),
-          ),
-        ),
+        repeat1(seq(field("field", $._identifier_or_qualified_name), optional($.format_phrase))),
         ")",
       ),
       seq(
@@ -68,14 +57,10 @@ module.exports = ({ kw }) => ({
       "^",
     ),
 
-  __prompt_for_at_phrase: ($) =>
-    seq(kw("AT"), field("position", token(/[0-9]+(\.[0-9]+)?/))),
-  __prompt_for_to_phrase: ($) =>
-    seq(kw("TO"), field("position", token(/[0-9]+(\.[0-9]+)?/))),
-  __prompt_for_view_as_phrase: ($) =>
-    seq(kw("VIEW-AS"), field("widget", $.identifier)),
-  __prompt_for_with_phrase: ($) =>
-    seq(kw("WITH"), alias(kw("NO-VALIDATE"), $.no_validate)),
+  __prompt_for_at_phrase: ($) => seq(kw("AT"), field("position", token(/[0-9]+(\.[0-9]+)?/))),
+  __prompt_for_to_phrase: ($) => seq(kw("TO"), field("position", token(/[0-9]+(\.[0-9]+)?/))),
+  __prompt_for_view_as_phrase: ($) => seq(kw("VIEW-AS"), field("widget", $.identifier)),
+  __prompt_for_with_phrase: ($) => seq(kw("WITH"), alias(kw("NO-VALIDATE"), $.no_validate)),
 
   __prompt_for_go_on: ($) =>
     seq(

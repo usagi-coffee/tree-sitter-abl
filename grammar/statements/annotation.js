@@ -5,9 +5,7 @@ module.exports = () => ({
   __annotation_body: ($) =>
     seq(
       field("name", alias($.__annotation_name, $.identifier)),
-      optional(
-        seq("(", optional(alias($.__annotation_attributes, $.attributes)), ")"),
-      ),
+      optional(seq("(", optional(alias($.__annotation_attributes, $.attributes)), ")")),
     ),
   __annotation_attributes: ($) =>
     seq(

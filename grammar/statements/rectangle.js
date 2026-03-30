@@ -26,10 +26,7 @@ module.exports = ({ kw }) => ({
           alias(kw("GROUP-BOX"), $.group_box),
           seq(
             kw("TOOLTIP"),
-            field(
-              "tooltip",
-              choice($.identifier, $.string_literal, $.null_literal),
-            ),
+            field("tooltip", choice($.identifier, $.string_literal, $.null_literal)),
           ),
           $.size_phrase,
         ),

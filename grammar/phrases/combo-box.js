@@ -15,15 +15,10 @@ module.exports = ({ kw }) => ({
       alias(kw("DROP-DOWN"), $.drop_down),
       alias(kw("DROP-DOWN-LIST"), $.drop_down_list),
       seq(kw("MAX-CHARS"), field("max_chars", $.number_literal)),
-      seq(
-        kw("AUTO-COMPLETION"),
-        optional(alias(kw("UNIQUE-MATCH"), $.unique_match)),
-      ),
+      seq(kw("AUTO-COMPLETION"), optional(alias(kw("UNIQUE-MATCH"), $.unique_match))),
     ),
-  __combo_box_list_items: ($) =>
-    seq(kw("LIST-ITEMS"), field("items", $.__combo_box_item_list)),
-  __combo_box_item_list: ($) =>
-    seq($._expression, repeat(seq(",", $._expression))),
+  __combo_box_list_items: ($) => seq(kw("LIST-ITEMS"), field("items", $.__combo_box_item_list)),
+  __combo_box_item_list: ($) => seq($._expression, repeat(seq(",", $._expression))),
   __combo_box_list_item_pairs: ($) =>
     seq(kw("LIST-ITEM-PAIRS"), field("pairs", $.__combo_box_item_pair_list)),
   __combo_box_item_pair_list: ($) =>

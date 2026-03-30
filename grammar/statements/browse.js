@@ -13,29 +13,17 @@ module.exports = ({ kw }) => ({
       field("name", $.identifier),
       kw("QUERY"),
       field("query", $.identifier),
-      optional(
-        alias(
-          choice(kw("SHARE-LOCK"), kw("EXCLUSIVE-LOCK"), kw("NO-LOCK")),
-          $.lock,
-        ),
-      ),
+      optional(alias(choice(kw("SHARE-LOCK"), kw("EXCLUSIVE-LOCK"), kw("NO-LOCK")), $.lock)),
       optional(alias(kw("NO-WAIT"), $.no_wait)),
       kw("DISPLAY"),
-      choice(
-        repeat1(alias($.__browse_column, $.column)),
-        alias($.__browse_record, $.record),
-      ),
+      choice(repeat1(alias($.__browse_column, $.column)), alias($.__browse_record, $.record)),
       optional($.__browse_enable_phrase),
       optional($.__browse_options_phrase),
     ),
   __browse_options_phrase: ($) => seq(kw("WITH"), repeat($.__browse_option)),
 
   __browse_record: ($) =>
-    seq(
-      field("record", $.identifier),
-      kw("EXCEPT"),
-      repeat1(field("field", $.identifier)),
-    ),
+    seq(field("record", $.identifier), kw("EXCEPT"), repeat1(field("field", $.identifier))),
 
   __browse_column: ($) =>
     prec.right(
@@ -47,8 +35,7 @@ module.exports = ({ kw }) => ({
     ),
   __browse_column_expression: ($) => prec.right($._expression),
 
-  __browse_at_base_field: ($) =>
-    seq("@", field("base", $._identifier_or_qualified_name)),
+  __browse_at_base_field: ($) => seq("@", field("base", $._identifier_or_qualified_name)),
 
   __browse_column_option: ($) =>
     choice(
@@ -56,44 +43,17 @@ module.exports = ({ kw }) => ({
       seq(kw("LABEL"), field("label", $.string_literal)),
       alias(kw("NO-LABELS", { alias: "NO-LABEL", offset: 8 }), $.no_labels),
       seq(kw("WIDTH"), field("width", $.__browse_option_expression)),
-      seq(
-        kw("COLUMN-FONT"),
-        field("column_font", $.__browse_option_expression),
-      ),
+      seq(kw("COLUMN-FONT"), field("column_font", $.__browse_option_expression)),
       seq(kw("COLUMN-LABEL"), field("column_label", $.string_literal)),
-      seq(
-        kw("COLUMN-DCOLOR"),
-        field("column_dcolor", $.__browse_option_expression),
-      ),
-      seq(
-        kw("COLUMN-BGCOLOR"),
-        field("column_bgcolor", $.__browse_option_expression),
-      ),
-      seq(
-        kw("COLUMN-FGCOLOR"),
-        field("column_fgcolor", $.__browse_option_expression),
-      ),
-      seq(
-        kw("COLUMN-PFCOLOR"),
-        field("column_pfcolor", $.__browse_option_expression),
-      ),
+      seq(kw("COLUMN-DCOLOR"), field("column_dcolor", $.__browse_option_expression)),
+      seq(kw("COLUMN-BGCOLOR"), field("column_bgcolor", $.__browse_option_expression)),
+      seq(kw("COLUMN-FGCOLOR"), field("column_fgcolor", $.__browse_option_expression)),
+      seq(kw("COLUMN-PFCOLOR"), field("column_pfcolor", $.__browse_option_expression)),
       seq(kw("LABEL-FONT"), field("label_font", $.__browse_option_expression)),
-      seq(
-        kw("LABEL-DCOLOR"),
-        field("label_dcolor", $.__browse_option_expression),
-      ),
-      seq(
-        kw("LABEL-BGCOLOR"),
-        field("label_bgcolor", $.__browse_option_expression),
-      ),
-      seq(
-        kw("LABEL-FGCOLOR"),
-        field("label_fgcolor", $.__browse_option_expression),
-      ),
-      seq(
-        kw("LABEL-PFCOLOR"),
-        field("label_pfcolor", $.__browse_option_expression),
-      ),
+      seq(kw("LABEL-DCOLOR"), field("label_dcolor", $.__browse_option_expression)),
+      seq(kw("LABEL-BGCOLOR"), field("label_bgcolor", $.__browse_option_expression)),
+      seq(kw("LABEL-FGCOLOR"), field("label_fgcolor", $.__browse_option_expression)),
+      seq(kw("LABEL-PFCOLOR"), field("label_pfcolor", $.__browse_option_expression)),
       seq(kw("HELP"), field("help", $.string_literal)),
       seq(
         kw("VALIDATE"),
@@ -112,10 +72,7 @@ module.exports = ({ kw }) => ({
 
   __browse_option: ($) =>
     choice(
-      seq(
-        kw("CONTEXT-HELP-ID"),
-        field("context_help_id", $.__browse_option_expression),
-      ),
+      seq(kw("CONTEXT-HELP-ID"), field("context_help_id", $.__browse_option_expression)),
       alias(kw("DROP-TARGET"), $.drop_target),
       seq(kw("TOOLTIP"), field("tooltip", $.__browse_option_expression)),
       seq(kw("BGCOLOR"), field("bgcolor", $.__browse_option_expression)),
@@ -125,12 +82,14 @@ module.exports = ({ kw }) => ({
       seq(kw("PFCOLOR"), field("pfcolor", $.__browse_option_expression)),
       seq(
         kw("TITLE"),
-        optional(choice(
-          seq(kw("BGCOLOR"), field("title_bgcolor", $.__browse_option_expression)),
-          seq(kw("DCOLOR"), field("title_dcolor", $.__browse_option_expression)),
-          seq(kw("FGCOLOR"), field("title_fgcolor", $.__browse_option_expression)),
-          seq(kw("FONT"), field("title_font", $.__browse_option_expression)),
-        )),
+        optional(
+          choice(
+            seq(kw("BGCOLOR"), field("title_bgcolor", $.__browse_option_expression)),
+            seq(kw("DCOLOR"), field("title_dcolor", $.__browse_option_expression)),
+            seq(kw("FGCOLOR"), field("title_fgcolor", $.__browse_option_expression)),
+            seq(kw("FONT"), field("title_font", $.__browse_option_expression)),
+          ),
+        ),
         field("title", $.string_literal),
       ),
       seq(kw("WIDTH"), field("width", $.__browse_option_expression)),
@@ -169,10 +128,7 @@ module.exports = ({ kw }) => ({
       alias(kw("NO-ROW-MARKERS"), $.no_row_markers),
       alias(kw("OVERLAY"), $.overlay),
       alias(kw("NO-COLUMN-SCROLLING"), $.no_column_scrolling),
-      seq(
-        kw("MAX-DATA-GUESS"),
-        field("max_data_guess", $.__browse_option_expression),
-      ),
+      seq(kw("MAX-DATA-GUESS"), field("max_data_guess", $.__browse_option_expression)),
       seq(kw("ROW"), field("row", $.__browse_option_expression)),
       seq(kw("COLUMN"), field("column", $.__browse_option_expression)),
       alias(kw("SCROLLBAR-HORIZONTAL"), $.scrollbar_horizontal),
@@ -210,10 +166,7 @@ module.exports = ({ kw }) => ({
     ),
   __browse_modifier: ($) =>
     choice(
-      seq(
-        alias(kw("NEW"), $.new_modifier),
-        alias(kw("SHARED"), $.scope_modifier),
-      ),
+      seq(alias(kw("NEW"), $.new_modifier), alias(kw("SHARED"), $.scope_modifier)),
       alias(kw("SHARED"), $.scope_modifier),
       alias(kw("PRIVATE"), $.access_modifier),
     ),

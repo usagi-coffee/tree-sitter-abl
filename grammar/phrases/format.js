@@ -43,13 +43,7 @@ module.exports = ({ kw }) => ({
             seq(kw("ROW"), field("row", $._expression)),
             seq(kw("ROW-OF"), field("row_of", $._expression)),
           ),
-          optional(
-            choice(
-              kw("COLON-ALIGNED"),
-              kw("LEFT-ALIGNED"),
-              kw("RIGHT-ALIGNED"),
-            ),
-          ),
+          optional(choice(kw("COLON-ALIGNED"), kw("LEFT-ALIGNED"), kw("RIGHT-ALIGNED"))),
         ),
         seq(
           choice(
@@ -60,13 +54,7 @@ module.exports = ({ kw }) => ({
             seq(kw("Y"), field("y", $._expression)),
             seq(kw("Y-OF"), field("y_of", $._expression)),
           ),
-          optional(
-            choice(
-              kw("COLON-ALIGNED"),
-              kw("LEFT-ALIGNED"),
-              kw("RIGHT-ALIGNED"),
-            ),
-          ),
+          optional(choice(kw("COLON-ALIGNED"), kw("LEFT-ALIGNED"), kw("RIGHT-ALIGNED"))),
         ),
       ),
     ),
@@ -102,10 +90,8 @@ module.exports = ({ kw }) => ({
       ),
     ),
 
-  __format_label: ($) =>
-    choice(seq(kw("LABEL"), $.__format_labels), kw("NO-LABELS")),
-  __format_labels: ($) =>
-    seq(field("label", $._expression), optional($.__format_labels_tail)),
+  __format_label: ($) => choice(seq(kw("LABEL"), $.__format_labels), kw("NO-LABELS")),
+  __format_labels: ($) => seq(field("label", $._expression), optional($.__format_labels_tail)),
   __format_labels_tail: ($) => repeat1(seq(",", field("label", $._expression))),
 
   __format_validate: ($) =>
@@ -121,11 +107,7 @@ module.exports = ({ kw }) => ({
   __format_view_as: ($) =>
     seq(
       kw("VIEW-AS"),
-      choice(
-        kw("TEXT"),
-        kw("TOGGLE-BOX"),
-        alias($.__format_editor_phrase, $.editor_phrase),
-      ),
+      choice(kw("TEXT"), kw("TOGGLE-BOX"), alias($.__format_editor_phrase, $.editor_phrase)),
     ),
 
   __format_editor_phrase: ($) =>

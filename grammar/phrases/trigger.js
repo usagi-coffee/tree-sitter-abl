@@ -1,14 +1,9 @@
 module.exports = ({ kw }) => ({
   trigger_phrase: ($) =>
-    choice(
-      seq(kw("TRIGGERS"), $.__triggers_body),
-      seq(kw("ON"), $.__trigger_event_list),
-    ),
+    choice(seq(kw("TRIGGERS"), $.__triggers_body), seq(kw("ON"), $.__trigger_event_list)),
 
   __triggers_body: ($) =>
-    prec.right(
-      seq(":", repeat1($.__trigger_block), kw("END"), optional(kw("TRIGGERS"))),
-    ),
+    prec.right(seq(":", repeat1($.__trigger_block), kw("END"), optional(kw("TRIGGERS")))),
 
   __trigger_block: ($) =>
     seq(
@@ -18,8 +13,7 @@ module.exports = ({ kw }) => ({
       choice(alias($.__trigger_body, $.trigger_body), $.__persistent_trigger),
     ),
 
-  __trigger_event_list: ($) =>
-    seq($._events, repeat(seq(",", $._events))),
+  __trigger_event_list: ($) => seq($._events, repeat(seq(",", $._events))),
 
   __trigger_body: ($) =>
     seq(
@@ -33,13 +27,7 @@ module.exports = ({ kw }) => ({
           field("end", $._expression),
         ),
       ),
-      optional(
-        seq(
-          kw("DOWN"),
-          optional(kw("TO")),
-          optional(field("down", $._expression)),
-        ),
-      ),
+      optional(seq(kw("DOWN"), optional(kw("TO")), optional(field("down", $._expression)))),
       ":",
       repeat($._statement),
       kw("END"),

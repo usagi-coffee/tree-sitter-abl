@@ -23,15 +23,9 @@ module.exports = ({ kw }) => ({
       optional(field("initializer", $.__var_initializer)),
     ),
 
-  __var_initializer: ($) =>
-    seq("=", choice($.array_initializer, $._expression)),
+  __var_initializer: ($) => seq("=", choice($.array_initializer, $._expression)),
   __var_extent: ($) => seq("[", optional($.__var_extent_size), "]"),
-  __var_extent_size: ($) =>
-    choice(
-      $.number_literal,
-      $.preprocessor_name,
-      $.identifier,
-    ),
+  __var_extent_size: ($) => choice($.number_literal, $.preprocessor_name, $.identifier),
   __var_modifier: ($) =>
     choice(
       seq($.__var_access_modifier, optional($.__var_storage_modifier)),

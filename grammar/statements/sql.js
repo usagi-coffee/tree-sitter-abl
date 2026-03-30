@@ -213,12 +213,7 @@ module.exports = ({ kw }) => ({
     ),
 
   sql_disconnect_catalog_statement: ($) =>
-    seq(
-      kw("DISCONNECT"),
-      kw("CATALOG"),
-      optional(field("catalog", $.__sql_name)),
-      $._terminator,
-    ),
+    seq(kw("DISCONNECT"), kw("CATALOG"), optional(field("catalog", $.__sql_name)), $._terminator),
 
   sql_drop_domain_statement: ($) =>
     seq(
@@ -319,8 +314,7 @@ module.exports = ({ kw }) => ({
       $._terminator,
     ),
 
-  sql_grant_statement: ($) =>
-    seq(kw("GRANT"), field("body", $.__sql_tail), $._terminator),
+  sql_grant_statement: ($) => seq(kw("GRANT"), field("body", $.__sql_tail), $._terminator),
 
   sql_insert_statement: ($) =>
     seq(
@@ -340,22 +334,15 @@ module.exports = ({ kw }) => ({
       $._terminator,
     ),
 
-  sql_revoke_statement: ($) =>
-    seq(kw("REVOKE"), field("body", $.__sql_tail), $._terminator),
+  sql_revoke_statement: ($) => seq(kw("REVOKE"), field("body", $.__sql_tail), $._terminator),
 
   sql_rollback_statement: ($) =>
     seq(kw("ROLLBACK"), optional(field("body", $.__sql_tail)), $._terminator),
 
-  sql_select_statement: ($) =>
-    seq(kw("SELECT"), field("body", $.__sql_tail), $._terminator),
+  sql_select_statement: ($) => seq(kw("SELECT"), field("body", $.__sql_tail), $._terminator),
 
   sql_set_catalog_statement: ($) =>
-    seq(
-      kw("SET"),
-      kw("CATALOG"),
-      field("catalog", $.__sql_name),
-      $._terminator,
-    ),
+    seq(kw("SET"), kw("CATALOG"), field("catalog", $.__sql_name), $._terminator),
 
   sql_set_database_default_area_statement: ($) =>
     seq(
@@ -368,13 +355,7 @@ module.exports = ({ kw }) => ({
     ),
 
   sql_set_pro_connect_log_statement: ($) =>
-    seq(
-      kw("SET"),
-      kw("PRO_CONNECT"),
-      kw("LOG"),
-      field("value", $.__sql_value),
-      $._terminator,
-    ),
+    seq(kw("SET"), kw("PRO_CONNECT"), kw("LOG"), field("value", $.__sql_value), $._terminator),
 
   sql_set_pro_connect_query_timeout_statement: ($) =>
     seq(
@@ -395,21 +376,10 @@ module.exports = ({ kw }) => ({
     ),
 
   sql_set_pro_server_log_statement: ($) =>
-    seq(
-      kw("SET"),
-      kw("PRO_SERVER"),
-      kw("LOG"),
-      field("value", $.__sql_value),
-      $._terminator,
-    ),
+    seq(kw("SET"), kw("PRO_SERVER"), kw("LOG"), field("value", $.__sql_value), $._terminator),
 
   sql_set_rowcount_statement: ($) =>
-    seq(
-      kw("SET"),
-      kw("ROWCOUNT"),
-      field("value", $.__sql_value),
-      $._terminator,
-    ),
+    seq(kw("SET"), kw("ROWCOUNT"), field("value", $.__sql_value), $._terminator),
 
   sql_set_schema_statement: ($) =>
     seq(kw("SET"), kw("SCHEMA"), field("schema", $.__sql_name), $._terminator),
@@ -424,56 +394,27 @@ module.exports = ({ kw }) => ({
       $._terminator,
     ),
 
-  sql_show_catalogs_statement: ($) =>
-    seq(kw("SHOW"), kw("CATALOGS"), $._terminator),
+  sql_show_catalogs_statement: ($) => seq(kw("SHOW"), kw("CATALOGS"), $._terminator),
 
   sql_show_database_default_area_statement: ($) =>
     seq(kw("SHOW"), kw("DATABASE"), kw("DEFAULT"), kw("AREA"), $._terminator),
 
   sql_show_group_statement: ($) =>
-    seq(
-      kw("SHOW"),
-      kw("GROUP"),
-      optional(field("group", $.__sql_name)),
-      $._terminator,
-    ),
+    seq(kw("SHOW"), kw("GROUP"), optional(field("group", $.__sql_name)), $._terminator),
 
   sql_show_partition_statement: ($) =>
-    seq(
-      kw("SHOW"),
-      kw("PARTITION"),
-      optional(field("partition", $.__sql_name)),
-      $._terminator,
-    ),
+    seq(kw("SHOW"), kw("PARTITION"), optional(field("partition", $.__sql_name)), $._terminator),
 
-  sql_show_rowcount_statement: ($) =>
-    seq(kw("SHOW"), kw("ROWCOUNT"), $._terminator),
+  sql_show_rowcount_statement: ($) => seq(kw("SHOW"), kw("ROWCOUNT"), $._terminator),
 
   sql_show_tenant_statement: ($) =>
-    seq(
-      kw("SHOW"),
-      kw("TENANT"),
-      optional(field("tenant", $.__sql_name)),
-      $._terminator,
-    ),
+    seq(kw("SHOW"), kw("TENANT"), optional(field("tenant", $.__sql_name)), $._terminator),
 
   sql_show_encrypt_on_statement: ($) =>
-    seq(
-      kw("SHOW"),
-      kw("ENCRYPT"),
-      kw("ON"),
-      optional(field("body", $.__sql_tail)),
-      $._terminator,
-    ),
+    seq(kw("SHOW"), kw("ENCRYPT"), kw("ON"), optional(field("body", $.__sql_tail)), $._terminator),
 
   sql_show_column_statistics_cipher_statement: ($) =>
-    seq(
-      kw("SHOW"),
-      kw("COLUMN"),
-      kw("STATISTICS"),
-      kw("CIPHER"),
-      $._terminator,
-    ),
+    seq(kw("SHOW"), kw("COLUMN"), kw("STATISTICS"), kw("CIPHER"), $._terminator),
 
   sql_update_statement: ($) =>
     seq(
@@ -485,12 +426,7 @@ module.exports = ({ kw }) => ({
     ),
 
   sql_update_statistics_statement: ($) =>
-    seq(
-      kw("UPDATE"),
-      kw("STATISTICS"),
-      optional(field("body", $.__sql_tail)),
-      $._terminator,
-    ),
+    seq(kw("UPDATE"), kw("STATISTICS"), optional(field("body", $.__sql_tail)), $._terminator),
 
   __sql_tail: ($) => repeat1($.__sql_token),
   __sql_value: ($) =>
@@ -503,8 +439,7 @@ module.exports = ({ kw }) => ({
     ),
 
   __sql_name: ($) => choice($.qualified_name, $.identifier),
-  __sql_procedure_name: ($) =>
-    choice($.qualified_name, $.identifier, $.string_literal),
+  __sql_procedure_name: ($) => choice($.qualified_name, $.identifier, $.string_literal),
 
   __sql_keyword: ($) =>
     choice(

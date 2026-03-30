@@ -7,24 +7,15 @@ module.exports = ({ kw }) => ({
       optional(
         choice(
           alias(
-            seq(
-              kw("PERSISTENT"),
-              optional(seq(kw("SET"), field("handle", $.identifier))),
-            ),
+            seq(kw("PERSISTENT"), optional(seq(kw("SET"), field("handle", $.identifier)))),
             $.persistent,
           ),
           alias(
-            seq(
-              kw("SINGLE-RUN"),
-              optional(seq(kw("SET"), field("handle", $.identifier))),
-            ),
+            seq(kw("SINGLE-RUN"), optional(seq(kw("SET"), field("handle", $.identifier)))),
             $.single_run,
           ),
           alias(
-            seq(
-              kw("SINGLETON"),
-              optional(seq(kw("SET"), field("handle", $.identifier))),
-            ),
+            seq(kw("SINGLETON"), optional(seq(kw("SET"), field("handle", $.identifier)))),
             $.singleton,
           ),
         ),
@@ -45,8 +36,7 @@ module.exports = ({ kw }) => ({
       $.qualified_name,
     ),
 
-  __run_value_expression: ($) =>
-    seq(kw("VALUE"), "(", field("value", $._expression), ")"),
+  __run_value_expression: ($) => seq(kw("VALUE"), "(", field("value", $._expression), ")"),
   __run_library_member: ($) =>
     seq(
       field("library", $.procedure_name),
@@ -57,8 +47,7 @@ module.exports = ({ kw }) => ({
   __run_member_name: ($) => token(/[A-Za-z0-9_\\/.-]+\.r/i),
 
   __run_in_phrase: ($) => seq(kw("IN"), field("context", $.__run_context_value)),
-  __run_on_server: ($) =>
-    seq(kw("ON"), kw("SERVER"), field("server", $._expression)),
+  __run_on_server: ($) => seq(kw("ON"), kw("SERVER"), field("server", $._expression)),
 
   __run_asynchronous: ($) =>
     seq(
@@ -74,12 +63,7 @@ module.exports = ({ kw }) => ({
           seq(
             kw("EVENT-HANDLER"),
             field("event_handler", $._expression),
-            optional(
-              seq(
-                kw("EVENT-HANDLER-CONTEXT"),
-                field("context", $.__run_context_value),
-              ),
-            ),
+            optional(seq(kw("EVENT-HANDLER-CONTEXT"), field("context", $.__run_context_value))),
           ),
         ),
       ),

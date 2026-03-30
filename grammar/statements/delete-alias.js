@@ -3,10 +3,7 @@ module.exports = ({ kw }) => ({
     seq(kw("DELETE"), kw("ALIAS"), $.__delete_alias_body, $._terminator),
 
   __delete_alias_body: ($) =>
-    seq(
-      field("alias", $.__delete_alias_name),
-      optional(alias(kw("NO-ERROR"), $.no_error)),
-    ),
+    seq(field("alias", $.__delete_alias_name), optional(alias(kw("NO-ERROR"), $.no_error))),
 
   __delete_alias_name: ($) =>
     choice(

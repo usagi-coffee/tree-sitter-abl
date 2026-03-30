@@ -5,10 +5,7 @@ module.exports = ({ kw }) => ({
     seq(
       choice(
         seq(",", $.__undo_action),
-        seq(
-          field("undo_label", $.identifier),
-          optional(seq(",", $.__undo_action)),
-        ),
+        seq(field("undo_label", $.identifier), optional(seq(",", $.__undo_action))),
       ),
     ),
 
@@ -19,27 +16,13 @@ module.exports = ({ kw }) => ({
         optional(
           field(
             "value",
-            choice(
-              $.new_expression,
-              $._assignable,
-              $.string_literal,
-              $.number_literal,
-            ),
+            choice($.new_expression, $._assignable, $.string_literal, $.number_literal),
           ),
         ),
       ),
-      seq(
-        kw("LEAVE"),
-        optional(field("leave_label", $.identifier)),
-      ),
-      seq(
-        kw("NEXT"),
-        optional(field("next_label", $.identifier)),
-      ),
-      seq(
-        kw("RETRY"),
-        optional(field("retry_label", $.identifier)),
-      ),
+      seq(kw("LEAVE"), optional(field("leave_label", $.identifier))),
+      seq(kw("NEXT"), optional(field("next_label", $.identifier))),
+      seq(kw("RETRY"), optional(field("retry_label", $.identifier))),
       seq(
         kw("RETURN"),
         optional(

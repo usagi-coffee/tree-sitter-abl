@@ -1,6 +1,5 @@
 module.exports = ({ kw }) => ({
-  copy_lob_statement: ($) =>
-    seq(kw("COPY-LOB"), $.__copy_lob_body, $._terminator),
+  copy_lob_statement: ($) => seq(kw("COPY-LOB"), $.__copy_lob_body, $._terminator),
 
   __copy_lob_body: ($) =>
     seq(
@@ -9,9 +8,7 @@ module.exports = ({ kw }) => ({
         seq(optional(kw("OBJECT")), field("source", $._expression)),
         seq(kw("FILE"), field("source_file", $._expression)),
       ),
-      optional(
-        seq(kw("STARTING"), kw("AT"), field("starting_at", $._expression)),
-      ),
+      optional(seq(kw("STARTING"), kw("AT"), field("starting_at", $._expression))),
       optional(seq(kw("FOR"), field("for_length", $._expression))),
       kw("TO"),
       choice(
@@ -45,19 +42,7 @@ module.exports = ({ kw }) => ({
   __copy_lob_convert_phrase: ($) =>
     seq(
       kw("CONVERT"),
-      optional(
-        seq(
-          kw("SOURCE"),
-          kw("CODEPAGE"),
-          field("source_codepage", $._expression),
-        ),
-      ),
-      optional(
-        seq(
-          kw("TARGET"),
-          kw("CODEPAGE"),
-          field("target_codepage", $._expression),
-        ),
-      ),
+      optional(seq(kw("SOURCE"), kw("CODEPAGE"), field("source_codepage", $._expression))),
+      optional(seq(kw("TARGET"), kw("CODEPAGE"), field("target_codepage", $._expression))),
     ),
 });

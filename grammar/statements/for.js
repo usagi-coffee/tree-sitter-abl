@@ -1,6 +1,5 @@
 module.exports = ({ kw }) => ({
-  for_statement: ($) =>
-    seq(optional($._label), $.__for_body, kw("END"), $._terminator),
+  for_statement: ($) => seq(optional($._label), $.__for_body, kw("END"), $._terminator),
 
   __for_body: ($) =>
     seq(
@@ -22,22 +21,11 @@ module.exports = ({ kw }) => ({
       $.body,
     ),
   __for_record_phrase_section: ($) =>
-    seq(
-      $.__for_record_phrases,
-      repeat($.__for_break_or_sort_phrase),
-    ),
+    seq($.__for_record_phrases, repeat($.__for_break_or_sort_phrase)),
 
-  __for_record_phrases: ($) =>
-    seq(
-      $.__for_record,
-      repeat(seq(",", $.__for_record)),
-    ),
+  __for_record_phrases: ($) => seq($.__for_record, repeat(seq(",", $.__for_record))),
 
-  __for_record: ($) =>
-    seq(
-      optional(choice(kw("EACH"), kw("FIRST"), kw("LAST"))),
-      $.record_phrase,
-    ),
+  __for_record: ($) => seq(optional(choice(kw("EACH"), kw("FIRST"), kw("LAST"))), $.record_phrase),
 
   __for_break_or_sort_phrase: ($) =>
     choice(
@@ -106,8 +94,7 @@ module.exports = ({ kw }) => ({
       ),
     ),
 
-  __for_with_stream_io_phrase: ($) =>
-    seq(kw("WITH"), alias(kw("STREAM-IO"), $.stream_io)),
+  __for_with_stream_io_phrase: ($) => seq(kw("WITH"), alias(kw("STREAM-IO"), $.stream_io)),
 
   __for_collate_phrase: ($) =>
     seq(
@@ -121,6 +108,5 @@ module.exports = ({ kw }) => ({
       optional(field("sort_order", kw("DESCENDING", { offset: 4 }))),
     ),
 
-  __for_while_phrase: ($) =>
-    seq(kw("WHILE"), field("condition", $._expression)),
+  __for_while_phrase: ($) => seq(kw("WHILE"), field("condition", $._expression)),
 });

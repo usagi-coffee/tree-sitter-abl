@@ -44,18 +44,10 @@ module.exports = ({ kw }) => ({
     ),
 
   __record_field_list: ($) =>
-    choice(
-      seq($.__record_fields_list, optional($.__record_except_list)),
-      $.__record_except_list,
-    ),
-  __record_fields_list: ($) =>
-    seq(kw("FIELDS"), "(", optional($.__record_field_names), ")"),
-  __record_except_list: ($) =>
-    seq(kw("EXCEPT"), "(", optional($.__record_field_names), ")"),
+    choice(seq($.__record_fields_list, optional($.__record_except_list)), $.__record_except_list),
+  __record_fields_list: ($) => seq(kw("FIELDS"), "(", optional($.__record_field_names), ")"),
+  __record_except_list: ($) => seq(kw("EXCEPT"), "(", optional($.__record_field_names), ")"),
   __record_field_names: ($) =>
-    seq(
-      $.__record_field_name,
-      repeat(seq(optional(","), $.__record_field_name)),
-    ),
+    seq($.__record_field_name, repeat(seq(optional(","), $.__record_field_name))),
   __record_field_name: ($) => $._identifier_or_qualified_name,
 });

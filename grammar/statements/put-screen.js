@@ -1,6 +1,5 @@
 module.exports = ({ kw }) => ({
-  put_screen_statement: ($) =>
-    seq(kw("PUT"), $.__put_screen_body, $._terminator),
+  put_screen_statement: ($) => seq(kw("PUT"), $.__put_screen_body, $._terminator),
 
   __put_screen_body: ($) =>
     seq(
@@ -11,6 +10,5 @@ module.exports = ({ kw }) => ({
       field("value", $._expression),
     ),
 
-  __put_screen_color_phrase: ($) =>
-    seq(kw("COLOR"), field("color", $._expression)),
+  __put_screen_color_phrase: ($) => seq(kw("COLOR"), field("color", $._expression)),
 });

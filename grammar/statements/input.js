@@ -9,10 +9,7 @@ module.exports = ({ kw }) => ({
       optional(alias(kw("BINARY"), $.binary)),
       optional(choice(alias(kw("ECHO"), $.echo), alias(kw("NO-ECHO"), $.no_echo))),
       optional(
-        choice(
-          seq(kw("MAP"), field("map", $.__input_map_entry)),
-          alias(kw("NO-MAP"), $.no_map),
-        ),
+        choice(seq(kw("MAP"), field("map", $.__input_map_entry)), alias(kw("NO-MAP"), $.no_map)),
       ),
       optional(alias(kw("UNBUFFERED"), $.unbuffered)),
       optional(alias($.__input_convert_phrase, $.convert_phrase)),
@@ -35,20 +32,13 @@ module.exports = ({ kw }) => ({
       ),
     ),
   __input_file_target: ($) =>
-    choice(
-      $.string_literal,
-      $._identifier_or_access_or_call,
-      $.preprocessor_name,
-    ),
+    choice($.string_literal, $._identifier_or_access_or_call, $.preprocessor_name),
   __input_lob_dir_phrase: ($) =>
     seq(
       kw("LOB-DIR"),
       field(
         "directory",
-        choice(
-          $.preprocessor_name,
-          seq(kw("VALUE"), "(", field("value", $._expression), ")"),
-        ),
+        choice($.preprocessor_name, seq(kw("VALUE"), "(", field("value", $._expression), ")")),
       ),
     ),
   __input_map_entry: ($) => choice($.identifier, $.string_literal),

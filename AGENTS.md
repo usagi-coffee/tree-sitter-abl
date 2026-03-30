@@ -22,6 +22,8 @@
 
 - Run tests:
   - `bun run test`
+- Run format:
+  - `bun run format`
 - Run a specific test:
   - `bun run test --include 'TEST NAME'`
   - Example: `bun run test --include 'WORKFILE DEFINITION - Shared/Private variants'` Parse a file:
@@ -53,7 +55,7 @@ Strongly prefer using these commands as they have helpful side-effects like retu
 - Keep grammar rule naming as close as possible to the language reference terminology (statement names, phrase names, and option names) unless there is a clear technical reason not to.
 - Grammar changes without thorough corpus coverage and testing are unacceptable.
 - Avoid creating a shared or generic code unless it is really a part of the core syntax, core grammar modifications require a confirmation unless experimenting.
-- Always prefere adding to `precedences` over using `prec(`.
+- Always prefer solving conflicts using `precedences` over using `prec(`.
 - We intentionally duplicate modifiers and tunings at the statement level so that most of the statement-specific context lives in a single file. To support this, each statement defines its own `__<statement>_rules`, which are later aliased to `$.rule` where needed. This intentional duplication favors locality, readability, and conflict isolation over DRY abstractions. Keep in mind we don't do these for trivial cases, see`Clean tree conventions`.
 - All statement-related modifiers, phrases, tunings that are not already part of core should be locally defined as `__<statement>_<rule>` rule and aliased to `$.<rule>`.
 - When resolving conflicts treat adding a `conflicts` entry as a last resort that requires prior confirmation with a clear explanation of why associativity/precedence are not enough.
@@ -67,7 +69,6 @@ Strongly prefer using these commands as they have helpful side-effects like retu
 - Don't do unnecessary comments like `// something is above`.
 - Never add `(ERROR` nodes to expected syntax trees in tests, it's pointless, fix the grammar not the test itself.
 - Prefer not using `_list` suffix for rules e.g `_format_label_list` should be `_format_labels`.
-- Prefer precedences over `prec(...)`.
 - Avoid hacks like cramming `FRAME` into regex to avoid the issue.
 - Add purpose + example comments before each precedence group when modifying precedences; add reference notes for each precedence entry.
 - *Only* if needed, refactor rules to be easier to target in precedence (e.g you can't target repeat(some_rule), its fine to refactor into e.g `__statement_expression: ($) => $._expression`.
@@ -216,4 +217,5 @@ instead of the `persistent` option.
 - `terminator`, `terminator_dot` or rules prefixed with `_` (unless aliased) should never be visible in the syntax tree output.
 - Always prefer `| head` when calling `bun run test` instead of `| tail`.
 - The `Permission denied (os error 13)` error occurs because the sandbox blocks writing outside the workspace, preventing tree-sitter from creating its lock file in the user's cache directory.
-- When reading a conflict error trust keyword tokens in {…}; ignore deduplicated rule names like __browse_body_token7.
+- When reading a conflict error trust keyword tokens in {…}; ignore deduplicated rule names like `__browse_body_token7`.
+- Run `bun run format` before commiting

@@ -72,11 +72,7 @@ module.exports = ({ kw }) => ({
     ),
 
   system_dialog_printer_setup_statement: ($) =>
-    seq(
-      kw("SYSTEM-DIALOG"),
-      $.__system_dialog_printer_setup_body,
-      $._terminator,
-    ),
+    seq(kw("SYSTEM-DIALOG"), $.__system_dialog_printer_setup_body, $._terminator),
 
   __system_dialog_printer_setup_body: ($) =>
     seq(
@@ -98,12 +94,10 @@ module.exports = ({ kw }) => ({
       $.__system_dialog_filters_pairs,
       optional(alias($.__system_dialog_initial_filter_phrase, $.initial_filter_phrase)),
     ),
-  __system_dialog_update_phrase: ($) =>
-    seq(kw("UPDATE"), field("update", $.identifier)),
+  __system_dialog_update_phrase: ($) => seq(kw("UPDATE"), field("update", $.identifier)),
   __system_dialog_initial_filter_phrase: ($) =>
     seq(kw("INITIAL-FILTER"), field("initial", $._expression)),
-  __system_dialog_filters_pairs: ($) =>
-    repeat1($.__system_dialog_filter_pair),
+  __system_dialog_filters_pairs: ($) => repeat1($.__system_dialog_filter_pair),
   __system_dialog_filter_pair: ($) =>
     seq(field("name", $._expression), field("spec", $._expression)),
 });

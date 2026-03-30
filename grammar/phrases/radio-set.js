@@ -12,8 +12,6 @@ module.exports = ({ kw }) => ({
 
   __radio_set_orientation: ($) =>
     choice(seq(kw("HORIZONTAL"), optional(kw("EXPAND"))), kw("VERTICAL")),
-  __radio_set_button_list: ($) =>
-    seq($.__radio_set_button, repeat(seq(",", $.__radio_set_button))),
-  __radio_set_button: ($) =>
-    seq(field("label", $._expression), ",", field("value", $._expression)),
+  __radio_set_button_list: ($) => seq($.__radio_set_button, repeat(seq(",", $.__radio_set_button))),
+  __radio_set_button: ($) => seq(field("label", $._expression), ",", field("value", $._expression)),
 });

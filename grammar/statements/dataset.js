@@ -12,13 +12,9 @@ module.exports = ({ kw }) => ({
     seq(
       field("name", $.identifier),
       optional(seq(kw("NAMESPACE-URI"), field("namespace_uri", $._expression))),
-      optional(
-        seq(kw("NAMESPACE-PREFIX"), field("namespace_prefix", $._expression)),
-      ),
+      optional(seq(kw("NAMESPACE-PREFIX"), field("namespace_prefix", $._expression))),
       optional(seq(kw("XML-NODE-NAME"), field("xml_node_name", $._expression))),
-      optional(
-        seq(kw("SERIALIZE-NAME"), field("serialize_name", $._expression)),
-      ),
+      optional(seq(kw("SERIALIZE-NAME"), field("serialize_name", $._expression))),
       optional(seq(kw("XML-NODE-TYPE"), field("xml_node_type", $._expression))),
       optional(alias(kw("SERIALIZE-HIDDEN"), $.serialize_hidden)),
       optional(alias(kw("REFERENCE-ONLY"), $.reference_only)),
@@ -48,12 +44,7 @@ module.exports = ({ kw }) => ({
         ",",
         field("child_field", $.identifier),
         repeat(
-          seq(
-            ",",
-            field("parent_field", $.identifier),
-            ",",
-            field("child_field", $.identifier),
-          ),
+          seq(",", field("parent_field", $.identifier), ",", field("child_field", $.identifier)),
         ),
         ")",
       ),
@@ -98,16 +89,10 @@ module.exports = ({ kw }) => ({
     ),
   __dataset_modifier: ($) =>
     choice(
-      seq(
-        alias(kw("NEW"), $.new_modifier),
-        alias(kw("SHARED"), $.scope_modifier),
-      ),
+      seq(alias(kw("NEW"), $.new_modifier), alias(kw("SHARED"), $.scope_modifier)),
       alias(kw("SHARED"), $.scope_modifier),
       seq(
-        choice(
-          alias(kw("PRIVATE"), $.access_modifier),
-          alias(kw("PROTECTED"), $.access_modifier),
-        ),
+        choice(alias(kw("PRIVATE"), $.access_modifier), alias(kw("PROTECTED"), $.access_modifier)),
         optional(alias(kw("STATIC"), $.static_modifier)),
         optional($.__dataset_serialization_modifier),
       ),

@@ -9,31 +9,17 @@ module.exports = ({ kw }) => ({
     ),
 
   __event_body: ($) =>
-    seq(
-      field("name", $.identifier),
-      optional(alias($.__event_signature, $.signature)),
-    ),
+    seq(field("name", $.identifier), optional(alias($.__event_signature, $.signature))),
 
   __event_signature: ($) =>
     choice(
       // VOID signature
-      seq(
-        optional(kw("SIGNATURE")),
-        kw("VOID"),
-        "(",
-        optional($.__event_parameter_list),
-        ")",
-      ),
+      seq(optional(kw("SIGNATURE")), kw("VOID"), "(", optional($.__event_parameter_list), ")"),
       // DELEGATE signature
-      seq(
-        kw("DELEGATE"),
-        optional(kw("CLASS")),
-        field("delegate_type", $._type_or_string),
-      ),
+      seq(kw("DELEGATE"), optional(kw("CLASS")), field("delegate_type", $._type_or_string)),
     ),
 
-  __event_parameter_list: ($) =>
-    seq($.__event_parameter, repeat(seq(",", $.__event_parameter))),
+  __event_parameter_list: ($) => seq($.__event_parameter, repeat(seq(",", $.__event_parameter))),
 
   __event_parameter: ($) =>
     seq(
@@ -66,8 +52,5 @@ module.exports = ({ kw }) => ({
       alias(kw("PUBLIC"), $.access_modifier),
     ),
   __event_type_modifier: ($) =>
-    choice(
-      alias(kw("STATIC"), $.static_modifier),
-      alias(kw("ABSTRACT"), $.abstract_modifier),
-    ),
+    choice(alias(kw("STATIC"), $.static_modifier), alias(kw("ABSTRACT"), $.abstract_modifier)),
 });

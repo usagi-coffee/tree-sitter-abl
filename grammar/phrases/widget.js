@@ -11,8 +11,7 @@ module.exports = ({ kw }) => ({
   __widget_frame: ($) => seq(kw("FRAME"), field("frame", $.identifier)),
   __widget_browse: ($) => seq(kw("BROWSE"), field("browse", $.identifier)),
 
-  __widget_handle: ($) =>
-    seq(field("handle", $._identifier_or_qualified_name)),
+  __widget_handle: ($) => seq(field("handle", $._identifier_or_qualified_name)),
 
   __widget_entry: ($) =>
     choice(
@@ -35,11 +34,9 @@ module.exports = ({ kw }) => ({
       field("system_handle", alias($.__widget_system_handle, $.system_handle)),
     ),
 
-  __widget_menu: ($) =>
-    seq(choice(kw("MENU"), kw("SUB-MENU")), field("menu", $.identifier)),
+  __widget_menu: ($) => seq(choice(kw("MENU"), kw("SUB-MENU")), field("menu", $.identifier)),
 
-  __widget_in_menu: ($) =>
-    seq(kw("IN"), kw("MENU"), field("menu", $.identifier)),
+  __widget_in_menu: ($) => seq(kw("IN"), kw("MENU"), field("menu", $.identifier)),
 
   __widget_system_handle: ($) =>
     choice(

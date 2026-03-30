@@ -11,11 +11,7 @@ module.exports = ({ kw }) => ({
     choice(
       prec(
         3,
-        seq(
-          $.__display_frame_phrases,
-          optional(alias(kw("NO-ERROR"), $.no_error)),
-          $._terminator,
-        ),
+        seq($.__display_frame_phrases, optional(alias(kw("NO-ERROR"), $.no_error)), $._terminator),
       ),
       prec(
         2,
@@ -43,12 +39,7 @@ module.exports = ({ kw }) => ({
     choice(
       seq(
         field("record", $.__display_record),
-        optional(
-          seq(
-            kw("EXCEPT"),
-            repeat1(field("except", $._identifier_or_qualified_name)),
-          ),
-        ),
+        optional(seq(kw("EXCEPT"), repeat1(field("except", $._identifier_or_qualified_name)))),
       ),
       prec.right(
         repeat1(
@@ -56,21 +47,15 @@ module.exports = ({ kw }) => ({
             seq(
               alias($.__display_field, $.field),
               optional($.format_phrase),
-              optional(
-                seq(kw("WHEN"), field("when", $.__display_when_expression)),
-              ),
-              optional(
-                seq("@", field("base", $._identifier_or_qualified_name)),
-              ),
+              optional(seq(kw("WHEN"), field("when", $.__display_when_expression))),
+              optional(seq("@", field("base", $._identifier_or_qualified_name))),
             ),
             seq(
               alias($.__display_field, $.field),
               optional($.format_phrase),
               seq("@", field("base", $._identifier_or_qualified_name)),
               $.format_phrase,
-              optional(
-                seq(kw("WHEN"), field("when", $.__display_when_expression)),
-              ),
+              optional(seq(kw("WHEN"), field("when", $.__display_when_expression))),
             ),
             $.__display_skip_phrase,
             $.__display_space_phrase,
@@ -92,13 +77,9 @@ module.exports = ({ kw }) => ({
   __display_record: ($) => $._identifier_or_qualified_name,
 
   __display_skip_phrase: ($) =>
-    prec.left(
-      seq(kw("SKIP"), optional(field("skip", seq("(", $._expression, ")")))),
-    ),
+    prec.left(seq(kw("SKIP"), optional(field("skip", seq("(", $._expression, ")"))))),
   __display_space_phrase: ($) =>
-    prec.left(
-      seq(kw("SPACE"), optional(field("space", seq("(", $._expression, ")")))),
-    ),
+    prec.left(seq(kw("SPACE"), optional(field("space", seq("(", $._expression, ")"))))),
 
   __display_frame_phrases: ($) => seq($.frame_phrase, optional($.frame_phrase)),
 

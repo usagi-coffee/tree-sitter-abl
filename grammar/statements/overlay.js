@@ -8,11 +8,7 @@ module.exports = ({ kw }) => ({
       ",",
       field("position", $._expression),
       optional(
-        seq(
-          ",",
-          field("length", $._expression),
-          optional(seq(",", field("type", $._expression))),
-        ),
+        seq(",", field("length", $._expression), optional(seq(",", field("type", $._expression)))),
       ),
       ")",
       "=",

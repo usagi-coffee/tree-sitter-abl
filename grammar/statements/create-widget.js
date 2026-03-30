@@ -28,9 +28,7 @@ module.exports = ({ kw }) => ({
         optional(
           seq(
             field("handle", $.identifier),
-            optional(
-              seq(kw("IN"), kw("WIDGET-POOL"), field("pool", $.identifier)),
-            ),
+            optional(seq(kw("IN"), kw("WIDGET-POOL"), field("pool", $.identifier))),
           ),
         ),
         optional($.assign_phrase),
@@ -51,10 +49,7 @@ module.exports = ({ kw }) => ({
   __create_widget_trigger_definition: ($) =>
     seq(
       kw("ON"),
-      field(
-        "event",
-        choice(kw("CHOOSE"), kw("ENTRY"), kw("LEAVE"), $.identifier),
-      ),
+      field("event", choice(kw("CHOOSE"), kw("ENTRY"), kw("LEAVE"), $.identifier)),
       $.do_statement,
     ),
 });

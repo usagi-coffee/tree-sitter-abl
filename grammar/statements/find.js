@@ -14,24 +14,20 @@ module.exports = ({ kw }) => ({
       ),
       field("table", $.__find_record_name),
       optional(field("constant", $._expression)),
-      repeat(choice(
-        alias($.__find_of_phrase, $.of_phrase),
-        $._find_record_option,
-        alias($.__find_where_phrase, $.where_phrase),
-      )),
+      repeat(
+        choice(
+          alias($.__find_of_phrase, $.of_phrase),
+          $._find_record_option,
+          alias($.__find_where_phrase, $.where_phrase),
+        ),
+      ),
     ),
 
   _find_record_option: ($) =>
     choice(
       alias(kw("NO-LOCK"), $.no_lock),
-      choice(
-        alias(kw("SHARE-LOCK"), $.share_lock),
-        alias(kw("SHARE"), $.share),
-      ),
-      choice(
-        alias(kw("EXCLUSIVE-LOCK"), $.exclusive_lock),
-        alias(kw("EXCLUSIVE"), $.exclusive),
-      ),
+      choice(alias(kw("SHARE-LOCK"), $.share_lock), alias(kw("SHARE"), $.share)),
+      choice(alias(kw("EXCLUSIVE-LOCK"), $.exclusive_lock), alias(kw("EXCLUSIVE"), $.exclusive)),
       alias(kw("NO-WAIT"), $.no_wait),
       alias(kw("NO-ERROR"), $.no_error),
       alias(kw("NO-PREFETCH"), $.no_prefetch),

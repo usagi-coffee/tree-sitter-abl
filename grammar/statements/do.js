@@ -1,6 +1,5 @@
 module.exports = ({ kw }) => ({
-  do_statement: ($) =>
-    seq(optional($._label), $.__do_body, kw("END"), $._terminator),
+  do_statement: ($) => seq(optional($._label), $.__do_body, kw("END"), $._terminator),
 
   __do_body: ($) =>
     seq(
@@ -25,12 +24,7 @@ module.exports = ({ kw }) => ({
     ),
 
   body: ($) =>
-    prec.right(
-      seq(
-        choice(alias($._colon, ":"), $._terminator_dot),
-        repeat($._statement),
-      ),
-    ),
+    prec.right(seq(choice(alias($._colon, ":"), $._terminator_dot), repeat($._statement))),
   __do_for_phrase: ($) =>
     seq(
       kw("FOR"),

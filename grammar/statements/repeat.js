@@ -1,6 +1,5 @@
 module.exports = ({ kw }) => ({
-  repeat_statement: ($) =>
-    seq(optional($._label), $.__repeat_body, kw("END"), $._terminator),
+  repeat_statement: ($) => seq(optional($._label), $.__repeat_body, kw("END"), $._terminator),
 
   __repeat_body: ($) =>
     seq(
@@ -39,13 +38,7 @@ module.exports = ({ kw }) => ({
         kw("BY"),
         field("by", $._expression),
         optional($.__repeat_sort_direction),
-        repeat(
-          seq(
-            kw("BY"),
-            field("by", $._expression),
-            optional($.__repeat_sort_direction),
-          ),
-        ),
+        repeat(seq(kw("BY"), field("by", $._expression), optional($.__repeat_sort_direction))),
       ),
     ),
   __repeat_loop_phrase: ($) =>
@@ -57,10 +50,7 @@ module.exports = ({ kw }) => ({
       field("end", $._expression),
       optional(seq(kw("BY"), field("step", $._expression))),
     ),
-  __repeat_while_phrase: ($) =>
-    seq(kw("WHILE"), field("condition", $._expression)),
-  __repeat_until_phrase: ($) =>
-    seq(kw("UNTIL"), field("condition", $._expression)),
-  __repeat_sort_direction: ($) =>
-    field("sort_order", kw("DESCENDING", { offset: 4 })),
+  __repeat_while_phrase: ($) => seq(kw("WHILE"), field("condition", $._expression)),
+  __repeat_until_phrase: ($) => seq(kw("UNTIL"), field("condition", $._expression)),
+  __repeat_sort_direction: ($) => field("sort_order", kw("DESCENDING", { offset: 4 })),
 });

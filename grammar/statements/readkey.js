@@ -6,6 +6,5 @@ module.exports = ({ kw }) => ({
       optional(alias($.__readkey_pause_phrase, $.pause_phrase)),
       $._terminator,
     ),
-  __readkey_pause_phrase: ($) =>
-    seq(kw("PAUSE"), field("pause", $._expression)),
+  __readkey_pause_phrase: ($) => seq(kw("PAUSE"), field("pause", $._expression)),
 });

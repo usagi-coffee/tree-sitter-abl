@@ -1,6 +1,5 @@
 module.exports = ({ kw }) => ({
-  can_find_expression: ($) =>
-    seq(kw("CAN-FIND"), "(", $.__can_find_record_query, ")"),
+  can_find_expression: ($) => seq(kw("CAN-FIND"), "(", $.__can_find_record_query, ")"),
 
   __can_find_record_query: ($) =>
     prec.right(
@@ -27,10 +26,8 @@ module.exports = ({ kw }) => ({
     ),
 
   __record_query_where_phrase: ($) => seq(kw("WHERE"), optional($._expression)),
-  __record_query_of_phrase: ($) =>
-    seq(kw("OF"), field("record", $.__record_query_record_name)),
-  __record_query_using_phrase: ($) =>
-    seq(kw("USING"), field("index", $.__record_query_index_name)),
+  __record_query_of_phrase: ($) => seq(kw("OF"), field("record", $.__record_query_record_name)),
+  __record_query_using_phrase: ($) => seq(kw("USING"), field("index", $.__record_query_index_name)),
   __record_query_frame_phrase: ($) =>
     seq(
       kw("AND"),

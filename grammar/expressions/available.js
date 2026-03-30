@@ -4,13 +4,7 @@ module.exports = ({ kw }) => ({
 
   __available_expression_body: ($) =>
     seq(
-      field(
-        "record",
-        choice(
-          $.__available_record_name,
-          seq("(", $.__available_record_name, ")"),
-        ),
-      ),
+      field("record", choice($.__available_record_name, seq("(", $.__available_record_name, ")"))),
     ),
 
   __available_record_name: ($) => $._identifier_or_qualified_name,

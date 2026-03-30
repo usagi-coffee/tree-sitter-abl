@@ -54,7 +54,7 @@ await concurrent_foreach(
       failures.push({ file: relativePath, output, exitCode: result.exitCode });
     }
   },
-  50
+  50,
 );
 
 if (failures.length > 0) {

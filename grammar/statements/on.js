@@ -102,14 +102,9 @@ module.exports = ({ kw }) => ({
         ),
       ),
     ),
-  __on_ui_event_branch: ($) =>
-    choice($.__on_ui_anywhere_branch, $.__on_ui_of_branch),
+  __on_ui_event_branch: ($) => choice($.__on_ui_anywhere_branch, $.__on_ui_of_branch),
   __on_ui_anywhere_branch: ($) =>
-    seq(
-      $.__on_ui_events,
-      alias(kw("ANYWHERE"), $.anywhere),
-      $.__on_trigger_action,
-    ),
+    seq($.__on_ui_events, alias(kw("ANYWHERE"), $.anywhere), $.__on_trigger_action),
   __on_ui_of_branch: ($) =>
     seq(
       $.__on_ui_event_widgets,
@@ -133,18 +128,11 @@ module.exports = ({ kw }) => ({
       $._terminator,
     ),
   __on_web_notify_branch: ($) =>
-    seq(
-      field("event", $.__on_web_notify_event),
-      alias(kw("ANYWHERE"), $.anywhere),
-      $._statement,
-    ),
+    seq(field("event", $.__on_web_notify_event), alias(kw("ANYWHERE"), $.anywhere), $._statement),
   __on_trigger_action: ($) =>
     choice(
       seq(alias(kw("REVERT"), $.revert), $._terminator),
-      seq(
-        field("function", alias($.__on_ui_key_function, $.key_function)),
-        $._terminator,
-      ),
+      seq(field("function", alias($.__on_ui_key_function, $.key_function)), $._terminator),
       $._statement,
       seq(
         kw("PERSISTENT"),
@@ -204,15 +192,13 @@ module.exports = ({ kw }) => ({
       kw("PREV-FRAME"),
       kw("TAB"),
     ),
-  __on_web_notify_event: ($) =>
-    prec(1, alias(token(/["']WEB-NOTIFY["']/i), $.string_literal)),
+  __on_web_notify_event: ($) => prec(1, alias(token(/["']WEB-NOTIFY["']/i), $.string_literal)),
   __on_ui_event_name: ($) =>
     token(
       prec(
         1,
         new RegExp(
-          `(${ON_WIDGET_EVENTS
-            .slice()
+          `(${ON_WIDGET_EVENTS.slice()
             .sort((a, b) => b.length - a.length)
             .map(escapeRegex)
             .join("|")})`,
@@ -228,24 +214,14 @@ module.exports = ({ kw }) => ({
       alias(token(choice("+", "-")), $.identifier),
     ),
   __on_ui_events: ($) =>
-    seq(
-      field("event", $.__on_ui_event),
-      repeat(seq(",", field("event", $.__on_ui_event))),
-    ),
-  __on_ui_event_widgets: ($) =>
-    seq($.__on_ui_events, alias($.__on_of_phrase, $.of_phrase)),
+    seq(field("event", $.__on_ui_event), repeat(seq(",", field("event", $.__on_ui_event)))),
+  __on_ui_event_widgets: ($) => seq($.__on_ui_events, alias($.__on_of_phrase, $.of_phrase)),
   __on_of_phrase: ($) =>
     seq(
       kw("OF"),
       optional(field("of", kw("MENU-ITEM"))),
       field("widget", $.widget_phrase),
-      repeat(
-        seq(
-          ",",
-          optional(field("of", kw("MENU-ITEM"))),
-          field("widget", $.widget_phrase),
-        ),
-      ),
+      repeat(seq(",", optional(field("of", kw("MENU-ITEM"))), field("widget", $.widget_phrase))),
     ),
   __on_referencing_phrase: ($) =>
     choice(

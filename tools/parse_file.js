@@ -8,6 +8,6 @@ if (!snippet) {
 }
 
 try {
-// run parser
-await $`tree-sitter parse ${snippet}`;
+  // run parser
+  await $`tree-sitter parse ${snippet}`;
 } catch (error) {}

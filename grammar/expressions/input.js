@@ -4,13 +4,6 @@ module.exports = ({ kw }) => ({
   __input_expression_body: ($) =>
     seq(
       optional(seq(kw("FRAME"), field("frame", $.identifier))),
-      field(
-        "field",
-        choice(
-          $._identifier_or_qualified_name,
-          $.object_access,
-          $.array_access,
-        ),
-      ),
+      field("field", choice($._identifier_or_qualified_name, $.object_access, $.array_access)),
     ),
 });

@@ -59,7 +59,5 @@ export function collect_keyword_words(rootDir, excludedWords = []) {
   }
 
   const excluded = new Set(excludedWords.map((word) => word.toUpperCase()));
-  return Array.from(keywords).filter(
-    (word) => !excluded.has(word.toUpperCase()),
-  );
+  return Array.from(keywords).filter((word) => !excluded.has(word.toUpperCase()));
 }

@@ -11,9 +11,9 @@ module.exports = ({ kw }) => ({
           kw("THROUGH"),
           $.__output_through_program_target,
           repeat($.__output_through_argument),
-          repeat($.__output_through_option)
-        )
-      )
+          repeat($.__output_through_option),
+        ),
+      ),
     ),
 
   __output_stream: ($) =>
@@ -37,7 +37,7 @@ module.exports = ({ kw }) => ({
       alias(kw("PAGED"), $.paged),
       alias($.__output_page_size_phrase, $.page_size_phrase),
       alias(kw("UNBUFFERED"), $.unbuffered),
-      alias($.__output_convert_phrase, $.convert_phrase)
+      alias($.__output_convert_phrase, $.convert_phrase),
     ),
 
   __output_through_option: ($) =>
@@ -49,7 +49,7 @@ module.exports = ({ kw }) => ({
       alias(kw("PAGED"), $.paged),
       alias($.__output_page_size_phrase, $.page_size_phrase),
       alias(kw("UNBUFFERED"), $.unbuffered),
-      alias($.__output_convert_phrase, $.convert_phrase)
+      alias($.__output_convert_phrase, $.convert_phrase),
     ),
 
   __output_convert_phrase: ($) =>
@@ -60,79 +60,64 @@ module.exports = ({ kw }) => ({
         repeat(
           choice(
             seq(kw("TARGET"), field("target", $.string_literal)),
-            seq(kw("SOURCE"), field("source", $.string_literal))
-          )
-        )
-      )
+            seq(kw("SOURCE"), field("source", $.string_literal)),
+          ),
+        ),
+      ),
     ),
 
   __output_lob_dir_phrase: ($) =>
     seq(
       kw("LOB-DIR"),
-        field(
-          "directory",
-          choice(
-            $.preprocessor_name,
-            seq(kw("VALUE"), "(", field("value", $._expression), ")")
-          )
-        )
+      field(
+        "directory",
+        choice($.preprocessor_name, seq(kw("VALUE"), "(", field("value", $._expression), ")")),
       ),
+    ),
 
   __output_num_copies_phrase: ($) =>
     seq(
       kw("NUM-COPIES"),
-        field(
-          "copies",
-          choice(
-            $.number_literal,
-            $.preprocessor_name,
-            seq(kw("VALUE"), "(", field("value", $._expression), ")")
-          )
-        )
+      field(
+        "copies",
+        choice(
+          $.number_literal,
+          $.preprocessor_name,
+          seq(kw("VALUE"), "(", field("value", $._expression), ")"),
+        ),
       ),
+    ),
 
   __output_page_size_phrase: ($) =>
     seq(
       kw("PAGE-SIZE"),
-        field(
-          "page_size",
-          choice(
-            $.number_literal,
-            $.preprocessor_name,
-            seq(kw("VALUE"), "(", field("value", $._expression), ")")
-          )
-        )
+      field(
+        "page_size",
+        choice(
+          $.number_literal,
+          $.preprocessor_name,
+          seq(kw("VALUE"), "(", field("value", $._expression), ")"),
+        ),
       ),
+    ),
 
   __output_map_entry: ($) =>
-    choice(
-      seq($.identifier, repeat(seq("/", $.identifier))),
-      $.identifier,
-      $.string_literal
-    ),
+    choice(seq($.identifier, repeat(seq("/", $.identifier))), $.identifier, $.string_literal),
 
   __output_to_target: ($) =>
     choice(
       prec.right(seq(kw("PRINTER"), optional(field("printer", $.__output_printer_target)))),
-      field(
-        "file",
-        choice(
-          $.string_literal,
-          $.preprocessor_name,
-          $.identifier,
-          $.qualified_name
-        )
-      ),
+      field("file", choice($.string_literal, $.preprocessor_name, $.identifier, $.qualified_name)),
       alias(kw("TERMINAL"), $.terminal),
       seq(kw("VALUE"), "(", field("value", $._expression), ")"),
-      alias(kw("CLIPBOARD"), $.clipboard)
+      alias(kw("CLIPBOARD"), $.clipboard),
     ),
 
   __output_through_program_target: ($) =>
     choice(
       field("program", $.identifier),
       field("program", $.string_literal),
-      seq(kw("VALUE"), "(", field("value", $._expression), ")")
+      seq(kw("VALUE"), "(", field("value", $._expression), ")"),
     ),
 
   __output_through_argument: ($) =>
@@ -142,14 +127,9 @@ module.exports = ({ kw }) => ({
       $.identifier,
       $.preprocessor_name,
       alias($.__output_program_flag, $.program_flag),
-      seq(kw("VALUE"), "(", field("value", $._expression), ")")
+      seq(kw("VALUE"), "(", field("value", $._expression), ")"),
     ),
   __output_program_flag: ($) => token(/-[A-Za-z][A-Za-z0-9-]*/),
 
-  __output_printer_target: ($) =>
-    choice(
-      $.string_literal,
-      $.identifier,
-      $.preprocessor_name
-    ),
+  __output_printer_target: ($) => choice($.string_literal, $.identifier, $.preprocessor_name),
 });

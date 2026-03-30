@@ -9,10 +9,7 @@ module.exports = ({ kw }) => ({
       kw("TO"),
       field("target", $._expression),
       optional(
-        choice(
-          alias(kw("CASE-SENSITIVE"), $.case_sensitive),
-          alias(kw("BINARY"), $.binary),
-        ),
+        choice(alias(kw("CASE-SENSITIVE"), $.case_sensitive), alias(kw("BINARY"), $.binary)),
       ),
       optional(alias($.__buffer_compare_save_phrase, $.save_phrase)),
       optional(alias($.__buffer_compare_compares_block, $.compares_block)),
@@ -27,11 +24,7 @@ module.exports = ({ kw }) => ({
     ),
 
   __buffer_compare_save_phrase: ($) =>
-    seq(
-      kw("SAVE"),
-      optional(seq(kw("RESULT"), kw("IN"))),
-      field("result", $._expression),
-    ),
+    seq(kw("SAVE"), optional(seq(kw("RESULT"), kw("IN"))), field("result", $._expression)),
 
   __buffer_compare_compares_block: ($) =>
     seq(

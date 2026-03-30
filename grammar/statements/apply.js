@@ -10,10 +10,7 @@ module.exports = ({ kw }) => ({
           field(
             "to",
             alias(
-              choice(
-                $.widget_phrase,
-                seq($._widgets, optional(field("handle", $.identifier))),
-              ),
+              choice($.widget_phrase, seq($._widgets, optional(field("handle", $.identifier)))),
               $.widget,
             ),
           ),

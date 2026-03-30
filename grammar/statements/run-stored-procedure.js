@@ -12,18 +12,10 @@ module.exports = ({ kw }) => ({
             kw("LOAD-RESULT-INTO"),
             field("result_handle", $._identifier_or_qualified_name),
             optional(
-              seq(
-                field("status_var", $._identifier_or_qualified_name),
-                "=",
-                kw("PROC-STATUS"),
-              ),
+              seq(field("status_var", $._identifier_or_qualified_name), "=", kw("PROC-STATUS")),
             ),
           ),
-          seq(
-            field("handle_var", $._identifier_or_qualified_name),
-            "=",
-            kw("PROC-HANDLE"),
-          ),
+          seq(field("handle_var", $._identifier_or_qualified_name), "=", kw("PROC-HANDLE")),
         ),
       ),
       optional(alias(kw("NO-ERROR"), $.no_error)),
@@ -34,10 +26,7 @@ module.exports = ({ kw }) => ({
     seq("(", optional($.__run_stored_procedure_param_list), ")"),
 
   __run_stored_procedure_param_list: ($) =>
-    seq(
-      $.__run_stored_procedure_param,
-      repeat(seq(",", $.__run_stored_procedure_param)),
-    ),
+    seq($.__run_stored_procedure_param, repeat(seq(",", $.__run_stored_procedure_param))),
 
   __run_stored_procedure_param: ($) =>
     seq(

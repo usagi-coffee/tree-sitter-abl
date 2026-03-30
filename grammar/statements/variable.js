@@ -14,12 +14,12 @@ module.exports = ({ kw }) => ({
       repeat(alias($.__variable_extent_phrase, $.extent_phrase)),
       optional(alias(kw("NO-UNDO"), $.no_undo)),
       choice(
+        seq(kw("AS"), optional(kw("CLASS")), field("type", $._type_or_string)),
         seq(
-          kw("AS"),
-          optional(kw("CLASS")),
-          field("type", $._type_or_string),
+          kw("LIKE"),
+          field("like", $._identifier_or_qualified_name),
+          optional(seq("[", field("like_subscript", $._expression), "]")),
         ),
-        seq(kw("LIKE"), field("like", $._identifier_or_qualified_name), optional(seq("[", field("like_subscript", $._expression), "]"))),
       ),
 
       repeat(
@@ -53,15 +53,9 @@ module.exports = ({ kw }) => ({
       ),
     ),
 
-  __variable_extent_size: ($) =>
-    choice(
-      $.number_literal,
-      $.preprocessor_name,
-      $.identifier,
-    ),
+  __variable_extent_size: ($) => choice($.number_literal, $.preprocessor_name, $.identifier),
 
-  __variable_list_items: ($) =>
-    seq($._expression, repeat(seq(",", $._expression))),
+  __variable_list_items: ($) => seq($._expression, repeat(seq(",", $._expression))),
 
   __variable_radio_buttons: ($) =>
     seq($.__variable_radio_button, repeat(seq(",", $.__variable_radio_button))),

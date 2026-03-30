@@ -1,6 +1,5 @@
 module.exports = ({ kw }) => ({
-  function_definition: ($) =>
-    seq(kw("FUNCTION"), $.__function_body, $._terminator),
+  function_definition: ($) => seq(kw("FUNCTION"), $.__function_body, $._terminator),
 
   __function_body: ($) =>
     seq(
@@ -24,12 +23,7 @@ module.exports = ({ kw }) => ({
 
   function_forward_definition: ($) =>
     choice(
-      seq(
-        kw("DEFINE", { offset: 3 }),
-        kw("FUNCTION"),
-        $.__function_forward_body_1,
-        $._terminator,
-      ),
+      seq(kw("DEFINE", { offset: 3 }), kw("FUNCTION"), $.__function_forward_body_1, $._terminator),
       seq(kw("FUNCTION"), $.__function_forward_body_2, $._terminator),
     ),
 
@@ -98,14 +92,8 @@ module.exports = ({ kw }) => ({
 
   __function_extent_phrase: ($) =>
     seq(kw("EXTENT"), optional(field("size", $.__function_extent_size))),
-  __function_map_phrase: ($) =>
-    seq(kw("MAP"), kw("TO"), field("actual", $.identifier)),
+  __function_map_phrase: ($) => seq(kw("MAP"), kw("TO"), field("actual", $.identifier)),
   __function_in_phrase: ($) => seq(kw("IN"), field("context", $._expression)),
   __function_extent_size: ($) =>
-    choice(
-      $.number_literal,
-      $.preprocessor_name,
-      $.identifier,
-      $.null_literal,
-    ),
+    choice($.number_literal, $.preprocessor_name, $.identifier, $.null_literal),
 });

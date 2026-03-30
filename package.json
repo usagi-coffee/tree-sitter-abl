@@ -2,17 +2,20 @@
   "name": "@usagi-coffee/tree-sitter-abl",
   "version": "0.0.50",
   "description": "ABL grammar for tree-sitter",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/usagi-coffee/tree-sitter-abl.git"
-  },
+  "keywords": [
+    "abl",
+    "incremental",
+    "parsing",
+    "tree-sitter"
+  ],
   "license": "MIT",
   "author": {
     "name": "Kamil Jakubus"
   },
-  "main": "bindings/node",
-  "types": "bindings/node",
-  "keywords": ["incremental", "parsing", "tree-sitter", "abl"],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/usagi-coffee/tree-sitter-abl.git"
+  },
   "files": [
     "grammar.js",
     "tree-sitter.json",
@@ -23,28 +26,13 @@
     "src/**",
     "*.wasm"
   ],
-  "dependencies": {
-    "node-addon-api": "^8.5.0",
-    "node-gyp-build": "^4.8.4"
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.22",
-    "prebuildify": "^6.0.1",
-    "tree-sitter": "^0.22.4",
-    "tree-sitter-cli": "^0.26.0"
-  },
-  "peerDependencies": {
-    "tree-sitter": "^0.22.4"
-  },
-  "peerDependenciesMeta": {
-    "tree-sitter": {
-      "optional": true
-    }
-  },
+  "main": "bindings/node",
+  "types": "bindings/node",
   "scripts": {
     "install": "node-gyp-build",
     "prestart": "tree-sitter build --wasm",
     "start": "tree-sitter playground",
+    "format": "oxfmt",
     "test": "bun run tools/generate.js && bun run tools/test.js",
     "test:queries": "tree-sitter test",
     "test:update": "bun run tools/generate.js && bun run tools/test.js",
@@ -58,5 +46,24 @@
     "build": "bun run tools/generate.js && tree-sitter build",
     "build:wasm": "tree-sitter generate && tree-sitter build -w",
     "dev": "nodemon --ignore ./src -e js,json,p --exec 'bun run tools/generate.js && bun run tools/parse_file.js example.p'"
+  },
+  "dependencies": {
+    "node-addon-api": "^8.5.0",
+    "node-gyp-build": "^4.8.4"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22",
+    "oxfmt": "^0.42.0",
+    "prebuildify": "^6.0.1",
+    "tree-sitter": "^0.22.4",
+    "tree-sitter-cli": "^0.26.0"
+  },
+  "peerDependencies": {
+    "tree-sitter": "^0.22.4"
+  },
+  "peerDependenciesMeta": {
+    "tree-sitter": {
+      "optional": true
+    }
   }
 }

@@ -108,8 +108,7 @@ for (let i = 0; i < lines.length; i++) {
   if (line.toLowerCase() === next_entry.toLowerCase()) break;
 
   if (capturing) {
-    if (line.startsWith("\f") || line === TITLE || (line && !isNaN(+line)))
-      continue;
+    if (line.startsWith("\f") || line === TITLE || (line && !isNaN(+line))) continue;
     console.log(line);
   }
 }

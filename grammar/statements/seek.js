@@ -1,6 +1,5 @@
 module.exports = ({ kw }) => ({
-  seek_statement: ($) =>
-    prec.right(seq(kw("SEEK"), $.__seek_body, $._terminator)),
+  seek_statement: ($) => prec.right(seq(kw("SEEK"), $.__seek_body, $._terminator)),
 
   __seek_body: ($) =>
     seq(
@@ -20,10 +19,7 @@ module.exports = ({ kw }) => ({
           kw("INPUT"),
           kw("OUTPUT"),
           field("name", $.identifier),
-          seq(
-            kw("STREAM-HANDLE"),
-            field("handle", $._identifier_or_qualified_name),
-          ),
+          seq(kw("STREAM-HANDLE"), field("handle", $._identifier_or_qualified_name)),
         ),
       ),
       ")",

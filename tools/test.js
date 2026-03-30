@@ -9,8 +9,7 @@ const proc = Bun.spawnSync({
   stderr: "pipe",
 });
 
-const raw =
-  (proc.stdout?.toString("utf8") ?? "") + (proc.stderr?.toString("utf8") ?? "");
+const raw = (proc.stdout?.toString("utf8") ?? "") + (proc.stderr?.toString("utf8") ?? "");
 
 const checkmarkCount = (raw.match(new RegExp("✓", "g")) || []).length;
 const failureCount = (raw.match(new RegExp("✗", "g")) || []).length;

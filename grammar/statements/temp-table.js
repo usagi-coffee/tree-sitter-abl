@@ -12,28 +12,16 @@ module.exports = ({ kw }) => ({
     seq(
       field("name", $.identifier),
       optional(alias(kw("NO-UNDO"), $.no_undo)),
-      optional(
-        seq(kw("NAMESPACE-URI"), field("namespace_uri", $.string_literal)),
-      ),
-      optional(
-        seq(
-          kw("NAMESPACE-PREFIX"),
-          field("namespace_prefix", $.string_literal),
-        ),
-      ),
+      optional(seq(kw("NAMESPACE-URI"), field("namespace_uri", $.string_literal))),
+      optional(seq(kw("NAMESPACE-PREFIX"), field("namespace_prefix", $.string_literal))),
       optional(seq(kw("XML-NODE-NAME"), field("node", $.string_literal))),
-      optional(
-        seq(kw("SERIALIZE-NAME"), field("serialize_name", $.string_literal)),
-      ),
+      optional(seq(kw("SERIALIZE-NAME"), field("serialize_name", $.string_literal))),
       optional(alias(kw("REFERENCE-ONLY"), $.reference_only)),
       repeat(
         choice(
           $.argument_reference,
           alias($.__temp_table_like_phrase, $.like_phrase),
-          alias(
-            $.__temp_table_like_sequential_phrase,
-            $.like_sequential_phrase,
-          ),
+          alias($.__temp_table_like_sequential_phrase, $.like_sequential_phrase),
           alias(kw("RCODE-INFORMATION"), $.rcode_information),
           alias($.__temp_table_before_table_phrase, $.before_table_phrase),
         ),
@@ -71,9 +59,7 @@ module.exports = ({ kw }) => ({
     seq(
       kw("INDEX"),
       field("name", $.identifier),
-      optional(
-        seq(choice(kw("AS"), kw("IS")), repeat($.__temp_table_index_modifier)),
-      ),
+      optional(seq(choice(kw("AS"), kw("IS")), repeat($.__temp_table_index_modifier))),
       repeat1($.__temp_table_index_field),
     ),
 
@@ -103,20 +89,15 @@ module.exports = ({ kw }) => ({
       field("index", $.identifier),
       optional(alias($.__temp_table_as_primary_phrase, $.as_primary_phrase)),
     ),
-  __temp_table_as_primary_phrase: ($) =>
-    seq(kw("AS"), alias(kw("PRIMARY"), $.primary)),
-  __temp_table_before_table_phrase: ($) =>
-    seq(kw("BEFORE-TABLE"), field("before", $.identifier)),
+  __temp_table_as_primary_phrase: ($) => seq(kw("AS"), alias(kw("PRIMARY"), $.primary)),
+  __temp_table_before_table_phrase: ($) => seq(kw("BEFORE-TABLE"), field("before", $.identifier)),
   __temp_table_index_field: ($) =>
     seq(
       field("field", $._identifier_or_qualified_name),
       optional(
         field(
           "sort_order",
-          choice(
-            kw("DESCENDING", { offset: 4 }),
-            kw("ASCENDING", { offset: 3 }),
-          ),
+          choice(kw("DESCENDING", { offset: 4 }), kw("ASCENDING", { offset: 3 })),
         ),
       ),
     ),
@@ -133,17 +114,11 @@ module.exports = ({ kw }) => ({
       seq(kw("HELP"), field("help", $.string_literal)),
       seq(
         kw("INITIAL"),
-        field(
-          "initial",
-          choice($._expression, seq("[", optional($._expressions), "]")),
-        ),
+        field("initial", choice($._expression, seq("[", optional($._expressions), "]"))),
       ),
       seq(kw("LABEL"), field("label", $.__temp_table_label_list)),
       seq(kw("MOUSE-POINTER"), field("mouse_pointer", $._expression)),
-      seq(
-        optional(alias(kw("NOT"), $.not)),
-        alias(kw("CASE-SENSITIVE"), $.case_sensitive),
-      ),
+      seq(optional(alias(kw("NOT"), $.not)), alias(kw("CASE-SENSITIVE"), $.case_sensitive)),
       seq(kw("PFCOLOR"), field("pfcolor", $._expression)),
       alias(kw("SERIALIZE-HIDDEN"), $.serialize_hidden),
       seq(kw("SERIALIZE-NAME"), field("serialize_name", $.string_literal)),
@@ -154,12 +129,9 @@ module.exports = ({ kw }) => ({
       seq(kw("XML-NODE-NAME"), field("xml_node_name", $.string_literal)),
       $.view_as_phrase,
     ),
-  __temp_table_extent_option: ($) =>
-    seq(kw("EXTENT"), field("extent", $.number_literal)),
-  __temp_table_like_name: ($) =>
-    choice($._identifier_or_qualified_name, $.array_access),
-  __temp_table_label_list: ($) =>
-    seq($.string_literal, repeat(seq(",", $.string_literal))),
+  __temp_table_extent_option: ($) => seq(kw("EXTENT"), field("extent", $.number_literal)),
+  __temp_table_like_name: ($) => choice($._identifier_or_qualified_name, $.array_access),
+  __temp_table_label_list: ($) => seq($.string_literal, repeat(seq(",", $.string_literal))),
   __temp_table_modifier: ($) =>
     choice(
       seq(
@@ -169,10 +141,7 @@ module.exports = ({ kw }) => ({
       ),
       alias(kw("SHARED"), $.scope_modifier),
       seq(
-        choice(
-          alias(kw("PRIVATE"), $.access_modifier),
-          alias(kw("PROTECTED"), $.access_modifier),
-        ),
+        choice(alias(kw("PRIVATE"), $.access_modifier), alias(kw("PROTECTED"), $.access_modifier)),
         optional(alias(kw("STATIC"), $.static_modifier)),
         optional($.__temp_table_serialization_modifier),
       ),

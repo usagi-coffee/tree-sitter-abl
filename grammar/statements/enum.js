@@ -19,17 +19,10 @@ module.exports = ({ kw }) => ({
       kw("ENUM"),
     ),
 
-  __enum_member: ($) =>
-    seq(field("name", $.identifier), optional(seq("=", $.__enum_member_value))),
+  __enum_member: ($) => seq(field("name", $.identifier), optional(seq("=", $.__enum_member_value))),
 
   __enum_member_value: ($) =>
-    choice(
-      $.number_literal,
-      $.identifier,
-      $.null_literal,
-      $.__enum_member_value_list,
-    ),
+    choice($.number_literal, $.identifier, $.null_literal, $.__enum_member_value_list),
 
-  __enum_member_value_list: ($) =>
-    seq($.identifier, repeat1(seq(",", $.identifier))),
+  __enum_member_value_list: ($) => seq($.identifier, repeat1(seq(",", $.identifier))),
 });

@@ -1,6 +1,5 @@
 module.exports = ({ kw }) => ({
-  underline_statement: ($) =>
-    seq(kw("UNDERLINE"), $.__underline_body, $._terminator),
+  underline_statement: ($) => seq(kw("UNDERLINE"), $.__underline_body, $._terminator),
 
   __underline_body: ($) =>
     seq(
@@ -10,5 +9,4 @@ module.exports = ({ kw }) => ({
     ),
 
   __underline_field: ($) => $._expression,
-
 });

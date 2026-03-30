@@ -1,6 +1,5 @@
 module.exports = ({ kw }) => ({
-  open_query_statement: ($) =>
-    seq(kw("OPEN"), $.__open_query_body, $._terminator),
+  open_query_statement: ($) => seq(kw("OPEN"), $.__open_query_body, $._terminator),
 
   __open_query_body: ($) =>
     seq(
@@ -35,10 +34,7 @@ module.exports = ({ kw }) => ({
 
   __open_query_record_phrase: ($) =>
     prec.right(
-      seq(
-        field("record", $._identifier_or_qualified_name),
-        repeat($.__open_query_record_option),
-      ),
+      seq(field("record", $._identifier_or_qualified_name), repeat($.__open_query_record_option)),
     ),
   __open_query_record_option: ($) =>
     choice(

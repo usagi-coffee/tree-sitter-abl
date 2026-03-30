@@ -10,9 +10,7 @@ module.exports = ({ kw }) => ({
       $._terminator,
     ),
 
-  this_object_statement: ($) =>
-    seq(kw("THIS-OBJECT"), optional($.arguments), $._terminator),
+  this_object_statement: ($) => seq(kw("THIS-OBJECT"), optional($.arguments), $._terminator),
 
-  super_statement: ($) =>
-    seq(kw("SUPER"), optional($.arguments), $._terminator),
+  super_statement: ($) => seq(kw("SUPER"), optional($.arguments), $._terminator),
 });
