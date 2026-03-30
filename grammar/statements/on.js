@@ -158,7 +158,10 @@ module.exports = ({ kw }) => ({
   __on_database_event: ($) =>
     choice(kw("CREATE"), kw("DELETE"), kw("FIND"), kw("WRITE"), kw("ASSIGN")),
   __on_database_event_name: ($) => $.__on_database_event,
-  __on_key_label: ($) => $._events,
+  // __on_key_label accepts both $.__on_ui_event_name tokens (TAB, ENDKEY, etc.)
+  // and plain $._events (F1, F10, etc.). The $.__on_ui_event_name overlap with
+  // $.__on_ui_event requires a conflicts entry in grammar.js to disambiguate at runtime.
+  __on_key_label: ($) => choice(alias($.__on_ui_event_name, $.identifier), $._events),
   __on_key_function: ($) =>
     choice(
       kw("ABORT"),
@@ -222,6 +225,7 @@ module.exports = ({ kw }) => ({
       alias($.__on_ui_event_name, $.identifier),
       prec(-1, $.string_literal),
       prec(-2, $.__on_key_label),
+      alias(token(choice("+", "-")), $.identifier),
     ),
   __on_ui_events: ($) =>
     seq(

@@ -457,3 +457,20 @@ ON "X" OF btn GO.
       widget: (widget_phrase
         handle: (identifier)))
     function: (key_function)))
+
+================================================================================
+ON - Branch: UI-event key-label + key-function
+================================================================================
+
+ON TAB TAB.
+ON TAB ENDKEY.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (on_statement
+    event: (identifier)
+    function: (key_function))
+  (on_statement
+    event: (identifier)
+    function: (key_function)))
