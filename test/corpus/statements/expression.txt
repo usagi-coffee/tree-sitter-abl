@@ -21,3 +21,43 @@ myFunc(1, "x") NO-ERROR.
         (argument
           name: (string_literal))))
     (no_error)))
+
+================================================================================
+NEW expression - record buffer check forms
+================================================================================
+
+IF NEW(Customer) THEN RETURN.
+IF NOT NEW Order THEN RETURN.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (if_statement
+    (new_expression
+      record: (identifier))
+    then: (return_statement))
+  (if_statement
+    (unary_expression
+      (new_expression
+        record: (identifier)))
+    then: (return_statement)))
+
+================================================================================
+ENTERED expression
+================================================================================
+
+IF wfeven ENTERED THEN RETURN.
+IF NOT wfeven ENTERED THEN LEAVE.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (if_statement
+    (entered_expression
+      field: (identifier))
+    then: (return_statement))
+  (if_statement
+    (unary_expression
+      (entered_expression
+        field: (identifier)))
+    then: (leave_statement)))

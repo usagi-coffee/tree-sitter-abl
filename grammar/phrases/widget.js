@@ -19,10 +19,12 @@ module.exports = ({ kw }) => ({
       seq(
         optional(kw("FIELD")),
         field("field", $._identifier_or_qualified_name),
+        optional(seq("[", field("subscript", $._expression), "]")),
         optional(seq(kw("IN"), kw("FRAME"), field("frame", $.identifier))),
       ),
       seq(
         field("column", $._identifier_or_qualified_name),
+        optional(seq("[", field("subscript", $._expression), "]")),
         seq(kw("IN"), kw("BROWSE"), field("browse", $.identifier)),
       ),
       seq(
