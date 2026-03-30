@@ -20,6 +20,17 @@ module.exports = ({ kw }) => ({
           alias(kw("USE-TEXT"), $.use_text),
           alias(kw("BACKGROUND"), $.background),
           alias(kw("NO-HIDE"), $.no_hide),
+          alias(kw("NO-UNDERLINE", { offset: 10 }), $.no_underline),
+          alias(kw("NO-HELP"), $.no_help),
+          alias(kw("SCROLLABLE"), $.scrollable),
+          alias(kw("TOP-ONLY"), $.top_only),
+          alias(kw("SCREEN-IO"), $.screen_io),
+          alias(kw("KEEP-TAB-ORDER"), $.keep_tab_order),
+          alias(kw("DROP-TARGET"), $.drop_target),
+          alias(kw("CONTEXT-HELP"), $.context_help),
+          alias(kw("EXPORT"), $.export),
+          alias(kw("USE-DICT-EXPS"), $.use_dict_exps),
+          alias(kw("ACCUM"), $.accum),
           seq(
             kw("FRAME"),
             field("frame", $.__frame_identifier),
@@ -33,8 +44,18 @@ module.exports = ({ kw }) => ({
           seq(kw("ROW"), field("row", $.__frame_expression)),
           seq(kw("WIDTH"), field("width", $.__frame_expression)),
           seq(kw("FONT"), field("font", $.number_literal)),
-          seq(kw("BGCOLOR"), field("bgcolor", $.number_literal)),
-          seq(kw("TITLE"), field("title", $.__frame_expression)),
+          seq(kw("CANCEL-BUTTON"), field("cancel_button", $.__frame_identifier)),
+          seq(kw("DEFAULT-BUTTON"), field("default_button", $.__frame_identifier)),
+          seq(kw("SCROLL"), field("scroll", $.__frame_expression)),
+          seq(kw("RETAIN"), field("retain", $.__frame_expression)),
+          seq(kw("WIDGET-ID"), field("widget_id", $.__frame_expression)),
+          seq(kw("CONTEXT-HELP-FILE"), field("context_help_file", $.__frame_expression)),
+          seq(kw("IN"), kw("WINDOW"), field("window", $.__frame_identifier)),
+          seq(kw("BGCOLOR"), field("bgcolor", $.__frame_expression)),
+          seq(kw("DCOLOR"), field("dcolor", $.__frame_expression)),
+          seq(kw("FGCOLOR"), field("fgcolor", $.__frame_expression)),
+          seq(kw("PFCOLOR"), field("pfcolor", $.__frame_expression)),
+          $.__frame_title_phrase,
           choice(
             seq(
               field("column", $.number_literal),
@@ -65,6 +86,17 @@ module.exports = ({ kw }) => ({
       ),
     ),
 
+  __frame_title_phrase: ($) =>
+    seq(
+      kw("TITLE"),
+      optional(choice(
+        seq(kw("BGCOLOR"), field("title_bgcolor", $.__frame_expression)),
+        seq(kw("DCOLOR"), field("title_dcolor", $.__frame_expression)),
+        seq(kw("FGCOLOR"), field("title_fgcolor", $.__frame_expression)),
+        seq(kw("FONT"), field("title_font", $.__frame_expression)),
+      )),
+      field("title", $.__frame_expression),
+    ),
   __frame_identifier: ($) => $.identifier,
   __frame_expression: ($) => $._expression,
   __frame_down_value: ($) =>

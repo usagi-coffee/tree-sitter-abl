@@ -77,6 +77,23 @@ FORM a COLON 25 WITH SIZE 79 BY 11 NO-LABEL THREE-D CENTER.
       (centered))))
 
 ================================================================================
+FRAME phrase with color attributes
+================================================================================
+
+DISPLAY x WITH DCOLOR 1 FGCOLOR 2 BGCOLOR wClrBg PFCOLOR wClrPf.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (display_statement
+    record: (identifier)
+    (frame_phrase
+      dcolor: (number_literal)
+      fgcolor: (number_literal)
+      bgcolor: (identifier)
+      pfcolor: (identifier))))
+
+================================================================================
 FRAME phrase with NO-ATTR-SPACE
 ================================================================================
 
@@ -92,3 +109,64 @@ DISPLAY x WITH FRAME f WIDTH 10 NO-BOX NO-ATTR-SPACE.
       width: (number_literal)
       (no_box)
       (no_attr_space))))
+
+================================================================================
+FRAME phrase with TITLE color options
+================================================================================
+
+DISPLAY x WITH TITLE DCOLOR wClrTit '[ Hello ]'.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (display_statement
+    record: (identifier)
+    (frame_phrase
+      title_dcolor: (identifier)
+      title: (string_literal))))
+
+================================================================================
+FRAME phrase with NO-UNDERLINE
+================================================================================
+
+DISPLAY x WITH NO-UNDERLINE NO-BOX.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (display_statement
+    record: (identifier)
+    (frame_phrase
+      (no_underline)
+      (no_box))))
+
+================================================================================
+FRAME phrase with SCROLLABLE, TOP-ONLY, NO-HELP
+================================================================================
+
+DISPLAY x WITH SCROLLABLE TOP-ONLY NO-HELP.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (display_statement
+    record: (identifier)
+    (frame_phrase
+      (scrollable)
+      (top_only)
+      (no_help))))
+
+================================================================================
+FRAME phrase with CANCEL-BUTTON and DEFAULT-BUTTON
+================================================================================
+
+DISPLAY x WITH CANCEL-BUTTON btnCancel DEFAULT-BUTTON btnOk.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (display_statement
+    record: (identifier)
+    (frame_phrase
+      cancel_button: (identifier)
+      default_button: (identifier))))
