@@ -14,9 +14,11 @@ module.exports = ({ kw }) => ({
       ),
       field("table", $.__find_record_name),
       optional(field("constant", $._expression)),
-      optional($._find_record_option),
-      optional(alias($.__find_of_phrase, $.of_phrase)),
-      repeat($._find_record_option_or_where),
+      repeat(choice(
+        alias($.__find_of_phrase, $.of_phrase),
+        $._find_record_option,
+        alias($.__find_where_phrase, $.where_phrase),
+      )),
     ),
 
   _find_record_option: ($) =>

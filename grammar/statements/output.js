@@ -141,8 +141,10 @@ module.exports = ({ kw }) => ({
       $.number_literal,
       $.identifier,
       $.preprocessor_name,
+      alias($.__output_program_flag, $.program_flag),
       seq(kw("VALUE"), "(", field("value", $._expression), ")")
     ),
+  __output_program_flag: ($) => token(/-[A-Za-z][A-Za-z0-9-]*/),
 
   __output_printer_target: ($) =>
     choice(
