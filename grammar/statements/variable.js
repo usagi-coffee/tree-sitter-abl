@@ -19,7 +19,7 @@ module.exports = ({ kw }) => ({
           optional(kw("CLASS")),
           field("type", $._type_or_string),
         ),
-        seq(kw("LIKE"), field("like", $._identifier_or_qualified_name)),
+        seq(kw("LIKE"), field("like", $._identifier_or_qualified_name), optional(seq("[", field("like_subscript", $._expression), "]"))),
       ),
 
       repeat(

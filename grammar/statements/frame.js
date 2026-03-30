@@ -51,6 +51,7 @@ module.exports = ({ kw }) => ({
       seq(kw("SKIP"), "(", optional(field("skip", $._expression)), ")"),
       seq(
         field("field", $._identifier_or_qualified_name),
+        optional(seq("[", field("subscript", $._expression), "]")),
         optional(
           choice(
             alias($.at_phrase, $.format_phrase),

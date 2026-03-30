@@ -903,3 +903,30 @@ DEF VAR l_linii AS INTEGER FORMA ">>9".
     type: (identifier)
     (format_phrase
       format: (string_literal))))
+
+================================================================================
+VARIABLE DEFINITION - LIKE with subscript
+================================================================================
+
+DEFINE VARIABLE x NO-UNDO LIKE Customer.CreditLimit[1].
+DEFINE VARIABLE y EXTENT 3 LIKE ttRecord.fieldArr[2] NO-UNDO.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    name: (identifier)
+    (no_undo)
+    like: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    like_subscript: (number_literal))
+  (variable_definition
+    name: (identifier)
+    (extent_phrase
+      size: (number_literal))
+    like: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    like_subscript: (number_literal)
+    (no_undo)))

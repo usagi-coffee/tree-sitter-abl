@@ -27,6 +27,24 @@ DEF FRAME f2 Customer.CustNum Sales.Order.OrderNum.
       right: (identifier))))
 
 ================================================================================
+FRAME - field with array subscript
+================================================================================
+
+DEFINE FRAME f1 tbl.field[1] WITH FRAME f1.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (frame_definition
+    name: (identifier)
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    subscript: (number_literal)
+    (frame_phrase
+      frame: (identifier))))
+
+================================================================================
 FRAME - EXCEPT syntax
 ================================================================================
 
