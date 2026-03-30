@@ -777,3 +777,23 @@ WITH DOWN 5.
       label_fgcolor: (number_literal)
       label_pfcolor: (number_literal))
     down: (number_literal)))
+
+================================================================================
+BROWSE - TITLE with color option and NO-UNDERLINE
+================================================================================
+
+DEFINE BROWSE b1 QUERY q1 NO-LOCK DISPLAY x
+WITH TITLE DCOLOR 5 'My Browse' NO-UNDERLINE NO-LABELS.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (browse_definition
+    name: (identifier)
+    query: (identifier)
+    (column
+      column: (identifier))
+    title_dcolor: (number_literal)
+    title: (string_literal)
+    (no_underline)
+    (no_labels)))
