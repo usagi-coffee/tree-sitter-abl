@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "skills": {
+    "tree-sitter-optimize": {
+      "source": "usagi-coffee/ai",
+      "sourceType": "github",
+      "computedHash": "604d6a0973cf0a8415deddc3305fe368967dc5e4462e4fbb2c9e502a61b315c3"
+    }
+  }
+}
