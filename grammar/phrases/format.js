@@ -28,6 +28,7 @@ module.exports = ({ kw }) => ({
     ),
 
   __format_expression: ($) => $._expression,
+  __format_alignment: ($) => choice(kw("COLON-ALIGNED"), kw("LEFT-ALIGNED"), kw("RIGHT-ALIGNED")),
 
   __format_at_phrase: ($) =>
     seq(
@@ -43,7 +44,7 @@ module.exports = ({ kw }) => ({
             seq(kw("ROW"), field("row", $._expression)),
             seq(kw("ROW-OF"), field("row_of", $._expression)),
           ),
-          optional(choice(kw("COLON-ALIGNED"), kw("LEFT-ALIGNED"), kw("RIGHT-ALIGNED"))),
+          optional($.__format_alignment),
         ),
         seq(
           choice(
@@ -54,7 +55,7 @@ module.exports = ({ kw }) => ({
             seq(kw("Y"), field("y", $._expression)),
             seq(kw("Y-OF"), field("y_of", $._expression)),
           ),
-          optional(choice(kw("COLON-ALIGNED"), kw("LEFT-ALIGNED"), kw("RIGHT-ALIGNED"))),
+          optional($.__format_alignment),
         ),
       ),
     ),

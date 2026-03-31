@@ -16,7 +16,11 @@ module.exports = ({ kw }) => ({
     ),
 
   sql_alter_database_set_column_statistics_statement: ($) =>
-    seq($.__sql_alter_database_set_prefix, $.__sql_alter_database_set_column_statistics_body, $._terminator),
+    seq(
+      $.__sql_alter_database_set_prefix,
+      $.__sql_alter_database_set_column_statistics_body,
+      $._terminator,
+    ),
 
   sql_alter_group_statement: ($) =>
     seq(kw("ALTER"), kw("GROUP"), field("group", $.__sql_name), $.__sql_optional_body_statement),
@@ -33,12 +37,7 @@ module.exports = ({ kw }) => ({
     seq(kw("ALTER"), kw("TABLE"), field("table", $.__sql_name), $.__sql_required_body_statement),
 
   sql_alter_tenant_statement: ($) =>
-    seq(
-      kw("ALTER"),
-      kw("TENANT"),
-      field("tenant", $.__sql_name),
-      $.__sql_optional_body_statement,
-    ),
+    seq(kw("ALTER"), kw("TENANT"), field("tenant", $.__sql_name), $.__sql_optional_body_statement),
 
   sql_alter_user_statement: ($) =>
     seq(kw("ALTER"), kw("USER"), field("user", $.__sql_name), $.__sql_optional_body_statement),
@@ -46,11 +45,9 @@ module.exports = ({ kw }) => ({
   sql_audit_insert_statement: ($) =>
     seq(kw("AUDIT"), kw("INSERT"), $.__sql_required_body_statement),
 
-  sql_audit_set_statement: ($) =>
-    seq(kw("AUDIT"), kw("SET"), $.__sql_required_body_statement),
+  sql_audit_set_statement: ($) => seq(kw("AUDIT"), kw("SET"), $.__sql_required_body_statement),
 
-  sql_commit_statement: ($) =>
-    seq(kw("COMMIT"), $.__sql_optional_body_statement),
+  sql_commit_statement: ($) => seq(kw("COMMIT"), $.__sql_optional_body_statement),
 
   sql_connect_as_catalog_statement: ($) =>
     seq(
@@ -95,7 +92,12 @@ module.exports = ({ kw }) => ({
     ),
 
   sql_create_synonym_statement: ($) =>
-    seq(kw("CREATE"), kw("SYNONYM"), field("synonym", $.__sql_name), $.__sql_required_body_statement),
+    seq(
+      kw("CREATE"),
+      kw("SYNONYM"),
+      field("synonym", $.__sql_name),
+      $.__sql_required_body_statement,
+    ),
   sql_create_table_statement: ($) =>
     seq(kw("CREATE"), kw("TABLE"), field("table", $.__sql_name), $.__sql_required_body_statement),
 
@@ -103,7 +105,12 @@ module.exports = ({ kw }) => ({
     seq(kw("CREATE"), kw("TENANT"), field("tenant", $.__sql_name), $.__sql_optional_body_statement),
 
   sql_create_trigger_statement: ($) =>
-    seq(kw("CREATE"), kw("TRIGGER"), field("trigger", $.__sql_name), $.__sql_required_body_statement),
+    seq(
+      kw("CREATE"),
+      kw("TRIGGER"),
+      field("trigger", $.__sql_name),
+      $.__sql_required_body_statement,
+    ),
 
   sql_create_user_statement: ($) =>
     seq(kw("CREATE"), kw("USER"), field("user", $.__sql_name), $.__sql_optional_body_statement),
@@ -135,7 +142,12 @@ module.exports = ({ kw }) => ({
     ),
 
   sql_drop_sequence_statement: ($) =>
-    seq(kw("DROP"), kw("SEQUENCE"), field("sequence", $.__sql_name), $.__sql_optional_body_statement),
+    seq(
+      kw("DROP"),
+      kw("SEQUENCE"),
+      field("sequence", $.__sql_name),
+      $.__sql_optional_body_statement,
+    ),
 
   sql_drop_synonym_statement: ($) =>
     seq(kw("DROP"), kw("SYNONYM"), field("synonym", $.__sql_name), $.__sql_optional_body_statement),
@@ -165,8 +177,7 @@ module.exports = ({ kw }) => ({
 
   sql_revoke_statement: ($) => seq(kw("REVOKE"), $.__sql_required_body_statement),
 
-  sql_rollback_statement: ($) =>
-    seq(kw("ROLLBACK"), $.__sql_optional_body_statement),
+  sql_rollback_statement: ($) => seq(kw("ROLLBACK"), $.__sql_optional_body_statement),
 
   sql_select_statement: ($) => seq(kw("SELECT"), $.__sql_required_body_statement),
 
@@ -305,12 +316,8 @@ module.exports = ({ kw }) => ({
       kw("WHERE"),
       kw("WITH"),
     ),
-  __sql_symbol: ($) => token(choice(",", "(", ")", "=", "<", ">", "<=", ">=", "<>", "+", "-", "*", "/", ":")),
+  __sql_symbol: ($) =>
+    token(choice(",", "(", ")", "=", "<", ">", "<=", ">=", "<>", "+", "-", "*", "/", ":")),
 
-  __sql_token: ($) =>
-    choice(
-      $.__sql_symbol,
-      $.__sql_value,
-      $.__sql_keyword,
-    ),
+  __sql_token: ($) => choice($.__sql_symbol, $.__sql_value, $.__sql_keyword),
 });
