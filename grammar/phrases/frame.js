@@ -49,11 +49,8 @@ module.exports = ({ kw }) => ({
           seq(kw("PFCOLOR"), field("pfcolor", $.__frame_expression)),
           $.__frame_title_phrase,
           choice(
-            seq(field("column", $.number_literal), choice(kw("COLUMN"), kw("COLUMNS"), kw("COL"))),
-            seq(
-              choice(kw("COLUMN"), kw("COLUMNS"), kw("COL")),
-              field("column", $.__frame_expression),
-            ),
+            seq(field("column", $.number_literal), $.__frame_column_keyword),
+            seq($.__frame_column_keyword, field("column", $.__frame_expression)),
           ),
           alias(seq(kw("VIEW-AS"), field("widget", kw("DIALOG-BOX"))), $.view_as_phrase),
           alias($.__frame_down_count, $.down),
@@ -68,18 +65,15 @@ module.exports = ({ kw }) => ({
     prec.left(seq(kw("SKIP"), optional(field("skip", seq("(", $.__frame_expression, ")"))))),
 
   __frame_title_phrase: ($) =>
-    seq(
-      kw("TITLE"),
-      optional(
-        choice(
-          seq(kw("BGCOLOR"), field("title_bgcolor", $.__frame_expression)),
-          seq(kw("DCOLOR"), field("title_dcolor", $.__frame_expression)),
-          seq(kw("FGCOLOR"), field("title_fgcolor", $.__frame_expression)),
-          seq(kw("FONT"), field("title_font", $.__frame_expression)),
-        ),
-      ),
-      field("title", $.__frame_expression),
+    seq(kw("TITLE"), optional($.__frame_title_option), field("title", $.__frame_expression)),
+  __frame_title_option: ($) =>
+    choice(
+      seq(kw("BGCOLOR"), field("title_bgcolor", $.__frame_expression)),
+      seq(kw("DCOLOR"), field("title_dcolor", $.__frame_expression)),
+      seq(kw("FGCOLOR"), field("title_fgcolor", $.__frame_expression)),
+      seq(kw("FONT"), field("title_font", $.__frame_expression)),
     ),
+  __frame_column_keyword: ($) => choice(kw("COLUMN"), kw("COLUMNS"), kw("COL")),
   __frame_identifier: ($) => $.identifier,
   __frame_expression: ($) => $._expression,
   __frame_down_value: ($) => seq(field("value", $.__frame_expression), kw("DOWN")),
