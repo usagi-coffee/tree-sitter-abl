@@ -1,5 +1,6 @@
 module.exports = ({ kw }) => ({
-  buffer_copy_statement: ($) => seq(kw("BUFFER-COPY"), $.__buffer_copy_body, $._terminator),
+  buffer_copy_statement: ($) =>
+    seq(kw("BUFFER-COPY"), $.__buffer_copy_body, $._no_error_terminator),
 
   __buffer_copy_body: ($) =>
     seq(
@@ -14,7 +15,6 @@ module.exports = ({ kw }) => ({
       field("target", $._identifier_or_qualified_name),
       optional(alias($.__buffer_copy_assign_phrase, $.assign_phrase)),
       optional(alias(kw("NO-LOBS"), $.no_lobs)),
-      optional(alias(kw("NO-ERROR"), $.no_error)),
     ),
   __buffer_copy_except_phrase: ($) =>
     seq(

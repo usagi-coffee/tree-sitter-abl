@@ -4,8 +4,7 @@ module.exports = ({ kw }) => ({
       kw("CONNECT"),
       optional(field("database", choice($.identifier, $.string_literal, $.function_call))),
       repeat($.__connect_option),
-      optional(alias(kw("NO-ERROR"), $.no_error)),
-      $._terminator,
+      $._no_error_terminator,
     ),
 
   __connect_option: ($) =>

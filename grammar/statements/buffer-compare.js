@@ -1,6 +1,6 @@
 module.exports = ({ kw }) => ({
   buffer_compare_statement: ($) =>
-    seq(kw("BUFFER-COMPARE"), $.__buffer_compare_body, $._terminator),
+    seq(kw("BUFFER-COMPARE"), $.__buffer_compare_body, $._no_error_terminator),
 
   __buffer_compare_body: ($) =>
     seq(
@@ -14,7 +14,6 @@ module.exports = ({ kw }) => ({
       optional(alias($.__buffer_compare_save_phrase, $.save_phrase)),
       optional(alias($.__buffer_compare_compares_block, $.compares_block)),
       optional(alias(kw("NO-LOBS"), $.no_lobs)),
-      optional(alias(kw("NO-ERROR"), $.no_error)),
     ),
 
   __buffer_compare_field_phrase: ($) =>

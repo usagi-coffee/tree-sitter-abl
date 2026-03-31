@@ -1,5 +1,5 @@
 module.exports = ({ kw }) => ({
-  subscribe_statement: ($) => seq(kw("SUBSCRIBE"), $.__subscribe_body, $._terminator),
+  subscribe_statement: ($) => seq(kw("SUBSCRIBE"), $.__subscribe_body, $._no_error_terminator),
 
   __subscribe_body: ($) =>
     seq(
@@ -8,7 +8,6 @@ module.exports = ({ kw }) => ({
       field("event", $.__subscribe_expression),
       choice(alias($.__subscribe_in_phrase, $.in_phrase), alias(kw("ANYWHERE"), $.anywhere)),
       optional(alias($.__subscribe_run_procedure_phrase, $.run_procedure_phrase)),
-      optional(alias(kw("NO-ERROR"), $.no_error)),
     ),
   __subscribe_in_phrase: ($) => seq(kw("IN"), field("publisher", $.__subscribe_expression)),
   __subscribe_run_procedure_phrase: ($) =>

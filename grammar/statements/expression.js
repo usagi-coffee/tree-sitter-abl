@@ -1,4 +1,3 @@
 module.exports = ({ kw }) => ({
-  expression_statement: ($) =>
-    seq($._statement_expression, optional(alias(kw("NO-ERROR"), $.no_error)), $._terminator),
+  expression_statement: ($) => seq($._statement_expression, $._no_error_terminator),
 });

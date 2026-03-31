@@ -6,8 +6,7 @@ module.exports = ({ kw }) => ({
       kw("DYNAMIC-NEW"),
       field("class", $._expression),
       $.arguments,
-      optional(alias(kw("NO-ERROR"), $.no_error)),
-      $._terminator,
+      $._no_error_terminator,
     ),
 
   this_object_statement: ($) => seq(kw("THIS-OBJECT"), optional($.arguments), $._terminator),

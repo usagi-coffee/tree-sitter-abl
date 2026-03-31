@@ -1,9 +1,5 @@
 module.exports = ({ kw }) => ({
-  validate_statement: ($) => seq(kw("VALIDATE"), $.__validate_body, $._terminator),
+  validate_statement: ($) => seq(kw("VALIDATE"), $.__validate_body, $._no_error_terminator),
 
-  __validate_body: ($) =>
-    seq(
-      field("record", $._identifier_or_qualified_name),
-      optional(alias(kw("NO-ERROR"), $.no_error)),
-    ),
+  __validate_body: ($) => seq(field("record", $._identifier_or_qualified_name)),
 });

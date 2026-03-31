@@ -1,5 +1,5 @@
 module.exports = ({ kw }) => ({
-  run_statement: ($) => seq(kw("RUN"), $.__run_body, $._terminator),
+  run_statement: ($) => seq(kw("RUN"), $.__run_body, $._no_error_terminator),
 
   __run_body: ($) =>
     seq(
@@ -24,7 +24,6 @@ module.exports = ({ kw }) => ({
       optional(alias($.__run_on_server, $.on_server_phrase)),
       optional(alias($.__run_asynchronous, $.asynchronous_phrase)),
       optional($.arguments),
-      optional(alias(kw("NO-ERROR"), $.no_error)),
     ),
 
   _run_target: ($) =>

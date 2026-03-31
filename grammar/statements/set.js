@@ -1,12 +1,11 @@
 module.exports = ({ kw }) => ({
-  set_statement: ($) => seq(kw("SET"), $.__set_body, $._terminator),
+  set_statement: ($) => seq(kw("SET"), $.__set_body, $._no_error_terminator),
 
   __set_body: ($) =>
     seq(
       optional($._stream_phrase),
       optional(alias(kw("UNLESS-HIDDEN"), $.unless_hidden)),
       choice($.__set_record_body, $.__set_fields_body),
-      optional(alias(kw("NO-ERROR"), $.no_error)),
     ),
 
   __set_fields_body: ($) =>

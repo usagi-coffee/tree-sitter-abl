@@ -1,5 +1,5 @@
 module.exports = ({ kw }) => ({
-  delete_statement: ($) => seq(kw("DELETE"), $.__delete_body, $._terminator),
+  delete_statement: ($) => seq(kw("DELETE"), $.__delete_body, $._no_error_terminator),
 
   __delete_body: ($) =>
     seq(
@@ -14,19 +14,17 @@ module.exports = ({ kw }) => ({
           ")",
         ),
       ),
-      optional(alias(kw("NO-ERROR"), $.no_error)),
     ),
 
   delete_object_statement: ($) =>
-    seq(kw("DELETE"), kw("OBJECT"), $.__delete_object_body, $._terminator),
+    seq(kw("DELETE"), kw("OBJECT"), $.__delete_object_body, $._no_error_terminator),
 
   delete_procedure_statement: ($) =>
     seq(
       kw("DELETE"),
       kw("PROCEDURE", { offset: 4 }),
       field("handle", $._expression),
-      optional(alias(kw("NO-ERROR"), $.no_error)),
-      $._terminator,
+      $._no_error_terminator,
     ),
 
   delete_widget_statement: ($) =>
@@ -35,10 +33,8 @@ module.exports = ({ kw }) => ({
       kw("WIDGET"),
       field("widget", $._expression),
       repeat(seq(",", field("widget", $._expression))),
-      optional(alias(kw("NO-ERROR"), $.no_error)),
-      $._terminator,
+      $._no_error_terminator,
     ),
 
-  __delete_object_body: ($) =>
-    seq(field("name", $.identifier), optional(alias(kw("NO-ERROR"), $.no_error))),
+  __delete_object_body: ($) => seq(field("name", $.identifier)),
 });

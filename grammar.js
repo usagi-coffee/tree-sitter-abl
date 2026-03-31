@@ -523,6 +523,7 @@ module.exports = grammar({
           ),
         ),
       _terminator: ($) => choice($._terminator_dot, ";"),
+      _no_error_terminator: ($) => seq(optional(alias(kw("NO-ERROR"), $.no_error)), $._terminator),
 
       // Contains $._expression and $._primary_expression aggregates
       ...require("./grammar/core/expressions")(ctx),

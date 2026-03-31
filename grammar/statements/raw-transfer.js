@@ -1,5 +1,6 @@
 module.exports = ({ kw }) => ({
-  raw_transfer_statement: ($) => seq(kw("RAW-TRANSFER"), $.__raw_transfer_body, $._terminator),
+  raw_transfer_statement: ($) =>
+    seq(kw("RAW-TRANSFER"), $.__raw_transfer_body, $._no_error_terminator),
 
   __raw_transfer_body: ($) =>
     seq(
@@ -45,6 +46,5 @@ module.exports = ({ kw }) => ({
           field("target_field", $.identifier),
         ),
       ),
-      optional(alias(kw("NO-ERROR"), $.no_error)),
     ),
 });

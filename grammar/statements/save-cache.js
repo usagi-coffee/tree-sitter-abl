@@ -1,5 +1,6 @@
 module.exports = ({ kw }) => ({
-  save_cache_statement: ($) => seq(kw("SAVE"), kw("CACHE"), $.__save_cache_body, $._terminator),
+  save_cache_statement: ($) =>
+    seq(kw("SAVE"), kw("CACHE"), $.__save_cache_body, $._no_error_terminator),
 
   __save_cache_body: ($) =>
     seq(
@@ -13,6 +14,5 @@ module.exports = ({ kw }) => ({
         field("path", $.string_literal),
         seq(kw("VALUE"), "(", field("path", $._expression), ")"),
       ),
-      optional(alias(kw("NO-ERROR"), $.no_error)),
     ),
 });

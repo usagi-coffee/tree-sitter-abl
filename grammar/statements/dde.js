@@ -11,8 +11,7 @@ module.exports = ({ kw }) => ({
         seq(field("action", alias(kw("SEND"), $.identifier)), $.__dde_send_body),
         seq(field("action", alias(kw("TERMINATE"), $.identifier)), $.__dde_terminate_body),
       ),
-      optional(alias(kw("NO-ERROR"), $.no_error)),
-      $._terminator,
+      $._no_error_terminator,
     ),
 
   __dde_advise_body: ($) =>

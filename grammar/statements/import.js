@@ -1,12 +1,11 @@
 module.exports = ({ kw }) => ({
-  import_statement: ($) => seq(kw("IMPORT"), $.__import_body, $._terminator),
+  import_statement: ($) => seq(kw("IMPORT"), $.__import_body, $._no_error_terminator),
 
   __import_body: ($) =>
     seq(
       optional($._stream_phrase),
       choice($.__import_fields_phrase, alias($.__import_unformatted_phrase, $.unformatted_phrase)),
       optional(alias(kw("NO-LOBS"), $.no_lobs)),
-      optional(alias(kw("NO-ERROR"), $.no_error)),
     ),
 
   __import_delimiter_phrase: ($) => seq(kw("DELIMITER"), field("delimiter", $.string_literal)),

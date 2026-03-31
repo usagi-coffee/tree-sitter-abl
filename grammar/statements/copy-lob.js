@@ -1,5 +1,5 @@
 module.exports = ({ kw }) => ({
-  copy_lob_statement: ($) => seq(kw("COPY-LOB"), $.__copy_lob_body, $._terminator),
+  copy_lob_statement: ($) => seq(kw("COPY-LOB"), $.__copy_lob_body, $._no_error_terminator),
 
   __copy_lob_body: ($) =>
     seq(
@@ -36,7 +36,6 @@ module.exports = ({ kw }) => ({
           alias($.__copy_lob_convert_phrase, $.convert_phrase),
         ),
       ),
-      optional(alias(kw("NO-ERROR"), $.no_error)),
     ),
 
   __copy_lob_convert_phrase: ($) =>

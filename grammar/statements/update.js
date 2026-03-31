@@ -1,11 +1,7 @@
 module.exports = ({ kw }) => ({
-  update_statement: ($) => seq(kw("UPDATE"), $.__update_body, $._terminator),
+  update_statement: ($) => seq(kw("UPDATE"), $.__update_body, $._no_error_terminator),
 
-  __update_body: ($) =>
-    seq(
-      choice($.__update_record_body, $.__update_fields_body),
-      optional(alias(kw("NO-ERROR"), $.no_error)),
-    ),
+  __update_body: ($) => seq(choice($.__update_record_body, $.__update_fields_body)),
 
   __update_record_body: ($) =>
     seq(

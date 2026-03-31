@@ -30,7 +30,7 @@ module.exports = ({ kw }) => ({
       kw("FOR"),
       kw("DATABASE"),
       field("database", $.__create_alias_name),
-      optional(alias(kw("NO-ERROR"), $.no_error)),
+      optional($.__create_no_error),
     ),
   __create_alias_name: ($) =>
     choice(
@@ -47,7 +47,7 @@ module.exports = ({ kw }) => ({
       field("table", $.__create_buffer_target),
       optional(seq(kw("BUFFER-NAME"), field("name", $.identifier))),
       optional($.__create_in_widget_pool),
-      optional(alias(kw("NO-ERROR"), $.no_error)),
+      optional($.__create_no_error),
     ),
   __create_buffer_target: ($) => choice($._identifier_or_access_or_call, $.string_literal),
   __create_call: ($) =>
@@ -55,7 +55,7 @@ module.exports = ({ kw }) => ({
       kw("CALL"),
       field("handle", $.identifier),
       optional($.__create_in_widget_pool),
-      optional(alias(kw("NO-ERROR"), $.no_error)),
+      optional($.__create_no_error),
     ),
   __create_client_principal: ($) =>
     seq(kw("CLIENT-PRINCIPAL"), field("handle", $.identifier), optional($.__create_in_widget_pool)),
@@ -68,7 +68,7 @@ module.exports = ({ kw }) => ({
       kw("QUERY"),
       field("handle", $.identifier),
       optional($.__create_in_widget_pool),
-      optional(alias(kw("NO-ERROR"), $.no_error)),
+      optional($.__create_no_error),
     ),
   __create_x_document: ($) =>
     seq(kw("X-DOCUMENT"), field("handle", $.identifier), optional($.__create_in_widget_pool)),
@@ -87,27 +87,27 @@ module.exports = ({ kw }) => ({
       kw("SAX-READER"),
       field("handle", $.identifier),
       optional($.__create_in_widget_pool),
-      optional(alias(kw("NO-ERROR"), $.no_error)),
+      optional($.__create_no_error),
     ),
   __create_sax_writer: ($) =>
     seq(
       kw("SAX-WRITER"),
       field("handle", $.identifier),
       optional($.__create_in_widget_pool),
-      optional(alias(kw("NO-ERROR"), $.no_error)),
+      optional($.__create_no_error),
     ),
   __create_sax_attributes: ($) =>
     seq(
       kw("SAX-ATTRIBUTES"),
       field("handle", $.identifier),
       optional($.__create_in_widget_pool),
-      optional(alias(kw("NO-ERROR"), $.no_error)),
+      optional($.__create_no_error),
     ),
   __create_widget_pool: ($) =>
     seq(
       kw("WIDGET-POOL"),
       optional(seq(field("pool", $.identifier), optional(alias(kw("PERSISTENT"), $.persistent)))),
-      optional(alias(kw("NO-ERROR"), $.no_error)),
+      optional($.__create_no_error),
     ),
   __create_server: ($) =>
     seq(kw("SERVER"), field("handle", $.identifier), optional($.assign_phrase)),
@@ -123,14 +123,14 @@ module.exports = ({ kw }) => ({
         ),
       ),
       optional(alias(kw("REPLACE"), $.replace)),
-      optional(alias(kw("NO-ERROR"), $.no_error)),
+      optional($.__create_no_error),
     ),
   __create_automation_object: ($) =>
     seq(
       field("progid", $._expression),
       field("handle", $.identifier),
       optional(seq(kw("CONNECT"), optional(seq(kw("TO"), field("target", $._expression))))),
-      optional(alias(kw("NO-ERROR"), $.no_error)),
+      optional($.__create_no_error),
     ),
   __create_record: ($) =>
     seq(
@@ -145,7 +145,8 @@ module.exports = ({ kw }) => ({
           ),
         ),
       ),
-      optional(alias(kw("NO-ERROR"), $.no_error)),
+      optional($.__create_no_error),
     ),
+  __create_no_error: ($) => alias(kw("NO-ERROR"), $.no_error),
   __create_in_widget_pool: ($) => seq(kw("IN"), kw("WIDGET-POOL"), field("pool", $.identifier)),
 });
