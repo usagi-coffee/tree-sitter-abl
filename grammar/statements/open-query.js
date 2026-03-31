@@ -18,16 +18,7 @@ module.exports = ({ kw }) => ({
       optional($.query_tuning_phrase),
       optional(alias(kw("BREAK"), $.break)),
       repeat(alias($.__open_query_by_phrase, $.by_phrase)),
-      optional(
-        field(
-          "lock",
-          choice(
-            alias(kw("SHARE-LOCK"), $.share_lock),
-            alias(kw("EXCLUSIVE-LOCK"), $.exclusive_lock),
-            alias(kw("NO-LOCK"), $.no_lock),
-          ),
-        ),
-      ),
+      optional(field("lock", $.__open_query_lock)),
       optional(alias(kw("INDEXED-REPOSITION"), $.indexed_reposition)),
       optional(seq(kw("MAX-ROWS"), field("max_rows", $._expression))),
     ),
@@ -41,14 +32,13 @@ module.exports = ({ kw }) => ({
       seq(kw("OF"), field("of", $._identifier_or_qualified_name)),
       seq(kw("WHERE"), field("where", $._expression)),
       seq(kw("USE-INDEX"), field("index", $.identifier)),
-      field(
-        "lock",
-        choice(
-          alias(kw("SHARE-LOCK"), $.share_lock),
-          alias(kw("EXCLUSIVE-LOCK"), $.exclusive_lock),
-          alias(kw("NO-LOCK"), $.no_lock),
-        ),
-      ),
+      field("lock", $.__open_query_lock),
+    ),
+  __open_query_lock: ($) =>
+    choice(
+      alias(kw("SHARE-LOCK"), $.share_lock),
+      alias(kw("EXCLUSIVE-LOCK"), $.exclusive_lock),
+      alias(kw("NO-LOCK"), $.no_lock),
     ),
 
   __open_query_by_phrase: ($) =>

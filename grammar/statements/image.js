@@ -15,13 +15,15 @@ module.exports = ({ kw }) => ({
       optional(seq(kw("BGCOLOR"), field("bgcolor", $._expression))),
       optional(seq(kw("FGCOLOR"), field("fgcolor", $._expression))),
       optional(alias(kw("CONVERT-3D-COLORS"), $.convert_3d_colors)),
-      optional(seq(kw("TOOLTIP"), field("tooltip", choice($.string_literal, $.identifier)))),
-      optional(
-        seq(
-          alias(kw("STRETCH-TO-FIT"), $.stretch_to_fit),
-          optional(alias(kw("RETAIN-SHAPE"), $.retain_shape)),
-        ),
-      ),
+      optional($.__image_tooltip_phrase),
+      optional($.__image_stretch_phrase),
       optional(alias(kw("TRANSPARENT"), $.transparent)),
+    ),
+  __image_tooltip_phrase: ($) =>
+    seq(kw("TOOLTIP"), field("tooltip", choice($.string_literal, $.identifier))),
+  __image_stretch_phrase: ($) =>
+    seq(
+      alias(kw("STRETCH-TO-FIT"), $.stretch_to_fit),
+      optional(alias(kw("RETAIN-SHAPE"), $.retain_shape)),
     ),
 });

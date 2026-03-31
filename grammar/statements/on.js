@@ -103,13 +103,12 @@ module.exports = ({ kw }) => ({
       ),
     ),
   __on_ui_event_branch: ($) => choice($.__on_ui_anywhere_branch, $.__on_ui_of_branch),
-  __on_ui_anywhere_branch: ($) =>
-    seq($.__on_ui_events, alias(kw("ANYWHERE"), $.anywhere), $.__on_trigger_action),
+  __on_ui_anywhere_branch: ($) => seq($.__on_ui_events, $.__on_anywhere, $.__on_trigger_action),
   __on_ui_of_branch: ($) =>
     seq(
       $.__on_ui_event_widgets,
       repeat(seq(kw("OR"), $.__on_ui_event_widgets)),
-      optional(alias(kw("ANYWHERE"), $.anywhere)),
+      optional($.__on_anywhere),
       $.__on_trigger_action,
     ),
   __on_database_event_branch: ($) =>
@@ -119,7 +118,7 @@ module.exports = ({ kw }) => ({
       field("object", $._identifier_or_qualified_name),
       optional(alias($.__on_referencing_phrase, $.referencing_phrase)),
       optional(alias(kw("OVERRIDE"), $.override)),
-      choice(seq(alias(kw("REVERT"), $.revert), $._terminator), $._statement),
+      choice($.__on_revert_action, $._statement),
     ),
   __on_key_label_branch: ($) =>
     seq(
@@ -128,10 +127,10 @@ module.exports = ({ kw }) => ({
       $._terminator,
     ),
   __on_web_notify_branch: ($) =>
-    seq(field("event", $.__on_web_notify_event), alias(kw("ANYWHERE"), $.anywhere), $._statement),
+    seq(field("event", $.__on_web_notify_event), $.__on_anywhere, $._statement),
   __on_trigger_action: ($) =>
     choice(
-      seq(alias(kw("REVERT"), $.revert), $._terminator),
+      $.__on_revert_action,
       seq(field("function", alias($.__on_ui_key_function, $.key_function)), $._terminator),
       $._statement,
       seq(
@@ -142,6 +141,8 @@ module.exports = ({ kw }) => ({
         $._terminator,
       ),
     ),
+  __on_revert_action: ($) => seq(alias(kw("REVERT"), $.revert), $._terminator),
+  __on_anywhere: ($) => alias(kw("ANYWHERE"), $.anywhere),
 
   __on_database_event: ($) =>
     choice(kw("CREATE"), kw("DELETE"), kw("FIND"), kw("WRITE"), kw("ASSIGN")),

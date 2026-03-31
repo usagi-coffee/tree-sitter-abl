@@ -211,7 +211,7 @@ instead of the `persistent` option.
 - `bun` instead of `npm`.
 - Never use `tree-sitter` CLI directly, use workflow commands.
 - There is no need to call `bun run build` during testing workflow, just use usual workflow commands like `bun run test` and `bun run parse:snippet`, they build/generate under the hood.
-- Parser generation can take up to 1 minute so adjust timeout accordingly.
+- Parser generation can take up to 2 minutes so adjust timeout accordingly.
 - `bun run test` returns only failed cases and failed syntax tree OR a message that everything went well.
 - When using `alias`, `tree-sitter` handles undefined rules by using the property name as the symbol name so it's okay to alias to `$.something_that_wasn't defined`.
 - `terminator`, `terminator_dot` or rules prefixed with `_` (unless aliased) should never be visible in the syntax tree output.

@@ -109,25 +109,18 @@ module.exports = ({ kw }) => ({
     choice(
       seq(
         optional(field("direction", choice(kw("INPUT"), kw("OUTPUT"), kw("INPUT-OUTPUT")))),
-        field("name", $.identifier),
-        $.__method_variable_type_phrase,
-        optional(alias(kw("NO-UNDO"), $.no_undo)),
+        $.__class_named_parameter_body,
       ),
       $.__method_table_parameter,
     ),
 
-  __method_body: ($) => seq(repeat($._statement), kw("END"), optional(kw("METHOD")), $._terminator),
+  __method_body: ($) => seq($.__class_compound_body, optional(kw("METHOD")), $._terminator),
 
   __constructor_body: ($) =>
-    seq(
-      repeat($._statement),
-      kw("END"),
-      optional(choice(kw("CONSTRUCTOR"), kw("METHOD"))),
-      $._terminator,
-    ),
+    seq($.__class_compound_body, optional(choice(kw("CONSTRUCTOR"), kw("METHOD"))), $._terminator),
 
-  __destructor_body: ($) =>
-    seq(repeat($._statement), kw("END"), optional(kw("DESTRUCTOR")), $._terminator),
+  __destructor_body: ($) => seq($.__class_compound_body, optional(kw("DESTRUCTOR")), $._terminator),
+  __class_compound_body: ($) => seq(repeat($._statement), kw("END")),
 
   __destructor_parameters: ($) => seq("(", ")"),
 
@@ -156,13 +149,7 @@ module.exports = ({ kw }) => ({
       kw("GET"),
       choice(
         $._terminator_dot,
-        seq(
-          alias($._colon, ":"),
-          repeat($._statement),
-          kw("END"),
-          optional(kw("GET")),
-          $._terminator,
-        ),
+        seq($.__property_accessor_body, optional(kw("GET")), $._terminator),
       ),
     ),
 
@@ -172,19 +159,15 @@ module.exports = ({ kw }) => ({
       optional($.property_set_parameter_list),
       choice(
         $._terminator_dot,
-        seq(
-          alias($._colon, ":"),
-          repeat($._statement),
-          kw("END"),
-          optional(kw("SET")),
-          $._terminator,
-        ),
+        seq($.__property_accessor_body, optional(kw("SET")), $._terminator),
       ),
     ),
+  __property_accessor_body: ($) => seq(alias($._colon, ":"), repeat($._statement), kw("END")),
 
   property_set_parameter_list: ($) => seq("(", $.property_set_parameter, ")"),
 
-  property_set_parameter: ($) =>
+  property_set_parameter: ($) => $.__class_named_parameter_body,
+  __class_named_parameter_body: ($) =>
     seq(
       field("name", $.identifier),
       $.__method_variable_type_phrase,
@@ -251,13 +234,7 @@ module.exports = ({ kw }) => ({
       alias(kw("NON-SERIALIZABLE"), $.serialization_modifier),
     ),
 
-  __property_type_phrase: ($) =>
-    seq(
-      optional(kw("AS")),
-      optional(kw("CLASS")),
-      field("type", $._type_or_string),
-      optional($.__method_extent_phrase),
-    ),
+  __property_type_phrase: ($) => seq(optional(kw("AS")), $.__class_typed_extent_phrase),
 
   __method_modifier: ($) =>
     choice(
@@ -294,22 +271,22 @@ module.exports = ({ kw }) => ({
     ),
 
   __method_return_type: ($) =>
-    choice(
-      field("type", alias(kw("VOID"), $.identifier)),
-      seq(
-        optional(kw("CLASS")),
-        field("type", $._type_or_string),
-        optional($.__method_extent_phrase),
-      ),
+    choice(field("type", alias(kw("VOID"), $.identifier)), $.__class_typed_extent_phrase),
+  __class_typed_extent_phrase: ($) =>
+    seq(
+      optional(kw("CLASS")),
+      field("type", $._type_or_string),
+      optional($.__method_extent_phrase),
     ),
 
   __method_variable_type_phrase: ($) =>
-    seq(
-      choice(
-        seq(kw("AS"), optional(kw("CLASS")), field("type", $._type_or_string)),
-        seq(kw("LIKE"), field("like", $._identifier_or_qualified_name)),
+    choice(
+      seq(kw("AS"), $.__class_typed_extent_phrase),
+      seq(
+        kw("LIKE"),
+        field("like", $._identifier_or_qualified_name),
+        optional($.__method_extent_phrase),
       ),
-      optional($.__method_extent_phrase),
     ),
 
   __method_extent_phrase: ($) =>

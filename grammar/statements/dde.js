@@ -20,24 +20,16 @@ module.exports = ({ kw }) => ({
       field("mode", alias(choice(kw("START"), kw("STOP")), $.identifier)),
       kw("ITEM"),
       field("item", $._expression),
-      optional(seq(kw("TIME"), field("time", $._expression))),
+      optional($.__dde_time_phrase),
     ),
   __dde_execute_body: ($) =>
     seq(
       field("ddeid", $._expression),
       kw("COMMAND"),
       field("command", $._expression),
-      optional(seq(kw("TIME"), field("time", $._expression))),
+      optional($.__dde_time_phrase),
     ),
-  __dde_get_body: ($) =>
-    seq(
-      field("ddeid", $._expression),
-      kw("TARGET"),
-      field("target", $._assignable),
-      kw("ITEM"),
-      field("item", $._expression),
-      optional(seq(kw("TIME"), field("time", $._expression))),
-    ),
+  __dde_get_body: ($) => $.__dde_target_item_body,
   __dde_initiate_body: ($) =>
     seq(
       field("ddeid", $._expression),
@@ -48,15 +40,7 @@ module.exports = ({ kw }) => ({
       kw("TOPIC"),
       field("topic", $._expression),
     ),
-  __dde_request_body: ($) =>
-    seq(
-      field("ddeid", $._expression),
-      kw("TARGET"),
-      field("target", $._assignable),
-      kw("ITEM"),
-      field("item", $._expression),
-      optional(seq(kw("TIME"), field("time", $._expression))),
-    ),
+  __dde_request_body: ($) => $.__dde_target_item_body,
   __dde_send_body: ($) =>
     seq(
       field("ddeid", $._expression),
@@ -64,7 +48,17 @@ module.exports = ({ kw }) => ({
       field("source", $._expression),
       kw("ITEM"),
       field("item", $._expression),
-      optional(seq(kw("TIME"), field("time", $._expression))),
+      optional($.__dde_time_phrase),
     ),
   __dde_terminate_body: ($) => seq(field("ddeid", $._expression)),
+  __dde_target_item_body: ($) =>
+    seq(
+      field("ddeid", $._expression),
+      kw("TARGET"),
+      field("target", $._assignable),
+      kw("ITEM"),
+      field("item", $._expression),
+      optional($.__dde_time_phrase),
+    ),
+  __dde_time_phrase: ($) => seq(kw("TIME"), field("time", $._expression)),
 });

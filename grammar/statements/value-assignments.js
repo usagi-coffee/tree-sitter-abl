@@ -18,8 +18,7 @@ module.exports = ({ kw }) => ({
   __value_assignment_current_language: ($) =>
     seq(
       field("type", alias(kw("CURRENT-LANGUAGE"), $.identifier)),
-      "=",
-      field("value", $._expression),
+      $.__value_assignment_equals_value,
     ),
 
   __value_assignment_current_value: ($) =>
@@ -69,8 +68,7 @@ module.exports = ({ kw }) => ({
       field("list", $._expression),
       optional(seq(",", field("delimiter", $._expression))),
       ")",
-      "=",
-      field("value", $._expression),
+      $.__value_assignment_equals_value,
     ),
 
   __value_assignment_length: ($) =>
@@ -88,16 +86,9 @@ module.exports = ({ kw }) => ({
       field("type", alias(kw("RAW"), $.identifier)),
       "(",
       field("field", $._expression),
-      optional(
-        seq(
-          ",",
-          field("position", $._expression),
-          optional(seq(",", field("length", $._expression))),
-        ),
-      ),
+      optional(seq(",", $.__value_assignment_position_length)),
       ")",
-      "=",
-      field("value", $._expression),
+      $.__value_assignment_equals_value,
     ),
 
   __value_assignment_substring: ($) =>
@@ -106,11 +97,13 @@ module.exports = ({ kw }) => ({
       "(",
       field("string", $._expression),
       ",",
-      field("position", $._expression),
-      optional(seq(",", field("length", $._expression))),
+      $.__value_assignment_position_length,
       ")",
       $.__value_assignment_value_no_error,
     ),
+  __value_assignment_position_length: ($) =>
+    seq(field("position", $._expression), optional(seq(",", field("length", $._expression)))),
+  __value_assignment_equals_value: ($) => seq("=", field("value", $._expression)),
   __value_assignment_value_no_error: ($) =>
-    seq("=", field("value", $._expression), optional(alias(kw("NO-ERROR"), $.no_error))),
+    seq($.__value_assignment_equals_value, optional(alias(kw("NO-ERROR"), $.no_error))),
 });
