@@ -107,6 +107,5 @@ module.exports = ({ kw }) => ({
       ")",
       optional(field("sort_order", kw("DESCENDING", { offset: 4 }))),
     ),
-
   __for_while_phrase: ($) => seq(kw("WHILE"), field("condition", $._expression)),
 });

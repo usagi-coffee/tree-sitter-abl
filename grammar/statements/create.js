@@ -32,12 +32,7 @@ module.exports = ({ kw }) => ({
       field("database", $.__create_alias_name),
       optional($.__create_no_error),
     ),
-  __create_alias_name: ($) =>
-    choice(
-      $.identifier,
-      $.string_literal,
-      seq(kw("VALUE"), "(", field("value", $._expression), ")"),
-    ),
+  __create_alias_name: ($) => choice($.identifier, $.string_literal, $._value_expression),
   __create_buffer: ($) =>
     seq(
       kw("BUFFER"),

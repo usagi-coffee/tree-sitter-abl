@@ -21,10 +21,7 @@ module.exports = ({ kw }) => ({
       repeat(
         choice(
           alias($.__variable_extent_phrase, $.extent_phrase),
-          seq(
-            kw("SERIALIZE-NAME"),
-            field("serialize_name", choice($.identifier, $.string_literal)),
-          ),
+          seq(kw("SERIALIZE-NAME"), field("serialize_name", $._identifier_or_string_literal)),
           alias($.__variable_format_phrase, $.format_phrase),
           seq(kw("BGCOLOR"), field("bgcolor", $._expression)),
           seq(kw("COLUMN-LABEL"), field("column_label", $.__format_labels)),

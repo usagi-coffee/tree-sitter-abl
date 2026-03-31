@@ -26,7 +26,7 @@ module.exports = ({ kw }) => ({
       seq(kw("IMAGE-UP"), field("image_up", $.image_phrase)),
       seq(kw("IMAGE-INSENSITIVE"), field("image_insensitive", $.image_phrase)),
       seq(kw("MOUSE-POINTER"), field("mouse_pointer", $._expression)),
-      seq(kw("LABEL"), field("label", choice($.string_literal, $.identifier))),
+      seq(kw("LABEL"), field("label", $._identifier_or_string_literal)),
       seq(kw("LIKE"), field("like", $.identifier)),
       seq(kw("PFCOLOR"), field("pfcolor", $._expression)),
       seq(
@@ -37,6 +37,6 @@ module.exports = ({ kw }) => ({
       ),
       seq(alias(kw("NO-FOCUS"), $.no_focus), optional(alias(kw("FLAT-BUTTON"), $.flat_button))),
       alias(kw("NO-CONVERT-3D-COLORS"), $.no_convert_3d_colors),
-      seq(kw("TOOLTIP"), field("tooltip", choice($.identifier, $.string_literal, $.null_literal))),
+      seq(kw("TOOLTIP"), field("tooltip", choice($._identifier_or_string_literal, $.null_literal))),
     ),
 });

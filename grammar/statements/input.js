@@ -22,7 +22,7 @@ module.exports = ({ kw }) => ({
     choice(
       field("file", $.__input_file_target),
       alias(kw("TERMINAL"), $.terminal),
-      seq(kw("VALUE"), "(", field("value", $._expression), ")"),
+      $._value_expression,
       seq(
         kw("OS-DIR"),
         "(",
@@ -34,14 +34,8 @@ module.exports = ({ kw }) => ({
   __input_file_target: ($) =>
     choice($.string_literal, $._identifier_or_access_or_call, $.preprocessor_name),
   __input_lob_dir_phrase: ($) =>
-    seq(
-      kw("LOB-DIR"),
-      field(
-        "directory",
-        choice($.preprocessor_name, seq(kw("VALUE"), "(", field("value", $._expression), ")")),
-      ),
-    ),
-  __input_map_entry: ($) => choice($.identifier, $.string_literal),
+    seq(kw("LOB-DIR"), field("directory", choice($.preprocessor_name, $._value_expression))),
+  __input_map_entry: ($) => $._identifier_or_string_literal,
   __input_convert_phrase: ($) =>
     choice(
       alias(kw("NO-CONVERT"), $.no_convert),

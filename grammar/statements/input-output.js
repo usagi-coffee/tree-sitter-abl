@@ -14,11 +14,7 @@ module.exports = ({ kw }) => ({
     ),
 
   __input_output_through_target: ($) =>
-    choice(
-      field("program", $.identifier),
-      field("program", $.string_literal),
-      seq(kw("VALUE"), "(", field("value", $._expression), ")"),
-    ),
+    choice(field("program", $.identifier), field("program", $.string_literal), $._value_expression),
 
   __input_output_through_argument: ($) =>
     choice(
@@ -26,14 +22,14 @@ module.exports = ({ kw }) => ({
       $.number_literal,
       $.identifier,
       $.preprocessor_name,
-      seq(kw("VALUE"), "(", field("value", $._expression), ")"),
+      $._value_expression,
     ),
 
   __input_output_through_option: ($) =>
     choice(
       alias(kw("ECHO"), $.echo),
       alias(kw("NO-ECHO"), $.no_echo),
-      seq(kw("MAP"), field("map", choice($.identifier, $.string_literal))),
+      seq(kw("MAP"), field("map", $._identifier_or_string_literal)),
       alias(kw("NO-MAP"), $.no_map),
       alias(kw("UNBUFFERED"), $.unbuffered),
       alias($.__input_output_convert_phrase, $.convert_phrase),

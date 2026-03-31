@@ -4,12 +4,7 @@ module.exports = ({ kw }) => ({
   __compile_body: ($) => seq(field("file", $.__compile_file), repeat($.__compile_option)),
 
   __compile_file: ($) =>
-    choice(
-      $.identifier,
-      $.qualified_name,
-      $.string_literal,
-      seq(kw("VALUE"), "(", field("value", $._expression), ")"),
-    ),
+    choice($.identifier, $.qualified_name, $.string_literal, $._value_expression),
 
   __compile_option: ($) =>
     choice(

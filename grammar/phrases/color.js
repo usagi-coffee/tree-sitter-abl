@@ -3,7 +3,7 @@ module.exports = ({ kw }) => ({
     choice(
       $.number_literal,
       $.string_literal,
-      seq(kw("VALUE"), "(", field("value", $._expression), ")"),
+      $._value_expression,
       field("foreground", alias($.__color_prefixed_identifier, $.identifier)),
       seq(
         repeat1(choice(kw("BLINK-"), kw("BRIGHT-"), kw("RVV-"), kw("UNDERLINE-"))),

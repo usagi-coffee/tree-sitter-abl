@@ -4,10 +4,5 @@ module.exports = ({ kw }) => ({
 
   __delete_alias_body: ($) => seq(field("alias", $.__delete_alias_name)),
 
-  __delete_alias_name: ($) =>
-    choice(
-      $.identifier,
-      $.string_literal,
-      seq(kw("VALUE"), "(", field("value", $._expression), ")"),
-    ),
+  __delete_alias_name: ($) => choice($.identifier, $.string_literal, $._value_expression),
 });

@@ -15,7 +15,7 @@ module.exports = ({ kw }) => ({
       optional(choice(alias(kw("ECHO"), $.echo), alias(kw("NO-ECHO"), $.no_echo))),
       optional(
         choice(
-          seq(kw("MAP"), field("map", choice($.identifier, $.string_literal))),
+          seq(kw("MAP"), field("map", $._identifier_or_string_literal)),
           alias(kw("NO-MAP"), $.no_map),
         ),
       ),
@@ -24,15 +24,8 @@ module.exports = ({ kw }) => ({
     ),
 
   __input_through_program_target: ($) =>
-    choice(
-      field("program", $.identifier),
-      field("program", $.string_literal),
-      $.__input_through_value_expression,
-    ),
-  __input_through_argument: ($) =>
-    choice($.__input_through_arg_value, $.__input_through_value_expression),
-  __input_through_value_expression: ($) =>
-    seq(kw("VALUE"), "(", field("value", $._expression), ")"),
+    choice(field("program", $.identifier), field("program", $.string_literal), $._value_expression),
+  __input_through_argument: ($) => choice($.__input_through_arg_value, $._value_expression),
   __input_through_arg_value: ($) =>
     choice(
       $.string_literal,

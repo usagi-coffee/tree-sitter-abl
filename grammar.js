@@ -522,6 +522,8 @@ module.exports = grammar({
             field("right", alias($._identifier_immediate, $.identifier)),
           ),
         ),
+      _identifier_or_string_literal: ($) => choice($.identifier, $.string_literal),
+      _value_expression: ($) => seq(kw("VALUE"), "(", field("value", $._expression), ")"),
       _terminator: ($) => choice($._terminator_dot, ";"),
       _no_error_terminator: ($) => seq(optional(alias(kw("NO-ERROR"), $.no_error)), $._terminator),
 

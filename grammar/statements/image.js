@@ -20,7 +20,7 @@ module.exports = ({ kw }) => ({
       optional(alias(kw("TRANSPARENT"), $.transparent)),
     ),
   __image_tooltip_phrase: ($) =>
-    seq(kw("TOOLTIP"), field("tooltip", choice($.string_literal, $.identifier))),
+    seq(kw("TOOLTIP"), field("tooltip", $._identifier_or_string_literal)),
   __image_stretch_phrase: ($) =>
     seq(
       alias(kw("STRETCH-TO-FIT"), $.stretch_to_fit),

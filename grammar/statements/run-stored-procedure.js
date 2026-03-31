@@ -5,7 +5,7 @@ module.exports = ({ kw }) => ({
   __run_stored_procedure_body: ($) =>
     seq(
       kw("STORED-PROCEDURE"),
-      field("procedure", choice($.identifier, $.string_literal)),
+      field("procedure", $._identifier_or_string_literal),
       optional(
         choice(
           seq(

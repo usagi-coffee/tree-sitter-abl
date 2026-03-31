@@ -28,14 +28,12 @@ module.exports = ({ kw }) => ({
 
   _run_target: ($) =>
     choice(
-      alias($.__run_value_expression, $.value_expression),
+      alias($._value_expression, $.value_expression),
       alias($.__run_library_member, $.library_member),
       $.procedure_name,
       $.identifier,
       $.qualified_name,
     ),
-
-  __run_value_expression: ($) => seq(kw("VALUE"), "(", field("value", $._expression), ")"),
   __run_library_member: ($) =>
     seq(
       field("library", $.procedure_name),

@@ -29,18 +29,13 @@ module.exports = ({ kw }) => ({
       alias(kw("PORTRAIT"), $.portrait),
       alias(kw("APPEND"), $.append),
       alias(kw("BINARY"), $.binary),
-      alias(kw("ECHO"), $.echo),
-      alias(kw("NO-ECHO"), $.no_echo),
       alias(kw("KEEP-MESSAGES"), $.keep_messages),
-      seq(kw("MAP"), field("map", $.__output_map_entry)),
-      alias(kw("NO-MAP"), $.no_map),
-      alias(kw("PAGED"), $.paged),
-      alias($.__output_page_size_phrase, $.page_size_phrase),
-      alias(kw("UNBUFFERED"), $.unbuffered),
-      alias($.__output_convert_phrase, $.convert_phrase),
+      $.__output_shared_option,
     ),
 
-  __output_through_option: ($) =>
+  __output_through_option: ($) => $.__output_shared_option,
+
+  __output_shared_option: ($) =>
     choice(
       alias(kw("ECHO"), $.echo),
       alias(kw("NO-ECHO"), $.no_echo),
@@ -67,38 +62,18 @@ module.exports = ({ kw }) => ({
     ),
 
   __output_lob_dir_phrase: ($) =>
-    seq(
-      kw("LOB-DIR"),
-      field(
-        "directory",
-        choice($.preprocessor_name, seq(kw("VALUE"), "(", field("value", $._expression), ")")),
-      ),
-    ),
+    seq(kw("LOB-DIR"), field("directory", choice($.preprocessor_name, $._value_expression))),
 
   __output_num_copies_phrase: ($) =>
     seq(
       kw("NUM-COPIES"),
-      field(
-        "copies",
-        choice(
-          $.number_literal,
-          $.preprocessor_name,
-          seq(kw("VALUE"), "(", field("value", $._expression), ")"),
-        ),
-      ),
+      field("copies", choice($.number_literal, $.preprocessor_name, $._value_expression)),
     ),
 
   __output_page_size_phrase: ($) =>
     seq(
       kw("PAGE-SIZE"),
-      field(
-        "page_size",
-        choice(
-          $.number_literal,
-          $.preprocessor_name,
-          seq(kw("VALUE"), "(", field("value", $._expression), ")"),
-        ),
-      ),
+      field("page_size", choice($.number_literal, $.preprocessor_name, $._value_expression)),
     ),
 
   __output_map_entry: ($) =>
@@ -109,16 +84,12 @@ module.exports = ({ kw }) => ({
       prec.right(seq(kw("PRINTER"), optional(field("printer", $.__output_printer_target)))),
       field("file", choice($.string_literal, $.preprocessor_name, $.identifier, $.qualified_name)),
       alias(kw("TERMINAL"), $.terminal),
-      seq(kw("VALUE"), "(", field("value", $._expression), ")"),
+      $._value_expression,
       alias(kw("CLIPBOARD"), $.clipboard),
     ),
 
   __output_through_program_target: ($) =>
-    choice(
-      field("program", $.identifier),
-      field("program", $.string_literal),
-      seq(kw("VALUE"), "(", field("value", $._expression), ")"),
-    ),
+    choice(field("program", $.identifier), field("program", $.string_literal), $._value_expression),
 
   __output_through_argument: ($) =>
     choice(
@@ -127,7 +98,7 @@ module.exports = ({ kw }) => ({
       $.identifier,
       $.preprocessor_name,
       alias($.__output_program_flag, $.program_flag),
-      seq(kw("VALUE"), "(", field("value", $._expression), ")"),
+      $._value_expression,
     ),
   __output_program_flag: ($) => token(/-[A-Za-z][A-Za-z0-9-]*/),
 
