@@ -23,25 +23,15 @@ module.exports = ({ kw }) => ({
     ),
 
   __value_assignment_current_value: ($) =>
-    seq(
-      field("type", alias(kw("CURRENT-VALUE"), $.identifier)),
-      "(",
-      field("sequence", $._expression),
-      optional(
-        seq(
-          ",",
-          field("database", $._expression),
-          optional(seq(",", field("tenant", $._expression))),
-        ),
-      ),
-      ")",
-      "=",
-      field("value", $._expression),
-    ),
+    seq(field("type", alias(kw("CURRENT-VALUE"), $.identifier)), $.__value_assignment_current_body),
 
   __value_assignment_dynamic_current_value: ($) =>
     seq(
       field("type", alias(kw("DYNAMIC-CURRENT-VALUE"), $.identifier)),
+      $.__value_assignment_current_body,
+    ),
+  __value_assignment_current_body: ($) =>
+    seq(
       "(",
       field("sequence", $._expression),
       optional(
@@ -64,18 +54,11 @@ module.exports = ({ kw }) => ({
       ",",
       field("property", $._expression),
       ")",
-      "=",
-      field("value", $._expression),
-      optional(alias(kw("NO-ERROR"), $.no_error)),
+      $.__value_assignment_value_no_error,
     ),
 
   __value_assignment_frame_value: ($) =>
-    seq(
-      field("type", alias(kw("FRAME-VALUE"), $.identifier)),
-      "=",
-      field("value", $._expression),
-      optional(alias(kw("NO-ERROR"), $.no_error)),
-    ),
+    seq(field("type", alias(kw("FRAME-VALUE"), $.identifier)), $.__value_assignment_value_no_error),
 
   __value_assignment_entry: ($) =>
     seq(
@@ -126,8 +109,8 @@ module.exports = ({ kw }) => ({
       field("position", $._expression),
       optional(seq(",", field("length", $._expression))),
       ")",
-      "=",
-      field("value", $._expression),
-      optional(alias(kw("NO-ERROR"), $.no_error)),
+      $.__value_assignment_value_no_error,
     ),
+  __value_assignment_value_no_error: ($) =>
+    seq("=", field("value", $._expression), optional(alias(kw("NO-ERROR"), $.no_error))),
 });

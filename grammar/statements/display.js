@@ -9,10 +9,7 @@ module.exports = ({ kw }) => ({
 
   __display_fields_body: ($) =>
     choice(
-      prec(
-        3,
-        seq($.__display_frame_phrases, optional(alias(kw("NO-ERROR"), $.no_error)), $._terminator),
-      ),
+      prec(3, seq($.__display_frame_phrases, $.__display_no_error_terminator)),
       prec(
         2,
         seq(
@@ -20,8 +17,7 @@ module.exports = ({ kw }) => ({
           optional(alias(kw("UNLESS-HIDDEN"), $.unless_hidden)),
           optional($.in_window_phrase),
           $.__display_frame_phrases,
-          optional(alias(kw("NO-ERROR"), $.no_error)),
-          $._terminator,
+          $.__display_no_error_terminator,
         ),
       ),
       seq(
@@ -30,8 +26,7 @@ module.exports = ({ kw }) => ({
         $.__display_items,
         optional($.in_window_phrase),
         optional($.__display_frame_phrases),
-        optional(alias(kw("NO-ERROR"), $.no_error)),
-        $._terminator,
+        $.__display_no_error_terminator,
       ),
     ),
 
@@ -82,6 +77,8 @@ module.exports = ({ kw }) => ({
     prec.left(seq(kw("SPACE"), optional(field("space", seq("(", $._expression, ")"))))),
 
   __display_frame_phrases: ($) => seq($.frame_phrase, optional($.frame_phrase)),
+  __display_no_error_terminator: ($) =>
+    seq(optional(alias(kw("NO-ERROR"), $.no_error)), $._terminator),
 
   // Second branch
   __display_browse_body: ($) =>
@@ -90,7 +87,6 @@ module.exports = ({ kw }) => ({
       kw("WITH"),
       kw("BROWSE"),
       field("browse", $.identifier),
-      optional(alias(kw("NO-ERROR"), $.no_error)),
-      $._terminator,
+      $.__display_no_error_terminator,
     ),
 });

@@ -2,19 +2,13 @@ module.exports = ({ kw }) => ({
   color_statement: ($) =>
     seq(kw("COLOR"), optional(choice($.__color_body, $.__color_prompt_body)), $._terminator),
 
-  __color_body: ($) =>
+  __color_body: ($) => seq(optional(alias(kw("DISPLAY"), $.display)), $.__color_tail),
+
+  __color_prompt_body: ($) => seq(kw("PROMPT"), $.__color_tail),
+  __color_tail: ($) =>
     seq(
-      optional(alias(kw("DISPLAY"), $.display)),
       field("color", $.color_phrase),
       optional(seq(kw("PROMPT"), field("prompt_color", $.color_phrase))),
-      repeat1($.__color_field),
-      optional($.frame_phrase),
-    ),
-
-  __color_prompt_body: ($) =>
-    seq(
-      kw("PROMPT"),
-      field("color", $.color_phrase),
       repeat1($.__color_field),
       optional($.frame_phrase),
     ),

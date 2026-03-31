@@ -4,20 +4,8 @@ module.exports = ({ kw }) => ({
   __choose_body: ($) =>
     seq(
       choice(
-        seq(
-          kw("ROW"),
-          field("field", $._identifier_or_qualified_name),
-          optional(seq(kw("HELP"), field("help", $.string_literal))),
-        ),
-        seq(
-          kw("FIELD"),
-          repeat1(
-            seq(
-              field("field", $._identifier_or_qualified_name),
-              optional(seq(kw("HELP"), field("help", $.string_literal))),
-            ),
-          ),
-        ),
+        seq(kw("ROW"), $.__choose_field_help),
+        seq(kw("FIELD"), repeat1($.__choose_field_help)),
       ),
       repeat(
         choice(
@@ -30,6 +18,11 @@ module.exports = ({ kw }) => ({
         ),
       ),
       optional($.frame_phrase),
+    ),
+  __choose_field_help: ($) =>
+    seq(
+      field("field", $._identifier_or_qualified_name),
+      optional(seq(kw("HELP"), field("help", $.string_literal))),
     ),
 
   __choose_go_on: ($) =>
