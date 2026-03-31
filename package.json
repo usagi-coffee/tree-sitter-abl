@@ -48,15 +48,15 @@
     "dev": "nodemon --ignore ./src -e js,json,p --exec 'bun run tools/generate.js && bun run tools/parse_file.js example.p'"
   },
   "dependencies": {
-    "node-addon-api": "^8.5.0",
+    "node-addon-api": "^8.7.0",
     "node-gyp-build": "^4.8.4"
   },
   "devDependencies": {
-    "nodemon": "^2.0.22",
-    "oxfmt": "^0.42.0",
+    "nodemon": "^3.1.14",
+    "oxfmt": "^0.43.0",
     "prebuildify": "^6.0.1",
     "tree-sitter": "^0.22.4",
-    "tree-sitter-cli": "^0.26.0"
+    "tree-sitter-cli": "^0.26.8"
   },
   "peerDependencies": {
     "tree-sitter": "^0.22.4"
