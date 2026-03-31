@@ -64,7 +64,7 @@ Strongly prefer using these commands as they have helpful side-effects like retu
 - Use compact rule formatting: keep one-line rules adjacent with no blank lines, avoid blank lines between consecutive one-line rules.
 - The grammar should avoid permissive or catch-all rules that allow invalid syntax to be parsed successfully.
 - ABL grammar is filled with optionals, be careful not to explode `tree-sitter`'s `ACTION_COUNT`, `STATE_COUNT` and `LARGE_STATE_COUNT` always check modification's impact on these.
-- When weighing the impact of the modifications on `ACTION_COUNT`, `LARGE_STATE_COUNT` and `STATE_COUNT` prefer biggest reductions to `ACTION_COUNT` but don't treat it as absolute, if `ACTION_COUNT` goes up by a small amount but `LARGE_STATE_COUNT` goes down by a few hundred then keep the changes anyway.
+- When weighing the impact of the modifications on `ACTION_COUNT`, `LARGE_STATE_COUNT` and `STATE_COUNT` prefer the biggest reductions to `ACTION_COUNT`.
 - Do not adjust or remove tests just to satisfy test passing, just fix the underlying parsing issue or ask me first to remove if it's really not supported.
 - Don't do unnecessary comments like `// something is above`.
 - Never add `(ERROR` nodes to expected syntax trees in tests, it's pointless, fix the grammar not the test itself.
