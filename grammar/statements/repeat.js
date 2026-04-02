@@ -16,7 +16,7 @@ module.exports = ({ kw }) => ({
       optional($.preselect_phrase),
       optional($.query_tuning_phrase),
       optional($.__repeat_loop_phrase),
-      optional(choice($.__repeat_while_phrase, $.__repeat_until_phrase)),
+      optional($.__repeat_condition_phrase),
       optional(alias(kw("TRANSACTION"), $.transaction)),
       repeat(
         choice(
@@ -50,7 +50,7 @@ module.exports = ({ kw }) => ({
       field("end", $._expression),
       optional(seq(kw("BY"), field("step", $._expression))),
     ),
-  __repeat_while_phrase: ($) => seq(kw("WHILE"), field("condition", $._expression)),
-  __repeat_until_phrase: ($) => seq(kw("UNTIL"), field("condition", $._expression)),
+  __repeat_condition_phrase: ($) =>
+    seq(choice(kw("WHILE"), kw("UNTIL")), field("condition", $._expression)),
   __repeat_sort_direction: ($) => field("sort_order", kw("DESCENDING", { offset: 4 })),
 });

@@ -4,7 +4,7 @@ module.exports = ({ kw }) => ({
   __for_body: ($) =>
     seq(
       kw("FOR"),
-      choice($.__for_record_phrase_section, $.__for_variables),
+      $.__for_record_or_variables,
       optional(alias($.__for_while_phrase, $.while_phrase)),
       optional(alias(kw("TRANSACTION"), $.transaction)),
       repeat(
@@ -20,6 +20,7 @@ module.exports = ({ kw }) => ({
       optional($.__for_with_stream_io_phrase),
       $.body,
     ),
+  __for_record_or_variables: ($) => choice($.__for_record_phrase_section, $.__for_variables),
   __for_record_phrase_section: ($) =>
     seq($.__for_record_phrases, repeat($.__for_break_or_sort_phrase)),
 
@@ -45,56 +46,27 @@ module.exports = ({ kw }) => ({
       optional(seq(kw("BY"), field("step", $._expression))),
     ),
 
-  __for_by_phrase: ($) =>
-    prec.right(
-      seq(
-        kw("BY"),
-        field("by", $._expression),
-        optional(field("sort_order", kw("DESCENDING", { offset: 4 }))),
-        repeat(
-          seq(
-            kw("BY"),
-            field("by", $._expression),
-            optional(field("sort_order", kw("DESCENDING", { offset: 4 }))),
-          ),
-        ),
-      ),
-    ),
-  __for_group_by_phrase: ($) =>
-    prec.right(
-      seq(
-        kw("GROUP"),
-        kw("BY"),
-        field("by", $._expression),
-        optional(field("sort_order", kw("DESCENDING", { offset: 4 }))),
-        repeat(
-          seq(
-            kw("BY"),
-            field("by", $._expression),
-            optional(field("sort_order", kw("DESCENDING", { offset: 4 }))),
-          ),
-        ),
-      ),
-    ),
+  __for_by_phrase: ($) => prec.right(seq(kw("BY"), $.__for_by_tail)),
+  __for_group_by_phrase: ($) => prec.right(seq(kw("GROUP"), kw("BY"), $.__for_by_tail)),
 
-  __for_break_by: ($) =>
-    prec.right(
-      seq(
-        kw("BREAK"),
-        kw("BY"),
-        field("by", $._expression),
-        optional(field("sort_order", kw("DESCENDING", { offset: 4 }))),
-        repeat(
-          seq(
-            kw("BY"),
-            field("by", $._expression),
-            optional(field("sort_order", kw("DESCENDING", { offset: 4 }))),
-          ),
-        ),
-      ),
-    ),
+  __for_break_by: ($) => prec.right(seq(kw("BREAK"), kw("BY"), $.__for_by_tail)),
 
   __for_with_stream_io_phrase: ($) => seq(kw("WITH"), alias(kw("STREAM-IO"), $.stream_io)),
+
+  __for_by_tail: ($) =>
+    prec.right(
+      seq(
+        field("by", $._expression),
+        optional(field("sort_order", kw("DESCENDING", { offset: 4 }))),
+        repeat(
+          seq(
+            kw("BY"),
+            field("by", $._expression),
+            optional(field("sort_order", kw("DESCENDING", { offset: 4 }))),
+          ),
+        ),
+      ),
+    ),
 
   __for_collate_phrase: ($) =>
     seq(

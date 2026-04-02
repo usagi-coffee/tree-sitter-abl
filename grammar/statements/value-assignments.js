@@ -3,8 +3,7 @@ module.exports = ({ kw }) => ({
     seq(
       choice(
         $.__value_assignment_current_language,
-        $.__value_assignment_current_value,
-        $.__value_assignment_dynamic_current_value,
+        $.__value_assignment_current_value_family,
         $.__value_assignment_dynamic_property,
         $.__value_assignment_frame_value,
         $.__value_assignment_entry,
@@ -21,28 +20,24 @@ module.exports = ({ kw }) => ({
       $.__value_assignment_equals_value,
     ),
 
-  __value_assignment_current_value: ($) =>
-    seq(field("type", alias(kw("CURRENT-VALUE"), $.identifier)), $.__value_assignment_current_body),
-
-  __value_assignment_dynamic_current_value: ($) =>
+  __value_assignment_current_value_family: ($) =>
     seq(
-      field("type", alias(kw("DYNAMIC-CURRENT-VALUE"), $.identifier)),
+      field(
+        "type",
+        choice(
+          alias(kw("CURRENT-VALUE"), $.identifier),
+          alias(kw("DYNAMIC-CURRENT-VALUE"), $.identifier),
+        ),
+      ),
       $.__value_assignment_current_body,
     ),
   __value_assignment_current_body: ($) =>
     seq(
       "(",
       field("sequence", $._expression),
-      optional(
-        seq(
-          ",",
-          field("database", $._expression),
-          optional(seq(",", field("tenant", $._expression))),
-        ),
-      ),
+      optional($.__value_assignment_database_tenant),
       ")",
-      "=",
-      field("value", $._expression),
+      $.__value_assignment_equals_value,
     ),
 
   __value_assignment_dynamic_property: ($) =>
@@ -67,8 +62,7 @@ module.exports = ({ kw }) => ({
       ",",
       field("list", $._expression),
       optional(seq(",", field("delimiter", $._expression))),
-      ")",
-      $.__value_assignment_equals_value,
+      $.__value_assignment_close_equals_value,
     ),
 
   __value_assignment_length: ($) =>
@@ -87,8 +81,7 @@ module.exports = ({ kw }) => ({
       "(",
       field("field", $._expression),
       optional(seq(",", $.__value_assignment_position_length)),
-      ")",
-      $.__value_assignment_equals_value,
+      $.__value_assignment_close_equals_value,
     ),
 
   __value_assignment_substring: ($) =>
@@ -103,6 +96,9 @@ module.exports = ({ kw }) => ({
     ),
   __value_assignment_position_length: ($) =>
     seq(field("position", $._expression), optional(seq(",", field("length", $._expression)))),
+  __value_assignment_database_tenant: ($) =>
+    seq(",", field("database", $._expression), optional(seq(",", field("tenant", $._expression)))),
+  __value_assignment_close_equals_value: ($) => seq(")", $.__value_assignment_equals_value),
   __value_assignment_equals_value: ($) => seq("=", field("value", $._expression)),
   __value_assignment_value_no_error: ($) =>
     seq($.__value_assignment_equals_value, optional(alias(kw("NO-ERROR"), $.no_error))),

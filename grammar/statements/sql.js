@@ -1,19 +1,9 @@
 module.exports = ({ kw }) => ({
   sql_alter_database_set_pro_enable_large_keys_statement: ($) =>
-    seq(
-      $.__sql_alter_database_set_prefix,
-      kw("PRO_ENABLE_LARGE_KEYS"),
-      field("value", $.__sql_value),
-      $._terminator,
-    ),
+    seq($.__sql_alter_database_set_prefix, $.__sql_pro_enable_large_keys_body, $._terminator),
 
   sql_alter_database_set_pro_enable_64bit_sequences_statement: ($) =>
-    seq(
-      $.__sql_alter_database_set_prefix,
-      kw("PRO_ENABLE_64BIT_SEQUENCES"),
-      field("value", $.__sql_value),
-      $._terminator,
-    ),
+    seq($.__sql_alter_database_set_prefix, $.__sql_pro_enable_64bit_sequences_body, $._terminator),
 
   sql_alter_database_set_column_statistics_statement: ($) =>
     seq(
@@ -181,78 +171,48 @@ module.exports = ({ kw }) => ({
 
   sql_select_statement: ($) => seq(kw("SELECT"), $.__sql_required_body_statement),
 
-  sql_set_catalog_statement: ($) =>
-    seq(kw("SET"), kw("CATALOG"), field("catalog", $.__sql_name), $._terminator),
+  sql_set_catalog_statement: ($) => seq(kw("SET"), $.__sql_set_catalog_body, $._terminator),
 
   sql_set_database_default_area_statement: ($) =>
-    seq(
-      kw("SET"),
-      kw("DATABASE"),
-      kw("DEFAULT"),
-      kw("AREA"),
-      field("area", $.__sql_value),
-      $._terminator,
-    ),
+    seq(kw("SET"), $.__sql_set_database_default_area_body, $._terminator),
 
   sql_set_pro_connect_log_statement: ($) =>
-    seq($.__sql_set_pro_connect_prefix, kw("LOG"), field("value", $.__sql_value), $._terminator),
+    seq($.__sql_set_pro_connect_prefix, $.__sql_set_log_body, $._terminator),
 
   sql_set_pro_connect_query_timeout_statement: ($) =>
-    seq(
-      $.__sql_set_pro_connect_prefix,
-      kw("QUERY_TIMEOUT"),
-      field("value", $.__sql_value),
-      $._terminator,
-    ),
+    seq($.__sql_set_pro_connect_prefix, $.__sql_set_query_timeout_body, $._terminator),
 
   sql_set_pro_server_query_timeout_statement: ($) =>
-    seq(
-      $.__sql_set_pro_server_prefix,
-      kw("QUERY_TIMEOUT"),
-      field("value", $.__sql_value),
-      $._terminator,
-    ),
+    seq($.__sql_set_pro_server_prefix, $.__sql_set_query_timeout_body, $._terminator),
 
   sql_set_pro_server_log_statement: ($) =>
-    seq($.__sql_set_pro_server_prefix, kw("LOG"), field("value", $.__sql_value), $._terminator),
+    seq($.__sql_set_pro_server_prefix, $.__sql_set_log_body, $._terminator),
 
-  sql_set_rowcount_statement: ($) =>
-    seq(kw("SET"), kw("ROWCOUNT"), field("value", $.__sql_value), $._terminator),
+  sql_set_rowcount_statement: ($) => seq(kw("SET"), $.__sql_set_rowcount_body, $._terminator),
 
-  sql_set_schema_statement: ($) =>
-    seq(kw("SET"), kw("SCHEMA"), field("schema", $.__sql_name), $._terminator),
+  sql_set_schema_statement: ($) => seq(kw("SET"), $.__sql_set_schema_body, $._terminator),
 
   sql_set_transaction_isolation_level_statement: ($) =>
-    seq(
-      kw("SET"),
-      kw("TRANSACTION"),
-      kw("ISOLATION"),
-      kw("LEVEL"),
-      field("level", $.__sql_tail),
-      $._terminator,
-    ),
+    seq(kw("SET"), $.__sql_set_transaction_isolation_level_body, $._terminator),
 
-  sql_show_catalogs_statement: ($) => seq(kw("SHOW"), kw("CATALOGS"), $._terminator),
+  sql_show_catalogs_statement: ($) => seq(kw("SHOW"), $.__sql_show_catalogs_body, $._terminator),
 
   sql_show_database_default_area_statement: ($) =>
-    seq(kw("SHOW"), kw("DATABASE"), kw("DEFAULT"), kw("AREA"), $._terminator),
+    seq(kw("SHOW"), $.__sql_show_database_default_area_body, $._terminator),
 
-  sql_show_group_statement: ($) =>
-    seq(kw("SHOW"), $.__sql_show_named_group, $._terminator),
+  sql_show_group_statement: ($) => seq(kw("SHOW"), $.__sql_show_named_group, $._terminator),
 
-  sql_show_partition_statement: ($) =>
-    seq(kw("SHOW"), $.__sql_show_named_partition, $._terminator),
+  sql_show_partition_statement: ($) => seq(kw("SHOW"), $.__sql_show_named_partition, $._terminator),
 
-  sql_show_rowcount_statement: ($) => seq(kw("SHOW"), kw("ROWCOUNT"), $._terminator),
+  sql_show_rowcount_statement: ($) => seq(kw("SHOW"), $.__sql_show_rowcount_body, $._terminator),
 
-  sql_show_tenant_statement: ($) =>
-    seq(kw("SHOW"), $.__sql_show_named_tenant, $._terminator),
+  sql_show_tenant_statement: ($) => seq(kw("SHOW"), $.__sql_show_named_tenant, $._terminator),
 
   sql_show_encrypt_on_statement: ($) =>
     seq(kw("SHOW"), kw("ENCRYPT"), kw("ON"), $.__sql_optional_body_statement),
 
   sql_show_column_statistics_cipher_statement: ($) =>
-    seq(kw("SHOW"), kw("COLUMN"), kw("STATISTICS"), kw("CIPHER"), $._terminator),
+    seq(kw("SHOW"), $.__sql_show_column_statistics_cipher_body, $._terminator),
 
   sql_update_statement: ($) =>
     seq(kw("UPDATE"), field("table", $.__sql_name), kw("SET"), $.__sql_required_body_statement),
@@ -260,6 +220,10 @@ module.exports = ({ kw }) => ({
   sql_update_statistics_statement: ($) =>
     seq(kw("UPDATE"), kw("STATISTICS"), $.__sql_optional_body_statement),
   __sql_alter_database_set_prefix: ($) => seq(kw("ALTER"), kw("DATABASE"), kw("SET")),
+  __sql_pro_enable_large_keys_body: ($) =>
+    seq(kw("PRO_ENABLE_LARGE_KEYS"), field("value", $.__sql_value)),
+  __sql_pro_enable_64bit_sequences_body: ($) =>
+    seq(kw("PRO_ENABLE_64BIT_SEQUENCES"), field("value", $.__sql_value)),
   __sql_alter_database_set_column_statistics_body: ($) =>
     seq(
       kw("COLUMN"),
@@ -270,10 +234,24 @@ module.exports = ({ kw }) => ({
     ),
   __sql_set_pro_connect_prefix: ($) => seq(kw("SET"), kw("PRO_CONNECT")),
   __sql_set_pro_server_prefix: ($) => seq(kw("SET"), kw("PRO_SERVER")),
+  __sql_set_log_body: ($) => seq(kw("LOG"), field("value", $.__sql_value)),
+  __sql_set_query_timeout_body: ($) => seq(kw("QUERY_TIMEOUT"), field("value", $.__sql_value)),
+  __sql_set_catalog_body: ($) => seq(kw("CATALOG"), field("catalog", $.__sql_name)),
+  __sql_set_database_default_area_body: ($) =>
+    seq(kw("DATABASE"), kw("DEFAULT"), kw("AREA"), field("area", $.__sql_value)),
+  __sql_set_rowcount_body: ($) => seq(kw("ROWCOUNT"), field("value", $.__sql_value)),
+  __sql_set_schema_body: ($) => seq(kw("SCHEMA"), field("schema", $.__sql_name)),
+  __sql_set_transaction_isolation_level_body: ($) =>
+    seq(kw("TRANSACTION"), kw("ISOLATION"), kw("LEVEL"), field("level", $.__sql_tail)),
+  __sql_show_catalogs_body: ($) => kw("CATALOGS"),
+  __sql_show_database_default_area_body: ($) => seq(kw("DATABASE"), kw("DEFAULT"), kw("AREA")),
   __sql_show_named_group: ($) => seq(kw("GROUP"), optional(field("group", $.__sql_name))),
+  __sql_show_rowcount_body: ($) => kw("ROWCOUNT"),
   __sql_show_named_partition: ($) =>
     seq(kw("PARTITION"), optional(field("partition", $.__sql_name))),
   __sql_show_named_tenant: ($) => seq(kw("TENANT"), optional(field("tenant", $.__sql_name))),
+  __sql_show_column_statistics_cipher_body: ($) =>
+    seq(kw("COLUMN"), kw("STATISTICS"), kw("CIPHER")),
   __sql_optional_body_statement: ($) => seq(optional(field("body", $.__sql_tail)), $._terminator),
   __sql_required_body_statement: ($) => seq(field("body", $.__sql_tail), $._terminator),
 

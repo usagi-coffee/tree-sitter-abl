@@ -3,31 +3,38 @@ module.exports = ({ kw }) => ({
     seq(
       kw("DDE"),
       choice(
-        seq(field("action", alias(kw("ADVISE"), $.identifier)), $.__dde_advise_body),
-        seq(field("action", alias(kw("EXECUTE"), $.identifier)), $.__dde_execute_body),
-        seq(field("action", alias(kw("GET"), $.identifier)), $.__dde_get_body),
+        $.__dde_advise_or_send_branch,
+        $.__dde_execute_or_terminate_branch,
+        $.__dde_get_or_request_branch,
         seq(field("action", alias(kw("INITIATE"), $.identifier)), $.__dde_initiate_body),
-        seq(field("action", alias(kw("REQUEST"), $.identifier)), $.__dde_request_body),
-        seq(field("action", alias(kw("SEND"), $.identifier)), $.__dde_send_body),
-        seq(field("action", alias(kw("TERMINATE"), $.identifier)), $.__dde_terminate_body),
       ),
       $._no_error_terminator,
     ),
 
-  __dde_advise_body: ($) =>
+  __dde_advise_or_send_branch: ($) =>
     seq(
+      field("action", choice(alias(kw("ADVISE"), $.identifier), alias(kw("SEND"), $.identifier))),
       field("ddeid", $._expression),
-      field("mode", alias(choice(kw("START"), kw("STOP")), $.identifier)),
+      choice(
+        field("mode", alias(choice(kw("START"), kw("STOP")), $.identifier)),
+        seq(kw("SOURCE"), field("source", $._expression)),
+      ),
       $.__dde_item_time_body,
     ),
-  __dde_execute_body: ($) =>
+  __dde_execute_or_terminate_branch: ($) =>
     seq(
+      field(
+        "action",
+        choice(alias(kw("EXECUTE"), $.identifier), alias(kw("TERMINATE"), $.identifier)),
+      ),
       field("ddeid", $._expression),
-      kw("COMMAND"),
-      field("command", $._expression),
-      optional($.__dde_time_phrase),
+      optional(seq(kw("COMMAND"), field("command", $._expression), optional($.__dde_time_phrase))),
     ),
-  __dde_get_body: ($) => $.__dde_target_item_body,
+  __dde_get_or_request_branch: ($) =>
+    seq(
+      field("action", choice(alias(kw("GET"), $.identifier), alias(kw("REQUEST"), $.identifier))),
+      $.__dde_target_item_body,
+    ),
   __dde_initiate_body: ($) =>
     seq(
       field("ddeid", $._expression),
@@ -38,15 +45,6 @@ module.exports = ({ kw }) => ({
       kw("TOPIC"),
       field("topic", $._expression),
     ),
-  __dde_request_body: ($) => $.__dde_target_item_body,
-  __dde_send_body: ($) =>
-    seq(
-      field("ddeid", $._expression),
-      kw("SOURCE"),
-      field("source", $._expression),
-      $.__dde_item_time_body,
-    ),
-  __dde_terminate_body: ($) => seq(field("ddeid", $._expression)),
   __dde_target_item_body: ($) =>
     seq(
       field("ddeid", $._expression),

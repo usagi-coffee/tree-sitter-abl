@@ -8,7 +8,7 @@ module.exports = ({ kw }) => ({
       optional($.preselect_phrase),
       optional($.query_tuning_phrase),
       optional(alias(kw("TRANSACTION"), $.transaction)),
-      optional(choice($.__do_while_phrase, $.__do_loop_phrase)),
+      optional($.__do_condition_or_loop_phrase),
       optional(alias(kw("TRANSACTION"), $.transaction)),
       repeat(
         choice(
@@ -34,6 +34,7 @@ module.exports = ({ kw }) => ({
       ),
     ),
 
+  __do_condition_or_loop_phrase: ($) => choice($.__do_while_phrase, $.__do_loop_phrase),
   __do_loop_phrase: ($) =>
     seq(
       field("variable", $.identifier),

@@ -143,7 +143,6 @@ module.exports = ({ kw }) => ({
     ),
   __on_revert_action: ($) => seq(alias(kw("REVERT"), $.revert), $._terminator),
   __on_anywhere: ($) => alias(kw("ANYWHERE"), $.anywhere),
-
   __on_database_event: ($) =>
     choice(kw("CREATE"), kw("DELETE"), kw("FIND"), kw("WRITE"), kw("ASSIGN")),
   __on_database_event_name: ($) => $.__on_database_event,
