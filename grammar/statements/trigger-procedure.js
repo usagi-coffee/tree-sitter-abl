@@ -27,21 +27,12 @@ module.exports = ({ kw }) => ({
       ),
     ),
 
-  __trigger_procedure_new_value: ($) =>
-    seq(
-      kw("NEW"),
-      optional(kw("VALUE")),
-      field("value", $.identifier),
-      choice(
-        seq(kw("AS"), field("data_type", $.identifier)),
-        seq(kw("LIKE"), field("like_field", $.qualified_name)),
-      ),
-      repeat($.__trigger_procedure_value_option),
-    ),
+  __trigger_procedure_new_value: ($) => seq(kw("NEW"), $.__trigger_procedure_value_body),
 
-  __trigger_procedure_old_value: ($) =>
+  __trigger_procedure_old_value: ($) => seq(kw("OLD"), $.__trigger_procedure_value_body),
+
+  __trigger_procedure_value_body: ($) =>
     seq(
-      kw("OLD"),
       optional(kw("VALUE")),
       field("value", $.identifier),
       choice(

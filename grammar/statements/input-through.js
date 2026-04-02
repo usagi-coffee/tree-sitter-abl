@@ -15,32 +15,21 @@ module.exports = ({ kw }) => ({
       seq(repeat1($.__input_through_argument), optional($.__input_through_tail_after_arguments)),
       seq($.__input_through_echo, optional($.__input_through_tail_after_echo)),
       seq($.__input_through_map, optional($.__input_through_tail_after_map)),
-      seq(
-        alias(kw("UNBUFFERED"), $.unbuffered),
-        optional(alias($.__input_through_convert_phrase, $.convert_phrase)),
-      ),
-      alias($.__input_through_convert_phrase, $.convert_phrase),
+      $.__input_through_unbuffered_convert_tail,
     ),
   __input_through_tail_after_arguments: ($) =>
     choice(
       seq($.__input_through_echo, optional($.__input_through_tail_after_echo)),
       seq($.__input_through_map, optional($.__input_through_tail_after_map)),
-      seq(
-        alias(kw("UNBUFFERED"), $.unbuffered),
-        optional(alias($.__input_through_convert_phrase, $.convert_phrase)),
-      ),
-      alias($.__input_through_convert_phrase, $.convert_phrase),
+      $.__input_through_unbuffered_convert_tail,
     ),
   __input_through_tail_after_echo: ($) =>
     choice(
       seq($.__input_through_map, optional($.__input_through_tail_after_map)),
-      seq(
-        alias(kw("UNBUFFERED"), $.unbuffered),
-        optional(alias($.__input_through_convert_phrase, $.convert_phrase)),
-      ),
-      alias($.__input_through_convert_phrase, $.convert_phrase),
+      $.__input_through_unbuffered_convert_tail,
     ),
-  __input_through_tail_after_map: ($) =>
+  __input_through_tail_after_map: ($) => $.__input_through_unbuffered_convert_tail,
+  __input_through_unbuffered_convert_tail: ($) =>
     choice(
       seq(
         alias(kw("UNBUFFERED"), $.unbuffered),

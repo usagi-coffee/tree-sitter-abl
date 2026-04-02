@@ -18,9 +18,7 @@ module.exports = ({ kw }) => ({
     seq(
       field("ddeid", $._expression),
       field("mode", alias(choice(kw("START"), kw("STOP")), $.identifier)),
-      kw("ITEM"),
-      field("item", $._expression),
-      optional($.__dde_time_phrase),
+      $.__dde_item_time_body,
     ),
   __dde_execute_body: ($) =>
     seq(
@@ -46,9 +44,7 @@ module.exports = ({ kw }) => ({
       field("ddeid", $._expression),
       kw("SOURCE"),
       field("source", $._expression),
-      kw("ITEM"),
-      field("item", $._expression),
-      optional($.__dde_time_phrase),
+      $.__dde_item_time_body,
     ),
   __dde_terminate_body: ($) => seq(field("ddeid", $._expression)),
   __dde_target_item_body: ($) =>
@@ -56,9 +52,9 @@ module.exports = ({ kw }) => ({
       field("ddeid", $._expression),
       kw("TARGET"),
       field("target", $._assignable),
-      kw("ITEM"),
-      field("item", $._expression),
-      optional($.__dde_time_phrase),
+      $.__dde_item_time_body,
     ),
+  __dde_item_time_body: ($) =>
+    seq(kw("ITEM"), field("item", $._expression), optional($.__dde_time_phrase)),
   __dde_time_phrase: ($) => seq(kw("TIME"), field("time", $._expression)),
 });

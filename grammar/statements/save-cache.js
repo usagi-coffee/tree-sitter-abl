@@ -5,14 +5,9 @@ module.exports = ({ kw }) => ({
   __save_cache_body: ($) =>
     seq(
       choice(kw("CURRENT"), kw("COMPLETE")),
-      choice(
-        field("database", $.identifier),
-        seq(kw("VALUE"), "(", field("database", $._expression), ")"),
-      ),
+      choice(field("database", $.identifier), field("database", $.__save_cache_value_expression)),
       kw("TO"),
-      choice(
-        field("path", $.string_literal),
-        seq(kw("VALUE"), "(", field("path", $._expression), ")"),
-      ),
+      choice(field("path", $.string_literal), field("path", $.__save_cache_value_expression)),
     ),
+  __save_cache_value_expression: ($) => seq(kw("VALUE"), "(", $._expression, ")"),
 });
