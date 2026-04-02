@@ -40,6 +40,7 @@
     "generate": "bun run tools/generate.js",
     "check": "bun run tools/generate.js",
     "check:statements": "bun run tools/check_statements.js",
+    "audit:node-types": "node tools/audit_node_types.js",
     "parse": "bun run tools/generate.js && tree-sitter parse",
     "parse:snippet": "bun run tools/generate.js && bun run tools/parse.js",
     "reference": "bun run tools/reference.js",

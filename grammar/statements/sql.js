@@ -238,15 +238,15 @@ module.exports = ({ kw }) => ({
     seq(kw("SHOW"), kw("DATABASE"), kw("DEFAULT"), kw("AREA"), $._terminator),
 
   sql_show_group_statement: ($) =>
-    seq(kw("SHOW"), kw("GROUP"), optional(field("group", $.__sql_name)), $._terminator),
+    seq(kw("SHOW"), $.__sql_show_named_group, $._terminator),
 
   sql_show_partition_statement: ($) =>
-    seq(kw("SHOW"), kw("PARTITION"), optional(field("partition", $.__sql_name)), $._terminator),
+    seq(kw("SHOW"), $.__sql_show_named_partition, $._terminator),
 
   sql_show_rowcount_statement: ($) => seq(kw("SHOW"), kw("ROWCOUNT"), $._terminator),
 
   sql_show_tenant_statement: ($) =>
-    seq(kw("SHOW"), kw("TENANT"), optional(field("tenant", $.__sql_name)), $._terminator),
+    seq(kw("SHOW"), $.__sql_show_named_tenant, $._terminator),
 
   sql_show_encrypt_on_statement: ($) =>
     seq(kw("SHOW"), kw("ENCRYPT"), kw("ON"), $.__sql_optional_body_statement),
@@ -270,6 +270,10 @@ module.exports = ({ kw }) => ({
     ),
   __sql_set_pro_connect_prefix: ($) => seq(kw("SET"), kw("PRO_CONNECT")),
   __sql_set_pro_server_prefix: ($) => seq(kw("SET"), kw("PRO_SERVER")),
+  __sql_show_named_group: ($) => seq(kw("GROUP"), optional(field("group", $.__sql_name))),
+  __sql_show_named_partition: ($) =>
+    seq(kw("PARTITION"), optional(field("partition", $.__sql_name))),
+  __sql_show_named_tenant: ($) => seq(kw("TENANT"), optional(field("tenant", $.__sql_name))),
   __sql_optional_body_statement: ($) => seq(optional(field("body", $.__sql_tail)), $._terminator),
   __sql_required_body_statement: ($) => seq(field("body", $.__sql_tail), $._terminator),
 
