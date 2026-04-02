@@ -254,6 +254,41 @@ stmt_b: ($) => seq("CREATE", "VIEW", $.name, $.__create_view_body),
 
 Use it when the tail is structurally generic and repeated often.
 
+## Technique: Non-Empty Tail Extraction
+
+Use when several branches repeat the same trailing shape, but that tail contains optional pieces and would become illegal as a hidden helper if extracted directly.
+
+This pays off when you keep the helper itself non-empty and move the outer optionality back to the callsite.
+
+Do not extract a helper like `seq(optional(...), repeat(...))` if that helper can match the empty string. Tree-sitter rejects hidden helpers that match empty.
+
+Example:
+
+```js
+choice(
+  seq($.preprocessor_name, optional(choice($.at_phrase, seq("TO", $.expr))), repeat($.display_option)),
+  seq(field("value", $.string_literal), optional(choice($.at_phrase, seq("TO", $.expr))), repeat($.display_option)),
+  seq(field("value", $.number_literal), optional(choice($.at_phrase, seq("TO", $.expr))), repeat($.display_option)),
+)
+```
+
+Prefer:
+
+```js
+choice(
+  seq($.preprocessor_name, optional($.__display_value_tail)),
+  seq(field("value", $.string_literal), optional($.__display_value_tail)),
+  seq(field("value", $.number_literal), optional($.__display_value_tail)),
+)
+__display_value_tail: ($) =>
+  choice(
+    seq(choice($.at_phrase, seq("TO", $.expr)), repeat($.display_option)),
+    repeat1($.display_option),
+  )
+```
+
+Use it when the repeated suffix is real and the non-empty reformulation preserves the same tree shape and accepted syntax.
+
 ## Technique: Token Packing
 
 Use when a generic tail consumes many punctuation or operator branches as undifferentiated items.
