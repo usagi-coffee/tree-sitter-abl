@@ -6,6 +6,8 @@ description: Optimize tree-sitter grammar cost metrics such as ACTION_COUNT, STA
 # Tree-sitter Optimize
 
 Use this skill to run a measured parser-cost reduction pass on a tree-sitter grammar.
+The optimization pass is not limited to the techniques listed below.
+Treat them as common patterns and examples, not an exhaustive menu.
 
 ## Workflow
 
@@ -24,6 +26,8 @@ Use this skill to run a measured parser-cost reduction pass on a tree-sitter gra
 6. Compare the result to the last accepted baseline and revert neutral-to-worse changes quickly.
 7. On slow grammars, remember the last accepted checkpoint counts and avoid re-measuring immediately after a pure revert.
 8. Run the normal test workflow after the kept changes.
+9. Always note every state change between runs.
+   Record the previous accepted state, the new observed state, and what change caused the transition so the next run starts from an explicit checkpoint.
 
 ## General Rules
 
@@ -33,10 +37,14 @@ Use this skill to run a measured parser-cost reduction pass on a tree-sitter gra
 - Treat parser metrics as the source of truth, not aesthetics.
 - Preserve parser behavior while optimizing.
 - Do not change the output tree shape, hide or expose nodes differently, rename fields, or otherwise alter parse results just to improve counts.
+- Do not apply optimizations that break rule ordering semantics, such as rewriting `seq(optional(...), optional(...), optional(...))` into `repeat(choice(...))`, unless the user has explicitly agreed to allow that ordering change.
 - Use one small edit per measurement cycle.
 - Some extractions reduce counts and some increase them. Try different cuts, regenerate, and keep only the proven win.
 - Use the last accepted checkpoint as the comparison source.
 - If a change is reverted cleanly, assume the metrics are back at the last accepted checkpoint unless there is a reason to distrust the revert.
+- Always leave a run-to-run state log.
+  Note each transition between baseline, accepted change, revert, and final kept state.
+- Use any other behavior-preserving optimization that measurably improves parser cost, even if it is not listed in the technique catalog below.
 
 Example measurement loop:
 
@@ -66,14 +74,17 @@ Example `src/parser.c` macros:
 #define LARGE_STATE_COUNT 16320
 ```
 
-Example extraction commands:
+Example extraction command:
 
 ```sh
-perl -ne 'while (/ACTIONS\((\d+)\)/g) { $m = $1 if !defined($m) || $1 > $m } END { print "#define ACTION_COUNT $m\n" if defined $m }' src/parser.c
-grep -E '#define (STATE_COUNT|LARGE_STATE_COUNT) ' src/parser.c
+perl -ne 'if (/^#define (STATE_COUNT|LARGE_STATE_COUNT) \d+/) { print } while (/ACTIONS\((\d+)\)/g) { $m = $1 if !defined($m) || $1 > $m } END { print "#define ACTION_COUNT $m\n\n" if defined $m }' src/parser.c
 ```
 
 Treat the extracted output as the baseline and comparison source for optimization passes.
+
+## Technique Catalog
+
+The following techniques are common starting points, not the full set of allowed optimizations.
 
 ## Technique: Hidden Semantic Chunk Extraction
 
