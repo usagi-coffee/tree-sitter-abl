@@ -5,22 +5,25 @@ module.exports = ({ kw }) => ({
     seq(
       kw("QUERY"),
       field("query", $.identifier),
-      choice(kw("FOR"), kw("PRESELECT")),
-      kw("EACH"),
-      alias($.__open_query_record_phrase, $.record_phrase),
-      repeat(
-        seq(
-          ",",
-          choice(kw("EACH"), kw("FIRST"), kw("LAST")),
-          alias($.__open_query_record_phrase, $.record_phrase),
-        ),
-      ),
+      $.__open_query_records,
       optional($.query_tuning_phrase),
       optional(alias(kw("BREAK"), $.break)),
       repeat(alias($.__open_query_by_phrase, $.by_phrase)),
       optional(field("lock", $.__open_query_lock)),
       optional(alias(kw("INDEXED-REPOSITION"), $.indexed_reposition)),
       optional(seq(kw("MAX-ROWS"), field("max_rows", $._expression))),
+    ),
+  __open_query_records: ($) =>
+    seq(
+      choice(kw("FOR"), kw("PRESELECT")),
+      kw("EACH"),
+      alias($.__open_query_record_phrase, $.record_phrase),
+      repeat(seq(",", $.__open_query_join_record)),
+    ),
+  __open_query_join_record: ($) =>
+    seq(
+      choice(kw("EACH"), kw("FIRST"), kw("LAST")),
+      alias($.__open_query_record_phrase, $.record_phrase),
     ),
 
   __open_query_record_phrase: ($) =>

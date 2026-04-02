@@ -12,25 +12,16 @@ module.exports = ({ kw }) => ({
       $._terminator,
     ),
 
-  sql_alter_group_statement: ($) =>
-    seq(kw("ALTER"), kw("GROUP"), field("group", $.__sql_name), $.__sql_optional_body_statement),
+  sql_alter_group_statement: ($) => seq(kw("ALTER"), $.__sql_group_tail),
 
-  sql_alter_sequence_statement: ($) =>
-    seq(
-      kw("ALTER"),
-      kw("SEQUENCE"),
-      field("sequence", $.__sql_name),
-      $.__sql_optional_body_statement,
-    ),
+  sql_alter_sequence_statement: ($) => seq(kw("ALTER"), $.__sql_sequence_tail),
 
   sql_alter_table_statement: ($) =>
     seq(kw("ALTER"), kw("TABLE"), field("table", $.__sql_name), $.__sql_required_body_statement),
 
-  sql_alter_tenant_statement: ($) =>
-    seq(kw("ALTER"), kw("TENANT"), field("tenant", $.__sql_name), $.__sql_optional_body_statement),
+  sql_alter_tenant_statement: ($) => seq(kw("ALTER"), $.__sql_tenant_tail),
 
-  sql_alter_user_statement: ($) =>
-    seq(kw("ALTER"), kw("USER"), field("user", $.__sql_name), $.__sql_optional_body_statement),
+  sql_alter_user_statement: ($) => seq(kw("ALTER"), $.__sql_user_tail),
 
   sql_audit_insert_statement: ($) =>
     seq(kw("AUDIT"), kw("INSERT"), $.__sql_required_body_statement),
@@ -51,8 +42,7 @@ module.exports = ({ kw }) => ({
   sql_create_domain_statement: ($) =>
     seq(kw("CREATE"), kw("DOMAIN"), field("domain", $.__sql_name), $.__sql_required_body_statement),
 
-  sql_create_group_statement: ($) =>
-    seq(kw("CREATE"), kw("GROUP"), field("group", $.__sql_name), $.__sql_optional_body_statement),
+  sql_create_group_statement: ($) => seq(kw("CREATE"), $.__sql_group_tail),
 
   sql_create_index_statement: ($) =>
     seq(kw("CREATE"), kw("INDEX"), field("index", $.__sql_name), $.__sql_required_body_statement),
@@ -65,13 +55,7 @@ module.exports = ({ kw }) => ({
       $.__sql_required_body_statement,
     ),
 
-  sql_create_sequence_statement: ($) =>
-    seq(
-      kw("CREATE"),
-      kw("SEQUENCE"),
-      field("sequence", $.__sql_name),
-      $.__sql_optional_body_statement,
-    ),
+  sql_create_sequence_statement: ($) => seq(kw("CREATE"), $.__sql_sequence_tail),
 
   sql_create_super_tenant_statement: ($) =>
     seq(
@@ -91,8 +75,7 @@ module.exports = ({ kw }) => ({
   sql_create_table_statement: ($) =>
     seq(kw("CREATE"), kw("TABLE"), field("table", $.__sql_name), $.__sql_required_body_statement),
 
-  sql_create_tenant_statement: ($) =>
-    seq(kw("CREATE"), kw("TENANT"), field("tenant", $.__sql_name), $.__sql_optional_body_statement),
+  sql_create_tenant_statement: ($) => seq(kw("CREATE"), $.__sql_tenant_tail),
 
   sql_create_trigger_statement: ($) =>
     seq(
@@ -102,8 +85,7 @@ module.exports = ({ kw }) => ({
       $.__sql_required_body_statement,
     ),
 
-  sql_create_user_statement: ($) =>
-    seq(kw("CREATE"), kw("USER"), field("user", $.__sql_name), $.__sql_optional_body_statement),
+  sql_create_user_statement: ($) => seq(kw("CREATE"), $.__sql_user_tail),
 
   sql_create_view_statement: ($) =>
     seq(kw("CREATE"), kw("VIEW"), field("view", $.__sql_name), $.__sql_required_body_statement),
@@ -117,8 +99,7 @@ module.exports = ({ kw }) => ({
   sql_drop_domain_statement: ($) =>
     seq(kw("DROP"), kw("DOMAIN"), field("domain", $.__sql_name), $.__sql_optional_body_statement),
 
-  sql_drop_group_statement: ($) =>
-    seq(kw("DROP"), kw("GROUP"), field("group", $.__sql_name), $.__sql_optional_body_statement),
+  sql_drop_group_statement: ($) => seq(kw("DROP"), $.__sql_group_tail),
 
   sql_drop_index_statement: ($) =>
     seq(kw("DROP"), kw("INDEX"), field("index", $.__sql_name), $.__sql_optional_body_statement),
@@ -131,13 +112,7 @@ module.exports = ({ kw }) => ({
       $.__sql_optional_body_statement,
     ),
 
-  sql_drop_sequence_statement: ($) =>
-    seq(
-      kw("DROP"),
-      kw("SEQUENCE"),
-      field("sequence", $.__sql_name),
-      $.__sql_optional_body_statement,
-    ),
+  sql_drop_sequence_statement: ($) => seq(kw("DROP"), $.__sql_sequence_tail),
 
   sql_drop_synonym_statement: ($) =>
     seq(kw("DROP"), kw("SYNONYM"), field("synonym", $.__sql_name), $.__sql_optional_body_statement),
@@ -145,14 +120,12 @@ module.exports = ({ kw }) => ({
   sql_drop_table_statement: ($) =>
     seq(kw("DROP"), kw("TABLE"), field("table", $.__sql_name), $.__sql_optional_body_statement),
 
-  sql_drop_tenant_statement: ($) =>
-    seq(kw("DROP"), kw("TENANT"), field("tenant", $.__sql_name), $.__sql_optional_body_statement),
+  sql_drop_tenant_statement: ($) => seq(kw("DROP"), $.__sql_tenant_tail),
 
   sql_drop_trigger_statement: ($) =>
     seq(kw("DROP"), kw("TRIGGER"), field("trigger", $.__sql_name), $.__sql_optional_body_statement),
 
-  sql_drop_user_statement: ($) =>
-    seq(kw("DROP"), kw("USER"), field("user", $.__sql_name), $.__sql_optional_body_statement),
+  sql_drop_user_statement: ($) => seq(kw("DROP"), $.__sql_user_tail),
 
   sql_drop_view_statement: ($) =>
     seq(kw("DROP"), kw("VIEW"), field("view", $.__sql_name), $.__sql_optional_body_statement),
@@ -243,6 +216,14 @@ module.exports = ({ kw }) => ({
   __sql_set_schema_body: ($) => seq(kw("SCHEMA"), field("schema", $.__sql_name)),
   __sql_set_transaction_isolation_level_body: ($) =>
     seq(kw("TRANSACTION"), kw("ISOLATION"), kw("LEVEL"), field("level", $.__sql_tail)),
+  __sql_group_tail: ($) =>
+    seq(kw("GROUP"), field("group", $.__sql_name), $.__sql_optional_body_statement),
+  __sql_sequence_tail: ($) =>
+    seq(kw("SEQUENCE"), field("sequence", $.__sql_name), $.__sql_optional_body_statement),
+  __sql_tenant_tail: ($) =>
+    seq(kw("TENANT"), field("tenant", $.__sql_name), $.__sql_optional_body_statement),
+  __sql_user_tail: ($) =>
+    seq(kw("USER"), field("user", $.__sql_name), $.__sql_optional_body_statement),
   __sql_show_catalogs_body: ($) => kw("CATALOGS"),
   __sql_show_database_default_area_body: ($) => seq(kw("DATABASE"), kw("DEFAULT"), kw("AREA")),
   __sql_show_named_group: ($) => seq(kw("GROUP"), optional(field("group", $.__sql_name))),

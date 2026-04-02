@@ -23,42 +23,32 @@ module.exports = ({ kw }) => ({
 
   function_forward_definition: ($) =>
     choice(
-      seq(kw("DEFINE", { offset: 3 }), kw("FUNCTION"), $.__function_forward_body_1, $._terminator),
-      seq(kw("FUNCTION"), $.__function_forward_body_2, $._terminator),
+      seq(kw("DEFINE", { offset: 3 }), kw("FUNCTION"), $.__function_forward_body, $._terminator),
+      seq(kw("FUNCTION"), $.__function_forward_required_body, $._terminator),
     ),
 
-  __function_forward_body_1: ($) =>
+  __function_forward_body: ($) =>
+    seq($.__function_forward_head, optional($.__function_forward_target)),
+
+  __function_forward_required_body: ($) =>
+    seq($.__function_forward_head, $.__function_forward_target),
+
+  __function_forward_head: ($) =>
     seq(
       field("name", $.identifier),
       kw("RETURNS", { offset: 5 }),
       optional(kw("CLASS")),
       field("type", $._type_name),
       optional(alias($.__function_parameters, $.parameters)),
-      optional(
-        choice(
-          seq(
-            optional(alias($.__function_map_phrase, $.map_phrase)),
-            alias($.__function_in_phrase, $.in_phrase),
-          ),
-          alias(kw("FORWARD"), $.forward),
-        ),
-      ),
     ),
 
-  __function_forward_body_2: ($) =>
-    seq(
-      field("name", $.identifier),
-      kw("RETURNS", { offset: 5 }),
-      optional(kw("CLASS")),
-      field("type", $._type_name),
-      optional(alias($.__function_parameters, $.parameters)),
-      choice(
-        seq(
-          optional(alias($.__function_map_phrase, $.map_phrase)),
-          alias($.__function_in_phrase, $.in_phrase),
-        ),
-        alias(kw("FORWARD"), $.forward),
+  __function_forward_target: ($) =>
+    choice(
+      seq(
+        optional(alias($.__function_map_phrase, $.map_phrase)),
+        alias($.__function_in_phrase, $.in_phrase),
       ),
+      alias(kw("FORWARD"), $.forward),
     ),
 
   __function_parameters: ($) =>
