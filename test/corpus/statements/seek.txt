@@ -75,7 +75,8 @@ SEEK STREAM-HANDLE hS TO 100.
       field: (identifier)))
   (display_statement
     record: (identifier))
-  (input_statement)
+  (input_statement
+    (close))
   (seek_statement
     (number_literal))
   (seek_statement

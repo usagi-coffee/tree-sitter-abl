@@ -31,7 +31,8 @@ INPUT STREAM-HANDLE hStream CLOSE.
       target: (string_literal)
       source: (string_literal)))
   (input_statement
-    name: (identifier)))
+    name: (identifier)
+    (close)))
 
 ================================================================================
 INPUT - Reference snippet
@@ -80,7 +81,8 @@ INPUT FROM VALUE(cPath) CONVERT SOURCE "ibm850" TARGET "utf-8".
         record: (qualified_name
           left: (identifier)
           right: (identifier)))))
-  (input_statement)
+  (input_statement
+    (close))
   (input_statement
     directory: (string_literal)
     (no_attr_list))

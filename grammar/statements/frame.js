@@ -51,22 +51,16 @@ module.exports = ({ kw }) => ({
           ),
         ),
       ),
-      seq(
-        $.preprocessor_name,
-        optional($.__frame_display_value_tail),
-      ),
-      seq(
-        field("value", $.string_literal),
-        optional($.__frame_display_value_tail),
-      ),
-      seq(
-        field("value", $.number_literal),
-        optional($.__frame_display_value_tail),
-      ),
+      seq($.preprocessor_name, optional($.__frame_display_value_tail)),
+      seq(field("value", $.string_literal), optional($.__frame_display_value_tail)),
+      seq(field("value", $.number_literal), optional($.__frame_display_value_tail)),
     ),
   __frame_display_value_tail: ($) =>
     choice(
-      seq(choice($.at_phrase, seq(kw("TO"), field("to", $._expression))), repeat($.__frame_display_option)),
+      seq(
+        choice($.at_phrase, seq(kw("TO"), field("to", $._expression))),
+        repeat($.__frame_display_option),
+      ),
       repeat1($.__frame_display_option),
     ),
 

@@ -1,16 +1,23 @@
 module.exports = ({ kw }) => ({
-  pause_statement: ($) =>
-    seq(
-      kw("PAUSE"),
-      optional(field("duration", $._expression)),
-      optional(alias(kw("BEFORE-HIDE"), $.before_hide)),
-      optional(
-        choice(
-          seq(kw("MESSAGE"), field("message", $.string_literal)),
-          alias(kw("NO-MESSAGE"), $.no_message),
-        ),
-      ),
-      optional($.in_window_phrase),
-      $._terminator,
+  pause_statement: ($) => seq(kw("PAUSE"), optional($.__pause_tail), $._terminator),
+  __pause_tail: ($) =>
+    choice(
+      seq(field("duration", $._expression), optional($.__pause_tail_after_duration)),
+      seq(alias(kw("BEFORE-HIDE"), $.before_hide), optional($.__pause_tail_after_before_hide)),
+      seq($.__pause_message, optional($.in_window_phrase)),
+      $.in_window_phrase,
+    ),
+  __pause_tail_after_duration: ($) =>
+    choice(
+      seq(alias(kw("BEFORE-HIDE"), $.before_hide), optional($.__pause_tail_after_before_hide)),
+      seq($.__pause_message, optional($.in_window_phrase)),
+      $.in_window_phrase,
+    ),
+  __pause_tail_after_before_hide: ($) =>
+    choice(seq($.__pause_message, optional($.in_window_phrase)), $.in_window_phrase),
+  __pause_message: ($) =>
+    choice(
+      seq(kw("MESSAGE"), field("message", $.string_literal)),
+      alias(kw("NO-MESSAGE"), $.no_message),
     ),
 });

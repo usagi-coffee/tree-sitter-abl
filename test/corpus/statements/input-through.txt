@@ -113,7 +113,8 @@ INPUT CLOSE.
       field: (identifier))
     (format_phrase
       format: (string_literal)))
-  (input_statement)
+  (input_statement
+    (close))
   (variable_definition
     name: (identifier)
     type: (identifier)
@@ -138,7 +139,8 @@ INPUT CLOSE.
   (set_statement
     (field
       field: (identifier)))
-  (input_statement)
+  (input_statement
+    (close))
   (assignment_statement
     left: (widget_qualified_name
       target: (object_access
@@ -168,4 +170,5 @@ INPUT CLOSE.
       (down_statement
         (frame_phrase
           frame: (identifier)))))
-  (input_statement))
+  (input_statement
+    (close)))

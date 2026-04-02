@@ -4,16 +4,67 @@ module.exports = ({ kw }) => ({
   __input_body: ($) =>
     seq(
       optional($.__output_stream),
-      choice(kw("CLOSE"), seq(kw("FROM"), $.__input_from_target)),
-      optional(alias($.__output_lob_dir_phrase, $.lob_dir_phrase)),
-      optional(alias(kw("BINARY"), $.binary)),
-      optional(choice(alias(kw("ECHO"), $.echo), alias(kw("NO-ECHO"), $.no_echo))),
-      optional(
-        choice(seq(kw("MAP"), field("map", $.__input_map_entry)), alias(kw("NO-MAP"), $.no_map)),
+      choice(
+        alias(kw("CLOSE"), $.close),
+        seq(kw("FROM"), $.__input_from_target, optional($.__input_tail)),
       ),
-      optional(alias(kw("UNBUFFERED"), $.unbuffered)),
-      optional(alias($.__input_convert_phrase, $.convert_phrase)),
     ),
+  __input_tail: ($) =>
+    choice(
+      seq(
+        alias($.__output_lob_dir_phrase, $.lob_dir_phrase),
+        optional($.__input_tail_after_lob_dir),
+      ),
+      seq(alias(kw("BINARY"), $.binary), optional($.__input_tail_after_binary)),
+      seq($.__input_echo, optional($.__input_tail_after_echo)),
+      seq($.__input_map, optional($.__input_tail_after_map)),
+      seq(
+        alias(kw("UNBUFFERED"), $.unbuffered),
+        optional(alias($.__input_convert_phrase, $.convert_phrase)),
+      ),
+      alias($.__input_convert_phrase, $.convert_phrase),
+    ),
+  __input_tail_after_lob_dir: ($) =>
+    choice(
+      seq(alias(kw("BINARY"), $.binary), optional($.__input_tail_after_binary)),
+      seq($.__input_echo, optional($.__input_tail_after_echo)),
+      seq($.__input_map, optional($.__input_tail_after_map)),
+      seq(
+        alias(kw("UNBUFFERED"), $.unbuffered),
+        optional(alias($.__input_convert_phrase, $.convert_phrase)),
+      ),
+      alias($.__input_convert_phrase, $.convert_phrase),
+    ),
+  __input_tail_after_binary: ($) =>
+    choice(
+      seq($.__input_echo, optional($.__input_tail_after_echo)),
+      seq($.__input_map, optional($.__input_tail_after_map)),
+      seq(
+        alias(kw("UNBUFFERED"), $.unbuffered),
+        optional(alias($.__input_convert_phrase, $.convert_phrase)),
+      ),
+      alias($.__input_convert_phrase, $.convert_phrase),
+    ),
+  __input_tail_after_echo: ($) =>
+    choice(
+      seq($.__input_map, optional($.__input_tail_after_map)),
+      seq(
+        alias(kw("UNBUFFERED"), $.unbuffered),
+        optional(alias($.__input_convert_phrase, $.convert_phrase)),
+      ),
+      alias($.__input_convert_phrase, $.convert_phrase),
+    ),
+  __input_tail_after_map: ($) =>
+    choice(
+      seq(
+        alias(kw("UNBUFFERED"), $.unbuffered),
+        optional(alias($.__input_convert_phrase, $.convert_phrase)),
+      ),
+      alias($.__input_convert_phrase, $.convert_phrase),
+    ),
+  __input_echo: ($) => choice(alias(kw("ECHO"), $.echo), alias(kw("NO-ECHO"), $.no_echo)),
+  __input_map: ($) =>
+    choice(seq(kw("MAP"), field("map", $.__input_map_entry)), alias(kw("NO-MAP"), $.no_map)),
 
   __input_from_target: ($) =>
     choice(

@@ -82,7 +82,8 @@ INPUT CLOSE.
         table: (identifier))
       (import_statement
         (identifier))))
-  (input_statement)
+  (input_statement
+    (close))
   (variable_definition
     name: (identifier)
     like: (qualified_name
@@ -120,7 +121,8 @@ INPUT CLOSE.
           field: (identifier))
         (field
           field: (identifier)))))
-  (input_statement)
+  (input_statement
+    (close))
   (variable_definition
     name: (identifier)
     type: (identifier)
@@ -149,7 +151,8 @@ INPUT CLOSE.
         (frame_phrase
           frame: (identifier)
           (no_labels)))))
-  (input_statement)
+  (input_statement
+    (close))
   (variable_definition
     name: (identifier)
     type: (identifier)
@@ -177,4 +180,5 @@ INPUT CLOSE.
       (no_convert)))
   (import_statement
     (identifier))
-  (input_statement))
+  (input_statement
+    (close)))
