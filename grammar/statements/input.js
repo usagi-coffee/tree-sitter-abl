@@ -3,9 +3,9 @@ module.exports = ({ kw }) => ({
 
   __input_body: ($) =>
     seq(
-      optional($.__input_stream),
+      optional($.__output_stream),
       choice(kw("CLOSE"), seq(kw("FROM"), $.__input_from_target)),
-      optional(alias($.__input_lob_dir_phrase, $.lob_dir_phrase)),
+      optional(alias($.__output_lob_dir_phrase, $.lob_dir_phrase)),
       optional(alias(kw("BINARY"), $.binary)),
       optional(choice(alias(kw("ECHO"), $.echo), alias(kw("NO-ECHO"), $.no_echo))),
       optional(
@@ -14,9 +14,6 @@ module.exports = ({ kw }) => ({
       optional(alias(kw("UNBUFFERED"), $.unbuffered)),
       optional(alias($.__input_convert_phrase, $.convert_phrase)),
     ),
-
-  __input_stream: ($) =>
-    seq(choice(kw("STREAM"), kw("STREAM-HANDLE")), field("name", $.identifier)),
 
   __input_from_target: ($) =>
     choice(
@@ -33,8 +30,6 @@ module.exports = ({ kw }) => ({
     ),
   __input_file_target: ($) =>
     choice($.string_literal, $._identifier_or_access_or_call, $.preprocessor_name),
-  __input_lob_dir_phrase: ($) =>
-    seq(kw("LOB-DIR"), field("directory", choice($.preprocessor_name, $._value_expression))),
   __input_map_entry: ($) => $._identifier_or_string_literal,
   __input_convert_phrase: ($) =>
     choice(

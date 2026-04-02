@@ -46,58 +46,28 @@ module.exports = ({ kw }) => ({
     ),
   __create_buffer_target: ($) => choice($._identifier_or_access_or_call, $.string_literal),
   __create_call: ($) =>
-    seq(
-      kw("CALL"),
-      field("handle", $.identifier),
-      optional($.__create_in_widget_pool),
-      optional($.__create_no_error),
-    ),
+    seq(kw("CALL"), $.__create_handle_in_widget_pool_no_error),
   __create_client_principal: ($) =>
-    seq(kw("CLIENT-PRINCIPAL"), field("handle", $.identifier), optional($.__create_in_widget_pool)),
+    seq(kw("CLIENT-PRINCIPAL"), $.__create_handle_in_widget_pool),
   __create_data_source: ($) =>
-    seq(kw("DATA-SOURCE"), field("handle", $.identifier), optional($.__create_in_widget_pool)),
-  __create_dataset: ($) =>
-    seq(kw("DATASET"), field("handle", $.identifier), optional($.__create_in_widget_pool)),
+    seq(kw("DATA-SOURCE"), $.__create_handle_in_widget_pool),
+  __create_dataset: ($) => seq(kw("DATASET"), $.__create_handle_in_widget_pool),
   __create_query: ($) =>
-    seq(
-      kw("QUERY"),
-      field("handle", $.identifier),
-      optional($.__create_in_widget_pool),
-      optional($.__create_no_error),
-    ),
+    seq(kw("QUERY"), $.__create_handle_in_widget_pool_no_error),
   __create_x_document: ($) =>
-    seq(kw("X-DOCUMENT"), field("handle", $.identifier), optional($.__create_in_widget_pool)),
+    seq(kw("X-DOCUMENT"), $.__create_handle_in_widget_pool),
   __create_x_noderef: ($) =>
-    seq(kw("X-NODEREF"), field("handle", $.identifier), optional($.__create_in_widget_pool)),
+    seq(kw("X-NODEREF"), $.__create_handle_in_widget_pool),
   __create_soap_header: ($) =>
-    seq(kw("SOAP-HEADER"), field("handle", $.identifier), optional($.__create_in_widget_pool)),
+    seq(kw("SOAP-HEADER"), $.__create_handle_in_widget_pool),
   __create_soap_header_entryref: ($) =>
-    seq(
-      kw("SOAP-HEADER-ENTRYREF"),
-      field("handle", $.identifier),
-      optional($.__create_in_widget_pool),
-    ),
+    seq(kw("SOAP-HEADER-ENTRYREF"), $.__create_handle_in_widget_pool),
   __create_sax_reader: ($) =>
-    seq(
-      kw("SAX-READER"),
-      field("handle", $.identifier),
-      optional($.__create_in_widget_pool),
-      optional($.__create_no_error),
-    ),
+    seq(kw("SAX-READER"), $.__create_handle_in_widget_pool_no_error),
   __create_sax_writer: ($) =>
-    seq(
-      kw("SAX-WRITER"),
-      field("handle", $.identifier),
-      optional($.__create_in_widget_pool),
-      optional($.__create_no_error),
-    ),
+    seq(kw("SAX-WRITER"), $.__create_handle_in_widget_pool_no_error),
   __create_sax_attributes: ($) =>
-    seq(
-      kw("SAX-ATTRIBUTES"),
-      field("handle", $.identifier),
-      optional($.__create_in_widget_pool),
-      optional($.__create_no_error),
-    ),
+    seq(kw("SAX-ATTRIBUTES"), $.__create_handle_in_widget_pool_no_error),
   __create_widget_pool: ($) =>
     seq(
       kw("WIDGET-POOL"),
@@ -142,6 +112,10 @@ module.exports = ({ kw }) => ({
       ),
       optional($.__create_no_error),
     ),
+  __create_handle_in_widget_pool: ($) =>
+    seq(field("handle", $.identifier), optional($.__create_in_widget_pool)),
+  __create_handle_in_widget_pool_no_error: ($) =>
+    seq(field("handle", $.identifier), optional($.__create_in_widget_pool), optional($.__create_no_error)),
   __create_no_error: ($) => alias(kw("NO-ERROR"), $.no_error),
   __create_in_widget_pool: ($) => seq(kw("IN"), kw("WIDGET-POOL"), field("pool", $.identifier)),
 });
