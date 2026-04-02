@@ -277,24 +277,53 @@ Example:
 
 ```js
 choice(
-  seq($.preprocessor_name, optional(choice($.at_phrase, seq("TO", $.expr))), repeat($.display_option)),
-  seq(field("value", $.string_literal), optional(choice($.at_phrase, seq("TO", $.expr))), repeat($.display_option)),
-  seq(field("value", $.number_literal), optional(choice($.at_phrase, seq("TO", $.expr))), repeat($.display_option)),
-)
+  seq("A", optional($.x), repeat($.y)),
+  seq("B", optional($.x), repeat($.y)),
+);
 ```
 
 Prefer:
 
 ```js
-choice(
-  seq($.preprocessor_name, optional($.__display_value_tail)),
-  seq(field("value", $.string_literal), optional($.__display_value_tail)),
-  seq(field("value", $.number_literal), optional($.__display_value_tail)),
-)
-__display_value_tail: ($) =>
+choice(seq("A", optional($.__tail)), seq("B", optional($.__tail)));
+__tail: ($) => choice(seq($.x, repeat($.y)), repeat1($.y));
+```
+
+Ordered-tail example:
+
+```js
+statement_with_ordered_tail: ($) =>
+  seq(
+    "COMMAND",
+    optional($.prefix),
+    optional($.target),
+    optional($.modifier),
+    optional($.location),
+    $._terminator,
+  );
+```
+
+Prefer:
+
+```js
+statement_with_ordered_tail: ($) => seq("COMMAND", optional($.__ordered_tail), $._terminator),
+__ordered_tail: ($) =>
   choice(
-    seq(choice($.at_phrase, seq("TO", $.expr)), repeat($.display_option)),
-    repeat1($.display_option),
+    seq($.prefix, optional($.__ordered_tail_after_prefix)),
+    seq($.target, optional($.__ordered_tail_after_target)),
+    seq($.modifier, optional($.location)),
+    $.location,
+  ),
+__ordered_tail_after_prefix: ($) =>
+  choice(
+    seq($.target, optional($.__ordered_tail_after_target)),
+    seq($.modifier, optional($.location)),
+    $.location,
+  ),
+__ordered_tail_after_target: ($) =>
+  choice(
+    seq($.modifier, optional($.location)),
+    $.location,
   )
 ```
 
