@@ -42,7 +42,8 @@ VALIDATE sports.Item NO-ERROR.
 
 (source_code
   (repeat_statement
-    record: (identifier)
+    (for_phrase
+      record: (identifier))
     (body
       (prompt_for_statement
         (field

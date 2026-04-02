@@ -171,7 +171,8 @@ END.
 
 (source_code
   (repeat_statement
-    record: (identifier)
+    (for_phrase
+      record: (identifier))
     (body
       (form_statement
         (form_item

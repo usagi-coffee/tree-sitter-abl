@@ -217,7 +217,8 @@ END.
               (message_statement
                 (string_literal))))))))
   (repeat_statement
-    record: (identifier)
+    (for_phrase
+      record: (identifier))
     (preselect_phrase
       (preselect_record_list
         (preselect_record

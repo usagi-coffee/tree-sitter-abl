@@ -4,15 +4,7 @@ module.exports = ({ kw }) => ({
   __repeat_body: ($) =>
     seq(
       kw("REPEAT"),
-      optional(
-        seq(
-          kw("FOR"),
-          seq(
-            field("record", $._identifier_or_qualified_name),
-            repeat(seq(",", field("record", $._identifier_or_qualified_name))),
-          ),
-        ),
-      ),
+      optional(alias($.__repeat_for_phrase, $.for_phrase)),
       optional($.preselect_phrase),
       optional($.query_tuning_phrase),
       optional($.__repeat_loop_phrase),
@@ -29,6 +21,15 @@ module.exports = ({ kw }) => ({
         ),
       ),
       $.body,
+    ),
+
+  __repeat_for_phrase: ($) =>
+    seq(
+      kw("FOR"),
+      seq(
+        field("record", $._identifier_or_qualified_name),
+        repeat(seq(",", field("record", $._identifier_or_qualified_name))),
+      ),
     ),
 
   __repeat_break_by_phrase: ($) =>
