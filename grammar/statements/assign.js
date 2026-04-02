@@ -1,14 +1,15 @@
 module.exports = ({ kw }) => ({
-  assign_statement: ($) =>
-    seq(
-      kw("ASSIGN"),
-      choice(
-        alias($.__assign_body, $.assign_phrase),
-        $.__assign_record_body,
-        $.__assign_input_body,
-      ),
-      $._terminator,
+  assign_statement: ($) => seq(kw("ASSIGN"), $.__assign_statement_body, $._no_error_terminator),
+
+  __assign_statement_body: ($) =>
+    choice(
+      alias($.__assign_statement_phrase_body, $.assign_phrase),
+      $.__assign_record_body,
+      $.__assign_input_body,
     ),
+
+  __assign_statement_phrase_body: ($) =>
+    seq(alias($.__assign_pair, $.assign_pair), repeat(alias($.__assign_pair, $.assign_pair))),
 
   __assign_record_body: ($) =>
     seq(
@@ -20,7 +21,6 @@ module.exports = ({ kw }) => ({
           repeat(seq(optional(","), field("field", $._identifier_or_qualified_name))),
         ),
       ),
-      optional(alias(kw("NO-ERROR"), $.no_error)),
     ),
 
   __assign_input_body: ($) =>
@@ -31,7 +31,6 @@ module.exports = ({ kw }) => ({
         seq(kw("BROWSE"), field("browse", $.identifier)),
       ),
       repeat1($.__assign_input_item),
-      optional(alias(kw("NO-ERROR"), $.no_error)),
     ),
 
   __assign_input_item: ($) =>

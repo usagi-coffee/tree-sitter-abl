@@ -124,8 +124,8 @@ ASSIGN a = 1 b = 2 NO-ERROR.
           function: (identifier)
           (arguments
             (argument
-              name: (identifier)))))
-      (no_error)))
+              name: (identifier))))))
+    (no_error))
   (assign_statement
     (assign_phrase
       (assign_pair
@@ -133,8 +133,8 @@ ASSIGN a = 1 b = 2 NO-ERROR.
         right: (number_literal))
       (assign_pair
         left: (identifier)
-        right: (number_literal))
-      (no_error))))
+        right: (number_literal)))
+    (no_error)))
 
 ================================================================================
 ASSIGN with comment
@@ -415,8 +415,8 @@ NO-ERROR.
             right: (identifier))))
       (assign_pair
         left: (identifier)
-        right: (number_literal))
-      (no_error))))
+        right: (number_literal)))
+    (no_error)))
 
 ================================================================================
 ASSIGN without expressions and keyword targets
@@ -442,8 +442,8 @@ ASSIGN CURRENT-WINDOW = hWin NO-ERROR.
     (assign_phrase
       (assign_pair
         left: (identifier)
-        right: (identifier))
-      (no_error))))
+        right: (identifier)))
+    (no_error)))
 
 ================================================================================
 ASSIGN with include expression value
