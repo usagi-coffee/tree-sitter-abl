@@ -177,11 +177,6 @@ module.exports = () => ({
       $.trigger_procedure_statement,
 
       // SQL
-      $._sql_statement,
-    ),
-
-  _sql_statement: ($) =>
-    choice(
       $.sql_alter_database_set_pro_enable_large_keys_statement,
       $.sql_alter_database_set_pro_enable_64bit_sequences_statement,
       $.sql_alter_database_set_column_statistics_statement,
