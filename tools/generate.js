@@ -4,7 +4,7 @@
 import { $ } from "bun";
 import { readdir } from "node:fs/promises";
 import { join } from "node:path";
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 
 const hasher = new Bun.CryptoHasher("sha256");
 
@@ -27,6 +27,7 @@ const hash = hasher.digest("hex");
 const prevHash = await Bun.file("abl.hash")
   .text()
   .catch(() => "");
+const parserCExists = existsSync("src/parser.c");
 
 function loadTokenMap(parserCText) {
   const map = new Map();
@@ -96,7 +97,7 @@ function tryAnnotateGenerateError(raw) {
   }
 }
 
-if (hash !== prevHash) {
+if (hash !== prevHash || !parserCExists) {
   // Use spawnSync so we can always capture stderr/stdout without Bun throwing
   const gen = Bun.spawnSync({
     cmd: ["tree-sitter", "generate"],
@@ -125,7 +126,10 @@ const proc = Bun.spawnSync({
 const testOut = proc.stdout ? Buffer.from(proc.stdout).toString("utf8") : "";
 const testErr = proc.stderr ? Buffer.from(proc.stderr).toString("utf8") : "";
 
-const text = await Bun.file("src/parser.c").text();
+const parserFile = Bun.file("src/parser.c");
+const text = await parserFile.text();
+const parserSizeBytes = parserFile.size;
+const parserSizeMiB = (parserSizeBytes / (1024 * 1024)).toFixed(2);
 let highest = -Infinity;
 const matches = text.match(/ACTIONS\((\d+)\)/g) || [];
 
@@ -137,6 +141,8 @@ for (const m of matches) {
 console.log(`#define ACTION_COUNT ${highest}`);
 
 await $`grep -E "#define.*STATE_COUNT" src/parser.c`;
+console.log(`#define PARSER_C_SIZE_BYTES ${parserSizeBytes}`);
+console.log(`#define PARSER_C_SIZE_MIB ${parserSizeMiB}`);
 
 if ((testOut + testErr).trim() === "") {
   console.error(

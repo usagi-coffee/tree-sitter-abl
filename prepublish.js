@@ -29,6 +29,9 @@ if (exitCode !== 0) {
 // Build parser
 await $`tree-sitter generate`;
 
+// Minify
+await $`bun run tools/minify.js`;
+
 // Build artifacts
 await Promise.all([
   // Build shared libraries

@@ -101,13 +101,6 @@ module.exports = grammar({
       $.__variable_modifier,
     ],
     [$.__property_access_modifier, $.__event_access_modifier],
-    [
-      $.__property_access_modifier,
-      $.__dataset_modifier,
-      $.__temp_table_modifier,
-      $.__variable_modifier,
-    ],
-    [$.__property_access_modifier, $.__variable_modifier],
     [$.__property_access_modifier, $.__event_access_modifier, $.__variable_modifier],
     [
       $.__buffer_modifier,
@@ -117,7 +110,6 @@ module.exports = grammar({
       $.__query_modifier,
       $.__variable_modifier,
     ],
-    [$.__property_class_modifier, $.__variable_modifier],
     [$.__property_class_modifier, $.__event_type_modifier],
     [$.__property_class_modifier, $.__event_type_modifier, $.__variable_modifier],
     // SUBSCRIBE/UNSUBSCRIBE can start with PROCEDURE/PROC which may also be parsed as identifier-like expression.
