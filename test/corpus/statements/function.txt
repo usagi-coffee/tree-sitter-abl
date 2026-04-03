@@ -687,7 +687,8 @@ END.
       context: (identifier)))
   (run_statement
     procedure: (procedure_name)
-    handle: (persistent))
+    (persistent
+      handle: (identifier)))
   (display_statement
     (field
       field: (string_literal))

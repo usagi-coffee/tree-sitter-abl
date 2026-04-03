@@ -57,16 +57,19 @@ SUBSCRIBE TO "spaced event" ANYWHERE RUN-PROCEDURE "spaced event".
     (no_undo))
   (run_statement
     procedure: (procedure_name)
-    handle: (persistent))
+    (persistent
+      handle: (identifier)))
   (run_statement
     procedure: (procedure_name)
-    handle: (persistent)
+    (persistent
+      handle: (identifier))
     (arguments
       (argument
         name: (identifier))))
   (run_statement
     procedure: (procedure_name)
-    handle: (persistent))
+    (persistent
+      handle: (identifier)))
   (subscribe_statement
     subscriber: (identifier)
     event: (string_literal)
