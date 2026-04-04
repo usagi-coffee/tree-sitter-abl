@@ -4,11 +4,7 @@ module.exports = ({ kw }) => ({
   __update_body: ($) => seq(choice($.__update_record_body, $.__update_fields_body)),
 
   __update_record_body: ($) =>
-    seq(
-      field("record", $.__update_record),
-      optional($.__except_fields),
-      optional($.frame_phrase),
-    ),
+    seq(field("record", $.__update_record), optional($.__except_fields), optional($.frame_phrase)),
 
   __update_fields_body: ($) =>
     seq(

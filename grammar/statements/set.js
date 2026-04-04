@@ -45,11 +45,7 @@ module.exports = ({ kw }) => ({
     ),
 
   __set_record_body: ($) =>
-    seq(
-      field("record", $.__set_record),
-      optional($.__except_fields),
-      optional($.frame_phrase),
-    ),
+    seq(field("record", $.__set_record), optional($.__except_fields), optional($.frame_phrase)),
 
   __set_record: ($) => $._identifier_or_qualified_name,
   __set_skip_phrase: ($) =>
