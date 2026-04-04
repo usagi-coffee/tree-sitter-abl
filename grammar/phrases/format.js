@@ -36,28 +36,36 @@ module.exports = ({ kw }) => ({
       choice(
         field("at", token(/[0-9]+(\.[0-9]+)?/)),
         seq(
-          choice(
-            seq(kw("COLUMN"), field("column", $._expression)),
-            seq(kw("COLUMN-OF"), field("column_of", $._expression)),
-          ),
-          choice(
-            seq(kw("ROW"), field("row", $._expression)),
-            seq(kw("ROW-OF"), field("row_of", $._expression)),
-          ),
+          $.__format_at_column,
+          $.__format_at_row,
           optional($.__format_alignment),
         ),
         seq(
-          choice(
-            seq(kw("X"), field("x", $._expression)),
-            seq(kw("X-OF"), field("x_of", $._expression)),
-          ),
-          choice(
-            seq(kw("Y"), field("y", $._expression)),
-            seq(kw("Y-OF"), field("y_of", $._expression)),
-          ),
+          $.__format_at_x,
+          $.__format_at_y,
           optional($.__format_alignment),
         ),
       ),
+    ),
+  __format_at_column: ($) =>
+    choice(
+      seq(kw("COLUMN"), field("column", $._expression)),
+      seq(kw("COLUMN-OF"), field("column_of", $._expression)),
+    ),
+  __format_at_row: ($) =>
+    choice(
+      seq(kw("ROW"), field("row", $._expression)),
+      seq(kw("ROW-OF"), field("row_of", $._expression)),
+    ),
+  __format_at_x: ($) =>
+    choice(
+      seq(kw("X"), field("x", $._expression)),
+      seq(kw("X-OF"), field("x_of", $._expression)),
+    ),
+  __format_at_y: ($) =>
+    choice(
+      seq(kw("Y"), field("y", $._expression)),
+      seq(kw("Y-OF"), field("y_of", $._expression)),
     ),
 
   __format_as_like: ($) =>
