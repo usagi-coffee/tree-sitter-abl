@@ -13,8 +13,8 @@ module.exports = ({ kw }) => ({
           kw("WRITE"),
           kw("OF"),
           field("object", $.identifier),
-          optional(seq(kw("NEW"), optional(kw("BUFFER")), field("new_buffer", $.identifier))),
-          optional(seq(kw("OLD"), optional(kw("BUFFER")), field("old_buffer", $.identifier))),
+          optional($.__trigger_procedure_new_buffer),
+          optional($.__trigger_procedure_old_buffer),
         ),
         // ASSIGN event
         seq(
@@ -30,6 +30,12 @@ module.exports = ({ kw }) => ({
   __trigger_procedure_new_value: ($) => seq(kw("NEW"), $.__trigger_procedure_value_body),
 
   __trigger_procedure_old_value: ($) => seq(kw("OLD"), $.__trigger_procedure_value_body),
+
+  __trigger_procedure_new_buffer: ($) =>
+    seq(kw("NEW"), optional(kw("BUFFER")), field("new_buffer", $.identifier)),
+
+  __trigger_procedure_old_buffer: ($) =>
+    seq(kw("OLD"), optional(kw("BUFFER")), field("old_buffer", $.identifier)),
 
   __trigger_procedure_value_body: ($) =>
     seq(
