@@ -4,17 +4,17 @@ module.exports = ({ kw }) => ({
   __run_body: ($) =>
     seq(
       field("procedure", $._run_target),
-      optional(
-        choice(
-          alias(seq(kw("PERSISTENT"), optional($.__run_persistence_set_tail)), $.persistent),
-          alias(seq(kw("SINGLE-RUN"), optional($.__run_persistence_set_tail)), $.single_run),
-          alias(seq(kw("SINGLETON"), optional($.__run_persistence_set_tail)), $.singleton),
-        ),
-      ),
+      optional($.__run_persistence),
       optional(alias($.__run_in_phrase, $.in_phrase)),
       optional(alias($.__run_on_server, $.on_server_phrase)),
       optional(alias($.__run_asynchronous, $.asynchronous_phrase)),
       optional($.arguments),
+    ),
+  __run_persistence: ($) =>
+    choice(
+      alias(seq(kw("PERSISTENT"), optional($.__run_persistence_set_tail)), $.persistent),
+      alias(seq(kw("SINGLE-RUN"), optional($.__run_persistence_set_tail)), $.single_run),
+      alias(seq(kw("SINGLETON"), optional($.__run_persistence_set_tail)), $.singleton),
     ),
   __run_persistence_set_tail: ($) => seq(kw("SET"), field("handle", $.identifier)),
 
