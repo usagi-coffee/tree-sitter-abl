@@ -20,9 +20,7 @@ module.exports = ({ kw }) => ({
           ),
         ),
       ),
-      seq(kw("LEAVE"), optional(field("leave_label", $.identifier))),
-      seq(kw("NEXT"), optional(field("next_label", $.identifier))),
-      seq(kw("RETRY"), optional(field("retry_label", $.identifier))),
+      $.__undo_lnr_target,
       seq(
         kw("RETURN"),
         optional(

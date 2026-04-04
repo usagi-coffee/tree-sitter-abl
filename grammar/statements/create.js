@@ -65,15 +65,15 @@ module.exports = ({ kw }) => ({
     seq(
       kw("DATABASE"),
       field("new_database", $._expression),
-      optional(
-        seq(
-          kw("FROM"),
-          field("old_database", $._expression),
-          optional(alias(kw("NEW-INSTANCE"), $.new_instance)),
-        ),
-      ),
+      optional($.__create_database_from),
       optional(alias(kw("REPLACE"), $.replace)),
       optional($.__create_no_error),
+    ),
+  __create_database_from: ($) =>
+    seq(
+      kw("FROM"),
+      field("old_database", $._expression),
+      optional(alias(kw("NEW-INSTANCE"), $.new_instance)),
     ),
   __create_automation_object: ($) =>
     seq(
