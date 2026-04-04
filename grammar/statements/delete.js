@@ -4,16 +4,7 @@ module.exports = ({ kw }) => ({
   __delete_body: ($) =>
     seq(
       field("record", $._identifier_or_qualified_name),
-      optional(
-        seq(
-          kw("VALIDATE"),
-          "(",
-          field("condition", $._expression),
-          ",",
-          field("message", $._expression),
-          ")",
-        ),
-      ),
+      optional($.__format_validate),
     ),
 
   delete_object_statement: ($) =>

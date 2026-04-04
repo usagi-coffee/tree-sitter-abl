@@ -12,16 +12,7 @@ module.exports = ({ kw }) => ({
     seq(
       repeat1(alias($.__set_field, $.field)),
       optional(alias($.__go_on_phrase, $.go_on_phrase)),
-      optional(
-        seq(
-          kw("VALIDATE"),
-          "(",
-          field("condition", $._expression),
-          ",",
-          field("message", $._expression),
-          ")",
-        ),
-      ),
+      optional($.__format_validate),
       optional(seq(kw("HELP"), field("help", $.string_literal))),
       optional($.frame_phrase),
       optional($.editing_phrase),
