@@ -47,7 +47,7 @@ module.exports = ({ kw }) => ({
   __set_record_body: ($) =>
     seq(
       field("record", $.__set_record),
-      optional(seq(kw("EXCEPT"), repeat1(field("except", $.identifier)))),
+      optional($.__except_fields),
       optional($.frame_phrase),
     ),
 
@@ -62,4 +62,5 @@ module.exports = ({ kw }) => ({
       prec.right(1, seq(kw("SPACE"), "(", field("space", $._expression), ")")),
       prec(-1, seq(kw("SPACE"))),
     ),
+  __except_fields: ($) => seq(kw("EXCEPT"), repeat1(field("except", $.identifier))),
 });

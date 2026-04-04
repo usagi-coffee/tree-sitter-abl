@@ -6,7 +6,7 @@ module.exports = ({ kw }) => ({
   __update_record_body: ($) =>
     seq(
       field("record", $.__update_record),
-      optional(seq(kw("EXCEPT"), repeat1(field("except", $.identifier)))),
+      optional($.__except_fields),
       optional($.frame_phrase),
     ),
 

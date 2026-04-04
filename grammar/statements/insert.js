@@ -3,7 +3,7 @@ module.exports = ({ kw }) => ({
   __insert_body: ($) =>
     seq(
       field("record", $._identifier_or_qualified_name),
-      optional(seq(kw("EXCEPT"), repeat1(field("except", $.identifier)))),
+      optional($.__except_fields),
       optional(seq(kw("USING"), field("using", $._expression))),
       optional($.frame_phrase),
     ),
