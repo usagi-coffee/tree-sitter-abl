@@ -7,23 +7,5 @@ module.exports = ({ kw }) => ({
       optional(seq(",", $.__on_quit_action)),
     ),
 
-  __on_quit_action: ($) =>
-    choice(
-      seq(kw("LEAVE"), optional(field("leave_label", $.identifier))),
-      seq(kw("NEXT"), optional(field("next_label", $.identifier))),
-      seq(kw("RETRY"), optional(field("retry_label", $.identifier))),
-      $.__on_quit_return,
-    ),
-
-  __on_quit_return: ($) =>
-    seq(
-      kw("RETURN"),
-      optional(
-        choice(
-          seq(kw("ERROR"), optional(field("error_value", $._expression))),
-          kw("NO-APPLY"),
-          field("return_value", $._expression),
-        ),
-      ),
-    ),
+  __on_quit_action: ($) => choice($.__undo_lnr_target, $.__on_phrase_return),
 });

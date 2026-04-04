@@ -8,7 +8,7 @@ module.exports = ({ kw }) => ({
       optional(seq(",", $.__on_endkey_action)),
     ),
 
-  __on_endkey_action: ($) => choice($.__undo_lnr_target, $.__on_endkey_return),
+  __on_endkey_action: ($) => choice($.__undo_lnr_target, $.__on_phrase_return),
 
   __undo_lnr_target: ($) =>
     choice(
@@ -17,7 +17,7 @@ module.exports = ({ kw }) => ({
       seq(kw("RETRY"), optional(field("retry_label", $.identifier))),
     ),
 
-  __on_endkey_return: ($) =>
+  __on_phrase_return: ($) =>
     seq(
       kw("RETURN"),
       optional(
