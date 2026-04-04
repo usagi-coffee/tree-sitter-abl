@@ -56,7 +56,9 @@ Strongly prefer using these commands as they have helpful side-effects like retu
 - Always prefer solving conflicts using `precedences` over using `prec(`.
 - We intentionally duplicate modifiers and tunings at the statement level so that most of the statement-specific context lives in a single file. To support this, each statement defines its own `__<statement>_rules`, which are later aliased to `$.rule` where needed. This intentional duplication favors locality, readability, and conflict isolation over DRY abstractions. Keep in mind we don't do these for trivial cases, see`Clean tree conventions`.
 - All statement-related modifiers, phrases, tunings that are not already part of core should be locally defined as `__<statement>_<rule>` rule and aliased to `$.<rule>`.
-- When resolving conflicts treat adding a `conflicts` entry as a last resort that requires prior confirmation with a clear explanation of why associativity/precedence are not enough.
+- Prefer resolving ambiguous parses with `grammar/precedences/*.js` before considering `conflicts`.
+- Do not treat precedence tuning as equivalent to adding a `conflicts` entry. Precedence changes are normal grammar work.
+- Adding a `conflicts` entry is a last resort and requires prior confirmation with a clear explanation of why adding to `precedences`, associativity, or local rule refactoring are insufficient.
 - Prefer `kw` for keywords in place of `token(/keyword/i)`, when the syntax supports partial keyword like `DEFINE` can be `DEF`, `DEFI`, `DEFIN` and `DEFINE` please use `kw("DEFINE", { offset: 3 })`, for scenario where it can be longer do alias e.g`kw("FIELDS", { alias: 'FIELD', offset: 5)`.
 - Treat `(ERROR)` and `(MISSING)` nodes in the test output aserrors that need to be fixed.
 - Use compact rule formatting: keep one-line rules adjacent with no blank lines, avoid blank lines between consecutive one-line rules.
