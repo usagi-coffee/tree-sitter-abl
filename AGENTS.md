@@ -20,7 +20,7 @@
 
 ## Workflow
 
-- Run tests:
+- Run tests (also prints global state counts):
   - `bun run test`
 - Run format:
   - `bun run format`
@@ -35,8 +35,6 @@
 - Build native and wasm artifacts:
   - `bun run build` -> abl.so
   - `bun run build:wasm` -> tree-sitter-abl.wasm
-- Prints global state count:
-  - `bun run check`
 - Retrieve syntax information from the language reference
   - `bun run reference <phrase from contents>`
   - Example: `bun run reference 'DEFINE VARIABLE statement'`: Returns complete reference for the define variable statement.

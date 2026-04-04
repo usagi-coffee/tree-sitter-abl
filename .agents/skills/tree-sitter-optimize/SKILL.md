@@ -29,6 +29,15 @@ Treat them as common patterns and examples, not an exhaustive menu.
 9. Always note every state change between runs.
    Record the previous accepted state, the new observed state, and what change caused the transition so the next run starts from an explicit checkpoint.
 
+## Before Edit Mental Checklist
+
+Before applying any optimization, verify:
+
+- **Field preservation**: All `field("name", ...)` calls remain unchanged—same names, same positions, same wrapped content.
+- **Node visibility**: No nodes are hidden (`_prefix`) or exposed (removing `_prefix`) that weren't already.
+- **Rule ordering semantics**: The order of `choice()` branches, `seq()` elements, and `optional()` vs `repeat()` placements preserves the original precedence and associativity.
+- **Tree shape**: The resulting parse tree structure remains identical—no new wrapper nodes, no removed intermediate nodes, no reshuffled children.
+
 ## General Rules
 
 - Optimize where the duplication actually lives.
@@ -82,7 +91,18 @@ perl -ne 'if (/^#define (STATE_COUNT|LARGE_STATE_COUNT) \d+/) { print } while (/
 
 Treat the extracted output as the baseline and comparison source for optimization passes.
 
-## Technique Catalog
+
+## Validation
+
+- Re-run the parser generation command after every optimization step.
+- Recompute or re-read `ACTION_COUNT`, `STATE_COUNT`, and `LARGE_STATE_COUNT` after every kept change.
+  Prefer a project command that already prints them.
+  Otherwise derive them from `src/parser.c`.
+- Re-run the grammar test suite after the kept changes.
+- Verify the kept change does not alter the output tree shape or node visibility for existing parses.
+- If one metric improves but others regress badly, compare against the previous baseline before keeping the change.
+
+## Optimization technique catalog
 
 The following techniques are common starting points, not the full set of allowed optimizations.
 
@@ -393,13 +413,3 @@ _sql_statement: ($) =>
 This may look cleaner, but it can still increase parser cost. Prefer testing local sharing inside the SQL rules first.
 
 Prefer local sharing inside the hotspot file before changing top-level dispatch.
-
-## Validation
-
-- Re-run the parser generation command after every optimization step.
-- Recompute or re-read `ACTION_COUNT`, `STATE_COUNT`, and `LARGE_STATE_COUNT` after every kept change.
-  Prefer a project command that already prints them.
-  Otherwise derive them from `src/parser.c`.
-- Re-run the grammar test suite after the kept changes.
-- Verify the kept change does not alter the output tree shape or node visibility for existing parses.
-- If one metric improves but others regress badly, compare against the previous baseline before keeping the change.
