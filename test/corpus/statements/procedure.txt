@@ -613,6 +613,7 @@ END PROCEDURE.
   (message_statement
     (string_literal)
     (view_as_phrase
+      (alert_type)
       title: (string_literal)))
   (run_statement
     procedure: (identifier)

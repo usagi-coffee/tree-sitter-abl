@@ -66,25 +66,32 @@ MESSAGE "Done" VIEW-AS ALERT-BOX INFO BUTTONS OK.
   (message_statement
     (string_literal)
     (skip)
-    (view_as_phrase))
+    (view_as_phrase
+      (alert_type)))
   (message_statement
     (string_literal)
-    (view_as_phrase))
+    (view_as_phrase
+      (alert_type)))
   (message_statement
     (string_literal)
-    (view_as_phrase))
+    (view_as_phrase
+      (alert_type)))
   (message_statement
     (string_literal)
-    (view_as_phrase))
+    (view_as_phrase
+      (alert_type)))
   (message_statement
     (string_literal)
-    (view_as_phrase))
+    (view_as_phrase
+      (alert_type)))
   (message_statement
     (string_literal)
-    (view_as_phrase))
+    (view_as_phrase
+      (alert_type)))
   (message_statement
     (string_literal)
-    (view_as_phrase)))
+    (view_as_phrase
+      (alert_type))))
 
 ================================================================================
 MESSAGE with BUTTONS
@@ -132,6 +139,7 @@ MESSAGE "Msg" VIEW-AS ALERT-BOX INFORMATION TITLE "Info".
   (message_statement
     (string_literal)
     (view_as_phrase
+      (alert_type)
       title: (string_literal))))
 
 ================================================================================
@@ -223,6 +231,7 @@ MESSAGE COLOR NORMAL "Export done: " + fileName SKIP(2) VIEW-AS ALERT-BOX INFORM
     (skip
       count: (number_literal))
     (view_as_phrase
+      (alert_type)
       title: (string_literal))
     (set_update_phrase
       field: (identifier)
@@ -415,6 +424,7 @@ END.
             count: (number_literal))
           (string_literal)
           (view_as_phrase
+            (alert_type)
             title: (string_literal))
           (set_update_phrase
             field: (identifier)
@@ -444,7 +454,8 @@ END.
               (body
                 (message_statement
                   (string_literal)
-                  (view_as_phrase))
+                  (view_as_phrase
+                    (alert_type)))
                 (return_statement
                   (no_apply)))))
           (case_otherwise_phrase

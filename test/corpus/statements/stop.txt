@@ -102,7 +102,8 @@ END.
       (message_statement
         (string_literal)
         (string_literal)
-        (view_as_phrase)
+        (view_as_phrase
+          (alert_type))
         (set_update_phrase
           field: (identifier)))
       (if_statement

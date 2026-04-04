@@ -745,6 +745,7 @@ DEFINE INPUT PARAMETER pExtent0 AS INTEGER EXTENT 0.
   (message_statement
     (string_literal)
     (view_as_phrase
+      (alert_type)
       title: (string_literal)))
   (run_statement
     procedure: (identifier)
