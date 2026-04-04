@@ -11,11 +11,7 @@ module.exports = ({ kw }) => ({
   __dataset_body: ($) =>
     seq(
       field("name", $.identifier),
-      optional(seq(kw("NAMESPACE-URI"), field("namespace_uri", $._expression))),
-      optional(seq(kw("NAMESPACE-PREFIX"), field("namespace_prefix", $._expression))),
-      optional(seq(kw("XML-NODE-NAME"), field("xml_node_name", $._expression))),
-      optional(seq(kw("SERIALIZE-NAME"), field("serialize_name", $._expression))),
-      optional(seq(kw("XML-NODE-TYPE"), field("xml_node_type", $._expression))),
+      repeat($.__dataset_serializable_option),
       optional(alias(kw("SERIALIZE-HIDDEN"), $.serialize_hidden)),
       optional(alias(kw("REFERENCE-ONLY"), $.reference_only)),
       optional(
@@ -27,6 +23,15 @@ module.exports = ({ kw }) => ({
       ),
       repeat(alias($.__dataset_data_relation, $.data_relation)),
       repeat(alias($.__dataset_parent_id_relation, $.parent_id_relation)),
+    ),
+
+  __dataset_serializable_option: ($) =>
+    choice(
+      seq(kw("NAMESPACE-URI"), field("namespace_uri", $._expression)),
+      seq(kw("NAMESPACE-PREFIX"), field("namespace_prefix", $._expression)),
+      seq(kw("XML-NODE-NAME"), field("xml_node_name", $._expression)),
+      seq(kw("SERIALIZE-NAME"), field("serialize_name", $._expression)),
+      seq(kw("XML-NODE-TYPE"), field("xml_node_type", $._expression)),
     ),
 
   __dataset_data_relation: ($) =>

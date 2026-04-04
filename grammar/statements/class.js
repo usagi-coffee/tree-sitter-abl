@@ -53,21 +53,21 @@ module.exports = ({ kw }) => ({
   method_definition: ($) =>
     choice(
       seq(
-        kw("METHOD"),
-        repeat($.__method_modifier_no_abstract),
+        $.__method_definition_prefix,
         $.__method_definition_signature,
         choice(alias($._colon, ":"), $._terminator_dot),
         alias($.__method_body, $.body),
       ),
       seq(
-        kw("METHOD"),
-        repeat($.__method_modifier_no_abstract),
+        $.__method_definition_prefix,
         kw("ABSTRACT"),
         repeat($.__method_modifier_no_abstract),
         $.__method_definition_signature,
         $._terminator_dot,
       ),
     ),
+  __method_definition_prefix: ($) =>
+    seq(kw("METHOD"), repeat($.__method_modifier_no_abstract)),
   __method_definition_signature: ($) =>
     seq(
       $.__method_return_type,
