@@ -16,9 +16,7 @@ module.exports = ({ kw }) => ({
       seq(
         kw("LOAD-RESULT-INTO"),
         field("result_handle", $._identifier_or_qualified_name),
-        optional(
-          seq(field("status_var", $._identifier_or_qualified_name), "=", kw("PROC-STATUS")),
-        ),
+        optional(seq(field("status_var", $._identifier_or_qualified_name), "=", kw("PROC-STATUS"))),
       ),
       seq(field("handle_var", $._identifier_or_qualified_name), "=", kw("PROC-HANDLE")),
     ),

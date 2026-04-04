@@ -54,11 +54,9 @@ module.exports = ({ kw }) => ({
       $.__create_handle_in_widget_pool,
     ),
   __create_widget_pool: ($) =>
-    seq(
-      kw("WIDGET-POOL"),
-      optional(seq(field("pool", $.identifier), optional(alias(kw("PERSISTENT"), $.persistent)))),
-      optional($.__create_no_error),
-    ),
+    seq(kw("WIDGET-POOL"), optional($.__create_widget_pool_name), optional($.__create_no_error)),
+  __create_widget_pool_name: ($) =>
+    seq(field("pool", $.identifier), optional(alias(kw("PERSISTENT"), $.persistent))),
   __create_server: ($) =>
     seq(kw("SERVER"), field("handle", $.identifier), optional($.assign_phrase)),
   __create_database: ($) =>
