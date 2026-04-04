@@ -42,12 +42,12 @@ module.exports = ({ kw }) => ({
     seq(
       kw("ASYNCHRONOUS"),
       optional(seq(kw("SET"), field("handle", $.identifier))),
-      optional(
-        choice(
-          seq(kw("EVENT-PROCEDURE"), $.__run_event_procedure_tail),
-          seq(kw("EVENT-HANDLER"), $.__run_event_handler_tail),
-        ),
-      ),
+      optional($.__run_event_choice),
+    ),
+  __run_event_choice: ($) =>
+    choice(
+      seq(kw("EVENT-PROCEDURE"), $.__run_event_procedure_tail),
+      seq(kw("EVENT-HANDLER"), $.__run_event_handler_tail),
     ),
   __run_event_procedure_tail: ($) =>
     seq(
