@@ -72,14 +72,10 @@ module.exports = ({ kw }) => ({
       alias(kw("NO-CONVERT"), $.no_convert),
       seq(
         kw("CONVERT"),
-        choice(
-          seq(
-            optional(seq(kw("TARGET"), field("target", $.string_literal))),
-            optional(seq(kw("SOURCE"), field("source", $.string_literal))),
-          ),
-          seq(
-            optional(seq(kw("SOURCE"), field("source", $.string_literal))),
-            optional(seq(kw("TARGET"), field("target", $.string_literal))),
+        repeat(
+          choice(
+            seq(kw("TARGET"), field("target", $.string_literal)),
+            seq(kw("SOURCE"), field("source", $.string_literal)),
           ),
         ),
       ),
