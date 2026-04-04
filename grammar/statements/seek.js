@@ -8,20 +8,14 @@ module.exports = ({ kw }) => ({
       choice(kw("END"), $._expression),
     ),
 
-  // SEEK expression: SEEK(INPUT) or SEEK(OUTPUT) or SEEK(name) or SEEK(STREAM-HANDLE handle) - returns current stream position
   seek_expression: ($) =>
-    seq(
-      field("function", alias(kw("SEEK"), $.identifier)),
-      "(",
-      field(
-        "value",
-        choice(
-          kw("INPUT"),
-          kw("OUTPUT"),
-          field("name", $.identifier),
-          seq(kw("STREAM-HANDLE"), field("handle", $._identifier_or_qualified_name)),
-        ),
-      ),
-      ")",
+    seq(field("function", alias(kw("SEEK"), $.identifier)), "(", $.__seek_value, ")"),
+
+  __seek_value: ($) =>
+    choice(
+      kw("INPUT"),
+      kw("OUTPUT"),
+      field("name", $.identifier),
+      seq(kw("STREAM-HANDLE"), field("handle", $._identifier_or_qualified_name)),
     ),
 });
