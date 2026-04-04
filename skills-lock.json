@@ -4,7 +4,7 @@
     "tree-sitter-optimize": {
       "source": "usagi-coffee/ai",
       "sourceType": "github",
-      "computedHash": "019b91db8650ee6346813ac1a3d04a0cc38e47ca648be9dd372aff76a3fa5850"
+      "computedHash": "8ff52b47cca598ae4410be58b31750792456edf9176888b58ba62924e2e50625"
     }
   }
 }

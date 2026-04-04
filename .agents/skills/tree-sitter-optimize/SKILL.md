@@ -23,10 +23,12 @@ Treat them as common patterns and examples, not an exhaustive menu.
 5. Re-run the same generation command after each change, then re-read the parser metrics.
    Prefer a project command that already prints them.
    Otherwise derive them from `src/parser.c`.
-6. Compare the result to the last accepted baseline and revert neutral-to-worse changes quickly.
-7. On slow grammars, remember the last accepted checkpoint counts and avoid re-measuring immediately after a pure revert.
-8. Run the normal test workflow after the kept changes.
-9. Always note every state change between runs.
+6. Run the relevant grammar validation or test workflow immediately after that single change.
+   Do not queue multiple edits before measurement or validation.
+7. Compare the result to the last accepted baseline and revert neutral-to-worse changes quickly.
+8. On slow grammars, remember the last accepted checkpoint counts and avoid re-measuring immediately after a pure revert.
+9. Run the normal test workflow after the kept changes.
+10. Always note every state change between runs.
    Record the previous accepted state, the new observed state, and what change caused the transition so the next run starts from an explicit checkpoint.
 
 ## Before Edit Mental Checklist
@@ -37,6 +39,7 @@ Before applying any optimization, verify:
 - **Node visibility**: No nodes are hidden (`_prefix`) or exposed (removing `_prefix`) that weren't already.
 - **Rule ordering semantics**: The order of `choice()` branches, `seq()` elements, and `optional()` vs `repeat()` placements preserves the original precedence and associativity.
 - **Tree shape**: The resulting parse tree structure remains identical—no new wrapper nodes, no removed intermediate nodes, no reshuffled children.
+- **Single-change scope**: The planned edit is one measurable change only, so any metric delta or test failure can be attributed to that edit alone.
 
 ## General Rules
 
@@ -48,11 +51,13 @@ Before applying any optimization, verify:
 - Do not change the output tree shape, hide or expose nodes differently, rename fields, or otherwise alter parse results just to improve counts.
 - Do not apply optimizations that break rule ordering semantics, such as rewriting `seq(optional(...), optional(...), optional(...))` into `repeat(choice(...))`, unless the user has explicitly agreed to allow that ordering change.
 - Use one small edit per measurement cycle.
+- Do not batch grammar edits.
+  The required loop is edit -> generate/measure -> validate/test -> accept or revert -> next edit.
 - Some extractions reduce counts and some increase them. Try different cuts, regenerate, and keep only the proven win.
 - Use the last accepted checkpoint as the comparison source.
 - If a change is reverted cleanly, assume the metrics are back at the last accepted checkpoint unless there is a reason to distrust the revert.
 - Always leave a run-to-run state log.
-  Note each transition between baseline, accepted change, revert, and final kept state.
+  Note each transition between baseline, accepted change, revert, and final kept state, and tie each logged delta to exactly one edit.
 - Use any other behavior-preserving optimization that measurably improves parser cost, even if it is not listed in the technique catalog below.
 
 Example measurement loop:
