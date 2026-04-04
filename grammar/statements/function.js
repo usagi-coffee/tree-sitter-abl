@@ -72,12 +72,12 @@ module.exports = ({ kw }) => ({
     ),
 
   __function_variable_type_phrase: ($) =>
-    seq(
-      choice(
-        seq(kw("AS"), optional(kw("CLASS")), field("type", $._type_or_string)),
-        seq(kw("LIKE"), field("like", $._identifier_or_qualified_name)),
-      ),
-      optional($.__function_extent_phrase),
+    seq($.__variable_type, optional($.__function_extent_phrase)),
+
+  __variable_type: ($) =>
+    choice(
+      seq(kw("AS"), optional(kw("CLASS")), field("type", $._type_or_string)),
+      seq(kw("LIKE"), field("like", $._identifier_or_qualified_name)),
     ),
 
   __function_extent_phrase: ($) =>

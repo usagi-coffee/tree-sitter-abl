@@ -79,15 +79,8 @@ module.exports = ({ kw }) => ({
 
   __parameter_variable_type_phrase: ($) =>
     seq(
-      choice(
-        seq(
-          kw("AS"),
-          optional(kw("CLASS")),
-          field("type", $._type_or_string),
-          optional(seq(kw("TO"), field("target", $.identifier))),
-        ),
-        seq(kw("LIKE"), field("like", $._identifier_or_qualified_name)),
-      ),
+      $.__variable_type,
+      optional(seq(kw("TO"), field("target", $.identifier))),
       optional(alias($.__parameter_extent_phrase, $.extent_phrase)),
     ),
 
