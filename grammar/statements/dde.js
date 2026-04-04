@@ -16,11 +16,13 @@ module.exports = ({ kw }) => ({
       field("action", choice(alias(kw("ADVISE"), $.identifier), alias(kw("SEND"), $.identifier))),
       field("ddeid", $._expression),
       choice(
-        field("mode", alias(choice(kw("START"), kw("STOP")), $.identifier)),
+        field("mode", alias($.__dde_mode, $.identifier)),
         seq(kw("SOURCE"), field("source", $._expression)),
       ),
       $.__dde_item_time_body,
     ),
+
+  __dde_mode: ($) => choice(kw("START"), kw("STOP")),
   __dde_execute_or_terminate_branch: ($) =>
     seq(
       field(

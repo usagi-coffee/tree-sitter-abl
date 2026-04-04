@@ -16,6 +16,7 @@ DDE TERMINATE 1 NO-ERROR.
   (dde_statement
     action: (identifier)
     ddeid: (number_literal)
+    mode: (identifier)
     item: (string_literal)
     time: (number_literal)
     (no_error))
