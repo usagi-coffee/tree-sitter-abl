@@ -274,59 +274,148 @@ function findSharedGroups(branches, kind, minSharedLength) {
   return results;
 }
 
-function findKeywordFamilies(branches) {
-  const groups = new Map();
+function summarizeNode(node) {
+  const summary = {
+    fields: 0,
+    optionals: 0,
+    repeats: 0,
+    choices: 0,
+    sequences: 0,
+    keywords: 0,
+    symbols: 0,
+  };
 
-  for (const branch of branches) {
-    const signature = branch.items
-      .map((item) => (item.kind === "keyword" ? "KW:*" : item.key))
-      .join("|");
+  walk(node, (current) => {
+    if (!current || typeof current !== "object") {
+      return;
+    }
 
-    const group = groups.get(signature) ?? [];
-    group.push(branch);
-    groups.set(signature, group);
+    if (current.type === "FIELD") {
+      summary.fields += 1;
+    }
+
+    const unwrapped = unwrap(current);
+    if (!unwrapped) {
+      return;
+    }
+
+    if (unwrapped.type === "OPTIONAL") {
+      summary.optionals += 1;
+    }
+
+    if (unwrapped.type === "REPEAT" || unwrapped.type === "REPEAT1") {
+      summary.repeats += 1;
+    }
+
+    if (unwrapped.type === "CHOICE") {
+      summary.choices += 1;
+    }
+
+    if (unwrapped.type === "SEQ") {
+      summary.sequences += 1;
+    }
+
+    if (keywordValue(current)) {
+      summary.keywords += 1;
+    }
+
+    if (unwrapped.type === "SYMBOL") {
+      summary.symbols += 1;
+    }
+  });
+
+  return summary;
+}
+
+function inlineHelperScore(node, summary) {
+  const unwrapped = unwrap(node);
+  if (!unwrapped || !["CHOICE", "SEQ"].includes(unwrapped.type)) {
+    return 0;
   }
 
-  return [...groups.values()]
-    .filter((group) => group.length > 1)
-    .map((group) => {
-      const varyingPositions = [];
+  const memberCount = Array.isArray(unwrapped.members) ? unwrapped.members.length : 0;
+  const branchWeight = unwrapped.type === "CHOICE" ? memberCount * 2 : memberCount;
 
-      for (let index = 0; index < group[0].items.length; index += 1) {
-        const keys = new Set(group.map((branch) => branch.items[index].key));
-        if (keys.size === 1) {
-          continue;
-        }
+  return (
+    branchWeight +
+    summary.fields * 2 +
+    summary.optionals * 2 +
+    summary.repeats * 2 +
+    summary.choices * 2 +
+    summary.sequences +
+    Math.min(summary.keywords, 3)
+  );
+}
 
-        if (!group.every((branch) => branch.items[index].kind === "keyword")) {
-          return null;
-        }
+function nodeShape(node) {
+  const unwrapped = unwrap(node);
+  if (!unwrapped) {
+    return "unknown";
+  }
 
-        varyingPositions.push({
-          index,
-          keywords: [...new Set(group.map((branch) => branch.items[index].display))].sort(),
-        });
+  if (unwrapped.type === "CHOICE" || unwrapped.type === "SEQ") {
+    return `${unwrapped.type.toLowerCase()}(${unwrapped.members.length})`;
+  }
+
+  return unwrapped.type.toLowerCase();
+}
+
+function findInlineHelperReports(grammar) {
+  const reports = [];
+
+  for (const [ruleName, rule] of Object.entries(grammar.rules)) {
+    walk(rule, (node, trail) => {
+      if (!trail) {
+        return;
       }
 
-      if (varyingPositions.length === 0) {
-        return null;
+      const unwrapped = unwrap(node);
+      if (!unwrapped || !["CHOICE", "SEQ"].includes(unwrapped.type)) {
+        return;
       }
 
-      return {
-        branches: group,
-        varyingPositions,
-        normalizedShape: group[0].items.map((item) =>
-          item.kind === "keyword" ? "KW:*" : item.display,
-        ),
-      };
-    })
-    .filter(Boolean);
+      if (!trail.includes("members[")) {
+        return;
+      }
+
+      if (unwrapped.type === "CHOICE" && unwrapped.members.length < 2) {
+        return;
+      }
+
+      if (unwrapped.type === "SEQ" && unwrapped.members.length < 4) {
+        return;
+      }
+
+      const summary = summarizeNode(node);
+      const score = inlineHelperScore(node, summary);
+
+      if (score < 10) {
+        return;
+      }
+
+      if (summary.fields === 0 && summary.optionals === 0 && summary.choices <= 1) {
+        return;
+      }
+
+      reports.push({
+        ruleName,
+        location: `${ruleName} @ ${trail}`,
+        nodeType: unwrapped.type.toLowerCase(),
+        shape: nodeShape(node),
+        score,
+        summary,
+      });
+    });
+  }
+
+  return reports.sort((a, b) => {
+    return b.score - a.score || a.location.localeCompare(b.location);
+  });
 }
 
 function collectChoiceReports(grammar, minSharedLength) {
   const sharedPrefixReports = [];
   const sharedSuffixReports = [];
-  const keywordFamilyReports = [];
 
   for (const [ruleName, rule] of Object.entries(grammar.rules)) {
     let choiceIndex = 0;
@@ -360,21 +449,12 @@ function collectChoiceReports(grammar, minSharedLength) {
           ...group,
         });
       }
-
-      for (const family of findKeywordFamilies(branches)) {
-        keywordFamilyReports.push({
-          ruleName,
-          location,
-          ...family,
-        });
-      }
     });
   }
 
   return {
     sharedPrefixReports: dedupeContainedGroups(sharedPrefixReports, "prefix"),
     sharedSuffixReports: dedupeContainedGroups(sharedSuffixReports, "suffix"),
-    keywordFamilyReports: dedupeKeywordFamilies(keywordFamilyReports),
   };
 }
 
@@ -433,30 +513,14 @@ function dedupeContainedGroups(rows, kind) {
     });
 }
 
-function dedupeKeywordFamilies(rows) {
-  const seen = new Set();
+function shuffle(rows) {
+  const shuffled = [...rows];
+  for (let index = shuffled.length - 1; index > 0; index -= 1) {
+    const swapIndex = Math.floor(Math.random() * (index + 1));
+    [shuffled[index], shuffled[swapIndex]] = [shuffled[swapIndex], shuffled[index]];
+  }
 
-  return rows
-    .filter((row) => {
-      const signature = `${row.location}:${row.branches
-        .map((branch) => branch.id)
-        .sort((a, b) => a - b)
-        .join(",")}:${row.varyingPositions.map((item) => item.index).join(",")}`;
-
-      if (seen.has(signature)) {
-        return false;
-      }
-
-      seen.add(signature);
-      return true;
-    })
-    .sort((a, b) => {
-      return (
-        b.branches.length - a.branches.length ||
-        b.varyingPositions.length - a.varyingPositions.length ||
-        a.location.localeCompare(b.location)
-      );
-    });
+  return shuffled;
 }
 
 function renderSection(title, rows, renderRow) {
@@ -474,10 +538,11 @@ function renderSection(title, rows, renderRow) {
 function main() {
   const args = parseArgs(process.argv.slice(2));
   const grammar = readGrammar(args.path);
-  const { sharedPrefixReports, sharedSuffixReports, keywordFamilyReports } = collectChoiceReports(
+  const { sharedPrefixReports, sharedSuffixReports } = collectChoiceReports(
     grammar,
     args.minSharedLength,
   );
+  const inlineHelperReports = findInlineHelperReports(grammar);
 
   console.log(`# Grammar Family Audit`);
   console.log(`file: ${path.relative(process.cwd(), args.path)}`);
@@ -487,25 +552,29 @@ function main() {
     `note: this audit only reports direct choice-branch reuse opportunities from grammar.json.`,
   );
 
-  renderSection("Same-Rule Shared Suffixes", sharedSuffixReports.slice(0, args.limit), (row) => {
-    const branchBodies = row.branches.map((branch) => formatItems(branch.items)).join(" || ");
-    return `${row.location} | ${row.branches.length} branches | shared suffix ${formatItems(row.sharedItems)} | suggest shared tail extraction | branches: ${branchBodies}`;
-  });
-
-  renderSection("Same-Rule Shared Prefixes", sharedPrefixReports.slice(0, args.limit), (row) => {
-    const branchBodies = row.branches.map((branch) => formatItems(branch.items)).join(" || ");
-    return `${row.location} | ${row.branches.length} branches | shared prefix ${formatItems(row.sharedItems)} | suggest prefix split | branches: ${branchBodies}`;
-  });
+  renderSection(
+    "Same-Rule Shared Suffixes",
+    shuffle(sharedSuffixReports).slice(0, args.limit),
+    (row) => {
+      const branchBodies = row.branches.map((branch) => formatItems(branch.items)).join(" || ");
+      return `${row.location} | ${row.branches.length} branches | shared suffix ${formatItems(row.sharedItems)} | suggest shared tail extraction | branches: ${branchBodies}`;
+    },
+  );
 
   renderSection(
-    "Keyword-Only Branch Families",
-    keywordFamilyReports.slice(0, args.limit),
+    "Same-Rule Shared Prefixes",
+    shuffle(sharedPrefixReports).slice(0, args.limit),
     (row) => {
-      const varying = row.varyingPositions
-        .map((item) => `item ${item.index + 1}: ${item.keywords.join("/")}`)
-        .join(", ");
-      const shape = row.normalizedShape.join(" ");
-      return `${row.location} | ${row.branches.length} branches | varies only in keywords (${varying}) | normalized shape ${shape} | suggest local family helper`;
+      const branchBodies = row.branches.map((branch) => formatItems(branch.items)).join(" || ");
+      return `${row.location} | ${row.branches.length} branches | shared prefix ${formatItems(row.sharedItems)} | suggest prefix split | branches: ${branchBodies}`;
+    },
+  );
+
+  renderSection(
+    "Extractable Inline Helpers",
+    shuffle(inlineHelperReports).slice(0, args.limit),
+    (row) => {
+      return `${row.location} | ${row.shape} | score ${row.score} | fields ${row.summary.fields} | optionals ${row.summary.optionals} | repeats ${row.summary.repeats} | nested choices ${row.summary.choices} | suggest extracting a local helper rule`;
     },
   );
 }
