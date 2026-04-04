@@ -25,20 +25,12 @@ module.exports = ({ kw }) => ({
 
   __copy_lob_target: ($) =>
     choice(
-      seq(
-        optional(kw("OBJECT")),
-        field("target", $._expression),
-        optional(
-          seq(
-            kw("OVERLAY"),
-            kw("AT"),
-            field("overlay_at", $._expression),
-            optional(alias(kw("TRIM"), $.trim)),
-          ),
-        ),
-      ),
+      seq(optional(kw("OBJECT")), field("target", $._expression), optional($.__copy_lob_overlay)),
       seq(kw("FILE"), field("target_file", $._expression), optional(alias(kw("APPEND"), $.append))),
     ),
+
+  __copy_lob_overlay: ($) =>
+    seq(kw("OVERLAY"), kw("AT"), field("overlay_at", $._expression), optional(alias(kw("TRIM"), $.trim))),
 
   __copy_lob_convert_phrase: ($) =>
     seq(
