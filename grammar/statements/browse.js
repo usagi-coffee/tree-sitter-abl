@@ -39,7 +39,7 @@ module.exports = ({ kw }) => ({
 
   __browse_column_option: ($) =>
     choice(
-      seq(kw("FORMAT", { offset: 4 }), field("format", $.string_literal)),
+      $.__format_string,
       seq(kw("LABEL"), field("label", $.string_literal)),
       alias(kw("NO-LABELS", { alias: "NO-LABEL", offset: 8 }), $.no_labels),
       seq(kw("WIDTH"), field("width", $.__browse_option_expression)),

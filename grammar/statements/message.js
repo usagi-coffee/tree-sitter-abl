@@ -53,7 +53,7 @@ module.exports = ({ kw }) => ({
           seq(kw("LIKE"), field("like", $._identifier_or_qualified_name)),
         ),
       ),
-      optional(seq(kw("FORMAT", { offset: 4 }), field("format", $.string_literal))),
+      optional($.__format_string),
       optional(alias(kw("AUTO-RETURN"), $.auto_return)),
     ),
 });

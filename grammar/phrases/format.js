@@ -143,4 +143,5 @@ module.exports = ({ kw }) => ({
       kw("BY"),
       field("height", $.number_literal),
     ),
+  __format_string: ($) => seq(kw("FORMAT", { offset: 4 }), field("format", $.string_literal)),
 });

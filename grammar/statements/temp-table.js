@@ -107,7 +107,7 @@ module.exports = ({ kw }) => ({
       $.__temp_table_extent_option,
       seq(kw("FONT"), field("font", $._expression)),
       seq(kw("FGCOLOR"), field("fgcolor", $._expression)),
-      seq(kw("FORMAT", { offset: 4 }), field("format", $.string_literal)),
+      $.__format_string,
       seq(kw("HELP"), field("help", $.string_literal)),
       seq(
         kw("INITIAL"),

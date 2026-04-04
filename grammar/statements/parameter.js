@@ -19,7 +19,7 @@ module.exports = ({ kw }) => ({
       repeat(
         choice(
           alias(seq(optional(kw("NOT")), kw("CASE-SENSITIVE")), $.case_sensitive),
-          seq(kw("FORMAT", { offset: 4 }), field("format", $.string_literal)),
+          $.__format_string,
           seq(kw("COLUMN-LABEL"), field("column_label", $.string_literal)),
           seq(kw("DECIMALS"), field("decimals", $.number_literal)),
           seq(
