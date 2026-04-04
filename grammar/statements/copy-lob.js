@@ -30,7 +30,12 @@ module.exports = ({ kw }) => ({
     ),
 
   __copy_lob_overlay: ($) =>
-    seq(kw("OVERLAY"), kw("AT"), field("overlay_at", $._expression), optional(alias(kw("TRIM"), $.trim))),
+    seq(
+      kw("OVERLAY"),
+      kw("AT"),
+      field("overlay_at", $._expression),
+      optional(alias(kw("TRIM"), $.trim)),
+    ),
 
   __copy_lob_convert_phrase: ($) =>
     seq(
