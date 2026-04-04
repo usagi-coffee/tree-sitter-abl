@@ -11,24 +11,7 @@ module.exports = ({ kw }) => ({
   __set_fields_body: ($) =>
     seq(
       repeat1(alias($.__set_field, $.field)),
-      optional(
-        alias(
-          seq(
-            kw("GO-ON"),
-            "(",
-            choice(
-              $.identifier,
-              $.string_literal,
-              seq(
-                choice($.identifier, $.string_literal),
-                repeat(seq(optional(","), choice($.identifier, $.string_literal))),
-              ),
-            ),
-            ")",
-          ),
-          $.go_on_phrase,
-        ),
-      ),
+      optional(alias($.__go_on_phrase, $.go_on_phrase)),
       optional(
         seq(
           kw("VALIDATE"),

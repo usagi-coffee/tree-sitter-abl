@@ -14,24 +14,7 @@ module.exports = ({ kw }) => ({
     seq(
       optional(alias(kw("UNLESS-HIDDEN"), $.unless_hidden)),
       repeat1(alias($.__update_field, $.field)),
-      optional(
-        alias(
-          seq(
-            kw("GO-ON"),
-            "(",
-            choice(
-              $.identifier,
-              $.string_literal,
-              seq(
-                choice($.identifier, $.string_literal),
-                repeat(seq(optional(","), choice($.identifier, $.string_literal))),
-              ),
-            ),
-            ")",
-          ),
-          $.go_on_phrase,
-        ),
-      ),
+      optional(alias($.__go_on_phrase, $.go_on_phrase)),
       optional($.frame_phrase),
       optional($.editing_phrase),
     ),

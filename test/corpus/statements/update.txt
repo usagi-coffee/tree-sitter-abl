@@ -59,11 +59,9 @@ UPDATE field1 GO-ON(f1 f2).
   (update_statement
     (field
       field: (identifier))
-    (go_on_phrase)
-    (go_on_phrase)
     (go_on_phrase
-      (identifier))
-    (go_on_phrase)))
+      (identifier)
+      (identifier))))
 
 ================================================================================
 UPDATE GO-ON with comma-separated strings
@@ -77,11 +75,9 @@ UPDATE field1 GO-ON("F5","CTRL-D").
   (update_statement
     (field
       field: (identifier))
-    (go_on_phrase)
-    (go_on_phrase)
     (go_on_phrase
-      (string_literal))
-    (go_on_phrase)))
+      (string_literal)
+      (string_literal))))
 
 ================================================================================
 UPDATE with format, text, constants, and editing

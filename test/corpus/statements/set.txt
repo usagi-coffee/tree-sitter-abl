@@ -64,11 +64,9 @@ SET field1 GO-ON(f1 f2).
   (set_statement
     (field
       field: (identifier))
-    (go_on_phrase)
-    (go_on_phrase)
     (go_on_phrase
-      (identifier))
-    (go_on_phrase)))
+      (identifier)
+      (identifier))))
 
 ================================================================================
 SET GO-ON with comma-separated strings
@@ -82,11 +80,9 @@ SET field1 GO-ON("F5","CTRL-D").
   (set_statement
     (field
       field: (identifier))
-    (go_on_phrase)
-    (go_on_phrase)
     (go_on_phrase
-      (string_literal))
-    (go_on_phrase)))
+      (string_literal)
+      (string_literal))))
 
 ================================================================================
 SET with format, text, constants, and editing
@@ -358,11 +354,9 @@ SET Customer EXCEPT Comments WITH FRAME fCust NO-ERROR.
       (skip_phrase
         skip: (number_literal)))
     (field)
-    (go_on_phrase)
-    (go_on_phrase)
     (go_on_phrase
-      (identifier))
-    (go_on_phrase))
+      (identifier)
+      (identifier)))
   (set_statement
     record: (identifier)
     except: (identifier)

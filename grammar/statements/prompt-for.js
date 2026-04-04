@@ -19,7 +19,7 @@ module.exports = ({ kw }) => ({
   __prompt_for_fields_body: ($) =>
     seq(
       repeat1(alias($.__prompt_for_field, $.field)),
-      optional(alias($.__prompt_for_go_on, $.go_on_phrase)),
+      optional(alias($.__go_on_phrase, $.go_on_phrase)),
       optional($.in_window_phrase),
       optional($.frame_phrase),
       optional(alias($.__prompt_for_with_phrase, $.with_phrase)),
@@ -61,19 +61,4 @@ module.exports = ({ kw }) => ({
   __prompt_for_to_phrase: ($) => seq(kw("TO"), field("position", token(/[0-9]+(\.[0-9]+)?/))),
   __prompt_for_view_as_phrase: ($) => seq(kw("VIEW-AS"), field("widget", $.identifier)),
   __prompt_for_with_phrase: ($) => seq(kw("WITH"), alias(kw("NO-VALIDATE"), $.no_validate)),
-
-  __prompt_for_go_on: ($) =>
-    seq(
-      kw("GO-ON"),
-      "(",
-      choice(
-        $.identifier,
-        $.string_literal,
-        seq(
-          choice($.identifier, $.string_literal),
-          repeat(seq(optional(","), choice($.identifier, $.string_literal))),
-        ),
-      ),
-      ")",
-    ),
 });

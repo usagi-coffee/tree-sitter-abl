@@ -21,12 +21,14 @@ const sliderPhrase = require("./slider");
 const stopAfterPhrase = require("./stop-after");
 const widgetPhrase = require("./widget");
 const assignPhrase = require("./assign");
+const goOnPhrase = require("./go-on");
 const triggerPhrase = require("./trigger");
 const inWindowPhrase = require("./in-window");
 const viewAsPhrase = require("./view-as");
 
 module.exports = (ctx) => ({
   ...assignPhrase(ctx),
+  ...goOnPhrase(ctx),
   ...aggregate(ctx),
   ...triggerPhrase(ctx),
   ...inWindowPhrase(ctx),
