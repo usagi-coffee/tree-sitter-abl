@@ -156,7 +156,11 @@ function needsSpace(previous, next) {
   }
 
   if (previous.type === "punct" && next.type === "punct") {
-    return PUNCTUATORS.includes(previous.value + next.value) || previous.value === "/" || next.value === "/";
+    return (
+      PUNCTUATORS.includes(previous.value + next.value) ||
+      previous.value === "/" ||
+      next.value === "/"
+    );
   }
 
   return false;
@@ -183,7 +187,8 @@ function minifyCodeChunk(text) {
 
     if (char === "/" && text[index + 1] === "*") {
       index += 2;
-      while (index + 1 < text.length && !(text[index] === "*" && text[index + 1] === "/")) index += 1;
+      while (index + 1 < text.length && !(text[index] === "*" && text[index + 1] === "/"))
+        index += 1;
       index = Math.min(index + 2, text.length);
       continue;
     }

@@ -66,8 +66,7 @@ module.exports = ({ kw }) => ({
         $._terminator_dot,
       ),
     ),
-  __method_definition_prefix: ($) =>
-    seq(kw("METHOD"), repeat($.__method_modifier_no_abstract)),
+  __method_definition_prefix: ($) => seq(kw("METHOD"), repeat($.__method_modifier_no_abstract)),
   __method_definition_signature: ($) =>
     seq(
       $.__method_return_type,
