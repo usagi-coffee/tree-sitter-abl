@@ -227,6 +227,14 @@ function minifyCodeChunk(text) {
 function minifyC(text) {
   const lines = text.match(/[^\n]*\n?|[^\n]+$/g) ?? [];
   let output = "";
+  let chunk = "";
+
+  function flushChunk({ trailingNewline = false } = {}) {
+    if (!chunk) return;
+    output += minifyCodeChunk(chunk);
+    if (trailingNewline && !output.endsWith("\n")) output += "\n";
+    chunk = "";
+  }
 
   for (const line of lines) {
     const hasNewline = line.endsWith("\n");
@@ -234,14 +242,16 @@ function minifyC(text) {
     const trimmedStart = body.trimStart();
 
     if (trimmedStart.startsWith("#")) {
+      flushChunk({ trailingNewline: true });
       output += body + (hasNewline ? "\n" : "");
       continue;
     }
 
-    const minified = minifyCodeChunk(body);
-    output += minified + (hasNewline ? "\n" : "");
+    chunk += body;
+    if (hasNewline) chunk += "\n";
   }
 
+  flushChunk();
   return output;
 }
 
