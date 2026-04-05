@@ -153,13 +153,7 @@ module.exports = ({ kw }) => ({
       field("field", choice($._identifier_or_qualified_name, $.object_access)),
       optional(seq("[", optional($._array_subscript), "]")),
     ),
-  __browse_title_option: ($) =>
-    choice(
-      seq(kw("BGCOLOR"), field("title_bgcolor", $.__browse_option_expression)),
-      seq(kw("DCOLOR"), field("title_dcolor", $.__browse_option_expression)),
-      seq(kw("FGCOLOR"), field("title_fgcolor", $.__browse_option_expression)),
-      seq(kw("FONT"), field("title_font", $.__browse_option_expression)),
-    ),
+  __browse_title_option: ($) => $.__frame_title_option,
   __browse_modifier: ($) =>
     choice(
       seq(alias(kw("NEW"), $.new_modifier), alias(kw("SHARED"), $.scope_modifier)),
