@@ -149,7 +149,6 @@ const valueAssignmentsStatement = require("./value-assignments");
 const expressionStatement = require("./expression");
 const createWidgetStatement = require("./create-widget");
 const createTempTableStatement = require("./create-temp-table");
-const sqlStatement = require("./sql");
 
 module.exports = (ctx) => ({
   ...aggregateStatement(ctx),
@@ -303,5 +302,4 @@ module.exports = (ctx) => ({
   ...expressionStatement(ctx),
   ...createWidgetStatement(ctx),
   ...createTempTableStatement(ctx),
-  ...sqlStatement(ctx),
 });
