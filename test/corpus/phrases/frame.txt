@@ -40,8 +40,7 @@ FORM a COLON 25 WITH SIZE 79 BY 11 NO-LABEL THREE-D CENTER.
       field: (identifier)
       colon: (number_literal))
     (frame_phrase
-      frame: (identifier))
-    (frame_phrase
+      frame: (identifier)
       row: (number_literal)
       (side_labels)))
   (form_statement

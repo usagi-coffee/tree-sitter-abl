@@ -645,8 +645,7 @@ DEFINE INPUT PARAMETER pExtent0 AS INTEGER EXTENT 0.
     label: (string_literal))
   (do_statement
     (frame_phrase
-      frame: (identifier))
-    (frame_phrase
+      frame: (identifier)
       (side_labels))
     (body
       (enable_statement

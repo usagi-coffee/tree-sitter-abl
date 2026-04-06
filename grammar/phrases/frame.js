@@ -31,8 +31,7 @@ module.exports = ({ kw }) => ({
           alias(kw("EXPORT"), $.export),
           alias(kw("USE-DICT-EXPS"), $.use_dict_exps),
           alias(kw("ACCUM"), $.accum),
-          seq(kw("FRAME"), field("frame", $.__frame_identifier), optional(kw("WITH"))),
-          seq(kw("BROWSE"), field("browse", $.__frame_identifier), optional(kw("WITH"))),
+          $.__frame_with_identifier,
           seq(kw("ROW"), field("row", $.__frame_expression)),
           seq(kw("WIDTH"), field("width", $.__frame_expression)),
           seq(kw("FONT"), field("font", $.number_literal)),
@@ -81,4 +80,14 @@ module.exports = ({ kw }) => ({
     prec.right(1, seq(kw("DOWN"), field("count", $.__frame_down_expression))),
   __frame_down_plain: ($) => prec(-1, seq(kw("DOWN"))),
   __frame_down_expression: ($) => choice($.number_literal, $.parenthesized_expression),
+  __frame_with_identifier: ($) =>
+    prec.right(
+      seq(
+        choice(
+          seq(kw("FRAME"), field("frame", $.__frame_identifier)),
+          seq(kw("BROWSE"), field("browse", $.__frame_identifier)),
+        ),
+        optional(kw("WITH")),
+      ),
+    ),
 });
