@@ -327,17 +327,19 @@ DEFINE FRAME atCol
     name: (identifier)
     value: (string_literal)
     (at_phrase
-      column_of: (qualified_name
-        left: (identifier)
-        right: (identifier)))
+      (column_of
+        (qualified_name
+          left: (identifier)
+          right: (identifier))))
     field: (qualified_name
       left: (identifier)
       right: (identifier))
     value: (string_literal)
     (at_phrase
-      column_of: (qualified_name
-        left: (identifier)
-        right: (identifier)))
+      (column_of
+        (qualified_name
+          left: (identifier)
+          right: (identifier))))
     field: (qualified_name
       left: (identifier)
       right: (identifier))))
@@ -356,9 +358,10 @@ DEFINE FRAME atRow
     name: (identifier)
     value: (string_literal)
     (at_phrase
-      row_of: (qualified_name
-        left: (identifier)
-        right: (identifier)))
+      (row_of
+        (qualified_name
+          left: (identifier)
+          right: (identifier))))
     field: (qualified_name
       left: (identifier)
       right: (identifier))))

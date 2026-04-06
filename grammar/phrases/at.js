@@ -16,13 +16,14 @@ module.exports = ({ kw }) => ({
     repeat1(
       choice(
         seq(kw("COLUMN"), field("column", $._expression)),
-        seq(kw("COLUMN"), kw("OF"), field("column_of", $._expression)),
+        seq(kw("COLUMN"), alias($.__at_of_suffix, $.column_of)),
         seq(kw("COLUMN-OF"), field("column_of", $._expression)),
         seq(kw("ROW"), field("row", $._expression)),
-        seq(kw("ROW"), kw("OF"), field("row_of", $._expression)),
+        seq(kw("ROW"), alias($.__at_of_suffix, $.row_of)),
         seq(kw("ROW-OF"), field("row_of", $._expression)),
       ),
     ),
+  __at_of_suffix: ($) => prec.right(seq(kw("OF"), $._expression)),
 
   __at_x_y: ($) =>
     repeat1(

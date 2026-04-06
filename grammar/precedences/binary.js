@@ -36,6 +36,7 @@ module.exports = ($) => [
     $.__system_dialog_filters_pairs,
     $.__system_dialog_filter_pair,
     $.__at_column_row,
+    $.__at_of_suffix,
     $.__at_x_y,
   ],
 ];
