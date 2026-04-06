@@ -1,28 +1,14 @@
-const widgetAccess = require("./widget");
-
-const availableExpression = require("./available");
-const canFindExpression = require("./can-find");
-const conditionalExpression = require("./conditional");
-const datasetExpression = require("./dataset");
-const enteredExpression = require("./entered");
-const lockedExpression = require("./locked");
-const newExpression = require("./new");
-const currentChangedExpression = require("./current-changed");
-const ambiguousExpression = require("./ambiguous");
-const inputExpression = require("./input");
-const accumExpression = require("./accum");
-
 module.exports = (ctx) => ({
-  ...conditionalExpression(ctx),
-  ...availableExpression(ctx),
-  ...canFindExpression(ctx),
-  ...lockedExpression(ctx),
-  ...newExpression(ctx),
-  ...enteredExpression(ctx),
-  ...datasetExpression(ctx),
-  ...currentChangedExpression(ctx),
-  ...ambiguousExpression(ctx),
-  ...accumExpression(ctx),
-  ...inputExpression(ctx),
-  ...widgetAccess(ctx),
+  ...require("./conditional")(ctx),
+  ...require("./available")(ctx),
+  ...require("./can-find")(ctx),
+  ...require("./locked")(ctx),
+  ...require("./new")(ctx),
+  ...require("./entered")(ctx),
+  ...require("./dataset")(ctx),
+  ...require("./current-changed")(ctx),
+  ...require("./ambiguous")(ctx),
+  ...require("./accum")(ctx),
+  ...require("./input")(ctx),
+  ...require("./widget")(ctx),
 });
