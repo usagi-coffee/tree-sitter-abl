@@ -5,6 +5,6 @@ module.exports = ({ kw }) => ({
     seq(
       choice(kw("SOCKET"), kw("SERVER-SOCKET")),
       field("name", $.identifier),
-      $._no_error_terminator
+      $._no_error_terminator,
     ),
 });
