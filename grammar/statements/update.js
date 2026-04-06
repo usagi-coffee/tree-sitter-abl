@@ -17,8 +17,8 @@ module.exports = ({ kw }) => ({
 
   __update_field: ($) =>
     choice(
-      alias($.__update_skip_phrase, $.skip_phrase),
-      alias($.__update_space_phrase, $.space_phrase),
+      alias($.__set_skip_phrase, $.skip_phrase),
+      alias($.__set_space_phrase, $.space_phrase),
       seq(
         field("field", $.__update_field_target),
         optional($.format_phrase),
@@ -40,14 +40,4 @@ module.exports = ({ kw }) => ({
 
   __update_record: ($) => $._identifier_or_qualified_name,
   __update_field_target: ($) => choice(prec(1, $._identifier_or_qualified_name), $.array_access),
-  __update_skip_phrase: ($) =>
-    choice(
-      prec.right(1, seq(kw("SKIP"), "(", field("skip", $._expression), ")")),
-      prec(-1, seq(kw("SKIP"))),
-    ),
-  __update_space_phrase: ($) =>
-    choice(
-      prec.right(1, seq(kw("SPACE"), "(", field("space", $._expression), ")")),
-      prec(-1, seq(kw("SPACE"))),
-    ),
 });
