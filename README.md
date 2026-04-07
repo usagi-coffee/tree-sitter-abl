@@ -2,7 +2,8 @@
 
 OpenEdge Advanced Business Language (ABL) grammar for tree-sitter.
 
-While the parser already implements most ABL statements (at least those defined in the reference), the shape of AST nodes is not yet considered stable. The grammar should be treated as **experimental**, and breaking changes are expected.
+> [!WARNING]
+> While the parser already implements most ABL statements (at least those defined in the reference), the shape of AST nodes is not yet considered stable. The grammar should be treated as **experimental**, and breaking changes are expected.
 
 ## Integrating
 
