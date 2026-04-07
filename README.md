@@ -4,6 +4,14 @@ OpenEdge Advanced Business Language (ABL) grammar for tree-sitter.
 
 While the parser already implements most ABL statements (at least those defined in the reference), the shape of AST nodes is not yet considered stable. The grammar should be treated as **experimental**, and breaking changes are expected.
 
+## Integrating
+
+Currently the grammar faces a few problems that might arise when integrating, keep in mind: 
+
+1. Tree-sitter generated output `parser.c` out-of-box using `tree-sitter generate` is currently beyond the github file limit (100MiB) so it needs to be "minified" to be able to be hosted on github, look at `tools/minify.js`.
+2. Compiling WASM is almost impossible without upstream fixes in LLVM, [the fix has been merged](https://github.com/llvm/llvm-project/pull/181755), this change is expected to come out in `clang-23`, it later needs to be adopted in [wasi-sdk](github.com/WebAssembly/wasi-sdk) (and optionally [emscripten](https://emscripten.org/)) in order for `tree-sitter build --wasm` to actually compile the webassembly binary.
+3. Tree-sitter uses an optimization pass AFTER compililng the webassembly, it uses `wasm-opt` [binaryen](https://github.com/WebAssembly/binaryen), the optimizer has an issue with such big wasm binaries, so the pass takes about 16 minutes on my machine to succeed, be patient.
+
 ## License
 
 ```LICENSE
