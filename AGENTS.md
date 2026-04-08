@@ -7,7 +7,8 @@
 ## Key paths
 
 - `grammar.js`: core grammar rules.
-- `grammar/core/{expressions,statements}.js`: core aggregation rules ($.\_statement, $.\_expression) and shared category-specific rules.
+- `grammar/core/{expressions,statements}.js`: core aggregation rules ($.\_statement, $.\_expression).
+- `grammar/core/{common}.js`: shared category-specific rules.
 - `grammar/{expressions, statements, phrases, precedences}/index.js`: aggregator files that collect and re-export from their respective categories.
 - `grammar/precedences/*.js`: precedences definitions
 - `grammar/expressions/*.js`: expression rules (available, locked, aggregate, conditional; non-core/non-shared specific expressions).
@@ -91,11 +92,11 @@ We have three types of rule:
 // This is a public rule visible in the AST.
 rule: ($) => ...,
 
-// This is a shared rule (single underscore), it should live in grammar.js.
+// This is a shared rule (single underscore), it should live in grammar/core/common.js (non-core) or grammar.js (core).
 _shared_rule: ($) => ...,
 
 // This is a private rule (double underscore, statement prefix), it should live in <my-statement>.js
-// This rule should never be reused between files unless it's made into a shared rule and moved into grammar.js
+// This rule should never be reused between files unless it's made into a shared rule and moved into grammar/core/common.js or grammar.js
 __my_statement_rule: ($) => ...,
 ```
 
