@@ -20,10 +20,10 @@ OUTPUT TO TERMINAL NO-ECHO PAGED PAGE-SIZE 24.
   (output_statement
     (close))
   (output_statement
-    name: (identifier)
+    stream: (identifier)
     (close))
   (output_statement
-    name: (identifier)
+    stream: (identifier)
     (close))
   (output_statement
     value: (binary_expression
@@ -346,14 +346,14 @@ OUTPUT TO TERMINAL.
     (page_size_phrase
       page_size: (number_literal)))
   (output_statement
-    name: (identifier)
+    stream: (identifier)
     file: (string_literal)
     (unbuffered))
   (output_statement
-    name: (identifier)
+    stream: (identifier)
     file: (string_literal))
   (output_statement
-    name: (identifier)
+    stream: (identifier)
     value: (identifier)
     (no_map))
   (output_statement

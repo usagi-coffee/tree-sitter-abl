@@ -3,7 +3,7 @@ module.exports = ({ kw }) => ({
 
   __input_body: ($) =>
     seq(
-      optional($._stream_definition),
+      optional($._stream_phrase),
       choice(
         alias(kw("CLOSE"), $.close),
         seq(kw("FROM"), $.__input_from_target, optional($.__input_tail)),
@@ -11,10 +11,7 @@ module.exports = ({ kw }) => ({
     ),
   __input_tail: ($) =>
     choice(
-      seq(
-        alias($._lob_dir_phrase, $.lob_dir_phrase),
-        optional($.__input_tail_after_lob_dir),
-      ),
+      seq(alias($._lob_dir_phrase, $.lob_dir_phrase), optional($.__input_tail_after_lob_dir)),
       seq(alias(kw("BINARY"), $.binary), optional($.__input_tail_after_binary)),
       seq($._echo_phrase, optional($.__input_tail_after_echo)),
       seq($.__input_map, optional($.__input_tail_after_map)),
@@ -34,10 +31,7 @@ module.exports = ({ kw }) => ({
       $._unbuffered_convert_tail,
     ),
   __input_tail_after_echo: ($) =>
-    choice(
-      seq($.__input_map, optional($.__input_tail_after_map)),
-      $._unbuffered_convert_tail,
-    ),
+    choice(seq($.__input_map, optional($.__input_tail_after_map)), $._unbuffered_convert_tail),
   __input_tail_after_map: ($) => $._unbuffered_convert_tail,
   __input_map: ($) =>
     choice(seq(kw("MAP"), field("map", $._map_entry)), alias(kw("NO-MAP"), $.no_map)),

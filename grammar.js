@@ -294,6 +294,11 @@ module.exports = grammar({
       generic_type: ($) => seq($._simple_type_name, "<", $._simple_type_name, ">"),
       _simple_type_name: ($) =>
         choice($.scoped_name, $.qualified_name, $.nested_type_name, $.identifier),
+      _variable_type: ($) =>
+        choice(
+          seq(kw("AS"), optional(kw("CLASS")), field("type", $._type_or_string)),
+          seq(kw("LIKE"), field("like", $._identifier_or_qualified_name)),
+        ),
       _type_name: ($) => choice($.generic_type, $._simple_type_name),
       _type_or_string: ($) => choice($._type_name, $.string_literal),
       _identifier_or_qualified_name: ($) =>
@@ -312,14 +317,18 @@ module.exports = grammar({
         token(/[_\p{L}][\p{L}\p{N}_\-&]*(\{(?:&[0-9A-Za-z_-]+|[0-9A-Za-z_-]+)\})+/i),
 
       _widgets: ($) => prec.right(alias(choice(...WIDGETS, kw("FRAME")), $.identifier)),
-      _stream_phrase: ($) =>
-        seq(choice(kw("STREAM"), kw("STREAM-HANDLE")), field("stream", $.identifier)),
       _events: ($) =>
         choice(
           $.identifier,
           $.string_literal,
           $.number_literal,
           alias($._signed_number_literal, $.number_literal),
+        ),
+      _program_target: ($) =>
+        choice(
+          field("program", $.identifier),
+          field("program", $.string_literal),
+          $._value_expression,
         ),
 
       // Operators
@@ -505,6 +514,8 @@ module.exports = grammar({
       _label_identifier: ($) => $.identifier,
       _label: ($) => prec.right(1, seq(field("label", $.identifier), alias($._colon, ":"))),
       _identifier_immediate: ($) => token.immediate(/[_\p{L}][\p{L}\p{N}_-]*/i),
+      _alias_name: ($) => choice($.identifier, $.string_literal, $._value_expression),
+      _os_filename: ($) => choice($.string_literal, $._identifier_or_access_or_call),
       parenthesized_identifier: ($) => seq("(", $.identifier, ")"),
       _object_access_tail: ($) =>
         repeat1(
@@ -517,6 +528,9 @@ module.exports = grammar({
       _value_expression: ($) => seq(kw("VALUE"), "(", field("value", $._expression), ")"),
       _terminator: ($) => choice($._terminator_dot, ";"),
       _no_error_terminator: ($) => seq(optional(alias(kw("NO-ERROR"), $.no_error)), $._terminator),
+
+      // Contains non-core statement-specific shared rules
+      ...require("./grammar/core/common")(ctx),
 
       // Contains $._expression and $._primary_expression aggregates
       ...require("./grammar/core/expressions")(ctx),

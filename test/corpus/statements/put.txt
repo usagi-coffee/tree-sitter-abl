@@ -63,7 +63,7 @@ PUT CONTROL NULL(20).
   (stream_definition
     name: (identifier))
   (output_statement
-    name: (identifier)
+    stream: (identifier)
     file: (qualified_name
       left: (identifier)
       right: (identifier)))
@@ -77,7 +77,7 @@ PUT CONTROL NULL(20).
         value: (identifier)
         value: (string_literal))))
   (output_statement
-    name: (identifier)
+    stream: (identifier)
     (close))
   (put_statement
     stream: (identifier)

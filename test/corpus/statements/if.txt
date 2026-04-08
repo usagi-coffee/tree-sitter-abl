@@ -269,7 +269,7 @@ OUTPUT STREAM due CLOSE.
   (stream_definition
     name: (identifier))
   (output_statement
-    name: (identifier)
+    stream: (identifier)
     file: (qualified_name
       left: (identifier)
       right: (identifier)))
@@ -417,7 +417,7 @@ OUTPUT STREAM due CLOSE.
                       (down)
                       frame: (identifier)))))))))))
   (output_statement
-    name: (identifier)
+    stream: (identifier)
     (close)))
 
 ================================================================================

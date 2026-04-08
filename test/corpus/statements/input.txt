@@ -17,7 +17,7 @@ INPUT STREAM-HANDLE hStream CLOSE.
     (convert_phrase
       (no_convert)))
   (input_statement
-    name: (identifier)
+    stream: (identifier)
     directory: (string_literal)
     (no_attr_list)
     (lob_dir_phrase
@@ -31,7 +31,7 @@ INPUT STREAM-HANDLE hStream CLOSE.
       target: (string_literal)
       source: (string_literal)))
   (input_statement
-    name: (identifier)
+    stream: (identifier)
     (close)))
 
 ================================================================================
@@ -113,7 +113,7 @@ INPUT STREAM sIn FROM VALUE(cPath) ECHO.
     (convert_phrase
       (no_convert)))
   (input_statement
-    name: (identifier)
+    stream: (identifier)
     value: (identifier)
     (echo)))
 

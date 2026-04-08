@@ -3,7 +3,7 @@ module.exports = ({ kw }) => ({
 
   __output_body: ($) =>
     seq(
-      optional($._stream_definition),
+      optional($._stream_phrase),
       choice(
         alias(kw("CLOSE"), $.close),
         seq(kw("TO"), $.__output_to_target, repeat($.__output_to_option)),
