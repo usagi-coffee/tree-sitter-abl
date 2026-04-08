@@ -66,4 +66,6 @@ module.exports = ({ kw, ctx }) => ({
       $.input_expression,
       alias($.include_expression, $.include_file_reference),
     ),
+
+  // Shared expression-specific rules
 });

@@ -86,10 +86,10 @@ for (const filename of files) {
   const { expectedPrefix, definitions, references } = fileData.get(filename);
 
   const badDefinitions = [...definitions.entries()].filter(
-    ([name]) => !name.startsWith(expectedPrefix)
+    ([name]) => !name.startsWith(expectedPrefix),
   );
   const badReferences = [...references.entries()].filter(
-    ([name]) => !name.startsWith(expectedPrefix)
+    ([name]) => !name.startsWith(expectedPrefix),
   );
 
   if (badDefinitions.length === 0 && badReferences.length === 0) continue;
@@ -121,7 +121,6 @@ for (const filename of files) {
 
   console.log("");
 }
-
 
 if (!foundIssues) {
   console.log("No issues found.");

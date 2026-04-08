@@ -86,10 +86,10 @@ for (const filename of files) {
   const { expectedPrefix, definitions, references } = fileData.get(filename);
 
   const badDefinitions = [...definitions.entries()].filter(
-    ([name]) => !name.startsWith(expectedPrefix)
+    ([name]) => !name.startsWith(expectedPrefix),
   );
   const badReferences = [...references.entries()].filter(
-    ([name]) => !name.startsWith(expectedPrefix)
+    ([name]) => !name.startsWith(expectedPrefix),
   );
 
   if (badDefinitions.length === 0 && badReferences.length === 0) continue;
@@ -119,19 +119,16 @@ for (const filename of files) {
     }
   }
 
-//  console.log("");
+  //  console.log("");
 }
 
 const sharedRules = [...externalUsages.entries()]
   .map(([name, usage]) => ({
     name,
-    owners: dedupeEntries(
-      usage.owners,
-      (entry) => `${entry.filename}:${entry.lineNumber}`
-    ),
+    owners: dedupeEntries(usage.owners, (entry) => `${entry.filename}:${entry.lineNumber}`),
     consumers: dedupeEntries(
       usage.consumers,
-      (entry) => `${entry.filename}:${formatLineList(entry.lineNumbers)}`
+      (entry) => `${entry.filename}:${formatLineList(entry.lineNumbers)}`,
     ),
   }))
   .sort((left, right) => left.name.localeCompare(right.name));
@@ -147,10 +144,7 @@ if (sharedRules.length > 0) {
       .sort()
       .join(", ");
     const consumerText = rule.consumers
-      .map(
-        (consumer) =>
-          `${consumer.filename}:${formatLineList(consumer.lineNumbers)}`
-      )
+      .map((consumer) => `${consumer.filename}:${formatLineList(consumer.lineNumbers)}`)
       .sort()
       .join(", ");
 

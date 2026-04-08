@@ -176,4 +176,6 @@ module.exports = () => ({
       $.system_dialog_color_statement,
       $.trigger_procedure_statement,
     ),
+
+  // Shared statements-specific rules
 });

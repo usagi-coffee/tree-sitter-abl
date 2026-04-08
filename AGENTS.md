@@ -7,7 +7,7 @@
 ## Key paths
 
 - `grammar.js`: core grammar rules.
-- `grammar/core/{expressions,statements}.js`: core aggregation rules ($.\_statement, $.\_expression; mostly plumbing).
+- `grammar/core/{expressions,statements}.js`: core aggregation rules ($.\_statement, $.\_expression) and shared category-specific rules.
 - `grammar/{expressions, statements, phrases, precedences}/index.js`: aggregator files that collect and re-export from their respective categories.
 - `grammar/precedences/*.js`: precedences definitions
 - `grammar/expressions/*.js`: expression rules (available, locked, aggregate, conditional; non-core/non-shared specific expressions).
