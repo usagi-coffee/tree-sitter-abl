@@ -92,7 +92,7 @@ module.exports = grammar({
     // Conflicts approach has slightly better state reduction (~500) than doing it conflicts free
     [
       $.__buffer_modifier,
-      $.__property_access_modifier,
+      $.__class_property_access_modifier,
       $.__data_source_access_modifier,
       $.__dataset_modifier,
       $.__event_access_modifier,
@@ -100,18 +100,18 @@ module.exports = grammar({
       $.__temp_table_modifier,
       $.__variable_modifier,
     ],
-    [$.__property_access_modifier, $.__event_access_modifier],
-    [$.__property_access_modifier, $.__event_access_modifier, $.__variable_modifier],
+    [$.__class_property_access_modifier, $.__event_access_modifier],
+    [$.__class_property_access_modifier, $.__event_access_modifier, $.__variable_modifier],
     [
       $.__buffer_modifier,
-      $.__property_class_modifier,
+      $.__class_property_class_modifier,
       $.__data_source_static,
       $.__event_type_modifier,
       $.__query_modifier,
       $.__variable_modifier,
     ],
-    [$.__property_class_modifier, $.__event_type_modifier],
-    [$.__property_class_modifier, $.__event_type_modifier, $.__variable_modifier],
+    [$.__class_property_class_modifier, $.__event_type_modifier],
+    [$.__class_property_class_modifier, $.__event_type_modifier, $.__variable_modifier],
     // SUBSCRIBE/UNSUBSCRIBE can start with PROCEDURE/PROC which may also be parsed as identifier-like expression.
     [$.__unsubscribe_body, $._identifier_or_qualified_name],
     // Shared identifier/access/call wrapper can compete with direct function call parse at `identifier(` sites.
@@ -294,11 +294,6 @@ module.exports = grammar({
       generic_type: ($) => seq($._simple_type_name, "<", $._simple_type_name, ">"),
       _simple_type_name: ($) =>
         choice($.scoped_name, $.qualified_name, $.nested_type_name, $.identifier),
-      _variable_type: ($) =>
-        choice(
-          seq(kw("AS"), optional(kw("CLASS")), field("type", $._type_or_string)),
-          seq(kw("LIKE"), field("like", $._identifier_or_qualified_name)),
-        ),
       _type_name: ($) => choice($.generic_type, $._simple_type_name),
       _type_or_string: ($) => choice($._type_name, $.string_literal),
       _identifier_or_qualified_name: ($) =>
@@ -531,7 +526,6 @@ module.exports = grammar({
 
       // Contains non-core statement-specific shared rules
       ...require("./grammar/core/common")(ctx),
-
       // Contains $._expression and $._primary_expression aggregates
       ...require("./grammar/core/expressions")(ctx),
       // Contains only $._statement aggregate and statement costs

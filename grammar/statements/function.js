@@ -71,8 +71,7 @@ module.exports = ({ kw }) => ({
       optional(alias(kw("NO-UNDO"), $.no_undo)),
     ),
 
-  __function_variable_type_phrase: ($) =>
-    seq($._variable_type, optional($.__function_extent_phrase)),
+  __function_variable_type_phrase: ($) => seq($._as_like, optional($.__function_extent_phrase)),
 
   __function_extent_phrase: ($) =>
     seq(kw("EXTENT"), optional(field("size", $.__function_extent_size))),

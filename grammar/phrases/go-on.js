@@ -1,5 +1,5 @@
 module.exports = ({ kw }) => ({
-  __go_on_phrase: ($) =>
+  _go_on_phrase: ($) =>
     seq(
       kw("GO-ON"),
       "(",

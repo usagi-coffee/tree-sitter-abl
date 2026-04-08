@@ -16,7 +16,7 @@ module.exports = ({ kw }) => ({
             alias(kw("MENU"), $.identifier),
             optional(alias(kw("NO-LABEL"), $.no_label)),
             optional(alias(kw("NO-LABELS"), $.no_labels)),
-            optional($.__format_string),
+            optional($._format_string),
           ),
         ),
         seq(
@@ -24,7 +24,7 @@ module.exports = ({ kw }) => ({
           optional(seq(kw("COLON"), field("colon", $._expression))),
           optional(seq(kw("LABEL"), optional(field("label", $.__form_label)))),
           optional(alias($.__form_validate_phrase, $.validate_phrase)),
-          optional($.__format_string),
+          optional($._format_string),
           optional(alias($.__form_view_as, $.view_as_phrase)),
         ),
         seq(kw("SKIP"), optional(field("skip", seq("(", $._expression, ")")))),

@@ -4,24 +4,24 @@ module.exports = ({ kw }) => ({
       repeat1(
         choice(
           $.__format_at_phrase,
-          $.__format_as_like,
+          $._as_like,
           kw("AUTO-RETURN"),
           seq(kw("BGCOLOR"), field("bgcolor", $.__format_expression)),
           kw("BLANK"),
-          $.__format_colon_to,
+          $._format_colon_to,
           seq(kw("COLUMN-LABEL"), field("column_label", $.__format_expression)),
           kw("DEBLANK"),
           seq(kw("DCOLOR"), field("dcolor", $.__format_expression)),
           kw("DISABLE-AUTO-ZAP"),
           seq(kw("FGCOLOR"), field("fgcolor", $.__format_expression)),
           seq(kw("FONT"), field("font", $.__format_expression)),
-          $.__format_format,
+          $._format_format,
           seq(kw("HELP"), field("help", $.__format_expression)),
-          $.__format_label,
+          $._format_label,
           kw("NO-TAB-STOP"),
           seq(kw("PFCOLOR"), field("pfcolor", $.__format_expression)),
-          $.__format_validate,
-          $.__format_view_as,
+          $._format_validate,
+          $._format_view_as,
           seq(kw("WIDGET-ID"), field("widget_id", $.__format_expression)),
         ),
       ),
@@ -54,73 +54,6 @@ module.exports = ({ kw }) => ({
   __format_at_y: ($) =>
     choice(seq(kw("Y"), field("y", $._expression)), seq(kw("Y-OF"), field("y_of", $._expression))),
 
-  __format_as_like: ($) =>
-    choice(
-      seq(kw("AS"), field("as", $.identifier)),
-      seq(kw("LIKE"), field("like", $._identifier_or_qualified_name)),
-    ),
-
-  __format_colon_to: ($) =>
-    choice(
-      seq(kw("COLON"), field("colon", $._expression)),
-      seq(kw("TO"), field("to", $._expression)),
-    ),
-
-  __format_format: ($) =>
-    seq(
-      kw("FORMAT", { offset: 4 }),
-      choice(
-        field("format", $.string_literal),
-        seq("(", field("format", $.string_literal), ")"),
-        field(
-          "format",
-          choice(
-            $.identifier,
-            $.qualified_name,
-            $.object_access,
-            $.preprocessor_name,
-            $.argument_reference,
-          ),
-        ),
-      ),
-    ),
-
-  __format_label: ($) => choice(seq(kw("LABEL"), $.__format_labels), kw("NO-LABELS")),
-  __format_labels: ($) => seq(field("label", $._expression), optional($.__format_labels_tail)),
-  __format_labels_tail: ($) => repeat1(seq(",", field("label", $._expression))),
-
-  __format_validate: ($) =>
-    seq(
-      kw("VALIDATE"),
-      "(",
-      field("condition", $._expression),
-      ",",
-      field("message", $._expression),
-      ")",
-    ),
-
-  __format_view_as: ($) =>
-    seq(
-      kw("VIEW-AS"),
-      choice(kw("TEXT"), kw("TOGGLE-BOX"), alias($.__format_editor_phrase, $.editor_phrase)),
-    ),
-
-  __format_editor_phrase: ($) =>
-    prec.left(
-      seq(
-        kw("EDITOR"),
-        choice(
-          $.__format_size_phrase,
-          seq(
-            kw("INNER-CHARS"),
-            field("inner_chars", $.number_literal),
-            kw("INNER-LINES"),
-            field("inner_lines", $.number_literal),
-          ),
-        ),
-        optional($.__format_editor_options),
-      ),
-    ),
   __format_editor_options: ($) =>
     repeat1(
       choice(
@@ -143,5 +76,68 @@ module.exports = ({ kw }) => ({
       kw("BY"),
       field("height", $.number_literal),
     ),
-  __format_string: ($) => seq(kw("FORMAT", { offset: 4 }), field("format", $.string_literal)),
+
+  _format_colon_to: ($) =>
+    choice(
+      seq(kw("COLON"), field("colon", $._expression)),
+      seq(kw("TO"), field("to", $._expression)),
+    ),
+
+  __format_editor_phrase: ($) =>
+    prec.left(
+      seq(
+        kw("EDITOR"),
+        choice(
+          $.__format_size_phrase,
+          seq(
+            kw("INNER-CHARS"),
+            field("inner_chars", $.number_literal),
+            kw("INNER-LINES"),
+            field("inner_lines", $.number_literal),
+          ),
+        ),
+        optional($.__format_editor_options),
+      ),
+    ),
+
+  // These for some cursed reason cannot be moved to grammar/core/common.js
+
+  _format_format: ($) =>
+    seq(
+      kw("FORMAT", { offset: 4 }),
+      choice(
+        field("format", $.string_literal),
+        seq("(", field("format", $.string_literal), ")"),
+        field(
+          "format",
+          choice(
+            $.identifier,
+            $.qualified_name,
+            $.object_access,
+            $.preprocessor_name,
+            $.argument_reference,
+          ),
+        ),
+      ),
+    ),
+
+  _format_label: ($) => choice(seq(kw("LABEL"), $._format_labels), kw("NO-LABELS")),
+  _format_labels: ($) => seq(field("label", $._expression), optional($._format_labels_tail)),
+  _format_labels_tail: ($) => repeat1(seq(",", field("label", $._expression))),
+
+  _format_validate: ($) =>
+    seq(
+      kw("VALIDATE"),
+      "(",
+      field("condition", $._expression),
+      ",",
+      field("message", $._expression),
+      ")",
+    ),
+
+  _format_view_as: ($) =>
+    seq(
+      kw("VIEW-AS"),
+      choice(kw("TEXT"), kw("TOGGLE-BOX"), alias($.__format_editor_phrase, $.editor_phrase)),
+    ),
 });

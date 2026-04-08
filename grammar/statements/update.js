@@ -4,13 +4,13 @@ module.exports = ({ kw }) => ({
   __update_body: ($) => seq(choice($.__update_record_body, $.__update_fields_body)),
 
   __update_record_body: ($) =>
-    seq(field("record", $.__update_record),       optional($._except_fields), optional($.frame_phrase)),
+    seq(field("record", $.__update_record), optional($._except_fields), optional($.frame_phrase)),
 
   __update_fields_body: ($) =>
     seq(
       optional(alias(kw("UNLESS-HIDDEN"), $.unless_hidden)),
       repeat1(alias($.__update_field, $.field)),
-      optional(alias($.__go_on_phrase, $.go_on_phrase)),
+      optional(alias($._go_on_phrase, $.go_on_phrase)),
       optional($.frame_phrase),
       optional($.editing_phrase),
     ),

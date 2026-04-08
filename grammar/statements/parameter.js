@@ -19,7 +19,7 @@ module.exports = ({ kw }) => ({
       repeat(
         choice(
           alias(seq(optional(kw("NOT")), kw("CASE-SENSITIVE")), $.case_sensitive),
-          $.__format_string,
+          $._format_string,
           seq(kw("COLUMN-LABEL"), field("column_label", $.string_literal)),
           seq(kw("DECIMALS"), field("decimals", $.number_literal)),
           seq(
@@ -79,7 +79,7 @@ module.exports = ({ kw }) => ({
 
   __parameter_variable_type_phrase: ($) =>
     seq(
-      $._variable_type,
+      $._as_like,
       optional(seq(kw("TO"), field("target", $.identifier))),
       optional(alias($.__parameter_extent_phrase, $.extent_phrase)),
     ),

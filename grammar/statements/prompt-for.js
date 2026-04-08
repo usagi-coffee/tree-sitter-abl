@@ -19,7 +19,7 @@ module.exports = ({ kw }) => ({
   __prompt_for_fields_body: ($) =>
     seq(
       repeat1(alias($.__prompt_for_field, $.field)),
-      optional(alias($.__go_on_phrase, $.go_on_phrase)),
+      optional(alias($._go_on_phrase, $.go_on_phrase)),
       optional($.in_window_phrase),
       optional($.frame_phrase),
       optional(alias($.__prompt_for_with_phrase, $.with_phrase)),

@@ -8,8 +8,7 @@ module.exports = ({ kw }) => ({
       $._terminator,
     ),
 
-  __input_through_body: ($) =>
-    seq($._program_target, optional($.__input_through_tail)),
+  __input_through_body: ($) => seq($._program_target, optional($.__input_through_tail)),
   __input_through_tail: ($) =>
     choice(
       seq(repeat1($.__input_through_argument), optional($.__input_through_tail_after_arguments)),

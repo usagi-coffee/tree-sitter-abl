@@ -1,6 +1,12 @@
 // Non-core statement-specific shared rules
 
 module.exports = ({ kw }) => ({
+  _as_like: ($) =>
+    choice(
+      seq(kw("AS"), optional(kw("CLASS")), field("type", $._type_or_string)),
+      seq(kw("LIKE"), field("like", $._identifier_or_qualified_name)),
+    ),
+
   _in_widget_pool: ($) => seq(kw("IN"), kw("WIDGET-POOL"), field("pool", $.identifier)),
 
   _except_fields: ($) => seq(kw("EXCEPT"), repeat1(field("except", $.identifier))),
@@ -13,7 +19,7 @@ module.exports = ({ kw }) => ({
       field("name", $.identifier),
       repeat(
         choice(
-          $.__aggregate_label_phrase,
+          $._aggregate_label_phrase,
           alias(kw("DISABLED"), $.disabled),
           seq(kw("ACCELERATOR"), field("accelerator", $.string_literal)),
         ),
@@ -25,7 +31,7 @@ module.exports = ({ kw }) => ({
       kw("SUB-MENU"),
       field("name", $.identifier),
       optional(alias(kw("DISABLED"), $.disabled)),
-      optional($.__aggregate_label_phrase),
+      optional($._aggregate_label_phrase),
     ),
 
   __up_down_count_frame: ($) =>
@@ -154,4 +160,8 @@ module.exports = ({ kw }) => ({
       ),
       alias($._convert_phrase, $.convert_phrase),
     ),
+
+  _aggregate_label_phrase: ($) => seq(kw("LABEL"), field("label", $.string_literal)),
+
+  _format_string: ($) => seq(kw("FORMAT", { offset: 4 }), field("format", $.string_literal)),
 });

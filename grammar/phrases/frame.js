@@ -64,8 +64,8 @@ module.exports = ({ kw }) => ({
     prec.left(seq(kw("SKIP"), optional(field("skip", seq("(", $.__frame_expression, ")"))))),
 
   __frame_title_phrase: ($) =>
-    seq(kw("TITLE"), optional($.__frame_title_option), field("title", $.__frame_expression)),
-  __frame_title_option: ($) =>
+    seq(kw("TITLE"), optional($._frame_title_option), field("title", $.__frame_expression)),
+  _frame_title_option: ($) =>
     choice(
       seq(kw("BGCOLOR"), field("title_bgcolor", $.__frame_expression)),
       seq(kw("DCOLOR"), field("title_dcolor", $.__frame_expression)),

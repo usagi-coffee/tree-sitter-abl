@@ -11,8 +11,8 @@ module.exports = ({ kw }) => ({
   __set_fields_body: ($) =>
     seq(
       repeat1(alias($.__set_field, $.field)),
-      optional(alias($.__go_on_phrase, $.go_on_phrase)),
-      optional($.__format_validate),
+      optional(alias($._go_on_phrase, $.go_on_phrase)),
+      optional($._format_validate),
       optional(seq(kw("HELP"), field("help", $.string_literal))),
       optional($.frame_phrase),
       optional($.editing_phrase),
@@ -45,7 +45,7 @@ module.exports = ({ kw }) => ({
     ),
 
   __set_record_body: ($) =>
-    seq(field("record", $.__set_record),       optional($._except_fields), optional($.frame_phrase)),
+    seq(field("record", $.__set_record), optional($._except_fields), optional($.frame_phrase)),
 
   __set_record: ($) => $._identifier_or_qualified_name,
 });

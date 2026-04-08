@@ -51,9 +51,9 @@ module.exports = ({ kw }) => ({
   __trigger_procedure_value_option: ($) =>
     choice(
       seq(kw("COLUMN-LABEL"), field("label", $.string_literal)),
-      $.__format_string,
+      $._format_string,
       seq(kw("INITIAL"), field("initial", $._expression)),
-      $.__aggregate_label_phrase,
+      $._aggregate_label_phrase,
       alias(kw("NO-UNDO"), $.no_undo),
     ),
 });

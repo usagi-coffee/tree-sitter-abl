@@ -11,7 +11,7 @@ module.exports = ({ kw }) => ({
         choice(
           alias(kw("AUTO-RETURN"), $.auto_return),
           seq(kw("COLOR"), field("color", $.color_phrase)),
-          alias($.__go_on_phrase, $.go_on),
+          alias($._go_on_phrase, $.go_on),
           seq(kw("KEYS"), field("keys", $.identifier)),
           alias(kw("NO-ERROR"), $.no_error),
           seq(kw("PAUSE"), field("pause", $._expression)),

@@ -53,21 +53,22 @@ module.exports = ({ kw }) => ({
   method_definition: ($) =>
     choice(
       seq(
-        $.__method_definition_prefix,
-        $.__method_definition_signature,
+        $.__class_method_definition_prefix,
+        $.__class_method_definition_signature,
         choice(alias($._colon, ":"), $._terminator_dot),
-        alias($.__method_body, $.body),
+        alias($.__class_method_body, $.body),
       ),
       seq(
-        $.__method_definition_prefix,
+        $.__class_method_definition_prefix,
         kw("ABSTRACT"),
         repeat($._method_modifier_no_abstract),
-        $.__method_definition_signature,
+        $.__class_method_definition_signature,
         $._terminator_dot,
       ),
     ),
-  __method_definition_prefix: ($) => seq(kw("METHOD"), repeat($._method_modifier_no_abstract)),
-  __method_definition_signature: ($) =>
+  __class_method_definition_prefix: ($) =>
+    seq(kw("METHOD"), repeat($._method_modifier_no_abstract)),
+  __class_method_definition_signature: ($) =>
     seq(
       $._method_return_type,
       field("name", $.identifier),
@@ -77,11 +78,11 @@ module.exports = ({ kw }) => ({
   constructor_definition: ($) =>
     seq(
       kw("CONSTRUCTOR"),
-      repeat($.__constructor_modifier),
+      repeat($.__class_constructor_modifier),
       field("name", $.identifier),
       alias($._method_parameters, $.parameters),
       alias($._colon, ":"),
-      alias($.__constructor_body, $.body),
+      alias($.__class_constructor_body, $.body),
     ),
 
   destructor_definition: ($) =>
@@ -89,9 +90,9 @@ module.exports = ({ kw }) => ({
       kw("DESTRUCTOR"),
       optional(alias(kw("PUBLIC"), $.access_modifier)),
       field("name", $.identifier),
-      alias($.__destructor_parameters, $.parameters),
+      alias($.__class_destructor_parameters, $.parameters),
       alias($._colon, ":"),
-      alias($.__destructor_body, $.body),
+      alias($.__class_destructor_body, $.body),
     ),
 
   _method_parameters: ($) =>
@@ -99,36 +100,40 @@ module.exports = ({ kw }) => ({
       "(",
       optional(
         seq(
-          alias($.__method_parameter, $.parameter),
-          repeat(seq(",", alias($.__method_parameter, $.parameter))),
+          alias($.__class_method_parameter, $.parameter),
+          repeat(seq(",", alias($.__class_method_parameter, $.parameter))),
         ),
       ),
       ")",
     ),
 
-  __method_parameter: ($) =>
-    seq(optional(field("direction", $.__method_parameter_direction)), $.__method_parameter_body),
-  __method_parameter_body: ($) =>
-    choice($.__class_named_parameter_body, $.__method_table_parameter),
-  __method_parameter_direction: ($) => choice(kw("INPUT"), kw("OUTPUT"), kw("INPUT-OUTPUT")),
+  __class_method_parameter: ($) =>
+    seq(
+      optional(field("direction", $.__class_method_parameter_direction)),
+      $.__class_method_parameter_body,
+    ),
+  __class_method_parameter_body: ($) =>
+    choice($.__class_named_parameter_body, $.__class_method_table_parameter),
+  __class_method_parameter_direction: ($) => choice(kw("INPUT"), kw("OUTPUT"), kw("INPUT-OUTPUT")),
 
-  __method_body: ($) => seq($.__class_compound_body, optional(kw("METHOD")), $._terminator),
+  __class_method_body: ($) => seq($.__class_compound_body, optional(kw("METHOD")), $._terminator),
 
-  __constructor_body: ($) =>
+  __class_constructor_body: ($) =>
     seq($.__class_compound_body, optional(choice(kw("CONSTRUCTOR"), kw("METHOD"))), $._terminator),
 
-  __destructor_body: ($) => seq($.__class_compound_body, optional(kw("DESTRUCTOR")), $._terminator),
+  __class_destructor_body: ($) =>
+    seq($.__class_compound_body, optional(kw("DESTRUCTOR")), $._terminator),
   __class_compound_body: ($) => seq(repeat($._statement), kw("END")),
 
-  __destructor_parameters: ($) => seq("(", ")"),
+  __class_destructor_parameters: ($) => seq("(", ")"),
 
   property_definition: ($) =>
     seq(
       kw("DEFINE", { offset: 3 }),
-      optional($.__property_definition_modifier),
+      optional($.__class_property_definition_modifier),
       kw("PROPERTY"),
       field("name", $.identifier),
-      $.__property_type_phrase,
+      $.__class_property_type_phrase,
       repeat(
         choice(
           seq(
@@ -139,18 +144,18 @@ module.exports = ({ kw }) => ({
           alias(kw("NO-UNDO"), $.no_undo),
         ),
       ),
-      repeat1(choice($.__property_get_phrase, $.__property_set_phrase)),
+      repeat1(choice($.__class_property_get_phrase, $.__class_property_set_phrase)),
     ),
 
-  __property_get_phrase: ($) => seq(kw("GET"), $.__property_accessor_tail),
+  __class_property_get_phrase: ($) => seq(kw("GET"), $.__class_property_accessor_tail),
 
-  __property_set_phrase: ($) =>
-    seq(kw("SET"), optional($.property_set_parameter_list), $.__property_accessor_tail),
-  __property_accessor_body: ($) => seq(alias($._colon, ":"), repeat($._statement), kw("END")),
-  __property_accessor_tail: ($) =>
+  __class_property_set_phrase: ($) =>
+    seq(kw("SET"), optional($.property_set_parameter_list), $.__class_property_accessor_tail),
+  __class_property_accessor_body: ($) => seq(alias($._colon, ":"), repeat($._statement), kw("END")),
+  __class_property_accessor_tail: ($) =>
     choice(
       $._terminator_dot,
-      seq($.__property_accessor_body, optional(choice(kw("GET"), kw("SET"))), $._terminator),
+      seq($.__class_property_accessor_body, optional(choice(kw("GET"), kw("SET"))), $._terminator),
     ),
 
   property_set_parameter_list: ($) => seq("(", $.property_set_parameter, ")"),
@@ -159,7 +164,7 @@ module.exports = ({ kw }) => ({
   __class_named_parameter_body: ($) =>
     seq(
       field("name", $.identifier),
-      $.__method_variable_type_phrase,
+      $.__class_method_variable_type_phrase,
       optional(alias(kw("NO-UNDO"), $.no_undo)),
     ),
 
@@ -177,30 +182,33 @@ module.exports = ({ kw }) => ({
       alias(kw("SERIALIZABLE"), $.serializable),
     ),
 
-  __property_modifier: ($) =>
+  __class_property_modifier: ($) =>
     choice(
       alias(kw("ABSTRACT"), $.abstract_modifier),
       alias(kw("FINAL"), $.final_modifier),
       alias(kw("OVERRIDE"), $.override_modifier),
     ),
-  __property_definition_modifier: ($) =>
+  __class_property_definition_modifier: ($) =>
     choice(
       seq(
-        $.__property_access_modifier,
-        optional($.__property_class_modifier),
-        optional($.__property_modifier_tail),
+        $.__class_property_access_modifier,
+        optional($.__class_property_class_modifier),
+        optional($.__class_property_modifier_tail),
       ),
       seq(
-        $.__property_class_modifier,
-        optional($.__property_access_modifier),
-        optional($.__property_modifier_tail),
+        $.__class_property_class_modifier,
+        optional($.__class_property_access_modifier),
+        optional($.__class_property_modifier_tail),
       ),
-      $.__property_modifier_tail,
-      $.__property_serialization_modifier,
+      $.__class_property_modifier_tail,
+      $.__class_property_serialization_modifier,
     ),
-  __property_modifier_tail: ($) =>
-    seq(alias(kw("OVERRIDE"), $.override_modifier), optional($.__property_serialization_modifier)),
-  __property_access_modifier: ($) =>
+  __class_property_modifier_tail: ($) =>
+    seq(
+      alias(kw("OVERRIDE"), $.override_modifier),
+      optional($.__class_property_serialization_modifier),
+    ),
+  __class_property_access_modifier: ($) =>
     choice(
       alias(kw("PRIVATE"), $.access_modifier),
       alias(kw("PACKAGE-PRIVATE"), $.access_modifier),
@@ -208,21 +216,21 @@ module.exports = ({ kw }) => ({
       alias(kw("PACKAGE-PROTECTED"), $.access_modifier),
       alias(kw("PUBLIC"), $.access_modifier),
     ),
-  __property_class_modifier: ($) =>
+  __class_property_class_modifier: ($) =>
     choice(
       alias(kw("STATIC"), $.static_modifier),
       alias(kw("ABSTRACT"), $.abstract_modifier),
       alias(kw("FINAL"), $.final_modifier),
     ),
-  __property_serialization_modifier: ($) =>
+  __class_property_serialization_modifier: ($) =>
     choice(
       alias(kw("SERIALIZABLE"), $.serialization_modifier),
       alias(kw("NON-SERIALIZABLE"), $.serialization_modifier),
     ),
 
-  __property_type_phrase: ($) => seq(optional(kw("AS")), $.__class_typed_extent_phrase),
+  __class_property_type_phrase: ($) => seq(optional(kw("AS")), $.__class_typed_extent_phrase),
 
-  __method_modifier: ($) =>
+  __class_method_modifier: ($) =>
     choice(
       alias(kw("PRIVATE"), $.access_modifier),
       alias(kw("PACKAGE-PRIVATE"), $.access_modifier),
@@ -246,7 +254,7 @@ module.exports = ({ kw }) => ({
       alias(kw("FINAL"), $.final_modifier),
     ),
 
-  __constructor_modifier: ($) =>
+  __class_constructor_modifier: ($) =>
     choice(
       alias(kw("PRIVATE"), $.access_modifier),
       alias(kw("PACKAGE-PRIVATE"), $.access_modifier),
@@ -262,53 +270,53 @@ module.exports = ({ kw }) => ({
     seq(
       optional(kw("CLASS")),
       field("type", $._type_or_string),
-      optional($.__method_extent_phrase),
+      optional($.__class_method_extent_phrase),
     ),
 
-  __method_variable_type_phrase: ($) =>
+  __class_method_variable_type_phrase: ($) =>
     choice(
       seq(kw("AS"), $.__class_typed_extent_phrase),
       seq(
         kw("LIKE"),
         field("like", $._identifier_or_qualified_name),
-        optional($.__method_extent_phrase),
+        optional($.__class_method_extent_phrase),
       ),
     ),
 
-  __method_extent_phrase: ($) =>
-    prec.right(seq(kw("EXTENT"), optional(field("size", $.__method_extent_size)))),
-  __method_extent_size: ($) => choice($.number_literal, $.preprocessor_name, $.identifier),
-  __method_table_parameter: ($) =>
+  __class_method_extent_phrase: ($) =>
+    prec.right(seq(kw("EXTENT"), optional(field("size", $.__class_method_extent_size)))),
+  __class_method_extent_size: ($) => choice($.number_literal, $.preprocessor_name, $.identifier),
+  __class_method_table_parameter: ($) =>
     choice(
-      seq(kw("TABLE"), $.__method_table_parameter_tail),
-      seq(kw("TABLE-HANDLE"), $.__method_table_handle_parameter_tail),
-      seq(kw("DATASET"), $.__method_dataset_parameter_tail),
-      seq(kw("DATASET-HANDLE"), $.__method_dataset_handle_parameter_tail),
+      seq(kw("TABLE"), $.__class_method_table_parameter_tail),
+      seq(kw("TABLE-HANDLE"), $.__class_method_table_handle_parameter_tail),
+      seq(kw("DATASET"), $.__class_method_dataset_parameter_tail),
+      seq(kw("DATASET-HANDLE"), $.__class_method_dataset_handle_parameter_tail),
     ),
-  __method_table_parameter_tail: ($) =>
+  __class_method_table_parameter_tail: ($) =>
     seq(
       optional(field("for", kw("FOR"))),
       field("table", $._identifier_or_qualified_name),
-      repeat($.__method_table_parameter_option),
+      repeat($.__class_method_table_parameter_option),
     ),
-  __method_dataset_parameter_tail: ($) =>
+  __class_method_dataset_parameter_tail: ($) =>
     seq(
       optional(field("for", kw("FOR"))),
       field("dataset", $._identifier_or_qualified_name),
-      repeat($.__method_table_parameter_option),
+      repeat($.__class_method_table_parameter_option),
     ),
-  __method_table_handle_parameter_tail: ($) =>
-    seq(field("table_handle", $.identifier), repeat($.__method_handle_parameter_option)),
-  __method_dataset_handle_parameter_tail: ($) =>
-    seq(field("dataset_handle", $.identifier), repeat($.__method_handle_parameter_option)),
-  __method_table_parameter_option: ($) =>
+  __class_method_table_handle_parameter_tail: ($) =>
+    seq(field("table_handle", $.identifier), repeat($.__class_method_handle_parameter_option)),
+  __class_method_dataset_handle_parameter_tail: ($) =>
+    seq(field("dataset_handle", $.identifier), repeat($.__class_method_handle_parameter_option)),
+  __class_method_table_parameter_option: ($) =>
     choice(
       alias(kw("APPEND"), $.append),
       alias(kw("BIND"), $.bind),
       alias(kw("BY-VALUE"), $.by_value),
       alias(kw("BY-REFERENCE"), $.by_reference),
     ),
-  __method_handle_parameter_option: ($) =>
+  __class_method_handle_parameter_option: ($) =>
     choice(
       alias(kw("BIND"), $.bind),
       alias(kw("BY-VALUE"), $.by_value),
