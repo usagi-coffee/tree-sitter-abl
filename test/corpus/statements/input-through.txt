@@ -51,6 +51,26 @@ INPUT THROUGH myprog VALUE(arg1) Func() NO-MAP UNBUFFERED CONVERT SOURCE "ibm850
       source: (string_literal))))
 
 ================================================================================
+INPUT THROUGH - Convert phrase variants
+================================================================================
+
+INPUT THROUGH "progname" NO-CONVERT.
+INPUT THROUGH VALUE(cmd) CONVERT TARGET "utf-8" SOURCE "ibm850".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (input_through_statement
+    program: (string_literal)
+    (convert_phrase
+      (no_convert)))
+  (input_through_statement
+    value: (identifier)
+    (convert_phrase
+      target: (string_literal)
+      source: (string_literal))))
+
+================================================================================
 INPUT THROUGH - Reference snippets
 ================================================================================
 

@@ -126,6 +126,12 @@ module.exports = ({ kw }) => ({
       seq(kw("XML-NODE-NAME"), field("xml_node_name", $.string_literal)),
       $.view_as_phrase,
     ),
+  __temp_table_xml_option: ($) =>
+    choice(
+      seq(kw("XML-DATA-TYPE"), field("xml_data_type", $.string_literal)),
+      seq(kw("XML-NODE-TYPE"), field("xml_node_type", $.string_literal)),
+      seq(kw("XML-NODE-NAME"), field("xml_node_name", $.string_literal)),
+    ),
   __temp_table_extent_option: ($) => seq(kw("EXTENT"), field("extent", $.number_literal)),
   __temp_table_like_name: ($) => choice($._identifier_or_qualified_name, $.array_access),
   __temp_table_label_list: ($) => seq($.string_literal, repeat(seq(",", $.string_literal))),

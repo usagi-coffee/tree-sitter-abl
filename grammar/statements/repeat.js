@@ -4,10 +4,10 @@ module.exports = ({ kw }) => ({
   __repeat_body: ($) =>
     seq(
       kw("REPEAT"),
-      optional(alias($.__repeat_for_phrase, $.for_phrase)),
+      optional(alias($.__do_for_phrase, $.for_phrase)),
       optional($.preselect_phrase),
       optional($.query_tuning_phrase),
-      optional($.__repeat_loop_phrase),
+      optional($.__do_loop_phrase),
       optional($.__repeat_condition_phrase),
       optional(alias(kw("TRANSACTION"), $.transaction)),
       repeat(
@@ -23,15 +23,6 @@ module.exports = ({ kw }) => ({
       $.body,
     ),
 
-  __repeat_for_phrase: ($) =>
-    seq(
-      kw("FOR"),
-      seq(
-        field("record", $._identifier_or_qualified_name),
-        repeat(seq(",", field("record", $._identifier_or_qualified_name))),
-      ),
-    ),
-
   __repeat_break_by_phrase: ($) =>
     prec.right(
       seq(
@@ -41,15 +32,6 @@ module.exports = ({ kw }) => ({
         optional($.__repeat_sort_direction),
         repeat(seq(kw("BY"), field("by", $._expression), optional($.__repeat_sort_direction))),
       ),
-    ),
-  __repeat_loop_phrase: ($) =>
-    seq(
-      field("variable", $.identifier),
-      "=",
-      field("start", $._expression),
-      kw("TO"),
-      field("end", $._expression),
-      optional(seq(kw("BY"), field("step", $._expression))),
     ),
   __repeat_condition_phrase: ($) =>
     seq(choice(kw("WHILE"), kw("UNTIL")), field("condition", $._expression)),

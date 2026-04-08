@@ -30,10 +30,7 @@ module.exports = ({ kw }) => ({
       optional($.__create_widget_triggers),
     ),
   __create_widget_handle: ($) =>
-    seq(
-      field("handle", $.identifier),
-      optional(seq(kw("IN"), kw("WIDGET-POOL"), field("pool", $.identifier))),
-    ),
+    seq(field("handle", $.identifier), optional($.__create_in_widget_pool)),
 
   __create_widget_triggers: ($) =>
     seq(

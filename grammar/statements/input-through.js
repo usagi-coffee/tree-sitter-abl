@@ -29,20 +29,10 @@ module.exports = ({ kw }) => ({
       $.__input_through_unbuffered_convert_tail,
     ),
   __input_through_tail_after_map: ($) => $.__input_through_unbuffered_convert_tail,
-  __input_through_unbuffered_convert_tail: ($) =>
-    choice(
-      seq(
-        alias(kw("UNBUFFERED"), $.unbuffered),
-        optional(alias($.__input_through_convert_phrase, $.convert_phrase)),
-      ),
-      alias($.__input_through_convert_phrase, $.convert_phrase),
-    ),
-  __input_through_echo: ($) => choice(alias(kw("ECHO"), $.echo), alias(kw("NO-ECHO"), $.no_echo)),
+  __input_through_unbuffered_convert_tail: ($) => $.__input_unbuffered_convert_tail,
+  __input_through_echo: ($) => $.__input_echo,
   __input_through_map: ($) =>
-    choice(
-      seq(kw("MAP"), field("map", $._identifier_or_string_literal)),
-      alias(kw("NO-MAP"), $.no_map),
-    ),
+    choice(seq(kw("MAP"), field("map", $.__input_map_entry)), alias(kw("NO-MAP"), $.no_map)),
 
   __input_through_program_target: ($) =>
     choice(field("program", $.identifier), field("program", $.string_literal), $._value_expression),
@@ -58,13 +48,4 @@ module.exports = ({ kw }) => ({
       alias($.__input_through_shell_variable, $.shell_variable),
     ),
   __input_through_shell_variable: ($) => token(/\$+[A-Za-z_0-9]*/),
-  __input_through_convert_phrase: ($) =>
-    choice(
-      alias(kw("NO-CONVERT"), $.no_convert),
-      seq(
-        kw("CONVERT"),
-        optional(seq(kw("TARGET"), field("target", $.string_literal))),
-        optional(seq(kw("SOURCE"), field("source", $.string_literal))),
-      ),
-    ),
 });

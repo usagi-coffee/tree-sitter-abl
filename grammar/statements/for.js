@@ -36,15 +36,7 @@ module.exports = ({ kw }) => ({
       alias($.__for_break_by, $.break_by),
     ),
 
-  __for_variables: ($) =>
-    seq(
-      field("variable", $.identifier),
-      "=",
-      field("start", $._expression),
-      kw("TO"),
-      field("end", $._expression),
-      optional(seq(kw("BY"), field("step", $._expression))),
-    ),
+  __for_variables: ($) => $.__do_loop_phrase,
 
   __for_by_phrase: ($) => prec.right(seq(kw("BY"), $.__for_by_tail)),
   __for_group_by_phrase: ($) => prec.right(seq(kw("GROUP"), kw("BY"), $.__for_by_tail)),

@@ -9,7 +9,7 @@ module.exports = ({ kw }) => ({
         seq(kw("TO"), $.__output_to_target, repeat($.__output_to_option)),
         seq(
           kw("THROUGH"),
-          $.__output_through_program_target,
+          $.__input_through_program_target,
           repeat($.__output_through_argument),
           repeat($.__output_through_option),
         ),
@@ -44,21 +44,7 @@ module.exports = ({ kw }) => ({
       alias(kw("PAGED"), $.paged),
       alias($.__output_page_size_phrase, $.page_size_phrase),
       alias(kw("UNBUFFERED"), $.unbuffered),
-      alias($.__output_convert_phrase, $.convert_phrase),
-    ),
-
-  __output_convert_phrase: ($) =>
-    choice(
-      alias(kw("NO-CONVERT"), $.no_convert),
-      seq(
-        kw("CONVERT"),
-        repeat(
-          choice(
-            seq(kw("TARGET"), field("target", $.string_literal)),
-            seq(kw("SOURCE"), field("source", $.string_literal)),
-          ),
-        ),
-      ),
+      alias($.__input_convert_phrase, $.convert_phrase),
     ),
 
   __output_lob_dir_phrase: ($) =>
@@ -87,9 +73,6 @@ module.exports = ({ kw }) => ({
       $._value_expression,
       alias(kw("CLIPBOARD"), $.clipboard),
     ),
-
-  __output_through_program_target: ($) =>
-    choice(field("program", $.identifier), field("program", $.string_literal), $._value_expression),
 
   __output_through_argument: ($) =>
     choice(

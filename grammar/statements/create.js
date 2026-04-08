@@ -3,13 +3,13 @@ module.exports = ({ kw }) => ({
 
   __create_body: ($) =>
     choice(
-      prec(1, $.__create_alias),
-      prec(1, $.__create_buffer),
-      prec(1, $.__create_handle_with_pool_no_error_body),
-      prec(1, $.__create_handle_with_pool_body),
-      prec(1, $.__create_widget_pool),
-      prec(1, $.__create_server),
-      prec(1, $.__create_database),
+      $.__create_alias,
+      $.__create_buffer,
+      $.__create_handle_with_pool_no_error_body,
+      $.__create_handle_with_pool_body,
+      $.__create_widget_pool,
+      $.__create_server,
+      $.__create_database,
       $.__create_automation_object,
       $.__create_record,
     ),

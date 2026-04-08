@@ -26,28 +26,9 @@ module.exports = ({ kw }) => ({
     ),
   __submenu_element: ($) =>
     choice(
-      alias($.__submenu_item, $.menu_item),
-      alias($.__submenu_submenu, $.submenu_item),
+      alias($.__menu_item, $.menu_item),
+      alias($.__menu_submenu, $.submenu_item),
       alias(kw("RULE"), $.rule),
       alias(kw("SKIP"), $.skip),
-    ),
-  __submenu_item: ($) =>
-    seq(
-      kw("MENU-ITEM"),
-      field("name", $.identifier),
-      repeat(
-        choice(
-          $.__aggregate_label_phrase,
-          alias(kw("DISABLED"), $.disabled),
-          seq(kw("ACCELERATOR"), field("accelerator", $.string_literal)),
-        ),
-      ),
-    ),
-  __submenu_submenu: ($) =>
-    seq(
-      kw("SUB-MENU"),
-      field("name", $.identifier),
-      optional(alias(kw("DISABLED"), $.disabled)),
-      optional($.__aggregate_label_phrase),
     ),
 });
