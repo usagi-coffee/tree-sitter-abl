@@ -44,6 +44,9 @@
   - Example: `bun run reference '*'`: Returns all entries in reference (names only).
 - Detect rule naming issues
   - `bun run audit:naming`
+- Check statement family state counts
+  - `bun run audit:statements`
+  - `bun run audit:expressions`
 
 Strongly prefer using these commands as they have helpful side-effects like returning `ACTION_COUNT`, `STATE_COUNT` and `LARGE_STATE_COUNT`.
 
