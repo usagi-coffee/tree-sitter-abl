@@ -42,11 +42,28 @@ function formatLineList(lineNumbers) {
   return [...new Set(lineNumbers)].sort((a, b) => a - b).join(", ");
 }
 
+function dedupeEntries(entries, getKey) {
+  const seen = new Set();
+  const result = [];
+
+  for (const entry of entries) {
+    const key = getKey(entry);
+    if (seen.has(key)) continue;
+    seen.add(key);
+    result.push(entry);
+  }
+
+  return result;
+}
+
 const files = fs
   .readdirSync(statementsDir)
   .filter((filename) => filename.endsWith(".js") && filename !== "index.js")
   .sort();
 
+const fileData = new Map();
+const definitionOwners = new Map();
+const externalUsages = new Map();
 let foundIssues = false;
 
 for (const filename of files) {
@@ -56,6 +73,17 @@ for (const filename of files) {
   const expectedPrefix = `__${normalizeBaseName(filename)}_`;
   const definitions = collectDefinitions(lines);
   const references = collectReferences(lines);
+
+  fileData.set(filename, { expectedPrefix, definitions, references });
+
+  for (const [name, lineNumber] of definitions) {
+    if (!definitionOwners.has(name)) definitionOwners.set(name, []);
+    definitionOwners.get(name).push({ filename, lineNumber });
+  }
+}
+
+for (const filename of files) {
+  const { expectedPrefix, definitions, references } = fileData.get(filename);
 
   const badDefinitions = [...definitions.entries()].filter(
     ([name]) => !name.startsWith(expectedPrefix),
@@ -75,9 +103,56 @@ for (const filename of files) {
 
   for (const [name, lineNumbers] of badReferences) {
     console.log(`  ref ${name} at lines ${formatLineList(lineNumbers)}`);
+
+    const owners = definitionOwners.get(name) || [];
+
+    for (const owner of owners) {
+      if (owner.filename === filename) continue;
+
+      if (!externalUsages.has(name)) {
+        externalUsages.set(name, { owners: [], consumers: [] });
+      }
+
+      const usage = externalUsages.get(name);
+      usage.owners.push(owner);
+      usage.consumers.push({ filename, lineNumbers });
+    }
   }
 
   console.log("");
+}
+
+const sharedRules = [...externalUsages.entries()]
+  .map(([name, usage]) => ({
+    name,
+    owners: dedupeEntries(usage.owners, (entry) => `${entry.filename}:${entry.lineNumber}`),
+    consumers: dedupeEntries(
+      usage.consumers,
+      (entry) => `${entry.filename}:${formatLineList(entry.lineNumbers)}`,
+    ),
+  }))
+  .sort((left, right) => left.name.localeCompare(right.name));
+
+if (sharedRules.length > 0) {
+  foundIssues = true;
+  console.log("Shared private-rule usage across statement files:");
+  console.log("");
+
+  for (const rule of sharedRules) {
+    const ownerText = rule.owners
+      .map((owner) => `${owner.filename}:${owner.lineNumber}`)
+      .sort()
+      .join(", ");
+    const consumerText = rule.consumers
+      .map((consumer) => `${consumer.filename}:${formatLineList(consumer.lineNumbers)}`)
+      .sort()
+      .join(", ");
+
+    console.log(`${rule.name}`);
+    console.log(`  owner: ${ownerText}`);
+    console.log(`  consumers: ${consumerText}`);
+    console.log("");
+  }
 }
 
 if (!foundIssues) {
