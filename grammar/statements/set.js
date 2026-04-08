@@ -20,8 +20,8 @@ module.exports = ({ kw }) => ({
 
   __set_field: ($) =>
     choice(
-      alias($.__set_skip_phrase, $.skip_phrase),
-      alias($.__set_space_phrase, $.space_phrase),
+      alias($._skip_phrase, $.skip_phrase),
+      alias($._space_phrase, $.space_phrase),
       prec.right(
         seq(
           field("field", $._identifier_or_qualified_name),
@@ -45,18 +45,7 @@ module.exports = ({ kw }) => ({
     ),
 
   __set_record_body: ($) =>
-    seq(field("record", $.__set_record), optional($.__except_fields), optional($.frame_phrase)),
+    seq(field("record", $.__set_record),       optional($._except_fields), optional($.frame_phrase)),
 
   __set_record: ($) => $._identifier_or_qualified_name,
-  __set_skip_phrase: ($) =>
-    choice(
-      prec.right(1, seq(kw("SKIP"), "(", field("skip", $._expression), ")")),
-      prec(-1, seq(kw("SKIP"))),
-    ),
-  __set_space_phrase: ($) =>
-    choice(
-      prec.right(1, seq(kw("SPACE"), "(", field("space", $._expression), ")")),
-      prec(-1, seq(kw("SPACE"))),
-    ),
-  __except_fields: ($) => seq(kw("EXCEPT"), repeat1(field("except", $.identifier))),
 });

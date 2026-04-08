@@ -26,8 +26,8 @@ module.exports = ({ kw }) => ({
     ),
   __submenu_element: ($) =>
     choice(
-      alias($.__menu_item, $.menu_item),
-      alias($.__menu_submenu, $.submenu_item),
+      alias($._menu_item, $.menu_item),
+      alias($._menu_submenu, $.submenu_item),
       alias(kw("RULE"), $.rule),
       alias(kw("SKIP"), $.skip),
     ),

@@ -79,7 +79,7 @@ module.exports = ({ kw }) => ({
 
   __parameter_variable_type_phrase: ($) =>
     seq(
-      $.__variable_type,
+      $._variable_type,
       optional(seq(kw("TO"), field("target", $.identifier))),
       optional(alias($.__parameter_extent_phrase, $.extent_phrase)),
     ),

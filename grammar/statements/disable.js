@@ -5,7 +5,7 @@ module.exports = ({ kw }) => ({
     seq(
       optional(alias(kw("UNLESS-HIDDEN"), $.unless_hidden)),
       choice(
-        seq(alias(kw("ALL"), $.all), optional($.__except_fields)),
+        seq(alias(kw("ALL"), $.all), optional($._except_fields)),
         repeat1(alias($.__disable_item, $.disable_item)),
       ),
       optional($.frame_phrase),

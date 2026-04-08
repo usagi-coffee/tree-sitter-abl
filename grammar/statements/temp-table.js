@@ -4,41 +4,20 @@ module.exports = ({ kw }) => ({
       kw("DEFINE", { offset: 3 }),
       optional($.__temp_table_modifier),
       kw("TEMP-TABLE"),
-      $.__temp_table_body,
+      $._table_body,
+      repeat(
+        choice(
+          alias($._table_field, $.temp_table_field),
+          alias($._table_index, $.temp_table_index),
+        ),
+      ),
       $._terminator,
     ),
 
-  __temp_table_body: ($) =>
-    seq(
-      field("name", $.identifier),
-      optional(alias(kw("NO-UNDO"), $.no_undo)),
-      repeat($.__temp_table_serializable_option),
-      optional(alias(kw("REFERENCE-ONLY"), $.reference_only)),
-      repeat(
-        choice(
-          $.argument_reference,
-          alias($.__temp_table_like_phrase, $.like_phrase),
-          alias($.__temp_table_like_sequential_phrase, $.like_sequential_phrase),
-          alias(kw("RCODE-INFORMATION"), $.rcode_information),
-          alias($.__temp_table_before_table_phrase, $.before_table_phrase),
-        ),
-      ),
-      repeat(
-        choice(
-          alias($.__temp_table_field, $.temp_table_field),
-          alias($.__temp_table_index, $.temp_table_index),
-        ),
-      ),
-    ),
-
-  __temp_table_serializable_option: ($) =>
-    choice(
-      seq(kw("NAMESPACE-URI"), field("namespace_uri", $.string_literal)),
-      seq(kw("NAMESPACE-PREFIX"), field("namespace_prefix", $.string_literal)),
-      seq(kw("XML-NODE-NAME"), field("node", $.string_literal)),
-      $.__temp_table_serialize_name_phrase,
-      seq(kw("XML-NODE-TYPE"), field("xml_node_type", $.string_literal)),
-    ),
+  // Aliases for shared rules that reference temp-table specific rules
+  _like_phrase: ($) => $.__temp_table_like_phrase,
+  _table_field: ($) => $.__temp_table_field,
+  _table_index: ($) => $.__temp_table_index,
 
   __temp_table_field: ($) =>
     seq(
@@ -58,6 +37,15 @@ module.exports = ({ kw }) => ({
       field("name", $.identifier),
       optional(seq(choice(kw("AS"), kw("IS")), repeat($.__temp_table_index_modifier))),
       repeat1($.__temp_table_index_field),
+    ),
+
+  __temp_table_serializable_option: ($) =>
+    choice(
+      seq(kw("NAMESPACE-URI"), field("namespace_uri", $.string_literal)),
+      seq(kw("NAMESPACE-PREFIX"), field("namespace_prefix", $.string_literal)),
+      seq(kw("XML-NODE-NAME"), field("node", $.string_literal)),
+      $.__temp_table_serialize_name_phrase,
+      seq(kw("XML-NODE-TYPE"), field("xml_node_type", $.string_literal)),
     ),
 
   __temp_table_index_modifier: ($) =>

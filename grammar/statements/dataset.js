@@ -4,25 +4,8 @@ module.exports = ({ kw }) => ({
       kw("DEFINE", { offset: 3 }),
       optional($.__dataset_modifier),
       kw("DATASET"),
-      $.__dataset_body,
+      $._dataset_body,
       $._terminator,
-    ),
-
-  __dataset_body: ($) =>
-    seq(
-      field("name", $.identifier),
-      repeat($.__dataset_serializable_option),
-      optional(alias(kw("SERIALIZE-HIDDEN"), $.serialize_hidden)),
-      optional(alias(kw("REFERENCE-ONLY"), $.reference_only)),
-      optional(
-        seq(
-          kw("FOR"),
-          field("table", $.identifier),
-          repeat(seq(",", field("table", $.identifier))),
-        ),
-      ),
-      repeat(alias($.__dataset_data_relation, $.data_relation)),
-      repeat(alias($.__dataset_parent_id_relation, $.parent_id_relation)),
     ),
 
   __dataset_serializable_option: ($) =>

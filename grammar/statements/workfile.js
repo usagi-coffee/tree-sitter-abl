@@ -3,9 +3,9 @@ module.exports = ({ kw }) => ({
   workfile_definition: ($) =>
     seq(
       kw("DEFINE", { offset: 3 }),
-      optional($.__work_table_modifier),
+      optional($._work_table_modifier),
       kw("WORKFILE"),
-      $.__work_table_body,
+      $._work_table_body,
       $._terminator,
     ),
 });

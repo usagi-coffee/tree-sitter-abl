@@ -61,17 +61,17 @@ module.exports = ({ kw }) => ({
       seq(
         $.__method_definition_prefix,
         kw("ABSTRACT"),
-        repeat($.__method_modifier_no_abstract),
+        repeat($._method_modifier_no_abstract),
         $.__method_definition_signature,
         $._terminator_dot,
       ),
     ),
-  __method_definition_prefix: ($) => seq(kw("METHOD"), repeat($.__method_modifier_no_abstract)),
+  __method_definition_prefix: ($) => seq(kw("METHOD"), repeat($._method_modifier_no_abstract)),
   __method_definition_signature: ($) =>
     seq(
-      $.__method_return_type,
+      $._method_return_type,
       field("name", $.identifier),
-      alias($.__method_parameters, $.parameters),
+      alias($._method_parameters, $.parameters),
     ),
 
   constructor_definition: ($) =>
@@ -79,7 +79,7 @@ module.exports = ({ kw }) => ({
       kw("CONSTRUCTOR"),
       repeat($.__constructor_modifier),
       field("name", $.identifier),
-      alias($.__method_parameters, $.parameters),
+      alias($._method_parameters, $.parameters),
       alias($._colon, ":"),
       alias($.__constructor_body, $.body),
     ),
@@ -94,7 +94,7 @@ module.exports = ({ kw }) => ({
       alias($.__destructor_body, $.body),
     ),
 
-  __method_parameters: ($) =>
+  _method_parameters: ($) =>
     seq(
       "(",
       optional(
@@ -234,7 +234,7 @@ module.exports = ({ kw }) => ({
       alias(kw("OVERRIDE"), $.override_modifier),
       alias(kw("FINAL"), $.final_modifier),
     ),
-  __method_modifier_no_abstract: ($) =>
+  _method_modifier_no_abstract: ($) =>
     choice(
       alias(kw("PRIVATE"), $.access_modifier),
       alias(kw("PACKAGE-PRIVATE"), $.access_modifier),
@@ -256,7 +256,7 @@ module.exports = ({ kw }) => ({
       alias(kw("STATIC"), $.static_modifier),
     ),
 
-  __method_return_type: ($) =>
+  _method_return_type: ($) =>
     choice(field("type", alias(kw("VOID"), $.identifier)), $.__class_typed_extent_phrase),
   __class_typed_extent_phrase: ($) =>
     seq(

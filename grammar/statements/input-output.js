@@ -7,7 +7,7 @@ module.exports = ({ kw }) => ({
       alias(kw("CLOSE"), $.close),
       seq(
         kw("THROUGH"),
-        $.__input_through_program_target,
+        $._program_target,
         repeat($.__input_output_through_argument),
         repeat($.__input_output_through_option),
       ),
@@ -29,6 +29,6 @@ module.exports = ({ kw }) => ({
       seq(kw("MAP"), field("map", $._identifier_or_string_literal)),
       alias(kw("NO-MAP"), $.no_map),
       alias(kw("UNBUFFERED"), $.unbuffered),
-      alias($.__input_convert_phrase, $.convert_phrase),
+      alias($._convert_phrase, $.convert_phrase),
     ),
 });

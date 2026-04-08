@@ -5,6 +5,6 @@ module.exports = ({ kw }) => ({
     seq(
       kw("TEMP-TABLE"),
       field("handle", $.identifier),
-      optional(alias($.__create_in_widget_pool, $.in_widget_pool_phrase)),
+      optional(alias($._in_widget_pool, $.in_widget_pool_phrase)),
     ),
 });

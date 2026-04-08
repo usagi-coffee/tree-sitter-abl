@@ -30,27 +30,38 @@ module.exports = ({ kw }) => ({
     ),
 
   __interface_temp_table: ($) =>
-    seq(kw("DEFINE", { offset: 3 }), kw("TEMP-TABLE"), $.__temp_table_body, $._terminator),
+    seq(
+      kw("DEFINE", { offset: 3 }),
+      kw("TEMP-TABLE"),
+      $._table_body,
+      repeat(
+        choice(
+          alias($._table_field, $.temp_table_field),
+          alias($._table_index, $.temp_table_index),
+        ),
+      ),
+      $._terminator,
+    ),
 
   __interface_dataset: ($) =>
-    seq(kw("DEFINE", { offset: 3 }), kw("DATASET"), $.__dataset_body, $._terminator),
+    seq(kw("DEFINE", { offset: 3 }), kw("DATASET"), $._dataset_body, $._terminator),
 
   __interface_event: ($) =>
     seq(
       kw("DEFINE", { offset: 3 }),
       optional(alias(kw("PUBLIC"), $.access_modifier)),
       kw("EVENT"),
-      $.__event_body,
+      $._event_body,
       $._terminator,
     ),
 
   interface_method_definition: ($) =>
     seq(
       kw("METHOD"),
-      repeat($.__method_modifier_no_abstract),
-      $.__method_return_type,
+      repeat($._method_modifier_no_abstract),
+      $._method_return_type,
       field("name", $.identifier),
-      alias($.__method_parameters, $.parameters),
+      alias($._method_parameters, $.parameters),
       $._terminator_dot,
     ),
 });

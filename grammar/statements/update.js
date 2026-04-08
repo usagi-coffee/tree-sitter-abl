@@ -4,7 +4,7 @@ module.exports = ({ kw }) => ({
   __update_body: ($) => seq(choice($.__update_record_body, $.__update_fields_body)),
 
   __update_record_body: ($) =>
-    seq(field("record", $.__update_record), optional($.__except_fields), optional($.frame_phrase)),
+    seq(field("record", $.__update_record),       optional($._except_fields), optional($.frame_phrase)),
 
   __update_fields_body: ($) =>
     seq(
@@ -17,8 +17,8 @@ module.exports = ({ kw }) => ({
 
   __update_field: ($) =>
     choice(
-      alias($.__set_skip_phrase, $.skip_phrase),
-      alias($.__set_space_phrase, $.space_phrase),
+      alias($._skip_phrase, $.skip_phrase),
+      alias($._space_phrase, $.space_phrase),
       seq(
         field("field", $.__update_field_target),
         optional($.format_phrase),

@@ -2,5 +2,5 @@
 module.exports = ($) => [
   // Purpose: prefer function call when filename starts with identifier + '('.
   // Example: OS-APPEND myFunc() target.
-  [$.function_call, $.__os_filename],
+  [$.function_call, $._os_filename],
 ];

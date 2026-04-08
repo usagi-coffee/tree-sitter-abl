@@ -4,10 +4,10 @@ module.exports = ({ kw }) => ({
   __repeat_body: ($) =>
     seq(
       kw("REPEAT"),
-      optional(alias($.__do_for_phrase, $.for_phrase)),
+      optional(alias($._for_phrase, $.for_phrase)),
       optional($.preselect_phrase),
       optional($.query_tuning_phrase),
-      optional($.__do_loop_phrase),
+      optional($._loop_phrase),
       optional($.__repeat_condition_phrase),
       optional(alias(kw("TRANSACTION"), $.transaction)),
       repeat(

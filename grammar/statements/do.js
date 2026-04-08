@@ -4,7 +4,7 @@ module.exports = ({ kw }) => ({
   __do_body: ($) =>
     seq(
       kw("DO"),
-      optional(alias($.__do_for_phrase, $.for_phrase)),
+      optional(alias($._for_phrase, $.for_phrase)),
       optional($.preselect_phrase),
       optional($.query_tuning_phrase),
       optional(alias(kw("TRANSACTION"), $.transaction)),
@@ -25,24 +25,6 @@ module.exports = ({ kw }) => ({
 
   body: ($) =>
     prec.right(seq(choice(alias($._colon, ":"), $._terminator_dot), repeat($._statement))),
-  __do_for_phrase: ($) =>
-    seq(
-      kw("FOR"),
-      seq(
-        field("record", $._identifier_or_qualified_name),
-        repeat(seq(",", field("record", $._identifier_or_qualified_name))),
-      ),
-    ),
-
-  __do_condition_or_loop_phrase: ($) => choice($.__do_while_phrase, $.__do_loop_phrase),
-  __do_loop_phrase: ($) =>
-    seq(
-      field("variable", $.identifier),
-      "=",
-      field("start", $._expression),
-      kw("TO"),
-      field("end", $._expression),
-      optional(seq(kw("BY"), field("step", $._expression))),
-    ),
+  __do_condition_or_loop_phrase: ($) => choice($.__do_while_phrase, $._loop_phrase),
   __do_while_phrase: ($) => seq(kw("WHILE"), field("condition", $._expression)),
 });

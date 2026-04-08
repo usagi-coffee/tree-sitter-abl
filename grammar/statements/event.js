@@ -4,12 +4,9 @@ module.exports = ({ kw }) => ({
       kw("DEFINE", { offset: 3 }),
       optional($.__event_modifier),
       kw("EVENT"),
-      $.__event_body,
+      $._event_body,
       $._terminator,
     ),
-
-  __event_body: ($) =>
-    seq(field("name", $.identifier), optional(alias($.__event_signature, $.signature))),
 
   __event_signature: ($) =>
     choice(

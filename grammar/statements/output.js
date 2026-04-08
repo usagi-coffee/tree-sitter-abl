@@ -3,26 +3,23 @@ module.exports = ({ kw }) => ({
 
   __output_body: ($) =>
     seq(
-      optional($.__output_stream),
+      optional($._stream_definition),
       choice(
         alias(kw("CLOSE"), $.close),
         seq(kw("TO"), $.__output_to_target, repeat($.__output_to_option)),
         seq(
           kw("THROUGH"),
-          $.__input_through_program_target,
+          $._program_target,
           repeat($.__output_through_argument),
           repeat($.__output_through_option),
         ),
       ),
     ),
 
-  __output_stream: ($) =>
-    seq(choice(kw("STREAM"), kw("STREAM-HANDLE")), field("name", $.identifier)),
-
   __output_to_option: ($) =>
     choice(
       $.preprocessor_name,
-      alias($.__output_lob_dir_phrase, $.lob_dir_phrase),
+      alias($._lob_dir_phrase, $.lob_dir_phrase),
       alias($.__output_num_copies_phrase, $.num_copies_phrase),
       alias(kw("COLLATE"), $.collate),
       alias(kw("LANDSCAPE"), $.landscape),
@@ -44,11 +41,8 @@ module.exports = ({ kw }) => ({
       alias(kw("PAGED"), $.paged),
       alias($.__output_page_size_phrase, $.page_size_phrase),
       alias(kw("UNBUFFERED"), $.unbuffered),
-      alias($.__input_convert_phrase, $.convert_phrase),
+      alias($._convert_phrase, $.convert_phrase),
     ),
-
-  __output_lob_dir_phrase: ($) =>
-    seq(kw("LOB-DIR"), field("directory", choice($.preprocessor_name, $._value_expression))),
 
   __output_num_copies_phrase: ($) =>
     seq(
