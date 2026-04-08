@@ -42,6 +42,8 @@
   - Example: `bun run reference '*statement'`: Returns all statements entries by prefix (names only).
   - Example: `bun run reference '*statement*'`: Returns all statements entries that include `statement` (names only).
   - Example: `bun run reference '*'`: Returns all entries in reference (names only).
+- Detect rule naming issues
+  - `bun run audit:naming`
 
 Strongly prefer using these commands as they have helpful side-effects like returning `ACTION_COUNT`, `STATE_COUNT` and `LARGE_STATE_COUNT`.
 
@@ -76,6 +78,28 @@ Strongly prefer using these commands as they have helpful side-effects like retu
 - For options of statement with values prefer e.g `seq(kw("ROW"), field("row", ...))` for those that can have expressions and e.g `alias(kw("NO-LABELS", $.no_labels))` for those that do not have expressions.
 - Do not use e.g `no_labels_option` as an alias, just use `no_labels` to keep it clean, avoid `_option` suffix.
 - Big blocks of `repeat(choice(` rules for the statement record/column/field/whatever should prefer inlining instead of duplication as it offers modest state reduction.
+
+## Rule naming
+
+We have three types of rule:
+
+```js
+// This is a public rule visible in the AST.
+rule: ($) => ...,
+
+// This is a shared rule (single underscore), it should live in grammar.js.
+_shared_rule: ($) => ...,
+
+// This is a private rule (double underscore, statement prefix), it should live in <my-statement>.js
+// This rule should never be reused between files unless it's made into a shared rule and moved into grammar.js
+__my_statement_rule: ($) => ...,
+```
+
+Notes:
+- In `grammar/**/<name>.js`, private helpers should be named `__<name>_*` using the file name with `-` converted to `_`, e.g. `input-through.js` -> `__input_through_*`.
+- The exported top-level rule should stay aligned with the statement name, e.g. `variable.js` should expose `variable_definition` and keep its internal helpers under `__variable_*`.
+- We do not reuse private rules between files but if reusing improves state counts it's allowed to convert a private rule into a shared rule and move it to `grammar.js`.
+- Use `npm run audit:naming` to find both local prefix mismatches and cross-file usage of private `__...` rules.
 
 ## Clean tree conventions
 
