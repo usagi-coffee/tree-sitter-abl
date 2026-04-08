@@ -95,14 +95,14 @@ for (const filename of files) {
   if (badDefinitions.length === 0 && badReferences.length === 0) continue;
 
   foundIssues = true;
-  console.log(`${filename} expected ${expectedPrefix}*`);
+  //  console.log(`${filename} expected ${expectedPrefix}*`);
 
   for (const [name, lineNumber] of badDefinitions) {
-    console.log(`  def ${name} at line ${lineNumber}`);
+    //   console.log(`  def ${name} at line ${lineNumber}`);
   }
 
   for (const [name, lineNumbers] of badReferences) {
-    console.log(`  ref ${name} at lines ${formatLineList(lineNumbers)}`);
+    //    console.log(`  ref ${name} at lines ${formatLineList(lineNumbers)}`);
 
     const owners = definitionOwners.get(name) || [];
 
@@ -119,10 +119,48 @@ for (const filename of files) {
     }
   }
 
-  console.log("");
+//  console.log("");
 }
 
+const sharedRules = [...externalUsages.entries()]
+  .map(([name, usage]) => ({
+    name,
+    owners: dedupeEntries(
+      usage.owners,
+      (entry) => `${entry.filename}:${entry.lineNumber}`
+    ),
+    consumers: dedupeEntries(
+      usage.consumers,
+      (entry) => `${entry.filename}:${formatLineList(entry.lineNumbers)}`
+    ),
+  }))
+  .sort((left, right) => left.name.localeCompare(right.name));
+
+if (sharedRules.length > 0) {
+  foundIssues = true;
+  console.log("Shared private-rule usage across statement files:");
+  console.log("");
+
+  for (const rule of sharedRules) {
+    const ownerText = rule.owners
+      .map((owner) => `${owner.filename}:${owner.lineNumber}`)
+      .sort()
+      .join(", ");
+    const consumerText = rule.consumers
+      .map(
+        (consumer) =>
+          `${consumer.filename}:${formatLineList(consumer.lineNumbers)}`
+      )
+      .sort()
+      .join(", ");
+
+    console.log(`${rule.name}`);
+    console.log(`  owner: ${ownerText}`);
+    console.log(`  consumers: ${consumerText}`);
+    console.log("");
+  }
+}
 
 if (!foundIssues) {
-  console.log("No issues found.");
+  console.log("No mismatched private statement rule prefixes found.");
 }

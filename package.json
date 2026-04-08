@@ -40,6 +40,7 @@
     "generate": "bun run tools/generate.js",
     "check": "bun run tools/generate.js",
     "audit:naming": "node tools/audit_naming.js",
+    "audit:sharing": "node tools/audit_sharing.js",
     "audit:statements": "tree-sitter generate --report-states-for-rule - 2>&1 | grep -E '_statement|_definition'",
     "audit:expressions": "tree-sitter generate --report-states-for-rule - 2>&1 | grep -E '_expression'",
     "audit:node-types": "node tools/audit_node_types.js",

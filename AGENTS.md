@@ -42,9 +42,10 @@
   - Example: `bun run reference '*statement'`: Returns all statements entries by prefix (names only).
   - Example: `bun run reference '*statement*'`: Returns all statements entries that include `statement` (names only).
   - Example: `bun run reference '*'`: Returns all entries in reference (names only).
-- Detect rule naming issues
+- Detect rule design issues
   - `bun run audit:naming`
-- Check statement family state counts
+  - `bun run audit:sharing`
+- Check per-statement family state counts
   - `bun run audit:statements`
   - `bun run audit:expressions`
 
