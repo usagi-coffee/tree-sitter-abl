@@ -3,8 +3,8 @@
   "grammars": [
     {
       "name": "abl",
-      "camelcase": "abl",
-      "title": "abl",
+      "camelcase": "ABL",
+      "title": "OpenEdge ABL",
       "scope": "source.abl",
       "file-types": ["cls", "p", "i", "w"],
       "injection-regex": "^abl$",
@@ -15,10 +15,13 @@
   "metadata": {
     "version": "0.0.51",
     "license": "MIT",
-    "description": "ABL grammar for tree-sitter",
+    "description": "OpenEdge ABL grammar for tree-sitter",
     "authors": [
       {
-        "name": "Kamil Jakubus"
+        "name": "Kamil Jakubus",
+        "name": "Jason Chrosrova",
+        "name": "Eglė Kazbaraitė",
+        "name": "Diego J. Coppari"
       }
     ],
     "links": {

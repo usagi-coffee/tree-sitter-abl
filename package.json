@@ -1,13 +1,8 @@
 {
   "name": "@usagi-coffee/tree-sitter-abl",
   "version": "0.0.51",
-  "description": "ABL grammar for tree-sitter",
-  "keywords": [
-    "abl",
-    "incremental",
-    "parsing",
-    "tree-sitter"
-  ],
+  "description": "OpenEdge ABL grammar for tree-sitter",
+  "keywords": ["abl", "incremental", "parsing", "tree-sitter"],
   "license": "MIT",
   "author": {
     "name": "Kamil Jakubus"
