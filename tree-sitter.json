@@ -18,9 +18,15 @@
     "description": "OpenEdge ABL grammar for tree-sitter",
     "authors": [
       {
-        "name": "Kamil Jakubus",
-        "name": "Jason Chrosrova",
-        "name": "Eglė Kazbaraitė",
+        "name": "Kamil Jakubus"
+      },
+      {
+        "name": "Jason Chrosrova"
+      },
+      {
+        "name": "Eglė Kazbaraitė"
+      },
+      {
         "name": "Diego J. Coppari"
       }
     ],
