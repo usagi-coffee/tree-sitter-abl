@@ -28,7 +28,8 @@ module.exports = ({ kw }) => ({
       seq(repeat1($.__do_block_option), $.body),
       $.body,
     ),
-  __do_body_after_second_transaction: ($) => choice(seq(repeat1($.__do_block_option), $.body), $.body),
+  __do_body_after_second_transaction: ($) =>
+    choice(seq(repeat1($.__do_block_option), $.body), $.body),
   __do_block_option: ($) =>
     choice(
       $.stop_after_phrase,

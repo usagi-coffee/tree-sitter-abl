@@ -40,14 +40,12 @@ module.exports = ({ kw }) => ({
         repeat1(
           choice(
             seq(
-              alias($.__display_field, $.field),
-              optional($.format_phrase),
+              $.__display_formatted_field,
               optional(seq(kw("WHEN"), field("when", $.__display_when_expression))),
               optional(seq("@", field("base", $._identifier_or_qualified_name))),
             ),
             seq(
-              alias($.__display_field, $.field),
-              optional($.format_phrase),
+              $.__display_formatted_field,
               seq("@", field("base", $._identifier_or_qualified_name)),
               $.format_phrase,
               optional(seq(kw("WHEN"), field("when", $.__display_when_expression))),
@@ -60,6 +58,8 @@ module.exports = ({ kw }) => ({
     ),
 
   __display_when_expression: ($) => $._expression,
+  __display_formatted_field: ($) =>
+    seq(alias($.__display_field, $.field), optional($.format_phrase)),
 
   __display_field: ($) =>
     prec.right(
