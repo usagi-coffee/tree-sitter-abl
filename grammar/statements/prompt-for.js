@@ -39,23 +39,79 @@ module.exports = ({ kw }) => ({
         repeat1(seq(field("field", $._identifier_or_qualified_name), optional($.format_phrase))),
         ")",
       ),
-      seq(
-        field("constant", $.string_literal),
-        optional(
-          choice(
-            alias($.__prompt_for_at_phrase, $.at_phrase),
-            alias($.__prompt_for_to_phrase, $.to_phrase),
-          ),
-        ),
-        optional(alias($.__prompt_for_view_as_phrase, $.view_as_phrase)),
-        optional(seq(kw("FGCOLOR"), field("fgcolor", $._expression))),
-        optional(seq(kw("BGCOLOR"), field("bgcolor", $._expression))),
-        optional(seq(kw("FONT"), field("font", $._expression))),
-      ),
+      seq(field("constant", $.string_literal), optional($.__prompt_for_constant_tail)),
       seq(kw("SKIP"), optional(field("skip", seq("(", $._expression, ")")))),
       seq(kw("SPACE"), optional(field("space", seq("(", $._expression, ")")))),
       "^",
     ),
+  __prompt_for_constant_tail: ($) =>
+    choice(
+      seq(
+        alias($.__prompt_for_at_phrase, $.at_phrase),
+        optional($.__prompt_for_constant_tail_after_position),
+      ),
+      seq(
+        alias($.__prompt_for_to_phrase, $.to_phrase),
+        optional($.__prompt_for_constant_tail_after_position),
+      ),
+      seq(
+        alias($.__prompt_for_view_as_phrase, $.view_as_phrase),
+        optional($.__prompt_for_constant_tail_after_view_as),
+      ),
+      seq(
+        kw("FGCOLOR"),
+        field("fgcolor", $._expression),
+        optional($.__prompt_for_constant_tail_after_fgcolor),
+      ),
+      seq(
+        kw("BGCOLOR"),
+        field("bgcolor", $._expression),
+        optional($.__prompt_for_constant_tail_after_bgcolor),
+      ),
+      seq(kw("FONT"), field("font", $._expression)),
+    ),
+  __prompt_for_constant_tail_after_position: ($) =>
+    choice(
+      seq(
+        alias($.__prompt_for_view_as_phrase, $.view_as_phrase),
+        optional($.__prompt_for_constant_tail_after_view_as),
+      ),
+      seq(
+        kw("FGCOLOR"),
+        field("fgcolor", $._expression),
+        optional($.__prompt_for_constant_tail_after_fgcolor),
+      ),
+      seq(
+        kw("BGCOLOR"),
+        field("bgcolor", $._expression),
+        optional($.__prompt_for_constant_tail_after_bgcolor),
+      ),
+      seq(kw("FONT"), field("font", $._expression)),
+    ),
+  __prompt_for_constant_tail_after_view_as: ($) =>
+    choice(
+      seq(
+        kw("FGCOLOR"),
+        field("fgcolor", $._expression),
+        optional($.__prompt_for_constant_tail_after_fgcolor),
+      ),
+      seq(
+        kw("BGCOLOR"),
+        field("bgcolor", $._expression),
+        optional($.__prompt_for_constant_tail_after_bgcolor),
+      ),
+      seq(kw("FONT"), field("font", $._expression)),
+    ),
+  __prompt_for_constant_tail_after_fgcolor: ($) =>
+    choice(
+      seq(
+        kw("BGCOLOR"),
+        field("bgcolor", $._expression),
+        optional($.__prompt_for_constant_tail_after_bgcolor),
+      ),
+      seq(kw("FONT"), field("font", $._expression)),
+    ),
+  __prompt_for_constant_tail_after_bgcolor: ($) => seq(kw("FONT"), field("font", $._expression)),
 
   __prompt_for_at_phrase: ($) => seq(kw("AT"), field("position", token(/[0-9]+(\.[0-9]+)?/))),
   __prompt_for_to_phrase: ($) => seq(kw("TO"), field("position", token(/[0-9]+(\.[0-9]+)?/))),

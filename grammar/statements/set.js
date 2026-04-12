@@ -9,14 +9,30 @@ module.exports = ({ kw }) => ({
     ),
 
   __set_fields_body: ($) =>
-    seq(
-      repeat1(alias($.__set_field, $.field)),
-      optional(alias($._go_on_phrase, $.go_on_phrase)),
-      optional($._format_validate),
-      optional(seq(kw("HELP"), field("help", $.string_literal))),
-      optional($.frame_phrase),
-      optional($.editing_phrase),
+    seq(repeat1(alias($.__set_field, $.field)), optional($.__set_fields_tail)),
+  __set_fields_tail: ($) =>
+    choice(
+      seq(alias($._go_on_phrase, $.go_on_phrase), optional($.__set_fields_tail_after_go_on)),
+      seq($._format_validate, optional($.__set_fields_tail_after_format_validate)),
+      seq(kw("HELP"), field("help", $.string_literal), optional($.__set_fields_tail_after_help)),
+      seq($.frame_phrase, optional($.editing_phrase)),
+      $.editing_phrase,
     ),
+  __set_fields_tail_after_go_on: ($) =>
+    choice(
+      seq($._format_validate, optional($.__set_fields_tail_after_format_validate)),
+      seq(kw("HELP"), field("help", $.string_literal), optional($.__set_fields_tail_after_help)),
+      seq($.frame_phrase, optional($.editing_phrase)),
+      $.editing_phrase,
+    ),
+  __set_fields_tail_after_format_validate: ($) =>
+    choice(
+      seq(kw("HELP"), field("help", $.string_literal), optional($.__set_fields_tail_after_help)),
+      seq($.frame_phrase, optional($.editing_phrase)),
+      $.editing_phrase,
+    ),
+  __set_fields_tail_after_help: ($) =>
+    choice(seq($.frame_phrase, optional($.editing_phrase)), $.editing_phrase),
 
   __set_field: ($) =>
     choice(

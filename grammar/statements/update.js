@@ -19,12 +19,8 @@ module.exports = ({ kw }) => ({
     choice(
       alias($._skip_phrase, $.skip_phrase),
       alias($._space_phrase, $.space_phrase),
-      seq(
-        field("field", $.__update_field_target),
-        optional($.format_phrase),
-        optional(seq(kw("WHEN"), field("when", $._expression))),
-      ),
-      seq(field("field", $.__update_field_target), "=", field("value", $._expression)),
+      seq($.__update_field_target_item, optional(seq(kw("WHEN"), field("when", $._expression)))),
+      seq($.__update_field_target_item, "=", field("value", $._expression)),
       seq(
         kw("TEXT"),
         "(",
@@ -39,5 +35,7 @@ module.exports = ({ kw }) => ({
     ),
 
   __update_record: ($) => $._identifier_or_qualified_name,
+  __update_field_target_item: ($) =>
+    seq(field("field", $.__update_field_target), optional($.format_phrase)),
   __update_field_target: ($) => choice(prec(1, $._identifier_or_qualified_name), $.array_access),
 });

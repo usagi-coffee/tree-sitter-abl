@@ -25,10 +25,16 @@ module.exports = ({ kw }) => ({
         kw("WINDOW"),
         seq(kw("VALUE"), "(", field("widget_type", $._expression), ")"),
       ),
-      optional($.__create_widget_handle),
-      optional($.assign_phrase),
-      optional($.__create_widget_triggers),
+      optional($.__create_widget_tail),
     ),
+  __create_widget_tail: ($) =>
+    choice(
+      seq($.__create_widget_handle, optional($.__create_widget_tail_after_handle)),
+      seq($.assign_phrase, optional($.__create_widget_triggers)),
+      $.__create_widget_triggers,
+    ),
+  __create_widget_tail_after_handle: ($) =>
+    choice(seq($.assign_phrase, optional($.__create_widget_triggers)), $.__create_widget_triggers),
   __create_widget_handle: ($) => seq(field("handle", $.identifier), optional($._in_widget_pool)),
 
   __create_widget_triggers: ($) =>

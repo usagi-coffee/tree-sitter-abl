@@ -134,18 +134,57 @@ module.exports = ({ kw }) => ({
     seq(
       field("name", $.identifier),
       repeat($.__dataset_serializable_option),
-      optional(alias(kw("SERIALIZE-HIDDEN"), $.serialize_hidden)),
-      optional(alias(kw("REFERENCE-ONLY"), $.reference_only)),
-      optional(
-        seq(
-          kw("FOR"),
-          field("table", $.identifier),
-          repeat(seq(",", field("table", $.identifier))),
-        ),
-      ),
-      repeat(alias($.__dataset_data_relation, $.data_relation)),
-      repeat(alias($.__dataset_parent_id_relation, $.parent_id_relation)),
+      optional($.__dataset_body_tail),
     ),
+  __dataset_body_tail: ($) =>
+    choice(
+      seq(
+        alias(kw("SERIALIZE-HIDDEN"), $.serialize_hidden),
+        optional($.__dataset_body_after_serialize_hidden),
+      ),
+      seq(
+        alias(kw("REFERENCE-ONLY"), $.reference_only),
+        optional($.__dataset_body_after_reference_only),
+      ),
+      seq($.__dataset_for_phrase, optional($.__dataset_body_after_for)),
+      seq(
+        repeat1(alias($.__dataset_data_relation, $.data_relation)),
+        repeat(alias($.__dataset_parent_id_relation, $.parent_id_relation)),
+      ),
+      repeat1(alias($.__dataset_parent_id_relation, $.parent_id_relation)),
+    ),
+  __dataset_body_after_serialize_hidden: ($) =>
+    choice(
+      seq(
+        alias(kw("REFERENCE-ONLY"), $.reference_only),
+        optional($.__dataset_body_after_reference_only),
+      ),
+      seq($.__dataset_for_phrase, optional($.__dataset_body_after_for)),
+      seq(
+        repeat1(alias($.__dataset_data_relation, $.data_relation)),
+        repeat(alias($.__dataset_parent_id_relation, $.parent_id_relation)),
+      ),
+      repeat1(alias($.__dataset_parent_id_relation, $.parent_id_relation)),
+    ),
+  __dataset_body_after_reference_only: ($) =>
+    choice(
+      seq($.__dataset_for_phrase, optional($.__dataset_body_after_for)),
+      seq(
+        repeat1(alias($.__dataset_data_relation, $.data_relation)),
+        repeat(alias($.__dataset_parent_id_relation, $.parent_id_relation)),
+      ),
+      repeat1(alias($.__dataset_parent_id_relation, $.parent_id_relation)),
+    ),
+  __dataset_body_after_for: ($) =>
+    choice(
+      seq(
+        repeat1(alias($.__dataset_data_relation, $.data_relation)),
+        repeat(alias($.__dataset_parent_id_relation, $.parent_id_relation)),
+      ),
+      repeat1(alias($.__dataset_parent_id_relation, $.parent_id_relation)),
+    ),
+  __dataset_for_phrase: ($) =>
+    seq(kw("FOR"), field("table", $.identifier), repeat(seq(",", field("table", $.identifier)))),
 
   _event_body: ($) =>
     seq(field("name", $.identifier), optional(alias($.__event_signature, $.signature))),

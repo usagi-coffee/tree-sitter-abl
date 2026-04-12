@@ -338,10 +338,14 @@ module.exports = grammar({
             field("left", $._assignable),
             field("operator", $.assignment_operator),
             field("right", choice($.array_initializer, $._expression)),
-            optional($.widget_phrase),
-            optional(alias(kw("NO-ERROR"), $.no_error)),
+            optional($.__assignment_statement_tail),
             $._terminator,
           ),
+        ),
+      __assignment_statement_tail: ($) =>
+        choice(
+          seq($.widget_phrase, optional(alias(kw("NO-ERROR"), $.no_error))),
+          alias(kw("NO-ERROR"), $.no_error),
         ),
 
       _assignable: ($) =>

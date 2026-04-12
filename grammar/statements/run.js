@@ -1,14 +1,32 @@
 module.exports = ({ kw }) => ({
   run_statement: ($) => seq(kw("RUN"), $.__run_body, $._no_error_terminator),
 
-  __run_body: ($) =>
-    seq(
-      field("procedure", $._run_target),
-      optional($.__run_persistence),
-      optional(alias($.__run_in_phrase, $.in_phrase)),
-      optional(alias($.__run_on_server, $.on_server_phrase)),
-      optional(alias($.__run_asynchronous, $.asynchronous_phrase)),
-      optional($.arguments),
+  __run_body: ($) => seq(field("procedure", $._run_target), optional($.__run_body_tail)),
+  __run_body_tail: ($) =>
+    choice(
+      seq($.__run_persistence, optional($.__run_body_after_persistence)),
+      seq(alias($.__run_in_phrase, $.in_phrase), optional($.__run_body_after_in)),
+      seq(alias($.__run_on_server, $.on_server_phrase), optional($.__run_body_after_on_server)),
+      seq(alias($.__run_asynchronous, $.asynchronous_phrase), optional($.arguments)),
+      $.arguments,
+    ),
+  __run_body_after_persistence: ($) =>
+    choice(
+      seq(alias($.__run_in_phrase, $.in_phrase), optional($.__run_body_after_in)),
+      seq(alias($.__run_on_server, $.on_server_phrase), optional($.__run_body_after_on_server)),
+      seq(alias($.__run_asynchronous, $.asynchronous_phrase), optional($.arguments)),
+      $.arguments,
+    ),
+  __run_body_after_in: ($) =>
+    choice(
+      seq(alias($.__run_on_server, $.on_server_phrase), optional($.__run_body_after_on_server)),
+      seq(alias($.__run_asynchronous, $.asynchronous_phrase), optional($.arguments)),
+      $.arguments,
+    ),
+  __run_body_after_on_server: ($) =>
+    choice(
+      seq(alias($.__run_asynchronous, $.asynchronous_phrase), optional($.arguments)),
+      $.arguments,
     ),
   __run_persistence: ($) =>
     choice(

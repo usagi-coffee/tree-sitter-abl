@@ -11,9 +11,14 @@ module.exports = ({ kw }) => ({
     seq(
       optional(alias($.__export_delimiter_phrase, $.delimiter_phrase)),
       repeat1($.__export_expression),
-      optional(seq(kw("EXCEPT"), repeat1($._identifier_or_qualified_name))),
-      optional(alias(kw("NO-LOBS"), $.no_lobs)),
+      optional($.__export_tail),
+    ),
+  __export_tail: ($) =>
+    choice(
+      seq($.__export_except_phrase, optional(alias(kw("NO-LOBS"), $.no_lobs))),
+      alias(kw("NO-LOBS"), $.no_lobs),
     ),
   __export_expression: ($) => $._expression,
+  __export_except_phrase: ($) => seq(kw("EXCEPT"), repeat1($._identifier_or_qualified_name)),
   __export_delimiter_phrase: ($) => seq(kw("DELIMITER"), field("delimiter", $.string_literal)),
 });

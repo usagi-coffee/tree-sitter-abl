@@ -6,12 +6,66 @@ module.exports = ({ kw }) => ({
       kw("QUERY"),
       field("query", $.identifier),
       $.__open_query_records,
-      optional($.query_tuning_phrase),
-      optional(alias(kw("BREAK"), $.break)),
-      repeat(alias($.__open_query_by_phrase, $.by_phrase)),
-      optional(field("lock", $.__open_query_lock)),
-      optional(alias(kw("INDEXED-REPOSITION"), $.indexed_reposition)),
-      optional(seq(kw("MAX-ROWS"), field("max_rows", $._expression))),
+      optional($.__open_query_tail),
+    ),
+  __open_query_tail: ($) =>
+    choice(
+      seq($.query_tuning_phrase, optional($.__open_query_tail_after_query_tuning)),
+      seq(alias(kw("BREAK"), $.break), optional($.__open_query_tail_after_break)),
+      seq(
+        repeat1(alias($.__open_query_by_phrase, $.by_phrase)),
+        optional($.__open_query_tail_after_by),
+      ),
+      seq(field("lock", $.__open_query_lock), optional($.__open_query_tail_after_lock)),
+      seq(
+        alias(kw("INDEXED-REPOSITION"), $.indexed_reposition),
+        optional(seq(kw("MAX-ROWS"), field("max_rows", $._expression))),
+      ),
+      seq(kw("MAX-ROWS"), field("max_rows", $._expression)),
+    ),
+  __open_query_tail_after_query_tuning: ($) =>
+    choice(
+      seq(alias(kw("BREAK"), $.break), optional($.__open_query_tail_after_break)),
+      seq(
+        repeat1(alias($.__open_query_by_phrase, $.by_phrase)),
+        optional($.__open_query_tail_after_by),
+      ),
+      seq(field("lock", $.__open_query_lock), optional($.__open_query_tail_after_lock)),
+      seq(
+        alias(kw("INDEXED-REPOSITION"), $.indexed_reposition),
+        optional(seq(kw("MAX-ROWS"), field("max_rows", $._expression))),
+      ),
+      seq(kw("MAX-ROWS"), field("max_rows", $._expression)),
+    ),
+  __open_query_tail_after_break: ($) =>
+    choice(
+      seq(
+        repeat1(alias($.__open_query_by_phrase, $.by_phrase)),
+        optional($.__open_query_tail_after_by),
+      ),
+      seq(field("lock", $.__open_query_lock), optional($.__open_query_tail_after_lock)),
+      seq(
+        alias(kw("INDEXED-REPOSITION"), $.indexed_reposition),
+        optional(seq(kw("MAX-ROWS"), field("max_rows", $._expression))),
+      ),
+      seq(kw("MAX-ROWS"), field("max_rows", $._expression)),
+    ),
+  __open_query_tail_after_by: ($) =>
+    choice(
+      seq(field("lock", $.__open_query_lock), optional($.__open_query_tail_after_lock)),
+      seq(
+        alias(kw("INDEXED-REPOSITION"), $.indexed_reposition),
+        optional(seq(kw("MAX-ROWS"), field("max_rows", $._expression))),
+      ),
+      seq(kw("MAX-ROWS"), field("max_rows", $._expression)),
+    ),
+  __open_query_tail_after_lock: ($) =>
+    choice(
+      seq(
+        alias(kw("INDEXED-REPOSITION"), $.indexed_reposition),
+        optional(seq(kw("MAX-ROWS"), field("max_rows", $._expression))),
+      ),
+      seq(kw("MAX-ROWS"), field("max_rows", $._expression)),
     ),
   __open_query_records: ($) =>
     seq(

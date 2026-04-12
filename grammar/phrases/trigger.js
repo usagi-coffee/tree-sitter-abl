@@ -15,24 +15,28 @@ module.exports = ({ kw }) => ({
 
   __trigger_event_list: ($) => seq($._events, repeat(seq(",", $._events))),
 
-  __trigger_body: ($) =>
-    seq(
-      kw("DO"),
-      optional(
-        seq(
-          field("variable", $.identifier),
-          "=",
-          field("start", $._expression),
-          kw("TO"),
-          field("end", $._expression),
-        ),
-      ),
-      optional(seq(kw("DOWN"), optional(kw("TO")), optional(field("down", $._expression)))),
-      ":",
-      repeat($._statement),
-      kw("END"),
-      ".",
+  __trigger_body: ($) => seq(kw("DO"), $.__trigger_body_tail),
+  __trigger_body_tail: ($) =>
+    choice(
+      seq($.__trigger_loop_phrase, optional($.__trigger_body_after_loop)),
+      seq($.__trigger_down_phrase, ":", repeat($._statement), kw("END"), "."),
+      seq(":", repeat($._statement), kw("END"), "."),
     ),
+  __trigger_body_after_loop: ($) =>
+    choice(
+      seq($.__trigger_down_phrase, ":", repeat($._statement), kw("END"), "."),
+      seq(":", repeat($._statement), kw("END"), "."),
+    ),
+  __trigger_loop_phrase: ($) =>
+    seq(
+      field("variable", $.identifier),
+      "=",
+      field("start", $._expression),
+      kw("TO"),
+      field("end", $._expression),
+    ),
+  __trigger_down_phrase: ($) =>
+    seq(kw("DOWN"), optional(kw("TO")), optional(field("down", $._expression))),
 
   __persistent_trigger: ($) =>
     seq(

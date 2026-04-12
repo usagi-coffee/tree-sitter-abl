@@ -15,6 +15,10 @@ module.exports = ({ kw }) => ({
         ),
       ),
       optional(alias($.__function_parameters, $.parameters)),
+      $.__function_compound_body,
+    ),
+  __function_compound_body: ($) =>
+    seq(
       choice(alias($._colon, ":"), $._terminator),
       repeat($._statement),
       kw("END"),

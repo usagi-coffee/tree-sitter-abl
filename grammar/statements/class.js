@@ -3,9 +3,9 @@ module.exports = ({ kw }) => ({
     seq(repeat($.__class_option), kw("CLASS"), $.__class_body, $._terminator),
 
   __class_body: ($) =>
+    seq(field("name", $._type_name), repeat($.__class_option), $.__class_definition_compound_body),
+  __class_definition_compound_body: ($) =>
     seq(
-      field("name", $._type_name),
-      repeat($.__class_option),
       choice(alias($._colon, ":"), $._terminator_dot),
       repeat($.__class_body_item),
       kw("END"),

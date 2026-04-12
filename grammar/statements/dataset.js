@@ -36,15 +36,37 @@ module.exports = ({ kw }) => ({
         ),
         ")",
       ),
-      optional(alias(kw("REPOSITION"), $.reposition)),
-      optional(
-        seq(
-          alias(kw("NESTED"), $.nested),
-          optional(alias(kw("FOREIGN-KEY-HIDDEN"), $.foreign_key_hidden)),
-        ),
+      optional($.__dataset_data_relation_tail),
+    ),
+  __dataset_data_relation_tail: ($) =>
+    choice(
+      seq(
+        alias(kw("REPOSITION"), $.reposition),
+        optional($.__dataset_data_relation_tail_after_reposition),
       ),
-      optional(alias(kw("NOT-ACTIVE"), $.not_active)),
-      optional(alias(kw("RECURSIVE"), $.recursive)),
+      seq(alias(kw("NESTED"), $.nested), optional($.__dataset_data_relation_tail_after_nested)),
+      seq(alias(kw("NOT-ACTIVE"), $.not_active), optional(alias(kw("RECURSIVE"), $.recursive))),
+      alias(kw("RECURSIVE"), $.recursive),
+    ),
+  __dataset_data_relation_tail_after_reposition: ($) =>
+    choice(
+      seq(alias(kw("NESTED"), $.nested), optional($.__dataset_data_relation_tail_after_nested)),
+      seq(alias(kw("NOT-ACTIVE"), $.not_active), optional(alias(kw("RECURSIVE"), $.recursive))),
+      alias(kw("RECURSIVE"), $.recursive),
+    ),
+  __dataset_data_relation_tail_after_nested: ($) =>
+    choice(
+      seq(
+        alias(kw("FOREIGN-KEY-HIDDEN"), $.foreign_key_hidden),
+        optional($.__dataset_data_relation_tail_after_foreign_key_hidden),
+      ),
+      seq(alias(kw("NOT-ACTIVE"), $.not_active), optional(alias(kw("RECURSIVE"), $.recursive))),
+      alias(kw("RECURSIVE"), $.recursive),
+    ),
+  __dataset_data_relation_tail_after_foreign_key_hidden: ($) =>
+    choice(
+      seq(alias(kw("NOT-ACTIVE"), $.not_active), optional(alias(kw("RECURSIVE"), $.recursive))),
+      alias(kw("RECURSIVE"), $.recursive),
     ),
 
   __dataset_parent_id_relation: ($) =>
@@ -56,24 +78,31 @@ module.exports = ({ kw }) => ({
       ",",
       field("child_buffer", $.identifier),
       seq(kw("PARENT-ID-FIELD"), field("parent_id_field", $.identifier)),
-      optional(
-        seq(
-          kw("PARENT-FIELDS-BEFORE"),
-          "(",
-          field("before_field", $.identifier),
-          repeat(seq(",", field("before_field", $.identifier))),
-          ")",
-        ),
+      optional($.__dataset_parent_id_relation_tail),
+    ),
+  __dataset_parent_id_relation_tail: ($) =>
+    choice(
+      seq(
+        $.__dataset_parent_fields_before_phrase,
+        optional($.__dataset_parent_fields_after_phrase),
       ),
-      optional(
-        seq(
-          kw("PARENT-FIELDS-AFTER"),
-          "(",
-          field("after_field", $.identifier),
-          repeat(seq(",", field("after_field", $.identifier))),
-          ")",
-        ),
-      ),
+      $.__dataset_parent_fields_after_phrase,
+    ),
+  __dataset_parent_fields_before_phrase: ($) =>
+    seq(
+      kw("PARENT-FIELDS-BEFORE"),
+      "(",
+      field("before_field", $.identifier),
+      repeat(seq(",", field("before_field", $.identifier))),
+      ")",
+    ),
+  __dataset_parent_fields_after_phrase: ($) =>
+    seq(
+      kw("PARENT-FIELDS-AFTER"),
+      "(",
+      field("after_field", $.identifier),
+      repeat(seq(",", field("after_field", $.identifier))),
+      ")",
     ),
   __dataset_modifier: ($) =>
     choice(

@@ -10,12 +10,12 @@ module.exports = ({ kw }) => ({
     ),
 
   __procedure_body: ($) =>
+    seq($.__procedure_compound_body, optional(kw("PROCEDURE", { offset: 4 })), $._terminator),
+  __procedure_compound_body: ($) =>
     seq(
       choice(alias($._colon, ":"), alias($._terminator_dot, ".")),
       repeat($._statement),
       kw("END"),
-      optional(kw("PROCEDURE", { offset: 4 })),
-      $._terminator,
     ),
 
   __procedure_modifier: ($) =>

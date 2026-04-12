@@ -5,9 +5,21 @@ module.exports = ({ kw }) => ({
     seq(
       optional(seq(kw("COLOR"), field("color", $.__message_color_value))),
       repeat1($.__message_expression),
-      optional(alias($.__message_view_as_phrase, $.view_as_phrase)),
-      optional(alias($.__message_set_update_phrase, $.set_update_phrase)),
-      optional($.in_window_phrase),
+      optional($.__message_body_tail),
+    ),
+  __message_body_tail: ($) =>
+    choice(
+      seq(
+        alias($.__message_view_as_phrase, $.view_as_phrase),
+        optional($.__message_body_after_view_as),
+      ),
+      seq(alias($.__message_set_update_phrase, $.set_update_phrase), optional($.in_window_phrase)),
+      $.in_window_phrase,
+    ),
+  __message_body_after_view_as: ($) =>
+    choice(
+      seq(alias($.__message_set_update_phrase, $.set_update_phrase), optional($.in_window_phrase)),
+      $.in_window_phrase,
     ),
 
   __message_expression: ($) =>

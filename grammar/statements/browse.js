@@ -17,8 +17,12 @@ module.exports = ({ kw }) => ({
       optional(alias(kw("NO-WAIT"), $.no_wait)),
       kw("DISPLAY"),
       choice(repeat1(alias($.__browse_column, $.column)), alias($.__browse_record, $.record)),
-      optional($.__browse_enable_phrase),
-      optional($.__browse_options_phrase),
+      optional($.__browse_body_tail),
+    ),
+  __browse_body_tail: ($) =>
+    choice(
+      seq($.__browse_enable_phrase, optional($.__browse_options_phrase)),
+      $.__browse_options_phrase,
     ),
   __browse_options_phrase: ($) => seq(kw("WITH"), repeat($.__browse_option)),
 
