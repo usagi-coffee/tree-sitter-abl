@@ -7,20 +7,36 @@ module.exports = ({ kw }) => ({
       optional(alias($._for_phrase, $.for_phrase)),
       optional($.preselect_phrase),
       optional($.query_tuning_phrase),
-      optional(alias(kw("TRANSACTION"), $.transaction)),
-      optional($.__do_condition_or_loop_phrase),
-      optional(alias(kw("TRANSACTION"), $.transaction)),
-      repeat(
-        choice(
-          $.stop_after_phrase,
-          $.on_endkey_phrase,
-          $.on_stop_phrase,
-          $.on_error_phrase,
-          $.on_quit_phrase,
-          $.frame_phrase,
-        ),
-      ),
+      $.__do_body_tail,
+    ),
+  __do_body_tail: ($) =>
+    choice(
+      seq(alias(kw("TRANSACTION"), $.transaction), optional($.__do_body_after_first_transaction)),
+      seq($.__do_condition_or_loop_phrase, optional($.__do_body_after_condition_or_loop)),
+      seq(repeat1($.__do_block_option), $.body),
       $.body,
+    ),
+  __do_body_after_first_transaction: ($) =>
+    choice(
+      seq($.__do_condition_or_loop_phrase, optional($.__do_body_after_condition_or_loop)),
+      seq(repeat1($.__do_block_option), $.body),
+      $.body,
+    ),
+  __do_body_after_condition_or_loop: ($) =>
+    choice(
+      seq(alias(kw("TRANSACTION"), $.transaction), optional($.__do_body_after_second_transaction)),
+      seq(repeat1($.__do_block_option), $.body),
+      $.body,
+    ),
+  __do_body_after_second_transaction: ($) => choice(seq(repeat1($.__do_block_option), $.body), $.body),
+  __do_block_option: ($) =>
+    choice(
+      $.stop_after_phrase,
+      $.on_endkey_phrase,
+      $.on_stop_phrase,
+      $.on_error_phrase,
+      $.on_quit_phrase,
+      $.frame_phrase,
     ),
 
   body: ($) =>

@@ -10,7 +10,6 @@ module.exports = ({ kw }) => ({
   _in_widget_pool: ($) => seq(kw("IN"), kw("WIDGET-POOL"), field("pool", $.identifier)),
 
   _except_fields: ($) => seq(kw("EXCEPT"), repeat1(field("except", $.identifier))),
-
   _map_entry: ($) => $._identifier_or_string_literal,
   _map_phrase: ($) =>
     choice(seq(kw("MAP"), field("map", $._map_entry)), alias(kw("NO-MAP"), $.no_map)),
