@@ -26,8 +26,7 @@ module.exports = ({ kw }) => ({
     choice(
       alias(kw("ECHO"), $.echo),
       alias(kw("NO-ECHO"), $.no_echo),
-      seq(kw("MAP"), field("map", $._identifier_or_string_literal)),
-      alias(kw("NO-MAP"), $.no_map),
+      $._map_phrase,
       alias(kw("UNBUFFERED"), $.unbuffered),
       alias($._convert_phrase, $.convert_phrase),
     ),

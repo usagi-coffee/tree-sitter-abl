@@ -14,27 +14,25 @@ module.exports = ({ kw }) => ({
       seq(alias($._lob_dir_phrase, $.lob_dir_phrase), optional($.__input_tail_after_lob_dir)),
       seq(alias(kw("BINARY"), $.binary), optional($.__input_tail_after_binary)),
       seq($._echo_phrase, optional($.__input_tail_after_echo)),
-      seq($.__input_map, optional($.__input_tail_after_map)),
+      seq($._map_phrase, optional($.__input_tail_after_map)),
       $._unbuffered_convert_tail,
     ),
   __input_tail_after_lob_dir: ($) =>
     choice(
       seq(alias(kw("BINARY"), $.binary), optional($.__input_tail_after_binary)),
       seq($._echo_phrase, optional($.__input_tail_after_echo)),
-      seq($.__input_map, optional($.__input_tail_after_map)),
+      seq($._map_phrase, optional($.__input_tail_after_map)),
       $._unbuffered_convert_tail,
     ),
   __input_tail_after_binary: ($) =>
     choice(
       seq($._echo_phrase, optional($.__input_tail_after_echo)),
-      seq($.__input_map, optional($.__input_tail_after_map)),
+      seq($._map_phrase, optional($.__input_tail_after_map)),
       $._unbuffered_convert_tail,
     ),
   __input_tail_after_echo: ($) =>
-    choice(seq($.__input_map, optional($.__input_tail_after_map)), $._unbuffered_convert_tail),
+    choice(seq($._map_phrase, optional($.__input_tail_after_map)), $._unbuffered_convert_tail),
   __input_tail_after_map: ($) => $._unbuffered_convert_tail,
-  __input_map: ($) =>
-    choice(seq(kw("MAP"), field("map", $._map_entry)), alias(kw("NO-MAP"), $.no_map)),
 
   __input_from_target: ($) =>
     choice(
