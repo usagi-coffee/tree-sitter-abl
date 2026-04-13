@@ -1,13 +1,11 @@
 ---
 name: tree-sitter-optimize
-description: Optimize tree-sitter grammar cost metrics such as ACTION_COUNT, STATE_COUNT, LARGE_STATE_COUNT, or expensive parser symbols. Use when Codex is asked to reduce parser size, squeeze action count, optimize costly grammar rules, or run a measured refactoring pass on a tree-sitter grammar.
+description: Optimize tree-sitter grammar cost metrics such as ACTION_COUNT, STATE_COUNT, LARGE_STATE_COUNT, or expensive parser symbols. Use when asked to reduce parser size, squeeze action count, optimize costly grammar rules, or run a measured refactoring pass on a tree-sitter grammar.
 ---
 
 # Tree-sitter Optimize
 
 Use this skill to run a measured parser-cost reduction pass on a tree-sitter grammar.
-The optimization pass is not limited to the techniques listed below.
-Treat them as common patterns and examples, not an exhaustive menu.
 
 ## Workflow
 
@@ -33,7 +31,7 @@ Treat them as common patterns and examples, not an exhaustive menu.
 
 ## Before Edit Mental Checklist
 
-Before applying any optimization, verify:
+Before applying any optimization, verify that your changes:
 
 - **Field preservation**: All `field("name", ...)` calls remain unchanged—same names, same positions, same wrapped content.
 - **Node visibility**: No nodes are hidden (`_prefix`) or exposed (removing `_prefix`) that weren't already.
@@ -109,9 +107,9 @@ Treat the extracted output as the baseline and comparison source for optimizatio
 
 ## Optimization technique catalog
 
-The following techniques are common starting points, not the full set of allowed optimizations.
+The following techniques are a common starting points, not the full set of allowed optimizations.
 
-## Technique: Hidden Semantic Chunk Extraction
+### Chunk Extraction
 
 Use when one large rule contains multiple logical sections that can be separated into hidden helpers.
 
@@ -153,7 +151,7 @@ _type_definition_declarators: ($) =>
 
 Use it when the extracted pieces are real semantic chunks, not arbitrary slices.
 
-## Technique: Prefix Extraction
+### Prefix Extraction
 
 Use when several rules begin with the same fixed keyword sequence and only diverge near the end.
 
@@ -176,7 +174,7 @@ foo_b: ($) => seq($.__foo_prefix, "Y", $.value),
 
 Use it when the prefix is exact and repeated many times.
 
-## Technique: Local Alternative Extraction
+### Local Alternative Extraction
 
 Use when the same non-trivial `choice(...)` appears repeatedly inside nearby rules.
 
@@ -209,7 +207,7 @@ stmt_b: ($) => seq("B", $.value, optional($.__stmt_alignment)),
 
 Use it when the extracted helper is a real local keyword family or semantic alternative set, not just an arbitrary tiny wrapper.
 
-## Technique: Body Extraction
+### Body Extraction
 
 Use when a single rule has a substantial internal structure and it is cheaper to split that structure into a dedicated `__rule_body` helper.
 
@@ -242,7 +240,7 @@ __my_statement_body: ($) =>
 
 Use it when the top rule becomes cleaner and the body is complex enough to stand on its own.
 
-## Technique: Optional Body Extraction
+### Optional Body Extraction
 
 Use when many rules share `optional(body) + terminator`.
 
@@ -266,7 +264,7 @@ stmt_b: ($) => seq("B", $.__stmt_b_body),
 
 Use it when the optionality is identical across multiple rules.
 
-## Technique: Tail Extraction
+### Tail Extraction
 
 Use when a rule family has a repeated tail shape after a unique head.
 
@@ -290,7 +288,7 @@ stmt_b: ($) => seq("CREATE", "VIEW", $.name, $.__create_view_body),
 
 Use it when the tail is structurally generic and repeated often.
 
-## Technique: Non-Empty Tail Extraction
+### Non-Empty Tail Extraction
 
 Use when several branches repeat the same trailing shape, but that tail contains optional pieces and would become illegal as a hidden helper if extracted directly.
 
@@ -354,7 +352,7 @@ __ordered_tail_after_target: ($) =>
 
 Use it when the repeated suffix is real and the non-empty reformulation preserves the same tree shape and accepted syntax.
 
-## Technique: Token Packing
+### Token Packing
 
 Use when a generic tail consumes many punctuation or operator branches as undifferentiated items.
 
@@ -375,7 +373,7 @@ __tail_token: ($) => choice($.__tail_symbol, $.identifier, $.string_literal),
 
 Use it only when those symbols are intentionally generic tail items.
 
-## Technique: Local Prefix Family Helpers
+### Local Prefix Family Helpers
 
 Use when a rule family differs only by one keyword after a shared local prefix.
 
@@ -398,7 +396,7 @@ stmt_b: ($) => seq($.__stmt_prefix, "QUERY_TIMEOUT", $.value),
 
 Use it when the family is local and repeated enough to matter.
 
-## Technique: Avoid Broad Dispatcher Grouping
+### Avoid Broad Dispatcher Grouping
 
 Do not assume grouping top-level statements into `_create_statement`, `_drop_statement`, or similar buckets will help.
 
