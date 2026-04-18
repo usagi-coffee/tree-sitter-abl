@@ -30,10 +30,10 @@ module.exports = ({ kw }) => ({
   __create_widget_tail: ($) =>
     choice(
       seq($.__create_widget_handle, optional($.__create_widget_tail_after_handle)),
-      seq($.assign_phrase, optional($.__create_widget_triggers)),
-      $.__create_widget_triggers,
+      $.__create_widget_assign_triggers_tail,
     ),
-  __create_widget_tail_after_handle: ($) =>
+  __create_widget_tail_after_handle: ($) => $.__create_widget_assign_triggers_tail,
+  __create_widget_assign_triggers_tail: ($) =>
     choice(seq($.assign_phrase, optional($.__create_widget_triggers)), $.__create_widget_triggers),
   __create_widget_handle: ($) => seq(field("handle", $.identifier), optional($._in_widget_pool)),
 
