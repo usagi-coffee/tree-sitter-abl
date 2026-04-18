@@ -43,6 +43,17 @@ module.exports = ({ kw }) => ({
   _stream_phrase: ($) =>
     seq(choice(kw("STREAM"), kw("STREAM-HANDLE")), field("stream", $.identifier)),
 
+  _dos_unix_command: ($) =>
+    choice(
+      field("command_token", $.identifier),
+      seq(kw("VALUE"), "(", field("command", $._expression), ")"),
+    ),
+  _dos_unix_tail: ($) =>
+    choice(
+      seq(alias(kw("SILENT"), $.silent), repeat($._dos_unix_command)),
+      repeat1($._dos_unix_command),
+    ),
+
   _for_phrase: ($) =>
     seq(
       kw("FOR"),
