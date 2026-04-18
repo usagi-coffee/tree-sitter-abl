@@ -13,9 +13,18 @@ module.exports = ({ kw }) => ({
       field("name", $.identifier),
       kw("FOR"),
       $.query_table_list,
-      optional(alias($.__query_cache_phrase, $.cache_phrase)),
-      optional(alias(kw("SCROLLING"), $.scrolling)),
-      optional(alias(kw("RCODE-INFORMATION"), $.rcode_information)),
+      optional($.__query_tail),
+    ),
+  __query_tail: ($) =>
+    choice(
+      seq(alias($.__query_cache_phrase, $.cache_phrase), optional($.__query_tail_after_cache)),
+      $.__query_scrolling_rcode_tail,
+    ),
+  __query_tail_after_cache: ($) => $.__query_scrolling_rcode_tail,
+  __query_scrolling_rcode_tail: ($) =>
+    choice(
+      seq(alias(kw("SCROLLING"), $.scrolling), optional(alias(kw("RCODE-INFORMATION"), $.rcode_information))),
+      alias(kw("RCODE-INFORMATION"), $.rcode_information),
     ),
   __query_cache_phrase: ($) => seq(kw("CACHE"), field("cache", $.number_literal)),
 
