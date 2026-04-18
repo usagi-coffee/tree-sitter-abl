@@ -23,8 +23,7 @@ module.exports = ({ kw }) => ({
         optional($.__image_body_after_convert_3d_colors),
       ),
       seq($.__image_tooltip_phrase, optional($.__image_body_after_tooltip)),
-      seq($.__image_stretch_phrase, optional(alias(kw("TRANSPARENT"), $.transparent))),
-      alias(kw("TRANSPARENT"), $.transparent),
+      $.__image_stretch_transparent_tail,
     ),
   __image_body_after_bgcolor: ($) =>
     choice(
@@ -34,8 +33,7 @@ module.exports = ({ kw }) => ({
         optional($.__image_body_after_convert_3d_colors),
       ),
       seq($.__image_tooltip_phrase, optional($.__image_body_after_tooltip)),
-      seq($.__image_stretch_phrase, optional(alias(kw("TRANSPARENT"), $.transparent))),
-      alias(kw("TRANSPARENT"), $.transparent),
+      $.__image_stretch_transparent_tail,
     ),
   __image_body_after_fgcolor: ($) =>
     choice(
@@ -44,16 +42,15 @@ module.exports = ({ kw }) => ({
         optional($.__image_body_after_convert_3d_colors),
       ),
       seq($.__image_tooltip_phrase, optional($.__image_body_after_tooltip)),
-      seq($.__image_stretch_phrase, optional(alias(kw("TRANSPARENT"), $.transparent))),
-      alias(kw("TRANSPARENT"), $.transparent),
+      $.__image_stretch_transparent_tail,
     ),
   __image_body_after_convert_3d_colors: ($) =>
     choice(
       seq($.__image_tooltip_phrase, optional($.__image_body_after_tooltip)),
-      seq($.__image_stretch_phrase, optional(alias(kw("TRANSPARENT"), $.transparent))),
-      alias(kw("TRANSPARENT"), $.transparent),
+      $.__image_stretch_transparent_tail,
     ),
-  __image_body_after_tooltip: ($) =>
+  __image_body_after_tooltip: ($) => $.__image_stretch_transparent_tail,
+  __image_stretch_transparent_tail: ($) =>
     choice(
       seq($.__image_stretch_phrase, optional(alias(kw("TRANSPARENT"), $.transparent))),
       alias(kw("TRANSPARENT"), $.transparent),
