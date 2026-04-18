@@ -37,7 +37,7 @@ module.exports = ({ kw }) => ({
   __create_handle_with_pool_no_error_body: ($) =>
     seq(
       choice(kw("CALL"), kw("QUERY"), kw("SAX-READER"), kw("SAX-WRITER"), kw("SAX-ATTRIBUTES")),
-      $.__create_handle_in_widget_pool_no_error,
+      seq($.__create_handle_in_widget_pool, optional($.__create_no_error)),
     ),
   __create_handle_with_pool_body: ($) =>
     seq(
@@ -98,7 +98,5 @@ module.exports = ({ kw }) => ({
   __create_record_locator_recid: ($) => seq("(", field("recid", $._expression), ")"),
   __create_handle_in_widget_pool: ($) =>
     seq(field("handle", $.identifier), optional($._in_widget_pool)),
-  __create_handle_in_widget_pool_no_error: ($) =>
-    seq($.__create_handle_in_widget_pool, optional($.__create_no_error)),
   __create_no_error: ($) => alias(kw("NO-ERROR"), $.no_error),
 });
