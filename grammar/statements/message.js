@@ -9,14 +9,10 @@ module.exports = ({ kw }) => ({
     ),
   __message_body_tail: ($) =>
     choice(
-      seq(
-        alias($.__message_view_as_phrase, $.view_as_phrase),
-        optional($.__message_body_after_view_as),
-      ),
-      seq(alias($.__message_set_update_phrase, $.set_update_phrase), optional($.in_window_phrase)),
-      $.in_window_phrase,
+      seq(alias($.__message_view_as_phrase, $.view_as_phrase), optional($.__message_window_tail)),
+      $.__message_window_tail,
     ),
-  __message_body_after_view_as: ($) =>
+  __message_window_tail: ($) =>
     choice(
       seq(alias($.__message_set_update_phrase, $.set_update_phrase), optional($.in_window_phrase)),
       $.in_window_phrase,
