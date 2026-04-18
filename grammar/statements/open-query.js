@@ -17,11 +17,7 @@ module.exports = ({ kw }) => ({
         optional($.__open_query_tail_after_by),
       ),
       seq(field("lock", $.__open_query_lock), optional($.__open_query_tail_after_lock)),
-      seq(
-        alias(kw("INDEXED-REPOSITION"), $.indexed_reposition),
-        optional(seq(kw("MAX-ROWS"), field("max_rows", $._expression))),
-      ),
-      seq(kw("MAX-ROWS"), field("max_rows", $._expression)),
+      $.__open_query_reposition_tail,
     ),
   __open_query_tail_after_query_tuning: ($) =>
     choice(
@@ -31,11 +27,7 @@ module.exports = ({ kw }) => ({
         optional($.__open_query_tail_after_by),
       ),
       seq(field("lock", $.__open_query_lock), optional($.__open_query_tail_after_lock)),
-      seq(
-        alias(kw("INDEXED-REPOSITION"), $.indexed_reposition),
-        optional(seq(kw("MAX-ROWS"), field("max_rows", $._expression))),
-      ),
-      seq(kw("MAX-ROWS"), field("max_rows", $._expression)),
+      $.__open_query_reposition_tail,
     ),
   __open_query_tail_after_break: ($) =>
     choice(
@@ -44,22 +36,16 @@ module.exports = ({ kw }) => ({
         optional($.__open_query_tail_after_by),
       ),
       seq(field("lock", $.__open_query_lock), optional($.__open_query_tail_after_lock)),
-      seq(
-        alias(kw("INDEXED-REPOSITION"), $.indexed_reposition),
-        optional(seq(kw("MAX-ROWS"), field("max_rows", $._expression))),
-      ),
-      seq(kw("MAX-ROWS"), field("max_rows", $._expression)),
+      $.__open_query_reposition_tail,
     ),
   __open_query_tail_after_by: ($) =>
     choice(
       seq(field("lock", $.__open_query_lock), optional($.__open_query_tail_after_lock)),
-      seq(
-        alias(kw("INDEXED-REPOSITION"), $.indexed_reposition),
-        optional(seq(kw("MAX-ROWS"), field("max_rows", $._expression))),
-      ),
-      seq(kw("MAX-ROWS"), field("max_rows", $._expression)),
+      $.__open_query_reposition_tail,
     ),
   __open_query_tail_after_lock: ($) =>
+    $.__open_query_reposition_tail,
+  __open_query_reposition_tail: ($) =>
     choice(
       seq(
         alias(kw("INDEXED-REPOSITION"), $.indexed_reposition),
