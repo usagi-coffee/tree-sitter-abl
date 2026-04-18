@@ -13,21 +13,17 @@ module.exports = ({ kw }) => ({
     choice(
       seq(repeat1($.__input_through_argument), optional($.__input_through_tail_after_arguments)),
       seq($._echo_phrase, optional($.__input_through_tail_after_echo)),
-      seq($._map_phrase, optional($.__input_through_tail_after_map)),
+      seq($._map_phrase, optional($._unbuffered_convert_tail)),
       $._unbuffered_convert_tail,
     ),
   __input_through_tail_after_arguments: ($) =>
     choice(
       seq($._echo_phrase, optional($.__input_through_tail_after_echo)),
-      seq($._map_phrase, optional($.__input_through_tail_after_map)),
+      seq($._map_phrase, optional($._unbuffered_convert_tail)),
       $._unbuffered_convert_tail,
     ),
   __input_through_tail_after_echo: ($) =>
-    choice(
-      seq($._map_phrase, optional($.__input_through_tail_after_map)),
-      $._unbuffered_convert_tail,
-    ),
-  __input_through_tail_after_map: ($) => $._unbuffered_convert_tail,
+    choice(seq($._map_phrase, optional($._unbuffered_convert_tail)), $._unbuffered_convert_tail),
 
   __input_through_argument: ($) => choice($.__input_through_arg_value, $._value_expression),
   __input_through_arg_value: ($) =>
