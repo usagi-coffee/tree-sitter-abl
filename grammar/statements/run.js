@@ -22,7 +22,10 @@ module.exports = ({ kw }) => ({
     ),
   __run_body_after_on_server: ($) => $.__run_arguments_tail,
   __run_arguments_tail: ($) =>
-    choice(seq(alias($.__run_asynchronous, $.asynchronous_phrase), optional($.arguments)), $.arguments),
+    choice(
+      seq(alias($.__run_asynchronous, $.asynchronous_phrase), optional($.arguments)),
+      $.arguments,
+    ),
   __run_persistence: ($) =>
     choice(
       alias(seq(kw("PERSISTENT"), optional($.__run_persistence_set_tail)), $.persistent),

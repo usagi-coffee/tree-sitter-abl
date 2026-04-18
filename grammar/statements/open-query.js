@@ -43,8 +43,7 @@ module.exports = ({ kw }) => ({
       seq(field("lock", $.__open_query_lock), optional($.__open_query_tail_after_lock)),
       $.__open_query_reposition_tail,
     ),
-  __open_query_tail_after_lock: ($) =>
-    $.__open_query_reposition_tail,
+  __open_query_tail_after_lock: ($) => $.__open_query_reposition_tail,
   __open_query_reposition_tail: ($) =>
     choice(
       seq(

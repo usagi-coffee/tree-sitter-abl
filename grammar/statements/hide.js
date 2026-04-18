@@ -7,13 +7,13 @@ module.exports = ({ kw }) => ({
       $.__hide_window_tail,
     ),
   __hide_tail_after_stream: ($) =>
-    choice(
-      seq($.__hide_target, optional($.__hide_tail_after_target)),
-      $.__hide_window_tail,
-    ),
+    choice(seq($.__hide_target, optional($.__hide_tail_after_target)), $.__hide_window_tail),
   __hide_tail_after_target: ($) => $.__hide_window_tail,
   __hide_window_tail: ($) =>
-    choice(seq(alias(kw("NO-PAUSE"), $.no_pause), optional($.in_window_phrase)), $.in_window_phrase),
+    choice(
+      seq(alias(kw("NO-PAUSE"), $.no_pause), optional($.in_window_phrase)),
+      $.in_window_phrase,
+    ),
   __hide_target: ($) =>
     choice(alias(kw("MESSAGE"), $.message), alias(kw("ALL"), $.all), $.widget_phrase),
 });

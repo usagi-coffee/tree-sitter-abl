@@ -68,10 +68,7 @@ module.exports = ({ kw }) => ({
       ),
       $.__prompt_for_constant_style_tail,
     ),
-  __prompt_for_constant_tail_after_view_as: ($) =>
-    choice(
-      $.__prompt_for_constant_style_tail,
-    ),
+  __prompt_for_constant_tail_after_view_as: ($) => choice($.__prompt_for_constant_style_tail),
   __prompt_for_constant_tail_after_fgcolor: ($) =>
     choice(
       seq(
