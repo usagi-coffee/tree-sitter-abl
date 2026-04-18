@@ -7,27 +7,22 @@ module.exports = ({ kw }) => ({
       seq($.__run_persistence, optional($.__run_body_after_persistence)),
       seq(alias($.__run_in_phrase, $.in_phrase), optional($.__run_body_after_in)),
       seq(alias($.__run_on_server, $.on_server_phrase), optional($.__run_body_after_on_server)),
-      seq(alias($.__run_asynchronous, $.asynchronous_phrase), optional($.arguments)),
-      $.arguments,
+      $.__run_arguments_tail,
     ),
   __run_body_after_persistence: ($) =>
     choice(
       seq(alias($.__run_in_phrase, $.in_phrase), optional($.__run_body_after_in)),
       seq(alias($.__run_on_server, $.on_server_phrase), optional($.__run_body_after_on_server)),
-      seq(alias($.__run_asynchronous, $.asynchronous_phrase), optional($.arguments)),
-      $.arguments,
+      $.__run_arguments_tail,
     ),
   __run_body_after_in: ($) =>
     choice(
       seq(alias($.__run_on_server, $.on_server_phrase), optional($.__run_body_after_on_server)),
-      seq(alias($.__run_asynchronous, $.asynchronous_phrase), optional($.arguments)),
-      $.arguments,
+      $.__run_arguments_tail,
     ),
-  __run_body_after_on_server: ($) =>
-    choice(
-      seq(alias($.__run_asynchronous, $.asynchronous_phrase), optional($.arguments)),
-      $.arguments,
-    ),
+  __run_body_after_on_server: ($) => $.__run_arguments_tail,
+  __run_arguments_tail: ($) =>
+    choice(seq(alias($.__run_asynchronous, $.asynchronous_phrase), optional($.arguments)), $.arguments),
   __run_persistence: ($) =>
     choice(
       alias(seq(kw("PERSISTENT"), optional($.__run_persistence_set_tail)), $.persistent),
