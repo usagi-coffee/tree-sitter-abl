@@ -45,14 +45,12 @@ module.exports = ({ kw }) => ({
         optional($.__dataset_data_relation_tail_after_reposition),
       ),
       seq(alias(kw("NESTED"), $.nested), optional($.__dataset_data_relation_tail_after_nested)),
-      seq(alias(kw("NOT-ACTIVE"), $.not_active), optional(alias(kw("RECURSIVE"), $.recursive))),
-      alias(kw("RECURSIVE"), $.recursive),
+      $.__dataset_not_active_recursive_tail,
     ),
   __dataset_data_relation_tail_after_reposition: ($) =>
     choice(
       seq(alias(kw("NESTED"), $.nested), optional($.__dataset_data_relation_tail_after_nested)),
-      seq(alias(kw("NOT-ACTIVE"), $.not_active), optional(alias(kw("RECURSIVE"), $.recursive))),
-      alias(kw("RECURSIVE"), $.recursive),
+      $.__dataset_not_active_recursive_tail,
     ),
   __dataset_data_relation_tail_after_nested: ($) =>
     choice(
@@ -60,10 +58,11 @@ module.exports = ({ kw }) => ({
         alias(kw("FOREIGN-KEY-HIDDEN"), $.foreign_key_hidden),
         optional($.__dataset_data_relation_tail_after_foreign_key_hidden),
       ),
-      seq(alias(kw("NOT-ACTIVE"), $.not_active), optional(alias(kw("RECURSIVE"), $.recursive))),
-      alias(kw("RECURSIVE"), $.recursive),
+      $.__dataset_not_active_recursive_tail,
     ),
   __dataset_data_relation_tail_after_foreign_key_hidden: ($) =>
+    $.__dataset_not_active_recursive_tail,
+  __dataset_not_active_recursive_tail: ($) =>
     choice(
       seq(alias(kw("NOT-ACTIVE"), $.not_active), optional(alias(kw("RECURSIVE"), $.recursive))),
       alias(kw("RECURSIVE"), $.recursive),
