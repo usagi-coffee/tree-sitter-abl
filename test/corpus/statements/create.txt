@@ -21,11 +21,26 @@ CREATE SERVER appSrv.
     handle: (identifier)))
 
 ================================================================================
+CREATE with preprocessor record
+================================================================================
+
+CREATE {&Bufor}.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (create_statement
+    table: (preprocessor_name
+      (identifier))))
+
+================================================================================
 CREATE with qualified name
 ================================================================================
 
 CREATE Sports2000.Customer.
 CREATE db.TableName.
+CREATE {&Db}.Customer.
+CREATE a{&one}b{&two}.Customer.
 
 --------------------------------------------------------------------------------
 
@@ -37,6 +52,15 @@ CREATE db.TableName.
   (create_statement
     table: (qualified_name
       left: (identifier)
+      right: (identifier)))
+  (create_statement
+    table: (qualified_name
+      left: (preprocessor_name
+        (identifier))
+      right: (identifier)))
+  (create_statement
+    table: (qualified_name
+      left: (macro_concatenated_name)
       right: (identifier))))
 
 ================================================================================

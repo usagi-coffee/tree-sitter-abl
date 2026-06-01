@@ -461,3 +461,76 @@ ASSIGN a = {us/t0/t001.i}.
         right: (include_file_reference
           file: (include_file_path
             (identifier)))))))
+
+================================================================================
+ASSIGN with preprocessor names
+================================================================================
+
+ASSIGN
+  {&Bufor}.status = {&Status}
+  a{&one}.field = 1
+  a{&one}b.field = 2
+  a{&one}{&two}.field = 3
+  a{&one}{&two}b{&three}.value = 1
+  value = {&Proces}
+  &IF DEFINED (Flag) NE 0 &THEN
+    {&Bufor}.flag = {&Flag}
+  &ENDIF
+  .
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assign_statement
+    (assign_phrase
+      (assign_pair
+        left: (qualified_name
+          left: (preprocessor_name
+            (identifier))
+          right: (identifier))
+        right: (preprocessor_name
+          (identifier)))
+      (assign_pair
+        left: (qualified_name
+          left: (macro_concatenated_name)
+          right: (identifier))
+        right: (number_literal))
+      (assign_pair
+        left: (qualified_name
+          left: (macro_concatenated_name)
+          right: (identifier))
+        right: (number_literal))
+      (assign_pair
+        left: (qualified_name
+          left: (macro_concatenated_name)
+          right: (identifier))
+        right: (number_literal))
+      (assign_pair
+        left: (qualified_name
+          left: (macro_concatenated_name)
+          right: (identifier))
+        right: (number_literal))
+      (assign_pair
+        left: (identifier)
+        right: (preprocessor_name
+          (identifier)))
+      (if_preprocessor_directive_statement
+        (if_branch
+          condition: (binary_expression
+            (function_call
+              function: (identifier)
+              (arguments
+                (argument
+                  name: (identifier))))
+            (number_literal))))
+      (if_preprocessor_directive_statement
+        (then_branch))
+      (assign_pair
+        left: (qualified_name
+          left: (preprocessor_name
+            (identifier))
+          right: (identifier))
+        right: (preprocessor_name
+          (identifier)))
+      (if_preprocessor_directive_statement
+        (endif_branch)))))

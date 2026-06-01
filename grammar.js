@@ -247,7 +247,7 @@ module.exports = grammar({
       __include_file_name: ($) => /[A-Za-z0-9_\\/.-]+\.[A-Za-z][A-Za-z0-9]*/,
 
       // Constants
-      constant: ($) => token(/\{&[^}\r\n]+\}[ \t]*\r?\n/),
+      constant: ($) => token(prec(-1, /\{&[^}\r\n]+\}[ \t]*\r?\n/)),
       preprocessor_name: ($) =>
         prec(
           1,
@@ -309,7 +309,9 @@ module.exports = grammar({
         choice($._identifier_or_qualified_name, $.array_access, $.object_access),
       _identifier_or_access_or_call: ($) => choice($._identifier_or_access, $.function_call),
       macro_concatenated_name: ($) =>
-        token(/[_\p{L}][\p{L}\p{N}_\-&]*(\{(?:&[0-9A-Za-z_-]+|[0-9A-Za-z_-]+)\})+/i),
+        token(
+          /[_\p{L}][\p{L}\p{N}_\-&]*(\{(?:&[0-9A-Za-z_-]+|[0-9A-Za-z_-]+)\}[\p{L}\p{N}_\-&]*)+/i,
+        ),
 
       _widgets: ($) => prec.right(alias(choice(...WIDGETS, kw("FRAME")), $.identifier)),
       _events: ($) =>
@@ -430,7 +432,7 @@ module.exports = grammar({
 
       qualified_name: ($) =>
         seq(
-          field("left", $.identifier),
+          field("left", choice($.macro_concatenated_name, $.identifier, $.preprocessor_name)),
           repeat1(seq($._namedot, field("right", alias($._identifier_immediate, $.identifier)))),
         ),
 

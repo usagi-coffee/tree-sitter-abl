@@ -9,7 +9,10 @@ module.exports = ({ kw }) => ({
     ),
 
   __assign_statement_phrase_body: ($) =>
-    seq(alias($.__assign_pair, $.assign_pair), repeat(alias($.__assign_pair, $.assign_pair))),
+    seq(
+      choice(alias($.__assign_pair, $.assign_pair), $.if_preprocessor_directive),
+      repeat(choice(alias($.__assign_pair, $.assign_pair), $.if_preprocessor_directive_statement)),
+    ),
 
   __assign_record_body: ($) =>
     seq(
