@@ -61,3 +61,36 @@ IF NOT wfeven ENTERED THEN LEAVE.
       (entered_expression
         field: (identifier)))
     then: (leave_statement)))
+
+================================================================================
+NOT ENTERED expression
+================================================================================
+
+IF wfeven NOT ENTERED THEN RETURN.
+IF NOT ENTERED wfeven THEN RETURN.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (if_statement
+    (not_entered_expression
+      field: (identifier))
+    then: (return_statement))
+  (if_statement
+    (not_entered_expression
+      field: (identifier))
+    then: (return_statement)))
+
+================================================================================
+ENTERED expression - reversed order
+================================================================================
+
+IF ENTERED wfeven THEN RETURN.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (if_statement
+    (entered_expression
+      field: (identifier))
+    then: (return_statement)))
