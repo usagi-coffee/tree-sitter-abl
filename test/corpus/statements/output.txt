@@ -358,3 +358,18 @@ OUTPUT TO TERMINAL.
     (no_map))
   (output_statement
     (terminal)))
+
+================================================================================
+OUTPUT TO - opsys_file (unquoted path)
+================================================================================
+
+OUTPUT TO /tmp/output.txt.
+OUTPUT TO ../logs/app.log.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (output_statement
+    file: (opsys_file))
+  (output_statement
+    file: (opsys_file)))

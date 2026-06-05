@@ -131,3 +131,18 @@ INPUT FROM "data.txt" MAP "hp2/spanish" CONVERT SOURCE "ibm850".
     map: (string_literal)
     (convert_phrase
       source: (string_literal))))
+
+================================================================================
+INPUT FROM - opsys_file (unquoted path)
+================================================================================
+
+INPUT FROM /tmp/data.txt.
+INPUT FROM ./report.dat.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (input_statement
+    file: (opsys_file))
+  (input_statement
+    file: (opsys_file)))

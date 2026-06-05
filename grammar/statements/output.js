@@ -62,7 +62,10 @@ module.exports = ({ kw }) => ({
   __output_to_target: ($) =>
     choice(
       prec.right(seq(kw("PRINTER"), optional(field("printer", $.__output_printer_target)))),
-      field("file", choice($.string_literal, $.preprocessor_name, $.identifier, $.qualified_name)),
+      field(
+        "file",
+        choice($.opsys_file, $.string_literal, $.preprocessor_name, $.identifier, $.qualified_name),
+      ),
       alias(kw("TERMINAL"), $.terminal),
       $._value_expression,
       alias(kw("CLIPBOARD"), $.clipboard),
