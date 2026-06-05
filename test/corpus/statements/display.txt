@@ -492,3 +492,27 @@ DISPLAY WITH FRAME a 1 DOWN NO-LABEL OVERLAY.
         value: (number_literal))
       (no_label)
       (overlay))))
+
+================================================================================
+DISPLAY - standalone aggregate expression
+================================================================================
+
+DISPLAY (COUNT BY category).
+DISPLAY (COUNT TOTAL BY region).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (display_statement
+    (aggregate_expression
+      (aggregate_phrase
+        operation: (aggregate_operation)
+        (by_phrase
+          group: (identifier)))))
+  (display_statement
+    (aggregate_expression
+      (aggregate_phrase
+        operation: (aggregate_operation)
+        operation: (aggregate_operation)
+        (by_phrase
+          group: (identifier))))))
