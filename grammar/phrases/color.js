@@ -3,6 +3,18 @@ module.exports = ({ kw }) => ({
     choice(
       $.number_literal,
       $.string_literal,
+      // Legacy fgnd/bgnd notación con slash (white/red) — no documentado pero usado en producción
+      prec(
+        2,
+        seq(
+          field(
+            "foreground",
+            choice($.identifier, alias($.__color_prefixed_identifier, $.identifier)),
+          ),
+          "/",
+          field("background", $.identifier),
+        ),
+      ),
       $._value_expression,
       field("foreground", alias($.__color_prefixed_identifier, $.identifier)),
       seq(

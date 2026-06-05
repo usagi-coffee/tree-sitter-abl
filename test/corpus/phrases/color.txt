@@ -25,3 +25,18 @@ MESSAGE COLOR VALUE(5) "x".
     color: (color_phrase
       value: (number_literal))
     (string_literal)))
+
+================================================================================
+COLOR - legacy slash notation (foreground/background)
+================================================================================
+
+MESSAGE COLOR white/red "Text".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (message_statement
+    color: (color_phrase
+      foreground: (identifier)
+      background: (identifier))
+    (string_literal)))
