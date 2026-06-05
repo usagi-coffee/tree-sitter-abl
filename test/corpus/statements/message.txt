@@ -460,3 +460,19 @@ END.
                   (no_apply)))))
           (case_otherwise_phrase
             (stop_statement)))))))
+
+================================================================================
+MESSAGE SET/UPDATE - VIEW-AS phrase
+================================================================================
+
+MESSAGE "Select" VIEW-AS ALERT-BOX SET flag VIEW-AS TOGGLE-BOX.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (message_statement
+    (string_literal)
+    (view_as_phrase)
+    (set_update_phrase
+      field: (identifier)
+      (view_as_phrase))))
