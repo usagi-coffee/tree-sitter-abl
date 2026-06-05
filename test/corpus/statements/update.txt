@@ -404,3 +404,20 @@ UPDATE field1 SPACE(2) SKIP(1) ^.
       (skip_phrase
         skip: (number_literal)))
     (field)))
+
+================================================================================
+UPDATE - multiple fields with frame_phrase
+================================================================================
+
+UPDATE field1 field2 WITH FRAME f1.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (update_statement
+    (field
+      field: (identifier))
+    (field
+      field: (identifier))
+    (frame_phrase
+      frame: (identifier))))

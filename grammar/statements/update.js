@@ -12,6 +12,7 @@ module.exports = ({ kw }) => ({
       repeat1(alias($.__update_field, $.field)),
       optional(alias($._go_on_phrase, $.go_on_phrase)),
       optional($.frame_phrase),
+      optional($.frame_phrase),
       optional($.editing_phrase),
     ),
 
