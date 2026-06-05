@@ -87,6 +87,8 @@ module.exports = grammar({
     [$.__prompt_for_with_phrase, $.frame_phrase],
     // BUTTON in alert-box phrase vs DEFINE BUTTON keyword
     [$.__view_as_alert_box],
+    // NOT ENTERED field: NOT can be unary op on entered_expression OR start of not_entered_expression
+    [$.entered_expression, $.not_entered_expression],
     // DISPLAY x IN WINDOW w ; DISPLAY x IN FRAME y - both can work
     [$.__display_record, $.widget_qualified_name, $._primary_expression],
     // Field / Column / Handle can be just an identifier
