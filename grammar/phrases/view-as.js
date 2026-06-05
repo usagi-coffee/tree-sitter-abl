@@ -11,6 +11,7 @@ module.exports = ({ kw }) => ({
         $.slider_phrase,
         $.__view_as_text,
         $.__view_as_toggle_box,
+        $.__view_as_alert_box,
       ),
     ),
 
@@ -32,5 +33,13 @@ module.exports = ({ kw }) => ({
       field("widget", kw("TOGGLE-BOX")),
       optional($.size_phrase),
       optional(seq(kw("TOOLTIP"), field("tooltip", $._expression))),
+    ),
+
+  __view_as_alert_box: ($) =>
+    seq(
+      field("widget", kw("ALERT-BOX")),
+      optional(alias($.__message_alert_type, $.alert_type)),
+      optional(seq(choice(kw("BUTTONS"), kw("BUTTON")), field("buttons", $.__message_buttons))),
+      optional(seq(kw("TITLE"), field("title", $.string_literal))),
     ),
 });

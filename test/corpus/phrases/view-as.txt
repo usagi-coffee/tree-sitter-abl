@@ -24,3 +24,18 @@ DEFINE VARIABLE c AS CHARACTER VIEW-AS FILL-IN NATIVE SIZE 10 BY 1.
       (size_phrase
         width: (number_literal)
         height: (number_literal)))))
+
+================================================================================
+VIEW-AS FILL-IN with tooltip
+================================================================================
+
+DEFINE VARIABLE x AS CHARACTER VIEW-AS FILL-IN TOOLTIP "Enter name".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (view_as_phrase
+      tooltip: (string_literal))))

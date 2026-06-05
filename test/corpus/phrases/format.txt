@@ -41,3 +41,24 @@ PUT x FORMAT hFmt:Value.
       format: (object_access
         left: (identifier)
         right: (identifier)))))
+
+================================================================================
+FORMAT - AT COL and AT ROW alone
+================================================================================
+
+DISPLAY x AT COL 5.
+DISPLAY x AT ROW 3.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (display_statement
+    (field
+      field: (identifier))
+    (format_phrase
+      column: (number_literal)))
+  (display_statement
+    (field
+      field: (identifier))
+    (format_phrase
+      row: (number_literal))))

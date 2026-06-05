@@ -35,13 +35,14 @@ module.exports = ({ kw }) => ({
       kw("AT"),
       choice(
         field("at", token(/[0-9]+(\.[0-9]+)?/)),
-        seq($.__format_at_column, $.__format_at_row, optional($.__format_alignment)),
+        seq($.__format_at_column, optional($.__format_at_row), optional($.__format_alignment)),
+        seq($.__format_at_row, optional($.__format_at_column), optional($.__format_alignment)),
         seq($.__format_at_x, $.__format_at_y, optional($.__format_alignment)),
       ),
     ),
   __format_at_column: ($) =>
     choice(
-      seq(kw("COLUMN"), field("column", $._expression)),
+      seq(choice(kw("COLUMN"), kw("COL")), field("column", $._expression)),
       seq(kw("COLUMN-OF"), field("column_of", $._expression)),
     ),
   __format_at_row: ($) =>
@@ -138,6 +139,11 @@ module.exports = ({ kw }) => ({
   _format_view_as: ($) =>
     seq(
       kw("VIEW-AS"),
-      choice(kw("TEXT"), kw("TOGGLE-BOX"), alias($.__format_editor_phrase, $.editor_phrase)),
+      choice(
+        kw("TEXT"),
+        kw("TOGGLE-BOX"),
+        alias($.__format_editor_phrase, $.editor_phrase),
+        alias($.__view_as_alert_box, $.view_as_phrase),
+      ),
     ),
 });
