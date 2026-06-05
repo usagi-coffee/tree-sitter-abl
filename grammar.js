@@ -296,6 +296,9 @@ module.exports = grammar({
       null_literal: ($) => token("?"),
       boolean_literal: ($) => choice(kw("TRUE"), kw("FALSE"), kw("YES"), kw("NO")),
       procedure_name: ($) => /[A-Za-z0-9_\\/.-]+\.pl?/i,
+      // opsys-file sin comillas: path absoluto (/x) o relativo (./x, ../x).
+      // Solo referenciado en INPUT FROM / OUTPUT TO, donde el lexer lo produce.
+      opsys_file: ($) => token(/(?:\.{1,2})?\/[A-Za-z0-9_.\-/~]*[A-Za-z0-9_\-/]/),
 
       // Types
       generic_type: ($) => seq($._simple_type_name, "<", $._simple_type_name, ">"),

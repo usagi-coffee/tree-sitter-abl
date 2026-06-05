@@ -48,5 +48,5 @@ module.exports = ({ kw }) => ({
       ),
     ),
   __input_file_target: ($) =>
-    choice($.string_literal, $._identifier_or_access_or_call, $.preprocessor_name),
+    choice($.opsys_file, $.string_literal, $._identifier_or_access_or_call, $.preprocessor_name),
 });
