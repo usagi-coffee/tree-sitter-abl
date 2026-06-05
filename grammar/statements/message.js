@@ -62,6 +62,7 @@ module.exports = ({ kw }) => ({
         ),
       ),
       optional($._format_string),
+      optional(alias($._format_view_as, $.view_as_phrase)),
       optional(alias(kw("AUTO-RETURN"), $.auto_return)),
     ),
 });
