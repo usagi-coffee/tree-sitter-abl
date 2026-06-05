@@ -5,8 +5,7 @@ module.exports = ({ kw }) => ({
       kw("ERROR"),
       kw("UNDO"),
       optional(field("undo_label", $.identifier)),
-      ",",
-      $.__on_error_action,
+      optional(seq(",", $.__on_error_action)),
     ),
 
   __on_error_action: ($) =>
