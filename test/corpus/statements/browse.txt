@@ -797,3 +797,36 @@ WITH TITLE DCOLOR 5 'My Browse' NO-UNDERLINE NO-LABELS.
     title: (string_literal)
     (no_underline)
     (no_labels)))
+
+================================================================================
+Define Browse - multiple WITH phrases
+================================================================================
+
+DEFINE BROWSE b1 QUERY q1 DISPLAY Name WITH TITLE "Customers" WITH DOWN 5.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (browse_definition
+    name: (identifier)
+    query: (identifier)
+    (column
+      column: (identifier))
+    title: (string_literal)
+    down: (number_literal)))
+
+================================================================================
+Define Browse - COL alias in WITH options
+================================================================================
+
+DEFINE BROWSE b1 QUERY q1 DISPLAY Name WITH COL 20.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (browse_definition
+    name: (identifier)
+    query: (identifier)
+    (column
+      column: (identifier))
+    column: (number_literal)))

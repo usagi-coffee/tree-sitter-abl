@@ -24,7 +24,7 @@ module.exports = ({ kw }) => ({
       seq($.__browse_enable_phrase, optional($.__browse_options_phrase)),
       $.__browse_options_phrase,
     ),
-  __browse_options_phrase: ($) => seq(kw("WITH"), repeat($.__browse_option)),
+  __browse_options_phrase: ($) => repeat1(seq(kw("WITH"), repeat($.__browse_option))),
 
   __browse_record: ($) =>
     seq(field("record", $.identifier), kw("EXCEPT"), repeat1(field("field", $.identifier))),
@@ -84,7 +84,11 @@ module.exports = ({ kw }) => ({
       seq(kw("FGCOLOR"), field("fgcolor", $.__browse_option_expression)),
       seq(kw("FONT"), field("font", $.__browse_option_expression)),
       seq(kw("PFCOLOR"), field("pfcolor", $.__browse_option_expression)),
-      seq(kw("TITLE"), optional($.__browse_title_option), field("title", $.string_literal)),
+      seq(
+        kw("TITLE"),
+        optional($.__browse_title_option),
+        field("title", $.__browse_option_expression),
+      ),
       seq(kw("WIDTH"), field("width", $.__browse_option_expression)),
       choice(
         seq(field("down", $.number_literal), kw("DOWN")),
@@ -123,7 +127,7 @@ module.exports = ({ kw }) => ({
       alias(kw("NO-COLUMN-SCROLLING"), $.no_column_scrolling),
       seq(kw("MAX-DATA-GUESS"), field("max_data_guess", $.__browse_option_expression)),
       seq(kw("ROW"), field("row", $.__browse_option_expression)),
-      seq(kw("COLUMN"), field("column", $.__browse_option_expression)),
+      seq(choice(kw("COLUMN"), kw("COL")), field("column", $.__browse_option_expression)),
       alias(kw("SCROLLBAR-HORIZONTAL"), $.scrollbar_horizontal),
       alias(kw("SCROLLBAR-VERTICAL"), $.scrollbar_vertical),
       seq(
@@ -156,6 +160,7 @@ module.exports = ({ kw }) => ({
     seq(
       field("field", choice($._identifier_or_qualified_name, $.object_access)),
       optional(seq("[", optional($._array_subscript), "]")),
+      repeat($.format_phrase),
     ),
   __browse_title_option: ($) => $._frame_title_option,
   __browse_modifier: ($) =>
