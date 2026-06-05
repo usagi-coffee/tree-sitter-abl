@@ -110,3 +110,18 @@ DISABLE Customer.CreditLimit WITH FRAME cust-info.
         right: (identifier)))
     (frame_phrase
       frame: (identifier))))
+
+================================================================================
+DISABLE - array access
+================================================================================
+
+DISABLE arr[1].
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (disable_statement
+    (disable_item
+      field: (array_access
+        array: (identifier)
+        index: (number_literal)))))

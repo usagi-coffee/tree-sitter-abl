@@ -18,7 +18,7 @@ module.exports = ({ kw }) => ({
   __enable_item: ($) =>
     choice(
       seq(
-        field("field", $._identifier_or_qualified_name),
+        field("field", $._identifier_or_array_access),
         repeat($.format_phrase),
         optional(seq(kw("WHEN"), field("when", $._expression))),
       ),
