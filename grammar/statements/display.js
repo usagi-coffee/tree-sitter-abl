@@ -70,7 +70,8 @@ module.exports = ({ kw }) => ({
       ),
     ),
   __display_aggregate_expression: ($) => seq("(", repeat1($.aggregate_phrase), ")"),
-  __display_aggregate_primary_expression: ($) => choice($.__display_keyword_identifier, $._expression),
+  __display_aggregate_primary_expression: ($) =>
+    choice($.__display_keyword_identifier, $._expression),
   __display_keyword_identifier: ($) => alias(kw("MENU"), $.identifier),
   __display_record: ($) => $._identifier_or_qualified_name,
 
