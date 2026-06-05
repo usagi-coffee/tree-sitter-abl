@@ -90,6 +90,8 @@ module.exports = grammar({
     // ENABLE/DISABLE field[N] can be confused with function_call
     [$.__enable_item, $.function_call],
     [$.__disable_item, $.function_call],
+    // DISPLAY field (TOTAL): field expr vs binary_expression that continues after field
+    [$.__display_aggregate_primary_expression, $.binary_expression],
     // DISPLAY x IN WINDOW w ; DISPLAY x IN FRAME y - both can work
     [$.__display_record, $.widget_qualified_name, $._primary_expression],
     // Field / Column / Handle can be just an identifier

@@ -50,6 +50,7 @@ module.exports = ({ kw }) => ({
               $.format_phrase,
               optional(seq(kw("WHEN"), field("when", $.__display_when_expression))),
             ),
+            alias($.__display_aggregate_expression, $.aggregate_expression),
             $.__display_skip_phrase,
             $.__display_space_phrase,
           ),
@@ -64,10 +65,12 @@ module.exports = ({ kw }) => ({
   __display_field: ($) =>
     prec.right(
       seq(
-        field("field", choice($.__display_keyword_identifier, $._expression)),
-        optional(prec.dynamic(1, seq("(", repeat1($.aggregate_phrase), ")"))),
+        field("field", $.__display_aggregate_primary_expression),
+        optional(prec.dynamic(1, $.__display_aggregate_expression)),
       ),
     ),
+  __display_aggregate_expression: ($) => seq("(", repeat1($.aggregate_phrase), ")"),
+  __display_aggregate_primary_expression: ($) => choice($.__display_keyword_identifier, $._expression),
   __display_keyword_identifier: ($) => alias(kw("MENU"), $.identifier),
   __display_record: ($) => $._identifier_or_qualified_name,
 
