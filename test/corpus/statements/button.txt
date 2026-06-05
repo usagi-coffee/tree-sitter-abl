@@ -467,3 +467,15 @@ DEFINE BUTTON button-1 LABEL "Drop Here" DROP-TARGET.
     name: (identifier)
     label: (string_literal)
     (drop_target)))
+
+================================================================================
+DEFINE BUTTON - BUTTONS keyword alias
+================================================================================
+
+DEFINE BUTTONS btn1.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (button_definition
+    name: (identifier)))

@@ -3,7 +3,7 @@ module.exports = ({ kw }) => ({
     seq(
       kw("DEFINE", { offset: 3 }),
       optional(alias(kw("PRIVATE"), $.access_modifier)),
-      kw("BUTTON"),
+      choice(kw("BUTTON"), kw("BUTTONS")),
       $.__button_body,
       $._terminator,
     ),
