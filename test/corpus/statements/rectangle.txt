@@ -599,3 +599,19 @@ END.
               left: (identifier)
               right: (identifier))))
         base: (identifier)))))
+
+================================================================================
+RECTANGLE - partial keyword (RECT, RECTAN)
+================================================================================
+
+DEFINE RECT r1.
+DEFINE RECTAN r2 NO-FILL.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (rectangle_definition
+    name: (identifier))
+  (rectangle_definition
+    name: (identifier)
+    (no_fill)))
