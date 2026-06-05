@@ -534,3 +534,19 @@ ASSIGN
           (identifier)))
       (if_preprocessor_directive_statement
         (endif_branch)))))
+
+================================================================================
+ASSIGN - BROWSE attribute LHS
+================================================================================
+
+ASSIGN BROWSE b1:CURRENT-ROW = 1.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assign_statement
+    (assign_phrase
+      (assign_pair
+        browse: (identifier)
+        attr: (identifier)
+        right: (number_literal)))))

@@ -10,11 +10,14 @@ module.exports = ({ kw }) => ({
 
   __assign_pair: ($) =>
     seq(
-      field("left", choice($._assignable, $.__assign_keyword_identifier)),
+      field("left", choice($._assignable, $.__assign_keyword_identifier, $.__assign_browse_attr)),
       optional(seq("=", field("right", choice($.array_initializer, $._expression)))),
       optional(seq(kw("WHEN"), field("when", $._expression))),
     ),
   __assign_keyword_identifier: ($) => alias($._widgets, $.identifier),
+
+  __assign_browse_attr: ($) =>
+    seq(kw("BROWSE"), field("browse", $.identifier), ":", field("attr", $.identifier)),
 
   __assign_no_error: ($) => kw("NO-ERROR"),
 });
