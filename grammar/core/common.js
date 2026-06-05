@@ -46,6 +46,7 @@ module.exports = ({ kw }) => ({
   _dos_unix_command: ($) =>
     choice(
       field("command_token", $.identifier),
+      field("command_token", $.string_literal),
       seq(kw("VALUE"), "(", field("command", $._expression), ")"),
     ),
   _dos_unix_tail: ($) =>
