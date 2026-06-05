@@ -10,6 +10,12 @@ module.exports = ({ kw }) => ({
           kw("INNER-LINES"),
           field("inner_lines", $.number_literal),
         ),
+        seq(
+          kw("INNER-LINES"),
+          field("inner_lines", $.number_literal),
+          kw("INNER-CHARS"),
+          field("inner_chars", $.number_literal),
+        ),
       ),
       optional($.__editor_options),
     ),
