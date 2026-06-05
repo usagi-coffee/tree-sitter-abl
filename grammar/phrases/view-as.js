@@ -11,7 +11,6 @@ module.exports = ({ kw }) => ({
         $.slider_phrase,
         $.__view_as_text,
         $.__view_as_toggle_box,
-        $.__view_as_alert_box,
       ),
     ),
 
