@@ -106,3 +106,14 @@ UNDO, RETURN ERROR errObj.
     leave_label: (identifier))
   (undo_statement
     error_value: (identifier)))
+
+================================================================================
+UNDO - RETURN ERROR bare (no value)
+================================================================================
+
+UNDO, RETURN ERROR.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (undo_statement))
