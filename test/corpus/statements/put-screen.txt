@@ -172,3 +172,26 @@ PUT SCREEN COLOR VALUE(cColor) ROW 1 COLUMN 1 "Hdr".
     row: (number_literal)
     column: (number_literal)
     value: (string_literal)))
+
+================================================================================
+PUT SCREEN - legacy order (value before ROW) and COL alias
+================================================================================
+
+PUT SCREEN "Text" ROW 5.
+PUT SCREEN "Text" ROW 5 COL 10.
+PUT SCREEN ROW 5 COL 10 "Text".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (put_screen_statement
+    value: (string_literal)
+    row: (number_literal))
+  (put_screen_statement
+    value: (string_literal)
+    row: (number_literal)
+    column: (number_literal))
+  (put_screen_statement
+    row: (number_literal)
+    column: (number_literal)
+    value: (string_literal)))
