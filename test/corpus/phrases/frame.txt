@@ -169,3 +169,43 @@ DISPLAY x WITH CANCEL-BUTTON btnCancel DEFAULT-BUTTON btnOk.
     (frame_phrase
       cancel_button: (identifier)
       default_button: (identifier))))
+
+================================================================================
+FRAME - NO-VALIDATE
+================================================================================
+
+DISPLAY x WITH FRAME f NO-VALIDATE.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (display_statement
+    record: (identifier)
+    (frame_phrase
+      frame: (identifier)
+      (no_validate))))
+
+================================================================================
+FRAME - COLOR phrase
+================================================================================
+
+DISPLAY x WITH FRAME f COLOR VALUE(5).
+DISPLAY x WITH FRAME f COLOR DISPLAY VALUE(5) PROMPT VALUE(3).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (display_statement
+    record: (identifier)
+    (frame_phrase
+      frame: (identifier)
+      color: (color_phrase
+        value: (number_literal))))
+  (display_statement
+    record: (identifier)
+    (frame_phrase
+      frame: (identifier)
+      color: (color_phrase
+        value: (number_literal))
+      prompt_color: (color_phrase
+        value: (number_literal)))))

@@ -22,6 +22,7 @@ module.exports = ({ kw }) => ({
           alias(kw("NO-HIDE"), $.no_hide),
           alias(kw("NO-UNDERLINE", { offset: 10 }), $.no_underline),
           alias(kw("NO-HELP"), $.no_help),
+          alias(kw("NO-VALIDATE"), $.no_validate),
           alias(kw("SCROLLABLE"), $.scrollable),
           alias(kw("TOP-ONLY"), $.top_only),
           alias(kw("SCREEN-IO"), $.screen_io),
@@ -46,6 +47,12 @@ module.exports = ({ kw }) => ({
           seq(kw("DCOLOR"), field("dcolor", $.__frame_expression)),
           seq(kw("FGCOLOR"), field("fgcolor", $.__frame_expression)),
           seq(kw("PFCOLOR"), field("pfcolor", $.__frame_expression)),
+          seq(
+            kw("COLOR"),
+            optional(kw("DISPLAY")),
+            field("color", $.__frame_color_value),
+            optional(seq(kw("PROMPT"), field("prompt_color", $.__frame_color_value))),
+          ),
           $.__frame_title_phrase,
           choice(
             seq(field("column", $.number_literal), $.__frame_column_keyword),
@@ -80,6 +87,8 @@ module.exports = ({ kw }) => ({
     prec.right(1, seq(kw("DOWN"), field("count", $.__frame_down_expression))),
   __frame_down_plain: ($) => prec(-1, seq(kw("DOWN"))),
   __frame_down_expression: ($) => choice($.number_literal, $.parenthesized_expression),
+  __frame_color_value: ($) => choice(kw("NORMAL"), kw("INPUT"), kw("MESSAGES"), $.color_phrase),
+
   __frame_with_identifier: ($) =>
     prec.right(
       seq(

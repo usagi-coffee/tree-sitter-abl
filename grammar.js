@@ -83,6 +83,8 @@ module.exports = grammar({
   conflicts: ($) => [
     // There are many statements where x ( ) has different meanings (aggregate/accum)
     [$._primary_expression, $.function_call],
+    // WITH NO-VALIDATE is valid both as prompt_for_with_phrase and as frame_phrase option
+    [$.__prompt_for_with_phrase, $.frame_phrase],
     // DISPLAY x IN WINDOW w ; DISPLAY x IN FRAME y - both can work
     [$.__display_record, $.widget_qualified_name, $._primary_expression],
     // Field / Column / Handle can be just an identifier
