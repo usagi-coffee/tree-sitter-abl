@@ -52,6 +52,16 @@
 
 Strongly prefer using these commands as they have helpful side-effects like returning `ACTION_COUNT`, `STATE_COUNT` and `LARGE_STATE_COUNT`.
 
+### Commiting 
+
+Always place parser count deltas at the end of the commit description using this template if the delats are non-zero.
+
+```
+ACTION_COUNT: <before> -> <after> (<delta>)
+STATE_COUNT: <before> -> <after> (<delta>)
+LARGE_STATE_COUNT: <before> -> <after> (<delta>)
+```
+
 ## Conventions
 
 - Always run tests after modifications.
