@@ -85,8 +85,8 @@ module.exports = grammar({
     [$._primary_expression, $.function_call],
     // WITH NO-VALIDATE is valid both as prompt_for_with_phrase and as frame_phrase option
     [$.__prompt_for_with_phrase, $.frame_phrase],
-    // NOT ENTERED field: NOT can be unary op on entered_expression OR start of not_entered_expression
-    [$.entered_expression, $.not_entered_expression],
+    // NOT ENTERED field: NOT can be unary, or part of the ENTERED expression.
+    [$.entered_expression],
     // ENABLE/DISABLE field[N] can be confused with function_call
     [$.__enable_item, $.function_call],
     [$.__disable_item, $.function_call],
@@ -298,8 +298,7 @@ module.exports = grammar({
       null_literal: ($) => token("?"),
       boolean_literal: ($) => choice(kw("TRUE"), kw("FALSE"), kw("YES"), kw("NO")),
       procedure_name: ($) => /[A-Za-z0-9_\\/.-]+\.pl?/i,
-      // opsys-file sin comillas: path absoluto (/x) o relativo (./x, ../x).
-      // Solo referenciado en INPUT FROM / OUTPUT TO, donde el lexer lo produce.
+      // Unquoted opsys-file paths, used only by INPUT FROM / OUTPUT TO targets.
       opsys_file: ($) => token(/(?:\.{1,2})?\/[A-Za-z0-9_.\-/~]*[A-Za-z0-9_\-/]/),
 
       // Types

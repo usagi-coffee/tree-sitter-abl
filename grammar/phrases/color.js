@@ -3,7 +3,7 @@ module.exports = ({ kw }) => ({
     choice(
       $.number_literal,
       $.string_literal,
-      // Legacy fgnd/bgnd notación con slash (white/red) — no documentado pero usado en producción
+      // Legacy foreground/background slash notation, e.g. white/red.
       prec(
         2,
         seq(

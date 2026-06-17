@@ -6,13 +6,13 @@ module.exports = ({ kw }) => ({
       kw("SCREEN"),
       optional(alias($.__put_screen_color_phrase, $.color_phrase)),
       choice(
-        // Orden estándar: [ROW] [COL] value
+        // Standard order: [ROW] [COL] value.
         seq(
           optional(seq(kw("ROW"), field("row", $._expression))),
           optional(seq(choice(kw("COLUMN"), kw("COL")), field("column", $._expression))),
           field("value", $._expression),
         ),
-        // Orden legacy: value ROW [COL]  (ROW requerido para desambiguar)
+        // Legacy order: value ROW [COL]. ROW is required to disambiguate.
         seq(
           field("value", $._expression),
           seq(kw("ROW"), field("row", $._expression)),

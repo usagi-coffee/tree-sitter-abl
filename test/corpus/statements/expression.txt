@@ -73,11 +73,13 @@ IF NOT ENTERED wfeven THEN RETURN.
 
 (source_code
   (if_statement
-    (not_entered_expression
-      field: (identifier))
+    (entered_expression
+      field: (identifier)
+      (not))
     then: (return_statement))
   (if_statement
-    (not_entered_expression
+    (entered_expression
+      (not)
       field: (identifier))
     then: (return_statement)))
 
