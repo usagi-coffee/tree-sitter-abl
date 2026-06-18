@@ -16,7 +16,7 @@ module.exports = ({ kw }) => ({
         repeat1(alias($.__open_query_by_phrase, $.by_phrase)),
         optional($.__open_query_tail_after_by),
       ),
-      seq(field("lock", $.__open_query_lock), optional($.__open_query_tail_after_lock)),
+      seq(field("lock", $.__open_query_lock), optional($.__open_query_reposition_tail)),
       $.__open_query_reposition_tail,
     ),
   __open_query_tail_after_query_tuning: ($) =>
@@ -26,7 +26,7 @@ module.exports = ({ kw }) => ({
         repeat1(alias($.__open_query_by_phrase, $.by_phrase)),
         optional($.__open_query_tail_after_by),
       ),
-      seq(field("lock", $.__open_query_lock), optional($.__open_query_tail_after_lock)),
+      seq(field("lock", $.__open_query_lock), optional($.__open_query_reposition_tail)),
       $.__open_query_reposition_tail,
     ),
   __open_query_tail_after_break: ($) =>
@@ -35,15 +35,14 @@ module.exports = ({ kw }) => ({
         repeat1(alias($.__open_query_by_phrase, $.by_phrase)),
         optional($.__open_query_tail_after_by),
       ),
-      seq(field("lock", $.__open_query_lock), optional($.__open_query_tail_after_lock)),
+      seq(field("lock", $.__open_query_lock), optional($.__open_query_reposition_tail)),
       $.__open_query_reposition_tail,
     ),
   __open_query_tail_after_by: ($) =>
     choice(
-      seq(field("lock", $.__open_query_lock), optional($.__open_query_tail_after_lock)),
+      seq(field("lock", $.__open_query_lock), optional($.__open_query_reposition_tail)),
       $.__open_query_reposition_tail,
     ),
-  __open_query_tail_after_lock: ($) => $.__open_query_reposition_tail,
   __open_query_reposition_tail: ($) =>
     choice(
       seq(
