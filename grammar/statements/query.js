@@ -12,10 +12,9 @@ module.exports = ({ kw }) => ({
     seq(field("name", $.identifier), kw("FOR"), $.query_table_list, optional($.__query_tail)),
   __query_tail: ($) =>
     choice(
-      seq(alias($.__query_cache_phrase, $.cache_phrase), optional($.__query_tail_after_cache)),
+      seq(alias($.__query_cache_phrase, $.cache_phrase), optional($.__query_scrolling_rcode_tail)),
       $.__query_scrolling_rcode_tail,
     ),
-  __query_tail_after_cache: ($) => $.__query_scrolling_rcode_tail,
   __query_scrolling_rcode_tail: ($) =>
     choice(
       seq(
