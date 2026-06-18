@@ -6,7 +6,24 @@ module.exports = ({ kw }) => ({
       optional($._stream_phrase),
       choice(
         alias(kw("CLOSE"), $.close),
-        seq(kw("TO"), $.__output_to_target, repeat($.__output_to_option)),
+        seq(
+          kw("TO"),
+          $.__output_to_target,
+          repeat(
+            choice(
+              $.preprocessor_name,
+              alias($._lob_dir_phrase, $.lob_dir_phrase),
+              alias($.__output_num_copies_phrase, $.num_copies_phrase),
+              alias(kw("COLLATE"), $.collate),
+              alias(kw("LANDSCAPE"), $.landscape),
+              alias(kw("PORTRAIT"), $.portrait),
+              alias(kw("APPEND"), $.append),
+              alias(kw("BINARY"), $.binary),
+              alias(kw("KEEP-MESSAGES"), $.keep_messages),
+              $.__output_shared_option,
+            ),
+          ),
+        ),
         seq(
           kw("THROUGH"),
           $._program_target,
@@ -14,20 +31,6 @@ module.exports = ({ kw }) => ({
           repeat($.__output_shared_option),
         ),
       ),
-    ),
-
-  __output_to_option: ($) =>
-    choice(
-      $.preprocessor_name,
-      alias($._lob_dir_phrase, $.lob_dir_phrase),
-      alias($.__output_num_copies_phrase, $.num_copies_phrase),
-      alias(kw("COLLATE"), $.collate),
-      alias(kw("LANDSCAPE"), $.landscape),
-      alias(kw("PORTRAIT"), $.portrait),
-      alias(kw("APPEND"), $.append),
-      alias(kw("BINARY"), $.binary),
-      alias(kw("KEEP-MESSAGES"), $.keep_messages),
-      $.__output_shared_option,
     ),
 
   __output_shared_option: ($) =>
