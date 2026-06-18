@@ -67,14 +67,17 @@ module.exports = ({ kw }) => ({
 
   __open_query_record_phrase: ($) =>
     prec.right(
-      seq(field("record", $._identifier_or_qualified_name), repeat($.__open_query_record_option)),
-    ),
-  __open_query_record_option: ($) =>
-    choice(
-      seq(kw("OF"), field("of", $._identifier_or_qualified_name)),
-      seq(kw("WHERE"), field("where", $._expression)),
-      seq(kw("USE-INDEX"), field("index", $.identifier)),
-      field("lock", $.__open_query_lock),
+      seq(
+        field("record", $._identifier_or_qualified_name),
+        repeat(
+          choice(
+            seq(kw("OF"), field("of", $._identifier_or_qualified_name)),
+            seq(kw("WHERE"), field("where", $._expression)),
+            seq(kw("USE-INDEX"), field("index", $.identifier)),
+            field("lock", $.__open_query_lock),
+          ),
+        ),
+      ),
     ),
   __open_query_lock: ($) =>
     choice(
