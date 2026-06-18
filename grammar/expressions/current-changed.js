@@ -6,9 +6,7 @@ module.exports = ({ kw }) => ({
     seq(
       field(
         "record",
-        choice($.__current_changed_record_name, seq("(", $.__current_changed_record_name, ")")),
+        choice($._identifier_or_qualified_name, seq("(", $._identifier_or_qualified_name, ")")),
       ),
     ),
-
-  __current_changed_record_name: ($) => $._identifier_or_qualified_name,
 });

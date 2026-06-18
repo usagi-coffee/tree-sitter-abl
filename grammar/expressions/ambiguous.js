@@ -3,8 +3,9 @@ module.exports = ({ kw }) => ({
 
   __ambiguous_expression_body: ($) =>
     seq(
-      field("record", choice($.__ambiguous_record_name, seq("(", $.__ambiguous_record_name, ")"))),
+      field(
+        "record",
+        choice($._identifier_or_qualified_name, seq("(", $._identifier_or_qualified_name, ")")),
+      ),
     ),
-
-  __ambiguous_record_name: ($) => $._identifier_or_qualified_name,
 });
