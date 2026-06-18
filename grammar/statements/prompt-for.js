@@ -56,7 +56,7 @@ module.exports = ({ kw }) => ({
       ),
       seq(
         alias($.__prompt_for_view_as_phrase, $.view_as_phrase),
-        optional($.__prompt_for_constant_tail_after_view_as),
+        optional($.__prompt_for_constant_style_tail),
       ),
       $.__prompt_for_constant_style_tail,
     ),
@@ -64,11 +64,10 @@ module.exports = ({ kw }) => ({
     choice(
       seq(
         alias($.__prompt_for_view_as_phrase, $.view_as_phrase),
-        optional($.__prompt_for_constant_tail_after_view_as),
+        optional($.__prompt_for_constant_style_tail),
       ),
       $.__prompt_for_constant_style_tail,
     ),
-  __prompt_for_constant_tail_after_view_as: ($) => choice($.__prompt_for_constant_style_tail),
   __prompt_for_constant_tail_after_fgcolor: ($) =>
     choice(
       seq(
