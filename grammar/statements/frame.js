@@ -66,11 +66,7 @@ module.exports = ({ kw }) => ({
 
   __frame_display_option: ($) =>
     choice(
-      seq(kw("BGCOLOR"), field("bgcolor", $._expression)),
-      seq(kw("DCOLOR"), field("dcolor", $._expression)),
-      seq(kw("FGCOLOR"), field("fgcolor", $._expression)),
-      seq(kw("FONT"), field("font", $._expression)),
-      seq(kw("PFCOLOR"), field("pfcolor", $._expression)),
+      $._color_font_option,
       seq(kw("VIEW-AS"), alias(kw("TEXT"), $.text)),
       seq(kw("WIDGET-ID"), field("widget_id", $._expression)),
     ),

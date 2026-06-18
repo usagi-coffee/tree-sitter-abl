@@ -34,7 +34,7 @@ module.exports = ({ kw }) => ({
       optional(alias(kw("DISABLED"), $.disabled)),
       optional($._aggregate_label_phrase),
     ),
-  _menu_color_font_option: ($) =>
+  _color_font_option: ($) =>
     choice(
       seq(kw("BGCOLOR"), field("bgcolor", $._expression)),
       seq(kw("DCOLOR"), field("dcolor", $._expression)),

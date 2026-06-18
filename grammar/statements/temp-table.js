@@ -88,13 +88,10 @@ module.exports = ({ kw }) => ({
     ),
   __temp_table_field_option: ($) =>
     choice(
-      seq(kw("BGCOLOR"), field("bgcolor", $._expression)),
+      $._color_font_option,
       seq(kw("COLUMN-LABEL"), field("column_label", $.__temp_table_label_list)),
-      seq(kw("DCOLOR"), field("dcolor", $._expression)),
       seq(kw("DECIMALS"), field("decimals", $.number_literal)),
       $.__temp_table_extent_option,
-      seq(kw("FONT"), field("font", $._expression)),
-      seq(kw("FGCOLOR"), field("fgcolor", $._expression)),
       $._format_string,
       seq(kw("HELP"), field("help", $.string_literal)),
       seq(
@@ -104,7 +101,6 @@ module.exports = ({ kw }) => ({
       seq(kw("LABEL"), field("label", $.__temp_table_label_list)),
       seq(kw("MOUSE-POINTER"), field("mouse_pointer", $._expression)),
       seq(optional(alias(kw("NOT"), $.not)), alias(kw("CASE-SENSITIVE"), $.case_sensitive)),
-      seq(kw("PFCOLOR"), field("pfcolor", $._expression)),
       alias(kw("SERIALIZE-HIDDEN"), $.serialize_hidden),
       $.__temp_table_serialize_name_phrase,
       seq(kw("TTCODEPAGE"), field("ttcodepage", $.string_literal)),

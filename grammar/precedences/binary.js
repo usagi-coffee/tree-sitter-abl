@@ -1,5 +1,5 @@
 // References: EXPORT statement; MESSAGE statement; DISPLAY statement; Format phrase; SIZE phrase;
-// SYSTEM-DIALOG GET-FILE statement; CASE statement; Frame phrase; AT phrase.
+// SYSTEM-DIALOG GET-FILE statement; CASE statement; Frame phrase; Color/font options; AT phrase.
 // Purpose: allow full binary expressions inside statement/phrase expression slots.
 // Example: EXPORT a - b.
 module.exports = ($) => [
@@ -31,6 +31,7 @@ module.exports = ($) => [
     $.__put_screen_color_phrase,
     $.__form_radio_button,
     $.__frame_display_option,
+    $._color_font_option,
     $.__frame_head_item,
     $.size_phrase,
     $.__system_dialog_filters_pairs,

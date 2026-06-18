@@ -13,7 +13,7 @@ module.exports = ({ kw }) => ({
       field("name", $.identifier),
       repeat(
         choice(
-          $._menu_color_font_option,
+          $._color_font_option,
           alias(kw("SUB-MENU-HELP"), $.submenu_help),
           seq(kw("LIKE"), field("like", $.identifier)),
           alias($.__submenu_element, $.menu_element),
