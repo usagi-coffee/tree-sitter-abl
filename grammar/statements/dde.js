@@ -1,14 +1,14 @@
 module.exports = ({ kw }) => ({
-  dde_statement: ($) =>
+  dde_statement: ($) => seq(kw("DDE"), $.__dde_body, $._no_error_terminator),
+
+  __dde_body: ($) =>
     seq(
-      kw("DDE"),
       choice(
         $.__dde_advise_or_send_branch,
         $.__dde_execute_or_terminate_branch,
         $.__dde_get_or_request_branch,
         seq(field("action", alias(kw("INITIATE"), $.identifier)), $.__dde_initiate_body),
       ),
-      $._no_error_terminator,
     ),
 
   __dde_advise_or_send_branch: ($) =>
