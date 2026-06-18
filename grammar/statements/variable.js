@@ -44,13 +44,6 @@ module.exports = ({ kw }) => ({
 
   __variable_extent_size: ($) => choice($.number_literal, $.preprocessor_name, $.identifier),
 
-  __variable_list_items: ($) => seq($._expression, repeat(seq(",", $._expression))),
-
-  __variable_radio_buttons: ($) =>
-    seq($.__variable_radio_button, repeat(seq(",", $.__variable_radio_button))),
-
-  __variable_radio_button: ($) => seq($._expression, ",", $._expression),
-
   __variable_extent_phrase: ($) =>
     seq(kw("EXTENT"), optional(field("size", $.__variable_extent_size))),
 

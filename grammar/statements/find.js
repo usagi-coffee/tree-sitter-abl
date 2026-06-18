@@ -35,9 +35,6 @@ module.exports = ({ kw }) => ({
       seq(kw("USE-INDEX"), field("index", $.__find_index_name)),
     ),
 
-  _find_record_option_or_where: ($) =>
-    choice($._find_record_option, alias($.__find_where_phrase, $.where_phrase)),
-
   __find_of_phrase: ($) => seq(kw("OF"), field("record", $.__find_record_name)),
   __find_where_phrase: ($) => seq(kw("WHERE"), field("where", $._expression)),
   __find_record_name: ($) => $._identifier_or_qualified_name,

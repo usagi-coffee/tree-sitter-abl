@@ -42,17 +42,6 @@ module.exports = ({ kw }) => ({
       $.frame_phrase,
     ),
 
-  __repeat_break_by_phrase: ($) =>
-    prec.right(
-      seq(
-        optional(alias(kw("BREAK"), $.break)),
-        kw("BY"),
-        field("by", $._expression),
-        optional($.__repeat_sort_direction),
-        repeat(seq(kw("BY"), field("by", $._expression), optional($.__repeat_sort_direction))),
-      ),
-    ),
   __repeat_condition_phrase: ($) =>
     seq(choice(kw("WHILE"), kw("UNTIL")), field("condition", $._expression)),
-  __repeat_sort_direction: ($) => field("sort_order", kw("DESCENDING", { offset: 4 })),
 });

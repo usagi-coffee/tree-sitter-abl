@@ -523,7 +523,6 @@ module.exports = grammar({
           token(prec(1, new RegExp(`(${SYSTEM_HANDLE_WORDS.map(escape_regex).join("|")})`, "i"))),
           $.identifier,
         ),
-      _label_identifier: ($) => $.identifier,
       _label: ($) => prec.right(1, seq(field("label", $.identifier), alias($._colon, ":"))),
       _identifier_immediate: ($) => token.immediate(/[_\p{L}][\p{L}\p{N}_-]*/i),
       _alias_name: ($) => choice($.identifier, $.string_literal, $._value_expression),

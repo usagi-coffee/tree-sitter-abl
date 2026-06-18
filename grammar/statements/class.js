@@ -182,12 +182,6 @@ module.exports = ({ kw }) => ({
       alias(kw("SERIALIZABLE"), $.serializable),
     ),
 
-  __class_property_modifier: ($) =>
-    choice(
-      alias(kw("ABSTRACT"), $.abstract_modifier),
-      alias(kw("FINAL"), $.final_modifier),
-      alias(kw("OVERRIDE"), $.override_modifier),
-    ),
   __class_property_definition_modifier: ($) =>
     choice(
       seq(
@@ -230,18 +224,6 @@ module.exports = ({ kw }) => ({
 
   __class_property_type_phrase: ($) => seq(optional(kw("AS")), $.__class_typed_extent_phrase),
 
-  __class_method_modifier: ($) =>
-    choice(
-      alias(kw("PRIVATE"), $.access_modifier),
-      alias(kw("PACKAGE-PRIVATE"), $.access_modifier),
-      alias(kw("PROTECTED"), $.access_modifier),
-      alias(kw("PACKAGE-PROTECTED"), $.access_modifier),
-      alias(kw("PUBLIC"), $.access_modifier),
-      alias(kw("STATIC"), $.static_modifier),
-      alias(kw("ABSTRACT"), $.abstract_modifier),
-      alias(kw("OVERRIDE"), $.override_modifier),
-      alias(kw("FINAL"), $.final_modifier),
-    ),
   _method_modifier_no_abstract: ($) =>
     choice(
       alias(kw("PRIVATE"), $.access_modifier),

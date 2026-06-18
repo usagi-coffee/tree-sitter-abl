@@ -10,5 +10,4 @@ module.exports = (ctx) => ({
   ...require("./ambiguous")(ctx),
   ...require("./accum")(ctx),
   ...require("./input")(ctx),
-  ...require("./widget")(ctx),
 });
