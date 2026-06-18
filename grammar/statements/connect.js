@@ -4,15 +4,20 @@ module.exports = ({ kw }) => ({
     choice(
       seq(
         field("database", choice($.identifier, $.string_literal, $.function_call)),
-        repeat($.__connect_option),
+        repeat(
+          seq(
+            "-",
+            field("parameter", alias(token.immediate(/[\p{L}\p{N}_]+/i), $.identifier)),
+            optional(field("value", choice($.identifier, $.string_literal, $.number_literal))),
+          ),
+        ),
       ),
-      repeat1($.__connect_option),
-    ),
-
-  __connect_option: ($) =>
-    seq(
-      "-",
-      field("parameter", alias(token.immediate(/[\p{L}\p{N}_]+/i), $.identifier)),
-      optional(field("value", choice($.identifier, $.string_literal, $.number_literal))),
+      repeat1(
+        seq(
+          "-",
+          field("parameter", alias(token.immediate(/[\p{L}\p{N}_]+/i), $.identifier)),
+          optional(field("value", choice($.identifier, $.string_literal, $.number_literal))),
+        ),
+      ),
     ),
 });
