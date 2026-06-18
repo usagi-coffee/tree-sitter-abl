@@ -9,7 +9,15 @@ module.exports = ({ kw }) => ({
         kw("THROUGH"),
         $._program_target,
         repeat($.__input_output_through_argument),
-        repeat($.__input_output_through_option),
+        repeat(
+          choice(
+            alias(kw("ECHO"), $.echo),
+            alias(kw("NO-ECHO"), $.no_echo),
+            $._map_phrase,
+            alias(kw("UNBUFFERED"), $.unbuffered),
+            alias($._convert_phrase, $.convert_phrase),
+          ),
+        ),
       ),
     ),
 
@@ -20,14 +28,5 @@ module.exports = ({ kw }) => ({
       $.identifier,
       $.preprocessor_name,
       $._value_expression,
-    ),
-
-  __input_output_through_option: ($) =>
-    choice(
-      alias(kw("ECHO"), $.echo),
-      alias(kw("NO-ECHO"), $.no_echo),
-      $._map_phrase,
-      alias(kw("UNBUFFERED"), $.unbuffered),
-      alias($._convert_phrase, $.convert_phrase),
     ),
 });
