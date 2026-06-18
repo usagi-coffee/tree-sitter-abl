@@ -45,15 +45,14 @@ module.exports = ({ kw }) => ({
         seq(kw("AS"), field("data_type", $.identifier)),
         seq(kw("LIKE"), field("like_field", $.qualified_name)),
       ),
-      repeat($.__trigger_procedure_value_option),
-    ),
-
-  __trigger_procedure_value_option: ($) =>
-    choice(
-      seq(kw("COLUMN-LABEL"), field("label", $.string_literal)),
-      $._format_string,
-      seq(kw("INITIAL"), field("initial", $._expression)),
-      $._aggregate_label_phrase,
-      alias(kw("NO-UNDO"), $.no_undo),
+      repeat(
+        choice(
+          seq(kw("COLUMN-LABEL"), field("label", $.string_literal)),
+          $._format_string,
+          seq(kw("INITIAL"), field("initial", $._expression)),
+          $._aggregate_label_phrase,
+          alias(kw("NO-UNDO"), $.no_undo),
+        ),
+      ),
     ),
 });
