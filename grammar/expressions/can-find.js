@@ -5,7 +5,7 @@ module.exports = ({ kw }) => ({
     prec.right(
       seq(
         optional(choice(kw("FIRST"), kw("LAST"))),
-        field("table", $.__record_query_record_name),
+        field("table", $._identifier_or_qualified_name),
         optional(alias($.__record_query_of_phrase, $.of_phrase)),
         optional(alias($.__record_query_using_phrase, $.using_phrase)),
         optional(alias($.__record_query_frame_phrase, $.frame_phrase)),
@@ -26,8 +26,9 @@ module.exports = ({ kw }) => ({
     ),
 
   __record_query_where_phrase: ($) => seq(kw("WHERE"), optional($._expression)),
-  __record_query_of_phrase: ($) => seq(kw("OF"), field("record", $.__record_query_record_name)),
-  __record_query_using_phrase: ($) => seq(kw("USING"), field("index", $.__record_query_index_name)),
+  __record_query_of_phrase: ($) => seq(kw("OF"), field("record", $._identifier_or_qualified_name)),
+  __record_query_using_phrase: ($) =>
+    seq(kw("USING"), field("index", $._identifier_or_qualified_name)),
   __record_query_frame_phrase: ($) =>
     seq(
       kw("AND"),
@@ -37,8 +38,5 @@ module.exports = ({ kw }) => ({
     ),
   __record_query_lock_phrase: ($) => kw("NO-LOCK"),
   __record_query_use_index: ($) =>
-    seq(kw("USE-INDEX"), field("index", $.__record_query_index_name)),
-
-  __record_query_record_name: ($) => $._identifier_or_qualified_name,
-  __record_query_index_name: ($) => $._identifier_or_qualified_name,
+    seq(kw("USE-INDEX"), field("index", $._identifier_or_qualified_name)),
 });
