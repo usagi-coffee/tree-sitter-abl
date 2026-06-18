@@ -11,7 +11,7 @@ module.exports = ({ kw }) => ({
           kw("THROUGH"),
           $._program_target,
           repeat($.__output_through_argument),
-          repeat($.__output_through_option),
+          repeat($.__output_shared_option),
         ),
       ),
     ),
@@ -29,8 +29,6 @@ module.exports = ({ kw }) => ({
       alias(kw("KEEP-MESSAGES"), $.keep_messages),
       $.__output_shared_option,
     ),
-
-  __output_through_option: ($) => $.__output_shared_option,
 
   __output_shared_option: ($) =>
     choice(
