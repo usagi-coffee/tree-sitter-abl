@@ -16,13 +16,10 @@ module.exports = ({ kw }) => ({
     ),
 
   delete_widget_statement: ($) =>
-    seq(
-      kw("DELETE"),
-      kw("WIDGET"),
-      field("widget", $._expression),
-      repeat(seq(",", field("widget", $._expression))),
-      $._no_error_terminator,
-    ),
+    seq(kw("DELETE"), kw("WIDGET"), $.__delete_widget_body, $._no_error_terminator),
+
+  __delete_widget_body: ($) =>
+    seq(field("widget", $._expression), repeat(seq(",", field("widget", $._expression)))),
 
   __delete_object_body: ($) => seq(field("name", $.identifier)),
 });
