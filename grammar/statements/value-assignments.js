@@ -1,5 +1,7 @@
 module.exports = ({ kw }) => ({
-  value_assignment_statement: ($) =>
+  value_assignment_statement: ($) => seq($.__value_assignments_body, $._terminator),
+
+  __value_assignments_body: ($) =>
     seq(
       choice(
         $.__value_assignments_current_language,
@@ -11,7 +13,6 @@ module.exports = ({ kw }) => ({
         $.__value_assignments_raw,
         $.__value_assignments_substring,
       ),
-      $._terminator,
     ),
 
   __value_assignments_current_language: ($) =>
