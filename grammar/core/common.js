@@ -34,6 +34,14 @@ module.exports = ({ kw }) => ({
       optional(alias(kw("DISABLED"), $.disabled)),
       optional($._aggregate_label_phrase),
     ),
+  _menu_color_font_option: ($) =>
+    choice(
+      seq(kw("BGCOLOR"), field("bgcolor", $._expression)),
+      seq(kw("DCOLOR"), field("dcolor", $._expression)),
+      seq(kw("FGCOLOR"), field("fgcolor", $._expression)),
+      seq(kw("FONT"), field("font", $._expression)),
+      seq(kw("PFCOLOR"), field("pfcolor", $._expression)),
+    ),
 
   __up_down_count_frame: ($) =>
     choice(seq(field("count", $._expression), optional($.frame_phrase)), $.frame_phrase),
