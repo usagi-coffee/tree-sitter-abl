@@ -13,20 +13,29 @@ module.exports = ({ kw }) => ({
     choice(
       seq($._loop_phrase, optional($.__repeat_body_after_loop)),
       seq($.__repeat_condition_phrase, optional($.__repeat_body_after_condition)),
-      seq(alias(kw("TRANSACTION"), $.transaction), optional($.__repeat_body_after_transaction)),
+      seq(
+        alias(kw("TRANSACTION", { offset: 5 }), $.transaction),
+        optional($.__repeat_body_after_transaction),
+      ),
       seq(repeat1($.__repeat_block_option), $.body),
       $.body,
     ),
   __repeat_body_after_loop: ($) =>
     choice(
       seq($.__repeat_condition_phrase, optional($.__repeat_body_after_condition)),
-      seq(alias(kw("TRANSACTION"), $.transaction), optional($.__repeat_body_after_transaction)),
+      seq(
+        alias(kw("TRANSACTION", { offset: 5 }), $.transaction),
+        optional($.__repeat_body_after_transaction),
+      ),
       seq(repeat1($.__repeat_block_option), $.body),
       $.body,
     ),
   __repeat_body_after_condition: ($) =>
     choice(
-      seq(alias(kw("TRANSACTION"), $.transaction), optional($.__repeat_body_after_transaction)),
+      seq(
+        alias(kw("TRANSACTION", { offset: 5 }), $.transaction),
+        optional($.__repeat_body_after_transaction),
+      ),
       seq(repeat1($.__repeat_block_option), $.body),
       $.body,
     ),

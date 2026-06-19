@@ -11,7 +11,10 @@ module.exports = ({ kw }) => ({
     ),
   __do_body_tail: ($) =>
     choice(
-      seq(alias(kw("TRANSACTION"), $.transaction), optional($.__do_body_after_first_transaction)),
+      seq(
+        alias(kw("TRANSACTION", { offset: 5 }), $.transaction),
+        optional($.__do_body_after_first_transaction),
+      ),
       seq($.__do_condition_or_loop_phrase, optional($.__do_body_after_condition_or_loop)),
       $.__do_block_tail,
     ),
@@ -22,7 +25,8 @@ module.exports = ({ kw }) => ({
     ),
   __do_body_after_condition_or_loop: ($) =>
     choice(
-      seq(alias(kw("TRANSACTION"), $.transaction), optional($.__do_block_tail)),
+      seq(alias(kw("TRANSACTION", { offset: 5 }), $.transaction), optional($.__do_block_tail)),
+      seq(alias($.__do_while_phrase, $.while_phrase), optional($.__do_block_tail)),
       $.__do_block_tail,
     ),
   __do_block_tail: ($) => choice(seq(repeat1($.__do_block_option), $.body), $.body),
