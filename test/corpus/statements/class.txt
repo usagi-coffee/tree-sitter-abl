@@ -77,6 +77,12 @@ CLASS TableMethodOpts:
   END METHOD.
 END CLASS.
 
+CLASS BufferMethodOpts:
+  METHOD PUBLIC CHARACTER useBuffer(BUFFER pBuf FOR myTable):
+    RETURN "".
+  END METHOD.
+END CLASS.
+
 CLASS DatasetHandleMethod:
   METHOD PUBLIC VOID useDs(INPUT-OUTPUT DATASET-HANDLE hDs):
     RETURN.
@@ -247,6 +253,19 @@ END CLASS.
           (by_reference)))
       (body
         (return_statement))))
+  (class_definition
+    name: (identifier)
+    (method_definition
+      (access_modifier)
+      type: (identifier)
+      name: (identifier)
+      (parameters
+        (parameter
+          buffer: (identifier)
+          table: (identifier)))
+      (body
+        (return_statement
+          value: (string_literal)))))
   (class_definition
     name: (identifier)
     (method_definition
