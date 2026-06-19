@@ -56,7 +56,9 @@ const SYSTEM_HANDLE_WORDS = [
   "SELF",
   "SESSION",
   "SOURCE-PROCEDURE",
+  "SUPER",
   "TARGET-PROCEDURE",
+  "THIS-OBJECT",
   "THIS-PROCEDURE",
 ];
 
@@ -491,7 +493,12 @@ module.exports = grammar({
         seq(
           field(
             "function",
-            choice($._identifier_or_qualified_name, $.object_access, $.scoped_name),
+            choice(
+              $._identifier_or_qualified_name,
+              $.object_access,
+              $.scoped_name,
+              $.system_handle_identifier,
+            ),
           ),
           $.arguments,
         ),

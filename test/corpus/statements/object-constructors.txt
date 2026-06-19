@@ -22,7 +22,11 @@ SUPER().
     class: (string_literal)
     (arguments)
     (no_error))
-  (this_object_statement
-    (arguments))
-  (super_statement
-    (arguments)))
+  (expression_statement
+    (function_call
+      function: (identifier)
+      (arguments)))
+  (expression_statement
+    (function_call
+      function: (identifier)
+      (arguments))))

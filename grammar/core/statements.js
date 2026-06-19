@@ -166,8 +166,6 @@ module.exports = ({ kw }) => ({
       $.quit_statement,
       $.stop_statement,
       $.dynamic_new_statement,
-      $.this_object_statement,
-      $.super_statement,
       $.put_assign_statement,
       $.system_dialog_get_file_statement,
       $.system_dialog_font_statement,

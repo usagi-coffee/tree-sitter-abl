@@ -359,3 +359,48 @@ END CLASS.
       type: (identifier)
       name: (identifier)
       (parameters))))
+
+================================================================================
+THIS-OBJECT method call and chained access
+================================================================================
+
+CLASS Foo:
+  METHOD PUBLIC VOID DoIt():
+    THIS-OBJECT:DoSomething(BUFFER pBuf, BUFFER pOther).
+    THIS-OBJECT:getInner():DoSomething(BUFFER pBuf).
+  END METHOD.
+END CLASS.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (class_definition
+    name: (identifier)
+    (method_definition
+      (access_modifier)
+      type: (identifier)
+      name: (identifier)
+      (parameters)
+      (body
+        (expression_statement
+          (function_call
+            function: (object_access
+              left: (identifier)
+              right: (identifier))
+            (arguments
+              (argument
+                name: (identifier))
+              (argument
+                name: (identifier)))))
+        (expression_statement
+          (function_call
+            function: (object_access
+              left: (function_call
+                function: (object_access
+                  left: (identifier)
+                  right: (identifier))
+                (arguments))
+              right: (identifier))
+            (arguments
+              (argument
+                name: (identifier)))))))))
