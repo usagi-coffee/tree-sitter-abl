@@ -95,7 +95,7 @@ module.exports = ({ kw }) => ({
       $._format_string,
       seq(kw("HELP"), field("help", $.string_literal)),
       seq(
-        kw("INITIAL"),
+        kw("INITIAL", { offset: 4 }),
         field("initial", choice($._expression, seq("[", optional($._expressions), "]"))),
       ),
       seq(kw("LABEL"), field("label", $.__temp_table_label_list)),

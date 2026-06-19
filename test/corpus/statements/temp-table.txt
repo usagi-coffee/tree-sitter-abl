@@ -294,6 +294,29 @@ DEFINE TEMP-TABLE tt NO-UNDO
       type: (identifier))))
 
 ================================================================================
+TEMP-TABLE FIELD with INIT short for INITIAL
+================================================================================
+
+DEFINE TEMP-TABLE ttSample NO-UNDO
+    FIELD flagA AS LOGICAL   INIT NO
+    FIELD flagB AS CHARACTER INIT NO.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (temp_table_definition
+    name: (identifier)
+    (no_undo)
+    (temp_table_field
+      name: (identifier)
+      type: (identifier)
+      initial: (boolean_literal))
+    (temp_table_field
+      name: (identifier)
+      type: (identifier)
+      initial: (boolean_literal))))
+
+================================================================================
 TEMP-TABLE DEFINITION - Field Options
 ================================================================================
 
