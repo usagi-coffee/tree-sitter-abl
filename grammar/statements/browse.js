@@ -86,7 +86,7 @@ module.exports = ({ kw }) => ({
       seq(kw("PFCOLOR"), field("pfcolor", $.__browse_option_expression)),
       seq(
         kw("TITLE"),
-        optional($.__browse_title_option),
+        optional($._frame_title_option),
         field("title", $.__browse_option_expression),
       ),
       seq(kw("WIDTH"), field("width", $.__browse_option_expression)),
@@ -162,7 +162,6 @@ module.exports = ({ kw }) => ({
       optional(seq("[", optional($._array_subscript), "]")),
       repeat($.format_phrase),
     ),
-  __browse_title_option: ($) => $._frame_title_option,
   __browse_modifier: ($) =>
     choice(
       seq(alias(kw("NEW"), $.new_modifier), alias(kw("SHARED"), $.scope_modifier)),
