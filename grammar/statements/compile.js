@@ -11,7 +11,7 @@ module.exports = ({ kw }) => ({
             optional(seq("=", field("save", $._expression))),
             optional(seq(kw("INTO"), field("into", $._expression))),
           ),
-          $.__compile_listing_option,
+          seq(kw("LISTING"), field("listing", $._expression), optional($.__compile_listing_tail)),
           seq(kw("XCODE"), field("xcode", $._expression)),
           seq(kw("XREF"), field("xref", $._expression), optional($.__compile_append_option)),
           seq(kw("XREF-XML"), field("xref_xml", $._expression)),
@@ -45,8 +45,6 @@ module.exports = ({ kw }) => ({
   __compile_file: ($) =>
     choice($.identifier, $.qualified_name, $.string_literal, $._value_expression),
 
-  __compile_listing_option: ($) =>
-    seq(kw("LISTING"), field("listing", $._expression), optional($.__compile_listing_tail)),
   __compile_listing_tail: ($) =>
     choice(
       $.__compile_append_option,
