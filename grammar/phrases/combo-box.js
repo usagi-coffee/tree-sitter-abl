@@ -3,19 +3,19 @@ module.exports = ({ kw }) => ({
     seq(
       field("widget", kw("COMBO-BOX")),
       optional(choice($.__combo_box_list_items, $.__combo_box_list_item_pairs)),
-      repeat($.__combo_box_option),
-    ),
-  __combo_box_option: ($) =>
-    choice(
-      seq(kw("INNER-LINES"), field("inner_lines", $.number_literal)),
-      $.size_phrase,
-      alias(kw("SORT"), $.sort),
-      seq(kw("TOOLTIP"), field("tooltip", $._expression)),
-      alias(kw("SIMPLE"), $.simple),
-      alias(kw("DROP-DOWN"), $.drop_down),
-      alias(kw("DROP-DOWN-LIST"), $.drop_down_list),
-      seq(kw("MAX-CHARS"), field("max_chars", $.number_literal)),
-      seq(kw("AUTO-COMPLETION"), optional(alias(kw("UNIQUE-MATCH"), $.unique_match))),
+      repeat(
+        choice(
+          seq(kw("INNER-LINES"), field("inner_lines", $.number_literal)),
+          $.size_phrase,
+          alias(kw("SORT"), $.sort),
+          seq(kw("TOOLTIP"), field("tooltip", $._expression)),
+          alias(kw("SIMPLE"), $.simple),
+          alias(kw("DROP-DOWN"), $.drop_down),
+          alias(kw("DROP-DOWN-LIST"), $.drop_down_list),
+          seq(kw("MAX-CHARS"), field("max_chars", $.number_literal)),
+          seq(kw("AUTO-COMPLETION"), optional(alias(kw("UNIQUE-MATCH"), $.unique_match))),
+        ),
+      ),
     ),
   __combo_box_list_items: ($) => seq(kw("LIST-ITEMS"), field("items", $.__combo_box_item_list)),
   __combo_box_item_list: ($) => seq($._expression, repeat(seq(",", $._expression))),
