@@ -4,7 +4,16 @@ module.exports = ({ kw }) => ({
       kw("PROCEDURE", { offset: 4 }),
       optional($.__procedure_modifier),
       field("name", $._identifier_or_qualified_name),
-      repeat($.__procedure_option),
+      repeat(
+        choice(
+          alias(kw("CDECL"), $.cdecl),
+          seq(kw("ORDINAL"), field("ordinal", $.number_literal)),
+          alias(kw("PERSISTENT"), $.persistent),
+          alias(seq(kw("THREAD-SAFE"), optional(kw("SAFE"))), $.thread_safe),
+          alias($.__procedure_external_phrase, $.external_phrase),
+          seq(kw("MAP"), field("name", $.identifier)),
+        ),
+      ),
       optional(alias($.__procedure_in_super_phrase, $.in_super_phrase)),
       alias($.__procedure_body, $.body),
     ),
@@ -25,16 +34,6 @@ module.exports = ({ kw }) => ({
       alias(kw("PUBLIC"), $.access_modifier),
     ),
   __procedure_in_super_phrase: ($) => seq(kw("IN"), kw("SUPER")),
-
-  __procedure_option: ($) =>
-    choice(
-      alias(kw("CDECL"), $.cdecl),
-      seq(kw("ORDINAL"), field("ordinal", $.number_literal)),
-      alias(kw("PERSISTENT"), $.persistent),
-      alias(seq(kw("THREAD-SAFE"), optional(kw("SAFE"))), $.thread_safe),
-      alias($.__procedure_external_phrase, $.external_phrase),
-      seq(kw("MAP"), field("name", $.identifier)),
-    ),
 
   __procedure_external_phrase: ($) =>
     prec.left(
