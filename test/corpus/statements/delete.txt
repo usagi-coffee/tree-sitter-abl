@@ -53,6 +53,7 @@ DELETE OBJECT hSocket.
 DELETE OBJECT hQuery.
 DELETE OBJECT myWidget.
 DELETE OBJECT hSocket NO-ERROR.
+DELETE OBJECT(vObj).
 DELETE WIDGET w1, w2 NO-ERROR.
 
 --------------------------------------------------------------------------------
@@ -67,6 +68,9 @@ DELETE WIDGET w1, w2 NO-ERROR.
   (delete_object_statement
     name: (identifier)
     (no_error))
+  (delete_object_statement
+    name: (parenthesized_expression
+      (identifier)))
   (delete_widget_statement
     widget: (identifier)
     widget: (identifier)

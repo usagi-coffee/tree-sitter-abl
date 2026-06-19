@@ -21,5 +21,5 @@ module.exports = ({ kw }) => ({
   __delete_widget_body: ($) =>
     seq(field("widget", $._expression), repeat(seq(",", field("widget", $._expression)))),
 
-  __delete_object_body: ($) => seq(field("name", $.identifier)),
+  __delete_object_body: ($) => field("name", choice($.identifier, $.parenthesized_expression)),
 });
