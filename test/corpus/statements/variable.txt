@@ -51,6 +51,26 @@ DEFINE PRIVATE STATIC SERIALIZABLE VARIABLE cust AS CLASS Customer NO-UNDO.
     (no_undo)))
 
 ================================================================================
+VARIABLE DEFINITION - Identifier with percent (legacy naming)
+================================================================================
+
+DEFINE VARIABLE P%RowId AS ROWID NO-UNDO.
+DEFINE VARIABLE P%Rate  AS DECIMAL DECIMALS 8 NO-UNDO.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    decimals: (number_literal)
+    (no_undo)))
+
+================================================================================
 VARIABLE DEFINITION - LIKE and Display Options
 ================================================================================
 
