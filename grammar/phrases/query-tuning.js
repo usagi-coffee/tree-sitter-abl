@@ -18,7 +18,17 @@ module.exports = ({ kw }) => ({
             kw("DEBUG"),
             choice(
               alias(kw("SQL"), $.sql),
-              seq(kw("EXTENDED"), optional($.__query_tuning_diag_option)),
+              seq(
+                kw("EXTENDED"),
+                optional(
+                  choice(
+                    alias(kw("CURSOR"), $.cursor),
+                    alias(kw("DATA-BIND"), $.data_bind),
+                    alias(kw("PERFORMANCE"), $.performance),
+                    alias(kw("VERBOSE"), $.verbose),
+                  ),
+                ),
+              ),
             ),
           ),
           alias(kw("NO-DEBUG"), $.no_debug),
@@ -35,13 +45,5 @@ module.exports = ({ kw }) => ({
         ),
       ),
       ")",
-    ),
-
-  __query_tuning_diag_option: ($) =>
-    choice(
-      alias(kw("CURSOR"), $.cursor),
-      alias(kw("DATA-BIND"), $.data_bind),
-      alias(kw("PERFORMANCE"), $.performance),
-      alias(kw("VERBOSE"), $.verbose),
     ),
 });
