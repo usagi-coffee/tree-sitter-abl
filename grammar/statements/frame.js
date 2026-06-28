@@ -1,12 +1,8 @@
 module.exports = ({ kw }) => ({
-  frame_definition: ($) =>
-    seq(
-      kw("DEFINE", { offset: 3 }),
-      optional($.__frame_modifier),
-      kw("FRAME"),
-      $.__frame_body,
-      $._terminator,
-    ),
+  frame_definition: ($) => seq($.__frame_prefix, $._terminator),
+
+  __frame_prefix: ($) =>
+    seq(kw("DEFINE", { offset: 3 }), optional($.__frame_modifier), kw("FRAME"), $.__frame_body),
 
   __frame_body: ($) =>
     seq(
