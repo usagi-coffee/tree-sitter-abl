@@ -1,6 +1,7 @@
 module.exports = ({ kw }) => ({
-  catch_statement: ($) => seq(kw("CATCH"), $.__catch_body, $._terminator),
+  catch_statement: ($) => seq($.__catch_prefix, $._terminator),
 
+  __catch_prefix: ($) => seq(kw("CATCH"), $.__catch_body),
   __catch_body: ($) =>
     seq(
       field("name", $.identifier),
