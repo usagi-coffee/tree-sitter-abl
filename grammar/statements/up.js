@@ -1,3 +1,5 @@
 module.exports = ({ kw }) => ({
-  up_statement: ($) => seq(kw("UP"), optional($._up_down_tail), $._terminator),
+  up_statement: ($) => seq($.__up_prefix, $._terminator),
+
+  __up_prefix: ($) => seq(kw("UP"), optional($._up_down_tail)),
 });
