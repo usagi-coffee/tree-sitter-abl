@@ -1,5 +1,6 @@
 module.exports = ({ kw }) => ({
-  readkey_statement: ($) => seq(kw("READKEY"), optional($.__readkey_body), $._terminator),
+  readkey_statement: ($) => seq($.__readkey_prefix, $._terminator),
+  __readkey_prefix: ($) => seq(kw("READKEY"), optional($.__readkey_body)),
   __readkey_body: ($) =>
     choice(
       seq($._stream_phrase, optional(alias($.__readkey_pause_phrase, $.pause_phrase))),
