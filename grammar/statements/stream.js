@@ -1,11 +1,12 @@
 module.exports = ({ kw }) => ({
-  stream_definition: ($) =>
+  stream_definition: ($) => seq($.__stream_prefix, $._terminator),
+
+  __stream_prefix: ($) =>
     seq(
       kw("DEFINE", { offset: 3 }),
       optional($.__stream_modifier),
       kw("STREAM"),
       field("name", $.identifier),
-      $._terminator,
     ),
   __stream_modifier: ($) =>
     choice(
