@@ -1,11 +1,12 @@
 module.exports = ({ kw }) => ({
-  variable_definition: ($) =>
+  variable_definition: ($) => seq($.__variable_prefix, $._terminator),
+
+  __variable_prefix: ($) =>
     seq(
       kw("DEFINE", { offset: 3 }),
       optional($.__variable_modifier),
       kw("VARIABLE", { offset: 3 }),
       $.__variable_body,
-      $._terminator,
     ),
 
   __variable_body: ($) =>
