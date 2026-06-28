@@ -1,6 +1,7 @@
 module.exports = ({ kw }) => ({
-  buffer_copy_statement: ($) =>
-    seq(kw("BUFFER-COPY"), $.__buffer_copy_body, $._no_error_terminator),
+  buffer_copy_statement: ($) => seq($.__buffer_copy_prefix, $._no_error_terminator),
+
+  __buffer_copy_prefix: ($) => seq(kw("BUFFER-COPY"), $.__buffer_copy_body),
 
   __buffer_copy_body: ($) =>
     seq(
