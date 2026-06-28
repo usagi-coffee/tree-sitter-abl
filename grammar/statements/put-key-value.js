@@ -1,6 +1,7 @@
 module.exports = ({ kw }) => ({
-  put_key_value_statement: ($) =>
-    seq(kw("PUT-KEY-VALUE"), $.__put_key_value_body, $._no_error_terminator),
+  put_key_value_statement: ($) => seq($.__put_key_value_prefix, $._no_error_terminator),
+
+  __put_key_value_prefix: ($) => seq(kw("PUT-KEY-VALUE"), $.__put_key_value_body),
 
   __put_key_value_body: ($) =>
     seq(
