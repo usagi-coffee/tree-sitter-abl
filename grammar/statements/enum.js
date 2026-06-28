@@ -1,6 +1,7 @@
 module.exports = ({ kw }) => ({
-  enum_statement: ($) => seq(kw("ENUM"), $.__enum_body, $._terminator),
+  enum_statement: ($) => seq($.__enum_prefix, $._terminator),
 
+  __enum_prefix: ($) => seq(kw("ENUM"), $.__enum_body),
   __enum_body: ($) =>
     seq(
       field("name", $.identifier),
