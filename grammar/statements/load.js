@@ -1,6 +1,7 @@
 module.exports = ({ kw }) => ({
-  load_statement: ($) => seq(kw("LOAD"), $.__load_body, $._no_error_terminator),
+  load_statement: ($) => seq($.__load_prefix, $._no_error_terminator),
 
+  __load_prefix: ($) => seq(kw("LOAD"), $.__load_body),
   __load_body: ($) =>
     seq(
       field("file", $._expression),
