@@ -1,6 +1,7 @@
 module.exports = ({ kw }) => ({
-  return_statement: ($) => seq(kw("RETURN"), optional($.__return_body), $._terminator),
+  return_statement: ($) => seq($.__return_prefix, $._terminator),
 
+  __return_prefix: ($) => seq(kw("RETURN"), optional($.__return_body)),
   __return_body: ($) =>
     choice(
       field("value", $._expression),
