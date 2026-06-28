@@ -1,6 +1,7 @@
 module.exports = ({ kw }) => ({
-  form_statement: ($) => seq(kw("FORM"), $.__form_body, $._terminator),
+  form_statement: ($) => seq($.__form_prefix, $._terminator),
 
+  __form_prefix: ($) => seq(kw("FORM"), $.__form_body),
   __form_body: ($) =>
     choice(
       seq(repeat1(alias($.__form_item, $.form_item)), repeat($.frame_phrase)),
