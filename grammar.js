@@ -548,7 +548,8 @@ module.exports = grammar({
         seq($.__value_expression_prefix, "(", field("value", $._expression), ")"),
       __value_expression_prefix: ($) => kw("VALUE"),
       _terminator: ($) => choice($._terminator_dot, ";"),
-      _no_error_terminator: ($) => seq(optional(alias(kw("NO-ERROR"), $.no_error)), $._terminator),
+      _no_error_terminator: ($) => seq(optional($.__no_error), $._terminator),
+      __no_error: ($) => alias(kw("NO-ERROR"), $.no_error),
 
       // Contains non-core statement-specific shared rules
       ...require("./grammar/core/common")(ctx),
