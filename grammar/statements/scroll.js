@@ -1,5 +1,6 @@
 module.exports = ({ kw }) => ({
-  scroll_statement: ($) => seq(kw("SCROLL"), optional($.__scroll_tail), $._terminator),
+  scroll_statement: ($) => seq($.__scroll_prefix, $._terminator),
+  __scroll_prefix: ($) => seq(kw("SCROLL"), optional($.__scroll_tail)),
   __scroll_tail: ($) =>
     choice(
       seq(
