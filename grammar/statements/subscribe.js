@@ -1,6 +1,7 @@
 module.exports = ({ kw }) => ({
-  subscribe_statement: ($) => seq(kw("SUBSCRIBE"), $.__subscribe_body, $._no_error_terminator),
+  subscribe_statement: ($) => seq($.__subscribe_prefix, $._no_error_terminator),
 
+  __subscribe_prefix: ($) => seq(kw("SUBSCRIBE"), $.__subscribe_body),
   __subscribe_body: ($) =>
     seq(
       optional(seq(kw("PROCEDURE", { offset: 4 }), field("subscriber", $.__subscribe_expression))),
