@@ -1,6 +1,7 @@
 module.exports = ({ kw }) => ({
-  os_command_statement: ($) => seq(kw("OS-COMMAND"), $.__os_command_body, $._terminator),
+  os_command_statement: ($) => seq($.__os_command_prefix, $._terminator),
 
+  __os_command_prefix: ($) => seq(kw("OS-COMMAND"), $.__os_command_body),
   __os_command_body: ($) =>
     seq(
       optional(choice(kw("SILENT"), kw("NO-WAIT"), kw("NO-CONSOLE"))),
