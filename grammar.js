@@ -397,6 +397,7 @@ module.exports = grammar({
         ),
       // excludes `=` to disambiguate assignment vs equality comparison at statement level.
       _comparison_operator_no_eq: ($) => choice(...COMPARISON_OPERATORS),
+      __multiplicative_operator: ($) => choice("*", "/", kw("MOD"), kw("MODULO")),
       // binary_expression without `=` comparison.
       binary_expression_no_eq: ($) =>
         binary_expression($, $._statement_expression, $._comparison_operator_no_eq),
@@ -564,10 +565,7 @@ function escape_regex(value) {
 
 function binary_expression($, expression, comparison_operator) {
   return choice(
-    prec.left(
-      "multiplication",
-      seq(expression, choice("*", "/", kw("MOD"), kw("MODULO")), expression),
-    ),
+    prec.left("multiplication", seq(expression, $.__multiplicative_operator, expression)),
     prec.left("add", seq(expression, choice("+", "-"), expression)),
     prec.left("compare", seq(expression, comparison_operator, expression)),
     prec.left("logical", seq(expression, $._logical_operator, expression)),
