@@ -1,6 +1,8 @@
 module.exports = ({ kw }) => ({
-  trigger_procedure_statement: ($) =>
-    seq(kw("TRIGGER"), kw("PROCEDURE", { offset: 4 }), $.__trigger_procedure_body, $._terminator),
+  trigger_procedure_statement: ($) => seq($.__trigger_procedure_prefix, $._terminator),
+
+  __trigger_procedure_prefix: ($) =>
+    seq(kw("TRIGGER"), kw("PROCEDURE", { offset: 4 }), $.__trigger_procedure_body),
 
   __trigger_procedure_body: ($) =>
     seq(
