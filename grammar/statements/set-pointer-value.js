@@ -1,6 +1,7 @@
 module.exports = ({ kw }) => ({
-  set_pointer_value_statement: ($) =>
-    seq(kw("SET-POINTER-VALUE"), $.__set_pointer_value_body, $._terminator),
+  set_pointer_value_statement: ($) => seq($.__set_pointer_value_prefix, $._terminator),
+
+  __set_pointer_value_prefix: ($) => seq(kw("SET-POINTER-VALUE"), $.__set_pointer_value_body),
 
   __set_pointer_value_body: ($) =>
     seq(
