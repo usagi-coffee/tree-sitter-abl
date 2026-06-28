@@ -1,6 +1,7 @@
 module.exports = ({ kw }) => ({
-  buffer_compare_statement: ($) =>
-    seq(kw("BUFFER-COMPARE"), $.__buffer_compare_body, $._no_error_terminator),
+  buffer_compare_statement: ($) => seq($.__buffer_compare_prefix, $._no_error_terminator),
+
+  __buffer_compare_prefix: ($) => seq(kw("BUFFER-COMPARE"), $.__buffer_compare_body),
 
   __buffer_compare_body: ($) =>
     seq(
