@@ -1,6 +1,7 @@
 module.exports = ({ kw }) => ({
-  raw_transfer_statement: ($) =>
-    seq(kw("RAW-TRANSFER"), $.__raw_transfer_body, $._no_error_terminator),
+  raw_transfer_statement: ($) => seq($.__raw_transfer_prefix, $._no_error_terminator),
+
+  __raw_transfer_prefix: ($) => seq(kw("RAW-TRANSFER"), $.__raw_transfer_body),
 
   __raw_transfer_body: ($) =>
     seq(
