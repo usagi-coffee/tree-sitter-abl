@@ -1,14 +1,8 @@
 module.exports = ({ kw }) => ({
-  buffer_definition: ($) =>
-    prec.right(
-      seq(
-        kw("DEFINE", { offset: 3 }),
-        optional($.__buffer_modifier),
-        kw("BUFFER"),
-        $.__buffer_body,
-        $._terminator,
-      ),
-    ),
+  buffer_definition: ($) => prec.right(seq($.__buffer_prefix, $._terminator)),
+
+  __buffer_prefix: ($) =>
+    seq(kw("DEFINE", { offset: 3 }), optional($.__buffer_modifier), kw("BUFFER"), $.__buffer_body),
 
   __buffer_body: ($) =>
     seq(
