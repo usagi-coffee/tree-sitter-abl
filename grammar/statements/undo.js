@@ -1,6 +1,7 @@
 module.exports = ({ kw }) => ({
-  undo_statement: ($) => seq(kw("UNDO"), optional($.__undo_body), $._terminator),
+  undo_statement: ($) => seq($.__undo_prefix, $._terminator),
 
+  __undo_prefix: ($) => seq(kw("UNDO"), optional($.__undo_body)),
   __undo_body: ($) =>
     seq(
       choice(
