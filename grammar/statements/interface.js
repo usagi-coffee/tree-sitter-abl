@@ -61,13 +61,14 @@ module.exports = ({ kw }) => ({
       $._terminator,
     ),
 
-  interface_method_definition: ($) =>
+  interface_method_definition: ($) => seq($.__interface_method_prefix, $._terminator_dot),
+
+  __interface_method_prefix: ($) =>
     seq(
       kw("METHOD"),
       repeat($._method_modifier_no_abstract),
       $._method_return_type,
       field("name", $.identifier),
       alias($._method_parameters, $.parameters),
-      $._terminator_dot,
     ),
 });
