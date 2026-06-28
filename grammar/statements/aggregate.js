@@ -1,6 +1,7 @@
 module.exports = ({ kw }) => ({
-  aggregate_statement: ($) => seq(kw("AGGREGATE"), $.__aggregate_body, $._terminator),
+  aggregate_statement: ($) => seq($.__aggregate_prefix, $._terminator),
 
+  __aggregate_prefix: ($) => seq(kw("AGGREGATE"), $.__aggregate_body),
   __aggregate_body: ($) =>
     seq(
       repeat1($.__aggregate_assignment),
