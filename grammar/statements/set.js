@@ -1,12 +1,13 @@
 module.exports = ({ kw }) => ({
-  set_statement: ($) => seq(kw("SET"), $.__set_body, $._no_error_terminator),
+  set_statement: ($) => seq($.__set_prefix, $.__set_body, $._no_error_terminator),
 
-  __set_body: ($) =>
+  __set_prefix: ($) =>
     seq(
+      kw("SET"),
       optional($._stream_phrase),
       optional(alias(kw("UNLESS-HIDDEN"), $.unless_hidden)),
-      choice($.__set_record_body, $.__set_fields_body),
     ),
+  __set_body: ($) => choice($.__set_record_body, $.__set_fields_body),
 
   __set_fields_body: ($) =>
     seq(repeat1(alias($.__set_field, $.field)), optional($.__set_fields_tail)),
