@@ -8,13 +8,10 @@ module.exports = ({ kw }) => ({
 
   __delete_object_prefix: ($) => seq(kw("DELETE"), kw("OBJECT"), $.__delete_object_body),
 
-  delete_procedure_statement: ($) =>
-    seq(
-      kw("DELETE"),
-      kw("PROCEDURE", { offset: 4 }),
-      field("handle", $._expression),
-      $._no_error_terminator,
-    ),
+  delete_procedure_statement: ($) => seq($.__delete_procedure_prefix, $._no_error_terminator),
+
+  __delete_procedure_prefix: ($) =>
+    seq(kw("DELETE"), kw("PROCEDURE", { offset: 4 }), field("handle", $._expression)),
 
   delete_widget_statement: ($) => seq($.__delete_widget_prefix, $._no_error_terminator),
 
