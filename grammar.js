@@ -544,7 +544,9 @@ module.exports = grammar({
           ),
         ),
       _identifier_or_string_literal: ($) => choice($.identifier, $.string_literal),
-      _value_expression: ($) => seq(kw("VALUE"), "(", field("value", $._expression), ")"),
+      _value_expression: ($) =>
+        seq($.__value_expression_prefix, "(", field("value", $._expression), ")"),
+      __value_expression_prefix: ($) => kw("VALUE"),
       _terminator: ($) => choice($._terminator_dot, ";"),
       _no_error_terminator: ($) => seq(optional(alias(kw("NO-ERROR"), $.no_error)), $._terminator),
 
