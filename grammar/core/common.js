@@ -224,6 +224,8 @@ module.exports = ({ kw }) => ({
       ),
       alias($._convert_phrase, $.convert_phrase),
     ),
+  _map_unbuffered_convert_tail: ($) =>
+    choice(seq($._map_phrase, optional($._unbuffered_convert_tail)), $._unbuffered_convert_tail),
 
   _aggregate_label_phrase: ($) => seq(kw("LABEL"), field("label", $.string_literal)),
 
