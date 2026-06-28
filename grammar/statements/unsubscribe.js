@@ -1,6 +1,7 @@
 module.exports = ({ kw }) => ({
-  unsubscribe_statement: ($) => seq(kw("UNSUBSCRIBE"), $.__unsubscribe_body, $._terminator),
+  unsubscribe_statement: ($) => seq($.__unsubscribe_prefix, $._terminator),
 
+  __unsubscribe_prefix: ($) => seq(kw("UNSUBSCRIBE"), $.__unsubscribe_body),
   __unsubscribe_body: ($) =>
     seq(
       optional(seq(kw("PROCEDURE", { offset: 4 }), field("subscriber", $._expression))),
