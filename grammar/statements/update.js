@@ -1,6 +1,7 @@
 module.exports = ({ kw }) => ({
-  update_statement: ($) => seq(kw("UPDATE"), $.__update_body, $._no_error_terminator),
+  update_statement: ($) => seq($.__update_prefix, $._no_error_terminator),
 
+  __update_prefix: ($) => seq(kw("UPDATE"), $.__update_body),
   __update_body: ($) => seq(choice($.__update_record_body, $.__update_fields_body)),
 
   __update_record_body: ($) =>
