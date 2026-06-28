@@ -1,12 +1,8 @@
 module.exports = ({ kw }) => ({
-  menu_definition: ($) =>
-    seq(
-      kw("DEFINE", { offset: 3 }),
-      optional($.__menu_modifier),
-      kw("MENU"),
-      $.__menu_body,
-      $._terminator,
-    ),
+  menu_definition: ($) => seq($.__menu_prefix, $._terminator),
+
+  __menu_prefix: ($) =>
+    seq(kw("DEFINE", { offset: 3 }), optional($.__menu_modifier), kw("MENU"), $.__menu_body),
 
   __menu_body: ($) =>
     seq(
