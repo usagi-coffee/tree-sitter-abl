@@ -1,6 +1,7 @@
 module.exports = ({ kw }) => ({
-  set_byte_order_statement: ($) =>
-    seq(kw("SET-BYTE-ORDER"), $.__set_byte_order_body, $._terminator),
+  set_byte_order_statement: ($) => seq($.__set_byte_order_prefix, $._terminator),
+
+  __set_byte_order_prefix: ($) => seq(kw("SET-BYTE-ORDER"), $.__set_byte_order_body),
 
   __set_byte_order_body: ($) =>
     seq("(", field("buffer", $._expression), ")", "=", field("order", $.__set_byte_order_value)),
