@@ -1,6 +1,7 @@
 module.exports = ({ kw }) => ({
-  disconnect_statement: ($) => seq(kw("DISCONNECT"), $.__disconnect_body, $._no_error_terminator),
+  disconnect_statement: ($) => seq($.__disconnect_prefix, $._no_error_terminator),
 
+  __disconnect_prefix: ($) => seq(kw("DISCONNECT"), $.__disconnect_body),
   __disconnect_body: ($) =>
     seq(
       choice(
