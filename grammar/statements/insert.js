@@ -1,5 +1,6 @@
 module.exports = ({ kw }) => ({
-  insert_statement: ($) => seq(kw("INSERT"), $.__insert_body, $._no_error_terminator),
+  insert_statement: ($) => seq($.__insert_prefix, $._no_error_terminator),
+  __insert_prefix: ($) => seq(kw("INSERT"), $.__insert_body),
   __insert_body: ($) =>
     seq(
       field("record", $._identifier_or_qualified_name),
