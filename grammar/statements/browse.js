@@ -1,12 +1,8 @@
 module.exports = ({ kw }) => ({
-  browse_definition: ($) =>
-    seq(
-      kw("DEFINE", { offset: 3 }),
-      optional($.__browse_modifier),
-      kw("BROWSE"),
-      $.__browse_body,
-      $._terminator,
-    ),
+  browse_definition: ($) => seq($.__browse_prefix, $._terminator),
+
+  __browse_prefix: ($) =>
+    seq(kw("DEFINE", { offset: 3 }), optional($.__browse_modifier), kw("BROWSE"), $.__browse_body),
 
   __browse_body: ($) =>
     seq(
