@@ -1,6 +1,7 @@
 module.exports = ({ kw }) => ({
-  seek_statement: ($) => prec.right(seq(kw("SEEK"), $.__seek_body, $._terminator)),
+  seek_statement: ($) => prec.right(seq($.__seek_prefix, $._terminator)),
 
+  __seek_prefix: ($) => seq(kw("SEEK"), $.__seek_body),
   __seek_body: ($) =>
     seq(
       choice(kw("INPUT"), kw("OUTPUT"), $._stream_phrase),
