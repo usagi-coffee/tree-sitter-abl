@@ -1,13 +1,11 @@
 module.exports = ({ kw }) => ({
-  input_statement: ($) => seq(kw("INPUT"), $.__input_body, $._terminator),
+  input_statement: ($) => seq($.__input_prefix, $.__input_body, $._terminator),
 
+  __input_prefix: ($) => seq(kw("INPUT"), optional($._stream_phrase)),
   __input_body: ($) =>
-    seq(
-      optional($._stream_phrase),
-      choice(
-        alias(kw("CLOSE"), $.close),
-        seq(kw("FROM"), $.__input_from_target, optional($.__input_tail)),
-      ),
+    choice(
+      alias(kw("CLOSE"), $.close),
+      seq(kw("FROM"), $.__input_from_target, optional($.__input_tail)),
     ),
   __input_tail: ($) =>
     choice(
