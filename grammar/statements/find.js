@@ -1,6 +1,7 @@
 module.exports = ({ kw }) => ({
-  find_statement: ($) => seq(kw("FIND"), $.__find_body, $._terminator),
+  find_statement: ($) => seq($.__find_prefix, $._terminator),
 
+  __find_prefix: ($) => seq(kw("FIND"), $.__find_body),
   __find_body: ($) =>
     seq(
       optional(
