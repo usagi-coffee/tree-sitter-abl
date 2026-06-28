@@ -1,11 +1,12 @@
 module.exports = ({ kw }) => ({
-  put_assign_statement: ($) =>
+  put_assign_statement: ($) => seq($.__put_assign_prefix, $._terminator),
+
+  __put_assign_prefix: ($) =>
     seq(
       field("type", $.__put_assign_type),
       $.__put_assign_args,
       "=",
       field("value", $._expression),
-      $._terminator,
     ),
 
   __put_assign_type: ($) =>
