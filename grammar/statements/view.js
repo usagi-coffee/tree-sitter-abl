@@ -1,5 +1,6 @@
 module.exports = ({ kw }) => ({
-  view_statement: ($) => seq(kw("VIEW"), optional($.__view_tail), $._terminator),
+  view_statement: ($) => seq($.__view_prefix, $._terminator),
+  __view_prefix: ($) => seq(kw("VIEW"), optional($.__view_tail)),
   __view_tail: ($) =>
     choice(seq($._stream_phrase, optional($.__view_window_tail)), $.__view_window_tail),
   __view_window_tail: ($) =>
