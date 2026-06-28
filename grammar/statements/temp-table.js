@@ -1,18 +1,16 @@
 module.exports = ({ kw }) => ({
   temp_table_definition: ($) =>
+    seq($.__temp_table_prefix, repeat($.__temp_table_member), $._terminator),
+
+  __temp_table_prefix: ($) =>
     seq(
       kw("DEFINE", { offset: 3 }),
       optional($.__temp_table_modifier),
       kw("TEMP-TABLE"),
       $._table_body,
-      repeat(
-        choice(
-          alias($._table_field, $.temp_table_field),
-          alias($._table_index, $.temp_table_index),
-        ),
-      ),
-      $._terminator,
     ),
+  __temp_table_member: ($) =>
+    choice(alias($._table_field, $.temp_table_field), alias($._table_index, $.temp_table_index)),
 
   // Aliases for shared rules that reference temp-table specific rules
   _like_phrase: ($) => $.__temp_table_like_phrase,
