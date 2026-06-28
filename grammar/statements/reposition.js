@@ -1,6 +1,7 @@
 module.exports = ({ kw }) => ({
-  reposition_statement: ($) => seq(kw("REPOSITION"), $.__reposition_body, $._terminator),
+  reposition_statement: ($) => seq($.__reposition_prefix, $._terminator),
 
+  __reposition_prefix: ($) => seq(kw("REPOSITION"), $.__reposition_body),
   __reposition_body: ($) =>
     seq(
       field("query", $.identifier),
