@@ -1,3 +1,5 @@
 module.exports = ({ kw }) => ({
-  dictionary_statement: ($) => seq(kw("DICTIONARY"), $._terminator),
+  dictionary_statement: ($) => seq($.__dictionary_prefix, $._terminator),
+
+  __dictionary_prefix: ($) => kw("DICTIONARY"),
 });
