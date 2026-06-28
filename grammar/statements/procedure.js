@@ -1,5 +1,7 @@
 module.exports = ({ kw }) => ({
-  procedure_definition: ($) =>
+  procedure_definition: ($) => seq($.__procedure_header, alias($.__procedure_body, $.body)),
+
+  __procedure_header: ($) =>
     seq(
       kw("PROCEDURE", { offset: 4 }),
       optional($.__procedure_modifier),
@@ -15,7 +17,6 @@ module.exports = ({ kw }) => ({
         ),
       ),
       optional(alias($.__procedure_in_super_phrase, $.in_super_phrase)),
-      alias($.__procedure_body, $.body),
     ),
 
   __procedure_body: ($) =>
