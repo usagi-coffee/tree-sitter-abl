@@ -1,6 +1,7 @@
 module.exports = ({ kw }) => ({
-  dde_statement: ($) => seq(kw("DDE"), $.__dde_body, $._no_error_terminator),
+  dde_statement: ($) => seq($.__dde_prefix, $._no_error_terminator),
 
+  __dde_prefix: ($) => seq(kw("DDE"), $.__dde_body),
   __dde_body: ($) =>
     seq(
       choice(
