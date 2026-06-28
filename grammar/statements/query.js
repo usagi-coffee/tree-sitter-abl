@@ -1,12 +1,8 @@
 module.exports = ({ kw }) => ({
-  query_definition: ($) =>
-    seq(
-      kw("DEFINE", { offset: 3 }),
-      optional($.__query_modifier),
-      kw("QUERY"),
-      $.__query_body,
-      $._terminator,
-    ),
+  query_definition: ($) => seq($.__query_prefix, $._terminator),
+
+  __query_prefix: ($) =>
+    seq(kw("DEFINE", { offset: 3 }), optional($.__query_modifier), kw("QUERY"), $.__query_body),
 
   __query_body: ($) =>
     seq(field("name", $.identifier), kw("FOR"), $.query_table_list, optional($.__query_tail)),
