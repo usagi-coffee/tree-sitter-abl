@@ -1,9 +1,9 @@
 module.exports = ({ kw }) => ({
-  import_statement: ($) => seq(kw("IMPORT"), $.__import_body, $._no_error_terminator),
+  import_statement: ($) => seq($.__import_prefix, $.__import_body, $._no_error_terminator),
 
+  __import_prefix: ($) => seq(kw("IMPORT"), optional($._stream_phrase)),
   __import_body: ($) =>
     seq(
-      optional($._stream_phrase),
       choice($.__import_fields_phrase, alias($.__import_unformatted_phrase, $.unformatted_phrase)),
       optional(alias(kw("NO-LOBS"), $.no_lobs)),
     ),
