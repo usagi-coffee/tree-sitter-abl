@@ -1,6 +1,7 @@
 module.exports = ({ kw }) => ({
-  using_statement: ($) => seq(kw("USING"), $.__using_body, $._terminator),
+  using_statement: ($) => seq($.__using_prefix, $._terminator),
 
+  __using_prefix: ($) => seq(kw("USING"), $.__using_body),
   __using_body: ($) =>
     seq(
       $.__using_type_ref,
