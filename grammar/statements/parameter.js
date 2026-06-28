@@ -1,5 +1,7 @@
 module.exports = ({ kw }) => ({
-  parameter_definition: ($) =>
+  parameter_definition: ($) => seq($.__parameter_prefix, $._terminator),
+
+  __parameter_prefix: ($) =>
     seq(
       kw("DEFINE", { offset: 3 }),
       choice(
@@ -7,7 +9,6 @@ module.exports = ({ kw }) => ({
         $.__parameter_table_parameter,
         $.__parameter_buffer_parameter,
       ),
-      $._terminator,
     ),
 
   __parameter_standard_parameter: ($) =>
