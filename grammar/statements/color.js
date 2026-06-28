@@ -1,6 +1,7 @@
 module.exports = ({ kw }) => ({
-  color_statement: ($) =>
-    seq(kw("COLOR"), optional(choice($.__color_body, $.__color_prompt_body)), $._terminator),
+  color_statement: ($) => seq($.__color_prefix, $._terminator),
+
+  __color_prefix: ($) => seq(kw("COLOR"), optional(choice($.__color_body, $.__color_prompt_body))),
 
   __color_body: ($) => seq(optional(alias(kw("DISPLAY"), $.display)), $.__color_tail),
 
