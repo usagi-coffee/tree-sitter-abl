@@ -1,5 +1,7 @@
 module.exports = ({ kw }) => ({
-  function_definition: ($) => seq(kw("FUNCTION"), $.__function_body, $._terminator),
+  function_definition: ($) => seq($.__function_prefix, $._terminator),
+
+  __function_prefix: ($) => seq(kw("FUNCTION"), $.__function_body),
 
   __function_body: ($) =>
     seq(
