@@ -1,12 +1,13 @@
 module.exports = ({ kw }) => ({
-  prompt_for_statement: ($) => seq(kw("PROMPT-FOR"), $.__prompt_for_body, $._terminator),
+  prompt_for_statement: ($) => seq($.__prompt_for_prefix, $.__prompt_for_body, $._terminator),
 
-  __prompt_for_body: ($) =>
+  __prompt_for_prefix: ($) =>
     seq(
+      kw("PROMPT-FOR"),
       optional($._stream_phrase),
       optional(alias(kw("UNLESS-HIDDEN"), $.unless_hidden)),
-      choice(prec(1, $.__prompt_for_fields_body), $.__prompt_for_record_body),
     ),
+  __prompt_for_body: ($) => choice(prec(1, $.__prompt_for_fields_body), $.__prompt_for_record_body),
 
   __prompt_for_record_body: ($) =>
     seq(
