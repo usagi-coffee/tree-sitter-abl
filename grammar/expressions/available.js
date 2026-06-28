@@ -1,4 +1,6 @@
 module.exports = ({ kw }) => ({
   available_expression: ($) =>
-    seq(choice(kw("AVAIL"), kw("AVAILABLE")), field("record", $._record_or_parenthesized_record)),
+    seq($.__available_prefix, field("record", $._record_or_parenthesized_record)),
+
+  __available_prefix: ($) => choice(kw("AVAIL"), kw("AVAILABLE")),
 });
