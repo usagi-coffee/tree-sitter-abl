@@ -1,35 +1,33 @@
 module.exports = ({ kw }) => ({
-  output_statement: ($) => seq(kw("OUTPUT"), $.__output_body, $._terminator),
+  output_statement: ($) => seq($.__output_prefix, $.__output_body, $._terminator),
 
+  __output_prefix: ($) => seq(kw("OUTPUT"), optional($._stream_phrase)),
   __output_body: ($) =>
-    seq(
-      optional($._stream_phrase),
-      choice(
-        alias(kw("CLOSE"), $.close),
-        seq(
-          kw("TO"),
-          $.__output_to_target,
-          repeat(
-            choice(
-              $.preprocessor_name,
-              alias($._lob_dir_phrase, $.lob_dir_phrase),
-              alias($.__output_num_copies_phrase, $.num_copies_phrase),
-              alias(kw("COLLATE"), $.collate),
-              alias(kw("LANDSCAPE"), $.landscape),
-              alias(kw("PORTRAIT"), $.portrait),
-              alias(kw("APPEND"), $.append),
-              alias(kw("BINARY"), $.binary),
-              alias(kw("KEEP-MESSAGES"), $.keep_messages),
-              $.__output_shared_option,
-            ),
+    choice(
+      alias(kw("CLOSE"), $.close),
+      seq(
+        kw("TO"),
+        $.__output_to_target,
+        repeat(
+          choice(
+            $.preprocessor_name,
+            alias($._lob_dir_phrase, $.lob_dir_phrase),
+            alias($.__output_num_copies_phrase, $.num_copies_phrase),
+            alias(kw("COLLATE"), $.collate),
+            alias(kw("LANDSCAPE"), $.landscape),
+            alias(kw("PORTRAIT"), $.portrait),
+            alias(kw("APPEND"), $.append),
+            alias(kw("BINARY"), $.binary),
+            alias(kw("KEEP-MESSAGES"), $.keep_messages),
+            $.__output_shared_option,
           ),
         ),
-        seq(
-          kw("THROUGH"),
-          $._program_target,
-          repeat($.__output_through_argument),
-          repeat($.__output_shared_option),
-        ),
+      ),
+      seq(
+        kw("THROUGH"),
+        $._program_target,
+        repeat($.__output_through_argument),
+        repeat($.__output_shared_option),
       ),
     ),
 
