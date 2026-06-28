@@ -42,6 +42,8 @@ module.exports = ({ kw }) => ({
       seq(kw("FONT"), field("font", $._expression)),
       seq(kw("PFCOLOR"), field("pfcolor", $._expression)),
     ),
+  _record_or_parenthesized_record: ($) =>
+    choice($._identifier_or_qualified_name, seq("(", $._identifier_or_qualified_name, ")")),
 
   __up_down_count_frame: ($) =>
     choice(seq(field("count", $._expression), optional($.frame_phrase)), $.frame_phrase),
