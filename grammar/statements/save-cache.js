@@ -1,6 +1,7 @@
 module.exports = ({ kw }) => ({
-  save_cache_statement: ($) =>
-    seq(kw("SAVE"), kw("CACHE"), $.__save_cache_body, $._no_error_terminator),
+  save_cache_statement: ($) => seq($.__save_cache_prefix, $._no_error_terminator),
+
+  __save_cache_prefix: ($) => seq(kw("SAVE"), kw("CACHE"), $.__save_cache_body),
 
   __save_cache_body: ($) =>
     seq(
