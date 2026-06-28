@@ -130,6 +130,12 @@ module.exports = ({ kw }) => ({
 
   property_definition: ($) =>
     seq(
+      $.__class_property_definition_prefix,
+      repeat1(choice($.__class_property_get_phrase, $.__class_property_set_phrase)),
+    ),
+
+  __class_property_definition_prefix: ($) =>
+    seq(
       kw("DEFINE", { offset: 3 }),
       optional($.__class_property_definition_modifier),
       kw("PROPERTY"),
@@ -145,7 +151,6 @@ module.exports = ({ kw }) => ({
           alias(kw("NO-UNDO"), $.no_undo),
         ),
       ),
-      repeat1(choice($.__class_property_get_phrase, $.__class_property_set_phrase)),
     ),
 
   __class_property_get_phrase: ($) => seq(kw("GET"), $.__class_property_accessor_tail),
