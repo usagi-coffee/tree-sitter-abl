@@ -33,7 +33,7 @@ module.exports = ($) => [
     $.__frame_display_option,
     $._color_font_option,
     $.__frame_head_item,
-    $.size_phrase,
+    $._size_phrase,
     $.__system_dialog_filters_pairs,
     $.__system_dialog_filter_pair,
     $.__at_column_row,
