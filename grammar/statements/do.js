@@ -1,5 +1,7 @@
 module.exports = ({ kw }) => ({
-  do_statement: ($) => seq(optional($._label), $.__do_body, kw("END"), $._terminator),
+  do_statement: ($) => seq($.__do_statement_prefix, $._terminator),
+
+  __do_statement_prefix: ($) => seq(optional($._label), $.__do_body, kw("END")),
 
   __do_body: ($) =>
     seq(
