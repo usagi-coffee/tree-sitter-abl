@@ -44,6 +44,8 @@ module.exports = ({ kw }) => ({
     ),
   _record_or_parenthesized_record: ($) =>
     choice($._identifier_or_qualified_name, seq("(", $._identifier_or_qualified_name, ")")),
+  _define_private_prefix: ($) =>
+    seq(kw("DEFINE", { offset: 3 }), optional(alias(kw("PRIVATE"), $.access_modifier))),
 
   __up_down_count_frame: ($) =>
     choice(seq(field("count", $._expression), optional($.frame_phrase)), $.frame_phrase),

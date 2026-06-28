@@ -1,8 +1,7 @@
 module.exports = ({ kw }) => ({
   button_definition: ($) =>
     seq(
-      kw("DEFINE", { offset: 3 }),
-      optional(alias(kw("PRIVATE"), $.access_modifier)),
+      $._define_private_prefix,
       choice(kw("BUTTON"), kw("BUTTONS")),
       $.__button_body,
       $._terminator,

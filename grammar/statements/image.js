@@ -1,12 +1,6 @@
 module.exports = ({ kw }) => ({
   image_definition: ($) =>
-    seq(
-      kw("DEFINE", { offset: 3 }),
-      optional(alias(kw("PRIVATE"), $.access_modifier)),
-      kw("IMAGE"),
-      $.__image_body,
-      $._terminator,
-    ),
+    seq($._define_private_prefix, kw("IMAGE"), $.__image_body, $._terminator),
 
   __image_body: ($) =>
     seq(

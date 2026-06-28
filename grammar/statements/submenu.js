@@ -1,12 +1,6 @@
 module.exports = ({ kw }) => ({
   submenu_definition: ($) =>
-    seq(
-      kw("DEFINE", { offset: 3 }),
-      optional(alias(kw("PRIVATE"), $.access_modifier)),
-      kw("SUB-MENU"),
-      $.__submenu_body,
-      $._terminator,
-    ),
+    seq($._define_private_prefix, kw("SUB-MENU"), $.__submenu_body, $._terminator),
 
   __submenu_body: ($) =>
     seq(
