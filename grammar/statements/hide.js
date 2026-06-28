@@ -1,5 +1,6 @@
 module.exports = ({ kw }) => ({
-  hide_statement: ($) => seq(kw("HIDE"), optional($.__hide_tail), $._terminator),
+  hide_statement: ($) => seq($.__hide_prefix, $._terminator),
+  __hide_prefix: ($) => seq(kw("HIDE"), optional($.__hide_tail)),
   __hide_tail: ($) =>
     choice(
       seq($._stream_phrase, optional($.__hide_tail_after_stream)),
