@@ -1,7 +1,7 @@
 module.exports = ({ kw }) => ({
-  input_output_statement: ($) =>
-    seq(kw("INPUT-OUTPUT"), optional($._stream_phrase), $.__input_output_body, $._terminator),
+  input_output_statement: ($) => seq($.__input_output_prefix, $.__input_output_body, $._terminator),
 
+  __input_output_prefix: ($) => seq(kw("INPUT-OUTPUT"), optional($._stream_phrase)),
   __input_output_body: ($) =>
     choice(
       alias(kw("CLOSE"), $.close),
