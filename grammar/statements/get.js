@@ -1,6 +1,7 @@
 module.exports = ({ kw }) => ({
-  get_statement: ($) => seq(kw("GET"), $.__get_body, $._terminator),
+  get_statement: ($) => seq($.__get_prefix, $._terminator),
 
+  __get_prefix: ($) => seq(kw("GET"), $.__get_body),
   __get_body: ($) =>
     seq(
       field("direction", choice(kw("FIRST"), kw("NEXT"), kw("PREV"), kw("LAST"), kw("CURRENT"))),
