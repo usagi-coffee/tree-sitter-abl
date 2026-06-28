@@ -1,5 +1,6 @@
 module.exports = ({ kw }) => ({
-  publish_statement: ($) => seq(kw("PUBLISH"), $.__publish_body, $._terminator),
+  publish_statement: ($) => seq($.__publish_prefix, $._terminator),
+  __publish_prefix: ($) => seq(kw("PUBLISH"), $.__publish_body),
   __publish_body: ($) =>
     seq(
       field("event", $._expression),
