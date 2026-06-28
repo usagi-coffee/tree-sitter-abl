@@ -1,6 +1,7 @@
 module.exports = ({ kw }) => ({
-  open_query_statement: ($) => seq(kw("OPEN"), $.__open_query_body, $._terminator),
+  open_query_statement: ($) => seq($.__open_query_prefix, $._terminator),
 
+  __open_query_prefix: ($) => seq(kw("OPEN"), $.__open_query_body),
   __open_query_body: ($) =>
     seq(
       kw("QUERY"),
