@@ -1,5 +1,7 @@
 module.exports = ({ kw }) => ({
-  preselect_statement: ($) => seq(kw("PRESELECT"), $.preselect_record_list, $._terminator),
+  preselect_statement: ($) => seq($.__preselect_prefix, $._terminator),
+
+  __preselect_prefix: ($) => seq(kw("PRESELECT"), $.preselect_record_list),
 
   preselect_record_list: ($) => seq($.preselect_record, repeat(seq(",", $.preselect_record))),
 
