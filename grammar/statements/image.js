@@ -1,6 +1,7 @@
 module.exports = ({ kw }) => ({
-  image_definition: ($) =>
-    seq($._define_private_prefix, kw("IMAGE"), $.__image_body, $._terminator),
+  image_definition: ($) => seq($.__image_prefix, $._terminator),
+
+  __image_prefix: ($) => seq($._define_private_prefix, kw("IMAGE"), $.__image_body),
 
   __image_body: ($) =>
     seq(
