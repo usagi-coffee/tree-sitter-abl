@@ -1,6 +1,7 @@
 module.exports = ({ kw }) => ({
-  choose_statement: ($) => seq(kw("CHOOSE"), $.__choose_body, $._terminator),
+  choose_statement: ($) => seq($.__choose_prefix, $._terminator),
 
+  __choose_prefix: ($) => seq(kw("CHOOSE"), $.__choose_body),
   __choose_body: ($) =>
     seq(
       choice(
