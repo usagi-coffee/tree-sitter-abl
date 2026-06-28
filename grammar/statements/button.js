@@ -1,11 +1,8 @@
 module.exports = ({ kw }) => ({
-  button_definition: ($) =>
-    seq(
-      $._define_private_prefix,
-      choice(kw("BUTTON"), kw("BUTTONS")),
-      $.__button_body,
-      $._terminator,
-    ),
+  button_definition: ($) => seq($.__button_prefix, $._terminator),
+
+  __button_prefix: ($) =>
+    seq($._define_private_prefix, choice(kw("BUTTON"), kw("BUTTONS")), $.__button_body),
 
   __button_body: ($) =>
     seq(
