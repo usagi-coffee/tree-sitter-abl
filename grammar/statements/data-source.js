@@ -1,6 +1,8 @@
 module.exports = ({ kw }) => ({
-  data_source_definition: ($) =>
-    seq(kw("DEFINE", { offset: 3 }), kw("DATA-SOURCE"), $.__data_source_body, $._terminator),
+  data_source_definition: ($) => seq($.__data_source_prefix, $._terminator),
+
+  __data_source_prefix: ($) =>
+    seq(kw("DEFINE", { offset: 3 }), kw("DATA-SOURCE"), $.__data_source_body),
 
   // For classes - with modifiers
   data_source_class_definition: ($) =>
