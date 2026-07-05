@@ -232,4 +232,9 @@ module.exports = ({ kw }) => ({
   _format_string: ($) => seq(kw("FORMAT", { offset: 4 }), field("format", $.string_literal)),
   _tooltip_phrase: ($) => seq(kw("TOOLTIP"), field("tooltip", $._expression)),
   _when_phrase: ($) => seq(kw("WHEN"), field("when", $._expression)),
+  _list_items_phrase: ($) => seq(kw("LIST-ITEMS"), field("items", $._list_item_values)),
+  _list_item_pairs_phrase: ($) => seq(kw("LIST-ITEM-PAIRS"), field("pairs", $._list_item_pairs)),
+  _list_item_values: ($) => seq($._expression, repeat(seq(",", $._expression))),
+  _list_item_pairs: ($) => seq($._list_item_pair, repeat(seq(",", $._list_item_pair))),
+  _list_item_pair: ($) => seq(field("label", $._expression), ",", field("value", $._expression)),
 });
