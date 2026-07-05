@@ -237,4 +237,9 @@ module.exports = ({ kw }) => ({
   _list_item_values: ($) => seq($._expression, repeat(seq(",", $._expression))),
   _list_item_pairs: ($) => seq($._list_item_pair, repeat(seq(",", $._list_item_pair))),
   _list_item_pair: ($) => seq(field("label", $._expression), ",", field("value", $._expression)),
+  _scrollbar_option: ($) =>
+    choice(
+      alias(kw("SCROLLBAR-HORIZONTAL"), $.scrollbar_horizontal),
+      alias(kw("SCROLLBAR-VERTICAL"), $.scrollbar_vertical),
+    ),
 });

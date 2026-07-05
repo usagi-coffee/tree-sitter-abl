@@ -78,8 +78,7 @@ module.exports = ({ kw }) => ({
             seq(kw("MAX-DATA-GUESS"), field("max_data_guess", $.__browse_option_expression)),
             seq(kw("ROW"), field("row", $.__browse_option_expression)),
             seq(choice(kw("COLUMN"), kw("COL")), field("column", $.__browse_option_expression)),
-            alias(kw("SCROLLBAR-HORIZONTAL"), $.scrollbar_horizontal),
-            alias(kw("SCROLLBAR-VERTICAL"), $.scrollbar_vertical),
+            $._scrollbar_option,
             seq(
               kw("SIZE"),
               field("width", $.__browse_option_expression),
