@@ -21,7 +21,7 @@ module.exports = ({ kw }) => ({
     choice(
       alias($._skip_phrase, $.skip_phrase),
       alias($._space_phrase, $.space_phrase),
-      seq($.__update_field_target_item, optional(seq(kw("WHEN"), field("when", $._expression)))),
+      seq($.__update_field_target_item, optional($._when_phrase)),
       seq($.__update_field_target_item, "=", field("value", $._expression)),
       seq(
         kw("TEXT"),

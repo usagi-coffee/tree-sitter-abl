@@ -12,7 +12,7 @@ module.exports = ({ kw }) => ({
     seq(
       field("left", choice($._assignable, $.__assign_keyword_identifier, $.__assign_browse_attr)),
       optional(seq("=", field("right", choice($.array_initializer, $._expression)))),
-      optional(seq(kw("WHEN"), field("when", $._expression))),
+      optional($._when_phrase),
     ),
   __assign_keyword_identifier: ($) => alias($._widgets, $.identifier),
 

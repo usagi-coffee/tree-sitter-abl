@@ -41,7 +41,7 @@ module.exports = ({ kw }) => ({
     seq(
       field("field", $._assignable),
       optional(seq("=", field("value", $._expression))),
-      optional(seq(kw("WHEN"), field("when", $._expression))),
+      optional($._when_phrase),
     ),
 
   __assign_record_name: ($) => $._identifier_or_qualified_name,

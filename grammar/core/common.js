@@ -231,4 +231,5 @@ module.exports = ({ kw }) => ({
 
   _format_string: ($) => seq(kw("FORMAT", { offset: 4 }), field("format", $.string_literal)),
   _tooltip_phrase: ($) => seq(kw("TOOLTIP"), field("tooltip", $._expression)),
+  _when_phrase: ($) => seq(kw("WHEN"), field("when", $._expression)),
 });

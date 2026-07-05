@@ -40,7 +40,7 @@ module.exports = ({ kw }) => ({
         seq(
           field("field", $._identifier_or_qualified_name),
           optional($.format_phrase),
-          optional(seq(kw("WHEN"), field("when", $._expression))),
+          optional($._when_phrase),
         ),
       ),
       seq(field("field", $._identifier_or_qualified_name), "=", field("value", $._expression)),

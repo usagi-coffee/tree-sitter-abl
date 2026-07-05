@@ -21,7 +21,7 @@ module.exports = ({ kw }) => ({
       seq(
         field("field", $._identifier_or_array_access),
         repeat($.format_phrase),
-        optional(seq(kw("WHEN"), field("when", $._expression))),
+        optional($._when_phrase),
       ),
       seq(kw("TEXT"), "(", token(/[A-Za-z_][A-Za-z0-9_-]*/), $.format_phrase, ")"),
       seq(field("constant", $.string_literal), repeat($.format_phrase)),
