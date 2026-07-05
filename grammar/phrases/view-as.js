@@ -29,5 +29,5 @@ module.exports = ({ kw }) => ({
       optional($.size_phrase),
       optional($.__view_as_tooltip_phrase),
     ),
-  __view_as_tooltip_phrase: ($) => seq(kw("TOOLTIP"), field("tooltip", $._expression)),
+  __view_as_tooltip_phrase: ($) => $._tooltip_phrase,
 });

@@ -10,7 +10,7 @@ module.exports = ({ kw }) => ({
       optional(kw("NO-CURRENT-VALUE")),
       optional(kw("LARGE-TO-SMALL")),
       optional($.__slider_tic_marks),
-      optional(seq(kw("TOOLTIP"), field("tooltip", $._expression))),
+      optional($._tooltip_phrase),
       optional($.size_phrase),
     ),
 

@@ -8,7 +8,7 @@ module.exports = ({ kw }) => ({
           seq(kw("INNER-LINES"), field("inner_lines", $.number_literal)),
           $.size_phrase,
           alias(kw("SORT"), $.sort),
-          seq(kw("TOOLTIP"), field("tooltip", $._expression)),
+          $._tooltip_phrase,
           alias(kw("SIMPLE"), $.simple),
           alias(kw("DROP-DOWN"), $.drop_down),
           alias(kw("DROP-DOWN-LIST"), $.drop_down_list),

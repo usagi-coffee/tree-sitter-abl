@@ -19,7 +19,7 @@ module.exports = ({ kw }) => ({
             field("inner_lines", $.number_literal),
           ),
           kw("SORT"),
-          seq(kw("TOOLTIP"), field("tooltip", $._expression)),
+          $._tooltip_phrase,
         ),
       ),
     ),

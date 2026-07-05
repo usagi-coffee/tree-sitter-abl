@@ -230,4 +230,5 @@ module.exports = ({ kw }) => ({
   _aggregate_label_phrase: ($) => seq(kw("LABEL"), field("label", $.string_literal)),
 
   _format_string: ($) => seq(kw("FORMAT", { offset: 4 }), field("format", $.string_literal)),
+  _tooltip_phrase: ($) => seq(kw("TOOLTIP"), field("tooltip", $._expression)),
 });

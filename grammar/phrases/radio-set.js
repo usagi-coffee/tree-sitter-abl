@@ -7,7 +7,7 @@ module.exports = ({ kw }) => ({
       kw("RADIO-BUTTONS"),
       field("buttons", $.__radio_set_button_list),
       optional($.size_phrase),
-      optional(seq(kw("TOOLTIP"), field("tooltip", $._expression))),
+      optional($._tooltip_phrase),
     ),
 
   __radio_set_orientation: ($) =>
