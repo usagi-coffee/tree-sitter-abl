@@ -228,6 +228,11 @@ module.exports = ({ kw }) => ({
     ),
   _map_unbuffered_convert_tail: ($) =>
     choice(seq($._map_phrase, optional($._unbuffered_convert_tail)), $._unbuffered_convert_tail),
+  _echo_map_unbuffered_convert_tail: ($) =>
+    choice(
+      seq($._echo_phrase, optional($._map_unbuffered_convert_tail)),
+      $._map_unbuffered_convert_tail,
+    ),
 
   _aggregate_label_phrase: ($) => seq(kw("LABEL"), field("label", $.string_literal)),
 

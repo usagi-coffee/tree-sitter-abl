@@ -11,20 +11,14 @@ module.exports = ({ kw }) => ({
     choice(
       seq(alias($._lob_dir_phrase, $.lob_dir_phrase), optional($.__input_tail_after_lob_dir)),
       seq(alias(kw("BINARY"), $.binary), optional($.__input_tail_after_binary)),
-      seq($._echo_phrase, optional($._map_unbuffered_convert_tail)),
-      $._map_unbuffered_convert_tail,
+      $._echo_map_unbuffered_convert_tail,
     ),
   __input_tail_after_lob_dir: ($) =>
     choice(
       seq(alias(kw("BINARY"), $.binary), optional($.__input_tail_after_binary)),
-      seq($._echo_phrase, optional($._map_unbuffered_convert_tail)),
-      $._map_unbuffered_convert_tail,
+      $._echo_map_unbuffered_convert_tail,
     ),
-  __input_tail_after_binary: ($) =>
-    choice(
-      seq($._echo_phrase, optional($._map_unbuffered_convert_tail)),
-      $._map_unbuffered_convert_tail,
-    ),
+  __input_tail_after_binary: ($) => $._echo_map_unbuffered_convert_tail,
 
   __input_from_target: ($) =>
     choice(

@@ -7,14 +7,9 @@ module.exports = ({ kw }) => ({
   __input_through_tail: ($) =>
     choice(
       seq(repeat1($.__input_through_argument), optional($.__input_through_tail_after_arguments)),
-      seq($._echo_phrase, optional($._map_unbuffered_convert_tail)),
-      $._map_unbuffered_convert_tail,
+      $._echo_map_unbuffered_convert_tail,
     ),
-  __input_through_tail_after_arguments: ($) =>
-    choice(
-      seq($._echo_phrase, optional($._map_unbuffered_convert_tail)),
-      $._map_unbuffered_convert_tail,
-    ),
+  __input_through_tail_after_arguments: ($) => $._echo_map_unbuffered_convert_tail,
 
   __input_through_argument: ($) => choice($.__input_through_arg_value, $._value_expression),
   __input_through_arg_value: ($) =>
