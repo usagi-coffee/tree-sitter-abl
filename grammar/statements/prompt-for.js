@@ -49,20 +49,28 @@ module.exports = ({ kw }) => ({
     choice(
       seq(
         alias($.__prompt_for_at_phrase, $.at_phrase),
-        optional($.__prompt_for_constant_tail_after_position),
+        optional(
+          choice(
+            seq(
+              alias($.__prompt_for_view_as_phrase, $.view_as_phrase),
+              optional($.__prompt_for_constant_style_tail),
+            ),
+            $.__prompt_for_constant_style_tail,
+          ),
+        ),
       ),
       seq(
         alias($.__prompt_for_to_phrase, $.to_phrase),
-        optional($.__prompt_for_constant_tail_after_position),
+        optional(
+          choice(
+            seq(
+              alias($.__prompt_for_view_as_phrase, $.view_as_phrase),
+              optional($.__prompt_for_constant_style_tail),
+            ),
+            $.__prompt_for_constant_style_tail,
+          ),
+        ),
       ),
-      seq(
-        alias($.__prompt_for_view_as_phrase, $.view_as_phrase),
-        optional($.__prompt_for_constant_style_tail),
-      ),
-      $.__prompt_for_constant_style_tail,
-    ),
-  __prompt_for_constant_tail_after_position: ($) =>
-    choice(
       seq(
         alias($.__prompt_for_view_as_phrase, $.view_as_phrase),
         optional($.__prompt_for_constant_style_tail),
