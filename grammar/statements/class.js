@@ -301,12 +301,7 @@ module.exports = ({ kw }) => ({
   __class_method_dataset_handle_parameter_tail: ($) =>
     seq(field("dataset_handle", $.identifier), repeat($.__class_method_handle_parameter_option)),
   __class_method_table_parameter_option: ($) =>
-    choice(
-      alias(kw("APPEND"), $.append),
-      alias(kw("BIND"), $.bind),
-      alias(kw("BY-VALUE"), $.by_value),
-      alias(kw("BY-REFERENCE"), $.by_reference),
-    ),
+    choice(alias(kw("APPEND"), $.append), $.__class_method_handle_parameter_option),
   __class_method_handle_parameter_option: ($) =>
     choice(
       alias(kw("BIND"), $.bind),
