@@ -5,7 +5,7 @@ module.exports = ({ kw }) => ({
     seq(
       alias($.__assign_pair, $.assign_pair),
       repeat(alias($.__assign_pair, $.assign_pair)),
-      optional(alias($.__assign_no_error, $.no_error)),
+      optional(alias(kw("NO-ERROR"), $.no_error)),
     ),
 
   __assign_pair: ($) =>
@@ -18,6 +18,4 @@ module.exports = ({ kw }) => ({
 
   __assign_browse_attr: ($) =>
     seq(kw("BROWSE"), field("browse", $.identifier), ":", field("attr", $.identifier)),
-
-  __assign_no_error: ($) => kw("NO-ERROR"),
 });
