@@ -11,17 +11,20 @@ module.exports = ({ kw }) => ({
     ),
   __open_query_tail: ($) =>
     choice(
-      seq($.query_tuning_phrase, optional($.__open_query_tail_after_query_tuning)),
-      seq(alias(kw("BREAK"), $.break), optional($.__open_query_tail_after_break)),
       seq(
-        repeat1(alias($.__open_query_by_phrase, $.by_phrase)),
-        optional($.__open_query_tail_after_by),
+        $.query_tuning_phrase,
+        optional(
+          choice(
+            seq(alias(kw("BREAK"), $.break), optional($.__open_query_tail_after_break)),
+            seq(
+              repeat1(alias($.__open_query_by_phrase, $.by_phrase)),
+              optional($.__open_query_tail_after_by),
+            ),
+            seq(field("lock", $.__open_query_lock), optional($.__open_query_reposition_tail)),
+            $.__open_query_reposition_tail,
+          ),
+        ),
       ),
-      seq(field("lock", $.__open_query_lock), optional($.__open_query_reposition_tail)),
-      $.__open_query_reposition_tail,
-    ),
-  __open_query_tail_after_query_tuning: ($) =>
-    choice(
       seq(alias(kw("BREAK"), $.break), optional($.__open_query_tail_after_break)),
       seq(
         repeat1(alias($.__open_query_by_phrase, $.by_phrase)),
