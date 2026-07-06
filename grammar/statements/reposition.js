@@ -12,13 +12,13 @@ module.exports = ({ kw }) => ({
           field("rowid", $._expression),
           repeat(seq(",", field("rowid", $._expression))),
           optional(seq(kw("FOR"), kw("TENANT"), field("tenant", $._expression))),
-          optional(alias(kw("NO-ERROR"), $.no_error)),
+          optional($.__no_error),
         ),
         seq(
           kw("TO"),
           kw("RECID"),
           field("recid", $._expression),
-          optional(alias(kw("NO-ERROR"), $.no_error)),
+          optional($.__no_error),
         ),
         seq(kw("TO"), kw("ROW"), field("row", $._expression)),
         seq(
