@@ -55,6 +55,7 @@ module.exports = ({ kw }) => ({
 
   _stream_phrase: ($) =>
     seq(choice(kw("STREAM"), kw("STREAM-HANDLE")), field("stream", $.identifier)),
+  _input_stream_prefix: ($) => seq(kw("INPUT"), optional($._stream_phrase)),
 
   _dos_unix_command: ($) =>
     choice(

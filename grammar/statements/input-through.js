@@ -2,7 +2,7 @@ module.exports = ({ kw }) => ({
   input_through_statement: ($) =>
     seq($.__input_through_prefix, $.__input_through_body, $._terminator),
 
-  __input_through_prefix: ($) => seq(kw("INPUT"), optional($._stream_phrase), kw("THROUGH")),
+  __input_through_prefix: ($) => seq($._input_stream_prefix, kw("THROUGH")),
   __input_through_body: ($) => seq($._program_target, optional($.__input_through_tail)),
   __input_through_tail: ($) =>
     choice(
