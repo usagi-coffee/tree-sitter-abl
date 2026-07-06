@@ -3,12 +3,15 @@ module.exports = ({ kw }) => ({
   __pause_prefix: ($) => seq(kw("PAUSE"), optional($.__pause_tail)),
   __pause_tail: ($) =>
     choice(
-      seq(field("duration", $._expression), optional($.__pause_tail_after_duration)),
-      seq(alias(kw("BEFORE-HIDE"), $.before_hide), optional($.__pause_message_window_tail)),
-      $.__pause_message_window_tail,
-    ),
-  __pause_tail_after_duration: ($) =>
-    choice(
+      seq(
+        field("duration", $._expression),
+        optional(
+          choice(
+            seq(alias(kw("BEFORE-HIDE"), $.before_hide), optional($.__pause_message_window_tail)),
+            $.__pause_message_window_tail,
+          ),
+        ),
+      ),
       seq(alias(kw("BEFORE-HIDE"), $.before_hide), optional($.__pause_message_window_tail)),
       $.__pause_message_window_tail,
     ),
