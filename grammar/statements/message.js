@@ -4,7 +4,12 @@ module.exports = ({ kw }) => ({
   __message_prefix: ($) => seq(kw("MESSAGE"), optional($.__message_body)),
   __message_body: ($) =>
     seq(
-      optional(seq(kw("COLOR"), field("color", $.__message_color_value))),
+      optional(
+        seq(
+          kw("COLOR"),
+          field("color", choice(kw("NORMAL"), kw("INPUT"), kw("MESSAGES"), $.color_phrase)),
+        ),
+      ),
       repeat1($.__message_expression),
       optional($.__message_body_tail),
     ),
@@ -21,8 +26,6 @@ module.exports = ({ kw }) => ({
 
   __message_expression: ($) =>
     choice($._expression, alias($.__message_skip_item, $.skip), alias(kw("MENU"), $.identifier)),
-
-  __message_color_value: ($) => choice(kw("NORMAL"), kw("INPUT"), kw("MESSAGES"), $.color_phrase),
 
   __message_view_as_phrase: ($) =>
     seq(
