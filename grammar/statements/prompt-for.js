@@ -74,11 +74,10 @@ module.exports = ({ kw }) => ({
       seq(
         kw("BGCOLOR"),
         field("bgcolor", $._expression),
-        optional($.__prompt_for_constant_tail_after_bgcolor),
+        optional(seq(kw("FONT"), field("font", $._expression))),
       ),
       seq(kw("FONT"), field("font", $._expression)),
     ),
-  __prompt_for_constant_tail_after_bgcolor: ($) => seq(kw("FONT"), field("font", $._expression)),
   __prompt_for_constant_style_tail: ($) =>
     choice(
       seq(
@@ -89,7 +88,7 @@ module.exports = ({ kw }) => ({
       seq(
         kw("BGCOLOR"),
         field("bgcolor", $._expression),
-        optional($.__prompt_for_constant_tail_after_bgcolor),
+        optional(seq(kw("FONT"), field("font", $._expression))),
       ),
       seq(kw("FONT"), field("font", $._expression)),
     ),
