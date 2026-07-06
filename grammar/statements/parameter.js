@@ -82,14 +82,9 @@ module.exports = ({ kw }) => ({
     seq(
       $._as_like,
       optional(seq(kw("TO"), field("target", $.identifier))),
-      optional(alias($.__parameter_extent_phrase, $.extent_phrase)),
+      optional(alias($._extent_phrase, $.extent_phrase)),
     ),
 
-  __parameter_extent_phrase: ($) =>
-    seq(kw("EXTENT"), optional(field("size", $.__parameter_extent_size))),
-
-  __parameter_extent_size: ($) =>
-    choice($.number_literal, $.preprocessor_name, $.identifier, $.null_literal),
   __parameter_table_parameter_option: ($) =>
     choice(
       alias(kw("APPEND"), $.append),

@@ -79,12 +79,8 @@ module.exports = ({ kw }) => ({
       optional(alias(kw("NO-UNDO"), $.no_undo)),
     ),
 
-  __function_variable_type_phrase: ($) => seq($._as_like, optional($.__function_extent_phrase)),
+  __function_variable_type_phrase: ($) => seq($._as_like, optional($._extent_phrase)),
 
-  __function_extent_phrase: ($) =>
-    seq(kw("EXTENT"), optional(field("size", $.__function_extent_size))),
   __function_map_phrase: ($) => seq(kw("MAP"), kw("TO"), field("actual", $.identifier)),
   __function_in_phrase: ($) => seq(kw("IN"), field("context", $._expression)),
-  __function_extent_size: ($) =>
-    choice($.number_literal, $.preprocessor_name, $.identifier, $.null_literal),
 });
