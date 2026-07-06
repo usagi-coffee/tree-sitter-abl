@@ -231,6 +231,12 @@ module.exports = ({ kw }) => ({
 
   _format_string: ($) => seq(kw("FORMAT", { offset: 4 }), field("format", $.string_literal)),
   _tooltip_phrase: ($) => seq(kw("TOOLTIP"), field("tooltip", $._expression)),
+  _lock_option: ($) =>
+    choice(
+      alias(kw("SHARE-LOCK"), $.share_lock),
+      alias(kw("EXCLUSIVE-LOCK"), $.exclusive_lock),
+      alias(kw("NO-LOCK"), $.no_lock),
+    ),
   _when_phrase: ($) => seq(kw("WHEN"), field("when", $._expression)),
   _list_items_phrase: ($) => seq(kw("LIST-ITEMS"), field("items", $._list_item_values)),
   _list_item_pairs_phrase: ($) => seq(kw("LIST-ITEM-PAIRS"), field("pairs", $._list_item_pairs)),

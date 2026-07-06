@@ -79,12 +79,7 @@ module.exports = ({ kw }) => ({
         ),
       ),
     ),
-  __open_query_lock: ($) =>
-    choice(
-      alias(kw("SHARE-LOCK"), $.share_lock),
-      alias(kw("EXCLUSIVE-LOCK"), $.exclusive_lock),
-      alias(kw("NO-LOCK"), $.no_lock),
-    ),
+  __open_query_lock: ($) => $._lock_option,
 
   __open_query_by_phrase: ($) =>
     seq(

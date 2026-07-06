@@ -19,9 +19,7 @@ module.exports = ({ kw }) => ({
       ),
       $.__record_use_index,
       $.__record_using_phrase,
-      alias(kw("SHARE-LOCK"), $.share_lock),
-      alias(kw("EXCLUSIVE-LOCK"), $.exclusive_lock),
-      alias(kw("NO-LOCK"), $.no_lock),
+      $._lock_option,
       alias(kw("NO-PREFETCH"), $.no_prefetch),
     ),
 
