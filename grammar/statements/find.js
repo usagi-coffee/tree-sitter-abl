@@ -26,9 +26,9 @@ module.exports = ({ kw }) => ({
 
   _find_record_option: ($) =>
     choice(
-      alias(kw("NO-LOCK"), $.no_lock),
-      choice(alias(kw("SHARE-LOCK"), $.share_lock), alias(kw("SHARE"), $.share)),
-      choice(alias(kw("EXCLUSIVE-LOCK"), $.exclusive_lock), alias(kw("EXCLUSIVE"), $.exclusive)),
+      $._lock_option,
+      alias(kw("SHARE"), $.share),
+      alias(kw("EXCLUSIVE"), $.exclusive),
       alias(kw("NO-WAIT"), $.no_wait),
       alias(kw("NO-ERROR"), $.no_error),
       alias(kw("NO-PREFETCH"), $.no_prefetch),
