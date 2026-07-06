@@ -4,13 +4,16 @@ module.exports = ({ kw }) => ({
   __run_body: ($) => seq(field("procedure", $._run_target), optional($.__run_body_tail)),
   __run_body_tail: ($) =>
     choice(
-      seq($.__run_persistence, optional($.__run_body_after_persistence)),
-      seq(alias($.__run_in_phrase, $.in_phrase), optional($.__run_body_after_in)),
-      seq(alias($.__run_on_server, $.on_server_phrase), optional($.__run_arguments_tail)),
-      $.__run_arguments_tail,
-    ),
-  __run_body_after_persistence: ($) =>
-    choice(
+      seq(
+        $.__run_persistence,
+        optional(
+          choice(
+            seq(alias($.__run_in_phrase, $.in_phrase), optional($.__run_body_after_in)),
+            seq(alias($.__run_on_server, $.on_server_phrase), optional($.__run_arguments_tail)),
+            $.__run_arguments_tail,
+          ),
+        ),
+      ),
       seq(alias($.__run_in_phrase, $.in_phrase), optional($.__run_body_after_in)),
       seq(alias($.__run_on_server, $.on_server_phrase), optional($.__run_arguments_tail)),
       $.__run_arguments_tail,
