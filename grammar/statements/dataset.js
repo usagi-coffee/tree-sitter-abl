@@ -43,13 +43,16 @@ module.exports = ({ kw }) => ({
     choice(
       seq(
         alias(kw("REPOSITION"), $.reposition),
-        optional($.__dataset_data_relation_tail_after_reposition),
+        optional(
+          choice(
+            seq(
+              alias(kw("NESTED"), $.nested),
+              optional($.__dataset_data_relation_tail_after_nested),
+            ),
+            $.__dataset_not_active_recursive_tail,
+          ),
+        ),
       ),
-      seq(alias(kw("NESTED"), $.nested), optional($.__dataset_data_relation_tail_after_nested)),
-      $.__dataset_not_active_recursive_tail,
-    ),
-  __dataset_data_relation_tail_after_reposition: ($) =>
-    choice(
       seq(alias(kw("NESTED"), $.nested), optional($.__dataset_data_relation_tail_after_nested)),
       $.__dataset_not_active_recursive_tail,
     ),
