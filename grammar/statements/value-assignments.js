@@ -2,17 +2,15 @@ module.exports = ({ kw }) => ({
   value_assignment_statement: ($) => seq($.__value_assignments_body, $._terminator),
 
   __value_assignments_body: ($) =>
-    seq(
-      choice(
-        $.__value_assignments_current_language,
-        $.__value_assignments_current_value_family,
-        $.__value_assignments_dynamic_property,
-        $.__value_assignments_frame_value,
-        $.__value_assignments_entry,
-        $.__value_assignments_length,
-        $.__value_assignments_raw,
-        $.__value_assignments_substring,
-      ),
+    choice(
+      $.__value_assignments_current_language,
+      $.__value_assignments_current_value_family,
+      $.__value_assignments_dynamic_property,
+      $.__value_assignments_frame_value,
+      $.__value_assignments_entry,
+      $.__value_assignments_length,
+      $.__value_assignments_raw,
+      $.__value_assignments_substring,
     ),
 
   __value_assignments_current_language: ($) =>
