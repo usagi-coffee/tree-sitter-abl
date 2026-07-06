@@ -47,20 +47,31 @@ module.exports = ({ kw }) => ({
           choice(
             seq(
               alias(kw("NESTED"), $.nested),
-              optional($.__dataset_data_relation_tail_after_nested),
+              optional(
+                choice(
+                  seq(
+                    alias(kw("FOREIGN-KEY-HIDDEN"), $.foreign_key_hidden),
+                    optional($.__dataset_not_active_recursive_tail),
+                  ),
+                  $.__dataset_not_active_recursive_tail,
+                ),
+              ),
             ),
             $.__dataset_not_active_recursive_tail,
           ),
         ),
       ),
-      seq(alias(kw("NESTED"), $.nested), optional($.__dataset_data_relation_tail_after_nested)),
-      $.__dataset_not_active_recursive_tail,
-    ),
-  __dataset_data_relation_tail_after_nested: ($) =>
-    choice(
       seq(
-        alias(kw("FOREIGN-KEY-HIDDEN"), $.foreign_key_hidden),
-        optional($.__dataset_not_active_recursive_tail),
+        alias(kw("NESTED"), $.nested),
+        optional(
+          choice(
+            seq(
+              alias(kw("FOREIGN-KEY-HIDDEN"), $.foreign_key_hidden),
+              optional($.__dataset_not_active_recursive_tail),
+            ),
+            $.__dataset_not_active_recursive_tail,
+          ),
+        ),
       ),
       $.__dataset_not_active_recursive_tail,
     ),
