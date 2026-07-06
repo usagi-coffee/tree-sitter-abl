@@ -18,12 +18,15 @@ module.exports = ({ kw }) => ({
   __trigger_body: ($) => seq(kw("DO"), $.__trigger_body_tail),
   __trigger_body_tail: ($) =>
     choice(
-      seq($.__trigger_loop_phrase, optional($.__trigger_body_after_loop)),
-      seq($.__trigger_down_phrase, ":", repeat($._statement), kw("END"), "."),
-      seq(":", repeat($._statement), kw("END"), "."),
-    ),
-  __trigger_body_after_loop: ($) =>
-    choice(
+      seq(
+        $.__trigger_loop_phrase,
+        optional(
+          choice(
+            seq($.__trigger_down_phrase, ":", repeat($._statement), kw("END"), "."),
+            seq(":", repeat($._statement), kw("END"), "."),
+          ),
+        ),
+      ),
       seq($.__trigger_down_phrase, ":", repeat($._statement), kw("END"), "."),
       seq(":", repeat($._statement), kw("END"), "."),
     ),
