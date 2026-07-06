@@ -57,12 +57,10 @@ module.exports = ({ kw }) => ({
     choice(
       seq(
         alias(kw("FOREIGN-KEY-HIDDEN"), $.foreign_key_hidden),
-        optional($.__dataset_data_relation_tail_after_foreign_key_hidden),
+        optional($.__dataset_not_active_recursive_tail),
       ),
       $.__dataset_not_active_recursive_tail,
     ),
-  __dataset_data_relation_tail_after_foreign_key_hidden: ($) =>
-    $.__dataset_not_active_recursive_tail,
   __dataset_not_active_recursive_tail: ($) =>
     choice(
       seq(alias(kw("NOT-ACTIVE"), $.not_active), optional(alias(kw("RECURSIVE"), $.recursive))),
