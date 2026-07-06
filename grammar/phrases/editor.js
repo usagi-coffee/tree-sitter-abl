@@ -27,7 +27,7 @@ module.exports = ({ kw }) => ({
             alias(kw("NO-BOX"), $.no_box),
             alias(kw("NO-WORD-WRAP"), $.no_word_wrap),
             $._scrollbar_option,
-            seq(kw("TOOLTIP"), field("tooltip", $._expression)),
+            $._tooltip_phrase,
           ),
         ),
       ),
