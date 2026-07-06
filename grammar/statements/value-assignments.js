@@ -105,5 +105,5 @@ module.exports = ({ kw }) => ({
   __value_assignments_close_equals_value: ($) => seq(")", $.__value_assignments_equals_value),
   __value_assignments_equals_value: ($) => seq("=", field("value", $._expression)),
   __value_assignments_value_no_error: ($) =>
-    seq($.__value_assignments_equals_value, optional(alias(kw("NO-ERROR"), $.no_error))),
+    seq($.__value_assignments_equals_value, optional($.__no_error)),
 });
