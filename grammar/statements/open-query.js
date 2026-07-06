@@ -20,7 +20,7 @@ module.exports = ({ kw }) => ({
               repeat1(alias($.__open_query_by_phrase, $.by_phrase)),
               optional($.__open_query_tail_after_by),
             ),
-            seq(field("lock", $.__open_query_lock), optional($.__open_query_reposition_tail)),
+            seq(field("lock", $._lock_option), optional($.__open_query_reposition_tail)),
             $.__open_query_reposition_tail,
           ),
         ),
@@ -30,7 +30,7 @@ module.exports = ({ kw }) => ({
         repeat1(alias($.__open_query_by_phrase, $.by_phrase)),
         optional($.__open_query_tail_after_by),
       ),
-      seq(field("lock", $.__open_query_lock), optional($.__open_query_reposition_tail)),
+      seq(field("lock", $._lock_option), optional($.__open_query_reposition_tail)),
       $.__open_query_reposition_tail,
     ),
   __open_query_tail_after_break: ($) =>
@@ -39,12 +39,12 @@ module.exports = ({ kw }) => ({
         repeat1(alias($.__open_query_by_phrase, $.by_phrase)),
         optional($.__open_query_tail_after_by),
       ),
-      seq(field("lock", $.__open_query_lock), optional($.__open_query_reposition_tail)),
+      seq(field("lock", $._lock_option), optional($.__open_query_reposition_tail)),
       $.__open_query_reposition_tail,
     ),
   __open_query_tail_after_by: ($) =>
     choice(
-      seq(field("lock", $.__open_query_lock), optional($.__open_query_reposition_tail)),
+      seq(field("lock", $._lock_option), optional($.__open_query_reposition_tail)),
       $.__open_query_reposition_tail,
     ),
   __open_query_reposition_tail: ($) =>
@@ -77,13 +77,11 @@ module.exports = ({ kw }) => ({
             seq(kw("OF"), field("of", $._identifier_or_qualified_name)),
             seq(kw("WHERE"), field("where", $._expression)),
             seq(kw("USE-INDEX"), field("index", $.identifier)),
-            field("lock", $.__open_query_lock),
+            field("lock", $._lock_option),
           ),
         ),
       ),
     ),
-  __open_query_lock: ($) => $._lock_option,
-
   __open_query_by_phrase: ($) =>
     seq(
       kw("BY"),
