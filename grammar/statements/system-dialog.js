@@ -1,6 +1,8 @@
 module.exports = ({ kw }) => ({
+  __system_dialog_prefix: ($) => kw("SYSTEM-DIALOG"),
+
   system_dialog_color_statement: ($) =>
-    seq(kw("SYSTEM-DIALOG"), $.__system_dialog_color_body, $._terminator),
+    seq($.__system_dialog_prefix, $.__system_dialog_color_body, $._terminator),
 
   __system_dialog_color_body: ($) =>
     seq(
@@ -11,7 +13,7 @@ module.exports = ({ kw }) => ({
     ),
 
   system_dialog_font_statement: ($) =>
-    seq(kw("SYSTEM-DIALOG"), $.__system_dialog_font_body, $._terminator),
+    seq($.__system_dialog_prefix, $.__system_dialog_font_body, $._terminator),
 
   __system_dialog_font_body: ($) =>
     seq(
@@ -29,7 +31,7 @@ module.exports = ({ kw }) => ({
     ),
 
   system_dialog_get_dir_statement: ($) =>
-    seq(kw("SYSTEM-DIALOG"), $.__system_dialog_get_dir_body, $._terminator),
+    seq($.__system_dialog_prefix, $.__system_dialog_get_dir_body, $._terminator),
 
   __system_dialog_get_dir_body: ($) =>
     seq(
@@ -45,7 +47,7 @@ module.exports = ({ kw }) => ({
     ),
 
   system_dialog_get_file_statement: ($) =>
-    seq(kw("SYSTEM-DIALOG"), $.__system_dialog_get_file_body, $._terminator),
+    seq($.__system_dialog_prefix, $.__system_dialog_get_file_body, $._terminator),
 
   __system_dialog_get_file_body: ($) =>
     seq(
@@ -69,7 +71,7 @@ module.exports = ({ kw }) => ({
     ),
 
   system_dialog_printer_setup_statement: ($) =>
-    seq(kw("SYSTEM-DIALOG"), $.__system_dialog_printer_setup_body, $._terminator),
+    seq($.__system_dialog_prefix, $.__system_dialog_printer_setup_body, $._terminator),
 
   __system_dialog_printer_setup_body: ($) =>
     seq(
