@@ -110,12 +110,11 @@ module.exports = ({ kw }) => ({
 
   __class_method_parameter: ($) =>
     seq(
-      optional(field("direction", $.__class_method_parameter_direction)),
+      optional(field("direction", choice(kw("INPUT"), kw("OUTPUT"), kw("INPUT-OUTPUT")))),
       $.__class_method_parameter_body,
     ),
   __class_method_parameter_body: ($) =>
     choice($.__class_named_parameter_body, $.__class_method_table_parameter),
-  __class_method_parameter_direction: ($) => choice(kw("INPUT"), kw("OUTPUT"), kw("INPUT-OUTPUT")),
 
   __class_method_body: ($) => seq($.__class_compound_body, optional(kw("METHOD")), $._terminator),
 
