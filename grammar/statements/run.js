@@ -59,7 +59,7 @@ module.exports = ({ kw }) => ({
   __run_asynchronous: ($) =>
     seq(
       kw("ASYNCHRONOUS"),
-      optional(seq(kw("SET"), field("handle", $.identifier))),
+      optional($.__run_persistence_set_tail),
       optional($.__run_event_choice),
     ),
   __run_event_choice: ($) =>
