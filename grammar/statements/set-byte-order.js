@@ -4,7 +4,11 @@ module.exports = ({ kw }) => ({
   __set_byte_order_prefix: ($) => seq(kw("SET-BYTE-ORDER"), $.__set_byte_order_body),
 
   __set_byte_order_body: ($) =>
-    seq("(", field("buffer", $._expression), ")", "=", field("order", $.__set_byte_order_value)),
-
-  __set_byte_order_value: ($) => choice($.number_literal, $.identifier),
+    seq(
+      "(",
+      field("buffer", $._expression),
+      ")",
+      "=",
+      field("order", choice($.number_literal, $.identifier)),
+    ),
 });
