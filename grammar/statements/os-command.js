@@ -5,10 +5,9 @@ module.exports = ({ kw }) => ({
   __os_command_body: ($) =>
     seq(
       optional(choice(kw("SILENT"), kw("NO-WAIT"), kw("NO-CONSOLE"))),
-      repeat1(choice($.__os_command_value_target, $.__os_command_token)),
+      repeat1(choice($._value_expression, $.__os_command_token)),
     ),
 
-  __os_command_value_target: ($) => $._value_expression,
   __os_command_token: ($) =>
     choice(
       $.identifier,
