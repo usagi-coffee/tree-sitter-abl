@@ -43,10 +43,11 @@ module.exports = ({ kw }) => ({
       ),
     ),
 
-  __variable_extent_size: ($) => choice($.number_literal, $.preprocessor_name, $.identifier),
-
   __variable_extent_phrase: ($) =>
-    seq(kw("EXTENT"), optional(field("size", $.__variable_extent_size))),
+    seq(
+      kw("EXTENT"),
+      optional(field("size", choice($.number_literal, $.preprocessor_name, $.identifier))),
+    ),
 
   __variable_format_phrase: ($) => $._format_string,
 
