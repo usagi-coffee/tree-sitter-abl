@@ -60,7 +60,12 @@ module.exports = ({ kw }) => ({
 
   __output_to_target: ($) =>
     choice(
-      prec.right(seq(kw("PRINTER"), optional(field("printer", $.__output_printer_target)))),
+      prec.right(
+        seq(
+          kw("PRINTER"),
+          optional(field("printer", choice($.string_literal, $.identifier, $.preprocessor_name))),
+        ),
+      ),
       field(
         "file",
         choice($.opsys_file, $.string_literal, $.preprocessor_name, $.identifier, $.qualified_name),
@@ -80,6 +85,4 @@ module.exports = ({ kw }) => ({
       $._value_expression,
     ),
   __output_program_flag: ($) => token(/-[A-Za-z][A-Za-z0-9-]*/),
-
-  __output_printer_target: ($) => choice($.string_literal, $.identifier, $.preprocessor_name),
 });
