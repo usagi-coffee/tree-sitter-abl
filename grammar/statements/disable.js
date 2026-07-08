@@ -19,9 +19,7 @@ module.exports = ({ kw }) => ({
         optional($._when_phrase),
       ),
       seq(kw("TEXT"), "(", token(/[A-Za-z_][A-Za-z0-9_-]*/), repeat($.format_phrase), ")"),
-      seq(field("constant", $.__disable_constant), repeat($.format_phrase)),
+      seq(field("constant", $.string_literal), repeat($.format_phrase)),
       alias(kw("SKIP"), $.skip),
     ),
-
-  __disable_constant: ($) => $.string_literal,
 });
