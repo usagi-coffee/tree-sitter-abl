@@ -271,8 +271,12 @@ module.exports = ({ kw }) => ({
     ),
 
   __class_method_extent_phrase: ($) =>
-    prec.right(seq(kw("EXTENT"), optional(field("size", $.__class_method_extent_size)))),
-  __class_method_extent_size: ($) => choice($.number_literal, $.preprocessor_name, $.identifier),
+    prec.right(
+      seq(
+        kw("EXTENT"),
+        optional(field("size", choice($.number_literal, $.preprocessor_name, $.identifier))),
+      ),
+    ),
   __class_method_table_parameter: ($) =>
     choice(
       seq(kw("BUFFER"), $.__class_method_buffer_parameter_tail),
