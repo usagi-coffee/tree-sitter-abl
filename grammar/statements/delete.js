@@ -6,7 +6,12 @@ module.exports = ({ kw }) => ({
 
   delete_object_statement: ($) => seq($.__delete_object_prefix, $._no_error_terminator),
 
-  __delete_object_prefix: ($) => seq(kw("DELETE"), kw("OBJECT"), $.__delete_object_body),
+  __delete_object_prefix: ($) =>
+    seq(
+      kw("DELETE"),
+      kw("OBJECT"),
+      field("name", choice($.identifier, $.parenthesized_expression)),
+    ),
 
   delete_procedure_statement: ($) => seq($.__delete_procedure_prefix, $._no_error_terminator),
 
@@ -19,6 +24,4 @@ module.exports = ({ kw }) => ({
 
   __delete_widget_body: ($) =>
     seq(field("widget", $._expression), repeat(seq(",", field("widget", $._expression)))),
-
-  __delete_object_body: ($) => field("name", choice($.identifier, $.parenthesized_expression)),
 });
