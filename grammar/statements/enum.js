@@ -1,9 +1,9 @@
 module.exports = ({ kw }) => ({
   enum_statement: ($) => seq($.__enum_prefix, $._terminator),
 
-  __enum_prefix: ($) => seq(kw("ENUM"), $.__enum_body),
-  __enum_body: ($) =>
+  __enum_prefix: ($) =>
     seq(
+      kw("ENUM"),
       field("name", $.identifier),
       optional(alias(kw("FLAGS"), $.flags)),
       alias($._colon, ":"),
