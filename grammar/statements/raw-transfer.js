@@ -1,10 +1,9 @@
 module.exports = ({ kw }) => ({
   raw_transfer_statement: ($) => seq($.__raw_transfer_prefix, $._no_error_terminator),
 
-  __raw_transfer_prefix: ($) => seq(kw("RAW-TRANSFER"), $.__raw_transfer_body),
-
-  __raw_transfer_body: ($) =>
+  __raw_transfer_prefix: ($) =>
     seq(
+      kw("RAW-TRANSFER"),
       choice(
         // Case 1: source TO target (basic)
         seq(field("source_field", $.identifier), kw("TO"), field("target", $.identifier)),
