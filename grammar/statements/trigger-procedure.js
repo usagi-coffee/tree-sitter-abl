@@ -22,13 +22,14 @@ module.exports = ({ kw }) => ({
           kw("ASSIGN"),
           choice(
             seq(kw("OF"), field("object", $.qualified_name)),
-            seq($.__trigger_procedure_new_value, optional($.__trigger_procedure_old_value)),
+            seq(
+              seq(kw("NEW"), $.__trigger_procedure_value_body),
+              optional($.__trigger_procedure_old_value),
+            ),
           ),
         ),
       ),
     ),
-
-  __trigger_procedure_new_value: ($) => seq(kw("NEW"), $.__trigger_procedure_value_body),
 
   __trigger_procedure_old_value: ($) => seq(kw("OLD"), $.__trigger_procedure_value_body),
 
