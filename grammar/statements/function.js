@@ -1,10 +1,9 @@
 module.exports = ({ kw }) => ({
   function_definition: ($) => seq($.__function_prefix, $._terminator),
 
-  __function_prefix: ($) => seq(kw("FUNCTION"), $.__function_body),
-
-  __function_body: ($) =>
+  __function_prefix: ($) =>
     seq(
+      kw("FUNCTION"),
       field("name", $.identifier),
       kw("RETURNS", { offset: 5 }),
       optional(kw("CLASS")),
