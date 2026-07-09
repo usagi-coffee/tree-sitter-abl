@@ -24,14 +24,12 @@ module.exports = ({ kw }) => ({
             seq(kw("OF"), field("object", $.qualified_name)),
             seq(
               seq(kw("NEW"), $.__trigger_procedure_value_body),
-              optional($.__trigger_procedure_old_value),
+              optional(seq(kw("OLD"), $.__trigger_procedure_value_body)),
             ),
           ),
         ),
       ),
     ),
-
-  __trigger_procedure_old_value: ($) => seq(kw("OLD"), $.__trigger_procedure_value_body),
 
   __trigger_procedure_new_buffer: ($) =>
     seq(kw("NEW"), optional(kw("BUFFER")), field("new_buffer", $.identifier)),
