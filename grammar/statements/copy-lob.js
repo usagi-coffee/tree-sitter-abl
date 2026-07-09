@@ -1,9 +1,9 @@
 module.exports = ({ kw }) => ({
   copy_lob_statement: ($) => seq($.__copy_lob_prefix, $._no_error_terminator),
 
-  __copy_lob_prefix: ($) => seq(kw("COPY-LOB"), $.__copy_lob_body),
-  __copy_lob_body: ($) =>
+  __copy_lob_prefix: ($) =>
     seq(
+      kw("COPY-LOB"),
       optional(kw("FROM")),
       $.__copy_lob_source,
       optional(seq(kw("STARTING"), kw("AT"), field("starting_at", $._expression))),
