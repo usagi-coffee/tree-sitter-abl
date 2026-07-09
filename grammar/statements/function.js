@@ -30,12 +30,13 @@ module.exports = ({ kw }) => ({
 
   __function_forward_definition_prefix: ($) =>
     choice(
-      seq(kw("DEFINE", { offset: 3 }), kw("FUNCTION"), $.__function_forward_body),
+      seq(
+        kw("DEFINE", { offset: 3 }),
+        kw("FUNCTION"),
+        seq($.__function_forward_head, optional($.__function_forward_target)),
+      ),
       seq(kw("FUNCTION"), $.__function_forward_required_body),
     ),
-
-  __function_forward_body: ($) =>
-    seq($.__function_forward_head, optional($.__function_forward_target)),
 
   __function_forward_required_body: ($) =>
     seq($.__function_forward_head, $.__function_forward_target),
