@@ -131,7 +131,10 @@ module.exports = ({ kw }) => ({
     seq(
       $.__class_property_definition_prefix,
       repeat1(
-        choice(seq(kw("GET"), $.__class_property_accessor_tail), $.__class_property_set_phrase),
+        choice(
+          seq(kw("GET"), $.__class_property_accessor_tail),
+          seq(kw("SET"), optional($.property_set_parameter_list), $.__class_property_accessor_tail),
+        ),
       ),
     ),
 
@@ -154,8 +157,6 @@ module.exports = ({ kw }) => ({
       ),
     ),
 
-  __class_property_set_phrase: ($) =>
-    seq(kw("SET"), optional($.property_set_parameter_list), $.__class_property_accessor_tail),
   __class_property_accessor_body: ($) => seq(alias($._colon, ":"), repeat($._statement), kw("END")),
   __class_property_accessor_tail: ($) =>
     choice(
