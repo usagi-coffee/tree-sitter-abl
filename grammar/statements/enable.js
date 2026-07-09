@@ -1,9 +1,9 @@
 module.exports = ({ kw }) => ({
   enable_statement: ($) => seq($.__enable_prefix, $._terminator),
 
-  __enable_prefix: ($) => seq(kw("ENABLE"), $.__enable_body),
-  __enable_body: ($) =>
+  __enable_prefix: ($) =>
     seq(
+      kw("ENABLE"),
       optional(alias(kw("UNLESS-HIDDEN"), $.unless_hidden)),
       choice(
         seq(
