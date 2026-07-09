@@ -1,9 +1,9 @@
 module.exports = ({ kw }) => ({
   choose_statement: ($) => seq($.__choose_prefix, $._terminator),
 
-  __choose_prefix: ($) => seq(kw("CHOOSE"), $.__choose_body),
-  __choose_body: ($) =>
+  __choose_prefix: ($) =>
     seq(
+      kw("CHOOSE"),
       choice(
         seq(kw("ROW"), $.__choose_field_help),
         seq(kw("FIELD"), repeat1($.__choose_field_help)),
