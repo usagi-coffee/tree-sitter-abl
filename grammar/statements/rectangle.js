@@ -2,10 +2,9 @@ module.exports = ({ kw }) => ({
   rectangle_definition: ($) => seq($.__rectangle_prefix, $._terminator),
 
   __rectangle_prefix: ($) =>
-    seq($._define_private_prefix, kw("RECTANGLE", { offset: 4 }), $.__rectangle_body),
-
-  __rectangle_body: ($) =>
     seq(
+      $._define_private_prefix,
+      kw("RECTANGLE", { offset: 4 }),
       field("name", $.identifier),
       repeat(
         choice(
