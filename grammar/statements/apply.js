@@ -1,9 +1,9 @@
 module.exports = ({ kw }) => ({
   apply_statement: ($) => seq($.__apply_prefix, $._terminator),
 
-  __apply_prefix: ($) => seq(kw("APPLY"), $.__apply_body),
-  __apply_body: ($) =>
+  __apply_prefix: ($) =>
     seq(
+      kw("APPLY"),
       field("event", $._events),
       optional(
         seq(
