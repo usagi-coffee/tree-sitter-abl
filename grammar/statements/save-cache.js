@@ -1,10 +1,10 @@
 module.exports = ({ kw }) => ({
   save_cache_statement: ($) => seq($.__save_cache_prefix, $._no_error_terminator),
 
-  __save_cache_prefix: ($) => seq(kw("SAVE"), kw("CACHE"), $.__save_cache_body),
-
-  __save_cache_body: ($) =>
+  __save_cache_prefix: ($) =>
     seq(
+      kw("SAVE"),
+      kw("CACHE"),
       choice(kw("CURRENT"), kw("COMPLETE")),
       choice(field("database", $.identifier), field("database", $.__save_cache_value_expression)),
       kw("TO"),
