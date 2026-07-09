@@ -12,11 +12,11 @@
         "nodemon": "^3.1.14",
         "oxfmt": "^0.58.0",
         "prebuildify": "^6.0.1",
-        "tree-sitter": "^0.22.4",
+        "tree-sitter": "^0.25.0",
         "tree-sitter-cli": "^0.26.8",
       },
       "peerDependencies": {
-        "tree-sitter": "^0.22.4",
+        "tree-sitter": "^0.25.0",
       },
       "optionalPeers": [
         "tree-sitter",
@@ -168,7 +168,7 @@
 
     "touch": ["touch@3.1.1", "", { "bin": { "nodetouch": "bin/nodetouch.js" } }, "sha512-r0eojU4bI8MnHr8c5bNo7lJDdI2qXlWWJk6a9EAFG7vbhTjElYhBVS3/miuE0uOuoLdb8Mc/rVfsmm6eo5o9GA=="],
 
-    "tree-sitter": ["tree-sitter@0.22.4", "", { "dependencies": { "node-addon-api": "^8.3.0", "node-gyp-build": "^4.8.4" } }, "sha512-usbHZP9/oxNsUY65MQUsduGRqDHQOou1cagUSwjhoSYAmSahjQDAVsh9s+SlZkn8X8+O1FULRGwHu7AFP3kjzg=="],
+    "tree-sitter": ["tree-sitter@0.25.0", "", { "dependencies": { "node-addon-api": "^8.3.0", "node-gyp-build": "^4.8.4" } }, "sha512-PGZZzFW63eElZJDe/b/R/LbsjDDYJa5UEjLZJB59RQsMX+fo0j54fqBPn1MGKav/QNa0JR0zBiVaikYDWCj5KQ=="],
 
     "tree-sitter-cli": ["tree-sitter-cli@0.26.10", "", { "bin": { "tree-sitter": "cli.js" } }, "sha512-RTse32x5YWOrEtH7wos8ODt3yyB7SKgmGN70jC7R+WcnDA64vrpYU98+LnwrwdXMlxgr0LGQdezZz85DN8Wv0w=="],
 
@@ -177,7 +177,5 @@
     "util-deprecate": ["util-deprecate@1.0.2", "", {}, "sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw=="],
 
     "wrappy": ["wrappy@1.0.2", "", {}, "sha512-l4Sp/DRseor9wL6EvV2+TuQn63dMkPjZ/sp9XkghTEbV9KlPS1xUsZ3u7/IQO4wxtcFB4bgpQPRcR3QCvezPcQ=="],
-
-    "tree-sitter/node-addon-api": ["node-addon-api@8.5.0", "", {}, "sha512-/bRZty2mXUIFY/xU5HLvveNHlswNJej+RnxBjOMkidWfwZzgTbPG1E3K5TOxRLOR+5hX7bSofy8yf1hZevMS8A=="],
   }
 }
