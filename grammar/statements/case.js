@@ -1,9 +1,9 @@
 module.exports = ({ kw }) => ({
   case_statement: ($) => seq($.__case_prefix, $._terminator),
 
-  __case_prefix: ($) => seq(kw("CASE"), $.__case_body),
-  __case_body: ($) =>
+  __case_prefix: ($) =>
     seq(
+      kw("CASE"),
       optional($._expression),
       alias($._colon, ":"),
       repeat1($.case_when_phrase),
