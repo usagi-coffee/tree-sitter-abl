@@ -1,9 +1,9 @@
 module.exports = ({ kw }) => ({
   var_statement: ($) => seq($.__var_prefix, $._terminator),
 
-  __var_prefix: ($) => seq(kw("VAR"), $.__var_body),
-  __var_body: ($) =>
+  __var_prefix: ($) =>
     seq(
+      kw("VAR"),
       optional($.__var_modifier),
       $._var_type,
       alias($.__var_variable, $.variable),
