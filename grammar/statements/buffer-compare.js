@@ -1,10 +1,9 @@
 module.exports = ({ kw }) => ({
   buffer_compare_statement: ($) => seq($.__buffer_compare_prefix, $._no_error_terminator),
 
-  __buffer_compare_prefix: ($) => seq(kw("BUFFER-COMPARE"), $.__buffer_compare_body),
-
-  __buffer_compare_body: ($) =>
+  __buffer_compare_prefix: ($) =>
     seq(
+      kw("BUFFER-COMPARE"),
       field("source", $._expression),
       optional($.__buffer_compare_field_phrase),
       kw("TO"),
