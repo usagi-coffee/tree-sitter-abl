@@ -57,11 +57,7 @@ module.exports = ({ kw }) => ({
   __run_on_server: ($) => seq(kw("ON"), kw("SERVER"), field("server", $._expression)),
 
   __run_asynchronous: ($) =>
-    seq(
-      kw("ASYNCHRONOUS"),
-      optional($.__run_persistence_set_tail),
-      optional($.__run_event_choice),
-    ),
+    seq(kw("ASYNCHRONOUS"), optional($.__run_persistence_set_tail), optional($.__run_event_choice)),
   __run_event_choice: ($) =>
     choice(
       seq(kw("EVENT-PROCEDURE"), $.__run_event_procedure_tail),
