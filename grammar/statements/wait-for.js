@@ -1,9 +1,9 @@
 module.exports = ({ kw }) => ({
   wait_for_statement: ($) => seq($.__wait_for_prefix, $._terminator),
 
-  __wait_for_prefix: ($) => seq(kw("WAIT-FOR"), $.__wait_for_body),
-  __wait_for_body: ($) =>
+  __wait_for_prefix: ($) =>
     seq(
+      kw("WAIT-FOR"),
       alias($.__wait_for_of_phrase, $.of_phrase),
       repeat(seq(kw("OR"), alias($.__wait_for_of_phrase, $.of_phrase))),
       optional(alias($.__wait_for_focus_phrase, $.focus_phrase)),
