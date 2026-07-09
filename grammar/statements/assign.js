@@ -1,12 +1,14 @@
 module.exports = ({ kw }) => ({
   assign_statement: ($) => seq($.__assign_statement_prefix, $._no_error_terminator),
 
-  __assign_statement_prefix: ($) => seq(kw("ASSIGN"), $.__assign_statement_body),
-  __assign_statement_body: ($) =>
-    choice(
-      alias($.__assign_statement_phrase_body, $.assign_phrase),
-      $.__assign_record_body,
-      $.__assign_input_body,
+  __assign_statement_prefix: ($) =>
+    seq(
+      kw("ASSIGN"),
+      choice(
+        alias($.__assign_statement_phrase_body, $.assign_phrase),
+        $.__assign_record_body,
+        $.__assign_input_body,
+      ),
     ),
 
   __assign_statement_phrase_body: ($) =>
