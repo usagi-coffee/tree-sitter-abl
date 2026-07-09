@@ -1,10 +1,14 @@
 module.exports = ({ kw }) => ({
   clear_statement: ($) => seq($.__clear_prefix, $._terminator),
-  __clear_prefix: ($) => seq(kw("CLEAR"), optional($.__clear_tail)),
-  __clear_tail: ($) =>
-    choice(
-      seq($.__clear_frame, optional($.__clear_all_no_pause_tail)),
-      $.__clear_all_no_pause_tail,
+  __clear_prefix: ($) =>
+    seq(
+      kw("CLEAR"),
+      optional(
+        choice(
+          seq($.__clear_frame, optional($.__clear_all_no_pause_tail)),
+          $.__clear_all_no_pause_tail,
+        ),
+      ),
     ),
   __clear_all_no_pause_tail: ($) =>
     choice(
