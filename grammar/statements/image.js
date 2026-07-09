@@ -1,10 +1,10 @@
 module.exports = ({ kw }) => ({
   image_definition: ($) => seq($.__image_prefix, $._terminator),
 
-  __image_prefix: ($) => seq($._define_private_prefix, kw("IMAGE"), $.__image_body),
-
-  __image_body: ($) =>
+  __image_prefix: ($) =>
     seq(
+      $._define_private_prefix,
+      kw("IMAGE"),
       field("name", $.identifier),
       repeat1(choice($.image_phrase, seq(kw("LIKE"), field("like", $.identifier)), $.size_phrase)),
       optional($.__image_body_tail),
