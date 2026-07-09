@@ -1,9 +1,9 @@
 module.exports = ({ kw }) => ({
   compile_statement: ($) => seq($.__compile_prefix, $._no_error_terminator),
 
-  __compile_prefix: ($) => seq(kw("COMPILE"), $.__compile_body),
-  __compile_body: ($) =>
+  __compile_prefix: ($) =>
     seq(
+      kw("COMPILE"),
       field("file", $.__compile_file),
       repeat(
         choice(
