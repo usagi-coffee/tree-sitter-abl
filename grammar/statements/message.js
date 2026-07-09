@@ -1,17 +1,21 @@
 module.exports = ({ kw }) => ({
   message_statement: ($) => seq($.__message_prefix, $._terminator),
 
-  __message_prefix: ($) => seq(kw("MESSAGE"), optional($.__message_body)),
-  __message_body: ($) =>
+  __message_prefix: ($) =>
     seq(
+      kw("MESSAGE"),
       optional(
         seq(
-          kw("COLOR"),
-          field("color", choice(kw("NORMAL"), kw("INPUT"), kw("MESSAGES"), $.color_phrase)),
+          optional(
+            seq(
+              kw("COLOR"),
+              field("color", choice(kw("NORMAL"), kw("INPUT"), kw("MESSAGES"), $.color_phrase)),
+            ),
+          ),
+          repeat1($.__message_expression),
+          optional($.__message_body_tail),
         ),
       ),
-      repeat1($.__message_expression),
-      optional($.__message_body_tail),
     ),
   __message_body_tail: ($) =>
     choice(
