@@ -35,11 +35,8 @@ module.exports = ({ kw }) => ({
         kw("FUNCTION"),
         seq($.__function_forward_head, optional($.__function_forward_target)),
       ),
-      seq(kw("FUNCTION"), $.__function_forward_required_body),
+      seq(kw("FUNCTION"), seq($.__function_forward_head, $.__function_forward_target)),
     ),
-
-  __function_forward_required_body: ($) =>
-    seq($.__function_forward_head, $.__function_forward_target),
 
   __function_forward_head: ($) =>
     seq(
