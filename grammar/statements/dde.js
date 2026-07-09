@@ -1,9 +1,9 @@
 module.exports = ({ kw }) => ({
   dde_statement: ($) => seq($.__dde_prefix, $._no_error_terminator),
 
-  __dde_prefix: ($) => seq(kw("DDE"), $.__dde_body),
-  __dde_body: ($) =>
+  __dde_prefix: ($) =>
     seq(
+      kw("DDE"),
       choice(
         $.__dde_advise_or_send_branch,
         $.__dde_execute_or_terminate_branch,
