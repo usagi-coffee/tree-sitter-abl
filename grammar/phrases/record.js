@@ -21,17 +21,15 @@ module.exports = ({ kw }) => ({
         seq(kw("USE-INDEX"), field("index", $._identifier_or_qualified_name)),
         alias(kw("TABLE-SCAN"), $.table_scan),
       ),
-      $.__record_using_phrase,
+      seq(
+        kw("USING"),
+        field("field", $.__record_using_field),
+        repeat(seq(kw("AND"), field("field", $.__record_using_field))),
+      ),
       $._lock_option,
       alias(kw("NO-PREFETCH"), $.no_prefetch),
     ),
 
-  __record_using_phrase: ($) =>
-    seq(
-      kw("USING"),
-      field("field", $.__record_using_field),
-      repeat(seq(kw("AND"), field("field", $.__record_using_field))),
-    ),
   __record_using_field: ($) =>
     seq(
       optional(seq(kw("FRAME"), field("frame", $.identifier))),
