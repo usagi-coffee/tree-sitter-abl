@@ -27,14 +27,12 @@ module.exports = ({ kw }) => ({
       seq(
         kw("MENU-ITEM"),
         field("item", $._identifier_or_qualified_name),
-        optional($.__widget_in_menu),
+        optional(seq(kw("IN"), kw("MENU"), field("menu", $.identifier))),
       ),
       field("system_handle", alias($.__widget_system_handle, $.system_handle)),
     ),
 
   __widget_menu: ($) => seq(choice(kw("MENU"), kw("SUB-MENU")), field("menu", $.identifier)),
-
-  __widget_in_menu: ($) => seq(kw("IN"), kw("MENU"), field("menu", $.identifier)),
 
   __widget_system_handle: ($) =>
     choice(
