@@ -290,29 +290,49 @@ module.exports = ({ kw }) => ({
         kw("TABLE"),
         optional(field("for", kw("FOR"))),
         field("table", $._identifier_or_qualified_name),
-        repeat(choice(alias(kw("APPEND"), $.append), $.__class_method_handle_parameter_option)),
+        repeat(
+          choice(
+            alias(kw("APPEND"), $.append),
+            alias(kw("BIND"), $.bind),
+            alias(kw("BY-VALUE"), $.by_value),
+            alias(kw("BY-REFERENCE"), $.by_reference),
+          ),
+        ),
       ),
       seq(
         kw("TABLE-HANDLE"),
         field("table_handle", $.identifier),
-        repeat($.__class_method_handle_parameter_option),
+        repeat(
+          choice(
+            alias(kw("BIND"), $.bind),
+            alias(kw("BY-VALUE"), $.by_value),
+            alias(kw("BY-REFERENCE"), $.by_reference),
+          ),
+        ),
       ),
       seq(
         kw("DATASET"),
         optional(field("for", kw("FOR"))),
         field("dataset", $._identifier_or_qualified_name),
-        repeat(choice(alias(kw("APPEND"), $.append), $.__class_method_handle_parameter_option)),
+        repeat(
+          choice(
+            alias(kw("APPEND"), $.append),
+            alias(kw("BIND"), $.bind),
+            alias(kw("BY-VALUE"), $.by_value),
+            alias(kw("BY-REFERENCE"), $.by_reference),
+          ),
+        ),
       ),
       seq(
         kw("DATASET-HANDLE"),
         field("dataset_handle", $.identifier),
-        repeat($.__class_method_handle_parameter_option),
+        repeat(
+          choice(
+            alias(kw("BIND"), $.bind),
+            alias(kw("BY-VALUE"), $.by_value),
+            alias(kw("BY-REFERENCE"), $.by_reference),
+          ),
+        ),
       ),
-    ),
-  __class_method_handle_parameter_option: ($) =>
-    choice(
-      alias(kw("BIND"), $.bind),
-      alias(kw("BY-VALUE"), $.by_value),
-      alias(kw("BY-REFERENCE"), $.by_reference),
     ),
 });
