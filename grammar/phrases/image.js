@@ -3,17 +3,17 @@ module.exports = ({ kw }) => ({
     seq(
       kw("FILE"),
       field("file", $._expression),
-      optional($.__image_size_phrase),
+      optional(
+        seq(
+          choice(kw("IMAGE-SIZE"), kw("IMAGE-SIZE-CHARS"), kw("IMAGE-SIZE-PIXELS")),
+          field("width", $.number_literal),
+          kw("BY"),
+          field("height", $.number_literal),
+        ),
+      ),
       optional($.__image_from_phrase),
     ),
 
-  __image_size_phrase: ($) =>
-    seq(
-      choice(kw("IMAGE-SIZE"), kw("IMAGE-SIZE-CHARS"), kw("IMAGE-SIZE-PIXELS")),
-      field("width", $.number_literal),
-      kw("BY"),
-      field("height", $.number_literal),
-    ),
   __image_from_phrase: ($) =>
     seq(
       kw("FROM"),
