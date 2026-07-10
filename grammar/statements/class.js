@@ -286,16 +286,15 @@ module.exports = ({ kw }) => ({
         kw("FOR"),
         field("table", $._identifier_or_qualified_name),
       ),
-      seq(kw("TABLE"), $.__class_method_table_parameter_tail),
+      seq(
+        kw("TABLE"),
+        optional(field("for", kw("FOR"))),
+        field("table", $._identifier_or_qualified_name),
+        repeat($.__class_method_table_parameter_option),
+      ),
       seq(kw("TABLE-HANDLE"), $.__class_method_table_handle_parameter_tail),
       seq(kw("DATASET"), $.__class_method_dataset_parameter_tail),
       seq(kw("DATASET-HANDLE"), $.__class_method_dataset_handle_parameter_tail),
-    ),
-  __class_method_table_parameter_tail: ($) =>
-    seq(
-      optional(field("for", kw("FOR"))),
-      field("table", $._identifier_or_qualified_name),
-      repeat($.__class_method_table_parameter_option),
     ),
   __class_method_dataset_parameter_tail: ($) =>
     seq(
