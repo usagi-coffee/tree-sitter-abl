@@ -4,7 +4,11 @@ module.exports = ({ kw }) => ({
   __update_prefix: ($) => seq(kw("UPDATE"), choice($.__update_record_body, $.__update_fields_body)),
 
   __update_record_body: ($) =>
-    seq(field("record", $.__update_record), optional($._except_fields), optional($.frame_phrase)),
+    seq(
+      field("record", $._identifier_or_qualified_name),
+      optional($._except_fields),
+      optional($.frame_phrase),
+    ),
 
   __update_fields_body: ($) =>
     seq(
@@ -16,6 +20,7 @@ module.exports = ({ kw }) => ({
       optional($.editing_phrase),
     ),
 
+  __update_record: ($) => $._identifier_or_qualified_name,
   __update_field: ($) =>
     choice(
       alias($._skip_phrase, $.skip_phrase),
@@ -35,7 +40,6 @@ module.exports = ({ kw }) => ({
       "^",
     ),
 
-  __update_record: ($) => $._identifier_or_qualified_name,
   __update_field_target_item: ($) =>
     seq(field("field", $.__update_field_target), optional($.format_phrase)),
   __update_field_target: ($) => choice(prec(1, $._identifier_or_qualified_name), $.array_access),
