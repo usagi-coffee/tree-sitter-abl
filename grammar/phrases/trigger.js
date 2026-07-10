@@ -19,7 +19,13 @@ module.exports = ({ kw }) => ({
   __trigger_body_tail: ($) =>
     choice(
       seq(
-        $.__trigger_loop_phrase,
+        seq(
+          field("variable", $.identifier),
+          "=",
+          field("start", $._expression),
+          kw("TO"),
+          field("end", $._expression),
+        ),
         optional(
           choice(
             seq($.__trigger_down_phrase, ":", repeat($._statement), kw("END"), "."),
@@ -29,14 +35,6 @@ module.exports = ({ kw }) => ({
       ),
       seq($.__trigger_down_phrase, ":", repeat($._statement), kw("END"), "."),
       seq(":", repeat($._statement), kw("END"), "."),
-    ),
-  __trigger_loop_phrase: ($) =>
-    seq(
-      field("variable", $.identifier),
-      "=",
-      field("start", $._expression),
-      kw("TO"),
-      field("end", $._expression),
     ),
   __trigger_down_phrase: ($) =>
     seq(kw("DOWN"), optional(kw("TO")), optional(field("down", $._expression))),
