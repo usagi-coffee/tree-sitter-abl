@@ -303,10 +303,12 @@ module.exports = ({ kw }) => ({
         field("dataset", $._identifier_or_qualified_name),
         repeat($.__class_method_table_parameter_option),
       ),
-      seq(kw("DATASET-HANDLE"), $.__class_method_dataset_handle_parameter_tail),
+      seq(
+        kw("DATASET-HANDLE"),
+        field("dataset_handle", $.identifier),
+        repeat($.__class_method_handle_parameter_option),
+      ),
     ),
-  __class_method_dataset_handle_parameter_tail: ($) =>
-    seq(field("dataset_handle", $.identifier), repeat($.__class_method_handle_parameter_option)),
   __class_method_table_parameter_option: ($) =>
     choice(alias(kw("APPEND"), $.append), $.__class_method_handle_parameter_option),
   __class_method_handle_parameter_option: ($) =>
