@@ -15,10 +15,11 @@ module.exports = ({ kw }) => ({
         $.selection_list_phrase,
         $.slider_phrase,
         seq(field("widget", kw("TEXT")), optional($.size_phrase), optional($._tooltip_phrase)),
-        $.__view_as_toggle_box,
+        seq(
+          field("widget", kw("TOGGLE-BOX")),
+          optional($.size_phrase),
+          optional($._tooltip_phrase),
+        ),
       ),
     ),
-
-  __view_as_toggle_box: ($) =>
-    seq(field("widget", kw("TOGGLE-BOX")), optional($.size_phrase), optional($._tooltip_phrase)),
 });
