@@ -280,14 +280,17 @@ module.exports = ({ kw }) => ({
     ),
   __class_method_table_parameter: ($) =>
     choice(
-      seq(kw("BUFFER"), $.__class_method_buffer_parameter_tail),
+      seq(
+        kw("BUFFER"),
+        field("buffer", $.identifier),
+        kw("FOR"),
+        field("table", $._identifier_or_qualified_name),
+      ),
       seq(kw("TABLE"), $.__class_method_table_parameter_tail),
       seq(kw("TABLE-HANDLE"), $.__class_method_table_handle_parameter_tail),
       seq(kw("DATASET"), $.__class_method_dataset_parameter_tail),
       seq(kw("DATASET-HANDLE"), $.__class_method_dataset_handle_parameter_tail),
     ),
-  __class_method_buffer_parameter_tail: ($) =>
-    seq(field("buffer", $.identifier), kw("FOR"), field("table", $._identifier_or_qualified_name)),
   __class_method_table_parameter_tail: ($) =>
     seq(
       optional(field("for", kw("FOR"))),
