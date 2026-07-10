@@ -5,7 +5,12 @@ module.exports = ({ kw }) => ({
       choice(
         $.combo_box_phrase,
         $.editor_phrase,
-        $.__view_as_fill_in,
+        seq(
+          field("widget", kw("FILL-IN")),
+          optional(kw("NATIVE")),
+          optional($.size_phrase),
+          optional($._tooltip_phrase),
+        ),
         $.radio_set_phrase,
         $.selection_list_phrase,
         $.slider_phrase,
@@ -14,13 +19,6 @@ module.exports = ({ kw }) => ({
       ),
     ),
 
-  __view_as_fill_in: ($) =>
-    seq(
-      field("widget", kw("FILL-IN")),
-      optional(kw("NATIVE")),
-      optional($.size_phrase),
-      optional($._tooltip_phrase),
-    ),
   __view_as_text: ($) =>
     seq(field("widget", kw("TEXT")), optional($.size_phrase), optional($._tooltip_phrase)),
   __view_as_toggle_box: ($) =>
