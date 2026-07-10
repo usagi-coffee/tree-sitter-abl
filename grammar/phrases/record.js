@@ -9,7 +9,7 @@ module.exports = ({ kw }) => ({
 
   __record_option: ($) =>
     choice(
-      $.__record_outer_join,
+      seq(optional(kw("LEFT")), kw("OUTER-JOIN")),
       seq(kw("OF"), field("of", $._identifier_or_qualified_name)),
       prec.right(seq(kw("WHERE"), field("where", optional($._expression)))),
       seq(
@@ -23,7 +23,6 @@ module.exports = ({ kw }) => ({
       alias(kw("NO-PREFETCH"), $.no_prefetch),
     ),
 
-  __record_outer_join: ($) => seq(optional(kw("LEFT")), kw("OUTER-JOIN")),
   __record_use_index: ($) =>
     choice(
       seq(kw("USE-INDEX"), field("index", $._identifier_or_qualified_name)),
