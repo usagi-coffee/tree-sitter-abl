@@ -290,7 +290,7 @@ module.exports = ({ kw }) => ({
         kw("TABLE"),
         optional(field("for", kw("FOR"))),
         field("table", $._identifier_or_qualified_name),
-        repeat($.__class_method_table_parameter_option),
+        repeat(choice(alias(kw("APPEND"), $.append), $.__class_method_handle_parameter_option)),
       ),
       seq(
         kw("TABLE-HANDLE"),
@@ -301,7 +301,7 @@ module.exports = ({ kw }) => ({
         kw("DATASET"),
         optional(field("for", kw("FOR"))),
         field("dataset", $._identifier_or_qualified_name),
-        repeat($.__class_method_table_parameter_option),
+        repeat(choice(alias(kw("APPEND"), $.append), $.__class_method_handle_parameter_option)),
       ),
       seq(
         kw("DATASET-HANDLE"),
@@ -309,8 +309,6 @@ module.exports = ({ kw }) => ({
         repeat($.__class_method_handle_parameter_option),
       ),
     ),
-  __class_method_table_parameter_option: ($) =>
-    choice(alias(kw("APPEND"), $.append), $.__class_method_handle_parameter_option),
   __class_method_handle_parameter_option: ($) =>
     choice(
       alias(kw("BIND"), $.bind),
