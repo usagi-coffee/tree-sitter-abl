@@ -84,9 +84,11 @@ module.exports = ({ kw }) => ({
   __frame_expression: ($) => $._expression,
   __frame_down_value: ($) => seq(field("value", $.__frame_expression), kw("DOWN")),
   __frame_down_count: ($) =>
-    prec.right(1, seq(kw("DOWN"), field("count", $.__frame_down_expression))),
+    prec.right(
+      1,
+      seq(kw("DOWN"), field("count", choice($.number_literal, $.parenthesized_expression))),
+    ),
   __frame_down_plain: ($) => prec(-1, seq(kw("DOWN"))),
-  __frame_down_expression: ($) => choice($.number_literal, $.parenthesized_expression),
   __frame_color_value: ($) => choice(kw("NORMAL"), kw("INPUT"), kw("MESSAGES"), $.color_phrase),
 
   __frame_with_identifier: ($) =>
