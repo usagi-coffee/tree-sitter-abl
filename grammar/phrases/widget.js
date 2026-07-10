@@ -5,7 +5,7 @@ module.exports = ({ kw }) => ({
       $.__widget_browse,
       $.__widget_handle,
       $.__widget_entry,
-      $.__widget_menu,
+      seq(choice(kw("MENU"), kw("SUB-MENU")), field("menu", $.identifier)),
     ),
 
   __widget_frame: ($) => seq(kw("FRAME"), field("frame", $.identifier)),
@@ -31,8 +31,6 @@ module.exports = ({ kw }) => ({
       ),
       field("system_handle", alias($.__widget_system_handle, $.system_handle)),
     ),
-
-  __widget_menu: ($) => seq(choice(kw("MENU"), kw("SUB-MENU")), field("menu", $.identifier)),
 
   __widget_system_handle: ($) =>
     choice(
