@@ -383,8 +383,9 @@ module.exports = grammar({
       unary_expression: ($) =>
         choice(
           prec("unary", seq(choice("+", "-"), $._expression)),
-          prec("not", seq(kw("NOT"), $._expression)),
+          prec("not", seq($._not_keyword, $._expression)),
         ),
+      _not_keyword: ($) => kw("NOT"),
       binary_expression: ($) => binary_expression($, $._expression, $._comparison_operator),
 
       // _statement_expression excludes `=` from comparison operators to disambiguate

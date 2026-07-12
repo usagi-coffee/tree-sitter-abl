@@ -4,5 +4,5 @@ module.exports = ({ kw }) => ({
       prec.right(-2, seq(field("field", $.identifier), $.__entered_operator)),
       prec.right(-2, seq($.__entered_operator, field("field", $.identifier))),
     ),
-  __entered_operator: ($) => seq(optional(alias(kw("NOT"), $.not)), kw("ENTERED")),
+  __entered_operator: ($) => seq(optional(alias($._not_keyword, $.not)), kw("ENTERED")),
 });
