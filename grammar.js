@@ -404,10 +404,9 @@ module.exports = grammar({
 
       // Accessors
       _object_access_plain: ($) =>
-        seq(
-          field("left", choice($._identifier_or_qualified_name, $.system_handle_identifier)),
-          $._object_access_tail,
-        ),
+        seq(field("left", $._object_access_plain_left), $._object_access_tail),
+      _object_access_plain_left: ($) =>
+        choice($._identifier_or_qualified_name, $.system_handle_identifier),
       _object_access_widget: ($) =>
         seq(
           field("widget", alias($._widgets, $.identifier)),
