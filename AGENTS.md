@@ -54,7 +54,7 @@ Strongly prefer using these commands as they have helpful side-effects like retu
 
 ### Commiting 
 
-Always place parser count deltas at the end of the commit description using this template if the delats are non-zero.
+Always place parser count deltas at the end of the commit description using this template.
 
 ```
 ACTION_COUNT: <before> -> <after> (<delta>)
