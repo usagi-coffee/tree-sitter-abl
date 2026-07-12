@@ -169,6 +169,50 @@ IF LOCKED bufOrder THEN RETURN TRUE.
       value: (boolean_literal))))
 
 ================================================================================
+IF - CAN-FIND ordered options
+================================================================================
+
+IF CAN-FIND(Customer OF Parent USING idx AND FRAME fr field WHERE Customer.id = 1 NO-LOCK USE-INDEX idx) THEN DISPLAY x.
+IF CAN-FIND(Customer NO-LOCK WHERE Customer.id = 1 USE-INDEX idx) THEN DISPLAY x.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (if_statement
+    (can_find_expression
+      table: (identifier)
+      (of_phrase
+        record: (identifier))
+      (using_phrase
+        index: (identifier))
+      (frame_phrase
+        frame: (identifier)
+        field: (identifier))
+      (where_phrase
+        (binary_expression
+          (qualified_name
+            left: (identifier)
+            right: (identifier))
+          (number_literal)))
+      (no_lock)
+      index: (identifier))
+    then: (display_statement
+      record: (identifier)))
+  (if_statement
+    (can_find_expression
+      table: (identifier)
+      (no_lock)
+      (where_phrase
+        (binary_expression
+          (qualified_name
+            left: (identifier)
+            right: (identifier))
+          (number_literal)))
+      index: (identifier))
+    then: (display_statement
+      record: (identifier))))
+
+================================================================================
 IF - Inline THEN/ELSE
 ================================================================================
 
