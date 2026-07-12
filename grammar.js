@@ -221,8 +221,7 @@ module.exports = grammar({
           token(/&IF/i),
           $.__if_preprocessor_condition_then,
           field("then_branch", repeat1(field("value", $.__if_preprocessor_branch_value))),
-          repeat(field("elseif_branch", $.__if_preprocessor_elseif_branch)),
-          optional(field("else_branch", $.__if_preprocessor_else_branch)),
+          optional($.__if_preprocessor_branches),
           token(/&ENDIF/i),
         ),
       if_preprocessor_directive_statement: ($) =>
@@ -245,6 +244,14 @@ module.exports = grammar({
           token(/&ELSEIF/i),
           $.__if_preprocessor_condition_then,
           field("then_branch", repeat1(field("value", $.__if_preprocessor_branch_value))),
+        ),
+      __if_preprocessor_branches: ($) =>
+        choice(
+          seq(
+            field("elseif_branch", $.__if_preprocessor_elseif_branch),
+            optional($.__if_preprocessor_branches),
+          ),
+          field("else_branch", $.__if_preprocessor_else_branch),
         ),
       __if_preprocessor_condition_then: ($) =>
         seq(field("condition", $._expression), token(/&THEN/i)),
