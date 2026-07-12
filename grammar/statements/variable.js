@@ -31,10 +31,7 @@ module.exports = ({ kw }) => ({
           alias(kw("DROP-TARGET"), $.drop_target),
           seq(kw("LABEL"), field("label", $._format_labels)),
           seq(kw("MOUSE-POINTER"), field("mouse_pointer", $._expression)),
-          seq(
-            kw("INITIAL", { offset: 4 }),
-            field("initial", choice($._expression, seq("[", optional($._expressions), "]"))),
-          ),
+          seq(kw("INITIAL", { offset: 4 }), field("initial", $._initial_value)),
           $.view_as_phrase,
           alias(seq(optional(kw("NOT")), kw("CASE-SENSITIVE")), $.case_sensitive),
           alias(kw("NO-UNDO"), $.no_undo),

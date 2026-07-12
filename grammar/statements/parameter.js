@@ -23,10 +23,7 @@ module.exports = ({ kw }) => ({
           $._format_string,
           seq(kw("COLUMN-LABEL"), field("column_label", $.string_literal)),
           seq(kw("DECIMALS"), field("decimals", $.number_literal)),
-          seq(
-            kw("INITIAL"),
-            field("initial", choice($._expression, seq("[", optional($._expressions), "]"))),
-          ),
+          seq(kw("INITIAL"), field("initial", $._initial_value)),
           seq(
             kw("LABEL"),
             field("label", $.string_literal),
