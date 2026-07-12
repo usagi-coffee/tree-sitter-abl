@@ -5,16 +5,46 @@ module.exports = ({ kw }) => ({
     seq(
       kw("DEFINE", { offset: 3 }),
       choice(
-        $.__parameter_standard_parameter,
-        $.__parameter_table_parameter,
+        seq(
+          field("direction", kw("RETURN")),
+          kw("PARAMETER", { offset: 5 }),
+          $.__parameter_standard_body,
+        ),
+        seq(
+          field("direction", $._parameter_direction),
+          kw("PARAMETER", { offset: 5 }),
+          choice(
+            $.__parameter_standard_body,
+            seq(
+              kw("TABLE"),
+              kw("FOR"),
+              field("table", $._identifier_or_qualified_name),
+              repeat($.__parameter_table_parameter_option),
+            ),
+            seq(
+              kw("TABLE-HANDLE"),
+              field("table_handle", $.identifier),
+              repeat($.__parameter_handle_parameter_option),
+            ),
+            seq(
+              kw("DATASET"),
+              kw("FOR"),
+              field("dataset", $._identifier_or_qualified_name),
+              repeat($.__parameter_table_parameter_option),
+            ),
+            seq(
+              kw("DATASET-HANDLE"),
+              field("dataset_handle", $.identifier),
+              repeat($.__parameter_handle_parameter_option),
+            ),
+          ),
+        ),
         $.__parameter_buffer_parameter,
       ),
     ),
 
-  __parameter_standard_parameter: ($) =>
+  __parameter_standard_body: ($) =>
     seq(
-      field("direction", choice(kw("INPUT"), kw("OUTPUT"), kw("INPUT-OUTPUT"), kw("RETURN"))),
-      kw("PARAMETER", { offset: 5 }),
       field("name", $.identifier),
       $.__parameter_variable_type_phrase,
       repeat(
@@ -30,36 +60,6 @@ module.exports = ({ kw }) => ({
             repeat(seq(",", field("label", $.string_literal))),
           ),
           alias(kw("NO-UNDO"), $.no_undo),
-        ),
-      ),
-    ),
-
-  __parameter_table_parameter: ($) =>
-    seq(
-      field("direction", choice(kw("INPUT"), kw("OUTPUT"), kw("INPUT-OUTPUT"))),
-      kw("PARAMETER", { offset: 5 }),
-      choice(
-        seq(
-          kw("TABLE"),
-          kw("FOR"),
-          field("table", $._identifier_or_qualified_name),
-          repeat($.__parameter_table_parameter_option),
-        ),
-        seq(
-          kw("TABLE-HANDLE"),
-          field("table_handle", $.identifier),
-          repeat($.__parameter_handle_parameter_option),
-        ),
-        seq(
-          kw("DATASET"),
-          kw("FOR"),
-          field("dataset", $._identifier_or_qualified_name),
-          repeat($.__parameter_table_parameter_option),
-        ),
-        seq(
-          kw("DATASET-HANDLE"),
-          field("dataset_handle", $.identifier),
-          repeat($.__parameter_handle_parameter_option),
         ),
       ),
     ),

@@ -137,6 +137,7 @@ module.exports = grammar({
     $.__assign_record_name,
     $.__temp_table_like_name,
     $._identifier_or_array_access,
+    $._parameter_direction,
     $.system_handle_identifier,
   ],
 

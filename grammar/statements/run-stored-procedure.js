@@ -29,7 +29,7 @@ module.exports = ({ kw }) => ({
 
   __run_stored_procedure_param: ($) =>
     seq(
-      optional(field("direction", choice(kw("INPUT"), kw("OUTPUT"), kw("INPUT-OUTPUT")))),
+      optional(field("direction", $._parameter_direction)),
       optional(seq(kw("PARAM"), field("name", $.identifier), "=")),
       field("value", $._expression),
     ),

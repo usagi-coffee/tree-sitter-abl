@@ -20,7 +20,7 @@ module.exports = ({ kw }) => ({
 
   __event_parameter: ($) =>
     seq(
-      optional(field("direction", choice(kw("INPUT"), kw("OUTPUT"), kw("INPUT-OUTPUT")))),
+      optional(field("direction", $._parameter_direction)),
       field("name", $.identifier),
       kw("AS"),
       optional(kw("CLASS")),
