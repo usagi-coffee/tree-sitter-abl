@@ -430,11 +430,10 @@ module.exports = grammar({
           $._object_access_widget,
           $._object_access_handle,
           $._object_access_plain,
-          seq(
-            field("left", choice($.function_call, $.parenthesized_expression, $.new_expression)),
-            $._object_access_tail,
-          ),
+          seq(field("left", $._object_access_expression_left), $._object_access_tail),
         ),
+      _object_access_expression_left: ($) =>
+        choice($.function_call, $.parenthesized_expression, $.new_expression),
 
       scoped_name: ($) =>
         seq(
@@ -540,10 +539,11 @@ module.exports = grammar({
       _object_access_tail: ($) =>
         repeat1(
           seq(
-            choice($._namecolon, token.immediate("?:")),
+            $._object_access_separator,
             field("right", alias($._identifier_immediate, $.identifier)),
           ),
         ),
+      _object_access_separator: ($) => choice($._namecolon, token.immediate("?:")),
       _identifier_or_string_literal: ($) => choice($.identifier, $.string_literal),
       _value_expression: ($) =>
         seq($.__value_expression_prefix, "(", field("value", $._expression), ")"),
