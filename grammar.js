@@ -493,6 +493,10 @@ module.exports = grammar({
       argument: ($) =>
         seq(
           optional(prec.dynamic(1, field("direction", $._parameter_direction))),
+          $.__argument_body,
+        ),
+      __argument_body: ($) =>
+        seq(
           choice(
             seq(
               choice(kw("TABLE"), kw("BUFFER"), kw("TABLE-HANDLE"), kw("DATASET-HANDLE")),
