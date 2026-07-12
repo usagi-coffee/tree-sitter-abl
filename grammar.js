@@ -98,6 +98,8 @@ module.exports = grammar({
     [$.__disable_item, $.function_call],
     // DISPLAY field (TOTAL): field expr vs binary_expression that continues after field
     [$.__display_aggregate_primary_expression, $.binary_expression],
+    // BUTTON in alert-box phrase vs DEFINE BUTTON keyword
+    [$.__view_as_alert_box],
     // DISPLAY x IN WINDOW w ; DISPLAY x IN FRAME y - both can work
     [$.__display_record, $.widget_qualified_name, $._primary_expression],
     // Field / Column / Handle can be just an identifier

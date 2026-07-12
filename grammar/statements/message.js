@@ -32,32 +32,7 @@ module.exports = ({ kw }) => ({
     choice($._expression, alias($.__message_skip_item, $.skip), alias(kw("MENU"), $.identifier)),
 
   __message_view_as_phrase: ($) =>
-    seq(
-      kw("VIEW-AS"),
-      kw("ALERT-BOX"),
-      optional(alias($.__message_alert_type, $.alert_type)),
-      optional($.__message_buttons_phrase),
-      optional(seq(kw("TITLE"), field("title", $.string_literal))),
-    ),
-
-  __message_alert_type: ($) =>
-    choice(
-      kw("MESSAGE"),
-      kw("QUESTION"),
-      kw("INFORMATION"),
-      kw("INFO"),
-      kw("ERROR"),
-      kw("WARNING"),
-    ),
-
-  __message_buttons_phrase: ($) =>
-    seq(
-      kw("BUTTONS", { alias: "BUTTON", offset: 6 }),
-      field(
-        "buttons",
-        choice(kw("YES-NO"), kw("YES-NO-CANCEL"), kw("OK-CANCEL"), kw("RETRY-CANCEL"), kw("OK")),
-      ),
-    ),
+    seq(kw("VIEW-AS"), kw("ALERT-BOX"), optional($._alert_box_options)),
 
   __message_skip_item: ($) =>
     prec.right(choice(seq(kw("SKIP"), "(", field("count", $._expression), ")"), kw("SKIP"))),

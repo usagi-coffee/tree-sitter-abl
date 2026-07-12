@@ -238,6 +238,33 @@ module.exports = ({ kw }) => ({
   _initial_value: ($) => choice($._expression, seq("[", optional($._expressions), "]")),
   _parameter_direction: ($) => choice(kw("INPUT"), kw("OUTPUT"), kw("INPUT-OUTPUT")),
 
+  _alert_box_options: ($) =>
+    choice(
+      seq(alias($._alert_type, $.alert_type), optional($._alert_box_after_type)),
+      seq($._alert_buttons_phrase, optional($._alert_box_title)),
+      $._alert_box_title,
+    ),
+  _alert_box_after_type: ($) =>
+    choice(seq($._alert_buttons_phrase, optional($._alert_box_title)), $._alert_box_title),
+  _alert_box_title: ($) => seq(kw("TITLE"), field("title", $.string_literal)),
+  _alert_type: ($) =>
+    choice(
+      kw("MESSAGE"),
+      kw("QUESTION"),
+      kw("INFORMATION"),
+      kw("INFO"),
+      kw("ERROR"),
+      kw("WARNING"),
+    ),
+  _alert_buttons_phrase: ($) =>
+    seq(
+      kw("BUTTONS", { alias: "BUTTON", offset: 6 }),
+      field(
+        "buttons",
+        choice(kw("YES-NO"), kw("YES-NO-CANCEL"), kw("OK-CANCEL"), kw("RETRY-CANCEL"), kw("OK")),
+      ),
+    ),
+
   _format_string: ($) => seq(kw("FORMAT", { offset: 4 }), field("format", $.string_literal)),
   _tooltip_phrase: ($) => seq(kw("TOOLTIP"), field("tooltip", $._expression)),
   _lock_option: ($) =>

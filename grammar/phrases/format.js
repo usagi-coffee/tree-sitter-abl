@@ -142,6 +142,11 @@ module.exports = ({ kw }) => ({
   _format_view_as: ($) =>
     seq(
       kw("VIEW-AS"),
-      choice(kw("TEXT"), kw("TOGGLE-BOX"), alias($.__format_editor_phrase, $.editor_phrase)),
+      choice(
+        kw("TEXT"),
+        kw("TOGGLE-BOX"),
+        alias($.__format_editor_phrase, $.editor_phrase),
+        alias($.__view_as_alert_box, $.view_as_phrase),
+      ),
     ),
 });

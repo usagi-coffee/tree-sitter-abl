@@ -22,4 +22,5 @@ module.exports = ({ kw }) => ({
         ),
       ),
     ),
+  __view_as_alert_box: ($) => seq(field("widget", kw("ALERT-BOX")), optional($._alert_box_options)),
 });
