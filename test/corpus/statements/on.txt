@@ -477,6 +477,8 @@ ON - Branch: UI-event key-label + key-function
 
 ON TAB TAB.
 ON TAB ENDKEY.
+ON TAB OF input-field DO:
+END.
 
 --------------------------------------------------------------------------------
 
@@ -486,4 +488,11 @@ ON TAB ENDKEY.
     function: (key_function))
   (on_statement
     event: (identifier)
-    function: (key_function)))
+    function: (key_function))
+  (on_statement
+    event: (identifier)
+    (of_phrase
+      widget: (widget_phrase
+        handle: (identifier)))
+    (do_statement
+      (body))))
