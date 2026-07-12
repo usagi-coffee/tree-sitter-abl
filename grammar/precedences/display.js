@@ -21,6 +21,10 @@ module.exports = ($) => [
   // Purpose: prefer field interpretation over record.
   // Example: DISPLAY Customer.Name IN WINDOW hWin WITH FRAME f1.
   [$.__display_field, $.__display_record],
+  // Purpose: prefer widget-qualified syntax over a bare display record when IN follows.
+  // Example: DISPLAY Customer.Name IN FRAME f.
+  // Reference: DISPLAY statement widget-qualified field.
+  [$.widget_qualified_name, $.__display_record],
   // Purpose: prefer item SKIP over frame SKIP.
   // Example: DISPLAY out-param LABEL "Updated YTD Sales" SKIP new-param.
   [$.__display_skip_phrase, $.__frame_skip_phrase],
