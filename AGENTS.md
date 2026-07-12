@@ -63,7 +63,7 @@ ACTION_COUNT: <before> -> <after> (<delta>)
 STATE_COUNT: <before> -> <after> (<delta>)
 LARGE_STATE_COUNT: <before> -> <after> (<delta>)
 PARSER_C_SIZE_BYTES: <before> -> <after> (<delta>)
-PARSER_SPEED_BYTES_MS: <before> -> <after> (<delta>)
+PARSER_SPEED_BYTES_MS: <speed>
 ```
 
 ## Conventions
