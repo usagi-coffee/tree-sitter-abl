@@ -131,8 +131,6 @@ module.exports = grammar({
     [$.__class_property_class_modifier, $.__event_type_modifier, $.__variable_modifier],
     // SUBSCRIBE/UNSUBSCRIBE can start with PROCEDURE/PROC which may also be parsed as identifier-like expression.
     [$.__unsubscribe_prefix, $._identifier_or_qualified_name],
-    // Shared identifier/access/call wrapper can compete with direct function call parse at `identifier(` sites.
-    [$._identifier_or_access, $.function_call],
     // ON TAB TAB. vs ON TAB OF widget: both start with a UI event name token.
     // Requires runtime dispatch since disambiguation needs 2-token lookahead.
     [$.__on_key_label, $.__on_ui_event],
