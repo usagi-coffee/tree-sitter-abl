@@ -89,6 +89,8 @@ module.exports = grammar({
     [$.__prompt_for_with_phrase, $.frame_phrase],
     // NOT ENTERED field: NOT can be unary, or part of the ENTERED expression.
     [$.entered_expression],
+    // Shared [NOT] ENTERED phrase must preserve both keyword-as-identifier spans.
+    [$.__entered_operator],
     // ENABLE/DISABLE field[N] can be confused with function_call
     [$.__enable_item, $.function_call],
     [$.__disable_item, $.function_call],
