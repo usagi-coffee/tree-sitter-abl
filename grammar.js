@@ -446,9 +446,11 @@ module.exports = grammar({
 
       qualified_name: ($) =>
         seq(
-          field("left", choice($.macro_concatenated_name, $.identifier, $.preprocessor_name)),
+          field("left", $._qualified_name_left),
           repeat1(seq($._namedot, field("right", alias($._identifier_immediate, $.identifier)))),
         ),
+      _qualified_name_left: ($) =>
+        choice($.macro_concatenated_name, $.identifier, $.preprocessor_name),
 
       nested_type_name: ($) =>
         seq(
