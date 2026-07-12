@@ -16,6 +16,7 @@ module.exports = ($) => [
   ...require("./enable")($),
   ...require("./display")($),
   ...require("./widget")($),
+  ...require("./on")($),
   ...require("./message")($),
   ...require("./record")($),
   ...require("./frame")($),

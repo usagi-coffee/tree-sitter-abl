@@ -3,7 +3,7 @@ module.exports = ({ kw }) => ({
     choice(
       // Class constructor: NEW ClassName(args)
       seq(
-        kw("NEW"),
+        $.__new_prefix,
         field("type", choice($.scoped_name, $._identifier_or_qualified_name, $.string_literal)),
         $.arguments,
       ),
@@ -11,7 +11,7 @@ module.exports = ({ kw }) => ({
       prec(
         -1,
         seq(
-          kw("NEW"),
+          $.__new_prefix,
           choice(
             field("record", $._identifier_or_qualified_name),
             seq("(", field("record", $._identifier_or_qualified_name), ")"),
@@ -19,4 +19,5 @@ module.exports = ({ kw }) => ({
         ),
       ),
     ),
+  __new_prefix: ($) => kw("NEW"),
 });
