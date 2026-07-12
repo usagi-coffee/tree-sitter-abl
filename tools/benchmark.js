@@ -25,7 +25,9 @@ for (let run = 0; run < RUNS; run += 1) {
   const parsedBytes = tree.rootNode.endIndex - tree.rootNode.startIndex;
   durations.push(duration);
   totalParsedBytes += parsedBytes;
-  console.log(`Run ${run + 1}: ${duration.toFixed(2)} ms (${(parsedBytes / duration).toFixed(2)} bytes/ms)`);
+  console.log(
+    `Run ${run + 1}: ${duration.toFixed(2)} ms (${(parsedBytes / duration).toFixed(2)} bytes/ms)`,
+  );
 }
 
 const totalDuration = durations.reduce((total, duration) => total + duration, 0);
