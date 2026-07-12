@@ -49,6 +49,8 @@
 - Check per-statement family state counts
   - `bun run audit:statements`
   - `bun run audit:expressions`
+- Run a parsing speed benchmark
+  - `bun run benchmark`
 
 Strongly prefer using these commands as they have helpful side-effects like returning `ACTION_COUNT`, `STATE_COUNT` and `LARGE_STATE_COUNT`.
 
@@ -61,6 +63,7 @@ ACTION_COUNT: <before> -> <after> (<delta>)
 STATE_COUNT: <before> -> <after> (<delta>)
 LARGE_STATE_COUNT: <before> -> <after> (<delta>)
 PARSER_C_SIZE_BYTES: <before> -> <after> (<delta>)
+PARSER_SPEED_BYTES_MS: <before> -> <after> (<delta>)
 ```
 
 ## Conventions
