@@ -161,6 +161,26 @@ PUT UNFORMATTED
     (skip)))
 
 ================================================================================
+PUT UNFORMATTED with multiple inline ELSEIF preprocessor directives
+================================================================================
+
+PUT UNFORMATTED &IF TRUE &THEN "a" &ELSEIF FALSE &THEN "b" &ELSEIF TRUE &THEN "c" &ENDIF SKIP.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (put_statement
+    (unformatted)
+    value: (if_preprocessor_directive
+      condition: (boolean_literal)
+      value: (string_literal)
+      condition: (boolean_literal)
+      value: (string_literal)
+      condition: (boolean_literal)
+      value: (string_literal))
+    (skip)))
+
+================================================================================
 PUT UNFORMATTED with inline IF/ELSEIF/ELSE preprocessor directive
 ================================================================================
 
