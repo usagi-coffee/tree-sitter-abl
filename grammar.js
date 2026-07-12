@@ -459,11 +459,10 @@ module.exports = grammar({
 
       // Array
       array_initializer: ($) => seq("[", optional($._expressions), "]"),
-      _array_target: ($) => choice($._identifier_or_qualified_name, $.object_access, $.scoped_name),
 
       array_access: ($) =>
         seq(
-          field("array", $._array_target),
+          field("array", choice($._identifier_or_qualified_name, $.object_access, $.scoped_name)),
           "[",
           field("index", optional($._array_subscript)),
           "]",
