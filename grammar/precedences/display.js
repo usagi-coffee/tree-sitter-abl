@@ -12,6 +12,10 @@ module.exports = ($) => [
   // Purpose: treat fields as fields, not function calls.
   // Example: DISPLAY Customer.Name.
   [$.__display_field, $.function_call],
+  // Purpose: finish binary DISPLAY fields before considering an aggregate target.
+  // Example: DISPLAY Item.Qty * Item.Price LABEL "Extended".
+  // Reference: DISPLAY statement expression field.
+  [$.binary_expression, $.__display_aggregate_primary_expression],
   // Purpose: SKIP/SPACE should win over function-call/expr parsing.
   // Example: DISPLAY SPACE(2) Customer.Name SKIP(1) Customer.City.
   [$.__display_skip_phrase, $.function_call],

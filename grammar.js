@@ -96,8 +96,6 @@ module.exports = grammar({
     // ENABLE/DISABLE field[N] can be confused with function_call
     [$.__enable_item, $.function_call],
     [$.__disable_item, $.function_call],
-    // DISPLAY field (TOTAL): field expr vs binary_expression that continues after field
-    [$.__display_aggregate_primary_expression, $.binary_expression],
     // BUTTON in alert-box phrase vs DEFINE BUTTON keyword
     [$.__view_as_alert_box],
     // Field / Column / Handle can be just an identifier
