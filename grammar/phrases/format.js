@@ -4,6 +4,7 @@ module.exports = ({ kw }) => ({
       repeat1(
         choice(
           $.__format_at_phrase,
+          $.__format_at_single_position,
           $._format_field_option,
           kw("AUTO-RETURN"),
           kw("BLANK"),
@@ -43,9 +44,17 @@ module.exports = ({ kw }) => ({
         seq($.__format_at_x, $.__format_at_y, optional($.__format_alignment)),
       ),
     ),
+  __format_at_single_position: ($) =>
+    seq(
+      kw("AT"),
+      choice(
+        seq(kw("COLUMN", { alias: "COL", offset: 3 }), field("column", $.number_literal)),
+        seq(kw("ROW"), field("row", $.number_literal)),
+      ),
+    ),
   __format_at_column: ($) =>
     choice(
-      seq(kw("COLUMN"), field("column", $._expression)),
+      seq(kw("COLUMN", { alias: "COL", offset: 3 }), field("column", $._expression)),
       seq(kw("COLUMN-OF"), field("column_of", $._expression)),
     ),
   __format_at_row: ($) =>
