@@ -294,6 +294,24 @@ MESSAGE "Value?" SET iValue AS INTEGER FORMAT ">>9".
       format: (string_literal))))
 
 ================================================================================
+MESSAGE SET - ordered options
+================================================================================
+
+MESSAGE "Choice" SET selection AS CHARACTER FORMAT "x(10)" VIEW-AS TOGGLE-BOX AUTO-RETURN.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (message_statement
+    (string_literal)
+    (set_update_phrase
+      field: (identifier)
+      type: (identifier)
+      format: (string_literal)
+      (view_as_phrase)
+      (auto_return))))
+
+================================================================================
 MESSAGE with LIKE clause
 ================================================================================
 

@@ -41,14 +41,30 @@ module.exports = ({ kw }) => ({
     seq(
       field("mode", choice(kw("SET"), kw("UPDATE"))),
       field("field", $._identifier_or_qualified_name),
-      optional(
+      optional($.__message_set_update_options),
+    ),
+  __message_set_update_options: ($) =>
+    choice(
+      seq(
         choice(
           seq(kw("AS"), field("type", $._type_name)),
           seq(kw("LIKE"), field("like", $._identifier_or_qualified_name)),
         ),
+        optional($.__message_set_update_after_type),
       ),
-      optional($._format_string),
-      optional(alias($._format_view_as, $.view_as_phrase)),
-      optional(alias(kw("AUTO-RETURN"), $.auto_return)),
+      $.__message_set_update_after_type,
+    ),
+  __message_set_update_after_type: ($) =>
+    choice(
+      seq($._format_string, optional($.__message_set_update_after_format)),
+      $.__message_set_update_after_format,
+    ),
+  __message_set_update_after_format: ($) =>
+    choice(
+      seq(
+        alias($._format_view_as, $.view_as_phrase),
+        optional(alias(kw("AUTO-RETURN"), $.auto_return)),
+      ),
+      alias(kw("AUTO-RETURN"), $.auto_return),
     ),
 });
