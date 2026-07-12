@@ -1,11 +1,11 @@
 // References: RUN STORED-PROCEDURE statement (parameter rules); Format phrase (VALIDATE notes).
 module.exports = ($) => [
-  // Purpose: avoid treating INPUT x as a named parameter body; prefer INPUT expression.
+  // Purpose: avoid treating INPUT x as a named parameter body through the extracted field.
   // Example: myMethod(INPUT x = 1).
-  [$._primary_expression, $.input_expression],
-  // Purpose: prefer function call when INPUT target is followed by '('.
+  [$._primary_expression, $.__input_field],
+  // Purpose: prefer function call when the extracted INPUT field is followed by '('.
   // Example: ACCUMULATE INPUT myFunc().
-  [$.function_call, $.input_expression],
+  [$.function_call, $.__input_field],
   // Purpose: treat tokens after INPUT THROUGH program as arguments, not program name.
   // Example: INPUT THROUGH prog arg1.
   [$.__input_through_arg_value, $._identifier_or_qualified_name],
