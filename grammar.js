@@ -85,6 +85,8 @@ module.exports = grammar({
   conflicts: ($) => [
     // There are many statements where x ( ) has different meanings (aggregate/accum)
     [$._primary_expression, $.function_call],
+    // INPUT starts either an argument direction or the screen-buffer INPUT function.
+    [$.__input_expression_prefix, $.argument],
     // WITH NO-VALIDATE is valid both as prompt_for_with_phrase and as frame_phrase option
     [$.__prompt_for_with_phrase, $.frame_phrase],
     // NOT ENTERED field: NOT can be unary, or part of the ENTERED expression.
@@ -482,7 +484,7 @@ module.exports = grammar({
       _argument_list: ($) => seq($.argument, repeat(seq(",", $.argument))),
       argument: ($) =>
         seq(
-          optional(choice(kw("INPUT"), kw("OUTPUT"), kw("INPUT-OUTPUT"))),
+          optional(prec.dynamic(1, field("direction", $._parameter_direction))),
           choice(
             seq(
               choice(kw("TABLE"), kw("BUFFER"), kw("TABLE-HANDLE"), kw("DATASET-HANDLE")),
