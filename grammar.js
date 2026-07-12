@@ -275,13 +275,12 @@ module.exports = grammar({
         prec(
           1,
           seq(
-            "{",
-            "&",
-            $.identifier,
+            $.__preprocessor_name_prefix,
             optional(seq("=", field("value", $.__preprocessor_name_value))),
             "}",
           ),
         ),
+      __preprocessor_name_prefix: ($) => seq("{", "&", $.identifier),
       __preprocessor_name_value: ($) =>
         choice(
           $._identifier_or_qualified_name,
