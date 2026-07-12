@@ -60,7 +60,7 @@ Always place parser count deltas at the end of the commit description using this
 ACTION_COUNT: <before> -> <after> (<delta>)
 STATE_COUNT: <before> -> <after> (<delta>)
 LARGE_STATE_COUNT: <before> -> <after> (<delta>)
-PARSER_C_SIZE_BYTES: <delta>
+PARSER_C_SIZE_BYTES: <before> -> <after> (<delta>)
 ```
 
 ## Conventions
