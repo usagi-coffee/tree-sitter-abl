@@ -15,3 +15,25 @@ DEFINE VARIABLE v AS INTEGER VIEW-AS SLIDER MAX-VALUE 10 MIN-VALUE 1 TIC-MARKS B
         max: (number_literal)
         min: (number_literal)
         frequency: (number_literal)))))
+
+================================================================================
+VIEW-AS SLIDER - ordered options
+================================================================================
+
+DEFINE VARIABLE v AS INTEGER VIEW-AS SLIDER MAX-VALUE 10 MIN-VALUE 1 VERTICAL NO-CURRENT-VALUE LARGE-TO-SMALL TIC-MARKS BOTH FREQUENCY 2 TOOLTIP "tip" SIZE 10 BY 2.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (view_as_phrase
+      (slider_phrase
+        max: (number_literal)
+        min: (number_literal)
+        frequency: (number_literal)
+        tooltip: (string_literal)
+        (size_phrase
+          width: (number_literal)
+          height: (number_literal))))))
