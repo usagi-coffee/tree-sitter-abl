@@ -3,6 +3,10 @@
 // Purpose: allow full binary expressions inside statement/phrase expression slots.
 // Example: EXPORT a - b.
 module.exports = ($) => [
+  // Purpose: continue an existing expression with the extracted additive operator.
+  // Example: PUT SCREEN ROW iRow + 1 COLUMN iCol + 2 "Text".
+  // Reference: expression operator precedence.
+  [$.__additive_operator, $.unary_expression],
   [
     $.binary_expression,
     $.__message_expression,
