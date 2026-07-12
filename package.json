@@ -44,6 +44,8 @@
     "audit:statements": "tree-sitter generate --report-states-for-rule - 2>&1 | grep -E '_statement|_definition'",
     "audit:expressions": "tree-sitter generate --report-states-for-rule - 2>&1 | grep -E '_expression'",
     "audit:node-types": "node tools/audit_node_types.js",
+    "benchmark:corpus": "bun run tools/generate_benchmark_corpus.js",
+    "benchmark": "bun run tools/benchmark.js",
     "parse": "bun run tools/generate.js && tree-sitter parse",
     "parse:snippet": "bun run tools/generate.js && bun run tools/parse.js",
     "reference": "bun run tools/reference.js",
