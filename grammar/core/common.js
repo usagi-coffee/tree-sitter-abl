@@ -44,7 +44,11 @@ module.exports = ({ kw }) => ({
       seq(kw("PFCOLOR"), field("pfcolor", $._expression)),
     ),
   _record_or_parenthesized_record: ($) =>
-    choice($._identifier_or_qualified_name, seq("(", $._identifier_or_qualified_name, ")")),
+    choice(
+      $._identifier_or_qualified_name,
+      seq($.__record_operand_opener, $._identifier_or_qualified_name, ")"),
+    ),
+  __record_operand_opener: ($) => "(",
   _define_private_prefix: ($) =>
     seq(kw("DEFINE", { offset: 3 }), optional(alias(kw("PRIVATE"), $.access_modifier))),
   _buffer_query_modifier: ($) =>
