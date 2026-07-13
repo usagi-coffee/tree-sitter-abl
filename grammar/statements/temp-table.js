@@ -121,13 +121,8 @@ module.exports = ({ kw }) => ({
       seq(
         choice(alias(kw("PRIVATE"), $.access_modifier), alias(kw("PROTECTED"), $.access_modifier)),
         optional(alias(kw("STATIC"), $.static_modifier)),
-        optional($.__temp_table_serialization_modifier),
+        optional($._serialization_modifier),
       ),
-      $.__temp_table_serialization_modifier,
-    ),
-  __temp_table_serialization_modifier: ($) =>
-    choice(
-      alias(kw("SERIALIZABLE"), $.serialization_modifier),
-      alias(kw("NON-SERIALIZABLE"), $.serialization_modifier),
+      $._serialization_modifier,
     ),
 });

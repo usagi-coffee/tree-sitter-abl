@@ -65,7 +65,7 @@ module.exports = ({ kw }) => ({
           alias(kw("PUBLIC"), $.access_modifier),
         ),
         optional(alias(kw("STATIC"), $.static_modifier)),
-        optional($.__variable_serialization_modifier),
+        optional($._serialization_modifier),
       ),
       seq(
         alias(kw("STATIC"), $.static_modifier),
@@ -78,13 +78,8 @@ module.exports = ({ kw }) => ({
             alias(kw("PUBLIC"), $.access_modifier),
           ),
         ),
-        optional($.__variable_serialization_modifier),
+        optional($._serialization_modifier),
       ),
-      $.__variable_serialization_modifier,
-    ),
-  __variable_serialization_modifier: ($) =>
-    choice(
-      alias(kw("SERIALIZABLE"), $.serialization_modifier),
-      alias(kw("NON-SERIALIZABLE"), $.serialization_modifier),
+      $._serialization_modifier,
     ),
 });
