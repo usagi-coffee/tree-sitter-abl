@@ -474,10 +474,11 @@ module.exports = grammar({
       array_access: ($) =>
         seq(
           field("array", choice($._identifier_or_qualified_name, $.object_access, $.scoped_name)),
-          "[",
+          $.__array_access_prefix,
           field("index", optional($._array_subscript)),
           "]",
         ),
+      __array_access_prefix: ($) => "[",
       _array_subscript: ($) =>
         choice(
           $._expressions,
