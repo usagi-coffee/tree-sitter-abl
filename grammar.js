@@ -418,7 +418,10 @@ module.exports = grammar({
 
       // Accessors
       _object_access_plain: ($) =>
-        seq(field("left", $._object_access_plain_left), $._object_access_tail),
+        seq(
+          field("left", choice($._object_access_plain_left, $._object_access_expression_left)),
+          $._object_access_tail,
+        ),
       _object_access_plain_left: ($) =>
         choice($._identifier_or_qualified_name, $.system_handle_identifier),
       _object_access_widget: ($) =>
@@ -439,12 +442,7 @@ module.exports = grammar({
       __object_access_handle_type: ($) =>
         prec(-1, choice(alias(kw("TEMP-TABLE"), $.identifier), alias(kw("BUFFER"), $.identifier))),
       object_access: ($) =>
-        choice(
-          $._object_access_widget,
-          $._object_access_handle,
-          $._object_access_plain,
-          seq(field("left", $._object_access_expression_left), $._object_access_tail),
-        ),
+        choice($._object_access_widget, $._object_access_handle, $._object_access_plain),
       _object_access_expression_left: ($) =>
         choice($.function_call, $.parenthesized_expression, $.new_expression),
 
