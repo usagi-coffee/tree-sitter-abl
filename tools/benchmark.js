@@ -1,38 +1,41 @@
 #!/usr/bin/env bun
 
-const { readFileSync } = require("node:fs");
-const { resolve } = require("node:path");
-const { performance } = require("node:perf_hooks");
+import { spawnSync } from "node:child_process";
+import { resolve } from "node:path";
 
-// The dependencies are built locally with node-gyp. Their Bun loader expects
-// unavailable prebuilt binaries, so select the compatible local-addon path.
-delete process.versions.bun;
-const Parser = require("tree-sitter");
-const abl = require("../bindings/node");
-
-const RUNS = 3;
 const corpusPath = resolve(process.argv[2] ?? "tools/benchmark.p");
-const source = readFileSync(corpusPath, "utf8");
-const parser = new Parser();
-parser.setLanguage(abl);
+const runs = 3;
+const speeds = [];
 
-const durations = [];
-let totalParsedBytes = 0;
-for (let run = 0; run < RUNS; run += 1) {
-  const startedAt = performance.now();
-  const tree = parser.parse(source);
-  const duration = performance.now() - startedAt;
-  const parsedBytes = tree.rootNode.endIndex - tree.rootNode.startIndex;
-  durations.push(duration);
-  totalParsedBytes += parsedBytes;
-  console.log(
-    `Run ${run + 1}: ${duration.toFixed(2)} ms (${(parsedBytes / duration).toFixed(2)} bytes/ms)`,
+const env = { ...process.env, XDG_CACHE_HOME: "/tmp/tree-sitter-cache" };
+
+function parse(rebuild) {
+  return spawnSync(
+    "tree-sitter",
+    ["parse", ...(rebuild ? ["--rebuild"] : []), "--time", "--stat", "--quiet", corpusPath],
+    { encoding: "utf8", env },
   );
 }
 
-const totalDuration = durations.reduce((total, duration) => total + duration, 0);
-const averageDuration = totalDuration / RUNS;
-const averageParseRate = totalParsedBytes / totalDuration;
-console.log(
-  `Average (${RUNS} runs): ${averageDuration.toFixed(2)} ms (${averageParseRate.toFixed(2)} bytes/ms)`,
-);
+const build = parse(true);
+if (build.status !== 0) {
+  process.stdout.write(`${build.stdout ?? ""}${build.stderr ?? ""}`);
+  process.exit(build.status ?? 1);
+}
+
+for (let run = 1; run <= runs; run += 1) {
+  const result = parse(false);
+  const output = `${result.stdout ?? ""}${result.stderr ?? ""}`;
+  process.stdout.write(output);
+
+  if (result.status !== 0) process.exit(result.status ?? 1);
+  const match = output.match(/Parse:\s+[\d.]+ ms\s+([\d.]+) bytes\/ms/);
+  if (!match || /failed parses:\s*[1-9]/.test(output)) {
+    console.error(`Benchmark run ${run} did not produce a successful parse.`);
+    process.exit(1);
+  }
+  speeds.push(Number(match[1]));
+}
+
+const average = speeds.reduce((sum, speed) => sum + speed, 0) / speeds.length;
+console.log(`Average (${runs} runs): ${average.toFixed(2)} bytes/ms`);
