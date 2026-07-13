@@ -3,11 +3,12 @@ module.exports = ({ kw }) => ({
     seq(
       $.__conditional_prefix,
       $._expression,
-      kw("THEN"),
+      $.__conditional_then,
       $._expression,
       kw("ELSE"),
       $._expression,
     ),
 
   __conditional_prefix: ($) => kw("IF"),
+  __conditional_then: ($) => kw("THEN"),
 });
