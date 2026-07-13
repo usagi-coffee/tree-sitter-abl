@@ -1,7 +1,9 @@
 module.exports = ({ kw }) => ({
-  can_find_expression: ($) => seq($.__can_find_prefix, "(", $.__can_find_record_query, ")"),
+  can_find_expression: ($) =>
+    seq($.__can_find_prefix, $.__can_find_opener, $.__can_find_record_query, ")"),
 
   __can_find_prefix: ($) => kw("CAN-FIND"),
+  __can_find_opener: ($) => "(",
 
   __can_find_record_query: ($) =>
     prec.right(
