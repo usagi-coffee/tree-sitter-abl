@@ -9,9 +9,11 @@ module.exports = ({ kw }) => ({
       choice(kw("END"), $._expression),
     ),
 
-  seek_expression: ($) => seq($.__seek_expression_prefix, "(", $.__seek_value, ")"),
+  seek_expression: ($) =>
+    seq($.__seek_expression_prefix, $.__seek_expression_opener, $.__seek_value, ")"),
 
   __seek_expression_prefix: ($) => field("function", alias(kw("SEEK"), $.identifier)),
+  __seek_expression_opener: ($) => "(",
 
   __seek_value: ($) =>
     choice(
