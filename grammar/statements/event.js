@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   event_definition: ($) =>
     seq(
       kw("DEFINE", { offset: 3 }),

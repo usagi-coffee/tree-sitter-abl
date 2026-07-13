@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   os_command_statement: ($) => seq($.__os_command_prefix, $._terminator),
 
   __os_command_prefix: ($) =>

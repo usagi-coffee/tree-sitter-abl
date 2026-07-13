@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   work_table_definition: ($) => seq($.__work_table_prefix, $._terminator),
 
   __work_table_prefix: ($) =>

@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   query_tuning_phrase: ($) =>
     seq(
       kw("QUERY-TUNING"),

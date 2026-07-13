@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   temp_table_definition: ($) =>
     seq($.__temp_table_prefix, repeat($.__temp_table_member), $._terminator),
 

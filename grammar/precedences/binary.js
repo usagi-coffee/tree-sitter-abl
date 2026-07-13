@@ -2,7 +2,7 @@
 // SYSTEM-DIALOG GET-FILE statement; CASE statement; Frame phrase; Color/font options; AT phrase.
 // Purpose: allow full binary expressions inside statement/phrase expression slots.
 // Example: EXPORT a - b.
-module.exports = ($) => [
+export default ($) => [
   // Purpose: continue an existing expression with the extracted additive operator.
   // Example: PUT SCREEN ROW iRow + 1 COLUMN iCol + 2 "Text".
   // Reference: expression operator precedence.

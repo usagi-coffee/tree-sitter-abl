@@ -1,5 +1,5 @@
 // References: Widget phrase; ON statement.
-module.exports = ($) => [
+export default ($) => [
   // Purpose: disambiguate ON "WEB-NOTIFY" ANYWHERE against generic UI event symbols.
   // Example: ON "WEB-NOTIFY" ANYWHERE DO: END.
   // Reference: ON statement.

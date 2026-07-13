@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   overlay_statement: ($) => seq($.__overlay_prefix, $._terminator),
 
   __overlay_prefix: ($) =>

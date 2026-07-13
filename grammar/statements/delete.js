@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   delete_statement: ($) => seq(kw("DELETE"), $.__delete_body, $._no_error_terminator),
 
   __delete_body: ($) =>

@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   next_prompt_statement: ($) => seq($.__next_prompt_prefix, $._terminator),
 
   __next_prompt_prefix: ($) =>

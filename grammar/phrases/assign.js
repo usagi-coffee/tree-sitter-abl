@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   assign_phrase: ($) => seq(kw("ASSIGN"), $.__assign_body),
 
   __assign_body: ($) =>

@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   frame_definition: ($) => seq($.__frame_prefix, $._terminator),
 
   __frame_prefix: ($) =>

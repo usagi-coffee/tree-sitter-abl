@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   dynamic_new_statement: ($) => seq($.__dynamic_new_prefix, $._no_error_terminator),
 
   __dynamic_new_prefix: ($) =>

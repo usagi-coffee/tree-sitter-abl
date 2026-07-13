@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   can_find_expression: ($) =>
     seq($.__can_find_prefix, $.__can_find_opener, $.__can_find_record_query, ")"),
 

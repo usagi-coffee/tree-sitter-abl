@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   scroll_statement: ($) => seq($.__scroll_prefix, $._terminator),
   __scroll_prefix: ($) =>
     seq(

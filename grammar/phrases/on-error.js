@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   on_error_phrase: ($) =>
     seq(
       kw("ON"),

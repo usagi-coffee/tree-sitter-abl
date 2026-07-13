@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   import_statement: ($) => seq($.__import_prefix, $.__import_body, $._no_error_terminator),
 
   __import_prefix: ($) => seq(kw("IMPORT"), optional($._stream_phrase)),

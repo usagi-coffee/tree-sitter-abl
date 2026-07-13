@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   view_as_phrase: ($) =>
     seq(
       kw("VIEW-AS"),

@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   create_socket_statement: ($) =>
     seq(
       kw("CREATE"),

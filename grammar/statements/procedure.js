@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   procedure_definition: ($) => seq($.__procedure_header, alias($.__procedure_body, $.body)),
 
   __procedure_header: ($) =>

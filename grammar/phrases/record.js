@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   record_phrase: ($) =>
     seq(
       field("record", $._identifier_or_qualified_name),

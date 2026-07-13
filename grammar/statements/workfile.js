@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   // Workfile is equivalent to WORK-TABLE
   workfile_definition: ($) => seq($.__workfile_prefix, $._terminator),
 

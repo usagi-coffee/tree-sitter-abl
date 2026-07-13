@@ -1,5 +1,5 @@
 // References: PROMPT-FOR statement.
-module.exports = ($) => [
+export default ($) => [
   // Purpose: prefer field list over record form when ambiguous.
   // Example: PROMPT-FOR Customer.Name WITH FRAME f.
   [$.__prompt_for_field, $.__prompt_for_record_body],

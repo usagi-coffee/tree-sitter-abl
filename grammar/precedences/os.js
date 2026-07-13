@@ -1,5 +1,5 @@
 // References: OS-APPEND, OS-COPY, OS-RENAME, OS-DELETE statements.
-module.exports = ($) => [
+export default ($) => [
   // Purpose: prefer function call when filename starts with identifier + '('.
   // Example: OS-APPEND myFunc() target.
   [$.function_call, $._os_filename],

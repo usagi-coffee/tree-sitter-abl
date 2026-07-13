@@ -1,5 +1,5 @@
 // References: DELETE ALIAS / DELETE WIDGET-POOL statements.
-module.exports = ($) => [
+export default ($) => [
   // Purpose: prefer specific DELETE forms over generic DELETE record.
   // Example: DELETE ALIAS myalias.
   [$.delete_alias_statement, $.delete_statement],

@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   form_statement: ($) => seq($.__form_prefix, $._terminator),
 
   __form_prefix: ($) => seq(kw("FORM"), $.__form_body),

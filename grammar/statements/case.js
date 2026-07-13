@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   case_statement: ($) => seq($.__case_prefix, $._terminator),
 
   __case_prefix: ($) =>

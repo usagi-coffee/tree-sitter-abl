@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   hide_statement: ($) => seq($.__hide_prefix, $._terminator),
   __hide_prefix: ($) => seq(kw("HIDE"), optional($.__hide_tail)),
   __hide_tail: ($) =>

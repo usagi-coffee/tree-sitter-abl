@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   accum_expression: ($) =>
     seq(
       $.__accum_prefix,

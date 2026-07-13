@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   run_statement: ($) => seq(kw("RUN"), $.__run_body, $._no_error_terminator),
 
   __run_body: ($) => seq(field("procedure", $._run_target), optional($.__run_body_tail)),

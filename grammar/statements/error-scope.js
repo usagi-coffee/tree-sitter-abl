@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   error_scope_statement: ($) =>
     seq(
       alias($.__error_scope_type, $.error_scope_type),

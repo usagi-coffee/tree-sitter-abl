@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   put_cursor_statement: ($) => seq(kw("PUT"), $.__put_cursor_body, $._terminator),
 
   __put_cursor_body: ($) =>

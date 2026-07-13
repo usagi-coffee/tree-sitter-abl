@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   put_key_value_statement: ($) => seq($.__put_key_value_prefix, $._no_error_terminator),
 
   __put_key_value_prefix: ($) =>

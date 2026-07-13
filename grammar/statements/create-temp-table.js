@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   create_temp_table_statement: ($) => seq(kw("CREATE"), $.__create_temp_table_body, $._terminator),
 
   __create_temp_table_body: ($) =>

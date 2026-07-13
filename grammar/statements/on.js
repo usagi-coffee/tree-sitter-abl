@@ -89,7 +89,7 @@ function escapeRegex(value) {
   return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   on_statement: ($) =>
     prec.right(
       seq(

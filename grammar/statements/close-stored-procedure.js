@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   close_stored_procedure_statement: ($) =>
     seq(kw("CLOSE"), $.__close_stored_procedure_body, $._terminator),
 

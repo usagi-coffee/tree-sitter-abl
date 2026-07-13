@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   preselect_statement: ($) => seq($.__preselect_prefix, $._terminator),
 
   __preselect_prefix: ($) => seq(kw("PRESELECT"), $.preselect_record_list),

@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   for_statement: ($) => seq($.__for_statement_prefix, $._terminator),
 
   __for_statement_prefix: ($) => seq(optional($._label), $.__for_body, kw("END")),

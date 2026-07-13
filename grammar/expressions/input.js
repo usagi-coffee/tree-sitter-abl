@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   input_expression: ($) =>
     seq(
       $.__input_expression_prefix,

@@ -1,7 +1,8 @@
-const fs = require("node:fs");
-const path = require("node:path");
+import fs from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 
-const statementsDir = path.resolve(__dirname, "../grammar/statements");
+const statementsDir = fileURLToPath(new URL("../grammar/statements", import.meta.url));
 
 function normalizeBaseName(filename) {
   return path.basename(filename, ".js").replace(/-/g, "_");

@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   color_phrase: ($) =>
     choice(
       $.number_literal,

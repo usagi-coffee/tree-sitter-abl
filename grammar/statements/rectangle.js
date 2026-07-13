@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   rectangle_definition: ($) => seq($.__rectangle_prefix, $._terminator),
 
   __rectangle_prefix: ($) =>

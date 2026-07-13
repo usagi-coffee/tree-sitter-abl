@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   buffer_compare_statement: ($) => seq($.__buffer_compare_prefix, $._no_error_terminator),
 
   __buffer_compare_prefix: ($) =>

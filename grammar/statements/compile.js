@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   compile_statement: ($) => seq($.__compile_prefix, $._no_error_terminator),
 
   __compile_prefix: ($) =>

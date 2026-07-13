@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   pause_statement: ($) => seq($.__pause_prefix, $._terminator),
   __pause_prefix: ($) => seq(kw("PAUSE"), optional($.__pause_tail)),
   __pause_tail: ($) =>

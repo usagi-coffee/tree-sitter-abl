@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   wait_for_statement: ($) => seq($.__wait_for_prefix, $._terminator),
 
   __wait_for_prefix: ($) =>

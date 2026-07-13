@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   save_cache_statement: ($) => seq($.__save_cache_prefix, $._no_error_terminator),
 
   __save_cache_prefix: ($) =>

@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   button_definition: ($) => seq($.__button_prefix, $._terminator),
 
   __button_prefix: ($) =>

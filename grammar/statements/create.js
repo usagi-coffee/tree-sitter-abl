@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   create_statement: ($) => seq(kw("CREATE"), $.__create_body, $._terminator),
 
   __create_body: ($) =>

@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   widget_phrase: ($) =>
     choice(
       seq(kw("FRAME"), field("frame", $.identifier)),

@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   enum_statement: ($) => seq($.__enum_prefix, $._terminator),
 
   __enum_prefix: ($) =>

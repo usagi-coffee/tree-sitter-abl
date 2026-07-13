@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   set_size_statement: ($) => seq($.__set_size_prefix, $._terminator),
 
   __set_size_prefix: ($) =>

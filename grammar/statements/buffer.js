@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   buffer_definition: ($) => prec.right(seq($.__buffer_prefix, $._terminator)),
 
   __buffer_prefix: ($) =>

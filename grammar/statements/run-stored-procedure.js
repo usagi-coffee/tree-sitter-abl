@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   run_stored_procedure_statement: ($) =>
     seq(kw("RUN"), $.__run_stored_procedure_body, $._terminator),
 

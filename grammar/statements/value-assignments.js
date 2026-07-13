@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   value_assignment_statement: ($) => seq($.__value_assignments_body, $._terminator),
 
   __value_assignments_body: ($) =>

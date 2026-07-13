@@ -1,5 +1,5 @@
 // References: CREATE BUFFER statement.
-module.exports = ($) => [
+export default ($) => [
   // Purpose: keep CREATE BUFFER statements from being interpreted as generic expression starts.
   // Example: CREATE BUFFER bh FOR TABLE tt.
   [$.__create_buffer, $.__object_access_handle_type],

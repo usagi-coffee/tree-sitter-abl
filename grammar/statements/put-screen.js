@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   put_screen_statement: ($) => seq(kw("PUT"), $.__put_screen_body, $._terminator),
 
   __put_screen_body: ($) =>

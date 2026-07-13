@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   interface_definition: ($) => seq($.__interface_prefix, $._terminator),
 
   __interface_prefix: ($) => seq(kw("INTERFACE"), $.__interface_body),

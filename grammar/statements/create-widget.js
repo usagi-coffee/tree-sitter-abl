@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   create_widget_statement: ($) =>
     prec.right(seq(kw("CREATE"), $.__create_widget_body, $._terminator)),
   __create_widget_body: ($) =>

@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   __system_dialog_prefix: ($) => kw("SYSTEM-DIALOG"),
 
   system_dialog_color_statement: ($) =>

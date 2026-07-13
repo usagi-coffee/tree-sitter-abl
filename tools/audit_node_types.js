@@ -1,9 +1,10 @@
 #!/usr/bin/env node
 
-const fs = require("fs");
-const path = require("path");
+import fs from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 
-const DEFAULT_GRAMMAR_PATH = path.join(__dirname, "..", "src", "grammar.json");
+const DEFAULT_GRAMMAR_PATH = fileURLToPath(new URL("../src/grammar.json", import.meta.url));
 const DEFAULT_LIMIT = 15;
 const DEFAULT_MIN_SHARED_LENGTH = 2;
 

@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   status_statement: ($) => seq($.__status_prefix, $._terminator),
 
   __status_prefix: ($) =>

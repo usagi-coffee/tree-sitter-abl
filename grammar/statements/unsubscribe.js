@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   unsubscribe_statement: ($) => seq($.__unsubscribe_prefix, $._terminator),
 
   __unsubscribe_prefix: ($) =>

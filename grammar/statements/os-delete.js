@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   os_delete_statement: ($) => seq($.__os_delete_prefix, $._terminator),
 
   __os_delete_prefix: ($) =>

@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   call_statement: ($) => seq($.__call_prefix, $._terminator),
 
   __call_prefix: ($) =>

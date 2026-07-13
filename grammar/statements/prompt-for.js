@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   prompt_for_statement: ($) => seq($.__prompt_for_prefix, $.__prompt_for_body, $._terminator),
 
   __prompt_for_prefix: ($) =>

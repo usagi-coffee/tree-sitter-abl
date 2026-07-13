@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   accumulate_statement: ($) => seq($.__accumulate_prefix, $._terminator),
 
   __accumulate_prefix: ($) =>

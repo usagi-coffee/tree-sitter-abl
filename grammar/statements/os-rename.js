@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   os_rename_statement: ($) => seq($.__os_rename_prefix, $._terminator),
 
   __os_rename_prefix: ($) =>

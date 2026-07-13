@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   dde_statement: ($) => seq($.__dde_prefix, $._no_error_terminator),
 
   __dde_prefix: ($) =>

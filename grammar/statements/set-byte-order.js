@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   set_byte_order_statement: ($) => seq($.__set_byte_order_prefix, $._terminator),
 
   __set_byte_order_prefix: ($) =>

@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   new_expression: ($) =>
     choice(
       // Class constructor: NEW ClassName(args)

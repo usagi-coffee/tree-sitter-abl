@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   trigger_procedure_statement: ($) => seq($.__trigger_procedure_prefix, $._terminator),
 
   __trigger_procedure_prefix: ($) =>

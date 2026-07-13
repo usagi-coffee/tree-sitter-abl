@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   copy_lob_statement: ($) => seq($.__copy_lob_prefix, $._no_error_terminator),
 
   __copy_lob_prefix: ($) =>

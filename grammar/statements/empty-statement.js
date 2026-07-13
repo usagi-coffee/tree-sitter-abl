@@ -1,3 +1,3 @@
-module.exports = () => ({
+export default () => ({
   empty_statement: ($) => $._terminator,
 });

@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   slider_phrase: ($) =>
     seq(
       kw("SLIDER"),

@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   get_key_value_statement: ($) => seq($.__get_key_value_prefix, $._terminator),
 
   __get_key_value_prefix: ($) =>

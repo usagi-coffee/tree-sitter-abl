@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   display_statement: ($) =>
     prec.left(
       seq(

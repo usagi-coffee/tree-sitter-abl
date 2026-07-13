@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   os_copy_statement: ($) => seq($.__os_copy_prefix, $._terminator),
 
   __os_copy_prefix: ($) =>

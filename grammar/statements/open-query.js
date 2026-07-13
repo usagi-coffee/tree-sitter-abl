@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   open_query_statement: ($) => seq($.__open_query_prefix, $._terminator),
 
   __open_query_prefix: ($) =>

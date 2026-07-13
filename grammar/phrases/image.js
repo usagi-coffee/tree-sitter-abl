@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   image_phrase: ($) =>
     seq(
       kw("FILE"),

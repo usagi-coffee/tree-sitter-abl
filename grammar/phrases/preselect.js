@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   preselect_phrase: ($) =>
     seq(
       kw("PRESELECT"),

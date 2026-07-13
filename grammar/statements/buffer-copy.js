@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   buffer_copy_statement: ($) => seq($.__buffer_copy_prefix, $._no_error_terminator),
 
   __buffer_copy_prefix: ($) =>

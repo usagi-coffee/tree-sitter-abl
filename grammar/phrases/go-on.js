@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   _go_on_phrase: ($) =>
     seq(
       kw("GO-ON"),

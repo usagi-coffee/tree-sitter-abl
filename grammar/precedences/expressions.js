@@ -1,5 +1,5 @@
 // References: expression parsing.
-module.exports = ($) => [
+export default ($) => [
   // Purpose: prefer function call when identifier is followed by args.
   // Example: ACCUMULATE myFunc(x).
   [$.function_call, $._primary_expression],

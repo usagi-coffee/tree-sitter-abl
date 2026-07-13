@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   seek_statement: ($) => prec.right(seq($.__seek_prefix, $._terminator)),
 
   __seek_prefix: ($) =>

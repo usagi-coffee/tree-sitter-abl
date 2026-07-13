@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   browse_definition: ($) => seq($.__browse_prefix, $._terminator),
 
   __browse_prefix: ($) =>

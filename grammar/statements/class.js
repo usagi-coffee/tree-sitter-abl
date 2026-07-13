@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   class_definition: ($) => seq($.__class_prefix, $._terminator),
 
   __class_prefix: ($) => seq(repeat($.__class_option), kw("CLASS"), $.__class_body),

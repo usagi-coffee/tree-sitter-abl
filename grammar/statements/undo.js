@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   undo_statement: ($) => seq($.__undo_prefix, $._terminator),
 
   __undo_prefix: ($) => seq(kw("UNDO"), optional($.__undo_body)),

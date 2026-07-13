@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   convert_statement: ($) => seq($.__convert_prefix, $._terminator),
 
   __convert_prefix: ($) =>

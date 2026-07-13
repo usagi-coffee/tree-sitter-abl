@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   raw_transfer_statement: ($) => seq($.__raw_transfer_prefix, $._no_error_terminator),
 
   __raw_transfer_prefix: ($) =>

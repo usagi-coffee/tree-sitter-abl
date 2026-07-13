@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   put_assign_statement: ($) => seq($.__put_assign_prefix, $._terminator),
 
   __put_assign_prefix: ($) =>

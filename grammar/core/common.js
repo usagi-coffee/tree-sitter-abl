@@ -1,6 +1,6 @@
 // Non-core statement-specific shared rules
 
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   _as_like: ($) =>
     choice(
       seq(kw("AS"), optional(kw("CLASS")), field("type", $._type_or_string)),

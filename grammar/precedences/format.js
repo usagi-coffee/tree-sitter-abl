@@ -1,5 +1,5 @@
 // References: Format phrase.
-module.exports = ($) => [
+export default ($) => [
   // Purpose: continue a numeric AT position when an expression operator follows.
   // Example: DISPLAY x AT COL 5 - 1 ROW 3.
   // Reference: AT phrase.

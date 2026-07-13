@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   set_pointer_value_statement: ($) => seq($.__set_pointer_value_prefix, $._terminator),
 
   __set_pointer_value_prefix: ($) =>

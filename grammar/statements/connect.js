@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   connect_statement: ($) => seq($.__connect_prefix, $._no_error_terminator),
   __connect_prefix: ($) => seq(kw("CONNECT"), optional($.__connect_tail)),
   __connect_tail: ($) =>

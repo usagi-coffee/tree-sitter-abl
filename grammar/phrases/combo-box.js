@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   combo_box_phrase: ($) =>
     seq(
       field("widget", kw("COMBO-BOX")),

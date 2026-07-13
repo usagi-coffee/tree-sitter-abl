@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   selection_list_phrase: ($) =>
     seq(
       kw("SELECTION-LIST"),

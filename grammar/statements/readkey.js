@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   readkey_statement: ($) => seq($.__readkey_prefix, $._terminator),
   __readkey_prefix: ($) =>
     seq(

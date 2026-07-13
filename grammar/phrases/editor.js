@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   editor_phrase: ($) =>
     seq(
       kw("EDITOR"),

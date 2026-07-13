@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   catch_statement: ($) => seq($.__catch_prefix, $._terminator),
 
   __catch_prefix: ($) =>

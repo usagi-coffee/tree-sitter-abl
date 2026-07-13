@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   aggregate_statement: ($) => seq($.__aggregate_prefix, $._terminator),
 
   __aggregate_prefix: ($) =>

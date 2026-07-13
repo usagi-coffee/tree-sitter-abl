@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   load_statement: ($) => seq($.__load_prefix, $._no_error_terminator),
 
   __load_prefix: ($) =>

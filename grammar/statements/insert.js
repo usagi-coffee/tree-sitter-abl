@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   insert_statement: ($) => seq($.__insert_prefix, $._no_error_terminator),
   __insert_prefix: ($) =>
     seq(

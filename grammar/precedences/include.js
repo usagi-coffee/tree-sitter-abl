@@ -1,5 +1,5 @@
 // References: include expression / include statement.
-module.exports = ($) => [
+export default ($) => [
   // Purpose: parse standalone includes as statements when ambiguous with expression starts.
   // Example: {inc.i} - 1.
   // Reference: include statement at top-level.

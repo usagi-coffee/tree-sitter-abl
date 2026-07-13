@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   input_output_statement: ($) => seq($.__input_output_prefix, $.__input_output_body, $._terminator),
 
   __input_output_prefix: ($) => seq(kw("INPUT-OUTPUT"), optional($._stream_phrase)),

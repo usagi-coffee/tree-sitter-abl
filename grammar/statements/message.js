@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   message_statement: ($) => seq($.__message_prefix, $._terminator),
 
   __message_prefix: ($) =>

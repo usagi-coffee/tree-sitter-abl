@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   data_source_definition: ($) => seq($.__data_source_prefix, $._terminator),
 
   __data_source_prefix: ($) =>

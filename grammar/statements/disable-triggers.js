@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   disable_triggers_statement: ($) => seq(kw("DISABLE"), $.__disable_triggers_body, $._terminator),
 
   __disable_triggers_body: ($) =>

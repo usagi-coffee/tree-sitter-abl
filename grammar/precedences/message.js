@@ -1,5 +1,5 @@
 // References: MESSAGE statement; widget keywords.
-module.exports = ($) => [
+export default ($) => [
   // Purpose: in `MESSAGE MENU.`, prefer `MENU` as message expression over widget tokenization.
   // Example: MESSAGE MENU.
   // Reference: MESSAGE statement value list.

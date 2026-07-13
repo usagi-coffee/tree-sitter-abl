@@ -1,5 +1,5 @@
 // References: RUN STORED-PROCEDURE statement (parameter rules); Format phrase (VALIDATE notes).
-module.exports = ($) => [
+export default ($) => [
   // Purpose: avoid treating INPUT x as a named parameter body through the extracted field.
   // Example: myMethod(INPUT x = 1).
   [$._primary_expression, $.__input_field],

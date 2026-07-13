@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   export_statement: ($) => seq(kw("EXPORT"), $.__export_statement_body),
 
   __export_statement_body: ($) =>

@@ -1,7 +1,13 @@
 /// <reference types="tree-sitter-cli/dsl" />
 
-const { kw } = require("./grammar/helpers/keywords");
-const precedences = require("./grammar/precedences");
+import commonRules from "./grammar/core/common.js";
+import coreExpressions from "./grammar/core/expressions.js";
+import coreStatements from "./grammar/core/statements.js";
+import expressions from "./grammar/expressions/index.js";
+import { kw } from "./grammar/helpers/keywords.js";
+import phrases from "./grammar/phrases/index.js";
+import precedences from "./grammar/precedences/index.js";
+import statements from "./grammar/statements/index.js";
 
 const COMPARISON_OPERATORS = [
   "<>",
@@ -62,7 +68,7 @@ const SYSTEM_HANDLE_WORDS = [
   "THIS-PROCEDURE",
 ];
 
-module.exports = grammar({
+export default grammar({
   name: "abl",
 
   externals: ($) => [
@@ -296,9 +302,9 @@ module.exports = grammar({
       argument_reference: ($) => token(/\{(?:[0-9]+|\*)\}/),
 
       // Re-exports
-      ...require("./grammar/statements")(ctx),
-      ...require("./grammar/expressions")(ctx),
-      ...require("./grammar/phrases")(ctx),
+      ...statements(ctx),
+      ...expressions(ctx),
+      ...phrases(ctx),
 
       // Literals
       number_literal: ($) => token(/([0-9]+(\.[0-9]+)?|\.[0-9]+)/),
@@ -571,11 +577,11 @@ module.exports = grammar({
       __no_error: ($) => alias(kw("NO-ERROR"), $.no_error),
 
       // Contains non-core statement-specific shared rules
-      ...require("./grammar/core/common")(ctx),
+      ...commonRules(ctx),
       // Contains $._expression and $._primary_expression aggregates
-      ...require("./grammar/core/expressions")(ctx),
+      ...coreExpressions(ctx),
       // Contains only $._statement aggregate and statement costs
-      ...require("./grammar/core/statements")(ctx),
+      ...coreStatements(ctx),
     };
   })(),
 });

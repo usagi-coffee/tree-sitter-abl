@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   choose_statement: ($) => seq($.__choose_prefix, $._terminator),
 
   __choose_prefix: ($) =>

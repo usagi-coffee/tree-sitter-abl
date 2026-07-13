@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   publish_statement: ($) => seq($.__publish_prefix, $._terminator),
   __publish_prefix: ($) =>
     seq(

@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   function_definition: ($) => seq($.__function_prefix, $._terminator),
 
   __function_prefix: ($) =>

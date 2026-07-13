@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   empty_temp_table_statement: ($) => seq($.__empty_temp_table_prefix, $._terminator),
 
   __empty_temp_table_prefix: ($) =>

@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   output_statement: ($) => seq($.__output_prefix, $.__output_body, $._terminator),
 
   __output_prefix: ($) => seq(kw("OUTPUT"), optional($._stream_phrase)),

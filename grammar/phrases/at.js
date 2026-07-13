@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   at_phrase: ($) => seq(kw("AT"), $.__at_phrase_body),
 
   __at_phrase_body: ($) =>

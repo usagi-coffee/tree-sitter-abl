@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   input_through_statement: ($) =>
     seq($.__input_through_prefix, $.__input_through_body, $._terminator),
 

@@ -1,6 +1,6 @@
 // Just an aggregator of statements
 
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   _statement: ($) =>
     choice(
       // Special

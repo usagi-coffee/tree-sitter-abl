@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   if_statement: ($) => seq(kw("IF"), $.__if_body),
 
   __if_body: ($) =>

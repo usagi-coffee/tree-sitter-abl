@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   menu_definition: ($) => seq($.__menu_prefix, $._terminator),
 
   __menu_prefix: ($) =>

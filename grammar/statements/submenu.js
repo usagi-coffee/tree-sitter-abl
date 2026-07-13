@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   submenu_definition: ($) => seq($.__submenu_prefix, $._terminator),
 
   __submenu_prefix: ($) => seq($._define_private_prefix, kw("SUB-MENU"), $.__submenu_body),

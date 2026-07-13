@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   entered_expression: ($) =>
     choice(
       prec.right(-2, seq(field("field", $.identifier), $.__entered_operator)),

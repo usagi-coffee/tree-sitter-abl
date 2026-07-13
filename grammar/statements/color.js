@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   color_statement: ($) => seq($.__color_prefix, $._terminator),
 
   __color_prefix: ($) => seq(kw("COLOR"), optional(choice($.__color_body, $.__color_prompt_body))),

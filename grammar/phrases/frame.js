@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   frame_phrase: ($) =>
     seq(
       prec(1, kw("WITH")),

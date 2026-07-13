@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   stream_definition: ($) => seq($.__stream_prefix, $._terminator),
 
   __stream_prefix: ($) =>

@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   aggregate_phrase: ($) =>
     prec.right(
       repeat1(

@@ -1,4 +1,4 @@
-module.exports = () => ({
+export default () => ({
   annotation: ($) => seq("@", $.__annotation_body, $._terminator),
 
   __annotation_name: () => token(/[^0-9\s()=,\.][^\s()=,\.]*/),

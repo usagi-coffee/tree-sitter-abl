@@ -10,11 +10,10 @@ const speeds = [];
 const env = { ...process.env, XDG_CACHE_HOME: "/tmp/tree-sitter-cache" };
 
 function parse(rebuild) {
-  return spawnSync(
-    "tree-sitter",
-    ["parse", "--time", "--stat", "--quiet", corpusPath],
-    { encoding: "utf8", env }
-  );
+  return spawnSync("tree-sitter", ["parse", "--time", "--stat", "--quiet", corpusPath], {
+    encoding: "utf8",
+    env,
+  });
 }
 
 const generate = spawnSync("bun", ["run", "generate"], {

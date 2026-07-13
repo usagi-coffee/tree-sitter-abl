@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   image_definition: ($) => seq($.__image_prefix, $._terminator),
 
   __image_prefix: ($) =>

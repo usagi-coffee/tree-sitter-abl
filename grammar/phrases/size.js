@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   size_phrase: ($) => $._size_phrase,
   _size_phrase: ($) =>
     seq(

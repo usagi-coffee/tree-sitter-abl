@@ -1,4 +1,4 @@
-module.exports = ({ kw, ctx }) => ({
+export default ({ kw, ctx }) => ({
   _expression: ($) =>
     choice(
       $.conditional_expression,

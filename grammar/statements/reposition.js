@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   reposition_statement: ($) => seq($.__reposition_prefix, $._terminator),
 
   __reposition_prefix: ($) => seq(kw("REPOSITION"), $.__reposition_body),

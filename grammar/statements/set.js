@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   set_statement: ($) => seq($.__set_prefix, $.__set_body, $._no_error_terminator),
 
   __set_prefix: ($) =>

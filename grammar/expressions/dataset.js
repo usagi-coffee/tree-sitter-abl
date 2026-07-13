@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   dataset_reference: ($) =>
     seq(
       $.__dataset_expression_prefix,

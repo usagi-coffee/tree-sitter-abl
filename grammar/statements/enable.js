@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   enable_statement: ($) => seq($.__enable_prefix, $._terminator),
 
   __enable_prefix: ($) =>

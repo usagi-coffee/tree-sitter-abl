@@ -1,5 +1,5 @@
 // References: DISPLAY statement.
-module.exports = ($) => [
+export default ($) => [
   // Purpose: prefer record parsing over plain expressions.
   // Example: DISPLAY Customer EXCEPT Customer.Comments WITH FRAME f2.
   [$.__display_record, $._primary_expression],

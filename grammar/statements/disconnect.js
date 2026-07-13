@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   disconnect_statement: ($) => seq($.__disconnect_prefix, $._no_error_terminator),
 
   __disconnect_prefix: ($) =>

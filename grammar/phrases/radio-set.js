@@ -1,4 +1,4 @@
-module.exports = ({ kw }) => ({
+export default ({ kw }) => ({
   radio_set_phrase: ($) =>
     seq(
       kw("RADIO-SET"),
