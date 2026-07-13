@@ -7,6 +7,10 @@ module.exports = ($) => [
   // Example: PUT SCREEN ROW iRow + 1 COLUMN iCol + 2 "Text".
   // Reference: expression operator precedence.
   [$.__additive_operator, $.unary_expression],
+  // Purpose: continue an existing binary expression before starting a signed operand.
+  // Example: UNSUBSCRIBE PROCEDURE target - {&offset}.
+  // Reference: expression operator precedence.
+  [$.__additive_operator, $.__unary_sign],
   [
     $.binary_expression,
     $.__message_expression,
