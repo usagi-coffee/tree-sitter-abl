@@ -2,7 +2,12 @@ module.exports = ({ kw }) => ({
   buffer_definition: ($) => prec.right(seq($.__buffer_prefix, $._terminator)),
 
   __buffer_prefix: ($) =>
-    seq(kw("DEFINE", { offset: 3 }), optional($.__buffer_modifier), kw("BUFFER"), $.__buffer_body),
+    seq(
+      kw("DEFINE", { offset: 3 }),
+      optional($._buffer_query_modifier),
+      kw("BUFFER"),
+      $.__buffer_body,
+    ),
 
   __buffer_body: ($) =>
     seq(
@@ -20,17 +25,5 @@ module.exports = ({ kw }) => ({
           seq(kw("SERIALIZE-NAME"), field("serialize_name", $.string_literal)),
         ),
       ),
-    ),
-  __buffer_modifier: ($) =>
-    choice(
-      seq(alias(kw("NEW"), $.new_modifier), alias(kw("SHARED"), $.scope_modifier)),
-      alias(kw("SHARED"), $.scope_modifier),
-      alias(kw("PRIVATE"), $.access_modifier),
-      alias(kw("PROTECTED"), $.access_modifier),
-      alias(kw("STATIC"), $.static_modifier),
-      seq(alias(kw("PRIVATE"), $.access_modifier), alias(kw("STATIC"), $.static_modifier)),
-      seq(alias(kw("PROTECTED"), $.access_modifier), alias(kw("STATIC"), $.static_modifier)),
-      seq(alias(kw("STATIC"), $.static_modifier), alias(kw("PRIVATE"), $.access_modifier)),
-      seq(alias(kw("STATIC"), $.static_modifier), alias(kw("PROTECTED"), $.access_modifier)),
     ),
 });

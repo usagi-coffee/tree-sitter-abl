@@ -104,23 +104,21 @@ module.exports = grammar({
     // DEFINE modifiers prefix conflicts
     // Conflicts approach has slightly better state reduction (~500) than doing it conflicts free
     [
-      $.__buffer_modifier,
+      $._buffer_query_modifier,
       $.__class_property_access_modifier,
       $.__data_source_access_modifier,
       $.__dataset_modifier,
       $.__event_access_modifier,
-      $.__query_modifier,
       $.__temp_table_modifier,
       $.__variable_modifier,
     ],
     [$.__class_property_access_modifier, $.__event_access_modifier],
     [$.__class_property_access_modifier, $.__event_access_modifier, $.__variable_modifier],
     [
-      $.__buffer_modifier,
+      $._buffer_query_modifier,
       $.__class_property_class_modifier,
       $.__data_source_static,
       $.__event_type_modifier,
-      $.__query_modifier,
       $.__variable_modifier,
     ],
     [$.__class_property_class_modifier, $.__event_type_modifier],
@@ -438,19 +436,15 @@ module.exports = grammar({
       _object_access_expression_left: ($) =>
         choice($.function_call, $.parenthesized_expression, $.new_expression),
 
-      scoped_name: ($) =>
-        seq(
-          field("left", $.identifier),
-          repeat1(
-            seq($._namedoublecolon, field("right", alias($._identifier_immediate, $.identifier))),
-          ),
+      scoped_name: ($) => seq(field("left", $.identifier), $.__scoped_name_tail),
+      __scoped_name_tail: ($) =>
+        repeat1(
+          seq($._namedoublecolon, field("right", alias($._identifier_immediate, $.identifier))),
         ),
 
-      qualified_name: ($) =>
-        seq(
-          field("left", $._qualified_name_left),
-          repeat1(seq($._namedot, field("right", alias($._identifier_immediate, $.identifier)))),
-        ),
+      qualified_name: ($) => seq(field("left", $._qualified_name_left), $.__qualified_name_tail),
+      __qualified_name_tail: ($) =>
+        repeat1(seq($._namedot, field("right", alias($._identifier_immediate, $.identifier)))),
       _qualified_name_left: ($) =>
         choice($.macro_concatenated_name, $.identifier, $.preprocessor_name),
 

@@ -2,7 +2,12 @@ module.exports = ({ kw }) => ({
   query_definition: ($) => seq($.__query_prefix, $._terminator),
 
   __query_prefix: ($) =>
-    seq(kw("DEFINE", { offset: 3 }), optional($.__query_modifier), kw("QUERY"), $.__query_body),
+    seq(
+      kw("DEFINE", { offset: 3 }),
+      optional($._buffer_query_modifier),
+      kw("QUERY"),
+      $.__query_body,
+    ),
 
   __query_body: ($) =>
     seq(field("name", $.identifier), kw("FOR"), $.query_table_list, optional($.__query_tail)),
@@ -37,17 +42,5 @@ module.exports = ({ kw }) => ({
     seq(
       $._identifier_or_qualified_name,
       repeat(seq(optional(","), $._identifier_or_qualified_name)),
-    ),
-  __query_modifier: ($) =>
-    choice(
-      seq(alias(kw("NEW"), $.new_modifier), alias(kw("SHARED"), $.scope_modifier)),
-      alias(kw("SHARED"), $.scope_modifier),
-      alias(kw("PRIVATE"), $.access_modifier),
-      alias(kw("PROTECTED"), $.access_modifier),
-      alias(kw("STATIC"), $.static_modifier),
-      seq(alias(kw("PRIVATE"), $.access_modifier), alias(kw("STATIC"), $.static_modifier)),
-      seq(alias(kw("PROTECTED"), $.access_modifier), alias(kw("STATIC"), $.static_modifier)),
-      seq(alias(kw("STATIC"), $.static_modifier), alias(kw("PRIVATE"), $.access_modifier)),
-      seq(alias(kw("STATIC"), $.static_modifier), alias(kw("PROTECTED"), $.access_modifier)),
     ),
 });

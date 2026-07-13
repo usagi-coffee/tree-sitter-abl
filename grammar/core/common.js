@@ -47,6 +47,18 @@ module.exports = ({ kw }) => ({
     choice($._identifier_or_qualified_name, seq("(", $._identifier_or_qualified_name, ")")),
   _define_private_prefix: ($) =>
     seq(kw("DEFINE", { offset: 3 }), optional(alias(kw("PRIVATE"), $.access_modifier))),
+  _buffer_query_modifier: ($) =>
+    choice(
+      seq(alias(kw("NEW"), $.new_modifier), alias(kw("SHARED"), $.scope_modifier)),
+      alias(kw("SHARED"), $.scope_modifier),
+      alias(kw("PRIVATE"), $.access_modifier),
+      alias(kw("PROTECTED"), $.access_modifier),
+      alias(kw("STATIC"), $.static_modifier),
+      seq(alias(kw("PRIVATE"), $.access_modifier), alias(kw("STATIC"), $.static_modifier)),
+      seq(alias(kw("PROTECTED"), $.access_modifier), alias(kw("STATIC"), $.static_modifier)),
+      seq(alias(kw("STATIC"), $.static_modifier), alias(kw("PRIVATE"), $.access_modifier)),
+      seq(alias(kw("STATIC"), $.static_modifier), alias(kw("PROTECTED"), $.access_modifier)),
+    ),
 
   __up_down_count_frame: ($) =>
     choice(seq(field("count", $._expression), optional($.frame_phrase)), $.frame_phrase),
