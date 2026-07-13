@@ -7,13 +7,13 @@
       "title": "OpenEdge ABL",
       "scope": "source.abl",
       "file-types": ["cls", "p", "i", "w"],
+      "highlights": "queries/highlights.scm",
       "injection-regex": "^abl$",
-      "class-name": "TreeSitterAbl",
-      "highlights": "queries/highlights.scm"
+      "class-name": "TreeSitterAbl"
     }
   ],
   "metadata": {
-    "version": "0.0.51",
+    "version": "0.0.52",
     "license": "MIT",
     "description": "OpenEdge ABL grammar for tree-sitter",
     "authors": [
@@ -37,6 +37,7 @@
   "bindings": {
     "c": true,
     "go": true,
+    "java": false,
     "node": true,
     "python": true,
     "rust": true,
