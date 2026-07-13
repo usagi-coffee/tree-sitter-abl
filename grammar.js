@@ -532,10 +532,11 @@ module.exports = grammar({
               $.function_call,
             ),
           ),
-          kw("IN"),
+          $.__widget_qualified_name_separator,
           $._widgets,
           field("widget", $.identifier),
         ),
+      __widget_qualified_name_separator: ($) => kw("IN"),
 
       _window_handle: ($) =>
         choice($._identifier_or_qualified_name, $.object_access, $.function_call, $.scoped_name),
