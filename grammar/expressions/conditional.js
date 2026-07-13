@@ -5,10 +5,11 @@ module.exports = ({ kw }) => ({
       $._expression,
       $.__conditional_then,
       $._expression,
-      kw("ELSE"),
+      $.__conditional_else,
       $._expression,
     ),
 
   __conditional_prefix: ($) => kw("IF"),
   __conditional_then: ($) => kw("THEN"),
+  __conditional_else: ($) => kw("ELSE"),
 });
