@@ -184,13 +184,13 @@ module.exports = ({ kw }) => ({
   __class_property_definition_modifier: ($) =>
     choice(
       seq(
-        $.__class_property_access_modifier,
+        $._member_access_modifier,
         optional($.__class_property_class_modifier),
         optional($.__class_property_modifier_tail),
       ),
       seq(
         $.__class_property_class_modifier,
-        optional($.__class_property_access_modifier),
+        optional($._member_access_modifier),
         optional($.__class_property_modifier_tail),
       ),
       $.__class_property_modifier_tail,
@@ -198,14 +198,6 @@ module.exports = ({ kw }) => ({
     ),
   __class_property_modifier_tail: ($) =>
     seq(alias(kw("OVERRIDE"), $.override_modifier), optional($._serialization_modifier)),
-  __class_property_access_modifier: ($) =>
-    choice(
-      alias(kw("PRIVATE"), $.access_modifier),
-      alias(kw("PACKAGE-PRIVATE"), $.access_modifier),
-      alias(kw("PROTECTED"), $.access_modifier),
-      alias(kw("PACKAGE-PROTECTED"), $.access_modifier),
-      alias(kw("PUBLIC"), $.access_modifier),
-    ),
   __class_property_class_modifier: ($) =>
     choice(
       alias(kw("STATIC"), $.static_modifier),

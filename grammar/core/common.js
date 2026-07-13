@@ -64,6 +64,14 @@ module.exports = ({ kw }) => ({
       alias(kw("SERIALIZABLE"), $.serialization_modifier),
       alias(kw("NON-SERIALIZABLE"), $.serialization_modifier),
     ),
+  _member_access_modifier: ($) =>
+    choice(
+      alias(kw("PRIVATE"), $.access_modifier),
+      alias(kw("PACKAGE-PRIVATE"), $.access_modifier),
+      alias(kw("PROTECTED"), $.access_modifier),
+      alias(kw("PACKAGE-PROTECTED"), $.access_modifier),
+      alias(kw("PUBLIC"), $.access_modifier),
+    ),
 
   __up_down_count_frame: ($) =>
     choice(seq(field("count", $._expression), optional($.frame_phrase)), $.frame_phrase),

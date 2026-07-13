@@ -57,27 +57,13 @@ module.exports = ({ kw }) => ({
       ),
       alias(kw("SHARED"), $.scope_modifier),
       seq(
-        choice(
-          alias(kw("PRIVATE"), $.access_modifier),
-          alias(kw("PACKAGE-PRIVATE"), $.access_modifier),
-          alias(kw("PROTECTED"), $.access_modifier),
-          alias(kw("PACKAGE-PROTECTED"), $.access_modifier),
-          alias(kw("PUBLIC"), $.access_modifier),
-        ),
+        $._member_access_modifier,
         optional(alias(kw("STATIC"), $.static_modifier)),
         optional($._serialization_modifier),
       ),
       seq(
         alias(kw("STATIC"), $.static_modifier),
-        optional(
-          choice(
-            alias(kw("PRIVATE"), $.access_modifier),
-            alias(kw("PACKAGE-PRIVATE"), $.access_modifier),
-            alias(kw("PROTECTED"), $.access_modifier),
-            alias(kw("PACKAGE-PROTECTED"), $.access_modifier),
-            alias(kw("PUBLIC"), $.access_modifier),
-          ),
-        ),
+        optional($._member_access_modifier),
         optional($._serialization_modifier),
       ),
       $._serialization_modifier,

@@ -105,15 +105,27 @@ module.exports = grammar({
     // Conflicts approach has slightly better state reduction (~500) than doing it conflicts free
     [
       $._buffer_query_modifier,
-      $.__class_property_access_modifier,
+      $._member_access_modifier,
       $.__data_source_access_modifier,
       $.__dataset_modifier,
-      $.__event_access_modifier,
       $.__temp_table_modifier,
       $.__variable_modifier,
     ],
-    [$.__class_property_access_modifier, $.__event_access_modifier],
-    [$.__class_property_access_modifier, $.__event_access_modifier, $.__variable_modifier],
+    [$._member_access_modifier, $.__variable_modifier],
+    [$.__dataset_modifier, $.__temp_table_modifier, $._member_access_modifier],
+    [
+      $.__dataset_modifier,
+      $.__temp_table_modifier,
+      $._buffer_query_modifier,
+      $._member_access_modifier,
+    ],
+    [
+      $.__data_source_access_modifier,
+      $.__dataset_modifier,
+      $.__temp_table_modifier,
+      $._buffer_query_modifier,
+      $._member_access_modifier,
+    ],
     [
       $._buffer_query_modifier,
       $.__class_property_class_modifier,
