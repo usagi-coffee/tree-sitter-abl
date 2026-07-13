@@ -30,5 +30,5 @@ module.exports = ($) => [
   [$.object_access, $.qualified_name, $.identifier],
   // Purpose: prefer explicit handle accessor form for TEMP-TABLE/BUFFER prefixes.
   // Example: BUFFER Customer:HANDLE.
-  [$._object_access_handle_prefix, $._object_access_plain],
+  [$._object_access_handle_prefix, $._object_access_plain_prefix],
 ];

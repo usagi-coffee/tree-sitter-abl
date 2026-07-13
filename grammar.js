@@ -417,11 +417,8 @@ module.exports = grammar({
         binary_expression($, $._statement_expression, $._comparison_operator_no_eq),
 
       // Accessors
-      _object_access_plain: ($) =>
-        seq(
-          field("left", choice($._object_access_plain_left, $._object_access_expression_left)),
-          $._object_access_tail,
-        ),
+      _object_access_plain_prefix: ($) =>
+        field("left", choice($._object_access_plain_left, $._object_access_expression_left)),
       _object_access_plain_left: ($) =>
         choice($._identifier_or_qualified_name, $.system_handle_identifier),
       _object_access_widget_prefix: ($) =>
@@ -440,12 +437,13 @@ module.exports = grammar({
       __object_access_handle_type: ($) =>
         prec(-1, choice(alias(kw("TEMP-TABLE"), $.identifier), alias(kw("BUFFER"), $.identifier))),
       object_access: ($) =>
-        choice(
-          seq(
-            choice($._object_access_widget_prefix, $._object_access_handle_prefix),
-            $._object_access_tail,
+        seq(
+          choice(
+            $._object_access_widget_prefix,
+            $._object_access_handle_prefix,
+            $._object_access_plain_prefix,
           ),
-          $._object_access_plain,
+          $._object_access_tail,
         ),
       _object_access_expression_left: ($) =>
         choice($.function_call, $.parenthesized_expression, $.new_expression),
