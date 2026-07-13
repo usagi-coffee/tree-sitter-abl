@@ -485,7 +485,8 @@ module.exports = grammar({
         ),
 
       // Callables
-      arguments: ($) => seq("(", optional($._argument_list), ")"),
+      arguments: ($) => seq($.__arguments_prefix, optional($._argument_list), ")"),
+      __arguments_prefix: ($) => "(",
       _argument_list: ($) => seq($.argument, repeat(seq(",", $.argument))),
       argument: ($) =>
         seq(
