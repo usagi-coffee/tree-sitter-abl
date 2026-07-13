@@ -12,9 +12,18 @@ const env = { ...process.env, XDG_CACHE_HOME: "/tmp/tree-sitter-cache" };
 function parse(rebuild) {
   return spawnSync(
     "tree-sitter",
-    ["parse", ...(rebuild ? ["--rebuild"] : []), "--time", "--stat", "--quiet", corpusPath],
-    { encoding: "utf8", env },
+    ["parse", "--time", "--stat", "--quiet", corpusPath],
+    { encoding: "utf8", env }
   );
+}
+
+const generate = spawnSync("bun", ["run", "generate"], {
+  encoding: "utf8",
+  env,
+});
+if (generate.status !== 0) {
+  process.stdout.write(`${generate.stdout ?? ""}${generate.stderr ?? ""}`);
+  process.exit(generate.status ?? 1);
 }
 
 const build = parse(true);
