@@ -21,11 +21,7 @@ export default ({ kw }) => ({
   __dataset_data_relation: ($) =>
     seq(
       kw("DATA-RELATION"),
-      optional(field("relation_name", $.identifier)),
-      kw("FOR"),
-      field("parent_buffer", $.identifier),
-      ",",
-      field("child_buffer", $.identifier),
+      $.__dataset_relation_head,
       seq(
         kw("RELATION-FIELDS"),
         "(",
@@ -72,13 +68,17 @@ export default ({ kw }) => ({
   __dataset_parent_id_relation: ($) =>
     seq(
       kw("PARENT-ID-RELATION"),
+      $.__dataset_relation_head,
+      seq(kw("PARENT-ID-FIELD"), field("parent_id_field", $.identifier)),
+      optional($.__dataset_parent_id_relation_tail),
+    ),
+  __dataset_relation_head: ($) =>
+    seq(
       optional(field("relation_name", $.identifier)),
       kw("FOR"),
       field("parent_buffer", $.identifier),
       ",",
       field("child_buffer", $.identifier),
-      seq(kw("PARENT-ID-FIELD"), field("parent_id_field", $.identifier)),
-      optional($.__dataset_parent_id_relation_tail),
     ),
   __dataset_parent_id_relation_tail: ($) =>
     choice(
