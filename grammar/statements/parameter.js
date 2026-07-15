@@ -19,7 +19,14 @@ export default ({ kw }) => ({
               kw("TABLE"),
               kw("FOR"),
               field("table", $._identifier_or_qualified_name),
-              repeat($.__parameter_table_parameter_option),
+              repeat(
+                choice(
+                  alias(kw("APPEND"), $.append),
+                  alias(kw("BIND"), $.bind),
+                  alias(kw("BY-VALUE"), $.by_value),
+                  alias(kw("NO-UNDO"), $.no_undo),
+                ),
+              ),
             ),
             seq(
               kw("TABLE-HANDLE"),
@@ -30,7 +37,14 @@ export default ({ kw }) => ({
               kw("DATASET"),
               kw("FOR"),
               field("dataset", $._identifier_or_qualified_name),
-              repeat($.__parameter_table_parameter_option),
+              repeat(
+                choice(
+                  alias(kw("APPEND"), $.append),
+                  alias(kw("BIND"), $.bind),
+                  alias(kw("BY-VALUE"), $.by_value),
+                  alias(kw("NO-UNDO"), $.no_undo),
+                ),
+              ),
             ),
             seq(
               kw("DATASET-HANDLE"),
@@ -82,13 +96,6 @@ export default ({ kw }) => ({
       optional(alias($._extent_phrase, $.extent_phrase)),
     ),
 
-  __parameter_table_parameter_option: ($) =>
-    choice(
-      alias(kw("APPEND"), $.append),
-      alias(kw("BIND"), $.bind),
-      alias(kw("BY-VALUE"), $.by_value),
-      alias(kw("NO-UNDO"), $.no_undo),
-    ),
   __parameter_handle_parameter_option: ($) =>
     choice(
       alias(kw("BIND"), $.bind),
