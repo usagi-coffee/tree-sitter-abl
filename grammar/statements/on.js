@@ -207,8 +207,8 @@ export default ({ kw }) => ({
   __on_ui_event: ($) =>
     choice(
       alias($.__on_ui_event_name, $.identifier),
-      prec(-1, $.string_literal),
-      prec(-2, $.__on_key_label),
+      $.string_literal,
+      $.__on_key_label,
       alias(token(choice("+", "-")), $.identifier),
     ),
   __on_ui_events: ($) =>

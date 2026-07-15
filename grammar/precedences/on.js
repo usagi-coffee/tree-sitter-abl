@@ -7,5 +7,5 @@ export default ($) => [
   // Purpose: keep overlapping key labels on the UI-event path until the following token resolves it.
   // Example: ON TAB OF field DO: END.
   // Reference: ON statement event-list and key-label forms.
-  [$.__on_ui_event, $.__on_key_label],
+  [$.__on_ui_event, $.__on_key_label, $._events],
 ];
