@@ -1,11 +1,6 @@
 export default ({ kw }) => ({
-  accum_expression: ($) =>
-    seq(
-      $.__accum_prefix,
-      field("operation", $.aggregate_phrase),
-      field("field", $.__accum_expression),
-    ),
+  accum_expression: ($) => seq($.__accum_head, field("field", $.__accum_expression)),
 
-  __accum_prefix: ($) => kw("ACCUM"),
+  __accum_head: ($) => seq(kw("ACCUM"), field("operation", $.aggregate_phrase)),
   __accum_expression: ($) => $._expression,
 });
