@@ -3,14 +3,20 @@ export default ({ kw }) => ({
     choice(seq(kw("TRIGGERS"), $.__triggers_body), seq(kw("ON"), $.__trigger_event_list)),
 
   __triggers_body: ($) =>
-    prec.right(seq(":", repeat1($.__trigger_block), kw("END"), optional(kw("TRIGGERS")))),
-
-  __trigger_block: ($) =>
-    seq(
-      kw("ON"),
-      field("event", $.__trigger_event_list),
-      optional(alias(kw("ANYWHERE"), $.anywhere)),
-      $.__trigger_action,
+    prec.right(
+      seq(
+        ":",
+        repeat1(
+          seq(
+            kw("ON"),
+            field("event", $.__trigger_event_list),
+            optional(alias(kw("ANYWHERE"), $.anywhere)),
+            $.__trigger_action,
+          ),
+        ),
+        kw("END"),
+        optional(kw("TRIGGERS")),
+      ),
     ),
   __trigger_action: ($) =>
     choice(alias(seq(kw("DO"), $.__trigger_body_tail), $.trigger_body), $.__persistent_trigger),
