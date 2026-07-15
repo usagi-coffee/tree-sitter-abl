@@ -191,24 +191,21 @@ export default grammar({
       include_named_argument: ($) =>
         seq("&", field("name", $.identifier), seq("=", field("value", $._include_argument_value))),
       _include_argument_value: ($) =>
-        prec(
-          1,
-          choice(
-            $.function_call,
-            $.binary_expression,
-            $.parenthesized_expression,
-            $._identifier_or_qualified_name,
-            alias(kw("NEW"), $.identifier),
-            alias(kw("WINDOW"), $.identifier),
-            $.object_access,
-            $.array_access,
-            $.string_literal,
-            $.number_literal,
-            alias($._signed_number_literal, $.number_literal),
-            $.boolean_literal,
-            $.preprocessor_name,
-            $.argument_reference,
-          ),
+        choice(
+          $.function_call,
+          $.binary_expression,
+          $.parenthesized_expression,
+          $._identifier_or_qualified_name,
+          alias(kw("NEW"), $.identifier),
+          alias(kw("WINDOW"), $.identifier),
+          $.object_access,
+          $.array_access,
+          $.string_literal,
+          $.number_literal,
+          alias($._signed_number_literal, $.number_literal),
+          $.boolean_literal,
+          $.preprocessor_name,
+          $.argument_reference,
         ),
 
       // Preprocessor

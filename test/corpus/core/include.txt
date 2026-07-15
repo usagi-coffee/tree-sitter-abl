@@ -147,3 +147,30 @@ INCLUDE with WINDOW positional argument
       (identifier))
     argument: (include_argument
       (number_literal))))
+
+================================================================================
+INCLUDE positional argument precedence
+================================================================================
+
+{include_precedence.i NEW WINDOW {1} myFunc() a -1}
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (include_file_reference
+    file: (include_file_path
+      (identifier))
+    argument: (include_argument
+      (identifier))
+    argument: (include_argument
+      (identifier))
+    argument: (include_argument
+      (argument_reference))
+    argument: (include_argument
+      (function_call
+        function: (identifier)
+        (arguments)))
+    argument: (include_argument
+      (identifier))
+    argument: (include_argument
+      (number_literal))))
