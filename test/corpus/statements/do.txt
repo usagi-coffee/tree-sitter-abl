@@ -559,3 +559,26 @@ END.
                 field: (qualified_name
                   left: (identifier)
                   right: (identifier))))))))))
+
+================================================================================
+DO PRESELECT with COLLATE phrase
+================================================================================
+
+DO PRESELECT EACH Customer COLLATE(Customer.Name, "CASE-INSENSITIVE", "basic") DESCENDING:
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (do_statement
+    (preselect_phrase
+      (preselect_record_list
+        (preselect_record
+          (record_phrase
+            record: (identifier))))
+      string: (qualified_name
+        left: (identifier)
+        right: (identifier))
+      strength: (string_literal)
+      collation: (string_literal))
+    (body)))

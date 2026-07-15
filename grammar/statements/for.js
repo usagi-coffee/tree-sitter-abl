@@ -54,15 +54,6 @@ export default ({ kw }) => ({
     ),
 
   __for_collate_phrase: ($) =>
-    seq(
-      kw("COLLATE"),
-      "(",
-      field("string", $._expression),
-      ",",
-      field("strength", $._expression),
-      optional(seq(",", field("collation", $._expression))),
-      ")",
-      optional(field("sort_order", kw("DESCENDING", { offset: 4 }))),
-    ),
+    seq($._collate_body, optional(field("sort_order", kw("DESCENDING", { offset: 4 })))),
   __for_while_phrase: ($) => seq(kw("WHILE"), field("condition", $._expression)),
 });

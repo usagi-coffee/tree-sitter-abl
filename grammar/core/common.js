@@ -123,6 +123,17 @@ export default ({ kw }) => ({
       optional(seq(kw("BY"), field("step", $._expression))),
     ),
 
+  _collate_body: ($) =>
+    seq(
+      kw("COLLATE"),
+      "(",
+      field("string", $._expression),
+      ",",
+      field("strength", $._expression),
+      optional(seq(",", field("collation", $._expression))),
+      ")",
+    ),
+
   _block_option: ($) =>
     choice(
       $.stop_after_phrase,

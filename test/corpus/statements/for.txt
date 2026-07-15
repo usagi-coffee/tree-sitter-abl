@@ -19,6 +19,27 @@ END.
           right: (identifier))))))
 
 ================================================================================
+FOR with COLLATE phrase
+================================================================================
+
+FOR EACH Customer COLLATE(Customer.Name, "CASE-INSENSITIVE", "basic") DESCENDING:
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (for_statement
+    (record_phrase
+      record: (identifier))
+    (collate_phrase
+      string: (qualified_name
+        left: (identifier)
+        right: (identifier))
+      strength: (string_literal)
+      collation: (string_literal))
+    (body)))
+
+================================================================================
 FOR EACH with GROUP BY
 ================================================================================
 
