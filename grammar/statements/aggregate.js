@@ -4,20 +4,19 @@ export default ({ kw }) => ({
   __aggregate_prefix: ($) =>
     seq(
       kw("AGGREGATE"),
-      repeat1($.__aggregate_assignment),
+      repeat1(
+        seq(
+          field("target", $._expression),
+          "=",
+          $.__aggregate_operation,
+          "(",
+          field("field", $._expression),
+          ")",
+        ),
+      ),
       kw("FOR"),
       field("table", $._identifier_or_qualified_name),
       optional(alias($.__aggregate_where_phrase, $.where_phrase)),
-    ),
-
-  __aggregate_assignment: ($) =>
-    seq(
-      field("target", $._expression),
-      "=",
-      $.__aggregate_operation,
-      "(",
-      field("field", $._expression),
-      ")",
     ),
   __aggregate_operation: ($) =>
     choice(kw("COUNT"), kw("TOTAL"), kw("AVERAGE"), kw("MAXIMUM"), kw("MINIMUM")),
