@@ -78,7 +78,16 @@ export default ({ kw }) => ({
   constructor_definition: ($) =>
     seq(
       kw("CONSTRUCTOR"),
-      repeat($.__class_constructor_modifier),
+      repeat(
+        choice(
+          alias(kw("PRIVATE"), $.access_modifier),
+          alias(kw("PACKAGE-PRIVATE"), $.access_modifier),
+          alias(kw("PROTECTED"), $.access_modifier),
+          alias(kw("PACKAGE-PROTECTED"), $.access_modifier),
+          alias(kw("PUBLIC"), $.access_modifier),
+          alias(kw("STATIC"), $.static_modifier),
+        ),
+      ),
       field("name", $.identifier),
       alias($._method_parameters, $.parameters),
       alias($._colon, ":"),
@@ -216,16 +225,6 @@ export default ({ kw }) => ({
       alias(kw("STATIC"), $.static_modifier),
       alias(kw("OVERRIDE"), $.override_modifier),
       alias(kw("FINAL"), $.final_modifier),
-    ),
-
-  __class_constructor_modifier: ($) =>
-    choice(
-      alias(kw("PRIVATE"), $.access_modifier),
-      alias(kw("PACKAGE-PRIVATE"), $.access_modifier),
-      alias(kw("PROTECTED"), $.access_modifier),
-      alias(kw("PACKAGE-PROTECTED"), $.access_modifier),
-      alias(kw("PUBLIC"), $.access_modifier),
-      alias(kw("STATIC"), $.static_modifier),
     ),
 
   _method_return_type: ($) =>
