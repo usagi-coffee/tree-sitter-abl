@@ -29,16 +29,8 @@ export default ({ kw }) => ({
     seq("[", optional(choice($.number_literal, $.preprocessor_name, $.identifier)), "]"),
   __var_modifier: ($) =>
     choice(
-      seq($.__var_access_modifier, optional($.__var_storage_modifier)),
+      seq($._member_access_modifier, optional($.__var_storage_modifier)),
       $.__var_storage_modifier,
-    ),
-  __var_access_modifier: ($) =>
-    choice(
-      alias(kw("PRIVATE"), $.access_modifier),
-      alias(kw("PACKAGE-PRIVATE"), $.access_modifier),
-      alias(kw("PROTECTED"), $.access_modifier),
-      alias(kw("PACKAGE-PROTECTED"), $.access_modifier),
-      alias(kw("PUBLIC"), $.access_modifier),
     ),
   __var_storage_modifier: ($) =>
     choice(
