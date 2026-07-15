@@ -8,7 +8,15 @@ export default ({ kw }) => ({
       seq(
         kw("THROUGH"),
         $._program_target,
-        repeat($.__input_output_through_argument),
+        repeat(
+          choice(
+            $.string_literal,
+            $.number_literal,
+            $.identifier,
+            $.preprocessor_name,
+            $._value_expression,
+          ),
+        ),
         repeat(
           choice(
             alias(kw("ECHO"), $.echo),
@@ -19,14 +27,5 @@ export default ({ kw }) => ({
           ),
         ),
       ),
-    ),
-
-  __input_output_through_argument: ($) =>
-    choice(
-      $.string_literal,
-      $.number_literal,
-      $.identifier,
-      $.preprocessor_name,
-      $._value_expression,
     ),
 });
