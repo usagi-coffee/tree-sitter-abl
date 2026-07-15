@@ -181,7 +181,7 @@ export default grammar({
           optional("."),
         ),
       __include_file_opener: ($) => "{",
-      include_expression: ($) => prec(1, $.__include_file_reference),
+      include_expression: ($) => $.__include_file_reference,
       include_statement: ($) => $.__include_file_reference,
       __include_arguments: ($) =>
         choice(
