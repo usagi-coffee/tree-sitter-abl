@@ -70,17 +70,12 @@ export default ({ kw }) => ({
       seq(
         kw("FGCOLOR"),
         field("fgcolor", $._expression),
-        optional(
-          choice(
-            seq(
-              kw("BGCOLOR"),
-              field("bgcolor", $._expression),
-              optional(seq(kw("FONT"), field("font", $._expression))),
-            ),
-            seq(kw("FONT"), field("font", $._expression)),
-          ),
-        ),
+        optional($.__prompt_for_constant_style_after_fgcolor),
       ),
+      $.__prompt_for_constant_style_after_fgcolor,
+    ),
+  __prompt_for_constant_style_after_fgcolor: ($) =>
+    choice(
       seq(
         kw("BGCOLOR"),
         field("bgcolor", $._expression),
