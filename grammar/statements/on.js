@@ -190,7 +190,7 @@ export default ({ kw }) => ({
       kw("PREV-FRAME"),
       kw("TAB"),
     ),
-  __on_web_notify_event: ($) => prec(1, alias(token(/["']WEB-NOTIFY["']/i), $.string_literal)),
+  __on_web_notify_event: ($) => alias(token(/["']WEB-NOTIFY["']/i), $.string_literal),
   __on_ui_event_name: ($) =>
     token(
       prec(
