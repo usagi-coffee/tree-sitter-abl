@@ -9,16 +9,13 @@ export default ({ kw }) => ({
 
   __display_fields_body: ($) =>
     choice(
-      prec(3, seq($.__display_frame_phrases, $._no_error_terminator)),
-      prec(
-        2,
-        seq(
-          $._stream_phrase,
-          optional(alias(kw("UNLESS-HIDDEN"), $.unless_hidden)),
-          optional($.in_window_phrase),
-          $.__display_frame_phrases,
-          $._no_error_terminator,
-        ),
+      seq($.__display_frame_phrases, $._no_error_terminator),
+      seq(
+        $._stream_phrase,
+        optional(alias(kw("UNLESS-HIDDEN"), $.unless_hidden)),
+        optional($.in_window_phrase),
+        $.__display_frame_phrases,
+        $._no_error_terminator,
       ),
       seq(
         optional($._stream_phrase),

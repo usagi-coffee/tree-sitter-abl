@@ -494,6 +494,20 @@ DISPLAY WITH FRAME a 1 DOWN NO-LABEL OVERLAY.
       (overlay))))
 
 ================================================================================
+DISPLAY with stream and frame only
+================================================================================
+
+DISPLAY STREAM s1 WITH FRAME f1.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (display_statement
+    stream: (identifier)
+    (frame_phrase
+      frame: (identifier))))
+
+================================================================================
 DISPLAY - standalone aggregate expression
 ================================================================================
 
