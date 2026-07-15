@@ -113,7 +113,7 @@ export default ({ kw }) => ({
     ),
   __on_database_event_branch: ($) =>
     seq(
-      field("event", $.__on_database_event_name),
+      field("event", $.__on_database_event),
       kw("OF"),
       field("object", $._identifier_or_qualified_name),
       optional(alias($.__on_referencing_phrase, $.referencing_phrase)),
@@ -145,7 +145,6 @@ export default ({ kw }) => ({
   __on_anywhere: ($) => alias(kw("ANYWHERE"), $.anywhere),
   __on_database_event: ($) =>
     choice(kw("CREATE"), kw("DELETE"), kw("FIND"), kw("WRITE"), kw("ASSIGN")),
-  __on_database_event_name: ($) => $.__on_database_event,
   // __on_key_label accepts both $.__on_ui_event_name tokens (TAB, ENDKEY, etc.)
   // and plain $._events (F1, F10, etc.).
   __on_key_label: ($) => choice(alias($.__on_ui_event_name, $.identifier), $._events),
