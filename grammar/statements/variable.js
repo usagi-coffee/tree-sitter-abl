@@ -23,7 +23,7 @@ export default ({ kw }) => ({
         choice(
           alias($.__variable_extent_phrase, $.extent_phrase),
           seq(kw("SERIALIZE-NAME"), field("serialize_name", $._identifier_or_string_literal)),
-          alias($.__variable_format_phrase, $.format_phrase),
+          alias($._format_string, $.format_phrase),
           $._color_font_option,
           seq(kw("COLUMN-LABEL"), field("column_label", $._format_labels)),
           seq(kw("CONTEXT-HELP-ID"), field("context_help_id", $._expression)),
@@ -45,8 +45,6 @@ export default ({ kw }) => ({
       kw("EXTENT"),
       optional(field("size", choice($.number_literal, $.preprocessor_name, $.identifier))),
     ),
-
-  __variable_format_phrase: ($) => $._format_string,
 
   __variable_modifier: ($) =>
     choice(
