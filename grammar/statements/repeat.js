@@ -12,16 +12,7 @@ export default ({ kw }) => ({
       $.__repeat_body_tail,
     ),
   __repeat_body_tail: ($) =>
-    choice(
-      seq($._loop_phrase, optional($.__repeat_body_after_loop)),
-      seq($.__repeat_condition_phrase, optional($.__repeat_body_after_condition)),
-      seq(
-        alias(kw("TRANSACTION", { offset: 5 }), $.transaction),
-        optional($.__repeat_body_after_transaction),
-      ),
-      seq(repeat1($.__repeat_block_option), $.body),
-      $.body,
-    ),
+    choice(seq($._loop_phrase, optional($.__repeat_body_after_loop)), $.__repeat_body_after_loop),
   __repeat_body_after_loop: ($) =>
     choice(
       seq($.__repeat_condition_phrase, optional($.__repeat_body_after_condition)),
