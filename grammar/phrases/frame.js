@@ -1,7 +1,7 @@
 export default ({ kw }) => ({
   frame_phrase: ($) =>
     seq(
-      prec(1, kw("WITH")),
+      kw("WITH"),
       repeat1(
         choice(
           $.at_phrase,
