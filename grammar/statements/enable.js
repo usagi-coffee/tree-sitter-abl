@@ -5,15 +5,17 @@ export default ({ kw }) => ({
     seq(
       kw("ENABLE"),
       optional(alias(kw("UNLESS-HIDDEN"), $.unless_hidden)),
-      choice(
-        seq(
-          alias(kw("ALL"), $.all),
-          optional(seq(kw("EXCEPT"), repeat1(field("except", $._identifier_or_qualified_name)))),
-        ),
-        repeat1(alias($.__enable_item, $.enable_item)),
-      ),
+      $.__enable_body,
       optional($.in_window_phrase),
       optional($.frame_phrase),
+    ),
+  __enable_body: ($) =>
+    choice(
+      seq(
+        alias(kw("ALL"), $.all),
+        optional(seq(kw("EXCEPT"), repeat1(field("except", $._identifier_or_qualified_name)))),
+      ),
+      repeat1(alias($.__enable_item, $.enable_item)),
     ),
 
   __enable_item: ($) =>
