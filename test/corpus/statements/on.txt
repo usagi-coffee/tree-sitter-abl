@@ -479,6 +479,8 @@ ON TAB TAB.
 ON TAB ENDKEY.
 ON TAB OF input-field DO:
 END.
+ON F10 OF input-field DO:
+END.
 
 --------------------------------------------------------------------------------
 
@@ -489,6 +491,13 @@ END.
   (on_statement
     event: (identifier)
     function: (key_function))
+  (on_statement
+    event: (identifier)
+    (of_phrase
+      widget: (widget_phrase
+        handle: (identifier)))
+    (do_statement
+      (body)))
   (on_statement
     event: (identifier)
     (of_phrase
