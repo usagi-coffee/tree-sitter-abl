@@ -2,7 +2,7 @@ export default ({ kw }) => ({
   accum_expression: ($) =>
     seq(
       $.__accum_prefix,
-      field("operation", repeat1($.__accum_aggregate)),
+      field("operation", $.__accum_aggregate),
       field("field", $.__accum_expression),
     ),
 
