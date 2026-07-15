@@ -27,13 +27,12 @@ export default ({ kw }) => ({
           kw("TO"),
           field("end", $._expression),
         ),
-        optional(
-          choice(seq($.__trigger_down_phrase, $.__trigger_body_block), $.__trigger_body_block),
-        ),
+        optional($.__trigger_body_after_loop),
       ),
-      seq($.__trigger_down_phrase, $.__trigger_body_block),
-      $.__trigger_body_block,
+      $.__trigger_body_after_loop,
     ),
+  __trigger_body_after_loop: ($) =>
+    choice(seq($.__trigger_down_phrase, $.__trigger_body_block), $.__trigger_body_block),
   __trigger_body_block: ($) => seq(":", repeat($._statement), kw("END"), "."),
   __trigger_down_phrase: ($) =>
     seq(kw("DOWN"), optional(kw("TO")), optional(field("down", $._expression))),
