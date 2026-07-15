@@ -17,8 +17,7 @@ export default ({ kw }) => ({
         alias(kw("TRANSACTION", { offset: 5 }), $.transaction),
         optional($.__do_body_after_first_transaction),
       ),
-      seq($.__do_condition_or_loop_phrase, optional($.__do_body_after_condition_or_loop)),
-      $.__do_block_tail,
+      $.__do_body_after_first_transaction,
     ),
   __do_body_after_first_transaction: ($) =>
     choice(
