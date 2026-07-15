@@ -9,15 +9,6 @@ export default ({ kw }) => ({
       $._dataset_body,
     ),
 
-  __dataset_serializable_option: ($) =>
-    choice(
-      seq(kw("NAMESPACE-URI"), field("namespace_uri", $._expression)),
-      seq(kw("NAMESPACE-PREFIX"), field("namespace_prefix", $._expression)),
-      seq(kw("XML-NODE-NAME"), field("xml_node_name", $._expression)),
-      seq(kw("SERIALIZE-NAME"), field("serialize_name", $._expression)),
-      seq(kw("XML-NODE-TYPE"), field("xml_node_type", $._expression)),
-    ),
-
   __dataset_data_relation: ($) =>
     seq(
       kw("DATA-RELATION"),

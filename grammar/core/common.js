@@ -225,7 +225,15 @@ export default ({ kw }) => ({
   _dataset_body: ($) =>
     seq(
       field("name", $.identifier),
-      repeat($.__dataset_serializable_option),
+      repeat(
+        choice(
+          seq(kw("NAMESPACE-URI"), field("namespace_uri", $._expression)),
+          seq(kw("NAMESPACE-PREFIX"), field("namespace_prefix", $._expression)),
+          seq(kw("XML-NODE-NAME"), field("xml_node_name", $._expression)),
+          seq(kw("SERIALIZE-NAME"), field("serialize_name", $._expression)),
+          seq(kw("XML-NODE-TYPE"), field("xml_node_type", $._expression)),
+        ),
+      ),
       optional($.__dataset_body_tail),
     ),
   __dataset_body_tail: ($) =>
