@@ -4,7 +4,7 @@ export default ({ kw }) => ({
   __case_prefix: ($) =>
     seq(
       kw("CASE"),
-      optional($._expression),
+      $._expression,
       alias($._colon, ":"),
       repeat1($.case_when_phrase),
       optional($.case_otherwise_phrase),
