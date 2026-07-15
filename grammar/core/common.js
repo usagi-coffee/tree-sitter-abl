@@ -166,16 +166,10 @@ export default ({ kw }) => ({
     seq(kw("LOB-DIR"), field("directory", choice($.preprocessor_name, $._value_expression))),
 
   _skip_phrase: ($) =>
-    choice(
-      prec.right(1, seq(kw("SKIP"), "(", field("skip", $._expression), ")")),
-      prec(-1, seq(kw("SKIP"))),
-    ),
+    prec.right(choice(seq(kw("SKIP"), "(", field("skip", $._expression), ")"), kw("SKIP"))),
 
   _space_phrase: ($) =>
-    choice(
-      prec.right(1, seq(kw("SPACE"), "(", field("space", $._expression), ")")),
-      prec(-1, seq(kw("SPACE"))),
-    ),
+    prec.right(choice(seq(kw("SPACE"), "(", field("space", $._expression), ")"), kw("SPACE"))),
 
   _table_body: ($) =>
     seq(

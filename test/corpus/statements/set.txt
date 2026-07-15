@@ -363,3 +363,20 @@ SET Customer EXCEPT Comments WITH FRAME fCust NO-ERROR.
     (frame_phrase
       frame: (identifier))
     (no_error)))
+
+================================================================================
+SET - bare SKIP and SPACE
+================================================================================
+
+SET field1 SPACE SKIP.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (set_statement
+    (field
+      field: (identifier))
+    (field
+      (space_phrase))
+    (field
+      (skip_phrase))))
