@@ -2,21 +2,7 @@ export default ({ kw }) => ({
   editor_phrase: ($) =>
     seq(
       kw("EDITOR"),
-      choice(
-        $.size_phrase,
-        seq(
-          kw("INNER-CHARS"),
-          field("inner_chars", $.number_literal),
-          kw("INNER-LINES"),
-          field("inner_lines", $.number_literal),
-        ),
-        seq(
-          kw("INNER-LINES"),
-          field("inner_lines", $.number_literal),
-          kw("INNER-CHARS"),
-          field("inner_chars", $.number_literal),
-        ),
-      ),
+      $.__editor_size,
       optional(
         repeat1(
           choice(
@@ -30,6 +16,22 @@ export default ({ kw }) => ({
             $._tooltip_phrase,
           ),
         ),
+      ),
+    ),
+  __editor_size: ($) =>
+    choice(
+      $.size_phrase,
+      seq(
+        kw("INNER-CHARS"),
+        field("inner_chars", $.number_literal),
+        kw("INNER-LINES"),
+        field("inner_lines", $.number_literal),
+      ),
+      seq(
+        kw("INNER-LINES"),
+        field("inner_lines", $.number_literal),
+        kw("INNER-CHARS"),
+        field("inner_chars", $.number_literal),
       ),
     ),
 });
