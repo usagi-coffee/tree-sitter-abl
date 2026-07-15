@@ -59,15 +59,7 @@ export default ({ kw }) => ({
             seq($.__frame_column_keyword, field("column", $.__frame_expression)),
           ),
           alias(seq(kw("VIEW-AS"), field("widget", kw("DIALOG-BOX"))), $.view_as_phrase),
-          alias(
-            prec.right(
-              1,
-              seq(kw("DOWN"), field("count", choice($.number_literal, $.parenthesized_expression))),
-            ),
-            $.down,
-          ),
-          alias($.__frame_down_value, $.down),
-          alias($.__frame_down_plain, $.down),
+          $.down,
           $.__frame_skip_phrase,
         ),
       ),
@@ -88,8 +80,16 @@ export default ({ kw }) => ({
   __frame_column_keyword: ($) => choice(kw("COLUMN"), kw("COLUMNS"), kw("COL")),
   __frame_identifier: ($) => $.identifier,
   __frame_expression: ($) => $._expression,
-  __frame_down_value: ($) => seq(field("value", $.__frame_expression), kw("DOWN")),
-  __frame_down_plain: ($) => prec(-1, seq(kw("DOWN"))),
+  down: ($) =>
+    choice(
+      prec.right(
+        seq(
+          kw("DOWN"),
+          optional(field("count", choice($.number_literal, $.parenthesized_expression))),
+        ),
+      ),
+      seq(field("value", $.__frame_expression), kw("DOWN")),
+    ),
   __frame_color_value: ($) => choice(kw("NORMAL"), kw("INPUT"), kw("MESSAGES"), $.color_phrase),
 
   __frame_with_identifier: ($) =>

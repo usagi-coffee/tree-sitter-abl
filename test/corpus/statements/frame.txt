@@ -212,6 +212,8 @@ FRAME - WITH DOWN
 ================================================================================
 
 DEFINE FRAME down Customer.CustNum WITH 10 DOWN.
+DEFINE FRAME downBare Customer.CustNum WITH DOWN.
+DEFINE FRAME downPrefix Customer.CustNum WITH DOWN 10.
 
 --------------------------------------------------------------------------------
 
@@ -223,7 +225,22 @@ DEFINE FRAME down Customer.CustNum WITH 10 DOWN.
       right: (identifier))
     (frame_phrase
       (down
-        value: (number_literal)))))
+        value: (number_literal))))
+  (frame_definition
+    name: (identifier)
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (frame_phrase
+      (down)))
+  (frame_definition
+    name: (identifier)
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (frame_phrase
+      (down
+        count: (number_literal)))))
 
 ================================================================================
 FRAME - WITH WIDTH
