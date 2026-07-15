@@ -38,25 +38,18 @@ export default ({ kw }) => ({
   __record_query_after_frame: ($) =>
     choice($.__record_query_where_or_lock, $.__record_query_use_index),
   __record_query_where_or_lock: ($) =>
-    choice(
-      seq(
-        alias($.__record_query_where_phrase, $.where_phrase),
-        optional($.__record_query_after_where),
+    seq(
+      choice(
+        seq(
+          alias($.__record_query_where_phrase, $.where_phrase),
+          optional(alias($.__record_query_lock_phrase, $.no_lock)),
+        ),
+        seq(
+          alias($.__record_query_lock_phrase, $.no_lock),
+          optional(alias($.__record_query_where_phrase, $.where_phrase)),
+        ),
       ),
-      seq(alias($.__record_query_lock_phrase, $.no_lock), optional($.__record_query_after_lock)),
-    ),
-  __record_query_after_where: ($) =>
-    choice(
-      seq(alias($.__record_query_lock_phrase, $.no_lock), optional($.__record_query_use_index)),
-      $.__record_query_use_index,
-    ),
-  __record_query_after_lock: ($) =>
-    choice(
-      seq(
-        alias($.__record_query_where_phrase, $.where_phrase),
-        optional($.__record_query_use_index),
-      ),
-      $.__record_query_use_index,
+      optional($.__record_query_use_index),
     ),
 
   __record_query_where_phrase: ($) => seq(kw("WHERE"), optional($._expression)),
