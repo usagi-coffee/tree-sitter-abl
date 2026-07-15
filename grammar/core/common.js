@@ -181,7 +181,15 @@ export default ({ kw }) => ({
     seq(
       field("name", $.identifier),
       optional(alias(kw("NO-UNDO"), $.no_undo)),
-      repeat($.__temp_table_serializable_option),
+      repeat(
+        choice(
+          seq(kw("NAMESPACE-URI"), field("namespace_uri", $.string_literal)),
+          seq(kw("NAMESPACE-PREFIX"), field("namespace_prefix", $.string_literal)),
+          seq(kw("XML-NODE-NAME"), field("node", $.string_literal)),
+          $.__temp_table_serialize_name_phrase,
+          seq(kw("XML-NODE-TYPE"), field("xml_node_type", $.string_literal)),
+        ),
+      ),
       optional(alias(kw("REFERENCE-ONLY"), $.reference_only)),
       repeat(
         choice(
