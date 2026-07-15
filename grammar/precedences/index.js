@@ -20,6 +20,7 @@ import grammar_put from "./put.js";
 import grammar_prompt_for from "./prompt-for.js";
 import grammar_export from "./export.js";
 import grammar_input from "./input.js";
+import grammar_entered from "./entered.js";
 import grammar_run from "./run.js";
 import grammar_subscribe from "./subscribe.js";
 import grammar_update from "./update.js";
@@ -51,6 +52,7 @@ export default ($) => [
   ...grammar_prompt_for($),
   ...grammar_export($),
   ...grammar_input($),
+  ...grammar_entered($),
   ...grammar_run($),
   ...grammar_subscribe($),
   ...grammar_update($),
