@@ -10,8 +10,10 @@ export default ({ kw }) => ({
       kw("ON"),
       field("event", $.__trigger_event_list),
       optional(alias(kw("ANYWHERE"), $.anywhere)),
-      choice(alias(seq(kw("DO"), $.__trigger_body_tail), $.trigger_body), $.__persistent_trigger),
+      $.__trigger_action,
     ),
+  __trigger_action: ($) =>
+    choice(alias(seq(kw("DO"), $.__trigger_body_tail), $.trigger_body), $.__persistent_trigger),
 
   __trigger_event_list: ($) => seq($._events, repeat(seq(",", $._events))),
 
