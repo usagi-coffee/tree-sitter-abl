@@ -570,8 +570,14 @@ export default grammar({
       _object_access_separator: ($) => choice($._namecolon, token.immediate("?:")),
       _identifier_or_string_literal: ($) => choice($.identifier, $.string_literal),
       _value_expression: ($) =>
-        seq($.__value_expression_prefix, "(", field("value", $._expression), ")"),
+        seq(
+          $.__value_expression_prefix,
+          $.__value_expression_opener,
+          field("value", $._expression),
+          ")",
+        ),
       __value_expression_prefix: ($) => kw("VALUE"),
+      __value_expression_opener: ($) => "(",
       _terminator: ($) => choice($._terminator_dot, ";"),
       _no_error_terminator: ($) => seq(optional($.__no_error), $._terminator),
       __no_error: ($) => alias(kw("NO-ERROR"), $.no_error),
