@@ -32,8 +32,7 @@ OUTPUT TO TERMINAL NO-ECHO PAGED PAGE-SIZE 24.
     (append))
   (output_statement
     printer: (string_literal)
-    (num_copies_phrase
-      copies: (number_literal))
+    copies: (number_literal)
     (landscape)
     (paged)
     (page_size_phrase
@@ -306,16 +305,13 @@ OUTPUT TO TERMINAL.
   (output_statement
     (close))
   (output_statement
-    (num_copies_phrase
-      copies: (number_literal)))
+    copies: (number_literal))
   (output_statement
     (landscape)
-    (num_copies_phrase
-      copies: (number_literal)))
+    copies: (number_literal))
   (output_statement
     (portrait)
-    (num_copies_phrase
-      value: (identifier))
+    value: (identifier)
     (collate))
   (output_statement
     printer: (string_literal)
