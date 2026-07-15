@@ -435,7 +435,6 @@ export default grammar({
         ),
       _object_access_handle_prefix: ($) =>
         prec.right(
-          1,
           seq(
             field("handle", $.__object_access_handle_type),
             field("name", $._identifier_or_qualified_name),
