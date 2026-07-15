@@ -214,12 +214,7 @@ export default ({ kw }) => ({
         alias(kw("REFERENCE-ONLY"), $.reference_only),
         optional($.__dataset_body_after_reference_only),
       ),
-      seq($.__dataset_for_phrase, optional($.__dataset_body_after_for)),
-      seq(
-        repeat1(alias($.__dataset_data_relation, $.data_relation)),
-        repeat(alias($.__dataset_parent_id_relation, $.parent_id_relation)),
-      ),
-      repeat1(alias($.__dataset_parent_id_relation, $.parent_id_relation)),
+      $.__dataset_body_after_reference_only,
     ),
   __dataset_body_after_reference_only: ($) =>
     choice(
