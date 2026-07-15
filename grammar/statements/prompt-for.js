@@ -49,28 +49,16 @@ export default ({ kw }) => ({
     choice(
       seq(
         alias($.__prompt_for_at_phrase, $.at_phrase),
-        optional(
-          choice(
-            seq(
-              alias($.__prompt_for_view_as_phrase, $.view_as_phrase),
-              optional($.__prompt_for_constant_style_tail),
-            ),
-            $.__prompt_for_constant_style_tail,
-          ),
-        ),
+        optional($.__prompt_for_constant_after_position),
       ),
       seq(
         alias($.__prompt_for_to_phrase, $.to_phrase),
-        optional(
-          choice(
-            seq(
-              alias($.__prompt_for_view_as_phrase, $.view_as_phrase),
-              optional($.__prompt_for_constant_style_tail),
-            ),
-            $.__prompt_for_constant_style_tail,
-          ),
-        ),
+        optional($.__prompt_for_constant_after_position),
       ),
+      $.__prompt_for_constant_after_position,
+    ),
+  __prompt_for_constant_after_position: ($) =>
+    choice(
       seq(
         alias($.__prompt_for_view_as_phrase, $.view_as_phrase),
         optional($.__prompt_for_constant_style_tail),
