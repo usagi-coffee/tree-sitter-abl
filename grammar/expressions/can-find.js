@@ -17,16 +17,7 @@ export default ({ kw }) => ({
   __record_query_options: ($) =>
     choice(
       seq(alias($.__record_query_of_phrase, $.of_phrase), optional($.__record_query_after_of)),
-      seq(
-        alias($.__record_query_using_phrase, $.using_phrase),
-        optional($.__record_query_after_using),
-      ),
-      seq(
-        alias($.__record_query_frame_phrase, $.frame_phrase),
-        optional($.__record_query_after_frame),
-      ),
-      $.__record_query_where_or_lock,
-      $.__record_query_use_index,
+      $.__record_query_after_of,
     ),
   __record_query_after_of: ($) =>
     choice(
