@@ -4,11 +4,7 @@ export default ({ kw }) => ({
   __update_prefix: ($) => seq(kw("UPDATE"), choice($.__update_record_body, $.__update_fields_body)),
 
   __update_record_body: ($) =>
-    seq(
-      field("record", $._identifier_or_qualified_name),
-      optional($._except_fields),
-      optional($.frame_phrase),
-    ),
+    seq(field("record", $.__update_record), optional($._except_fields), optional($.frame_phrase)),
 
   __update_fields_body: ($) =>
     seq(
@@ -42,5 +38,5 @@ export default ({ kw }) => ({
 
   __update_field_target_item: ($) =>
     seq(field("field", $.__update_field_target), optional($.format_phrase)),
-  __update_field_target: ($) => choice(prec(1, $._identifier_or_qualified_name), $.array_access),
+  __update_field_target: ($) => choice($._identifier_or_qualified_name, $.array_access),
 });

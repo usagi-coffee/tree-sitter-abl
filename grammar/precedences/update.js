@@ -1,4 +1,7 @@
 // References: UPDATE statement.
-// Purpose: treat bare identifiers as fields unless record form is explicit (EXCEPT).
-// Example: UPDATE Customer WITH FRAME f.
-export default ($) => [[$.__update_field_target, $.__update_record]];
+export default ($) => [
+  // Purpose: prefer UPDATE fields over function-call reduction and bare records.
+  // Example: UPDATE Customer WITH FRAME f.
+  // Reference: UPDATE statement field and record forms.
+  [$.__update_field_target, $.function_call, $.__update_record],
+];
