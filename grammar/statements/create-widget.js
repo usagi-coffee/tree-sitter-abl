@@ -39,15 +39,14 @@ export default ({ kw }) => ({
     seq(
       kw("TRIGGERS"),
       alias($._colon, ":"),
-      repeat1($.__create_widget_trigger_definition),
+      repeat1(
+        seq(
+          kw("ON"),
+          field("event", choice(kw("CHOOSE"), kw("ENTRY"), kw("LEAVE"), $.identifier)),
+          $.do_statement,
+        ),
+      ),
       kw("END"),
       kw("TRIGGERS"),
-    ),
-
-  __create_widget_trigger_definition: ($) =>
-    seq(
-      kw("ON"),
-      field("event", choice(kw("CHOOSE"), kw("ENTRY"), kw("LEAVE"), $.identifier)),
-      $.do_statement,
     ),
 });
