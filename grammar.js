@@ -375,14 +375,9 @@ export default grammar({
             field("left", $._assignable),
             field("operator", $.assignment_operator),
             field("right", choice($.array_initializer, $._expression)),
-            optional($.__assignment_statement_tail),
-            $._terminator,
+            optional($.widget_phrase),
+            $._no_error_terminator,
           ),
-        ),
-      __assignment_statement_tail: ($) =>
-        choice(
-          seq($.widget_phrase, optional(alias(kw("NO-ERROR"), $.no_error))),
-          alias(kw("NO-ERROR"), $.no_error),
         ),
 
       _assignable: ($) =>

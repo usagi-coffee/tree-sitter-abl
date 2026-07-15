@@ -39,6 +39,7 @@ x = +5.
 x = 1.31.2022.
 x = 42 NO-ERROR.
 obj:prop = "value" FIELD Cust.Name IN FRAME frm.
+obj:prop = "value" FIELD Cust.Name IN FRAME frm NO-ERROR.
 
 --------------------------------------------------------------------------------
 
@@ -87,4 +88,16 @@ obj:prop = "value" FIELD Cust.Name IN FRAME frm.
       field: (qualified_name
         left: (identifier)
         right: (identifier))
-      frame: (identifier))))
+      frame: (identifier)))
+  (assignment_statement
+    left: (object_access
+      left: (identifier)
+      right: (identifier))
+    operator: (assignment_operator)
+    right: (string_literal)
+    (widget_phrase
+      field: (qualified_name
+        left: (identifier)
+        right: (identifier))
+      frame: (identifier))
+    (no_error)))
