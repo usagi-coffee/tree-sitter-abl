@@ -39,8 +39,7 @@ export default ({ kw }) => ({
         repeat1(alias($.__open_query_by_phrase, $.by_phrase)),
         optional($.__open_query_tail_after_by),
       ),
-      seq(field("lock", $._lock_option), optional($.__open_query_reposition_tail)),
-      $.__open_query_reposition_tail,
+      $.__open_query_tail_after_by,
     ),
   __open_query_tail_after_by: ($) =>
     choice(
