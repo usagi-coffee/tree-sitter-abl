@@ -14,10 +14,8 @@ export default ({ kw }) => ({
           ),
         ),
       ),
-      alias($.__put_control_phrase, $.control_phrase),
+      alias(seq(kw("CONTROL"), repeat1($.__put_control)), $.control_phrase),
     ),
-
-  __put_control_phrase: ($) => seq(kw("CONTROL"), repeat1($.__put_control)),
   __put_control: ($) => $._expression,
 
   __put_expression_item: ($) =>
