@@ -252,8 +252,7 @@ export default ({ kw }) => ({
   _alert_box_options: ($) =>
     choice(
       seq(alias($._alert_type, $.alert_type), optional($._alert_box_after_type)),
-      seq($._alert_buttons_phrase, optional($._alert_box_title)),
-      $._alert_box_title,
+      $._alert_box_after_type,
     ),
   _alert_box_after_type: ($) =>
     choice(seq($._alert_buttons_phrase, optional($._alert_box_title)), $._alert_box_title),
