@@ -36,14 +36,13 @@ export default ({ kw }) => ({
         seq(kw("FRAME"), field("frame", $.identifier)),
         seq(kw("BROWSE"), field("browse", $.identifier)),
       ),
-      repeat1($.__assign_input_item),
-    ),
-
-  __assign_input_item: ($) =>
-    seq(
-      field("field", $._assignable),
-      optional(seq("=", field("value", $._expression))),
-      optional($._when_phrase),
+      repeat1(
+        seq(
+          field("field", $._assignable),
+          optional(seq("=", field("value", $._expression))),
+          optional($._when_phrase),
+        ),
+      ),
     ),
 
   __assign_record_name: ($) => $._identifier_or_qualified_name,
