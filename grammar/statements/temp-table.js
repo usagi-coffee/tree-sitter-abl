@@ -1,6 +1,15 @@
 export default ({ kw }) => ({
   temp_table_definition: ($) =>
-    seq($.__temp_table_prefix, repeat($.__temp_table_member), $._terminator),
+    seq(
+      $.__temp_table_prefix,
+      repeat(
+        choice(
+          alias($._table_field, $.temp_table_field),
+          alias($._table_index, $.temp_table_index),
+        ),
+      ),
+      $._terminator,
+    ),
 
   __temp_table_prefix: ($) =>
     seq(
@@ -9,9 +18,6 @@ export default ({ kw }) => ({
       kw("TEMP-TABLE"),
       $._table_body,
     ),
-  __temp_table_member: ($) =>
-    choice(alias($._table_field, $.temp_table_field), alias($._table_index, $.temp_table_index)),
-
   // Aliases for shared rules that reference temp-table specific rules
   _like_phrase: ($) => $.__temp_table_like_phrase,
   _table_field: ($) => $.__temp_table_field,
