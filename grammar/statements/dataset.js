@@ -43,24 +43,12 @@ export default ({ kw }) => ({
     choice(
       seq(
         alias(kw("REPOSITION"), $.reposition),
-        optional(
-          choice(
-            seq(
-              alias(kw("NESTED"), $.nested),
-              optional(
-                choice(
-                  seq(
-                    alias(kw("FOREIGN-KEY-HIDDEN"), $.foreign_key_hidden),
-                    optional($.__dataset_not_active_recursive_tail),
-                  ),
-                  $.__dataset_not_active_recursive_tail,
-                ),
-              ),
-            ),
-            $.__dataset_not_active_recursive_tail,
-          ),
-        ),
+        optional($.__dataset_data_relation_after_reposition),
       ),
+      $.__dataset_data_relation_after_reposition,
+    ),
+  __dataset_data_relation_after_reposition: ($) =>
+    choice(
       seq(
         alias(kw("NESTED"), $.nested),
         optional(
