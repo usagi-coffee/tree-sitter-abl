@@ -26,15 +26,13 @@ export default ({ kw }) => ({
           field("end", $._expression),
         ),
         optional(
-          choice(
-            seq($.__trigger_down_phrase, ":", repeat($._statement), kw("END"), "."),
-            seq(":", repeat($._statement), kw("END"), "."),
-          ),
+          choice(seq($.__trigger_down_phrase, $.__trigger_body_block), $.__trigger_body_block),
         ),
       ),
-      seq($.__trigger_down_phrase, ":", repeat($._statement), kw("END"), "."),
-      seq(":", repeat($._statement), kw("END"), "."),
+      seq($.__trigger_down_phrase, $.__trigger_body_block),
+      $.__trigger_body_block,
     ),
+  __trigger_body_block: ($) => seq(":", repeat($._statement), kw("END"), "."),
   __trigger_down_phrase: ($) =>
     seq(kw("DOWN"), optional(kw("TO")), optional(field("down", $._expression))),
 
