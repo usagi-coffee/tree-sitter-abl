@@ -1,13 +1,11 @@
 export default ({ kw }) => ({
   put_statement: ($) => seq(kw("PUT"), $.__put_body, $._terminator),
 
-  __put_body: ($) =>
-    seq(
-      optional($._stream_phrase),
-      choice(
-        seq(optional(alias(kw("UNFORMATTED"), $.unformatted)), repeat1($.__put_item)),
-        alias($.__put_control_phrase, $.control_phrase),
-      ),
+  __put_body: ($) => seq(optional($._stream_phrase), $.__put_output),
+  __put_output: ($) =>
+    choice(
+      seq(optional(alias(kw("UNFORMATTED"), $.unformatted)), repeat1($.__put_item)),
+      alias($.__put_control_phrase, $.control_phrase),
     ),
 
   __put_control_phrase: ($) => seq(kw("CONTROL"), repeat1($.__put_control)),
