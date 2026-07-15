@@ -4,11 +4,13 @@ export default ({ kw }) => ({
   __disable_body: ($) =>
     seq(
       optional(alias(kw("UNLESS-HIDDEN"), $.unless_hidden)),
-      choice(
-        seq(alias(kw("ALL"), $.all), optional($._except_fields)),
-        repeat1(alias($.__disable_item, $.disable_item)),
-      ),
+      $.__disable_items,
       optional($.frame_phrase),
+    ),
+  __disable_items: ($) =>
+    choice(
+      seq(alias(kw("ALL"), $.all), optional($._except_fields)),
+      repeat1(alias($.__disable_item, $.disable_item)),
     ),
 
   __disable_item: ($) =>
