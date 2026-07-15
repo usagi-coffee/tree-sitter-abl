@@ -26,7 +26,16 @@ export default ({ kw }) => ({
       seq(
         kw("THROUGH"),
         $._program_target,
-        repeat($.__output_through_argument),
+        repeat(
+          choice(
+            $.string_literal,
+            $.number_literal,
+            $.identifier,
+            $.preprocessor_name,
+            alias($.__output_program_flag, $.program_flag),
+            $._value_expression,
+          ),
+        ),
         repeat($.__output_shared_option),
       ),
     ),
@@ -75,14 +84,5 @@ export default ({ kw }) => ({
       alias(kw("CLIPBOARD"), $.clipboard),
     ),
 
-  __output_through_argument: ($) =>
-    choice(
-      $.string_literal,
-      $.number_literal,
-      $.identifier,
-      $.preprocessor_name,
-      alias($.__output_program_flag, $.program_flag),
-      $._value_expression,
-    ),
   __output_program_flag: ($) => token(/-[A-Za-z][A-Za-z0-9-]*/),
 });
