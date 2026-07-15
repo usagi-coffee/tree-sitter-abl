@@ -24,8 +24,7 @@ export default ({ kw }) => ({
         alias(kw("TRANSACTION", { offset: 5 }), $.transaction),
         optional($.__repeat_body_after_transaction),
       ),
-      seq(repeat1($.__repeat_block_option), $.body),
-      $.body,
+      $.__repeat_body_after_transaction,
     ),
   __repeat_body_after_transaction: ($) =>
     choice(seq(repeat1($.__repeat_block_option), $.body), $.body),
