@@ -11,9 +11,11 @@ export default ({ kw }) => ({
   _handle_in_widget_pool: ($) => seq(field("handle", $.identifier), optional($._in_widget_pool)),
 
   _except_fields: ($) => seq(kw("EXCEPT"), repeat1(field("except", $.identifier))),
-  _map_entry: ($) => $._identifier_or_string_literal,
   _map_phrase: ($) =>
-    choice(seq(kw("MAP"), field("map", $._map_entry)), alias(kw("NO-MAP"), $.no_map)),
+    choice(
+      seq(kw("MAP"), field("map", $._identifier_or_string_literal)),
+      alias(kw("NO-MAP"), $.no_map),
+    ),
 
   _menu_item: ($) =>
     seq(
