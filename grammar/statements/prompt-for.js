@@ -7,7 +7,7 @@ export default ({ kw }) => ({
       optional($._stream_phrase),
       optional(alias(kw("UNLESS-HIDDEN"), $.unless_hidden)),
     ),
-  __prompt_for_body: ($) => choice(prec(1, $.__prompt_for_fields_body), $.__prompt_for_record_body),
+  __prompt_for_body: ($) => choice($.__prompt_for_fields_body, $.__prompt_for_record_body),
 
   __prompt_for_record_body: ($) =>
     seq(
