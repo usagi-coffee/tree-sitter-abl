@@ -2,7 +2,12 @@ export default ({ kw }) => ({
   frame_definition: ($) => seq($.__frame_prefix, $._terminator),
 
   __frame_prefix: ($) =>
-    seq(kw("DEFINE", { offset: 3 }), optional($.__frame_modifier), kw("FRAME"), $.__frame_body),
+    seq(
+      kw("DEFINE", { offset: 3 }),
+      optional($._definition_scope_modifier),
+      kw("FRAME"),
+      $.__frame_body,
+    ),
 
   __frame_body: ($) =>
     seq(
@@ -84,10 +89,4 @@ export default ({ kw }) => ({
     prec.left(seq(kw("SKIP"), optional(field("skip", seq("(", $._expression, ")"))))),
   __frame_space_phrase: ($) =>
     prec.left(seq(kw("SPACE"), optional(field("space", seq("(", $._expression, ")"))))),
-  __frame_modifier: ($) =>
-    choice(
-      seq(alias(kw("NEW"), $.new_modifier), alias(kw("SHARED"), $.scope_modifier)),
-      alias(kw("SHARED"), $.scope_modifier),
-      alias(kw("PRIVATE"), $.access_modifier),
-    ),
 });

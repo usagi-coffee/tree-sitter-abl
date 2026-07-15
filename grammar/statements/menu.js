@@ -2,7 +2,12 @@ export default ({ kw }) => ({
   menu_definition: ($) => seq($.__menu_prefix, $._terminator),
 
   __menu_prefix: ($) =>
-    seq(kw("DEFINE", { offset: 3 }), optional($.__menu_modifier), kw("MENU"), $.__menu_body),
+    seq(
+      kw("DEFINE", { offset: 3 }),
+      optional($._definition_scope_modifier),
+      kw("MENU"),
+      $.__menu_body,
+    ),
 
   __menu_body: ($) =>
     seq(
@@ -19,12 +24,5 @@ export default ({ kw }) => ({
           alias(kw("SKIP"), $.skip),
         ),
       ),
-    ),
-
-  __menu_modifier: ($) =>
-    choice(
-      seq(alias(kw("NEW"), $.new_modifier), alias(kw("SHARED"), $.scope_modifier)),
-      alias(kw("SHARED"), $.scope_modifier),
-      alias(kw("PRIVATE"), $.access_modifier),
     ),
 });

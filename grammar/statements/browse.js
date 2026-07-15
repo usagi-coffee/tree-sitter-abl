@@ -2,7 +2,12 @@ export default ({ kw }) => ({
   browse_definition: ($) => seq($.__browse_prefix, $._terminator),
 
   __browse_prefix: ($) =>
-    seq(kw("DEFINE", { offset: 3 }), optional($.__browse_modifier), kw("BROWSE"), $.__browse_body),
+    seq(
+      kw("DEFINE", { offset: 3 }),
+      optional($._definition_scope_modifier),
+      kw("BROWSE"),
+      $.__browse_body,
+    ),
 
   __browse_body: ($) =>
     seq(
@@ -161,11 +166,5 @@ export default ({ kw }) => ({
       field("field", choice($._identifier_or_qualified_name, $.object_access)),
       optional(seq("[", optional($._array_subscript), "]")),
       repeat($.format_phrase),
-    ),
-  __browse_modifier: ($) =>
-    choice(
-      seq(alias(kw("NEW"), $.new_modifier), alias(kw("SHARED"), $.scope_modifier)),
-      alias(kw("SHARED"), $.scope_modifier),
-      alias(kw("PRIVATE"), $.access_modifier),
     ),
 });
