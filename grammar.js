@@ -488,7 +488,7 @@ export default grammar({
         seq(
           field("array", choice($._identifier_or_qualified_name, $.object_access, $.scoped_name)),
           $.__array_access_prefix,
-          field("index", optional($._array_subscript)),
+          field("index", $._array_subscript),
           "]",
         ),
       __array_access_prefix: ($) => "[",
