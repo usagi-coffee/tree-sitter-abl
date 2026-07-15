@@ -48,8 +48,7 @@ export default ({ kw }) => ({
         alias(kw("CONVERT-3D-COLORS"), $.convert_3d_colors),
         optional($.__image_body_after_convert_3d_colors),
       ),
-      seq($.__image_tooltip_phrase, optional($.__image_stretch_transparent_tail)),
-      $.__image_stretch_transparent_tail,
+      $.__image_body_after_convert_3d_colors,
     ),
   __image_body_after_convert_3d_colors: ($) =>
     choice(
