@@ -174,12 +174,13 @@ export default grammar({
       include_file_reference: ($) => $.__include_file_reference,
       __include_file_reference: ($) =>
         seq(
-          "{",
+          $.__include_file_opener,
           field("file", $.__include_file_target),
           optional(field("arguments", $.__include_arguments)),
           "}",
           optional("."),
         ),
+      __include_file_opener: ($) => "{",
       include_expression: ($) => prec(1, $.__include_file_reference),
       include_statement: ($) => $.__include_file_reference,
       __include_arguments: ($) =>
