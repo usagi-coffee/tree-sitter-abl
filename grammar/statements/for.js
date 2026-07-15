@@ -15,19 +15,21 @@ export default ({ kw }) => ({
     ),
   __for_record_or_variables: ($) => choice($.__for_record_phrase_section, $._loop_phrase),
   __for_record_phrase_section: ($) =>
-    seq($.__for_record_phrases, repeat($.__for_break_or_sort_phrase)),
+    seq(
+      $.__for_record_phrases,
+      repeat(
+        choice(
+          alias($.__for_by_phrase, $.by_phrase),
+          alias($.__for_group_by_phrase, $.group_by_phrase),
+          alias($.__for_collate_phrase, $.collate_phrase),
+          alias($.__for_break_by, $.break_by),
+        ),
+      ),
+    ),
 
   __for_record_phrases: ($) => seq($.__for_record, repeat(seq(",", $.__for_record))),
 
   __for_record: ($) => seq(optional(choice(kw("EACH"), kw("FIRST"), kw("LAST"))), $.record_phrase),
-
-  __for_break_or_sort_phrase: ($) =>
-    choice(
-      alias($.__for_by_phrase, $.by_phrase),
-      alias($.__for_group_by_phrase, $.group_by_phrase),
-      alias($.__for_collate_phrase, $.collate_phrase),
-      alias($.__for_break_by, $.break_by),
-    ),
 
   __for_by_phrase: ($) => prec.right(seq(kw("BY"), $.__for_by_tail)),
   __for_group_by_phrase: ($) => prec.right(seq(kw("GROUP"), kw("BY"), $.__for_by_tail)),
