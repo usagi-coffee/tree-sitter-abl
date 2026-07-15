@@ -30,16 +30,7 @@ export default ({ kw }) => ({
       seq(alias($.__do_while_phrase, $.while_phrase), optional($.__do_block_tail)),
       $.__do_block_tail,
     ),
-  __do_block_tail: ($) => choice(seq(repeat1($.__do_block_option), $.body), $.body),
-  __do_block_option: ($) =>
-    choice(
-      $.stop_after_phrase,
-      $.on_endkey_phrase,
-      $.on_stop_phrase,
-      $.on_error_phrase,
-      $.on_quit_phrase,
-      $.frame_phrase,
-    ),
+  __do_block_tail: ($) => choice(seq(repeat1($._block_option), $.body), $.body),
 
   body: ($) =>
     prec.right(seq(choice(alias($._colon, ":"), $._terminator_dot), repeat($._statement))),

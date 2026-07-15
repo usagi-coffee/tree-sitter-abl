@@ -123,6 +123,16 @@ export default ({ kw }) => ({
       optional(seq(kw("BY"), field("step", $._expression))),
     ),
 
+  _block_option: ($) =>
+    choice(
+      $.stop_after_phrase,
+      $.on_endkey_phrase,
+      $.on_stop_phrase,
+      $.on_error_phrase,
+      $.on_quit_phrase,
+      $.frame_phrase,
+    ),
+
   _convert_phrase: ($) =>
     choice(
       alias(kw("NO-CONVERT"), $.no_convert),

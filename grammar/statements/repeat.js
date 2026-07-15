@@ -26,17 +26,7 @@ export default ({ kw }) => ({
       ),
       $.__repeat_body_after_transaction,
     ),
-  __repeat_body_after_transaction: ($) =>
-    choice(seq(repeat1($.__repeat_block_option), $.body), $.body),
-  __repeat_block_option: ($) =>
-    choice(
-      $.stop_after_phrase,
-      $.on_endkey_phrase,
-      $.on_stop_phrase,
-      $.on_error_phrase,
-      $.on_quit_phrase,
-      $.frame_phrase,
-    ),
+  __repeat_body_after_transaction: ($) => choice(seq(repeat1($._block_option), $.body), $.body),
 
   __repeat_condition_phrase: ($) =>
     seq(choice(kw("WHILE"), kw("UNTIL")), field("condition", $._expression)),

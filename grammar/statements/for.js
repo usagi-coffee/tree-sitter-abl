@@ -9,16 +9,7 @@ export default ({ kw }) => ({
       $.__for_record_or_variables,
       optional(alias($.__for_while_phrase, $.while_phrase)),
       optional(alias(kw("TRANSACTION"), $.transaction)),
-      repeat(
-        choice(
-          $.stop_after_phrase,
-          $.on_endkey_phrase,
-          $.on_stop_phrase,
-          $.on_error_phrase,
-          $.on_quit_phrase,
-          $.frame_phrase,
-        ),
-      ),
+      repeat($._block_option),
       optional($.__for_with_stream_io_phrase),
       $.body,
     ),
