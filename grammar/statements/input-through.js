@@ -15,7 +15,7 @@ export default ({ kw }) => ({
     choice(
       $.string_literal,
       $.number_literal,
-      prec(1, $.function_call),
+      $.function_call,
       $.object_access,
       $._identifier_or_qualified_name,
       $.preprocessor_name,
