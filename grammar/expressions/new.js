@@ -14,10 +14,11 @@ export default ({ kw }) => ({
           $.__new_prefix,
           choice(
             field("record", $._identifier_or_qualified_name),
-            seq("(", field("record", $._identifier_or_qualified_name), ")"),
+            seq($.__new_record_opener, field("record", $._identifier_or_qualified_name), ")"),
           ),
         ),
       ),
     ),
   __new_prefix: ($) => kw("NEW"),
+  __new_record_opener: ($) => "(",
 });
