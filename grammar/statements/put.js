@@ -4,19 +4,21 @@ export default ({ kw }) => ({
   __put_body: ($) => seq(optional($._stream_phrase), $.__put_output),
   __put_output: ($) =>
     choice(
-      seq(optional(alias(kw("UNFORMATTED"), $.unformatted)), repeat1($.__put_item)),
+      seq(
+        optional(alias(kw("UNFORMATTED"), $.unformatted)),
+        repeat1(
+          choice(
+            $.__put_expression_item,
+            alias($.__put_skip_item, $.skip),
+            alias($.__put_space_item, $.space),
+          ),
+        ),
+      ),
       alias($.__put_control_phrase, $.control_phrase),
     ),
 
   __put_control_phrase: ($) => seq(kw("CONTROL"), repeat1($.__put_control)),
   __put_control: ($) => $._expression,
-
-  __put_item: ($) =>
-    choice(
-      $.__put_expression_item,
-      alias($.__put_skip_item, $.skip),
-      alias($.__put_space_item, $.space),
-    ),
 
   __put_expression_item: ($) =>
     prec.left(
