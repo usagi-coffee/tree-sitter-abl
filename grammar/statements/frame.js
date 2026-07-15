@@ -39,10 +39,10 @@ export default ({ kw }) => ({
 
   __frame_form_item: ($) =>
     choice(
-      prec.right(1, seq(kw("SPACE"), "(", optional(field("space", $._expression)), ")")),
-      prec.right(1, seq(kw("SKIP"), "(", optional(field("skip", $._expression)), ")")),
-      prec(-1, alias(kw("SPACE"), $.space)),
-      prec(-1, alias(kw("SKIP"), $.skip)),
+      prec.right(seq(kw("SPACE"), "(", optional(field("space", $._expression)), ")")),
+      prec.right(seq(kw("SKIP"), "(", optional(field("skip", $._expression)), ")")),
+      prec.right(alias(kw("SPACE"), $.space)),
+      prec.right(alias(kw("SKIP"), $.skip)),
       seq(
         field("field", $._identifier_or_array_access),
         optional(
