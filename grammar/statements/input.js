@@ -1,7 +1,6 @@
 export default ({ kw }) => ({
-  input_statement: ($) => seq($.__input_prefix, $.__input_body, $._terminator),
+  input_statement: ($) => seq($._input_stream_prefix, $.__input_body, $._terminator),
 
-  __input_prefix: ($) => $._input_stream_prefix,
   __input_body: ($) =>
     choice(
       alias(kw("CLOSE"), $.close),
