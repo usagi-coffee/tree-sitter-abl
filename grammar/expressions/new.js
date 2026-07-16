@@ -8,8 +8,7 @@ export default ({ kw }) => ({
         $.arguments,
       ),
       // Record buffer check: NEW record or NEW(record)
-      prec(
-        -1,
+      prec.right(
         seq(
           $.__new_prefix,
           choice(
