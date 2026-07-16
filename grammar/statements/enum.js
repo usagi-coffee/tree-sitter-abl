@@ -11,8 +11,7 @@ export default ({ kw }) => ({
         seq(
           kw("DEFINE", { offset: 3 }),
           kw("ENUM"),
-          alias($.__enum_member, $.member),
-          repeat(alias($.__enum_member, $.member)),
+          repeat1(alias($.__enum_member, $.member)),
           $._terminator,
         ),
       ),
