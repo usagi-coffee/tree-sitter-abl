@@ -15,6 +15,7 @@ import grammar_on from "./on.js";
 import grammar_message from "./message.js";
 import grammar_record from "./record.js";
 import grammar_frame from "./frame.js";
+import grammar_form from "./form.js";
 import grammar_format from "./format.js";
 import grammar_put from "./put.js";
 import grammar_prompt_for from "./prompt-for.js";
@@ -47,6 +48,7 @@ export default ($) => [
   ...grammar_message($),
   ...grammar_record($),
   ...grammar_frame($),
+  ...grammar_form($),
   ...grammar_format($),
   ...grammar_put($),
   ...grammar_prompt_for($),

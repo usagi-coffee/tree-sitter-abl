@@ -11,14 +11,11 @@ export default ({ kw }) => ({
   __form_item: ($) =>
     prec.right(
       choice(
-        prec(
-          1,
-          seq(
-            alias(kw("MENU"), $.identifier),
-            optional(alias(kw("NO-LABEL"), $.no_label)),
-            optional(alias(kw("NO-LABELS"), $.no_labels)),
-            optional($._format_string),
-          ),
+        seq(
+          alias(kw("MENU"), $.identifier),
+          optional(alias(kw("NO-LABEL"), $.no_label)),
+          optional(alias(kw("NO-LABELS"), $.no_labels)),
+          optional($._format_string),
         ),
         seq(
           field("field", $._expression),
