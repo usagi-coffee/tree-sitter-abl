@@ -4,7 +4,6 @@ export default ({ kw }) => ({
       repeat1(
         choice(
           $.__format_at_phrase,
-          $.__format_at_single_position,
           $._format_field_option,
           kw("AUTO-RETURN"),
           kw("BLANK"),
@@ -42,12 +41,6 @@ export default ({ kw }) => ({
         field("at", token(/[0-9]+(\.[0-9]+)?/)),
         seq($.__format_at_column, $.__format_at_row, optional($.__format_alignment)),
         seq($.__format_at_x, $.__format_at_y, optional($.__format_alignment)),
-      ),
-    ),
-  __format_at_single_position: ($) =>
-    seq(
-      kw("AT"),
-      choice(
         seq(kw("COLUMN", { alias: "COL", offset: 3 }), field("column", $.number_literal)),
         seq(kw("ROW"), field("row", $.number_literal)),
       ),

@@ -1,13 +1,9 @@
 // References: Format phrase.
 export default ($) => [
-  // Purpose: continue a numeric AT position when an expression operator follows.
+  // Purpose: prefer expression continuation over the merged AT coordinate alternatives.
   // Example: DISPLAY x AT COL 5 - 1 ROW 3.
   // Reference: AT phrase.
-  [$._primary_expression, $.__format_at_single_position],
-  // Purpose: prefer the documented paired AT coordinate form over a standalone compatibility position.
-  // Example: DISPLAY x AT COL 5 ROW 3.
-  // Reference: AT phrase.
-  [$.__format_at_phrase, $.__format_at_single_position],
+  [$._primary_expression, $.__format_at_phrase],
   // Purpose: parse FORMAT (...) as format target, not parenthesized expression start.
   // Example: FORMAT ("x(10)").
   // Reference: format-phrase.
