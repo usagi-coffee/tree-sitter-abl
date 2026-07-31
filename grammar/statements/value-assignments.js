@@ -5,8 +5,20 @@ export default ({ kw }) => ({
     choice(
       $.__value_assignments_current_language,
       $.__value_assignments_current_value_family,
-      $.__value_assignments_dynamic_property,
-      $.__value_assignments_frame_value,
+      seq(
+        choice(
+          seq(
+            field("type", alias(kw("DYNAMIC-PROPERTY"), $.identifier)),
+            "(",
+            field("object", $._expression),
+            ",",
+            field("property", $._expression),
+            ")",
+          ),
+          field("type", alias(kw("FRAME-VALUE"), $.identifier)),
+        ),
+        $.__value_assignments_value_no_error,
+      ),
       $.__value_assignments_entry,
       $.__value_assignments_length,
       $.__value_assignments_raw,
@@ -37,23 +49,6 @@ export default ({ kw }) => ({
       optional($.__value_assignments_database_tenant),
       ")",
       $.__value_assignments_equals_value,
-    ),
-
-  __value_assignments_dynamic_property: ($) =>
-    seq(
-      field("type", alias(kw("DYNAMIC-PROPERTY"), $.identifier)),
-      "(",
-      field("object", $._expression),
-      ",",
-      field("property", $._expression),
-      ")",
-      $.__value_assignments_value_no_error,
-    ),
-
-  __value_assignments_frame_value: ($) =>
-    seq(
-      field("type", alias(kw("FRAME-VALUE"), $.identifier)),
-      $.__value_assignments_value_no_error,
     ),
 
   __value_assignments_entry: ($) =>
