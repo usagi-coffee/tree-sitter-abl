@@ -3,8 +3,22 @@ export default ({ kw }) => ({
 
   __value_assignments_body: ($) =>
     choice(
-      $.__value_assignments_current_language,
-      $.__value_assignments_current_value_family,
+      seq(
+        choice(
+          field("type", alias(kw("CURRENT-LANGUAGE"), $.identifier)),
+          seq(
+            field(
+              "type",
+              choice(
+                alias(kw("CURRENT-VALUE"), $.identifier),
+                alias(kw("DYNAMIC-CURRENT-VALUE"), $.identifier),
+              ),
+            ),
+            $.__value_assignments_current_body,
+          ),
+        ),
+        $.__value_assignments_equals_value,
+      ),
       seq(
         choice(
           seq(
@@ -25,30 +39,12 @@ export default ({ kw }) => ({
       $.__value_assignments_substring,
     ),
 
-  __value_assignments_current_language: ($) =>
-    seq(
-      field("type", alias(kw("CURRENT-LANGUAGE"), $.identifier)),
-      $.__value_assignments_equals_value,
-    ),
-
-  __value_assignments_current_value_family: ($) =>
-    seq(
-      field(
-        "type",
-        choice(
-          alias(kw("CURRENT-VALUE"), $.identifier),
-          alias(kw("DYNAMIC-CURRENT-VALUE"), $.identifier),
-        ),
-      ),
-      $.__value_assignments_current_body,
-    ),
   __value_assignments_current_body: ($) =>
     seq(
       "(",
       field("sequence", $._expression),
       optional($.__value_assignments_database_tenant),
       ")",
-      $.__value_assignments_equals_value,
     ),
 
   __value_assignments_entry: ($) =>
