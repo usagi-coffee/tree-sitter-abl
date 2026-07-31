@@ -7,8 +7,7 @@ export default ({ kw }) => ({
         prec.right(
           seq(
             optional(kw("BREAK")),
-            choice($.__preselect_by_phrase, $.__preselect_collate_phrase),
-            repeat(choice($.__preselect_by_phrase, $.__preselect_collate_phrase)),
+            repeat1(choice($.__preselect_by_phrase, $.__preselect_collate_phrase)),
           ),
         ),
       ),
