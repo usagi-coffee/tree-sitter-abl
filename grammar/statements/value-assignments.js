@@ -30,6 +30,14 @@ export default ({ kw }) => ({
             ")",
           ),
           field("type", alias(kw("FRAME-VALUE"), $.identifier)),
+          seq(
+            field("type", alias(kw("SUBSTRING"), $.identifier)),
+            "(",
+            field("string", $._expression),
+            ",",
+            $.__value_assignments_position_length,
+            ")",
+          ),
         ),
         $.__value_assignments_value_no_error,
       ),
@@ -53,7 +61,6 @@ export default ({ kw }) => ({
         $.__value_assignments_close_equals_value,
       ),
       $.__value_assignments_length,
-      $.__value_assignments_substring,
     ),
 
   __value_assignments_current_body: ($) =>
@@ -74,16 +81,6 @@ export default ({ kw }) => ({
       field("length", $._expression),
     ),
 
-  __value_assignments_substring: ($) =>
-    seq(
-      field("type", alias(kw("SUBSTRING"), $.identifier)),
-      "(",
-      field("string", $._expression),
-      ",",
-      $.__value_assignments_position_length,
-      ")",
-      $.__value_assignments_value_no_error,
-    ),
   __value_assignments_position_length: ($) =>
     seq(field("position", $._expression), optional(seq(",", field("length", $._expression)))),
   __value_assignments_database_tenant: ($) =>
