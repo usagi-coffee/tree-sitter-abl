@@ -3,15 +3,20 @@ export default ({ kw }) => ({
 
   __create_body: ($) =>
     choice(
-      $.__create_alias,
-      $.__create_buffer,
+      seq(
+        choice(
+          $.__create_alias,
+          $.__create_buffer,
+          $.__create_widget_pool,
+          $.__create_database,
+          $.__create_automation_object,
+          $.__create_record,
+        ),
+        optional($.__no_error),
+      ),
       $.__create_handle_with_pool_no_error_body,
       $.__create_handle_with_pool_body,
-      $.__create_widget_pool,
       $.__create_server,
-      $.__create_database,
-      $.__create_automation_object,
-      $.__create_record,
     ),
   __create_alias: ($) =>
     seq(
@@ -20,7 +25,6 @@ export default ({ kw }) => ({
       kw("FOR"),
       kw("DATABASE"),
       field("database", $._alias_name),
-      optional($.__no_error),
     ),
   __create_buffer: ($) =>
     seq(
@@ -31,7 +35,6 @@ export default ({ kw }) => ({
       field("table", $.__create_buffer_target),
       optional(seq(kw("BUFFER-NAME"), field("name", $.identifier))),
       optional($._in_widget_pool),
-      optional($.__no_error),
     ),
   __create_buffer_target: ($) => choice($._identifier_or_access_or_call, $.string_literal),
   __create_handle_with_pool_no_error_body: ($) =>
@@ -52,8 +55,7 @@ export default ({ kw }) => ({
       ),
       $._handle_in_widget_pool,
     ),
-  __create_widget_pool: ($) =>
-    seq(kw("WIDGET-POOL"), optional($.__create_widget_pool_name), optional($.__no_error)),
+  __create_widget_pool: ($) => seq(kw("WIDGET-POOL"), optional($.__create_widget_pool_name)),
   __create_widget_pool_name: ($) =>
     seq(field("pool", $.identifier), optional(alias(kw("PERSISTENT"), $.persistent))),
   __create_server: ($) =>
@@ -64,7 +66,6 @@ export default ({ kw }) => ({
       field("new_database", $._expression),
       optional($.__create_database_from),
       optional(alias(kw("REPLACE"), $.replace)),
-      optional($.__no_error),
     ),
   __create_database_from: ($) =>
     seq(
@@ -77,7 +78,6 @@ export default ({ kw }) => ({
       field("progid", $._expression),
       field("handle", $.identifier),
       optional(seq(kw("CONNECT"), optional(seq(kw("TO"), field("target", $._expression))))),
-      optional($.__no_error),
     ),
   __create_record: ($) =>
     seq(
@@ -92,7 +92,6 @@ export default ({ kw }) => ({
           ),
         ),
       ),
-      optional($.__no_error),
     ),
   __create_record_locator_rowid: ($) => seq("(", field("rowid", $._expression), ")"),
   __create_record_locator_recid: ($) => seq("(", field("recid", $._expression), ")"),
