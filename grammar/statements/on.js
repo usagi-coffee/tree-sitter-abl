@@ -102,15 +102,19 @@ export default ({ kw }) => ({
         ),
       ),
     ),
-  __on_ui_event_branch: ($) => choice($.__on_ui_anywhere_branch, $.__on_ui_of_branch),
-  __on_ui_anywhere_branch: ($) => seq($.__on_ui_events, $.__on_anywhere, $.__on_trigger_action),
-  __on_ui_of_branch: ($) =>
+  __on_ui_event_branch: ($) =>
     seq(
-      $.__on_ui_event_widgets,
-      repeat(seq(kw("OR"), $.__on_ui_event_widgets)),
-      optional($.__on_anywhere),
+      choice(
+        $.__on_ui_anywhere_branch,
+        seq(
+          $.__on_ui_event_widgets,
+          repeat(seq(kw("OR"), $.__on_ui_event_widgets)),
+          optional($.__on_anywhere),
+        ),
+      ),
       $.__on_trigger_action,
     ),
+  __on_ui_anywhere_branch: ($) => seq($.__on_ui_events, $.__on_anywhere),
   __on_database_event_branch: ($) =>
     seq(
       field("event", $.__on_database_event),
