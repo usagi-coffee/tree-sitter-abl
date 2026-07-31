@@ -3,8 +3,7 @@ export default ({ kw }) => ({
 
   __assign_body: ($) =>
     seq(
-      alias($.__assign_pair, $.assign_pair),
-      repeat(alias($.__assign_pair, $.assign_pair)),
+      repeat1(alias($.__assign_pair, $.assign_pair)),
       optional(alias(kw("NO-ERROR"), $.no_error)),
     ),
 
