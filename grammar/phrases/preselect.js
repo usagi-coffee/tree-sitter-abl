@@ -7,14 +7,18 @@ export default ({ kw }) => ({
         prec.right(
           seq(
             optional(kw("BREAK")),
-            repeat1(choice($.__preselect_by_phrase, $.__preselect_collate_phrase)),
+            repeat1(
+              choice(
+                seq(
+                  kw("BY"),
+                  field("by", $._expression),
+                  optional(kw("DESCENDING", { offset: 4 })),
+                ),
+                seq($._collate_body, optional(kw("DESCENDING", { offset: 4 }))),
+              ),
+            ),
           ),
         ),
       ),
     ),
-
-  __preselect_by_phrase: ($) =>
-    seq(kw("BY"), field("by", $._expression), optional(kw("DESCENDING", { offset: 4 }))),
-  __preselect_collate_phrase: ($) =>
-    seq($._collate_body, optional(kw("DESCENDING", { offset: 4 }))),
 });
