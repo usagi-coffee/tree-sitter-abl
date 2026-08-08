@@ -211,8 +211,7 @@ export default ({ kw }) => ({
         ),
       ),
     ),
-  __on_ui_event: ($) =>
-    choice($.string_literal, $.__on_key_label, alias(token(choice("+", "-")), $.identifier)),
+  __on_ui_event: ($) => choice($.__on_key_label, alias(token(choice("+", "-")), $.identifier)),
   __on_ui_events: ($) =>
     seq(field("event", $.__on_ui_event), repeat(seq(",", field("event", $.__on_ui_event)))),
   __on_ui_event_widgets: ($) => seq($.__on_ui_events, alias($.__on_of_phrase, $.of_phrase)),
