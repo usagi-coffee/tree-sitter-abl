@@ -105,14 +105,6 @@ export default grammar({
 
     // DEFINE modifiers prefix conflicts
     // Conflicts approach has slightly better state reduction (~500) than doing it conflicts free
-    [
-      $._buffer_query_modifier,
-      $._member_access_modifier,
-      $.__data_source_access_modifier,
-      $.__dataset_modifier,
-      $.__temp_table_modifier,
-      $.__variable_modifier,
-    ],
     [$.__dataset_modifier, $.__temp_table_modifier, $._member_access_modifier],
     [
       $.__dataset_modifier,
