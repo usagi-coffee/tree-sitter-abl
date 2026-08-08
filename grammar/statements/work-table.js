@@ -12,8 +12,12 @@ export default ({ kw }) => ({
   _work_table_body: ($) =>
     seq(
       field("name", $.identifier),
-      optional(alias($._like_phrase, $.like_phrase)),
-      optional(alias(kw("NO-UNDO"), $.no_undo)),
+      optional($.__work_table_like_no_undo_tail),
       repeat(choice(alias($._table_field, $.field), alias($._table_index, $.index))),
+    ),
+  __work_table_like_no_undo_tail: ($) =>
+    choice(
+      seq(alias($._like_phrase, $.like_phrase), optional(alias(kw("NO-UNDO"), $.no_undo))),
+      alias(kw("NO-UNDO"), $.no_undo),
     ),
 });
