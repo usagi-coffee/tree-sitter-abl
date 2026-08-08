@@ -113,7 +113,6 @@ export default grammar({
       $.__temp_table_modifier,
       $.__variable_modifier,
     ],
-    [$._member_access_modifier, $.__variable_modifier],
     [$.__dataset_modifier, $.__temp_table_modifier, $._member_access_modifier],
     [
       $.__dataset_modifier,
