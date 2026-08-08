@@ -8,14 +8,18 @@ export default ({ kw }) => ({
       choice(
         seq(
           kw("TO"),
-          kw("ROWID"),
-          field("rowid", $._expression),
-          repeat(seq(",", field("rowid", $._expression))),
-          optional(seq(kw("FOR"), kw("TENANT"), field("tenant", $._expression))),
-          optional($.__no_error),
+          choice(
+            seq(
+              kw("ROWID"),
+              field("rowid", $._expression),
+              repeat(seq(",", field("rowid", $._expression))),
+              optional(seq(kw("FOR"), kw("TENANT"), field("tenant", $._expression))),
+              optional($.__no_error),
+            ),
+            seq(kw("RECID"), field("recid", $._expression), optional($.__no_error)),
+            seq(kw("ROW"), field("row", $._expression)),
+          ),
         ),
-        seq(kw("TO"), kw("RECID"), field("recid", $._expression), optional($.__no_error)),
-        seq(kw("TO"), kw("ROW"), field("row", $._expression)),
         seq(
           alias(kw("FORWARDS", { alias: "FORWARD", offset: 7 }), $.forwards),
           field("count", $._expression),
