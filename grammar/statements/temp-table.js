@@ -1,5 +1,6 @@
 export default ({ kw }) => ({
-  temp_table_definition: ($) =>
+  temp_table_definition: ($) => seq($.__temp_table_definition_body, $._terminator),
+  __temp_table_definition_body: ($) =>
     seq(
       $.__temp_table_prefix,
       repeat(
@@ -8,7 +9,6 @@ export default ({ kw }) => ({
           alias($._table_index, $.temp_table_index),
         ),
       ),
-      $._terminator,
     ),
 
   __temp_table_prefix: ($) =>
