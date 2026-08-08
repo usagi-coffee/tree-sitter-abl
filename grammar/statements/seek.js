@@ -9,15 +9,17 @@ export default ({ kw }) => ({
       choice(kw("END"), $._expression),
     ),
 
-  seek_expression: ($) => seq($.__seek_expression_opener, $.__seek_value, ")"),
+  seek_expression: ($) => seq($.__seek_expression_body, ")"),
 
-  __seek_expression_opener: ($) => seq(field("function", alias(kw("SEEK"), $.identifier)), "("),
-
-  __seek_value: ($) =>
-    choice(
-      kw("INPUT"),
-      kw("OUTPUT"),
-      field("name", $.identifier),
-      seq(kw("STREAM-HANDLE"), field("handle", $._identifier_or_qualified_name)),
+  __seek_expression_body: ($) =>
+    seq(
+      field("function", alias(kw("SEEK"), $.identifier)),
+      "(",
+      choice(
+        kw("INPUT"),
+        kw("OUTPUT"),
+        field("name", $.identifier),
+        seq(kw("STREAM-HANDLE"), field("handle", $._identifier_or_qualified_name)),
+      ),
     ),
 });
