@@ -1,8 +1,12 @@
 export default ({ kw }) => ({
-  delete_statement: ($) => seq(kw("DELETE"), $.__delete_body, $._no_error_terminator),
+  delete_statement: ($) => seq($.__delete_body, $._no_error_terminator),
 
   __delete_body: ($) =>
-    seq(field("record", $._identifier_or_qualified_name), optional($._format_validate)),
+    seq(
+      kw("DELETE"),
+      field("record", $._identifier_or_qualified_name),
+      optional($._format_validate),
+    ),
 
   delete_object_statement: ($) => seq($.__delete_object_prefix, $._no_error_terminator),
 
