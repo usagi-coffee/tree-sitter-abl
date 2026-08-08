@@ -278,3 +278,27 @@ END.
       (hide_statement
         (widget_phrase
           frame: (identifier))))))
+
+================================================================================
+REPEAT - FOR, PRESELECT, and QUERY-TUNING prefix
+================================================================================
+
+REPEAT FOR Customer PRESELECT EACH Customer QUERY-TUNING (LOOKAHEAD):
+  LEAVE.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (repeat_statement
+    (for_phrase
+      record: (identifier))
+    (preselect_phrase
+      (preselect_record_list
+        (preselect_record
+          (record_phrase
+            record: (identifier)))))
+    (query_tuning_phrase
+      (lookahead))
+    (body
+      (leave_statement))))

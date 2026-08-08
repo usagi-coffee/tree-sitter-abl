@@ -4,13 +4,14 @@ export default ({ kw }) => ({
   __repeat_statement_prefix: ($) => seq(optional($._label), $.__repeat_body, kw("END")),
 
   __repeat_body: ($) =>
-    seq(
-      kw("REPEAT"),
-      optional(alias($._for_phrase, $.for_phrase)),
-      optional($.preselect_phrase),
-      optional($.query_tuning_phrase),
-      $.__repeat_body_tail,
+    seq(kw("REPEAT"), optional($.__repeat_selection_prefix), $.__repeat_body_tail),
+  __repeat_selection_prefix: ($) =>
+    choice(
+      seq(alias($._for_phrase, $.for_phrase), optional($.__repeat_selection_after_for)),
+      $.__repeat_selection_after_for,
     ),
+  __repeat_selection_after_for: ($) =>
+    choice(seq($.preselect_phrase, optional($.query_tuning_phrase)), $.query_tuning_phrase),
   __repeat_body_tail: ($) =>
     choice(seq($._loop_phrase, optional($.__repeat_body_after_loop)), $.__repeat_body_after_loop),
   __repeat_body_after_loop: ($) =>
