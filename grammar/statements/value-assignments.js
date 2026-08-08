@@ -14,7 +14,10 @@ export default ({ kw }) => ({
                 alias(kw("DYNAMIC-CURRENT-VALUE"), $.identifier),
               ),
             ),
-            $.__value_assignments_current_body,
+            "(",
+            field("sequence", $._expression),
+            optional($.__value_assignments_database_tenant),
+            ")",
           ),
         ),
         $.__value_assignments_equals_value,
@@ -69,15 +72,6 @@ export default ({ kw }) => ({
         field("length", $._expression),
       ),
     ),
-
-  __value_assignments_current_body: ($) =>
-    seq(
-      "(",
-      field("sequence", $._expression),
-      optional($.__value_assignments_database_tenant),
-      ")",
-    ),
-
   __value_assignments_position_length: ($) =>
     seq(field("position", $._expression), optional(seq(",", field("length", $._expression)))),
   __value_assignments_database_tenant: ($) =>
