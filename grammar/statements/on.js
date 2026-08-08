@@ -109,12 +109,12 @@ export default ({ kw }) => ({
         seq(
           $.__on_ui_event_widgets,
           repeat(seq(kw("OR"), $.__on_ui_event_widgets)),
-          optional($.__on_anywhere),
+          optional(alias(kw("ANYWHERE"), $.anywhere)),
         ),
       ),
       $.__on_trigger_action,
     ),
-  __on_ui_anywhere_branch: ($) => seq($.__on_ui_events, $.__on_anywhere),
+  __on_ui_anywhere_branch: ($) => seq($.__on_ui_events, alias(kw("ANYWHERE"), $.anywhere)),
   __on_database_event_branch: ($) =>
     seq(
       field("event", $.__on_database_event),
@@ -133,7 +133,7 @@ export default ({ kw }) => ({
   __on_web_notify_branch: ($) =>
     seq(
       field("event", alias($.__on_web_notify_event, $.string_literal)),
-      $.__on_anywhere,
+      alias(kw("ANYWHERE"), $.anywhere),
       $._statement,
     ),
   __on_trigger_action: ($) =>
@@ -150,7 +150,6 @@ export default ({ kw }) => ({
       ),
     ),
   __on_revert_action: ($) => seq(alias(kw("REVERT"), $.revert), $._terminator),
-  __on_anywhere: ($) => alias(kw("ANYWHERE"), $.anywhere),
   __on_database_event: ($) =>
     choice(kw("CREATE"), kw("DELETE"), kw("FIND"), kw("WRITE"), kw("ASSIGN")),
   // __on_key_label accepts both $.__on_ui_event_name tokens (TAB, ENDKEY, etc.)
