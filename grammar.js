@@ -357,14 +357,13 @@ export default grammar({
 
       // Assignabless
       assignment_statement: ($) =>
-        prec.right(
-          seq(
-            field("left", $._assignable),
-            field("operator", $.assignment_operator),
-            field("right", choice($.array_initializer, $._expression)),
-            optional($.widget_phrase),
-            $._no_error_terminator,
-          ),
+        prec.right(seq($.__assignment_statement_body, $._no_error_terminator)),
+      __assignment_statement_body: ($) =>
+        seq(
+          field("left", $._assignable),
+          field("operator", $.assignment_operator),
+          field("right", choice($.array_initializer, $._expression)),
+          optional($.widget_phrase),
         ),
 
       _assignable: ($) =>
