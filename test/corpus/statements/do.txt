@@ -582,3 +582,27 @@ END.
       strength: (string_literal)
       collation: (string_literal))
     (body)))
+
+================================================================================
+DO - FOR, PRESELECT, and QUERY-TUNING prefix
+================================================================================
+
+DO FOR Customer PRESELECT EACH Customer QUERY-TUNING (LOOKAHEAD):
+  LEAVE.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (do_statement
+    (for_phrase
+      record: (identifier))
+    (preselect_phrase
+      (preselect_record_list
+        (preselect_record
+          (record_phrase
+            record: (identifier)))))
+    (query_tuning_phrase
+      (lookahead))
+    (body
+      (leave_statement))))

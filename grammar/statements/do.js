@@ -3,14 +3,14 @@ export default ({ kw }) => ({
 
   __do_statement_prefix: ($) => seq(optional($._label), $.__do_body, kw("END")),
 
-  __do_body: ($) =>
-    seq(
-      kw("DO"),
-      optional(alias($._for_phrase, $.for_phrase)),
-      optional($.preselect_phrase),
-      optional($.query_tuning_phrase),
-      $.__do_body_tail,
+  __do_body: ($) => seq(kw("DO"), optional($.__do_selection_prefix), $.__do_body_tail),
+  __do_selection_prefix: ($) =>
+    choice(
+      seq(alias($._for_phrase, $.for_phrase), optional($.__do_selection_after_for)),
+      $.__do_selection_after_for,
     ),
+  __do_selection_after_for: ($) =>
+    choice(seq($.preselect_phrase, optional($.query_tuning_phrase)), $.query_tuning_phrase),
   __do_body_tail: ($) =>
     choice(
       seq(
