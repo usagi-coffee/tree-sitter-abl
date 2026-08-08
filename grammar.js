@@ -95,8 +95,6 @@ export default grammar({
     [$.__input_expression_prefix, $.argument],
     // WITH NO-VALIDATE is valid both as prompt_for_with_phrase and as frame_phrase option
     [$.__prompt_for_with_phrase, $.frame_phrase],
-    // NOT ENTERED field: NOT can be unary, or part of the ENTERED expression.
-    [$.entered_expression],
     // Shared [NOT] ENTERED phrase must preserve both keyword-as-identifier spans.
     [$.__entered_operator],
     // ENABLE/DISABLE field[N] can be confused with function_call
