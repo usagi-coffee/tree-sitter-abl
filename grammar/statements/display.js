@@ -8,23 +8,24 @@ export default ({ kw }) => ({
     ),
 
   __display_fields_body: ($) =>
-    choice(
-      seq($.__display_frame_phrases, $._no_error_terminator),
-      seq(
-        $._stream_phrase,
-        optional(alias(kw("UNLESS-HIDDEN"), $.unless_hidden)),
-        optional($.in_window_phrase),
+    seq(
+      choice(
         $.__display_frame_phrases,
-        $._no_error_terminator,
+        seq(
+          $._stream_phrase,
+          optional(alias(kw("UNLESS-HIDDEN"), $.unless_hidden)),
+          optional($.in_window_phrase),
+          $.__display_frame_phrases,
+        ),
+        seq(
+          optional($._stream_phrase),
+          optional(alias(kw("UNLESS-HIDDEN"), $.unless_hidden)),
+          $.__display_items,
+          optional($.in_window_phrase),
+          optional($.__display_frame_phrases),
+        ),
       ),
-      seq(
-        optional($._stream_phrase),
-        optional(alias(kw("UNLESS-HIDDEN"), $.unless_hidden)),
-        $.__display_items,
-        optional($.in_window_phrase),
-        optional($.__display_frame_phrases),
-        $._no_error_terminator,
-      ),
+      $._no_error_terminator,
     ),
 
   __display_items: ($) =>
