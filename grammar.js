@@ -100,8 +100,6 @@ export default grammar({
     // ENABLE/DISABLE field[N] can be confused with function_call
     [$.__enable_item, $.function_call],
     [$.__disable_item, $.function_call],
-    // BUTTON in alert-box phrase vs DEFINE BUTTON keyword
-    [$.__view_as_alert_box],
     // Field / Column / Handle can be just an identifier
     [$.__widget_entry],
 
