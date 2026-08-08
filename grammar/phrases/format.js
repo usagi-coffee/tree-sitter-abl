@@ -39,8 +39,13 @@ export default ({ kw }) => ({
       kw("AT"),
       choice(
         field("at", token(/[0-9]+(\.[0-9]+)?/)),
-        seq($.__format_at_column, $.__format_at_row, optional($.__format_alignment)),
-        seq($.__format_at_x, $.__format_at_y, optional($.__format_alignment)),
+        seq(
+          choice(
+            seq($.__format_at_column, $.__format_at_row),
+            seq($.__format_at_x, $.__format_at_y),
+          ),
+          optional($.__format_alignment),
+        ),
         seq(kw("COLUMN", { alias: "COL", offset: 3 }), field("column", $.number_literal)),
         seq(kw("ROW"), field("row", $.number_literal)),
       ),
