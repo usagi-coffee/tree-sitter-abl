@@ -1,6 +1,7 @@
 export default ({ kw }) => ({
-  set_statement: ($) => seq($.__set_prefix, $.__set_body, $._no_error_terminator),
+  set_statement: ($) => seq($.__set_statement_body, $._no_error_terminator),
 
+  __set_statement_body: ($) => seq($.__set_prefix, $.__set_body),
   __set_prefix: ($) =>
     seq(
       kw("SET"),
