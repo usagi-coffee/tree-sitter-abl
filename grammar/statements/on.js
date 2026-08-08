@@ -221,13 +221,9 @@ export default ({ kw }) => ({
   __on_ui_events: ($) =>
     seq(field("event", $.__on_ui_event), repeat(seq(",", field("event", $.__on_ui_event)))),
   __on_ui_event_widgets: ($) => seq($.__on_ui_events, alias($.__on_of_phrase, $.of_phrase)),
-  __on_of_phrase: ($) =>
-    seq(
-      kw("OF"),
-      optional(field("of", kw("MENU-ITEM"))),
-      field("widget", $.widget_phrase),
-      repeat(seq(",", optional(field("of", kw("MENU-ITEM"))), field("widget", $.widget_phrase))),
-    ),
+  __on_of_phrase: ($) => seq(kw("OF"), $.__on_of_widget, repeat(seq(",", $.__on_of_widget))),
+  __on_of_widget: ($) =>
+    seq(optional(field("of", kw("MENU-ITEM"))), field("widget", $.widget_phrase)),
   __on_referencing_phrase: ($) =>
     choice(
       seq(
