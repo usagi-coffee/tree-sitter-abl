@@ -6,9 +6,13 @@ export default ({ kw }) => ({
     seq(
       kw("STORED-PROCEDURE"),
       field("procedure", $._identifier_or_string_literal),
-      optional($.__run_stored_procedure_result),
-      optional(alias(kw("NO-ERROR"), $.no_error)),
+      optional($.__run_stored_procedure_result_no_error),
       optional(alias($.__run_stored_procedure_params, $.parameter_list)),
+    ),
+  __run_stored_procedure_result_no_error: ($) =>
+    choice(
+      seq($.__run_stored_procedure_result, optional(alias(kw("NO-ERROR"), $.no_error))),
+      alias(kw("NO-ERROR"), $.no_error),
     ),
 
   __run_stored_procedure_result: ($) =>
