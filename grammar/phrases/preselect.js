@@ -14,7 +14,7 @@ export default ({ kw }) => ({
     ),
 
   __preselect_by_phrase: ($) =>
-    seq(kw("BY"), field("by", $._expression), optional($.__preselect_sort_direction)),
-  __preselect_collate_phrase: ($) => seq($._collate_body, optional($.__preselect_sort_direction)),
-  __preselect_sort_direction: ($) => kw("DESCENDING", { offset: 4 }),
+    seq(kw("BY"), field("by", $._expression), optional(kw("DESCENDING", { offset: 4 }))),
+  __preselect_collate_phrase: ($) =>
+    seq($._collate_body, optional(kw("DESCENDING", { offset: 4 }))),
 });
