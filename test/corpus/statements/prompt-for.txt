@@ -83,6 +83,30 @@ PROMPT-FOR field1 FORMAT "x(10)" WHEN ok
       (readkey_statement))))
 
 ================================================================================
+PROMPT-FOR - full ordered fields tail
+================================================================================
+
+PROMPT-FOR field1 GO-ON(F2) IN WINDOW w1 WITH FRAME f1 WITH NO-VALIDATE EDITING:
+  READKEY.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (prompt_for_statement
+    (field
+      field: (identifier))
+    (go_on_phrase
+      (identifier))
+    (in_window_phrase
+      window: (identifier))
+    (frame_phrase
+      frame: (identifier)
+      (no_validate))
+    (editing_phrase
+      (readkey_statement))))
+
+================================================================================
 PROMPT-FOR record with EXCEPT and constant VIEW-AS
 ================================================================================
 

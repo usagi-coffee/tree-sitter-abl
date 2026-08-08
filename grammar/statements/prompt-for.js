@@ -22,10 +22,18 @@ export default ({ kw }) => ({
     seq(
       repeat1(alias($.__prompt_for_field, $.field)),
       optional(alias($._go_on_phrase, $.go_on_phrase)),
-      optional($.in_window_phrase),
-      optional($.frame_phrase),
-      optional(alias($.__prompt_for_with_phrase, $.with_phrase)),
+      optional($.__prompt_for_fields_tail),
       optional($.editing_phrase),
+    ),
+  __prompt_for_fields_tail: ($) =>
+    choice(
+      seq($.in_window_phrase, optional($.__prompt_for_fields_after_window)),
+      $.__prompt_for_fields_after_window,
+    ),
+  __prompt_for_fields_after_window: ($) =>
+    choice(
+      seq($.frame_phrase, optional(alias($.__prompt_for_with_phrase, $.with_phrase))),
+      alias($.__prompt_for_with_phrase, $.with_phrase),
     ),
 
   __prompt_for_field: ($) =>
