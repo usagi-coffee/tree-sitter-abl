@@ -60,7 +60,14 @@ export default ({ kw }) => ({
         ),
         $.__value_assignments_close_equals_value,
       ),
-      $.__value_assignments_length,
+      seq(
+        field("type", alias(kw("LENGTH"), $.identifier)),
+        "(",
+        field("value", $._expression),
+        ")",
+        "=",
+        field("length", $._expression),
+      ),
     ),
 
   __value_assignments_current_body: ($) =>
@@ -69,16 +76,6 @@ export default ({ kw }) => ({
       field("sequence", $._expression),
       optional($.__value_assignments_database_tenant),
       ")",
-    ),
-
-  __value_assignments_length: ($) =>
-    seq(
-      field("type", alias(kw("LENGTH"), $.identifier)),
-      "(",
-      field("value", $._expression),
-      ")",
-      "=",
-      field("length", $._expression),
     ),
 
   __value_assignments_position_length: ($) =>
