@@ -131,7 +131,11 @@ export default ({ kw }) => ({
       $._terminator,
     ),
   __on_web_notify_branch: ($) =>
-    seq(field("event", $.__on_web_notify_event), $.__on_anywhere, $._statement),
+    seq(
+      field("event", alias($.__on_web_notify_event, $.string_literal)),
+      $.__on_anywhere,
+      $._statement,
+    ),
   __on_trigger_action: ($) =>
     choice(
       $.__on_revert_action,
@@ -194,7 +198,7 @@ export default ({ kw }) => ({
       kw("PREV-FRAME"),
       kw("TAB"),
     ),
-  __on_web_notify_event: ($) => alias(token(/["']WEB-NOTIFY["']/i), $.string_literal),
+  __on_web_notify_event: ($) => token(/["']WEB-NOTIFY["']/i),
   __on_ui_event_name: ($) =>
     token(
       prec(
