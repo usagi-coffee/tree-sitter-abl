@@ -6,8 +6,15 @@ export default ({ kw }) => ({
       kw("WAIT-FOR"),
       alias($.__wait_for_of_phrase, $.of_phrase),
       repeat(seq(kw("OR"), alias($.__wait_for_of_phrase, $.of_phrase))),
-      optional(alias($.__wait_for_focus_phrase, $.focus_phrase)),
-      optional(alias($.__wait_for_pause_phrase, $.pause_phrase)),
+      optional($.__wait_for_focus_pause_tail),
+    ),
+  __wait_for_focus_pause_tail: ($) =>
+    choice(
+      seq(
+        alias($.__wait_for_focus_phrase, $.focus_phrase),
+        optional(alias($.__wait_for_pause_phrase, $.pause_phrase)),
+      ),
+      alias($.__wait_for_pause_phrase, $.pause_phrase),
     ),
   __wait_for_of_phrase: ($) =>
     seq(
