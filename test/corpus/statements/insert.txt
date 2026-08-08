@@ -116,3 +116,20 @@ INSERT Customer USING RECID(2) NO-ERROR.
         (argument
           name: (number_literal))))
     (no_error)))
+
+================================================================================
+INSERT - all ordered options
+================================================================================
+
+INSERT Customer EXCEPT field1 USING alternate WITH FRAME f1 NO-ERROR.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (insert_statement
+    record: (identifier)
+    except: (identifier)
+    using: (identifier)
+    (frame_phrase
+      frame: (identifier))
+    (no_error)))
