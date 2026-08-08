@@ -15,11 +15,12 @@ export default ({ kw }) => ({
   __at_column_row: ($) =>
     repeat1(
       choice(
-        seq(kw("COLUMN"), field("column", $._expression)),
-        seq(kw("COLUMN"), alias($.__at_of_suffix, $.column_of)),
+        seq(
+          kw("COLUMN"),
+          choice(field("column", $._expression), alias($.__at_of_suffix, $.column_of)),
+        ),
         seq(kw("COLUMN-OF"), field("column_of", $._expression)),
-        seq(kw("ROW"), field("row", $._expression)),
-        seq(kw("ROW"), alias($.__at_of_suffix, $.row_of)),
+        seq(kw("ROW"), choice(field("row", $._expression), alias($.__at_of_suffix, $.row_of))),
         seq(kw("ROW-OF"), field("row_of", $._expression)),
       ),
     ),
