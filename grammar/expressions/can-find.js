@@ -1,14 +1,16 @@
 export default ({ kw }) => ({
-  can_find_expression: ($) => seq($.__can_find_opener, $.__can_find_record_query, ")"),
+  can_find_expression: ($) => seq($.__can_find_body, ")"),
 
-  __can_find_opener: ($) => seq(kw("CAN-FIND"), "("),
-
-  __can_find_record_query: ($) =>
-    prec.right(
-      seq(
-        optional(choice(kw("FIRST"), kw("LAST"))),
-        field("table", $._identifier_or_qualified_name),
-        optional($.__record_query_options),
+  __can_find_body: ($) =>
+    seq(
+      kw("CAN-FIND"),
+      "(",
+      prec.right(
+        seq(
+          optional(choice(kw("FIRST"), kw("LAST"))),
+          field("table", $._identifier_or_qualified_name),
+          optional($.__record_query_options),
+        ),
       ),
     ),
 
