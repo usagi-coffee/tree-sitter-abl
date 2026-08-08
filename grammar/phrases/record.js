@@ -17,10 +17,8 @@ export default ({ kw }) => ({
         field("tenant_where", $._expression),
         optional(alias(kw("SKIP-GROUP-DUPLICATES"), $.skip_group_duplicates)),
       ),
-      choice(
-        seq(kw("USE-INDEX"), field("index", $._identifier_or_qualified_name)),
-        alias(kw("TABLE-SCAN"), $.table_scan),
-      ),
+      seq(kw("USE-INDEX"), field("index", $._identifier_or_qualified_name)),
+      alias(kw("TABLE-SCAN"), $.table_scan),
       seq(
         kw("USING"),
         field("field", $.__record_using_field),
