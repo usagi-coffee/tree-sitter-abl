@@ -8,12 +8,32 @@ export default ({ kw }) => ({
       optional($.__buffer_compare_field_phrase),
       kw("TO"),
       field("target", $._expression),
-      optional(
+      optional($.__buffer_compare_tail),
+    ),
+
+  __buffer_compare_tail: ($) =>
+    choice(
+      seq(
         choice(alias(kw("CASE-SENSITIVE"), $.case_sensitive), alias(kw("BINARY"), $.binary)),
+        optional($.__buffer_compare_after_mode),
       ),
-      optional(alias($.__buffer_compare_save_phrase, $.save_phrase)),
-      optional(alias($.__buffer_compare_compares_block, $.compares_block)),
-      optional(alias(kw("NO-LOBS"), $.no_lobs)),
+      $.__buffer_compare_after_mode,
+    ),
+  __buffer_compare_after_mode: ($) =>
+    choice(
+      seq(
+        alias($.__buffer_compare_save_phrase, $.save_phrase),
+        optional($.__buffer_compare_after_save),
+      ),
+      $.__buffer_compare_after_save,
+    ),
+  __buffer_compare_after_save: ($) =>
+    choice(
+      seq(
+        alias($.__buffer_compare_compares_block, $.compares_block),
+        optional(alias(kw("NO-LOBS"), $.no_lobs)),
+      ),
+      alias(kw("NO-LOBS"), $.no_lobs),
     ),
 
   __buffer_compare_field_phrase: ($) =>
