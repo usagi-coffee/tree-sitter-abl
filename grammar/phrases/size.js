@@ -1,6 +1,5 @@
 export default ({ kw }) => ({
-  size_phrase: ($) => $._size_phrase,
-  _size_phrase: ($) =>
+  size_phrase: ($) =>
     seq(
       choice(kw("SIZE"), kw("SIZE-CHARS"), kw("SIZE-PIXELS")),
       field("width", $._expression),

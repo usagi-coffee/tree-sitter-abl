@@ -41,7 +41,7 @@ export default ($) => [
     $.__frame_display_option,
     $._color_font_option,
     $.__frame_head_item,
-    $._size_phrase,
+    $.size_phrase,
     $.__system_dialog_filters_pairs,
     $.__system_dialog_filter_pair,
     $.__at_column_row,
