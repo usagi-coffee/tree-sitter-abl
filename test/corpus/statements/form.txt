@@ -7,6 +7,8 @@ FORM customer-name customer-balance.
 FORM customer-name LABEL "Customer Name".
 FORM customer-name FORMAT "x(30)".
 FORM customer-name VIEW-AS FILL-IN.
+FORM customer-name FORMAT "x(30)" VIEW-AS FILL-IN.
+FORM customer-name VALIDATE(ok) FORMAT "x(30)" VIEW-AS FILL-IN.
 
 --------------------------------------------------------------------------------
 
@@ -30,6 +32,20 @@ FORM customer-name VIEW-AS FILL-IN.
   (form_statement
     (form_item
       field: (identifier)
+      (view_as_phrase
+        widget: (identifier))))
+  (form_statement
+    (form_item
+      field: (identifier)
+      format: (string_literal)
+      (view_as_phrase
+        widget: (identifier))))
+  (form_statement
+    (form_item
+      field: (identifier)
+      (validate_phrase
+        expression: (identifier))
+      format: (string_literal)
       (view_as_phrase
         widget: (identifier)))))
 

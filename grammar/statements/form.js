@@ -21,15 +21,26 @@ export default ({ kw }) => ({
           field("field", $._expression),
           optional(seq(kw("COLON"), field("colon", $._expression))),
           optional(seq(kw("LABEL"), optional(field("label", $.__form_label)))),
-          optional(alias($.__form_validate_phrase, $.validate_phrase)),
-          optional($._format_string),
-          optional(alias($.__form_view_as, $.view_as_phrase)),
+          optional($.__form_validate_format_view_as_tail),
         ),
         seq(kw("SKIP"), optional(field("skip", seq("(", $._expression, ")")))),
         seq(kw("SPACE"), optional(field("space", seq("(", $._expression, ")")))),
       ),
     ),
 
+  __form_validate_format_view_as_tail: ($) =>
+    choice(
+      seq(
+        alias($.__form_validate_phrase, $.validate_phrase),
+        optional($.__form_format_view_as_tail),
+      ),
+      $.__form_format_view_as_tail,
+    ),
+  __form_format_view_as_tail: ($) =>
+    choice(
+      seq($._format_string, optional(alias($.__form_view_as, $.view_as_phrase))),
+      alias($.__form_view_as, $.view_as_phrase),
+    ),
   __form_view_as: ($) =>
     seq(
       kw("VIEW-AS"),
