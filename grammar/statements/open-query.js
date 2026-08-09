@@ -7,12 +7,8 @@ export default ({ kw }) => ({
       kw("QUERY"),
       field("query", $.identifier),
       $.__open_query_records,
-      optional($.__open_query_tail),
-    ),
-  __open_query_tail: ($) =>
-    choice(
-      seq($.query_tuning_phrase, optional($.__open_query_tail_after_tuning)),
-      $.__open_query_tail_after_tuning,
+      optional($.query_tuning_phrase),
+      optional($.__open_query_tail_after_tuning),
     ),
   __open_query_tail_after_tuning: ($) =>
     choice(
