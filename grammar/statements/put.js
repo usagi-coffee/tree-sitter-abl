@@ -27,9 +27,8 @@ export default ({ kw }) => ({
       ),
     ),
 
-  __put_skip_item: ($) =>
-    prec.right(seq(kw("SKIP"), optional(seq("(", field("count", $._expression), ")")))),
+  __put_skip_item: ($) => prec.right(seq(kw("SKIP"), optional($.__put_parenthesized_count))),
 
-  __put_space_item: ($) =>
-    prec.right(seq(kw("SPACE"), optional(seq("(", field("count", $._expression), ")")))),
+  __put_space_item: ($) => prec.right(seq(kw("SPACE"), optional($.__put_parenthesized_count))),
+  __put_parenthesized_count: ($) => seq("(", field("count", $._expression), ")"),
 });
