@@ -10,16 +10,13 @@ export default ({ kw }) => ({
     choice(
       seq(
         alias($._lob_dir_phrase, $.lob_dir_phrase),
-        optional(
-          choice(
-            seq(alias(kw("BINARY"), $.binary), optional($._echo_map_unbuffered_convert_tail)),
-            $._echo_map_unbuffered_convert_tail,
-          ),
-        ),
+        optional(choice($.__input_binary_tail, $._echo_map_unbuffered_convert_tail)),
       ),
-      seq(alias(kw("BINARY"), $.binary), optional($._echo_map_unbuffered_convert_tail)),
+      $.__input_binary_tail,
       $._echo_map_unbuffered_convert_tail,
     ),
+  __input_binary_tail: ($) =>
+    seq(alias(kw("BINARY"), $.binary), optional($._echo_map_unbuffered_convert_tail)),
 
   __input_from_target: ($) =>
     choice(
