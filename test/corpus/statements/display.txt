@@ -505,12 +505,19 @@ DISPLAY with stream and frame only
 ================================================================================
 
 DISPLAY STREAM s1 WITH FRAME f1.
+DISPLAY STREAM s1 IN WINDOW hWin WITH FRAME f1.
 
 --------------------------------------------------------------------------------
 
 (source_code
   (display_statement
     stream: (identifier)
+    (frame_phrase
+      frame: (identifier)))
+  (display_statement
+    stream: (identifier)
+    (in_window_phrase
+      window: (identifier))
     (frame_phrase
       frame: (identifier))))
 

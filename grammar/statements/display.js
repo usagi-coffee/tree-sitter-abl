@@ -14,8 +14,7 @@ export default ({ kw }) => ({
         seq(
           $._stream_phrase,
           optional(alias(kw("UNLESS-HIDDEN"), $.unless_hidden)),
-          optional($.in_window_phrase),
-          $.__display_frame_phrases,
+          $.__display_window_frame_phrases,
         ),
         seq(
           optional($.__display_stream_unless_prefix),
@@ -32,6 +31,8 @@ export default ({ kw }) => ({
     ),
   __display_window_frame_tail: ($) =>
     choice(seq($.in_window_phrase, optional($.__display_frame_phrases)), $.__display_frame_phrases),
+  __display_window_frame_phrases: ($) =>
+    choice(seq($.in_window_phrase, $.__display_frame_phrases), $.__display_frame_phrases),
 
   __display_items: ($) =>
     choice(
