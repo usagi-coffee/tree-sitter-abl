@@ -4,16 +4,12 @@ export default ({ kw }) => ({
   __input_body: ($) =>
     choice(
       alias(kw("CLOSE"), $.close),
-      seq(kw("FROM"), $.__input_from_target, optional($.__input_tail)),
-    ),
-  __input_tail: ($) =>
-    choice(
       seq(
-        alias($._lob_dir_phrase, $.lob_dir_phrase),
+        kw("FROM"),
+        $.__input_from_target,
+        optional(alias($._lob_dir_phrase, $.lob_dir_phrase)),
         optional(choice($.__input_binary_tail, $._echo_map_unbuffered_convert_tail)),
       ),
-      $.__input_binary_tail,
-      $._echo_map_unbuffered_convert_tail,
     ),
   __input_binary_tail: ($) =>
     seq(alias(kw("BINARY"), $.binary), optional($._echo_map_unbuffered_convert_tail)),
