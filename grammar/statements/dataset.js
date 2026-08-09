@@ -24,15 +24,8 @@ export default ({ kw }) => ({
         ),
         ")",
       ),
-      optional($.__dataset_data_relation_tail),
-    ),
-  __dataset_data_relation_tail: ($) =>
-    choice(
-      seq(
-        alias(kw("REPOSITION"), $.reposition),
-        optional($.__dataset_data_relation_after_reposition),
-      ),
-      $.__dataset_data_relation_after_reposition,
+      optional(alias(kw("REPOSITION"), $.reposition)),
+      optional($.__dataset_data_relation_after_reposition),
     ),
   __dataset_data_relation_after_reposition: ($) =>
     choice(
