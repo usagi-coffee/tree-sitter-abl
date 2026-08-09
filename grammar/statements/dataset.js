@@ -54,7 +54,8 @@ export default ({ kw }) => ({
       kw("PARENT-ID-RELATION"),
       $.__dataset_relation_head,
       seq(kw("PARENT-ID-FIELD"), field("parent_id_field", $.identifier)),
-      optional($.__dataset_parent_id_relation_tail),
+      optional($.__dataset_parent_fields_before_phrase),
+      optional($.__dataset_parent_fields_after_phrase),
     ),
   __dataset_relation_head: ($) =>
     seq(
@@ -63,14 +64,6 @@ export default ({ kw }) => ({
       field("parent_buffer", $.identifier),
       ",",
       field("child_buffer", $.identifier),
-    ),
-  __dataset_parent_id_relation_tail: ($) =>
-    choice(
-      seq(
-        $.__dataset_parent_fields_before_phrase,
-        optional($.__dataset_parent_fields_after_phrase),
-      ),
-      $.__dataset_parent_fields_after_phrase,
     ),
   __dataset_parent_fields_before_phrase: ($) =>
     seq(
