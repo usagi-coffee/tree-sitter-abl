@@ -14,7 +14,8 @@ export default ({ kw }) => ({
     ),
   __load_after_application: ($) =>
     choice(
-      seq(alias(kw("NEW"), $.new), optional(seq(kw("BASE-KEY"), field("base_key", $._expression)))),
-      seq(kw("BASE-KEY"), field("base_key", $._expression)),
+      seq(alias(kw("NEW"), $.new), optional($.__load_base_key_option)),
+      $.__load_base_key_option,
     ),
+  __load_base_key_option: ($) => seq(kw("BASE-KEY"), field("base_key", $._expression)),
 });
