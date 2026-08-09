@@ -13,8 +13,7 @@ export default ({ kw }) => ({
               kw("ROWID"),
               field("rowid", $._expression),
               repeat(seq(",", field("rowid", $._expression))),
-              optional(seq(kw("FOR"), kw("TENANT"), field("tenant", $._expression))),
-              optional($.__no_error),
+              optional($.__reposition_tenant_no_error_tail),
             ),
             seq(kw("RECID"), field("recid", $._expression), optional($.__no_error)),
             seq(kw("ROW"), field("row", $._expression)),
@@ -29,5 +28,10 @@ export default ({ kw }) => ({
           field("count", $._expression),
         ),
       ),
+    ),
+  __reposition_tenant_no_error_tail: ($) =>
+    choice(
+      seq(kw("FOR"), kw("TENANT"), field("tenant", $._expression), optional($.__no_error)),
+      $.__no_error,
     ),
 });
