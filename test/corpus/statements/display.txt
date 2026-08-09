@@ -229,6 +229,7 @@ DISPLAY Customer EXCEPT Customer.Comments WITH FRAME f2.
 DISPLAY Customer EXCEPT Customer.Comments WITH BROWSE b1.
 DISPLAY Customer.Name IN WINDOW hWin WITH FRAME f1 NO-ERROR.
 DISPLAY STREAM s1 Customer.Name.
+DISPLAY STREAM s1 UNLESS-HIDDEN Customer.Name.
 DISPLAY STREAM-HANDLE hStream Customer.Name.
 DISPLAY UNLESS-HIDDEN Customer.Name.
 DISPLAY SPACE(2) Customer.Name SKIP(1) Customer.City.
@@ -447,6 +448,12 @@ DISPLAY SPACE(2) Customer.Name SKIP(1) Customer.City.
     (no_error))
   (display_statement
     stream: (identifier)
+    record: (qualified_name
+      left: (identifier)
+      right: (identifier)))
+  (display_statement
+    stream: (identifier)
+    (unless_hidden)
     record: (qualified_name
       left: (identifier)
       right: (identifier)))

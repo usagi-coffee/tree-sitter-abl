@@ -18,14 +18,18 @@ export default ({ kw }) => ({
           $.__display_frame_phrases,
         ),
         seq(
-          optional($._stream_phrase),
-          optional(alias(kw("UNLESS-HIDDEN"), $.unless_hidden)),
+          optional($.__display_stream_unless_prefix),
           $.__display_items,
           optional($.in_window_phrase),
           optional($.__display_frame_phrases),
         ),
       ),
       $._no_error_terminator,
+    ),
+  __display_stream_unless_prefix: ($) =>
+    choice(
+      seq($._stream_phrase, optional(alias(kw("UNLESS-HIDDEN"), $.unless_hidden))),
+      alias(kw("UNLESS-HIDDEN"), $.unless_hidden),
     ),
 
   __display_items: ($) =>
