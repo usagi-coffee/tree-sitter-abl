@@ -11,8 +11,6 @@ export default ({ kw }) => ({
       ),
     ),
   __clear_all_no_pause_tail: ($) =>
-    choice(
-      seq(alias(kw("ALL"), $.all), optional(alias(kw("NO-PAUSE"), $.no_pause))),
-      alias(kw("NO-PAUSE"), $.no_pause),
-    ),
+    choice(seq(alias(kw("ALL"), $.all), optional($.__clear_no_pause)), $.__clear_no_pause),
+  __clear_no_pause: ($) => alias(kw("NO-PAUSE"), $.no_pause),
 });

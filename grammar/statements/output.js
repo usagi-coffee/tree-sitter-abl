@@ -12,10 +12,7 @@ export default ({ kw }) => ({
           choice(
             $.preprocessor_name,
             alias($._lob_dir_phrase, $.lob_dir_phrase),
-            seq(
-              kw("NUM-COPIES"),
-              field("copies", choice($.number_literal, $.preprocessor_name, $._value_expression)),
-            ),
+            seq(kw("NUM-COPIES"), field("copies", $.__output_numeric_value)),
             alias(kw("COLLATE"), $.collate),
             alias(kw("LANDSCAPE"), $.landscape),
             alias(kw("PORTRAIT"), $.portrait),
@@ -56,10 +53,8 @@ export default ({ kw }) => ({
     ),
 
   __output_page_size_phrase: ($) =>
-    seq(
-      kw("PAGE-SIZE"),
-      field("page_size", choice($.number_literal, $.preprocessor_name, $._value_expression)),
-    ),
+    seq(kw("PAGE-SIZE"), field("page_size", $.__output_numeric_value)),
+  __output_numeric_value: ($) => choice($.number_literal, $.preprocessor_name, $._value_expression),
 
   __output_map_entry: ($) =>
     choice(seq($.identifier, repeat(seq("/", $.identifier))), $.identifier, $.string_literal),
