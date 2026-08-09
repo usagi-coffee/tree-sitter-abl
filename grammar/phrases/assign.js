@@ -17,8 +17,16 @@ export default ({ kw }) => ({
           seq(kw("BROWSE"), field("browse", $.identifier), ":", field("attr", $.identifier)),
         ),
       ),
-      optional(seq("=", field("right", choice($.array_initializer, $._expression)))),
-      optional($._when_phrase),
+      optional($.__assign_pair_tail),
+    ),
+  __assign_pair_tail: ($) =>
+    choice(
+      seq(
+        "=",
+        field("right", choice($.array_initializer, $._expression)),
+        optional($._when_phrase),
+      ),
+      $._when_phrase,
     ),
   __assign_keyword_identifier: ($) => alias($._widgets, $.identifier),
 });
