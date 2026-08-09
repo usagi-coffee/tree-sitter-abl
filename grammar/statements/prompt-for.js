@@ -85,13 +85,10 @@ export default ({ kw }) => ({
     ),
   __prompt_for_constant_style_after_fgcolor: ($) =>
     choice(
-      seq(
-        kw("BGCOLOR"),
-        field("bgcolor", $._expression),
-        optional(seq(kw("FONT"), field("font", $._expression))),
-      ),
-      seq(kw("FONT"), field("font", $._expression)),
+      seq(kw("BGCOLOR"), field("bgcolor", $._expression), optional($.__prompt_for_font_option)),
+      $.__prompt_for_font_option,
     ),
+  __prompt_for_font_option: ($) => seq(kw("FONT"), field("font", $._expression)),
 
   __prompt_for_at_phrase: ($) => seq(kw("AT"), field("position", token(/[0-9]+(\.[0-9]+)?/))),
   __prompt_for_to_phrase: ($) => seq(kw("TO"), field("position", token(/[0-9]+(\.[0-9]+)?/))),

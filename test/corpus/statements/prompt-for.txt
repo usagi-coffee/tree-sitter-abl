@@ -112,6 +112,8 @@ PROMPT-FOR record with EXCEPT and constant VIEW-AS
 
 PROMPT-FOR Customer EXCEPT Comments PrivateNotes WITH FRAME fCust.
 PROMPT-FOR "Notes:" TO 20 VIEW-AS TEXT FGCOLOR 12 BGCOLOR 1 FONT 2 field1.
+PROMPT-FOR "Font:" FONT 2 field2.
+PROMPT-FOR "Background:" BGCOLOR 1 FONT 2 field3.
 
 --------------------------------------------------------------------------------
 
@@ -131,6 +133,19 @@ PROMPT-FOR "Notes:" TO 20 VIEW-AS TEXT FGCOLOR 12 BGCOLOR 1 FONT 2 field1.
       (view_as_phrase
         widget: (identifier))
       fgcolor: (number_literal)
+      bgcolor: (number_literal)
+      font: (number_literal))
+    (field
+      field: (identifier)))
+  (prompt_for_statement
+    (field
+      constant: (string_literal)
+      font: (number_literal))
+    (field
+      field: (identifier)))
+  (prompt_for_statement
+    (field
+      constant: (string_literal)
       bgcolor: (number_literal)
       font: (number_literal))
     (field
