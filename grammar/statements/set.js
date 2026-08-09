@@ -11,11 +11,10 @@ export default ({ kw }) => ({
   __set_body: ($) => choice($.__set_record_body, $.__set_fields_body),
 
   __set_fields_body: ($) =>
-    seq(repeat1(alias($.__set_field, $.field)), optional($.__set_fields_tail)),
-  __set_fields_tail: ($) =>
-    choice(
-      seq(alias($._go_on_phrase, $.go_on_phrase), optional($.__set_fields_tail_after_go_on)),
-      $.__set_fields_tail_after_go_on,
+    seq(
+      repeat1(alias($.__set_field, $.field)),
+      optional(alias($._go_on_phrase, $.go_on_phrase)),
+      optional($.__set_fields_tail_after_go_on),
     ),
   __set_fields_tail_after_go_on: ($) =>
     choice(
