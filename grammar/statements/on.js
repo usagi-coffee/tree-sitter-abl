@@ -120,9 +120,16 @@ export default ({ kw }) => ({
       field("event", $.__on_database_event),
       kw("OF"),
       field("object", $._identifier_or_qualified_name),
-      optional(alias($.__on_referencing_phrase, $.referencing_phrase)),
-      optional(alias(kw("OVERRIDE"), $.override)),
+      optional($.__on_database_event_tail),
       choice($.__on_revert_action, $._statement),
+    ),
+  __on_database_event_tail: ($) =>
+    choice(
+      seq(
+        alias($.__on_referencing_phrase, $.referencing_phrase),
+        optional(alias(kw("OVERRIDE"), $.override)),
+      ),
+      alias(kw("OVERRIDE"), $.override),
     ),
   __on_key_label_branch: ($) =>
     seq(

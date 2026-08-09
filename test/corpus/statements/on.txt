@@ -8,6 +8,7 @@ END.
 
 ON ASSIGN OF Customer.Name OLD VALUE old-name REVERT.
 ON FIND OF Customer OVERRIDE REVERT.
+ON WRITE OF Customer NEW new-cust OLD old-cust OVERRIDE REVERT.
 ON "WRITE" OF Customer REVERT.
 ON CHOOSE ANYWHERE DO:
   MESSAGE "x".
@@ -40,6 +41,13 @@ END.
     (revert))
   (on_statement
     object: (identifier)
+    (override)
+    (revert))
+  (on_statement
+    object: (identifier)
+    (referencing_phrase
+      new_record: (identifier)
+      old_record: (identifier))
     (override)
     (revert))
   (on_statement
