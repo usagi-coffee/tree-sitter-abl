@@ -58,10 +58,7 @@ export default ({ kw }) => ({
       seq(kw("EVENT-HANDLER"), $.__run_event_handler_tail),
     ),
   __run_event_procedure_tail: ($) =>
-    seq(
-      field("event_procedure", $._expression),
-      optional(seq(kw("IN"), field("context", $.__run_context_value))),
-    ),
+    seq(field("event_procedure", $._expression), optional($.__run_in_phrase)),
   __run_event_handler_tail: ($) =>
     seq(
       field("event_handler", $._expression),
