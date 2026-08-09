@@ -1,11 +1,12 @@
 export default ({ kw }) => ({
   load_statement: ($) => seq($.__load_prefix, $._no_error_terminator),
 
-  __load_prefix: ($) => seq(kw("LOAD"), field("file", $._expression), optional($.__load_tail)),
-  __load_tail: ($) =>
-    choice(
-      seq(kw("DIR"), field("dir", $._expression), optional($.__load_after_dir)),
-      $.__load_after_dir,
+  __load_prefix: ($) =>
+    seq(
+      kw("LOAD"),
+      field("file", $._expression),
+      optional(seq(kw("DIR"), field("dir", $._expression))),
+      optional($.__load_after_dir),
     ),
   __load_after_dir: ($) =>
     choice(
