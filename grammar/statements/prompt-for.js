@@ -50,10 +50,11 @@ export default ({ kw }) => ({
         ")",
       ),
       seq(field("constant", $.string_literal), optional($.__prompt_for_constant_tail)),
-      seq(kw("SKIP"), optional(field("skip", seq("(", $._expression, ")")))),
-      seq(kw("SPACE"), optional(field("space", seq("(", $._expression, ")")))),
+      seq(kw("SKIP"), optional(field("skip", $.__prompt_for_parenthesized_expression))),
+      seq(kw("SPACE"), optional(field("space", $.__prompt_for_parenthesized_expression))),
       "^",
     ),
+  __prompt_for_parenthesized_expression: ($) => seq("(", $._expression, ")"),
   __prompt_for_constant_tail: ($) =>
     choice(
       seq(
