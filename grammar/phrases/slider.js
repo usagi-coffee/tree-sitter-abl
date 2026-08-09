@@ -6,12 +6,8 @@ export default ({ kw }) => ({
       field("max", $.number_literal),
       kw("MIN-VALUE"),
       field("min", $.number_literal),
-      optional($.__slider_options),
-    ),
-  __slider_options: ($) =>
-    choice(
-      seq(choice(kw("HORIZONTAL"), kw("VERTICAL")), optional($.__slider_after_orientation)),
-      $.__slider_after_orientation,
+      optional(choice(kw("HORIZONTAL"), kw("VERTICAL"))),
+      optional($.__slider_after_orientation),
     ),
   __slider_after_orientation: ($) =>
     choice(
