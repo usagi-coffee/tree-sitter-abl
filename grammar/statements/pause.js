@@ -1,14 +1,10 @@
 export default ({ kw }) => ({
   pause_statement: ($) => seq($.__pause_prefix, $._terminator),
-  __pause_prefix: ($) => seq(kw("PAUSE"), optional($.__pause_tail)),
-  __pause_tail: ($) =>
-    choice(
-      seq(
-        field("duration", $._expression),
-        optional(choice($.__pause_before_hide_tail, $.__pause_message_window_tail)),
-      ),
-      $.__pause_before_hide_tail,
-      $.__pause_message_window_tail,
+  __pause_prefix: ($) =>
+    seq(
+      kw("PAUSE"),
+      optional(field("duration", $._expression)),
+      optional(choice($.__pause_before_hide_tail, $.__pause_message_window_tail)),
     ),
   __pause_before_hide_tail: ($) =>
     seq(alias(kw("BEFORE-HIDE"), $.before_hide), optional($.__pause_message_window_tail)),
