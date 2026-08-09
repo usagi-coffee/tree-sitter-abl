@@ -55,23 +55,25 @@ export default ({ kw }) => ({
       ),
       $._handle_in_widget_pool,
     ),
-  __create_widget_pool: ($) => seq(kw("WIDGET-POOL"), optional($.__create_widget_pool_name)),
-  __create_widget_pool_name: ($) =>
-    seq(field("pool", $.identifier), optional(alias(kw("PERSISTENT"), $.persistent))),
+  __create_widget_pool: ($) =>
+    seq(
+      kw("WIDGET-POOL"),
+      optional(seq(field("pool", $.identifier), optional(alias(kw("PERSISTENT"), $.persistent)))),
+    ),
   __create_server: ($) =>
     seq(kw("SERVER"), field("handle", $.identifier), optional($.assign_phrase)),
   __create_database: ($) =>
     seq(
       kw("DATABASE"),
       field("new_database", $._expression),
-      optional($.__create_database_from),
+      optional(
+        seq(
+          kw("FROM"),
+          field("old_database", $._expression),
+          optional(alias(kw("NEW-INSTANCE"), $.new_instance)),
+        ),
+      ),
       optional(alias(kw("REPLACE"), $.replace)),
-    ),
-  __create_database_from: ($) =>
-    seq(
-      kw("FROM"),
-      field("old_database", $._expression),
-      optional(alias(kw("NEW-INSTANCE"), $.new_instance)),
     ),
   __create_automation_object: ($) =>
     seq(

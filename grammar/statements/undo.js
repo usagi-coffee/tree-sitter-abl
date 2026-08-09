@@ -1,13 +1,11 @@
 export default ({ kw }) => ({
   undo_statement: ($) => seq($.__undo_prefix, $._terminator),
 
-  __undo_prefix: ($) => seq(kw("UNDO"), optional($.__undo_body)),
-  __undo_body: ($) =>
+  __undo_prefix: ($) =>
     seq(
-      choice(
-        seq(",", $.__undo_action),
-        seq(field("undo_label", $.identifier), optional(seq(",", $.__undo_action))),
-      ),
+      kw("UNDO"),
+      optional(field("undo_label", $.identifier)),
+      optional(seq(",", $.__undo_action)),
     ),
 
   __undo_action: ($) =>
