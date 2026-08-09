@@ -13,9 +13,10 @@ export default ({ kw }) => ({
 
   __assign_statement_phrase_body: ($) =>
     seq(
-      choice(alias($.__assign_pair, $.assign_pair), $.if_preprocessor_directive),
-      repeat(choice(alias($.__assign_pair, $.assign_pair), $.if_preprocessor_directive_statement)),
+      choice($.__assign_pair_item, $.if_preprocessor_directive),
+      repeat(choice($.__assign_pair_item, $.if_preprocessor_directive_statement)),
     ),
+  __assign_pair_item: ($) => alias($.__assign_pair, $.assign_pair),
 
   __assign_record_body: ($) =>
     seq(
