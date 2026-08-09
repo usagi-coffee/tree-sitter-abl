@@ -38,10 +38,11 @@ export default ({ kw }) => ({
 
   __for_record: ($) => seq(optional(choice(kw("EACH"), kw("FIRST"), kw("LAST"))), $.record_phrase),
 
-  __for_by_phrase: ($) => prec.right(seq(kw("BY"), $.__for_by_tail)),
-  __for_group_by_phrase: ($) => prec.right(seq(kw("GROUP"), kw("BY"), $.__for_by_tail)),
+  __for_by_phrase: ($) => prec.right($.__for_by_clause),
+  __for_group_by_phrase: ($) => prec.right(seq(kw("GROUP"), $.__for_by_clause)),
 
-  __for_break_by: ($) => prec.right(seq(kw("BREAK"), kw("BY"), $.__for_by_tail)),
+  __for_break_by: ($) => prec.right(seq(kw("BREAK"), $.__for_by_clause)),
+  __for_by_clause: ($) => seq(kw("BY"), $.__for_by_tail),
 
   __for_with_stream_io_phrase: ($) => seq(kw("WITH"), alias(kw("STREAM-IO"), $.stream_io)),
 
