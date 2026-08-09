@@ -11,10 +11,10 @@ export default ({ kw }) => ({
           $.__create_database,
           $.__create_automation_object,
           $.__create_record,
+          $.__create_handle_with_pool_no_error_body,
         ),
         optional($.__no_error),
       ),
-      $.__create_handle_with_pool_no_error_body,
       $.__create_handle_with_pool_body,
       $.__create_server,
     ),
@@ -40,7 +40,7 @@ export default ({ kw }) => ({
   __create_handle_with_pool_no_error_body: ($) =>
     seq(
       choice(kw("CALL"), kw("QUERY"), kw("SAX-READER"), kw("SAX-WRITER"), kw("SAX-ATTRIBUTES")),
-      seq($._handle_in_widget_pool, optional($.__no_error)),
+      $._handle_in_widget_pool,
     ),
   __create_handle_with_pool_body: ($) =>
     seq(
