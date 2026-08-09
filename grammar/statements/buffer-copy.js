@@ -16,15 +16,10 @@ export default ({ kw }) => ({
       optional(alias($.__buffer_copy_assign_phrase, $.assign_phrase)),
       optional(alias(kw("NO-LOBS"), $.no_lobs)),
     ),
-  __buffer_copy_except_phrase: ($) =>
+  __buffer_copy_except_phrase: ($) => seq(kw("EXCEPT"), $.__buffer_copy_fields),
+  __buffer_copy_using_phrase: ($) => seq(kw("USING"), $.__buffer_copy_fields),
+  __buffer_copy_fields: ($) =>
     seq(
-      kw("EXCEPT"),
-      $._identifier_or_qualified_name,
-      repeat(seq(optional(","), $._identifier_or_qualified_name)),
-    ),
-  __buffer_copy_using_phrase: ($) =>
-    seq(
-      kw("USING"),
       $._identifier_or_qualified_name,
       repeat(seq(optional(","), $._identifier_or_qualified_name)),
     ),
