@@ -7,12 +7,13 @@ export default ({ kw }) => ({
         choice(
           seq(
             alias(kw("FROM-CURRENT"), $.from_current),
-            optional(choice(seq($.__scroll_direction, optional($.frame_phrase)), $.frame_phrase)),
+            optional(choice($.__scroll_direction_frame_tail, $.frame_phrase)),
           ),
-          seq($.__scroll_direction, optional($.frame_phrase)),
+          $.__scroll_direction_frame_tail,
           $.frame_phrase,
         ),
       ),
     ),
+  __scroll_direction_frame_tail: ($) => seq($.__scroll_direction, optional($.frame_phrase)),
   __scroll_direction: ($) => choice(alias(kw("UP"), $.up), alias(kw("DOWN"), $.down)),
 });

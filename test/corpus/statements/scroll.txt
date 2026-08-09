@@ -7,6 +7,8 @@ SCROLL UP.
 SCROLL DOWN.
 SCROLL FROM-CURRENT UP.
 SCROLL FROM-CURRENT DOWN WITH FRAME myframe.
+SCROLL WITH FRAME myframe.
+SCROLL FROM-CURRENT WITH FRAME myframe.
 
 --------------------------------------------------------------------------------
 
@@ -22,6 +24,13 @@ SCROLL FROM-CURRENT DOWN WITH FRAME myframe.
   (scroll_statement
     (from_current)
     (down)
+    (frame_phrase
+      frame: (identifier)))
+  (scroll_statement
+    (frame_phrase
+      frame: (identifier)))
+  (scroll_statement
+    (from_current)
     (frame_phrase
       frame: (identifier))))
 
