@@ -41,12 +41,13 @@ export default ({ kw }) => ({
   __record_field_list: ($) =>
     choice(
       seq(
-        seq(kw("FIELDS"), "(", optional($.__record_field_names), ")"),
+        seq(kw("FIELDS"), $.__record_parenthesized_field_names),
         optional($.__record_except_list),
       ),
       $.__record_except_list,
     ),
-  __record_except_list: ($) => seq(kw("EXCEPT"), "(", optional($.__record_field_names), ")"),
+  __record_except_list: ($) => seq(kw("EXCEPT"), $.__record_parenthesized_field_names),
+  __record_parenthesized_field_names: ($) => seq("(", optional($.__record_field_names), ")"),
   __record_field_names: ($) =>
     seq(
       $._identifier_or_qualified_name,
