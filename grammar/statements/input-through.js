@@ -3,14 +3,11 @@ export default ({ kw }) => ({
     seq($.__input_through_prefix, $.__input_through_body, $._terminator),
 
   __input_through_prefix: ($) => seq($._input_stream_prefix, kw("THROUGH")),
-  __input_through_body: ($) => seq($._program_target, optional($.__input_through_tail)),
-  __input_through_tail: ($) =>
-    choice(
-      seq(
-        repeat1(choice($.__input_through_arg_value, $._value_expression)),
-        optional($._echo_map_unbuffered_convert_tail),
-      ),
-      $._echo_map_unbuffered_convert_tail,
+  __input_through_body: ($) =>
+    seq(
+      $._program_target,
+      repeat(choice($.__input_through_arg_value, $._value_expression)),
+      optional($._echo_map_unbuffered_convert_tail),
     ),
 
   __input_through_arg_value: ($) =>
