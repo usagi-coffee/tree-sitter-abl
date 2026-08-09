@@ -522,6 +522,33 @@ END FUNCTION.
             name: (identifier)))))))
 
 ================================================================================
+FUNCTION - definitions without parameters
+================================================================================
+
+FUNCTION noArgs RETURNS CHARACTER:
+  RETURN "".
+END FUNCTION.
+
+FUNCTION privateNoArgs RETURNS CHARACTER PRIVATE:
+  RETURN "".
+END FUNCTION.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (function_definition
+    name: (identifier)
+    type: (identifier)
+    (return_statement
+      value: (string_literal)))
+  (function_definition
+    name: (identifier)
+    type: (identifier)
+    (access_modifier)
+    (return_statement
+      value: (string_literal))))
+
+================================================================================
 FUNCTION - MAP TO IN proc-handle prototype
 ================================================================================
 
