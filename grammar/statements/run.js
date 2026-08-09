@@ -1,11 +1,11 @@
 export default ({ kw }) => ({
   run_statement: ($) => seq(kw("RUN"), $.__run_body, $._no_error_terminator),
 
-  __run_body: ($) => seq(field("procedure", $._run_target), optional($.__run_body_tail)),
-  __run_body_tail: ($) =>
-    choice(
-      seq($.__run_persistence, optional($.__run_body_after_persistence)),
-      $.__run_body_after_persistence,
+  __run_body: ($) =>
+    seq(
+      field("procedure", $._run_target),
+      optional($.__run_persistence),
+      optional($.__run_body_after_persistence),
     ),
   __run_body_after_persistence: ($) =>
     choice(
