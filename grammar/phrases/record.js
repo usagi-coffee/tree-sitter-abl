@@ -2,9 +2,13 @@ export default ({ kw }) => ({
   record_phrase: ($) =>
     seq(
       field("record", $._identifier_or_qualified_name),
-      optional(alias($.__record_field_list, $.field_list)),
-      optional($.preprocessor_name),
+      optional($.__record_field_list_preprocessor_tail),
       repeat($.__record_option),
+    ),
+  __record_field_list_preprocessor_tail: ($) =>
+    choice(
+      seq(alias($.__record_field_list, $.field_list), optional($.preprocessor_name)),
+      $.preprocessor_name,
     ),
 
   __record_option: ($) =>

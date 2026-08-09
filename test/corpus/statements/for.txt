@@ -479,6 +479,25 @@ END.
         record: (identifier)))))
 
 ================================================================================
+FOR field list with preprocessor constant
+================================================================================
+
+FOR EACH Customer FIELDS (Name) {&recordConstant}:
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (for_statement
+    (record_phrase
+      record: (identifier)
+      (field_list
+        (identifier))
+      (preprocessor_name
+        (identifier)))
+    (body)))
+
+================================================================================
 FOR WHILE and STOP-AFTER
 ================================================================================
 
