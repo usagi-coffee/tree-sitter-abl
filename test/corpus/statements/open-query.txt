@@ -99,6 +99,7 @@ END.
 
 OPEN QUERY qCust FOR EACH Customer BREAK BY Customer.State NO-LOCK.
 OPEN QUERY qCust FOR EACH Customer NO-LOCK INDEXED-REPOSITION MAX-ROWS 10.
+OPEN QUERY qCust FOR EACH Customer NO-LOCK MAX-ROWS 25.
 OPEN QUERY qCust PRESELECT EACH Customer NO-LOCK.
 OPEN QUERY qCust FOR EACH Customer BY COLLATE(Customer.Name, "CASE-INSENSITIVE") DESCENDING.
 OPEN QUERY qCust FOR EACH Customer WHERE Customer.CustNum > 0 USE-INDEX CustNum SHARE-LOCK.
@@ -230,6 +231,12 @@ OPEN QUERY qCust FOR EACH Customer QUERY-TUNING(JOIN-BY-SQLDB NO-BIND-WHERE) NO-
       record: (identifier)
       lock: (no_lock))
     (indexed_reposition)
+    max_rows: (number_literal))
+  (open_query_statement
+    query: (identifier)
+    (record_phrase
+      record: (identifier)
+      lock: (no_lock))
     max_rows: (number_literal))
   (open_query_statement
     query: (identifier)

@@ -36,10 +36,11 @@ export default ({ kw }) => ({
     choice(
       seq(
         alias(kw("INDEXED-REPOSITION"), $.indexed_reposition),
-        optional(seq(kw("MAX-ROWS"), field("max_rows", $._expression))),
+        optional($.__open_query_max_rows_option),
       ),
-      seq(kw("MAX-ROWS"), field("max_rows", $._expression)),
+      $.__open_query_max_rows_option,
     ),
+  __open_query_max_rows_option: ($) => seq(kw("MAX-ROWS"), field("max_rows", $._expression)),
   __open_query_records: ($) =>
     seq(
       choice(kw("FOR"), kw("PRESELECT")),
