@@ -18,16 +18,8 @@ export default ({ kw }) => ({
             optional(
               choice(
                 $.__compile_append_option,
-                seq(
-                  kw("PAGE-SIZE"),
-                  field("page_size", $._expression),
-                  optional(seq(kw("PAGE-WIDTH"), field("page_width", $._expression))),
-                ),
-                seq(
-                  kw("PAGE-WIDTH"),
-                  field("page_width", $._expression),
-                  optional(seq(kw("PAGE-SIZE"), field("page_size", $._expression))),
-                ),
+                seq($.__compile_page_size_option, optional($.__compile_page_width_option)),
+                seq($.__compile_page_width_option, optional($.__compile_page_size_option)),
               ),
             ),
           ),
@@ -66,5 +58,7 @@ export default ({ kw }) => ({
 
   __compile_append_option: ($) =>
     seq(kw("APPEND"), optional(seq("=", field("append", $._expression)))),
+  __compile_page_size_option: ($) => seq(kw("PAGE-SIZE"), field("page_size", $._expression)),
+  __compile_page_width_option: ($) => seq(kw("PAGE-WIDTH"), field("page_width", $._expression)),
   __compile_equals_expression: ($) => seq("=", field("value", $._expression)),
 });

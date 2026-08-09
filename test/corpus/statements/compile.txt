@@ -20,7 +20,10 @@ COMPILE - LISTING with APPEND and PAGE options
 ================================================================================
 
 COMPILE myproc.p LISTING "out.lst" APPEND = TRUE.
+COMPILE myproc.p LISTING "out.lst" PAGE-SIZE 80.
+COMPILE myproc.p LISTING "out.lst" PAGE-WIDTH 132.
 COMPILE myproc.p LISTING "out.lst" PAGE-SIZE 80 PAGE-WIDTH 132.
+COMPILE myproc.p LISTING "out.lst" PAGE-WIDTH 132 PAGE-SIZE 80.
 
 --------------------------------------------------------------------------------
 
@@ -36,8 +39,27 @@ COMPILE myproc.p LISTING "out.lst" PAGE-SIZE 80 PAGE-WIDTH 132.
       left: (identifier)
       right: (identifier))
     listing: (string_literal)
+    page_size: (number_literal))
+  (compile_statement
+    file: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    listing: (string_literal)
+    page_width: (number_literal))
+  (compile_statement
+    file: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    listing: (string_literal)
     page_size: (number_literal)
-    page_width: (number_literal)))
+    page_width: (number_literal))
+  (compile_statement
+    file: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    listing: (string_literal)
+    page_width: (number_literal)
+    page_size: (number_literal)))
 
 ================================================================================
 COMPILE - XREF and STRING-XREF with APPEND
