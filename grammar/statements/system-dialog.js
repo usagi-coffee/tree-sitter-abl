@@ -39,8 +39,8 @@ export default ({ kw }) => ({
       field("variable", $.identifier),
       repeat(
         choice(
-          seq(kw("INITIAL-DIR"), field("initial_dir", $._expression)),
-          seq(kw("TITLE"), field("title", $._expression)),
+          $.__system_dialog_initial_dir_option,
+          $.__system_dialog_title_option,
           $.__system_dialog_window_option,
         ),
       ),
@@ -59,11 +59,11 @@ export default ({ kw }) => ({
           alias(kw("ASK-OVERWRITE"), $.ask_overwrite),
           alias(kw("CREATE-TEST-FILE"), $.create_test_file),
           seq(kw("DEFAULT-EXTENSION"), field("extension", $._expression)),
-          seq(kw("INITIAL-DIR"), field("initial_dir", $._expression)),
+          $.__system_dialog_initial_dir_option,
           alias(kw("MUST-EXIST"), $.must_exist),
           alias(kw("RETURN-TO-START-DIR"), $.return_to_start_dir),
           alias(kw("SAVE-AS"), $.save_as),
-          seq(kw("TITLE"), field("title", $._expression)),
+          $.__system_dialog_title_option,
           alias(kw("USE-FILENAME"), $.use_filename),
           $.__system_dialog_window_option,
         ),
@@ -94,6 +94,9 @@ export default ({ kw }) => ({
     ),
   __system_dialog_window_option: ($) =>
     choice(alias($.__system_dialog_update_phrase, $.update_phrase), $.in_window_phrase),
+  __system_dialog_initial_dir_option: ($) =>
+    seq(kw("INITIAL-DIR"), field("initial_dir", $._expression)),
+  __system_dialog_title_option: ($) => seq(kw("TITLE"), field("title", $._expression)),
   __system_dialog_update_phrase: ($) => seq(kw("UPDATE"), field("update", $.identifier)),
   __system_dialog_initial_filter_phrase: ($) =>
     seq(kw("INITIAL-FILTER"), field("initial", $._expression)),
