@@ -7,7 +7,7 @@ export default ({ kw }) => ({
     seq(field("name", $._type_name), repeat($.__class_option), $.__class_definition_compound_body),
   __class_definition_compound_body: ($) =>
     seq(
-      choice(alias($._colon, ":"), $._terminator_dot),
+      $.__class_body_opener,
       repeat(
         choice(
           $.variable_definition,
@@ -55,7 +55,7 @@ export default ({ kw }) => ({
       seq(
         $.__class_method_definition_prefix,
         $.__class_method_definition_signature,
-        choice(alias($._colon, ":"), $._terminator_dot),
+        $.__class_body_opener,
         alias($.__class_method_body, $.body),
       ),
       seq(
@@ -66,6 +66,7 @@ export default ({ kw }) => ({
         $._terminator_dot,
       ),
     ),
+  __class_body_opener: ($) => choice(alias($._colon, ":"), $._terminator_dot),
   __class_method_definition_prefix: ($) =>
     seq(kw("METHOD"), repeat($._method_modifier_no_abstract)),
   __class_method_definition_signature: ($) =>
