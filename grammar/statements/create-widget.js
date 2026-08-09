@@ -25,15 +25,10 @@ export default ({ kw }) => ({
         kw("WINDOW"),
         seq(kw("VALUE"), "(", field("widget_type", $._expression), ")"),
       ),
-      optional($.__create_widget_tail),
+      optional($._handle_in_widget_pool),
+      optional($.assign_phrase),
+      optional($.__create_widget_triggers),
     ),
-  __create_widget_tail: ($) =>
-    choice(
-      seq($._handle_in_widget_pool, optional($.__create_widget_assign_triggers_tail)),
-      $.__create_widget_assign_triggers_tail,
-    ),
-  __create_widget_assign_triggers_tail: ($) =>
-    choice(seq($.assign_phrase, optional($.__create_widget_triggers)), $.__create_widget_triggers),
 
   __create_widget_triggers: ($) =>
     seq(
