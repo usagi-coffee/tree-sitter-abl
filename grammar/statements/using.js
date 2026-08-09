@@ -16,7 +16,7 @@ export default ({ kw }) => ({
     token(
       seq(
         /[_\p{L}][\p{L}\p{N}_-]*/i,
-        repeat(choice(seq(".", /[_\p{L}][\p{L}\p{N}_-]*/i), seq("+", /[_\p{L}][\p{L}\p{N}_-]*/i))),
+        repeat(seq(choice(".", "+"), /[_\p{L}][\p{L}\p{N}_-]*/i)),
         optional(seq(".", "*")),
       ),
     ),

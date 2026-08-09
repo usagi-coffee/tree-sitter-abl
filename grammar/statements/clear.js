@@ -3,14 +3,8 @@ export default ({ kw }) => ({
   __clear_prefix: ($) =>
     seq(
       kw("CLEAR"),
-      optional(
-        choice(
-          seq(kw("FRAME"), field("frame", $.identifier), optional($.__clear_all_no_pause_tail)),
-          $.__clear_all_no_pause_tail,
-        ),
-      ),
+      optional(seq(kw("FRAME"), field("frame", $.identifier))),
+      optional(alias(kw("ALL"), $.all)),
+      optional(alias(kw("NO-PAUSE"), $.no_pause)),
     ),
-  __clear_all_no_pause_tail: ($) =>
-    choice(seq(alias(kw("ALL"), $.all), optional($.__clear_no_pause)), $.__clear_no_pause),
-  __clear_no_pause: ($) => alias(kw("NO-PAUSE"), $.no_pause),
 });

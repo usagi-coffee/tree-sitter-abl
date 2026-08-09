@@ -3,14 +3,8 @@ export default ({ kw }) => ({
     seq(
       kw("GO-ON"),
       "(",
-      choice(
-        $.identifier,
-        $.string_literal,
-        seq(
-          choice($.identifier, $.string_literal),
-          repeat(seq(optional(","), choice($.identifier, $.string_literal))),
-        ),
-      ),
+      choice($.identifier, $.string_literal),
+      repeat(seq(optional(","), choice($.identifier, $.string_literal))),
       ")",
     ),
 });
