@@ -23,10 +23,11 @@ export default ({ kw }) => ({
           optional(seq(kw("LABEL"), optional(field("label", $.__form_label)))),
           optional($.__form_validate_format_view_as_tail),
         ),
-        seq(kw("SKIP"), optional(field("skip", seq("(", $._expression, ")")))),
-        seq(kw("SPACE"), optional(field("space", seq("(", $._expression, ")")))),
+        seq(kw("SKIP"), optional(field("skip", $.__form_parenthesized_expression))),
+        seq(kw("SPACE"), optional(field("space", $.__form_parenthesized_expression))),
       ),
     ),
+  __form_parenthesized_expression: ($) => seq("(", $._expression, ")"),
 
   __form_validate_format_view_as_tail: ($) =>
     choice(
