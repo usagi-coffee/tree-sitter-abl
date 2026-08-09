@@ -486,6 +486,10 @@ FOR EACH Customer WHILE x > 5:
   DISPLAY Customer.
 END.
 
+FOR EACH Customer WHILE active TRANSACTION:
+  DISPLAY Customer.
+END.
+
 FOR EACH Customer STOP-AFTER 30:
   DISPLAY Customer.
 END.
@@ -500,6 +504,15 @@ END.
       condition: (binary_expression
         (identifier)
         (number_literal)))
+    (body
+      (display_statement
+        record: (identifier))))
+  (for_statement
+    (record_phrase
+      record: (identifier))
+    (while_phrase
+      condition: (identifier))
+    (transaction)
     (body
       (display_statement
         record: (identifier))))

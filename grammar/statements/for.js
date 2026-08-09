@@ -7,11 +7,18 @@ export default ({ kw }) => ({
     seq(
       kw("FOR"),
       $.__for_record_or_variables,
-      optional(alias($.__for_while_phrase, $.while_phrase)),
-      optional(alias(kw("TRANSACTION"), $.transaction)),
+      optional($.__for_while_transaction_tail),
       repeat($._block_option),
       optional($.__for_with_stream_io_phrase),
       $.body,
+    ),
+  __for_while_transaction_tail: ($) =>
+    choice(
+      seq(
+        alias($.__for_while_phrase, $.while_phrase),
+        optional(alias(kw("TRANSACTION"), $.transaction)),
+      ),
+      alias(kw("TRANSACTION"), $.transaction),
     ),
   __for_record_or_variables: ($) => choice($.__for_record_phrase_section, $._loop_phrase),
   __for_record_phrase_section: ($) =>
