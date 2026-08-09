@@ -21,3 +21,47 @@ DEFINE VARIABLE v2 AS CHARACTER TRIGGERS: ON "RETURN", 13 DO: END. END TRIGGERS.
       event: (string_literal)
       event: (number_literal)
       (trigger_body))))
+
+================================================================================
+TRIGGERS - persistent procedure tails
+================================================================================
+
+DEFINE VARIABLE a AS CHARACTER TRIGGERS: ON GO PERSISTENT RUN "handler" END TRIGGERS.
+DEFINE VARIABLE b AS CHARACTER TRIGGERS: ON GO PERSISTENT RUN "handler" IN h END TRIGGERS.
+DEFINE VARIABLE c AS CHARACTER TRIGGERS: ON GO PERSISTENT RUN "handler" (1, x) END TRIGGERS.
+DEFINE VARIABLE d AS CHARACTER TRIGGERS: ON GO PERSISTENT RUN "handler" IN (h) (1, x) END TRIGGERS.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (trigger_phrase
+      event: (identifier)
+      procedure: (string_literal)))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (trigger_phrase
+      event: (identifier)
+      procedure: (string_literal)
+      handle: (identifier)))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (trigger_phrase
+      event: (identifier)
+      procedure: (string_literal)
+      parameters: (number_literal)
+      parameters: (identifier)))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (trigger_phrase
+      event: (identifier)
+      procedure: (string_literal)
+      handle: (parenthesized_expression
+        (identifier))
+      parameters: (number_literal)
+      parameters: (identifier))))

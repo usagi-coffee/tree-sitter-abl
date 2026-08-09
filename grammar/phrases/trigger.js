@@ -48,7 +48,12 @@ export default ({ kw }) => ({
       kw("PERSISTENT"),
       kw("RUN"),
       field("procedure", $._expression),
-      optional(seq(kw("IN"), field("handle", $._expression))),
-      optional(seq("(", field("parameters", $._expressions), ")")),
+      optional($.__persistent_trigger_tail),
     ),
+  __persistent_trigger_tail: ($) =>
+    choice(
+      seq(kw("IN"), field("handle", $._expression), optional($.__persistent_trigger_parameters)),
+      $.__persistent_trigger_parameters,
+    ),
+  __persistent_trigger_parameters: ($) => seq("(", field("parameters", $._expressions), ")"),
 });
