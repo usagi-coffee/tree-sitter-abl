@@ -237,3 +237,21 @@ DEFINE DATASET dsPidFields FOR ttParent, ttChild PARENT-ID-RELATION FOR ttParent
       parent_id_field: (identifier)
       before_field: (identifier)
       after_field: (identifier))))
+
+================================================================================
+DATASET - reference with arguments
+================================================================================
+
+x = DATASET dsFoo(1).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (dataset_reference
+      dataset: (identifier)
+      (arguments
+        (argument
+          name: (number_literal))))))

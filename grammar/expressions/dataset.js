@@ -3,6 +3,7 @@ export default ({ kw }) => ({
     seq(
       $.__dataset_expression_prefix,
       field("dataset", choice($.object_access, $._identifier_or_qualified_name)),
+      optional($.arguments),
     ),
   __dataset_expression_prefix: ($) => kw("DATASET"),
 });
