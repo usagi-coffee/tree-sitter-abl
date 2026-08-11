@@ -270,3 +270,31 @@ CREATE BUFFER hUS FOR TABLE "UserSession".
   (create_statement
     handle: (identifier)
     table: (string_literal)))
+
+================================================================================
+CREATE - array handle
+================================================================================
+
+CREATE QUERY hQry[2].
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (create_statement
+    handle: (array_access
+      array: (identifier)
+      index: (number_literal))))
+
+================================================================================
+CREATE BUFFER - BUFFER-NAME as a string
+================================================================================
+
+CREATE BUFFER hBuf FOR TABLE "cust" BUFFER-NAME "b1".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (create_statement
+    handle: (identifier)
+    table: (string_literal)
+    name: (string_literal)))

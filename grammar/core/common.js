@@ -8,7 +8,8 @@ export default ({ kw }) => ({
     ),
 
   _in_widget_pool: ($) => seq(kw("IN"), kw("WIDGET-POOL"), field("pool", $.identifier)),
-  _handle_in_widget_pool: ($) => seq(field("handle", $.identifier), optional($._in_widget_pool)),
+  _handle_in_widget_pool: ($) =>
+    seq(field("handle", $._identifier_or_array_access), optional($._in_widget_pool)),
 
   _except_fields: ($) => seq(kw("EXCEPT"), repeat1(field("except", $.identifier))),
   _map_phrase: ($) =>
