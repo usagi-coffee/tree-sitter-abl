@@ -502,3 +502,19 @@ RUN proc{&SUF}.
 (source_code
   (run_statement
     procedure: (macro_concatenated_name)))
+
+================================================================================
+RUN - IN with an array element handle
+================================================================================
+
+RUN p IN hArr[1].
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (run_statement
+    procedure: (identifier)
+    (in_phrase
+      context: (array_access
+        array: (identifier)
+        index: (number_literal)))))
