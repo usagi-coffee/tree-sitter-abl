@@ -114,3 +114,23 @@ END.
           right: (identifier))
         (body
           (undo_statement))))))
+
+================================================================================
+CATCH - unqualified error type
+================================================================================
+
+DO ON ERROR UNDO, THROW:
+  CATCH e AS MyError:
+  END CATCH.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (do_statement
+    (on_error_phrase)
+    (body
+      (catch_statement
+        name: (identifier)
+        type: (identifier)
+        (body)))))

@@ -5,7 +5,7 @@ export default ({ kw }) => ({
     seq(
       kw("CATCH"),
       field("name", $.identifier),
-      optional(seq(kw("AS"), optional(kw("CLASS")), field("type", $.qualified_name))),
+      optional(seq(kw("AS"), optional(kw("CLASS")), field("type", $._identifier_or_qualified_name))),
       $.body,
       kw("END"),
       optional(kw("CATCH")),
