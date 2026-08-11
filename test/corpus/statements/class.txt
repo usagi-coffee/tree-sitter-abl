@@ -528,3 +528,20 @@ END CLASS.
       name: (identifier)
       (parameters)
       (body))))
+
+================================================================================
+CLASS - routine-level error scope in the body
+================================================================================
+
+CLASS Foo:
+  ROUTINE-LEVEL ON ERROR UNDO, THROW.
+END CLASS.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (class_definition
+    name: (identifier)
+    (error_scope_statement
+      (error_scope_type)
+      (on_error_phrase))))
