@@ -286,7 +286,7 @@ export default ({ kw }) => ({
 
   _aggregate_label_phrase: ($) => seq(kw("LABEL"), field("label", $.string_literal)),
   _initial_value: ($) => choice($._expression, seq("[", optional($._expressions), "]")),
-  _parameter_direction: ($) => choice(kw("INPUT"), kw("OUTPUT"), kw("INPUT-OUTPUT")),
+  _parameter_direction: ($) => choice(kw("INPUT"), kw("OUTPUT"), kw("INPUT-OUTPUT", { offset: 7 })),
 
   _alert_box_options: ($) =>
     choice(
