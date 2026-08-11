@@ -45,12 +45,8 @@ export default ({ kw }) => ({
       prec.right(alias(kw("SKIP"), $.skip)),
       seq(
         field("field", $._identifier_or_array_access),
-        optional(
-          choice(
-            alias($.at_phrase, $.format_phrase),
-            alias($.__frame_field_format_phrase, $.format_phrase),
-          ),
-        ),
+        optional(alias($.at_phrase, $.format_phrase)),
+        optional(alias($.__frame_field_format_phrase, $.format_phrase)),
       ),
       seq($.preprocessor_name, optional($.__frame_display_value_tail)),
       seq(field("value", $.string_literal), optional($.__frame_display_value_tail)),
