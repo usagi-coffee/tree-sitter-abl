@@ -952,3 +952,17 @@ DEFINE VARIABLE y EXTENT 3 LIKE ttRecord.fieldArr[2] NO-UNDO.
         right: (identifier))
       index: (number_literal))
     (no_undo)))
+
+================================================================================
+IDENTIFIER - dollar sign in legacy names
+================================================================================
+
+DEFINE VARIABLE p$typ_rem AS CHARACTER NO-UNDO.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo)))
