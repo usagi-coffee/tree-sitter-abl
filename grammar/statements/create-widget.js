@@ -27,21 +27,7 @@ export default ({ kw }) => ({
       ),
       optional($._handle_in_widget_pool),
       optional($.assign_phrase),
-      optional($.__create_widget_triggers),
+      optional($.trigger_phrase),
     ),
 
-  __create_widget_triggers: ($) =>
-    seq(
-      kw("TRIGGERS"),
-      alias($._colon, ":"),
-      repeat1(
-        seq(
-          kw("ON"),
-          field("event", choice(kw("CHOOSE"), kw("ENTRY"), kw("LEAVE"), $.identifier)),
-          $.do_statement,
-        ),
-      ),
-      kw("END"),
-      kw("TRIGGERS"),
-    ),
 });

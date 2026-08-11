@@ -34,12 +34,13 @@ END TRIGGERS.
         right: (boolean_literal))))
   (create_widget_statement
     handle: (identifier)
-    (do_statement
-      (body
+    (trigger_phrase
+      event: (identifier)
+      (trigger_body
         (message_statement
-          (string_literal))))
-    (do_statement
-      (body
+          (string_literal)))
+      event: (identifier)
+      (trigger_body
         (message_statement
           (string_literal))))))
 
@@ -89,3 +90,22 @@ CREATE BUTTON hBtn[1].
     handle: (array_access
       array: (identifier)
       index: (number_literal))))
+
+================================================================================
+CREATE WIDGET - event list and END without TRIGGERS
+================================================================================
+
+CREATE BUTTON hBtn TRIGGERS:
+  ON CHOOSE, ENTRY DO:
+  END.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (create_widget_statement
+    handle: (identifier)
+    (trigger_phrase
+      event: (identifier)
+      event: (identifier)
+      (trigger_body))))
