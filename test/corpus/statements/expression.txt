@@ -113,3 +113,21 @@ OBJECT ACCESS - preprocessor name as the receiver
       right: (identifier))
     operator: (assignment_operator)
     right: (string_literal)))
+
+================================================================================
+OBJECT ACCESS - array element as the receiver
+================================================================================
+
+x = arr[1]:HANDLE.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (object_access
+      left: (array_access
+        array: (identifier)
+        index: (number_literal))
+      right: (identifier))))
