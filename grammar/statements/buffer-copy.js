@@ -30,5 +30,6 @@ export default ({ kw }) => ({
       field("left", $._assignable),
       choice("=", "+=", "-=", "*=", "/="),
       field("right", $._expression),
+      optional(seq(kw("WHEN"), field("when", $._expression))),
     ),
 });
