@@ -533,7 +533,7 @@ export default grammar({
 
       // Identifiers
       // BE CAREFUL MODIFYING HERE, IDENTIFIER ORDER FOR SOME REASON MATTERS!
-      identifier: ($) => token(/[_\p{L}][\p{L}\p{N}_\-&#%]*/i),
+      identifier: ($) => token(/[_\p{L}][\p{L}\p{N}_\-&#%$]*/i),
       system_handle_identifier: ($) =>
         alias(
           token(prec(1, new RegExp(`(${SYSTEM_HANDLE_WORDS.map(escape_regex).join("|")})`, "i"))),
