@@ -96,3 +96,20 @@ IF ENTERED wfeven THEN RETURN.
     (entered_expression
       field: (identifier))
     then: (return_statement)))
+
+================================================================================
+OBJECT ACCESS - preprocessor name as the receiver
+================================================================================
+
+{&WIN}:TITLE = "x".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assignment_statement
+    left: (object_access
+      left: (preprocessor_name
+        (identifier))
+      right: (identifier))
+    operator: (assignment_operator)
+    right: (string_literal)))
