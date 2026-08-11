@@ -438,7 +438,7 @@ export default grammar({
           $._object_access_tail,
         ),
       _object_access_expression_left: ($) =>
-        choice($.function_call, $.parenthesized_expression, $.new_expression),
+        choice($.function_call, $.parenthesized_expression, $.new_expression, $.array_access),
 
       scoped_name: ($) => seq(field("left", $.identifier), $.__scoped_name_tail),
       __scoped_name_tail: ($) =>
