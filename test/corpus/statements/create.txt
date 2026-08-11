@@ -298,3 +298,17 @@ CREATE BUFFER hBuf FOR TABLE "cust" BUFFER-NAME "b1".
     handle: (identifier)
     table: (string_literal)
     name: (string_literal)))
+
+================================================================================
+CREATE BUFFER - widget pool named by a string
+================================================================================
+
+CREATE BUFFER h FOR TABLE "t" IN WIDGET-POOL "myPool".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (create_statement
+    handle: (identifier)
+    table: (string_literal)
+    pool: (string_literal)))
