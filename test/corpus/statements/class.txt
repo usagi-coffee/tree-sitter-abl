@@ -509,3 +509,22 @@ END CLASS.
           type: (identifier)))
       (return_statement
         value: (string_literal)))))
+
+================================================================================
+DESTRUCTOR - closed with END METHOD
+================================================================================
+
+CLASS Foo:
+  DESTRUCTOR Foo():
+  END METHOD.
+END CLASS.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (class_definition
+    name: (identifier)
+    (destructor_definition
+      name: (identifier)
+      (parameters)
+      (body))))
