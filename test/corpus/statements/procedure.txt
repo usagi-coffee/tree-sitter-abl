@@ -715,3 +715,18 @@ END PROCEDURE.
       right: (identifier)
       right: (identifier))
     (body)))
+
+================================================================================
+PROCEDURE - modifier after the name
+================================================================================
+
+PROCEDURE p PRIVATE:
+END PROCEDURE.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (procedure_definition
+    name: (identifier)
+    (access_modifier)
+    (body)))

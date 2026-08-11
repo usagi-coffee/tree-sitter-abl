@@ -6,6 +6,7 @@ export default ({ kw }) => ({
       kw("PROCEDURE", { offset: 4 }),
       optional($.__procedure_modifier),
       field("name", $._identifier_or_qualified_name),
+      optional($.__procedure_modifier),
       repeat(
         choice(
           alias(kw("CDECL"), $.cdecl),
