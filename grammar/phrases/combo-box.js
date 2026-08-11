@@ -2,9 +2,10 @@ export default ({ kw }) => ({
   combo_box_phrase: ($) =>
     seq(
       field("widget", kw("COMBO-BOX")),
-      optional(choice($._list_items_phrase, $._list_item_pairs_phrase)),
       repeat(
         choice(
+          $._list_items_phrase,
+          $._list_item_pairs_phrase,
           seq(kw("INNER-LINES"), field("inner_lines", $.number_literal)),
           $.size_phrase,
           alias(kw("SORT"), $.sort),
