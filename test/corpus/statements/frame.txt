@@ -1142,3 +1142,20 @@ WAIT-FOR WINDOW-CLOSE OF FRAME cust-fr.
       events: (identifier)
       widgets: (widget_phrase
         frame: (identifier)))))
+
+================================================================================
+FRAME - field with both AT and FORMAT
+================================================================================
+
+DEFINE FRAME fr fld1 AT 5 FORMAT "x(10)".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (frame_definition
+    name: (identifier)
+    field: (identifier)
+    (format_phrase
+      position: (number_literal))
+    (format_phrase
+      format: (string_literal))))
