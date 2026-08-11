@@ -102,3 +102,23 @@ BUFFER-COPY bSrc TO bTgt ASSIGN Cust.Name = "X" Cust.Balance -= 10.
           left: (identifier)
           right: (identifier))
         right: (number_literal)))))
+
+================================================================================
+BUFFER-COPY - ASSIGN pair with WHEN
+================================================================================
+
+BUFFER-COPY src TO tgt ASSIGN fld = 1 WHEN x > 0.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (buffer_copy_statement
+    source: (identifier)
+    target: (identifier)
+    (assign_phrase
+      (assign_pair
+        left: (identifier)
+        right: (number_literal)
+        when: (binary_expression
+          (identifier)
+          (number_literal))))))
