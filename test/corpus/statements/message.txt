@@ -504,3 +504,17 @@ MESSAGE "Select" VIEW-AS ALERT-BOX SET flag VIEW-AS ALERT-BOX QUESTION BUTTONS Y
         (view_as_phrase
           (alert_type)
           title: (string_literal))))))
+
+================================================================================
+MESSAGE - alert box title from a variable
+================================================================================
+
+MESSAGE "x" VIEW-AS ALERT-BOX TITLE cTitle.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (message_statement
+    (string_literal)
+    (view_as_phrase
+      title: (identifier))))
