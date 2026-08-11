@@ -10,5 +10,5 @@ export default ({ kw }) => ({
       $.in_window_phrase,
     ),
   __hide_target: ($) =>
-    choice(alias(kw("MESSAGE"), $.message), alias(kw("ALL"), $.all), $.widget_phrase),
+    choice(alias(kw("MESSAGE"), $.message), alias(kw("ALL"), $.all), repeat1($.widget_phrase)),
 });
