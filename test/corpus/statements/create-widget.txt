@@ -75,3 +75,17 @@ CREATE BROWSE hBr IN WIDGET-POOL wp ASSIGN TITLE = "t".
       (assign_pair
         left: (identifier)
         right: (string_literal)))))
+
+================================================================================
+CREATE WIDGET - array handle
+================================================================================
+
+CREATE BUTTON hBtn[1].
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (create_widget_statement
+    handle: (array_access
+      array: (identifier)
+      index: (number_literal))))
