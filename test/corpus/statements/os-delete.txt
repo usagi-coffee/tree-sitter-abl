@@ -81,3 +81,17 @@ OS-DELETE VALUE(cPath) "tmp" RECURSIVE.
     value: (identifier)
     (string_literal)
     (recursive)))
+
+================================================================================
+OS-DELETE - VALUE with an expression
+================================================================================
+
+OS-DELETE VALUE(cPath + "x").
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (os_delete_statement
+    value: (binary_expression
+      (identifier)
+      (string_literal))))
