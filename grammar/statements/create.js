@@ -33,7 +33,9 @@ export default ({ kw }) => ({
       kw("FOR"),
       kw("TABLE"),
       field("table", $.__create_buffer_target),
-      optional(seq(kw("BUFFER-NAME"), field("name", $.identifier))),
+      optional(
+        seq(kw("BUFFER-NAME"), field("name", choice($._identifier_or_qualified_name, $.string_literal))),
+      ),
       optional($._in_widget_pool),
     ),
   __create_buffer_target: ($) => choice($._identifier_or_access_or_call, $.string_literal),
