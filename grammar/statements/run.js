@@ -35,6 +35,7 @@ export default ({ kw }) => ({
       alias($._value_expression, $.value_expression),
       alias($.__run_library_member, $.library_member),
       $.procedure_name,
+      $.macro_concatenated_name,
       $.identifier,
       $.qualified_name,
     ),
