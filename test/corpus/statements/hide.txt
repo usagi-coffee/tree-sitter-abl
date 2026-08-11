@@ -128,3 +128,18 @@ HIDE ALL NO-PAUSE IN WINDOW w1.
     (no_pause)
     (in_window_phrase
       window: (identifier))))
+
+================================================================================
+HIDE - several widgets
+================================================================================
+
+HIDE FRAME f1 FRAME f2.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (hide_statement
+    (widget_phrase
+      frame: (identifier))
+    (widget_phrase
+      frame: (identifier))))
