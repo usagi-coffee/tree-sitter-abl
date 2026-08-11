@@ -119,3 +119,27 @@ END.
       condition: (string_literal)
       (run_statement
         procedure: (identifier)))))
+
+================================================================================
+CASE - include reference in the body
+================================================================================
+
+CASE x:
+  {inc/foo.i}
+  WHEN 1 THEN y = 1.
+END CASE.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (case_statement
+    (identifier)
+    (include_file_reference
+      file: (include_file_path
+        (identifier)))
+    (case_when_phrase
+      condition: (number_literal)
+      (assignment_statement
+        left: (identifier)
+        operator: (assignment_operator)
+        right: (number_literal)))))
