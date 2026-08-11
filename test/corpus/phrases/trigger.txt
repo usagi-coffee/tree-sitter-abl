@@ -65,3 +65,19 @@ DEFINE VARIABLE d AS CHARACTER TRIGGERS: ON GO PERSISTENT RUN "handler" IN (h) (
         (identifier))
       parameters: (number_literal)
       parameters: (identifier))))
+
+================================================================================
+TRIGGERS - persistent procedure with terminator
+================================================================================
+
+DEFINE VARIABLE a AS CHARACTER TRIGGERS: ON GO PERSISTENT RUN "h". END TRIGGERS.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (trigger_phrase
+      event: (identifier)
+      procedure: (string_literal))))
