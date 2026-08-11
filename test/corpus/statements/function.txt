@@ -772,3 +772,53 @@ END.
               name: (binary_expression
                 (identifier)
                 (number_literal)))))))))
+
+================================================================================
+FUNCTION - table, dataset and buffer parameters
+================================================================================
+
+FUNCTION f RETURNS CHARACTER (BUFFER pBuf FOR myTable) FORWARD.
+FUNCTION g RETURNS CHARACTER (TABLE tt) FORWARD.
+FUNCTION h RETURNS CHARACTER (TABLE-HANDLE ht) FORWARD.
+FUNCTION i RETURNS CHARACTER (DATASET FOR ds) FORWARD.
+FUNCTION j RETURNS CHARACTER (DATASET-HANDLE hd) FORWARD.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (function_forward_definition
+    name: (identifier)
+    type: (identifier)
+    (parameters
+      (parameter
+        buffer: (identifier)
+        table: (identifier)))
+    (forward))
+  (function_forward_definition
+    name: (identifier)
+    type: (identifier)
+    (parameters
+      (parameter
+        table: (identifier)))
+    (forward))
+  (function_forward_definition
+    name: (identifier)
+    type: (identifier)
+    (parameters
+      (parameter
+        table_handle: (identifier)))
+    (forward))
+  (function_forward_definition
+    name: (identifier)
+    type: (identifier)
+    (parameters
+      (parameter
+        dataset: (identifier)))
+    (forward))
+  (function_forward_definition
+    name: (identifier)
+    type: (identifier)
+    (parameters
+      (parameter
+        dataset_handle: (identifier)))
+    (forward)))

@@ -76,9 +76,23 @@ export default ({ kw }) => ({
   __function_parameter: ($) =>
     seq(
       optional(field("direction", $._parameter_direction)),
-      field("name", $.identifier),
-      $.__function_variable_type_phrase,
-      optional(alias(kw("NO-UNDO"), $.no_undo)),
+      choice(
+        seq(
+          field("name", $.identifier),
+          $.__function_variable_type_phrase,
+          optional(alias(kw("NO-UNDO"), $.no_undo)),
+        ),
+        seq(
+          kw("BUFFER"),
+          field("buffer", $.identifier),
+          kw("FOR"),
+          field("table", $._identifier_or_qualified_name),
+        ),
+        seq(kw("TABLE"), field("table", $.identifier)),
+        seq(kw("TABLE-HANDLE"), field("table_handle", $.identifier)),
+        seq(kw("DATASET"), kw("FOR"), field("dataset", $._identifier_or_qualified_name)),
+        seq(kw("DATASET-HANDLE"), field("dataset_handle", $.identifier)),
+      ),
     ),
 
   __function_variable_type_phrase: ($) => seq($._as_like, optional($._extent_phrase)),
