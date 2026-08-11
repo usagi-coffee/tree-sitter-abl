@@ -822,3 +822,18 @@ DEFINE INPUT PARAMETER pExtent0 AS INTEGER EXTENT 0.
     type: (identifier)
     (extent_phrase
       size: (number_literal))))
+
+================================================================================
+DEFINE PARAMETER - INIT abbreviation
+================================================================================
+
+DEFINE INPUT PARAMETER x AS INTEGER INIT 1 NO-UNDO.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (parameter_definition
+    name: (identifier)
+    type: (identifier)
+    initial: (number_literal)
+    (no_undo)))
