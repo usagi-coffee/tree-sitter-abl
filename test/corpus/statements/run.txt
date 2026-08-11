@@ -490,3 +490,15 @@ RUN p (INPUT x BIND).
     (arguments
       (argument
         name: (identifier)))))
+
+================================================================================
+RUN - macro-concatenated procedure name
+================================================================================
+
+RUN proc{&SUF}.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (run_statement
+    procedure: (macro_concatenated_name)))
