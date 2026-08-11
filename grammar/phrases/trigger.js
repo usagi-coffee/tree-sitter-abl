@@ -49,6 +49,7 @@ export default ({ kw }) => ({
       kw("RUN"),
       field("procedure", $._expression),
       optional($.__persistent_trigger_tail),
+      optional($._terminator_dot),
     ),
   __persistent_trigger_tail: ($) =>
     choice(
