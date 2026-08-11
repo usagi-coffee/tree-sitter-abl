@@ -146,14 +146,18 @@ export default ({ kw }) => ({
       ")",
     ),
 
+  __format_view_as_tail: ($) =>
+    prec.right(choice(seq($.size_phrase, optional($._tooltip_phrase)), $._tooltip_phrase)),
   _format_view_as: ($) =>
-    seq(
-      kw("VIEW-AS"),
-      choice(
-        kw("TEXT"),
-        kw("TOGGLE-BOX"),
-        alias($.__format_editor_phrase, $.editor_phrase),
-        alias($.__view_as_alert_box, $.view_as_phrase),
+    prec.right(
+      seq(
+        kw("VIEW-AS"),
+        choice(
+          seq(kw("TEXT"), optional($.__format_view_as_tail)),
+          seq(kw("TOGGLE-BOX"), optional($.__format_view_as_tail)),
+          alias($.__format_editor_phrase, $.editor_phrase),
+          alias($.__view_as_alert_box, $.view_as_phrase),
+        ),
       ),
     ),
 });
