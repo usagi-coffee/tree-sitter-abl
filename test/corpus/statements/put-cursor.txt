@@ -39,3 +39,16 @@ PUT CURSOR ROW iRow + 1 COLUMN iCol - 1.
     column: (binary_expression
       (identifier)
       (number_literal))))
+
+================================================================================
+PUT CURSOR - COL abbreviation
+================================================================================
+
+PUT CURSOR ROW 5 COL 10.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (put_cursor_statement
+    row: (number_literal)
+    column: (number_literal)))
