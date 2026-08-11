@@ -16,9 +16,9 @@ export default ({ kw }) => ({
     choice(
       seq(
         alias($.__for_while_phrase, $.while_phrase),
-        optional(alias(kw("TRANSACTION"), $.transaction)),
+        optional(alias(kw("TRANSACTION", { offset: 5 }), $.transaction)),
       ),
-      alias(kw("TRANSACTION"), $.transaction),
+      alias(kw("TRANSACTION", { offset: 5 }), $.transaction),
     ),
   __for_record_or_variables: ($) => choice($.__for_record_phrase_section, $._loop_phrase),
   __for_record_phrase_section: ($) =>

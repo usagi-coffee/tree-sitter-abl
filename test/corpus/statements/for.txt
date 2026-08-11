@@ -753,3 +753,22 @@ END.
         record: (qualified_name
           left: (identifier)
           right: (identifier))))))
+
+================================================================================
+FOR - TRANS abbreviation
+================================================================================
+
+FOR EACH cust TRANS:
+  DISPLAY cust.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (for_statement
+    (record_phrase
+      record: (identifier))
+    (transaction)
+    (body
+      (display_statement
+        record: (identifier)))))
