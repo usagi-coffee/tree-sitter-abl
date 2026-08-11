@@ -463,3 +463,30 @@ RUN x (INPUT oid_{&QXO-TABLE}).
     (arguments
       (argument
         name: (macro_concatenated_name)))))
+
+================================================================================
+RUN - BY-VALUE, APPEND and BIND parameter modifiers
+================================================================================
+
+RUN p (INPUT x BY-VALUE).
+RUN p (INPUT x APPEND).
+RUN p (INPUT x BIND).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (run_statement
+    procedure: (identifier)
+    (arguments
+      (argument
+        name: (identifier))))
+  (run_statement
+    procedure: (identifier)
+    (arguments
+      (argument
+        name: (identifier))))
+  (run_statement
+    procedure: (identifier)
+    (arguments
+      (argument
+        name: (identifier)))))

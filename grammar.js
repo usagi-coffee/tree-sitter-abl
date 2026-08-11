@@ -494,7 +494,7 @@ export default grammar({
             field("name", $._expression),
           ),
           optional(seq(kw("AS"), field("type", $._type_name))),
-          optional(kw("BY-REFERENCE")),
+          optional(choice(kw("BY-REFERENCE"), kw("BY-VALUE"), kw("APPEND"), kw("BIND"))),
         ),
 
       function_call: ($) =>
