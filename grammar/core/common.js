@@ -297,7 +297,8 @@ export default ({ kw }) => ({
     ),
   _alert_box_after_type: ($) =>
     choice(seq($._alert_buttons_phrase, optional($._alert_box_title)), $._alert_box_title),
-  _alert_box_title: ($) => seq(kw("TITLE"), field("title", $.string_literal)),
+  _alert_box_title: ($) =>
+    seq(kw("TITLE"), field("title", choice($.string_literal, $._identifier_or_qualified_name))),
   _alert_type: ($) =>
     choice(
       kw("MESSAGE"),
