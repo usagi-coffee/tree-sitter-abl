@@ -1159,3 +1159,18 @@ DEFINE FRAME fr fld1 AT 5 FORMAT "x(10)".
       position: (number_literal))
     (format_phrase
       format: (string_literal))))
+
+================================================================================
+FRAME - field with TOOLTIP
+================================================================================
+
+DEFINE FRAME fr fld1 TOOLTIP "aide".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (frame_definition
+    name: (identifier)
+    field: (identifier)
+    (format_phrase
+      tooltip: (string_literal))))
