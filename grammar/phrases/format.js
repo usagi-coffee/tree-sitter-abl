@@ -155,6 +155,7 @@ export default ({ kw }) => ({
         choice(
           seq(kw("TEXT"), optional($.__format_view_as_tail)),
           seq(kw("TOGGLE-BOX"), optional($.__format_view_as_tail)),
+          seq(kw("FILL-IN"), optional(kw("NATIVE")), optional($.__format_view_as_tail)),
           alias($.__format_editor_phrase, $.editor_phrase),
           alias($.__view_as_alert_box, $.view_as_phrase),
         ),
