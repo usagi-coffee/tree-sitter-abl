@@ -138,8 +138,16 @@ export default ({ kw }) => ({
       $.__class_property_definition_prefix,
       repeat1(
         choice(
-          seq(kw("GET"), $.__class_property_accessor_tail),
-          seq(kw("SET"), optional($.property_set_parameter_list), $.__class_property_accessor_tail),
+          seq(
+            kw("GET"),
+            optional($.__class_property_accessor_parameters),
+            $.__class_property_accessor_tail,
+          ),
+          seq(
+            kw("SET"),
+            optional($.__class_property_accessor_parameters),
+            $.__class_property_accessor_tail,
+          ),
         ),
       ),
     ),
@@ -167,6 +175,8 @@ export default ({ kw }) => ({
       seq($.__class_property_accessor_body, optional(choice(kw("GET"), kw("SET"))), $._terminator),
     ),
 
+  __class_property_accessor_parameters: ($) =>
+    choice(seq("(", ")"), $.property_set_parameter_list),
   property_set_parameter_list: ($) => seq("(", $.property_set_parameter, ")"),
 
   property_set_parameter: ($) => $.__class_named_parameter_body,

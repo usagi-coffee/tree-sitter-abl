@@ -436,3 +436,27 @@ END CLASS.
 (source_code
   (class_definition
     name: (identifier)))
+
+================================================================================
+PROPERTY - accessor with empty parentheses
+================================================================================
+
+CLASS Foo:
+  DEFINE PUBLIC PROPERTY p AS CHARACTER NO-UNDO
+    GET():
+      RETURN "".
+    END GET.
+END CLASS.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (class_definition
+    name: (identifier)
+    (property_definition
+      (access_modifier)
+      name: (identifier)
+      type: (identifier)
+      (no_undo)
+      (return_statement
+        value: (string_literal)))))
