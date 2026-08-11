@@ -837,3 +837,22 @@ DEFINE INPUT PARAMETER x AS INTEGER INIT 1 NO-UNDO.
     type: (identifier)
     initial: (number_literal)
     (no_undo)))
+
+================================================================================
+DEFINE PARAMETER - INPUT-OUTPUT abbreviation
+================================================================================
+
+DEFINE INPUT-O PARAMETER x AS INTEGER NO-UNDO.
+DEFINE INPUT-OUTPUT PARAMETER y AS INTEGER NO-UNDO.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (parameter_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (parameter_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo)))
