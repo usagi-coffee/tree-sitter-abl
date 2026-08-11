@@ -460,3 +460,24 @@ END CLASS.
       (no_undo)
       (return_statement
         value: (string_literal)))))
+
+================================================================================
+PROPERTY - accessor with its own access modifier
+================================================================================
+
+CLASS Foo:
+  DEFINE PUBLIC PROPERTY p AS CHARACTER NO-UNDO
+    PROTECTED SET.
+END CLASS.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (class_definition
+    name: (identifier)
+    (property_definition
+      (access_modifier)
+      name: (identifier)
+      type: (identifier)
+      (no_undo)
+      (access_modifier))))

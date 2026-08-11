@@ -139,11 +139,13 @@ export default ({ kw }) => ({
       repeat1(
         choice(
           seq(
+            optional($.__class_property_accessor_modifier),
             kw("GET"),
             optional($.__class_property_accessor_parameters),
             $.__class_property_accessor_tail,
           ),
           seq(
+            optional($.__class_property_accessor_modifier),
             kw("SET"),
             optional($.__class_property_accessor_parameters),
             $.__class_property_accessor_tail,
@@ -175,6 +177,14 @@ export default ({ kw }) => ({
       seq($.__class_property_accessor_body, optional(choice(kw("GET"), kw("SET"))), $._terminator),
     ),
 
+  __class_property_accessor_modifier: ($) =>
+    choice(
+      alias(kw("PRIVATE"), $.access_modifier),
+      alias(kw("PACKAGE-PRIVATE"), $.access_modifier),
+      alias(kw("PROTECTED"), $.access_modifier),
+      alias(kw("PACKAGE-PROTECTED"), $.access_modifier),
+      alias(kw("PUBLIC"), $.access_modifier),
+    ),
   __class_property_accessor_parameters: ($) =>
     choice(seq("(", ")"), $.property_set_parameter_list),
   property_set_parameter_list: ($) => seq("(", $.property_set_parameter, ")"),
