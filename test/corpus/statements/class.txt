@@ -481,3 +481,31 @@ END CLASS.
       type: (identifier)
       (no_undo)
       (access_modifier))))
+
+================================================================================
+PROPERTY - accessor parameter with a direction
+================================================================================
+
+CLASS Foo:
+  DEFINE PUBLIC PROPERTY p AS CHARACTER NO-UNDO
+    GET(INPUT i AS INTEGER):
+      RETURN "".
+    END GET.
+END CLASS.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (class_definition
+    name: (identifier)
+    (property_definition
+      (access_modifier)
+      name: (identifier)
+      type: (identifier)
+      (no_undo)
+      (property_set_parameter_list
+        (property_set_parameter
+          name: (identifier)
+          type: (identifier)))
+      (return_statement
+        value: (string_literal)))))
