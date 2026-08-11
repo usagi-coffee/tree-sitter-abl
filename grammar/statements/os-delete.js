@@ -9,5 +9,5 @@ export default ({ kw }) => ({
     ),
 
   __os_delete_target: ($) =>
-    choice($._os_filename, seq(kw("VALUE"), "(", field("value", $._os_filename), ")")),
+    choice($._os_filename, seq(kw("VALUE"), "(", field("value", $._expression), ")")),
 });
