@@ -436,7 +436,6 @@
   "END"
   "END-KEY"
   "ENDKEY"
-  "ENTRY"
   "ENUM"
   "EQ"
   "ERROR"
