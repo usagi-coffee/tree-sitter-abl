@@ -35,6 +35,7 @@ export default ({ kw }) => ({
           $.method_definition,
           $.constructor_definition,
           $.destructor_definition,
+          $.error_scope_statement,
           $.on_statement,
           $.using_statement,
           $.annotation,
