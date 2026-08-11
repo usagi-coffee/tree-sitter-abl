@@ -62,3 +62,20 @@ DISPLAY x AT ROW 3.
       field: (identifier))
     (format_phrase
       row: (number_literal))))
+
+================================================================================
+FORMAT - VIEW-AS TOGGLE-BOX with SIZE
+================================================================================
+
+DISPLAY x VIEW-AS TOGGLE-BOX SIZE 10 BY 1.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (display_statement
+    (field
+      field: (identifier))
+    (format_phrase
+      (size_phrase
+        width: (number_literal)
+        height: (number_literal)))))
