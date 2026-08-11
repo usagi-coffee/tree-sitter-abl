@@ -1,4 +1,4 @@
-// References: EXPORT statement; MESSAGE statement; DISPLAY statement; Format phrase; SIZE phrase;
+// References: EXPORT statement; MESSAGE statement; DISPLAY statement; Format phrase; SIZE phrase; TOOLTIP phrase;
 // SYSTEM-DIALOG GET-FILE statement; CASE statement; Frame phrase; Color/font options; AT phrase.
 // Purpose: allow full binary expressions inside statement/phrase expression slots.
 // Example: EXPORT a - b.
@@ -42,6 +42,7 @@ export default ($) => [
     $._color_font_option,
     $.__frame_head_item,
     $.size_phrase,
+    $._tooltip_phrase,
     $.__system_dialog_filters_pairs,
     $.__system_dialog_filter_pair,
     $.__at_column_row,

@@ -72,6 +72,7 @@ export default ({ kw }) => ({
       repeat1(
         choice(
           $._format_field_option,
+          $._tooltip_phrase,
           alias(kw("AUTO-RETURN"), $.auto_return),
           alias(kw("BLANK"), $.blank),
           alias(kw("DEBLANK"), $.deblank),
