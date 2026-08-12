@@ -830,3 +830,22 @@ DEFINE BROWSE b1 QUERY q1 DISPLAY Name WITH COL 20.
     (column
       column: (identifier))
     column: (number_literal)))
+
+================================================================================
+BROWSE - ENABLE item with a subscript
+================================================================================
+
+DEFINE BROWSE b QUERY q DISPLAY rec ENABLE fld[1] WITH 10 DOWN.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (browse_definition
+    name: (identifier)
+    query: (identifier)
+    (column
+      column: (identifier))
+    field: (array_access
+      array: (identifier)
+      index: (number_literal))
+    down: (number_literal)))
