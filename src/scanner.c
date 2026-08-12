@@ -168,6 +168,34 @@ bool tree_sitter_abl_external_scanner_scan(
           lexer->advance(lexer, false);
           continue;
         }
+        // The closing quote ends the string, but ABL allows a case-marker
+        // suffix right after it. Consume it here so the ':' cannot be taken
+        // for a block-opening colon, as in
+        //   FOR EACH cust WHERE cust.id = "X":U NO-LOCK:
+        // Accepted shapes: :[RLCT]U?[0-9]* | :U[0-9]* | :[0-9]+
+        lexer->mark_end(lexer);
+        if (lexer->lookahead == ':') {
+          lexer->advance(lexer, false);
+          int marker = lexer->lookahead;
+          bool extended = false;
+          if (marker == 'R' || marker == 'L' || marker == 'C' || marker == 'T' ||
+              marker == 'r' || marker == 'l' || marker == 'c' || marker == 't') {
+            lexer->advance(lexer, false);
+            if (lexer->lookahead == 'U' || lexer->lookahead == 'u') {
+              lexer->advance(lexer, false);
+            }
+            while (iswdigit(lexer->lookahead)) lexer->advance(lexer, false);
+            extended = true;
+          } else if (marker == 'U' || marker == 'u') {
+            lexer->advance(lexer, false);
+            while (iswdigit(lexer->lookahead)) lexer->advance(lexer, false);
+            extended = true;
+          } else if (iswdigit(lexer->lookahead)) {
+            while (iswdigit(lexer->lookahead)) lexer->advance(lexer, false);
+            extended = true;
+          }
+          if (extended) lexer->mark_end(lexer);
+        }
         lexer->result_symbol = ESCAPED_STRING;
         return true;
       }

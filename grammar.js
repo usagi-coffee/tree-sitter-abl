@@ -301,11 +301,7 @@ export default grammar({
       number_literal: ($) => token(/([0-9]+(\.[0-9]+)?|\.[0-9]+)/),
       _signed_number_literal: ($) => token(/[+-]([0-9]+(\.[0-9]+)?|\.[0-9]+)/),
       date_literal: ($) => token(/[0-9]{1,2}[./][0-9]{1,2}[./][0-9]{2,4}/),
-      string_literal: ($) =>
-        seq(
-          $._escaped_string,
-          optional(token.immediate(/:(?:[RLCT](?:U)?(?:[0-9]+)?|U(?:[0-9]+)?|[0-9]+)/i)),
-        ),
+      string_literal: ($) => $._escaped_string,
       null_literal: ($) => token("?"),
       boolean_literal: ($) => choice(kw("TRUE"), kw("FALSE"), kw("YES"), kw("NO")),
       procedure_name: ($) => /[A-Za-z0-9_\\/.-]+\.pl?/i,
