@@ -1,11 +1,9 @@
 export default ({ kw }) => ({
   assign_phrase: ($) => seq(kw("ASSIGN"), $.__assign_body),
 
-  __assign_body: ($) =>
-    seq(
-      repeat1(alias($.__assign_pair, $.assign_pair)),
-      optional(alias(kw("NO-ERROR"), $.no_error)),
-    ),
+  __assign_body: ($) => seq($._assign_pairs, optional(alias(kw("NO-ERROR"), $.no_error))),
+
+  _assign_pairs: ($) => repeat1(alias($.__assign_pair, $.assign_pair)),
 
   __assign_pair: ($) =>
     seq(
