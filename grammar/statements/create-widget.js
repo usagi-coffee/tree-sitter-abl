@@ -26,8 +26,11 @@ export default ({ kw }) => ({
         seq(kw("VALUE"), "(", field("widget_type", $._expression), ")"),
       ),
       optional($._handle_in_widget_pool),
-      optional($.assign_phrase),
+      optional(alias($.__create_widget_assign_phrase, $.assign_phrase)),
       optional($.trigger_phrase),
+      optional(alias(kw("NO-ERROR"), $.no_error)),
     ),
+
+  __create_widget_assign_phrase: ($) => seq(kw("ASSIGN"), $._assign_pairs),
 
 });
