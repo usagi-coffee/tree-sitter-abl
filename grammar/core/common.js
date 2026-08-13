@@ -192,7 +192,7 @@ export default ({ kw }) => ({
           $.argument_reference,
           alias($._like_phrase, $.like_phrase),
           alias($.__temp_table_like_sequential_phrase, $.like_sequential_phrase),
-          alias(kw("RCODE-INFORMATION"), $.rcode_information),
+          alias(kw("RCODE-INFORMATION", { offset: 10 }), $.rcode_information),
           alias($.__temp_table_before_table_phrase, $.before_table_phrase),
         ),
       ),
