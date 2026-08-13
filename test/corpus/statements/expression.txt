@@ -158,3 +158,24 @@ y = REPLACE(v,"\","_").
           name: (string_literal))
         (argument
           name: (string_literal))))))
+
+================================================================================
+ARGUMENT - IN handle qualifier
+================================================================================
+
+x = DYNAMIC-FUNCTION("Verif":U IN api, 24).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (string_literal)
+          in_handle: (identifier))
+        (argument
+          name: (number_literal))))))
