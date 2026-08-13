@@ -49,8 +49,10 @@ export default ({ kw }) => ({
   __record_except_list: ($) => seq(kw("EXCEPT"), $.__record_parenthesized_field_names),
   __record_parenthesized_field_names: ($) => seq("(", optional($.__record_field_names), ")"),
   __record_field_names: ($) =>
+    seq($.__record_field_name, repeat(seq(optional(","), $.__record_field_name))),
+  __record_field_name: ($) =>
     seq(
       $._identifier_or_qualified_name,
-      repeat(seq(optional(","), $._identifier_or_qualified_name)),
+      optional(seq("[", field("index", $._expression), "]")),
     ),
 });
