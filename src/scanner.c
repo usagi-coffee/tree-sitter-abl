@@ -154,14 +154,6 @@ bool tree_sitter_abl_external_scanner_scan(
     lexer->advance(lexer, false);
 
     while (!lexer->eof(lexer)) {
-      if (lexer->lookahead == '\\') {
-        lexer->advance(lexer, false);
-        if (!lexer->eof(lexer)) {
-          lexer->advance(lexer, false);
-        }
-        continue;
-      }
-
       if (lexer->lookahead == start) {
         lexer->advance(lexer, false);
         if (lexer->lookahead == start) {
