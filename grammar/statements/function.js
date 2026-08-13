@@ -49,6 +49,13 @@ export default ({ kw }) => ({
       kw("RETURNS", { offset: 5 }),
       optional(kw("CLASS")),
       field("type", $._type_name),
+      optional(
+        choice(
+          alias(kw("PRIVATE"), $.access_modifier),
+          alias(kw("PROTECTED"), $.access_modifier),
+          alias(kw("PUBLIC"), $.access_modifier),
+        ),
+      ),
       optional(alias($.__function_parameters, $.parameters)),
     ),
 

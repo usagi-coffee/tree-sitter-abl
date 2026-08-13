@@ -822,3 +822,22 @@ FUNCTION j RETURNS CHARACTER (DATASET-HANDLE hd) FORWARD.
       (parameter
         dataset_handle: (identifier)))
     (forward)))
+
+================================================================================
+FUNCTION FORWARD - access modifier
+================================================================================
+
+FUNCTION f RETURNS DECIMAL PRIVATE (INPUT p AS CHARACTER) FORWARD.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (function_forward_definition
+    name: (identifier)
+    type: (identifier)
+    (access_modifier)
+    (parameters
+      (parameter
+        name: (identifier)
+        type: (identifier)))
+    (forward)))
