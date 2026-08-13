@@ -489,6 +489,7 @@ export default grammar({
             ),
             field("name", $._expression),
           ),
+          optional(seq(kw("IN"), field("in_handle", $._identifier_or_qualified_name))),
           optional(seq(kw("AS"), field("type", $._type_name))),
           optional(choice(kw("BY-REFERENCE"), kw("BY-VALUE"), kw("APPEND"), kw("BIND"))),
         ),
