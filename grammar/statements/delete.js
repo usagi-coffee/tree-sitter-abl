@@ -14,7 +14,10 @@ export default ({ kw }) => ({
     seq(
       kw("DELETE"),
       kw("OBJECT"),
-      field("name", choice($.identifier, $.parenthesized_expression)),
+      field(
+        "name",
+        choice($._identifier_or_array_access, $.system_handle_identifier, $.parenthesized_expression),
+      ),
     ),
 
   delete_procedure_statement: ($) => seq($.__delete_procedure_prefix, $._no_error_terminator),
