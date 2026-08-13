@@ -131,3 +131,30 @@ x = arr[1]:HANDLE.
         array: (identifier)
         index: (number_literal))
       right: (identifier))))
+
+================================================================================
+STRING - backslash is an ordinary character
+================================================================================
+
+x = "C:\temp\fichier.txt".
+y = REPLACE(v,"\","_").
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (string_literal))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (identifier))
+        (argument
+          name: (string_literal))
+        (argument
+          name: (string_literal))))))
