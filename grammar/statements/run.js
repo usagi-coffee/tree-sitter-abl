@@ -35,10 +35,16 @@ export default ({ kw }) => ({
       alias($._value_expression, $.value_expression),
       alias($.__run_library_member, $.library_member),
       $.procedure_name,
+      alias($.__run_procedure_path, $.procedure_name),
       $.macro_concatenated_name,
       $.identifier,
       $.qualified_name,
     ),
+  // A procedure reference given as a path, with the .p or .r extension left
+  // implicit: RUN Erp\Model\Vente\ErpTrt. Both separators occur in practice.
+  __run_procedure_path: ($) =>
+    token(/[A-Za-z_][A-Za-z0-9_-]*(?:[/\u005C][A-Za-z_][A-Za-z0-9_-]*)+/),
+
   __run_library_member: ($) =>
     seq(
       field("library", $.procedure_name),
