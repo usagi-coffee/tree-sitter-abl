@@ -1,0 +1,165 @@
+================================================================================
+SAVE CACHE
+================================================================================
+
+SAVE CACHE CURRENT mydb TO "cache.bin".
+SAVE CACHE COMPLETE mydb TO "cache.bin".
+SAVE CACHE CURRENT VALUE(cDB) TO VALUE(cPath).
+SAVE CACHE COMPLETE mydb TO "/tmp/cache" NO-ERROR.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (save_cache_statement
+    database: (identifier)
+    path: (string_literal))
+  (save_cache_statement
+    database: (identifier)
+    path: (string_literal))
+  (save_cache_statement
+    database: (identifier)
+    path: (identifier))
+  (save_cache_statement
+    database: (identifier)
+    path: (string_literal)
+    (no_error)))
+
+================================================================================
+SAVE CACHE - reference snippet
+================================================================================
+
+DEFINE VARIABLE db-name AS CHARACTER NO-UNDO FORMAT "x(12)" INITIAL ?.
+DEFINE VARIABLE icnt AS INTEGER NO-UNDO.
+DO WHILE db-name <> "":
+SET db-name LABEL "Database Name"
+WITH FRAME A SIDE-LABELS TITLE "Save Cache" VIEW-AS DIALOG-BOX.
+IF db-name <> "" THEN
+CONNECT VALUE(db-name) -1 NO-ERROR.
+ELSE LEAVE.
+IF NOT ERROR-STATUS:ERROR THEN DO:
+SAVE CACHE COMPLETE VALUE(db-name) TO VALUE(db-name + ".csh") NO-ERROR.
+IF NOT ERROR-STATUS:ERROR THEN
+MESSAGE "Saved schema cache for" db-name "in" db-name + ".csh.".
+ELSE DO:
+BELL.
+DO icnt = 1 TO ERROR-STATUS:NUM-MESSAGES:
+MESSAGE ERROR-STATUS:GET-MESSAGE(icnt) VIEW-AS ALERT-BOX.
+END.
+END.
+END.
+ELSE DO:
+BELL.
+DO icnt = 1 TO ERROR-STATUS:NUM-MESSAGES:
+MESSAGE ERROR-STATUS:GET-MESSAGE(icnt) VIEW-AS ALERT-BOX.
+END.
+END.
+DISCONNECT VALUE(db-name) NO-ERROR.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo)
+    (format_phrase
+      format: (string_literal))
+    initial: (null_literal))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (do_statement
+    condition: (binary_expression
+      (identifier)
+      (string_literal))
+    (body
+      (set_statement
+        (field
+          field: (identifier)
+          (format_phrase
+            label: (string_literal)))
+        (frame_phrase
+          frame: (identifier)
+          (side_labels)
+          title: (string_literal)))
+      (if_statement
+        (binary_expression
+          (identifier)
+          (string_literal))
+        then: (connect_statement
+          database: (function_call
+            function: (identifier)
+            (arguments
+              (argument
+                name: (identifier))))
+          parameter: (identifier)
+          (no_error))
+        else: (leave_statement))
+      (if_statement
+        (unary_expression
+          (object_access
+            left: (identifier)
+            right: (identifier)))
+        then: (do_statement
+          (body
+            (save_cache_statement
+              database: (identifier)
+              path: (binary_expression
+                (identifier)
+                (string_literal))
+              (no_error))
+            (if_statement
+              (unary_expression
+                (object_access
+                  left: (identifier)
+                  right: (identifier)))
+              then: (message_statement
+                (string_literal)
+                (identifier)
+                (string_literal)
+                (binary_expression
+                  (identifier)
+                  (string_literal)))
+              else: (do_statement
+                (body
+                  (bell_statement)
+                  (do_statement
+                    variable: (identifier)
+                    start: (number_literal)
+                    end: (object_access
+                      left: (identifier)
+                      right: (identifier))
+                    (body
+                      (message_statement
+                        (function_call
+                          function: (object_access
+                            left: (identifier)
+                            right: (identifier))
+                          (arguments
+                            (argument
+                              name: (identifier))))
+                        (view_as_phrase)))))))))
+        else: (do_statement
+          (body
+            (bell_statement)
+            (do_statement
+              variable: (identifier)
+              start: (number_literal)
+              end: (object_access
+                left: (identifier)
+                right: (identifier))
+              (body
+                (message_statement
+                  (function_call
+                    function: (object_access
+                      left: (identifier)
+                      right: (identifier))
+                    (arguments
+                      (argument
+                        name: (identifier))))
+                  (view_as_phrase)))))))
+      (disconnect_statement
+        database: (identifier)
+        (no_error)))))

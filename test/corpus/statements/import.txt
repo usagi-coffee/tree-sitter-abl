@@ -1,0 +1,184 @@
+================================================================================
+IMPORT
+================================================================================
+
+IMPORT STREAM sIn UNFORMATTED lineText.
+IMPORT DELIMITER "," fieldA ^ fieldB NO-LOBS NO-ERROR.
+IMPORT recBuf EXCEPT fieldX fieldY.
+IMPORT STREAM-HANDLE hStream mPtrData.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (import_statement
+    stream: (identifier)
+    (unformatted_phrase
+      field: (identifier)))
+  (import_statement
+    (delimiter_phrase
+      delimiter: (string_literal))
+    (identifier)
+    (skip_field)
+    (identifier)
+    (no_lobs)
+    (no_error))
+  (import_statement
+    (identifier)
+    (identifier)
+    (identifier))
+  (import_statement
+    stream: (identifier)
+    (identifier)))
+
+================================================================================
+IMPORT - Reference snippets
+================================================================================
+
+INPUT FROM customer.d.
+DISABLE TRIGGERS FOR LOAD OF Customer.
+REPEAT:
+  CREATE Customer.
+  IMPORT Customer.
+END.
+INPUT CLOSE.
+
+DEFINE VARIABLE cnum LIKE Customer.CustNum NO-UNDO.
+DEFINE VARIABLE cname LIKE Customer.Name NO-UNDO.
+DEFINE VARIABLE cmax LIKE Customer.CreditLimit NO-UNDO.
+INPUT FROM custdump2.
+FOR EACH Customer:
+  IMPORT DELIMITER ";" cnum cname cmax.
+  DISPLAY cnum cname cmax.
+END.
+INPUT CLOSE.
+
+DEFINE VARIABLE text-string AS CHARACTER NO-UNDO FORMAT "x(76)".
+INPUT FROM VALUE(SEARCH("hello")).
+DO WHILE TRUE ON ENDKEY UNDO, LEAVE:
+  IMPORT UNFORMATTED text-string.
+  DISPLAY text-string WITH DOWN FRAME x.
+  DOWN WITH FRAME x NO-LABELS.
+END.
+INPUT CLOSE.
+
+DEFINE VARIABLE bb AS MEMPTR NO-UNDO.
+ASSIGN FILE-INFO:FILE-NAME = "big.in" SET-SIZE(bb) = FILE-INFO:FILE-SIZE.
+INPUT FROM "big.in" BINARY NO-CONVERT.
+IMPORT bb.
+INPUT CLOSE.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (input_statement
+    file: (qualified_name
+      left: (identifier)
+      right: (identifier)))
+  (disable_triggers_statement
+    table: (identifier))
+  (repeat_statement
+    (body
+      (create_statement
+        table: (identifier))
+      (import_statement
+        (identifier))))
+  (input_statement
+    (close))
+  (variable_definition
+    name: (identifier)
+    like: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (no_undo))
+  (variable_definition
+    name: (identifier)
+    like: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (no_undo))
+  (variable_definition
+    name: (identifier)
+    like: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (no_undo))
+  (input_statement
+    file: (identifier))
+  (for_statement
+    (record_phrase
+      record: (identifier))
+    (body
+      (import_statement
+        (delimiter_phrase
+          delimiter: (string_literal))
+        (identifier)
+        (identifier)
+        (identifier))
+      (display_statement
+        (field
+          field: (identifier))
+        (field
+          field: (identifier))
+        (field
+          field: (identifier)))))
+  (input_statement
+    (close))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo)
+    (format_phrase
+      format: (string_literal)))
+  (input_statement
+    value: (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (string_literal)))))
+  (do_statement
+    condition: (boolean_literal)
+    (on_endkey_phrase)
+    (body
+      (import_statement
+        (unformatted_phrase
+          field: (identifier)))
+      (display_statement
+        record: (identifier)
+        (frame_phrase
+          (down)
+          frame: (identifier)))
+      (down_statement
+        (frame_phrase
+          frame: (identifier)
+          (no_labels)))))
+  (input_statement
+    (close))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (assign_statement
+    (assign_phrase
+      (assign_pair
+        left: (object_access
+          left: (identifier)
+          right: (identifier))
+        right: (string_literal))
+      (assign_pair
+        left: (function_call
+          function: (identifier)
+          (arguments
+            (argument
+              name: (identifier))))
+        right: (object_access
+          left: (identifier)
+          right: (identifier)))))
+  (input_statement
+    file: (string_literal)
+    (binary)
+    (convert_phrase
+      (no_convert)))
+  (import_statement
+    (identifier))
+  (input_statement
+    (close)))

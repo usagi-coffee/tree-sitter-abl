@@ -1,0 +1,87 @@
+================================================================================
+DOWN statement
+================================================================================
+
+DOWN.
+DOWN 1.
+DOWN 2 WITH FRAME cust.
+DOWN STREAM-HANDLE hOut 3.
+DOWN STREAM sOut.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (down_statement)
+  (down_statement
+    count: (number_literal))
+  (down_statement
+    count: (number_literal)
+    (frame_phrase
+      frame: (identifier)))
+  (down_statement
+    stream: (identifier)
+    count: (number_literal))
+  (down_statement
+    stream: (identifier)))
+
+================================================================================
+DOWN - Reference snippet
+================================================================================
+
+FOR EACH Customer NO-LOCK BY Customer.State:
+  IF Customer.State <> laststate THEN DO:
+    IF laststate <> "" THEN DOWN 1.
+    laststate = Customer.State.
+  END.
+  DISPLAY Customer.CustNum Customer.Name Customer.City Customer.State.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (for_statement
+    (record_phrase
+      record: (identifier)
+      (no_lock))
+    (by_phrase
+      by: (qualified_name
+        left: (identifier)
+        right: (identifier)))
+    (body
+      (if_statement
+        (binary_expression
+          (qualified_name
+            left: (identifier)
+            right: (identifier))
+          (identifier))
+        then: (do_statement
+          (body
+            (if_statement
+              (binary_expression
+                (identifier)
+                (string_literal))
+              then: (down_statement
+                count: (number_literal)))
+            (assignment_statement
+              left: (identifier)
+              operator: (assignment_operator)
+              right: (qualified_name
+                left: (identifier)
+                right: (identifier))))))
+      (display_statement
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))))))

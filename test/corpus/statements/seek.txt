@@ -1,0 +1,86 @@
+================================================================================
+SEEK
+================================================================================
+
+SEEK INPUT TO pos.
+SEEK STREAM outStream TO END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (seek_statement
+    (identifier))
+  (seek_statement
+    stream: (identifier)))
+
+================================================================================
+SEEK - reference snippet and variants
+================================================================================
+
+DEFINE VARIABLE savepos AS INT64 NO-UNDO.
+DEFINE VARIABLE c AS CHARACTER NO-UNDO FORMAT "x(20)".
+OUTPUT TO seek.out APPEND NO-ECHO.
+savepos = SEEK(OUTPUT).
+PUT UNFORMATTED "abcdefg" SKIP.
+OUTPUT CLOSE.
+INPUT FROM seek.out NO-ECHO.
+SEEK INPUT TO savepos.
+SET c.
+DISPLAY c.
+INPUT CLOSE.
+
+SEEK OUTPUT TO 0.
+SEEK STREAM s1 TO END.
+SEEK STREAM-HANDLE hS TO 100.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo)
+    (format_phrase
+      format: (string_literal)))
+  (output_statement
+    file: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (append)
+    (no_echo))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (seek_expression
+      function: (identifier)))
+  (put_statement
+    (unformatted)
+    value: (string_literal)
+    (skip))
+  (output_statement
+    (close))
+  (input_statement
+    file: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (no_echo))
+  (seek_statement
+    (identifier))
+  (set_statement
+    (field
+      field: (identifier)))
+  (display_statement
+    record: (identifier))
+  (input_statement
+    (close))
+  (seek_statement
+    (number_literal))
+  (seek_statement
+    stream: (identifier))
+  (seek_statement
+    stream: (identifier)
+    (number_literal)))

@@ -1,0 +1,144 @@
+===============================================================================
+FINALLY
+===============================================================================
+
+FINALLY:
+  MESSAGE "Cleanup".
+END.
+
+FINALLY:
+  DELETE OBJECT hBuffer.
+  DELETE OBJECT hQuery.
+END FINALLY.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (finally_statement
+    (body
+      (message_statement
+        (string_literal))))
+  (finally_statement
+    (body
+      (delete_object_statement
+        name: (identifier))
+      (delete_object_statement
+        name: (identifier)))))
+
+===============================================================================
+FINALLY with different body statements
+===============================================================================
+
+FINALLY:
+  DELETE OBJECT hBuffer.
+  CLOSE QUERY qCustomer.
+  MESSAGE "Cleanup complete".
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (finally_statement
+    (body
+      (delete_object_statement
+        name: (identifier))
+      (close_query_statement
+        query: (identifier))
+      (message_statement
+        (string_literal)))))
+
+===============================================================================
+FINALLY with complex body
+===============================================================================
+
+FINALLY:
+  DELETE OBJECT hQuery.
+  DELETE OBJECT hBuffer.
+  OUTPUT CLOSE.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (finally_statement
+    (body
+      (delete_object_statement
+        name: (identifier))
+      (delete_object_statement
+        name: (identifier))
+      (output_statement
+        (close)))))
+
+===============================================================================
+FINALLY - Reference snippets
+===============================================================================
+
+DO ON ERROR UNDO, LEAVE:
+  FIND Customer WHERE CustNum = 1000.
+  MESSAGE "This message never appears because of ERROR condition.".
+  FINALLY:
+    MESSAGE "Inside FINALLY block." VIEW-AS ALERT-BOX BUTTONS OK.
+  END FINALLY.
+END.
+MESSAGE "Out of DO block." VIEW-AS ALERT-BOX BUTTONS OK.
+
+DO ON ERROR UNDO, LEAVE:
+  FIND Customer WHERE CustNum = 1000.
+  CATCH eSysError AS Progress.Lang.SysError:
+    MESSAGE "Inside CATCH block." VIEW-AS ALERT-BOX BUTTONS OK.
+  END CATCH.
+  FINALLY:
+    MESSAGE "Inside FINALLY block." VIEW-AS ALERT-BOX BUTTONS OK.
+  END FINALLY.
+END.
+MESSAGE "Out of DO block." VIEW-AS ALERT-BOX BUTTONS OK.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (do_statement
+    (on_error_phrase)
+    (body
+      (find_statement
+        table: (identifier)
+        (where_phrase
+          where: (binary_expression
+            (identifier)
+            (number_literal))))
+      (message_statement
+        (string_literal))
+      (finally_statement
+        (body
+          (message_statement
+            (string_literal)
+            (view_as_phrase))))))
+  (message_statement
+    (string_literal)
+    (view_as_phrase))
+  (do_statement
+    (on_error_phrase)
+    (body
+      (find_statement
+        table: (identifier)
+        (where_phrase
+          where: (binary_expression
+            (identifier)
+            (number_literal))))
+      (catch_statement
+        name: (identifier)
+        type: (qualified_name
+          left: (identifier)
+          right: (identifier)
+          right: (identifier))
+        (body
+          (message_statement
+            (string_literal)
+            (view_as_phrase))))
+      (finally_statement
+        (body
+          (message_statement
+            (string_literal)
+            (view_as_phrase))))))
+  (message_statement
+    (string_literal)
+    (view_as_phrase)))

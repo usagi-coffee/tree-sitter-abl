@@ -1,0 +1,122 @@
+================================================================================
+RELEASE OBJECT
+================================================================================
+
+RELEASE OBJECT hWidget.
+RELEASE OBJECT hBuffer NO-ERROR.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (release_object_statement
+    handle: (identifier))
+  (release_object_statement
+    handle: (identifier)
+    (no_error)))
+
+================================================================================
+RELEASE OBJECT - object access handle
+================================================================================
+
+RELEASE OBJECT hFrame:HANDLE.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (release_object_statement
+    handle: (object_access
+      left: (identifier)
+      right: (identifier))))
+
+================================================================================
+RELEASE OBJECT - reference snippet
+================================================================================
+
+DEFINE VARIABLE CFWidHdl AS HANDLE NO-UNDO.
+DEFINE VARIABLE CFComHdl AS COM-HANDLE NO-UNDO.
+DEFINE VARIABLE controlHdl AS COM-HANDLE NO-UNDO.
+CREATE CONTROL-FRAME CFWidHdl ASSIGN
+  FRAME = FRAME foo:HANDLE
+  NAME = "ctlFrame1".
+
+CFComHdl = CFWidHdl:COM-HANDLE.
+CFComHdl:LoadControls(hc_CmdButton.wrx, "hc_CmdButton").
+controlHdl = CFComHdl:hc_CmdButton.
+controlHdl:BgColor = RGB-VALUE(0,128,0).
+RELEASE OBJECT controlHdl.
+DELETE WIDGET CFWidHdl.
+
+RELEASE OBJECT controlHdl NO-ERROR.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (create_widget_statement
+    handle: (identifier)
+    (assign_phrase
+      (assign_pair
+        left: (identifier)
+        right: (object_access
+          widget: (identifier)
+          left: (identifier)
+          right: (identifier)))
+      (assign_pair
+        left: (identifier)
+        right: (string_literal))))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (object_access
+      left: (identifier)
+      right: (identifier)))
+  (expression_statement
+    (function_call
+      function: (object_access
+        left: (identifier)
+        right: (identifier))
+      (arguments
+        (argument
+          name: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (argument
+          name: (string_literal)))))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (object_access
+      left: (identifier)
+      right: (identifier)))
+  (assignment_statement
+    left: (object_access
+      left: (identifier)
+      right: (identifier))
+    operator: (assignment_operator)
+    right: (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (number_literal))
+        (argument
+          name: (number_literal))
+        (argument
+          name: (number_literal)))))
+  (release_object_statement
+    handle: (identifier))
+  (delete_widget_statement
+    widget: (identifier))
+  (release_object_statement
+    handle: (identifier)
+    (no_error)))

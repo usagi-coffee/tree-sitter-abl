@@ -1,0 +1,10 @@
+export default ({ kw }) => ({
+  _go_on_phrase: ($) =>
+    seq(
+      kw("GO-ON"),
+      "(",
+      choice($.identifier, $.string_literal),
+      repeat(seq(optional(","), choice($.identifier, $.string_literal))),
+      ")",
+    ),
+});

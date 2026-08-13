@@ -1,0 +1,858 @@
+================================================================================
+PARAMETER DEFINITION - Direction Modifiers
+================================================================================
+
+DEFINE INPUT PARAMETER p1 AS CHARACTER.
+DEFINE OUTPUT PARAMETER p2 AS INTEGER.
+DEFINE INPUT-OUTPUT PARAMETER p3 AS DECIMAL.
+DEFINE RETURN PARAMETER pResult AS LOGICAL.
+DEF RETURN PARAMETER retval AS INTEGER NO-UNDO.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (parameter_definition
+    name: (identifier)
+    type: (identifier))
+  (parameter_definition
+    name: (identifier)
+    type: (identifier))
+  (parameter_definition
+    name: (identifier)
+    type: (identifier))
+  (parameter_definition
+    name: (identifier)
+    type: (identifier))
+  (parameter_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo)))
+
+================================================================================
+PARAMETER DEFINITION - AS Type Phrase with CLASS
+================================================================================
+
+DEFINE INPUT PARAMETER pCust AS CLASS Customer.
+DEFINE OUTPUT PARAMETER pHnd AS HANDLE.
+DEFINE INPUT-OUTPUT PARAMETER pObj AS CLASS Some.Type.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (parameter_definition
+    name: (identifier)
+    type: (identifier))
+  (parameter_definition
+    name: (identifier)
+    type: (identifier))
+  (parameter_definition
+    name: (identifier)
+    type: (qualified_name
+      left: (identifier)
+      right: (identifier))))
+
+================================================================================
+PARAMETER DEFINITION - LIKE Phrase
+================================================================================
+
+DEFINE INPUT PARAMETER pName LIKE Customer.Name.
+DEFINE OUTPUT PARAMETER pCode LIKE Customer.CustNum.
+DEFINE INPUT-OUTPUT PARAMETER pField LIKE SalesOrderDetail.LineNum.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (parameter_definition
+    name: (identifier)
+    like: (qualified_name
+      left: (identifier)
+      right: (identifier)))
+  (parameter_definition
+    name: (identifier)
+    like: (qualified_name
+      left: (identifier)
+      right: (identifier)))
+  (parameter_definition
+    name: (identifier)
+    like: (qualified_name
+      left: (identifier)
+      right: (identifier))))
+
+================================================================================
+PARAMETER DEFINITION - EXTENT Phrase
+================================================================================
+
+DEFINE INPUT PARAMETER pArray AS CHARACTER EXTENT.
+DEFINE INPUT PARAMETER pArray10 AS INTEGER EXTENT 10.
+DEFINE OUTPUT PARAMETER pArraySize AS DECIMAL EXTENT {&MAX_SIZE}.
+DEFINE INPUT-OUTPUT PARAMETER pIds AS INTEGER EXTENT ?.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (parameter_definition
+    name: (identifier)
+    type: (identifier)
+    (extent_phrase))
+  (parameter_definition
+    name: (identifier)
+    type: (identifier)
+    (extent_phrase
+      size: (number_literal)))
+  (parameter_definition
+    name: (identifier)
+    type: (identifier)
+    (extent_phrase
+      size: (preprocessor_name
+        (identifier))))
+  (parameter_definition
+    name: (identifier)
+    type: (identifier)
+    (extent_phrase
+      size: (null_literal))))
+
+================================================================================
+PARAMETER DEFINITION - INITIAL Option
+================================================================================
+
+DEFINE INPUT PARAMETER pName AS CHARACTER INITIAL "Test".
+DEFINE INPUT PARAMETER pNum AS INTEGER INITIAL 100.
+DEFINE OUTPUT PARAMETER pArray AS INTEGER EXTENT 3 INITIAL [1, 2, 3].
+DEFINE INPUT-OUTPUT PARAMETER pVals AS DECIMAL INITIAL [] NO-UNDO.
+DEF INPUT PARAMETER pNull AS CHARACTER INITIAL ?.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (parameter_definition
+    name: (identifier)
+    type: (identifier)
+    initial: (string_literal))
+  (parameter_definition
+    name: (identifier)
+    type: (identifier)
+    initial: (number_literal))
+  (parameter_definition
+    name: (identifier)
+    type: (identifier)
+    (extent_phrase
+      size: (number_literal))
+    initial: (number_literal)
+    initial: (number_literal)
+    initial: (number_literal))
+  (parameter_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (parameter_definition
+    name: (identifier)
+    type: (identifier)
+    initial: (null_literal)))
+
+================================================================================
+PARAMETER DEFINITION - LABEL Option
+================================================================================
+
+DEFINE INPUT PARAMETER pLabel AS CHARACTER LABEL "Parameter Label".
+DEFINE OUTPUT PARAMETER pMulti AS INTEGER LABEL "First", "Second", "Third".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (parameter_definition
+    name: (identifier)
+    type: (identifier)
+    label: (string_literal))
+  (parameter_definition
+    name: (identifier)
+    type: (identifier)
+    label: (string_literal)
+    label: (string_literal)
+    label: (string_literal)))
+
+================================================================================
+PARAMETER DEFINITION - FORMAT Option
+================================================================================
+
+DEFINE INPUT PARAMETER pCode AS CHARACTER FORMAT "x(10)".
+DEFINE OUTPUT PARAMETER pNum AS DECIMAL FORMAT "z,zzz.99".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (parameter_definition
+    name: (identifier)
+    type: (identifier)
+    format: (string_literal))
+  (parameter_definition
+    name: (identifier)
+    type: (identifier)
+    format: (string_literal)))
+
+================================================================================
+PARAMETER DEFINITION - NO-UNDO Option
+================================================================================
+
+DEFINE INPUT PARAMETER pVal AS INTEGER NO-UNDO.
+DEFINE INPUT-OUTPUT PARAMETERpData AS CHARACTER NO-UNDO.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (parameter_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (parameter_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo)))
+
+================================================================================
+PARAMETER DEFINITION - BY-VALUE Option
+================================================================================
+
+DEFINE INPUT PARAMETER TABLE-HANDLE hTable BY-VALUE.
+DEFINE INPUT-OUTPUT PARAMETER DATASET-HANDLE hData BY-VALUE NO-UNDO.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (parameter_definition
+    table_handle: (identifier)
+    (by_value))
+  (parameter_definition
+    dataset_handle: (identifier)
+    (by_value)
+    (no_undo)))
+
+================================================================================
+PARAMETER DEFINITION - BY-REFERENCE Option
+================================================================================
+
+DEFINE INPUT PARAMETER TABLE-HANDLE hTable BY-REFERENCE.
+DEFINE INPUT-OUTPUT PARAMETER DATASET-HANDLE hData BY-REFERENCE BIND.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (parameter_definition
+    table_handle: (identifier)
+    (by_reference))
+  (parameter_definition
+    dataset_handle: (identifier)
+    (by_reference)
+    (bind)))
+
+================================================================================
+PARAMETER DEFINITION - APPEND Option
+================================================================================
+
+DEFINE INPUT PARAMETER TABLE FOR ttOrders APPEND.
+DEFINE OUTPUT PARAMETER DATASET FOR dsAudit APPEND BIND.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (parameter_definition
+    table: (identifier)
+    (append))
+  (parameter_definition
+    dataset: (identifier)
+    (append)
+    (bind)))
+
+================================================================================
+PARAMETER DEFINITION - BIND Option
+================================================================================
+
+DEFINE INPUT-OUTPUT PARAMETER TABLE-HANDLE hTable BIND.
+DEFINE OUTPUT PARAMETER DATASET-HANDLE hData BIND NO-UNDO.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (parameter_definition
+    table_handle: (identifier)
+    (bind))
+  (parameter_definition
+    dataset_handle: (identifier)
+    (bind)
+    (no_undo)))
+
+================================================================================
+PARAMETER DEFINITION - TABLE and DATASET Parameters
+================================================================================
+
+DEFINE INPUT PARAMETER TABLE FOR ttCustomer.
+DEFINE OUTPUT PARAMETER TABLE FOR ttOrder NO-UNDO.
+DEFINE INPUT-OUTPUT PARAMETER TABLE FOR ttLine NO-UNDO.
+DEFINE INPUT PARAMETER DATASET FOR dsInventory.
+DEFINE OUTPUT PARAMETER DATASET-HANDLE hDataset.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (parameter_definition
+    table: (identifier))
+  (parameter_definition
+    table: (identifier)
+    (no_undo))
+  (parameter_definition
+    table: (identifier)
+    (no_undo))
+  (parameter_definition
+    dataset: (identifier))
+  (parameter_definition
+    dataset_handle: (identifier)))
+
+================================================================================
+PARAMETER DEFINITION - BUFFER Parameters
+================================================================================
+
+DEFINE PARAMETER BUFFER pCust FOR Customer.
+DEFINE PARAMETER BUFFER pTemp FOR TEMP-TABLE ttOrder PRESELECT.
+DEFINE PARAMETER BUFFER bufCustomer FOR Customer PRESELECT.
+DEFINE PARAMETER BUFFER bufTemp FOR TEMP-TABLE ttData PRESELECT.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (parameter_definition
+    name: (identifier)
+    table: (identifier))
+  (parameter_definition
+    name: (identifier)
+    table: (identifier)
+    (preselect))
+  (parameter_definition
+    name: (identifier)
+    table: (identifier)
+    (preselect))
+  (parameter_definition
+    name: (identifier)
+    table: (identifier)
+    (preselect)))
+
+================================================================================
+PARAMETER DEFINITION - Combinations
+================================================================================
+
+DEFINE INPUT PARAMETER pCombo AS INTEGER FORMAT ">>>>9" INITIAL 0 LABEL "Count" NO-UNDO.
+DEFINE OUTPUT PARAMETER pArr AS INTEGER EXTENT 10 INITIAL [1,2,3] LABEL "Array" FORMAT "zz9".
+DEF INPUT-OUTPUT PARAMETER pStr LIKE Customer.Name INITIAL "" NO-UNDO.
+DEFINE INPUT PARAMETER pClass AS CLASS Customer NO-UNDO.
+DEFINE RETURN PARAMETER pRes AS LOGICAL NO-UNDO.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (parameter_definition
+    name: (identifier)
+    type: (identifier)
+    format: (string_literal)
+    initial: (number_literal)
+    label: (string_literal)
+    (no_undo))
+  (parameter_definition
+    name: (identifier)
+    type: (identifier)
+    (extent_phrase
+      size: (number_literal))
+    initial: (number_literal)
+    initial: (number_literal)
+    initial: (number_literal)
+    label: (string_literal)
+    format: (string_literal))
+  (parameter_definition
+    name: (identifier)
+    like: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    initial: (string_literal)
+    (no_undo))
+  (parameter_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (parameter_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo)))
+
+================================================================================
+PARAMETER DEFINITION - reference snippets and missing options
+================================================================================
+
+RUN r-param.p (INPUT 10).
+
+DEFINE INPUT PARAMETER int-param AS INTEGER NO-UNDO.
+DISPLAY int-param LABEL "Integer input param"
+WITH SIDE-LABELS.
+
+DEFINE VARIABLE new-param AS CHARACTER NO-UNDO FORMAT "x(20)".
+DEFINE VARIABLE out-param AS DECIMAL NO-UNDO.
+DEFINE VARIABLE in-param AS INTEGER NO-UNDO INITIAL 20.
+RUN r-param1.p (OUTPUT out-param, 10, OUTPUT new-param, in-param).
+DISPLAY out-param LABEL "Updated YTD Sales" SKIP new-param LABEL "Status"
+WITH SIDE-LABELS.
+
+DEFINE OUTPUT PARAMETER xout-param AS DECIMAL NO-UNDO.
+DEFINE INPUT PARAMETER newin AS INTEGER NO-UNDO.
+DEFINE OUTPUT PARAMETER xnew-param AS CHARACTER NO-UNDO.
+DEFINE INPUT PARAMETER xin-param AS INTEGER NO-UNDO.
+FOR EACH Customer NO-LOCK:
+xout-param = xout-param + Customer.Balance.
+END.
+DISPLAY xout-param LABEL "Balance" WITH SIDE-LABELS.
+ASSIGN
+xout-param = xout-param + newin + xin-param
+xnew-param = "Example Complete".
+
+DEFINE VARIABLE io-param AS INTEGER NO-UNDO.
+FOR EACH Item:
+DISPLAY Item.ItemName Item.OnHand WITH 1 DOWN.
+io-param = Item.OnHand.
+RUN r-param2.p (INPUT-OUTPUT io-param).
+Item.OnHand = io-param.
+DISPLAY io-param LABEL "New Quantity On-hand".
+END.
+
+DEFINE INPUT-OUTPUT PARAMETER io-param AS INTEGER NO-UNDO.
+DEFINE VARIABLE inp-qty AS INTEGER NO-UNDO.
+PROMPT-FOR inp-qty LABEL "Quantity Received?".
+ASSIGN inp-qty.
+io-param = io-param + inp-qty.
+
+DEFINE BUTTON btnFind LABEL "Find Customer".
+DO WITH FRAME frCustomer WITH SIDE-LABELS:
+ENABLE Customer.CustNum btnFind.
+ON CHOOSE OF btnFind DO:
+RUN getCustomer (Customer.CustNum:HANDLE, BUFFER Customer).
+IF NOT ERROR-STATUS:ERROR THEN
+DISPLAY Customer EXCEPT Customer.Comments WITH SIDE-LABELS.
+END.
+ON ENTRY OF Customer.CustNum DO:
+HIDE MESSAGE.
+END.
+WAIT-FOR WINDOW-CLOSE OF CURRENT-WINDOW.
+END.
+PROCEDURE getCustomer:
+DEFINE INPUT PARAMETER hWidget AS HANDLE NO-UNDO.
+DEFINE PARAMETER BUFFER bufCustomer FOR Customer.
+FIND bufCustomer WHERE bufCustomer.CustNum =
+INTEGER(hWidget:SCREEN-VALUE) NO-LOCK NO-ERROR.
+IF NOT AVAILABLE bufCustomer THEN DO:
+MESSAGE "Customer record not found." VIEW-AS ALERT-BOX.
+RETURN ERROR.
+END.
+END.
+
+DEFINE VARIABLE result AS INTEGER NO-UNDO.
+MESSAGE " It's a whole new world!"
+VIEW-AS ALERT-BOX MESSAGE BUTTONS OK TITLE "ABL Message".
+RUN MessageBoxA (0, " It's a whole new world, again!!",
+"ABL DLL access", 0, OUTPUT result).
+PROCEDURE MessageBoxA EXTERNAL "user32.dll":
+DEFINE INPUT PARAMETER hwnd AS LONG.
+DEFINE INPUT PARAMETER mbtext AS CHARACTER.
+DEFINE INPUT PARAMETER mbtitle AS CHARACTER.
+DEFINE INPUT PARAMETER style AS LONG.
+DEFINE RETURN PARAMETER result AS LONG.
+END.
+
+DEFINE INPUT PARAMETER pCase AS CHARACTER CASE-SENSITIVE.
+DEFINE INPUT PARAMETER pCaseOff AS CHARACTER NOT CASE-SENSITIVE.
+DEFINE INPUT PARAMETER pLabel AS CHARACTER COLUMN-LABEL "Param".
+DEFINE INPUT PARAMETER pNum AS DECIMAL DECIMALS 2.
+DEFINE INPUT PARAMETER pPtr AS HANDLE TO LONG.
+DEFINE INPUT PARAMETER pObj AS CLASS My.Namespace.Type.
+DEFINE INPUT PARAMETER TABLE-HANDLE hT BY-VALUE BIND.
+DEFINE OUTPUT PARAMETER TABLE-HANDLE hTOut BY-VALUE.
+DEFINE INPUT PARAMETER DATASET FOR dsData APPEND BY-VALUE.
+DEFINE OUTPUT PARAMETER DATASET-HANDLE hDs BIND BY-VALUE.
+DEFINE INPUT PARAMETER pExtent0 AS INTEGER EXTENT 0.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (run_statement
+    procedure: (procedure_name)
+    (arguments
+      (argument
+        name: (number_literal))))
+  (parameter_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (display_statement
+    (field
+      field: (identifier))
+    (format_phrase
+      label: (string_literal))
+    (frame_phrase
+      (side_labels)))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo)
+    (format_phrase
+      format: (string_literal)))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo)
+    initial: (number_literal))
+  (run_statement
+    procedure: (procedure_name)
+    (arguments
+      (argument
+        name: (identifier))
+      (argument
+        name: (number_literal))
+      (argument
+        name: (identifier))
+      (argument
+        name: (identifier))))
+  (display_statement
+    (field
+      field: (identifier))
+    (format_phrase
+      label: (string_literal))
+    (field
+      field: (identifier))
+    (format_phrase
+      label: (string_literal))
+    (frame_phrase
+      (side_labels)))
+  (parameter_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (parameter_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (parameter_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (parameter_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (for_statement
+    (record_phrase
+      record: (identifier)
+      (no_lock))
+    (body
+      (assignment_statement
+        left: (identifier)
+        operator: (assignment_operator)
+        right: (binary_expression
+          (identifier)
+          (qualified_name
+            left: (identifier)
+            right: (identifier))))))
+  (display_statement
+    (field
+      field: (identifier))
+    (format_phrase
+      label: (string_literal))
+    (frame_phrase
+      (side_labels)))
+  (assign_statement
+    (assign_phrase
+      (assign_pair
+        left: (identifier)
+        right: (binary_expression
+          (binary_expression
+            (identifier)
+            (identifier))
+          (identifier)))
+      (assign_pair
+        left: (identifier)
+        right: (string_literal))))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (for_statement
+    (record_phrase
+      record: (identifier))
+    (body
+      (display_statement
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (frame_phrase
+          (down
+            value: (number_literal))))
+      (assignment_statement
+        left: (identifier)
+        operator: (assignment_operator)
+        right: (qualified_name
+          left: (identifier)
+          right: (identifier)))
+      (run_statement
+        procedure: (procedure_name)
+        (arguments
+          (argument
+            name: (identifier))))
+      (assignment_statement
+        left: (qualified_name
+          left: (identifier)
+          right: (identifier))
+        operator: (assignment_operator)
+        right: (identifier))
+      (display_statement
+        (field
+          field: (identifier))
+        (format_phrase
+          label: (string_literal)))))
+  (parameter_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (prompt_for_statement
+    (field
+      field: (identifier)
+      (format_phrase
+        label: (string_literal))))
+  (assign_statement
+    record: (identifier))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (binary_expression
+      (identifier)
+      (identifier)))
+  (button_definition
+    name: (identifier)
+    label: (string_literal))
+  (do_statement
+    (frame_phrase
+      frame: (identifier)
+      (side_labels))
+    (body
+      (enable_statement
+        (enable_item
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (enable_item
+          field: (identifier)))
+      (on_statement
+        event: (identifier)
+        (of_phrase
+          widget: (widget_phrase
+            handle: (identifier)))
+        (do_statement
+          (body
+            (run_statement
+              procedure: (identifier)
+              (arguments
+                (argument
+                  name: (object_access
+                    left: (qualified_name
+                      left: (identifier)
+                      right: (identifier))
+                    right: (identifier)))
+                (argument
+                  name: (identifier))))
+            (if_statement
+              (unary_expression
+                (object_access
+                  left: (identifier)
+                  right: (identifier)))
+              then: (display_statement
+                record: (identifier)
+                except: (qualified_name
+                  left: (identifier)
+                  right: (identifier))
+                (frame_phrase
+                  (side_labels)))))))
+      (on_statement
+        event: (identifier)
+        (of_phrase
+          widget: (widget_phrase
+            handle: (qualified_name
+              left: (identifier)
+              right: (identifier))))
+        (do_statement
+          (body
+            (hide_statement
+              (message)))))
+      (wait_for_statement
+        (of_phrase
+          events: (identifier)
+          widgets: (widget_phrase
+            system_handle: (system_handle))))))
+  (procedure_definition
+    name: (identifier)
+    (body
+      (parameter_definition
+        name: (identifier)
+        type: (identifier)
+        (no_undo))
+      (parameter_definition
+        name: (identifier)
+        table: (identifier))
+      (find_statement
+        table: (identifier)
+        (where_phrase
+          where: (binary_expression
+            (qualified_name
+              left: (identifier)
+              right: (identifier))
+            (function_call
+              function: (identifier)
+              (arguments
+                (argument
+                  name: (object_access
+                    left: (identifier)
+                    right: (identifier)))))))
+        (no_lock)
+        (no_error))
+      (if_statement
+        (unary_expression
+          (available_expression
+            record: (identifier)))
+        then: (do_statement
+          (body
+            (message_statement
+              (string_literal)
+              (view_as_phrase))
+            (return_statement))))))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (message_statement
+    (string_literal)
+    (view_as_phrase
+      (alert_type)
+      title: (string_literal)))
+  (run_statement
+    procedure: (identifier)
+    (arguments
+      (argument
+        name: (number_literal))
+      (argument
+        name: (string_literal))
+      (argument
+        name: (string_literal))
+      (argument
+        name: (number_literal))
+      (argument
+        name: (identifier))))
+  (procedure_definition
+    name: (identifier)
+    (external_phrase)
+    (body
+      (parameter_definition
+        name: (identifier)
+        type: (identifier))
+      (parameter_definition
+        name: (identifier)
+        type: (identifier))
+      (parameter_definition
+        name: (identifier)
+        type: (identifier))
+      (parameter_definition
+        name: (identifier)
+        type: (identifier))
+      (parameter_definition
+        name: (identifier)
+        type: (identifier))))
+  (parameter_definition
+    name: (identifier)
+    type: (identifier))
+  (parameter_definition
+    name: (identifier)
+    type: (identifier))
+  (parameter_definition
+    name: (identifier)
+    type: (identifier)
+    column_label: (string_literal))
+  (parameter_definition
+    name: (identifier)
+    type: (identifier)
+    decimals: (number_literal))
+  (parameter_definition
+    name: (identifier)
+    type: (identifier)
+    target: (identifier))
+  (parameter_definition
+    name: (identifier)
+    type: (qualified_name
+      left: (identifier)
+      right: (identifier)
+      right: (identifier)))
+  (parameter_definition
+    table_handle: (identifier)
+    (by_value)
+    (bind))
+  (parameter_definition
+    table_handle: (identifier)
+    (by_value))
+  (parameter_definition
+    dataset: (identifier)
+    (append)
+    (by_value))
+  (parameter_definition
+    dataset_handle: (identifier)
+    (bind)
+    (by_value))
+  (parameter_definition
+    name: (identifier)
+    type: (identifier)
+    (extent_phrase
+      size: (number_literal))))
+
+================================================================================
+DEFINE PARAMETER - INIT abbreviation
+================================================================================
+
+DEFINE INPUT PARAMETER x AS INTEGER INIT 1 NO-UNDO.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (parameter_definition
+    name: (identifier)
+    type: (identifier)
+    initial: (number_literal)
+    (no_undo)))
+
+================================================================================
+DEFINE PARAMETER - INPUT-OUTPUT abbreviation
+================================================================================
+
+DEFINE INPUT-O PARAMETER x AS INTEGER NO-UNDO.
+DEFINE INPUT-OUTPUT PARAMETER y AS INTEGER NO-UNDO.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (parameter_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (parameter_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo)))

@@ -1,0 +1,97 @@
+================================================================================
+EXPORT
+================================================================================
+
+EXPORT a b c.
+EXPORT DELIMITER "," Customer EXCEPT CustNum CustName NO-LOBS.
+EXPORT STREAM-HANDLE hOut memptrBuf.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (export_statement
+    (identifier)
+    (identifier)
+    (identifier))
+  (export_statement
+    (delimiter_phrase
+      delimiter: (string_literal))
+    (identifier)
+    (identifier)
+    (identifier)
+    (no_lobs))
+  (export_statement
+    stream: (identifier)
+    (identifier)))
+
+================================================================================
+EXPORT - Reference snippets
+================================================================================
+
+OUTPUT TO customer.d.
+FOR EACH Customer NO-LOCK:
+  EXPORT Customer.
+END.
+OUTPUT CLOSE.
+
+OUTPUT TO custdump2.
+FOR EACH Customer NO-LOCK:
+  EXPORT DELIMITER ";" Customer.CustNum Customer.Name Customer.CreditLimit.
+END.
+OUTPUT CLOSE.
+
+EXPORT tt1 EXCEPT f2.
+EXPORT z.
+EXPORT STREAM s1 Customer.Name.
+EXPORT STREAM-HANDLE hOut memptrBuf.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (output_statement
+    file: (qualified_name
+      left: (identifier)
+      right: (identifier)))
+  (for_statement
+    (record_phrase
+      record: (identifier)
+      (no_lock))
+    (body
+      (export_statement
+        (identifier))))
+  (output_statement
+    (close))
+  (output_statement
+    file: (identifier))
+  (for_statement
+    (record_phrase
+      record: (identifier)
+      (no_lock))
+    (body
+      (export_statement
+        (delimiter_phrase
+          delimiter: (string_literal))
+        (qualified_name
+          left: (identifier)
+          right: (identifier))
+        (qualified_name
+          left: (identifier)
+          right: (identifier))
+        (qualified_name
+          left: (identifier)
+          right: (identifier)))))
+  (output_statement
+    (close))
+  (export_statement
+    (identifier)
+    (identifier))
+  (export_statement
+    (identifier))
+  (export_statement
+    stream: (identifier)
+    (qualified_name
+      left: (identifier)
+      right: (identifier)))
+  (export_statement
+    stream: (identifier)
+    (identifier)))

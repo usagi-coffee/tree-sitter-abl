@@ -1,0 +1,105 @@
+================================================================================
+OS-RENAME statement
+================================================================================
+
+OS-RENAME "old.txt" "new.txt".
+OS-RENAME cOld cNew.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (os_rename_statement
+    source: (string_literal)
+    target: (string_literal))
+  (os_rename_statement
+    source: (identifier)
+    target: (identifier)))
+
+================================================================================
+OS-RENAME - reference snippets and VALUE
+================================================================================
+
+DEFINE VARIABLE sourcefile AS CHARACTER NO-UNDO.
+DEFINE VARIABLE targetfile AS CHARACTER NO-UNDO FORMAT "x(20)" VIEW-AS FILL-IN.
+DEFINE VARIABLE OKpressed AS LOGICAL NO-UNDO INITIAL TRUE.
+Main:
+REPEAT:
+SYSTEM-DIALOG GET-FILE sourcefile
+TITLE "Choose a File or Directory to Rename"
+MUST-EXIST
+USE-FILENAME
+UPDATE OKpressed.
+IF OKpressed = FALSE THEN
+LEAVE Main.
+UPDATE targetfile WITH FRAME newnameframe.
+OS-RENAME VALUE(sourcefile) VALUE(targetfile).
+END.
+
+OS-RENAME VALUE("a.txt") "b.txt".
+OS-RENAME "a.txt" VALUE("b.txt").
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo)
+    (format_phrase
+      format: (string_literal))
+    (view_as_phrase))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo)
+    initial: (boolean_literal))
+  (repeat_statement
+    label: (identifier)
+    (body
+      (system_dialog_get_file_statement
+        variable: (identifier)
+        title: (string_literal)
+        (must_exist)
+        (use_filename)
+        (update_phrase
+          update: (identifier)))
+      (if_statement
+        (binary_expression
+          (identifier)
+          (boolean_literal))
+        then: (leave_statement
+          label: (identifier)))
+      (update_statement
+        (field
+          field: (identifier))
+        (frame_phrase
+          frame: (identifier)))
+      (os_rename_statement
+        source: (function_call
+          function: (identifier)
+          (arguments
+            (argument
+              name: (identifier))))
+        target: (function_call
+          function: (identifier)
+          (arguments
+            (argument
+              name: (identifier)))))))
+  (os_rename_statement
+    source: (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (string_literal))))
+    target: (string_literal))
+  (os_rename_statement
+    source: (string_literal)
+    target: (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (string_literal))))))

@@ -1,0 +1,43 @@
+export default ({ kw }) => ({
+  find_statement: ($) => seq($.__find_prefix, $._terminator),
+
+  __find_prefix: ($) =>
+    seq(
+      kw("FIND"),
+      optional(
+        choice(
+          alias(kw("FIRST"), $.first),
+          alias(kw("LAST"), $.last),
+          alias(kw("NEXT"), $.next),
+          alias(kw("PREV"), $.prev),
+          alias(kw("CURRENT"), $.current),
+        ),
+      ),
+      field("table", $.__find_record_name),
+      optional(field("constant", $._expression)),
+      repeat(
+        choice(
+          alias($.__find_of_phrase, $.of_phrase),
+          $._find_record_option,
+          alias($.__find_where_phrase, $.where_phrase),
+        ),
+      ),
+    ),
+
+  _find_record_option: ($) =>
+    choice(
+      $._lock_option,
+      alias(kw("SHARE"), $.share),
+      alias(kw("EXCLUSIVE"), $.exclusive),
+      alias(kw("NO-WAIT"), $.no_wait),
+      alias(kw("NO-ERROR"), $.no_error),
+      alias(kw("NO-PREFETCH"), $.no_prefetch),
+      seq(kw("USING"), field("values", $._expressions)),
+      seq(kw("USE-INDEX"), field("index", $.__find_index_name)),
+    ),
+
+  __find_of_phrase: ($) => seq(kw("OF"), field("record", $.__find_record_name)),
+  __find_where_phrase: ($) => seq(kw("WHERE"), field("where", $._expression)),
+  __find_record_name: ($) => $._identifier_or_qualified_name,
+  __find_index_name: ($) => $._identifier_or_qualified_name,
+});

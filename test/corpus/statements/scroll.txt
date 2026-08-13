@@ -1,0 +1,220 @@
+================================================================================
+SCROLL statement
+================================================================================
+
+SCROLL.
+SCROLL UP.
+SCROLL DOWN.
+SCROLL FROM-CURRENT UP.
+SCROLL FROM-CURRENT DOWN WITH FRAME myframe.
+SCROLL WITH FRAME myframe.
+SCROLL FROM-CURRENT WITH FRAME myframe.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (scroll_statement)
+  (scroll_statement
+    (up))
+  (scroll_statement
+    (down))
+  (scroll_statement
+    (from_current)
+    (up))
+  (scroll_statement
+    (from_current)
+    (down)
+    (frame_phrase
+      frame: (identifier)))
+  (scroll_statement
+    (frame_phrase
+      frame: (identifier)))
+  (scroll_statement
+    (from_current)
+    (frame_phrase
+      frame: (identifier))))
+
+================================================================================
+SCROLL - reference snippet
+================================================================================
+
+DEFINE VARIABLE ans AS CHARACTER NO-UNDO FORMAT "x".
+FORM Customer.CustNum Customer.Name Customer.CreditLimit
+WITH FRAME cust CENTERED 10 DOWN.
+FORM
+"1 - scroll up" SKIP
+"2 - scroll from-current up" SKIP
+"3 - scroll down" SKIP
+"4 - scroll from-current down" SKIP
+"5 - scroll from-current "
+WITH FRAME instruct CENTERED TITLE "Instructions:".
+VIEW FRAME cust.
+REPEAT WHILE FRAME-LINE(cust) <= FRAME-DOWN(cust):
+FIND NEXT Customer NO-LOCK.
+DISPLAY Customer.CustNum Customer.Name Customer.CreditLimit
+WITH FRAME cust TITLE "Customers".
+DOWN WITH FRAME cust.
+END.
+UP FRAME-DOWN(cust) / 2 WITH FRAME cust.
+VIEW FRAME instruct.
+REPEAT WITH FRAME cust:
+CHOOSE ROW Customer.Name KEYS ans AUTO-RETURN NO-ERROR WITH FRAME cust.
+IF ans = "1" THEN SCROLL UP.
+ELSE IF ans = "2" THEN SCROLL FROM-CURRENT UP.
+ELSE IF ans = "3" THEN SCROLL DOWN.
+ELSE IF ans = "4" THEN SCROLL FROM-CURRENT DOWN.
+ELSE IF ans = "5" THEN SCROLL FROM-CURRENT.
+VIEW FRAME cust.
+ans = "".
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo)
+    (format_phrase
+      format: (string_literal)))
+  (form_statement
+    (form_item
+      field: (qualified_name
+        left: (identifier)
+        right: (identifier)))
+    (form_item
+      field: (qualified_name
+        left: (identifier)
+        right: (identifier)))
+    (form_item
+      field: (qualified_name
+        left: (identifier)
+        right: (identifier)))
+    (frame_phrase
+      frame: (identifier)
+      (centered)
+      (down
+        value: (number_literal))))
+  (form_statement
+    (form_item
+      field: (string_literal))
+    (form_item)
+    (form_item
+      field: (string_literal))
+    (form_item)
+    (form_item
+      field: (string_literal))
+    (form_item)
+    (form_item
+      field: (string_literal))
+    (form_item)
+    (form_item
+      field: (string_literal))
+    (frame_phrase
+      frame: (identifier)
+      (centered)
+      title: (string_literal)))
+  (view_statement
+    (widget_phrase
+      frame: (identifier)))
+  (repeat_statement
+    condition: (binary_expression
+      (function_call
+        function: (identifier)
+        (arguments
+          (argument
+            name: (identifier))))
+      (function_call
+        function: (identifier)
+        (arguments
+          (argument
+            name: (identifier)))))
+    (body
+      (find_statement
+        (next)
+        table: (identifier)
+        (no_lock))
+      (display_statement
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (frame_phrase
+          frame: (identifier)
+          title: (string_literal)))
+      (down_statement
+        (frame_phrase
+          frame: (identifier)))))
+  (up_statement
+    count: (binary_expression
+      (function_call
+        function: (identifier)
+        (arguments
+          (argument
+            name: (identifier))))
+      (number_literal))
+    (frame_phrase
+      frame: (identifier)))
+  (view_statement
+    (widget_phrase
+      frame: (identifier)))
+  (repeat_statement
+    (frame_phrase
+      frame: (identifier))
+    (body
+      (choose_statement
+        field: (qualified_name
+          left: (identifier)
+          right: (identifier))
+        keys: (identifier)
+        (auto_return)
+        (no_error)
+        (frame_phrase
+          frame: (identifier)))
+      (if_statement
+        (binary_expression
+          (identifier)
+          (string_literal))
+        then: (scroll_statement
+          (up))
+        else: (if_statement
+          (binary_expression
+            (identifier)
+            (string_literal))
+          then: (scroll_statement
+            (from_current)
+            (up))
+          else: (if_statement
+            (binary_expression
+              (identifier)
+              (string_literal))
+            then: (scroll_statement
+              (down))
+            else: (if_statement
+              (binary_expression
+                (identifier)
+                (string_literal))
+              then: (scroll_statement
+                (from_current)
+                (down))
+              else: (if_statement
+                (binary_expression
+                  (identifier)
+                  (string_literal))
+                then: (scroll_statement
+                  (from_current)))))))
+      (view_statement
+        (widget_phrase
+          frame: (identifier)))
+      (assignment_statement
+        left: (identifier)
+        operator: (assignment_operator)
+        right: (string_literal)))))

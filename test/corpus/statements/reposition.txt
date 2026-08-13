@@ -1,0 +1,237 @@
+================================================================================
+REPOSITION statement
+================================================================================
+
+REPOSITION qCust TO ROW 5.
+REPOSITION qCust FORWARDS 10.
+REPOSITION qCust BACKWARDS 5.
+REPOSITION qCust TO ROWID rCust.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (reposition_statement
+    query: (identifier)
+    row: (number_literal))
+  (reposition_statement
+    query: (identifier)
+    (forwards)
+    count: (number_literal))
+  (reposition_statement
+    query: (identifier)
+    (backwards)
+    count: (number_literal))
+  (reposition_statement
+    query: (identifier)
+    rowid: (identifier)))
+
+================================================================================
+REPOSITION - reference snippet and variants
+================================================================================
+
+DEFINE VARIABLE num AS INTEGER NO-UNDO INITIAL 1.
+DEFINE QUERY q-order FOR Customer, Order SCROLLING.
+DEFINE BUTTON b_quit LABEL "Quit".
+DEFINE BUTTON b_frwd LABEL "FORWARD".
+DEFINE BUTTON b_back LABEL "BACKWARD".
+FORM b_frwd b_back b_quit
+WITH FRAME butt-frame ROW 1.
+ON CHOOSE OF b_back, b_frwd DO:
+PROMPT-FOR num LABEL "Records To Skip"
+WITH FRAME pos-info CENTERED ROW 5 overlay.
+HIDE FRAME pos-info NO-PAUSE.
+IF SELF:LABEL = "BACKWARD" THEN
+REPOSITION q-order BACKWARDS INPUT num + 1.
+ELSE
+REPOSITION q-order FORWARDS INPUT num - 1.
+RUN getone.
+END.
+OPEN QUERY q-order FOR EACH Customer NO-LOCK,
+EACH Order OF Customer NO-LOCK.
+RUN getone.
+ENABLE b_back b_frwd b_quit WITH FRAME butt-frame.
+WAIT-FOR CHOOSE OF b_quit OR WINDOW-CLOSE OF CURRENT-WINDOW.
+PROCEDURE getone:
+GET NEXT q-order.
+IF NOT AVAILABLE Customer THEN DO:
+REPOSITION q-order BACKWARDS 1.
+GET NEXT q-order.
+END.
+DISPLAY Customer.CustNum Customer.Name SKIP
+Order.OrderNum Order.OrderDate
+WITH FRAME order-info CENTERED ROW 5 SIDE-LABELS OVERLAY.
+END PROCEDURE.
+
+REPOSITION qCust FORWARD 5.
+REPOSITION qCust BACKWARD (n - 1).
+REPOSITION qCust TO RECID rCust NO-ERROR.
+REPOSITION qCust TO ROWID rTop, rChild FOR TENANT tenantId NO-ERROR.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo)
+    initial: (number_literal))
+  (query_definition
+    name: (identifier)
+    (query_table_list
+      table: (identifier)
+      table: (identifier))
+    (scrolling))
+  (button_definition
+    name: (identifier)
+    label: (string_literal))
+  (button_definition
+    name: (identifier)
+    label: (string_literal))
+  (button_definition
+    name: (identifier)
+    label: (string_literal))
+  (form_statement
+    (form_item
+      field: (identifier))
+    (form_item
+      field: (identifier))
+    (form_item
+      field: (identifier))
+    (frame_phrase
+      frame: (identifier)
+      row: (number_literal)))
+  (on_statement
+    event: (identifier)
+    (of_phrase
+      widget: (widget_phrase
+        handle: (identifier))
+      widget: (widget_phrase
+        handle: (identifier)))
+    (do_statement
+      (body
+        (prompt_for_statement
+          (field
+            field: (identifier)
+            (format_phrase
+              label: (string_literal)))
+          (frame_phrase
+            frame: (identifier)
+            (centered)
+            row: (number_literal)
+            (overlay)))
+        (hide_statement
+          (widget_phrase
+            frame: (identifier))
+          (no_pause))
+        (if_statement
+          (binary_expression
+            (object_access
+              left: (identifier)
+              right: (identifier))
+            (string_literal))
+          then: (reposition_statement
+            query: (identifier)
+            (backwards)
+            count: (binary_expression
+              (input_expression
+                field: (identifier))
+              (number_literal)))
+          else: (reposition_statement
+            query: (identifier)
+            (forwards)
+            count: (binary_expression
+              (input_expression
+                field: (identifier))
+              (number_literal))))
+        (run_statement
+          procedure: (identifier)))))
+  (open_query_statement
+    query: (identifier)
+    (record_phrase
+      record: (identifier)
+      lock: (no_lock))
+    (record_phrase
+      record: (identifier)
+      of: (identifier)
+      lock: (no_lock)))
+  (run_statement
+    procedure: (identifier))
+  (enable_statement
+    (enable_item
+      field: (identifier))
+    (enable_item
+      field: (identifier))
+    (enable_item
+      field: (identifier))
+    (frame_phrase
+      frame: (identifier)))
+  (wait_for_statement
+    (of_phrase
+      events: (identifier)
+      widgets: (widget_phrase
+        handle: (identifier)))
+    (of_phrase
+      events: (identifier)
+      widgets: (widget_phrase
+        system_handle: (system_handle))))
+  (procedure_definition
+    name: (identifier)
+    (body
+      (get_statement
+        query: (identifier))
+      (if_statement
+        (unary_expression
+          (available_expression
+            record: (identifier)))
+        then: (do_statement
+          (body
+            (reposition_statement
+              query: (identifier)
+              (backwards)
+              count: (number_literal))
+            (get_statement
+              query: (identifier)))))
+      (display_statement
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (frame_phrase
+          frame: (identifier)
+          (centered)
+          row: (number_literal)
+          (side_labels)
+          (overlay)))))
+  (reposition_statement
+    query: (identifier)
+    (forwards)
+    count: (number_literal))
+  (reposition_statement
+    query: (identifier)
+    (backwards)
+    count: (parenthesized_expression
+      (binary_expression
+        (identifier)
+        (number_literal))))
+  (reposition_statement
+    query: (identifier)
+    recid: (identifier)
+    (no_error))
+  (reposition_statement
+    query: (identifier)
+    rowid: (identifier)
+    rowid: (identifier)
+    tenant: (identifier)
+    (no_error)))

@@ -1,0 +1,48 @@
+================================================================================
+FIX-CODEPAGE
+================================================================================
+
+FIX-CODEPAGE(mData) = "UTF-8".
+FIX-CODEPAGE(mRaw) = cCodepage.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (fix_codepage_statement
+    target: (identifier)
+    codepage: (string_literal))
+  (fix_codepage_statement
+    target: (identifier)
+    codepage: (identifier)))
+
+================================================================================
+FIX-CODEPAGE - object access codepage
+================================================================================
+
+FIX-CODEPAGE(mData) = SESSION:CHARSET.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (fix_codepage_statement
+    target: (identifier)
+    codepage: (object_access
+      left: (identifier)
+      right: (identifier))))
+
+================================================================================
+FIX-CODEPAGE - Reference snippets
+================================================================================
+
+FIX-CODEPAGE(mData) = "UTF-8".
+FIX-CODEPAGE(mData) = ?.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (fix_codepage_statement
+    target: (identifier)
+    codepage: (string_literal))
+  (fix_codepage_statement
+    target: (identifier)
+    codepage: (null_literal)))

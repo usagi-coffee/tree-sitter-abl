@@ -1,0 +1,14 @@
+export default ({ kw }) => ({
+  unsubscribe_statement: ($) => seq($.__unsubscribe_prefix, $._terminator),
+
+  __unsubscribe_prefix: ($) =>
+    seq(
+      kw("UNSUBSCRIBE"),
+      optional(seq(kw("PROCEDURE", { offset: 4 }), field("subscriber", $._expression))),
+      optional(kw("TO")),
+      $.__unsubscribe_event,
+      optional(alias($.__unsubscribe_in_phrase, $.in_phrase)),
+    ),
+  __unsubscribe_event: ($) => choice(field("event", $._expression), alias(kw("ALL"), $.all)),
+  __unsubscribe_in_phrase: ($) => seq(kw("IN"), field("publisher", $._expression)),
+});

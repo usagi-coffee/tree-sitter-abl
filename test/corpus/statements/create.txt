@@ -1,0 +1,334 @@
+================================================================================
+CREATE basic
+================================================================================
+
+CREATE Customer NO-ERROR.
+CREATE Order.
+CREATE tDebtorShipTo.
+CREATE SERVER appSrv.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (create_statement
+    table: (identifier)
+    (no_error))
+  (create_statement
+    table: (identifier))
+  (create_statement
+    table: (identifier))
+  (create_statement
+    handle: (identifier)))
+
+================================================================================
+CREATE with preprocessor record
+================================================================================
+
+CREATE {&Bufor}.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (create_statement
+    table: (preprocessor_name
+      (identifier))))
+
+================================================================================
+CREATE with qualified name
+================================================================================
+
+CREATE Sports2000.Customer.
+CREATE db.TableName.
+CREATE {&Db}.Customer.
+CREATE a{&one}b{&two}.Customer.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (create_statement
+    table: (qualified_name
+      left: (identifier)
+      right: (identifier)))
+  (create_statement
+    table: (qualified_name
+      left: (identifier)
+      right: (identifier)))
+  (create_statement
+    table: (qualified_name
+      left: (preprocessor_name
+        (identifier))
+      right: (identifier)))
+  (create_statement
+    table: (qualified_name
+      left: (macro_concatenated_name)
+      right: (identifier))))
+
+================================================================================
+BUFFER-COPY basic
+================================================================================
+
+BUFFER-COPY tApiBusinessRelation TO tBusinessRelation.
+BUFFER-COPY srcBuf TO dstBuf.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (buffer_copy_statement
+    source: (identifier)
+    target: (identifier))
+  (buffer_copy_statement
+    source: (identifier)
+    target: (identifier)))
+
+================================================================================
+BUFFER-COPY with EXCEPT
+================================================================================
+
+BUFFER-COPY src_tbl EXCEPT fld1 fld2 TO dst_tbl.
+BUFFER-COPY Customer EXCEPT CustNum CreatedDate TO ttCustomer.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (buffer_copy_statement
+    source: (identifier)
+    (except_phrase
+      (identifier)
+      (identifier))
+    target: (identifier))
+  (buffer_copy_statement
+    source: (identifier)
+    (except_phrase
+      (identifier)
+      (identifier))
+    target: (identifier)))
+
+================================================================================
+CREATE in transaction
+================================================================================
+
+DO TRANSACTION:
+  CREATE Customer.
+  ASSIGN Customer.Name = "Test".
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (do_statement
+    (transaction)
+    (body
+      (create_statement
+        table: (identifier))
+      (assign_statement
+        (assign_phrase
+          (assign_pair
+            left: (qualified_name
+              left: (identifier)
+              right: (identifier))
+            right: (string_literal)))))))
+
+================================================================================
+CREATE - Reference snippets and options
+================================================================================
+
+CREATE Order.
+CREATE OrderLine.
+CREATE Customer FOR TENANT 0.
+CREATE Customer USING ROWID(1) NO-ERROR.
+CREATE Customer USING RECID(2).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (create_statement
+    table: (identifier))
+  (create_statement
+    table: (identifier))
+  (create_statement
+    table: (identifier)
+    tenant: (number_literal))
+  (create_statement
+    table: (identifier)
+    rowid: (number_literal)
+    (no_error))
+  (create_statement
+    table: (identifier)
+    recid: (number_literal)))
+
+================================================================================
+CREATE - Handles and objects
+================================================================================
+
+CREATE ALIAS myalias FOR DATABASE mydb NO-ERROR.
+CREATE BUFFER hBuf FOR TABLE Customer BUFFER-NAME mybuf IN WIDGET-POOL wp.
+CREATE BUFFER hBuf2 FOR TABLE Customer NO-ERROR.
+CREATE CALL hCall IN WIDGET-POOL wp NO-ERROR.
+CREATE CLIENT-PRINCIPAL hCP IN WIDGET-POOL wp.
+CREATE QUERY hQ IN WIDGET-POOL wp.
+CREATE DATASET hDS IN WIDGET-POOL wp.
+CREATE DATA-SOURCE hDSrc IN WIDGET-POOL wp.
+CREATE X-DOCUMENT hX IN WIDGET-POOL wp.
+CREATE X-NODEREF hN IN WIDGET-POOL wp.
+CREATE SOAP-HEADER hSH IN WIDGET-POOL wp.
+CREATE SOAP-HEADER-ENTRYREF hSHE IN WIDGET-POOL wp.
+CREATE SAX-READER hSR IN WIDGET-POOL wp NO-ERROR.
+CREATE SAX-WRITER hSW IN WIDGET-POOL wp NO-ERROR.
+CREATE SAX-ATTRIBUTES hSA IN WIDGET-POOL wp NO-ERROR.
+CREATE WIDGET-POOL wp PERSISTENT NO-ERROR.
+CREATE SERVER hSrv ASSIGN SERVER-CONNECTION-ID = 1.
+CREATE DATABASE "newdb" FROM "olddb" NEW-INSTANCE REPLACE NO-ERROR.
+CREATE "Excel.Application" hExcel CONNECT TO "file.xls" NO-ERROR.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (create_statement
+    alias: (identifier)
+    database: (identifier)
+    (no_error))
+  (create_statement
+    handle: (identifier)
+    table: (identifier)
+    name: (identifier)
+    pool: (identifier))
+  (create_statement
+    handle: (identifier)
+    table: (identifier)
+    (no_error))
+  (create_statement
+    handle: (identifier)
+    pool: (identifier)
+    (no_error))
+  (create_statement
+    handle: (identifier)
+    pool: (identifier))
+  (create_statement
+    handle: (identifier)
+    pool: (identifier))
+  (create_statement
+    handle: (identifier)
+    pool: (identifier))
+  (create_statement
+    handle: (identifier)
+    pool: (identifier))
+  (create_statement
+    handle: (identifier)
+    pool: (identifier))
+  (create_statement
+    handle: (identifier)
+    pool: (identifier))
+  (create_statement
+    handle: (identifier)
+    pool: (identifier))
+  (create_statement
+    handle: (identifier)
+    pool: (identifier))
+  (create_statement
+    handle: (identifier)
+    pool: (identifier)
+    (no_error))
+  (create_statement
+    handle: (identifier)
+    pool: (identifier)
+    (no_error))
+  (create_statement
+    handle: (identifier)
+    pool: (identifier)
+    (no_error))
+  (create_statement
+    pool: (identifier)
+    (persistent)
+    (no_error))
+  (create_statement
+    handle: (identifier)
+    (assign_phrase
+      (assign_pair
+        left: (identifier)
+        right: (number_literal))))
+  (create_statement
+    new_database: (string_literal)
+    old_database: (string_literal)
+    (new_instance)
+    (replace)
+    (no_error))
+  (create_statement
+    progid: (string_literal)
+    handle: (identifier)
+    target: (string_literal)
+    (no_error)))
+
+================================================================================
+CREATE BUFFER with string table target
+================================================================================
+
+CREATE BUFFER hUS FOR TABLE "UserSession".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (create_statement
+    handle: (identifier)
+    table: (string_literal)))
+
+================================================================================
+CREATE - array handle
+================================================================================
+
+CREATE QUERY hQry[2].
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (create_statement
+    handle: (array_access
+      array: (identifier)
+      index: (number_literal))))
+
+================================================================================
+CREATE BUFFER - BUFFER-NAME as a string
+================================================================================
+
+CREATE BUFFER hBuf FOR TABLE "cust" BUFFER-NAME "b1".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (create_statement
+    handle: (identifier)
+    table: (string_literal)
+    name: (string_literal)))
+
+================================================================================
+CREATE BUFFER - widget pool named by a string
+================================================================================
+
+CREATE BUFFER h FOR TABLE "t" IN WIDGET-POOL "myPool".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (create_statement
+    handle: (identifier)
+    table: (string_literal)
+    pool: (string_literal)))
+
+================================================================================
+CREATE BUFFER - handle held in an array or a field
+================================================================================
+
+CREATE BUFFER hb[i] FOR TABLE r.nom_table BUFFER-NAME r.nom_alias.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (create_statement
+    handle: (array_access
+      array: (identifier)
+      index: (identifier))
+    table: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    name: (qualified_name
+      left: (identifier)
+      right: (identifier))))

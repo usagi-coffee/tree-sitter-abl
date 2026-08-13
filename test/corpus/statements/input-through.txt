@@ -1,0 +1,194 @@
+================================================================================
+INPUT THROUGH
+================================================================================
+
+INPUT THROUGH "progname" arg1 VALUE(arg2) NO-ECHO NO-MAP UNBUFFERED CONVERT TARGET "utf-8" SOURCE "ibm850".
+INPUT STREAM sIn THROUGH VALUE(cmd) ECHO.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (input_through_statement
+    program: (string_literal)
+    (identifier)
+    value: (identifier)
+    (no_echo)
+    (no_map)
+    (unbuffered)
+    (convert_phrase
+      target: (string_literal)
+      source: (string_literal)))
+  (input_through_statement
+    stream: (identifier)
+    value: (identifier)
+    (echo)))
+
+================================================================================
+INPUT THROUGH - MAP and NO-CONVERT variants
+================================================================================
+
+INPUT STREAM-HANDLE hIn THROUGH VALUE(cmd) MAP "hp2/spanish" NO-CONVERT.
+INPUT THROUGH myprog VALUE(arg1) Func() NO-MAP UNBUFFERED CONVERT SOURCE "ibm850".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (input_through_statement
+    stream: (identifier)
+    value: (identifier)
+    map: (string_literal)
+    (convert_phrase
+      (no_convert)))
+  (input_through_statement
+    program: (identifier)
+    value: (identifier)
+    (function_call
+      function: (identifier)
+      (arguments))
+    (no_map)
+    (unbuffered)
+    (convert_phrase
+      source: (string_literal))))
+
+================================================================================
+INPUT THROUGH - Convert phrase variants
+================================================================================
+
+INPUT THROUGH "progname" NO-CONVERT.
+INPUT THROUGH VALUE(cmd) CONVERT TARGET "utf-8" SOURCE "ibm850".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (input_through_statement
+    program: (string_literal)
+    (convert_phrase
+      (no_convert)))
+  (input_through_statement
+    value: (identifier)
+    (convert_phrase
+      target: (string_literal)
+      source: (string_literal))))
+
+================================================================================
+INPUT THROUGH - Reference snippets
+================================================================================
+
+DEFINE VARIABLE process-id AS CHARACTER NO-UNDO.
+DEFINE VARIABLE dir-path AS CHARACTER NO-UNDO VIEW-AS EDITOR SIZE 60 BY 10.
+INPUT THROUGH echo $$ $PATH NO-ECHO.
+SET process-id dir-path WITH FRAME indata NO-BOX NO-LABELS.
+DISPLAY process-id dir-path FORMAT "x(70)".
+INPUT CLOSE.
+
+DEFINE VARIABLE dir-name AS CHARACTER NO-UNDO FORMAT "x(64)".
+DEFINE VARIABLE fn AS CHARACTER NO-UNDO FORMAT "x(32)".
+FORM fn WITH DOWN FRAME dir-list.
+INPUT THROUGH pwd NO-ECHO.
+SET dir-name.
+INPUT CLOSE.
+fn:LABEL IN FRAME dir-list = dir-name.
+INPUT THROUGH ls NO-ECHO.
+REPEAT:
+  SET fn WITH NO-BOX NO-LABELS FRAME indata.
+  DISPLAY fn VIEW-AS TEXT WITH FRAME dir-list.
+  DOWN WITH FRAME dir-list.
+END.
+INPUT CLOSE.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo)
+    (view_as_phrase
+      (editor_phrase
+        (size_phrase
+          width: (number_literal)
+          height: (number_literal)))))
+  (input_through_statement
+    program: (identifier)
+    (shell_variable)
+    (shell_variable)
+    (no_echo))
+  (set_statement
+    (field
+      field: (identifier))
+    (field
+      field: (identifier))
+    (frame_phrase
+      frame: (identifier)
+      (no_box)
+      (no_labels)))
+  (display_statement
+    (field
+      field: (identifier))
+    (field
+      field: (identifier))
+    (format_phrase
+      format: (string_literal)))
+  (input_statement
+    (close))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo)
+    (format_phrase
+      format: (string_literal)))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo)
+    (format_phrase
+      format: (string_literal)))
+  (form_statement
+    (form_item
+      field: (identifier))
+    (frame_phrase
+      (down)
+      frame: (identifier)))
+  (input_through_statement
+    program: (identifier)
+    (no_echo))
+  (set_statement
+    (field
+      field: (identifier)))
+  (input_statement
+    (close))
+  (assignment_statement
+    left: (widget_qualified_name
+      target: (object_access
+        left: (identifier)
+        right: (identifier))
+      widget: (identifier))
+    operator: (assignment_operator)
+    right: (identifier))
+  (input_through_statement
+    program: (identifier)
+    (no_echo))
+  (repeat_statement
+    (body
+      (set_statement
+        (field
+          field: (identifier))
+        (frame_phrase
+          (no_box)
+          (no_labels)
+          frame: (identifier)))
+      (display_statement
+        (field
+          field: (identifier))
+        (format_phrase)
+        (frame_phrase
+          frame: (identifier)))
+      (down_statement
+        (frame_phrase
+          frame: (identifier)))))
+  (input_statement
+    (close)))

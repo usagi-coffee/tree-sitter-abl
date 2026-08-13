@@ -1,0 +1,524 @@
+================================================================================
+EVENT basic definition
+================================================================================
+
+CLASS X:
+  DEFINE EVENT onCustomerChanged SIGNATURE VOID ().
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (class_definition
+    name: (identifier)
+    (event_definition
+      name: (identifier)
+      (signature))))
+
+================================================================================
+EVENT with modifiers
+================================================================================
+
+CLASS X:
+  DEFINE PUBLIC STATIC EVENT onSync SIGNATURE VOID ().
+  DEFINE PROTECTED ABSTRACT OVERRIDE EVENT onAbstract SIGNATURE VOID (INPUT reason AS CHARACTER).
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (class_definition
+    name: (identifier)
+    (event_definition
+      (access_modifier)
+      (static_modifier)
+      name: (identifier)
+      (signature))
+    (event_definition
+      (access_modifier)
+      (abstract_modifier)
+      (override_modifier)
+      name: (identifier)
+      (signature
+        name: (identifier)
+        type: (identifier)))))
+
+================================================================================
+EVENT with parameters
+================================================================================
+
+CLASS X:
+  DEFINE EVENT onDataChanged SIGNATURE VOID (
+    INPUT sender AS CLASS Progress.Lang.Object,
+    INPUT args AS CLASS MyEventArgs
+  ).
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (class_definition
+    name: (identifier)
+    (event_definition
+      name: (identifier)
+      (signature
+        name: (identifier)
+        type: (qualified_name
+          left: (identifier)
+          right: (identifier)
+          right: (identifier))
+        name: (identifier)
+        type: (identifier)))))
+
+================================================================================
+EVENT with DELEGATE
+================================================================================
+
+CLASS X:
+  DEFINE EVENT onProgress DELEGATE CLASS System.EventHandler.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (class_definition
+    name: (identifier)
+    (event_definition
+      name: (identifier)
+      (signature
+        delegate_type: (qualified_name
+          left: (identifier)
+          right: (identifier))))))
+
+================================================================================
+EVENT static definition
+================================================================================
+
+CLASS X:
+  DEFINE STATIC EVENT onLog SIGNATURE VOID ().
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (class_definition
+    name: (identifier)
+    (event_definition
+      (static_modifier)
+      name: (identifier)
+      (signature))))
+
+================================================================================
+EVENT - PRIVATE modifier
+================================================================================
+
+CLASS X:
+  DEFINE PRIVATE EVENT onPrivate SIGNATURE VOID ().
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (class_definition
+    name: (identifier)
+    (event_definition
+      (access_modifier)
+      name: (identifier)
+      (signature))))
+
+================================================================================
+EVENT - PACKAGE-PRIVATE modifier
+================================================================================
+
+CLASS X:
+  DEFINE PACKAGE-PRIVATE EVENT onPackage SIGNATURE VOID (INPUT id AS INTEGER).
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (class_definition
+    name: (identifier)
+    (event_definition
+      (access_modifier)
+      name: (identifier)
+      (signature
+        name: (identifier)
+        type: (identifier)))))
+
+================================================================================
+EVENT - PROTECTED modifier
+================================================================================
+
+CLASS X:
+  DEFINE PROTECTED EVENT onProtected SIGNATURE VOID ().
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (class_definition
+    name: (identifier)
+    (event_definition
+      (access_modifier)
+      name: (identifier)
+      (signature))))
+
+================================================================================
+EVENT - PACKAGE-PROTECTED modifier
+================================================================================
+
+CLASS X:
+  DEFINE PACKAGE-PROTECTED EVENT onPackageProt SIGNATURE VOID ().
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (class_definition
+    name: (identifier)
+    (event_definition
+      (access_modifier)
+      name: (identifier)
+      (signature))))
+
+================================================================================
+EVENT - PUBLIC modifier (default)
+================================================================================
+
+CLASS X:
+  DEFINE EVENT onPublic SIGNATURE VOID ().
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (class_definition
+    name: (identifier)
+    (event_definition
+      name: (identifier)
+      (signature))))
+
+================================================================================
+EVENT - STATIC modifier only
+================================================================================
+
+CLASS X:
+  DEFINE STATIC EVENT onStatic SIGNATURE VOID ().
+  DEFINE STATIC PRIVATE EVENT onStaticPriv SIGNATURE VOID ().
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (class_definition
+    name: (identifier)
+    (event_definition
+      (static_modifier)
+      name: (identifier)
+      (signature))
+    (event_definition
+      (static_modifier)
+      (access_modifier)
+      name: (identifier)
+      (signature))))
+
+================================================================================
+EVENT - ABSTRACT modifier
+================================================================================
+
+CLASS X:
+  DEFINE ABSTRACT EVENT onAbstract SIGNATURE VOID (INPUT data AS CHARACTER).
+  DEFINE PUBLIC ABSTRACT EVENT onPubAbs SIGNATURE VOID ().
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (class_definition
+    name: (identifier)
+    (event_definition
+      (abstract_modifier)
+      name: (identifier)
+      (signature
+        name: (identifier)
+        type: (identifier)))
+    (event_definition
+      (access_modifier)
+      (abstract_modifier)
+      name: (identifier)
+      (signature))))
+
+================================================================================
+EVENT - OVERRIDE modifier
+================================================================================
+
+CLASS X:
+  DEFINE OVERRIDE EVENT onOverride SIGNATURE VOID ().
+  DEFINE PROTECTED OVERRIDE EVENT onProtOverride SIGNATURE VOID ().
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (class_definition
+    name: (identifier)
+    (event_definition
+      (override_modifier)
+      name: (identifier)
+      (signature))
+    (event_definition
+      (access_modifier)
+      (override_modifier)
+      name: (identifier)
+      (signature))))
+
+================================================================================
+EVENT - Multiple parameters VOID
+================================================================================
+
+CLASS X:
+  DEFINE EVENT onMultiParams SIGNATURE VOID (
+    INPUT a AS INTEGER,
+    INPUT b AS CHARACTER,
+    INPUT c AS LOGICAL
+  ).
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (class_definition
+    name: (identifier)
+    (event_definition
+      name: (identifier)
+      (signature
+        name: (identifier)
+        type: (identifier)
+        name: (identifier)
+        type: (identifier)
+        name: (identifier)
+        type: (identifier)))))
+
+================================================================================
+EVENT - OUTPUT parameters
+================================================================================
+
+CLASS X:
+  DEFINE EVENT onOutput SIGNATURE VOID (
+    OUTPUT result AS INTEGER,
+    OUTPUT message AS CHARACTER
+  ).
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (class_definition
+    name: (identifier)
+    (event_definition
+      name: (identifier)
+      (signature
+        name: (identifier)
+        type: (identifier)
+        name: (identifier)
+        type: (identifier)))))
+
+================================================================================
+EVENT - INPUT-OUTPUT parameters
+================================================================================
+
+CLASS X:
+  DEFINE EVENT onInOut SIGNATURE VOID (
+    INPUT-OUTPUT value AS DECIMAL,
+    INPUT-OUTPUT name AS CHARACTER
+  ).
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (class_definition
+    name: (identifier)
+    (event_definition
+      name: (identifier)
+      (signature
+        name: (identifier)
+        type: (identifier)
+        name: (identifier)
+        type: (identifier)))))
+
+================================================================================
+EVENT - DELEGATE with generic types
+================================================================================
+
+CLASS X:
+  DEFINE EVENT onClick DELEGATE CLASS System.EventHandler<System.EventArgs>.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (class_definition
+    name: (identifier)
+    (event_definition
+      name: (identifier)
+      (signature
+        delegate_type: (generic_type
+          (qualified_name
+            left: (identifier)
+            right: (identifier))
+          (qualified_name
+            left: (identifier)
+            right: (identifier)))))))
+
+================================================================================
+EVENT - DELEGATE with simple CLASS
+================================================================================
+
+CLASS X:
+  DEFINE EVENT onUpdate DELEGATE CLASS MyDelegate.
+  DEFINE EVENT onAction DELEGATE CLASS Action.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (class_definition
+    name: (identifier)
+    (event_definition
+      name: (identifier)
+      (signature
+        delegate_type: (identifier)))
+    (event_definition
+      name: (identifier)
+      (signature
+        delegate_type: (identifier)))))
+
+================================================================================
+EVENT - No parameters VOID
+================================================================================
+
+CLASS X:
+  DEFINE EVENT onSimple SIGNATURE VOID ().
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (class_definition
+    name: (identifier)
+    (event_definition
+      name: (identifier)
+      (signature))))
+
+================================================================================
+EVENT - No SIGNATURE DELEGATE
+================================================================================
+
+CLASS X:
+  DEFINE EVENT onLogEntry DELEGATE CLASS Logger.LogHandler.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (class_definition
+    name: (identifier)
+    (event_definition
+      name: (identifier)
+      (signature
+        delegate_type: (qualified_name
+          left: (identifier)
+          right: (identifier))))))
+
+================================================================================
+EVENT - Modifiers combination
+================================================================================
+
+CLASS X:
+  DEFINE PRIVATE STATIC EVENT onMsg SIGNATURE VOID (INPUT msg AS CHARACTER).
+  DEFINE PROTECTED OVERRIDE EVENT onValue SIGNATURE VOID (INPUT val AS INTEGER).
+  DEFINE PUBLIC STATIC ABSTRACT EVENT onInit SIGNATURE VOID (INPUT id AS INTEGER).
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (class_definition
+    name: (identifier)
+    (event_definition
+      (access_modifier)
+      (static_modifier)
+      name: (identifier)
+      (signature
+        name: (identifier)
+        type: (identifier)))
+    (event_definition
+      (access_modifier)
+      (override_modifier)
+      name: (identifier)
+      (signature
+        name: (identifier)
+        type: (identifier)))
+    (event_definition
+      (access_modifier)
+      (static_modifier)
+      (abstract_modifier)
+      name: (identifier)
+      (signature
+        name: (identifier)
+        type: (identifier)))))
+
+================================================================================
+EVENT - Minimal
+================================================================================
+
+CLASS X:
+  DEFINE EVENT e SIGNATURE VOID ().
+  DEF EVENT e2 DELEGATE cls.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (class_definition
+    name: (identifier)
+    (event_definition
+      name: (identifier)
+      (signature))
+    (event_definition
+      name: (identifier)
+      (signature
+        delegate_type: (identifier)))))
+
+================================================================================
+EVENT - Reference snippets
+================================================================================
+
+CLASS X:
+  DEFINE PUBLIC EVENT NewCustomer SIGNATURE VOID ( INPUT pcCustName AS CHARACTER ).
+  DEFINE EVENT onSimple SIGNATURE VOID ( ).
+  DEFINE EVENT onDelegate DELEGATE CLASS System.EventHandler.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (class_definition
+    name: (identifier)
+    (event_definition
+      (access_modifier)
+      name: (identifier)
+      (signature
+        name: (identifier)
+        type: (identifier)))
+    (event_definition
+      name: (identifier)
+      (signature))
+    (event_definition
+      name: (identifier)
+      (signature
+        delegate_type: (qualified_name
+          left: (identifier)
+          right: (identifier))))))

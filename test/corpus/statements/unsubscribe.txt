@@ -1,0 +1,63 @@
+================================================================================
+UNSUBSCRIBE statement
+================================================================================
+
+UNSUBSCRIBE TO "MyEvent".
+UNSUBSCRIBE ALL.
+UNSUBSCRIBE TO "MyEvent" IN hPub.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (unsubscribe_statement
+    event: (string_literal))
+  (unsubscribe_statement
+    (all))
+  (unsubscribe_statement
+    event: (string_literal)
+    (in_phrase
+      publisher: (identifier))))
+
+================================================================================
+UNSUBSCRIBE - reference snippets and variants
+================================================================================
+
+PROCEDURE NewCustomer:
+DEFINE INPUT PARAMETER name AS CHARACTER NO-UNDO.
+MESSAGE "Subscriber 2 received event NewCustomer concerning" name
+VIEW-AS ALERT-BOX.
+UNSUBSCRIBE TO ALL.
+END.
+
+UNSUBSCRIBE PROCEDURE hSub TO "NewCustomer" IN hPub.
+UNSUBSCRIBE PROCEDURE hSub TO cEvent.
+UNSUBSCRIBE ALL IN hPub.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (procedure_definition
+    name: (identifier)
+    (body
+      (parameter_definition
+        name: (identifier)
+        type: (identifier)
+        (no_undo))
+      (message_statement
+        (string_literal)
+        (identifier)
+        (view_as_phrase))
+      (unsubscribe_statement
+        (all))))
+  (unsubscribe_statement
+    subscriber: (identifier)
+    event: (string_literal)
+    (in_phrase
+      publisher: (identifier)))
+  (unsubscribe_statement
+    subscriber: (identifier)
+    event: (identifier))
+  (unsubscribe_statement
+    (all)
+    (in_phrase
+      publisher: (identifier))))

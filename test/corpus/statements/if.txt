@@ -1,0 +1,511 @@
+================================================================================
+IF
+================================================================================
+
+IF par_kontakt = '' THEN DO:
+  UNDO, THROW NEW Progress.Lang.AppError("msg", 400).
+END.
+ELSE DO:
+  ASSIGN par_kontakt = "x".
+END.
+
+IF NOT AVAIL(Debtor) THEN UNDO, THROW NEW Progress.Lang.AppError("missing", 400).
+
+IF NOT CAN-FIND(FIRST Contact WHERE Contact.Address_ID = Address.Address_ID) THEN DO:
+  DISPLAY Contact.ContactName.
+END.
+
+IF CAN-FIND(LAST Activity WHERE Activity.Activity_ID = 10) THEN DO:
+  DISPLAY Activity.Activity_ID.
+END.
+
+IF CAN-FIND(FIRST LogTable WHERE LogTable.Log_ID = 10 USE-INDEX log_idx) THEN DO:
+  DISPLAY LogTable.Log_ID.
+END.
+IF CAN-FIND(FIRST Contact WHERE) THEN DO:
+  DISPLAY Contact.ContactName.
+END.
+
+IF hasFlag THEN DO:
+  DISPLAY hasFlag.
+END.
+/* bridge */
+ELSE IF otherFlag THEN DISPLAY otherFlag.
+
+IF skip THEN .
+
+IF AVAILABLE Customer THEN .
+IF AVAIL (Customer) THEN .
+IF LOCKED bufOrder THEN RETURN TRUE.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (if_statement
+    (binary_expression
+      (identifier)
+      (string_literal))
+    then: (do_statement
+      (body
+        (undo_statement
+          value: (new_expression
+            type: (qualified_name
+              left: (identifier)
+              right: (identifier)
+              right: (identifier))
+            (arguments
+              (argument
+                name: (string_literal))
+              (argument
+                name: (number_literal)))))))
+    else: (do_statement
+      (body
+        (assign_statement
+          (assign_phrase
+            (assign_pair
+              left: (identifier)
+              right: (string_literal)))))))
+  (if_statement
+    (unary_expression
+      (available_expression
+        record: (identifier)))
+    then: (undo_statement
+      value: (new_expression
+        type: (qualified_name
+          left: (identifier)
+          right: (identifier)
+          right: (identifier))
+        (arguments
+          (argument
+            name: (string_literal))
+          (argument
+            name: (number_literal))))))
+  (if_statement
+    (unary_expression
+      (can_find_expression
+        table: (identifier)
+        (where_phrase
+          (binary_expression
+            (qualified_name
+              left: (identifier)
+              right: (identifier))
+            (qualified_name
+              left: (identifier)
+              right: (identifier))))))
+    then: (do_statement
+      (body
+        (display_statement
+          record: (qualified_name
+            left: (identifier)
+            right: (identifier))))))
+  (if_statement
+    (can_find_expression
+      table: (identifier)
+      (where_phrase
+        (binary_expression
+          (qualified_name
+            left: (identifier)
+            right: (identifier))
+          (number_literal))))
+    then: (do_statement
+      (body
+        (display_statement
+          record: (qualified_name
+            left: (identifier)
+            right: (identifier))))))
+  (if_statement
+    (can_find_expression
+      table: (identifier)
+      (where_phrase
+        (binary_expression
+          (qualified_name
+            left: (identifier)
+            right: (identifier))
+          (number_literal)))
+      index: (identifier))
+    then: (do_statement
+      (body
+        (display_statement
+          record: (qualified_name
+            left: (identifier)
+            right: (identifier))))))
+  (if_statement
+    (can_find_expression
+      table: (identifier)
+      (where_phrase))
+    then: (do_statement
+      (body
+        (display_statement
+          record: (qualified_name
+            left: (identifier)
+            right: (identifier))))))
+  (if_statement
+    (identifier)
+    then: (do_statement
+      (body
+        (display_statement
+          record: (identifier))))
+    (comment
+      (block_comment))
+    else: (if_statement
+      (identifier)
+      then: (display_statement
+        record: (identifier))))
+  (if_statement
+    (identifier)
+    then: (empty_statement))
+  (if_statement
+    (available_expression
+      record: (identifier))
+    then: (empty_statement))
+  (if_statement
+    (available_expression
+      record: (identifier))
+    then: (empty_statement))
+  (if_statement
+    (locked_expression
+      record: (identifier))
+    then: (return_statement
+      value: (boolean_literal))))
+
+================================================================================
+IF - CAN-FIND ordered options
+================================================================================
+
+IF CAN-FIND(Customer OF Parent USING idx AND FRAME fr field WHERE Customer.id = 1 NO-LOCK USE-INDEX idx) THEN DISPLAY x.
+IF CAN-FIND(Customer NO-LOCK WHERE Customer.id = 1 USE-INDEX idx) THEN DISPLAY x.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (if_statement
+    (can_find_expression
+      table: (identifier)
+      (of_phrase
+        record: (identifier))
+      (using_phrase
+        index: (identifier))
+      (frame_phrase
+        frame: (identifier)
+        field: (identifier))
+      (where_phrase
+        (binary_expression
+          (qualified_name
+            left: (identifier)
+            right: (identifier))
+          (number_literal)))
+      (no_lock)
+      index: (identifier))
+    then: (display_statement
+      record: (identifier)))
+  (if_statement
+    (can_find_expression
+      table: (identifier)
+      (no_lock)
+      (where_phrase
+        (binary_expression
+          (qualified_name
+            left: (identifier)
+            right: (identifier))
+          (number_literal)))
+      index: (identifier))
+    then: (display_statement
+      record: (identifier))))
+
+================================================================================
+IF - Inline THEN/ELSE
+================================================================================
+
+IF x > 10 THEN x = 10.
+ELSE IF x > 20 THEN x = 20.
+ELSE x = x.
+
+IF x > 10 THEN x = 10.
+ELSE DO:
+  x = 20.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (if_statement
+    (binary_expression
+      (identifier)
+      (number_literal))
+    then: (assignment_statement
+      left: (identifier)
+      operator: (assignment_operator)
+      right: (number_literal))
+    else: (if_statement
+      (binary_expression
+        (identifier)
+        (number_literal))
+      then: (assignment_statement
+        left: (identifier)
+        operator: (assignment_operator)
+        right: (number_literal))
+      else: (assignment_statement
+        left: (identifier)
+        operator: (assignment_operator)
+        right: (identifier))))
+  (if_statement
+    (binary_expression
+      (identifier)
+      (number_literal))
+    then: (assignment_statement
+      left: (identifier)
+      operator: (assignment_operator)
+      right: (number_literal))
+    else: (do_statement
+      (body
+        (assignment_statement
+          left: (identifier)
+          operator: (assignment_operator)
+          right: (number_literal))))))
+
+================================================================================
+IF - Reference snippet
+================================================================================
+
+DEFINE VARIABLE ans AS LOGICAL NO-UNDO.
+DEFINE STREAM due.
+OUTPUT STREAM due TO ovrdue.lst.
+DISPLAY STREAM due
+  "Orders shipped but still unpaid as of" TODAY SKIP(2)
+  WITH NO-BOX NO-LABELS CENTERED FRAME hdr PAGE-TOP.
+FOR EACH Order WITH FRAME oinfo:
+  FIND Customer OF Order NO-LOCK.
+  DISPLAY Order.OrderNum Customer.Name Order.OrderDate Order.PromiseDate
+    Order.ShipDate.
+  IF Order.ShipDate = ? THEN DO:
+    IF Order.PromiseDate = ? THEN DO:
+      MESSAGE "Please update the promise date.".
+      REPEAT WHILE promise-date = ?:
+        UPDATE Order.PromiseDate WITH FRAME oinfo.
+      END.
+    END.
+    ans = FALSE.
+    MESSAGE "Has this order been shipped?" UPDATE ans.
+    IF ans THEN
+      REPEAT WHILE Order.ShipDate = ?:
+        UPDATE Order.ShipDate WITH FRAME oinfo.
+      END.
+  END.
+  ELSE DO:
+    ans = TRUE.
+    MESSAGE "Has this order been paid?" UPDATE ans.
+    IF NOT ans THEN DO:
+      DISPLAY STREAM due Order.OrderNum TO 14 Customer.Name AT 18
+        Order.OrderDate AT 42 Order.ShipDate AT 54
+        WITH NO-BOX DOWN FRAME unpaid.
+    END.
+  END.
+END.
+OUTPUT STREAM due CLOSE.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (stream_definition
+    name: (identifier))
+  (output_statement
+    stream: (identifier)
+    file: (qualified_name
+      left: (identifier)
+      right: (identifier)))
+  (display_statement
+    stream: (identifier)
+    (field
+      field: (string_literal))
+    (field
+      field: (identifier))
+    (field
+      field: (parenthesized_expression
+        (number_literal)))
+    (frame_phrase
+      (no_box)
+      (no_labels)
+      (centered)
+      frame: (identifier)
+      (page_top)))
+  (for_statement
+    (record_phrase
+      record: (identifier))
+    (frame_phrase
+      frame: (identifier))
+    (body
+      (find_statement
+        table: (identifier)
+        (of_phrase
+          record: (identifier))
+        (no_lock))
+      (display_statement
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier))))
+      (if_statement
+        (binary_expression
+          (qualified_name
+            left: (identifier)
+            right: (identifier))
+          (null_literal))
+        then: (do_statement
+          (body
+            (if_statement
+              (binary_expression
+                (qualified_name
+                  left: (identifier)
+                  right: (identifier))
+                (null_literal))
+              then: (do_statement
+                (body
+                  (message_statement
+                    (string_literal))
+                  (repeat_statement
+                    condition: (binary_expression
+                      (identifier)
+                      (null_literal))
+                    (body
+                      (update_statement
+                        (field
+                          field: (qualified_name
+                            left: (identifier)
+                            right: (identifier)))
+                        (frame_phrase
+                          frame: (identifier))))))))
+            (assignment_statement
+              left: (identifier)
+              operator: (assignment_operator)
+              right: (boolean_literal))
+            (message_statement
+              (string_literal)
+              (set_update_phrase
+                field: (identifier)))
+            (if_statement
+              (identifier)
+              then: (repeat_statement
+                condition: (binary_expression
+                  (qualified_name
+                    left: (identifier)
+                    right: (identifier))
+                  (null_literal))
+                (body
+                  (update_statement
+                    (field
+                      field: (qualified_name
+                        left: (identifier)
+                        right: (identifier)))
+                    (frame_phrase
+                      frame: (identifier))))))))
+        else: (do_statement
+          (body
+            (assignment_statement
+              left: (identifier)
+              operator: (assignment_operator)
+              right: (boolean_literal))
+            (message_statement
+              (string_literal)
+              (set_update_phrase
+                field: (identifier)))
+            (if_statement
+              (unary_expression
+                (identifier))
+              then: (do_statement
+                (body
+                  (display_statement
+                    stream: (identifier)
+                    (field
+                      field: (qualified_name
+                        left: (identifier)
+                        right: (identifier)))
+                    (format_phrase
+                      to: (number_literal))
+                    (field
+                      field: (qualified_name
+                        left: (identifier)
+                        right: (identifier)))
+                    (format_phrase)
+                    (field
+                      field: (qualified_name
+                        left: (identifier)
+                        right: (identifier)))
+                    (format_phrase)
+                    (field
+                      field: (qualified_name
+                        left: (identifier)
+                        right: (identifier)))
+                    (format_phrase)
+                    (frame_phrase
+                      (no_box)
+                      (down)
+                      frame: (identifier)))))))))))
+  (output_statement
+    stream: (identifier)
+    (close)))
+
+================================================================================
+IF with PROC variable name
+================================================================================
+
+IF x > 0 THEN proc = 1.
+IF x > 0 THEN proc = 1.
+IF x > 0 THEN procedu = 1.
+IF x > 0 THEN procedure = 1.
+ 
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (if_statement
+    (binary_expression
+      (identifier)
+      (number_literal))
+    then: (assignment_statement
+      left: (identifier)
+      operator: (assignment_operator)
+      right: (number_literal)))
+  (if_statement
+    (binary_expression
+      (identifier)
+      (number_literal))
+    then: (assignment_statement
+      left: (identifier)
+      operator: (assignment_operator)
+      right: (number_literal)))
+  (if_statement
+    (binary_expression
+      (identifier)
+      (number_literal))
+    then: (assignment_statement
+      left: (identifier)
+      operator: (assignment_operator)
+      right: (number_literal)))
+  (if_statement
+    (binary_expression
+      (identifier)
+      (number_literal))
+    then: (assignment_statement
+      left: (identifier)
+      operator: (assignment_operator)
+      right: (number_literal))))

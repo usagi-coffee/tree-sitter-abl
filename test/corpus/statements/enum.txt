@@ -1,0 +1,177 @@
+================================================================================
+ENUM statement
+================================================================================
+
+ENUM Weather:
+  define ENUM Rainy
+              Default = Sunny
+              Cloudy
+              Snowy
+              Apocalyptic.
+END ENUM.
+
+ENUM Permission FLAGS:
+    DEFINE ENUM None = 0
+                Read
+                Write
+                Update = Write
+                ReadWrite = Read,Write
+                Create
+                Delete
+                Execute.
+END ENUM.
+
+ENUM Direction:
+    DEFINE ENUM North
+                South
+                East
+                West.
+END ENUM.
+
+ENUM Status:
+  DEFINE ENUM New = 1
+              Open
+              Closed = Open
+              Archived = New,Closed.
+END ENUM.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (enum_statement
+    name: (identifier)
+    (member
+      name: (identifier))
+    (member
+      name: (identifier)
+      (identifier))
+    (member
+      name: (identifier))
+    (member
+      name: (identifier))
+    (member
+      name: (identifier)))
+  (enum_statement
+    name: (identifier)
+    (flags)
+    (member
+      name: (identifier)
+      (number_literal))
+    (member
+      name: (identifier))
+    (member
+      name: (identifier))
+    (member
+      name: (identifier)
+      (identifier))
+    (member
+      name: (identifier)
+      (identifier)
+      (identifier))
+    (member
+      name: (identifier))
+    (member
+      name: (identifier))
+    (member
+      name: (identifier)))
+  (enum_statement
+    name: (identifier)
+    (member
+      name: (identifier))
+    (member
+      name: (identifier))
+    (member
+      name: (identifier))
+    (member
+      name: (identifier)))
+  (enum_statement
+    name: (identifier)
+    (member
+      name: (identifier)
+      (number_literal))
+    (member
+      name: (identifier))
+    (member
+      name: (identifier)
+      (identifier))
+    (member
+      name: (identifier)
+      (identifier)
+      (identifier))))
+
+================================================================================
+ENUM - Reference snippets and split DEFINE ENUM
+================================================================================
+
+ENUM Direction:
+  DEFINE ENUM North
+  South.
+  DEFINE ENUM East
+  West.
+END ENUM.
+
+ENUM Permission FLAGS:
+  DEFINE ENUM None = 0
+  Read = 0x01
+  Write = 0x02
+  Update = 0x02
+  ReadWrite = 0x03
+  Create = 0x04
+  Delete = 0x08
+  Execute = 0x10.
+END ENUM.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (enum_statement
+    name: (identifier)
+    (member
+      name: (identifier))
+    (member
+      name: (identifier))
+    (member
+      name: (identifier))
+    (member
+      name: (identifier)))
+  (enum_statement
+    name: (identifier)
+    (flags)
+    (member
+      name: (identifier)
+      (number_literal))
+    (member
+      name: (identifier)
+      (number_literal))
+    (member
+      name: (identifier))
+    (member
+      name: (identifier)
+      (number_literal))
+    (member
+      name: (identifier))
+    (member
+      name: (identifier)
+      (number_literal))
+    (member
+      name: (identifier))
+    (member
+      name: (identifier)
+      (number_literal))
+    (member
+      name: (identifier))
+    (member
+      name: (identifier)
+      (number_literal))
+    (member
+      name: (identifier))
+    (member
+      name: (identifier)
+      (number_literal))
+    (member
+      name: (identifier))
+    (member
+      name: (identifier)
+      (number_literal))
+    (member
+      name: (identifier))))

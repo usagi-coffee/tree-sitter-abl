@@ -1,0 +1,122 @@
+===============================================================================
+PROMSGS statement
+===============================================================================
+
+PROMSGS = "C:/msgfile.dat".
+PROMSGS = cMsgFile.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (promsgs_statement
+    value: (string_literal))
+  (promsgs_statement
+    value: (identifier)))
+
+===============================================================================
+PROMSGS statement with different expression types
+===============================================================================
+
+PROMSGS = "promsgs".
+PROMSGS = cMsgBuffer.
+PROMSGS = cPath + "/" + cFile.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (promsgs_statement
+    value: (string_literal))
+  (promsgs_statement
+    value: (identifier))
+  (promsgs_statement
+    value: (binary_expression
+      (binary_expression
+        (identifier)
+        (string_literal))
+      (identifier))))
+
+===============================================================================
+PROMSGS - reference snippet
+===============================================================================
+
+DEFINE VARIABLE newlang AS CHARACTER NO-UNDO FORMAT "x(16)"
+LABEL "Language".
+DEFINE VARIABLE msgfile AS CHARACTER NO-UNDO.
+SET newlang HELP "Enter the new language for messages.".
+IF newlang = "English" THEN msgfile = "promsgs".
+ELSE msgfile = "prolang/promsgs." + LC(SUBSTRING(newlang, 1, 3)).
+IF SEARCH(msgfile) <> ? THEN DO:
+PROMSGS = msgfile.
+MESSAGE "Messages will now be taken from" PROMSGS.
+END.
+ELSE DO:
+MESSAGE "Cannot find" msgfile.
+UNDO, RETRY.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo)
+    (format_phrase
+      format: (string_literal))
+    label: (string_literal))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (set_statement
+    (field
+      field: (identifier)
+      (format_phrase
+        help: (string_literal))))
+  (if_statement
+    (binary_expression
+      (identifier)
+      (string_literal))
+    then: (assignment_statement
+      left: (identifier)
+      operator: (assignment_operator)
+      right: (string_literal))
+    else: (assignment_statement
+      left: (identifier)
+      operator: (assignment_operator)
+      right: (binary_expression
+        (string_literal)
+        (function_call
+          function: (identifier)
+          (arguments
+            (argument
+              name: (function_call
+                function: (identifier)
+                (arguments
+                  (argument
+                    name: (identifier))
+                  (argument
+                    name: (number_literal))
+                  (argument
+                    name: (number_literal))))))))))
+  (if_statement
+    (binary_expression
+      (function_call
+        function: (identifier)
+        (arguments
+          (argument
+            name: (identifier))))
+      (null_literal))
+    then: (do_statement
+      (body
+        (promsgs_statement
+          value: (identifier))
+        (message_statement
+          (string_literal)
+          (identifier))))
+    else: (do_statement
+      (body
+        (message_statement
+          (string_literal)
+          (identifier))
+        (undo_statement)))))

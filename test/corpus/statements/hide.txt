@@ -1,0 +1,145 @@
+================================================================================
+HIDE statement
+================================================================================
+
+HIDE.
+HIDE FRAME myframe.
+HIDE MESSAGE.
+HIDE ALL.
+HIDE ALL NO-PAUSE.
+HIDE STREAM s1.
+HIDE STREAM-HANDLE hS FRAME f1 NO-PAUSE.
+
+
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (hide_statement)
+  (hide_statement
+    (widget_phrase
+      frame: (identifier)))
+  (hide_statement
+    (message))
+  (hide_statement
+    (all))
+  (hide_statement
+    (all)
+    (no_pause))
+  (hide_statement
+    stream: (identifier))
+  (hide_statement
+    stream: (identifier)
+    (widget_phrase
+      frame: (identifier))
+    (no_pause)))
+
+================================================================================
+HIDE - Reference snippet
+================================================================================
+
+VIEW FRAME x.
+DISPLAY "This is frame A." WITH FRAME a ROW 1 COLUMN 60.
+DISPLAY "This is frame B." WITH FRAME b ROW 16 COLUMN 10 4 DOWN.
+MESSAGE "Make your selection!".
+UPDATE "Selection: " selection VALIDATE(0 < selection AND selection < 7,
+  "Invalid selection") AUTO-RETURN WITH FRAME x.
+IF selection = 1 THEN HIDE FRAME a.
+ELSE IF selection = 2 THEN HIDE FRAME b.
+ELSE IF selection = 3 THEN HIDE ALL.
+ELSE IF selection = 4 THEN HIDE FRAME x.
+
+HIDE MESSAGE.
+HIDE ALL NO-PAUSE IN WINDOW w1.
+
+
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (view_statement
+    (widget_phrase
+      frame: (identifier)))
+  (display_statement
+    (field
+      field: (string_literal))
+    (frame_phrase
+      frame: (identifier)
+      row: (number_literal)
+      column: (number_literal)))
+  (display_statement
+    (field
+      field: (string_literal))
+    (frame_phrase
+      frame: (identifier)
+      row: (number_literal)
+      column: (number_literal)
+      (down
+        value: (number_literal))))
+  (message_statement
+    (string_literal))
+  (update_statement
+    (field
+      constant: (string_literal))
+    (field
+      field: (identifier)
+      (format_phrase
+        condition: (binary_expression
+          (binary_expression
+            (number_literal)
+            (identifier))
+          (binary_expression
+            (identifier)
+            (number_literal)))
+        message: (string_literal)))
+    (frame_phrase
+      frame: (identifier)))
+  (if_statement
+    (binary_expression
+      (identifier)
+      (number_literal))
+    then: (hide_statement
+      (widget_phrase
+        frame: (identifier)))
+    else: (if_statement
+      (binary_expression
+        (identifier)
+        (number_literal))
+      then: (hide_statement
+        (widget_phrase
+          frame: (identifier)))
+      else: (if_statement
+        (binary_expression
+          (identifier)
+          (number_literal))
+        then: (hide_statement
+          (all))
+        else: (if_statement
+          (binary_expression
+            (identifier)
+            (number_literal))
+          then: (hide_statement
+            (widget_phrase
+              frame: (identifier)))))))
+  (hide_statement
+    (message))
+  (hide_statement
+    (all)
+    (no_pause)
+    (in_window_phrase
+      window: (identifier))))
+
+================================================================================
+HIDE - several widgets
+================================================================================
+
+HIDE FRAME f1 FRAME f2.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (hide_statement
+    (widget_phrase
+      frame: (identifier))
+    (widget_phrase
+      frame: (identifier))))

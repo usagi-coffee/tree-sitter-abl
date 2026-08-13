@@ -1,0 +1,363 @@
+================================================================================
+WAIT-FOR
+================================================================================
+
+WAIT-FOR READ-RESPONSE OF hSocket PAUSE 1.
+WAIT-FOR WINDOW-CLOSE OF CURRENT-WINDOW OR READ-RESPONSE OF hSocket FOCUS hSocket PAUSE 5.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (wait_for_statement
+    (of_phrase
+      events: (identifier)
+      widgets: (widget_phrase
+        handle: (identifier)))
+    (pause_phrase
+      duration: (number_literal)))
+  (wait_for_statement
+    (of_phrase
+      events: (identifier)
+      widgets: (widget_phrase
+        system_handle: (system_handle)))
+    (of_phrase
+      events: (identifier)
+      widgets: (widget_phrase
+        handle: (identifier)))
+    (focus_phrase
+      focus: (widget_phrase
+        handle: (identifier)))
+    (pause_phrase
+      duration: (number_literal))))
+
+================================================================================
+WAIT-FOR with string event and focus/pause
+================================================================================
+
+WAIT-FOR WINDOW-CLOSE OF CURRENT-WINDOW OR "F6" OF b1 FOCUS b1 PAUSE 60.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (wait_for_statement
+    (of_phrase
+      events: (identifier)
+      widgets: (widget_phrase
+        system_handle: (system_handle)))
+    (of_phrase
+      events: (string_literal)
+      widgets: (widget_phrase
+        handle: (identifier)))
+    (focus_phrase
+      focus: (widget_phrase
+        handle: (identifier)))
+    (pause_phrase
+      duration: (number_literal))))
+
+================================================================================
+WAIT-FOR - reference snippets
+================================================================================
+
+DEFINE BUTTON more-button LABEL "MORE".
+DEFINE BUTTON next-button LABEL "NEXT".
+FORM Customer.CustNum Customer.Name more-button next-button
+WITH FRAME brief.
+FORM Customer EXCEPT Customer.CustNum Customer.Name
+WITH FRAME full.
+ON CHOOSE OF more-button
+DISPLAY Customer EXCEPT Customer.CustNum Customer.Name WITH FRAME full.
+ON CHOOSE OF next-button DO:
+HIDE FRAME full.
+FIND NEXT Customer NO-LOCK NO-ERROR.
+IF AVAILABLE Customer THEN
+DISPLAY Customer.CustNum Customer.Name WITH FRAME brief.
+END.
+FIND FIRST Customer NO-LOCK.
+DISPLAY Customer.CustNum Customer.Name WITH FRAME brief.
+ENABLE more-button next-button WITH FRAME brief.
+WAIT-FOR WINDOW-CLOSE OF CURRENT-WINDOW FOCUS more-button.
+
+DEFINE VARIABLE jump-ahead AS LOGICAL NO-UNDO INITIAL TRUE.
+DEFINE BUTTON more-button LABEL "MORE".
+DEFINE BUTTON next-button LABEL "NEXT".
+FORM Customer.CustNum Customer.Name more-button next-button
+WITH FRAME brief.
+FORM Customer EXCEPT Customer.CustNum Customer.Name
+WITH FRAME full.
+ON CHOOSE OF more-button DO:
+DISPLAY Customer EXCEPT Customer.CustNum Customer.Name WITH FRAME full.
+jump-ahead = FALSE.
+END.
+ON CHOOSE OF next-button DO:
+jump-ahead = TRUE.
+END.
+ON WINDOW-CLOSE OF CURRENT-WINDOW DO:
+QUIT.
+END.
+ENABLE more-button next-button WITH FRAME brief.
+DO WHILE TRUE:
+IF jump-ahead THEN
+RUN next-cust.
+WAIT-FOR WINDOW-CLOSE OF CURRENT-WINDOW OR CHOOSE OF next-button
+FOCUS more-button PAUSE 3.
+END.
+PROCEDURE next-cust:
+HIDE FRAME full.
+FIND NEXT Customer NO-ERROR.
+IF AVAILABLE Customer THEN
+DISPLAY Customer.CustNum Customer.Name WITH FRAME brief.
+END.
+
+WAIT-FOR PROCEDURE-COMPLETE OF hRequest.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (button_definition
+    name: (identifier)
+    label: (string_literal))
+  (button_definition
+    name: (identifier)
+    label: (string_literal))
+  (form_statement
+    (form_item
+      field: (qualified_name
+        left: (identifier)
+        right: (identifier)))
+    (form_item
+      field: (qualified_name
+        left: (identifier)
+        right: (identifier)))
+    (form_item
+      field: (identifier))
+    (form_item
+      field: (identifier))
+    (frame_phrase
+      frame: (identifier)))
+  (form_statement
+    (form_item
+      field: (identifier))
+    (form_item
+      field: (identifier))
+    (form_item
+      field: (qualified_name
+        left: (identifier)
+        right: (identifier)))
+    (form_item
+      field: (qualified_name
+        left: (identifier)
+        right: (identifier)))
+    (frame_phrase
+      frame: (identifier)))
+  (on_statement
+    event: (identifier)
+    (of_phrase
+      widget: (widget_phrase
+        handle: (identifier)))
+    (display_statement
+      record: (identifier)
+      except: (qualified_name
+        left: (identifier)
+        right: (identifier))
+      except: (qualified_name
+        left: (identifier)
+        right: (identifier))
+      (frame_phrase
+        frame: (identifier))))
+  (on_statement
+    event: (identifier)
+    (of_phrase
+      widget: (widget_phrase
+        handle: (identifier)))
+    (do_statement
+      (body
+        (hide_statement
+          (widget_phrase
+            frame: (identifier)))
+        (find_statement
+          (next)
+          table: (identifier)
+          (no_lock)
+          (no_error))
+        (if_statement
+          (available_expression
+            record: (identifier))
+          then: (display_statement
+            (field
+              field: (qualified_name
+                left: (identifier)
+                right: (identifier)))
+            (field
+              field: (qualified_name
+                left: (identifier)
+                right: (identifier)))
+            (frame_phrase
+              frame: (identifier)))))))
+  (find_statement
+    (first)
+    table: (identifier)
+    (no_lock))
+  (display_statement
+    (field
+      field: (qualified_name
+        left: (identifier)
+        right: (identifier)))
+    (field
+      field: (qualified_name
+        left: (identifier)
+        right: (identifier)))
+    (frame_phrase
+      frame: (identifier)))
+  (enable_statement
+    (enable_item
+      field: (identifier))
+    (enable_item
+      field: (identifier))
+    (frame_phrase
+      frame: (identifier)))
+  (wait_for_statement
+    (of_phrase
+      events: (identifier)
+      widgets: (widget_phrase
+        system_handle: (system_handle)))
+    (focus_phrase
+      focus: (widget_phrase
+        handle: (identifier))))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo)
+    initial: (boolean_literal))
+  (button_definition
+    name: (identifier)
+    label: (string_literal))
+  (button_definition
+    name: (identifier)
+    label: (string_literal))
+  (form_statement
+    (form_item
+      field: (qualified_name
+        left: (identifier)
+        right: (identifier)))
+    (form_item
+      field: (qualified_name
+        left: (identifier)
+        right: (identifier)))
+    (form_item
+      field: (identifier))
+    (form_item
+      field: (identifier))
+    (frame_phrase
+      frame: (identifier)))
+  (form_statement
+    (form_item
+      field: (identifier))
+    (form_item
+      field: (identifier))
+    (form_item
+      field: (qualified_name
+        left: (identifier)
+        right: (identifier)))
+    (form_item
+      field: (qualified_name
+        left: (identifier)
+        right: (identifier)))
+    (frame_phrase
+      frame: (identifier)))
+  (on_statement
+    event: (identifier)
+    (of_phrase
+      widget: (widget_phrase
+        handle: (identifier)))
+    (do_statement
+      (body
+        (display_statement
+          record: (identifier)
+          except: (qualified_name
+            left: (identifier)
+            right: (identifier))
+          except: (qualified_name
+            left: (identifier)
+            right: (identifier))
+          (frame_phrase
+            frame: (identifier)))
+        (assignment_statement
+          left: (identifier)
+          operator: (assignment_operator)
+          right: (boolean_literal)))))
+  (on_statement
+    event: (identifier)
+    (of_phrase
+      widget: (widget_phrase
+        handle: (identifier)))
+    (do_statement
+      (body
+        (assignment_statement
+          left: (identifier)
+          operator: (assignment_operator)
+          right: (boolean_literal)))))
+  (on_statement
+    event: (identifier)
+    (of_phrase
+      widget: (widget_phrase
+        system_handle: (system_handle)))
+    (do_statement
+      (body
+        (quit_statement))))
+  (enable_statement
+    (enable_item
+      field: (identifier))
+    (enable_item
+      field: (identifier))
+    (frame_phrase
+      frame: (identifier)))
+  (do_statement
+    condition: (boolean_literal)
+    (body
+      (if_statement
+        (identifier)
+        then: (run_statement
+          procedure: (identifier)))
+      (wait_for_statement
+        (of_phrase
+          events: (identifier)
+          widgets: (widget_phrase
+            system_handle: (system_handle)))
+        (of_phrase
+          events: (identifier)
+          widgets: (widget_phrase
+            handle: (identifier)))
+        (focus_phrase
+          focus: (widget_phrase
+            handle: (identifier)))
+        (pause_phrase
+          duration: (number_literal)))))
+  (procedure_definition
+    name: (identifier)
+    (body
+      (hide_statement
+        (widget_phrase
+          frame: (identifier)))
+      (find_statement
+        (next)
+        table: (identifier)
+        (no_error))
+      (if_statement
+        (available_expression
+          record: (identifier))
+        then: (display_statement
+          (field
+            field: (qualified_name
+              left: (identifier)
+              right: (identifier)))
+          (field
+            field: (qualified_name
+              left: (identifier)
+              right: (identifier)))
+          (frame_phrase
+            frame: (identifier))))))
+  (wait_for_statement
+    (of_phrase
+      events: (identifier)
+      widgets: (widget_phrase
+        handle: (identifier)))))

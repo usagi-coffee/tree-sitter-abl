@@ -1,0 +1,135 @@
+================================================================================
+INSERT
+================================================================================
+
+INSERT Customer.
+INSERT db.Customer.
+INSERT Customer EXCEPT field1.
+INSERT Customer EXCEPT field1 field2.
+INSERT Customer USING alternate.
+INSERT Customer EXCEPT field1 USING alternate.
+INSERT Customer WITH FRAME f1.
+INSERT Customer NO-ERROR.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (insert_statement
+    record: (identifier))
+  (insert_statement
+    record: (qualified_name
+      left: (identifier)
+      right: (identifier)))
+  (insert_statement
+    record: (identifier)
+    except: (identifier))
+  (insert_statement
+    record: (identifier)
+    except: (identifier)
+    except: (identifier))
+  (insert_statement
+    record: (identifier)
+    using: (identifier))
+  (insert_statement
+    record: (identifier)
+    except: (identifier)
+    using: (identifier))
+  (insert_statement
+    record: (identifier)
+    (frame_phrase
+      frame: (identifier)))
+  (insert_statement
+    record: (identifier)
+    (no_error)))
+
+================================================================================
+INSERT - Reference snippet
+================================================================================
+
+INSERT Order WITH 1 COLUMN.
+REPEAT:
+  CREATE OrderLine.
+  OrderLine.OrderNum = Order.OrderNum.
+  UPDATE OrderLine.LineNum OrderLine.ItemNum OrderLine.Qty
+    OrderLine.Price.
+  FIND Item OF OrderLine.
+END.
+END.
+
+INSERT Customer USING ROWID(1).
+INSERT Customer USING RECID(2) NO-ERROR.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (insert_statement
+    record: (identifier)
+    (frame_phrase
+      column: (number_literal)))
+  (repeat_statement
+    (body
+      (create_statement
+        table: (identifier))
+      (assignment_statement
+        left: (qualified_name
+          left: (identifier)
+          right: (identifier))
+        operator: (assignment_operator)
+        right: (qualified_name
+          left: (identifier)
+          right: (identifier)))
+      (update_statement
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier))))
+      (find_statement
+        table: (identifier)
+        (of_phrase
+          record: (identifier)))))
+  (expression_statement
+    (identifier))
+  (insert_statement
+    record: (identifier)
+    using: (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (number_literal)))))
+  (insert_statement
+    record: (identifier)
+    using: (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (number_literal))))
+    (no_error)))
+
+================================================================================
+INSERT - all ordered options
+================================================================================
+
+INSERT Customer EXCEPT field1 USING alternate WITH FRAME f1 NO-ERROR.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (insert_statement
+    record: (identifier)
+    except: (identifier)
+    using: (identifier)
+    (frame_phrase
+      frame: (identifier))
+    (no_error)))

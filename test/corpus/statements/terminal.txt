@@ -1,0 +1,88 @@
+===============================================================================
+TERMINAL statement
+===============================================================================
+
+TERMINAL = "vt100".
+TERMINAL = cTermType.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (terminal_statement
+    terminal: (string_literal))
+  (terminal_statement
+    terminal: (identifier)))
+
+===============================================================================
+TERMINAL statement with various expression types
+===============================================================================
+
+TERMINAL = "vt100".
+TERMINAL = cTermType.
+TERMINAL = "ansi".
+TERMINAL = "monochrome".
+TERMINAL = "CO80".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (terminal_statement
+    terminal: (string_literal))
+  (terminal_statement
+    terminal: (identifier))
+  (terminal_statement
+    terminal: (string_literal))
+  (terminal_statement
+    terminal: (string_literal))
+  (terminal_statement
+    terminal: (string_literal)))
+
+===============================================================================
+TERMINAL - reference snippet
+===============================================================================
+
+FOR EACH Customer NO-LOCK:
+DISPLAY Customer.
+END.
+TERMINAL = "wy60w".
+OUTPUT TO TERMINAL PAGED.
+FOR EACH Customer NO-LOCK:
+DISPLAY Customer WITH WIDTH 132.
+END.
+OUTPUT CLOSE.
+TERMINAL = "wy60".
+DISPLAY "Back to 80 columns." WITH CENTERED.
+
+-------------------------------------------------------------------------------
+
+(source_code
+  (for_statement
+    (record_phrase
+      record: (identifier)
+      (no_lock))
+    (body
+      (display_statement
+        record: (identifier))))
+  (terminal_statement
+    terminal: (string_literal))
+  (output_statement
+    (terminal)
+    (paged))
+  (for_statement
+    (record_phrase
+      record: (identifier)
+      (no_lock))
+    (body
+      (display_statement
+        record: (identifier)
+        (frame_phrase
+          width: (number_literal)))))
+  (output_statement
+    (close))
+  (terminal_statement
+    terminal: (string_literal))
+  (display_statement
+    (field
+      field: (string_literal))
+    (frame_phrase
+      (centered))))

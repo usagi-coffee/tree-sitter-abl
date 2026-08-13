@@ -1,0 +1,41 @@
+================================================================================
+DICTIONARY statement
+================================================================================
+
+DICTIONARY.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (dictionary_statement))
+
+================================================================================
+DICTIONARY - reference snippet
+================================================================================
+
+DEFINE VARIABLE ans AS LOGICAL NO-UNDO.
+DISPLAY "Do you want to access the Dictionary?"
+WITH ROW 7 COLUMN 20 NO-LABELS.
+UPDATE ans.
+IF ans THEN DICTIONARY.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (display_statement
+    (field
+      field: (string_literal))
+    (frame_phrase
+      row: (number_literal)
+      column: (number_literal)
+      (no_labels)))
+  (update_statement
+    (field
+      field: (identifier)))
+  (if_statement
+    (identifier)
+    then: (dictionary_statement)))

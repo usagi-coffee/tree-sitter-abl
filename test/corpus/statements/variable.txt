@@ -1,0 +1,968 @@
+================================================================================
+VARIABLE DEFINITION - Basic Types
+================================================================================
+
+DEFINE VARIABLE count& AS INTEGER.
+DEF VAR foo AS Some.Type NO-UNDO.
+DEFINE VARIABLE list AS List<INTEGER>.
+DEFINE VARIABLE cName AS CHARACTER EXTENT 4 INITIAL ["a","b","c","d"].
+DEFINE NEW GLOBAL SHARED VARIABLE gValue AS INTEGER NO-UNDO.
+DEFINE PRIVATE STATIC SERIALIZABLE VARIABLE cust AS CLASS Customer NO-UNDO.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    name: (identifier)
+    type: (identifier))
+  (variable_definition
+    name: (identifier)
+    type: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (no_undo))
+  (variable_definition
+    name: (identifier)
+    type: (generic_type
+      (identifier)
+      (identifier)))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (extent_phrase
+      size: (number_literal))
+    initial: (string_literal)
+    initial: (string_literal)
+    initial: (string_literal)
+    initial: (string_literal))
+  (variable_definition
+    (new_modifier)
+    (scope_modifier)
+    (scope_modifier)
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (variable_definition
+    (access_modifier)
+    (static_modifier)
+    (serialization_modifier)
+    name: (identifier)
+    type: (identifier)
+    (no_undo)))
+
+================================================================================
+VARIABLE DEFINITION - Identifier with percent (legacy naming)
+================================================================================
+
+DEFINE VARIABLE P%RowId AS ROWID NO-UNDO.
+DEFINE VARIABLE P%Rate  AS DECIMAL DECIMALS 8 NO-UNDO.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    decimals: (number_literal)
+    (no_undo)))
+
+================================================================================
+VARIABLE DEFINITION - LIKE and Display Options
+================================================================================
+
+DEFINE VARIABLE likeVar LIKE Customer.Name LABEL "Name" COLUMN-LABEL "Cust Name" FORMAT "x(20)".
+DEFINE VARIABLE flags AS LOGICAL NOT CASE-SENSITIVE.
+DEFINE VARIABLE fillIn AS CHARACTER DROP-TARGET.
+DEFINE VARIABLE cSer AS CHARACTER SERIALIZE-NAME "ser-name".
+DEFINE VARIABLE cView AS CHARACTER VIEW-AS FILL-IN.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    name: (identifier)
+    like: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    label: (string_literal)
+    label: (string_literal)
+    (format_phrase
+      format: (string_literal)))
+  (variable_definition
+    name: (identifier)
+    type: (identifier))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (drop_target))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    serialize_name: (string_literal))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (view_as_phrase)))
+
+================================================================================
+VARIABLE DEFINITION - Color and Visual Options
+================================================================================
+
+DEFINE VARIABLE v1 AS CHARACTER BGCOLOR 15 FGCOLOR 1.
+DEFINE VARIABLE v2 AS DECIMAL DCOLOR 7 PFCOLOR 8.
+DEFINE VARIABLE v3 AS INTEGER FONT 2 MOUSE-POINTER 15.
+DEFINE VARIABLE v4 AS CHARACTER CONTEXT-HELP-ID 123.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    bgcolor: (number_literal)
+    fgcolor: (number_literal))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    dcolor: (number_literal)
+    pfcolor: (number_literal))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    font: (number_literal)
+    mouse_pointer: (number_literal))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    context_help_id: (number_literal)))
+
+================================================================================
+VARIABLE DEFINITION - DECIMALS Option
+================================================================================
+
+DEFINE VARIABLE price AS DECIMAL DECIMALS 2 NO-UNDO.
+DEFINE VARIABLE rate AS DECIMAL DECIMALS 4 INITIAL 0.0525.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    decimals: (number_literal)
+    (no_undo))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    decimals: (number_literal)
+    initial: (number_literal)))
+
+================================================================================
+VARIABLE DEFINITION - EXTENT Variations
+================================================================================
+
+DEFINE VARIABLE arr1 AS INTEGER EXTENT.
+DEFINE VARIABLE arr2 AS CHARACTER EXTENT 10 NO-UNDO.
+DEFINE VARIABLE arr3 AS DECIMAL EXTENT {&MAX_SIZE}.
+DEFINE VARIABLE arr4 EXTENT 7 LIKE ad_name NO-UNDO.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (extent_phrase))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (extent_phrase
+      size: (number_literal))
+    (no_undo))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (extent_phrase
+      size: (preprocessor_name
+        (identifier))))
+  (variable_definition
+    name: (identifier)
+    (extent_phrase
+      size: (number_literal))
+    like: (identifier)
+    (no_undo)))
+
+================================================================================
+VARIABLE DEFINITION - INITIAL with Different Types
+================================================================================
+
+DEFINE VARIABLE iNum AS INTEGER INITIAL 100.
+DEFINE VARIABLE dNum AS DECIMAL INITIAL 99.99.
+DEFINE VARIABLE cStr AS CHARACTER INITIAL "test".
+DEFINE VARIABLE lFlag AS LOGICAL INITIAL TRUE.
+DEFINE VARIABLE dtDate AS DATE INITIAL TODAY.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    initial: (number_literal))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    initial: (number_literal))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    initial: (string_literal))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    initial: (boolean_literal))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    initial: (identifier)))
+
+================================================================================
+VARIABLE DEFINITION - Shared Variations
+================================================================================
+
+DEFINE NEW SHARED VARIABLE v1 AS INTEGER NO-UNDO.
+DEFINE NEW GLOBAL SHARED VARIABLE v2 AS CHARACTER NO-UNDO.
+DEFINE SHARED VARIABLE v3 AS LOGICAL NO-UNDO.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    (new_modifier)
+    (scope_modifier)
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (variable_definition
+    (new_modifier)
+    (scope_modifier)
+    (scope_modifier)
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (variable_definition
+    (scope_modifier)
+    name: (identifier)
+    type: (identifier)
+    (no_undo)))
+
+================================================================================
+VARIABLE DEFINITION - Access Modifiers
+================================================================================
+
+DEFINE PRIVATE VARIABLE v1 AS INTEGER NO-UNDO.
+DEFINE PROTECTED VARIABLE v2 AS CHARACTER NO-UNDO.
+DEFINE PUBLIC VARIABLE v3 AS LOGICAL NO-UNDO.
+DEFINE PACKAGE-PRIVATE VARIABLE v4 AS DECIMAL NO-UNDO.
+DEFINE PACKAGE-PROTECTED VARIABLE v5 AS INTEGER NO-UNDO.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    (access_modifier)
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (variable_definition
+    (access_modifier)
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (variable_definition
+    (access_modifier)
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (variable_definition
+    (access_modifier)
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (variable_definition
+    (access_modifier)
+    name: (identifier)
+    type: (identifier)
+    (no_undo)))
+
+================================================================================
+VARIABLE DEFINITION - Serialization Modifiers
+================================================================================
+
+DEFINE PUBLIC SERIALIZABLE VARIABLE v1 AS INTEGER NO-UNDO.
+DEFINE PRIVATE NON-SERIALIZABLE VARIABLE v2 AS CHARACTER NO-UNDO.
+DEFINE PROTECTED STATIC SERIALIZABLE VARIABLE v3 AS LOGICAL NO-UNDO.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    (access_modifier)
+    (serialization_modifier)
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (variable_definition
+    (access_modifier)
+    (serialization_modifier)
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (variable_definition
+    (access_modifier)
+    (static_modifier)
+    (serialization_modifier)
+    name: (identifier)
+    type: (identifier)
+    (no_undo)))
+
+================================================================================
+VARIABLE DEFINITION - Primitive Types
+================================================================================
+
+DEFINE VARIABLE v1 AS CHARACTER NO-UNDO.
+DEFINE VARIABLE v2 AS COM-HANDLE NO-UNDO.
+DEFINE VARIABLE v3 AS DATE NO-UNDO.
+DEFINE VARIABLE v4 AS DATETIME NO-UNDO.
+DEFINE VARIABLE v5 AS DATETIME-TZ NO-UNDO.
+DEFINE VARIABLE v6 AS DECIMAL NO-UNDO.
+DEFINE VARIABLE v7 AS HANDLE NO-UNDO.
+DEFINE VARIABLE v8 AS INT64 NO-UNDO.
+DEFINE VARIABLE v9 AS INTEGER NO-UNDO.
+DEFINE VARIABLE v10 AS LOGICAL NO-UNDO.
+DEFINE VARIABLE v11 AS LONGCHAR NO-UNDO.
+DEFINE VARIABLE v12 AS MEMPTR NO-UNDO.
+DEFINE VARIABLE v13 AS RAW NO-UNDO.
+DEFINE VARIABLE v14 AS RECID NO-UNDO.
+DEFINE VARIABLE v15 AS ROWID NO-UNDO.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo)))
+
+================================================================================
+VARIABLE DEFINITION - Trigger Phrase
+================================================================================
+
+DEFINE VARIABLE vTrigger AS CHARACTER ON trigger1.
+DEFINE VARIABLE vEvent AS INTEGER ON clickHandler NO-UNDO.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (trigger_phrase
+      (identifier)))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (trigger_phrase
+      (identifier))
+    (no_undo)))
+
+================================================================================
+VARIABLE DEFINITION - reference snippets 1
+================================================================================
+
+DEFINE NEW SHARED VARIABLE del AS LOGICAL NO-UNDO.
+DEFINE NEW SHARED VARIABLE nrecs AS INTEGER NO-UNDO.
+MESSAGE "Do you want to delete the orders being printed (y/n)?" UPDATE del.
+RUN r-dfvar2.p.
+IF del THEN
+MESSAGE nrecs "orders have been shipped and were deleted".
+ELSE
+MESSAGE nrecs "orders have been shipped".
+
+DEFINE SHARED VARIABLE del AS LOGICAL NO-UNDO.
+DEFINE SHARED VARIABLE nrecs AS INTEGER NO-UNDO.
+OUTPUT TO PRINTER.
+FOR EACH Order WHERE Order.ShipDate <> ?:
+nrecs = nrecs + 1.
+FOR EACH OrderLine OF Order:
+DISPLAY OrderLine.OrderNum OrderLine.LineNum OrderLine.Qty
+OrderLine.Price.
+IF del THEN DELETE OrderLine.
+END.
+IF del THEN DELETE Order.
+END.
+OUTPUT CLOSE.
+
+DEFINE NEW GLOBAL SHARED VARIABLE first-time AS LOGICAL NO-UNDO INITIAL TRUE.
+DEFINE VARIABLE selection AS INTEGER NO-UNDO FORMAT "9" LABEL "Selection".
+IF first-time THEN DO:
+RUN r-init.p.
+first-time = FALSE.
+END.
+FORM
+"
+MAIN MENU
+" SKIP(1)
+"1 - Accounts Payable
+" SKIP
+"2 - Accounts Receivable"
+WITH CENTERED ROW 5 FRAME menu.
+REPEAT:
+VIEW FRAME menu.
+UPDATE selection AUTO-RETURN WITH FRAME sel CENTERED ROW 12 SIDE-LABELS.
+IF selection = 1 THEN DO:
+HIDE FRAME menu.
+HIDE FRAME sel.
+RUN apmenu.p.
+END.
+ELSE IF selection = 2 THEN DO:
+HIDE FRAME menu.
+HIDE FRAME sel.
+RUN armenu.p.
+END.
+ELSE DO:
+MESSAGE "Invalid selection. Try again".
+UNDO, RETRY.
+END.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    (new_modifier)
+    (scope_modifier)
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (variable_definition
+    (new_modifier)
+    (scope_modifier)
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (message_statement
+    (string_literal)
+    (set_update_phrase
+      field: (identifier)))
+  (run_statement
+    procedure: (procedure_name))
+  (if_statement
+    (identifier)
+    then: (message_statement
+      (identifier)
+      (string_literal))
+    else: (message_statement
+      (identifier)
+      (string_literal)))
+  (variable_definition
+    (scope_modifier)
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (variable_definition
+    (scope_modifier)
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (output_statement)
+  (for_statement
+    (record_phrase
+      record: (identifier)
+      where: (binary_expression
+        (qualified_name
+          left: (identifier)
+          right: (identifier))
+        (null_literal)))
+    (body
+      (assignment_statement
+        left: (identifier)
+        operator: (assignment_operator)
+        right: (binary_expression
+          (identifier)
+          (number_literal)))
+      (for_statement
+        (record_phrase
+          record: (identifier)
+          of: (identifier))
+        (body
+          (display_statement
+            (field
+              field: (qualified_name
+                left: (identifier)
+                right: (identifier)))
+            (field
+              field: (qualified_name
+                left: (identifier)
+                right: (identifier)))
+            (field
+              field: (qualified_name
+                left: (identifier)
+                right: (identifier)))
+            (field
+              field: (qualified_name
+                left: (identifier)
+                right: (identifier))))
+          (if_statement
+            (identifier)
+            then: (delete_statement
+              record: (identifier)))))
+      (if_statement
+        (identifier)
+        then: (delete_statement
+          record: (identifier)))))
+  (output_statement
+    (close))
+  (variable_definition
+    (new_modifier)
+    (scope_modifier)
+    (scope_modifier)
+    name: (identifier)
+    type: (identifier)
+    (no_undo)
+    initial: (boolean_literal))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo)
+    (format_phrase
+      format: (string_literal))
+    label: (string_literal))
+  (if_statement
+    (identifier)
+    then: (do_statement
+      (body
+        (run_statement
+          procedure: (procedure_name))
+        (assignment_statement
+          left: (identifier)
+          operator: (assignment_operator)
+          right: (boolean_literal)))))
+  (form_statement
+    (form_item
+      field: (string_literal))
+    (form_item
+      skip: (number_literal))
+    (form_item
+      field: (string_literal))
+    (form_item)
+    (form_item
+      field: (string_literal))
+    (frame_phrase
+      (centered)
+      row: (number_literal)
+      frame: (identifier)))
+  (repeat_statement
+    (body
+      (view_statement
+        (widget_phrase
+          frame: (identifier)))
+      (update_statement
+        (field
+          field: (identifier)
+          (format_phrase))
+        (frame_phrase
+          frame: (identifier)
+          (centered)
+          row: (number_literal)
+          (side_labels)))
+      (if_statement
+        (binary_expression
+          (identifier)
+          (number_literal))
+        then: (do_statement
+          (body
+            (hide_statement
+              (widget_phrase
+                frame: (identifier)))
+            (hide_statement
+              (widget_phrase
+                frame: (identifier)))
+            (run_statement
+              procedure: (procedure_name))))
+        else: (if_statement
+          (binary_expression
+            (identifier)
+            (number_literal))
+          then: (do_statement
+            (body
+              (hide_statement
+                (widget_phrase
+                  frame: (identifier)))
+              (hide_statement
+                (widget_phrase
+                  frame: (identifier)))
+              (run_statement
+                procedure: (procedure_name))))
+          else: (do_statement
+            (body
+              (message_statement
+                (string_literal))
+              (undo_statement))))))))
+
+================================================================================
+VARIABLE DEFINITION - reference snippets 2
+================================================================================
+
+DEFINE VARIABLE dow AS CHARACTER NO-UNDO FORMAT "x(9)" EXTENT 7
+INITIAL ["Sunday", "Monday", "Tuesday", "Wednesday",
+"Thursday", "Friday", "Saturday"].
+DEFINE VARIABLE dob AS DATE NO-UNDO INITIAL TODAY.
+REPEAT WITH SIDE-LABELS 1 DOWN CENTERED ROW 10 TITLE "Date of Birth":
+DISPLAY SKIP(1).
+UPDATE dob LABEL "Enter date of birth".
+DISPLAY dow[WEEKDAY(dob)] LABEL "It was a".
+END.
+
+DEFINE VARIABLE ix AS INTEGER NO-UNDO.
+DEFINE VARIABLE clubs AS CHARACTER NO-UNDO
+VIEW-AS SELECTION-LIST SIZE 20 BY 5 MULTIPLE SCROLLBAR-VERTICAL NO-DRAG
+LIST-ITEMS "One Iron", "Two Iron", "Three Iron", "Four Iron",
+"Five Iron", "Six Iron", "Seven Iron", "Eight Iron",
+"Nine Iron", "Pitching Wedge"
+LABEL "Golf Clubs Available"
+TRIGGERS:
+ON GO DO:
+IF SELF:SCREEN-VALUE <> "" THEN
+DO ix = 1 TO NUM-ENTRIES(SELF:SCREEN-VALUE) :
+DISPLAY ENTRY(ix, SELF:SCREEN-VALUE) FORMAT "X(16)"
+WITH FRAME clubs-sel CENTERED
+NUM-ENTRIES(SELF:SCREEN-VALUE) + 1 DOWN
+TITLE "Clubs Selected" USE-TEXT.
+DOWN 1 WITH FRAME clubs-sel.
+END.
+END.
+END TRIGGERS.
+ENABLE clubs WITH FRAME get-info TITLE "Select the Desired Club(s)".
+WAIT-FOR WINDOW-CLOSE OF CURRENT-WINDOW.
+
+DEFINE VARIABLE credit-percent AS INTEGER NO-UNDO
+COLUMN-LABEL "Enter
+!percentage!increase ".
+
+FOR EACH Customer:
+  DISPLAY Customer.Name Customer.CreditLimit.
+  SET credit-percent.
+  Customer.CreditLimit = (Customer.CreditLimit * (credit-percent / 100)) + Customer.CreditLimit.
+
+  DISPLAY Customer.CreditLimit @ new-credit LIKE Customer.CreditLimit
+    LABEL "New max cred".
+END.
+
+-----------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo)
+    (format_phrase
+      format: (string_literal))
+    (extent_phrase
+      size: (number_literal))
+    initial: (string_literal)
+    initial: (string_literal)
+    initial: (string_literal)
+    initial: (string_literal)
+    initial: (string_literal)
+    initial: (string_literal)
+    initial: (string_literal))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo)
+    initial: (identifier))
+  (repeat_statement
+    (frame_phrase
+      (side_labels)
+      (down
+        value: (number_literal))
+      (centered)
+      row: (number_literal)
+      title: (string_literal))
+    (body
+      (display_statement
+        (field
+          field: (parenthesized_expression
+            (number_literal))))
+      (update_statement
+        (field
+          field: (identifier)
+          (format_phrase
+            label: (string_literal))))
+      (display_statement
+        (field
+          field: (array_access
+            array: (identifier)
+            index: (function_call
+              function: (identifier)
+              (arguments
+                (argument
+                  name: (identifier))))))
+        (format_phrase
+          label: (string_literal)))))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo)
+    (view_as_phrase
+      (selection_list_phrase
+        (size_phrase
+          width: (number_literal)
+          height: (number_literal))
+        items: (string_literal)
+        items: (string_literal)
+        items: (string_literal)
+        items: (string_literal)
+        items: (string_literal)
+        items: (string_literal)
+        items: (string_literal)
+        items: (string_literal)
+        items: (string_literal)
+        items: (string_literal)))
+    label: (string_literal)
+    (trigger_phrase
+      event: (identifier)
+      (trigger_body
+        (if_statement
+          (binary_expression
+            (object_access
+              left: (identifier)
+              right: (identifier))
+            (string_literal))
+          then: (do_statement
+            variable: (identifier)
+            start: (number_literal)
+            end: (function_call
+              function: (identifier)
+              (arguments
+                (argument
+                  name: (object_access
+                    left: (identifier)
+                    right: (identifier)))))
+            (body
+              (display_statement
+                (field
+                  field: (function_call
+                    function: (identifier)
+                    (arguments
+                      (argument
+                        name: (identifier))
+                      (argument
+                        name: (object_access
+                          left: (identifier)
+                          right: (identifier))))))
+                (format_phrase
+                  format: (string_literal))
+                (frame_phrase
+                  frame: (identifier)
+                  (centered)
+                  (down
+                    value: (binary_expression
+                      (function_call
+                        function: (identifier)
+                        (arguments
+                          (argument
+                            name: (object_access
+                              left: (identifier)
+                              right: (identifier)))))
+                      (number_literal)))
+                  title: (string_literal)
+                  (use_text)))
+              (down_statement
+                count: (number_literal)
+                (frame_phrase
+                  frame: (identifier)))))))))
+  (enable_statement
+    (enable_item
+      field: (identifier))
+    (frame_phrase
+      frame: (identifier)
+      title: (string_literal)))
+  (wait_for_statement
+    (of_phrase
+      events: (identifier)
+      widgets: (widget_phrase
+        system_handle: (system_handle))))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo)
+    label: (string_literal))
+  (for_statement
+    (record_phrase
+      record: (identifier))
+    (body
+      (display_statement
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier))))
+      (set_statement
+        (field
+          field: (identifier)))
+      (assignment_statement
+        left: (qualified_name
+          left: (identifier)
+          right: (identifier))
+        operator: (assignment_operator)
+        right: (binary_expression
+          (parenthesized_expression
+            (binary_expression
+              (qualified_name
+                left: (identifier)
+                right: (identifier))
+              (parenthesized_expression
+                (binary_expression
+                  (identifier)
+                  (number_literal)))))
+          (qualified_name
+            left: (identifier)
+            right: (identifier))))
+      (display_statement
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        base: (identifier)
+        (format_phrase
+          like: (qualified_name
+            left: (identifier)
+            right: (identifier))
+          label: (string_literal))))))
+
+================================================================================
+VARIABLE - FORMAT abbreviation
+================================================================================
+
+DEF VAR l_linii AS INTEGER FORMA ">>9".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (format_phrase
+      format: (string_literal))))
+
+================================================================================
+VARIABLE DEFINITION - LIKE with subscript
+================================================================================
+
+DEFINE VARIABLE x NO-UNDO LIKE Customer.CreditLimit[1].
+DEFINE VARIABLE y EXTENT 3 LIKE ttRecord.fieldArr[2] NO-UNDO.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    name: (identifier)
+    (no_undo)
+    like: (array_access
+      array: (qualified_name
+        left: (identifier)
+        right: (identifier))
+      index: (number_literal)))
+  (variable_definition
+    name: (identifier)
+    (extent_phrase
+      size: (number_literal))
+    like: (array_access
+      array: (qualified_name
+        left: (identifier)
+        right: (identifier))
+      index: (number_literal))
+    (no_undo)))
+
+================================================================================
+IDENTIFIER - dollar sign in legacy names
+================================================================================
+
+DEFINE VARIABLE p$typ_rem AS CHARACTER NO-UNDO.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo)))

@@ -1,0 +1,1176 @@
+================================================================================
+FRAME - Basic Definition
+================================================================================
+
+DEFINE FRAME f1 Customer.Name Customer.Address.
+DEF FRAME f2 Customer.CustNum Sales.Order.OrderNum.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (frame_definition
+    name: (identifier)
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier)))
+  (frame_definition
+    name: (identifier)
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier)
+      right: (identifier))))
+
+================================================================================
+FRAME - field with array subscript
+================================================================================
+
+DEFINE FRAME f1 tbl.field[1] WITH FRAME f1.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (frame_definition
+    name: (identifier)
+    field: (array_access
+      array: (qualified_name
+        left: (identifier)
+        right: (identifier))
+      index: (number_literal))
+    (frame_phrase
+      frame: (identifier))))
+
+================================================================================
+FRAME - EXCEPT syntax
+================================================================================
+
+DEFINE FRAME fExcept Customer EXCEPT Comments PrivateNotes.
+DEF FRAME fOrder Sales.Order EXCEPT Status HiddenFlag.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (frame_definition
+    name: (identifier)
+    record: (identifier)
+    field: (identifier)
+    field: (identifier))
+  (frame_definition
+    name: (identifier)
+    record: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    field: (identifier)
+    field: (identifier)))
+
+================================================================================
+FRAME - String Items
+================================================================================
+
+DEFINE FRAME strings
+  "Header: " Customer.Name
+  "Record ID: " Customer.CustNum
+  "Total: " Sales.Order.Total.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (frame_definition
+    name: (identifier)
+    value: (string_literal)
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    value: (string_literal)
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    value: (string_literal)
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier)
+      right: (identifier))))
+
+================================================================================
+FRAME - SPACE clause
+================================================================================
+
+DEFINE FRAME space1 SPACE "   " 10 5.
+DEF FRAME space2 SPACE.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (frame_definition
+    name: (identifier)
+    (space)
+    value: (string_literal)
+    value: (number_literal)
+    value: (number_literal))
+  (frame_definition
+    name: (identifier)
+    (space)))
+
+================================================================================
+FRAME - SKIP clause
+================================================================================
+
+DEFINE FRAME skip1 SKIP 3.
+DEF FRAME skip2 SKIP.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (frame_definition
+    name: (identifier)
+    (skip)
+    value: (number_literal))
+  (frame_definition
+    name: (identifier)
+    (skip)))
+
+================================================================================
+FRAME - mixed bare and parenthesized spacing
+================================================================================
+
+DEFINE FRAME spacing SPACE SKIP SPACE(2) SKIP(1).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (frame_definition
+    name: (identifier)
+    (space)
+    (skip)
+    space: (number_literal)
+    skip: (number_literal)))
+
+================================================================================
+FRAME - HEADER with string
+================================================================================
+
+DEFINE FRAME headered HEADER "Customer Header".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (frame_definition
+    name: (identifier)
+    (header)
+    value: (string_literal)))
+
+================================================================================
+FRAME - BACKGROUND with SPACE
+================================================================================
+
+DEFINE FRAME bg1
+  BACKGROUND SPACE 10.
+  Customer.Name.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (frame_definition
+    name: (identifier)
+    (background)
+    value: (number_literal))
+  (expression_statement
+    (qualified_name
+      left: (identifier)
+      right: (identifier))))
+
+================================================================================
+FRAME - WITH CENTERED
+================================================================================
+
+DEFINE FRAME centered Customer.CustNum WITH CENTERED.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (frame_definition
+    name: (identifier)
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (frame_phrase
+      (centered))))
+
+================================================================================
+FRAME - WITH SIZE
+================================================================================
+
+DEFINE FRAME sized Customer.Name Customer.Address WITH SIZE 80 BY 20.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (frame_definition
+    name: (identifier)
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (frame_phrase
+      (size_phrase
+        width: (number_literal)
+        height: (number_literal)))))
+
+================================================================================
+FRAME - WITH DOWN
+================================================================================
+
+DEFINE FRAME down Customer.CustNum WITH 10 DOWN.
+DEFINE FRAME downBare Customer.CustNum WITH DOWN.
+DEFINE FRAME downPrefix Customer.CustNum WITH DOWN 10.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (frame_definition
+    name: (identifier)
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (frame_phrase
+      (down
+        value: (number_literal))))
+  (frame_definition
+    name: (identifier)
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (frame_phrase
+      (down)))
+  (frame_definition
+    name: (identifier)
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (frame_phrase
+      (down
+        count: (number_literal)))))
+
+================================================================================
+FRAME - WITH WIDTH
+================================================================================
+
+DEFINE FRAME width Customer.Name WITH WIDTH 60.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (frame_definition
+    name: (identifier)
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (frame_phrase
+      width: (number_literal))))
+
+================================================================================
+FRAME - WITH OVERLAY
+================================================================================
+
+DEFINE FRAME overlay Sales.Order.OrderNum WITH OVERLAY.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (frame_definition
+    name: (identifier)
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier)
+      right: (identifier))
+    (frame_phrase
+      (overlay))))
+
+================================================================================
+FRAME - WITH ROW and COLUMN
+================================================================================
+
+DEFINE FRAME positioned Customer.CustNum WITH ROW 5 COLUMN 10.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (frame_definition
+    name: (identifier)
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (frame_phrase
+      row: (number_literal)
+      column: (number_literal))))
+
+================================================================================
+FRAME - WITH NO-LABELS
+================================================================================
+
+DEFINE FRAME noLabels Customer.CustNum WITH NO-LABELS.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (frame_definition
+    name: (identifier)
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (frame_phrase
+      (no_labels))))
+
+================================================================================
+FRAME - WITH SIDE-LABELS
+================================================================================
+
+DEFINE FRAME sideLabels Customer.CustNum WITH SIDE-LABELS.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (frame_definition
+    name: (identifier)
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (frame_phrase
+      (side_labels))))
+
+================================================================================
+FRAME - String with AT phrase COLUMN
+================================================================================
+
+DEFINE FRAME atCol
+  "Name: " AT COLUMN OF Customer.Name Customer.Name
+  "ID: " AT COLUMN OF Customer.CustNum Customer.CustNum.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (frame_definition
+    name: (identifier)
+    value: (string_literal)
+    (at_phrase
+      (column_of
+        (qualified_name
+          left: (identifier)
+          right: (identifier))))
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    value: (string_literal)
+    (at_phrase
+      (column_of
+        (qualified_name
+          left: (identifier)
+          right: (identifier))))
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))))
+
+================================================================================
+FRAME - String with AT phrase ROW
+================================================================================
+
+DEFINE FRAME atRow
+  "Record: " AT ROW OF Customer.CustNum Customer.CustNum.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (frame_definition
+    name: (identifier)
+    value: (string_literal)
+    (at_phrase
+      (row_of
+        (qualified_name
+          left: (identifier)
+          right: (identifier))))
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))))
+
+================================================================================
+FRAME - AT phrase simple
+================================================================================
+
+DEFINE FRAME atSimple Customer.CustNum AT COLUMN 5.
+DEF FRAME atSimple2 "Label: " Customer.Name AT ROW 2 COLUMN 10.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (frame_definition
+    name: (identifier)
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (format_phrase
+      column: (number_literal)))
+  (frame_definition
+    name: (identifier)
+    value: (string_literal)
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (format_phrase
+      row: (number_literal)
+      column: (number_literal))))
+
+================================================================================
+FRAME - Constant name with AT phrase
+================================================================================
+
+DEFINE FRAME {&FRAME_NAME} bPolicy AT COLUMN 2 ROW 2.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (frame_definition
+    name: (preprocessor_name
+      (identifier))
+    field: (identifier)
+    (format_phrase
+      column: (number_literal)
+      row: (number_literal))))
+
+================================================================================
+FRAME - TO phrase on string
+================================================================================
+
+DEFINE FRAME toPhrase
+  Customer.Name TO 40
+  Customer.Address TO 50.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (frame_definition
+    name: (identifier)
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (format_phrase
+      to: (number_literal))
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (format_phrase
+      to: (number_literal))))
+
+================================================================================
+FRAME - String with BGCOLOR
+================================================================================
+
+DEFINE FRAME strBg
+  "Header" BGCOLOR 7
+  Customer.Name.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (frame_definition
+    name: (identifier)
+    value: (string_literal)
+    bgcolor: (number_literal)
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))))
+
+================================================================================
+FRAME - String with DCOLOR
+================================================================================
+
+DEFINE FRAME strDc
+  "Label" DCOLOR 5
+  Customer.CustNum.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (frame_definition
+    name: (identifier)
+    value: (string_literal)
+    dcolor: (number_literal)
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))))
+
+================================================================================
+FRAME - String with FGCOLOR
+================================================================================
+
+DEFINE FRAME strFg
+  "Text" FGCOLOR 15
+  Customer.Name.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (frame_definition
+    name: (identifier)
+    value: (string_literal)
+    fgcolor: (number_literal)
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))))
+
+================================================================================
+FRAME - String with PFCOLOR
+================================================================================
+
+DEFINE FRAME strPf
+  "Prompt" PFCOLOR 3
+  Customer.CustNum.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (frame_definition
+    name: (identifier)
+    value: (string_literal)
+    pfcolor: (number_literal)
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))))
+
+================================================================================
+FRAME - String with FONT
+================================================================================
+
+DEFINE FRAME strFont
+  "Title" FONT 4
+  Customer.Name.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (frame_definition
+    name: (identifier)
+    value: (string_literal)
+    font: (number_literal)
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))))
+
+================================================================================
+FRAME - String form item simple
+================================================================================
+
+DEFINE FRAME fStr "Test".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (frame_definition
+    name: (identifier)
+    value: (string_literal)))
+
+================================================================================
+FRAME - NEW SHARED
+================================================================================
+
+DEFINE NEW SHARED FRAME sharedF Customer.CustNum.
+DEF NEW SHARED FRAME sharedF2 Customer.Name Customer.Address.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (frame_definition
+    (new_modifier)
+    (scope_modifier)
+    name: (identifier)
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier)))
+  (frame_definition
+    (new_modifier)
+    (scope_modifier)
+    name: (identifier)
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))))
+
+================================================================================
+FRAME - PRIVATE
+================================================================================
+
+DEFINE PRIVATE FRAME privF Customer.CustNum.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (frame_definition
+    (access_modifier)
+    name: (identifier)
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))))
+
+================================================================================
+FRAME - Multiple options combined
+================================================================================
+
+DEFINE FRAME combined
+  Customer.CustNum
+  Customer.Name BGCOLOR 7 FGCOLOR 15
+  WITH SIZE 80 BY 20 10 DOWN CENTERED.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (frame_definition
+    name: (identifier)
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (format_phrase
+      bgcolor: (number_literal)
+      fgcolor: (number_literal))
+    (frame_phrase
+      (size_phrase
+        width: (number_literal)
+        height: (number_literal))
+      (down
+        value: (number_literal))
+      (centered))))
+
+================================================================================
+FRAME - Minimal
+================================================================================
+
+DEFINE FRAME f field1.
+DEF FRAME frame field1.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (frame_definition
+    name: (identifier)
+    field: (identifier))
+  (frame_definition
+    name: (identifier)
+    field: (identifier)))
+
+================================================================================
+FRAME - Reference snippets
+================================================================================
+
+DEFINE VARIABLE bal-avail LIKE Customer.Balance COLUMN-LABEL "Available!Credit" NO-UNDO.
+DEFINE FRAME cust-bal
+  Customer.CustNum
+  Customer.Name FORMAT "X(20)"
+  Customer.CreditLimit LABEL "Limit"
+  Customer.Balance
+  bal-avail
+  WITH CENTERED ROW 3 TITLE "Available Customer Credit" USE-TEXT.
+FOR EACH Customer NO-LOCK WITH FRAME cust-bal:
+  DISPLAY
+    Customer.CustNum
+    Customer.Name
+    Customer.CreditLimit
+    Customer.Balance
+    Customer.CreditLimit - Customer.Balance
+    @ bal-avail.
+END.
+
+DEFINE BUTTON b_dtl LABEL "Detail".
+DEFINE BUTTON b_next LABEL "Next".
+DEFINE BUTTON b_quit LABEL "Quit" AUTO-ENDKEY.
+DEFINE FRAME cust-info
+  Customer.CustNum
+  Customer.Name FORMAT "X(20)"
+  Customer.Phone
+  WITH CENTERED ROW 4.
+DEFINE FRAME cust-dtl
+  Customer EXCEPT Customer.CustNum Customer.Name Customer.Phone
+  WITH SIDE-LABELS ROW 9 WIDTH 100.
+DEFINE FRAME butt-frame
+  b_dtl b_next b_quit
+  WITH ROW 1.
+ON CHOOSE OF b_dtl
+  DISPLAY Customer EXCEPT Customer.CustNum Customer.Name Customer.Phone
+  WITH FRAME cust-dtl.
+
+DEFINE NEW SHARED FRAME cust-frame.
+DEFINE NEW SHARED VARIABLE csz AS CHARACTER FORMAT "x(29)".
+DEFINE NEW SHARED BUFFER xcust FOR Customer.
+FOR EACH xcust WHERE xcust.CustNum <= 20:
+  DISPLAY xcust.Name xcust.Phone xcust.Address xcust.SalesRep
+    xcust.City + ", " + xcust.State + " " + xcust.PostalCode @ csz
+    xcust.CreditLimit WITH FRAME cust-frame.
+END.
+
+DEFINE QUERY custq FOR Customer.
+DEFINE BUTTON bprev LABEL "<".
+DEFINE BUTTON bnext LABEL ">".
+DEFINE FRAME cust-fr SKIP(.5)
+  SPACE(8) Customer.Name Customer.CustNum Customer.SalesRep
+  Customer.Comments AT COLUMN 6 ROW 13.5
+  WITH SIDE-LABELS TITLE "Customer Data" SIZE 80 BY 15 VIEW-AS DIALOG-BOX.
+DEFINE FRAME cont-fr SKIP(.5)
+  Customer.Address COLON 17 SKIP
+  Customer.Address2 COLON 17 SKIP
+  Customer.City COLON 17 SKIP
+  Customer.State COLON 17 SKIP
+  Customer.PostalCode COLON 17 SKIP
+  Customer.Country COLON 17 SKIP
+  Customer.Contact COLON 17 SKIP
+  Customer.Phone COLON 17
+  WITH SIDE-LABELS TITLE "Contact Informaion" SIZE 40 BY 10 AT COLUMN 1 ROW 3.
+DEFINE FRAME ctrl-fr SKIP(.12)
+  SPACE(4) bprev bnext
+  WITH TITLE "PREVIOUS/NEXT" SIZE 15 BY 2 AT COLUMN 53 ROW 10.5.
+DEFINE FRAME acct-fr SKIP(.5)
+  Customer.Balance COLON 15 SKIP
+  Customer.CreditLimit COLON 15 SKIP
+  Customer.Discount COLON 15 SKIP
+  Customer.Terms COLON 15
+  WITH SIDE-LABELS TITLE "Account Information"
+  SIZE 38.85 BY 6 AT COLUMN 41 ROW 3.
+FRAME cont-fr:FRAME = FRAME cust-fr:HANDLE.
+FRAME acct-fr:FRAME = FRAME cust-fr:HANDLE.
+FRAME ctrl-fr:FRAME = FRAME cust-fr:HANDLE.
+OPEN QUERY custq PRESELECT EACH Customer BY Customer.Name.
+GET FIRST custq.
+ENABLE ALL WITH FRAME ctrl-fr.
+WAIT-FOR WINDOW-CLOSE OF FRAME cust-fr.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    name: (identifier)
+    like: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    label: (string_literal)
+    (no_undo))
+  (frame_definition
+    name: (identifier)
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (format_phrase
+      format: (string_literal))
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (format_phrase
+      label: (string_literal))
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    field: (identifier)
+    (frame_phrase
+      (centered)
+      row: (number_literal)
+      title: (string_literal)
+      (use_text)))
+  (for_statement
+    (record_phrase
+      record: (identifier)
+      (no_lock))
+    (frame_phrase
+      frame: (identifier))
+    (body
+      (display_statement
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (binary_expression
+            (qualified_name
+              left: (identifier)
+              right: (identifier))
+            (qualified_name
+              left: (identifier)
+              right: (identifier))))
+        base: (identifier))))
+  (button_definition
+    name: (identifier)
+    label: (string_literal))
+  (button_definition
+    name: (identifier)
+    label: (string_literal))
+  (button_definition
+    name: (identifier)
+    label: (string_literal)
+    (auto_endkey))
+  (frame_definition
+    name: (identifier)
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (format_phrase
+      format: (string_literal))
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (frame_phrase
+      (centered)
+      row: (number_literal)))
+  (frame_definition
+    name: (identifier)
+    record: (identifier)
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (frame_phrase
+      (side_labels)
+      row: (number_literal)
+      width: (number_literal)))
+  (frame_definition
+    name: (identifier)
+    field: (identifier)
+    field: (identifier)
+    field: (identifier)
+    (frame_phrase
+      row: (number_literal)))
+  (on_statement
+    event: (identifier)
+    (of_phrase
+      widget: (widget_phrase
+        handle: (identifier)))
+    (display_statement
+      record: (identifier)
+      except: (qualified_name
+        left: (identifier)
+        right: (identifier))
+      except: (qualified_name
+        left: (identifier)
+        right: (identifier))
+      except: (qualified_name
+        left: (identifier)
+        right: (identifier))
+      (frame_phrase
+        frame: (identifier))))
+  (frame_definition
+    (new_modifier)
+    (scope_modifier)
+    name: (identifier))
+  (variable_definition
+    (new_modifier)
+    (scope_modifier)
+    name: (identifier)
+    type: (identifier)
+    (format_phrase
+      format: (string_literal)))
+  (buffer_definition
+    (new_modifier)
+    (scope_modifier)
+    name: (identifier)
+    table: (identifier))
+  (for_statement
+    (record_phrase
+      record: (identifier)
+      where: (binary_expression
+        (qualified_name
+          left: (identifier)
+          right: (identifier))
+        (number_literal)))
+    (body
+      (display_statement
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (binary_expression
+            (binary_expression
+              (binary_expression
+                (binary_expression
+                  (qualified_name
+                    left: (identifier)
+                    right: (identifier))
+                  (string_literal))
+                (qualified_name
+                  left: (identifier)
+                  right: (identifier)))
+              (string_literal))
+            (qualified_name
+              left: (identifier)
+              right: (identifier))))
+        base: (identifier)
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (frame_phrase
+          frame: (identifier)))))
+  (query_definition
+    name: (identifier)
+    (query_table_list
+      table: (identifier)))
+  (button_definition
+    name: (identifier)
+    label: (string_literal))
+  (button_definition
+    name: (identifier)
+    label: (string_literal))
+  (frame_definition
+    name: (identifier)
+    skip: (number_literal)
+    space: (number_literal)
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (format_phrase
+      column: (number_literal)
+      row: (number_literal))
+    (frame_phrase
+      (side_labels)
+      title: (string_literal)
+      (size_phrase
+        width: (number_literal)
+        height: (number_literal))))
+  (frame_definition
+    name: (identifier)
+    skip: (number_literal)
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (format_phrase
+      colon: (number_literal))
+    (skip)
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (format_phrase
+      colon: (number_literal))
+    (skip)
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (format_phrase
+      colon: (number_literal))
+    (skip)
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (format_phrase
+      colon: (number_literal))
+    (skip)
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (format_phrase
+      colon: (number_literal))
+    (skip)
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (format_phrase
+      colon: (number_literal))
+    (skip)
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (format_phrase
+      colon: (number_literal))
+    (skip)
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (format_phrase
+      colon: (number_literal))
+    (frame_phrase
+      (side_labels)
+      title: (string_literal)
+      (size_phrase
+        width: (number_literal)
+        height: (number_literal))
+      (at_phrase
+        column: (number_literal))
+      row: (number_literal)))
+  (frame_definition
+    name: (identifier)
+    skip: (number_literal)
+    space: (number_literal)
+    field: (identifier)
+    field: (identifier)
+    (frame_phrase
+      title: (string_literal)
+      (size_phrase
+        width: (number_literal)
+        height: (number_literal))
+      (at_phrase
+        column: (number_literal))
+      row: (number_literal)))
+  (frame_definition
+    name: (identifier)
+    skip: (number_literal)
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (format_phrase
+      colon: (number_literal))
+    (skip)
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (format_phrase
+      colon: (number_literal))
+    (skip)
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (format_phrase
+      colon: (number_literal))
+    (skip)
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (format_phrase
+      colon: (number_literal))
+    (frame_phrase
+      (side_labels)
+      title: (string_literal)
+      (size_phrase
+        width: (number_literal)
+        height: (number_literal))
+      (at_phrase
+        column: (number_literal))
+      row: (number_literal)))
+  (assignment_statement
+    left: (object_access
+      widget: (identifier)
+      left: (identifier)
+      right: (identifier))
+    operator: (assignment_operator)
+    right: (object_access
+      widget: (identifier)
+      left: (identifier)
+      right: (identifier)))
+  (assignment_statement
+    left: (object_access
+      widget: (identifier)
+      left: (identifier)
+      right: (identifier))
+    operator: (assignment_operator)
+    right: (object_access
+      widget: (identifier)
+      left: (identifier)
+      right: (identifier)))
+  (assignment_statement
+    left: (object_access
+      widget: (identifier)
+      left: (identifier)
+      right: (identifier))
+    operator: (assignment_operator)
+    right: (object_access
+      widget: (identifier)
+      left: (identifier)
+      right: (identifier)))
+  (open_query_statement
+    query: (identifier)
+    (record_phrase
+      record: (identifier))
+    (by_phrase
+      by: (qualified_name
+        left: (identifier)
+        right: (identifier))))
+  (get_statement
+    query: (identifier))
+  (enable_statement
+    (all)
+    (frame_phrase
+      frame: (identifier)))
+  (wait_for_statement
+    (of_phrase
+      events: (identifier)
+      widgets: (widget_phrase
+        frame: (identifier)))))
+
+================================================================================
+FRAME - field with both AT and FORMAT
+================================================================================
+
+DEFINE FRAME fr fld1 AT 5 FORMAT "x(10)".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (frame_definition
+    name: (identifier)
+    field: (identifier)
+    (format_phrase
+      position: (number_literal))
+    (format_phrase
+      format: (string_literal))))
+
+================================================================================
+FRAME - field with TOOLTIP
+================================================================================
+
+DEFINE FRAME fr fld1 TOOLTIP "aide".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (frame_definition
+    name: (identifier)
+    field: (identifier)
+    (format_phrase
+      tooltip: (string_literal))))

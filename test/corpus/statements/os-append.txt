@@ -1,0 +1,88 @@
+================================================================================
+OS-APPEND statement
+================================================================================
+
+OS-APPEND "source.txt" "target.txt".
+OS-APPEND cSource cTarget.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (os_append_statement
+    source: (string_literal)
+    target: (string_literal))
+  (os_append_statement
+    source: (identifier)
+    target: (identifier)))
+
+================================================================================
+OS-APPEND - Reference snippet
+================================================================================
+
+DEFINE VARIABLE sourcefile AS CHARACTER NO-UNDO.
+DEFINE VARIABLE targetfile AS CHARACTER NO-UNDO FORMAT "x(20)" VIEW-AS FILL-IN.
+DEFINE VARIABLE OKpressed AS LOGICAL NO-UNDO INITIAL TRUE.
+Main:
+REPEAT:
+  SYSTEM-DIALOG GET-FILE sourcefile
+    TITLE "Choose Source File For Append"
+    MUST-EXIST
+    USE-FILENAME
+    UPDATE OKpressed.
+  IF OKpressed = FALSE THEN
+    LEAVE Main.
+  UPDATE targetfile WITH FRAME appendframe.
+  OS-APPEND VALUE(sourcefile) VALUE(targetfile).
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo)
+    (format_phrase
+      format: (string_literal))
+    (view_as_phrase))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo)
+    initial: (boolean_literal))
+  (repeat_statement
+    label: (identifier)
+    (body
+      (system_dialog_get_file_statement
+        variable: (identifier)
+        title: (string_literal)
+        (must_exist)
+        (use_filename)
+        (update_phrase
+          update: (identifier)))
+      (if_statement
+        (binary_expression
+          (identifier)
+          (boolean_literal))
+        then: (leave_statement
+          label: (identifier)))
+      (update_statement
+        (field
+          field: (identifier))
+        (frame_phrase
+          frame: (identifier)))
+      (os_append_statement
+        source: (function_call
+          function: (identifier)
+          (arguments
+            (argument
+              name: (identifier))))
+        target: (function_call
+          function: (identifier)
+          (arguments
+            (argument
+              name: (identifier))))))))

@@ -1,0 +1,385 @@
+================================================================================
+FIND basic
+================================================================================
+
+FIND Customer.
+FIND Customer NO-LOCK.
+FIND Customer EXCLUSIVE-LOCK.
+FIND Customer SHARE-LOCK.
+FIND Customer EXCLUSIVE.
+FIND Customer SHARE.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (find_statement
+    table: (identifier))
+  (find_statement
+    table: (identifier)
+    (no_lock))
+  (find_statement
+    table: (identifier)
+    (exclusive_lock))
+  (find_statement
+    table: (identifier)
+    (share_lock))
+  (find_statement
+    table: (identifier)
+    (exclusive))
+  (find_statement
+    table: (identifier)
+    (share)))
+
+================================================================================
+FIND with WHERE clause
+================================================================================
+
+FIND customer WHERE customer.id = 2 NO-LOCK.
+FIND Customer WHERE Customer.Name = "John" AND Customer.Balance > 0.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (find_statement
+    table: (identifier)
+    (where_phrase
+      where: (binary_expression
+        (qualified_name
+          left: (identifier)
+          right: (identifier))
+        (number_literal)))
+    (no_lock))
+  (find_statement
+    table: (identifier)
+    (where_phrase
+      where: (binary_expression
+        (binary_expression
+          (qualified_name
+            left: (identifier)
+            right: (identifier))
+          (string_literal))
+        (binary_expression
+          (qualified_name
+            left: (identifier)
+            right: (identifier))
+          (number_literal))))))
+
+================================================================================
+FIND FIRST/LAST
+================================================================================
+
+FIND FIRST Customer NO-LOCK.
+FIND LAST Order NO-LOCK.
+FIND FIRST DebtorShipTo WHERE DebtorShipTo.Code = par_code NO-LOCK NO-ERROR.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (find_statement
+    (first)
+    table: (identifier)
+    (no_lock))
+  (find_statement
+    (last)
+    table: (identifier)
+    (no_lock))
+  (find_statement
+    (first)
+    table: (identifier)
+    (where_phrase
+      where: (binary_expression
+        (qualified_name
+          left: (identifier)
+          right: (identifier))
+        (identifier)))
+    (no_lock)
+    (no_error)))
+
+================================================================================
+FIND CURRENT
+================================================================================
+
+FIND CURRENT Order NO-ERROR.
+FIND CURRENT Customer EXCLUSIVE-LOCK.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (find_statement
+    (current)
+    table: (identifier)
+    (no_error))
+  (find_statement
+    (current)
+    table: (identifier)
+    (exclusive_lock)))
+
+================================================================================
+FIND with OF clause
+================================================================================
+
+FIND Contact OF Address EXCLUSIVE-LOCK NO-ERROR NO-WAIT.
+FIND Order OF Customer NO-LOCK.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (find_statement
+    table: (identifier)
+    (of_phrase
+      record: (identifier))
+    (exclusive_lock)
+    (no_error)
+    (no_wait))
+  (find_statement
+    table: (identifier)
+    (of_phrase
+      record: (identifier))
+    (no_lock)))
+
+================================================================================
+FIND with USE-INDEX
+================================================================================
+
+FIND FIRST det WHERE det.id = 1 USE-INDEX idx_id NO-LOCK NO-ERROR.
+FIND Customer USE-INDEX CustNum.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (find_statement
+    (first)
+    table: (identifier)
+    (where_phrase
+      where: (binary_expression
+        (qualified_name
+          left: (identifier)
+          right: (identifier))
+        (number_literal)))
+    index: (identifier)
+    (no_lock)
+    (no_error))
+  (find_statement
+    table: (identifier)
+    index: (identifier)))
+
+================================================================================
+FIND with NO-PREFETCH
+================================================================================
+
+FIND FIRST Customer NO-LOCK NO-PREFETCH.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (find_statement
+    (first)
+    table: (identifier)
+    (no_lock)
+    (no_prefetch)))
+
+================================================================================
+FIND with USING clause
+================================================================================
+
+FIND Customer USING Customer.CustNum NO-ERROR.
+FIND Order USING Order.OrderNum EXCLUSIVE-LOCK.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (find_statement
+    table: (identifier)
+    values: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (no_error))
+  (find_statement
+    table: (identifier)
+    values: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (exclusive_lock)))
+
+================================================================================
+FIND with qualified table name
+================================================================================
+
+FIND Sports2000.Customer NO-LOCK.
+FIND db.tablename WHERE tablename.field = 1.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (find_statement
+    table: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (no_lock))
+  (find_statement
+    table: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (where_phrase
+      where: (binary_expression
+        (qualified_name
+          left: (identifier)
+          right: (identifier))
+        (number_literal)))))
+
+================================================================================
+FIND with multiple options combined
+================================================================================
+
+FIND FIRST Customer WHERE Customer.Balance > 1000 USE-INDEX Balance NO-LOCK NO-ERROR NO-WAIT.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (find_statement
+    (first)
+    table: (identifier)
+    (where_phrase
+      where: (binary_expression
+        (qualified_name
+          left: (identifier)
+          right: (identifier))
+        (number_literal)))
+    index: (identifier)
+    (no_lock)
+    (no_error)
+    (no_wait)))
+
+================================================================================
+FIND - Reference snippets
+================================================================================
+
+FIND Customer 1.
+PROMPT-FOR Customer.CustNum.
+FIND Customer USING Customer.CustNum.
+
+REPEAT:
+  PROMPT-FOR Item.ItemNum.
+  FIND Item USING Item.ItemNum.
+  DISPLAY Item.ItemNum Item.ItemName.
+  REPEAT:
+    FIND NEXT OrderLine OF Item.
+    FIND Order OF OrderLine.
+    FIND Customer WHERE Customer.CustNum = Order.CustNum.
+    DISPLAY Customer.Name Order.OrderNum OrderLine.Qty (TOTAL).
+  END.
+END.
+
+DEFINE VARIABLE start-name NO-UNDO LIKE Customer.Name.
+REPEAT:
+  SET start-name.
+  FIND FIRST Customer WHERE Customer.Name >= start-name.
+  REPEAT:
+    DISPLAY Customer.Name.
+    FIND NEXT Customer USE-INDEX name.
+  END.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (find_statement
+    table: (identifier)
+    constant: (number_literal))
+  (prompt_for_statement
+    (field
+      field: (qualified_name
+        left: (identifier)
+        right: (identifier))))
+  (find_statement
+    table: (identifier)
+    values: (qualified_name
+      left: (identifier)
+      right: (identifier)))
+  (repeat_statement
+    (body
+      (prompt_for_statement
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier))))
+      (find_statement
+        table: (identifier)
+        values: (qualified_name
+          left: (identifier)
+          right: (identifier)))
+      (display_statement
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier))))
+      (repeat_statement
+        (body
+          (find_statement
+            (next)
+            table: (identifier)
+            (of_phrase
+              record: (identifier)))
+          (find_statement
+            table: (identifier)
+            (of_phrase
+              record: (identifier)))
+          (find_statement
+            table: (identifier)
+            (where_phrase
+              where: (binary_expression
+                (qualified_name
+                  left: (identifier)
+                  right: (identifier))
+                (qualified_name
+                  left: (identifier)
+                  right: (identifier)))))
+          (display_statement
+            (field
+              field: (qualified_name
+                left: (identifier)
+                right: (identifier)))
+            (field
+              field: (qualified_name
+                left: (identifier)
+                right: (identifier)))
+            (field
+              field: (qualified_name
+                left: (identifier)
+                right: (identifier))
+              (aggregate_phrase
+                operation: (aggregate_operation))))))))
+  (variable_definition
+    name: (identifier)
+    (no_undo)
+    like: (qualified_name
+      left: (identifier)
+      right: (identifier)))
+  (repeat_statement
+    (body
+      (set_statement
+        (field
+          field: (identifier)))
+      (find_statement
+        (first)
+        table: (identifier)
+        (where_phrase
+          where: (binary_expression
+            (qualified_name
+              left: (identifier)
+              right: (identifier))
+            (identifier))))
+      (repeat_statement
+        (body
+          (display_statement
+            record: (qualified_name
+              left: (identifier)
+              right: (identifier)))
+          (find_statement
+            (next)
+            table: (identifier)
+            index: (identifier)))))))

@@ -1,0 +1,58 @@
+export default ({ kw }) => ({
+  trigger_procedure_statement: ($) => seq($.__trigger_procedure_prefix, $._terminator),
+
+  __trigger_procedure_prefix: ($) =>
+    seq(
+      kw("TRIGGER"),
+      kw("PROCEDURE", { offset: 4 }),
+      kw("FOR"),
+      choice(
+        // Simple events: CREATE, DELETE, FIND, REPLICATION-CREATE, etc.
+        seq(field("event", $.identifier), kw("OF"), field("object", $.identifier)),
+        // WRITE event with optional NEW and OLD buffers
+        seq(
+          kw("WRITE"),
+          kw("OF"),
+          field("object", $.identifier),
+          optional($.__trigger_procedure_new_buffer),
+          optional($.__trigger_procedure_old_buffer),
+        ),
+        // ASSIGN event
+        seq(
+          kw("ASSIGN"),
+          choice(
+            seq(kw("OF"), field("object", $.qualified_name)),
+            seq(
+              seq(kw("NEW"), $.__trigger_procedure_value_body),
+              optional(seq(kw("OLD"), $.__trigger_procedure_value_body)),
+            ),
+          ),
+        ),
+      ),
+    ),
+
+  __trigger_procedure_new_buffer: ($) =>
+    seq(kw("NEW"), optional(kw("BUFFER")), field("new_buffer", $.identifier)),
+
+  __trigger_procedure_old_buffer: ($) =>
+    seq(kw("OLD"), optional(kw("BUFFER")), field("old_buffer", $.identifier)),
+
+  __trigger_procedure_value_body: ($) =>
+    seq(
+      optional(kw("VALUE")),
+      field("value", $.identifier),
+      choice(
+        seq(kw("AS"), field("data_type", $.identifier)),
+        seq(kw("LIKE"), field("like_field", $.qualified_name)),
+      ),
+      repeat(
+        choice(
+          seq(kw("COLUMN-LABEL"), field("label", $.string_literal)),
+          $._format_string,
+          seq(kw("INITIAL"), field("initial", $._expression)),
+          $._aggregate_label_phrase,
+          alias(kw("NO-UNDO"), $.no_undo),
+        ),
+      ),
+    ),
+});

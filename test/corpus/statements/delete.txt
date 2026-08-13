@@ -1,0 +1,188 @@
+================================================================================
+DELETE basic
+================================================================================
+
+DELETE Customer.
+DELETE Order.
+DELETE ttRecord.
+DELETE Customer VALIDATE (Customer.CustNum > 0, "Bad") NO-ERROR.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (delete_statement
+    record: (identifier))
+  (delete_statement
+    record: (identifier))
+  (delete_statement
+    record: (identifier))
+  (delete_statement
+    record: (identifier)
+    condition: (binary_expression
+      (qualified_name
+        left: (identifier)
+        right: (identifier))
+      (number_literal))
+    message: (string_literal)
+    (no_error)))
+
+================================================================================
+DELETE with qualified name
+================================================================================
+
+DELETE Sports2000.Customer.
+DELETE db.TableName.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (delete_statement
+    record: (qualified_name
+      left: (identifier)
+      right: (identifier)))
+  (delete_statement
+    record: (qualified_name
+      left: (identifier)
+      right: (identifier))))
+
+================================================================================
+DELETE OBJECT
+================================================================================
+
+DELETE OBJECT hSocket.
+DELETE OBJECT hQuery.
+DELETE OBJECT myWidget.
+DELETE OBJECT hSocket NO-ERROR.
+DELETE OBJECT(vObj).
+DELETE WIDGET w1, w2 NO-ERROR.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (delete_object_statement
+    name: (identifier))
+  (delete_object_statement
+    name: (identifier))
+  (delete_object_statement
+    name: (identifier))
+  (delete_object_statement
+    name: (identifier)
+    (no_error))
+  (delete_object_statement
+    name: (parenthesized_expression
+      (identifier)))
+  (delete_widget_statement
+    widget: (identifier)
+    widget: (identifier)
+    (no_error)))
+
+================================================================================
+DELETE in FOR EACH loop
+================================================================================
+
+FOR EACH Customer WHERE Customer.Balance = 0 EXCLUSIVE-LOCK:
+  DELETE Customer.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (for_statement
+    (record_phrase
+      record: (identifier)
+      where: (binary_expression
+        (qualified_name
+          left: (identifier)
+          right: (identifier))
+        (number_literal))
+      (exclusive_lock))
+    (body
+      (delete_statement
+        record: (identifier)))))
+
+================================================================================
+DELETE in transaction
+================================================================================
+
+DO TRANSACTION:
+  FIND Customer WHERE Customer.CustNum = 1 EXCLUSIVE-LOCK.
+  DELETE Customer.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (do_statement
+    (transaction)
+    (body
+      (find_statement
+        table: (identifier)
+        (where_phrase
+          where: (binary_expression
+            (qualified_name
+              left: (identifier)
+              right: (identifier))
+            (number_literal)))
+        (exclusive_lock))
+      (delete_statement
+        record: (identifier)))))
+
+================================================================================
+DELETE ALIAS / WIDGET-POOL
+================================================================================
+
+DELETE ALIAS myalias NO-ERROR.
+DELETE WIDGET-POOL wp.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (delete_alias_statement
+    alias: (identifier)
+    (no_error))
+  (delete_widget_pool_statement
+    pool: (identifier)))
+
+================================================================================
+DELETE - Reference snippets
+================================================================================
+
+FOR EACH Customer:
+  DELETE Customer.
+END.
+
+DELETE Customer VALIDATE(NOT(CAN-FIND(Order OF Customer)),
+"This Customer has outstanding orders and cannot be deleted.").
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (for_statement
+    (record_phrase
+      record: (identifier))
+    (body
+      (delete_statement
+        record: (identifier))))
+  (delete_statement
+    record: (identifier)
+    condition: (unary_expression
+      (parenthesized_expression
+        (can_find_expression
+          table: (identifier)
+          (of_phrase
+            record: (identifier)))))
+    message: (string_literal)))
+
+================================================================================
+DELETE OBJECT - handle held in an array
+================================================================================
+
+DELETE OBJECT hb[vii].
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (delete_object_statement
+    name: (array_access
+      array: (identifier)
+      index: (identifier))))

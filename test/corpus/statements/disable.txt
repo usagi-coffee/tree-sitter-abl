@@ -1,0 +1,127 @@
+================================================================================
+DISABLE
+================================================================================
+
+DISABLE ALL.
+DISABLE ALL EXCEPT field1.
+DISABLE ALL EXCEPT field1 field2.
+DISABLE field1.
+DISABLE field1 field2 field3.
+DISABLE UNLESS-HIDDEN field1.
+DISABLE field1 WHEN x > 5.
+DISABLE field1 field2 WHEN y = 1.
+DISABLE field1 WITH FRAME f1.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (disable_statement
+    (all))
+  (disable_statement
+    (all)
+    except: (identifier))
+  (disable_statement
+    (all)
+    except: (identifier)
+    except: (identifier))
+  (disable_statement
+    (disable_item
+      field: (identifier)))
+  (disable_statement
+    (disable_item
+      field: (identifier))
+    (disable_item
+      field: (identifier))
+    (disable_item
+      field: (identifier)))
+  (disable_statement
+    (unless_hidden)
+    (disable_item
+      field: (identifier)))
+  (disable_statement
+    (disable_item
+      field: (identifier)
+      when: (binary_expression
+        (identifier)
+        (number_literal))))
+  (disable_statement
+    (disable_item
+      field: (identifier))
+    (disable_item
+      field: (identifier)
+      when: (binary_expression
+        (identifier)
+        (number_literal))))
+  (disable_statement
+    (disable_item
+      field: (identifier))
+    (frame_phrase
+      frame: (identifier))))
+
+================================================================================
+DISABLE with format, text, and constants
+================================================================================
+
+DISABLE field1 FORMAT "x(10)" WHEN ok
+  TEXT(field2 FORMAT "x(5)")
+  "CONST" AT 5 BGCOLOR 2 VIEW-AS TEXT
+  SKIP.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (disable_statement
+    (disable_item
+      field: (identifier)
+      (format_phrase
+        format: (string_literal))
+      when: (identifier))
+    (disable_item
+      (format_phrase
+        format: (string_literal)))
+    (disable_item
+      constant: (string_literal)
+      (format_phrase
+        bgcolor: (number_literal)))
+    (disable_item
+      (skip))))
+
+================================================================================
+DISABLE - Reference snippet
+================================================================================
+
+DISABLE b_save b_undo WITH FRAME butt-frame.
+DISABLE Customer.CreditLimit WITH FRAME cust-info.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (disable_statement
+    (disable_item
+      field: (identifier))
+    (disable_item
+      field: (identifier))
+    (frame_phrase
+      frame: (identifier)))
+  (disable_statement
+    (disable_item
+      field: (qualified_name
+        left: (identifier)
+        right: (identifier)))
+    (frame_phrase
+      frame: (identifier))))
+
+================================================================================
+DISABLE - array access
+================================================================================
+
+DISABLE arr[1].
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (disable_statement
+    (disable_item
+      field: (array_access
+        array: (identifier)
+        index: (number_literal)))))

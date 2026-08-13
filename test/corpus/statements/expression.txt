@@ -1,0 +1,199 @@
+================================================================================
+EXPRESSION STATEMENT
+================================================================================
+
+doWork().
+myFunc(1, "x") NO-ERROR.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (expression_statement
+    (function_call
+      function: (identifier)
+      (arguments)))
+  (expression_statement
+    (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (number_literal))
+        (argument
+          name: (string_literal))))
+    (no_error)))
+
+================================================================================
+NEW expression - record buffer check forms
+================================================================================
+
+IF NEW(Customer) THEN RETURN.
+IF NOT NEW Order THEN RETURN.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (if_statement
+    (new_expression
+      record: (identifier))
+    then: (return_statement))
+  (if_statement
+    (unary_expression
+      (new_expression
+        record: (identifier)))
+    then: (return_statement)))
+
+================================================================================
+ENTERED expression
+================================================================================
+
+IF wfeven ENTERED THEN RETURN.
+IF NOT wfeven ENTERED THEN LEAVE.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (if_statement
+    (entered_expression
+      field: (identifier))
+    then: (return_statement))
+  (if_statement
+    (unary_expression
+      (entered_expression
+        field: (identifier)))
+    then: (leave_statement)))
+
+================================================================================
+NOT ENTERED expression
+================================================================================
+
+IF wfeven NOT ENTERED THEN RETURN.
+IF NOT ENTERED wfeven THEN RETURN.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (if_statement
+    (entered_expression
+      field: (identifier)
+      (not))
+    then: (return_statement))
+  (if_statement
+    (entered_expression
+      (not)
+      field: (identifier))
+    then: (return_statement)))
+
+================================================================================
+ENTERED expression - reversed order
+================================================================================
+
+IF ENTERED wfeven THEN RETURN.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (if_statement
+    (entered_expression
+      field: (identifier))
+    then: (return_statement)))
+
+================================================================================
+OBJECT ACCESS - preprocessor name as the receiver
+================================================================================
+
+{&WIN}:TITLE = "x".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assignment_statement
+    left: (object_access
+      left: (preprocessor_name
+        (identifier))
+      right: (identifier))
+    operator: (assignment_operator)
+    right: (string_literal)))
+
+================================================================================
+OBJECT ACCESS - array element as the receiver
+================================================================================
+
+x = arr[1]:HANDLE.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (object_access
+      left: (array_access
+        array: (identifier)
+        index: (number_literal))
+      right: (identifier))))
+
+================================================================================
+STRING - backslash is an ordinary character
+================================================================================
+
+x = "C:\temp\fichier.txt".
+y = REPLACE(v,"\","_").
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (string_literal))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (identifier))
+        (argument
+          name: (string_literal))
+        (argument
+          name: (string_literal))))))
+
+================================================================================
+ARGUMENT - IN handle qualifier
+================================================================================
+
+x = DYNAMIC-FUNCTION("Verif":U IN api, 24).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (string_literal)
+          in_handle: (identifier))
+        (argument
+          name: (number_literal))))))
+
+================================================================================
+OBJECT ACCESS - scoped name as the receiver
+================================================================================
+
+x = h::champ:ATTR.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (object_access
+      left: (scoped_name
+        left: (identifier)
+        right: (identifier))
+      right: (identifier))))

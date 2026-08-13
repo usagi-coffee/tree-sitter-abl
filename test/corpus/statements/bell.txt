@@ -1,0 +1,89 @@
+===============================================================================
+BELL statement
+===============================================================================
+
+BELL.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (bell_statement))
+
+===============================================================================
+BELL - reference snippet
+===============================================================================
+
+DEFINE VARIABLE outfile AS CHARACTER NO-UNDO FORMAT "x(8)" LABEL "Output file name".
+
+getfile:
+DO ON ERROR UNDO, RETRY:
+  SET outfile WITH SIDE-LABELS.
+  IF SEARCH(outfile) = outfile THEN DO:
+    MESSAGE "A file named" outfile "already exists in your directory".
+    MESSAGE "Please use another name".
+    BELL.
+    UNDO getfile, RETRY getfile.
+  END.
+END.
+
+OUTPUT TO VALUE(outfile).
+
+FOR EACH Customer NO-LOCK:
+DISPLAY Customer.Name Customer.CreditLimit.
+END.
+
+-------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo)
+    (format_phrase
+      format: (string_literal))
+    label: (string_literal))
+  (do_statement
+    label: (identifier)
+    (on_error_phrase)
+    (body
+      (set_statement
+        (field
+          field: (identifier))
+        (frame_phrase
+          (side_labels)))
+      (if_statement
+        (binary_expression
+          (function_call
+            function: (identifier)
+            (arguments
+              (argument
+                name: (identifier))))
+          (identifier))
+        then: (do_statement
+          (body
+            (message_statement
+              (string_literal)
+              (identifier)
+              (string_literal))
+            (message_statement
+              (string_literal))
+            (bell_statement)
+            (undo_statement
+              undo_label: (identifier)
+              retry_label: (identifier)))))))
+  (output_statement
+    value: (identifier))
+  (for_statement
+    (record_phrase
+      record: (identifier)
+      (no_lock))
+    (body
+      (display_statement
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))))))

@@ -1,0 +1,115 @@
+================================================================================
+USE
+================================================================================
+
+USE "production".
+USE cEnvironment.
+USE "testing" NO-ERROR.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (use_statement
+    environment: (string_literal))
+  (use_statement
+    environment: (identifier))
+  (use_statement
+    environment: (string_literal)
+    (no_error)))
+
+================================================================================
+USE - VALUE expression
+================================================================================
+
+USE VALUE(cEnv) NO-ERROR.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (use_statement
+    environment: (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (identifier))))
+    (no_error)))
+
+================================================================================
+USE - reference snippet
+================================================================================
+
+DEFINE VARIABLE w1 AS CHARACTER NO-UNDO VIEW-AS TEXT FONT 0
+FORMAT "x(34)" INITIAL "This is font 0 in the first window".
+DEFINE VARIABLE w2 AS CHARACTER NO-UNDO VIEW-AS TEXT FONT 0
+FORMAT "x(35)" INITIAL "This is font 0 in the second window".
+DEFINE VARIABLE new_win AS HANDLE NO-UNDO.
+LOAD "env1".
+LOAD "env2".
+USE "env1".
+DISPLAY w1 WITH NO-LABELS WITH FRAME a.
+PAUSE.
+USE "env2".
+CREATE WINDOW new_win.
+CURRENT-WINDOW = new_win.
+DISPLAY w2 in WINDOW new_win WITH NO-LABELS WITH FRAME b.
+PAUSE.
+DELETE WIDGET new_win.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo)
+    (view_as_phrase)
+    font: (number_literal)
+    (format_phrase
+      format: (string_literal))
+    initial: (string_literal))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo)
+    (view_as_phrase)
+    font: (number_literal)
+    (format_phrase
+      format: (string_literal))
+    initial: (string_literal))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (load_statement
+    file: (string_literal))
+  (load_statement
+    file: (string_literal))
+  (use_statement
+    environment: (string_literal))
+  (display_statement
+    record: (identifier)
+    (frame_phrase
+      (no_labels))
+    (frame_phrase
+      frame: (identifier)))
+  (pause_statement)
+  (use_statement
+    environment: (string_literal))
+  (create_widget_statement
+    handle: (identifier))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (identifier))
+  (display_statement
+    (field
+      field: (widget_qualified_name
+        target: (identifier)
+        widget: (identifier)))
+    (frame_phrase
+      (no_labels))
+    (frame_phrase
+      frame: (identifier)))
+  (pause_statement)
+  (delete_widget_statement
+    widget: (identifier)))

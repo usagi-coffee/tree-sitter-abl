@@ -1,0 +1,732 @@
+================================================================================
+PROCEDURE DEFINITION
+================================================================================
+
+PROCEDURE doSomething:
+  DEFINE INPUT PARAMETER pVal AS INTEGER.
+  DISPLAY pVal.
+END PROCEDURE.
+
+PROCEDURE emptyProc:
+END PROCEDURE.
+
+PROCEDURE dotProc.
+  MESSAGE "x".
+END PROCEDURE.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (procedure_definition
+    name: (identifier)
+    (body
+      (parameter_definition
+        name: (identifier)
+        type: (identifier))
+      (display_statement
+        record: (identifier))))
+  (procedure_definition
+    name: (identifier)
+    (body))
+  (procedure_definition
+    name: (identifier)
+    (body
+      (message_statement
+        (string_literal)))))
+
+================================================================================
+PROCEDURE - MAP option
+================================================================================
+
+PROCEDURE mappedProc MAP mp:
+END PROCEDURE.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (procedure_definition
+    name: (identifier)
+    name: (identifier)
+    (body)))
+
+================================================================================
+PROCEDURE - TABLE parameter
+================================================================================
+
+PROCEDURE tableProc:
+  DEFINE INPUT PARAMETER TABLE FOR Customer.
+  FIND FIRST Customer NO-LOCK.
+END PROCEDURE.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (procedure_definition
+    name: (identifier)
+    (body
+      (parameter_definition
+        table: (identifier))
+      (find_statement
+        (first)
+        table: (identifier)
+        (no_lock)))))
+
+================================================================================
+PROCEDURE - TABLE-HANDLE parameter
+================================================================================
+
+PROCEDURE tableHandleProc:
+  DEFINE OUTPUT PARAMETER TABLE-HANDLE hTable NO-UNDO.
+END PROCEDURE.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (procedure_definition
+    name: (identifier)
+    (body
+      (parameter_definition
+        table_handle: (identifier)
+        (no_undo)))))
+
+================================================================================
+PROCEDURE - DATASET parameter
+================================================================================
+
+PROCEDURE datasetProc:
+  DEFINE INPUT PARAMETER DATASET FOR dsOrders.
+  FOR EACH ttOrder OF dsOrders:
+    DISPLAY ttOrder.OrderNum.
+  END.
+END PROCEDURE.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (procedure_definition
+    name: (identifier)
+    (body
+      (parameter_definition
+        dataset: (identifier))
+      (for_statement
+        (record_phrase
+          record: (identifier)
+          of: (identifier))
+        (body
+          (display_statement
+            record: (qualified_name
+              left: (identifier)
+              right: (identifier))))))))
+
+================================================================================
+PROCEDURE - DATASET-HANDLE parameter
+================================================================================
+
+PROCEDURE datasetHandleProc:
+  DEFINE INPUT PARAMETER DATASET-HANDLE hDataset.
+END PROCEDURE.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (procedure_definition
+    name: (identifier)
+    (body
+      (parameter_definition
+        dataset_handle: (identifier)))))
+
+================================================================================
+PROCEDURE - BUFFER parameter
+================================================================================
+
+PROCEDURE bufferProc:
+  DEFINE PARAMETER BUFFER bufCustomer FOR Customer PRESELECT.
+  FIND FIRST bufCustomer NO-LOCK.
+END PROCEDURE.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (procedure_definition
+    name: (identifier)
+    (body
+      (parameter_definition
+        name: (identifier)
+        table: (identifier)
+        (preselect))
+      (find_statement
+        (first)
+        table: (identifier)
+        (no_lock)))))
+
+================================================================================
+PROCEDURE - BUFFER TEMP-TABLE parameter
+================================================================================
+
+PROCEDURE bufferTempProc:
+  DEFINE PARAMETER BUFFER bufTemp FOR TEMP-TABLE ttData PRESELECT.
+END PROCEDURE.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (procedure_definition
+    name: (identifier)
+    (body
+      (parameter_definition
+        name: (identifier)
+        table: (identifier)
+        (preselect)))))
+
+================================================================================
+PROCEDURE - TABLE with APPEND
+================================================================================
+
+PROCEDURE appendProc:
+  DEFINE OUTPUT PARAMETER TABLE FOR ttOrder APPEND.
+END PROCEDURE.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (procedure_definition
+    name: (identifier)
+    (body
+      (parameter_definition
+        table: (identifier)
+        (append)))))
+
+================================================================================
+PROCEDURE - TABLE with BIND
+================================================================================
+
+PROCEDURE bindProc:
+  DEFINE INPUT-OUTPUT PARAMETER TABLE FOR ttData BIND.
+END PROCEDURE.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (procedure_definition
+    name: (identifier)
+    (body
+      (parameter_definition
+        table: (identifier)
+        (bind)))))
+
+================================================================================
+PROCEDURE - TABLE with BY-VALUE
+================================================================================
+
+PROCEDURE byValueProc:
+  DEFINE INPUT PARAMETER TABLE FOR Customer BY-VALUE.
+END PROCEDURE.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (procedure_definition
+    name: (identifier)
+    (body
+      (parameter_definition
+        table: (identifier)
+        (by_value)))))
+
+================================================================================
+PROCEDURE - DATASET with APPEND
+================================================================================
+
+PROCEDURE appendDsProc:
+  DEFINE OUTPUT PARAMETER DATASET FOR dsAudit APPEND.
+END PROCEDURE.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (procedure_definition
+    name: (identifier)
+    (body
+      (parameter_definition
+        dataset: (identifier)
+        (append)))))
+
+================================================================================
+PROCEDURE - TABLE-HANDLE with BIND
+================================================================================
+
+PROCEDURE bindHandleProc:
+  DEFINE OUTPUT PARAMETER TABLE-HANDLE hTable BIND NO-UNDO.
+END PROCEDURE.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (procedure_definition
+    name: (identifier)
+    (body
+      (parameter_definition
+        table_handle: (identifier)
+        (bind)
+        (no_undo)))))
+
+================================================================================
+PROCEDURE - DATASET-HANDLE with BIND
+================================================================================
+
+PROCEDURE bindDsHandleProc:
+  DEFINE INPUT-OUTPUT PARAMETER DATASET-HANDLE hDataSet BIND.
+END PROCEDURE.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (procedure_definition
+    name: (identifier)
+    (body
+      (parameter_definition
+        dataset_handle: (identifier)
+        (bind)))))
+
+================================================================================
+PROCEDURE - Dot Header
+================================================================================
+
+PROCEDURE dotBody.
+END.
+PROCEDURE colonBody:
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (procedure_definition
+    name: (identifier)
+    (body))
+  (procedure_definition
+    name: (identifier)
+    (body)))
+
+================================================================================
+PROCEDURE - STANDARD parameter combinations
+================================================================================
+
+PROCEDURE comboProc:
+  DEFINE INPUT PARAMETER p1 AS INTEGER INITIAL 10.
+  DEFINE OUTPUT PARAMETER p2 AS CHARACTER NO-UNDO FORMAT "x(50)".
+  DEFINE INPUT-OUTPUT PARAMETER p3 LIKE Customer.CustNum.
+END PROCEDURE.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (procedure_definition
+    name: (identifier)
+    (body
+      (parameter_definition
+        name: (identifier)
+        type: (identifier)
+        initial: (number_literal))
+      (parameter_definition
+        name: (identifier)
+        type: (identifier)
+        (no_undo)
+        format: (string_literal))
+      (parameter_definition
+        name: (identifier)
+        like: (qualified_name
+          left: (identifier)
+          right: (identifier))))))
+
+================================================================================
+PROCEDURE - PRIVATE with CATCH/FINALLY
+================================================================================
+
+PROCEDURE PRIVATE calcTotals:
+  DEFINE VARIABLE i AS INTEGER NO-UNDO.
+  DO ON ERROR UNDO, THROW:
+    i = i + 1.
+  END.
+  CATCH err AS Progress.Lang.SysError:
+    MESSAGE err:GetMessage(1).
+  END CATCH.
+  FINALLY:
+    MESSAGE "cleanup".
+  END FINALLY.
+END PROCEDURE.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (procedure_definition
+    (access_modifier)
+    name: (identifier)
+    (body
+      (variable_definition
+        name: (identifier)
+        type: (identifier)
+        (no_undo))
+      (do_statement
+        (on_error_phrase)
+        (body
+          (assignment_statement
+            left: (identifier)
+            operator: (assignment_operator)
+            right: (binary_expression
+              (identifier)
+              (number_literal)))))
+      (catch_statement
+        name: (identifier)
+        type: (qualified_name
+          left: (identifier)
+          right: (identifier)
+          right: (identifier))
+        (body
+          (message_statement
+            (function_call
+              function: (object_access
+                left: (identifier)
+                right: (identifier))
+              (arguments
+                (argument
+                  name: (number_literal)))))))
+      (finally_statement
+        (body
+          (message_statement
+            (string_literal)))))))
+
+================================================================================
+PROCEDURE - EXTERNAL and IN SUPER prototypes
+================================================================================
+
+PROCEDURE MessageBoxA EXTERNAL "user32.dll":
+  DEFINE INPUT PARAMETER hwnd AS LONG.
+  DEFINE INPUT PARAMETER mbtext AS CHARACTER.
+  DEFINE INPUT PARAMETER mbtitle AS CHARACTER.
+  DEFINE INPUT PARAMETER style AS LONG.
+  DEFINE RETURN PARAMETER result AS LONG.
+END PROCEDURE.
+
+PROCEDURE calcTax CDECL ORDINAL 5 PERSISTENT THREAD-SAFE EXTERNAL "tax.dll":
+  DEFINE INPUT PARAMETER pAmount AS DECIMAL.
+  DEFINE RETURN PARAMETER pTax AS DECIMAL.
+END PROCEDURE.
+
+PROCEDURE doSuper IN SUPER.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (procedure_definition
+    name: (identifier)
+    (external_phrase)
+    (body
+      (parameter_definition
+        name: (identifier)
+        type: (identifier))
+      (parameter_definition
+        name: (identifier)
+        type: (identifier))
+      (parameter_definition
+        name: (identifier)
+        type: (identifier))
+      (parameter_definition
+        name: (identifier)
+        type: (identifier))
+      (parameter_definition
+        name: (identifier)
+        type: (identifier))))
+  (procedure_definition
+    name: (identifier)
+    (cdecl)
+    ordinal: (number_literal)
+    (persistent)
+    (external_phrase)
+    (body
+      (parameter_definition
+        name: (identifier)
+        type: (identifier))
+      (parameter_definition
+        name: (identifier)
+        type: (identifier))))
+  (procedure_definition
+    name: (identifier)
+    (in_super_phrase)
+    (body)))
+
+================================================================================
+PROCEDURE - reference snippets and EXTERNAL options
+================================================================================
+
+DEFINE VARIABLE FactorialResult AS INTEGER NO-UNDO FORMAT ">>>,>>>,>>9".
+DEFINE VARIABLE FactorialInput AS INTEGER NO-UNDO.
+REPEAT:
+SET FactorialInput VALIDATE(FactorialInput <= 12 AND FactorialInput >= 0,
+"Value must be between 0 and 12.").
+RUN Factorial (INPUT FactorialInput, OUTPUT FactorialResult).
+DISPLAY FactorialResult.
+END.
+PROCEDURE Factorial:
+DEFINE INPUT PARAMETER PTerm AS INTEGER NO-UNDO.
+DEFINE OUTPUT PARAMETER FactorialResult AS INTEGER NO-UNDO.
+DEFINE VARIABLE WorkingResult AS INTEGER NO-UNDO.
+IF PTerm <= 1 THEN DO:
+FactorialResult = 1.
+RETURN.
+END.
+ELSE DO:
+RUN Factorial (INPUT PTerm - 1, OUTPUT WorkingResult).
+FactorialResult = PTerm * WorkingResult.
+END.
+END PROCEDURE.
+
+DEFINE VARIABLE iResult AS INTEGER NO-UNDO.
+MESSAGE " It's a whole new world!"
+VIEW-AS ALERT-BOX MESSAGE BUTTONS OK TITLE "ABL Message".
+RUN MessageBoxA (0, " It's a whole new world, again!!",
+"ABL DLL Access", 0, OUTPUT iResult).
+PROCEDURE MessageBoxA EXTERNAL "user32.dll":
+DEFINE INPUT PARAMETER hwnd AS LONG.
+DEFINE INPUT PARAMETER mbtext AS CHARACTER.
+DEFINE INPUT PARAMETER mbtitle AS CHARACTER.
+DEFINE INPUT PARAMETER style AS LONG.
+DEFINE RETURN PARAMETER result AS LONG.
+END.
+
+PROCEDURE atoi EXTERNAL "/usr/lib/libc.so.1":
+DEFINE INPUT PARAMETER val AS CHARACTER.
+DEFINE RETURN PARAMETER outVal AS LONG.
+END.
+
+PROCEDURE dllProc EXTERNAL "mylib.dll":
+DEFINE INPUT PARAMETER p1 AS INTEGER.
+END.
+
+PROCEDURE dllCdecl EXTERNAL "mylib.dll" CDECL ORDINAL 2 PERSISTENT THREAD-SAFE:
+DEFINE INPUT PARAMETER p1 AS INTEGER.
+END.
+
+PROCEDURE dllStdcall EXTERNAL "mylib.dll" STDCALL:
+DEFINE INPUT PARAMETER p1 AS INTEGER.
+END.
+
+PROCEDURE dllPascal EXTERNAL "mylib.dll" PASCAL:
+DEFINE INPUT PARAMETER p1 AS INTEGER.
+END.
+
+PROCEDURE superProc IN SUPER:
+DEFINE INPUT PARAMETER p1 AS INTEGER.
+END.
+
+PROCEDURE PRIVATE hiddenProc:
+DEFINE INPUT PARAMETER p1 AS INTEGER.
+END PROCEDURE.
+
+PROCEDURE ANYWHERE.Click.
+END.
+PROCEDURE frCtrl.myOcx.Click:
+END PROCEDURE.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo)
+    (format_phrase
+      format: (string_literal)))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (repeat_statement
+    (body
+      (set_statement
+        (field
+          field: (identifier)
+          (format_phrase
+            condition: (binary_expression
+              (binary_expression
+                (identifier)
+                (number_literal))
+              (binary_expression
+                (identifier)
+                (number_literal)))
+            message: (string_literal))))
+      (run_statement
+        procedure: (identifier)
+        (arguments
+          (argument
+            name: (identifier))
+          (argument
+            name: (identifier))))
+      (display_statement
+        record: (identifier))))
+  (procedure_definition
+    name: (identifier)
+    (body
+      (parameter_definition
+        name: (identifier)
+        type: (identifier)
+        (no_undo))
+      (parameter_definition
+        name: (identifier)
+        type: (identifier)
+        (no_undo))
+      (variable_definition
+        name: (identifier)
+        type: (identifier)
+        (no_undo))
+      (if_statement
+        (binary_expression
+          (identifier)
+          (number_literal))
+        then: (do_statement
+          (body
+            (assignment_statement
+              left: (identifier)
+              operator: (assignment_operator)
+              right: (number_literal))
+            (return_statement)))
+        else: (do_statement
+          (body
+            (run_statement
+              procedure: (identifier)
+              (arguments
+                (argument
+                  name: (binary_expression
+                    (identifier)
+                    (number_literal)))
+                (argument
+                  name: (identifier))))
+            (assignment_statement
+              left: (identifier)
+              operator: (assignment_operator)
+              right: (binary_expression
+                (identifier)
+                (identifier))))))))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (message_statement
+    (string_literal)
+    (view_as_phrase
+      (alert_type)
+      title: (string_literal)))
+  (run_statement
+    procedure: (identifier)
+    (arguments
+      (argument
+        name: (number_literal))
+      (argument
+        name: (string_literal))
+      (argument
+        name: (string_literal))
+      (argument
+        name: (number_literal))
+      (argument
+        name: (identifier))))
+  (procedure_definition
+    name: (identifier)
+    (external_phrase)
+    (body
+      (parameter_definition
+        name: (identifier)
+        type: (identifier))
+      (parameter_definition
+        name: (identifier)
+        type: (identifier))
+      (parameter_definition
+        name: (identifier)
+        type: (identifier))
+      (parameter_definition
+        name: (identifier)
+        type: (identifier))
+      (parameter_definition
+        name: (identifier)
+        type: (identifier))))
+  (procedure_definition
+    name: (identifier)
+    (external_phrase)
+    (body
+      (parameter_definition
+        name: (identifier)
+        type: (identifier))
+      (parameter_definition
+        name: (identifier)
+        type: (identifier))))
+  (procedure_definition
+    name: (identifier)
+    (external_phrase)
+    (body
+      (parameter_definition
+        name: (identifier)
+        type: (identifier))))
+  (procedure_definition
+    name: (identifier)
+    (external_phrase)
+    (cdecl)
+    ordinal: (number_literal)
+    (persistent)
+    (body
+      (parameter_definition
+        name: (identifier)
+        type: (identifier))))
+  (procedure_definition
+    name: (identifier)
+    (external_phrase
+      (stdcall))
+    (body
+      (parameter_definition
+        name: (identifier)
+        type: (identifier))))
+  (procedure_definition
+    name: (identifier)
+    (external_phrase
+      (pascal))
+    (body
+      (parameter_definition
+        name: (identifier)
+        type: (identifier))))
+  (procedure_definition
+    name: (identifier)
+    (in_super_phrase)
+    (body
+      (parameter_definition
+        name: (identifier)
+        type: (identifier))))
+  (procedure_definition
+    (access_modifier)
+    name: (identifier)
+    (body
+      (parameter_definition
+        name: (identifier)
+        type: (identifier))))
+  (procedure_definition
+    name: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (body))
+  (procedure_definition
+    name: (qualified_name
+      left: (identifier)
+      right: (identifier)
+      right: (identifier))
+    (body)))
+
+================================================================================
+PROCEDURE - modifier after the name
+================================================================================
+
+PROCEDURE p PRIVATE:
+END PROCEDURE.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (procedure_definition
+    name: (identifier)
+    (access_modifier)
+    (body)))

@@ -1,0 +1,560 @@
+================================================================================
+DISPLAY basic
+================================================================================
+
+DISPLAY x.
+DISPLAY "Hello".
+DISPLAY 123.
+DISP SKIP(1) "x".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (display_statement
+    record: (identifier))
+  (display_statement
+    (field
+      field: (string_literal)))
+  (display_statement
+    (field
+      field: (number_literal)))
+  (display_statement
+    (field
+      field: (parenthesized_expression
+        (number_literal)))
+    (field
+      field: (string_literal))))
+
+================================================================================
+DISPLAY multiple items
+================================================================================
+
+DISPLAY x y z.
+DISPLAY Customer.Name Customer.Balance.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (display_statement
+    (field
+      field: (identifier))
+    (field
+      field: (identifier))
+    (field
+      field: (identifier)))
+  (display_statement
+    (field
+      field: (qualified_name
+        left: (identifier)
+        right: (identifier)))
+    (field
+      field: (qualified_name
+        left: (identifier)
+        right: (identifier)))))
+
+================================================================================
+DISPLAY with aggregates
+================================================================================
+
+DISPLAY Customer.Balance (TOTAL).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (display_statement
+    (field
+      field: (qualified_name
+        left: (identifier)
+        right: (identifier))
+      (aggregate_phrase
+        operation: (aggregate_operation)))))
+
+================================================================================
+DISPLAY abbreviated
+================================================================================
+
+DISP x.
+disp Customer.Name.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (display_statement
+    record: (identifier))
+  (display_statement
+    record: (qualified_name
+      left: (identifier)
+      right: (identifier))))
+
+================================================================================
+DISPLAY with expressions
+================================================================================
+
+DISPLAY x + y.
+DISPLAY "Total: " + STRING(amount).
+DISPLAY Item.Qty * Item.Price LABEL "Extended".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (display_statement
+    (field
+      field: (binary_expression
+        (identifier)
+        (identifier))))
+  (display_statement
+    (field
+      field: (binary_expression
+        (string_literal)
+        (function_call
+          function: (identifier)
+          (arguments
+            (argument
+              name: (identifier)))))))
+  (display_statement
+    (field
+      field: (binary_expression
+        (qualified_name
+          left: (identifier)
+          right: (identifier))
+        (qualified_name
+          left: (identifier)
+          right: (identifier))))
+    (format_phrase
+      label: (string_literal))))
+
+================================================================================
+DISPLAY with function calls
+================================================================================
+
+DISPLAY STRING(TODAY).
+DISPLAY CAPS(Customer.Name).
+DISPLAY SUBSTRING(str, 1, 5).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (display_statement
+    (field
+      field: (function_call
+        function: (identifier)
+        (arguments
+          (argument
+            name: (identifier))))))
+  (display_statement
+    (field
+      field: (function_call
+        function: (identifier)
+        (arguments
+          (argument
+            name: (qualified_name
+              left: (identifier)
+              right: (identifier)))))))
+  (display_statement
+    (field
+      field: (function_call
+        function: (identifier)
+        (arguments
+          (argument
+            name: (identifier))
+          (argument
+            name: (number_literal))
+          (argument
+            name: (number_literal)))))))
+
+================================================================================
+DISPLAY record with EXCEPT and frame phrase
+================================================================================
+
+DISPLAY Customer EXCEPT Comments PrivateNotes WITH FRAME fCust NO-ERROR.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (display_statement
+    record: (identifier)
+    except: (identifier)
+    except: (identifier)
+    (frame_phrase
+      frame: (identifier))
+    (no_error)))
+
+================================================================================
+DISPLAY with format, WHEN, and @ base-field
+================================================================================
+
+DISPLAY orderTotal FORMAT "->>>,>>9.99" WHEN showTotal @ baseTotal.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (display_statement
+    (field
+      field: (identifier))
+    (format_phrase
+      format: (string_literal))
+    when: (identifier)
+    base: (identifier)))
+
+================================================================================
+DISPLAY - Reference snippets
+================================================================================
+
+FOR EACH Customer NO-LOCK BY Customer.State BY Customer.Name:
+  DISPLAY Customer.State Customer.CustNum Customer.Name.
+  FOR EACH Order OF Customer NO-LOCK:
+    DISPLAY Order.OrderNum Order.Name Order.ShipDate Order.PromiseDate.
+    FOR EACH OrderLine OF Order NO-LOCK, Item OF OrderLine NO-LOCK:
+      DISPLAY OrderLine.LineNum Item.ItemName OrderLine.Qty OrderLine.price.
+    END.
+  END.
+END.
+
+FOR EACH Order NO-LOCK, Customer OF Order NO-LOCK:
+  DISPLAY Order.OrderNum Customer.Name Order.ShipDate Order.PromiseDate.
+  FOR EACH OrderLine OF Order NO-LOCK, Item OF OrderLine NO-LOCK:
+    DISPLAY OrderLine.LineNum Item.ItemName OrderLine.Qty OrderLine.Price
+      OrderLine.Qty * OrderLine.Price (TOTAL) LABEL "Order-value".
+  END.
+END.
+
+FOR EACH Customer NO-LOCK:
+  DISPLAY Customer.Name SKIP Customer.Address SKIP Customer.Address2 SKIP
+    Customer.City + ", " + Customer.State FORMAT "x(16)"
+    Customer.PostalCode WHEN Customer.PostalCode NE "" SKIP(2)
+    WITH NO-BOX NO-LABELS USE-TEXT.
+END.
+
+DISPLAY Customer EXCEPT Customer.Comments WITH FRAME f2.
+DISPLAY Customer EXCEPT Customer.Comments WITH BROWSE b1.
+DISPLAY Customer.Name IN WINDOW hWin WITH FRAME f1 NO-ERROR.
+DISPLAY STREAM s1 Customer.Name.
+DISPLAY STREAM s1 UNLESS-HIDDEN Customer.Name.
+DISPLAY STREAM-HANDLE hStream Customer.Name.
+DISPLAY UNLESS-HIDDEN Customer.Name.
+DISPLAY SPACE(2) Customer.Name SKIP(1) Customer.City.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (for_statement
+    (record_phrase
+      record: (identifier)
+      (no_lock))
+    (by_phrase
+      by: (qualified_name
+        left: (identifier)
+        right: (identifier))
+      by: (qualified_name
+        left: (identifier)
+        right: (identifier)))
+    (body
+      (display_statement
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier))))
+      (for_statement
+        (record_phrase
+          record: (identifier)
+          of: (identifier)
+          (no_lock))
+        (body
+          (display_statement
+            (field
+              field: (qualified_name
+                left: (identifier)
+                right: (identifier)))
+            (field
+              field: (qualified_name
+                left: (identifier)
+                right: (identifier)))
+            (field
+              field: (qualified_name
+                left: (identifier)
+                right: (identifier)))
+            (field
+              field: (qualified_name
+                left: (identifier)
+                right: (identifier))))
+          (for_statement
+            (record_phrase
+              record: (identifier)
+              of: (identifier)
+              (no_lock))
+            (record_phrase
+              record: (identifier)
+              of: (identifier)
+              (no_lock))
+            (body
+              (display_statement
+                (field
+                  field: (qualified_name
+                    left: (identifier)
+                    right: (identifier)))
+                (field
+                  field: (qualified_name
+                    left: (identifier)
+                    right: (identifier)))
+                (field
+                  field: (qualified_name
+                    left: (identifier)
+                    right: (identifier)))
+                (field
+                  field: (qualified_name
+                    left: (identifier)
+                    right: (identifier))))))))))
+  (for_statement
+    (record_phrase
+      record: (identifier)
+      (no_lock))
+    (record_phrase
+      record: (identifier)
+      of: (identifier)
+      (no_lock))
+    (body
+      (display_statement
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier))))
+      (for_statement
+        (record_phrase
+          record: (identifier)
+          of: (identifier)
+          (no_lock))
+        (record_phrase
+          record: (identifier)
+          of: (identifier)
+          (no_lock))
+        (body
+          (display_statement
+            (field
+              field: (qualified_name
+                left: (identifier)
+                right: (identifier)))
+            (field
+              field: (qualified_name
+                left: (identifier)
+                right: (identifier)))
+            (field
+              field: (qualified_name
+                left: (identifier)
+                right: (identifier)))
+            (field
+              field: (qualified_name
+                left: (identifier)
+                right: (identifier)))
+            (field
+              field: (binary_expression
+                (qualified_name
+                  left: (identifier)
+                  right: (identifier))
+                (qualified_name
+                  left: (identifier)
+                  right: (identifier)))
+              (aggregate_phrase
+                operation: (aggregate_operation)))
+            (format_phrase
+              label: (string_literal)))))))
+  (for_statement
+    (record_phrase
+      record: (identifier)
+      (no_lock))
+    (body
+      (display_statement
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (binary_expression
+            (binary_expression
+              (qualified_name
+                left: (identifier)
+                right: (identifier))
+              (string_literal))
+            (qualified_name
+              left: (identifier)
+              right: (identifier))))
+        (format_phrase
+          format: (string_literal))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        when: (binary_expression
+          (qualified_name
+            left: (identifier)
+            right: (identifier))
+          (string_literal))
+        (field
+          field: (parenthesized_expression
+            (number_literal)))
+        (frame_phrase
+          (no_box)
+          (no_labels)
+          (use_text)))))
+  (display_statement
+    record: (identifier)
+    except: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (frame_phrase
+      frame: (identifier)))
+  (display_statement
+    record: (identifier)
+    except: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    browse: (identifier))
+  (display_statement
+    (field
+      field: (widget_qualified_name
+        target: (qualified_name
+          left: (identifier)
+          right: (identifier))
+        widget: (identifier)))
+    (frame_phrase
+      frame: (identifier))
+    (no_error))
+  (display_statement
+    stream: (identifier)
+    record: (qualified_name
+      left: (identifier)
+      right: (identifier)))
+  (display_statement
+    stream: (identifier)
+    (unless_hidden)
+    record: (qualified_name
+      left: (identifier)
+      right: (identifier)))
+  (display_statement
+    stream: (identifier)
+    record: (qualified_name
+      left: (identifier)
+      right: (identifier)))
+  (display_statement
+    (unless_hidden)
+    record: (qualified_name
+      left: (identifier)
+      right: (identifier)))
+  (display_statement
+    (field
+      field: (parenthesized_expression
+        (number_literal)))
+    (field
+      field: (qualified_name
+        left: (identifier)
+        right: (identifier)))
+    (field
+      field: (parenthesized_expression
+        (number_literal)))
+    (field
+      field: (qualified_name
+        left: (identifier)
+        right: (identifier)))))
+
+================================================================================
+DISPLAY with frame only
+================================================================================
+
+DISPLAY WITH FRAME a 1 DOWN NO-LABEL OVERLAY.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (display_statement
+    (frame_phrase
+      frame: (identifier)
+      (down
+        value: (number_literal))
+      (no_label)
+      (overlay))))
+
+================================================================================
+DISPLAY with stream and frame only
+================================================================================
+
+DISPLAY STREAM s1 WITH FRAME f1.
+DISPLAY STREAM s1 IN WINDOW hWin WITH FRAME f1.
+DISPLAY STREAM s1 UNLESS-HIDDEN WITH FRAME f1.
+DISPLAY STREAM s1 UNLESS-HIDDEN IN WINDOW hWin WITH FRAME f1.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (display_statement
+    stream: (identifier)
+    (frame_phrase
+      frame: (identifier)))
+  (display_statement
+    stream: (identifier)
+    (in_window_phrase
+      window: (identifier))
+    (frame_phrase
+      frame: (identifier)))
+  (display_statement
+    stream: (identifier)
+    (unless_hidden)
+    (frame_phrase
+      frame: (identifier)))
+  (display_statement
+    stream: (identifier)
+    (unless_hidden)
+    (in_window_phrase
+      window: (identifier))
+    (frame_phrase
+      frame: (identifier))))
+
+================================================================================
+DISPLAY - standalone aggregate expression
+================================================================================
+
+DISPLAY (COUNT BY category).
+DISPLAY (COUNT TOTAL BY region).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (display_statement
+    (aggregate_expression
+      (aggregate_phrase
+        operation: (aggregate_operation)
+        (by_phrase
+          group: (identifier)))))
+  (display_statement
+    (aggregate_expression
+      (aggregate_phrase
+        operation: (aggregate_operation)
+        operation: (aggregate_operation)
+        (by_phrase
+          group: (identifier))))))

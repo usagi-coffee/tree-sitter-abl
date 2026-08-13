@@ -1,0 +1,197 @@
+================================================================================
+PUT SCREEN
+================================================================================
+
+PUT SCREEN "Hello".
+PUT SCREEN ROW 5 "Text".
+PUT SCREEN COLUMN 10 "Text".
+PUT SCREEN ROW 5 COLUMN 10 "Text".
+PUT SCREEN COLOR 7 ROW 1 COLUMN 1 "Header".
+PUT SCREEN COLOR NORMAL ROW 2 COLUMN 1 "Hdr".
+PUT SCREEN COLOR "FF" "Hex".
+PUT SCREEN COLOR BLINK-RED "Blink".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (put_screen_statement
+    value: (string_literal))
+  (put_screen_statement
+    row: (number_literal)
+    value: (string_literal))
+  (put_screen_statement
+    column: (number_literal)
+    value: (string_literal))
+  (put_screen_statement
+    row: (number_literal)
+    column: (number_literal)
+    value: (string_literal))
+  (put_screen_statement
+    (color_phrase
+      color: (number_literal))
+    row: (number_literal)
+    column: (number_literal)
+    value: (string_literal))
+  (put_screen_statement
+    (color_phrase
+      color: (identifier))
+    row: (number_literal)
+    column: (number_literal)
+    value: (string_literal))
+  (put_screen_statement
+    (color_phrase
+      color: (string_literal))
+    value: (string_literal))
+  (put_screen_statement
+    (color_phrase
+      color: (identifier))
+    value: (string_literal)))
+
+================================================================================
+PUT SCREEN - row/column expressions
+================================================================================
+
+PUT SCREEN ROW iRow + 1 COLUMN iCol + 2 "Text".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (put_screen_statement
+    row: (binary_expression
+      (identifier)
+      (number_literal))
+    column: (binary_expression
+      (identifier)
+      (number_literal))
+    value: (string_literal)))
+
+================================================================================
+PUT SCREEN - reference snippet
+================================================================================
+
+DEFINE VARIABLE paid-owed AS DECIMAL NO-UNDO.
+DEFINE VARIABLE bal-label AS CHARACTER NO-UNDO FORMAT "x(20)".
+FOR EACH Customer NO-LOCK:
+paid-owed = Customer.Balance.
+IF paid-owed < 0 THEN DO:
+paid-owed = - paid-owed.
+bal-label = "Customer Credit".
+END.
+ELSE bal-label = "Unpaid balance".
+DISPLAY Customer.CustNum Customer.Name paid-owed LABEL " " WITH 1 DOWN.
+IF Customer.Balance < 0 THEN
+PUT SCREEN COLOR MESSAGES ROW 2 COLUMN 34 bal-label.
+ELSE
+PUT SCREEN ROW 2 COLUMN 34 bal-label.
+END.
+
+PUT SCREEN COLOR VALUE(cColor) ROW 1 COLUMN 1 "Hdr".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo)
+    (format_phrase
+      format: (string_literal)))
+  (for_statement
+    (record_phrase
+      record: (identifier)
+      (no_lock))
+    (body
+      (assignment_statement
+        left: (identifier)
+        operator: (assignment_operator)
+        right: (qualified_name
+          left: (identifier)
+          right: (identifier)))
+      (if_statement
+        (binary_expression
+          (identifier)
+          (number_literal))
+        then: (do_statement
+          (body
+            (assignment_statement
+              left: (identifier)
+              operator: (assignment_operator)
+              right: (unary_expression
+                (identifier)))
+            (assignment_statement
+              left: (identifier)
+              operator: (assignment_operator)
+              right: (string_literal))))
+        else: (assignment_statement
+          left: (identifier)
+          operator: (assignment_operator)
+          right: (string_literal)))
+      (display_statement
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (identifier))
+        (format_phrase
+          label: (string_literal))
+        (frame_phrase
+          (down
+            value: (number_literal))))
+      (if_statement
+        (binary_expression
+          (qualified_name
+            left: (identifier)
+            right: (identifier))
+          (number_literal))
+        then: (put_screen_statement
+          (color_phrase
+            color: (identifier))
+          row: (number_literal)
+          column: (number_literal)
+          value: (identifier))
+        else: (put_screen_statement
+          row: (number_literal)
+          column: (number_literal)
+          value: (identifier)))))
+  (put_screen_statement
+    (color_phrase
+      color: (function_call
+        function: (identifier)
+        (arguments
+          (argument
+            name: (identifier)))))
+    row: (number_literal)
+    column: (number_literal)
+    value: (string_literal)))
+
+================================================================================
+PUT SCREEN - legacy order (value before ROW) and COL alias
+================================================================================
+
+PUT SCREEN "Text" ROW 5.
+PUT SCREEN "Text" ROW 5 COL 10.
+PUT SCREEN ROW 5 COL 10 "Text".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (put_screen_statement
+    value: (string_literal)
+    row: (number_literal))
+  (put_screen_statement
+    value: (string_literal)
+    row: (number_literal)
+    column: (number_literal))
+  (put_screen_statement
+    row: (number_literal)
+    column: (number_literal)
+    value: (string_literal)))

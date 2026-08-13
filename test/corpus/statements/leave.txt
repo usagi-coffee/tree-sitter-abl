@@ -1,0 +1,79 @@
+================================================================================
+LEAVE
+================================================================================
+
+LEAVE.
+LEAVE outerLoop.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (leave_statement)
+  (leave_statement
+    label: (identifier)))
+
+================================================================================
+LEAVE - Reference snippet
+================================================================================
+
+DEFINE VARIABLE valid-choice AS CHARACTER NO-UNDO INITIAL "NPFQ".
+DEFINE VARIABLE selection AS CHARACTER NO-UNDO FORMAT "x".
+main-loop:
+REPEAT:
+label1:
+REPEAT ON ENDKEY UNDO label1, RETURN:
+  MESSAGE "(N)ext (P)rev (F)ind (Q)uit".
+  UPDATE selection AUTO-RETURN.
+  IF INDEX(valid-choice, selection) <> 0 THEN LEAVE label1.
+  BELL.
+END.
+IF selection = "Q" THEN LEAVE main-loop.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo)
+    initial: (string_literal))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo)
+    (format_phrase
+      format: (string_literal)))
+  (repeat_statement
+    label: (identifier)
+    (body
+      (repeat_statement
+        label: (identifier)
+        (on_endkey_phrase
+          undo_label: (identifier))
+        (body
+          (message_statement
+            (string_literal))
+          (update_statement
+            (field
+              field: (identifier)
+              (format_phrase)))
+          (if_statement
+            (binary_expression
+              (function_call
+                function: (identifier)
+                (arguments
+                  (argument
+                    name: (identifier))
+                  (argument
+                    name: (identifier))))
+              (number_literal))
+            then: (leave_statement
+              label: (identifier)))
+          (bell_statement)))
+      (if_statement
+        (binary_expression
+          (identifier)
+          (string_literal))
+        then: (leave_statement
+          label: (identifier))))))

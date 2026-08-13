@@ -1,0 +1,442 @@
+================================================================================
+PROMPT-FOR
+================================================================================
+
+PROMPT-FOR field1.
+PROMPT-FOR field1 field2 field3.
+PROMPT-FOR field1 WHEN x > 5.
+PROMPT-FOR UNLESS-HIDDEN field1.
+PROMPT-FOR field1 IN WINDOW w1.
+PROMPT-FOR field1 WITH FRAME f1.
+PROMPT-FOR field1 GO-ON(f1 f2).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (prompt_for_statement
+    (field
+      field: (identifier)))
+  (prompt_for_statement
+    (field
+      field: (identifier))
+    (field
+      field: (identifier))
+    (field
+      field: (identifier)))
+  (prompt_for_statement
+    (field
+      field: (identifier)
+      when: (binary_expression
+        (identifier)
+        (number_literal))))
+  (prompt_for_statement
+    (unless_hidden)
+    (field
+      field: (identifier)))
+  (prompt_for_statement
+    (field
+      field: (identifier))
+    (in_window_phrase
+      window: (identifier)))
+  (prompt_for_statement
+    (field
+      field: (identifier))
+    (frame_phrase
+      frame: (identifier)))
+  (prompt_for_statement
+    (field
+      field: (identifier))
+    (go_on_phrase
+      (identifier)
+      (identifier))))
+
+================================================================================
+PROMPT-FOR with format, text, constants, and editing
+================================================================================
+
+PROMPT-FOR field1 FORMAT "x(10)" WHEN ok
+  TEXT(field2 FORMAT "x(5)")
+  "CONST" AT 5
+  SKIP
+  EDITING:
+    READKEY.
+  END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (prompt_for_statement
+    (field
+      field: (identifier)
+      (format_phrase
+        format: (string_literal))
+      when: (identifier))
+    (field
+      field: (identifier)
+      (format_phrase
+        format: (string_literal)))
+    (field
+      constant: (string_literal)
+      (at_phrase))
+    (field)
+    (editing_phrase
+      (readkey_statement))))
+
+================================================================================
+PROMPT-FOR - full ordered fields tail
+================================================================================
+
+PROMPT-FOR field1 GO-ON(F2) IN WINDOW w1 WITH FRAME f1 WITH NO-VALIDATE EDITING:
+  READKEY.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (prompt_for_statement
+    (field
+      field: (identifier))
+    (go_on_phrase
+      (identifier))
+    (in_window_phrase
+      window: (identifier))
+    (frame_phrase
+      frame: (identifier)
+      (no_validate))
+    (editing_phrase
+      (readkey_statement))))
+
+================================================================================
+PROMPT-FOR record with EXCEPT and constant VIEW-AS
+================================================================================
+
+PROMPT-FOR Customer EXCEPT Comments PrivateNotes WITH FRAME fCust.
+PROMPT-FOR "Notes:" TO 20 VIEW-AS TEXT FGCOLOR 12 BGCOLOR 1 FONT 2 field1.
+PROMPT-FOR "Font:" FONT 2 field2.
+PROMPT-FOR "Background:" BGCOLOR 1 FONT 2 field3.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (prompt_for_statement
+    record: (identifier)
+    (field
+      (identifier))
+    (field
+      (identifier))
+    (frame_phrase
+      frame: (identifier)))
+  (prompt_for_statement
+    (field
+      constant: (string_literal)
+      (to_phrase)
+      (view_as_phrase
+        widget: (identifier))
+      fgcolor: (number_literal)
+      bgcolor: (number_literal)
+      font: (number_literal))
+    (field
+      field: (identifier)))
+  (prompt_for_statement
+    (field
+      constant: (string_literal)
+      font: (number_literal))
+    (field
+      field: (identifier)))
+  (prompt_for_statement
+    (field
+      constant: (string_literal)
+      bgcolor: (number_literal)
+      font: (number_literal))
+    (field
+      field: (identifier))))
+
+================================================================================
+PROMPT-FOR - reference snippets and stream variants
+================================================================================
+
+DEFINE VARIABLE ix AS INTEGER NO-UNDO INITIAL 3.
+PROMPT-FOR ix.
+MESSAGE "Record buffer" ix SKIP(0) "Screen buffer" INPUT ix.
+
+DEFINE VARIABLE s-com AS CHARACTER NO-UNDO FORMAT "x(40)" EXTENT 5.
+FORM
+"Shipped
+:" Order.ShipDate AT 13 SKIP
+"Misc Info :" Order.Instructions AT 13 SKIP(1)
+"Order Comments :" s-com AT 1
+WITH FRAME o-com CENTERED NO-LABELS TITLE "Shipping Information".
+FOR EACH Customer NO-LOCK, EACH Order OF Customer:
+DISPLAY Customer.CustNum Customer.Name Order.OrderNum Order.OrderDate
+Order.PromiseDate WITH FRAME order-hdr CENTERED.
+UPDATE Order.ShipDate Order.Instructions TEXT(s-com)
+WITH FRAME o-com.
+s-com = "".
+END.
+
+REPEAT:
+PROMPT-FOR Customer.CustNum.
+FIND Customer USING Customer.CustNum NO-ERROR.
+IF NOT AVAILABLE Customer THEN DO:
+MESSAGE "No such customer number.".
+UNDO, RETRY.
+END.
+DISPLAY Customer.Name Customer.Phone Customer.SalesRep.
+END.
+
+REPEAT:
+  PROMPT-FOR SalesRep.SalesRep LABEL "Sales rep's initials"
+  WITH FRAME namefr ROW 2 SIDE-LABELS.
+  FIND SalesRep NO-LOCK USING SalesRep.SalesRep.
+  DISPLAY SalesRep.RepName SalesRep.Region SalesRep.MonthQuota
+  WITH 1 DOWN NO-HIDE.
+END.
+
+PROMPT-FOR STREAM s1 field1 SPACE(2) SKIP(1) ^ GO-ON(F2 F3).
+PROMPT-FOR STREAM-HANDLE hS field1 field2 IN WINDOW wMain WITH FRAME fMain.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo)
+    initial: (number_literal))
+  (prompt_for_statement
+    (field
+      field: (identifier)))
+  (message_statement
+    (string_literal)
+    (identifier)
+    (skip
+      count: (number_literal))
+    (string_literal)
+    (input_expression
+      field: (identifier)))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo)
+    (format_phrase
+      format: (string_literal))
+    (extent_phrase
+      size: (number_literal)))
+  (form_statement
+    (form_item
+      field: (string_literal))
+    (form_item
+      field: (qualified_name
+        left: (identifier)
+        right: (identifier)))
+    (form_item
+      field: (identifier))
+    (form_item
+      field: (number_literal))
+    (form_item)
+    (form_item
+      field: (string_literal))
+    (form_item
+      field: (qualified_name
+        left: (identifier)
+        right: (identifier)))
+    (form_item
+      field: (identifier))
+    (form_item
+      field: (number_literal))
+    (form_item
+      skip: (number_literal))
+    (form_item
+      field: (string_literal))
+    (form_item
+      field: (identifier))
+    (form_item
+      field: (identifier))
+    (form_item
+      field: (number_literal))
+    (frame_phrase
+      frame: (identifier)
+      (centered)
+      (no_labels)
+      title: (string_literal)))
+  (for_statement
+    (record_phrase
+      record: (identifier)
+      (no_lock))
+    (record_phrase
+      record: (identifier)
+      of: (identifier))
+    (body
+      (display_statement
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (frame_phrase
+          frame: (identifier)
+          (centered)))
+      (update_statement
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (identifier))
+        (frame_phrase
+          frame: (identifier)))
+      (assignment_statement
+        left: (identifier)
+        operator: (assignment_operator)
+        right: (string_literal))))
+  (repeat_statement
+    (body
+      (prompt_for_statement
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier))))
+      (find_statement
+        table: (identifier)
+        values: (qualified_name
+          left: (identifier)
+          right: (identifier))
+        (no_error))
+      (if_statement
+        (unary_expression
+          (available_expression
+            record: (identifier)))
+        then: (do_statement
+          (body
+            (message_statement
+              (string_literal))
+            (undo_statement))))
+      (display_statement
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier))))))
+  (repeat_statement
+    (body
+      (prompt_for_statement
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier))
+          (format_phrase
+            label: (string_literal)))
+        (frame_phrase
+          frame: (identifier)
+          row: (number_literal)
+          (side_labels)))
+      (find_statement
+        table: (identifier)
+        (no_lock)
+        values: (qualified_name
+          left: (identifier)
+          right: (identifier)))
+      (display_statement
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (frame_phrase
+          (down
+            value: (number_literal))
+          (no_hide)))))
+  (prompt_for_statement
+    stream: (identifier)
+    (field
+      field: (identifier))
+    (field
+      space: (number_literal))
+    (field
+      skip: (number_literal))
+    (field)
+    (go_on_phrase
+      (identifier)
+      (identifier)))
+  (prompt_for_statement
+    stream: (identifier)
+    (field
+      field: (identifier))
+    (field
+      field: (identifier))
+    (in_window_phrase
+      window: (identifier))
+    (frame_phrase
+      frame: (identifier))))
+
+================================================================================
+PROMPT-FOR with NO-VALIDATE + EDITING
+================================================================================
+
+PROMPT-FOR cp_cust WITH NO-VALIDATE EDITING:
+  READKEY.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (prompt_for_statement
+    (field
+      field: (identifier))
+    (with_phrase
+      (no_validate))
+    (editing_phrase
+      (readkey_statement))))
+
+================================================================================
+PROMPT-FOR - GO-ON with quoted keys
+================================================================================
+
+PROMPT-FOR code_fldname GO-ON("F5" "CTRL-D") EDITING:
+  READKEY.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (prompt_for_statement
+    (field
+      field: (identifier))
+    (go_on_phrase
+      (string_literal)
+      (string_literal))
+    (editing_phrase
+      (readkey_statement))))

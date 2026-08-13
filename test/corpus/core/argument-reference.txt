@@ -1,0 +1,33 @@
+================================================================================
+ARGUMENT REFERENCE
+================================================================================
+
+DEF {1} VAR x AS INTEGER.
+x = {2}.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    (argument_reference)
+    name: (identifier)
+    type: (identifier))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (argument_reference)))
+
+================================================================================
+ARGUMENT REFERENCE positional and all arguments
+================================================================================
+
+{1}.
+{*}.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (argument_reference)
+  (empty_statement)
+  (argument_reference)
+  (empty_statement))

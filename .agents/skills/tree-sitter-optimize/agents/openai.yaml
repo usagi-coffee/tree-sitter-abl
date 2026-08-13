@@ -1,0 +1,4 @@
+interface:
+  display_name: "Tree-sitter Optimize"
+  short_description: "Optimize tree-sitter grammar costs"
+  default_prompt: "Use $tree-sitter-optimize to reduce parser cost in this grammar."

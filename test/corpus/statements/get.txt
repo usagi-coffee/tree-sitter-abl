@@ -1,0 +1,89 @@
+================================================================================
+GET statement
+================================================================================
+
+GET FIRST qCustomer.
+GET NEXT qCustomer.
+GET PREV qCustomer.
+GET LAST qCustomer.
+GET CURRENT qCustomer NO-LOCK.
+GET NEXT qOrder EXCLUSIVE-LOCK NO-WAIT.
+GET FIRST qCustomer SHARE-LOCK.
+GET NEXT qCustomer NO-WAIT.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (get_statement
+    query: (identifier))
+  (get_statement
+    query: (identifier))
+  (get_statement
+    query: (identifier))
+  (get_statement
+    query: (identifier))
+  (get_statement
+    query: (identifier))
+  (get_statement
+    query: (identifier)
+    (no_wait))
+  (get_statement
+    query: (identifier))
+  (get_statement
+    query: (identifier)
+    (no_wait)))
+
+================================================================================
+GET - Reference snippet
+================================================================================
+
+DEFINE QUERY cust-order FOR Customer, Order.
+OPEN QUERY cust-order FOR EACH Customer, EACH Order OF Customer.
+GET FIRST cust-order.
+DO WHILE AVAILABLE Customer:
+  DISPLAY Customer.CustNum Customer.Name WITH FRAME cust-info.
+  DISPLAY Order WITH FRAME order-info SIDE-LABELS.
+  PAUSE.
+  GET NEXT cust-order.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (query_definition
+    name: (identifier)
+    (query_table_list
+      table: (identifier)
+      table: (identifier)))
+  (open_query_statement
+    query: (identifier)
+    (record_phrase
+      record: (identifier))
+    (record_phrase
+      record: (identifier)
+      of: (identifier)))
+  (get_statement
+    query: (identifier))
+  (do_statement
+    condition: (available_expression
+      record: (identifier))
+    (body
+      (display_statement
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (frame_phrase
+          frame: (identifier)))
+      (display_statement
+        record: (identifier)
+        (frame_phrase
+          frame: (identifier)
+          (side_labels)))
+      (pause_statement)
+      (get_statement
+        query: (identifier)))))

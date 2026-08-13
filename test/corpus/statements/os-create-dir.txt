@@ -1,0 +1,71 @@
+================================================================================
+OS-CREATE-DIR statement
+================================================================================
+
+OS-CREATE-DIR "mydir".
+OS-CREATE-DIR cDirName.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (os_create_dir_statement
+    directory: (string_literal))
+  (os_create_dir_statement
+    directory: (identifier)))
+
+================================================================================
+OS-CREATE-DIR - reference snippets and VALUE
+================================================================================
+
+DEFINE VARIABLE stat AS INTEGER NO-UNDO.
+DEFINE VARIABLE dir_name AS CHARACTER NO-UNDO FORMAT "x(64)"
+LABEL "Enter the name of the directory you want to create.".
+UPDATE dir_name.
+OS-CREATE-DIR VALUE(dir_name).
+stat = OS-ERROR.
+IF stat NE 0 THEN
+MESSAGE "Directory not created. System Error #" stat.
+
+OS-CREATE-DIR VALUE("tmp") "logs".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo)
+    (format_phrase
+      format: (string_literal))
+    label: (string_literal))
+  (update_statement
+    (field
+      field: (identifier)))
+  (os_create_dir_statement
+    directory: (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (identifier)))))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (identifier))
+  (if_statement
+    (binary_expression
+      (identifier)
+      (number_literal))
+    then: (message_statement
+      (string_literal)
+      (identifier)))
+  (os_create_dir_statement
+    directory: (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (string_literal))))
+    directory: (string_literal)))

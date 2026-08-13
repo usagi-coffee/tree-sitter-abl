@@ -1,0 +1,52 @@
+================================================================================
+COPY-LOB
+================================================================================
+
+COPY-LOB FROM FILE outPath TO targetPtr.
+COPY-LOB FROM FILE inPath TO targetPtr CONVERT SOURCE CODEPAGE "1250" TARGET CODEPAGE "UTF-8".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (copy_lob_statement
+    source_file: (identifier)
+    target: (identifier))
+  (copy_lob_statement
+    source_file: (identifier)
+    target: (identifier)
+    (convert_phrase
+      source_codepage: (string_literal)
+      target_codepage: (string_literal))))
+
+================================================================================
+COPY-LOB - Additional phrases
+================================================================================
+
+COPY-LOB OBJECT srcLob TO OBJECT tgtLob NO-CONVERT.
+COPY-LOB FROM FILE inPath STARTING AT 2 FOR 10 TO FILE outPath APPEND.
+COPY-LOB FROM OBJECT srcLob TO OBJECT tgtLob OVERLAY AT 3 TRIM.
+COPY-LOB FROM FILE inPath TO targetPtr NO-ERROR.
+
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (copy_lob_statement
+    source: (identifier)
+    target: (identifier)
+    (no_convert))
+  (copy_lob_statement
+    source_file: (identifier)
+    starting_at: (number_literal)
+    for_length: (number_literal)
+    target_file: (identifier)
+    (append))
+  (copy_lob_statement
+    source: (identifier)
+    target: (identifier)
+    overlay_at: (number_literal)
+    (trim))
+  (copy_lob_statement
+    source_file: (identifier)
+    target: (identifier)
+    (no_error)))

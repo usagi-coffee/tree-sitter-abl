@@ -1,0 +1,677 @@
+================================================================================
+MENU basic definition
+================================================================================
+
+DEFINE MENU mnuMain MENUBAR
+  MENU-ITEM miFile LABEL "File"
+  MENU-ITEM miEdit LABEL "Edit".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (menu_definition
+    name: (identifier)
+    (menubar)
+    (menu_item
+      name: (identifier)
+      label: (string_literal))
+    (menu_item
+      name: (identifier)
+      label: (string_literal))))
+
+================================================================================
+MENU with submenu
+================================================================================
+
+DEFINE MENU mnuBar MENUBAR
+  SUB-MENU smFile LABEL "File"
+  RULE
+  MENU-ITEM miExit LABEL "Exit".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (menu_definition
+    name: (identifier)
+    (menubar)
+    (submenu_item
+      name: (identifier)
+      label: (string_literal))
+    (rule)
+    (menu_item
+      name: (identifier)
+      label: (string_literal))))
+
+================================================================================
+MENU popup with title
+================================================================================
+
+DEFINE MENU mnuPopup TITLE "Context Menu"
+  MENU-ITEM miCopy LABEL "Copy"
+  SKIP
+  MENU-ITEM miPaste LABEL "Paste".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (menu_definition
+    name: (identifier)
+    title: (string_literal)
+    (menu_item
+      name: (identifier)
+      label: (string_literal))
+    (skip)
+    (menu_item
+      name: (identifier)
+      label: (string_literal))))
+
+================================================================================
+MENU shared definition
+================================================================================
+
+DEFINE NEW SHARED MENU mnuShared MENUBAR.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (menu_definition
+    (new_modifier)
+    (scope_modifier)
+    name: (identifier)
+    (menubar)))
+
+================================================================================
+MENU with colors
+================================================================================
+
+DEFINE MENU mnuColored
+  FGCOLOR 15
+  BGCOLOR 1
+  MENU-ITEM mi1 LABEL "Item".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (menu_definition
+    name: (identifier)
+    fgcolor: (number_literal)
+    bgcolor: (number_literal)
+    (menu_item
+      name: (identifier)
+      label: (string_literal))))
+
+================================================================================
+MENU - LIKE option
+================================================================================
+
+DEFINE MENU mnuLike LIKE mnuMain.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (menu_definition
+    name: (identifier)
+    like: (identifier)))
+
+================================================================================
+MENU - TITLE only
+================================================================================
+
+DEFINE MENU mnuTitle TITLE "My Menu"
+  menu-item mi1 LABEL "Item 1".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (menu_definition
+    name: (identifier)
+    title: (string_literal)
+    (menu_item
+      name: (identifier)
+      label: (string_literal))))
+
+================================================================================
+MENU - NEW SHARED only
+================================================================================
+
+DEFINE NEW SHARED MENU mnuNS.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (menu_definition
+    (new_modifier)
+    (scope_modifier)
+    name: (identifier)))
+
+================================================================================
+MENU - SHARED only
+================================================================================
+
+DEFINE SHARED MENU mnuShared2.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (menu_definition
+    (scope_modifier)
+    name: (identifier)))
+
+================================================================================
+MENU - PRIVATE only
+================================================================================
+
+DEFINE PRIVATE MENU mnuPriv.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (menu_definition
+    (access_modifier)
+    name: (identifier)))
+
+================================================================================
+MENU - DCOLOR only
+================================================================================
+
+DEFINE MENU mnuDC DCOLOR 5
+  MENU-ITEM mi1 LABEL "Item".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (menu_definition
+    name: (identifier)
+    dcolor: (number_literal)
+    (menu_item
+      name: (identifier)
+      label: (string_literal))))
+
+================================================================================
+MENU - PFCOLOR only
+================================================================================
+
+DEFINE MENU mnuPF PFCOLOR 3
+  MENU-ITEM mi1 LABEL "Item".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (menu_definition
+    name: (identifier)
+    pfcolor: (number_literal)
+    (menu_item
+      name: (identifier)
+      label: (string_literal))))
+
+================================================================================
+MENU - FONT only
+================================================================================
+
+DEFINE MENU mnuFont FONT 2
+  MENU-ITEM mi1 LABEL "Item".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (menu_definition
+    name: (identifier)
+    font: (number_literal)
+    (menu_item
+      name: (identifier)
+      label: (string_literal))))
+
+================================================================================
+MENU - All colors
+================================================================================
+
+DEFINE MENU mnuAllColors
+  FGCOLOR 10
+  BGCOLOR 1
+  DCOLOR 5
+  PFCOLOR 3
+  MENU-ITEM miTest LABEL "Test".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (menu_definition
+    name: (identifier)
+    fgcolor: (number_literal)
+    bgcolor: (number_literal)
+    dcolor: (number_literal)
+    pfcolor: (number_literal)
+    (menu_item
+      name: (identifier)
+      label: (string_literal))))
+
+================================================================================
+MENU - MENU-ITEM without label
+================================================================================
+
+DEFINE MENU mnuNoLab
+  MENU-ITEM mi1
+  MENU-ITEM mi2.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (menu_definition
+    name: (identifier)
+    (menu_item
+      name: (identifier))
+    (menu_item
+      name: (identifier))))
+
+================================================================================
+MENU - MENU-ITEM with ACCELERATOR
+================================================================================
+
+DEFINE MENU mnuAcc
+  MENU-ITEM miSave LABEL "Save" ACCELERATOR "Ctrl+S"
+  MENU-ITEM miOpen LABEL "Open" ACCELERATOR "Ctrl+O".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (menu_definition
+    name: (identifier)
+    (menu_item
+      name: (identifier)
+      label: (string_literal)
+      accelerator: (string_literal))
+    (menu_item
+      name: (identifier)
+      label: (string_literal)
+      accelerator: (string_literal))))
+
+================================================================================
+MENU - SUB-MENU without label
+================================================================================
+
+DEFINE MENU mnuSl
+  SUB-MENU sm1
+  SUB-MENU sm2 LABEL "Menu 2".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (menu_definition
+    name: (identifier)
+    (submenu_item
+      name: (identifier))
+    (submenu_item
+      name: (identifier)
+      label: (string_literal))))
+
+================================================================================
+MENU - SUB-MENU DISABLED
+================================================================================
+
+DEFINE MENU mnuSMD
+  SUB-MENU sm1 DISABLED
+  SUB-MENU sm2 DISABLED LABEL "Disabled".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (menu_definition
+    name: (identifier)
+    (submenu_item
+      name: (identifier)
+      (disabled))
+    (submenu_item
+      name: (identifier)
+      (disabled)
+      label: (string_literal))))
+
+================================================================================
+MENU - MENU-ITEM DISABLED
+================================================================================
+
+DEFINE MENU mnuMID
+  MENU-ITEM mi1 DISABLED LABEL "Disabled Item"
+  MENU-ITEM mi2 LABEL "Item 2" DISABLED.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (menu_definition
+    name: (identifier)
+    (menu_item
+      name: (identifier)
+      (disabled)
+      label: (string_literal))
+    (menu_item
+      name: (identifier)
+      label: (string_literal)
+      (disabled))))
+
+================================================================================
+MENU - Multiple RULEs
+================================================================================
+
+DEFINE MENU mnuMRules TITLE "Rules"
+  RULE
+  RULE
+  MENU-ITEM mi1 LABEL "Item 1"
+  RULE
+  MENU-ITEM mi2 LABEL "Item 2".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (menu_definition
+    name: (identifier)
+    title: (string_literal)
+    (rule)
+    (rule)
+    (menu_item
+      name: (identifier)
+      label: (string_literal))
+    (rule)
+    (menu_item
+      name: (identifier)
+      label: (string_literal))))
+
+================================================================================
+MENU - Minimal
+================================================================================
+
+DEFINE MENU m.
+DEF MENU mnu.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (menu_definition
+    name: (identifier))
+  (menu_definition
+    name: (identifier)))
+
+================================================================================
+MENU - Complete combination
+================================================================================
+
+DEFINE MENU mnuComplete
+  FGCOLOR 15
+  BGCOLOR 1
+  DCOLOR 5
+  PFCOLOR 10
+  FONT 2
+  MENUBAR
+  MENU-ITEM miFile LABEL "File" ACCELERATOR "Ctrl+F"
+  MENU-ITEM miEdit LABEL "Edit" DISABLED
+  RULE
+  SUB-MENU smOptions LABEL "Options"
+  RULE
+  MENU-ITEM miExit LABEL "Exit".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (menu_definition
+    name: (identifier)
+    fgcolor: (number_literal)
+    bgcolor: (number_literal)
+    dcolor: (number_literal)
+    pfcolor: (number_literal)
+    font: (number_literal)
+    (menubar)
+    (menu_item
+      name: (identifier)
+      label: (string_literal)
+      accelerator: (string_literal))
+    (menu_item
+      name: (identifier)
+      label: (string_literal)
+      (disabled))
+    (rule)
+    (submenu_item
+      name: (identifier)
+      label: (string_literal))
+    (rule)
+    (menu_item
+      name: (identifier)
+      label: (string_literal))))
+
+================================================================================
+MENU - Reference snippet
+================================================================================
+
+DEFINE SUB-MENU topic
+  MENU-ITEM numbr LABEL "Cust. Number"
+  MENU-ITEM addr LABEL "Address"
+  MENU-ITEM othrinfo LABEL "Other".
+DEFINE SUB-MENU move
+  MENU-ITEM forward LABEL "NextRec" ACCELERATOR "PAGE-DOWN"
+  MENU-ITEM backward LABEL "PrevRec" ACCELERATOR "PAGE-UP".
+DEFINE SUB-MENU quitit
+  MENU-ITEM quititem LABEL "E&xit".
+DEFINE MENU mbar MENUBAR
+  SUB-MENU topic LABEL "Topic"
+  SUB-MENU move LABEL "Move"
+  SUB-MENU quitit LABEL "E&xit".
+ON CHOOSE OF MENU-ITEM numbr
+  DISPLAY Customer.CustNum.
+ON CHOOSE OF MENU-ITEM addr
+  DISPLAY Customer.Address Customer.Address2 Customer.City
+    Customer.State Customer.PostalCode
+    WITH FRAME addr-frame NO-LABELS COLUMN 25.
+ON CHOOSE OF MENU-ITEM othrinfo
+  DISPLAY Customer EXCEPT Customer.Name Customer.CustNum Customer.Address
+    Customer.Address2 Customer.City Customer.State Customer.PostalCode
+    WITH FRAME oth-frame SIDE-LABELS.
+ON CHOOSE OF MENU-ITEM forward DO:
+  HIDE ALL NO-PAUSE.
+  CLEAR FRAME name-frame.
+  FIND NEXT Customer NO-ERROR.
+  IF AVAILABLE Customer THEN
+    DISPLAY Customer.Name WITH FRAME name-frame.
+END.
+ON CHOOSE OF MENU-ITEM backward DO:
+  HIDE ALL NO-PAUSE.
+  CLEAR FRAME name-frame.
+  FIND PREV Customer NO-ERROR.
+  IF AVAILABLE Customer THEN
+    DISPLAY Customer.Name WITH FRAME name-frame.
+END.
+FIND FIRST Customer.
+DISPLAY Customer.Name LABEL "Customer Name" WITH FRAME name-frame.
+ASSIGN CURRENT-WINDOW:MENUBAR = MENU mbar:HANDLE.
+WAIT-FOR CHOOSE OF MENU-ITEM quititem.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (submenu_definition
+    name: (identifier)
+    (menu_element
+      (menu_item
+        name: (identifier)
+        label: (string_literal)))
+    (menu_element
+      (menu_item
+        name: (identifier)
+        label: (string_literal)))
+    (menu_element
+      (menu_item
+        name: (identifier)
+        label: (string_literal))))
+  (submenu_definition
+    name: (identifier)
+    (menu_element
+      (menu_item
+        name: (identifier)
+        label: (string_literal)
+        accelerator: (string_literal)))
+    (menu_element
+      (menu_item
+        name: (identifier)
+        label: (string_literal)
+        accelerator: (string_literal))))
+  (submenu_definition
+    name: (identifier)
+    (menu_element
+      (menu_item
+        name: (identifier)
+        label: (string_literal))))
+  (menu_definition
+    name: (identifier)
+    (menubar)
+    (submenu_item
+      name: (identifier)
+      label: (string_literal))
+    (submenu_item
+      name: (identifier)
+      label: (string_literal))
+    (submenu_item
+      name: (identifier)
+      label: (string_literal)))
+  (on_statement
+    event: (identifier)
+    (of_phrase
+      widget: (widget_phrase
+        handle: (identifier)))
+    (display_statement
+      record: (qualified_name
+        left: (identifier)
+        right: (identifier))))
+  (on_statement
+    event: (identifier)
+    (of_phrase
+      widget: (widget_phrase
+        handle: (identifier)))
+    (display_statement
+      (field
+        field: (qualified_name
+          left: (identifier)
+          right: (identifier)))
+      (field
+        field: (qualified_name
+          left: (identifier)
+          right: (identifier)))
+      (field
+        field: (qualified_name
+          left: (identifier)
+          right: (identifier)))
+      (field
+        field: (qualified_name
+          left: (identifier)
+          right: (identifier)))
+      (field
+        field: (qualified_name
+          left: (identifier)
+          right: (identifier)))
+      (frame_phrase
+        frame: (identifier)
+        (no_labels)
+        column: (number_literal))))
+  (on_statement
+    event: (identifier)
+    (of_phrase
+      widget: (widget_phrase
+        handle: (identifier)))
+    (display_statement
+      record: (identifier)
+      except: (qualified_name
+        left: (identifier)
+        right: (identifier))
+      except: (qualified_name
+        left: (identifier)
+        right: (identifier))
+      except: (qualified_name
+        left: (identifier)
+        right: (identifier))
+      except: (qualified_name
+        left: (identifier)
+        right: (identifier))
+      except: (qualified_name
+        left: (identifier)
+        right: (identifier))
+      except: (qualified_name
+        left: (identifier)
+        right: (identifier))
+      except: (qualified_name
+        left: (identifier)
+        right: (identifier))
+      (frame_phrase
+        frame: (identifier)
+        (side_labels))))
+  (on_statement
+    event: (identifier)
+    (of_phrase
+      widget: (widget_phrase
+        handle: (identifier)))
+    (do_statement
+      (body
+        (hide_statement
+          (all)
+          (no_pause))
+        (clear_statement
+          frame: (identifier))
+        (find_statement
+          (next)
+          table: (identifier)
+          (no_error))
+        (if_statement
+          (available_expression
+            record: (identifier))
+          then: (display_statement
+            record: (qualified_name
+              left: (identifier)
+              right: (identifier))
+            (frame_phrase
+              frame: (identifier)))))))
+  (on_statement
+    event: (identifier)
+    (of_phrase
+      widget: (widget_phrase
+        handle: (identifier)))
+    (do_statement
+      (body
+        (hide_statement
+          (all)
+          (no_pause))
+        (clear_statement
+          frame: (identifier))
+        (find_statement
+          (prev)
+          table: (identifier)
+          (no_error))
+        (if_statement
+          (available_expression
+            record: (identifier))
+          then: (display_statement
+            record: (qualified_name
+              left: (identifier)
+              right: (identifier))
+            (frame_phrase
+              frame: (identifier)))))))
+  (find_statement
+    (first)
+    table: (identifier))
+  (display_statement
+    (field
+      field: (qualified_name
+        left: (identifier)
+        right: (identifier)))
+    (format_phrase
+      label: (string_literal))
+    (frame_phrase
+      frame: (identifier)))
+  (assign_statement
+    (assign_phrase
+      (assign_pair
+        left: (object_access
+          left: (identifier)
+          right: (identifier))
+        right: (object_access
+          widget: (identifier)
+          left: (identifier)
+          right: (identifier)))))
+  (wait_for_statement
+    (of_phrase
+      events: (identifier)
+      widgets: (widget_phrase
+        item: (identifier)))))

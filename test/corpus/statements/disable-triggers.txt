@@ -1,0 +1,47 @@
+================================================================================
+DISABLE TRIGGERS
+================================================================================
+
+DISABLE TRIGGERS FOR DUMP OF wo_mstr.
+DISABLE TRIGGERS FOR LOAD OF db.wo_mstr ALLOW-REPLICATION.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (disable_triggers_statement
+    table: (identifier))
+  (disable_triggers_statement
+    table: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (allow_replication)))
+
+================================================================================
+DISABLE TRIGGERS - Reference snippet
+================================================================================
+
+DISABLE TRIGGERS FOR DUMP OF Customer.
+DISABLE TRIGGERS FOR LOAD OF Customer.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (disable_triggers_statement
+    table: (identifier))
+  (disable_triggers_statement
+    table: (identifier)))
+
+================================================================================
+DISABLE TRIGGERS - ALLOW-REPLICATION with DUMP
+================================================================================
+
+DISABLE TRIGGERS FOR DUMP OF db.Customer ALLOW-REPLICATION.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (disable_triggers_statement
+    table: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (allow_replication)))

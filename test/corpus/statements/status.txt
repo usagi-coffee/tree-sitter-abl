@@ -1,0 +1,98 @@
+================================================================================
+STATUS statement
+================================================================================
+
+STATUS DEFAULT "Processing...".
+STATUS INPUT "Enter data".
+STATUS INPUT OFF.
+STATUS DEFAULT.
+
+
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (status_statement
+    message: (string_literal))
+  (status_statement
+    message: (string_literal))
+  (status_statement)
+  (status_statement))
+
+================================================================================
+STATUS - reference snippet
+================================================================================
+
+STATUS DEFAULT "All Around Sports Order Processing System".
+STATUS INPUT "Enter data, or use the " + KBLABEL("END-ERROR") +
+" key to exit".
+FOR EACH Customer:
+DISPLAY Customer.Name.
+FOR EACH Order OF Customer:
+UPDATE Order.OrderNum Order.PromiseDate Order.OrderDate Order.ShipDate.
+END.
+UPDATE Customer.CreditLimit.
+END.
+
+STATUS DEFAULT "Ready" IN WINDOW hWin.
+STATUS INPUT OFF IN WINDOW hWin.
+
+
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (status_statement
+    message: (string_literal))
+  (status_statement
+    message: (binary_expression
+      (binary_expression
+        (string_literal)
+        (function_call
+          function: (identifier)
+          (arguments
+            (argument
+              name: (string_literal)))))
+      (string_literal)))
+  (for_statement
+    (record_phrase
+      record: (identifier))
+    (body
+      (display_statement
+        record: (qualified_name
+          left: (identifier)
+          right: (identifier)))
+      (for_statement
+        (record_phrase
+          record: (identifier)
+          of: (identifier))
+        (body
+          (update_statement
+            (field
+              field: (qualified_name
+                left: (identifier)
+                right: (identifier)))
+            (field
+              field: (qualified_name
+                left: (identifier)
+                right: (identifier)))
+            (field
+              field: (qualified_name
+                left: (identifier)
+                right: (identifier)))
+            (field
+              field: (qualified_name
+                left: (identifier)
+                right: (identifier))))))
+      (update_statement
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier))))))
+  (status_statement
+    message: (string_literal)
+    (in_window_phrase
+      window: (identifier)))
+  (status_statement
+    (in_window_phrase
+      window: (identifier))))

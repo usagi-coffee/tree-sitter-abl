@@ -1,0 +1,304 @@
+================================================================================
+REPEAT
+================================================================================
+
+REPEAT:
+  DISPLAY x.
+END.
+
+REPEAT WHILE x < 5:
+  x = x + 1.
+END.
+
+REPEAT UNTIL done:
+  DISPLAY done.
+END.
+
+main: REPEAT ON STOP UNDO, RETURN ERROR "x" ON ERROR UNDO, THROW:
+  LEAVE.
+END.
+
+choose_label: REPEAT:
+  MESSAGE "ok".
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (repeat_statement
+    (body
+      (display_statement
+        record: (identifier))))
+  (repeat_statement
+    condition: (binary_expression
+      (identifier)
+      (number_literal))
+    (body
+      (assignment_statement
+        left: (identifier)
+        operator: (assignment_operator)
+        right: (binary_expression
+          (identifier)
+          (number_literal)))))
+  (repeat_statement
+    condition: (identifier)
+    (body
+      (display_statement
+        record: (identifier))))
+  (repeat_statement
+    label: (identifier)
+    (on_stop_phrase
+      error_value: (string_literal))
+    (on_error_phrase)
+    (body
+      (leave_statement)))
+  (repeat_statement
+    label: (identifier)
+    (body
+      (message_statement
+        (string_literal)))))
+
+================================================================================
+REPEAT - reference snippet and options
+================================================================================
+
+DEFINE VARIABLE Selection AS INTEGER NO-UNDO FORMAT "9".
+FORM SKIP(3)
+"0 - Exit" at 32
+"1 - Edit Customer File" at 32
+"2 - List Customer File" at 32
+"3 - Edit Item File" at 32
+"4 - List Item File" at 32
+"Enter Choice" TO 30 Selection AUTO-RETURN
+HEADER "Application Name" "Master Menu" AT 34
+WITH NO-BOX NO-LABELS CENTERED FRAME menu.
+
+REPEAT ON ENDKEY UNDO, RETRY:
+  UPDATE Selection WITH FRAME menu.
+  HIDE FRAME menu.
+  CASE(Selection):
+    WHEN 0 THEN LEAVE.
+    WHEN 1 THEN RUN custedit.p.
+    WHEN 2 THEN RUN custrpt.p.
+    WHEN 3 THEN RUN itemedit.p.
+    WHEN 4 THEN RUN itemrpt.p.
+  OTHERWISE DO:
+    BELL.
+    MESSAGE "Not a valid choice. Try again.".
+    END.
+  END CASE.
+END.
+
+REPEAT FOR Customer PRESELECT EACH Customer BREAK BY Customer.Name:
+FIND NEXT Customer.
+UPDATE Customer.CustNum.
+END.
+
+REPEAT i = 1 TO 10 BY 2 TRANSACTION STOP-AFTER 5 ON QUIT UNDO, LEAVE:
+DISPLAY i.
+END.
+
+REPEAT QUERY-TUNING (CACHE-SIZE 10 LOOKAHEAD NO-LOOKAHEAD NO-BIND-WHERE INDEX-HINT NO-INDEX-HINT SEPARATE-CONNECTION NO-SEPARATE-CONNECTION DEBUG EXTENDED NO-DEBUG JOIN-BY-SQLDB NO-JOIN-BY-SQLDB):
+DISPLAY "q".
+END.
+
+REPEAT ON ENDKEY UNDO, RETURN NO-APPLY:
+  MESSAGE "x".
+END.
+
+REPEAT WITH FRAME fA ON END-KEY UNDO, LEAVE:
+  HIDE FRAME fA.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo)
+    (format_phrase
+      format: (string_literal)))
+  (form_statement
+    (form_item
+      skip: (number_literal))
+    (form_item
+      field: (string_literal))
+    (form_item
+      field: (identifier))
+    (form_item
+      field: (number_literal))
+    (form_item
+      field: (string_literal))
+    (form_item
+      field: (identifier))
+    (form_item
+      field: (number_literal))
+    (form_item
+      field: (string_literal))
+    (form_item
+      field: (identifier))
+    (form_item
+      field: (number_literal))
+    (form_item
+      field: (string_literal))
+    (form_item
+      field: (identifier))
+    (form_item
+      field: (number_literal))
+    (form_item
+      field: (string_literal))
+    (form_item
+      field: (identifier))
+    (form_item
+      field: (number_literal))
+    (form_item
+      field: (string_literal))
+    (form_item
+      field: (identifier))
+    (form_item
+      field: (number_literal))
+    (form_item
+      field: (identifier))
+    (form_item
+      field: (identifier))
+    (form_item
+      field: (identifier))
+    (form_item
+      field: (string_literal))
+    (form_item
+      field: (string_literal))
+    (form_item
+      field: (identifier))
+    (form_item
+      field: (number_literal))
+    (frame_phrase
+      (no_box)
+      (no_labels)
+      (centered)
+      frame: (identifier)))
+  (repeat_statement
+    (on_endkey_phrase)
+    (body
+      (update_statement
+        (field
+          field: (identifier))
+        (frame_phrase
+          frame: (identifier)))
+      (hide_statement
+        (widget_phrase
+          frame: (identifier)))
+      (case_statement
+        (parenthesized_expression
+          (identifier))
+        (case_when_phrase
+          condition: (number_literal)
+          (leave_statement))
+        (case_when_phrase
+          condition: (number_literal)
+          (run_statement
+            procedure: (procedure_name)))
+        (case_when_phrase
+          condition: (number_literal)
+          (run_statement
+            procedure: (procedure_name)))
+        (case_when_phrase
+          condition: (number_literal)
+          (run_statement
+            procedure: (procedure_name)))
+        (case_when_phrase
+          condition: (number_literal)
+          (run_statement
+            procedure: (procedure_name)))
+        (case_otherwise_phrase
+          (do_statement
+            (body
+              (bell_statement)
+              (message_statement
+                (string_literal))))))))
+  (repeat_statement
+    (for_phrase
+      record: (identifier))
+    (preselect_phrase
+      (preselect_record_list
+        (preselect_record
+          (record_phrase
+            record: (identifier))))
+      by: (qualified_name
+        left: (identifier)
+        right: (identifier)))
+    (body
+      (find_statement
+        (next)
+        table: (identifier))
+      (update_statement
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier))))))
+  (repeat_statement
+    variable: (identifier)
+    start: (number_literal)
+    end: (number_literal)
+    step: (number_literal)
+    (transaction)
+    (stop_after_phrase
+      time: (number_literal))
+    (on_quit_phrase)
+    (body
+      (display_statement
+        record: (identifier))))
+  (repeat_statement
+    (query_tuning_phrase
+      cache_size: (number_literal)
+      (lookahead)
+      (no_lookahead)
+      (no_bind_where)
+      (index_hint)
+      (no_index_hint)
+      (separate_connection)
+      (no_separate_connection)
+      (no_debug)
+      (join_by_sqldb)
+      (no_join_by_sqldb))
+    (body
+      (display_statement
+        (field
+          field: (string_literal)))))
+  (repeat_statement
+    (on_endkey_phrase)
+    (body
+      (message_statement
+        (string_literal))))
+  (repeat_statement
+    (frame_phrase
+      frame: (identifier))
+    (on_endkey_phrase)
+    (body
+      (hide_statement
+        (widget_phrase
+          frame: (identifier))))))
+
+================================================================================
+REPEAT - FOR, PRESELECT, and QUERY-TUNING prefix
+================================================================================
+
+REPEAT FOR Customer PRESELECT EACH Customer QUERY-TUNING (LOOKAHEAD):
+  LEAVE.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (repeat_statement
+    (for_phrase
+      record: (identifier))
+    (preselect_phrase
+      (preselect_record_list
+        (preselect_record
+          (record_phrase
+            record: (identifier)))))
+    (query_tuning_phrase
+      (lookahead))
+    (body
+      (leave_statement))))

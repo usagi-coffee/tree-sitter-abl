@@ -1,0 +1,95 @@
+===============================================================================
+VALIDATE statement
+===============================================================================
+
+VALIDATE Customer.
+VALIDATE Item NO-ERROR.
+VALIDATE db1.Customer.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (validate_statement
+    record: (identifier))
+  (validate_statement
+    record: (identifier)
+    (no_error))
+  (validate_statement
+    record: (qualified_name
+      left: (identifier)
+      right: (identifier))))
+
+===============================================================================
+VALIDATE - reference snippet
+===============================================================================
+
+REPEAT FOR Item:
+PROMPT-FOR Item.ItemNum.
+FIND Item USING Item.ItemNum NO-ERROR.
+IF NOT AVAILABLE Item THEN DO:
+CREATE iIem.
+ASSIGN Item.ItemNum.
+UPDATE Item.ItemName Item.Price.
+VALIDATE Item.
+END.
+ELSE
+DISPLAY Item.ItemName Item.Price.
+END.
+
+VALIDATE sports.Item NO-ERROR.
+
+-------------------------------------------------------------------------------
+
+(source_code
+  (repeat_statement
+    (for_phrase
+      record: (identifier))
+    (body
+      (prompt_for_statement
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier))))
+      (find_statement
+        table: (identifier)
+        values: (qualified_name
+          left: (identifier)
+          right: (identifier))
+        (no_error))
+      (if_statement
+        (unary_expression
+          (available_expression
+            record: (identifier)))
+        then: (do_statement
+          (body
+            (create_statement
+              table: (identifier))
+            (assign_statement
+              record: (qualified_name
+                left: (identifier)
+                right: (identifier)))
+            (update_statement
+              (field
+                field: (qualified_name
+                  left: (identifier)
+                  right: (identifier)))
+              (field
+                field: (qualified_name
+                  left: (identifier)
+                  right: (identifier))))
+            (validate_statement
+              record: (identifier))))
+        else: (display_statement
+          (field
+            field: (qualified_name
+              left: (identifier)
+              right: (identifier)))
+          (field
+            field: (qualified_name
+              left: (identifier)
+              right: (identifier)))))))
+  (validate_statement
+    record: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (no_error)))

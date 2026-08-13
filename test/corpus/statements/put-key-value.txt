@@ -1,0 +1,111 @@
+================================================================================
+PUT-KEY-VALUE
+================================================================================
+
+PUT-KEY-VALUE SECTION "general" KEY "theme" VALUE "dark".
+PUT-KEY-VALUE SECTION cSection KEY DEFAULT VALUE cValue.
+PUT-KEY-VALUE COLOR 1.
+PUT-KEY-VALUE FONT ALL.
+PUT-KEY-VALUE SECTION "app" KEY "debug" VALUE "true" NO-ERROR.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (put_key_value_statement
+    section: (string_literal)
+    key: (string_literal)
+    value: (string_literal))
+  (put_key_value_statement
+    section: (identifier)
+    value: (identifier))
+  (put_key_value_statement
+    number: (number_literal))
+  (put_key_value_statement)
+  (put_key_value_statement
+    section: (string_literal)
+    key: (string_literal)
+    value: (string_literal)
+    (no_error)))
+
+================================================================================
+PUT-KEY-VALUE - VALUE expressions
+================================================================================
+
+PUT-KEY-VALUE SECTION VALUE(cSection) KEY VALUE(cKey) VALUE VALUE(cValue).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (put_key_value_statement
+    section: (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (identifier))))
+    key: (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (identifier))))
+    value: (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (identifier))))))
+
+================================================================================
+PUT-KEY-VALUE - reference examples
+================================================================================
+
+PUT-KEY-VALUE SECTION "MYSECTION" KEY "MYKEY" VALUE MYVARIABLE.
+PUT-KEY-VALUE SECTION "" KEY "MYKEY" VALUE MYVARIABLE.
+PUT-KEY-VALUE SECTION "?" KEY "MYKEY" VALUE MYVARIABLE.
+
+PUT-KEY-VALUE SECTION "MYSECTION" KEY "MYKEY" VALUE "".
+PUT-KEY-VALUE SECTION "MYSECTION" KEY "MYKEY" VALUE ?.
+
+PUT-KEY-VALUE SECTION "MYSECTION " KEY "?" VALUE ?.
+PUT-KEY-VALUE SECTION "MYSECTION " KEY "" VALUE "".
+
+PUT-KEY-VALUE SECTION "MYAPP" KEY DEFAULT VALUE "NEWVALUE".
+
+PUT-KEY-VALUE COLOR ALL.
+PUT-KEY-VALUE FONT 2.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (put_key_value_statement
+    section: (string_literal)
+    key: (string_literal)
+    value: (identifier))
+  (put_key_value_statement
+    section: (string_literal)
+    key: (string_literal)
+    value: (identifier))
+  (put_key_value_statement
+    section: (string_literal)
+    key: (string_literal)
+    value: (identifier))
+  (put_key_value_statement
+    section: (string_literal)
+    key: (string_literal)
+    value: (string_literal))
+  (put_key_value_statement
+    section: (string_literal)
+    key: (string_literal)
+    value: (null_literal))
+  (put_key_value_statement
+    section: (string_literal)
+    key: (string_literal)
+    value: (null_literal))
+  (put_key_value_statement
+    section: (string_literal)
+    key: (string_literal)
+    value: (string_literal))
+  (put_key_value_statement
+    section: (string_literal)
+    value: (string_literal))
+  (put_key_value_statement)
+  (put_key_value_statement
+    number: (number_literal)))

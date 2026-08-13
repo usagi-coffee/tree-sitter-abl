@@ -1,0 +1,547 @@
+================================================================================
+CLASS
+================================================================================
+
+CLASS FunkyWorld.Util.KittyLogHelper:
+  VAR PRIVATE INT64 MAX_RECORDS = 5.
+  VAR PROTECTED INT64 DEFAULT_SIZE = 20.
+  VAR PUBLIC CHAR SomeName.
+
+  @Setup.
+  METHOD PUBLIC VOID setup():
+    oObject = NEW Object().
+  END METHOD.
+
+  DEFINE PUBLIC PROPERTY m_Total AS INTEGER NO-UNDO
+    GET.
+    SET.
+
+  DEFINE PUBLIC PROPERTY Totals AS INTEGER NO-UNDO
+    GET:
+      RETURN m_Total.
+    END GET.
+    SET (newValue AS INTEGER):
+      m_Total = newValue.
+    END SET.
+
+  DEFINE PRIVATE PROPERTY MY_NUMBER AS CHAR NO-UNDO INIT "9999"
+    GET.
+    SET.
+
+  METHOD PUBLIC VOID csvFileToTempTable(
+      INPUT pcFilePath AS CHAR,
+      OUTPUT TABLE-HANDLE phOutputTable):
+    RETURN.
+  END METHOD.
+END CLASS.
+
+CLASS DecoratedMotorcycle:
+  CONSTRUCTOR PUBLIC DecoratedMotorcycle():
+    MESSAGE "moto".
+  END METHOD.
+  DESTRUCTOR PUBLIC DecoratedMotorcycle():
+    MESSAGE "bye".
+  END DESTRUCTOR.
+END CLASS.
+
+INTERFACE Common.Message.IMessage:
+  METHOD PUBLIC IMessage SetLanguage (INPUT poLanguage AS Language).
+END INTERFACE.
+
+CLASS Testings:
+  CONSTRUCTOR PUBLIC Testings(databasename AS CHAR):
+    MESSAGE "create " + databasename.
+  END CONSTRUCTOR.
+
+  METHOD PUBLIC VOID stuff(  ).
+    MESSAGE "hi".
+  END METHOD.
+END CLASS.
+
+CLASS Base:
+  METHOD PUBLIC VOID work():
+    RETURN.
+  END METHOD.
+END CLASS.
+
+CLASS Derived INHERITS Base:
+  METHOD PUBLIC OVERRIDE VOID work():
+    RETURN.
+  END METHOD.
+END CLASS.
+
+CLASS TableMethodOpts:
+  METHOD PUBLIC VOID useTable(
+      OUTPUT TABLE FOR tt APPEND BIND BY-VALUE BY-REFERENCE):
+    RETURN.
+  END METHOD.
+END CLASS.
+
+CLASS BufferMethodOpts:
+  METHOD PUBLIC CHARACTER useBuffer(BUFFER pBuf FOR myTable):
+    RETURN "".
+  END METHOD.
+END CLASS.
+
+CLASS DatasetHandleMethod:
+  METHOD PUBLIC VOID useDs(INPUT-OUTPUT DATASET-HANDLE hDs):
+    RETURN.
+  END METHOD.
+END CLASS.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (class_definition
+    name: (qualified_name
+      left: (identifier)
+      right: (identifier)
+      right: (identifier))
+    (var_statement
+      (access_modifier)
+      type: (identifier)
+      (variable
+        name: (identifier)
+        initializer: (number_literal)))
+    (var_statement
+      (access_modifier)
+      type: (identifier)
+      (variable
+        name: (identifier)
+        initializer: (number_literal)))
+    (var_statement
+      (access_modifier)
+      type: (identifier)
+      (variable
+        name: (identifier)))
+    (annotation
+      name: (identifier))
+    (method_definition
+      (access_modifier)
+      type: (identifier)
+      name: (identifier)
+      (parameters)
+      (body
+        (assignment_statement
+          left: (identifier)
+          operator: (assignment_operator)
+          right: (new_expression
+            type: (identifier)
+            (arguments)))))
+    (property_definition
+      (access_modifier)
+      name: (identifier)
+      type: (identifier)
+      (no_undo))
+    (property_definition
+      (access_modifier)
+      name: (identifier)
+      type: (identifier)
+      (no_undo)
+      (return_statement
+        value: (identifier))
+      (property_set_parameter_list
+        (property_set_parameter
+          name: (identifier)
+          type: (identifier)))
+      (assignment_statement
+        left: (identifier)
+        operator: (assignment_operator)
+        right: (identifier)))
+    (property_definition
+      (access_modifier)
+      name: (identifier)
+      type: (identifier)
+      (no_undo)
+      initial: (string_literal))
+    (method_definition
+      (access_modifier)
+      type: (identifier)
+      name: (identifier)
+      (parameters
+        (parameter
+          name: (identifier)
+          type: (identifier))
+        (parameter
+          table_handle: (identifier)))
+      (body
+        (return_statement))))
+  (class_definition
+    name: (identifier)
+    (constructor_definition
+      (access_modifier)
+      name: (identifier)
+      (parameters)
+      (body
+        (message_statement
+          (string_literal))))
+    (destructor_definition
+      (access_modifier)
+      name: (identifier)
+      (parameters)
+      (body
+        (message_statement
+          (string_literal)))))
+  (interface_definition
+    name: (qualified_name
+      left: (identifier)
+      right: (identifier)
+      right: (identifier))
+    (interface_body_item
+      (method_definition
+        (access_modifier)
+        type: (identifier)
+        name: (identifier)
+        (parameters
+          (parameter
+            name: (identifier)
+            type: (identifier))))))
+  (class_definition
+    name: (identifier)
+    (constructor_definition
+      (access_modifier)
+      name: (identifier)
+      (parameters
+        (parameter
+          name: (identifier)
+          type: (identifier)))
+      (body
+        (message_statement
+          (binary_expression
+            (string_literal)
+            (identifier)))))
+    (method_definition
+      (access_modifier)
+      type: (identifier)
+      name: (identifier)
+      (parameters)
+      (body
+        (message_statement
+          (string_literal)))))
+  (class_definition
+    name: (identifier)
+    (method_definition
+      (access_modifier)
+      type: (identifier)
+      name: (identifier)
+      (parameters)
+      (body
+        (return_statement))))
+  (class_definition
+    name: (identifier)
+    super: (identifier)
+    (method_definition
+      (access_modifier)
+      (override_modifier)
+      type: (identifier)
+      name: (identifier)
+      (parameters)
+      (body
+        (return_statement))))
+  (class_definition
+    name: (identifier)
+    (method_definition
+      (access_modifier)
+      type: (identifier)
+      name: (identifier)
+      (parameters
+        (parameter
+          table: (identifier)
+          (append)
+          (bind)
+          (by_value)
+          (by_reference)))
+      (body
+        (return_statement))))
+  (class_definition
+    name: (identifier)
+    (method_definition
+      (access_modifier)
+      type: (identifier)
+      name: (identifier)
+      (parameters
+        (parameter
+          buffer: (identifier)
+          table: (identifier)))
+      (body
+        (return_statement
+          value: (string_literal)))))
+  (class_definition
+    name: (identifier)
+    (method_definition
+      (access_modifier)
+      type: (identifier)
+      name: (identifier)
+      (parameters
+        (parameter
+          dataset_handle: (identifier)))
+      (body
+        (return_statement)))))
+
+================================================================================
+CLASS - Events and Widget Definitions
+================================================================================
+
+CLASS UiWidgets:
+  DEFINE PRIVATE BROWSE bCust QUERY qCust
+    DISPLAY Customer.CustNum Customer.Name.
+  DEFINE PRIVATE FRAME frCust Customer.CustNum Customer.Name.
+  DEFINE MENU mnuMain MENUBAR
+    MENU-ITEM miFile LABEL "File"
+    MENU-ITEM miExit LABEL "Exit".
+  DEFINE SUB-MENU smFile
+    MENU-ITEM miOpen LABEL "Open".
+  DEFINE RECTANGLE rectBorder SIZE 80 BY 10.
+  DEFINE PUBLIC EVENT DataChanged SIGNATURE VOID (INPUT id AS INTEGER).
+END CLASS.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (class_definition
+    name: (identifier)
+    (browse_definition
+      (access_modifier)
+      name: (identifier)
+      query: (identifier)
+      (column
+        column: (qualified_name
+          left: (identifier)
+          right: (identifier)))
+      (column
+        column: (qualified_name
+          left: (identifier)
+          right: (identifier))))
+    (frame_definition
+      (access_modifier)
+      name: (identifier)
+      field: (qualified_name
+        left: (identifier)
+        right: (identifier))
+      field: (qualified_name
+        left: (identifier)
+        right: (identifier)))
+    (menu_definition
+      name: (identifier)
+      (menubar)
+      (menu_item
+        name: (identifier)
+        label: (string_literal))
+      (menu_item
+        name: (identifier)
+        label: (string_literal)))
+    (submenu_definition
+      name: (identifier)
+      (menu_element
+        (menu_item
+          name: (identifier)
+          label: (string_literal))))
+    (rectangle_definition
+      name: (identifier)
+      (size_phrase
+        width: (number_literal)
+        height: (number_literal)))
+    (event_definition
+      (access_modifier)
+      name: (identifier)
+      (signature
+        name: (identifier)
+        type: (identifier)))))
+
+================================================================================
+CLASS - Options and ABSTRACT method
+================================================================================
+
+ABSTRACT SERIALIZABLE CLASS MyPkg.Tools.AbstractThing
+  INHERITS BaseThing
+  IMPLEMENTS IFoo, IBar
+  USE-WIDGET-POOL:
+  METHOD PUBLIC ABSTRACT VOID DoIt().
+END CLASS.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (class_definition
+    (abstract)
+    (serializable)
+    name: (qualified_name
+      left: (identifier)
+      right: (identifier)
+      right: (identifier))
+    super: (identifier)
+    interface: (identifier)
+    interface: (identifier)
+    (use_widget_pool)
+    (method_definition
+      (access_modifier)
+      type: (identifier)
+      name: (identifier)
+      (parameters))))
+
+================================================================================
+THIS-OBJECT method call and chained access
+================================================================================
+
+CLASS Foo:
+  METHOD PUBLIC VOID DoIt():
+    THIS-OBJECT:DoSomething(BUFFER pBuf, BUFFER pOther).
+    THIS-OBJECT:getInner():DoSomething(BUFFER pBuf).
+  END METHOD.
+END CLASS.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (class_definition
+    name: (identifier)
+    (method_definition
+      (access_modifier)
+      type: (identifier)
+      name: (identifier)
+      (parameters)
+      (body
+        (expression_statement
+          (function_call
+            function: (object_access
+              left: (identifier)
+              right: (identifier))
+            (arguments
+              (argument
+                name: (identifier))
+              (argument
+                name: (identifier)))))
+        (expression_statement
+          (function_call
+            function: (object_access
+              left: (function_call
+                function: (object_access
+                  left: (identifier)
+                  right: (identifier))
+                (arguments))
+              right: (identifier))
+            (arguments
+              (argument
+                name: (identifier)))))))))
+
+================================================================================
+CLASS - Period body opener
+================================================================================
+
+CLASS DotBody.
+END CLASS.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (class_definition
+    name: (identifier)))
+
+================================================================================
+PROPERTY - accessor with empty parentheses
+================================================================================
+
+CLASS Foo:
+  DEFINE PUBLIC PROPERTY p AS CHARACTER NO-UNDO
+    GET():
+      RETURN "".
+    END GET.
+END CLASS.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (class_definition
+    name: (identifier)
+    (property_definition
+      (access_modifier)
+      name: (identifier)
+      type: (identifier)
+      (no_undo)
+      (return_statement
+        value: (string_literal)))))
+
+================================================================================
+PROPERTY - accessor with its own access modifier
+================================================================================
+
+CLASS Foo:
+  DEFINE PUBLIC PROPERTY p AS CHARACTER NO-UNDO
+    PROTECTED SET.
+END CLASS.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (class_definition
+    name: (identifier)
+    (property_definition
+      (access_modifier)
+      name: (identifier)
+      type: (identifier)
+      (no_undo)
+      (access_modifier))))
+
+================================================================================
+PROPERTY - accessor parameter with a direction
+================================================================================
+
+CLASS Foo:
+  DEFINE PUBLIC PROPERTY p AS CHARACTER NO-UNDO
+    GET(INPUT i AS INTEGER):
+      RETURN "".
+    END GET.
+END CLASS.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (class_definition
+    name: (identifier)
+    (property_definition
+      (access_modifier)
+      name: (identifier)
+      type: (identifier)
+      (no_undo)
+      (property_set_parameter_list
+        (property_set_parameter
+          name: (identifier)
+          type: (identifier)))
+      (return_statement
+        value: (string_literal)))))
+
+================================================================================
+DESTRUCTOR - closed with END METHOD
+================================================================================
+
+CLASS Foo:
+  DESTRUCTOR Foo():
+  END METHOD.
+END CLASS.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (class_definition
+    name: (identifier)
+    (destructor_definition
+      name: (identifier)
+      (parameters)
+      (body))))
+
+================================================================================
+CLASS - routine-level error scope in the body
+================================================================================
+
+CLASS Foo:
+  ROUTINE-LEVEL ON ERROR UNDO, THROW.
+END CLASS.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (class_definition
+    name: (identifier)
+    (error_scope_statement
+      (error_scope_type)
+      (on_error_phrase))))

@@ -1,0 +1,186 @@
+================================================================================
+INPUT-OUTPUT CLOSE
+================================================================================
+
+INPUT-OUTPUT CLOSE.
+INPUT-OUTPUT STREAM sIO CLOSE.
+INPUT-OUTPUT STREAM-HANDLE hStream CLOSE.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (input_output_statement
+    (close))
+  (input_output_statement
+    stream: (identifier)
+    (close))
+  (input_output_statement
+    stream: (identifier)
+    (close)))
+
+================================================================================
+INPUT-OUTPUT THROUGH
+================================================================================
+
+INPUT-OUTPUT THROUGH "myprogram".
+INPUT-OUTPUT THROUGH prog arg1 arg2.
+INPUT-OUTPUT THROUGH VALUE(cProgram) NO-ECHO.
+INPUT-OUTPUT STREAM sIO THROUGH "filter" UNBUFFERED.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (input_output_statement
+    program: (string_literal))
+  (input_output_statement
+    program: (identifier)
+    (identifier)
+    (identifier))
+  (input_output_statement
+    value: (identifier)
+    (no_echo))
+  (input_output_statement
+    stream: (identifier)
+    program: (string_literal)
+    (unbuffered)))
+
+================================================================================
+INPUT-OUTPUT THROUGH - MAP and NO-CONVERT variants
+================================================================================
+
+INPUT-OUTPUT STREAM-HANDLE hIO THROUGH VALUE(cmd) MAP "laserwriter/french" NO-CONVERT.
+INPUT-OUTPUT THROUGH myprog VALUE(arg1) NO-MAP CONVERT TARGET "utf-8".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (input_output_statement
+    stream: (identifier)
+    value: (identifier)
+    map: (string_literal)
+    (convert_phrase
+      (no_convert)))
+  (input_output_statement
+    program: (identifier)
+    value: (identifier)
+    (no_map)
+    (convert_phrase
+      target: (string_literal))))
+
+================================================================================
+INPUT-OUTPUT THROUGH - ECHO option
+================================================================================
+
+INPUT-OUTPUT THROUGH "filter" ECHO.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (input_output_statement
+    program: (string_literal)
+    (echo)))
+
+================================================================================
+INPUT-OUTPUT - Reference snippets
+================================================================================
+
+FOR EACH Item WHERE Item.ItemNum < 10:
+  DISPLAY Item.ItemNum Item.Price LABEL "Price before recalculation".
+END.
+INPUT-OUTPUT THROUGH r-iothru UNBUFFERED.
+FOR EACH Item WHERE Item.ItemNum < 10:
+  EXPORT Item.Price.
+  SET Item.Price.
+END.
+INPUT-OUTPUT CLOSE.
+FOR EACH Item WHERE Item.ItemNum < 10 WITH COLUMN 40:
+  DISPLAY Item.ItemNum Item.Price LABEL "Price after recalculation".
+END.
+
+INPUT-OUTPUT THROUGH VALUE(cProgram) NO-ECHO.
+INPUT-OUTPUT STREAM sIO THROUGH "filter" UNBUFFERED NO-CONVERT.
+INPUT-OUTPUT STREAM sIO THROUGH "filter" CONVERT SOURCE "ibm850" TARGET "utf-8".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (for_statement
+    (record_phrase
+      record: (identifier)
+      where: (binary_expression
+        (qualified_name
+          left: (identifier)
+          right: (identifier))
+        (number_literal)))
+    (body
+      (display_statement
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (format_phrase
+          label: (string_literal)))))
+  (input_output_statement
+    program: (identifier)
+    (unbuffered))
+  (for_statement
+    (record_phrase
+      record: (identifier)
+      where: (binary_expression
+        (qualified_name
+          left: (identifier)
+          right: (identifier))
+        (number_literal)))
+    (body
+      (export_statement
+        (qualified_name
+          left: (identifier)
+          right: (identifier)))
+      (set_statement
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier))))))
+  (input_output_statement
+    (close))
+  (for_statement
+    (record_phrase
+      record: (identifier)
+      where: (binary_expression
+        (qualified_name
+          left: (identifier)
+          right: (identifier))
+        (number_literal)))
+    (frame_phrase
+      column: (number_literal))
+    (body
+      (display_statement
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (format_phrase
+          label: (string_literal)))))
+  (input_output_statement
+    value: (identifier)
+    (no_echo))
+  (input_output_statement
+    stream: (identifier)
+    program: (string_literal)
+    (unbuffered)
+    (convert_phrase
+      (no_convert)))
+  (input_output_statement
+    stream: (identifier)
+    program: (string_literal)
+    (convert_phrase
+      source: (string_literal)
+      target: (string_literal))))

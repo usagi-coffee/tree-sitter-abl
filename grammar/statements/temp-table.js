@@ -1,0 +1,129 @@
+export default ({ kw }) => ({
+  temp_table_definition: ($) => seq($.__temp_table_definition_body, $._terminator),
+  __temp_table_definition_body: ($) =>
+    seq(
+      $.__temp_table_prefix,
+      repeat(
+        choice(
+          alias($._table_field, $.temp_table_field),
+          alias($._table_index, $.temp_table_index),
+        ),
+      ),
+    ),
+
+  __temp_table_prefix: ($) =>
+    seq(
+      kw("DEFINE", { offset: 3 }),
+      optional($.__temp_table_modifier),
+      kw("TEMP-TABLE"),
+      $._table_body,
+    ),
+  // Aliases for shared rules that reference temp-table specific rules
+  _like_phrase: ($) => $.__temp_table_like_phrase,
+  _table_field: ($) => $.__temp_table_field,
+  _table_index: ($) => $.__temp_table_index,
+
+  __temp_table_field: ($) =>
+    seq(
+      kw("FIELDS", { alias: "FIELD", offset: 5 }),
+      field("name", $.identifier),
+      choice(
+        seq(kw("AS"), field("type", $._type_name)),
+        $.__temp_table_like_type_clause,
+        seq($.__temp_table_extent_option, $.__temp_table_like_type_clause),
+      ),
+      repeat($.__temp_table_field_option),
+    ),
+
+  __temp_table_index: ($) =>
+    seq(
+      kw("INDEX"),
+      field("name", $.identifier),
+      optional(seq(choice(kw("AS"), kw("IS")), repeat($.__temp_table_index_modifier))),
+      repeat1($.__temp_table_index_field),
+    ),
+
+  __temp_table_index_modifier: ($) =>
+    choice(
+      alias(kw("UNIQUE"), $.unique),
+      alias(kw("PRIMARY"), $.primary),
+      alias(kw("WORD-INDEX"), $.word_index),
+    ),
+  __temp_table_like_phrase: ($) => seq(kw("LIKE"), $.__temp_table_like_body),
+  __temp_table_like_sequential_phrase: ($) => seq(kw("LIKE-SEQUENTIAL"), $.__temp_table_like_body),
+  __temp_table_like_body: ($) =>
+    seq(
+      field("like", $.__temp_table_like_name),
+      optional(alias(kw("VALIDATE"), $.validate)),
+      repeat($.__temp_table_use_index_phrase),
+    ),
+  __temp_table_like_type_clause: ($) =>
+    seq(
+      kw("LIKE"),
+      field("type", $.__temp_table_like_name),
+      optional(alias(kw("VALIDATE"), $.validate)),
+    ),
+  __temp_table_use_index_phrase: ($) =>
+    seq(
+      kw("USE-INDEX"),
+      field("index", $.identifier),
+      optional(alias($.__temp_table_as_primary_phrase, $.as_primary_phrase)),
+    ),
+  __temp_table_as_primary_phrase: ($) => seq(kw("AS"), alias(kw("PRIMARY"), $.primary)),
+  __temp_table_before_table_phrase: ($) => seq(kw("BEFORE-TABLE"), field("before", $.identifier)),
+  __temp_table_index_field: ($) =>
+    seq(
+      field("field", $._identifier_or_qualified_name),
+      optional(
+        field(
+          "sort_order",
+          choice(kw("DESCENDING", { offset: 4 }), kw("ASCENDING", { offset: 3 })),
+        ),
+      ),
+    ),
+  __temp_table_field_option: ($) =>
+    choice(
+      $._color_font_option,
+      seq(kw("COLUMN-LABEL"), field("column_label", $.__temp_table_label_list)),
+      seq(kw("DECIMALS"), field("decimals", $.number_literal)),
+      $.__temp_table_extent_option,
+      $._format_string,
+      seq(kw("HELP"), field("help", $.string_literal)),
+      seq(kw("INITIAL", { offset: 4 }), field("initial", $._initial_value)),
+      seq(kw("LABEL"), field("label", $.__temp_table_label_list)),
+      seq(kw("MOUSE-POINTER"), field("mouse_pointer", $._expression)),
+      seq(optional(alias(kw("NOT"), $.not)), alias(kw("CASE-SENSITIVE"), $.case_sensitive)),
+      alias(kw("SERIALIZE-HIDDEN"), $.serialize_hidden),
+      $.__temp_table_serialize_name_phrase,
+      seq(kw("TTCODEPAGE"), field("ttcodepage", $.string_literal)),
+      seq(kw("COLUMN-CODEPAGE"), field("column_codepage", $.string_literal)),
+      seq(kw("XML-DATA-TYPE"), field("xml_data_type", $.string_literal)),
+      seq(kw("XML-NODE-TYPE"), field("xml_node_type", $.string_literal)),
+      seq(kw("XML-NODE-NAME"), field("xml_node_name", $.string_literal)),
+      $.view_as_phrase,
+    ),
+  __temp_table_extent_option: ($) => seq(kw("EXTENT"), field("extent", $.number_literal)),
+  __temp_table_like_name: ($) => choice($._identifier_or_qualified_name, $.array_access),
+  __temp_table_label_list: ($) => seq($.string_literal, repeat(seq(",", $.string_literal))),
+  __temp_table_serialize_name_phrase: ($) =>
+    seq(kw("SERIALIZE-NAME"), field("serialize_name", $.string_literal)),
+  __temp_table_modifier: ($) =>
+    choice(
+      seq(
+        alias(kw("NEW"), $.new_modifier),
+        optional(alias(kw("GLOBAL"), $.scope_modifier)),
+        alias(kw("SHARED"), $.scope_modifier),
+      ),
+      alias(kw("SHARED"), $.scope_modifier),
+      seq(
+        alias(kw("STATIC"), $.static_modifier),
+        optional($._serialization_modifier),
+      ),
+      seq(
+        choice(alias(kw("PRIVATE"), $.access_modifier), alias(kw("PROTECTED"), $.access_modifier)),
+        optional(alias(kw("STATIC"), $.static_modifier)),
+        optional($._serialization_modifier),
+      ),
+      $._serialization_modifier,
+    ),
+});

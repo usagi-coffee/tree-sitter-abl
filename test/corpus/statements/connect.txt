@@ -1,0 +1,81 @@
+================================================================================
+CONNECT statement
+================================================================================
+
+CONNECT mydb NO-ERROR.
+CONNECT VALUE("-db mydb -H localhost").
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (connect_statement
+    database: (identifier)
+    (no_error))
+  (connect_statement
+    database: (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (string_literal))))))
+
+================================================================================
+CONNECT with connection options
+================================================================================
+
+CONNECT -db Sports2020 -H dbserver -S 1900 -U appuser -P secret NO-ERROR.
+CONNECT -db Sports2020 -H dbserver.
+CONNECT mydb1 -1 -db mydb2 -1 NO-ERROR.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (connect_statement
+    parameter: (identifier)
+    value: (identifier)
+    parameter: (identifier)
+    value: (identifier)
+    parameter: (identifier)
+    value: (number_literal)
+    parameter: (identifier)
+    value: (identifier)
+    parameter: (identifier)
+    value: (identifier)
+    (no_error))
+  (connect_statement
+    parameter: (identifier)
+    value: (identifier)
+    parameter: (identifier)
+    value: (identifier))
+  (connect_statement
+    database: (identifier)
+    parameter: (identifier)
+    parameter: (identifier)
+    value: (identifier)
+    parameter: (identifier)
+    (no_error)))
+
+================================================================================
+CONNECT - Reference snippets
+================================================================================
+
+CONNECT mydb1 -1 -db mydb2 -1 NO-ERROR.
+CONNECT VALUE("-db C:\\OpenEdge\\WRK\\db\\Sports2020 -H dbserver -S 1900") NO-ERROR.
+
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (connect_statement
+    database: (identifier)
+    parameter: (identifier)
+    parameter: (identifier)
+    value: (identifier)
+    parameter: (identifier)
+    (no_error))
+  (connect_statement
+    database: (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (string_literal))))
+    (no_error)))

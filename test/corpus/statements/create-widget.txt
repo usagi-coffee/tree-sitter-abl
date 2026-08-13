@@ -1,0 +1,132 @@
+================================================================================
+CREATE WIDGET
+================================================================================
+
+CREATE BUTTON hBtn IN WIDGET-POOL wp ASSIGN WIDTH = 10 HEIGHT = 2.
+CREATE VALUE("MY-WIDGET") ASSIGN SENSITIVE = TRUE.
+CREATE FRAME hFrame TRIGGERS:
+  ON CHOOSE DO:
+    MESSAGE "ok".
+  END.
+  ON ENTRY DO:
+    MESSAGE "entry".
+  END.
+END TRIGGERS.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (create_widget_statement
+    handle: (identifier)
+    pool: (identifier)
+    (assign_phrase
+      (assign_pair
+        left: (identifier)
+        right: (number_literal))
+      (assign_pair
+        left: (identifier)
+        right: (number_literal))))
+  (create_widget_statement
+    widget_type: (string_literal)
+    (assign_phrase
+      (assign_pair
+        left: (identifier)
+        right: (boolean_literal))))
+  (create_widget_statement
+    handle: (identifier)
+    (trigger_phrase
+      event: (identifier)
+      (trigger_body
+        (message_statement
+          (string_literal)))
+      event: (identifier)
+      (trigger_body
+        (message_statement
+          (string_literal))))))
+
+================================================================================
+CREATE WIDGET - window and dialog-box
+================================================================================
+
+CREATE WINDOW hWin.
+CREATE DIALOG-BOX hDlg IN WIDGET-POOL wp.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (create_widget_statement
+    handle: (identifier))
+  (create_widget_statement
+    handle: (identifier)
+    pool: (identifier)))
+
+================================================================================
+CREATE WIDGET - browse
+================================================================================
+
+CREATE BROWSE hBr IN WIDGET-POOL wp ASSIGN TITLE = "t".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (create_widget_statement
+    handle: (identifier)
+    pool: (identifier)
+    (assign_phrase
+      (assign_pair
+        left: (identifier)
+        right: (string_literal)))))
+
+================================================================================
+CREATE WIDGET - array handle
+================================================================================
+
+CREATE BUTTON hBtn[1].
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (create_widget_statement
+    handle: (array_access
+      array: (identifier)
+      index: (number_literal))))
+
+================================================================================
+CREATE WIDGET - event list and END without TRIGGERS
+================================================================================
+
+CREATE BUTTON hBtn TRIGGERS:
+  ON CHOOSE, ENTRY DO:
+  END.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (create_widget_statement
+    handle: (identifier)
+    (trigger_phrase
+      event: (identifier)
+      event: (identifier)
+      (trigger_body))))
+
+================================================================================
+CREATE WIDGET - NO-ERROR
+================================================================================
+
+CREATE BUTTON hBtn NO-ERROR.
+CREATE WINDOW h ASSIGN x = 1 NO-ERROR.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (create_widget_statement
+    handle: (identifier)
+    (no_error))
+  (create_widget_statement
+    handle: (identifier)
+    (assign_phrase
+      (assign_pair
+        left: (identifier)
+        right: (number_literal)))
+    (no_error)))

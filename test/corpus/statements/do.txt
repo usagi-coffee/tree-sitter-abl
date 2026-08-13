@@ -1,0 +1,608 @@
+================================================================================
+DO block basic
+================================================================================
+
+DO:
+  x = 1.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (do_statement
+    (body
+      (assignment_statement
+        left: (identifier)
+        operator: (assignment_operator)
+        right: (number_literal)))))
+
+================================================================================
+DO with loop variable
+================================================================================
+
+DO idx = 1 TO 3:
+  x = idx.
+END.
+
+DO i = 1 TO 10 BY 2:
+  DISPLAY i.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (do_statement
+    variable: (identifier)
+    start: (number_literal)
+    end: (number_literal)
+    (body
+      (assignment_statement
+        left: (identifier)
+        operator: (assignment_operator)
+        right: (identifier))))
+  (do_statement
+    variable: (identifier)
+    start: (number_literal)
+    end: (number_literal)
+    step: (number_literal)
+    (body
+      (display_statement
+        record: (identifier)))))
+
+================================================================================
+DO WHILE
+================================================================================
+
+DO WHILE idx < 3:
+  idx = idx + 1.
+END.
+
+DO WHILE NOT eof:
+  x = 1.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (do_statement
+    condition: (binary_expression
+      (identifier)
+      (number_literal))
+    (body
+      (assignment_statement
+        left: (identifier)
+        operator: (assignment_operator)
+        right: (binary_expression
+          (identifier)
+          (number_literal)))))
+  (do_statement
+    condition: (unary_expression
+      (identifier))
+    (body
+      (assignment_statement
+        left: (identifier)
+        operator: (assignment_operator)
+        right: (number_literal)))))
+
+================================================================================
+DO WHILE with ON ERROR UNDO THROW
+================================================================================
+
+DO WHILE idx < 3 ON ERROR UNDO, THROW:
+  idx = idx + 1.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (do_statement
+    condition: (binary_expression
+      (identifier)
+      (number_literal))
+    (on_error_phrase)
+    (body
+      (assignment_statement
+        left: (identifier)
+        operator: (assignment_operator)
+        right: (binary_expression
+          (identifier)
+          (number_literal))))))
+
+================================================================================
+DO with ON ERROR UNDO LEAVE
+================================================================================
+
+DO ON ERROR UNDO, LEAVE:
+  idx = 1.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (do_statement
+    (on_error_phrase)
+    (body
+      (assignment_statement
+        left: (identifier)
+        operator: (assignment_operator)
+        right: (number_literal)))))
+
+================================================================================
+DO with ON STOP UNDO NEXT
+================================================================================
+
+DO ON STOP UNDO, NEXT:
+  idx = 3.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (do_statement
+    (on_stop_phrase)
+    (body
+      (assignment_statement
+        left: (identifier)
+        operator: (assignment_operator)
+        right: (number_literal)))))
+
+================================================================================
+DO with ON QUIT LEAVE
+================================================================================
+
+DO ON QUIT, LEAVE:
+  idx = 2.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (do_statement
+    (on_quit_phrase)
+    (body
+      (assignment_statement
+        left: (identifier)
+        operator: (assignment_operator)
+        right: (number_literal)))))
+
+================================================================================
+DO TRANSACTION
+================================================================================
+
+DO TRANSACTION:
+END.
+
+DO TRANSACTION:
+  CREATE Customer.
+  Customer.Name = "Test".
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (do_statement
+    (transaction)
+    (body))
+  (do_statement
+    (transaction)
+    (body
+      (create_statement
+        table: (identifier))
+      (assignment_statement
+        left: (qualified_name
+          left: (identifier)
+          right: (identifier))
+        operator: (assignment_operator)
+        right: (string_literal)))))
+
+================================================================================
+DO TRANSACTION WHILE
+================================================================================
+
+DO TRANSACTION WHILE something:get-next():
+  something:buffer-copy(something).
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (do_statement
+    (transaction)
+    condition: (function_call
+      function: (object_access
+        left: (identifier)
+        right: (identifier))
+      (arguments))
+    (body
+      (expression_statement
+        (function_call
+          function: (object_access
+            left: (identifier)
+            right: (identifier))
+          (arguments
+            (argument
+              name: (identifier))))))))
+
+================================================================================
+DO TRANS short for TRANSACTION
+================================================================================
+
+DO TRANS:
+  x = 1.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (do_statement
+    (transaction)
+    (body
+      (assignment_statement
+        left: (identifier)
+        operator: (assignment_operator)
+        right: (number_literal)))))
+
+================================================================================
+DO loop with TO and trailing WHILE
+================================================================================
+
+DO i = 1 TO 5 WHILE pParam.fields[i] <> "":
+  DISPLAY i.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (do_statement
+    variable: (identifier)
+    start: (number_literal)
+    end: (number_literal)
+    (while_phrase
+      condition: (binary_expression
+        (array_access
+          array: (qualified_name
+            left: (identifier)
+            right: (identifier))
+          index: (identifier))
+        (string_literal)))
+    (body
+      (display_statement
+        record: (identifier)))))
+
+================================================================================
+DO WHILE with ON ENDKEY UNDO RETRY
+================================================================================
+
+DO WHILE TRUE ON ENDKEY UNDO, RETRY:
+  MESSAGE "hi".
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (do_statement
+    condition: (boolean_literal)
+    (on_endkey_phrase)
+    (body
+      (message_statement
+        (string_literal)))))
+
+================================================================================
+DO ON ENDKEY UNDO RETURN NO-APPLY
+================================================================================
+
+DO ON ENDKEY UNDO, RETURN NO-APPLY:
+  MESSAGE "x".
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (do_statement
+    (on_endkey_phrase)
+    (body
+      (message_statement
+        (string_literal)))))
+
+================================================================================
+DO with label
+================================================================================
+
+process_block: DO:
+  x = 1.
+END.
+
+outer: DO i = 1 TO 10:
+  inner: DO j = 1 TO 5:
+    DISPLAY i j.
+  END.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (do_statement
+    label: (identifier)
+    (body
+      (assignment_statement
+        left: (identifier)
+        operator: (assignment_operator)
+        right: (number_literal))))
+  (do_statement
+    label: (identifier)
+    variable: (identifier)
+    start: (number_literal)
+    end: (number_literal)
+    (body
+      (do_statement
+        label: (identifier)
+        variable: (identifier)
+        start: (number_literal)
+        end: (number_literal)
+        (body
+          (display_statement
+            (field
+              field: (identifier))
+            (field
+              field: (identifier))))))))
+
+================================================================================
+DO with ON ENDKEY UNDO LEAVE with label
+================================================================================
+
+myloop: DO WHILE TRUE ON ENDKEY UNDO myloop, LEAVE myloop:
+  x = x + 1.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (do_statement
+    label: (identifier)
+    condition: (boolean_literal)
+    (on_endkey_phrase
+      undo_label: (identifier)
+      leave_label: (identifier))
+    (body
+      (assignment_statement
+        left: (identifier)
+        operator: (assignment_operator)
+        right: (binary_expression
+          (identifier)
+          (number_literal))))))
+
+================================================================================
+DO with expression TO expression
+================================================================================
+
+DO i = startVal TO endVal:
+  DISPLAY i.
+END.
+
+DO i = getStart() TO getEnd() BY getStep():
+  DISPLAY i.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (do_statement
+    variable: (identifier)
+    start: (identifier)
+    end: (identifier)
+    (body
+      (display_statement
+        record: (identifier))))
+  (do_statement
+    variable: (identifier)
+    start: (function_call
+      function: (identifier)
+      (arguments))
+    end: (function_call
+      function: (identifier)
+      (arguments))
+    step: (function_call
+      function: (identifier)
+      (arguments))
+    (body
+      (display_statement
+        record: (identifier)))))
+
+================================================================================
+DO with empty body using dot terminator
+================================================================================
+
+DO.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (do_statement
+    (body)))
+
+================================================================================
+DO FOR with TRANSACTION STOP-AFTER and ON ERROR
+================================================================================
+
+DO FOR some_copy TRANSACTION STOP-AFTER 2 ON ERROR UNDO, THROW:
+  a = 5.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (do_statement
+    (for_phrase
+      record: (identifier))
+    (transaction)
+    (stop_after_phrase
+      time: (number_literal))
+    (on_error_phrase)
+    (body
+      (assignment_statement
+        left: (identifier)
+        operator: (assignment_operator)
+        right: (number_literal)))))
+
+================================================================================
+DO FOR with QUERY-TUNING and FRAME options
+================================================================================
+
+DO FOR rec1, rec2 QUERY-TUNING (LOOKAHEAD NO-LOOKAHEAD CACHE-SIZE 10 INDEX-HINT NO-INDEX-HINT SEPARATE-CONNECTION NO-SEPARATE-CONNECTION DEBUG SQL NO-DEBUG JOIN-BY-SQLDB NO-JOIN-BY-SQLDB BIND-WHERE NO-BIND-WHERE) WITH WIDTH 40:
+  DISPLAY rec1.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (do_statement
+    (for_phrase
+      record: (identifier)
+      record: (identifier))
+    (query_tuning_phrase
+      (lookahead)
+      (no_lookahead)
+      cache_size: (number_literal)
+      (index_hint)
+      (no_index_hint)
+      (separate_connection)
+      (no_separate_connection)
+      (sql)
+      (no_debug)
+      (join_by_sqldb)
+      (no_join_by_sqldb)
+      (bind_where)
+      (no_bind_where))
+    (frame_phrase
+      width: (number_literal))
+    (body
+      (display_statement
+        record: (identifier)))))
+
+================================================================================
+DO PRESELECT
+================================================================================
+
+DO PRESELECT EACH Customer NO-LOCK:
+  DISPLAY Customer.Name.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (do_statement
+    (preselect_phrase
+      (preselect_record_list
+        (preselect_record
+          (record_phrase
+            record: (identifier)
+            (no_lock)))))
+    (body
+      (display_statement
+        record: (qualified_name
+          left: (identifier)
+          right: (identifier))))))
+
+================================================================================
+DO - Reference snippet
+================================================================================
+
+FOR EACH Customer NO-LOCK:
+  DISPLAY Customer.Name Customer.CreditLimit.
+  PAUSE 3.
+  IF Customer.CreditLimit > 80000 THEN DO:
+    Customer.CreditLimit = 80000.
+    DISPLAY Customer.Name Customer.CreditLimit.
+  END.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (for_statement
+    (record_phrase
+      record: (identifier)
+      (no_lock))
+    (body
+      (display_statement
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier))))
+      (pause_statement
+        duration: (number_literal))
+      (if_statement
+        (binary_expression
+          (qualified_name
+            left: (identifier)
+            right: (identifier))
+          (number_literal))
+        then: (do_statement
+          (body
+            (assignment_statement
+              left: (qualified_name
+                left: (identifier)
+                right: (identifier))
+              operator: (assignment_operator)
+              right: (number_literal))
+            (display_statement
+              (field
+                field: (qualified_name
+                  left: (identifier)
+                  right: (identifier)))
+              (field
+                field: (qualified_name
+                  left: (identifier)
+                  right: (identifier))))))))))
+
+================================================================================
+DO PRESELECT with COLLATE phrase
+================================================================================
+
+DO PRESELECT EACH Customer COLLATE(Customer.Name, "CASE-INSENSITIVE", "basic") DESCENDING:
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (do_statement
+    (preselect_phrase
+      (preselect_record_list
+        (preselect_record
+          (record_phrase
+            record: (identifier))))
+      string: (qualified_name
+        left: (identifier)
+        right: (identifier))
+      strength: (string_literal)
+      collation: (string_literal))
+    (body)))
+
+================================================================================
+DO - FOR, PRESELECT, and QUERY-TUNING prefix
+================================================================================
+
+DO FOR Customer PRESELECT EACH Customer QUERY-TUNING (LOOKAHEAD):
+  LEAVE.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (do_statement
+    (for_phrase
+      record: (identifier))
+    (preselect_phrase
+      (preselect_record_list
+        (preselect_record
+          (record_phrase
+            record: (identifier)))))
+    (query_tuning_phrase
+      (lookahead))
+    (body
+      (leave_statement))))

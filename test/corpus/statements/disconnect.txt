@@ -1,0 +1,47 @@
+================================================================================
+DISCONNECT statement
+================================================================================
+
+DISCONNECT mydb.
+DISCONNECT mydb NO-ERROR.
+DISCONNECT VALUE(cDbName).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (disconnect_statement
+    database: (identifier))
+  (disconnect_statement
+    database: (identifier)
+    (no_error))
+  (disconnect_statement
+    database: (identifier)))
+
+================================================================================
+DISCONNECT - VALUE with NO-ERROR
+================================================================================
+
+DISCONNECT VALUE(cDb) NO-ERROR.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (disconnect_statement
+    database: (identifier)
+    (no_error)))
+
+================================================================================
+DISCONNECT - Reference snippet
+================================================================================
+
+DISCONNECT mydb.
+DISCONNECT VALUE("mydb") NO-ERROR.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (disconnect_statement
+    database: (identifier))
+  (disconnect_statement
+    database: (string_literal)
+    (no_error)))

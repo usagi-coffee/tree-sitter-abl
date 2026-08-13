@@ -1,0 +1,184 @@
+================================================================================
+PUBLISH statement
+================================================================================
+
+PUBLISH "MyEvent".
+PUBLISH "MyEvent" FROM hPublisher.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (publish_statement
+    event: (string_literal))
+  (publish_statement
+    event: (string_literal)
+    (from_phrase
+      publisher: (identifier))))
+
+================================================================================
+PUBLISH - reference snippets and parameters
+================================================================================
+
+DEFINE VARIABLE hPub AS HANDLE NO-UNDO.
+DEFINE VARIABLE hSub1 AS HANDLE NO-UNDO.
+DEFINE VARIABLE hSub2 AS HANDLE NO-UNDO.
+DEFINE BUTTON bNewCust LABEL "New Customer".
+DEFINE BUTTON bQuit LABEL "Quit".
+RUN r-nepub.p PERSISTENT SET hPub.
+RUN r-nesub1.p PERSISTENT SET hSub1 (hPub).
+RUN r-nesub2.p PERSISTENT SET hSub2.
+SUBSCRIBE PROCEDURE hSub2 TO "NewCustomer" IN hPub.
+FORM bNewCust bQuit WITH FRAME x.
+ENABLE ALL WITH FRAME x.
+ON CHOOSE OF bNewCust RUN NewCust IN hPub.
+WAIT-FOR CHOOSE OF bQuit OR WINDOW-CLOSE OF CURRENT-WINDOW.
+
+PROCEDURE NewCust:
+DEFINE VARIABLE name AS CHARACTER NO-UNDO INITIAL "Sam".
+PUBLISH "NewCustomer" (INPUT name).
+END PROCEDURE.
+
+DEFINE INPUT PARAMETER hPub AS HANDLE NO-UNDO.
+SUBSCRIBE TO "NewCustomer" IN hPub.
+PROCEDURE NewCustomer:
+DEFINE INPUT PARAMETER name AS CHARACTER NO-UNDO.
+MESSAGE "Subscriber 1 received event NewCustomer concerning" name
+VIEW-AS ALERT-BOX.
+END.
+
+PROCEDURE NewCustomer:
+DEFINE INPUT PARAMETER name AS CHARACTER NO-UNDO.
+MESSAGE "Subscriber 2 received event NewCustomer concerning" name
+VIEW-AS ALERT-BOX.
+UNSUBSCRIBE TO ALL.
+END.
+
+PUBLISH cEventName FROM hPublisher (INPUT p1, INPUT-OUTPUT p2, OUTPUT p3).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (button_definition
+    name: (identifier)
+    label: (string_literal))
+  (button_definition
+    name: (identifier)
+    label: (string_literal))
+  (run_statement
+    procedure: (procedure_name)
+    (persistent
+      handle: (identifier)))
+  (run_statement
+    procedure: (procedure_name)
+    (persistent
+      handle: (identifier))
+    (arguments
+      (argument
+        name: (identifier))))
+  (run_statement
+    procedure: (procedure_name)
+    (persistent
+      handle: (identifier)))
+  (subscribe_statement
+    subscriber: (identifier)
+    event: (string_literal)
+    (in_phrase
+      publisher: (identifier)))
+  (form_statement
+    (form_item
+      field: (identifier))
+    (form_item
+      field: (identifier))
+    (frame_phrase
+      frame: (identifier)))
+  (enable_statement
+    (all)
+    (frame_phrase
+      frame: (identifier)))
+  (on_statement
+    event: (identifier)
+    (of_phrase
+      widget: (widget_phrase
+        handle: (identifier)))
+    (run_statement
+      procedure: (identifier)
+      (in_phrase
+        context: (identifier))))
+  (wait_for_statement
+    (of_phrase
+      events: (identifier)
+      widgets: (widget_phrase
+        handle: (identifier)))
+    (of_phrase
+      events: (identifier)
+      widgets: (widget_phrase
+        system_handle: (system_handle))))
+  (procedure_definition
+    name: (identifier)
+    (body
+      (variable_definition
+        name: (identifier)
+        type: (identifier)
+        (no_undo)
+        initial: (string_literal))
+      (publish_statement
+        event: (string_literal)
+        (arguments
+          (argument
+            name: (identifier))))))
+  (parameter_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (subscribe_statement
+    event: (string_literal)
+    (in_phrase
+      publisher: (identifier)))
+  (procedure_definition
+    name: (identifier)
+    (body
+      (parameter_definition
+        name: (identifier)
+        type: (identifier)
+        (no_undo))
+      (message_statement
+        (string_literal)
+        (identifier)
+        (view_as_phrase))))
+  (procedure_definition
+    name: (identifier)
+    (body
+      (parameter_definition
+        name: (identifier)
+        type: (identifier)
+        (no_undo))
+      (message_statement
+        (string_literal)
+        (identifier)
+        (view_as_phrase))
+      (unsubscribe_statement
+        (all))))
+  (publish_statement
+    event: (identifier)
+    (from_phrase
+      publisher: (function_call
+        function: (identifier)
+        (arguments
+          (argument
+            name: (identifier))
+          (argument
+            name: (identifier))
+          (argument
+            name: (identifier)))))))

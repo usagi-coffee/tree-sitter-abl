@@ -1,0 +1,174 @@
+================================================================================
+COMPILE - OPTIONS-FILE and SAVE with logical
+================================================================================
+
+COMPILE myproc.p OPTIONS-FILE "compile.opts" SAVE = TRUE INTO "r".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (compile_statement
+    file: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    options_file: (string_literal)
+    save: (boolean_literal)
+    into: (string_literal)))
+
+================================================================================
+COMPILE - LISTING with APPEND and PAGE options
+================================================================================
+
+COMPILE myproc.p LISTING "out.lst" APPEND = TRUE.
+COMPILE myproc.p LISTING "out.lst" PAGE-SIZE 80.
+COMPILE myproc.p LISTING "out.lst" PAGE-WIDTH 132.
+COMPILE myproc.p LISTING "out.lst" PAGE-SIZE 80 PAGE-WIDTH 132.
+COMPILE myproc.p LISTING "out.lst" PAGE-WIDTH 132 PAGE-SIZE 80.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (compile_statement
+    file: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    listing: (string_literal)
+    append: (boolean_literal))
+  (compile_statement
+    file: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    listing: (string_literal)
+    page_size: (number_literal))
+  (compile_statement
+    file: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    listing: (string_literal)
+    page_width: (number_literal))
+  (compile_statement
+    file: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    listing: (string_literal)
+    page_size: (number_literal)
+    page_width: (number_literal))
+  (compile_statement
+    file: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    listing: (string_literal)
+    page_width: (number_literal)
+    page_size: (number_literal)))
+
+================================================================================
+COMPILE - XREF and STRING-XREF with APPEND
+================================================================================
+
+COMPILE myproc.p XREF "xref.txt" APPEND = FALSE STRING-XREF "sxref.txt" APPEND = TRUE.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (compile_statement
+    file: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    xref: (string_literal)
+    append: (boolean_literal)
+    string_xref: (string_literal)
+    append: (boolean_literal)))
+
+================================================================================
+COMPILE - Reference snippets and additional options
+================================================================================
+
+COMPILE ord-ent SAVE.
+COMPILE r-incl.p SAVE LISTING r-incl.lis XREF r-incl.xrf DEBUG-LIST r-incl.dbg.
+COMPILE VALUE("myproc.p") OPTIONS "require-full-names".
+COMPILE myproc.p OPTIONS-FILE VALUE(optFile) SAVE INTO VALUE(outDir).
+COMPILE myproc.p XCODE "key".
+COMPILE myproc.p XREF-XML "xrefdir".
+COMPILE myproc.p STREAM-IO.
+COMPILE myproc.p LANGUAGES("en") TEXT-SEG-GROW 100.
+COMPILE myproc.p PREPROCESS "pre.out".
+COMPILE myproc.p V6FRAME USE-REVVIDEO.
+COMPILE myproc.p V6FRAME USE-UNDERLINE.
+COMPILE myproc.p MIN-SIZE DEFAULT-UNTRANSLATABLE NO-ERROR.
+
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (compile_statement
+    file: (identifier))
+  (compile_statement
+    file: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    listing: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    xref: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    debug_list: (qualified_name
+      left: (identifier)
+      right: (identifier)))
+  (compile_statement
+    value: (string_literal)
+    options: (string_literal))
+  (compile_statement
+    file: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    options_file: (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (identifier))))
+    into: (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (identifier)))))
+  (compile_statement
+    file: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    xcode: (string_literal))
+  (compile_statement
+    file: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    xref_xml: (string_literal))
+  (compile_statement
+    file: (qualified_name
+      left: (identifier)
+      right: (identifier)))
+  (compile_statement
+    file: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    languages: (string_literal)
+    text_seg_grow: (number_literal))
+  (compile_statement
+    file: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    preprocess: (string_literal))
+  (compile_statement
+    file: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (use_revvideo))
+  (compile_statement
+    file: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (use_underline))
+  (compile_statement
+    file: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (no_error)))

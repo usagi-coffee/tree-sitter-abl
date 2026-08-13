@@ -1,0 +1,798 @@
+================================================================================
+FOR EACH basic
+================================================================================
+
+FOR EACH Customer:
+  DISPLAY Customer.Name.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (for_statement
+    (record_phrase
+      record: (identifier))
+    (body
+      (display_statement
+        record: (qualified_name
+          left: (identifier)
+          right: (identifier))))))
+
+================================================================================
+FOR with COLLATE phrase
+================================================================================
+
+FOR EACH Customer COLLATE(Customer.Name, "CASE-INSENSITIVE", "basic") DESCENDING:
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (for_statement
+    (record_phrase
+      record: (identifier))
+    (collate_phrase
+      string: (qualified_name
+        left: (identifier)
+        right: (identifier))
+      strength: (string_literal)
+      collation: (string_literal))
+    (body)))
+
+================================================================================
+FOR EACH with GROUP BY
+================================================================================
+
+FOR EACH ttTransakcje NO-LOCK GROUP BY ttTime DESC:
+  PUT SKIP.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (for_statement
+    (record_phrase
+      record: (identifier)
+      (no_lock))
+    (group_by_phrase
+      by: (identifier))
+    (body
+      (put_statement
+        (skip)))))
+
+================================================================================
+FOR EACH with WHERE clause
+================================================================================
+
+FOR EACH customer WHERE customer.id = 1 NO-LOCK:
+  DISPLAY customer.name.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (for_statement
+    (record_phrase
+      record: (identifier)
+      where: (binary_expression
+        (qualified_name
+          left: (identifier)
+          right: (identifier))
+        (number_literal))
+      (no_lock))
+    (body
+      (display_statement
+        record: (qualified_name
+          left: (identifier)
+          right: (identifier))))))
+
+================================================================================
+FOR EACH with ON ERROR UNDO THROW
+================================================================================
+
+FOR EACH tFcMessages ON ERROR UNDO, THROW:
+  DISPLAY tFcMessages.tcFcMessage.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (for_statement
+    (record_phrase
+      record: (identifier))
+    (on_error_phrase)
+    (body
+      (display_statement
+        record: (qualified_name
+          left: (identifier)
+          right: (identifier))))))
+
+================================================================================
+FOR EACH with USE-INDEX and BREAK BY
+================================================================================
+
+FOR EACH trans_hist WHERE trans_hist.domain = "ZMD" NO-LOCK USE-INDEX idxTrans BREAK BY trans_hist.line BY trans_hist.part:
+  DISPLAY trans_hist.line.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (for_statement
+    (record_phrase
+      record: (identifier)
+      where: (binary_expression
+        (qualified_name
+          left: (identifier)
+          right: (identifier))
+        (string_literal))
+      (no_lock)
+      index: (identifier))
+    (break_by
+      by: (qualified_name
+        left: (identifier)
+        right: (identifier))
+      by: (qualified_name
+        left: (identifier)
+        right: (identifier)))
+    (body
+      (display_statement
+        record: (qualified_name
+          left: (identifier)
+          right: (identifier))))))
+
+================================================================================
+FOR EACH with BY clause and DESC
+================================================================================
+
+FOR EACH order_hdr NO-LOCK BY order_hdr.order_num DESC:
+  DISPLAY order_hdr.order_num.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (for_statement
+    (record_phrase
+      record: (identifier)
+      (no_lock))
+    (by_phrase
+      by: (qualified_name
+        left: (identifier)
+        right: (identifier)))
+    (body
+      (display_statement
+        record: (qualified_name
+          left: (identifier)
+          right: (identifier))))))
+
+================================================================================
+FOR EACH with frame clause
+================================================================================
+
+FOR EACH item NO-LOCK WITH FRAME fr WIDTH 120:
+  PUT UNFORMATTED item.item_id SKIP.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (for_statement
+    (record_phrase
+      record: (identifier)
+      (no_lock))
+    (frame_phrase
+      frame: (identifier)
+      width: (number_literal))
+    (body
+      (put_statement
+        (unformatted)
+        value: (qualified_name
+          left: (identifier)
+          right: (identifier))
+        (skip)))))
+
+================================================================================
+FOR EACH with label
+================================================================================
+
+outer_loop: FOR EACH item_mstr NO-LOCK:
+  DISPLAY item_mstr.item_code.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (for_statement
+    label: (identifier)
+    (record_phrase
+      record: (identifier)
+      (no_lock))
+    (body
+      (display_statement
+        record: (qualified_name
+          left: (identifier)
+          right: (identifier))))))
+
+================================================================================
+FOR EACH with ON ENDKEY UNDO RETRY
+================================================================================
+
+FOR EACH Customer ON ENDKEY UNDO, RETRY:
+  DISPLAY Customer.Name.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (for_statement
+    (record_phrase
+      record: (identifier))
+    (on_endkey_phrase)
+    (body
+      (display_statement
+        record: (qualified_name
+          left: (identifier)
+          right: (identifier))))))
+
+================================================================================
+FOR EACH with EXCLUSIVE-LOCK
+================================================================================
+
+FOR EACH ld_det WHERE ld_domain = "ZMD" EXCLUSIVE-LOCK:
+  DISPLAY ld_det.ld_domain.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (for_statement
+    (record_phrase
+      record: (identifier)
+      where: (binary_expression
+        (identifier)
+        (string_literal))
+      (exclusive_lock))
+    (body
+      (display_statement
+        record: (qualified_name
+          left: (identifier)
+          right: (identifier))))))
+
+================================================================================
+FOR EACH with optional WHERE and BY
+================================================================================
+
+FOR EACH x WHERE BY x:
+  DISPLAY x.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (for_statement
+    (record_phrase
+      record: (identifier))
+    (by_phrase
+      by: (identifier))
+    (body
+      (display_statement
+        record: (identifier)))))
+
+================================================================================
+FOR EACH with SHARE-LOCK and NO-PREFETCH
+================================================================================
+
+FOR EACH share_lock_rec SHARE-LOCK NO-PREFETCH:
+  DISPLAY share_lock_rec.share_id.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (for_statement
+    (record_phrase
+      record: (identifier)
+      (share_lock)
+      (no_prefetch))
+    (body
+      (display_statement
+        record: (qualified_name
+          left: (identifier)
+          right: (identifier))))))
+
+================================================================================
+FOR FIRST
+================================================================================
+
+FOR FIRST Customer NO-LOCK:
+  DISPLAY Customer.Name.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (for_statement
+    (record_phrase
+      record: (identifier)
+      (no_lock))
+    (body
+      (display_statement
+        record: (qualified_name
+          left: (identifier)
+          right: (identifier))))))
+
+================================================================================
+FOR LAST
+================================================================================
+
+FOR LAST Order NO-LOCK:
+  DISPLAY Order.OrderNum.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (for_statement
+    (record_phrase
+      record: (identifier)
+      (no_lock))
+    (body
+      (display_statement
+        record: (qualified_name
+          left: (identifier)
+          right: (identifier))))))
+
+================================================================================
+FOR EACH with multiple tables (join)
+================================================================================
+
+FOR EACH Customer NO-LOCK, EACH Order OF Customer NO-LOCK:
+  DISPLAY Customer.Name Order.OrderNum.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (for_statement
+    (record_phrase
+      record: (identifier)
+      (no_lock))
+    (record_phrase
+      record: (identifier)
+      of: (identifier)
+      (no_lock))
+    (body
+      (display_statement
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))))))
+
+================================================================================
+FOR EACH with complex WHERE and multiple BY
+================================================================================
+
+FOR EACH Customer NO-LOCK WHERE Customer.Balance > 0 AND Customer.State = "NY" BY Customer.Name BY Customer.Balance DESC:
+  DISPLAY Customer.Name Customer.Balance.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (for_statement
+    (record_phrase
+      record: (identifier)
+      (no_lock)
+      where: (binary_expression
+        (binary_expression
+          (qualified_name
+            left: (identifier)
+            right: (identifier))
+          (number_literal))
+        (binary_expression
+          (qualified_name
+            left: (identifier)
+            right: (identifier))
+          (string_literal))))
+    (by_phrase
+      by: (qualified_name
+        left: (identifier)
+        right: (identifier))
+      by: (qualified_name
+        left: (identifier)
+        right: (identifier)))
+    (body
+      (display_statement
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))))))
+
+================================================================================
+FOR EACH FIRST/LAST in join
+================================================================================
+
+FOR EACH Customer NO-LOCK, FIRST Order OF Customer NO-LOCK:
+  DISPLAY Customer.Name Order.OrderNum.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (for_statement
+    (record_phrase
+      record: (identifier)
+      (no_lock))
+    (record_phrase
+      record: (identifier)
+      of: (identifier)
+      (no_lock))
+    (body
+      (display_statement
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))))))
+
+================================================================================
+FOR variable loops
+================================================================================
+
+FOR i = 1 TO 10:
+  DISPLAY i.
+END.
+
+FOR i = 1 TO 100 BY 5:
+  DISPLAY i.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (for_statement
+    variable: (identifier)
+    start: (number_literal)
+    end: (number_literal)
+    (body
+      (display_statement
+        record: (identifier))))
+  (for_statement
+    variable: (identifier)
+    start: (number_literal)
+    end: (number_literal)
+    step: (number_literal)
+    (body
+      (display_statement
+        record: (identifier)))))
+
+================================================================================
+FOR field list with preprocessor constant
+================================================================================
+
+FOR EACH Customer FIELDS (Name) {&recordConstant}:
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (for_statement
+    (record_phrase
+      record: (identifier)
+      (field_list
+        (identifier))
+      (preprocessor_name
+        (identifier)))
+    (body)))
+
+================================================================================
+FOR WHILE and STOP-AFTER
+================================================================================
+
+FOR EACH Customer WHILE x > 5:
+  DISPLAY Customer.
+END.
+
+FOR EACH Customer WHILE active TRANSACTION:
+  DISPLAY Customer.
+END.
+
+FOR EACH Customer STOP-AFTER 30:
+  DISPLAY Customer.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (for_statement
+    (record_phrase
+      record: (identifier))
+    (while_phrase
+      condition: (binary_expression
+        (identifier)
+        (number_literal)))
+    (body
+      (display_statement
+        record: (identifier))))
+  (for_statement
+    (record_phrase
+      record: (identifier))
+    (while_phrase
+      condition: (identifier))
+    (transaction)
+    (body
+      (display_statement
+        record: (identifier))))
+  (for_statement
+    (record_phrase
+      record: (identifier))
+    (stop_after_phrase
+      time: (number_literal))
+    (body
+      (display_statement
+        record: (identifier)))))
+
+================================================================================
+FOR error handlers
+================================================================================
+
+FOR EACH Customer ON ERROR UNDO, LEAVE:
+  DISPLAY Customer.
+END.
+
+FOR EACH Customer ON QUIT UNDO, LEAVE:
+  DISPLAY Customer.
+END.
+
+FOR EACH Customer ON STOP UNDO, LEAVE:
+  DISPLAY Customer.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (for_statement
+    (record_phrase
+      record: (identifier))
+    (on_error_phrase)
+    (body
+      (display_statement
+        record: (identifier))))
+  (for_statement
+    (record_phrase
+      record: (identifier))
+    (on_quit_phrase)
+    (body
+      (display_statement
+        record: (identifier))))
+  (for_statement
+    (record_phrase
+      record: (identifier))
+    (on_stop_phrase)
+    (body
+      (display_statement
+        record: (identifier)))))
+
+================================================================================
+FOR - Reference snippets
+================================================================================
+
+FOR EACH Customer NO-LOCK BY Customer.CreditLimit:
+  DISPLAY Customer.
+  LEAVE.
+END.
+
+FOR EACH Customer NO-LOCK WHERE Customer.CustNum < 12 BY Customer.State:
+  DISPLAY Customer.CustNum Customer.Name Customer.City Customer.State.
+END.
+
+FOR EACH Customer NO-LOCK, EACH Order OF Customer NO-LOCK,
+     EACH OrderLine OF Order NO-LOCK, Item OF OrderLine NO-LOCK
+     BY Order.PromiseDate BY Customer.CustNum BY OrderLine.LineNum:
+  DISPLAY Order.PromiseDate Customer.CustNum Order.OrderNum
+    OrderLine.LineNum Item.ItemNum Item.ItemName.
+END.
+
+FOR EACH Customer NO-LOCK, LAST Order OF Customer:
+  DISPLAY Customer.CustNum Customer.Name Order.OrderNum Order.OrderDate
+    Order.Instructions.
+  PAUSE 1 NO-MESSAGE.
+  Order.Instructions = "Last order".
+  DISPLAY Order.Instruction.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (for_statement
+    (record_phrase
+      record: (identifier)
+      (no_lock))
+    (by_phrase
+      by: (qualified_name
+        left: (identifier)
+        right: (identifier)))
+    (body
+      (display_statement
+        record: (identifier))
+      (leave_statement)))
+  (for_statement
+    (record_phrase
+      record: (identifier)
+      (no_lock)
+      where: (binary_expression
+        (qualified_name
+          left: (identifier)
+          right: (identifier))
+        (number_literal)))
+    (by_phrase
+      by: (qualified_name
+        left: (identifier)
+        right: (identifier)))
+    (body
+      (display_statement
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier))))))
+  (for_statement
+    (record_phrase
+      record: (identifier)
+      (no_lock))
+    (record_phrase
+      record: (identifier)
+      of: (identifier)
+      (no_lock))
+    (record_phrase
+      record: (identifier)
+      of: (identifier)
+      (no_lock))
+    (record_phrase
+      record: (identifier)
+      of: (identifier)
+      (no_lock))
+    (by_phrase
+      by: (qualified_name
+        left: (identifier)
+        right: (identifier))
+      by: (qualified_name
+        left: (identifier)
+        right: (identifier))
+      by: (qualified_name
+        left: (identifier)
+        right: (identifier)))
+    (body
+      (display_statement
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier))))))
+  (for_statement
+    (record_phrase
+      record: (identifier)
+      (no_lock))
+    (record_phrase
+      record: (identifier)
+      of: (identifier))
+    (body
+      (display_statement
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier))))
+      (pause_statement
+        duration: (number_literal)
+        (no_message))
+      (assignment_statement
+        left: (qualified_name
+          left: (identifier)
+          right: (identifier))
+        operator: (assignment_operator)
+        right: (string_literal))
+      (display_statement
+        record: (qualified_name
+          left: (identifier)
+          right: (identifier))))))
+
+================================================================================
+FOR - TRANS abbreviation
+================================================================================
+
+FOR EACH cust TRANS:
+  DISPLAY cust.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (for_statement
+    (record_phrase
+      record: (identifier))
+    (transaction)
+    (body
+      (display_statement
+        record: (identifier)))))
+
+================================================================================
+FOR - case-marked string before a block colon
+================================================================================
+
+FOR EACH cust WHERE cust.id = "X":U NO-LOCK:
+  DISPLAY cust.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (for_statement
+    (record_phrase
+      record: (identifier)
+      where: (binary_expression
+        (qualified_name
+          left: (identifier)
+          right: (identifier))
+        (string_literal))
+      (no_lock))
+    (body
+      (display_statement
+        record: (identifier)))))

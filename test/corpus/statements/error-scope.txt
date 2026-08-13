@@ -1,0 +1,50 @@
+================================================================================
+ERROR SCOPE
+================================================================================
+
+BLOCK-LEVEL ON ERROR UNDO, THROW.
+ROUTINE-LEVEL ON ERROR UNDO, THROW.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (error_scope_statement
+    (error_scope_type)
+    (on_error_phrase))
+  (error_scope_statement
+    (error_scope_type)
+    (on_error_phrase)))
+
+================================================================================
+ERROR SCOPE with following definitions
+================================================================================
+
+BLOCK-LEVEL ON ERROR UNDO, THROW.
+DEFINE VARIABLE x AS INTEGER.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (error_scope_statement
+    (error_scope_type)
+    (on_error_phrase))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)))
+
+================================================================================
+ERROR SCOPE - Reference snippets
+================================================================================
+
+BLOCK-LEVEL ON ERROR UNDO, THROW.
+ROUTINE-LEVEL ON ERROR UNDO, THROW.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (error_scope_statement
+    (error_scope_type)
+    (on_error_phrase))
+  (error_scope_statement
+    (error_scope_type)
+    (on_error_phrase)))

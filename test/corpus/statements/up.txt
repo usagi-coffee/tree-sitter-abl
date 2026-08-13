@@ -1,0 +1,61 @@
+================================================================================
+UP statement
+================================================================================
+
+UP.
+UP 2.
+UP 1 WITH FRAME myframe.
+UP STREAM sOut 2.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (up_statement)
+  (up_statement
+    count: (number_literal))
+  (up_statement
+    count: (number_literal)
+    (frame_phrase
+      frame: (identifier)))
+  (up_statement
+    stream: (identifier)
+    count: (number_literal)))
+
+================================================================================
+UP - reference snippet and variants
+================================================================================
+
+FOR EACH Customer:
+UP 2.
+DISPLAY Customer.CustNum Customer.Name Customer.City.
+END.
+
+UP STREAM-HANDLE hS 3 WITH FRAME f1.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (for_statement
+    (record_phrase
+      record: (identifier))
+    (body
+      (up_statement
+        count: (number_literal))
+      (display_statement
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier))))))
+  (up_statement
+    stream: (identifier)
+    count: (number_literal)
+    (frame_phrase
+      frame: (identifier))))

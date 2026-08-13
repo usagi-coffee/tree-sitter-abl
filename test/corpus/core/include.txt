@@ -1,0 +1,176 @@
+================================================================================
+INCLUDE positional arguments
+================================================================================
+
+{include_positional.i arg1 arg2 "NEW"}
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (include_file_reference
+    file: (include_file_path
+      (identifier))
+    argument: (include_argument
+      (identifier))
+    argument: (include_argument
+      (identifier))
+    argument: (include_argument
+      (string_literal))))
+
+================================================================================
+INCLUDE named arguments
+================================================================================
+
+{include_named.i &arg2="test" &ABC=variable}
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (include_file_reference
+    file: (include_file_path
+      (identifier))
+    argument: (include_argument
+      name: (identifier)
+      value: (string_literal))
+    argument: (include_argument
+      name: (identifier)
+      value: (identifier))))
+
+================================================================================
+INCLUDE preprocessor file prefix with positional argument
+================================================================================
+
+{{&US_ET}etdcrvar.i new}
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (include_file_reference
+    file: (include_file_path
+      (preprocessor_name
+        (identifier))
+      (identifier))
+    argument: (include_argument
+      (identifier))))
+
+================================================================================
+INCLUDE preprocessor file prefix only
+================================================================================
+
+{{&INC}file.i}
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (include_file_reference
+    file: (include_file_path
+      (preprocessor_name
+        (identifier))
+      (identifier))))
+
+================================================================================
+INCLUDE file from argument reference
+================================================================================
+
+{{1}}
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (include_file_reference
+    file: (argument_reference)))
+
+================================================================================
+INCLUDE multiline named arguments
+================================================================================
+
+{{&INC}file_with_args.i
+  &PARM1=var_one &PARM2=var_two
+  &SITE=tbl_one.col_one &LOC=tbl_one.col_two
+  &ORDER=param_order
+  &ITEM=param_item &QTY=qty_val &LOT='N' &PRICE=price_val
+}
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (include_file_reference
+    file: (include_file_path
+      (preprocessor_name
+        (identifier))
+      (identifier))
+    argument: (include_argument
+      name: (identifier)
+      value: (identifier))
+    argument: (include_argument
+      name: (identifier)
+      value: (identifier))
+    argument: (include_argument
+      name: (identifier)
+      value: (qualified_name
+        left: (identifier)
+        right: (identifier)))
+    argument: (include_argument
+      name: (identifier)
+      value: (qualified_name
+        left: (identifier)
+        right: (identifier)))
+    argument: (include_argument
+      name: (identifier)
+      value: (identifier))
+    argument: (include_argument
+      name: (identifier)
+      value: (identifier))
+    argument: (include_argument
+      name: (identifier)
+      value: (identifier))
+    argument: (include_argument
+      name: (identifier)
+      value: (string_literal))
+    argument: (include_argument
+      name: (identifier)
+      value: (identifier))))
+
+================================================================================
+INCLUDE with WINDOW positional argument
+================================================================================
+
+{us/mf/mfselbpr.i window 132}
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (include_file_reference
+    file: (include_file_path
+      (identifier))
+    argument: (include_argument
+      (identifier))
+    argument: (include_argument
+      (number_literal))))
+
+================================================================================
+INCLUDE positional argument precedence
+================================================================================
+
+{include_precedence.i NEW WINDOW {1} myFunc() a -1}
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (include_file_reference
+    file: (include_file_path
+      (identifier))
+    argument: (include_argument
+      (identifier))
+    argument: (include_argument
+      (identifier))
+    argument: (include_argument
+      (argument_reference))
+    argument: (include_argument
+      (function_call
+        function: (identifier)
+        (arguments)))
+    argument: (include_argument
+      (identifier))
+    argument: (include_argument
+      (number_literal))))

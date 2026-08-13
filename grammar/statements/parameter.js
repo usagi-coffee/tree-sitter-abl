@@ -1,0 +1,112 @@
+export default ({ kw }) => ({
+  parameter_definition: ($) => seq($.__parameter_prefix, $._terminator),
+
+  __parameter_prefix: ($) =>
+    seq(
+      kw("DEFINE", { offset: 3 }),
+      choice(
+        seq(
+          field("direction", kw("RETURN")),
+          kw("PARAMETER", { offset: 5 }),
+          $.__parameter_standard_body,
+        ),
+        seq(
+          field("direction", $._parameter_direction),
+          kw("PARAMETER", { offset: 5 }),
+          choice(
+            $.__parameter_standard_body,
+            seq(
+              kw("TABLE"),
+              kw("FOR"),
+              field("table", $._identifier_or_qualified_name),
+              repeat(
+                choice(
+                  alias(kw("APPEND"), $.append),
+                  alias(kw("BIND"), $.bind),
+                  alias(kw("BY-VALUE"), $.by_value),
+                  alias(kw("NO-UNDO"), $.no_undo),
+                ),
+              ),
+            ),
+            seq(
+              kw("TABLE-HANDLE"),
+              field("table_handle", $.identifier),
+              repeat(
+                choice(
+                  alias(kw("BIND"), $.bind),
+                  alias(kw("BY-VALUE"), $.by_value),
+                  alias(kw("BY-REFERENCE"), $.by_reference),
+                  alias(kw("NO-UNDO"), $.no_undo),
+                ),
+              ),
+            ),
+            seq(
+              kw("DATASET"),
+              kw("FOR"),
+              field("dataset", $._identifier_or_qualified_name),
+              repeat(
+                choice(
+                  alias(kw("APPEND"), $.append),
+                  alias(kw("BIND"), $.bind),
+                  alias(kw("BY-VALUE"), $.by_value),
+                  alias(kw("NO-UNDO"), $.no_undo),
+                ),
+              ),
+            ),
+            seq(
+              kw("DATASET-HANDLE"),
+              field("dataset_handle", $.identifier),
+              repeat(
+                choice(
+                  alias(kw("BIND"), $.bind),
+                  alias(kw("BY-VALUE"), $.by_value),
+                  alias(kw("BY-REFERENCE"), $.by_reference),
+                  alias(kw("NO-UNDO"), $.no_undo),
+                ),
+              ),
+            ),
+          ),
+        ),
+        $.__parameter_buffer_parameter,
+      ),
+    ),
+
+  __parameter_standard_body: ($) =>
+    seq(
+      field("name", $.identifier),
+      $.__parameter_variable_type_phrase,
+      repeat(
+        choice(
+          alias(seq(optional(kw("NOT")), kw("CASE-SENSITIVE")), $.case_sensitive),
+          $._format_string,
+          seq(kw("COLUMN-LABEL"), field("column_label", $.string_literal)),
+          seq(kw("DECIMALS"), field("decimals", $.number_literal)),
+          seq(kw("INITIAL", { offset: 4 }), field("initial", $._initial_value)),
+          seq(
+            kw("LABEL"),
+            field("label", $.string_literal),
+            repeat(seq(",", field("label", $.string_literal))),
+          ),
+          alias(kw("NO-UNDO"), $.no_undo),
+        ),
+      ),
+    ),
+
+  __parameter_buffer_parameter: ($) =>
+    seq(
+      kw("PARAMETER", { offset: 5 }),
+      kw("BUFFER"),
+      field("name", $.identifier),
+      kw("FOR"),
+      optional(field("for", kw("TEMP-TABLE"))),
+      field("table", $._identifier_or_qualified_name),
+      optional(alias(kw("PRESELECT"), $.preselect)),
+    ),
+
+  __parameter_variable_type_phrase: ($) =>
+    seq(
+      $._as_like,
+      optional(seq(kw("TO"), field("target", $.identifier))),
+      optional(alias($._extent_phrase, $.extent_phrase)),
+    ),
+});

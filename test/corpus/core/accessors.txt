@@ -1,0 +1,149 @@
+================================================================================
+ACCESSORS
+================================================================================
+
+table.field.
+Type::Member.
+obj?:prop.
+obj:method(1, 2).
+Func().
+some_object:root.
+some_object :root.
+some_object:chained_property:chained_another:method().
+oObject:Length -= String(pcMessage):Size.
+new MyClass():Size.
+SESSION:NUMERIC-FORMAT = 'EUROPEAN'.
+THIS-PROCEDURE:PRIVATE-DATA.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (expression_statement
+    (qualified_name
+      left: (identifier)
+      right: (identifier)))
+  (expression_statement
+    (scoped_name
+      left: (identifier)
+      right: (identifier)))
+  (expression_statement
+    (object_access
+      left: (identifier)
+      right: (identifier)))
+  (expression_statement
+    (function_call
+      function: (object_access
+        left: (identifier)
+        right: (identifier))
+      (arguments
+        (argument
+          name: (number_literal))
+        (argument
+          name: (number_literal)))))
+  (expression_statement
+    (function_call
+      function: (identifier)
+      (arguments)))
+  (expression_statement
+    (object_access
+      left: (identifier)
+      right: (identifier)))
+  (expression_statement
+    (object_access
+      left: (identifier)
+      right: (identifier)))
+  (expression_statement
+    (function_call
+      function: (object_access
+        left: (identifier)
+        right: (identifier)
+        right: (identifier)
+        right: (identifier))
+      (arguments)))
+  (assignment_statement
+    left: (object_access
+      left: (identifier)
+      right: (identifier))
+    operator: (assignment_operator)
+    right: (object_access
+      left: (function_call
+        function: (identifier)
+        (arguments
+          (argument
+            name: (identifier))))
+      right: (identifier)))
+  (expression_statement
+    (object_access
+      left: (new_expression
+        type: (identifier)
+        (arguments))
+      right: (identifier)))
+  (assignment_statement
+    left: (object_access
+      left: (identifier)
+      right: (identifier))
+    operator: (assignment_operator)
+    right: (string_literal))
+  (expression_statement
+    (object_access
+      left: (identifier)
+      right: (identifier))))
+
+================================================================================
+ACCESSORS - assignment variants
+================================================================================
+
+hUS::SessionStatus = "Active".
+zmd_key1:label = getTermLabel("X",15).
+HTT = TEMP-TABLE ttPH:HANDLE.
+HB = BUFFER bCust:HANDLE.
+interface = zmd_wkfl.zmd_chr02.
+object :property = 5.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assignment_statement
+    left: (scoped_name
+      left: (identifier)
+      right: (identifier))
+    operator: (assignment_operator)
+    right: (string_literal))
+  (assignment_statement
+    left: (object_access
+      left: (identifier)
+      right: (identifier))
+    operator: (assignment_operator)
+    right: (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (string_literal))
+        (argument
+          name: (number_literal)))))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (object_access
+      handle: (identifier)
+      name: (identifier)
+      right: (identifier)))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (object_access
+      handle: (identifier)
+      name: (identifier)
+      right: (identifier)))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (qualified_name
+      left: (identifier)
+      right: (identifier)))
+  (assignment_statement
+    left: (object_access
+      left: (identifier)
+      right: (identifier))
+    operator: (assignment_operator)
+    right: (number_literal)))

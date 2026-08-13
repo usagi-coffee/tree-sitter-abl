@@ -1,0 +1,67 @@
+================================================================================
+CALL
+================================================================================
+
+CALL myRoutine.
+CALL processData "input.dat".
+CALL updateRecord iId cName dDate.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (call_statement
+    routine: (identifier))
+  (call_statement
+    routine: (identifier)
+    (argument
+      (string_literal)))
+  (call_statement
+    routine: (identifier)
+    (argument
+      (identifier))
+    (argument
+      (identifier))
+    (argument
+      (identifier))))
+
+================================================================================
+CALL - argument expressions
+================================================================================
+
+CALL myRoutine 1 "arg" TODAY.
+CALL runCalc (a + b) func(arg1, arg2).
+CALL doWork ? TODAY.
+
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (call_statement
+    routine: (identifier)
+    (argument
+      (number_literal))
+    (argument
+      (string_literal))
+    (argument
+      (identifier)))
+  (call_statement
+    routine: (identifier)
+    (argument
+      (parenthesized_expression
+        (binary_expression
+          (identifier)
+          (identifier))))
+    (argument
+      (function_call
+        function: (identifier)
+        (arguments
+          (argument
+            name: (identifier))
+          (argument
+            name: (identifier))))))
+  (call_statement
+    routine: (identifier)
+    (argument
+      (null_literal))
+    (argument
+      (identifier))))

@@ -1,0 +1,40 @@
+export default ({ kw }) => ({
+  run_stored_procedure_statement: ($) =>
+    seq(kw("RUN"), $.__run_stored_procedure_body, $._terminator),
+
+  __run_stored_procedure_body: ($) =>
+    seq(
+      kw("STORED-PROCEDURE"),
+      field("procedure", $._identifier_or_string_literal),
+      optional($.__run_stored_procedure_result_no_error),
+      optional(alias($.__run_stored_procedure_params, $.parameter_list)),
+    ),
+  __run_stored_procedure_result_no_error: ($) =>
+    choice(
+      seq($.__run_stored_procedure_result, optional(alias(kw("NO-ERROR"), $.no_error))),
+      alias(kw("NO-ERROR"), $.no_error),
+    ),
+
+  __run_stored_procedure_result: ($) =>
+    choice(
+      seq(
+        kw("LOAD-RESULT-INTO"),
+        field("result_handle", $._identifier_or_qualified_name),
+        optional(seq(field("status_var", $._identifier_or_qualified_name), "=", kw("PROC-STATUS"))),
+      ),
+      seq(field("handle_var", $._identifier_or_qualified_name), "=", kw("PROC-HANDLE")),
+    ),
+
+  __run_stored_procedure_params: ($) =>
+    seq("(", optional($.__run_stored_procedure_param_list), ")"),
+
+  __run_stored_procedure_param_list: ($) =>
+    seq($.__run_stored_procedure_param, repeat(seq(",", $.__run_stored_procedure_param))),
+
+  __run_stored_procedure_param: ($) =>
+    seq(
+      optional(field("direction", $._parameter_direction)),
+      optional(seq(kw("PARAM"), field("name", $.identifier), "=")),
+      field("value", $._expression),
+    ),
+});

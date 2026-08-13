@@ -1,0 +1,124 @@
+================================================================================
+UNIX statement
+================================================================================
+
+UNIX.
+UNIX SILENT.
+UNIX VALUE("ls -la").
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (unix_statement)
+  (unix_statement
+    (silent))
+  (unix_statement
+    command: (string_literal)))
+
+================================================================================
+UNIX - reference snippets
+================================================================================
+
+IF OPSYS = "UNIX" THEN UNIX ls.
+ELSE IF OPSYS = "WIN32" THEN DOS dir.
+ELSE DISPLAY OPSYS "is an unsupported operating system".
+
+DEFINE VARIABLE proc AS CHARACTER NO-UNDO FORMAT "x(40)".
+REPEAT:
+DISPLAY "Enter L to list your files"
+WITH ROW 5 CENTERED FRAME a.
+SET proc LABEL "Enter a valid Procedure Name to run"
+WITH ROW 9 CENTERED FRAME b.
+IF proc = "L" THEN
+IF OPSYS = "UNIX" THEN UNIX ls.
+ELSE IF OPSYS = "WIN32" then DOS dir.
+ELSE display "Operating system" OPSYS "is not supported".
+ELSE DO:
+HIDE FRAME a.
+HIDE FRAME b.
+RUN VALUE(proc).
+END.
+END.
+
+UNIX VALUE("cp usr/myfile.").
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (if_statement
+    (binary_expression
+      (identifier)
+      (string_literal))
+    then: (unix_statement
+      command_token: (identifier))
+    else: (if_statement
+      (binary_expression
+        (identifier)
+        (string_literal))
+      then: (dos_statement
+        command_token: (identifier))
+      else: (display_statement
+        (field
+          field: (identifier))
+        (field
+          field: (string_literal)))))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo)
+    (format_phrase
+      format: (string_literal)))
+  (repeat_statement
+    (body
+      (display_statement
+        (field
+          field: (string_literal))
+        (frame_phrase
+          row: (number_literal)
+          (centered)
+          frame: (identifier)))
+      (set_statement
+        (field
+          field: (identifier)
+          (format_phrase
+            label: (string_literal)))
+        (frame_phrase
+          row: (number_literal)
+          (centered)
+          frame: (identifier)))
+      (if_statement
+        (binary_expression
+          (identifier)
+          (string_literal))
+        then: (if_statement
+          (binary_expression
+            (identifier)
+            (string_literal))
+          then: (unix_statement
+            command_token: (identifier))
+          else: (if_statement
+            (binary_expression
+              (identifier)
+              (string_literal))
+            then: (dos_statement
+              command_token: (identifier))
+            else: (display_statement
+              (field
+                field: (string_literal))
+              (field
+                field: (identifier))
+              (field
+                field: (string_literal)))))
+        else: (do_statement
+          (body
+            (hide_statement
+              (widget_phrase
+                frame: (identifier)))
+            (hide_statement
+              (widget_phrase
+                frame: (identifier)))
+            (run_statement
+              procedure: (value_expression
+                value: (identifier))))))))
+  (unix_statement
+    command: (string_literal)))

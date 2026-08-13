@@ -1,0 +1,312 @@
+================================================================================
+FORM basic
+================================================================================
+
+FORM customer-name.
+FORM customer-name customer-balance.
+FORM customer-name LABEL "Customer Name".
+FORM customer-name FORMAT "x(30)".
+FORM customer-name VIEW-AS FILL-IN.
+FORM customer-name FORMAT "x(30)" VIEW-AS FILL-IN.
+FORM customer-name VALIDATE(ok) FORMAT "x(30)" VIEW-AS FILL-IN.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (form_statement
+    (form_item
+      field: (identifier)))
+  (form_statement
+    (form_item
+      field: (identifier))
+    (form_item
+      field: (identifier)))
+  (form_statement
+    (form_item
+      field: (identifier)
+      label: (string_literal)))
+  (form_statement
+    (form_item
+      field: (identifier)
+      format: (string_literal)))
+  (form_statement
+    (form_item
+      field: (identifier)
+      (view_as_phrase
+        widget: (identifier))))
+  (form_statement
+    (form_item
+      field: (identifier)
+      format: (string_literal)
+      (view_as_phrase
+        widget: (identifier))))
+  (form_statement
+    (form_item
+      field: (identifier)
+      (validate_phrase
+        expression: (identifier))
+      format: (string_literal)
+      (view_as_phrase
+        widget: (identifier)))))
+
+================================================================================
+FORM with expressions
+================================================================================
+
+FORM customer-name customer-balance + 100.
+FORM customer-name customer-id LABEL "ID".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (form_statement
+    (form_item
+      field: (identifier))
+    (form_item
+      field: (binary_expression
+        (identifier)
+        (number_literal))))
+  (form_statement
+    (form_item
+      field: (identifier))
+    (form_item
+      field: (identifier)
+      label: (string_literal))))
+
+================================================================================
+FORM with formatting elements
+================================================================================
+
+FORM customer-name SKIP SPACE.
+FORM customer-name SKIP(1) SPACE(2).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (form_statement
+    (form_item
+      field: (identifier))
+    (form_item)
+    (form_item))
+  (form_statement
+    (form_item
+      field: (identifier))
+    (form_item
+      skip: (number_literal))
+    (form_item
+      space: (number_literal))))
+
+================================================================================
+FORM with frame phrase
+================================================================================
+
+FORM customer-name WITH FRAME A.
+FORM customer-name customer-balance WITH FRAME B.
+FORM WITH FRAME only DOWN WIDTH 80.
+FORM customer-name LABEL {us/t0/t001.i} FORMAT "x(10)".
+FORM customer-name WITH SIDE-LABELS WITH FRAME cForm.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (form_statement
+    (form_item
+      field: (identifier))
+    (frame_phrase
+      frame: (identifier)))
+  (form_statement
+    (form_item
+      field: (identifier))
+    (form_item
+      field: (identifier))
+    (frame_phrase
+      frame: (identifier)))
+  (form_statement
+    (frame_phrase
+      frame: (identifier)
+      (down)
+      width: (number_literal)))
+  (form_statement
+    (form_item
+      field: (identifier)
+      label: (include_file_reference
+        file: (include_file_path
+          (identifier)))
+      format: (string_literal)))
+  (form_statement
+    (form_item
+      field: (identifier))
+    (frame_phrase
+      (side_labels))
+    (frame_phrase
+      frame: (identifier))))
+
+================================================================================
+FORM with MENU item
+================================================================================
+
+FORM Menu NO-LABEL WITH FRAME a SIDE-LABELS.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (form_statement
+    (form_item
+      (identifier)
+      (no_label))
+    (frame_phrase
+      frame: (identifier)
+      (side_labels))))
+
+================================================================================
+FORM - Reference snippets
+================================================================================
+
+REPEAT FOR Customer:
+  FORM
+    Customer.Name COLON 10 Customer.Phone COLON 50
+    Customer.Address COLON 10 Customer.SalesRep COLON 50 SKIP
+    Customer.City COLON 10 NO-LABEL Customer.State NO-LABEL
+    Customer.PostalCode NO-LABEL
+    WITH SIDE-LABELS 1 DOWN CENTERED.
+  PROMPT-FOR Customer.CustNum WITH FRAME cnum SIDE-LABELS CENTERED.
+  FIND Customer USING Customer.CustNum.
+  UPDATE Customer.Name Customer.Address Customer.City Customer.State
+    Customer.PostalCode Customer.Phone Customer.SalesRep.
+END.
+
+DEFINE VARIABLE ix AS INTEGER NO-UNDO FORMAT ">9".
+FORM HEADER "This is the header - ix is" ix
+  WITH FRAME a ROW ix COLUMN ix ix DOWN.
+DO ix = 1 TO 8 WITH FRAME a:
+  DISPLAY ix.
+  HIDE FRAME a.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (repeat_statement
+    (for_phrase
+      record: (identifier))
+    (body
+      (form_statement
+        (form_item
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier))
+          colon: (number_literal))
+        (form_item
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier))
+          colon: (number_literal))
+        (form_item
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier))
+          colon: (number_literal))
+        (form_item
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier))
+          colon: (number_literal))
+        (form_item)
+        (form_item
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier))
+          colon: (number_literal))
+        (form_item
+          field: (identifier))
+        (form_item
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (form_item
+          field: (identifier))
+        (form_item
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (form_item
+          field: (identifier))
+        (frame_phrase
+          (side_labels)
+          (down
+            value: (number_literal))
+          (centered)))
+      (prompt_for_statement
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (frame_phrase
+          frame: (identifier)
+          (side_labels)
+          (centered)))
+      (find_statement
+        table: (identifier)
+        values: (qualified_name
+          left: (identifier)
+          right: (identifier)))
+      (update_statement
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier))))))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo)
+    (format_phrase
+      format: (string_literal)))
+  (form_statement
+    (form_item
+      field: (identifier))
+    (form_item
+      field: (string_literal))
+    (form_item
+      field: (identifier))
+    (frame_phrase
+      frame: (identifier)
+      row: (identifier)
+      column: (identifier)
+      (down
+        value: (identifier))))
+  (do_statement
+    variable: (identifier)
+    start: (number_literal)
+    end: (number_literal)
+    (frame_phrase
+      frame: (identifier))
+    (body
+      (display_statement
+        record: (identifier))
+      (hide_statement
+        (widget_phrase
+          frame: (identifier))))))

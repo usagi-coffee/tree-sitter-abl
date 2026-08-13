@@ -1,0 +1,515 @@
+================================================================================
+ON
+================================================================================
+
+ON WRITE OF Customer NEW new-cust OLD old-cust DO:
+  a += 3.
+END.
+
+ON ASSIGN OF Customer.Name OLD VALUE old-name REVERT.
+ON FIND OF Customer OVERRIDE REVERT.
+ON WRITE OF Customer NEW new-cust OLD old-cust OVERRIDE REVERT.
+ON "WRITE" OF Customer REVERT.
+ON CHOOSE ANYWHERE DO:
+  MESSAGE "x".
+END.
+ON CHOOSE OF btn PERSISTENT RUN onChoose (INPUT 1).
+ON RETURN OF BROWSE br1 DO:
+  MESSAGE "browse-return".
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (on_statement
+    object: (identifier)
+    (referencing_phrase
+      new_record: (identifier)
+      old_record: (identifier))
+    (do_statement
+      (body
+        (assignment_statement
+          left: (identifier)
+          operator: (assignment_operator)
+          right: (number_literal)))))
+  (on_statement
+    object: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (referencing_phrase
+      old_field: (identifier))
+    (revert))
+  (on_statement
+    object: (identifier)
+    (override)
+    (revert))
+  (on_statement
+    object: (identifier)
+    (referencing_phrase
+      new_record: (identifier)
+      old_record: (identifier))
+    (override)
+    (revert))
+  (on_statement
+    event: (string_literal)
+    (of_phrase
+      widget: (widget_phrase
+        handle: (identifier)))
+    (revert))
+  (on_statement
+    event: (identifier)
+    (anywhere)
+    (do_statement
+      (body
+        (message_statement
+          (string_literal)))))
+  (on_statement
+    event: (identifier)
+    (of_phrase
+      widget: (widget_phrase
+        handle: (identifier)))
+    procedure: (identifier)
+    (arguments
+      (argument
+        name: (number_literal))))
+  (on_statement
+    event: (identifier)
+    (of_phrase
+      widget: (widget_phrase
+        browse: (identifier)))
+    (do_statement
+      (body
+        (message_statement
+          (string_literal))))))
+
+================================================================================
+ON - Reference snippets
+================================================================================
+
+ON WRITE OF Customer NEW new-cust OLD old-cust DO:
+  IF new-cust.City <> old-cust.City AND
+     new-cust.PostalCode = old-cust.PostalCode THEN DO:
+    MESSAGE "Must update postal code, too.".
+    RETURN ERROR.
+  END.
+END.
+FOR EACH Customer:
+  UPDATE Customer.
+END.
+
+DEFINE BUTTON b_next LABEL "Next".
+DEFINE BUTTON b_prev LABEL "Previous".
+DEFINE BUTTON b_quit LABEL "Quit".
+DEFINE FRAME butt-frame b_next b_prev WITH CENTERED ROW SCREEN-LINES - 1.
+DEFINE FRAME info
+  Customer.CustNum Customer.Name
+  b_quit AT ROW-OF Customer.CustNum + 2 COLUMN-OF Customer.CustNum + 18
+  WITH CENTERED TITLE "Customers" ROW 2 1 COL.
+ON CHOOSE OF b_next, b_prev DO:
+  IF SELF:LABEL = "Next" THEN
+    FIND NEXT Customer NO-LOCK.
+  ELSE
+    FIND PREV Customer NO-LOCK.
+  DISPLAY Customer.CustNum Customer.Name WITH FRAME info.
+END.
+ENABLE b_next b_prev WITH FRAME butt-frame.
+ENABLE b_quit WITH FRAME info.
+WAIT-FOR END-ERROR OF FRAME butt-frame OR
+  CHOOSE OF b_quit IN FRAME info FOCUS b_next IN FRAME butt-frame.
+
+ON F1 GO.
+ON F2 HELP.
+ON CTRL-X BELL.
+ON F5 ENDKEY.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (on_statement
+    object: (identifier)
+    (referencing_phrase
+      new_record: (identifier)
+      old_record: (identifier))
+    (do_statement
+      (body
+        (if_statement
+          (binary_expression
+            (binary_expression
+              (qualified_name
+                left: (identifier)
+                right: (identifier))
+              (qualified_name
+                left: (identifier)
+                right: (identifier)))
+            (binary_expression
+              (qualified_name
+                left: (identifier)
+                right: (identifier))
+              (qualified_name
+                left: (identifier)
+                right: (identifier))))
+          then: (do_statement
+            (body
+              (message_statement
+                (string_literal))
+              (return_statement)))))))
+  (for_statement
+    (record_phrase
+      record: (identifier))
+    (body
+      (update_statement
+        (field
+          field: (identifier)))))
+  (button_definition
+    name: (identifier)
+    label: (string_literal))
+  (button_definition
+    name: (identifier)
+    label: (string_literal))
+  (button_definition
+    name: (identifier)
+    label: (string_literal))
+  (frame_definition
+    name: (identifier)
+    field: (identifier)
+    field: (identifier)
+    (frame_phrase
+      (centered)
+      row: (binary_expression
+        (identifier)
+        (number_literal))))
+  (frame_definition
+    name: (identifier)
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    field: (identifier)
+    (format_phrase
+      row_of: (binary_expression
+        (qualified_name
+          left: (identifier)
+          right: (identifier))
+        (number_literal))
+      column_of: (binary_expression
+        (qualified_name
+          left: (identifier)
+          right: (identifier))
+        (number_literal)))
+    (frame_phrase
+      (centered)
+      title: (string_literal)
+      row: (number_literal)
+      column: (number_literal)))
+  (on_statement
+    event: (identifier)
+    (of_phrase
+      widget: (widget_phrase
+        handle: (identifier))
+      widget: (widget_phrase
+        handle: (identifier)))
+    (do_statement
+      (body
+        (if_statement
+          (binary_expression
+            (object_access
+              left: (identifier)
+              right: (identifier))
+            (string_literal))
+          then: (find_statement
+            (next)
+            table: (identifier)
+            (no_lock))
+          else: (find_statement
+            (prev)
+            table: (identifier)
+            (no_lock)))
+        (display_statement
+          (field
+            field: (qualified_name
+              left: (identifier)
+              right: (identifier)))
+          (field
+            field: (qualified_name
+              left: (identifier)
+              right: (identifier)))
+          (frame_phrase
+            frame: (identifier))))))
+  (enable_statement
+    (enable_item
+      field: (identifier))
+    (enable_item
+      field: (identifier))
+    (frame_phrase
+      frame: (identifier)))
+  (enable_statement
+    (enable_item
+      field: (identifier))
+    (frame_phrase
+      frame: (identifier)))
+  (wait_for_statement
+    (of_phrase
+      events: (identifier)
+      widgets: (widget_phrase
+        frame: (identifier)))
+    (of_phrase
+      events: (identifier)
+      widgets: (widget_phrase
+        field: (identifier)
+        frame: (identifier)))
+    (focus_phrase
+      focus: (widget_phrase
+        field: (identifier)
+        frame: (identifier))))
+  (on_statement
+    event: (identifier)
+    function: (key_function))
+  (on_statement
+    event: (identifier)
+    function: (key_function))
+  (on_statement
+    event: (identifier)
+    function: (key_function))
+  (on_statement
+    event: (identifier)
+    function: (key_function)))
+
+================================================================================
+ON - OR event/widget clauses
+================================================================================
+
+ON 'z' OF kodkk OR 'Z' OF kodkk DO:
+END.
+
+ON LEAVE OF FIELD lvd_tara IN FRAME wr OR LEAVE OF FIELD lvd_brutto IN FRAME wr DO:
+END.
+
+ON LEAVE OF FIELD arr[1] IN FRAME wr DO:
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (on_statement
+    event: (string_literal)
+    (of_phrase
+      widget: (widget_phrase
+        handle: (identifier)))
+    event: (string_literal)
+    (of_phrase
+      widget: (widget_phrase
+        handle: (identifier)))
+    (do_statement
+      (body)))
+  (on_statement
+    event: (identifier)
+    (of_phrase
+      widget: (widget_phrase
+        field: (identifier)
+        frame: (identifier)))
+    event: (identifier)
+    (of_phrase
+      widget: (widget_phrase
+        field: (identifier)
+        frame: (identifier)))
+    (do_statement
+      (body)))
+  (on_statement
+    event: (identifier)
+    (of_phrase
+      widget: (widget_phrase
+        field: (array_access
+          array: (identifier)
+          index: (number_literal))
+        frame: (identifier)))
+    (do_statement
+      (body))))
+
+================================================================================
+ON - Branch: UI ANYWHERE + REVERT
+================================================================================
+
+ON CHOOSE ANYWHERE REVERT.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (on_statement
+    event: (identifier)
+    (anywhere)
+    (revert)))
+
+================================================================================
+ON - Branch: UI OF + ANYWHERE + REVERT
+================================================================================
+
+ON CHOOSE OF btn1 ANYWHERE REVERT.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (on_statement
+    event: (identifier)
+    (of_phrase
+      widget: (widget_phrase
+        handle: (identifier)))
+    (anywhere)
+    (revert)))
+
+================================================================================
+ON - Branch: UI OF widget-list with MENU-ITEM entries
+================================================================================
+
+ON CHOOSE OF MENU-ITEM mi1, MENU-ITEM mi2 DO:
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (on_statement
+    event: (identifier)
+    (of_phrase
+      widget: (widget_phrase
+        handle: (identifier))
+      widget: (widget_phrase
+        handle: (identifier)))
+    (do_statement
+      (body))))
+
+================================================================================
+ON - Branch: UI OF/OR + ANYWHERE + PERSISTENT RUN
+================================================================================
+
+ON CHOOSE OF btn1 OR LEAVE OF btn2 ANYWHERE PERSISTENT RUN hProc (INPUT 1).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (on_statement
+    event: (identifier)
+    (of_phrase
+      widget: (widget_phrase
+        handle: (identifier)))
+    event: (identifier)
+    (of_phrase
+      widget: (widget_phrase
+        handle: (identifier)))
+    (anywhere)
+    procedure: (identifier)
+    (arguments
+      (argument
+        name: (number_literal)))))
+
+================================================================================
+ON - Branch: database event with REVERT
+================================================================================
+
+ON WRITE OF Customer REVERT.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (on_statement
+    object: (identifier)
+    (revert)))
+
+================================================================================
+ON - Branch: database event with referencing phrase + block
+================================================================================
+
+ON ASSIGN OF Customer.Name OLD VALUE oldVal DO:
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (on_statement
+    object: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (referencing_phrase
+      old_field: (identifier))
+    (do_statement
+      (body))))
+
+================================================================================
+ON - Branch: WEB-NOTIFY
+================================================================================
+
+ON "WEB-NOTIFY" ANYWHERE DO:
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (on_statement
+    event: (string_literal)
+    (anywhere)
+    (do_statement
+      (body))))
+
+================================================================================
+ON - Branch: key-label + key-function
+================================================================================
+
+ON F10 HELP.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (on_statement
+    event: (identifier)
+    function: (key_function)))
+
+================================================================================
+ON - Branch: OF + key-function action
+================================================================================
+
+ON "X" OF btn GO.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (on_statement
+    event: (string_literal)
+    (of_phrase
+      widget: (widget_phrase
+        handle: (identifier)))
+    function: (key_function)))
+
+================================================================================
+ON - Branch: UI-event key-label + key-function
+================================================================================
+
+ON TAB TAB.
+ON TAB ENDKEY.
+ON TAB OF input-field DO:
+END.
+ON F10 OF input-field DO:
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (on_statement
+    event: (identifier)
+    function: (key_function))
+  (on_statement
+    event: (identifier)
+    function: (key_function))
+  (on_statement
+    event: (identifier)
+    (of_phrase
+      widget: (widget_phrase
+        handle: (identifier)))
+    (do_statement
+      (body)))
+  (on_statement
+    event: (identifier)
+    (of_phrase
+      widget: (widget_phrase
+        handle: (identifier)))
+    (do_statement
+      (body))))

@@ -1,0 +1,98 @@
+================================================================================
+SUBSCRIBE statement
+================================================================================
+
+SUBSCRIBE TO "MyEvent" IN hPublisher.
+SUBSCRIBE "MyEvent" ANYWHERE.
+SUBSCRIBE PROCEDURE hSub TO "MyEvent" IN hPub.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (subscribe_statement
+    event: (string_literal)
+    (in_phrase
+      publisher: (identifier)))
+  (subscribe_statement
+    event: (string_literal)
+    (anywhere))
+  (subscribe_statement
+    subscriber: (identifier)
+    event: (string_literal)
+    (in_phrase
+      publisher: (identifier))))
+
+================================================================================
+SUBSCRIBE - reference snippets and variants
+================================================================================
+
+DEFINE VARIABLE hPub AS HANDLE NO-UNDO.
+DEFINE VARIABLE hSub1 AS HANDLE NO-UNDO.
+DEFINE VARIABLE hSub2 AS HANDLE NO-UNDO.
+RUN r-nepub.p PERSISTENT SET hPub.
+RUN r-nesub1.p PERSISTENT SET hSub1 (hPub).
+RUN r-nesub2.p PERSISTENT SET hSub2.
+SUBSCRIBE PROCEDURE hSub2 TO "NewCustomer" IN hPub.
+
+DEFINE INPUT PARAMETER hPub AS HANDLE NO-UNDO.
+SUBSCRIBE TO "NewCustomer" IN hPub.
+
+SUBSCRIBE PROCEDURE hSub1 TO cEvent IN hPub RUN-PROCEDURE "OnEvent" NO-ERROR.
+SUBSCRIBE TO "spaced event" ANYWHERE RUN-PROCEDURE "spaced event".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (run_statement
+    procedure: (procedure_name)
+    (persistent
+      handle: (identifier)))
+  (run_statement
+    procedure: (procedure_name)
+    (persistent
+      handle: (identifier))
+    (arguments
+      (argument
+        name: (identifier))))
+  (run_statement
+    procedure: (procedure_name)
+    (persistent
+      handle: (identifier)))
+  (subscribe_statement
+    subscriber: (identifier)
+    event: (string_literal)
+    (in_phrase
+      publisher: (identifier)))
+  (parameter_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (subscribe_statement
+    event: (string_literal)
+    (in_phrase
+      publisher: (identifier)))
+  (subscribe_statement
+    subscriber: (identifier)
+    event: (identifier)
+    (in_phrase
+      publisher: (identifier))
+    (run_procedure_phrase
+      procedure: (string_literal))
+    (no_error))
+  (subscribe_statement
+    event: (string_literal)
+    (anywhere)
+    (run_procedure_phrase
+      procedure: (string_literal))))

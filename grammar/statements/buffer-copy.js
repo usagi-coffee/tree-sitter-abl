@@ -1,0 +1,35 @@
+export default ({ kw }) => ({
+  buffer_copy_statement: ($) => seq($.__buffer_copy_prefix, $._no_error_terminator),
+
+  __buffer_copy_prefix: ($) =>
+    seq(
+      kw("BUFFER-COPY"),
+      field("source", $._identifier_or_qualified_name),
+      optional(
+        choice(
+          alias($.__buffer_copy_except_phrase, $.except_phrase),
+          alias($.__buffer_copy_using_phrase, $.using_phrase),
+        ),
+      ),
+      kw("TO"),
+      field("target", $._identifier_or_qualified_name),
+      optional(alias($.__buffer_copy_assign_phrase, $.assign_phrase)),
+      optional(alias(kw("NO-LOBS"), $.no_lobs)),
+    ),
+  __buffer_copy_except_phrase: ($) => seq(kw("EXCEPT"), $.__buffer_copy_fields),
+  __buffer_copy_using_phrase: ($) => seq(kw("USING"), $.__buffer_copy_fields),
+  __buffer_copy_fields: ($) =>
+    seq(
+      $._identifier_or_qualified_name,
+      repeat(seq(optional(","), $._identifier_or_qualified_name)),
+    ),
+  __buffer_copy_assign_phrase: ($) =>
+    seq(kw("ASSIGN"), repeat1(alias($.__buffer_copy_assign_pair, $.assign_pair))),
+  __buffer_copy_assign_pair: ($) =>
+    seq(
+      field("left", $._assignable),
+      choice("=", "+=", "-=", "*=", "/="),
+      field("right", $._expression),
+      optional(seq(kw("WHEN"), field("when", $._expression))),
+    ),
+});

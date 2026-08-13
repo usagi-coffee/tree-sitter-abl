@@ -1,0 +1,136 @@
+================================================================================
+ENABLE
+================================================================================
+
+ENABLE ALL.
+ENABLE ALL EXCEPT field1.
+ENABLE ALL EXCEPT field1 field2.
+ENABLE field1.
+ENABLE field1 field2 field3.
+ENABLE UNLESS-HIDDEN field1.
+ENABLE field1 WHEN x > 5.
+ENABLE field1 field2 WHEN y = 1.
+ENABLE field1 WITH FRAME f1.
+ENABLE field1 IN WINDOW w1.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (enable_statement
+    (all))
+  (enable_statement
+    (all)
+    except: (identifier))
+  (enable_statement
+    (all)
+    except: (identifier)
+    except: (identifier))
+  (enable_statement
+    (enable_item
+      field: (identifier)))
+  (enable_statement
+    (enable_item
+      field: (identifier))
+    (enable_item
+      field: (identifier))
+    (enable_item
+      field: (identifier)))
+  (enable_statement
+    (unless_hidden)
+    (enable_item
+      field: (identifier)))
+  (enable_statement
+    (enable_item
+      field: (identifier)
+      when: (binary_expression
+        (identifier)
+        (number_literal))))
+  (enable_statement
+    (enable_item
+      field: (identifier))
+    (enable_item
+      field: (identifier)
+      when: (binary_expression
+        (identifier)
+        (number_literal))))
+  (enable_statement
+    (enable_item
+      field: (identifier))
+    (frame_phrase
+      frame: (identifier)))
+  (enable_statement
+    (enable_item
+      field: (identifier))
+    (in_window_phrase
+      window: (identifier))))
+
+================================================================================
+ENABLE with format, text, and constants
+================================================================================
+
+ENABLE field1 FORMAT "x(10)" WHEN ok
+  TEXT(field2 FORMAT "x(5)")
+  "CONST" AT 5 BGCOLOR 2 VIEW-AS TEXT
+  SKIP.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (enable_statement
+    (enable_item
+      field: (identifier)
+      (format_phrase
+        format: (string_literal))
+      when: (identifier))
+    (enable_item
+      (format_phrase
+        format: (string_literal)))
+    (enable_item
+      constant: (string_literal)
+      (format_phrase
+        bgcolor: (number_literal)))
+    (enable_item
+      (skip))))
+
+================================================================================
+ENABLE - Reference snippet
+================================================================================
+
+ENABLE Customer.CustNum WITH FRAME cust-info.
+ENABLE b_quit WITH FRAME butt-frame.
+ENABLE ALL WITH FRAME butt-frame.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (enable_statement
+    (enable_item
+      field: (qualified_name
+        left: (identifier)
+        right: (identifier)))
+    (frame_phrase
+      frame: (identifier)))
+  (enable_statement
+    (enable_item
+      field: (identifier))
+    (frame_phrase
+      frame: (identifier)))
+  (enable_statement
+    (all)
+    (frame_phrase
+      frame: (identifier))))
+
+================================================================================
+ENABLE - array access
+================================================================================
+
+ENABLE arr[1].
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (enable_statement
+    (enable_item
+      field: (array_access
+        array: (identifier)
+        index: (number_literal)))))

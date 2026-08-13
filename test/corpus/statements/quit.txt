@@ -1,0 +1,123 @@
+===============================================================================
+QUIT statement
+===============================================================================
+
+QUIT.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (quit_statement))
+
+===============================================================================
+QUIT - reference snippet
+===============================================================================
+
+DEFINE SUB-MENU cusmaint1
+MENU-ITEM crecust LABEL "Create New Customer"
+MENU-ITEM chgcust LABEL "Chan&ge Existing Customer"
+MENU-ITEM delcust LABEL "Delete Customer"
+MENU-ITEM prtcust LABEL "Print Customer List"
+MENU-ITEM extcust LABEL "E&xit ABL".
+DEFINE MENU mainbar MENUBAR
+SUB-MENU cusmaint1 LABEL "Customer".
+ON CHOOSE OF MENU-ITEM crecust
+RUN newcust.p.
+ON CHOOSE OF MENU-ITEM chgcust
+RUN chgcust.p.
+ON CHOOSE OF MENU-ITEM delcust
+RUN delcust.p.
+ON CHOOSE OF MENU-ITEM prtcust
+RUN prncust.p.
+ON CHOOSE OF MENU-ITEM extcust
+QUIT.
+ASSIGN
+CURRENT-WINDOW:MENUBAR = MENU mainbar:HANDLE
+CURRENT-WINDOW:VISIBLE = TRUE.
+WAIT-FOR WINDOW-CLOSE OF CURRENT-WINDOW.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (submenu_definition
+    name: (identifier)
+    (menu_element
+      (menu_item
+        name: (identifier)
+        label: (string_literal)))
+    (menu_element
+      (menu_item
+        name: (identifier)
+        label: (string_literal)))
+    (menu_element
+      (menu_item
+        name: (identifier)
+        label: (string_literal)))
+    (menu_element
+      (menu_item
+        name: (identifier)
+        label: (string_literal)))
+    (menu_element
+      (menu_item
+        name: (identifier)
+        label: (string_literal))))
+  (menu_definition
+    name: (identifier)
+    (menubar)
+    (submenu_item
+      name: (identifier)
+      label: (string_literal)))
+  (on_statement
+    event: (identifier)
+    (of_phrase
+      widget: (widget_phrase
+        handle: (identifier)))
+    (run_statement
+      procedure: (procedure_name)))
+  (on_statement
+    event: (identifier)
+    (of_phrase
+      widget: (widget_phrase
+        handle: (identifier)))
+    (run_statement
+      procedure: (procedure_name)))
+  (on_statement
+    event: (identifier)
+    (of_phrase
+      widget: (widget_phrase
+        handle: (identifier)))
+    (run_statement
+      procedure: (procedure_name)))
+  (on_statement
+    event: (identifier)
+    (of_phrase
+      widget: (widget_phrase
+        handle: (identifier)))
+    (run_statement
+      procedure: (procedure_name)))
+  (on_statement
+    event: (identifier)
+    (of_phrase
+      widget: (widget_phrase
+        handle: (identifier)))
+    (quit_statement))
+  (assign_statement
+    (assign_phrase
+      (assign_pair
+        left: (object_access
+          left: (identifier)
+          right: (identifier))
+        right: (object_access
+          widget: (identifier)
+          left: (identifier)
+          right: (identifier)))
+      (assign_pair
+        left: (object_access
+          left: (identifier)
+          right: (identifier))
+        right: (boolean_literal))))
+  (wait_for_statement
+    (of_phrase
+      events: (identifier)
+      widgets: (widget_phrase
+        system_handle: (system_handle)))))

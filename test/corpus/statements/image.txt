@@ -1,0 +1,598 @@
+================================================================================
+IMAGE DEFINITION - FILE Basic
+================================================================================
+
+DEFINE IMAGE imgLogo FILE "logo.png".
+DEF IMAGE icon1 FILE "icon.ico".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (image_definition
+    name: (identifier)
+    (image_phrase
+      file: (string_literal)))
+  (image_definition
+    name: (identifier)
+    (image_phrase
+      file: (string_literal))))
+
+================================================================================
+IMAGE DEFINITION - FILE with IMAGE-SIZE
+================================================================================
+
+DEFINE IMAGE imgSized FILE "image.jpg" IMAGE-SIZE 100 BY 50.
+DEF IMAGE imgS2 FILE "pic.png" IMAGE-SIZE 50 BY 100.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (image_definition
+    name: (identifier)
+    (image_phrase
+      file: (string_literal)
+      width: (number_literal)
+      height: (number_literal)))
+  (image_definition
+    name: (identifier)
+    (image_phrase
+      file: (string_literal)
+      width: (number_literal)
+      height: (number_literal))))
+
+================================================================================
+IMAGE DEFINITION - FILE with IMAGE-SIZE-CHARS
+================================================================================
+
+DEFINE IMAGE imgChars FILE "pic.bmp" IMAGE-SIZE-CHARS 20 BY 10.
+DEF IMAGE imgChar FILE "logo.gif" IMAGE-SIZE-CHARS 15 BY 30.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (image_definition
+    name: (identifier)
+    (image_phrase
+      file: (string_literal)
+      width: (number_literal)
+      height: (number_literal)))
+  (image_definition
+    name: (identifier)
+    (image_phrase
+      file: (string_literal)
+      width: (number_literal)
+      height: (number_literal))))
+
+================================================================================
+IMAGE DEFINITION - FILE with IMAGE-SIZE-PIXELS
+================================================================================
+
+DEFINE IMAGE imgPix FILE "img.png" IMAGE-SIZE-PIXELS 200 BY 100.
+DEF IMAGE imgPx FILE "photo.jpg" IMAGE-SIZE-PIXELS 150 BY 75.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (image_definition
+    name: (identifier)
+    (image_phrase
+      file: (string_literal)
+      width: (number_literal)
+      height: (number_literal)))
+  (image_definition
+    name: (identifier)
+    (image_phrase
+      file: (string_literal)
+      width: (number_literal)
+      height: (number_literal))))
+
+================================================================================
+IMAGE DEFINITION - FILE with FROM X Y
+================================================================================
+
+DEFINE IMAGE imgXY FILE "image.png" FROM X 10 Y 20.
+DEF IMAGE imgXY2 FILE "icon.jpg" IMAGE-SIZE 50 BY 50 FROM X 5 Y 10.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (image_definition
+    name: (identifier)
+    (image_phrase
+      file: (string_literal)
+      x: (number_literal)
+      y: (number_literal)))
+  (image_definition
+    name: (identifier)
+    (image_phrase
+      file: (string_literal)
+      width: (number_literal)
+      height: (number_literal)
+      x: (number_literal)
+      y: (number_literal))))
+
+================================================================================
+IMAGE DEFINITION - FILE with FROM ROW COLUMN
+================================================================================
+
+DEFINE IMAGE imgRC FILE "pic.png" FROM ROW 5 COLUMN 10.
+DEF IMAGE imgRC2 FILE "logo.jpg" IMAGE-SIZE-PIXELS 100 BY 50 FROM ROW 2 COLUMN 5.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (image_definition
+    name: (identifier)
+    (image_phrase
+      file: (string_literal)
+      row: (number_literal)
+      column: (number_literal)))
+  (image_definition
+    name: (identifier)
+    (image_phrase
+      file: (string_literal)
+      width: (number_literal)
+      height: (number_literal)
+      row: (number_literal)
+      column: (number_literal))))
+
+================================================================================
+IMAGE DEFINITION - COMPLETE IMAGE PHRASE
+================================================================================
+
+DEFINE IMAGE imgFull FILE "full.png" IMAGE-SIZE-PIXELS 200 BY 100 FROM X 10 Y 20.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (image_definition
+    name: (identifier)
+    (image_phrase
+      file: (string_literal)
+      width: (number_literal)
+      height: (number_literal)
+      x: (number_literal)
+      y: (number_literal))))
+
+================================================================================
+IMAGE DEFINITION - LIKE Option
+================================================================================
+
+DEFINE IMAGE imgLike LIKE imgLogo.
+DEF IMAGE img2 LIKE icon1.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (image_definition
+    name: (identifier)
+    like: (identifier))
+  (image_definition
+    name: (identifier)
+    like: (identifier)))
+
+================================================================================
+IMAGE DEFINITION - SIZE
+================================================================================
+
+DEFINE IMAGE imgSize SIZE 10 BY 20.
+DEF IMAGE imgSz SIZE 30 BY 40.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (image_definition
+    name: (identifier)
+    (size_phrase
+      width: (number_literal)
+      height: (number_literal)))
+  (image_definition
+    name: (identifier)
+    (size_phrase
+      width: (number_literal)
+      height: (number_literal))))
+
+================================================================================
+IMAGE DEFINITION - SIZE-CHARS
+================================================================================
+
+DEFINE IMAGE imgChars SIZE-CHARS 15 BY 25.
+DEF IMAGE imgSC2 SIZE-CHARS 20 BY 30.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (image_definition
+    name: (identifier)
+    (size_phrase
+      width: (number_literal)
+      height: (number_literal)))
+  (image_definition
+    name: (identifier)
+    (size_phrase
+      width: (number_literal)
+      height: (number_literal))))
+
+================================================================================
+IMAGE DEFINITION - SIZE-PIXELS
+================================================================================
+
+DEFINE IMAGE imgPixels SIZE-PIXELS 150 BY 200.
+DEF IMAGE imgPx SIZE-PIXELS 100 BY 100.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (image_definition
+    name: (identifier)
+    (size_phrase
+      width: (number_literal)
+      height: (number_literal)))
+  (image_definition
+    name: (identifier)
+    (size_phrase
+      width: (number_literal)
+      height: (number_literal))))
+
+================================================================================
+IMAGE DEFINITION - BGCOLOR
+================================================================================
+
+DEFINE IMAGE imgBg FILE "img.png" BGCOLOR 10.
+DEF IMAGE imgBg2 FILE "pic.jpg" IMAGE-SIZE 50 BY 50 BGCOLOR 15.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (image_definition
+    name: (identifier)
+    (image_phrase
+      file: (string_literal))
+    bgcolor: (number_literal))
+  (image_definition
+    name: (identifier)
+    (image_phrase
+      file: (string_literal)
+      width: (number_literal)
+      height: (number_literal))
+    bgcolor: (number_literal)))
+
+================================================================================
+IMAGE DEFINITION - FGCOLOR
+================================================================================
+
+DEFINE IMAGE imgFg FILE "img.png" FGCOLOR 5.
+DEF IMAGE imgFg2 FILE "pic.jpg" IMAGE-SIZE 50 BY 50 FGCOLOR 10.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (image_definition
+    name: (identifier)
+    (image_phrase
+      file: (string_literal))
+    fgcolor: (number_literal))
+  (image_definition
+    name: (identifier)
+    (image_phrase
+      file: (string_literal)
+      width: (number_literal)
+      height: (number_literal))
+    fgcolor: (number_literal)))
+
+================================================================================
+IMAGE DEFINITION - Both Colors
+================================================================================
+
+DEFINE IMAGE imgColors FILE "img.png" BGCOLOR 1 FGCOLOR 2.
+DEF IMAGE imgBoth SIZE 20 BY 30 BGCOLOR 5 FGCOLOR 10.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (image_definition
+    name: (identifier)
+    (image_phrase
+      file: (string_literal))
+    bgcolor: (number_literal)
+    fgcolor: (number_literal))
+  (image_definition
+    name: (identifier)
+    (size_phrase
+      width: (number_literal)
+      height: (number_literal))
+    bgcolor: (number_literal)
+    fgcolor: (number_literal)))
+
+================================================================================
+IMAGE DEFINITION - CONVERT-3D-COLORS
+================================================================================
+
+DEFINE IMAGE imgConvert FILE "img.png" CONVERT-3D-COLORS.
+DEF IMAGE imgConv FILE "pic.jpg" SIZE 20 BY 30 CONVERT-3D-COLORS.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (image_definition
+    name: (identifier)
+    (image_phrase
+      file: (string_literal))
+    (convert_3d_colors))
+  (image_definition
+    name: (identifier)
+    (image_phrase
+      file: (string_literal))
+    (size_phrase
+      width: (number_literal)
+      height: (number_literal))
+    (convert_3d_colors)))
+
+================================================================================
+IMAGE DEFINITION - TOOLTIP
+================================================================================
+
+DEFINE IMAGE imgTooltip FILE "img.png" TOOLTIP text.
+DEF IMAGE imgTT FILE "pic.jpg" TOOLTIP "Image tooltip".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (image_definition
+    name: (identifier)
+    (image_phrase
+      file: (string_literal))
+    tooltip: (identifier))
+  (image_definition
+    name: (identifier)
+    (image_phrase
+      file: (string_literal))
+    tooltip: (string_literal)))
+
+================================================================================
+IMAGE DEFINITION - STRETCH-TO-FIT
+================================================================================
+
+DEFINE IMAGE imgStretch FILE "img.png" STRETCH-TO-FIT.
+DEF IMAGE imgSt FILE "pic.jpg" SIZE 30 BY 40 STRETCH-TO-FIT.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (image_definition
+    name: (identifier)
+    (image_phrase
+      file: (string_literal))
+    (stretch_to_fit))
+  (image_definition
+    name: (identifier)
+    (image_phrase
+      file: (string_literal))
+    (size_phrase
+      width: (number_literal)
+      height: (number_literal))
+    (stretch_to_fit)))
+
+================================================================================
+IMAGE DEFINITION - STRETCH-TO-FIT with RETAIN-SHAPE
+================================================================================
+
+DEFINE IMAGE imgRetain FILE "img.png" STRETCH-TO-FIT RETAIN-SHAPE.
+DEF IMAGE imgRS FILE "pic.jpg" SIZE 20 BY 25 STRETCH-TO-FIT RETAIN-SHAPE.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (image_definition
+    name: (identifier)
+    (image_phrase
+      file: (string_literal))
+    (stretch_to_fit)
+    (retain_shape))
+  (image_definition
+    name: (identifier)
+    (image_phrase
+      file: (string_literal))
+    (size_phrase
+      width: (number_literal)
+      height: (number_literal))
+    (stretch_to_fit)
+    (retain_shape)))
+
+================================================================================
+IMAGE DEFINITION - TRANSPARENT
+================================================================================
+
+DEFINE IMAGE imgTransparent FILE "img.png" TRANSPARENT.
+DEF IMAGE imgTrans FILE "pic.jpg" SIZE 20 BY 30 TRANSPARENT.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (image_definition
+    name: (identifier)
+    (image_phrase
+      file: (string_literal))
+    (transparent))
+  (image_definition
+    name: (identifier)
+    (image_phrase
+      file: (string_literal))
+    (size_phrase
+      width: (number_literal)
+      height: (number_literal))
+    (transparent)))
+
+================================================================================
+IMAGE DEFINITION - PRIVATE Modifier
+================================================================================
+
+DEFINE PRIVATE IMAGE privImg FILE "priv.png".
+DEF PRIVATE IMAGE privFile FILE "private.jpg" SIZE 10 BY 20.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (image_definition
+    (access_modifier)
+    name: (identifier)
+    (image_phrase
+      file: (string_literal)))
+  (image_definition
+    (access_modifier)
+    name: (identifier)
+    (image_phrase
+      file: (string_literal))
+    (size_phrase
+      width: (number_literal)
+      height: (number_literal))))
+
+================================================================================
+IMAGE DEFINITION - Complete Combinations
+================================================================================
+
+DEFINE IMAGE imgComplete FILE "complete.png"
+  IMAGE-SIZE-PIXELS 200 BY 100
+  FROM X 10 Y 20
+  BGCOLOR 5
+  FGCOLOR 10
+  CONVERT-3D-COLORS
+  TOOLTIP "Complete test image"
+  STRETCH-TO-FIT RETAIN-SHAPE
+  TRANSPARENT.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (image_definition
+    name: (identifier)
+    (image_phrase
+      file: (string_literal)
+      width: (number_literal)
+      height: (number_literal)
+      x: (number_literal)
+      y: (number_literal))
+    bgcolor: (number_literal)
+    fgcolor: (number_literal)
+    (convert_3d_colors)
+    tooltip: (string_literal)
+    (stretch_to_fit)
+    (retain_shape)
+    (transparent)))
+
+================================================================================
+IMAGE DEFINITION - Minimal Required
+================================================================================
+
+DEFINE IMAGE i FILE "x.png".
+DEF IMAGE i2 LIKE other.
+DEF IMAGE i3 SIZE 10 BY 20.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (image_definition
+    name: (identifier)
+    (image_phrase
+      file: (string_literal)))
+  (image_definition
+    name: (identifier)
+    like: (identifier))
+  (image_definition
+    name: (identifier)
+    (size_phrase
+      width: (number_literal)
+      height: (number_literal))))
+
+================================================================================
+IMAGE - Reference snippet
+================================================================================
+
+DEFINE VARIABLE repeat_loop AS INTEGER NO-UNDO.
+DEFINE VARIABLE animation_loop AS INTEGER NO-UNDO.
+DEFINE VARIABLE lok AS LOGICAL NO-UNDO.
+DEFINE BUTTON animate LABEL "Animate".
+DEFINE IMAGE trashcan FILE "ANI01.BMP".
+DISPLAY animate trashcan WITH FRAME y TITLE "** Animation Sample **".
+ON CHOOSE OF animate IN FRAME y DO:
+  DO repeat_loop = 1 TO 5:
+    DO animation_loop = 1 TO 14:
+      lok = trashcan:LOAD-IMAGE("ANI" + STRING(animation_loop,"99")) IN FRAME y.
+    END.
+  END.
+END.
+UPDATE animate WITH FRAME y.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (button_definition
+    name: (identifier)
+    label: (string_literal))
+  (image_definition
+    name: (identifier)
+    (image_phrase
+      file: (string_literal)))
+  (display_statement
+    (field
+      field: (identifier))
+    (field
+      field: (identifier))
+    (frame_phrase
+      frame: (identifier)
+      title: (string_literal)))
+  (on_statement
+    event: (identifier)
+    (of_phrase
+      widget: (widget_phrase
+        field: (identifier)
+        frame: (identifier)))
+    (do_statement
+      (body
+        (do_statement
+          variable: (identifier)
+          start: (number_literal)
+          end: (number_literal)
+          (body
+            (do_statement
+              variable: (identifier)
+              start: (number_literal)
+              end: (number_literal)
+              (body
+                (assignment_statement
+                  left: (identifier)
+                  operator: (assignment_operator)
+                  right: (widget_qualified_name
+                    target: (function_call
+                      function: (object_access
+                        left: (identifier)
+                        right: (identifier))
+                      (arguments
+                        (argument
+                          name: (binary_expression
+                            (string_literal)
+                            (function_call
+                              function: (identifier)
+                              (arguments
+                                (argument
+                                  name: (identifier))
+                                (argument
+                                  name: (string_literal))))))))
+                    widget: (identifier))))))))))
+  (update_statement
+    (field
+      field: (identifier))
+    (frame_phrase
+      frame: (identifier))))

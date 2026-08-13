@@ -1,0 +1,371 @@
+================================================================================
+OUTPUT
+================================================================================
+
+OUTPUT CLOSE.
+OUTPUT STREAM outStream CLOSE.
+OUTPUT STREAM-HANDLE hOut CLOSE.
+OUTPUT TO VALUE(outPath + "/data.xml") APPEND.
+OUTPUT TO PRINTER "HP" NUM-COPIES 2 LANDSCAPE PAGED PAGE-SIZE 60 NO-ECHO NO-MAP UNBUFFERED NO-CONVERT.
+OUTPUT THROUGH "crypt" mypass NO-ECHO.
+OUTPUT TO "file.log".
+OUTPUT TO VALUE(path) CONVERT SOURCE "UTF-8" TARGET "1250".
+OUTPUT TO "out.txt" CONVERT TARGET "1250".
+OUTPUT TO PRINTER pName PORTRAIT.
+OUTPUT TO TERMINAL NO-ECHO PAGED PAGE-SIZE 24.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (output_statement
+    (close))
+  (output_statement
+    stream: (identifier)
+    (close))
+  (output_statement
+    stream: (identifier)
+    (close))
+  (output_statement
+    value: (binary_expression
+      (identifier)
+      (string_literal))
+    (append))
+  (output_statement
+    printer: (string_literal)
+    copies: (number_literal)
+    (landscape)
+    (paged)
+    (page_size_phrase
+      page_size: (number_literal))
+    (no_echo)
+    (no_map)
+    (unbuffered)
+    (convert_phrase
+      (no_convert)))
+  (output_statement
+    program: (string_literal)
+    (identifier)
+    (no_echo))
+  (output_statement
+    file: (string_literal))
+  (output_statement
+    value: (identifier)
+    (convert_phrase
+      source: (string_literal)
+      target: (string_literal)))
+  (output_statement
+    file: (string_literal)
+    (convert_phrase
+      target: (string_literal)))
+  (output_statement
+    printer: (identifier)
+    (portrait))
+  (output_statement
+    (terminal)
+    (no_echo)
+    (paged)
+    (page_size_phrase
+      page_size: (number_literal))))
+
+================================================================================
+OUTPUT THROUGH - MAP and NO-CONVERT variants
+================================================================================
+
+OUTPUT THROUGH VALUE(cmd) MAP "hp2/spanish" NO-CONVERT.
+OUTPUT THROUGH myprog NO-MAP CONVERT TARGET "utf-8".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (output_statement
+    value: (identifier)
+    map: (string_literal)
+    (convert_phrase
+      (no_convert)))
+  (output_statement
+    program: (identifier)
+    (no_map)
+    (convert_phrase
+      target: (string_literal))))
+
+================================================================================
+OUTPUT TO VALUE with preprocessor name option
+================================================================================
+
+OUTPUT TO VALUE({&OUT}) {&OUTPUT-ARGS}.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (output_statement
+    value: (preprocessor_name
+      (identifier))
+    (preprocessor_name
+      (identifier))))
+
+================================================================================
+OUTPUT - reference snippets and options
+================================================================================
+
+OUTPUT TO cust.dat.
+FOR EACH Customer NO-LOCK:
+DISPLAY Customer.CustNum Customer.Name Customer.Address Customer.Address2
+Customer.City Customer.State Customer.Country SKIP(2)
+WITH 1 COLUMN SIDE-LABELS.
+END.
+OUTPUT CLOSE.
+DISPLAY "Finished".
+
+DEFINE VARIABLE ix AS INTEGER NO-UNDO.
+OUTPUT TO TERMINAL PAGED.
+FOR EACH Customer NO-LOCK BREAK BY Customer.SalesRep:
+FIND SalesRep OF Customer NO-LOCK.
+FORM HEADER TODAY
+"Customer Listing For " TO 43
+"Page " TO 55 PAGE-NUMBER - ix TO 58 FORMAT "99"
+(SalesRep.RepName) FORMAT "x(30)" AT 25
+WITH FRAME hdr PAGE-TOP CENTERED.
+VIEW FRAME hdr.
+DISPLAY Customer.CustNum COLUMN-LABEL "Customer!Number"
+Customer.Name LABEL "Name"
+Customer.Phone COLUMN-LABEL "Phone!Number" WITH CENTERED.
+IF LAST-OF(Customer.SalesRep) THEN DO:
+ix = PAGE-NUMBER.
+PAGE.
+END.
+END.
+OUTPUT CLOSE.
+
+OUTPUT TO PRINTER NUM-COPIES 3.
+OUTPUT TO PRINTER LANDSCAPE NUM-COPIES 3.
+OUTPUT TO PRINTER PORTRAIT NUM-COPIES VALUE(copies) COLLATE.
+OUTPUT TO PRINTER "\\fs_dev\hplas4" PAGE-SIZE VALUE(pageLines).
+OUTPUT TO "out.txt" LOB-DIR VALUE(lobDir) APPEND.
+OUTPUT TO "out.bin" BINARY NO-CONVERT.
+OUTPUT TO "out.txt" ECHO KEEP-MESSAGES.
+OUTPUT TO "out.txt" NO-ECHO MAP laserwriter/french.
+OUTPUT TO "out.txt" PAGED PAGE-SIZE 0.
+OUTPUT STREAM s1 TO "out2.txt" UNBUFFERED.
+OUTPUT STREAM s2 TO "CLIPBOARD".
+OUTPUT STREAM-HANDLE hOut TO VALUE(dest) NO-MAP.
+OUTPUT TO TERMINAL.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (output_statement
+    file: (qualified_name
+      left: (identifier)
+      right: (identifier)))
+  (for_statement
+    (record_phrase
+      record: (identifier)
+      (no_lock))
+    (body
+      (display_statement
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (parenthesized_expression
+            (number_literal)))
+        (frame_phrase
+          column: (number_literal)
+          (side_labels)))))
+  (output_statement
+    (close))
+  (display_statement
+    (field
+      field: (string_literal)))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (output_statement
+    (terminal)
+    (paged))
+  (for_statement
+    (record_phrase
+      record: (identifier)
+      (no_lock))
+    (break_by
+      by: (qualified_name
+        left: (identifier)
+        right: (identifier)))
+    (body
+      (find_statement
+        table: (identifier)
+        (of_phrase
+          record: (identifier))
+        (no_lock))
+      (form_statement
+        (form_item
+          field: (identifier))
+        (form_item
+          field: (identifier))
+        (form_item
+          field: (string_literal))
+        (form_item
+          field: (identifier))
+        (form_item
+          field: (number_literal))
+        (form_item
+          field: (string_literal))
+        (form_item
+          field: (identifier))
+        (form_item
+          field: (number_literal))
+        (form_item
+          field: (binary_expression
+            (identifier)
+            (identifier)))
+        (form_item
+          field: (identifier))
+        (form_item
+          field: (number_literal)
+          format: (string_literal))
+        (form_item
+          field: (parenthesized_expression
+            (qualified_name
+              left: (identifier)
+              right: (identifier)))
+          format: (string_literal))
+        (form_item
+          field: (identifier))
+        (form_item
+          field: (number_literal))
+        (frame_phrase
+          frame: (identifier)
+          (page_top)
+          (centered)))
+      (view_statement
+        (widget_phrase
+          frame: (identifier)))
+      (display_statement
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (format_phrase
+          column_label: (string_literal))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (format_phrase
+          label: (string_literal))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (format_phrase
+          column_label: (string_literal))
+        (frame_phrase
+          (centered)))
+      (if_statement
+        (function_call
+          function: (identifier)
+          (arguments
+            (argument
+              name: (qualified_name
+                left: (identifier)
+                right: (identifier)))))
+        then: (do_statement
+          (body
+            (assignment_statement
+              left: (identifier)
+              operator: (assignment_operator)
+              right: (identifier))
+            (page_statement))))))
+  (output_statement
+    (close))
+  (output_statement
+    copies: (number_literal))
+  (output_statement
+    (landscape)
+    copies: (number_literal))
+  (output_statement
+    (portrait)
+    value: (identifier)
+    (collate))
+  (output_statement
+    printer: (string_literal)
+    (page_size_phrase
+      value: (identifier)))
+  (output_statement
+    file: (string_literal)
+    (lob_dir_phrase
+      value: (identifier))
+    (append))
+  (output_statement
+    file: (string_literal)
+    (binary)
+    (convert_phrase
+      (no_convert)))
+  (output_statement
+    file: (string_literal)
+    (echo)
+    (keep_messages))
+  (output_statement
+    file: (string_literal)
+    (no_echo)
+    map: (identifier)
+    map: (identifier))
+  (output_statement
+    file: (string_literal)
+    (paged)
+    (page_size_phrase
+      page_size: (number_literal)))
+  (output_statement
+    stream: (identifier)
+    file: (string_literal)
+    (unbuffered))
+  (output_statement
+    stream: (identifier)
+    file: (string_literal))
+  (output_statement
+    stream: (identifier)
+    value: (identifier)
+    (no_map))
+  (output_statement
+    (terminal)))
+
+================================================================================
+OUTPUT TO - opsys_file (unquoted path)
+================================================================================
+
+OUTPUT TO /tmp/output.txt.
+OUTPUT TO ../logs/app.log.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (output_statement
+    file: (opsys_file))
+  (output_statement
+    file: (opsys_file)))

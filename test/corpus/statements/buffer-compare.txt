@@ -1,0 +1,184 @@
+================================================================================
+BUFFER-COMPARE basic
+================================================================================
+
+BUFFER-COMPARE bSrc TO bTgt.
+BUFFER-COMPARE bSrc EXCEPT Field1 Field2 TO bTgt.
+BUFFER-COMPARE bSrc USING Field1 Field2 TO bTgt.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (buffer_compare_statement
+    source: (identifier)
+    target: (identifier))
+  (buffer_compare_statement
+    source: (identifier)
+    field: (identifier)
+    field: (identifier)
+    target: (identifier))
+  (buffer_compare_statement
+    source: (identifier)
+    field: (identifier)
+    field: (identifier)
+    target: (identifier)))
+
+================================================================================
+BUFFER-COMPARE with options
+================================================================================
+
+BUFFER-COMPARE bSrc TO bTgt CASE-SENSITIVE.
+BUFFER-COMPARE bSrc TO bTgt BINARY.
+BUFFER-COMPARE bSrc TO bTgt SAVE lResult.
+BUFFER-COMPARE bSrc TO bTgt SAVE RESULT IN cDiff.
+BUFFER-COMPARE bSrc TO bTgt NO-LOBS.
+BUFFER-COMPARE bSrc TO bTgt NO-ERROR.
+BUFFER-COMPARE bSrc TO bTgt SAVE RESULT IN obj:prop NO-ERROR.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (buffer_compare_statement
+    source: (identifier)
+    target: (identifier)
+    (case_sensitive))
+  (buffer_compare_statement
+    source: (identifier)
+    target: (identifier)
+    (binary))
+  (buffer_compare_statement
+    source: (identifier)
+    target: (identifier)
+    (save_phrase
+      result: (identifier)))
+  (buffer_compare_statement
+    source: (identifier)
+    target: (identifier)
+    (save_phrase
+      result: (identifier)))
+  (buffer_compare_statement
+    source: (identifier)
+    target: (identifier)
+    (no_lobs))
+  (buffer_compare_statement
+    source: (identifier)
+    target: (identifier)
+    (no_error))
+  (buffer_compare_statement
+    source: (identifier)
+    target: (identifier)
+    (save_phrase
+      result: (object_access
+        left: (identifier)
+        right: (identifier)))
+    (no_error)))
+
+================================================================================
+BUFFER-COMPARE with COMPARES block
+================================================================================
+
+BUFFER-COMPARE bSrc TO bTgt
+  COMPARES:
+    WHEN Field1 <> Field2 THEN MESSAGE "Mismatch".
+  END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (buffer_compare_statement
+    source: (identifier)
+    target: (identifier)
+    (compares_block
+      (compares)
+      field: (identifier)
+      value: (identifier)
+      action: (message_statement
+        (string_literal)))))
+
+================================================================================
+BUFFER-COMPARE with all ordered options
+================================================================================
+
+BUFFER-COMPARE bSrc TO bTgt CASE-SENSITIVE SAVE RESULT IN cDiff
+  EXPLICIT COMPARES:
+    WHEN Field1 = Field2 THEN MESSAGE "Mismatch".
+  COMPARES END NO-LOBS NO-ERROR.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (buffer_compare_statement
+    source: (identifier)
+    target: (identifier)
+    (case_sensitive)
+    (save_phrase
+      result: (identifier))
+    (compares_block
+      (explicit)
+      (compares)
+      field: (identifier)
+      value: (identifier)
+      action: (message_statement
+        (string_literal))
+      (compares))
+    (no_lobs)
+    (no_error)))
+
+================================================================================
+BUFFER-COMPARE with COMPARES and inner END COMPARES
+================================================================================
+
+BUFFER-COMPARE bSrc TO bTgt
+  COMPARES:
+    WHEN Field1 = Field2 THEN APPLY "CHOOSE".
+    WHEN Field3 BEGINS "A" THEN RUN DoWork.
+  COMPARES END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (buffer_compare_statement
+    source: (identifier)
+    target: (identifier)
+    (compares_block
+      (compares)
+      field: (identifier)
+      value: (identifier)
+      action: (apply_statement
+        event: (string_literal))
+      field: (identifier)
+      value: (string_literal)
+      action: (run_statement
+        procedure: (identifier))
+      (compares))))
+
+================================================================================
+BUFFER-COMPARE with EXPLICIT COMPARES and operators
+================================================================================
+
+BUFFER-COMPARE bSrc TO bTgt
+  EXPLICIT COMPARES:
+    WHEN Field1 >= Field2 THEN ASSIGN flag = TRUE.
+    WHEN Field3 < Field4 THEN MESSAGE "Less".
+  END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (buffer_compare_statement
+    source: (identifier)
+    target: (identifier)
+    (compares_block
+      (explicit)
+      (compares)
+      field: (identifier)
+      value: (identifier)
+      action: (assign_statement
+        (assign_phrase
+          (assign_pair
+            left: (identifier)
+            right: (boolean_literal))))
+      field: (identifier)
+      value: (identifier)
+      action: (message_statement
+        (string_literal)))))

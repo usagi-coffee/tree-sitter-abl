@@ -1,0 +1,101 @@
+================================================================================
+SET-POINTER-VALUE
+================================================================================
+
+SET-POINTER-VALUE(pData) = 0.
+SET-POINTER-VALUE(pBuffer) = GET-POINTER-VALUE(pSource).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (set_pointer_value_statement
+    target: (identifier)
+    value: (number_literal))
+  (set_pointer_value_statement
+    target: (identifier)
+    value: (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (identifier))))))
+
+================================================================================
+SET-POINTER-VALUE - object access target
+================================================================================
+
+SET-POINTER-VALUE(hBuf:HANDLE) = pOther.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (set_pointer_value_statement
+    target: (object_access
+      left: (identifier)
+      right: (identifier))
+    value: (identifier)))
+
+================================================================================
+SET-POINTER-VALUE - reference snippet
+================================================================================
+
+DEFINE VARIABLE person_struct AS MEMPTR NO-UNDO.
+DEFINE VARIABLE name AS MEMPTR NO-UNDO.
+SET-SIZE(person_struct) = 8.
+RUN person_info (OUTPUT person_struct).
+SET-POINTER-VALUE(name) = GET-LONG(person_struct,5).
+DISPLAY GET-STRING(name,1) FORMAT "x(50)".
+SET-SIZE(person_struct) = 0.
+PROCEDURE person_info EXTERNAL "person.dll" PERSISTENT:
+DEFINE OUTPUT PARAMETER person_struct AS MEMPTR.
+END PROCEDURE.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (set_size_statement
+    buffer: (identifier)
+    size: (number_literal))
+  (run_statement
+    procedure: (identifier)
+    (arguments
+      (argument
+        name: (identifier))))
+  (set_pointer_value_statement
+    target: (identifier)
+    value: (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (identifier))
+        (argument
+          name: (number_literal)))))
+  (display_statement
+    (field
+      field: (function_call
+        function: (identifier)
+        (arguments
+          (argument
+            name: (identifier))
+          (argument
+            name: (number_literal)))))
+    (format_phrase
+      format: (string_literal)))
+  (set_size_statement
+    buffer: (identifier)
+    size: (number_literal))
+  (procedure_definition
+    name: (identifier)
+    (external_phrase)
+    (persistent)
+    (body
+      (parameter_definition
+        name: (identifier)
+        type: (identifier)))))

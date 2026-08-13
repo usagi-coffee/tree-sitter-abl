@@ -1,0 +1,71 @@
+================================================================================
+OS-COMMAND
+================================================================================
+
+OS-COMMAND VALUE("echo ok").
+OS-COMMAND NO-WAIT dir /b.
+OS-COMMAND SILENT VALUE(cmd).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (os_command_statement
+    value: (string_literal))
+  (os_command_statement
+    (identifier))
+  (os_command_statement
+    value: (identifier)))
+
+================================================================================
+OS-COMMAND - reference snippets and options
+================================================================================
+
+DEFINE VARIABLE comm-line AS CHARACTER NO-UNDO FORMAT "x(70)".
+REPEAT:
+UPDATE comm-line.
+OS-COMMAND VALUE(comm-line).
+END.
+
+OS-COMMAND NO-CONSOLE VALUE("dir").
+OS-COMMAND VALUE("echo") "ok".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo)
+    (format_phrase
+      format: (string_literal)))
+  (repeat_statement
+    (body
+      (update_statement
+        (field
+          field: (identifier)))
+      (os_command_statement
+        value: (identifier))))
+  (os_command_statement
+    value: (string_literal))
+  (os_command_statement
+    value: (string_literal)
+    (string_literal)))
+
+================================================================================
+OS-COMMAND - extra command tokens
+================================================================================
+
+OS-COMMAND NO-WAIT VALUE("echo") "done" 1 /q.
+OS-COMMAND SILENT "ping" "localhost" /n 1.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (os_command_statement
+    value: (string_literal)
+    (string_literal)
+    (number_literal))
+  (os_command_statement
+    (string_literal)
+    (string_literal)
+    (number_literal)))

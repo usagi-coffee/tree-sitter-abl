@@ -1,0 +1,51 @@
+export default ({ kw }) => ({
+  image_definition: ($) => seq($.__image_prefix, $._terminator),
+
+  __image_prefix: ($) =>
+    seq(
+      $._define_private_prefix,
+      kw("IMAGE"),
+      field("name", $.identifier),
+      repeat1(choice($.image_phrase, seq(kw("LIKE"), field("like", $.identifier)), $.size_phrase)),
+      optional(
+        choice(
+          seq(
+            kw("BGCOLOR"),
+            field("bgcolor", $._expression),
+            optional($.__image_body_after_bgcolor),
+          ),
+          $.__image_body_after_bgcolor,
+        ),
+      ),
+    ),
+  __image_body_after_bgcolor: ($) =>
+    choice(
+      seq(kw("FGCOLOR"), field("fgcolor", $._expression), optional($.__image_body_after_fgcolor)),
+      $.__image_body_after_fgcolor,
+    ),
+  __image_body_after_fgcolor: ($) =>
+    choice(
+      seq(
+        alias(kw("CONVERT-3D-COLORS"), $.convert_3d_colors),
+        optional($.__image_body_after_convert_3d_colors),
+      ),
+      $.__image_body_after_convert_3d_colors,
+    ),
+  __image_body_after_convert_3d_colors: ($) =>
+    choice(
+      seq($.__image_tooltip_phrase, optional($.__image_stretch_transparent_tail)),
+      $.__image_stretch_transparent_tail,
+    ),
+  __image_stretch_transparent_tail: ($) =>
+    choice(
+      seq($.__image_stretch_phrase, optional(alias(kw("TRANSPARENT"), $.transparent))),
+      alias(kw("TRANSPARENT"), $.transparent),
+    ),
+  __image_tooltip_phrase: ($) =>
+    seq(kw("TOOLTIP"), field("tooltip", $._identifier_or_string_literal)),
+  __image_stretch_phrase: ($) =>
+    seq(
+      alias(kw("STRETCH-TO-FIT"), $.stretch_to_fit),
+      optional(alias(kw("RETAIN-SHAPE"), $.retain_shape)),
+    ),
+});

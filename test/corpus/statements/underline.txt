@@ -1,0 +1,83 @@
+================================================================================
+UNDERLINE
+================================================================================
+
+UNDERLINE field1.
+UNDERLINE field1 field2 field3.
+UNDERLINE STREAM s1 field1.
+UNDERLINE field1 WITH FRAME f1.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (underline_statement
+    field: (identifier))
+  (underline_statement
+    field: (identifier)
+    field: (identifier)
+    field: (identifier))
+  (underline_statement
+    stream: (identifier)
+    field: (identifier))
+  (underline_statement
+    field: (identifier)
+    (frame_phrase
+      frame: (identifier))))
+
+================================================================================
+UNDERLINE - reference snippet
+================================================================================
+
+FOR EACH Customer NO-LOCK BREAK BY Customer.State WITH USE-TEXT:
+DISPLAY Customer.State Customer.CustNum Customer.Name.
+IF LAST-OF(Customer.State) THEN UNDERLINE Customer.State.
+END.
+
+UNDERLINE STREAM-HANDLE hS Customer.Name WITH FRAME f1.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (for_statement
+    (record_phrase
+      record: (identifier)
+      (no_lock))
+    (break_by
+      by: (qualified_name
+        left: (identifier)
+        right: (identifier)))
+    (frame_phrase
+      (use_text))
+    (body
+      (display_statement
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier))))
+      (if_statement
+        (function_call
+          function: (identifier)
+          (arguments
+            (argument
+              name: (qualified_name
+                left: (identifier)
+                right: (identifier)))))
+        then: (underline_statement
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier))))))
+  (underline_statement
+    stream: (identifier)
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (frame_phrase
+      frame: (identifier))))

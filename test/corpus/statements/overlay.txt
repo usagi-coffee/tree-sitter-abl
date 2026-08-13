@@ -1,0 +1,256 @@
+================================================================================
+OVERLAY
+================================================================================
+
+OVERLAY(cTarget, 1) = "X".
+OVERLAY(cString, 5, 3) = "ABC".
+OVERLAY(cData, 1, 10, CHARACTER) = cValue.
+OVERLAY(mBuffer, 5, 4, RAW) = mSource.
+OVERLAY(cLine, iPos, iLen, COLUMN) = "Hello".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (overlay_statement
+    target: (identifier)
+    position: (number_literal)
+    value: (string_literal))
+  (overlay_statement
+    target: (identifier)
+    position: (number_literal)
+    length: (number_literal)
+    value: (string_literal))
+  (overlay_statement
+    target: (identifier)
+    position: (number_literal)
+    length: (number_literal)
+    type: (identifier)
+    value: (identifier))
+  (overlay_statement
+    target: (identifier)
+    position: (number_literal)
+    length: (number_literal)
+    type: (identifier)
+    value: (identifier))
+  (overlay_statement
+    target: (identifier)
+    position: (identifier)
+    length: (identifier)
+    type: (identifier)
+    value: (string_literal)))
+
+================================================================================
+OVERLAY - reference snippets and variants
+================================================================================
+
+DEFINE VARIABLE chktext AS CHARACTER NO-UNDO.
+DEFINE VARIABLE ix AS INTEGER NO-UNDO.
+DEFINE VARIABLE chkndx AS INTEGER NO-UNDO.
+DEFINE VARIABLE ndx AS INTEGER NO-UNDO.
+DEFINE VARIABLE old-text AS CHARACTER NO-UNDO.
+DEFINE VARIABLE new-text AS CHARACTER NO-UNDO.
+DEFINE VARIABLE max-len AS INTEGER NO-UNDO.
+DEFINE VARIABLE comment AS CHARACTER NO-UNDO FORMAT "x(49)" EXTENT 5
+INITIAL ["You are probably interested in OpenEdge because",
+"you have a lot of information to organize. You",
+"want to get at the information, add to it, and",
+"change it, without a lot of work and aggravation.",
+"You made the right choice with OpenEdge." ].
+DISPLAY comment WITH CENTERED FRAME comm NO-LABELS
+TITLE "Why You Chose OpenEdge" ROW 4.
+REPEAT:
+SET old-text LABEL "Enter text to search for"
+new-text LABEL "Enter text to replace with"
+WITH FRAME replace SIDE-LABELS CENTERED.
+max-len = MAXIMUM(LENGTH(old-text), LENGTH(new-text)).
+DO ix = 1 TO 5:
+ndx = 1.
+DO ndx = 1 TO LENGTH(comment[ix]):
+chktext = SUBSTRING(comment[ix], ndx).
+chkndx = INDEX(chktext, old-text).
+IF chkndx <> 0 THEN DO:
+ndx = ndx + chkndx - 1.
+OVERLAY(comment[ix], ndx, max-len, "CHARACTER") = new-text.
+ndx = max-len.
+END.
+END.
+DISPLAY comment[ix] WITH FRAME comm.
+END.
+END.
+
+OVERLAY(cLine, 3, -1, "RAW") = cNew.
+OVERLAY(cLong, 1, 5, "COLUMN") = "Hi".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo)
+    (format_phrase
+      format: (string_literal))
+    (extent_phrase
+      size: (number_literal))
+    initial: (string_literal)
+    initial: (string_literal)
+    initial: (string_literal)
+    initial: (string_literal)
+    initial: (string_literal))
+  (display_statement
+    record: (identifier)
+    (frame_phrase
+      (centered)
+      frame: (identifier)
+      (no_labels)
+      title: (string_literal)
+      row: (number_literal)))
+  (repeat_statement
+    (body
+      (set_statement
+        (field
+          field: (identifier)
+          (format_phrase
+            label: (string_literal)))
+        (field
+          field: (identifier)
+          (format_phrase
+            label: (string_literal)))
+        (frame_phrase
+          frame: (identifier)
+          (side_labels)
+          (centered)))
+      (assignment_statement
+        left: (identifier)
+        operator: (assignment_operator)
+        right: (function_call
+          function: (identifier)
+          (arguments
+            (argument
+              name: (function_call
+                function: (identifier)
+                (arguments
+                  (argument
+                    name: (identifier)))))
+            (argument
+              name: (function_call
+                function: (identifier)
+                (arguments
+                  (argument
+                    name: (identifier))))))))
+      (do_statement
+        variable: (identifier)
+        start: (number_literal)
+        end: (number_literal)
+        (body
+          (assignment_statement
+            left: (identifier)
+            operator: (assignment_operator)
+            right: (number_literal))
+          (do_statement
+            variable: (identifier)
+            start: (number_literal)
+            end: (function_call
+              function: (identifier)
+              (arguments
+                (argument
+                  name: (array_access
+                    array: (identifier)
+                    index: (identifier)))))
+            (body
+              (assignment_statement
+                left: (identifier)
+                operator: (assignment_operator)
+                right: (function_call
+                  function: (identifier)
+                  (arguments
+                    (argument
+                      name: (array_access
+                        array: (identifier)
+                        index: (identifier)))
+                    (argument
+                      name: (identifier)))))
+              (assignment_statement
+                left: (identifier)
+                operator: (assignment_operator)
+                right: (function_call
+                  function: (identifier)
+                  (arguments
+                    (argument
+                      name: (identifier))
+                    (argument
+                      name: (identifier)))))
+              (if_statement
+                (binary_expression
+                  (identifier)
+                  (number_literal))
+                then: (do_statement
+                  (body
+                    (assignment_statement
+                      left: (identifier)
+                      operator: (assignment_operator)
+                      right: (binary_expression
+                        (binary_expression
+                          (identifier)
+                          (identifier))
+                        (number_literal)))
+                    (overlay_statement
+                      target: (array_access
+                        array: (identifier)
+                        index: (identifier))
+                      position: (identifier)
+                      length: (identifier)
+                      type: (string_literal)
+                      value: (identifier))
+                    (assignment_statement
+                      left: (identifier)
+                      operator: (assignment_operator)
+                      right: (identifier)))))))
+          (display_statement
+            (field
+              field: (array_access
+                array: (identifier)
+                index: (identifier)))
+            (frame_phrase
+              frame: (identifier)))))))
+  (overlay_statement
+    target: (identifier)
+    position: (number_literal)
+    length: (unary_expression
+      (number_literal))
+    type: (string_literal)
+    value: (identifier))
+  (overlay_statement
+    target: (identifier)
+    position: (number_literal)
+    length: (number_literal)
+    type: (string_literal)
+    value: (string_literal)))

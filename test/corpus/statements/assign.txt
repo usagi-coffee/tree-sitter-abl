@@ -1,0 +1,552 @@
+================================================================================
+ASSIGN basic
+================================================================================
+
+ASSIGN a = 1.
+ASSIGN x = "hello".
+ASSIGN flag = TRUE.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assign_statement
+    (assign_phrase
+      (assign_pair
+        left: (identifier)
+        right: (number_literal))))
+  (assign_statement
+    (assign_phrase
+      (assign_pair
+        left: (identifier)
+        right: (string_literal))))
+  (assign_statement
+    (assign_phrase
+      (assign_pair
+        left: (identifier)
+        right: (boolean_literal)))))
+
+================================================================================
+ASSIGN multiple pairs
+================================================================================
+
+ASSIGN
+  a = 1
+  b = "x"
+  c = TRUE
+  d = 3.14.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assign_statement
+    (assign_phrase
+      (assign_pair
+        left: (identifier)
+        right: (number_literal))
+      (assign_pair
+        left: (identifier)
+        right: (string_literal))
+      (assign_pair
+        left: (identifier)
+        right: (boolean_literal))
+      (assign_pair
+        left: (identifier)
+        right: (number_literal)))))
+
+================================================================================
+ASSIGN with WHEN AVAILABLE clause
+================================================================================
+
+ASSIGN
+  a = 1
+  b = "x" WHEN AVAILABLE Customer
+  c = Customer.Name WHEN AVAILABLE Customer.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assign_statement
+    (assign_phrase
+      (assign_pair
+        left: (identifier)
+        right: (number_literal))
+      (assign_pair
+        left: (identifier)
+        right: (string_literal)
+        when: (available_expression
+          record: (identifier)))
+      (assign_pair
+        left: (identifier)
+        right: (qualified_name
+          left: (identifier)
+          right: (identifier))
+        when: (available_expression
+          record: (identifier))))))
+
+================================================================================
+ASSIGN record/input
+================================================================================
+
+ASSIGN Customer EXCEPT Name NO-ERROR.
+ASSIGN INPUT FRAME frm Cust.Name = "x" WHEN TRUE NO-ERROR.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assign_statement
+    record: (identifier)
+    field: (identifier)
+    (no_error))
+  (assign_statement
+    frame: (identifier)
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    value: (string_literal)
+    when: (boolean_literal)
+    (no_error)))
+
+================================================================================
+ASSIGN with NO-ERROR
+================================================================================
+
+ASSIGN amount = DECIMAL(par_amount) NO-ERROR.
+ASSIGN a = 1 b = 2 NO-ERROR.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assign_statement
+    (assign_phrase
+      (assign_pair
+        left: (identifier)
+        right: (function_call
+          function: (identifier)
+          (arguments
+            (argument
+              name: (identifier))))))
+    (no_error))
+  (assign_statement
+    (assign_phrase
+      (assign_pair
+        left: (identifier)
+        right: (number_literal))
+      (assign_pair
+        left: (identifier)
+        right: (number_literal)))
+    (no_error)))
+
+================================================================================
+ASSIGN with comment
+================================================================================
+
+ASSIGN // note
+  a = 1
+  b = "x".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assign_statement
+    (comment
+      (line_comment))
+    (assign_phrase
+      (assign_pair
+        left: (identifier)
+        right: (number_literal))
+      (assign_pair
+        left: (identifier)
+        right: (string_literal)))))
+
+================================================================================
+ASSIGN with dataset reference
+================================================================================
+
+ASSIGN c = dataset BDebtorShipTo:handle.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assign_statement
+    (assign_phrase
+      (assign_pair
+        left: (identifier)
+        right: (dataset_reference
+          dataset: (object_access
+            left: (identifier)
+            right: (identifier)))))))
+
+================================================================================
+ASSIGN with conditional expression
+================================================================================
+
+ASSIGN status = IF ok THEN "Y" ELSE "N".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assign_statement
+    (assign_phrase
+      (assign_pair
+        left: (identifier)
+        right: (conditional_expression
+          (identifier)
+          (string_literal)
+          (string_literal))))))
+
+================================================================================
+ASSIGN with qualified names
+================================================================================
+
+ASSIGN Customer.Name = "John"
+       Customer.Balance = 100.00.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assign_statement
+    (assign_phrase
+      (assign_pair
+        left: (qualified_name
+          left: (identifier)
+          right: (identifier))
+        right: (string_literal))
+      (assign_pair
+        left: (qualified_name
+          left: (identifier)
+          right: (identifier))
+        right: (number_literal)))))
+
+================================================================================
+Simple assignment statement
+================================================================================
+
+x = 1.
+Customer.Name = "test".
+a = b + c.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (number_literal))
+  (assignment_statement
+    left: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    operator: (assignment_operator)
+    right: (string_literal))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (binary_expression
+      (identifier)
+      (identifier))))
+
+================================================================================
+Assignment with NO-ERROR
+================================================================================
+
+x = 1 NO-ERROR.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (number_literal)
+    (no_error)))
+
+================================================================================
+Assignment to function result
+================================================================================
+
+PUT-STRING(workBuf, 1) = cmdValue.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (put_assign_statement
+    type: (identifier)
+    buffer: (identifier)
+    position: (number_literal)
+    value: (identifier)))
+
+================================================================================
+Expression statement with NO-ERROR
+================================================================================
+
+doWork() NO-ERROR.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (expression_statement
+    (function_call
+      function: (identifier)
+      (arguments))
+    (no_error)))
+
+================================================================================
+Assignment with INPUT, IN FRAME, and string options
+================================================================================
+
+baz = INPUT FRAME y bar.
+quux = INPUT qux.
+x = qbf-s:SCREEN-VALUE IN FRAME qbf-area.
+x = NOT x IN FRAME qbf-test.
+a = "A":U.
+b = "Hello":R10.
+c = "Trim":T.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (input_expression
+      frame: (identifier)
+      field: (identifier)))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (input_expression
+      field: (identifier)))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (widget_qualified_name
+      target: (object_access
+        left: (identifier)
+        right: (identifier))
+      widget: (identifier)))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (unary_expression
+      (widget_qualified_name
+        target: (identifier)
+        widget: (identifier))))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (string_literal))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (string_literal))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (string_literal)))
+
+================================================================================
+Assignment with array initializers
+================================================================================
+
+x = [1, ?, 3].
+y = ["hello", ?, "world"].
+z = [true, ?, false].
+mixed = [1, "test", ?, true].
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (array_initializer
+      (number_literal)
+      (null_literal)
+      (number_literal)))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (array_initializer
+      (string_literal)
+      (null_literal)
+      (string_literal)))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (array_initializer
+      (boolean_literal)
+      (null_literal)
+      (boolean_literal)))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (array_initializer
+      (number_literal)
+      (string_literal)
+      (null_literal)
+      (boolean_literal))))
+
+================================================================================
+ASSIGN with qualified WHEN AVAILABLE and NO-ERROR
+================================================================================
+
+ASSIGN
+  a = 1
+  Customer.Name = "John" WHEN AVAILABLE sports.Customer
+  b = 2
+NO-ERROR.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assign_statement
+    (assign_phrase
+      (assign_pair
+        left: (identifier)
+        right: (number_literal))
+      (assign_pair
+        left: (qualified_name
+          left: (identifier)
+          right: (identifier))
+        right: (string_literal)
+        when: (available_expression
+          record: (qualified_name
+            left: (identifier)
+            right: (identifier))))
+      (assign_pair
+        left: (identifier)
+        right: (number_literal)))
+    (no_error)))
+
+================================================================================
+ASSIGN without expressions and keyword targets
+================================================================================
+
+ASSIGN Customer.Name Customer.Balance.
+ASSIGN CURRENT-WINDOW = hWin NO-ERROR.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assign_statement
+    (assign_phrase
+      (assign_pair
+        left: (qualified_name
+          left: (identifier)
+          right: (identifier)))
+      (assign_pair
+        left: (qualified_name
+          left: (identifier)
+          right: (identifier)))))
+  (assign_statement
+    (assign_phrase
+      (assign_pair
+        left: (identifier)
+        right: (identifier)))
+    (no_error)))
+
+================================================================================
+ASSIGN with include expression value
+================================================================================
+
+ASSIGN a = {us/t0/t001.i}.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assign_statement
+    (assign_phrase
+      (assign_pair
+        left: (identifier)
+        right: (include_file_reference
+          file: (include_file_path
+            (identifier)))))))
+
+================================================================================
+ASSIGN with preprocessor names
+================================================================================
+
+ASSIGN
+  {&Bufor}.status = {&Status}
+  a{&one}.field = 1
+  a{&one}b.field = 2
+  a{&one}{&two}.field = 3
+  a{&one}{&two}b{&three}.value = 1
+  value = {&Proces}
+  &IF DEFINED (Flag) NE 0 &THEN
+    {&Bufor}.flag = {&Flag}
+  &ENDIF
+  .
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assign_statement
+    (assign_phrase
+      (assign_pair
+        left: (qualified_name
+          left: (preprocessor_name
+            (identifier))
+          right: (identifier))
+        right: (preprocessor_name
+          (identifier)))
+      (assign_pair
+        left: (qualified_name
+          left: (macro_concatenated_name)
+          right: (identifier))
+        right: (number_literal))
+      (assign_pair
+        left: (qualified_name
+          left: (macro_concatenated_name)
+          right: (identifier))
+        right: (number_literal))
+      (assign_pair
+        left: (qualified_name
+          left: (macro_concatenated_name)
+          right: (identifier))
+        right: (number_literal))
+      (assign_pair
+        left: (qualified_name
+          left: (macro_concatenated_name)
+          right: (identifier))
+        right: (number_literal))
+      (assign_pair
+        left: (identifier)
+        right: (preprocessor_name
+          (identifier)))
+      (if_preprocessor_directive_statement
+        (if_branch
+          condition: (binary_expression
+            (function_call
+              function: (identifier)
+              (arguments
+                (argument
+                  name: (identifier))))
+            (number_literal))))
+      (if_preprocessor_directive_statement
+        (then_branch))
+      (assign_pair
+        left: (qualified_name
+          left: (preprocessor_name
+            (identifier))
+          right: (identifier))
+        right: (preprocessor_name
+          (identifier)))
+      (if_preprocessor_directive_statement
+        (endif_branch)))))
+
+================================================================================
+ASSIGN - BROWSE attribute LHS
+================================================================================
+
+ASSIGN BROWSE b1:CURRENT-ROW = 1.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assign_statement
+    (assign_phrase
+      (assign_pair
+        browse: (identifier)
+        attr: (identifier)
+        right: (number_literal)))))

@@ -1,0 +1,537 @@
+================================================================================
+RUN basic procedure
+================================================================================
+
+RUN myproc.p.
+RUN someproc.p.
+RUN utilities/helper.p.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (run_statement
+    procedure: (procedure_name))
+  (run_statement
+    procedure: (procedure_name))
+  (run_statement
+    procedure: (procedure_name)))
+
+================================================================================
+RUN with arguments OUTPUT DATASET
+================================================================================
+
+RUN proxy/starttransaction.p (OUTPUT DATASET tFcMessages, OUTPUT bFinApiError).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (run_statement
+    procedure: (procedure_name)
+    (arguments
+      (argument
+        name: (dataset_reference
+          dataset: (identifier)))
+      (argument
+        name: (identifier)))))
+
+================================================================================
+RUN with INPUT-OUTPUT DATASET
+================================================================================
+
+RUN someproc.p (INPUT-OUTPUT DATASET dsOrder, INPUT DATASET dsOther:HANDLE).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (run_statement
+    procedure: (procedure_name)
+    (arguments
+      (argument
+        name: (dataset_reference
+          dataset: (identifier)))
+      (argument
+        name: (dataset_reference
+          dataset: (object_access
+            left: (identifier)
+            right: (identifier)))))))
+
+================================================================================
+RUN with simple arguments
+================================================================================
+
+RUN calculate.p (INPUT x, INPUT y, OUTPUT result).
+RUN process.p (1, "hello", TRUE).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (run_statement
+    procedure: (procedure_name)
+    (arguments
+      (argument
+        name: (identifier))
+      (argument
+        name: (identifier))
+      (argument
+        name: (identifier))))
+  (run_statement
+    procedure: (procedure_name)
+    (arguments
+      (argument
+        name: (number_literal))
+      (argument
+        name: (string_literal))
+      (argument
+        name: (boolean_literal)))))
+
+================================================================================
+RUN internal procedure
+================================================================================
+
+RUN processData.
+RUN validate-input.
+RUN ip_calculate.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (run_statement
+    procedure: (identifier))
+  (run_statement
+    procedure: (identifier))
+  (run_statement
+    procedure: (identifier)))
+
+================================================================================
+RUN internal procedure with arguments
+================================================================================
+
+RUN processData (INPUT cValue, OUTPUT lResult).
+RUN validateOrder (orderId, customerId).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (run_statement
+    procedure: (identifier)
+    (arguments
+      (argument
+        name: (identifier))
+      (argument
+        name: (identifier))))
+  (run_statement
+    procedure: (identifier)
+    (arguments
+      (argument
+        name: (identifier))
+      (argument
+        name: (identifier)))))
+
+================================================================================
+RUN with object method call
+================================================================================
+
+RUN utils.helpers.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (run_statement
+    procedure: (qualified_name
+      left: (identifier)
+      right: (identifier))))
+
+================================================================================
+RUN with path variations
+================================================================================
+
+RUN data/import/customers.p.
+RUN ../shared/utilities.p.
+RUN ./local/process.p.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (run_statement
+    procedure: (procedure_name))
+  (run_statement
+    procedure: (procedure_name))
+  (run_statement
+    procedure: (procedure_name)))
+
+================================================================================
+RUN with multiple arguments
+================================================================================
+
+RUN processRecord.p (cCustomer, lSuccess).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (run_statement
+    procedure: (procedure_name)
+    (arguments
+      (argument
+        name: (identifier))
+      (argument
+        name: (identifier)))))
+
+================================================================================
+RUN with expression arguments
+================================================================================
+
+RUN calc.p (x + y, STRING(TODAY), SUBSTRING(name, 1, 10)).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (run_statement
+    procedure: (procedure_name)
+    (arguments
+      (argument
+        name: (binary_expression
+          (identifier)
+          (identifier)))
+      (argument
+        name: (function_call
+          function: (identifier)
+          (arguments
+            (argument
+              name: (identifier)))))
+      (argument
+        name: (function_call
+          function: (identifier)
+          (arguments
+            (argument
+              name: (identifier))
+            (argument
+              name: (number_literal))
+            (argument
+              name: (number_literal))))))))
+
+================================================================================
+RUN - reference snippets and async/server options
+================================================================================
+
+DEFINE INPUT PARAMETER invDate AS DATE NO-UNDO.
+DEFINE VARIABLE sh AS HANDLE NO-UNDO.
+DEFINE VARIABLE ah AS HANDLE NO-UNDO.
+CREATE SERVER sh.
+sh:CONNECT("-URL http://slater:8810/inventory/apsv -sessionModel Session-free").
+RUN runReport.p ON SERVER sh
+ASYNCHRONOUS SET ah EVENT-HANDLER "reportDone" EVENT-HANDLER-CONTEXT THIS-PROCEDURE
+(invDate, OUTPUT numLines AS INTEGER).
+RETURN.
+PROCEDURE reportDone:
+DEFINE INPUT PARAMETER numLines AS INTEGER.
+IF ah:ERROR OR ah:STOP THEN
+MESSAGE "An error occurred when running your" SKIP
+"Inventory report for" invDate "." SKIP
+"The error is:" ERROR-STATUS:GET-MESSAGE(1)
+VIEW-AS ALERT-BOX.
+ELSE
+MESSAGE "Your Inventory report for " invDate SKIP
+"has completed successfully." SKIP
+numLines "report lines were generated"
+VIEW-AS ALERT-BOX.
+sh:DISCONNECT().
+DELETE OBJECT sh.
+DELETE OBJECT THIS-PROCEDURE.
+END PROCEDURE.
+
+RUN aproc.p SINGLE-RUN SET procHandle ON SERVER serverHandle.
+RUN internalProcA IN procHandle (INPUT argIn1, OUTPUT argout1).
+DELETE PROCEDURE procHandle.
+
+RUN aproc.p SINGLETON SET procHandle ON SERVER serverHandle.
+RUN internalProcA IN procHandle (INPUT argIn1, OUTPUT argout1).
+RUN internalProcB IN procHandle (INPUT argIn1, OUTPUT argout1).
+DELETE PROCEDURE procHandle.
+
+RUN /usr/foo/app.pl<<appmenu.r>>.
+RUN VALUE(cProcName) PERSISTENT SET hProc.
+RUN internalProc IN hProc ASYNCHRONOUS EVENT-PROCEDURE "done" IN THIS-PROCEDURE.
+RUN methodProc IN hProc NO-ERROR.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (parameter_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (create_statement
+    handle: (identifier))
+  (expression_statement
+    (function_call
+      function: (object_access
+        left: (identifier)
+        right: (identifier))
+      (arguments
+        (argument
+          name: (string_literal)))))
+  (run_statement
+    procedure: (procedure_name)
+    (on_server_phrase
+      server: (identifier))
+    (asynchronous_phrase
+      handle: (identifier)
+      event_handler: (string_literal)
+      context: (this_procedure))
+    (arguments
+      (argument
+        name: (identifier))
+      (argument
+        name: (identifier)
+        type: (identifier))))
+  (return_statement)
+  (procedure_definition
+    name: (identifier)
+    (body
+      (parameter_definition
+        name: (identifier)
+        type: (identifier))
+      (if_statement
+        (binary_expression
+          (object_access
+            left: (identifier)
+            right: (identifier))
+          (object_access
+            left: (identifier)
+            right: (identifier)))
+        then: (message_statement
+          (string_literal)
+          (skip)
+          (string_literal)
+          (identifier)
+          (string_literal)
+          (skip)
+          (string_literal)
+          (function_call
+            function: (object_access
+              left: (identifier)
+              right: (identifier))
+            (arguments
+              (argument
+                name: (number_literal))))
+          (view_as_phrase))
+        else: (message_statement
+          (string_literal)
+          (identifier)
+          (skip)
+          (string_literal)
+          (skip)
+          (identifier)
+          (string_literal)
+          (view_as_phrase)))
+      (expression_statement
+        (function_call
+          function: (object_access
+            left: (identifier)
+            right: (identifier))
+          (arguments)))
+      (delete_object_statement
+        name: (identifier))
+      (delete_object_statement
+        name: (identifier))))
+  (run_statement
+    procedure: (procedure_name)
+    (single_run
+      handle: (identifier))
+    (on_server_phrase
+      server: (identifier)))
+  (run_statement
+    procedure: (identifier)
+    (in_phrase
+      context: (identifier))
+    (arguments
+      (argument
+        name: (identifier))
+      (argument
+        name: (identifier))))
+  (delete_procedure_statement
+    handle: (identifier))
+  (run_statement
+    procedure: (procedure_name)
+    (singleton
+      handle: (identifier))
+    (on_server_phrase
+      server: (identifier)))
+  (run_statement
+    procedure: (identifier)
+    (in_phrase
+      context: (identifier))
+    (arguments
+      (argument
+        name: (identifier))
+      (argument
+        name: (identifier))))
+  (run_statement
+    procedure: (identifier)
+    (in_phrase
+      context: (identifier))
+    (arguments
+      (argument
+        name: (identifier))
+      (argument
+        name: (identifier))))
+  (delete_procedure_statement
+    handle: (identifier))
+  (run_statement
+    procedure: (library_member
+      library: (procedure_name)))
+  (run_statement
+    procedure: (value_expression
+      value: (identifier))
+    (persistent
+      handle: (identifier)))
+  (run_statement
+    procedure: (identifier)
+    (in_phrase
+      context: (identifier))
+    (asynchronous_phrase
+      event_procedure: (string_literal)
+      context: (this_procedure)))
+  (run_statement
+    procedure: (identifier)
+    (in_phrase
+      context: (identifier))
+    (no_error)))
+
+================================================================================
+RUN IN handle with multiline arguments
+================================================================================
+
+RUN CreateBufferHeader IN reportHandle
+  (bufferName, "Sales Order Header").
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (run_statement
+    procedure: (identifier)
+    (in_phrase
+      context: (identifier))
+    (arguments
+      (argument
+        name: (identifier))
+      (argument
+        name: (string_literal)))))
+
+================================================================================
+RUN with DATASET-HANDLE output and BUFFER handle argument
+================================================================================
+
+RUN RunReport (OUTPUT DATASET-HANDLE phReportResults).
+RUN buildBuffer (BUFFER ttReportOptions:HANDLE).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (run_statement
+    procedure: (identifier)
+    (arguments
+      (argument
+        name: (identifier))))
+  (run_statement
+    procedure: (identifier)
+    (arguments
+      (argument
+        name: (object_access
+          left: (identifier)
+          right: (identifier))))))
+
+================================================================================
+RUN with macro-concatenated argument identifier
+================================================================================
+
+RUN x (INPUT oid_{&QXO-TABLE}).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (run_statement
+    procedure: (identifier)
+    (arguments
+      (argument
+        name: (macro_concatenated_name)))))
+
+================================================================================
+RUN - BY-VALUE, APPEND and BIND parameter modifiers
+================================================================================
+
+RUN p (INPUT x BY-VALUE).
+RUN p (INPUT x APPEND).
+RUN p (INPUT x BIND).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (run_statement
+    procedure: (identifier)
+    (arguments
+      (argument
+        name: (identifier))))
+  (run_statement
+    procedure: (identifier)
+    (arguments
+      (argument
+        name: (identifier))))
+  (run_statement
+    procedure: (identifier)
+    (arguments
+      (argument
+        name: (identifier)))))
+
+================================================================================
+RUN - macro-concatenated procedure name
+================================================================================
+
+RUN proc{&SUF}.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (run_statement
+    procedure: (macro_concatenated_name)))
+
+================================================================================
+RUN - IN with an array element handle
+================================================================================
+
+RUN p IN hArr[1].
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (run_statement
+    procedure: (identifier)
+    (in_phrase
+      context: (array_access
+        array: (identifier)
+        index: (number_literal)))))
+
+================================================================================
+RUN - procedure path without an extension
+================================================================================
+
+RUN externe/ext-truc.
+RUN Erp\Model\Vente\ErpTrt PERSISTENT SET h.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (run_statement
+    procedure: (procedure_name))
+  (run_statement
+    procedure: (procedure_name)
+    (persistent
+      handle: (identifier))))

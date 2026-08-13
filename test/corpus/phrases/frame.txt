@@ -1,0 +1,211 @@
+================================================================================
+FRAME phrase
+================================================================================
+
+DISPLAY x WITH FRAME f NO-LABELS.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (display_statement
+    record: (identifier)
+    (frame_phrase
+      frame: (identifier)
+      (no_labels))))
+
+================================================================================
+FRAME phrase with ATTR-SPACE
+================================================================================
+
+FORM a COLON 20 WITH FRAME fA ROW 3 SIDE-LABELS ATTR-SPACE.
+FORM a COLON 20 WITH FRAME fA WITH ROW 3 SIDE-LABELS.
+FORM a COLON 20 WITH FRAME fA ROW 3 SIDE-LABEL ATTR-SPACE.
+FORM a COLON 25 WITH SIZE 79 BY 11 NO-LABEL THREE-D CENTERED.
+FORM a COLON 25 WITH SIZE 79 BY 11 NO-LABEL THREE-D CENTER.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (form_statement
+    (form_item
+      field: (identifier)
+      colon: (number_literal))
+    (frame_phrase
+      frame: (identifier)
+      row: (number_literal)
+      (side_labels)
+      (attr_space)))
+  (form_statement
+    (form_item
+      field: (identifier)
+      colon: (number_literal))
+    (frame_phrase
+      frame: (identifier)
+      row: (number_literal)
+      (side_labels)))
+  (form_statement
+    (form_item
+      field: (identifier)
+      colon: (number_literal))
+    (frame_phrase
+      frame: (identifier)
+      row: (number_literal)
+      (side_labels)
+      (attr_space)))
+  (form_statement
+    (form_item
+      field: (identifier)
+      colon: (number_literal))
+    (frame_phrase
+      (size_phrase
+        width: (number_literal)
+        height: (number_literal))
+      (no_label)
+      (three_d)
+      (centered)))
+  (form_statement
+    (form_item
+      field: (identifier)
+      colon: (number_literal))
+    (frame_phrase
+      (size_phrase
+        width: (number_literal)
+        height: (number_literal))
+      (no_label)
+      (three_d)
+      (centered))))
+
+================================================================================
+FRAME phrase with color attributes
+================================================================================
+
+DISPLAY x WITH DCOLOR 1 FGCOLOR 2 BGCOLOR wClrBg PFCOLOR wClrPf.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (display_statement
+    record: (identifier)
+    (frame_phrase
+      dcolor: (number_literal)
+      fgcolor: (number_literal)
+      bgcolor: (identifier)
+      pfcolor: (identifier))))
+
+================================================================================
+FRAME phrase with NO-ATTR-SPACE
+================================================================================
+
+DISPLAY x WITH FRAME f WIDTH 10 NO-BOX NO-ATTR-SPACE.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (display_statement
+    record: (identifier)
+    (frame_phrase
+      frame: (identifier)
+      width: (number_literal)
+      (no_box)
+      (no_attr_space))))
+
+================================================================================
+FRAME phrase with TITLE color options
+================================================================================
+
+DISPLAY x WITH TITLE DCOLOR wClrTit '[ Hello ]'.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (display_statement
+    record: (identifier)
+    (frame_phrase
+      title_dcolor: (identifier)
+      title: (string_literal))))
+
+================================================================================
+FRAME phrase with NO-UNDERLINE
+================================================================================
+
+DISPLAY x WITH NO-UNDERLINE NO-BOX.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (display_statement
+    record: (identifier)
+    (frame_phrase
+      (no_underline)
+      (no_box))))
+
+================================================================================
+FRAME phrase with SCROLLABLE, TOP-ONLY, NO-HELP
+================================================================================
+
+DISPLAY x WITH SCROLLABLE TOP-ONLY NO-HELP.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (display_statement
+    record: (identifier)
+    (frame_phrase
+      (scrollable)
+      (top_only)
+      (no_help))))
+
+================================================================================
+FRAME phrase with CANCEL-BUTTON and DEFAULT-BUTTON
+================================================================================
+
+DISPLAY x WITH CANCEL-BUTTON btnCancel DEFAULT-BUTTON btnOk.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (display_statement
+    record: (identifier)
+    (frame_phrase
+      cancel_button: (identifier)
+      default_button: (identifier))))
+
+================================================================================
+FRAME - NO-VALIDATE
+================================================================================
+
+DISPLAY x WITH FRAME f NO-VALIDATE.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (display_statement
+    record: (identifier)
+    (frame_phrase
+      frame: (identifier)
+      (no_validate))))
+
+================================================================================
+FRAME - COLOR phrase
+================================================================================
+
+DISPLAY x WITH FRAME f COLOR VALUE(5).
+DISPLAY x WITH FRAME f COLOR DISPLAY VALUE(5) PROMPT VALUE(3).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (display_statement
+    record: (identifier)
+    (frame_phrase
+      frame: (identifier)
+      color: (color_phrase
+        value: (number_literal))))
+  (display_statement
+    record: (identifier)
+    (frame_phrase
+      frame: (identifier)
+      color: (color_phrase
+        value: (number_literal))
+      prompt_color: (color_phrase
+        value: (number_literal)))))

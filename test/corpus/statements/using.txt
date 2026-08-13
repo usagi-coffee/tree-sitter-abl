@@ -1,0 +1,129 @@
+===============================================================================
+USING
+===============================================================================
+
+USING Progress.Collections.*.
+USING Acme.BusObjs.Customer.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (using_statement)
+  (using_statement))
+
+===============================================================================
+USING with multiple types
+===============================================================================
+
+USING Domains.Vacation.Vacation, Progress.Json.ObjectModel.JsonObject.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (using_statement))
+
+===============================================================================
+USING with different patterns
+===============================================================================
+
+USING Progress.Collections.*.
+USING Progress.Collections.List.
+USING System.Windows.Forms.*.
+USING Acme.BusObjs.*.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (using_statement)
+  (using_statement)
+  (using_statement)
+  (using_statement))
+
+===============================================================================
+USING - reference snippets and FROM options
+===============================================================================
+
+USING Acme.BusObjs.*.
+DEFINE VARIABLE CustObj AS CLASS Customer.
+DEFINE VARIABLE CustObj2 AS CLASS Acme.BusObjs.Customer.
+
+USING Acme.BusObjs.Customer.
+DEFINE VARIABLE CustObj AS CLASS Customer.
+DEFINE VARIABLE CustObj2 AS CLASS Acme.BusObjs.Customer.
+
+USING System.Windows.Forms.* FROM ASSEMBLY.
+DEFINE VARIABLE rControl AS CLASS Control.
+DEFINE VARIABLE rCollection AS CLASS Control+ControlCollection.
+
+USING Classes.Inventory.*.
+DEFINE VARIABLE clRef AS CLASS Shipping.
+clRef = NEW Shipping().
+
+USING System.Windows.Forms.*.
+USING System.Collections.Generic.List<Button>.
+USING System.Collections.ObjectModel.*.
+DEFINE VARIABLE ButtonList AS CLASS List<Button> NO-UNDO.
+DEFINE VARIABLE intColl AS CLASS Collection<INTEGER> NO-UNDO.
+
+USING Acme.BusObjs.* FROM PROPATH.
+
+-------------------------------------------------------------------------------
+
+(source_code
+  (using_statement)
+  (variable_definition
+    name: (identifier)
+    type: (identifier))
+  (variable_definition
+    name: (identifier)
+    type: (qualified_name
+      left: (identifier)
+      right: (identifier)
+      right: (identifier)))
+  (using_statement)
+  (variable_definition
+    name: (identifier)
+    type: (identifier))
+  (variable_definition
+    name: (identifier)
+    type: (qualified_name
+      left: (identifier)
+      right: (identifier)
+      right: (identifier)))
+  (using_statement
+    (from_clause))
+  (variable_definition
+    name: (identifier)
+    type: (identifier))
+  (variable_definition
+    name: (identifier)
+    type: (nested_type_name
+      left: (identifier)
+      right: (identifier)))
+  (using_statement)
+  (variable_definition
+    name: (identifier)
+    type: (identifier))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (new_expression
+      type: (identifier)
+      (arguments)))
+  (using_statement)
+  (using_statement)
+  (using_statement)
+  (variable_definition
+    name: (identifier)
+    type: (generic_type
+      (identifier)
+      (identifier))
+    (no_undo))
+  (variable_definition
+    name: (identifier)
+    type: (generic_type
+      (identifier)
+      (identifier))
+    (no_undo))
+  (using_statement
+    (from_clause)))

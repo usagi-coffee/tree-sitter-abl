@@ -1,0 +1,73 @@
+export default ({ kw }) => ({
+  form_statement: ($) => seq($.__form_prefix, $._terminator),
+
+  __form_prefix: ($) => seq(kw("FORM"), $.__form_body),
+  __form_body: ($) =>
+    choice(
+      seq(repeat1(alias($.__form_item, $.form_item)), repeat($.frame_phrase)),
+      repeat1($.frame_phrase),
+    ),
+
+  __form_item: ($) =>
+    prec.right(
+      choice(
+        seq(
+          alias(kw("MENU"), $.identifier),
+          optional(alias(kw("NO-LABEL"), $.no_label)),
+          optional(alias(kw("NO-LABELS"), $.no_labels)),
+          optional($._format_string),
+        ),
+        seq(
+          field("field", $._expression),
+          optional(seq(kw("COLON"), field("colon", $._expression))),
+          optional(seq(kw("LABEL"), optional(field("label", $.__form_label)))),
+          optional($.__form_validate_format_view_as_tail),
+        ),
+        seq(kw("SKIP"), optional(field("skip", $.__form_parenthesized_expression))),
+        seq(kw("SPACE"), optional(field("space", $.__form_parenthesized_expression))),
+      ),
+    ),
+  __form_parenthesized_expression: ($) => seq("(", $._expression, ")"),
+
+  __form_validate_format_view_as_tail: ($) =>
+    choice(
+      seq(
+        alias($.__form_validate_phrase, $.validate_phrase),
+        optional($.__form_format_view_as_tail),
+      ),
+      $.__form_format_view_as_tail,
+    ),
+  __form_format_view_as_tail: ($) =>
+    choice(
+      seq($._format_string, optional(alias($.__form_view_as, $.view_as_phrase))),
+      alias($.__form_view_as, $.view_as_phrase),
+    ),
+  __form_view_as: ($) =>
+    seq(
+      kw("VIEW-AS"),
+      choice(
+        field("widget", $.identifier),
+        seq(kw("RADIO-SET"), kw("RADIO-BUTTONS"), $.__form_radio_button_list),
+      ),
+    ),
+
+  __form_radio_button_list: ($) =>
+    seq($.__form_radio_button, repeat(seq(",", $.__form_radio_button))),
+  __form_radio_button: ($) =>
+    seq(field("label", $.string_literal), ",", field("value", $._expression)),
+  __form_validate_phrase: ($) =>
+    seq(
+      kw("VALIDATE", { offset: 4 }),
+      "(",
+      field("expression", $._expression),
+      repeat(seq(",", field("expression", $._expression))),
+      ")",
+    ),
+  __form_label: ($) =>
+    choice(
+      $.include_file_reference,
+      $.preprocessor_name,
+      $.string_literal,
+      $._identifier_or_qualified_name,
+    ),
+});

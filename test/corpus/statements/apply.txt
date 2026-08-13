@@ -1,0 +1,125 @@
+===============================================================================
+APPLY statement - basic
+===============================================================================
+
+APPLY "CHOOSE".
+APPLY "CHOOSE" TO order-but.
+APPLY LASTKEY.
+APPLY "ERROR".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (apply_statement
+    event: (string_literal))
+  (apply_statement
+    event: (string_literal)
+    to: (widget
+      handle: (identifier)))
+  (apply_statement
+    event: (identifier))
+  (apply_statement
+    event: (string_literal)))
+
+===============================================================================
+APPLY statement with different event types
+===============================================================================
+
+APPLY "CHOOSE" TO button1.
+APPLY LASTKEY TO fill-in.
+APPLY "U1" TO menu-item.
+APply "CLOSE" TO window.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (apply_statement
+    event: (string_literal)
+    to: (widget
+      handle: (identifier)))
+  (apply_statement
+    event: (identifier)
+    to: (widget))
+  (apply_statement
+    event: (string_literal)
+    to: (widget))
+  (apply_statement
+    event: (string_literal)
+    to: (widget)))
+
+===============================================================================
+APPLY statement with widget expressions
+===============================================================================
+
+APPLY "CHOOSE" TO Customer.Name.
+APPLY SELECT TO hButton.
+APPLY "CHOOSE" TO CURRENT-WINDOW.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (apply_statement
+    event: (string_literal)
+    to: (widget
+      handle: (qualified_name
+        left: (identifier)
+        right: (identifier))))
+  (apply_statement
+    event: (identifier)
+    to: (widget
+      handle: (identifier)))
+  (apply_statement
+    event: (string_literal)
+    to: (widget
+      system_handle: (system_handle))))
+
+===============================================================================
+APPLY statement with keycode and frame widget-phrase
+===============================================================================
+
+APPLY 13 TO browse-1.
+APPLY "CHOOSE" TO order-but IN FRAME x.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (apply_statement
+    event: (number_literal)
+    to: (widget
+      handle: (identifier)))
+  (apply_statement
+    event: (string_literal)
+    to: (widget
+      field: (identifier)
+      frame: (identifier))))
+
+===============================================================================
+APPLY statement with negative keycode and implicit target
+===============================================================================
+
+APPLY -2.
+APPLY "ERROR" TO THIS-PROCEDURE.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (apply_statement
+    event: (number_literal))
+  (apply_statement
+    event: (string_literal)
+    to: (widget
+      system_handle: (system_handle))))
+
+===============================================================================
+APPLY statement to named BROWSE widget
+===============================================================================
+
+APPLY "VALUE-CHANGED" TO BROWSE b1.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (apply_statement
+    event: (string_literal)
+    to: (widget
+      browse: (identifier))))

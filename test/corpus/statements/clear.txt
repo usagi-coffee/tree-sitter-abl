@@ -1,0 +1,39 @@
+================================================================================
+CLEAR statement
+================================================================================
+
+CLEAR.
+CLEAR FRAME ex.
+CLEAR FRAME ex NO-PAUSE.
+CLEAR ALL.
+CLEAR FRAME myframe ALL NO-PAUSE.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (clear_statement)
+  (clear_statement
+    frame: (identifier))
+  (clear_statement
+    frame: (identifier)
+    (no_pause))
+  (clear_statement
+    (all))
+  (clear_statement
+    frame: (identifier)
+    (all)
+    (no_pause)))
+
+================================================================================
+CLEAR - Reference snippet
+================================================================================
+
+CLEAR FRAME ex NO-PAUSE.
+
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (clear_statement
+    frame: (identifier)
+    (no_pause)))

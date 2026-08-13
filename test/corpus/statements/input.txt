@@ -1,0 +1,148 @@
+================================================================================
+INPUT
+================================================================================
+
+INPUT FROM VALUE(inPath).
+INPUT FROM TERMINAL NO-CONVERT.
+INPUT STREAM inStream FROM OS-DIR("dir") NO-ATTR-LIST LOB-DIR {&LOB} BINARY NO-ECHO MAP termcap UNBUFFERED CONVERT TARGET "utf-8" SOURCE "ibm850".
+INPUT STREAM-HANDLE hStream CLOSE.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (input_statement
+    value: (identifier))
+  (input_statement
+    (terminal)
+    (convert_phrase
+      (no_convert)))
+  (input_statement
+    stream: (identifier)
+    directory: (string_literal)
+    (no_attr_list)
+    (lob_dir_phrase
+      directory: (preprocessor_name
+        (identifier)))
+    (binary)
+    (no_echo)
+    map: (identifier)
+    (unbuffered)
+    (convert_phrase
+      target: (string_literal)
+      source: (string_literal)))
+  (input_statement
+    stream: (identifier)
+    (close)))
+
+================================================================================
+INPUT - Reference snippet
+================================================================================
+
+INPUT FROM VALUE(SEARCH("r-in.dat")).
+REPEAT:
+  PROMPT-FOR Customer.CustNum Customer.CreditLimit.
+  FIND Customer USING INPUT Customer.CustNum.
+  ASSIGN Customer.CreditLimit.
+END.
+INPUT CLOSE.
+
+INPUT FROM OS-DIR("c:\\mydir") NO-ATTR-LIST.
+INPUT FROM VALUE("file.txt") NO-ECHO.
+INPUT FROM TERMINAL.
+INPUT FROM VALUE(cPath) CONVERT SOURCE "ibm850" TARGET "utf-8".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (input_statement
+    value: (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (string_literal)))))
+  (repeat_statement
+    (body
+      (prompt_for_statement
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier))))
+      (find_statement
+        table: (identifier)
+        values: (input_expression
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier))))
+      (assign_statement
+        record: (qualified_name
+          left: (identifier)
+          right: (identifier)))))
+  (input_statement
+    (close))
+  (input_statement
+    directory: (string_literal)
+    (no_attr_list))
+  (input_statement
+    value: (string_literal)
+    (no_echo))
+  (input_statement
+    (terminal))
+  (input_statement
+    value: (identifier)
+    (convert_phrase
+      source: (string_literal)
+      target: (string_literal))))
+
+================================================================================
+INPUT - NO-MAP and NO-CONVERT
+================================================================================
+
+INPUT FROM "data.txt" NO-MAP NO-CONVERT.
+INPUT STREAM sIn FROM VALUE(cPath) ECHO.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (input_statement
+    file: (string_literal)
+    (no_map)
+    (convert_phrase
+      (no_convert)))
+  (input_statement
+    stream: (identifier)
+    value: (identifier)
+    (echo)))
+
+================================================================================
+INPUT - MAP with string and CONVERT SOURCE
+================================================================================
+
+INPUT FROM "data.txt" MAP "hp2/spanish" CONVERT SOURCE "ibm850".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (input_statement
+    file: (string_literal)
+    map: (string_literal)
+    (convert_phrase
+      source: (string_literal))))
+
+================================================================================
+INPUT FROM - opsys_file (unquoted path)
+================================================================================
+
+INPUT FROM /tmp/data.txt.
+INPUT FROM ./report.dat.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (input_statement
+    file: (opsys_file))
+  (input_statement
+    file: (opsys_file)))

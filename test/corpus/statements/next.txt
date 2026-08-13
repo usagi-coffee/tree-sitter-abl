@@ -1,0 +1,73 @@
+================================================================================
+NEXT
+================================================================================
+
+NEXT.
+NEXT outer_loop.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (next_statement)
+  (next_statement
+    label: (identifier)))
+
+================================================================================
+NEXT - Reference snippet
+================================================================================
+
+PROMPT-FOR Customer.SalesRep LABEL "Enter salesman initials"
+  WITH SIDE-LABELS CENTERED.
+FOR EACH Customer:
+  IF Customer.SalesRep <> INPUT Customer.SalesRep THEN NEXT.
+  DISPLAY Customer.CustNum Customer.Name Customer.City Customer.State
+    WITH CENTERED USE-TEXT.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (prompt_for_statement
+    (field
+      field: (qualified_name
+        left: (identifier)
+        right: (identifier))
+      (format_phrase
+        label: (string_literal)))
+    (frame_phrase
+      (side_labels)
+      (centered)))
+  (for_statement
+    (record_phrase
+      record: (identifier))
+    (body
+      (if_statement
+        (binary_expression
+          (qualified_name
+            left: (identifier)
+            right: (identifier))
+          (input_expression
+            field: (qualified_name
+              left: (identifier)
+              right: (identifier))))
+        then: (next_statement))
+      (display_statement
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (frame_phrase
+          (centered)
+          (use_text))))))

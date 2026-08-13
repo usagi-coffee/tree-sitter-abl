@@ -1,0 +1,64 @@
+================================================================================
+SYSTEM-DIALOG
+================================================================================
+
+SYSTEM-DIALOG COLOR 7 UPDATE colorSel IN WINDOW winH.
+SYSTEM-DIALOG FONT fontId MAX-SIZE 14 MIN-SIZE 8 UPDATE fontSel.
+SYSTEM-DIALOG FONT fontId ANSI-ONLY FIXED-ONLY IN WINDOW winH.
+SYSTEM-DIALOG GET-FILE cFile FILTERS "Images" "*.png" INITIAL-FILTER "Images" MUST-EXIST TITLE "Pick".
+SYSTEM-DIALOG GET-FILE cOut SAVE-AS ASK-OVERWRITE DEFAULT-EXTENSION "txt" INITIAL-DIR "C:\\out" RETURN-TO-START-DIR USE-FILENAME.
+SYSTEM-DIALOG GET-DIR cDir INITIAL-DIR "C:\\tmp" TITLE "Pick Dir".
+SYSTEM-DIALOG PRINTER-SETUP NUM-COPIES 2 LANDSCAPE.
+SYSTEM-DIALOG PRINTER-SETUP PORTRAIT UPDATE pset IN WINDOW winH.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (system_dialog_color_statement
+    color: (number_literal)
+    (update_phrase
+      update: (identifier))
+    (in_window_phrase
+      window: (identifier)))
+  (system_dialog_font_statement
+    font: (identifier)
+    max_size: (number_literal)
+    min_size: (number_literal)
+    (update_phrase
+      update: (identifier)))
+  (system_dialog_font_statement
+    font: (identifier)
+    (ansi_only)
+    (fixed_only)
+    (in_window_phrase
+      window: (identifier)))
+  (system_dialog_get_file_statement
+    variable: (identifier)
+    (filters_phrase
+      name: (string_literal)
+      spec: (string_literal)
+      (initial_filter_phrase
+        initial: (string_literal)))
+    (must_exist)
+    title: (string_literal))
+  (system_dialog_get_file_statement
+    variable: (identifier)
+    (save_as)
+    (ask_overwrite)
+    extension: (string_literal)
+    initial_dir: (string_literal)
+    (return_to_start_dir)
+    (use_filename))
+  (system_dialog_get_dir_statement
+    variable: (identifier)
+    initial_dir: (string_literal)
+    title: (string_literal))
+  (system_dialog_printer_setup_statement
+    copies: (number_literal)
+    (landscape))
+  (system_dialog_printer_setup_statement
+    (portrait)
+    (update_phrase
+      update: (identifier))
+    (in_window_phrase
+      window: (identifier))))

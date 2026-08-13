@@ -1,0 +1,307 @@
+================================================================================
+OPEN QUERY statement
+================================================================================
+
+OPEN QUERY qCust FOR EACH Customer NO-LOCK.
+OPEN QUERY qCust FOR EACH Customer NO-LOCK BY Customer.Name.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (open_query_statement
+    query: (identifier)
+    (record_phrase
+      record: (identifier)
+      lock: (no_lock)))
+  (open_query_statement
+    query: (identifier)
+    (record_phrase
+      record: (identifier)
+      lock: (no_lock))
+    (by_phrase
+      by: (qualified_name
+        left: (identifier)
+        right: (identifier)))))
+
+================================================================================
+OPEN QUERY with DESC short form
+================================================================================
+
+OPEN QUERY q1 FOR EACH zr BY zr_procent DESC BY zr_wyd DESC.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (open_query_statement
+    query: (identifier)
+    (record_phrase
+      record: (identifier))
+    (by_phrase
+      by: (identifier))
+    (by_phrase
+      by: (identifier))))
+
+================================================================================
+OPEN QUERY with lock before USE-INDEX
+================================================================================
+
+OPEN QUERY q1 FOR EACH tr_hist WHERE tr_type = "RCT-TR" NO-LOCK USE-INDEX tr_nbr_eff BY tr_trnbr DESC.
+OPEN QUERY q1 FOR EACH tr_hist NO-LOCK WHERE tr_type = "RCT-TR" BY tr_trnbr.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (open_query_statement
+    query: (identifier)
+    (record_phrase
+      record: (identifier)
+      where: (binary_expression
+        (identifier)
+        (string_literal))
+      lock: (no_lock)
+      index: (identifier))
+    (by_phrase
+      by: (identifier)))
+  (open_query_statement
+    query: (identifier)
+    (record_phrase
+      record: (identifier)
+      lock: (no_lock)
+      where: (binary_expression
+        (identifier)
+        (string_literal)))
+    (by_phrase
+      by: (identifier))))
+
+================================================================================
+OPEN QUERY - Reference snippet
+================================================================================
+
+DEFINE QUERY q-order FOR Customer, Order, OrderLine, Item.
+OPEN QUERY q-order FOR EACH Customer,
+  EACH Order OF Customer,
+  EACH OrderLine OF Order,
+  EACH Item OF OrderLine NO-LOCK.
+GET FIRST q-order.
+DO WHILE AVAILABLE Customer:
+  DISPLAY Customer.CustNum Customer.Name SKIP
+    Customer.Phone SKIP
+    Order.OrderNum Order.OrderDate SKIP
+    OrderLine.LineNum OrderLine.Price OrderLine.Qty SKIP
+    Item.ItemNum Item.ItemName SKIP
+    Item.CatDesc VIEW-AS EDITOR SIZE 50 BY 2 SCROLLBAR-VERTICAL
+    WITH FRAME ord-info CENTERED SIDE-LABELS TITLE "Order Information".
+  ASSIGN Item.CatDesc:READ-ONLY IN FRAME ord-info = TRUE
+    Item.CatDesc:SENSITIVE IN FRAME ord-info = TRUE.
+  PAUSE.
+  GET NEXT q-order.
+END.
+
+OPEN QUERY qCust FOR EACH Customer BREAK BY Customer.State NO-LOCK.
+OPEN QUERY qCust FOR EACH Customer NO-LOCK INDEXED-REPOSITION MAX-ROWS 10.
+OPEN QUERY qCust FOR EACH Customer NO-LOCK MAX-ROWS 25.
+OPEN QUERY qCust PRESELECT EACH Customer NO-LOCK.
+OPEN QUERY qCust FOR EACH Customer BY COLLATE(Customer.Name, "CASE-INSENSITIVE") DESCENDING.
+OPEN QUERY qCust FOR EACH Customer WHERE Customer.CustNum > 0 USE-INDEX CustNum SHARE-LOCK.
+OPEN QUERY qCust FOR EACH Customer EXCLUSIVE-LOCK.
+OPEN QUERY qCust FOR EACH Customer, FIRST Order OF Customer NO-LOCK.
+OPEN QUERY qCust FOR EACH Customer QUERY-TUNING(LOOKAHEAD CACHE-SIZE 5 SEPARATE-CONNECTION NO-SEPARATE-CONNECTION DEBUG SQL NO-DEBUG NO-JOIN-BY-SQLDB NO-LOOKAHEAD NO-INDEX-HINT).
+OPEN QUERY qCust FOR EACH Customer QUERY-TUNING(JOIN-BY-SQLDB NO-BIND-WHERE) NO-LOCK INDEXED-REPOSITION MAX-ROWS 100.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (query_definition
+    name: (identifier)
+    (query_table_list
+      table: (identifier)
+      table: (identifier)
+      table: (identifier)
+      table: (identifier)))
+  (open_query_statement
+    query: (identifier)
+    (record_phrase
+      record: (identifier))
+    (record_phrase
+      record: (identifier)
+      of: (identifier))
+    (record_phrase
+      record: (identifier)
+      of: (identifier))
+    (record_phrase
+      record: (identifier)
+      of: (identifier)
+      lock: (no_lock)))
+  (get_statement
+    query: (identifier))
+  (do_statement
+    condition: (available_expression
+      record: (identifier))
+    (body
+      (display_statement
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (field
+          field: (qualified_name
+            left: (identifier)
+            right: (identifier)))
+        (format_phrase
+          (editor_phrase
+            width: (number_literal)
+            height: (number_literal)))
+        (frame_phrase
+          frame: (identifier)
+          (centered)
+          (side_labels)
+          title: (string_literal)))
+      (assign_statement
+        (assign_phrase
+          (assign_pair
+            left: (widget_qualified_name
+              target: (object_access
+                left: (qualified_name
+                  left: (identifier)
+                  right: (identifier))
+                right: (identifier))
+              widget: (identifier))
+            right: (boolean_literal))
+          (assign_pair
+            left: (widget_qualified_name
+              target: (object_access
+                left: (qualified_name
+                  left: (identifier)
+                  right: (identifier))
+                right: (identifier))
+              widget: (identifier))
+            right: (boolean_literal))))
+      (pause_statement)
+      (get_statement
+        query: (identifier))))
+  (open_query_statement
+    query: (identifier)
+    (record_phrase
+      record: (identifier))
+    (break)
+    (by_phrase
+      by: (qualified_name
+        left: (identifier)
+        right: (identifier)))
+    lock: (no_lock))
+  (open_query_statement
+    query: (identifier)
+    (record_phrase
+      record: (identifier)
+      lock: (no_lock))
+    (indexed_reposition)
+    max_rows: (number_literal))
+  (open_query_statement
+    query: (identifier)
+    (record_phrase
+      record: (identifier)
+      lock: (no_lock))
+    max_rows: (number_literal))
+  (open_query_statement
+    query: (identifier)
+    (record_phrase
+      record: (identifier)
+      lock: (no_lock)))
+  (open_query_statement
+    query: (identifier)
+    (record_phrase
+      record: (identifier))
+    (by_phrase
+      by: (function_call
+        function: (identifier)
+        (arguments
+          (argument
+            name: (qualified_name
+              left: (identifier)
+              right: (identifier)))
+          (argument
+            name: (string_literal))))))
+  (open_query_statement
+    query: (identifier)
+    (record_phrase
+      record: (identifier)
+      where: (binary_expression
+        (qualified_name
+          left: (identifier)
+          right: (identifier))
+        (number_literal))
+      index: (identifier)
+      lock: (share_lock)))
+  (open_query_statement
+    query: (identifier)
+    (record_phrase
+      record: (identifier)
+      lock: (exclusive_lock)))
+  (open_query_statement
+    query: (identifier)
+    (record_phrase
+      record: (identifier))
+    (record_phrase
+      record: (identifier)
+      of: (identifier)
+      lock: (no_lock)))
+  (open_query_statement
+    query: (identifier)
+    (record_phrase
+      record: (identifier))
+    (query_tuning_phrase
+      (lookahead)
+      cache_size: (number_literal)
+      (separate_connection)
+      (no_separate_connection)
+      (sql)
+      (no_debug)
+      (no_join_by_sqldb)
+      (no_lookahead)
+      (no_index_hint)))
+  (open_query_statement
+    query: (identifier)
+    (record_phrase
+      record: (identifier))
+    (query_tuning_phrase
+      (join_by_sqldb)
+      (no_bind_where))
+    lock: (no_lock)
+    (indexed_reposition)
+    max_rows: (number_literal)))

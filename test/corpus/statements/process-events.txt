@@ -1,0 +1,70 @@
+================================================================================
+PROCESS EVENTS statement
+================================================================================
+
+PROCESS EVENTS.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (process_events_statement))
+
+================================================================================
+PROCESS EVENTS - reference snippet
+================================================================================
+
+DEFINE VARIABLE ix AS INTEGER NO-UNDO.
+DEFINE VARIABLE stop-sel AS LOGICAL NO-UNDO.
+DEFINE BUTTON stop-it LABEL "STOP".
+DISPLAY stop-it.
+ON CHOOSE OF stop-it
+stop-sel = TRUE.
+
+ENABLE stop-it.
+DO ix = 1 TO 1000:
+  DISPLAY ix VIEW-AS TEXT.
+  PROCESS EVENTS.
+  IF stop-sel THEN LEAVE.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (button_definition
+    name: (identifier)
+    label: (string_literal))
+  (display_statement
+    record: (identifier))
+  (on_statement
+    event: (identifier)
+    (of_phrase
+      widget: (widget_phrase
+        handle: (identifier)))
+    (assignment_statement
+      left: (identifier)
+      operator: (assignment_operator)
+      right: (boolean_literal)))
+  (enable_statement
+    (enable_item
+      field: (identifier)))
+  (do_statement
+    variable: (identifier)
+    start: (number_literal)
+    end: (number_literal)
+    (body
+      (display_statement
+        (field
+          field: (identifier))
+        (format_phrase))
+      (process_events_statement)
+      (if_statement
+        (identifier)
+        then: (leave_statement)))))

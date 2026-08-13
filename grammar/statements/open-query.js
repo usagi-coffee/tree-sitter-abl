@@ -1,0 +1,73 @@
+export default ({ kw }) => ({
+  open_query_statement: ($) => seq($.__open_query_prefix, $._terminator),
+
+  __open_query_prefix: ($) =>
+    seq(
+      kw("OPEN"),
+      kw("QUERY"),
+      field("query", $.identifier),
+      $.__open_query_records,
+      optional($.query_tuning_phrase),
+      optional($.__open_query_tail_after_tuning),
+    ),
+  __open_query_tail_after_tuning: ($) =>
+    choice(
+      seq(alias(kw("BREAK"), $.break), optional($.__open_query_tail_after_break)),
+      $.__open_query_tail_after_break,
+    ),
+  __open_query_tail_after_break: ($) =>
+    choice(
+      seq(
+        repeat1(alias($.__open_query_by_phrase, $.by_phrase)),
+        optional($.__open_query_tail_after_by),
+      ),
+      $.__open_query_tail_after_by,
+    ),
+  __open_query_tail_after_by: ($) =>
+    choice(
+      seq(field("lock", $._lock_option), optional($.__open_query_reposition_tail)),
+      $.__open_query_reposition_tail,
+    ),
+  __open_query_reposition_tail: ($) =>
+    choice(
+      seq(
+        alias(kw("INDEXED-REPOSITION"), $.indexed_reposition),
+        optional($.__open_query_max_rows_option),
+      ),
+      $.__open_query_max_rows_option,
+    ),
+  __open_query_max_rows_option: ($) => seq(kw("MAX-ROWS"), field("max_rows", $._expression)),
+  __open_query_records: ($) =>
+    seq(
+      choice(kw("FOR"), kw("PRESELECT")),
+      kw("EACH"),
+      alias($.__open_query_record_phrase, $.record_phrase),
+      repeat(seq(",", $.__open_query_join_record)),
+    ),
+  __open_query_join_record: ($) =>
+    seq(
+      choice(kw("EACH"), kw("FIRST"), kw("LAST")),
+      alias($.__open_query_record_phrase, $.record_phrase),
+    ),
+
+  __open_query_record_phrase: ($) =>
+    prec.right(
+      seq(
+        field("record", $._identifier_or_qualified_name),
+        repeat(
+          choice(
+            seq(kw("OF"), field("of", $._identifier_or_qualified_name)),
+            seq(kw("WHERE"), field("where", $._expression)),
+            seq(kw("USE-INDEX"), field("index", $.identifier)),
+            field("lock", $._lock_option),
+          ),
+        ),
+      ),
+    ),
+  __open_query_by_phrase: ($) =>
+    seq(
+      kw("BY"),
+      field("by", $._expression),
+      optional(field("sort_order", kw("DESCENDING", { offset: 4 }))),
+    ),
+});

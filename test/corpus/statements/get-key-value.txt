@@ -1,0 +1,97 @@
+================================================================================
+GET-KEY-VALUE
+================================================================================
+
+GET-KEY-VALUE SECTION "general" KEY "theme" VALUE cTheme.
+GET-KEY-VALUE SECTION cSection KEY cKey VALUE cValue.
+GET-KEY-VALUE SECTION "startup" DEFAULT.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (get_key_value_statement
+    section: (string_literal)
+    key: (string_literal)
+    value: (identifier))
+  (get_key_value_statement
+    section: (identifier)
+    key: (identifier)
+    value: (identifier))
+  (get_key_value_statement
+    section: (string_literal)))
+
+================================================================================
+GET-KEY-VALUE - VALUE expressions
+================================================================================
+
+GET-KEY-VALUE SECTION VALUE(cSection) KEY VALUE(cKey) VALUE cValue.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (get_key_value_statement
+    section: (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (identifier))))
+    key: (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (identifier))))
+    value: (identifier)))
+
+================================================================================
+GET-KEY-VALUE - Reference snippets
+================================================================================
+
+GET-KEY-VALUE SECTION "MYSECTION" KEY "MYKEY" VALUE MYVARIABLE.
+GET-KEY-VALUE SECTION "" KEY "MYKEY" VALUE MYVARIABLE.
+GET-KEY-VALUE SECTION "MYSECTION" KEY "" VALUE MYVARIABLE.
+GET-KEY-VALUE SECTION "MYSECTION" KEY "?" VALUE MYVARIABLE.
+GET-KEY-VALUE SECTION "" KEY "" VALUE MYVARIABLE.
+GET-KEY-VALUE SECTION "" KEY "?" VALUE MYVARIABLE.
+GET-KEY-VALUE SECTION "?" KEY "" VALUE MYVARIABLE.
+GET-KEY-VALUE SECTION "?" KEY "?" VALUE MYVARIABLE.
+GET-KEY-VALUE SECTION "MYAPP" KEY DEFAULT VALUE MYVARIABLE.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (get_key_value_statement
+    section: (string_literal)
+    key: (string_literal)
+    value: (identifier))
+  (get_key_value_statement
+    section: (string_literal)
+    key: (string_literal)
+    value: (identifier))
+  (get_key_value_statement
+    section: (string_literal)
+    key: (string_literal)
+    value: (identifier))
+  (get_key_value_statement
+    section: (string_literal)
+    key: (string_literal)
+    value: (identifier))
+  (get_key_value_statement
+    section: (string_literal)
+    key: (string_literal)
+    value: (identifier))
+  (get_key_value_statement
+    section: (string_literal)
+    key: (string_literal)
+    value: (identifier))
+  (get_key_value_statement
+    section: (string_literal)
+    key: (string_literal)
+    value: (identifier))
+  (get_key_value_statement
+    section: (string_literal)
+    key: (string_literal)
+    value: (identifier))
+  (get_key_value_statement
+    section: (string_literal)
+    key: (identifier)
+    value: (identifier)))

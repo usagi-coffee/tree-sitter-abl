@@ -1,0 +1,145 @@
+================================================================================
+CASE
+================================================================================
+
+CASE status:
+  WHEN "A" THEN DO:
+    PUT UNFORMATTED "A" SKIP.
+  END.
+  WHEN "B" THEN PUT UNFORMATTED "B" SKIP.
+  OTHERWISE PUT UNFORMATTED "Z" SKIP.
+END CASE.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (case_statement
+    (identifier)
+    (case_when_phrase
+      condition: (string_literal)
+      (do_statement
+        (body
+          (put_statement
+            (unformatted)
+            value: (string_literal)
+            (skip)))))
+    (case_when_phrase
+      condition: (string_literal)
+      (put_statement
+        (unformatted)
+        value: (string_literal)
+        (skip)))
+    (case_otherwise_phrase
+      (put_statement
+        (unformatted)
+        value: (string_literal)
+        (skip)))))
+
+================================================================================
+CASE END
+================================================================================
+
+CASE user_role:
+  WHEN "ADMIN" THEN access_level = 3.
+  OTHERWISE access_level = 0.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (case_statement
+    (identifier)
+    (case_when_phrase
+      condition: (string_literal)
+      (assignment_statement
+        left: (identifier)
+        operator: (assignment_operator)
+        right: (number_literal)))
+    (case_otherwise_phrase
+      (assignment_statement
+        left: (identifier)
+        operator: (assignment_operator)
+        right: (number_literal)))))
+
+================================================================================
+CASE - Reference snippet and OR WHEN
+================================================================================
+
+DEFINE VARIABLE pay-stat AS INTEGER NO-UNDO INITIAL 1.
+CASE pay-stat:
+  WHEN 1 THEN MESSAGE "This account is unpaid.".
+  WHEN 2 OR WHEN 3 THEN DO:
+    MESSAGE "Paid.".
+  END.
+END CASE.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo)
+    initial: (number_literal))
+  (case_statement
+    (identifier)
+    (case_when_phrase
+      condition: (number_literal)
+      (message_statement
+        (string_literal)))
+    (case_when_phrase
+      condition: (number_literal)
+      condition: (number_literal)
+      (do_statement
+        (body
+          (message_statement
+            (string_literal)))))))
+
+================================================================================
+CASE with expression and no OTHERWISE
+================================================================================
+
+CASE Order.Status:
+  WHEN "OPEN" THEN RUN OpenOrder.
+  WHEN "HOLD" THEN RUN HoldOrder.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (case_statement
+    (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (case_when_phrase
+      condition: (string_literal)
+      (run_statement
+        procedure: (identifier)))
+    (case_when_phrase
+      condition: (string_literal)
+      (run_statement
+        procedure: (identifier)))))
+
+================================================================================
+CASE - include reference in the body
+================================================================================
+
+CASE x:
+  {inc/foo.i}
+  WHEN 1 THEN y = 1.
+END CASE.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (case_statement
+    (identifier)
+    (include_file_reference
+      file: (include_file_path
+        (identifier)))
+    (case_when_phrase
+      condition: (number_literal)
+      (assignment_statement
+        left: (identifier)
+        operator: (assignment_operator)
+        right: (number_literal)))))

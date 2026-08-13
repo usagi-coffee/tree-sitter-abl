@@ -1,0 +1,65 @@
+================================================================================
+VALUE ASSIGNMENTS
+================================================================================
+
+CURRENT-LANGUAGE = "en".
+CURRENT-VALUE(seq1, "db", 1) = 2.
+DYNAMIC-CURRENT-VALUE("seq", "db", 1) = 2.
+DYNAMIC-PROPERTY(hObj, "Prop") = 5 NO-ERROR.
+FRAME-VALUE = "x" NO-ERROR.
+ENTRY(1, "a,b", ",") = "c".
+LENGTH(name) = 5.
+RAW(field1, 2, 3) = "x".
+SUBSTRING("abc", 2, 1) = "d" NO-ERROR.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (value_assignment_statement
+    type: (identifier)
+    value: (string_literal))
+  (value_assignment_statement
+    type: (identifier)
+    sequence: (identifier)
+    database: (string_literal)
+    tenant: (number_literal)
+    value: (number_literal))
+  (value_assignment_statement
+    type: (identifier)
+    sequence: (string_literal)
+    database: (string_literal)
+    tenant: (number_literal)
+    value: (number_literal))
+  (value_assignment_statement
+    type: (identifier)
+    object: (identifier)
+    property: (string_literal)
+    value: (number_literal)
+    (no_error))
+  (value_assignment_statement
+    type: (identifier)
+    value: (string_literal)
+    (no_error))
+  (value_assignment_statement
+    type: (identifier)
+    element: (number_literal)
+    list: (string_literal)
+    delimiter: (string_literal)
+    value: (string_literal))
+  (value_assignment_statement
+    type: (identifier)
+    value: (identifier)
+    length: (number_literal))
+  (value_assignment_statement
+    type: (identifier)
+    field: (identifier)
+    position: (number_literal)
+    length: (number_literal)
+    value: (string_literal))
+  (value_assignment_statement
+    type: (identifier)
+    string: (string_literal)
+    position: (number_literal)
+    length: (number_literal)
+    value: (string_literal)
+    (no_error)))

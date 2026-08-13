@@ -1,0 +1,30 @@
+================================================================================
+VIEW-AS RADIO-SET
+================================================================================
+
+DEFINE VARIABLE v AS LOGICAL VIEW-AS RADIO-SET RADIO-BUTTONS "A", 1.
+DEFINE VARIABLE w AS INTEGER VIEW-AS RADIO-SET HORIZONTAL EXPAND SIZE 30 BY 3 RADIO-BUTTONS "A", 1, "B", 2 TOOLTIP "Choose".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (view_as_phrase
+      (radio_set_phrase
+        label: (string_literal)
+        value: (number_literal))))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (view_as_phrase
+      (radio_set_phrase
+        (size_phrase
+          width: (number_literal)
+          height: (number_literal))
+        label: (string_literal)
+        value: (number_literal)
+        label: (string_literal)
+        value: (number_literal)
+        tooltip: (string_literal)))))

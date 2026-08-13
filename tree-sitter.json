@@ -1,0 +1,47 @@
+{
+  "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/config.schema.json",
+  "grammars": [
+    {
+      "name": "abl",
+      "camelcase": "ABL",
+      "title": "OpenEdge ABL",
+      "scope": "source.abl",
+      "file-types": ["cls", "p", "i", "w"],
+      "highlights": "queries/highlights.scm",
+      "injection-regex": "^abl$",
+      "class-name": "TreeSitterAbl"
+    }
+  ],
+  "metadata": {
+    "version": "0.0.52",
+    "license": "MIT",
+    "description": "OpenEdge ABL grammar for tree-sitter",
+    "authors": [
+      {
+        "name": "Kamil Jakubus"
+      },
+      {
+        "name": "Jason Chrosrova"
+      },
+      {
+        "name": "Eglė Kazbaraitė"
+      },
+      {
+        "name": "Diego J. Coppari"
+      }
+    ],
+    "links": {
+      "repository": "https://github.com/usagi-coffee/tree-sitter-abl"
+    }
+  },
+  "bindings": {
+    "c": true,
+    "go": true,
+    "java": false,
+    "node": true,
+    "python": true,
+    "rust": true,
+    "swift": true,
+    "zig": false
+  }
+}

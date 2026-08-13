@@ -1,0 +1,257 @@
+================================================================================
+DATASET DEFINITION - Basic Syntax
+================================================================================
+
+DEFINE DATASET dsCustomer FOR ttCustomer.
+DEF DATASET dsOrder FOR ttHeader, ttLine.
+DEFINE DATASET dsEmpty.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (dataset_definition
+    name: (identifier)
+    table: (identifier))
+  (dataset_definition
+    name: (identifier)
+    table: (identifier)
+    table: (identifier))
+  (dataset_definition
+    name: (identifier)))
+
+================================================================================
+DATASET DEFINITION - Multiple Tables
+================================================================================
+
+DEFINE DATASET dsMulti FOR ttCustomer, ttOrder, ttOrderLine.
+DEF DATASET dsThree FOR ttHeader, ttDetail, ttTotals.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (dataset_definition
+    name: (identifier)
+    table: (identifier)
+    table: (identifier)
+    table: (identifier))
+  (dataset_definition
+    name: (identifier)
+    table: (identifier)
+    table: (identifier)
+    table: (identifier)))
+
+================================================================================
+DATASET DEFINITION - Single Table
+================================================================================
+
+DEFINE DATASET dsSingle FOR ttData.
+DEF DATASET dsOne FOR ttTable.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (dataset_definition
+    name: (identifier)
+    table: (identifier))
+  (dataset_definition
+    name: (identifier)
+    table: (identifier)))
+
+================================================================================
+DATASET DEFINITION - Four Tables
+================================================================================
+
+DEFINE DATASET dsFull FOR ttHeader, ttDetail, ttTax, ttLine.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (dataset_definition
+    name: (identifier)
+    table: (identifier)
+    table: (identifier)
+    table: (identifier)
+    table: (identifier)))
+
+================================================================================
+DATASET DEFINITION - No Tables
+================================================================================
+
+DEFINE DATASET dsNoTables.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (dataset_definition
+    name: (identifier)))
+
+================================================================================
+DATASET DEFINITION - Short Form
+================================================================================
+
+DEF DATASET d FOR t.
+DEF DATASET ds FOR tt.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (dataset_definition
+    name: (identifier)
+    table: (identifier))
+  (dataset_definition
+    name: (identifier)
+    table: (identifier)))
+
+================================================================================
+DATASET DEFINITION - Reference options
+================================================================================
+
+DEFINE NEW SHARED DATASET dsShared FOR ttCustomer.
+DEFINE SHARED DATASET dsUse FOR ttCustomer.
+DEFINE PRIVATE STATIC DATASET dsPrivStatic FOR ttCustomer.
+DEFINE PROTECTED DATASET dsProt FOR ttCustomer.
+DEFINE SERIALIZABLE DATASET dsSer FOR ttCustomer.
+DEFINE NON-SERIALIZABLE DATASET dsNonSer FOR ttCustomer.
+DEFINE DATASET dsRef REFERENCE-ONLY FOR ttCustomer.
+DEFINE DATASET dsNs NAMESPACE-URI "http://example.com" NAMESPACE-PREFIX "ex" FOR ttCustomer.
+DEFINE DATASET dsXml XML-NODE-NAME "cust" SERIALIZE-NAME "custNode" XML-NODE-TYPE "HIDDEN" SERIALIZE-HIDDEN FOR ttCustomer.
+DEFINE DATASET dsRel FOR ttParent, ttChild DATA-RELATION FOR ttParent, ttChild RELATION-FIELDS (parentId, childId).
+DEFINE DATASET dsRelNested FOR ttParent, ttChild DATA-RELATION FOR ttParent, ttChild RELATION-FIELDS (parentId, childId) NESTED FOREIGN-KEY-HIDDEN.
+DEFINE DATASET dsRelRepos FOR ttParent, ttChild DATA-RELATION FOR ttParent, ttChild RELATION-FIELDS (parentId, childId) REPOSITION.
+DEFINE DATASET dsRelInactive FOR ttParent, ttChild DATA-RELATION rel1 FOR ttParent, ttChild RELATION-FIELDS (parentId, childId) NOT-ACTIVE.
+DEFINE DATASET dsRelRec FOR ttParent, ttChild DATA-RELATION FOR ttParent, ttChild RELATION-FIELDS (parentId, childId) RECURSIVE.
+DEFINE DATASET dsPid FOR ttParent, ttChild PARENT-ID-RELATION FOR ttParent, ttChild PARENT-ID-FIELD childRecid.
+DEFINE DATASET dsPidFields FOR ttParent, ttChild PARENT-ID-RELATION FOR ttParent, ttChild PARENT-ID-FIELD childRecid PARENT-FIELDS-BEFORE (parentName) PARENT-FIELDS-AFTER (parentNote).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (dataset_definition
+    (new_modifier)
+    (scope_modifier)
+    name: (identifier)
+    table: (identifier))
+  (dataset_definition
+    (scope_modifier)
+    name: (identifier)
+    table: (identifier))
+  (dataset_definition
+    (access_modifier)
+    (static_modifier)
+    name: (identifier)
+    table: (identifier))
+  (dataset_definition
+    (access_modifier)
+    name: (identifier)
+    table: (identifier))
+  (dataset_definition
+    (serialization_modifier)
+    name: (identifier)
+    table: (identifier))
+  (dataset_definition
+    (serialization_modifier)
+    name: (identifier)
+    table: (identifier))
+  (dataset_definition
+    name: (identifier)
+    (reference_only)
+    table: (identifier))
+  (dataset_definition
+    name: (identifier)
+    namespace_uri: (string_literal)
+    namespace_prefix: (string_literal)
+    table: (identifier))
+  (dataset_definition
+    name: (identifier)
+    xml_node_name: (string_literal)
+    serialize_name: (string_literal)
+    xml_node_type: (string_literal)
+    (serialize_hidden)
+    table: (identifier))
+  (dataset_definition
+    name: (identifier)
+    table: (identifier)
+    table: (identifier)
+    (data_relation
+      parent_buffer: (identifier)
+      child_buffer: (identifier)
+      parent_field: (identifier)
+      child_field: (identifier)))
+  (dataset_definition
+    name: (identifier)
+    table: (identifier)
+    table: (identifier)
+    (data_relation
+      parent_buffer: (identifier)
+      child_buffer: (identifier)
+      parent_field: (identifier)
+      child_field: (identifier)
+      (nested)
+      (foreign_key_hidden)))
+  (dataset_definition
+    name: (identifier)
+    table: (identifier)
+    table: (identifier)
+    (data_relation
+      parent_buffer: (identifier)
+      child_buffer: (identifier)
+      parent_field: (identifier)
+      child_field: (identifier)
+      (reposition)))
+  (dataset_definition
+    name: (identifier)
+    table: (identifier)
+    table: (identifier)
+    (data_relation
+      relation_name: (identifier)
+      parent_buffer: (identifier)
+      child_buffer: (identifier)
+      parent_field: (identifier)
+      child_field: (identifier)
+      (not_active)))
+  (dataset_definition
+    name: (identifier)
+    table: (identifier)
+    table: (identifier)
+    (data_relation
+      parent_buffer: (identifier)
+      child_buffer: (identifier)
+      parent_field: (identifier)
+      child_field: (identifier)
+      (recursive)))
+  (dataset_definition
+    name: (identifier)
+    table: (identifier)
+    table: (identifier)
+    (parent_id_relation
+      parent_buffer: (identifier)
+      child_buffer: (identifier)
+      parent_id_field: (identifier)))
+  (dataset_definition
+    name: (identifier)
+    table: (identifier)
+    table: (identifier)
+    (parent_id_relation
+      parent_buffer: (identifier)
+      child_buffer: (identifier)
+      parent_id_field: (identifier)
+      before_field: (identifier)
+      after_field: (identifier))))
+
+================================================================================
+DATASET - reference with arguments
+================================================================================
+
+x = DATASET dsFoo(1).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (dataset_reference
+      dataset: (identifier)
+      (arguments
+        (argument
+          name: (number_literal))))))

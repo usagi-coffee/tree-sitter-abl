@@ -1,0 +1,99 @@
+================================================================================
+SET-SIZE
+================================================================================
+
+SET-SIZE(bufData) = 16.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (set_size_statement
+    buffer: (identifier)
+    size: (number_literal)))
+
+================================================================================
+SET-SIZE - reference snippet
+================================================================================
+
+DEFINE VARIABLE ElipRegion AS MEMPTR NO-UNDO.
+ASSIGN
+SET-SIZE(ElipRegion) = 8
+PUT-SHORT(ElipRegion, 1) = 10
+PUT-SHORT(ElipRegion, 3) = 10
+PUT-SHORT(ElipRegion, 5) = 200
+PUT-SHORT(ElipRegion, 7) = 50.
+
+SET-SIZE(ElipRegion) = 0.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (assign_statement
+    (assign_phrase
+      (assign_pair
+        left: (function_call
+          function: (identifier)
+          (arguments
+            (argument
+              name: (identifier))))
+        right: (number_literal))
+      (assign_pair
+        left: (function_call
+          function: (identifier)
+          (arguments
+            (argument
+              name: (identifier))
+            (argument
+              name: (number_literal))))
+        right: (number_literal))
+      (assign_pair
+        left: (function_call
+          function: (identifier)
+          (arguments
+            (argument
+              name: (identifier))
+            (argument
+              name: (number_literal))))
+        right: (number_literal))
+      (assign_pair
+        left: (function_call
+          function: (identifier)
+          (arguments
+            (argument
+              name: (identifier))
+            (argument
+              name: (number_literal))))
+        right: (number_literal))
+      (assign_pair
+        left: (function_call
+          function: (identifier)
+          (arguments
+            (argument
+              name: (identifier))
+            (argument
+              name: (number_literal))))
+        right: (number_literal))))
+  (set_size_statement
+    buffer: (identifier)
+    size: (number_literal)))
+
+================================================================================
+SET-SIZE - expression size
+================================================================================
+
+SET-SIZE(bufData) = LENGTH(cData).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (set_size_statement
+    buffer: (identifier)
+    size: (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (identifier))))))

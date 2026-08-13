@@ -1,0 +1,119 @@
+================================================================================
+UNDO
+================================================================================
+
+UNDO, THROW errObj.
+UNDO, LEAVE.
+UNDO, RETRY.
+UNDO, RETURN "done".
+UNDO, RETURN ERROR "bad".
+UNDO, RETURN NO-APPLY.
+UNDO.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (undo_statement
+    value: (identifier))
+  (undo_statement)
+  (undo_statement)
+  (undo_statement
+    return_value: (string_literal))
+  (undo_statement
+    error_value: (string_literal))
+  (undo_statement
+    (no_apply))
+  (undo_statement))
+
+================================================================================
+UNDO - reference snippet and variants
+================================================================================
+
+FIND Customer 1000 NO-ERROR.
+IF ERROR-STATUS:ERROR THEN
+UNDO, THROW NEW Progress.Lang.AppError("Can't find this customer", 550).
+MESSAGE Customer.CustNum.
+CATCH eAppError AS Progress.Lang.AppError:
+MESSAGE eAppError:GetMessage(1) eAppError:GetMessageNum(1).
+END CATCH.
+
+main: REPEAT:
+DO TRANSACTION:
+UNDO, NEXT main.
+END.
+END.
+
+UNDO, LEAVE main.
+UNDO, RETURN ERROR errObj.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (find_statement
+    table: (identifier)
+    constant: (number_literal)
+    (no_error))
+  (if_statement
+    (object_access
+      left: (identifier)
+      right: (identifier))
+    then: (undo_statement
+      value: (new_expression
+        type: (qualified_name
+          left: (identifier)
+          right: (identifier)
+          right: (identifier))
+        (arguments
+          (argument
+            name: (string_literal))
+          (argument
+            name: (number_literal))))))
+  (message_statement
+    (qualified_name
+      left: (identifier)
+      right: (identifier)))
+  (catch_statement
+    name: (identifier)
+    type: (qualified_name
+      left: (identifier)
+      right: (identifier)
+      right: (identifier))
+    (body
+      (message_statement
+        (function_call
+          function: (object_access
+            left: (identifier)
+            right: (identifier))
+          (arguments
+            (argument
+              name: (number_literal))))
+        (function_call
+          function: (object_access
+            left: (identifier)
+            right: (identifier))
+          (arguments
+            (argument
+              name: (number_literal)))))))
+  (repeat_statement
+    label: (identifier)
+    (body
+      (do_statement
+        (transaction)
+        (body
+          (undo_statement
+            next_label: (identifier))))))
+  (undo_statement
+    leave_label: (identifier))
+  (undo_statement
+    error_value: (identifier)))
+
+================================================================================
+UNDO - RETURN ERROR bare (no value)
+================================================================================
+
+UNDO, RETURN ERROR.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (undo_statement))

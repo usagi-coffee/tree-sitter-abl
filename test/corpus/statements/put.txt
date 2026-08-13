@@ -1,0 +1,212 @@
+================================================================================
+PUT
+================================================================================
+
+PUT UNFORMATTED "# " tFcMessages.tcFcMessage SKIP.
+PUT STREAM outStream "ok" FORMAT "x(4)" AT 10 SPACE(2) SKIP(1).
+PUT CONTROL CHR(27) "c".
+PUT UNFORMATTED x format("9999-99-99") ';'.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (put_statement
+    (unformatted)
+    value: (string_literal)
+    value: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (skip))
+  (put_statement
+    stream: (identifier)
+    value: (string_literal)
+    (format_phrase
+      format: (string_literal))
+    (space
+      count: (number_literal))
+    (skip
+      count: (number_literal)))
+  (put_statement
+    (control_phrase
+      (function_call
+        function: (identifier)
+        (arguments
+          (argument
+            name: (number_literal))))
+      (string_literal)))
+  (put_statement
+    (unformatted)
+    value: (identifier)
+    (format_phrase
+      format: (string_literal))
+    value: (string_literal)))
+
+================================================================================
+PUT - reference snippet and variants
+================================================================================
+
+DEFINE STREAM s1.
+OUTPUT STREAM s1 TO cus.dat.
+FOR EACH Customer NO-LOCK:
+PUT STREAM s1 name "/".
+END.
+OUTPUT STREAM s1 CLOSE.
+
+PUT STREAM s1 "Name" TO 20 SPACE SKIP.
+PUT STREAM-HANDLE hOut UNFORMATTED cVal AT 5 SKIP(2).
+PUT CONTROL "~033A" NULL.
+PUT CONTROL NULL(20).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (stream_definition
+    name: (identifier))
+  (output_statement
+    stream: (identifier)
+    file: (qualified_name
+      left: (identifier)
+      right: (identifier)))
+  (for_statement
+    (record_phrase
+      record: (identifier)
+      (no_lock))
+    (body
+      (put_statement
+        stream: (identifier)
+        value: (identifier)
+        value: (string_literal))))
+  (output_statement
+    stream: (identifier)
+    (close))
+  (put_statement
+    stream: (identifier)
+    value: (string_literal)
+    position: (number_literal)
+    (space)
+    (skip))
+  (put_statement
+    stream: (identifier)
+    (unformatted)
+    value: (identifier)
+    (format_phrase)
+    (skip
+      count: (number_literal)))
+  (put_statement
+    (control_phrase
+      (string_literal)
+      (identifier)))
+  (put_statement
+    (control_phrase
+      (function_call
+        function: (identifier)
+        (arguments
+          (argument
+            name: (number_literal)))))))
+
+================================================================================
+PUT UNFORMATTED with inline preprocessor directives
+================================================================================
+
+PUT UNFORMATTED
+  &IF DEFINED (Description) EQ 0 &THEN ' - ' &ELSE ' "' {&Description} '"' &ENDIF
+  &IF DEFINED (StatusText) EQ 0 &THEN ' - ' &ELSE ' "' {&StatusText} '"' &ENDIF
+  &IF DEFINED (Project) EQ 0 &THEN ' - ' &ELSE ' "' {&Project} '"' &ENDIF
+  SKIP.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (put_statement
+    (unformatted)
+    value: (if_preprocessor_directive
+      condition: (binary_expression
+        (function_call
+          function: (identifier)
+          (arguments
+            (argument
+              name: (identifier))))
+        (number_literal))
+      value: (string_literal)
+      value: (string_literal)
+      value: (preprocessor_name
+        (identifier))
+      value: (string_literal))
+    value: (if_preprocessor_directive
+      condition: (binary_expression
+        (function_call
+          function: (identifier)
+          (arguments
+            (argument
+              name: (identifier))))
+        (number_literal))
+      value: (string_literal)
+      value: (string_literal)
+      value: (preprocessor_name
+        (identifier))
+      value: (string_literal))
+    value: (if_preprocessor_directive
+      condition: (binary_expression
+        (function_call
+          function: (identifier)
+          (arguments
+            (argument
+              name: (identifier))))
+        (number_literal))
+      value: (string_literal)
+      value: (string_literal)
+      value: (preprocessor_name
+        (identifier))
+      value: (string_literal))
+    (skip)))
+
+================================================================================
+PUT UNFORMATTED with multiple inline ELSEIF preprocessor directives
+================================================================================
+
+PUT UNFORMATTED &IF TRUE &THEN "a" &ELSEIF FALSE &THEN "b" &ELSEIF TRUE &THEN "c" &ENDIF SKIP.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (put_statement
+    (unformatted)
+    value: (if_preprocessor_directive
+      condition: (boolean_literal)
+      value: (string_literal)
+      condition: (boolean_literal)
+      value: (string_literal)
+      condition: (boolean_literal)
+      value: (string_literal))
+    (skip)))
+
+================================================================================
+PUT UNFORMATTED with inline IF/ELSEIF/ELSE preprocessor directive
+================================================================================
+
+PUT UNFORMATTED &IF DEFINED(X) EQ 0 &THEN "a" &ELSEIF DEFINED(Y) EQ 1 &THEN "b" &ELSE "c" &ENDIF SKIP.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (put_statement
+    (unformatted)
+    value: (if_preprocessor_directive
+      condition: (binary_expression
+        (function_call
+          function: (identifier)
+          (arguments
+            (argument
+              name: (identifier))))
+        (number_literal))
+      value: (string_literal)
+      condition: (binary_expression
+        (function_call
+          function: (identifier)
+          (arguments
+            (argument
+              name: (identifier))))
+        (number_literal))
+      value: (string_literal)
+      value: (string_literal))
+    (skip)))

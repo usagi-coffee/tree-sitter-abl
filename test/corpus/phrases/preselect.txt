@@ -1,0 +1,17 @@
+================================================================================
+DO PRESELECT
+================================================================================
+
+DO PRESELECT EACH Customer NO-LOCK: END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (do_statement
+    (preselect_phrase
+      (preselect_record_list
+        (preselect_record
+          (record_phrase
+            record: (identifier)
+            (no_lock)))))
+    (body)))

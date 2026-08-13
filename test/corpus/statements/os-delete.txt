@@ -1,0 +1,97 @@
+================================================================================
+OS-DELETE
+================================================================================
+
+OS-DELETE VALUE(filePath).
+OS-DELETE tmpFile tmpDir RECURSIVE.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (os_delete_statement
+    value: (identifier))
+  (os_delete_statement
+    (identifier)
+    (identifier)
+    (recursive)))
+
+================================================================================
+OS-DELETE - reference snippets and RECURSIVE
+================================================================================
+
+DEFINE VARIABLE filename AS CHARACTER NO-UNDO.
+DEFINE VARIABLE OKpressed AS LOGICAL NO-UNDO INITIAL TRUE.
+Main:
+REPEAT:
+SYSTEM-DIALOG GET-FILE filename
+TITLE "Choose File to Delete"
+MUST-EXIST
+USE-FILENAME
+UPDATE OKpressed.
+IF OKpressed = FALSE THEN LEAVE Main.
+ELSE OS-DELETE VALUE(filename).
+END.
+
+OS-DELETE VALUE("tmp") RECURSIVE.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo)
+    initial: (boolean_literal))
+  (repeat_statement
+    label: (identifier)
+    (body
+      (system_dialog_get_file_statement
+        variable: (identifier)
+        title: (string_literal)
+        (must_exist)
+        (use_filename)
+        (update_phrase
+          update: (identifier)))
+      (if_statement
+        (binary_expression
+          (identifier)
+          (boolean_literal))
+        then: (leave_statement
+          label: (identifier))
+        else: (os_delete_statement
+          value: (identifier)))))
+  (os_delete_statement
+    value: (string_literal)
+    (recursive)))
+
+================================================================================
+OS-DELETE - multiple targets with RECURSIVE
+================================================================================
+
+OS-DELETE VALUE(cPath) "tmp" RECURSIVE.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (os_delete_statement
+    value: (identifier)
+    (string_literal)
+    (recursive)))
+
+================================================================================
+OS-DELETE - VALUE with an expression
+================================================================================
+
+OS-DELETE VALUE(cPath + "x").
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (os_delete_statement
+    value: (binary_expression
+      (identifier)
+      (string_literal))))

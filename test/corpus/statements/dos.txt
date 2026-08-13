@@ -1,0 +1,56 @@
+================================================================================
+DOS
+================================================================================
+
+DOS.
+DOS SILENT.
+DOS NOWAIT.
+DOS VALUE("dir").
+DOS SILENT VALUE("dir").
+DOS NOWAIT VALUE("dir").
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (dos_statement)
+  (dos_statement
+    (silent))
+  (dos_statement
+    command_token: (identifier))
+  (dos_statement
+    command: (string_literal))
+  (dos_statement
+    (silent)
+    command: (string_literal))
+  (dos_statement
+    command_token: (identifier)
+    command: (string_literal)))
+
+================================================================================
+DOS - Reference snippet
+================================================================================
+
+IF OPSYS = "UNIX" THEN UNIX ls.
+ELSE IF OPSYS = "WIN32" THEN DOS dir.
+ELSE DISPLAY OPSYS "is an unsupported operating system".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (if_statement
+    (binary_expression
+      (identifier)
+      (string_literal))
+    then: (unix_statement
+      command_token: (identifier))
+    else: (if_statement
+      (binary_expression
+        (identifier)
+        (string_literal))
+      then: (dos_statement
+        command_token: (identifier))
+      else: (display_statement
+        (field
+          field: (identifier))
+        (field
+          field: (string_literal))))))

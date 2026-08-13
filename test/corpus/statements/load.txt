@@ -1,0 +1,99 @@
+================================================================================
+LOAD
+================================================================================
+
+LOAD "myapp.r".
+LOAD cFile.
+LOAD "myapp.r" DIR "/usr/lib".
+LOAD "myapp.r" APPLICATION "app1".
+LOAD "myapp.r" NEW.
+LOAD "myapp.r" BASE-KEY "INI".
+LOAD "myapp.r" NO-ERROR.
+LOAD "myapp.r" DIR "/usr/lib" APPLICATION "app1" NEW.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (load_statement
+    file: (string_literal))
+  (load_statement
+    file: (identifier))
+  (load_statement
+    file: (string_literal)
+    dir: (string_literal))
+  (load_statement
+    file: (string_literal)
+    app: (string_literal))
+  (load_statement
+    file: (string_literal)
+    (new))
+  (load_statement
+    file: (string_literal)
+    base_key: (string_literal))
+  (load_statement
+    file: (string_literal)
+    (no_error))
+  (load_statement
+    file: (string_literal)
+    dir: (string_literal)
+    app: (string_literal)
+    (new)))
+
+================================================================================
+LOAD - VALUE expressions
+================================================================================
+
+LOAD VALUE(cFile) DIR VALUE(cDir) APPLICATION VALUE(cApp) NEW BASE-KEY VALUE(cKey) NO-ERROR.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (load_statement
+    file: (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (identifier))))
+    dir: (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (identifier))))
+    app: (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (identifier))))
+    (new)
+    base_key: (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (identifier))))
+    (no_error)))
+
+================================================================================
+LOAD - Reference snippet
+================================================================================
+
+LOAD "myenv".
+LOAD "myenv" DIR "C:\\temp".
+LOAD "myenv" NEW BASE-KEY "INI" NO-ERROR.
+LOAD "myenv" BASE-KEY "HKEY_CURRENT_USER".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (load_statement
+    file: (string_literal))
+  (load_statement
+    file: (string_literal)
+    dir: (string_literal))
+  (load_statement
+    file: (string_literal)
+    (new)
+    base_key: (string_literal)
+    (no_error))
+  (load_statement
+    file: (string_literal)
+    base_key: (string_literal)))

@@ -1,0 +1,275 @@
+================================================================================
+STREAM DEFINITION - Basic Syntax
+================================================================================
+
+DEFINE STREAM outStream.
+DEF STREAM debugStream.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (stream_definition
+    name: (identifier))
+  (stream_definition
+    name: (identifier)))
+
+================================================================================
+STREAM DEFINITION - NEW SHARED
+================================================================================
+
+DEFINE NEW SHARED STREAM sShared.
+DEF NEW SHARED STREAM sGlobal.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (stream_definition
+    (new_modifier)
+    (scope_modifier)
+    name: (identifier))
+  (stream_definition
+    (new_modifier)
+    (scope_modifier)
+    name: (identifier)))
+
+================================================================================
+STREAM DEFINITION - SHARED
+================================================================================
+
+DEFINE SHARED STREAM sCust.
+DEF SHARED STREAM sOrder.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (stream_definition
+    (scope_modifier)
+    name: (identifier))
+  (stream_definition
+    (scope_modifier)
+    name: (identifier)))
+
+================================================================================
+STREAM DEFINITION - NEW GLOBAL SHARED
+================================================================================
+
+DEFINE NEW GLOBAL SHARED STREAM sGlobalShared.
+DEF NEW GLOBAL SHARED STREAM sPersistent.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (stream_definition
+    (new_modifier)
+    (scope_modifier)
+    (scope_modifier)
+    name: (identifier))
+  (stream_definition
+    (new_modifier)
+    (scope_modifier)
+    (scope_modifier)
+    name: (identifier)))
+
+================================================================================
+STREAM DEFINITION - PRIVATE
+================================================================================
+
+DEFINE PRIVATE STREAM privStream.
+DEF PRIVATE STREAM classStream.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (stream_definition
+    (access_modifier)
+    name: (identifier))
+  (stream_definition
+    (access_modifier)
+    name: (identifier)))
+
+================================================================================
+STREAM DEFINITION - Short Names
+================================================================================
+
+DEF STREAM s.
+DEFINE STREAM log.
+DEFINE NEW SHARED STREAM db.
+DEFINE PRIVATE STREAM out.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (stream_definition
+    name: (identifier))
+  (stream_definition
+    name: (identifier))
+  (stream_definition
+    (new_modifier)
+    (scope_modifier)
+    name: (identifier))
+  (stream_definition
+    (access_modifier)
+    name: (identifier)))
+
+================================================================================
+STREAM DEFINITION - reference snippet
+================================================================================
+
+DEFINE VARIABLE fnr AS CHARACTER NO-UNDO FORMAT "x(12)".
+DEFINE VARIABLE fne AS CHARACTER NO-UNDO FORMAT "x(12)".
+DEFINE VARIABLE excount AS INTEGER NO-UNDO LABEL "Total Number of exceptions".
+DEFINE NEW SHARED BUFFER xitem FOR item.
+DEFINE NEW SHARED STREAM rpt.
+DEFINE STREAM exceptions.
+SET fnr LABEL "Enter filename for report output" SKIP(1)
+fne LABEL "Enter filename for exception output"
+WITH SIDE-LABELS FRAME fnames.
+OUTPUT STREAM rpt TO VALUE(fnr) PAGED.
+OUTPUT STREAM exceptions TO VALUE(fne) PAGED.
+FOR EACH xitem:
+IF on-hand < alloc THEN DO:
+DISPLAY STREAM exceptions
+xitem.ItemNum xitem.ItemName xitem.OnHand xitem.Allocated
+WITH FRAME exitem DOWN.
+excount = excount + 1.
+END.
+RUN r-dfstr2.p.
+END.
+DISPLAY STREAM exceptions SKIP(1) excount WITH FRAME exc SIDE-LABELS.
+DISPLAY STREAM rpt WITH FRAME exc.
+OUTPUT STREAM rpt CLOSE.
+OUTPUT STREAM exceptions CLOSE.
+
+DEFINE SHARED STREAM rpt.
+DEFINE SHARED BUFFER xitem FOR Item.
+DISPLAY STREAM rpt ItemNum ItemName WITH NO-LABELS NO-BOX.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo)
+    (format_phrase
+      format: (string_literal)))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo)
+    (format_phrase
+      format: (string_literal)))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo)
+    label: (string_literal))
+  (buffer_definition
+    (new_modifier)
+    (scope_modifier)
+    name: (identifier)
+    table: (identifier))
+  (stream_definition
+    (new_modifier)
+    (scope_modifier)
+    name: (identifier))
+  (stream_definition
+    name: (identifier))
+  (set_statement
+    (field
+      field: (identifier)
+      (format_phrase
+        label: (string_literal)))
+    (field
+      (skip_phrase
+        skip: (number_literal)))
+    (field
+      field: (identifier)
+      (format_phrase
+        label: (string_literal)))
+    (frame_phrase
+      (side_labels)
+      frame: (identifier)))
+  (output_statement
+    stream: (identifier)
+    value: (identifier)
+    (paged))
+  (output_statement
+    stream: (identifier)
+    value: (identifier)
+    (paged))
+  (for_statement
+    (record_phrase
+      record: (identifier))
+    (body
+      (if_statement
+        (binary_expression
+          (identifier)
+          (identifier))
+        then: (do_statement
+          (body
+            (display_statement
+              stream: (identifier)
+              (field
+                field: (qualified_name
+                  left: (identifier)
+                  right: (identifier)))
+              (field
+                field: (qualified_name
+                  left: (identifier)
+                  right: (identifier)))
+              (field
+                field: (qualified_name
+                  left: (identifier)
+                  right: (identifier)))
+              (field
+                field: (qualified_name
+                  left: (identifier)
+                  right: (identifier)))
+              (frame_phrase
+                frame: (identifier)
+                (down)))
+            (assignment_statement
+              left: (identifier)
+              operator: (assignment_operator)
+              right: (binary_expression
+                (identifier)
+                (number_literal))))))
+      (run_statement
+        procedure: (procedure_name))))
+  (display_statement
+    stream: (identifier)
+    (field
+      field: (parenthesized_expression
+        (number_literal)))
+    (field
+      field: (identifier))
+    (frame_phrase
+      frame: (identifier)
+      (side_labels)))
+  (display_statement
+    stream: (identifier)
+    (frame_phrase
+      frame: (identifier)))
+  (output_statement
+    stream: (identifier)
+    (close))
+  (output_statement
+    stream: (identifier)
+    (close))
+  (stream_definition
+    (scope_modifier)
+    name: (identifier))
+  (buffer_definition
+    (scope_modifier)
+    name: (identifier)
+    table: (identifier))
+  (display_statement
+    stream: (identifier)
+    (field
+      field: (identifier))
+    (field
+      field: (identifier))
+    (frame_phrase
+      (no_labels)
+      (no_box))))
