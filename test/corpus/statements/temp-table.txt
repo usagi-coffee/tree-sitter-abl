@@ -730,3 +730,20 @@ DEFINE TEMP-TABLE tt NO-UNDO RCODE-INFO FIELD f AS INTEGER.
     (temp_table_field
       name: (identifier)
       type: (identifier))))
+
+================================================================================
+TEMP-TABLE - STATIC without an access modifier
+================================================================================
+
+DEFINE STATIC TEMP-TABLE tt NO-UNDO FIELD f AS INTEGER.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (temp_table_definition
+    (static_modifier)
+    name: (identifier)
+    (no_undo)
+    (temp_table_field
+      name: (identifier)
+      type: (identifier))))
