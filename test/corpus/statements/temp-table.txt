@@ -713,3 +713,20 @@ WAIT-FOR CHOOSE OF cancel-butt OR WINDOW-CLOSE OF CURRENT-WINDOW.
       events: (identifier)
       widgets: (widget_phrase
         system_handle: (system_handle)))))
+
+================================================================================
+TEMP-TABLE - RCODE-INFO abbreviation
+================================================================================
+
+DEFINE TEMP-TABLE tt NO-UNDO RCODE-INFO FIELD f AS INTEGER.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (temp_table_definition
+    name: (identifier)
+    (no_undo)
+    (rcode_information)
+    (temp_table_field
+      name: (identifier)
+      type: (identifier))))
