@@ -16,7 +16,12 @@ export default ({ kw }) => ({
       kw("OBJECT"),
       field(
         "name",
-        choice($._identifier_or_array_access, $.system_handle_identifier, $.parenthesized_expression),
+        choice(
+          $._identifier_or_array_access,
+          $.system_handle_identifier,
+          $.object_access,
+          $.parenthesized_expression,
+        ),
       ),
     ),
 
