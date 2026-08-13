@@ -509,3 +509,25 @@ IF x > 0 THEN procedure = 1.
       left: (identifier)
       operator: (assignment_operator)
       right: (number_literal))))
+
+================================================================================
+CAN-FIND - USE-INDEX before NO-LOCK
+================================================================================
+
+IF CAN-FIND(FIRST t WHERE t.a = 1 USE-INDEX ix NO-LOCK) THEN RETURN.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (if_statement
+    (can_find_expression
+      table: (identifier)
+      (where_phrase
+        (binary_expression
+          (qualified_name
+            left: (identifier)
+            right: (identifier))
+          (number_literal)))
+      index: (identifier)
+      (no_lock))
+    then: (return_statement)))
