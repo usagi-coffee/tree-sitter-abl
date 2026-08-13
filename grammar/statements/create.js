@@ -29,7 +29,7 @@ export default ({ kw }) => ({
   __create_buffer: ($) =>
     seq(
       kw("BUFFER"),
-      field("handle", $.identifier),
+      field("handle", $._identifier_or_array_access),
       kw("FOR"),
       kw("TABLE"),
       field("table", $.__create_buffer_target),

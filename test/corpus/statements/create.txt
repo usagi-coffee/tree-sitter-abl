@@ -312,3 +312,23 @@ CREATE BUFFER h FOR TABLE "t" IN WIDGET-POOL "myPool".
     handle: (identifier)
     table: (string_literal)
     pool: (string_literal)))
+
+================================================================================
+CREATE BUFFER - handle held in an array or a field
+================================================================================
+
+CREATE BUFFER hb[i] FOR TABLE r.nom_table BUFFER-NAME r.nom_alias.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (create_statement
+    handle: (array_access
+      array: (identifier)
+      index: (identifier))
+    table: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    name: (qualified_name
+      left: (identifier)
+      right: (identifier))))
