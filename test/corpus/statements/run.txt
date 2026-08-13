@@ -518,3 +518,20 @@ RUN p IN hArr[1].
       context: (array_access
         array: (identifier)
         index: (number_literal)))))
+
+================================================================================
+RUN - procedure path without an extension
+================================================================================
+
+RUN externe/ext-truc.
+RUN Erp\Model\Vente\ErpTrt PERSISTENT SET h.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (run_statement
+    procedure: (procedure_name))
+  (run_statement
+    procedure: (procedure_name)
+    (persistent
+      handle: (identifier))))
