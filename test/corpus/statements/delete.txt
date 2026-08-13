@@ -186,3 +186,17 @@ DELETE OBJECT hb[vii].
     name: (array_access
       array: (identifier)
       index: (identifier))))
+
+================================================================================
+DELETE OBJECT - object attribute
+================================================================================
+
+DELETE OBJECT THIS-OBJECT:gData.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (delete_object_statement
+    name: (object_access
+      left: (identifier)
+      right: (identifier))))
