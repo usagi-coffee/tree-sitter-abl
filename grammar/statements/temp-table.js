@@ -116,6 +116,10 @@ export default ({ kw }) => ({
       ),
       alias(kw("SHARED"), $.scope_modifier),
       seq(
+        alias(kw("STATIC"), $.static_modifier),
+        optional($._serialization_modifier),
+      ),
+      seq(
         choice(alias(kw("PRIVATE"), $.access_modifier), alias(kw("PROTECTED"), $.access_modifier)),
         optional(alias(kw("STATIC"), $.static_modifier)),
         optional($._serialization_modifier),
