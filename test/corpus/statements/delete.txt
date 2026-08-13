@@ -172,3 +172,17 @@ DELETE Customer VALIDATE(NOT(CAN-FIND(Order OF Customer)),
           (of_phrase
             record: (identifier)))))
     message: (string_literal)))
+
+================================================================================
+DELETE OBJECT - handle held in an array
+================================================================================
+
+DELETE OBJECT hb[vii].
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (delete_object_statement
+    name: (array_access
+      array: (identifier)
+      index: (identifier))))
