@@ -179,3 +179,21 @@ x = DYNAMIC-FUNCTION("Verif":U IN api, 24).
           in_handle: (identifier))
         (argument
           name: (number_literal))))))
+
+================================================================================
+OBJECT ACCESS - scoped name as the receiver
+================================================================================
+
+x = h::champ:ATTR.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (object_access
+      left: (scoped_name
+        left: (identifier)
+        right: (identifier))
+      right: (identifier))))

@@ -409,7 +409,12 @@ export default grammar({
       _object_access_plain_prefix: ($) =>
         field("left", choice($._object_access_plain_left, $._object_access_expression_left)),
       _object_access_plain_left: ($) =>
-        choice($._identifier_or_qualified_name, $.system_handle_identifier, $.preprocessor_name),
+        choice(
+          $._identifier_or_qualified_name,
+          $.system_handle_identifier,
+          $.preprocessor_name,
+          $.scoped_name,
+        ),
       _object_access_widget_prefix: ($) =>
         seq(
           field("widget", alias($._widgets, $.identifier)),
