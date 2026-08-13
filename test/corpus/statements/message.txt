@@ -518,3 +518,19 @@ MESSAGE "x" VIEW-AS ALERT-BOX TITLE cTitle.
     (string_literal)
     (view_as_phrase
       title: (identifier))))
+
+================================================================================
+MESSAGE - IN WINDOW with a system handle
+================================================================================
+
+MESSAGE "x" VIEW-AS ALERT-BOX INFORMATION BUTTONS OK IN WINDOW CURRENT-WINDOW.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (message_statement
+    (string_literal)
+    (view_as_phrase
+      (alert_type))
+    (in_window_phrase
+      window: (identifier))))

@@ -525,7 +525,13 @@ export default grammar({
       __widget_qualified_name_separator: ($) => kw("IN"),
 
       _window_handle: ($) =>
-        choice($._identifier_or_qualified_name, $.object_access, $.function_call, $.scoped_name),
+        choice(
+          $._identifier_or_qualified_name,
+          $.system_handle_identifier,
+          $.object_access,
+          $.function_call,
+          $.scoped_name,
+        ),
 
       // Identifiers
       // BE CAREFUL MODIFYING HERE, IDENTIFIER ORDER FOR SOME REASON MATTERS!
