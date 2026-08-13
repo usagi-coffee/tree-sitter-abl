@@ -13,3 +13,24 @@ PRESELECT EACH Customer NO-LOCK.
         (record_phrase
           record: (identifier)
           (no_lock))))))
+
+================================================================================
+FOR - FIELDS list with array subscripts
+================================================================================
+
+FOR FIRST t FIELDS (secta[1] sect[2]) NO-LOCK:
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (for_statement
+    (record_phrase
+      record: (identifier)
+      (field_list
+        (identifier)
+        index: (number_literal)
+        (identifier)
+        index: (number_literal))
+      (no_lock))
+    (body)))
