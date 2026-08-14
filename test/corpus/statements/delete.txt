@@ -200,3 +200,20 @@ DELETE OBJECT THIS-OBJECT:gData.
     name: (object_access
       left: (identifier)
       right: (identifier))))
+
+================================================================================
+DELETE WIDGET-POOL - named pool with NO-ERROR
+================================================================================
+
+DELETE WIDGET-POOL POOL NO-ERROR.
+DELETE WIDGET-POOL "mypool" NO-ERROR.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (delete_widget_pool_statement
+    pool: (identifier)
+    (no_error))
+  (delete_widget_pool_statement
+    pool: (string_literal)
+    (no_error)))
