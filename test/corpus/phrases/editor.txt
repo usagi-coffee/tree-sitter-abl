@@ -41,3 +41,23 @@ DEFINE VARIABLE x AS CHARACTER VIEW-AS EDITOR INNER-CHARS 60 INNER-LINES 5.
       (editor_phrase
         inner_chars: (number_literal)
         inner_lines: (number_literal)))))
+
+================================================================================
+EDITOR - options before the size
+================================================================================
+
+DEFINE VARIABLE v AS CHARACTER VIEW-AS EDITOR SCROLLBAR-VERTICAL SIZE 10 BY 2 NO-UNDO.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (view_as_phrase
+      (editor_phrase
+        (scrollbar_vertical)
+        (size_phrase
+          width: (number_literal)
+          height: (number_literal))))
+    (no_undo)))
