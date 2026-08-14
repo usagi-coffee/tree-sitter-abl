@@ -209,3 +209,25 @@ DISPLAY x WITH FRAME f COLOR DISPLAY VALUE(5) PROMPT VALUE(3).
         value: (number_literal))
       prompt_color: (color_phrase
         value: (number_literal)))))
+
+================================================================================
+FRAME - name given by a macro
+================================================================================
+
+DISPLAY x WITH FRAME {&FRAME-NAME}.
+ENABLE x WITH FRAME {&FRAME-NAME}.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (display_statement
+    record: (identifier)
+    (frame_phrase
+      frame: (preprocessor_name
+        (identifier))))
+  (enable_statement
+    (enable_item
+      field: (identifier))
+    (frame_phrase
+      frame: (preprocessor_name
+        (identifier)))))

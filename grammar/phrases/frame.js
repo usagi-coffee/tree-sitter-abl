@@ -78,7 +78,9 @@ export default ({ kw }) => ({
       seq(kw("FONT"), field("title_font", $.__frame_expression)),
     ),
   __frame_column_keyword: ($) => choice(kw("COLUMN"), kw("COLUMNS"), kw("COL")),
-  __frame_identifier: ($) => $.identifier,
+  // Generated screens name their frame, browse and window through a macro, as in
+  // `WITH FRAME {&FRAME-NAME}`, so a name here can be either.
+  __frame_identifier: ($) => choice($.identifier, $.preprocessor_name),
   __frame_expression: ($) => $._expression,
   down: ($) =>
     choice(
