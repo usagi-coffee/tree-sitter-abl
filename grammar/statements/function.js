@@ -99,6 +99,10 @@ export default ({ kw }) => ({
         seq(kw("TABLE-HANDLE"), field("table_handle", $.identifier)),
         seq(kw("DATASET"), kw("FOR"), field("dataset", $._identifier_or_qualified_name)),
         seq(kw("DATASET-HANDLE"), field("dataset_handle", $.identifier)),
+        // A prototype states only the mode and data type of each parameter, so the
+        // name may be absent. Definition and prototype share every token up to the
+        // closing parenthesis, so one rule has to serve both.
+        seq(optional(kw("CLASS")), field("type", $._type_name), optional($._extent_phrase)),
       ),
     ),
 
