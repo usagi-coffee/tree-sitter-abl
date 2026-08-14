@@ -39,6 +39,8 @@ export default ({ kw }) => ({
           seq(kw("FGCOLOR"), field("fgcolor", $.__browse_option_expression)),
           seq(kw("FONT"), field("font", $.__browse_option_expression)),
           seq(kw("PFCOLOR"), field("pfcolor", $.__browse_option_expression)),
+          seq(kw("ROW-HEIGHT-CHARS"), field("row_height_chars", $.__browse_option_expression)),
+          seq(kw("ROW-HEIGHT-PIXELS"), field("row_height_pixels", $.__browse_option_expression)),
           seq(
             kw("TITLE"),
             optional($._frame_title_option),
