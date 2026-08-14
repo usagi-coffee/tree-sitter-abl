@@ -849,3 +849,21 @@ DEFINE BROWSE b QUERY q DISPLAY rec ENABLE fld[1] WITH 10 DOWN.
       array: (identifier)
       index: (number_literal))
     down: (number_literal)))
+
+================================================================================
+BROWSE - ROW-HEIGHT-CHARS option
+================================================================================
+
+DEFINE BROWSE b QUERY q DISPLAY f WITH 10 DOWN ROW-HEIGHT-CHARS .54 FIT-LAST-COLUMN.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (browse_definition
+    name: (identifier)
+    query: (identifier)
+    (column
+      column: (identifier))
+    down: (number_literal)
+    row_height_chars: (number_literal)
+    (fit_last_column)))
