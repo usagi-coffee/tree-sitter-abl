@@ -275,8 +275,6 @@
   (table_scan)
   (terminal)
   (text)
-  (this_object)
-  (this_procedure)
   (thread_safe)
   (three_d)
   (transaction)
