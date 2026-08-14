@@ -1,12 +1,16 @@
 export default ({ kw }) => ({
   widget_phrase: ($) =>
     choice(
-      seq(kw("FRAME"), field("frame", $.identifier)),
-      seq(kw("BROWSE"), field("browse", $.identifier)),
+      seq(kw("FRAME"), field("frame", $.__widget_name)),
+      seq(kw("BROWSE"), field("browse", $.__widget_name)),
       $.__widget_handle,
       $.__widget_entry,
-      seq(choice(kw("MENU"), kw("SUB-MENU")), field("menu", $.identifier)),
+      seq(choice(kw("MENU"), kw("SUB-MENU")), field("menu", $.__widget_name)),
     ),
+
+  // Generated screens reach their widgets through a macro — `OF FRAME
+  // {&FRAME-NAME}`, `IN BROWSE {&BROWSE-NAME}` — so a name here can be either.
+  __widget_name: ($) => choice($.identifier, $.preprocessor_name),
 
   __widget_handle: ($) =>
     seq(field("handle", choice($._identifier_or_qualified_name, $.preprocessor_name))),
@@ -16,16 +20,16 @@ export default ({ kw }) => ({
       seq(
         optional(kw("FIELD")),
         field("field", $._identifier_or_array_access),
-        optional(seq(kw("IN"), kw("FRAME"), field("frame", $.identifier))),
+        optional(seq(kw("IN"), kw("FRAME"), field("frame", $.__widget_name))),
       ),
       seq(
         field("column", $._identifier_or_array_access),
-        seq(kw("IN"), kw("BROWSE"), field("browse", $.identifier)),
+        seq(kw("IN"), kw("BROWSE"), field("browse", $.__widget_name)),
       ),
       seq(
         kw("MENU-ITEM"),
         field("item", $._identifier_or_qualified_name),
-        optional(seq(kw("IN"), kw("MENU"), field("menu", $.identifier))),
+        optional(seq(kw("IN"), kw("MENU"), field("menu", $.__widget_name))),
       ),
       field("system_handle", alias($.__widget_system_handle, $.system_handle)),
     ),

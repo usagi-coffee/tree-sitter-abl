@@ -534,3 +534,35 @@ END.
     (anywhere)
     (do_statement
       (body))))
+
+================================================================================
+ON - widget named by a macro
+================================================================================
+
+ON WINDOW-CLOSE OF FRAME {&FRAME-NAME}
+DO:
+END.
+
+ON CHOOSE OF BROWSE {&BROWSE-NAME}
+DO:
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (on_statement
+    event: (identifier)
+    (of_phrase
+      widget: (widget_phrase
+        frame: (preprocessor_name
+          (identifier))))
+    (do_statement
+      (body)))
+  (on_statement
+    event: (identifier)
+    (of_phrase
+      widget: (widget_phrase
+        browse: (preprocessor_name
+          (identifier))))
+    (do_statement
+      (body))))
