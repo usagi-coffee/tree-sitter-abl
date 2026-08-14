@@ -596,3 +596,20 @@ UPDATE animate WITH FRAME y.
       field: (identifier))
     (frame_phrase
       frame: (identifier))))
+
+================================================================================
+IMAGE DEFINITION - FILENAME as a synonym of FILE
+================================================================================
+
+DEFINE IMAGE IMAGE-1 FILENAME "ctrlf11.bmp":U SIZE 3.14 BY .67.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (image_definition
+    name: (identifier)
+    (image_phrase
+      file: (string_literal))
+    (size_phrase
+      width: (number_literal)
+      height: (number_literal))))
