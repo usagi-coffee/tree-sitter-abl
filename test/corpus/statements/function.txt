@@ -841,3 +841,32 @@ FUNCTION f RETURNS DECIMAL PRIVATE (INPUT p AS CHARACTER) FORWARD.
         name: (identifier)
         type: (identifier)))
     (forward)))
+
+================================================================================
+FUNCTION FORWARD - unnamed parameters
+================================================================================
+
+FUNCTION SetGedDocValue RETURNS LOGICAL (INPUT INTEGER, INPUT CHARACTER) IN hRunEdit.
+FUNCTION doubler RETURNS INTEGER (INPUT INTEGER EXTENT 3) FORWARD.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (function_forward_definition
+    name: (identifier)
+    type: (identifier)
+    (parameters
+      (parameter
+        type: (identifier))
+      (parameter
+        type: (identifier)))
+    (in_phrase
+      context: (identifier)))
+  (function_forward_definition
+    name: (identifier)
+    type: (identifier)
+    (parameters
+      (parameter
+        type: (identifier)
+        size: (number_literal)))
+    (forward)))
