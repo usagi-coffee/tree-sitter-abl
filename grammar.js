@@ -371,6 +371,7 @@ export default grammar({
           $.array_access,
           $.function_call,
           $.system_handle_identifier,
+          $.preprocessor_name,
         ),
 
       // Expressions

@@ -197,3 +197,18 @@ x = h::champ:ATTR.
         left: (identifier)
         right: (identifier))
       right: (identifier))))
+
+================================================================================
+ASSIGNMENT - preprocessor name as the target
+================================================================================
+
+{&WINDOW-NAME} = CURRENT-WINDOW.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assignment_statement
+    left: (preprocessor_name
+      (identifier))
+    operator: (assignment_operator)
+    right: (identifier)))
