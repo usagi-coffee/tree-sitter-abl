@@ -5,6 +5,7 @@ export default ({ kw }) => ({
     choice(
       // Special
       alias($.include_statement, $.include_file_reference),
+      alias($.__macro_statement, $.constant),
       $.global_define_preprocessor_directive,
       $.scoped_define_preprocessor_directive,
       alias($.if_preprocessor_directive_statement, $.if_preprocessor_directive),

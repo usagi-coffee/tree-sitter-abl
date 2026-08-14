@@ -263,6 +263,10 @@ export default grammar({
 
       // Constants
       constant: ($) => token(prec(-1, /\{&[^}\r\n]+\}[ \t]*\r?\n/)),
+      // A macro alone on its line expands to whole statements, terminator included,
+      // so none follows it in the source. It outranks `{` to win in statement
+      // position; anywhere else `{` still opens a preprocessor_name.
+      __macro_statement: ($) => token(prec(2, /\{&[^}\r\n]+\}[ \t]*\r?\n/)),
       preprocessor_name: ($) =>
         prec(
           1,
