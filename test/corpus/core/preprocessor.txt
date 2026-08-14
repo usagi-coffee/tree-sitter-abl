@@ -143,3 +143,25 @@ PREPROCESSOR IF DIRECTIVES - mixed with statements
     type: (identifier))
   (if_preprocessor_directive
     (endif_branch)))
+
+================================================================================
+PREPROCESSOR - macro alone on its line is a statement
+================================================================================
+
+DEFINE VARIABLE x AS INTEGER NO-UNDO.
+{&FetchDyn}
+ASSIGN x = 1.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (constant)
+  (assign_statement
+    (assign_phrase
+      (assign_pair
+        left: (identifier)
+        right: (number_literal)))))
