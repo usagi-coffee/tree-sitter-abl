@@ -8,7 +8,8 @@ export default ({ kw }) => ({
       seq(choice(kw("MENU"), kw("SUB-MENU")), field("menu", $.identifier)),
     ),
 
-  __widget_handle: ($) => seq(field("handle", $._identifier_or_qualified_name)),
+  __widget_handle: ($) =>
+    seq(field("handle", choice($._identifier_or_qualified_name, $.preprocessor_name))),
 
   __widget_entry: ($) =>
     choice(
