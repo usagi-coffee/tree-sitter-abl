@@ -285,7 +285,7 @@ RUN methodProc IN hProc NO-ERROR.
     (asynchronous_phrase
       handle: (identifier)
       event_handler: (string_literal)
-      context: (this_procedure))
+      context: (identifier))
     (arguments
       (argument
         name: (identifier))
@@ -399,7 +399,7 @@ RUN methodProc IN hProc NO-ERROR.
       context: (identifier))
     (asynchronous_phrase
       event_procedure: (string_literal)
-      context: (this_procedure)))
+      context: (identifier)))
   (run_statement
     procedure: (identifier)
     (in_phrase
@@ -535,3 +535,24 @@ RUN Erp\Model\Vente\ErpTrt PERSISTENT SET h.
     procedure: (procedure_name)
     (persistent
       handle: (identifier))))
+
+================================================================================
+RUN - IN with an attribute of THIS-OBJECT
+================================================================================
+
+RUN Oper IN THIS-OBJECT:hGco(a, INPUT b).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (run_statement
+    procedure: (identifier)
+    (in_phrase
+      context: (object_access
+        left: (identifier)
+        right: (identifier)))
+    (arguments
+      (argument
+        name: (identifier))
+      (argument
+        name: (identifier)))))
