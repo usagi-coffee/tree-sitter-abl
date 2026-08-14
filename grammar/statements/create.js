@@ -38,7 +38,15 @@ export default ({ kw }) => ({
       ),
       optional($._in_widget_pool),
     ),
-  __create_buffer_target: ($) => choice($._identifier_or_access_or_call, $.string_literal),
+  // The table is named by a character expression, so it can be assembled at run
+  // time. Concatenation is spelled out here rather than reusing the expression
+  // rule: that one reaches widget_qualified_name, whose separator is IN, and it
+  // would then swallow the IN WIDGET-POOL option that follows.
+  __create_buffer_target: ($) =>
+    choice($.__create_buffer_name, alias($.__create_buffer_concatenation, $.binary_expression)),
+  __create_buffer_concatenation: ($) =>
+    seq($.__create_buffer_name, repeat1(seq("+", $.__create_buffer_name))),
+  __create_buffer_name: ($) => choice($._identifier_or_access_or_call, $.string_literal),
   __create_handle_with_pool_no_error_body: ($) =>
     seq(
       choice(kw("CALL"), kw("QUERY"), kw("SAX-READER"), kw("SAX-WRITER"), kw("SAX-ATTRIBUTES")),
