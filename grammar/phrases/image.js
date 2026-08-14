@@ -1,7 +1,7 @@
 export default ({ kw }) => ({
   image_phrase: ($) =>
     seq(
-      kw("FILE"),
+      choice(kw("FILE"), kw("FILENAME")),
       field("file", $._expression),
       optional(
         seq(
