@@ -332,3 +332,17 @@ CREATE BUFFER hb[i] FOR TABLE r.nom_table BUFFER-NAME r.nom_alias.
     name: (qualified_name
       left: (identifier)
       right: (identifier))))
+
+================================================================================
+CREATE TEMP-TABLE - handle held in an array
+================================================================================
+
+CREATE TEMP-TABLE hTT[1].
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (create_temp_table_statement
+    handle: (array_access
+      array: (identifier)
+      index: (number_literal))))
