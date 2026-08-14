@@ -346,3 +346,24 @@ CREATE TEMP-TABLE hTT[1].
     handle: (array_access
       array: (identifier)
       index: (number_literal))))
+
+================================================================================
+CREATE BUFFER - table named by a concatenation
+================================================================================
+
+CREATE BUFFER hBuf FOR TABLE qBase + pTable BUFFER-NAME pBuff.
+CREATE BUFFER hBuf FOR TABLE hT IN WIDGET-POOL "p".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (create_statement
+    handle: (identifier)
+    table: (binary_expression
+      (identifier)
+      (identifier))
+    name: (identifier))
+  (create_statement
+    handle: (identifier)
+    table: (identifier)
+    pool: (string_literal)))
