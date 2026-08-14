@@ -37,3 +37,21 @@ FORM "Label" AT ROW 2 COLUMN 3.
       field: (identifier))
     (form_item
       field: (number_literal))))
+
+================================================================================
+AT - COLUMN abbreviated to COL
+================================================================================
+
+DEFINE FRAME F1 WITH NO-BOX OVERLAY AT COL 1 ROW 1.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (frame_definition
+    name: (identifier)
+    (frame_phrase
+      (no_box)
+      (overlay)
+      (at_phrase
+        column: (number_literal))
+      row: (number_literal))))
