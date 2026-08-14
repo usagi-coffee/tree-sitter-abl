@@ -16,7 +16,7 @@ export default ({ kw }) => ({
     repeat1(
       choice(
         seq(
-          kw("COLUMN"),
+          kw("COLUMN", { offset: 3 }),
           choice(field("column", $._expression), alias($.__at_of_suffix, $.column_of)),
         ),
         seq(kw("COLUMN-OF"), field("column_of", $._expression)),
