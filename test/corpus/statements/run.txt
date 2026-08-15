@@ -556,3 +556,34 @@ RUN Oper IN THIS-OBJECT:hGco(a, INPUT b).
         name: (identifier))
       (argument
         name: (identifier)))))
+
+================================================================================
+RUN - persistent handle in an array, and the PERSIST spelling
+================================================================================
+
+RUN winctrl_ml PERSISTENT SET hWindow[1] (NO, cField:SCREEN-VALUE, NO).
+
+RUN feedback PERSIST SET gHandlePapa.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (run_statement
+    procedure: (identifier)
+    (persistent
+      handle: (array_access
+        array: (identifier)
+        index: (number_literal)))
+    (arguments
+      (argument
+        name: (boolean_literal))
+      (argument
+        name: (object_access
+          left: (identifier)
+          right: (identifier)))
+      (argument
+        name: (boolean_literal))))
+  (run_statement
+    procedure: (identifier)
+    (persistent
+      handle: (identifier))))

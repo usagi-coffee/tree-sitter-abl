@@ -24,11 +24,22 @@ export default ({ kw }) => ({
     ),
   __run_persistence: ($) =>
     choice(
-      alias(seq(kw("PERSISTENT"), optional($.__run_persistence_set_tail)), $.persistent),
+      alias(
+        seq(kw("PERSISTENT", { offset: 7 }), optional($.__run_persistence_set_tail)),
+        $.persistent,
+      ),
       alias(seq(kw("SINGLE-RUN"), optional($.__run_persistence_set_tail)), $.single_run),
       alias(seq(kw("SINGLETON"), optional($.__run_persistence_set_tail)), $.singleton),
     ),
-  __run_persistence_set_tail: ($) => seq(kw("SET"), field("handle", $.identifier)),
+  // The handle is often one slot of an array of window handles, as in
+  // `RUN winctrl_ml PERSISTENT SET hWindow[1] (...)`. The subscript is
+  // spelled out rather than reusing array_access: that one also starts on an
+  // object access, and `SET h (...)` would then read as a call.
+  __run_persistence_set_tail: ($) => seq(kw("SET"), field("handle", $.__run_persistence_handle)),
+  __run_persistence_handle: ($) =>
+    choice($.identifier, alias($.__run_persistence_handle_element, $.array_access)),
+  __run_persistence_handle_element: ($) =>
+    seq(field("array", $.identifier), "[", field("index", $._expression), "]"),
 
   _run_target: ($) =>
     choice(
