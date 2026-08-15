@@ -332,7 +332,7 @@ export default grammar({
       // to follow it, otherwise the text is a plain macro reference.
       macro_concatenated_name: ($) =>
         token(
-          /[_\p{L}][\p{L}\p{N}_\-&]*(\{(?:&[0-9A-Za-z_-]+|[0-9A-Za-z_-]+)\}[\p{L}\p{N}_\-&]*)+|(\{(?:&[0-9A-Za-z_-]+|[0-9A-Za-z_-]+)\})+[\p{L}\p{N}_\-&]+(\{(?:&[0-9A-Za-z_-]+|[0-9A-Za-z_-]+)\}[\p{L}\p{N}_\-&]*)*/i,
+          /[_\p{L}][\p{L}\p{N}_\-&#%$]*(\{(?:&[0-9A-Za-z_-]+|[0-9A-Za-z_-]+)\}[\p{L}\p{N}_\-&#%$]*)+|(\{(?:&[0-9A-Za-z_-]+|[0-9A-Za-z_-]+)\})+[\p{L}\p{N}_\-&#%$]+(\{(?:&[0-9A-Za-z_-]+|[0-9A-Za-z_-]+)\}[\p{L}\p{N}_\-&#%$]*)*/i,
         ),
 
       _widgets: ($) => prec.right(alias(choice(...WIDGETS, kw("FRAME")), $.identifier)),
