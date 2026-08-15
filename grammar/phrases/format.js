@@ -150,6 +150,40 @@ export default ({ kw }) => ({
       ")",
     ),
 
+  // A frame item is drawn as a radio set as readily as a variable is. The
+  // shared radio set phrase cannot serve here: it ends on an optional tooltip,
+  // and the format phrase around it takes a tooltip of its own, so the two
+  // readings of one TOOLTIP are ambiguous. This copy stops at the size and
+  // leaves the tooltip to the format phrase.
+  __format_radio_set_phrase: ($) =>
+    seq(
+      kw("RADIO-SET"),
+      optional($.__format_radio_set_orientation),
+      kw("RADIO-BUTTONS"),
+      field("buttons", $.__format_radio_set_buttons),
+      optional($.size_phrase),
+    ),
+  __format_radio_set_orientation: ($) =>
+    choice(seq(kw("HORIZONTAL"), optional(kw("EXPAND"))), kw("VERTICAL")),
+  // The pairs are literals, not the shared list-item pair: that one is built
+  // from expressions, and a comma-separated list of those cannot be told apart
+  // from the frame items around it.
+  __format_radio_set_buttons: ($) =>
+    seq($.__format_radio_set_pair, repeat(seq(",", $.__format_radio_set_pair))),
+  __format_radio_set_pair: ($) =>
+    seq(
+      field("label", $.__format_radio_set_value),
+      ",",
+      field("value", $.__format_radio_set_value),
+    ),
+  __format_radio_set_value: ($) =>
+    choice(
+      $.string_literal,
+      $.number_literal,
+      alias($._signed_number_literal, $.number_literal),
+      $.boolean_literal,
+    ),
+
   __format_view_as_tail: ($) =>
     prec.right(choice(seq($.size_phrase, optional($._tooltip_phrase)), $._tooltip_phrase)),
   _format_view_as: ($) =>
@@ -161,6 +195,7 @@ export default ({ kw }) => ({
           seq(kw("TOGGLE-BOX"), optional($.__format_view_as_tail)),
           seq(kw("FILL-IN"), optional(kw("NATIVE")), optional($.__format_view_as_tail)),
           alias($.__format_editor_phrase, $.editor_phrase),
+          alias($.__format_radio_set_phrase, $.radio_set_phrase),
           alias($.__view_as_alert_box, $.view_as_phrase),
         ),
       ),
