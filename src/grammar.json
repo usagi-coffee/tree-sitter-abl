@@ -59485,7 +59485,7 @@
               },
               {
                 "type": "SYMBOL",
-                "name": "_identifier_or_qualified_name"
+                "name": "_identifier_or_access_or_call"
               }
             ]
           }

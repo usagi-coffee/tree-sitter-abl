@@ -299,8 +299,13 @@ export default ({ kw }) => ({
     ),
   _alert_box_after_type: ($) =>
     choice(seq($._alert_buttons_phrase, optional($._alert_box_title)), $._alert_box_title),
+  // The title bar takes a character expression, and a translated caption --
+  // `TITLE Translate("Converted", -2, "")` -- is the usual way to
+  // write one, so a literal or a name alone is not enough. It stops short of
+  // the full expression: an operator after the title cannot be told apart from
+  // one continuing the message text.
   _alert_box_title: ($) =>
-    seq(kw("TITLE"), field("title", choice($.string_literal, $._identifier_or_qualified_name))),
+    seq(kw("TITLE"), field("title", choice($.string_literal, $._identifier_or_access_or_call))),
   _alert_type: ($) =>
     choice(
       kw("MESSAGE"),
