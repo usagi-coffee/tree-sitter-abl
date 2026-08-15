@@ -96,3 +96,32 @@ DISPLAY x VIEW-AS FILL-IN SIZE 10 BY 1.
       (size_phrase
         width: (number_literal)
         height: (number_literal)))))
+
+================================================================================
+FORMAT - editor options before the size
+================================================================================
+
+DEFINE FRAME F1
+    assisdat.texte AT ROW 4.75 COL 2 NO-LABELS
+    VIEW-AS EDITOR MAX-CHARS 700 SCROLLBAR-VERTICAL
+    SIZE 74.57 BY 7.75
+    WITH THREE-D.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (frame_definition
+    name: (identifier)
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (format_phrase
+      row: (number_literal)
+      column: (number_literal))
+    (format_phrase
+      (editor_phrase
+        max_chars: (number_literal)
+        width: (number_literal)
+        height: (number_literal)))
+    (frame_phrase
+      (three_d))))

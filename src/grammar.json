@@ -48447,6 +48447,18 @@
             "members": [
               {
                 "type": "SYMBOL",
+                "name": "__format_editor_options"
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
                 "name": "__format_size_phrase"
               },
               {

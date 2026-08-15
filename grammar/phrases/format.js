@@ -94,10 +94,14 @@ export default ({ kw }) => ({
       seq(kw("TO"), field("to", $._expression)),
     ),
 
+  // The options sit on either side of the size, as they do in the shared
+  // editor phrase: `VIEW-AS EDITOR MAX-CHARS 700 SCROLLBAR-VERTICAL SIZE 74 BY 7`
+  // is what the AppBuilder writes.
   __format_editor_phrase: ($) =>
     prec.left(
       seq(
         kw("EDITOR"),
+        optional($.__format_editor_options),
         choice(
           $.__format_size_phrase,
           seq(
