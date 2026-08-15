@@ -1,13 +1,18 @@
 export default ({ kw }) => ({
   enable_statement: ($) => seq($.__enable_prefix, $._terminator),
 
+  // With no field list at all the statement realizes the frame and enables
+  // nothing -- `ENABLE WITH FRAME F1 VIEW-AS DIALOG-BOX.` -- so the frame
+  // phrase stands in for the list rather than the list being optional; a bare
+  // ENABLE with neither has no meaning.
   __enable_prefix: ($) =>
     seq(
       kw("ENABLE"),
       optional(alias(kw("UNLESS-HIDDEN"), $.unless_hidden)),
-      $.__enable_body,
-      optional($.in_window_phrase),
-      optional($.frame_phrase),
+      choice(
+        seq($.__enable_body, optional($.in_window_phrase), optional($.frame_phrase)),
+        seq(optional($.in_window_phrase), $.frame_phrase),
+      ),
     ),
   __enable_body: ($) =>
     choice(
