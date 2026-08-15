@@ -68,6 +68,16 @@ const SYSTEM_HANDLE_WORDS = [
   "THIS-PROCEDURE",
 ];
 
+// Pieces of `macro_concatenated_name`, kept apart so the alternation stays
+// readable: a macro reference, and the characters a name is made of.
+const MACRO = `\\{(?:&[0-9A-Za-z_-]+|[0-9A-Za-z_-]+)\\}`;
+const NAME_CHARS = `[\\p{L}\\p{N}_\\-&#%$]`;
+const MACRO_CONCATENATED_NAME = new RegExp(
+  `[_\\p{L}]${NAME_CHARS}*(?:${MACRO}${NAME_CHARS}*)+` +
+    `|(?:${MACRO})+${NAME_CHARS}+(?:${MACRO}${NAME_CHARS}*)*`,
+  "i",
+);
+
 export default grammar({
   name: "abl",
 
@@ -338,10 +348,7 @@ export default grammar({
       // A name is assembled at compile time from macros and the text around
       // them. The macro may lead -- `{&PREFIX}TITLE` -- but a name character has
       // to follow it, otherwise the text is a plain macro reference.
-      macro_concatenated_name: ($) =>
-        token(
-          /[_\p{L}][\p{L}\p{N}_\-&#%$]*(\{(?:&[0-9A-Za-z_-]+|[0-9A-Za-z_-]+)\}[\p{L}\p{N}_\-&#%$]*)+|(\{(?:&[0-9A-Za-z_-]+|[0-9A-Za-z_-]+)\})+[\p{L}\p{N}_\-&#%$]+(\{(?:&[0-9A-Za-z_-]+|[0-9A-Za-z_-]+)\}[\p{L}\p{N}_\-&#%$]*)*/i,
-        ),
+      macro_concatenated_name: ($) => token(MACRO_CONCATENATED_NAME),
 
       _widgets: ($) => prec.right(alias(choice(...WIDGETS, kw("FRAME")), $.identifier)),
       _events: ($) =>
