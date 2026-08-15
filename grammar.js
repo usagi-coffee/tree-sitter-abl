@@ -488,7 +488,14 @@ export default grammar({
       // Callables
       arguments: ($) => seq($.__arguments_prefix, optional($._argument_list), ")"),
       __arguments_prefix: ($) => "(",
-      _argument_list: ($) => seq($.argument, repeat(seq(",", $.argument))),
+      // A COM automation method takes its optional parameters by position, and
+      // the ones you do not pass are left empty: `nodes:ADD(,,"A", label, 1)`.
+      // The list still cannot be empty, so `f()` keeps one reading.
+      _argument_list: ($) =>
+        choice(
+          seq($.argument, repeat(seq(",", optional($.argument)))),
+          repeat1(seq(",", optional($.argument))),
+        ),
       argument: ($) =>
         seq(
           optional(prec.dynamic(1, field("direction", $._parameter_direction))),
