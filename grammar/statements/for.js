@@ -32,6 +32,12 @@ export default ({ kw }) => ({
           alias($.__for_break_by, $.break_by),
         ),
       ),
+      // The syntax box allows a counter after the records, and code that
+      // commits in batches uses it: `FOR EACH t WHERE ... NO-LOCK
+      // cpttrans = 1 TO 1000:` stops the block after a thousand records
+      // instead of holding the whole table. It goes last, after the sort
+      // clauses, so that its own BY step cannot be read as another one.
+      optional($._loop_phrase),
     ),
 
   __for_record_phrases: ($) => seq($.__for_record, repeat(seq(",", $.__for_record))),

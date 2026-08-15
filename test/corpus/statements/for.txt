@@ -796,3 +796,30 @@ END.
     (body
       (display_statement
         record: (identifier)))))
+
+================================================================================
+FOR - record loop with a counter
+================================================================================
+
+FOR EACH del_mlemp WHERE del_mlemp.no_scenario = 0 EXCLUSIVE-LOCK cptTrans = 1 TO 500:
+  DELETE del_mlemp.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (for_statement
+    (record_phrase
+      record: (identifier)
+      where: (binary_expression
+        (qualified_name
+          left: (identifier)
+          right: (identifier))
+        (number_literal))
+      (exclusive_lock))
+    variable: (identifier)
+    start: (number_literal)
+    end: (number_literal)
+    (body
+      (delete_statement
+        record: (identifier)))))
