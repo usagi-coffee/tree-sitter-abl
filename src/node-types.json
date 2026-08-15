@@ -83538,11 +83538,23 @@
         "required": false,
         "types": [
           {
+            "type": "array_access",
+            "named": true
+          },
+          {
+            "type": "function_call",
+            "named": true
+          },
+          {
             "type": "identifier",
             "named": true
           },
           {
             "type": "macro_concatenated_name",
+            "named": true
+          },
+          {
+            "type": "object_access",
             "named": true
           },
           {

@@ -534,3 +534,27 @@ MESSAGE "x" VIEW-AS ALERT-BOX INFORMATION BUTTONS OK IN WINDOW CURRENT-WINDOW.
       (alert_type))
     (in_window_phrase
       window: (identifier))))
+
+================================================================================
+MESSAGE - alert box titled by a function call
+================================================================================
+
+MESSAGE wMsg VIEW-AS ALERT-BOX ERROR BUTTONS OK TITLE Translate("Converted",-2,"").
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (message_statement
+    (identifier)
+    (view_as_phrase
+      (alert_type)
+      title: (function_call
+        function: (identifier)
+        (arguments
+          (argument
+            name: (string_literal))
+          (argument
+            name: (unary_expression
+              (number_literal)))
+          (argument
+            name: (string_literal)))))))
