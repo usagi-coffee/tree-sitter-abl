@@ -305,8 +305,16 @@ export default ({ kw }) => ({
   // write one, so a literal or a name alone is not enough. It stops short of
   // the full expression: an operator after the title cannot be told apart from
   // one continuing the message text.
-  _alert_box_title: ($) =>
-    seq(kw("TITLE"), field("title", choice($.string_literal, $._identifier_or_access_or_call))),
+  _alert_box_title: ($) => seq(kw("TITLE"), field("title", $._alert_box_title_value)),
+  // A translated caption is usually built up: `TITLE Translate("Modified")
+  // + " " + CAPS(tabName)`. The concatenation is spelled out rather than reusing
+  // the expression rule, which cannot be told apart from the message text it
+  // follows.
+  _alert_box_title_value: ($) =>
+    choice($._alert_box_title_atom, alias($._alert_box_title_concatenation, $.binary_expression)),
+  _alert_box_title_concatenation: ($) =>
+    prec.right(1, seq($._alert_box_title_atom, repeat1(seq("+", $._alert_box_title_atom)))),
+  _alert_box_title_atom: ($) => choice($.string_literal, $._identifier_or_access_or_call),
   _alert_type: ($) =>
     choice(
       kw("MESSAGE"),

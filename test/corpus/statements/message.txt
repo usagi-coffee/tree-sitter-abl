@@ -558,3 +558,38 @@ MESSAGE wMsg VIEW-AS ALERT-BOX ERROR BUTTONS OK TITLE Translate("Converted",-2,"
               (number_literal)))
           (argument
             name: (string_literal)))))))
+
+================================================================================
+MESSAGE - alert box title built from several pieces
+================================================================================
+
+MESSAGE m VIEW-AS ALERT-BOX QUESTION BUTTONS YES-NO
+  TITLE Translate("Modified",-2,"") + " " + CAPS(tabName)
+  UPDATE vwrkf.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (message_statement
+    (identifier)
+    (view_as_phrase
+      (alert_type)
+      title: (binary_expression
+        (function_call
+          function: (identifier)
+          (arguments
+            (argument
+              name: (string_literal))
+            (argument
+              name: (unary_expression
+                (number_literal)))
+            (argument
+              name: (string_literal))))
+        (string_literal)
+        (function_call
+          function: (identifier)
+          (arguments
+            (argument
+              name: (identifier))))))
+    (set_update_phrase
+      field: (identifier))))
