@@ -23864,6 +23864,10 @@
             "named": true
           },
           {
+            "type": "parenthesized_expression",
+            "named": true
+          },
+          {
             "type": "preprocessor_name",
             "named": true
           },

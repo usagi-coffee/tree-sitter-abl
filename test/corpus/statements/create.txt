@@ -367,3 +367,17 @@ CREATE BUFFER hBuf FOR TABLE hT IN WIDGET-POOL "p".
     handle: (identifier)
     table: (identifier)
     pool: (string_literal)))
+
+================================================================================
+CREATE BUFFER - table name in parentheses
+================================================================================
+
+CREATE BUFFER buf-mod FOR TABLE ("lisval":U).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (create_statement
+    handle: (identifier)
+    table: (parenthesized_expression
+      (string_literal))))
