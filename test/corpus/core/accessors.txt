@@ -147,3 +147,55 @@ object :property = 5.
       right: (identifier))
     operator: (assignment_operator)
     right: (number_literal)))
+
+================================================================================
+ACCESSORS - COM method with omitted arguments
+================================================================================
+
+chImglist:ImageList:listImages:ADD(1,,bufcomh[1]).
+
+arbo:nodes:ADD(,,"A" + numof, 1).
+
+doc = cc:Documents:Open(Pdoc,,,).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (expression_statement
+    (function_call
+      function: (object_access
+        left: (identifier)
+        right: (identifier)
+        right: (identifier)
+        right: (identifier))
+      (arguments
+        (argument
+          name: (number_literal))
+        (argument
+          name: (array_access
+            array: (identifier)
+            index: (number_literal))))))
+  (expression_statement
+    (function_call
+      function: (object_access
+        left: (identifier)
+        right: (identifier)
+        right: (identifier))
+      (arguments
+        (argument
+          name: (binary_expression
+            (string_literal)
+            (identifier)))
+        (argument
+          name: (number_literal)))))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (function_call
+      function: (object_access
+        left: (identifier)
+        right: (identifier)
+        right: (identifier))
+      (arguments
+        (argument
+          name: (identifier))))))
