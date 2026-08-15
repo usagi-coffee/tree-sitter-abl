@@ -2737,6 +2737,10 @@
             "named": true
           },
           {
+            "type": "parenthesized_expression",
+            "named": true
+          },
+          {
             "type": "qualified_name",
             "named": true
           }
