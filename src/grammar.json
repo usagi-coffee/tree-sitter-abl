@@ -58578,7 +58578,7 @@
                         "name": "target",
                         "content": {
                           "type": "SYMBOL",
-                          "name": "string_literal"
+                          "name": "_codepage_name"
                         }
                       }
                     ]
@@ -58604,7 +58604,7 @@
                         "name": "source",
                         "content": {
                           "type": "SYMBOL",
-                          "name": "string_literal"
+                          "name": "_codepage_name"
                         }
                       }
                     ]
@@ -58613,6 +58613,19 @@
               }
             }
           ]
+        }
+      ]
+    },
+    "_codepage_name": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "string_literal"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_identifier_or_access_or_call"
         }
       ]
     },
