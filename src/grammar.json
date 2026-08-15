@@ -37279,10 +37279,544 @@
           "name": "topic",
           "content": {
             "type": "SYMBOL",
-            "name": "_expression"
+            "name": "__system_help_expression"
           }
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "TOKEN",
+                    "content": {
+                      "type": "PATTERN",
+                      "value": "WINDOW-NAME",
+                      "flags": "i"
+                    }
+                  },
+                  "named": false,
+                  "value": "WINDOW-NAME"
+                },
+                {
+                  "type": "FIELD",
+                  "name": "window_name",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "__system_help_expression"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "__system_help_action"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         }
       ]
+    },
+    "__system_help_action": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "ALIAS",
+            "content": {
+              "type": "TOKEN",
+              "content": {
+                "type": "PATTERN",
+                "value": "CONTENTS",
+                "flags": "i"
+              }
+            },
+            "named": false,
+            "value": "CONTENTS"
+          },
+          "named": true,
+          "value": "contents"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "ALIAS",
+            "content": {
+              "type": "TOKEN",
+              "content": {
+                "type": "PATTERN",
+                "value": "QUIT",
+                "flags": "i"
+              }
+            },
+            "named": false,
+            "value": "QUIT"
+          },
+          "named": true,
+          "value": "quit"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "ALIAS",
+            "content": {
+              "type": "TOKEN",
+              "content": {
+                "type": "PATTERN",
+                "value": "FINDER",
+                "flags": "i"
+              }
+            },
+            "named": false,
+            "value": "FINDER"
+          },
+          "named": true,
+          "value": "finder"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "ALIAS",
+            "content": {
+              "type": "TOKEN",
+              "content": {
+                "type": "PATTERN",
+                "value": "FORCE-FILE",
+                "flags": "i"
+              }
+            },
+            "named": false,
+            "value": "FORCE-FILE"
+          },
+          "named": true,
+          "value": "force_file"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "ALIAS",
+            "content": {
+              "type": "TOKEN",
+              "content": {
+                "type": "PATTERN",
+                "value": "HELP",
+                "flags": "i"
+              }
+            },
+            "named": false,
+            "value": "HELP"
+          },
+          "named": true,
+          "value": "help"
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PATTERN",
+                  "value": "CONTEXT",
+                  "flags": "i"
+                }
+              },
+              "named": false,
+              "value": "CONTEXT"
+            },
+            {
+              "type": "FIELD",
+              "name": "context",
+              "content": {
+                "type": "SYMBOL",
+                "name": "__system_help_expression"
+              }
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PATTERN",
+                  "value": "CONTEXT-POPUP",
+                  "flags": "i"
+                }
+              },
+              "named": false,
+              "value": "CONTEXT-POPUP"
+            },
+            {
+              "type": "FIELD",
+              "name": "context_popup",
+              "content": {
+                "type": "SYMBOL",
+                "name": "__system_help_expression"
+              }
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PATTERN",
+                  "value": "HELP-TOPIC",
+                  "flags": "i"
+                }
+              },
+              "named": false,
+              "value": "HELP-TOPIC"
+            },
+            {
+              "type": "FIELD",
+              "name": "help_topic",
+              "content": {
+                "type": "SYMBOL",
+                "name": "__system_help_expression"
+              }
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PATTERN",
+                  "value": "KEY",
+                  "flags": "i"
+                }
+              },
+              "named": false,
+              "value": "KEY"
+            },
+            {
+              "type": "FIELD",
+              "name": "key",
+              "content": {
+                "type": "SYMBOL",
+                "name": "__system_help_expression"
+              }
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PATTERN",
+                  "value": "ALTERNATE-KEY",
+                  "flags": "i"
+                }
+              },
+              "named": false,
+              "value": "ALTERNATE-KEY"
+            },
+            {
+              "type": "FIELD",
+              "name": "alternate_key",
+              "content": {
+                "type": "SYMBOL",
+                "name": "__system_help_expression"
+              }
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PATTERN",
+                  "value": "PARTIAL-KEY",
+                  "flags": "i"
+                }
+              },
+              "named": false,
+              "value": "PARTIAL-KEY"
+            },
+            {
+              "type": "FIELD",
+              "name": "partial_key",
+              "content": {
+                "type": "SYMBOL",
+                "name": "__system_help_expression"
+              }
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PATTERN",
+                  "value": "SET-CONTENTS",
+                  "flags": "i"
+                }
+              },
+              "named": false,
+              "value": "SET-CONTENTS"
+            },
+            {
+              "type": "FIELD",
+              "name": "set_contents",
+              "content": {
+                "type": "SYMBOL",
+                "name": "__system_help_expression"
+              }
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PATTERN",
+                  "value": "COMMAND",
+                  "flags": "i"
+                }
+              },
+              "named": false,
+              "value": "COMMAND"
+            },
+            {
+              "type": "FIELD",
+              "name": "command",
+              "content": {
+                "type": "SYMBOL",
+                "name": "__system_help_expression"
+              }
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PATTERN",
+                  "value": "MULTIPLE-KEY",
+                  "flags": "i"
+                }
+              },
+              "named": false,
+              "value": "MULTIPLE-KEY"
+            },
+            {
+              "type": "FIELD",
+              "name": "multiple_key",
+              "content": {
+                "type": "SYMBOL",
+                "name": "__system_help_expression"
+              }
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PATTERN",
+                  "value": "TEXT",
+                  "flags": "i"
+                }
+              },
+              "named": false,
+              "value": "TEXT"
+            },
+            {
+              "type": "FIELD",
+              "name": "text",
+              "content": {
+                "type": "SYMBOL",
+                "name": "__system_help_expression"
+              }
+            }
+          ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "__system_help_position"
+        }
+      ]
+    },
+    "__system_help_position": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PATTERN",
+              "value": "POSITION",
+              "flags": "i"
+            }
+          },
+          "named": false,
+          "value": "POSITION"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "ALIAS",
+                "content": {
+                  "type": "TOKEN",
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "MAXIMIZE",
+                    "flags": "i"
+                  }
+                },
+                "named": false,
+                "value": "MAXIMIZE"
+              },
+              "named": true,
+              "value": "maximize"
+            },
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "TOKEN",
+                    "content": {
+                      "type": "PATTERN",
+                      "value": "X",
+                      "flags": "i"
+                    }
+                  },
+                  "named": false,
+                  "value": "X"
+                },
+                {
+                  "type": "FIELD",
+                  "name": "x",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "__system_help_expression"
+                  }
+                },
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "TOKEN",
+                    "content": {
+                      "type": "PATTERN",
+                      "value": "Y",
+                      "flags": "i"
+                    }
+                  },
+                  "named": false,
+                  "value": "Y"
+                },
+                {
+                  "type": "FIELD",
+                  "name": "y",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "__system_help_expression"
+                  }
+                },
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "TOKEN",
+                    "content": {
+                      "type": "PATTERN",
+                      "value": "WIDTH",
+                      "flags": "i"
+                    }
+                  },
+                  "named": false,
+                  "value": "WIDTH"
+                },
+                {
+                  "type": "FIELD",
+                  "name": "width",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "__system_help_expression"
+                  }
+                },
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "TOKEN",
+                    "content": {
+                      "type": "PATTERN",
+                      "value": "HEIGHT",
+                      "flags": "i"
+                    }
+                  },
+                  "named": false,
+                  "value": "HEIGHT"
+                },
+                {
+                  "type": "FIELD",
+                  "name": "height",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "__system_help_expression"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "__system_help_expression": {
+      "type": "SYMBOL",
+      "name": "_expression"
     },
     "__system_dialog_prefix": {
       "type": "ALIAS",
