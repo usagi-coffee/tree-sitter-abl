@@ -43,12 +43,16 @@ export default ({ kw }) => ({
       seq(kw("FUNCTION"), seq($.__function_forward_head, $.__function_forward_target)),
     ),
 
+  // The syntax box reads `[ RETURNS ] return-type`, and the return type takes
+  // an extent like any other: `FUNCTION f RETURNS CHARACTER EXTENT (p AS
+  // CHARACTER) FORWARD.` returns an array.
   __function_forward_head: ($) =>
     seq(
       field("name", $.identifier),
-      kw("RETURNS", { offset: 5 }),
+      optional(kw("RETURNS", { offset: 5 })),
       optional(kw("CLASS")),
       field("type", $._type_name),
+      optional(alias($._extent_phrase, $.extent_phrase)),
       optional(
         choice(
           alias(kw("PRIVATE"), $.access_modifier),
@@ -65,7 +69,7 @@ export default ({ kw }) => ({
         optional(alias($.__function_map_phrase, $.map_phrase)),
         alias($.__function_in_phrase, $.in_phrase),
       ),
-      alias(kw("FORWARD"), $.forward),
+      alias(kw("FORWARDS", { alias: "FORWARD", offset: 7 }), $.forward),
     ),
 
   __function_parameters: ($) =>
