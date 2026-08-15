@@ -199,3 +199,36 @@ x = STRING({&PREFIX}TITLE, 'X(42)':U).
           name: (macro_concatenated_name))
         (argument
           name: (string_literal))))))
+
+================================================================================
+PREPROCESSOR - macro name with the punctuation a name allows
+================================================================================
+
+{&PREFIX}W% = Translate("en %",-2,"").
+
+IF {&PREFIX}field$ = 0 THEN z = 1.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assignment_statement
+    left: (macro_concatenated_name)
+    operator: (assignment_operator)
+    right: (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (string_literal))
+        (argument
+          name: (unary_expression
+            (number_literal)))
+        (argument
+          name: (string_literal)))))
+  (if_statement
+    (binary_expression
+      (macro_concatenated_name)
+      (number_literal))
+    then: (assignment_statement
+      left: (identifier)
+      operator: (assignment_operator)
+      right: (number_literal))))
