@@ -47,9 +47,18 @@ export default ({ kw }) => ({
     seq(
       kw("PERSISTENT"),
       kw("RUN"),
-      field("procedure", $._expression),
+      field("procedure", $.__persistent_trigger_procedure),
       optional($.__persistent_trigger_tail),
       optional($._terminator_dot),
+    ),
+  // The procedure is named, not computed from an expression: that one reaches
+  // widget_qualified_name, whose separator is IN, and it would then swallow the
+  // `IN THIS-PROCEDURE` that follows.
+  __persistent_trigger_procedure: ($) =>
+    choice(
+      $._identifier_or_qualified_name,
+      $.string_literal,
+      alias($._value_expression, $.value_expression),
     ),
   __persistent_trigger_tail: ($) =>
     choice(
