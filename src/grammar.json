@@ -56919,6 +56919,42 @@
                     }
                   }
                 ]
+              },
+              {
+                "type": "ALIAS",
+                "content": {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "TOKEN",
+                    "content": {
+                      "type": "PATTERN",
+                      "value": "READ-ONLY",
+                      "flags": "i"
+                    }
+                  },
+                  "named": false,
+                  "value": "READ-ONLY"
+                },
+                "named": true,
+                "value": "read_only"
+              },
+              {
+                "type": "ALIAS",
+                "content": {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "TOKEN",
+                    "content": {
+                      "type": "PATTERN",
+                      "value": "TOGGLE-BOX",
+                      "flags": "i"
+                    }
+                  },
+                  "named": false,
+                  "value": "TOGGLE-BOX"
+                },
+                "named": true,
+                "value": "toggle_box"
               }
             ]
           }
