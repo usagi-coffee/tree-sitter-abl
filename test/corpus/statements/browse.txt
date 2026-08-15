@@ -908,3 +908,28 @@ DEFINE BROWSE c QUERY q DISPLAY t.f WITH SINGLE NO-SEPARATORS NO-AUTO-VALIDATE.
     (single)
     (no_separators)
     (no_auto_validate)))
+
+================================================================================
+BROWSE DEFINITION - column shown as a toggle box
+================================================================================
+
+DEFINE BROWSE b QUERY q
+  DISPLAY tablib.oblig COLUMN-LABEL "O" LABEL-FGCOLOR 9 FORMAT "O/N":U WIDTH 2.14 VIEW-AS TOGGLE-BOX
+  WITH 10 DOWN.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (browse_definition
+    name: (identifier)
+    query: (identifier)
+    (column
+      column: (qualified_name
+        left: (identifier)
+        right: (identifier))
+      column_label: (string_literal)
+      label_fgcolor: (number_literal)
+      format: (string_literal)
+      width: (number_literal)
+      (view_as_phrase))
+    down: (number_literal)))

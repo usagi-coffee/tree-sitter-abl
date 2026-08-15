@@ -155,11 +155,18 @@ export default ({ kw }) => ({
             alias(kw("DISABLE-AUTO-ZAP"), $.disable_auto_zap),
             alias(kw("MOVEABLE"), $.moveable),
             alias(kw("RESIZABLE"), $.resizable),
+            alias($.__browse_column_view_as, $.view_as_phrase),
           ),
         ),
         optional(alias(seq("@", field("base", $._identifier_or_qualified_name)), $.base_field)),
       ),
     ),
+  // A browse column takes a strict subset of the VIEW-AS phrase: a toggle box
+  // or a combo box. Only the toggle box is spelled out here -- the combo box
+  // brings its LIST-ITEMS values, and a comma-separated list of expressions
+  // cannot be told apart from the column list around it.
+  __browse_column_view_as: ($) => seq(kw("VIEW-AS"), field("widget", kw("TOGGLE-BOX"))),
+
   __browse_option_expression: ($) => prec.right($._expression),
 
   __browse_enable_phrase: ($) =>

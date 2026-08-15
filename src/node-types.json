@@ -16684,6 +16684,10 @@
         {
           "type": "resizable",
           "named": true
+        },
+        {
+          "type": "view_as_phrase",
+          "named": true
         }
       ]
     }
