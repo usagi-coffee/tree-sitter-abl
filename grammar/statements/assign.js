@@ -34,8 +34,8 @@ export default ({ kw }) => ({
     seq(
       optional(kw("INPUT")),
       choice(
-        seq(kw("FRAME"), field("frame", $.identifier)),
-        seq(kw("BROWSE"), field("browse", $.identifier)),
+        seq(kw("FRAME"), field("frame", $.__assign_widget_name)),
+        seq(kw("BROWSE"), field("browse", $.__assign_widget_name)),
       ),
       repeat1(
         seq(

@@ -624,3 +624,19 @@ IF VALID-HANDLE(ACTIVE-WINDOW) AND FRAME {&FRAME-NAME}:PARENT EQ ? THEN x = 1.
       left: (identifier)
       operator: (assignment_operator)
       right: (number_literal))))
+
+================================================================================
+ASSIGN - frame named by a macro before its fields
+================================================================================
+
+ASSIGN FRAME {&FRAME-NAME} tabgco.inti_tab.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assign_statement
+    frame: (preprocessor_name
+      (identifier))
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))))
