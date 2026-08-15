@@ -550,3 +550,31 @@ ASSIGN BROWSE b1:CURRENT-ROW = 1.
         browse: (identifier)
         attr: (identifier)
         right: (number_literal)))))
+
+================================================================================
+ASSIGN - FRAME attribute LHS
+================================================================================
+
+ASSIGN
+    FRAME Dialog-Frame:SCROLLABLE = FALSE
+    FRAME Dialog-Frame:HIDDEN     = TRUE.
+
+ASSIGN FRAME F1 fld1 fld2.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assign_statement
+    (assign_phrase
+      (assign_pair
+        frame: (identifier)
+        attr: (identifier)
+        right: (boolean_literal))
+      (assign_pair
+        frame: (identifier)
+        attr: (identifier)
+        right: (boolean_literal))))
+  (assign_statement
+    frame: (identifier)
+    field: (identifier)
+    field: (identifier)))

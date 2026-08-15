@@ -1744,6 +1744,16 @@
           }
         ]
       },
+      "frame": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
       "left": {
         "multiple": true,
         "required": true,
@@ -1754,6 +1764,10 @@
           },
           {
             "type": "BROWSE",
+            "named": false
+          },
+          {
+            "type": "FRAME",
             "named": false
           },
           {

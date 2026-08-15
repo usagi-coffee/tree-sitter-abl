@@ -13,6 +13,7 @@ export default ({ kw }) => ({
           $._assignable,
           $.__assign_keyword_identifier,
           seq(kw("BROWSE"), field("browse", $.identifier), ":", field("attr", $.identifier)),
+          seq(kw("FRAME"), field("frame", $.identifier), ":", field("attr", $.identifier)),
         ),
       ),
       optional($.__assign_pair_tail),
