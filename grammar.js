@@ -259,7 +259,9 @@ export default grammar({
       __include_file_target: ($) => choice($.include_file_path, $.argument_reference),
       include_file_path: ($) =>
         seq(optional($.preprocessor_name), alias($.__include_file_name, $.identifier)),
-      __include_file_name: ($) => /[A-Za-z0-9_\\/.-]+\.[A-Za-z][A-Za-z0-9]*/,
+      // `!` separates a procedure library from the member inside it, as in
+      // `{h!Api.i}`, and it is a legal file-name character besides.
+      __include_file_name: ($) => /[A-Za-z0-9_!\\/.-]+\.[A-Za-z][A-Za-z0-9]*/,
 
       // Constants
       constant: ($) => token(prec(-1, /\{&[^}\r\n]+\}[ \t]*\r?\n/)),
