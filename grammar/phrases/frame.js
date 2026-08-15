@@ -68,8 +68,12 @@ export default ({ kw }) => ({
   __frame_skip_phrase: ($) =>
     prec.left(seq(kw("SKIP"), optional(field("skip", seq("(", $.__frame_expression, ")"))))),
 
+  // The title takes one colour per component -- `TITLE BGCOLOR 1 FGCOLOR 15
+  // "Frame A"` -- so the options repeat instead of being a single choice.
+  // Spelling the four out in the order the syntax box gives them costs 620
+  // actions against 136 for the repeat, so the looser form wins.
   __frame_title_phrase: ($) =>
-    seq(kw("TITLE"), optional($._frame_title_option), field("title", $.__frame_expression)),
+    seq(kw("TITLE"), repeat($._frame_title_option), field("title", $.__frame_expression)),
   _frame_title_option: ($) =>
     choice(
       seq(kw("BGCOLOR"), field("title_bgcolor", $.__frame_expression)),
