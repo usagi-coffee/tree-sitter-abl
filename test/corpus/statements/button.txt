@@ -479,3 +479,26 @@ DEFINE BUTTONS btn1.
 (source_code
   (button_definition
     name: (identifier)))
+
+================================================================================
+BUTTON DEFINITION - AUTO-END-KEY spelling
+================================================================================
+
+DEFINE BUTTON Bretour AUTO-END-KEY LABEL "Retour" SIZE 5 BY 1.
+
+DEFINE BUTTON BtnCancel AUTO-END-KEY DEFAULT LABEL "Annuler".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (button_definition
+    name: (identifier)
+    (auto_endkey)
+    label: (string_literal)
+    width: (number_literal)
+    height: (number_literal))
+  (button_definition
+    name: (identifier)
+    (auto_endkey)
+    (default)
+    label: (string_literal)))
