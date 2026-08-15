@@ -165,3 +165,37 @@ ASSIGN x = 1.
       (assign_pair
         left: (identifier)
         right: (number_literal)))))
+
+================================================================================
+PREPROCESSOR - name that starts with a macro
+================================================================================
+
+{&PREFIX}fmt6 = "ZZZZZZ9".
+
+{&PREFIX}MEMOTEXT[1] = "x".
+
+x = STRING({&PREFIX}TITLE, 'X(42)':U).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assignment_statement
+    left: (macro_concatenated_name)
+    operator: (assignment_operator)
+    right: (string_literal))
+  (assignment_statement
+    left: (array_access
+      array: (macro_concatenated_name)
+      index: (number_literal))
+    operator: (assignment_operator)
+    right: (string_literal))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (macro_concatenated_name))
+        (argument
+          name: (string_literal))))))

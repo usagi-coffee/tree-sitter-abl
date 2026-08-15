@@ -327,9 +327,12 @@ export default grammar({
       _identifier_or_access: ($) =>
         choice($._identifier_or_qualified_name, $.array_access, $.object_access),
       _identifier_or_access_or_call: ($) => choice($._identifier_or_access, $.function_call),
+      // A name is assembled at compile time from macros and the text around
+      // them. The macro may lead -- `{&PREFIX}TITLE` -- but a name character has
+      // to follow it, otherwise the text is a plain macro reference.
       macro_concatenated_name: ($) =>
         token(
-          /[_\p{L}][\p{L}\p{N}_\-&]*(\{(?:&[0-9A-Za-z_-]+|[0-9A-Za-z_-]+)\}[\p{L}\p{N}_\-&]*)+/i,
+          /[_\p{L}][\p{L}\p{N}_\-&]*(\{(?:&[0-9A-Za-z_-]+|[0-9A-Za-z_-]+)\}[\p{L}\p{N}_\-&]*)+|(\{(?:&[0-9A-Za-z_-]+|[0-9A-Za-z_-]+)\})+[\p{L}\p{N}_\-&]+(\{(?:&[0-9A-Za-z_-]+|[0-9A-Za-z_-]+)\}[\p{L}\p{N}_\-&]*)*/i,
         ),
 
       _widgets: ($) => prec.right(alias(choice(...WIDGETS, kw("FRAME")), $.identifier)),
