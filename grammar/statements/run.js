@@ -53,8 +53,12 @@ export default ({ kw }) => ({
     ),
   // A procedure reference given as a path, with the .p or .r extension left
   // implicit: RUN Erp\Model\Vente\ErpTrt. Both separators occur in practice.
+  // The extension can also be spelled out -- `RUN export\libexcel.i` runs an
+  // include file that was compiled on its own.
   __run_procedure_path: ($) =>
-    token(/[A-Za-z_][A-Za-z0-9_-]*(?:[/\u005C][A-Za-z_][A-Za-z0-9_-]*)+/),
+    token(
+      /[A-Za-z_][A-Za-z0-9_-]*(?:[/\u005C][A-Za-z_][A-Za-z0-9_-]*)+(?:\.[A-Za-z][A-Za-z0-9]*)?/,
+    ),
 
   __run_library_member: ($) =>
     seq(
