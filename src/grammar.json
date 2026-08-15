@@ -783,7 +783,7 @@
     },
     "__include_file_name": {
       "type": "PATTERN",
-      "value": "[A-Za-z0-9_!\\\\/.-]+\\.[A-Za-z][A-Za-z0-9]*"
+      "value": "[A-Za-z0-9_!\\\\/.-](?:[A-Za-z0-9_!\\\\/.-]|\\{&[0-9A-Za-z_-]+\\})*\\.[A-Za-z][A-Za-z0-9]*"
     },
     "__macro_statement": {
       "type": "TOKEN",
