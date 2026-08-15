@@ -83578,6 +83578,10 @@
             "named": true
           },
           {
+            "type": "binary_expression",
+            "named": true
+          },
+          {
             "type": "function_call",
             "named": true
           },
