@@ -81,3 +81,23 @@ DEFINE VARIABLE a AS CHARACTER TRIGGERS: ON GO PERSISTENT RUN "h". END TRIGGERS.
     (trigger_phrase
       event: (identifier)
       procedure: (string_literal))))
+
+================================================================================
+TRIGGERS - persistent procedure owned by THIS-PROCEDURE
+================================================================================
+
+CREATE BUTTON h
+  TRIGGERS:
+    ON RETURN, LEAVE PERSISTENT RUN ACT-LEAVE-RETURN IN THIS-PROCEDURE.
+  END TRIGGERS.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (create_widget_statement
+    handle: (identifier)
+    (trigger_phrase
+      event: (identifier)
+      event: (identifier)
+      procedure: (identifier)
+      handle: (identifier))))

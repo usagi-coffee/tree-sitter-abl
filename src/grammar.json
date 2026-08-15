@@ -46121,7 +46121,7 @@
           "name": "procedure",
           "content": {
             "type": "SYMBOL",
-            "name": "_expression"
+            "name": "__persistent_trigger_procedure"
           }
         },
         {
@@ -46147,6 +46147,28 @@
               "type": "BLANK"
             }
           ]
+        }
+      ]
+    },
+    "__persistent_trigger_procedure": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "_identifier_or_qualified_name"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "string_literal"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_value_expression"
+          },
+          "named": true,
+          "value": "value_expression"
         }
       ]
     },
