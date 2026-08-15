@@ -102,15 +102,43 @@ export default ({ kw }) => ({
           kw("FOR"),
           field("table", $._identifier_or_qualified_name),
         ),
-        seq(kw("TABLE"), field("table", $.identifier)),
-        seq(kw("TABLE-HANDLE"), field("table_handle", $.identifier)),
-        seq(kw("DATASET"), kw("FOR"), field("dataset", $._identifier_or_qualified_name)),
-        seq(kw("DATASET-HANDLE"), field("dataset_handle", $.identifier)),
+        // The syntax box spells it `TABLE FOR name [APPEND] [BIND] [BY-VALUE]`,
+        // like the DEFINE PARAMETER statement. FOR stays optional because a
+        // test already pins the shorter form.
+        seq(
+          kw("TABLE"),
+          optional(kw("FOR")),
+          field("table", $._identifier_or_qualified_name),
+          repeat($.__function_table_option),
+        ),
+        seq(
+          kw("TABLE-HANDLE"),
+          field("table_handle", $.identifier),
+          repeat($.__function_table_option),
+        ),
+        seq(
+          kw("DATASET"),
+          kw("FOR"),
+          field("dataset", $._identifier_or_qualified_name),
+          repeat($.__function_table_option),
+        ),
+        seq(
+          kw("DATASET-HANDLE"),
+          field("dataset_handle", $.identifier),
+          repeat($.__function_table_option),
+        ),
         // A prototype states only the mode and data type of each parameter, so the
         // name may be absent. Definition and prototype share every token up to the
         // closing parenthesis, so one rule has to serve both.
         seq(optional(kw("CLASS")), field("type", $._type_name), optional($._extent_phrase)),
       ),
+    ),
+
+  __function_table_option: ($) =>
+    choice(
+      alias(kw("APPEND"), $.append),
+      alias(kw("BIND"), $.bind),
+      alias(kw("BY-VALUE"), $.by_value),
     ),
 
   __function_variable_type_phrase: ($) => seq($._as_like, optional($._extent_phrase)),

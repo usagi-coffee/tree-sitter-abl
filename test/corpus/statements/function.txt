@@ -930,3 +930,37 @@ END FUNCTION.
         type: (identifier)))
     (return_statement
       value: (string_literal))))
+
+================================================================================
+FUNCTION - temp-table parameter passed by name
+================================================================================
+
+FUNCTION f RETURNS LOGICAL (INPUT pSite AS INTEGER, INPUT-OUTPUT TABLE FOR tt-site) FORWARD.
+
+FUNCTION g RETURNS LOGICAL (INPUT-OUTPUT TABLE FOR tt-x APPEND BIND):
+  RETURN YES.
+END FUNCTION.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (function_forward_definition
+    name: (identifier)
+    type: (identifier)
+    (parameters
+      (parameter
+        name: (identifier)
+        type: (identifier))
+      (parameter
+        table: (identifier)))
+    (forward))
+  (function_definition
+    name: (identifier)
+    type: (identifier)
+    (parameters
+      (parameter
+        table: (identifier)
+        (append)
+        (bind)))
+    (return_statement
+      value: (boolean_literal))))
