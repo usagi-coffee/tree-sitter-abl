@@ -587,3 +587,26 @@ RUN feedback PERSIST SET gHandlePapa.
     procedure: (identifier)
     (persistent
       handle: (identifier))))
+
+================================================================================
+RUN - context chosen at the call site
+================================================================================
+
+RUN ExecuterFonctionV4 IN (IF vmemoireSeparee THEN hmemoireSeparee ELSE g-hgpao) (a, b).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (run_statement
+    procedure: (identifier)
+    (in_phrase
+      context: (parenthesized_expression
+        (conditional_expression
+          (identifier)
+          (identifier)
+          (identifier))))
+    (arguments
+      (argument
+        name: (identifier))
+      (argument
+        name: (identifier)))))

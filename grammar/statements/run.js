@@ -83,11 +83,14 @@ export default ({ kw }) => ({
       optional(seq(kw("EVENT-HANDLER-CONTEXT"), field("context", $.__run_context_value))),
     ),
 
+  // The context is a handle, and a handle can be chosen at the call site:
+  // `RUN ExecuterFonctionV4 IN (IF vSeparee THEN hSeparee ELSE g-hgpao) (...)`.
   __run_context_value: ($) =>
     choice(
       $.system_handle_identifier,
       $.object_access,
       $.array_access,
+      $.parenthesized_expression,
       $._identifier_or_qualified_name,
     ),
 });
