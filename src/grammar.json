@@ -34102,7 +34102,7 @@
                   "type": "TOKEN",
                   "content": {
                     "type": "PATTERN",
-                    "value": "PERSISTENT",
+                    "value": "PERSIST(E(N(T)?)?)?",
                     "flags": "i"
                   }
                 },
@@ -34219,8 +34219,55 @@
           "name": "handle",
           "content": {
             "type": "SYMBOL",
+            "name": "__run_persistence_handle"
+          }
+        }
+      ]
+    },
+    "__run_persistence_handle": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "identifier"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "__run_persistence_handle_element"
+          },
+          "named": true,
+          "value": "array_access"
+        }
+      ]
+    },
+    "__run_persistence_handle_element": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "array",
+          "content": {
+            "type": "SYMBOL",
             "name": "identifier"
           }
+        },
+        {
+          "type": "STRING",
+          "value": "["
+        },
+        {
+          "type": "FIELD",
+          "name": "index",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_expression"
+          }
+        },
+        {
+          "type": "STRING",
+          "value": "]"
         }
       ]
     },

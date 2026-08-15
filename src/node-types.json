@@ -3003,6 +3003,10 @@
         "required": false,
         "types": [
           {
+            "type": "array_access",
+            "named": true
+          },
+          {
             "type": "identifier",
             "named": true
           }
@@ -58252,6 +58256,10 @@
         "required": false,
         "types": [
           {
+            "type": "array_access",
+            "named": true
+          },
+          {
             "type": "identifier",
             "named": true
           }
@@ -69725,6 +69733,10 @@
         "required": true,
         "types": [
           {
+            "type": "array_access",
+            "named": true
+          },
+          {
             "type": "identifier",
             "named": true
           }
@@ -69740,6 +69752,10 @@
         "multiple": false,
         "required": true,
         "types": [
+          {
+            "type": "array_access",
+            "named": true
+          },
           {
             "type": "identifier",
             "named": true
