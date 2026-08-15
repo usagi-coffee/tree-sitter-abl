@@ -11,3 +11,19 @@ MESSAGE "x" IN WINDOW win.
     (string_literal)
     (in_window_phrase
       window: (identifier))))
+
+================================================================================
+IN WINDOW - window named by a macro
+================================================================================
+
+VIEW FRAME fr$mntacc_op IN WINDOW {&WINDOW-NAME}.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (view_statement
+    (widget_phrase
+      frame: (identifier))
+    (in_window_phrase
+      window: (preprocessor_name
+        (identifier)))))

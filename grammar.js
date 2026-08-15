@@ -552,6 +552,8 @@ export default grammar({
         ),
       __widget_qualified_name_separator: ($) => kw("IN"),
 
+      // A generated screen names its window through a macro, as in
+      // `VIEW FRAME fr IN WINDOW {&WINDOW-NAME}.`
       _window_handle: ($) =>
         choice(
           $._identifier_or_qualified_name,
@@ -559,6 +561,7 @@ export default grammar({
           $.object_access,
           $.function_call,
           $.scoped_name,
+          $.preprocessor_name,
         ),
 
       // Identifiers
