@@ -6,7 +6,17 @@ export default ({ kw }) => ({
       $._define_private_prefix,
       kw("IMAGE"),
       field("name", $.identifier),
-      repeat1(choice($.image_phrase, seq(kw("LIKE"), field("like", $.identifier)), $.size_phrase)),
+      repeat1(
+        choice(
+          $.image_phrase,
+          seq(kw("LIKE"), field("like", $.identifier)),
+          $.size_phrase,
+          // The syntax box puts TRANSPARENT last, but the AppBuilder writes it
+          // before the size phrase -- `IMAGE img TRANSPARENT SIZE 5.43 BY 1.5`
+          // -- and that compiles, so it belongs here too.
+          alias(kw("TRANSPARENT"), $.transparent),
+        ),
+      ),
       optional(
         choice(
           seq(
@@ -37,10 +47,7 @@ export default ({ kw }) => ({
       $.__image_stretch_transparent_tail,
     ),
   __image_stretch_transparent_tail: ($) =>
-    choice(
-      seq($.__image_stretch_phrase, optional(alias(kw("TRANSPARENT"), $.transparent))),
-      alias(kw("TRANSPARENT"), $.transparent),
-    ),
+    seq($.__image_stretch_phrase, optional(alias(kw("TRANSPARENT"), $.transparent))),
   __image_tooltip_phrase: ($) =>
     seq(kw("TOOLTIP"), field("tooltip", $._identifier_or_string_literal)),
   __image_stretch_phrase: ($) =>
