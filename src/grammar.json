@@ -1146,21 +1146,29 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "ALIAS",
-              "content": {
-                "type": "SYMBOL",
-                "name": "__assign_statement_phrase_body"
-              },
-              "named": true,
-              "value": "assign_phrase"
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "__assign_statement_phrase_body"
+                  },
+                  "named": true,
+                  "value": "assign_phrase"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "__assign_record_body"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "__assign_input_body"
+                }
+              ]
             },
             {
-              "type": "SYMBOL",
-              "name": "__assign_record_body"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "__assign_input_body"
+              "type": "BLANK"
             }
           ]
         }

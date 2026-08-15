@@ -1,13 +1,19 @@
 export default ({ kw }) => ({
   assign_statement: ($) => seq($.__assign_statement_prefix, $._no_error_terminator),
 
+  // The list is optional. Generated code emits `ASSIGN` and a terminator with
+  // nothing between when the assignments it was going to write all came from
+  // macros that expanded to nothing; real code does this, and the bytes really
+  // are just those two tokens.
   __assign_statement_prefix: ($) =>
     seq(
       kw("ASSIGN"),
-      choice(
-        alias($.__assign_statement_phrase_body, $.assign_phrase),
-        $.__assign_record_body,
-        $.__assign_input_body,
+      optional(
+        choice(
+          alias($.__assign_statement_phrase_body, $.assign_phrase),
+          $.__assign_record_body,
+          $.__assign_input_body,
+        ),
       ),
     ),
 
