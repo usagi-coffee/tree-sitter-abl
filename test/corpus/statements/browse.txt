@@ -867,3 +867,44 @@ DEFINE BROWSE b QUERY q DISPLAY f WITH 10 DOWN ROW-HEIGHT-CHARS .54 FIT-LAST-COL
     down: (number_literal)
     row_height_chars: (number_literal)
     (fit_last_column)))
+
+================================================================================
+BROWSE DEFINITION - remaining option keywords
+================================================================================
+
+DEFINE BROWSE b QUERY q DISPLAY t.f
+  WITH NO-BOX NO-ROW-MARKERS SEPARATORS NO-SCROLLBAR-VERTICAL SIZE 88.29 BY 7.21
+       BGCOLOR 48 FONT 49 ROW-HEIGHT-CHARS .54 EXPANDABLE.
+
+DEFINE BROWSE c QUERY q DISPLAY t.f WITH SINGLE NO-SEPARATORS NO-AUTO-VALIDATE.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (browse_definition
+    name: (identifier)
+    query: (identifier)
+    (column
+      column: (qualified_name
+        left: (identifier)
+        right: (identifier)))
+    (no_box)
+    (no_row_markers)
+    (separators)
+    (no_scrollbar_vertical)
+    width: (number_literal)
+    height: (number_literal)
+    bgcolor: (number_literal)
+    font: (number_literal)
+    row_height_chars: (number_literal)
+    (expandable))
+  (browse_definition
+    name: (identifier)
+    query: (identifier)
+    (column
+      column: (qualified_name
+        left: (identifier)
+        right: (identifier)))
+    (single)
+    (no_separators)
+    (no_auto_validate)))
