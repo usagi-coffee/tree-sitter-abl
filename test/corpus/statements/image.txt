@@ -639,3 +639,21 @@ DEFINE IMAGE PALETTE FILENAME "LePALETT":U TRANSPARENT SIZE 21 BY 3.88.
     (size_phrase
       width: (number_literal)
       height: (number_literal))))
+
+================================================================================
+IMAGE DEFINITION - stretch phrase before the size
+================================================================================
+
+DEFINE IMAGE imgcli
+    STRETCH-TO-FIT
+    SIZE 42.57 BY 7.29.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (image_definition
+    name: (identifier)
+    (stretch_to_fit)
+    (size_phrase
+      width: (number_literal)
+      height: (number_literal))))

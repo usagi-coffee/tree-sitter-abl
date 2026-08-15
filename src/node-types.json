@@ -46935,7 +46935,7 @@
     "named": true,
     "fields": {
       "bgcolor": {
-        "multiple": false,
+        "multiple": true,
         "required": false,
         "types": [
           {
@@ -47069,7 +47069,7 @@
         ]
       },
       "fgcolor": {
-        "multiple": false,
+        "multiple": true,
         "required": false,
         "types": [
           {
@@ -47223,7 +47223,7 @@
         ]
       },
       "tooltip": {
-        "multiple": false,
+        "multiple": true,
         "required": false,
         "types": [
           {
