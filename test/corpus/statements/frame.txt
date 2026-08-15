@@ -1174,3 +1174,31 @@ DEFINE FRAME fr fld1 TOOLTIP "aide".
     field: (identifier)
     (format_phrase
       tooltip: (string_literal))))
+
+================================================================================
+FRAME DEFINITION - size before position on a literal item
+================================================================================
+
+DEFINE FRAME F1
+    "~~" VIEW-AS TEXT
+    SIZE 2.57 BY .5 AT ROW 8.33 COL 36
+    BGCOLOR 48 FONT 14
+    WITH THREE-D.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (frame_definition
+    name: (identifier)
+    value: (string_literal)
+    (text)
+    (size_phrase
+      width: (number_literal)
+      height: (number_literal))
+    (at_phrase
+      row: (number_literal)
+      column: (number_literal))
+    bgcolor: (number_literal)
+    font: (number_literal)
+    (frame_phrase
+      (three_d))))

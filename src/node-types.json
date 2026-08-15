@@ -40472,6 +40472,10 @@
           "named": true
         },
         {
+          "type": "size_phrase",
+          "named": true
+        },
+        {
           "type": "skip",
           "named": true
         },
