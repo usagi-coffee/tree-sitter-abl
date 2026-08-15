@@ -908,3 +908,25 @@ FUNCTION INITCAISSE_closeAPI RETURNS LOGICAL FORWARDS.
     name: (identifier)
     type: (identifier)
     (forward)))
+
+================================================================================
+FUNCTION - return type with an extent
+================================================================================
+
+FUNCTION getListeTypElem RETURNS CHARACTER EXTENT (pTypFich AS CHARACTER):
+  RETURN "".
+END FUNCTION.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (function_definition
+    name: (identifier)
+    type: (identifier)
+    (extent_phrase)
+    (parameters
+      (parameter
+        name: (identifier)
+        type: (identifier)))
+    (return_statement
+      value: (string_literal))))
