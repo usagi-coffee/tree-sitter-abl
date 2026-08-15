@@ -369,3 +369,23 @@ OUTPUT TO ../logs/app.log.
     file: (opsys_file))
   (output_statement
     file: (opsys_file)))
+
+================================================================================
+OUTPUT TO - code page read off the session
+================================================================================
+
+OUTPUT TO VALUE(SESSION:TEMP-DIR + "datafield.udl":U) CONVERT TARGET SESSION:CPINTERNAL.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (output_statement
+    value: (binary_expression
+      (object_access
+        left: (identifier)
+        right: (identifier))
+      (string_literal))
+    (convert_phrase
+      target: (object_access
+        left: (identifier)
+        right: (identifier)))))

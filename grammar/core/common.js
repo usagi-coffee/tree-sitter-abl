@@ -158,12 +158,17 @@ export default ({ kw }) => ({
         kw("CONVERT"),
         repeat(
           choice(
-            seq(kw("TARGET"), field("target", $.string_literal)),
-            seq(kw("SOURCE"), field("source", $.string_literal)),
+            // The code page is usually a literal, but reading it off the
+            // session -- `CONVERT TARGET SESSION:CPINTERNAL` -- is how a
+            // program keeps the file in whatever encoding it is running in.
+            seq(kw("TARGET"), field("target", $._codepage_name)),
+            seq(kw("SOURCE"), field("source", $._codepage_name)),
           ),
         ),
       ),
     ),
+
+  _codepage_name: ($) => choice($.string_literal, $._identifier_or_access_or_call),
 
   _echo_phrase: ($) => choice(alias(kw("ECHO"), $.echo), alias(kw("NO-ECHO"), $.no_echo)),
 
