@@ -81,6 +81,9 @@ export default ({ kw }) => ({
           $._format_string,
           seq(kw("COLUMN-LABEL"), field("column_label", $.string_literal)),
           seq(kw("DECIMALS"), field("decimals", $.number_literal)),
+          // The syntax box attaches the extent to the type, ahead of the
+          // options, but `AS DECIMAL DECIMALS 4 EXTENT 3` compiles too.
+          alias($._extent_phrase, $.extent_phrase),
           seq(kw("INITIAL", { offset: 4 }), field("initial", $._initial_value)),
           seq(
             kw("LABEL"),
@@ -103,10 +106,9 @@ export default ({ kw }) => ({
       optional(alias(kw("PRESELECT"), $.preselect)),
     ),
 
+  // The extent lives with the options rather than here, so that it can follow
+  // them as well as precede them; keeping it in both places makes the two
+  // readings of a single EXTENT ambiguous.
   __parameter_variable_type_phrase: ($) =>
-    seq(
-      $._as_like,
-      optional(seq(kw("TO"), field("target", $.identifier))),
-      optional(alias($._extent_phrase, $.extent_phrase)),
-    ),
+    seq($._as_like, optional(seq(kw("TO"), field("target", $.identifier)))),
 });

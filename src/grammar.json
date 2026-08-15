@@ -28680,6 +28680,15 @@
                 ]
               },
               {
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "_extent_phrase"
+                },
+                "named": true,
+                "value": "extent_phrase"
+              },
+              {
                 "type": "SEQ",
                 "members": [
                   {
@@ -28920,23 +28929,6 @@
                   }
                 }
               ]
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "SYMBOL",
-                "name": "_extent_phrase"
-              },
-              "named": true,
-              "value": "extent_phrase"
             },
             {
               "type": "BLANK"
