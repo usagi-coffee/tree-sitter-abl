@@ -130,3 +130,40 @@ CREATE WINDOW h ASSIGN x = 1 NO-ERROR.
         left: (identifier)
         right: (number_literal)))
     (no_error)))
+
+================================================================================
+CREATE WIDGET - NO-ERROR before the ASSIGN block
+================================================================================
+
+CREATE FRAME WFRAME IN WIDGET-POOL POOL NO-ERROR
+    ASSIGN
+    PARENT = ph:PARENT
+    FRAME  = IF ph <> ? THEN ph ELSE ?
+    NAME   = r.inti_fen.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (create_widget_statement
+    handle: (identifier)
+    pool: (identifier)
+    (no_error)
+    (assign_phrase
+      (assign_pair
+        left: (identifier)
+        right: (object_access
+          left: (identifier)
+          right: (identifier)))
+      (assign_pair
+        left: (identifier)
+        right: (conditional_expression
+          (binary_expression
+            (identifier)
+            (null_literal))
+          (identifier)
+          (null_literal)))
+      (assign_pair
+        left: (identifier)
+        right: (qualified_name
+          left: (identifier)
+          right: (identifier))))))

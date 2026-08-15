@@ -26,11 +26,24 @@ export default ({ kw }) => ({
         seq(kw("VALUE"), "(", field("widget_type", $._expression), ")"),
       ),
       optional($._handle_in_widget_pool),
-      optional(alias($.__create_widget_assign_phrase, $.assign_phrase)),
-      optional($.trigger_phrase),
+      // NO-ERROR sits right after the handle in real code, before the ASSIGN
+      // block rather than after it. Both positions parse; the trailing one is
+      // reachable only once a block has been seen, so a lone NO-ERROR has a
+      // single reading.
       optional(alias(kw("NO-ERROR"), $.no_error)),
+      optional(
+        seq(
+          choice(
+            seq(
+              alias($.__create_widget_assign_phrase, $.assign_phrase),
+              optional($.trigger_phrase),
+            ),
+            $.trigger_phrase,
+          ),
+          optional(alias(kw("NO-ERROR"), $.no_error)),
+        ),
+      ),
     ),
 
   __create_widget_assign_phrase: ($) => seq(kw("ASSIGN"), $._assign_pairs),
-
 });
