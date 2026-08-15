@@ -86064,10 +86064,47 @@
   {
     "type": "wait_for_statement",
     "named": true,
-    "fields": {},
+    "fields": {
+      "method": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "function_call",
+            "named": true
+          }
+        ]
+      },
+      "return_value": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "array_access",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "macro_concatenated_name",
+            "named": true
+          },
+          {
+            "type": "object_access",
+            "named": true
+          },
+          {
+            "type": "qualified_name",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "focus_phrase",
