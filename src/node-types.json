@@ -51482,6 +51482,14 @@
         {
           "type": "disabled",
           "named": true
+        },
+        {
+          "type": "read_only",
+          "named": true
+        },
+        {
+          "type": "toggle_box",
+          "named": true
         }
       ]
     }
@@ -87826,6 +87834,10 @@
     "named": true
   },
   {
+    "type": "read_only",
+    "named": true
+  },
+  {
     "type": "recursive",
     "named": true
   },
@@ -88003,6 +88015,10 @@
   },
   {
     "type": "three_d",
+    "named": true
+  },
+  {
+    "type": "toggle_box",
     "named": true
   },
   {

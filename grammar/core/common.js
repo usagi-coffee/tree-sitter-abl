@@ -28,6 +28,8 @@ export default ({ kw }) => ({
           $._aggregate_label_phrase,
           alias(kw("DISABLED"), $.disabled),
           seq(kw("ACCELERATOR"), field("accelerator", $.string_literal)),
+          alias(kw("READ-ONLY"), $.read_only),
+          alias(kw("TOGGLE-BOX"), $.toggle_box),
         ),
       ),
     ),

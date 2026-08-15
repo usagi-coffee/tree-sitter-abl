@@ -675,3 +675,29 @@ WAIT-FOR CHOOSE OF MENU-ITEM quititem.
       events: (identifier)
       widgets: (widget_phrase
         item: (identifier)))))
+
+================================================================================
+MENU DEFINITION - toggle-box and read-only items
+================================================================================
+
+DEFINE MENU Pm-gencod
+    MENU-ITEM m_gencod LABEL "Acces direct par GTIN" TOGGLE-BOX.
+
+DEFINE MENU Pm-lect
+    MENU-ITEM m_lect LABEL "Lecture seule" READ-ONLY.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (menu_definition
+    name: (identifier)
+    (menu_item
+      name: (identifier)
+      label: (string_literal)
+      (toggle_box)))
+  (menu_definition
+    name: (identifier)
+    (menu_item
+      name: (identifier)
+      label: (string_literal)
+      (read_only))))
