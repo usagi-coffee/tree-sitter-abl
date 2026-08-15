@@ -1741,6 +1741,10 @@
           {
             "type": "identifier",
             "named": true
+          },
+          {
+            "type": "preprocessor_name",
+            "named": true
           }
         ]
       },
@@ -1750,6 +1754,10 @@
         "types": [
           {
             "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "preprocessor_name",
             "named": true
           }
         ]

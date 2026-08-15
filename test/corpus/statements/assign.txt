@@ -578,3 +578,49 @@ ASSIGN FRAME F1 fld1 fld2.
     frame: (identifier)
     field: (identifier)
     field: (identifier)))
+
+================================================================================
+ASSIGN - widget named by a macro in an attribute reference
+================================================================================
+
+ASSIGN FRAME {&FRAME-NAME}:HIDDEN = YES.
+
+ASSIGN BROWSE {&BROWSE-NAME}:HIDDEN = YES.
+
+IF VALID-HANDLE(ACTIVE-WINDOW) AND FRAME {&FRAME-NAME}:PARENT EQ ? THEN x = 1.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assign_statement
+    (assign_phrase
+      (assign_pair
+        frame: (preprocessor_name
+          (identifier))
+        attr: (identifier)
+        right: (boolean_literal))))
+  (assign_statement
+    (assign_phrase
+      (assign_pair
+        browse: (preprocessor_name
+          (identifier))
+        attr: (identifier)
+        right: (boolean_literal))))
+  (if_statement
+    (binary_expression
+      (function_call
+        function: (identifier)
+        (arguments
+          (argument
+            name: (identifier))))
+      (binary_expression
+        (object_access
+          widget: (identifier)
+          left: (preprocessor_name
+            (identifier))
+          right: (identifier))
+        (null_literal)))
+    then: (assignment_statement
+      left: (identifier)
+      operator: (assignment_operator)
+      right: (number_literal))))

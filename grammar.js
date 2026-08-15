@@ -422,10 +422,12 @@ export default grammar({
           $.preprocessor_name,
           $.scoped_name,
         ),
+      // Generated screens reach their widgets through a macro, as in
+      // `FRAME {&FRAME-NAME}:PARENT`, so the name can be either.
       _object_access_widget_prefix: ($) =>
         seq(
           field("widget", alias($._widgets, $.identifier)),
-          field("left", $._identifier_or_qualified_name),
+          field("left", choice($._identifier_or_qualified_name, $.preprocessor_name)),
         ),
       _object_access_handle_prefix: ($) =>
         prec.right(

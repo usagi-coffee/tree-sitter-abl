@@ -12,8 +12,18 @@ export default ({ kw }) => ({
         choice(
           $._assignable,
           $.__assign_keyword_identifier,
-          seq(kw("BROWSE"), field("browse", $.identifier), ":", field("attr", $.identifier)),
-          seq(kw("FRAME"), field("frame", $.identifier), ":", field("attr", $.identifier)),
+          seq(
+            kw("BROWSE"),
+            field("browse", $.__assign_widget_name),
+            ":",
+            field("attr", $.identifier),
+          ),
+          seq(
+            kw("FRAME"),
+            field("frame", $.__assign_widget_name),
+            ":",
+            field("attr", $.identifier),
+          ),
         ),
       ),
       optional($.__assign_pair_tail),
@@ -28,4 +38,7 @@ export default ({ kw }) => ({
       $._when_phrase,
     ),
   __assign_keyword_identifier: ($) => alias($._widgets, $.identifier),
+  // Generated screens reach their frame through a macro, as in
+  // `FRAME {&FRAME-NAME}:HIDDEN = YES`, so the name can be either.
+  __assign_widget_name: ($) => choice($.identifier, $.preprocessor_name),
 });
