@@ -8,6 +8,9 @@ export default ({ kw }) => ({
       kw("RETURNS", { offset: 5 }),
       optional(kw("CLASS")),
       field("type", $._type_name),
+      // A function returns an array as readily as it declares one, and the
+      // prototype already says so.
+      optional(alias($._extent_phrase, $.extent_phrase)),
       optional($.__function_access_parameters_tail),
       $.__function_compound_body,
     ),

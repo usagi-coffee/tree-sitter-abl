@@ -43541,6 +43541,10 @@
           "named": true
         },
         {
+          "type": "extent_phrase",
+          "named": true
+        },
+        {
           "type": "finally_statement",
           "named": true
         },
