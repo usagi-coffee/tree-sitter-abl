@@ -153,9 +153,16 @@ export default ({ kw }) => ({
         kw("RUN"),
         field("procedure", $.identifier),
         optional($.arguments),
+        optional(alias($.__on_in_phrase, $.in_phrase)),
         $._terminator,
       ),
     ),
+  // The syntax box for the ON statement stops at the procedure name, but a
+  // persistent trigger routinely names the procedure that owns it, as in
+  // `PERSISTENT RUN valuechanged IN THIS-PROCEDURE`, and such code compiles.
+  __on_in_phrase: ($) => seq(kw("IN"), field("context", $.__on_context_value)),
+  __on_context_value: ($) =>
+    choice($.system_handle_identifier, $.object_access, $._identifier_or_qualified_name),
   __on_revert_action: ($) => seq(alias(kw("REVERT"), $.revert), $._terminator),
   __on_database_event: ($) =>
     choice(kw("CREATE"), kw("DELETE"), kw("FIND"), kw("WRITE"), kw("ASSIGN")),
