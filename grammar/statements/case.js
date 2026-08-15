@@ -6,9 +6,10 @@ export default ({ kw }) => ({
       kw("CASE"),
       $._expression,
       alias($._colon, ":"),
-      repeat1(
-        choice($.case_when_phrase, alias($.include_statement, $.include_file_reference)),
-      ),
+      // The syntax box asks for at least one WHEN, but generated code writes a
+      // CASE whose only branch is OTHERWISE, and sometimes one with no branch
+      // at all where the branches came from a macro that expanded to nothing.
+      repeat(choice($.case_when_phrase, alias($.include_statement, $.include_file_reference))),
       optional($.case_otherwise_phrase),
       kw("END"),
       optional(kw("CASE")),

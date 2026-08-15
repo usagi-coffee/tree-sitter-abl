@@ -143,3 +143,27 @@ END CASE.
         left: (identifier)
         operator: (assignment_operator)
         right: (number_literal)))))
+
+================================================================================
+CASE - only an OTHERWISE branch, or none at all
+================================================================================
+
+CASE pIdZone:
+  OTHERWISE vResult = 1.
+END CASE.
+
+CASE pParametre:
+END CASE.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (case_statement
+    (identifier)
+    (case_otherwise_phrase
+      (assignment_statement
+        left: (identifier)
+        operator: (assignment_operator)
+        right: (number_literal))))
+  (case_statement
+    (identifier)))
