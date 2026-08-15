@@ -4,9 +4,21 @@ export default ({ kw }) => ({
   __wait_for_prefix: ($) =>
     seq(
       kw("WAIT-FOR"),
-      alias($.__wait_for_of_phrase, $.of_phrase),
-      repeat(seq(kw("OR"), alias($.__wait_for_of_phrase, $.of_phrase))),
-      optional($.__wait_for_focus_pause_tail),
+      choice(
+        seq(
+          alias($.__wait_for_of_phrase, $.of_phrase),
+          repeat(seq(kw("OR"), alias($.__wait_for_of_phrase, $.of_phrase))),
+          optional($.__wait_for_focus_pause_tail),
+        ),
+        $.__wait_for_dotnet_call,
+      ),
+    ),
+  // The .NET form of the statement blocks on a call rather than an event:
+  // `WAIT-FOR ColorPicker:ShowDialog().` It has its own reference entry.
+  __wait_for_dotnet_call: ($) =>
+    seq(
+      field("method", $.function_call),
+      optional(seq(kw("SET"), field("return_value", $._identifier_or_access))),
     ),
   __wait_for_focus_pause_tail: ($) =>
     choice(

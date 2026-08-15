@@ -43383,50 +43383,111 @@
           "value": "WAIT-FOR"
         },
         {
-          "type": "ALIAS",
-          "content": {
-            "type": "SYMBOL",
-            "name": "__wait_for_of_phrase"
-          },
-          "named": true,
-          "value": "of_phrase"
-        },
-        {
-          "type": "REPEAT",
-          "content": {
-            "type": "SEQ",
-            "members": [
-              {
-                "type": "ALIAS",
-                "content": {
-                  "type": "TOKEN",
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "ALIAS",
                   "content": {
-                    "type": "PATTERN",
-                    "value": "OR",
-                    "flags": "i"
+                    "type": "SYMBOL",
+                    "name": "__wait_for_of_phrase"
+                  },
+                  "named": true,
+                  "value": "of_phrase"
+                },
+                {
+                  "type": "REPEAT",
+                  "content": {
+                    "type": "SEQ",
+                    "members": [
+                      {
+                        "type": "ALIAS",
+                        "content": {
+                          "type": "TOKEN",
+                          "content": {
+                            "type": "PATTERN",
+                            "value": "OR",
+                            "flags": "i"
+                          }
+                        },
+                        "named": false,
+                        "value": "OR"
+                      },
+                      {
+                        "type": "ALIAS",
+                        "content": {
+                          "type": "SYMBOL",
+                          "name": "__wait_for_of_phrase"
+                        },
+                        "named": true,
+                        "value": "of_phrase"
+                      }
+                    ]
                   }
                 },
-                "named": false,
-                "value": "OR"
-              },
-              {
-                "type": "ALIAS",
-                "content": {
-                  "type": "SYMBOL",
-                  "name": "__wait_for_of_phrase"
-                },
-                "named": true,
-                "value": "of_phrase"
-              }
-            ]
+                {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "__wait_for_focus_pause_tail"
+                    },
+                    {
+                      "type": "BLANK"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "SYMBOL",
+              "name": "__wait_for_dotnet_call"
+            }
+          ]
+        }
+      ]
+    },
+    "__wait_for_dotnet_call": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "method",
+          "content": {
+            "type": "SYMBOL",
+            "name": "function_call"
           }
         },
         {
           "type": "CHOICE",
           "members": [
             {
-              "type": "SYMBOL",
-              "name": "__wait_for_focus_pause_tail"
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "TOKEN",
+                    "content": {
+                      "type": "PATTERN",
+                      "value": "SET",
+                      "flags": "i"
+                    }
+                  },
+                  "named": false,
+                  "value": "SET"
+                },
+                {
+                  "type": "FIELD",
+                  "name": "return_value",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "_identifier_or_access"
+                  }
+                }
+              ]
             },
             {
               "type": "BLANK"

@@ -361,3 +361,42 @@ WAIT-FOR PROCEDURE-COMPLETE OF hRequest.
       events: (identifier)
       widgets: (widget_phrase
         handle: (identifier)))))
+
+================================================================================
+WAIT-FOR - blocking on a .NET call
+================================================================================
+
+WAIT-FOR ColorPicker:ShowDialog().
+
+WAIT-FOR System.Windows.Forms.Application:Run(oForm).
+
+WAIT-FOR ColorPicker:ShowDialog() SET rc.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (wait_for_statement
+    method: (function_call
+      function: (object_access
+        left: (identifier)
+        right: (identifier))
+      (arguments)))
+  (wait_for_statement
+    method: (function_call
+      function: (object_access
+        left: (qualified_name
+          left: (identifier)
+          right: (identifier)
+          right: (identifier)
+          right: (identifier))
+        right: (identifier))
+      (arguments
+        (argument
+          name: (identifier)))))
+  (wait_for_statement
+    method: (function_call
+      function: (object_access
+        left: (identifier)
+        right: (identifier))
+      (arguments))
+    return_value: (identifier)))
