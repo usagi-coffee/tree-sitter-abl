@@ -11,6 +11,9 @@ export default ({ kw }) => ({
         choice(
           alias(kw("AUTO-GO"), $.auto_go),
           alias(kw("AUTO-ENDKEY"), $.auto_endkey),
+          // The syntax box stops at AUTO-ENDKEY, but the AppBuilder writes
+          // AUTO-END-KEY and so does every screen it generates; both compile.
+          alias(kw("AUTO-END-KEY"), $.auto_endkey),
           alias(kw("DEFAULT"), $.default),
           $._color_font_option,
           seq(kw("CONTEXT-HELP-ID"), field("context_help_id", $._expression)),

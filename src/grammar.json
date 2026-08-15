@@ -5226,6 +5226,24 @@
                     "type": "TOKEN",
                     "content": {
                       "type": "PATTERN",
+                      "value": "AUTO-END-KEY",
+                      "flags": "i"
+                    }
+                  },
+                  "named": false,
+                  "value": "AUTO-END-KEY"
+                },
+                "named": true,
+                "value": "auto_endkey"
+              },
+              {
+                "type": "ALIAS",
+                "content": {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "TOKEN",
+                    "content": {
+                      "type": "PATTERN",
                       "value": "DEFAULT",
                       "flags": "i"
                     }
