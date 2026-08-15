@@ -640,3 +640,25 @@ ASSIGN FRAME {&FRAME-NAME} tabgco.inti_tab.
     field: (qualified_name
       left: (identifier)
       right: (identifier))))
+
+================================================================================
+ASSIGN - list left empty by the generator
+================================================================================
+
+ASSIGN
+.
+
+ASSIGN x = 1 y = 2.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assign_statement)
+  (assign_statement
+    (assign_phrase
+      (assign_pair
+        left: (identifier)
+        right: (number_literal))
+      (assign_pair
+        left: (identifier)
+        right: (number_literal)))))
