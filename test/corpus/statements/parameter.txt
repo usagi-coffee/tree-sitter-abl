@@ -870,3 +870,20 @@ DEFINE INPUT PARAMETER pglo AS {&longchar}CHAR NO-UNDO.
     name: (identifier)
     type: (macro_concatenated_name)
     (no_undo)))
+
+================================================================================
+PARAMETER DEFINITION - extent after the other options
+================================================================================
+
+DEFINE OUTPUT PARAMETER prubrique-pxr AS DECIMAL DECIMALS 4 EXTENT 3 NO-UNDO.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (parameter_definition
+    name: (identifier)
+    type: (identifier)
+    decimals: (number_literal)
+    (extent_phrase
+      size: (number_literal))
+    (no_undo)))
