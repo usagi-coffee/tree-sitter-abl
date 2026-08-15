@@ -134,3 +134,16 @@ ENABLE arr[1].
       field: (array_access
         array: (identifier)
         index: (number_literal)))))
+
+================================================================================
+ENABLE - frame phrase with no field list
+================================================================================
+
+ENABLE WITH FRAME FRAME-cdtcouleur VIEW-AS DIALOG-BOX.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (enable_statement
+    (frame_phrase
+      frame: (identifier))))
