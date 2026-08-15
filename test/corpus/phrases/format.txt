@@ -125,3 +125,39 @@ DEFINE FRAME F1
         height: (number_literal)))
     (frame_phrase
       (three_d))))
+
+================================================================================
+FORMAT - frame item drawn as a radio set
+================================================================================
+
+DEFINE FRAME F1
+    Rrech AT ROW 7.25 COL 14.72 NO-LABELS
+    VIEW-AS RADIO-SET HORIZONTAL
+    RADIO-BUTTONS
+    "Code", "c":U,
+    "Intitule", "d":U
+    SIZE 44.86 BY .54
+    FONT 49
+    WITH THREE-D.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (frame_definition
+    name: (identifier)
+    field: (identifier)
+    (format_phrase
+      row: (number_literal)
+      column: (number_literal))
+    (format_phrase
+      (radio_set_phrase
+        label: (string_literal)
+        value: (string_literal)
+        label: (string_literal)
+        value: (string_literal)
+        (size_phrase
+          width: (number_literal)
+          height: (number_literal)))
+      font: (number_literal))
+    (frame_phrase
+      (three_d))))
