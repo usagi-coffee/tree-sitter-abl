@@ -555,7 +555,10 @@ export default grammar({
 
       // Identifiers
       // BE CAREFUL MODIFYING HERE, IDENTIFIER ORDER FOR SOME REASON MATTERS!
-      identifier: ($) => token(/[_\p{L}][\p{L}\p{N}_\-&#%$]*/i),
+      // `!` is a name character like `#`, `%` and `$`. It is what separates a
+      // procedure library from the routine inside it, as in `RUN !SelCrit`,
+      // and the same spelling turns up in include names.
+      identifier: ($) => token(/[_\p{L}][\p{L}\p{N}_\-&#%$!]*/i),
       system_handle_identifier: ($) =>
         alias(
           token(prec(1, new RegExp(`(${SYSTEM_HANDLE_WORDS.map(escape_regex).join("|")})`, "i"))),
