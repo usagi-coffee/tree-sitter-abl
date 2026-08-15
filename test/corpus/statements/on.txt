@@ -566,3 +566,35 @@ END.
           (identifier))))
     (do_statement
       (body))))
+
+================================================================================
+ON - persistent trigger owned by another procedure
+================================================================================
+
+ON F5 OF pHFrame ANYWHERE PERSISTENT RUN CHOOSE-BAFFICHER IN THIS-PROCEDURE.
+
+ON CHOOSE OF btn PERSISTENT RUN ClicOption (INPUT 1) IN pproc.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (on_statement
+    event: (identifier)
+    (of_phrase
+      widget: (widget_phrase
+        handle: (identifier)))
+    (anywhere)
+    procedure: (identifier)
+    (in_phrase
+      context: (identifier)))
+  (on_statement
+    event: (identifier)
+    (of_phrase
+      widget: (widget_phrase
+        handle: (identifier)))
+    procedure: (identifier)
+    (arguments
+      (argument
+        name: (number_literal)))
+    (in_phrase
+      context: (identifier))))
