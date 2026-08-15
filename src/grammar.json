@@ -3951,6 +3951,15 @@
                   },
                   "named": true,
                   "value": "resizable"
+                },
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "__browse_column_view_as"
+                  },
+                  "named": true,
+                  "value": "view_as_phrase"
                 }
               ]
             }
@@ -3987,6 +3996,41 @@
           }
         ]
       }
+    },
+    "__browse_column_view_as": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PATTERN",
+              "value": "VIEW-AS",
+              "flags": "i"
+            }
+          },
+          "named": false,
+          "value": "VIEW-AS"
+        },
+        {
+          "type": "FIELD",
+          "name": "widget",
+          "content": {
+            "type": "ALIAS",
+            "content": {
+              "type": "TOKEN",
+              "content": {
+                "type": "PATTERN",
+                "value": "TOGGLE-BOX",
+                "flags": "i"
+              }
+            },
+            "named": false,
+            "value": "TOGGLE-BOX"
+          }
+        }
+      ]
     },
     "__browse_option_expression": {
       "type": "PREC_RIGHT",
