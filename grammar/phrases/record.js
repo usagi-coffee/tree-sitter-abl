@@ -41,7 +41,7 @@ export default ({ kw }) => ({
   __record_field_list: ($) =>
     choice(
       seq(
-        seq(kw("FIELDS"), $.__record_parenthesized_field_names),
+        seq(kw("FIELDS", { alias: "FIELD", offset: 5 }), $.__record_parenthesized_field_names),
         optional($.__record_except_list),
       ),
       $.__record_except_list,
@@ -51,8 +51,5 @@ export default ({ kw }) => ({
   __record_field_names: ($) =>
     seq($.__record_field_name, repeat(seq(optional(","), $.__record_field_name))),
   __record_field_name: ($) =>
-    seq(
-      $._identifier_or_qualified_name,
-      optional(seq("[", field("index", $._expression), "]")),
-    ),
+    seq($._identifier_or_qualified_name, optional(seq("[", field("index", $._expression), "]"))),
 });
