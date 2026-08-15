@@ -34,3 +34,27 @@ END.
         index: (number_literal))
       (no_lock))
     (body)))
+
+================================================================================
+FOR - FIELD as the singular spelling of FIELDS
+================================================================================
+
+FOR EACH item FIELD(itemcode itemname) WHERE item.subtype = "AR":U NO-LOCK:
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (for_statement
+    (record_phrase
+      record: (identifier)
+      (field_list
+        (identifier)
+        (identifier))
+      where: (binary_expression
+        (qualified_name
+          left: (identifier)
+          right: (identifier))
+        (string_literal))
+      (no_lock))
+    (body)))

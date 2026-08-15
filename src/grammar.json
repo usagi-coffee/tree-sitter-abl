@@ -51750,12 +51750,12 @@
                     "type": "TOKEN",
                     "content": {
                       "type": "PATTERN",
-                      "value": "FIELDS",
+                      "value": "FIELD(S)?",
                       "flags": "i"
                     }
                   },
                   "named": false,
-                  "value": "FIELDS"
+                  "value": "FIELD"
                 },
                 {
                   "type": "SYMBOL",
