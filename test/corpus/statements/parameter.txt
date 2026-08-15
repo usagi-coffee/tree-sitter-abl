@@ -856,3 +856,17 @@ DEFINE INPUT-OUTPUT PARAMETER y AS INTEGER NO-UNDO.
     name: (identifier)
     type: (identifier)
     (no_undo)))
+
+================================================================================
+PARAMETER DEFINITION - data type assembled from a macro
+================================================================================
+
+DEFINE INPUT PARAMETER pglo AS {&longchar}CHAR NO-UNDO.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (parameter_definition
+    name: (identifier)
+    type: (macro_concatenated_name)
+    (no_undo)))

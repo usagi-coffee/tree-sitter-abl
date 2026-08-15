@@ -311,8 +311,16 @@ export default grammar({
 
       // Types
       generic_type: ($) => seq($._simple_type_name, "<", $._simple_type_name, ">"),
+      // A data type can be assembled from a macro too: `AS {&longchar}CHAR`
+      // selects CHARACTER or LONGCHAR depending on how the file was compiled.
       _simple_type_name: ($) =>
-        choice($.scoped_name, $.qualified_name, $.nested_type_name, $.identifier),
+        choice(
+          $.scoped_name,
+          $.qualified_name,
+          $.nested_type_name,
+          $.identifier,
+          $.macro_concatenated_name,
+        ),
       _type_name: ($) => choice($.generic_type, $._simple_type_name),
       _type_or_string: ($) => choice($._type_name, $.string_literal),
       _identifier_or_qualified_name: ($) =>
