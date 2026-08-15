@@ -606,3 +606,19 @@ END.
       (lookahead))
     (body
       (leave_statement))))
+
+================================================================================
+DO - counter named by a macro
+================================================================================
+
+DO {&PREFIX}I = 1 TO 16:
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (do_statement
+    variable: (macro_concatenated_name)
+    start: (number_literal)
+    end: (number_literal)
+    (body)))

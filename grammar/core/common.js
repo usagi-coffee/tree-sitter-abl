@@ -119,9 +119,10 @@ export default ({ kw }) => ({
       ),
     ),
 
+  // The counter can be named by a macro too: `DO {&PREFIX}I = 1 TO 16:`.
   _loop_phrase: ($) =>
     seq(
-      field("variable", $.identifier),
+      field("variable", choice($.identifier, $.macro_concatenated_name)),
       "=",
       field("start", $._expression),
       kw("TO"),

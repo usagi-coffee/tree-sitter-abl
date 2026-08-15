@@ -29215,6 +29215,10 @@
           {
             "type": "identifier",
             "named": true
+          },
+          {
+            "type": "macro_concatenated_name",
+            "named": true
           }
         ]
       }
@@ -35121,6 +35125,10 @@
         "types": [
           {
             "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "macro_concatenated_name",
             "named": true
           }
         ]
@@ -65943,6 +65951,10 @@
         "types": [
           {
             "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "macro_concatenated_name",
             "named": true
           }
         ]
