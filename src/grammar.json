@@ -785,17 +785,6 @@
       "type": "PATTERN",
       "value": "[A-Za-z0-9_!\\\\/.-]+\\.[A-Za-z][A-Za-z0-9]*"
     },
-    "constant": {
-      "type": "TOKEN",
-      "content": {
-        "type": "PREC",
-        "value": -1,
-        "content": {
-          "type": "PATTERN",
-          "value": "\\{&[^}\\r\\n]+\\}[ \\t]*\\r?\\n"
-        }
-      }
-    },
     "__macro_statement": {
       "type": "TOKEN",
       "content": {
@@ -61065,10 +61054,6 @@
     {
       "type": "SYMBOL",
       "name": "comment"
-    },
-    {
-      "type": "SYMBOL",
-      "name": "constant"
     },
     {
       "type": "SYMBOL",

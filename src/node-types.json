@@ -87274,8 +87274,7 @@
   },
   {
     "type": "constant",
-    "named": true,
-    "extra": true
+    "named": true
   },
   {
     "type": "context_help",
