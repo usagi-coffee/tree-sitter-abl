@@ -81,12 +81,7 @@ export default grammar({
     $._escaped_string,
     $.block_comment,
   ],
-  extras: ($) => [
-    /[\s\f\uFEFF\u2060\u200B]|\\\r?\n|~[ \t]*/,
-    $.comment,
-    $.constant,
-    $.argument_reference,
-  ],
+  extras: ($) => [/[\s\f\uFEFF\u2060\u200B]|\\\r?\n|~[ \t]*/, $.comment, $.argument_reference],
   word: ($) => $.identifier,
   conflicts: ($) => [
     // There are many statements where x ( ) has different meanings (aggregate/accum)
@@ -264,10 +259,10 @@ export default grammar({
       __include_file_name: ($) => /[A-Za-z0-9_!\\/.-]+\.[A-Za-z][A-Za-z0-9]*/,
 
       // Constants
-      constant: ($) => token(prec(-1, /\{&[^}\r\n]+\}[ \t]*\r?\n/)),
       // A macro alone on its line expands to whole statements, terminator included,
       // so none follows it in the source. It outranks `{` to win in statement
-      // position; anywhere else `{` still opens a preprocessor_name.
+      // position; anywhere else `{` still opens a preprocessor_name. It is
+      // aliased to `constant`, which is why no rule of that name is needed.
       __macro_statement: ($) => token(prec(2, /\{&[^}\r\n]+\}[ \t]*\r?\n/)),
       preprocessor_name: ($) =>
         prec(
