@@ -86994,6 +86994,10 @@
           {
             "type": "identifier",
             "named": true
+          },
+          {
+            "type": "preprocessor_name",
+            "named": true
           }
         ]
       }

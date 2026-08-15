@@ -57433,8 +57433,17 @@
           "type": "FIELD",
           "name": "widget",
           "content": {
-            "type": "SYMBOL",
-            "name": "identifier"
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "identifier"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "preprocessor_name"
+              }
+            ]
           }
         }
       ]
