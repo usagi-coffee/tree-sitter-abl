@@ -34,7 +34,10 @@ export default ({ kw }) => ({
       kw("TABLE"),
       field("table", $.__create_buffer_target),
       optional(
-        seq(kw("BUFFER-NAME"), field("name", choice($._identifier_or_qualified_name, $.string_literal))),
+        seq(
+          kw("BUFFER-NAME"),
+          field("name", choice($._identifier_or_qualified_name, $.string_literal)),
+        ),
       ),
       optional($._in_widget_pool),
     ),
@@ -46,7 +49,8 @@ export default ({ kw }) => ({
     choice($.__create_buffer_name, alias($.__create_buffer_concatenation, $.binary_expression)),
   __create_buffer_concatenation: ($) =>
     seq($.__create_buffer_name, repeat1(seq("+", $.__create_buffer_name))),
-  __create_buffer_name: ($) => choice($._identifier_or_access_or_call, $.string_literal),
+  __create_buffer_name: ($) =>
+    choice($._identifier_or_access_or_call, $.string_literal, $.parenthesized_expression),
   __create_handle_with_pool_no_error_body: ($) =>
     seq(
       choice(kw("CALL"), kw("QUERY"), kw("SAX-READER"), kw("SAX-WRITER"), kw("SAX-ATTRIBUTES")),
