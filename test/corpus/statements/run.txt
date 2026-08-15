@@ -610,3 +610,17 @@ RUN ExecuterFonctionV4 IN (IF vmemoireSeparee THEN hmemoireSeparee ELSE g-hgpao)
         name: (identifier))
       (argument
         name: (identifier)))))
+
+================================================================================
+RUN - path target with an explicit extension
+================================================================================
+
+RUN export\libexcel.i PERSISTENT SET mye.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (run_statement
+    procedure: (procedure_name)
+    (persistent
+      handle: (identifier))))
