@@ -231,3 +231,19 @@ ENABLE x WITH FRAME {&FRAME-NAME}.
     (frame_phrase
       frame: (preprocessor_name
         (identifier)))))
+
+================================================================================
+FRAME - TITLE with a colour per component
+================================================================================
+
+DISPLAY x WITH TITLE BGCOLOR 1 FGCOLOR 15 "Frame A".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (display_statement
+    record: (identifier)
+    (frame_phrase
+      title_bgcolor: (number_literal)
+      title_fgcolor: (number_literal)
+      title: (string_literal))))
