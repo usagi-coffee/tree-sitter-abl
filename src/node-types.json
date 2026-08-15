@@ -9426,6 +9426,10 @@
           "named": true
         },
         {
+          "type": "expandable",
+          "named": true
+        },
+        {
           "type": "export",
           "named": true
         },
@@ -9454,6 +9458,10 @@
           "named": true
         },
         {
+          "type": "no_auto_validate",
+          "named": true
+        },
+        {
           "type": "no_box",
           "named": true
         },
@@ -9479,6 +9487,14 @@
         },
         {
           "type": "no_row_markers",
+          "named": true
+        },
+        {
+          "type": "no_scrollbar_vertical",
+          "named": true
+        },
+        {
+          "type": "no_separators",
           "named": true
         },
         {
@@ -9519,6 +9535,10 @@
         },
         {
           "type": "separators",
+          "named": true
+        },
+        {
+          "type": "single",
           "named": true
         },
         {
@@ -87410,6 +87430,10 @@
     "named": true
   },
   {
+    "type": "expandable",
+    "named": true
+  },
+  {
     "type": "explicit",
     "named": true
   },
@@ -87582,6 +87606,10 @@
     "named": true
   },
   {
+    "type": "no_auto_validate",
+    "named": true
+  },
+  {
     "type": "no_bind_where",
     "named": true
   },
@@ -87678,7 +87706,15 @@
     "named": true
   },
   {
+    "type": "no_scrollbar_vertical",
+    "named": true
+  },
+  {
     "type": "no_separate_connection",
+    "named": true
+  },
+  {
+    "type": "no_separators",
     "named": true
   },
   {
@@ -87907,6 +87943,10 @@
   },
   {
     "type": "simple",
+    "named": true
+  },
+  {
+    "type": "single",
     "named": true
   },
   {

@@ -3200,6 +3200,24 @@
               "type": "TOKEN",
               "content": {
                 "type": "PATTERN",
+                "value": "SINGLE",
+                "flags": "i"
+              }
+            },
+            "named": false,
+            "value": "SINGLE"
+          },
+          "named": true,
+          "value": "single"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "ALIAS",
+            "content": {
+              "type": "TOKEN",
+              "content": {
+                "type": "PATTERN",
                 "value": "SEPARATORS",
                 "flags": "i"
               }
@@ -3209,6 +3227,78 @@
           },
           "named": true,
           "value": "separators"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "ALIAS",
+            "content": {
+              "type": "TOKEN",
+              "content": {
+                "type": "PATTERN",
+                "value": "NO-SEPARATORS",
+                "flags": "i"
+              }
+            },
+            "named": false,
+            "value": "NO-SEPARATORS"
+          },
+          "named": true,
+          "value": "no_separators"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "ALIAS",
+            "content": {
+              "type": "TOKEN",
+              "content": {
+                "type": "PATTERN",
+                "value": "EXPANDABLE",
+                "flags": "i"
+              }
+            },
+            "named": false,
+            "value": "EXPANDABLE"
+          },
+          "named": true,
+          "value": "expandable"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "ALIAS",
+            "content": {
+              "type": "TOKEN",
+              "content": {
+                "type": "PATTERN",
+                "value": "NO-SCROLLBAR-VERTICAL",
+                "flags": "i"
+              }
+            },
+            "named": false,
+            "value": "NO-SCROLLBAR-VERTICAL"
+          },
+          "named": true,
+          "value": "no_scrollbar_vertical"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "ALIAS",
+            "content": {
+              "type": "TOKEN",
+              "content": {
+                "type": "PATTERN",
+                "value": "NO-AUTO-VALIDATE",
+                "flags": "i"
+              }
+            },
+            "named": false,
+            "value": "NO-AUTO-VALIDATE"
+          },
+          "named": true,
+          "value": "no_auto_validate"
         },
         {
           "type": "ALIAS",
