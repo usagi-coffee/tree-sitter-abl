@@ -28187,6 +28187,10 @@
         "required": false,
         "types": [
           {
+            "type": "array_access",
+            "named": true
+          },
+          {
             "type": "identifier",
             "named": true
           },

@@ -558,3 +558,31 @@ DISPLAY (COUNT TOTAL BY region).
         operation: (aggregate_operation)
         (by_phrase
           group: (identifier))))))
+
+================================================================================
+DISPLAY - value shown against one element of an array
+================================================================================
+
+DISPLAY dec(widA[1]:SCREEN-VALUE) @ tardeca.px_refa[x] WITH FRAME F1.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (display_statement
+    (field
+      field: (function_call
+        function: (identifier)
+        (arguments
+          (argument
+            name: (object_access
+              left: (array_access
+                array: (identifier)
+                index: (number_literal))
+              right: (identifier))))))
+    base: (array_access
+      array: (qualified_name
+        left: (identifier)
+        right: (identifier))
+      index: (identifier))
+    (frame_phrase
+      frame: (identifier))))
