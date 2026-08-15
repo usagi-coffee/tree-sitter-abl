@@ -56692,6 +56692,10 @@
         {
           "type": "SYMBOL",
           "name": "scoped_name"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "preprocessor_name"
         }
       ]
     },
