@@ -18107,6 +18107,18 @@
               }
             ]
           }
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "_loop_phrase"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         }
       ]
     },
