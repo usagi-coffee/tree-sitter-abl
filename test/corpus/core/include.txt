@@ -174,3 +174,16 @@ INCLUDE positional argument precedence
       (identifier))
     argument: (include_argument
       (number_literal))))
+
+================================================================================
+INCLUDE - procedure library member
+================================================================================
+
+{h!Api.i}
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (include_file_reference
+    file: (include_file_path
+      (identifier))))
