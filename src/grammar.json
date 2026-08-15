@@ -20037,17 +20037,25 @@
           }
         },
         {
-          "type": "ALIAS",
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "PATTERN",
-              "value": "RETUR(N(S)?)?",
-              "flags": "i"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PATTERN",
+                  "value": "RETUR(N(S)?)?",
+                  "flags": "i"
+                }
+              },
+              "named": false,
+              "value": "RETURNS"
+            },
+            {
+              "type": "BLANK"
             }
-          },
-          "named": false,
-          "value": "RETURNS"
+          ]
         },
         {
           "type": "CHOICE",

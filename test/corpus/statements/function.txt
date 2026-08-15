@@ -964,3 +964,27 @@ END FUNCTION.
         (bind)))
     (return_statement
       value: (boolean_literal))))
+
+================================================================================
+FUNCTION - definition with RETURNS left out
+================================================================================
+
+FUNCTION getListItem CHARACTER (vTable AS CHARACTER, vUse AS LOG):
+  RETURN "".
+END FUNCTION.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (function_definition
+    name: (identifier)
+    type: (identifier)
+    (parameters
+      (parameter
+        name: (identifier)
+        type: (identifier))
+      (parameter
+        name: (identifier)
+        type: (identifier)))
+    (return_statement
+      value: (string_literal))))
