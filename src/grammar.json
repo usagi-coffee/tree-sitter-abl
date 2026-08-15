@@ -20164,17 +20164,25 @@
           }
         },
         {
-          "type": "ALIAS",
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "PATTERN",
-              "value": "RETUR(N(S)?)?",
-              "flags": "i"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PATTERN",
+                  "value": "RETUR(N(S)?)?",
+                  "flags": "i"
+                }
+              },
+              "named": false,
+              "value": "RETURNS"
+            },
+            {
+              "type": "BLANK"
             }
-          },
-          "named": false,
-          "value": "RETURNS"
+          ]
         },
         {
           "type": "CHOICE",
@@ -20204,6 +20212,23 @@
             "type": "SYMBOL",
             "name": "_type_name"
           }
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "SYMBOL",
+                "name": "_extent_phrase"
+              },
+              "named": true,
+              "value": "extent_phrase"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         },
         {
           "type": "CHOICE",
@@ -20333,7 +20358,7 @@
               "type": "TOKEN",
               "content": {
                 "type": "PATTERN",
-                "value": "FORWARD",
+                "value": "FORWARD(S)?",
                 "flags": "i"
               }
             },

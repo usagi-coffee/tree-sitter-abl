@@ -870,3 +870,41 @@ FUNCTION doubler RETURNS INTEGER (INPUT INTEGER EXTENT 3) FORWARD.
         type: (identifier)
         size: (number_literal)))
     (forward)))
+
+================================================================================
+FUNCTION FORWARD - return type spellings
+================================================================================
+
+FUNCTION getListeTypElem RETURNS CHARACTER EXTENT (pTypFich AS CHARACTER) FORWARD.
+
+FUNCTION getListItem CHARACTER (vTable AS CHARACTER, vUse AS LOG) FORWARD.
+
+FUNCTION INITCAISSE_closeAPI RETURNS LOGICAL FORWARDS.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (function_forward_definition
+    name: (identifier)
+    type: (identifier)
+    (extent_phrase)
+    (parameters
+      (parameter
+        name: (identifier)
+        type: (identifier)))
+    (forward))
+  (function_forward_definition
+    name: (identifier)
+    type: (identifier)
+    (parameters
+      (parameter
+        name: (identifier)
+        type: (identifier))
+      (parameter
+        name: (identifier)
+        type: (identifier)))
+    (forward))
+  (function_forward_definition
+    name: (identifier)
+    type: (identifier)
+    (forward)))
