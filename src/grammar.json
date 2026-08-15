@@ -42867,8 +42867,11 @@
           "type": "SEQ",
           "members": [
             {
-              "type": "SYMBOL",
-              "name": "widget_phrase"
+              "type": "REPEAT1",
+              "content": {
+                "type": "SYMBOL",
+                "name": "widget_phrase"
+              }
             },
             {
               "type": "CHOICE",

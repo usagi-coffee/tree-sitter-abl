@@ -155,3 +155,18 @@ VIEW STREAM-HANDLE hS FRAME f1.
     stream: (identifier)
     (widget_phrase
       frame: (identifier))))
+
+================================================================================
+VIEW - several widgets at once
+================================================================================
+
+VIEW Thdimm Thdimam.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (view_statement
+    (widget_phrase
+      handle: (identifier))
+    (widget_phrase
+      handle: (identifier))))
