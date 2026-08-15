@@ -305,16 +305,12 @@ export default ({ kw }) => ({
     ),
   _alert_box_after_type: ($) =>
     choice(seq($._alert_buttons_phrase, optional($._alert_box_title)), $._alert_box_title),
-  // The title bar takes a character expression, and a translated caption --
-  // `TITLE Translate("Converted", -2, "")` -- is the usual way to
-  // write one, so a literal or a name alone is not enough. It stops short of
-  // the full expression: an operator after the title cannot be told apart from
-  // one continuing the message text.
+  // The title bar takes a character expression, and a translated caption is the
+  // usual way to write one: `TITLE Translate("Modified",-2,"") + " " +
+  // CAPS(tabName)`. Both the call and the concatenation around it are spelled
+  // out rather than reaching for the expression rule -- an operator there
+  // cannot be told apart from one continuing the message text.
   _alert_box_title: ($) => seq(kw("TITLE"), field("title", $._alert_box_title_value)),
-  // A translated caption is usually built up: `TITLE Translate("Modified")
-  // + " " + CAPS(tabName)`. The concatenation is spelled out rather than reusing
-  // the expression rule, which cannot be told apart from the message text it
-  // follows.
   _alert_box_title_value: ($) =>
     choice($._alert_box_title_atom, alias($._alert_box_title_concatenation, $.binary_expression)),
   _alert_box_title_concatenation: ($) =>
