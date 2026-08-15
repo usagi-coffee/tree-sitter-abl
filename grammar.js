@@ -560,7 +560,9 @@ export default grammar({
           ),
           $.__widget_qualified_name_separator,
           $._widgets,
-          field("widget", $.identifier),
+          // Generated screens name the frame through a macro here too:
+          // `SELF:BGCOLOR = brlib:BGCOLOR IN FRAME {&FRAME-NAME}.`
+          field("widget", choice($.identifier, $.preprocessor_name)),
         ),
       __widget_qualified_name_separator: ($) => kw("IN"),
 

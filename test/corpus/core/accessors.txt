@@ -199,3 +199,35 @@ doc = cc:Documents:Open(Pdoc,,,).
       (arguments
         (argument
           name: (identifier))))))
+
+================================================================================
+ACCESSORS - widget qualifier named by a macro
+================================================================================
+
+SELF:BGCOLOR = brlib:BGCOLOR IN FRAME {&FRAME-NAME}.
+
+x = mm1:SCREEN-VALUE IN FRAME {&FRAME-NAME}.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assignment_statement
+    left: (object_access
+      left: (identifier)
+      right: (identifier))
+    operator: (assignment_operator)
+    right: (widget_qualified_name
+      target: (object_access
+        left: (identifier)
+        right: (identifier))
+      widget: (preprocessor_name
+        (identifier))))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (widget_qualified_name
+      target: (object_access
+        left: (identifier)
+        right: (identifier))
+      widget: (preprocessor_name
+        (identifier)))))
