@@ -613,3 +613,29 @@ DEFINE IMAGE IMAGE-1 FILENAME "ctrlf11.bmp":U SIZE 3.14 BY .67.
     (size_phrase
       width: (number_literal)
       height: (number_literal))))
+
+================================================================================
+IMAGE DEFINITION - TRANSPARENT before the size phrase
+================================================================================
+
+DEFINE IMAGE img TRANSPARENT SIZE 5.43 BY 1.5.
+
+DEFINE IMAGE PALETTE FILENAME "LePALETT":U TRANSPARENT SIZE 21 BY 3.88.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (image_definition
+    name: (identifier)
+    (transparent)
+    (size_phrase
+      width: (number_literal)
+      height: (number_literal)))
+  (image_definition
+    name: (identifier)
+    (image_phrase
+      file: (string_literal))
+    (transparent)
+    (size_phrase
+      width: (number_literal)
+      height: (number_literal))))

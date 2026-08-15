@@ -21424,6 +21424,24 @@
               {
                 "type": "SYMBOL",
                 "name": "size_phrase"
+              },
+              {
+                "type": "ALIAS",
+                "content": {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "TOKEN",
+                    "content": {
+                      "type": "PATTERN",
+                      "value": "TRANSPARENT",
+                      "flags": "i"
+                    }
+                  },
+                  "named": false,
+                  "value": "TRANSPARENT"
+                },
+                "named": true,
+                "value": "transparent"
               }
             ]
           }
@@ -21607,60 +21625,37 @@
       ]
     },
     "__image_stretch_transparent_tail": {
-      "type": "CHOICE",
+      "type": "SEQ",
       "members": [
         {
-          "type": "SEQ",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "__image_stretch_phrase"
-            },
-            {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "ALIAS",
-                  "content": {
-                    "type": "ALIAS",
-                    "content": {
-                      "type": "TOKEN",
-                      "content": {
-                        "type": "PATTERN",
-                        "value": "TRANSPARENT",
-                        "flags": "i"
-                      }
-                    },
-                    "named": false,
-                    "value": "TRANSPARENT"
-                  },
-                  "named": true,
-                  "value": "transparent"
-                },
-                {
-                  "type": "BLANK"
-                }
-              ]
-            }
-          ]
+          "type": "SYMBOL",
+          "name": "__image_stretch_phrase"
         },
         {
-          "type": "ALIAS",
-          "content": {
-            "type": "ALIAS",
-            "content": {
-              "type": "TOKEN",
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "ALIAS",
               "content": {
-                "type": "PATTERN",
-                "value": "TRANSPARENT",
-                "flags": "i"
-              }
+                "type": "ALIAS",
+                "content": {
+                  "type": "TOKEN",
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "TRANSPARENT",
+                    "flags": "i"
+                  }
+                },
+                "named": false,
+                "value": "TRANSPARENT"
+              },
+              "named": true,
+              "value": "transparent"
             },
-            "named": false,
-            "value": "TRANSPARENT"
-          },
-          "named": true,
-          "value": "transparent"
+            {
+              "type": "BLANK"
+            }
+          ]
         }
       ]
     },
