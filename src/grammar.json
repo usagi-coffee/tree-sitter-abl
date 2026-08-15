@@ -19588,63 +19588,46 @@
       ]
     },
     "__frame_display_value_tail": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SEQ",
-          "members": [
-            {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "SYMBOL",
-                  "name": "at_phrase"
+      "type": "REPEAT1",
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "at_phrase"
+          },
+          {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "ALIAS",
+                "content": {
+                  "type": "TOKEN",
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "TO",
+                    "flags": "i"
+                  }
                 },
-                {
-                  "type": "SEQ",
-                  "members": [
-                    {
-                      "type": "ALIAS",
-                      "content": {
-                        "type": "TOKEN",
-                        "content": {
-                          "type": "PATTERN",
-                          "value": "TO",
-                          "flags": "i"
-                        }
-                      },
-                      "named": false,
-                      "value": "TO"
-                    },
-                    {
-                      "type": "FIELD",
-                      "name": "to",
-                      "content": {
-                        "type": "SYMBOL",
-                        "name": "_expression"
-                      }
-                    }
-                  ]
+                "named": false,
+                "value": "TO"
+              },
+              {
+                "type": "FIELD",
+                "name": "to",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "_expression"
                 }
-              ]
-            },
-            {
-              "type": "REPEAT",
-              "content": {
-                "type": "SYMBOL",
-                "name": "__frame_display_option"
               }
-            }
-          ]
-        },
-        {
-          "type": "REPEAT1",
-          "content": {
+            ]
+          },
+          {
             "type": "SYMBOL",
             "name": "__frame_display_option"
           }
-        }
-      ]
+        ]
+      }
     },
     "__frame_display_option": {
       "type": "CHOICE",
@@ -19652,6 +19635,10 @@
         {
           "type": "SYMBOL",
           "name": "_color_font_option"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "size_phrase"
         },
         {
           "type": "SEQ",

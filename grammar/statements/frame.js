@@ -52,18 +52,18 @@ export default ({ kw }) => ({
       seq(field("value", $.string_literal), optional($.__frame_display_value_tail)),
       seq(field("value", $.number_literal), optional($.__frame_display_value_tail)),
     ),
+  // The AppBuilder writes the size before the position -- `"~~" VIEW-AS TEXT
+  // SIZE 2.57 BY .5 AT ROW 8.33 COL 36 BGCOLOR 48` -- so the placement phrase
+  // sits among the options rather than ahead of them.
   __frame_display_value_tail: ($) =>
-    choice(
-      seq(
-        choice($.at_phrase, seq(kw("TO"), field("to", $._expression))),
-        repeat($.__frame_display_option),
-      ),
-      repeat1($.__frame_display_option),
+    repeat1(
+      choice($.at_phrase, seq(kw("TO"), field("to", $._expression)), $.__frame_display_option),
     ),
 
   __frame_display_option: ($) =>
     choice(
       $._color_font_option,
+      $.size_phrase,
       seq(kw("VIEW-AS"), alias(kw("TEXT"), $.text)),
       seq(kw("WIDGET-ID"), field("widget_id", $._expression)),
     ),
