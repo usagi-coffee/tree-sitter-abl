@@ -10,3 +10,47 @@ SYSTEM-HELP "help" NO-ERROR.
   (system_help_statement
     topic: (string_literal)
     (no_error)))
+
+================================================================================
+SYSTEM-HELP - the option list
+================================================================================
+
+SYSTEM-HELP GetSessionData("Config!", "BIN") + "\app_help.HLP" CONTEXT INT(pd).
+
+SYSTEM-HELP "x.chm" WINDOW-NAME "main" HELP-TOPIC "intro".
+
+SYSTEM-HELP "x.hlp" POSITION X 1 Y 2 WIDTH 3 HEIGHT 4.
+
+SYSTEM-HELP "x.hlp" QUIT.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (system_help_statement
+    topic: (binary_expression
+      (function_call
+        function: (identifier)
+        (arguments
+          (argument
+            name: (string_literal))
+          (argument
+            name: (string_literal))))
+      (string_literal))
+    context: (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (identifier)))))
+  (system_help_statement
+    topic: (string_literal)
+    window_name: (string_literal)
+    help_topic: (string_literal))
+  (system_help_statement
+    topic: (string_literal)
+    x: (number_literal)
+    y: (number_literal)
+    width: (number_literal)
+    height: (number_literal))
+  (system_help_statement
+    topic: (string_literal)
+    (quit)))
