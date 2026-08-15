@@ -187,3 +187,16 @@ INCLUDE - procedure library member
   (include_file_reference
     file: (include_file_path
       (identifier))))
+
+================================================================================
+INCLUDE - macro inside the path
+================================================================================
+
+{strings{&Slash}strings.i}
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (include_file_reference
+    file: (include_file_path
+      (identifier))))

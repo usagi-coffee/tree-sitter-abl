@@ -266,7 +266,12 @@ export default grammar({
         seq(optional($.preprocessor_name), alias($.__include_file_name, $.identifier)),
       // `!` separates a procedure library from the member inside it, as in
       // `{h!Api.i}`, and it is a legal file-name character besides.
-      __include_file_name: ($) => /[A-Za-z0-9_!\\/.-]+\.[A-Za-z][A-Za-z0-9]*/,
+      // A macro can sit inside the path too -- `{strings{&Slash}strings.i}` picks the
+      // separator at compile time -- so it is part of the same token. The name still
+      // has to start on a path character, which leaves a leading macro to the
+      // preprocessor_name that already handles it.
+      __include_file_name: ($) =>
+        /[A-Za-z0-9_!\\/.-](?:[A-Za-z0-9_!\\/.-]|\{&[0-9A-Za-z_-]+\})*\.[A-Za-z][A-Za-z0-9]*/,
 
       // Constants
       // A macro alone on its line expands to whole statements, terminator included,
