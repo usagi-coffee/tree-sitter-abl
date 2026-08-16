@@ -29227,6 +29227,15 @@
                 },
                 "named": true,
                 "value": "identifier"
+              },
+              {
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "__numeric_routine_name"
+                },
+                "named": true,
+                "value": "identifier"
               }
             ]
           }
@@ -34554,6 +34563,15 @@
           "content": {
             "type": "SYMBOL",
             "name": "__symbolic_routine_name"
+          },
+          "named": true,
+          "value": "identifier"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "__numeric_routine_name"
           },
           "named": true,
           "value": "identifier"
@@ -58411,6 +58429,14 @@
       "content": {
         "type": "PATTERN",
         "value": "[!#$%][\\p{L}\\p{N}_\\-&#%$!]*",
+        "flags": "i"
+      }
+    },
+    "__numeric_routine_name": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "[0-9][\\p{N}\\-]*[\\p{L}][\\p{L}\\p{N}_\\-&#%$!]*",
         "flags": "i"
       }
     },

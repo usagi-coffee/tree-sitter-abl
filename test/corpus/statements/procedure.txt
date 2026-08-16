@@ -744,3 +744,17 @@ END PROCEDURE.
   (procedure_definition
     name: (identifier)
     (body)))
+
+================================================================================
+PROCEDURE - routine name opening on a digit
+================================================================================
+
+PROCEDURE 4-ITEM-CODE-lookup :
+END PROCEDURE.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (procedure_definition
+    name: (identifier)
+    (body)))
