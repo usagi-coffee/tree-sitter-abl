@@ -18199,22 +18199,75 @@
           ]
         },
         {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "ALIAS",
+                "content": {
+                  "type": "TOKEN",
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "TRANS(A(C(T(I(O(N)?)?)?)?)?)?",
+                    "flags": "i"
+                  }
+                },
+                "named": false,
+                "value": "TRANSACTION"
+              },
+              "named": true,
+              "value": "transaction"
+            },
+            {
+              "type": "REPEAT",
+              "content": {
+                "type": "SYMBOL",
+                "name": "__for_sort_clause"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "__for_sort_clause": {
+      "type": "CHOICE",
+      "members": [
+        {
           "type": "ALIAS",
           "content": {
-            "type": "ALIAS",
-            "content": {
-              "type": "TOKEN",
-              "content": {
-                "type": "PATTERN",
-                "value": "TRANS(A(C(T(I(O(N)?)?)?)?)?)?",
-                "flags": "i"
-              }
-            },
-            "named": false,
-            "value": "TRANSACTION"
+            "type": "SYMBOL",
+            "name": "__for_by_phrase"
           },
           "named": true,
-          "value": "transaction"
+          "value": "by_phrase"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "__for_group_by_phrase"
+          },
+          "named": true,
+          "value": "group_by_phrase"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "__for_collate_phrase"
+          },
+          "named": true,
+          "value": "collate_phrase"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "__for_break_by"
+          },
+          "named": true,
+          "value": "break_by"
         }
       ]
     },
@@ -18241,45 +18294,8 @@
         {
           "type": "REPEAT",
           "content": {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "ALIAS",
-                "content": {
-                  "type": "SYMBOL",
-                  "name": "__for_by_phrase"
-                },
-                "named": true,
-                "value": "by_phrase"
-              },
-              {
-                "type": "ALIAS",
-                "content": {
-                  "type": "SYMBOL",
-                  "name": "__for_group_by_phrase"
-                },
-                "named": true,
-                "value": "group_by_phrase"
-              },
-              {
-                "type": "ALIAS",
-                "content": {
-                  "type": "SYMBOL",
-                  "name": "__for_collate_phrase"
-                },
-                "named": true,
-                "value": "collate_phrase"
-              },
-              {
-                "type": "ALIAS",
-                "content": {
-                  "type": "SYMBOL",
-                  "name": "__for_break_by"
-                },
-                "named": true,
-                "value": "break_by"
-              }
-            ]
+            "type": "SYMBOL",
+            "name": "__for_sort_clause"
           }
         },
         {
