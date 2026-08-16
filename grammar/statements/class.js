@@ -167,6 +167,9 @@ export default ({ kw }) => ({
           seq(kw("INITIAL", { offset: 4 }), field("initial", $._initial_value)),
           seq(kw("SERIALIZE-NAME"), field("serialize_name", $.string_literal)),
           alias(kw("NO-UNDO"), $.no_undo),
+          // `AS CHARACTER NO-UNDO EXTENT 12` -- the extent can follow the other
+          // options as well as sit with the type.
+          alias($._extent_phrase, $.extent_phrase),
         ),
       ),
     ),
@@ -186,9 +189,11 @@ export default ({ kw }) => ({
       alias(kw("PACKAGE-PROTECTED"), $.access_modifier),
       alias(kw("PUBLIC"), $.access_modifier),
     ),
-  __class_property_accessor_parameters: ($) =>
-    choice(seq("(", ")"), $.property_set_parameter_list),
-  property_set_parameter_list: ($) => seq("(", $.property_set_parameter, ")"),
+  __class_property_accessor_parameters: ($) => choice(seq("(", ")"), $.property_set_parameter_list),
+  // A setter can take more than the value: an indexed property receives the
+  // subscript alongside it.
+  property_set_parameter_list: ($) =>
+    seq("(", $.property_set_parameter, repeat(seq(",", $.property_set_parameter)), ")"),
 
   property_set_parameter: ($) =>
     seq(optional(field("direction", $._parameter_direction)), $.__class_named_parameter_body),
@@ -228,15 +233,25 @@ export default ({ kw }) => ({
       $.__class_property_modifier_tail,
       $._serialization_modifier,
     ),
+  // OVERRIDE can come before the access modifier as well as after it:
+  // `DEFINE OVERRIDE PROTECTED PROPERTY ...`.
   __class_property_modifier_tail: ($) =>
-    seq(alias(kw("OVERRIDE"), $.override_modifier), optional($._serialization_modifier)),
+    seq(
+      alias(kw("OVERRIDE"), $.override_modifier),
+      optional($._member_access_modifier),
+      optional($._serialization_modifier),
+    ),
   __class_property_class_modifier: ($) =>
     choice(
       alias(kw("STATIC"), $.static_modifier),
       alias(kw("ABSTRACT"), $.abstract_modifier),
       alias(kw("FINAL"), $.final_modifier),
     ),
-  __class_property_type_phrase: ($) => seq(optional(kw("AS")), $.__class_typed_extent_phrase),
+  // The extent lives with the options rather than with the type, so that it can
+  // follow NO-UNDO as well as precede it; keeping it in both places makes the
+  // two readings of a single EXTENT ambiguous.
+  __class_property_type_phrase: ($) =>
+    seq(optional(kw("AS")), optional(kw("CLASS")), field("type", $._type_or_string)),
 
   _method_modifier_no_abstract: ($) =>
     choice(
