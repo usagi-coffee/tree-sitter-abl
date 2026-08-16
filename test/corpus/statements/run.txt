@@ -624,3 +624,22 @@ RUN export\libexcel.i PERSISTENT SET mye.
     procedure: (procedure_name)
     (persistent
       handle: (identifier))))
+
+================================================================================
+RUN - context looked up with DYNAMIC-FUNCTION
+================================================================================
+
+RUN MESSAGE-INFO IN DYNAMIC-FUNCTION("GetHparent":U IN hparent) (p%message).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (run_statement
+    procedure: (identifier)
+    (in_phrase
+      context: (dynamic_function_call
+        function: (string_literal)
+        context: (identifier)))
+    (arguments
+      (argument
+        name: (identifier)))))

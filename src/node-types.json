@@ -2725,6 +2725,10 @@
             "named": true
           },
           {
+            "type": "dynamic_function_call",
+            "named": true
+          },
+          {
             "type": "identifier",
             "named": true
           },
@@ -29833,6 +29837,94 @@
     }
   },
   {
+    "type": "dynamic_function_call",
+    "named": true,
+    "fields": {
+      "argument": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "argument",
+            "named": true
+          }
+        ]
+      },
+      "context": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "array_access",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "macro_concatenated_name",
+            "named": true
+          },
+          {
+            "type": "object_access",
+            "named": true
+          },
+          {
+            "type": "parenthesized_expression",
+            "named": true
+          },
+          {
+            "type": "qualified_name",
+            "named": true
+          }
+        ]
+      },
+      "function": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "array_access",
+            "named": true
+          },
+          {
+            "type": "binary_expression",
+            "named": true
+          },
+          {
+            "type": "function_call",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "macro_concatenated_name",
+            "named": true
+          },
+          {
+            "type": "object_access",
+            "named": true
+          },
+          {
+            "type": "parenthesized_expression",
+            "named": true
+          },
+          {
+            "type": "qualified_name",
+            "named": true
+          },
+          {
+            "type": "string_literal",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "dynamic_new_statement",
     "named": true,
     "fields": {
@@ -47636,6 +47728,10 @@
           },
           {
             "type": "date_literal",
+            "named": true
+          },
+          {
+            "type": "dynamic_function_call",
             "named": true
           },
           {
@@ -87870,6 +87966,10 @@
   },
   {
     "type": "DUMP",
+    "named": false
+  },
+  {
+    "type": "DYNAMIC-FUNCTION",
     "named": false
   },
   {
