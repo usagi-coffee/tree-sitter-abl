@@ -532,7 +532,7 @@ WAIT-FOR CHOOSE OF MENU-ITEM quititem.
     event: (identifier)
     (of_phrase
       widget: (widget_phrase
-        handle: (identifier)))
+        item: (identifier)))
     (display_statement
       record: (qualified_name
         left: (identifier)
@@ -541,7 +541,7 @@ WAIT-FOR CHOOSE OF MENU-ITEM quititem.
     event: (identifier)
     (of_phrase
       widget: (widget_phrase
-        handle: (identifier)))
+        item: (identifier)))
     (display_statement
       (field
         field: (qualified_name
@@ -571,7 +571,7 @@ WAIT-FOR CHOOSE OF MENU-ITEM quititem.
     event: (identifier)
     (of_phrase
       widget: (widget_phrase
-        handle: (identifier)))
+        item: (identifier)))
     (display_statement
       record: (identifier)
       except: (qualified_name
@@ -602,7 +602,7 @@ WAIT-FOR CHOOSE OF MENU-ITEM quititem.
     event: (identifier)
     (of_phrase
       widget: (widget_phrase
-        handle: (identifier)))
+        item: (identifier)))
     (do_statement
       (body
         (hide_statement
@@ -627,7 +627,7 @@ WAIT-FOR CHOOSE OF MENU-ITEM quititem.
     event: (identifier)
     (of_phrase
       widget: (widget_phrase
-        handle: (identifier)))
+        item: (identifier)))
     (do_statement
       (body
         (hide_statement

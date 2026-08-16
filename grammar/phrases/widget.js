@@ -15,12 +15,21 @@ export default ({ kw }) => ({
   __widget_handle: ($) =>
     seq(field("handle", choice($._identifier_or_qualified_name, $.preprocessor_name))),
 
+  // A bare name is a handle -- see the precedence that settles it against this
+  // rule. So neither field branch may also match a bare name: either FIELD
+  // introduces it, or IN FRAME qualifies it. With both parts optional the
+  // branch overlapped __widget_handle, the precedence took the handle, and
+  // `HIDE TBADR IN FRAME FR1` lost its IN clause.
   __widget_entry: ($) =>
     choice(
       seq(
-        optional(kw("FIELD")),
+        kw("FIELD"),
         field("field", $._identifier_or_array_access),
         optional(seq(kw("IN"), kw("FRAME"), field("frame", $.__widget_name))),
+      ),
+      seq(
+        field("field", $._identifier_or_array_access),
+        seq(kw("IN"), kw("FRAME"), field("frame", $.__widget_name)),
       ),
       seq(
         field("column", $._identifier_or_array_access),
