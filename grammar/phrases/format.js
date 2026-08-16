@@ -184,6 +184,36 @@ export default ({ kw }) => ({
       $.boolean_literal,
     ),
 
+  // A frame item is drawn as a combo box as readily as a variable is, and the
+  // shared combo box phrase cannot serve here for the same reason the shared
+  // radio set could not: it carries a tooltip, and so does the format phrase
+  // around it, so one TOOLTIP has two readings. This copy leaves the tooltip
+  // out. Its item lists are literals, again as the radio set buttons are.
+  //
+  // Every option below is one real code writes, except MAX-CHARS, which is
+  // left out for that reason.
+  __format_combo_box_phrase: ($) =>
+    seq(
+      field("widget", kw("COMBO-BOX")),
+      repeat(
+        choice(
+          seq(kw("LIST-ITEMS"), field("items", $.__format_combo_box_values)),
+          seq(kw("LIST-ITEM-PAIRS"), field("pairs", $.__format_combo_box_pairs)),
+          seq(kw("INNER-LINES"), field("inner_lines", $.number_literal)),
+          $.size_phrase,
+          alias(kw("SORT"), $.sort),
+          alias(kw("SIMPLE"), $.simple),
+          alias(kw("DROP-DOWN-LIST"), $.drop_down_list),
+          alias(kw("DROP-DOWN"), $.drop_down),
+          seq(kw("AUTO-COMPLETION"), optional(alias(kw("UNIQUE-MATCH"), $.unique_match))),
+        ),
+      ),
+    ),
+  __format_combo_box_values: ($) =>
+    seq($.__format_radio_set_value, repeat(seq(",", $.__format_radio_set_value))),
+  __format_combo_box_pairs: ($) =>
+    seq($.__format_radio_set_pair, repeat(seq(",", $.__format_radio_set_pair))),
+
   __format_view_as_tail: ($) =>
     prec.right(choice(seq($.size_phrase, optional($._tooltip_phrase)), $._tooltip_phrase)),
   _format_view_as: ($) =>
@@ -196,6 +226,7 @@ export default ({ kw }) => ({
           seq(kw("FILL-IN"), optional(kw("NATIVE")), optional($.__format_view_as_tail)),
           alias($.__format_editor_phrase, $.editor_phrase),
           alias($.__format_radio_set_phrase, $.radio_set_phrase),
+          alias($.__format_combo_box_phrase, $.combo_box_phrase),
           alias($.__view_as_alert_box, $.view_as_phrase),
         ),
       ),
