@@ -57372,6 +57372,24 @@
         {
           "type": "SYMBOL",
           "name": "preprocessor_name"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "ALIAS",
+            "content": {
+              "type": "TOKEN",
+              "content": {
+                "type": "PATTERN",
+                "value": "INTERFACE",
+                "flags": "i"
+              }
+            },
+            "named": false,
+            "value": "INTERFACE"
+          },
+          "named": true,
+          "value": "identifier"
         }
       ]
     },

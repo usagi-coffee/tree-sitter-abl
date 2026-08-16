@@ -383,3 +383,24 @@ END.
             (next)
             table: (identifier)
             index: (identifier)))))))
+
+================================================================================
+FIND - a table named INTERFACE
+================================================================================
+
+FIND FIRST interface WHERE interface.ndos = 0 NO-LOCK NO-ERROR.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (find_statement
+    (first)
+    table: (identifier)
+    (where_phrase
+      where: (binary_expression
+        (qualified_name
+          left: (identifier)
+          right: (identifier))
+        (number_literal)))
+    (no_lock)
+    (no_error)))

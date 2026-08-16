@@ -481,8 +481,17 @@ export default grammar({
       qualified_name: ($) => seq(field("left", $._qualified_name_left), $.__qualified_name_tail),
       __qualified_name_tail: ($) =>
         repeat1(seq($._namedot, field("right", alias($._identifier_immediate, $.identifier)))),
+      // INTERFACE is unreserved and databases use it as a table name. Without it
+      // here, `interface.ndos` is not a qualified name: the dot ends the
+      // statement and the rest of the line becomes another one, with no error
+      // node to show for it. _identifier_or_qualified_name already aliases it.
       _qualified_name_left: ($) =>
-        choice($.macro_concatenated_name, $.identifier, $.preprocessor_name),
+        choice(
+          $.macro_concatenated_name,
+          $.identifier,
+          $.preprocessor_name,
+          alias(kw("INTERFACE"), $.identifier),
+        ),
 
       nested_type_name: ($) =>
         seq(
