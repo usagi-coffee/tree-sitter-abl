@@ -212,3 +212,25 @@ ASSIGNMENT - preprocessor name as the target
       (identifier))
     operator: (assignment_operator)
     right: (identifier)))
+
+================================================================================
+EXPRESSION STATEMENT - method named by a keyword
+================================================================================
+
+Close().
+
+IF vRetour THEN Close().
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (expression_statement
+    (function_call
+      function: (identifier)
+      (arguments)))
+  (if_statement
+    (identifier)
+    then: (expression_statement
+      (function_call
+        function: (identifier)
+        (arguments)))))
