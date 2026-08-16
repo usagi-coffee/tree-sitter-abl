@@ -44325,12 +44325,57 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "_statement_expression"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "_statement_expression"
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "SYMBOL",
+                "name": "__expression_keyword_call"
+              },
+              "named": true,
+              "value": "function_call"
+            }
+          ]
         },
         {
           "type": "SYMBOL",
           "name": "_no_error_terminator"
+        }
+      ]
+    },
+    "__expression_keyword_call": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "function",
+          "content": {
+            "type": "ALIAS",
+            "content": {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PATTERN",
+                  "value": "CLOSE",
+                  "flags": "i"
+                }
+              },
+              "named": false,
+              "value": "CLOSE"
+            },
+            "named": true,
+            "value": "identifier"
+          }
+        },
+        {
+          "type": "SYMBOL",
+          "name": "arguments"
         }
       ]
     },
