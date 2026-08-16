@@ -31385,7 +31385,27 @@
         "required": true,
         "types": [
           {
+            "type": "generic_type",
+            "named": true
+          },
+          {
             "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "macro_concatenated_name",
+            "named": true
+          },
+          {
+            "type": "nested_type_name",
+            "named": true
+          },
+          {
+            "type": "qualified_name",
+            "named": true
+          },
+          {
+            "type": "scoped_name",
             "named": true
           }
         ]

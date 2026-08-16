@@ -175,3 +175,45 @@ END ENUM.
       (number_literal))
     (member
       name: (identifier))))
+
+================================================================================
+ENUM - name carrying its package
+================================================================================
+
+ENUM Pkg.App.Widgets.SelectionKindEnum :
+  DEFINE ENUM Aucune = 1
+              Toutes = 2.
+END ENUM.
+
+ENUM Pkg.App.DateContextEnum FLAGS :
+  DEFINE ENUM Aucun = 0
+              Jour = 1.
+END ENUM.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (enum_statement
+    name: (qualified_name
+      left: (identifier)
+      right: (identifier)
+      right: (identifier)
+      right: (identifier))
+    (member
+      name: (identifier)
+      (number_literal))
+    (member
+      name: (identifier)
+      (number_literal)))
+  (enum_statement
+    name: (qualified_name
+      left: (identifier)
+      right: (identifier)
+      right: (identifier))
+    (flags)
+    (member
+      name: (identifier)
+      (number_literal))
+    (member
+      name: (identifier)
+      (number_literal))))
