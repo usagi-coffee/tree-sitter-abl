@@ -381,3 +381,19 @@ CREATE BUFFER buf-mod FOR TABLE ("lisval":U).
     handle: (identifier)
     table: (parenthesized_expression
       (string_literal))))
+
+================================================================================
+CREATE BUFFER - name read off an object
+================================================================================
+
+CREATE BUFFER hbuffer FOR TABLE vHandleTtTypElem BUFFER-NAME THIS-OBJECT:NomBuffer.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (create_statement
+    handle: (identifier)
+    table: (identifier)
+    name: (object_access
+      left: (identifier)
+      right: (identifier))))

@@ -36,7 +36,9 @@ export default ({ kw }) => ({
       optional(
         seq(
           kw("BUFFER-NAME"),
-          field("name", choice($._identifier_or_qualified_name, $.string_literal)),
+          // The name is often a property of the object doing the creating:
+          // `BUFFER-NAME THIS-OBJECT:NomBuffer`.
+          field("name", choice($._identifier_or_access_or_call, $.string_literal)),
         ),
       ),
       optional($._in_widget_pool),
