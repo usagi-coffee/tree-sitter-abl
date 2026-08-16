@@ -53031,6 +53031,42 @@
               "type": "TOKEN",
               "content": {
                 "type": "PATTERN",
+                "value": "SHARE",
+                "flags": "i"
+              }
+            },
+            "named": false,
+            "value": "SHARE"
+          },
+          "named": true,
+          "value": "share"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "ALIAS",
+            "content": {
+              "type": "TOKEN",
+              "content": {
+                "type": "PATTERN",
+                "value": "EXCLUSIVE",
+                "flags": "i"
+              }
+            },
+            "named": false,
+            "value": "EXCLUSIVE"
+          },
+          "named": true,
+          "value": "exclusive"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "ALIAS",
+            "content": {
+              "type": "TOKEN",
+              "content": {
+                "type": "PATTERN",
                 "value": "NO-PREFETCH",
                 "flags": "i"
               }

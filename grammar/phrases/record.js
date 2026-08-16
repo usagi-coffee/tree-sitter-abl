@@ -29,6 +29,10 @@ export default ({ kw }) => ({
         repeat(seq(kw("AND"), field("field", $.__record_using_field))),
       ),
       $._lock_option,
+      // SHARE and EXCLUSIVE are the abbreviated lock keywords, spelled the same
+      // way the FIND statement already accepts them.
+      alias(kw("SHARE"), $.share),
+      alias(kw("EXCLUSIVE"), $.exclusive),
       alias(kw("NO-PREFETCH"), $.no_prefetch),
     ),
 
