@@ -31,7 +31,18 @@ export default ({ kw }) => ({
       seq(alias($.__do_while_phrase, $.while_phrase), optional($.__do_block_tail)),
       $.__do_block_tail,
     ),
-  __do_block_tail: ($) => choice(seq(repeat1($._block_option), $.body), $.body),
+  // The reference lists TRANSACTION before the frame phrase, but the compiler
+  // takes the reverse order and AppBuilder writes it that way:
+  // `DO WITH FRAME {&FRAME-NAME} TRANSACTION:`.
+  __do_block_tail: ($) =>
+    choice(
+      seq(
+        repeat1($._block_option),
+        optional(alias(kw("TRANSACTION", { offset: 5 }), $.transaction)),
+        $.body,
+      ),
+      $.body,
+    ),
 
   body: ($) =>
     prec.right(seq(choice(alias($._colon, ":"), $._terminator_dot), repeat($._statement))),
