@@ -9,8 +9,18 @@ export default ({ kw }) => ({
       optional(alias($.__using_from_clause, $.from_clause)),
     ),
 
+  // The type can be quoted, which is how a generic with several arguments is
+  // written here: `USING "System...Dictionary<LOGICAL, CHARACTER>":U FROM ASSEMBLY.`
   __using_type_ref: ($) =>
-    prec.right(seq($.__using_base_name, optional(seq("<", $.__using_type_ref, ">")))),
+    choice(
+      prec.right(
+        seq(
+          $.__using_base_name,
+          optional(seq("<", $.__using_type_ref, repeat(seq(",", $.__using_type_ref)), ">")),
+        ),
+      ),
+      $.string_literal,
+    ),
 
   __using_base_name: ($) =>
     token(

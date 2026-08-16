@@ -127,3 +127,31 @@ USING Acme.BusObjs.* FROM PROPATH.
     (no_undo))
   (using_statement
     (from_clause)))
+
+================================================================================
+USING - generic with several type arguments
+================================================================================
+
+USING "System.Collections.Generic.Dictionary<LOGICAL, CHARACTER>":U FROM ASSEMBLY.
+
+DEFINE VARIABLE v AS System.Collections.Generic.Dictionary<CHARACTER, System.Object> NO-UNDO.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (using_statement
+    (string_literal)
+    (from_clause))
+  (variable_definition
+    name: (identifier)
+    type: (generic_type
+      (qualified_name
+        left: (identifier)
+        right: (identifier)
+        right: (identifier)
+        right: (identifier))
+      (identifier)
+      (qualified_name
+        left: (identifier)
+        right: (identifier)))
+    (no_undo)))

@@ -325,7 +325,10 @@ export default grammar({
       opsys_file: ($) => token(/(?:\.{1,2})?\/[A-Za-z0-9_.\-/~]*[A-Za-z0-9_\-/]/),
 
       // Types
-      generic_type: ($) => seq($._simple_type_name, "<", $._simple_type_name, ">"),
+      // A generic takes as many type arguments as it declares, and each of them
+      // can itself be generic: `Dictionary<CHARACTER, System.Object>`.
+      generic_type: ($) =>
+        seq($._simple_type_name, "<", $._type_name, repeat(seq(",", $._type_name)), ">"),
       // A data type can be assembled from a macro too: `AS {&longchar}CHAR`
       // selects CHARACTER or LONGCHAR depending on how the file was compiled.
       _simple_type_name: ($) =>
