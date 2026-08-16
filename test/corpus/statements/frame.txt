@@ -1230,3 +1230,36 @@ DEFINE FRAME F1
       widget_id: (number_literal))
     (frame_phrase
       (three_d))))
+
+================================================================================
+DEFINE FRAME - item drawn as a combo box
+================================================================================
+
+DEFINE FRAME F1
+  x AT ROW 1 COL 1
+  VIEW-AS COMBO-BOX INNER-LINES 5
+  LIST-ITEM-PAIRS "un",1,
+  "deux",2
+  DROP-DOWN-LIST
+  SIZE 20 BY 1.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (frame_definition
+    name: (identifier)
+    field: (identifier)
+    (format_phrase
+      row: (number_literal)
+      column: (number_literal))
+    (format_phrase
+      (combo_box_phrase
+        inner_lines: (number_literal)
+        label: (string_literal)
+        value: (number_literal)
+        label: (string_literal)
+        value: (number_literal)
+        (drop_down_list)
+        (size_phrase
+          width: (number_literal)
+          height: (number_literal))))))
