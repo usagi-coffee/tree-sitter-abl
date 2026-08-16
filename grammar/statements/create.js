@@ -29,7 +29,9 @@ export default ({ kw }) => ({
   __create_buffer: ($) =>
     seq(
       kw("BUFFER"),
-      field("handle", $._identifier_or_array_access),
+      // The handle is often a property of the object doing the creating, the
+      // same way BUFFER-NAME below is: `CREATE BUFFER THIS-OBJECT:hTT FOR ...`.
+      field("handle", choice($._identifier_or_array_access, $.object_access)),
       kw("FOR"),
       kw("TABLE"),
       field("table", $.__create_buffer_target),
