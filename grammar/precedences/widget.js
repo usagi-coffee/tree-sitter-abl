@@ -20,10 +20,12 @@ export default ($) => [
   // Example: ON CHOOSE OF myFunc().
   // Reference: Widget phrase.
   [$.function_call, $.__widget_handle],
-  // Purpose: prefer bare handles over field/column entries.
-  // Example: ON CHOOSE OF btnFind DO:
-  // Reference: Widget phrase.
-  [$.__widget_handle, $.__widget_entry],
+  // Purpose: a name that IN FRAME, IN BROWSE or MENU-ITEM qualifies is an
+  // entry; a name on its own can no longer match the entry rule, so reading
+  // the entry first keeps the qualifier attached without stealing bare names.
+  // Example: HIDE TBADR IN FRAME FR1.
+  // Reference: Widget phrase; HIDE statement.
+  [$.__widget_entry, $.__widget_handle],
   // Purpose: inside a frame, a widget keyword on its own is the name of a field,
   // not the start of an attribute reference qualified by widget type.
   // Example: DEFINE FRAME F1 Image AT ROW 3.42 COL 1.72.

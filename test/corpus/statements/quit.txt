@@ -71,35 +71,35 @@ WAIT-FOR WINDOW-CLOSE OF CURRENT-WINDOW.
     event: (identifier)
     (of_phrase
       widget: (widget_phrase
-        handle: (identifier)))
+        item: (identifier)))
     (run_statement
       procedure: (procedure_name)))
   (on_statement
     event: (identifier)
     (of_phrase
       widget: (widget_phrase
-        handle: (identifier)))
+        item: (identifier)))
     (run_statement
       procedure: (procedure_name)))
   (on_statement
     event: (identifier)
     (of_phrase
       widget: (widget_phrase
-        handle: (identifier)))
+        item: (identifier)))
     (run_statement
       procedure: (procedure_name)))
   (on_statement
     event: (identifier)
     (of_phrase
       widget: (widget_phrase
-        handle: (identifier)))
+        item: (identifier)))
     (run_statement
       procedure: (procedure_name)))
   (on_statement
     event: (identifier)
     (of_phrase
       widget: (widget_phrase
-        handle: (identifier)))
+        item: (identifier)))
     (quit_statement))
   (assign_statement
     (assign_phrase

@@ -372,9 +372,9 @@ END.
     event: (identifier)
     (of_phrase
       widget: (widget_phrase
-        handle: (identifier))
+        item: (identifier))
       widget: (widget_phrase
-        handle: (identifier)))
+        item: (identifier)))
     (do_statement
       (body))))
 

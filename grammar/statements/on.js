@@ -230,8 +230,9 @@ export default ({ kw }) => ({
     seq(field("event", $.__on_ui_event), repeat(seq(",", field("event", $.__on_ui_event)))),
   __on_ui_event_widgets: ($) => seq($.__on_ui_events, alias($.__on_of_phrase, $.of_phrase)),
   __on_of_phrase: ($) => seq(kw("OF"), $.__on_of_widget, repeat(seq(",", $.__on_of_widget))),
-  __on_of_widget: ($) =>
-    seq(optional(field("of", kw("MENU-ITEM"))), field("widget", $.widget_phrase)),
+  // MENU-ITEM is not spelled out here: widget_phrase already has a branch for
+  // it, and consuming the keyword first made that branch unreachable.
+  __on_of_widget: ($) => seq(field("widget", $.widget_phrase)),
   __on_referencing_phrase: ($) =>
     choice(
       seq(

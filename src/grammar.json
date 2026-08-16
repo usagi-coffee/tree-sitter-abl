@@ -26058,31 +26058,6 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "FIELD",
-              "name": "of",
-              "content": {
-                "type": "ALIAS",
-                "content": {
-                  "type": "TOKEN",
-                  "content": {
-                    "type": "PATTERN",
-                    "value": "MENU-ITEM",
-                    "flags": "i"
-                  }
-                },
-                "named": false,
-                "value": "MENU-ITEM"
-              }
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
-        },
-        {
           "type": "FIELD",
           "name": "widget",
           "content": {
@@ -55172,25 +55147,17 @@
           "type": "SEQ",
           "members": [
             {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "ALIAS",
-                  "content": {
-                    "type": "TOKEN",
-                    "content": {
-                      "type": "PATTERN",
-                      "value": "FIELD",
-                      "flags": "i"
-                    }
-                  },
-                  "named": false,
-                  "value": "FIELD"
-                },
-                {
-                  "type": "BLANK"
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PATTERN",
+                  "value": "FIELD",
+                  "flags": "i"
                 }
-              ]
+              },
+              "named": false,
+              "value": "FIELD"
             },
             {
               "type": "FIELD",
@@ -55244,6 +55211,58 @@
                 },
                 {
                   "type": "BLANK"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "FIELD",
+              "name": "field",
+              "content": {
+                "type": "SYMBOL",
+                "name": "_identifier_or_array_access"
+              }
+            },
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "TOKEN",
+                    "content": {
+                      "type": "PATTERN",
+                      "value": "IN",
+                      "flags": "i"
+                    }
+                  },
+                  "named": false,
+                  "value": "IN"
+                },
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "TOKEN",
+                    "content": {
+                      "type": "PATTERN",
+                      "value": "FRAME",
+                      "flags": "i"
+                    }
+                  },
+                  "named": false,
+                  "value": "FRAME"
+                },
+                {
+                  "type": "FIELD",
+                  "name": "frame",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "__widget_name"
+                  }
                 }
               ]
             }
@@ -63333,11 +63352,11 @@
     [
       {
         "type": "SYMBOL",
-        "name": "__widget_handle"
+        "name": "__widget_entry"
       },
       {
         "type": "SYMBOL",
-        "name": "__widget_entry"
+        "name": "__widget_handle"
       }
     ],
     [

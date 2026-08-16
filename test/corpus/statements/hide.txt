@@ -143,3 +143,19 @@ HIDE FRAME f1 FRAME f2.
       frame: (identifier))
     (widget_phrase
       frame: (identifier))))
+
+================================================================================
+HIDE - widget list qualified by a frame
+================================================================================
+
+HIDE select-1 select-2 IN FRAME f1.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (hide_statement
+    (widget_phrase
+      handle: (identifier))
+    (widget_phrase
+      field: (identifier)
+      frame: (identifier))))

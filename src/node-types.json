@@ -52494,16 +52494,6 @@
           }
         ]
       },
-      "of": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "MENU-ITEM",
-            "named": false
-          }
-        ]
-      },
       "record": {
         "multiple": false,
         "required": false,
