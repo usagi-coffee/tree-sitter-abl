@@ -37,3 +37,43 @@ DEFINE VARIABLE v AS INTEGER VIEW-AS SLIDER MAX-VALUE 10 MIN-VALUE 1 VERTICAL NO
         (size_phrase
           width: (number_literal)
           height: (number_literal))))))
+
+================================================================================
+SLIDER - MIN-VALUE before MAX-VALUE, as generated screens write it
+================================================================================
+
+DEFINE VARIABLE fraction AS INTEGER
+  VIEW-AS SLIDER MIN-VALUE 0 MAX-VALUE 10 HORIZONTAL NO-CURRENT-VALUE
+  TIC-MARKS BOTTOM FREQUENCY 1
+  SIZE 56 BY 1.75 NO-UNDO.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (view_as_phrase
+      (slider_phrase
+        min: (number_literal)
+        max: (number_literal)
+        frequency: (number_literal)
+        (size_phrase
+          width: (number_literal)
+          height: (number_literal))))
+    (no_undo)))
+
+================================================================================
+SLIDER - no bounds
+================================================================================
+
+DEFINE VARIABLE v AS INTEGER VIEW-AS SLIDER.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (view_as_phrase
+      (slider_phrase))))
