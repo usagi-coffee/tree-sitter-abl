@@ -622,3 +622,24 @@ END.
     start: (number_literal)
     end: (number_literal)
     (body)))
+
+================================================================================
+DO - TRANSACTION after the frame phrase
+================================================================================
+
+DO WITH FRAME fr1 TRANSACTION:
+  x = 1.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (do_statement
+    (frame_phrase
+      frame: (identifier))
+    (transaction)
+    (body
+      (assignment_statement
+        left: (identifier)
+        operator: (assignment_operator)
+        right: (number_literal)))))

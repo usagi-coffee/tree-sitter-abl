@@ -15994,6 +15994,32 @@
               }
             },
             {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "ALIAS",
+                    "content": {
+                      "type": "TOKEN",
+                      "content": {
+                        "type": "PATTERN",
+                        "value": "TRANS(A(C(T(I(O(N)?)?)?)?)?)?",
+                        "flags": "i"
+                      }
+                    },
+                    "named": false,
+                    "value": "TRANSACTION"
+                  },
+                  "named": true,
+                  "value": "transaction"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            },
+            {
               "type": "SYMBOL",
               "name": "body"
             }
