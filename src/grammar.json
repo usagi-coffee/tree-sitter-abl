@@ -249,6 +249,24 @@
           "value": "identifier"
         },
         {
+          "type": "ALIAS",
+          "content": {
+            "type": "ALIAS",
+            "content": {
+              "type": "TOKEN",
+              "content": {
+                "type": "PATTERN",
+                "value": "IN",
+                "flags": "i"
+              }
+            },
+            "named": false,
+            "value": "IN"
+          },
+          "named": true,
+          "value": "identifier"
+        },
+        {
           "type": "SYMBOL",
           "name": "object_access"
         },
@@ -62665,6 +62683,16 @@
       {
         "type": "SYMBOL",
         "name": "_primary_expression"
+      }
+    ],
+    [
+      {
+        "type": "SYMBOL",
+        "name": "_include_argument_value"
+      },
+      {
+        "type": "SYMBOL",
+        "name": "widget_qualified_name"
       }
     ],
     [

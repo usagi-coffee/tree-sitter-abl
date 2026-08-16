@@ -190,6 +190,7 @@ export default grammar({
           $._identifier_or_qualified_name,
           alias(kw("NEW"), $.identifier),
           alias(kw("WINDOW"), $.identifier),
+          alias(kw("IN"), $.identifier),
           $.object_access,
           $.array_access,
           $.string_literal,
