@@ -7653,6 +7653,15 @@
                 },
                 "named": true,
                 "value": "no_undo"
+              },
+              {
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "_extent_phrase"
+                },
+                "named": true,
+                "value": "extent_phrase"
               }
             ]
           }
@@ -7881,6 +7890,22 @@
         {
           "type": "SYMBOL",
           "name": "property_set_parameter"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "STRING",
+                "value": ","
+              },
+              {
+                "type": "SYMBOL",
+                "name": "property_set_parameter"
+              }
+            ]
+          }
         },
         {
           "type": "STRING",
@@ -8210,6 +8235,18 @@
           "members": [
             {
               "type": "SYMBOL",
+              "name": "_member_access_modifier"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
               "name": "_serialization_modifier"
             },
             {
@@ -8303,8 +8340,33 @@
           ]
         },
         {
-          "type": "SYMBOL",
-          "name": "__class_typed_extent_phrase"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PATTERN",
+                  "value": "CLASS",
+                  "flags": "i"
+                }
+              },
+              "named": false,
+              "value": "CLASS"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "FIELD",
+          "name": "type",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_type_or_string"
+          }
         }
       ]
     },

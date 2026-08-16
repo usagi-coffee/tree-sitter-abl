@@ -545,3 +545,58 @@ END CLASS.
     (error_scope_statement
       (error_scope_type)
       (on_error_phrase))))
+
+================================================================================
+PROPERTY - extent after the options, OVERRIDE first, setter with two parameters
+================================================================================
+
+CLASS a:
+  DEFINE PUBLIC PROPERTY I-MOIS AS CHARACTER NO-UNDO EXTENT 12
+    GET.
+    SET.
+
+  DEFINE OVERRIDE PROTECTED PROPERTY DescriptionComposant AS CHARACTER INIT "Fam" NO-UNDO
+    GET.
+
+  DEFINE PUBLIC PROPERTY p AS CHARACTER NO-UNDO
+    GET.
+    SET(INPUT pValeur AS CHARACTER, INPUT pIndice AS INTEGER):
+      x = 1.
+    END SET.
+END CLASS.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (class_definition
+    name: (identifier)
+    (property_definition
+      (access_modifier)
+      name: (identifier)
+      type: (identifier)
+      (no_undo)
+      (extent_phrase
+        size: (number_literal)))
+    (property_definition
+      (override_modifier)
+      (access_modifier)
+      name: (identifier)
+      type: (identifier)
+      initial: (string_literal)
+      (no_undo))
+    (property_definition
+      (access_modifier)
+      name: (identifier)
+      type: (identifier)
+      (no_undo)
+      (property_set_parameter_list
+        (property_set_parameter
+          name: (identifier)
+          type: (identifier))
+        (property_set_parameter
+          name: (identifier)
+          type: (identifier)))
+      (assignment_statement
+        left: (identifier)
+        operator: (assignment_operator)
+        right: (number_literal)))))
