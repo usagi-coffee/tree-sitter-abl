@@ -839,3 +839,24 @@ END.
       record: (identifier)
       (exclusive))
     (body)))
+
+================================================================================
+FOR EACH with BREAK BY after TRANSACTION
+================================================================================
+
+FOR EACH orderhdr EXCLUSIVE-LOCK TRANSACTION BREAK BY orderhdr.custnum:
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (for_statement
+    (record_phrase
+      record: (identifier)
+      (exclusive_lock))
+    (transaction)
+    (break_by
+      by: (qualified_name
+        left: (identifier)
+        right: (identifier)))
+    (body)))
