@@ -823,3 +823,19 @@ END.
     (body
       (delete_statement
         record: (identifier)))))
+
+================================================================================
+FOR EACH with the abbreviated EXCLUSIVE lock
+================================================================================
+
+FOR EACH TTcomp EXCLUSIVE:
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (for_statement
+    (record_phrase
+      record: (identifier)
+      (exclusive))
+    (body)))
