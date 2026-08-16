@@ -31,6 +31,13 @@ export default ({ kw }) => ({
         field("field", $._identifier_or_array_access),
         seq(kw("IN"), kw("FRAME"), field("frame", $.__widget_name)),
       ),
+      // An array element is a widget on its own -- `APPLY "entry" TO TDEC[I]`.
+      // It is not a bare name, so it cannot be confused with __widget_handle
+      // and its qualifier stays optional.
+      seq(
+        field("field", $.array_access),
+        optional(seq(kw("IN"), kw("FRAME"), field("frame", $.__widget_name))),
+      ),
       seq(
         field("column", $._identifier_or_array_access),
         seq(kw("IN"), kw("BROWSE"), field("browse", $.__widget_name)),

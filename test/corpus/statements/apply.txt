@@ -123,3 +123,19 @@ APPLY "VALUE-CHANGED" TO BROWSE b1.
     event: (string_literal)
     to: (widget
       browse: (identifier))))
+
+================================================================================
+APPLY - event to an array element
+================================================================================
+
+APPLY "entry" TO TDEC[I].
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (apply_statement
+    event: (string_literal)
+    to: (widget
+      field: (array_access
+        array: (identifier)
+        index: (identifier)))))

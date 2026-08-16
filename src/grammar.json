@@ -55273,6 +55273,66 @@
           "members": [
             {
               "type": "FIELD",
+              "name": "field",
+              "content": {
+                "type": "SYMBOL",
+                "name": "array_access"
+              }
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SEQ",
+                  "members": [
+                    {
+                      "type": "ALIAS",
+                      "content": {
+                        "type": "TOKEN",
+                        "content": {
+                          "type": "PATTERN",
+                          "value": "IN",
+                          "flags": "i"
+                        }
+                      },
+                      "named": false,
+                      "value": "IN"
+                    },
+                    {
+                      "type": "ALIAS",
+                      "content": {
+                        "type": "TOKEN",
+                        "content": {
+                          "type": "PATTERN",
+                          "value": "FRAME",
+                          "flags": "i"
+                        }
+                      },
+                      "named": false,
+                      "value": "FRAME"
+                    },
+                    {
+                      "type": "FIELD",
+                      "name": "frame",
+                      "content": {
+                        "type": "SYMBOL",
+                        "name": "__widget_name"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "FIELD",
               "name": "column",
               "content": {
                 "type": "SYMBOL",
