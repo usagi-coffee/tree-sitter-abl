@@ -44152,6 +44152,10 @@
       "required": true,
       "types": [
         {
+          "type": "generic_type",
+          "named": true
+        },
+        {
           "type": "identifier",
           "named": true
         },
@@ -81609,11 +81613,15 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": false,
       "types": [
         {
           "type": "from_clause",
+          "named": true
+        },
+        {
+          "type": "string_literal",
           "named": true
         }
       ]
