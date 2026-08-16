@@ -54033,45 +54033,63 @@
           "value": "SLIDER"
         },
         {
-          "type": "ALIAS",
+          "type": "REPEAT",
           "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "PATTERN",
-              "value": "MAX-VALUE",
-              "flags": "i"
-            }
-          },
-          "named": false,
-          "value": "MAX-VALUE"
-        },
-        {
-          "type": "FIELD",
-          "name": "max",
-          "content": {
-            "type": "SYMBOL",
-            "name": "number_literal"
-          }
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "PATTERN",
-              "value": "MIN-VALUE",
-              "flags": "i"
-            }
-          },
-          "named": false,
-          "value": "MIN-VALUE"
-        },
-        {
-          "type": "FIELD",
-          "name": "min",
-          "content": {
-            "type": "SYMBOL",
-            "name": "number_literal"
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SEQ",
+                "members": [
+                  {
+                    "type": "ALIAS",
+                    "content": {
+                      "type": "TOKEN",
+                      "content": {
+                        "type": "PATTERN",
+                        "value": "MAX-VALUE",
+                        "flags": "i"
+                      }
+                    },
+                    "named": false,
+                    "value": "MAX-VALUE"
+                  },
+                  {
+                    "type": "FIELD",
+                    "name": "max",
+                    "content": {
+                      "type": "SYMBOL",
+                      "name": "number_literal"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "SEQ",
+                "members": [
+                  {
+                    "type": "ALIAS",
+                    "content": {
+                      "type": "TOKEN",
+                      "content": {
+                        "type": "PATTERN",
+                        "value": "MIN-VALUE",
+                        "flags": "i"
+                      }
+                    },
+                    "named": false,
+                    "value": "MIN-VALUE"
+                  },
+                  {
+                    "type": "FIELD",
+                    "name": "min",
+                    "content": {
+                      "type": "SYMBOL",
+                      "name": "number_literal"
+                    }
+                  }
+                ]
+              }
+            ]
           }
         },
         {

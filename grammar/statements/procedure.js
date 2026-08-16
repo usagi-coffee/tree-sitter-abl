@@ -7,8 +7,11 @@ export default ({ kw }) => ({
       optional($.__procedure_modifier),
       field(
         "name",
-        choice($._identifier_or_qualified_name, alias($.__symbolic_routine_name, $.identifier),
-          alias($.__numeric_routine_name, $.identifier)),
+        choice(
+          $._identifier_or_qualified_name,
+          alias($.__symbolic_routine_name, $.identifier),
+          alias($.__numeric_routine_name, $.identifier),
+        ),
       ),
       optional($.__procedure_modifier),
       repeat(

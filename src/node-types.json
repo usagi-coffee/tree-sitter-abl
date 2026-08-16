@@ -70679,8 +70679,8 @@
         ]
       },
       "max": {
-        "multiple": false,
-        "required": true,
+        "multiple": true,
+        "required": false,
         "types": [
           {
             "type": "number_literal",
@@ -70689,8 +70689,8 @@
         ]
       },
       "min": {
-        "multiple": false,
-        "required": true,
+        "multiple": true,
+        "required": false,
         "types": [
           {
             "type": "number_literal",
