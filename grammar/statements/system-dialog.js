@@ -100,7 +100,11 @@ export default ({ kw }) => ({
   __system_dialog_update_phrase: ($) => seq(kw("UPDATE"), field("update", $.identifier)),
   __system_dialog_initial_filter_phrase: ($) =>
     seq(kw("INITIAL-FILTER"), field("initial", $._expression)),
-  __system_dialog_filters_pairs: ($) => repeat1($.__system_dialog_filter_pair),
+  // The reference separates the pairs with a comma; the comma stays optional
+  // because the grammar already accepted, and real code already writes, the
+  // bare sequence.
+  __system_dialog_filters_pairs: ($) =>
+    seq($.__system_dialog_filter_pair, repeat(seq(optional(","), $.__system_dialog_filter_pair))),
   __system_dialog_filter_pair: ($) =>
     seq(field("name", $._expression), field("spec", $._expression)),
 });
