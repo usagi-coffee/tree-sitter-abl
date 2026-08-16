@@ -89,8 +89,12 @@ export default ({ kw }) => ({
 
   // The context is a handle, and a handle can be chosen at the call site:
   // `RUN ExecuterFonctionV4 IN (IF vSeparee THEN hSeparee ELSE g-hgpao) (...)`.
+  // It can also be looked up at run time, which is what the parenthesis-anchored
+  // DYNAMIC-FUNCTION allows here where a bare function_call could not: after
+  // `RUN p IN h (a, b)` the parentheses belong to the RUN, not to h.
   __run_context_value: ($) =>
     choice(
+      $.dynamic_function_call,
       $.system_handle_identifier,
       $.object_access,
       $.array_access,

@@ -9,6 +9,7 @@ import grammar_current_changed from "./current-changed.js";
 import grammar_ambiguous from "./ambiguous.js";
 import grammar_accum from "./accum.js";
 import grammar_input from "./input.js";
+import grammar_dynamic_function from "./dynamic-function.js";
 
 export default (ctx) => ({
   ...grammar_conditional(ctx),
@@ -22,4 +23,5 @@ export default (ctx) => ({
   ...grammar_ambiguous(ctx),
   ...grammar_accum(ctx),
   ...grammar_input(ctx),
+  ...grammar_dynamic_function(ctx),
 });
