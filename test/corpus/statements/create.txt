@@ -397,3 +397,18 @@ CREATE BUFFER hbuffer FOR TABLE vHandleTtTypElem BUFFER-NAME THIS-OBJECT:NomBuff
     name: (object_access
       left: (identifier)
       right: (identifier))))
+
+================================================================================
+CREATE BUFFER - handle read off an object
+================================================================================
+
+CREATE BUFFER THIS-OBJECT:hTT FOR TABLE "customer".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (create_statement
+    handle: (object_access
+      left: (identifier)
+      right: (identifier))
+    table: (string_literal)))
