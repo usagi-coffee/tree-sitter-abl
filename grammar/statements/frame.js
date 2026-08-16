@@ -43,8 +43,10 @@ export default ({ kw }) => ({
       prec.right(seq(kw("SKIP"), "(", optional(field("skip", $._expression)), ")")),
       prec.right(alias(kw("SPACE"), $.space)),
       prec.right(alias(kw("SKIP"), $.skip)),
+      // A widget keyword is not reserved: `DEFINE VARIABLE Image AS CHARACTER`
+      // is legal, and the frame that lays it out has to name it back.
       seq(
-        field("field", $._identifier_or_array_access),
+        field("field", choice($._identifier_or_array_access, alias($._widgets, $.identifier))),
         optional(alias($.at_phrase, $.format_phrase)),
         optional(alias($.__frame_field_format_phrase, $.format_phrase)),
       ),

@@ -1202,3 +1202,31 @@ DEFINE FRAME F1
     font: (number_literal)
     (frame_phrase
       (three_d))))
+
+================================================================================
+FRAME DEFINITION - field named by a widget keyword
+================================================================================
+
+DEFINE VARIABLE Image AS CHARACTER NO-UNDO.
+
+DEFINE FRAME F1
+    Image AT ROW 3.42 COL 1.72 NO-LABELS WIDGET-ID 12
+    WITH THREE-D.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (frame_definition
+    name: (identifier)
+    field: (identifier)
+    (format_phrase
+      row: (number_literal)
+      column: (number_literal))
+    (format_phrase
+      widget_id: (number_literal))
+    (frame_phrase
+      (three_d))))
