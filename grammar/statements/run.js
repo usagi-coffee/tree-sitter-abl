@@ -50,6 +50,7 @@ export default ({ kw }) => ({
       $.macro_concatenated_name,
       $.identifier,
       alias($.__symbolic_routine_name, $.identifier),
+      alias($.__numeric_routine_name, $.identifier),
       $.qualified_name,
     ),
   // A procedure reference given as a path, with the .p or .r extension left

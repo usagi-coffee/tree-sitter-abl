@@ -615,6 +615,15 @@ export default grammar({
       // one name and lose the argument (measured: two corpus tests).
       _routine_name: ($) => choice($.identifier, alias($.__symbolic_routine_name, $.identifier)),
       __symbolic_routine_name: ($) => token(/[!#$%][\p{L}\p{N}_\-&#%$!]*/i),
+
+      // A routine name may also open on a digit: `PROCEDURE 4-ITEM-CODE-lookup:`
+      // and `RUN 6-FIXED-WEIGHT-calc(...)`. A letter is required somewhere after
+      // the digits so the token can never be a number -- `4` and `4-5` do not
+      // match, and `4 - 5` still reads as a subtraction. It is wired only where
+      // real code needs it, the PROCEDURE name and the RUN target, and
+      // deliberately not into the head of a call, where it would be free to
+      // take `4-ITEMVAR` out of an expression.
+      __numeric_routine_name: ($) => token(/[0-9][\p{N}\-]*[\p{L}][\p{L}\p{N}_\-&#%$!]*/i),
       system_handle_identifier: ($) =>
         alias(
           token(prec(1, new RegExp(`(${SYSTEM_HANDLE_WORDS.map(escape_regex).join("|")})`, "i"))),
