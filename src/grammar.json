@@ -20190,7 +20190,7 @@
           "name": "name",
           "content": {
             "type": "SYMBOL",
-            "name": "identifier"
+            "name": "_routine_name"
           }
         },
         {
@@ -20546,7 +20546,7 @@
           "name": "name",
           "content": {
             "type": "SYMBOL",
-            "name": "identifier"
+            "name": "_routine_name"
           }
         },
         {
@@ -29213,8 +29213,22 @@
           "type": "FIELD",
           "name": "name",
           "content": {
-            "type": "SYMBOL",
-            "name": "_identifier_or_qualified_name"
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "_identifier_or_qualified_name"
+              },
+              {
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "__symbolic_routine_name"
+                },
+                "named": true,
+                "value": "identifier"
+              }
+            ]
           }
         },
         {
@@ -34534,6 +34548,15 @@
         {
           "type": "SYMBOL",
           "name": "identifier"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "__symbolic_routine_name"
+          },
+          "named": true,
+          "value": "identifier"
         },
         {
           "type": "SYMBOL",
@@ -57944,6 +57967,15 @@
                 "name": "_identifier_or_qualified_name"
               },
               {
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "__symbolic_routine_name"
+                },
+                "named": true,
+                "value": "identifier"
+              },
+              {
                 "type": "SYMBOL",
                 "name": "object_access"
               },
@@ -58066,6 +58098,32 @@
       "content": {
         "type": "PATTERN",
         "value": "[_\\p{L}][\\p{L}\\p{N}_\\-&#%$!]*",
+        "flags": "i"
+      }
+    },
+    "_routine_name": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "identifier"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "__symbolic_routine_name"
+          },
+          "named": true,
+          "value": "identifier"
+        }
+      ]
+    },
+    "__symbolic_routine_name": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "[!#$%][\\p{L}\\p{N}_\\-&#%$!]*",
         "flags": "i"
       }
     },

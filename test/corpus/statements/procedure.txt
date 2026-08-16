@@ -730,3 +730,17 @@ END PROCEDURE.
     name: (identifier)
     (access_modifier)
     (body)))
+
+================================================================================
+PROCEDURE - routine name opening on a symbol
+================================================================================
+
+PROCEDURE !Bar:
+END PROCEDURE.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (procedure_definition
+    name: (identifier)
+    (body)))
