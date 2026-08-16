@@ -19565,8 +19565,22 @@
               "type": "FIELD",
               "name": "field",
               "content": {
-                "type": "SYMBOL",
-                "name": "_identifier_or_array_access"
+                "type": "CHOICE",
+                "members": [
+                  {
+                    "type": "SYMBOL",
+                    "name": "_identifier_or_array_access"
+                  },
+                  {
+                    "type": "ALIAS",
+                    "content": {
+                      "type": "SYMBOL",
+                      "name": "_widgets"
+                    },
+                    "named": true,
+                    "value": "identifier"
+                  }
+                ]
               }
             },
             {
@@ -62880,6 +62894,16 @@
       {
         "type": "SYMBOL",
         "name": "__widget_entry"
+      }
+    ],
+    [
+      {
+        "type": "SYMBOL",
+        "name": "__frame_form_item"
+      },
+      {
+        "type": "SYMBOL",
+        "name": "_object_access_widget_prefix"
       }
     ],
     [
