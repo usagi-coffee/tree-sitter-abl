@@ -62,3 +62,22 @@ SYSTEM-DIALOG PRINTER-SETUP PORTRAIT UPDATE pset IN WINDOW winH.
       update: (identifier))
     (in_window_phrase
       window: (identifier))))
+
+================================================================================
+SYSTEM-DIALOG GET-FILE - comma separated filter pairs
+================================================================================
+
+SYSTEM-DIALOG GET-FILE cfic
+  FILTERS "Images" "*.bmp",
+          "Tous" "*.*".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (system_dialog_get_file_statement
+    variable: (identifier)
+    (filters_phrase
+      name: (string_literal)
+      spec: (string_literal)
+      name: (string_literal)
+      spec: (string_literal))))
