@@ -6,7 +6,9 @@ export default ({ kw }) => ({
     prec.right(
       seq(
         ":",
-        repeat1(
+        // The block can be empty. A screen generator writes the header and the
+        // END for a widget it turned out to have no trigger for.
+        repeat(
           seq(
             kw("ON"),
             field("event", $.__trigger_event_list),

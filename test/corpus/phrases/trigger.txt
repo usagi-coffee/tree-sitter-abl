@@ -101,3 +101,22 @@ CREATE BUTTON h
       event: (identifier)
       procedure: (identifier)
       handle: (identifier))))
+
+================================================================================
+TRIGGERS - block with no trigger in it
+================================================================================
+
+CREATE BUTTON h ASSIGN FONT = 49
+  TRIGGERS :
+  END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (create_widget_statement
+    handle: (identifier)
+    (assign_phrase
+      (assign_pair
+        left: (identifier)
+        right: (number_literal)))
+    (trigger_phrase)))
