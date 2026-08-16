@@ -15599,6 +15599,10 @@
         "required": false,
         "types": [
           {
+            "type": "number_literal",
+            "named": true
+          },
+          {
             "type": "string_literal",
             "named": true
           }
@@ -32587,6 +32591,10 @@
         "required": false,
         "types": [
           {
+            "type": "number_literal",
+            "named": true
+          },
+          {
             "type": "string_literal",
             "named": true
           }
@@ -35550,6 +35558,10 @@
         "required": false,
         "types": [
           {
+            "type": "number_literal",
+            "named": true
+          },
+          {
             "type": "string_literal",
             "named": true
           }
@@ -37136,6 +37148,10 @@
           },
           {
             "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "number_literal",
             "named": true
           },
           {
@@ -57265,6 +57281,10 @@
         "required": false,
         "types": [
           {
+            "type": "number_literal",
+            "named": true
+          },
+          {
             "type": "string_literal",
             "named": true
           }
@@ -69694,6 +69714,10 @@
         "required": false,
         "types": [
           {
+            "type": "number_literal",
+            "named": true
+          },
+          {
             "type": "string_literal",
             "named": true
           }
@@ -77384,6 +77408,10 @@
         "required": false,
         "types": [
           {
+            "type": "number_literal",
+            "named": true
+          },
+          {
             "type": "string_literal",
             "named": true
           }
@@ -79643,6 +79671,10 @@
         "multiple": true,
         "required": false,
         "types": [
+          {
+            "type": "number_literal",
+            "named": true
+          },
           {
             "type": "string_literal",
             "named": true
