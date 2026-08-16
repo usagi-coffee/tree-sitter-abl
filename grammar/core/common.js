@@ -334,7 +334,10 @@ export default ({ kw }) => ({
       ),
     ),
 
-  _format_string: ($) => seq(kw("FORMAT", { offset: 4 }), field("format", $.string_literal)),
+  // A numeric picture needs no quotes: `FIELD Indice AS INTEGER FORMAT 999`
+  // is what the schema-derived definitions carry.
+  _format_string: ($) =>
+    seq(kw("FORMAT", { offset: 4 }), field("format", choice($.string_literal, $.number_literal))),
   _tooltip_phrase: ($) => seq(kw("TOOLTIP"), field("tooltip", $._expression)),
   _lock_option: ($) =>
     choice(

@@ -747,3 +747,32 @@ DEFINE STATIC TEMP-TABLE tt NO-UNDO FIELD f AS INTEGER.
     (temp_table_field
       name: (identifier)
       type: (identifier))))
+
+================================================================================
+TEMP-TABLE - numeric format without quotes
+================================================================================
+
+DEFINE PROTECTED TEMP-TABLE ttOperation NO-UNDO
+    FIELD Indice    AS INTEGER   FORMAT 999
+    FIELD CheckList AS CHARACTER FORMAT "X(4)"
+    INDEX idx1 IS PRIMARY Indice.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (temp_table_definition
+    (access_modifier)
+    name: (identifier)
+    (no_undo)
+    (temp_table_field
+      name: (identifier)
+      type: (identifier)
+      format: (number_literal))
+    (temp_table_field
+      name: (identifier)
+      type: (identifier)
+      format: (string_literal))
+    (temp_table_index
+      name: (identifier)
+      (primary)
+      field: (identifier))))
