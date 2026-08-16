@@ -643,3 +643,17 @@ RUN MESSAGE-INFO IN DYNAMIC-FUNCTION("GetHparent":U IN hparent) (p%message).
     (arguments
       (argument
         name: (identifier)))))
+
+================================================================================
+RUN - target opening on a symbol
+================================================================================
+
+RUN !Bar IN h.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (run_statement
+    procedure: (identifier)
+    (in_phrase
+      context: (identifier))))

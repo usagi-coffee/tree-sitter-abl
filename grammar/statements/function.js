@@ -4,7 +4,7 @@ export default ({ kw }) => ({
   __function_prefix: ($) =>
     seq(
       kw("FUNCTION"),
-      field("name", $.identifier),
+      field("name", $._routine_name),
       // `[ RETURNS ] return-type`, as in the prototype: the keyword is optional
       // and the type takes an extent.
       optional(kw("RETURNS", { offset: 5 })),
@@ -51,7 +51,7 @@ export default ({ kw }) => ({
   // CHARACTER) FORWARD.` returns an array.
   __function_forward_head: ($) =>
     seq(
-      field("name", $.identifier),
+      field("name", $._routine_name),
       optional(kw("RETURNS", { offset: 5 })),
       optional(kw("CLASS")),
       field("type", $._type_name),

@@ -552,6 +552,7 @@ export default grammar({
             "function",
             choice(
               $._identifier_or_qualified_name,
+              alias($.__symbolic_routine_name, $.identifier),
               $.object_access,
               $.scoped_name,
               $.system_handle_identifier,
@@ -597,6 +598,23 @@ export default grammar({
       // procedure library from the routine inside it, as in `RUN !SelCrit`,
       // and the same spelling turns up in include names.
       identifier: ($) => token(/[_\p{L}][\p{L}\p{N}_\-&#%$!]*/i),
+
+      // A routine name may open with a character a data symbol may not. The
+      // compiler enters the two under different rules: a data symbol whose
+      // initial is not a letter is error 257, while FUNCTION !Foo, PROCEDURE
+      // !Bar, RUN !Bar and !Foo("a") all compile. Only the initial differs, so
+      // this token covers that case alone and can never match what `identifier`
+      // matches -- widening `identifier` instead would relax the data contexts,
+      // which are correct today.
+      //
+      // The compiler also accepts `&`, a digit, `*`, `/` and `+` as the
+      // initial. They are left out. Real code uses `!` almost
+      // exclusively, and each of the others costs more than it is worth here:
+      // a digit cannot be told from a number literal, and `&` is how a named
+      // include argument opens -- allowing it makes `{f.i &name="x"}` lex as
+      // one name and lose the argument (measured: two corpus tests).
+      _routine_name: ($) => choice($.identifier, alias($.__symbolic_routine_name, $.identifier)),
+      __symbolic_routine_name: ($) => token(/[!#$%][\p{L}\p{N}_\-&#%$!]*/i),
       system_handle_identifier: ($) =>
         alias(
           token(prec(1, new RegExp(`(${SYSTEM_HANDLE_WORDS.map(escape_regex).join("|")})`, "i"))),

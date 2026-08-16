@@ -988,3 +988,22 @@ END FUNCTION.
         type: (identifier)))
     (return_statement
       value: (string_literal))))
+
+================================================================================
+FUNCTION - routine name opening on a symbol
+================================================================================
+
+FUNCTION !ACOS RETURNS DECIMAL (INPUT v AS DECIMAL) IN h.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (function_forward_definition
+    name: (identifier)
+    type: (identifier)
+    (parameters
+      (parameter
+        name: (identifier)
+        type: (identifier)))
+    (in_phrase
+      context: (identifier))))

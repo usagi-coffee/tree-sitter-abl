@@ -5,7 +5,10 @@ export default ({ kw }) => ({
     seq(
       kw("PROCEDURE", { offset: 4 }),
       optional($.__procedure_modifier),
-      field("name", $._identifier_or_qualified_name),
+      field(
+        "name",
+        choice($._identifier_or_qualified_name, alias($.__symbolic_routine_name, $.identifier)),
+      ),
       optional($.__procedure_modifier),
       repeat(
         choice(
