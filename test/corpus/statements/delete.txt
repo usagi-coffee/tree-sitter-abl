@@ -217,3 +217,25 @@ DELETE WIDGET-POOL "mypool" NO-ERROR.
   (delete_widget_pool_statement
     pool: (string_literal)
     (no_error)))
+
+================================================================================
+DELETE OBJECT - member reached with a double colon
+================================================================================
+
+IF VALID-OBJECT(pBufTT::ListeParamPxRvtSocDep) THEN DELETE OBJECT pBufTT::ListeParamPxRvtSocDep.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (if_statement
+    (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (scoped_name
+            left: (identifier)
+            right: (identifier)))))
+    then: (delete_object_statement
+      name: (scoped_name
+        left: (identifier)
+        right: (identifier)))))

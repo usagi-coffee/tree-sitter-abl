@@ -20,6 +20,8 @@ export default ({ kw }) => ({
           $._identifier_or_array_access,
           $.system_handle_identifier,
           $.object_access,
+          // A member reached with `::`, as in `DELETE OBJECT pBufTT::Liste.`
+          $.scoped_name,
           $.parenthesized_expression,
         ),
       ),

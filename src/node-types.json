@@ -27066,6 +27066,10 @@
           {
             "type": "qualified_name",
             "named": true
+          },
+          {
+            "type": "scoped_name",
+            "named": true
           }
         ]
       }

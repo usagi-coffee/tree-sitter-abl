@@ -14225,6 +14225,10 @@
               },
               {
                 "type": "SYMBOL",
+                "name": "scoped_name"
+              },
+              {
+                "type": "SYMBOL",
                 "name": "parenthesized_expression"
               }
             ]
