@@ -200,3 +200,26 @@ INCLUDE - macro inside the path
   (include_file_reference
     file: (include_file_path
       (identifier))))
+
+================================================================================
+INCLUDE - IN between two positional arguments
+================================================================================
+
+{lib/foreach.i BaseData vData in Manager:Items}
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (include_file_reference
+    file: (include_file_path
+      (identifier))
+    argument: (include_argument
+      (identifier))
+    argument: (include_argument
+      (identifier))
+    argument: (include_argument
+      (identifier))
+    argument: (include_argument
+      (object_access
+        left: (identifier)
+        right: (identifier)))))
