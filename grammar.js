@@ -209,7 +209,13 @@ export default grammar({
           $.boolean_literal,
           $.preprocessor_name,
           $.argument_reference,
+          // `{lib/compare.i DATE IN < DATE}` -- an include argument is raw
+          // text, and this one hands the include a bare comparison operator to
+          // drop into `RETURN (v1 {3} v2)`. Spelled out rather than left to a
+          // catch-all, so a stray token in an argument list still fails.
+          alias($.__include_operator_argument, $.comparison_operator),
         ),
+      __include_operator_argument: ($) => choice("<>", ">=", "<=", "=", ">", "<"),
 
       // Preprocessor
       global_define_preprocessor_directive: ($) =>
