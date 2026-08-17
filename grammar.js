@@ -17,6 +17,9 @@ const COMPARISON_OPERATORS = [
   "<=",
   kw("BEGINS"),
   kw("MATCHES"),
+  // Word-index comparison: `FOR EACH wordidx WHERE wordidx.keywords CONTAINS
+  // term`. It sits with BEGINS and MATCHES, the other word operators.
+  kw("CONTAINS"),
   kw("EQ"),
   kw("NE"),
   kw("GT"),
