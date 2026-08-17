@@ -239,3 +239,38 @@ IF VALID-OBJECT(pBufTT::ListeParamPxRvtSocDep) THEN DELETE OBJECT pBufTT::ListeP
       name: (scoped_name
         left: (identifier)
         right: (identifier)))))
+
+================================================================================
+DELETE OBJECT - a handle produced by a call
+================================================================================
+
+DELETE OBJECT WIDGET-HANDLE (ENTRY (i, listeHe)).
+DELETE OBJECT h:BUFFER-FIELD("nom").
+DELETE OBJECT h NO-ERROR.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (delete_object_statement
+    name: (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (function_call
+            function: (identifier)
+            (arguments
+              (argument
+                name: (identifier))
+              (argument
+                name: (identifier))))))))
+  (delete_object_statement
+    name: (function_call
+      function: (object_access
+        left: (identifier)
+        right: (identifier))
+      (arguments
+        (argument
+          name: (string_literal)))))
+  (delete_object_statement
+    name: (identifier)
+    (no_error)))
