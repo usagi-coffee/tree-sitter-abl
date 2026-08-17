@@ -178,3 +178,58 @@ END.
       (display_statement
         (field
           field: (string_literal))))))
+
+================================================================================
+PUNCTUATION IN QUALIFIED FIELD NAMES
+================================================================================
+
+ASSIGN field# = 1.
+ASSIGN tt.FIELD# = 2.
+ASSIGN tt.FIELD$ = 3.
+ASSIGN tt.P%RowId = 4.
+ASSIGN tt.FIELD& = 5.
+ASSIGN h:FIELD# = 6.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assign_statement
+    (assign_phrase
+      (assign_pair
+        left: (identifier)
+        right: (number_literal))))
+  (assign_statement
+    (assign_phrase
+      (assign_pair
+        left: (qualified_name
+          left: (identifier)
+          right: (identifier))
+        right: (number_literal))))
+  (assign_statement
+    (assign_phrase
+      (assign_pair
+        left: (qualified_name
+          left: (identifier)
+          right: (identifier))
+        right: (number_literal))))
+  (assign_statement
+    (assign_phrase
+      (assign_pair
+        left: (qualified_name
+          left: (identifier)
+          right: (identifier))
+        right: (number_literal))))
+  (assign_statement
+    (assign_phrase
+      (assign_pair
+        left: (qualified_name
+          left: (identifier)
+          right: (identifier))
+        right: (number_literal))))
+  (assign_statement
+    (assign_phrase
+      (assign_pair
+        left: (object_access
+          left: (identifier)
+          right: (identifier))
+        right: (number_literal)))))
