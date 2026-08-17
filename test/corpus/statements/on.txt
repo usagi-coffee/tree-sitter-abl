@@ -598,3 +598,36 @@ ON CHOOSE OF btn PERSISTENT RUN ClicOption (INPUT 1) IN pproc.
         name: (number_literal)))
     (in_phrase
       context: (identifier))))
+
+================================================================================
+ON - DELETE against a widget, not a table
+================================================================================
+
+ON DELETE OF FRAME F1 ANYWHERE DO: END.
+ON DELETE OF BROWSE {&BROWSE-NAME} ANYWHERE DO: END.
+ON DELETE OF Customer DO: END.
+ON DELETE OF Customer REVERT.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (on_statement
+    widget: (widget_phrase
+      frame: (identifier))
+    (anywhere)
+    (do_statement
+      (body)))
+  (on_statement
+    widget: (widget_phrase
+      browse: (preprocessor_name
+        (identifier)))
+    (anywhere)
+    (do_statement
+      (body)))
+  (on_statement
+    object: (identifier)
+    (do_statement
+      (body)))
+  (on_statement
+    object: (identifier)
+    (revert)))

@@ -25040,37 +25040,209 @@
           "value": "OF"
         },
         {
-          "type": "FIELD",
-          "name": "object",
-          "content": {
-            "type": "SYMBOL",
-            "name": "_identifier_or_qualified_name"
-          }
-        },
-        {
           "type": "CHOICE",
           "members": [
             {
-              "type": "SYMBOL",
-              "name": "__on_database_event_tail"
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "FIELD",
+                  "name": "object",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "_identifier_or_qualified_name"
+                  }
+                },
+                {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "__on_database_event_tail"
+                    },
+                    {
+                      "type": "BLANK"
+                    }
+                  ]
+                },
+                {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "__on_revert_action"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "_statement"
+                    }
+                  ]
+                }
+              ]
             },
             {
-              "type": "BLANK"
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "FIELD",
+                  "name": "widget",
+                  "content": {
+                    "type": "ALIAS",
+                    "content": {
+                      "type": "SYMBOL",
+                      "name": "__on_database_event_widget"
+                    },
+                    "named": true,
+                    "value": "widget_phrase"
+                  }
+                },
+                {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "ALIAS",
+                      "content": {
+                        "type": "ALIAS",
+                        "content": {
+                          "type": "TOKEN",
+                          "content": {
+                            "type": "PATTERN",
+                            "value": "ANYWHERE",
+                            "flags": "i"
+                          }
+                        },
+                        "named": false,
+                        "value": "ANYWHERE"
+                      },
+                      "named": true,
+                      "value": "anywhere"
+                    },
+                    {
+                      "type": "BLANK"
+                    }
+                  ]
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "__on_trigger_action"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "__on_database_event_widget": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PATTERN",
+                  "value": "FRAME",
+                  "flags": "i"
+                }
+              },
+              "named": false,
+              "value": "FRAME"
+            },
+            {
+              "type": "FIELD",
+              "name": "frame",
+              "content": {
+                "type": "SYMBOL",
+                "name": "__on_widget_name"
+              }
             }
           ]
         },
         {
-          "type": "CHOICE",
+          "type": "SEQ",
           "members": [
             {
-              "type": "SYMBOL",
-              "name": "__on_revert_action"
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PATTERN",
+                  "value": "BROWSE",
+                  "flags": "i"
+                }
+              },
+              "named": false,
+              "value": "BROWSE"
             },
             {
-              "type": "SYMBOL",
-              "name": "_statement"
+              "type": "FIELD",
+              "name": "browse",
+              "content": {
+                "type": "SYMBOL",
+                "name": "__on_widget_name"
+              }
             }
           ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "TOKEN",
+                    "content": {
+                      "type": "PATTERN",
+                      "value": "MENU",
+                      "flags": "i"
+                    }
+                  },
+                  "named": false,
+                  "value": "MENU"
+                },
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "TOKEN",
+                    "content": {
+                      "type": "PATTERN",
+                      "value": "SUB-MENU",
+                      "flags": "i"
+                    }
+                  },
+                  "named": false,
+                  "value": "SUB-MENU"
+                }
+              ]
+            },
+            {
+              "type": "FIELD",
+              "name": "menu",
+              "content": {
+                "type": "SYMBOL",
+                "name": "__on_widget_name"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "__on_widget_name": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "identifier"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "preprocessor_name"
         }
       ]
     },
