@@ -600,3 +600,40 @@ END CLASS.
         left: (identifier)
         operator: (assignment_operator)
         right: (number_literal)))))
+
+================================================================================
+CLASS - METHOD whose modifier comes from a macro
+================================================================================
+
+CLASS Pkg.Foo:
+  METHOD {&PACKAGE-PROTECTED} OVERRIDE VOID CreateRecord(INPUT pBufferName AS CHARACTER):
+  END METHOD.
+  METHOD PUBLIC OVERRIDE VOID Ordinaire():
+  END METHOD.
+END CLASS.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (class_definition
+    name: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (method_definition
+      (preprocessor_name
+        (identifier))
+      (override_modifier)
+      type: (identifier)
+      name: (identifier)
+      (parameters
+        (parameter
+          name: (identifier)
+          type: (identifier)))
+      (body))
+    (method_definition
+      (access_modifier)
+      (override_modifier)
+      type: (identifier)
+      name: (identifier)
+      (parameters)
+      (body))))

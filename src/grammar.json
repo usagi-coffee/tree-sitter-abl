@@ -6889,8 +6889,17 @@
         {
           "type": "REPEAT",
           "content": {
-            "type": "SYMBOL",
-            "name": "_method_modifier_no_abstract"
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "_method_modifier_no_abstract"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "preprocessor_name"
+              }
+            ]
           }
         }
       ]
@@ -63365,6 +63374,9 @@
     ],
     [
       "__widget_entry"
+    ],
+    [
+      "__class_method_definition_prefix"
     ],
     [
       "__dataset_modifier",
