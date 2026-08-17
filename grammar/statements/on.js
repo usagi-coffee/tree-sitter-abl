@@ -115,14 +115,44 @@ export default ({ kw }) => ({
       $.__on_trigger_action,
     ),
   __on_ui_anywhere_branch: ($) => seq($.__on_ui_events, alias(kw("ANYWHERE"), $.anywhere)),
+  // `ON DELETE OF FRAME F1 ANYWHERE DO:` -- DELETE names a widget event as well
+  // as the database one, and generated screens write it against a frame.
+  //
+  // The two readings share `<event> OF`, so they are factored behind it rather
+  // than given a branch each: two branches both opening on DELETE cannot be
+  // told apart at that token, and tree-sitter asks for a precedence or a
+  // conflict there. A precedence would settle it statically and lose one form
+  // -- the mistake already made on HIDE. Factored this way the choice falls
+  // after OF, where the widget keyword separates it from a bare table name and
+  // no conflict arises at all.
+  //
+  // The cost is that the widget form is reachable from every database event,
+  // so `ON WRITE OF FRAME f` parses too. Narrowing it to DELETE alone would
+  // mean duplicating the branch and reintroducing the ambiguity.
   __on_database_event_branch: ($) =>
     seq(
       field("event", $.__on_database_event),
       kw("OF"),
-      field("object", $._identifier_or_qualified_name),
-      optional($.__on_database_event_tail),
-      choice($.__on_revert_action, $._statement),
+      choice(
+        seq(
+          field("object", $._identifier_or_qualified_name),
+          optional($.__on_database_event_tail),
+          choice($.__on_revert_action, $._statement),
+        ),
+        seq(
+          field("widget", alias($.__on_database_event_widget, $.widget_phrase)),
+          optional(alias(kw("ANYWHERE"), $.anywhere)),
+          $.__on_trigger_action,
+        ),
+      ),
     ),
+  __on_database_event_widget: ($) =>
+    choice(
+      seq(kw("FRAME"), field("frame", $.__on_widget_name)),
+      seq(kw("BROWSE"), field("browse", $.__on_widget_name)),
+      seq(choice(kw("MENU"), kw("SUB-MENU")), field("menu", $.__on_widget_name)),
+    ),
+  __on_widget_name: ($) => choice($.identifier, $.preprocessor_name),
   __on_database_event_tail: ($) =>
     choice(
       seq(

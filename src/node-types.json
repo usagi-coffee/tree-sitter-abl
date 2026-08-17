@@ -53841,6 +53841,16 @@
             "named": true
           }
         ]
+      },
+      "widget": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "widget_phrase",
+            "named": true
+          }
+        ]
       }
     },
     "children": {
