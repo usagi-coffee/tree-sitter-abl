@@ -523,3 +523,31 @@ s = INPUT FRAME fr SESSION:NUMERIC-FORMAT.
       field: (object_access
         left: (identifier)
         right: (identifier)))))
+
+================================================================================
+CONTAINS, the word-index comparison
+================================================================================
+
+FOR EACH wordidx WHERE wordidx.keywords CONTAINS term NO-LOCK:
+END.
+
+IF champ CONTAINS "mot" THEN RETURN.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (for_statement
+    (record_phrase
+      record: (identifier)
+      where: (binary_expression
+        (qualified_name
+          left: (identifier)
+          right: (identifier))
+        (identifier))
+      (no_lock))
+    (body))
+  (if_statement
+    (binary_expression
+      (identifier)
+      (string_literal))
+    then: (return_statement)))
