@@ -66,7 +66,7 @@ export default ({ kw }) => ({
   __record_query_frame_phrase: ($) =>
     seq(
       kw("AND"),
-      kw("FRAME"),
+      kw("FRAME", { offset: 4 }),
       optional(field("frame", $.identifier)),
       field("field", $.identifier),
     ),

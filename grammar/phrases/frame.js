@@ -102,7 +102,7 @@ export default ({ kw }) => ({
     prec.right(
       seq(
         choice(
-          seq(kw("FRAME"), field("frame", $.__frame_identifier)),
+          seq(kw("FRAME", { offset: 4 }), field("frame", $.__frame_identifier)),
           seq(kw("BROWSE"), field("browse", $.__frame_identifier)),
         ),
         optional(kw("WITH")),

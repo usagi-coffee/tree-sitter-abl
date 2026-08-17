@@ -5,7 +5,7 @@ export default ({ kw }) => ({
     seq(
       kw("DEFINE", { offset: 3 }),
       optional($._definition_scope_modifier),
-      kw("FRAME"),
+      kw("FRAME", { offset: 4 }),
       $.__frame_body,
     ),
 

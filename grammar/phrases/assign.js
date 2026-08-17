@@ -19,7 +19,7 @@ export default ({ kw }) => ({
             field("attr", $.identifier),
           ),
           seq(
-            kw("FRAME"),
+            kw("FRAME", { offset: 4 }),
             field("frame", $.__assign_widget_name),
             ":",
             field("attr", $.identifier),
