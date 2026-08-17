@@ -40,7 +40,7 @@ export default ({ kw }) => ({
     seq(
       optional(kw("INPUT")),
       choice(
-        seq(kw("FRAME"), field("frame", $.__assign_widget_name)),
+        seq(kw("FRAME", { offset: 4 }), field("frame", $.__assign_widget_name)),
         seq(kw("BROWSE"), field("browse", $.__assign_widget_name)),
       ),
       repeat1(

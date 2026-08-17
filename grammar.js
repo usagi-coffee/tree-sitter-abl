@@ -369,7 +369,7 @@ export default grammar({
       // to follow it, otherwise the text is a plain macro reference.
       macro_concatenated_name: ($) => token(MACRO_CONCATENATED_NAME),
 
-      _widgets: ($) => prec.right(alias(choice(...WIDGETS, kw("FRAME")), $.identifier)),
+      _widgets: ($) => prec.right(alias(choice(...WIDGETS, kw("FRAME", { offset: 4 })), $.identifier)),
       _events: ($) =>
         choice(
           $.identifier,

@@ -180,6 +180,34 @@ END.
           field: (string_literal))))))
 
 ================================================================================
+FRAME ABBREVIATED TO FRAM
+================================================================================
+
+bajoutCond:ROW IN FRAM fr-clause = 1.
+HIDE TBADR IN FRAME FR1.
+DISPLAY x WITH FRAM f.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assignment_statement
+    left: (widget_qualified_name
+      target: (object_access
+        left: (identifier)
+        right: (identifier))
+      widget: (identifier))
+    operator: (assignment_operator)
+    right: (number_literal))
+  (hide_statement
+    (widget_phrase
+      field: (identifier)
+      frame: (identifier)))
+  (display_statement
+    record: (identifier)
+    (frame_phrase
+      frame: (identifier))))
+
+================================================================================
 PUNCTUATION IN QUALIFIED FIELD NAMES
 ================================================================================
 

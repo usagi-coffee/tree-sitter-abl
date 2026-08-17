@@ -38,7 +38,7 @@ export default ({ kw }) => ({
 
   __record_using_field: ($) =>
     seq(
-      optional(seq(kw("FRAME"), field("frame", $.identifier))),
+      optional(seq(kw("FRAME", { offset: 4 }), field("frame", $.identifier))),
       field("field", $._identifier_or_qualified_name),
     ),
 

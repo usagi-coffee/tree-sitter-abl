@@ -1,7 +1,7 @@
 export default ({ kw }) => ({
   widget_phrase: ($) =>
     choice(
-      seq(kw("FRAME"), field("frame", $.__widget_name)),
+      seq(kw("FRAME", { offset: 4 }), field("frame", $.__widget_name)),
       seq(kw("BROWSE"), field("browse", $.__widget_name)),
       $.__widget_handle,
       $.__widget_entry,
@@ -25,18 +25,18 @@ export default ({ kw }) => ({
       seq(
         kw("FIELD"),
         field("field", $._identifier_or_array_access),
-        optional(seq(kw("IN"), kw("FRAME"), field("frame", $.__widget_name))),
+        optional(seq(kw("IN"), kw("FRAME", { offset: 4 }), field("frame", $.__widget_name))),
       ),
       seq(
         field("field", $._identifier_or_array_access),
-        seq(kw("IN"), kw("FRAME"), field("frame", $.__widget_name)),
+        seq(kw("IN"), kw("FRAME", { offset: 4 }), field("frame", $.__widget_name)),
       ),
       // An array element is a widget on its own -- `APPLY "entry" TO TDEC[I]`.
       // It is not a bare name, so it cannot be confused with __widget_handle
       // and its qualifier stays optional.
       seq(
         field("field", $.array_access),
-        optional(seq(kw("IN"), kw("FRAME"), field("frame", $.__widget_name))),
+        optional(seq(kw("IN"), kw("FRAME", { offset: 4 }), field("frame", $.__widget_name))),
       ),
       seq(
         field("column", $._identifier_or_array_access),

@@ -11,7 +11,7 @@ export default ({ kw }) => ({
         kw("DIALOG-BOX"),
         kw("EDITOR"),
         kw("FILL-IN"),
-        kw("FRAME"),
+        kw("FRAME", { offset: 4 }),
         kw("IMAGE"),
         kw("MENU"),
         kw("MENU-ITEM"),

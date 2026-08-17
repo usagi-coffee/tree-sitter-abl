@@ -1346,7 +1346,7 @@
                     "type": "TOKEN",
                     "content": {
                       "type": "PATTERN",
-                      "value": "FRAME",
+                      "value": "FRAM(E)?",
                       "flags": "i"
                     }
                   },
@@ -9279,7 +9279,7 @@
                     "type": "TOKEN",
                     "content": {
                       "type": "PATTERN",
-                      "value": "FRAME",
+                      "value": "FRAM(E)?",
                       "flags": "i"
                     }
                   },
@@ -13944,7 +13944,7 @@
             "type": "TOKEN",
             "content": {
               "type": "PATTERN",
-              "value": "FRAME",
+              "value": "FRAM(E)?",
               "flags": "i"
             }
           },
@@ -19371,7 +19371,7 @@
             "type": "TOKEN",
             "content": {
               "type": "PATTERN",
-              "value": "FRAME",
+              "value": "FRAM(E)?",
               "flags": "i"
             }
           },
@@ -25162,7 +25162,7 @@
                 "type": "TOKEN",
                 "content": {
                   "type": "PATTERN",
-                  "value": "FRAME",
+                  "value": "FRAM(E)?",
                   "flags": "i"
                 }
               },
@@ -44947,7 +44947,7 @@
                 "type": "TOKEN",
                 "content": {
                   "type": "PATTERN",
-                  "value": "FRAME",
+                  "value": "FRAM(E)?",
                   "flags": "i"
                 }
               },
@@ -45912,7 +45912,7 @@
             "type": "TOKEN",
             "content": {
               "type": "PATTERN",
-              "value": "FRAME",
+              "value": "FRAM(E)?",
               "flags": "i"
             }
           },
@@ -46400,7 +46400,7 @@
             "type": "TOKEN",
             "content": {
               "type": "PATTERN",
-              "value": "FRAME",
+              "value": "FRAM(E)?",
               "flags": "i"
             }
           },
@@ -46740,7 +46740,7 @@
                       "type": "TOKEN",
                       "content": {
                         "type": "PATTERN",
-                        "value": "FRAME",
+                        "value": "FRAM(E)?",
                         "flags": "i"
                       }
                     },
@@ -52280,7 +52280,7 @@
                       "type": "TOKEN",
                       "content": {
                         "type": "PATTERN",
-                        "value": "FRAME",
+                        "value": "FRAM(E)?",
                         "flags": "i"
                       }
                     },
@@ -53880,7 +53880,7 @@
                     "type": "TOKEN",
                     "content": {
                       "type": "PATTERN",
-                      "value": "FRAME",
+                      "value": "FRAM(E)?",
                       "flags": "i"
                     }
                   },
@@ -55618,7 +55618,7 @@
                 "type": "TOKEN",
                 "content": {
                   "type": "PATTERN",
-                  "value": "FRAME",
+                  "value": "FRAM(E)?",
                   "flags": "i"
                 }
               },
@@ -55802,7 +55802,7 @@
                         "type": "TOKEN",
                         "content": {
                           "type": "PATTERN",
-                          "value": "FRAME",
+                          "value": "FRAM(E)?",
                           "flags": "i"
                         }
                       },
@@ -55859,7 +55859,7 @@
                     "type": "TOKEN",
                     "content": {
                       "type": "PATTERN",
-                      "value": "FRAME",
+                      "value": "FRAM(E)?",
                       "flags": "i"
                     }
                   },
@@ -55914,7 +55914,7 @@
                         "type": "TOKEN",
                         "content": {
                           "type": "PATTERN",
-                          "value": "FRAME",
+                          "value": "FRAM(E)?",
                           "flags": "i"
                         }
                       },
@@ -56845,7 +56845,7 @@
                 "type": "TOKEN",
                 "content": {
                   "type": "PATTERN",
-                  "value": "FRAME",
+                  "value": "FRAM(E)?",
                   "flags": "i"
                 }
               },
