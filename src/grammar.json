@@ -7573,8 +7573,17 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "SYMBOL",
-              "name": "__class_property_definition_modifier"
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "__class_property_definition_modifier"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "preprocessor_name"
+                }
+              ]
             },
             {
               "type": "BLANK"
