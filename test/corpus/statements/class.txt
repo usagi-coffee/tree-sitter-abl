@@ -637,3 +637,29 @@ END CLASS.
       name: (identifier)
       (parameters)
       (body))))
+
+================================================================================
+CLASS - PROPERTY whose modifier comes from a macro
+================================================================================
+
+CLASS Foo:
+  DEFINE {&package-protected} PROPERTY gX AS LOGICAL NO-UNDO GET. SET.
+  DEFINE PUBLIC PROPERTY gY AS LOGICAL NO-UNDO GET. SET.
+END CLASS.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (class_definition
+    name: (identifier)
+    (property_definition
+      (preprocessor_name
+        (identifier))
+      name: (identifier)
+      type: (identifier)
+      (no_undo))
+    (property_definition
+      (access_modifier)
+      name: (identifier)
+      type: (identifier)
+      (no_undo))))

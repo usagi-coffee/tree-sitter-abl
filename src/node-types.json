@@ -18472,6 +18472,10 @@
             "named": false
           },
           {
+            "type": "CONTAINS",
+            "named": false
+          },
+          {
             "type": "EQ",
             "named": false
           },
@@ -60269,6 +60273,10 @@
           "named": true
         },
         {
+          "type": "preprocessor_name",
+          "named": true
+        },
+        {
           "type": "preselect_statement",
           "named": true
         },
@@ -87770,6 +87778,10 @@
   },
   {
     "type": "CONSTRUCTOR",
+    "named": false
+  },
+  {
+    "type": "CONTAINS",
     "named": false
   },
   {

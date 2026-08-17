@@ -165,7 +165,11 @@ export default ({ kw }) => ({
   __class_property_definition_prefix: ($) =>
     seq(
       kw("DEFINE", { offset: 3 }),
-      optional($.__class_property_definition_modifier),
+      // `DEFINE {&package-protected} PROPERTY gDemiJourneeMatin AS LOGICAL` --
+      // the modifier comes from a macro, exactly as it does on METHOD. Left as
+      // `preprocessor_name` for the same reason: what it expands to is not
+      // known here.
+      optional(choice($.__class_property_definition_modifier, $.preprocessor_name)),
       kw("PROPERTY"),
       field("name", $.identifier),
       $.__class_property_type_phrase,
