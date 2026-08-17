@@ -544,7 +544,12 @@ export default grammar({
           choice(
             seq(
               choice(kw("TABLE"), kw("BUFFER"), kw("TABLE-HANDLE"), kw("DATASET-HANDLE")),
-              field("name", choice($._identifier_or_qualified_name, $.object_access)),
+              // `STRING(BUFFER bufParam:BUFFER-FIELD(ENTRY(i,l)))` -- here BUFFER
+              // opens an expression whose method is called, not a parameter
+              // being passed, but the keyword is read first either way and the
+              // call was left with nowhere to attach. Outside an argument list
+              // the same text parses, which is what made the gap so narrow.
+              field("name", choice($._identifier_or_qualified_name, $.object_access, $.function_call)),
             ),
             field("name", $._expression),
           ),

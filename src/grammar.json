@@ -58345,6 +58345,10 @@
                       {
                         "type": "SYMBOL",
                         "name": "object_access"
+                      },
+                      {
+                        "type": "SYMBOL",
+                        "name": "function_call"
                       }
                     ]
                   }
