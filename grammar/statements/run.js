@@ -52,6 +52,17 @@ export default ({ kw }) => ({
       alias($.__symbolic_routine_name, $.identifier),
       alias($.__numeric_routine_name, $.identifier),
       $.qualified_name,
+      alias($.__run_handle_method, $.object_access),
+    ),
+  // `RUN THIS-OBJECT:MakeBreak (pKey, ...)` -- a class running one of
+  // its own methods through the object handle. Only a system handle opens the
+  // form: real code writes THIS-OBJECT and nothing else, and taking a general
+  // object access here would let any `a:b` be a RUN target.
+  __run_handle_method: ($) =>
+    seq(
+      field("left", $.system_handle_identifier),
+      $._namecolon,
+      field("right", alias($._identifier_immediate, $.identifier)),
     ),
   // A procedure reference given as a path, with the .p or .r extension left
   // implicit: RUN Erp\Model\Vente\ErpTrt. Both separators occur in practice.

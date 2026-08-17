@@ -657,3 +657,27 @@ RUN !Bar IN h.
     procedure: (identifier)
     (in_phrase
       context: (identifier))))
+
+================================================================================
+RUN - a method reached through the object handle
+================================================================================
+
+RUN THIS-OBJECT:MakeBreak (pKey, OUTPUT x).
+RUN THIS-OBJECT:Foo.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (run_statement
+    procedure: (object_access
+      left: (identifier)
+      right: (identifier))
+    (arguments
+      (argument
+        name: (identifier))
+      (argument
+        name: (identifier))))
+  (run_statement
+    procedure: (object_access
+      left: (identifier)
+      right: (identifier))))
