@@ -107,6 +107,13 @@ export default grammar({
     [$.__disable_item, $.function_call],
     // Field / Column / Handle can be just an identifier
     [$.__widget_entry],
+    // `METHOD {&PACKAGE-PROTECTED} OVERRIDE VOID Foo():` -- on the `{` the
+    // parser must decide whether the modifier list continues with a macro or
+    // has ended and something else opens on a brace. Both readings are still
+    // alive at that token, and the choice is only settled by what follows the
+    // macro, so it is made at parse time rather than by an associativity that
+    // would fix one reading and lose the other.
+    [$.__class_method_definition_prefix],
 
     // DEFINE modifiers prefix conflicts
     // Conflicts approach has slightly better state reduction (~500) than doing it conflicts free

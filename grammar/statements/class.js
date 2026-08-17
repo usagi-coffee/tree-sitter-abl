@@ -68,8 +68,15 @@ export default ({ kw }) => ({
       ),
     ),
   __class_body_opener: ($) => choice(alias($._colon, ":"), $._terminator_dot),
+  // `METHOD {&PACKAGE-PROTECTED} OVERRIDE VOID Foo(...):` -- a whole modifier
+  // supplied by a macro, so that one source builds a package-protected method
+  // in one configuration and a public one in another. Taken here rather than in
+  // the shared `_method_modifier_no_abstract`, which other definitions read and
+  // which real code never writes this way. Left as `preprocessor_name`: what
+  // the macro expands to is not known here, so aliasing it to access_modifier
+  // would be a guess.
   __class_method_definition_prefix: ($) =>
-    seq(kw("METHOD"), repeat($._method_modifier_no_abstract)),
+    seq(kw("METHOD"), repeat(choice($._method_modifier_no_abstract, $.preprocessor_name))),
   __class_method_definition_signature: ($) =>
     seq(
       $._method_return_type,

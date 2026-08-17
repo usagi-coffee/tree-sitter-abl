@@ -52088,6 +52088,10 @@
           "named": true
         },
         {
+          "type": "preprocessor_name",
+          "named": true
+        },
+        {
           "type": "static_modifier",
           "named": true
         }
