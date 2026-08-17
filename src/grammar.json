@@ -302,6 +302,44 @@
         {
           "type": "SYMBOL",
           "name": "argument_reference"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "__include_operator_argument"
+          },
+          "named": true,
+          "value": "comparison_operator"
+        }
+      ]
+    },
+    "__include_operator_argument": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "<>"
+        },
+        {
+          "type": "STRING",
+          "value": ">="
+        },
+        {
+          "type": "STRING",
+          "value": "<="
+        },
+        {
+          "type": "STRING",
+          "value": "="
+        },
+        {
+          "type": "STRING",
+          "value": ">"
+        },
+        {
+          "type": "STRING",
+          "value": "<"
         }
       ]
     },

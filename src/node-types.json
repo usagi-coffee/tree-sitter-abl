@@ -18644,6 +18644,11 @@
     }
   },
   {
+    "type": "comparison_operator",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "compile_statement",
     "named": true,
     "fields": {
@@ -48064,6 +48069,10 @@
             "named": true
           },
           {
+            "type": "comparison_operator",
+            "named": true
+          },
+          {
             "type": "function_call",
             "named": true
           },
@@ -48120,6 +48129,10 @@
         },
         {
           "type": "boolean_literal",
+          "named": true
+        },
+        {
+          "type": "comparison_operator",
           "named": true
         },
         {

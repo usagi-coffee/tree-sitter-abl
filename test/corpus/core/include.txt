@@ -223,3 +223,36 @@ INCLUDE - IN between two positional arguments
       (object_access
         left: (identifier)
         right: (identifier)))))
+
+================================================================================
+An include argument that is a bare comparison operator
+================================================================================
+
+{lib/compare.i DATE IN < DATE}
+{lib/compare.i DEC DI <> DEC}
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (include_file_reference
+    file: (include_file_path
+      (identifier))
+    argument: (include_argument
+      (identifier))
+    argument: (include_argument
+      (identifier))
+    argument: (include_argument
+      (comparison_operator))
+    argument: (include_argument
+      (identifier)))
+  (include_file_reference
+    file: (include_file_path
+      (identifier))
+    argument: (include_argument
+      (identifier))
+    argument: (include_argument
+      (identifier))
+    argument: (include_argument
+      (comparison_operator))
+    argument: (include_argument
+      (identifier))))
