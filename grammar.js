@@ -630,7 +630,16 @@ export default grammar({
           $.identifier,
         ),
       _label: ($) => seq(field("label", $.identifier), alias($._colon, ":")),
-      _identifier_immediate: ($) => token.immediate(/[_\p{L}][\p{L}\p{N}_\-%]*/i),
+      // The name after a name dot or colon is a field, and a field is a data
+      // symbol like any other: the compiler takes `&`, `#`, `$` and `%` inside
+      // one, so `tt.FIELD#` compiles while this rule rejected it. Only `%` was
+      // allowed here, which is narrower than `identifier` for no reason.
+      //
+      // Deliberately without `!`, which `identifier` above does accept: `!` is
+      // legal only in a routine name. In a data symbol the compiler raises
+      // error 274, so widening this rule to match `identifier` exactly would
+      // accept what the compiler rejects.
+      _identifier_immediate: ($) => token.immediate(/[_\p{L}][\p{L}\p{N}_\-&#%$]*/i),
       _alias_name: ($) => choice($.identifier, $.string_literal, $._value_expression),
       _os_filename: ($) => choice($.string_literal, $._identifier_or_access_or_call),
       parenthesized_identifier: ($) => seq("(", $.identifier, ")"),
