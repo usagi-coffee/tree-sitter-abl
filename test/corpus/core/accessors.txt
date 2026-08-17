@@ -231,3 +231,35 @@ x = mm1:SCREEN-VALUE IN FRAME {&FRAME-NAME}.
         right: (identifier))
       widget: (preprocessor_name
         (identifier)))))
+
+================================================================================
+A buffer method called inside an argument list
+================================================================================
+
+val = STRING(BUFFER bufParam:BUFFER-FIELD("x")).
+RUN buildBuffer (BUFFER ttOpt:HANDLE).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (function_call
+            function: (object_access
+              left: (identifier)
+              right: (identifier))
+            (arguments
+              (argument
+                name: (string_literal))))))))
+  (run_statement
+    procedure: (identifier)
+    (arguments
+      (argument
+        name: (object_access
+          left: (identifier)
+          right: (identifier))))))
