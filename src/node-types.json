@@ -733,6 +733,16 @@
     "type": "apply_statement",
     "named": true,
     "fields": {
+      "browse": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
       "event": {
         "multiple": false,
         "required": true,
@@ -746,7 +756,21 @@
             "named": true
           },
           {
+            "type": "object_access",
+            "named": true
+          },
+          {
             "type": "string_literal",
+            "named": true
+          }
+        ]
+      },
+      "frame": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
             "named": true
           }
         ]
@@ -757,6 +781,16 @@
         "types": [
           {
             "type": "widget",
+            "named": true
+          }
+        ]
+      },
+      "menu": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
             "named": true
           }
         ]
@@ -89104,7 +89138,7 @@
     "named": false
   },
   {
-    "type": "ROW-HEIGHT-CHARS",
+    "type": "ROW-HEIGHT",
     "named": false
   },
   {
