@@ -3039,6 +3039,14 @@
           {
             "type": "identifier",
             "named": true
+          },
+          {
+            "type": "macro_concatenated_name",
+            "named": true
+          },
+          {
+            "type": "qualified_name",
+            "named": true
           }
         ]
       }
@@ -58615,6 +58623,14 @@
           {
             "type": "identifier",
             "named": true
+          },
+          {
+            "type": "macro_concatenated_name",
+            "named": true
+          },
+          {
+            "type": "qualified_name",
+            "named": true
           }
         ]
       }
@@ -70130,6 +70146,14 @@
           {
             "type": "identifier",
             "named": true
+          },
+          {
+            "type": "macro_concatenated_name",
+            "named": true
+          },
+          {
+            "type": "qualified_name",
+            "named": true
           }
         ]
       }
@@ -70149,6 +70173,14 @@
           },
           {
             "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "macro_concatenated_name",
+            "named": true
+          },
+          {
+            "type": "qualified_name",
             "named": true
           }
         ]
