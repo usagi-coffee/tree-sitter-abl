@@ -337,3 +337,36 @@ BUFFER b:ATTACH-DATA-SOURCE (DATA-SOURCE src:HANDLE, ?, ?).
           name: (null_literal))
         (argument
           name: (null_literal))))))
+
+================================================================================
+A buffer reference as an operand inside an argument list
+================================================================================
+
+x = STRING(BUFFER b:NAME + "y").
+x = STRING(BUFFER b:HANDLE).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (binary_expression
+            (object_access
+              left: (identifier)
+              right: (identifier))
+            (string_literal))))))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (object_access
+            left: (identifier)
+            right: (identifier)))))))

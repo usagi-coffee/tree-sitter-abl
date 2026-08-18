@@ -585,7 +585,19 @@ export default grammar({
               // being passed, but the keyword is read first either way and the
               // call was left with nowhere to attach. Outside an argument list
               // the same text parses, which is what made the gap so narrow.
-              field("name", choice($._identifier_or_qualified_name, $.object_access, $.function_call)),
+              field(
+                "name",
+                choice(
+                  $._identifier_or_qualified_name,
+                  $.object_access,
+                  $.function_call,
+                  // `x = STRING(BUFFER b:NAME + "y").` -- the reference is an
+                  // operand here, not a parameter being passed, but BUFFER is
+                  // read as the keyword either way and the rest of the
+                  // expression was then left with nowhere to go.
+                  $.binary_expression,
+                ),
+              ),
             ),
             field("name", $._expression),
           ),
