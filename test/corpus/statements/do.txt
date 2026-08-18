@@ -643,3 +643,21 @@ END.
         left: (identifier)
         operator: (assignment_operator)
         right: (number_literal)))))
+
+================================================================================
+DO - a WITH that carries no option
+================================================================================
+
+DO WITH : END.
+DO WITH FRAME f: END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (do_statement
+    (frame_phrase)
+    (body))
+  (do_statement
+    (frame_phrase
+      frame: (identifier))
+    (body)))
