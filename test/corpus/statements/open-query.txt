@@ -305,3 +305,40 @@ OPEN QUERY qCust FOR EACH Customer QUERY-TUNING(JOIN-BY-SQLDB NO-BIND-WHERE) NO-
     lock: (no_lock)
     (indexed_reposition)
     max_rows: (number_literal)))
+
+================================================================================
+OPEN QUERY - OUTER-JOIN, which is legal only here
+================================================================================
+
+OPEN QUERY q2 FOR EACH ta NO-LOCK, EACH tb OUTER-JOIN NO-LOCK.
+OPEN QUERY q2 FOR EACH ta NO-LOCK, FIRST tb LEFT OUTER-JOIN NO-LOCK.
+OPEN QUERY q1 FOR EACH ta NO-LOCK INDEXED-REPOSITION.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (open_query_statement
+    query: (identifier)
+    (record_phrase
+      record: (identifier)
+      lock: (no_lock))
+    (record_phrase
+      record: (identifier)
+      (outer_join)
+      lock: (no_lock)))
+  (open_query_statement
+    query: (identifier)
+    (record_phrase
+      record: (identifier)
+      lock: (no_lock))
+    (record_phrase
+      record: (identifier)
+      (left)
+      (outer_join)
+      lock: (no_lock)))
+  (open_query_statement
+    query: (identifier)
+    (record_phrase
+      record: (identifier)
+      lock: (no_lock))
+    (indexed_reposition)))
