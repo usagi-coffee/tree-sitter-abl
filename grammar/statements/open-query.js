@@ -60,6 +60,15 @@ export default ({ kw }) => ({
             seq(kw("WHERE"), field("where", $._expression)),
             seq(kw("USE-INDEX"), field("index", $.identifier)),
             field("lock", $._lock_option),
+            // `OPEN QUERY q FOR EACH ta NO-LOCK, EACH tb OUTER-JOIN NO-LOCK.`
+            // -- this is the only statement where a join is legal. The shared
+            // record phrase used to carry it, which had the rule exactly
+            // inverted: refused here, accepted in FOR and DO PRESELECT where
+            // the compiler answers 2833.
+            seq(
+              optional(alias(kw("LEFT"), $.left)),
+              alias(kw("OUTER-JOIN"), $.outer_join),
+            ),
           ),
         ),
       ),

@@ -64508,11 +64508,19 @@
           "named": true
         },
         {
+          "type": "left",
+          "named": true
+        },
+        {
           "type": "no_lock",
           "named": true
         },
         {
           "type": "no_prefetch",
+          "named": true
+        },
+        {
+          "type": "outer_join",
           "named": true
         },
         {
@@ -88788,10 +88796,6 @@
     "named": false
   },
   {
-    "type": "OUTER-JOIN",
-    "named": false
-  },
-  {
     "type": "OUTPUT",
     "named": false
   },
@@ -90009,6 +90013,10 @@
     "named": true
   },
   {
+    "type": "left",
+    "named": true
+  },
+  {
     "type": "line_comment",
     "named": true
   },
@@ -90238,6 +90246,10 @@
   },
   {
     "type": "ordered_join",
+    "named": true
+  },
+  {
+    "type": "outer_join",
     "named": true
   },
   {

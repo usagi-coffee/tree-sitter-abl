@@ -11,9 +11,13 @@ export default ({ kw }) => ({
       $.preprocessor_name,
     ),
 
+  // OUTER-JOIN is deliberately absent here. It is legal only inside OPEN
+  // QUERY -- anywhere else the compiler answers "JOIN can only be used in
+  // OPEN QUERY (2833)" -- and this phrase is shared with FOR and with DO
+  // PRESELECT, which would then accept what the compiler rejects. The OPEN
+  // QUERY statement carries its own record phrase and takes it there.
   __record_option: ($) =>
     choice(
-      seq(optional(kw("LEFT")), kw("OUTER-JOIN")),
       seq(kw("OF"), field("of", $._identifier_or_qualified_name)),
       prec.right(seq(kw("WHERE"), field("where", optional($._expression)))),
       seq(

@@ -26977,6 +26977,55 @@
                     "type": "SYMBOL",
                     "name": "_lock_option"
                   }
+                },
+                {
+                  "type": "SEQ",
+                  "members": [
+                    {
+                      "type": "CHOICE",
+                      "members": [
+                        {
+                          "type": "ALIAS",
+                          "content": {
+                            "type": "ALIAS",
+                            "content": {
+                              "type": "TOKEN",
+                              "content": {
+                                "type": "PATTERN",
+                                "value": "LEFT",
+                                "flags": "i"
+                              }
+                            },
+                            "named": false,
+                            "value": "LEFT"
+                          },
+                          "named": true,
+                          "value": "left"
+                        },
+                        {
+                          "type": "BLANK"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "ALIAS",
+                      "content": {
+                        "type": "ALIAS",
+                        "content": {
+                          "type": "TOKEN",
+                          "content": {
+                            "type": "PATTERN",
+                            "value": "OUTER-JOIN",
+                            "flags": "i"
+                          }
+                        },
+                        "named": false,
+                        "value": "OUTER-JOIN"
+                      },
+                      "named": true,
+                      "value": "outer_join"
+                    }
+                  ]
                 }
               ]
             }
@@ -53593,45 +53642,6 @@
     "__record_option": {
       "type": "CHOICE",
       "members": [
-        {
-          "type": "SEQ",
-          "members": [
-            {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "ALIAS",
-                  "content": {
-                    "type": "TOKEN",
-                    "content": {
-                      "type": "PATTERN",
-                      "value": "LEFT",
-                      "flags": "i"
-                    }
-                  },
-                  "named": false,
-                  "value": "LEFT"
-                },
-                {
-                  "type": "BLANK"
-                }
-              ]
-            },
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "TOKEN",
-                "content": {
-                  "type": "PATTERN",
-                  "value": "OUTER-JOIN",
-                  "flags": "i"
-                }
-              },
-              "named": false,
-              "value": "OUTER-JOIN"
-            }
-          ]
-        },
         {
           "type": "SEQ",
           "members": [
