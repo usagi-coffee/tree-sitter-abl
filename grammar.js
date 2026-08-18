@@ -110,6 +110,12 @@ export default grammar({
     [$.__disable_item, $.function_call],
     // Field / Column / Handle can be just an identifier
     [$.__widget_entry],
+    // `a::c` off a bare name is a scoped_name; the object-access tail reads the
+    // same `::` for the receivers scoped_name cannot take, so on that token
+    // both are alive and only the receiver settles it -- which the parser has
+    // already reduced away. A precedence was tried first and does not resolve
+    // it: this is a shift/reduce on the token, not an ordering of rules.
+    [$._identifier_or_qualified_name, $.scoped_name],
     // `METHOD {&PACKAGE-PROTECTED} OVERRIDE VOID Foo():` -- on the `{` the
     // parser must decide whether the modifier list continues with a macro or
     // has ended and something else opens on a brace. Both readings are still
@@ -488,7 +494,10 @@ export default grammar({
       _object_access_expression_left: ($) =>
         choice($.function_call, $.parenthesized_expression, $.new_expression, $.array_access),
 
-      scoped_name: ($) => seq(field("left", $.identifier), $.__scoped_name_tail),
+      // Left-associative so `Pkg.Model::A::B` reads as one name rather than
+      // nesting: once the tail can also be reached from the object-access side,
+      // the repeat has two ways to group and tree-sitter asks which.
+      scoped_name: ($) => prec.left(seq(field("left", $.identifier), $.__scoped_name_tail)),
       __scoped_name_tail: ($) =>
         repeat1(
           seq($._namedoublecolon, field("right", alias($._identifier_immediate, $.identifier))),
@@ -664,11 +673,29 @@ export default grammar({
       _alias_name: ($) => choice($.identifier, $.string_literal, $._value_expression),
       _os_filename: ($) => choice($.string_literal, $._identifier_or_access_or_call),
       parenthesized_identifier: ($) => seq("(", $.identifier, ")"),
+      // `pHandles[1]::custnum`, `entity:hBuf::channel` -- a class member
+      // reached off a subscript or off an attribute chain rather than off a
+      // bare name, which is all `scoped_name` accepts to its left.
+      //
+      // Taken here rather than by widening that receiver: `scoped_name` is
+      // already reachable from `_array_target` and from the object-access left,
+      // so putting `array_access` there closes a cycle and the grammar stops
+      // generating. Handling the segment in the tail reaches both forms.
+      //
+      // It matters beyond the parse failure. The scanner only emits `::` where
+      // the parser says the token is valid, so with no reading available the
+      // two colons fell back to one: inside a FOR EACH that loose colon opened
+      // the block in the middle of the WHERE clause, and outside a query
+      // `b[1]::c` read as an attribute access with no error at all. The member
+      // keeps its own field so the two operators stay distinguishable.
       _object_access_tail: ($) =>
         repeat1(
-          seq(
-            $._object_access_separator,
-            field("right", alias($._identifier_immediate, $.identifier)),
+          choice(
+            seq(
+              $._object_access_separator,
+              field("right", alias($._identifier_immediate, $.identifier)),
+            ),
+            seq($._namedoublecolon, field("member", alias($._identifier_immediate, $.identifier))),
           ),
         ),
       _object_access_separator: ($) => choice($._namecolon, token.immediate("?:")),

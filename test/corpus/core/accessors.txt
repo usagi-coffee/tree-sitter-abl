@@ -263,3 +263,51 @@ RUN buildBuffer (BUFFER ttOpt:HANDLE).
         name: (object_access
           left: (identifier)
           right: (identifier))))))
+
+================================================================================
+A scoped member reached off a subscript or an attribute chain
+================================================================================
+
+x = a::c.
+x = pEntity:hBuf::costfile.
+x = pHandles[1]::custnum.
+FOR EACH v WHERE v.a = pH[1]::a NO-LOCK: END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (scoped_name
+      left: (identifier)
+      right: (identifier)))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (object_access
+      left: (identifier)
+      right: (identifier)
+      member: (identifier)))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (object_access
+      left: (array_access
+        array: (identifier)
+        index: (number_literal))
+      member: (identifier)))
+  (for_statement
+    (record_phrase
+      record: (identifier)
+      where: (binary_expression
+        (qualified_name
+          left: (identifier)
+          right: (identifier))
+        (object_access
+          left: (array_access
+            array: (identifier)
+            index: (number_literal))
+          member: (identifier)))
+      (no_lock))
+    (body)))

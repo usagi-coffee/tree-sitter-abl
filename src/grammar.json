@@ -57953,21 +57953,25 @@
       ]
     },
     "scoped_name": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "FIELD",
-          "name": "left",
-          "content": {
+      "type": "PREC_LEFT",
+      "value": 0,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "FIELD",
+            "name": "left",
+            "content": {
+              "type": "SYMBOL",
+              "name": "identifier"
+            }
+          },
+          {
             "type": "SYMBOL",
-            "name": "identifier"
+            "name": "__scoped_name_tail"
           }
-        },
-        {
-          "type": "SYMBOL",
-          "name": "__scoped_name_tail"
-        }
-      ]
+        ]
+      }
     },
     "__scoped_name_tail": {
       "type": "REPEAT1",
@@ -58856,24 +58860,51 @@
     "_object_access_tail": {
       "type": "REPEAT1",
       "content": {
-        "type": "SEQ",
+        "type": "CHOICE",
         "members": [
           {
-            "type": "SYMBOL",
-            "name": "_object_access_separator"
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "_object_access_separator"
+              },
+              {
+                "type": "FIELD",
+                "name": "right",
+                "content": {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "_identifier_immediate"
+                  },
+                  "named": true,
+                  "value": "identifier"
+                }
+              }
+            ]
           },
           {
-            "type": "FIELD",
-            "name": "right",
-            "content": {
-              "type": "ALIAS",
-              "content": {
+            "type": "SEQ",
+            "members": [
+              {
                 "type": "SYMBOL",
-                "name": "_identifier_immediate"
+                "name": "_namedoublecolon"
               },
-              "named": true,
-              "value": "identifier"
-            }
+              {
+                "type": "FIELD",
+                "name": "member",
+                "content": {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "_identifier_immediate"
+                  },
+                  "named": true,
+                  "value": "identifier"
+                }
+              }
+            ]
           }
         ]
       }
@@ -63455,6 +63486,10 @@
     ],
     [
       "__widget_entry"
+    ],
+    [
+      "_identifier_or_qualified_name",
+      "scoped_name"
     ],
     [
       "__class_method_definition_prefix"
