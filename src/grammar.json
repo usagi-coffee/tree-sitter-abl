@@ -54136,8 +54136,16 @@
                   "value": "FIELD"
                 },
                 {
-                  "type": "SYMBOL",
-                  "name": "__record_parenthesized_field_names"
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "__record_parenthesized_field_names"
+                    },
+                    {
+                      "type": "BLANK"
+                    }
+                  ]
                 }
               ]
             },

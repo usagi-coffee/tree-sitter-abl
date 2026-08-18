@@ -49,7 +49,13 @@ export default ({ kw }) => ({
   __record_field_list: ($) =>
     choice(
       seq(
-        seq(kw("FIELDS", { alias: "FIELD", offset: 5 }), $.__record_parenthesized_field_names),
+        // `FOR FIRST t FIELDS WHERE ROWID(t) = r NO-LOCK:` -- FIELDS with no
+        // list at all compiles, and means the record is read without its
+        // fields. The list was required.
+        seq(
+          kw("FIELDS", { alias: "FIELD", offset: 5 }),
+          optional($.__record_parenthesized_field_names),
+        ),
         optional($.__record_except_list),
       ),
       $.__record_except_list,
