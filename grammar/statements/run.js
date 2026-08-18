@@ -19,9 +19,23 @@ export default ({ kw }) => ({
     ),
   __run_arguments_tail: ($) =>
     choice(
-      seq(alias($.__run_asynchronous, $.asynchronous_phrase), optional($.arguments)),
-      $.arguments,
+      seq(
+        alias($.__run_asynchronous, $.asynchronous_phrase),
+        optional(seq($.arguments, optional($.__run_surplus_tail))),
+      ),
+      seq($.arguments, optional($.__run_surplus_tail)),
     ),
+  // RUN tolerates what no other statement does: `RUN pr (1,2,3)).` and
+  // `RUN pr (1,2,3) (4).` both compile, and so does a second surplus closing
+  // parenthesis. A surplus *opening* one is refused -- error 247 -- and so is
+  // the same surplus in an ordinary expression, which is why this stays inside
+  // RUN rather than moving to the argument list itself.
+  //
+  // Aligned on the compiler by decision. Bounded to these two shapes rather
+  // than to any trailing token: `RUN p.ip (OUTPUT r) name.` is also accepted by
+  // the compiler, but only as a name it then fails to resolve, and reading a
+  // bare trailing name here would swallow whatever follows.
+  __run_surplus_tail: ($) => repeat1(choice($.arguments, ")")),
   __run_persistence: ($) =>
     choice(
       alias(

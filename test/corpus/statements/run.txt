@@ -716,3 +716,49 @@ RUN cible.p PERSISTENT SET hArr[2] (a,b).
         name: (identifier))
       (argument
         name: (identifier)))))
+
+================================================================================
+RUN - the surplus the compiler tolerates after an argument list
+================================================================================
+
+RUN pr (1,2,STRING(3))).
+RUN pr (1,2,3) (4).
+RUN pr (1,2,3).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (run_statement
+    procedure: (identifier)
+    (arguments
+      (argument
+        name: (number_literal))
+      (argument
+        name: (number_literal))
+      (argument
+        name: (function_call
+          function: (identifier)
+          (arguments
+            (argument
+              name: (number_literal)))))))
+  (run_statement
+    procedure: (identifier)
+    (arguments
+      (argument
+        name: (number_literal))
+      (argument
+        name: (number_literal))
+      (argument
+        name: (number_literal)))
+    (arguments
+      (argument
+        name: (number_literal))))
+  (run_statement
+    procedure: (identifier)
+    (arguments
+      (argument
+        name: (number_literal))
+      (argument
+        name: (number_literal))
+      (argument
+        name: (number_literal)))))
