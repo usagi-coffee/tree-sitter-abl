@@ -46472,7 +46472,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "__input_frame_phrase"
+              "name": "__input_widget_phrase"
             },
             {
               "type": "BLANK"
@@ -46502,29 +46502,60 @@
       "named": false,
       "value": "INPUT"
     },
-    "__input_frame_phrase": {
-      "type": "SEQ",
+    "__input_widget_phrase": {
+      "type": "CHOICE",
       "members": [
         {
-          "type": "ALIAS",
-          "content": {
-            "type": "TOKEN",
-            "content": {
-              "type": "PATTERN",
-              "value": "FRAM(E)?",
-              "flags": "i"
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PATTERN",
+                  "value": "FRAM(E)?",
+                  "flags": "i"
+                }
+              },
+              "named": false,
+              "value": "FRAME"
+            },
+            {
+              "type": "FIELD",
+              "name": "frame",
+              "content": {
+                "type": "SYMBOL",
+                "name": "identifier"
+              }
             }
-          },
-          "named": false,
-          "value": "FRAME"
+          ]
         },
         {
-          "type": "FIELD",
-          "name": "frame",
-          "content": {
-            "type": "SYMBOL",
-            "name": "identifier"
-          }
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PATTERN",
+                  "value": "BROWSE",
+                  "flags": "i"
+                }
+              },
+              "named": false,
+              "value": "BROWSE"
+            },
+            {
+              "type": "FIELD",
+              "name": "browse",
+              "content": {
+                "type": "SYMBOL",
+                "name": "identifier"
+              }
+            }
+          ]
         }
       ]
     },

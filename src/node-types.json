@@ -48478,6 +48478,16 @@
     "type": "input_expression",
     "named": true,
     "fields": {
+      "browse": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
       "field": {
         "multiple": false,
         "required": true,
