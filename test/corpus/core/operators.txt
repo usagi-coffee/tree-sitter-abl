@@ -551,3 +551,42 @@ IF champ CONTAINS "mot" THEN RETURN.
       (identifier)
       (string_literal))
     then: (return_statement)))
+
+================================================================================
+INPUT read out of a browse as well as a frame
+================================================================================
+
+IF t.f <> INPUT BROWSE br t.f THEN x = 1.
+IF t.f <> INPUT FRAME fr t.f THEN x = 1.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (if_statement
+    (binary_expression
+      (qualified_name
+        left: (identifier)
+        right: (identifier))
+      (input_expression
+        browse: (identifier)
+        field: (qualified_name
+          left: (identifier)
+          right: (identifier))))
+    then: (assignment_statement
+      left: (identifier)
+      operator: (assignment_operator)
+      right: (number_literal)))
+  (if_statement
+    (binary_expression
+      (qualified_name
+        left: (identifier)
+        right: (identifier))
+      (input_expression
+        frame: (identifier)
+        field: (qualified_name
+          left: (identifier)
+          right: (identifier))))
+    then: (assignment_statement
+      left: (identifier)
+      operator: (assignment_operator)
+      right: (number_literal))))
