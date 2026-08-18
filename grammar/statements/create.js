@@ -79,7 +79,15 @@ export default ({ kw }) => ({
   __create_widget_pool: ($) =>
     seq(
       kw("WIDGET-POOL"),
-      optional(seq(field("pool", $.identifier), optional(alias(kw("PERSISTENT"), $.persistent)))),
+      // `CREATE WIDGET-POOL "p" PERSISTENT NO-ERROR.` -- the pool is named by a
+      // character expression, and only a bare identifier was read, so the form
+      // real code writes never parsed.
+      optional(
+        seq(
+          field("pool", choice($.identifier, $.string_literal)),
+          optional(alias(kw("PERSISTENT"), $.persistent)),
+        ),
+      ),
     ),
   __create_server: ($) =>
     seq(kw("SERVER"), field("handle", $.identifier), optional($.assign_phrase)),
