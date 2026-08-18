@@ -28,15 +28,22 @@ export default ({ kw }) => ({
       ),
       optional($.__assign_pair_tail),
     ),
+  // `ASSIGN x += 1 y = 2.` -- a compound assignment is legal inside an ASSIGN
+  // list, not only as a statement on its own, and only `=` was read here.
+  //
+  // `=` stays anonymous so every existing tree is unchanged; the compound
+  // forms carry an operator node, because otherwise nothing in the tree would
+  // tell `+=` from `=`.
   __assign_pair_tail: ($) =>
     choice(
       seq(
-        "=",
+        choice("=", field("operator", alias($.__assign_compound_operator, $.assignment_operator))),
         field("right", choice($.array_initializer, $._expression)),
         optional($._when_phrase),
       ),
       $._when_phrase,
     ),
+  __assign_compound_operator: ($) => choice("+=", "-=", "*=", "/="),
   __assign_keyword_identifier: ($) => alias($._widgets, $.identifier),
   // Generated screens reach their frame through a macro, as in
   // `FRAME {&FRAME-NAME}:HIDDEN = YES`, so the name can be either.

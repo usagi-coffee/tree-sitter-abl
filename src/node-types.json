@@ -1820,6 +1820,16 @@
           }
         ]
       },
+      "operator": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "assignment_operator",
+            "named": true
+          }
+        ]
+      },
       "right": {
         "multiple": false,
         "required": false,

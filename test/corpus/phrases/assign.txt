@@ -15,3 +15,26 @@ ASSIGN x = 1 y = 2.
       (assign_pair
         left: (identifier)
         right: (number_literal)))))
+
+================================================================================
+ASSIGN - a compound assignment in the list
+================================================================================
+
+ASSIGN x += 1 y = 2 z -= 3.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assign_statement
+    (assign_phrase
+      (assign_pair
+        left: (identifier)
+        operator: (assignment_operator)
+        right: (number_literal))
+      (assign_pair
+        left: (identifier)
+        right: (number_literal))
+      (assign_pair
+        left: (identifier)
+        operator: (assignment_operator)
+        right: (number_literal)))))
