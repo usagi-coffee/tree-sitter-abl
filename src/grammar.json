@@ -11539,17 +11539,8 @@
                   "type": "FIELD",
                   "name": "name",
                   "content": {
-                    "type": "CHOICE",
-                    "members": [
-                      {
-                        "type": "SYMBOL",
-                        "name": "_identifier_or_access_or_call"
-                      },
-                      {
-                        "type": "SYMBOL",
-                        "name": "string_literal"
-                      }
-                    ]
+                    "type": "SYMBOL",
+                    "name": "__create_buffer_target"
                   }
                 }
               ]

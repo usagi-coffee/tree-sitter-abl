@@ -39,8 +39,11 @@ export default ({ kw }) => ({
         seq(
           kw("BUFFER-NAME"),
           // The name is often a property of the object doing the creating:
-          // `BUFFER-NAME THIS-OBJECT:NomBuffer`.
-          field("name", choice($._identifier_or_access_or_call, $.string_literal)),
+          // `BUFFER-NAME THIS-OBJECT:hName`. It can also be assembled at run
+          // time -- `BUFFER-NAME "n" + STRING(i)` compiles -- so it reads the
+          // same target as the table above, concatenation included, rather
+          // than a name or a literal alone.
+          field("name", $.__create_buffer_target),
         ),
       ),
       optional($._in_widget_pool),
