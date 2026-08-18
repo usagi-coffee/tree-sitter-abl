@@ -58,3 +58,35 @@ END.
         (string_literal))
       (no_lock))
     (body)))
+
+================================================================================
+RECORD PHRASE - FIELDS with no list
+================================================================================
+
+FOR FIRST t FIELDS WHERE ROWID(t) = r NO-LOCK: END.
+FOR EACH t FIELDS (a b) NO-LOCK: END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (for_statement
+    (record_phrase
+      record: (identifier)
+      (field_list)
+      where: (binary_expression
+        (function_call
+          function: (identifier)
+          (arguments
+            (argument
+              name: (identifier))))
+        (identifier))
+      (no_lock))
+    (body))
+  (for_statement
+    (record_phrase
+      record: (identifier)
+      (field_list
+        (identifier)
+        (identifier))
+      (no_lock))
+    (body)))
