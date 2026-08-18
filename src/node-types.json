@@ -15671,6 +15671,10 @@
         "required": false,
         "types": [
           {
+            "type": "format_picture",
+            "named": true
+          },
+          {
             "type": "number_literal",
             "named": true
           },
@@ -32804,6 +32808,10 @@
         "required": false,
         "types": [
           {
+            "type": "format_picture",
+            "named": true
+          },
+          {
             "type": "number_literal",
             "named": true
           },
@@ -35771,6 +35779,10 @@
         "required": false,
         "types": [
           {
+            "type": "format_picture",
+            "named": true
+          },
+          {
             "type": "number_literal",
             "named": true
           },
@@ -37357,6 +37369,10 @@
         "types": [
           {
             "type": "argument_reference",
+            "named": true
+          },
+          {
+            "type": "format_picture",
             "named": true
           },
           {
@@ -57538,6 +57554,10 @@
         "required": false,
         "types": [
           {
+            "type": "format_picture",
+            "named": true
+          },
+          {
             "type": "number_literal",
             "named": true
           },
@@ -70003,6 +70023,10 @@
         "required": false,
         "types": [
           {
+            "type": "format_picture",
+            "named": true
+          },
+          {
             "type": "number_literal",
             "named": true
           },
@@ -77713,6 +77737,10 @@
         "required": false,
         "types": [
           {
+            "type": "format_picture",
+            "named": true
+          },
+          {
             "type": "number_literal",
             "named": true
           },
@@ -79976,6 +80004,10 @@
         "multiple": true,
         "required": false,
         "types": [
+          {
+            "type": "format_picture",
+            "named": true
+          },
           {
             "type": "number_literal",
             "named": true
@@ -90068,6 +90100,10 @@
   },
   {
     "type": "foreign_key_hidden",
+    "named": true
+  },
+  {
+    "type": "format_picture",
     "named": true
   },
   {

@@ -336,8 +336,19 @@ export default ({ kw }) => ({
 
   // A numeric picture needs no quotes: `FIELD Indice AS INTEGER FORMAT 999`
   // is what the schema-derived definitions carry.
+  // `FORMAT 99/99/99` -- a date picture written without quotes, which is how
+  // generated screens spell it. Unquoted it would otherwise lex as division.
+  // The token is deliberately narrow: digit groups separated by slashes, so it
+  // can only ever match a picture and never an ordinary quotient.
   _format_string: ($) =>
-    seq(kw("FORMAT", { offset: 4 }), field("format", choice($.string_literal, $.number_literal))),
+    seq(
+      kw("FORMAT", { offset: 4 }),
+      field(
+        "format",
+        choice($.string_literal, $.number_literal, alias($.__unquoted_format, $.format_picture)),
+      ),
+    ),
+  __unquoted_format: ($) => token(/[0-9]+(?:\/[0-9]+)+/),
   _tooltip_phrase: ($) => seq(kw("TOOLTIP"), field("tooltip", $._expression)),
   _lock_option: ($) =>
     choice(
