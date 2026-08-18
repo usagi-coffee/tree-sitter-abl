@@ -29517,6 +29517,15 @@
                 },
                 "named": true,
                 "value": "identifier"
+              },
+              {
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "__procedure_dash_name"
+                },
+                "named": true,
+                "value": "identifier"
               }
             ]
           }
@@ -29782,6 +29791,14 @@
           "value": "END"
         }
       ]
+    },
+    "__procedure_dash_name": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "-[\\p{L}][\\p{L}\\p{N}_\\-&#%$!]*",
+        "flags": "i"
+      }
     },
     "__procedure_modifier": {
       "type": "CHOICE",
