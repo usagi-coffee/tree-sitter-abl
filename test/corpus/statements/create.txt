@@ -458,3 +458,19 @@ CREATE WIDGET-POOL wp PERSISTENT.
   (create_statement
     pool: (identifier)
     (persistent)))
+
+================================================================================
+CREATE BUFFER - the table chosen by a conditional
+================================================================================
+
+CREATE BUFFER h FOR TABLE IF c THEN "a" ELSE "b".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (create_statement
+    handle: (identifier)
+    table: (conditional_expression
+      (identifier)
+      (string_literal)
+      (string_literal))))

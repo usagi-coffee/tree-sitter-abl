@@ -56,8 +56,16 @@ export default ({ kw }) => ({
     choice($.__create_buffer_name, alias($.__create_buffer_concatenation, $.binary_expression)),
   __create_buffer_concatenation: ($) =>
     seq($.__create_buffer_name, repeat1(seq("+", $.__create_buffer_name))),
+  // `CREATE BUFFER h FOR TABLE IF c THEN "a" ELSE "b".` compiles: the table is
+  // named by a character expression, and a conditional is how a program picks
+  // between two tables at run time.
   __create_buffer_name: ($) =>
-    choice($._identifier_or_access_or_call, $.string_literal, $.parenthesized_expression),
+    choice(
+      $._identifier_or_access_or_call,
+      $.string_literal,
+      $.parenthesized_expression,
+      $.conditional_expression,
+    ),
   __create_handle_with_pool_no_error_body: ($) =>
     seq(
       choice(kw("CALL"), kw("QUERY"), kw("SAX-READER"), kw("SAX-WRITER"), kw("SAX-ATTRIBUTES")),

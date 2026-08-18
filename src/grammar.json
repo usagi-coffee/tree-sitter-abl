@@ -11743,6 +11743,10 @@
         {
           "type": "SYMBOL",
           "name": "parenthesized_expression"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "conditional_expression"
         }
       ]
     },
