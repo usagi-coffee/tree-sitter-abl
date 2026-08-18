@@ -39,7 +39,14 @@ export default ({ kw }) => ({
           seq(kw("FGCOLOR"), field("fgcolor", $.__browse_option_expression)),
           seq(kw("FONT"), field("font", $.__browse_option_expression)),
           seq(kw("PFCOLOR"), field("pfcolor", $.__browse_option_expression)),
-          seq(kw("ROW-HEIGHT-CHARS"), field("row_height_chars", $.__browse_option_expression)),
+          // `WITH SIZE 70 BY 9 ROW-HEIGHT 0.54` -- the unsuffixed spelling is
+          // what AppBuilder writes, and it compiles; only the -CHARS and
+          // -PIXELS forms were read. It measures in characters, like the
+          // default of every other size option here.
+          seq(
+            kw("ROW-HEIGHT-CHARS", { alias: "ROW-HEIGHT", offset: 10 }),
+            field("row_height_chars", $.__browse_option_expression),
+          ),
           seq(kw("ROW-HEIGHT-PIXELS"), field("row_height_pixels", $.__browse_option_expression)),
           seq(
             kw("TITLE"),

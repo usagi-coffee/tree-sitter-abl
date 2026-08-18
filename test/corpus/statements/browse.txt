@@ -933,3 +933,23 @@ DEFINE BROWSE b QUERY q
       width: (number_literal)
       (view_as_phrase))
     down: (number_literal)))
+
+================================================================================
+DEFINE BROWSE - ROW-HEIGHT without a unit suffix
+================================================================================
+
+DEFINE BROWSE bw QUERY q DISPLAY t.f WITH SIZE 70 BY 9 ROW-HEIGHT 0.54.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (browse_definition
+    name: (identifier)
+    query: (identifier)
+    (column
+      column: (qualified_name
+        left: (identifier)
+        right: (identifier)))
+    width: (number_literal)
+    height: (number_literal)
+    row_height_chars: (number_literal)))

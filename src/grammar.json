@@ -2321,12 +2321,12 @@
                       "type": "TOKEN",
                       "content": {
                         "type": "PATTERN",
-                        "value": "ROW-HEIGHT-CHARS",
+                        "value": "ROW-HEIGHT(-(C(H(A(R(S)?)?)?)?)?)?",
                         "flags": "i"
                       }
                     },
                     "named": false,
-                    "value": "ROW-HEIGHT-CHARS"
+                    "value": "ROW-HEIGHT"
                   },
                   {
                     "type": "FIELD",
