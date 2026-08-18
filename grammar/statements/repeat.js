@@ -14,15 +14,21 @@ export default ({ kw }) => ({
     choice(seq($.preselect_phrase, optional($.query_tuning_phrase)), $.query_tuning_phrase),
   __repeat_body_tail: ($) =>
     choice(seq($._loop_phrase, optional($.__repeat_body_after_loop)), $.__repeat_body_after_loop),
+  // `REPEAT TRANSACTION WHILE x = 1:` and `REPEAT WHILE x = 1 TRANSACTION:`
+  // both compile. The chain read the condition first and TRANSACTION only
+  // after it, so one of the two orders never parsed. Written as two branches
+  // rather than a repeat: each qualifier still appears at most once, so
+  // `REPEAT TRANSACTION WHILE x TRANSACTION:` stays rejected.
   __repeat_body_after_loop: ($) =>
     choice(
-      seq($.__repeat_condition_phrase, optional($.__repeat_body_after_condition)),
-      $.__repeat_body_after_condition,
-    ),
-  __repeat_body_after_condition: ($) =>
-    choice(
+      seq(
+        $.__repeat_condition_phrase,
+        optional(alias(kw("TRANSACTION", { offset: 5 }), $.transaction)),
+        optional($.__repeat_body_after_transaction),
+      ),
       seq(
         alias(kw("TRANSACTION", { offset: 5 }), $.transaction),
+        optional($.__repeat_condition_phrase),
         optional($.__repeat_body_after_transaction),
       ),
       $.__repeat_body_after_transaction,
