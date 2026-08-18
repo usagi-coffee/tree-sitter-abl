@@ -440,3 +440,21 @@ CREATE BUFFER vb FOR TABLE "tt" BUFFER-NAME "n".
     handle: (identifier)
     table: (string_literal)
     name: (string_literal)))
+
+================================================================================
+CREATE WIDGET-POOL - the pool named by a character expression
+================================================================================
+
+CREATE WIDGET-POOL "p" PERSISTENT NO-ERROR.
+CREATE WIDGET-POOL wp PERSISTENT.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (create_statement
+    pool: (string_literal)
+    (persistent)
+    (no_error))
+  (create_statement
+    pool: (identifier)
+    (persistent)))
