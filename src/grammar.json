@@ -34784,7 +34784,7 @@
       "members": [
         {
           "type": "SYMBOL",
-          "name": "identifier"
+          "name": "_identifier_or_qualified_name"
         },
         {
           "type": "ALIAS",
@@ -34805,7 +34805,7 @@
           "name": "array",
           "content": {
             "type": "SYMBOL",
-            "name": "identifier"
+            "name": "_identifier_or_qualified_name"
           }
         },
         {

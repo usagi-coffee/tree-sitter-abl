@@ -681,3 +681,38 @@ RUN THIS-OBJECT:Foo.
     procedure: (object_access
       left: (identifier)
       right: (identifier))))
+
+================================================================================
+RUN - a persistent handle that is both qualified and subscripted
+================================================================================
+
+RUN cible.p PERSISTENT SET tz.hdl-obj[2] (a,b).
+RUN cible.p PERSISTENT SET hArr[2] (a,b).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (run_statement
+    procedure: (procedure_name)
+    (persistent
+      handle: (array_access
+        array: (qualified_name
+          left: (identifier)
+          right: (identifier))
+        index: (number_literal)))
+    (arguments
+      (argument
+        name: (identifier))
+      (argument
+        name: (identifier))))
+  (run_statement
+    procedure: (procedure_name)
+    (persistent
+      handle: (array_access
+        array: (identifier)
+        index: (number_literal)))
+    (arguments
+      (argument
+        name: (identifier))
+      (argument
+        name: (identifier)))))

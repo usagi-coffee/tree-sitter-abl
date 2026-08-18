@@ -36,10 +36,16 @@ export default ({ kw }) => ({
   // spelled out rather than reusing array_access: that one also starts on an
   // object access, and `SET h (...)` would then read as a call.
   __run_persistence_set_tail: ($) => seq(kw("SET"), field("handle", $.__run_persistence_handle)),
+  // The handle may also be a field of a record rather than a variable, and the
+  // two combine: `PERSISTENT SET tz.hdl-obj[2] (a,b)` compiles. Qualified and
+  // subscripted each worked on their own; only together did they have no path.
   __run_persistence_handle: ($) =>
-    choice($.identifier, alias($.__run_persistence_handle_element, $.array_access)),
+    choice(
+      $._identifier_or_qualified_name,
+      alias($.__run_persistence_handle_element, $.array_access),
+    ),
   __run_persistence_handle_element: ($) =>
-    seq(field("array", $.identifier), "[", field("index", $._expression), "]"),
+    seq(field("array", $._identifier_or_qualified_name), "[", field("index", $._expression), "]"),
 
   _run_target: ($) =>
     choice(
