@@ -110,6 +110,11 @@ export default grammar({
     [$.__disable_item, $.function_call],
     // Field / Column / Handle can be just an identifier
     [$.__widget_entry],
+    // `DYNAMIC-FUNCTION("f" IN h:PARENT)` -- on the IN after an argument the
+    // parser must choose between the argument's own IN clause and a widget
+    // qualifier, which expects IN WINDOW. Both are alive at that token and only
+    // what follows settles it, so it is decided at parse time.
+    [$.__argument_body, $.__widget_qualified_name_separator],
     // `a::c` off a bare name is a scoped_name; the object-access tail reads the
     // same `::` for the receivers scoped_name cannot take, so on that token
     // both are alive and only the receiver settles it -- which the parser has
@@ -601,7 +606,24 @@ export default grammar({
             ),
             field("name", $._expression),
           ),
-          optional(seq(kw("IN"), field("in_handle", $._identifier_or_qualified_name))),
+          // `DYNAMIC-FUNCTION("f" IN h:PARENT)`, `IN pH[1]`, `IN (h)`,
+          // `IN WIDGET-HANDLE(x)` -- the clause takes a handle expression, and
+          // only a bare or qualified name was read.
+          optional(
+            seq(
+              kw("IN"),
+              field(
+                "in_handle",
+                choice(
+                  $._identifier_or_qualified_name,
+                  $.object_access,
+                  $.array_access,
+                  $.parenthesized_expression,
+                  $.function_call,
+                ),
+              ),
+            ),
+          ),
           optional(seq(kw("AS"), field("type", $._type_name))),
           optional(choice(kw("BY-REFERENCE"), kw("BY-VALUE"), kw("APPEND"), kw("BIND"))),
         ),
