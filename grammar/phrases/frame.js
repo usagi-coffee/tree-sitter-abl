@@ -1,8 +1,10 @@
 export default ({ kw }) => ({
+  // `DO WITH : END.` compiles: the WITH may carry no option at all, and the
+  // phrase required at least one.
   frame_phrase: ($) =>
     seq(
       kw("WITH"),
-      repeat1(
+      repeat(
         choice(
           $.at_phrase,
           $.size_phrase,
