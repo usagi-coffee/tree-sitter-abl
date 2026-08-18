@@ -966,3 +966,32 @@ DEFINE VARIABLE p$typ_rem AS CHARACTER NO-UNDO.
     name: (identifier)
     type: (identifier)
     (no_undo)))
+
+================================================================================
+VARIABLE DEFINITION - a nested .NET type
+================================================================================
+
+DEFINE VARIABLE v AS System.Windows.Forms.Control+ControlCollection NO-UNDO.
+DEFINE VARIABLE w AS System.Windows.Forms.Control NO-UNDO.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    name: (identifier)
+    type: (nested_type_name
+      left: (qualified_name
+        left: (identifier)
+        right: (identifier)
+        right: (identifier)
+        right: (identifier))
+      right: (identifier))
+    (no_undo))
+  (variable_definition
+    name: (identifier)
+    type: (qualified_name
+      left: (identifier)
+      right: (identifier)
+      right: (identifier)
+      right: (identifier))
+    (no_undo)))
