@@ -25665,6 +25665,18 @@
               ]
             },
             {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "arguments"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            },
+            {
               "type": "SYMBOL",
               "name": "_terminator"
             }
@@ -63864,6 +63876,10 @@
     ],
     [
       "__widget_entry"
+    ],
+    [
+      "__on_context_value",
+      "function_call"
     ],
     [
       "__argument_body",

@@ -182,8 +182,12 @@ export default ({ kw }) => ({
         kw("PERSISTENT"),
         kw("RUN"),
         field("procedure", $.identifier),
+        // `ON "F4" OF hb PERSISTENT RUN chx IN THIS-PROCEDURE (hb).` -- the
+        // argument list comes after the IN clause as readily as before it, and
+        // only the leading position was read.
         optional($.arguments),
         optional(alias($.__on_in_phrase, $.in_phrase)),
+        optional($.arguments),
         $._terminator,
       ),
     ),

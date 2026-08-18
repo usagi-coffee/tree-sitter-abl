@@ -110,6 +110,10 @@ export default grammar({
     [$.__disable_item, $.function_call],
     // Field / Column / Handle can be just an identifier
     [$.__widget_entry],
+    // `ON … PERSISTENT RUN chx IN THIS-PROCEDURE (hb).` -- on the `(` the
+    // parser must choose between the trigger's argument list and a call on the
+    // context that precedes it. Both are alive at that token.
+    [$.__on_context_value, $.function_call],
     // `DYNAMIC-FUNCTION("f" IN h:PARENT)` -- on the IN after an argument the
     // parser must choose between the argument's own IN clause and a widget
     // qualifier, which expects IN WINDOW. Both are alive at that token and only
