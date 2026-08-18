@@ -302,3 +302,32 @@ END.
       (lookahead))
     (body
       (leave_statement))))
+
+================================================================================
+REPEAT - TRANSACTION and WHILE in either order
+================================================================================
+
+REPEAT TRANSACTION WHILE x = 1:
+  LEAVE.
+END.
+REPEAT WHILE x = 1 TRANSACTION:
+  LEAVE.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (repeat_statement
+    (transaction)
+    condition: (binary_expression
+      (identifier)
+      (number_literal))
+    (body
+      (leave_statement)))
+  (repeat_statement
+    condition: (binary_expression
+      (identifier)
+      (number_literal))
+    (transaction)
+    (body
+      (leave_statement))))
