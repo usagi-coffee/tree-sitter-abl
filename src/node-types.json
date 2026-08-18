@@ -52461,6 +52461,16 @@
           }
         ]
       },
+      "member": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
       "name": {
         "multiple": false,
         "required": false,
@@ -52481,7 +52491,7 @@
       },
       "right": {
         "multiple": true,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "identifier",
