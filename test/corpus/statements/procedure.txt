@@ -758,3 +758,25 @@ END PROCEDURE.
   (procedure_definition
     name: (identifier)
     (body)))
+
+================================================================================
+PROCEDURE - a name opening on a dash
+================================================================================
+
+PROCEDURE -REPORT :
+END PROCEDURE.
+
+x = a -b.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (procedure_definition
+    name: (identifier)
+    (body))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (binary_expression
+      (identifier)
+      (identifier))))
