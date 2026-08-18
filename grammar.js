@@ -480,8 +480,23 @@ export default grammar({
             field("name", $._identifier_or_qualified_name),
           ),
         ),
+      // `BUFFER b:ATTACH-DATA-SOURCE (DATA-SOURCE src:HANDLE, ?, ?).` compiles:
+      // a data source is named by its keyword the same way a buffer or a
+      // temp-table is, and only those two were read here.
+      //
+      // STREAM belongs in this list too -- `x = STREAM s:HANDLE.` compiles --
+      // but adding it makes `INPUT STREAM s` ambiguous with an INPUT expression
+      // followed by a stream handle, which needs a declared conflict rather
+      // than a widened list.
       __object_access_handle_type: ($) =>
-        prec(-1, choice(alias(kw("TEMP-TABLE"), $.identifier), alias(kw("BUFFER"), $.identifier))),
+        prec(
+          -1,
+          choice(
+            alias(kw("TEMP-TABLE"), $.identifier),
+            alias(kw("BUFFER"), $.identifier),
+            alias(kw("DATA-SOURCE"), $.identifier),
+          ),
+        ),
       object_access: ($) =>
         seq(
           choice(

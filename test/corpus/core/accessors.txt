@@ -311,3 +311,29 @@ FOR EACH v WHERE v.a = pH[1]::a NO-LOCK: END.
           member: (identifier)))
       (no_lock))
     (body)))
+
+================================================================================
+A data source named by its keyword
+================================================================================
+
+BUFFER b:ATTACH-DATA-SOURCE (DATA-SOURCE src:HANDLE, ?, ?).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (expression_statement
+    (function_call
+      function: (object_access
+        handle: (identifier)
+        name: (identifier)
+        right: (identifier))
+      (arguments
+        (argument
+          name: (object_access
+            handle: (identifier)
+            name: (identifier)
+            right: (identifier)))
+        (argument
+          name: (null_literal))
+        (argument
+          name: (null_literal))))))
