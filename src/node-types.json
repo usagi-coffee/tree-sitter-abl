@@ -23225,6 +23225,10 @@
             "named": true
           },
           {
+            "type": "binary_expression",
+            "named": true
+          },
+          {
             "type": "function_call",
             "named": true
           },
@@ -23238,6 +23242,10 @@
           },
           {
             "type": "object_access",
+            "named": true
+          },
+          {
+            "type": "parenthesized_expression",
             "named": true
           },
           {

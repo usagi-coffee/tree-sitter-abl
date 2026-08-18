@@ -412,3 +412,31 @@ CREATE BUFFER THIS-OBJECT:hTT FOR TABLE "customer".
       left: (identifier)
       right: (identifier))
     table: (string_literal)))
+
+================================================================================
+CREATE BUFFER - a BUFFER-NAME assembled at run time
+================================================================================
+
+CREATE BUFFER vb FOR TABLE BUFFER b:HANDLE BUFFER-NAME "n" + STRING(i).
+CREATE BUFFER vb FOR TABLE "tt" BUFFER-NAME "n".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (create_statement
+    handle: (identifier)
+    table: (object_access
+      handle: (identifier)
+      name: (identifier)
+      right: (identifier))
+    name: (binary_expression
+      (string_literal)
+      (function_call
+        function: (identifier)
+        (arguments
+          (argument
+            name: (identifier))))))
+  (create_statement
+    handle: (identifier)
+    table: (string_literal)
+    name: (string_literal)))
