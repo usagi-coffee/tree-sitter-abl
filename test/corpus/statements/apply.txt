@@ -139,3 +139,30 @@ APPLY "entry" TO TDEC[I].
       field: (array_access
         array: (identifier)
         index: (identifier)))))
+
+================================================================================
+APPLY - an event read off a handle, and a target qualified by its browse
+================================================================================
+
+APPLY "entry" TO SELF IN BROWSE bw.
+APPLY LAST-EVENT:FUNCTION TO SELF.
+APPLY "entry" TO SELF.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (apply_statement
+    event: (string_literal)
+    to: (widget
+      system_handle: (system_handle))
+    browse: (identifier))
+  (apply_statement
+    event: (object_access
+      left: (identifier)
+      right: (identifier))
+    to: (widget
+      system_handle: (system_handle)))
+  (apply_statement
+    event: (string_literal)
+    to: (widget
+      system_handle: (system_handle))))
