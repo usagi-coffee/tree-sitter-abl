@@ -370,3 +370,36 @@ x = STRING(BUFFER b:HANDLE).
           name: (object_access
             left: (identifier)
             right: (identifier)))))))
+
+================================================================================
+An IN handle that is more than a bare name
+================================================================================
+
+x = DYNAMIC-FUNCTION("f" IN h:PARENT).
+x = DYNAMIC-FUNCTION("f" IN pH[1]).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (string_literal)
+          in_handle: (object_access
+            left: (identifier)
+            right: (identifier))))))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (string_literal)
+          in_handle: (array_access
+            array: (identifier)
+            index: (number_literal)))))))

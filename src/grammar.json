@@ -58806,8 +58806,29 @@
                   "type": "FIELD",
                   "name": "in_handle",
                   "content": {
-                    "type": "SYMBOL",
-                    "name": "_identifier_or_qualified_name"
+                    "type": "CHOICE",
+                    "members": [
+                      {
+                        "type": "SYMBOL",
+                        "name": "_identifier_or_qualified_name"
+                      },
+                      {
+                        "type": "SYMBOL",
+                        "name": "object_access"
+                      },
+                      {
+                        "type": "SYMBOL",
+                        "name": "array_access"
+                      },
+                      {
+                        "type": "SYMBOL",
+                        "name": "parenthesized_expression"
+                      },
+                      {
+                        "type": "SYMBOL",
+                        "name": "function_call"
+                      }
+                    ]
                   }
                 }
               ]
@@ -63823,6 +63844,10 @@
     ],
     [
       "__widget_entry"
+    ],
+    [
+      "__argument_body",
+      "__widget_qualified_name_separator"
     ],
     [
       "_identifier_or_qualified_name",
