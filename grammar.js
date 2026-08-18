@@ -518,9 +518,12 @@ export default grammar({
           alias(kw("INTERFACE"), $.identifier),
         ),
 
+      // `System.Windows.Forms.Control+ControlCollection` -- a nested .NET type
+      // is reached off a qualified name, never off a bare one, so requiring an
+      // identifier to the left of `+` meant the form never parsed in practice.
       nested_type_name: ($) =>
         seq(
-          field("left", $.identifier),
+          field("left", choice($.qualified_name, $.identifier)),
           repeat1(seq($._nameplus, field("right", alias($._identifier_immediate, $.identifier)))),
         ),
 
