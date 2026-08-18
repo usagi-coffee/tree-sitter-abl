@@ -58207,6 +58207,24 @@
             },
             "named": true,
             "value": "identifier"
+          },
+          {
+            "type": "ALIAS",
+            "content": {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PATTERN",
+                  "value": "DATA-SOURCE",
+                  "flags": "i"
+                }
+              },
+              "named": false,
+              "value": "DATA-SOURCE"
+            },
+            "named": true,
+            "value": "identifier"
           }
         ]
       }
