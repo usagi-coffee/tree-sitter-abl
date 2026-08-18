@@ -62506,11 +62506,27 @@
               {
                 "type": "SYMBOL",
                 "name": "number_literal"
+              },
+              {
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "__unquoted_format"
+                },
+                "named": true,
+                "value": "format_picture"
               }
             ]
           }
         }
       ]
+    },
+    "__unquoted_format": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "[0-9]+(?:\\/[0-9]+)+"
+      }
     },
     "_tooltip_phrase": {
       "type": "SEQ",

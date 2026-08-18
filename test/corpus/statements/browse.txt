@@ -953,3 +953,31 @@ DEFINE BROWSE bw QUERY q DISPLAY t.f WITH SIZE 70 BY 9 ROW-HEIGHT 0.54.
     width: (number_literal)
     height: (number_literal)
     row_height_chars: (number_literal)))
+
+================================================================================
+DEFINE BROWSE - an unquoted FORMAT picture
+================================================================================
+
+DEFINE BROWSE bw QUERY q DISPLAY tt.d FORMAT 99/99/99 COLUMN-LABEL "Date" WIDTH 6 WITH 10 DOWN.
+x = 6/2.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (browse_definition
+    name: (identifier)
+    query: (identifier)
+    (column
+      column: (qualified_name
+        left: (identifier)
+        right: (identifier))
+      format: (format_picture)
+      column_label: (string_literal)
+      width: (number_literal))
+    down: (number_literal))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (binary_expression
+      (number_literal)
+      (number_literal))))
