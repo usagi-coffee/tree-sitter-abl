@@ -255,3 +255,36 @@ x = DATASET dsFoo(1).
       (arguments
         (argument
           name: (number_literal))))))
+
+================================================================================
+DATASET - a data relation with no field mapping
+================================================================================
+
+DEFINE DATASET ds FOR tt, b
+  DATA-RELATION r1 FOR tt, b NESTED.
+DEFINE DATASET ds2 FOR tt, b
+  DATA-RELATION r2 FOR tt, b RELATION-FIELDS (k, k) NESTED.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (dataset_definition
+    name: (identifier)
+    table: (identifier)
+    table: (identifier)
+    (data_relation
+      relation_name: (identifier)
+      parent_buffer: (identifier)
+      child_buffer: (identifier)
+      (nested)))
+  (dataset_definition
+    name: (identifier)
+    table: (identifier)
+    table: (identifier)
+    (data_relation
+      relation_name: (identifier)
+      parent_buffer: (identifier)
+      child_buffer: (identifier)
+      parent_field: (identifier)
+      child_field: (identifier)
+      (nested))))

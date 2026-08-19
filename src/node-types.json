@@ -24772,7 +24772,7 @@
       },
       "child_field": {
         "multiple": true,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "identifier",
@@ -24792,7 +24792,7 @@
       },
       "parent_field": {
         "multiple": true,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "identifier",
