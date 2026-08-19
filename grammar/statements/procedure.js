@@ -5,7 +5,14 @@ export default ({ kw }) => ({
     seq(
       kw("PROCEDURE", { offset: 4 }),
       optional($.__procedure_modifier),
-      field("name", choice($._identifier_or_qualified_name, $._routine_name_initial)),
+      field(
+        "name",
+        choice(
+          $._identifier_or_qualified_name,
+          $._routine_name_initial,
+          alias($.__operator_routine_name, $.identifier),
+        ),
+      ),
       optional($.__procedure_modifier),
       repeat(
         choice(

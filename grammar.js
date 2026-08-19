@@ -714,7 +714,12 @@ export default grammar({
       // qualified-name rule, which the other two positions reach and this one
       // did not, which is why the four positions disagreed on `.` alone.
       _routine_name: ($) =>
-        choice($.identifier, $.qualified_name, alias($.__symbolic_routine_name, $.identifier)),
+        choice(
+          $.identifier,
+          $.qualified_name,
+          alias($.__symbolic_routine_name, $.identifier),
+          alias($.__operator_routine_name, $.identifier),
+        ),
       __symbolic_routine_name: ($) => token(/[!#$%][\p{L}\p{N}_\-&#%$!]*/i),
 
       // A routine name may also open on a digit: `PROCEDURE 4-ITEM-CODE-lookup:`
@@ -725,6 +730,21 @@ export default grammar({
       // deliberately not into the head of a call, where it would be free to
       // take `4-ITEMVAR` out of an expression.
       __numeric_routine_name: ($) => token(/[0-9][\p{N}\-]*[\p{L}][\p{L}\p{N}_\-&#%$!]*/i),
+
+      // `PROCEDURE a*b :`, `FUNCTION a+b RETURNS ...`, `INDEX a/b f1` compile:
+      // `*`, `+` and `/` are name characters in a routine name, though not in a
+      // data symbol.
+      //
+      // They cannot be added to `identifier`, and this is the whole difficulty:
+      // `a*b` written without spaces would then lex as one name and take the
+      // multiplication away. The token below requires at least one of the three,
+      // so it can never match what `identifier` matches, and it is wired only
+      // where a routine or index name is read -- never into `function_call`,
+      // which is reached from every expression. tree-sitter only offers a token
+      // in states where the grammar says it is valid, so at `x = a*b` the token
+      // is not a candidate at all and the arithmetic reading is untouched.
+      __operator_routine_name: ($) =>
+        token(/[_\p{L}][\p{L}\p{N}_\-&#%$!]*[*+\/][\p{L}\p{N}_\-&#%$!*+\/]*/i),
 
       // `PROCEDURE -REPORT :` and `RUN -REPORT.` compile. A letter is required
       // straight after the dash so the token can never be a negative number,

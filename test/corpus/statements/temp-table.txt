@@ -850,3 +850,22 @@ DEFINE TEMP-TABLE tg NO-UNDO FIELD f1 AS INTEGER INDEX ia.b f1.
         left: (identifier)
         right: (identifier))
       field: (identifier))))
+
+================================================================================
+TEMP-TABLE DEFINITION - Index name carrying an operator character
+================================================================================
+
+DEFINE TEMP-TABLE tg NO-UNDO FIELD f1 AS INTEGER INDEX ia*b f1.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (temp_table_definition
+    name: (identifier)
+    (no_undo)
+    (temp_table_field
+      name: (identifier)
+      type: (identifier))
+    (temp_table_index
+      name: (identifier)
+      field: (identifier))))

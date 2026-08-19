@@ -73,6 +73,10 @@ export default ({ kw }) => ({
       // only the call site was left out, so a routine that could be declared
       // could not be called.
       $._routine_name_initial,
+      // `RUN a*b.` and `RUN a+b.` compile. The `/` form already parses through
+      // the path reading below, which is why that one column of the defect
+      // table looked inconsistent.
+      alias($.__operator_routine_name, $.identifier),
       $.qualified_name,
       alias($.__run_handle_method, $.object_access),
     ),

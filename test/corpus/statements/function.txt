@@ -1024,3 +1024,18 @@ END FUNCTION.
       right: (identifier))
     type: (identifier)
     (parameters)))
+
+================================================================================
+FUNCTION - a name carrying an operator character
+================================================================================
+
+FUNCTION fa*b RETURNS CHARACTER () :
+END FUNCTION.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (function_definition
+    name: (identifier)
+    type: (identifier)
+    (parameters)))

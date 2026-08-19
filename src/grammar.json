@@ -29932,6 +29932,15 @@
               {
                 "type": "SYMBOL",
                 "name": "_routine_name_initial"
+              },
+              {
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "__operator_routine_name"
+                },
+                "named": true,
+                "value": "identifier"
               }
             ]
           }
@@ -35338,6 +35347,15 @@
           "name": "_routine_name_initial"
         },
         {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "__operator_routine_name"
+          },
+          "named": true,
+          "value": "identifier"
+        },
+        {
           "type": "SYMBOL",
           "name": "qualified_name"
         },
@@ -39773,6 +39791,15 @@
               {
                 "type": "SYMBOL",
                 "name": "_unquoted_name_initial"
+              },
+              {
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "__operator_routine_name"
+                },
+                "named": true,
+                "value": "identifier"
               }
             ]
           }
@@ -59394,6 +59421,15 @@
           },
           "named": true,
           "value": "identifier"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "__operator_routine_name"
+          },
+          "named": true,
+          "value": "identifier"
         }
       ]
     },
@@ -59410,6 +59446,14 @@
       "content": {
         "type": "PATTERN",
         "value": "[0-9][\\p{N}\\-]*[\\p{L}][\\p{L}\\p{N}_\\-&#%$!]*",
+        "flags": "i"
+      }
+    },
+    "__operator_routine_name": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "[_\\p{L}][\\p{L}\\p{N}_\\-&#%$!]*[*+\\/][\\p{L}\\p{N}_\\-&#%$!*+\\/]*",
         "flags": "i"
       }
     },

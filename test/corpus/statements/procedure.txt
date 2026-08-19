@@ -780,3 +780,25 @@ x = a -b.
     right: (binary_expression
       (identifier)
       (identifier))))
+
+================================================================================
+PROCEDURE - a name carrying an operator character
+================================================================================
+
+PROCEDURE a*b :
+END PROCEDURE.
+
+x = a * b.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (procedure_definition
+    name: (identifier)
+    (body))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (binary_expression
+      (identifier)
+      (identifier))))

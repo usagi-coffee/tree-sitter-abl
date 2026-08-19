@@ -787,3 +787,36 @@ x = a -b.
     right: (binary_expression
       (identifier)
       (identifier))))
+
+================================================================================
+RUN - a target carrying an operator character
+================================================================================
+
+RUN a*b.
+RUN a+b (1).
+
+x = a * b.
+x = a + b.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (run_statement
+    procedure: (identifier))
+  (run_statement
+    procedure: (identifier)
+    (arguments
+      (argument
+        name: (number_literal))))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (binary_expression
+      (identifier)
+      (identifier)))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (binary_expression
+      (identifier)
+      (identifier))))
