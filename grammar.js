@@ -620,6 +620,14 @@ export default grammar({
                 "in_handle",
                 choice(
                   $._identifier_or_qualified_name,
+                  // A bare system handle -- `IN THIS-PROCEDURE`, `IN SESSION`,
+                  // `IN ACTIVE-WINDOW`. It has to be listed in its own right:
+                  // before object_access appeared here the word simply lexed as
+                  // an identifier, but object_access makes the system-handle
+                  // token valid at this position, and its higher precedence
+                  // then wins and demands a `:` that never comes. Omitting it
+                  // silently breaks the commonest spelling of the clause.
+                  $.system_handle_identifier,
                   $.object_access,
                   $.array_access,
                   $.parenthesized_expression,

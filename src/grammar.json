@@ -58830,6 +58830,10 @@
                       },
                       {
                         "type": "SYMBOL",
+                        "name": "system_handle_identifier"
+                      },
+                      {
+                        "type": "SYMBOL",
                         "name": "object_access"
                       },
                       {
