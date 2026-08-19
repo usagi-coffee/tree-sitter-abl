@@ -708,3 +708,71 @@ END.
         left: (identifier)
         operator: (assignment_operator)
         right: (number_literal)))))
+
+================================================================================
+DO with a qualified or subscripted loop counter
+================================================================================
+
+DO tt.idx = 1 TO 10:
+  x = 1.
+END.
+
+DO cpt[n] = 1 TO 10:
+  x = 1.
+END.
+
+DO FOR tt i = 1 TO 10:
+  x = 1.
+END.
+
+DO PRESELECT EACH tt:
+  x = 1.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (do_statement
+    variable: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    start: (number_literal)
+    end: (number_literal)
+    (body
+      (assignment_statement
+        left: (identifier)
+        operator: (assignment_operator)
+        right: (number_literal))))
+  (do_statement
+    variable: (array_access
+      array: (identifier)
+      index: (identifier))
+    start: (number_literal)
+    end: (number_literal)
+    (body
+      (assignment_statement
+        left: (identifier)
+        operator: (assignment_operator)
+        right: (number_literal))))
+  (do_statement
+    (for_phrase
+      record: (identifier))
+    variable: (identifier)
+    start: (number_literal)
+    end: (number_literal)
+    (body
+      (assignment_statement
+        left: (identifier)
+        operator: (assignment_operator)
+        right: (number_literal))))
+  (do_statement
+    (preselect_phrase
+      (preselect_record_list
+        (preselect_record
+          (record_phrase
+            record: (identifier)))))
+    (body
+      (assignment_statement
+        left: (identifier)
+        operator: (assignment_operator)
+        right: (number_literal)))))
