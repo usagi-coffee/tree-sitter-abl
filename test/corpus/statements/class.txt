@@ -663,3 +663,41 @@ END CLASS.
       name: (identifier)
       type: (identifier)
       (no_undo))))
+
+================================================================================
+CLASS - a method returning an array, with and without an extent size
+================================================================================
+
+CLASS Foo:
+  METHOD PROTECTED CHARACTER EXTENT M():
+  END METHOD.
+  METHOD PROTECTED CHARACTER EXTENT 5 N():
+  END METHOD.
+  METHOD PROTECTED CHARACTER P():
+  END METHOD.
+END CLASS.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (class_definition
+    name: (identifier)
+    (method_definition
+      (access_modifier)
+      type: (identifier)
+      name: (identifier)
+      (parameters)
+      (body))
+    (method_definition
+      (access_modifier)
+      type: (identifier)
+      size: (number_literal)
+      name: (identifier)
+      (parameters)
+      (body))
+    (method_definition
+      (access_modifier)
+      type: (identifier)
+      name: (identifier)
+      (parameters)
+      (body))))

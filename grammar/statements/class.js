@@ -276,8 +276,33 @@ export default ({ kw }) => ({
       alias(kw("FINAL"), $.final_modifier),
     ),
 
+  // `METHOD PROTECTED CHARACTER EXTENT M():` compiles -- the reference writes
+  // the return type as `... [ EXTENT [constant]]`, so the size is optional and
+  // the method name follows it.
+  //
+  // The shared typed-extent phrase cannot serve here. Its size may be a bare
+  // name, and `EXTENT M (` then has two readings: M as the constant, or M as
+  // the method name. `prec.right` inside it settles that by shifting, so the
+  // name was swallowed as a size and the parameter list left with nowhere to
+  // go. Only the `(` that follows separates the two, one token too late.
+  //
+  // A return type therefore takes a literal or a macro as its extent, not a
+  // bare name. The cost is `METHOD CHARACTER EXTENT kMax M()`, a named constant
+  // as the size, which no longer parses; the reference allows it, but between
+  // the two the sizeless form is the one that is written. The variable and
+  // property types are untouched and keep the full phrase.
   _method_return_type: ($) =>
-    choice(field("type", alias(kw("VOID"), $.identifier)), $.__class_typed_extent_phrase),
+    choice(field("type", alias(kw("VOID"), $.identifier)), $.__class_method_return_type_phrase),
+  __class_method_return_type_phrase: ($) =>
+    seq(
+      optional(kw("CLASS")),
+      field("type", $._type_or_string),
+      optional($.__class_method_return_extent_phrase),
+    ),
+  __class_method_return_extent_phrase: ($) =>
+    prec.right(
+      seq(kw("EXTENT"), optional(field("size", choice($.number_literal, $.preprocessor_name)))),
+    ),
   __class_typed_extent_phrase: ($) =>
     seq(
       optional(kw("CLASS")),
