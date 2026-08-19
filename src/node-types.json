@@ -2194,7 +2194,7 @@
     "named": true,
     "fields": {
       "browse": {
-        "multiple": false,
+        "multiple": true,
         "required": false,
         "types": [
           {
@@ -2250,7 +2250,7 @@
         ]
       },
       "frame": {
-        "multiple": false,
+        "multiple": true,
         "required": false,
         "types": [
           {

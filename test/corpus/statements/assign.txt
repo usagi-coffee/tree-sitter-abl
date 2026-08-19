@@ -662,3 +662,28 @@ ASSIGN x = 1 y = 2.
       (assign_pair
         left: (identifier)
         right: (number_literal)))))
+
+================================================================================
+ASSIGN - more than one INPUT qualifier group
+================================================================================
+
+ASSIGN INPUT BROWSE br tt.f INPUT BROWSE br tt.g.
+ASSIGN INPUT FRAME fr tt.f.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assign_statement
+    browse: (identifier)
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    browse: (identifier)
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier)))
+  (assign_statement
+    frame: (identifier)
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))))

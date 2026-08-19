@@ -1373,116 +1373,153 @@
           ]
         },
         {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SEQ",
-              "members": [
-                {
-                  "type": "ALIAS",
-                  "content": {
-                    "type": "TOKEN",
-                    "content": {
-                      "type": "PATTERN",
-                      "value": "FRAM(E)?",
-                      "flags": "i"
-                    }
-                  },
-                  "named": false,
-                  "value": "FRAME"
-                },
-                {
-                  "type": "FIELD",
-                  "name": "frame",
-                  "content": {
-                    "type": "SYMBOL",
-                    "name": "__assign_widget_name"
-                  }
-                }
-              ]
-            },
-            {
-              "type": "SEQ",
-              "members": [
-                {
-                  "type": "ALIAS",
-                  "content": {
-                    "type": "TOKEN",
-                    "content": {
-                      "type": "PATTERN",
-                      "value": "BROWSE",
-                      "flags": "i"
-                    }
-                  },
-                  "named": false,
-                  "value": "BROWSE"
-                },
-                {
-                  "type": "FIELD",
-                  "name": "browse",
-                  "content": {
-                    "type": "SYMBOL",
-                    "name": "__assign_widget_name"
-                  }
-                }
-              ]
-            }
-          ]
+          "type": "SYMBOL",
+          "name": "__assign_input_qualifier"
         },
         {
-          "type": "REPEAT1",
+          "type": "SYMBOL",
+          "name": "__assign_input_fields"
+        },
+        {
+          "type": "REPEAT",
           "content": {
             "type": "SEQ",
             "members": [
               {
-                "type": "FIELD",
-                "name": "field",
+                "type": "ALIAS",
                 "content": {
-                  "type": "SYMBOL",
-                  "name": "_assignable"
-                }
+                  "type": "TOKEN",
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "INPUT",
+                    "flags": "i"
+                  }
+                },
+                "named": false,
+                "value": "INPUT"
               },
               {
-                "type": "CHOICE",
-                "members": [
-                  {
-                    "type": "SEQ",
-                    "members": [
-                      {
-                        "type": "STRING",
-                        "value": "="
-                      },
-                      {
-                        "type": "FIELD",
-                        "name": "value",
-                        "content": {
-                          "type": "SYMBOL",
-                          "name": "_expression"
-                        }
-                      }
-                    ]
-                  },
-                  {
-                    "type": "BLANK"
-                  }
-                ]
+                "type": "SYMBOL",
+                "name": "__assign_input_qualifier"
               },
               {
-                "type": "CHOICE",
-                "members": [
-                  {
-                    "type": "SYMBOL",
-                    "name": "_when_phrase"
-                  },
-                  {
-                    "type": "BLANK"
-                  }
-                ]
+                "type": "SYMBOL",
+                "name": "__assign_input_fields"
               }
             ]
           }
         }
       ]
+    },
+    "__assign_input_qualifier": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PATTERN",
+                  "value": "FRAM(E)?",
+                  "flags": "i"
+                }
+              },
+              "named": false,
+              "value": "FRAME"
+            },
+            {
+              "type": "FIELD",
+              "name": "frame",
+              "content": {
+                "type": "SYMBOL",
+                "name": "__assign_widget_name"
+              }
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PATTERN",
+                  "value": "BROWSE",
+                  "flags": "i"
+                }
+              },
+              "named": false,
+              "value": "BROWSE"
+            },
+            {
+              "type": "FIELD",
+              "name": "browse",
+              "content": {
+                "type": "SYMBOL",
+                "name": "__assign_widget_name"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "__assign_input_fields": {
+      "type": "REPEAT1",
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "FIELD",
+            "name": "field",
+            "content": {
+              "type": "SYMBOL",
+              "name": "_assignable"
+            }
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SEQ",
+                "members": [
+                  {
+                    "type": "STRING",
+                    "value": "="
+                  },
+                  {
+                    "type": "FIELD",
+                    "name": "value",
+                    "content": {
+                      "type": "SYMBOL",
+                      "name": "_expression"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "_when_phrase"
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          }
+        ]
+      }
     },
     "__assign_record_name": {
       "type": "SYMBOL",

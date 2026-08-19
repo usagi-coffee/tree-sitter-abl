@@ -36,19 +36,33 @@ export default ({ kw }) => ({
       ),
     ),
 
+  // The syntax box closes the whole qualifier-and-fields group with `} ...`, so
+  // it repeats: `ASSIGN INPUT BROWSE br t.f INPUT BROWSE br t.g.` compiles, and
+  // only one group was read.
+  //
+  // A repeated group on its own does not generate. FRAME and BROWSE are
+  // unreserved, so after a field list either of them is both a possible next
+  // field and the opening of the next group, and nothing separates the two.
+  // Requiring INPUT to open a continuation settles it -- INPUT is lexed as the
+  // keyword, never as a field name -- and it is how the form is written.
   __assign_input_body: ($) =>
     seq(
       optional(kw("INPUT")),
-      choice(
-        seq(kw("FRAME", { offset: 4 }), field("frame", $.__assign_widget_name)),
-        seq(kw("BROWSE"), field("browse", $.__assign_widget_name)),
-      ),
-      repeat1(
-        seq(
-          field("field", $._assignable),
-          optional(seq("=", field("value", $._expression))),
-          optional($._when_phrase),
-        ),
+      $.__assign_input_qualifier,
+      $.__assign_input_fields,
+      repeat(seq(kw("INPUT"), $.__assign_input_qualifier, $.__assign_input_fields)),
+    ),
+  __assign_input_qualifier: ($) =>
+    choice(
+      seq(kw("FRAME", { offset: 4 }), field("frame", $.__assign_widget_name)),
+      seq(kw("BROWSE"), field("browse", $.__assign_widget_name)),
+    ),
+  __assign_input_fields: ($) =>
+    repeat1(
+      seq(
+        field("field", $._assignable),
+        optional(seq("=", field("value", $._expression))),
+        optional($._when_phrase),
       ),
     ),
 
