@@ -66,7 +66,9 @@ export default ({ kw }) => ({
   __temp_table_use_index_phrase: ($) =>
     seq(
       kw("USE-INDEX"),
-      field("index", $.identifier),
+      // Same class as the index definition: a name that can be defined has to
+      // be referenceable.
+      field("index", choice($.identifier, $._unquoted_name_initial)),
       optional(alias($.__temp_table_as_primary_phrase, $.as_primary_phrase)),
     ),
   __temp_table_as_primary_phrase: ($) => seq(kw("AS"), alias(kw("PRIMARY"), $.primary)),
@@ -115,10 +117,7 @@ export default ({ kw }) => ({
         alias(kw("SHARED"), $.scope_modifier),
       ),
       alias(kw("SHARED"), $.scope_modifier),
-      seq(
-        alias(kw("STATIC"), $.static_modifier),
-        optional($._serialization_modifier),
-      ),
+      seq(alias(kw("STATIC"), $.static_modifier), optional($._serialization_modifier)),
       seq(
         choice(alias(kw("PRIVATE"), $.access_modifier), alias(kw("PROTECTED"), $.access_modifier)),
         optional(alias(kw("STATIC"), $.static_modifier)),

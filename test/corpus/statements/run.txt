@@ -762,3 +762,28 @@ RUN pr (1,2,3).
         name: (number_literal))
       (argument
         name: (number_literal)))))
+
+================================================================================
+RUN - a target opening on a dash
+================================================================================
+
+RUN -REPORT.
+RUN -REPORT (1).
+x = a -b.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (run_statement
+    procedure: (identifier))
+  (run_statement
+    procedure: (identifier)
+    (arguments
+      (argument
+        name: (number_literal))))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (binary_expression
+      (identifier)
+      (identifier))))

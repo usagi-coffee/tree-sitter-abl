@@ -776,3 +776,56 @@ DEFINE PROTECTED TEMP-TABLE ttOperation NO-UNDO
       name: (identifier)
       (primary)
       field: (identifier))))
+
+================================================================================
+TEMP-TABLE DEFINITION - Index name opening on a symbol or a digit
+================================================================================
+
+DEFINE TEMP-TABLE tt NO-UNDO
+  FIELD f1 AS INTEGER
+  INDEX #ep1 f1
+  INDEX $ep2 f1
+  INDEX %ep3 f1
+  INDEX !ep4 f1
+  INDEX 1ep f1
+  INDEX _ep6 f1
+  INDEX ep7# f1.
+
+DEFINE TEMP-TABLE tt2 LIKE base_tbl USE-INDEX #ep1 USE-INDEX plain.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (temp_table_definition
+    name: (identifier)
+    (no_undo)
+    (temp_table_field
+      name: (identifier)
+      type: (identifier))
+    (temp_table_index
+      name: (identifier)
+      field: (identifier))
+    (temp_table_index
+      name: (identifier)
+      field: (identifier))
+    (temp_table_index
+      name: (identifier)
+      field: (identifier))
+    (temp_table_index
+      name: (identifier)
+      field: (identifier))
+    (temp_table_index
+      name: (identifier)
+      field: (identifier))
+    (temp_table_index
+      name: (identifier)
+      field: (identifier))
+    (temp_table_index
+      name: (identifier)
+      field: (identifier)))
+  (temp_table_definition
+    name: (identifier)
+    (like_phrase
+      like: (identifier)
+      index: (identifier)
+      index: (identifier))))

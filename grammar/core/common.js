@@ -218,10 +218,13 @@ export default ({ kw }) => ({
       repeat($.__temp_table_field_option),
     ),
 
+  // An index name is not a data symbol: `INDEX #ep1` and `INDEX 1ep` compile,
+  // while `FIELD #f` and `TEMP-TABLE #tt` are error 257. It takes the routine
+  // name's initials, minus the dash -- see `_unquoted_name_initial`.
   _table_index: ($) =>
     seq(
       kw("INDEX"),
-      field("name", $.identifier),
+      field("name", choice($.identifier, $._unquoted_name_initial)),
       optional(seq(choice(kw("AS"), kw("IS")), repeat($.__temp_table_index_modifier))),
       repeat1($.__temp_table_index_field),
     ),

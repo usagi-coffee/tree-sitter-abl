@@ -69,8 +69,10 @@ export default ({ kw }) => ({
       alias($.__run_procedure_path, $.procedure_name),
       $.macro_concatenated_name,
       $.identifier,
-      alias($.__symbolic_routine_name, $.identifier),
-      alias($.__numeric_routine_name, $.identifier),
+      // `RUN -REPORT.` compiles, and the definition already read the same name:
+      // only the call site was left out, so a routine that could be declared
+      // could not be called.
+      $._routine_name_initial,
       $.qualified_name,
       alias($.__run_handle_method, $.object_access),
     ),

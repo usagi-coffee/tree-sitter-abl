@@ -29639,31 +29639,8 @@
                 "name": "_identifier_or_qualified_name"
               },
               {
-                "type": "ALIAS",
-                "content": {
-                  "type": "SYMBOL",
-                  "name": "__symbolic_routine_name"
-                },
-                "named": true,
-                "value": "identifier"
-              },
-              {
-                "type": "ALIAS",
-                "content": {
-                  "type": "SYMBOL",
-                  "name": "__numeric_routine_name"
-                },
-                "named": true,
-                "value": "identifier"
-              },
-              {
-                "type": "ALIAS",
-                "content": {
-                  "type": "SYMBOL",
-                  "name": "__procedure_dash_name"
-                },
-                "named": true,
-                "value": "identifier"
+                "type": "SYMBOL",
+                "name": "_routine_name_initial"
               }
             ]
           }
@@ -29929,14 +29906,6 @@
           "value": "END"
         }
       ]
-    },
-    "__procedure_dash_name": {
-      "type": "TOKEN",
-      "content": {
-        "type": "PATTERN",
-        "value": "-[\\p{L}][\\p{L}\\p{N}_\\-&#%$!]*",
-        "flags": "i"
-      }
     },
     "__procedure_modifier": {
       "type": "CHOICE",
@@ -35074,22 +35043,8 @@
           "name": "identifier"
         },
         {
-          "type": "ALIAS",
-          "content": {
-            "type": "SYMBOL",
-            "name": "__symbolic_routine_name"
-          },
-          "named": true,
-          "value": "identifier"
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "SYMBOL",
-            "name": "__numeric_routine_name"
-          },
-          "named": true,
-          "value": "identifier"
+          "type": "SYMBOL",
+          "name": "_routine_name_initial"
         },
         {
           "type": "SYMBOL",
@@ -39514,8 +39469,17 @@
           "type": "FIELD",
           "name": "name",
           "content": {
-            "type": "SYMBOL",
-            "name": "identifier"
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "identifier"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "_unquoted_name_initial"
+              }
+            ]
           }
         },
         {
@@ -39964,8 +39928,17 @@
           "type": "FIELD",
           "name": "index",
           "content": {
-            "type": "SYMBOL",
-            "name": "identifier"
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "identifier"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "_unquoted_name_initial"
+              }
+            ]
           }
         },
         {
@@ -59140,6 +59113,55 @@
         "value": "[0-9][\\p{N}\\-]*[\\p{L}][\\p{L}\\p{N}_\\-&#%$!]*",
         "flags": "i"
       }
+    },
+    "__dash_routine_name": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "-[\\p{L}][\\p{L}\\p{N}_\\-&#%$!]*",
+        "flags": "i"
+      }
+    },
+    "_unquoted_name_initial": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "__symbolic_routine_name"
+          },
+          "named": true,
+          "value": "identifier"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "__numeric_routine_name"
+          },
+          "named": true,
+          "value": "identifier"
+        }
+      ]
+    },
+    "_routine_name_initial": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "_unquoted_name_initial"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "__dash_routine_name"
+          },
+          "named": true,
+          "value": "identifier"
+        }
+      ]
     },
     "system_handle_identifier": {
       "type": "ALIAS",

@@ -5,20 +5,7 @@ export default ({ kw }) => ({
     seq(
       kw("PROCEDURE", { offset: 4 }),
       optional($.__procedure_modifier),
-      field(
-        "name",
-        choice(
-          $._identifier_or_qualified_name,
-          alias($.__symbolic_routine_name, $.identifier),
-          alias($.__numeric_routine_name, $.identifier),
-          // `PROCEDURE -REPORT :` compiles. Kept as its own token rather than
-          // added to the symbolic routine name, which is also read at the head
-          // of a call, where a leading `-` is subtraction. A letter is required
-          // straight after the dash so the token can never be a negative
-          // number, and it is wired only here.
-          alias($.__procedure_dash_name, $.identifier),
-        ),
-      ),
+      field("name", choice($._identifier_or_qualified_name, $._routine_name_initial)),
       optional($.__procedure_modifier),
       repeat(
         choice(
@@ -41,8 +28,6 @@ export default ({ kw }) => ({
       repeat($._statement),
       kw("END"),
     ),
-
-  __procedure_dash_name: ($) => token(/-[\p{L}][\p{L}\p{N}_\-&#%$!]*/i),
 
   __procedure_modifier: ($) =>
     choice(

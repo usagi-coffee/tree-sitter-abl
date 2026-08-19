@@ -390,7 +390,8 @@ export default grammar({
       // to follow it, otherwise the text is a plain macro reference.
       macro_concatenated_name: ($) => token(MACRO_CONCATENATED_NAME),
 
-      _widgets: ($) => prec.right(alias(choice(...WIDGETS, kw("FRAME", { offset: 4 })), $.identifier)),
+      _widgets: ($) =>
+        prec.right(alias(choice(...WIDGETS, kw("FRAME", { offset: 4 })), $.identifier)),
       _events: ($) =>
         choice(
           $.identifier,
@@ -718,6 +719,42 @@ export default grammar({
       // deliberately not into the head of a call, where it would be free to
       // take `4-ITEMVAR` out of an expression.
       __numeric_routine_name: ($) => token(/[0-9][\p{N}\-]*[\p{L}][\p{L}\p{N}_\-&#%$!]*/i),
+
+      // `PROCEDURE -REPORT :` and `RUN -REPORT.` compile. A letter is required
+      // straight after the dash so the token can never be a negative number,
+      // and it is wired only where a routine name is read -- never at the head
+      // of a call, where a leading `-` is subtraction.
+      __dash_routine_name: ($) => token(/-[\p{L}][\p{L}\p{N}_\-&#%$!]*/i),
+
+      // The three tokens above are one class: the initials a routine name may
+      // take that `identifier` cannot express. The compiler enters a routine
+      // name under a rule a data symbol does not share -- `DEFINE VARIABLE !x`
+      // is error 257 while `PROCEDURE !x` compiles -- and an index name follows
+      // the routine rule rather than the data one: `INDEX #ep1`, `INDEX 1ep`
+      // and `INDEX -ep1` all compile, while `FIELD #f` and `TEMP-TABLE #tt` are
+      // error 257. An index name is therefore a third class, not a data symbol.
+      //
+      // Grouped rather than restated at each position because the tokens have
+      // to be shared anyway: a second copy of one of these regexes would match
+      // the same text at the same length and compete with the first in the
+      // lexer. The plain name is deliberately left out, so that each position
+      // can pair this with whatever base it already reads -- a qualified name
+      // for PROCEDURE and RUN, a bare identifier for an index.
+      //
+      // Split in two because the dash is not safe everywhere. `#x`, `$x`, `%x`,
+      // `!x` and `4-x` open with something no operator starts with, so they can
+      // be read wherever a name is expected. `-x` cannot: where an expression is
+      // also reachable the token competes with subtraction and takes `a -b`
+      // apart. An index name sits in a table body, next to FIELD initial values
+      // that are expressions, so it gets the safe half only -- measured: adding
+      // the dash there stops the parser returning any output at all.
+      _unquoted_name_initial: ($) =>
+        choice(
+          alias($.__symbolic_routine_name, $.identifier),
+          alias($.__numeric_routine_name, $.identifier),
+        ),
+      _routine_name_initial: ($) =>
+        choice($._unquoted_name_initial, alias($.__dash_routine_name, $.identifier)),
       system_handle_identifier: ($) =>
         alias(
           token(prec(1, new RegExp(`(${SYSTEM_HANDLE_WORDS.map(escape_regex).join("|")})`, "i"))),
