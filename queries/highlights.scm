@@ -222,6 +222,7 @@
   (no_wait)
   (no_word_wrap)
   (ordered_join)
+  (outer_join)
   (overlay)
   (override)
   (override_modifier)
@@ -598,7 +599,6 @@
   "OS-DIR"
   "OS-RENAME"
   "OTHERWISE"
-  "OUTER-JOIN"
   "OUTPUT"
   "OVERLAY"
   "PAGE"
