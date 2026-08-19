@@ -39768,6 +39768,10 @@
               },
               {
                 "type": "SYMBOL",
+                "name": "qualified_name"
+              },
+              {
+                "type": "SYMBOL",
                 "name": "_unquoted_name_initial"
               }
             ]
@@ -59377,6 +59381,10 @@
         {
           "type": "SYMBOL",
           "name": "identifier"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "qualified_name"
         },
         {
           "type": "ALIAS",

@@ -1007,3 +1007,20 @@ FUNCTION !ACOS RETURNS DECIMAL (INPUT v AS DECIMAL) IN h.
         type: (identifier)))
     (in_phrase
       context: (identifier))))
+
+================================================================================
+FUNCTION - a name carrying a dot
+================================================================================
+
+FUNCTION fa.b RETURNS CHARACTER () :
+END FUNCTION.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (function_definition
+    name: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    type: (identifier)
+    (parameters)))

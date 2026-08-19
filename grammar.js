@@ -708,7 +708,13 @@ export default grammar({
       // a digit cannot be told from a number literal, and `&` is how a named
       // include argument opens -- allowing it makes `{f.i &name="x"}` lex as
       // one name and lose the argument (measured: two corpus tests).
-      _routine_name: ($) => choice($.identifier, alias($.__symbolic_routine_name, $.identifier)),
+      // The qualified form is here because the compiler takes it and PROCEDURE
+      // and RUN already read it: `FUNCTION a.b RETURNS CHARACTER ():` compiles.
+      // A dot inside a routine name is not a token question at all -- it is the
+      // qualified-name rule, which the other two positions reach and this one
+      // did not, which is why the four positions disagreed on `.` alone.
+      _routine_name: ($) =>
+        choice($.identifier, $.qualified_name, alias($.__symbolic_routine_name, $.identifier)),
       __symbolic_routine_name: ($) => token(/[!#$%][\p{L}\p{N}_\-&#%$!]*/i),
 
       // A routine name may also open on a digit: `PROCEDURE 4-ITEM-CODE-lookup:`

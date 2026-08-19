@@ -233,7 +233,7 @@ export default ({ kw }) => ({
   _table_index: ($) =>
     seq(
       kw("INDEX"),
-      field("name", choice($.identifier, $._unquoted_name_initial)),
+      field("name", choice($.identifier, $.qualified_name, $._unquoted_name_initial)),
       optional(seq(choice(kw("AS"), kw("IS")), repeat($.__temp_table_index_modifier))),
       repeat1($.__temp_table_index_field),
     ),

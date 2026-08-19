@@ -829,3 +829,24 @@ DEFINE TEMP-TABLE tt2 LIKE base_tbl USE-INDEX #ep1 USE-INDEX plain.
       like: (identifier)
       index: (identifier)
       index: (identifier))))
+
+================================================================================
+TEMP-TABLE DEFINITION - Index name carrying a dot
+================================================================================
+
+DEFINE TEMP-TABLE tg NO-UNDO FIELD f1 AS INTEGER INDEX ia.b f1.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (temp_table_definition
+    name: (identifier)
+    (no_undo)
+    (temp_table_field
+      name: (identifier)
+      type: (identifier))
+    (temp_table_index
+      name: (qualified_name
+        left: (identifier)
+        right: (identifier))
+      field: (identifier))))
