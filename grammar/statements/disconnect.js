@@ -6,7 +6,11 @@ export default ({ kw }) => ({
       kw("DISCONNECT"),
       choice(
         seq(kw("VALUE"), "(", field("database", $._expression), ")"),
-        field("database", $.identifier),
+        // The reference says of the logical name: "It can be an unquoted string
+        // or a quoted string." Only the unquoted form was read, so
+        // `IF CONNECTED("c") THEN DISCONNECT "c".` failed on the quoted one --
+        // the spelling code uses when the same name is passed to CONNECTED.
+        field("database", choice($.identifier, $.string_literal)),
       ),
     ),
 });

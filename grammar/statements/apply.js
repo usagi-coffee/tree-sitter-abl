@@ -7,7 +7,14 @@ export default ({ kw }) => ({
       // `APPLY LAST-EVENT:FUNCTION TO SELF.` -- the event is named by reading
       // it off a handle as often as it is written out, and only the literal
       // event list was read.
-      field("event", choice($._events, $.object_access)),
+      //
+      // `APPLY tt.nom TO FOCUS.` reads it out of a field, and `APPLY ev[i]` out
+      // of an array. The reference calls the event "an expression whose value is
+      // the key code or event name", so both are legal. It stops short of the
+      // whole expression grammar on purpose: an operator after the event cannot
+      // be told from one continuing it, and the two readings would need a
+      // declared conflict for a form nothing writes.
+      field("event", choice($._events, $.object_access, $.qualified_name, $.array_access)),
       optional(
         seq(
           kw("TO"),
