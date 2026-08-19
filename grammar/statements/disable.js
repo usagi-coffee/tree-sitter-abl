@@ -1,5 +1,7 @@
 export default ({ kw }) => ({
-  disable_statement: ($) => seq(kw("DISABLE"), $.__disable_body, $._terminator),
+  // `DISABLE.` on its own compiles, the same way `ENABLE.` does, and for the
+  // same reason: a generated list that expanded to nothing.
+  disable_statement: ($) => seq(kw("DISABLE"), optional($.__disable_body), $._terminator),
 
   __disable_body: ($) =>
     seq(

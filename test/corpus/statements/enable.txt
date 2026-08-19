@@ -147,3 +147,19 @@ ENABLE WITH FRAME FRAME-cdtcouleur VIEW-AS DIALOG-BOX.
   (enable_statement
     (frame_phrase
       frame: (identifier))))
+
+================================================================================
+ENABLE - with no list at all
+================================================================================
+
+ENABLE .
+ENABLE ALL WITH FRAME f1.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (enable_statement)
+  (enable_statement
+    (all)
+    (frame_phrase
+      frame: (identifier))))

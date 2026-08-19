@@ -125,3 +125,19 @@ DISABLE arr[1].
       field: (array_access
         array: (identifier)
         index: (number_literal)))))
+
+================================================================================
+DISABLE - with no list at all
+================================================================================
+
+DISABLE .
+DISABLE ALL WITH FRAME f1.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (disable_statement)
+  (disable_statement
+    (all)
+    (frame_phrase
+      frame: (identifier))))
