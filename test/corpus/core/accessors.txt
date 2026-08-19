@@ -403,3 +403,42 @@ x = DYNAMIC-FUNCTION("f" IN pH[1]).
           in_handle: (array_access
             array: (identifier)
             index: (number_literal)))))))
+
+================================================================================
+An IN handle that is a system handle
+================================================================================
+
+x = DYNAMIC-FUNCTION("f" IN THIS-PROCEDURE).
+x = DYNAMIC-FUNCTION("f" IN SESSION).
+x = DYNAMIC-FUNCTION("f" IN h).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (string_literal)
+          in_handle: (identifier)))))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (string_literal)
+          in_handle: (identifier)))))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (string_literal)
+          in_handle: (identifier))))))
