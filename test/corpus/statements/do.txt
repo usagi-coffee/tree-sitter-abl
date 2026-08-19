@@ -661,3 +661,50 @@ DO WITH FRAME f: END.
     (frame_phrase
       frame: (identifier))
     (body)))
+
+================================================================================
+DO WHILE with a loop counter after the condition
+================================================================================
+
+DO WHILE h:LOCKED ii = 1 TO 5:
+  LEAVE.
+END.
+
+DO WHILE idx < 3:
+  x = 1.
+END.
+
+DO ii = 1 TO 5:
+  x = 1.
+END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (do_statement
+    condition: (object_access
+      left: (identifier)
+      right: (identifier))
+    variable: (identifier)
+    start: (number_literal)
+    end: (number_literal)
+    (body
+      (leave_statement)))
+  (do_statement
+    condition: (binary_expression
+      (identifier)
+      (number_literal))
+    (body
+      (assignment_statement
+        left: (identifier)
+        operator: (assignment_operator)
+        right: (number_literal))))
+  (do_statement
+    variable: (identifier)
+    start: (number_literal)
+    end: (number_literal)
+    (body
+      (assignment_statement
+        left: (identifier)
+        operator: (assignment_operator)
+        right: (number_literal)))))

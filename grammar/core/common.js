@@ -120,6 +120,13 @@ export default ({ kw }) => ({
     ),
 
   // The counter can be named by a macro too: `DO {&PREFIX}I = 1 TO 16:`.
+  //
+  // It stays a bare name, though `DO tt.idx = 1 TO 10:` and
+  // `DO cpt[n] = 1 TO 10:` also compile. Every rule that reads this one may
+  // open on a record name at the same position, so a counter that extends a
+  // bare name -- with a dot or a subscript -- is not separable from the record
+  // until the `=`, one token too late. tree-sitter reports it on
+  // `record_phrase` and offers only an associativity or a declared conflict.
   _loop_phrase: ($) =>
     seq(
       field("variable", choice($.identifier, $.macro_concatenated_name)),

@@ -46,6 +46,10 @@ export default ({ kw }) => ({
 
   body: ($) =>
     prec.right(seq(choice(alias($._colon, ":"), $._terminator_dot), repeat($._statement))),
-  __do_condition_or_loop_phrase: ($) => choice($.__do_while_phrase, $._loop_phrase),
+  // `DO WHILE h:LOCKED ii = 1 TO 5 :` compiles: a counter may follow the
+  // condition. Hung off the WHILE branch rather than added to the tail below,
+  // which would also let one counter follow another.
+  __do_condition_or_loop_phrase: ($) =>
+    choice(seq($.__do_while_phrase, optional($._loop_phrase)), $._loop_phrase),
   __do_while_phrase: ($) => seq(kw("WHILE"), field("condition", $._expression)),
 });
