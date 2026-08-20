@@ -1,0 +1,212 @@
+================================================================================
+SQL - DECLARE CURSOR, OPEN, FETCH, CLOSE
+================================================================================
+
+DEFINE VARIABLE nm AS CHARACTER NO-UNDO.
+DECLARE c CURSOR FOR SELECT Name FROM Customer.
+OPEN c.
+FETCH c INTO nm.
+CLOSE c.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (declare_cursor_statement
+    cursor: (identifier)
+    query: (select
+      column: (identifier)
+      name: (identifier)))
+  (open_cursor_statement
+    cursor: (identifier))
+  (fetch_statement
+    cursor: (identifier)
+    target: (identifier))
+  (close_cursor_statement
+    cursor: (identifier)))
+
+================================================================================
+SQL - cursor modes
+================================================================================
+
+DECLARE c2 CURSOR FOR SELECT DISTINCT CustNum FROM Customer WHERE Customer.Bal > 0 FOR READ ONLY.
+DECLARE c3 CURSOR FOR SELECT a FROM t ORDER BY a DESC FOR UPDATE OF t.a.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (declare_cursor_statement
+    cursor: (identifier)
+    query: (select
+      (distinct)
+      column: (identifier)
+      name: (identifier)
+      condition: (binary_expression
+        (qualified_name
+          left: (identifier)
+          right: (identifier))
+        (number_literal)))
+    (read_only))
+  (declare_cursor_statement
+    cursor: (identifier)
+    query: (select
+      column: (identifier)
+      name: (identifier)
+      (order_term
+        key: (identifier)))
+    (for_update
+      column: (qualified_name
+        left: (identifier)
+        right: (identifier)))))
+
+================================================================================
+SQL - SELECT INTO with an aggregate
+================================================================================
+
+DEFINE VARIABLE m AS INTEGER NO-UNDO.
+SELECT COUNT(*) INTO m FROM Customer WHERE Customer.CustNum = 1.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (select_statement
+    column: (function_call
+      (star))
+    into: (identifier)
+    name: (identifier)
+    condition: (binary_expression
+      (qualified_name
+        left: (identifier)
+        right: (identifier))
+      (number_literal))))
+
+================================================================================
+SQL - the full clause set
+================================================================================
+
+SELECT ALL t.* FROM t x WHERE x.k = 1 GROUP BY t.k HAVING t.k > 0 ORDER BY 1 ASC.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (select_statement
+    (all)
+    column: (star
+      table: (identifier))
+    name: (identifier)
+    alias: (identifier)
+    condition: (binary_expression
+      (qualified_name
+        left: (identifier)
+        right: (identifier))
+      (number_literal))
+    group: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    condition: (binary_expression
+      (qualified_name
+        left: (identifier)
+        right: (identifier))
+      (number_literal))
+    (order_term
+      key: (number_literal))))
+
+================================================================================
+SQL - column titles, with and without AS
+================================================================================
+
+SELECT a AS "Titre", b c FROM t.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (select_statement
+    column: (identifier)
+    title: (string_literal)
+    column: (identifier)
+    title: (identifier)
+    name: (identifier)))
+
+================================================================================
+SQL - the ABL statements these could be confused with still parse
+================================================================================
+
+DEFINE QUERY q FOR Customer.
+OPEN QUERY q FOR EACH Customer NO-LOCK.
+CLOSE QUERY q.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (query_definition
+    name: (identifier)
+    (query_table_list
+      table: (identifier)))
+  (open_query_statement
+    query: (identifier)
+    (record_phrase
+      record: (identifier)
+      lock: (no_lock)))
+  (close_query_statement
+    query: (identifier)))
+
+================================================================================
+SQL - UPDATE, and the ABL UPDATE it must not swallow
+================================================================================
+
+DEFINE TEMP-TABLE tt NO-UNDO FIELD c AS INTEGER FIELD k AS INTEGER FIELD nom AS CHARACTER.
+UPDATE tt SET c = 1 WHERE k = 2.
+UPDATE tt.nom WITH FRAME f1.
+UPDATE tt.c = 1 WITH FRAME f3.
+UPDATE tt EXCEPT k WITH FRAME f4.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (temp_table_definition
+    name: (identifier)
+    (no_undo)
+    (temp_table_field
+      name: (identifier)
+      type: (identifier))
+    (temp_table_field
+      name: (identifier)
+      type: (identifier))
+    (temp_table_field
+      name: (identifier)
+      type: (identifier)))
+  (sql_update_statement
+    table: (identifier)
+    (assignment
+      column: (identifier)
+      value: (number_literal))
+    condition: (binary_expression
+      (identifier)
+      (number_literal)))
+  (update_statement
+    (field
+      field: (qualified_name
+        left: (identifier)
+        right: (identifier)))
+    (frame_phrase
+      frame: (identifier)))
+  (update_statement
+    (field
+      field: (qualified_name
+        left: (identifier)
+        right: (identifier))
+      value: (number_literal))
+    (frame_phrase
+      frame: (identifier)))
+  (update_statement
+    record: (identifier)
+    except: (identifier)
+    (frame_phrase
+      frame: (identifier))))
