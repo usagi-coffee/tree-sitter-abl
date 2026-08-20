@@ -16,6 +16,7 @@ import grammar_choose from "./choose.js";
 import grammar_class from "./class.js";
 import grammar_clear from "./clear.js";
 import grammar_close_query from "./close-query.js";
+import grammar_sql from "./sql.js";
 import grammar_close_stored_procedure from "./close-stored-procedure.js";
 import grammar_color from "./color.js";
 import grammar_compile from "./compile.js";
@@ -302,4 +303,5 @@ export default (ctx) => ({
   ...grammar_expression(ctx),
   ...grammar_create_widget(ctx),
   ...grammar_create_temp_table(ctx),
+  ...grammar_sql(ctx),
 });
