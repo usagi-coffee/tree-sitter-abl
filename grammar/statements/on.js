@@ -115,36 +115,26 @@ export default ({ kw }) => ({
       $.__on_trigger_action,
     ),
   __on_ui_anywhere_branch: ($) => seq($.__on_ui_events, alias(kw("ANYWHERE"), $.anywhere)),
-  // `ON DELETE OF FRAME F1 ANYWHERE DO:` -- DELETE names a widget event as well
-  // as the database one, and generated screens write it against a frame.
-  //
-  // The two readings share `<event> OF`, so they are factored behind it rather
-  // than given a branch each: two branches both opening on DELETE cannot be
-  // told apart at that token, and tree-sitter asks for a precedence or a
-  // conflict there. A precedence would settle it statically and lose one form
-  // -- the mistake already made on HIDE. Factored this way the choice falls
-  // after OF, where the widget keyword separates it from a bare table name and
-  // no conflict arises at all.
-  //
-  // The cost is that the widget form is reachable from every database event,
-  // so `ON WRITE OF FRAME f` parses too. Narrowing it to DELETE alone would
-  // mean duplicating the branch and reintroducing the ambiguity.
   __on_database_event_branch: ($) =>
-    seq(
-      field("event", $.__on_database_event),
-      kw("OF"),
-      choice(
-        seq(
-          field("object", $._identifier_or_qualified_name),
-          optional($.__on_database_event_tail),
-          choice($.__on_revert_action, $._statement),
-        ),
-        seq(
-          field("widget", alias($.__on_database_event_widget, $.widget_phrase)),
-          optional(alias(kw("ANYWHERE"), $.anywhere)),
-          $.__on_trigger_action,
-        ),
+    choice(
+      seq(
+        field("event", kw("DELETE")),
+        kw("OF"),
+        choice($.__on_database_event_action, $.__on_delete_widget_action),
       ),
+      seq(field("event", $.__on_database_event), kw("OF"), $.__on_database_event_action),
+    ),
+  __on_database_event_action: ($) =>
+    seq(
+      field("object", $._identifier_or_qualified_name),
+      optional($.__on_database_event_tail),
+      choice($.__on_revert_action, $._statement),
+    ),
+  __on_delete_widget_action: ($) =>
+    seq(
+      field("widget", alias($.__on_database_event_widget, $.widget_phrase)),
+      optional(alias(kw("ANYWHERE"), $.anywhere)),
+      $.__on_trigger_action,
     ),
   __on_database_event_widget: ($) =>
     choice(
@@ -182,24 +172,17 @@ export default ({ kw }) => ({
         kw("PERSISTENT"),
         kw("RUN"),
         field("procedure", $.identifier),
-        // `ON "F4" OF hb PERSISTENT RUN chx IN THIS-PROCEDURE (hb).` -- the
-        // argument list comes after the IN clause as readily as before it, and
-        // only the leading position was read.
         optional($.arguments),
         optional(alias($.__on_in_phrase, $.in_phrase)),
         optional($.arguments),
         $._terminator,
       ),
     ),
-  // The syntax box for the ON statement stops at the procedure name, but a
-  // persistent trigger routinely names the procedure that owns it, as in
-  // `PERSISTENT RUN valuechanged IN THIS-PROCEDURE`, and such code compiles.
   __on_in_phrase: ($) => seq(kw("IN"), field("context", $.__on_context_value)),
   __on_context_value: ($) =>
     choice($.system_handle_identifier, $.object_access, $._identifier_or_qualified_name),
   __on_revert_action: ($) => seq(alias(kw("REVERT"), $.revert), $._terminator),
-  __on_database_event: ($) =>
-    choice(kw("CREATE"), kw("DELETE"), kw("FIND"), kw("WRITE"), kw("ASSIGN")),
+  __on_database_event: ($) => choice(kw("CREATE"), kw("FIND"), kw("WRITE"), kw("ASSIGN")),
   // __on_key_label accepts both $.__on_ui_event_name tokens (TAB, ENDKEY, etc.)
   // and plain $._events (F1, F10, etc.).
   __on_key_label: ($) => choice(alias($.__on_ui_event_name, $.identifier), $._events),
