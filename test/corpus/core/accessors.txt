@@ -377,6 +377,7 @@ An IN handle that is more than a bare name
 
 x = DYNAMIC-FUNCTION("f" IN h:PARENT).
 x = DYNAMIC-FUNCTION("f" IN pH[1]).
+x = DYNAMIC-FUNCTION(pNom IN h).
 
 --------------------------------------------------------------------------------
 
@@ -402,7 +403,16 @@ x = DYNAMIC-FUNCTION("f" IN pH[1]).
           name: (string_literal)
           in_handle: (array_access
             array: (identifier)
-            index: (number_literal)))))))
+            index: (number_literal))))))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (identifier)
+          in_handle: (identifier))))))
 
 ================================================================================
 An IN handle that is a system handle

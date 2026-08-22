@@ -115,6 +115,9 @@ export default grammar({
     // qualifier, which expects IN WINDOW. Both are alive at that token and only
     // what follows settles it, so it is decided at parse time.
     [$.__argument_body, $.__widget_qualified_name_separator],
+    // `DYNAMIC-FUNCTION(pNom IN h)` has the same ambiguity after a bare name,
+    // before the argument expression has reduced to __argument_body.
+    [$.__argument_in_handle, $.__widget_qualified_name_separator],
     // `a::c` off a bare name is a scoped_name; the object-access tail reads the
     // same `::` for the receivers scoped_name cannot take, so on that token
     // both are alive and only the receiver settles it -- which the parser has
@@ -549,38 +552,45 @@ export default grammar({
       __argument_body: ($) =>
         seq(
           choice(
+            $.__argument_identifier_in_handle,
             seq(
-              choice(kw("TABLE"), kw("BUFFER"), kw("TABLE-HANDLE"), kw("DATASET-HANDLE")),
-              field(
-                "name",
-                choice(
-                  $._identifier_or_qualified_name,
-                  $.object_access,
-                  $.function_call,
-                  $.binary_expression,
+              choice(
+                seq(
+                  choice(kw("TABLE"), kw("BUFFER"), kw("TABLE-HANDLE"), kw("DATASET-HANDLE")),
+                  field(
+                    "name",
+                    choice(
+                      $._identifier_or_qualified_name,
+                      $.object_access,
+                      $.function_call,
+                      $.binary_expression,
+                    ),
+                  ),
                 ),
+                field("name", $._expression),
               ),
-            ),
-            field("name", $._expression),
-          ),
-          optional(
-            seq(
-              kw("IN"),
-              field(
-                "in_handle",
-                choice(
-                  $._identifier_or_qualified_name,
-                  $.system_handle_identifier,
-                  $.object_access,
-                  $.array_access,
-                  $.parenthesized_expression,
-                  $.function_call,
-                ),
-              ),
+              optional($.__argument_in_handle),
             ),
           ),
           optional(seq(kw("AS"), field("type", $._type_name))),
           optional(choice(kw("BY-REFERENCE"), kw("BY-VALUE"), kw("APPEND"), kw("BIND"))),
+        ),
+      __argument_identifier_in_handle: ($) =>
+        seq(field("name", $._identifier_or_qualified_name), $.__argument_in_handle),
+      __argument_in_handle: ($) =>
+        seq(
+          kw("IN"),
+          field(
+            "in_handle",
+            choice(
+              $._identifier_or_qualified_name,
+              $.system_handle_identifier,
+              $.object_access,
+              $.array_access,
+              $.parenthesized_expression,
+              $.function_call,
+            ),
+          ),
         ),
 
       function_call: ($) =>
