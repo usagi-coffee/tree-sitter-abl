@@ -187,6 +187,7 @@ instead of the `persistent` option.
 
 ## Optimization
 
+- Optimizations should reduce both `src/parser.c` size AND `ACTION_COUNT` or `STATE_COUNT` or `LARGE_STATE_COUNT`.
 - Prefer the biggest reductions to `src/parser.c` size, do not go beyond tree-sitter limit of `65535` `ACTION_COUNT` and `STATE_COUNT`.
 - Avoid token packing; do not combine distinct tokens solely to reduce parser size.
 
