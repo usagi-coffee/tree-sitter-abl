@@ -3,6 +3,7 @@
 ## Project
 
 - Tree-sitter grammar for OpenEdge ABL.
+- Contributor-facing requirements are documented in [`CONTRIBUTING.md`](CONTRIBUTING.md).
 
 ## Key paths
 
@@ -53,17 +54,6 @@
   - `bun run benchmark`
 
 Strongly prefer using these commands as they have helpful side-effects like returning `ACTION_COUNT`, `STATE_COUNT` and `LARGE_STATE_COUNT`.
-
-### Commiting 
-
-Always place parser count deltas at the end of the commit description using this template.
-
-```
-ACTION_COUNT: <before> -> <after> (<delta>)
-STATE_COUNT: <before> -> <after> (<delta>)
-LARGE_STATE_COUNT: <before> -> <after> (<delta>)
-PARSER_C_SIZE_BYTES: <before> -> <after> (<delta>)
-```
 
 ## Conventions
 
