@@ -57,11 +57,8 @@ Strongly prefer using these commands as they have helpful side-effects like retu
 
 ## Conventions
 
-- Always run tests after modifications.
-- Do not remove tests unless it is illegal syntax.
 - Before working on a statement, first consult its reference to ensure you understand the available syntax and it's proper usage.
 - Keep grammar rule naming as close as possible to the language reference terminology (statement names, phrase names, and option names) unless there is a clear technical reason not to.
-- Grammar changes without thorough corpus coverage and testing are unacceptable.
 - Avoid creating a shared or generic code unless it is really a part of the core syntax, core grammar modifications require a confirmation unless experimenting.
 - Always prefer solving conflicts using `precedences` over using `prec(`.
 - We intentionally duplicate modifiers and tunings at the statement level so that most of the statement-specific context lives in a single file. To support this, each statement defines its own `__<statement>_rules`, which are later aliased to `$.rule` where needed. This intentional duplication favors locality, readability, and conflict isolation over DRY abstractions. Keep in mind we don't do these for trivial cases, see`Clean tree conventions`.
@@ -70,19 +67,15 @@ Strongly prefer using these commands as they have helpful side-effects like retu
 - Do not treat precedence tuning as equivalent to adding a `conflicts` entry. Precedence changes are normal grammar work.
 - Adding a `conflicts` entry is a last resort and requires prior confirmation with a clear explanation of why adding to `precedences`, associativity, or local rule refactoring are insufficient.
 - Prefer `kw` for keywords in place of `token(/keyword/i)`, when the syntax supports partial keyword like `DEFINE` can be `DEF`, `DEFI`, `DEFIN` and `DEFINE` please use `kw("DEFINE", { offset: 3 })`, for scenario where it can be longer do alias e.g`kw("FIELDS", { alias: 'FIELD', offset: 5)`.
-- Treat `(ERROR)` and `(MISSING)` nodes in the test output aserrors that need to be fixed.
 - Use compact rule formatting: keep one-line rules adjacent with no blank lines, avoid blank lines between consecutive one-line rules.
 - The grammar should avoid permissive or catch-all rules that allow invalid syntax to be parsed successfully.
 - ABL grammar is filled with optionals, be careful not to explode `tree-sitter`'s `ACTION_COUNT`, `STATE_COUNT` and `LARGE_STATE_COUNT` always check modification's impact on these.
 - When weighing the impact of the modifications on `ACTION_COUNT`, `LARGE_STATE_COUNT` and `STATE_COUNT` prefer the biggest reductions to `ACTION_COUNT`.
-- Do not adjust or remove tests just to satisfy test passing, just fix the underlying parsing issue or ask me first to remove if it's really not supported.
 - Don't do unnecessary comments like `// something is above`.
-- Never add `(ERROR` nodes to expected syntax trees in tests, it's pointless, fix the grammar not the test itself.
 - Prefer not using `_list` suffix for rules e.g `_format_label_list` should be `_format_labels`.
 - Avoid hacks like cramming `FRAME` into regex to avoid the issue.
 - Add purpose + example comments before each precedence group when modifying precedences; add reference notes for each precedence entry.
 - *Only* if needed, refactor rules to be easier to target in precedence (e.g you can't target repeat(some_rule), its fine to refactor into e.g `__statement_expression: ($) => $._expression`.
-- Any newly added grammar warrants adding a tests for it, please write tests for new grammar constructs.
 - For options of statement with values prefer e.g `seq(kw("ROW"), field("row", ...))` for those that can have expressions and e.g `alias(kw("NO-LABELS", $.no_labels))` for those that do not have expressions.
 - Do not use e.g `no_labels_option` as an alias, just use `no_labels` to keep it clean, avoid `_option` suffix.
 - Big blocks of `repeat(choice(` rules for the statement record/column/field/whatever should prefer inlining instead of duplication as it offers modest state reduction.
