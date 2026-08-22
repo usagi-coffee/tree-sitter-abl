@@ -104,23 +104,23 @@ export default ({ kw }) => ({
           kw("TABLE"),
           optional(kw("FOR")),
           field("table", $._identifier_or_qualified_name),
-          repeat($.__function_table_option),
+          optional($.__function_table_options),
         ),
         seq(
           kw("TABLE-HANDLE"),
           field("table_handle", $.identifier),
-          repeat($.__function_table_option),
+          optional($.__function_table_options),
         ),
         seq(
           kw("DATASET"),
           kw("FOR"),
           field("dataset", $._identifier_or_qualified_name),
-          repeat($.__function_table_option),
+          optional($.__function_table_options),
         ),
         seq(
           kw("DATASET-HANDLE"),
           field("dataset_handle", $.identifier),
-          repeat($.__function_table_option),
+          optional($.__function_table_options),
         ),
         // A prototype states only the mode and data type of each parameter, so the
         // name may be absent. Definition and prototype share every token up to the
@@ -129,10 +129,14 @@ export default ({ kw }) => ({
       ),
     ),
 
-  __function_table_option: ($) =>
+  __function_table_options: ($) =>
     choice(
-      alias(kw("APPEND"), $.append),
-      alias(kw("BIND"), $.bind),
+      seq(
+        alias(kw("APPEND"), $.append),
+        optional(alias(kw("BIND"), $.bind)),
+        optional(alias(kw("BY-VALUE"), $.by_value)),
+      ),
+      seq(alias(kw("BIND"), $.bind), optional(alias(kw("BY-VALUE"), $.by_value))),
       alias(kw("BY-VALUE"), $.by_value),
     ),
 

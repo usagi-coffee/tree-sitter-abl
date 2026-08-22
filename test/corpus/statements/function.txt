@@ -936,6 +936,7 @@ FUNCTION - temp-table parameter passed by name
 ================================================================================
 
 FUNCTION f RETURNS LOGICAL (INPUT pSite AS INTEGER, INPUT-OUTPUT TABLE FOR tt-site) FORWARD.
+FUNCTION h RETURNS LOGICAL (INPUT TABLE FOR tt APPEND BIND BY-VALUE) FORWARD.
 
 FUNCTION g RETURNS LOGICAL (INPUT-OUTPUT TABLE FOR tt-x APPEND BIND):
   RETURN YES.
@@ -953,6 +954,16 @@ END FUNCTION.
         type: (identifier))
       (parameter
         table: (identifier)))
+    (forward))
+  (function_forward_definition
+    name: (identifier)
+    type: (identifier)
+    (parameters
+      (parameter
+        table: (identifier)
+        (append)
+        (bind)
+        (by_value)))
     (forward))
   (function_definition
     name: (identifier)
