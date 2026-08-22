@@ -1,5 +1,9 @@
 # Contributing
 
+## Formatting
+
+Please format your code with `bun run format` before committing.
+
 ## Commit descriptions
 
 Always include parser-count deltas at the end of the commit description in exactly this
@@ -17,8 +21,6 @@ merging instead of keeping deltas from an earlier base.
 
 If a rule was optimized into a less obvious form, mention in the commit description
 that the simpler form was measured and produced a more expensive parser.
-
-Run `bun run format` before committing.
 
 ## Tests
 
