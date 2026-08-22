@@ -265,8 +265,9 @@ export default ({ kw }) => ({
       optional($.__class_method_return_extent_phrase),
     ),
   __class_method_return_extent_phrase: ($) =>
-    prec.right(
-      seq(kw("EXTENT"), optional(field("size", choice($.number_literal, $.preprocessor_name)))),
+    seq(
+      kw("EXTENT"),
+      optional(field("size", choice($.number_literal, $.preprocessor_name, $.identifier))),
     ),
   __class_typed_extent_phrase: ($) =>
     seq(

@@ -673,6 +673,8 @@ CLASS Foo:
   END METHOD.
   METHOD PROTECTED CHARACTER EXTENT 5 N():
   END METHOD.
+  METHOD PROTECTED CHARACTER EXTENT kMax O():
+  END METHOD.
   METHOD PROTECTED CHARACTER P():
   END METHOD.
 END CLASS.
@@ -692,6 +694,13 @@ END CLASS.
       (access_modifier)
       type: (identifier)
       size: (number_literal)
+      name: (identifier)
+      (parameters)
+      (body))
+    (method_definition
+      (access_modifier)
+      type: (identifier)
+      size: (identifier)
       name: (identifier)
       (parameters)
       (body))

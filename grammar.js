@@ -131,6 +131,9 @@ export default grammar({
     // Function definitions require parameter names, while prototypes may omit
     // them. The forms diverge only after the closing parenthesis.
     [$.__function_parameter, $.__function_definition_parameter],
+    // In `METHOD CHARACTER EXTENT M()`, M is the method name; in
+    // `METHOD CHARACTER EXTENT kMax M()`, the first name is the extent size.
+    [$.__class_method_return_extent_phrase],
 
     // DEFINE modifiers prefix conflicts
     // Conflicts approach has slightly better state reduction (~500) than doing it conflicts free
