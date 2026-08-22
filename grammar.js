@@ -97,6 +97,17 @@ export default grammar({
     [$._primary_expression, $.function_call],
     // INPUT starts either an argument direction or the screen-buffer INPUT function.
     [$.__input_expression_prefix, $.argument],
+    // `INPUT STREAM s` opens an INPUT statement, while `INPUT STREAM s:HANDLE`
+    // can also begin an INPUT expression whose operand is a stream handle.
+    [$.__input_expression_prefix, $._input_stream_prefix],
+    // After EXPORT, STREAM can introduce the statement's output stream or the
+    // first exported expression in `STREAM s:attribute` form.
+    [$.__export_statement_head],
+    // After SET, STREAM can introduce the statement's input stream or begin a
+    // stream-handle field expression.
+    [$.__set_prefix],
+    // UNDERLINE has the same optional statement stream before its field list.
+    [$.__underline_prefix],
     // WITH NO-VALIDATE is valid both as prompt_for_with_phrase and as frame_phrase option
     [$.__prompt_for_with_phrase, $.frame_phrase],
     // Shared [NOT] ENTERED phrase must preserve both keyword-as-identifier spans.
@@ -480,6 +491,7 @@ export default grammar({
             alias(kw("TEMP-TABLE"), $.identifier),
             alias(kw("BUFFER"), $.identifier),
             alias(kw("DATA-SOURCE"), $.identifier),
+            alias(kw("STREAM"), $.identifier),
           ),
         ),
       object_access: ($) =>
