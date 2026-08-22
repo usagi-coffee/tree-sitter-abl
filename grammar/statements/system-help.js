@@ -9,8 +9,6 @@ export default ({ kw }) => ({
       optional($.__system_help_action),
     ),
 
-  // The syntax box makes the action mandatory, but a statement that only names
-  // the file already parsed here before and is pinned by a test.
   __system_help_action: ($) =>
     choice(
       alias(kw("CONTENTS"), $.contents),

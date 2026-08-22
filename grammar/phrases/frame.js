@@ -1,6 +1,4 @@
 export default ({ kw }) => ({
-  // `DO WITH : END.` compiles: the WITH may carry no option at all, and the
-  // phrase required at least one.
   frame_phrase: ($) =>
     seq(
       kw("WITH"),
@@ -70,10 +68,6 @@ export default ({ kw }) => ({
   __frame_skip_phrase: ($) =>
     prec.left(seq(kw("SKIP"), optional(field("skip", seq("(", $.__frame_expression, ")"))))),
 
-  // The title takes one colour per component -- `TITLE BGCOLOR 1 FGCOLOR 15
-  // "Frame A"` -- so the options repeat instead of being a single choice.
-  // Spelling the four out in the order the syntax box gives them costs 620
-  // actions against 136 for the repeat, so the looser form wins.
   __frame_title_phrase: ($) =>
     seq(kw("TITLE"), repeat($._frame_title_option), field("title", $.__frame_expression)),
   _frame_title_option: ($) =>
@@ -84,8 +78,6 @@ export default ({ kw }) => ({
       seq(kw("FONT"), field("title_font", $.__frame_expression)),
     ),
   __frame_column_keyword: ($) => choice(kw("COLUMN"), kw("COLUMNS"), kw("COL")),
-  // Generated screens name their frame, browse and window through a macro, as in
-  // `WITH FRAME {&FRAME-NAME}`, so a name here can be either.
   __frame_identifier: ($) => choice($.identifier, $.preprocessor_name),
   __frame_expression: ($) => $._expression,
   down: ($) =>

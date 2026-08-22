@@ -29,36 +29,17 @@ export default ({ kw }) => ({
   __create_buffer: ($) =>
     seq(
       kw("BUFFER"),
-      // The handle is often a property of the object doing the creating, the
-      // same way BUFFER-NAME below is: `CREATE BUFFER THIS-OBJECT:hTT FOR ...`.
       field("handle", choice($._identifier_or_array_access, $.object_access)),
       kw("FOR"),
       kw("TABLE"),
       field("table", $.__create_buffer_target),
-      optional(
-        seq(
-          kw("BUFFER-NAME"),
-          // The name is often a property of the object doing the creating:
-          // `BUFFER-NAME THIS-OBJECT:hName`. It can also be assembled at run
-          // time -- `BUFFER-NAME "n" + STRING(i)` compiles -- so it reads the
-          // same target as the table above, concatenation included, rather
-          // than a name or a literal alone.
-          field("name", $.__create_buffer_target),
-        ),
-      ),
+      optional(seq(kw("BUFFER-NAME"), field("name", $.__create_buffer_target))),
       optional($._in_widget_pool),
     ),
-  // The table is named by a character expression, so it can be assembled at run
-  // time. Concatenation is spelled out here rather than reusing the expression
-  // rule: that one reaches widget_qualified_name, whose separator is IN, and it
-  // would then swallow the IN WIDGET-POOL option that follows.
   __create_buffer_target: ($) =>
     choice($.__create_buffer_name, alias($.__create_buffer_concatenation, $.binary_expression)),
   __create_buffer_concatenation: ($) =>
     seq($.__create_buffer_name, repeat1(seq("+", $.__create_buffer_name))),
-  // `CREATE BUFFER h FOR TABLE IF c THEN "a" ELSE "b".` compiles: the table is
-  // named by a character expression, and a conditional is how a program picks
-  // between two tables at run time.
   __create_buffer_name: ($) =>
     choice(
       $._identifier_or_access_or_call,
@@ -87,9 +68,6 @@ export default ({ kw }) => ({
   __create_widget_pool: ($) =>
     seq(
       kw("WIDGET-POOL"),
-      // `CREATE WIDGET-POOL "p" PERSISTENT NO-ERROR.` -- the pool is named by a
-      // character expression, and only a bare identifier was read, so the form
-      // real code writes never parsed.
       optional(
         seq(
           field("pool", choice($.identifier, $.string_literal)),

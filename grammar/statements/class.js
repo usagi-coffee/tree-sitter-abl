@@ -68,13 +68,6 @@ export default ({ kw }) => ({
       ),
     ),
   __class_body_opener: ($) => choice(alias($._colon, ":"), $._terminator_dot),
-  // `METHOD {&PACKAGE-PROTECTED} OVERRIDE VOID Foo(...):` -- a whole modifier
-  // supplied by a macro, so that one source builds a package-protected method
-  // in one configuration and a public one in another. Taken here rather than in
-  // the shared `_method_modifier_no_abstract`, which other definitions read and
-  // which real code never writes this way. Left as `preprocessor_name`: what
-  // the macro expands to is not known here, so aliasing it to access_modifier
-  // would be a guess.
   __class_method_definition_prefix: ($) =>
     seq(kw("METHOD"), repeat(choice($._method_modifier_no_abstract, $.preprocessor_name))),
   __class_method_definition_signature: ($) =>
@@ -165,10 +158,6 @@ export default ({ kw }) => ({
   __class_property_definition_prefix: ($) =>
     seq(
       kw("DEFINE", { offset: 3 }),
-      // `DEFINE {&package-protected} PROPERTY gDemiJourneeMatin AS LOGICAL` --
-      // the modifier comes from a macro, exactly as it does on METHOD. Left as
-      // `preprocessor_name` for the same reason: what it expands to is not
-      // known here.
       optional(choice($.__class_property_definition_modifier, $.preprocessor_name)),
       kw("PROPERTY"),
       field("name", $.identifier),
@@ -178,8 +167,6 @@ export default ({ kw }) => ({
           seq(kw("INITIAL", { offset: 4 }), field("initial", $._initial_value)),
           seq(kw("SERIALIZE-NAME"), field("serialize_name", $.string_literal)),
           alias(kw("NO-UNDO"), $.no_undo),
-          // `AS CHARACTER NO-UNDO EXTENT 12` -- the extent can follow the other
-          // options as well as sit with the type.
           alias($._extent_phrase, $.extent_phrase),
         ),
       ),
@@ -201,8 +188,6 @@ export default ({ kw }) => ({
       alias(kw("PUBLIC"), $.access_modifier),
     ),
   __class_property_accessor_parameters: ($) => choice(seq("(", ")"), $.property_set_parameter_list),
-  // A setter can take more than the value: an indexed property receives the
-  // subscript alongside it.
   property_set_parameter_list: ($) =>
     seq("(", $.property_set_parameter, repeat(seq(",", $.property_set_parameter)), ")"),
 
@@ -244,8 +229,6 @@ export default ({ kw }) => ({
       $.__class_property_modifier_tail,
       $._serialization_modifier,
     ),
-  // OVERRIDE can come before the access modifier as well as after it:
-  // `DEFINE OVERRIDE PROTECTED PROPERTY ...`.
   __class_property_modifier_tail: ($) =>
     seq(
       alias(kw("OVERRIDE"), $.override_modifier),
@@ -258,9 +241,6 @@ export default ({ kw }) => ({
       alias(kw("ABSTRACT"), $.abstract_modifier),
       alias(kw("FINAL"), $.final_modifier),
     ),
-  // The extent lives with the options rather than with the type, so that it can
-  // follow NO-UNDO as well as precede it; keeping it in both places makes the
-  // two readings of a single EXTENT ambiguous.
   __class_property_type_phrase: ($) =>
     seq(optional(kw("AS")), optional(kw("CLASS")), field("type", $._type_or_string)),
 
@@ -276,21 +256,6 @@ export default ({ kw }) => ({
       alias(kw("FINAL"), $.final_modifier),
     ),
 
-  // `METHOD PROTECTED CHARACTER EXTENT M():` compiles -- the reference writes
-  // the return type as `... [ EXTENT [constant]]`, so the size is optional and
-  // the method name follows it.
-  //
-  // The shared typed-extent phrase cannot serve here. Its size may be a bare
-  // name, and `EXTENT M (` then has two readings: M as the constant, or M as
-  // the method name. `prec.right` inside it settles that by shifting, so the
-  // name was swallowed as a size and the parameter list left with nowhere to
-  // go. Only the `(` that follows separates the two, one token too late.
-  //
-  // A return type therefore takes a literal or a macro as its extent, not a
-  // bare name. The cost is `METHOD CHARACTER EXTENT kMax M()`, a named constant
-  // as the size, which no longer parses; the reference allows it, but between
-  // the two the sizeless form is the one that is written. The variable and
-  // property types are untouched and keep the full phrase.
   _method_return_type: ($) =>
     choice(field("type", alias(kw("VOID"), $.identifier)), $.__class_method_return_type_phrase),
   __class_method_return_type_phrase: ($) =>

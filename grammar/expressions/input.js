@@ -6,8 +6,6 @@ export default ({ kw }) => ({
       field("field", $.__input_field),
     ),
   __input_expression_prefix: ($) => kw("INPUT"),
-  // `IF t.f <> INPUT BROWSE br t.f THEN` -- the screen value can be read out of
-  // a browse as well as out of a frame, and only FRAME was accepted here.
   __input_widget_phrase: ($) =>
     choice(
       seq(kw("FRAME", { offset: 4 }), field("frame", $.identifier)),

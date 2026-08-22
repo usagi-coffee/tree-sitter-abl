@@ -39,10 +39,6 @@ export default ({ kw }) => ({
           seq(kw("FGCOLOR"), field("fgcolor", $.__browse_option_expression)),
           seq(kw("FONT"), field("font", $.__browse_option_expression)),
           seq(kw("PFCOLOR"), field("pfcolor", $.__browse_option_expression)),
-          // `WITH SIZE 70 BY 9 ROW-HEIGHT 0.54` -- the unsuffixed spelling is
-          // what AppBuilder writes, and it compiles; only the -CHARS and
-          // -PIXELS forms were read. It measures in characters, like the
-          // default of every other size option here.
           seq(
             kw("ROW-HEIGHT-CHARS", { alias: "ROW-HEIGHT", offset: 10 }),
             field("row_height_chars", $.__browse_option_expression),
@@ -168,10 +164,6 @@ export default ({ kw }) => ({
         optional(alias(seq("@", field("base", $._identifier_or_qualified_name)), $.base_field)),
       ),
     ),
-  // A browse column takes a strict subset of the VIEW-AS phrase: a toggle box
-  // or a combo box. Only the toggle box is spelled out here -- the combo box
-  // brings its LIST-ITEMS values, and a comma-separated list of expressions
-  // cannot be told apart from the column list around it.
   __browse_column_view_as: ($) => seq(kw("VIEW-AS"), field("widget", kw("TOGGLE-BOX"))),
 
   __browse_option_expression: ($) => prec.right($._expression),

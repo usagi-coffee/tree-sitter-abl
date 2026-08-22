@@ -26,10 +26,6 @@ export default ({ kw }) => ({
         seq(kw("VALUE"), "(", field("widget_type", $._expression), ")"),
       ),
       optional($._handle_in_widget_pool),
-      // NO-ERROR sits right after the handle in real code, before the ASSIGN
-      // block rather than after it. Both positions parse; the trailing one is
-      // reachable only once a block has been seen, so a lone NO-ERROR has a
-      // single reading.
       optional(alias(kw("NO-ERROR"), $.no_error)),
       optional(
         seq(

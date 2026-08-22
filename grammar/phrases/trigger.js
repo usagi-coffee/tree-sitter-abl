@@ -6,8 +6,6 @@ export default ({ kw }) => ({
     prec.right(
       seq(
         ":",
-        // The block can be empty. A screen generator writes the header and the
-        // END for a widget it turned out to have no trigger for.
         repeat(
           seq(
             kw("ON"),
@@ -53,9 +51,6 @@ export default ({ kw }) => ({
       optional($.__persistent_trigger_tail),
       optional($._terminator_dot),
     ),
-  // The procedure is named, not computed from an expression: that one reaches
-  // widget_qualified_name, whose separator is IN, and it would then swallow the
-  // `IN THIS-PROCEDURE` that follows.
   __persistent_trigger_procedure: ($) =>
     choice(
       $._identifier_or_qualified_name,

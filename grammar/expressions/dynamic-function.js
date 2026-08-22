@@ -1,8 +1,4 @@
 export default ({ kw }) => ({
-  // DYNAMIC-FUNCTION ( function-name [ IN proc-handle ] [ , parameter ]... )
-  //
-  // The IN clause inside the parentheses is what sets this apart from a plain
-  // call, and it is why the generic function_call rule could not carry it.
   dynamic_function_call: ($) =>
     seq(
       kw("DYNAMIC-FUNCTION"),
@@ -13,9 +9,6 @@ export default ({ kw }) => ({
       ")",
     ),
 
-  // Spelled out rather than reusing the expression rule: that one reaches
-  // widget_qualified_name, whose separator is IN, and it would then swallow the
-  // IN clause that follows.
   __dynamic_function_name: ($) =>
     choice(
       $.__dynamic_function_atom,

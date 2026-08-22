@@ -119,16 +119,6 @@ export default ({ kw }) => ({
       ),
     ),
 
-  // The counter can be named by a macro too: `DO {&PREFIX}I = 1 TO 16:`.
-  //
-  // The counter can be named by a macro too: `DO {&PREFIX}I = 1 TO 16:`.
-  //
-  // Kept to a bare name at this rule, which FOR and REPEAT read. The wider form
-  // -- `DO tt.idx = 1 TO 10:`, `DO cpt[n] = 1 TO 10:` -- is in
-  // `__do_loop_phrase`, and widening it here instead was measured: it puts a
-  // qualified name where `record_phrase` is live, and the resulting ambiguity
-  // with `function_call` on the opening parenthesis would fire on every
-  // `name(...)` in a record context, which is far too hot a path to split.
   _loop_phrase: ($) =>
     seq(
       field("variable", choice($.identifier, $.macro_concatenated_name)),
@@ -167,9 +157,6 @@ export default ({ kw }) => ({
         kw("CONVERT"),
         repeat(
           choice(
-            // The code page is usually a literal, but reading it off the
-            // session -- `CONVERT TARGET SESSION:CPINTERNAL` -- is how a
-            // program keeps the file in whatever encoding it is running in.
             seq(kw("TARGET"), field("target", $._codepage_name)),
             seq(kw("SOURCE"), field("source", $._codepage_name)),
           ),
@@ -227,9 +214,6 @@ export default ({ kw }) => ({
       repeat($.__temp_table_field_option),
     ),
 
-  // An index name is not a data symbol: `INDEX #ep1` and `INDEX 1ep` compile,
-  // while `FIELD #f` and `TEMP-TABLE #tt` are error 257. It takes the routine
-  // name's initials, minus the dash -- see `_unquoted_name_initial`.
   _table_index: ($) =>
     seq(
       kw("INDEX"),
@@ -325,11 +309,6 @@ export default ({ kw }) => ({
     ),
   _alert_box_after_type: ($) =>
     choice(seq($._alert_buttons_phrase, optional($._alert_box_title)), $._alert_box_title),
-  // The title bar takes a character expression, and a translated caption is the
-  // usual way to write one: `TITLE Translate("Modified",-2,"") + " " +
-  // CAPS(tabName)`. Both the call and the concatenation around it are spelled
-  // out rather than reaching for the expression rule -- an operator there
-  // cannot be told apart from one continuing the message text.
   _alert_box_title: ($) => seq(kw("TITLE"), field("title", $._alert_box_title_value)),
   _alert_box_title_value: ($) =>
     choice($._alert_box_title_atom, alias($._alert_box_title_concatenation, $.binary_expression)),
@@ -354,12 +333,6 @@ export default ({ kw }) => ({
       ),
     ),
 
-  // A numeric picture needs no quotes: `FIELD Indice AS INTEGER FORMAT 999`
-  // is what the schema-derived definitions carry.
-  // `FORMAT 99/99/99` -- a date picture written without quotes, which is how
-  // generated screens spell it. Unquoted it would otherwise lex as division.
-  // The token is deliberately narrow: digit groups separated by slashes, so it
-  // can only ever match a picture and never an ordinary quotient.
   _format_string: ($) =>
     seq(
       kw("FORMAT", { offset: 4 }),

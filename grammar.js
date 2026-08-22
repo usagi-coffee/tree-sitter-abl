@@ -17,8 +17,6 @@ const COMPARISON_OPERATORS = [
   "<=",
   kw("BEGINS"),
   kw("MATCHES"),
-  // Word-index comparison: `FOR EACH wordidx WHERE wordidx.keywords CONTAINS
-  // term`. It sits with BEGINS and MATCHES, the other word operators.
   kw("CONTAINS"),
   kw("EQ"),
   kw("NE"),
@@ -71,8 +69,6 @@ const SYSTEM_HANDLE_WORDS = [
   "THIS-PROCEDURE",
 ];
 
-// Pieces of `macro_concatenated_name`, kept apart so the alternation stays
-// readable: a macro reference, and the characters a name is made of.
 const MACRO = `\\{(?:&[0-9A-Za-z_-]+|[0-9A-Za-z_-]+)\\}`;
 const NAME_CHARS = `[\\p{L}\\p{N}_\\-&#%$]`;
 const MACRO_CONCATENATED_NAME = new RegExp(
@@ -224,10 +220,6 @@ export default grammar({
           $.boolean_literal,
           $.preprocessor_name,
           $.argument_reference,
-          // `{lib/compare.i DATE IN < DATE}` -- an include argument is raw
-          // text, and this one hands the include a bare comparison operator to
-          // drop into `RETURN (v1 {3} v2)`. Spelled out rather than left to a
-          // catch-all, so a stray token in an argument list still fails.
           alias($.__include_operator_argument, $.comparison_operator),
         ),
       __include_operator_argument: ($) => choice("<>", ">=", "<=", "=", ">", "<"),
@@ -296,20 +288,11 @@ export default grammar({
       __include_file_target: ($) => choice($.include_file_path, $.argument_reference),
       include_file_path: ($) =>
         seq(optional($.preprocessor_name), alias($.__include_file_name, $.identifier)),
-      // `!` separates a procedure library from the member inside it, as in
-      // `{h!Api.i}`, and it is a legal file-name character besides.
-      // A macro can sit inside the path too -- `{strings{&Slash}strings.i}` picks the
-      // separator at compile time -- so it is part of the same token. The name still
-      // has to start on a path character, which leaves a leading macro to the
-      // preprocessor_name that already handles it.
       __include_file_name: ($) =>
         /[A-Za-z0-9_!\\/.-](?:[A-Za-z0-9_!\\/.-]|\{&[0-9A-Za-z_-]+\})*\.[A-Za-z][A-Za-z0-9]*/,
 
       // Constants
-      // A macro alone on its line expands to whole statements, terminator included,
-      // so none follows it in the source. It outranks `{` to win in statement
-      // position; anywhere else `{` still opens a preprocessor_name. It is
-      // aliased to `constant`, which is why no rule of that name is needed.
+      // Must outrank `{` only when a macro occupies an entire statement line.
       __macro_statement: ($) => token(prec(2, /\{&[^}\r\n]+\}[ \t]*\r?\n/)),
       preprocessor_name: ($) =>
         prec(
@@ -357,12 +340,8 @@ export default grammar({
       opsys_file: ($) => token(/(?:\.{1,2})?\/[A-Za-z0-9_.\-/~]*[A-Za-z0-9_\-/]/),
 
       // Types
-      // A generic takes as many type arguments as it declares, and each of them
-      // can itself be generic: `Dictionary<CHARACTER, System.Object>`.
       generic_type: ($) =>
         seq($._simple_type_name, "<", $._type_name, repeat(seq(",", $._type_name)), ">"),
-      // A data type can be assembled from a macro too: `AS {&longchar}CHAR`
-      // selects CHARACTER or LONGCHAR depending on how the file was compiled.
       _simple_type_name: ($) =>
         choice(
           $.scoped_name,
@@ -385,9 +364,6 @@ export default grammar({
       _identifier_or_access: ($) =>
         choice($._identifier_or_qualified_name, $.array_access, $.object_access),
       _identifier_or_access_or_call: ($) => choice($._identifier_or_access, $.function_call),
-      // A name is assembled at compile time from macros and the text around
-      // them. The macro may lead -- `{&PREFIX}TITLE` -- but a name character has
-      // to follow it, otherwise the text is a plain macro reference.
       macro_concatenated_name: ($) => token(MACRO_CONCATENATED_NAME),
 
       _widgets: ($) =>
@@ -476,8 +452,6 @@ export default grammar({
           $.preprocessor_name,
           $.scoped_name,
         ),
-      // Generated screens reach their widgets through a macro, as in
-      // `FRAME {&FRAME-NAME}:PARENT`, so the name can be either.
       _object_access_widget_prefix: ($) =>
         seq(
           field("widget", alias($._widgets, $.identifier)),
@@ -490,14 +464,6 @@ export default grammar({
             field("name", $._identifier_or_qualified_name),
           ),
         ),
-      // `BUFFER b:ATTACH-DATA-SOURCE (DATA-SOURCE src:HANDLE, ?, ?).` compiles:
-      // a data source is named by its keyword the same way a buffer or a
-      // temp-table is, and only those two were read here.
-      //
-      // STREAM belongs in this list too -- `x = STREAM s:HANDLE.` compiles --
-      // but adding it makes `INPUT STREAM s` ambiguous with an INPUT expression
-      // followed by a stream handle, which needs a declared conflict rather
-      // than a widened list.
       __object_access_handle_type: ($) =>
         prec(
           -1,
@@ -519,9 +485,7 @@ export default grammar({
       _object_access_expression_left: ($) =>
         choice($.function_call, $.parenthesized_expression, $.new_expression, $.array_access),
 
-      // Left-associative so `Pkg.Model::A::B` reads as one name rather than
-      // nesting: once the tail can also be reached from the object-access side,
-      // the repeat has two ways to group and tree-sitter asks which.
+      // Preserve a flat tree for chained .NET names such as `Pkg::Type::Member`.
       scoped_name: ($) => prec.left(seq(field("left", $.identifier), $.__scoped_name_tail)),
       __scoped_name_tail: ($) =>
         repeat1(
@@ -531,10 +495,6 @@ export default grammar({
       qualified_name: ($) => seq(field("left", $._qualified_name_left), $.__qualified_name_tail),
       __qualified_name_tail: ($) =>
         repeat1(seq($._namedot, field("right", alias($._identifier_immediate, $.identifier)))),
-      // INTERFACE is unreserved and databases use it as a table name. Without it
-      // here, `interface.ndos` is not a qualified name: the dot ends the
-      // statement and the rest of the line becomes another one, with no error
-      // node to show for it. _identifier_or_qualified_name already aliases it.
       _qualified_name_left: ($) =>
         choice(
           $.macro_concatenated_name,
@@ -543,9 +503,6 @@ export default grammar({
           alias(kw("INTERFACE"), $.identifier),
         ),
 
-      // `System.Windows.Forms.Control+ControlCollection` -- a nested .NET type
-      // is reached off a qualified name, never off a bare one, so requiring an
-      // identifier to the left of `+` meant the form never parsed in practice.
       nested_type_name: ($) =>
         seq(
           field("left", choice($.qualified_name, $.identifier)),
@@ -572,9 +529,7 @@ export default grammar({
       // Callables
       arguments: ($) => seq($.__arguments_prefix, optional($._argument_list), ")"),
       __arguments_prefix: ($) => "(",
-      // A COM automation method takes its optional parameters by position, and
-      // the ones you do not pass are left empty: `nodes:ADD(,,"A", label, 1)`.
-      // The list still cannot be empty, so `f()` keeps one reading.
+      // COM calls use empty comma-delimited slots for omitted positional arguments.
       _argument_list: ($) =>
         choice(
           seq($.argument, repeat(seq(",", optional($.argument)))),
@@ -590,30 +545,18 @@ export default grammar({
           choice(
             seq(
               choice(kw("TABLE"), kw("BUFFER"), kw("TABLE-HANDLE"), kw("DATASET-HANDLE")),
-              // `STRING(BUFFER bufParam:BUFFER-FIELD(ENTRY(i,l)))` -- here BUFFER
-              // opens an expression whose method is called, not a parameter
-              // being passed, but the keyword is read first either way and the
-              // call was left with nowhere to attach. Outside an argument list
-              // the same text parses, which is what made the gap so narrow.
               field(
                 "name",
                 choice(
                   $._identifier_or_qualified_name,
                   $.object_access,
                   $.function_call,
-                  // `x = STRING(BUFFER b:NAME + "y").` -- the reference is an
-                  // operand here, not a parameter being passed, but BUFFER is
-                  // read as the keyword either way and the rest of the
-                  // expression was then left with nowhere to go.
                   $.binary_expression,
                 ),
               ),
             ),
             field("name", $._expression),
           ),
-          // `DYNAMIC-FUNCTION("f" IN h:PARENT)`, `IN pH[1]`, `IN (h)`,
-          // `IN WIDGET-HANDLE(x)` -- the clause takes a handle expression, and
-          // only a bare or qualified name was read.
           optional(
             seq(
               kw("IN"),
@@ -621,13 +564,6 @@ export default grammar({
                 "in_handle",
                 choice(
                   $._identifier_or_qualified_name,
-                  // A bare system handle -- `IN THIS-PROCEDURE`, `IN SESSION`,
-                  // `IN ACTIVE-WINDOW`. It has to be listed in its own right:
-                  // before object_access appeared here the word simply lexed as
-                  // an identifier, but object_access makes the system-handle
-                  // token valid at this position, and its higher precedence
-                  // then wins and demands a `:` that never comes. Omitting it
-                  // silently breaks the commonest spelling of the clause.
                   $.system_handle_identifier,
                   $.object_access,
                   $.array_access,
@@ -669,14 +605,10 @@ export default grammar({
           ),
           $.__widget_qualified_name_separator,
           $._widgets,
-          // Generated screens name the frame through a macro here too:
-          // `SELF:BGCOLOR = brlib:BGCOLOR IN FRAME {&FRAME-NAME}.`
           field("widget", choice($.identifier, $.preprocessor_name)),
         ),
       __widget_qualified_name_separator: ($) => kw("IN"),
 
-      // A generated screen names its window through a macro, as in
-      // `VIEW FRAME fr IN WINDOW {&WINDOW-NAME}.`
       _window_handle: ($) =>
         choice(
           $._identifier_or_qualified_name,
@@ -689,30 +621,9 @@ export default grammar({
 
       // Identifiers
       // BE CAREFUL MODIFYING HERE, IDENTIFIER ORDER FOR SOME REASON MATTERS!
-      // `!` is a name character like `#`, `%` and `$`. It is what separates a
-      // procedure library from the routine inside it, as in `RUN !SelCrit`,
-      // and the same spelling turns up in include names.
       identifier: ($) => token(/[_\p{L}][\p{L}\p{N}_\-&#%$!]*/i),
 
-      // A routine name may open with a character a data symbol may not. The
-      // compiler enters the two under different rules: a data symbol whose
-      // initial is not a letter is error 257, while FUNCTION !Foo, PROCEDURE
-      // !Bar, RUN !Bar and !Foo("a") all compile. Only the initial differs, so
-      // this token covers that case alone and can never match what `identifier`
-      // matches -- widening `identifier` instead would relax the data contexts,
-      // which are correct today.
-      //
-      // The compiler also accepts `&`, a digit, `*`, `/` and `+` as the
-      // initial. They are left out. Real code uses `!` almost
-      // exclusively, and each of the others costs more than it is worth here:
-      // a digit cannot be told from a number literal, and `&` is how a named
-      // include argument opens -- allowing it makes `{f.i &name="x"}` lex as
-      // one name and lose the argument (measured: two corpus tests).
-      // The qualified form is here because the compiler takes it and PROCEDURE
-      // and RUN already read it: `FUNCTION a.b RETURNS CHARACTER ():` compiles.
-      // A dot inside a routine name is not a token question at all -- it is the
-      // qualified-name rule, which the other two positions reach and this one
-      // did not, which is why the four positions disagreed on `.` alone.
+      // Routine names accept initials and operators that remain illegal in data identifiers.
       _routine_name: ($) =>
         choice(
           $.identifier,
@@ -722,58 +633,13 @@ export default grammar({
         ),
       __symbolic_routine_name: ($) => token(/[!#$%][\p{L}\p{N}_\-&#%$!]*/i),
 
-      // A routine name may also open on a digit: `PROCEDURE 4-ITEM-CODE-lookup:`
-      // and `RUN 6-FIXED-WEIGHT-calc(...)`. A letter is required somewhere after
-      // the digits so the token can never be a number -- `4` and `4-5` do not
-      // match, and `4 - 5` still reads as a subtraction. It is wired only where
-      // real code needs it, the PROCEDURE name and the RUN target, and
-      // deliberately not into the head of a call, where it would be free to
-      // take `4-ITEMVAR` out of an expression.
       __numeric_routine_name: ($) => token(/[0-9][\p{N}\-]*[\p{L}][\p{L}\p{N}_\-&#%$!]*/i),
 
-      // `PROCEDURE a*b :`, `FUNCTION a+b RETURNS ...`, `INDEX a/b f1` compile:
-      // `*`, `+` and `/` are name characters in a routine name, though not in a
-      // data symbol.
-      //
-      // They cannot be added to `identifier`, and this is the whole difficulty:
-      // `a*b` written without spaces would then lex as one name and take the
-      // multiplication away. The token below requires at least one of the three,
-      // so it can never match what `identifier` matches, and it is wired only
-      // where a routine or index name is read -- never into `function_call`,
-      // which is reached from every expression. tree-sitter only offers a token
-      // in states where the grammar says it is valid, so at `x = a*b` the token
-      // is not a candidate at all and the arithmetic reading is untouched.
       __operator_routine_name: ($) =>
         token(/[_\p{L}][\p{L}\p{N}_\-&#%$!]*[*+\/][\p{L}\p{N}_\-&#%$!*+\/]*/i),
 
-      // `PROCEDURE -REPORT :` and `RUN -REPORT.` compile. A letter is required
-      // straight after the dash so the token can never be a negative number,
-      // and it is wired only where a routine name is read -- never at the head
-      // of a call, where a leading `-` is subtraction.
       __dash_routine_name: ($) => token(/-[\p{L}][\p{L}\p{N}_\-&#%$!]*/i),
 
-      // The three tokens above are one class: the initials a routine name may
-      // take that `identifier` cannot express. The compiler enters a routine
-      // name under a rule a data symbol does not share -- `DEFINE VARIABLE !x`
-      // is error 257 while `PROCEDURE !x` compiles -- and an index name follows
-      // the routine rule rather than the data one: `INDEX #ep1`, `INDEX 1ep`
-      // and `INDEX -ep1` all compile, while `FIELD #f` and `TEMP-TABLE #tt` are
-      // error 257. An index name is therefore a third class, not a data symbol.
-      //
-      // Grouped rather than restated at each position because the tokens have
-      // to be shared anyway: a second copy of one of these regexes would match
-      // the same text at the same length and compete with the first in the
-      // lexer. The plain name is deliberately left out, so that each position
-      // can pair this with whatever base it already reads -- a qualified name
-      // for PROCEDURE and RUN, a bare identifier for an index.
-      //
-      // Split in two because the dash is not safe everywhere. `#x`, `$x`, `%x`,
-      // `!x` and `4-x` open with something no operator starts with, so they can
-      // be read wherever a name is expected. `-x` cannot: where an expression is
-      // also reachable the token competes with subtraction and takes `a -b`
-      // apart. An index name sits in a table body, next to FIELD initial values
-      // that are expressions, so it gets the safe half only -- measured: adding
-      // the dash there stops the parser returning any output at all.
       _unquoted_name_initial: ($) =>
         choice(
           alias($.__symbolic_routine_name, $.identifier),
@@ -787,34 +653,11 @@ export default grammar({
           $.identifier,
         ),
       _label: ($) => seq(field("label", $.identifier), alias($._colon, ":")),
-      // The name after a name dot or colon is a field, and a field is a data
-      // symbol like any other: the compiler takes `&`, `#`, `$` and `%` inside
-      // one, so `tt.FIELD#` compiles while this rule rejected it. Only `%` was
-      // allowed here, which is narrower than `identifier` for no reason.
-      //
-      // Deliberately without `!`, which `identifier` above does accept: `!` is
-      // legal only in a routine name. In a data symbol the compiler raises
-      // error 274, so widening this rule to match `identifier` exactly would
-      // accept what the compiler rejects.
+      // `!` is excluded after `.` and `:` because it is legal only in routine names.
       _identifier_immediate: ($) => token.immediate(/[_\p{L}][\p{L}\p{N}_\-&#%$]*/i),
       _alias_name: ($) => choice($.identifier, $.string_literal, $._value_expression),
       _os_filename: ($) => choice($.string_literal, $._identifier_or_access_or_call),
       parenthesized_identifier: ($) => seq("(", $.identifier, ")"),
-      // `pHandles[1]::custnum`, `entity:hBuf::channel` -- a class member
-      // reached off a subscript or off an attribute chain rather than off a
-      // bare name, which is all `scoped_name` accepts to its left.
-      //
-      // Taken here rather than by widening that receiver: `scoped_name` is
-      // already reachable from `_array_target` and from the object-access left,
-      // so putting `array_access` there closes a cycle and the grammar stops
-      // generating. Handling the segment in the tail reaches both forms.
-      //
-      // It matters beyond the parse failure. The scanner only emits `::` where
-      // the parser says the token is valid, so with no reading available the
-      // two colons fell back to one: inside a FOR EACH that loose colon opened
-      // the block in the middle of the WHERE clause, and outside a query
-      // `b[1]::c` read as an attribute access with no error at all. The member
-      // keeps its own field so the two operators stay distinguishable.
       _object_access_tail: ($) =>
         repeat1(
           choice(

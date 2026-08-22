@@ -18,8 +18,6 @@ export default ({ kw }) => ({
         alias($.__for_while_phrase, $.while_phrase),
         optional(alias(kw("TRANSACTION", { offset: 5 }), $.transaction)),
       ),
-      // The reference sorts before TRANSACTION, but the compiler takes the
-      // reverse order too: `FOR EACH t EXCLUSIVE-LOCK TRANSACTION BREAK BY t.k:`
       seq(alias(kw("TRANSACTION", { offset: 5 }), $.transaction), repeat($.__for_sort_clause)),
     ),
   __for_sort_clause: ($) =>
@@ -31,16 +29,7 @@ export default ({ kw }) => ({
     ),
   __for_record_or_variables: ($) => choice($.__for_record_phrase_section, $._loop_phrase),
   __for_record_phrase_section: ($) =>
-    seq(
-      $.__for_record_phrases,
-      repeat($.__for_sort_clause),
-      // The syntax box allows a counter after the records, and code that
-      // commits in batches uses it: `FOR EACH t WHERE ... NO-LOCK
-      // cpttrans = 1 TO 1000:` stops the block after a thousand records
-      // instead of holding the whole table. It goes last, after the sort
-      // clauses, so that its own BY step cannot be read as another one.
-      optional($._loop_phrase),
-    ),
+    seq($.__for_record_phrases, repeat($.__for_sort_clause), optional($._loop_phrase)),
 
   __for_record_phrases: ($) => seq($.__for_record, repeat(seq(",", $.__for_record))),
 

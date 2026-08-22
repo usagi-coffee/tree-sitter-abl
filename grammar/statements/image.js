@@ -1,12 +1,6 @@
 export default ({ kw }) => ({
   image_definition: ($) => seq($.__image_prefix, $._terminator),
 
-  // The syntax box gives the options in a fixed order, ending on the stretch
-  // phrase and TRANSPARENT. The AppBuilder does not follow it -- it writes
-  // `IMAGE img TRANSPARENT SIZE 5.43 BY 1.5` and `IMAGE imgcli STRETCH-TO-FIT
-  // SIZE 42.57 BY 7.29`, both of which compile. One group covers every order
-  // the compiler accepts and costs less than the chain of nested optionals it
-  // replaces.
   __image_prefix: ($) =>
     seq(
       $._define_private_prefix,

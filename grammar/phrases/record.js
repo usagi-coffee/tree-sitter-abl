@@ -11,11 +11,6 @@ export default ({ kw }) => ({
       $.preprocessor_name,
     ),
 
-  // OUTER-JOIN is deliberately absent here. It is legal only inside OPEN
-  // QUERY -- anywhere else the compiler answers "JOIN can only be used in
-  // OPEN QUERY (2833)" -- and this phrase is shared with FOR and with DO
-  // PRESELECT, which would then accept what the compiler rejects. The OPEN
-  // QUERY statement carries its own record phrase and takes it there.
   __record_option: ($) =>
     choice(
       seq(kw("OF"), field("of", $._identifier_or_qualified_name)),
@@ -33,8 +28,6 @@ export default ({ kw }) => ({
         repeat(seq(kw("AND"), field("field", $.__record_using_field))),
       ),
       $._lock_option,
-      // SHARE and EXCLUSIVE are the abbreviated lock keywords, spelled the same
-      // way the FIND statement already accepts them.
       alias(kw("SHARE"), $.share),
       alias(kw("EXCLUSIVE"), $.exclusive),
       alias(kw("NO-PREFETCH"), $.no_prefetch),
@@ -49,9 +42,6 @@ export default ({ kw }) => ({
   __record_field_list: ($) =>
     choice(
       seq(
-        // `FOR FIRST t FIELDS WHERE ROWID(t) = r NO-LOCK:` -- FIELDS with no
-        // list at all compiles, and means the record is read without its
-        // fields. The list was required.
         seq(
           kw("FIELDS", { alias: "FIELD", offset: 5 }),
           optional($.__record_parenthesized_field_names),

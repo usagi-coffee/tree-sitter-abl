@@ -66,8 +66,6 @@ export default ({ kw }) => ({
   __temp_table_use_index_phrase: ($) =>
     seq(
       kw("USE-INDEX"),
-      // Same class as the index definition: a name that can be defined has to
-      // be referenceable.
       field("index", choice($.identifier, $._unquoted_name_initial)),
       optional(alias($.__temp_table_as_primary_phrase, $.as_primary_phrase)),
     ),

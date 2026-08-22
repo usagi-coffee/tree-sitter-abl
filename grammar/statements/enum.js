@@ -4,8 +4,6 @@ export default ({ kw }) => ({
   __enum_prefix: ($) =>
     seq(
       kw("ENUM"),
-      // An enum carries its package, exactly as a class does:
-      // `ENUM Pkg.App.Widgets.SelectionKindEnum :`
       field("name", $._type_name),
       optional(alias(kw("FLAGS"), $.flags)),
       alias($._colon, ":"),

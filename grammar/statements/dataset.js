@@ -13,12 +13,6 @@ export default ({ kw }) => ({
     seq(
       kw("DATA-RELATION"),
       $.__dataset_relation_head,
-      // The syntax box writes the field mapping without brackets, but the prose
-      // under it does not: "You can define a query for the data source of the
-      // child buffer, or supply custom logic in response to FILL events ... In
-      // these cases, the field-mapping-phrase is not used." So
-      // `DATA-RELATION r FOR tt, b NESTED.` compiles, and required here it did
-      // not parse.
       optional(
         seq(
           kw("RELATION-FIELDS"),

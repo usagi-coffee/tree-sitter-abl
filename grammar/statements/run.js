@@ -45,14 +45,7 @@ export default ({ kw }) => ({
       alias(seq(kw("SINGLE-RUN"), optional($.__run_persistence_set_tail)), $.single_run),
       alias(seq(kw("SINGLETON"), optional($.__run_persistence_set_tail)), $.singleton),
     ),
-  // The handle is often one slot of an array of window handles, as in
-  // `RUN winctrl_ml PERSISTENT SET hWindow[1] (...)`. The subscript is
-  // spelled out rather than reusing array_access: that one also starts on an
-  // object access, and `SET h (...)` would then read as a call.
   __run_persistence_set_tail: ($) => seq(kw("SET"), field("handle", $.__run_persistence_handle)),
-  // The handle may also be a field of a record rather than a variable, and the
-  // two combine: `PERSISTENT SET tz.hdl-obj[2] (a,b)` compiles. Qualified and
-  // subscripted each worked on their own; only together did they have no path.
   __run_persistence_handle: ($) =>
     choice(
       $._identifier_or_qualified_name,
@@ -69,21 +62,11 @@ export default ({ kw }) => ({
       alias($.__run_procedure_path, $.procedure_name),
       $.macro_concatenated_name,
       $.identifier,
-      // `RUN -REPORT.` compiles, and the definition already read the same name:
-      // only the call site was left out, so a routine that could be declared
-      // could not be called.
       $._routine_name_initial,
-      // `RUN a*b.` and `RUN a+b.` compile. The `/` form already parses through
-      // the path reading below, which is why that one column of the defect
-      // table looked inconsistent.
       alias($.__operator_routine_name, $.identifier),
       $.qualified_name,
       alias($.__run_handle_method, $.object_access),
     ),
-  // `RUN THIS-OBJECT:MakeBreak (pKey, ...)` -- a class running one of
-  // its own methods through the object handle. Only a system handle opens the
-  // form: real code writes THIS-OBJECT and nothing else, and taking a general
-  // object access here would let any `a:b` be a RUN target.
   __run_handle_method: ($) =>
     seq(
       field("left", $.system_handle_identifier),
@@ -92,8 +75,6 @@ export default ({ kw }) => ({
     ),
   // A procedure reference given as a path, with the .p or .r extension left
   // implicit: RUN Erp\Model\Vente\ErpTrt. Both separators occur in practice.
-  // The extension can also be spelled out -- `RUN export\libexcel.i` runs an
-  // include file that was compiled on its own.
   __run_procedure_path: ($) =>
     token(
       /[A-Za-z_][A-Za-z0-9_-]*(?:[/\u005C][A-Za-z_][A-Za-z0-9_-]*)+(?:\.[A-Za-z][A-Za-z0-9]*)?/,
@@ -126,11 +107,6 @@ export default ({ kw }) => ({
       optional(seq(kw("EVENT-HANDLER-CONTEXT"), field("context", $.__run_context_value))),
     ),
 
-  // The context is a handle, and a handle can be chosen at the call site:
-  // `RUN ExecuterFonctionV4 IN (IF vSeparee THEN hSeparee ELSE g-hgpao) (...)`.
-  // It can also be looked up at run time, which is what the parenthesis-anchored
-  // DYNAMIC-FUNCTION allows here where a bare function_call could not: after
-  // `RUN p IN h (a, b)` the parentheses belong to the RUN, not to h.
   __run_context_value: ($) =>
     choice(
       $.dynamic_function_call,

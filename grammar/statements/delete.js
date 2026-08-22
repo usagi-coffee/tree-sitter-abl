@@ -20,16 +20,8 @@ export default ({ kw }) => ({
           $._identifier_or_array_access,
           $.system_handle_identifier,
           $.object_access,
-          // A member reached with `::`, as in `DELETE OBJECT pBufTT::Liste.`
           $.scoped_name,
           $.parenthesized_expression,
-          // A handle produced by a call rather than named outright:
-          // `DELETE OBJECT WIDGET-HANDLE (ENTRY (i, listeHe)).` and
-          // `DELETE OBJECT h:BUFFER-FIELD("nom").` both compile. The list above
-          // had grown as far as the attribute and stopped there, so a handle
-          // that comes back from a function or a method had no reading --
-          // while DELETE PROCEDURE and DELETE WIDGET, which take a full
-          // expression, accepted the same text.
           $.function_call,
         ),
       ),

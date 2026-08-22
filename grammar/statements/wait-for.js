@@ -13,8 +13,6 @@ export default ({ kw }) => ({
         $.__wait_for_dotnet_call,
       ),
     ),
-  // The .NET form of the statement blocks on a call rather than an event:
-  // `WAIT-FOR ColorPicker:ShowDialog().` It has its own reference entry.
   __wait_for_dotnet_call: ($) =>
     seq(
       field("method", $.function_call),

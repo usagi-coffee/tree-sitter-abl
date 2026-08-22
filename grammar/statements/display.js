@@ -97,10 +97,6 @@ export default ({ kw }) => ({
       $._no_error_terminator,
     ),
 
-  // The field a value is displayed against can be one element of an array:
-  // `DISPLAY dec(w[1]:SCREEN-VALUE) @ tardeca.px_refa[x]`. The subscript is
-  // spelled out rather than reusing array_access, which also starts on a call
-  // and cannot be told apart from the display item before it.
   __display_base_field: ($) =>
     choice($._identifier_or_qualified_name, alias($.__display_base_element, $.array_access)),
   __display_base_element: ($) =>

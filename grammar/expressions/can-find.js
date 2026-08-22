@@ -46,10 +46,7 @@ export default ({ kw }) => ({
             optional(alias($.__record_query_lock_phrase, $.no_lock)),
             optional($.__record_query_use_index),
           ),
-          seq(
-            $.__record_query_use_index,
-            optional(alias($.__record_query_lock_phrase, $.no_lock)),
-          ),
+          seq($.__record_query_use_index, optional(alias($.__record_query_lock_phrase, $.no_lock))),
         ),
       ),
       seq(

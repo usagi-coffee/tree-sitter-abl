@@ -94,9 +94,6 @@ export default ({ kw }) => ({
       seq(kw("TO"), field("to", $._expression)),
     ),
 
-  // The options sit on either side of the size, as they do in the shared
-  // editor phrase: `VIEW-AS EDITOR MAX-CHARS 700 SCROLLBAR-VERTICAL SIZE 74 BY 7`
-  // is what the AppBuilder writes.
   __format_editor_phrase: ($) =>
     prec.left(
       seq(
@@ -150,11 +147,7 @@ export default ({ kw }) => ({
       ")",
     ),
 
-  // A frame item is drawn as a radio set as readily as a variable is. The
-  // shared radio set phrase cannot serve here: it ends on an optional tooltip,
-  // and the format phrase around it takes a tooltip of its own, so the two
-  // readings of one TOOLTIP are ambiguous. This copy stops at the size and
-  // leaves the tooltip to the format phrase.
+  // Local VIEW-AS copies omit TOOLTIP to avoid competing with the enclosing format phrase.
   __format_radio_set_phrase: ($) =>
     seq(
       kw("RADIO-SET"),
@@ -165,9 +158,6 @@ export default ({ kw }) => ({
     ),
   __format_radio_set_orientation: ($) =>
     choice(seq(kw("HORIZONTAL"), optional(kw("EXPAND"))), kw("VERTICAL")),
-  // The pairs are literals, not the shared list-item pair: that one is built
-  // from expressions, and a comma-separated list of those cannot be told apart
-  // from the frame items around it.
   __format_radio_set_buttons: ($) =>
     seq($.__format_radio_set_pair, repeat(seq(",", $.__format_radio_set_pair))),
   __format_radio_set_pair: ($) =>
@@ -184,14 +174,6 @@ export default ({ kw }) => ({
       $.boolean_literal,
     ),
 
-  // A frame item is drawn as a combo box as readily as a variable is, and the
-  // shared combo box phrase cannot serve here for the same reason the shared
-  // radio set could not: it carries a tooltip, and so does the format phrase
-  // around it, so one TOOLTIP has two readings. This copy leaves the tooltip
-  // out. Its item lists are literals, again as the radio set buttons are.
-  //
-  // Every option below is one real code writes, except MAX-CHARS, which is
-  // left out for that reason.
   __format_combo_box_phrase: ($) =>
     seq(
       field("widget", kw("COMBO-BOX")),

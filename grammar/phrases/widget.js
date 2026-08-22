@@ -8,18 +8,11 @@ export default ({ kw }) => ({
       seq(choice(kw("MENU"), kw("SUB-MENU")), field("menu", $.__widget_name)),
     ),
 
-  // Generated screens reach their widgets through a macro — `OF FRAME
-  // {&FRAME-NAME}`, `IN BROWSE {&BROWSE-NAME}` — so a name here can be either.
   __widget_name: ($) => choice($.identifier, $.preprocessor_name),
 
   __widget_handle: ($) =>
     seq(field("handle", choice($._identifier_or_qualified_name, $.preprocessor_name))),
 
-  // A bare name is a handle -- see the precedence that settles it against this
-  // rule. So neither field branch may also match a bare name: either FIELD
-  // introduces it, or IN FRAME qualifies it. With both parts optional the
-  // branch overlapped __widget_handle, the precedence took the handle, and
-  // `HIDE TBADR IN FRAME FR1` lost its IN clause.
   __widget_entry: ($) =>
     choice(
       seq(
@@ -31,9 +24,6 @@ export default ({ kw }) => ({
         field("field", $._identifier_or_array_access),
         seq(kw("IN"), kw("FRAME", { offset: 4 }), field("frame", $.__widget_name)),
       ),
-      // An array element is a widget on its own -- `APPLY "entry" TO TDEC[I]`.
-      // It is not a bare name, so it cannot be confused with __widget_handle
-      // and its qualifier stays optional.
       seq(
         field("field", $.array_access),
         optional(seq(kw("IN"), kw("FRAME", { offset: 4 }), field("frame", $.__widget_name))),
