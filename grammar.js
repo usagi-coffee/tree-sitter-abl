@@ -128,6 +128,9 @@ export default grammar({
     // macro, so it is made at parse time rather than by an associativity that
     // would fix one reading and lose the other.
     [$.__class_method_definition_prefix],
+    // Function definitions require parameter names, while prototypes may omit
+    // them. The forms diverge only after the closing parenthesis.
+    [$.__function_parameter, $.__function_definition_parameter],
 
     // DEFINE modifiers prefix conflicts
     // Conflicts approach has slightly better state reduction (~500) than doing it conflicts free

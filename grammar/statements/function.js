@@ -20,9 +20,9 @@ export default ({ kw }) => ({
           alias(kw("PROTECTED"), $.access_modifier),
           alias(kw("PUBLIC"), $.access_modifier),
         ),
-        optional(alias($.__function_parameters, $.parameters)),
+        optional(alias($.__function_definition_parameters, $.parameters)),
       ),
-      alias($.__function_parameters, $.parameters),
+      alias($.__function_definition_parameters, $.parameters),
     ),
   __function_compound_body: ($) =>
     seq(
@@ -81,51 +81,61 @@ export default ({ kw }) => ({
       ),
       ")",
     ),
-
+  __function_definition_parameters: ($) =>
+    seq(
+      "(",
+      optional(
+        seq(
+          alias($.__function_definition_parameter, $.parameter),
+          repeat(seq(",", alias($.__function_definition_parameter, $.parameter))),
+        ),
+      ),
+      ")",
+    ),
   __function_parameter: ($) =>
     seq(
       optional(field("direction", $._parameter_direction)),
       choice(
-        seq(
-          field("name", $.identifier),
-          $.__function_variable_type_phrase,
-          optional(alias(kw("NO-UNDO"), $.no_undo)),
-        ),
-        seq(
-          kw("BUFFER"),
-          field("buffer", $.identifier),
-          kw("FOR"),
-          field("table", $._identifier_or_qualified_name),
-        ),
-        // The syntax box spells it `TABLE FOR name [APPEND] [BIND] [BY-VALUE]`,
-        // like the DEFINE PARAMETER statement. FOR stays optional because a
-        // test already pins the shorter form.
-        seq(
-          kw("TABLE"),
-          optional(kw("FOR")),
-          field("table", $._identifier_or_qualified_name),
-          optional($.__function_table_options),
-        ),
-        seq(
-          kw("TABLE-HANDLE"),
-          field("table_handle", $.identifier),
-          optional($.__function_table_options),
-        ),
-        seq(
-          kw("DATASET"),
-          kw("FOR"),
-          field("dataset", $._identifier_or_qualified_name),
-          optional($.__function_table_options),
-        ),
-        seq(
-          kw("DATASET-HANDLE"),
-          field("dataset_handle", $.identifier),
-          optional($.__function_table_options),
-        ),
-        // A prototype states only the mode and data type of each parameter, so the
-        // name may be absent. Definition and prototype share every token up to the
-        // closing parenthesis, so one rule has to serve both.
+        $.__function_named_parameter_body,
         seq(optional(kw("CLASS")), field("type", $._type_name), optional($._extent_phrase)),
+      ),
+    ),
+  __function_definition_parameter: ($) =>
+    seq(optional(field("direction", $._parameter_direction)), $.__function_named_parameter_body),
+  __function_named_parameter_body: ($) =>
+    choice(
+      seq(
+        field("name", $.identifier),
+        $.__function_variable_type_phrase,
+        optional(alias(kw("NO-UNDO"), $.no_undo)),
+      ),
+      seq(
+        kw("BUFFER"),
+        field("buffer", $.identifier),
+        kw("FOR"),
+        field("table", $._identifier_or_qualified_name),
+      ),
+      seq(
+        kw("TABLE"),
+        optional(kw("FOR")),
+        field("table", $._identifier_or_qualified_name),
+        optional($.__function_table_options),
+      ),
+      seq(
+        kw("TABLE-HANDLE"),
+        field("table_handle", $.identifier),
+        optional($.__function_table_options),
+      ),
+      seq(
+        kw("DATASET"),
+        kw("FOR"),
+        field("dataset", $._identifier_or_qualified_name),
+        optional($.__function_table_options),
+      ),
+      seq(
+        kw("DATASET-HANDLE"),
+        field("dataset_handle", $.identifier),
+        optional($.__function_table_options),
       ),
     ),
 
