@@ -28,7 +28,7 @@ __my_statement_rule: ($) => ...,
 - The exported top-level rule should stay aligned with the statement name, e.g. `variable.js` should expose `variable_definition` and keep its internal helpers under `__variable_*`.
 - We do not reuse private rules between files but if reusing improves state counts it's allowed to convert a private rule into a shared rule and move it to `grammar.js`.
 - All statement-related modifiers, phrases, tunings that are not already part of core should be locally defined as `__<statement>_<rule>` rule and aliased to `$.<rule>`.
-- Use `npm run audit:naming` to find both local prefix mismatches and cross-file usage of private `__...` rules.
+- Use `bun run audit:naming` to find both local prefix mismatches and cross-file usage of private `__...` rules.
 
 
 ## Keywords
