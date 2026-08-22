@@ -494,14 +494,12 @@ export default grammar({
             alias(kw("STREAM"), $.identifier),
           ),
         ),
-      object_access: ($) =>
-        seq(
-          choice(
-            $._object_access_widget_prefix,
-            $._object_access_handle_prefix,
-            $._object_access_plain_prefix,
-          ),
-          $._object_access_tail,
+      object_access: ($) => seq($._object_access_prefix, $._object_access_tail),
+      _object_access_prefix: ($) =>
+        choice(
+          $._object_access_widget_prefix,
+          $._object_access_handle_prefix,
+          $._object_access_plain_prefix,
         ),
       _object_access_expression_left: ($) =>
         choice($.function_call, $.parenthesized_expression, $.new_expression, $.array_access),
