@@ -91,15 +91,14 @@ export default ({ kw }) => ({
   // would read that word as a screen field, this one reads it as the keyword it
   // is. Where both could apply the keyword wins, which is the point -- the ABL
   // reading of this text was never right.
-  sql_update_statement: ($) =>
+  sql_update_statement: ($) => seq(kw("UPDATE"), $.__sql_update_body, $._terminator),
+  __sql_update_body: ($) =>
     seq(
-      kw("UPDATE"),
       field("table", $._identifier_or_qualified_name),
       kw("SET"),
       alias($.__sql_update_assignment, $.assignment),
       repeat(seq(",", alias($.__sql_update_assignment, $.assignment))),
       optional($.__sql_where_clause),
-      $._terminator,
     ),
   __sql_update_assignment: ($) =>
     seq(field("column", $._identifier_or_qualified_name), "=", field("value", $._expression)),
