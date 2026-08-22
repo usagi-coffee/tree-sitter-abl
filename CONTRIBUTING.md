@@ -15,6 +15,11 @@ PARSER_C_SIZE_BYTES: <before> -> <after> (<delta>)
 Measure the values against the commit's actual base. Recalculate them after rebasing or
 merging instead of keeping deltas from an earlier base.
 
+If a rule was optimized into a less obvious form, mention in the commit description
+that the simpler form was measured and produced a more expensive parser.
+
+Run `bun run format` before committing.
+
 ## Tests
 
 Every commit should ideally include a test that covers the change.

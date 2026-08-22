@@ -25,3 +25,4 @@ instead. Ask before removing a test whose syntax appears unsupported or illegal.
 
 Treat every `(ERROR)` and `(MISSING)` node as a parsing failure that must be fixed.
 Never add an `(ERROR)` node to an expected syntax tree.
+Nodes like `terminator`, `terminator_dot` or rules prefixed with `_` (unless aliased) should never be visible in the syntax tree output.
