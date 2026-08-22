@@ -1,15 +1,21 @@
 export default ({ kw }) => ({
-  // The syntax box fixes the order MAX-VALUE then MIN-VALUE and makes both
-  // mandatory. The compiler takes either order, and takes neither: `VIEW-AS
-  // SLIDER` on its own compiles. AppBuilder writes MIN-VALUE first, so the
-  // spelled-out order rejected every slider it was given.
   slider_phrase: ($) =>
     seq(
       kw("SLIDER"),
-      repeat(
+      optional(
         choice(
-          seq(kw("MAX-VALUE"), field("max", $.number_literal)),
-          seq(kw("MIN-VALUE"), field("min", $.number_literal)),
+          seq(
+            kw("MAX-VALUE"),
+            field("max", $.number_literal),
+            kw("MIN-VALUE"),
+            field("min", $.number_literal),
+          ),
+          seq(
+            kw("MIN-VALUE"),
+            field("min", $.number_literal),
+            kw("MAX-VALUE"),
+            field("max", $.number_literal),
+          ),
         ),
       ),
       optional(choice(kw("HORIZONTAL"), kw("VERTICAL"))),
