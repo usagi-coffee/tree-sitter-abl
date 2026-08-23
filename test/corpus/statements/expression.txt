@@ -234,3 +234,26 @@ IF vRetour THEN Close().
       (function_call
         function: (identifier)
         (arguments)))))
+
+================================================================================
+ACCUM expression with a binary operand
+================================================================================
+
+x = ACCUM TOTAL Customer.Balance + Customer.CreditLimit.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (accum_expression
+      operation: (aggregate_phrase
+        operation: (aggregate_operation))
+      field: (binary_expression
+        (qualified_name
+          left: (identifier)
+          right: (identifier))
+        (qualified_name
+          left: (identifier)
+          right: (identifier))))))

@@ -20,7 +20,7 @@ export default ($) => [
     $.__underline_field,
     $.__call_argument,
     $.__put_control,
-    $.__accum_expression,
+    $.accum_expression,
     $.__frame_expression,
     $.__at_phrase_body,
     $.__display_when_expression,
