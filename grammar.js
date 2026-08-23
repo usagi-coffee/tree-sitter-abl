@@ -524,7 +524,8 @@ export default grammar({
         ),
 
       // Array
-      array_initializer: ($) => seq("[", optional($._expressions), "]"),
+      array_initializer: ($) => seq($.__array_initializer_prefix, "]"),
+      __array_initializer_prefix: ($) => seq("[", optional($._expressions)),
 
       array_access: ($) =>
         seq(
