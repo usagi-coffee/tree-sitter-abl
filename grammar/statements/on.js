@@ -120,7 +120,14 @@ export default ({ kw }) => ({
       seq(
         field("event", kw("DELETE")),
         kw("OF"),
-        choice($.__on_database_event_action, $.__on_delete_widget_action),
+        choice(
+          $.__on_database_event_action,
+          seq(
+            field("widget", alias($.__on_database_event_widget, $.widget_phrase)),
+            optional(alias(kw("ANYWHERE"), $.anywhere)),
+            $.__on_trigger_action,
+          ),
+        ),
       ),
       seq(field("event", $.__on_database_event), kw("OF"), $.__on_database_event_action),
     ),
@@ -129,12 +136,6 @@ export default ({ kw }) => ({
       field("object", $._identifier_or_qualified_name),
       optional($.__on_database_event_tail),
       choice($.__on_revert_action, $._statement),
-    ),
-  __on_delete_widget_action: ($) =>
-    seq(
-      field("widget", alias($.__on_database_event_widget, $.widget_phrase)),
-      optional(alias(kw("ANYWHERE"), $.anywhere)),
-      $.__on_trigger_action,
     ),
   __on_database_event_widget: ($) =>
     choice(
