@@ -1,5 +1,6 @@
 export default ({ kw }) => ({
-  query_tuning_phrase: ($) =>
+  query_tuning_phrase: ($) => seq($.__query_tuning_prefix, ")"),
+  __query_tuning_prefix: ($) =>
     seq(
       kw("QUERY-TUNING"),
       "(",
@@ -44,6 +45,5 @@ export default ({ kw }) => ({
           alias(kw("NO-SEPARATE-CONNECTION"), $.no_separate_connection),
         ),
       ),
-      ")",
     ),
 });
