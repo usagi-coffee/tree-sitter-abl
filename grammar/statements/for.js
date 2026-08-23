@@ -1,7 +1,7 @@
 export default ({ kw }) => ({
   for_statement: ($) => seq($.__for_statement_prefix, $._terminator),
 
-  __for_statement_prefix: ($) => seq(optional($._label), $.__for_body, kw("END")),
+  __for_statement_prefix: ($) => seq(optional($._label), $.__for_body, $._end_keyword),
 
   __for_body: ($) =>
     seq(

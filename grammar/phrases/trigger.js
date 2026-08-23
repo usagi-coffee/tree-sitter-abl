@@ -14,7 +14,7 @@ export default ({ kw }) => ({
             $.__trigger_action,
           ),
         ),
-        kw("END"),
+        $._end_keyword,
         optional(kw("TRIGGERS")),
       ),
     ),
@@ -40,7 +40,7 @@ export default ({ kw }) => ({
     ),
   __trigger_body_after_loop: ($) =>
     choice(seq($.__trigger_down_phrase, $.__trigger_body_block), $.__trigger_body_block),
-  __trigger_body_block: ($) => seq(":", repeat($._statement), kw("END"), "."),
+  __trigger_body_block: ($) => seq(":", repeat($._statement), $._end_keyword, "."),
   __trigger_down_phrase: ($) =>
     seq(kw("DOWN"), optional($._to_keyword), optional(field("down", $._expression))),
 

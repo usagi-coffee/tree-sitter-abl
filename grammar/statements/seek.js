@@ -6,7 +6,7 @@ export default ({ kw }) => ({
       kw("SEEK"),
       choice(kw("INPUT"), kw("OUTPUT"), $._stream_phrase),
       $._to_keyword,
-      choice(kw("END"), $._expression),
+      choice($._end_keyword, $._expression),
     ),
 
   seek_expression: ($) => seq($.__seek_expression_body, ")"),

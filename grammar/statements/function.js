@@ -28,7 +28,7 @@ export default ({ kw }) => ({
     seq(
       choice(alias($._colon, ":"), $._terminator),
       repeat($._statement),
-      kw("END"),
+      $._end_keyword,
       optional(kw("FUNCTION")),
     ),
 

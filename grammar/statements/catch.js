@@ -9,7 +9,7 @@ export default ({ kw }) => ({
         seq(kw("AS"), optional(kw("CLASS")), field("type", $._identifier_or_qualified_name)),
       ),
       $.body,
-      kw("END"),
+      $._end_keyword,
       optional(kw("CATCH")),
     ),
 });

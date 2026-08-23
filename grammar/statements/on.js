@@ -199,7 +199,7 @@ export default ({ kw }) => ({
       kw("CURSOR-RIGHT"),
       kw("CURSOR-UP"),
       kw("DELETE-CHARACTER"),
-      kw("END"),
+      $._end_keyword,
       kw("END-ERROR"),
       kw("ENDKEY"),
       kw("ENTER-MENUBAR"),

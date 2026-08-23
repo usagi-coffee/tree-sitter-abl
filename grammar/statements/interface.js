@@ -13,7 +13,7 @@ export default ({ kw }) => ({
     seq(
       choice(alias($._colon, ":"), $._terminator_dot),
       repeat(alias($.__interface_body_item, $.interface_body_item)),
-      kw("END"),
+      $._end_keyword,
       optional(kw("INTERFACE")),
     ),
 

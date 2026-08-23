@@ -1,7 +1,7 @@
 export default ({ kw }) => ({
   repeat_statement: ($) => seq($.__repeat_statement_prefix, $._terminator),
 
-  __repeat_statement_prefix: ($) => seq(optional($._label), $.__repeat_body, kw("END")),
+  __repeat_statement_prefix: ($) => seq(optional($._label), $.__repeat_body, $._end_keyword),
 
   __repeat_body: ($) =>
     seq(

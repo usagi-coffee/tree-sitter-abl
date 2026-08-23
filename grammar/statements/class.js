@@ -47,7 +47,7 @@ export default ({ kw }) => ({
           $.include_file_reference,
         ),
       ),
-      kw("END"),
+      $._end_keyword,
       optional(kw("CLASS")),
     ),
 
@@ -130,7 +130,7 @@ export default ({ kw }) => ({
 
   __class_destructor_body: ($) =>
     seq($.__class_compound_body, optional(choice(kw("DESTRUCTOR"), kw("METHOD"))), $._terminator),
-  __class_compound_body: ($) => seq(repeat($._statement), kw("END")),
+  __class_compound_body: ($) => seq(repeat($._statement), $._end_keyword),
 
   __class_destructor_parameters: ($) => seq("(", ")"),
 
@@ -172,7 +172,8 @@ export default ({ kw }) => ({
       ),
     ),
 
-  __class_property_accessor_body: ($) => seq(alias($._colon, ":"), repeat($._statement), kw("END")),
+  __class_property_accessor_body: ($) =>
+    seq(alias($._colon, ":"), repeat($._statement), $._end_keyword),
   __class_property_accessor_tail: ($) =>
     choice(
       $._terminator_dot,

@@ -15,7 +15,7 @@ export default ({ kw }) => ({
           $._terminator,
         ),
       ),
-      kw("END"),
+      $._end_keyword,
       kw("ENUM"),
     ),
 

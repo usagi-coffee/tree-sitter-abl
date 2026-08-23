@@ -52,7 +52,7 @@ export default ({ kw }) => ({
       alias($._colon, ":"),
       repeat1($.__buffer_compare_when_phrase),
       optional($.__buffer_compare_compares),
-      kw("END"),
+      $._end_keyword,
     ),
   __buffer_compare_compares: ($) => alias(kw("COMPARES"), $.compares),
 

@@ -8,7 +8,7 @@ export default ({ kw }) => ({
       alias($._colon, ":"),
       repeat(choice($.case_when_phrase, alias($.include_statement, $.include_file_reference))),
       optional($.case_otherwise_phrase),
-      kw("END"),
+      $._end_keyword,
       optional(kw("CASE")),
     ),
 

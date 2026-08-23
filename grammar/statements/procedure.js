@@ -33,7 +33,7 @@ export default ({ kw }) => ({
     seq(
       choice(alias($._colon, ":"), alias($._terminator_dot, ".")),
       repeat($._statement),
-      kw("END"),
+      $._end_keyword,
     ),
 
   __procedure_modifier: ($) =>
