@@ -564,7 +564,7 @@ export default grammar({
       __argument_body: ($) =>
         seq(
           choice(
-            $.__argument_identifier_in_handle,
+            seq(field("name", $._identifier_or_qualified_name), $.__argument_in_handle),
             seq(
               choice(
                 seq(
@@ -587,8 +587,6 @@ export default grammar({
           optional(seq(kw("AS"), field("type", $._type_name))),
           optional(choice(kw("BY-REFERENCE"), kw("BY-VALUE"), kw("APPEND"), kw("BIND"))),
         ),
-      __argument_identifier_in_handle: ($) =>
-        seq(field("name", $._identifier_or_qualified_name), $.__argument_in_handle),
       __argument_in_handle: ($) =>
         seq(
           kw("IN"),
