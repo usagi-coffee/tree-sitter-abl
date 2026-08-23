@@ -16,17 +16,19 @@ export default ({ kw }) => ({
     choice(seq($._loop_phrase, optional($.__repeat_body_after_loop)), $.__repeat_body_after_loop),
   __repeat_body_after_loop: ($) =>
     choice(
+      seq($.__repeat_condition_transaction, optional($.__repeat_body_after_transaction)),
+      $.__repeat_body_after_transaction,
+    ),
+  __repeat_condition_transaction: ($) =>
+    choice(
       seq(
         $.__repeat_condition_phrase,
         optional(alias(kw("TRANSACTION", { offset: 5 }), $.transaction)),
-        optional($.__repeat_body_after_transaction),
       ),
       seq(
         alias(kw("TRANSACTION", { offset: 5 }), $.transaction),
         optional($.__repeat_condition_phrase),
-        optional($.__repeat_body_after_transaction),
       ),
-      $.__repeat_body_after_transaction,
     ),
   __repeat_body_after_transaction: ($) => choice(seq(repeat1($._block_option), $.body), $.body),
 
