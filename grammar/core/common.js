@@ -127,7 +127,8 @@ export default ({ kw }) => ({
       optional(seq(kw("BY"), field("step", $._expression))),
     ),
 
-  _collate_body: ($) =>
+  _collate_body: ($) => seq($.__collate_prefix, ")"),
+  __collate_prefix: ($) =>
     seq(
       kw("COLLATE"),
       "(",
@@ -135,7 +136,6 @@ export default ({ kw }) => ({
       ",",
       field("strength", $._expression),
       optional(seq(",", field("collation", $._expression))),
-      ")",
     ),
 
   _block_option: ($) =>
