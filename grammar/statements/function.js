@@ -70,16 +70,11 @@ export default ({ kw }) => ({
       alias(kw("FORWARDS", { alias: "FORWARD", offset: 7 }), $.forward),
     ),
 
-  __function_parameters: ($) =>
+  __function_parameters: ($) => seq("(", optional($.__function_parameter_list), ")"),
+  __function_parameter_list: ($) =>
     seq(
-      "(",
-      optional(
-        seq(
-          alias($.__function_parameter, $.parameter),
-          repeat(seq(",", alias($.__function_parameter, $.parameter))),
-        ),
-      ),
-      ")",
+      alias($.__function_parameter, $.parameter),
+      repeat(seq(",", alias($.__function_parameter, $.parameter))),
     ),
   __function_definition_parameters: ($) =>
     seq(
