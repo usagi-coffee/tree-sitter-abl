@@ -1,7 +1,7 @@
 export default ({ kw }) => ({
-  output_statement: ($) => seq($.__output_prefix, $.__output_body, $._terminator),
+  output_statement: ($) => seq($.__output_prefix, $._terminator),
 
-  __output_prefix: ($) => seq(kw("OUTPUT"), optional($._stream_phrase)),
+  __output_prefix: ($) => seq(kw("OUTPUT"), optional($._stream_phrase), $.__output_body),
   __output_body: ($) =>
     choice(
       alias(kw("CLOSE"), $.close),
