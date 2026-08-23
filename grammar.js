@@ -508,7 +508,11 @@ export default grammar({
 
       qualified_name: ($) => seq(field("left", $._qualified_name_left), $.__qualified_name_tail),
       __qualified_name_tail: ($) =>
-        repeat1(seq($._namedot, field("right", alias($._identifier_immediate, $.identifier)))),
+        seq(
+          $._namedot,
+          field("right", alias($._identifier_immediate, $.identifier)),
+          optional($.__qualified_name_tail),
+        ),
       _qualified_name_left: ($) =>
         choice(
           $.macro_concatenated_name,
