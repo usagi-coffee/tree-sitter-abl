@@ -15,7 +15,9 @@ export default ({ kw }) => ({
       alias($.__dynamic_function_concatenation, $.binary_expression),
     ),
   __dynamic_function_concatenation: ($) =>
-    seq($.__dynamic_function_atom, repeat1(seq("+", $.__dynamic_function_atom))),
+    seq($.__dynamic_function_atom, $.__dynamic_function_concatenation_tail),
+  __dynamic_function_concatenation_tail: ($) =>
+    seq("+", $.__dynamic_function_atom, optional($.__dynamic_function_concatenation_tail)),
   __dynamic_function_atom: ($) =>
     choice($.string_literal, $._identifier_or_access_or_call, $.parenthesized_expression),
   __dynamic_function_context: ($) =>

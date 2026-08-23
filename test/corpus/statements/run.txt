@@ -630,6 +630,7 @@ RUN - context looked up with DYNAMIC-FUNCTION
 ================================================================================
 
 RUN MESSAGE-INFO IN DYNAMIC-FUNCTION("GetHparent":U IN hparent) (p%message).
+RUN MESSAGE-INFO IN DYNAMIC-FUNCTION("Get" + "H" + "parent" IN hparent) (p%message).
 
 --------------------------------------------------------------------------------
 
@@ -639,6 +640,18 @@ RUN MESSAGE-INFO IN DYNAMIC-FUNCTION("GetHparent":U IN hparent) (p%message).
     (in_phrase
       context: (dynamic_function_call
         function: (string_literal)
+        context: (identifier)))
+    (arguments
+      (argument
+        name: (identifier))))
+  (run_statement
+    procedure: (identifier)
+    (in_phrase
+      context: (dynamic_function_call
+        function: (binary_expression
+          (string_literal)
+          (string_literal)
+          (string_literal))
         context: (identifier)))
     (arguments
       (argument
