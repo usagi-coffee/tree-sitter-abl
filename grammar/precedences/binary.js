@@ -23,7 +23,7 @@ export default ($) => [
     $.accum_expression,
     $.__frame_expression,
     $.__at_phrase_body,
-    $.__display_when_expression,
+    $.__display_when_phrase,
     $._format_colon_to,
     $._format_label,
     $._format_labels,

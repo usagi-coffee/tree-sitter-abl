@@ -62,8 +62,7 @@ export default ({ kw }) => ({
         ),
       ),
     ),
-  __display_when_phrase: ($) => seq(kw("WHEN"), field("when", $.__display_when_expression)),
-  __display_when_expression: ($) => $._expression,
+  __display_when_phrase: ($) => seq(kw("WHEN"), field("when", $._expression)),
   __display_formatted_field: ($) =>
     seq(alias($.__display_field, $.field), optional($.format_phrase)),
 
