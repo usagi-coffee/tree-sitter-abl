@@ -105,11 +105,11 @@ export default ({ kw }) => ({
 
   __sql_select_body: ($) => seq(kw("SELECT"), $.__sql_select_projection, $.__sql_select_from_body),
   __sql_select_projection: ($) =>
+    seq(optional($.__sql_set_quantifier), $.__sql_select_columns, optional($.__sql_into_clause)),
+  __sql_select_columns: ($) =>
     seq(
-      optional($.__sql_set_quantifier),
       field("column", $.__sql_select_item),
       repeat(seq(",", field("column", $.__sql_select_item))),
-      optional($.__sql_into_clause),
     ),
   __sql_select_from_body: ($) =>
     seq(
