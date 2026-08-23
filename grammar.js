@@ -180,6 +180,8 @@ export default grammar({
     $.__find_index_name,
     $.__assign_record_name,
     $.__temp_table_like_name,
+    $.__browse_options,
+    $.__browse_flag_option,
     $._identifier_or_array_access,
     $._parameter_direction,
     $.system_handle_identifier,
