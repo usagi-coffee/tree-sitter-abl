@@ -42,7 +42,7 @@ export default ({ kw }) => ({
           seq(kw("RETAIN"), field("retain", $.__frame_expression)),
           seq(kw("WIDGET-ID"), field("widget_id", $.__frame_expression)),
           seq(kw("CONTEXT-HELP-FILE"), field("context_help_file", $.__frame_expression)),
-          seq(kw("IN"), kw("WINDOW"), field("window", $.__frame_identifier)),
+          seq($._in_keyword, kw("WINDOW"), field("window", $.__frame_identifier)),
           seq(kw("BGCOLOR"), field("bgcolor", $.__frame_expression)),
           seq(kw("DCOLOR"), field("dcolor", $.__frame_expression)),
           seq(kw("FGCOLOR"), field("fgcolor", $.__frame_expression)),

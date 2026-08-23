@@ -22,7 +22,7 @@ export default ({ kw }) => ({
 
   __apply_in_widget: ($) =>
     seq(
-      kw("IN"),
+      $._in_keyword,
       choice(
         seq(kw("BROWSE"), field("browse", $.identifier)),
         seq(kw("FRAME", { offset: 4 }), field("frame", $.identifier)),

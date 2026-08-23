@@ -42,7 +42,7 @@ export default ({ kw }) => ({
       alias(kw("PROTECTED"), $.access_modifier),
       alias(kw("PUBLIC"), $.access_modifier),
     ),
-  __procedure_in_super_phrase: ($) => seq(kw("IN"), kw("SUPER")),
+  __procedure_in_super_phrase: ($) => seq($._in_keyword, kw("SUPER")),
 
   __procedure_external_phrase: ($) =>
     prec.left(

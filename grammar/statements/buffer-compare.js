@@ -43,7 +43,7 @@ export default ({ kw }) => ({
     ),
 
   __buffer_compare_save_phrase: ($) =>
-    seq(kw("SAVE"), optional(seq(kw("RESULT"), kw("IN"))), field("result", $._expression)),
+    seq(kw("SAVE"), optional(seq(kw("RESULT"), $._in_keyword)), field("result", $._expression)),
 
   __buffer_compare_compares_block: ($) =>
     seq(

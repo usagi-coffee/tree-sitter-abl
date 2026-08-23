@@ -60,7 +60,11 @@ export default ({ kw }) => ({
     ),
   __persistent_trigger_tail: ($) =>
     choice(
-      seq(kw("IN"), field("handle", $._expression), optional($.__persistent_trigger_parameters)),
+      seq(
+        $._in_keyword,
+        field("handle", $._expression),
+        optional($.__persistent_trigger_parameters),
+      ),
       $.__persistent_trigger_parameters,
     ),
   __persistent_trigger_parameters: ($) => seq("(", field("parameters", $._expressions), ")"),

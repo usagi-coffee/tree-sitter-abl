@@ -148,5 +148,5 @@ export default ({ kw }) => ({
   __function_variable_type_phrase: ($) => seq($._as_like, optional($._extent_phrase)),
 
   __function_map_phrase: ($) => seq(kw("MAP"), $._to_keyword, field("actual", $.identifier)),
-  __function_in_phrase: ($) => seq(kw("IN"), field("context", $._expression)),
+  __function_in_phrase: ($) => seq($._in_keyword, field("context", $._expression)),
 });

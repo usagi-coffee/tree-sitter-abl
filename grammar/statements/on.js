@@ -179,7 +179,7 @@ export default ({ kw }) => ({
         $._terminator,
       ),
     ),
-  __on_in_phrase: ($) => seq(kw("IN"), field("context", $.__on_context_value)),
+  __on_in_phrase: ($) => seq($._in_keyword, field("context", $.__on_context_value)),
   __on_context_value: ($) =>
     choice($.system_handle_identifier, $.object_access, $._identifier_or_qualified_name),
   __on_revert_action: ($) => seq(alias(kw("REVERT"), $.revert), $._terminator),

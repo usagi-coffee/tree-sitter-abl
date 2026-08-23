@@ -8,7 +8,7 @@ export default ({ kw }) => ({
     ),
 
   _in_widget_pool: ($) =>
-    seq(kw("IN"), kw("WIDGET-POOL"), field("pool", choice($.identifier, $.string_literal))),
+    seq($._in_keyword, kw("WIDGET-POOL"), field("pool", choice($.identifier, $.string_literal))),
   _handle_in_widget_pool: ($) =>
     seq(field("handle", $._identifier_or_array_access), optional($._in_widget_pool)),
 

@@ -18,24 +18,24 @@ export default ({ kw }) => ({
       seq(
         kw("FIELD"),
         field("field", $._identifier_or_array_access),
-        optional(seq(kw("IN"), kw("FRAME", { offset: 4 }), field("frame", $.__widget_name))),
+        optional(seq($._in_keyword, kw("FRAME", { offset: 4 }), field("frame", $.__widget_name))),
       ),
       seq(
         field("field", $._identifier_or_array_access),
-        seq(kw("IN"), kw("FRAME", { offset: 4 }), field("frame", $.__widget_name)),
+        seq($._in_keyword, kw("FRAME", { offset: 4 }), field("frame", $.__widget_name)),
       ),
       seq(
         field("field", $.array_access),
-        optional(seq(kw("IN"), kw("FRAME", { offset: 4 }), field("frame", $.__widget_name))),
+        optional(seq($._in_keyword, kw("FRAME", { offset: 4 }), field("frame", $.__widget_name))),
       ),
       seq(
         field("column", $._identifier_or_array_access),
-        seq(kw("IN"), kw("BROWSE"), field("browse", $.__widget_name)),
+        seq($._in_keyword, kw("BROWSE"), field("browse", $.__widget_name)),
       ),
       seq(
         kw("MENU-ITEM"),
         field("item", $._identifier_or_qualified_name),
-        optional(seq(kw("IN"), kw("MENU"), field("menu", $.__widget_name))),
+        optional(seq($._in_keyword, kw("MENU"), field("menu", $.__widget_name))),
       ),
       field("system_handle", alias($.__widget_system_handle, $.system_handle)),
     ),

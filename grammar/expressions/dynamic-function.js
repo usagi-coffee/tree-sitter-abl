@@ -5,7 +5,7 @@ export default ({ kw }) => ({
       kw("DYNAMIC-FUNCTION"),
       "(",
       field("function", $.__dynamic_function_name),
-      optional(seq(kw("IN"), field("context", $.__dynamic_function_context))),
+      optional(seq($._in_keyword, field("context", $.__dynamic_function_context))),
       repeat(seq(",", field("argument", $.argument))),
     ),
 

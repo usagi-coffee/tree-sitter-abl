@@ -231,7 +231,7 @@ export default grammar({
           $._identifier_or_qualified_name,
           alias(kw("NEW"), $.identifier),
           alias(kw("WINDOW"), $.identifier),
-          alias(kw("IN"), $.identifier),
+          alias($._in_keyword, $.identifier),
           $.object_access,
           $.array_access,
           $.string_literal,
@@ -355,6 +355,7 @@ export default grammar({
 
       _for_keyword: ($) => kw("FOR"),
       _to_keyword: ($) => kw("TO"),
+      _in_keyword: ($) => kw("IN"),
 
       // Types
       generic_type: ($) => seq($.__generic_type_prefix, ">"),
@@ -600,7 +601,7 @@ export default grammar({
         ),
       __argument_in_handle: ($) =>
         seq(
-          kw("IN"),
+          $._in_keyword,
           field(
             "in_handle",
             choice(
@@ -644,7 +645,7 @@ export default grammar({
           $._widgets,
           field("widget", choice($.identifier, $.preprocessor_name)),
         ),
-      __widget_qualified_name_separator: ($) => kw("IN"),
+      __widget_qualified_name_separator: ($) => $._in_keyword,
 
       _window_handle: ($) =>
         choice(
