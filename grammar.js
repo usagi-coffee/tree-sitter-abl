@@ -257,13 +257,13 @@ export default grammar({
           field("name", $.identifier),
           field("value", $.preprocessor_value),
         ),
-      if_preprocessor_directive: ($) =>
+      if_preprocessor_directive: ($) => seq($.__if_preprocessor_directive_prefix, token(/&ENDIF/i)),
+      __if_preprocessor_directive_prefix: ($) =>
         seq(
           token(/&IF/i),
           $.__if_preprocessor_condition_then,
           field("then_branch", repeat1(field("value", $.__if_preprocessor_branch_value))),
           optional($.__if_preprocessor_branches),
-          token(/&ENDIF/i),
         ),
       if_preprocessor_directive_statement: ($) =>
         choice(
