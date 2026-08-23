@@ -2,12 +2,7 @@ export default ({ kw }) => ({
   browse_definition: ($) => seq($.__browse_prefix, $._terminator),
 
   __browse_prefix: ($) =>
-    seq(
-      kw("DEFINE", { offset: 3 }),
-      optional($._definition_scope_modifier),
-      kw("BROWSE"),
-      $.__browse_body,
-    ),
+    seq($._define_keyword, optional($._definition_scope_modifier), kw("BROWSE"), $.__browse_body),
 
   __browse_body: ($) =>
     seq(

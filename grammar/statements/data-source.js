@@ -1,13 +1,12 @@
 export default ({ kw }) => ({
   data_source_definition: ($) => seq($.__data_source_prefix, $._terminator),
 
-  __data_source_prefix: ($) =>
-    seq(kw("DEFINE", { offset: 3 }), kw("DATA-SOURCE"), $.__data_source_body),
+  __data_source_prefix: ($) => seq($._define_keyword, kw("DATA-SOURCE"), $.__data_source_body),
 
   // For classes - with modifiers
   data_source_class_definition: ($) =>
     seq(
-      kw("DEFINE", { offset: 3 }),
+      $._define_keyword,
       optional($.__data_source_modifier),
       kw("DATA-SOURCE"),
       $.__data_source_body,

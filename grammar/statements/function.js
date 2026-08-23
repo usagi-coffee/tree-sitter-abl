@@ -37,7 +37,7 @@ export default ({ kw }) => ({
   __function_forward_definition_prefix: ($) =>
     choice(
       seq(
-        kw("DEFINE", { offset: 3 }),
+        $._define_keyword,
         kw("FUNCTION"),
         seq($.__function_forward_head, optional($.__function_forward_target)),
       ),

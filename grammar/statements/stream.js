@@ -3,7 +3,7 @@ export default ({ kw }) => ({
 
   __stream_prefix: ($) =>
     seq(
-      kw("DEFINE", { offset: 3 }),
+      $._define_keyword,
       optional($.__stream_modifier),
       kw("STREAM"),
       field("name", $.identifier),

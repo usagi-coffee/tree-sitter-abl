@@ -12,12 +12,7 @@ export default ({ kw }) => ({
     ),
 
   __temp_table_prefix: ($) =>
-    seq(
-      kw("DEFINE", { offset: 3 }),
-      optional($.__temp_table_modifier),
-      kw("TEMP-TABLE"),
-      $._table_body,
-    ),
+    seq($._define_keyword, optional($.__temp_table_modifier), kw("TEMP-TABLE"), $._table_body),
   // Aliases for shared rules that reference temp-table specific rules
   _like_phrase: ($) => $.__temp_table_like_phrase,
   _table_field: ($) => $.__temp_table_field,

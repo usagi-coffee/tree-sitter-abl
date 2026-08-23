@@ -356,6 +356,7 @@ export default grammar({
       _for_keyword: ($) => kw("FOR"),
       _to_keyword: ($) => kw("TO"),
       _in_keyword: ($) => kw("IN"),
+      _define_keyword: ($) => kw("DEFINE", { offset: 3 }),
 
       // Types
       generic_type: ($) => seq($.__generic_type_prefix, ">"),

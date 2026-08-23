@@ -3,7 +3,7 @@ export default ({ kw }) => ({
 
   __variable_prefix: ($) =>
     seq(
-      kw("DEFINE", { offset: 3 }),
+      $._define_keyword,
       optional($.__variable_modifier),
       kw("VARIABLE", { offset: 3 }),
       $.__variable_body,

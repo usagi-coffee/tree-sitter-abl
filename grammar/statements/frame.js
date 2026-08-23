@@ -3,7 +3,7 @@ export default ({ kw }) => ({
 
   __frame_prefix: ($) =>
     seq(
-      kw("DEFINE", { offset: 3 }),
+      $._define_keyword,
       optional($._definition_scope_modifier),
       kw("FRAME", { offset: 4 }),
       $.__frame_body,

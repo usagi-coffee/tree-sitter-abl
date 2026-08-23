@@ -2,12 +2,7 @@ export default ({ kw }) => ({
   query_definition: ($) => seq($.__query_prefix, $._terminator),
 
   __query_prefix: ($) =>
-    seq(
-      kw("DEFINE", { offset: 3 }),
-      optional($._buffer_query_modifier),
-      kw("QUERY"),
-      $.__query_body,
-    ),
+    seq($._define_keyword, optional($._buffer_query_modifier), kw("QUERY"), $.__query_body),
 
   __query_body: ($) =>
     seq(

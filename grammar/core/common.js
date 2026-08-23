@@ -53,7 +53,7 @@ export default ({ kw }) => ({
     choice($._identifier_or_qualified_name, seq($.__record_operand_opener, ")")),
   __record_operand_opener: ($) => seq("(", $._identifier_or_qualified_name),
   _define_private_prefix: ($) =>
-    seq(kw("DEFINE", { offset: 3 }), optional(alias(kw("PRIVATE"), $.access_modifier))),
+    seq($._define_keyword, optional(alias(kw("PRIVATE"), $.access_modifier))),
   _definition_scope_modifier: ($) =>
     choice(
       seq(alias(kw("NEW"), $.new_modifier), alias(kw("SHARED"), $.scope_modifier)),

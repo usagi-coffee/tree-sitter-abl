@@ -3,7 +3,7 @@ export default ({ kw }) => ({
 
   __work_table_prefix: ($) =>
     seq(
-      kw("DEFINE", { offset: 3 }),
+      $._define_keyword,
       optional($._definition_scope_modifier),
       kw("WORK-TABLE"),
       $._work_table_body,

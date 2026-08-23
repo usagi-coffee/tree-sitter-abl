@@ -3,7 +3,7 @@ export default ({ kw }) => ({
 
   __parameter_prefix: ($) =>
     seq(
-      kw("DEFINE", { offset: 3 }),
+      $._define_keyword,
       choice(
         seq(
           field("direction", kw("RETURN")),

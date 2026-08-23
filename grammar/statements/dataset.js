@@ -2,12 +2,7 @@ export default ({ kw }) => ({
   dataset_definition: ($) => seq($.__dataset_prefix, $._terminator),
 
   __dataset_prefix: ($) =>
-    seq(
-      kw("DEFINE", { offset: 3 }),
-      optional($.__dataset_modifier),
-      kw("DATASET"),
-      $._dataset_body,
-    ),
+    seq($._define_keyword, optional($.__dataset_modifier), kw("DATASET"), $._dataset_body),
 
   __dataset_data_relation: ($) =>
     seq(

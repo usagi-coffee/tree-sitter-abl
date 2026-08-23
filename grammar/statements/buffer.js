@@ -2,12 +2,7 @@ export default ({ kw }) => ({
   buffer_definition: ($) => prec.right(seq($.__buffer_prefix, $._terminator)),
 
   __buffer_prefix: ($) =>
-    seq(
-      kw("DEFINE", { offset: 3 }),
-      optional($._buffer_query_modifier),
-      kw("BUFFER"),
-      $.__buffer_body,
-    ),
+    seq($._define_keyword, optional($._buffer_query_modifier), kw("BUFFER"), $.__buffer_body),
 
   __buffer_body: ($) =>
     seq(

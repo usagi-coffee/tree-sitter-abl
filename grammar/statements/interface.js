@@ -37,7 +37,7 @@ export default ({ kw }) => ({
 
   __interface_temp_table: ($) =>
     seq(
-      kw("DEFINE", { offset: 3 }),
+      $._define_keyword,
       kw("TEMP-TABLE"),
       $._table_body,
       repeat(
@@ -49,12 +49,11 @@ export default ({ kw }) => ({
       $._terminator,
     ),
 
-  __interface_dataset: ($) =>
-    seq(kw("DEFINE", { offset: 3 }), kw("DATASET"), $._dataset_body, $._terminator),
+  __interface_dataset: ($) => seq($._define_keyword, kw("DATASET"), $._dataset_body, $._terminator),
 
   __interface_event: ($) =>
     seq(
-      kw("DEFINE", { offset: 3 }),
+      $._define_keyword,
       optional(alias(kw("PUBLIC"), $.access_modifier)),
       kw("EVENT"),
       $._event_body,

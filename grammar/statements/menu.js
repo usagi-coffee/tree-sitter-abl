@@ -2,12 +2,7 @@ export default ({ kw }) => ({
   menu_definition: ($) => seq($.__menu_prefix, $._terminator),
 
   __menu_prefix: ($) =>
-    seq(
-      kw("DEFINE", { offset: 3 }),
-      optional($._definition_scope_modifier),
-      kw("MENU"),
-      $.__menu_body,
-    ),
+    seq($._define_keyword, optional($._definition_scope_modifier), kw("MENU"), $.__menu_body),
 
   __menu_body: ($) =>
     seq(

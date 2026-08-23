@@ -9,7 +9,7 @@ export default ({ kw }) => ({
       alias($._colon, ":"),
       repeat(
         seq(
-          kw("DEFINE", { offset: 3 }),
+          $._define_keyword,
           kw("ENUM"),
           repeat1(alias($.__enum_member, $.member)),
           $._terminator,
