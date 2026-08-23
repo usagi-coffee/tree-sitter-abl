@@ -69,14 +69,13 @@ export default ({ kw }) => ({
   open_cursor_statement: ($) => seq(kw("OPEN"), field("cursor", $.identifier), $._terminator),
 
   // `FETCH c INTO nm.`
-  fetch_statement: ($) =>
+  fetch_statement: ($) => seq(kw("FETCH"), $.__sql_fetch_body, $._terminator),
+  __sql_fetch_body: ($) =>
     seq(
-      kw("FETCH"),
       field("cursor", $.identifier),
       kw("INTO"),
       field("target", $._sql_target),
       repeat(seq(",", field("target", $._sql_target))),
-      $._terminator,
     ),
 
   // `CLOSE c.` -- distinct from CLOSE QUERY and CLOSE STORED-PROCEDURE, both of
