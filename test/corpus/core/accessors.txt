@@ -277,6 +277,7 @@ A scoped member reached off a subscript or an attribute chain
 ================================================================================
 
 x = a::c.
+x = a::b::c.
 x = pEntity:hBuf::costfile.
 x = pHandles[1]::custnum.
 FOR EACH v WHERE v.a = pH[1]::a NO-LOCK: END.
@@ -289,6 +290,13 @@ FOR EACH v WHERE v.a = pH[1]::a NO-LOCK: END.
     operator: (assignment_operator)
     right: (scoped_name
       left: (identifier)
+      right: (identifier)))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (scoped_name
+      left: (identifier)
+      right: (identifier)
       right: (identifier)))
   (assignment_statement
     left: (identifier)

@@ -502,8 +502,12 @@ export default grammar({
       // Preserve a flat tree for chained .NET names such as `Pkg::Type::Member`.
       scoped_name: ($) => prec.left(seq(field("left", $.identifier), $.__scoped_name_tail)),
       __scoped_name_tail: ($) =>
-        repeat1(
-          seq($._namedoublecolon, field("right", alias($._identifier_immediate, $.identifier))),
+        prec.right(
+          seq(
+            $._namedoublecolon,
+            field("right", alias($._identifier_immediate, $.identifier)),
+            optional($.__scoped_name_tail),
+          ),
         ),
 
       qualified_name: ($) => seq(field("left", $._qualified_name_left), $.__qualified_name_tail),
