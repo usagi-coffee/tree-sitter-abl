@@ -112,6 +112,10 @@ export default ({ kw }) => ({
       field("column", $.__sql_select_item),
       repeat(seq(",", field("column", $.__sql_select_item))),
       optional($.__sql_into_clause),
+      $.__sql_select_from_body,
+    ),
+  __sql_select_from_body: ($) =>
+    seq(
       kw("FROM"),
       field("table", $.__sql_table_reference),
       repeat(seq(",", field("table", $.__sql_table_reference))),
