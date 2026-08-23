@@ -6,6 +6,16 @@ Please format your code with `bun run format` before committing.
 
 ## Commit descriptions
 
+Use a short, descriptive commit subject with a category prefix, such as
+`grammar:`, `test:`, `queries:`, `scanner:`, `docs:`, `agent:`. Choose the
+prefix that best describes the primary area affected by the change; use a
+lowercase prefix followed by a concise imperative description.
+
+Each commit should make one semantic change. Include tests that directly cover
+the change in the same commit, but do not bundle unrelated grammar, tests,
+formatting, or cleanup changes; split them into separate commits when they can
+be reviewed or reverted independently.
+
 Always include parser-count deltas at the end of the commit description in exactly this
 form and order:
 
