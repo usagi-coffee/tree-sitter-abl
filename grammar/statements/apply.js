@@ -7,7 +7,7 @@ export default ({ kw }) => ({
       field("event", choice($._events, $.object_access, $.qualified_name, $.array_access)),
       optional(
         seq(
-          kw("TO"),
+          $._to_keyword,
           field(
             "to",
             alias(

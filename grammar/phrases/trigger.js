@@ -31,7 +31,7 @@ export default ({ kw }) => ({
           field("variable", $.identifier),
           "=",
           field("start", $._expression),
-          kw("TO"),
+          $._to_keyword,
           field("end", $._expression),
         ),
         optional($.__trigger_body_after_loop),
@@ -42,7 +42,7 @@ export default ({ kw }) => ({
     choice(seq($.__trigger_down_phrase, $.__trigger_body_block), $.__trigger_body_block),
   __trigger_body_block: ($) => seq(":", repeat($._statement), kw("END"), "."),
   __trigger_down_phrase: ($) =>
-    seq(kw("DOWN"), optional(kw("TO")), optional(field("down", $._expression))),
+    seq(kw("DOWN"), optional($._to_keyword), optional(field("down", $._expression))),
 
   __persistent_trigger: ($) =>
     seq(

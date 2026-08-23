@@ -6,26 +6,26 @@ export default ({ kw }) => ({
       kw("RAW-TRANSFER"),
       choice(
         // Case 1: source TO target (basic)
-        seq(field("source_field", $.identifier), kw("TO"), field("target", $.identifier)),
+        seq(field("source_field", $.identifier), $._to_keyword, field("target", $.identifier)),
         // Case 2: FIELD source TO target
         seq(
           kw("FIELD"),
           field("source_field", $._expression),
-          kw("TO"),
+          $._to_keyword,
           field("target_field", $._expression),
         ),
         // Case 3: BUFFER source TO target
         seq(
           kw("BUFFER"),
           field("source_field", $.identifier),
-          kw("TO"),
+          $._to_keyword,
           field("target", $.identifier),
         ),
         // Case 4: BUFFER source TO FIELD target
         seq(
           kw("BUFFER"),
           field("source_field", $.identifier),
-          kw("TO"),
+          $._to_keyword,
           kw("FIELD"),
           field("target_field", $.identifier),
         ),
@@ -33,7 +33,7 @@ export default ({ kw }) => ({
         seq(
           kw("FIELD"),
           field("source_field", $._expression),
-          kw("TO"),
+          $._to_keyword,
           kw("BUFFER"),
           field("target_field", $._expression),
         ),
@@ -41,7 +41,7 @@ export default ({ kw }) => ({
         seq(
           kw("BUFFER"),
           field("source_field", $.identifier),
-          kw("TO"),
+          $._to_keyword,
           kw("BUFFER"),
           field("target_field", $.identifier),
         ),

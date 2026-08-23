@@ -105,5 +105,5 @@ export default ({ kw }) => ({
     ),
 
   __parameter_variable_type_phrase: ($) =>
-    seq($._as_like, optional(seq(kw("TO"), field("target", $.identifier)))),
+    seq($._as_like, optional(seq($._to_keyword, field("target", $.identifier)))),
 });

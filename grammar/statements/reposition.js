@@ -7,7 +7,7 @@ export default ({ kw }) => ({
       field("query", $.identifier),
       choice(
         seq(
-          kw("TO"),
+          $._to_keyword,
           choice(
             seq(
               kw("ROWID"),

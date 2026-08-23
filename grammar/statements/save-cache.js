@@ -7,7 +7,7 @@ export default ({ kw }) => ({
       kw("CACHE"),
       choice(kw("CURRENT"), kw("COMPLETE")),
       choice(field("database", $.identifier), field("database", $.__save_cache_value_expression)),
-      kw("TO"),
+      $._to_keyword,
       choice(field("path", $.string_literal), field("path", $.__save_cache_value_expression)),
     ),
   __save_cache_value_expression: ($) => seq(kw("VALUE"), "(", $._expression, ")"),

@@ -11,7 +11,7 @@ export default ({ kw }) => ({
           alias($.__buffer_copy_using_phrase, $.using_phrase),
         ),
       ),
-      kw("TO"),
+      $._to_keyword,
       field("target", $._identifier_or_qualified_name),
       optional(alias($.__buffer_copy_assign_phrase, $.assign_phrase)),
       optional(alias(kw("NO-LOBS"), $.no_lobs)),

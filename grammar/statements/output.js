@@ -6,7 +6,7 @@ export default ({ kw }) => ({
     choice(
       alias(kw("CLOSE"), $.close),
       seq(
-        kw("TO"),
+        $._to_keyword,
         $.__output_to_target,
         repeat(
           choice(

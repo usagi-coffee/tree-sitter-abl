@@ -5,7 +5,7 @@ export default ({ kw }) => ({
     seq(
       kw("SEEK"),
       choice(kw("INPUT"), kw("OUTPUT"), $._stream_phrase),
-      kw("TO"),
+      $._to_keyword,
       choice(kw("END"), $._expression),
     ),
 

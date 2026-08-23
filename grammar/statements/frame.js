@@ -54,7 +54,7 @@ export default ({ kw }) => ({
     ),
   __frame_display_value_tail: ($) =>
     repeat1(
-      choice($.at_phrase, seq(kw("TO"), field("to", $._expression)), $.__frame_display_option),
+      choice($.at_phrase, seq($._to_keyword, field("to", $._expression)), $.__frame_display_option),
     ),
 
   __frame_display_option: ($) =>

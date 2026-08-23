@@ -5,7 +5,7 @@ export default ({ kw }) => ({
     seq(
       kw("SUBSCRIBE"),
       optional(seq(kw("PROCEDURE", { offset: 4 }), field("subscriber", $.__subscribe_expression))),
-      optional(kw("TO")),
+      optional($._to_keyword),
       field("event", $.__subscribe_expression),
       choice(alias($.__subscribe_in_phrase, $.in_phrase), alias(kw("ANYWHERE"), $.anywhere)),
       optional(alias($.__subscribe_run_procedure_phrase, $.run_procedure_phrase)),

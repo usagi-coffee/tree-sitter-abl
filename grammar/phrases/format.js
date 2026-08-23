@@ -91,7 +91,7 @@ export default ({ kw }) => ({
   _format_colon_to: ($) =>
     choice(
       seq(kw("COLON"), field("colon", $._expression)),
-      seq(kw("TO"), field("to", $._expression)),
+      seq($._to_keyword, field("to", $._expression)),
     ),
 
   __format_editor_phrase: ($) =>

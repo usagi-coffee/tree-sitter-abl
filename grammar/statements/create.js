@@ -94,7 +94,7 @@ export default ({ kw }) => ({
     seq(
       field("progid", $._expression),
       field("handle", $.identifier),
-      optional(seq(kw("CONNECT"), optional(seq(kw("TO"), field("target", $._expression))))),
+      optional(seq(kw("CONNECT"), optional(seq($._to_keyword, field("target", $._expression))))),
     ),
   __create_record: ($) =>
     seq(

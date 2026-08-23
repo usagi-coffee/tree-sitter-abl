@@ -354,6 +354,7 @@ export default grammar({
       opsys_file: ($) => token(/(?:\.{1,2})?\/[A-Za-z0-9_.\-/~]*[A-Za-z0-9_\-/]/),
 
       _for_keyword: ($) => kw("FOR"),
+      _to_keyword: ($) => kw("TO"),
 
       // Types
       generic_type: ($) => seq($.__generic_type_prefix, ">"),
