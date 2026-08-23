@@ -180,7 +180,13 @@ export default ({ kw }) => ({
       repeat(
         choice(
           seq(kw("LIST-ITEMS"), field("items", $.__format_combo_box_values)),
-          seq(kw("LIST-ITEM-PAIRS"), field("pairs", $.__format_combo_box_pairs)),
+          seq(
+            kw("LIST-ITEM-PAIRS"),
+            field(
+              "pairs",
+              seq($.__format_radio_set_pair, repeat(seq(",", $.__format_radio_set_pair))),
+            ),
+          ),
           seq(kw("INNER-LINES"), field("inner_lines", $.number_literal)),
           $.size_phrase,
           alias(kw("SORT"), $.sort),
@@ -193,8 +199,6 @@ export default ({ kw }) => ({
     ),
   __format_combo_box_values: ($) =>
     seq($.__format_radio_set_value, repeat(seq(",", $.__format_radio_set_value))),
-  __format_combo_box_pairs: ($) =>
-    seq($.__format_radio_set_pair, repeat(seq(",", $.__format_radio_set_pair))),
 
   __format_view_as_tail: ($) =>
     prec.right(choice(seq($.size_phrase, optional($._tooltip_phrase)), $._tooltip_phrase)),
