@@ -37,7 +37,7 @@ export default ({ kw }) => ({
     seq(
       field("cursor", $.identifier),
       kw("CURSOR"),
-      kw("FOR"),
+      $._for_keyword,
       field("query", alias($.__sql_select_body, $.select)),
       optional($.__sql_cursor_mode),
     ),
@@ -51,10 +51,10 @@ export default ({ kw }) => ({
   // kind of gap, which only a node count catches.
   __sql_cursor_mode: ($) =>
     choice(alias($.__sql_read_only, $.read_only), alias($.__sql_for_update, $.for_update)),
-  __sql_read_only: ($) => seq(kw("FOR"), kw("READ"), kw("ONLY")),
+  __sql_read_only: ($) => seq($._for_keyword, kw("READ"), kw("ONLY")),
   __sql_for_update: ($) =>
     seq(
-      kw("FOR"),
+      $._for_keyword,
       kw("UPDATE"),
       optional(
         seq(

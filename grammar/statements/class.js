@@ -298,12 +298,12 @@ export default ({ kw }) => ({
       seq(
         kw("BUFFER"),
         field("buffer", $.identifier),
-        kw("FOR"),
+        $._for_keyword,
         field("table", $._identifier_or_qualified_name),
       ),
       seq(
         kw("TABLE"),
-        optional(field("for", kw("FOR"))),
+        optional(field("for", $._for_keyword)),
         field("table", $._identifier_or_qualified_name),
         repeat(
           choice(
@@ -327,7 +327,7 @@ export default ({ kw }) => ({
       ),
       seq(
         kw("DATASET"),
-        optional(field("for", kw("FOR"))),
+        optional(field("for", $._for_keyword)),
         field("dataset", $._identifier_or_qualified_name),
         repeat(
           choice(

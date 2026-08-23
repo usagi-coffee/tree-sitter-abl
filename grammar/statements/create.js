@@ -22,7 +22,7 @@ export default ({ kw }) => ({
     seq(
       kw("ALIAS"),
       field("alias", $._alias_name),
-      kw("FOR"),
+      $._for_keyword,
       kw("DATABASE"),
       field("database", $._alias_name),
     ),
@@ -30,7 +30,7 @@ export default ({ kw }) => ({
     seq(
       kw("BUFFER"),
       field("handle", choice($._identifier_or_array_access, $.object_access)),
-      kw("FOR"),
+      $._for_keyword,
       kw("TABLE"),
       field("table", $.__create_buffer_target),
       optional(seq(kw("BUFFER-NAME"), field("name", $.__create_buffer_target))),
@@ -99,7 +99,7 @@ export default ({ kw }) => ({
   __create_record: ($) =>
     seq(
       field("table", choice($._identifier_or_qualified_name, $.preprocessor_name)),
-      optional(seq(kw("FOR"), kw("TENANT"), field("tenant", $._expression))),
+      optional(seq($._for_keyword, kw("TENANT"), field("tenant", $._expression))),
       optional(
         seq(
           kw("USING"),

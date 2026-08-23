@@ -5,7 +5,7 @@ export default ({ kw }) => ({
     seq(
       kw("TRIGGER"),
       kw("PROCEDURE", { offset: 4 }),
-      kw("FOR"),
+      $._for_keyword,
       choice(
         // Simple events: CREATE, DELETE, FIND, REPLICATION-CREATE, etc.
         seq(field("event", $.identifier), kw("OF"), field("object", $.identifier)),

@@ -107,12 +107,12 @@ export default ({ kw }) => ({
       seq(
         kw("BUFFER"),
         field("buffer", $.identifier),
-        kw("FOR"),
+        $._for_keyword,
         field("table", $._identifier_or_qualified_name),
       ),
       seq(
         kw("TABLE"),
-        optional(kw("FOR")),
+        optional($._for_keyword),
         field("table", $._identifier_or_qualified_name),
         optional($.__function_table_options),
       ),
@@ -123,7 +123,7 @@ export default ({ kw }) => ({
       ),
       seq(
         kw("DATASET"),
-        kw("FOR"),
+        $._for_keyword,
         field("dataset", $._identifier_or_qualified_name),
         optional($.__function_table_options),
       ),

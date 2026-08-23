@@ -12,7 +12,7 @@ export default ({ kw }) => ({
   __query_body: ($) =>
     seq(
       field("name", $.identifier),
-      kw("FOR"),
+      $._for_keyword,
       $.query_table_list,
       optional(alias($.__query_cache_phrase, $.cache_phrase)),
       optional(alias(kw("SCROLLING"), $.scrolling)),

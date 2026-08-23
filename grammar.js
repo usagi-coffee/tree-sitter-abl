@@ -353,6 +353,8 @@ export default grammar({
       // Unquoted opsys-file paths, used only by INPUT FROM / OUTPUT TO targets.
       opsys_file: ($) => token(/(?:\.{1,2})?\/[A-Za-z0-9_.\-/~]*[A-Za-z0-9_\-/]/),
 
+      _for_keyword: ($) => kw("FOR"),
+
       // Types
       generic_type: ($) => seq($.__generic_type_prefix, ">"),
       __generic_type_prefix: ($) =>
@@ -552,7 +554,7 @@ export default grammar({
       _array_subscript: ($) =>
         choice(
           $._expressions,
-          seq(field("start", $._expression), kw("FOR"), field("count", $._expression)),
+          seq(field("start", $._expression), $._for_keyword, field("count", $._expression)),
         ),
 
       // Callables

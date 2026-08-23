@@ -12,7 +12,7 @@ export default ({ kw }) => ({
   __buffer_body: ($) =>
     seq(
       field("name", $.identifier),
-      kw("FOR"),
+      $._for_keyword,
       optional(field("for", kw("TEMP-TABLE"))),
       field("table", $._identifier_or_qualified_name),
       repeat(

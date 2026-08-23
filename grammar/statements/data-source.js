@@ -20,7 +20,7 @@ export default ({ kw }) => ({
       optional(seq(kw("QUERY"), field("query", $.identifier))),
       optional(
         seq(
-          kw("FOR"),
+          $._for_keyword,
           $.__data_source_buffer_phrase,
           repeat(seq(",", $.__data_source_buffer_phrase)),
         ),

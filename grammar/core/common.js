@@ -109,7 +109,7 @@ export default ({ kw }) => ({
 
   _for_phrase: ($) =>
     seq(
-      kw("FOR"),
+      $._for_keyword,
       seq(
         field("record", $._identifier_or_qualified_name),
         repeat(seq(",", field("record", $._identifier_or_qualified_name))),
@@ -272,7 +272,11 @@ export default ({ kw }) => ({
       repeat1(alias($.__dataset_parent_id_relation, $.parent_id_relation)),
     ),
   __dataset_for_phrase: ($) =>
-    seq(kw("FOR"), field("table", $.identifier), repeat(seq(",", field("table", $.identifier)))),
+    seq(
+      $._for_keyword,
+      field("table", $.identifier),
+      repeat(seq(",", field("table", $.identifier))),
+    ),
 
   _event_body: ($) =>
     seq(field("name", $.identifier), optional(alias($.__event_signature, $.signature))),

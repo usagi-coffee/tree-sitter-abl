@@ -39,7 +39,7 @@ export default ({ kw }) => ({
   __open_query_max_rows_option: ($) => seq(kw("MAX-ROWS"), field("max_rows", $._expression)),
   __open_query_records: ($) =>
     seq(
-      choice(kw("FOR"), kw("PRESELECT")),
+      choice($._for_keyword, kw("PRESELECT")),
       kw("EACH"),
       alias($.__open_query_record_phrase, $.record_phrase),
       repeat(seq(",", $.__open_query_join_record)),

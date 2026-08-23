@@ -14,7 +14,7 @@ export default ({ kw }) => ({
           ")",
         ),
       ),
-      kw("FOR"),
+      $._for_keyword,
       field("table", $._identifier_or_qualified_name),
       optional(alias($.__aggregate_where_phrase, $.where_phrase)),
     ),

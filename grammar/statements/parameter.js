@@ -17,7 +17,7 @@ export default ({ kw }) => ({
             $.__parameter_standard_body,
             seq(
               kw("TABLE"),
-              kw("FOR"),
+              $._for_keyword,
               field("table", $._identifier_or_qualified_name),
               repeat(
                 choice(
@@ -42,7 +42,7 @@ export default ({ kw }) => ({
             ),
             seq(
               kw("DATASET"),
-              kw("FOR"),
+              $._for_keyword,
               field("dataset", $._identifier_or_qualified_name),
               repeat(
                 choice(
@@ -98,7 +98,7 @@ export default ({ kw }) => ({
       kw("PARAMETER", { offset: 5 }),
       kw("BUFFER"),
       field("name", $.identifier),
-      kw("FOR"),
+      $._for_keyword,
       optional(field("for", kw("TEMP-TABLE"))),
       field("table", $._identifier_or_qualified_name),
       optional(alias(kw("PRESELECT"), $.preselect)),
