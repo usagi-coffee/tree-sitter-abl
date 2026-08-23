@@ -525,10 +525,12 @@ export default grammar({
           alias(kw("INTERFACE"), $.identifier),
         ),
 
-      nested_type_name: ($) =>
+      nested_type_name: ($) => seq(field("left", $._nested_type_left), $.__nested_type_tail),
+      __nested_type_tail: ($) =>
         seq(
-          field("left", $._nested_type_left),
-          repeat1(seq($._nameplus, field("right", alias($._identifier_immediate, $.identifier)))),
+          $._nameplus,
+          field("right", alias($._identifier_immediate, $.identifier)),
+          optional($.__nested_type_tail),
         ),
       _nested_type_left: ($) => choice($.qualified_name, $.identifier),
 

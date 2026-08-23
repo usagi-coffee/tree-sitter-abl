@@ -973,6 +973,7 @@ VARIABLE DEFINITION - a nested .NET type
 
 DEFINE VARIABLE v AS System.Windows.Forms.Control+ControlCollection NO-UNDO.
 DEFINE VARIABLE w AS System.Windows.Forms.Control NO-UNDO.
+DEFINE VARIABLE x AS Namespace.Outer+Inner+Leaf NO-UNDO.
 
 --------------------------------------------------------------------------------
 
@@ -992,6 +993,15 @@ DEFINE VARIABLE w AS System.Windows.Forms.Control NO-UNDO.
     type: (qualified_name
       left: (identifier)
       right: (identifier)
+      right: (identifier)
+      right: (identifier))
+    (no_undo))
+  (variable_definition
+    name: (identifier)
+    type: (nested_type_name
+      left: (qualified_name
+        left: (identifier)
+        right: (identifier))
       right: (identifier)
       right: (identifier))
     (no_undo)))
