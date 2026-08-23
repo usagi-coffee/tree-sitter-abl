@@ -190,6 +190,7 @@ instead of the `persistent` option.
 When optimizing
 
 - Optimizations should reduce both `src/parser.c` size AND `ACTION_COUNT` or `STATE_COUNT` or `LARGE_STATE_COUNT`.
+- Exception: an optimization that reduces `src/parser.c` by more than `100000` bytes may be accepted when all count regressions are minor.
 - Prefer the biggest reductions to `src/parser.c` size, do not go beyond tree-sitter limit of `65535` `ACTION_COUNT` and `STATE_COUNT`.
 - Preserve accepted and rejected syntax; do not weaken the grammar.
 - Preserve syntax-tree shape, including fields, aliases, and child ordering.
