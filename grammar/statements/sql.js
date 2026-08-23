@@ -32,15 +32,14 @@
 // they fail loudly, and a loud failure needs no rule to make it honest.
 export default ({ kw }) => ({
   // `DECLARE cursor_name CURSOR FOR query_expr [ORDER BY] [FOR UPDATE]`
-  declare_cursor_statement: ($) =>
+  declare_cursor_statement: ($) => seq(kw("DECLARE"), $.__sql_declare_cursor_body, $._terminator),
+  __sql_declare_cursor_body: ($) =>
     seq(
-      kw("DECLARE"),
       field("cursor", $.identifier),
       kw("CURSOR"),
       kw("FOR"),
       field("query", alias($.__sql_select_body, $.select)),
       optional($.__sql_cursor_mode),
-      $._terminator,
     ),
   // `FOR READ ONLY` and `FOR UPDATE` close the declaration rather than the
   // query, so they sit here and not inside the select, where they would also be
