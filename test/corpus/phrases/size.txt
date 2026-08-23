@@ -14,3 +14,24 @@ DEFINE VARIABLE v AS CHARACTER VIEW-AS FILL-IN SIZE 10 BY 1.
       (size_phrase
         width: (number_literal)
         height: (number_literal)))))
+
+================================================================================
+SIZE phrase with binary dimensions
+================================================================================
+
+DEFINE VARIABLE v AS CHARACTER VIEW-AS FILL-IN SIZE 5 + 5 BY 1 + 1.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (view_as_phrase
+      (size_phrase
+        width: (binary_expression
+          (number_literal)
+          (number_literal))
+        height: (binary_expression
+          (number_literal)
+          (number_literal))))))
