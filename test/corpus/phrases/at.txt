@@ -55,3 +55,20 @@ DEFINE FRAME F1 WITH NO-BOX OVERLAY AT COL 1 ROW 1.
       (at_phrase
         column: (number_literal))
       row: (number_literal))))
+
+================================================================================
+AT with a binary position
+================================================================================
+
+DEFINE FRAME f WITH AT 1 + 2.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (frame_definition
+    name: (identifier)
+    (frame_phrase
+      (at_phrase
+        position: (binary_expression
+          (number_literal)
+          (number_literal))))))

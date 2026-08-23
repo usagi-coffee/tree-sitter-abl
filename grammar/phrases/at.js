@@ -1,13 +1,14 @@
 export default ({ kw }) => ({
-  at_phrase: ($) => seq(kw("AT"), $.__at_phrase_body),
-
-  __at_phrase_body: ($) =>
-    prec.right(
-      seq(
-        choice(
-          seq($.__at_column_row, optional($.__at_alignment)),
-          seq($.__at_x_y, optional($.__at_alignment)),
-          field("position", $._expression),
+  at_phrase: ($) =>
+    seq(
+      kw("AT"),
+      prec.right(
+        seq(
+          choice(
+            seq($.__at_column_row, optional($.__at_alignment)),
+            seq($.__at_x_y, optional($.__at_alignment)),
+            field("position", $._expression),
+          ),
         ),
       ),
     ),
