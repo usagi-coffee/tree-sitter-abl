@@ -137,14 +137,14 @@ export default ({ kw }) => ({
   _format_labels: ($) => seq(field("label", $._expression), optional($._format_labels_tail)),
   _format_labels_tail: ($) => repeat1(seq(",", field("label", $._expression))),
 
-  _format_validate: ($) =>
+  _format_validate: ($) => seq($.__format_validate_prefix, ")"),
+  __format_validate_prefix: ($) =>
     seq(
       kw("VALIDATE"),
       "(",
       field("condition", $._expression),
       ",",
       field("message", $._expression),
-      ")",
     ),
 
   // Local VIEW-AS copies omit TOOLTIP to avoid competing with the enclosing format phrase.
