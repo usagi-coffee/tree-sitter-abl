@@ -17,13 +17,11 @@ export default ({ kw }) => ({
       seq(kw("BGCOLOR"), field("bgcolor", $._expression)),
       seq(kw("FGCOLOR"), field("fgcolor", $._expression)),
       alias(kw("CONVERT-3D-COLORS"), $.convert_3d_colors),
-      $.__image_tooltip_phrase,
+      seq(kw("TOOLTIP"), field("tooltip", $._identifier_or_string_literal)),
       $.__image_stretch_phrase,
       alias(kw("TRANSPARENT"), $.transparent),
     ),
 
-  __image_tooltip_phrase: ($) =>
-    seq(kw("TOOLTIP"), field("tooltip", $._identifier_or_string_literal)),
   __image_stretch_phrase: ($) =>
     seq(
       alias(kw("STRETCH-TO-FIT"), $.stretch_to_fit),
