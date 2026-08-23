@@ -17,18 +17,16 @@ export default ({ kw }) => ({
         seq(
           kw("RELATION-FIELDS"),
           "(",
-          field("parent_field", $.identifier),
-          ",",
-          field("child_field", $.identifier),
-          repeat(
-            seq(",", field("parent_field", $.identifier), ",", field("child_field", $.identifier)),
-          ),
+          $.__dataset_relation_field_pair,
+          repeat(seq(",", $.__dataset_relation_field_pair)),
           ")",
         ),
       ),
       optional(alias(kw("REPOSITION"), $.reposition)),
       optional($.__dataset_data_relation_after_reposition),
     ),
+  __dataset_relation_field_pair: ($) =>
+    seq(field("parent_field", $.identifier), ",", field("child_field", $.identifier)),
   __dataset_data_relation_after_reposition: ($) =>
     choice(
       seq(
