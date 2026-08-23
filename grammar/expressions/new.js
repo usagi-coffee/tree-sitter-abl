@@ -10,13 +10,10 @@ export default ({ kw }) => ({
         ),
         // Record buffer check: NEW record or NEW(record)
         prec.right(
-          choice(
-            field("record", $._identifier_or_qualified_name),
-            seq($.__new_record_opener, field("record", $._identifier_or_qualified_name), ")"),
-          ),
+          choice(field("record", $._identifier_or_qualified_name), seq($.__new_record_opener, ")")),
         ),
       ),
     ),
   __new_prefix: ($) => kw("NEW"),
-  __new_record_opener: ($) => "(",
+  __new_record_opener: ($) => seq("(", field("record", $._identifier_or_qualified_name)),
 });
