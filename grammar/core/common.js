@@ -120,8 +120,9 @@ export default ({ kw }) => ({
     ),
 
   _loop_phrase: ($) =>
+    seq(field("variable", choice($.identifier, $.macro_concatenated_name)), $._loop_phrase_tail),
+  _loop_phrase_tail: ($) =>
     seq(
-      field("variable", choice($.identifier, $.macro_concatenated_name)),
       "=",
       field("start", $._expression),
       kw("TO"),

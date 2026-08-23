@@ -73,11 +73,7 @@ export default ({ kw }) => ({
         "variable",
         choice($.identifier, $.qualified_name, $.array_access, $.macro_concatenated_name),
       ),
-      "=",
-      field("start", $._expression),
-      kw("TO"),
-      field("end", $._expression),
-      optional(seq(kw("BY"), field("step", $._expression))),
+      $._loop_phrase_tail,
     ),
   __do_while_phrase: ($) => seq(kw("WHILE"), field("condition", $._expression)),
 });
