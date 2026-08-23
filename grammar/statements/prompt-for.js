@@ -54,7 +54,7 @@ export default ({ kw }) => ({
       seq(kw("SPACE"), optional(field("space", $.__prompt_for_parenthesized_expression))),
       "^",
     ),
-  __prompt_for_parenthesized_expression: ($) => seq("(", $._expression, ")"),
+  __prompt_for_parenthesized_expression: ($) => seq($._parenthesized_expression_prefix, ")"),
   __prompt_for_constant_tail: ($) =>
     choice(
       seq(

@@ -427,8 +427,8 @@ export default grammar({
         ),
 
       // Expressions
-      parenthesized_expression: ($) => seq($.__parenthesized_expression_prefix, ")"),
-      __parenthesized_expression_prefix: ($) => seq("(", $._expression),
+      parenthesized_expression: ($) => seq($._parenthesized_expression_prefix, ")"),
+      _parenthesized_expression_prefix: ($) => seq("(", $._expression),
       _expressions: ($) => seq($._expression, repeat(seq(",", $._expression))),
       unary_expression: ($) =>
         choice(

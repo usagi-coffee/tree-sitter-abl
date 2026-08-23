@@ -27,7 +27,7 @@ export default ({ kw }) => ({
         seq(kw("SPACE"), optional(field("space", $.__form_parenthesized_expression))),
       ),
     ),
-  __form_parenthesized_expression: ($) => seq("(", $._expression, ")"),
+  __form_parenthesized_expression: ($) => seq($._parenthesized_expression_prefix, ")"),
 
   __form_validate_format_view_as_tail: ($) =>
     choice(

@@ -80,7 +80,11 @@ export default ({ kw }) => ({
     ),
 
   __frame_skip_phrase: ($) =>
-    prec.left(seq(kw("SKIP"), optional(field("skip", seq("(", $._expression, ")"))))),
+    prec.left(
+      seq(kw("SKIP"), optional(field("skip", seq($._parenthesized_expression_prefix, ")")))),
+    ),
   __frame_space_phrase: ($) =>
-    prec.left(seq(kw("SPACE"), optional(field("space", seq("(", $._expression, ")"))))),
+    prec.left(
+      seq(kw("SPACE"), optional(field("space", seq($._parenthesized_expression_prefix, ")")))),
+    ),
 });

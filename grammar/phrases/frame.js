@@ -66,7 +66,9 @@ export default ({ kw }) => ({
     ),
 
   __frame_skip_phrase: ($) =>
-    prec.left(seq(kw("SKIP"), optional(field("skip", seq("(", $.__frame_expression, ")"))))),
+    prec.left(
+      seq(kw("SKIP"), optional(field("skip", seq($._parenthesized_expression_prefix, ")")))),
+    ),
 
   __frame_title_phrase: ($) =>
     seq(kw("TITLE"), repeat($._frame_title_option), field("title", $.__frame_expression)),

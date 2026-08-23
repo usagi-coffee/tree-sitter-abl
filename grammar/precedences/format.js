@@ -11,7 +11,7 @@ export default ($) => [
   // Purpose: keep FORMAT (...) on the format target path after extracting the expression opener.
   // Example: FORMAT ("x(10)").
   // Reference: format-phrase.
-  [$._format_format, $.__parenthesized_expression_prefix],
+  [$._format_format, $._parenthesized_expression_prefix],
   // Purpose: when FORMAT is followed by identifier-like text, keep it inside format_phrase.
   // Example: PUT x FORMAT decF.
   // Reference: FORMAT option in format-phrase.

@@ -81,9 +81,13 @@ export default ({ kw }) => ({
   __display_record: ($) => $._identifier_or_qualified_name,
 
   __display_skip_phrase: ($) =>
-    prec.left(seq(kw("SKIP"), optional(field("skip", seq("(", $._expression, ")"))))),
+    prec.left(
+      seq(kw("SKIP"), optional(field("skip", seq($._parenthesized_expression_prefix, ")")))),
+    ),
   __display_space_phrase: ($) =>
-    prec.left(seq(kw("SPACE"), optional(field("space", seq("(", $._expression, ")"))))),
+    prec.left(
+      seq(kw("SPACE"), optional(field("space", seq($._parenthesized_expression_prefix, ")")))),
+    ),
 
   __display_frame_phrases: ($) => seq($.frame_phrase, optional($.frame_phrase)),
 
