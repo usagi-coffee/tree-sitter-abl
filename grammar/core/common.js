@@ -311,7 +311,12 @@ export default ({ kw }) => ({
   _alert_box_title_value: ($) =>
     choice($._alert_box_title_atom, alias($._alert_box_title_concatenation, $.binary_expression)),
   _alert_box_title_concatenation: ($) =>
-    prec.right(1, seq($._alert_box_title_atom, repeat1(seq("+", $._alert_box_title_atom)))),
+    prec.right(1, seq($._alert_box_title_atom, $._alert_box_title_concatenation_tail)),
+  _alert_box_title_concatenation_tail: ($) =>
+    prec.right(
+      1,
+      seq("+", $._alert_box_title_atom, optional($._alert_box_title_concatenation_tail)),
+    ),
   _alert_box_title_atom: ($) => choice($.string_literal, $._identifier_or_access_or_call),
   _alert_type: ($) =>
     choice(
