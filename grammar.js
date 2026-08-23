@@ -315,21 +315,16 @@ export default grammar({
       // Constants
       // Must outrank `{` only when a macro occupies an entire statement line.
       __macro_statement: ($) => token(prec(2, /\{&[^}\r\n]+\}[ \t]*\r?\n/)),
-      preprocessor_name: ($) =>
-        prec(
-          1,
-          seq(
-            $.__preprocessor_name_prefix,
-            optional(
-              seq(
-                $.__preprocessor_name_value_separator,
-                field("value", $.__preprocessor_name_value),
-              ),
-            ),
-            "}",
+      preprocessor_name: ($) => prec(1, seq($.__preprocessor_name_prefix, "}")),
+      __preprocessor_name_prefix: ($) =>
+        seq(
+          "{",
+          "&",
+          $.identifier,
+          optional(
+            seq($.__preprocessor_name_value_separator, field("value", $.__preprocessor_name_value)),
           ),
         ),
-      __preprocessor_name_prefix: ($) => seq("{", "&", $.identifier),
       __preprocessor_name_value_separator: ($) => "=",
       __preprocessor_name_value: ($) =>
         choice(
