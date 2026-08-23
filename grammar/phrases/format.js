@@ -179,7 +179,13 @@ export default ({ kw }) => ({
       field("widget", kw("COMBO-BOX")),
       repeat(
         choice(
-          seq(kw("LIST-ITEMS"), field("items", $.__format_combo_box_values)),
+          seq(
+            kw("LIST-ITEMS"),
+            field(
+              "items",
+              seq($.__format_radio_set_value, repeat(seq(",", $.__format_radio_set_value))),
+            ),
+          ),
           seq(
             kw("LIST-ITEM-PAIRS"),
             field(
@@ -197,9 +203,6 @@ export default ({ kw }) => ({
         ),
       ),
     ),
-  __format_combo_box_values: ($) =>
-    seq($.__format_radio_set_value, repeat(seq(",", $.__format_radio_set_value))),
-
   __format_view_as_tail: ($) =>
     prec.right(choice(seq($.size_phrase, optional($._tooltip_phrase)), $._tooltip_phrase)),
   _format_view_as: ($) =>
