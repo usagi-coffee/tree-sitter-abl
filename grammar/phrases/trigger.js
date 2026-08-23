@@ -21,7 +21,8 @@ export default ({ kw }) => ({
   __trigger_action: ($) =>
     choice(alias(seq(kw("DO"), $.__trigger_body_tail), $.trigger_body), $.__persistent_trigger),
 
-  __trigger_event_list: ($) => seq($._events, repeat(seq(",", $._events))),
+  __trigger_event_list: ($) => seq($._events, optional($.__trigger_event_list_tail)),
+  __trigger_event_list_tail: ($) => seq(",", $._events, optional($.__trigger_event_list_tail)),
 
   __trigger_body_tail: ($) =>
     choice(
