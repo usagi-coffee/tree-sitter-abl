@@ -8,7 +8,7 @@ enum TokenType {
   NAMEPLUS,
   COLON,
   TERMINATOR_DOT,
-  ESCAPED_STRING,
+  STRING_LITERAL,
   BLOCK_COMMENT
 };
 
@@ -148,7 +148,7 @@ bool tree_sitter_abl_external_scanner_scan(
     }
   }
 
-  if (valid_symbols[ESCAPED_STRING] &&
+  if (valid_symbols[STRING_LITERAL] &&
       (lexer->lookahead == '"' || lexer->lookahead == '\'')) {
     char start = lexer->lookahead;
     lexer->advance(lexer, false);
@@ -188,7 +188,7 @@ bool tree_sitter_abl_external_scanner_scan(
           }
           if (extended) lexer->mark_end(lexer);
         }
-        lexer->result_symbol = ESCAPED_STRING;
+        lexer->result_symbol = STRING_LITERAL;
         return true;
       }
 

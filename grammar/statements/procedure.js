@@ -48,7 +48,7 @@ export default ({ kw }) => ({
     prec.left(
       seq(
         kw("EXTERNAL"),
-        field("library", $._escaped_string),
+        field("library", alias($.string_literal, "_escaped_string")),
         optional(
           choice(
             alias(kw("CDECL"), $.cdecl),
