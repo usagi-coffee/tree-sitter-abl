@@ -357,7 +357,8 @@ export default ({ kw }) => ({
   _list_item_pairs_phrase: ($) => seq(kw("LIST-ITEM-PAIRS"), field("pairs", $._list_item_pairs)),
   _list_item_values: ($) => seq($._expression, optional($._list_item_values_tail)),
   _list_item_values_tail: ($) => seq(",", $._expression, optional($._list_item_values_tail)),
-  _list_item_pairs: ($) => seq($._list_item_pair, repeat(seq(",", $._list_item_pair))),
+  _list_item_pairs: ($) => seq($._list_item_pair, optional($._list_item_pairs_tail)),
+  _list_item_pairs_tail: ($) => seq(",", $._list_item_pair, optional($._list_item_pairs_tail)),
   _list_item_pair: ($) => seq(field("label", $._expression), ",", field("value", $._expression)),
   _scrollbar_option: ($) =>
     choice(

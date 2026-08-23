@@ -37,3 +37,24 @@ DEFINE VARIABLE v AS CHARACTER VIEW-AS COMBO-BOX INNER-LINES 5 LIST-ITEMS "a","b
         items: (string_literal)
         items: (string_literal)))
     (no_undo)))
+
+================================================================================
+COMBO-BOX - LIST-ITEM-PAIRS
+================================================================================
+
+DEFINE VARIABLE p AS CHARACTER VIEW-AS COMBO-BOX LIST-ITEM-PAIRS "a",1,"b",2,"c",3.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (view_as_phrase
+      (combo_box_phrase
+        label: (string_literal)
+        value: (number_literal)
+        label: (string_literal)
+        value: (number_literal)
+        label: (string_literal)
+        value: (number_literal)))))
