@@ -520,9 +520,10 @@ export default grammar({
 
       nested_type_name: ($) =>
         seq(
-          field("left", choice($.qualified_name, $.identifier)),
+          field("left", $._nested_type_left),
           repeat1(seq($._nameplus, field("right", alias($._identifier_immediate, $.identifier)))),
         ),
+      _nested_type_left: ($) => choice($.qualified_name, $.identifier),
 
       // Array
       array_initializer: ($) => seq($.__array_initializer_prefix, "]"),
