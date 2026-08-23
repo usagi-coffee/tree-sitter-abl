@@ -68,7 +68,7 @@ CASE - Reference snippet and OR WHEN
 DEFINE VARIABLE pay-stat AS INTEGER NO-UNDO INITIAL 1.
 CASE pay-stat:
   WHEN 1 THEN MESSAGE "This account is unpaid.".
-  WHEN 2 OR WHEN 3 THEN DO:
+  WHEN 2 OR WHEN 3 OR WHEN 4 THEN DO:
     MESSAGE "Paid.".
   END.
 END CASE.
@@ -88,6 +88,7 @@ END CASE.
       (message_statement
         (string_literal)))
     (case_when_phrase
+      condition: (number_literal)
       condition: (number_literal)
       condition: (number_literal)
       (do_statement

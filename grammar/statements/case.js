@@ -20,5 +20,10 @@ export default ({ kw }) => ({
   __case_when_expression_list: ($) =>
     seq($._expression, optional($.__case_when_expression_list_tail)),
   __case_when_expression_list_tail: ($) =>
-    repeat1(seq(kw("OR"), kw("WHEN"), field("condition", $._expression))),
+    seq(
+      kw("OR"),
+      kw("WHEN"),
+      field("condition", $._expression),
+      optional($.__case_when_expression_list_tail),
+    ),
 });
