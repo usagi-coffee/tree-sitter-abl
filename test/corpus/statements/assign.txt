@@ -88,7 +88,7 @@ ASSIGN record/input
 ================================================================================
 
 ASSIGN Customer EXCEPT Name NO-ERROR.
-ASSIGN INPUT FRAME frm Cust.Name = "x" WHEN TRUE NO-ERROR.
+ASSIGN INPUT FRAME frm Cust.Name = "x" WHEN TRUE Cust.City = "y" WHEN FALSE NO-ERROR.
 
 --------------------------------------------------------------------------------
 
@@ -99,6 +99,11 @@ ASSIGN INPUT FRAME frm Cust.Name = "x" WHEN TRUE NO-ERROR.
     (no_error))
   (assign_statement
     frame: (identifier)
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    value: (string_literal)
+    when: (boolean_literal)
     field: (qualified_name
       left: (identifier)
       right: (identifier))

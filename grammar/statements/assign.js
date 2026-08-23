@@ -45,12 +45,11 @@ export default ({ kw }) => ({
       seq(kw("BROWSE"), field("browse", $.__assign_widget_name)),
     ),
   __assign_input_fields: ($) =>
-    repeat1(
-      seq(
-        field("field", $._assignable),
-        optional(seq("=", field("value", $._expression))),
-        optional($._when_phrase),
-      ),
+    seq(
+      field("field", $._assignable),
+      optional(seq("=", field("value", $._expression))),
+      optional($._when_phrase),
+      optional($.__assign_input_fields),
     ),
 
   __assign_record_name: ($) => $._identifier_or_qualified_name,
