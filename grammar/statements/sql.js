@@ -116,12 +116,16 @@ export default ({ kw }) => ({
   __sql_select_from_body: ($) =>
     seq(
       kw("FROM"),
-      field("table", $.__sql_table_reference),
-      repeat(seq(",", field("table", $.__sql_table_reference))),
+      $.__sql_table_references,
       optional($.__sql_where_clause),
       optional($.__sql_group_by_clause),
       optional($.__sql_having_clause),
       optional($.__sql_order_by_clause),
+    ),
+  __sql_table_references: ($) =>
+    seq(
+      field("table", $.__sql_table_reference),
+      repeat(seq(",", field("table", $.__sql_table_reference))),
     ),
   __sql_set_quantifier: ($) => choice(alias(kw("ALL"), $.all), alias(kw("DISTINCT"), $.distinct)),
 
