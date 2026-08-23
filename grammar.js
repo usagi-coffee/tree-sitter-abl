@@ -542,8 +542,8 @@ export default grammar({
         ),
 
       // Callables
-      arguments: ($) => seq($.__arguments_prefix, optional($._argument_list), ")"),
-      __arguments_prefix: ($) => "(",
+      arguments: ($) => seq($.__arguments_prefix, ")"),
+      __arguments_prefix: ($) => seq("(", optional($._argument_list)),
       // COM calls use empty comma-delimited slots for omitted positional arguments.
       _argument_list: ($) =>
         choice(
