@@ -355,8 +355,9 @@ export default grammar({
       opsys_file: ($) => token(/(?:\.{1,2})?\/[A-Za-z0-9_.\-/~]*[A-Za-z0-9_\-/]/),
 
       // Types
-      generic_type: ($) =>
-        seq($._simple_type_name, "<", $._type_name, repeat(seq(",", $._type_name)), ">"),
+      generic_type: ($) => seq($.__generic_type_prefix, ">"),
+      __generic_type_prefix: ($) =>
+        seq($._simple_type_name, "<", $._type_name, repeat(seq(",", $._type_name))),
       _simple_type_name: ($) =>
         choice(
           $.scoped_name,
