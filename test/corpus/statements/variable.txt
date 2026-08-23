@@ -5,6 +5,7 @@ VARIABLE DEFINITION - Basic Types
 DEFINE VARIABLE count& AS INTEGER.
 DEF VAR foo AS Some.Type NO-UNDO.
 DEFINE VARIABLE list AS List<INTEGER>.
+DEFINE VARIABLE triple AS Tuple<INTEGER, CHARACTER, LOGICAL>.
 DEFINE VARIABLE cName AS CHARACTER EXTENT 4 INITIAL ["a","b","c","d"].
 DEFINE NEW GLOBAL SHARED VARIABLE gValue AS INTEGER NO-UNDO.
 DEFINE PRIVATE STATIC SERIALIZABLE VARIABLE cust AS CLASS Customer NO-UNDO.
@@ -24,6 +25,13 @@ DEFINE PRIVATE STATIC SERIALIZABLE VARIABLE cust AS CLASS Customer NO-UNDO.
   (variable_definition
     name: (identifier)
     type: (generic_type
+      (identifier)
+      (identifier)))
+  (variable_definition
+    name: (identifier)
+    type: (generic_type
+      (identifier)
+      (identifier)
       (identifier)
       (identifier)))
   (variable_definition
