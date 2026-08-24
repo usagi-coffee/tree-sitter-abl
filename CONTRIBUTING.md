@@ -17,14 +17,27 @@ formatting, or cleanup changes; split them into separate commits when they can
 be reviewed or reverted independently.
 
 Always include parser-count deltas at the end of the commit description in exactly this
-form and order:
+form and order. The four metric lines must be separate physical lines; do not write
+literal `\\n` escape sequences into the message.
+
+Use this complete template for grammar and parser changes:
 
 ```text
+<category>: <short imperative description>
+
+<brief explanation of the semantic change and preserved behavior>
+
+<if optimized: The simpler form was measured and produced a more expensive parser.>
+
 ACTION_COUNT: <before> -> <after> (<delta>)
 STATE_COUNT: <before> -> <after> (<delta>)
 LARGE_STATE_COUNT: <before> -> <after> (<delta>)
 PARSER_C_SIZE_BYTES: <before> -> <after> (<delta>)
 ```
+
+Keep the blank lines and metric names exactly as shown. Replace the angle-bracketed
+placeholders; do not include the brackets in the final message. Omit the optional
+optimization sentence when the change was not an optimization.
 
 Measure the values against the commit's actual base. Recalculate them after rebasing or
 merging instead of keeping deltas from an earlier base.
