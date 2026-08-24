@@ -64,18 +64,18 @@ export default ({ kw }) => ({
     choice(seq(kw("Y"), field("y", $._expression)), seq(kw("Y-OF"), field("y_of", $._expression))),
 
   __format_editor_options: ($) =>
-    repeat1(
-      choice(
-        seq(kw("BUFFER-CHARS"), field("buffer_chars", $.number_literal)),
-        seq(kw("BUFFER-LINES"), field("buffer_lines", $.number_literal)),
-        kw("LARGE"),
-        seq(kw("MAX-CHARS"), field("max_chars", $.number_literal)),
-        kw("NO-BOX"),
-        kw("NO-WORD-WRAP"),
-        kw("SCROLLBAR-HORIZONTAL"),
-        kw("SCROLLBAR-VERTICAL"),
-        seq(kw("TOOLTIP"), field("tooltip", $._expression)),
-      ),
+    prec.right(seq($.__format_editor_option, optional($.__format_editor_options))),
+  __format_editor_option: ($) =>
+    choice(
+      seq(kw("BUFFER-CHARS"), field("buffer_chars", $.number_literal)),
+      seq(kw("BUFFER-LINES"), field("buffer_lines", $.number_literal)),
+      kw("LARGE"),
+      seq(kw("MAX-CHARS"), field("max_chars", $.number_literal)),
+      kw("NO-BOX"),
+      kw("NO-WORD-WRAP"),
+      kw("SCROLLBAR-HORIZONTAL"),
+      kw("SCROLLBAR-VERTICAL"),
+      seq(kw("TOOLTIP"), field("tooltip", $._expression)),
     ),
 
   __format_size_phrase: ($) =>

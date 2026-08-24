@@ -35,6 +35,7 @@ export default ($) => [
     $.__format_at_x,
     $.__format_at_y,
     $.__format_editor_options,
+    $.__format_editor_option,
     $.conditional_expression,
     $.__put_screen_color_phrase,
     $.__form_radio_button,
