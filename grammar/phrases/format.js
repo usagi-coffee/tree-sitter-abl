@@ -24,7 +24,7 @@ export default ({ kw }) => ({
       seq(kw("FGCOLOR"), field("fgcolor", $.__format_expression)),
       seq(kw("FONT"), field("font", $.__format_expression)),
       $._format_format,
-      seq(kw("HELP"), field("help", $.__format_expression)),
+      seq($._help_keyword, field("help", $.__format_expression)),
       $._format_label,
       seq(kw("PFCOLOR"), field("pfcolor", $.__format_expression)),
       $._format_validate,

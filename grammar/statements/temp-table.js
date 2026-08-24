@@ -83,7 +83,7 @@ export default ({ kw }) => ({
       seq(kw("DECIMALS"), field("decimals", $.number_literal)),
       $.__temp_table_extent_option,
       $._format_string,
-      seq(kw("HELP"), field("help", $.string_literal)),
+      seq($._help_keyword, field("help", $.string_literal)),
       seq(kw("INITIAL", { offset: 4 }), field("initial", $._initial_value)),
       seq(kw("LABEL"), field("label", $.__temp_table_label_list)),
       seq(kw("MOUSE-POINTER"), field("mouse_pointer", $._expression)),

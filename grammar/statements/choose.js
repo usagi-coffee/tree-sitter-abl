@@ -23,6 +23,6 @@ export default ({ kw }) => ({
   __choose_field_help: ($) =>
     seq(
       field("field", $._identifier_or_qualified_name),
-      optional(seq(kw("HELP"), field("help", $.string_literal))),
+      optional(seq($._help_keyword, field("help", $.string_literal))),
     ),
 });

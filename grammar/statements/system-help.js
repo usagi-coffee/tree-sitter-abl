@@ -15,7 +15,7 @@ export default ({ kw }) => ({
       alias(kw("QUIT"), $.quit),
       alias(kw("FINDER"), $.finder),
       alias(kw("FORCE-FILE"), $.force_file),
-      alias(kw("HELP"), $.help),
+      alias($._help_keyword, $.help),
       seq(kw("CONTEXT"), field("context", $.__system_help_expression)),
       seq(kw("CONTEXT-POPUP"), field("context_popup", $.__system_help_expression)),
       seq(kw("HELP-TOPIC"), field("help_topic", $.__system_help_expression)),
