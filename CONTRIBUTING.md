@@ -27,8 +27,6 @@ Use this complete template for grammar and parser changes:
 
 <brief explanation of the semantic change and preserved behavior>
 
-<if optimized: The simpler form was measured and produced a more expensive parser.>
-
 ACTION_COUNT: <before> -> <after> (<delta>)
 STATE_COUNT: <before> -> <after> (<delta>)
 LARGE_STATE_COUNT: <before> -> <after> (<delta>)
