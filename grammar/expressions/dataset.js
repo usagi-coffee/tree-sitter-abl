@@ -1,9 +1,8 @@
 export default ({ kw }) => ({
   dataset_reference: ($) =>
     seq(
-      $.__dataset_expression_prefix,
+      $._dataset_keyword,
       field("dataset", choice($.object_access, $._identifier_or_qualified_name)),
       optional($.arguments),
     ),
-  __dataset_expression_prefix: ($) => kw("DATASET"),
 });

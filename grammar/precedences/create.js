@@ -12,5 +12,5 @@ export default ($) => [
   // Purpose: keep CREATE DATASET handle syntax ahead of a DATASET expression prefix.
   // Example: CREATE DATASET hDataset.
   // Reference: CREATE statement handle forms.
-  [$.__create_handle_with_pool_body, $.__dataset_expression_prefix],
+  [$.__create_handle_with_pool_body, $.dataset_reference],
 ];

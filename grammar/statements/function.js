@@ -127,7 +127,7 @@ export default ({ kw }) => ({
         optional($.__function_table_options),
       ),
       seq(
-        kw("DATASET"),
+        $._dataset_keyword,
         $._for_keyword,
         field("dataset", $._identifier_or_qualified_name),
         optional($.__function_table_options),

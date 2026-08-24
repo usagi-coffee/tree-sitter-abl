@@ -335,7 +335,7 @@ export default ({ kw }) => ({
         ),
       ),
       seq(
-        kw("DATASET"),
+        $._dataset_keyword,
         optional(field("for", $._for_keyword)),
         field("dataset", $._identifier_or_qualified_name),
         repeat(

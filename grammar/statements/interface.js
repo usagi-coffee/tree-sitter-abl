@@ -51,7 +51,8 @@ export default ({ kw }) => ({
       $._terminator,
     ),
 
-  __interface_dataset: ($) => seq($._define_keyword, kw("DATASET"), $._dataset_body, $._terminator),
+  __interface_dataset: ($) =>
+    seq($._define_keyword, $._dataset_keyword, $._dataset_body, $._terminator),
 
   __interface_event: ($) =>
     seq(
