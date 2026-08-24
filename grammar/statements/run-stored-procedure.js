@@ -29,7 +29,9 @@ export default ({ kw }) => ({
     seq("(", optional($.__run_stored_procedure_param_list), ")"),
 
   __run_stored_procedure_param_list: ($) =>
-    seq($.__run_stored_procedure_param, repeat(seq(",", $.__run_stored_procedure_param))),
+    seq($.__run_stored_procedure_param, optional($.__run_stored_procedure_param_tail)),
+  __run_stored_procedure_param_tail: ($) =>
+    seq(",", $.__run_stored_procedure_param, optional($.__run_stored_procedure_param_tail)),
 
   __run_stored_procedure_param: ($) =>
     seq(
