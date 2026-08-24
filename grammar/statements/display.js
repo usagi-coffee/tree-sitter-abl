@@ -10,7 +10,7 @@ export default ({ kw }) => ({
   __display_fields_body: ($) =>
     seq(
       choice(
-        $.__display_frame_phrases,
+        $._frame_phrases,
         seq($._stream_phrase, $.__display_stream_frame_tail),
         seq(
           optional($.__display_stream_unless_prefix),
@@ -31,9 +31,9 @@ export default ({ kw }) => ({
       alias(kw("UNLESS-HIDDEN"), $.unless_hidden),
     ),
   __display_window_frame_tail: ($) =>
-    choice(seq($.in_window_phrase, optional($.__display_frame_phrases)), $.__display_frame_phrases),
+    choice(seq($.in_window_phrase, optional($._frame_phrases)), $._frame_phrases),
   __display_window_frame_phrases: ($) =>
-    choice(seq($.in_window_phrase, $.__display_frame_phrases), $.__display_frame_phrases),
+    choice(seq($.in_window_phrase, $._frame_phrases), $._frame_phrases),
 
   __display_items: ($) =>
     choice(
@@ -87,8 +87,6 @@ export default ({ kw }) => ({
     prec.left(
       seq(kw("SPACE"), optional(field("space", seq($._parenthesized_expression_prefix, ")")))),
     ),
-
-  __display_frame_phrases: ($) => seq($.frame_phrase, optional($.frame_phrase)),
 
   // Second branch
   __display_browse_body: ($) =>

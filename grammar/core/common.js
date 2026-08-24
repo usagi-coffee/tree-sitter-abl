@@ -14,6 +14,7 @@ export default ({ kw }) => ({
     seq(field("handle", $._identifier_or_array_access), optional($._in_widget_pool)),
 
   _except_fields: ($) => seq(kw("EXCEPT"), repeat1(field("except", $.identifier))),
+  _frame_phrases: ($) => seq($.frame_phrase, optional($.frame_phrase)),
   _map_phrase: ($) =>
     choice(
       seq(kw("MAP"), field("map", $._identifier_or_string_literal)),

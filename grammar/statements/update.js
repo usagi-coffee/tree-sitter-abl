@@ -11,11 +11,10 @@ export default ({ kw }) => ({
       optional(alias(kw("UNLESS-HIDDEN"), $.unless_hidden)),
       repeat1(alias($.__update_field, $.field)),
       optional(alias($._go_on_phrase, $.go_on_phrase)),
-      optional($.__update_frame_phrases),
+      optional($._frame_phrases),
       optional($.editing_phrase),
     ),
 
-  __update_frame_phrases: ($) => seq($.frame_phrase, optional($.frame_phrase)),
   __update_record: ($) => $._identifier_or_qualified_name,
   __update_field: ($) =>
     choice(
