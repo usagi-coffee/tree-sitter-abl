@@ -10,7 +10,7 @@ export default ({ kw }) => ({
             repeat1(
               choice(
                 seq(
-                  kw("BY"),
+                  $._by_keyword,
                   field("by", $._expression),
                   optional(kw("DESCENDING", { offset: 4 })),
                 ),

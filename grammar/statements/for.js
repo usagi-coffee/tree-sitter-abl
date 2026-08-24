@@ -39,11 +39,12 @@ export default ({ kw }) => ({
   __for_group_by_phrase: ($) => prec.right(seq(kw("GROUP"), $.__for_by_clause)),
 
   __for_break_by: ($) => prec.right(seq(kw("BREAK"), $.__for_by_clause)),
-  __for_by_clause: ($) => seq(kw("BY"), $.__for_by_tail),
+  __for_by_clause: ($) => seq($._by_keyword, $.__for_by_tail),
 
   __for_with_stream_io_phrase: ($) => seq(kw("WITH"), alias(kw("STREAM-IO"), $.stream_io)),
 
-  __for_by_tail: ($) => prec.right(seq($.__for_by_item, repeat(seq(kw("BY"), $.__for_by_item)))),
+  __for_by_tail: ($) =>
+    prec.right(seq($.__for_by_item, repeat(seq($._by_keyword, $.__for_by_item)))),
   __for_by_item: ($) =>
     seq(field("by", $._expression), optional(field("sort_order", kw("DESCENDING", { offset: 4 })))),
 

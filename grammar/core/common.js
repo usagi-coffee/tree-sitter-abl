@@ -124,7 +124,7 @@ export default ({ kw }) => ({
       field("start", $._expression),
       $._to_keyword,
       field("end", $._expression),
-      optional(seq(kw("BY"), field("step", $._expression))),
+      optional(seq($._by_keyword, field("step", $._expression))),
     ),
 
   _collate_body: ($) => seq($.__collate_prefix, ")"),

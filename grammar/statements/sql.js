@@ -164,7 +164,7 @@ export default ({ kw }) => ({
   __sql_group_by_clause: ($) =>
     seq(
       kw("GROUP"),
-      kw("BY"),
+      $._by_keyword,
       field("group", $._identifier_or_qualified_name),
       repeat(seq(",", field("group", $._identifier_or_qualified_name))),
     ),
@@ -172,7 +172,7 @@ export default ({ kw }) => ({
   __sql_order_by_clause: ($) =>
     seq(
       kw("ORDER"),
-      kw("BY"),
+      $._by_keyword,
       alias($.__sql_order_term, $.order_term),
       repeat(seq(",", alias($.__sql_order_term, $.order_term))),
     ),

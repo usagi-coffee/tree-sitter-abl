@@ -4,6 +4,6 @@ export default ({ kw }) => ({
     seq(
       choice(kw("SIZE"), kw("SIZE-CHARS"), kw("SIZE-PIXELS")),
       field("width", $._expression),
-      kw("BY"),
+      $._by_keyword,
     ),
 });

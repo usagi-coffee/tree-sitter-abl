@@ -84,7 +84,7 @@ export default ({ kw }) => ({
     seq(
       choice(kw("SIZE"), kw("SIZE-CHARS"), kw("SIZE-PIXELS")),
       field("width", $.number_literal),
-      kw("BY"),
+      $._by_keyword,
       field("height", $.number_literal),
     ),
 

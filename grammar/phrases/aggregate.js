@@ -24,5 +24,5 @@ export default ({ kw }) => ({
       kw("SUB-TOTAL"),
     ),
 
-  __aggregate_by_phrase: ($) => seq(kw("BY"), field("group", $._identifier_or_qualified_name)),
+  __aggregate_by_phrase: ($) => seq($._by_keyword, field("group", $._identifier_or_qualified_name)),
 });

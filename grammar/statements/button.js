@@ -26,7 +26,7 @@ export default ({ kw }) => ({
           seq(
             choice(kw("SIZE"), kw("SIZE-CHARS"), kw("SIZE-PIXELS")),
             field("width", $._expression),
-            kw("BY"),
+            $._by_keyword,
             field("height", $._expression),
           ),
           seq(alias(kw("NO-FOCUS"), $.no_focus), optional(alias(kw("FLAT-BUTTON"), $.flat_button))),

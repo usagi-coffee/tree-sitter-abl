@@ -67,7 +67,7 @@ export default ({ kw }) => ({
     ),
   __open_query_by_phrase: ($) =>
     seq(
-      kw("BY"),
+      $._by_keyword,
       field("by", $._expression),
       optional(field("sort_order", kw("DESCENDING", { offset: 4 }))),
     ),
