@@ -156,14 +156,15 @@ export default ({ kw }) => ({
         kw("CONVERT"),
         repeat(
           choice(
-            seq(kw("TARGET"), field("target", $._codepage_name)),
-            seq(kw("SOURCE"), field("source", $._codepage_name)),
+            seq(kw("TARGET"), field("target", $._string_or_identifier_access_or_call)),
+            seq(kw("SOURCE"), field("source", $._string_or_identifier_access_or_call)),
           ),
         ),
       ),
     ),
 
-  _codepage_name: ($) => choice($.string_literal, $._identifier_or_access_or_call),
+  _string_or_identifier_access_or_call: ($) =>
+    choice($.string_literal, $._identifier_or_access_or_call),
 
   _echo_phrase: ($) => choice(alias(kw("ECHO"), $.echo), alias(kw("NO-ECHO"), $.no_echo)),
 
@@ -312,15 +313,24 @@ export default ({ kw }) => ({
     choice(seq($._alert_buttons_phrase, optional($._alert_box_title)), $._alert_box_title),
   _alert_box_title: ($) => seq(kw("TITLE"), field("title", $._alert_box_title_value)),
   _alert_box_title_value: ($) =>
-    choice($._alert_box_title_atom, alias($._alert_box_title_concatenation, $.binary_expression)),
+    choice(
+      $._string_or_identifier_access_or_call,
+      alias($._alert_box_title_concatenation, $.binary_expression),
+    ),
   _alert_box_title_concatenation: ($) =>
-    prec.right(1, seq($._alert_box_title_atom, $._alert_box_title_concatenation_tail)),
+    prec.right(
+      1,
+      seq($._string_or_identifier_access_or_call, $._alert_box_title_concatenation_tail),
+    ),
   _alert_box_title_concatenation_tail: ($) =>
     prec.right(
       1,
-      seq("+", $._alert_box_title_atom, optional($._alert_box_title_concatenation_tail)),
+      seq(
+        "+",
+        $._string_or_identifier_access_or_call,
+        optional($._alert_box_title_concatenation_tail),
+      ),
     ),
-  _alert_box_title_atom: ($) => choice($.string_literal, $._identifier_or_access_or_call),
   _alert_type: ($) =>
     choice(
       kw("MESSAGE"),

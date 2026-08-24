@@ -2,7 +2,7 @@
 export default ($) => [
   // Purpose: prefer function call when subscribe expression uses '('.
   // Example: SUBSCRIBE TO myFunc() IN publisher.
-  [$.function_call, $.__subscribe_expression],
+  [$.function_call, $._string_or_identifier_access_or_call],
   // Purpose: when SUBSCRIBE starts with PROCEDURE/PROC-like token, prefer subscribe body parse.
   // Example: SUBSCRIBE PROCEDURE hProc TO "evt" IN src.
   [$.__subscribe_prefix, $._identifier_or_qualified_name],
