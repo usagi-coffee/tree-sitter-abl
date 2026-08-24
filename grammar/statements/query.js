@@ -15,7 +15,9 @@ export default ({ kw }) => ({
     ),
   __query_cache_phrase: ($) => seq(kw("CACHE"), field("cache", $.number_literal)),
 
-  query_table_list: ($) => seq($.__query_table_entry, repeat(seq(",", $.__query_table_entry))),
+  query_table_list: ($) => seq($.__query_table_entry, optional($.__query_table_list_tail)),
+  __query_table_list_tail: ($) =>
+    seq(",", $.__query_table_entry, optional($.__query_table_list_tail)),
 
   __query_table_entry: ($) =>
     seq(
