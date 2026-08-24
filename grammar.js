@@ -501,14 +501,11 @@ export default grammar({
           ),
         ),
       __object_access_handle_type: ($) =>
-        prec(
-          -1,
-          choice(
-            alias(kw("TEMP-TABLE"), $.identifier),
-            alias(kw("BUFFER"), $.identifier),
-            alias(kw("DATA-SOURCE"), $.identifier),
-            alias(kw("STREAM"), $.identifier),
-          ),
+        choice(
+          alias(kw("TEMP-TABLE"), $.identifier),
+          alias(kw("BUFFER"), $.identifier),
+          alias(kw("DATA-SOURCE"), $.identifier),
+          alias(kw("STREAM"), $.identifier),
         ),
       object_access: ($) => seq($._object_access_prefix, $._object_access_tail),
       _object_access_prefix: ($) =>

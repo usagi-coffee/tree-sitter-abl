@@ -9,8 +9,8 @@ export default ($) => [
   // Purpose: prefer CREATE BUFFER target over bare identifier.
   // Example: CREATE BUFFER hBuf FOR TABLE Customer IN WIDGET-POOL wp.
   [$.__create_buffer_target, $._identifier_or_qualified_name],
-  // Purpose: keep CREATE DATASET handle syntax ahead of a DATASET expression prefix.
-  // Example: CREATE DATASET hDataset.
+  // Purpose: keep CREATE handle forms ahead of DATA-SOURCE handle and DATASET expression prefixes.
+  // Example: CREATE DATA-SOURCE hSource; CREATE DATASET hDataset.
   // Reference: CREATE statement handle forms.
-  [$.__create_handle_with_pool_body, $.dataset_reference],
+  [$.__create_handle_with_pool_body, $.__object_access_handle_type, $.dataset_reference],
 ];

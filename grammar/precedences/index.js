@@ -1,4 +1,5 @@
 import grammar_binary from "./binary.js";
+import grammar_arguments from "./arguments.js";
 import grammar_os from "./os.js";
 import grammar_dataset from "./dataset.js";
 import grammar_browse from "./browse.js";
@@ -23,6 +24,8 @@ import grammar_export from "./export.js";
 import grammar_input from "./input.js";
 import grammar_entered from "./entered.js";
 import grammar_run from "./run.js";
+import grammar_raw_transfer from "./raw-transfer.js";
+import grammar_stream from "./stream.js";
 import grammar_subscribe from "./subscribe.js";
 import grammar_update from "./update.js";
 
@@ -31,6 +34,7 @@ import grammar_update from "./update.js";
 
 export default ($) => [
   ["unary", "multiplication", "add", "compare", "not", "logical"],
+  ...grammar_arguments($),
   ...grammar_binary($),
   ...grammar_os($),
   ...grammar_dataset($),
@@ -56,6 +60,8 @@ export default ($) => [
   ...grammar_input($),
   ...grammar_entered($),
   ...grammar_run($),
+  ...grammar_raw_transfer($),
+  ...grammar_stream($),
   ...grammar_subscribe($),
   ...grammar_update($),
 ];
