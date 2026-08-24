@@ -46,14 +46,14 @@ export default ({ kw }) => ({
           choice(
             seq(
               $.__display_formatted_field,
-              optional($.__display_when_phrase),
+              optional($._when_phrase),
               optional(seq("@", field("base", $.__display_base_field))),
             ),
             seq(
               $.__display_formatted_field,
               seq("@", field("base", $.__display_base_field)),
               $.format_phrase,
-              optional($.__display_when_phrase),
+              optional($._when_phrase),
             ),
             alias($.__display_aggregate_expression, $.aggregate_expression),
             $.__display_skip_phrase,
@@ -62,7 +62,6 @@ export default ({ kw }) => ({
         ),
       ),
     ),
-  __display_when_phrase: ($) => seq(kw("WHEN"), field("when", $._expression)),
   __display_formatted_field: ($) =>
     seq(alias($.__display_field, $.field), optional($.format_phrase)),
 
