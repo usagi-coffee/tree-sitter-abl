@@ -12,7 +12,7 @@ export default ({ kw }) => ({
             seq(
               kw("ROWID"),
               field("rowid", $._expression),
-              repeat(seq(",", field("rowid", $._expression))),
+              optional($.__reposition_rowid_tail),
               optional($.__reposition_tenant_no_error_tail),
             ),
             seq(kw("RECID"), field("recid", $._expression), optional($.__no_error)),
@@ -29,6 +29,8 @@ export default ({ kw }) => ({
         ),
       ),
     ),
+  __reposition_rowid_tail: ($) =>
+    seq(",", field("rowid", $._expression), optional($.__reposition_rowid_tail)),
   __reposition_tenant_no_error_tail: ($) =>
     choice(
       seq($._for_keyword, kw("TENANT"), field("tenant", $._expression), optional($.__no_error)),

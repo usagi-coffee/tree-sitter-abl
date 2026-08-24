@@ -65,7 +65,7 @@ END PROCEDURE.
 REPOSITION qCust FORWARD 5.
 REPOSITION qCust BACKWARD (n - 1).
 REPOSITION qCust TO RECID rCust NO-ERROR.
-REPOSITION qCust TO ROWID rTop, rChild FOR TENANT tenantId NO-ERROR.
+REPOSITION qCust TO ROWID rTop, rChild, rGrandchild FOR TENANT tenantId NO-ERROR.
 
 --------------------------------------------------------------------------------
 
@@ -231,6 +231,7 @@ REPOSITION qCust TO ROWID rTop, rChild FOR TENANT tenantId NO-ERROR.
     (no_error))
   (reposition_statement
     query: (identifier)
+    rowid: (identifier)
     rowid: (identifier)
     rowid: (identifier)
     tenant: (identifier)
