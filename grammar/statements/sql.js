@@ -120,10 +120,9 @@ export default ({ kw }) => ({
       optional($.__sql_order_by_clause),
     ),
   __sql_table_references: ($) =>
-    seq(
-      field("table", $.__sql_table_reference),
-      repeat(seq(",", field("table", $.__sql_table_reference))),
-    ),
+    seq(field("table", $.__sql_table_reference), optional($.__sql_table_references_tail)),
+  __sql_table_references_tail: ($) =>
+    seq(",", field("table", $.__sql_table_reference), optional($.__sql_table_references_tail)),
   __sql_set_quantifier: ($) => choice(alias(kw("ALL"), $.all), alias(kw("DISTINCT"), $.distinct)),
 
   // `*`, `t.*`, `COUNT(*)`, or an expression with an optional column title. An
