@@ -257,3 +257,24 @@ x = ACCUM TOTAL Customer.Balance + Customer.CreditLimit.
         (qualified_name
           left: (identifier)
           right: (identifier))))))
+
+================================================================================
+CURRENT-CHANGED with bare and parenthesized records
+================================================================================
+
+changed = CURRENT-CHANGED Customer.
+changed = CURRENT-CHANGED (Customer).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (current_changed_expression
+      record: (identifier)))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (current_changed_expression
+      record: (identifier))))
