@@ -83,15 +83,13 @@ export default ({ kw }) => ({
           seq(kw("DECIMALS"), field("decimals", $.number_literal)),
           alias($._extent_phrase, $.extent_phrase),
           seq(kw("INITIAL", { offset: 4 }), field("initial", $._initial_value)),
-          seq(
-            kw("LABEL"),
-            field("label", $.string_literal),
-            repeat(seq(",", field("label", $.string_literal))),
-          ),
+          seq(kw("LABEL"), field("label", $.string_literal), optional($.__parameter_label_tail)),
           alias($._no_undo_keyword, $.no_undo),
         ),
       ),
     ),
+  __parameter_label_tail: ($) =>
+    seq(",", field("label", $.string_literal), optional($.__parameter_label_tail)),
 
   __parameter_buffer_parameter: ($) =>
     seq(
