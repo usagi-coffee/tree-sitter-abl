@@ -101,7 +101,9 @@ export default ({ kw }) => ({
   __system_dialog_initial_filter_phrase: ($) =>
     seq(kw("INITIAL-FILTER"), field("initial", $._expression)),
   __system_dialog_filters_pairs: ($) =>
-    seq($.__system_dialog_filter_pair, repeat(seq(optional(","), $.__system_dialog_filter_pair))),
+    seq($.__system_dialog_filter_pair, optional($.__system_dialog_filter_pair_tail)),
+  __system_dialog_filter_pair_tail: ($) =>
+    seq(optional(","), $.__system_dialog_filter_pair, optional($.__system_dialog_filter_pair_tail)),
   __system_dialog_filter_pair: ($) =>
     seq(field("name", $._expression), field("spec", $._expression)),
 });
