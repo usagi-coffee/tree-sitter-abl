@@ -50,6 +50,26 @@ FORM customer-name VALIDATE(ok) FORMAT "x(30)" VIEW-AS FILL-IN.
         widget: (identifier)))))
 
 ================================================================================
+FORM radio-set with multiple buttons
+================================================================================
+
+FORM choice-field VIEW-AS RADIO-SET RADIO-BUTTONS "One", 1, "Two", 2, "Three", 3.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (form_statement
+    (form_item
+      field: (identifier)
+      (view_as_phrase
+        label: (string_literal)
+        value: (number_literal)
+        label: (string_literal)
+        value: (number_literal)
+        label: (string_literal)
+        value: (number_literal)))))
+
+================================================================================
 FORM with expressions
 ================================================================================
 

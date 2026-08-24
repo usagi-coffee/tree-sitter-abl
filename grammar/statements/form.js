@@ -51,8 +51,9 @@ export default ({ kw }) => ({
       ),
     ),
 
-  __form_radio_button_list: ($) =>
-    seq($.__form_radio_button, repeat(seq(",", $.__form_radio_button))),
+  __form_radio_button_list: ($) => seq($.__form_radio_button, optional($.__form_radio_button_tail)),
+  __form_radio_button_tail: ($) =>
+    seq(",", $.__form_radio_button, optional($.__form_radio_button_tail)),
   __form_radio_button: ($) =>
     seq(field("label", $.string_literal), ",", field("value", $._expression)),
   __form_validate_phrase: ($) =>
