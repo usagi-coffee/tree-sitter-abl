@@ -30,8 +30,7 @@ export default ({ kw }) => ({
   __query_except_list: ($) => seq(kw("EXCEPT"), $.__query_parenthesized_field_names),
   __query_parenthesized_field_names: ($) => seq("(", optional($.__query_field_names), ")"),
   __query_field_names: ($) =>
-    seq(
-      $._identifier_or_qualified_name,
-      repeat(seq(optional(","), $._identifier_or_qualified_name)),
-    ),
+    seq($._identifier_or_qualified_name, optional($.__query_field_name_tail)),
+  __query_field_name_tail: ($) =>
+    seq(optional(","), $._identifier_or_qualified_name, optional($.__query_field_name_tail)),
 });
