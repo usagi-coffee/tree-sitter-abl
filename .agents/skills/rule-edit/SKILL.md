@@ -42,10 +42,12 @@ __my_statement_rule: ($) => ...,
 
 ## Conflicts
 
-- Always prefer solving conflicts using `precedences` over using `prec(<number>,`.
+- Do not introduce static numeric precedence with `prec(<number>, ...)` or
+  `prec.left/right(<number>, ...)`. It may be used temporarily to measure an
+  ambiguity, but must be removed before committing.
 - Prefer resolving ambiguous parses with `grammar/precedences/*.js` before considering `conflicts`.
-- Do not treat precedence tuning as equivalent to adding a `conflicts` entry. Precedence changes are normal grammar work.
-- Adding a `conflicts` entry is a last resort and requires prior confirmation with a clear explanation of why adding to `precedences`, associativity, or local rule refactoring are insufficient.
+- Use a `conflicts` entry when both parses are genuinely valid and precedence or local rule refactoring cannot resolve the ambiguity without discarding one.
+- Do not treat precedence tuning as equivalent to adding a `conflicts` entry.
 - Add purpose + example comments before each precedence group when modifying precedences; add reference notes for each precedence entry.
 - When reading a conflict error trust keyword tokens in {…}; ignore deduplicated rule names like `__browse_body_token7`.
 
