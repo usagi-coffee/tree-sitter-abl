@@ -1,17 +1,16 @@
 export default ({ kw }) => ({
-  format_phrase: ($) =>
-    prec.right(
-      repeat1(
-        choice(
-          $.__format_at_phrase,
-          $._format_field_option,
-          kw("AUTO-RETURN"),
-          kw("BLANK"),
-          kw("DEBLANK"),
-          kw("DISABLE-AUTO-ZAP"),
-          kw("NO-TAB-STOP"),
-        ),
-      ),
+  format_phrase: ($) => prec.right(seq($.__format_option, optional($.__format_options_tail))),
+  __format_options_tail: ($) =>
+    prec.right(seq($.__format_option, optional($.__format_options_tail))),
+  __format_option: ($) =>
+    choice(
+      $.__format_at_phrase,
+      $._format_field_option,
+      kw("AUTO-RETURN"),
+      kw("BLANK"),
+      kw("DEBLANK"),
+      kw("DISABLE-AUTO-ZAP"),
+      kw("NO-TAB-STOP"),
     ),
 
   _format_field_option: ($) =>
