@@ -121,7 +121,7 @@ DEFINE DATASET dsRelRepos FOR ttParent, ttChild DATA-RELATION FOR ttParent, ttCh
 DEFINE DATASET dsRelInactive FOR ttParent, ttChild DATA-RELATION rel1 FOR ttParent, ttChild RELATION-FIELDS (parentId, childId) NOT-ACTIVE.
 DEFINE DATASET dsRelRec FOR ttParent, ttChild DATA-RELATION FOR ttParent, ttChild RELATION-FIELDS (parentId, childId) RECURSIVE.
 DEFINE DATASET dsPid FOR ttParent, ttChild PARENT-ID-RELATION FOR ttParent, ttChild PARENT-ID-FIELD childRecid.
-DEFINE DATASET dsPidFields FOR ttParent, ttChild PARENT-ID-RELATION FOR ttParent, ttChild PARENT-ID-FIELD childRecid PARENT-FIELDS-BEFORE (parentName) PARENT-FIELDS-AFTER (parentNote).
+DEFINE DATASET dsPidFields FOR ttParent, ttChild PARENT-ID-RELATION FOR ttParent, ttChild PARENT-ID-FIELD childRecid PARENT-FIELDS-BEFORE (parentName, parentCode, parentSeq) PARENT-FIELDS-AFTER (parentNote).
 
 --------------------------------------------------------------------------------
 
@@ -239,6 +239,8 @@ DEFINE DATASET dsPidFields FOR ttParent, ttChild PARENT-ID-RELATION FOR ttParent
       parent_buffer: (identifier)
       child_buffer: (identifier)
       parent_id_field: (identifier)
+      before_field: (identifier)
+      before_field: (identifier)
       before_field: (identifier)
       after_field: (identifier))))
 

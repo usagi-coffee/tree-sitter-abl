@@ -67,9 +67,11 @@ export default ({ kw }) => ({
       kw("PARENT-FIELDS-BEFORE"),
       "(",
       field("before_field", $.identifier),
-      repeat(seq(",", field("before_field", $.identifier))),
+      optional($.__dataset_parent_fields_before_tail),
       ")",
     ),
+  __dataset_parent_fields_before_tail: ($) =>
+    seq(",", field("before_field", $.identifier), optional($.__dataset_parent_fields_before_tail)),
   __dataset_parent_fields_after_phrase: ($) =>
     seq(
       kw("PARENT-FIELDS-AFTER"),
