@@ -21,7 +21,9 @@ export default ({ kw }) => ({
       $.__browse_options_phrase,
     ),
   __browse_options_phrase: ($) => seq($._with_keyword, optional($.__browse_options)),
-  __browse_options: ($) => repeat1($.__browse_option),
+  __browse_options: ($) => seq($.__browse_option, optional($.__browse_options_tail)),
+  __browse_options_tail: ($) =>
+    prec.right(seq($.__browse_option, optional($.__browse_options_tail))),
   __browse_option: ($) =>
     choice(
       $._with_keyword,
