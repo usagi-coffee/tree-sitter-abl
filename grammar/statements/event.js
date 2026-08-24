@@ -10,7 +10,8 @@ export default ({ kw }) => ({
       seq(kw("DELEGATE"), optional(kw("CLASS")), field("delegate_type", $._type_or_string)),
     ),
 
-  __event_parameter_list: ($) => seq($.__event_parameter, repeat(seq(",", $.__event_parameter))),
+  __event_parameter_list: ($) => seq($.__event_parameter, optional($.__event_parameter_tail)),
+  __event_parameter_tail: ($) => seq(",", $.__event_parameter, optional($.__event_parameter_tail)),
 
   __event_parameter: ($) =>
     seq(
