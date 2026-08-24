@@ -110,11 +110,10 @@ export default ({ kw }) => ({
   _for_phrase: ($) =>
     seq(
       $._for_keyword,
-      seq(
-        field("record", $._identifier_or_qualified_name),
-        repeat(seq(",", field("record", $._identifier_or_qualified_name))),
-      ),
+      seq(field("record", $._identifier_or_qualified_name), optional($._for_phrase_record_tail)),
     ),
+  _for_phrase_record_tail: ($) =>
+    seq(",", field("record", $._identifier_or_qualified_name), optional($._for_phrase_record_tail)),
 
   _loop_phrase: ($) =>
     seq(field("variable", choice($.identifier, $.macro_concatenated_name)), $._loop_phrase_tail),
