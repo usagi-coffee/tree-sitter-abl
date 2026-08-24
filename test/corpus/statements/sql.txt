@@ -122,7 +122,7 @@ SELECT ALL t.* FROM t x WHERE x.k = 1 GROUP BY t.k HAVING t.k > 0 ORDER BY 1 ASC
 SQL - column titles, with and without AS
 ================================================================================
 
-SELECT a AS "Titre", b c FROM t.
+SELECT a AS "Titre", b c, d AS e FROM t.
 
 --------------------------------------------------------------------------------
 
@@ -130,6 +130,8 @@ SELECT a AS "Titre", b c FROM t.
   (select_statement
     column: (identifier)
     title: (string_literal)
+    column: (identifier)
+    title: (identifier)
     column: (identifier)
     title: (identifier)
     name: (identifier)))
