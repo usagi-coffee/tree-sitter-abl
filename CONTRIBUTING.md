@@ -34,14 +34,10 @@ PARSER_C_SIZE_BYTES: <before> -> <after> (<delta>)
 ```
 
 Keep the blank lines and metric names exactly as shown. Replace the angle-bracketed
-placeholders; do not include the brackets in the final message. Omit the optional
-optimization sentence when the change was not an optimization.
+placeholders; do not include the brackets in the final message.
 
 Measure the values against the commit's actual base. Recalculate them after rebasing or
 merging instead of keeping deltas from an earlier base.
-
-If a rule was optimized into a less obvious form, mention in the commit description
-that the simpler form was measured and produced a more expensive parser.
 
 ## Tests
 
