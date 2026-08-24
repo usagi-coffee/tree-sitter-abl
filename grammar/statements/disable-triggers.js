@@ -6,7 +6,7 @@ export default ({ kw }) => ({
       kw("TRIGGERS"),
       $._for_keyword,
       field("mode", choice(kw("DUMP"), kw("LOAD"))),
-      kw("OF"),
+      $._of_keyword,
       field("table", $._identifier_or_qualified_name),
       optional(alias(kw("ALLOW-REPLICATION"), $.allow_replication)),
     ),

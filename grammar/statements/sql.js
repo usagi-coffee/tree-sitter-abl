@@ -58,7 +58,7 @@ export default ({ kw }) => ({
       kw("UPDATE"),
       optional(
         seq(
-          kw("OF"),
+          $._of_keyword,
           field("column", $._identifier_or_qualified_name),
           optional($.__sql_for_update_column_tail),
         ),

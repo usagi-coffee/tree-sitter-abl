@@ -13,7 +13,7 @@ export default ({ kw }) => ({
 
   __record_option: ($) =>
     choice(
-      seq(kw("OF"), field("of", $._identifier_or_qualified_name)),
+      seq($._of_keyword, field("of", $._identifier_or_qualified_name)),
       prec.right(seq(kw("WHERE"), field("where", optional($._expression)))),
       seq(
         kw("TENANT-WHERE"),

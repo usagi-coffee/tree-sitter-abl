@@ -25,7 +25,7 @@ export default ({ kw }) => ({
         seq(kw("ROW-OF"), field("row_of", $._expression)),
       ),
     ),
-  __at_of_suffix: ($) => prec.right(seq(kw("OF"), $._expression)),
+  __at_of_suffix: ($) => prec.right(seq($._of_keyword, $._expression)),
 
   __at_x_y: ($) =>
     repeat1(

@@ -56,7 +56,7 @@ export default ({ kw }) => ({
         field("record", $._identifier_or_qualified_name),
         repeat(
           choice(
-            seq(kw("OF"), field("of", $._identifier_or_qualified_name)),
+            seq($._of_keyword, field("of", $._identifier_or_qualified_name)),
             seq(kw("WHERE"), field("where", $._expression)),
             seq(kw("USE-INDEX"), field("index", $.identifier)),
             field("lock", $._lock_option),

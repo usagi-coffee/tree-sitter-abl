@@ -8,11 +8,11 @@ export default ({ kw }) => ({
       $._for_keyword,
       choice(
         // Simple events: CREATE, DELETE, FIND, REPLICATION-CREATE, etc.
-        seq(field("event", $.identifier), kw("OF"), field("object", $.identifier)),
+        seq(field("event", $.identifier), $._of_keyword, field("object", $.identifier)),
         // WRITE event with optional NEW and OLD buffers
         seq(
           kw("WRITE"),
-          kw("OF"),
+          $._of_keyword,
           field("object", $.identifier),
           optional($.__trigger_procedure_new_buffer),
           optional($.__trigger_procedure_old_buffer),
@@ -21,7 +21,7 @@ export default ({ kw }) => ({
         seq(
           kw("ASSIGN"),
           choice(
-            seq(kw("OF"), field("object", $.qualified_name)),
+            seq($._of_keyword, field("object", $.qualified_name)),
             seq(
               seq(kw("NEW"), $.__trigger_procedure_value_body),
               optional(seq(kw("OLD"), $.__trigger_procedure_value_body)),

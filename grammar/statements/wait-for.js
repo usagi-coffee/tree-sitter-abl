@@ -29,7 +29,7 @@ export default ({ kw }) => ({
   __wait_for_of_phrase: ($) =>
     seq(
       field("events", $.__wait_for_event_list),
-      kw("OF"),
+      $._of_keyword,
       field("widgets", $.__wait_for_widget_list),
     ),
   __wait_for_focus_phrase: ($) => seq(kw("FOCUS"), field("focus", $.widget_phrase)),
