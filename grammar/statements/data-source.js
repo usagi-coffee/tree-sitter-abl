@@ -35,12 +35,18 @@ export default ({ kw }) => ({
             kw("ROWID"),
             seq(
               field("field", $._identifier_or_qualified_name),
-              repeat(seq(",", field("field", $._identifier_or_qualified_name))),
+              optional($.__data_source_key_field_tail),
             ),
           ),
           ")",
         ),
       ),
+    ),
+  __data_source_key_field_tail: ($) =>
+    seq(
+      ",",
+      field("field", $._identifier_or_qualified_name),
+      optional($.__data_source_key_field_tail),
     ),
   __data_source_modifier: ($) =>
     choice(
