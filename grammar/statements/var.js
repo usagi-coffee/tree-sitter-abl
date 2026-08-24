@@ -7,8 +7,10 @@ export default ({ kw }) => ({
       optional($.__var_modifier),
       $._var_type,
       alias($.__var_variable, $.variable),
-      repeat(seq(",", alias($.__var_variable, $.variable))),
+      optional($.__var_variable_tail),
     ),
+  __var_variable_tail: ($) =>
+    seq(",", alias($.__var_variable, $.variable), optional($.__var_variable_tail)),
 
   _var_type: ($) =>
     seq(
