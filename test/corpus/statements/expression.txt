@@ -278,3 +278,24 @@ changed = CURRENT-CHANGED (Customer).
     operator: (assignment_operator)
     right: (current_changed_expression
       record: (identifier))))
+
+================================================================================
+AMBIGUOUS with bare and parenthesized records
+================================================================================
+
+ambiguous-record = AMBIGUOUS Customer.
+ambiguous-record = AMBIGUOUS (Customer).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (ambiguous_expression
+      record: (identifier)))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (ambiguous_expression
+      record: (identifier))))
