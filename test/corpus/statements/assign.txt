@@ -87,7 +87,7 @@ ASSIGN
 ASSIGN record/input
 ================================================================================
 
-ASSIGN Customer EXCEPT Name NO-ERROR.
+ASSIGN Customer EXCEPT Name, City State NO-ERROR.
 ASSIGN INPUT FRAME frm Cust.Name = "x" WHEN TRUE Cust.City = "y" WHEN FALSE NO-ERROR.
 
 --------------------------------------------------------------------------------
@@ -95,6 +95,8 @@ ASSIGN INPUT FRAME frm Cust.Name = "x" WHEN TRUE Cust.City = "y" WHEN FALSE NO-E
 (source_code
   (assign_statement
     record: (identifier)
+    field: (identifier)
+    field: (identifier)
     field: (identifier)
     (no_error))
   (assign_statement

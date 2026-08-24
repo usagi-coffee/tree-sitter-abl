@@ -27,9 +27,15 @@ export default ({ kw }) => ({
         seq(
           kw("EXCEPT"),
           field("field", $._identifier_or_qualified_name),
-          repeat(seq(optional(","), field("field", $._identifier_or_qualified_name))),
+          optional($.__assign_except_field_tail),
         ),
       ),
+    ),
+  __assign_except_field_tail: ($) =>
+    seq(
+      optional(","),
+      field("field", $._identifier_or_qualified_name),
+      optional($.__assign_except_field_tail),
     ),
 
   __assign_input_body: ($) =>
