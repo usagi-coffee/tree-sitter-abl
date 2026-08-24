@@ -174,8 +174,10 @@ export default ({ kw }) => ({
       kw("GROUP"),
       $._by_keyword,
       field("group", $._identifier_or_qualified_name),
-      repeat(seq(",", field("group", $._identifier_or_qualified_name))),
+      optional($.__sql_group_by_tail),
     ),
+  __sql_group_by_tail: ($) =>
+    seq(",", field("group", $._identifier_or_qualified_name), optional($.__sql_group_by_tail)),
   __sql_having_clause: ($) => seq(kw("HAVING"), field("condition", $._expression)),
   __sql_order_by_clause: ($) =>
     seq(

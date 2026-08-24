@@ -102,7 +102,7 @@ SELECT CustNum, Name, City INTO n, nm, city FROM Customer.
 SQL - the full clause set
 ================================================================================
 
-SELECT ALL t.* FROM t x, u y, v z WHERE x.k = 1 GROUP BY t.k HAVING t.k > 0 ORDER BY 1 ASC.
+SELECT ALL t.* FROM t x, u y, v z WHERE x.k = 1 GROUP BY t.k, u.k, v.k HAVING t.k > 0 ORDER BY 1 ASC.
 
 --------------------------------------------------------------------------------
 
@@ -122,6 +122,12 @@ SELECT ALL t.* FROM t x, u y, v z WHERE x.k = 1 GROUP BY t.k HAVING t.k > 0 ORDE
         left: (identifier)
         right: (identifier))
       (number_literal))
+    group: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    group: (qualified_name
+      left: (identifier)
+      right: (identifier))
     group: (qualified_name
       left: (identifier)
       right: (identifier))
