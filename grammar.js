@@ -109,7 +109,7 @@ export default grammar({
     // UNDERLINE has the same optional statement stream before its field list.
     [$.__underline_prefix],
     // WITH NO-VALIDATE is valid both as prompt_for_with_phrase and as frame_phrase option
-    [$.__prompt_for_with_phrase, $.frame_phrase],
+    [$.__prompt_for_with_phrase, $.__frame_option],
     // Shared [NOT] ENTERED phrase must preserve both keyword-as-identifier spans.
     [$.__entered_operator],
     // ENABLE/DISABLE field[N] can be confused with function_call
