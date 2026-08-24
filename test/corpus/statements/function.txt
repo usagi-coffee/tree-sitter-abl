@@ -846,7 +846,7 @@ FUNCTION f RETURNS DECIMAL PRIVATE (INPUT p AS CHARACTER) FORWARD.
 FUNCTION FORWARD - unnamed parameters
 ================================================================================
 
-FUNCTION SetGedDocValue RETURNS LOGICAL (INPUT INTEGER, INPUT CHARACTER) IN hRunEdit.
+FUNCTION SetGedDocValue RETURNS LOGICAL (INPUT INTEGER, INPUT CHARACTER, OUTPUT LOGICAL) IN hRunEdit.
 FUNCTION doubler RETURNS INTEGER (INPUT INTEGER EXTENT 3) FORWARD.
 
 --------------------------------------------------------------------------------
@@ -856,6 +856,8 @@ FUNCTION doubler RETURNS INTEGER (INPUT INTEGER EXTENT 3) FORWARD.
     name: (identifier)
     type: (identifier)
     (parameters
+      (parameter
+        type: (identifier))
       (parameter
         type: (identifier))
       (parameter
