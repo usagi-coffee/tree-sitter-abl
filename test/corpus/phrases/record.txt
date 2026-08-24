@@ -18,7 +18,7 @@ PRESELECT EACH Customer NO-LOCK.
 FOR - FIELDS list with array subscripts
 ================================================================================
 
-FOR FIRST t FIELDS (secta[1] sect[2]) NO-LOCK:
+FOR FIRST t FIELDS (secta[1] sect[2], sect3[3]) NO-LOCK:
 END.
 
 --------------------------------------------------------------------------------
@@ -28,6 +28,8 @@ END.
     (record_phrase
       record: (identifier)
       (field_list
+        (identifier)
+        index: (number_literal)
         (identifier)
         index: (number_literal)
         (identifier)
