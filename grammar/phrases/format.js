@@ -159,7 +159,9 @@ export default ({ kw }) => ({
   __format_radio_set_orientation: ($) =>
     choice(seq(kw("HORIZONTAL"), optional(kw("EXPAND"))), kw("VERTICAL")),
   __format_radio_set_buttons: ($) =>
-    seq($.__format_radio_set_pair, repeat(seq(",", $.__format_radio_set_pair))),
+    seq($.__format_radio_set_pair, optional($.__format_radio_set_buttons_tail)),
+  __format_radio_set_buttons_tail: ($) =>
+    seq(",", $.__format_radio_set_pair, optional($.__format_radio_set_buttons_tail)),
   __format_radio_set_pair: ($) =>
     seq(
       field("label", $.__format_radio_set_value),
