@@ -35,7 +35,7 @@ SQL - cursor modes
 ================================================================================
 
 DECLARE c2 CURSOR FOR SELECT DISTINCT CustNum FROM Customer WHERE Customer.Bal > 0 FOR READ ONLY.
-DECLARE c3 CURSOR FOR SELECT a FROM t ORDER BY a DESC FOR UPDATE OF t.a.
+DECLARE c3 CURSOR FOR SELECT a FROM t ORDER BY a DESC FOR UPDATE OF t.a, t.b, t.c.
 
 --------------------------------------------------------------------------------
 
@@ -60,6 +60,12 @@ DECLARE c3 CURSOR FOR SELECT a FROM t ORDER BY a DESC FOR UPDATE OF t.a.
       (order_term
         key: (identifier)))
     (for_update
+      column: (qualified_name
+        left: (identifier)
+        right: (identifier))
+      column: (qualified_name
+        left: (identifier)
+        right: (identifier))
       column: (qualified_name
         left: (identifier)
         right: (identifier)))))

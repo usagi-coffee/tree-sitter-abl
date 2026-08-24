@@ -60,9 +60,15 @@ export default ({ kw }) => ({
         seq(
           kw("OF"),
           field("column", $._identifier_or_qualified_name),
-          repeat(seq(",", field("column", $._identifier_or_qualified_name))),
+          optional($.__sql_for_update_column_tail),
         ),
       ),
+    ),
+  __sql_for_update_column_tail: ($) =>
+    seq(
+      ",",
+      field("column", $._identifier_or_qualified_name),
+      optional($.__sql_for_update_column_tail),
     ),
 
   // `OPEN c.` -- distinct from OPEN QUERY, which names its keyword.
