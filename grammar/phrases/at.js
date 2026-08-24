@@ -5,8 +5,8 @@ export default ({ kw }) => ({
       prec.right(
         seq(
           choice(
-            seq($.__at_column_row, optional($.__at_alignment)),
-            seq($.__at_x_y, optional($.__at_alignment)),
+            seq($.__at_column_row, optional($._alignment)),
+            seq($.__at_x_y, optional($._alignment)),
             field("position", $._expression),
           ),
         ),
@@ -36,6 +36,4 @@ export default ({ kw }) => ({
         seq(kw("Y-OF"), field("y_of", $._expression)),
       ),
     ),
-
-  __at_alignment: ($) => choice(kw("COLON-ALIGNED"), kw("LEFT-ALIGNED"), kw("RIGHT-ALIGNED")),
 });

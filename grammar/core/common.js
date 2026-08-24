@@ -1,6 +1,7 @@
 // Non-core statement-specific shared rules
 
 export default ({ kw }) => ({
+  _alignment: ($) => choice(kw("COLON-ALIGNED"), kw("LEFT-ALIGNED"), kw("RIGHT-ALIGNED")),
   _as_like: ($) =>
     choice(
       seq($._as_keyword, optional(kw("CLASS")), field("type", $._type_or_string)),

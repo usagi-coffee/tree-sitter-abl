@@ -32,7 +32,6 @@ export default ({ kw }) => ({
       seq(kw("WIDGET-ID"), field("widget_id", $.__format_expression)),
     ),
   __format_expression: ($) => $._expression,
-  __format_alignment: ($) => choice(kw("COLON-ALIGNED"), kw("LEFT-ALIGNED"), kw("RIGHT-ALIGNED")),
 
   __format_at_phrase: ($) =>
     seq(
@@ -44,7 +43,7 @@ export default ({ kw }) => ({
             seq($.__format_at_column, $.__format_at_row),
             seq($.__format_at_x, $.__format_at_y),
           ),
-          optional($.__format_alignment),
+          optional($._alignment),
         ),
         seq(kw("COLUMN", { alias: "COL", offset: 3 }), field("column", $.number_literal)),
         seq($._row_keyword, field("row", $.number_literal)),
