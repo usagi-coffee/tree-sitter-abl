@@ -115,7 +115,7 @@ DEFINE NON-SERIALIZABLE DATASET dsNonSer FOR ttCustomer.
 DEFINE DATASET dsRef REFERENCE-ONLY FOR ttCustomer.
 DEFINE DATASET dsNs NAMESPACE-URI "http://example.com" NAMESPACE-PREFIX "ex" FOR ttCustomer.
 DEFINE DATASET dsXml XML-NODE-NAME "cust" SERIALIZE-NAME "custNode" XML-NODE-TYPE "HIDDEN" SERIALIZE-HIDDEN FOR ttCustomer.
-DEFINE DATASET dsRel FOR ttParent, ttChild DATA-RELATION FOR ttParent, ttChild RELATION-FIELDS (parentId, childId).
+DEFINE DATASET dsRel FOR ttParent, ttChild DATA-RELATION FOR ttParent, ttChild RELATION-FIELDS (parentId, childId, parentCode, childCode, parentSeq, childSeq).
 DEFINE DATASET dsRelNested FOR ttParent, ttChild DATA-RELATION FOR ttParent, ttChild RELATION-FIELDS (parentId, childId) NESTED FOREIGN-KEY-HIDDEN.
 DEFINE DATASET dsRelRepos FOR ttParent, ttChild DATA-RELATION FOR ttParent, ttChild RELATION-FIELDS (parentId, childId) REPOSITION.
 DEFINE DATASET dsRelInactive FOR ttParent, ttChild DATA-RELATION rel1 FOR ttParent, ttChild RELATION-FIELDS (parentId, childId) NOT-ACTIVE.
@@ -175,6 +175,10 @@ DEFINE DATASET dsPidFields FOR ttParent, ttChild PARENT-ID-RELATION FOR ttParent
     (data_relation
       parent_buffer: (identifier)
       child_buffer: (identifier)
+      parent_field: (identifier)
+      child_field: (identifier)
+      parent_field: (identifier)
+      child_field: (identifier)
       parent_field: (identifier)
       child_field: (identifier)))
   (dataset_definition
