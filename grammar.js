@@ -369,6 +369,7 @@ export default grammar({
       _help_keyword: ($) => kw("HELP"),
       _delete_keyword: ($) => kw("DELETE"),
       _close_keyword: ($) => kw("CLOSE"),
+      _with_keyword: ($) => kw("WITH"),
 
       // Types
       generic_type: ($) => seq($.__generic_type_prefix, ">"),

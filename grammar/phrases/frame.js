@@ -1,7 +1,7 @@
 export default ({ kw }) => ({
   frame_phrase: ($) =>
     seq(
-      kw("WITH"),
+      $._with_keyword,
       repeat(
         choice(
           $.at_phrase,
@@ -101,7 +101,7 @@ export default ({ kw }) => ({
           seq(kw("FRAME", { offset: 4 }), field("frame", $.__frame_identifier)),
           seq(kw("BROWSE"), field("browse", $.__frame_identifier)),
         ),
-        optional(kw("WITH")),
+        optional($._with_keyword),
       ),
     ),
 });

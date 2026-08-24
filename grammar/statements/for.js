@@ -41,7 +41,7 @@ export default ({ kw }) => ({
   __for_break_by: ($) => prec.right(seq(kw("BREAK"), $.__for_by_clause)),
   __for_by_clause: ($) => seq($._by_keyword, $.__for_by_tail),
 
-  __for_with_stream_io_phrase: ($) => seq(kw("WITH"), alias(kw("STREAM-IO"), $.stream_io)),
+  __for_with_stream_io_phrase: ($) => seq($._with_keyword, alias(kw("STREAM-IO"), $.stream_io)),
 
   __for_by_tail: ($) => prec.right(seq($.__for_by_item, optional($.__for_by_items_tail))),
   __for_by_items_tail: ($) =>

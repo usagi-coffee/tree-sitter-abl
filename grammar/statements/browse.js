@@ -20,11 +20,11 @@ export default ({ kw }) => ({
       seq($.__browse_enable_phrase, optional($.__browse_options_phrase)),
       $.__browse_options_phrase,
     ),
-  __browse_options_phrase: ($) => seq(kw("WITH"), optional($.__browse_options)),
+  __browse_options_phrase: ($) => seq($._with_keyword, optional($.__browse_options)),
   __browse_options: ($) => repeat1($.__browse_option),
   __browse_option: ($) =>
     choice(
-      kw("WITH"),
+      $._with_keyword,
       seq(kw("CONTEXT-HELP-ID"), field("context_help_id", $.__browse_option_expression)),
       $.__browse_flag_option,
       seq(kw("TOOLTIP"), field("tooltip", $.__browse_option_expression)),
