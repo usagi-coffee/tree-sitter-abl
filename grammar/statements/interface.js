@@ -18,7 +18,9 @@ export default ({ kw }) => ({
     ),
 
   __interface_inherits_list: ($) =>
-    seq(field("super", $._type_name), repeat(seq(",", field("super", $._type_name)))),
+    seq(field("super", $._type_name), optional($.__interface_inherits_tail)),
+  __interface_inherits_tail: ($) =>
+    seq(",", field("super", $._type_name), optional($.__interface_inherits_tail)),
 
   __interface_body_item: ($) =>
     choice(
