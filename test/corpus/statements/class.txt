@@ -20,7 +20,7 @@ CLASS FunkyWorld.Util.KittyLogHelper:
     GET:
       RETURN m_Total.
     END GET.
-    SET (newValue AS INTEGER):
+    SET (newValue AS INTEGER, oldValue AS INTEGER, changed AS LOGICAL):
       m_Total = newValue.
     END SET.
 
@@ -142,6 +142,12 @@ END CLASS.
       (return_statement
         value: (identifier))
       (property_set_parameter_list
+        (property_set_parameter
+          name: (identifier)
+          type: (identifier))
+        (property_set_parameter
+          name: (identifier)
+          type: (identifier))
         (property_set_parameter
           name: (identifier)
           type: (identifier)))

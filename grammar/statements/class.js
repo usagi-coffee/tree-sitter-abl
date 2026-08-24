@@ -196,7 +196,9 @@ export default ({ kw }) => ({
     ),
   __class_property_accessor_parameters: ($) => choice(seq("(", ")"), $.property_set_parameter_list),
   property_set_parameter_list: ($) =>
-    seq("(", $.property_set_parameter, repeat(seq(",", $.property_set_parameter)), ")"),
+    seq("(", $.property_set_parameter, optional($.__class_property_set_parameter_tail), ")"),
+  __class_property_set_parameter_tail: ($) =>
+    seq(",", $.property_set_parameter, optional($.__class_property_set_parameter_tail)),
 
   property_set_parameter: ($) =>
     seq(optional(field("direction", $._parameter_direction)), $.__class_named_parameter_body),
