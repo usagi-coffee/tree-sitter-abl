@@ -15,6 +15,7 @@ export default ({ kw }) => ({
 
   _except_fields: ($) => seq(kw("EXCEPT"), repeat1(field("except", $.identifier))),
   _frame_phrases: ($) => seq($.frame_phrase, optional($.frame_phrase)),
+  _parenthesized_value: ($) => seq($._parenthesized_expression_prefix, ")"),
   _map_phrase: ($) =>
     choice(
       seq(kw("MAP"), field("map", $._identifier_or_string_literal)),
