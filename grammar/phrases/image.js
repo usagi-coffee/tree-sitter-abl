@@ -20,7 +20,7 @@ export default ({ kw }) => ({
       choice(
         seq(kw("X"), field("x", $.number_literal), kw("Y"), field("y", $.number_literal)),
         seq(
-          kw("ROW"),
+          $._row_keyword,
           field("row", $.number_literal),
           kw("COLUMN"),
           field("column", $.number_literal),

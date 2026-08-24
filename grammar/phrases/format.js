@@ -47,7 +47,7 @@ export default ({ kw }) => ({
           optional($.__format_alignment),
         ),
         seq(kw("COLUMN", { alias: "COL", offset: 3 }), field("column", $.number_literal)),
-        seq(kw("ROW"), field("row", $.number_literal)),
+        seq($._row_keyword, field("row", $.number_literal)),
       ),
     ),
   __format_at_column: ($) =>
@@ -57,7 +57,7 @@ export default ({ kw }) => ({
     ),
   __format_at_row: ($) =>
     choice(
-      seq(kw("ROW"), field("row", $._expression)),
+      seq($._row_keyword, field("row", $._expression)),
       seq(kw("ROW-OF"), field("row_of", $._expression)),
     ),
   __format_at_x: ($) =>

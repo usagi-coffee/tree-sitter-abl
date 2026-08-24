@@ -7,7 +7,7 @@ export default ({ kw }) => ({
       choice(
         kw("OFF"),
         seq(
-          optional(seq(kw("ROW"), field("row", $._expression))),
+          optional(seq($._row_keyword, field("row", $._expression))),
           optional(seq(kw("COLUMN", { offset: 3 }), field("column", $._expression))),
         ),
       ),

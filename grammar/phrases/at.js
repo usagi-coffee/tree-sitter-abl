@@ -21,7 +21,7 @@ export default ({ kw }) => ({
           choice(field("column", $._expression), alias($.__at_of_suffix, $.column_of)),
         ),
         seq(kw("COLUMN-OF"), field("column_of", $._expression)),
-        seq(kw("ROW"), choice(field("row", $._expression), alias($.__at_of_suffix, $.row_of))),
+        seq($._row_keyword, choice(field("row", $._expression), alias($.__at_of_suffix, $.row_of))),
         seq(kw("ROW-OF"), field("row_of", $._expression)),
       ),
     ),

@@ -33,7 +33,7 @@ export default ({ kw }) => ({
           alias(kw("USE-DICT-EXPS"), $.use_dict_exps),
           alias(kw("ACCUM"), $.accum),
           $.__frame_with_identifier,
-          seq(kw("ROW"), field("row", $.__frame_expression)),
+          seq($._row_keyword, field("row", $.__frame_expression)),
           seq(kw("WIDTH"), field("width", $.__frame_expression)),
           seq(kw("FONT"), field("font", $.number_literal)),
           seq(kw("CANCEL-BUTTON"), field("cancel_button", $.__frame_identifier)),

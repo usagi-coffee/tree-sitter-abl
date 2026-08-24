@@ -16,7 +16,7 @@ export default ({ kw }) => ({
               optional($.__reposition_tenant_no_error_tail),
             ),
             seq(kw("RECID"), field("recid", $._expression), optional($.__no_error)),
-            seq(kw("ROW"), field("row", $._expression)),
+            seq($._row_keyword, field("row", $._expression)),
           ),
         ),
         seq(

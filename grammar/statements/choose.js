@@ -5,7 +5,7 @@ export default ({ kw }) => ({
     seq(
       kw("CHOOSE"),
       choice(
-        seq(kw("ROW"), $.__choose_field_help),
+        seq($._row_keyword, $.__choose_field_help),
         seq(kw("FIELD"), repeat1($.__choose_field_help)),
       ),
       repeat(

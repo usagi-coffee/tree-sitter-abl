@@ -363,6 +363,7 @@ export default grammar({
       _no_undo_keyword: ($) => kw("NO-UNDO"),
       _of_keyword: ($) => kw("OF"),
       _like_keyword: ($) => kw("LIKE"),
+      _row_keyword: ($) => kw("ROW"),
 
       // Types
       generic_type: ($) => seq($.__generic_type_prefix, ">"),
