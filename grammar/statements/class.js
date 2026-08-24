@@ -166,7 +166,7 @@ export default ({ kw }) => ({
         choice(
           seq(kw("INITIAL", { offset: 4 }), field("initial", $._initial_value)),
           seq(kw("SERIALIZE-NAME"), field("serialize_name", $.string_literal)),
-          alias(kw("NO-UNDO"), $.no_undo),
+          alias($._no_undo_keyword, $.no_undo),
           alias($._extent_phrase, $.extent_phrase),
         ),
       ),
@@ -198,7 +198,7 @@ export default ({ kw }) => ({
     seq(
       field("name", $.identifier),
       $.__class_method_variable_type_phrase,
-      optional(alias(kw("NO-UNDO"), $.no_undo)),
+      optional(alias($._no_undo_keyword, $.no_undo)),
     ),
 
   __class_option: ($) =>

@@ -178,7 +178,7 @@ export default ({ kw }) => ({
   _table_body: ($) =>
     seq(
       field("name", $.identifier),
-      optional(alias(kw("NO-UNDO"), $.no_undo)),
+      optional(alias($._no_undo_keyword, $.no_undo)),
       repeat(
         choice(
           seq(kw("NAMESPACE-URI"), field("namespace_uri", $.string_literal)),

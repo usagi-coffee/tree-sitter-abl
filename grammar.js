@@ -360,6 +360,7 @@ export default grammar({
       _end_keyword: ($) => kw("END"),
       _by_keyword: ($) => kw("BY"),
       _as_keyword: ($) => kw("AS"),
+      _no_undo_keyword: ($) => kw("NO-UNDO"),
 
       // Types
       generic_type: ($) => seq($.__generic_type_prefix, ">"),

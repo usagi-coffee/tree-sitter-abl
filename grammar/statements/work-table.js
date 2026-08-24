@@ -17,7 +17,7 @@ export default ({ kw }) => ({
     ),
   __work_table_like_no_undo_tail: ($) =>
     choice(
-      seq(alias($._like_phrase, $.like_phrase), optional(alias(kw("NO-UNDO"), $.no_undo))),
-      alias(kw("NO-UNDO"), $.no_undo),
+      seq(alias($._like_phrase, $.like_phrase), optional(alias($._no_undo_keyword, $.no_undo))),
+      alias($._no_undo_keyword, $.no_undo),
     ),
 });

@@ -102,7 +102,7 @@ export default ({ kw }) => ({
       seq(
         field("name", $.identifier),
         $.__function_variable_type_phrase,
-        optional(alias(kw("NO-UNDO"), $.no_undo)),
+        optional(alias($._no_undo_keyword, $.no_undo)),
       ),
       seq(
         kw("BUFFER"),

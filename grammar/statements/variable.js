@@ -13,7 +13,7 @@ export default ({ kw }) => ({
     seq(
       field("name", $.identifier),
       repeat(alias($.__variable_extent_phrase, $.extent_phrase)),
-      optional(alias(kw("NO-UNDO"), $.no_undo)),
+      optional(alias($._no_undo_keyword, $.no_undo)),
       choice(
         seq($._as_keyword, optional(kw("CLASS")), field("type", $._type_or_string)),
         seq(kw("LIKE"), field("like", $._identifier_or_array_access)),
@@ -34,7 +34,7 @@ export default ({ kw }) => ({
           seq(kw("INITIAL", { offset: 4 }), field("initial", $._initial_value)),
           $.view_as_phrase,
           alias(seq(optional(kw("NOT")), kw("CASE-SENSITIVE")), $.case_sensitive),
-          alias(kw("NO-UNDO"), $.no_undo),
+          alias($._no_undo_keyword, $.no_undo),
           $.trigger_phrase,
         ),
       ),
