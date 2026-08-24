@@ -102,7 +102,7 @@ export default ({ kw }) => ({
       optional(seq($._for_keyword, kw("TENANT"), field("tenant", $._expression))),
       optional(
         seq(
-          kw("USING"),
+          $._using_keyword,
           choice(
             seq(kw("ROWID"), $.__create_record_locator_rowid),
             seq(kw("RECID"), $.__create_record_locator_recid),

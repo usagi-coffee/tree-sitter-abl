@@ -38,7 +38,7 @@ export default ({ kw }) => ({
 
   __buffer_compare_field_phrase: ($) =>
     seq(
-      choice(kw("EXCEPT"), kw("USING")),
+      choice(kw("EXCEPT"), $._using_keyword),
       repeat1(field("field", $._identifier_or_qualified_name)),
     ),
 

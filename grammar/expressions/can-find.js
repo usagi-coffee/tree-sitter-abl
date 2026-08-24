@@ -60,7 +60,7 @@ export default ({ kw }) => ({
   __record_query_of_phrase: ($) =>
     seq($._of_keyword, field("record", $._identifier_or_qualified_name)),
   __record_query_using_phrase: ($) =>
-    seq(kw("USING"), field("index", $._identifier_or_qualified_name)),
+    seq($._using_keyword, field("index", $._identifier_or_qualified_name)),
   __record_query_frame_phrase: ($) =>
     seq(
       kw("AND"),

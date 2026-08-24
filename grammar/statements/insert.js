@@ -9,7 +9,7 @@ export default ({ kw }) => ({
     ),
   __insert_after_except: ($) =>
     choice(
-      seq(kw("USING"), field("using", $._expression), optional($.frame_phrase)),
+      seq($._using_keyword, field("using", $._expression), optional($.frame_phrase)),
       $.frame_phrase,
     ),
 });

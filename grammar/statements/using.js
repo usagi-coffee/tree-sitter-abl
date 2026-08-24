@@ -3,7 +3,7 @@ export default ({ kw }) => ({
 
   __using_prefix: ($) =>
     seq(
-      kw("USING"),
+      $._using_keyword,
       $.__using_type_ref,
       repeat(seq(",", $.__using_type_ref)),
       optional(alias($.__using_from_clause, $.from_clause)),

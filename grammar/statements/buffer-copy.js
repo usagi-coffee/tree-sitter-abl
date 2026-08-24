@@ -17,7 +17,7 @@ export default ({ kw }) => ({
       optional(alias(kw("NO-LOBS"), $.no_lobs)),
     ),
   __buffer_copy_except_phrase: ($) => seq(kw("EXCEPT"), $.__buffer_copy_fields),
-  __buffer_copy_using_phrase: ($) => seq(kw("USING"), $.__buffer_copy_fields),
+  __buffer_copy_using_phrase: ($) => seq($._using_keyword, $.__buffer_copy_fields),
   __buffer_copy_fields: ($) =>
     seq($._identifier_or_qualified_name, optional($.__buffer_copy_field_tail)),
   __buffer_copy_field_tail: ($) =>

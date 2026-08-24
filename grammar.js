@@ -368,6 +368,7 @@ export default grammar({
       _dataset_keyword: ($) => kw("DATASET"),
       _on_keyword: ($) => kw("ON"),
       _at_keyword: ($) => kw("AT"),
+      _using_keyword: ($) => kw("USING"),
 
       // Types
       generic_type: ($) => seq($.__generic_type_prefix, ">"),

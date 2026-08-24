@@ -32,7 +32,7 @@ export default ({ kw }) => ({
       alias(kw("NO-WAIT"), $.no_wait),
       alias(kw("NO-ERROR"), $.no_error),
       alias(kw("NO-PREFETCH"), $.no_prefetch),
-      seq(kw("USING"), field("values", $._expressions)),
+      seq($._using_keyword, field("values", $._expressions)),
       seq(kw("USE-INDEX"), field("index", $.__find_index_name)),
     ),
 
