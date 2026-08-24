@@ -56,13 +56,13 @@ export default ({ kw }) => ({
     seq($._define_keyword, optional(alias(kw("PRIVATE"), $.access_modifier))),
   _definition_scope_modifier: ($) =>
     choice(
-      seq(alias(kw("NEW"), $.new_modifier), alias(kw("SHARED"), $.scope_modifier)),
+      seq(alias($._new_keyword, $.new_modifier), alias(kw("SHARED"), $.scope_modifier)),
       alias(kw("SHARED"), $.scope_modifier),
       alias(kw("PRIVATE"), $.access_modifier),
     ),
   _buffer_query_modifier: ($) =>
     choice(
-      seq(alias(kw("NEW"), $.new_modifier), alias(kw("SHARED"), $.scope_modifier)),
+      seq(alias($._new_keyword, $.new_modifier), alias(kw("SHARED"), $.scope_modifier)),
       alias(kw("SHARED"), $.scope_modifier),
       alias(kw("PRIVATE"), $.access_modifier),
       alias(kw("PROTECTED"), $.access_modifier),

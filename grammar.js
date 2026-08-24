@@ -229,7 +229,7 @@ export default grammar({
           $.binary_expression,
           $.parenthesized_expression,
           $._identifier_or_qualified_name,
-          alias(kw("NEW"), $.identifier),
+          alias($._new_keyword, $.identifier),
           alias(kw("WINDOW"), $.identifier),
           alias($._in_keyword, $.identifier),
           $.object_access,
@@ -364,6 +364,7 @@ export default grammar({
       _of_keyword: ($) => kw("OF"),
       _like_keyword: ($) => kw("LIKE"),
       _row_keyword: ($) => kw("ROW"),
+      _new_keyword: ($) => kw("NEW"),
 
       // Types
       generic_type: ($) => seq($.__generic_type_prefix, ">"),

@@ -84,7 +84,7 @@ export default ({ kw }) => ({
     seq(",", field("after_field", $.identifier), optional($.__dataset_parent_fields_after_tail)),
   __dataset_modifier: ($) =>
     choice(
-      seq(alias(kw("NEW"), $.new_modifier), alias(kw("SHARED"), $.scope_modifier)),
+      seq(alias($._new_keyword, $.new_modifier), alias(kw("SHARED"), $.scope_modifier)),
       alias(kw("SHARED"), $.scope_modifier),
       seq(
         choice(alias(kw("PRIVATE"), $.access_modifier), alias(kw("PROTECTED"), $.access_modifier)),

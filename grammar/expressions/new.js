@@ -1,7 +1,7 @@
 export default ({ kw }) => ({
   new_expression: ($) =>
     seq(
-      $.__new_prefix,
+      $._new_keyword,
       choice(
         // Class constructor: NEW ClassName(args)
         seq(
@@ -14,6 +14,5 @@ export default ({ kw }) => ({
         ),
       ),
     ),
-  __new_prefix: ($) => kw("NEW"),
   __new_record_opener: ($) => seq("(", field("record", $._identifier_or_qualified_name)),
 });

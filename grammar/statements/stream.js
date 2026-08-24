@@ -11,7 +11,7 @@ export default ({ kw }) => ({
   __stream_modifier: ($) =>
     choice(
       seq(
-        alias(kw("NEW"), $.new_modifier),
+        alias($._new_keyword, $.new_modifier),
         optional(alias(kw("GLOBAL"), $.scope_modifier)),
         alias(kw("SHARED"), $.scope_modifier),
       ),

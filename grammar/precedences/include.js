@@ -7,7 +7,7 @@ export default ($) => [
   // Purpose: keep NEW/WINDOW as positional include arguments over constructor and widget reductions.
   // Example: {include.i NEW WINDOW {&next-argument}}
   // Reference: include positional arguments.
-  [$._include_argument_value, $.__new_prefix, $._widgets],
+  [$._include_argument_value, $.new_expression, $._widgets],
   // Purpose: keep an include argument reference in the positional-argument path.
   // Example: {include.i {1} -1}
   // Reference: include positional arguments.

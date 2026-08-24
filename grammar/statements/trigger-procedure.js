@@ -23,7 +23,7 @@ export default ({ kw }) => ({
           choice(
             seq($._of_keyword, field("object", $.qualified_name)),
             seq(
-              seq(kw("NEW"), $.__trigger_procedure_value_body),
+              seq($._new_keyword, $.__trigger_procedure_value_body),
               optional(seq(kw("OLD"), $.__trigger_procedure_value_body)),
             ),
           ),
@@ -32,7 +32,7 @@ export default ({ kw }) => ({
     ),
 
   __trigger_procedure_new_buffer: ($) =>
-    seq(kw("NEW"), optional(kw("BUFFER")), field("new_buffer", $.identifier)),
+    seq($._new_keyword, optional(kw("BUFFER")), field("new_buffer", $.identifier)),
 
   __trigger_procedure_old_buffer: ($) =>
     seq(kw("OLD"), optional(kw("BUFFER")), field("old_buffer", $.identifier)),
