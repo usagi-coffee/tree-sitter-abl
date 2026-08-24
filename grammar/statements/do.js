@@ -14,16 +14,14 @@ export default ({ kw }) => ({
           $.__do_body_tail,
         ),
         seq($.__do_selection_after_for, $.__do_body_tail),
-        $.__do_body_tail_wide,
+        choice(
+          seq(
+            alias(kw("TRANSACTION", { offset: 5 }), $.transaction),
+            optional($.__do_body_after_first_transaction_wide),
+          ),
+          $.__do_body_after_first_transaction_wide,
+        ),
       ),
-    ),
-  __do_body_tail_wide: ($) =>
-    choice(
-      seq(
-        alias(kw("TRANSACTION", { offset: 5 }), $.transaction),
-        optional($.__do_body_after_first_transaction_wide),
-      ),
-      $.__do_body_after_first_transaction_wide,
     ),
   __do_body_after_first_transaction_wide: ($) =>
     choice(
