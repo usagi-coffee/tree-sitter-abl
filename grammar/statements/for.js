@@ -43,8 +43,9 @@ export default ({ kw }) => ({
 
   __for_with_stream_io_phrase: ($) => seq(kw("WITH"), alias(kw("STREAM-IO"), $.stream_io)),
 
-  __for_by_tail: ($) =>
-    prec.right(seq($.__for_by_item, repeat(seq($._by_keyword, $.__for_by_item)))),
+  __for_by_tail: ($) => prec.right(seq($.__for_by_item, optional($.__for_by_items_tail))),
+  __for_by_items_tail: ($) =>
+    prec.right(seq($._by_keyword, $.__for_by_item, optional($.__for_by_items_tail))),
   __for_by_item: ($) =>
     seq(field("by", $._expression), optional(field("sort_order", kw("DESCENDING", { offset: 4 })))),
 
