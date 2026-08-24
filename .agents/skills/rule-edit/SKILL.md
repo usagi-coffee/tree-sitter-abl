@@ -40,17 +40,6 @@ __my_statement_rule: ($) => ...,
 - Use compact rule formatting: keep one-line rules adjacent with no blank lines, avoid blank lines between consecutive one-line rules.
 - Don't do unnecessary comments like `// something is above`.
 
-## Conflicts
-
-- Do not introduce static numeric precedence with `prec(<number>, ...)` or
-  `prec.left/right(<number>, ...)`. It may be used temporarily to measure an
-  ambiguity, but must be removed before committing.
-- Prefer resolving ambiguous parses with `grammar/precedences/*.js` before considering `conflicts`.
-- Use a `conflicts` entry when both parses are genuinely valid and precedence or local rule refactoring cannot resolve the ambiguity without discarding one.
-- Do not treat precedence tuning as equivalent to adding a `conflicts` entry.
-- Add purpose + example comments before each precedence group when modifying precedences; add reference notes for each precedence entry.
-- When reading a conflict error trust keyword tokens in {…}; ignore deduplicated rule names like `__browse_body_token7`.
-
 ## Clean tree conventions
 
 We want the syntax tree output to be flattened unless necessary, prefer `field` for non-repeating rules and `alias` for flags.
