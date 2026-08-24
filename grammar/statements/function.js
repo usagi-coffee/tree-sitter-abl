@@ -82,10 +82,16 @@ export default ({ kw }) => ({
       optional(
         seq(
           alias($.__function_definition_parameter, $.parameter),
-          repeat(seq(",", alias($.__function_definition_parameter, $.parameter))),
+          optional($.__function_definition_parameter_tail),
         ),
       ),
       ")",
+    ),
+  __function_definition_parameter_tail: ($) =>
+    seq(
+      ",",
+      alias($.__function_definition_parameter, $.parameter),
+      optional($.__function_definition_parameter_tail),
     ),
   __function_parameter: ($) =>
     seq(
