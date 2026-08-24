@@ -4,7 +4,7 @@ export default ({ kw }) => ({
   _as_like: ($) =>
     choice(
       seq($._as_keyword, optional(kw("CLASS")), field("type", $._type_or_string)),
-      seq(kw("LIKE"), field("like", $._identifier_or_qualified_name)),
+      seq($._like_keyword, field("like", $._identifier_or_qualified_name)),
     ),
 
   _in_widget_pool: ($) =>
@@ -89,7 +89,7 @@ export default ({ kw }) => ({
   __up_down_count_frame: ($) =>
     choice(seq(field("count", $._expression), optional($.frame_phrase)), $.frame_phrase),
 
-  _like_phrase: ($) => seq(kw("LIKE"), $.__temp_table_like_body),
+  _like_phrase: ($) => seq($._like_keyword, $.__temp_table_like_body),
 
   _stream_phrase: ($) =>
     seq(choice(kw("STREAM"), kw("STREAM-HANDLE")), field("stream", $.identifier)),

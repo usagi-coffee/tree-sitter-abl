@@ -10,7 +10,7 @@ export default ({ kw }) => ({
         choice(
           $._color_font_option,
           alias(kw("SUB-MENU-HELP"), $.submenu_help),
-          seq(kw("LIKE"), field("like", $.identifier)),
+          seq($._like_keyword, field("like", $.identifier)),
           alias($.__submenu_element, $.menu_element),
         ),
       ),

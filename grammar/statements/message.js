@@ -48,7 +48,7 @@ export default ({ kw }) => ({
       seq(
         choice(
           seq($._as_keyword, field("type", $._type_name)),
-          seq(kw("LIKE"), field("like", $._identifier_or_qualified_name)),
+          seq($._like_keyword, field("like", $._identifier_or_qualified_name)),
         ),
         optional($.__message_set_update_after_type),
       ),

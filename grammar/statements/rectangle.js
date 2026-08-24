@@ -8,7 +8,7 @@ export default ({ kw }) => ({
       field("name", $.identifier),
       repeat(
         choice(
-          seq(kw("LIKE"), field("like", $.identifier)),
+          seq($._like_keyword, field("like", $.identifier)),
           alias(kw("NO-FILL"), $.no_fill),
           seq(kw("EDGE-CHARS"), field("edge_chars", $._expression)),
           seq(kw("EDGE-PIXELS"), field("edge_pixels", $._expression)),

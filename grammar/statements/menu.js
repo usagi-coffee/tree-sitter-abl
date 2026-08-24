@@ -11,7 +11,7 @@ export default ({ kw }) => ({
         choice(
           $._color_font_option,
           seq(kw("TITLE"), field("title", $._expression)),
-          seq(kw("LIKE"), field("like", $.identifier)),
+          seq($._like_keyword, field("like", $.identifier)),
           alias(kw("MENUBAR"), $.menubar),
           alias($._menu_item, $.menu_item),
           alias($._menu_submenu, $.submenu_item),

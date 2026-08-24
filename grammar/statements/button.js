@@ -22,7 +22,7 @@ export default ({ kw }) => ({
           seq(kw("IMAGE-INSENSITIVE"), field("image_insensitive", $.image_phrase)),
           seq(kw("MOUSE-POINTER"), field("mouse_pointer", $._expression)),
           seq(kw("LABEL"), field("label", $._identifier_or_string_literal)),
-          seq(kw("LIKE"), field("like", $.identifier)),
+          seq($._like_keyword, field("like", $.identifier)),
           seq(
             choice(kw("SIZE"), kw("SIZE-CHARS"), kw("SIZE-PIXELS")),
             field("width", $._expression),

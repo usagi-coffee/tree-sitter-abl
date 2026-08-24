@@ -16,7 +16,7 @@ export default ({ kw }) => ({
       optional(alias($._no_undo_keyword, $.no_undo)),
       choice(
         seq($._as_keyword, optional(kw("CLASS")), field("type", $._type_or_string)),
-        seq(kw("LIKE"), field("like", $._identifier_or_array_access)),
+        seq($._like_keyword, field("like", $._identifier_or_array_access)),
       ),
 
       repeat(

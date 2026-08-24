@@ -12,7 +12,7 @@ export default ({ kw }) => ({
   __image_option: ($) =>
     choice(
       $.image_phrase,
-      seq(kw("LIKE"), field("like", $.identifier)),
+      seq($._like_keyword, field("like", $.identifier)),
       $.size_phrase,
       seq(kw("BGCOLOR"), field("bgcolor", $._expression)),
       seq(kw("FGCOLOR"), field("fgcolor", $._expression)),

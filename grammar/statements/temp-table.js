@@ -44,7 +44,7 @@ export default ({ kw }) => ({
       alias(kw("PRIMARY"), $.primary),
       alias(kw("WORD-INDEX"), $.word_index),
     ),
-  __temp_table_like_phrase: ($) => seq(kw("LIKE"), $.__temp_table_like_body),
+  __temp_table_like_phrase: ($) => seq($._like_keyword, $.__temp_table_like_body),
   __temp_table_like_sequential_phrase: ($) => seq(kw("LIKE-SEQUENTIAL"), $.__temp_table_like_body),
   __temp_table_like_body: ($) =>
     seq(
@@ -54,7 +54,7 @@ export default ({ kw }) => ({
     ),
   __temp_table_like_type_clause: ($) =>
     seq(
-      kw("LIKE"),
+      $._like_keyword,
       field("type", $.__temp_table_like_name),
       optional(alias(kw("VALIDATE"), $.validate)),
     ),
