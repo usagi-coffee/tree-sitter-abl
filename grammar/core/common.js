@@ -271,11 +271,9 @@ export default ({ kw }) => ({
       repeat1(alias($.__dataset_parent_id_relation, $.parent_id_relation)),
     ),
   __dataset_for_phrase: ($) =>
-    seq(
-      $._for_keyword,
-      field("table", $.identifier),
-      repeat(seq(",", field("table", $.identifier))),
-    ),
+    seq($._for_keyword, field("table", $.identifier), optional($.__dataset_for_table_tail)),
+  __dataset_for_table_tail: ($) =>
+    seq(",", field("table", $.identifier), optional($.__dataset_for_table_tail)),
 
   _event_body: ($) =>
     seq(field("name", $.identifier), optional(alias($.__event_signature, $.signature))),
