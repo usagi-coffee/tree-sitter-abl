@@ -77,9 +77,11 @@ export default ({ kw }) => ({
       kw("PARENT-FIELDS-AFTER"),
       "(",
       field("after_field", $.identifier),
-      repeat(seq(",", field("after_field", $.identifier))),
+      optional($.__dataset_parent_fields_after_tail),
       ")",
     ),
+  __dataset_parent_fields_after_tail: ($) =>
+    seq(",", field("after_field", $.identifier), optional($.__dataset_parent_fields_after_tail)),
   __dataset_modifier: ($) =>
     choice(
       seq(alias(kw("NEW"), $.new_modifier), alias(kw("SHARED"), $.scope_modifier)),
