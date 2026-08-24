@@ -244,8 +244,9 @@ export default ({ kw }) => ({
       ),
     ),
   __on_ui_event: ($) => choice($.__on_key_label, alias(token(choice("+", "-")), $.identifier)),
-  __on_ui_events: ($) =>
-    seq(field("event", $.__on_ui_event), repeat(seq(",", field("event", $.__on_ui_event)))),
+  __on_ui_events: ($) => seq(field("event", $.__on_ui_event), optional($.__on_ui_events_tail)),
+  __on_ui_events_tail: ($) =>
+    seq(",", field("event", $.__on_ui_event), optional($.__on_ui_events_tail)),
   __on_ui_event_widgets: ($) => seq($.__on_ui_events, alias($.__on_of_phrase, $.of_phrase)),
   __on_of_phrase: ($) => seq(kw("OF"), $.__on_of_widget, optional($.__on_of_widget_tail)),
   __on_of_widget_tail: ($) => seq(",", $.__on_of_widget, optional($.__on_of_widget_tail)),
