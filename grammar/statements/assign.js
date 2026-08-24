@@ -41,14 +41,21 @@ export default ({ kw }) => ({
   __assign_input_body: ($) =>
     seq(
       optional(kw("INPUT")),
-      $.__assign_input_qualifier,
+      choice(
+        seq(kw("FRAME", { offset: 4 }), field("frame", $.__assign_widget_name)),
+        seq(kw("BROWSE"), field("browse", $.__assign_widget_name)),
+      ),
       $.__assign_input_fields,
-      repeat(seq(kw("INPUT"), $.__assign_input_qualifier, $.__assign_input_fields)),
-    ),
-  __assign_input_qualifier: ($) =>
-    choice(
-      seq(kw("FRAME", { offset: 4 }), field("frame", $.__assign_widget_name)),
-      seq(kw("BROWSE"), field("browse", $.__assign_widget_name)),
+      repeat(
+        seq(
+          kw("INPUT"),
+          choice(
+            seq(kw("FRAME", { offset: 4 }), field("frame", $.__assign_widget_name)),
+            seq(kw("BROWSE"), field("browse", $.__assign_widget_name)),
+          ),
+          $.__assign_input_fields,
+        ),
+      ),
     ),
   __assign_input_fields: ($) =>
     seq(
