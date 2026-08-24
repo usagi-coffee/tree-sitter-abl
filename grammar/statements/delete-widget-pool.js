@@ -3,7 +3,7 @@ export default ({ kw }) => ({
 
   __delete_widget_pool_prefix: ($) =>
     seq(
-      kw("DELETE"),
+      $._delete_keyword,
       kw("WIDGET-POOL"),
       optional(field("pool", choice($.identifier, $.string_literal))),
     ),

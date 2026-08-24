@@ -118,7 +118,7 @@ export default ({ kw }) => ({
   __on_database_event_branch: ($) =>
     choice(
       seq(
-        field("event", kw("DELETE")),
+        field("event", $._delete_keyword),
         $._of_keyword,
         choice(
           $.__on_database_event_action,

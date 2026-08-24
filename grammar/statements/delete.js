@@ -3,7 +3,7 @@ export default ({ kw }) => ({
 
   __delete_body: ($) =>
     seq(
-      kw("DELETE"),
+      $._delete_keyword,
       field("record", $._identifier_or_qualified_name),
       optional($._format_validate),
     ),
@@ -12,7 +12,7 @@ export default ({ kw }) => ({
 
   __delete_object_prefix: ($) =>
     seq(
-      kw("DELETE"),
+      $._delete_keyword,
       kw("OBJECT"),
       field(
         "name",
@@ -30,13 +30,13 @@ export default ({ kw }) => ({
   delete_procedure_statement: ($) => seq($.__delete_procedure_prefix, $._no_error_terminator),
 
   __delete_procedure_prefix: ($) =>
-    seq(kw("DELETE"), kw("PROCEDURE", { offset: 4 }), field("handle", $._expression)),
+    seq($._delete_keyword, kw("PROCEDURE", { offset: 4 }), field("handle", $._expression)),
 
   delete_widget_statement: ($) => seq($.__delete_widget_prefix, $._no_error_terminator),
 
   __delete_widget_prefix: ($) =>
     seq(
-      kw("DELETE"),
+      $._delete_keyword,
       kw("WIDGET"),
       field("widget", $._expression),
       repeat(seq(",", field("widget", $._expression))),

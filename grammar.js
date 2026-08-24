@@ -367,6 +367,7 @@ export default grammar({
       _at_keyword: ($) => kw("AT"),
       _using_keyword: ($) => kw("USING"),
       _help_keyword: ($) => kw("HELP"),
+      _delete_keyword: ($) => kw("DELETE"),
 
       // Types
       generic_type: ($) => seq($.__generic_type_prefix, ">"),
