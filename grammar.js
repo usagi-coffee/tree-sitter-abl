@@ -320,11 +320,8 @@ export default grammar({
           "{",
           "&",
           $.identifier,
-          optional(
-            seq($.__preprocessor_name_value_separator, field("value", $.__preprocessor_name_value)),
-          ),
+          optional(seq("=", field("value", $.__preprocessor_name_value))),
         ),
-      __preprocessor_name_value_separator: ($) => "=",
       __preprocessor_name_value: ($) =>
         choice(
           $._identifier_or_qualified_name,
