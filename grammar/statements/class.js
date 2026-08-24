@@ -112,10 +112,16 @@ export default ({ kw }) => ({
       optional(
         seq(
           alias($.__class_method_parameter, $.parameter),
-          repeat(seq(",", alias($.__class_method_parameter, $.parameter))),
+          optional($.__class_method_parameter_tail),
         ),
       ),
       ")",
+    ),
+  __class_method_parameter_tail: ($) =>
+    seq(
+      ",",
+      alias($.__class_method_parameter, $.parameter),
+      optional($.__class_method_parameter_tail),
     ),
 
   __class_method_parameter: ($) =>
