@@ -3,7 +3,7 @@ export default ({ kw }) => ({
 
   __input_body: ($) =>
     choice(
-      alias(kw("CLOSE"), $.close),
+      alias($._close_keyword, $.close),
       seq(
         kw("FROM"),
         $.__input_from_target,

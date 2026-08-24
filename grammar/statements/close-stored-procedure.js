@@ -1,6 +1,6 @@
 export default ({ kw }) => ({
   close_stored_procedure_statement: ($) =>
-    seq(kw("CLOSE"), $.__close_stored_procedure_body, $._terminator),
+    seq($._close_keyword, $.__close_stored_procedure_body, $._terminator),
 
   __close_stored_procedure_body: ($) =>
     seq(

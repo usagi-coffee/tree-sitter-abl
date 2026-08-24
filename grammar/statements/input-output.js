@@ -4,7 +4,7 @@ export default ({ kw }) => ({
   __input_output_prefix: ($) => seq(kw("INPUT-OUTPUT", { offset: 7 }), optional($._stream_phrase)),
   __input_output_body: ($) =>
     choice(
-      alias(kw("CLOSE"), $.close),
+      alias($._close_keyword, $.close),
       seq(
         kw("THROUGH"),
         $._program_target,

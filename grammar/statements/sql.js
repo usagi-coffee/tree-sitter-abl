@@ -88,7 +88,8 @@ export default ({ kw }) => ({
 
   // `CLOSE c.` -- distinct from CLOSE QUERY and CLOSE STORED-PROCEDURE, both of
   // which name a keyword where this one names a cursor.
-  close_cursor_statement: ($) => seq(kw("CLOSE"), field("cursor", $.identifier), $._terminator),
+  close_cursor_statement: ($) =>
+    seq($._close_keyword, field("cursor", $.identifier), $._terminator),
 
   // `UPDATE t SET c = 1 WHERE k = 2.`
   //

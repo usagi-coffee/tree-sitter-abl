@@ -4,5 +4,5 @@ export default ({ kw }) => ({
     choice($._statement_expression, alias($.__expression_keyword_call, $.function_call)),
 
   __expression_keyword_call: ($) =>
-    seq(field("function", alias(kw("CLOSE"), $.identifier)), $.arguments),
+    seq(field("function", alias($._close_keyword, $.identifier)), $.arguments),
 });
