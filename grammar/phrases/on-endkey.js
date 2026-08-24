@@ -1,7 +1,7 @@
 export default ({ kw }) => ({
   on_endkey_phrase: ($) =>
     seq(
-      kw("ON"),
+      $._on_keyword,
       choice(kw("ENDKEY"), kw("END-KEY")),
       kw("UNDO"),
       optional(field("undo_label", $.identifier)),

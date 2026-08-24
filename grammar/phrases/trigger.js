@@ -1,6 +1,6 @@
 export default ({ kw }) => ({
   trigger_phrase: ($) =>
-    choice(seq(kw("TRIGGERS"), $.__triggers_body), seq(kw("ON"), $.__trigger_event_list)),
+    choice(seq(kw("TRIGGERS"), $.__triggers_body), seq($._on_keyword, $.__trigger_event_list)),
 
   __triggers_body: ($) =>
     prec.right(
@@ -8,7 +8,7 @@ export default ({ kw }) => ({
         ":",
         repeat(
           seq(
-            kw("ON"),
+            $._on_keyword,
             field("event", $.__trigger_event_list),
             optional(alias(kw("ANYWHERE"), $.anywhere)),
             $.__trigger_action,

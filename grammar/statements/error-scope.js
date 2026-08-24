@@ -7,5 +7,6 @@ export default ({ kw }) => ({
     ),
 
   __error_scope_type: ($) => choice(kw("BLOCK-LEVEL"), kw("ROUTINE-LEVEL")),
-  __error_scope_on_error_phrase: ($) => seq(kw("ON"), kw("ERROR"), kw("UNDO"), ",", kw("THROW")),
+  __error_scope_on_error_phrase: ($) =>
+    seq($._on_keyword, kw("ERROR"), kw("UNDO"), ",", kw("THROW")),
 });

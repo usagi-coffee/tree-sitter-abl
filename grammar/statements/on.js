@@ -93,7 +93,7 @@ export default ({ kw }) => ({
   on_statement: ($) =>
     prec.right(
       seq(
-        kw("ON"),
+        $._on_keyword,
         choice(
           $.__on_ui_event_branch,
           $.__on_database_event_branch,

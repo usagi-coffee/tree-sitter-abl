@@ -1,7 +1,7 @@
 export default ({ kw }) => ({
   on_stop_phrase: ($) =>
     seq(
-      kw("ON"),
+      $._on_keyword,
       kw("STOP"),
       kw("UNDO"),
       optional(field("undo_label", $.identifier)),

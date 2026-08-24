@@ -1,7 +1,7 @@
 export default ({ kw }) => ({
   on_quit_phrase: ($) =>
     seq(
-      kw("ON"),
+      $._on_keyword,
       kw("QUIT"),
       optional(seq(kw("UNDO"), optional(field("undo_label", $.identifier)))),
       optional(seq(",", $.__on_quit_action)),

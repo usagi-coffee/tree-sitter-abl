@@ -90,7 +90,7 @@ export default ({ kw }) => ({
   __run_member_name: ($) => token(/[A-Za-z0-9_\\/.-]+\.r/i),
 
   __run_in_phrase: ($) => seq($._in_keyword, field("context", $.__run_context_value)),
-  __run_on_server: ($) => seq(kw("ON"), kw("SERVER"), field("server", $._expression)),
+  __run_on_server: ($) => seq($._on_keyword, kw("SERVER"), field("server", $._expression)),
 
   __run_asynchronous: ($) =>
     seq(kw("ASYNCHRONOUS"), optional($.__run_persistence_set_tail), optional($.__run_event_choice)),

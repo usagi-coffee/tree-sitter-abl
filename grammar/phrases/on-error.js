@@ -1,7 +1,7 @@
 export default ({ kw }) => ({
   on_error_phrase: ($) =>
     seq(
-      kw("ON"),
+      $._on_keyword,
       kw("ERROR"),
       kw("UNDO"),
       optional(field("undo_label", $.identifier)),
