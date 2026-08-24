@@ -184,8 +184,10 @@ export default ({ kw }) => ({
       kw("ORDER"),
       $._by_keyword,
       alias($.__sql_order_term, $.order_term),
-      repeat(seq(",", alias($.__sql_order_term, $.order_term))),
+      optional($.__sql_order_by_tail),
     ),
+  __sql_order_by_tail: ($) =>
+    seq(",", alias($.__sql_order_term, $.order_term), optional($.__sql_order_by_tail)),
   // The reference gives the ordering key as an expression or a column position,
   // so a bare integer here is a position and not a literal to compare.
   __sql_order_term: ($) =>

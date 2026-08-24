@@ -102,7 +102,7 @@ SELECT CustNum, Name, City INTO n, nm, city FROM Customer.
 SQL - the full clause set
 ================================================================================
 
-SELECT ALL t.* FROM t x, u y, v z WHERE x.k = 1 GROUP BY t.k, u.k, v.k HAVING t.k > 0 ORDER BY 1 ASC.
+SELECT ALL t.* FROM t x, u y, v z WHERE x.k = 1 GROUP BY t.k, u.k, v.k HAVING t.k > 0 ORDER BY 1 ASC, t.k DESC, u.k.
 
 --------------------------------------------------------------------------------
 
@@ -137,7 +137,15 @@ SELECT ALL t.* FROM t x, u y, v z WHERE x.k = 1 GROUP BY t.k, u.k, v.k HAVING t.
         right: (identifier))
       (number_literal))
     (order_term
-      key: (number_literal))))
+      key: (number_literal))
+    (order_term
+      key: (qualified_name
+        left: (identifier)
+        right: (identifier)))
+    (order_term
+      key: (qualified_name
+        left: (identifier)
+        right: (identifier)))))
 
 ================================================================================
 SQL - column titles, with and without AS
