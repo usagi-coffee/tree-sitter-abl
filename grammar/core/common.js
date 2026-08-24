@@ -3,7 +3,7 @@
 export default ({ kw }) => ({
   _as_like: ($) =>
     choice(
-      seq(kw("AS"), optional(kw("CLASS")), field("type", $._type_or_string)),
+      seq($._as_keyword, optional(kw("CLASS")), field("type", $._type_or_string)),
       seq(kw("LIKE"), field("like", $._identifier_or_qualified_name)),
     ),
 
@@ -205,7 +205,7 @@ export default ({ kw }) => ({
       kw("FIELDS", { alias: "FIELD", offset: 5 }),
       field("name", $.identifier),
       choice(
-        seq(kw("AS"), field("type", $._type_name)),
+        seq($._as_keyword, field("type", $._type_name)),
         $.__temp_table_like_type_clause,
         seq($.__temp_table_extent_option, $.__temp_table_like_type_clause),
       ),
@@ -224,7 +224,7 @@ export default ({ kw }) => ({
           alias($.__operator_routine_name, $.identifier),
         ),
       ),
-      optional(seq(choice(kw("AS"), kw("IS")), repeat($.__temp_table_index_modifier))),
+      optional(seq(choice($._as_keyword, kw("IS")), repeat($.__temp_table_index_modifier))),
       repeat1($.__temp_table_index_field),
     ),
 

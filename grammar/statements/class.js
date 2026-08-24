@@ -243,7 +243,7 @@ export default ({ kw }) => ({
       alias(kw("FINAL"), $.final_modifier),
     ),
   __class_property_type_phrase: ($) =>
-    seq(optional(kw("AS")), optional(kw("CLASS")), field("type", $._type_or_string)),
+    seq(optional($._as_keyword), optional(kw("CLASS")), field("type", $._type_or_string)),
 
   _method_modifier_no_abstract: ($) =>
     choice(
@@ -279,7 +279,7 @@ export default ({ kw }) => ({
 
   __class_method_variable_type_phrase: ($) =>
     choice(
-      seq(kw("AS"), $.__class_typed_extent_phrase),
+      seq($._as_keyword, $.__class_typed_extent_phrase),
       seq(
         kw("LIKE"),
         field("like", $._identifier_or_qualified_name),

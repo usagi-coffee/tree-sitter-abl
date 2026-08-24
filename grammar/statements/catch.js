@@ -6,7 +6,7 @@ export default ({ kw }) => ({
       kw("CATCH"),
       field("name", $.identifier),
       optional(
-        seq(kw("AS"), optional(kw("CLASS")), field("type", $._identifier_or_qualified_name)),
+        seq($._as_keyword, optional(kw("CLASS")), field("type", $._identifier_or_qualified_name)),
       ),
       $.body,
       $._end_keyword,

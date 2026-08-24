@@ -146,7 +146,7 @@ export default ({ kw }) => ({
   __sql_qualified_star: ($) => seq(field("table", $.identifier), ".", "*"),
   __sql_count_star: ($) =>
     seq(field("function", kw("COUNT")), "(", alias($.__sql_star, $.star), ")"),
-  __sql_column_title: ($) => seq(optional(kw("AS")), field("title", $._sql_title)),
+  __sql_column_title: ($) => seq(optional($._as_keyword), field("title", $._sql_title)),
   _sql_title: ($) => choice($.identifier, $.string_literal),
 
   __sql_into_clause: ($) =>

@@ -23,7 +23,7 @@ export default ({ kw }) => ({
       kw("FIELDS", { alias: "FIELD", offset: 5 }),
       field("name", $.identifier),
       choice(
-        seq(kw("AS"), field("type", $._type_name)),
+        seq($._as_keyword, field("type", $._type_name)),
         $.__temp_table_like_type_clause,
         seq($.__temp_table_extent_option, $.__temp_table_like_type_clause),
       ),
@@ -34,7 +34,7 @@ export default ({ kw }) => ({
     seq(
       kw("INDEX"),
       field("name", $.identifier),
-      optional(seq(choice(kw("AS"), kw("IS")), repeat($.__temp_table_index_modifier))),
+      optional(seq(choice($._as_keyword, kw("IS")), repeat($.__temp_table_index_modifier))),
       repeat1($.__temp_table_index_field),
     ),
 
@@ -64,7 +64,7 @@ export default ({ kw }) => ({
       field("index", choice($.identifier, $._unquoted_name_initial)),
       optional(alias($.__temp_table_as_primary_phrase, $.as_primary_phrase)),
     ),
-  __temp_table_as_primary_phrase: ($) => seq(kw("AS"), alias(kw("PRIMARY"), $.primary)),
+  __temp_table_as_primary_phrase: ($) => seq($._as_keyword, alias(kw("PRIMARY"), $.primary)),
   __temp_table_before_table_phrase: ($) => seq(kw("BEFORE-TABLE"), field("before", $.identifier)),
   __temp_table_index_field: ($) =>
     seq(

@@ -359,6 +359,7 @@ export default grammar({
       _define_keyword: ($) => kw("DEFINE", { offset: 3 }),
       _end_keyword: ($) => kw("END"),
       _by_keyword: ($) => kw("BY"),
+      _as_keyword: ($) => kw("AS"),
 
       // Types
       generic_type: ($) => seq($.__generic_type_prefix, ">"),
@@ -599,7 +600,7 @@ export default grammar({
               optional($.__argument_in_handle),
             ),
           ),
-          optional(seq(kw("AS"), field("type", $._type_name))),
+          optional(seq($._as_keyword, field("type", $._type_name))),
           optional(choice(kw("BY-REFERENCE"), kw("BY-VALUE"), kw("APPEND"), kw("BIND"))),
         ),
       __argument_in_handle: ($) =>

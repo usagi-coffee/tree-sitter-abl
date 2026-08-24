@@ -15,7 +15,7 @@ export default ({ kw }) => ({
       repeat(alias($.__variable_extent_phrase, $.extent_phrase)),
       optional(alias(kw("NO-UNDO"), $.no_undo)),
       choice(
-        seq(kw("AS"), optional(kw("CLASS")), field("type", $._type_or_string)),
+        seq($._as_keyword, optional(kw("CLASS")), field("type", $._type_or_string)),
         seq(kw("LIKE"), field("like", $._identifier_or_array_access)),
       ),
 

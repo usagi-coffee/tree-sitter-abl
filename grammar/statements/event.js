@@ -16,7 +16,7 @@ export default ({ kw }) => ({
     seq(
       optional(field("direction", $._parameter_direction)),
       field("name", $.identifier),
-      kw("AS"),
+      $._as_keyword,
       optional(kw("CLASS")),
       field("type", $._type_or_string),
     ),
