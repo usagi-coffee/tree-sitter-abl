@@ -170,7 +170,7 @@ SQL - UPDATE, and the ABL UPDATE it must not swallow
 ================================================================================
 
 DEFINE TEMP-TABLE tt NO-UNDO FIELD c AS INTEGER FIELD k AS INTEGER FIELD nom AS CHARACTER.
-UPDATE tt SET c = 1 WHERE k = 2.
+UPDATE tt SET c = 1, k = 2, nom = "x" WHERE k = 2.
 UPDATE tt.nom WITH FRAME f1.
 UPDATE tt.c = 1 WITH FRAME f3.
 UPDATE tt EXCEPT k WITH FRAME f4.
@@ -195,6 +195,12 @@ UPDATE tt EXCEPT k WITH FRAME f4.
     (assignment
       column: (identifier)
       value: (number_literal))
+    (assignment
+      column: (identifier)
+      value: (number_literal))
+    (assignment
+      column: (identifier)
+      value: (string_literal))
     condition: (binary_expression
       (identifier)
       (number_literal)))

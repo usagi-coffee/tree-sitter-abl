@@ -97,8 +97,14 @@ export default ({ kw }) => ({
       field("table", $._identifier_or_qualified_name),
       kw("SET"),
       alias($.__sql_update_assignment, $.assignment),
-      repeat(seq(",", alias($.__sql_update_assignment, $.assignment))),
+      optional($.__sql_update_assignment_tail),
       optional($.__sql_where_clause),
+    ),
+  __sql_update_assignment_tail: ($) =>
+    seq(
+      ",",
+      alias($.__sql_update_assignment, $.assignment),
+      optional($.__sql_update_assignment_tail),
     ),
   __sql_update_assignment: ($) =>
     seq(field("column", $._identifier_or_qualified_name), "=", field("value", $._expression)),
