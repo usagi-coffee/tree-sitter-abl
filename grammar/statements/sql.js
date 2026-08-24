@@ -75,8 +75,10 @@ export default ({ kw }) => ({
       field("cursor", $.identifier),
       kw("INTO"),
       field("target", $._sql_target),
-      repeat(seq(",", field("target", $._sql_target))),
+      optional($.__sql_fetch_target_tail),
     ),
+  __sql_fetch_target_tail: ($) =>
+    seq(",", field("target", $._sql_target), optional($.__sql_fetch_target_tail)),
 
   // `CLOSE c.` -- distinct from CLOSE QUERY and CLOSE STORED-PROCEDURE, both of
   // which name a keyword where this one names a cursor.

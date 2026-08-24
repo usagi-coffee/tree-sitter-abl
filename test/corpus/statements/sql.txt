@@ -5,7 +5,7 @@ SQL - DECLARE CURSOR, OPEN, FETCH, CLOSE
 DEFINE VARIABLE nm AS CHARACTER NO-UNDO.
 DECLARE c CURSOR FOR SELECT Name FROM Customer.
 OPEN c.
-FETCH c INTO nm.
+FETCH c INTO nm, nm2, nm3.
 CLOSE c.
 
 --------------------------------------------------------------------------------
@@ -24,6 +24,8 @@ CLOSE c.
     cursor: (identifier))
   (fetch_statement
     cursor: (identifier)
+    target: (identifier)
+    target: (identifier)
     target: (identifier))
   (close_cursor_statement
     cursor: (identifier)))
