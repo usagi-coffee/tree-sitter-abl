@@ -15,7 +15,7 @@ ENUM Permission FLAGS:
                 Read
                 Write
                 Update = Write
-                ReadWrite = Read,Write
+                ReadWrite = Read,Write,Update
                 Create
                 Delete
                 Execute.
@@ -66,6 +66,7 @@ END ENUM.
       (identifier))
     (member
       name: (identifier)
+      (identifier)
       (identifier)
       (identifier))
     (member

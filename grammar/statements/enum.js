@@ -22,5 +22,10 @@ export default ({ kw }) => ({
   __enum_member: ($) => seq(field("name", $.identifier), optional(seq("=", $.__enum_member_value))),
 
   __enum_member_value: ($) =>
-    choice($.number_literal, seq($.identifier, repeat(seq(",", $.identifier))), $.null_literal),
+    choice(
+      $.number_literal,
+      seq($.identifier, optional($.__enum_member_value_tail)),
+      $.null_literal,
+    ),
+  __enum_member_value_tail: ($) => seq(",", $.identifier, optional($.__enum_member_value_tail)),
 });
