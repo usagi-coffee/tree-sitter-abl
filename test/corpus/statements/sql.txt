@@ -70,6 +70,7 @@ SQL - SELECT INTO with an aggregate
 
 DEFINE VARIABLE m AS INTEGER NO-UNDO.
 SELECT COUNT(*) INTO m FROM Customer WHERE Customer.CustNum = 1.
+SELECT CustNum, Name, City INTO n, nm, city FROM Customer.
 
 --------------------------------------------------------------------------------
 
@@ -87,7 +88,15 @@ SELECT COUNT(*) INTO m FROM Customer WHERE Customer.CustNum = 1.
       (qualified_name
         left: (identifier)
         right: (identifier))
-      (number_literal))))
+      (number_literal)))
+  (select_statement
+    column: (identifier)
+    column: (identifier)
+    column: (identifier)
+    into: (identifier)
+    into: (identifier)
+    into: (identifier)
+    name: (identifier)))
 
 ================================================================================
 SQL - the full clause set

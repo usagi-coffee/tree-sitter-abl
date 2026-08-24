@@ -156,7 +156,9 @@ export default ({ kw }) => ({
   _sql_title: ($) => choice($.identifier, $.string_literal),
 
   __sql_into_clause: ($) =>
-    seq(kw("INTO"), field("into", $._sql_target), repeat(seq(",", field("into", $._sql_target)))),
+    seq(kw("INTO"), field("into", $._sql_target), optional($.__sql_into_target_tail)),
+  __sql_into_target_tail: ($) =>
+    seq(",", field("into", $._sql_target), optional($.__sql_into_target_tail)),
 
   // A host variable receiving a column value. Kept to the shapes a variable can
   // take, not to `_assignable`, which reaches widget references with no meaning
