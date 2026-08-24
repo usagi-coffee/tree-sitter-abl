@@ -18,13 +18,11 @@ export default ({ kw }) => ({
       field("name", $.identifier),
       optional(seq(kw("QUERY"), field("query", $.identifier))),
       optional(
-        seq(
-          $._for_keyword,
-          $.__data_source_buffer_phrase,
-          repeat(seq(",", $.__data_source_buffer_phrase)),
-        ),
+        seq($._for_keyword, $.__data_source_buffer_phrase, optional($.__data_source_buffer_tail)),
       ),
     ),
+  __data_source_buffer_tail: ($) =>
+    seq(",", $.__data_source_buffer_phrase, optional($.__data_source_buffer_tail)),
 
   __data_source_buffer_phrase: ($) =>
     seq(
