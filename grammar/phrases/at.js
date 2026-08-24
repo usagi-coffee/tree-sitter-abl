@@ -1,7 +1,7 @@
 export default ({ kw }) => ({
   at_phrase: ($) =>
     seq(
-      kw("AT"),
+      $._at_keyword,
       prec.right(
         seq(
           choice(

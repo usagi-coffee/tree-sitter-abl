@@ -6,7 +6,7 @@ export default ({ kw }) => ({
       kw("COPY-LOB"),
       optional(kw("FROM")),
       $.__copy_lob_source,
-      optional(seq(kw("STARTING"), kw("AT"), field("starting_at", $._expression))),
+      optional(seq(kw("STARTING"), $._at_keyword, field("starting_at", $._expression))),
       optional(seq($._for_keyword, field("for_length", $._expression))),
       $._to_keyword,
       $.__copy_lob_target,
@@ -33,7 +33,7 @@ export default ({ kw }) => ({
   __copy_lob_overlay: ($) =>
     seq(
       kw("OVERLAY"),
-      kw("AT"),
+      $._at_keyword,
       field("overlay_at", $._expression),
       optional(alias(kw("TRIM"), $.trim)),
     ),

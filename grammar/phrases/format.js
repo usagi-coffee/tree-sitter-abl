@@ -35,7 +35,7 @@ export default ({ kw }) => ({
 
   __format_at_phrase: ($) =>
     seq(
-      kw("AT"),
+      $._at_keyword,
       choice(
         field("at", token(/[0-9]+(\.[0-9]+)?/)),
         seq(

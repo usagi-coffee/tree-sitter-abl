@@ -23,7 +23,7 @@ export default ({ kw }) => ({
       seq(
         field("value", $._expression),
         optional($.format_phrase),
-        optional(seq(choice(kw("AT"), $._to_keyword), field("position", $._expression))),
+        optional(seq(choice($._at_keyword, $._to_keyword), field("position", $._expression))),
       ),
     ),
 

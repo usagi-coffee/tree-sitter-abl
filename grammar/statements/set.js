@@ -50,7 +50,7 @@ export default ({ kw }) => ({
       ),
       seq(
         field("constant", $.string_literal),
-        seq(kw("AT"), field("position", token(/[0-9]+(\.[0-9]+)?/))),
+        seq($._at_keyword, field("position", token(/[0-9]+(\.[0-9]+)?/))),
       ),
       "^",
     ),
