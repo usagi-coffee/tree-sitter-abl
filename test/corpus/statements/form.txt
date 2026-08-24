@@ -8,7 +8,7 @@ FORM customer-name LABEL "Customer Name".
 FORM customer-name FORMAT "x(30)".
 FORM customer-name VIEW-AS FILL-IN.
 FORM customer-name FORMAT "x(30)" VIEW-AS FILL-IN.
-FORM customer-name VALIDATE(ok) FORMAT "x(30)" VIEW-AS FILL-IN.
+FORM customer-name VALIDATE(ok, valid, ready) FORMAT "x(30)" VIEW-AS FILL-IN.
 
 --------------------------------------------------------------------------------
 
@@ -44,6 +44,8 @@ FORM customer-name VALIDATE(ok) FORMAT "x(30)" VIEW-AS FILL-IN.
     (form_item
       field: (identifier)
       (validate_phrase
+        expression: (identifier)
+        expression: (identifier)
         expression: (identifier))
       format: (string_literal)
       (view_as_phrase

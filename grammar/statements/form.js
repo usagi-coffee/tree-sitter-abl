@@ -61,9 +61,11 @@ export default ({ kw }) => ({
       kw("VALIDATE", { offset: 4 }),
       "(",
       field("expression", $._expression),
-      repeat(seq(",", field("expression", $._expression))),
+      optional($.__form_validate_expression_tail),
       ")",
     ),
+  __form_validate_expression_tail: ($) =>
+    seq(",", field("expression", $._expression), optional($.__form_validate_expression_tail)),
   __form_label: ($) =>
     choice(
       $.include_file_reference,
