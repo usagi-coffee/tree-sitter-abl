@@ -366,6 +366,24 @@ export default ({ kw }) => ({
       alias(kw("EXCLUSIVE-LOCK"), $.exclusive_lock),
       alias(kw("NO-LOCK"), $.no_lock),
     ),
+  _on_phrase_action: ($) => choice($._undo_lnr_target, $._on_phrase_return),
+  _undo_lnr_target: ($) =>
+    choice(
+      seq(kw("LEAVE"), optional(field("leave_label", $.identifier))),
+      seq(kw("NEXT"), optional(field("next_label", $.identifier))),
+      seq(kw("RETRY"), optional(field("retry_label", $.identifier))),
+    ),
+  _on_phrase_return: ($) =>
+    seq(
+      kw("RETURN"),
+      optional(
+        choice(
+          seq(kw("ERROR"), optional(field("error_value", $._expression))),
+          kw("NO-APPLY"),
+          field("return_value", $._expression),
+        ),
+      ),
+    ),
   _when_phrase: ($) => seq(kw("WHEN"), field("when", $._expression)),
   _list_items_phrase: ($) => seq(kw("LIST-ITEMS"), field("items", $._list_item_values)),
   _list_item_pairs_phrase: ($) => seq(kw("LIST-ITEM-PAIRS"), field("pairs", $._list_item_pairs)),

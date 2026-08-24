@@ -11,7 +11,7 @@ export default ({ kw }) => ({
   __on_error_action: ($) =>
     choice(
       seq(kw("THROW"), optional(field("throw_value", $._expression))),
-      $.__undo_lnr_target,
-      $.__on_phrase_return,
+      $._undo_lnr_target,
+      $._on_phrase_return,
     ),
 });

@@ -19,7 +19,7 @@ export default ({ kw }) => ({
           ),
         ),
       ),
-      $.__undo_lnr_target,
+      $._undo_lnr_target,
       seq(
         kw("RETURN"),
         optional(

@@ -4,8 +4,6 @@ export default ({ kw }) => ({
       $._on_keyword,
       kw("QUIT"),
       optional(seq(kw("UNDO"), optional(field("undo_label", $.identifier)))),
-      optional(seq(",", $.__on_quit_action)),
+      optional(seq(",", $._on_phrase_action)),
     ),
-
-  __on_quit_action: ($) => choice($.__undo_lnr_target, $.__on_phrase_return),
 });

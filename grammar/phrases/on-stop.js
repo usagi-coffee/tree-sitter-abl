@@ -6,8 +6,6 @@ export default ({ kw }) => ({
       kw("UNDO"),
       optional(field("undo_label", $.identifier)),
       ",",
-      $.__on_stop_action,
+      $._on_phrase_action,
     ),
-
-  __on_stop_action: ($) => choice($.__undo_lnr_target, $.__on_phrase_return),
 });
