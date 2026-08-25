@@ -192,7 +192,12 @@ export default ({ kw }) => ({
         ),
       ),
       optional(alias(kw("REFERENCE-ONLY"), $.reference_only)),
-      repeat(
+      optional($._table_options),
+    ),
+
+  _table_options: ($) =>
+    prec.right(
+      seq(
         choice(
           $.argument_reference,
           alias($._like_phrase, $.like_phrase),
@@ -200,6 +205,7 @@ export default ({ kw }) => ({
           alias(kw("RCODE-INFORMATION", { offset: 10 }), $.rcode_information),
           alias($.__temp_table_before_table_phrase, $.before_table_phrase),
         ),
+        optional($._table_options),
       ),
     ),
 
