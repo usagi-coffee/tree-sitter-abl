@@ -26,7 +26,7 @@ export default ({ kw }) => ({
       seq(
         $._using_keyword,
         field("field", $.__record_using_field),
-        repeat(seq(kw("AND"), field("field", $.__record_using_field))),
+        optional($.__record_using_fields_tail),
       ),
       $._lock_option,
       alias(kw("SHARE"), $.share),
@@ -39,6 +39,8 @@ export default ({ kw }) => ({
       optional(seq(kw("FRAME", { offset: 4 }), field("frame", $.identifier))),
       field("field", $._identifier_or_qualified_name),
     ),
+  __record_using_fields_tail: ($) =>
+    seq(kw("AND"), field("field", $.__record_using_field), optional($.__record_using_fields_tail)),
 
   __record_field_list: ($) =>
     choice(
