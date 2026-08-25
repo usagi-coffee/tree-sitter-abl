@@ -39,5 +39,7 @@ export default ({ kw }) => ({
     prec.right(seq($.widget_phrase, optional($.__wait_for_widget_list_tail))),
   __wait_for_widget_list_tail: ($) =>
     seq(",", $.widget_phrase, optional($.__wait_for_widget_list_tail)),
-  __wait_for_event_list: ($) => seq($._events, repeat(seq(optional(","), $._events))),
+  __wait_for_event_list: ($) => seq($._events, optional($.__wait_for_event_list_tail)),
+  __wait_for_event_list_tail: ($) =>
+    seq(optional(","), $._events, optional($.__wait_for_event_list_tail)),
 });
