@@ -151,16 +151,16 @@ export default ({ kw }) => ({
     ),
 
   _convert_phrase: ($) =>
-    choice(
-      alias(kw("NO-CONVERT"), $.no_convert),
+    choice(alias(kw("NO-CONVERT"), $.no_convert), seq(kw("CONVERT"), optional($._convert_options))),
+
+  _convert_options: ($) =>
+    prec.right(
       seq(
-        kw("CONVERT"),
-        repeat(
-          choice(
-            seq(kw("TARGET"), field("target", $._string_or_identifier_access_or_call)),
-            seq(kw("SOURCE"), field("source", $._string_or_identifier_access_or_call)),
-          ),
+        choice(
+          seq(kw("TARGET"), field("target", $._string_or_identifier_access_or_call)),
+          seq(kw("SOURCE"), field("source", $._string_or_identifier_access_or_call)),
         ),
+        optional($._convert_options),
       ),
     ),
 
