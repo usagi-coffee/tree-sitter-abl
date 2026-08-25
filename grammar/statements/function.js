@@ -15,11 +15,7 @@ export default ({ kw }) => ({
   __function_access_parameters_tail: ($) =>
     choice(
       seq(
-        choice(
-          alias(kw("PRIVATE"), $.access_modifier),
-          alias(kw("PROTECTED"), $.access_modifier),
-          alias(kw("PUBLIC"), $.access_modifier),
-        ),
+        $.__function_access_modifier,
         optional(alias($.__function_definition_parameters, $.parameters)),
       ),
       alias($.__function_definition_parameters, $.parameters),
@@ -51,13 +47,7 @@ export default ({ kw }) => ({
       optional(kw("CLASS")),
       field("type", $._type_name),
       optional(alias($._extent_phrase, $.extent_phrase)),
-      optional(
-        choice(
-          alias(kw("PRIVATE"), $.access_modifier),
-          alias(kw("PROTECTED"), $.access_modifier),
-          alias(kw("PUBLIC"), $.access_modifier),
-        ),
-      ),
+      optional($.__function_access_modifier),
       optional(alias($.__function_parameters, $.parameters)),
     ),
 
@@ -68,6 +58,12 @@ export default ({ kw }) => ({
         alias($.__function_in_phrase, $.in_phrase),
       ),
       alias(kw("FORWARDS", { alias: "FORWARD", offset: 7 }), $.forward),
+    ),
+  __function_access_modifier: ($) =>
+    choice(
+      alias(kw("PRIVATE"), $.access_modifier),
+      alias(kw("PROTECTED"), $.access_modifier),
+      alias(kw("PUBLIC"), $.access_modifier),
     ),
 
   __function_parameters: ($) => seq("(", optional($.__function_parameter_list), ")"),
