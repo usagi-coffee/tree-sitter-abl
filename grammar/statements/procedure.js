@@ -14,7 +14,12 @@ export default ({ kw }) => ({
         ),
       ),
       optional($.__procedure_modifier),
-      repeat(
+      optional($.__procedure_options),
+      optional(alias($.__procedure_in_super_phrase, $.in_super_phrase)),
+    ),
+  __procedure_options: ($) =>
+    prec.right(
+      seq(
         choice(
           alias(kw("CDECL"), $.cdecl),
           seq(kw("ORDINAL"), field("ordinal", $.number_literal)),
@@ -23,8 +28,8 @@ export default ({ kw }) => ({
           alias($.__procedure_external_phrase, $.external_phrase),
           seq(kw("MAP"), field("name", $.identifier)),
         ),
+        optional($.__procedure_options),
       ),
-      optional(alias($.__procedure_in_super_phrase, $.in_super_phrase)),
     ),
 
   __procedure_body: ($) =>
