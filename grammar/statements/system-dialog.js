@@ -37,12 +37,18 @@ export default ({ kw }) => ({
     seq(
       kw("GET-DIR"),
       field("variable", $.identifier),
-      repeat(
+      optional($.__system_dialog_get_dir_options),
+    ),
+
+  __system_dialog_get_dir_options: ($) =>
+    prec.right(
+      seq(
         choice(
           $.__system_dialog_initial_dir_option,
           $.__system_dialog_title_option,
           $.__system_dialog_window_option,
         ),
+        optional($.__system_dialog_get_dir_options),
       ),
     ),
 
