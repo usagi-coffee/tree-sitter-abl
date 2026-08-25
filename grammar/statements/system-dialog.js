@@ -80,15 +80,18 @@ export default ({ kw }) => ({
     seq($.__system_dialog_prefix, $.__system_dialog_printer_setup_body, $._terminator),
 
   __system_dialog_printer_setup_body: ($) =>
-    seq(
-      kw("PRINTER-SETUP"),
-      repeat(
+    seq(kw("PRINTER-SETUP"), optional($.__system_dialog_printer_setup_options)),
+
+  __system_dialog_printer_setup_options: ($) =>
+    prec.right(
+      seq(
         choice(
           seq(kw("NUM-COPIES"), field("copies", $._expression)),
           alias(kw("LANDSCAPE"), $.landscape),
           alias(kw("PORTRAIT"), $.portrait),
           $.__system_dialog_window_option,
         ),
+        optional($.__system_dialog_printer_setup_options),
       ),
     ),
 
