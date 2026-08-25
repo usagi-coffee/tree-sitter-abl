@@ -15,12 +15,18 @@ export default ({ kw }) => ({
       ),
       field("table", $.__find_record_name),
       optional(field("constant", $._expression)),
-      repeat(
+      optional($.__find_options),
+    ),
+
+  __find_options: ($) =>
+    prec.right(
+      seq(
         choice(
           alias($.__find_of_phrase, $.of_phrase),
           $._find_record_option,
           alias($.__find_where_phrase, $.where_phrase),
         ),
+        optional($.__find_options),
       ),
     ),
 
