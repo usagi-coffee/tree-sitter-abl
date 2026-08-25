@@ -218,8 +218,11 @@ export default ({ kw }) => ({
         $.__temp_table_like_type_clause,
         seq($.__temp_table_extent_option, $.__temp_table_like_type_clause),
       ),
-      repeat($.__temp_table_field_option),
+      optional($._table_field_options),
     ),
+
+  _table_field_options: ($) =>
+    prec.right(seq($.__temp_table_field_option, optional($._table_field_options))),
 
   _table_index: ($) =>
     seq(
