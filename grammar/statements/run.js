@@ -35,7 +35,7 @@ export default ({ kw }) => ({
   // than to any trailing token: `RUN p.ip (OUTPUT r) name.` is also accepted by
   // the compiler, but only as a name it then fails to resolve, and reading a
   // bare trailing name here would swallow whatever follows.
-  __run_surplus_tail: ($) => repeat1(choice($.arguments, ")")),
+  __run_surplus_tail: ($) => seq(choice($.arguments, ")"), optional($.__run_surplus_tail)),
   __run_persistence: ($) =>
     choice(
       alias(
