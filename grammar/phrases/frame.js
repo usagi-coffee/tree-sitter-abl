@@ -68,7 +68,9 @@ export default ({ kw }) => ({
     ),
 
   __frame_title_phrase: ($) =>
-    seq(kw("TITLE"), repeat($._frame_title_option), field("title", $.__frame_expression)),
+    seq(kw("TITLE"), optional($.__frame_title_options), field("title", $.__frame_expression)),
+  __frame_title_options: ($) =>
+    prec.right(seq($._frame_title_option, optional($.__frame_title_options))),
   _frame_title_option: ($) =>
     choice(
       seq(kw("BGCOLOR"), field("title_bgcolor", $.__frame_expression)),
