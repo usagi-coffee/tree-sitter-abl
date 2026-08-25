@@ -212,11 +212,7 @@ export default ({ kw }) => ({
   __class_option: ($) =>
     choice(
       seq(kw("INHERITS"), field("super", $._type_name)),
-      seq(
-        kw("IMPLEMENTS"),
-        field("interface", $._type_name),
-        repeat(seq(",", field("interface", $._type_name))),
-      ),
+      seq(kw("IMPLEMENTS"), field("interface", $._type_name), optional($.__class_implements_tail)),
       alias(kw("USE-WIDGET-POOL"), $.use_widget_pool),
       alias(kw("ABSTRACT"), $.abstract),
       alias(kw("FINAL"), $.final),
@@ -252,6 +248,9 @@ export default ({ kw }) => ({
     ),
   __class_property_type_phrase: ($) =>
     seq(optional($._as_keyword), optional(kw("CLASS")), field("type", $._type_or_string)),
+
+  __class_implements_tail: ($) =>
+    seq(",", field("interface", $._type_name), optional($.__class_implements_tail)),
 
   _method_modifier_no_abstract: ($) =>
     choice(
