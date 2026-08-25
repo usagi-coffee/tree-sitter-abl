@@ -36,6 +36,8 @@ export default ({ kw }) => ({
   __wait_for_pause_phrase: ($) => seq(kw("PAUSE"), field("duration", $._expression)),
 
   __wait_for_widget_list: ($) =>
-    prec.right(seq($.widget_phrase, repeat(seq(",", $.widget_phrase)))),
+    prec.right(seq($.widget_phrase, optional($.__wait_for_widget_list_tail))),
+  __wait_for_widget_list_tail: ($) =>
+    seq(",", $.widget_phrase, optional($.__wait_for_widget_list_tail)),
   __wait_for_event_list: ($) => seq($._events, repeat(seq(optional(","), $._events))),
 });
