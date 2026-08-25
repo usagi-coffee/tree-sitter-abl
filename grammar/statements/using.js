@@ -4,10 +4,12 @@ export default ({ kw }) => ({
   __using_prefix: ($) =>
     seq(
       $._using_keyword,
-      $.__using_type_ref,
-      repeat(seq(",", $.__using_type_ref)),
+      $.__using_type_refs,
       optional(alias($.__using_from_clause, $.from_clause)),
     ),
+
+  __using_type_refs: ($) =>
+    prec.right(seq($.__using_type_ref, optional(seq(",", $.__using_type_refs)))),
 
   __using_type_ref: ($) =>
     choice(
