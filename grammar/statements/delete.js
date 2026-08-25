@@ -39,6 +39,9 @@ export default ({ kw }) => ({
       $._delete_keyword,
       kw("WIDGET"),
       field("widget", $._expression),
-      repeat(seq(",", field("widget", $._expression))),
+      optional($.__delete_widget_tail),
     ),
+
+  __delete_widget_tail: ($) =>
+    seq(",", field("widget", $._expression), optional($.__delete_widget_tail)),
 });
