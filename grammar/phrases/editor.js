@@ -1,6 +1,7 @@
 export default ({ kw }) => ({
   editor_phrase: ($) =>
-    seq(kw("EDITOR"), repeat($.__editor_option), $.__editor_size, repeat($.__editor_option)),
+    seq(kw("EDITOR"), optional($.__editor_options), $.__editor_size, optional($.__editor_options)),
+  __editor_options: ($) => prec.right(seq($.__editor_option, optional($.__editor_options))),
   __editor_option: ($) =>
     choice(
       seq(kw("BUFFER-CHARS"), field("buffer_chars", $.number_literal)),
