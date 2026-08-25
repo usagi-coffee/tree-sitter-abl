@@ -3,8 +3,9 @@ export default ({ kw }) => ({
     seq(
       field("record", $._identifier_or_qualified_name),
       optional($.__record_field_list_preprocessor_tail),
-      repeat($.__record_option),
+      optional($.__record_options),
     ),
+  __record_options: ($) => prec.right(seq($.__record_option, optional($.__record_options))),
   __record_field_list_preprocessor_tail: ($) =>
     choice(
       seq(alias($.__record_field_list, $.field_list), optional($.preprocessor_name)),
