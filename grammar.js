@@ -370,6 +370,12 @@ export default grammar({
       _delete_keyword: ($) => kw("DELETE"),
       _close_keyword: ($) => kw("CLOSE"),
       _with_keyword: ($) => kw("WITH"),
+      _routine_access_modifier: ($) =>
+        choice(
+          alias(kw("PRIVATE"), $.access_modifier),
+          alias(kw("PROTECTED"), $.access_modifier),
+          alias(kw("PUBLIC"), $.access_modifier),
+        ),
 
       // Types
       generic_type: ($) => seq($.__generic_type_prefix, ">"),

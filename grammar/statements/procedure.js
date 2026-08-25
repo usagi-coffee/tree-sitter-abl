@@ -4,7 +4,7 @@ export default ({ kw }) => ({
   __procedure_header: ($) =>
     seq(
       kw("PROCEDURE", { offset: 4 }),
-      optional($.__procedure_modifier),
+      optional($._routine_access_modifier),
       field(
         "name",
         choice(
@@ -13,7 +13,7 @@ export default ({ kw }) => ({
           alias($.__operator_routine_name, $.identifier),
         ),
       ),
-      optional($.__procedure_modifier),
+      optional($._routine_access_modifier),
       optional($.__procedure_options),
       optional(alias($.__procedure_in_super_phrase, $.in_super_phrase)),
     ),
@@ -41,12 +41,6 @@ export default ({ kw }) => ({
       $._end_keyword,
     ),
 
-  __procedure_modifier: ($) =>
-    choice(
-      alias(kw("PRIVATE"), $.access_modifier),
-      alias(kw("PROTECTED"), $.access_modifier),
-      alias(kw("PUBLIC"), $.access_modifier),
-    ),
   __procedure_in_super_phrase: ($) => seq($._in_keyword, kw("SUPER")),
 
   __procedure_external_phrase: ($) =>
