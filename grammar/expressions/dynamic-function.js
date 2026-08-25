@@ -6,8 +6,11 @@ export default ({ kw }) => ({
       "(",
       field("function", $.__dynamic_function_name),
       optional(seq($._in_keyword, field("context", $.__dynamic_function_context))),
-      repeat(seq(",", field("argument", $.argument))),
+      optional($.__dynamic_function_arguments_tail),
     ),
+
+  __dynamic_function_arguments_tail: ($) =>
+    seq(",", field("argument", $.argument), optional($.__dynamic_function_arguments_tail)),
 
   __dynamic_function_name: ($) =>
     choice(
