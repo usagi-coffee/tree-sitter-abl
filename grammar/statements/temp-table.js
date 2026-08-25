@@ -50,8 +50,10 @@ export default ({ kw }) => ({
     seq(
       field("like", $.__temp_table_like_name),
       optional(alias(kw("VALIDATE"), $.validate)),
-      repeat($.__temp_table_use_index_phrase),
+      optional($.__temp_table_use_index_phrases),
     ),
+  __temp_table_use_index_phrases: ($) =>
+    prec.right(seq($.__temp_table_use_index_phrase, optional($.__temp_table_use_index_phrases))),
   __temp_table_like_type_clause: ($) =>
     seq(
       $._like_keyword,
