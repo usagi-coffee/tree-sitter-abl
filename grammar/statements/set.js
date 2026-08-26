@@ -12,7 +12,7 @@ export default ({ kw }) => ({
 
   __set_fields_body: ($) =>
     seq(
-      repeat1(alias($.__set_field, $.field)),
+      $.__set_fields,
       optional(alias($._go_on_phrase, $.go_on_phrase)),
       optional($.__set_fields_tail_after_go_on),
     ),
@@ -54,6 +54,7 @@ export default ({ kw }) => ({
       ),
       "^",
     ),
+  __set_fields: ($) => prec.right(seq(alias($.__set_field, $.field), optional($.__set_fields))),
 
   __set_record_body: ($) =>
     seq(field("record", $.__set_record), optional($._except_fields), optional($.frame_phrase)),
