@@ -12,7 +12,7 @@ export default ({ kw }) => ({
               field("color", choice(kw("NORMAL"), kw("INPUT"), kw("MESSAGES"), $.color_phrase)),
             ),
           ),
-          repeat1($.__message_expression),
+          $.__message_expressions,
           optional($.__message_body_tail),
         ),
       ),
@@ -30,6 +30,8 @@ export default ({ kw }) => ({
 
   __message_expression: ($) =>
     choice($._expression, alias($.__message_skip_item, $.skip), alias(kw("MENU"), $.identifier)),
+  __message_expressions: ($) =>
+    prec.right(seq($.__message_expression, optional($.__message_expressions))),
 
   __message_view_as_phrase: ($) =>
     seq(kw("VIEW-AS"), kw("ALERT-BOX"), optional($._alert_box_options)),
