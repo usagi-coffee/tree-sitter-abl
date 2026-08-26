@@ -16,12 +16,16 @@ export default ({ kw }) => ({
         seq(
           field("record", $._identifier_or_qualified_name),
           kw("EXCEPT"),
-          repeat1(field("field", $._identifier_or_qualified_name)),
+          $.__frame_except_fields,
         ),
         repeat($.__frame_form_item),
       ),
       optional($.__frame_header_section),
       repeat($.frame_phrase),
+    ),
+  __frame_except_fields: ($) =>
+    prec.right(
+      seq(field("field", $._identifier_or_qualified_name), optional($.__frame_except_fields)),
     ),
 
   __frame_header_section: ($) =>
