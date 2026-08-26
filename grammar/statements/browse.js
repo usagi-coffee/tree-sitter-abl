@@ -12,7 +12,7 @@ export default ({ kw }) => ({
       optional(alias(choice(kw("SHARE-LOCK"), kw("EXCLUSIVE-LOCK"), kw("NO-LOCK")), $.lock)),
       optional(alias(kw("NO-WAIT"), $.no_wait)),
       kw("DISPLAY"),
-      choice(repeat1(alias($.__browse_column, $.column)), alias($.__browse_record, $.record)),
+      choice($.__browse_columns, alias($.__browse_record, $.record)),
       optional($.__browse_body_tail),
     ),
   __browse_body_tail: ($) =>
@@ -119,6 +119,8 @@ export default ({ kw }) => ({
     seq(field("record", $.identifier), kw("EXCEPT"), $.__browse_record_fields),
   __browse_record_fields: ($) =>
     prec.right(seq(field("field", $.identifier), optional($.__browse_record_fields))),
+  __browse_columns: ($) =>
+    prec.right(seq(alias($.__browse_column, $.column), optional($.__browse_columns))),
 
   __browse_column: ($) =>
     prec.right(
