@@ -187,6 +187,7 @@ export default grammar({
     $.__call_argument,
     $.__underline_field,
     $.__put_control,
+    $.__export_expression,
     $.system_handle_identifier,
   ],
 
