@@ -190,6 +190,7 @@ export default grammar({
     $.__export_expression,
     $.__system_help_position,
     $.__include_file_target,
+    $.__include_arguments,
     $.system_handle_identifier,
   ],
 
