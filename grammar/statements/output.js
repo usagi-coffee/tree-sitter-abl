@@ -27,7 +27,7 @@ export default ({ kw }) => ({
         kw("THROUGH"),
         $._program_target,
         optional($.__output_program_items),
-        repeat($.__output_shared_option),
+        optional($.__output_shared_options),
       ),
     ),
 
@@ -57,6 +57,8 @@ export default ({ kw }) => ({
       alias(kw("UNBUFFERED"), $.unbuffered),
       alias($._convert_phrase, $.convert_phrase),
     ),
+  __output_shared_options: ($) =>
+    prec.right(seq($.__output_shared_option, optional($.__output_shared_options))),
 
   __output_page_size_phrase: ($) =>
     seq(kw("PAGE-SIZE"), field("page_size", $.__output_numeric_value)),
