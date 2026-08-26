@@ -1,7 +1,9 @@
 export default ({ kw }) => ({
   os_create_dir_statement: ($) => seq($.__os_create_dir_prefix, $._terminator),
 
-  __os_create_dir_prefix: ($) => seq(kw("OS-CREATE-DIR"), repeat1($.__os_create_dir_directory)),
+  __os_create_dir_prefix: ($) => seq(kw("OS-CREATE-DIR"), $.__os_create_dir_directories),
 
   __os_create_dir_directory: ($) => field("directory", $._os_filename),
+  __os_create_dir_directories: ($) =>
+    prec.right(seq($.__os_create_dir_directory, optional($.__os_create_dir_directories))),
 });
