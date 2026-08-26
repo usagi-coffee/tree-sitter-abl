@@ -25,15 +25,11 @@ export default ({ kw }) => ({
     choice(
       seq(
         field("field", $._identifier_or_array_access),
-        optional($.__enable_field_formats),
+        optional($._format_phrases),
         optional($._when_phrase),
       ),
       seq(kw("TEXT"), "(", token(/[A-Za-z_][A-Za-z0-9_-]*/), $.format_phrase, ")"),
-      seq(field("constant", $.string_literal), optional($.__enable_constant_formats)),
+      seq(field("constant", $.string_literal), optional($._format_phrases)),
       alias(kw("SKIP"), $.skip),
     ),
-  __enable_constant_formats: ($) =>
-    prec.right(seq($.format_phrase, optional($.__enable_constant_formats))),
-  __enable_field_formats: ($) =>
-    prec.right(seq($.format_phrase, optional($.__enable_field_formats))),
 });

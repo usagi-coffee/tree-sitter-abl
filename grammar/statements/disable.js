@@ -19,18 +19,8 @@ export default ({ kw }) => ({
         repeat($.format_phrase),
         optional($._when_phrase),
       ),
-      seq(
-        kw("TEXT"),
-        "(",
-        token(/[A-Za-z_][A-Za-z0-9_-]*/),
-        optional($.__disable_text_formats),
-        ")",
-      ),
-      seq(field("constant", $.string_literal), optional($.__disable_constant_formats)),
+      seq(kw("TEXT"), "(", token(/[A-Za-z_][A-Za-z0-9_-]*/), optional($._format_phrases), ")"),
+      seq(field("constant", $.string_literal), optional($._format_phrases)),
       alias(kw("SKIP"), $.skip),
     ),
-  __disable_constant_formats: ($) =>
-    prec.right(seq($.format_phrase, optional($.__disable_constant_formats))),
-  __disable_text_formats: ($) =>
-    prec.right(seq($.format_phrase, optional($.__disable_text_formats))),
 });

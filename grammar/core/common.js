@@ -22,6 +22,7 @@ export default ({ kw }) => ({
     ),
   _frame_phrases: ($) => seq($.frame_phrase, optional($.frame_phrase)),
   _widget_phrases: ($) => prec.right(seq($.widget_phrase, optional($._widget_phrases))),
+  _format_phrases: ($) => prec.right(seq($.format_phrase, optional($._format_phrases))),
   _parenthesized_value: ($) => seq($._parenthesized_expression_prefix, ")"),
   _map_phrase: ($) =>
     choice(
