@@ -97,16 +97,18 @@ export default ({ kw }) => ({
       seq(
         kw("EDITOR"),
         optional($.__format_editor_options),
-        choice(
-          $.__format_size_phrase,
-          seq(
-            kw("INNER-CHARS"),
-            field("inner_chars", $.number_literal),
-            kw("INNER-LINES"),
-            field("inner_lines", $.number_literal),
-          ),
-        ),
+        $.__format_editor_size,
         optional($.__format_editor_options),
+      ),
+    ),
+  __format_editor_size: ($) =>
+    choice(
+      $.__format_size_phrase,
+      seq(
+        kw("INNER-CHARS"),
+        field("inner_chars", $.number_literal),
+        kw("INNER-LINES"),
+        field("inner_lines", $.number_literal),
       ),
     ),
 
