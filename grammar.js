@@ -192,7 +192,8 @@ export default grammar({
   rules: (() => {
     const ctx = { kw };
     return {
-      source_code: ($) => repeat($._statement),
+      source_code: ($) => optional($.__source_statements),
+      __source_statements: ($) => prec.right(seq($._statement, optional($.__source_statements))),
 
       // Comments
       line_comment: ($) => token(seq("//", /[^\r\n]*/)),
