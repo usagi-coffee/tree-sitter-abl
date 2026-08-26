@@ -13,7 +13,14 @@ export default ({ kw }) => ({
     seq(
       field("name", $.identifier),
       optional($.__work_table_like_no_undo_tail),
-      repeat(choice(alias($._table_field, $.field), alias($._table_index, $.index))),
+      optional($.__work_table_items),
+    ),
+  __work_table_items: ($) =>
+    prec.right(
+      seq(
+        choice(alias($._table_field, $.field), alias($._table_index, $.index)),
+        optional($.__work_table_items),
+      ),
     ),
   __work_table_like_no_undo_tail: ($) =>
     choice(
