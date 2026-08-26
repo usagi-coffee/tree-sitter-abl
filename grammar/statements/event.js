@@ -25,11 +25,11 @@ export default ({ kw }) => ({
     choice(
       seq(
         $._member_access_modifier,
-        repeat($.__event_type_modifier),
+        optional($.__event_type_modifiers),
         optional(alias(kw("OVERRIDE"), $.override_modifier)),
       ),
       seq(
-        repeat1($.__event_type_modifier),
+        $.__event_type_modifiers,
         optional($._member_access_modifier),
         optional(alias(kw("OVERRIDE"), $.override_modifier)),
       ),
@@ -37,4 +37,6 @@ export default ({ kw }) => ({
     ),
   __event_type_modifier: ($) =>
     choice(alias(kw("STATIC"), $.static_modifier), alias(kw("ABSTRACT"), $.abstract_modifier)),
+  __event_type_modifiers: ($) =>
+    prec.right(seq($.__event_type_modifier, optional($.__event_type_modifiers))),
 });
