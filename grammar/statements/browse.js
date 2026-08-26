@@ -116,7 +116,9 @@ export default ({ kw }) => ({
     ),
 
   __browse_record: ($) =>
-    seq(field("record", $.identifier), kw("EXCEPT"), repeat1(field("field", $.identifier))),
+    seq(field("record", $.identifier), kw("EXCEPT"), $.__browse_record_fields),
+  __browse_record_fields: ($) =>
+    prec.right(seq(field("field", $.identifier), optional($.__browse_record_fields))),
 
   __browse_column: ($) =>
     prec.right(
