@@ -183,7 +183,7 @@ export default ({ kw }) => ({
             kw("LIST-ITEMS"),
             field(
               "items",
-              seq($.__format_radio_set_value, repeat(seq(",", $.__format_radio_set_value))),
+              seq($.__format_radio_set_value, optional($.__format_combo_box_values_tail)),
             ),
           ),
           seq(
@@ -203,6 +203,8 @@ export default ({ kw }) => ({
         ),
       ),
     ),
+  __format_combo_box_values_tail: ($) =>
+    seq(",", $.__format_radio_set_value, optional($.__format_combo_box_values_tail)),
   __format_view_as_tail: ($) =>
     prec.right(choice(seq($.size_phrase, optional($._tooltip_phrase)), $._tooltip_phrase)),
   _format_view_as: ($) =>
