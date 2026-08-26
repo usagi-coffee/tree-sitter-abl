@@ -10,6 +10,5 @@ export default ({ kw }) => ({
       $.in_window_phrase,
     ),
   __hide_target: ($) =>
-    choice(alias(kw("MESSAGE"), $.message), alias(kw("ALL"), $.all), $.__hide_widgets),
-  __hide_widgets: ($) => prec.right(seq($.widget_phrase, optional($.__hide_widgets))),
+    choice(alias(kw("MESSAGE"), $.message), alias(kw("ALL"), $.all), $._widget_phrases),
 });
