@@ -39,7 +39,9 @@ export default ({ kw }) => ({
   __create_buffer_target: ($) =>
     choice($.__create_buffer_name, alias($.__create_buffer_concatenation, $.binary_expression)),
   __create_buffer_concatenation: ($) =>
-    seq($.__create_buffer_name, repeat1(seq("+", $.__create_buffer_name))),
+    seq($.__create_buffer_name, $.__create_buffer_concatenation_tail),
+  __create_buffer_concatenation_tail: ($) =>
+    prec.right(seq("+", $.__create_buffer_name, optional($.__create_buffer_concatenation_tail))),
   __create_buffer_name: ($) =>
     choice(
       $._identifier_or_access_or_call,
