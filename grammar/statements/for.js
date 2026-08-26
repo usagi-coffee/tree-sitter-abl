@@ -15,7 +15,7 @@ export default ({ kw }) => ({
   __for_while_transaction_tail: ($) =>
     choice(
       seq(
-        alias($.__for_while_phrase, $.while_phrase),
+        alias($.__do_while_phrase, $.while_phrase),
         optional(alias(kw("TRANSACTION", { offset: 5 }), $.transaction)),
       ),
       seq(alias(kw("TRANSACTION", { offset: 5 }), $.transaction), optional($.__for_sort_clauses)),
@@ -52,5 +52,4 @@ export default ({ kw }) => ({
 
   __for_collate_phrase: ($) =>
     seq($._collate_body, optional(field("sort_order", kw("DESCENDING", { offset: 4 })))),
-  __for_while_phrase: ($) => seq(kw("WHILE"), field("condition", $._expression)),
 });
