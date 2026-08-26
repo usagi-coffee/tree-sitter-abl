@@ -1,7 +1,6 @@
 export default ({ kw }) => ({
-  format_phrase: ($) => prec.right(seq($.__format_option, optional($.__format_options_tail))),
-  __format_options_tail: ($) =>
-    prec.right(seq($.__format_option, optional($.__format_options_tail))),
+  format_phrase: ($) => $.__format_options,
+  __format_options: ($) => prec.right(seq($.__format_option, optional($.__format_options))),
   __format_option: ($) =>
     choice(
       $.__format_at_phrase,
