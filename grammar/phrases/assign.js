@@ -3,7 +3,9 @@ export default ({ kw }) => ({
 
   __assign_body: ($) => seq($._assign_pairs, optional(alias(kw("NO-ERROR"), $.no_error))),
 
-  _assign_pairs: ($) => repeat1(alias($.__assign_pair, $.assign_pair)),
+  _assign_pairs: ($) => $._assign_pair_list,
+  _assign_pair_list: ($) =>
+    prec.right(seq(alias($.__assign_pair, $.assign_pair), optional($._assign_pair_list))),
 
   __assign_pair: ($) =>
     seq(
