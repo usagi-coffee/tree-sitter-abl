@@ -10,7 +10,14 @@ export default ({ kw }) => ({
     seq(
       field("color", $.color_phrase),
       optional(seq(kw("PROMPT"), field("prompt_color", $.color_phrase))),
-      repeat1(choice($._identifier_or_qualified_name, $.scoped_name, $.input_expression)),
+      $.__color_targets,
       optional($.frame_phrase),
+    ),
+  __color_targets: ($) =>
+    prec.right(
+      seq(
+        choice($._identifier_or_qualified_name, $.scoped_name, $.input_expression),
+        optional($.__color_targets),
+      ),
     ),
 });
