@@ -18,7 +18,7 @@ export default ({ kw }) => ({
         alias($.__for_while_phrase, $.while_phrase),
         optional(alias(kw("TRANSACTION", { offset: 5 }), $.transaction)),
       ),
-      seq(alias(kw("TRANSACTION", { offset: 5 }), $.transaction), repeat($.__for_sort_clause)),
+      seq(alias(kw("TRANSACTION", { offset: 5 }), $.transaction), optional($.__for_sort_clauses)),
     ),
   __for_sort_clause: ($) =>
     choice(
@@ -27,9 +27,10 @@ export default ({ kw }) => ({
       alias($.__for_collate_phrase, $.collate_phrase),
       alias($.__for_break_by, $.break_by),
     ),
+  __for_sort_clauses: ($) => prec.right(seq($.__for_sort_clause, optional($.__for_sort_clauses))),
   __for_record_or_variables: ($) => choice($.__for_record_phrase_section, $._loop_phrase),
   __for_record_phrase_section: ($) =>
-    seq($.__for_record_phrases, repeat($.__for_sort_clause), optional($._loop_phrase)),
+    seq($.__for_record_phrases, optional($.__for_sort_clauses), optional($._loop_phrase)),
 
   __for_record_phrases: ($) => seq($.__for_record, repeat(seq(",", $.__for_record))),
 
