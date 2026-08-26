@@ -7,9 +7,17 @@ export default ({ kw }) => ({
       field("name", $._type_name),
       optional(alias(kw("FLAGS"), $.flags)),
       alias($._colon, ":"),
-      repeat(seq($._define_keyword, kw("ENUM"), $.__enum_members, $._terminator)),
+      optional($.__enum_definitions),
       $._end_keyword,
       kw("ENUM"),
+    ),
+
+  __enum_definitions: ($) =>
+    prec.right(
+      seq(
+        seq($._define_keyword, kw("ENUM"), $.__enum_members, $._terminator),
+        optional($.__enum_definitions),
+      ),
     ),
 
   __enum_member: ($) => seq(field("name", $.identifier), optional(seq("=", $.__enum_member_value))),
