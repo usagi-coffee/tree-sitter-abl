@@ -47,12 +47,7 @@ export default ({ kw }) => ({
     ),
   __run_persistence_set_tail: ($) => seq(kw("SET"), field("handle", $.__run_persistence_handle)),
   __run_persistence_handle: ($) =>
-    choice(
-      $._identifier_or_qualified_name,
-      alias($.__run_persistence_handle_element, $.array_access),
-    ),
-  __run_persistence_handle_element: ($) =>
-    seq(field("array", $._identifier_or_qualified_name), "[", field("index", $._expression), "]"),
+    choice($._identifier_or_qualified_name, alias($.__display_base_element, $.array_access)),
 
   _run_target: ($) =>
     choice(
