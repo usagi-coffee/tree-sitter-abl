@@ -51,11 +51,13 @@ export default ({ kw }) => ({
       optional(alias(kw("EXPLICIT"), $.explicit)),
       $.__buffer_compare_compares,
       alias($._colon, ":"),
-      repeat1($.__buffer_compare_when_phrase),
+      $.__buffer_compare_when_phrases,
       optional($.__buffer_compare_compares),
       $._end_keyword,
     ),
   __buffer_compare_compares: ($) => alias(kw("COMPARES"), $.compares),
+  __buffer_compare_when_phrases: ($) =>
+    prec.right(seq($.__buffer_compare_when_phrase, optional($.__buffer_compare_when_phrases))),
 
   __buffer_compare_when_phrase: ($) =>
     seq(
