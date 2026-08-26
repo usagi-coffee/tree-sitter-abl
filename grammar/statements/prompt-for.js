@@ -13,7 +13,7 @@ export default ({ kw }) => ({
   __prompt_for_record_body: ($) =>
     seq(
       field("record", $.identifier),
-      optional(seq(kw("EXCEPT"), repeat1(alias($._identifier_or_qualified_name, $.field)))),
+      optional(seq(kw("EXCEPT"), $.__prompt_for_except_fields)),
       optional($.in_window_phrase),
       optional($.frame_phrase),
     ),
@@ -24,6 +24,10 @@ export default ({ kw }) => ({
       optional(alias($._go_on_phrase, $.go_on_phrase)),
       optional($.__prompt_for_fields_tail),
       optional($.editing_phrase),
+    ),
+  __prompt_for_except_fields: ($) =>
+    prec.right(
+      seq(alias($._identifier_or_qualified_name, $.field), optional($.__prompt_for_except_fields)),
     ),
   __prompt_for_fields_tail: ($) =>
     choice(
