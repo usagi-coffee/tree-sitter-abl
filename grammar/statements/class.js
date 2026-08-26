@@ -185,14 +185,17 @@ export default ({ kw }) => ({
       kw("PROPERTY"),
       field("name", $.identifier),
       $.__class_property_type_phrase,
-      repeat(
-        choice(
-          seq(kw("INITIAL", { offset: 4 }), field("initial", $._initial_value)),
-          seq(kw("SERIALIZE-NAME"), field("serialize_name", $.string_literal)),
-          alias($._no_undo_keyword, $.no_undo),
-          alias($._extent_phrase, $.extent_phrase),
-        ),
-      ),
+      optional($.__class_property_options),
+    ),
+
+  __class_property_options: ($) =>
+    prec.right(seq($.__class_property_option, optional($.__class_property_options))),
+  __class_property_option: ($) =>
+    choice(
+      seq(kw("INITIAL", { offset: 4 }), field("initial", $._initial_value)),
+      seq(kw("SERIALIZE-NAME"), field("serialize_name", $.string_literal)),
+      alias($._no_undo_keyword, $.no_undo),
+      alias($._extent_phrase, $.extent_phrase),
     ),
 
   __class_property_accessor_body: ($) =>
