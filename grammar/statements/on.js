@@ -123,7 +123,7 @@ export default ({ kw }) => ({
         choice(
           $.__on_database_event_action,
           seq(
-            field("widget", alias($.__on_database_event_widget, $.widget_phrase)),
+            field("widget", alias($._frame_browse_menu_widget, $.widget_phrase)),
             optional(alias(kw("ANYWHERE"), $.anywhere)),
             $.__on_trigger_action,
           ),
@@ -136,12 +136,6 @@ export default ({ kw }) => ({
       field("object", $._identifier_or_qualified_name),
       optional($.__on_database_event_tail),
       choice($.__on_revert_action, $._statement),
-    ),
-  __on_database_event_widget: ($) =>
-    choice(
-      seq(kw("FRAME", { offset: 4 }), field("frame", $.__widget_name)),
-      seq(kw("BROWSE"), field("browse", $.__widget_name)),
-      seq(choice(kw("MENU"), kw("SUB-MENU")), field("menu", $.__widget_name)),
     ),
   __on_database_event_tail: ($) =>
     choice(

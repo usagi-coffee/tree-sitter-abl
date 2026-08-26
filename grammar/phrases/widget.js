@@ -1,12 +1,5 @@
 export default ({ kw }) => ({
-  widget_phrase: ($) =>
-    choice(
-      seq(kw("FRAME", { offset: 4 }), field("frame", $.__widget_name)),
-      seq(kw("BROWSE"), field("browse", $.__widget_name)),
-      $.__widget_handle,
-      $.__widget_entry,
-      seq(choice(kw("MENU"), kw("SUB-MENU")), field("menu", $.__widget_name)),
-    ),
+  widget_phrase: ($) => choice($._frame_browse_menu_widget, $.__widget_handle, $.__widget_entry),
 
   __widget_name: ($) => choice($.identifier, $.preprocessor_name),
 

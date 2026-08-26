@@ -62,6 +62,12 @@ export default ({ kw }) => ({
       optional(alias(kw("DISABLED"), $.disabled)),
       optional($._aggregate_label_phrase),
     ),
+  _frame_browse_menu_widget: ($) =>
+    choice(
+      seq(kw("FRAME", { offset: 4 }), field("frame", $.__widget_name)),
+      seq(kw("BROWSE"), field("browse", $.__widget_name)),
+      seq(choice(kw("MENU"), kw("SUB-MENU")), field("menu", $.__widget_name)),
+    ),
   _color_font_option: ($) =>
     choice(
       seq(kw("BGCOLOR"), field("bgcolor", $._expression)),
