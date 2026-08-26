@@ -26,17 +26,23 @@ export default ({ kw }) => ({
       seq(
         kw("THROUGH"),
         $._program_target,
-        repeat(
-          choice(
-            $.string_literal,
-            $.number_literal,
-            $.identifier,
-            $.preprocessor_name,
-            alias($.__output_program_flag, $.program_flag),
-            $._value_expression,
-          ),
-        ),
+        optional($.__output_program_items),
         repeat($.__output_shared_option),
+      ),
+    ),
+
+  __output_program_items: ($) =>
+    prec.right(
+      seq(
+        choice(
+          $.string_literal,
+          $.number_literal,
+          $.identifier,
+          $.preprocessor_name,
+          alias($.__output_program_flag, $.program_flag),
+          $._value_expression,
+        ),
+        optional($.__output_program_items),
       ),
     ),
 
