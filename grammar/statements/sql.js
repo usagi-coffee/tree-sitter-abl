@@ -105,7 +105,7 @@ export default ({ kw }) => ({
       kw("SET"),
       alias($.__sql_update_assignment, $.assignment),
       optional($.__sql_update_assignment_tail),
-      optional($.__sql_where_clause),
+      optional($.__aggregate_where_phrase),
     ),
   __sql_update_assignment_tail: ($) =>
     seq(
@@ -129,7 +129,7 @@ export default ({ kw }) => ({
     seq(
       kw("FROM"),
       $.__sql_table_references,
-      optional($.__sql_where_clause),
+      optional($.__aggregate_where_phrase),
       optional($.__sql_group_by_clause),
       optional($.__sql_having_clause),
       optional($.__sql_order_by_clause),
@@ -173,7 +173,6 @@ export default ({ kw }) => ({
   __sql_table_reference: ($) =>
     seq(field("name", $._identifier_or_qualified_name), optional(field("alias", $.identifier))),
 
-  __sql_where_clause: ($) => seq(kw("WHERE"), field("condition", $._expression)),
   __sql_group_by_clause: ($) =>
     seq(
       kw("GROUP"),
