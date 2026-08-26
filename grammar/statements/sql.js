@@ -80,11 +80,11 @@ export default ({ kw }) => ({
     seq(
       field("cursor", $.identifier),
       kw("INTO"),
-      field("target", $._sql_target),
+      field("target", $._identifier_or_array_access),
       optional($.__sql_fetch_target_tail),
     ),
   __sql_fetch_target_tail: ($) =>
-    seq(",", field("target", $._sql_target), optional($.__sql_fetch_target_tail)),
+    seq(",", field("target", $._identifier_or_array_access), optional($.__sql_fetch_target_tail)),
 
   // `CLOSE c.` -- distinct from CLOSE QUERY and CLOSE STORED-PROCEDURE, both of
   // which name a keyword where this one names a cursor.
@@ -161,15 +161,17 @@ export default ({ kw }) => ({
   _sql_title: ($) => choice($.identifier, $.string_literal),
 
   __sql_into_clause: ($) =>
-    seq(kw("INTO"), field("into", $._sql_target), optional($.__sql_into_target_tail)),
+    seq(
+      kw("INTO"),
+      field("into", $._identifier_or_array_access),
+      optional($.__sql_into_target_tail),
+    ),
   __sql_into_target_tail: ($) =>
-    seq(",", field("into", $._sql_target), optional($.__sql_into_target_tail)),
+    seq(",", field("into", $._identifier_or_array_access), optional($.__sql_into_target_tail)),
 
   // A host variable receiving a column value. Kept to the shapes a variable can
   // take, not to `_assignable`, which reaches widget references with no meaning
   // here.
-  _sql_target: ($) => choice($._identifier_or_qualified_name, $.array_access),
-
   __sql_table_reference: ($) =>
     seq(field("name", $._identifier_or_qualified_name), optional(field("alias", $.identifier))),
 
