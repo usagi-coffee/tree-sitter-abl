@@ -5,16 +5,7 @@ export default ({ kw }) => ({
     seq(
       kw("CHOOSE"),
       choice(seq($._row_keyword, $.__choose_field_help), seq(kw("FIELD"), $.__choose_field_helps)),
-      repeat(
-        choice(
-          alias(kw("AUTO-RETURN"), $.auto_return),
-          seq(kw("COLOR"), field("color", $.color_phrase)),
-          alias($._go_on_phrase, $.go_on),
-          seq(kw("KEYS"), field("keys", $.identifier)),
-          alias(kw("NO-ERROR"), $.no_error),
-          seq(kw("PAUSE"), field("pause", $._expression)),
-        ),
-      ),
+      optional($.__choose_options),
       optional($.frame_phrase),
     ),
   __choose_field_help: ($) =>
@@ -24,4 +15,14 @@ export default ({ kw }) => ({
     ),
   __choose_field_helps: ($) =>
     prec.right(seq($.__choose_field_help, optional($.__choose_field_helps))),
+  __choose_options: ($) => prec.right(seq($.__choose_option, optional($.__choose_options))),
+  __choose_option: ($) =>
+    choice(
+      alias(kw("AUTO-RETURN"), $.auto_return),
+      seq(kw("COLOR"), field("color", $.color_phrase)),
+      alias($._go_on_phrase, $.go_on),
+      seq(kw("KEYS"), field("keys", $.identifier)),
+      alias(kw("NO-ERROR"), $.no_error),
+      seq(kw("PAUSE"), field("pause", $._expression)),
+    ),
 });
