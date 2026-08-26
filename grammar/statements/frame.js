@@ -39,7 +39,7 @@ export default ({ kw }) => ({
   __frame_head_item: ($) =>
     choice(
       $.__frame_skip_phrase,
-      $.__frame_space_phrase,
+      $._display_space_phrase,
       seq(
         field("value", $._expression),
         optional($.at_phrase),
@@ -94,9 +94,5 @@ export default ({ kw }) => ({
   __frame_skip_phrase: ($) =>
     prec.left(
       seq(kw("SKIP"), optional(field("skip", seq($._parenthesized_expression_prefix, ")")))),
-    ),
-  __frame_space_phrase: ($) =>
-    prec.left(
-      seq(kw("SPACE"), optional(field("space", seq($._parenthesized_expression_prefix, ")")))),
     ),
 });

@@ -19,9 +19,9 @@ export default ($) => [
   // Purpose: SKIP/SPACE should win over function-call/expr parsing.
   // Example: DISPLAY SPACE(2) Customer.Name SKIP(1) Customer.City.
   [$.__display_skip_phrase, $.function_call],
-  [$.__display_space_phrase, $.function_call],
+  [$._display_space_phrase, $.function_call],
   [$.__display_skip_phrase, $._primary_expression],
-  [$.__display_space_phrase, $._primary_expression],
+  [$._display_space_phrase, $._primary_expression],
   // Purpose: prefer field interpretation over record.
   // Example: DISPLAY Customer.Name IN WINDOW hWin WITH FRAME f1.
   [$.__display_field, $.__display_record],

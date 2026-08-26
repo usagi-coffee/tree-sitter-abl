@@ -54,7 +54,7 @@ export default ({ kw }) => ({
             ),
             alias($.__display_aggregate_expression, $.aggregate_expression),
             $.__display_skip_phrase,
-            $.__display_space_phrase,
+            $._display_space_phrase,
           ),
         ),
       ),
@@ -78,10 +78,6 @@ export default ({ kw }) => ({
   __display_skip_phrase: ($) =>
     prec.left(
       seq(kw("SKIP"), optional(field("skip", seq($._parenthesized_expression_prefix, ")")))),
-    ),
-  __display_space_phrase: ($) =>
-    prec.left(
-      seq(kw("SPACE"), optional(field("space", seq($._parenthesized_expression_prefix, ")")))),
     ),
 
   // Second branch
