@@ -339,13 +339,7 @@ export default ({ kw }) => ({
       seq(
         kw("TABLE-HANDLE"),
         field("table_handle", $.identifier),
-        repeat(
-          choice(
-            alias(kw("BIND"), $.bind),
-            alias(kw("BY-VALUE"), $.by_value),
-            alias(kw("BY-REFERENCE"), $.by_reference),
-          ),
-        ),
+        optional($.__class_handle_options),
       ),
       seq(
         $._dataset_keyword,
@@ -356,13 +350,7 @@ export default ({ kw }) => ({
       seq(
         kw("DATASET-HANDLE"),
         field("dataset_handle", $.identifier),
-        repeat(
-          choice(
-            alias(kw("BIND"), $.bind),
-            alias(kw("BY-VALUE"), $.by_value),
-            alias(kw("BY-REFERENCE"), $.by_reference),
-          ),
-        ),
+        optional($.__class_handle_options),
       ),
     ),
   __class_table_options: ($) =>
@@ -370,6 +358,14 @@ export default ({ kw }) => ({
   __class_table_option: ($) =>
     choice(
       alias(kw("APPEND"), $.append),
+      alias(kw("BIND"), $.bind),
+      alias(kw("BY-VALUE"), $.by_value),
+      alias(kw("BY-REFERENCE"), $.by_reference),
+    ),
+  __class_handle_options: ($) =>
+    prec.right(seq($.__class_handle_option, optional($.__class_handle_options))),
+  __class_handle_option: ($) =>
+    choice(
       alias(kw("BIND"), $.bind),
       alias(kw("BY-VALUE"), $.by_value),
       alias(kw("BY-REFERENCE"), $.by_reference),
