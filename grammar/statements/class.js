@@ -79,7 +79,14 @@ export default ({ kw }) => ({
     ),
   __class_body_opener: ($) => choice(alias($._colon, ":"), $._terminator_dot),
   __class_method_definition_prefix: ($) =>
-    seq(kw("METHOD"), repeat(choice($._method_modifier_no_abstract, $.preprocessor_name))),
+    seq(kw("METHOD"), optional($.__class_method_definition_modifiers)),
+  __class_method_definition_modifiers: ($) =>
+    prec.right(
+      seq(
+        choice($._method_modifier_no_abstract, $.preprocessor_name),
+        optional($.__class_method_definition_modifiers),
+      ),
+    ),
   __class_method_definition_signature: ($) =>
     seq(
       $._method_return_type,
