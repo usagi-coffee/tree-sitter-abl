@@ -31,8 +31,9 @@ export default ({ kw }) => ({
   __frame_header_section: ($) =>
     seq(
       choice(alias(kw("HEADER"), $.header), alias(kw("BACKGROUND"), $.background)),
-      repeat1($.__frame_head_item),
+      $.__frame_head_items,
     ),
+  __frame_head_items: ($) => prec.right(seq($.__frame_head_item, optional($.__frame_head_items))),
 
   __frame_head_item: ($) =>
     choice(
