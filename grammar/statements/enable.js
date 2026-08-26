@@ -15,8 +15,11 @@ export default ({ kw }) => ({
   __enable_body: ($) =>
     choice(
       seq(alias(kw("ALL"), $.all), optional(seq(kw("EXCEPT"), $._except_name_list))),
-      repeat1(alias($.__enable_item, $.enable_item)),
+      $.__enable_items_list,
     ),
+
+  __enable_items_list: ($) =>
+    prec.right(seq(alias($.__enable_item, $.enable_item), optional($.__enable_items_list))),
 
   __enable_item: ($) =>
     choice(
