@@ -188,6 +188,7 @@ export default grammar({
     $.__underline_field,
     $.__put_control,
     $.__export_expression,
+    $.__system_help_position,
     $.system_handle_identifier,
   ],
 
