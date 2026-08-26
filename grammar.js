@@ -216,10 +216,20 @@ export default grammar({
         ),
       include_expression: ($) => $.__include_file_reference,
       include_statement: ($) => $.__include_file_reference,
-      __include_arguments: ($) =>
-        choice(
-          repeat1(field("argument", alias($._include_argument_value, $.include_argument))),
-          repeat1(field("argument", alias($.include_named_argument, $.include_argument))),
+      __include_arguments: ($) => choice($.__include_arguments_values, $.__include_arguments_named),
+      __include_arguments_values: ($) =>
+        prec.right(
+          seq(
+            field("argument", alias($._include_argument_value, $.include_argument)),
+            optional($.__include_arguments_values),
+          ),
+        ),
+      __include_arguments_named: ($) =>
+        prec.right(
+          seq(
+            field("argument", alias($.include_named_argument, $.include_argument)),
+            optional($.__include_arguments_named),
+          ),
         ),
       include_named_argument: ($) =>
         seq("&", field("name", $.identifier), seq("=", field("value", $._include_argument_value))),
