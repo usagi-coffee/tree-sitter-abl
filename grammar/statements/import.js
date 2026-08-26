@@ -13,8 +13,10 @@ export default ({ kw }) => ({
     seq(
       optional(alias($.__import_delimiter_phrase, $.delimiter_phrase)),
       repeat1(choice($._identifier_or_qualified_name, alias("^", $.skip_field))),
-      optional(seq(kw("EXCEPT"), repeat1($._identifier_or_qualified_name))),
+      optional(seq(kw("EXCEPT"), $.__import_except_names)),
     ),
+  __import_except_names: ($) =>
+    prec.right(seq($._identifier_or_qualified_name, optional($.__import_except_names))),
   __import_unformatted_phrase: ($) =>
     seq(kw("UNFORMATTED"), field("field", $._identifier_or_qualified_name)),
 });
