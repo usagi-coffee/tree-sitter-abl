@@ -20,7 +20,7 @@ export default ({ kw }) => ({
 
   __prompt_for_fields_body: ($) =>
     seq(
-      repeat1(alias($.__prompt_for_field, $.field)),
+      $.__prompt_for_fields,
       optional(alias($._go_on_phrase, $.go_on_phrase)),
       optional($.__prompt_for_fields_tail),
       optional($.editing_phrase),
@@ -58,6 +58,8 @@ export default ({ kw }) => ({
       seq(kw("SPACE"), optional(field("space", $._parenthesized_value))),
       "^",
     ),
+  __prompt_for_fields: ($) =>
+    prec.right(seq(alias($.__prompt_for_field, $.field), optional($.__prompt_for_fields))),
   __prompt_for_constant_tail: ($) =>
     choice(
       seq(
