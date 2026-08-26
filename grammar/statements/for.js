@@ -8,7 +8,7 @@ export default ({ kw }) => ({
       $._for_keyword,
       $.__for_record_or_variables,
       optional($.__for_while_transaction_tail),
-      repeat($._block_option),
+      optional($._block_options),
       optional($.__for_with_stream_io_phrase),
       $.body,
     ),

@@ -48,7 +48,7 @@ export default ({ kw }) => ({
   __do_block_tail: ($) =>
     choice(
       seq(
-        repeat1($._block_option),
+        $._block_options,
         optional(alias(kw("TRANSACTION", { offset: 5 }), $.transaction)),
         $.body,
       ),

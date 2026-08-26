@@ -28,7 +28,7 @@ export default ({ kw }) => ({
         optional($.__repeat_condition_phrase),
       ),
     ),
-  __repeat_body_after_transaction: ($) => choice(seq(repeat1($._block_option), $.body), $.body),
+  __repeat_body_after_transaction: ($) => choice(seq($._block_options, $.body), $.body),
 
   __repeat_condition_phrase: ($) =>
     seq(choice(kw("WHILE"), kw("UNTIL")), field("condition", $._expression)),

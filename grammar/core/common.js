@@ -174,6 +174,7 @@ export default ({ kw }) => ({
       $.on_quit_phrase,
       $.frame_phrase,
     ),
+  _block_options: ($) => prec.right(seq($._block_option, optional($._block_options))),
 
   _convert_phrase: ($) =>
     choice(alias(kw("NO-CONVERT"), $.no_convert), seq(kw("CONVERT"), optional($._convert_options))),
