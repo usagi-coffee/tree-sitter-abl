@@ -75,18 +75,20 @@ export default ({ kw }) => ({
     seq(
       field("name", $.identifier),
       $.__parameter_variable_type_phrase,
-      repeat(
-        choice(
-          alias(seq(optional(kw("NOT")), kw("CASE-SENSITIVE")), $.case_sensitive),
-          $._format_string,
-          seq(kw("COLUMN-LABEL"), field("column_label", $.string_literal)),
-          seq(kw("DECIMALS"), field("decimals", $.number_literal)),
-          alias($._extent_phrase, $.extent_phrase),
-          seq(kw("INITIAL", { offset: 4 }), field("initial", $._initial_value)),
-          seq(kw("LABEL"), field("label", $.string_literal), optional($.__parameter_label_tail)),
-          alias($._no_undo_keyword, $.no_undo),
-        ),
-      ),
+      optional($.__parameter_options),
+    ),
+  __parameter_options: ($) =>
+    prec.right(seq($.__parameter_option, optional($.__parameter_options))),
+  __parameter_option: ($) =>
+    choice(
+      alias(seq(optional(kw("NOT")), kw("CASE-SENSITIVE")), $.case_sensitive),
+      $._format_string,
+      seq(kw("COLUMN-LABEL"), field("column_label", $.string_literal)),
+      seq(kw("DECIMALS"), field("decimals", $.number_literal)),
+      alias($._extent_phrase, $.extent_phrase),
+      seq(kw("INITIAL", { offset: 4 }), field("initial", $._initial_value)),
+      seq(kw("LABEL"), field("label", $.string_literal), optional($.__parameter_label_tail)),
+      alias($._no_undo_keyword, $.no_undo),
     ),
   __parameter_label_tail: ($) =>
     seq(",", field("label", $.string_literal), optional($.__parameter_label_tail)),
