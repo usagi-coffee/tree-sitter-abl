@@ -20,7 +20,9 @@ export default ({ kw }) => ({
         optional($._when_phrase),
       ),
       seq(kw("TEXT"), "(", token(/[A-Za-z_][A-Za-z0-9_-]*/), repeat($.format_phrase), ")"),
-      seq(field("constant", $.string_literal), repeat($.format_phrase)),
+      seq(field("constant", $.string_literal), optional($.__disable_constant_formats)),
       alias(kw("SKIP"), $.skip),
     ),
+  __disable_constant_formats: ($) =>
+    prec.right(seq($.format_phrase, optional($.__disable_constant_formats))),
 });
