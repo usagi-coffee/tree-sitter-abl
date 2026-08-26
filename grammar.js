@@ -272,7 +272,7 @@ export default grammar({
         seq(
           token(/&IF/i),
           $.__if_preprocessor_condition_then,
-          field("then_branch", repeat1(field("value", $.__if_preprocessor_branch_value))),
+          field("then_branch", $.__if_preprocessor_branch_values),
           optional($.__if_preprocessor_branches),
         ),
       if_preprocessor_directive_statement: ($) =>
@@ -294,7 +294,7 @@ export default grammar({
         seq(
           token(/&ELSEIF/i),
           $.__if_preprocessor_condition_then,
-          field("then_branch", repeat1(field("value", $.__if_preprocessor_branch_value))),
+          field("then_branch", $.__if_preprocessor_branch_values),
         ),
       __if_preprocessor_branches: ($) =>
         choice(
@@ -306,10 +306,16 @@ export default grammar({
         ),
       __if_preprocessor_condition_then: ($) =>
         seq(field("condition", $._expression), token(/&THEN/i)),
-      __if_preprocessor_else_branch: ($) =>
-        seq(token(/&ELSE/i), repeat1(field("value", $.__if_preprocessor_branch_value))),
+      __if_preprocessor_else_branch: ($) => seq(token(/&ELSE/i), $.__if_preprocessor_branch_values),
       __if_preprocessor_branch_value: ($) =>
         choice($.string_literal, $.preprocessor_name, $.argument_reference, $.number_literal),
+      __if_preprocessor_branch_values: ($) =>
+        prec.right(
+          seq(
+            field("value", $.__if_preprocessor_branch_value),
+            optional($.__if_preprocessor_branch_values),
+          ),
+        ),
       message_preprocessor_directive: ($) =>
         seq(token(prec(1, /&MESSAGE/i)), field("value", $.preprocessor_value)),
       undefine_preprocessor_directive: ($) =>
