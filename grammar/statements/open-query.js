@@ -39,8 +39,10 @@ export default ({ kw }) => ({
       choice($._for_keyword, kw("PRESELECT")),
       kw("EACH"),
       alias($.__open_query_record_phrase, $.record_phrase),
-      repeat(seq(",", $.__open_query_join_record)),
+      optional($.__open_query_join_records),
     ),
+  __open_query_join_records: ($) =>
+    prec.right(seq(",", $.__open_query_join_record, optional($.__open_query_join_records))),
   __open_query_join_record: ($) =>
     seq(
       choice(kw("EACH"), kw("FIRST"), kw("LAST")),
