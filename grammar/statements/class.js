@@ -1,10 +1,14 @@
 export default ({ kw }) => ({
   class_definition: ($) => seq($.__class_prefix, $._terminator),
 
-  __class_prefix: ($) => seq(repeat($.__class_option), kw("CLASS"), $.__class_body),
+  __class_prefix: ($) => seq(optional($.__class_options), kw("CLASS"), $.__class_body),
 
   __class_body: ($) =>
-    seq(field("name", $._type_name), repeat($.__class_option), $.__class_definition_compound_body),
+    seq(
+      field("name", $._type_name),
+      optional($.__class_options),
+      $.__class_definition_compound_body,
+    ),
   __class_definition_compound_body: ($) =>
     seq(
       $.__class_body_opener,
@@ -218,6 +222,7 @@ export default ({ kw }) => ({
       alias(kw("FINAL"), $.final),
       alias(kw("SERIALIZABLE"), $.serializable),
     ),
+  __class_options: ($) => prec.right(seq($.__class_option, optional($.__class_options))),
 
   __class_property_definition_modifier: ($) =>
     choice(
