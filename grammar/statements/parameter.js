@@ -19,14 +19,7 @@ export default ({ kw }) => ({
               kw("TABLE"),
               $._for_keyword,
               field("table", $._identifier_or_qualified_name),
-              repeat(
-                choice(
-                  alias(kw("APPEND"), $.append),
-                  alias(kw("BIND"), $.bind),
-                  alias(kw("BY-VALUE"), $.by_value),
-                  alias($._no_undo_keyword, $.no_undo),
-                ),
-              ),
+              optional($.__parameter_table_options),
             ),
             seq(
               kw("TABLE-HANDLE"),
@@ -44,14 +37,7 @@ export default ({ kw }) => ({
               $._dataset_keyword,
               $._for_keyword,
               field("dataset", $._identifier_or_qualified_name),
-              repeat(
-                choice(
-                  alias(kw("APPEND"), $.append),
-                  alias(kw("BIND"), $.bind),
-                  alias(kw("BY-VALUE"), $.by_value),
-                  alias($._no_undo_keyword, $.no_undo),
-                ),
-              ),
+              optional($.__parameter_table_options),
             ),
             seq(
               kw("DATASET-HANDLE"),
@@ -88,6 +74,15 @@ export default ({ kw }) => ({
       alias($._extent_phrase, $.extent_phrase),
       seq(kw("INITIAL", { offset: 4 }), field("initial", $._initial_value)),
       seq(kw("LABEL"), field("label", $.string_literal), optional($.__parameter_label_tail)),
+      alias($._no_undo_keyword, $.no_undo),
+    ),
+  __parameter_table_options: ($) =>
+    prec.right(seq($.__parameter_table_option, optional($.__parameter_table_options))),
+  __parameter_table_option: ($) =>
+    choice(
+      alias(kw("APPEND"), $.append),
+      alias(kw("BIND"), $.bind),
+      alias(kw("BY-VALUE"), $.by_value),
       alias($._no_undo_keyword, $.no_undo),
     ),
   __parameter_label_tail: ($) =>
