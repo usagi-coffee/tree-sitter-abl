@@ -725,7 +725,6 @@ export default grammar({
       // `!` is excluded after `.` and `:` because it is legal only in routine names.
       _identifier_immediate: ($) => token.immediate(/[_\p{L}][\p{L}\p{N}_\-&#%$]*/i),
       _alias_name: ($) => choice($.identifier, $.string_literal, $._value_expression),
-      _os_filename: ($) => choice($.string_literal, $._identifier_or_access_or_call),
       parenthesized_identifier: ($) => seq("(", $.identifier, ")"),
       _object_access_tail: ($) =>
         repeat1(
