@@ -7,9 +7,11 @@ export default ({ kw }) => ({
   __export_expressions_body: ($) =>
     seq(
       optional(alias($.__export_delimiter_phrase, $.delimiter_phrase)),
-      repeat1($.__export_expression),
+      $.__export_expressions,
       optional($.__export_tail),
     ),
+  __export_expressions: ($) =>
+    prec.right(seq($.__export_expression, optional($.__export_expressions))),
   __export_tail: ($) =>
     choice(
       seq($.__export_except_phrase, optional(alias(kw("NO-LOBS"), $.no_lobs))),
