@@ -5,7 +5,11 @@ export default ({ kw }) => ({
     seq(
       kw("OS-COMMAND"),
       optional(choice(kw("SILENT"), kw("NO-WAIT"), kw("NO-CONSOLE"))),
-      repeat1(choice($._value_expression, $.__os_command_token)),
+      $.__os_command_items,
+    ),
+  __os_command_items: ($) =>
+    prec.right(
+      seq(choice($._value_expression, $.__os_command_token), optional($.__os_command_items)),
     ),
 
   __os_command_token: ($) =>
