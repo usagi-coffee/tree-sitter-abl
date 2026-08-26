@@ -421,6 +421,7 @@ export default ({ kw }) => ({
       ),
     ),
   _when_phrase: ($) => seq(kw("WHEN"), field("when", $._expression)),
+  _equals_value: ($) => seq("=", field("value", $._expression)),
   _list_items_phrase: ($) => seq(kw("LIST-ITEMS"), field("items", $._list_item_values)),
   _list_item_pairs_phrase: ($) => seq(kw("LIST-ITEM-PAIRS"), field("pairs", $._list_item_pairs)),
   _list_item_values: ($) => seq($._expression, optional($._list_item_values_tail)),

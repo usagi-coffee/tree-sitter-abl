@@ -20,7 +20,7 @@ export default ({ kw }) => ({
             ")",
           ),
         ),
-        $.__value_assignments_equals_value,
+        $._equals_value,
       ),
       seq(
         choice(
@@ -76,8 +76,6 @@ export default ({ kw }) => ({
     seq(field("position", $._expression), optional(seq(",", field("length", $._expression)))),
   __value_assignments_database_tenant: ($) =>
     seq(",", field("database", $._expression), optional(seq(",", field("tenant", $._expression)))),
-  __value_assignments_close_equals_value: ($) => seq(")", $.__value_assignments_equals_value),
-  __value_assignments_equals_value: ($) => seq("=", field("value", $._expression)),
-  __value_assignments_value_no_error: ($) =>
-    seq($.__value_assignments_equals_value, optional($.__no_error)),
+  __value_assignments_close_equals_value: ($) => seq(")", $._equals_value),
+  __value_assignments_value_no_error: ($) => seq($._equals_value, optional($.__no_error)),
 });
