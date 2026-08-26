@@ -16,6 +16,8 @@ export default ({ kw }) => ({
       alias(kw("NO-LOBS"), $.no_lobs),
     ),
   __export_expression: ($) => $._expression,
-  __export_except_phrase: ($) => seq(kw("EXCEPT"), repeat1($._identifier_or_qualified_name)),
+  __export_except_phrase: ($) => seq(kw("EXCEPT"), $.__export_except_names),
+  __export_except_names: ($) =>
+    prec.right(seq($._identifier_or_qualified_name, optional($.__export_except_names))),
   __export_delimiter_phrase: ($) => seq(kw("DELIMITER"), field("delimiter", $.string_literal)),
 });
