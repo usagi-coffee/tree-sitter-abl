@@ -165,10 +165,9 @@ export default ({ kw }) => ({
   __browse_option_expression: ($) => prec.right($._expression),
 
   __browse_enable_phrase: ($) =>
-    seq(
-      kw("ENABLE"),
-      choice(alias(kw("ALL"), $.all), repeat1(field("field", $.__browse_enable_field))),
-    ),
+    seq(kw("ENABLE"), choice(alias(kw("ALL"), $.all), $.__browse_enable_fields)),
+  __browse_enable_fields: ($) =>
+    prec.right(seq(field("field", $.__browse_enable_field), optional($.__browse_enable_fields))),
 
   __browse_enable_field: ($) =>
     seq(
