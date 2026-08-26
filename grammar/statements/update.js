@@ -22,12 +22,7 @@ export default ({ kw }) => ({
       alias($._space_phrase, $.space_phrase),
       seq($.__update_field_target_item, optional($._when_phrase)),
       seq($.__update_field_target_item, "=", field("value", $._expression)),
-      seq(
-        kw("TEXT"),
-        "(",
-        repeat1(seq(field("field", $._identifier_or_qualified_name), optional($.format_phrase))),
-        ")",
-      ),
+      seq(kw("TEXT"), "(", $._text_fields, ")"),
       seq(
         field("constant", $.string_literal),
         optional(

@@ -42,12 +42,7 @@ export default ({ kw }) => ({
       ),
       seq(field("field", $._identifier_or_qualified_name), "=", field("value", $._expression)),
       seq(field("field", $.array_access), "=", field("value", $._expression)),
-      seq(
-        kw("TEXT"),
-        "(",
-        repeat1(seq(field("field", $._identifier_or_qualified_name), optional($.format_phrase))),
-        ")",
-      ),
+      seq(kw("TEXT"), "(", $._text_fields, ")"),
       seq(
         field("constant", $.string_literal),
         seq($._at_keyword, field("position", token(/[0-9]+(\.[0-9]+)?/))),

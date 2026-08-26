@@ -47,12 +47,7 @@ export default ({ kw }) => ({
         optional($.format_phrase),
         optional($._when_phrase),
       ),
-      seq(
-        kw("TEXT"),
-        "(",
-        repeat1(seq(field("field", $._identifier_or_qualified_name), optional($.format_phrase))),
-        ")",
-      ),
+      seq(kw("TEXT"), "(", $._text_fields, ")"),
       seq(field("constant", $.string_literal), optional($.__prompt_for_constant_tail)),
       seq(kw("SKIP"), optional(field("skip", $._parenthesized_value))),
       seq(kw("SPACE"), optional(field("space", $._parenthesized_value))),
