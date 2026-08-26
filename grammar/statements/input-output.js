@@ -9,15 +9,7 @@ export default ({ kw }) => ({
         kw("THROUGH"),
         $._program_target,
         optional($.__input_output_arguments),
-        repeat(
-          choice(
-            alias(kw("ECHO"), $.echo),
-            alias(kw("NO-ECHO"), $.no_echo),
-            $._map_phrase,
-            alias(kw("UNBUFFERED"), $.unbuffered),
-            alias($._convert_phrase, $.convert_phrase),
-          ),
-        ),
+        optional($.__input_output_options),
       ),
     ),
   __input_output_arguments: ($) =>
@@ -32,5 +24,15 @@ export default ({ kw }) => ({
         ),
         optional($.__input_output_arguments),
       ),
+    ),
+  __input_output_options: ($) =>
+    prec.right(seq($.__input_output_option, optional($.__input_output_options))),
+  __input_output_option: ($) =>
+    choice(
+      alias(kw("ECHO"), $.echo),
+      alias(kw("NO-ECHO"), $.no_echo),
+      $._map_phrase,
+      alias(kw("UNBUFFERED"), $.unbuffered),
+      alias($._convert_phrase, $.convert_phrase),
     ),
 });
