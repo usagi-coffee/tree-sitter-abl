@@ -37,10 +37,7 @@ export default ({ kw }) => ({
 
   __display_items: ($) =>
     choice(
-      seq(
-        field("record", $.__display_record),
-        optional(seq(kw("EXCEPT"), repeat1(field("except", $._identifier_or_qualified_name)))),
-      ),
+      seq(field("record", $.__display_record), optional(seq(kw("EXCEPT"), $._except_name_list))),
       prec.right(
         repeat1(
           choice(
