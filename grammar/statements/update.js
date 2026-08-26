@@ -9,7 +9,7 @@ export default ({ kw }) => ({
   __update_fields_body: ($) =>
     seq(
       optional(alias(kw("UNLESS-HIDDEN"), $.unless_hidden)),
-      repeat1(alias($.__update_field, $.field)),
+      $.__update_fields,
       optional(alias($._go_on_phrase, $.go_on_phrase)),
       optional($._frame_phrases),
       optional($.editing_phrase),
@@ -36,6 +36,8 @@ export default ({ kw }) => ({
       ),
       "^",
     ),
+  __update_fields: ($) =>
+    prec.right(seq(alias($.__update_field, $.field), optional($.__update_fields))),
 
   __update_field_target_item: ($) =>
     seq(field("field", $.__update_field_target), optional($.format_phrase)),
