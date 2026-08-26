@@ -18,7 +18,7 @@ export default ({ kw }) => ({
           kw("EXCEPT"),
           $.__frame_except_fields,
         ),
-        repeat($.__frame_form_item),
+        optional($.__frame_form_items),
       ),
       optional($.__frame_header_section),
       repeat($.frame_phrase),
@@ -27,6 +27,7 @@ export default ({ kw }) => ({
     prec.right(
       seq(field("field", $._identifier_or_qualified_name), optional($.__frame_except_fields)),
     ),
+  __frame_form_items: ($) => prec.right(seq($.__frame_form_item, optional($.__frame_form_items))),
 
   __frame_header_section: ($) =>
     seq(
