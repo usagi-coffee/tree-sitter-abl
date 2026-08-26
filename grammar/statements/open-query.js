@@ -17,10 +17,7 @@ export default ({ kw }) => ({
     ),
   __open_query_tail_after_break: ($) =>
     choice(
-      seq(
-        repeat1(alias($.__open_query_by_phrase, $.by_phrase)),
-        optional($.__open_query_tail_after_by),
-      ),
+      seq($.__open_query_by_phrases, optional($.__open_query_tail_after_by)),
       $.__open_query_tail_after_by,
     ),
   __open_query_tail_after_by: ($) =>
@@ -70,5 +67,9 @@ export default ({ kw }) => ({
       $._by_keyword,
       field("by", $._expression),
       optional(field("sort_order", kw("DESCENDING", { offset: 4 }))),
+    ),
+  __open_query_by_phrases: ($) =>
+    prec.right(
+      seq(alias($.__open_query_by_phrase, $.by_phrase), optional($.__open_query_by_phrases)),
     ),
 });
