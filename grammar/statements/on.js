@@ -139,11 +139,10 @@ export default ({ kw }) => ({
     ),
   __on_database_event_widget: ($) =>
     choice(
-      seq(kw("FRAME", { offset: 4 }), field("frame", $.__on_widget_name)),
-      seq(kw("BROWSE"), field("browse", $.__on_widget_name)),
-      seq(choice(kw("MENU"), kw("SUB-MENU")), field("menu", $.__on_widget_name)),
+      seq(kw("FRAME", { offset: 4 }), field("frame", $.__widget_name)),
+      seq(kw("BROWSE"), field("browse", $.__widget_name)),
+      seq(choice(kw("MENU"), kw("SUB-MENU")), field("menu", $.__widget_name)),
     ),
-  __on_widget_name: ($) => choice($.identifier, $.preprocessor_name),
   __on_database_event_tail: ($) =>
     choice(
       seq(
