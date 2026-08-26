@@ -12,7 +12,7 @@ export default ({ kw }) => ({
   __variable_body: ($) =>
     seq(
       field("name", $.identifier),
-      repeat(alias($.__variable_extent_phrase, $.extent_phrase)),
+      optional($.__variable_extents),
       optional(alias($._no_undo_keyword, $.no_undo)),
       choice(
         seq($._as_keyword, optional(kw("CLASS")), field("type", $._type_or_string)),
@@ -45,6 +45,10 @@ export default ({ kw }) => ({
     seq(
       kw("EXTENT"),
       optional(field("size", choice($.number_literal, $.preprocessor_name, $.identifier))),
+    ),
+  __variable_extents: ($) =>
+    prec.right(
+      seq(alias($.__variable_extent_phrase, $.extent_phrase), optional($.__variable_extents)),
     ),
 
   __variable_modifier: ($) =>
