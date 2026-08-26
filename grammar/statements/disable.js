@@ -8,10 +8,9 @@ export default ({ kw }) => ({
       optional($.frame_phrase),
     ),
   __disable_items: ($) =>
-    choice(
-      seq(alias(kw("ALL"), $.all), optional($._except_fields)),
-      repeat1(alias($.__disable_item, $.disable_item)),
-    ),
+    choice(seq(alias(kw("ALL"), $.all), optional($._except_fields)), $.__disable_items_list),
+  __disable_items_list: ($) =>
+    prec.right(seq(alias($.__disable_item, $.disable_item), optional($.__disable_items_list))),
 
   __disable_item: ($) =>
     choice(
