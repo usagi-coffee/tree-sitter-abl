@@ -186,6 +186,7 @@ export default grammar({
     $.__buffer_compare_compares,
     $.__call_argument,
     $.__underline_field,
+    $.__put_control,
     $.system_handle_identifier,
   ],
 
