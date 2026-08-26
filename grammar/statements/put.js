@@ -6,15 +6,17 @@ export default ({ kw }) => ({
     choice(
       seq(
         optional(alias(kw("UNFORMATTED"), $.unformatted)),
-        repeat1(
-          choice(
-            $.__put_expression_item,
-            alias($.__put_skip_item, $.skip),
-            alias($.__put_space_item, $.space),
-          ),
-        ),
+        prec.right(seq($.__put_output_item, optional($.__put_output_items_tail))),
       ),
       alias(seq(kw("CONTROL"), $.__put_controls), $.control_phrase),
+    ),
+  __put_output_items_tail: ($) =>
+    prec.right(seq($.__put_output_item, optional($.__put_output_items_tail))),
+  __put_output_item: ($) =>
+    choice(
+      $.__put_expression_item,
+      alias($.__put_skip_item, $.skip),
+      alias($.__put_space_item, $.space),
     ),
   __put_control: ($) => $._expression,
   __put_controls: ($) => prec.right(seq($.__put_control, optional($.__put_controls))),
