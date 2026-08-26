@@ -152,12 +152,11 @@ export default ({ kw }) => ({
   __format_radio_set_phrase: ($) =>
     seq(
       kw("RADIO-SET"),
-      optional($.__format_radio_set_orientation),
+      optional($.__radio_set_orientation),
       kw("RADIO-BUTTONS"),
       field("buttons", $.__format_radio_set_buttons),
       optional($.size_phrase),
     ),
-  __format_radio_set_orientation: ($) => $.__radio_set_orientation,
   __format_radio_set_buttons: ($) =>
     seq($.__format_radio_set_pair, optional($.__format_radio_set_buttons_tail)),
   __format_radio_set_buttons_tail: ($) =>
