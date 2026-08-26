@@ -183,6 +183,7 @@ export default grammar({
     $.__browse_flag_option,
     $._identifier_or_array_access,
     $._parameter_direction,
+    $.__buffer_compare_compares,
     $.system_handle_identifier,
   ],
 
