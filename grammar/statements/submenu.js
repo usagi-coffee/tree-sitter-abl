@@ -3,17 +3,14 @@ export default ({ kw }) => ({
 
   __submenu_prefix: ($) => seq($._define_private_prefix, kw("SUB-MENU"), $.__submenu_body),
 
-  __submenu_body: ($) =>
-    seq(
-      field("name", $.identifier),
-      repeat(
-        choice(
-          $._color_font_option,
-          alias(kw("SUB-MENU-HELP"), $.submenu_help),
-          seq($._like_keyword, field("like", $.identifier)),
-          alias($.__submenu_element, $.menu_element),
-        ),
-      ),
+  __submenu_body: ($) => seq(field("name", $.identifier), optional($.__submenu_options)),
+  __submenu_options: ($) => prec.right(seq($.__submenu_option, optional($.__submenu_options))),
+  __submenu_option: ($) =>
+    choice(
+      $._color_font_option,
+      alias(kw("SUB-MENU-HELP"), $.submenu_help),
+      seq($._like_keyword, field("like", $.identifier)),
+      alias($.__submenu_element, $.menu_element),
     ),
   __submenu_element: ($) =>
     choice(
