@@ -12,9 +12,17 @@ export default ({ kw }) => ({
   __interface_compound_body: ($) =>
     seq(
       choice(alias($._colon, ":"), $._terminator_dot),
-      repeat(alias($.__interface_body_item, $.interface_body_item)),
+      optional($.__interface_body_items),
       $._end_keyword,
       optional(kw("INTERFACE")),
+    ),
+
+  __interface_body_items: ($) =>
+    prec.right(
+      seq(
+        alias($.__interface_body_item, $.interface_body_item),
+        optional($.__interface_body_items),
+      ),
     ),
 
   __interface_inherits_list: ($) =>
