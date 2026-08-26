@@ -45,14 +45,16 @@ export default ({ kw }) => ({
         seq($._as_keyword, field("data_type", $.identifier)),
         seq($._like_keyword, field("like_field", $.qualified_name)),
       ),
-      repeat(
-        choice(
-          seq(kw("COLUMN-LABEL"), field("label", $.string_literal)),
-          $._format_string,
-          seq(kw("INITIAL"), field("initial", $._expression)),
-          $._aggregate_label_phrase,
-          alias($._no_undo_keyword, $.no_undo),
-        ),
-      ),
+      optional($.__trigger_procedure_options),
+    ),
+  __trigger_procedure_options: ($) =>
+    prec.right(seq($.__trigger_procedure_option, optional($.__trigger_procedure_options))),
+  __trigger_procedure_option: ($) =>
+    choice(
+      seq(kw("COLUMN-LABEL"), field("label", $.string_literal)),
+      $._format_string,
+      seq(kw("INITIAL"), field("initial", $._expression)),
+      $._aggregate_label_phrase,
+      alias($._no_undo_keyword, $.no_undo),
     ),
 });
