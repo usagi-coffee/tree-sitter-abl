@@ -285,11 +285,19 @@ export default ({ kw }) => ({
     ),
   __dataset_body_after_for: ($) =>
     choice(
+      seq($.__dataset_data_relations, optional($.__dataset_parent_id_relations)),
+      $.__dataset_parent_id_relations,
+    ),
+  __dataset_data_relations: ($) =>
+    prec.right(
+      seq(alias($.__dataset_data_relation, $.data_relation), optional($.__dataset_data_relations)),
+    ),
+  __dataset_parent_id_relations: ($) =>
+    prec.right(
       seq(
-        repeat1(alias($.__dataset_data_relation, $.data_relation)),
-        repeat(alias($.__dataset_parent_id_relation, $.parent_id_relation)),
+        alias($.__dataset_parent_id_relation, $.parent_id_relation),
+        optional($.__dataset_parent_id_relations),
       ),
-      repeat1(alias($.__dataset_parent_id_relation, $.parent_id_relation)),
     ),
   __dataset_for_phrase: ($) =>
     seq($._for_keyword, field("table", $.identifier), optional($.__dataset_for_table_tail)),
