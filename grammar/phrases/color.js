@@ -17,11 +17,15 @@ export default ({ kw }) => ({
       ),
       $._value_expression,
       field("foreground", alias($.__color_prefixed_identifier, $.identifier)),
-      seq(
-        repeat1(choice(kw("BLINK-"), kw("BRIGHT-"), kw("RVV-"), kw("UNDERLINE-"))),
-        field("foreground", $.identifier),
-      ),
+      seq($.__color_prefixes, field("foreground", $.identifier)),
       $.identifier,
+    ),
+  __color_prefixes: ($) =>
+    prec.right(
+      seq(
+        choice(kw("BLINK-"), kw("BRIGHT-"), kw("RVV-"), kw("UNDERLINE-")),
+        optional($.__color_prefixes),
+      ),
     ),
   __color_prefixed_identifier: ($) =>
     token(/(BLINK-|BRIGHT-|RVV-|UNDERLINE-)[_\p{L}][\p{L}\p{N}_-]*/i),
