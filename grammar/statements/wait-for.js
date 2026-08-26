@@ -7,7 +7,7 @@ export default ({ kw }) => ({
       choice(
         seq(
           alias($.__wait_for_of_phrase, $.of_phrase),
-          repeat(seq(kw("OR"), alias($.__wait_for_of_phrase, $.of_phrase))),
+          optional($.__wait_for_of_tail),
           optional($.__wait_for_focus_pause_tail),
         ),
         $.__wait_for_dotnet_call,
@@ -32,6 +32,8 @@ export default ({ kw }) => ({
       $._of_keyword,
       field("widgets", $.__wait_for_widget_list),
     ),
+  __wait_for_of_tail: ($) =>
+    seq(kw("OR"), alias($.__wait_for_of_phrase, $.of_phrase), optional($.__wait_for_of_tail)),
   __wait_for_focus_phrase: ($) => seq(kw("FOCUS"), field("focus", $.widget_phrase)),
   __wait_for_pause_phrase: ($) => seq(kw("PAUSE"), field("duration", $._expression)),
 
