@@ -38,26 +38,25 @@ export default ({ kw }) => ({
   __display_items: ($) =>
     choice(
       seq(field("record", $.__display_record), optional(seq(kw("EXCEPT"), $._except_name_list))),
-      prec.right(
-        repeat1(
-          choice(
-            seq(
-              $.__display_formatted_field,
-              optional($._when_phrase),
-              optional(seq("@", field("base", $.__display_base_field))),
-            ),
-            seq(
-              $.__display_formatted_field,
-              seq("@", field("base", $.__display_base_field)),
-              $.format_phrase,
-              optional($._when_phrase),
-            ),
-            alias($.__display_aggregate_expression, $.aggregate_expression),
-            $.__display_skip_phrase,
-            $._display_space_phrase,
-          ),
-        ),
+      prec.right(seq($.__display_item, optional($.__display_items_tail))),
+    ),
+  __display_items_tail: ($) => prec.right(seq($.__display_item, optional($.__display_items_tail))),
+  __display_item: ($) =>
+    choice(
+      seq(
+        $.__display_formatted_field,
+        optional($._when_phrase),
+        optional(seq("@", field("base", $.__display_base_field))),
       ),
+      seq(
+        $.__display_formatted_field,
+        seq("@", field("base", $.__display_base_field)),
+        $.format_phrase,
+        optional($._when_phrase),
+      ),
+      alias($.__display_aggregate_expression, $.aggregate_expression),
+      $.__display_skip_phrase,
+      $._display_space_phrase,
     ),
   __display_formatted_field: ($) =>
     seq(alias($.__display_field, $.field), optional($.format_phrase)),
