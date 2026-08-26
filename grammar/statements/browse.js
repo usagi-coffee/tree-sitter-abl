@@ -174,6 +174,6 @@ export default ({ kw }) => ({
   __browse_enable_field: ($) =>
     seq(
       field("field", choice($._identifier_or_qualified_name, $.object_access, $.array_access)),
-      repeat($.format_phrase),
+      optional($._format_phrases),
     ),
 });
