@@ -12,7 +12,14 @@ export default ({ kw }) => ({
   __class_definition_compound_body: ($) =>
     seq(
       $.__class_body_opener,
-      repeat(
+      optional($.__class_definition_items),
+      $._end_keyword,
+      optional(kw("CLASS")),
+    ),
+
+  __class_definition_items: ($) =>
+    prec.right(
+      seq(
         choice(
           $.variable_definition,
           $.temp_table_definition,
@@ -50,9 +57,8 @@ export default ({ kw }) => ({
           $.undefine_preprocessor_directive,
           $.include_file_reference,
         ),
+        optional($.__class_definition_items),
       ),
-      $._end_keyword,
-      optional(kw("CLASS")),
     ),
 
   method_definition: ($) =>
