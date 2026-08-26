@@ -6,8 +6,16 @@ export default ({ kw }) => ({
   __input_through_body: ($) =>
     seq(
       $._program_target,
-      repeat(choice($.__input_through_arg_value, $._value_expression)),
+      optional($.__input_through_args),
       optional($._echo_map_unbuffered_convert_tail),
+    ),
+
+  __input_through_args: ($) =>
+    prec.right(
+      seq(
+        choice($.__input_through_arg_value, $._value_expression),
+        optional($.__input_through_args),
+      ),
     ),
 
   __input_through_arg_value: ($) =>
