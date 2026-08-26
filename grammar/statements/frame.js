@@ -40,7 +40,11 @@ export default ({ kw }) => ({
     choice(
       $.__frame_skip_phrase,
       $.__frame_space_phrase,
-      seq(field("value", $._expression), optional($.at_phrase), repeat($.__frame_display_option)),
+      seq(
+        field("value", $._expression),
+        optional($.at_phrase),
+        optional($.__frame_display_options),
+      ),
     ),
 
   __frame_form_item: ($) =>
@@ -70,6 +74,8 @@ export default ({ kw }) => ({
       seq(kw("VIEW-AS"), alias(kw("TEXT"), $.text)),
       seq(kw("WIDGET-ID"), field("widget_id", $._expression)),
     ),
+  __frame_display_options: ($) =>
+    prec.right(seq($.__frame_display_option, optional($.__frame_display_options))),
   __frame_field_format_phrase: ($) =>
     prec.right(
       repeat1(
