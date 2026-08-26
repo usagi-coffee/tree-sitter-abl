@@ -14,15 +14,10 @@ export default ({ kw }) => ({
         choice(
           $._assignable,
           $.__assign_keyword_identifier,
-          seq(
-            kw("BROWSE"),
-            field("browse", $.__assign_widget_name),
-            ":",
-            field("attr", $.identifier),
-          ),
+          seq(kw("BROWSE"), field("browse", $.__widget_name), ":", field("attr", $.identifier)),
           seq(
             kw("FRAME", { offset: 4 }),
-            field("frame", $.__assign_widget_name),
+            field("frame", $.__widget_name),
             ":",
             field("attr", $.identifier),
           ),
@@ -41,5 +36,4 @@ export default ({ kw }) => ({
     ),
   __assign_compound_operator: ($) => choice("+=", "-=", "*=", "/="),
   __assign_keyword_identifier: ($) => alias($._widgets, $.identifier),
-  __assign_widget_name: ($) => choice($.identifier, $.preprocessor_name),
 });
