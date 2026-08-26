@@ -237,7 +237,7 @@ export default ({ kw }) => ({
         ),
       ),
       optional(seq(choice($._as_keyword, kw("IS")), repeat($.__temp_table_index_modifier))),
-      repeat1($.__temp_table_index_field),
+      $.__temp_table_index_fields,
     ),
 
   _dataset_body: ($) =>

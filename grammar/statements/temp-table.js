@@ -35,7 +35,7 @@ export default ({ kw }) => ({
       kw("INDEX"),
       field("name", $.identifier),
       optional(seq(choice($._as_keyword, kw("IS")), repeat($.__temp_table_index_modifier))),
-      repeat1($.__temp_table_index_field),
+      $.__temp_table_index_fields,
     ),
 
   __temp_table_index_modifier: ($) =>
@@ -78,6 +78,8 @@ export default ({ kw }) => ({
         ),
       ),
     ),
+  __temp_table_index_fields: ($) =>
+    prec.right(seq($.__temp_table_index_field, optional($.__temp_table_index_fields))),
   __temp_table_field_option: ($) =>
     choice(
       $._color_font_option,
