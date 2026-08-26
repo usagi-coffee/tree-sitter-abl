@@ -4,10 +4,7 @@ export default ({ kw }) => ({
   __choose_prefix: ($) =>
     seq(
       kw("CHOOSE"),
-      choice(
-        seq($._row_keyword, $.__choose_field_help),
-        seq(kw("FIELD"), repeat1($.__choose_field_help)),
-      ),
+      choice(seq($._row_keyword, $.__choose_field_help), seq(kw("FIELD"), $.__choose_field_helps)),
       repeat(
         choice(
           alias(kw("AUTO-RETURN"), $.auto_return),
@@ -25,4 +22,6 @@ export default ({ kw }) => ({
       field("field", $._identifier_or_qualified_name),
       optional(seq($._help_keyword, field("help", $.string_literal))),
     ),
+  __choose_field_helps: ($) =>
+    prec.right(seq($.__choose_field_help, optional($.__choose_field_helps))),
 });
