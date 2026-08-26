@@ -7,11 +7,9 @@ export default ({ kw }) => ({
     seq(
       kw("REPEAT"),
       optional(alias($._for_phrase, $.for_phrase)),
-      optional($.__repeat_selection_after_for),
+      optional($._selection_after_for),
       $.__repeat_body_tail,
     ),
-  __repeat_selection_after_for: ($) =>
-    choice(seq($.preselect_phrase, optional($.query_tuning_phrase)), $.query_tuning_phrase),
   __repeat_body_tail: ($) =>
     choice(seq($._loop_phrase, optional($.__repeat_body_after_loop)), $.__repeat_body_after_loop),
   __repeat_body_after_loop: ($) =>

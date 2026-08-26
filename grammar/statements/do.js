@@ -8,12 +8,8 @@ export default ({ kw }) => ({
     seq(
       kw("DO"),
       choice(
-        seq(
-          alias($._for_phrase, $.for_phrase),
-          optional($.__do_selection_after_for),
-          $.__do_body_tail,
-        ),
-        seq($.__do_selection_after_for, $.__do_body_tail),
+        seq(alias($._for_phrase, $.for_phrase), optional($._selection_after_for), $.__do_body_tail),
+        seq($._selection_after_for, $.__do_body_tail),
         choice(
           seq(
             alias(kw("TRANSACTION", { offset: 5 }), $.transaction),
@@ -30,8 +26,6 @@ export default ({ kw }) => ({
     ),
   __do_condition_or_loop_phrase_wide: ($) =>
     choice(seq($.__do_while_phrase, optional($.__do_loop_phrase)), $.__do_loop_phrase),
-  __do_selection_after_for: ($) =>
-    choice(seq($.preselect_phrase, optional($.query_tuning_phrase)), $.query_tuning_phrase),
   __do_body_tail: ($) =>
     choice(
       seq(
