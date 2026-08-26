@@ -25,7 +25,7 @@ export default ({ kw }) => ({
     choice(
       seq(
         field("field", $._identifier_or_array_access),
-        repeat($.format_phrase),
+        optional($.__enable_field_formats),
         optional($._when_phrase),
       ),
       seq(kw("TEXT"), "(", token(/[A-Za-z_][A-Za-z0-9_-]*/), $.format_phrase, ")"),
@@ -34,4 +34,6 @@ export default ({ kw }) => ({
     ),
   __enable_constant_formats: ($) =>
     prec.right(seq($.format_phrase, optional($.__enable_constant_formats))),
+  __enable_field_formats: ($) =>
+    prec.right(seq($.format_phrase, optional($.__enable_field_formats))),
 });
