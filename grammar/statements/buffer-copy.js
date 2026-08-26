@@ -22,13 +22,19 @@ export default ({ kw }) => ({
     seq($._identifier_or_qualified_name, optional($.__buffer_copy_field_tail)),
   __buffer_copy_field_tail: ($) =>
     seq(optional(","), $._identifier_or_qualified_name, optional($.__buffer_copy_field_tail)),
-  __buffer_copy_assign_phrase: ($) =>
-    seq(kw("ASSIGN"), repeat1(alias($.__buffer_copy_assign_pair, $.assign_pair))),
+  __buffer_copy_assign_phrase: ($) => seq(kw("ASSIGN"), $.__buffer_copy_assign_pairs),
   __buffer_copy_assign_pair: ($) =>
     seq(
       field("left", $._assignable),
       choice("=", "+=", "-=", "*=", "/="),
       field("right", $._expression),
       optional(seq(kw("WHEN"), field("when", $._expression))),
+    ),
+  __buffer_copy_assign_pairs: ($) =>
+    prec.right(
+      seq(
+        alias($.__buffer_copy_assign_pair, $.assign_pair),
+        optional($.__buffer_copy_assign_pairs),
+      ),
     ),
 });
