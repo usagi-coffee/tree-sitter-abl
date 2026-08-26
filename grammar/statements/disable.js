@@ -16,7 +16,7 @@ export default ({ kw }) => ({
     choice(
       seq(
         field("field", $._identifier_or_array_access),
-        repeat($.format_phrase),
+        optional($._format_phrases),
         optional($._when_phrase),
       ),
       seq(kw("TEXT"), "(", token(/[A-Za-z_][A-Za-z0-9_-]*/), optional($._format_phrases), ")"),
