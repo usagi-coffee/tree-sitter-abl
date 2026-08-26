@@ -6,10 +6,18 @@ export default ({ kw }) => ({
       kw("CASE"),
       $._expression,
       alias($._colon, ":"),
-      repeat(choice($.case_when_phrase, alias($.include_statement, $.include_file_reference))),
+      optional($.__case_items),
       optional($.case_otherwise_phrase),
       $._end_keyword,
       optional(kw("CASE")),
+    ),
+
+  __case_items: ($) =>
+    prec.right(
+      seq(
+        choice($.case_when_phrase, alias($.include_statement, $.include_file_reference)),
+        optional($.__case_items),
+      ),
     ),
 
   case_when_phrase: ($) =>
