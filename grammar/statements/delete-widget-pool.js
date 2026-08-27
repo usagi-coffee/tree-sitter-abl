@@ -5,6 +5,6 @@ export default ({ kw }) => ({
     seq(
       $._delete_keyword,
       kw("WIDGET-POOL"),
-      optional(field("pool", choice($.identifier, $.string_literal))),
+      optional(field("pool", $._identifier_or_string_literal)),
     ),
 });
