@@ -104,10 +104,11 @@ export default ({ kw }) => ({
     ),
   __on_ui_event_branch: ($) =>
     seq(
+      $.__on_ui_events,
       choice(
-        $.__on_ui_anywhere_branch,
+        alias(kw("ANYWHERE"), $.anywhere),
         seq(
-          $.__on_ui_event_widgets,
+          alias($.__on_of_phrase, $.of_phrase),
           optional($.__on_ui_event_widgets_tail),
           optional(alias(kw("ANYWHERE"), $.anywhere)),
         ),
