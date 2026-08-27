@@ -6,7 +6,7 @@ export default ({ kw }) => ({
       kw("DISCONNECT"),
       choice(
         seq(kw("VALUE"), "(", field("database", $._expression), ")"),
-        field("database", choice($.identifier, $.string_literal)),
+        field("database", $._identifier_or_string_literal),
       ),
     ),
 });
