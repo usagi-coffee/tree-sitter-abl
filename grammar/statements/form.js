@@ -60,13 +60,13 @@ export default ({ kw }) => ({
     seq(",", $.__form_radio_button, optional($.__form_radio_button_tail)),
   __form_radio_button: ($) =>
     seq(field("label", $.string_literal), ",", field("value", $._expression)),
-  __form_validate_phrase: ($) => seq($.__form_validate_prefix, ")"),
-  __form_validate_prefix: ($) =>
+  __form_validate_phrase: ($) =>
     seq(
       kw("VALIDATE", { offset: 4 }),
       "(",
       field("expression", $._expression),
       optional($.__form_validate_expression_tail),
+      ")",
     ),
   __form_validate_expression_tail: ($) =>
     seq(",", field("expression", $._expression), optional($.__form_validate_expression_tail)),
