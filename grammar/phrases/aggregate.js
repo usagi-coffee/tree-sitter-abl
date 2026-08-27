@@ -1,13 +1,18 @@
 export default ({ kw }) => ({
   aggregate_phrase: ($) =>
     prec.right(
+      // deopt: recurse
       repeat1(
         seq(
           field("operation", $.aggregate_operation),
           optional(alias($._aggregate_label_phrase, $.label_phrase)),
-          repeat(alias($.__aggregate_by_phrase, $.by_phrase)),
+          optional($.__aggregate_by_phrases),
         ),
       ),
+    ),
+  __aggregate_by_phrases: ($) =>
+    prec.right(
+      seq(alias($.__aggregate_by_phrase, $.by_phrase), optional($.__aggregate_by_phrases)),
     ),
 
   aggregate_operation: ($) =>
