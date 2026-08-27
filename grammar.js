@@ -191,6 +191,7 @@ export default grammar({
     $.__system_help_position,
     $.__include_file_target,
     $.__include_arguments,
+    $.__for_by_phrase,
     $.system_handle_identifier,
   ],
 
