@@ -25,8 +25,9 @@ export default ({ kw }) => ({
       seq(field("handle_var", $._identifier_or_qualified_name), "=", kw("PROC-HANDLE")),
     ),
 
-  __run_stored_procedure_params: ($) =>
-    seq("(", optional($.__run_stored_procedure_param_list), ")"),
+  __run_stored_procedure_params: ($) => seq($.__run_stored_procedure_params_prefix, ")"),
+  __run_stored_procedure_params_prefix: ($) =>
+    seq("(", optional($.__run_stored_procedure_param_list)),
 
   __run_stored_procedure_param_list: ($) =>
     seq($.__run_stored_procedure_param, optional($.__run_stored_procedure_param_tail)),
