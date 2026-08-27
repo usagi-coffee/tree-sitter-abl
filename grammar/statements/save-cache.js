@@ -10,5 +10,6 @@ export default ({ kw }) => ({
       $._to_keyword,
       choice(field("path", $.string_literal), field("path", $.__save_cache_value_expression)),
     ),
-  __save_cache_value_expression: ($) => seq(kw("VALUE"), "(", $._expression, ")"),
+  __save_cache_value_expression: ($) => seq($.__save_cache_value_prefix, ")"),
+  __save_cache_value_prefix: ($) => seq(kw("VALUE"), "(", $._expression),
 });
