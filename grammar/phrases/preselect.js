@@ -7,6 +7,7 @@ export default ({ kw }) => ({
         prec.right(
           seq(
             optional(kw("BREAK")),
+            // deopt: recurse
             repeat1(
               choice(
                 seq(

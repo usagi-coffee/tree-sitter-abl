@@ -2,6 +2,7 @@ export default ({ kw }) => ({
   combo_box_phrase: ($) =>
     seq(
       field("widget", kw("COMBO-BOX")),
+      // deopt: recurse
       repeat(
         choice(
           $._list_items_phrase,

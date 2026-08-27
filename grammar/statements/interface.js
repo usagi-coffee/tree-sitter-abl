@@ -50,6 +50,7 @@ export default ({ kw }) => ({
       $._define_keyword,
       kw("TEMP-TABLE"),
       $._table_body,
+      // deopt: recurse
       repeat(
         choice(
           alias($._table_field, $.temp_table_field),

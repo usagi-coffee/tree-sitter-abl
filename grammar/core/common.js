@@ -44,6 +44,7 @@ export default ({ kw }) => ({
     seq(
       kw("MENU-ITEM"),
       field("name", $.identifier),
+      // deopt: recurse
       repeat(
         choice(
           $._aggregate_label_phrase,
@@ -208,6 +209,7 @@ export default ({ kw }) => ({
     seq(
       field("name", $.identifier),
       optional(alias($._no_undo_keyword, $.no_undo)),
+      // deopt: recurse
       repeat(
         choice(
           seq(kw("NAMESPACE-URI"), field("namespace_uri", $.string_literal)),
@@ -262,9 +264,11 @@ export default ({ kw }) => ({
           alias($.__operator_routine_name, $.identifier),
         ),
       ),
-      optional(seq(choice($._as_keyword, kw("IS")), repeat($.__temp_table_index_modifier))),
+      optional(seq(choice($._as_keyword, kw("IS")), optional($.__temp_table_index_modifiers))),
       $.__temp_table_index_fields,
     ),
+  __temp_table_index_modifiers: ($) =>
+    prec.right(seq($.__temp_table_index_modifier, optional($.__temp_table_index_modifiers))),
 
   _dataset_body: ($) =>
     seq(

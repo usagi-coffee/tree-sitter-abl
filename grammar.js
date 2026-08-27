@@ -604,6 +604,7 @@ export default grammar({
       arguments: ($) => seq($.__arguments_prefix, ")"),
       __arguments_prefix: ($) => seq("(", optional($._argument_list)),
       // COM calls use empty comma-delimited slots for omitted positional arguments.
+      // deopt: recurse
       _argument_list: ($) =>
         choice(
           seq($.argument, repeat(seq(",", optional($.argument)))),
@@ -737,6 +738,7 @@ export default grammar({
       _alias_name: ($) => choice($.identifier, $.string_literal, $._value_expression),
       parenthesized_identifier: ($) => seq("(", $.identifier, ")"),
       _object_access_tail: ($) =>
+        // deopt: recurse
         repeat1(
           choice(
             seq(
