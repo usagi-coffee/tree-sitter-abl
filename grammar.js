@@ -587,12 +587,12 @@ export default grammar({
       array_initializer: ($) => seq($.__array_initializer_prefix, "]"),
       __array_initializer_prefix: ($) => seq("[", optional($._expressions)),
 
-      array_access: ($) =>
+      array_access: ($) => seq($.__array_access_prefix, "]"),
+      __array_access_prefix: ($) =>
         seq(
           field("array", choice($._identifier_or_qualified_name, $.object_access, $.scoped_name)),
           "[",
           field("index", $._array_subscript),
-          "]",
         ),
       _array_subscript: ($) =>
         choice(
