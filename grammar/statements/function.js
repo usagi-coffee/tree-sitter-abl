@@ -129,14 +129,12 @@ export default ({ kw }) => ({
     ),
 
   __function_table_options: ($) =>
-    choice(
-      seq(
-        alias(kw("APPEND"), $.append),
-        optional(alias(kw("BIND"), $.bind)),
-        optional(alias(kw("BY-VALUE"), $.by_value)),
+    seq(
+      optional(alias(kw("APPEND"), $.append)),
+      choice(
+        seq(alias(kw("BIND"), $.bind), optional(alias(kw("BY-VALUE"), $.by_value))),
+        alias(kw("BY-VALUE"), $.by_value),
       ),
-      seq(alias(kw("BIND"), $.bind), optional(alias(kw("BY-VALUE"), $.by_value))),
-      alias(kw("BY-VALUE"), $.by_value),
     ),
 
   __function_variable_type_phrase: ($) => seq($._as_like, optional($._extent_phrase)),
