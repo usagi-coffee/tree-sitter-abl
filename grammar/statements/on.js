@@ -213,7 +213,16 @@ export default ({ kw }) => ({
       kw("TAB"),
     ),
   __on_ui_key_function: ($) =>
-    token(/(?:BACK-TAB|END-ERROR|ENDKEY|GO|HELP|NEXT-FRAME|PREV-FRAME|TAB)/i),
+    choice(
+      kw("BACK-TAB"),
+      kw("END-ERROR"),
+      kw("ENDKEY"),
+      kw("GO"),
+      $._help_keyword,
+      kw("NEXT-FRAME"),
+      kw("PREV-FRAME"),
+      kw("TAB"),
+    ),
   __on_web_notify_event: ($) => token(/["']WEB-NOTIFY["']/i),
   __on_ui_event_name: ($) =>
     token(
