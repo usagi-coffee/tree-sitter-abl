@@ -202,8 +202,8 @@ export default ({ kw }) => ({
   _skip_phrase: ($) => prec.right(choice(seq($.__skip_parenthesized_prefix, ")"), kw("SKIP"))),
   __skip_parenthesized_prefix: ($) => seq(kw("SKIP"), "(", field("skip", $._expression)),
 
-  _space_phrase: ($) =>
-    prec.right(choice(seq(kw("SPACE"), "(", field("space", $._expression), ")"), kw("SPACE"))),
+  _space_phrase: ($) => prec.right(choice(seq($.__space_parenthesized_prefix, ")"), kw("SPACE"))),
+  __space_parenthesized_prefix: ($) => seq(kw("SPACE"), "(", field("space", $._expression)),
 
   _table_body: ($) =>
     seq(
