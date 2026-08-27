@@ -24,12 +24,7 @@ export default ({ kw }) => ({
           seq(kw("MOUSE-POINTER"), field("mouse_pointer", $._expression)),
           seq(kw("LABEL"), field("label", $._identifier_or_string_literal)),
           seq($._like_keyword, field("like", $.identifier)),
-          seq(
-            choice(kw("SIZE"), kw("SIZE-CHARS"), kw("SIZE-PIXELS")),
-            field("width", $._expression),
-            $._by_keyword,
-            field("height", $._expression),
-          ),
+          seq($.__size_prefix, field("height", $._expression)),
           seq(alias(kw("NO-FOCUS"), $.no_focus), optional(alias(kw("FLAT-BUTTON"), $.flat_button))),
           alias(kw("NO-CONVERT-3D-COLORS"), $.no_convert_3d_colors),
           seq(
