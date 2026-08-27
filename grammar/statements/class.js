@@ -72,6 +72,7 @@ export default ({ kw }) => ({
       seq(
         $.__class_method_definition_prefix,
         kw("ABSTRACT"),
+        // deopt: recurse
         repeat($._method_modifier_no_abstract),
         $.__class_method_definition_signature,
         $._terminator_dot,
@@ -97,6 +98,7 @@ export default ({ kw }) => ({
   constructor_definition: ($) =>
     seq(
       kw("CONSTRUCTOR"),
+      // deopt: recurse
       repeat(
         choice(
           alias(kw("PRIVATE"), $.access_modifier),
@@ -153,13 +155,19 @@ export default ({ kw }) => ({
 
   __class_destructor_body: ($) =>
     seq($.__class_compound_body, optional(choice(kw("DESTRUCTOR"), kw("METHOD"))), $._terminator),
-  __class_compound_body: ($) => seq(repeat($._statement), $._end_keyword),
+  __class_compound_body: ($) =>
+    seq(
+      // deopt: recurse
+      repeat($._statement),
+      $._end_keyword,
+    ),
 
   __class_destructor_parameters: ($) => seq("(", ")"),
 
   property_definition: ($) =>
     seq(
       $.__class_property_definition_prefix,
+      // deopt: recurse
       repeat1(
         choice(
           seq(
@@ -199,7 +207,12 @@ export default ({ kw }) => ({
     ),
 
   __class_property_accessor_body: ($) =>
-    seq(alias($._colon, ":"), repeat($._statement), $._end_keyword),
+    seq(
+      alias($._colon, ":"),
+      // deopt: recurse
+      repeat($._statement),
+      $._end_keyword,
+    ),
   __class_property_accessor_tail: ($) =>
     choice(
       $._terminator_dot,

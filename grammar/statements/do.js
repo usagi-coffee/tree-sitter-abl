@@ -56,7 +56,13 @@ export default ({ kw }) => ({
     ),
 
   body: ($) =>
-    prec.right(seq(choice(alias($._colon, ":"), $._terminator_dot), repeat($._statement))),
+    prec.right(
+      seq(
+        choice(alias($._colon, ":"), $._terminator_dot),
+        // deopt: recurse
+        repeat($._statement),
+      ),
+    ),
   __do_condition_or_loop_phrase: ($) =>
     choice(seq($.__do_while_phrase, optional($._loop_phrase)), $._loop_phrase),
   __do_loop_phrase: ($) =>

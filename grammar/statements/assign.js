@@ -53,15 +53,18 @@ export default ({ kw }) => ({
         seq(kw("BROWSE"), field("browse", $.__widget_name)),
       ),
       $.__assign_input_fields,
-      repeat(
-        seq(
-          kw("INPUT"),
-          choice(
-            seq(kw("FRAME", { offset: 4 }), field("frame", $.__widget_name)),
-            seq(kw("BROWSE"), field("browse", $.__widget_name)),
-          ),
-          $.__assign_input_fields,
+      optional($.__assign_input_sections),
+    ),
+  __assign_input_sections: ($) =>
+    prec.right(
+      seq(
+        kw("INPUT"),
+        choice(
+          seq(kw("FRAME", { offset: 4 }), field("frame", $.__widget_name)),
+          seq(kw("BROWSE"), field("browse", $.__widget_name)),
         ),
+        $.__assign_input_fields,
+        optional($.__assign_input_sections),
       ),
     ),
   __assign_input_fields: ($) =>
