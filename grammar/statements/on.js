@@ -102,18 +102,15 @@ export default ({ kw }) => ({
         ),
       ),
     ),
-  __on_ui_event_branch: ($) =>
-    seq(
-      $.__on_ui_events,
-      choice(
-        alias(kw("ANYWHERE"), $.anywhere),
-        seq(
-          alias($.__on_of_phrase, $.of_phrase),
-          optional($.__on_ui_event_widgets_tail),
-          optional(alias(kw("ANYWHERE"), $.anywhere)),
-        ),
+  __on_ui_event_branch: ($) => seq($.__on_ui_events, $.__on_ui_event_target, $.__on_trigger_action),
+  __on_ui_event_target: ($) =>
+    choice(
+      alias(kw("ANYWHERE"), $.anywhere),
+      seq(
+        alias($.__on_of_phrase, $.of_phrase),
+        optional($.__on_ui_event_widgets_tail),
+        optional(alias(kw("ANYWHERE"), $.anywhere)),
       ),
-      $.__on_trigger_action,
     ),
   __on_ui_anywhere_branch: ($) => seq($.__on_ui_events, alias(kw("ANYWHERE"), $.anywhere)),
   __on_database_event_branch: ($) =>
