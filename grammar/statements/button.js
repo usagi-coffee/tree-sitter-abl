@@ -7,6 +7,7 @@ export default ({ kw }) => ({
   __button_body: ($) =>
     seq(
       field("name", $.identifier),
+      // deopt: recurse
       repeat(
         choice(
           alias(kw("AUTO-GO"), $.auto_go),

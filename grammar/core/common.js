@@ -273,6 +273,7 @@ export default ({ kw }) => ({
   _dataset_body: ($) =>
     seq(
       field("name", $.identifier),
+      // deopt: recurse
       repeat(
         choice(
           seq(kw("NAMESPACE-URI"), field("namespace_uri", $._expression)),

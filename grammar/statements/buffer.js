@@ -10,6 +10,7 @@ export default ({ kw }) => ({
       $._for_keyword,
       optional(field("for", kw("TEMP-TABLE"))),
       field("table", $._identifier_or_qualified_name),
+      // deopt: recurse
       repeat(
         choice(
           alias(kw("PRESELECT"), $.preselect),

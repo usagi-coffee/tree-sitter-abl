@@ -21,6 +21,7 @@ export default ({ kw }) => ({
         optional($.__frame_form_items),
       ),
       optional($.__frame_header_section),
+      // deopt: recurse
       repeat($.frame_phrase),
     ),
   __frame_except_fields: ($) =>
@@ -63,6 +64,7 @@ export default ({ kw }) => ({
       seq(field("value", $.number_literal), optional($.__frame_display_value_tail)),
     ),
   __frame_display_value_tail: ($) =>
+    // deopt: recurse
     repeat1(
       choice($.at_phrase, seq($._to_keyword, field("to", $._expression)), $.__frame_display_option),
     ),
@@ -78,6 +80,7 @@ export default ({ kw }) => ({
     prec.right(seq($.__frame_display_option, optional($.__frame_display_options))),
   __frame_field_format_phrase: ($) =>
     prec.right(
+      // deopt: recurse
       repeat1(
         choice(
           $._format_field_option,

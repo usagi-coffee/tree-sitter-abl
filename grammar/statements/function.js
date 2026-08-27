@@ -23,6 +23,7 @@ export default ({ kw }) => ({
   __function_compound_body: ($) =>
     seq(
       choice(alias($._colon, ":"), $._terminator),
+      // deopt: recurse
       repeat($._statement),
       $._end_keyword,
       optional(kw("FUNCTION")),

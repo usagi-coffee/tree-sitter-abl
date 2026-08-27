@@ -2,7 +2,16 @@ export default ({ kw }) => ({
   form_statement: ($) => seq($.__form_prefix, $._terminator),
 
   __form_prefix: ($) => seq(kw("FORM"), $.__form_body),
-  __form_body: ($) => choice(seq($.__form_items, repeat($.frame_phrase)), repeat1($.frame_phrase)),
+  __form_body: ($) =>
+    choice(
+      seq(
+        $.__form_items,
+        // deopt: recurse
+        repeat($.frame_phrase),
+      ),
+      // deopt: recurse
+      repeat1($.frame_phrase),
+    ),
   __form_items: ($) => prec.right(seq(alias($.__form_item, $.form_item), optional($.__form_items))),
 
   __form_item: ($) =>

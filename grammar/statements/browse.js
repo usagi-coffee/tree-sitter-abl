@@ -124,6 +124,7 @@ export default ({ kw }) => ({
     prec.right(
       seq(
         field("column", prec.right($._expression)),
+        // deopt: recurse
         repeat(
           choice(
             $._format_string,

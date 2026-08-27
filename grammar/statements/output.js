@@ -8,6 +8,7 @@ export default ({ kw }) => ({
       seq(
         $._to_keyword,
         $.__output_to_target,
+        // deopt: recurse
         repeat(
           choice(
             $.preprocessor_name,
@@ -65,7 +66,14 @@ export default ({ kw }) => ({
   __output_numeric_value: ($) => choice($.number_literal, $.preprocessor_name, $._value_expression),
 
   __output_map_entry: ($) =>
-    choice(seq($.identifier, repeat(seq("/", $.identifier))), $.string_literal),
+    choice(
+      seq(
+        $.identifier,
+        // deopt: recurse
+        repeat(seq("/", $.identifier)),
+      ),
+      $.string_literal,
+    ),
 
   __output_to_target: ($) =>
     choice(

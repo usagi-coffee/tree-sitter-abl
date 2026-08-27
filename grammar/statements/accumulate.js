@@ -7,5 +7,11 @@ export default ({ kw }) => ({
     prec.right(seq(alias($.__accumulate_item, $.accumulate), optional($.__accumulate_items))),
 
   __accumulate_item: ($) =>
-    seq(field("target", $._expression), "(", repeat1($.aggregate_phrase), ")"),
+    seq(
+      field("target", $._expression),
+      "(",
+      // deopt: recurse
+      repeat1($.aggregate_phrase),
+      ")",
+    ),
 });

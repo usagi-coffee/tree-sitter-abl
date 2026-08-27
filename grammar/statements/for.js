@@ -32,7 +32,9 @@ export default ({ kw }) => ({
   __for_record_phrase_section: ($) =>
     seq($.__for_record_phrases, optional($.__for_sort_clauses), optional($._loop_phrase)),
 
-  __for_record_phrases: ($) => seq($.__for_record, repeat(seq(",", $.__for_record))),
+  __for_record_phrases: ($) =>
+    // deopt: recurse
+    seq($.__for_record, repeat(seq(",", $.__for_record))),
 
   __for_record: ($) => seq(optional(choice(kw("EACH"), kw("FIRST"), kw("LAST"))), $.record_phrase),
 

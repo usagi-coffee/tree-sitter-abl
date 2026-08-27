@@ -77,6 +77,7 @@ export default ({ kw }) => ({
   __interface_method_prefix: ($) =>
     seq(
       kw("METHOD"),
+      // deopt: recurse
       repeat($._method_modifier_no_abstract),
       $._method_return_type,
       field("name", $.identifier),

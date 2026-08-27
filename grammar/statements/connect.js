@@ -4,6 +4,7 @@ export default ({ kw }) => ({
     seq(
       kw("CONNECT"),
       optional(field("database", choice($.identifier, $.string_literal, $.function_call))),
+      // deopt: recurse
       repeat(
         seq(
           "-",
