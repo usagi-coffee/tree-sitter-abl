@@ -23,7 +23,12 @@
           "cflags_c": [
             "-std=c11",
           ],
-        }, { # OS == "win"
+        }, { # OS == "win" — MSVC cl.exe hits C1060 (out of compiler heap) on the
+             # generated src/parser.c once it grows past ~100 MB (measured on
+             # feat/appbuilder-round4, 147 MB / 38 897 states). ClangCL handles the
+             # same translation unit without the internal heap limit; it accepts the
+             # same /std:c11 /utf-8 flags below since it is MSVC-compatible.
+          "msbuild_toolset": "ClangCL",
           "cflags_c": [
             "/std:c11",
             "/utf-8",
