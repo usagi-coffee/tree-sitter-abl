@@ -126,11 +126,6 @@ export default grammar({
     // parser must choose between the trigger's argument list and a call on the
     // context that precedes it. Both are alive at that token.
     [$.__on_context_value, $.function_call],
-    // `DYNAMIC-FUNCTION("f" IN h:PARENT)` -- on the IN after an argument the
-    // parser must choose between the argument's own IN clause and a widget
-    // qualifier, which expects IN WINDOW. Both are alive at that token and only
-    // what follows settles it, so it is decided at parse time.
-    [$.__argument_body, $.__widget_qualified_name_separator],
     // `DYNAMIC-FUNCTION(pNom IN h)` has the same ambiguity after a bare name,
     // before the argument expression has reduced to __argument_body.
     [$.__argument_in_handle, $.__widget_qualified_name_separator],
