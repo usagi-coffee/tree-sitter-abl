@@ -170,3 +170,18 @@ VIEW Thdimm Thdimam.
       handle: (identifier))
     (widget_phrase
       handle: (identifier))))
+
+================================================================================
+VIEW - a bare widget name IN WINDOW
+================================================================================
+
+VIEW c-win IN WINDOW w1.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (view_statement
+    (widget_phrase
+      handle: (identifier))
+    (in_window_phrase
+      window: (identifier))))
