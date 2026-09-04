@@ -67,3 +67,19 @@ DISCONNECT mydb NO-ERROR.
   (disconnect_statement
     database: (identifier)
     (no_error)))
+
+================================================================================
+DISCONNECT - abbreviated keyword
+================================================================================
+
+DISCON mydb.
+DISCONN mydb NO-ERROR.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (disconnect_statement
+    database: (identifier))
+  (disconnect_statement
+    database: (identifier)
+    (no_error)))
