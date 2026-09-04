@@ -109,3 +109,20 @@ PUT-KEY-VALUE FONT 2.
   (put_key_value_statement)
   (put_key_value_statement
     number: (number_literal)))
+
+================================================================================
+PUT-KEY-VALUE - abbreviated keyword
+================================================================================
+
+PUT-KEY-VAL SECTION "general" KEY "theme" VALUE "dark".
+PUT-KEY-VALU COLOR 1.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (put_key_value_statement
+    section: (string_literal)
+    key: (string_literal)
+    value: (string_literal))
+  (put_key_value_statement
+    number: (number_literal)))

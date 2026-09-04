@@ -3,7 +3,7 @@ export default ({ kw }) => ({
 
   __put_key_value_prefix: ($) =>
     seq(
-      kw("PUT-KEY-VALUE"),
+      kw("PUT-KEY-VALUE", { offset: 11 }),
       choice(
         seq(
           kw("SECTION"),
