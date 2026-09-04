@@ -159,3 +159,18 @@ HIDE select-1 select-2 IN FRAME f1.
     (widget_phrase
       field: (identifier)
       frame: (identifier))))
+
+================================================================================
+HIDE - a bare widget name IN WINDOW
+================================================================================
+
+HIDE c-win IN WINDOW w1.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (hide_statement
+    (widget_phrase
+      handle: (identifier))
+    (in_window_phrase
+      window: (identifier))))

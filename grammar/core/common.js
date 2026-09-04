@@ -21,7 +21,16 @@ export default ({ kw }) => ({
       seq(field("except", $._identifier_or_qualified_name), optional($._except_name_list)),
     ),
   _frame_phrases: ($) => seq($.frame_phrase, optional($.frame_phrase)),
-  _widget_phrases: ($) => prec.right(seq($.widget_phrase, optional($._widget_phrases))),
+  // VIEW and HIDE are the only users, and both admit a trailing IN WINDOW that
+  // the shared widget_phrase cannot be told apart from IN FRAME with a single
+  // token of lookahead, hence the statement-local variant.
+  _widget_phrases: ($) =>
+    prec.right(
+      seq(
+        alias($.__view_hide_widget_phrase, $.widget_phrase),
+        optional($._widget_phrases),
+      ),
+    ),
   _format_phrases: ($) => prec.right(seq($.format_phrase, optional($._format_phrases))),
   _text_fields: ($) =>
     prec.right(

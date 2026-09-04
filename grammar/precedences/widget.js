@@ -20,6 +20,10 @@ export default ($) => [
   // Example: ON CHOOSE OF myFunc().
   // Reference: Widget phrase.
   [$.function_call, $.__widget_handle],
+  // Purpose: same as above, for the VIEW/HIDE-only widget-ref variant.
+  // Example: VIEW myFunc().
+  // Reference: Widget phrase; VIEW statement; HIDE statement.
+  [$.function_call, $.__view_hide_widget_ref],
   // Purpose: a name that IN FRAME, IN BROWSE or MENU-ITEM qualifies is an
   // entry; a name on its own can no longer match the entry rule, so reading
   // the entry first keeps the qualifier attached without stealing bare names.
