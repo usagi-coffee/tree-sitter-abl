@@ -1052,3 +1052,62 @@ END FUNCTION.
     name: (identifier)
     type: (identifier)
     (parameters)))
+
+================================================================================
+DYNAMIC-FUNCTION - a call as the function name before IN
+================================================================================
+
+x = DYNAMIC-FUNCTION(ENTRY(2,c) IN h, a).
+y = DYNAMIC-FUNCTION(ENTRY(2,p,"|") IN WIDGET-HANDLE(ENTRY(1,p,"|")), s).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (function_call
+            function: (identifier)
+            (arguments
+              (argument
+                name: (number_literal))
+              (argument
+                name: (identifier))))
+          in_handle: (identifier))
+        (argument
+          name: (identifier)))))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (function_call
+            function: (identifier)
+            (arguments
+              (argument
+                name: (number_literal))
+              (argument
+                name: (identifier))
+              (argument
+                name: (string_literal))))
+          in_handle: (function_call
+            function: (identifier)
+            (arguments
+              (argument
+                name: (function_call
+                  function: (identifier)
+                  (arguments
+                    (argument
+                      name: (number_literal))
+                    (argument
+                      name: (identifier))
+                    (argument
+                      name: (string_literal))))))))
+        (argument
+          name: (identifier))))))
