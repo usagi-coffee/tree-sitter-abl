@@ -9,16 +9,27 @@ export default ({ kw }) => ({
       kw("DATA-RELATION"),
       $.__dataset_relation_head,
       optional(
-        seq(
-          kw("RELATION-FIELDS"),
-          "(",
-          $.__dataset_relation_field_pair,
-          optional($.__dataset_relation_field_pair_tail),
-          ")",
+        choice(
+          seq($.__dataset_relation_fields, optional($.__dataset_relation_qualifiers)),
+          seq($.__dataset_relation_qualifiers, optional($.__dataset_relation_fields)),
         ),
       ),
-      optional(alias(kw("REPOSITION"), $.reposition)),
-      optional($.__dataset_data_relation_after_reposition),
+    ),
+  __dataset_relation_fields: ($) =>
+    seq(
+      kw("RELATION-FIELDS"),
+      "(",
+      $.__dataset_relation_field_pair,
+      optional($.__dataset_relation_field_pair_tail),
+      ")",
+    ),
+  __dataset_relation_qualifiers: ($) =>
+    choice(
+      seq(
+        alias(kw("REPOSITION"), $.reposition),
+        optional($.__dataset_data_relation_after_reposition),
+      ),
+      $.__dataset_data_relation_after_reposition,
     ),
   __dataset_relation_field_pair: ($) =>
     seq(field("parent_field", $.identifier), ",", field("child_field", $.identifier)),

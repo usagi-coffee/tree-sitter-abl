@@ -296,3 +296,37 @@ DEFINE DATASET ds2 FOR tt, b
       parent_field: (identifier)
       child_field: (identifier)
       (nested))))
+
+================================================================================
+DATASET - RELATION-FIELDS after NESTED
+================================================================================
+
+DEFINE DATASET ds FOR tt, b
+  DATA-RELATION FOR tt, b NESTED RELATION-FIELDS (k, k).
+DEFINE DATASET ds2 FOR tt, b
+  DATA-RELATION FOR tt, b NOT-ACTIVE RECURSIVE RELATION-FIELDS (k, k).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (dataset_definition
+    name: (identifier)
+    table: (identifier)
+    table: (identifier)
+    (data_relation
+      parent_buffer: (identifier)
+      child_buffer: (identifier)
+      (nested)
+      parent_field: (identifier)
+      child_field: (identifier)))
+  (dataset_definition
+    name: (identifier)
+    table: (identifier)
+    table: (identifier)
+    (data_relation
+      parent_buffer: (identifier)
+      child_buffer: (identifier)
+      (not_active)
+      (recursive)
+      parent_field: (identifier)
+      child_field: (identifier))))
