@@ -172,6 +172,7 @@ export default ({ kw }) => ({
       $.number_literal,
       alias($._signed_number_literal, $.number_literal),
       $.boolean_literal,
+      $.null_literal,
     ),
 
   __format_combo_box_phrase: ($) =>

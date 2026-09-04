@@ -28,3 +28,22 @@ DEFINE VARIABLE w AS INTEGER VIEW-AS RADIO-SET HORIZONTAL EXPAND SIZE 30 BY 3 RA
         label: (string_literal)
         value: (number_literal)
         tooltip: (string_literal)))))
+
+================================================================================
+VIEW-AS RADIO-SET - Unknown value button
+================================================================================
+
+DEFINE VARIABLE v AS INTEGER VIEW-AS RADIO-SET RADIO-BUTTONS "A", 1, "Unknown", ?.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (view_as_phrase
+      (radio_set_phrase
+        label: (string_literal)
+        value: (number_literal)
+        label: (string_literal)
+        value: (null_literal)))))
