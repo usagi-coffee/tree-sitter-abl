@@ -3,7 +3,7 @@ export default ({ kw }) => ({
 
   __disconnect_prefix: ($) =>
     seq(
-      kw("DISCONNECT"),
+      kw("DISCONNECT", { offset: 6 }),
       choice(
         seq(kw("VALUE"), "(", field("database", $._expression), ")"),
         field("database", $._identifier_or_string_literal),
