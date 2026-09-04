@@ -39,8 +39,4 @@ export default ($) => [
   // Example: MENU-ITEM m1:SENSITIVE IN MENU mymenu = TRUE.
   // Reference: Widget phrase.
   [$.widget_qualified_name, $.object_access],
-  // Purpose: prefer widget-qualified name when IN <widget> follows identifier.
-  // Example: x IN FRAME f.
-  // Reference: Widget phrase.
-  [$.widget_qualified_name, $._primary_expression],
 ];

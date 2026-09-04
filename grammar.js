@@ -134,6 +134,13 @@ export default grammar({
     // `DYNAMIC-FUNCTION(pNom IN h)` has the same ambiguity after a bare name,
     // before the argument expression has reduced to __argument_body.
     [$.__argument_in_handle, $.__widget_qualified_name_separator],
+    // `DYNAMIC-FUNCTION(ENTRY(2,c) IN h)` against
+    // `trashcan:LOAD-IMAGE("a") IN FRAME y` -- on the IN after a call the
+    // parser must choose between the argument's own IN clause and a widget
+    // qualifier. A precedence was tried first and cannot resolve it: it fixes
+    // one reading for every call, and only the token after IN tells them apart.
+    [$.__argument_body, $.widget_qualified_name, $._primary_expression],
+    [$.widget_qualified_name, $._primary_expression],
     // `a::c` off a bare name is a scoped_name; the object-access tail reads the
     // same `::` for the receivers scoped_name cannot take, so on that token
     // both are alive and only the receiver settles it -- which the parser has
