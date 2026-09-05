@@ -209,6 +209,7 @@ export default grammar({
     $._format_format,
     $._color_font_option,
     $._object_access_handle_prefix,
+    $._object_access_widget_prefix,
     $.__find_record_name,
     $.__find_index_name,
     $.__assign_record_name,
@@ -553,9 +554,12 @@ export default grammar({
           $.scoped_name,
         ),
       _object_access_widget_prefix: ($) =>
-        seq(
-          field("widget", alias($._widgets, $.identifier)),
-          field("left", choice($._identifier_or_qualified_name, $.preprocessor_name)),
+        prec(
+          "object_widget_prefix",
+          seq(
+            field("widget", alias($._widgets, $.identifier)),
+            field("left", choice($._identifier_or_qualified_name, $.preprocessor_name)),
+          ),
         ),
       _object_access_handle_prefix: ($) =>
         prec.right(

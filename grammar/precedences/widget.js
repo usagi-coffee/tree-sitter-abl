@@ -34,7 +34,7 @@ export default ($) => [
   // not the start of an attribute reference qualified by widget type.
   // Example: DEFINE FRAME F1 Image AT ROW 3.42 COL 1.72.
   // Reference: Frame phrase; DEFINE FRAME statement.
-  [$.__frame_form_item, $._object_access_widget_prefix],
+  [$.__frame_form_item, "object_widget_prefix"],
   // Purpose: prefer widget-qualified name when IN <widget> follows object access.
   // Example: MENU-ITEM m1:SENSITIVE IN MENU mymenu = TRUE.
   // Reference: Widget phrase.

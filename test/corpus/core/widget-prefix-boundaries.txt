@@ -1,0 +1,33 @@
+================================================================================
+Widget prefixes - Keyword field names and attribute access
+================================================================================
+
+ASSIGN FRAME = FRAME foo:HANDLE.
+DEFINE FRAME F1 Image AT ROW 3.42 COL 1.72.
+ASSIGN x = FRAME foo?:HANDLE.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assign_statement
+    (assign_phrase
+      (assign_pair
+        left: (identifier)
+        right: (object_access
+          widget: (identifier)
+          left: (identifier)
+          right: (identifier)))))
+  (frame_definition
+    name: (identifier)
+    field: (identifier)
+    (format_phrase
+      row: (number_literal)
+      column: (number_literal)))
+  (assign_statement
+    (assign_phrase
+      (assign_pair
+        left: (identifier)
+        right: (object_access
+          widget: (identifier)
+          left: (identifier)
+          right: (identifier))))))
