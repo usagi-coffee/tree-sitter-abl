@@ -191,6 +191,7 @@ export default grammar({
     $._comparison_operator,
     $._statement_primary_expression,
     $._type_or_string,
+    $.__include_file_reference,
     $.__find_record_name,
     $.__find_index_name,
     $.__assign_record_name,
