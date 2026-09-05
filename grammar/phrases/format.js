@@ -114,19 +114,22 @@ export default ({ kw }) => ({
   // These for some cursed reason cannot be moved to grammar/core/common.js
 
   _format_format: ($) =>
-    seq(
-      kw("FORMAT", { offset: 4 }),
-      choice(
-        field("format", $.string_literal),
-        seq("(", field("format", $.string_literal), ")"),
-        field(
-          "format",
-          choice(
-            $.identifier,
-            $.qualified_name,
-            $.object_access,
-            $.preprocessor_name,
-            $.argument_reference,
+    prec(
+      "format_value",
+      seq(
+        kw("FORMAT", { offset: 4 }),
+        choice(
+          field("format", $.string_literal),
+          seq("(", field("format", $.string_literal), ")"),
+          field(
+            "format",
+            choice(
+              $.identifier,
+              $.qualified_name,
+              $.object_access,
+              $.preprocessor_name,
+              $.argument_reference,
+            ),
           ),
         ),
       ),

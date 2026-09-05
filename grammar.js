@@ -206,6 +206,7 @@ export default grammar({
     $._format_validate,
     $._identifier_or_access,
     $.__format_radio_set_value,
+    $._format_format,
     $.__find_record_name,
     $.__find_index_name,
     $.__assign_record_name,

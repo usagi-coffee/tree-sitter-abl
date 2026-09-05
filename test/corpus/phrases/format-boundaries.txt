@@ -1,0 +1,30 @@
+================================================================================
+FORMAT - Value and following expression boundaries
+================================================================================
+
+SET x FORMAT ("x(10)").
+DISPLAY x FORMAT obj:fmt LABEL "Name".
+PUT x FORMAT decF (x).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (set_statement
+    (field
+      field: (identifier)
+      (format_phrase
+        format: (string_literal))))
+  (display_statement
+    (field
+      field: (identifier))
+    (format_phrase
+      format: (object_access
+        left: (identifier)
+        right: (identifier))
+      label: (string_literal)))
+  (put_statement
+    value: (identifier)
+    (format_phrase
+      format: (identifier))
+    value: (parenthesized_expression
+      (identifier))))
