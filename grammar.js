@@ -196,6 +196,7 @@ export default grammar({
     $._comparison_operator_no_eq,
     $._simple_type_name,
     $._identifier_or_string_literal,
+    $._as_like,
     $.__find_record_name,
     $.__find_index_name,
     $.__assign_record_name,
