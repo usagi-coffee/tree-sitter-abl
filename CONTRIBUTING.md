@@ -39,6 +39,11 @@ placeholders; do not include the brackets in the final message.
 Measure the values against the commit's actual base. Recalculate them after rebasing or
 merging instead of keeping deltas from an earlier base.
 
+Descriptions must explain the actual semantic change and resulting behavior. Do not add
+generic test-pass summaries or corpus counts; every commit is expected to pass the
+required tests. Mention validation details only when they clarify the change or a
+focused regression covered.
+
 ## Tests
 
 Every commit should ideally include a test that covers the change.
