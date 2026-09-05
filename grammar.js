@@ -183,6 +183,7 @@ export default grammar({
     [$.__class_property_class_modifier, $.__event_type_modifier, $.__variable_modifier],
   ],
   inline: ($) => [
+    $._object_access_plain_left,
     $.__find_record_name,
     $.__find_index_name,
     $.__assign_record_name,
