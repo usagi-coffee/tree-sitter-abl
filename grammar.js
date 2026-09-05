@@ -198,6 +198,7 @@ export default grammar({
     $._identifier_or_string_literal,
     $._as_like,
     $.__additive_operator,
+    $._window_handle,
     $.__find_record_name,
     $.__find_index_name,
     $.__assign_record_name,
