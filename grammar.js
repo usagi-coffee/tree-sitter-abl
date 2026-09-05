@@ -208,6 +208,7 @@ export default grammar({
     $.__format_radio_set_value,
     $._format_format,
     $._color_font_option,
+    $._object_access_handle_prefix,
     $.__find_record_name,
     $.__find_index_name,
     $.__assign_record_name,
