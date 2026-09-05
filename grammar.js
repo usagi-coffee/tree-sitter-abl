@@ -184,6 +184,7 @@ export default grammar({
   ],
   inline: ($) => [
     $._object_access_plain_left,
+    $._object_access_expression_left,
     $.__find_record_name,
     $.__find_index_name,
     $.__assign_record_name,
