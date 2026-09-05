@@ -189,6 +189,7 @@ export default grammar({
     $._logical_operator,
     $.__multiplicative_operator,
     $._comparison_operator,
+    $._statement_primary_expression,
     $.__find_record_name,
     $.__find_index_name,
     $.__assign_record_name,
