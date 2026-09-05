@@ -192,6 +192,7 @@ export default grammar({
     $._statement_primary_expression,
     $._type_or_string,
     $.__include_file_reference,
+    $._format_field_option,
     $.__find_record_name,
     $.__find_index_name,
     $.__assign_record_name,
