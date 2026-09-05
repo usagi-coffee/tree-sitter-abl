@@ -2,7 +2,7 @@
 export default ($) => [
   // Purpose: prefer record parsing over plain expressions.
   // Example: DISPLAY Customer EXCEPT Customer.Comments WITH FRAME f2.
-  [$.__display_record, $._primary_expression],
+  [$.__display_record, $._expression],
   // Purpose: prefer record parsing over identifier/qualified name.
   // Example: DISPLAY Customer WITH BROWSE b.
   [$.__display_record, $._identifier_or_qualified_name],
@@ -20,8 +20,8 @@ export default ($) => [
   // Example: DISPLAY SPACE(2) Customer.Name SKIP(1) Customer.City.
   [$.__display_skip_phrase, $.function_call],
   [$._display_space_phrase, $.function_call],
-  [$.__display_skip_phrase, $._primary_expression],
-  [$._display_space_phrase, $._primary_expression],
+  [$.__display_skip_phrase, $._expression],
+  [$._display_space_phrase, $._expression],
   // Purpose: prefer field interpretation over record.
   // Example: DISPLAY Customer.Name IN WINDOW hWin WITH FRAME f1.
   [$.__display_field, $.__display_record],

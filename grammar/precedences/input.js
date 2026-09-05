@@ -2,7 +2,7 @@
 export default ($) => [
   // Purpose: avoid treating INPUT x as a named parameter body through the extracted field.
   // Example: myMethod(INPUT x = 1).
-  [$._primary_expression, $.__input_field],
+  [$._expression, $.__input_field],
   // Purpose: prefer function call when the extracted INPUT field is followed by '('.
   // Example: ACCUMULATE INPUT myFunc().
   [$.function_call, $.__input_field],

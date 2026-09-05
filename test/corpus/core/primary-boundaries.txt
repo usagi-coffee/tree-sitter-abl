@@ -1,0 +1,47 @@
+================================================================================
+PRIMARY - expression boundaries and argument handles
+================================================================================
+
+{inc.i} - 1.
+DISPLAY x AT COL 5 - 1 ROW 3.
+myMethod(INPUT x = 1).
+DYNAMIC-FUNCTION(ENTRY(2,c) IN h).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (include_file_reference
+    file: (include_file_path
+      (identifier)))
+  (expression_statement
+    (unary_expression
+      (number_literal)))
+  (display_statement
+    (field
+      field: (identifier))
+    (format_phrase
+      column: (binary_expression
+        (number_literal)
+        (number_literal))
+      row: (number_literal)))
+  (expression_statement
+    (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (binary_expression
+            (identifier)
+            (number_literal))))))
+  (expression_statement
+    (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (function_call
+            function: (identifier)
+            (arguments
+              (argument
+                name: (number_literal))
+              (argument
+                name: (identifier))))
+          in_handle: (identifier))))))

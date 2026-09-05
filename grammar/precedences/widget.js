@@ -11,7 +11,7 @@ export default ($) => [
   // Purpose: treat widget entries as widgets, not generic expressions.
   // Example: ON CHOOSE OF btn foo - bar.
   // Reference: Widget phrase.
-  [$.__widget_entry, $._primary_expression],
+  [$.__widget_entry, $._expression],
   // Purpose: prefer function calls only when explicitly called.
   // Example: ON CHOOSE OF btn foo().
   // Reference: Widget phrase.

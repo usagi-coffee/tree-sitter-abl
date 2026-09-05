@@ -94,7 +94,7 @@ export default grammar({
   word: ($) => $.identifier,
   conflicts: ($) => [
     // There are many statements where x ( ) has different meanings (aggregate/accum)
-    [$._primary_expression, $.function_call],
+    [$._expression, $.function_call],
     // INPUT starts either an argument direction or the screen-buffer INPUT function.
     [$.__input_expression_prefix, $.argument],
     // `INPUT STREAM s` opens an INPUT statement, while `INPUT STREAM s:HANDLE`
@@ -134,8 +134,8 @@ export default grammar({
     // parser must choose between the argument's own IN clause and a widget
     // qualifier. A precedence was tried first and cannot resolve it: it fixes
     // one reading for every call, and only the token after IN tells them apart.
-    [$.__argument_body, $.widget_qualified_name, $._primary_expression],
-    [$.widget_qualified_name, $._primary_expression],
+    [$.__argument_body, $.widget_qualified_name, $._expression],
+    [$.widget_qualified_name, $._expression],
     // `a::c` off a bare name is a scoped_name; the object-access tail reads the
     // same `::` for the receivers scoped_name cannot take, so on that token
     // both are alive and only the receiver settles it -- which the parser has
@@ -200,6 +200,7 @@ export default grammar({
     $.__additive_operator,
     $._window_handle,
     $._block_option,
+    $._primary_expression,
     $.__find_record_name,
     $.__find_index_name,
     $.__assign_record_name,
