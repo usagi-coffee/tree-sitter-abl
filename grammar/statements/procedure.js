@@ -37,10 +37,9 @@ export default ({ kw }) => ({
   __procedure_compound_body: ($) =>
     seq(
       choice(alias($._colon, ":"), alias($._terminator_dot, ".")),
-      optional($.__procedure_statements),
+      optional($._statements),
       $._end_keyword,
     ),
-  __procedure_statements: ($) => prec.right(seq($._statement, optional($.__procedure_statements))),
 
   __procedure_in_super_phrase: ($) => seq($._in_keyword, kw("SUPER")),
 

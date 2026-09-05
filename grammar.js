@@ -221,8 +221,8 @@ export default grammar({
   rules: (() => {
     const ctx = { kw };
     return {
-      source_code: ($) => optional($.__source_statements),
-      __source_statements: ($) => prec.right(seq($._statement, optional($.__source_statements))),
+      source_code: ($) => optional($._statements),
+      _statements: ($) => prec.right(seq($._statement, optional($._statements))),
 
       // Comments
       line_comment: ($) => token(seq("//", /[^\r\n]*/)),
