@@ -1,0 +1,31 @@
+================================================================================
+ADDITIVE - statement expression continuations
+================================================================================
+
+EXPORT a - {&offset}.
+PUT SCREEN ROW iRow + 1 COLUMN iCol + 2 "Text".
+MESSAGE -a * b + c.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (export_statement
+    (binary_expression
+      (identifier)
+      (preprocessor_name
+        (identifier))))
+  (put_screen_statement
+    row: (binary_expression
+      (identifier)
+      (number_literal))
+    column: (binary_expression
+      (identifier)
+      (number_literal))
+    value: (string_literal))
+  (message_statement
+    (binary_expression
+      (binary_expression
+        (unary_expression
+          (identifier))
+        (identifier))
+      (identifier))))
