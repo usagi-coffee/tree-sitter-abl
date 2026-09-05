@@ -40,7 +40,7 @@ export default ($) => [
     $.__put_screen_color_phrase,
     $.__form_radio_button,
     $.__frame_display_option,
-    $._color_font_option,
+    "color_font_value",
     $.__frame_head_item,
     $.size_phrase,
     $._tooltip_phrase,

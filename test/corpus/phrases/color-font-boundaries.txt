@@ -1,0 +1,21 @@
+================================================================================
+Color and font - Binary expression boundaries
+================================================================================
+
+DEFINE BUTTON b BGCOLOR base + 1 FONT f(2) - 1.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (button_definition
+    name: (identifier)
+    bgcolor: (binary_expression
+      (identifier)
+      (number_literal))
+    font: (binary_expression
+      (function_call
+        function: (identifier)
+        (arguments
+          (argument
+            name: (number_literal))))
+      (number_literal))))

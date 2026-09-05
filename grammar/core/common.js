@@ -79,12 +79,15 @@ export default ({ kw }) => ({
       seq(choice(kw("MENU"), kw("SUB-MENU")), field("menu", $.__widget_name)),
     ),
   _color_font_option: ($) =>
-    choice(
-      seq(kw("BGCOLOR"), field("bgcolor", $._expression)),
-      seq(kw("DCOLOR"), field("dcolor", $._expression)),
-      seq(kw("FGCOLOR"), field("fgcolor", $._expression)),
-      seq(kw("FONT"), field("font", $._expression)),
-      seq(kw("PFCOLOR"), field("pfcolor", $._expression)),
+    prec(
+      "color_font_value",
+      choice(
+        seq(kw("BGCOLOR"), field("bgcolor", $._expression)),
+        seq(kw("DCOLOR"), field("dcolor", $._expression)),
+        seq(kw("FGCOLOR"), field("fgcolor", $._expression)),
+        seq(kw("FONT"), field("font", $._expression)),
+        seq(kw("PFCOLOR"), field("pfcolor", $._expression)),
+      ),
     ),
   _record_or_parenthesized_record: ($) =>
     choice($._identifier_or_qualified_name, seq($.__record_operand_opener, ")")),
