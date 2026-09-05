@@ -202,6 +202,7 @@ export default grammar({
     $._block_option,
     $._primary_expression,
     $.__preprocessor_name_value,
+    $._identifier_or_access_or_call,
     $.__find_record_name,
     $.__find_index_name,
     $.__assign_record_name,
