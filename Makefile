@@ -1,6 +1,6 @@
 LANGUAGE_NAME := tree-sitter-abl
 HOMEPAGE_URL := https://github.com/usagi-coffee/tree-sitter-abl
-VERSION := 0.0.52
+VERSION := 0.0.53
 DESCRIPTION := OpenEdge ABL grammar for tree-sitter
 
 # repository
