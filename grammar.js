@@ -657,9 +657,15 @@ export default grammar({
               optional($.__argument_in_handle),
             ),
           ),
-          optional(seq($._as_keyword, field("type", $._type_name))),
-          optional(choice(kw("BY-REFERENCE"), kw("BY-VALUE"), kw("APPEND"), kw("BIND"))),
+          optional($.__argument_type_passing),
         ),
+      __argument_type_passing: ($) =>
+        choice(
+          seq($._as_keyword, field("type", $._type_name), optional($.__argument_passing)),
+          $.__argument_passing,
+        ),
+      __argument_passing: ($) =>
+        choice(kw("BY-REFERENCE"), kw("BY-VALUE"), kw("APPEND"), kw("BIND")),
       __argument_in_handle: ($) =>
         seq(
           $._in_keyword,
