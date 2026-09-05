@@ -210,6 +210,7 @@ export default grammar({
     $._color_font_option,
     $._object_access_handle_prefix,
     $._object_access_widget_prefix,
+    $._format_colon_to,
     $.__find_record_name,
     $.__find_index_name,
     $.__assign_record_name,

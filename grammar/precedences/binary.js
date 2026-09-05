@@ -24,7 +24,7 @@ export default ($) => [
     $.__frame_expression,
     $.at_phrase,
     $._when_phrase,
-    $._format_colon_to,
+    "format_position",
     $._format_label,
     $._format_labels,
     $._format_labels_tail,

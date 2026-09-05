@@ -1,0 +1,28 @@
+================================================================================
+Format position - Expression and following value boundaries
+================================================================================
+
+PUT x COLON a + 1 "text".
+DISPLAY x TO f(2) + 1.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (put_statement
+    value: (identifier)
+    (format_phrase
+      colon: (binary_expression
+        (identifier)
+        (number_literal)))
+    value: (string_literal))
+  (display_statement
+    (field
+      field: (identifier))
+    (format_phrase
+      to: (binary_expression
+        (function_call
+          function: (identifier)
+          (arguments
+            (argument
+              name: (number_literal))))
+        (number_literal)))))
