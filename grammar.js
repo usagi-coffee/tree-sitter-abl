@@ -199,6 +199,7 @@ export default grammar({
     $._as_like,
     $.__additive_operator,
     $._window_handle,
+    $._block_option,
     $.__find_record_name,
     $.__find_index_name,
     $.__assign_record_name,
