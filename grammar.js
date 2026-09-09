@@ -402,7 +402,9 @@ export default grammar({
         seq(
           "{",
           "&",
-          $.identifier,
+          // {&2 = "default"} defaults positional include argument 2 when
+          // the caller omits it; {&NAME} refers to a named one.
+          choice($.identifier, $.number_literal),
           optional(seq("=", field("value", $.__preprocessor_name_value))),
         ),
       __preprocessor_name_value: ($) =>

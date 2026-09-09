@@ -258,6 +258,23 @@ An include argument that is a bare comparison operator
       (identifier))))
 
 ================================================================================
+INCLUDE - nested {&N = default} defaulted positional argument
+================================================================================
+
+{lib/nested.i {&2 = "REFERENCE-ONLY" }}
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (include_file_reference
+    file: (include_file_path
+      (identifier))
+    argument: (include_argument
+      (preprocessor_name
+        (number_literal)
+        value: (string_literal)))))
+
+================================================================================
 INCLUDE - THIS-OBJECT as a positional argument
 ================================================================================
 
