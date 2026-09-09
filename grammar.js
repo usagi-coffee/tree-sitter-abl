@@ -183,6 +183,8 @@ export default grammar({
     ],
     [$.__class_property_class_modifier, $.__event_type_modifier],
     [$.__class_property_class_modifier, $.__event_type_modifier, $.__variable_modifier],
+    [$.__class_property_class_modifier, $.__temp_table_modifier, $.__variable_modifier],
+    [$.__class_property_class_modifier, $.__variable_modifier],
     // A {&NAME} macro accessor modifier looks the same whether it starts a
     // new GET/SET accessor or, degenerately, continues the previous one; only
     // the keyword that follows (GET/SET) settles it.

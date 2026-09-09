@@ -747,6 +747,31 @@ END CLASS.
           type: (identifier)))
       (body))))
 ================================================================================
+PROPERTY - access modifier directly followed by NON-SERIALIZABLE
+================================================================================
+
+CLASS Foo:
+
+    DEFINE PUBLIC NON-SERIALIZABLE PROPERTY InnerExceptions AS CHARACTER NO-UNDO
+        GET.
+        PRIVATE SET.
+
+END CLASS.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (class_definition
+    name: (identifier)
+    (property_definition
+      (access_modifier)
+      (serialization_modifier)
+      name: (identifier)
+      type: (identifier)
+      (no_undo)
+      (access_modifier))))
+
+================================================================================
 PROPERTY - macro accessor modifier
 ================================================================================
 

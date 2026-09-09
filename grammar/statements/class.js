@@ -265,12 +265,12 @@ export default ({ kw }) => ({
       seq(
         $._member_access_modifier,
         optional($.__class_property_class_modifier),
-        optional($.__class_property_modifier_tail),
+        optional(choice($.__class_property_modifier_tail, $._serialization_modifier)),
       ),
       seq(
         $.__class_property_class_modifier,
         optional($._member_access_modifier),
-        optional($.__class_property_modifier_tail),
+        optional(choice($.__class_property_modifier_tail, $._serialization_modifier)),
       ),
       $.__class_property_modifier_tail,
       $._serialization_modifier,
