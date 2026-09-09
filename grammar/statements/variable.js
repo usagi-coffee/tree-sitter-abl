@@ -58,6 +58,9 @@ export default ({ kw }) => ({
         optional(alias(kw("GLOBAL"), $.scope_modifier)),
         alias(kw("SHARED"), $.scope_modifier),
       ),
+      // A {&NEWGLOBAL}-style macro can stand in for the whole "NEW GLOBAL"
+      // phrase, with SHARED still spelled out afterward.
+      seq($.preprocessor_name, alias(kw("SHARED"), $.scope_modifier)),
       alias(kw("SHARED"), $.scope_modifier),
       seq(
         $._member_access_modifier,

@@ -1013,3 +1013,23 @@ DEFINE VARIABLE x AS Namespace.Outer+Inner+Leaf NO-UNDO.
       right: (identifier)
       right: (identifier))
     (no_undo)))
+
+================================================================================
+VARIABLE DEFINITION - macro standing in for NEW GLOBAL
+================================================================================
+
+&SCOPED-DEFINE NEWGLOBAL NEW GLOBAL
+DEFINE {&NEWGLOBAL} SHARED VARIABLE g-user AS CHARACTER.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (scoped_define_preprocessor_directive
+    name: (identifier)
+    value: (preprocessor_value))
+  (variable_definition
+    (preprocessor_name
+      (identifier))
+    (scope_modifier)
+    name: (identifier)
+    type: (identifier)))
