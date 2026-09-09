@@ -869,3 +869,21 @@ DEFINE TEMP-TABLE tg NO-UNDO FIELD f1 AS INTEGER INDEX ia*b f1.
     (temp_table_index
       name: (identifier)
       field: (identifier))))
+
+================================================================================
+TEMP-TABLE DEFINITION - FIELD EXTENT sized by a macro
+================================================================================
+
+DEFINE TEMP-TABLE tt
+    FIELD BufferSurBD AS HANDLE EXTENT {&ExtentBuffersSurBD}.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (temp_table_definition
+    name: (identifier)
+    (temp_table_field
+      name: (identifier)
+      type: (identifier)
+      extent: (preprocessor_name
+        (identifier)))))
