@@ -795,3 +795,36 @@ END CLASS.
       name: (identifier)
       (parameters)
       (body))))
+
+================================================================================
+CONSTRUCTOR and EVENT - macro access modifier
+================================================================================
+
+CLASS Foo:
+
+    CONSTRUCTOR {&PACKAGE-PROTECTED} Foo(INPUT p AS Session):
+    END CONSTRUCTOR.
+
+    DEFINE {&PACKAGE-PROTECTED} EVENT Notified SIGNATURE VOID ().
+
+END CLASS.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (class_definition
+    name: (identifier)
+    (constructor_definition
+      (preprocessor_name
+        (identifier))
+      name: (identifier)
+      (parameters
+        (parameter
+          name: (identifier)
+          type: (identifier)))
+      (body))
+    (event_definition
+      (preprocessor_name
+        (identifier))
+      name: (identifier)
+      (signature))))

@@ -34,6 +34,7 @@ export default ({ kw }) => ({
         optional(alias(kw("OVERRIDE"), $.override_modifier)),
       ),
       alias(kw("OVERRIDE"), $.override_modifier),
+      $.preprocessor_name,
     ),
   __event_type_modifier: ($) =>
     choice(alias(kw("STATIC"), $.static_modifier), alias(kw("ABSTRACT"), $.abstract_modifier)),
