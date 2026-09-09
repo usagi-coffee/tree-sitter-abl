@@ -258,6 +258,36 @@ An include argument that is a bare comparison operator
       (identifier))))
 
 ================================================================================
+INCLUDE - THIS-OBJECT object access as a positional argument
+================================================================================
+
+{lib/adapt.i vTyped = THIS-OBJECT:SomeControl as Some.Namespace.IType define}
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (include_file_reference
+    file: (include_file_path
+      (identifier))
+    argument: (include_argument
+      (identifier))
+    argument: (include_argument
+      (comparison_operator))
+    argument: (include_argument
+      (object_access
+        left: (identifier)
+        right: (identifier)))
+    argument: (include_argument
+      (identifier))
+    argument: (include_argument
+      (qualified_name
+        left: (identifier)
+        right: (identifier)
+        right: (identifier)))
+    argument: (include_argument
+      (identifier))))
+
+================================================================================
 INCLUDE - nested {&N = default} defaulted positional argument
 ================================================================================
 
