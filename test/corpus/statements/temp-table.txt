@@ -167,6 +167,7 @@ TEMP-TABLE DEFINITION - Access Modifiers
 DEFINE PRIVATE TEMP-TABLE tt1 NO-UNDO FIELD f1 AS INTEGER.
 DEFINE PROTECTED TEMP-TABLE tt2 NO-UNDO FIELD f2 AS CHARACTER.
 DEFINE PRIVATE STATIC TEMP-TABLE tt3 NO-UNDO FIELD f3 AS LOGICAL.
+DEFINE STATIC PROTECTED TEMP-TABLE tt4 NO-UNDO FIELD f4 AS LOGICAL.
 
 --------------------------------------------------------------------------------
 
@@ -188,6 +189,14 @@ DEFINE PRIVATE STATIC TEMP-TABLE tt3 NO-UNDO FIELD f3 AS LOGICAL.
   (temp_table_definition
     (access_modifier)
     (static_modifier)
+    name: (identifier)
+    (no_undo)
+    (temp_table_field
+      name: (identifier)
+      type: (identifier)))
+  (temp_table_definition
+    (static_modifier)
+    (access_modifier)
     name: (identifier)
     (no_undo)
     (temp_table_field

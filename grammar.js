@@ -179,6 +179,7 @@ export default grammar({
       $.__data_source_static,
       $.__event_type_modifier,
       $.__variable_modifier,
+      $.__temp_table_modifier,
     ],
     [$.__class_property_class_modifier, $.__event_type_modifier],
     [$.__class_property_class_modifier, $.__event_type_modifier, $.__variable_modifier],
@@ -190,6 +191,11 @@ export default grammar({
     // modifier, looks the same as EXTENT sized by that same {&NAME} macro
     // until the token after the closing '}' settles which one it was.
     [$._extent_phrase],
+    // DEFINE STATIC PROTECTED/PRIVATE ... reads the same up to the access
+    // modifier whether it is temp-table's own STATIC-then-access ordering or
+    // another DEFINE's shared _member_access_modifier chain; only what
+    // follows settles it.
+    [$.__temp_table_modifier, $._member_access_modifier],
   ],
   inline: ($) => [
     $._object_access_plain_left,
