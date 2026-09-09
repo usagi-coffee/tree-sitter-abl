@@ -386,6 +386,18 @@ export default grammar({
         seq(token(prec(1, /&MESSAGE/i)), field("value", $.preprocessor_value)),
       undefine_preprocessor_directive: ($) =>
         seq(token(prec(1, /&UNDEFINE/i)), field("name", $.identifier)),
+      // AppBuilder region markers carry optional metadata on the same line.
+      analyze_suspend_preprocessor_directive: ($) =>
+        seq(
+          token(prec(1, /&ANALYZE-SUSPEND/i)),
+          optional(field("value", alias($._analyze_preprocessor_value, $.preprocessor_value))),
+        ),
+      analyze_resume_preprocessor_directive: ($) =>
+        seq(
+          token(prec(1, /&ANALYZE-RESUME/i)),
+          optional(field("value", alias($._analyze_preprocessor_value, $.preprocessor_value))),
+        ),
+      _analyze_preprocessor_value: ($) => token.immediate(/[^\r\n]+(?:~[ \t]*\r?\n[^\r\n]+)*/),
       preprocessor_value: ($) => token(/[^\n]+(?:~\s*\n[^\n]+)*/),
       __include_file_target: ($) => choice($.include_file_path, $.argument_reference),
       include_file_path: ($) =>

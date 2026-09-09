@@ -232,3 +232,68 @@ IF {&PREFIX}field$ = 0 THEN z = 1.
       left: (identifier)
       operator: (assignment_operator)
       right: (number_literal))))
+
+================================================================================
+PREPROCESSOR - AppBuilder ANALYZE-SUSPEND/ANALYZE-RESUME markers
+================================================================================
+
+&ANALYZE-SUSPEND _VERSION-NUMBER AB_v10r12 GUI
+&ANALYZE-RESUME
+&ANALYZE-SUSPEND _UIB-CODE-BLOCK _CUSTOM _DEFINITIONS C-Win
+CREATE WIDGET-POOL.
+&ANALYZE-RESUME
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (analyze_suspend_preprocessor_directive
+    value: (preprocessor_value))
+  (analyze_resume_preprocessor_directive)
+  (analyze_suspend_preprocessor_directive
+    value: (preprocessor_value))
+  (create_statement)
+  (analyze_resume_preprocessor_directive))
+
+================================================================================
+PREPROCESSOR - bare AppBuilder markers preserve following statements
+================================================================================
+
+&ANALYZE-SUSPEND
+x = 1.
+&ANALYZE-RESUME
+
+y = 2.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (analyze_suspend_preprocessor_directive)
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (number_literal))
+  (analyze_resume_preprocessor_directive)
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (number_literal)))
+
+================================================================================
+PREPROCESSOR - AppBuilder metadata continuation and keyword case
+================================================================================
+
+&analyze-suspend _UIB-CODE-BLOCK ~
+  _CUSTOM _DEFINITIONS C-Win
+x = 1.
+&analyze-resume
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (analyze_suspend_preprocessor_directive
+    value: (preprocessor_value))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (number_literal))
+  (analyze_resume_preprocessor_directive))
