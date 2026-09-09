@@ -9,7 +9,8 @@ enum TokenType {
   COLON,
   TERMINATOR_DOT,
   STRING_LITERAL,
-  BLOCK_COMMENT
+  BLOCK_COMMENT,
+  MACRO_STATEMENT
 };
 
 void *tree_sitter_abl_external_scanner_create() {
@@ -45,6 +46,67 @@ bool tree_sitter_abl_external_scanner_scan(
   const bool *valid_symbols
 ) {
   (void)payload;
+  if (valid_symbols[MACRO_STATEMENT]) {
+    // Extras (whitespace) are not yet skipped when the external scanner runs;
+    // skip them before looking for an indented macro statement.
+    while (!lexer->eof(lexer) && iswspace(lexer->lookahead)) {
+      lexer->advance(lexer, true);
+    }
+  }
+
+  if (valid_symbols[MACRO_STATEMENT] && lexer->lookahead == '{') {
+    lexer->advance(lexer, false);
+    // A {&NAME} macro alone on its line (a "pragma", e.g. prolint-nowarn
+    // annotations) is its own statement/class member, distinct from the same
+    // {&NAME} spelling used inline as a preprocessor_name (an accessor
+    // modifier, an EXTENT size, ...). Only what follows the closing '}'
+    // tells them apart, and a regex token cannot look ahead without
+    // consuming a trailing "// comment" into itself (losing it as its own
+    // comment node), so it is decided here instead: peek past '}', and
+    // commit only if nothing but optional whitespace and an optional
+    // "// comment" precede the newline.
+    if (valid_symbols[MACRO_STATEMENT] && lexer->lookahead == '&') {
+      lexer->advance(lexer, false); // consume '&'
+      bool saw_body = false;
+
+      while (!lexer->eof(lexer) && lexer->lookahead != '}' && lexer->lookahead != '\r' &&
+             lexer->lookahead != '\n') {
+        saw_body = true;
+        lexer->advance(lexer, false);
+      }
+
+      if (saw_body && lexer->lookahead == '}') {
+        lexer->advance(lexer, false); // consume '}'
+        lexer->mark_end(lexer); // the token itself is just "{&NAME}"
+
+        while (lexer->lookahead == ' ' || lexer->lookahead == '\t') {
+          lexer->advance(lexer, false);
+        }
+
+        if (lexer->lookahead == '/') {
+          lexer->advance(lexer, false);
+          if (lexer->lookahead == '/') {
+            while (!lexer->eof(lexer) && lexer->lookahead != '\r' && lexer->lookahead != '\n') {
+              lexer->advance(lexer, false);
+            }
+          } else {
+            return false; // a single '/' is not a comment, not this pattern
+          }
+        }
+
+        if (lexer->lookahead == '\r') lexer->advance(lexer, false);
+        if (lexer->lookahead == '\n') {
+          lexer->result_symbol = MACRO_STATEMENT;
+          return true;
+        }
+      }
+    }
+
+    // No match: the peeking above must not leak into the checks below, which
+    // assume they are looking at the original, unadvanced lexer position.
+    return false;
+  }
+
   if (valid_symbols[NAMEDOT] || valid_symbols[NAMECOLON] || valid_symbols[NAMEDOUBLECOLON] ||
       valid_symbols[NAMEPLUS] || valid_symbols[COLON] || valid_symbols[TERMINATOR_DOT]) {
     if (lexer->lookahead == '.') {
