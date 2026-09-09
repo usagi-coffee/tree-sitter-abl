@@ -56,6 +56,7 @@ export default ({ kw }) => ({
           $.message_preprocessor_directive,
           $.undefine_preprocessor_directive,
           $.include_file_reference,
+          alias($.__macro_statement, $.constant),
         ),
         optional($.__class_definition_items),
       ),

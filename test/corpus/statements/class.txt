@@ -720,3 +720,29 @@ END CLASS.
       name: (identifier)
       (parameters)
       (body))))
+
+================================================================================
+CLASS - full-line macro pragma between members
+================================================================================
+
+CLASS Foo:
+  {&_proparse_ prolint-nowarn(varusage)}
+  METHOD PUBLIC VOID Bar(INPUT pRequest AS CHARACTER):
+  END METHOD.
+END CLASS.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (class_definition
+    name: (identifier)
+    (constant)
+    (method_definition
+      (access_modifier)
+      type: (identifier)
+      name: (identifier)
+      (parameters
+        (parameter
+          name: (identifier)
+          type: (identifier)))
+      (body))))
