@@ -181,6 +181,14 @@ export default grammar({
     ],
     [$.__class_property_class_modifier, $.__event_type_modifier],
     [$.__class_property_class_modifier, $.__event_type_modifier, $.__variable_modifier],
+    // A {&NAME} macro accessor modifier looks the same whether it starts a
+    // new GET/SET accessor or, degenerately, continues the previous one; only
+    // the keyword that follows (GET/SET) settles it.
+    [$.property_definition],
+    // EXTENT with no size, immediately followed by a {&NAME} accessor
+    // modifier, looks the same as EXTENT sized by that same {&NAME} macro
+    // until the token after the closing '}' settles which one it was.
+    [$._extent_phrase],
   ],
   inline: ($) => [
     $._object_access_plain_left,

@@ -227,6 +227,11 @@ export default ({ kw }) => ({
       alias(kw("PROTECTED"), $.access_modifier),
       alias(kw("PACKAGE-PROTECTED"), $.access_modifier),
       alias(kw("PUBLIC"), $.access_modifier),
+      $.preprocessor_name,
+      // A {&NAME} alone on its line lexes as the whole-line macro_statement
+      // token (longer match, higher precedence) rather than a bare
+      // preprocessor_name — accept that spelling here too.
+      alias($.__macro_statement, $.constant),
     ),
   __class_property_accessor_parameters: ($) => choice(seq("(", ")"), $.property_set_parameter_list),
   property_set_parameter_list: ($) =>
