@@ -15,7 +15,7 @@ export default ($) => [
   [$._include_argument_value, $._expression],
   // Purpose: IN separates two positional include arguments; it does not qualify
   // the preceding one by a widget, since arguments are unexpanded tokens.
-  // Example: {foreach.i CoreObjPostit vPostit in CollectionPostit}
+  // Example: {foreach.i SomeItem vItem in Collection}
   // Reference: include positional arguments; Widget phrase.
   [$._include_argument_value, $.widget_qualified_name],
   // Purpose: finish a function call before reducing its name as a positional include argument.
