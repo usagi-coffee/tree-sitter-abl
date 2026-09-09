@@ -772,6 +772,31 @@ END CLASS.
       (access_modifier))))
 
 ================================================================================
+PROPERTY - protected access directly followed by SERIALIZABLE
+================================================================================
+
+CLASS Foo:
+
+    DEFINE PROTECTED SERIALIZABLE PROPERTY SerializedValue AS CHARACTER NO-UNDO
+        GET.
+        PRIVATE SET.
+
+END CLASS.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (class_definition
+    name: (identifier)
+    (property_definition
+      (access_modifier)
+      (serialization_modifier)
+      name: (identifier)
+      type: (identifier)
+      (no_undo)
+      (access_modifier))))
+
+================================================================================
 PROPERTY - macro accessor modifier
 ================================================================================
 
