@@ -295,6 +295,7 @@ export default grammar({
           alias($._new_keyword, $.identifier),
           alias(kw("WINDOW"), $.identifier),
           alias($._in_keyword, $.identifier),
+          alias(kw("THIS-OBJECT"), $.identifier),
           $.object_access,
           $.array_access,
           $.string_literal,

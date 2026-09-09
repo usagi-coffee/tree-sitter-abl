@@ -256,3 +256,24 @@ An include argument that is a bare comparison operator
       (comparison_operator))
     argument: (include_argument
       (identifier))))
+
+================================================================================
+INCLUDE - THIS-OBJECT as a positional argument
+================================================================================
+
+{lib/foreach.i ISomeRowId vItem in THIS-OBJECT}
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (include_file_reference
+    file: (include_file_path
+      (identifier))
+    argument: (include_argument
+      (identifier))
+    argument: (include_argument
+      (identifier))
+    argument: (include_argument
+      (identifier))
+    argument: (include_argument
+      (identifier))))
