@@ -12,6 +12,8 @@ export default ({ kw }) => ({
       alias($.if_preprocessor_directive_statement, $.if_preprocessor_directive),
       $.message_preprocessor_directive,
       $.undefine_preprocessor_directive,
+      $.analyze_suspend_preprocessor_directive,
+      $.analyze_resume_preprocessor_directive,
       $.empty_statement,
       $.annotation,
 

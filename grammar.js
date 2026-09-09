@@ -385,6 +385,13 @@ export default grammar({
         seq(token(prec(1, /&MESSAGE/i)), field("value", $.preprocessor_value)),
       undefine_preprocessor_directive: ($) =>
         seq(token(prec(1, /&UNDEFINE/i)), field("name", $.identifier)),
+      // AppBuilder/UIB markers delimiting the tool-managed regions of a .w
+      // file; the free-form trailing words (a block name, control name...)
+      // are not meaningful to the compiler, only to the AppBuilder itself.
+      analyze_suspend_preprocessor_directive: ($) =>
+        seq(token(prec(1, /&ANALYZE-SUSPEND/i)), optional(field("value", $.preprocessor_value))),
+      analyze_resume_preprocessor_directive: ($) =>
+        seq(token(prec(1, /&ANALYZE-RESUME/i)), optional(field("value", $.preprocessor_value))),
       preprocessor_value: ($) => token(/[^\n]+(?:~\s*\n[^\n]+)*/),
       __include_file_target: ($) => choice($.include_file_path, $.argument_reference),
       include_file_path: ($) =>
