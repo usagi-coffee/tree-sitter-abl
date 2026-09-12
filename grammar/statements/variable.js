@@ -52,6 +52,7 @@ export default ({ kw }) => ({
       seq(alias($.__variable_extent_phrase, $.extent_phrase), optional($.__variable_extents)),
     ),
 
+  // oxlint-disable-next-line tree-sitter-optimize/body-extraction
   __variable_modifier: ($) =>
     choice(
       seq(
