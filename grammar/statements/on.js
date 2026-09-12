@@ -250,6 +250,7 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/tail-extraction
   __on_of_widget_tail: ($) => seq(",", $.__on_of_widget, optional($.__on_of_widget_tail)),
   __on_of_widget: ($) => seq(field("widget", $.widget_phrase)),
+  // oxlint-disable-next-line tree-sitter-optimize/body-extraction
   __on_referencing_phrase: ($) =>
     choice(
       seq(
