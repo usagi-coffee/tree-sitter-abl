@@ -2,6 +2,7 @@ export default ({ kw }) => ({
   procedure_definition: ($) => seq($.__procedure_header, alias($.__procedure_body, $.body)),
 
   __procedure_header: ($) =>
+    // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq(
       kw("PROCEDURE", { offset: 4 }),
       optional($._routine_access_modifier),
