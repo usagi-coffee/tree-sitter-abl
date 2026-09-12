@@ -14,5 +14,6 @@ export default ({ kw }) => ({
   this_object_statement: ($) => seq(kw("THIS-OBJECT"), optional($.arguments), $._terminator),
 
   // oxlint-disable-next-line tree-sitter-optimize/optional-body-extraction
+  // oxlint-disable-next-line tree-sitter-optimize/tail-extraction
   super_statement: ($) => seq(kw("SUPER"), optional($.arguments), $._terminator),
 });
