@@ -10,7 +10,7 @@ export default ({ kw }) => ({
     seq(
       field("target", $._expression),
       "(",
-      // deopt: recurse
+      // oxlint-disable-next-line tree-sitter-optimize/recurse
       repeat1($.aggregate_phrase),
       ")",
     ),

@@ -6,10 +6,10 @@ export default ({ kw }) => ({
     choice(
       seq(
         $.__form_items,
-        // deopt: recurse
+        // oxlint-disable-next-line tree-sitter-optimize/recurse
         repeat($.frame_phrase),
       ),
-      // deopt: recurse
+      // oxlint-disable-next-line tree-sitter-optimize/recurse
       repeat1($.frame_phrase),
     ),
   __form_items: ($) => prec.right(seq(alias($.__form_item, $.form_item), optional($.__form_items))),

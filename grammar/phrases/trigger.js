@@ -37,7 +37,7 @@ export default ({ kw }) => ({
   __trigger_body_block: ($) =>
     seq(
       ":",
-      // deopt: recurse
+      // oxlint-disable-next-line tree-sitter-optimize/recurse
       repeat($._statement),
       $._end_keyword,
       ".",

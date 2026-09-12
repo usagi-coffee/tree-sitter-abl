@@ -1,0 +1,38 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "ignorePatterns": ["tools/**"],
+  "jsPlugins": [
+    {
+      "name": "tree-sitter-optimize",
+      "specifier": "./tools/oxlint-plugin-tree-sitter-optimize.js"
+    }
+  ],
+  "rules": {
+    "no-unused-vars": [
+      "warn",
+      {
+        "argsIgnorePattern": "^(?:\\$|kw)$",
+        "varsIgnorePattern": "^\\$$"
+      }
+    ],
+    "no-useless-escape": "off"
+  },
+  "overrides": [
+    {
+      "files": ["grammar.js", "grammar/**/*.js"],
+      "rules": {
+        "tree-sitter-optimize/alternative-extraction": "warn",
+        "tree-sitter-optimize/body-extraction": "warn",
+        "tree-sitter-optimize/broad-dispatcher": "warn",
+        "tree-sitter-optimize/chunk-extraction": "warn",
+        "tree-sitter-optimize/local-prefix-helper": "warn",
+        "tree-sitter-optimize/non-empty-tail-extraction": "warn",
+        "tree-sitter-optimize/optional-body-extraction": "warn",
+        "tree-sitter-optimize/prefix-extraction": "warn",
+        "tree-sitter-optimize/recurse": "warn",
+        "tree-sitter-optimize/tail-extraction": "warn",
+        "tree-sitter-optimize/token-packing": "warn"
+      }
+    }
+  ]
+}

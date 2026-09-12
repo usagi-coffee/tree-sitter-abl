@@ -3,7 +3,7 @@ export default ({ kw }) => ({
   __temp_table_definition_body: ($) =>
     seq(
       $.__temp_table_prefix,
-      // deopt: recurse
+      // oxlint-disable-next-line tree-sitter-optimize/recurse
       repeat(
         choice(
           alias($._table_field, $.temp_table_field),
@@ -28,7 +28,7 @@ export default ({ kw }) => ({
         $.__temp_table_like_type_clause,
         seq($.__temp_table_extent_option, $.__temp_table_like_type_clause),
       ),
-      // deopt: recurse
+      // oxlint-disable-next-line tree-sitter-optimize/recurse
       repeat($.__temp_table_field_option),
     ),
 
@@ -36,7 +36,7 @@ export default ({ kw }) => ({
     seq(
       kw("INDEX"),
       field("name", $.identifier),
-      // deopt: recurse
+      // oxlint-disable-next-line tree-sitter-optimize/recurse
       optional(seq(choice($._as_keyword, kw("IS")), repeat($.__temp_table_index_modifier))),
       $.__temp_table_index_fields,
     ),

@@ -8,7 +8,7 @@ export default ({ kw }) => ({
       seq(
         $._to_keyword,
         $.__output_to_target,
-        // deopt: recurse
+        // oxlint-disable-next-line tree-sitter-optimize/recurse
         repeat(
           choice(
             $.preprocessor_name,
@@ -69,7 +69,7 @@ export default ({ kw }) => ({
     choice(
       seq(
         $.identifier,
-        // deopt: recurse
+        // oxlint-disable-next-line tree-sitter-optimize/recurse
         repeat(seq("/", $.identifier)),
       ),
       $.string_literal,

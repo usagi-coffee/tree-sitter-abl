@@ -71,7 +71,7 @@ export default ({ kw }) => ({
   __display_aggregate_expression: ($) =>
     seq(
       "(",
-      // deopt: recurse
+      // oxlint-disable-next-line tree-sitter-optimize/recurse
       repeat1($.aggregate_phrase),
       ")",
     ),

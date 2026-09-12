@@ -184,7 +184,7 @@ export default ({ kw }) => ({
   __format_combo_box_phrase: ($) =>
     seq(
       field("widget", kw("COMBO-BOX")),
-      // deopt: recurse
+      // oxlint-disable-next-line tree-sitter-optimize/recurse
       repeat(
         choice(
           seq(

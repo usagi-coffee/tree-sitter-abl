@@ -19,7 +19,7 @@ export default ({ kw }) => ({
     seq(
       kw("FONT"),
       field("font", $._expression),
-      // deopt: recurse
+      // oxlint-disable-next-line tree-sitter-optimize/recurse
       repeat(
         choice(
           alias(kw("ANSI-ONLY"), $.ansi_only),
@@ -60,7 +60,7 @@ export default ({ kw }) => ({
     seq(
       kw("GET-FILE"),
       field("variable", $.identifier),
-      // deopt: recurse
+      // oxlint-disable-next-line tree-sitter-optimize/recurse
       repeat(
         choice(
           alias($.__system_dialog_filters, $.filters_phrase),

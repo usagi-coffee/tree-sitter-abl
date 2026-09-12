@@ -1,7 +1,7 @@
 export default ({ kw }) => ({
   aggregate_phrase: ($) =>
     prec.right(
-      // deopt: recurse
+      // oxlint-disable-next-line tree-sitter-optimize/recurse
       repeat1(
         seq(
           field("operation", $.aggregate_operation),

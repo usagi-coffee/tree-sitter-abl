@@ -73,7 +73,7 @@ export default ({ kw }) => ({
       seq(
         $.__class_method_definition_prefix,
         kw("ABSTRACT"),
-        // deopt: recurse
+        // oxlint-disable-next-line tree-sitter-optimize/recurse
         repeat($._method_modifier_no_abstract),
         $.__class_method_definition_signature,
         $._terminator_dot,
@@ -99,7 +99,7 @@ export default ({ kw }) => ({
   constructor_definition: ($) =>
     seq(
       kw("CONSTRUCTOR"),
-      // deopt: recurse
+      // oxlint-disable-next-line tree-sitter-optimize/recurse
       repeat(
         choice(
           alias(kw("PRIVATE"), $.access_modifier),
@@ -159,7 +159,7 @@ export default ({ kw }) => ({
     seq($.__class_compound_body, optional(choice(kw("DESTRUCTOR"), kw("METHOD"))), $._terminator),
   __class_compound_body: ($) =>
     seq(
-      // deopt: recurse
+      // oxlint-disable-next-line tree-sitter-optimize/recurse
       repeat($._statement),
       $._end_keyword,
     ),
@@ -169,7 +169,7 @@ export default ({ kw }) => ({
   property_definition: ($) =>
     seq(
       $.__class_property_definition_prefix,
-      // deopt: recurse
+      // oxlint-disable-next-line tree-sitter-optimize/recurse
       repeat1(
         choice(
           seq(
@@ -211,7 +211,7 @@ export default ({ kw }) => ({
   __class_property_accessor_body: ($) =>
     seq(
       alias($._colon, ":"),
-      // deopt: recurse
+      // oxlint-disable-next-line tree-sitter-optimize/recurse
       repeat($._statement),
       $._end_keyword,
     ),

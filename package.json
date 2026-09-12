@@ -30,6 +30,7 @@
   "main": "bindings/node",
   "types": "bindings/node",
   "scripts": {
+    "lint": "oxlint grammar.js grammar",
     "install": "node-gyp-build",
     "prestart": "tree-sitter build --wasm",
     "start": "tree-sitter playground",
@@ -61,6 +62,7 @@
   "devDependencies": {
     "nodemon": "^3.1.14",
     "oxfmt": "^0.67.0",
+    "oxlint": "^1.82.0",
     "prebuildify": "^6.0.1",
     "tree-sitter": "^0.25.1",
     "tree-sitter-cli": "^0.27.0"

@@ -53,7 +53,7 @@ export default ({ kw }) => ({
     prec.right(
       seq(
         field("record", $._identifier_or_qualified_name),
-        // deopt: recurse
+        // oxlint-disable-next-line tree-sitter-optimize/recurse
         repeat(
           choice(
             seq($._of_keyword, field("of", $._identifier_or_qualified_name)),

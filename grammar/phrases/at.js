@@ -14,7 +14,7 @@ export default ({ kw }) => ({
     ),
 
   __at_column_row: ($) =>
-    // deopt: recurse
+    // oxlint-disable-next-line tree-sitter-optimize/recurse
     repeat1(
       choice(
         seq(
@@ -29,7 +29,7 @@ export default ({ kw }) => ({
   __at_of_suffix: ($) => prec.right(seq($._of_keyword, $._expression)),
 
   __at_x_y: ($) =>
-    // deopt: recurse
+    // oxlint-disable-next-line tree-sitter-optimize/recurse
     repeat1(
       choice(
         seq(kw("X"), field("x", $._expression)),

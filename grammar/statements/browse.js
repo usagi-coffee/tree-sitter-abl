@@ -124,7 +124,7 @@ export default ({ kw }) => ({
     prec.right(
       seq(
         field("column", prec.right($._expression)),
-        // deopt: recurse
+        // oxlint-disable-next-line tree-sitter-optimize/recurse
         repeat(
           choice(
             $._format_string,

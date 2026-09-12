@@ -59,7 +59,7 @@ export default ({ kw }) => ({
     prec.right(
       seq(
         choice(alias($._colon, ":"), $._terminator_dot),
-        // deopt: recurse
+        // oxlint-disable-next-line tree-sitter-optimize/recurse
         repeat($._statement),
       ),
     ),

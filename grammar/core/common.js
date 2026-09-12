@@ -50,7 +50,7 @@ export default ({ kw }) => ({
     seq(
       kw("MENU-ITEM"),
       field("name", $.identifier),
-      // deopt: recurse
+      // oxlint-disable-next-line tree-sitter-optimize/recurse
       repeat(
         choice(
           $._aggregate_label_phrase,
@@ -218,7 +218,7 @@ export default ({ kw }) => ({
     seq(
       field("name", $.identifier),
       optional(alias($._no_undo_keyword, $.no_undo)),
-      // deopt: recurse
+      // oxlint-disable-next-line tree-sitter-optimize/recurse
       repeat(
         choice(
           seq(kw("NAMESPACE-URI"), field("namespace_uri", $.string_literal)),
@@ -282,7 +282,7 @@ export default ({ kw }) => ({
   _dataset_body: ($) =>
     seq(
       field("name", $.identifier),
-      // deopt: recurse
+      // oxlint-disable-next-line tree-sitter-optimize/recurse
       repeat(
         choice(
           seq(kw("NAMESPACE-URI"), field("namespace_uri", $._expression)),

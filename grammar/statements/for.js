@@ -33,7 +33,7 @@ export default ({ kw }) => ({
     seq($.__for_record_phrases, optional($.__for_sort_clauses), optional($._loop_phrase)),
 
   __for_record_phrases: ($) =>
-    // deopt: recurse
+    // oxlint-disable-next-line tree-sitter-optimize/recurse
     seq($.__for_record, repeat(seq(",", $.__for_record))),
 
   __for_record: ($) => seq(optional(choice(kw("EACH"), kw("FIRST"), kw("LAST"))), $.record_phrase),

@@ -4,6 +4,21 @@
 
 Please format your code with `bun run format` before committing.
 
+## Optimization lint
+
+Run `bun run lint` to find grammar shapes that are candidates for the measured
+optimizations. These diagnostics are suggestions: try one transformation at a
+time, regenerate the parser, and retain it only when the parser metrics
+improve without changing behavior or tree shape.
+
+Oxlint's rule-specific ignore directive can silence a suggestion next to the
+reported construct:
+
+```js
+// oxlint-disable-next-line tree-sitter-optimize/prefix-extraction
+some_rule: ($) => seq(...),
+```
+
 ## Commit descriptions
 
 Use a short, descriptive commit subject with a category prefix, such as

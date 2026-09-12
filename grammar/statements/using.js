@@ -21,7 +21,7 @@ export default ({ kw }) => ({
     token(
       seq(
         /[_\p{L}][\p{L}\p{N}_-]*/i,
-        // deopt: recurse
+        // oxlint-disable-next-line tree-sitter-optimize/recurse
         repeat(seq(choice(".", "+"), /[_\p{L}][\p{L}\p{N}_-]*/i)),
         optional(seq(".", "*")),
       ),

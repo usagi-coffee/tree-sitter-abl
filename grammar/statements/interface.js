@@ -50,7 +50,7 @@ export default ({ kw }) => ({
       $._define_keyword,
       kw("TEMP-TABLE"),
       $._table_body,
-      // deopt: recurse
+      // oxlint-disable-next-line tree-sitter-optimize/recurse
       repeat(
         choice(
           alias($._table_field, $.temp_table_field),
@@ -77,7 +77,7 @@ export default ({ kw }) => ({
   __interface_method_prefix: ($) =>
     seq(
       kw("METHOD"),
-      // deopt: recurse
+      // oxlint-disable-next-line tree-sitter-optimize/recurse
       repeat($._method_modifier_no_abstract),
       $._method_return_type,
       field("name", $.identifier),
