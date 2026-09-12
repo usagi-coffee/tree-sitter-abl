@@ -64,6 +64,7 @@ export default ({ kw }) => ({
 
   method_definition: ($) =>
     choice(
+      // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
       seq(
         $.__class_method_definition_prefix,
         $.__class_method_definition_signature,
