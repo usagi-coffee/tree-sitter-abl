@@ -4,13 +4,17 @@ export default ({ kw }) => ({
   __enable_prefix: ($) =>
     seq(
       kw("ENABLE"),
-      optional(alias(kw("UNLESS-HIDDEN"), $.unless_hidden)),
-      optional(
-        choice(
-          seq($.__enable_body, optional($.in_window_phrase), optional($.frame_phrase)),
-          seq(optional($.in_window_phrase), $.frame_phrase),
-        ),
-      ),
+      optional($.__enable_prefix_tail),
+    ),
+  __enable_prefix_tail: ($) =>
+    choice(
+      seq(alias(kw("UNLESS-HIDDEN"), $.unless_hidden), optional($.__enable_options)),
+      $.__enable_options,
+    ),
+  __enable_options: ($) =>
+    choice(
+      seq($.__enable_body, optional($.in_window_phrase), optional($.frame_phrase)),
+      seq(optional($.in_window_phrase), $.frame_phrase),
     ),
   __enable_body: ($) =>
     choice(
