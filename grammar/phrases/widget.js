@@ -62,6 +62,7 @@ export default ({ kw }) => ({
   // cannot settle with one token of lookahead. Kept as its own symbols
   // (aliased back to widget_phrase) so the resulting GLR fork stays local to
   // VIEW/HIDE instead of reaching every widget_phrase call site.
+  // oxlint-disable-next-line tree-sitter-optimize/body-extraction
   __view_hide_widget_phrase: ($) =>
     choice(
       seq(kw("FRAME", { offset: 4 }), field("frame", $.__widget_name)),
