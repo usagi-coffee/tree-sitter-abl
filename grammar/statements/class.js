@@ -304,6 +304,7 @@ export default ({ kw }) => ({
   __class_implements_tail: ($) =>
     seq(",", field("interface", $._type_name), optional($.__class_implements_tail)),
 
+  // oxlint-disable-next-line tree-sitter-optimize/body-extraction
   _method_modifier_no_abstract: ($) =>
     choice(
       alias(kw("PRIVATE"), $.access_modifier),
