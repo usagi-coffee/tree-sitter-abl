@@ -68,6 +68,7 @@ export default ({ kw }) => ({
         optional(alias(kw("STATIC"), $.static_modifier)),
         optional($._serialization_modifier),
       ),
+      // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
       seq(
         alias(kw("STATIC"), $.static_modifier),
         optional($._member_access_modifier),
