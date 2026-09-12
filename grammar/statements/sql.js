@@ -127,6 +127,7 @@ export default ({ kw }) => ({
   __sql_select_columns_tail: ($) =>
     seq(",", field("column", $.__sql_select_item), optional($.__sql_select_columns_tail)),
   __sql_select_from_body: ($) =>
+    // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq(
       kw("FROM"),
       $.__sql_table_references,
