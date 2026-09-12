@@ -24,6 +24,7 @@ export default ({ kw }) => ({
           optional(alias(kw("NO-LABELS"), $.no_labels)),
           optional($._format_string),
         ),
+        // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
         seq(
           field("field", $._expression),
           optional(seq(kw("COLON"), field("colon", $._expression))),
