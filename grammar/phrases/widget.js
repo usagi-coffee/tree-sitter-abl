@@ -6,6 +6,7 @@ export default ({ kw }) => ({
   __widget_handle: ($) =>
     seq(field("handle", choice($._identifier_or_qualified_name, $.preprocessor_name))),
 
+  // oxlint-disable-next-line tree-sitter-optimize/body-extraction
   __widget_entry: ($) =>
     choice(
       seq(
