@@ -51,6 +51,7 @@ export default ({ kw }) => ({
     ),
   __parameter_options: ($) =>
     prec.right(seq($.__parameter_option, optional($.__parameter_options))),
+  // oxlint-disable-next-line tree-sitter-optimize/body-extraction
   __parameter_option: ($) =>
     choice(
       alias(seq(optional(kw("NOT")), kw("CASE-SENSITIVE")), $.case_sensitive),
