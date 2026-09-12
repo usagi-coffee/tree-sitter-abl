@@ -21,6 +21,7 @@ export default ({ kw }) => ({
       optional(kw("CLASS")),
       field("type", $._type_or_string),
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/body-extraction
   __event_modifier: ($) =>
     choice(
       // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
