@@ -3,6 +3,7 @@ export default ({ kw }) => ({
     prec.right(
       // oxlint-disable-next-line tree-sitter-optimize/recurse
       repeat1(
+        // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
         seq(
           field("operation", $.aggregate_operation),
           optional(alias($._aggregate_label_phrase, $.label_phrase)),
