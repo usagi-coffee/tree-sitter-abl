@@ -6,6 +6,7 @@ export default ({ kw }) => ({
   __compile_options: ($) => prec.right(seq($.__compile_option, optional($.__compile_options))),
   __compile_option: ($) =>
     choice(
+      // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
       seq(
         kw("SAVE"),
         optional(seq("=", field("save", $._expression))),
