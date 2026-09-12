@@ -31,6 +31,7 @@ export default ({ kw }) => ({
       ),
     ),
 
+  // oxlint-disable-next-line tree-sitter-optimize/body-extraction
   _find_record_option: ($) =>
     choice(
       $._lock_option,
