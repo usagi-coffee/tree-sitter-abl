@@ -43,6 +43,7 @@ export default ({ kw }) => ({
       alias($.__prompt_for_with_phrase, $.with_phrase),
     ),
 
+  // oxlint-disable-next-line tree-sitter-optimize/body-extraction
   __prompt_for_field: ($) =>
     choice(
       // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
