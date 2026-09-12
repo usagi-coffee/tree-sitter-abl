@@ -22,6 +22,7 @@ export default ({ kw }) => ({
       optional($.__variable_options),
     ),
   __variable_options: ($) => prec.right(seq($.__variable_option, optional($.__variable_options))),
+  // oxlint-disable-next-line tree-sitter-optimize/body-extraction
   __variable_option: ($) =>
     choice(
       alias($.__variable_extent_phrase, $.extent_phrase),
