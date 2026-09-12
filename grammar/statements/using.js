@@ -19,6 +19,7 @@ export default ({ kw }) => ({
 
   __using_base_name: ($) =>
     token(
+      // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
       seq(
         /[_\p{L}][\p{L}\p{N}_-]*/i,
         // oxlint-disable-next-line tree-sitter-optimize/recurse
