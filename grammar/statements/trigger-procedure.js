@@ -10,6 +10,7 @@ export default ({ kw }) => ({
         // Simple events: CREATE, DELETE, FIND, REPLICATION-CREATE, etc.
         seq(field("event", $.identifier), $._of_keyword, field("object", $.identifier)),
         // WRITE event with optional NEW and OLD buffers
+        // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
         seq(
           kw("WRITE"),
           $._of_keyword,
