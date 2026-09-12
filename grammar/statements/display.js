@@ -43,6 +43,7 @@ export default ({ kw }) => ({
   __display_items_tail: ($) => prec.right(seq($.__display_item, optional($.__display_items_tail))),
   __display_item: ($) =>
     choice(
+      // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
       seq(
         $.__display_formatted_field,
         optional($._when_phrase),
