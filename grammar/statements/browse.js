@@ -4,6 +4,7 @@ export default ({ kw }) => ({
   __browse_prefix: ($) =>
     seq($._define_keyword, optional($._definition_scope_modifier), kw("BROWSE"), $.__browse_body),
 
+  // oxlint-disable-next-line tree-sitter-optimize/body-extraction
   __browse_body: ($) =>
     seq(
       field("name", $.identifier),
