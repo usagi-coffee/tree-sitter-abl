@@ -37,6 +37,7 @@ export default ({ kw }) => ({
   // the compiler, but only as a name it then fails to resolve, and reading a
   // bare trailing name here would swallow whatever follows.
   __run_surplus_tail: ($) => seq(choice($.arguments, ")"), optional($.__run_surplus_tail)),
+  // oxlint-disable-next-line tree-sitter-optimize/body-extraction
   __run_persistence: ($) =>
     choice(
       alias(
