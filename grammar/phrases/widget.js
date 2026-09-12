@@ -34,6 +34,7 @@ export default ({ kw }) => ({
       field("system_handle", alias($.__widget_system_handle, $.system_handle)),
     ),
 
+  // oxlint-disable-next-line tree-sitter-optimize/body-extraction
   __widget_system_handle: ($) =>
     choice(
       kw("ACTIVE-WINDOW"),
