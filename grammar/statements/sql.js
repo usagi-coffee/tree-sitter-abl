@@ -170,6 +170,7 @@ export default ({ kw }) => ({
       field("into", $._identifier_or_array_access),
       optional($.__sql_into_target_tail),
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/tail-extraction
   __sql_into_target_tail: ($) =>
     seq(",", field("into", $._identifier_or_array_access), optional($.__sql_into_target_tail)),
 
