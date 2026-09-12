@@ -2,6 +2,7 @@ export default ({ kw }) => ({
   choose_statement: ($) => seq($.__choose_prefix, $._terminator),
 
   __choose_prefix: ($) =>
+    // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq(
       kw("CHOOSE"),
       choice(seq($._row_keyword, $.__choose_field_help), seq(kw("FIELD"), $.__choose_field_helps)),
