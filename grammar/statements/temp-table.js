@@ -84,6 +84,7 @@ export default ({ kw }) => ({
     ),
   __temp_table_index_fields: ($) =>
     prec.right(seq($.__temp_table_index_field, optional($.__temp_table_index_fields))),
+  // oxlint-disable-next-line tree-sitter-optimize/body-extraction
   __temp_table_field_option: ($) =>
     choice(
       $._color_font_option,
