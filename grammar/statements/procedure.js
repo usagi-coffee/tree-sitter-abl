@@ -47,6 +47,7 @@ export default ({ kw }) => ({
 
   __procedure_external_phrase: ($) =>
     prec.left(
+      // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
       seq(
         kw("EXTERNAL"),
         field("library", alias($.string_literal, "_escaped_string")),
