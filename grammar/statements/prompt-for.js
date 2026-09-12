@@ -45,6 +45,7 @@ export default ({ kw }) => ({
 
   __prompt_for_field: ($) =>
     choice(
+      // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
       seq(
         field("field", $._identifier_or_qualified_name),
         optional($.format_phrase),
