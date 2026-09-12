@@ -34,6 +34,7 @@ export default ({ kw }) => ({
     ),
 
   __procedure_body: ($) =>
+    // oxlint-disable-next-line tree-sitter-optimize/optional-body-extraction
     seq($.__procedure_compound_body, optional(kw("PROCEDURE", { offset: 4 })), $._terminator),
   __procedure_compound_body: ($) =>
     seq(
