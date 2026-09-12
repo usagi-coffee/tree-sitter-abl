@@ -2,6 +2,7 @@ export default ({ kw }) => ({
   system_help_statement: ($) => seq($.__system_help_prefix, $._no_error_terminator),
 
   __system_help_prefix: ($) =>
+    // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq(
       kw("SYSTEM-HELP"),
       field("topic", $.__system_help_expression),
