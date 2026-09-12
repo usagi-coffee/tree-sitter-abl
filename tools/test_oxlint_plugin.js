@@ -1,6 +1,10 @@
 import { RuleTester } from "oxlint/plugins-dev";
 
-import { resetSharingCandidates, sharedRepetition } from "./oxlint-plugin-tree-sitter-optimize.js";
+import {
+  resetSharingCandidates,
+  sharedRecursion,
+  sharedRepetition,
+} from "./oxlint-plugin-tree-sitter-optimize.js";
 
 RuleTester.describe = (_name, run) => run();
 RuleTester.it = (_name, run) => run();
@@ -37,6 +41,151 @@ new RuleTester().run("shared-repetition", sharedRepetition, {
             "This non-trivial repetition duplicates temp_table_definition in temp-table.js; try extracting a shared hidden helper.",
         },
       ],
+    },
+  ],
+});
+
+const recursiveFieldTail = (name) => `
+export default () => ({
+  ${name}: ($) =>
+    seq(optional(","), $._identifier_or_qualified_name, optional($.${name})),
+});
+`;
+
+resetSharingCandidates();
+new RuleTester().run("shared-recursion across files", sharedRecursion, {
+  valid: [
+    {
+      name: "original BUFFER-COPY tail seeds the candidate",
+      filename: "grammar/statements/buffer-copy.js",
+      code: recursiveFieldTail("__buffer_copy_field_tail"),
+    },
+  ],
+  invalid: [
+    {
+      name: "original QUERY tail duplicates BUFFER-COPY",
+      filename: "grammar/statements/query.js",
+      code: recursiveFieldTail("__query_field_name_tail"),
+      errors: [{ message: /duplicates __buffer_copy_field_tail in buffer-copy\.js/ }],
+    },
+  ],
+});
+
+RuleTester.it = (_name, run) => {
+  resetSharingCandidates();
+  run();
+};
+
+new RuleTester().run("shared-recursion", sharedRecursion, {
+  valid: [
+    {
+      name: "one shared helper serves both field lists after optimization",
+      code: `export default () => ({
+        _field_names: ($) => seq($._name, optional($._field_names_tail)),
+        _field_names_tail: ($) => seq(optional(","), $._name, optional($._field_names_tail)),
+        __copy_fields: ($) => seq("EXCEPT", $._field_names),
+        __query_fields: ($) => seq("(", optional($._field_names), ")"),
+      });`,
+    },
+    {
+      name: "public recursive nodes keep their identities",
+      code: `export default () => ({
+        first: ($) => seq($.item, optional($.first)),
+        second: ($) => seq($.item, optional($.second)),
+      });`,
+    },
+    {
+      name: "non-grammar object properties are ignored",
+      code: `const object = {
+        _first: ($) => seq($.item, optional($._first)),
+        _second: ($) => seq($.item, optional($._second)),
+      };`,
+    },
+    {
+      name: "different fields cannot be shared",
+      code: `export default () => ({
+        _first: ($) => seq(field("left", $.item), optional($._first)),
+        _second: ($) => seq(field("right", $.item), optional($._second)),
+      });`,
+    },
+    {
+      name: "different aliases cannot be shared",
+      code: `export default () => ({
+        _first: ($) => seq(alias($.item, $.left), optional($._first)),
+        _second: ($) => seq(alias($.item, $.right), optional($._second)),
+      });`,
+    },
+    {
+      name: "different associativity cannot be shared",
+      code: `export default () => ({
+        _first: ($) => prec.left(seq($.item, optional($._first))),
+        _second: ($) => prec.right(seq($.item, optional($._second))),
+      });`,
+    },
+    {
+      name: "different named precedence cannot be shared",
+      code: `export default () => ({
+        _first: ($) => prec("first", seq($.item, optional($._first))),
+        _second: ($) => prec("second", seq($.item, optional($._second))),
+      });`,
+    },
+    {
+      name: "keyword abbreviation options remain distinct",
+      code: `export default () => ({
+        _first: ($) => seq(kw("COLUMN", { offset: 3 }), optional($._first)),
+        _second: ($) => seq(kw("COLUMN", { offset: 6 }), optional($._second)),
+      });`,
+    },
+    {
+      name: "different regular expressions remain distinct",
+      code: `export default () => ({
+        _first: ($) => seq(token(/a/i), optional($._first)),
+        _second: ($) => seq(token(/b/i), optional($._second)),
+      });`,
+    },
+    {
+      name: "different item rules remain distinct",
+      code: `export default () => ({
+        _first: ($) => seq($.left, optional($._first)),
+        _second: ($) => seq($.right, optional($._second)),
+      });`,
+    },
+    {
+      name: "a reference to another rule is not a recursive edge",
+      code: `export default () => ({
+        _first: ($) => seq($.item, optional($._tail)),
+        _second: ($) => seq($.item, optional($._tail)),
+      });`,
+    },
+  ],
+  invalid: [
+    {
+      name: "USING lists with a separator inside the optional tail",
+      code: `export default () => ({
+        __using_type_refs: ($) =>
+          prec.right(seq($.__using_type_ref, optional(seq(",", $.__using_type_refs)))),
+        __using_type_arguments: ($) =>
+          prec.right(seq($.__using_type_ref, optional(seq(",", $.__using_type_arguments)))),
+      });`,
+      errors: [{ message: /duplicates __using_type_refs/ }],
+    },
+    {
+      name: "core grammar rules with identical fields and aliases",
+      code: `export default grammar({ rules: {
+        _first: ($) => prec.right(seq(field("item", alias($.value, $.item)), optional($._first))),
+        _second: ($) => prec.right(seq(field("item", alias($.value, $.item)), optional($._second))),
+      }});`,
+      errors: [{ message: /duplicates _first/ }],
+    },
+    {
+      name: "formatting and comments do not hide a duplicate",
+      code: `export default () => ({
+        _first: ($) => seq($.item, optional($._first)),
+        _second: ($) => seq(
+          $.item, /* continue the list */ optional($._second)
+        ),
+      });`,
+      errors: [{ message: /duplicates _first/ }],
     },
   ],
 });
