@@ -13,10 +13,8 @@ export default ({ kw }) => ({
     seq(
       optional(alias($.__import_delimiter_phrase, $.delimiter_phrase)),
       $.__import_fields,
-      optional(seq(kw("EXCEPT"), $.__import_except_names)),
+      optional(seq(kw("EXCEPT"), $._import_export_except_names)),
     ),
-  __import_except_names: ($) =>
-    prec.right(seq($._identifier_or_qualified_name, optional($.__import_except_names))),
   __import_fields: ($) =>
     prec.right(
       seq(

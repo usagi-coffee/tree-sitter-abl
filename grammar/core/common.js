@@ -25,6 +25,8 @@ export default ({ kw }) => ({
     prec.right(
       seq(field("except", $._identifier_or_qualified_name), optional($._except_name_list)),
     ),
+  _import_export_except_names: ($) =>
+    prec.right(seq($._identifier_or_qualified_name, optional($._import_export_except_names))),
   _frame_phrases: ($) => seq($.frame_phrase, optional($.frame_phrase)),
   // VIEW and HIDE are the only users, and both admit a trailing IN WINDOW that
   // the shared widget_phrase cannot be told apart from IN FRAME with a single
