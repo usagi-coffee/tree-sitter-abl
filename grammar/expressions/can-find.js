@@ -49,6 +49,7 @@ export default ({ kw }) => ({
           seq($.__record_query_use_index, optional(alias($.__record_query_lock_phrase, $.no_lock))),
         ),
       ),
+      // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
       seq(
         alias($.__record_query_lock_phrase, $.no_lock),
         optional(alias($.__record_query_where_phrase, $.where_phrase)),
