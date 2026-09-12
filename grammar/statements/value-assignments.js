@@ -1,6 +1,7 @@
 export default ({ kw }) => ({
   value_assignment_statement: ($) => seq($.__value_assignments_body, $._terminator),
 
+  // oxlint-disable-next-line tree-sitter-optimize/body-extraction
   __value_assignments_body: ($) =>
     choice(
       seq(
