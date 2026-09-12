@@ -30,9 +30,5 @@ export default ({ kw }) => ({
   __query_fields_list: ($) => seq(kw("FIELDS", { offset: 5 }), $.__query_parenthesized_field_names),
   __query_except_list: ($) => seq(kw("EXCEPT"), $.__query_parenthesized_field_names),
   __query_parenthesized_field_names: ($) => seq($.__query_field_names_prefix, ")"),
-  __query_field_names_prefix: ($) => seq("(", optional($.__query_field_names)),
-  __query_field_names: ($) =>
-    seq($._identifier_or_qualified_name, optional($.__query_field_name_tail)),
-  __query_field_name_tail: ($) =>
-    seq(optional(","), $._identifier_or_qualified_name, optional($.__query_field_name_tail)),
+  __query_field_names_prefix: ($) => seq("(", optional($._field_names)),
 });

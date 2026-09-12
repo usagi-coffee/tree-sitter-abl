@@ -14,6 +14,9 @@ export default ({ kw }) => ({
     seq(field("handle", $._identifier_or_array_access), optional($._in_widget_pool)),
 
   _except_fields: ($) => seq(kw("EXCEPT"), $._except_field_names),
+  _field_names: ($) => seq($._identifier_or_qualified_name, optional($._field_names_tail)),
+  _field_names_tail: ($) =>
+    seq(optional(","), $._identifier_or_qualified_name, optional($._field_names_tail)),
   _except_field_names: ($) =>
     prec.right(seq(field("except", $.identifier), optional($._except_field_names))),
   _except_name_list: ($) =>
