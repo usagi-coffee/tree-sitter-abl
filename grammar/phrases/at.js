@@ -29,6 +29,7 @@ export default ({ kw }) => ({
     ),
   __at_of_suffix: ($) => prec.right(seq($._of_keyword, $._expression)),
 
+  // oxlint-disable-next-line tree-sitter-optimize/body-extraction
   __at_x_y: ($) =>
     // oxlint-disable-next-line tree-sitter-optimize/recurse
     repeat1(
