@@ -94,6 +94,7 @@ export default ({ kw }) => ({
     ),
   __dataset_parent_fields_after_tail: ($) =>
     seq(",", field("after_field", $.identifier), optional($.__dataset_parent_fields_after_tail)),
+  // oxlint-disable-next-line tree-sitter-optimize/body-extraction
   __dataset_modifier: ($) =>
     choice(
       seq(alias($._new_keyword, $.new_modifier), alias(kw("SHARED"), $.scope_modifier)),
