@@ -5,6 +5,7 @@ export default ({ kw }) => ({
     seq($.__system_dialog_prefix, $.__system_dialog_color_body, $._terminator),
 
   __system_dialog_color_body: ($) =>
+    // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq(
       kw("COLOR"),
       field("color", $._expression),
