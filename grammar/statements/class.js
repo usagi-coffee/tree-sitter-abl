@@ -221,6 +221,7 @@ export default ({ kw }) => ({
   __class_property_accessor_tail: ($) =>
     choice(
       $._terminator_dot,
+      // oxlint-disable-next-line tree-sitter-optimize/optional-body-extraction
       seq($.__class_property_accessor_body, optional(choice(kw("GET"), kw("SET"))), $._terminator),
     ),
 
