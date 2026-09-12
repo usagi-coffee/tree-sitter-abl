@@ -219,18 +219,26 @@ export default ({ kw }) => ({
     seq(
       field("name", $.identifier),
       optional(alias($._no_undo_keyword, $.no_undo)),
-      // oxlint-disable-next-line tree-sitter-optimize/recurse
-      repeat(
-        choice(
-          seq(kw("NAMESPACE-URI"), field("namespace_uri", $.string_literal)),
-          seq(kw("NAMESPACE-PREFIX"), field("namespace_prefix", $.string_literal)),
-          seq(kw("XML-NODE-NAME"), field("node", $.string_literal)),
-          $.__temp_table_serialize_name_phrase,
-          seq(kw("XML-NODE-TYPE"), field("xml_node_type", $.string_literal)),
+      optional($._table_body_tail),
+    ),
+  _table_body_tail: ($) =>
+    choice(
+      seq(
+        // oxlint-disable-next-line tree-sitter-optimize/recurse
+        repeat1(
+          choice(
+            seq(kw("NAMESPACE-URI"), field("namespace_uri", $.string_literal)),
+            seq(kw("NAMESPACE-PREFIX"), field("namespace_prefix", $.string_literal)),
+            seq(kw("XML-NODE-NAME"), field("node", $.string_literal)),
+            $.__temp_table_serialize_name_phrase,
+            seq(kw("XML-NODE-TYPE"), field("xml_node_type", $.string_literal)),
+          ),
         ),
+        optional(alias(kw("REFERENCE-ONLY"), $.reference_only)),
+        optional($._table_options),
       ),
-      optional(alias(kw("REFERENCE-ONLY"), $.reference_only)),
-      optional($._table_options),
+      seq(alias(kw("REFERENCE-ONLY"), $.reference_only), optional($._table_options)),
+      $._table_options,
     ),
 
   _table_options: ($) =>
