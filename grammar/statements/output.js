@@ -78,6 +78,7 @@ export default ({ kw }) => ({
       $.string_literal,
     ),
 
+  // oxlint-disable-next-line tree-sitter-optimize/body-extraction
   __output_to_target: ($) =>
     choice(
       prec.right(
