@@ -4,6 +4,7 @@ export default ({ kw }) => ({
 
   __input_through_prefix: ($) => seq($._input_stream_prefix, kw("THROUGH")),
   __input_through_body: ($) =>
+    // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq(
       $._program_target,
       optional($.__input_through_args),
