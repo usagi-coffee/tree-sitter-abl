@@ -17,6 +17,7 @@ export default ({ kw }) => ({
   __form_item: ($) =>
     prec.right(
       choice(
+        // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
         seq(
           alias(kw("MENU"), $.identifier),
           optional(alias(kw("NO-LABEL"), $.no_label)),
