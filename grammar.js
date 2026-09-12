@@ -294,6 +294,7 @@ export default grammar({
         ),
       include_named_argument: ($) =>
         seq("&", field("name", $.identifier), seq("=", field("value", $._include_argument_value))),
+      // oxlint-disable-next-line tree-sitter-optimize/body-extraction
       _include_argument_value: ($) =>
         choice(
           $.function_call,
