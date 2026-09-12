@@ -3,6 +3,7 @@ export default ({ kw }) => ({
   __query_tuning_prefix: ($) => seq(kw("QUERY-TUNING"), "(", $.__query_tuning_options),
   __query_tuning_options: ($) =>
     prec.right(seq($.__query_tuning_option, optional($.__query_tuning_options))),
+  // oxlint-disable-next-line tree-sitter-optimize/body-extraction
   __query_tuning_option: ($) =>
     choice(
       alias(kw("ARRAY-MESSAGE"), $.array_message),
