@@ -9,6 +9,7 @@ export default ({ kw }) => ({
       field("value", $._expression),
     ),
 
+  // oxlint-disable-next-line tree-sitter-optimize/body-extraction
   __put_assign_type: ($) =>
     choice(
       alias(kw("PUT-BYTE"), $.identifier),
