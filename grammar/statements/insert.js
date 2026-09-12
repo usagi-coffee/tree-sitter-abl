@@ -1,6 +1,7 @@
 export default ({ kw }) => ({
   insert_statement: ($) => seq($.__insert_prefix, $._no_error_terminator),
   __insert_prefix: ($) =>
+    // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq(
       kw("INSERT"),
       field("record", $._identifier_or_qualified_name),
