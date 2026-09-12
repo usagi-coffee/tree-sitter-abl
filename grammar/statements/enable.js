@@ -13,6 +13,7 @@ export default ({ kw }) => ({
     ),
   __enable_options: ($) =>
     choice(
+      // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
       seq($.__enable_body, optional($.in_window_phrase), optional($.frame_phrase)),
       seq(optional($.in_window_phrase), $.frame_phrase),
     ),
