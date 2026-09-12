@@ -18,6 +18,7 @@ export default ({ kw }) => ({
     ),
 
   __update_record: ($) => $._identifier_or_qualified_name,
+  // oxlint-disable-next-line tree-sitter-optimize/body-extraction
   __update_field: ($) =>
     choice(
       alias($._skip_phrase, $.skip_phrase),
