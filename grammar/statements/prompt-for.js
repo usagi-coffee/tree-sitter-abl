@@ -12,6 +12,7 @@ export default ({ kw }) => ({
   __prompt_for_body: ($) => choice($.__prompt_for_fields_body, $.__prompt_for_record_body),
 
   __prompt_for_record_body: ($) =>
+    // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq(
       field("record", $.identifier),
       optional(seq(kw("EXCEPT"), $.__prompt_for_except_fields)),
