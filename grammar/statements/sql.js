@@ -198,6 +198,7 @@ export default ({ kw }) => ({
       alias($.__sql_order_term, $.order_term),
       optional($.__sql_order_by_tail),
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/tail-extraction
   __sql_order_by_tail: ($) =>
     seq(",", alias($.__sql_order_term, $.order_term), optional($.__sql_order_by_tail)),
   // The reference gives the ordering key as an expression or a column position,
