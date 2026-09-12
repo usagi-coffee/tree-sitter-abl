@@ -355,6 +355,7 @@ export default ({ kw }) => ({
         optional(field("size", choice($.number_literal, $.preprocessor_name, $.identifier))),
       ),
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/body-extraction
   __class_method_table_parameter: ($) =>
     choice(
       seq(
