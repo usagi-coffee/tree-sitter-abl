@@ -64,6 +64,7 @@ export default ({ kw }) => ({
     ),
 
   _menu_submenu: ($) =>
+    // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq(
       kw("SUB-MENU"),
       field("name", $.identifier),
