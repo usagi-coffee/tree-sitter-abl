@@ -8,6 +8,7 @@ export default ({ kw }) => ({
     seq(field("record", $.__update_record), optional($._except_fields), optional($.frame_phrase)),
 
   __update_fields_body: ($) =>
+    // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq(
       optional(alias(kw("UNLESS-HIDDEN"), $.unless_hidden)),
       $.__update_fields,
