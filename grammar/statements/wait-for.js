@@ -5,6 +5,7 @@ export default ({ kw }) => ({
     seq(
       kw("WAIT-FOR"),
       choice(
+        // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
         seq(
           alias($.__wait_for_of_phrase, $.of_phrase),
           optional($.__wait_for_of_tail),
