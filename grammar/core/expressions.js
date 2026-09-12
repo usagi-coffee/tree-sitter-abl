@@ -39,6 +39,7 @@ export default ({ kw }) => ({
       $.input_expression,
       alias($.include_expression, $.include_file_reference),
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/body-extraction
   _statement_primary_expression: ($) =>
     choice(
       prec(-2, $.if_preprocessor_directive),
