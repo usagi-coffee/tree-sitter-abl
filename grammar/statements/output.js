@@ -49,6 +49,7 @@ export default ({ kw }) => ({
       ),
     ),
 
+  // oxlint-disable-next-line tree-sitter-optimize/body-extraction
   __output_shared_option: ($) =>
     choice(
       alias(kw("ECHO"), $.echo),
