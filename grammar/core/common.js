@@ -31,6 +31,7 @@ export default ({ kw }) => ({
   _format_phrases: ($) => prec.right(seq($.format_phrase, optional($._format_phrases))),
   _text_fields: ($) =>
     prec.right(
+      // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
       seq(
         field("field", $._identifier_or_qualified_name),
         optional($.format_phrase),
