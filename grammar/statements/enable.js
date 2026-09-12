@@ -26,6 +26,7 @@ export default ({ kw }) => ({
   __enable_items_list: ($) =>
     prec.right(seq(alias($.__enable_item, $.enable_item), optional($.__enable_items_list))),
 
+  // oxlint-disable-next-line tree-sitter-optimize/body-extraction
   __enable_item: ($) =>
     choice(
       // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
