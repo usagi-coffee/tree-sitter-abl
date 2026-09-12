@@ -1,5 +1,6 @@
 export default ({ kw }) => ({
   record_phrase: ($) =>
+    // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq(
       field("record", $._identifier_or_qualified_name),
       optional($.__record_field_list_preprocessor_tail),
