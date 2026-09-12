@@ -80,6 +80,7 @@ export default ({ kw }) => ({
       ),
     ),
 
+  // oxlint-disable-next-line tree-sitter-optimize/body-extraction
   __browse_flag_option: ($) =>
     choice(
       alias(kw("DROP-TARGET"), $.drop_target),
