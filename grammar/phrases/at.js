@@ -13,6 +13,7 @@ export default ({ kw }) => ({
       ),
     ),
 
+  // oxlint-disable-next-line tree-sitter-optimize/body-extraction
   __at_column_row: ($) =>
     // oxlint-disable-next-line tree-sitter-optimize/recurse
     repeat1(
