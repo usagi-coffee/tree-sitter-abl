@@ -1,6 +1,7 @@
 export default ({ kw }) => ({
   copy_lob_statement: ($) => seq($.__copy_lob_prefix, $._no_error_terminator),
 
+  // oxlint-disable-next-line tree-sitter-optimize/body-extraction
   __copy_lob_prefix: ($) =>
     seq(
       kw("COPY-LOB"),
