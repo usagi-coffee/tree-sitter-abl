@@ -42,6 +42,7 @@ export default ({ kw }) => ({
       optional($.__delete_widget_tail),
     ),
 
+  // oxlint-disable-next-line tree-sitter-optimize/tail-extraction
   __delete_widget_tail: ($) =>
     seq(",", field("widget", $._expression), optional($.__delete_widget_tail)),
 });
