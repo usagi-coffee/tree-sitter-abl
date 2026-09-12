@@ -77,6 +77,7 @@ export default ({ kw }) => ({
       seq(kw("BROWSE"), field("browse", $.__widget_name)),
       seq(choice(kw("MENU"), kw("SUB-MENU")), field("menu", $.__widget_name)),
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/body-extraction
   _color_font_option: ($) =>
     prec(
       "color_font_value",
