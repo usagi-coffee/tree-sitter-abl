@@ -1,6 +1,7 @@
 export default ({ kw }) => ({
   dynamic_function_call: ($) => seq($.__dynamic_function_prefix, ")"),
   __dynamic_function_prefix: ($) =>
+    // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq(
       kw("DYNAMIC-FUNCTION"),
       "(",
