@@ -106,6 +106,7 @@ export default ({ kw }) => ({
   __on_ui_event_target: ($) =>
     choice(
       alias(kw("ANYWHERE"), $.anywhere),
+      // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
       seq(
         alias($.__on_of_phrase, $.of_phrase),
         optional($.__on_ui_event_widgets_tail),
