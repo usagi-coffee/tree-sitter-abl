@@ -314,6 +314,7 @@ export default grammar({
           $.argument_reference,
           alias($.__include_operator_argument, $.comparison_operator),
         ),
+      // oxlint-disable-next-line tree-sitter-optimize/token-packing
       __include_operator_argument: ($) => choice("<>", ">=", "<=", "=", ">", "<"),
 
       // Preprocessor
