@@ -1,11 +1,7 @@
 export default ({ kw }) => ({
   enable_statement: ($) => seq($.__enable_prefix, $._terminator),
 
-  __enable_prefix: ($) =>
-    seq(
-      kw("ENABLE"),
-      optional($.__enable_prefix_tail),
-    ),
+  __enable_prefix: ($) => seq(kw("ENABLE"), optional($.__enable_prefix_tail)),
   __enable_prefix_tail: ($) =>
     choice(
       seq(alias(kw("UNLESS-HIDDEN"), $.unless_hidden), optional($.__enable_options)),
