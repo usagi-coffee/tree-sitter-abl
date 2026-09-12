@@ -2,6 +2,7 @@ export default ({ kw }) => ({
   selection_list_phrase: ($) => seq(kw("SELECTION-LIST"), optional($.__selection_list_options)),
   __selection_list_options: ($) =>
     prec.right(seq($.__selection_list_option, optional($.__selection_list_options))),
+  // oxlint-disable-next-line tree-sitter-optimize/body-extraction
   __selection_list_option: ($) =>
     choice(
       kw("SINGLE"),
