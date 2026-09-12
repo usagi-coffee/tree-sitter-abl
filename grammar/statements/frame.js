@@ -50,6 +50,7 @@ export default ({ kw }) => ({
       ),
     ),
 
+  // oxlint-disable-next-line tree-sitter-optimize/body-extraction
   __frame_form_item: ($) =>
     choice(
       prec.right(seq(kw("SPACE"), "(", optional(field("space", $._expression)), ")")),
