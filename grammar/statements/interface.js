@@ -46,17 +46,12 @@ export default ({ kw }) => ({
     ),
 
   __interface_temp_table: ($) =>
+    // oxlint-disable-next-line tree-sitter-optimize/optional-body-extraction
     seq(
       $._define_keyword,
       kw("TEMP-TABLE"),
       $._table_body,
-      // oxlint-disable-next-line tree-sitter-optimize/recurse
-      repeat(
-        choice(
-          alias($._table_field, $.temp_table_field),
-          alias($._table_index, $.temp_table_index),
-        ),
-      ),
+      optional($._temp_table_items),
       $._terminator,
     ),
 

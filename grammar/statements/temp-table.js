@@ -1,16 +1,6 @@
 export default ({ kw }) => ({
   temp_table_definition: ($) => seq($.__temp_table_definition_body, $._terminator),
-  __temp_table_definition_body: ($) =>
-    seq(
-      $.__temp_table_prefix,
-      // oxlint-disable-next-line tree-sitter-optimize/recurse
-      repeat(
-        choice(
-          alias($._table_field, $.temp_table_field),
-          alias($._table_index, $.temp_table_index),
-        ),
-      ),
-    ),
+  __temp_table_definition_body: ($) => seq($.__temp_table_prefix, optional($._temp_table_items)),
 
   __temp_table_prefix: ($) =>
     seq($._define_keyword, optional($.__temp_table_modifier), kw("TEMP-TABLE"), $._table_body),

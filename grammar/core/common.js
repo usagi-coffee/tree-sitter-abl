@@ -275,6 +275,17 @@ export default ({ kw }) => ({
   _table_field_options: ($) =>
     prec.right(seq($.__temp_table_field_option, optional($._table_field_options))),
 
+  _temp_table_items: ($) =>
+    prec.right(
+      seq(
+        choice(
+          alias($._table_field, $.temp_table_field),
+          alias($._table_index, $.temp_table_index),
+        ),
+        optional($._temp_table_items),
+      ),
+    ),
+
   _table_index: ($) =>
     seq(
       kw("INDEX"),
