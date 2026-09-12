@@ -31,9 +31,11 @@ the change in the same commit, but do not bundle unrelated grammar, tests,
 formatting, or cleanup changes; split them into separate commits when they can
 be reviewed or reverted independently.
 
-Always include parser-count deltas at the end of the commit description in exactly this
-form and order. The four metric lines must be separate physical lines; do not write
-literal `\\n` escape sequences into the message.
+For grammar and parser changes with any non-zero parser-count delta, include parser-count
+deltas at the end of the commit description in exactly this form and order. It is
+acceptable to omit the parser-count annotation when all four deltas are zero or when the
+change is not grammar-related. When included, the four metric lines must be separate
+physical lines; do not write literal `\\n` escape sequences into the message.
 
 Use this complete template for grammar and parser changes:
 
