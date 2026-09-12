@@ -26,10 +26,7 @@ export default ({ kw }) => ({
   // token of lookahead, hence the statement-local variant.
   _widget_phrases: ($) =>
     prec.right(
-      seq(
-        alias($.__view_hide_widget_phrase, $.widget_phrase),
-        optional($._widget_phrases),
-      ),
+      seq(alias($.__view_hide_widget_phrase, $.widget_phrase), optional($._widget_phrases)),
     ),
   _format_phrases: ($) => prec.right(seq($.format_phrase, optional($._format_phrases))),
   _text_fields: ($) =>
