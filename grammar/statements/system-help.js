@@ -10,6 +10,7 @@ export default ({ kw }) => ({
       optional($.__system_help_action),
     ),
 
+  // oxlint-disable-next-line tree-sitter-optimize/body-extraction
   __system_help_action: ($) =>
     choice(
       alias(kw("CONTENTS"), $.contents),
