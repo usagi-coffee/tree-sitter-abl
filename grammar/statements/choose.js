@@ -17,6 +17,7 @@ export default ({ kw }) => ({
   __choose_field_helps: ($) =>
     prec.right(seq($.__choose_field_help, optional($.__choose_field_helps))),
   __choose_options: ($) => prec.right(seq($.__choose_option, optional($.__choose_options))),
+  // oxlint-disable-next-line tree-sitter-optimize/body-extraction
   __choose_option: ($) =>
     choice(
       alias(kw("AUTO-RETURN"), $.auto_return),
