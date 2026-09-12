@@ -284,6 +284,7 @@ export default ({ kw }) => ({
       $._serialization_modifier,
     ),
   __class_property_modifier_tail: ($) =>
+    // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq(
       alias(kw("OVERRIDE"), $.override_modifier),
       optional($._member_access_modifier),
