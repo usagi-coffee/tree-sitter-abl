@@ -12,6 +12,7 @@ export default ({ kw }) => ({
   __set_body: ($) => choice($.__set_record_body, $.__set_fields_body),
 
   __set_fields_body: ($) =>
+    // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq(
       $.__set_fields,
       optional(alias($._go_on_phrase, $.go_on_phrase)),
