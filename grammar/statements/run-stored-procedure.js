@@ -3,6 +3,7 @@ export default ({ kw }) => ({
     seq(kw("RUN"), $.__run_stored_procedure_body, $._terminator),
 
   __run_stored_procedure_body: ($) =>
+    // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq(
       kw("STORED-PROCEDURE"),
       field("procedure", $._identifier_or_string_literal),
