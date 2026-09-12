@@ -290,6 +290,7 @@ export default ({ kw }) => ({
     prec.right(seq($.__temp_table_index_modifier, optional($.__temp_table_index_modifiers))),
 
   _dataset_body: ($) =>
+    // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq(
       field("name", $.identifier),
       // oxlint-disable-next-line tree-sitter-optimize/recurse
