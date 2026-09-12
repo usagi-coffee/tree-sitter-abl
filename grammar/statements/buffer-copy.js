@@ -1,6 +1,7 @@
 export default ({ kw }) => ({
   buffer_copy_statement: ($) => seq($.__buffer_copy_prefix, $._no_error_terminator),
 
+  // oxlint-disable-next-line tree-sitter-optimize/body-extraction
   __buffer_copy_prefix: ($) =>
     // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq(
