@@ -4,6 +4,7 @@ export default ({ kw }) => ({
   __input_body: ($) =>
     choice(
       alias($._close_keyword, $.close),
+      // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
       seq(
         kw("FROM"),
         $.__input_from_target,
