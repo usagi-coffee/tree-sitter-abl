@@ -98,6 +98,7 @@ export default ({ kw }) => ({
     choice(
       seq(alias($._new_keyword, $.new_modifier), alias(kw("SHARED"), $.scope_modifier)),
       alias(kw("SHARED"), $.scope_modifier),
+      // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
       seq(
         choice(alias(kw("PRIVATE"), $.access_modifier), alias(kw("PROTECTED"), $.access_modifier)),
         optional(alias(kw("STATIC"), $.static_modifier)),
