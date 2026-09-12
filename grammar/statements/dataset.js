@@ -58,6 +58,7 @@ export default ({ kw }) => ({
     ),
 
   __dataset_parent_id_relation: ($) =>
+    // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq(
       kw("PARENT-ID-RELATION"),
       $.__dataset_relation_head,
