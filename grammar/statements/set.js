@@ -31,6 +31,7 @@ export default ({ kw }) => ({
   __set_frame_editing_tail: ($) =>
     choice(seq($.frame_phrase, optional($.editing_phrase)), $.editing_phrase),
 
+  // oxlint-disable-next-line tree-sitter-optimize/body-extraction
   __set_field: ($) =>
     choice(
       alias($._skip_phrase, $.skip_phrase),
