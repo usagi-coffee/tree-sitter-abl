@@ -62,6 +62,7 @@ export default ({ kw }) => ({
       // phrase, with SHARED still spelled out afterward.
       seq($.preprocessor_name, alias(kw("SHARED"), $.scope_modifier)),
       alias(kw("SHARED"), $.scope_modifier),
+      // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
       seq(
         $._member_access_modifier,
         optional(alias(kw("STATIC"), $.static_modifier)),
