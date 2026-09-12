@@ -69,6 +69,7 @@ export default ({ kw }) => ({
       ),
     ),
   __assign_input_fields: ($) =>
+    // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq(
       field("field", $._assignable),
       optional(seq("=", field("value", $._expression))),
