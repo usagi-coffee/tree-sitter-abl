@@ -5,6 +5,7 @@ export default ({ kw }) => ({
   __input_output_body: ($) =>
     choice(
       alias($._close_keyword, $.close),
+      // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
       seq(
         kw("THROUGH"),
         $._program_target,
