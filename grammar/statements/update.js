@@ -4,6 +4,7 @@ export default ({ kw }) => ({
   __update_prefix: ($) => seq(kw("UPDATE"), choice($.__update_record_body, $.__update_fields_body)),
 
   __update_record_body: ($) =>
+    // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq(field("record", $.__update_record), optional($._except_fields), optional($.frame_phrase)),
 
   __update_fields_body: ($) =>
