@@ -70,6 +70,7 @@ export default ({ kw }) => ({
       $.__view_hide_widget_ref,
       seq(choice(kw("MENU"), kw("SUB-MENU")), field("menu", $.__widget_name)),
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/body-extraction
   __view_hide_widget_ref: ($) =>
     choice(
       seq(
