@@ -41,6 +41,7 @@ export default ({ kw }) => ({
       prec.right(seq($.__display_item, optional($.__display_items_tail))),
     ),
   __display_items_tail: ($) => prec.right(seq($.__display_item, optional($.__display_items_tail))),
+  // oxlint-disable-next-line tree-sitter-optimize/body-extraction
   __display_item: ($) =>
     choice(
       // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
