@@ -47,6 +47,7 @@ export default ({ kw }) => ({
     seq(kw("DOWN"), optional($._to_keyword), optional(field("down", $._expression))),
 
   __persistent_trigger: ($) =>
+    // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq(
       kw("PERSISTENT"),
       kw("RUN"),
