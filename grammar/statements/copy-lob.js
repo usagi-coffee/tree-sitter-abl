@@ -39,6 +39,7 @@ export default ({ kw }) => ({
     ),
 
   __copy_lob_convert_phrase: ($) =>
+    // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq(
       kw("CONVERT"),
       optional(seq(kw("SOURCE"), kw("CODEPAGE"), field("source_codepage", $._expression))),
