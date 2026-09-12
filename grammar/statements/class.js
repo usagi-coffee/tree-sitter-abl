@@ -274,6 +274,7 @@ export default ({ kw }) => ({
         optional($.__class_property_class_modifier),
         optional(choice($.__class_property_modifier_tail, $._serialization_modifier)),
       ),
+      // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
       seq(
         $.__class_property_class_modifier,
         optional($._member_access_modifier),
