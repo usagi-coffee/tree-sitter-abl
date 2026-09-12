@@ -2,6 +2,7 @@ export default ({ kw }) => ({
   get_statement: ($) => seq($.__get_prefix, $._terminator),
 
   __get_prefix: ($) =>
+    // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq(
       kw("GET"),
       field("direction", choice(kw("FIRST"), kw("NEXT"), kw("PREV"), kw("LAST"), kw("CURRENT"))),
