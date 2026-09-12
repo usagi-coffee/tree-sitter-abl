@@ -2,6 +2,7 @@ export default ({ kw }) => ({
   load_statement: ($) => seq($.__load_prefix, $._no_error_terminator),
 
   __load_prefix: ($) =>
+    // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq(
       kw("LOAD"),
       field("file", $._expression),
