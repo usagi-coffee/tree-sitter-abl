@@ -83,6 +83,7 @@ export default ({ kw }) => ({
       field("target", $._identifier_or_array_access),
       optional($.__sql_fetch_target_tail),
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/tail-extraction
   __sql_fetch_target_tail: ($) =>
     seq(",", field("target", $._identifier_or_array_access), optional($.__sql_fetch_target_tail)),
 
