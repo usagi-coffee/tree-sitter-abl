@@ -224,6 +224,7 @@ export default ({ kw }) => ({
     ),
   _table_body_tail: ($) =>
     choice(
+      // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
       seq(
         // oxlint-disable-next-line tree-sitter-optimize/recurse
         repeat1(
@@ -241,7 +242,6 @@ export default ({ kw }) => ({
       seq(alias(kw("REFERENCE-ONLY"), $.reference_only), optional($._table_options)),
       $._table_options,
     ),
-
   _table_options: ($) =>
     prec.right(
       seq(
