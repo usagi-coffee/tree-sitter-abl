@@ -1,4 +1,5 @@
 export default ({ kw }) => ({
+  // oxlint-disable-next-line tree-sitter-optimize/body-extraction
   color_phrase: ($) =>
     choice(
       $.number_literal,
