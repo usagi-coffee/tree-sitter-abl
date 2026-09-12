@@ -10,6 +10,7 @@ export default ({ kw }) => ({
     ),
   __rectangle_options: ($) =>
     prec.right(seq($.__rectangle_option, optional($.__rectangle_options))),
+  // oxlint-disable-next-line tree-sitter-optimize/body-extraction
   __rectangle_option: ($) =>
     choice(
       seq($._like_keyword, field("like", $.identifier)),
