@@ -114,6 +114,7 @@ export default ({ kw }) => ({
       ),
     ),
   __on_ui_anywhere_branch: ($) => seq($.__on_ui_events, alias(kw("ANYWHERE"), $.anywhere)),
+  // oxlint-disable-next-line tree-sitter-optimize/body-extraction
   __on_database_event_branch: ($) =>
     choice(
       seq(
