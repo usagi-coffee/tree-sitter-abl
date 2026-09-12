@@ -100,6 +100,7 @@ export default ({ kw }) => ({
     ),
   __function_definition_parameter: ($) =>
     seq(optional(field("direction", $._parameter_direction)), $.__function_named_parameter_body),
+  // oxlint-disable-next-line tree-sitter-optimize/body-extraction
   __function_named_parameter_body: ($) =>
     choice(
       seq(
