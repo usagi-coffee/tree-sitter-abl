@@ -6,6 +6,7 @@ export default ({ kw }) => ({
 
   __menu_body: ($) => seq(field("name", $.identifier), optional($.__menu_options)),
   __menu_options: ($) => prec.right(seq($.__menu_option, optional($.__menu_options))),
+  // oxlint-disable-next-line tree-sitter-optimize/body-extraction
   __menu_option: ($) =>
     choice(
       $._color_font_option,
