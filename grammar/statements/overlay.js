@@ -1,6 +1,7 @@
 export default ({ kw }) => ({
   overlay_statement: ($) => seq($.__overlay_prefix, $._terminator),
 
+  // oxlint-disable-next-line tree-sitter-optimize/body-extraction
   __overlay_prefix: ($) =>
     seq(
       kw("OVERLAY"),
