@@ -5,6 +5,7 @@ export default ({ kw }) => ({
       choice(
         $.combo_box_phrase,
         $.editor_phrase,
+        // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
         seq(
           field("widget", kw("FILL-IN")),
           optional(kw("NATIVE")),
