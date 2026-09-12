@@ -36,6 +36,7 @@ export default ({ kw }) => ({
       alias($._skip_phrase, $.skip_phrase),
       alias($._space_phrase, $.space_phrase),
       prec.right(
+        // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
         seq(
           field("field", $._identifier_or_qualified_name),
           optional($.format_phrase),
