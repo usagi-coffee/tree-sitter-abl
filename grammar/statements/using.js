@@ -8,6 +8,7 @@ export default ({ kw }) => ({
       optional(alias($.__using_from_clause, $.from_clause)),
     ),
 
+  // oxlint-disable-next-line tree-sitter-optimize/shared-recursion
   __using_type_refs: ($) =>
     prec.right(seq($.__using_type_ref, optional(seq(",", $.__using_type_refs)))),
 
@@ -28,6 +29,7 @@ export default ({ kw }) => ({
       ),
     ),
 
+  // oxlint-disable-next-line tree-sitter-optimize/shared-recursion
   __using_type_arguments: ($) =>
     prec.right(seq($.__using_type_ref, optional(seq(",", $.__using_type_arguments)))),
 

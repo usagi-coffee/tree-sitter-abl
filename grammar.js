@@ -544,6 +544,7 @@ export default grammar({
       parenthesized_expression: ($) => seq($._parenthesized_expression_prefix, ")"),
       _parenthesized_expression_prefix: ($) => seq("(", $._expression),
       _expressions: ($) => seq($._expression, optional($.__expressions_tail)),
+      // oxlint-disable-next-line tree-sitter-optimize/shared-recursion
       __expressions_tail: ($) => seq(",", $._expression, optional($.__expressions_tail)),
       unary_expression: ($) =>
         choice(
