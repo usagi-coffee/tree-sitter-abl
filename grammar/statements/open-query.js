@@ -2,6 +2,7 @@ export default ({ kw }) => ({
   open_query_statement: ($) => seq($.__open_query_prefix, $._terminator),
 
   __open_query_prefix: ($) =>
+    // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq(
       kw("OPEN"),
       kw("QUERY"),
