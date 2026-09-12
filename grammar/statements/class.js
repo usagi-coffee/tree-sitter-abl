@@ -150,6 +150,7 @@ export default ({ kw }) => ({
       optional(field("direction", $._parameter_direction)),
       choice($.__class_named_parameter_body, $.__class_method_table_parameter),
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/optional-body-extraction
   __class_method_body: ($) => seq($.__class_compound_body, optional(kw("METHOD")), $._terminator),
 
   __class_constructor_body: ($) =>
