@@ -6,6 +6,7 @@ export default ({ kw }) => ({
 
   __image_options: ($) => prec.right(seq($.__image_option, optional($.__image_options))),
 
+  // oxlint-disable-next-line tree-sitter-optimize/body-extraction
   __image_option: ($) =>
     choice(
       $.image_phrase,
