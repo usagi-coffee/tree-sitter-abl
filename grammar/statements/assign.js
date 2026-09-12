@@ -55,6 +55,7 @@ export default ({ kw }) => ({
       $.__assign_input_fields,
       optional($.__assign_input_sections),
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/tail-extraction
   __assign_input_sections: ($) =>
     prec.right(
       seq(
