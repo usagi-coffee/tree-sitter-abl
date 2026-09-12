@@ -21,6 +21,7 @@ export default ({ kw }) => ({
     ),
 
   __prompt_for_fields_body: ($) =>
+    // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq(
       $.__prompt_for_fields,
       optional(alias($._go_on_phrase, $.go_on_phrase)),
