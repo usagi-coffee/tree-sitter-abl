@@ -10,6 +10,7 @@ export default ({ kw }) => ({
     ),
 
   __frame_body: ($) =>
+    // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq(
       field("name", choice($.identifier, $.preprocessor_name)),
       choice(
