@@ -161,6 +161,7 @@ export default ({ kw }) => ({
       $.__on_revert_action,
       seq(field("function", alias($.__on_ui_key_function, $.key_function)), $._terminator),
       $._statement,
+      // oxlint-disable-next-line tree-sitter-optimize/optional-body-extraction
       seq(
         kw("PERSISTENT"),
         kw("RUN"),
