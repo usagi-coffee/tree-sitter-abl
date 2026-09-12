@@ -29,6 +29,7 @@ export default ({ kw }) => ({
         optional($.__event_type_modifiers),
         optional(alias(kw("OVERRIDE"), $.override_modifier)),
       ),
+      // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
       seq(
         $.__event_type_modifiers,
         optional($._member_access_modifier),
