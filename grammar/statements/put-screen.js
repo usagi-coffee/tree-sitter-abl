@@ -7,6 +7,7 @@ export default ({ kw }) => ({
       optional(alias($.__put_screen_color_phrase, $.color_phrase)),
       $.__put_screen_output,
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/body-extraction
   __put_screen_output: ($) =>
     choice(
       // Standard order: [ROW] [COL] value.
