@@ -323,6 +323,7 @@ export default grammar({
           field("name", $.identifier),
           field("value", $.preprocessor_value),
         ),
+      // oxlint-disable-next-line tree-sitter-optimize/tail-extraction
       scoped_define_preprocessor_directive: ($) =>
         seq(
           token(prec(1, /&SCOPED-DEFINE/i)),
