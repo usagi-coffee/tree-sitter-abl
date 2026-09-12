@@ -334,6 +334,7 @@ export default ({ kw }) => ({
     ),
   __dataset_for_phrase: ($) =>
     seq($._for_keyword, field("table", $.identifier), optional($.__dataset_for_table_tail)),
+  // oxlint-disable-next-line tree-sitter-optimize/tail-extraction
   __dataset_for_table_tail: ($) =>
     seq(",", field("table", $.identifier), optional($.__dataset_for_table_tail)),
 
