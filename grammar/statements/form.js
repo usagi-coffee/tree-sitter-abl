@@ -14,6 +14,7 @@ export default ({ kw }) => ({
     ),
   __form_items: ($) => prec.right(seq(alias($.__form_item, $.form_item), optional($.__form_items))),
 
+  // oxlint-disable-next-line tree-sitter-optimize/body-extraction
   __form_item: ($) =>
     prec.right(
       choice(
