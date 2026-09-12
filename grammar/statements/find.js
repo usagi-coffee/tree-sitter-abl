@@ -2,6 +2,7 @@ export default ({ kw }) => ({
   find_statement: ($) => seq($.__find_prefix, $._terminator),
 
   __find_prefix: ($) =>
+    // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq(
       kw("FIND"),
       optional(
