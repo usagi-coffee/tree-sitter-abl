@@ -56,6 +56,7 @@ export default ({ kw }) => ({
       prec.right(seq(kw("SKIP"), "(", optional(field("skip", $._expression)), ")")),
       prec.right(alias(kw("SPACE"), $.space)),
       prec.right(alias(kw("SKIP"), $.skip)),
+      // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
       seq(
         field("field", choice($._identifier_or_array_access, alias($._widgets, $.identifier))),
         optional(alias($.at_phrase, $.format_phrase)),
