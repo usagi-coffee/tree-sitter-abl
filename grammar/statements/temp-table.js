@@ -113,6 +113,7 @@ export default ({ kw }) => ({
   __temp_table_label_tail: ($) => seq(",", $.string_literal, optional($.__temp_table_label_tail)),
   __temp_table_serialize_name_phrase: ($) =>
     seq(kw("SERIALIZE-NAME"), field("serialize_name", $.string_literal)),
+  // oxlint-disable-next-line tree-sitter-optimize/body-extraction
   __temp_table_modifier: ($) =>
     choice(
       seq(
