@@ -23,6 +23,7 @@ export default ({ kw }) => ({
 
   __put_expression_item: ($) =>
     prec.left(
+      // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
       seq(
         field("value", $._expression),
         optional($.format_phrase),
