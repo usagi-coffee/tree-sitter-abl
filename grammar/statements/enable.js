@@ -28,6 +28,7 @@ export default ({ kw }) => ({
 
   __enable_item: ($) =>
     choice(
+      // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
       seq(
         field("field", $._identifier_or_array_access),
         optional($._format_phrases),
