@@ -87,6 +87,7 @@ export default ({ kw }) => ({
   __run_on_server: ($) => seq($._on_keyword, kw("SERVER"), field("server", $._expression)),
 
   __run_asynchronous: ($) =>
+    // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq(kw("ASYNCHRONOUS"), optional($.__run_persistence_set_tail), optional($.__run_event_choice)),
   __run_event_choice: ($) =>
     choice(
