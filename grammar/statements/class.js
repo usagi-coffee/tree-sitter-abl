@@ -154,6 +154,7 @@ export default ({ kw }) => ({
   __class_method_body: ($) => seq($.__class_compound_body, optional(kw("METHOD")), $._terminator),
 
   __class_constructor_body: ($) =>
+    // oxlint-disable-next-line tree-sitter-optimize/optional-body-extraction
     seq($.__class_compound_body, optional(choice(kw("CONSTRUCTOR"), kw("METHOD"))), $._terminator),
 
   __class_destructor_body: ($) =>
