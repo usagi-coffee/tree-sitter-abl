@@ -50,6 +50,7 @@ export default ({ kw }) => ({
   __temp_table_like_phrase: ($) => seq($._like_keyword, $.__temp_table_like_body),
   __temp_table_like_sequential_phrase: ($) => seq(kw("LIKE-SEQUENTIAL"), $.__temp_table_like_body),
   __temp_table_like_body: ($) =>
+    // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq(
       field("like", $.__temp_table_like_name),
       optional(alias(kw("VALIDATE"), $.validate)),
