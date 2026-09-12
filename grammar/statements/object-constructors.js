@@ -19,5 +19,6 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/tail-extraction
   // oxlint-disable-next-line tree-sitter-optimize/optional-body-extraction
   // oxlint-disable-next-line tree-sitter-optimize/tail-extraction
+  // oxlint-disable-next-line tree-sitter-optimize/optional-body-extraction
   super_statement: ($) => seq(kw("SUPER"), optional($.arguments), $._terminator),
 });
