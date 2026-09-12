@@ -216,6 +216,7 @@ export default ({ kw }) => ({
   __space_parenthesized_prefix: ($) => seq(kw("SPACE"), "(", field("space", $._expression)),
 
   _table_body: ($) =>
+    // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq(
       field("name", $.identifier),
       optional(alias($._no_undo_keyword, $.no_undo)),
