@@ -3,6 +3,7 @@ export default ({ kw }) => ({
 
   __set_statement_body: ($) => seq($.__set_prefix, $.__set_body),
   __set_prefix: ($) =>
+    // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq(
       kw("SET"),
       optional($._stream_phrase),
