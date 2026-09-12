@@ -4,6 +4,7 @@ export default ({ kw }) => ({
   __compile_prefix: ($) =>
     seq(kw("COMPILE"), field("file", $.__compile_file), optional($.__compile_options)),
   __compile_options: ($) => prec.right(seq($.__compile_option, optional($.__compile_options))),
+  // oxlint-disable-next-line tree-sitter-optimize/body-extraction
   __compile_option: ($) =>
     choice(
       // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
