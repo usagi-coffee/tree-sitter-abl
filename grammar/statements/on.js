@@ -244,6 +244,7 @@ export default ({ kw }) => ({
   __on_ui_event_widgets_tail: ($) =>
     seq(kw("OR"), $.__on_ui_event_widgets, optional($.__on_ui_event_widgets_tail)),
   __on_of_phrase: ($) => seq($._of_keyword, $.__on_of_widget, optional($.__on_of_widget_tail)),
+  // oxlint-disable-next-line tree-sitter-optimize/tail-extraction
   __on_of_widget_tail: ($) => seq(",", $.__on_of_widget, optional($.__on_of_widget_tail)),
   __on_of_widget: ($) => seq(field("widget", $.widget_phrase)),
   __on_referencing_phrase: ($) =>
