@@ -20,6 +20,7 @@ export default ({ kw }) => ({
     ),
 
   __var_variable: ($) =>
+    // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq(
       field("name", $.identifier),
       optional(field("extent", $.__var_extent)),
