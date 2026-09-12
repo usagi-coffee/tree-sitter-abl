@@ -157,6 +157,7 @@ export default ({ kw }) => ({
       alias(kw("ANYWHERE"), $.anywhere),
       $._statement,
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/body-extraction
   __on_trigger_action: ($) =>
     choice(
       $.__on_revert_action,
