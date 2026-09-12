@@ -65,6 +65,7 @@ export default ({ kw }) => ({
 
   __format_editor_options: ($) =>
     prec.right(seq($.__format_editor_option, optional($.__format_editor_options))),
+  // oxlint-disable-next-line tree-sitter-optimize/body-extraction
   __format_editor_option: ($) =>
     choice(
       seq(kw("BUFFER-CHARS"), field("buffer_chars", $.number_literal)),
