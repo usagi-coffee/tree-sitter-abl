@@ -12,6 +12,7 @@ export default ({ kw }) => ({
       kw("NO-TAB-STOP"),
     ),
 
+  // oxlint-disable-next-line tree-sitter-optimize/body-extraction
   _format_field_option: ($) =>
     choice(
       $._as_like,
