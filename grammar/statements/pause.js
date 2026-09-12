@@ -1,6 +1,7 @@
 export default ({ kw }) => ({
   pause_statement: ($) => seq($.__pause_prefix, $._terminator),
   __pause_prefix: ($) =>
+    // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq(
       kw("PAUSE"),
       optional(field("duration", $._expression)),
