@@ -37,6 +37,7 @@ export default ({ kw }) => ({
     ),
   __record_query_after_frame: ($) =>
     choice($.__record_query_where_or_lock, $.__record_query_use_index),
+  // oxlint-disable-next-line tree-sitter-optimize/body-extraction
   __record_query_where_or_lock: ($) =>
     choice(
       seq(
