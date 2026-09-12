@@ -47,9 +47,17 @@ export default ({ kw }) => ({
       optional(kw("RETURNS", { offset: 5 })),
       optional(kw("CLASS")),
       field("type", $._type_name),
-      optional(alias($._extent_phrase, $.extent_phrase)),
-      optional($._routine_access_modifier),
-      optional(alias($.__function_parameters, $.parameters)),
+      optional($.__function_forward_tail),
+    ),
+  __function_forward_tail: ($) =>
+    choice(
+      seq(
+        optional(alias($._extent_phrase, $.extent_phrase)),
+        optional($._routine_access_modifier),
+        alias($.__function_parameters, $.parameters),
+      ),
+      seq(optional(alias($._extent_phrase, $.extent_phrase)), $._routine_access_modifier),
+      alias($._extent_phrase, $.extent_phrase),
     ),
 
   __function_forward_target: ($) =>
