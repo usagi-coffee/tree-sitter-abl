@@ -7,6 +7,7 @@ export default ({ kw }) => ({
       $._primary_expression,
     ),
 
+  // oxlint-disable-next-line tree-sitter-optimize/body-extraction
   _primary_expression: ($) =>
     choice(
       prec(-2, $.if_preprocessor_directive),
