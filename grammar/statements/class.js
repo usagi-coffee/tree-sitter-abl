@@ -255,6 +255,7 @@ export default ({ kw }) => ({
       optional(alias($._no_undo_keyword, $.no_undo)),
     ),
 
+  // oxlint-disable-next-line tree-sitter-optimize/body-extraction
   __class_option: ($) =>
     choice(
       seq(kw("INHERITS"), field("super", $._type_name)),
