@@ -30,6 +30,7 @@ export default ({ kw }) => ({
   __for_sort_clauses: ($) => prec.right(seq($.__for_sort_clause, optional($.__for_sort_clauses))),
   __for_record_or_variables: ($) => choice($.__for_record_phrase_section, $._loop_phrase),
   __for_record_phrase_section: ($) =>
+    // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq($.__for_record_phrases, optional($.__for_sort_clauses), optional($._loop_phrase)),
 
   __for_record_phrases: ($) =>
