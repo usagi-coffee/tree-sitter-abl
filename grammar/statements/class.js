@@ -267,6 +267,7 @@ export default ({ kw }) => ({
     ),
   __class_options: ($) => prec.right(seq($.__class_option, optional($.__class_options))),
 
+  // oxlint-disable-next-line tree-sitter-optimize/body-extraction
   __class_property_definition_modifier: ($) =>
     choice(
       // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
