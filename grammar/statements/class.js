@@ -71,6 +71,7 @@ export default ({ kw }) => ({
         $.__class_body_opener,
         alias($.__class_method_body, $.body),
       ),
+      // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
       seq(
         $.__class_method_definition_prefix,
         kw("ABSTRACT"),
