@@ -10,6 +10,7 @@ export default ({ kw }) => ({
     ),
 
   _work_table_body: ($) =>
+    // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq(
       field("name", $.identifier),
       optional($.__work_table_like_no_undo_tail),
