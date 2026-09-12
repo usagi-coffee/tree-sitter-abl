@@ -120,6 +120,7 @@ export default ({ kw }) => ({
         alias(kw("SHARED"), $.scope_modifier),
       ),
       alias(kw("SHARED"), $.scope_modifier),
+      // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
       seq(
         alias(kw("STATIC"), $.static_modifier),
         optional(
