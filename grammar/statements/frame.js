@@ -42,6 +42,7 @@ export default ({ kw }) => ({
     choice(
       $.__frame_skip_phrase,
       $._display_space_phrase,
+      // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
       seq(
         field("value", $._expression),
         optional($.at_phrase),
