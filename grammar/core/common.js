@@ -100,6 +100,7 @@ export default ({ kw }) => ({
       alias(kw("SHARED"), $.scope_modifier),
       alias(kw("PRIVATE"), $.access_modifier),
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/body-extraction
   _buffer_query_modifier: ($) =>
     choice(
       seq(alias($._new_keyword, $.new_modifier), alias(kw("SHARED"), $.scope_modifier)),
