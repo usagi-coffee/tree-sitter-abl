@@ -1,0 +1,31 @@
+================================================================================
+BUFFER-COMPARE and FRAME - qualified field exclusions
+================================================================================
+
+BUFFER-COMPARE bSrc EXCEPT Customer.Name Other.Field TO bTarget NO-ERROR.
+DEFINE FRAME f Customer EXCEPT Customer.Name Other.Field WITH NO-BOX.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (buffer_compare_statement
+    source: (identifier)
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    target: (identifier)
+    (no_error))
+  (frame_definition
+    name: (identifier)
+    record: (identifier)
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    field: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (frame_phrase
+      (no_box))))

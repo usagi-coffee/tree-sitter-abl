@@ -37,11 +37,7 @@ export default ({ kw }) => ({
     ),
 
   __buffer_compare_field_phrase: ($) =>
-    seq(choice(kw("EXCEPT"), $._using_keyword), $.__buffer_compare_fields),
-  __buffer_compare_fields: ($) =>
-    prec.right(
-      seq(field("field", $._identifier_or_qualified_name), optional($.__buffer_compare_fields)),
-    ),
+    seq(choice(kw("EXCEPT"), $._using_keyword), $._field_references),
 
   __buffer_compare_save_phrase: ($) =>
     seq(kw("SAVE"), optional(seq(kw("RESULT"), $._in_keyword)), field("result", $._expression)),

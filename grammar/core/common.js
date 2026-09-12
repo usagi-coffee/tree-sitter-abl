@@ -17,6 +17,8 @@ export default ({ kw }) => ({
   _field_names: ($) => seq($._identifier_or_qualified_name, optional($._field_names_tail)),
   _field_names_tail: ($) =>
     seq(optional(","), $._identifier_or_qualified_name, optional($._field_names_tail)),
+  _field_references: ($) =>
+    prec.right(seq(field("field", $._identifier_or_qualified_name), optional($._field_references))),
   _except_field_names: ($) =>
     prec.right(seq(field("except", $.identifier), optional($._except_field_names))),
   _except_name_list: ($) =>

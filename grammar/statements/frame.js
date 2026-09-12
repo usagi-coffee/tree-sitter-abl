@@ -14,20 +14,12 @@ export default ({ kw }) => ({
     seq(
       field("name", choice($.identifier, $.preprocessor_name)),
       choice(
-        seq(
-          field("record", $._identifier_or_qualified_name),
-          kw("EXCEPT"),
-          $.__frame_except_fields,
-        ),
+        seq(field("record", $._identifier_or_qualified_name), kw("EXCEPT"), $._field_references),
         optional($.__frame_form_items),
       ),
       optional($.__frame_header_section),
       // oxlint-disable-next-line tree-sitter-optimize/recurse
       repeat($.frame_phrase),
-    ),
-  __frame_except_fields: ($) =>
-    prec.right(
-      seq(field("field", $._identifier_or_qualified_name), optional($.__frame_except_fields)),
     ),
   __frame_form_items: ($) => prec.right(seq($.__frame_form_item, optional($.__frame_form_items))),
 
