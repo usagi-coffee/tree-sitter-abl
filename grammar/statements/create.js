@@ -101,6 +101,7 @@ export default ({ kw }) => ({
       optional(seq(kw("CONNECT"), optional(seq($._to_keyword, field("target", $._expression))))),
     ),
   __create_record: ($) =>
+    // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq(
       field("table", choice($._identifier_or_qualified_name, $.preprocessor_name)),
       optional(seq($._for_keyword, kw("TENANT"), field("tenant", $._expression))),
