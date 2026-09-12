@@ -1,6 +1,7 @@
 export default ({ kw }) => ({
   frame_phrase: ($) => seq($._with_keyword, optional($.__frame_options)),
   __frame_options: ($) => prec.right(seq($.__frame_option, optional($.__frame_options))),
+  // oxlint-disable-next-line tree-sitter-optimize/body-extraction
   __frame_option: ($) =>
     choice(
       $.at_phrase,
