@@ -13,6 +13,7 @@ export default ({ kw }) => ({
       $.preprocessor_name,
     ),
 
+  // oxlint-disable-next-line tree-sitter-optimize/body-extraction
   __record_option: ($) =>
     choice(
       seq($._of_keyword, field("of", $._identifier_or_qualified_name)),
