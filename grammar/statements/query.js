@@ -5,6 +5,7 @@ export default ({ kw }) => ({
     seq($._define_keyword, optional($._buffer_query_modifier), kw("QUERY"), $.__query_body),
 
   __query_body: ($) =>
+    // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq(
       field("name", $.identifier),
       $._for_keyword,
