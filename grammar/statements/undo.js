@@ -9,6 +9,7 @@ export default ({ kw }) => ({
       optional(seq(",", $.__undo_action)),
     ),
 
+  // oxlint-disable-next-line tree-sitter-optimize/body-extraction
   __undo_action: ($) =>
     choice(
       seq(
