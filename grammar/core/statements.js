@@ -1,6 +1,7 @@
 // Just an aggregator of statements
 
 export default ({ kw }) => ({
+  // oxlint-disable-next-line tree-sitter-optimize/body-extraction
   _statement: ($) =>
     choice(
       // Special
