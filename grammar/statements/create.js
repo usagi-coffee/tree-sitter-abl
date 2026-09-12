@@ -27,6 +27,7 @@ export default ({ kw }) => ({
       field("database", $._alias_name),
     ),
   __create_buffer: ($) =>
+    // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq(
       kw("BUFFER"),
       field("handle", $._identifier_or_access),
