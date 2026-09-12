@@ -9,6 +9,7 @@ export default ({ kw }) => ({
         seq(
           $._to_keyword,
           choice(
+            // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
             seq(
               kw("ROWID"),
               field("rowid", $._expression),
