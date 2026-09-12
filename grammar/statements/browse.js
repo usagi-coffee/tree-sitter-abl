@@ -122,6 +122,7 @@ export default ({ kw }) => ({
 
   __browse_column: ($) =>
     prec.right(
+      // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
       seq(
         field("column", prec.right($._expression)),
         // oxlint-disable-next-line tree-sitter-optimize/recurse
