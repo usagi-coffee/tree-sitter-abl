@@ -30,6 +30,7 @@
         "tree-sitter-optimize/optional-body-extraction": "warn",
         "tree-sitter-optimize/prefix-extraction": "warn",
         "tree-sitter-optimize/recurse": "warn",
+        "tree-sitter-optimize/shared-aliased-rule": "warn",
         "tree-sitter-optimize/shared-recursion": "warn",
         "tree-sitter-optimize/shared-repetition": "warn",
         "tree-sitter-optimize/tail-extraction": "warn",

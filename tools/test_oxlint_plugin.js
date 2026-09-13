@@ -2,6 +2,7 @@ import { RuleTester } from "oxlint/plugins-dev";
 
 import {
   resetSharingCandidates,
+  sharedAliasedRule,
   sharedRecursion,
   sharedRepetition,
 } from "./oxlint-plugin-tree-sitter-optimize.js";
@@ -186,6 +187,150 @@ new RuleTester().run("shared-recursion", sharedRecursion, {
         ),
       });`,
       errors: [{ message: /duplicates _first/ }],
+    },
+  ],
+});
+
+const delimiterRule = (prefix) => `
+export default ({ kw }) => ({
+  ${prefix}_statement: ($) => seq("${prefix.toUpperCase()}", optional(alias($.__${prefix}_delimiter_phrase, $.delimiter_phrase)), $.item),
+  __${prefix}_delimiter_phrase: ($) => seq(kw("DELIMITER"), field("delimiter", $.string_literal)),
+});
+`;
+
+resetSharingCandidates();
+RuleTester.it = (_name, run) => run();
+new RuleTester().run("shared-aliased-rule across files", sharedAliasedRule, {
+  valid: [
+    {
+      name: "original IMPORT phrase seeds the candidate",
+      filename: "grammar/statements/import.js",
+      code: delimiterRule("import"),
+    },
+  ],
+  invalid: [
+    {
+      name: "original EXPORT phrase duplicates the same public DELIMITER node",
+      filename: "grammar/statements/export.js",
+      code: delimiterRule("export"),
+      errors: [{ message: /__import_delimiter_phrase in import\.js.*alias to delimiter_phrase/ }],
+    },
+  ],
+});
+
+RuleTester.it = (_name, run) => {
+  resetSharingCandidates();
+  run();
+};
+
+const aliasedPair = (first, second, extra = "", target = "phrase") => `
+export default ({ kw }) => ({
+  first: ($) => alias($.__first, $.phrase),
+  second: ($) => alias($.__second, $.${target}),
+  __first: ($) => ${first},
+  __second: ($) => ${second},
+  ${extra}
+});
+`;
+const delimiterBody = 'seq(kw("DELIMITER"), field("delimiter", $.string_literal))';
+
+new RuleTester().run("shared-aliased-rule", sharedAliasedRule, {
+  valid: [
+    {
+      name: "optimized statements share the public phrase directly",
+      code: `export default ({ kw }) => ({
+        import_statement: ($) => seq("IMPORT", optional($.delimiter_phrase), $.item),
+        export_statement: ($) => seq("EXPORT", optional($.delimiter_phrase), $.item),
+        delimiter_phrase: ($) => seq(kw("DELIMITER"), field("delimiter", $.string_literal)),
+      });`,
+    },
+    {
+      name: "different public aliases preserve distinct node identities",
+      code: aliasedPair(delimiterBody, delimiterBody, "", "other_phrase"),
+    },
+    {
+      name: "a helper with a bare reference cannot become public",
+      code: aliasedPair(delimiterBody, delimiterBody, "bare: ($) => $.__first,"),
+    },
+    {
+      name: "a helper with multiple aliases is excluded",
+      code: aliasedPair(delimiterBody, delimiterBody, "other: ($) => alias($.__first, $.other),"),
+    },
+    {
+      name: "different field captures are preserved",
+      code: aliasedPair(delimiterBody, delimiterBody.replace('"delimiter"', '"separator"')),
+    },
+    {
+      name: "different value rules are preserved",
+      code: aliasedPair(delimiterBody, delimiterBody.replace("$.string_literal", "$.identifier")),
+    },
+    {
+      name: "different keyword abbreviation options are preserved",
+      code: aliasedPair(
+        'seq(kw("COLUMN", { offset: 3 }), field("value", $.number))',
+        'seq(kw("COLUMN", { offset: 6 }), field("value", $.number))',
+      ),
+    },
+    {
+      name: "different lexical aliases are preserved",
+      code: aliasedPair(
+        'seq(kw("COLUMN", { alias: "COL" }), field("value", $.number))',
+        'seq(kw("COLUMN", { alias: "COLUMN" }), field("value", $.number))',
+      ),
+    },
+    {
+      name: "different regex patterns are preserved",
+      code: aliasedPair('seq("X", token(/a/i))', 'seq("X", token(/b/i))'),
+    },
+    {
+      name: "different associativity is preserved",
+      code: aliasedPair(`prec.left(${delimiterBody})`, `prec.right(${delimiterBody})`),
+    },
+    {
+      name: "different named precedence is preserved",
+      code: aliasedPair(`prec("a", ${delimiterBody})`, `prec("b", ${delimiterBody})`),
+    },
+    {
+      name: "nested aliases preserve their node identities",
+      code: aliasedPair('seq("X", alias($.item, $.a))', 'seq("X", alias($.item, $.b))'),
+    },
+    {
+      name: "ordinary JavaScript object methods are not grammar rules",
+      code: `const helpers = {
+        first: ($) => alias($.__first, $.phrase), second: ($) => alias($.__second, $.phrase),
+        __first: ($) => ${delimiterBody}, __second: ($) => ${delimiterBody},
+      };`,
+    },
+    {
+      name: "public source rules keep their existing visibility",
+      code: aliasedPair(delimiterBody, delimiterBody).replaceAll("__first", "public_first"),
+    },
+    {
+      name: "shared token definitions remain lexical rules",
+      code: aliasedPair('token(seq("A", "B"))', 'token(seq("A", "B"))'),
+    },
+  ],
+  invalid: [
+    {
+      name: "identical aliases within a module",
+      code: aliasedPair(delimiterBody, delimiterBody),
+      errors: [{ message: /__first.*alias to phrase/ }],
+    },
+    {
+      name: "comments and whitespace do not hide a duplicate",
+      code: aliasedPair(
+        delimiterBody,
+        'seq(kw("DELIMITER"), /* value */\n field("delimiter", $.string_literal))',
+      ),
+      errors: [{ message: /__first.*alias to phrase/ }],
+    },
+    {
+      name: "core grammar declarations are recognized",
+      code: `export default grammar({ rules: {
+        first: ($) => alias($.__first, $.phrase), second: ($) => alias($.__second, $.phrase),
+        __first: ($) => prec.right(${delimiterBody}), __second: ($) => prec.right(${delimiterBody}),
+      }});`,
+      errors: [{ message: /__first.*alias to phrase/ }],
     },
   ],
 });

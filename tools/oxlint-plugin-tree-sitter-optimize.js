@@ -167,10 +167,12 @@ const preferRecursion = rule(
 
 const repeatedBodies = new Map();
 const recursiveBodies = new Map();
+const aliasedBodies = new Map();
 
 export function resetSharingCandidates() {
   repeatedBodies.clear();
   recursiveBodies.clear();
+  aliasedBodies.clear();
 }
 
 export const sharedRepetition = rule(
@@ -250,6 +252,63 @@ export const sharedRecursion = rule(
   }),
   "Suggest sharing identical hidden recursive lists and tails",
 );
+
+export const sharedAliasedRule = rule((context) => {
+  const properties = [];
+  const aliases = new Map();
+  const unaliasedReferences = new Set();
+  return {
+    Property(node) {
+      if (isRuleProperty(node)) properties.push(node);
+    },
+    MemberExpression(node) {
+      const name = memberName(node);
+      if (!name?.startsWith("_") || !enclosingRule(node)) return;
+      const parent = node.parent;
+      const target =
+        callName(parent) === "alias" && parent.arguments[0] === node
+          ? memberName(parent.arguments[1])
+          : null;
+      if (target === null || target.startsWith("_")) {
+        unaliasedReferences.add(name);
+        return;
+      }
+      if (!aliases.has(name)) aliases.set(name, new Set());
+      aliases.get(name).add(target);
+    },
+    "Program:exit"() {
+      for (const property of properties) {
+        const name = ruleName(property);
+        const targets = aliases.get(name);
+        if (!name.startsWith("_") || targets?.size !== 1 || unaliasedReferences.has(name)) continue;
+        const elements = sequenceElements(property.value.body);
+        if (!elements || elements.length < 2) continue;
+        const [target] = targets;
+        // Keep token identities, keyword options, fields, aliases, and precedence
+        // in the comparison; comments and whitespace have no effect.
+        const signature = JSON.stringify([
+          context.cwd,
+          target,
+          context.sourceCode.getTokens(property.value.body).map(({ type, value }) => [type, value]),
+        ]);
+        const candidate = { filename: context.filename, rule: name };
+        const previous = aliasedBodies.get(signature);
+        if (!previous) {
+          aliasedBodies.set(signature, candidate);
+          continue;
+        }
+        if (previous.filename === candidate.filename && previous.rule === name) continue;
+        const previousFile = previous.filename.split(/[\\/]/).at(-1);
+        report(
+          context,
+          property,
+          "shared-aliased-rule",
+          `This hidden rule and ${previous.rule} in ${previousFile} have identical bodies and alias to ${target}; try sharing the public rule while preserving its tree shape.`,
+        );
+      }
+    },
+  };
+}, "Suggest sharing duplicate hidden rules that produce the same public alias");
 
 const alternativeExtraction = rule((context) => {
   const choices = new Map();
@@ -458,6 +517,7 @@ export default {
     "optional-body-extraction": optionalBodyExtraction,
     "prefix-extraction": prefixExtraction,
     recurse: preferRecursion,
+    "shared-aliased-rule": sharedAliasedRule,
     "shared-recursion": sharedRecursion,
     "shared-repetition": sharedRepetition,
     "tail-extraction": tailExtraction,
