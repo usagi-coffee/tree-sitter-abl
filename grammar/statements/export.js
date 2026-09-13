@@ -5,11 +5,7 @@ export default ({ kw }) => ({
   __export_statement_head: ($) => seq(kw("EXPORT"), optional($._stream_phrase)),
 
   __export_expressions_body: ($) =>
-    seq(
-      optional(alias($.__export_delimiter_phrase, $.delimiter_phrase)),
-      $.__export_expressions,
-      optional($.__export_tail),
-    ),
+    seq(optional($.delimiter_phrase), $.__export_expressions, optional($.__export_tail)),
   __export_expressions: ($) =>
     prec.right(seq($.__export_expression, optional($.__export_expressions))),
   __export_tail: ($) =>
@@ -19,5 +15,4 @@ export default ({ kw }) => ({
     ),
   __export_expression: ($) => $._expression,
   __export_except_phrase: ($) => seq(kw("EXCEPT"), $._import_export_except_names),
-  __export_delimiter_phrase: ($) => seq(kw("DELIMITER"), field("delimiter", $.string_literal)),
 });

@@ -5,6 +5,7 @@ import grammar_trigger from "./trigger.js";
 import grammar_in_window from "./in-window.js";
 import grammar_at from "./at.js";
 import grammar_color from "./color.js";
+import grammar_delimiter from "./delimiter.js";
 import grammar_combo_box from "./combo-box.js";
 import grammar_editing from "./editing.js";
 import grammar_editor from "./editor.js";
@@ -34,6 +35,7 @@ export default (ctx) => ({
   ...grammar_in_window(ctx),
   ...grammar_at(ctx),
   ...grammar_color(ctx),
+  ...grammar_delimiter(ctx),
   ...grammar_combo_box(ctx),
   ...grammar_editing(ctx),
   ...grammar_editor(ctx),

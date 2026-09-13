@@ -8,10 +8,9 @@ export default ({ kw }) => ({
       optional(alias(kw("NO-LOBS"), $.no_lobs)),
     ),
 
-  __import_delimiter_phrase: ($) => seq(kw("DELIMITER"), field("delimiter", $.string_literal)),
   __import_fields_phrase: ($) =>
     seq(
-      optional(alias($.__import_delimiter_phrase, $.delimiter_phrase)),
+      optional($.delimiter_phrase),
       $.__import_fields,
       optional(seq(kw("EXCEPT"), $._import_export_except_names)),
     ),

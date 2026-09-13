@@ -1,0 +1,35 @@
+================================================================================
+IMPORT and EXPORT - stream delimiters with qualified exclusions
+================================================================================
+
+IMPORT STREAM incoming DELIMITER "|" Customer EXCEPT Customer.Name Customer.City NO-LOBS NO-ERROR.
+EXPORT STREAM outgoing DELIMITER ";" Customer EXCEPT Customer.Name Customer.City NO-LOBS.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (import_statement
+    stream: (identifier)
+    (delimiter_phrase
+      delimiter: (string_literal))
+    (identifier)
+    (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (no_lobs)
+    (no_error))
+  (export_statement
+    stream: (identifier)
+    (delimiter_phrase
+      delimiter: (string_literal))
+    (identifier)
+    (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (no_lobs)))
