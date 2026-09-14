@@ -64,8 +64,10 @@ export default ({ kw }) => ({
     ),
   __function_parameters: ($) => seq("(", optional($.__function_parameter_list), ")"),
   __function_parameter_list: ($) =>
-    seq(alias($.__function_parameter, $.parameter), optional($.__function_parameter_tail)),
-  __function_parameter_tail: ($) => seq(",", $.__function_parameter_list),
+    seq(
+      alias($.__function_parameter, $.parameter),
+      optional(seq(",", $.__function_parameter_list)),
+    ),
   __function_definition_parameters: ($) =>
     seq(
       "(",
