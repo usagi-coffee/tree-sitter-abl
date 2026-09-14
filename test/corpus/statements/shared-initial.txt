@@ -1,0 +1,41 @@
+================================================================================
+INITIAL - abbreviations, arrays, and option boundaries across definitions
+================================================================================
+
+DEFINE VARIABLE v AS INTEGER INIT [1, 2] NO-UNDO.
+DEFINE INPUT PARAMETER p AS INTEGER INITIAL [] NO-UNDO.
+DEFINE TEMP-TABLE tt FIELD first AS INTEGER INIT 1 FIELD second AS INTEGER.
+CLASS InitProps:
+  DEFINE PUBLIC PROPERTY Value AS INTEGER INITIAL 2 NO-UNDO GET. SET.
+END CLASS.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    initial: (number_literal)
+    initial: (number_literal)
+    (no_undo))
+  (parameter_definition
+    name: (identifier)
+    type: (identifier)
+    (no_undo))
+  (temp_table_definition
+    name: (identifier)
+    (temp_table_field
+      name: (identifier)
+      type: (identifier)
+      initial: (number_literal))
+    (temp_table_field
+      name: (identifier)
+      type: (identifier)))
+  (class_definition
+    name: (identifier)
+    (property_definition
+      (access_modifier)
+      name: (identifier)
+      type: (identifier)
+      initial: (number_literal)
+      (no_undo))))

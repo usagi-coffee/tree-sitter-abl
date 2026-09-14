@@ -83,7 +83,7 @@ export default ({ kw }) => ({
       $.__temp_table_extent_option,
       $._format_string,
       seq($._help_keyword, field("help", $.string_literal)),
-      seq(kw("INITIAL", { offset: 4 }), field("initial", $._initial_value)),
+      $._initial_phrase,
       seq(kw("LABEL"), field("label", $.__temp_table_label_list)),
       seq(kw("MOUSE-POINTER"), field("mouse_pointer", $._expression)),
       seq(optional(alias(kw("NOT"), $.not)), alias(kw("CASE-SENSITIVE"), $.case_sensitive)),
