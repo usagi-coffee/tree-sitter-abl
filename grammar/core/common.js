@@ -381,6 +381,7 @@ export default ({ kw }) => ({
         optional($.__dataset_parent_id_relations),
       ),
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-sequence
   __dataset_for_phrase: ($) =>
     seq($._for_keyword, field("table", $.identifier), optional($.__dataset_for_table_tail)),
   // oxlint-disable-next-line tree-sitter-optimize/tail-extraction
