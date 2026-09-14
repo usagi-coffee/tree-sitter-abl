@@ -218,3 +218,34 @@ END ENUM.
     (member
       name: (identifier)
       (number_literal))))
+
+================================================================================
+ENUM - all member value alternatives
+================================================================================
+
+ENUM ValueKinds FLAGS:
+  DEFINE ENUM FirstValue = 1
+              AliasValue = FirstValue
+              CombinedValue = FirstValue,AliasValue
+              UnsetValue = ?.
+END ENUM.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (enum_statement
+    name: (identifier)
+    (flags)
+    (member
+      name: (identifier)
+      (number_literal))
+    (member
+      name: (identifier)
+      (identifier))
+    (member
+      name: (identifier)
+      (identifier)
+      (identifier))
+    (member
+      name: (identifier)
+      (null_literal))))
