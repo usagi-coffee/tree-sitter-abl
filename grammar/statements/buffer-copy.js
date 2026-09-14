@@ -24,7 +24,7 @@ export default ({ kw }) => ({
   __buffer_copy_assign_pair: ($) =>
     seq(
       field("left", $._assignable),
-      // oxlint-disable-next-line tree-sitter-optimize/choice-subset
+      // oxlint-disable-next-line tree-sitter-optimize/choice-subset, tree-sitter-optimize/shared-choice
       choice("=", "+=", "-=", "*=", "/="),
       field("right", $._expression),
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
