@@ -6,6 +6,7 @@ import {
   sequenceSubset,
   recursiveTailReuse,
   keywordReuse,
+  sharedChoice,
   resetSharingCandidates,
   sharedSequence,
   sharedRecursion,
@@ -877,6 +878,81 @@ new RuleTester().run("keyword-reuse cross-file VIEW/HIDE regression", keywordReu
       errors: [
         { message: /__view_hide_widget_ref repeats the exact "IN" keyword call from _in_keyword/ },
       ],
+    },
+  ],
+});
+
+RuleTester.it = (_name, run) => {
+  resetSharingCandidates();
+  run();
+};
+new RuleTester().run("shared-choice", sharedChoice, {
+  valid: [
+    `export default () => ({ _assignment_value: ($) => choice($.array_initializer, $._expression), first: ($) => field("right", $._assignment_value), second: ($) => seq("=", $._assignment_value) });`,
+    `export default () => ({ first: ($) => choice($.a, $.b), second: ($) => choice($.b, $.a) });`,
+    `export default () => ({ first: ($) => choice(field("x", $.a), $.b), second: ($) => choice(field("y", $.a), $.b) });`,
+    `export default () => ({ first: ($) => choice(alias($.a, $.x), $.b), second: ($) => choice(alias($.a, $.y), $.b) });`,
+    `export default ({kw}) => ({ first: ($) => choice(kw("FRAME", {offset:4}), $.b), second: ($) => choice(kw("FRAME", {offset:5}), $.b) });`,
+    `export default ({kw}) => ({ first: ($) => choice(kw("FRAME", options), $.b), second: ($) => choice(kw("FRAME", options), $.b) });`,
+    `export default () => ({ first: ($) => choice(token(/a/i), $.b), second: ($) => choice(token(/b/i), $.b) });`,
+    `export default () => ({ first: ($) => prec.left(choice($.a, $.b)), second: ($) => prec.right(choice($.a, $.b)) });`,
+    `export default () => ({ first: ($) => prec("one", choice($.a, $.b)), second: ($) => prec("two", choice($.a, $.b)) });`,
+    `export default () => ({ first: ($) => choice($.a, $.b), second: ($) => token(choice($.a, $.b)) });`,
+    `export default () => ({ first: ($) => choice($.a, $.b), second: ($) => token.immediate(choice($.a, $.b)) });`,
+    `export default () => ({ first: ($) => choice($.a, optional($.b)), second: ($) => choice($.a, optional($.b)) });`,
+    `export default () => ({ first: ($) => choice(...values), second: ($) => choice(...values) });`,
+    `export default () => ({ first: ($) => choice(value, $.b), second: ($) => choice(value, $.b) });`,
+    `export default () => ({ first: ($) => choice(seq("X", $.first), $.b), second: ($) => choice(seq("X", $.first), $.b) });`,
+    `const unrelated = { first: ($) => choice($.a, $.b), second: ($) => choice($.a, $.b) };`,
+    `export default () => ({
+      // oxlint-disable-next-line rule-to-test/shared-choice
+      first: ($) => choice($.a, $.b),
+      second: ($) => choice($.a, $.b),
+    });`,
+  ],
+  invalid: [
+    {
+      name: "two-branch choices with fields outside the choice",
+      code: `export default () => ({ first: ($) => field("right", choice($.array_initializer, $._expression)), second: ($) => seq("=", choice($.array_initializer, $._expression)) });`,
+      errors: [{ message: /repeats 2 alternatives.*extract a shared hidden choice helper/ }],
+    },
+    {
+      name: "reuse hidden provider",
+      code: `export default () => ({ _value: ($) => choice($.a, $.b), second: ($) => field("value", choice($.a, $.b)) });`,
+      errors: [{ message: /reuse hidden choice _value/ }],
+    },
+    {
+      name: "public providers must retain their visible wrapper",
+      code: `export default () => ({ visible: ($) => choice($.a, $.b), second: ($) => field("value", choice($.a, $.b)) });`,
+      errors: [{ message: /extract a shared hidden choice helper/ }],
+    },
+    {
+      name: "equal precedence wrappers remain part of the match",
+      code: `export default () => ({ first: ($) => prec.right(choice($.a, $.b)), second: ($) => prec.right(choice($.a, $.b)) });`,
+      errors: [{ message: /repeats 2 alternatives/ }],
+    },
+  ],
+});
+
+resetSharingCandidates();
+RuleTester.it = (_name, run) => run();
+new RuleTester().run("shared-choice assignment value regression", sharedChoice, {
+  valid: [
+    {
+      filename: "grammar.js",
+      code: `export default grammar({rules: { __assignment_statement_body: ($) => seq(field("left", $._assignable), field("operator", $.assignment_operator), field("right", choice($.array_initializer, $._expression)), optional($.widget_phrase)) }});`,
+    },
+  ],
+  invalid: [
+    {
+      filename: "grammar/phrases/assign.js",
+      code: `export default () => ({ __assign_pair_tail: ($) => seq("=", field("right", choice($.array_initializer, $._expression)), optional($._when_phrase)) });`,
+      errors: [{ message: /repeats 2 alternatives from __assignment_statement_body/ }],
+    },
+    {
+      filename: "grammar/statements/var.js",
+      code: `export default () => ({ __var_initializer: ($) => seq("=", choice($.array_initializer, $._expression)) });`,
+      errors: [{ message: /repeats 2 alternatives from __assignment_statement_body/ }],
     },
   ],
 });

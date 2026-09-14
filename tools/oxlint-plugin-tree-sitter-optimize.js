@@ -260,6 +260,7 @@ const sharedSequences = new Map();
 const choiceCandidates = [];
 const sequenceCandidates = [];
 const keywordCandidates = [];
+const sharedChoices = new Map();
 
 export function resetSharingCandidates() {
   repeatedBodies.clear();
@@ -268,6 +269,7 @@ export function resetSharingCandidates() {
   choiceCandidates.length = 0;
   sequenceCandidates.length = 0;
   keywordCandidates.length = 0;
+  sharedChoices.clear();
 }
 
 function containsAlternatives(outer, inner) {
@@ -408,6 +410,87 @@ export const keywordReuse = rule(
     },
   }),
   "Suggest measured reuse of existing hidden helpers for identical static keyword calls",
+);
+
+function isStaticDsl(node) {
+  if (memberName(node)) return true;
+  if (node?.type === "Literal") {
+    return ["string", "number"].includes(typeof node.value) || Boolean(node.regex);
+  }
+  const name = callName(node);
+  if (name === "kw") return isStaticKeywordCall(node);
+  return (
+    [
+      "seq",
+      "choice",
+      "optional",
+      "repeat",
+      "repeat1",
+      "field",
+      "alias",
+      "prec",
+      "prec.left",
+      "prec.right",
+      "prec.dynamic",
+      "token",
+      "token.immediate",
+    ].includes(name) && node.arguments.every(isStaticDsl)
+  );
+}
+
+export const sharedChoice = rule(
+  (context) => ({
+    CallExpression(node) {
+      if (callName(node) !== "choice" || node.arguments.length < 2 || !isStaticDsl(node)) return;
+      if (isNullable(node)) return;
+      const property = enclosingRule(node);
+      if (!property) return;
+      for (let parent = node.parent; parent !== property; parent = parent.parent) {
+        if (["token", "token.immediate"].includes(callName(parent))) return;
+      }
+      let subject = node;
+      while (
+        ["prec", "prec.left", "prec.right", "prec.dynamic"].includes(callName(subject.parent)) &&
+        subject.parent.arguments.at(-1) === subject
+      )
+        subject = subject.parent;
+      if (!isStaticDsl(subject)) return;
+      const reportNode = subject === property.value.body ? property : subject;
+      if (isRuleDisabled(context, reportNode)) return;
+      if (referencedSymbols(subject).includes(ruleName(property))) return;
+      const signature = JSON.stringify([
+        context.cwd,
+        context.sourceCode.getTokens(subject).map(({ type, value }) => [type, value]),
+      ]);
+      const candidate = {
+        filename: context.filename,
+        rule: ruleName(property),
+        line: subject.loc.start.line,
+        helper: subject === property.value.body && ruleName(property).startsWith("_"),
+      };
+      const previous = sharedChoices.get(signature);
+      if (!previous) {
+        sharedChoices.set(signature, candidate);
+        return;
+      }
+      if (previous.filename === candidate.filename && previous.rule === candidate.rule) return;
+      const helper = previous.helper ? previous : candidate.helper ? candidate : null;
+      const target = helper === candidate ? previous : candidate;
+      const suggestion = !helper
+        ? "extract a shared hidden choice helper"
+        : helper.rule.startsWith("__") && helper.filename !== target.filename
+          ? `promote private ${helper.rule} to a shared helper before reuse`
+          : `reuse hidden choice ${helper.rule}`;
+      report(
+        context,
+        reportNode,
+        "shared-choice",
+        `This choice repeats ${node.arguments.length} alternatives from ${previous.rule} in ${previous.filename}:${previous.line}; try to ${suggestion}. Preserve fields, aliases, order, and precedence; measure parser size and validate trees.`,
+      );
+      if (!previous.helper && candidate.helper) sharedChoices.set(signature, candidate);
+    },
+  }),
+  "Suggest sharing identical non-nullable choices, including small cross-file alternative sets",
 );
 
 export const recursiveTailReuse = rule(
@@ -902,6 +985,7 @@ export default {
     "sequence-subset": sequenceSubset,
     "recursive-tail-reuse": recursiveTailReuse,
     "keyword-reuse": keywordReuse,
+    "shared-choice": sharedChoice,
     "tail-extraction": tailExtraction,
     "token-packing": tokenPacking,
   },
