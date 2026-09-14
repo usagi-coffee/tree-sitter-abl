@@ -62,7 +62,11 @@ export default ({ kw }) => ({
       seq(kw("ROW-OF"), field("row_of", $._expression)),
     ),
   __format_at_x: ($) =>
-    choice(seq(kw("X"), field("x", $._expression)), seq(kw("X-OF"), field("x_of", $._expression))),
+    choice(
+      // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
+      seq(kw("X"), field("x", $._expression)),
+      seq(kw("X-OF"), field("x_of", $._expression)),
+    ),
   __format_at_y: ($) =>
     choice(seq(kw("Y"), field("y", $._expression)), seq(kw("Y-OF"), field("y_of", $._expression))),
 
