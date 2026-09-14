@@ -14,7 +14,7 @@ export default ({ kw }) => ({
           alias(kw("CURRENT"), $.current),
         ),
       ),
-      field("table", $.__find_record_name),
+      field("table", $._identifier_or_qualified_name),
       optional(field("constant", $._expression)),
       optional($.__find_options),
     ),
@@ -44,9 +44,8 @@ export default ({ kw }) => ({
       seq(kw("USE-INDEX"), field("index", $.__find_index_name)),
     ),
 
-  __find_of_phrase: ($) => seq($._of_keyword, field("record", $.__find_record_name)),
+  __find_of_phrase: ($) => seq($._of_keyword, field("record", $._identifier_or_qualified_name)),
   // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
   __find_where_phrase: ($) => seq(kw("WHERE"), field("where", $._expression)),
-  __find_record_name: ($) => $._identifier_or_qualified_name,
   __find_index_name: ($) => $._identifier_or_qualified_name,
 });
