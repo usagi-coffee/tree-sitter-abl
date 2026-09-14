@@ -514,6 +514,7 @@ export default grammar({
         ),
 
       // Operators
+      // oxlint-disable-next-line tree-sitter-optimize/choice-subset
       assignment_operator: ($) => choice("=", "+=", "-=", "*=", "/="),
       _logical_operator: ($) => choice(kw("AND"), kw("OR")),
       _comparison_operator: ($) => choice("=", ...COMPARISON_OPERATORS),
