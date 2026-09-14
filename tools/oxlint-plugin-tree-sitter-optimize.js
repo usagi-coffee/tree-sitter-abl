@@ -259,6 +259,7 @@ const recursiveBodies = new Map();
 const sharedSequences = new Map();
 const choiceCandidates = [];
 const sequenceCandidates = [];
+const keywordCandidates = [];
 
 export function resetSharingCandidates() {
   repeatedBodies.clear();
@@ -266,6 +267,7 @@ export function resetSharingCandidates() {
   sharedSequences.clear();
   choiceCandidates.length = 0;
   sequenceCandidates.length = 0;
+  keywordCandidates.length = 0;
 }
 
 function containsAlternatives(outer, inner) {
@@ -338,6 +340,74 @@ export const choiceSubset = rule(
     },
   }),
   "Suggest reusing existing hidden choices inside larger choices with matching consecutive alternatives",
+);
+
+function isStaticKeywordCall(node) {
+  if (callName(node) !== "kw" || node.arguments.length < 1 || node.arguments.length > 2)
+    return false;
+  if (node.arguments[0].type !== "Literal" || typeof node.arguments[0].value !== "string")
+    return false;
+  const options = node.arguments[1];
+  return (
+    !options ||
+    (options.type === "ObjectExpression" &&
+      options.properties.every(
+        (property) =>
+          property.type === "Property" &&
+          !property.computed &&
+          !property.shorthand &&
+          property.value.type === "Literal" &&
+          ["string", "number"].includes(typeof property.value.value),
+      ))
+  );
+}
+
+export const keywordReuse = rule(
+  (context) => ({
+    CallExpression(node) {
+      if (!isStaticKeywordCall(node)) return;
+      const property = enclosingRule(node);
+      if (!property) return;
+      const wholeBody = property.value.body === node;
+      if (wholeBody && !ruleName(property).startsWith("_")) return;
+      for (let parent = node.parent; parent !== property; parent = parent.parent) {
+        if (["token", "token.immediate"].includes(callName(parent))) return;
+        if (callName(parent) === "alias" && parent.arguments[0] !== node) return;
+      }
+      const reportNode = wholeBody ? property : node;
+      if (isRuleDisabled(context, reportNode)) return;
+      const candidate = {
+        cwd: context.cwd,
+        filename: context.filename,
+        rule: ruleName(property),
+        line: node.loc.start.line,
+        helper: wholeBody,
+        signature: JSON.stringify(
+          context.sourceCode.getTokens(node).map(({ type, value }) => [type, value]),
+        ),
+        keyword: node.arguments[0].value,
+      };
+      for (const previous of keywordCandidates) {
+        if (previous.cwd !== candidate.cwd || previous.signature !== candidate.signature) continue;
+        if (previous.helper === candidate.helper) continue;
+        if (previous.filename === candidate.filename && previous.rule === candidate.rule) continue;
+        const helper = previous.helper ? previous : candidate;
+        const target = previous.helper ? candidate : previous;
+        const sharing =
+          helper.rule.startsWith("__") && helper.filename !== target.filename
+            ? "promote the private keyword helper before reuse"
+            : "reuse the hidden keyword helper";
+        report(
+          context,
+          reportNode,
+          "keyword-reuse",
+          `${target.rule} repeats the exact ${JSON.stringify(candidate.keyword)} keyword call from ${helper.rule} (other occurrence: ${previous.filename}:${previous.line}); try to ${sharing}. Check helper-specific precedence/conflicts, then measure parser size and validate trees.`,
+        );
+      }
+      keywordCandidates.push(candidate);
+    },
+  }),
+  "Suggest measured reuse of existing hidden helpers for identical static keyword calls",
 );
 
 export const recursiveTailReuse = rule(
@@ -831,6 +901,7 @@ export default {
     "single-use-sequence": singleUseSequence,
     "sequence-subset": sequenceSubset,
     "recursive-tail-reuse": recursiveTailReuse,
+    "keyword-reuse": keywordReuse,
     "tail-extraction": tailExtraction,
     "token-packing": tokenPacking,
   },

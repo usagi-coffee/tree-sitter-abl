@@ -5,6 +5,7 @@ import {
   singleUseSequence,
   sequenceSubset,
   recursiveTailReuse,
+  keywordReuse,
   resetSharingCandidates,
   sharedSequence,
   sharedRecursion,
@@ -805,6 +806,77 @@ new RuleTester().run("recursive-tail-reuse", recursiveTailReuse, {
         __tail: ($) => seq(",", field("name", $.name), "=", alias($.value, $.item), optional($.__tail)),
       });`,
       errors: [{ message: /__tail repeats the body of _head/ }],
+    },
+  ],
+});
+
+new RuleTester().run("keyword-reuse", keywordReuse, {
+  valid: [
+    `export default ({kw}) => ({ _in_keyword: ($) => kw("IN"), root: ($) => seq($._in_keyword, $.value) });`,
+    `export default ({kw}) => ({ keyword: ($) => kw("IN"), root: ($) => seq(kw("IN"), $.value) });`,
+    `export default ({kw}) => ({ _in_keyword: ($) => kw("IN"), public_keyword: ($) => kw("IN") });`,
+    `export default ({kw}) => ({ _first: ($) => kw("IN"), _second: ($) => kw("IN") });`,
+    `export default ({kw}) => ({ _keyword: ($) => prec(1, kw("IN")), root: ($) => seq(kw("IN"), $.value) });`,
+    `export default ({kw}) => ({ _keyword: ($) => kw("FRAME", {offset:4}), root: ($) => seq(kw("FRAME", {offset:5}), $.value) });`,
+    `export default ({kw}) => ({ _keyword: ($) => kw("FIELDS", {alias:"FIELD"}), root: ($) => seq(kw("FIELDS", {alias:"FIELDS"}), $.value) });`,
+    `export default ({kw}) => ({ _keyword: ($) => kw("IN"), root: ($) => token(seq(kw("IN"), $.value)) });`,
+    `export default ({kw}) => ({ _keyword: ($) => kw("IN"), root: ($) => token.immediate(seq(kw("IN"), $.value)) });`,
+    `export default ({kw}) => ({ _keyword: ($) => kw(word), root: ($) => seq(kw(word), $.value) });`,
+    `export default ({kw}) => ({ _keyword: ($) => kw("IN", options), root: ($) => seq(kw("IN", options), $.value) });`,
+    `export default ({kw}) => ({ _keyword: ($) => kw("IN", {...options}), root: ($) => seq(kw("IN", {...options}), $.value) });`,
+    `export default ({kw}) => ({ _keyword: ($) => kw("IN", {offset}), root: ($) => seq(kw("IN", {offset}), $.value) });`,
+    `export default ({kw}) => ({ _keyword: ($) => kw("IN", {[key]:3}), root: ($) => seq(kw("IN", {[key]:3}), $.value) });`,
+    `export default ({kw}) => ({ _not_keyword: ($) => kw("NOT"), root: ($) => alias(seq(optional(kw("NOT")), kw("CASE-SENSITIVE")), $.case_sensitive) });`,
+    `const unrelated = { _keyword: ($) => kw("IN"), root: ($) => seq(kw("IN"), $.value) };`,
+    `export default ({kw}) => ({
+      // oxlint-disable-next-line rule-to-test/keyword-reuse
+      _keyword: ($) => kw("IN"),
+      root: ($) => seq(kw("IN"), $.value),
+    });`,
+  ],
+  invalid: [
+    {
+      name: "VIEW/HIDE keyword reuse",
+      code: `export default ({kw}) => ({ _in_keyword: ($) => kw("IN"), root: ($) => seq(kw("IN"), kw("FRAME", {offset:4}), field("frame", $.name)) });`,
+      errors: [{ message: /root repeats the exact "IN" keyword call from _in_keyword/ }],
+    },
+    {
+      name: "provider last retains all occurrences",
+      code: `export default ({kw}) => ({ root: ($) => choice(seq(kw("IN"), $.a), seq(kw("IN"), $.b)), _in_keyword: ($) => kw("IN") });`,
+      errors: [
+        { message: /root repeats the exact "IN" keyword call from _in_keyword/ },
+        { message: /root repeats the exact "IN" keyword call from _in_keyword/ },
+      ],
+    },
+    {
+      name: "matching keyword options",
+      code: `export default ({kw}) => ({ _keyword: ($) => kw("FIELDS", {alias:"FIELD", offset:5}), root: ($) => seq(kw("FIELDS", {alias:"FIELD", offset:5}), $.value) });`,
+      errors: [{ message: /root repeats the exact "FIELDS" keyword call from _keyword/ }],
+    },
+    {
+      name: "direct token alias retained at callsite",
+      code: `export default ({kw}) => ({ _keyword: ($) => kw("NO-LOCK"), root: ($) => seq($.name, alias(kw("NO-LOCK"), $.no_lock)) });`,
+      errors: [{ message: /root repeats the exact "NO-LOCK" keyword call from _keyword/ }],
+    },
+  ],
+});
+
+resetSharingCandidates();
+RuleTester.it = (_name, run) => run();
+new RuleTester().run("keyword-reuse cross-file VIEW/HIDE regression", keywordReuse, {
+  valid: [
+    {
+      filename: "grammar.js",
+      code: `export default grammar({rules: { _in_keyword: ($) => kw("IN") }});`,
+    },
+  ],
+  invalid: [
+    {
+      filename: "grammar/phrases/widget.js",
+      code: `export default ({kw}) => ({ __view_hide_widget_ref: ($) => seq(field("field", $._identifier_or_array_access), kw("IN"), kw("FRAME", {offset:4}), field("frame", $.__widget_name)) });`,
+      errors: [
+        { message: /__view_hide_widget_ref repeats the exact "IN" keyword call from _in_keyword/ },
+      ],
     },
   ],
 });
