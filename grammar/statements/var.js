@@ -29,6 +29,7 @@ export default ({ kw }) => ({
       seq($._member_access_modifier, optional($.__var_storage_modifier)),
       $.__var_storage_modifier,
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/choice-subset
   __var_storage_modifier: ($) =>
     choice(
       alias(kw("STATIC"), $.static_modifier),
