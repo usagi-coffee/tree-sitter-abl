@@ -95,6 +95,7 @@ export default ({ kw }) => ({
       seq(kw("EVENT-PROCEDURE"), $.__run_event_procedure_tail),
       seq(kw("EVENT-HANDLER"), $.__run_event_handler_tail),
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-sequence
   __run_event_procedure_tail: ($) =>
     seq(field("event_procedure", $._expression), optional($.__run_in_phrase)),
   __run_event_handler_tail: ($) =>
