@@ -518,7 +518,7 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/shared-recursion
   _list_item_values_tail: ($) => seq(",", $._list_item_values),
   _list_item_pairs: ($) => seq($._list_item_pair, optional($._list_item_pairs_tail)),
-  _list_item_pairs_tail: ($) => seq(",", $._list_item_pair, optional($._list_item_pairs_tail)),
+  _list_item_pairs_tail: ($) => seq(",", $._list_item_pairs),
   _list_item_pair: ($) => seq(field("label", $._expression), ",", field("value", $._expression)),
   _scrollbar_option: ($) =>
     choice(
