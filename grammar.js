@@ -657,6 +657,7 @@ export default grammar({
 
       // Array
       array_initializer: ($) => seq($.__array_initializer_prefix, "]"),
+      // oxlint-disable-next-line tree-sitter-optimize/single-use-sequence
       __array_initializer_prefix: ($) => seq("[", optional($._expressions)),
 
       array_access: ($) => seq($.__array_access_prefix, "]"),
