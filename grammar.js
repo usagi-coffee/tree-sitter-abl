@@ -835,8 +835,8 @@ export default grammar({
       _object_access_separator: ($) => choice($._namecolon, token.immediate("?:")),
       // oxlint-disable-next-line tree-sitter-optimize/choice-subset
       _identifier_or_string_literal: ($) => choice($.identifier, $.string_literal),
-      _value_expression: ($) => seq($.__value_expression_opener, ")"),
-      __value_expression_opener: ($) => seq(kw("VALUE"), "(", field("value", $._expression)),
+      _value_expression: ($) => seq($._value_expression_opener, ")"),
+      _value_expression_opener: ($) => seq(kw("VALUE"), "(", field("value", $._expression)),
       _terminator: ($) => choice($._terminator_dot, ";"),
       _no_error_terminator: ($) => seq(optional($.__no_error), $._terminator),
       __no_error: ($) => alias(kw("NO-ERROR"), $.no_error),
