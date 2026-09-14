@@ -49,7 +49,7 @@ export default ({ kw }) => ({
     choice(
       seq(
         choice(
-          seq($._as_keyword, field("type", $._type_name)),
+          $.__as_type_name_phrase,
           // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
           seq($._like_keyword, field("like", $._identifier_or_qualified_name)),
         ),

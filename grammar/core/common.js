@@ -8,6 +8,7 @@ export default ({ kw }) => ({
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
       seq($._like_keyword, field("like", $._identifier_or_qualified_name)),
     ),
+  __as_type_name_phrase: ($) => seq($._as_keyword, field("type", $._type_name)),
 
   _in_widget_pool: ($) =>
     seq($._in_keyword, kw("WIDGET-POOL"), field("pool", choice($.identifier, $.string_literal))),
@@ -284,7 +285,7 @@ export default ({ kw }) => ({
       kw("FIELDS", { alias: "FIELD", offset: 5 }),
       field("name", $.identifier),
       choice(
-        seq($._as_keyword, field("type", $._type_name)),
+        $.__as_type_name_phrase,
         $.__temp_table_like_type_clause,
         seq($.__temp_table_extent_option, $.__temp_table_like_type_clause),
       ),
