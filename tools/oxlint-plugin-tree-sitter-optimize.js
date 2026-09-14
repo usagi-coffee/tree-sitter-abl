@@ -167,12 +167,12 @@ const preferRecursion = rule(
 
 const repeatedBodies = new Map();
 const recursiveBodies = new Map();
-const aliasedBodies = new Map();
+const sharedSequences = new Map();
 
 export function resetSharingCandidates() {
   repeatedBodies.clear();
   recursiveBodies.clear();
-  aliasedBodies.clear();
+  sharedSequences.clear();
 }
 
 export const sharedRepetition = rule(
@@ -253,13 +253,43 @@ export const sharedRecursion = rule(
   "Suggest sharing identical hidden recursive lists and tails",
 );
 
-export const sharedAliasedRule = rule((context) => {
-  const properties = [];
+function hasField(node) {
+  return (
+    callName(node) === "field" || (node?.type === "CallExpression" && node.arguments.some(hasField))
+  );
+}
+
+function isKeyword(node) {
+  if (callName(node) === "kw") return Boolean(node.arguments[0]?.value);
+  if (memberName(node)?.endsWith("_keyword")) return true;
+  if (node?.type === "Literal")
+    return typeof node.value === "string" && /^[A-Za-z]/.test(node.value);
+  if (callName(node) === "choice")
+    return node.arguments.length > 0 && node.arguments.every(isKeyword);
+  if (callName(node) === "alias") return isKeyword(node.arguments[0]);
+  return false;
+}
+
+export const sharedSequence = rule((context) => {
+  const sequences = [];
   const aliases = new Map();
   const unaliasedReferences = new Set();
   return {
-    Property(node) {
-      if (isRuleProperty(node)) properties.push(node);
+    CallExpression(node) {
+      if (callName(node) !== "seq" || node.arguments.length < 2) return;
+      if (!isKeyword(node.arguments[0]) || !hasField(node)) return;
+      const property = enclosingRule(node);
+      if (!property) return;
+      for (let parent = node.parent; parent !== property; parent = parent.parent) {
+        if (["token", "token.immediate"].includes(callName(parent))) return;
+      }
+      let subject = node;
+      while (
+        ["prec", "prec.left", "prec.right", "prec.dynamic"].includes(callName(subject.parent)) &&
+        subject.parent.arguments.at(-1) === subject
+      )
+        subject = subject.parent;
+      sequences.push({ subject, property });
     },
     MemberExpression(node) {
       const name = memberName(node);
@@ -277,38 +307,51 @@ export const sharedAliasedRule = rule((context) => {
       aliases.get(name).add(target);
     },
     "Program:exit"() {
-      for (const property of properties) {
+      for (const { subject, property } of sequences) {
         const name = ruleName(property);
         const targets = aliases.get(name);
-        if (!name.startsWith("_") || targets?.size !== 1 || unaliasedReferences.has(name)) continue;
-        const elements = sequenceElements(property.value.body);
-        if (!elements || elements.length < 2) continue;
-        const [target] = targets;
+        const publicAlias =
+          subject === property.value.body &&
+          name.startsWith("_") &&
+          targets?.size === 1 &&
+          !unaliasedReferences.has(name)
+            ? [...targets][0]
+            : null;
         // Keep token identities, keyword options, fields, aliases, and precedence
         // in the comparison; comments and whitespace have no effect.
         const signature = JSON.stringify([
           context.cwd,
-          target,
-          context.sourceCode.getTokens(property.value.body).map(({ type, value }) => [type, value]),
+          context.sourceCode.getTokens(subject).map(({ type, value }) => [type, value]),
         ]);
-        const candidate = { filename: context.filename, rule: name };
-        const previous = aliasedBodies.get(signature);
+        const candidate = {
+          filename: context.filename,
+          rule: name,
+          start: context.sourceCode.getRange(subject)[0],
+          line: subject.loc.start.line,
+          publicAlias,
+        };
+        const previous = sharedSequences.get(signature);
         if (!previous) {
-          aliasedBodies.set(signature, candidate);
+          sharedSequences.set(signature, candidate);
           continue;
         }
-        if (previous.filename === candidate.filename && previous.rule === name) continue;
-        const previousFile = previous.filename.split(/[\\/]/).at(-1);
+        if (previous.filename === candidate.filename && previous.start === candidate.start)
+          continue;
+        const previousFile = `${previous.filename.split(/[\\/]/).at(-1)}:${previous.line}`;
+        const message =
+          publicAlias && publicAlias === previous.publicAlias
+            ? `This hidden rule and ${previous.rule} in ${previousFile} have identical bodies and alias to ${publicAlias}; try sharing the public rule while preserving its tree shape.`
+            : `This keyword/value sequence duplicates ${previous.rule} in ${previousFile}; try sharing a hidden helper while preserving fields, aliases, and precedence.`;
         report(
           context,
-          property,
-          "shared-aliased-rule",
-          `This hidden rule and ${previous.rule} in ${previousFile} have identical bodies and alias to ${target}; try sharing the public rule while preserving its tree shape.`,
+          subject === property.value.body ? property : subject,
+          "shared-sequence",
+          message,
         );
       }
     },
   };
-}, "Suggest sharing duplicate hidden rules that produce the same public alias");
+}, "Suggest sharing repeated keyword/value sequences, including nested clauses and aliased rules");
 
 const alternativeExtraction = rule((context) => {
   const choices = new Map();
@@ -517,7 +560,7 @@ export default {
     "optional-body-extraction": optionalBodyExtraction,
     "prefix-extraction": prefixExtraction,
     recurse: preferRecursion,
-    "shared-aliased-rule": sharedAliasedRule,
+    "shared-sequence": sharedSequence,
     "shared-recursion": sharedRecursion,
     "shared-repetition": sharedRepetition,
     "tail-extraction": tailExtraction,

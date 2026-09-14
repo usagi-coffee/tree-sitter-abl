@@ -2,7 +2,7 @@ import { RuleTester } from "oxlint/plugins-dev";
 
 import {
   resetSharingCandidates,
-  sharedAliasedRule,
+  sharedSequence,
   sharedRecursion,
   sharedRepetition,
 } from "./oxlint-plugin-tree-sitter-optimize.js";
@@ -200,7 +200,7 @@ export default ({ kw }) => ({
 
 resetSharingCandidates();
 RuleTester.it = (_name, run) => run();
-new RuleTester().run("shared-aliased-rule across files", sharedAliasedRule, {
+new RuleTester().run("shared-sequence across files", sharedSequence, {
   valid: [
     {
       name: "original IMPORT phrase seeds the candidate",
@@ -234,7 +234,7 @@ export default ({ kw }) => ({
 `;
 const delimiterBody = 'seq(kw("DELIMITER"), field("delimiter", $.string_literal))';
 
-new RuleTester().run("shared-aliased-rule", sharedAliasedRule, {
+new RuleTester().run("shared-sequence", sharedSequence, {
   valid: [
     {
       name: "optimized statements share the public phrase directly",
@@ -243,18 +243,6 @@ new RuleTester().run("shared-aliased-rule", sharedAliasedRule, {
         export_statement: ($) => seq("EXPORT", optional($.delimiter_phrase), $.item),
         delimiter_phrase: ($) => seq(kw("DELIMITER"), field("delimiter", $.string_literal)),
       });`,
-    },
-    {
-      name: "different public aliases preserve distinct node identities",
-      code: aliasedPair(delimiterBody, delimiterBody, "", "other_phrase"),
-    },
-    {
-      name: "a helper with a bare reference cannot become public",
-      code: aliasedPair(delimiterBody, delimiterBody, "bare: ($) => $.__first,"),
-    },
-    {
-      name: "a helper with multiple aliases is excluded",
-      code: aliasedPair(delimiterBody, delimiterBody, "other: ($) => alias($.__first, $.other),"),
     },
     {
       name: "different field captures are preserved",
@@ -280,7 +268,10 @@ new RuleTester().run("shared-aliased-rule", sharedAliasedRule, {
     },
     {
       name: "different regex patterns are preserved",
-      code: aliasedPair('seq("X", token(/a/i))', 'seq("X", token(/b/i))'),
+      code: aliasedPair(
+        'seq("X", field("value", token(/a/i)))',
+        'seq("X", field("value", token(/b/i)))',
+      ),
     },
     {
       name: "different associativity is preserved",
@@ -292,7 +283,10 @@ new RuleTester().run("shared-aliased-rule", sharedAliasedRule, {
     },
     {
       name: "nested aliases preserve their node identities",
-      code: aliasedPair('seq("X", alias($.item, $.a))', 'seq("X", alias($.item, $.b))'),
+      code: aliasedPair(
+        'seq("X", field("value", alias($.item, $.a)))',
+        'seq("X", field("value", alias($.item, $.b)))',
+      ),
     },
     {
       name: "ordinary JavaScript object methods are not grammar rules",
@@ -302,15 +296,120 @@ new RuleTester().run("shared-aliased-rule", sharedAliasedRule, {
       };`,
     },
     {
-      name: "public source rules keep their existing visibility",
-      code: aliasedPair(delimiterBody, delimiterBody).replaceAll("__first", "public_first"),
-    },
-    {
       name: "shared token definitions remain lexical rules",
       code: aliasedPair('token(seq("A", "B"))', 'token(seq("A", "B"))'),
     },
+    {
+      name: "the full precedence chain is compared",
+      code: aliasedPair(
+        `prec("a", prec.right(${delimiterBody}))`,
+        `prec("b", prec.right(${delimiterBody}))`,
+      ),
+    },
+    {
+      name: "keyword/value-looking token internals are excluded",
+      code: aliasedPair(`token(${delimiterBody})`, `token.immediate(${delimiterBody})`),
+    },
+    {
+      name: "nullable sequences cannot become hidden helpers",
+      code: aliasedPair(
+        'seq(optional("X"), optional(field("x", $.item)))',
+        'seq(optional("X"), optional(field("x", $.item)))',
+      ),
+    },
+    {
+      name: "keyword-only sequences are outside the valued-clause rule",
+      code: aliasedPair('seq("FOR", "READ", "ONLY")', 'seq("FOR", "READ", "ONLY")'),
+    },
+    {
+      name: "reusing a WHEN helper removes the duplicate sequence",
+      code: `export default ({kw}) => ({
+        _when_phrase: ($) => seq(kw("WHEN"), field("when", $._expression)),
+        __buffer_copy_assign_pair: ($) => seq(field("left", $._assignable), "=", field("right", $._expression), optional($._when_phrase)),
+      });`,
+    },
+    {
+      name: "the optimized INITIAL clauses share one sequence",
+      code: `export default ({kw}) => ({
+        _initial_phrase: ($) => seq(kw("INITIAL", {offset: 4}), field("initial", $._initial_value)),
+        __variable_option: ($) => choice($.view_as_phrase, $._initial_phrase),
+        __parameter_option: ($) => choice($._format_string, $._initial_phrase),
+        __temp_table_field_option: ($) => choice($._color_font_option, $._initial_phrase),
+        __class_property_option: ($) => choice($._initial_phrase, $._no_undo_keyword),
+      });`,
+    },
   ],
   invalid: [
+    {
+      name: "BUFFER-COPY's nested WHEN clause duplicates an existing helper",
+      code: `export default ({kw}) => ({
+        _when_phrase: ($) => seq(kw("WHEN"), field("when", $._expression)),
+        __buffer_copy_assign_pair: ($) => seq(field("left", $._assignable), "=", field("right", $._expression), optional(seq(kw("WHEN"), field("when", $._expression)))),
+      });`,
+      errors: [{ message: /duplicates _when_phrase.*hidden helper/ }],
+    },
+    {
+      name: "INITIAL clauses match across four definition families",
+      code: `export default ({kw}) => ({
+        __variable_option: ($) => choice($.view_as_phrase, seq(kw("INITIAL", {offset: 4}), field("initial", $._initial_value))),
+        __parameter_option: ($) => choice($._format_string, seq(kw("INITIAL", {offset: 4}), field("initial", $._initial_value))),
+        __temp_table_field_option: ($) => choice($._color_font_option, seq(kw("INITIAL", {offset: 4}), field("initial", $._initial_value))),
+        __class_property_option: ($) => choice(seq(kw("INITIAL", {offset: 4}), field("initial", $._initial_value)), $._no_undo_keyword),
+      });`,
+      errors: [
+        { message: /duplicates __variable_option/ },
+        { message: /duplicates __variable_option/ },
+        { message: /duplicates __variable_option/ },
+      ],
+    },
+    {
+      name: "widget LIKE clauses match even when embedded in different surrounding constructs",
+      code: `export default ({kw}) => ({
+        __button_body: ($) => seq(field("name", $.identifier), repeat(choice(kw("AUTO-GO"), seq($._like_keyword, field("like", $.identifier))))),
+        __image_option: ($) => choice($.image_phrase, seq($._like_keyword, field("like", $.identifier)), $.size_phrase),
+        __menu_option: ($) => choice($._color_font_option, seq($._like_keyword, field("like", $.identifier))),
+      });`,
+      errors: [{ message: /duplicates __button_body/ }, { message: /duplicates __button_body/ }],
+    },
+    {
+      name: "the inner-size pair matches in editor, format, and selection-list alternatives",
+      code: `export default ({kw}) => ({
+        __editor_size: ($) => choice($.size_phrase, seq(kw("INNER-CHARS"), field("inner_chars", $.number_literal), kw("INNER-LINES"), field("inner_lines", $.number_literal))),
+        __format_editor_size: ($) => choice($.__format_size_phrase, seq(kw("INNER-CHARS"), field("inner_chars", $.number_literal), kw("INNER-LINES"), field("inner_lines", $.number_literal))),
+        __selection_list_option: ($) => choice(kw("SINGLE"), seq(kw("INNER-CHARS"), field("inner_chars", $.number_literal), kw("INNER-LINES"), field("inner_lines", $.number_literal))),
+      });`,
+      errors: [{ message: /duplicates __editor_size/ }, { message: /duplicates __editor_size/ }],
+    },
+    {
+      name: "repeated clauses inside one rule are candidates",
+      code: `export default ({kw}) => ({
+        __put_screen_output: ($) => choice(
+          seq(optional(seq($._row_keyword, field("row", $._expression))), field("value", $._expression)),
+          seq(field("value", $._expression), seq($._row_keyword, field("row", $._expression)))
+        ),
+      });`,
+      errors: [{ message: /duplicates __put_screen_output/ }],
+    },
+    {
+      name: "different aliases suggest a hidden helper to preserve node identities",
+      code: aliasedPair(delimiterBody, delimiterBody, "", "other_phrase"),
+      errors: [{ message: /duplicates __first.*hidden helper/ }],
+    },
+    {
+      name: "bare references require a hidden helper",
+      code: aliasedPair(delimiterBody, delimiterBody, "bare: ($) => $.__first,"),
+      errors: [{ message: /duplicates __first.*hidden helper/ }],
+    },
+    {
+      name: "multiple aliases require a hidden helper",
+      code: aliasedPair(delimiterBody, delimiterBody, "other: ($) => alias($.__first, $.other),"),
+      errors: [{ message: /duplicates __first.*hidden helper/ }],
+    },
+    {
+      name: "public source rules retain their wrappers around the hidden helper",
+      code: aliasedPair(delimiterBody, delimiterBody).replaceAll("__first", "public_first"),
+      errors: [{ message: /duplicates public_first.*hidden helper/ }],
+    },
     {
       name: "identical aliases within a module",
       code: aliasedPair(delimiterBody, delimiterBody),
