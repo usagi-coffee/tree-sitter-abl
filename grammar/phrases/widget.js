@@ -82,6 +82,7 @@ export default ({ kw }) => ({
       ),
       seq(
         field("field", $._identifier_or_array_access),
+        // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
         seq(kw("IN"), kw("FRAME", { offset: 4 }), field("frame", $.__widget_name)),
       ),
       seq(
