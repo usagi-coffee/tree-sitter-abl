@@ -2,6 +2,7 @@ export default ({ kw }) => ({
   put_statement: ($) => seq(kw("PUT"), $.__put_body, $._terminator),
 
   __put_body: ($) => seq(optional($._stream_phrase), $.__put_output),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __put_output: ($) =>
     choice(
       seq(
