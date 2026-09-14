@@ -26,6 +26,7 @@ export default ({ kw }) => ({
       seq(alias(kw("UNLESS-HIDDEN"), $.unless_hidden), $.__display_window_frame_phrases),
       $.__display_window_frame_phrases,
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __display_stream_unless_prefix: ($) =>
     choice(
       seq($._stream_phrase, optional(alias(kw("UNLESS-HIDDEN"), $.unless_hidden))),
