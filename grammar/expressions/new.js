@@ -14,5 +14,6 @@ export default ({ kw }) => ({
         ),
       ),
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-sequence
   __new_record_opener: ($) => seq("(", field("record", $._identifier_or_qualified_name)),
 });
