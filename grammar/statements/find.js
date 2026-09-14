@@ -41,11 +41,10 @@ export default ({ kw }) => ({
       alias(kw("NO-ERROR"), $.no_error),
       alias(kw("NO-PREFETCH"), $.no_prefetch),
       seq($._using_keyword, field("values", $._expressions)),
-      seq(kw("USE-INDEX"), field("index", $.__find_index_name)),
+      seq(kw("USE-INDEX"), field("index", $._identifier_or_qualified_name)),
     ),
 
   __find_of_phrase: ($) => seq($._of_keyword, field("record", $._identifier_or_qualified_name)),
   // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
   __find_where_phrase: ($) => seq(kw("WHERE"), field("where", $._expression)),
-  __find_index_name: ($) => $._identifier_or_qualified_name,
 });
