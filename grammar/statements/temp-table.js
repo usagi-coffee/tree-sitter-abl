@@ -82,6 +82,7 @@ export default ({ kw }) => ({
       seq(kw("DECIMALS"), field("decimals", $.number_literal)),
       $.__temp_table_extent_option,
       $._format_string,
+      // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
       seq($._help_keyword, field("help", $.string_literal)),
       $._initial_phrase,
       seq(kw("LABEL"), field("label", $.__temp_table_label_list)),
