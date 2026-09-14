@@ -4,6 +4,7 @@ export default ({ kw }) => ({
   _alignment: ($) => choice(kw("COLON-ALIGNED"), kw("LEFT-ALIGNED"), kw("RIGHT-ALIGNED")),
   _as_like: ($) =>
     choice(
+      // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
       seq($._as_keyword, optional(kw("CLASS")), field("type", $._type_or_string)),
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
       seq($._like_keyword, field("like", $._identifier_or_qualified_name)),

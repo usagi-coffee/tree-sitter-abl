@@ -15,6 +15,7 @@ export default ({ kw }) => ({
       optional($.__variable_extents),
       optional(alias($._no_undo_keyword, $.no_undo)),
       choice(
+        // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
         seq($._as_keyword, optional(kw("CLASS")), field("type", $._type_or_string)),
         seq($._like_keyword, field("like", $._identifier_or_array_access)),
       ),
