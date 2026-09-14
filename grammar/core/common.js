@@ -494,6 +494,7 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
   _when_phrase: ($) => seq(kw("WHEN"), field("when", $._expression)),
   _equals_value: ($) => seq("=", field("value", $._expression)),
+  _close_equals_value: ($) => seq(")", $._equals_value),
   _display_space_phrase: ($) =>
     prec.left(
       seq(kw("SPACE"), optional(field("space", seq($._parenthesized_expression_prefix, ")")))),

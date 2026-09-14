@@ -62,7 +62,7 @@ export default ({ kw }) => ({
             optional(seq(",", $.__value_assignments_position_length)),
           ),
         ),
-        $.__value_assignments_close_equals_value,
+        $._close_equals_value,
       ),
       seq(
         field("type", alias(kw("LENGTH"), $.identifier)),
@@ -77,8 +77,6 @@ export default ({ kw }) => ({
     seq(field("position", $._expression), optional(seq(",", field("length", $._expression)))),
   __value_assignments_database_tenant: ($) =>
     seq(",", field("database", $._expression), optional(seq(",", field("tenant", $._expression)))),
-  // oxlint-disable-next-line tree-sitter-optimize/single-use-sequence
-  __value_assignments_close_equals_value: ($) => seq(")", $._equals_value),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-sequence
   __value_assignments_value_no_error: ($) => seq($._equals_value, optional($.__no_error)),
 });

@@ -12,7 +12,6 @@ export default ({ kw }) => ({
       optional(
         seq(",", field("length", $._expression), optional(seq(",", field("type", $._expression)))),
       ),
-      ")",
-      $._equals_value,
+      $._close_equals_value,
     ),
 });
