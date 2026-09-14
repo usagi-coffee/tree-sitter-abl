@@ -7,6 +7,7 @@ export default ({ kw }) => ({
       choice(
         kw("OFF"),
         seq(
+          // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
           optional(seq($._row_keyword, field("row", $._expression))),
           optional(seq(kw("COLUMN", { offset: 3 }), field("column", $._expression))),
         ),
