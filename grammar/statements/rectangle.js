@@ -25,6 +25,7 @@ export default ({ kw }) => ({
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
       seq(kw("FGCOLOR"), field("fgcolor", $._expression)),
       alias(kw("GRAPHIC-EDGE"), $.graphic_edge),
+      // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
       seq(kw("PFCOLOR"), field("pfcolor", $._expression)),
       alias(kw("ROUNDED"), $.rounded),
       alias(kw("GROUP-BOX"), $.group_box),
