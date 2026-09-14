@@ -373,12 +373,13 @@ export default grammar({
       __if_preprocessor_condition_then: ($) =>
         seq(field("condition", $._expression), token(/&THEN/i)),
       __if_preprocessor_else_branch: ($) => seq(token(/&ELSE/i), $.__if_preprocessor_branch_values),
-      __if_preprocessor_branch_value: ($) =>
-        choice($.string_literal, $.preprocessor_name, $.argument_reference, $.number_literal),
       __if_preprocessor_branch_values: ($) =>
         prec.right(
           seq(
-            field("value", $.__if_preprocessor_branch_value),
+            field(
+              "value",
+              choice($.string_literal, $.preprocessor_name, $.argument_reference, $.number_literal),
+            ),
             optional($.__if_preprocessor_branch_values),
           ),
         ),
