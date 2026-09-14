@@ -360,6 +360,7 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/body-extraction
   __class_method_table_parameter: ($) =>
     choice(
+      // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
       seq(
         kw("BUFFER"),
         field("buffer", $.identifier),

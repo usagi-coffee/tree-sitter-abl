@@ -108,6 +108,7 @@ export default ({ kw }) => ({
         $.__function_variable_type_phrase,
         optional(alias($._no_undo_keyword, $.no_undo)),
       ),
+      // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
       seq(
         kw("BUFFER"),
         field("buffer", $.identifier),
