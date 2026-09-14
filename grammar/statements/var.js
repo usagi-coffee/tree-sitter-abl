@@ -4,8 +4,7 @@ export default ({ kw }) => ({
   __var_prefix: ($) =>
     seq(kw("VAR"), optional($.__var_modifier), $._var_type, $.__var_variable_suffix),
   __var_variable_suffix: ($) =>
-    seq(alias($.__var_variable, $.variable), optional($.__var_variable_tail)),
-  __var_variable_tail: ($) => seq(",", $.__var_variable_suffix),
+    seq(alias($.__var_variable, $.variable), optional(seq(",", $.__var_variable_suffix))),
 
   _var_type: ($) =>
     seq(
