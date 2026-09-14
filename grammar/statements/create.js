@@ -115,6 +115,7 @@ export default ({ kw }) => ({
         ),
       ),
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-sequence
   __create_record_locator_rowid: ($) => seq("(", field("rowid", $._expression), ")"),
   __create_record_locator_recid: ($) => seq("(", field("recid", $._expression), ")"),
 });
