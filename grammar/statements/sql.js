@@ -141,8 +141,7 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/single-use-sequence
   __sql_table_references: ($) =>
     seq(field("table", $.__sql_table_reference), optional($.__sql_table_references_tail)),
-  __sql_table_references_tail: ($) =>
-    seq(",", field("table", $.__sql_table_reference), optional($.__sql_table_references_tail)),
+  __sql_table_references_tail: ($) => seq(",", $.__sql_table_references),
   __sql_set_quantifier: ($) => choice(alias(kw("ALL"), $.all), alias(kw("DISTINCT"), $.distinct)),
 
   // `*`, `t.*`, `COUNT(*)`, or an expression with an optional column title. An
