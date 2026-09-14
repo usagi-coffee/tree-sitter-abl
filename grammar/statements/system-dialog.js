@@ -108,6 +108,7 @@ export default ({ kw }) => ({
     choice(alias($.__system_dialog_update_phrase, $.update_phrase), $.in_window_phrase),
   __system_dialog_initial_dir_option: ($) =>
     seq(kw("INITIAL-DIR"), field("initial_dir", $._expression)),
+  // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
   __system_dialog_title_option: ($) => seq(kw("TITLE"), field("title", $._expression)),
   __system_dialog_update_phrase: ($) => seq(kw("UPDATE"), field("update", $.identifier)),
   __system_dialog_initial_filter_phrase: ($) =>
