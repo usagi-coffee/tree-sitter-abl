@@ -12,7 +12,7 @@ export default ({ kw }) => ({
 
   // oxlint-disable-next-line tree-sitter-optimize/single-use-sequence
   __event_parameter_list: ($) => seq($.__event_parameter, optional($.__event_parameter_tail)),
-  __event_parameter_tail: ($) => seq(",", $.__event_parameter, optional($.__event_parameter_tail)),
+  __event_parameter_tail: ($) => seq(",", $.__event_parameter_list),
 
   __event_parameter: ($) =>
     seq(
