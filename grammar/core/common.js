@@ -261,6 +261,7 @@ export default ({ kw }) => ({
             // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
             seq(kw("XML-NODE-NAME"), field("node", $.string_literal)),
             $.__temp_table_serialize_name_phrase,
+            // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
             seq(kw("XML-NODE-TYPE"), field("xml_node_type", $.string_literal)),
           ),
         ),
@@ -283,7 +284,6 @@ export default ({ kw }) => ({
         optional($._table_options),
       ),
     ),
-
   _table_field: ($) =>
     seq(
       kw("FIELDS", { alias: "FIELD", offset: 5 }),
