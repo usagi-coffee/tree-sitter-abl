@@ -468,3 +468,40 @@ x = DYNAMIC-FUNCTION("f" IN h).
         (argument
           name: (string_literal)
           in_handle: (identifier))))))
+
+================================================================================
+BUFFER and TABLE-HANDLE as plain identifiers (not reserved words)
+================================================================================
+
+x = Buffer.
+y = Buffer:SomeProp.
+z = Table-Handle.
+IF VALID-OBJECT(Buffer) THEN x = 1.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (identifier))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (object_access
+      left: (identifier)
+      right: (identifier)))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (identifier))
+  (if_statement
+    (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (identifier))))
+    then: (assignment_statement
+      left: (identifier)
+      operator: (assignment_operator)
+      right: (number_literal))))

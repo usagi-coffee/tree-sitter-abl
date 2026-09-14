@@ -490,6 +490,18 @@ export default grammar({
           alias(kw("PROCEDURE", { offset: 4 }), $.identifier),
           alias(kw("INTERFACE"), $.identifier),
         ),
+      // BUFFER/TABLE-HANDLE are not reserved (per the ABL Reference Keyword
+      // Index), but they are also used as parameter/handle-type markers
+      // (__argument_body, __object_access_handle_type, __create_buffer*,
+      // __raw_transfer_prefix). Rather than aliasing them inside
+      // _identifier_or_qualified_name (reused at ~145 sites) or inside
+      // _primary_expression/_expression (reused even more broadly), this
+      // rule is wired in only at the exact three value positions a bare
+      // "Buffer"/"Table-Handle" is reachable from: an assignment's
+      // right-hand side, a plain object-access receiver, and an unnamed
+      // call argument.
+      _bare_marker_identifier: ($) =>
+        choice(alias(kw("BUFFER"), $.identifier), alias(kw("TABLE-HANDLE"), $.identifier)),
       _identifier_or_array_access: ($) => choice($._identifier_or_qualified_name, $.array_access),
       _identifier_or_access: ($) =>
         choice($._identifier_or_qualified_name, $.array_access, $.object_access),
@@ -524,7 +536,7 @@ export default grammar({
         seq(
           field("left", $._assignable),
           field("operator", $.assignment_operator),
-          field("right", choice($.array_initializer, $._expression)),
+          field("right", choice($.array_initializer, $._expression, $._bare_marker_identifier)),
           optional($.widget_phrase),
         ),
 
@@ -580,6 +592,7 @@ export default grammar({
       _object_access_plain_left: ($) =>
         choice(
           $._identifier_or_qualified_name,
+          $._bare_marker_identifier,
           $.system_handle_identifier,
           $.preprocessor_name,
           $.scoped_name,
@@ -705,7 +718,7 @@ export default grammar({
                     ),
                   ),
                 ),
-                field("name", $._expression),
+                field("name", choice($._expression, $._bare_marker_identifier)),
               ),
               optional($.__argument_in_handle),
             ),
