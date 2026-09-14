@@ -229,6 +229,7 @@ export default ({ kw }) => ({
       seq($.__class_property_accessor_body, optional(choice(kw("GET"), kw("SET"))), $._terminator),
     ),
 
+  // oxlint-disable-next-line tree-sitter-optimize/choice-subset
   __class_property_accessor_modifier: ($) =>
     choice(
       alias(kw("PRIVATE"), $.access_modifier),
