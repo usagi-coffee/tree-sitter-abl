@@ -49,6 +49,7 @@ export default ({ kw }) => ({
       alias(kw("GENERATE-MD5"), $.generate_md5),
     ),
 
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __compile_file: ($) =>
     choice($.identifier, $.qualified_name, $.string_literal, $._value_expression),
 
