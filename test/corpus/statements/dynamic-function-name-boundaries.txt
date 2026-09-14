@@ -1,0 +1,45 @@
+================================================================================
+RUN - DYNAMIC-FUNCTION call, parenthesized, and concatenated names
+================================================================================
+
+RUN task IN DYNAMIC-FUNCTION(GetName() IN h) (1).
+RUN task IN DYNAMIC-FUNCTION((procName) IN h) (2).
+RUN task IN DYNAMIC-FUNCTION(cfg:Name + "Suffix" IN h) (3).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (run_statement
+    procedure: (identifier)
+    (in_phrase
+      context: (dynamic_function_call
+        function: (function_call
+          function: (identifier)
+          (arguments))
+        context: (identifier)))
+    (arguments
+      (argument
+        name: (number_literal))))
+  (run_statement
+    procedure: (identifier)
+    (in_phrase
+      context: (dynamic_function_call
+        function: (parenthesized_expression
+          (identifier))
+        context: (identifier)))
+    (arguments
+      (argument
+        name: (number_literal))))
+  (run_statement
+    procedure: (identifier)
+    (in_phrase
+      context: (dynamic_function_call
+        function: (binary_expression
+          (object_access
+            left: (identifier)
+            right: (identifier))
+          (string_literal))
+        context: (identifier)))
+    (arguments
+      (argument
+        name: (number_literal)))))

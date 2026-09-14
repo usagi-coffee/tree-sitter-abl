@@ -23,7 +23,7 @@ export default ({ kw }) => ({
   __dynamic_function_concatenation_tail: ($) =>
     seq("+", $.__dynamic_function_atom, optional($.__dynamic_function_concatenation_tail)),
   __dynamic_function_atom: ($) =>
-    choice($.string_literal, $._identifier_or_access_or_call, $.parenthesized_expression),
+    choice($._string_or_identifier_access_or_call, $.parenthesized_expression),
   __dynamic_function_context: ($) =>
     choice(
       $.system_handle_identifier,
