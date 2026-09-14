@@ -12,6 +12,7 @@ export default ({ kw }) => ({
       $.image_phrase,
       seq($._like_keyword, field("like", $.identifier)),
       $.size_phrase,
+      // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
       seq(kw("BGCOLOR"), field("bgcolor", $._expression)),
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
       seq(kw("FGCOLOR"), field("fgcolor", $._expression)),
