@@ -2,10 +2,7 @@
 export default ($) => [
   // Purpose: prefer record parsing over plain expressions.
   // Example: DISPLAY Customer EXCEPT Customer.Comments WITH FRAME f2.
-  [$.__display_record, $._expression],
-  // Purpose: prefer record parsing over identifier/qualified name.
-  // Example: DISPLAY Customer WITH BROWSE b.
-  [$.__display_record, $._identifier_or_qualified_name],
+  [$.__display_items, $._expression],
   // Purpose: prefer browse form when WITH BROWSE is present.
   // Example: DISPLAY Customer EXCEPT Customer.Comments WITH BROWSE b1.
   [$.__display_browse_body, $.__frame_identifier],
@@ -24,11 +21,11 @@ export default ($) => [
   [$._display_space_phrase, $._expression],
   // Purpose: prefer field interpretation over record.
   // Example: DISPLAY Customer.Name IN WINDOW hWin WITH FRAME f1.
-  [$.__display_field, $.__display_record],
+  [$.__display_field, $._identifier_or_qualified_name],
   // Purpose: prefer widget-qualified syntax over a bare display record when IN follows.
   // Example: DISPLAY Customer.Name IN FRAME f.
   // Reference: DISPLAY statement widget-qualified field.
-  [$.widget_qualified_name, $.__display_record],
+  [$.widget_qualified_name, $.__display_items],
   // Purpose: prefer item SKIP over frame SKIP.
   // Example: DISPLAY out-param LABEL "Updated YTD Sales" SKIP new-param.
   [$.__display_skip_phrase, $.__frame_skip_phrase],

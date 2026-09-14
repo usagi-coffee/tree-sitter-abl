@@ -37,7 +37,10 @@ export default ({ kw }) => ({
 
   __display_items: ($) =>
     choice(
-      seq(field("record", $.__display_record), optional(seq(kw("EXCEPT"), $._except_name_list))),
+      seq(
+        field("record", $._identifier_or_qualified_name),
+        optional(seq(kw("EXCEPT"), $._except_name_list)),
+      ),
       prec.right(seq($.__display_item, optional($.__display_items_tail))),
     ),
   __display_items_tail: ($) => prec.right(seq($.__display_item, optional($.__display_items_tail))),
@@ -81,8 +84,6 @@ export default ({ kw }) => ({
   __display_aggregate_primary_expression: ($) =>
     choice($.__display_keyword_identifier, $._expression),
   __display_keyword_identifier: ($) => alias(kw("MENU"), $.identifier),
-  __display_record: ($) => $._identifier_or_qualified_name,
-
   // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
   __display_skip_phrase: ($) =>
     prec.left(
