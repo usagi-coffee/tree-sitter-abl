@@ -829,6 +829,7 @@ export default grammar({
           ),
         ),
       _object_access_separator: ($) => choice($._namecolon, token.immediate("?:")),
+      // oxlint-disable-next-line tree-sitter-optimize/choice-subset
       _identifier_or_string_literal: ($) => choice($.identifier, $.string_literal),
       _value_expression: ($) => seq($.__value_expression_opener, ")"),
       __value_expression_opener: ($) => seq(kw("VALUE"), "(", field("value", $._expression)),
