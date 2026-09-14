@@ -23,6 +23,7 @@ export default ({ kw }) => ({
         field("tenant_where", $._expression),
         optional(alias(kw("SKIP-GROUP-DUPLICATES"), $.skip_group_duplicates)),
       ),
+      // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
       seq(kw("USE-INDEX"), field("index", $._identifier_or_qualified_name)),
       alias(kw("TABLE-SCAN"), $.table_scan),
       seq(
