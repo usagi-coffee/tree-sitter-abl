@@ -12,6 +12,7 @@ export default ({ kw }) => ({
       seq(choice($._value_expression, $.__os_command_token), optional($.__os_command_items)),
     ),
 
+  // oxlint-disable-next-line tree-sitter-optimize/choice-subset
   __os_command_token: ($) =>
     choice(
       $.identifier,
