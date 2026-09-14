@@ -53,5 +53,6 @@ export default ({ kw }) => ({
       ),
     ),
 
+  // oxlint-disable-next-line tree-sitter-optimize/forwarding-rule
   __system_help_expression: ($) => $._expression,
 });
