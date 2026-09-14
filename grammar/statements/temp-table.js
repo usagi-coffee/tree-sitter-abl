@@ -79,6 +79,7 @@ export default ({ kw }) => ({
     choice(
       $._color_font_option,
       seq(kw("COLUMN-LABEL"), field("column_label", $.__temp_table_label_list)),
+      // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
       seq(kw("DECIMALS"), field("decimals", $.number_literal)),
       $.__temp_table_extent_option,
       $._format_string,

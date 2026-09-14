@@ -58,6 +58,7 @@ export default ({ kw }) => ({
       $._format_string,
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
       seq(kw("COLUMN-LABEL"), field("column_label", $.string_literal)),
+      // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
       seq(kw("DECIMALS"), field("decimals", $.number_literal)),
       alias($._extent_phrase, $.extent_phrase),
       $._initial_phrase,

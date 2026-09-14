@@ -32,6 +32,7 @@ export default ({ kw }) => ({
       $._color_font_option,
       seq(kw("COLUMN-LABEL"), field("column_label", $._format_labels)),
       seq(kw("CONTEXT-HELP-ID"), field("context_help_id", $._expression)),
+      // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
       seq(kw("DECIMALS"), field("decimals", $.number_literal)),
       alias(kw("DROP-TARGET"), $.drop_target),
       seq(kw("LABEL"), field("label", $._format_labels)),
