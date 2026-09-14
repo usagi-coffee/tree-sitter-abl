@@ -113,6 +113,7 @@ export default ({ kw }) => ({
   __system_dialog_update_phrase: ($) => seq(kw("UPDATE"), field("update", $.identifier)),
   __system_dialog_initial_filter_phrase: ($) =>
     seq(kw("INITIAL-FILTER"), field("initial", $._expression)),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-sequence
   __system_dialog_filters_pairs: ($) =>
     seq($.__system_dialog_filter_pair, optional($.__system_dialog_filter_pair_tail)),
   __system_dialog_filter_pair_tail: ($) =>
