@@ -90,6 +90,7 @@ export default ({ kw }) => ({
       seq(kw("LABEL"), field("label", $.__temp_table_label_list)),
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
       seq(kw("MOUSE-POINTER"), field("mouse_pointer", $._expression)),
+      // oxlint-disable-next-line tree-sitter-optimize/keyword-reuse
       seq(optional(alias(kw("NOT"), $.not)), alias(kw("CASE-SENSITIVE"), $.case_sensitive)),
       alias(kw("SERIALIZE-HIDDEN"), $.serialize_hidden),
       $.__temp_table_serialize_name_phrase,
