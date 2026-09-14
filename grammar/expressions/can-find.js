@@ -15,10 +15,7 @@ export default ({ kw }) => ({
     ),
 
   __record_query_options: ($) =>
-    choice(
-      seq(alias($.__record_query_of_phrase, $.of_phrase), optional($.__record_query_after_of)),
-      $.__record_query_after_of,
-    ),
+    choice(seq($.of_phrase, optional($.__record_query_after_of)), $.__record_query_after_of),
   __record_query_after_of: ($) =>
     choice(
       seq(
@@ -59,8 +56,6 @@ export default ({ kw }) => ({
     ),
 
   __record_query_where_phrase: ($) => seq(kw("WHERE"), optional($._expression)),
-  __record_query_of_phrase: ($) =>
-    seq($._of_keyword, field("record", $._identifier_or_qualified_name)),
   __record_query_using_phrase: ($) =>
     seq($._using_keyword, field("index", $._identifier_or_qualified_name)),
   __record_query_frame_phrase: ($) =>

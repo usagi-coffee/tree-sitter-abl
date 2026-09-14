@@ -1,4 +1,5 @@
 export default ({ kw }) => ({
+  of_phrase: ($) => seq($._of_keyword, field("record", $._identifier_or_qualified_name)),
   record_phrase: ($) =>
     // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq(

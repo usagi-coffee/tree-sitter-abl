@@ -22,11 +22,7 @@ export default ({ kw }) => ({
   __find_options: ($) =>
     prec.right(
       seq(
-        choice(
-          alias($.__find_of_phrase, $.of_phrase),
-          $._find_record_option,
-          alias($.__find_where_phrase, $.where_phrase),
-        ),
+        choice($.of_phrase, $._find_record_option, alias($.__find_where_phrase, $.where_phrase)),
         optional($.__find_options),
       ),
     ),
@@ -44,7 +40,6 @@ export default ({ kw }) => ({
       seq(kw("USE-INDEX"), field("index", $._identifier_or_qualified_name)),
     ),
 
-  __find_of_phrase: ($) => seq($._of_keyword, field("record", $._identifier_or_qualified_name)),
   // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
   __find_where_phrase: ($) => seq(kw("WHERE"), field("where", $._expression)),
 });
