@@ -67,9 +67,12 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/body-extraction
   __view_hide_widget_phrase: ($) =>
     choice(
+      // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
       seq(kw("FRAME", { offset: 4 }), field("frame", $.__widget_name)),
+      // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
       seq(kw("BROWSE"), field("browse", $.__widget_name)),
       $.__view_hide_widget_ref,
+      // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
       seq(choice(kw("MENU"), kw("SUB-MENU")), field("menu", $.__widget_name)),
     ),
   // oxlint-disable-next-line tree-sitter-optimize/body-extraction
