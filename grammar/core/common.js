@@ -486,6 +486,7 @@ export default ({ kw }) => ({
       ),
     ),
   __return_error_clause: ($) => seq(kw("ERROR"), optional(field("error_value", $._expression))),
+  // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
   _when_phrase: ($) => seq(kw("WHEN"), field("when", $._expression)),
   _equals_value: ($) => seq("=", field("value", $._expression)),
   _display_space_phrase: ($) =>

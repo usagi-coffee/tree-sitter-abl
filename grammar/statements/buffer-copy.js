@@ -26,6 +26,7 @@ export default ({ kw }) => ({
       field("left", $._assignable),
       choice("=", "+=", "-=", "*=", "/="),
       field("right", $._expression),
+      // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
       optional(seq(kw("WHEN"), field("when", $._expression))),
     ),
   __buffer_copy_assign_pairs: ($) =>
