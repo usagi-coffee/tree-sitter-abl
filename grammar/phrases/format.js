@@ -30,6 +30,7 @@ export default ({ kw }) => ({
       $._format_view_as,
       seq(kw("WIDGET-ID"), field("widget_id", $.__format_expression)),
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/forwarding-rule
   __format_expression: ($) => $._expression,
 
   __format_at_phrase: ($) =>
