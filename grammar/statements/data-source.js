@@ -55,6 +55,7 @@ export default ({ kw }) => ({
       $.__data_source_static,
       seq($.__data_source_static, $.__data_source_access_modifier),
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/shared-choice
   __data_source_access_modifier: ($) =>
     choice(alias(kw("PRIVATE"), $.access_modifier), alias(kw("PROTECTED"), $.access_modifier)),
   __data_source_static: ($) => alias(kw("STATIC"), $.static_modifier),

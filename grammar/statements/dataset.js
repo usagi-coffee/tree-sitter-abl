@@ -101,6 +101,7 @@ export default ({ kw }) => ({
       alias(kw("SHARED"), $.scope_modifier),
       // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
       seq(
+        // oxlint-disable-next-line tree-sitter-optimize/shared-choice
         choice(alias(kw("PRIVATE"), $.access_modifier), alias(kw("PROTECTED"), $.access_modifier)),
         optional(alias(kw("STATIC"), $.static_modifier)),
         optional($._serialization_modifier),
