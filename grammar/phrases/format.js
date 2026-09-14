@@ -109,6 +109,7 @@ export default ({ kw }) => ({
   __format_editor_size: ($) =>
     choice(
       $.__format_size_phrase,
+      // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
       seq(
         kw("INNER-CHARS"),
         field("inner_chars", $.number_literal),
