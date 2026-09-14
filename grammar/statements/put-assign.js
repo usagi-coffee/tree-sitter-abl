@@ -1,6 +1,7 @@
 export default ({ kw }) => ({
   put_assign_statement: ($) => seq($.__put_assign_prefix, $._terminator),
 
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-sequence
   __put_assign_prefix: ($) =>
     seq(field("type", $.__put_assign_type), $.__put_assign_args, $._equals_value),
 
