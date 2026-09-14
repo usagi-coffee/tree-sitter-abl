@@ -25,6 +25,7 @@
         "tree-sitter-optimize/body-extraction": "warn",
         "tree-sitter-optimize/broad-dispatcher": "warn",
         "tree-sitter-optimize/chunk-extraction": "warn",
+        "tree-sitter-optimize/choice-subset": "warn",
         "tree-sitter-optimize/local-prefix-helper": "warn",
         "tree-sitter-optimize/non-empty-tail-extraction": "warn",
         "tree-sitter-optimize/optional-body-extraction": "warn",

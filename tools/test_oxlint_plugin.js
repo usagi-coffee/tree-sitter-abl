@@ -1,6 +1,7 @@
 import { RuleTester } from "oxlint/plugins-dev";
 
 import {
+  choiceSubset,
   resetSharingCandidates,
   sharedSequence,
   sharedRecursion,
@@ -495,6 +496,123 @@ new RuleTester().run("shared-sequence", sharedSequence, {
         __first: ($) => prec.right(${delimiterBody}), __second: ($) => prec.right(${delimiterBody}),
       }});`,
       errors: [{ message: /__first.*alias to phrase/ }],
+    },
+  ],
+});
+
+resetSharingCandidates();
+RuleTester.it = (_name, run) => run();
+new RuleTester().run("choice-subset across files", choiceSubset, {
+  valid: [
+    {
+      filename: "grammar/core/common.js",
+      code: `export default ({kw}) => ({
+      _serialization_modifier: ($) => choice(alias(kw("SERIALIZABLE"), $.serialization_modifier), alias(kw("NON-SERIALIZABLE"), $.serialization_modifier)),
+    });`,
+    },
+  ],
+  invalid: [
+    {
+      filename: "grammar/statements/var.js",
+      code: `export default ({kw}) => ({
+      __var_storage_modifier: ($) => choice(alias(kw("STATIC"), $.static_modifier), alias(kw("SERIALIZABLE"), $.serialization_modifier), alias(kw("NON-SERIALIZABLE"), $.serialization_modifier)),
+    });`,
+      errors: [
+        {
+          message:
+            /_serialization_modifier matches 2 consecutive alternatives in __var_storage_modifier/,
+        },
+      ],
+    },
+  ],
+});
+
+resetSharingCandidates();
+new RuleTester().run("choice-subset DYNAMIC-FUNCTION regression", choiceSubset, {
+  valid: [
+    {
+      filename: "grammar/core/common.js",
+      code: `export default () => ({
+      _string_or_identifier_access_or_call: ($) => choice($.string_literal, $._identifier_or_access_or_call),
+    });`,
+    },
+  ],
+  invalid: [
+    {
+      filename: "grammar/expressions/dynamic-function.js",
+      code: `export default () => ({
+      __dynamic_function_atom: ($) => choice($.string_literal, $._identifier_or_access_or_call, $.parenthesized_expression),
+    });`,
+      errors: [
+        {
+          message:
+            /_string_or_identifier_access_or_call matches 2 consecutive alternatives in __dynamic_function_atom/,
+        },
+      ],
+    },
+  ],
+});
+
+RuleTester.it = (_name, run) => {
+  resetSharingCandidates();
+  run();
+};
+new RuleTester().run("choice-subset", choiceSubset, {
+  valid: [
+    `export default () => ({
+      _string_or_identifier_access_or_call: ($) => choice($.string_literal, $._identifier_or_access_or_call),
+      __dynamic_function_atom: ($) => choice($._string_or_identifier_access_or_call, $.parenthesized_expression),
+    });`,
+    `export default () => ({ _small: ($) => choice($.a, $.b), _large: ($) => choice($.x, $._small) });`,
+    `export default () => ({ _small: ($) => choice($.a, $.b), _large: ($) => choice($.b, $.a, $.c) });`,
+    `export default () => ({ _small: ($) => choice($.a, $.b), _large: ($) => choice($.a, $.c, $.b) });`,
+    `export default () => ({ small: ($) => choice($.a, $.b), _large: ($) => choice($.a, $.b, $.c) });`,
+    `export default () => ({ _small: ($) => prec.right(choice($.a, $.b)), _large: ($) => choice($.a, $.b, $.c) });`,
+    `export default () => ({ _small: ($) => choice($.a, $.b), _same: ($) => choice($.a, $.b) });`,
+    `export default () => ({ _small: ($) => choice($.a, $._large), _large: ($) => choice($.a, $._large, $.c) });`,
+    `export default () => ({ _small: ($) => choice($.a, $.b), _large: ($) => token(choice($.a, $.b, $.c)) });`,
+    `const helpers = { _small: ($) => choice($.a, $.b), _large: ($) => choice($.a, $.b, $.c) };`,
+    `export default ({kw}) => ({ _small: ($) => choice(kw("COLUMN", {offset:3}), $.b), _large: ($) => choice(kw("COLUMN", {offset:6}), $.b, $.c) });`,
+    `export default () => ({ _small: ($) => choice(field("x", $.a), $.b), _large: ($) => choice(field("y", $.a), $.b, $.c) });`,
+    `export default () => ({ _small: ($) => choice(alias($.a, $.x), $.b), _large: ($) => choice(alias($.a, $.y), $.b, $.c) });`,
+    `export default () => ({ _small: ($) => choice(token(/a/i), $.b), _large: ($) => choice(token(/b/i), $.b, $.c) });`,
+    `export default () => ({
+      // oxlint-disable-next-line rule-to-test/choice-subset
+      _small: ($) => choice($.a, $.b),
+      _large: ($) => choice($.a, $.b, $.c),
+    });`,
+  ],
+  invalid: [
+    {
+      name: "provider appears first",
+      code: `export default () => ({ _small: ($) => choice($.a, $.b), _large: ($) => choice($.x, $.a, $.b, $.y) });`,
+      errors: [{ message: /_small matches 2 consecutive alternatives in _large/ }],
+    },
+    {
+      name: "provider appears after the larger choice",
+      code: `export default () => ({ _large: ($) => choice($.x, $.a, $.b, $.y), _small: ($) => choice($.a, $.b) });`,
+      errors: [{ message: /_small matches 2 consecutive alternatives in _large/ }],
+    },
+    {
+      name: "class parameter flags",
+      code: `export default ({kw}) => ({
+        __class_handle_option: ($) => choice(alias(kw("BIND"), $.bind), alias(kw("BY-VALUE"), $.by_value), alias(kw("BY-REFERENCE"), $.by_reference)),
+        __class_table_option: ($) => choice(alias(kw("APPEND"), $.append), alias(kw("BIND"), $.bind), alias(kw("BY-VALUE"), $.by_value), alias(kw("BY-REFERENCE"), $.by_reference)),
+      });`,
+      errors: [
+        {
+          message:
+            /__class_handle_option matches 3 consecutive alternatives in __class_table_option/,
+        },
+      ],
+    },
+    {
+      name: "nested larger choice under a field",
+      code: `export default grammar({rules: {
+        _small: ($) => choice($.a, $.b),
+        value: ($) => seq("X", field("value", choice($.a, $.b, $.c))),
+      }});`,
+      errors: [{ message: /_small matches 2 consecutive alternatives in value/ }],
     },
   ],
 });
