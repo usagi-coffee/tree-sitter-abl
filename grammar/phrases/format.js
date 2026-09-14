@@ -93,6 +93,7 @@ export default ({ kw }) => ({
 
   __format_size_phrase: ($) =>
     seq(
+      // oxlint-disable-next-line tree-sitter-optimize/shared-choice
       choice(kw("SIZE"), kw("SIZE-CHARS"), kw("SIZE-PIXELS")),
       field("width", $.number_literal),
       $._by_keyword,
