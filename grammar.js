@@ -656,9 +656,8 @@ export default grammar({
       _nested_type_left: ($) => choice($.qualified_name, $.identifier),
 
       // Array
-      array_initializer: ($) => seq($.__array_initializer_prefix, "]"),
-      // oxlint-disable-next-line tree-sitter-optimize/single-use-sequence
-      __array_initializer_prefix: ($) => seq("[", optional($._expressions)),
+      array_initializer: ($) => seq($._array_initializer_prefix, "]"),
+      _array_initializer_prefix: ($) => seq("[", optional($._expressions)),
 
       array_access: ($) => seq($.__array_access_prefix, "]"),
       __array_access_prefix: ($) =>
