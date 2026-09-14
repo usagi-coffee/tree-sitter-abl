@@ -56,7 +56,7 @@ export default ({ kw }) => ({
           $.message_preprocessor_directive,
           $.undefine_preprocessor_directive,
           $.include_file_reference,
-          alias($.__macro_statement, $.constant),
+          alias($._macro_statement_token, $.constant),
         ),
         optional($.__class_definition_items),
       ),
@@ -223,7 +223,7 @@ export default ({ kw }) => ({
       // A {&NAME} alone on its line lexes as the whole-line macro_statement
       // token (longer match, higher precedence) rather than a bare
       // preprocessor_name — accept that spelling here too.
-      alias($.__macro_statement, $.constant),
+      alias($._macro_statement_token, $.constant),
     ),
   __class_property_accessor_parameters: ($) => choice(seq("(", ")"), $.property_set_parameter_list),
   property_set_parameter_list: ($) =>

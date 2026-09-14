@@ -297,3 +297,18 @@ x = 1.
     operator: (assignment_operator)
     right: (number_literal))
   (analyze_resume_preprocessor_directive))
+
+================================================================================
+Preprocessor - consecutive whole-line macro statements preserve constant nodes
+================================================================================
+
+{&FIRST}
+{&SECOND} // trailing comment
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (constant)
+  (constant)
+  (comment
+    (line_comment)))

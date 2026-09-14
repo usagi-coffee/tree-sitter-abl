@@ -89,6 +89,12 @@ export default grammar({
     $._terminator_dot,
     $.string_literal,
     $.block_comment,
+    // External token: a {&NAME} alone on its line (only whitespace and an
+    // optional // comment before the newline) is a whole macro statement,
+    // distinct from the same spelling used inline as a preprocessor_name.
+    // A grammar-level regex token cannot look ahead past '}' without
+    // consuming what follows, which would swallow a trailing comment into
+    // itself instead of leaving it as its own comment node (see scanner.c).
     $._macro_statement_token,
   ],
   extras: ($) => [/[\s\f\uFEFF\u2060\u200B]|\\\r?\n|~[ \t]*/, $.comment, $.argument_reference],
@@ -406,13 +412,6 @@ export default grammar({
         /[A-Za-z0-9_!\\/.-](?:[A-Za-z0-9_!\\/.-]|\{&[0-9A-Za-z_-]+\})*\.[A-Za-z][A-Za-z0-9]*/,
 
       // Constants
-      // External token: a {&NAME} alone on its line (only whitespace and an
-      // optional // comment before the newline) is a whole macro statement,
-      // distinct from the same spelling used inline as a preprocessor_name.
-      // A grammar-level regex token cannot look ahead past '}' without
-      // consuming what follows, which would swallow a trailing comment into
-      // itself instead of leaving it as its own comment node (see scanner.c).
-      __macro_statement: ($) => $._macro_statement_token,
       preprocessor_name: ($) => prec(1, seq($.__preprocessor_name_prefix, "}")),
       __preprocessor_name_prefix: ($) =>
         seq(
