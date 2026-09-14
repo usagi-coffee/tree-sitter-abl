@@ -1,6 +1,7 @@
 import { RuleTester } from "oxlint/plugins-dev";
 
 import {
+  singleUseChoice,
   forwardingRule,
   choiceSubset,
   singleUseSequence,
@@ -1005,6 +1006,60 @@ new RuleTester().run("forwarding-rule", forwardingRule, {
       name: "a hidden wrapper around a visible target can also be removed",
       code: `export default grammar({ rules: { root: ($) => seq("X", $.__name), __name: ($) => $.identifier } });`,
       errors: [{ message: /__name only forwards to identifier/ }],
+    },
+  ],
+});
+
+new RuleTester().run("single-use-choice", singleUseChoice, {
+  valid: [
+    `export default () => ({ visible: ($) => choice($.a, $.b), root: ($) => $.visible });`,
+    `export default () => ({ _shared: ($) => choice($.a, $.b), root: ($) => $._shared });`,
+    `export default () => ({ __item_body: ($) => choice($.a, $.b), root: ($) => $.__item_body });`,
+    `export default () => ({ __item: ($) => choice($.a, $.b), root: ($) => seq($.__item, $.__item) });`,
+    `export default () => ({ __item: ($) => choice($.a, $.b) });`,
+    `export default () => ({ __item: ($) => choice($.a, $.__item) });`,
+    `export default () => ({ __item: ($) => prec.right(choice($.a, $.b)), root: ($) => $.__item });`,
+    `export default () => ({ __item: ($) => choice($.a), root: ($) => $.__item });`,
+    `export default () => ({ __item: ($) => choice($.a, $.b, $.c, $.d, $.e, $.f), root: ($) => $.__item });`,
+    `export default () => ({ __item: ($) => choice(...items), root: ($) => $.__item });`,
+    `export default ({kw}) => ({ __item: ($) => choice(kw("A", options), $.b), root: ($) => $.__item });`,
+    `export default () => ({ __item: ($) => choice($.a, $.b), root: ($) => alias($.__item, $.item) });`,
+    `export default () => ({ __item: ($) => choice($.a, $.b), root: ($) => alias($.other, $.__item) });`,
+    `export default () => ({ __item: ($) => choice($.a, $.b), root: ($) => token($.__item) });`,
+    `export default () => ({ __item: ($) => choice($.a, $.b), root: ($) => token.immediate($.__item) });`,
+    `const unrelated = { __item: ($) => choice($.a, $.b), root: ($) => $.__item };`,
+    ...["inline", "conflicts", "precedences", "supertypes"].map(
+      (metadata) =>
+        `export default grammar({ ${metadata}: ($) => [$.__item], rules: { __item: ($) => choice($.a, $.b), root: ($) => $.__item } });`,
+    ),
+    `export default () => ({
+      // oxlint-disable-next-line rule-to-test/single-use-choice
+      __item: ($) => choice($.a, $.b),
+      root: ($) => $.__item,
+    });`,
+    `export default () => ({
+      __enum_member: ($) => seq(field("name", $.identifier), optional(seq("=", choice($.number_literal, seq($.identifier, optional($.__enum_member_value_tail)), $.null_literal)))),
+      __enum_member_value_tail: ($) => seq(",", $.identifier, optional($.__enum_member_value_tail)),
+    });`,
+  ],
+  invalid: [
+    {
+      name: "ENUM member value regression",
+      code: `export default () => ({
+        __enum_member: ($) => seq(field("name", $.identifier), optional(seq("=", $.__enum_member_value))),
+        __enum_member_value: ($) => choice($.number_literal, seq($.identifier, optional($.__enum_member_value_tail)), $.null_literal),
+      });`,
+      errors: [{ message: /__enum_member_value has one unaliased local use in __enum_member/ }],
+    },
+    {
+      name: "fields outside and inside the choice are preserved",
+      code: `export default grammar({rules: { __item: ($) => choice(field("a", $.a), alias($.b, $.item)), root: ($) => field("value", $.__item) }});`,
+      errors: [{ message: /__item has one unaliased local use in root/ }],
+    },
+    {
+      name: "alternative precedence remains inside the inlined choice",
+      code: `export default () => ({ __item: ($) => choice(prec.left(1, $.a), $.b), root: ($) => optional($.__item) });`,
+      errors: [{ message: /__item has one unaliased local use in root/ }],
     },
   ],
 });
