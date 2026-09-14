@@ -95,14 +95,13 @@ export default ({ kw }) => ({
       seq(
         $._on_keyword,
         choice(
-          $.__on_ui_event_branch,
+          seq($.__on_ui_events, $.__on_ui_event_target, $.__on_trigger_action),
           $.__on_database_event_branch,
           $.__on_key_label_branch,
           $.__on_web_notify_branch,
         ),
       ),
     ),
-  __on_ui_event_branch: ($) => seq($.__on_ui_events, $.__on_ui_event_target, $.__on_trigger_action),
   __on_ui_event_target: ($) =>
     choice(
       alias(kw("ANYWHERE"), $.anywhere),
