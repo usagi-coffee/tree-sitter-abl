@@ -180,6 +180,7 @@ export default ({ kw }) => ({
     ),
   __format_radio_set_buttons: ($) =>
     seq($.__format_radio_set_pair, optional($.__format_radio_set_buttons_tail)),
+  // oxlint-disable-next-line tree-sitter-optimize/recursive-tail-reuse
   __format_radio_set_buttons_tail: ($) =>
     seq(",", $.__format_radio_set_pair, optional($.__format_radio_set_buttons_tail)),
   __format_radio_set_pair: ($) =>
