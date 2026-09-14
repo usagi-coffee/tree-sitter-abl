@@ -8,6 +8,7 @@ export default ({ kw }) => ({
   __input_expression_prefix: ($) => kw("INPUT"),
   __input_widget_phrase: ($) =>
     choice(
+      // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
       seq(kw("FRAME", { offset: 4 }), field("frame", $.identifier)),
       seq(kw("BROWSE"), field("browse", $.identifier)),
     ),
