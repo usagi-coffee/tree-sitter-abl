@@ -8,8 +8,7 @@ export default ({ kw }) => ({
       optional(field("undo_label", $.identifier)),
       optional(seq(",", $.__undo_action)),
     ),
-
-  // oxlint-disable-next-line tree-sitter-optimize/body-extraction
+  // oxlint-disable-next-line tree-sitter-optimize/body-extraction, tree-sitter-optimize/single-use-choice
   __undo_action: ($) =>
     choice(
       seq(
