@@ -85,8 +85,11 @@ export default ({ kw }) => ({
     ),
   _frame_browse_menu_widget: ($) =>
     choice(
+      // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
       seq(kw("FRAME", { offset: 4 }), field("frame", $.__widget_name)),
+      // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
       seq(kw("BROWSE"), field("browse", $.__widget_name)),
+      // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
       seq(choice(kw("MENU"), kw("SUB-MENU")), field("menu", $.__widget_name)),
     ),
   _frame_identifier_phrase: ($) => seq(kw("FRAME", { offset: 4 }), field("frame", $.identifier)),
