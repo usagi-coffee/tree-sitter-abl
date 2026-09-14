@@ -7,7 +7,13 @@ export default ({ kw }) => ({
       kw("GET"),
       field("direction", choice(kw("FIRST"), kw("NEXT"), kw("PREV"), kw("LAST"), kw("CURRENT"))),
       field("query", $.identifier),
-      optional(field("lock", choice(kw("SHARE-LOCK"), kw("EXCLUSIVE-LOCK"), kw("NO-LOCK")))),
+      optional(
+        field(
+          "lock",
+          // oxlint-disable-next-line tree-sitter-optimize/shared-choice
+          choice(kw("SHARE-LOCK"), kw("EXCLUSIVE-LOCK"), kw("NO-LOCK")),
+        ),
+      ),
       optional(alias(kw("NO-WAIT"), $.no_wait)),
     ),
 });
