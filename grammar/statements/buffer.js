@@ -15,6 +15,7 @@ export default ({ kw }) => ({
         choice(
           alias(kw("PRESELECT"), $.preselect),
           seq(kw("LABEL"), field("label", $._identifier_or_string_literal)),
+          // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
           seq(kw("NAMESPACE-URI"), field("namespace_uri", $.string_literal)),
           seq(kw("NAMESPACE-PREFIX"), field("namespace_prefix", $.string_literal)),
           seq(kw("XML-NODE-NAME"), field("node", $.string_literal)),
