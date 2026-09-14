@@ -8,8 +8,10 @@ export default () => ({
       optional(seq("(", optional(alias($.__annotation_attributes, $.attributes)), ")")),
     ),
   __annotation_attributes: ($) =>
-    seq(alias($.__annotation_attribute, $.attribute), optional($.__annotation_attributes_tail)),
-  __annotation_attributes_tail: ($) => seq(",", $.__annotation_attributes),
+    seq(
+      alias($.__annotation_attribute, $.attribute),
+      optional(seq(",", $.__annotation_attributes)),
+    ),
   __annotation_attribute: ($) =>
     seq(
       field("name", alias($.__annotation_name, $.identifier)),
