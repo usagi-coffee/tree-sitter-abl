@@ -9,14 +9,12 @@ export default ({ kw }) => ({
       field("table", $._identifier_or_qualified_name),
       optional(alias($.__aggregate_where_phrase, $.where_phrase)),
     ),
-  __aggregate_operation: ($) =>
-    choice(kw("COUNT"), kw("TOTAL"), kw("AVERAGE"), kw("MAXIMUM"), kw("MINIMUM")),
   __aggregate_items: ($) =>
     prec.right(
       seq(
         field("target", $._expression),
         "=",
-        $.__aggregate_operation,
+        choice(kw("COUNT"), kw("TOTAL"), kw("AVERAGE"), kw("MAXIMUM"), kw("MINIMUM")),
         "(",
         field("field", $._expression),
         ")",
