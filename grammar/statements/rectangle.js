@@ -13,6 +13,7 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/body-extraction
   __rectangle_option: ($) =>
     choice(
+      // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
       seq($._like_keyword, field("like", $.identifier)),
       alias(kw("NO-FILL"), $.no_fill),
       seq(kw("EDGE-CHARS"), field("edge_chars", $._expression)),
