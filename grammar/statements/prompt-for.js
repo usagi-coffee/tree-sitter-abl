@@ -32,6 +32,7 @@ export default ({ kw }) => ({
     prec.right(
       seq(alias($._identifier_or_qualified_name, $.field), optional($.__prompt_for_except_fields)),
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __prompt_for_fields_tail: ($) =>
     choice(
       seq($.in_window_phrase, optional($.__prompt_for_fields_after_window)),
