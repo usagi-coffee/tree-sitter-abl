@@ -326,6 +326,7 @@ export default ({ kw }) => ({
       field("type", $._type_or_string),
       optional($.__class_method_return_extent_phrase),
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
   __class_method_return_extent_phrase: ($) =>
     seq(
       kw("EXTENT"),

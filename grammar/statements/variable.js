@@ -46,6 +46,7 @@ export default ({ kw }) => ({
       $.trigger_phrase,
     ),
 
+  // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
   __variable_extent_phrase: ($) =>
     seq(
       kw("EXTENT"),
