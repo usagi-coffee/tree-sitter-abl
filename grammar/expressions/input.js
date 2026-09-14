@@ -10,6 +10,7 @@ export default ({ kw }) => ({
     choice(
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
       seq(kw("FRAME", { offset: 4 }), field("frame", $.identifier)),
+      // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
       seq(kw("BROWSE"), field("browse", $.identifier)),
     ),
   __input_field: ($) => choice($._identifier_or_qualified_name, $.object_access, $.array_access),
