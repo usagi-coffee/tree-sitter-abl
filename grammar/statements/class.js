@@ -314,6 +314,7 @@ export default ({ kw }) => ({
   __class_method_return_extent_phrase: ($) =>
     seq(
       kw("EXTENT"),
+      // oxlint-disable-next-line tree-sitter-optimize/shared-choice
       optional(field("size", choice($.number_literal, $.preprocessor_name, $.identifier))),
     ),
   __class_typed_extent_phrase: ($) =>
@@ -337,7 +338,7 @@ export default ({ kw }) => ({
     prec.right(
       seq(
         kw("EXTENT"),
-        // oxlint-disable-next-line tree-sitter-optimize/alternative-extraction
+        // oxlint-disable-next-line tree-sitter-optimize/alternative-extraction, tree-sitter-optimize/shared-choice
         optional(field("size", choice($.number_literal, $.preprocessor_name, $.identifier))),
       ),
     ),

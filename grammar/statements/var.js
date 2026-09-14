@@ -23,7 +23,14 @@ export default ({ kw }) => ({
 
   __var_initializer: ($) => seq("=", $._assignment_value),
   __var_extent: ($) =>
-    seq("[", optional(choice($.number_literal, $.preprocessor_name, $.identifier)), "]"),
+    seq(
+      "[",
+      optional(
+        // oxlint-disable-next-line tree-sitter-optimize/shared-choice
+        choice($.number_literal, $.preprocessor_name, $.identifier),
+      ),
+      "]",
+    ),
   __var_modifier: ($) =>
     choice(
       seq($._member_access_modifier, optional($.__var_storage_modifier)),
