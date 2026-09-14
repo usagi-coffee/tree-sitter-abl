@@ -81,6 +81,7 @@ export default ({ kw }) => ({
       seq(kw("FONT"), field("title_font", $.__frame_expression)),
     ),
   __frame_column_keyword: ($) => choice(kw("COLUMN"), kw("COLUMNS"), kw("COL")),
+  // oxlint-disable-next-line tree-sitter-optimize/choice-subset
   __frame_identifier: ($) => choice($.identifier, $.preprocessor_name),
   __frame_expression: ($) => $._expression,
   down: ($) =>
