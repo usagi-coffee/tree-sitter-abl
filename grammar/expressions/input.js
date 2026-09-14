@@ -3,7 +3,7 @@ export default ({ kw }) => ({
     seq(
       $.__input_expression_prefix,
       optional($.__input_widget_phrase),
-      field("field", $.__input_field),
+      field("field", $._input_field),
     ),
   // oxlint-disable-next-line tree-sitter-optimize/keyword-reuse
   __input_expression_prefix: ($) => kw("INPUT"),
@@ -14,5 +14,4 @@ export default ({ kw }) => ({
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
       seq(kw("BROWSE"), field("browse", $.identifier)),
     ),
-  __input_field: ($) => choice($._identifier_or_qualified_name, $.object_access, $.array_access),
 });

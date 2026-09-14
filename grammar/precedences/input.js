@@ -2,10 +2,10 @@
 export default ($) => [
   // Purpose: avoid treating INPUT x as a named parameter body through the extracted field.
   // Example: myMethod(INPUT x = 1).
-  [$._expression, $.__input_field],
+  [$._expression, $._input_field],
   // Purpose: prefer function call when the extracted INPUT field is followed by '('.
   // Example: ACCUMULATE INPUT myFunc().
-  [$.function_call, $.__input_field],
+  [$.function_call, $._input_field],
   // Purpose: treat tokens after INPUT THROUGH program as arguments, not program name.
   // Example: INPUT THROUGH prog arg1.
   [$.__input_through_arg_value, $._identifier_or_qualified_name],
