@@ -7,5 +7,6 @@ export default ({ kw }) => ({
   __call_arguments: ($) =>
     prec.right(seq(alias($.__call_argument, $.argument), optional($.__call_arguments))),
 
+  // oxlint-disable-next-line tree-sitter-optimize/forwarding-rule
   __call_argument: ($) => $._expression,
 });
