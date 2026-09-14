@@ -84,6 +84,7 @@ export default ({ kw }) => ({
       repeat1($.aggregate_phrase),
       ")",
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __display_aggregate_primary_expression: ($) =>
     choice($.__display_keyword_identifier, $._expression),
   __display_keyword_identifier: ($) => alias(kw("MENU"), $.identifier),
