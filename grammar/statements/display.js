@@ -70,6 +70,7 @@ export default ({ kw }) => ({
         optional(prec.dynamic(1, $.__display_aggregate_expression)),
       ),
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/sequence-subset
   __display_aggregate_expression: ($) =>
     seq(
       "(",
