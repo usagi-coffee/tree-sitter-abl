@@ -528,10 +528,11 @@ export default grammar({
         seq(
           field("left", $._assignable),
           field("operator", $.assignment_operator),
-          field("right", choice($.array_initializer, $._expression)),
+          field("right", $._assignment_value),
           optional($.widget_phrase),
         ),
 
+      _assignment_value: ($) => choice($.array_initializer, $._expression),
       _assignable: ($) =>
         choice(
           $.object_access,

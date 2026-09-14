@@ -21,7 +21,7 @@ export default ({ kw }) => ({
       optional(field("initializer", $.__var_initializer)),
     ),
 
-  __var_initializer: ($) => seq("=", choice($.array_initializer, $._expression)),
+  __var_initializer: ($) => seq("=", $._assignment_value),
   __var_extent: ($) =>
     seq("[", optional(choice($.number_literal, $.preprocessor_name, $.identifier)), "]"),
   __var_modifier: ($) =>

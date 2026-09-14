@@ -1,0 +1,69 @@
+================================================================================
+Assignment values - arrays, expressions, and declaration boundaries
+================================================================================
+
+x = [1, F(2, 3)].
+ASSIGN x = IF ready THEN 1 ELSE 2 y = [3, 4].
+VAR INT[2] a = [1, 2], b = [3, 4].
+VAR INT n = F(1, 2) + 3, m = (4 * 5).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (array_initializer
+      (number_literal)
+      (function_call
+        function: (identifier)
+        (arguments
+          (argument
+            name: (number_literal))
+          (argument
+            name: (number_literal))))))
+  (assign_statement
+    (assign_phrase
+      (assign_pair
+        left: (identifier)
+        right: (conditional_expression
+          (identifier)
+          (number_literal)
+          (number_literal)))
+      (assign_pair
+        left: (identifier)
+        right: (array_initializer
+          (number_literal)
+          (number_literal)))))
+  (var_statement
+    type: (identifier)
+    extent: (number_literal)
+    (variable
+      name: (identifier)
+      initializer: (array_initializer
+        (number_literal)
+        (number_literal)))
+    (variable
+      name: (identifier)
+      initializer: (array_initializer
+        (number_literal)
+        (number_literal))))
+  (var_statement
+    type: (identifier)
+    (variable
+      name: (identifier)
+      initializer: (binary_expression
+        (function_call
+          function: (identifier)
+          (arguments
+            (argument
+              name: (number_literal))
+            (argument
+              name: (number_literal))))
+        (number_literal)))
+    (variable
+      name: (identifier)
+      initializer: (parenthesized_expression
+        (binary_expression
+          (number_literal)
+          (number_literal))))))

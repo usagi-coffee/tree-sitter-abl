@@ -28,7 +28,7 @@ export default ({ kw }) => ({
     choice(
       seq(
         choice("=", field("operator", alias($.__assign_compound_operator, $.assignment_operator))),
-        field("right", choice($.array_initializer, $._expression)),
+        field("right", $._assignment_value),
         optional($._when_phrase),
       ),
       $._when_phrase,
