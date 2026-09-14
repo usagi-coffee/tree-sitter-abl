@@ -8,5 +8,11 @@ export default ({ kw }) => ({
     prec.right(seq(",", $.preselect_record, optional($.__preselect_record_list_tail))),
 
   preselect_record: ($) =>
-    seq(optional(choice(kw("EACH"), kw("FIRST"), kw("LAST"))), $.record_phrase),
+    seq(
+      optional(
+        // oxlint-disable-next-line tree-sitter-optimize/shared-choice
+        choice(kw("EACH"), kw("FIRST"), kw("LAST")),
+      ),
+      $.record_phrase,
+    ),
 });

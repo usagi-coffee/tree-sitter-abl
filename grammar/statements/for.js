@@ -40,7 +40,14 @@ export default ({ kw }) => ({
     // oxlint-disable-next-line tree-sitter-optimize/recurse
     seq($.__for_record, repeat(seq(",", $.__for_record))),
 
-  __for_record: ($) => seq(optional(choice(kw("EACH"), kw("FIRST"), kw("LAST"))), $.record_phrase),
+  __for_record: ($) =>
+    seq(
+      optional(
+        // oxlint-disable-next-line tree-sitter-optimize/shared-choice
+        choice(kw("EACH"), kw("FIRST"), kw("LAST")),
+      ),
+      $.record_phrase,
+    ),
 
   __for_by_phrase: ($) => prec.right($.__for_by_clause),
   __for_group_by_phrase: ($) => prec.right(seq(kw("GROUP"), $.__for_by_clause)),
