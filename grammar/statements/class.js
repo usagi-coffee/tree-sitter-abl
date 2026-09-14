@@ -208,6 +208,7 @@ export default ({ kw }) => ({
   __class_property_option: ($) =>
     choice(
       $._initial_phrase,
+      // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
       seq(kw("SERIALIZE-NAME"), field("serialize_name", $.string_literal)),
       alias($._no_undo_keyword, $.no_undo),
       alias($._extent_phrase, $.extent_phrase),
