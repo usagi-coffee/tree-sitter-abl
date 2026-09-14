@@ -22,6 +22,7 @@ export default ({ kw }) => ({
         field("value", $._expression),
         // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
         seq($._row_keyword, field("row", $._expression)),
+        // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
         optional(seq(choice(kw("COLUMN"), kw("COL")), field("column", $._expression))),
       ),
     ),
