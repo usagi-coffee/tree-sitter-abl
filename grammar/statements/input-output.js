@@ -28,7 +28,7 @@ export default ({ kw }) => ({
     ),
   __input_output_options: ($) =>
     prec.right(seq($.__input_output_option, optional($.__input_output_options))),
-  // oxlint-disable-next-line tree-sitter-optimize/choice-subset
+  // oxlint-disable-next-line tree-sitter-optimize/choice-subset, tree-sitter-optimize/single-use-choice
   __input_output_option: ($) =>
     choice(
       alias(kw("ECHO"), $.echo),
