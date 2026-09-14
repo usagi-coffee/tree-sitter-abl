@@ -48,6 +48,7 @@ export default ({ kw }) => ({
   __assign_input_body: ($) =>
     seq(
       optional(kw("INPUT")),
+      // oxlint-disable-next-line tree-sitter-optimize/shared-choice
       choice(
         // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
         seq(kw("FRAME", { offset: 4 }), field("frame", $.__widget_name)),
@@ -62,6 +63,7 @@ export default ({ kw }) => ({
     prec.right(
       seq(
         kw("INPUT"),
+        // oxlint-disable-next-line tree-sitter-optimize/shared-choice
         choice(
           // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
           seq(kw("FRAME", { offset: 4 }), field("frame", $.__widget_name)),
