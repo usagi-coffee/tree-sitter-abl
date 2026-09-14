@@ -497,6 +497,12 @@ export default ({ kw }) => ({
   _close_equals_value: ($) => seq(")", $._equals_value),
   _position_length: ($) =>
     seq(field("position", $._expression), optional(seq(",", field("length", $._expression)))),
+  _method_definition_signature: ($) =>
+    seq(
+      $._method_return_type,
+      field("name", $.identifier),
+      alias($._method_parameters, $.parameters),
+    ),
   _compound_body: ($) =>
     seq(
       // oxlint-disable-next-line tree-sitter-optimize/recurse

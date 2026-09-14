@@ -67,7 +67,7 @@ export default ({ kw }) => ({
       // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
       seq(
         $.__class_method_definition_prefix,
-        $.__class_method_definition_signature,
+        $._method_definition_signature,
         $.__class_body_opener,
         alias($.__class_method_body, $.body),
       ),
@@ -77,7 +77,7 @@ export default ({ kw }) => ({
         kw("ABSTRACT"),
         // oxlint-disable-next-line tree-sitter-optimize/recurse
         repeat($._method_modifier_no_abstract),
-        $.__class_method_definition_signature,
+        $._method_definition_signature,
         $._terminator_dot,
       ),
     ),
@@ -91,13 +91,6 @@ export default ({ kw }) => ({
         optional($.__class_method_definition_modifiers),
       ),
     ),
-  __class_method_definition_signature: ($) =>
-    seq(
-      $._method_return_type,
-      field("name", $.identifier),
-      alias($._method_parameters, $.parameters),
-    ),
-
   constructor_definition: ($) =>
     seq(
       kw("CONSTRUCTOR"),
