@@ -3,6 +3,7 @@ REPOSITION statement
 ================================================================================
 
 REPOSITION qCust TO ROW 5.
+REPOSITION qCust TO ROW 8 - 3.
 REPOSITION qCust FORWARDS 10.
 REPOSITION qCust BACKWARDS 5.
 REPOSITION qCust TO ROWID rCust.
@@ -13,6 +14,11 @@ REPOSITION qCust TO ROWID rCust.
   (reposition_statement
     query: (identifier)
     row: (number_literal))
+  (reposition_statement
+    query: (identifier)
+    row: (binary_expression
+      (number_literal)
+      (number_literal)))
   (reposition_statement
     query: (identifier)
     (forwards)
