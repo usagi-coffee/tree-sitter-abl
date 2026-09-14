@@ -127,8 +127,7 @@ export default ({ kw }) => ({
     seq(optional($.__sql_set_quantifier), $.__sql_select_columns, optional($.__sql_into_clause)),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-sequence
   __sql_select_columns: ($) =>
-    seq(field("column", $.__sql_select_item), optional($.__sql_select_columns_tail)),
-  __sql_select_columns_tail: ($) => seq(",", $.__sql_select_columns),
+    seq(field("column", $.__sql_select_item), optional(seq(",", $.__sql_select_columns))),
   __sql_select_from_body: ($) =>
     // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq(
