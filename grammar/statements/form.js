@@ -28,6 +28,7 @@ export default ({ kw }) => ({
         // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
         seq(
           field("field", $._expression),
+          // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
           optional(seq(kw("COLON"), field("colon", $._expression))),
           optional(seq(kw("LABEL"), optional(field("label", $.__form_label)))),
           optional($.__form_validate_format_view_as_tail),
