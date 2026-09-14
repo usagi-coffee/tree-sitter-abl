@@ -1,6 +1,7 @@
 import { RuleTester } from "oxlint/plugins-dev";
 
 import {
+  forwardingRule,
   choiceSubset,
   singleUseSequence,
   sequenceSubset,
@@ -953,6 +954,57 @@ new RuleTester().run("shared-choice assignment value regression", sharedChoice, 
       filename: "grammar/statements/var.js",
       code: `export default () => ({ __var_initializer: ($) => seq("=", choice($.array_initializer, $._expression)) });`,
       errors: [{ message: /repeats 2 alternatives from __assignment_statement_body/ }],
+    },
+  ],
+});
+
+new RuleTester().run("forwarding-rule", forwardingRule, {
+  valid: [
+    `export default () => ({ __value: ($) => $.identifier, root: ($) => alias($.__value, $.value) });`,
+    `export default () => ({ __value: ($) => $._expression, root: ($) => alias($.other, $.__value) });`,
+    `export default () => ({ __value: ($) => $["expression"], root: ($) => $.__value });`,
+    `export default () => ({ __value: ($) => other.expression, root: ($) => $.__value });`,
+    `export default grammar({ externals: ($) => [$._macro_statement_token], rules: { root: ($) => alias($._macro_statement_token, $.constant) } });`,
+    `export default () => ({ visible: ($) => $._expression, root: ($) => $.visible });`,
+    `export default () => ({ _shared: ($) => $._expression, root: ($) => $._shared });`,
+    `export default () => ({ __self: ($) => $.__self });`,
+    `export default () => ({ __value: ($) => prec(1, $._expression), root: ($) => $.__value });`,
+    `export default () => ({ __value: ($) => field("value", $._expression), root: ($) => $.__value });`,
+    `export default () => ({ __value: ($) => alias($._expression, $.value), root: ($) => $.__value });`,
+    `export default () => ({ __value: ($) => choice($.a, $.b), root: ($) => $.__value });`,
+    `export default () => ({ __value: ($) => $._expression, root: ($) => token($.__value) });`,
+    `export default () => ({ __value: ($) => $._expression, root: ($) => token.immediate($.__value) });`,
+    `export default grammar({ inline: ($) => [$.__value], rules: { __value: ($) => $._expression, root: ($) => $.__value } });`,
+    `export default grammar({ conflicts: ($) => [[$.__value, $.other]], rules: { __value: ($) => $._expression, root: ($) => $.__value } });`,
+    `export default grammar({ precedences: ($) => [[$.__value, $.other]], rules: { __value: ($) => $._expression, root: ($) => $.__value } });`,
+    `export default grammar({ supertypes: ($) => [$.__value], rules: { __value: ($) => $._expression, root: ($) => $.__value } });`,
+    `const unrelated = { __value: ($) => $._expression, root: ($) => $.__value };`,
+    `export default () => ({
+      // oxlint-disable-next-line rule-to-test/forwarding-rule
+      __value: ($) => $._expression,
+      root: ($) => $.__value,
+    });`,
+  ],
+  invalid: [
+    {
+      name: "macro statement forwarding rule used by other grammar modules",
+      code: `export default grammar({ externals: ($) => [$._macro_statement_token], rules: { __macro_statement: ($) => $._macro_statement_token } });`,
+      errors: [{ message: /__macro_statement only forwards to _macro_statement_token/ }],
+    },
+    {
+      name: "alias stays at the callsite",
+      code: `export default () => ({ __macro_statement: ($) => $._macro_statement_token, root: ($) => alias($.__macro_statement, $.constant) });`,
+      errors: [{ message: /__macro_statement only forwards to _macro_statement_token/ }],
+    },
+    {
+      name: "forwarding expression helper preserves each field at its callsite",
+      code: `export default () => ({ __value: ($) => $._expression, root: ($) => seq(field("topic", $.__value), optional(seq("KEY", field("key", $.__value)))) });`,
+      errors: [{ message: /__value only forwards to _expression/ }],
+    },
+    {
+      name: "a hidden wrapper around a visible target can also be removed",
+      code: `export default grammar({ rules: { root: ($) => seq("X", $.__name), __name: ($) => $.identifier } });`,
+      errors: [{ message: /__name only forwards to identifier/ }],
     },
   ],
 });
