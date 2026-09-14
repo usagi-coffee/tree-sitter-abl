@@ -17,6 +17,7 @@ export default ({ kw }) => ({
   __editor_size: ($) =>
     choice(
       $.size_phrase,
+      // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
       seq(
         kw("INNER-CHARS"),
         field("inner_chars", $.number_literal),
