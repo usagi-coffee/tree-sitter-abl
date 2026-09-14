@@ -14,7 +14,7 @@ export default ({ kw }) => ({
       kw("FIELDS", { alias: "FIELD", offset: 5 }),
       field("name", $.identifier),
       choice(
-        $.__as_type_name_phrase,
+        $._as_type_name_phrase,
         $.__temp_table_like_type_clause,
         seq($.__temp_table_extent_option, $.__temp_table_like_type_clause),
       ),
