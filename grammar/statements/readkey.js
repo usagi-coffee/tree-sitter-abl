@@ -10,5 +10,6 @@ export default ({ kw }) => ({
         ),
       ),
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
   __readkey_pause_phrase: ($) => seq(kw("PAUSE"), field("pause", $._expression)),
 });
