@@ -457,6 +457,7 @@ export default ({ kw }) => ({
       ),
     ),
   __unquoted_format: ($) => token(/[0-9]+(?:\/[0-9]+)+/),
+  // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
   _tooltip_phrase: ($) => seq(kw("TOOLTIP"), field("tooltip", $._expression)),
   _lock_option: ($) =>
     choice(
