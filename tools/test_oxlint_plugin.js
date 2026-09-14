@@ -46,6 +46,28 @@ new RuleTester().run("shared-repetition", sharedRepetition, {
   ],
 });
 
+resetSharingCandidates();
+new RuleTester().run("shared-repetition", sharedRepetition, {
+  valid: [
+    {
+      name: "disabled repetition does not seed the cross-file candidate map",
+      filename: "grammar/statements/temp-table.js",
+      code: repeatedTableItems
+        .replace("RULE_NAME", "temp_table_definition")
+        .replace(
+          "repeat(",
+          "// oxlint-disable-next-line rule-to-test/shared-repetition\n    repeat(",
+        ),
+    },
+    {
+      name: "matching repetition remains clean when its only peer is disabled",
+      filename: "grammar/statements/interface.js",
+      code: repeatedTableItems.replace("RULE_NAME", "interface_temp_table"),
+    },
+  ],
+  invalid: [],
+});
+
 const recursiveFieldTail = (name) => `
 export default () => ({
   ${name}: ($) =>
@@ -70,6 +92,27 @@ new RuleTester().run("shared-recursion across files", sharedRecursion, {
       errors: [{ message: /duplicates __buffer_copy_field_tail in buffer-copy\.js/ }],
     },
   ],
+});
+
+resetSharingCandidates();
+new RuleTester().run("shared-recursion", sharedRecursion, {
+  valid: [
+    {
+      name: "disabled recursion does not seed the cross-file candidate map",
+      filename: "grammar/statements/buffer-copy.js",
+      code: `export default () => ({
+        // oxlint-disable-next-line rule-to-test/shared-recursion
+        __buffer_copy_field_tail: ($) =>
+          seq(optional(","), $._identifier_or_qualified_name, optional($.__buffer_copy_field_tail)),
+      });`,
+    },
+    {
+      name: "matching recursion remains clean when its only peer is disabled",
+      filename: "grammar/statements/query.js",
+      code: recursiveFieldTail("__query_field_name_tail"),
+    },
+  ],
+  invalid: [],
 });
 
 RuleTester.it = (_name, run) => {
@@ -216,6 +259,28 @@ new RuleTester().run("shared-sequence across files", sharedSequence, {
       errors: [{ message: /__import_delimiter_phrase in import\.js.*alias to delimiter_phrase/ }],
     },
   ],
+});
+
+resetSharingCandidates();
+new RuleTester().run("shared-sequence", sharedSequence, {
+  valid: [
+    {
+      name: "disabled IMPORT phrase does not seed the cross-file candidate map",
+      filename: "grammar/statements/import.js",
+      code: `export default ({ kw }) => ({
+        // oxlint-disable-next-line rule-to-test/shared-sequence
+        __import_delimiter_phrase: ($) => seq(kw("DELIMITER"), field("delimiter", $.string_literal)),
+      });`,
+    },
+    {
+      name: "matching EXPORT phrase remains clean when its only peer is disabled",
+      filename: "grammar/statements/export.js",
+      code: `export default ({ kw }) => ({
+        __export_delimiter_phrase: ($) => seq(kw("DELIMITER"), field("delimiter", $.string_literal)),
+      });`,
+    },
+  ],
+  invalid: [],
 });
 
 RuleTester.it = (_name, run) => {

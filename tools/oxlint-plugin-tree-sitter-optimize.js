@@ -129,6 +129,35 @@ function report(context, node, _optimization, message) {
   context.report({ node, message });
 }
 
+function directiveTargetsRule(directive, ruleId) {
+  const rules = directive.value
+    .split("--", 1)[0]
+    .split(/[\s,]+/)
+    .filter(Boolean);
+  return rules.length === 0 || rules.includes("all") || rules.includes(ruleId);
+}
+
+function isRuleDisabled(context, node) {
+  const line = node.loc.start.line;
+  let disabled = false;
+  for (const directive of context.sourceCode.getDisableDirectives().directives) {
+    if (!directiveTargetsRule(directive, context.id)) continue;
+    const directiveLine = directive.node.loc.start.line;
+    if (directive.type === "disable-next-line") {
+      if (directiveLine + 1 === line) return true;
+      continue;
+    }
+    if (directive.type === "disable-line") {
+      if (directiveLine === line) return true;
+      continue;
+    }
+    if (directiveLine > line) continue;
+    if (directive.type === "disable") disabled = true;
+    if (directive.type === "enable") disabled = false;
+  }
+  return disabled;
+}
+
 function rule(create, description) {
   return {
     meta: { type: "suggestion", docs: { description }, schema: [] },
@@ -184,6 +213,7 @@ export const sharedRepetition = rule(
 
       const property = enclosingRule(node);
       if (!property) return;
+      if (isRuleDisabled(context, node)) return;
 
       const candidate = {
         filename: context.filename,
@@ -214,6 +244,7 @@ export const sharedRecursion = rule(
     for (const property of properties) {
       const name = ruleName(property);
       if (!name.startsWith("_")) continue;
+      if (isRuleDisabled(context, property)) continue;
       const elements = sequenceElements(property.value.body);
       if (!elements || elements.length < 2) continue;
       const tail = elements.at(-1);
@@ -308,6 +339,8 @@ export const sharedSequence = rule((context) => {
     },
     "Program:exit"() {
       for (const { subject, property } of sequences) {
+        const reportNode = subject === property.value.body ? property : subject;
+        if (isRuleDisabled(context, reportNode)) continue;
         const name = ruleName(property);
         const targets = aliases.get(name);
         const publicAlias =
@@ -342,12 +375,7 @@ export const sharedSequence = rule((context) => {
           publicAlias && publicAlias === previous.publicAlias
             ? `This hidden rule and ${previous.rule} in ${previousFile} have identical bodies and alias to ${publicAlias}; try sharing the public rule while preserving its tree shape.`
             : `This keyword/value sequence duplicates ${previous.rule} in ${previousFile}; try sharing a hidden helper while preserving fields, aliases, and precedence.`;
-        report(
-          context,
-          subject === property.value.body ? property : subject,
-          "shared-sequence",
-          message,
-        );
+        report(context, reportNode, "shared-sequence", message);
       }
     },
   };
