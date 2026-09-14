@@ -44,6 +44,7 @@ export default ({ kw }) => ({
           optional($._when_phrase),
         ),
       ),
+      // oxlint-disable-next-line tree-sitter-optimize/sequence-subset
       seq(field("field", $._identifier_or_qualified_name), "=", field("value", $._expression)),
       seq(field("field", $.array_access), "=", field("value", $._expression)),
       seq(kw("TEXT"), "(", $._text_fields, ")"),
