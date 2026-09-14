@@ -17,7 +17,7 @@ export default ($) => [
     $._expression,
     $.__os_create_dir_directory,
     $.__os_delete_target,
-    $.__underline_field,
+    $.__underline_fields,
     $.__call_argument,
     $.__put_control,
     $.accum_expression,
