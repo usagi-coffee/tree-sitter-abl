@@ -19,7 +19,7 @@ export default ($) => [
     $.__os_delete_target,
     $.__underline_fields,
     $.__call_argument,
-    $.__put_controls,
+    $._expression_list,
     $.accum_expression,
     $.__frame_expression,
     $.at_phrase,

@@ -5,8 +5,7 @@ export default ({ kw }) => ({
   __export_statement_head: ($) => seq(kw("EXPORT"), optional($._stream_phrase)),
 
   __export_expressions_body: ($) =>
-    seq(optional($.delimiter_phrase), $.__export_expressions, optional($.__export_tail)),
-  __export_expressions: ($) => prec.right(seq($._expression, optional($.__export_expressions))),
+    seq(optional($.delimiter_phrase), $._expression_list, optional($.__export_tail)),
   __export_tail: ($) =>
     choice(
       seq($.__export_except_phrase, optional(alias(kw("NO-LOBS"), $.no_lobs))),

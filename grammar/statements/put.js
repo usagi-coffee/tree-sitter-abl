@@ -8,7 +8,7 @@ export default ({ kw }) => ({
         optional(alias(kw("UNFORMATTED"), $.unformatted)),
         prec.right(seq($.__put_output_item, optional($.__put_output_items_tail))),
       ),
-      alias(seq(kw("CONTROL"), $.__put_controls), $.control_phrase),
+      alias(seq(kw("CONTROL"), $._expression_list), $.control_phrase),
     ),
   __put_output_items_tail: ($) =>
     prec.right(seq($.__put_output_item, optional($.__put_output_items_tail))),
@@ -18,8 +18,6 @@ export default ({ kw }) => ({
       alias($.__put_skip_item, $.skip),
       alias($.__put_space_item, $.space),
     ),
-  __put_controls: ($) => prec.right(seq($._expression, optional($.__put_controls))),
-
   __put_expression_item: ($) =>
     prec.left(
       // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
