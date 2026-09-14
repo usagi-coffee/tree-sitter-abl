@@ -37,6 +37,7 @@ export default ({ kw }) => ({
       seq(kw("DECIMALS"), field("decimals", $.number_literal)),
       alias(kw("DROP-TARGET"), $.drop_target),
       seq(kw("LABEL"), field("label", $._format_labels)),
+      // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
       seq(kw("MOUSE-POINTER"), field("mouse_pointer", $._expression)),
       $._initial_phrase,
       $.view_as_phrase,
