@@ -125,6 +125,7 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/single-use-sequence
   __sql_select_projection: ($) =>
     seq(optional($.__sql_set_quantifier), $.__sql_select_columns, optional($.__sql_into_clause)),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-sequence
   __sql_select_columns: ($) =>
     seq(field("column", $.__sql_select_item), optional($.__sql_select_columns_tail)),
   __sql_select_columns_tail: ($) =>
