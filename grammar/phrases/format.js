@@ -77,6 +77,7 @@ export default ({ kw }) => ({
       kw("NO-WORD-WRAP"),
       kw("SCROLLBAR-HORIZONTAL"),
       kw("SCROLLBAR-VERTICAL"),
+      // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
       seq(kw("TOOLTIP"), field("tooltip", $._expression)),
     ),
 
