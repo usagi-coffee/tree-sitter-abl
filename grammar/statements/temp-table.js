@@ -22,9 +22,8 @@ export default ({ kw }) => ({
     seq(
       kw("INDEX"),
       field("name", $.identifier),
-      // oxlint-disable-next-line tree-sitter-optimize/recurse
       optional(
-        // oxlint-disable-next-line tree-sitter-optimize/shared-choice
+        // oxlint-disable-next-line tree-sitter-optimize/shared-choice, tree-sitter-optimize/recurse
         seq(choice($._as_keyword, kw("IS")), repeat($.__temp_table_index_modifier)),
       ),
       $.__temp_table_index_fields,
