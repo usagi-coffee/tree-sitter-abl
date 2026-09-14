@@ -12,6 +12,7 @@ export default ({ kw }) => ({
     choice(
       // Standard order: [ROW] [COL] value.
       seq(
+        // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
         optional(seq($._row_keyword, field("row", $._expression))),
         optional(seq(choice(kw("COLUMN"), kw("COL")), field("column", $._expression))),
         field("value", $._expression),
