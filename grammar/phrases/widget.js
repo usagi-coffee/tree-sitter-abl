@@ -76,12 +76,14 @@ export default ({ kw }) => ({
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
       seq(choice(kw("MENU"), kw("SUB-MENU")), field("menu", $.__widget_name)),
     ),
-  // oxlint-disable-next-line tree-sitter-optimize/body-extraction
+  // oxlint-disable-next-line tree-sitter-optimize/body-extraction, tree-sitter-optimize/choice-subset
   __view_hide_widget_ref: ($) =>
     choice(
+      // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
       seq(
         kw("FIELD"),
         field("field", $._identifier_or_array_access),
+        // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
         optional(seq($._in_keyword, kw("FRAME", { offset: 4 }), field("frame", $.__widget_name))),
       ),
       seq(
@@ -94,13 +96,17 @@ export default ({ kw }) => ({
         // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
         optional(seq($._in_keyword, kw("FRAME", { offset: 4 }), field("frame", $.__widget_name))),
       ),
+      // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
       seq(
         field("column", $._identifier_or_array_access),
+        // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
         seq($._in_keyword, kw("BROWSE"), field("browse", $.__widget_name)),
       ),
+      // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
       seq(
         kw("MENU-ITEM"),
         field("item", $._identifier_or_qualified_name),
+        // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
         optional(seq($._in_keyword, kw("MENU"), field("menu", $.__widget_name))),
       ),
       field("system_handle", alias($.__widget_system_handle, $.system_handle)),
