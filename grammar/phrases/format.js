@@ -55,6 +55,7 @@ export default ({ kw }) => ({
     ),
   __format_at_row: ($) =>
     choice(
+      // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
       seq($._row_keyword, field("row", $._expression)),
       seq(kw("ROW-OF"), field("row_of", $._expression)),
     ),

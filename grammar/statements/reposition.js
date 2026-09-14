@@ -17,7 +17,6 @@ export default ({ kw }) => ({
               optional($.__reposition_tenant_no_error_tail),
             ),
             seq(kw("RECID"), field("recid", $._expression), optional($.__no_error)),
-            // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
             seq($._row_keyword, field("row", $._expression)),
           ),
         ),
