@@ -20,6 +20,7 @@ export default ({ kw }) => ({
       // Legacy order: value ROW [COL]. ROW is required to disambiguate.
       seq(
         field("value", $._expression),
+        // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
         seq($._row_keyword, field("row", $._expression)),
         optional(seq(choice(kw("COLUMN"), kw("COL")), field("column", $._expression))),
       ),
