@@ -137,6 +137,7 @@ export default ({ kw }) => ({
             // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
             seq(kw("WIDTH"), field("width", $.__browse_option_expression)),
             seq(kw("COLUMN-FONT"), field("column_font", $.__browse_option_expression)),
+            // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
             seq(kw("COLUMN-LABEL"), field("column_label", $.string_literal)),
             seq(kw("COLUMN-DCOLOR"), field("column_dcolor", $.__browse_option_expression)),
             seq(kw("COLUMN-BGCOLOR"), field("column_bgcolor", $.__browse_option_expression)),
