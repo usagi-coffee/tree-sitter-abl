@@ -93,6 +93,7 @@ export default ({ kw }) => ({
       choice(
         // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
         seq(kw("BGCOLOR"), field("bgcolor", $._expression)),
+        // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
         seq(kw("DCOLOR"), field("dcolor", $._expression)),
         seq(kw("FGCOLOR"), field("fgcolor", $._expression)),
         seq(kw("FONT"), field("font", $._expression)),
