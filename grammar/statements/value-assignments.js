@@ -79,5 +79,6 @@ export default ({ kw }) => ({
     seq(",", field("database", $._expression), optional(seq(",", field("tenant", $._expression)))),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-sequence
   __value_assignments_close_equals_value: ($) => seq(")", $._equals_value),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-sequence
   __value_assignments_value_no_error: ($) => seq($._equals_value, optional($.__no_error)),
 });
