@@ -103,6 +103,7 @@ export default ({ kw }) => ({
       optional(seq(kw("EVENT-HANDLER-CONTEXT"), field("context", $.__run_context_value))),
     ),
 
+  // oxlint-disable-next-line tree-sitter-optimize/choice-subset
   __run_context_value: ($) =>
     choice(
       $.dynamic_function_call,
