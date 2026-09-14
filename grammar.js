@@ -234,7 +234,6 @@ export default grammar({
     $._object_access_handle_prefix,
     $._object_access_widget_prefix,
     $._format_colon_to,
-    $.__assign_record_name,
     $.__temp_table_like_name,
     $.__browse_flag_option,
     $._identifier_or_array_access,

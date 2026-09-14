@@ -29,7 +29,7 @@ export default ({ kw }) => ({
 
   __assign_record_body: ($) =>
     seq(
-      field("record", $.__assign_record_name),
+      field("record", $._identifier_or_qualified_name),
       optional(
         seq(
           kw("EXCEPT"),
@@ -82,6 +82,4 @@ export default ({ kw }) => ({
       optional($._when_phrase),
       optional($.__assign_input_fields),
     ),
-
-  __assign_record_name: ($) => $._identifier_or_qualified_name,
 });
