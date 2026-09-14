@@ -31,6 +31,7 @@ export default ({ kw }) => ({
       ),
       "]",
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __var_modifier: ($) =>
     choice(
       seq($._member_access_modifier, optional($.__var_storage_modifier)),
