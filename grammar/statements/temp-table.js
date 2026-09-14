@@ -105,7 +105,7 @@ export default ({ kw }) => ({
     seq(kw("EXTENT"), field("extent", choice($.number_literal, $.preprocessor_name))),
   __temp_table_like_name: ($) => choice($._identifier_or_qualified_name, $.array_access),
   __temp_table_label_list: ($) => seq($.string_literal, optional($.__temp_table_label_tail)),
-  __temp_table_label_tail: ($) => seq(",", $.string_literal, optional($.__temp_table_label_tail)),
+  __temp_table_label_tail: ($) => seq(",", $.__temp_table_label_list),
   __temp_table_serialize_name_phrase: ($) =>
     seq(kw("SERIALIZE-NAME"), field("serialize_name", $.string_literal)),
   // oxlint-disable-next-line tree-sitter-optimize/body-extraction
