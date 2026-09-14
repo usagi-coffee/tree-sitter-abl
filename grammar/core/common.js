@@ -253,6 +253,7 @@ export default ({ kw }) => ({
             seq(kw("NAMESPACE-URI"), field("namespace_uri", $.string_literal)),
             // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
             seq(kw("NAMESPACE-PREFIX"), field("namespace_prefix", $.string_literal)),
+            // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
             seq(kw("XML-NODE-NAME"), field("node", $.string_literal)),
             $.__temp_table_serialize_name_phrase,
             seq(kw("XML-NODE-TYPE"), field("xml_node_type", $.string_literal)),
