@@ -16,6 +16,7 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/body-extraction
   __record_option: ($) =>
     choice(
+      // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
       seq($._of_keyword, field("of", $._identifier_or_qualified_name)),
       prec.right(seq(kw("WHERE"), field("where", optional($._expression)))),
       seq(
@@ -36,7 +37,6 @@ export default ({ kw }) => ({
       alias(kw("EXCLUSIVE"), $.exclusive),
       alias(kw("NO-PREFETCH"), $.no_prefetch),
     ),
-
   __record_using_field: ($) =>
     seq(optional($._frame_identifier_phrase), field("field", $._identifier_or_qualified_name)),
   __record_using_fields_tail: ($) =>

@@ -57,6 +57,7 @@ export default ({ kw }) => ({
         // oxlint-disable-next-line tree-sitter-optimize/recurse
         repeat(
           choice(
+            // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
             seq($._of_keyword, field("of", $._identifier_or_qualified_name)),
             // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
             seq(kw("WHERE"), field("where", $._expression)),
