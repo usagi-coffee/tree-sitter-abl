@@ -5,6 +5,7 @@ export default ({ kw }) => ({
   _as_like: ($) =>
     choice(
       seq($._as_keyword, optional(kw("CLASS")), field("type", $._type_or_string)),
+      // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
       seq($._like_keyword, field("like", $._identifier_or_qualified_name)),
     ),
 

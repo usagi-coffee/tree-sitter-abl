@@ -50,6 +50,7 @@ export default ({ kw }) => ({
       seq(
         choice(
           seq($._as_keyword, field("type", $._type_name)),
+          // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
           seq($._like_keyword, field("like", $._identifier_or_qualified_name)),
         ),
         optional($.__message_set_update_after_type),
