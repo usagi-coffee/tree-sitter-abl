@@ -117,7 +117,7 @@ export default ({ kw }) => ({
       optional($.__sql_update_assignment_tail),
     ),
   __sql_update_assignment: ($) =>
-    seq(field("column", $._identifier_or_qualified_name), "=", field("value", $._expression)),
+    seq(field("column", $._identifier_or_qualified_name), $._equals_value),
 
   select_statement: ($) => seq($.__sql_select_body, $._terminator),
 
