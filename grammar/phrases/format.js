@@ -214,6 +214,7 @@ export default ({ kw }) => ({
               seq($.__format_radio_set_pair, optional($.__format_radio_set_buttons_tail)),
             ),
           ),
+          // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
           seq(kw("INNER-LINES"), field("inner_lines", $.number_literal)),
           $.size_phrase,
           alias(kw("SORT"), $.sort),
