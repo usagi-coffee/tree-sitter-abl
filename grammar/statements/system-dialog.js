@@ -115,8 +115,10 @@ export default ({ kw }) => ({
     seq(kw("INITIAL-FILTER"), field("initial", $._expression)),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-sequence
   __system_dialog_filters_pairs: ($) =>
-    seq($.__system_dialog_filter_pair, optional($.__system_dialog_filter_pair_tail)),
-  __system_dialog_filter_pair_tail: ($) => seq(optional(","), $.__system_dialog_filters_pairs),
+    seq(
+      $.__system_dialog_filter_pair,
+      optional(seq(optional(","), $.__system_dialog_filters_pairs)),
+    ),
   __system_dialog_filter_pair: ($) =>
     seq(field("name", $._expression), field("spec", $._expression)),
 });
