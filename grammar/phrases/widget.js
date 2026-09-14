@@ -1,6 +1,7 @@
 export default ({ kw }) => ({
   widget_phrase: ($) => choice($._frame_browse_menu_widget, $.__widget_handle, $.__widget_entry),
 
+  // oxlint-disable-next-line tree-sitter-optimize/choice-subset
   __widget_name: ($) => choice($.identifier, $.preprocessor_name),
 
   __widget_handle: ($) =>
