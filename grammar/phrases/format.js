@@ -76,6 +76,7 @@ export default ({ kw }) => ({
   __format_editor_option: ($) =>
     choice(
       seq(kw("BUFFER-CHARS"), field("buffer_chars", $.number_literal)),
+      // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
       seq(kw("BUFFER-LINES"), field("buffer_lines", $.number_literal)),
       kw("LARGE"),
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
