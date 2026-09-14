@@ -24,6 +24,7 @@ export default ({ kw }) => ({
       alias($._skip_phrase, $.skip_phrase),
       alias($._space_phrase, $.space_phrase),
       seq($.__update_field_target_item, optional($._when_phrase)),
+      // oxlint-disable-next-line tree-sitter-optimize/sequence-subset
       seq($.__update_field_target_item, "=", field("value", $._expression)),
       seq(kw("TEXT"), "(", $._text_fields, ")"),
       seq(
