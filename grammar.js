@@ -572,6 +572,7 @@ export default grammar({
       // excludes `=` to disambiguate assignment vs equality comparison at statement level.
       _comparison_operator_no_eq: ($) => choice(...COMPARISON_OPERATORS),
       __multiplicative_operator: ($) => choice("*", "/", kw("MOD"), kw("MODULO")),
+      // oxlint-disable-next-line tree-sitter-optimize/shared-choice
       __additive_operator: ($) => choice("+", "-"),
       // binary_expression without `=` comparison.
       binary_expression_no_eq: ($) =>
