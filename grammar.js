@@ -240,7 +240,6 @@ export default grammar({
     $._parameter_direction,
     $.__buffer_compare_compares,
     $.__call_argument,
-    $.__put_control,
     $.__system_help_position,
     $.__include_file_target,
     $.__include_arguments,

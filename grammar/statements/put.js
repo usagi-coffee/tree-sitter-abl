@@ -18,8 +18,7 @@ export default ({ kw }) => ({
       alias($.__put_skip_item, $.skip),
       alias($.__put_space_item, $.space),
     ),
-  __put_control: ($) => $._expression,
-  __put_controls: ($) => prec.right(seq($.__put_control, optional($.__put_controls))),
+  __put_controls: ($) => prec.right(seq($._expression, optional($.__put_controls))),
 
   __put_expression_item: ($) =>
     prec.left(
