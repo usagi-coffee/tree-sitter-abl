@@ -51,6 +51,7 @@ export default ({ kw }) => ({
       choice(
         // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
         seq(kw("FRAME", { offset: 4 }), field("frame", $.__widget_name)),
+        // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
         seq(kw("BROWSE"), field("browse", $.__widget_name)),
       ),
       $.__assign_input_fields,
@@ -64,6 +65,7 @@ export default ({ kw }) => ({
         choice(
           // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
           seq(kw("FRAME", { offset: 4 }), field("frame", $.__widget_name)),
+          // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
           seq(kw("BROWSE"), field("browse", $.__widget_name)),
         ),
         $.__assign_input_fields,
