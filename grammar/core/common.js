@@ -113,6 +113,7 @@ export default ({ kw }) => ({
     ),
   _record_or_parenthesized_record: ($) =>
     choice($._identifier_or_qualified_name, seq($.__record_operand_opener, ")")),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-sequence
   __record_operand_opener: ($) => seq("(", $._identifier_or_qualified_name),
   _define_private_prefix: ($) =>
     seq($._define_keyword, optional(alias(kw("PRIVATE"), $.access_modifier))),
