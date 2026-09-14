@@ -27,7 +27,13 @@ export default ({ kw }) => ({
       seq(
         field("value", $._expression),
         optional($.format_phrase),
-        optional(seq(choice($._at_keyword, $._to_keyword), field("position", $._expression))),
+        optional(
+          seq(
+            // oxlint-disable-next-line tree-sitter-optimize/shared-choice
+            choice($._at_keyword, $._to_keyword),
+            field("position", $._expression),
+          ),
+        ),
       ),
     ),
 
