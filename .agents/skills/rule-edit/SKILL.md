@@ -181,9 +181,6 @@ instead of the `persistent` option.
 When optimizing
 
 - Read nearby `oxlint-disable-next-line: tree-sitter-optimize/...` comments before choosing an optimization. They mark transformations that were already tried at that location and rejected. Preserve these comments and do not retry the marked transformation unless the user explicitly asks to revisit it; look for other optimization candidates.
-- Optimizations should reduce both `src/parser.c` size AND `ACTION_COUNT` or `STATE_COUNT` or `LARGE_STATE_COUNT`.
-- Exception: an optimization that reduces `src/parser.c` by more than `100000` bytes may be accepted when all count regressions are minor.
-- Prefer the biggest reductions to `src/parser.c` size, do not go beyond tree-sitter limit of `65535` `ACTION_COUNT` and `STATE_COUNT`.
 - Preserve accepted and rejected syntax; do not weaken the grammar.
 - Preserve syntax-tree shape, including fields, aliases, and child ordering.
 - Preserve public and hidden node visibility.
@@ -191,6 +188,11 @@ When optimizing
 - Preserve distinct token identity; avoid token packing.
 - Preserve existing corpus behavior.
 - Optimize one change at a time, measure it, then run focused and full tests. A parser-size improvement is invalid if parsing behavior changes.
+
+The only acceptable optimizations results are:
+1. `src/parser.c` size reduction and (`ACTION_COUNT` or `STATE_COUNT` or `LARGE_STATE_COUNT`) reduction.
+2. `src/parser.c` size reduction and neutral parser count delta.
+3. `src/parser.c` size reduction that more than `100000` bytes while being under tree-sitter limit of `65535` `ACTION_COUNT` and `STATE_COUNT`.
 
 ## Verification
 
