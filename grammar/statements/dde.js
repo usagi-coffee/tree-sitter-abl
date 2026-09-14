@@ -38,6 +38,7 @@ export default ({ kw }) => ({
       field("action", choice(alias(kw("GET"), $.identifier), alias(kw("REQUEST"), $.identifier))),
       $.__dde_target_item_body,
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/sequence-subset
   __dde_initiate_body: ($) =>
     seq(
       field("ddeid", $._expression),
