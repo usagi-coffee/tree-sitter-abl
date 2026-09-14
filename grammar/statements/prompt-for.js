@@ -63,6 +63,7 @@ export default ({ kw }) => ({
     ),
   __prompt_for_fields: ($) =>
     prec.right(seq(alias($.__prompt_for_field, $.field), optional($.__prompt_for_fields))),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __prompt_for_constant_tail: ($) =>
     choice(
       seq(
