@@ -4,6 +4,7 @@ import {
   choiceSubset,
   singleUseSequence,
   sequenceSubset,
+  recursiveTailReuse,
   resetSharingCandidates,
   sharedSequence,
   sharedRecursion,
@@ -736,6 +737,74 @@ new RuleTester().run("sequence-subset PUT assignment regression", sequenceSubset
       filename: "grammar/statements/put-assign.js",
       code: `export default () => ({ __put_assign_prefix: ($) => seq(field("type", $.__put_assign_type), $.__put_assign_args, "=", field("value", $._expression)) });`,
       errors: [{ message: /_equals_value matches 2 consecutive elements in __put_assign_prefix/ }],
+    },
+  ],
+});
+
+RuleTester.it = (_name, run) => {
+  resetSharingCandidates();
+  run();
+};
+new RuleTester().run("recursive-tail-reuse", recursiveTailReuse, {
+  valid: [
+    `export default () => ({ _expressions: ($) => seq($._expression, optional($.__expressions_tail)), __expressions_tail: ($) => seq(",", $._expressions) });`,
+    `export default () => ({ expressions: ($) => seq($.item, optional($.__tail)), __tail: ($) => seq(",", $.item, optional($.__tail)) });`,
+    `export default () => ({ _head: ($) => seq($.item, optional($.tail)), tail: ($) => seq(",", $.item, optional($.tail)) });`,
+    `export default () => ({ _head: ($) => prec.right(seq($.item, optional($.__tail))), __tail: ($) => seq(",", $.item, optional($.__tail)) });`,
+    `export default () => ({ _head: ($) => seq($.item, optional($.__tail)), __tail: ($) => prec.right(seq(",", $.item, optional($.__tail))) });`,
+    `export default () => ({ _head: ($) => seq($.first, optional($.__tail)), __tail: ($) => seq(",", $.rest, optional($.__tail)) });`,
+    `export default () => ({ _head: ($) => seq(field("first", $.item), optional($.__tail)), __tail: ($) => seq(",", field("rest", $.item), optional($.__tail)) });`,
+    `export default () => ({ _head: ($) => seq(alias($.item, $.first), optional($.__tail)), __tail: ($) => seq(",", alias($.item, $.rest), optional($.__tail)) });`,
+    `export default ({kw}) => ({ _head: ($) => seq(kw("FIELD", {offset:3}), optional($.__tail)), __tail: ($) => seq(",", kw("FIELD", {offset:5}), optional($.__tail)) });`,
+    `export default () => ({ _head: ($) => seq(token(/a/i), optional($.__tail)), __tail: ($) => seq(",", token(/b/i), optional($.__tail)) });`,
+    `export default () => ({ _head: ($) => seq($.item, optional($.__tail)), __tail: ($) => seq(",", $.item, optional($.__other)) });`,
+    `export default () => ({ _head: ($) => seq($.item, optional($.__tail)), __tail: ($) => seq(",", optional($.__tail), $.item) });`,
+    `export default () => ({ _head: ($) => seq($.item, optional($.__tail)), __tail: ($) => seq($.item, optional($.__tail)) });`,
+    `export default () => ({ _head: ($) => seq(optional($.item), optional($.__tail)), __tail: ($) => seq(",", optional($.item), optional($.__tail)) });`,
+    `export default () => ({ _head: ($) => seq($.item, optional($._head)) });`,
+    `const unrelated = { _head: ($) => seq($.item, optional($.__tail)), __tail: ($) => seq(",", $.item, optional($.__tail)) };`,
+    `export default () => ({ _head: ($) => seq($.item, optional($.__tail)),
+      // oxlint-disable-next-line rule-to-test/recursive-tail-reuse
+      __tail: ($) => seq(",", $.item, optional($.__tail)),
+    });`,
+    `export default () => ({
+      // oxlint-disable-next-line rule-to-test/recursive-tail-reuse
+      _head: ($) => seq($.item, optional($.__tail)),
+      __tail: ($) => seq(",", $.item, optional($.__tail)),
+    });`,
+  ],
+  invalid: [
+    {
+      name: "expression list regression",
+      code: `export default grammar({rules: {
+        _expressions: ($) => seq($._expression, optional($.__expressions_tail)),
+        __expressions_tail: ($) => seq(",", $._expression, optional($.__expressions_tail)),
+      }});`,
+      errors: [{ message: /__expressions_tail repeats the body of _expressions/ }],
+    },
+    {
+      name: "event parameter list",
+      code: `export default () => ({
+        __event_parameter_list: ($) => seq($.__event_parameter, optional($.__event_parameter_tail)),
+        __event_parameter_tail: ($) => seq(",", $.__event_parameter, optional($.__event_parameter_tail)),
+      });`,
+      errors: [{ message: /__event_parameter_tail repeats the body of __event_parameter_list/ }],
+    },
+    {
+      name: "optional comma with preserved fields, tail declared first",
+      code: `export default () => ({
+        __tail: ($) => seq(optional(","), field("item", $.identifier), optional($.__tail)),
+        _head: ($) => seq(field("item", $.identifier), optional($.__tail)),
+      });`,
+      errors: [{ message: /__tail repeats the body of _head/ }],
+    },
+    {
+      name: "compound list item with alias",
+      code: `export default () => ({
+        _head: ($) => seq(field("name", $.name), "=", alias($.value, $.item), optional($.__tail)),
+        __tail: ($) => seq(",", field("name", $.name), "=", alias($.value, $.item), optional($.__tail)),
+      });`,
+      errors: [{ message: /__tail repeats the body of _head/ }],
     },
   ],
 });

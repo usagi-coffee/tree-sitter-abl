@@ -36,6 +36,7 @@
         "tree-sitter-optimize/shared-repetition": "warn",
         "tree-sitter-optimize/single-use-sequence": "warn",
         "tree-sitter-optimize/sequence-subset": "warn",
+        "tree-sitter-optimize/recursive-tail-reuse": "warn",
         "tree-sitter-optimize/tail-extraction": "warn",
         "tree-sitter-optimize/token-packing": "warn"
       }
