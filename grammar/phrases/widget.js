@@ -4,6 +4,7 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/choice-subset, tree-sitter-optimize/shared-choice
   __widget_name: ($) => choice($.identifier, $.preprocessor_name),
 
+  // oxlint-disable-next-line tree-sitter-optimize/shared-choice
   __widget_handle: ($) =>
     seq(field("handle", choice($._identifier_or_qualified_name, $.preprocessor_name))),
 
@@ -110,6 +111,7 @@ export default ({ kw }) => ({
         optional(seq($._in_keyword, kw("MENU"), field("menu", $.__widget_name))),
       ),
       field("system_handle", alias($.__widget_system_handle, $.system_handle)),
+      // oxlint-disable-next-line tree-sitter-optimize/shared-choice
       field("handle", choice($._identifier_or_qualified_name, $.preprocessor_name)),
     ),
 });

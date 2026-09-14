@@ -103,6 +103,7 @@ export default ({ kw }) => ({
   __create_record: ($) =>
     // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq(
+      // oxlint-disable-next-line tree-sitter-optimize/shared-choice
       field("table", choice($._identifier_or_qualified_name, $.preprocessor_name)),
       optional(seq($._for_keyword, kw("TENANT"), field("tenant", $._expression))),
       optional(

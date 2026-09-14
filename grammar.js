@@ -593,6 +593,7 @@ export default grammar({
           "object_widget_prefix",
           seq(
             field("widget", alias($._widgets, $.identifier)),
+            // oxlint-disable-next-line tree-sitter-optimize/shared-choice
             field("left", choice($._identifier_or_qualified_name, $.preprocessor_name)),
           ),
         ),
