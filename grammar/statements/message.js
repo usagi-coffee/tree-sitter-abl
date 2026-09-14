@@ -21,6 +21,7 @@ export default ({ kw }) => ({
         ),
       ),
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __message_body_tail: ($) =>
     choice(
       seq(alias($.__message_view_as_phrase, $.view_as_phrase), optional($.__message_window_tail)),
