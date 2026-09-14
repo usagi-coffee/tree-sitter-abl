@@ -402,6 +402,7 @@ export default ({ kw }) => ({
     ),
   __class_handle_options: ($) =>
     prec.right(seq($.__class_handle_option, optional($.__class_handle_options))),
+  // oxlint-disable-next-line tree-sitter-optimize/choice-subset
   __class_handle_option: ($) =>
     choice(
       alias(kw("BIND"), $.bind),
