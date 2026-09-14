@@ -27,7 +27,7 @@ export default ({ kw }) => ({
         seq(kw("VALUE"), "(", field("widget_type", $._expression), ")"),
       ),
       optional($._handle_in_widget_pool),
-      optional(alias(kw("NO-ERROR"), $.no_error)),
+      optional($.__no_error),
       optional(
         seq(
           choice(
@@ -37,7 +37,7 @@ export default ({ kw }) => ({
             ),
             $.trigger_phrase,
           ),
-          optional(alias(kw("NO-ERROR"), $.no_error)),
+          optional($.__no_error),
         ),
       ),
     ),
