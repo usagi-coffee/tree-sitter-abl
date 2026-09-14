@@ -22,6 +22,7 @@ export default ({ kw }) => ({
       optional(choice(kw("HORIZONTAL"), kw("VERTICAL"))),
       optional($.__slider_after_orientation),
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __slider_after_orientation: ($) =>
     choice(
       seq(kw("NO-CURRENT-VALUE"), optional($.__slider_after_current_value)),
