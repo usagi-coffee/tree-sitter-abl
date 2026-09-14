@@ -2,6 +2,7 @@ import { RuleTester } from "oxlint/plugins-dev";
 
 import {
   choiceSubset,
+  singleUseSequence,
   resetSharingCandidates,
   sharedSequence,
   sharedRecursion,
@@ -613,6 +614,55 @@ new RuleTester().run("choice-subset", choiceSubset, {
         value: ($) => seq("X", field("value", choice($.a, $.b, $.c))),
       }});`,
       errors: [{ message: /_small matches 2 consecutive alternatives in value/ }],
+    },
+  ],
+});
+
+new RuleTester().run("single-use-sequence", singleUseSequence, {
+  valid: [
+    `export default () => ({ __var_variable_suffix: ($) => seq(alias($.__var_variable, $.variable), optional(seq(",", $.__var_variable_suffix))) });`,
+    `export default () => ({ value: ($) => seq("(", $.name), root: ($) => seq($.value, ")") });`,
+    `export default () => ({ _shared: ($) => seq("(", $.name), root: ($) => seq($._shared, ")") });`,
+    `export default () => ({ __x_body: ($) => seq("(", $.name), root: ($) => seq($.__x_body, ")") });`,
+    `export default () => ({ __x: ($) => seq("(", $.name), root: ($) => choice($.__x, seq($.__x, ")")) });`,
+    `export default () => ({ __x: ($) => seq("(", $.name), root: ($) => alias($.__x, $.visible) });`,
+    `export default () => ({ __x: ($) => seq("(", $.name), root: ($) => field("value", $.__x) });`,
+    `export default () => ({ __x: ($) => prec.right(seq("(", $.name)), root: ($) => seq($.__x, ")") });`,
+    `export default () => ({ __x: ($) => choice("(", $.name), root: ($) => seq($.__x, ")") });`,
+    `export default () => ({ __x: ($) => seq("(", choice($.a, $.b)), root: ($) => seq($.__x, ")") });`,
+    `export default () => ({ __x: ($) => seq("(", $.name, ")", "."), root: ($) => seq($.__x, ")") });`,
+    `export default () => ({ __x: ($) => seq("(", $.__x) });`,
+    `export default () => ({ __x: ($) => seq("(", $.name), root: ($) => token(seq($.__x, ")")) });`,
+    `export default grammar({inline: ($) => [$.__x], rules: { __x: ($) => seq("(", $.name), root: ($) => seq($.__x, ")") }});`,
+    `export default grammar({precedences: ($) => [[$.__x, $.root]], rules: { __x: ($) => seq("(", $.name), root: ($) => seq($.__x, ")") }});`,
+    `const unrelated = { __x: ($) => seq("(", $.name), root: ($) => seq($.__x, ")") };`,
+  ],
+  invalid: [
+    {
+      name: "VAR recursive comma tail",
+      code: `export default () => ({
+        __var_variable_suffix: ($) => seq(alias($.__var_variable, $.variable), optional($.__var_variable_tail)),
+        __var_variable_tail: ($) => seq(",", $.__var_variable_suffix),
+      });`,
+      errors: [
+        { message: /__var_variable_tail has one unaliased local use in __var_variable_suffix/ },
+      ],
+    },
+    {
+      name: "parenthesized field sequence",
+      code: `export default () => ({
+        root: ($) => seq("ROWID", $.__rowid),
+        __rowid: ($) => seq("(", field("rowid", $.expression), ")"),
+      });`,
+      errors: [{ message: /__rowid has one unaliased local use in root/ }],
+    },
+    {
+      name: "sequence with optional suffix",
+      code: `export default grammar({rules: {
+        root: ($) => seq("VALUE", $.__value),
+        __value: ($) => seq($.expression, optional($.no_error)),
+      }});`,
+      errors: [{ message: /__value has one unaliased local use in root/ }],
     },
   ],
 });
