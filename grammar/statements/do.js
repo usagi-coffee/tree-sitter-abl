@@ -59,6 +59,7 @@ export default ({ kw }) => ({
   body: ($) =>
     prec.right(
       seq(
+        // oxlint-disable-next-line tree-sitter-optimize/shared-choice
         choice(alias($._colon, ":"), $._terminator_dot),
         // oxlint-disable-next-line tree-sitter-optimize/recurse
         repeat($._statement),

@@ -81,6 +81,7 @@ export default ({ kw }) => ({
         $._terminator_dot,
       ),
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/shared-choice
   __class_body_opener: ($) => choice(alias($._colon, ":"), $._terminator_dot),
   __class_method_definition_prefix: ($) =>
     seq(kw("METHOD"), optional($.__class_method_definition_modifiers)),

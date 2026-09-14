@@ -13,6 +13,7 @@ export default ({ kw }) => ({
     ),
   __interface_compound_body: ($) =>
     seq(
+      // oxlint-disable-next-line tree-sitter-optimize/shared-choice
       choice(alias($._colon, ":"), $._terminator_dot),
       optional($.__interface_body_items),
       $._end_keyword,
