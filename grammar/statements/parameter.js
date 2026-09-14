@@ -78,13 +78,16 @@ export default ({ kw }) => ({
       ),
     ),
   __parameter_handle_options: ($) =>
-    prec.right(seq($.__parameter_handle_option, optional($.__parameter_handle_options))),
-  __parameter_handle_option: ($) =>
-    choice(
-      alias(kw("BIND"), $.bind),
-      alias(kw("BY-VALUE"), $.by_value),
-      alias(kw("BY-REFERENCE"), $.by_reference),
-      alias($._no_undo_keyword, $.no_undo),
+    prec.right(
+      seq(
+        choice(
+          alias(kw("BIND"), $.bind),
+          alias(kw("BY-VALUE"), $.by_value),
+          alias(kw("BY-REFERENCE"), $.by_reference),
+          alias($._no_undo_keyword, $.no_undo),
+        ),
+        optional($.__parameter_handle_options),
+      ),
     ),
   __parameter_label_tail: ($) =>
     seq(",", field("label", $.string_literal), optional($.__parameter_label_tail)),
