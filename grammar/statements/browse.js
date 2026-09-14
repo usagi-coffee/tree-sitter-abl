@@ -134,6 +134,7 @@ export default ({ kw }) => ({
             $._format_string,
             $._aggregate_label_phrase,
             alias(kw("NO-LABELS", { alias: "NO-LABEL", offset: 8 }), $.no_labels),
+            // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
             seq(kw("WIDTH"), field("width", $.__browse_option_expression)),
             seq(kw("COLUMN-FONT"), field("column_font", $.__browse_option_expression)),
             seq(kw("COLUMN-LABEL"), field("column_label", $.string_literal)),
