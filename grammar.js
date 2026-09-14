@@ -619,6 +619,7 @@ export default grammar({
             field("name", $._identifier_or_qualified_name),
           ),
         ),
+      // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
       __object_access_handle_type: ($) =>
         choice(
           alias(kw("TEMP-TABLE"), $.identifier),
