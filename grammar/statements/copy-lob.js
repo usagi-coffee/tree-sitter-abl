@@ -19,6 +19,7 @@ export default ({ kw }) => ({
       ),
     ),
 
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __copy_lob_source: ($) =>
     choice(
       seq(optional(kw("OBJECT")), field("source", $._expression)),
