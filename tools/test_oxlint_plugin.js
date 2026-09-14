@@ -3,6 +3,7 @@ import { RuleTester } from "oxlint/plugins-dev";
 import {
   choiceSubset,
   singleUseSequence,
+  sequenceSubset,
   resetSharingCandidates,
   sharedSequence,
   sharedRecursion,
@@ -663,6 +664,78 @@ new RuleTester().run("single-use-sequence", singleUseSequence, {
         __value: ($) => seq($.expression, optional($.no_error)),
       }});`,
       errors: [{ message: /__value has one unaliased local use in root/ }],
+    },
+  ],
+});
+
+new RuleTester().run("sequence-subset", sequenceSubset, {
+  valid: [
+    `export default () => ({ _value: ($) => seq("=", field("value", $.expression)), root: ($) => seq($.name, $._value) });`,
+    `export default () => ({ value: ($) => seq("=", $.expression), root: ($) => seq($.name, "=", $.expression) });`,
+    `export default () => ({ _value: ($) => prec.right(seq("=", $.expression)), root: ($) => seq($.name, "=", $.expression) });`,
+    `export default () => ({ _value: ($) => seq("=", field("value", $.expression)), root: ($) => seq($.name, "=", field("other", $.expression)) });`,
+    `export default () => ({ _value: ($) => seq("=", alias($.expression, $.value)), root: ($) => seq($.name, "=", alias($.expression, $.other)) });`,
+    `export default () => ({ _value: ($) => seq("=", $.expression), root: ($) => seq($.name, $.expression, "=") });`,
+    `export default () => ({ _value: ($) => seq("=", $.expression), root: ($) => seq($.name, "=", ":", $.expression) });`,
+    `export default () => ({ _value: ($) => seq("=", $.expression), root: ($) => seq("=", $.expression) });`,
+    `export default () => ({ _value: ($) => seq("=", $.expression), root: ($) => token(seq($.name, "=", $.expression)) });`,
+    `export default () => ({ _value: ($) => seq("=", $.expression), root: ($) => token.immediate(seq($.name, "=", $.expression)) });`,
+    `export default () => ({ _value: ($) => seq("=", field("value", $.root)), root: ($) => seq($.name, "=", field("value", $.root)) });`,
+    `export default () => ({ _value: ($) => seq("=", token(/a/i)), root: ($) => seq($.name, "=", token(/b/i)) });`,
+    `export default ({kw}) => ({ _value: ($) => seq(kw("COLUMN", {offset:3}), $.expression), root: ($) => seq($.name, kw("COLUMN", {offset:6}), $.expression) });`,
+    `const unrelated = { _value: ($) => seq("=", $.expression), root: ($) => seq($.name, "=", $.expression) };`,
+    `export default () => ({
+      // oxlint-disable-next-line rule-to-test/sequence-subset
+      _value: ($) => seq("=", $.expression),
+      root: ($) => seq($.name, "=", $.expression),
+    });`,
+  ],
+  invalid: [
+    {
+      name: "punctuation-led suffix",
+      code: `export default () => ({ _value: ($) => seq("=", field("value", $.expression)), root: ($) => seq($.name, "=", field("value", $.expression)) });`,
+      errors: [{ message: /_value matches 2 consecutive elements in root/ }],
+    },
+    {
+      name: "provider follows usage",
+      code: `export default () => ({ root: ($) => seq($.name, "=", $.expression), _value: ($) => seq("=", $.expression) });`,
+      errors: [{ message: /_value matches 2 consecutive elements in root/ }],
+    },
+    {
+      name: "prefix inside nested sequence",
+      code: `export default grammar({rules: { _opener: ($) => seq("(", $.expression), root: ($) => choice($.name, seq("(", $.expression, ")")) }});`,
+      errors: [{ message: /_opener matches 2 consecutive elements in root/ }],
+    },
+    {
+      name: "middle sequence",
+      code: `export default () => ({ _value: ($) => seq("=", $.expression), root: ($) => seq($.name, "=", $.expression, ".") });`,
+      errors: [{ message: /_value matches 2 consecutive elements in root/ }],
+    },
+    {
+      name: "provider last retains all matching targets",
+      code: `export default () => ({ first: ($) => seq($.a, "=", $.expression), second: ($) => seq($.b, "=", $.expression), _value: ($) => seq("=", $.expression) });`,
+      errors: [
+        { message: /_value matches 2 consecutive elements in first/ },
+        { message: /_value matches 2 consecutive elements in second/ },
+      ],
+    },
+  ],
+});
+
+resetSharingCandidates();
+RuleTester.it = (_name, run) => run();
+new RuleTester().run("sequence-subset PUT assignment regression", sequenceSubset, {
+  valid: [
+    {
+      filename: "grammar/core/common.js",
+      code: `export default () => ({ _equals_value: ($) => seq("=", field("value", $._expression)) });`,
+    },
+  ],
+  invalid: [
+    {
+      filename: "grammar/statements/put-assign.js",
+      code: `export default () => ({ __put_assign_prefix: ($) => seq(field("type", $.__put_assign_type), $.__put_assign_args, "=", field("value", $._expression)) });`,
+      errors: [{ message: /_equals_value matches 2 consecutive elements in __put_assign_prefix/ }],
     },
   ],
 });

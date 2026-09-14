@@ -258,12 +258,14 @@ const repeatedBodies = new Map();
 const recursiveBodies = new Map();
 const sharedSequences = new Map();
 const choiceCandidates = [];
+const sequenceCandidates = [];
 
 export function resetSharingCandidates() {
   repeatedBodies.clear();
   recursiveBodies.clear();
   sharedSequences.clear();
   choiceCandidates.length = 0;
+  sequenceCandidates.length = 0;
 }
 
 function containsAlternatives(outer, inner) {
@@ -336,6 +338,69 @@ export const choiceSubset = rule(
     },
   }),
   "Suggest reusing existing hidden choices inside larger choices with matching consecutive alternatives",
+);
+
+function referencedSymbols(node) {
+  const name = memberName(node);
+  if (name) return [name];
+  return node?.type === "CallExpression" ? node.arguments.flatMap(referencedSymbols) : [];
+}
+
+export const sequenceSubset = rule(
+  (context) => ({
+    CallExpression(node) {
+      if (callName(node) !== "seq" || node.arguments.length < 2) return;
+      const property = enclosingRule(node);
+      if (!property) return;
+      for (let parent = node.parent; parent !== property; parent = parent.parent) {
+        if (["token", "token.immediate"].includes(callName(parent))) return;
+      }
+      const reportNode = property.value.body === node ? property : node;
+      if (isRuleDisabled(context, reportNode)) return;
+      const candidate = {
+        cwd: context.cwd,
+        filename: context.filename,
+        rule: ruleName(property),
+        line: node.loc.start.line,
+        helper: property.value.body === node && ruleName(property).startsWith("_"),
+        elements: node.arguments.map((argument) =>
+          JSON.stringify(
+            context.sourceCode.getTokens(argument).map(({ type, value }) => [type, value]),
+          ),
+        ),
+        references: referencedSymbols(node),
+      };
+      for (const previous of sequenceCandidates) {
+        if (previous.cwd !== candidate.cwd) continue;
+        if (previous.filename === candidate.filename && previous.rule === candidate.rule) continue;
+        let helper, target;
+        if (previous.helper && containsAlternatives(candidate.elements, previous.elements)) {
+          helper = previous;
+          target = candidate;
+        } else if (
+          candidate.helper &&
+          containsAlternatives(previous.elements, candidate.elements)
+        ) {
+          helper = candidate;
+          target = previous;
+        } else continue;
+        if (helper.references.includes(target.rule) || target.references.includes(helper.rule))
+          continue;
+        const sharing =
+          helper.rule.startsWith("__") && helper.filename !== target.filename
+            ? "promote the private sequence to a shared helper before reuse"
+            : "reuse the hidden sequence";
+        report(
+          context,
+          reportNode,
+          "sequence-subset",
+          `${helper.rule} matches ${helper.elements.length} consecutive elements in ${target.rule} (other sequence: ${previous.filename}:${previous.line}); try to ${sharing}. Preserve fields, aliases, and precedence; measure parser size and validate trees.`,
+        );
+      }
+      sequenceCandidates.push(candidate);
+    },
+  }),
+  "Suggest reusing existing hidden sequences embedded in longer sequences",
 );
 
 export const sharedRepetition = rule(
@@ -727,6 +792,7 @@ export default {
     "shared-recursion": sharedRecursion,
     "shared-repetition": sharedRepetition,
     "single-use-sequence": singleUseSequence,
+    "sequence-subset": sequenceSubset,
     "tail-extraction": tailExtraction,
     "token-packing": tokenPacking,
   },
