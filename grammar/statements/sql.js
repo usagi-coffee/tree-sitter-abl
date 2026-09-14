@@ -140,6 +140,7 @@ export default ({ kw }) => ({
       optional($.__sql_having_clause),
       optional($.__sql_order_by_clause),
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-sequence
   __sql_table_references: ($) =>
     seq(field("table", $.__sql_table_reference), optional($.__sql_table_references_tail)),
   __sql_table_references_tail: ($) =>
