@@ -61,6 +61,7 @@ export default ({ kw }) => ({
       seq(
         kw("INPUT"),
         choice(
+          // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
           seq(kw("FRAME", { offset: 4 }), field("frame", $.__widget_name)),
           seq(kw("BROWSE"), field("browse", $.__widget_name)),
         ),
