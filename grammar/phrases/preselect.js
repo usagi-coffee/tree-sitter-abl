@@ -1,4 +1,5 @@
 export default ({ kw }) => ({
+  // oxlint-disable-next-line tree-sitter-optimize/sequence-subset
   preselect_phrase: ($) =>
     seq(
       kw("PRESELECT"),
