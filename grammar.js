@@ -492,6 +492,13 @@ export default grammar({
           alias(kw("PROCEDURE", { offset: 4 }), $.identifier),
           alias(kw("INTERFACE"), $.identifier),
         ),
+      // BUFFER and TABLE-HANDLE can be identifiers in assignments, receivers,
+      // and unnamed arguments, as well as parameter and handle-type markers.
+      // TODO: Support marker identifiers in ASSIGN and compound/parenthesized
+      // expressions without broadening expression states; preserve assignment
+      // boundaries such as ASSIGN x = Buffer y = 1.
+      _bare_marker_identifier: ($) =>
+        choice(alias(kw("BUFFER"), $.identifier), alias(kw("TABLE-HANDLE"), $.identifier)),
       _identifier_or_array_access: ($) => choice($._identifier_or_qualified_name, $.array_access),
       // oxlint-disable-next-line tree-sitter-optimize/choice-subset
       _identifier_or_access: ($) =>
@@ -528,7 +535,7 @@ export default grammar({
         seq(
           field("left", $._assignable),
           field("operator", $.assignment_operator),
-          field("right", $._assignment_value),
+          field("right", choice($._assignment_value, $._bare_marker_identifier)),
           optional($.widget_phrase),
         ),
 
@@ -584,6 +591,7 @@ export default grammar({
       _object_access_plain_left: ($) =>
         choice(
           $._identifier_or_qualified_name,
+          $._bare_marker_identifier,
           $.system_handle_identifier,
           $.preprocessor_name,
           $.scoped_name,
@@ -711,7 +719,7 @@ export default grammar({
                     ),
                   ),
                 ),
-                field("name", $._expression),
+                field("name", choice($._expression, $._bare_marker_identifier)),
               ),
               optional($.__argument_in_handle),
             ),

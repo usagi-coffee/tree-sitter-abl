@@ -28,12 +28,14 @@ import grammar_raw_transfer from "./raw-transfer.js";
 import grammar_stream from "./stream.js";
 import grammar_subscribe from "./subscribe.js";
 import grammar_update from "./update.js";
+import grammar_accessors from "./accessors.js";
 
 // References: N/A (barrel for precedence groups).
 // Purpose: compose all precedence groups in a stable, readable order.
 
 export default ($) => [
   ["unary", "multiplication", "add", "compare", "not", "logical"],
+  ...grammar_accessors($),
   ...grammar_arguments($),
   ...grammar_binary($),
   ...grammar_os($),
