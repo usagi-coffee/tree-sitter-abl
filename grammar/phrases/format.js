@@ -157,8 +157,7 @@ export default ({ kw }) => ({
 
   _format_label: ($) => choice(seq(kw("LABEL"), $._format_labels), kw("NO-LABELS")),
   _format_labels: ($) => seq(field("label", $._expression), optional($._format_labels_tail)),
-  _format_labels_tail: ($) =>
-    seq(",", field("label", $._expression), optional($._format_labels_tail)),
+  _format_labels_tail: ($) => seq(",", $._format_labels),
 
   _format_validate: ($) => seq($.__format_validate_prefix, ")"),
   __format_validate_prefix: ($) =>
