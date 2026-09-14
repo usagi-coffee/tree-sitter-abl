@@ -13,11 +13,7 @@ export default ({ kw }) => ({
     seq(
       kw("FIELDS", { alias: "FIELD", offset: 5 }),
       field("name", $.identifier),
-      choice(
-        $._as_type_name_phrase,
-        $.__temp_table_like_type_clause,
-        seq($.__temp_table_extent_option, $.__temp_table_like_type_clause),
-      ),
+      $._table_field_type,
       // oxlint-disable-next-line tree-sitter-optimize/recurse
       repeat($.__temp_table_field_option),
     ),

@@ -292,15 +292,17 @@ export default ({ kw }) => ({
         optional($._table_options),
       ),
     ),
+  _table_field_type: ($) =>
+    choice(
+      $._as_type_name_phrase,
+      $.__temp_table_like_type_clause,
+      seq($.__temp_table_extent_option, $.__temp_table_like_type_clause),
+    ),
   _table_field: ($) =>
     seq(
       kw("FIELDS", { alias: "FIELD", offset: 5 }),
       field("name", $.identifier),
-      choice(
-        $._as_type_name_phrase,
-        $.__temp_table_like_type_clause,
-        seq($.__temp_table_extent_option, $.__temp_table_like_type_clause),
-      ),
+      $._table_field_type,
       optional($._table_field_options),
     ),
 
