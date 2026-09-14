@@ -96,7 +96,7 @@ export default ({ kw }) => ({
       seq(kw("BGCOLOR"), field("bgcolor", $._expression), optional($.__prompt_for_font_option)),
       $.__prompt_for_font_option,
     ),
-  // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
+  // oxlint-disable-next-line tree-sitter-optimize/shared-sequence, tree-sitter-optimize/sequence-subset
   __prompt_for_font_option: ($) => seq(kw("FONT"), field("font", $._expression)),
   // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
   __prompt_for_at_phrase: ($) => seq($._at_keyword, field("position", token(/[0-9]+(\.[0-9]+)?/))),
