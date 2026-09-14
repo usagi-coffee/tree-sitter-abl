@@ -1,0 +1,44 @@
+================================================================================
+VIEW/HIDE - widget IN qualifiers and window boundaries
+================================================================================
+
+VIEW FIELD a IN FRAME f IN WINDOW w.
+HIDE a IN FRAME f NO-PAUSE IN WINDOW w.
+VIEW a[1] IN FRAM f.
+HIDE a IN BROWSE b.
+VIEW MENU-ITEM go IN MENU m.
+HIDE FIELD a.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (view_statement
+    (widget_phrase
+      field: (identifier)
+      frame: (identifier))
+    (in_window_phrase
+      window: (identifier)))
+  (hide_statement
+    (widget_phrase
+      field: (identifier)
+      frame: (identifier))
+    (no_pause)
+    (in_window_phrase
+      window: (identifier)))
+  (view_statement
+    (widget_phrase
+      field: (array_access
+        array: (identifier)
+        index: (number_literal))
+      frame: (identifier)))
+  (hide_statement
+    (widget_phrase
+      column: (identifier)
+      browse: (identifier)))
+  (view_statement
+    (widget_phrase
+      item: (identifier)
+      menu: (identifier)))
+  (hide_statement
+    (widget_phrase
+      field: (identifier))))
