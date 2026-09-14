@@ -160,13 +160,13 @@ export default ({ kw }) => ({
       alias("*", $.star),
       alias($.__sql_qualified_star, $.star),
       alias($.__sql_count_star, $.function_call),
-      seq($._expression, optional($.__sql_column_title)),
+      seq(
+        $._expression,
+        optional(seq(optional($._as_keyword), field("title", $._identifier_or_string_literal))),
+      ),
     ),
   __sql_qualified_star: ($) => seq(field("table", $.identifier), ".", "*"),
   __sql_count_star: ($) => seq(field("function", kw("COUNT")), "(", alias("*", $.star), ")"),
-  __sql_column_title: ($) =>
-    seq(optional($._as_keyword), field("title", $._identifier_or_string_literal)),
-
   __sql_into_clause: ($) =>
     seq(
       kw("INTO"),
