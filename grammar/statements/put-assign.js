@@ -20,13 +20,5 @@ export default ({ kw }) => ({
       alias(kw("PUT-DOUBLE"), $.identifier),
       alias(kw("PUT-STRING"), $.identifier),
     ),
-  __put_assign_args: ($) =>
-    seq(
-      "(",
-      field("buffer", $._expression),
-      ",",
-      field("position", $._expression),
-      optional(seq(",", field("length", $._expression))),
-      ")",
-    ),
+  __put_assign_args: ($) => seq("(", field("buffer", $._expression), ",", $._position_length, ")"),
 });

@@ -39,7 +39,7 @@ export default ({ kw }) => ({
             "(",
             field("string", $._expression),
             ",",
-            $.__value_assignments_position_length,
+            $._position_length,
             ")",
           ),
         ),
@@ -59,7 +59,7 @@ export default ({ kw }) => ({
             field("type", alias(kw("RAW"), $.identifier)),
             "(",
             field("field", $._expression),
-            optional(seq(",", $.__value_assignments_position_length)),
+            optional(seq(",", $._position_length)),
           ),
         ),
         $._close_equals_value,
@@ -73,8 +73,6 @@ export default ({ kw }) => ({
         field("length", $._expression),
       ),
     ),
-  __value_assignments_position_length: ($) =>
-    seq(field("position", $._expression), optional(seq(",", field("length", $._expression)))),
   __value_assignments_database_tenant: ($) =>
     seq(",", field("database", $._expression), optional(seq(",", field("tenant", $._expression)))),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-sequence

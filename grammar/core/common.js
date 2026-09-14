@@ -495,6 +495,8 @@ export default ({ kw }) => ({
   _when_phrase: ($) => seq(kw("WHEN"), field("when", $._expression)),
   _equals_value: ($) => seq("=", field("value", $._expression)),
   _close_equals_value: ($) => seq(")", $._equals_value),
+  _position_length: ($) =>
+    seq(field("position", $._expression), optional(seq(",", field("length", $._expression)))),
   _display_space_phrase: ($) =>
     prec.left(
       seq(kw("SPACE"), optional(field("space", seq($._parenthesized_expression_prefix, ")")))),
