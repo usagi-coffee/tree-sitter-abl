@@ -82,6 +82,7 @@ export default ({ kw }) => ({
   __display_keyword_identifier: ($) => alias(kw("MENU"), $.identifier),
   __display_record: ($) => $._identifier_or_qualified_name,
 
+  // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
   __display_skip_phrase: ($) =>
     prec.left(
       seq(kw("SKIP"), optional(field("skip", seq($._parenthesized_expression_prefix, ")")))),

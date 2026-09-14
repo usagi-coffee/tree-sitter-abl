@@ -63,6 +63,7 @@ export default ({ kw }) => ({
       $.__frame_skip_phrase,
     ),
 
+  // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
   __frame_skip_phrase: ($) =>
     prec.left(
       seq(kw("SKIP"), optional(field("skip", seq($._parenthesized_expression_prefix, ")")))),
