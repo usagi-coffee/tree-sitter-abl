@@ -9,6 +9,7 @@ export default ({ kw }) => ({
     choice(
       $._color_font_option,
       alias(kw("SUB-MENU-HELP"), $.submenu_help),
+      // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
       seq($._like_keyword, field("like", $.identifier)),
       alias($.__submenu_element, $.menu_element),
     ),
