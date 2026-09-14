@@ -103,6 +103,7 @@ export default ({ kw }) => ({
       kw("CONSTRUCTOR"),
       // oxlint-disable-next-line tree-sitter-optimize/recurse
       repeat(
+        // oxlint-disable-next-line tree-sitter-optimize/choice-subset
         choice(
           alias(kw("PRIVATE"), $.access_modifier),
           alias(kw("PACKAGE-PRIVATE"), $.access_modifier),
