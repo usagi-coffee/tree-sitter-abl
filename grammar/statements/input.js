@@ -29,5 +29,5 @@ export default ({ kw }) => ({
       ),
     ),
   __input_file_target: ($) =>
-    choice($.opsys_file, $.string_literal, $._identifier_or_access_or_call, $.preprocessor_name),
+    choice($.opsys_file, $._string_or_identifier_access_or_call, $.preprocessor_name),
 });
