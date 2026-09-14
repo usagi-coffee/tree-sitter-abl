@@ -491,6 +491,7 @@ export default grammar({
           alias(kw("INTERFACE"), $.identifier),
         ),
       _identifier_or_array_access: ($) => choice($._identifier_or_qualified_name, $.array_access),
+      // oxlint-disable-next-line tree-sitter-optimize/choice-subset
       _identifier_or_access: ($) =>
         choice($._identifier_or_qualified_name, $.array_access, $.object_access),
       _identifier_or_access_or_call: ($) => choice($._identifier_or_access, $.function_call),
