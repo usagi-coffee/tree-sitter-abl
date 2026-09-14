@@ -43,6 +43,7 @@ export default ({ kw }) => ({
   __wait_for_widget_list_tail: ($) =>
     seq(",", $.widget_phrase, optional($.__wait_for_widget_list_tail)),
   __wait_for_event_list: ($) => seq($._events, optional($.__wait_for_event_list_tail)),
+  // oxlint-disable-next-line tree-sitter-optimize/recursive-tail-reuse
   __wait_for_event_list_tail: ($) =>
     seq(optional(","), $._events, optional($.__wait_for_event_list_tail)),
 });
