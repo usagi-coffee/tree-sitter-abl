@@ -66,13 +66,16 @@ export default ({ kw }) => ({
       alias($._no_undo_keyword, $.no_undo),
     ),
   __parameter_table_options: ($) =>
-    prec.right(seq($.__parameter_table_option, optional($.__parameter_table_options))),
-  __parameter_table_option: ($) =>
-    choice(
-      alias(kw("APPEND"), $.append),
-      alias(kw("BIND"), $.bind),
-      alias(kw("BY-VALUE"), $.by_value),
-      alias($._no_undo_keyword, $.no_undo),
+    prec.right(
+      seq(
+        choice(
+          alias(kw("APPEND"), $.append),
+          alias(kw("BIND"), $.bind),
+          alias(kw("BY-VALUE"), $.by_value),
+          alias($._no_undo_keyword, $.no_undo),
+        ),
+        optional($.__parameter_table_options),
+      ),
     ),
   __parameter_handle_options: ($) =>
     prec.right(seq($.__parameter_handle_option, optional($.__parameter_handle_options))),
