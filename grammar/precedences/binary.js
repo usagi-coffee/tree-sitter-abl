@@ -14,7 +14,7 @@ export default ($) => [
   [
     $.binary_expression,
     $.__message_expression,
-    $.__export_expression,
+    $._expression,
     $.__os_create_dir_directory,
     $.__os_delete_target,
     $.__underline_field,

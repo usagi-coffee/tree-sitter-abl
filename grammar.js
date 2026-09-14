@@ -245,7 +245,6 @@ export default grammar({
     $.__call_argument,
     $.__underline_field,
     $.__put_control,
-    $.__export_expression,
     $.__system_help_position,
     $.__include_file_target,
     $.__include_arguments,
