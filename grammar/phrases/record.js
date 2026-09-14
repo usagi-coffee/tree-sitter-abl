@@ -55,6 +55,7 @@ export default ({ kw }) => ({
     ),
   __record_except_list: ($) => seq(kw("EXCEPT"), $.__record_parenthesized_field_names),
   __record_parenthesized_field_names: ($) => seq($.__record_field_names_prefix, ")"),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-sequence
   __record_field_names_prefix: ($) => seq("(", optional($.__record_field_names)),
   __record_field_names: ($) => seq($.__record_field_name, optional($.__record_field_name_tail)),
   __record_field_name_tail: ($) =>
