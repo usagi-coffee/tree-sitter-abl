@@ -8,6 +8,7 @@ export default ({ kw }) => ({
       kw("STREAM"),
       field("name", $.identifier),
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __stream_modifier: ($) =>
     choice(
       seq(
