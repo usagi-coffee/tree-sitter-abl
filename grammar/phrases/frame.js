@@ -83,6 +83,7 @@ export default ({ kw }) => ({
   __frame_column_keyword: ($) => choice(kw("COLUMN"), kw("COLUMNS"), kw("COL")),
   // oxlint-disable-next-line tree-sitter-optimize/choice-subset, tree-sitter-optimize/shared-choice
   __frame_identifier: ($) => choice($.identifier, $.preprocessor_name),
+  // oxlint-disable-next-line tree-sitter-optimize/forwarding-rule
   __frame_expression: ($) => $._expression,
   down: ($) =>
     choice(
