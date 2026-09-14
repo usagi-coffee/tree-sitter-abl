@@ -26,6 +26,7 @@ export default ({ kw }) => ({
       seq(kw("FILE"), field("source_file", $._expression)),
     ),
 
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __copy_lob_target: ($) =>
     choice(
       seq(optional(kw("OBJECT")), field("target", $._expression), optional($.__copy_lob_overlay)),
