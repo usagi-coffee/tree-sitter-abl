@@ -734,6 +734,7 @@ export default grammar({
           ),
           optional($.__argument_type_passing),
         ),
+      // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
       __argument_type_passing: ($) =>
         choice(
           // oxlint-disable-next-line tree-sitter-optimize/sequence-subset
