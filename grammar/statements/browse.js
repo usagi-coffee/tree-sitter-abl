@@ -58,6 +58,7 @@ export default ({ kw }) => ({
       seq($._in_keyword, kw("WINDOW"), field("window", $.__browse_option_expression)),
       seq(kw("MAX-DATA-GUESS"), field("max_data_guess", $.__browse_option_expression)),
       seq($._row_keyword, field("row", $.__browse_option_expression)),
+      // oxlint-disable-next-line tree-sitter-optimize/shared-choice
       seq(choice(kw("COLUMN"), kw("COL")), field("column", $.__browse_option_expression)),
       $._scrollbar_option,
       seq(
