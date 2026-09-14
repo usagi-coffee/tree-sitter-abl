@@ -10,6 +10,7 @@ export default ({ kw }) => ({
   __image_option: ($) =>
     choice(
       $.image_phrase,
+      // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
       seq($._like_keyword, field("like", $.identifier)),
       $.size_phrase,
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
