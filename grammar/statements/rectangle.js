@@ -18,6 +18,7 @@ export default ({ kw }) => ({
       alias(kw("NO-FILL"), $.no_fill),
       seq(kw("EDGE-CHARS"), field("edge_chars", $._expression)),
       seq(kw("EDGE-PIXELS"), field("edge_pixels", $._expression)),
+      // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
       seq(kw("DCOLOR"), field("dcolor", $._expression)),
       seq(kw("BGCOLOR"), field("bgcolor", $._expression)),
       seq(kw("FGCOLOR"), field("fgcolor", $._expression)),
