@@ -458,6 +458,7 @@ export default grammar({
       _delete_keyword: ($) => kw("DELETE"),
       _close_keyword: ($) => kw("CLOSE"),
       _with_keyword: ($) => kw("WITH"),
+      // oxlint-disable-next-line tree-sitter-optimize/choice-subset
       _routine_access_modifier: ($) =>
         choice(
           alias(kw("PRIVATE"), $.access_modifier),
