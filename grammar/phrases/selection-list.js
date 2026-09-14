@@ -13,6 +13,7 @@ export default ({ kw }) => ({
       kw("SCROLLBAR-HORIZONTAL"),
       kw("SCROLLBAR-VERTICAL"),
       $.size_phrase,
+      // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
       seq(
         kw("INNER-CHARS"),
         field("inner_chars", $.number_literal),

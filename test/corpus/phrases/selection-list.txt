@@ -17,3 +17,20 @@ DEFINE VARIABLE v AS CHARACTER VIEW-AS SELECTION-LIST SIZE 20 BY 5 MULTIPLE SCRO
           height: (number_literal))
         items: (string_literal)
         items: (string_literal)))))
+
+================================================================================
+SELECTION-LIST - INNER-CHARS and INNER-LINES
+================================================================================
+
+DEFINE VARIABLE vInner AS CHARACTER VIEW-AS SELECTION-LIST INNER-CHARS 60 INNER-LINES 5.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (view_as_phrase
+      (selection_list_phrase
+        inner_chars: (number_literal)
+        inner_lines: (number_literal)))))
