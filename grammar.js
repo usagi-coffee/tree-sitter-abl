@@ -269,6 +269,7 @@ export default grammar({
         ),
       include_file_reference: ($) => $.__include_file_reference,
       __include_file_reference: ($) => seq($.__include_file_opener, "}", optional(".")),
+      // oxlint-disable-next-line tree-sitter-optimize/single-use-sequence
       __include_file_opener: ($) =>
         seq(
           "{",
