@@ -37,6 +37,7 @@ export default ({ kw }) => ({
       alias(kw("PRIMARY"), $.primary),
       alias(kw("WORD-INDEX"), $.word_index),
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-sequence
   __temp_table_like_phrase: ($) => seq($._like_keyword, $.__temp_table_like_body),
   __temp_table_like_sequential_phrase: ($) => seq(kw("LIKE-SEQUENTIAL"), $.__temp_table_like_body),
   __temp_table_like_body: ($) =>
