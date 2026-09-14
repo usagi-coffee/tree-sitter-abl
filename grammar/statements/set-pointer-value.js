@@ -7,7 +7,6 @@ export default ({ kw }) => ({
       "(",
       field("target", choice($._identifier_or_qualified_name, $.object_access)),
       ")",
-      "=",
-      field("value", $._expression),
+      $._equals_value,
     ),
 });
