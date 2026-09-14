@@ -31,9 +31,5 @@ export default ({ kw }) => ({
       $.__var_storage_modifier,
     ),
   __var_storage_modifier: ($) =>
-    choice(
-      alias(kw("STATIC"), $.static_modifier),
-      alias(kw("SERIALIZABLE"), $.serialization_modifier),
-      alias(kw("NON-SERIALIZABLE"), $.serialization_modifier),
-    ),
+    choice(alias(kw("STATIC"), $.static_modifier), $._serialization_modifier),
 });
