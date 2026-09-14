@@ -20,6 +20,7 @@ export default ({ kw }) => ({
       ),
       $._no_error_terminator,
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __display_stream_frame_tail: ($) =>
     choice(
       seq(alias(kw("UNLESS-HIDDEN"), $.unless_hidden), $.__display_window_frame_phrases),
