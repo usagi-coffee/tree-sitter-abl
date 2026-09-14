@@ -5,7 +5,11 @@ export default ({ kw }) => ({
 
   __update_record_body: ($) =>
     // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
-    seq(field("record", $.__update_record), optional($._except_fields), optional($.frame_phrase)),
+    seq(
+      field("record", $._identifier_or_qualified_name),
+      optional($._except_fields),
+      optional($.frame_phrase),
+    ),
 
   __update_fields_body: ($) =>
     // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
@@ -17,7 +21,6 @@ export default ({ kw }) => ({
       optional($.editing_phrase),
     ),
 
-  __update_record: ($) => $._identifier_or_qualified_name,
   // oxlint-disable-next-line tree-sitter-optimize/body-extraction
   __update_field: ($) =>
     choice(
