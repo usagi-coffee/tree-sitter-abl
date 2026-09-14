@@ -293,6 +293,7 @@ export default ({ kw }) => ({
       optional($._member_access_modifier),
       optional($._serialization_modifier),
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/choice-subset
   __class_property_class_modifier: ($) =>
     choice(
       alias(kw("STATIC"), $.static_modifier),
