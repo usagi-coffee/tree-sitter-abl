@@ -36,6 +36,7 @@ export default ({ kw }) => ({
     // oxlint-disable-next-line tree-sitter-optimize/recurse
     repeat1(
       choice(
+        // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
         seq(kw("X"), field("x", $._expression)),
         seq(kw("X-OF"), field("x_of", $._expression)),
         seq(kw("Y"), field("y", $._expression)),
