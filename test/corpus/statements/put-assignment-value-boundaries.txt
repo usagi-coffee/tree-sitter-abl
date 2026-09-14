@@ -1,0 +1,33 @@
+================================================================================
+PUT assignments - argument and value expression boundaries
+================================================================================
+
+PUT-BYTE(rawBuf, offset + 1) = a + b * c.
+PUT-STRING(rawBuf, 1, 4) = FormatValue("x", 2).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (put_assign_statement
+    type: (identifier)
+    buffer: (identifier)
+    position: (binary_expression
+      (identifier)
+      (number_literal))
+    value: (binary_expression
+      (identifier)
+      (binary_expression
+        (identifier)
+        (identifier))))
+  (put_assign_statement
+    type: (identifier)
+    buffer: (identifier)
+    position: (number_literal)
+    length: (number_literal)
+    value: (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (string_literal))
+        (argument
+          name: (number_literal))))))

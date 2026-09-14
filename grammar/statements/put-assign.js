@@ -2,12 +2,7 @@ export default ({ kw }) => ({
   put_assign_statement: ($) => seq($.__put_assign_prefix, $._terminator),
 
   __put_assign_prefix: ($) =>
-    seq(
-      field("type", $.__put_assign_type),
-      $.__put_assign_args,
-      "=",
-      field("value", $._expression),
-    ),
+    seq(field("type", $.__put_assign_type), $.__put_assign_args, $._equals_value),
 
   // oxlint-disable-next-line tree-sitter-optimize/body-extraction
   __put_assign_type: ($) =>
