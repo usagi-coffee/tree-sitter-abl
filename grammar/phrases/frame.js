@@ -94,6 +94,8 @@ export default ({ kw }) => ({
       ),
       seq(field("value", $.__frame_expression), kw("DOWN")),
     ),
+
+  // oxlint-disable-next-line tree-sitter-optimize/shared-choice
   __frame_color_value: ($) => choice(kw("NORMAL"), kw("INPUT"), kw("MESSAGES"), $.color_phrase),
 
   __frame_with_identifier: ($) =>

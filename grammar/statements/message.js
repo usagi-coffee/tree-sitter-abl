@@ -9,7 +9,11 @@ export default ({ kw }) => ({
           optional(
             seq(
               kw("COLOR"),
-              field("color", choice(kw("NORMAL"), kw("INPUT"), kw("MESSAGES"), $.color_phrase)),
+              field(
+                "color",
+                // oxlint-disable-next-line tree-sitter-optimize/shared-choice
+                choice(kw("NORMAL"), kw("INPUT"), kw("MESSAGES"), $.color_phrase),
+              ),
             ),
           ),
           $.__message_expressions,
