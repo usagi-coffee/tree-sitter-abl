@@ -183,6 +183,7 @@ export default ({ kw }) => ({
   __sql_table_reference: ($) =>
     seq(field("name", $._identifier_or_qualified_name), optional(field("alias", $.identifier))),
 
+  // oxlint-disable-next-line tree-sitter-optimize/sequence-subset
   __sql_group_by_clause: ($) =>
     seq(
       kw("GROUP"),
