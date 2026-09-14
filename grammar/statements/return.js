@@ -5,7 +5,7 @@ export default ({ kw }) => ({
   __return_body: ($) =>
     choice(
       field("value", $._expression),
-      seq(kw("ERROR"), optional(field("error_value", $._expression))),
+      $.__return_error_clause,
       alias(kw("NO-APPLY"), $.no_apply),
     ),
 });

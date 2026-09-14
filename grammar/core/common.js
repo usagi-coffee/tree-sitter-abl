@@ -477,13 +477,10 @@ export default ({ kw }) => ({
     seq(
       kw("RETURN"),
       optional(
-        choice(
-          seq(kw("ERROR"), optional(field("error_value", $._expression))),
-          kw("NO-APPLY"),
-          field("return_value", $._expression),
-        ),
+        choice($.__return_error_clause, kw("NO-APPLY"), field("return_value", $._expression)),
       ),
     ),
+  __return_error_clause: ($) => seq(kw("ERROR"), optional(field("error_value", $._expression))),
   _when_phrase: ($) => seq(kw("WHEN"), field("when", $._expression)),
   _equals_value: ($) => seq("=", field("value", $._expression)),
   _display_space_phrase: ($) =>

@@ -26,7 +26,7 @@ export default ({ kw }) => ({
         kw("RETURN"),
         optional(
           choice(
-            seq(kw("ERROR"), optional(field("error_value", $._expression))),
+            $.__return_error_clause,
             alias(kw("NO-APPLY"), $.no_apply),
             field("return_value", $._expression),
           ),
