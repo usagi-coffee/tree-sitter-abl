@@ -70,6 +70,7 @@ export default ({ kw }) => ({
       optional(field("frame", $.identifier)),
       field("field", $.identifier),
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/keyword-reuse
   __record_query_lock_phrase: ($) => kw("NO-LOCK"),
   // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
   __record_query_use_index: ($) =>
