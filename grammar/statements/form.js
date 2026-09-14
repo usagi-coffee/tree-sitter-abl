@@ -57,11 +57,15 @@ export default ({ kw }) => ({
       kw("VIEW-AS"),
       choice(
         field("widget", $.identifier),
-        seq(kw("RADIO-SET"), kw("RADIO-BUTTONS"), $.__form_radio_button_list),
+        seq(
+          kw("RADIO-SET"),
+          kw("RADIO-BUTTONS"),
+          $.__form_radio_button,
+          optional($.__form_radio_button_tail),
+        ),
       ),
     ),
 
-  __form_radio_button_list: ($) => seq($.__form_radio_button, optional($.__form_radio_button_tail)),
   __form_radio_button_tail: ($) =>
     seq(",", $.__form_radio_button, optional($.__form_radio_button_tail)),
   __form_radio_button: ($) =>
