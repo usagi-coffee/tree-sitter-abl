@@ -675,6 +675,7 @@ export default grammar({
 
       // Callables
       arguments: ($) => seq($.__arguments_prefix, ")"),
+      // oxlint-disable-next-line tree-sitter-optimize/single-use-sequence
       __arguments_prefix: ($) => seq("(", optional($._argument_list)),
       // COM calls use empty comma-delimited slots for omitted positional arguments.
       _argument_list: ($) =>
