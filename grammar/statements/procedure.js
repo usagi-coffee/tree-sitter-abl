@@ -58,6 +58,7 @@ export default ({ kw }) => ({
             alias(kw("STDCALL"), $.stdcall),
           ),
         ),
+        // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
         optional(seq(kw("ORDINAL"), field("ordinal", $.number_literal))),
         optional(alias(kw("PERSISTENT"), $.persistent)),
         optional(alias(kw("THREAD-SAFE"), $.thread_safe)),
