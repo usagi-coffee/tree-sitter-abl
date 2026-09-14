@@ -1,0 +1,66 @@
+================================================================================
+Expression lists - nested commas and repeated fields
+================================================================================
+
+a = [1, F(2, 3), (x + y)].
+x = items[1, 2, 3].
+FIND Customer USING 1, F(2, 3), (x + y) NO-ERROR.
+DEFINE VARIABLE c AS CHARACTER TRIGGERS: ON GO PERSISTENT RUN "handler" (1, F(2, 3), x) END TRIGGERS.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (array_initializer
+      (number_literal)
+      (function_call
+        function: (identifier)
+        (arguments
+          (argument
+            name: (number_literal))
+          (argument
+            name: (number_literal))))
+      (parenthesized_expression
+        (binary_expression
+          (identifier)
+          (identifier)))))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (array_access
+      array: (identifier)
+      index: (number_literal)
+      index: (number_literal)
+      index: (number_literal)))
+  (find_statement
+    table: (identifier)
+    values: (number_literal)
+    values: (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (number_literal))
+        (argument
+          name: (number_literal))))
+    values: (parenthesized_expression
+      (binary_expression
+        (identifier)
+        (identifier)))
+    (no_error))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (trigger_phrase
+      event: (identifier)
+      procedure: (string_literal)
+      parameters: (number_literal)
+      parameters: (function_call
+        function: (identifier)
+        (arguments
+          (argument
+            name: (number_literal))
+          (argument
+            name: (number_literal))))
+      parameters: (identifier))))
