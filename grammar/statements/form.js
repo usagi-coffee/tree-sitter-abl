@@ -35,6 +35,7 @@ export default ({ kw }) => ({
         ),
         // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
         seq(kw("SKIP"), optional(field("skip", $._parenthesized_value))),
+        // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
         seq(kw("SPACE"), optional(field("space", $._parenthesized_value))),
       ),
     ),
