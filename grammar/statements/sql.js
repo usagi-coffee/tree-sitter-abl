@@ -122,6 +122,7 @@ export default ({ kw }) => ({
   select_statement: ($) => seq($.__sql_select_body, $._terminator),
 
   __sql_select_body: ($) => seq(kw("SELECT"), $.__sql_select_projection, $.__sql_select_from_body),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-sequence
   __sql_select_projection: ($) =>
     seq(optional($.__sql_set_quantifier), $.__sql_select_columns, optional($.__sql_into_clause)),
   __sql_select_columns: ($) =>
