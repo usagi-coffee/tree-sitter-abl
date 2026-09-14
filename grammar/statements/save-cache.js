@@ -11,5 +11,5 @@ export default ({ kw }) => ({
       choice(field("path", $.string_literal), field("path", $.__save_cache_value_expression)),
     ),
   __save_cache_value_expression: ($) => seq($.__save_cache_value_prefix, ")"),
-  __save_cache_value_prefix: ($) => seq(kw("VALUE"), "(", $._expression),
+  __save_cache_value_prefix: ($) => seq(kw("VALUE"), $._parenthesized_expression_prefix),
 });
