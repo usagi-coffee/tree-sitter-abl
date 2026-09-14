@@ -13,7 +13,6 @@ export default ({ kw }) => ({
         seq(",", field("length", $._expression), optional(seq(",", field("type", $._expression)))),
       ),
       ")",
-      "=",
-      field("value", $._expression),
+      $._equals_value,
     ),
 });
