@@ -43,6 +43,45 @@ IF NOT NEW Order THEN RETURN.
     then: (return_statement)))
 
 ================================================================================
+NEW expression - .NET generic type argument
+================================================================================
+
+vResult = NEW Progress.Collections.List<SomeType> ().
+vResult = NEW System.Collections.Generic.Dictionary<CHARACTER, ISomeType> (StringComparer:OrdinalIgnoreCase).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (new_expression
+      type: (generic_type
+        (qualified_name
+          left: (identifier)
+          right: (identifier)
+          right: (identifier))
+        (identifier))
+      (arguments)))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (new_expression
+      type: (generic_type
+        (qualified_name
+          left: (identifier)
+          right: (identifier)
+          right: (identifier)
+          right: (identifier))
+        (identifier)
+        (identifier))
+      (arguments
+        (argument
+          name: (object_access
+            left: (identifier)
+            right: (identifier)))))))
+
+================================================================================
 ENTERED expression
 ================================================================================
 
