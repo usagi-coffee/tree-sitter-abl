@@ -7,6 +7,14 @@ description: Diagnose and resolve Tree-sitter grammar conflict errors. Use whene
 
 Resolve the reported ambiguity without changing which valid ABL programs are accepted or how they are represented in the syntax tree.
 
+## Generator-conflict stance
+
+An unresolved generator conflict is a diagnostic result, not a verdict on the requested syntax or an automatic reason to reject an in-scope grammar change. It means the current formulation has not yet expressed the intended parse decision. Treat each generator report as a controlled experiment: use it to identify the competing parses, make the smallest semantics-aware adjustment, regenerate, and use the next report or parse result to refine the hypothesis.
+
+- Do not stop at the first conflict merely to report it, abandon the requested change, or ask the user to choose a mechanism. A conflict is normally work to investigate and resolve.
+- A newly exposed conflict after an adjustment does not invalidate the change by itself; it can reveal the next decision that the grammar must express. Continue the focused investigation while the reported paths and language evidence provide a viable direction.
+- Stop or seek user direction only when investigation shows that the requested syntax is invalid or undocumented, the required tree semantics are genuinely incompatible, or resolving it requires a product-level choice that evidence cannot make. State the evidence and the concrete alternatives in that case.
+
 ## Procedure
 
 1. Read the complete conflict report and locate the earliest token where the derivations diverge.
