@@ -719,6 +719,7 @@ export default grammar({
         ),
       __argument_type_passing: ($) =>
         choice(
+          // oxlint-disable-next-line tree-sitter-optimize/sequence-subset
           seq($._as_keyword, field("type", $._type_name), optional($.__argument_passing)),
           $.__argument_passing,
         ),
