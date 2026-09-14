@@ -1,5 +1,3 @@
 export default ({ kw }) => ({
-  close_query_statement: ($) => seq($._close_keyword, $.__close_query_body, $._terminator),
-
-  __close_query_body: ($) => seq(kw("QUERY"), field("query", $.identifier)),
+  close_query_statement: ($) => seq($._close_keyword, $._query_name_phrase, $._terminator),
 });

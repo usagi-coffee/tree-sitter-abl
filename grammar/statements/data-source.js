@@ -17,7 +17,7 @@ export default ({ kw }) => ({
     // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq(
       field("name", $.identifier),
-      optional(seq(kw("QUERY"), field("query", $.identifier))),
+      optional($._query_name_phrase),
       optional(
         seq($._for_keyword, $.__data_source_buffer_phrase, optional($.__data_source_buffer_tail)),
       ),
