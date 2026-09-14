@@ -62,7 +62,12 @@ export default ({ kw }) => ({
   __frame_display_value_tail: ($) =>
     // oxlint-disable-next-line tree-sitter-optimize/recurse
     repeat1(
-      choice($.at_phrase, seq($._to_keyword, field("to", $._expression)), $.__frame_display_option),
+      choice(
+        $.at_phrase,
+        // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
+        seq($._to_keyword, field("to", $._expression)),
+        $.__frame_display_option,
+      ),
     ),
 
   __frame_display_option: ($) =>
