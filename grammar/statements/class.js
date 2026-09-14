@@ -154,21 +154,15 @@ export default ({ kw }) => ({
       choice($.__class_named_parameter_body, $.__class_method_table_parameter),
     ),
   // oxlint-disable-next-line tree-sitter-optimize/optional-body-extraction
-  __class_method_body: ($) => seq($.__class_compound_body, optional(kw("METHOD")), $._terminator),
+  __class_method_body: ($) => seq($._compound_body, optional(kw("METHOD")), $._terminator),
 
   __class_constructor_body: ($) =>
     // oxlint-disable-next-line tree-sitter-optimize/optional-body-extraction
-    seq($.__class_compound_body, optional(choice(kw("CONSTRUCTOR"), kw("METHOD"))), $._terminator),
+    seq($._compound_body, optional(choice(kw("CONSTRUCTOR"), kw("METHOD"))), $._terminator),
 
   __class_destructor_body: ($) =>
     // oxlint-disable-next-line tree-sitter-optimize/optional-body-extraction
-    seq($.__class_compound_body, optional(choice(kw("DESTRUCTOR"), kw("METHOD"))), $._terminator),
-  __class_compound_body: ($) =>
-    seq(
-      // oxlint-disable-next-line tree-sitter-optimize/recurse
-      repeat($._statement),
-      $._end_keyword,
-    ),
+    seq($._compound_body, optional(choice(kw("DESTRUCTOR"), kw("METHOD"))), $._terminator),
 
   __class_destructor_parameters: ($) => seq("(", ")"),
 
@@ -215,13 +209,7 @@ export default ({ kw }) => ({
       alias($._extent_phrase, $.extent_phrase),
     ),
 
-  __class_property_accessor_body: ($) =>
-    seq(
-      alias($._colon, ":"),
-      // oxlint-disable-next-line tree-sitter-optimize/recurse
-      repeat($._statement),
-      $._end_keyword,
-    ),
+  __class_property_accessor_body: ($) => seq(alias($._colon, ":"), $._compound_body),
   __class_property_accessor_tail: ($) =>
     choice(
       $._terminator_dot,

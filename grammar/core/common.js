@@ -497,6 +497,12 @@ export default ({ kw }) => ({
   _close_equals_value: ($) => seq(")", $._equals_value),
   _position_length: ($) =>
     seq(field("position", $._expression), optional(seq(",", field("length", $._expression)))),
+  _compound_body: ($) =>
+    seq(
+      // oxlint-disable-next-line tree-sitter-optimize/recurse
+      repeat($._statement),
+      $._end_keyword,
+    ),
   _display_space_phrase: ($) =>
     prec.left(
       seq(kw("SPACE"), optional(field("space", seq($._parenthesized_expression_prefix, ")")))),

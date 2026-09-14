@@ -34,14 +34,7 @@ export default ({ kw }) => ({
     ),
   __trigger_body_after_loop: ($) =>
     choice(seq($.__trigger_down_phrase, $.__trigger_body_block), $.__trigger_body_block),
-  __trigger_body_block: ($) =>
-    seq(
-      ":",
-      // oxlint-disable-next-line tree-sitter-optimize/recurse
-      repeat($._statement),
-      $._end_keyword,
-      ".",
-    ),
+  __trigger_body_block: ($) => seq(":", $._compound_body, "."),
   __trigger_down_phrase: ($) =>
     // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq(kw("DOWN"), optional($._to_keyword), optional(field("down", $._expression))),

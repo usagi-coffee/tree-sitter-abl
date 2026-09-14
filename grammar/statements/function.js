@@ -21,13 +21,7 @@ export default ({ kw }) => ({
       alias($.__function_definition_parameters, $.parameters),
     ),
   __function_compound_body: ($) =>
-    seq(
-      choice(alias($._colon, ":"), $._terminator),
-      // oxlint-disable-next-line tree-sitter-optimize/recurse
-      repeat($._statement),
-      $._end_keyword,
-      optional(kw("FUNCTION")),
-    ),
+    seq(choice(alias($._colon, ":"), $._terminator), $._compound_body, optional(kw("FUNCTION"))),
 
   function_forward_definition: ($) => seq($.__function_forward_definition_prefix, $._terminator),
 
