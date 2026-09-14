@@ -96,6 +96,7 @@ export default ({ kw }) => ({
     ),
   // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
   __prompt_for_font_option: ($) => seq(kw("FONT"), field("font", $._expression)),
+  // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
   __prompt_for_at_phrase: ($) => seq($._at_keyword, field("position", token(/[0-9]+(\.[0-9]+)?/))),
   __prompt_for_to_phrase: ($) => seq($._to_keyword, field("position", token(/[0-9]+(\.[0-9]+)?/))),
   __prompt_for_view_as_phrase: ($) => seq(kw("VIEW-AS"), field("widget", $.identifier)),
