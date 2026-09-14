@@ -1,6 +1,7 @@
 export default ({ kw }) => ({
   for_statement: ($) => seq($.__for_statement_prefix, $._terminator),
 
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-sequence
   __for_statement_prefix: ($) => seq(optional($._label), $.__for_body, $._end_keyword),
 
   __for_body: ($) =>
