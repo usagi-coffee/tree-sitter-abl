@@ -49,6 +49,7 @@ export default ({ kw }) => ({
       seq(kw("TEXT"), "(", $._text_fields, ")"),
       seq(
         field("constant", $.string_literal),
+        // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
         seq($._at_keyword, field("position", token(/[0-9]+(\.[0-9]+)?/))),
       ),
       "^",
