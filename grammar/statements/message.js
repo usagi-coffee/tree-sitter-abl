@@ -37,7 +37,13 @@ export default ({ kw }) => ({
     seq(kw("VIEW-AS"), kw("ALERT-BOX"), optional($._alert_box_options)),
 
   __message_skip_item: ($) =>
-    prec.right(choice(seq(kw("SKIP"), "(", field("count", $._expression), ")"), kw("SKIP"))),
+    prec.right(
+      choice(
+        // oxlint-disable-next-line tree-sitter-optimize/sequence-subset
+        seq(kw("SKIP"), "(", field("count", $._expression), ")"),
+        kw("SKIP"),
+      ),
+    ),
 
   __message_set_update_phrase: ($) =>
     seq(
