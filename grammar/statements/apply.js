@@ -25,7 +25,7 @@ export default ({ kw }) => ({
       $._in_keyword,
       choice(
         seq(kw("BROWSE"), field("browse", $.identifier)),
-        seq(kw("FRAME", { offset: 4 }), field("frame", $.identifier)),
+        $._frame_identifier_phrase,
         seq(kw("MENU"), field("menu", $.identifier)),
       ),
     ),

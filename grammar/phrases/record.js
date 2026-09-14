@@ -38,10 +38,7 @@ export default ({ kw }) => ({
     ),
 
   __record_using_field: ($) =>
-    seq(
-      optional(seq(kw("FRAME", { offset: 4 }), field("frame", $.identifier))),
-      field("field", $._identifier_or_qualified_name),
-    ),
+    seq(optional($._frame_identifier_phrase), field("field", $._identifier_or_qualified_name)),
   __record_using_fields_tail: ($) =>
     seq(kw("AND"), field("field", $.__record_using_field), optional($.__record_using_fields_tail)),
 
