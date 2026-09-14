@@ -12,7 +12,15 @@ export default ({ kw }) => ({
   _as_type_name_phrase: ($) => seq($._as_keyword, field("type", $._type_name)),
 
   _in_widget_pool: ($) =>
-    seq($._in_keyword, kw("WIDGET-POOL"), field("pool", choice($.identifier, $.string_literal))),
+    seq(
+      $._in_keyword,
+      kw("WIDGET-POOL"),
+      field(
+        "pool",
+        // oxlint-disable-next-line tree-sitter-optimize/shared-choice
+        choice($.identifier, $.string_literal),
+      ),
+    ),
   _handle_in_widget_pool: ($) =>
     seq(field("handle", $._identifier_or_array_access), optional($._in_widget_pool)),
 
