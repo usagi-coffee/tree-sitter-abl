@@ -15,6 +15,7 @@ export default ({ kw }) => ({
           alias(kw("SIMPLE"), $.simple),
           alias(kw("DROP-DOWN"), $.drop_down),
           alias(kw("DROP-DOWN-LIST"), $.drop_down_list),
+          // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
           seq(kw("MAX-CHARS"), field("max_chars", $.number_literal)),
           seq(kw("AUTO-COMPLETION"), optional(alias(kw("UNIQUE-MATCH"), $.unique_match))),
         ),
