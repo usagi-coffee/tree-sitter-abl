@@ -27,5 +27,6 @@ export default ({ kw }) => ({
       ),
     ),
 
+  // oxlint-disable-next-line tree-sitter-optimize/sequence-subset
   __put_screen_color_phrase: ($) => seq(kw("COLOR"), field("color", $._expression)),
 });
