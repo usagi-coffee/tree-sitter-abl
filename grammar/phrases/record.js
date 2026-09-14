@@ -59,8 +59,7 @@ export default ({ kw }) => ({
   __record_field_names_prefix: ($) => seq("(", optional($.__record_field_names)),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-sequence
   __record_field_names: ($) => seq($.__record_field_name, optional($.__record_field_name_tail)),
-  __record_field_name_tail: ($) =>
-    seq(optional(","), $.__record_field_name, optional($.__record_field_name_tail)),
+  __record_field_name_tail: ($) => seq(optional(","), $.__record_field_names),
   __record_field_name: ($) =>
     seq($._identifier_or_qualified_name, optional(seq("[", field("index", $._expression), "]"))),
 });
