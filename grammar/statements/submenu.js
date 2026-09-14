@@ -13,6 +13,7 @@ export default ({ kw }) => ({
       seq($._like_keyword, field("like", $.identifier)),
       alias($.__submenu_element, $.menu_element),
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/choice-subset
   __submenu_element: ($) =>
     choice(
       alias($._menu_item, $.menu_item),
