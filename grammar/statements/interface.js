@@ -6,7 +6,9 @@ export default ({ kw }) => ({
   __interface_body: ($) =>
     seq(
       field("name", $._type_name),
-      optional(seq(kw("INHERITS"), $.__interface_inherits_list)),
+      optional(
+        seq(kw("INHERITS"), field("super", $._type_name), optional($.__interface_inherits_tail)),
+      ),
       $.__interface_compound_body,
     ),
   __interface_compound_body: ($) =>
@@ -25,8 +27,6 @@ export default ({ kw }) => ({
       ),
     ),
 
-  __interface_inherits_list: ($) =>
-    seq(field("super", $._type_name), optional($.__interface_inherits_tail)),
   __interface_inherits_tail: ($) =>
     seq(",", field("super", $._type_name), optional($.__interface_inherits_tail)),
 
