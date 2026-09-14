@@ -51,6 +51,7 @@ export default ({ kw }) => ({
   __format_at_column: ($) =>
     choice(
       seq(kw("COLUMN", { alias: "COL", offset: 3 }), field("column", $._expression)),
+      // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
       seq(kw("COLUMN-OF"), field("column_of", $._expression)),
     ),
   __format_at_row: ($) =>
