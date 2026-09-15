@@ -15,7 +15,7 @@ export default ({ kw }) => ({
           kw("WRITE"),
           $._of_keyword,
           field("object", $.identifier),
-          optional($.__trigger_procedure_new_buffer),
+          optional(seq($._new_keyword, optional(kw("BUFFER")), field("new_buffer", $.identifier))),
           optional($.__trigger_procedure_old_buffer),
         ),
         // ASSIGN event
@@ -31,9 +31,6 @@ export default ({ kw }) => ({
         ),
       ),
     ),
-
-  __trigger_procedure_new_buffer: ($) =>
-    seq($._new_keyword, optional(kw("BUFFER")), field("new_buffer", $.identifier)),
 
   __trigger_procedure_old_buffer: ($) =>
     seq(kw("OLD"), optional(kw("BUFFER")), field("old_buffer", $.identifier)),

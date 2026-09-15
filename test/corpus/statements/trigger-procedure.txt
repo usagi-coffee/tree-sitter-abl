@@ -51,3 +51,26 @@ TRIGGER PROCEDURE FOR REPLICATION-CREATE OF Customer.
   (trigger_procedure_statement
     event: (identifier)
     object: (identifier)))
+
+================================================================================
+TRIGGER PROCEDURE - optional BUFFER after NEW
+================================================================================
+
+TRIGGER PROCEDURE FOR WRITE OF Customer NEW currentRow.
+TRIGGER PROCEDURE FOR WRITE OF Customer NEW currentRow OLD previousRow.
+TRIGGER PROCEDURE FOR WRITE OF Customer NEW BUFFER currentRow OLD previousRow.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (trigger_procedure_statement
+    object: (identifier)
+    new_buffer: (identifier))
+  (trigger_procedure_statement
+    object: (identifier)
+    new_buffer: (identifier)
+    old_buffer: (identifier))
+  (trigger_procedure_statement
+    object: (identifier)
+    new_buffer: (identifier)
+    old_buffer: (identifier)))
