@@ -91,6 +91,7 @@ export default ({ kw }) => ({
   __run_asynchronous: ($) =>
     // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq(kw("ASYNCHRONOUS"), optional($.__run_persistence_set_tail), optional($.__run_event_choice)),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __run_event_choice: ($) =>
     choice(
       seq(kw("EVENT-PROCEDURE"), $.__run_event_procedure_tail),
