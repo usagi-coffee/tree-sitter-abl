@@ -25,10 +25,13 @@ export default ({ kw }) => ({
       ),
       $.__dataset_data_relation_after_reposition,
     ),
-  __dataset_relation_field_pair: ($) =>
-    seq(field("parent_field", $.identifier), ",", field("child_field", $.identifier)),
   __dataset_relation_field_pair_head: ($) =>
-    seq($.__dataset_relation_field_pair, optional($.__dataset_relation_field_pair_tail)),
+    seq(
+      field("parent_field", $.identifier),
+      ",",
+      field("child_field", $.identifier),
+      optional($.__dataset_relation_field_pair_tail),
+    ),
   __dataset_relation_field_pair_tail: ($) => seq(",", $.__dataset_relation_field_pair_head),
   __dataset_data_relation_after_reposition: ($) =>
     choice(
