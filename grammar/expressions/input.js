@@ -7,6 +7,7 @@ export default ({ kw }) => ({
     ),
   // oxlint-disable-next-line tree-sitter-optimize/keyword-reuse
   __input_expression_prefix: ($) => kw("INPUT"),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __input_widget_phrase: ($) =>
     choice(
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
