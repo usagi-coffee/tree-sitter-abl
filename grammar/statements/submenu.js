@@ -5,6 +5,7 @@ export default ({ kw }) => ({
 
   __submenu_body: ($) => seq(field("name", $.identifier), optional($.__submenu_options)),
   __submenu_options: ($) => prec.right(seq($.__submenu_option, optional($.__submenu_options))),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __submenu_option: ($) =>
     choice(
       $._color_font_option,
