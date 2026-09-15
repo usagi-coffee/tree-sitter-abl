@@ -105,6 +105,7 @@ export default ({ kw }) => ({
       optional(alias($.__system_dialog_initial_filter_phrase, $.initial_filter_phrase)),
     ),
   __system_dialog_window_option: ($) =>
+    // oxlint-disable-next-line tree-sitter-optimize/phrase-alias-extraction
     choice(alias($.__system_dialog_update_phrase, $.update_phrase), $.in_window_phrase),
   __system_dialog_initial_dir_option: ($) =>
     seq(kw("INITIAL-DIR"), field("initial_dir", $._expression)),
