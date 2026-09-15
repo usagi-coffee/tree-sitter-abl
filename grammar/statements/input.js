@@ -15,6 +15,7 @@ export default ({ kw }) => ({
   __input_binary_tail: ($) =>
     seq(alias(kw("BINARY"), $.binary), optional($._echo_map_unbuffered_convert_tail)),
 
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __input_from_target: ($) =>
     choice(
       field("file", $.__input_file_target),
