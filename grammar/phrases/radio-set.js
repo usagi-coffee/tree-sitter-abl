@@ -8,6 +8,7 @@ export default ({ kw }) => ({
       optional($.__radio_set_size_tooltip_tail),
     ),
 
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __radio_set_orientation_size_prefix: ($) =>
     choice(seq($.__radio_set_orientation, optional($.size_phrase)), $.size_phrase),
   __radio_set_size_tooltip_tail: ($) =>
