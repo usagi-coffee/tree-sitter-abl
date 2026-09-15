@@ -64,6 +64,7 @@ export default ({ kw }) => ({
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
       seq(kw("ROW-OF"), field("row_of", $._expression)),
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __format_at_x: ($) =>
     choice(
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
