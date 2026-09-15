@@ -380,6 +380,7 @@ export default ({ kw }) => ({
     ),
   __class_table_options: ($) =>
     prec.right(seq($.__class_table_option, optional($.__class_table_options))),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __class_table_option: ($) =>
     choice(
       alias(kw("APPEND"), $.append),
