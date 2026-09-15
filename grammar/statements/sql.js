@@ -169,6 +169,7 @@ export default ({ kw }) => ({
   __sql_qualified_star: ($) => seq(field("table", $.identifier), ".", "*"),
   __sql_count_star: ($) => seq(field("function", kw("COUNT")), "(", alias("*", $.star), ")"),
   __sql_into_clause: ($) =>
+    // oxlint-disable-next-line tree-sitter-optimize/list-head-extraction
     seq(
       kw("INTO"),
       field("into", $._identifier_or_array_access),
