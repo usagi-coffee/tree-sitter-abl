@@ -55,6 +55,7 @@ export default ({ kw }) => ({
       $.string_literal,
       alias($._value_expression, $.value_expression),
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __persistent_trigger_tail: ($) =>
     choice(
       seq(
