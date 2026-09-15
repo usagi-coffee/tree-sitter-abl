@@ -25,6 +25,7 @@ export default ({ kw }) => ({
       seq($.__do_condition_or_loop_phrase_wide, optional($.__do_body_after_condition_or_loop)),
       $.__do_block_tail,
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __do_condition_or_loop_phrase_wide: ($) =>
     choice(seq($.__do_while_phrase, optional($.__do_loop_phrase)), $.__do_loop_phrase),
   __do_body_tail: ($) =>
