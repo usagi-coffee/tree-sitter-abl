@@ -33,6 +33,7 @@ export default ({ kw }) => ({
     ),
   __reposition_rowid_tail: ($) =>
     seq(",", field("rowid", $._expression), optional($.__reposition_rowid_tail)),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __reposition_tenant_no_error_tail: ($) =>
     choice(
       seq($._for_keyword, kw("TENANT"), field("tenant", $._expression), optional($.__no_error)),
