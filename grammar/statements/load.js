@@ -9,6 +9,7 @@ export default ({ kw }) => ({
       optional(seq(kw("DIR"), field("dir", $._expression))),
       optional($.__load_after_dir),
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __load_after_dir: ($) =>
     choice(
       seq(kw("APPLICATION"), field("app", $._expression), optional($.__load_after_application)),
