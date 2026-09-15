@@ -1,6 +1,7 @@
 import { RuleTester } from "oxlint/plugins-dev";
 
 import {
+  singleUseKeywordSequence,
   listHeadExtraction,
   recursiveBodyReuse,
   singleUsePrecedence,
@@ -1295,6 +1296,79 @@ new RuleTester().run("list-head-extraction", listHeadExtraction, {
         root: ($) => seq("(", field("name", $.name), "=", alias($.value, $.item), optional($.__tail), ")"),
       }});`,
       errors: [{ message: /item and optional continuation repeated by __tail/ }],
+    },
+  ],
+});
+
+const keywordSequence = (
+  body = 'seq(kw("IN"), $.name)',
+  use = "$.__clause",
+  name = "__clause",
+) => `export default ({kw}) => ({
+  ${name}: ($) => ${body}, root: ($) => ${use},
+});`;
+
+new RuleTester().run("single-use-keyword-sequence", singleUseKeywordSequence, {
+  valid: [
+    keywordSequence("seq($.keyword, $.name)"),
+    keywordSequence('seq("IN", $.name)'),
+    keywordSequence('seq(kw("IN"))'),
+    keywordSequence('seq(kw("IN"), $.a, $.b, $.c)'),
+    keywordSequence('seq(kw("IN", options), $.name)'),
+    keywordSequence("seq(kw(word), $.name)"),
+    keywordSequence('seq(optional(kw("IN", options)), $.name)'),
+    keywordSequence('prec.right(seq(kw("IN"), $.name))'),
+    keywordSequence('seq(kw("IN"), choice($.a, $.b))'),
+    keywordSequence('seq(kw("IN"), repeat($.name))'),
+    keywordSequence('seq(kw("IN"), alias($.name, $.item))'),
+    keywordSequence('seq(kw("IN"), $.name)', "$.clause", "clause"),
+    keywordSequence('seq(kw("IN"), $.name)', "$._clause", "_clause"),
+    keywordSequence('seq(kw("IN"), $.name)', "$.__clause_body", "__clause_body"),
+    keywordSequence(undefined, "seq($.__clause, $.__clause)"),
+    keywordSequence(undefined, "alias($.__clause, $.clause)"),
+    keywordSequence(undefined, "alias($.item, $.__clause)"),
+    keywordSequence(undefined, "token($.__clause)"),
+    keywordSequence(undefined, "token.immediate($.__clause)"),
+    `export default ({kw}) => ({ __clause: ($) => seq(kw("IN"), optional($.__clause)) });`,
+    `export default ({kw}) => ({ __clause: ($) => seq(kw("IN"), $.name) });`,
+    `const unrelated = { __clause: ($) => seq(kw("IN"), $.name), root: ($) => $.__clause };`,
+    ...["inline", "conflicts", "precedences", "supertypes"].map(
+      (metadata) =>
+        `export default grammar({ ${metadata}: ($) => [$.__clause], rules: { __clause: ($) => seq(kw("IN"), $.name), root: ($) => $.__clause } });`,
+    ),
+    `export default ({kw}) => ({
+      // oxlint-disable-next-line rule-to-test/single-use-keyword-sequence
+      __clause: ($) => seq(kw("IN"), $.name),
+      root: ($) => $.__clause,
+    });`,
+    `export default ({kw}) => ({ __trigger_procedure_prefix: ($) => seq(kw("WRITE"), $._of_keyword, field("object", $.identifier), optional(seq($._new_keyword, optional(kw("BUFFER")), field("new_buffer", $.identifier))), optional($.__trigger_procedure_old_buffer)) });`,
+  ],
+  invalid: [
+    {
+      name: "TRIGGER PROCEDURE optional BUFFER regression",
+      code: `export default ({kw}) => ({
+        __trigger_procedure_prefix: ($) => seq(kw("WRITE"), $._of_keyword, field("object", $.identifier), optional($.__trigger_procedure_new_buffer), optional($.__trigger_procedure_old_buffer)),
+        __trigger_procedure_new_buffer: ($) => seq($._new_keyword, optional(kw("BUFFER")), field("new_buffer", $.identifier)),
+      });`,
+      errors: [
+        {
+          message:
+            /__trigger_procedure_new_buffer has one unaliased local use in __trigger_procedure_prefix/,
+        },
+      ],
+    },
+    {
+      name: "keyword abbreviation and outer field stay intact",
+      code: keywordSequence(
+        'seq(kw("COLUMN", {offset:3}), field("column", $.number))',
+        'field("position", $.__clause)',
+      ),
+      errors: [{ message: /Preserve keyword options, fields and ordering/ }],
+    },
+    {
+      name: "field-wrapped keyword with lexical alias options",
+      code: keywordSequence('seq(field("kind", kw("FIELDS", {alias:"FIELD", offset:5})), $.name)'),
+      errors: [{ message: /__clause has one unaliased local use in root/ }],
     },
   ],
 });
