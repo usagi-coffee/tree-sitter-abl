@@ -134,6 +134,7 @@ export default ({ kw }) => ({
       optional($.__on_database_event_tail),
       choice($.__on_revert_action, $._statement),
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __on_database_event_tail: ($) =>
     choice(
       seq(
