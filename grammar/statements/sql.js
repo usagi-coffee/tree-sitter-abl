@@ -124,7 +124,11 @@ export default ({ kw }) => ({
   __sql_select_body: ($) => seq(kw("SELECT"), $.__sql_select_projection, $.__sql_select_from_body),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-sequence
   __sql_select_projection: ($) =>
-    seq(optional($.__sql_set_quantifier), $.__sql_select_columns, optional($.__sql_into_clause)),
+    seq(
+      optional(choice(alias(kw("ALL"), $.all), alias(kw("DISTINCT"), $.distinct))),
+      $.__sql_select_columns,
+      optional($.__sql_into_clause),
+    ),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-sequence
   __sql_select_columns: ($) =>
     seq(field("column", $.__sql_select_item), optional(seq(",", $.__sql_select_columns))),
@@ -141,8 +145,6 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/single-use-sequence
   __sql_table_references: ($) =>
     seq(field("table", $.__sql_table_reference), optional(seq(",", $.__sql_table_references))),
-  __sql_set_quantifier: ($) => choice(alias(kw("ALL"), $.all), alias(kw("DISTINCT"), $.distinct)),
-
   // `*`, `t.*`, `COUNT(*)`, or an expression with an optional column title. An
   // ordinary call such as `MAX(f)` needs nothing here: `_expression` reads it.
   //
