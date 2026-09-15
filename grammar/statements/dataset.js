@@ -74,6 +74,7 @@ export default ({ kw }) => ({
       field("child_buffer", $.identifier),
     ),
   __dataset_parent_fields_before_phrase: ($) =>
+    // oxlint-disable-next-line tree-sitter-optimize/list-head-extraction
     seq(
       kw("PARENT-FIELDS-BEFORE"),
       "(",
