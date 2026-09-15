@@ -50,6 +50,7 @@ export default ({ kw }) => ({
     seq(
       // oxlint-disable-next-line tree-sitter-optimize/shared-choice
       choice(kw("EACH"), kw("FIRST"), kw("LAST")),
+      // oxlint-disable-next-line tree-sitter-optimize/phrase-alias-extraction
       alias($.__open_query_record_phrase, $.record_phrase),
     ),
 
