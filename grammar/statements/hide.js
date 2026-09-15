@@ -1,5 +1,6 @@
 export default ({ kw }) => ({
   hide_statement: ($) => seq($.__hide_prefix, $._terminator),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-keyword-sequence
   __hide_prefix: ($) =>
     // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq(kw("HIDE"), optional($._stream_phrase), optional($.__hide_after_stream)),
