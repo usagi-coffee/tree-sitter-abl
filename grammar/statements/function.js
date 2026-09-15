@@ -26,6 +26,7 @@ export default ({ kw }) => ({
 
   function_forward_definition: ($) => seq($.__function_forward_definition_prefix, $._terminator),
 
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __function_forward_definition_prefix: ($) =>
     choice(
       seq(
