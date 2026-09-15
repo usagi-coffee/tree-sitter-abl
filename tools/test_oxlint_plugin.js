@@ -1,6 +1,7 @@
 import { RuleTester } from "oxlint/plugins-dev";
 
 import {
+  sharedStatementAlias,
   aliasPromotion,
   phraseAliasExtraction,
   singleUseKeywordSequence,
@@ -1589,6 +1590,131 @@ new RuleTester().run("alias-promotion", aliasPromotion, {
       errors: [aliasPromotionError],
     },
   ],
+});
+
+const statementAlias = "alias($.if_preprocessor_directive_statement, $.if_preprocessor_directive)";
+const statementAliasRules = (body, extra = "") => `export default () => ({
+  items: ($) => ${body},
+  ${extra}
+});`;
+const statementAliasError = {
+  message:
+    /This alias of if_preprocessor_directive_statement as if_preprocessor_directive duplicates items/,
+};
+
+resetSharingCandidates();
+new RuleTester().run("shared-statement-alias across files", sharedStatementAlias, {
+  valid: [
+    {
+      filename: "grammar/statements/class.js",
+      code: statementAliasRules(`choice(${statementAlias}, $.other)`),
+    },
+  ],
+  invalid: [
+    {
+      filename: "grammar/statements/interface.js",
+      code: statementAliasRules(`choice(${statementAlias}, $.other)`),
+      errors: [statementAliasError],
+    },
+    {
+      filename: "grammar/core/statements.js",
+      code: statementAliasRules(`choice(${statementAlias}, $.other)`),
+      errors: [statementAliasError],
+    },
+  ],
+});
+
+resetSharingCandidates();
+new RuleTester().run("shared-statement-alias exclusions", sharedStatementAlias, {
+  valid: [
+    statementAliasRules(`seq(token(${statementAlias}), token.immediate(${statementAlias}))`),
+    statementAliasRules(
+      `seq(alias(${statementAlias}, $.outer), alias(${statementAlias}, $.outer))`,
+    ),
+    statementAliasRules('seq(alias(kw("FLAG"), $.flag), alias(kw("FLAG"), $.flag))'),
+    statementAliasRules("seq(alias($._flag_keyword, $.flag), alias($._flag_keyword, $.flag))"),
+    statementAliasRules("seq(alias($.identifier, $.name), alias($.identifier, $.name))"),
+    statementAliasRules(
+      "seq(alias($.__private_statement, $.node), alias($.__private_statement, $.node))",
+    ),
+    statementAliasRules('seq(alias($.a_statement, "node"), alias($.a_statement, "node"))'),
+    statementAliasRules("seq(alias($.a_statement, $._node), alias($.a_statement, $._node))"),
+    statementAliasRules(
+      "seq(alias($.a_statement, $.a_statement), alias($.a_statement, $.a_statement))",
+    ),
+    statementAliasRules('seq(alias($["a_statement"], $.node), alias($["a_statement"], $.node))'),
+    statementAliasRules(
+      `seq(${statementAlias}, ${statementAlias})`,
+      "if_preprocessor_directive_statement: ($) => token(/x/),",
+    ),
+    statementAliasRules(
+      `seq(${statementAlias}, ${statementAlias})`,
+      'if_preprocessor_directive_statement: ($) => kw("X"),',
+    ),
+    `const unrelated = {items: ($) => seq(${statementAlias}, ${statementAlias})};`,
+  ],
+  invalid: [],
+});
+
+resetSharingCandidates();
+new RuleTester().run("shared-statement-alias", sharedStatementAlias, {
+  valid: [
+    {
+      name: "disabled occurrence does not seed the shared map",
+      filename: "grammar/statements/class.js",
+      code: statementAliasRules(`choice(
+      // oxlint-disable-next-line rule-to-test/shared-statement-alias
+      ${statementAlias}, $.other)`),
+    },
+    {
+      name: "only unsuppressed occurrence is not reported",
+      filename: "grammar/statements/interface.js",
+      code: statementAliasRules(statementAlias),
+    },
+  ],
+  invalid: [],
+});
+
+resetSharingCandidates();
+new RuleTester().run("shared-statement-alias exact names", sharedStatementAlias, {
+  valid: [
+    statementAliasRules(
+      `choice(${statementAlias}, alias($.other_statement, $.if_preprocessor_directive), alias($.if_preprocessor_directive_statement, $.different))`,
+    ),
+  ],
+  invalid: [],
+});
+
+resetSharingCandidates();
+new RuleTester().run("shared-statement-alias local fields and precedence", sharedStatementAlias, {
+  valid: [],
+  invalid: [
+    {
+      code: statementAliasRules(
+        `seq(field("first", ${statementAlias}), prec.right(${statementAlias}))`,
+        'if_preprocessor_directive_statement: ($) => seq("IF", $.body),',
+      ),
+      errors: [statementAliasError],
+    },
+  ],
+});
+
+resetSharingCandidates();
+new RuleTester().run("shared-statement-alias after extraction", sharedStatementAlias, {
+  valid: [
+    {
+      filename: "grammar.js",
+      code: `export default grammar({rules: {
+      _if_preprocessor_statement: ($) => ${statementAlias},
+      items: ($) => choice($._if_preprocessor_statement, $.other),
+    }});`,
+    },
+    {
+      filename: "grammar/statements/interface.js",
+      code: statementAliasRules("choice($._if_preprocessor_statement, $.other)"),
+    },
+  ],
+  invalid: [],
 });
 
 console.log("✓ Optimizer lint plugin tests passed successfully");

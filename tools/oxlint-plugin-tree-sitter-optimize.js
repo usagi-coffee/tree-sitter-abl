@@ -530,6 +530,7 @@ const choiceCandidates = [];
 const sequenceCandidates = [];
 const keywordCandidates = [];
 const sharedChoices = new Map();
+const sharedStatementAliases = new Map();
 
 export function resetSharingCandidates() {
   repeatedBodies.clear();
@@ -539,7 +540,64 @@ export function resetSharingCandidates() {
   sequenceCandidates.length = 0;
   keywordCandidates.length = 0;
   sharedChoices.clear();
+  sharedStatementAliases.clear();
 }
+
+export const sharedStatementAlias = rule((context) => {
+  const properties = [];
+  const candidates = [];
+  return {
+    Property(node) {
+      if (isRuleProperty(node)) properties.push(node);
+    },
+    CallExpression(node) {
+      if (callName(node) !== "alias" || node.arguments.length !== 2) return;
+      const source = memberName(node.arguments[0]);
+      const target = memberName(node.arguments[1]);
+      if (!source?.endsWith("_statement") || source.startsWith("_")) return;
+      if (!target || target.startsWith("_") || source === target) return;
+      const owner = enclosingRule(node);
+      if (!owner) return;
+      for (let parent = node.parent; parent !== owner; parent = parent.parent) {
+        if (["alias", "token", "token.immediate"].includes(callName(parent))) return;
+      }
+      const reportNode = owner.value.body === node ? owner : node;
+      if (isRuleDisabled(context, reportNode)) return;
+      candidates.push({ node, reportNode, owner, source, target });
+    },
+    "Program:exit"() {
+      for (const { node, reportNode, owner, source, target } of candidates) {
+        const definition = properties.find((property) => ruleName(property) === source);
+        if (
+          definition &&
+          !["seq", "choice", "repeat1"].includes(callName(unwrap(definition.value.body)))
+        )
+          continue;
+        const key = JSON.stringify([context.cwd, source, target]);
+        const candidate = {
+          filename: context.filename,
+          rule: ruleName(owner),
+          start: context.sourceCode.getRange(node)[0],
+          line: node.loc.start.line,
+        };
+        const previous = sharedStatementAliases.get(key);
+        if (!previous) {
+          sharedStatementAliases.set(key, candidate);
+          continue;
+        }
+        if (previous.filename === candidate.filename && previous.start === candidate.start)
+          continue;
+        const location = `${previous.filename.split(/[\\/]/).at(-1)}:${previous.line}`;
+        report(
+          context,
+          reportNode,
+          "shared-statement-alias",
+          `This alias of ${source} as ${target} duplicates ${previous.rule} in ${location}; try sharing one hidden helper containing the exact alias. Preserve named nodes, fields and precedence; measure parser size and validate trees.`,
+        );
+      }
+    },
+  };
+}, "Suggest sharing identical named aliases of public statement rules");
 
 function containsAlternatives(outer, inner) {
   return (
@@ -1431,6 +1489,7 @@ const broadDispatcher = rule(
 export default {
   meta: { name: "tree-sitter-optimize" },
   rules: {
+    "shared-statement-alias": sharedStatementAlias,
     "alias-promotion": aliasPromotion,
     "phrase-alias-extraction": phraseAliasExtraction,
     "alternative-extraction": alternativeExtraction,
