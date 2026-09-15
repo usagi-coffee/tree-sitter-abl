@@ -356,6 +356,7 @@ export default ({ kw }) => ({
       ),
       optional($.__dataset_body_tail),
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __dataset_body_tail: ($) =>
     choice(
       seq(
