@@ -19,6 +19,7 @@ export default ({ kw }) => ({
       field("method", $.function_call),
       optional(seq(kw("SET"), field("return_value", $._identifier_or_access))),
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __wait_for_focus_pause_tail: ($) =>
     choice(
       seq(
