@@ -102,6 +102,7 @@ export default ({ kw }) => ({
         ),
       ),
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __on_ui_event_target: ($) =>
     choice(
       alias(kw("ANYWHERE"), $.anywhere),
