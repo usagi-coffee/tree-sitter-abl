@@ -586,3 +586,32 @@ DISPLAY dec(widA[1]:SCREEN-VALUE) @ tardeca.px_refa[x] WITH FRAME F1.
       index: (identifier))
     (frame_phrase
       frame: (identifier))))
+
+================================================================================
+DISPLAY - record versus mixed item lists in normal and browse output
+================================================================================
+
+DISPLAY x.
+DISPLAY x "label" 1.
+DISPLAY "label" x 1 WITH BROWSE b1.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (display_statement
+    record: (identifier))
+  (display_statement
+    (field
+      field: (identifier))
+    (field
+      field: (string_literal))
+    (field
+      field: (number_literal)))
+  (display_statement
+    (field
+      field: (string_literal))
+    (field
+      field: (identifier))
+    (field
+      field: (number_literal))
+    browse: (identifier)))

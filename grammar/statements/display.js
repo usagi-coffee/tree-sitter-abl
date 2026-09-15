@@ -44,7 +44,7 @@ export default ({ kw }) => ({
         field("record", $._identifier_or_qualified_name),
         optional(seq(kw("EXCEPT"), $._except_name_list)),
       ),
-      prec.right(seq($.__display_item, optional($.__display_items_tail))),
+      $.__display_items_tail,
     ),
   __display_items_tail: ($) => prec.right(seq($.__display_item, optional($.__display_items_tail))),
   // oxlint-disable-next-line tree-sitter-optimize/body-extraction
