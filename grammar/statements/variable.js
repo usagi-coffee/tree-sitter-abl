@@ -55,6 +55,7 @@ export default ({ kw }) => ({
     ),
   __variable_extents: ($) =>
     prec.right(
+      // oxlint-disable-next-line tree-sitter-optimize/phrase-alias-extraction
       seq(alias($.__variable_extent_phrase, $.extent_phrase), optional($.__variable_extents)),
     ),
 
