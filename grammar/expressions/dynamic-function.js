@@ -12,7 +12,21 @@ export default ({ kw }) => ({
           alias($.__dynamic_function_concatenation, $.binary_expression),
         ),
       ),
-      optional(seq($._in_keyword, field("context", $.__dynamic_function_context))),
+      optional(
+        seq(
+          $._in_keyword,
+          field(
+            "context",
+            choice(
+              $.system_handle_identifier,
+              $.object_access,
+              $.array_access,
+              $.parenthesized_expression,
+              $._identifier_or_qualified_name,
+            ),
+          ),
+        ),
+      ),
       optional($.__dynamic_function_arguments_tail),
     ),
 
@@ -25,12 +39,4 @@ export default ({ kw }) => ({
     seq("+", $.__dynamic_function_atom, optional($.__dynamic_function_concatenation_tail)),
   __dynamic_function_atom: ($) =>
     choice($._string_or_identifier_access_or_call, $.parenthesized_expression),
-  __dynamic_function_context: ($) =>
-    choice(
-      $.system_handle_identifier,
-      $.object_access,
-      $.array_access,
-      $.parenthesized_expression,
-      $._identifier_or_qualified_name,
-    ),
 });
