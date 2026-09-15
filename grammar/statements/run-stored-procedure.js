@@ -17,6 +17,7 @@ export default ({ kw }) => ({
       alias(kw("NO-ERROR"), $.no_error),
     ),
 
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __run_stored_procedure_result: ($) =>
     choice(
       seq(
