@@ -31,6 +31,7 @@ export default ({ kw }) => ({
       alias($.__for_break_by, $.break_by),
     ),
   __for_sort_clauses: ($) => prec.right(seq($.__for_sort_clause, optional($.__for_sort_clauses))),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __for_record_or_variables: ($) =>
     choice(
       // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
