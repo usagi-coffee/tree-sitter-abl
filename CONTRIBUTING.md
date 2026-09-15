@@ -12,10 +12,12 @@ time, regenerate the parser, and retain it only when the parser metrics
 improve without changing behavior or tree shape.
 
 Oxlint's rule-specific ignore directive can silence a suggestion next to the
-reported construct:
+reported construct. When suppressing multiple rules on the same line, list them
+comma-separated in a single directive; do not stack `oxlint-disable-next-line`
+comments:
 
 ```js
-// oxlint-disable-next-line tree-sitter-optimize/prefix-extraction
+// oxlint-disable-next-line tree-sitter-optimize/prefix-extraction, tree-sitter-optimize/shared-sequence
 some_rule: ($) => seq(...),
 ```
 
