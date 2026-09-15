@@ -397,9 +397,7 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/single-use-sequence
   __dataset_for_phrase: ($) => seq($._for_keyword, $.__dataset_for_table_head),
   __dataset_for_table_head: ($) =>
-    seq(field("table", $.identifier), optional($.__dataset_for_table_tail)),
-  // oxlint-disable-next-line tree-sitter-optimize/tail-extraction
-  __dataset_for_table_tail: ($) => seq(",", $.__dataset_for_table_head),
+    seq(field("table", $.identifier), optional(seq(",", $.__dataset_for_table_head))),
 
   _event_body: ($) =>
     seq(field("name", $.identifier), optional(alias($.__event_signature, $.signature))),
