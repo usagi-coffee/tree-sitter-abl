@@ -31,6 +31,7 @@ export default ({ kw }) => ({
     ),
   __frame_head_items: ($) => prec.right(seq($.__frame_head_item, optional($.__frame_head_items))),
 
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __frame_head_item: ($) =>
     choice(
       $.__frame_skip_phrase,
