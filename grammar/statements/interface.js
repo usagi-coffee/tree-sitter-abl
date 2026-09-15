@@ -1,6 +1,7 @@
 export default ({ kw }) => ({
   interface_definition: ($) => seq($.__interface_prefix, $._terminator),
 
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-keyword-sequence
   __interface_prefix: ($) => seq(kw("INTERFACE"), $.__interface_body),
 
   __interface_body: ($) =>
