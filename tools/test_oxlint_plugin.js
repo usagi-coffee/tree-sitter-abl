@@ -1,6 +1,7 @@
 import { RuleTester } from "oxlint/plugins-dev";
 
 import {
+  listHeadExtraction,
   recursiveBodyReuse,
   singleUsePrecedence,
   singleUseChoice,
@@ -1223,6 +1224,77 @@ new RuleTester().run("recursive-body-reuse", recursiveBodyReuse, {
       name: "surrounding field stays at the use",
       code: `export default grammar({rules: { __items: ($) => ${recursiveItems}, root: ($) => field("items", ${recursiveItems}) }});`,
       errors: [{ message: /complete recursive body of __items/ }],
+    },
+  ],
+});
+
+const embeddedList = (
+  item = "$.item",
+  target = item,
+  separator = 'optional(",")',
+  continuation = "$.__tail",
+) => `export default ({kw}) => ({
+  root: ($) => seq("(", ${target}, optional(${continuation}), ")"),
+  __tail: ($) => seq(${separator}, ${item}, optional($.__tail)),
+});`;
+
+new RuleTester().run("list-head-extraction", listHeadExtraction, {
+  valid: [
+    embeddedList("$.item", "$.other"),
+    embeddedList('field("a", $.item)', 'field("b", $.item)'),
+    embeddedList("alias($.item, $.a)", "alias($.item, $.b)"),
+    embeddedList('kw("FIELD", {offset:3})', 'kw("FIELD", {offset:5})'),
+    embeddedList("token(/a/i)", "token(/b/i)"),
+    embeddedList('kw("FIELD", options)'),
+    embeddedList("optional($.item)"),
+    embeddedList("$.__tail"),
+    embeddedList("$.item", "$.item", '";"'),
+    embeddedList("$.item", "$.item", 'optional(",")', "$.__other"),
+    `export default () => ({ root: ($) => seq($.item, optional($.__tail)), __tail: ($) => seq(",", $.item, optional($.__tail)) });`,
+    `export default () => ({ root: ($) => seq("(", $.item, optional($.tail), ")"), tail: ($) => seq(",", $.item, optional($.tail)) });`,
+    `export default () => ({ root: ($) => seq("(", $.item, optional($.__tail), ")"), __tail: ($) => prec.right(seq(",", $.item, optional($.__tail))) });`,
+    ...["token", "token.immediate", "prec.right"].map(
+      (wrapper) =>
+        `export default () => ({ root: ($) => ${wrapper}(seq("(", $.item, optional($.__tail), ")")), __tail: ($) => seq(",", $.item, optional($.__tail)) });`,
+    ),
+    `export default () => ({ root: ($) => alias(seq("(", $.item, optional($.__tail), ")"), $.list), __tail: ($) => seq(",", $.item, optional($.__tail)) });`,
+    `const unrelated = { root: ($) => seq("(", $.item, optional($.__tail), ")"), __tail: ($) => seq(",", $.item, optional($.__tail)) };`,
+    `export default () => ({ root: ($) => seq("(", $.item, optional($.__tail), ")"),
+      // oxlint-disable-next-line rule-to-test/list-head-extraction
+      __tail: ($) => seq(",", $.item, optional($.__tail)),
+    });`,
+    `export default () => ({ root: ($) =>
+      // oxlint-disable-next-line rule-to-test/list-head-extraction
+      seq("(", $.item, optional($.__tail), ")"),
+      __tail: ($) => seq(",", $.item, optional($.__tail)),
+    });`,
+    `export default ({kw}) => ({
+      _go_on_phrase: ($) => seq(kw("GO-ON"), "(", $.__go_on_keys, ")"),
+      _go_on_key_tail: ($) => seq(optional(","), $.__go_on_keys),
+      __go_on_keys: ($) => seq(choice($.identifier, $.string_literal), optional($._go_on_key_tail)),
+    });`,
+  ],
+  invalid: [
+    {
+      name: "GO-ON optional comma tail regression",
+      code: `export default ({kw}) => ({
+        _go_on_phrase: ($) => seq(kw("GO-ON"), "(", choice($.identifier, $.string_literal), optional($._go_on_key_tail), ")"),
+        _go_on_key_tail: ($) => seq(optional(","), choice($.identifier, $.string_literal), optional($._go_on_key_tail)),
+      });`,
+      errors: [{ message: /item and optional continuation repeated by _go_on_key_tail/ }],
+    },
+    {
+      name: "required comma is retained",
+      code: embeddedList("$.item", "$.item", '","'),
+      errors: [{ message: /item and optional continuation repeated by __tail/ }],
+    },
+    {
+      name: "compound item and tail declared first",
+      code: `export default grammar({rules: {
+        __tail: ($) => seq(",", field("name", $.name), "=", alias($.value, $.item), optional($.__tail)),
+        root: ($) => seq("(", field("name", $.name), "=", alias($.value, $.item), optional($.__tail), ")"),
+      }});`,
+      errors: [{ message: /item and optional continuation repeated by __tail/ }],
     },
   ],
 });

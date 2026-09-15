@@ -686,6 +686,90 @@ export const recursiveBodyReuse = rule((context) => {
   };
 }, "Suggest reusing hidden recursive helpers where their complete body is expanded inside another rule");
 
+export const listHeadExtraction = rule((context) => {
+  const properties = [];
+  const sequences = [];
+  const signature = (node) =>
+    JSON.stringify(context.sourceCode.getTokens(node).map(({ type, value }) => [type, value]));
+  return {
+    Property(node) {
+      if (isRuleProperty(node)) properties.push(node);
+    },
+    CallExpression(node) {
+      if (callName(node) !== "seq" || !isStaticDsl(node)) return;
+      const owner = enclosingRule(node);
+      if (!owner || isRuleDisabled(context, node)) return;
+      for (let parent = node.parent; parent !== owner; parent = parent.parent) {
+        if (
+          [
+            "alias",
+            "token",
+            "token.immediate",
+            "prec",
+            "prec.left",
+            "prec.right",
+            "prec.dynamic",
+          ].includes(callName(parent))
+        )
+          return;
+      }
+      sequences.push({ node, owner, signatures: node.arguments.map(signature) });
+    },
+    "Program:exit"() {
+      const nullable = (node) => {
+        const body = unwrap(node);
+        const name = callName(body);
+        if (name === "field") return nullable(body.arguments[1]);
+        if (name === "alias" || name === "repeat1") return nullable(body.arguments[0]);
+        if (name === "seq") return body.arguments.every(nullable);
+        if (name === "choice") return body.arguments.some(nullable);
+        return isNullable(body);
+      };
+      const tails = [];
+      for (const property of properties) {
+        const name = ruleName(property);
+        const body = property.value.body;
+        if (!name.startsWith("_") || callName(body) !== "seq" || body.arguments.length < 3)
+          continue;
+        if (!isStaticDsl(body) || isRuleDisabled(context, property)) continue;
+        let separator = body.arguments[0];
+        if (callName(separator) === "optional" && separator.arguments.length === 1)
+          separator = separator.arguments[0];
+        if (separator.type !== "Literal" || separator.value !== ",") continue;
+        const last = body.arguments.at(-1);
+        if (
+          callName(last) !== "optional" ||
+          last.arguments.length !== 1 ||
+          memberName(last.arguments[0]) !== name
+        )
+          continue;
+        const items = body.arguments.slice(1, -1);
+        if (items.every(nullable) || items.some((item) => referencedSymbols(item).includes(name)))
+          continue;
+        tails.push({ property, name, suffix: body.arguments.slice(1).map(signature) });
+      }
+      for (const sequence of sequences) {
+        for (const tail of tails) {
+          if (sequence.owner === tail.property || sequence.owner.parent !== tail.property.parent)
+            continue;
+          if (sequence.signatures.length <= tail.suffix.length) continue;
+          const matches = sequence.signatures.some((_, index) =>
+            tail.suffix.every((part, offset) => sequence.signatures[index + offset] === part),
+          );
+          if (!matches) continue;
+          report(
+            context,
+            sequence.node,
+            "list-head-extraction",
+            `This sequence embeds the item and optional continuation repeated by ${tail.name}; try extracting that non-empty list head and reusing it here and after the comma in ${tail.name}. Preserve separator optionality, fields, aliases and order; measure parser size and validate trees.`,
+          );
+          break;
+        }
+      }
+    },
+  };
+}, "Suggest extracting embedded list heads shared with recursive comma tails");
+
 function referencedSymbols(node) {
   const name = memberName(node);
   if (name) return [name];
@@ -1192,6 +1276,7 @@ export default {
     "sequence-subset": sequenceSubset,
     "recursive-tail-reuse": recursiveTailReuse,
     "recursive-body-reuse": recursiveBodyReuse,
+    "list-head-extraction": listHeadExtraction,
     "keyword-reuse": keywordReuse,
     "shared-choice": sharedChoice,
     "tail-extraction": tailExtraction,
