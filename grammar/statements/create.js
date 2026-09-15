@@ -78,6 +78,7 @@ export default ({ kw }) => ({
         ),
       ),
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-keyword-sequence
   __create_server: ($) =>
     seq(kw("SERVER"), field("handle", $.identifier), optional($.assign_phrase)),
   __create_database: ($) =>
