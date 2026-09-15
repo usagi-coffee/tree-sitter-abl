@@ -53,7 +53,7 @@ export default ({ kw }) => ({
         field("color", $.__frame_color_value),
         optional(seq(kw("PROMPT"), field("prompt_color", $.__frame_color_value))),
       ),
-      $.__frame_title_phrase,
+      seq(kw("TITLE"), optional($.__frame_title_options), field("title", $.__frame_expression)),
       choice(
         seq(field("column", $.number_literal), $.__frame_column_keyword),
         seq($.__frame_column_keyword, field("column", $.__frame_expression)),
@@ -69,8 +69,6 @@ export default ({ kw }) => ({
       seq(kw("SKIP"), optional(field("skip", seq($._parenthesized_expression_prefix, ")")))),
     ),
 
-  __frame_title_phrase: ($) =>
-    seq(kw("TITLE"), optional($.__frame_title_options), field("title", $.__frame_expression)),
   __frame_title_options: ($) =>
     prec.right(seq($._frame_title_option, optional($.__frame_title_options))),
   _frame_title_option: ($) =>
