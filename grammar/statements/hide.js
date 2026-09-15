@@ -11,6 +11,7 @@ export default ({ kw }) => ({
       seq(alias(kw("NO-PAUSE"), $.no_pause), optional($.in_window_phrase)),
       $.in_window_phrase,
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __hide_target: ($) =>
     choice(alias(kw("MESSAGE"), $.message), alias(kw("ALL"), $.all), $._widget_phrases),
 });
