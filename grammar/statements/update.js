@@ -1,6 +1,7 @@
 export default ({ kw }) => ({
   update_statement: ($) => seq($.__update_prefix, $._no_error_terminator),
 
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice-sequence
   __update_prefix: ($) => seq(kw("UPDATE"), choice($.__update_record_body, $.__update_fields_body)),
 
   __update_record_body: ($) =>
