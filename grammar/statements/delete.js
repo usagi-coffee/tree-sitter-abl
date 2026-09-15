@@ -34,15 +34,10 @@ export default ({ kw }) => ({
 
   delete_widget_statement: ($) => seq($.__delete_widget_prefix, $._no_error_terminator),
 
-  __delete_widget_prefix: ($) =>
-    seq(
-      $._delete_keyword,
-      kw("WIDGET"),
-      field("widget", $._expression),
-      optional($.__delete_widget_tail),
-    ),
+  __delete_widget_prefix: ($) => seq($._delete_keyword, kw("WIDGET"), $.__delete_widget_head),
 
+  __delete_widget_head: ($) =>
+    seq(field("widget", $._expression), optional($.__delete_widget_tail)),
   // oxlint-disable-next-line tree-sitter-optimize/tail-extraction
-  __delete_widget_tail: ($) =>
-    seq(",", field("widget", $._expression), optional($.__delete_widget_tail)),
+  __delete_widget_tail: ($) => seq(",", $.__delete_widget_head),
 });
