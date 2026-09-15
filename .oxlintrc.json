@@ -21,6 +21,7 @@
     {
       "files": ["grammar.js", "grammar/**/*.js"],
       "rules": {
+        "tree-sitter-optimize/single-use-alias-sequence": "warn",
         "tree-sitter-optimize/single-use-choice-sequence": "warn",
         "tree-sitter-optimize/single-use-optional-sequence": "warn",
         "tree-sitter-optimize/shared-statement-alias": "warn",

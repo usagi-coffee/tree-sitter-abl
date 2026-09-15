@@ -1,6 +1,7 @@
 import { RuleTester } from "oxlint/plugins-dev";
 
 import {
+  singleUseAliasSequence,
   singleUseChoiceSequence,
   singleUseOptionalSequence,
   sharedStatementAlias,
@@ -1910,6 +1911,113 @@ new RuleTester().run("single-use-choice-sequence", singleUseChoiceSequence, {
       name: "core grammar rule maps are recognized",
       code: `export default grammar({rules: {root: ($) => $.__selection, __selection: ($) => ${choiceSequenceBody}}});`,
       errors: [choiceSequenceError],
+    },
+  ],
+});
+
+const aliasSequenceBody = "seq($.__events, alias($.__of_phrase, $.of_phrase))";
+const aliasSequenceRules = (
+  body = aliasSequenceBody,
+  use = "$.__items",
+  extra = "",
+) => `export default () => ({
+  root: ($) => ${use},
+  __items: ($) => ${body},
+  ${extra}
+});`;
+const aliasSequenceError = {
+  message:
+    /__items has one unaliased local use in root; try inlining this small sequence with its symbol aliases intact/,
+};
+new RuleTester().run("single-use-alias-sequence", singleUseAliasSequence, {
+  valid: [
+    aliasSequenceRules(undefined, "seq($.__items, $.__items)"),
+    aliasSequenceRules(undefined, "alias($.__items, $.items)"),
+    aliasSequenceRules(undefined, 'field("items", $.__items)'),
+    aliasSequenceRules(undefined, "token($.__items)"),
+    aliasSequenceRules(undefined, "token.immediate($.__items)"),
+    aliasSequenceRules(undefined, "prec.dynamic(1, $.__items)"),
+    aliasSequenceRules(undefined, 'seq($.__items, $["__items"])'),
+    aliasSequenceRules(undefined, '$["__items"]'),
+    aliasSequenceRules(undefined, "$.other"),
+    aliasSequenceRules("seq($.__items, alias($.other, $.item))"),
+    aliasSequenceRules("seq($.head, $.tail)"),
+    aliasSequenceRules("seq(alias($.a, $.b))"),
+    aliasSequenceRules("seq($.a, $.b, alias($.c, $.d), $.e)"),
+    aliasSequenceRules("seq(choice($.a, $.b), alias($.c, $.d))"),
+    aliasSequenceRules('seq($.a, alias(kw("FLAG"), $.flag))'),
+    aliasSequenceRules("seq($.a, optional(alias($._no_error_keyword, $.no_error)))"),
+    aliasSequenceRules("seq($.a, alias(token(/x/), $.name))"),
+    aliasSequenceRules("seq($.a, alias($.b, $._hidden))"),
+    aliasSequenceRules("seq($.a, alias($.b, $.b))"),
+    aliasSequenceRules("seq($.a, alias($.b, 42))"),
+    aliasSequenceRules('seq($.a, alias($["b"], $.c))'),
+    aliasSequenceRules("seq($.a, alias(unknown(), $.c))"),
+    aliasSequenceRules(`prec.right(${aliasSequenceBody})`),
+    aliasSequenceRules().replaceAll("__items", "__items_body"),
+    aliasSequenceRules().replaceAll("__items", "_items"),
+    {
+      name: "metadata references prevent inlining",
+      code: `export default grammar({conflicts: ($) => [[$.__items]], rules: {
+        root: ($) => $.__items,
+        __items: ($) => ${aliasSequenceBody},
+      }});`,
+    },
+    {
+      name: "a reference from another rule map is not a local use",
+      code: `export default grammar({rules: {__items: ($) => ${aliasSequenceBody}}, other: {rules: {root: ($) => $.__items}}});`,
+    },
+    {
+      name: "non-grammar objects are ignored",
+      code: `const data = {root: ($) => $.__items, __items: ($) => ${aliasSequenceBody}};`,
+    },
+    {
+      name: "rule-specific suppression at the helper definition",
+      code: aliasSequenceRules().replace(
+        "  __items:",
+        "  // oxlint-disable-next-line rule-to-test/single-use-alias-sequence\n  __items:",
+      ),
+    },
+  ],
+  invalid: [
+    {
+      name: "ON event list followed by an aliased OF phrase",
+      code: aliasSequenceRules(undefined, 'seq(kw("OR"), $.__items, optional($.tail))'),
+      errors: [aliasSequenceError],
+    },
+    {
+      name: "an alias within a field retains its scope",
+      code: aliasSequenceRules(
+        'seq(field("event", $.event), field("function", alias($.__function, $.key_function)), $._terminator)',
+      ),
+      errors: [aliasSequenceError],
+    },
+    {
+      name: "optional symbol aliases remain optional",
+      code: aliasSequenceRules("seq($.head, optional(alias($.__suffix, $.suffix)))"),
+      errors: [aliasSequenceError],
+    },
+    {
+      name: "anonymous symbol aliases retain their literal target",
+      code: aliasSequenceRules('seq(alias($._colon, ":"), $._compound_body)'),
+      errors: [aliasSequenceError],
+    },
+    {
+      name: "static precedence at the callsite stays intact",
+      code: aliasSequenceRules(undefined, "prec.right(seq($.__items, optional($.tail)))"),
+      errors: [aliasSequenceError],
+    },
+    {
+      name: "keyword abbreviation options remain intact",
+      code: aliasSequenceRules(
+        'seq(kw("DEFINE", {offset:3}), alias($.__declaration, $.declaration))',
+      ),
+      errors: [aliasSequenceError],
+    },
+    {
+      name: "core grammar rule maps are supported",
+      code: `export default grammar({rules: {root: ($) => $.__items, __items: ($) => ${aliasSequenceBody}}});`,
+      errors: [aliasSequenceError],
     },
   ],
 });
