@@ -10,6 +10,7 @@ export default ({ kw }) => ({
       optional($.__run_stored_procedure_result_no_error),
       optional(alias($.__run_stored_procedure_params, $.parameter_list)),
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __run_stored_procedure_result_no_error: ($) =>
     choice(
       seq($.__run_stored_procedure_result, optional(alias(kw("NO-ERROR"), $.no_error))),
