@@ -57,6 +57,7 @@ export default ({ kw }) => ({
       $._for_keyword,
       kw("UPDATE"),
       optional(
+        // oxlint-disable-next-line tree-sitter-optimize/list-head-extraction
         seq(
           $._of_keyword,
           field("column", $._identifier_or_qualified_name),
