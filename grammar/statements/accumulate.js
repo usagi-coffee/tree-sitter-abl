@@ -1,6 +1,7 @@
 export default ({ kw }) => ({
   accumulate_statement: ($) => seq($.__accumulate_prefix, $._terminator),
 
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-keyword-sequence
   __accumulate_prefix: ($) => seq(kw("ACCUMULATE"), $.__accumulate_items),
 
   __accumulate_items: ($) =>
