@@ -33,6 +33,7 @@ export default ({ kw }) => ({
       ),
       $.__record_query_after_frame,
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/body-extraction
   __record_query_after_frame: ($) =>
     choice(
       choice(
