@@ -1,6 +1,7 @@
 export default ({ kw }) => ({
   button_definition: ($) => seq($.__button_prefix, $._terminator),
 
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice-sequence
   __button_prefix: ($) =>
     seq($._define_private_prefix, choice(kw("BUTTON"), kw("BUTTONS")), $.__button_body),
 
