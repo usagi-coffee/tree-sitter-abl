@@ -194,6 +194,7 @@ export default ({ kw }) => ({
 
   __class_property_options: ($) =>
     prec.right(seq($.__class_property_option, optional($.__class_property_options))),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __class_property_option: ($) =>
     choice(
       $._initial_phrase,
