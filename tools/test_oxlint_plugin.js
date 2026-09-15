@@ -1,6 +1,7 @@
 import { RuleTester } from "oxlint/plugins-dev";
 
 import {
+  aliasPromotion,
   phraseAliasExtraction,
   singleUseKeywordSequence,
   listHeadExtraction,
@@ -1454,6 +1455,138 @@ new RuleTester().run("phrase-alias-extraction", phraseAliasExtraction, {
       name: "core grammar rules are recognized",
       code: `export default grammar({ rules: { root: ($) => seq(${phraseAlias}, ${phraseAlias}) } });`,
       errors: [phraseAliasError],
+    },
+  ],
+});
+
+const aliasPromotionRules = (
+  body = 'seq("(", optional($.items), ")")',
+  use = "alias($.__parameters, $.parameters)",
+  extra = "",
+) => `export default () => ({
+  root: ($) => ${use},
+  __parameters: ($) => ${body},
+  ${extra}
+});`;
+const aliasPromotionError = {
+  message: /__parameters is used locally only as the named alias parameters/,
+};
+new RuleTester().run("alias-promotion", aliasPromotion, {
+  valid: [
+    {
+      name: "unaliased use must retain the private node visibility",
+      code: aliasPromotionRules(
+        undefined,
+        "seq(alias($.__parameters, $.parameters), $.__parameters)",
+      ),
+    },
+    {
+      name: "distinct aliases cannot become one public rule",
+      code: aliasPromotionRules(
+        undefined,
+        "seq(alias($.__parameters, $.parameters), alias($.__parameters, $.arguments))",
+      ),
+    },
+    aliasPromotionRules(undefined, 'alias($.__parameters, "parameters")'),
+    aliasPromotionRules(undefined, "alias($.__parameters, $.__parameters_node)"),
+    aliasPromotionRules(undefined, "token(alias($.__parameters, $.parameters))"),
+    aliasPromotionRules(undefined, "token.immediate(alias($.__parameters, $.parameters))"),
+    aliasPromotionRules(undefined, "alias(alias($.__parameters, $.parameters), $.outer)"),
+    aliasPromotionRules('kw("NO-ERROR")'),
+    aliasPromotionRules("token(/[a-z]+/)"),
+    aliasPromotionRules("prec(1, token(/[a-z]+/))"),
+    aliasPromotionRules("buildParameters($)"),
+    aliasPromotionRules(undefined, undefined, "parameters: ($) => $.other,"),
+    aliasPromotionRules(undefined, "seq(alias($.__parameters, $.parameters), $.parameters)"),
+    aliasPromotionRules(undefined, 'seq(alias($.__parameters, $.parameters), $["__parameters"])'),
+    aliasPromotionRules(undefined, "$.other"),
+    aliasPromotionRules('seq("(", optional(alias($.__parameters, $.parameters)), ")")'),
+    {
+      name: "conflict metadata prevents a local promotion suggestion",
+      code: `export default grammar({
+        conflicts: ($) => [[$.__parameters]],
+        rules: {
+          root: ($) => alias($.__parameters, $.parameters),
+          __parameters: ($) => seq("(", $.items, ")"),
+        },
+      });`,
+    },
+    {
+      name: "references from another rule map are unsafe",
+      code: `export default grammar({
+        rules: {
+          root: ($) => alias($.__parameters, $.parameters),
+          __parameters: ($) => seq("(", $.items, ")"),
+        },
+        other: { rules: { root: ($) => alias($.__parameters, $.parameters) } },
+      });`,
+    },
+    {
+      name: "a private name used as an alias destination is not promotable",
+      code: aliasPromotionRules(
+        undefined,
+        "seq(alias($.__parameters, $.parameters), alias($.other, $.__parameters))",
+      ),
+    },
+    {
+      name: "existing public and shared rules are excluded",
+      code: aliasPromotionRules().replaceAll("__parameters", "_parameters"),
+    },
+    {
+      name: "non-grammar objects are ignored",
+      code: 'const data = {root: ($) => alias($.__parameters, $.parameters), __parameters: ($) => seq("(", $.items, ")")};',
+    },
+    {
+      name: "rule-specific suppression applies to the private definition",
+      code: aliasPromotionRules().replace(
+        "  __parameters:",
+        "  // oxlint-disable-next-line rule-to-test/alias-promotion\n  __parameters:",
+      ),
+    },
+  ],
+  invalid: [
+    {
+      name: "FUNCTION parameter wrapper can become its existing public alias",
+      code: aliasPromotionRules(),
+      errors: [aliasPromotionError],
+    },
+    {
+      name: "multiple references with one public alias",
+      code: aliasPromotionRules(
+        undefined,
+        "seq(alias($.__parameters, $.parameters), optional(alias($.__parameters, $.parameters)))",
+      ),
+      errors: [aliasPromotionError],
+    },
+    {
+      name: "retain body fields and static precedence",
+      code: aliasPromotionRules(
+        'prec.right(seq("(", field("item", $.item), ")"))',
+        'field("arguments", alias($.__parameters, $.parameters))',
+      ),
+      errors: [aliasPromotionError],
+    },
+    {
+      name: "a nonterminal choice can be promoted",
+      code: aliasPromotionRules("choice($.named_parameters, $.positional_parameters)"),
+      errors: [aliasPromotionError],
+    },
+    {
+      name: "other rules may alias to the same public node",
+      code: aliasPromotionRules(
+        undefined,
+        undefined,
+        "other: ($) => alias($._different_parameters, $.parameters),",
+      ),
+      errors: [aliasPromotionError],
+    },
+    {
+      name: "core grammar rule maps are supported",
+      code: `export default grammar({ rules: {
+        root: ($) => alias($.__parameters, $.parameters),
+        __parameters: ($) => seq("(", $.items, ")"),
+      } });`,
+      errors: [aliasPromotionError],
     },
   ],
 });
