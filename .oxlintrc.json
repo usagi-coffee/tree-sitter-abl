@@ -21,7 +21,7 @@
     {
       "files": ["grammar.js", "grammar/**/*.js"],
       "rules": {
-        "tree-sitter-optimize/alias-promotion": "warn",
+        "tree-sitter-optimize/alias-promotion": "off",
         "tree-sitter-optimize/phrase-alias-extraction": "warn",
         "tree-sitter-optimize/alternative-extraction": "warn",
         "tree-sitter-optimize/body-extraction": "warn",
