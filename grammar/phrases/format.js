@@ -125,6 +125,7 @@ export default ({ kw }) => ({
         optional($.__format_editor_options),
       ),
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __format_editor_size: ($) =>
     choice(
       $.__format_size_phrase,
