@@ -39,6 +39,7 @@ export default ({ kw }) => ({
         seq(kw("SPACE"), optional(field("space", $._parenthesized_value))),
       ),
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __form_validate_format_view_as_tail: ($) =>
     choice(
       seq(
