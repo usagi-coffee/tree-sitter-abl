@@ -19,6 +19,7 @@ export default ({ kw }) => ({
       seq($.__repeat_condition_transaction, optional($.__repeat_body_after_transaction)),
       $.__repeat_body_after_transaction,
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __repeat_condition_transaction: ($) =>
     choice(
       seq(
