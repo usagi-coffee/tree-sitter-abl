@@ -6,6 +6,7 @@ export default ({ kw }) => ({
 
   __export_expressions_body: ($) =>
     seq(optional($.delimiter_phrase), $._expression_list, optional($.__export_tail)),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __export_tail: ($) =>
     choice(
       seq($.__export_except_phrase, optional(alias(kw("NO-LOBS"), $.no_lobs))),
