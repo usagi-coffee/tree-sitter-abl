@@ -6,6 +6,7 @@ export default ({ kw }) => ({
       optional(
         choice(
           seq($._stream_phrase, optional(alias($.__readkey_pause_phrase, $.pause_phrase))),
+          // oxlint-disable-next-line tree-sitter-optimize/phrase-alias-extraction
           alias($.__readkey_pause_phrase, $.pause_phrase),
         ),
       ),
