@@ -85,6 +85,7 @@ export default ({ kw }) => ({
   __dataset_parent_fields_before_tail: ($) =>
     seq(",", field("before_field", $.identifier), optional($.__dataset_parent_fields_before_tail)),
   __dataset_parent_fields_after_phrase: ($) =>
+    // oxlint-disable-next-line tree-sitter-optimize/list-head-extraction
     seq(
       kw("PARENT-FIELDS-AFTER"),
       "(",
