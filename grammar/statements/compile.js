@@ -1,6 +1,7 @@
 export default ({ kw }) => ({
   compile_statement: ($) => seq($.__compile_prefix, $._no_error_terminator),
 
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-keyword-sequence
   __compile_prefix: ($) =>
     seq(kw("COMPILE"), field("file", $.__compile_file), optional($.__compile_options)),
   __compile_options: ($) => prec.right(seq($.__compile_option, optional($.__compile_options))),
