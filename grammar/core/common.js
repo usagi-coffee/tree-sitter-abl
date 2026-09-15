@@ -413,6 +413,7 @@ export default ({ kw }) => ({
         alias(kw("UNBUFFERED"), $.unbuffered),
         optional(alias($._convert_phrase, $.convert_phrase)),
       ),
+      // oxlint-disable-next-line tree-sitter-optimize/phrase-alias-extraction
       alias($._convert_phrase, $.convert_phrase),
     ),
   _map_unbuffered_convert_tail: ($) =>
