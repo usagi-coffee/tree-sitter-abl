@@ -5,7 +5,13 @@ export default ({ kw }) => ({
     seq(
       kw("DYNAMIC-FUNCTION"),
       "(",
-      field("function", $.__dynamic_function_name),
+      field(
+        "function",
+        choice(
+          $.__dynamic_function_atom,
+          alias($.__dynamic_function_concatenation, $.binary_expression),
+        ),
+      ),
       optional(seq($._in_keyword, field("context", $.__dynamic_function_context))),
       optional($.__dynamic_function_arguments_tail),
     ),
@@ -13,11 +19,6 @@ export default ({ kw }) => ({
   __dynamic_function_arguments_tail: ($) =>
     seq(",", field("argument", $.argument), optional($.__dynamic_function_arguments_tail)),
 
-  __dynamic_function_name: ($) =>
-    choice(
-      $.__dynamic_function_atom,
-      alias($.__dynamic_function_concatenation, $.binary_expression),
-    ),
   __dynamic_function_concatenation: ($) =>
     seq($.__dynamic_function_atom, $.__dynamic_function_concatenation_tail),
   __dynamic_function_concatenation_tail: ($) =>
