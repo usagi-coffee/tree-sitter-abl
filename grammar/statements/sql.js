@@ -198,6 +198,7 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/tail-extraction
   __sql_group_by_tail: ($) =>
     seq(",", field("group", $._identifier_or_qualified_name), optional($.__sql_group_by_tail)),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-keyword-sequence
   __sql_having_clause: ($) => seq(kw("HAVING"), field("condition", $._expression)),
   __sql_order_by_clause: ($) =>
     // oxlint-disable-next-line tree-sitter-optimize/list-head-extraction
