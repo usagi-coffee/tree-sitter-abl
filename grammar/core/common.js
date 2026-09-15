@@ -247,6 +247,7 @@ export default ({ kw }) => ({
   __skip_parenthesized_prefix: ($) => seq(kw("SKIP"), "(", field("skip", $._expression)),
 
   _space_phrase: ($) => prec.right(choice(seq($.__space_parenthesized_prefix, ")"), kw("SPACE"))),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-keyword-sequence
   __space_parenthesized_prefix: ($) => seq(kw("SPACE"), "(", field("space", $._expression)),
 
   _table_body: ($) =>
