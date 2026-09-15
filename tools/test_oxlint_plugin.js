@@ -1,6 +1,7 @@
 import { RuleTester } from "oxlint/plugins-dev";
 
 import {
+  phraseAliasExtraction,
   singleUseKeywordSequence,
   listHeadExtraction,
   recursiveBodyReuse,
@@ -1369,6 +1370,90 @@ new RuleTester().run("single-use-keyword-sequence", singleUseKeywordSequence, {
       name: "field-wrapped keyword with lexical alias options",
       code: keywordSequence('seq(field("kind", kw("FIELDS", {alias:"FIELD", offset:5})), $.name)'),
       errors: [{ message: /__clause has one unaliased local use in root/ }],
+    },
+  ],
+});
+
+const phraseAlias = "alias($._extent_phrase, $.extent_phrase)";
+const phraseAliasRules = (body, extra = "") => `export default () => ({
+  root: ($) => ${body},
+  ${extra}
+});`;
+const phraseAliasError = {
+  message: /The alias of _extent_phrase as extent_phrase is repeated in this rule map/,
+};
+new RuleTester().run("phrase-alias-extraction", phraseAliasExtraction, {
+  valid: [
+    phraseAliasRules(phraseAlias),
+    phraseAliasRules(`seq(${phraseAlias}, alias($._other_phrase, $.extent_phrase))`),
+    phraseAliasRules(`seq(${phraseAlias}, alias($._extent_phrase, $.other_phrase))`),
+    phraseAliasRules('seq(alias(kw("NO-ERROR"), $.no_error), alias(kw("NO-ERROR"), $.no_error))'),
+    phraseAliasRules(
+      "seq(alias($._no_error_keyword, $.no_error), alias($._no_error_keyword, $.no_error))",
+    ),
+    phraseAliasRules('seq(alias($._extent_phrase, "EXTENT"), alias($._extent_phrase, "EXTENT"))'),
+    phraseAliasRules(
+      "seq(alias($._extent_phrase, $.__extent_phrase), alias($._extent_phrase, $.__extent_phrase))",
+    ),
+    phraseAliasRules(`seq(token(${phraseAlias}), token.immediate(${phraseAlias}))`),
+    phraseAliasRules(`seq(alias(${phraseAlias}, $.outer), alias(${phraseAlias}, $.outer))`),
+    phraseAliasRules(`seq(${phraseAlias}, alias($["_extent_phrase"], $.extent_phrase))`),
+    phraseAliasRules(
+      `seq(${phraseAlias}, ${phraseAlias})`,
+      "_extent_phrase: ($) => token(/extent/i),",
+    ),
+    phraseAliasRules(`seq(${phraseAlias}, ${phraseAlias})`, '_extent_phrase: ($) => kw("EXTENT"),'),
+    phraseAliasRules(
+      "seq($.__local_phrase, $.__local_phrase)",
+      `__local_phrase: ($) => ${phraseAlias},`,
+    ),
+    `const unrelated = { root: ($) => seq(${phraseAlias}, ${phraseAlias}) };`,
+    `export default grammar({ rules: {
+      one: ($) => ${phraseAlias},
+    }, other: { rules: { two: ($) => ${phraseAlias} } } });`,
+    phraseAliasRules(`seq(
+      // oxlint-disable-next-line rule-to-test/phrase-alias-extraction
+      ${phraseAlias},
+      ${phraseAlias}
+    )`),
+  ],
+  invalid: [
+    {
+      name: "FUNCTION extent aliases inside optional forward tails",
+      code: phraseAliasRules(`choice(
+        seq(optional(${phraseAlias}), $.parameters),
+        seq(optional(${phraseAlias}), $.access),
+        ${phraseAlias}
+      )`),
+      errors: [phraseAliasError],
+    },
+    {
+      name: "aliases in separate rules of the same map",
+      code: phraseAliasRules(phraseAlias, `other: ($) => optional(${phraseAlias}),`),
+      errors: [phraseAliasError],
+    },
+    {
+      name: "fields and precedence stay at the callsites",
+      code: phraseAliasRules(`seq(field("first", ${phraseAlias}), prec.right(${phraseAlias}))`),
+      errors: [phraseAliasError],
+    },
+    {
+      name: "local nonterminal phrase definition",
+      code: phraseAliasRules(
+        `seq(${phraseAlias}, ${phraseAlias})`,
+        '_extent_phrase: ($) => seq("EXTENT", $.number),',
+      ),
+      errors: [phraseAliasError],
+    },
+    {
+      name: "existing alias helper can be reused",
+      code: phraseAliasRules(`optional(${phraseAlias})`, `__local_phrase: ($) => ${phraseAlias},`),
+      errors: [phraseAliasError],
+    },
+    {
+      name: "core grammar rules are recognized",
+      code: `export default grammar({ rules: { root: ($) => seq(${phraseAlias}, ${phraseAlias}) } });`,
+      errors: [phraseAliasError],
     },
   ],
 });
