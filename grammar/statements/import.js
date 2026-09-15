@@ -9,6 +9,7 @@ export default ({ kw }) => ({
       optional(alias(kw("NO-LOBS"), $.no_lobs)),
     ),
 
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-optional-sequence
   __import_fields_phrase: ($) =>
     seq(
       optional($.delimiter_phrase),
