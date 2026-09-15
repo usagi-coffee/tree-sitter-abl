@@ -1,6 +1,7 @@
 import { RuleTester } from "oxlint/plugins-dev";
 
 import {
+  fieldForwardingRule,
   singleUseAliasSequence,
   singleUseChoiceSequence,
   singleUseOptionalSequence,
@@ -2018,6 +2019,105 @@ new RuleTester().run("single-use-alias-sequence", singleUseAliasSequence, {
       name: "core grammar rule maps are supported",
       code: `export default grammar({rules: {root: ($) => $.__items, __items: ($) => ${aliasSequenceBody}}});`,
       errors: [aliasSequenceError],
+    },
+  ],
+});
+
+const widgetFieldWrapper = 'seq(field("widget", $.widget_phrase))';
+const fieldForwardingRules = (
+  body = widgetFieldWrapper,
+  use = "$.__widget",
+  extra = "",
+) => `export default () => ({
+  root: ($) => ${use},
+  __widget: ($) => ${body},
+  ${extra}
+});`;
+const fieldForwardingError = {
+  message: /__widget only applies field "widget" to widget_phrase/,
+};
+new RuleTester().run("field-forwarding-rule", fieldForwardingRule, {
+  valid: [
+    fieldForwardingRules(undefined, "alias($.__widget, $.widget)"),
+    fieldForwardingRules(undefined, 'field("outer", $.__widget)'),
+    fieldForwardingRules(undefined, "token($.__widget)"),
+    fieldForwardingRules(undefined, "token.immediate($.__widget)"),
+    fieldForwardingRules(undefined, "prec.dynamic(1, $.__widget)"),
+    fieldForwardingRules(undefined, "seq($.__widget, alias($.__widget, $.other))"),
+    fieldForwardingRules(undefined, 'seq($.__widget, $["__widget"])'),
+    fieldForwardingRules(undefined, '$["__widget"]'),
+    fieldForwardingRules(undefined, "$.other"),
+    fieldForwardingRules('field("widget", $.__widget)'),
+    fieldForwardingRules("field(label, $.widget_phrase)"),
+    fieldForwardingRules("field(42, $.widget_phrase)"),
+    fieldForwardingRules('field("widget", choice($.a, $.b))'),
+    fieldForwardingRules('field("widget", optional($.widget_phrase))'),
+    fieldForwardingRules('field("widget", alias($.other, $.widget_phrase))'),
+    fieldForwardingRules('field("flag", kw("FLAG"))'),
+    fieldForwardingRules('field("flag", $._flag_keyword)'),
+    fieldForwardingRules('field("widget", $["widget_phrase"])'),
+    fieldForwardingRules('seq(field("widget", $.widget_phrase), ".")'),
+    fieldForwardingRules('seq(seq(field("widget", $.widget_phrase)))'),
+    fieldForwardingRules('prec.right(field("widget", $.widget_phrase))'),
+    fieldForwardingRules().replaceAll("__widget", "__widget_body"),
+    fieldForwardingRules().replaceAll("__widget", "_widget"),
+    {
+      name: "metadata references must be checked before removing a field helper",
+      code: `export default grammar({precedences: ($) => [[$.__widget, $.other]], rules: {
+        root: ($) => $.__widget,
+        __widget: ($) => ${widgetFieldWrapper},
+      }});`,
+    },
+    {
+      name: "uses from another rule map are not local",
+      code: `export default grammar({rules: {__widget: ($) => ${widgetFieldWrapper}}, other: {rules: {root: ($) => $.__widget}}});`,
+    },
+    {
+      name: "non-grammar objects are ignored",
+      code: `const data = {root: ($) => $.__widget, __widget: ($) => ${widgetFieldWrapper}};`,
+    },
+    {
+      name: "rule-specific suppression applies to the helper definition",
+      code: fieldForwardingRules().replace(
+        "  __widget:",
+        "  // oxlint-disable-next-line rule-to-test/field-forwarding-rule\n  __widget:",
+      ),
+    },
+  ],
+  invalid: [
+    {
+      name: "ON widget field wrapper in the list head and comma tail",
+      code: fieldForwardingRules(
+        undefined,
+        "seq($.__widget, optional($.__tail))",
+        '__tail: ($) => seq(",", $.__widget, optional($.__tail)),',
+      ),
+      errors: [fieldForwardingError],
+    },
+    {
+      name: "a direct field body without a redundant sequence",
+      code: fieldForwardingRules('field("widget", $.widget_phrase)'),
+      errors: [fieldForwardingError],
+    },
+    {
+      name: "multiple uses in one parent preserve each field wrapper",
+      code: fieldForwardingRules(undefined, "seq($.__widget, optional($.__widget))"),
+      errors: [fieldForwardingError],
+    },
+    {
+      name: "static precedence around the callsite stays intact",
+      code: fieldForwardingRules(undefined, "prec.right(seq($.__widget, optional($.tail)))"),
+      errors: [fieldForwardingError],
+    },
+    {
+      name: "hidden expression targets are supported",
+      code: fieldForwardingRules('field("value", $._expression)'),
+      errors: [{ message: /__widget only applies field "value" to _expression/ }],
+    },
+    {
+      name: "core grammar rule maps are supported",
+      code: `export default grammar({rules: {root: ($) => $.__widget, __widget: ($) => ${widgetFieldWrapper}}});`,
+      errors: [fieldForwardingError],
     },
   ],
 });
