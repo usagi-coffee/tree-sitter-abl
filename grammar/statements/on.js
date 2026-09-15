@@ -115,7 +115,11 @@ export default ({ kw }) => ({
               $.__on_database_event_action,
             ),
           ),
-          $.__on_key_label_branch,
+          seq(
+            field("event", $.__on_key_label),
+            field("function", alias($.__on_key_function, $.key_function)),
+            $._terminator,
+          ),
           $.__on_web_notify_branch,
         ),
       ),
@@ -146,12 +150,6 @@ export default ({ kw }) => ({
         optional(alias(kw("OVERRIDE"), $.override)),
       ),
       alias(kw("OVERRIDE"), $.override),
-    ),
-  __on_key_label_branch: ($) =>
-    seq(
-      field("event", $.__on_key_label),
-      field("function", alias($.__on_key_function, $.key_function)),
-      $._terminator,
     ),
   __on_web_notify_branch: ($) =>
     seq(
