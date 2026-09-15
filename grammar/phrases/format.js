@@ -49,6 +49,7 @@ export default ({ kw }) => ({
         seq($._row_keyword, field("row", $.number_literal)),
       ),
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __format_at_column: ($) =>
     choice(
       seq(kw("COLUMN", { alias: "COL", offset: 3 }), field("column", $._expression)),
