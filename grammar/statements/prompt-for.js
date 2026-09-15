@@ -41,6 +41,7 @@ export default ({ kw }) => ({
   __prompt_for_fields_after_window: ($) =>
     choice(
       seq($.frame_phrase, optional(alias($.__prompt_for_with_phrase, $.with_phrase))),
+      // oxlint-disable-next-line tree-sitter-optimize/phrase-alias-extraction
       alias($.__prompt_for_with_phrase, $.with_phrase),
     ),
 
