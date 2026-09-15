@@ -93,7 +93,7 @@ export default ({ kw }) => ({
       // oxlint-disable-next-line tree-sitter-optimize/keyword-reuse
       seq(optional(alias(kw("NOT"), $.not)), alias(kw("CASE-SENSITIVE"), $.case_sensitive)),
       alias(kw("SERIALIZE-HIDDEN"), $.serialize_hidden),
-      $.__temp_table_serialize_name_phrase,
+      seq(kw("SERIALIZE-NAME"), field("serialize_name", $.string_literal)),
       seq(kw("TTCODEPAGE"), field("ttcodepage", $.string_literal)),
       seq(kw("COLUMN-CODEPAGE"), field("column_codepage", $.string_literal)),
       seq(kw("XML-DATA-TYPE"), field("xml_data_type", $.string_literal)),
