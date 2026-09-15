@@ -73,6 +73,7 @@ export default ({ kw }) => ({
   __form_radio_button: ($) =>
     seq(field("label", $.string_literal), ",", field("value", $._expression)),
   __form_validate_phrase: ($) =>
+    // oxlint-disable-next-line tree-sitter-optimize/list-head-extraction
     seq(
       kw("VALIDATE", { offset: 4 }),
       "(",
