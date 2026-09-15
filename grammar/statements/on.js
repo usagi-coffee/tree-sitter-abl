@@ -254,10 +254,10 @@ export default ({ kw }) => ({
     ),
   __on_of_phrase: ($) =>
     // oxlint-disable-next-line tree-sitter-optimize/list-head-extraction
-    seq($._of_keyword, $.__on_of_widget, optional($.__on_of_widget_tail)),
+    seq($._of_keyword, field("widget", $.widget_phrase), optional($.__on_of_widget_tail)),
   // oxlint-disable-next-line tree-sitter-optimize/tail-extraction
-  __on_of_widget_tail: ($) => seq(",", $.__on_of_widget, optional($.__on_of_widget_tail)),
-  __on_of_widget: ($) => seq(field("widget", $.widget_phrase)),
+  __on_of_widget_tail: ($) =>
+    seq(",", field("widget", $.widget_phrase), optional($.__on_of_widget_tail)),
   // oxlint-disable-next-line tree-sitter-optimize/body-extraction
   __on_referencing_phrase: ($) =>
     choice(
