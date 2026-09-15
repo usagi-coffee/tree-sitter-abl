@@ -17,6 +17,7 @@ export default ({ kw }) => ({
       choice($.__browse_columns, alias($.__browse_record, $.record)),
       optional($.__browse_body_tail),
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __browse_body_tail: ($) =>
     choice(
       seq($.__browse_enable_phrase, optional($.__browse_options_phrase)),
