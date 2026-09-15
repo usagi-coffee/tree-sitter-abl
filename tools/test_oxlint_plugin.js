@@ -1,6 +1,7 @@
 import { RuleTester } from "oxlint/plugins-dev";
 
 import {
+  recursiveBodyReuse,
   singleUsePrecedence,
   singleUseChoice,
   forwardingRule,
@@ -1133,6 +1134,95 @@ new RuleTester().run("single-use-precedence", singleUsePrecedence, {
       name: "the full static precedence chain is retained",
       code: precedenceHelper('prec("items", prec.right(seq($.item, $.tail)))'),
       errors: [{ message: /retaining every precedence and associativity wrapper/ }],
+    },
+  ],
+});
+
+const recursiveExpansion = (
+  helper,
+  expanded = helper,
+  name = "__items",
+) => `export default ({kw}) => ({
+  ${name}: ($) => ${helper},
+  root: ($) => choice($.record, ${expanded}),
+});`;
+const recursiveItems = "prec.right(seq($.item, optional($.__items)))";
+
+new RuleTester().run("recursive-body-reuse", recursiveBodyReuse, {
+  valid: [
+    recursiveExpansion(recursiveItems, "$.__items"),
+    recursiveExpansion("prec.right(seq($.item, optional($.items)))", undefined, "items"),
+    recursiveExpansion(recursiveItems, "prec.left(seq($.item, optional($.__items)))"),
+    recursiveExpansion(recursiveItems, "seq($.item, optional($.__items))"),
+    recursiveExpansion("seq($.item, optional($.__items))", recursiveItems),
+    recursiveExpansion(recursiveItems, "prec.right(seq($.other, optional($.__items)))"),
+    recursiveExpansion(recursiveItems, "prec.right(seq($.item, optional($.__other)))"),
+    recursiveExpansion("seq($.item, optional($.__tail))"),
+    recursiveExpansion("seq(optional($.item), optional($.__items))"),
+    recursiveExpansion("seq($.__items, optional($.__items))"),
+    recursiveExpansion(
+      'seq(field("a", $.item), optional($.__items))',
+      'seq(field("b", $.item), optional($.__items))',
+    ),
+    recursiveExpansion(
+      "seq(alias($.item, $.a), optional($.__items))",
+      "seq(alias($.item, $.b), optional($.__items))",
+    ),
+    recursiveExpansion(
+      'seq(kw("FIELD", {offset:3}), optional($.__items))',
+      'seq(kw("FIELD", {offset:5}), optional($.__items))',
+    ),
+    recursiveExpansion(
+      "seq(token(/a/i), optional($.__items))",
+      "seq(token(/b/i), optional($.__items))",
+    ),
+    recursiveExpansion('seq(kw("FIELD", options), optional($.__items))'),
+    recursiveExpansion("prec.dynamic(1, seq($.item, optional($.__items)))"),
+    recursiveExpansion(recursiveItems, `token(${recursiveItems})`),
+    recursiveExpansion(recursiveItems, `token.immediate(${recursiveItems})`),
+    recursiveExpansion(recursiveItems, `alias(${recursiveItems}, $.items)`),
+    `const unrelated = { __items: ($) => ${recursiveItems}, root: ($) => choice($.record, ${recursiveItems}) };`,
+    `export default () => ({ __items: ($) => ${recursiveItems}, duplicate: ($) => ${recursiveItems} });`,
+    `export default () => ({
+      // oxlint-disable-next-line rule-to-test/recursive-body-reuse
+      __items: ($) => ${recursiveItems},
+      root: ($) => choice($.record, ${recursiveItems}),
+    });`,
+    `export default () => ({ __items: ($) => ${recursiveItems}, root: ($) => choice($.record,
+      // oxlint-disable-next-line rule-to-test/recursive-body-reuse
+      ${recursiveItems}),
+    });`,
+  ],
+  invalid: [
+    {
+      name: "DISPLAY recursive item body regression, helper declared last",
+      code: `export default () => ({
+        __display_items: ($) => choice($.record, prec.right(seq($.__display_item, optional($.__display_items_tail)))),
+        __display_items_tail: ($) => prec.right(seq($.__display_item, optional($.__display_items_tail))),
+      });`,
+      errors: [{ message: /complete recursive body of __display_items_tail/ }],
+    },
+    {
+      name: "plain recursive sequence",
+      code: recursiveExpansion("seq($.item, optional($.__items))"),
+      errors: [{ message: /complete recursive body of __items/ }],
+    },
+    {
+      name: "preserve compound fields and aliases",
+      code: recursiveExpansion(
+        'seq(field("key", $.name), "=", alias($.value, $.item), optional($.__items))',
+      ),
+      errors: [{ message: /complete recursive body of __items/ }],
+    },
+    {
+      name: "complete named precedence chain",
+      code: recursiveExpansion('prec("items", prec.right(seq($.item, optional($.__items))))'),
+      errors: [{ message: /complete recursive body of __items/ }],
+    },
+    {
+      name: "surrounding field stays at the use",
+      code: `export default grammar({rules: { __items: ($) => ${recursiveItems}, root: ($) => field("items", ${recursiveItems}) }});`,
+      errors: [{ message: /complete recursive body of __items/ }],
     },
   ],
 });
