@@ -8,6 +8,7 @@ export default ({ kw }) => ({
       optional($.__run_persistence),
       optional($.__run_body_after_persistence),
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __run_body_after_persistence: ($) =>
     choice(
       seq(alias($.__run_in_phrase, $.in_phrase), optional($.__run_body_after_in)),
