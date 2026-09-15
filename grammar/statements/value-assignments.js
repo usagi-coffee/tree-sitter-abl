@@ -73,6 +73,7 @@ export default ({ kw }) => ({
         field("length", $._expression),
       ),
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-optional-sequence
   __value_assignments_database_tenant: ($) =>
     seq(",", field("database", $._expression), optional(seq(",", field("tenant", $._expression)))),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-sequence
