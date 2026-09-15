@@ -8,6 +8,7 @@ export default ({ kw }) => ({
       $.__disable_items,
       optional($.frame_phrase),
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __disable_items: ($) =>
     choice(seq(alias(kw("ALL"), $.all), optional($._except_fields)), $.__disable_items_list),
   __disable_items_list: ($) =>
