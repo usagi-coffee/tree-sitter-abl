@@ -1,6 +1,7 @@
 export default ({ kw }) => ({
   os_copy_statement: ($) => seq($.__os_copy_prefix, $._terminator),
 
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-keyword-sequence
   __os_copy_prefix: ($) =>
     seq(
       kw("OS-COPY"),
