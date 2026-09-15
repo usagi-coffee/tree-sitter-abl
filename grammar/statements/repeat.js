@@ -11,6 +11,7 @@ export default ({ kw }) => ({
       optional($._selection_after_for),
       $.__repeat_body_tail,
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __repeat_body_tail: ($) =>
     choice(seq($._loop_phrase, optional($.__repeat_body_after_loop)), $.__repeat_body_after_loop),
   __repeat_body_after_loop: ($) =>
