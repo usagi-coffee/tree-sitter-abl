@@ -11,6 +11,7 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __pause_message_window_tail: ($) =>
     choice(seq($.__pause_message, optional($.in_window_phrase)), $.in_window_phrase),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __pause_message: ($) =>
     choice(
       seq(kw("MESSAGE"), field("message", $.string_literal)),
