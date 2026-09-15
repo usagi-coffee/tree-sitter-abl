@@ -323,6 +323,7 @@ export default ({ kw }) => ({
       // oxlint-disable-next-line tree-sitter-optimize/shared-choice
       optional(field("size", choice($.number_literal, $.preprocessor_name, $.identifier))),
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-keyword-sequence
   __class_typed_extent_phrase: ($) =>
     seq(
       optional(kw("CLASS")),
