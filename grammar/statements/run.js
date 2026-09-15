@@ -95,17 +95,15 @@ export default ({ kw }) => ({
   __run_event_choice: ($) =>
     choice(
       seq(kw("EVENT-PROCEDURE"), $.__run_event_procedure_tail),
-      seq(kw("EVENT-HANDLER"), $.__run_event_handler_tail),
+      seq(
+        kw("EVENT-HANDLER"),
+        field("event_handler", $._expression),
+        optional(seq(kw("EVENT-HANDLER-CONTEXT"), field("context", $.__run_context_value))),
+      ),
     ),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-sequence
   __run_event_procedure_tail: ($) =>
     seq(field("event_procedure", $._expression), optional($.__run_in_phrase)),
-  __run_event_handler_tail: ($) =>
-    seq(
-      field("event_handler", $._expression),
-      optional(seq(kw("EVENT-HANDLER-CONTEXT"), field("context", $.__run_context_value))),
-    ),
-
   // oxlint-disable-next-line tree-sitter-optimize/choice-subset
   __run_context_value: ($) =>
     choice(
