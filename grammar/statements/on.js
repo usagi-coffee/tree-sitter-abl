@@ -109,7 +109,11 @@ export default ({ kw }) => ({
                 ),
               ),
             ),
-            seq(field("event", $.__on_database_event), $._of_keyword, $.__on_database_event_action),
+            seq(
+              field("event", choice(kw("CREATE"), kw("FIND"), kw("WRITE"), kw("ASSIGN"))),
+              $._of_keyword,
+              $.__on_database_event_action,
+            ),
           ),
           $.__on_key_label_branch,
           $.__on_web_notify_branch,
@@ -177,7 +181,6 @@ export default ({ kw }) => ({
   __on_context_value: ($) =>
     choice($.system_handle_identifier, $.object_access, $._identifier_or_qualified_name),
   __on_revert_action: ($) => seq(alias(kw("REVERT"), $.revert), $._terminator),
-  __on_database_event: ($) => choice(kw("CREATE"), kw("FIND"), kw("WRITE"), kw("ASSIGN")),
   // __on_key_label accepts both $.__on_ui_event_name tokens (TAB, ENDKEY, etc.)
   // and plain $._events (F1, F10, etc.).
   __on_key_label: ($) => choice(alias($.__on_ui_event_name, $.identifier), $._events),
