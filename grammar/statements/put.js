@@ -10,6 +10,7 @@ export default ({ kw }) => ({
     ),
   __put_output_items_tail: ($) =>
     prec.right(seq($.__put_output_item, optional($.__put_output_items_tail))),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __put_output_item: ($) =>
     choice(
       $.__put_expression_item,
