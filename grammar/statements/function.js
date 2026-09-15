@@ -45,6 +45,7 @@ export default ({ kw }) => ({
       field("type", $._type_name),
       optional($.__function_forward_tail),
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __function_forward_tail: ($) =>
     choice(
       seq(
