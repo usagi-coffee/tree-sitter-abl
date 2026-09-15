@@ -1,6 +1,7 @@
 import { RuleTester } from "oxlint/plugins-dev";
 
 import {
+  singleUseChoiceSequence,
   singleUseOptionalSequence,
   sharedStatementAlias,
   aliasPromotion,
@@ -1807,6 +1808,108 @@ new RuleTester().run("single-use-optional-sequence", singleUseOptionalSequence, 
       name: "core grammar rules are supported",
       code: `export default grammar({rules: {fields: ($) => $.__item, __item: ($) => ${indexedName}}});`,
       errors: [optionalSequenceError],
+    },
+  ],
+});
+
+const choiceSequenceBody = 'seq(choice(kw("EXCEPT"), $._using_keyword), $._field_references)';
+const choiceSequenceRules = (
+  body = choiceSequenceBody,
+  use = "$.__selection",
+  extra = "",
+) => `export default () => ({
+  root: ($) => ${use},
+  __selection: ($) => ${body},
+  ${extra}
+});`;
+const choiceSequenceError = {
+  message:
+    /__selection has one unaliased local use in root; try inlining this small sequence containing a direct choice/,
+};
+new RuleTester().run("single-use-choice-sequence", singleUseChoiceSequence, {
+  valid: [
+    choiceSequenceRules(undefined, "seq($.__selection, $.__selection)"),
+    choiceSequenceRules(undefined, "alias($.__selection, $.selection)"),
+    choiceSequenceRules(undefined, 'field("selection", $.__selection)'),
+    choiceSequenceRules(undefined, "token($.__selection)"),
+    choiceSequenceRules(undefined, "token.immediate($.__selection)"),
+    choiceSequenceRules(undefined, "prec.dynamic(1, $.__selection)"),
+    choiceSequenceRules(undefined, 'seq($.__selection, $["__selection"])'),
+    choiceSequenceRules(undefined, '$["__selection"]'),
+    choiceSequenceRules(undefined, "$.other"),
+    choiceSequenceRules("seq(choice($.__selection, $.other), $.tail)"),
+    choiceSequenceRules("seq($.head, $.tail)"),
+    choiceSequenceRules("seq(choice($.one), $.tail)"),
+    choiceSequenceRules("seq(choice($.a, $.b, $.c, $.d, $.e, $.f), $.tail)"),
+    choiceSequenceRules("seq($.one, $.two, choice($.a, $.b), $.tail)"),
+    choiceSequenceRules("seq(choice(seq($.a, $.b), $.c), $.tail)"),
+    choiceSequenceRules("seq(choice(alias($.a, $.x), $.b), $.tail)"),
+    choiceSequenceRules("seq(choice($.a, unknown()), $.tail)"),
+    choiceSequenceRules("seq(optional(choice($.a, $.b)), $.tail)"),
+    {
+      name: "DELETE OBJECT field-wrapped choices are outside this rule",
+      code: choiceSequenceRules(
+        'seq($._delete_keyword, kw("OBJECT"), field("name", choice($.object_access, $.scoped_name)))',
+      ),
+    },
+    choiceSequenceRules(`prec.right(${choiceSequenceBody})`),
+    choiceSequenceRules().replaceAll("__selection", "__selection_body"),
+    choiceSequenceRules().replaceAll("__selection", "_selection"),
+    {
+      name: "references in grammar metadata prevent inlining",
+      code: `export default grammar({conflicts: ($) => [[$.__selection]], rules: {
+        root: ($) => $.__selection,
+        __selection: ($) => ${choiceSequenceBody},
+      }});`,
+    },
+    {
+      name: "a reference in another rule map is not a local use",
+      code: `export default grammar({rules: {__selection: ($) => ${choiceSequenceBody}}, other: {rules: {root: ($) => $.__selection}}});`,
+    },
+    {
+      name: "non-grammar object properties are ignored",
+      code: `const data = {root: ($) => $.__selection, __selection: ($) => ${choiceSequenceBody}};`,
+    },
+    {
+      name: "rule-specific suppression applies to the helper definition",
+      code: choiceSequenceRules().replace(
+        "  __selection:",
+        "  // oxlint-disable-next-line rule-to-test/single-use-choice-sequence\n  __selection:",
+      ),
+    },
+  ],
+  invalid: [
+    {
+      name: "BUFFER-COMPARE EXCEPT or USING followed by field references",
+      code: choiceSequenceRules(),
+      errors: [choiceSequenceError],
+    },
+    {
+      name: "a keyword followed by a choice of nonterminal bodies",
+      code: choiceSequenceRules('seq(kw("UPDATE"), choice($.__record, $.__fields))'),
+      errors: [choiceSequenceError],
+    },
+    {
+      name: "fields and keyword abbreviation options remain intact",
+      code: choiceSequenceRules(
+        'seq(choice(kw("FIELDS", {offset:5, alias:"FIELD"}), $._using_keyword), field("items", $.items))',
+      ),
+      errors: [choiceSequenceError],
+    },
+    {
+      name: "static precedence surrounding the callsite is preserved",
+      code: choiceSequenceRules(undefined, "prec.right(seq($.__selection, optional($.tail)))"),
+      errors: [choiceSequenceError],
+    },
+    {
+      name: "a short choice in the middle of a sequence",
+      code: choiceSequenceRules('seq("(", choice($.a, $.b), ")")'),
+      errors: [choiceSequenceError],
+    },
+    {
+      name: "core grammar rule maps are recognized",
+      code: `export default grammar({rules: {root: ($) => $.__selection, __selection: ($) => ${choiceSequenceBody}}});`,
+      errors: [choiceSequenceError],
     },
   ],
 });
