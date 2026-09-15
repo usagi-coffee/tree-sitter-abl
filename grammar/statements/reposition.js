@@ -1,6 +1,7 @@
 export default ({ kw }) => ({
   reposition_statement: ($) => seq($.__reposition_prefix, $._terminator),
 
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-keyword-sequence
   __reposition_prefix: ($) => seq(kw("REPOSITION"), $.__reposition_body),
   __reposition_body: ($) =>
     seq(
