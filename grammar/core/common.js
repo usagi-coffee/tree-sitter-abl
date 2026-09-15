@@ -503,6 +503,7 @@ export default ({ kw }) => ({
         choice($.__return_error_clause, kw("NO-APPLY"), field("return_value", $._expression)),
       ),
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-keyword-sequence
   __return_error_clause: ($) => seq(kw("ERROR"), optional(field("error_value", $._expression))),
   // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
   _when_phrase: ($) => seq(kw("WHEN"), field("when", $._expression)),
