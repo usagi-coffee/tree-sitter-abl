@@ -228,6 +228,7 @@ export default ({ kw }) => ({
     ),
   __class_property_accessor_parameters: ($) => choice(seq("(", ")"), $.property_set_parameter_list),
   property_set_parameter_list: ($) =>
+    // oxlint-disable-next-line tree-sitter-optimize/list-head-extraction
     seq("(", $.property_set_parameter, optional($.__class_property_set_parameter_tail), ")"),
   __class_property_set_parameter_tail: ($) =>
     seq(",", $.property_set_parameter, optional($.__class_property_set_parameter_tail)),
