@@ -1,6 +1,7 @@
 export default ({ kw }) => ({
   input_output_statement: ($) => seq($.__input_output_prefix, $.__input_output_body, $._terminator),
 
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-keyword-sequence
   __input_output_prefix: ($) => seq(kw("INPUT-OUTPUT", { offset: 7 }), optional($._stream_phrase)),
   __input_output_body: ($) =>
     choice(
