@@ -66,6 +66,7 @@ export default ({ kw }) => ({
         repeat($._statement),
       ),
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __do_condition_or_loop_phrase: ($) =>
     choice(seq($.__do_while_phrase, optional($._loop_phrase)), $._loop_phrase),
   __do_loop_phrase: ($) =>
