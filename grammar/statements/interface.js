@@ -42,7 +42,7 @@ export default ({ kw }) => ({
       alias($.__interface_event, $.event_definition),
       $.global_define_preprocessor_directive,
       $.scoped_define_preprocessor_directive,
-      alias($.if_preprocessor_directive_statement, $.if_preprocessor_directive),
+      $._if_preprocessor_statement,
       $.message_preprocessor_directive,
       $.undefine_preprocessor_directive,
       $.include_file_reference,

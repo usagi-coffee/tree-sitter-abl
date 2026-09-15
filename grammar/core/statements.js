@@ -9,7 +9,7 @@ export default ({ kw }) => ({
       alias($._macro_statement_token, $.constant),
       $.global_define_preprocessor_directive,
       $.scoped_define_preprocessor_directive,
-      alias($.if_preprocessor_directive_statement, $.if_preprocessor_directive),
+      $._if_preprocessor_statement,
       $.message_preprocessor_directive,
       $.undefine_preprocessor_directive,
       $.analyze_suspend_preprocessor_directive,

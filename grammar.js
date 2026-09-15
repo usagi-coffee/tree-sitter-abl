@@ -861,6 +861,8 @@ export default grammar({
       __no_error: ($) => alias(kw("NO-ERROR"), $.no_error),
 
       // Contains non-core statement-specific shared rules
+      _if_preprocessor_statement: ($) =>
+        alias($.if_preprocessor_directive_statement, $.if_preprocessor_directive),
       ...commonRules(ctx),
       // Contains $._expression and $._primary_expression aggregates
       ...coreExpressions(ctx),
