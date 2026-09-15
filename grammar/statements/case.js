@@ -15,6 +15,7 @@ export default ({ kw }) => ({
   __case_items: ($) =>
     prec.right(
       seq(
+        // oxlint-disable-next-line tree-sitter-optimize/shared-statement-alias
         choice($.case_when_phrase, alias($.include_statement, $.include_file_reference)),
         optional($.__case_items),
       ),
