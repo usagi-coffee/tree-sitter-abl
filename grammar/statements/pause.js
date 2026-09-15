@@ -8,6 +8,7 @@ export default ({ kw }) => ({
       optional(alias(kw("BEFORE-HIDE"), $.before_hide)),
       optional($.__pause_message_window_tail),
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __pause_message_window_tail: ($) =>
     choice(seq($.__pause_message, optional($.in_window_phrase)), $.in_window_phrase),
   __pause_message: ($) =>
