@@ -243,6 +243,7 @@ export default ({ kw }) => ({
     seq(kw("LOB-DIR"), field("directory", choice($.preprocessor_name, $._value_expression))),
 
   _skip_phrase: ($) => prec.right(choice(seq($.__skip_parenthesized_prefix, ")"), kw("SKIP"))),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-keyword-sequence
   __skip_parenthesized_prefix: ($) => seq(kw("SKIP"), "(", field("skip", $._expression)),
 
   _space_phrase: ($) => prec.right(choice(seq($.__space_parenthesized_prefix, ")"), kw("SPACE"))),
