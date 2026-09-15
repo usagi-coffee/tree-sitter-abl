@@ -24,6 +24,7 @@ export default ({ kw }) => ({
       ),
       optional($.__assign_pair_tail),
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __assign_pair_tail: ($) =>
     choice(
       seq(
