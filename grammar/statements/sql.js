@@ -153,6 +153,7 @@ export default ({ kw }) => ({
   // at the opening parenthesis the parser cannot yet tell it from an ordinary
   // call, and the star settles it one token later. Naming the keyword moves the
   // decision onto a token the lexer already separates.
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __sql_select_item: ($) =>
     choice(
       alias("*", $.star),
