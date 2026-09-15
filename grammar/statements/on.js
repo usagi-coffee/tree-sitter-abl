@@ -173,6 +173,7 @@ export default ({ kw }) => ({
       ),
     ),
   __on_in_phrase: ($) => seq($._in_keyword, field("context", $.__on_context_value)),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __on_context_value: ($) =>
     choice($.system_handle_identifier, $.object_access, $._identifier_or_qualified_name),
   __on_revert_action: ($) => seq(alias(kw("REVERT"), $.revert), $._terminator),
