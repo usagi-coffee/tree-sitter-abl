@@ -38,6 +38,6 @@ export default ({ kw }) => ({
 
   __delete_widget_head: ($) =>
     seq(field("widget", $._expression), optional($.__delete_widget_tail)),
-  // oxlint-disable-next-line tree-sitter-optimize/tail-extraction
+  // oxlint-disable-next-line tree-sitter-optimize/tail-extraction, tree-sitter-optimize/single-use-sequence
   __delete_widget_tail: ($) => seq(",", $.__delete_widget_head),
 });
