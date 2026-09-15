@@ -81,7 +81,7 @@ export default ({ kw }) => ({
     seq(kw("PAGE-SIZE"), field("page_size", $.__output_numeric_value)),
   __output_numeric_value: ($) => choice($.number_literal, $.preprocessor_name, $._value_expression),
 
-  // oxlint-disable-next-line tree-sitter-optimize/body-extraction
+  // oxlint-disable-next-line tree-sitter-optimize/body-extraction, tree-sitter-optimize/single-use-choice
   __output_to_target: ($) =>
     choice(
       prec.right(
