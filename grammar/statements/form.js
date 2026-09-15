@@ -81,6 +81,7 @@ export default ({ kw }) => ({
     ),
   __form_validate_expression_tail: ($) =>
     seq(",", field("expression", $._expression), optional($.__form_validate_expression_tail)),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __form_label: ($) =>
     choice(
       $.include_file_reference,
