@@ -14,6 +14,7 @@ export default ({ kw }) => ({
       ),
     ),
 
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __record_query_options: ($) =>
     choice(seq($.of_phrase, optional($.__record_query_after_of)), $.__record_query_after_of),
   __record_query_after_of: ($) =>
