@@ -288,9 +288,9 @@ export default ({ kw }) => ({
       alias(kw("ABSTRACT"), $.abstract_modifier),
       alias(kw("FINAL"), $.final_modifier),
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-keyword-sequence
   __class_property_type_phrase: ($) =>
     seq(optional($._as_keyword), optional(kw("CLASS")), field("type", $._type_or_string)),
-
   __class_implements_tail: ($) =>
     seq(",", field("interface", $._type_name), optional($.__class_implements_tail)),
 
