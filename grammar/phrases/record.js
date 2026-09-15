@@ -8,6 +8,7 @@ export default ({ kw }) => ({
       optional($.__record_options),
     ),
   __record_options: ($) => prec.right(seq($.__record_option, optional($.__record_options))),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __record_field_list_preprocessor_tail: ($) =>
     choice(
       seq(alias($.__record_field_list, $.field_list), optional($.preprocessor_name)),
