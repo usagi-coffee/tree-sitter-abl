@@ -1,6 +1,7 @@
 export default ({ kw }) => ({
   class_definition: ($) => seq($.__class_prefix, $._terminator),
 
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-keyword-sequence
   __class_prefix: ($) => seq(optional($.__class_options), kw("CLASS"), $.__class_body),
 
   __class_body: ($) =>
