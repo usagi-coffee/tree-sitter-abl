@@ -58,6 +58,7 @@ export default ({ kw }) => ({
       kw("VIEW-AS"),
       choice(
         field("widget", $.identifier),
+        // oxlint-disable-next-line tree-sitter-optimize/list-head-extraction
         seq(
           kw("RADIO-SET"),
           kw("RADIO-BUTTONS"),
