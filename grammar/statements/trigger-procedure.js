@@ -50,6 +50,7 @@ export default ({ kw }) => ({
     ),
   __trigger_procedure_options: ($) =>
     prec.right(seq($.__trigger_procedure_option, optional($.__trigger_procedure_options))),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __trigger_procedure_option: ($) =>
     choice(
       seq(kw("COLUMN-LABEL"), field("label", $.string_literal)),
