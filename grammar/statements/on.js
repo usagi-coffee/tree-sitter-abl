@@ -241,6 +241,7 @@ export default ({ kw }) => ({
         ),
       ),
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __on_ui_event: ($) => choice($.__on_key_label, alias(token(choice("+", "-")), $.identifier)),
   __on_ui_events: ($) => seq(field("event", $.__on_ui_event), optional(seq(",", $.__on_ui_events))),
   __on_ui_event_widgets: ($) => seq($.__on_ui_events, alias($.__on_of_phrase, $.of_phrase)),
