@@ -40,6 +40,7 @@ export default ({ kw }) => ({
       alias(kw("OVERRIDE"), $.override_modifier),
       $.preprocessor_name,
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __event_type_modifier: ($) =>
     choice(alias(kw("STATIC"), $.static_modifier), alias(kw("ABSTRACT"), $.abstract_modifier)),
   __event_type_modifiers: ($) =>
