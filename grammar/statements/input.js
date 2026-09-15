@@ -18,7 +18,10 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __input_from_target: ($) =>
     choice(
-      field("file", $.__input_file_target),
+      field(
+        "file",
+        choice($.opsys_file, $._string_or_identifier_access_or_call, $.preprocessor_name),
+      ),
       alias(kw("TERMINAL"), $.terminal),
       $._value_expression,
       seq(
@@ -29,6 +32,4 @@ export default ({ kw }) => ({
         optional(alias(kw("NO-ATTR-LIST"), $.no_attr_list)),
       ),
     ),
-  __input_file_target: ($) =>
-    choice($.opsys_file, $._string_or_identifier_access_or_call, $.preprocessor_name),
 });
