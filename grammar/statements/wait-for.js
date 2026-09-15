@@ -32,15 +32,13 @@ export default ({ kw }) => ({
     seq(
       field("events", $.__wait_for_event_list),
       $._of_keyword,
-      field("widgets", $.__wait_for_widget_list),
+      field("widgets", prec.right(seq($.widget_phrase, optional($.__wait_for_widget_list_tail)))),
     ),
   __wait_for_of_tail: ($) =>
     seq(kw("OR"), alias($.__wait_for_of_phrase, $.of_phrase), optional($.__wait_for_of_tail)),
   __wait_for_focus_phrase: ($) => seq(kw("FOCUS"), field("focus", $.widget_phrase)),
   __wait_for_pause_phrase: ($) => seq(kw("PAUSE"), field("duration", $._expression)),
 
-  __wait_for_widget_list: ($) =>
-    prec.right(seq($.widget_phrase, optional($.__wait_for_widget_list_tail))),
   __wait_for_widget_list_tail: ($) =>
     seq(",", $.widget_phrase, optional($.__wait_for_widget_list_tail)),
   __wait_for_event_list: ($) => seq($._events, optional($.__wait_for_event_list_tail)),
