@@ -1,6 +1,7 @@
 import { RuleTester } from "oxlint/plugins-dev";
 
 import {
+  singleUseOptionalSequence,
   sharedStatementAlias,
   aliasPromotion,
   phraseAliasExtraction,
@@ -1715,6 +1716,99 @@ new RuleTester().run("shared-statement-alias after extraction", sharedStatementA
     },
   ],
   invalid: [],
+});
+
+const indexedName =
+  'seq($._identifier_or_qualified_name, optional(seq("[", field("index", $._expression), "]")))';
+const optionalSequenceRules = (
+  body = indexedName,
+  use = "$.__item",
+  extra = "",
+) => `export default () => ({
+  fields: ($) => ${use},
+  __item: ($) => ${body},
+  ${extra}
+});`;
+const optionalSequenceError = {
+  message:
+    /__item has one unaliased local use in fields; try inlining this small sequence with its optional compound suffix intact/,
+};
+new RuleTester().run("single-use-optional-sequence", singleUseOptionalSequence, {
+  valid: [
+    optionalSequenceRules(undefined, "seq($.__item, $.__item)"),
+    optionalSequenceRules(undefined, "alias($.__item, $.item)"),
+    optionalSequenceRules(undefined, 'field("item", $.__item)'),
+    optionalSequenceRules(undefined, "token($.__item)"),
+    optionalSequenceRules(undefined, "token.immediate($.__item)"),
+    optionalSequenceRules(undefined, "prec.dynamic(1, $.__item)"),
+    optionalSequenceRules(undefined, 'seq($.__item, $["__item"])'),
+    optionalSequenceRules(undefined, '$["__item"]'),
+    optionalSequenceRules(undefined, "$.other"),
+    optionalSequenceRules('seq($.__item, optional(seq("[", $.index, "]")))'),
+    optionalSequenceRules("seq($.name, optional($.index))"),
+    optionalSequenceRules("seq($.name, optional(seq($.index)))"),
+    optionalSequenceRules('seq($.name, optional(seq("[", $.one, $.two, $.three, "]")))'),
+    optionalSequenceRules('seq($.one, $.two, $.three, optional(seq("[", $.index, "]")))'),
+    optionalSequenceRules('seq(optional($.name), optional(seq("[", $.index, "]")))'),
+    optionalSequenceRules('seq($.name, optional(seq("[", choice($.x, $.y), "]")))'),
+    optionalSequenceRules('seq($.name, optional(seq("[", unknown(), "]")))'),
+    optionalSequenceRules(`prec.right(${indexedName})`),
+    optionalSequenceRules().replaceAll("__item", "__item_body"),
+    optionalSequenceRules().replaceAll("__item", "_item"),
+    {
+      name: "grammar metadata references prevent an inlining suggestion",
+      code: `export default grammar({inline: ($) => [$.__item], rules: {
+        fields: ($) => $.__item,
+        __item: ($) => ${indexedName},
+      }});`,
+    },
+    {
+      name: "another rule map is not a local callsite",
+      code: `export default grammar({rules: {__item: ($) => ${indexedName}}, other: {rules: {fields: ($) => $.__item}}});`,
+    },
+    {
+      name: "non-grammar objects are ignored",
+      code: `const data = {fields: ($) => $.__item, __item: ($) => ${indexedName}};`,
+    },
+    {
+      name: "rule-specific suppression at the helper definition",
+      code: optionalSequenceRules().replace(
+        "  __item:",
+        "  // oxlint-disable-next-line rule-to-test/single-use-optional-sequence\n  __item:",
+      ),
+    },
+  ],
+  invalid: [
+    {
+      name: "record field name with optional array index",
+      code: optionalSequenceRules(),
+      errors: [optionalSequenceError],
+    },
+    {
+      name: "static precedence around the callsite stays intact",
+      code: optionalSequenceRules(undefined, "prec.right(seq($.__item, optional($.tail)))"),
+      errors: [optionalSequenceError],
+    },
+    {
+      name: "literal prefix and abbreviated valued suffix",
+      code: optionalSequenceRules(
+        'seq("(", $.name, optional(seq(kw("COLUMN", {offset:3}), field("column", $.number))))',
+      ),
+      errors: [optionalSequenceError],
+    },
+    {
+      name: "field in the required prefix is preserved",
+      code: optionalSequenceRules(
+        'seq(field("name", $.identifier), optional(seq("[", field("index", $.expression), "]")))',
+      ),
+      errors: [optionalSequenceError],
+    },
+    {
+      name: "core grammar rules are supported",
+      code: `export default grammar({rules: {fields: ($) => $.__item, __item: ($) => ${indexedName}}});`,
+      errors: [optionalSequenceError],
+    },
+  ],
 });
 
 console.log("✓ Optimizer lint plugin tests passed successfully");
