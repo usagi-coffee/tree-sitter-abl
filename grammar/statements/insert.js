@@ -8,6 +8,7 @@ export default ({ kw }) => ({
       optional($._except_fields),
       optional($.__insert_after_except),
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __insert_after_except: ($) =>
     choice(
       seq($._using_keyword, field("using", $._expression), optional($.frame_phrase)),
