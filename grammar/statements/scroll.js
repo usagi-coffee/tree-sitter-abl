@@ -15,5 +15,6 @@ export default ({ kw }) => ({
       ),
     ),
   __scroll_direction_frame_tail: ($) => seq($.__scroll_direction, optional($.frame_phrase)),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __scroll_direction: ($) => choice(alias(kw("UP"), $.up), alias(kw("DOWN"), $.down)),
 });
