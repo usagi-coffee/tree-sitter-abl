@@ -54,7 +54,20 @@ export default ({ kw }) => ({
     choice(
       alias(kw("ECHO"), $.echo),
       alias(kw("NO-ECHO"), $.no_echo),
-      seq(kw("MAP"), field("map", $.__output_map_entry)),
+      seq(
+        kw("MAP"),
+        field(
+          "map",
+          choice(
+            seq(
+              $.identifier,
+              // oxlint-disable-next-line tree-sitter-optimize/recurse
+              repeat(seq("/", $.identifier)),
+            ),
+            $.string_literal,
+          ),
+        ),
+      ),
       alias(kw("NO-MAP"), $.no_map),
       alias(kw("PAGED"), $.paged),
       alias($.__output_page_size_phrase, $.page_size_phrase),
@@ -67,16 +80,6 @@ export default ({ kw }) => ({
   __output_page_size_phrase: ($) =>
     seq(kw("PAGE-SIZE"), field("page_size", $.__output_numeric_value)),
   __output_numeric_value: ($) => choice($.number_literal, $.preprocessor_name, $._value_expression),
-
-  __output_map_entry: ($) =>
-    choice(
-      seq(
-        $.identifier,
-        // oxlint-disable-next-line tree-sitter-optimize/recurse
-        repeat(seq("/", $.identifier)),
-      ),
-      $.string_literal,
-    ),
 
   // oxlint-disable-next-line tree-sitter-optimize/body-extraction
   __output_to_target: ($) =>
