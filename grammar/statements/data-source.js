@@ -49,6 +49,7 @@ export default ({ kw }) => ({
       field("field", $._identifier_or_qualified_name),
       optional($.__data_source_key_field_tail),
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __data_source_modifier: ($) =>
     choice(
       seq($.__data_source_access_modifier, optional($.__data_source_static)),
