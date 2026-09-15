@@ -187,6 +187,7 @@ export default ({ kw }) => ({
 
   // oxlint-disable-next-line tree-sitter-optimize/sequence-subset
   __sql_group_by_clause: ($) =>
+    // oxlint-disable-next-line tree-sitter-optimize/list-head-extraction
     seq(
       kw("GROUP"),
       $._by_keyword,
