@@ -1,6 +1,7 @@
 export default ({ kw }) => ({
   form_statement: ($) => seq($.__form_prefix, $._terminator),
 
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-keyword-sequence
   __form_prefix: ($) => seq(kw("FORM"), $.__form_body),
   __form_body: ($) =>
     choice(
