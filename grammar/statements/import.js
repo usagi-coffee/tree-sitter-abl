@@ -1,6 +1,7 @@
 export default ({ kw }) => ({
   import_statement: ($) => seq($.__import_prefix, $.__import_body, $._no_error_terminator),
 
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-keyword-sequence
   __import_prefix: ($) => seq(kw("IMPORT"), optional($._stream_phrase)),
   __import_body: ($) =>
     seq(
