@@ -31,6 +31,7 @@ export default ({ kw }) => ({
     seq(
       field("record", $._identifier_or_qualified_name),
       optional(
+        // oxlint-disable-next-line tree-sitter-optimize/list-head-extraction
         seq(
           kw("EXCEPT"),
           field("field", $._identifier_or_qualified_name),
