@@ -26,6 +26,7 @@ export default ({ kw }) => ({
         alias($.__wait_for_focus_phrase, $.focus_phrase),
         optional(alias($.__wait_for_pause_phrase, $.pause_phrase)),
       ),
+      // oxlint-disable-next-line tree-sitter-optimize/phrase-alias-extraction
       alias($.__wait_for_pause_phrase, $.pause_phrase),
     ),
   __wait_for_of_phrase: ($) =>
