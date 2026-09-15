@@ -13,6 +13,7 @@ export default ({ kw }) => ({
       optional($.__for_with_stream_io_phrase),
       $.body,
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __for_while_transaction_tail: ($) =>
     choice(
       seq(
