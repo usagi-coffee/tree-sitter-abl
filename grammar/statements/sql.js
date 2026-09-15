@@ -39,7 +39,9 @@ export default ({ kw }) => ({
       kw("CURSOR"),
       $._for_keyword,
       field("query", alias($.__sql_select_body, $.select)),
-      optional($.__sql_cursor_mode),
+      optional(
+        choice(alias($.__sql_read_only, $.read_only), alias($.__sql_for_update, $.for_update)),
+      ),
     ),
   // `FOR READ ONLY` and `FOR UPDATE` close the declaration rather than the
   // query, so they sit here and not inside the select, where they would also be
@@ -49,8 +51,6 @@ export default ({ kw }) => ({
   // `seq(...)` instead parses the clause and then drops it: the tokens are
   // consumed, no error is raised, and nothing reaches the tree -- the silent
   // kind of gap, which only a node count catches.
-  __sql_cursor_mode: ($) =>
-    choice(alias($.__sql_read_only, $.read_only), alias($.__sql_for_update, $.for_update)),
   __sql_read_only: ($) => seq($._for_keyword, kw("READ"), kw("ONLY")),
   __sql_for_update: ($) =>
     seq(
