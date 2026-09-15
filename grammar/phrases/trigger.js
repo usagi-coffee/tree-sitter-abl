@@ -12,6 +12,7 @@ export default ({ kw }) => ({
       $.__trigger_action,
       optional($.__triggers_entries),
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __trigger_action: ($) =>
     choice(alias(seq(kw("DO"), $.__trigger_body_tail), $.trigger_body), $.__persistent_trigger),
 
