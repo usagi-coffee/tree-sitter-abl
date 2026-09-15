@@ -22,6 +22,7 @@ export default ({ kw }) => ({
       ),
       seq(alias(kw("TRANSACTION", { offset: 5 }), $.transaction), optional($.__for_sort_clauses)),
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __for_sort_clause: ($) =>
     choice(
       alias($.__for_by_phrase, $.by_phrase),
