@@ -14,6 +14,7 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __radio_set_size_tooltip_tail: ($) =>
     choice(seq($.size_phrase, optional($._tooltip_phrase)), $._tooltip_phrase),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __radio_set_orientation: ($) =>
     choice(seq(kw("HORIZONTAL"), optional(kw("EXPAND"))), kw("VERTICAL")),
 });
