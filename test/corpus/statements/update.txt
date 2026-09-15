@@ -421,3 +421,27 @@ UPDATE field1 field2 WITH FRAME f1.
       field: (identifier))
     (frame_phrase
       frame: (identifier))))
+
+================================================================================
+UPDATE GO-ON with a single key and mixed separators
+================================================================================
+
+UPDATE field1 GO-ON(F1).
+UPDATE field1 GO-ON(F1, "F2" F3, "F4").
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (update_statement
+    (field
+      field: (identifier))
+    (go_on_phrase
+      (identifier)))
+  (update_statement
+    (field
+      field: (identifier))
+    (go_on_phrase
+      (identifier)
+      (string_literal)
+      (identifier)
+      (string_literal))))
