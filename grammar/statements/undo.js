@@ -1,6 +1,7 @@
 export default ({ kw }) => ({
   undo_statement: ($) => seq($.__undo_prefix, $._terminator),
 
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-optional-sequence
   __undo_prefix: ($) =>
     // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq(
