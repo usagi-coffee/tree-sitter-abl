@@ -103,6 +103,7 @@ export default ({ kw }) => ({
       optional(alias(kw("PRESELECT"), $.preselect)),
     ),
 
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-optional-sequence
   __parameter_variable_type_phrase: ($) =>
     seq($._as_like, optional(seq($._to_keyword, field("target", $.identifier)))),
 });
