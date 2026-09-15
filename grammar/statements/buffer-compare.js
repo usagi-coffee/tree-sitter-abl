@@ -5,7 +5,7 @@ export default ({ kw }) => ({
     seq(
       kw("BUFFER-COMPARE"),
       field("source", $._expression),
-      optional($.__buffer_compare_field_phrase),
+      optional(seq(choice(kw("EXCEPT"), $._using_keyword), $._field_references)),
       $._to_keyword,
       field("target", $._expression),
       optional($.__buffer_compare_tail),
@@ -36,9 +36,6 @@ export default ({ kw }) => ({
       ),
       alias(kw("NO-LOBS"), $.no_lobs),
     ),
-
-  __buffer_compare_field_phrase: ($) =>
-    seq(choice(kw("EXCEPT"), $._using_keyword), $._field_references),
 
   __buffer_compare_save_phrase: ($) =>
     seq(kw("SAVE"), optional(seq(kw("RESULT"), $._in_keyword)), field("result", $._expression)),
