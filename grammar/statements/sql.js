@@ -104,7 +104,7 @@ export default ({ kw }) => ({
   // reading of this text was never right.
   sql_update_statement: ($) => seq(kw("UPDATE"), $.__sql_update_body, $._terminator),
   __sql_update_body: ($) =>
-    // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
+    // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction, tree-sitter-optimize/list-head-extraction
     seq(
       field("table", $._identifier_or_qualified_name),
       kw("SET"),
