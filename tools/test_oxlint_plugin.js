@@ -1,6 +1,7 @@
 import { RuleTester } from "oxlint/plugins-dev";
 
 import {
+  singleUsePrecedence,
   singleUseChoice,
   forwardingRule,
   choiceSubset,
@@ -1060,6 +1061,78 @@ new RuleTester().run("single-use-choice", singleUseChoice, {
       name: "alternative precedence remains inside the inlined choice",
       code: `export default () => ({ __item: ($) => choice(prec.left(1, $.a), $.b), root: ($) => optional($.__item) });`,
       errors: [{ message: /__item has one unaliased local use in root/ }],
+    },
+  ],
+});
+
+const precedenceHelper = (
+  body = "prec.right(seq($.item, optional($.tail)))",
+  use = "$.__items",
+  name = "__items",
+) => `export default () => ({
+  ${name}: ($) => ${body}, root: ($) => ${use},
+});`;
+
+new RuleTester().run("single-use-precedence", singleUsePrecedence, {
+  valid: [
+    precedenceHelper("seq($.item, optional($.tail))"),
+    precedenceHelper("prec.dynamic(1, seq($.item, $.tail))"),
+    precedenceHelper("prec.right(prec.dynamic(1, seq($.item, $.tail)))"),
+    precedenceHelper("prec.right(choice($.item, $.tail))"),
+    precedenceHelper("prec.right(seq($.item))"),
+    precedenceHelper("prec.right(seq($.a, $.b, $.c, $.d))"),
+    precedenceHelper("prec.right(seq($.item, repeat($.tail)))"),
+    precedenceHelper("prec.right(priority, seq($.item, $.tail))"),
+    precedenceHelper("prec.right(seq($.item, optional($.tail)))", "$._items", "_items"),
+    precedenceHelper("prec.right(seq($.item, optional($.tail)))", "$.items", "items"),
+    precedenceHelper("prec.right(seq($.item, optional($.tail)))", "$.__items_body", "__items_body"),
+    precedenceHelper(undefined, "seq($.__items, $.__items)"),
+    precedenceHelper(undefined, "alias($.__items, $.items)"),
+    precedenceHelper(undefined, "alias($.other, $.__items)"),
+    precedenceHelper(undefined, "token($.__items)"),
+    precedenceHelper(undefined, "token.immediate($.__items)"),
+    `export default () => ({ __items: ($) => prec.right(seq($.item, optional($.__items))) });`,
+    `export default () => ({ __items: ($) => prec.right(seq($.item, $.tail)) });`,
+    `const unrelated = { __items: ($) => prec.right(seq($.item, $.tail)), root: ($) => $.__items };`,
+    ...["inline", "conflicts", "precedences", "supertypes"].map(
+      (metadata) =>
+        `export default grammar({ ${metadata}: ($) => [$.__items], rules: { __items: ($) => prec.right(seq($.item, $.tail)), root: ($) => $.__items } });`,
+    ),
+    `export default () => ({
+      // oxlint-disable-next-line rule-to-test/single-use-precedence
+      __items: ($) => prec.right(seq($.item, optional($.tail))),
+      root: ($) => $.__items,
+    });`,
+    `export default () => ({ __wait_for_of_phrase: ($) => seq(field("events", $.__wait_for_event_list), $._of_keyword, field("widgets", prec.right(seq($.widget_phrase, optional($.__wait_for_widget_list_tail))))) });`,
+  ],
+  invalid: [
+    {
+      name: "WAIT-FOR widget list regression",
+      code: `export default () => ({
+        __wait_for_of_phrase: ($) => seq(field("events", $.__wait_for_event_list), $._of_keyword, field("widgets", $.__wait_for_widget_list)),
+        __wait_for_widget_list: ($) => prec.right(seq($.widget_phrase, optional($.__wait_for_widget_list_tail))),
+      });`,
+      errors: [
+        { message: /__wait_for_widget_list has one unaliased local use in __wait_for_of_phrase/ },
+      ],
+    },
+    {
+      name: "named static precedence and fields are retained",
+      code: precedenceHelper(
+        'prec("items", seq(field("item", $.item), optional($.tail)))',
+        'field("items", $.__items)',
+      ),
+      errors: [{ message: /retaining every precedence and associativity wrapper/ }],
+    },
+    {
+      name: "left associativity",
+      code: precedenceHelper("prec.left(seq($.item, $.tail))"),
+      errors: [{ message: /__items has one unaliased local use in root/ }],
+    },
+    {
+      name: "the full static precedence chain is retained",
+      code: precedenceHelper('prec("items", prec.right(seq($.item, $.tail)))'),
+      errors: [{ message: /retaining every precedence and associativity wrapper/ }],
     },
   ],
 });
