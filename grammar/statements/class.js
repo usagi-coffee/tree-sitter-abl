@@ -345,7 +345,7 @@ export default ({ kw }) => ({
         optional(field("size", choice($.number_literal, $.preprocessor_name, $.identifier))),
       ),
     ),
-  // oxlint-disable-next-line tree-sitter-optimize/body-extraction
+  // oxlint-disable-next-line tree-sitter-optimize/body-extraction, tree-sitter-optimize/single-use-choice
   __class_method_table_parameter: ($) =>
     choice(
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
