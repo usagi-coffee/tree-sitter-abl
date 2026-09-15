@@ -17,6 +17,7 @@ export default ({ kw }) => ({
       $._scrollbar_option,
       $._tooltip_phrase,
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __editor_size: ($) =>
     choice(
       $.size_phrase,
