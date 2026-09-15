@@ -9,17 +9,17 @@ export default ({ kw }) => ({
     ),
   __os_command_items: ($) =>
     prec.right(
-      seq(choice($._value_expression, $.__os_command_token), optional($.__os_command_items)),
-    ),
-
-  // oxlint-disable-next-line tree-sitter-optimize/choice-subset
-  __os_command_token: ($) =>
-    choice(
-      $.identifier,
-      $.string_literal,
-      $.number_literal,
-      $.preprocessor_name,
-      $.__os_command_switch,
+      seq(
+        choice(
+          $._value_expression,
+          $.identifier,
+          $.string_literal,
+          $.number_literal,
+          $.preprocessor_name,
+          $.__os_command_switch,
+        ),
+        optional($.__os_command_items),
+      ),
     ),
   __os_command_switch: () => token(/\/[^\s.]+/),
 });
