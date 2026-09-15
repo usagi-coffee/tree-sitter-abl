@@ -29,7 +29,7 @@ export default ({ kw }) => ({
     ),
 
   __run_stored_procedure_params: ($) => seq($.__run_stored_procedure_params_prefix, ")"),
-  // oxlint-disable-next-line tree-sitter-optimize/single-use-sequence
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-optional-sequence, tree-sitter-optimize/single-use-sequence
   __run_stored_procedure_params_prefix: ($) =>
     seq(
       "(",
