@@ -48,6 +48,7 @@ export default ({ kw }) => ({
       optional($.__persistent_trigger_tail),
       optional($._terminator_dot),
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __persistent_trigger_procedure: ($) =>
     choice(
       $._identifier_or_qualified_name,
