@@ -1,6 +1,7 @@
 export default ({ kw }) => ({
   using_statement: ($) => seq($.__using_prefix, $._terminator),
 
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-alias-sequence
   __using_prefix: ($) =>
     seq(
       $._using_keyword,
