@@ -1,5 +1,6 @@
 export default ({ kw }) => ({
   query_tuning_phrase: ($) => seq($.__query_tuning_prefix, ")"),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-keyword-sequence
   __query_tuning_prefix: ($) => seq(kw("QUERY-TUNING"), "(", $.__query_tuning_options),
   __query_tuning_options: ($) =>
     prec.right(seq($.__query_tuning_option, optional($.__query_tuning_options))),
