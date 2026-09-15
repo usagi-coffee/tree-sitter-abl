@@ -11,13 +11,11 @@ export default ({ kw }) => ({
           optional($.__wait_for_of_tail),
           optional($.__wait_for_focus_pause_tail),
         ),
-        $.__wait_for_dotnet_call,
+        seq(
+          field("method", $.function_call),
+          optional(seq(kw("SET"), field("return_value", $._identifier_or_access))),
+        ),
       ),
-    ),
-  __wait_for_dotnet_call: ($) =>
-    seq(
-      field("method", $.function_call),
-      optional(seq(kw("SET"), field("return_value", $._identifier_or_access))),
     ),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __wait_for_focus_pause_tail: ($) =>
