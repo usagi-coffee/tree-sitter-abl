@@ -7,6 +7,7 @@ export default ({ kw }) => ({
     seq(
       field("name", $._type_name),
       optional(
+        // oxlint-disable-next-line tree-sitter-optimize/list-head-extraction
         seq(kw("INHERITS"), field("super", $._type_name), optional($.__interface_inherits_tail)),
       ),
       $.__interface_compound_body,
