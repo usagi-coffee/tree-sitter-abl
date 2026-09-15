@@ -96,7 +96,21 @@ export default ({ kw }) => ({
         $._on_keyword,
         choice(
           seq($.__on_ui_events, $.__on_ui_event_target, $.__on_trigger_action),
-          $.__on_database_event_branch,
+          choice(
+            seq(
+              field("event", $._delete_keyword),
+              $._of_keyword,
+              choice(
+                $.__on_database_event_action,
+                seq(
+                  field("widget", alias($._frame_browse_menu_widget, $.widget_phrase)),
+                  optional(alias(kw("ANYWHERE"), $.anywhere)),
+                  $.__on_trigger_action,
+                ),
+              ),
+            ),
+            seq(field("event", $.__on_database_event), $._of_keyword, $.__on_database_event_action),
+          ),
           $.__on_key_label_branch,
           $.__on_web_notify_branch,
         ),
@@ -114,23 +128,6 @@ export default ({ kw }) => ({
       ),
     ),
   __on_ui_anywhere_branch: ($) => seq($.__on_ui_events, alias(kw("ANYWHERE"), $.anywhere)),
-  // oxlint-disable-next-line tree-sitter-optimize/body-extraction
-  __on_database_event_branch: ($) =>
-    choice(
-      seq(
-        field("event", $._delete_keyword),
-        $._of_keyword,
-        choice(
-          $.__on_database_event_action,
-          seq(
-            field("widget", alias($._frame_browse_menu_widget, $.widget_phrase)),
-            optional(alias(kw("ANYWHERE"), $.anywhere)),
-            $.__on_trigger_action,
-          ),
-        ),
-      ),
-      seq(field("event", $.__on_database_event), $._of_keyword, $.__on_database_event_action),
-    ),
   __on_database_event_action: ($) =>
     seq(
       field("object", $._identifier_or_qualified_name),
