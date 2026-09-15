@@ -78,6 +78,7 @@ export default ({ kw }) => ({
   // `FETCH c INTO nm.`
   fetch_statement: ($) => seq(kw("FETCH"), $.__sql_fetch_body, $._terminator),
   __sql_fetch_body: ($) =>
+    // oxlint-disable-next-line tree-sitter-optimize/list-head-extraction
     seq(
       field("cursor", $.identifier),
       kw("INTO"),
