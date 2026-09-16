@@ -68,6 +68,7 @@ export default ({ kw }) => ({
       $.boolean_literal,
       $.null_literal,
       $.input_expression,
+      // oxlint-disable-next-line tree-sitter-optimize/shared-expression-alias
       alias($.include_expression, $.include_file_reference),
     ),
 });
