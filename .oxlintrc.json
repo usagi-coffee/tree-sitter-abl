@@ -21,6 +21,7 @@
     {
       "files": ["grammar.js", "grammar/**/*.js"],
       "rules": {
+        "tree-sitter-optimize/precedence-list-head-extraction": "warn",
         "tree-sitter-optimize/field-list-head-extraction": "warn",
         "tree-sitter-optimize/choice-list-head-extraction": "warn",
         "tree-sitter-optimize/shared-field-chunk": "warn",

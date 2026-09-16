@@ -1633,6 +1633,7 @@ export const recursiveBodyReuse = rule((context) => {
 }, "Suggest reusing hidden recursive helpers where their complete body is expanded inside another rule");
 
 function listHeadExtractionVisitor(context, mode = "embedded") {
+  const precedenceHead = mode === "precedence";
   const optionalHead = mode === "optional";
   const choiceHead = mode === "choice";
   const fieldHead = mode === "field";
@@ -1655,6 +1656,13 @@ function listHeadExtractionVisitor(context, mode = "embedded") {
           node.parent.arguments[1] !== node)
       )
         return;
+      if (
+        precedenceHead &&
+        (!["prec", "prec.left", "prec.right"].includes(callName(node.parent)) ||
+          node.parent.arguments.at(-1) !== node ||
+          !isStaticDsl(node.parent))
+      )
+        return;
       if (choiceHead && (callName(node.parent) !== "choice" || node.parent.arguments.length < 2))
         return;
       if (
@@ -1672,7 +1680,12 @@ function listHeadExtractionVisitor(context, mode = "embedded") {
             "prec.left",
             "prec.right",
             "prec.dynamic",
-          ].includes(callName(parent))
+          ].includes(callName(parent)) &&
+          !(
+            precedenceHead &&
+            ["prec", "prec.left", "prec.right"].includes(callName(parent)) &&
+            isStaticDsl(parent)
+          )
         )
           return;
       }
@@ -1716,7 +1729,7 @@ function listHeadExtractionVisitor(context, mode = "embedded") {
           if (sequence.owner === tail.property || sequence.owner.parent !== tail.property.parent)
             continue;
           if (
-            optionalHead || choiceHead || fieldHead
+            optionalHead || choiceHead || fieldHead || precedenceHead
               ? sequence.signatures.length !== tail.suffix.length
               : sequence.signatures.length <= tail.suffix.length
           )
@@ -1728,20 +1741,24 @@ function listHeadExtractionVisitor(context, mode = "embedded") {
           report(
             context,
             sequence.node,
-            fieldHead
-              ? "field-list-head-extraction"
-              : choiceHead
-                ? "choice-list-head-extraction"
-                : optionalHead
-                  ? "optional-list-head-extraction"
-                  : "list-head-extraction",
-            fieldHead
-              ? `This field contains the item and continuation repeated by ${tail.name}; try extracting or reusing a hidden non-empty list head here and after the comma in ${tail.name}. Keep the outer field at this call site, preserve nested fields, aliases and separator optionality, check precedence relationships, then measure parser size and validate trees.`
-              : choiceHead
-                ? `This choice branch repeats the item and continuation in ${tail.name}; try extracting a hidden non-empty list head and reusing it in this branch and after the comma in ${tail.name}. Preserve choice order, separator optionality, fields and aliases; check helper-specific conflicts and precedence, then measure parser size and validate trees.`
-                : optionalHead
-                  ? `This optional list head repeats the item and continuation in ${tail.name}; try extracting a hidden non-empty head and reusing it inside this optional and after the comma in ${tail.name}. Preserve separator optionality, fields, aliases and order; check helper-specific conflicts and precedence, then measure parser size and validate trees.`
-                  : `This sequence embeds the item and optional continuation repeated by ${tail.name}; try extracting that non-empty list head and reusing it here and after the comma in ${tail.name}. Preserve separator optionality, fields, aliases and order; measure parser size and validate trees.`,
+            precedenceHead
+              ? "precedence-list-head-extraction"
+              : fieldHead
+                ? "field-list-head-extraction"
+                : choiceHead
+                  ? "choice-list-head-extraction"
+                  : optionalHead
+                    ? "optional-list-head-extraction"
+                    : "list-head-extraction",
+            precedenceHead
+              ? `This precedence-wrapped list repeats the item and continuation in ${tail.name}; try extracting a hidden non-empty recursive list and inlining its comma continuation when the tail has no other uses. Keep the complete precedence chain and outer fields at this call site, preserve separators, item fields and aliases, check external references and metadata, then measure parser size and validate trees.`
+              : fieldHead
+                ? `This field contains the item and continuation repeated by ${tail.name}; try extracting or reusing a hidden non-empty list head here and after the comma in ${tail.name}. Keep the outer field at this call site, preserve nested fields, aliases and separator optionality, check precedence relationships, then measure parser size and validate trees.`
+                : choiceHead
+                  ? `This choice branch repeats the item and continuation in ${tail.name}; try extracting a hidden non-empty list head and reusing it in this branch and after the comma in ${tail.name}. Preserve choice order, separator optionality, fields and aliases; check helper-specific conflicts and precedence, then measure parser size and validate trees.`
+                  : optionalHead
+                    ? `This optional list head repeats the item and continuation in ${tail.name}; try extracting a hidden non-empty head and reusing it inside this optional and after the comma in ${tail.name}. Preserve separator optionality, fields, aliases and order; check helper-specific conflicts and precedence, then measure parser size and validate trees.`
+                    : `This sequence embeds the item and optional continuation repeated by ${tail.name}; try extracting that non-empty list head and reusing it here and after the comma in ${tail.name}. Preserve separator optionality, fields, aliases and order; measure parser size and validate trees.`,
           );
           break;
         }
@@ -1763,6 +1780,11 @@ export const optionalListHeadExtraction = rule(
 export const choiceListHeadExtraction = rule(
   (context) => listHeadExtractionVisitor(context, "choice"),
   "Suggest extracting choice-branch list heads duplicated in recursive comma tails",
+);
+
+export const precedenceListHeadExtraction = rule(
+  (context) => listHeadExtractionVisitor(context, "precedence"),
+  "Suggest extracting recursive list heads while retaining call-site static precedence",
 );
 
 export const fieldListHeadExtraction = rule(
@@ -2256,6 +2278,7 @@ const broadDispatcher = rule(
 export default {
   meta: { name: "tree-sitter-optimize" },
   rules: {
+    "precedence-list-head-extraction": precedenceListHeadExtraction,
     "field-list-head-extraction": fieldListHeadExtraction,
     "choice-list-head-extraction": choiceListHeadExtraction,
     "shared-field-chunk": sharedFieldChunk,

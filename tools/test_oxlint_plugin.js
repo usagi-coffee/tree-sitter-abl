@@ -1,6 +1,7 @@
 import { RuleTester } from "oxlint/plugins-dev";
 
 import {
+  precedenceListHeadExtraction,
   fieldListHeadExtraction,
   choiceListHeadExtraction,
   sharedFieldChunk,
@@ -3427,6 +3428,112 @@ new RuleTester().run("field-list-head-extraction", fieldListHeadExtraction, {
       name: "core grammar maps",
       code: `export default grammar({rules: {root: ($) => field("items", seq($.value, optional($.__tail))), __tail: ($) => seq(",", $.value, optional($.__tail))}});`,
       errors: [fieldHeadError],
+    },
+  ],
+});
+
+const precedenceHeadGrammar = (
+  item = "$.widget_phrase",
+  wrapper = "prec.right",
+  separator = '","',
+) => `
+export default () => ({
+  root: ($) => field("widgets", ${wrapper}(seq(${item}, optional($.__tail)))),
+  __tail: ($) => seq(${separator}, ${item}, optional($.__tail)),
+});`;
+const precedenceHeadError = {
+  message: /precedence-wrapped list repeats the item and continuation in __tail/,
+};
+new RuleTester().run("precedence-list-head-extraction", precedenceListHeadExtraction, {
+  valid: [
+    `export default () => ({root: ($) => field("widgets", prec.right($.__widgets)), __widgets: ($) => seq($.widget_phrase, optional(seq(",", $.__widgets)))});`,
+    precedenceHeadGrammar().replace("prec.right(seq(", "optional(seq("),
+    precedenceHeadGrammar().replace("prec.right(seq(", "prec.dynamic(1, seq("),
+    precedenceHeadGrammar().replace("prec.right(seq(", "prec(getPriority(), seq("),
+    precedenceHeadGrammar().replace('seq(",", $.widget_phrase,', 'seq(",", $.other,'),
+    precedenceHeadGrammar().replace(
+      'seq(",", $.widget_phrase, optional($.__tail))',
+      'seq(",", $.widget_phrase, optional($.__other))',
+    ),
+    precedenceHeadGrammar().replace("prec.right(seq(", 'prec.right(seq("PREFIX", '),
+    precedenceHeadGrammar().replaceAll("__tail", "visible_tail"),
+    precedenceHeadGrammar().replaceAll("$.__tail", '$["__tail"]'),
+    precedenceHeadGrammar("optional($.value)"),
+    precedenceHeadGrammar('field("value", optional($.value))'),
+    precedenceHeadGrammar("alias(optional($.value), $.item)"),
+    precedenceHeadGrammar("seq($.value, $.__tail)"),
+    precedenceHeadGrammar("makeItem($)"),
+    precedenceHeadGrammar("...items"),
+    precedenceHeadGrammar("$.value", "prec.right", '";"'),
+    precedenceHeadGrammar('field("value", $.value)').replace(
+      'seq(",", field("value"',
+      'seq(",", field("other"',
+    ),
+    precedenceHeadGrammar("alias($.value, $.item)").replace(
+      'seq(",", alias($.value, $.item)',
+      'seq(",", alias($.value, $.other)',
+    ),
+    precedenceHeadGrammar().replace(
+      'seq(",", $.widget_phrase, optional($.__tail))',
+      'prec.right(seq(",", $.widget_phrase, optional($.__tail)))',
+    ),
+    ...["token", "token.immediate", "alias", "prec.dynamic"].map((wrapper) =>
+      precedenceHeadGrammar().replace(
+        'field("widgets", prec.right(seq($.widget_phrase, optional($.__tail))))',
+        `${wrapper}(${wrapper === "prec.dynamic" ? "1, " : ""}prec.right(seq($.widget_phrase, optional($.__tail)))${wrapper === "alias" ? ", $.widgets" : ""})`,
+      ),
+    ),
+    `const a = grammar({rules: {root: ($) => prec.right(seq($.value, optional($.__tail)))}}); const b = grammar({rules: {__tail: ($) => seq(",", $.value, optional($.__tail))}});`,
+    precedenceHeadGrammar().replace("export default () => (", "const unrelated = ("),
+    ...["root", "__tail"].map((name) =>
+      precedenceHeadGrammar().replace(
+        `  ${name}:`,
+        `  // oxlint-disable-next-line rule-to-test/precedence-list-head-extraction\n  ${name}:`,
+      ),
+    ),
+  ],
+  invalid: [
+    {
+      name: "WAIT-FOR widgets regression",
+      code: precedenceHeadGrammar(),
+      errors: [precedenceHeadError],
+    },
+    {
+      name: "left associativity",
+      code: precedenceHeadGrammar("$.value", "prec.left"),
+      errors: [precedenceHeadError],
+    },
+    {
+      name: "named precedence chain stays outside the head",
+      code: precedenceHeadGrammar()
+        .replace("prec.right(seq(", 'prec("widgets", prec.right(seq(')
+        .replace("optional($.__tail))))", "optional($.__tail)))))"),
+      errors: [precedenceHeadError],
+    },
+    {
+      name: "inner fields",
+      code: precedenceHeadGrammar('field("value", $.value)'),
+      errors: [precedenceHeadError],
+    },
+    {
+      name: "inner aliases",
+      code: precedenceHeadGrammar("alias($.value, $.item)"),
+      errors: [precedenceHeadError],
+    },
+    {
+      name: "optional comma",
+      code: precedenceHeadGrammar("$.value", "prec.right", 'optional(",")'),
+      errors: [precedenceHeadError],
+    },
+    {
+      name: "multiple item parts",
+      code: precedenceHeadGrammar('$.key, "=", field("value", $.value)'),
+      errors: [precedenceHeadError],
+    },
+    {
+      name: "core grammar",
+      code: `export default grammar({rules: {root: ($) => prec.right(seq($.value, optional($.__tail))), __tail: ($) => seq(",", $.value, optional($.__tail))}});`,
+      errors: [precedenceHeadError],
     },
   ],
 });
