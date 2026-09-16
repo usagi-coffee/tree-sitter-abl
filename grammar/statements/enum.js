@@ -28,6 +28,6 @@ export default ({ kw }) => ({
   __enum_members: ($) =>
     prec.right(seq(alias($.__enum_member, $.member), optional($.__enum_members))),
 
-  __enum_member_value_head: ($) => seq($.identifier, optional($.__enum_member_value_tail)),
-  __enum_member_value_tail: ($) => seq(",", $.__enum_member_value_head),
+  __enum_member_value_head: ($) =>
+    seq($.identifier, optional(seq(",", $.__enum_member_value_head))),
 });
