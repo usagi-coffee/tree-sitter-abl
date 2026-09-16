@@ -38,9 +38,9 @@ export default ({ kw }) => ({
     ),
   __open_query_max_rows_option: ($) => seq(kw("MAX-ROWS"), field("max_rows", $._expression)),
   __open_query_records: ($) =>
+    seq(choice($._for_keyword, kw("PRESELECT")), kw("EACH"), $.__open_query_record_tail),
+  __open_query_record_tail: ($) =>
     seq(
-      choice($._for_keyword, kw("PRESELECT")),
-      kw("EACH"),
       alias($.__open_query_record_phrase, $.record_phrase),
       optional($.__open_query_join_records),
     ),
@@ -50,9 +50,7 @@ export default ({ kw }) => ({
         ",",
         // oxlint-disable-next-line tree-sitter-optimize/shared-choice
         choice(kw("EACH"), kw("FIRST"), kw("LAST")),
-        // oxlint-disable-next-line tree-sitter-optimize/phrase-alias-extraction
-        alias($.__open_query_record_phrase, $.record_phrase),
-        optional($.__open_query_join_records),
+        $.__open_query_record_tail,
       ),
     ),
 
