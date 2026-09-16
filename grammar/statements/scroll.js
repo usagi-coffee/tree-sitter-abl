@@ -3,18 +3,10 @@ export default ({ kw }) => ({
   __scroll_prefix: ($) =>
     seq(
       kw("SCROLL"),
-      optional(
-        choice(
-          seq(
-            alias(kw("FROM-CURRENT"), $.from_current),
-            optional(choice($.__scroll_direction_frame_tail, $.frame_phrase)),
-          ),
-          $.__scroll_direction_frame_tail,
-          $.frame_phrase,
-        ),
-      ),
+      optional(alias(kw("FROM-CURRENT"), $.from_current)),
+      optional($.__scroll_direction),
+      optional($.frame_phrase),
     ),
-  __scroll_direction_frame_tail: ($) => seq($.__scroll_direction, optional($.frame_phrase)),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __scroll_direction: ($) => choice(alias(kw("UP"), $.up), alias(kw("DOWN"), $.down)),
 });

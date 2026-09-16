@@ -218,3 +218,62 @@ END.
         left: (identifier)
         operator: (assignment_operator)
         right: (string_literal)))))
+
+================================================================================
+SCROLL - every ordered optional clause combination
+================================================================================
+
+SCROLL.
+SCROLL WITH FRAME f.
+SCROLL UP.
+SCROLL UP WITH FRAME f.
+SCROLL DOWN.
+SCROLL DOWN WITH FRAME f.
+SCROLL FROM-CURRENT.
+SCROLL FROM-CURRENT WITH FRAME f.
+SCROLL FROM-CURRENT UP.
+SCROLL FROM-CURRENT UP WITH FRAME f.
+SCROLL FROM-CURRENT DOWN.
+SCROLL FROM-CURRENT DOWN WITH FRAME f.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (scroll_statement)
+  (scroll_statement
+    (frame_phrase
+      frame: (identifier)))
+  (scroll_statement
+    (up))
+  (scroll_statement
+    (up)
+    (frame_phrase
+      frame: (identifier)))
+  (scroll_statement
+    (down))
+  (scroll_statement
+    (down)
+    (frame_phrase
+      frame: (identifier)))
+  (scroll_statement
+    (from_current))
+  (scroll_statement
+    (from_current)
+    (frame_phrase
+      frame: (identifier)))
+  (scroll_statement
+    (from_current)
+    (up))
+  (scroll_statement
+    (from_current)
+    (up)
+    (frame_phrase
+      frame: (identifier)))
+  (scroll_statement
+    (from_current)
+    (down))
+  (scroll_statement
+    (from_current)
+    (down)
+    (frame_phrase
+      frame: (identifier))))
