@@ -1,6 +1,7 @@
 import { RuleTester } from "oxlint/plugins-dev";
 
 import {
+  sharedFieldChunk,
   singleUseChoiceAliasSequence,
   singleUsePrecedenceValue,
   optionalModifierField,
@@ -3152,6 +3153,97 @@ new RuleTester().run("single-use-choice-alias-sequence", singleUseChoiceAliasSeq
       name: "core rule map",
       code: `export default grammar({rules: {root: ($) => $.__item, __item: ($) => ${choiceAliasBody}}});`,
       errors: [choiceAliasError],
+    },
+  ],
+});
+
+const signatureChunk =
+  'field("name", $._routine_name), optional(kw("RETURNS", {offset: 5})), $.__type';
+const fieldChunkRules = (first, second) =>
+  `export default ({kw}) => ({first: ($) => ${first}, second: ($) => ${second}});`;
+const fieldChunkError = { message: /three field-led elements repeat a chunk in first/ };
+
+new RuleTester().run("shared-field-chunk", sharedFieldChunk, {
+  valid: [
+    ...[
+      signatureChunk.replace('"name"', '"other"'),
+      signatureChunk.replace("$._routine_name", "$.identifier"),
+      signatureChunk.replace("offset: 5", "offset: 6"),
+      signatureChunk.replace("$.__type", "$.__other_type"),
+      'field("name", $._routine_name), $.__type, optional(kw("RETURNS", {offset: 5}))',
+      'field("name", $._routine_name), kw("RETURNS", {offset: 5}), $.__type',
+    ].map((chunk) =>
+      fieldChunkRules(`seq("FUNCTION", ${signatureChunk})`, `seq(${chunk}, $.tail)`),
+    ),
+    ...[
+      'field("name", choice($.a, $.b)), optional(kw("RETURNS")), $.type',
+      'field("name", $["name"]), optional(kw("RETURNS")), $.type',
+      'field("name", $.name), optional(kw("RETURNS", options)), $.type',
+      'field("name", $.name), optional(kw("RETURNS")), alias($.type, $.value)',
+      'field("name", $.name), optional(kw("RETURNS")), helper($)',
+      'field("name", $.name), optional(kw("RETURNS")), ...values',
+    ].map((chunk) => fieldChunkRules(`seq("FUNCTION", ${chunk})`, `seq(${chunk}, $.tail)`)),
+    fieldChunkRules(`seq(${signatureChunk})`, `seq(${signatureChunk}, $.tail)`),
+    ...["token", "token.immediate", "prec.left", "prec.right"].map((wrapper) =>
+      fieldChunkRules(
+        `${wrapper}(seq("FUNCTION", ${signatureChunk}))`,
+        `${wrapper}(seq(${signatureChunk}, $.tail))`,
+      ),
+    ),
+    fieldChunkRules(
+      `prec("type", seq("FUNCTION", ${signatureChunk}))`,
+      `seq(${signatureChunk}, $.tail)`,
+    ),
+    fieldChunkRules(
+      `prec.dynamic(1, seq("FUNCTION", ${signatureChunk}))`,
+      `seq(${signatureChunk}, $.tail)`,
+    ),
+    fieldChunkRules(
+      `alias(seq("FUNCTION", ${signatureChunk}), $.signature)`,
+      `seq(${signatureChunk}, $.tail)`,
+    ),
+    `export default ({kw}) => ({first: ($) => choice(seq("FUNCTION", ${signatureChunk}), seq(${signatureChunk}, $.tail))});`,
+    `const a = grammar({rules: {first: ($) => seq("FUNCTION", ${signatureChunk})}}); const b = grammar({rules: {second: ($) => seq(${signatureChunk}, $.tail)}});`,
+    `const unrelated = {first: ($) => seq("FUNCTION", ${signatureChunk}), second: ($) => seq(${signatureChunk}, $.tail)};`,
+    `export default ({kw}) => ({
+      // oxlint-disable-next-line rule-to-test/shared-field-chunk
+      first: ($) => seq("FUNCTION", ${signatureChunk}),
+      second: ($) => seq(${signatureChunk}, $.tail),
+    });`,
+    `export default ({kw}) => ({first: ($) => seq("FUNCTION",
+      // oxlint-disable-next-line rule-to-test/shared-field-chunk
+      ${signatureChunk}), second: ($) => seq(${signatureChunk}, $.tail)});`,
+    `export default ({kw}) => ({__signature: ($) => seq(${signatureChunk}), first: ($) => seq("FUNCTION", $.__signature, $.a), second: ($) => seq($.__signature, $.b)});`,
+  ],
+  invalid: [
+    {
+      name: "FUNCTION definition and forward signature regression",
+      code: fieldChunkRules(
+        `seq(kw("FUNCTION"), ${signatureChunk}, $.body)`,
+        `seq(${signatureChunk}, optional($.tail))`,
+      ),
+      errors: [fieldChunkError],
+    },
+    {
+      name: "different surrounding tokens do not enter the chunk",
+      code: fieldChunkRules(
+        `seq("BEFORE", ${signatureChunk}, "AFTER")`,
+        `seq("OTHER", ${signatureChunk}, "END")`,
+      ),
+      errors: [fieldChunkError],
+    },
+    {
+      name: "core grammar maps",
+      code: `export default grammar({rules: {first: ($) => seq("FUNCTION", ${signatureChunk}), second: ($) => seq(${signatureChunk}, $.tail)}});`,
+      errors: [fieldChunkError],
+    },
+    {
+      name: "formatting and comments are ignored",
+      code: fieldChunkRules(
+        `seq("FUNCTION", ${signatureChunk})`,
+        'seq(field("name", $._routine_name), /* marker */ optional(kw("RETURNS", { offset: 5 })), $.__type, $.tail)',
+      ),
+      errors: [fieldChunkError],
     },
   ],
 });
