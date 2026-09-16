@@ -1,0 +1,31 @@
+================================================================================
+EXTENT - size alternatives retain their parameter fields
+================================================================================
+
+FUNCTION Sized RETURNS INTEGER (INPUT a AS INTEGER EXTENT 3, INPUT b AS INTEGER EXTENT ?, INPUT c AS INTEGER EXTENT {&N}, INPUT d AS INTEGER EXTENT limitCount) FORWARD.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (function_forward_definition
+    name: (identifier)
+    type: (identifier)
+    (parameters
+      (parameter
+        name: (identifier)
+        type: (identifier)
+        size: (number_literal))
+      (parameter
+        name: (identifier)
+        type: (identifier)
+        size: (null_literal))
+      (parameter
+        name: (identifier)
+        type: (identifier)
+        size: (preprocessor_name
+          (identifier)))
+      (parameter
+        name: (identifier)
+        type: (identifier)
+        size: (identifier)))
+    (forward)))

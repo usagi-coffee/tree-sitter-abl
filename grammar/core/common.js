@@ -551,6 +551,11 @@ export default ({ kw }) => ({
       alias(kw("SCROLLBAR-HORIZONTAL"), $.scrollbar_horizontal),
       alias(kw("SCROLLBAR-VERTICAL"), $.scrollbar_vertical),
     ),
-  _extent_size: ($) => choice($.number_literal, $.preprocessor_name, $.identifier, $.null_literal),
-  _extent_phrase: ($) => seq(kw("EXTENT"), optional(field("size", $._extent_size))),
+  _extent_phrase: ($) =>
+    seq(
+      kw("EXTENT"),
+      optional(
+        field("size", choice($.number_literal, $.preprocessor_name, $.identifier, $.null_literal)),
+      ),
+    ),
 });
