@@ -186,9 +186,7 @@ export default ({ kw }) => ({
       optional($.size_phrase),
     ),
   __format_radio_set_buttons: ($) =>
-    seq($.__format_radio_set_pair, optional($.__format_radio_set_buttons_tail)),
-  // oxlint-disable-next-line tree-sitter-optimize/recursive-tail-reuse
-  __format_radio_set_buttons_tail: ($) => seq(",", $.__format_radio_set_buttons),
+    seq($.__format_radio_set_pair, optional(seq(",", $.__format_radio_set_buttons))),
   __format_radio_set_pair: ($) =>
     seq(
       field("label", $.__format_radio_set_value),
