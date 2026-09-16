@@ -572,24 +572,6 @@ export default grammar({
       __unary_sign: ($) => choice("+", "-"),
       _not_keyword: ($) => kw("NOT"),
       binary_expression: ($) => binary_expression($, $._expression, $._comparison_operator),
-      // LIST-ITEMS keeps adjacent signed numbers as literal leaves. Their binary
-      // continuations need a separate left operand so ordinary expression lexing
-      // can keep treating signs as unary operators.
-      _list_item_expression: ($) =>
-        choice(
-          alias($._signed_number_literal, $.number_literal),
-          alias($.__list_item_binary_expression, $.binary_expression),
-          $._expression,
-        ),
-      // oxlint-disable-next-line tree-sitter-optimize/choice-subset, tree-sitter-optimize/single-use-choice
-      __list_item_signed_left: ($) =>
-        choice(
-          alias($._signed_number_literal, $.number_literal),
-          alias($.__list_item_binary_expression, $.binary_expression),
-        ),
-      __list_item_binary_expression: ($) =>
-        binary_expression($, $.__list_item_signed_left, $._comparison_operator, $._expression),
-
       // _statement_expression excludes `=` from comparison operators to disambiguate
       // assignment vs equality at the statement level. Without this, `x = 5.` could
       // parse as either assignment_statement or expression_statement (equality check).
@@ -896,11 +878,11 @@ function escape_regex(value) {
   return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
-function binary_expression($, expression, comparison_operator, right_expression = expression) {
+function binary_expression($, expression, comparison_operator) {
   return choice(
-    prec.left("multiplication", seq(expression, $.__multiplicative_operator, right_expression)),
-    prec.left("add", seq(expression, $.__additive_operator, right_expression)),
-    prec.left("compare", seq(expression, comparison_operator, right_expression)),
-    prec.left("logical", seq(expression, $._logical_operator, right_expression)),
+    prec.left("multiplication", seq(expression, $.__multiplicative_operator, expression)),
+    prec.left("add", seq(expression, $.__additive_operator, expression)),
+    prec.left("compare", seq(expression, comparison_operator, expression)),
+    prec.left("logical", seq(expression, $._logical_operator, expression)),
   );
 }

@@ -74,7 +74,8 @@ DEFINE VARIABLE s AS CHARACTER VIEW-AS COMBO-BOX LIST-ITEMS "only" DROP-DOWN-LIS
     type: (identifier)
     (view_as_phrase
       (combo_box_phrase
-        items: (number_literal)
+        items: (unary_expression
+          (number_literal))
         items: (number_literal)
         items: (number_literal)
         (sort)))

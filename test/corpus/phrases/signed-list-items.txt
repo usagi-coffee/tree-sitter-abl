@@ -1,5 +1,5 @@
 ================================================================================
-LIST-ITEMS - signed literal leaves and expression boundaries
+LIST-ITEMS - unary signs and expression boundaries
 ================================================================================
 
 DEFINE VARIABLE n AS DECIMAL VIEW-AS COMBO-BOX LIST-ITEMS
@@ -14,17 +14,23 @@ x = -1 + 2.
     type: (identifier)
     (view_as_phrase
       (combo_box_phrase
-        items: (number_literal)
-        items: (number_literal)
-        items: (number_literal)
-        items: (number_literal)
+        items: (unary_expression
+          (number_literal))
+        items: (unary_expression
+          (number_literal))
+        items: (unary_expression
+          (number_literal))
+        items: (unary_expression
+          (number_literal))
         items: (binary_expression
           (binary_expression
-            (number_literal)
+            (unary_expression
+              (number_literal))
             (number_literal))
           (number_literal))
         items: (binary_expression
-          (number_literal)
+          (unary_expression
+            (number_literal))
           (binary_expression
             (number_literal)
             (number_literal)))
@@ -41,7 +47,8 @@ x = -1 + 2.
             (number_literal)))
         items: (binary_expression
           (binary_expression
-            (number_literal)
+            (unary_expression
+              (number_literal))
             (number_literal))
           (identifier)))))
   (assignment_statement
@@ -53,7 +60,7 @@ x = -1 + 2.
       (number_literal))))
 
 ================================================================================
-SELECTION-LIST - signed literal values
+SELECTION-LIST - unary signed values
 ================================================================================
 
 DEFINE VARIABLE n AS DECIMAL VIEW-AS SELECTION-LIST LIST-ITEMS -1.5, +2.5 SIZE 12 BY 3.
@@ -66,8 +73,10 @@ DEFINE VARIABLE n AS DECIMAL VIEW-AS SELECTION-LIST LIST-ITEMS -1.5, +2.5 SIZE 1
     type: (identifier)
     (view_as_phrase
       (selection_list_phrase
-        items: (number_literal)
-        items: (number_literal)
+        items: (unary_expression
+          (number_literal))
+        items: (unary_expression
+          (number_literal))
         (size_phrase
           width: (number_literal)
           height: (number_literal))))))
