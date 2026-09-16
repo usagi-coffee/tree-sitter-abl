@@ -1,0 +1,32 @@
+================================================================================
+ON action continuations - labels, return values, and omitted tails
+================================================================================
+
+DO ON ENDKEY UNDO outer, RETRY outer: END.
+DO ON QUIT UNDO, RETURN 7: END.
+DO ON STOP UNDO, LEAVE outer: END.
+DO ON ENDKEY UNDO: END.
+DO ON QUIT: END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (do_statement
+    (on_endkey_phrase
+      undo_label: (identifier)
+      retry_label: (identifier))
+    (body))
+  (do_statement
+    (on_quit_phrase
+      return_value: (number_literal))
+    (body))
+  (do_statement
+    (on_stop_phrase
+      leave_label: (identifier))
+    (body))
+  (do_statement
+    (on_endkey_phrase)
+    (body))
+  (do_statement
+    (on_quit_phrase)
+    (body)))

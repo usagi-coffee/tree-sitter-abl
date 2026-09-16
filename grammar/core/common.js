@@ -499,6 +499,7 @@ export default ({ kw }) => ({
       alias(kw("EXCLUSIVE-LOCK"), $.exclusive_lock),
       alias(kw("NO-LOCK"), $.no_lock),
     ),
+  _on_action_tail: ($) => seq(",", $._on_phrase_action),
   _on_phrase_action: ($) => choice($._undo_lnr_target, $._on_phrase_return),
   _undo_lnr_target: ($) =>
     choice(

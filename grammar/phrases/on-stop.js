@@ -5,7 +5,6 @@ export default ({ kw }) => ({
       kw("STOP"),
       kw("UNDO"),
       optional(field("undo_label", $.identifier)),
-      ",",
-      $._on_phrase_action,
+      $._on_action_tail,
     ),
 });
