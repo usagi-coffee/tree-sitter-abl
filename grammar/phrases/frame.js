@@ -60,13 +60,9 @@ export default ({ kw }) => ({
       ),
       alias(seq(kw("VIEW-AS"), field("widget", kw("DIALOG-BOX"))), $.view_as_phrase),
       $.down,
-      $.__frame_skip_phrase,
-    ),
-
-  // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
-  __frame_skip_phrase: ($) =>
-    prec.left(
-      seq(kw("SKIP"), optional(field("skip", seq($._parenthesized_expression_prefix, ")")))),
+      prec.left(
+        seq(kw("SKIP"), optional(field("skip", seq($._parenthesized_expression_prefix, ")")))),
+      ),
     ),
 
   __frame_title_options: ($) =>
