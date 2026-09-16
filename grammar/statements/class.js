@@ -127,8 +127,10 @@ export default ({ kw }) => ({
 
   _method_parameters: ($) => seq("(", optional($.__class_method_parameter_head), ")"),
   __class_method_parameter_head: ($) =>
-    seq(alias($.__class_method_parameter, $.parameter), optional($.__class_method_parameter_tail)),
-  __class_method_parameter_tail: ($) => seq(",", $.__class_method_parameter_head),
+    seq(
+      alias($.__class_method_parameter, $.parameter),
+      optional(seq(",", $.__class_method_parameter_head)),
+    ),
 
   __class_method_parameter: ($) =>
     seq(
