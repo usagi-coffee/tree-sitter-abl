@@ -74,22 +74,13 @@ export default ({ kw }) => ({
       optional(seq(",", $.__function_parameter_list)),
     ),
   __function_definition_parameters: ($) =>
+    seq("(", optional($.__function_definition_parameter_head), ")"),
+  __function_definition_parameter_head: ($) =>
     seq(
-      "(",
-      optional(
-        seq(
-          alias($.__function_definition_parameter, $.parameter),
-          optional($.__function_definition_parameter_tail),
-        ),
-      ),
-      ")",
-    ),
-  __function_definition_parameter_tail: ($) =>
-    seq(
-      ",",
       alias($.__function_definition_parameter, $.parameter),
       optional($.__function_definition_parameter_tail),
     ),
+  __function_definition_parameter_tail: ($) => seq(",", $.__function_definition_parameter_head),
   __function_parameter: ($) =>
     seq(
       optional(field("direction", $._parameter_direction)),
