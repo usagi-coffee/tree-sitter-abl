@@ -694,10 +694,12 @@ export default grammar({
 
       // Callables
       arguments: ($) => seq($.__arguments_prefix, ")"),
-      // oxlint-disable-next-line tree-sitter-optimize/single-use-sequence
+      // oxlint-disable-next-line tree-sitter-optimize/single-use-sequence, tree-sitter-optimize/non-empty-tail-extraction
       __arguments_prefix: ($) => seq("(", optional($.argument), optional($.__arguments_comma_tail)),
       // COM calls use empty comma-delimited slots for omitted positional arguments.
+      // oxlint-disable-next-line tree-sitter-optimize/tail-extraction
       __arguments_comma_tail: ($) =>
+        // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
         seq(",", optional($.argument), optional($.__arguments_comma_tail)),
       argument: ($) =>
         seq(
