@@ -1,5 +1,4 @@
 export default ({ kw }) => ({
-  __class_type: ($) => seq(optional(kw("CLASS")), field("type", $._type_or_string)),
   class_definition: ($) => seq($.__class_prefix, $._terminator),
 
   // oxlint-disable-next-line tree-sitter-optimize/single-use-keyword-sequence
@@ -279,7 +278,7 @@ export default ({ kw }) => ({
       alias(kw("FINAL"), $.final_modifier),
     ),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-keyword-sequence, tree-sitter-optimize/single-use-sequence
-  __class_property_type_phrase: ($) => seq(optional($._as_keyword), $.__class_type),
+  __class_property_type_phrase: ($) => seq(optional($._as_keyword), $._class_type),
   __class_implements_tail: ($) =>
     seq(",", field("interface", $._type_name), optional($.__class_implements_tail)),
 
@@ -299,7 +298,7 @@ export default ({ kw }) => ({
   _method_return_type: ($) =>
     choice(
       field("type", alias(kw("VOID"), $.identifier)),
-      seq($.__class_type, optional($.__class_method_return_extent_phrase)),
+      seq($._class_type, optional($.__class_method_return_extent_phrase)),
     ),
   // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
   __class_method_return_extent_phrase: ($) =>
@@ -311,7 +310,7 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __class_method_variable_type_phrase: ($) =>
     choice(
-      seq($._as_keyword, $.__class_type, optional($.__class_method_extent_phrase)),
+      seq($._as_keyword, $._class_type, optional($.__class_method_extent_phrase)),
       seq(
         $._like_keyword,
         field("like", $._identifier_or_qualified_name),

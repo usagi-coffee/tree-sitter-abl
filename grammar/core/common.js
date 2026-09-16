@@ -9,6 +9,7 @@ export default ({ kw }) => ({
       optional($.frame_phrase),
     ),
   _alignment: ($) => choice(kw("COLON-ALIGNED"), kw("LEFT-ALIGNED"), kw("RIGHT-ALIGNED")),
+  _class_type: ($) => seq(optional(kw("CLASS")), field("type", $._type_or_string)),
   _as_like: ($) =>
     choice(
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence

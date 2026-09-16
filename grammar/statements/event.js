@@ -19,8 +19,7 @@ export default ({ kw }) => ({
       optional(field("direction", $._parameter_direction)),
       field("name", $.identifier),
       $._as_keyword,
-      optional(kw("CLASS")),
-      field("type", $._type_or_string),
+      $._class_type,
     ),
   // oxlint-disable-next-line tree-sitter-optimize/body-extraction, tree-sitter-optimize/single-use-choice
   __event_modifier: ($) =>
