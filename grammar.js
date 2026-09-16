@@ -678,6 +678,7 @@ export default grammar({
       _array_initializer_prefix: ($) => seq("[", optional($._expressions)),
 
       array_access: ($) => seq($.__array_access_prefix, "]"),
+      // oxlint-disable-next-line tree-sitter-optimize/single-use-field-choice-sequence
       __array_access_prefix: ($) =>
         seq(
           field("array", choice($._identifier_or_qualified_name, $.object_access, $.scoped_name)),
