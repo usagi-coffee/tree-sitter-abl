@@ -33,6 +33,7 @@ export default ({ kw }) => ({
   __run_stored_procedure_params_prefix: ($) =>
     seq(
       "(",
+      // oxlint-disable-next-line tree-sitter-optimize/optional-list-head-extraction
       optional(seq($.__run_stored_procedure_param, optional($.__run_stored_procedure_param_tail))),
     ),
 
