@@ -1,12 +1,12 @@
 export default ({ kw }) => ({
+  __function_signature: ($) =>
+    seq(field("name", $._routine_name), optional(kw("RETURNS", { offset: 5 })), $.__function_type),
   function_definition: ($) => seq($.__function_prefix, $._terminator),
 
   __function_prefix: ($) =>
     seq(
       kw("FUNCTION"),
-      field("name", $._routine_name),
-      optional(kw("RETURNS", { offset: 5 })),
-      $.__function_type,
+      $.__function_signature,
       optional($.__function_extent_phrase),
       optional($.__function_access_parameters_tail),
       $.__function_compound_body,
@@ -36,13 +36,7 @@ export default ({ kw }) => ({
       seq(kw("FUNCTION"), seq($.__function_forward_head, $.__function_forward_target)),
     ),
 
-  __function_forward_head: ($) =>
-    seq(
-      field("name", $._routine_name),
-      optional(kw("RETURNS", { offset: 5 })),
-      $.__function_type,
-      optional($.__function_forward_tail),
-    ),
+  __function_forward_head: ($) => seq($.__function_signature, optional($.__function_forward_tail)),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __function_forward_tail: ($) =>
     choice(

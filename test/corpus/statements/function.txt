@@ -1111,3 +1111,33 @@ y = DYNAMIC-FUNCTION(ENTRY(2,p,"|") IN WIDGET-HANDLE(ENTRY(1,p,"|")), s).
                       name: (string_literal))))))))
         (argument
           name: (identifier))))))
+
+================================================================================
+FUNCTION - shared signature preserves forward and definition tails
+================================================================================
+
+FUNCTION calculate RETURN INTEGER (INPUT amount AS INTEGER) FORWARD.
+FUNCTION calculate RETURNS INTEGER (INPUT amount AS INTEGER):
+  RETURN amount.
+END FUNCTION.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (function_forward_definition
+    name: (identifier)
+    type: (identifier)
+    (parameters
+      (parameter
+        name: (identifier)
+        type: (identifier)))
+    (forward))
+  (function_definition
+    name: (identifier)
+    type: (identifier)
+    (parameters
+      (parameter
+        name: (identifier)
+        type: (identifier)))
+    (return_statement
+      value: (identifier))))
