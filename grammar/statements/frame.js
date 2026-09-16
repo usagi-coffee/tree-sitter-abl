@@ -79,6 +79,7 @@ export default ({ kw }) => ({
         optional(
           // oxlint-disable-next-line tree-sitter-optimize/recurse
           repeat1(
+            // oxlint-disable-next-line tree-sitter-optimize/alternative-extraction
             choice(
               $.at_phrase,
               // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
@@ -93,6 +94,7 @@ export default ({ kw }) => ({
         optional(
           // oxlint-disable-next-line tree-sitter-optimize/recurse
           repeat1(
+            // oxlint-disable-next-line tree-sitter-optimize/alternative-extraction
             choice(
               $.at_phrase,
               // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
