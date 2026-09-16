@@ -186,12 +186,11 @@ export default ({ kw }) => ({
       optional($.size_phrase),
     ),
   __format_radio_set_buttons: ($) =>
-    seq($.__format_radio_set_pair, optional(seq(",", $.__format_radio_set_buttons))),
-  __format_radio_set_pair: ($) =>
     seq(
       field("label", $.__format_radio_set_value),
       ",",
       field("value", $.__format_radio_set_value),
+      optional(seq(",", $.__format_radio_set_buttons)),
     ),
   __format_radio_set_value: ($) =>
     choice(
