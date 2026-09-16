@@ -125,23 +125,10 @@ export default ({ kw }) => ({
       alias($.__class_destructor_body, $.body),
     ),
 
-  _method_parameters: ($) =>
-    seq(
-      "(",
-      optional(
-        seq(
-          alias($.__class_method_parameter, $.parameter),
-          optional($.__class_method_parameter_tail),
-        ),
-      ),
-      ")",
-    ),
-  __class_method_parameter_tail: ($) =>
-    seq(
-      ",",
-      alias($.__class_method_parameter, $.parameter),
-      optional($.__class_method_parameter_tail),
-    ),
+  _method_parameters: ($) => seq("(", optional($.__class_method_parameter_head), ")"),
+  __class_method_parameter_head: ($) =>
+    seq(alias($.__class_method_parameter, $.parameter), optional($.__class_method_parameter_tail)),
+  __class_method_parameter_tail: ($) => seq(",", $.__class_method_parameter_head),
 
   __class_method_parameter: ($) =>
     seq(
