@@ -27,7 +27,7 @@ Use this skill to run a measured parser-cost reduction pass on a tree-sitter gra
 8. On slow grammars, remember the last accepted checkpoint counts and avoid re-measuring immediately after a pure revert.
 9. Run the normal test workflow after the kept changes.
 10. Always note every state change between runs.
-   Record the previous accepted state, the new observed state, and what change caused the transition so the next run starts from an explicit checkpoint.
+    Record the previous accepted state, the new observed state, and what change caused the transition so the next run starts from an explicit checkpoint.
 
 ## Before Edit Mental Checklist
 
@@ -94,7 +94,6 @@ perl -ne 'if (/^#define (STATE_COUNT|LARGE_STATE_COUNT) \d+/) { print } while (/
 
 Treat the extracted output as the baseline and comparison source for optimization passes.
 
-
 ## Validation
 
 - Re-run the parser generation command after every optimization step.
@@ -107,7 +106,11 @@ Treat the extracted output as the baseline and comparison source for optimizatio
 
 ## Optimization technique catalog
 
-The following techniques are a common starting points, not the full set of allowed optimizations.
+The following techniques are common starting points, not the full set of allowed optimizations.
+
+Extraction is not always the winning direction. Also look for helpers that add an unnecessary
+nonterminal boundary, exact structures that should reuse an existing helper, and recursive list
+bodies that have been expanded at one of their call sites.
 
 ### Chunk Extraction
 
@@ -133,20 +136,10 @@ Prefer:
 
 ```js
 type_definition: ($) =>
-  seq(
-    $._type_definition_type,
-    $._type_definition_declarators,
-    repeat($.attribute_specifier),
-    ";",
-  );
+  seq($._type_definition_type, $._type_definition_declarators, repeat($.attribute_specifier), ";");
 _type_definition_type: ($) =>
-  seq(
-    repeat($.type_qualifier),
-    field("type", $._type_specifier),
-    repeat($.type_qualifier),
-  );
-_type_definition_declarators: ($) =>
-  commaSep1(field("declarator", $._type_declarator));
+  seq(repeat($.type_qualifier), field("type", $._type_specifier), repeat($.type_qualifier));
+_type_definition_declarators: ($) => commaSep1(field("declarator", $._type_declarator));
 ```
 
 Use it when the extracted pieces are real semantic chunks, not arbitrary slices.
@@ -299,10 +292,7 @@ Do not extract a helper like `seq(optional(...), repeat(...))` if that helper ca
 Example:
 
 ```js
-choice(
-  seq("A", optional($.x), repeat($.y)),
-  seq("B", optional($.x), repeat($.y)),
-);
+choice(seq("A", optional($.x), repeat($.y)), seq("B", optional($.x), repeat($.y)));
 ```
 
 Prefer:
@@ -352,6 +342,32 @@ __ordered_tail_after_target: ($) =>
 
 Use it when the repeated suffix is real and the non-empty reformulation preserves the same tree shape and accepted syntax.
 
+### Right-Recursive Repetition
+
+Try replacing `repeat1(body)` in a hidden rule with an explicit non-empty right-recursive sequence when the repeated body is a parser-cost hotspot.
+
+Example:
+
+```js
+__scoped_name_tail: ($) =>
+  repeat1(
+    seq($._namedoublecolon, field("right", alias($._identifier_immediate, $.identifier))),
+  ),
+```
+
+Prefer:
+
+```js
+__scoped_name_tail: ($) =>
+  seq(
+    $._namedoublecolon,
+    field("right", alias($._identifier_immediate, $.identifier)),
+    optional($.__scoped_name_tail),
+  ),
+```
+
+This accepts the same one-or-more sequence while making the recursion explicit, which can reduce parser states or actions for some repeated bodies. Keep the recursive rule hidden so it does not introduce nested visible nodes.
+
 ### Token Packing
 
 Use when a generic tail consumes many punctuation or operator branches as undifferentiated items.
@@ -396,6 +412,152 @@ stmt_b: ($) => seq($.__stmt_prefix, "QUERY_TIMEOUT", $.value),
 
 Use it when the family is local and repeated enough to matter.
 
+### Remove Pure Forwarding Helpers
+
+Use when a private helper only forwards to a symbol or adds one field:
+
+```js
+__value: ($) => $._expression,
+__name: ($) => field("name", $.identifier),
+root: ($) => seq($.__value, $.__name),
+```
+
+Try:
+
+```js
+root: ($) => seq($._expression, field("name", $.identifier)),
+```
+
+The field form may wrap a small `choice(...)` as long as its scope and alternative order remain
+exact. Before removal, check cross-file uses and `inline`, `supertypes`, `conflicts`, and
+`precedences`. Do not substitute through lexical rules or aliases whose identity would change.
+
+### Inline Single-Use Private Structures
+
+Measure inlining a helper with one local, unaliased use when its body is a small:
+
+- `seq(...)` or `choice(...)`;
+- sequence containing a field-wrapped choice or symbol alias;
+- keyword-led sequence;
+- sequence ending in an optional compound suffix; or
+- statically precedence-wrapped clause.
+
+```js
+__in_clause: ($) => prec.right(seq("IN", field("table", $.identifier))),
+item: ($) => seq($.value, optional($.__in_clause)),
+```
+
+Try:
+
+```js
+item: ($) =>
+  seq(
+    $.value,
+    optional(prec.right(seq("IN", field("table", $.identifier)))),
+  ),
+```
+
+Move the complete body, including every precedence wrapper. Preserve fields, aliases, choice order,
+and optionality. Do not inline recursive helpers, metadata entries, externally used helpers, or
+helpers used inside `token(...)` or `token.immediate(...)`.
+
+This is the inverse of extraction; measure both directions.
+
+### Reuse Existing Sequence and Choice Helpers
+
+Use when an existing hidden helper exactly matches a consecutive part of a larger structure:
+
+```js
+__target: ($) => seq("IN", field("table", $.identifier)),
+copy: ($) => seq("COPY", "FROM", "IN", field("table", $.identifier)),
+```
+
+Try:
+
+```js
+__target: ($) => seq("IN", field("table", $.identifier)),
+copy: ($) => seq("COPY", "FROM", $.__target),
+```
+
+Apply the same technique when an existing hidden `choice(...)` matches consecutive alternatives in
+a larger choice. Exact matching includes fields, aliases, keyword options, regexes, order,
+optionality, and precedence.
+
+Also reuse an existing helper for an identical static keyword call. If it is private to another
+module, promote it only to the narrowest genuinely shared scope.
+
+### Share Identical Structured Fragments
+
+Extract one hidden helper when separate rules repeat the exact same:
+
+- non-nullable `choice(...)`;
+- keyword-led or field-led sequence;
+- optional keyword followed by a required field;
+- non-trivial `repeat(...)` or `repeat1(...)`; or
+- hidden recursive list shape.
+
+```js
+first: ($) => seq(optional(kw("CLASS")), field("type", $.type), $.left),
+second: ($) => seq("AS", optional(kw("CLASS")), field("type", $.type), $.right),
+```
+
+Try:
+
+```js
+__modified_type: ($) => seq(optional(kw("CLASS")), field("type", $.type)),
+first: ($) => seq($.__modified_type, $.left),
+second: ($) => seq("AS", $.__modified_type, $.right),
+```
+
+Keep statement-specific wrappers and outer optionality at their call sites. Do not merge merely
+similar fragments or broaden the helper to accept syntax that either original site rejected.
+
+### Share or Promote Repeated Aliases
+
+When the same nonterminal is repeatedly aliased to the same visible node, share the exact alias:
+
+```js
+__extent: ($) => alias($._extent_phrase, $.extent_phrase),
+first: ($) => seq("A", $.__extent),
+second: ($) => seq("B", optional($.__extent)),
+```
+
+This applies to repeated phrase, statement, expression, and item aliases when the source is a
+nonterminal. Keep fields, precedence, and outer optionality at each call site.
+
+When a private rule is used only through one named alias, measure promoting its body instead:
+
+```js
+parameters: ($) => seq("(", optional($.items), ")"),
+root: ($) => $.parameters,
+```
+
+Only promote when there are no unaliased uses, conflicting aliases, name collisions, external
+references, or metadata dependencies.
+
+### Reuse Recursive List Bodies
+
+When a recursive comma tail repeats the head's item and continuation:
+
+```js
+items: ($) => seq("(", $.item, optional($.__item_tail), ")"),
+__item_tail: ($) => seq(",", $.item, optional($.__item_tail)),
+```
+
+Extract one non-empty head:
+
+```js
+items: ($) => seq("(", $.__item_head, ")"),
+__item_head: ($) => seq($.item, optional($.__item_tail)),
+__item_tail: ($) => seq(",", $.__item_head),
+```
+
+Use the same technique for an optional list head or a tail that repeats an existing hidden head.
+When another rule expands a recursive helper's complete body, reuse that helper directly.
+
+Keep separators and full precedence chains intact. Never extract a nullable head; preserve fields,
+aliases, item order, separator optionality, and conflicts.
+
 ### Avoid Broad Dispatcher Grouping
 
 Do not assume grouping top-level statements into `_create_statement`, `_drop_statement`, or similar buckets will help.
@@ -406,11 +568,7 @@ Example:
 
 ```js
 _sql_statement: ($) =>
-  choice(
-    $._sql_create_statement,
-    $._sql_drop_statement,
-    $._sql_alter_statement,
-  );
+  choice($._sql_create_statement, $._sql_drop_statement, $._sql_alter_statement);
 ```
 
 This may look cleaner, but it can still increase parser cost. Prefer testing local sharing inside the SQL rules first.
