@@ -9,8 +9,7 @@ export default ({ kw }) => ({
       field("buffer", $._expression),
       ",",
       $._position_length,
-      ")",
-      $._equals_value,
+      $._close_equals_value,
     ),
 
   // oxlint-disable-next-line tree-sitter-optimize/body-extraction
