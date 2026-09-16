@@ -29,6 +29,7 @@ export default ({ kw }) => ({
     choice(seq($.__query_fields_list, optional($.__query_except_list)), $.__query_except_list),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-keyword-sequence
   __query_fields_list: ($) => seq(kw("FIELDS", { offset: 5 }), $.__query_field_names_prefix, ")"),
+  // oxlint-disable-next-line tree-sitter-optimize/tail-extraction
   __query_except_list: ($) => seq(kw("EXCEPT"), $.__query_field_names_prefix, ")"),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-sequence
   __query_field_names_prefix: ($) => seq("(", optional($._field_names)),
