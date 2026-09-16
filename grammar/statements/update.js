@@ -4,13 +4,7 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/single-use-choice-sequence
   __update_prefix: ($) => seq(kw("UPDATE"), choice($.__update_record_body, $.__update_fields_body)),
 
-  __update_record_body: ($) =>
-    // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
-    seq(
-      field("record", $._identifier_or_qualified_name),
-      optional($._except_fields),
-      optional($.frame_phrase),
-    ),
+  __update_record_body: ($) => $._set_update_record_body,
 
   __update_fields_body: ($) =>
     // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction

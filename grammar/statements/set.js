@@ -59,11 +59,5 @@ export default ({ kw }) => ({
     ),
   __set_fields: ($) => prec.right(seq(alias($.__set_field, $.field), optional($.__set_fields))),
 
-  __set_record_body: ($) =>
-    // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
-    seq(
-      field("record", $._identifier_or_qualified_name),
-      optional($._except_fields),
-      optional($.frame_phrase),
-    ),
+  __set_record_body: ($) => $._set_update_record_body,
 });

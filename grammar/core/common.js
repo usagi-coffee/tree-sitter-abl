@@ -1,6 +1,13 @@
 // Non-core statement-specific shared rules
 
 export default ({ kw }) => ({
+  _set_update_record_body: ($) =>
+    // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
+    seq(
+      field("record", $._identifier_or_qualified_name),
+      optional($._except_fields),
+      optional($.frame_phrase),
+    ),
   _alignment: ($) => choice(kw("COLON-ALIGNED"), kw("LEFT-ALIGNED"), kw("RIGHT-ALIGNED")),
   _as_like: ($) =>
     choice(

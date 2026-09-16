@@ -1,0 +1,51 @@
+================================================================================
+SET and UPDATE - shared record body preserves field precedence
+================================================================================
+
+SET Customer WITH FRAME f.
+UPDATE Customer WITH FRAME f.
+SET Customer EXCEPT Name WITH FRAME f.
+UPDATE Customer EXCEPT Name WITH FRAME f.
+UPDATE foo NO-ERROR.
+SET foo = getValue().
+UPDATE foo = getValue().
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (set_statement
+    (field
+      field: (identifier))
+    (frame_phrase
+      frame: (identifier)))
+  (update_statement
+    (field
+      field: (identifier))
+    (frame_phrase
+      frame: (identifier)))
+  (set_statement
+    record: (identifier)
+    except: (identifier)
+    (frame_phrase
+      frame: (identifier)))
+  (update_statement
+    record: (identifier)
+    except: (identifier)
+    (frame_phrase
+      frame: (identifier)))
+  (update_statement
+    (field
+      field: (identifier))
+    (no_error))
+  (set_statement
+    (field
+      field: (identifier)
+      value: (function_call
+        function: (identifier)
+        (arguments))))
+  (update_statement
+    (field
+      field: (identifier)
+      value: (function_call
+        function: (identifier)
+        (arguments)))))
