@@ -49,7 +49,7 @@ export default ({ kw }) => ({
       optional($.__persistent_trigger_tail),
       optional($._terminator_dot),
     ),
-  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice, tree-sitter-optimize/single-use-field-choice
   __persistent_trigger_procedure: ($) =>
     choice($._identifier_or_qualified_name, $.string_literal, $._aliased_value_expression),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
