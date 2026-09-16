@@ -12,7 +12,7 @@ export default ({ kw }) => ({
   _class_type: ($) => seq(optional(kw("CLASS")), field("type", $._type_or_string)),
   _as_like: ($) =>
     choice(
-      // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
+      // oxlint-disable-next-line tree-sitter-optimize/shared-sequence, tree-sitter-optimize/optional-modifier-field, tree-sitter-optimize/sequence-subset
       seq($._as_keyword, optional(kw("CLASS")), field("type", $._type_or_string)),
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
       seq($._like_keyword, field("like", $._identifier_or_qualified_name)),
