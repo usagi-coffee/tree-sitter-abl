@@ -1,6 +1,7 @@
 import { RuleTester } from "oxlint/plugins-dev";
 
 import {
+  sharedCommaField,
   closingDelimiterWrapper,
   singleUseDelimitedSequence,
   orderedOptionalChain,
@@ -3820,5 +3821,94 @@ new RuleTester().run("closing-delimiter-wrapper", closingDelimiterWrapper, {
     },
   ],
 });
+
+const commaFieldSeed = `export default () => ({first: ($) => seq($.position, optional(seq(",", field("length", $._expression))))});`;
+const commaFieldTarget = `export default () => ({second: ($) => seq(",", field("length", $._expression), optional($.type))});`;
+const commaFieldError = { message: /comma and length field repeat a fragment in first/ };
+const commaSeedCase = { filename: "grammar/core/common.js", code: commaFieldSeed };
+const commaTargetCase = (code) => ({ filename: "grammar/statements/overlay.js", code });
+for (const code of [
+  commaFieldTarget.replace('field("length"', 'field("size"'),
+  commaFieldTarget.replace("$._expression", "$.number_literal"),
+  commaFieldTarget.replace('seq(",",', 'seq(";",'),
+  commaFieldTarget.replace(
+    'field("length", $._expression)',
+    'field("length", optional($._expression))',
+  ),
+  commaFieldTarget.replace('field("length", $._expression)', 'field("length", $["_expression"])'),
+  commaFieldTarget.replace('field("length", $._expression)', 'field("length", makeValue($))'),
+  commaFieldTarget.replace('field("length", $._expression)', 'field("length", ...items)'),
+  commaFieldTarget.replace('field("length", $._expression)', 'field("length", $.__local_value)'),
+  commaFieldTarget.replace(
+    'seq(",", field("length", $._expression), optional($.type))',
+    "seq($._comma_length, optional($.type))",
+  ),
+  commaFieldTarget.replace("export default () => (", "const unrelated = ("),
+  ...["alias", "token", "token.immediate", "prec", "prec.left", "prec.right", "prec.dynamic"].map(
+    (wrapper) =>
+      commaFieldTarget.replace(
+        'seq(",", field("length", $._expression), optional($.type))',
+        `${wrapper}(${wrapper === "prec" ? '\"argument\", ' : wrapper === "prec.dynamic" ? "1, " : ""}seq(",", field("length", $._expression))${wrapper === "alias" ? ", $.argument" : ""})`,
+      ),
+  ),
+  commaFieldTarget.replace(
+    "second:",
+    "\n// oxlint-disable-next-line rule-to-test/shared-comma-field\nsecond:",
+  ),
+]) {
+  resetSharingCandidates();
+  new RuleTester().run("shared-comma-field", sharedCommaField, {
+    valid: [commaSeedCase, commaTargetCase(code)],
+    invalid: [],
+  });
+}
+resetSharingCandidates();
+new RuleTester().run("shared-comma-field", sharedCommaField, {
+  valid: [commaSeedCase],
+  invalid: [{ ...commaTargetCase(commaFieldTarget), errors: [commaFieldError] }],
+});
+resetSharingCandidates();
+new RuleTester().run("shared-comma-field", sharedCommaField, {
+  valid: [],
+  invalid: [
+    {
+      name: "same local map",
+      code: `export default () => ({first: ($) => seq($.position, optional(seq(",", field("length", $._expression)))), second: ($) => seq("OVERLAY", optional(seq(",", field("length", $._expression), optional($.type))))});`,
+      errors: [commaFieldError],
+    },
+  ],
+});
+resetSharingCandidates();
+new RuleTester().run("shared-comma-field", sharedCommaField, {
+  valid: [
+    `const a = grammar({rules: {first: ($) => seq(",", field("length", $._expression))}}); const b = grammar({rules: {second: ($) => seq(",", field("length", $._expression))}});`,
+  ],
+  invalid: [],
+});
+resetSharingCandidates();
+new RuleTester().run("shared-comma-field", sharedCommaField, {
+  valid: [
+    {
+      filename: "grammar/statements/single.js",
+      code: `export default () => ({single: ($) => choice(seq(",", field("length", $._expression)), seq(",", field("length", $._expression), $.other))});`,
+    },
+  ],
+  invalid: [],
+});
+resetSharingCandidates();
+new RuleTester().run("shared-comma-field", sharedCommaField, {
+  valid: [
+    {
+      ...commaSeedCase,
+      code: commaFieldSeed.replace(
+        "first:",
+        "\n// oxlint-disable-next-line rule-to-test/shared-comma-field\nfirst:",
+      ),
+    },
+    commaTargetCase(commaFieldTarget),
+  ],
+  invalid: [],
+});
+resetSharingCandidates();
 
 console.log("✓ Optimizer lint plugin tests passed successfully");
