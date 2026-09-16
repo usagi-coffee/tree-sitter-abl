@@ -52,7 +52,7 @@ export default ({ kw }) => ({
 
   _run_target: ($) =>
     choice(
-      alias($._value_expression, $.value_expression),
+      $._aliased_value_expression,
       alias($.__run_library_member, $.library_member),
       $.procedure_name,
       alias($.__run_procedure_path, $.procedure_name),

@@ -121,3 +121,32 @@ CREATE BUTTON h ASSIGN FONT = 49
         left: (identifier)
         right: (number_literal)))
     (trigger_phrase)))
+
+================================================================================
+TRIGGERS - persistent VALUE procedure retains its expression node
+================================================================================
+
+DEFINE VARIABLE a AS CHARACTER TRIGGERS: ON GO PERSISTENT RUN VALUE(handler) END TRIGGERS.
+DEFINE VARIABLE b AS CHARACTER TRIGGERS: ON GO PERSISTENT RUN VALUE(handler) IN (h) (1, x) END TRIGGERS.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (trigger_phrase
+      event: (identifier)
+      procedure: (value_expression
+        value: (identifier))))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (trigger_phrase
+      event: (identifier)
+      procedure: (value_expression
+        value: (identifier))
+      handle: (parenthesized_expression
+        (identifier))
+      parameters: (number_literal)
+      parameters: (identifier))))
