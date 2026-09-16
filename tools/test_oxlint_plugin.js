@@ -1,6 +1,7 @@
 import { RuleTester } from "oxlint/plugins-dev";
 
 import {
+  sharedExpressionAlias,
   singleUseFieldChoiceSequence,
   optionalListHeadExtraction,
   singleUsePrecedenceClause,
@@ -2521,6 +2522,134 @@ new RuleTester().run("single-use-field-choice-sequence", singleUseFieldChoiceSeq
       errors: [fieldChoiceSequenceError],
     },
   ],
+});
+
+const expressionAlias = "alias($._value_expression, $.value_expression)";
+const expressionAliasRules = (body, definitions = "") =>
+  `export default () => ({ items: ($) => ${body}, ${definitions} });`;
+const expressionAliasError = {
+  message: /alias of _value_expression as value_expression duplicates items/,
+};
+
+resetSharingCandidates();
+new RuleTester().run("shared-expression-alias", sharedExpressionAlias, {
+  valid: [
+    {
+      filename: "grammar/statements/run.js",
+      code: expressionAliasRules(`choice(${expressionAlias}, $.procedure_name)`),
+    },
+  ],
+  invalid: [
+    {
+      name: "RUN and persistent trigger share the same visible expression alias",
+      filename: "grammar/phrases/trigger.js",
+      code: expressionAliasRules(`choice($.identifier, ${expressionAlias})`),
+      errors: [expressionAliasError],
+    },
+  ],
+});
+
+resetSharingCandidates();
+new RuleTester().run("shared-expression-alias", sharedExpressionAlias, {
+  valid: [
+    ...[
+      'alias(kw("FLAG"), $.flag)',
+      "alias($._flag_keyword, $.flag)",
+      "alias($.identifier, $.name)",
+      "alias($.a_statement, $.node)",
+      "alias($.__private_expression, $.value_expression)",
+      "alias($._value_expression, $._hidden)",
+      'alias($._value_expression, "value")',
+      "alias($.value_expression, $.value_expression)",
+      'alias($["_value_expression"], $.value_expression)',
+      `token(${expressionAlias})`,
+      `token.immediate(${expressionAlias})`,
+      `alias(${expressionAlias}, $.outer)`,
+    ].map((body) => expressionAliasRules(`seq(${body}, ${body})`)),
+    ...["token(/value/i)", 'kw("VALUE")', 'token.immediate("VALUE")', "$.identifier"].map((body) =>
+      expressionAliasRules(
+        `seq(${expressionAlias}, ${expressionAlias})`,
+        `_value_expression: ($) => ${body},`,
+      ),
+    ),
+    `const unrelated = {items: ($) => seq(${expressionAlias}, ${expressionAlias})};`,
+  ],
+  invalid: [],
+});
+
+resetSharingCandidates();
+new RuleTester().run("shared-expression-alias", sharedExpressionAlias, {
+  valid: [
+    {
+      filename: "grammar/statements/run.js",
+      code: expressionAliasRules(`choice(
+        // oxlint-disable-next-line rule-to-test/shared-expression-alias
+        ${expressionAlias}, $.other)`),
+    },
+    {
+      filename: "grammar/phrases/trigger.js",
+      code: expressionAliasRules(expressionAlias),
+    },
+  ],
+  invalid: [],
+});
+
+resetSharingCandidates();
+new RuleTester().run("shared-expression-alias", sharedExpressionAlias, {
+  valid: [
+    expressionAliasRules(
+      `choice(${expressionAlias}, alias($._other_expression, $.value_expression), alias($._value_expression, $.different))`,
+    ),
+  ],
+  invalid: [],
+});
+
+resetSharingCandidates();
+new RuleTester().run("shared-expression-alias", sharedExpressionAlias, {
+  valid: [],
+  invalid: [
+    {
+      name: "outer fields and precedence remain at their original call sites",
+      code: expressionAliasRules(
+        `seq(field("procedure", ${expressionAlias}), prec.right(${expressionAlias}))`,
+        '_value_expression: ($) => seq("VALUE", "(", $.value, ")"),',
+      ),
+      errors: [expressionAliasError],
+    },
+  ],
+});
+
+resetSharingCandidates();
+new RuleTester().run("shared-expression-alias", sharedExpressionAlias, {
+  valid: [],
+  invalid: [
+    {
+      name: "public expression rules are supported",
+      code: expressionAliasRules(
+        "seq(alias($.binary_expression, $.value), alias($.binary_expression, $.value))",
+      ),
+      errors: [{ message: /alias of binary_expression as value duplicates items/ }],
+    },
+  ],
+});
+
+resetSharingCandidates();
+new RuleTester().run("shared-expression-alias", sharedExpressionAlias, {
+  valid: [
+    {
+      filename: "grammar.js",
+      code: `export default grammar({rules: { _aliased_value_expression: ($) => ${expressionAlias}, items: ($) => $._aliased_value_expression }});`,
+    },
+    {
+      filename: "grammar/statements/run.js",
+      code: expressionAliasRules("choice($._aliased_value_expression, $.procedure_name)"),
+    },
+    {
+      filename: "grammar/phrases/trigger.js",
+      code: expressionAliasRules('field("procedure", $._aliased_value_expression)'),
+    },
+  ],
+  invalid: [],
 });
 
 console.log("✓ Optimizer lint plugin tests passed successfully");

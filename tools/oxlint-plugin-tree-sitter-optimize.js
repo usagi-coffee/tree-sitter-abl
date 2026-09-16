@@ -998,6 +998,7 @@ const sequenceCandidates = [];
 const keywordCandidates = [];
 const sharedChoices = new Map();
 const sharedStatementAliases = new Map();
+const sharedExpressionAliases = new Map();
 
 export function resetSharingCandidates() {
   repeatedBodies.clear();
@@ -1008,11 +1009,13 @@ export function resetSharingCandidates() {
   keywordCandidates.length = 0;
   sharedChoices.clear();
   sharedStatementAliases.clear();
+  sharedExpressionAliases.clear();
 }
 
-export const sharedStatementAlias = rule((context) => {
+function sharedNamedAliasVisitor(context, expression = false) {
   const properties = [];
   const candidates = [];
+  const aliases = expression ? sharedExpressionAliases : sharedStatementAliases;
   return {
     Property(node) {
       if (isRuleProperty(node)) properties.push(node);
@@ -1021,7 +1024,9 @@ export const sharedStatementAlias = rule((context) => {
       if (callName(node) !== "alias" || node.arguments.length !== 2) return;
       const source = memberName(node.arguments[0]);
       const target = memberName(node.arguments[1]);
-      if (!source?.endsWith("_statement") || source.startsWith("_")) return;
+      if (expression) {
+        if (!source?.endsWith("_expression") || source.startsWith("__")) return;
+      } else if (!source?.endsWith("_statement") || source.startsWith("_")) return;
       if (!target || target.startsWith("_") || source === target) return;
       const owner = enclosingRule(node);
       if (!owner) return;
@@ -1047,9 +1052,9 @@ export const sharedStatementAlias = rule((context) => {
           start: context.sourceCode.getRange(node)[0],
           line: node.loc.start.line,
         };
-        const previous = sharedStatementAliases.get(key);
+        const previous = aliases.get(key);
         if (!previous) {
-          sharedStatementAliases.set(key, candidate);
+          aliases.set(key, candidate);
           continue;
         }
         if (previous.filename === candidate.filename && previous.start === candidate.start)
@@ -1058,13 +1063,23 @@ export const sharedStatementAlias = rule((context) => {
         report(
           context,
           reportNode,
-          "shared-statement-alias",
-          `This alias of ${source} as ${target} duplicates ${previous.rule} in ${location}; try sharing one hidden helper containing the exact alias. Preserve named nodes, fields and precedence; measure parser size and validate trees.`,
+          expression ? "shared-expression-alias" : "shared-statement-alias",
+          `This alias of ${source} as ${target} duplicates ${previous.rule} in ${location}; try sharing one hidden helper containing the exact alias. ${expression ? "Confirm the source is a nonterminal expression and check grammar metadata. " : ""}Preserve named nodes, fields and precedence; measure parser size and validate trees.`,
         );
       }
     },
   };
-}, "Suggest sharing identical named aliases of public statement rules");
+}
+
+export const sharedStatementAlias = rule(
+  (context) => sharedNamedAliasVisitor(context),
+  "Suggest sharing identical named aliases of public statement rules",
+);
+
+export const sharedExpressionAlias = rule(
+  (context) => sharedNamedAliasVisitor(context, true),
+  "Suggest sharing identical named aliases of shared or public expression rules",
+);
 
 function containsAlternatives(outer, inner) {
   return (
@@ -1978,6 +1993,7 @@ const broadDispatcher = rule(
 export default {
   meta: { name: "tree-sitter-optimize" },
   rules: {
+    "shared-expression-alias": sharedExpressionAlias,
     "single-use-field-choice-sequence": singleUseFieldChoiceSequence,
     "optional-list-head-extraction": optionalListHeadExtraction,
     "single-use-precedence-clause": singleUsePrecedenceClause,
