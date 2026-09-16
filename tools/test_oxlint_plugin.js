@@ -1,6 +1,7 @@
 import { RuleTester } from "oxlint/plugins-dev";
 
 import {
+  singleUseDelimitedSequence,
   orderedOptionalChain,
   precedenceListHeadExtraction,
   fieldListHeadExtraction,
@@ -3636,6 +3637,94 @@ new RuleTester().run("ordered-optional-chain", orderedOptionalChain, {
       name: "core grammar",
       code: `export default grammar({rules: {root: ($) => optional(choice(seq($.a, optional(choice($.__tail, $.c))), $.__tail, $.c)), __tail: ($) => seq($.b, optional($.c))}});`,
       errors: [orderedChainError],
+    },
+  ],
+});
+
+const delimitedSequenceGrammar = (
+  body = 'seq("(", field("buffer", $._expression), ",", $._position_length, ")")',
+  use = "$.__args",
+) => `
+export default () => ({
+  root: ($) => seq($.type, ${use}, $.value),
+  __args: ($) => ${body},
+});`;
+const delimitedSequenceError = {
+  message: /__args has one unaliased local use in root; try inlining this delimited sequence/,
+};
+new RuleTester().run("single-use-delimited-sequence", singleUseDelimitedSequence, {
+  valid: [
+    delimitedSequenceGrammar().replaceAll("__args", "public_args"),
+    delimitedSequenceGrammar().replaceAll("__args", "__main_body"),
+    delimitedSequenceGrammar(undefined, "seq($.__args, $.__args)"),
+    delimitedSequenceGrammar(undefined, 'seq($.__args, $["__args"])'),
+    delimitedSequenceGrammar(undefined, '$["__args"]'),
+    delimitedSequenceGrammar(undefined, "alias($.__args, $.arguments)"),
+    delimitedSequenceGrammar(undefined, 'field("arguments", $.__args)'),
+    delimitedSequenceGrammar('seq("(", $.value, ")")'),
+    delimitedSequenceGrammar('seq("(", $.a, $.b, $.c, $.d, $.e, $.f, ")")'),
+    delimitedSequenceGrammar('seq("(", $.a, ",", $.b, "]")'),
+    delimitedSequenceGrammar('seq("START", $.a, ",", $.b, "END")'),
+    delimitedSequenceGrammar('seq("(", "a", ",", "b", ")")'),
+    delimitedSequenceGrammar('seq("(", $.a, ",", $.__args, ")")'),
+    delimitedSequenceGrammar('seq("(", $.a, ",", makeValue($), ")")'),
+    delimitedSequenceGrammar('seq("(", $.a, ...items, ")")'),
+    delimitedSequenceGrammar('prec.right(seq("(", $.a, ",", $.b, ")"))'),
+    delimitedSequenceGrammar('seq("(", alias($.a, $.item), ",", $.b, ")")'),
+    ...["token", "token.immediate", "prec.dynamic"].map((wrapper) =>
+      delimitedSequenceGrammar(
+        undefined,
+        `${wrapper}(${wrapper === "prec.dynamic" ? "1, " : ""}$.__args)`,
+      ),
+    ),
+    `export default grammar({inline: ($) => [$.__args], rules: {root: ($) => $.__args, __args: ($) => seq("(", $.a, ",", $.b, ")")}});`,
+    `export default grammar({precedences: ($) => [[$.__args, $.other]], rules: {root: ($) => $.__args, __args: ($) => seq("(", $.a, ",", $.b, ")")}});`,
+    `const a = grammar({rules: {root: ($) => $.__args}}); const b = grammar({rules: {__args: ($) => seq("(", $.a, ",", $.b, ")")}});`,
+    delimitedSequenceGrammar().replace("export default () => (", "const unrelated = ("),
+    ...["root", "__args"].map((name) =>
+      delimitedSequenceGrammar().replace(
+        `  ${name}:`,
+        `  // oxlint-disable-next-line rule-to-test/single-use-delimited-sequence\n  ${name}:`,
+      ),
+    ),
+  ],
+  invalid: [
+    {
+      name: "PUT assignment arguments regression",
+      code: delimitedSequenceGrammar(),
+      errors: [delimitedSequenceError],
+    },
+    {
+      name: "bracket delimiters",
+      code: delimitedSequenceGrammar('seq("[", $.a, ",", $.b, "]")'),
+      errors: [delimitedSequenceError],
+    },
+    {
+      name: "brace delimiters",
+      code: delimitedSequenceGrammar('seq("{", $.a, ",", $.b, "}")'),
+      errors: [delimitedSequenceError],
+    },
+    {
+      name: "optional field preserved",
+      code: delimitedSequenceGrammar(
+        'seq("(", field("first", $.a), ",", optional(field("second", $.b)), ")")',
+      ),
+      errors: [delimitedSequenceError],
+    },
+    {
+      name: "outer optional retained",
+      code: delimitedSequenceGrammar(undefined, "optional($.__args)"),
+      errors: [delimitedSequenceError],
+    },
+    {
+      name: "call-site precedence retained",
+      code: delimitedSequenceGrammar(undefined, "prec.right($.__args)"),
+      errors: [delimitedSequenceError],
+    },
+    {
+      name: "core grammar",
+      code: `export default grammar({rules: {root: ($) => $.__args, __args: ($) => seq("(", $.a, ",", $.b, ")")}});`,
+      errors: [delimitedSequenceError],
     },
   ],
 });
