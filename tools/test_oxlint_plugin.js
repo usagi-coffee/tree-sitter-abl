@@ -1,6 +1,7 @@
 import { RuleTester } from "oxlint/plugins-dev";
 
 import {
+  sharedFieldBody,
   sharedItemAlias,
   sharedExpressionAlias,
   singleUseFieldChoiceSequence,
@@ -2763,6 +2764,122 @@ new RuleTester().run("shared-item-alias", sharedItemAlias, {
     {
       filename: "grammar/statements/submenu.js",
       code: itemAliasRules("choice($._aliased_menu_item, $.other)"),
+    },
+  ],
+  invalid: [],
+});
+
+const recordBody =
+  'seq(field("record", $._identifier_or_qualified_name), optional($._except_fields), optional($.frame_phrase))';
+const fieldBodyRules = (name, body = recordBody) =>
+  `export default () => ({ ${name}: ($) => ${body} });`;
+const fieldBodyError = { message: /field-led body duplicates __set_record_body/ };
+
+resetSharingCandidates();
+new RuleTester().run("shared-field-body", sharedFieldBody, {
+  valid: [{ filename: "grammar/statements/set.js", code: fieldBodyRules("__set_record_body") }],
+  invalid: [
+    {
+      name: "SET and UPDATE record body regression",
+      filename: "grammar/statements/update.js",
+      code: fieldBodyRules("__update_record_body"),
+      errors: [fieldBodyError],
+    },
+  ],
+});
+
+for (const [name, body] of [
+  ["public_body", recordBody],
+  ["__prefix", recordBody],
+  ["__record_body", 'seq(field("record", $.record))'],
+  ["__record_body", 'seq(field("record", $.record), $.a, $.b, $.c, $.d, $.e)'],
+  ["__record_body", 'seq(kw("RECORD"), field("record", $.record))'],
+  ["__record_body", 'seq(field("record", token(/record/)), optional($.tail))'],
+  ["__record_body", 'seq(field("record", choice($.a, $.b)), optional($.tail))'],
+  ["__record_body", 'seq(field("record", $.record), alias($.tail, $.value))'],
+  ["__record_body", 'seq(field("record", $.record), ...tails)'],
+  ["__record_body", 'seq(field("record", $.record), helper($))'],
+  ["__record_body", `prec.right(${recordBody})`],
+  ["__record_body", 'seq(field("record", $["record"]), optional($.tail))'],
+]) {
+  resetSharingCandidates();
+  new RuleTester().run("shared-field-body", sharedFieldBody, {
+    valid: [
+      { filename: "grammar/first.js", code: fieldBodyRules(name, body) },
+      { filename: "grammar/second.js", code: fieldBodyRules(name, body) },
+    ],
+    invalid: [],
+  });
+}
+
+resetSharingCandidates();
+new RuleTester().run("shared-field-body", sharedFieldBody, {
+  valid: [
+    fieldBodyRules("__record_body", 'seq(field("record", $.record), optional($.__record_body))'),
+    `const unrelated = {__record_body: ($) => ${recordBody}};`,
+    fieldBodyRules(
+      "__record_body",
+      'seq(field("table", $._identifier_or_qualified_name), optional($._except_fields), optional($.frame_phrase))',
+    ),
+    fieldBodyRules(
+      "__record_body",
+      'seq(field("record", $._identifier_or_qualified_name), optional($.frame_phrase), optional($._except_fields))',
+    ),
+    fieldBodyRules(
+      "__record_body",
+      'seq(field("record", $._identifier_or_qualified_name), $._except_fields, optional($.frame_phrase))',
+    ),
+    fieldBodyRules(
+      "__record_body",
+      'seq(field("record", $.different), optional($._except_fields), optional($.frame_phrase))',
+    ),
+  ],
+  invalid: [],
+});
+
+for (const suppressed of [
+  `export default () => ({
+    // oxlint-disable-next-line rule-to-test/shared-field-body
+    __set_record_body: ($) => ${recordBody},
+  });`,
+  `export default () => ({__set_record_body: ($) =>
+    // oxlint-disable-next-line rule-to-test/shared-field-body
+    ${recordBody}
+  });`,
+]) {
+  resetSharingCandidates();
+  new RuleTester().run("shared-field-body", sharedFieldBody, {
+    valid: [
+      { filename: "grammar/first.js", code: suppressed },
+      { filename: "grammar/second.js", code: fieldBodyRules("__update_record_body") },
+    ],
+    invalid: [],
+  });
+}
+
+resetSharingCandidates();
+new RuleTester().run("shared-field-body", sharedFieldBody, {
+  valid: [],
+  invalid: [
+    {
+      name: "local duplicates ignore formatting and comments",
+      code: `export default grammar({rules: {__set_record_body: ($) => ${recordBody}, __update_record_body: ($) => seq(field("record", $._identifier_or_qualified_name), /* same tail */ optional($._except_fields), optional($.frame_phrase))}});`,
+      errors: [fieldBodyError],
+    },
+  ],
+});
+
+resetSharingCandidates();
+new RuleTester().run("shared-field-body", sharedFieldBody, {
+  valid: [
+    { filename: "grammar/core/common.js", code: fieldBodyRules("_set_update_record_body") },
+    {
+      filename: "grammar/statements/set.js",
+      code: fieldBodyRules("__set_record_body", "$._set_update_record_body"),
+    },
+    {
+      filename: "grammar/statements/update.js",
+      code: fieldBodyRules("__update_record_body", "$._set_update_record_body"),
     },
   ],
   invalid: [],
