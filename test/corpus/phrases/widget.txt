@@ -18,3 +18,67 @@ HIDE CURRENT-WINDOW.
   (hide_statement
     (widget_phrase
       system_handle: (system_handle))))
+
+================================================================================
+WIDGET - handles and qualified entries before function-call actions
+================================================================================
+
+ON CHOOSE OF btn foo().
+ON CHOOSE OF btn IN FRAME f foo().
+ON CHOOSE OF btn IN BROWSE b foo().
+ON CHOOSE OF app.btn foo().
+ON CHOOSE OF {&BTN} foo().
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (on_statement
+    event: (identifier)
+    (of_phrase
+      widget: (widget_phrase
+        handle: (identifier)))
+    (expression_statement
+      (function_call
+        function: (identifier)
+        (arguments))))
+  (on_statement
+    event: (identifier)
+    (of_phrase
+      widget: (widget_phrase
+        field: (identifier)
+        frame: (identifier)))
+    (expression_statement
+      (function_call
+        function: (identifier)
+        (arguments))))
+  (on_statement
+    event: (identifier)
+    (of_phrase
+      widget: (widget_phrase
+        column: (identifier)
+        browse: (identifier)))
+    (expression_statement
+      (function_call
+        function: (identifier)
+        (arguments))))
+  (on_statement
+    event: (identifier)
+    (of_phrase
+      widget: (widget_phrase
+        handle: (qualified_name
+          left: (identifier)
+          right: (identifier))))
+    (expression_statement
+      (function_call
+        function: (identifier)
+        (arguments))))
+  (on_statement
+    event: (identifier)
+    (of_phrase
+      widget: (widget_phrase
+        handle: (preprocessor_name
+          (identifier))))
+    (expression_statement
+      (function_call
+        function: (identifier)
+        (arguments)))))

@@ -1,12 +1,20 @@
 export default ({ kw }) => ({
-  widget_phrase: ($) => choice($._frame_browse_menu_widget, $.__widget_handle, $.__widget_entry),
+  widget_phrase: ($) =>
+    choice(
+      $._frame_browse_menu_widget,
+      prec(
+        "widget_handle",
+        field(
+          "handle",
+          // oxlint-disable-next-line tree-sitter-optimize/shared-choice
+          choice($._identifier_or_qualified_name, $.preprocessor_name),
+        ),
+      ),
+      $.__widget_entry,
+    ),
 
   // oxlint-disable-next-line tree-sitter-optimize/choice-subset, tree-sitter-optimize/shared-choice
   __widget_name: ($) => choice($.identifier, $.preprocessor_name),
-
-  // oxlint-disable-next-line tree-sitter-optimize/shared-choice
-  __widget_handle: ($) =>
-    seq(field("handle", choice($._identifier_or_qualified_name, $.preprocessor_name))),
 
   // oxlint-disable-next-line tree-sitter-optimize/body-extraction
   __widget_entry: ($) =>

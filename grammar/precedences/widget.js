@@ -17,9 +17,9 @@ export default ($) => [
   // Reference: Widget phrase.
   [$.function_call, $.__widget_entry],
   // Purpose: prefer function calls only when explicitly called, even for bare handle branch.
-  // Example: ON CHOOSE OF myFunc().
+  // Example: ON CHOOSE OF btn foo().
   // Reference: Widget phrase.
-  [$.function_call, $.__widget_handle],
+  [$.function_call, "widget_handle"],
   // Purpose: same as above, for the VIEW/HIDE-only widget-ref variant.
   // Example: VIEW myFunc().
   // Reference: Widget phrase; VIEW statement; HIDE statement.
@@ -27,9 +27,9 @@ export default ($) => [
   // Purpose: a name that IN FRAME, IN BROWSE or MENU-ITEM qualifies is an
   // entry; a name on its own can no longer match the entry rule, so reading
   // the entry first keeps the qualifier attached without stealing bare names.
-  // Example: HIDE TBADR IN FRAME FR1.
-  // Reference: Widget phrase; HIDE statement.
-  [$.__widget_entry, $.__widget_handle],
+  // Example: ON CHOOSE OF btn IN FRAME f foo().
+  // Reference: Widget phrase; ON statement.
+  [$.__widget_entry, "widget_handle"],
   // Purpose: inside a frame, a widget keyword on its own is the name of a field,
   // not the start of an attribute reference qualified by widget type.
   // Example: DEFINE FRAME F1 Image AT ROW 3.42 COL 1.72.

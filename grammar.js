@@ -127,7 +127,7 @@ export default grammar({
     // VIEW/HIDE only: a bare name before IN WINDOW cannot be told apart from
     // one before IN FRAME/IN BROWSE with a single token of lookahead; only
     // what follows IN settles it. Scoped to its own symbol so the fork does
-    // not reach the shared __widget_entry/__widget_handle used elsewhere.
+    // not reach the shared widget-entry and bare-handle branches used elsewhere.
     [$.__view_hide_widget_ref],
     // `ON … PERSISTENT RUN chx IN THIS-PROCEDURE (hb).` -- on the `(` the
     // parser must choose between the trigger's argument list and a call on the
