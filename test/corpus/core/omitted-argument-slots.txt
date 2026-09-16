@@ -1,0 +1,33 @@
+================================================================================
+Argument slots - empty, omitted, and trailing positions
+================================================================================
+
+obj:Invoke().
+obj:Invoke(,,).
+obj:Invoke(, 1,, 2,).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (expression_statement
+    (function_call
+      function: (object_access
+        left: (identifier)
+        right: (identifier))
+      (arguments)))
+  (expression_statement
+    (function_call
+      function: (object_access
+        left: (identifier)
+        right: (identifier))
+      (arguments)))
+  (expression_statement
+    (function_call
+      function: (object_access
+        left: (identifier)
+        right: (identifier))
+      (arguments
+        (argument
+          name: (number_literal))
+        (argument
+          name: (number_literal))))))
