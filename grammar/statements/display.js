@@ -63,7 +63,11 @@ export default ({ kw }) => ({
         optional($._when_phrase),
       ),
       alias($.__display_aggregate_expression, $.aggregate_expression),
-      $.__display_skip_phrase,
+      // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
+      prec.left(
+        "display_skip",
+        seq(kw("SKIP"), optional(field("skip", seq($._parenthesized_expression_prefix, ")")))),
+      ),
       $._display_space_phrase,
     ),
   __display_formatted_field: ($) =>
@@ -88,11 +92,6 @@ export default ({ kw }) => ({
   __display_aggregate_primary_expression: ($) =>
     choice($.__display_keyword_identifier, $._expression),
   __display_keyword_identifier: ($) => alias(kw("MENU"), $.identifier),
-  // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
-  __display_skip_phrase: ($) =>
-    prec.left(
-      seq(kw("SKIP"), optional(field("skip", seq($._parenthesized_expression_prefix, ")")))),
-    ),
 
   // Second branch
   __display_browse_body: ($) =>

@@ -15,9 +15,9 @@ export default ($) => [
   [$.binary_expression, $.__display_aggregate_primary_expression],
   // Purpose: SKIP/SPACE should win over function-call/expr parsing.
   // Example: DISPLAY SPACE(2) Customer.Name SKIP(1) Customer.City.
-  [$.__display_skip_phrase, $.function_call],
+  ["display_skip", $.function_call],
   [$._display_space_phrase, $.function_call],
-  [$.__display_skip_phrase, $._expression],
+  ["display_skip", $._expression],
   [$._display_space_phrase, $._expression],
   // Purpose: prefer field interpretation over record.
   // Example: DISPLAY Customer.Name IN WINDOW hWin WITH FRAME f1.
@@ -28,7 +28,7 @@ export default ($) => [
   [$.widget_qualified_name, $.__display_items],
   // Purpose: prefer item SKIP over frame SKIP.
   // Example: DISPLAY out-param LABEL "Updated YTD Sales" SKIP new-param.
-  [$.__display_skip_phrase, $.__frame_skip_phrase],
+  ["display_skip", $.__frame_skip_phrase],
   // Purpose: prefer WITH frame phrase over treating WITH as a field identifier.
   // Example: DISPLAY menu WITH TITLE "...".
   [$.frame_phrase, $.__display_field],

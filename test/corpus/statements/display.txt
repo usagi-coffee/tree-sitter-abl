@@ -615,3 +615,38 @@ DISPLAY "label" x 1 WITH BROWSE b1.
     (field
       field: (number_literal))
     browse: (identifier)))
+
+================================================================================
+DISPLAY - bare SKIP between fields and function calls
+================================================================================
+
+DISPLAY a SKIP b.
+DISPLAY SKIP foo(2).
+DISPLAY foo(2) SKIP Customer.Name.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (display_statement
+    (field
+      field: (identifier))
+    (field
+      field: (identifier)))
+  (display_statement
+    (field
+      field: (function_call
+        function: (identifier)
+        (arguments
+          (argument
+            name: (number_literal))))))
+  (display_statement
+    (field
+      field: (function_call
+        function: (identifier)
+        (arguments
+          (argument
+            name: (number_literal)))))
+    (field
+      field: (qualified_name
+        left: (identifier)
+        right: (identifier)))))
