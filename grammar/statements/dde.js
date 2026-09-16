@@ -7,7 +7,13 @@ export default ({ kw }) => ({
       choice(
         $.__dde_advise_or_send_branch,
         $.__dde_execute_or_terminate_branch,
-        $.__dde_get_or_request_branch,
+        seq(
+          field(
+            "action",
+            choice(alias(kw("GET"), $.identifier), alias(kw("REQUEST"), $.identifier)),
+          ),
+          $.__dde_target_item_body,
+        ),
         seq(field("action", alias(kw("INITIATE"), $.identifier)), $.__dde_initiate_body),
       ),
     ),
@@ -32,11 +38,6 @@ export default ({ kw }) => ({
       ),
       field("ddeid", $._expression),
       optional(seq(kw("COMMAND"), field("command", $._expression), optional($.__dde_time_phrase))),
-    ),
-  __dde_get_or_request_branch: ($) =>
-    seq(
-      field("action", choice(alias(kw("GET"), $.identifier), alias(kw("REQUEST"), $.identifier))),
-      $.__dde_target_item_body,
     ),
   // oxlint-disable-next-line tree-sitter-optimize/sequence-subset
   __dde_initiate_body: ($) =>

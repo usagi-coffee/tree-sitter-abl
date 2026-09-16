@@ -58,3 +58,24 @@ DDE TERMINATE 1 NO-ERROR.
     action: (identifier)
     ddeid: (number_literal)
     (no_error)))
+
+================================================================================
+DDE - GET and REQUEST without optional TIME or NO-ERROR
+================================================================================
+
+DDE GET channel TARGET result ITEM "first".
+DDE REQUEST channel TARGET result ITEM "second".
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (dde_statement
+    action: (identifier)
+    ddeid: (identifier)
+    target: (identifier)
+    item: (string_literal))
+  (dde_statement
+    action: (identifier)
+    ddeid: (identifier)
+    target: (identifier)
+    item: (string_literal)))
