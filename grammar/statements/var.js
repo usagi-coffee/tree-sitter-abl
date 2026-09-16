@@ -6,12 +6,7 @@ export default ({ kw }) => ({
   __var_variable_suffix: ($) =>
     seq(alias($.__var_variable, $.variable), optional(seq(",", $.__var_variable_suffix))),
 
-  _var_type: ($) =>
-    seq(
-      optional(kw("CLASS")),
-      field("type", $._type_or_string),
-      optional(field("extent", $.__var_extent)),
-    ),
+  _var_type: ($) => seq($._class_type, optional(field("extent", $.__var_extent))),
 
   __var_variable: ($) =>
     // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
