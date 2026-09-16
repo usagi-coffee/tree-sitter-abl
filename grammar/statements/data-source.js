@@ -30,27 +30,11 @@ export default ({ kw }) => ({
   __data_source_buffer_phrase: ($) =>
     seq(
       field("buffer", $._identifier_or_qualified_name),
-      optional(
-        seq(
-          kw("KEYS"),
-          "(",
-          choice(
-            kw("ROWID"),
-            seq(
-              field("field", $._identifier_or_qualified_name),
-              optional($.__data_source_key_field_tail),
-            ),
-          ),
-          ")",
-        ),
-      ),
+      optional(seq(kw("KEYS"), "(", choice(kw("ROWID"), $.__data_source_key_fields), ")")),
     ),
-  __data_source_key_field_tail: ($) =>
-    seq(
-      ",",
-      field("field", $._identifier_or_qualified_name),
-      optional($.__data_source_key_field_tail),
-    ),
+  __data_source_key_fields: ($) =>
+    seq(field("field", $._identifier_or_qualified_name), optional($.__data_source_key_field_tail)),
+  __data_source_key_field_tail: ($) => seq(",", $.__data_source_key_fields),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __data_source_modifier: ($) =>
     choice(

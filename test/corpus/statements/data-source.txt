@@ -279,3 +279,21 @@ DEFINE DATA-SOURCE dsKeyRowid FOR bCust KEYS (ROWID).
   (data_source_definition
     name: (identifier)
     buffer: (identifier)))
+
+================================================================================
+DATA-SOURCE - choice list head preserves key and buffer boundaries
+================================================================================
+
+DEFINE DATA-SOURCE ds FOR b1 KEYS (k1, k2), b2 KEYS (ROWID), b3 KEYS (k3).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (data_source_definition
+    name: (identifier)
+    buffer: (identifier)
+    field: (identifier)
+    field: (identifier)
+    buffer: (identifier)
+    buffer: (identifier)
+    field: (identifier)))
