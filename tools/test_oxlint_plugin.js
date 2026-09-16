@@ -1,6 +1,7 @@
 import { RuleTester } from "oxlint/plugins-dev";
 
 import {
+  fieldListHeadExtraction,
   choiceListHeadExtraction,
   sharedFieldChunk,
   singleUseChoiceAliasSequence,
@@ -3334,6 +3335,98 @@ new RuleTester().run("choice-list-head-extraction", choiceListHeadExtraction, {
       name: "core rule maps",
       code: `export default grammar({rules: {root: ($) => choice("ROWID", seq($.item, optional($.__tail))), __tail: ($) => seq(",", $.item, optional($.__tail))}});`,
       errors: [choiceHeadError],
+    },
+  ],
+});
+
+const fieldHeadGrammar = (item = "$.__value", separator = '","') => `
+export default () => ({
+  root: ($) => seq("ITEMS", field("items", seq(${item}, optional($.__tail)))),
+  __tail: ($) => seq(${separator}, ${item}, optional($.__tail)),
+});`;
+const fieldHeadError = { message: /field contains the item and continuation repeated by __tail/ };
+
+new RuleTester().run("field-list-head-extraction", fieldListHeadExtraction, {
+  valid: [
+    `export default () => ({root: ($) => field("items", $.__head), __head: ($) => seq($.value, optional($.__tail)), __tail: ($) => seq(",", $.__head)});`,
+    fieldHeadGrammar().replace('field("items", seq(', 'field("items", seq("PREFIX", '),
+    fieldHeadGrammar().replace('field("items", seq(', "optional(seq("),
+    fieldHeadGrammar().replace('field("items", seq(', 'choice("ROWID", seq('),
+    fieldHeadGrammar().replace('seq(",", $.__value,', 'seq(",", $.other,'),
+    fieldHeadGrammar().replace(
+      'seq(",", $.__value, optional($.__tail))',
+      'seq(",", $.__value, optional($.__other))',
+    ),
+    fieldHeadGrammar().replaceAll("__tail", "visible_tail"),
+    fieldHeadGrammar().replaceAll("$.__tail", '$["__tail"]'),
+    fieldHeadGrammar("optional($.value)"),
+    fieldHeadGrammar('field("value", optional($.value))'),
+    fieldHeadGrammar("alias(optional($.value), $.item)"),
+    fieldHeadGrammar("choice($.value, optional($.other))"),
+    fieldHeadGrammar("seq($.value, $.__tail)"),
+    fieldHeadGrammar("makeItem($)"),
+    fieldHeadGrammar("...items"),
+    fieldHeadGrammar("$.value", '";"'),
+    fieldHeadGrammar("$.value", "$.separator"),
+    fieldHeadGrammar('field("value", $.value)').replace(
+      'seq(",", field("value"',
+      'seq(",", field("other"',
+    ),
+    fieldHeadGrammar("alias($.value, $.item)").replace(
+      'seq(",", alias($.value, $.item)',
+      'seq(",", alias($.value, $.other)',
+    ),
+    fieldHeadGrammar("token(/a/i)").replace('seq(",", token(/a/i)', 'seq(",", token(/b/i)'),
+    ...["alias", "token", "token.immediate", "prec", "prec.left", "prec.right", "prec.dynamic"].map(
+      (wrapper) => ({
+        name: `field under ${wrapper} is excluded`,
+        code: fieldHeadGrammar().replace(
+          'seq("ITEMS", field("items", seq($.__value, optional($.__tail))))',
+          `${wrapper}(${wrapper === "prec" ? '"list", ' : wrapper === "prec.dynamic" ? "1, " : ""}field("items", seq($.__value, optional($.__tail)))${wrapper === "alias" ? ", $.list" : ""})`,
+        ),
+      }),
+    ),
+    fieldHeadGrammar().replace(
+      'seq(",", $.__value, optional($.__tail))',
+      'prec.right(seq(",", $.__value, optional($.__tail)))',
+    ),
+    `const a = grammar({rules: {root: ($) => field("items", seq($.value, optional($.__tail)))}}); const b = grammar({rules: {__tail: ($) => seq(",", $.value, optional($.__tail))}});`,
+    fieldHeadGrammar().replace("export default () => (", "const unrelated = ("),
+    fieldHeadGrammar().replace(
+      "  root:",
+      "  // oxlint-disable-next-line rule-to-test/field-list-head-extraction\n  root:",
+    ),
+    fieldHeadGrammar().replace(
+      "  __tail:",
+      "  // oxlint-disable-next-line rule-to-test/field-list-head-extraction\n  __tail:",
+    ),
+  ],
+  invalid: [
+    { name: "COMBO-BOX LIST-ITEMS regression", code: fieldHeadGrammar(), errors: [fieldHeadError] },
+    {
+      name: "inner fields stay inside the head",
+      code: fieldHeadGrammar('field("value", $.value)'),
+      errors: [fieldHeadError],
+    },
+    {
+      name: "aliases stay inside the head",
+      code: fieldHeadGrammar("alias($.value, $.item)"),
+      errors: [fieldHeadError],
+    },
+    {
+      name: "optional comma remains optional",
+      code: fieldHeadGrammar("$.value", 'optional(",")'),
+      errors: [fieldHeadError],
+    },
+    {
+      name: "multiple item parts",
+      code: fieldHeadGrammar('$.key, "=", field("value", $.value)'),
+      errors: [fieldHeadError],
+    },
+    {
+      name: "core grammar maps",
+      code: `export default grammar({rules: {root: ($) => field("items", seq($.value, optional($.__tail))), __tail: ($) => seq(",", $.value, optional($.__tail))}});`,
+      errors: [fieldHeadError],
     },
   ],
 });
