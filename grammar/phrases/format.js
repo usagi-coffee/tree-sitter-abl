@@ -188,8 +188,7 @@ export default ({ kw }) => ({
   __format_radio_set_buttons: ($) =>
     seq($.__format_radio_set_pair, optional($.__format_radio_set_buttons_tail)),
   // oxlint-disable-next-line tree-sitter-optimize/recursive-tail-reuse
-  __format_radio_set_buttons_tail: ($) =>
-    seq(",", $.__format_radio_set_pair, optional($.__format_radio_set_buttons_tail)),
+  __format_radio_set_buttons_tail: ($) => seq(",", $.__format_radio_set_buttons),
   __format_radio_set_pair: ($) =>
     seq(
       field("label", $.__format_radio_set_value),
@@ -212,13 +211,7 @@ export default ({ kw }) => ({
       repeat(
         choice(
           seq(kw("LIST-ITEMS"), field("items", $.__format_combo_box_values)),
-          seq(
-            kw("LIST-ITEM-PAIRS"),
-            field(
-              "pairs",
-              seq($.__format_radio_set_pair, optional($.__format_radio_set_buttons_tail)),
-            ),
-          ),
+          seq(kw("LIST-ITEM-PAIRS"), field("pairs", $.__format_radio_set_buttons)),
           // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
           seq(kw("INNER-LINES"), field("inner_lines", $.number_literal)),
           $.size_phrase,
