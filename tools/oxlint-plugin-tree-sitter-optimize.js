@@ -500,10 +500,22 @@ export const singleUseAliasSequence = rule((context) => {
   };
 }, "Suggest inlining single-use private sequences containing symbol aliases");
 
-function singleUseChoiceSequenceVisitor(context, fieldChoice = false) {
+function singleUseChoiceSequenceVisitor(context, fieldChoice = false, withAlias = false) {
   const properties = [];
   const references = new Map();
   const smallElement = (node) => isSmallSequenceElement(node) || isStaticKeywordCall(node);
+  const symbolAlias = (node) => {
+    if (callName(node) !== "alias" || node.arguments.length !== 2) return false;
+    const source = memberName(node.arguments[0]);
+    const target = memberName(node.arguments[1]);
+    return (
+      source !== null &&
+      !source.endsWith("_keyword") &&
+      target !== null &&
+      !target.startsWith("_") &&
+      source !== target
+    );
+  };
   const atom = (node) =>
     memberName(node) !== null ||
     (node?.type === "Literal" && typeof node.value === "string" && node.value.length > 0) ||
@@ -554,7 +566,13 @@ function singleUseChoiceSequenceVisitor(context, fieldChoice = false) {
         if (callName(body) !== "seq" || body.arguments.length < 2 || body.arguments.length > 3)
           continue;
         if (!body.arguments.some(smallChoice)) continue;
-        if (!body.arguments.every((element) => smallElement(element) || smallChoice(element)))
+        if (withAlias && !body.arguments.some(symbolAlias)) continue;
+        if (
+          !body.arguments.every(
+            (element) =>
+              smallElement(element) || smallChoice(element) || (withAlias && symbolAlias(element)),
+          )
+        )
           continue;
         const uses = references.get(name) ?? [];
         if (uses.length !== 1) continue;
@@ -580,8 +598,12 @@ function singleUseChoiceSequenceVisitor(context, fieldChoice = false) {
         report(
           context,
           property,
-          fieldChoice ? "single-use-field-choice-sequence" : "single-use-choice-sequence",
-          `${name} has one unaliased local use in ${ruleName(owner)}; try inlining this small sequence containing a ${fieldChoice ? "field-wrapped" : "direct"} choice. Preserve alternative order, fields${fieldChoice ? ", aliases" : ""} and precedence, check external references and grammar metadata, then measure parser size and validate trees.`,
+          withAlias
+            ? "single-use-choice-alias-sequence"
+            : fieldChoice
+              ? "single-use-field-choice-sequence"
+              : "single-use-choice-sequence",
+          `${name} has one unaliased local use in ${ruleName(owner)}; try inlining this small sequence containing a ${fieldChoice ? "field-wrapped" : "direct"} choice${withAlias ? " and symbol alias" : ""}. Preserve alternative order, fields${fieldChoice || withAlias ? ", aliases" : ""} and precedence, check external references and grammar metadata, then measure parser size and validate trees.`,
         );
       }
     },
@@ -596,6 +618,11 @@ export const singleUseChoiceSequence = rule(
 export const singleUseFieldChoiceSequence = rule(
   (context) => singleUseChoiceSequenceVisitor(context, true),
   "Suggest inlining single-use private sequences containing small field-wrapped choices",
+);
+
+export const singleUseChoiceAliasSequence = rule(
+  (context) => singleUseChoiceSequenceVisitor(context, false, true),
+  "Suggest inlining single-use private sequences combining a small choice and symbol alias",
 );
 
 export const singleUseOptionalSequence = rule((context) => {
@@ -2135,6 +2162,7 @@ const broadDispatcher = rule(
 export default {
   meta: { name: "tree-sitter-optimize" },
   rules: {
+    "single-use-choice-alias-sequence": singleUseChoiceAliasSequence,
     "single-use-precedence-value": singleUsePrecedenceValue,
     "optional-modifier-field": optionalModifierField,
     "shared-field-body": sharedFieldBody,

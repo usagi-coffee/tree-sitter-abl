@@ -1,6 +1,7 @@
 import { RuleTester } from "oxlint/plugins-dev";
 
 import {
+  singleUseChoiceAliasSequence,
   singleUsePrecedenceValue,
   optionalModifierField,
   sharedFieldBody,
@@ -3068,6 +3069,89 @@ new RuleTester().run("single-use-precedence-value", singleUsePrecedenceValue, {
       name: "core rule map",
       code: `export default grammar({rules: {root: ($) => $.__item, __item: ($) => ${precedenceValueBody}}});`,
       errors: [precedenceValueError],
+    },
+  ],
+});
+
+const choiceAliasBody =
+  'seq(choice(kw("EACH"), kw("FIRST"), kw("LAST")), alias($.__record, $.record_phrase))';
+const choiceAliasRules = (body = choiceAliasBody, use = "$.__item") =>
+  `export default ({kw}) => ({root: ($) => seq(",", ${use}), __item: ($) => ${body}});`;
+const choiceAliasError = {
+  message: /__item has one unaliased local use in root.*direct choice and symbol alias/,
+};
+
+new RuleTester().run("single-use-choice-alias-sequence", singleUseChoiceAliasSequence, {
+  valid: [
+    choiceAliasRules().replaceAll("__item", "public_item"),
+    choiceAliasRules().replaceAll("__item", "_shared"),
+    choiceAliasRules().replaceAll("__item", "__item_body"),
+    choiceAliasRules(choiceAliasBody, "seq($.__item, $.__item)"),
+    choiceAliasRules(choiceAliasBody, "$.other"),
+    choiceAliasRules(choiceAliasBody, '$["__item"]'),
+    choiceAliasRules(choiceAliasBody.replace("$.__record", "$.__item")),
+    ...[
+      "alias($.__item, $.item)",
+      'field("value", $.__item)',
+      "token($.__item)",
+      "token.immediate($.__item)",
+      "prec.dynamic(1, $.__item)",
+      'alias(seq("X", optional($.__item)), $.item)',
+    ].map((use) => choiceAliasRules(choiceAliasBody, use)),
+    ...[
+      "seq(choice($.a, $.b), $.record)",
+      "seq($.a, alias($.__record, $.record_phrase))",
+      'seq(choice($.a, $.b), alias(kw("FLAG"), $.flag))',
+      "seq(choice($.a, $.b), alias($._flag_keyword, $.flag))",
+      "seq(choice($.a, $.b), alias($.record, $.record))",
+      "seq(choice($.a, $.b), alias($.__record, $._record))",
+      'seq(choice($.a, $.b), alias($.__record, "record"))',
+      'seq(choice($.a, $.b), alias($["__record"], $.record))',
+      "seq(choice($.a), alias($.__record, $.record))",
+      "seq(choice($.a, $.b, $.c, $.d, $.e, $.f), alias($.__record, $.record))",
+      "seq(choice(seq($.a, $.b), $.c), alias($.__record, $.record))",
+      'seq(choice(kw("EACH", options), $.b), alias($.__record, $.record))',
+      "seq(choice(...values), alias($.__record, $.record))",
+      "seq(choice($.a, $.b), alias($.__record, $.record), $.x, $.y)",
+      `prec.right(${choiceAliasBody})`,
+    ].map((body) => choiceAliasRules(body)),
+    ...["inline", "conflicts", "precedences", "supertypes"].map(
+      (metadata) =>
+        `export default grammar({${metadata}: ($) => [$.__item], rules: {root: ($) => $.__item, __item: ($) => ${choiceAliasBody}}});`,
+    ),
+    `const a = grammar({rules: {root: ($) => $.__item}}); const b = grammar({rules: {__item: ($) => ${choiceAliasBody}}});`,
+    `const unrelated = {root: ($) => $.__item, __item: ($) => ${choiceAliasBody}};`,
+    `export default ({kw}) => ({root: ($) => $.__item,
+      // oxlint-disable-next-line rule-to-test/single-use-choice-alias-sequence
+      __item: ($) => ${choiceAliasBody}});`,
+  ],
+  invalid: [
+    {
+      name: "OPEN QUERY join item regression",
+      code: choiceAliasRules(),
+      errors: [choiceAliasError],
+    },
+    {
+      name: "alias before choice retains order",
+      code: choiceAliasRules("seq(alias($.__record, $.record_phrase), choice($.a, $.b))"),
+      errors: [choiceAliasError],
+    },
+    {
+      name: "fields and keyword options are retained",
+      code: choiceAliasRules(
+        'seq(choice(kw("EACH", {offset: 2}), kw("FIRST")), alias($.__record, $.record_phrase), optional(field("name", $.identifier)))',
+      ),
+      errors: [choiceAliasError],
+    },
+    {
+      name: "call site precedence is retained",
+      code: choiceAliasRules(choiceAliasBody, "prec.right(seq($.__item, optional($.tail)))"),
+      errors: [choiceAliasError],
+    },
+    {
+      name: "core rule map",
+      code: `export default grammar({rules: {root: ($) => $.__item, __item: ($) => ${choiceAliasBody}}});`,
+      errors: [choiceAliasError],
     },
   ],
 });
