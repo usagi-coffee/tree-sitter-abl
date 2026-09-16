@@ -103,8 +103,16 @@ export default ({ kw }) => ({
       seq(kw("XML-NODE-NAME"), field("xml_node_name", $.string_literal)),
       $.view_as_phrase,
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
   __temp_table_extent_option: ($) =>
-    seq(kw("EXTENT"), field("extent", choice($.number_literal, $.preprocessor_name))),
+    seq(
+      kw("EXTENT"),
+      field(
+        "extent",
+        // oxlint-disable-next-line tree-sitter-optimize/shared-choice
+        choice($.number_literal, $.preprocessor_name),
+      ),
+    ),
   // oxlint-disable-next-line tree-sitter-optimize/shared-choice
   __temp_table_like_name: ($) => choice($._identifier_or_qualified_name, $.array_access),
   __temp_table_label_list: ($) =>
