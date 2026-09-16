@@ -1,6 +1,7 @@
 import { RuleTester } from "oxlint/plugins-dev";
 
 import {
+  optionalRepetitionInline,
   sharedCommaContinuation,
   nullableSlotList,
   singleUseFieldChoice,
@@ -4090,5 +4091,54 @@ new RuleTester().run("shared-comma-continuation", sharedCommaContinuation, {
   invalid: [],
 });
 resetSharingCandidates();
+
+const optionalRepeatGrammar = `export default () => ({root: ($) => choice(seq($.a, optional($.__options)), seq($.b, optional($.__options))), __options: ($) => repeat1(choice($.at_phrase, seq($._to_keyword, field("to", $._expression)), $.__display_option))});`;
+new RuleTester().run("optional-repetition-inline", optionalRepetitionInline, {
+  valid: [
+    optionalRepeatGrammar.replaceAll("__options", "visible_options"),
+    optionalRepeatGrammar.replaceAll("__options", "__main_body"),
+    optionalRepeatGrammar.replaceAll("$.__options", '$["__options"]'),
+    optionalRepeatGrammar.replace("seq($.b, optional($.__options))", "$.b"),
+    optionalRepeatGrammar.replace("seq($.b, optional($.__options))", "seq($.b, $.__options)"),
+    optionalRepeatGrammar.replace(
+      'repeat1(choice($.at_phrase, seq($._to_keyword, field("to", $._expression)), $.__display_option))',
+      'repeat(choice($.at_phrase, seq($._to_keyword, field("to", $._expression)), $.__display_option))',
+    ),
+    optionalRepeatGrammar.replace("$.__display_option", "$.__options"),
+    optionalRepeatGrammar.replace(
+      "seq($.b, optional($.__options))",
+      "seq($.b, alias(optional($.__options), $.options))",
+    ),
+    optionalRepeatGrammar.replace(
+      "seq($.b, optional($.__options))",
+      'seq($.b, field("options", optional($.__options)))',
+    ),
+    optionalRepeatGrammar.replace(
+      "seq($.b, optional($.__options))",
+      "seq($.b, token(optional($.__options)))",
+    ),
+    optionalRepeatGrammar.replace(
+      "seq($.b, optional($.__options))",
+      "seq($.b, prec.dynamic(1, optional($.__options)))",
+    ),
+    optionalRepeatGrammar.replace("__options:", "metadata: ($) => $.__options, __options:"),
+    optionalRepeatGrammar.replace("__options:", 'metadata: ($) => $["__options"], __options:'),
+    ...["root", "__options"].map((name) =>
+      optionalRepeatGrammar.replace(
+        `${name}:`,
+        `\n// oxlint-disable-next-line rule-to-test/optional-repetition-inline\n${name}:`,
+      ),
+    ),
+  ],
+  invalid: [
+    {
+      name: "FRAME display-value options",
+      code: optionalRepeatGrammar,
+      errors: [
+        { message: /__options is a non-empty repetition used only inside 2 local optional calls/ },
+      ],
+    },
+  ],
+});
 
 console.log("✓ Optimizer lint plugin tests passed successfully");
