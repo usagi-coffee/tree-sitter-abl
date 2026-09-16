@@ -1,6 +1,7 @@
 import { RuleTester } from "oxlint/plugins-dev";
 
 import {
+  singleUseFieldChoice,
   recursiveContinuationInline,
   sharedCommaField,
   closingDelimiterWrapper,
@@ -3944,6 +3945,50 @@ new RuleTester().run("recursive-continuation-inline", recursiveContinuationInlin
   invalid: [
     { name: "GO-ON optional separator", code: continuationGrammar(), errors: [continuationError] },
     { name: "required separator", code: continuationGrammar('","'), errors: [continuationError] },
+  ],
+});
+
+const fieldChoiceGrammar = (use = 'optional(field("size", $._sizes))') =>
+  `export default () => ({root: ($) => seq("EXTENT", ${use}), _sizes: ($) => choice($.number_literal, $.identifier, $.null_literal)});`;
+const fieldWrappedChoiceError = { message: /_sizes has one local use inside the size field/ };
+new RuleTester().run("single-use-field-choice", singleUseFieldChoice, {
+  valid: [
+    fieldChoiceGrammar().replaceAll("_sizes", "public_sizes"),
+    fieldChoiceGrammar().replaceAll("$._sizes", '$["_sizes"]'),
+    fieldChoiceGrammar("$._sizes"),
+    fieldChoiceGrammar("alias($._sizes, $.size)"),
+    fieldChoiceGrammar('seq(field("size", $._sizes), $._sizes)'),
+    fieldChoiceGrammar('seq(field("size", $._sizes), $["_sizes"])'),
+    fieldChoiceGrammar().replace("$.null_literal", "$._sizes"),
+    fieldChoiceGrammar().replace("$.null_literal", "$._some_keyword"),
+    fieldChoiceGrammar().replace(
+      "choice($.number_literal, $.identifier, $.null_literal)",
+      "prec.right(choice($.number_literal, $.identifier, $.null_literal))",
+    ),
+    fieldChoiceGrammar().replace("$.null_literal", "seq($.a, $.b)"),
+    ...["alias", "token", "token.immediate", "prec.dynamic"].map((wrapper) =>
+      fieldChoiceGrammar(
+        `${wrapper}(${wrapper === "prec.dynamic" ? "1, " : ""}field("size", $._sizes)${wrapper === "alias" ? ", $.value" : ""})`,
+      ),
+    ),
+    ...["root", "_sizes"].map((name) =>
+      fieldChoiceGrammar().replace(
+        `${name}:`,
+        `\n// oxlint-disable-next-line rule-to-test/single-use-field-choice\n${name}:`,
+      ),
+    ),
+  ],
+  invalid: [
+    {
+      name: "EXTENT size regression",
+      code: fieldChoiceGrammar(),
+      errors: [fieldWrappedChoiceError],
+    },
+    {
+      name: "static caller precedence",
+      code: fieldChoiceGrammar('prec.right(field("size", $._sizes))'),
+      errors: [fieldWrappedChoiceError],
+    },
   ],
 });
 
