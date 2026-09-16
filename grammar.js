@@ -671,6 +671,7 @@ export default grammar({
           field("right", alias($._identifier_immediate, $.identifier)),
           optional($.__nested_type_tail),
         ),
+      // oxlint-disable-next-line tree-sitter-optimize/single-use-field-choice
       _nested_type_left: ($) => choice($.qualified_name, $.identifier),
 
       // Array
