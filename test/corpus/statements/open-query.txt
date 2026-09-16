@@ -342,3 +342,34 @@ OPEN QUERY q1 FOR EACH ta NO-LOCK INDEXED-REPOSITION.
       record: (identifier)
       lock: (no_lock))
     (indexed_reposition)))
+
+================================================================================
+OPEN QUERY - mixed join selectors preserve record aliases and sorting
+================================================================================
+
+OPEN QUERY q FOR EACH Customer,
+  FIRST Order OF Customer,
+  LAST OrderLine OF Order,
+  EACH Item OF OrderLine NO-LOCK BY Customer.Name.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (open_query_statement
+    query: (identifier)
+    (record_phrase
+      record: (identifier))
+    (record_phrase
+      record: (identifier)
+      of: (identifier))
+    (record_phrase
+      record: (identifier)
+      of: (identifier))
+    (record_phrase
+      record: (identifier)
+      of: (identifier)
+      lock: (no_lock))
+    (by_phrase
+      by: (qualified_name
+        left: (identifier)
+        right: (identifier)))))

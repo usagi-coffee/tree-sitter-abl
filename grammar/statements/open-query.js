@@ -45,13 +45,15 @@ export default ({ kw }) => ({
       optional($.__open_query_join_records),
     ),
   __open_query_join_records: ($) =>
-    prec.right(seq(",", $.__open_query_join_record, optional($.__open_query_join_records))),
-  __open_query_join_record: ($) =>
-    seq(
-      // oxlint-disable-next-line tree-sitter-optimize/shared-choice
-      choice(kw("EACH"), kw("FIRST"), kw("LAST")),
-      // oxlint-disable-next-line tree-sitter-optimize/phrase-alias-extraction
-      alias($.__open_query_record_phrase, $.record_phrase),
+    prec.right(
+      seq(
+        ",",
+        // oxlint-disable-next-line tree-sitter-optimize/shared-choice
+        choice(kw("EACH"), kw("FIRST"), kw("LAST")),
+        // oxlint-disable-next-line tree-sitter-optimize/phrase-alias-extraction
+        alias($.__open_query_record_phrase, $.record_phrase),
+        optional($.__open_query_join_records),
+      ),
     ),
 
   __open_query_record_phrase: ($) =>
