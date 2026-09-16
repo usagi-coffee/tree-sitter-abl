@@ -1358,7 +1358,7 @@ export const recursiveBodyReuse = rule((context) => {
   };
 }, "Suggest reusing hidden recursive helpers where their complete body is expanded inside another rule");
 
-export const listHeadExtraction = rule((context) => {
+function listHeadExtractionVisitor(context, optionalHead = false) {
   const properties = [];
   const sequences = [];
   const signature = (node) =>
@@ -1371,6 +1371,11 @@ export const listHeadExtraction = rule((context) => {
       if (callName(node) !== "seq" || !isStaticDsl(node)) return;
       const owner = enclosingRule(node);
       if (!owner || isRuleDisabled(context, node)) return;
+      if (
+        optionalHead &&
+        (callName(node.parent) !== "optional" || node.parent.arguments.length !== 1)
+      )
+        return;
       for (let parent = node.parent; parent !== owner; parent = parent.parent) {
         if (
           [
@@ -1424,7 +1429,12 @@ export const listHeadExtraction = rule((context) => {
         for (const tail of tails) {
           if (sequence.owner === tail.property || sequence.owner.parent !== tail.property.parent)
             continue;
-          if (sequence.signatures.length <= tail.suffix.length) continue;
+          if (
+            optionalHead
+              ? sequence.signatures.length !== tail.suffix.length
+              : sequence.signatures.length <= tail.suffix.length
+          )
+            continue;
           const matches = sequence.signatures.some((_, index) =>
             tail.suffix.every((part, offset) => sequence.signatures[index + offset] === part),
           );
@@ -1432,15 +1442,27 @@ export const listHeadExtraction = rule((context) => {
           report(
             context,
             sequence.node,
-            "list-head-extraction",
-            `This sequence embeds the item and optional continuation repeated by ${tail.name}; try extracting that non-empty list head and reusing it here and after the comma in ${tail.name}. Preserve separator optionality, fields, aliases and order; measure parser size and validate trees.`,
+            optionalHead ? "optional-list-head-extraction" : "list-head-extraction",
+            optionalHead
+              ? `This optional list head repeats the item and continuation in ${tail.name}; try extracting a hidden non-empty head and reusing it inside this optional and after the comma in ${tail.name}. Preserve separator optionality, fields, aliases and order; check helper-specific conflicts and precedence, then measure parser size and validate trees.`
+              : `This sequence embeds the item and optional continuation repeated by ${tail.name}; try extracting that non-empty list head and reusing it here and after the comma in ${tail.name}. Preserve separator optionality, fields, aliases and order; measure parser size and validate trees.`,
           );
           break;
         }
       }
     },
   };
-}, "Suggest extracting embedded list heads shared with recursive comma tails");
+}
+
+export const listHeadExtraction = rule(
+  (context) => listHeadExtractionVisitor(context),
+  "Suggest extracting embedded list heads shared with recursive comma tails",
+);
+
+export const optionalListHeadExtraction = rule(
+  (context) => listHeadExtractionVisitor(context, true),
+  "Suggest extracting optional list heads duplicated in recursive comma tails",
+);
 
 function referencedSymbols(node) {
   const name = memberName(node);
@@ -1928,6 +1950,7 @@ const broadDispatcher = rule(
 export default {
   meta: { name: "tree-sitter-optimize" },
   rules: {
+    "optional-list-head-extraction": optionalListHeadExtraction,
     "single-use-precedence-clause": singleUsePrecedenceClause,
     "field-choice-forwarding-rule": fieldChoiceForwardingRule,
     "field-forwarding-rule": fieldForwardingRule,

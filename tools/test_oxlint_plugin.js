@@ -1,6 +1,7 @@
 import { RuleTester } from "oxlint/plugins-dev";
 
 import {
+  optionalListHeadExtraction,
   singleUsePrecedenceClause,
   fieldChoiceForwardingRule,
   fieldForwardingRule,
@@ -2310,6 +2311,121 @@ new RuleTester().run("single-use-precedence-clause", singleUsePrecedenceClause, 
       name: "core grammar rule maps are supported",
       code: `export default grammar({rules: {item: ($) => $.__skip, __skip: ($) => ${precedenceClauseBody}}});`,
       errors: [precedenceClauseError],
+    },
+  ],
+});
+
+const optionalHeadGrammar = (item = "alias($.__parameter, $.parameter)", separator = '","') => `
+export default () => ({
+  parameters: ($) => seq("(", optional(seq(${item}, optional($.__tail))), ")"),
+  __tail: ($) => seq(${separator}, ${item}, optional($.__tail)),
+});`;
+const optionalHeadError = {
+  message: /optional list head repeats the item and continuation in __tail/,
+};
+
+new RuleTester().run("optional-list-head-extraction", optionalListHeadExtraction, {
+  valid: [
+    {
+      name: "already extracted head",
+      code: `export default () => ({ parameters: ($) => seq("(", optional($.__head), ")"), __head: ($) => seq(alias($.__parameter, $.parameter), optional($.__tail)), __tail: ($) => seq(",", $.__head) });`,
+    },
+    {
+      name: "larger sequences belong to list-head-extraction",
+      code: optionalHeadGrammar().replace("optional(seq(alias", 'optional(seq("PREFIX", alias'),
+    },
+    {
+      name: "named head belongs to recursive-tail-reuse",
+      code: `export default () => ({ __head: ($) => seq($.item, optional($.__tail)), __tail: ($) => seq(",", $.item, optional($.__tail)) });`,
+    },
+    optionalHeadGrammar().replace(
+      'seq(",", alias($.__parameter, $.parameter)',
+      'seq(",", alias($.__parameter, $.other)',
+    ),
+    optionalHeadGrammar('field("value", $.item)').replace(
+      'seq(",", field("value"',
+      'seq(",", field("other"',
+    ),
+    optionalHeadGrammar().replace('seq(",", alias($.__parameter', 'seq(",", alias($.__other'),
+    optionalHeadGrammar().replace(
+      'seq(",", alias($.__parameter, $.parameter), optional($.__tail))',
+      'seq(",", alias($.__parameter, $.parameter), optional($.__other))',
+    ),
+    optionalHeadGrammar().replaceAll("__tail", "visible_tail"),
+    optionalHeadGrammar("optional($.item)"),
+    optionalHeadGrammar('field("value", optional($.item))'),
+    optionalHeadGrammar("alias(optional($.item), $.item)"),
+    optionalHeadGrammar("choice($.item, optional($.other))"),
+    optionalHeadGrammar("seq($.item, $.__tail)"),
+    optionalHeadGrammar("makeItem($)"),
+    optionalHeadGrammar("...items"),
+    optionalHeadGrammar("$.item", '";"'),
+    optionalHeadGrammar("$.item", "$.separator"),
+    optionalHeadGrammar().replaceAll("$.__tail", '$["__tail"]'),
+    optionalHeadGrammar('kw("PARAMETER", { offset: 5 })').replace(
+      'seq(",", kw("PARAMETER", { offset: 5 })',
+      'seq(",", kw("PARAMETER", { offset: 6 })',
+    ),
+    optionalHeadGrammar("token(/a/i)").replace('seq(",", token(/a/i)', 'seq(",", token(/b/i)'),
+    optionalHeadGrammar("$.key, $.value").replace(
+      'seq(",", $.key, $.value',
+      'seq(",", $.value, $.key',
+    ),
+    ...["alias", "token", "token.immediate", "prec", "prec.left", "prec.right", "prec.dynamic"].map(
+      (wrapper) => ({
+        name: `head inside ${wrapper} is excluded`,
+        code: optionalHeadGrammar().replace(
+          'seq("(", optional(seq(alias($.__parameter, $.parameter), optional($.__tail))), ")")',
+          `${wrapper}(${wrapper === "prec" ? '"list", ' : wrapper === "prec.dynamic" ? "1, " : ""}optional(seq(alias($.__parameter, $.parameter), optional($.__tail)))${wrapper === "alias" ? ", $.parameters" : ""})`,
+        ),
+      }),
+    ),
+    {
+      name: "tail precedence must not be moved",
+      code: optionalHeadGrammar().replace(
+        'seq(",", alias($.__parameter, $.parameter), optional($.__tail))',
+        'prec.right(seq(",", alias($.__parameter, $.parameter), optional($.__tail)))',
+      ),
+    },
+    {
+      name: "different rule maps cannot share private helpers",
+      code: `const a = grammar({rules: {parameters: ($) => optional(seq($.item, optional($.__tail)))}}); const b = grammar({rules: {__tail: ($) => seq(",", $.item, optional($.__tail))}});`,
+    },
+    optionalHeadGrammar().replace("export default () => (", "const unrelated = ("),
+    optionalHeadGrammar().replace(
+      "  parameters:",
+      "  // oxlint-disable-next-line rule-to-test/optional-list-head-extraction\n  parameters:",
+    ),
+    optionalHeadGrammar().replace(
+      "  __tail:",
+      "  // oxlint-disable-next-line rule-to-test/optional-list-head-extraction\n  __tail:",
+    ),
+  ],
+  invalid: [
+    {
+      name: "FUNCTION definition parameter list regression",
+      code: optionalHeadGrammar(),
+      errors: [optionalHeadError],
+    },
+    {
+      name: "fields stay on each repeated item",
+      code: optionalHeadGrammar('field("value", $.item)'),
+      errors: [optionalHeadError],
+    },
+    {
+      name: "optional comma retains its optionality",
+      code: optionalHeadGrammar("$.item", 'optional(",")'),
+      errors: [optionalHeadError],
+    },
+    {
+      name: "multiple required parts form the head",
+      code: optionalHeadGrammar('$.key, "=", field("value", $.value)'),
+      errors: [optionalHeadError],
+    },
+    {
+      name: "core grammar map",
+      code: `export default grammar({rules: { parameters: ($) => optional(seq($.item, optional($.__tail))), __tail: ($) => seq(",", $.item, optional($.__tail)) }});`,
+      errors: [optionalHeadError],
     },
   ],
 });
