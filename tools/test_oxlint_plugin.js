@@ -1,6 +1,7 @@
 import { RuleTester } from "oxlint/plugins-dev";
 
 import {
+  sharedItemAlias,
   sharedExpressionAlias,
   singleUseFieldChoiceSequence,
   optionalListHeadExtraction,
@@ -2647,6 +2648,121 @@ new RuleTester().run("shared-expression-alias", sharedExpressionAlias, {
     {
       filename: "grammar/phrases/trigger.js",
       code: expressionAliasRules('field("procedure", $._aliased_value_expression)'),
+    },
+  ],
+  invalid: [],
+});
+
+const itemAlias = "alias($._menu_item, $.menu_item)";
+const itemAliasRules = (body, definitions = "") =>
+  `export default () => ({ items: ($) => ${body}, ${definitions} });`;
+const itemAliasError = { message: /alias of _menu_item as menu_item duplicates items/ };
+
+resetSharingCandidates();
+new RuleTester().run("shared-item-alias", sharedItemAlias, {
+  valid: [
+    {
+      filename: "grammar/statements/menu.js",
+      code: itemAliasRules(`choice(${itemAlias}, $.other)`),
+    },
+  ],
+  invalid: [
+    {
+      name: "MENU and SUB-MENU retain the exact item alias",
+      filename: "grammar/statements/submenu.js",
+      code: itemAliasRules(`choice(${itemAlias}, $.other)`),
+      errors: [itemAliasError],
+    },
+  ],
+});
+
+resetSharingCandidates();
+new RuleTester().run("shared-item-alias", sharedItemAlias, {
+  valid: [
+    ...[
+      'alias(kw("FLAG"), $.flag_item)',
+      "alias($._flag_keyword, $.flag_item)",
+      "alias($._lexical_token, $.lexical_item)",
+      "alias($._value_expression, $.value_item)",
+      "alias($._extent_phrase, $.extent_item)",
+      "alias($.__private_item, $.public_item)",
+      "alias($.public_item, $.other_item)",
+      "alias($._menu_item, $._hidden_item)",
+      "alias($._menu_item, $.menu_entry)",
+      'alias($._menu_item, "menu_item")',
+      'alias($["_menu_item"], $.menu_item)',
+      `token(${itemAlias})`,
+      `token.immediate(${itemAlias})`,
+      `alias(${itemAlias}, $.outer)`,
+    ].map((body) => itemAliasRules(`seq(${body}, ${body})`)),
+    ...["token(/item/)", 'kw("ITEM")', "$.identifier"].map((body) =>
+      itemAliasRules(`seq(${itemAlias}, ${itemAlias})`, `_menu_item: ($) => ${body},`),
+    ),
+    `const unrelated = {items: ($) => seq(${itemAlias}, ${itemAlias})};`,
+  ],
+  invalid: [],
+});
+
+resetSharingCandidates();
+new RuleTester().run("shared-item-alias", sharedItemAlias, {
+  valid: [
+    {
+      filename: "grammar/statements/menu.js",
+      code: itemAliasRules(`choice(
+      // oxlint-disable-next-line rule-to-test/shared-item-alias
+      ${itemAlias}, $.other)`),
+    },
+    { filename: "grammar/statements/submenu.js", code: itemAliasRules(itemAlias) },
+  ],
+  invalid: [],
+});
+
+resetSharingCandidates();
+new RuleTester().run("shared-item-alias", sharedItemAlias, {
+  valid: [
+    itemAliasRules(
+      `choice(${itemAlias}, alias($._other_item, $.menu_item), alias($._menu_item, $.different_item))`,
+    ),
+  ],
+  invalid: [],
+});
+
+resetSharingCandidates();
+new RuleTester().run("shared-item-alias", sharedItemAlias, {
+  valid: [],
+  invalid: [
+    {
+      name: "fields and precedence remain at each call site",
+      code: itemAliasRules(
+        `seq(field("first", ${itemAlias}), prec.right(${itemAlias}))`,
+        '_menu_item: ($) => seq("ITEM", $.identifier),',
+      ),
+      errors: [itemAliasError],
+    },
+    {
+      name: "shared source can have a different name from the item target",
+      code: itemAliasRules(
+        "seq(alias($._menu_submenu, $.submenu_item), alias($._menu_submenu, $.submenu_item))",
+      ),
+      errors: [{ message: /alias of _menu_submenu as submenu_item duplicates items/ }],
+    },
+  ],
+});
+
+resetSharingCandidates();
+new RuleTester().run("shared-item-alias", sharedItemAlias, {
+  valid: [
+    {
+      filename: "grammar/core/common.js",
+      code: `export default () => ({_aliased_menu_item: ($) => ${itemAlias}});`,
+    },
+    {
+      filename: "grammar/statements/menu.js",
+      code: itemAliasRules("choice($._aliased_menu_item, $.other)"),
+    },
+    {
+      filename: "grammar/statements/submenu.js",
+      code: itemAliasRules("choice($._aliased_menu_item, $.other)"),
     },
   ],
   invalid: [],

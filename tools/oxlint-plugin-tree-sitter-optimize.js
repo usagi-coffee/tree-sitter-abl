@@ -999,6 +999,7 @@ const keywordCandidates = [];
 const sharedChoices = new Map();
 const sharedStatementAliases = new Map();
 const sharedExpressionAliases = new Map();
+const sharedItemAliases = new Map();
 
 export function resetSharingCandidates() {
   repeatedBodies.clear();
@@ -1010,12 +1011,19 @@ export function resetSharingCandidates() {
   sharedChoices.clear();
   sharedStatementAliases.clear();
   sharedExpressionAliases.clear();
+  sharedItemAliases.clear();
 }
 
-function sharedNamedAliasVisitor(context, expression = false) {
+function sharedNamedAliasVisitor(context, kind = "statement") {
   const properties = [];
   const candidates = [];
-  const aliases = expression ? sharedExpressionAliases : sharedStatementAliases;
+  const expression = kind === "expression";
+  const item = kind === "item";
+  const aliases = item
+    ? sharedItemAliases
+    : expression
+      ? sharedExpressionAliases
+      : sharedStatementAliases;
   return {
     Property(node) {
       if (isRuleProperty(node)) properties.push(node);
@@ -1024,7 +1032,17 @@ function sharedNamedAliasVisitor(context, expression = false) {
       if (callName(node) !== "alias" || node.arguments.length !== 2) return;
       const source = memberName(node.arguments[0]);
       const target = memberName(node.arguments[1]);
-      if (expression) {
+      if (item) {
+        if (!source?.startsWith("_") || source.startsWith("__") || !target?.endsWith("_item"))
+          return;
+        if (
+          source.endsWith("_keyword") ||
+          source.endsWith("_token") ||
+          source.endsWith("_phrase") ||
+          source.endsWith("_expression")
+        )
+          return;
+      } else if (expression) {
         if (!source?.endsWith("_expression") || source.startsWith("__")) return;
       } else if (!source?.endsWith("_statement") || source.startsWith("_")) return;
       if (!target || target.startsWith("_") || source === target) return;
@@ -1063,8 +1081,8 @@ function sharedNamedAliasVisitor(context, expression = false) {
         report(
           context,
           reportNode,
-          expression ? "shared-expression-alias" : "shared-statement-alias",
-          `This alias of ${source} as ${target} duplicates ${previous.rule} in ${location}; try sharing one hidden helper containing the exact alias. ${expression ? "Confirm the source is a nonterminal expression and check grammar metadata. " : ""}Preserve named nodes, fields and precedence; measure parser size and validate trees.`,
+          `shared-${kind}-alias`,
+          `This alias of ${source} as ${target} duplicates ${previous.rule} in ${location}; try sharing one hidden helper containing the exact alias. ${item ? "Confirm the source is a nonterminal item rule and check grammar metadata. " : expression ? "Confirm the source is a nonterminal expression and check grammar metadata. " : ""}Preserve named nodes, fields and precedence; measure parser size and validate trees.`,
         );
       }
     },
@@ -1077,8 +1095,13 @@ export const sharedStatementAlias = rule(
 );
 
 export const sharedExpressionAlias = rule(
-  (context) => sharedNamedAliasVisitor(context, true),
+  (context) => sharedNamedAliasVisitor(context, "expression"),
   "Suggest sharing identical named aliases of shared or public expression rules",
+);
+
+export const sharedItemAlias = rule(
+  (context) => sharedNamedAliasVisitor(context, "item"),
+  "Suggest sharing identical named item aliases of shared nonterminal rules",
 );
 
 function containsAlternatives(outer, inner) {
@@ -1993,6 +2016,7 @@ const broadDispatcher = rule(
 export default {
   meta: { name: "tree-sitter-optimize" },
   rules: {
+    "shared-item-alias": sharedItemAlias,
     "shared-expression-alias": sharedExpressionAlias,
     "single-use-field-choice-sequence": singleUseFieldChoiceSequence,
     "optional-list-head-extraction": optionalListHeadExtraction,
