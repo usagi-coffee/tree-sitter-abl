@@ -519,8 +519,8 @@ export default ({ kw }) => ({
   _when_phrase: ($) => seq(kw("WHEN"), field("when", $._expression)),
   _equals_value: ($) => seq("=", field("value", $._expression)),
   _close_equals_value: ($) => seq(")", $._equals_value),
-  _position_length: ($) =>
-    seq(field("position", $._expression), optional(seq(",", field("length", $._expression)))),
+  _position_length: ($) => seq(field("position", $._expression), optional($._comma_length)),
+  _comma_length: ($) => seq(",", field("length", $._expression)),
   _method_definition_signature: ($) =>
     seq(
       $._method_return_type,

@@ -9,9 +9,7 @@ export default ({ kw }) => ({
       field("target", $._expression),
       ",",
       field("position", $._expression),
-      optional(
-        seq(",", field("length", $._expression), optional(seq(",", field("type", $._expression)))),
-      ),
+      optional(seq($._comma_length, optional(seq(",", field("type", $._expression))))),
       $._close_equals_value,
     ),
 });

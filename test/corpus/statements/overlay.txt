@@ -254,3 +254,38 @@ OVERLAY(cLong, 1, 5, "COLUMN") = "Hi".
     length: (number_literal)
     type: (string_literal)
     value: (string_literal)))
+
+================================================================================
+OVERLAY - length expression retains the following type argument
+================================================================================
+
+OVERLAY(target, pos, CalcLength(1, 2), "RAW") = replacement.
+PUT-STRING(rawBuf, pos, CalcLength(1, 2)) = replacement.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (overlay_statement
+    target: (identifier)
+    position: (identifier)
+    length: (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (number_literal))
+        (argument
+          name: (number_literal))))
+    type: (string_literal)
+    value: (identifier))
+  (put_assign_statement
+    type: (identifier)
+    buffer: (identifier)
+    position: (identifier)
+    length: (function_call
+      function: (identifier)
+      (arguments
+        (argument
+          name: (number_literal))
+        (argument
+          name: (number_literal))))
+    value: (identifier)))
