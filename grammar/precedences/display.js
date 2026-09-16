@@ -28,7 +28,7 @@ export default ($) => [
   [$.widget_qualified_name, $.__display_items],
   // Purpose: prefer item SKIP over frame SKIP.
   // Example: DISPLAY out-param LABEL "Updated YTD Sales" SKIP new-param.
-  ["display_skip", $.__frame_skip_phrase],
+  ["display_skip", "frame_skip"],
   // Purpose: prefer WITH frame phrase over treating WITH as a field identifier.
   // Example: DISPLAY menu WITH TITLE "...".
   [$.frame_phrase, $.__display_field],

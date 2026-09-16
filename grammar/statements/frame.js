@@ -34,7 +34,10 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __frame_head_item: ($) =>
     choice(
-      $.__frame_skip_phrase,
+      prec.left(
+        "frame_skip",
+        seq(kw("SKIP"), optional(field("skip", seq($._parenthesized_expression_prefix, ")")))),
+      ),
       $._display_space_phrase,
       // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
       seq(
@@ -95,11 +98,5 @@ export default ({ kw }) => ({
           alias(kw("NO-TAB-STOP"), $.no_tab_stop),
         ),
       ),
-    ),
-
-  // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
-  __frame_skip_phrase: ($) =>
-    prec.left(
-      seq(kw("SKIP"), optional(field("skip", seq($._parenthesized_expression_prefix, ")")))),
     ),
 });
