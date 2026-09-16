@@ -1,6 +1,7 @@
 import { RuleTester } from "oxlint/plugins-dev";
 
 import {
+  fieldChoiceForwardingRule,
   fieldForwardingRule,
   singleUseAliasSequence,
   singleUseChoiceSequence,
@@ -2118,6 +2119,98 @@ new RuleTester().run("field-forwarding-rule", fieldForwardingRule, {
       name: "core grammar rule maps are supported",
       code: `export default grammar({rules: {root: ($) => $.__widget, __widget: ($) => ${widgetFieldWrapper}}});`,
       errors: [fieldForwardingError],
+    },
+  ],
+});
+
+const fieldChoiceBody =
+  'seq(field("handle", choice($._identifier_or_qualified_name, $.preprocessor_name)))';
+const fieldChoiceRules = (
+  body = fieldChoiceBody,
+  use = "$.__handle",
+  extra = "",
+) => `export default () => ({
+  widget_phrase: ($) => ${use},
+  __handle: ($) => ${body},
+  ${extra}
+});`;
+const fieldChoiceError = {
+  message: /__handle only applies field "handle" to a choice of symbols/,
+};
+new RuleTester().run("field-choice-forwarding-rule", fieldChoiceForwardingRule, {
+  valid: [
+    fieldChoiceRules(undefined, "alias($.__handle, $.handle)"),
+    fieldChoiceRules(undefined, 'field("outer", $.__handle)'),
+    fieldChoiceRules(undefined, "token($.__handle)"),
+    fieldChoiceRules(undefined, "token.immediate($.__handle)"),
+    fieldChoiceRules(undefined, "prec.dynamic(1, $.__handle)"),
+    fieldChoiceRules(undefined, "seq($.__handle, alias($.__handle, $.other))"),
+    fieldChoiceRules(undefined, 'seq($.__handle, $["__handle"])'),
+    fieldChoiceRules(undefined, '$["__handle"]'),
+    fieldChoiceRules(undefined, "$.other"),
+    fieldChoiceRules('field("handle", choice($.__handle, $.other))'),
+    fieldChoiceRules("field(label, choice($.a, $.b))"),
+    fieldChoiceRules('field("handle", $.identifier)'),
+    fieldChoiceRules('field("handle", choice($.a))'),
+    fieldChoiceRules('field("handle", choice($.a, $.b, $.c, $.d, $.e, $.f))'),
+    fieldChoiceRules('field("handle", choice($.a, alias($.b, $.c)))'),
+    fieldChoiceRules('field("handle", choice($.a, optional($.b)))'),
+    fieldChoiceRules('field("flag", choice(kw("A"), kw("B")))'),
+    fieldChoiceRules('field("flag", choice($._a_keyword, $._b_keyword))'),
+    fieldChoiceRules('field("handle", choice($["a"], $.b))'),
+    fieldChoiceRules('seq(field("handle", choice($.a, $.b)), ".")'),
+    fieldChoiceRules('seq(seq(field("handle", choice($.a, $.b))))'),
+    fieldChoiceRules('prec.right(field("handle", choice($.a, $.b)))'),
+    fieldChoiceRules().replaceAll("__handle", "__handle_body"),
+    fieldChoiceRules().replaceAll("__handle", "_handle"),
+    {
+      name: "visible metadata references require a separate precedence analysis",
+      code: `export default grammar({precedences: ($) => [[$.function_call, $.__handle]], rules: {
+        widget_phrase: ($) => $.__handle,
+        __handle: ($) => ${fieldChoiceBody},
+      }});`,
+    },
+    {
+      name: "another rule map is not a local caller",
+      code: `export default grammar({rules: {__handle: ($) => ${fieldChoiceBody}}, other: {rules: {widget_phrase: ($) => $.__handle}}});`,
+    },
+    {
+      name: "non-grammar object properties are ignored",
+      code: `const data = {widget_phrase: ($) => $.__handle, __handle: ($) => ${fieldChoiceBody}};`,
+    },
+    {
+      name: "rule-specific suppression at the helper definition",
+      code: fieldChoiceRules().replace(
+        "  __handle:",
+        "  // oxlint-disable-next-line rule-to-test/field-choice-forwarding-rule\n  __handle:",
+      ),
+    },
+  ],
+  invalid: [
+    {
+      name: "widget handle choice inside a one-element sequence",
+      code: fieldChoiceRules(),
+      errors: [fieldChoiceError],
+    },
+    {
+      name: "direct field-choice body without a sequence",
+      code: fieldChoiceRules('field("handle", choice($.a, $.b))'),
+      errors: [fieldChoiceError],
+    },
+    {
+      name: "multiple unaliased callers",
+      code: fieldChoiceRules(undefined, "seq($.__handle, optional($.__handle))"),
+      errors: [fieldChoiceError],
+    },
+    {
+      name: "static precedence at the use stays intact",
+      code: fieldChoiceRules(undefined, 'prec("widget_handle", $.__handle)'),
+      errors: [fieldChoiceError],
+    },
+    {
+      name: "core grammar rule maps are supported",
+      code: `export default grammar({rules: {widget_phrase: ($) => $.__handle, __handle: ($) => ${fieldChoiceBody}}});`,
+      errors: [fieldChoiceError],
     },
   ],
 });
