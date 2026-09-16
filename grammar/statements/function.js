@@ -82,10 +82,7 @@ export default ({ kw }) => ({
   __function_parameter: ($) =>
     seq(
       optional(field("direction", $._parameter_direction)),
-      choice(
-        $.__function_named_parameter_body,
-        seq(optional(kw("CLASS")), field("type", $._type_name), optional($._extent_phrase)),
-      ),
+      choice($.__function_named_parameter_body, seq($.__function_type, optional($._extent_phrase))),
     ),
   __function_definition_parameter: ($) =>
     seq(optional(field("direction", $._parameter_direction)), $.__function_named_parameter_body),
