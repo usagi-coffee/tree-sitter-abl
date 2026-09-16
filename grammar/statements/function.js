@@ -6,8 +6,7 @@ export default ({ kw }) => ({
       kw("FUNCTION"),
       field("name", $._routine_name),
       optional(kw("RETURNS", { offset: 5 })),
-      optional(kw("CLASS")),
-      field("type", $._type_name),
+      $.__function_type,
       optional($.__function_extent_phrase),
       optional($.__function_access_parameters_tail),
       $.__function_compound_body,
@@ -41,8 +40,7 @@ export default ({ kw }) => ({
     seq(
       field("name", $._routine_name),
       optional(kw("RETURNS", { offset: 5 })),
-      optional(kw("CLASS")),
-      field("type", $._type_name),
+      $.__function_type,
       optional($.__function_forward_tail),
     ),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
@@ -58,6 +56,7 @@ export default ({ kw }) => ({
     ),
 
   __function_extent_phrase: ($) => alias($._extent_phrase, $.extent_phrase),
+  __function_type: ($) => seq(optional(kw("CLASS")), field("type", $._type_name)),
 
   __function_forward_target: ($) =>
     choice(
