@@ -13,24 +13,23 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __put_output_item: ($) =>
     choice(
-      $.__put_expression_item,
-      alias($.__put_skip_item, $.skip),
-      alias($.__put_space_item, $.space),
-    ),
-  __put_expression_item: ($) =>
-    prec.left(
-      // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
-      seq(
-        field("value", $._expression),
-        optional($.format_phrase),
-        optional(
-          seq(
-            // oxlint-disable-next-line tree-sitter-optimize/shared-choice
-            choice($._at_keyword, $._to_keyword),
-            field("position", $._expression),
+      prec.left(
+        "put_expression_item",
+        // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
+        seq(
+          field("value", $._expression),
+          optional($.format_phrase),
+          optional(
+            seq(
+              // oxlint-disable-next-line tree-sitter-optimize/shared-choice
+              choice($._at_keyword, $._to_keyword),
+              field("position", $._expression),
+            ),
           ),
         ),
       ),
+      alias($.__put_skip_item, $.skip),
+      alias($.__put_space_item, $.space),
     ),
 
   __put_skip_item: ($) => prec.right(seq(kw("SKIP"), optional($.__put_parenthesized_count))),

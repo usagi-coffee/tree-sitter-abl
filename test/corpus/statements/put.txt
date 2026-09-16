@@ -210,3 +210,28 @@ PUT UNFORMATTED &IF DEFINED(X) EQ 0 &THEN "a" &ELSEIF DEFINED(Y) EQ 1 &THEN "b" 
       value: (string_literal)
       value: (string_literal))
     (skip)))
+
+================================================================================
+PUT - expression and format positioning retain their fields
+================================================================================
+
+PUT a TO b.
+PUT a FORMAT "x" TO b.
+PUT a TO b SKIP c.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (put_statement
+    value: (identifier)
+    position: (identifier))
+  (put_statement
+    value: (identifier)
+    (format_phrase
+      format: (string_literal)
+      to: (identifier)))
+  (put_statement
+    value: (identifier)
+    position: (identifier)
+    (skip)
+    value: (identifier)))
