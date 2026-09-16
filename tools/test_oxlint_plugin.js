@@ -1,6 +1,7 @@
 import { RuleTester } from "oxlint/plugins-dev";
 
 import {
+  singleUsePrecedenceValue,
   optionalModifierField,
   sharedFieldBody,
   sharedItemAlias,
@@ -2990,6 +2991,83 @@ new RuleTester().run("optional-modifier-field", optionalModifierField, {
         'seq(optional(kw("CLASS")), /* field */ field( "type", $._type_or_string ))',
       ),
       errors: [modifierFieldError],
+    },
+  ],
+});
+
+const precedenceValueBody =
+  'prec.left(seq(field("value", $._expression), optional($.format_phrase), optional(seq(choice($._at_keyword, $._to_keyword), field("position", $._expression)))))';
+const precedenceValueRules = (body = precedenceValueBody, use = "$.__item") =>
+  `export default () => ({root: ($) => choice(${use}, $.other), __item: ($) => ${body}});`;
+const precedenceValueError = {
+  message: /__item has one unaliased local use in root.*precedence-wrapped field-led item/,
+};
+
+new RuleTester().run("single-use-precedence-value", singleUsePrecedenceValue, {
+  valid: [
+    precedenceValueRules().replaceAll("__item", "visible"),
+    precedenceValueRules().replaceAll("__item", "_shared"),
+    precedenceValueRules().replaceAll("__item", "__item_body"),
+    precedenceValueRules(precedenceValueBody, "seq($.__item, $.__item)"),
+    precedenceValueRules(precedenceValueBody, "$.other"),
+    precedenceValueRules(precedenceValueBody, '$["__item"]'),
+    precedenceValueRules(precedenceValueBody.replace("$._expression", "$.__item")),
+    ...[
+      "alias($.__item, $.item)",
+      'field("value", $.__item)',
+      "token($.__item)",
+      "token.immediate($.__item)",
+      "prec.dynamic(1, $.__item)",
+      'alias(seq("X", optional($.__item)), $.item)',
+    ].map((use) => precedenceValueRules(precedenceValueBody, use)),
+    ...[
+      'seq(field("value", $._expression), optional(seq("AT", $.position)))',
+      'prec.left(seq(field("value", $._expression), optional($.tail)))',
+      'prec.left(seq(kw("ITEM"), optional(seq("AT", field("value", $.value)))))',
+      'prec.left(seq(field("value", choice($.a, $.b)), optional(seq("AT", $.position))))',
+      'prec.left(seq(field("value", $.value)))',
+      'prec.left(seq(field("value", $.value), $.a, $.b, optional(seq("AT", $.position))))',
+      'prec.left(seq(field("value", $.value), optional(prec.dynamic(1, $.tail))))',
+      'prec.left(seq(field("value", $.value), helper($)))',
+      'prec.left(seq(field("value", $.value), ...tails))',
+      'prec.dynamic(1, seq(field("value", $.value), optional(seq("AT", $.position))))',
+      'prec.left(seq(field("value", $.value), choice($.a, $.b, $.c, $.d, $.e, $.f, $.g, $.h, $.i, $.j, $.k, $.l, $.m, $.n, $.o, $.p, $.q, $.r, $.s, $.t)))',
+    ].map((body) => precedenceValueRules(body)),
+    ...["inline", "conflicts", "precedences", "supertypes"].map(
+      (metadata) =>
+        `export default grammar({${metadata}: ($) => [$.__item], rules: {root: ($) => $.__item, __item: ($) => ${precedenceValueBody}}});`,
+    ),
+    `const a = grammar({rules: {root: ($) => $.__item}}); const b = grammar({rules: {__item: ($) => ${precedenceValueBody}}});`,
+    `const unrelated = {root: ($) => $.__item, __item: ($) => ${precedenceValueBody}};`,
+    `export default () => ({root: ($) => $.__item,
+      // oxlint-disable-next-line rule-to-test/single-use-precedence-value
+      __item: ($) => ${precedenceValueBody}});`,
+  ],
+  invalid: [
+    {
+      name: "PUT expression-item regression",
+      code: precedenceValueRules(),
+      errors: [precedenceValueError],
+    },
+    {
+      name: "right associativity is preserved",
+      code: precedenceValueRules(precedenceValueBody.replace("prec.left", "prec.right")),
+      errors: [precedenceValueError],
+    },
+    {
+      name: "named precedence is preserved",
+      code: precedenceValueRules(precedenceValueBody.replace("prec.left(", 'prec("value", ')),
+      errors: [precedenceValueError],
+    },
+    {
+      name: "optional caller retains its optionality",
+      code: precedenceValueRules(precedenceValueBody, "optional($.__item)"),
+      errors: [precedenceValueError],
+    },
+    {
+      name: "core rule map",
+      code: `export default grammar({rules: {root: ($) => $.__item, __item: ($) => ${precedenceValueBody}}});`,
+      errors: [precedenceValueError],
     },
   ],
 });

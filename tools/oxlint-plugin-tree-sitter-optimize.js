@@ -726,7 +726,7 @@ export const singleUseKeywordSequence = rule((context) => {
   };
 }, "Suggest measuring inlining of small single-use private sequences containing static kw calls");
 
-export const singleUsePrecedenceClause = rule((context) => {
+function singleUsePrecedenceClauseVisitor(context, valueLed = false) {
   const properties = [];
   const references = new Map();
   const staticPrecedence = ["prec", "prec.left", "prec.right"];
@@ -766,7 +766,15 @@ export const singleUsePrecedenceClause = rule((context) => {
           sequence.arguments.length > 3
         )
           continue;
-        if (!isKeyword(sequence.arguments[0]) || !hasField(sequence)) continue;
+        if (valueLed) {
+          const first = sequence.arguments[0];
+          if (
+            callName(first) !== "field" ||
+            first.arguments.length !== 2 ||
+            !memberName(first.arguments[1])
+          )
+            continue;
+        } else if (!isKeyword(sequence.arguments[0]) || !hasField(sequence)) continue;
         if (sequence.arguments.every(isSmallSequenceElement)) continue;
         const uses = references.get(name) ?? [];
         if (uses.length !== 1) continue;
@@ -792,13 +800,23 @@ export const singleUsePrecedenceClause = rule((context) => {
         report(
           context,
           property,
-          "single-use-precedence-clause",
-          `${name} has one unaliased local use in ${ruleName(owner)}; try inlining this small precedence-wrapped valued clause. Retain associativity and fields, preserve the helper's precedence relationships, check external references and grammar metadata, then measure parser size and validate trees.`,
+          valueLed ? "single-use-precedence-value" : "single-use-precedence-clause",
+          `${name} has one unaliased local use in ${ruleName(owner)}; try inlining this small precedence-wrapped ${valueLed ? "field-led item" : "valued clause"}. Retain associativity and fields, preserve the helper's precedence relationships, check external references and grammar metadata, then measure parser size and validate trees.`,
         );
       }
     },
   };
-}, "Suggest inlining single-use private valued clauses with static precedence wrappers");
+}
+
+export const singleUsePrecedenceClause = rule(
+  (context) => singleUsePrecedenceClauseVisitor(context),
+  "Suggest inlining single-use private valued clauses with static precedence wrappers",
+);
+
+export const singleUsePrecedenceValue = rule(
+  (context) => singleUsePrecedenceClauseVisitor(context, true),
+  "Suggest inlining single-use private field-led items with static precedence wrappers",
+);
 
 export const singleUsePrecedence = rule((context) => {
   const properties = [];
@@ -2117,6 +2135,7 @@ const broadDispatcher = rule(
 export default {
   meta: { name: "tree-sitter-optimize" },
   rules: {
+    "single-use-precedence-value": singleUsePrecedenceValue,
     "optional-modifier-field": optionalModifierField,
     "shared-field-body": sharedFieldBody,
     "shared-item-alias": sharedItemAlias,

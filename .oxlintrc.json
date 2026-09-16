@@ -21,6 +21,7 @@
     {
       "files": ["grammar.js", "grammar/**/*.js"],
       "rules": {
+        "tree-sitter-optimize/single-use-precedence-value": "warn",
         "tree-sitter-optimize/optional-modifier-field": "warn",
         "tree-sitter-optimize/shared-field-body": "warn",
         "tree-sitter-optimize/shared-item-alias": "warn",
