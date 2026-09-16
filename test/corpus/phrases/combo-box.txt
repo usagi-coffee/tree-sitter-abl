@@ -58,3 +58,59 @@ DEFINE VARIABLE p AS CHARACTER VIEW-AS COMBO-BOX LIST-ITEM-PAIRS "a",1,"b",2,"c"
         value: (number_literal)
         label: (string_literal)
         value: (number_literal)))))
+
+================================================================================
+COMBO-BOX - list head preserves items fields and following options
+================================================================================
+
+DEFINE VARIABLE n AS INTEGER VIEW-AS COMBO-BOX LIST-ITEMS -1, 0, 2 SORT NO-UNDO.
+DEFINE VARIABLE s AS CHARACTER VIEW-AS COMBO-BOX LIST-ITEMS "only" DROP-DOWN-LIST.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (view_as_phrase
+      (combo_box_phrase
+        items: (unary_expression
+          (number_literal))
+        items: (number_literal)
+        items: (number_literal)
+        (sort)))
+    (no_undo))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (view_as_phrase
+      (combo_box_phrase
+        items: (string_literal)
+        (drop_down_list)))))
+
+================================================================================
+DISPLAY - COMBO-BOX list head retains signed items and following options
+================================================================================
+
+DISPLAY n VIEW-AS COMBO-BOX LIST-ITEMS -1, 0, 2 SORT.
+DISPLAY s VIEW-AS COMBO-BOX LIST-ITEMS "only" DROP-DOWN-LIST.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (display_statement
+    (field
+      field: (identifier))
+    (format_phrase
+      (combo_box_phrase
+        items: (number_literal)
+        items: (number_literal)
+        items: (number_literal)
+        (sort))))
+  (display_statement
+    (field
+      field: (identifier))
+    (format_phrase
+      (combo_box_phrase
+        items: (string_literal)
+        (drop_down_list)))))
