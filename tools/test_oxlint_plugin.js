@@ -1,6 +1,7 @@
 import { RuleTester } from "oxlint/plugins-dev";
 
 import {
+  closingDelimiterWrapper,
   singleUseDelimitedSequence,
   orderedOptionalChain,
   precedenceListHeadExtraction,
@@ -3725,6 +3726,97 @@ new RuleTester().run("single-use-delimited-sequence", singleUseDelimitedSequence
       name: "core grammar",
       code: `export default grammar({rules: {root: ($) => $.__args, __args: ($) => seq("(", $.a, ",", $.b, ")")}});`,
       errors: [delimitedSequenceError],
+    },
+  ],
+});
+
+const closingWrapperGrammar = (open = '"("', close = '")"') => `
+export default () => ({
+  first: ($) => seq("FIELDS", $.__wrapped),
+  second: ($) => seq("EXCEPT", $.__wrapped),
+  __wrapped: ($) => seq($.__prefix, ${close}),
+  __prefix: ($) => seq(${open}, optional($.names)),
+});`;
+const closingWrapperError = {
+  message: /__wrapped only appends a closing delimiter to __prefix at 2 local unaliased uses/,
+};
+new RuleTester().run("closing-delimiter-wrapper", closingDelimiterWrapper, {
+  valid: [
+    closingWrapperGrammar().replaceAll("__wrapped", "visible_wrapper"),
+    closingWrapperGrammar().replaceAll("__wrapped", "__main_body"),
+    closingWrapperGrammar().replaceAll("$.__wrapped", '$["__wrapped"]'),
+    closingWrapperGrammar().replace('seq("EXCEPT", $.__wrapped)', 'seq("EXCEPT", $.other)'),
+    closingWrapperGrammar().replace('seq("EXCEPT", $.__wrapped)', 'seq("EXCEPT", $["__wrapped"])'),
+    closingWrapperGrammar().replace('seq($.__prefix, ")")', 'prec.right(seq($.__prefix, ")"))'),
+    closingWrapperGrammar().replace('seq($.__prefix, ")")', 'seq($.__prefix, ",", ")")'),
+    closingWrapperGrammar().replace('seq($.__prefix, ")")', "seq($.__prefix, $.close)"),
+    closingWrapperGrammar().replace(
+      'seq("(", optional($.names))',
+      'seq("(", optional($.__wrapped))',
+    ),
+    closingWrapperGrammar().replace('seq("(", optional($.names))', "makePrefix($)"),
+    closingWrapperGrammar().replace(
+      'seq("(", optional($.names))',
+      'prec.right(seq("(", optional($.names)))',
+    ),
+    closingWrapperGrammar('"["', '")"'),
+    closingWrapperGrammar('"START"', '"END"'),
+    ...["alias", "field", "token", "token.immediate", "prec.dynamic"].map((wrapper) =>
+      closingWrapperGrammar().replace(
+        'seq("FIELDS", $.__wrapped)',
+        `seq("FIELDS", ${wrapper}(${wrapper === "field" ? '\"items\", ' : wrapper === "prec.dynamic" ? "1, " : ""}$.__wrapped${wrapper === "alias" ? ", $.items" : ""}))`,
+      ),
+    ),
+    `export default grammar({inline: ($) => [$.__wrapped], rules: {first: ($) => $.__wrapped, second: ($) => $.__wrapped, __wrapped: ($) => seq($.__prefix, ")"), __prefix: ($) => seq("(", $.names)}});`,
+    `const a = grammar({rules: {first: ($) => $.__wrapped, second: ($) => $.__wrapped}}); const b = grammar({rules: {__wrapped: ($) => seq($.__prefix, ")"), __prefix: ($) => seq("(", $.names)}});`,
+    closingWrapperGrammar().replace("export default () => (", "const unrelated = ("),
+    ...["first", "__wrapped"].map((name) =>
+      closingWrapperGrammar().replace(
+        `  ${name}:`,
+        `  // oxlint-disable-next-line rule-to-test/closing-delimiter-wrapper\n  ${name}:`,
+      ),
+    ),
+  ],
+  invalid: [
+    {
+      name: "QUERY FIELDS and EXCEPT regression",
+      code: closingWrapperGrammar(),
+      errors: [closingWrapperError],
+    },
+    {
+      name: "square brackets",
+      code: closingWrapperGrammar('"["', '"]"'),
+      errors: [closingWrapperError],
+    },
+    { name: "braces", code: closingWrapperGrammar('"{"', '"}"'), errors: [closingWrapperError] },
+    {
+      name: "caller optionality preserved",
+      code: closingWrapperGrammar().replace(
+        'seq("FIELDS", $.__wrapped)',
+        'seq("FIELDS", optional($.__wrapped))',
+      ),
+      errors: [closingWrapperError],
+    },
+    {
+      name: "caller static precedence preserved",
+      code: closingWrapperGrammar().replace(
+        'seq("FIELDS", $.__wrapped)',
+        'seq("FIELDS", prec.right($.__wrapped))',
+      ),
+      errors: [closingWrapperError],
+    },
+    {
+      name: "prefix suppression for another transformation",
+      code: closingWrapperGrammar().replace(
+        "  __prefix:",
+        "  // oxlint-disable-next-line rule-to-test/single-use-sequence\n  __prefix:",
+      ),
+      errors: [closingWrapperError],
+    },
+    {
+      name: "core grammar",
+      code: `export default grammar({rules: {first: ($) => $.__wrapped, second: ($) => $.__wrapped, __wrapped: ($) => seq($.__prefix, ")"), __prefix: ($) => seq("(", $.names)}});`,
+      errors: [closingWrapperError],
     },
   ],
 });
