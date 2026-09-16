@@ -21,6 +21,7 @@
     {
       "files": ["grammar.js", "grammar/**/*.js"],
       "rules": {
+        "tree-sitter-optimize/single-use-precedence-clause": "warn",
         "tree-sitter-optimize/field-choice-forwarding-rule": "warn",
         "tree-sitter-optimize/field-forwarding-rule": "warn",
         "tree-sitter-optimize/single-use-alias-sequence": "warn",

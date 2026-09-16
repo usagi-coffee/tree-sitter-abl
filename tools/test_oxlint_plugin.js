@@ -1,6 +1,7 @@
 import { RuleTester } from "oxlint/plugins-dev";
 
 import {
+  singleUsePrecedenceClause,
   fieldChoiceForwardingRule,
   fieldForwardingRule,
   singleUseAliasSequence,
@@ -2211,6 +2212,104 @@ new RuleTester().run("field-choice-forwarding-rule", fieldChoiceForwardingRule, 
       name: "core grammar rule maps are supported",
       code: `export default grammar({rules: {widget_phrase: ($) => $.__handle, __handle: ($) => ${fieldChoiceBody}}});`,
       errors: [fieldChoiceError],
+    },
+  ],
+});
+
+const precedenceClauseBody =
+  'prec.left(seq(kw("SKIP"), optional(field("skip", seq($._parenthesized_expression_prefix, ")")))))';
+const precedenceClauseRules = (
+  body = precedenceClauseBody,
+  use = "$.__skip",
+  extra = "",
+) => `export default () => ({
+  item: ($) => ${use},
+  __skip: ($) => ${body},
+  ${extra}
+});`;
+const precedenceClauseError = {
+  message:
+    /__skip has one unaliased local use in item; try inlining this small precedence-wrapped valued clause/,
+};
+new RuleTester().run("single-use-precedence-clause", singleUsePrecedenceClause, {
+  valid: [
+    precedenceClauseRules(undefined, "seq($.__skip, $.__skip)"),
+    precedenceClauseRules(undefined, "alias($.__skip, $.skip)"),
+    precedenceClauseRules(undefined, 'field("outer", $.__skip)'),
+    precedenceClauseRules(undefined, "token($.__skip)"),
+    precedenceClauseRules(undefined, "token.immediate($.__skip)"),
+    precedenceClauseRules(undefined, "prec.dynamic(1, $.__skip)"),
+    precedenceClauseRules(undefined, 'seq($.__skip, $["__skip"])'),
+    precedenceClauseRules(undefined, '$["__skip"]'),
+    precedenceClauseRules(undefined, "$.other"),
+    precedenceClauseRules('prec.left(seq(kw("X"), field("value", $.__skip)))'),
+    precedenceClauseRules('seq(kw("X"), field("value", $.value))'),
+    precedenceClauseRules('prec.left(seq($._keyword, field("value", $.value)))'),
+    precedenceClauseRules('prec.left(seq($.name, field("value", $.value)))'),
+    precedenceClauseRules('prec.left(seq(kw("X"), $.value))'),
+    precedenceClauseRules('prec.left(seq(kw("X"), field("value", $.value), $.a, $.b))'),
+    precedenceClauseRules('prec.left(choice(seq(kw("X"), field("value", $.value)), $.other))'),
+    precedenceClauseRules('prec.dynamic(1, seq(kw("X"), field("value", $.value)))'),
+    precedenceClauseRules('prec.left(prec.dynamic(1, seq(kw("X"), field("value", $.value))))'),
+    precedenceClauseRules('prec.left(seq(kw("X"), field("value", prec.dynamic(1, $.value))))'),
+    precedenceClauseRules('prec.left(seq(kw("X"), field("value", unknown())))'),
+    precedenceClauseRules(
+      `prec.left(seq(kw("X"), field("value", seq(${Array.from({ length: 30 }, (_, i) => `$.v${i}`).join(",")}))))`,
+    ),
+    precedenceClauseRules().replaceAll("__skip", "__skip_body"),
+    precedenceClauseRules().replaceAll("__skip", "_skip"),
+    {
+      name: "local metadata references need a separate precedence analysis",
+      code: `export default grammar({precedences: ($) => [[$.__skip, $.function_call]], rules: {
+        item: ($) => $.__skip,
+        __skip: ($) => ${precedenceClauseBody},
+      }});`,
+    },
+    {
+      name: "a caller in another rule map is not a local use",
+      code: `export default grammar({rules: {__skip: ($) => ${precedenceClauseBody}}, other: {rules: {item: ($) => $.__skip}}});`,
+    },
+    {
+      name: "non-grammar objects are ignored",
+      code: `const data = {item: ($) => $.__skip, __skip: ($) => ${precedenceClauseBody}};`,
+    },
+    {
+      name: "rule-specific suppression applies to the helper definition",
+      code: precedenceClauseRules().replace(
+        "  __skip:",
+        "  // oxlint-disable-next-line rule-to-test/single-use-precedence-clause\n  __skip:",
+      ),
+    },
+  ],
+  invalid: [
+    {
+      name: "DISPLAY SKIP with a compound field and left associativity",
+      code: precedenceClauseRules(),
+      errors: [precedenceClauseError],
+    },
+    {
+      name: "named precedence and right associativity are retained together",
+      code: precedenceClauseRules(
+        'prec("position", prec.right(seq(kw("COLUMN", {offset:3}), field("column", $.expression))))',
+      ),
+      errors: [precedenceClauseError],
+    },
+    {
+      name: "a shared keyword followed by a compound field",
+      code: precedenceClauseRules(
+        'prec.left(seq($._at_keyword, field("position", seq("(", $.expression, ")"))))',
+      ),
+      errors: [precedenceClauseError],
+    },
+    {
+      name: "static precedence around the callsite stays intact",
+      code: precedenceClauseRules(undefined, "prec.right(seq($.__skip, optional($.tail)))"),
+      errors: [precedenceClauseError],
+    },
+    {
+      name: "core grammar rule maps are supported",
+      code: `export default grammar({rules: {item: ($) => $.__skip, __skip: ($) => ${precedenceClauseBody}}});`,
+      errors: [precedenceClauseError],
     },
   ],
 });
