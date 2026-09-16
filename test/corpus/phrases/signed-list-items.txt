@@ -1,0 +1,73 @@
+================================================================================
+LIST-ITEMS - signed literal leaves and expression boundaries
+================================================================================
+
+DEFINE VARIABLE n AS DECIMAL VIEW-AS COMBO-BOX LIST-ITEMS
+  -1, +2, -.5, +.25, -8 - 3 - 1, -1 + 2 * 3, 1 - -2, -value, (-1 + 2), -1 < 0 AND ready.
+x = -1 + 2.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (view_as_phrase
+      (combo_box_phrase
+        items: (number_literal)
+        items: (number_literal)
+        items: (number_literal)
+        items: (number_literal)
+        items: (binary_expression
+          (binary_expression
+            (number_literal)
+            (number_literal))
+          (number_literal))
+        items: (binary_expression
+          (number_literal)
+          (binary_expression
+            (number_literal)
+            (number_literal)))
+        items: (binary_expression
+          (number_literal)
+          (unary_expression
+            (number_literal)))
+        items: (unary_expression
+          (identifier))
+        items: (parenthesized_expression
+          (binary_expression
+            (unary_expression
+              (number_literal))
+            (number_literal)))
+        items: (binary_expression
+          (binary_expression
+            (number_literal)
+            (number_literal))
+          (identifier)))))
+  (assignment_statement
+    left: (identifier)
+    operator: (assignment_operator)
+    right: (binary_expression
+      (unary_expression
+        (number_literal))
+      (number_literal))))
+
+================================================================================
+SELECTION-LIST - signed literal values
+================================================================================
+
+DEFINE VARIABLE n AS DECIMAL VIEW-AS SELECTION-LIST LIST-ITEMS -1.5, +2.5 SIZE 12 BY 3.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (view_as_phrase
+      (selection_list_phrase
+        items: (number_literal)
+        items: (number_literal)
+        (size_phrase
+          width: (number_literal)
+          height: (number_literal))))))

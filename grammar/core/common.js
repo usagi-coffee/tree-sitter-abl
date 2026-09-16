@@ -539,7 +539,7 @@ export default ({ kw }) => ({
     ),
   _list_items_phrase: ($) => seq(kw("LIST-ITEMS"), field("items", $._list_item_values)),
   _list_item_pairs_phrase: ($) => seq(kw("LIST-ITEM-PAIRS"), field("pairs", $._list_item_pairs)),
-  _list_item_values: ($) => seq($._expression, optional($._list_item_values_tail)),
+  _list_item_values: ($) => seq($._list_item_expression, optional($._list_item_values_tail)),
   // oxlint-disable-next-line tree-sitter-optimize/shared-recursion
   _list_item_values_tail: ($) => seq(",", $._list_item_values),
   _list_item_pairs: ($) => seq($._list_item_pair, optional($._list_item_pairs_tail)),
