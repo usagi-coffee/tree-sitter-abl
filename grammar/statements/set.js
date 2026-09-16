@@ -9,7 +9,7 @@ export default ({ kw }) => ({
       optional($._stream_phrase),
       optional(alias(kw("UNLESS-HIDDEN"), $.unless_hidden)),
     ),
-  __set_body: ($) => choice($.__set_record_body, $.__set_fields_body),
+  __set_body: ($) => choice($._set_update_record_body, $.__set_fields_body),
 
   __set_fields_body: ($) =>
     // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
@@ -58,6 +58,4 @@ export default ({ kw }) => ({
       "^",
     ),
   __set_fields: ($) => prec.right(seq(alias($.__set_field, $.field), optional($.__set_fields))),
-
-  __set_record_body: ($) => $._set_update_record_body,
 });
