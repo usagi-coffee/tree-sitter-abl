@@ -30,10 +30,8 @@ export default ({ kw }) => ({
       field("parent_field", $.identifier),
       ",",
       field("child_field", $.identifier),
-      optional($.__dataset_relation_field_pair_tail),
+      optional(seq(",", $.__dataset_relation_field_pair_head)),
     ),
-  // oxlint-disable-next-line tree-sitter-optimize/single-use-sequence
-  __dataset_relation_field_pair_tail: ($) => seq(",", $.__dataset_relation_field_pair_head),
   __dataset_data_relation_after_reposition: ($) =>
     choice(
       seq(
