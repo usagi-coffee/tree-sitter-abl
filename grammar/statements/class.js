@@ -308,13 +308,10 @@ export default ({ kw }) => ({
       // oxlint-disable-next-line tree-sitter-optimize/shared-choice
       optional(field("size", choice($.number_literal, $.preprocessor_name, $.identifier))),
     ),
-  // oxlint-disable-next-line tree-sitter-optimize/single-use-keyword-sequence
-  __class_typed_extent_phrase: ($) => seq($.__class_type, optional($.__class_method_extent_phrase)),
-
   // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __class_method_variable_type_phrase: ($) =>
     choice(
-      seq($._as_keyword, $.__class_typed_extent_phrase),
+      seq($._as_keyword, $.__class_type, optional($.__class_method_extent_phrase)),
       seq(
         $._like_keyword,
         field("like", $._identifier_or_qualified_name),
