@@ -78,9 +78,8 @@ export default ({ kw }) => ({
   __function_definition_parameter_head: ($) =>
     seq(
       alias($.__function_definition_parameter, $.parameter),
-      optional($.__function_definition_parameter_tail),
+      optional(seq(",", $.__function_definition_parameter_head)),
     ),
-  __function_definition_parameter_tail: ($) => seq(",", $.__function_definition_parameter_head),
   __function_parameter: ($) =>
     seq(
       optional(field("direction", $._parameter_direction)),
