@@ -1,0 +1,18 @@
+================================================================================
+GO-ON - recursive continuation preserves mixed separators
+================================================================================
+
+SET field1 GO-ON(F1, "F2" F3, "F4" F5).
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (set_statement
+    (field
+      field: (identifier))
+    (go_on_phrase
+      (identifier)
+      (string_literal)
+      (identifier)
+      (string_literal)
+      (identifier))))
