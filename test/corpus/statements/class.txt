@@ -878,3 +878,37 @@ END CLASS.
         (identifier))
       name: (identifier)
       (signature))))
+
+================================================================================
+CLASS - property and parameter types share optional CLASS without changing fields
+================================================================================
+
+CLASS Sample:
+  DEFINE PUBLIC PROPERTY Item AS CLASS Progress.Lang.Object GET. SET.
+  CONSTRUCTOR PUBLIC Sample (INPUT items AS CLASS Progress.Lang.Object EXTENT):
+  END CONSTRUCTOR.
+END CLASS.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (class_definition
+    name: (identifier)
+    (property_definition
+      (access_modifier)
+      name: (identifier)
+      type: (qualified_name
+        left: (identifier)
+        right: (identifier)
+        right: (identifier)))
+    (constructor_definition
+      (access_modifier)
+      name: (identifier)
+      (parameters
+        (parameter
+          name: (identifier)
+          type: (qualified_name
+            left: (identifier)
+            right: (identifier)
+            right: (identifier))))
+      (body))))

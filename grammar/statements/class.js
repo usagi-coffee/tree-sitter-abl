@@ -1,4 +1,5 @@
 export default ({ kw }) => ({
+  __class_type: ($) => seq(optional(kw("CLASS")), field("type", $._type_or_string)),
   class_definition: ($) => seq($.__class_prefix, $._terminator),
 
   // oxlint-disable-next-line tree-sitter-optimize/single-use-keyword-sequence
@@ -278,8 +279,7 @@ export default ({ kw }) => ({
       alias(kw("FINAL"), $.final_modifier),
     ),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-keyword-sequence
-  __class_property_type_phrase: ($) =>
-    seq(optional($._as_keyword), optional(kw("CLASS")), field("type", $._type_or_string)),
+  __class_property_type_phrase: ($) => seq(optional($._as_keyword), $.__class_type),
   __class_implements_tail: ($) =>
     seq(",", field("interface", $._type_name), optional($.__class_implements_tail)),
 
@@ -313,12 +313,7 @@ export default ({ kw }) => ({
       optional(field("size", choice($.number_literal, $.preprocessor_name, $.identifier))),
     ),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-keyword-sequence
-  __class_typed_extent_phrase: ($) =>
-    seq(
-      optional(kw("CLASS")),
-      field("type", $._type_or_string),
-      optional($.__class_method_extent_phrase),
-    ),
+  __class_typed_extent_phrase: ($) => seq($.__class_type, optional($.__class_method_extent_phrase)),
 
   // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __class_method_variable_type_phrase: ($) =>
