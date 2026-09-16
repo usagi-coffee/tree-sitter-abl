@@ -64,6 +64,6 @@ export default ({ kw }) => ({
       seq($._identifier_or_qualified_name, optional(seq("[", field("index", $._expression), "]"))),
       optional($.__record_field_name_tail),
     ),
-  // oxlint-disable-next-line tree-sitter-optimize/single-use-sequence
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-sequence, tree-sitter-optimize/recursive-continuation-inline
   __record_field_name_tail: ($) => seq(optional(","), $.__record_field_names),
 });
