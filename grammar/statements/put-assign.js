@@ -3,7 +3,15 @@ export default ({ kw }) => ({
 
   // oxlint-disable-next-line tree-sitter-optimize/single-use-sequence
   __put_assign_prefix: ($) =>
-    seq(field("type", $.__put_assign_type), $.__put_assign_args, $._equals_value),
+    seq(
+      field("type", $.__put_assign_type),
+      "(",
+      field("buffer", $._expression),
+      ",",
+      $._position_length,
+      ")",
+      $._equals_value,
+    ),
 
   // oxlint-disable-next-line tree-sitter-optimize/body-extraction
   __put_assign_type: ($) =>
@@ -20,5 +28,4 @@ export default ({ kw }) => ({
       alias(kw("PUT-DOUBLE"), $.identifier),
       alias(kw("PUT-STRING"), $.identifier),
     ),
-  __put_assign_args: ($) => seq("(", field("buffer", $._expression), ",", $._position_length, ")"),
 });
