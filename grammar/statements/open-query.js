@@ -8,7 +8,9 @@ export default ({ kw }) => ({
       kw("OPEN"),
       kw("QUERY"),
       field("query", $.identifier),
-      $.__open_query_records,
+      choice($._for_keyword, kw("PRESELECT")),
+      kw("EACH"),
+      $.__open_query_record_tail,
       optional($.query_tuning_phrase),
       optional($.__open_query_tail_after_tuning),
     ),
@@ -37,8 +39,6 @@ export default ({ kw }) => ({
       $.__open_query_max_rows_option,
     ),
   __open_query_max_rows_option: ($) => seq(kw("MAX-ROWS"), field("max_rows", $._expression)),
-  __open_query_records: ($) =>
-    seq(choice($._for_keyword, kw("PRESELECT")), kw("EACH"), $.__open_query_record_tail),
   __open_query_record_tail: ($) =>
     seq(
       alias($.__open_query_record_phrase, $.record_phrase),
