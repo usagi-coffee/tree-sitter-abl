@@ -27,7 +27,6 @@ export default ($) => [
     "format_position",
     $._format_label,
     $._format_labels,
-    $._format_labels_tail,
     $.__format_expression,
     $.__format_at_phrase,
     $.__format_at_column,
