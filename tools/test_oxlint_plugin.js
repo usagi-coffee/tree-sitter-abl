@@ -1,6 +1,7 @@
 import { RuleTester } from "oxlint/plugins-dev";
 
 import {
+  sharedCommaContinuation,
   nullableSlotList,
   singleUseFieldChoice,
   recursiveContinuationInline,
@@ -4031,5 +4032,63 @@ new RuleTester().run("nullable-slot-list", nullableSlotList, {
     },
   ],
 });
+
+const continuationSeed = {
+  filename: "grammar/phrases/on-endkey.js",
+  code: 'export default () => ({first: ($) => seq("ENDKEY", optional(seq(",", $._action)))});',
+};
+const continuationTarget = 'export default () => ({second: ($) => seq("STOP", ",", $._action)});';
+for (const code of [
+  continuationTarget.replace("$._action", "$._other"),
+  continuationTarget.replace("$._action", "$.__private"),
+  continuationTarget.replace("$._action", "$._some_keyword"),
+  continuationTarget.replace("$._action", "$.visible"),
+  continuationTarget.replace("$._action", 'field("action", $._action)'),
+  continuationTarget.replace("$._action", '$["_action"]'),
+  continuationTarget.replace('","', '";"'),
+  ...["alias", "token", "token.immediate", "prec", "prec.left", "prec.right", "prec.dynamic"].map(
+    (wrapper) =>
+      continuationTarget.replace(
+        'seq("STOP", ",", $._action)',
+        `${wrapper}(${wrapper === "prec" ? '"action", ' : wrapper === "prec.dynamic" ? "1, " : ""}seq("STOP", ",", $._action)${wrapper === "alias" ? ", $.action" : ""})`,
+      ),
+  ),
+  continuationTarget.replace(
+    "second:",
+    "\n// oxlint-disable-next-line rule-to-test/shared-comma-continuation\nsecond:",
+  ),
+]) {
+  resetSharingCandidates();
+  new RuleTester().run("shared-comma-continuation", sharedCommaContinuation, {
+    valid: [continuationSeed, { filename: "grammar/phrases/on-stop.js", code }],
+    invalid: [],
+  });
+}
+resetSharingCandidates();
+new RuleTester().run("shared-comma-continuation", sharedCommaContinuation, {
+  valid: [continuationSeed],
+  invalid: [
+    {
+      filename: "grammar/phrases/on-stop.js",
+      code: continuationTarget,
+      errors: [{ message: /comma and _action continuation repeat a fragment in first/ }],
+    },
+  ],
+});
+resetSharingCandidates();
+new RuleTester().run("shared-comma-continuation", sharedCommaContinuation, {
+  valid: [
+    {
+      ...continuationSeed,
+      code: continuationSeed.code.replace(
+        "first:",
+        "\n// oxlint-disable-next-line rule-to-test/shared-comma-continuation\nfirst:",
+      ),
+    },
+    { filename: "grammar/phrases/on-stop.js", code: continuationTarget },
+  ],
+  invalid: [],
+});
+resetSharingCandidates();
 
 console.log("✓ Optimizer lint plugin tests passed successfully");
