@@ -300,11 +300,7 @@ export default ({ kw }) => ({
     choice(field("type", alias(kw("VOID"), $.identifier)), $.__class_method_return_type_phrase),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-keyword-sequence
   __class_method_return_type_phrase: ($) =>
-    seq(
-      optional(kw("CLASS")),
-      field("type", $._type_or_string),
-      optional($.__class_method_return_extent_phrase),
-    ),
+    seq($.__class_type, optional($.__class_method_return_extent_phrase)),
   // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
   __class_method_return_extent_phrase: ($) =>
     seq(
