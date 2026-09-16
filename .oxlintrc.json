@@ -21,6 +21,7 @@
     {
       "files": ["grammar.js", "grammar/**/*.js"],
       "rules": {
+        "tree-sitter-optimize/recursive-continuation-inline": "warn",
         "tree-sitter-optimize/shared-comma-field": "warn",
         "tree-sitter-optimize/closing-delimiter-wrapper": "warn",
         "tree-sitter-optimize/single-use-delimited-sequence": "warn",

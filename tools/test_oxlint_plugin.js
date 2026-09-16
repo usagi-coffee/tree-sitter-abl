@@ -1,6 +1,7 @@
 import { RuleTester } from "oxlint/plugins-dev";
 
 import {
+  recursiveContinuationInline,
   sharedCommaField,
   closingDelimiterWrapper,
   singleUseDelimitedSequence,
@@ -3910,5 +3911,40 @@ new RuleTester().run("shared-comma-field", sharedCommaField, {
   invalid: [],
 });
 resetSharingCandidates();
+
+const continuationGrammar = (separator = 'optional(",")') =>
+  `export default () => ({_tail: ($) => seq(${separator}, $.__head), __head: ($) => seq(choice($.identifier, $.string_literal), optional($._tail))});`;
+const continuationError = { message: /_tail only adds a separator before recursing into __head/ };
+new RuleTester().run("recursive-continuation-inline", recursiveContinuationInline, {
+  valid: [
+    continuationGrammar().replace('seq(optional(","), $.__head)', 'seq(optional(","), $.other)'),
+    continuationGrammar().replace("optional($._tail)", "repeat($._tail)"),
+    continuationGrammar().replaceAll("_tail", "visible_tail"),
+    continuationGrammar().replaceAll("__head", "visible_head"),
+    continuationGrammar().replaceAll("$._tail", '$["_tail"]'),
+    continuationGrammar('";"'),
+    continuationGrammar().replace(
+      'seq(optional(","), $.__head)',
+      'prec.right(seq(optional(","), $.__head))',
+    ),
+    continuationGrammar().replace(
+      "seq(choice($.identifier, $.string_literal), optional($._tail))",
+      "prec.right(seq(choice($.identifier, $.string_literal), optional($._tail)))",
+    ),
+    continuationGrammar().replace("_tail:", "extra: ($) => $._tail, _tail:"),
+    continuationGrammar().replace("_tail:", 'extra: ($) => $["_tail"], _tail:'),
+    continuationGrammar().replace("export default () => (", "const unrelated = ("),
+    ...["_tail", "__head"].map((name) =>
+      continuationGrammar().replace(
+        `${name}:`,
+        `\n// oxlint-disable-next-line rule-to-test/recursive-continuation-inline\n${name}:`,
+      ),
+    ),
+  ],
+  invalid: [
+    { name: "GO-ON optional separator", code: continuationGrammar(), errors: [continuationError] },
+    { name: "required separator", code: continuationGrammar('","'), errors: [continuationError] },
+  ],
+});
 
 console.log("✓ Optimizer lint plugin tests passed successfully");
