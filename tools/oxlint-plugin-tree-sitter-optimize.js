@@ -442,15 +442,33 @@ export const singleUseAliasSequence = rule((context) => {
   };
 }, "Suggest inlining single-use private sequences containing symbol aliases");
 
-export const singleUseChoiceSequence = rule((context) => {
+function singleUseChoiceSequenceVisitor(context, fieldChoice = false) {
   const properties = [];
   const references = new Map();
   const smallElement = (node) => isSmallSequenceElement(node) || isStaticKeywordCall(node);
-  const smallChoice = (node) =>
-    callName(node) === "choice" &&
-    node.arguments.length >= 2 &&
-    node.arguments.length <= 5 &&
-    node.arguments.every(smallElement);
+  const atom = (node) =>
+    memberName(node) !== null ||
+    (node?.type === "Literal" && typeof node.value === "string" && node.value.length > 0) ||
+    isStaticKeywordCall(node);
+  const alternative = (node) => {
+    if (atom(node)) return true;
+    if (callName(node) !== "alias" || node.arguments.length !== 2 || !atom(node.arguments[0]))
+      return false;
+    const target = memberName(node.arguments[1]);
+    return target !== null && !target.startsWith("_");
+  };
+  const smallChoice = (node) => {
+    if (fieldChoice) {
+      if (callName(node) !== "field" || node.arguments.length !== 2) return false;
+      node = node.arguments[1];
+    }
+    return (
+      callName(node) === "choice" &&
+      node.arguments.length >= 2 &&
+      node.arguments.length <= 5 &&
+      node.arguments.every(fieldChoice ? alternative : smallElement)
+    );
+  };
   return {
     Property(node) {
       if (isRuleProperty(node)) properties.push(node);
@@ -504,13 +522,23 @@ export const singleUseChoiceSequence = rule((context) => {
         report(
           context,
           property,
-          "single-use-choice-sequence",
-          `${name} has one unaliased local use in ${ruleName(owner)}; try inlining this small sequence containing a direct choice. Preserve alternative order, fields and precedence, check external references and grammar metadata, then measure parser size and validate trees.`,
+          fieldChoice ? "single-use-field-choice-sequence" : "single-use-choice-sequence",
+          `${name} has one unaliased local use in ${ruleName(owner)}; try inlining this small sequence containing a ${fieldChoice ? "field-wrapped" : "direct"} choice. Preserve alternative order, fields${fieldChoice ? ", aliases" : ""} and precedence, check external references and grammar metadata, then measure parser size and validate trees.`,
         );
       }
     },
   };
-}, "Suggest inlining single-use private sequences containing small direct choices");
+}
+
+export const singleUseChoiceSequence = rule(
+  (context) => singleUseChoiceSequenceVisitor(context),
+  "Suggest inlining single-use private sequences containing small direct choices",
+);
+
+export const singleUseFieldChoiceSequence = rule(
+  (context) => singleUseChoiceSequenceVisitor(context, true),
+  "Suggest inlining single-use private sequences containing small field-wrapped choices",
+);
 
 export const singleUseOptionalSequence = rule((context) => {
   const properties = [];
@@ -1950,6 +1978,7 @@ const broadDispatcher = rule(
 export default {
   meta: { name: "tree-sitter-optimize" },
   rules: {
+    "single-use-field-choice-sequence": singleUseFieldChoiceSequence,
     "optional-list-head-extraction": optionalListHeadExtraction,
     "single-use-precedence-clause": singleUsePrecedenceClause,
     "field-choice-forwarding-rule": fieldChoiceForwardingRule,

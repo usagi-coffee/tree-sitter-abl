@@ -1,6 +1,7 @@
 import { RuleTester } from "oxlint/plugins-dev";
 
 import {
+  singleUseFieldChoiceSequence,
   optionalListHeadExtraction,
   singleUsePrecedenceClause,
   fieldChoiceForwardingRule,
@@ -2426,6 +2427,98 @@ new RuleTester().run("optional-list-head-extraction", optionalListHeadExtraction
       name: "core grammar map",
       code: `export default grammar({rules: { parameters: ($) => optional(seq($.item, optional($.__tail))), __tail: ($) => seq(",", $.item, optional($.__tail)) }});`,
       errors: [optionalHeadError],
+    },
+  ],
+});
+
+const fieldChoiceSequenceBody =
+  'seq(field("action", choice(alias(kw("GET"), $.identifier), alias(kw("REQUEST"), $.identifier))), $.__target_body)';
+const fieldChoiceSequenceGrammar = (body = fieldChoiceSequenceBody, use = "$.__branch") => `
+export default ({kw}) => ({
+  root: ($) => seq(kw("DDE"), ${use}),
+  __branch: ($) => ${body},
+});`;
+const fieldChoiceSequenceError = {
+  message: /__branch has one unaliased local use in root.*field-wrapped choice/,
+};
+
+new RuleTester().run("single-use-field-choice-sequence", singleUseFieldChoiceSequence, {
+  valid: [
+    fieldChoiceSequenceGrammar().replaceAll("__branch", "visible"),
+    fieldChoiceSequenceGrammar().replaceAll("__branch", "_shared"),
+    fieldChoiceSequenceGrammar().replaceAll("__branch", "__branch_body"),
+    fieldChoiceSequenceGrammar(fieldChoiceSequenceBody, "seq($.__branch, $.__branch)"),
+    fieldChoiceSequenceGrammar(fieldChoiceSequenceBody, "$.other"),
+    fieldChoiceSequenceGrammar(fieldChoiceSequenceBody.replace("$.__target_body", "$.__branch")),
+    fieldChoiceSequenceGrammar(fieldChoiceSequenceBody, '$["__branch"]'),
+    ...[
+      "alias($.__branch, $.branch)",
+      'field("value", $.__branch)',
+      "token($.__branch)",
+      "token.immediate($.__branch)",
+      "prec.dynamic(1, $.__branch)",
+      'alias(seq("X", optional($.__branch)), $.branch)',
+    ].map((use) => fieldChoiceSequenceGrammar(fieldChoiceSequenceBody, use)),
+    ...[
+      "choice($.a, $.b)",
+      'seq(field("value", choice($.a, $.b)))',
+      'seq(field("value", choice($.a, $.b)), $.x, $.y, $.z)',
+      "seq(choice($.a, $.b), $.tail)",
+      'seq(field("value", $.a), $.tail)',
+      'seq(field("value", choice($.a)), $.tail)',
+      'seq(field("value", choice($.a, $.b, $.c, $.d, $.e, $.f)), $.tail)',
+      'seq(field("value", choice(optional($.a), $.b)), $.tail)',
+      'seq(field("value", choice(seq($.a, $.b), $.c)), $.tail)',
+      'seq(field("value", choice(alias($.a, $.__hidden), $.b)), $.tail)',
+      'seq(field("value", choice(kw("GET", options), $.b)), $.tail)',
+      'seq(field("value", choice(...values)), $.tail)',
+      'seq(field("value", choice(token(/x/), $.b)), $.tail)',
+      'seq(field("value", choice(prec.dynamic(1, $.a), $.b)), $.tail)',
+      'prec.right(seq(field("value", choice($.a, $.b)), $.tail))',
+    ].map((body) => fieldChoiceSequenceGrammar(body)),
+    ...["inline", "conflicts", "precedences", "supertypes"].map(
+      (metadata) =>
+        `export default grammar({ ${metadata}: ($) => [$.__branch], rules: { root: ($) => $.__branch, __branch: ($) => ${fieldChoiceSequenceBody} }});`,
+    ),
+    `const a = grammar({rules: { root: ($) => $.__branch }}); const b = grammar({rules: {__branch: ($) => ${fieldChoiceSequenceBody}}});`,
+    fieldChoiceSequenceGrammar().replace("export default ({kw}) => (", "const unrelated = ("),
+    fieldChoiceSequenceGrammar().replace(
+      "  __branch:",
+      "  // oxlint-disable-next-line rule-to-test/single-use-field-choice-sequence\n  __branch:",
+    ),
+  ],
+  invalid: [
+    {
+      name: "DDE GET and REQUEST regression preserves both aliases",
+      code: fieldChoiceSequenceGrammar(),
+      errors: [fieldChoiceSequenceError],
+    },
+    {
+      name: "symbol alternatives and surrounding fields",
+      code: fieldChoiceSequenceGrammar(
+        'seq(field("value", choice($.a, $.b)), field("name", $.identifier), optional($.tail))',
+      ),
+      errors: [fieldChoiceSequenceError],
+    },
+    {
+      name: "unaliased keywords with static options",
+      code: fieldChoiceSequenceGrammar(
+        'seq(field("mode", choice(kw("FIRST", {offset: 3}), kw("LAST"))), $.tail)',
+      ),
+      errors: [fieldChoiceSequenceError],
+    },
+    {
+      name: "optional call site and named precedence stay outside the body",
+      code: fieldChoiceSequenceGrammar(
+        fieldChoiceSequenceBody,
+        'prec("clause", optional($.__branch))',
+      ),
+      errors: [fieldChoiceSequenceError],
+    },
+    {
+      name: "core rule maps",
+      code: `export default grammar({rules: {root: ($) => $.__branch, __branch: ($) => ${fieldChoiceSequenceBody}}});`,
+      errors: [fieldChoiceSequenceError],
     },
   ],
 });
