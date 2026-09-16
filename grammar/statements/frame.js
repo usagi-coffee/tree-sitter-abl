@@ -60,21 +60,49 @@ export default ({ kw }) => ({
         optional(alias($.at_phrase, $.format_phrase)),
         optional(alias($.__frame_field_format_phrase, $.format_phrase)),
       ),
-      seq($.preprocessor_name, optional($.__frame_display_value_tail)),
-      seq(field("value", $.string_literal), optional($.__frame_display_value_tail)),
-      seq(field("value", $.number_literal), optional($.__frame_display_value_tail)),
-    ),
-  __frame_display_value_tail: ($) =>
-    // oxlint-disable-next-line tree-sitter-optimize/recurse
-    repeat1(
-      choice(
-        $.at_phrase,
-        // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
-        seq($._to_keyword, field("to", $._expression)),
-        $.__frame_display_option,
+      seq(
+        $.preprocessor_name,
+        optional(
+          // oxlint-disable-next-line tree-sitter-optimize/recurse
+          repeat1(
+            choice(
+              $.at_phrase,
+              // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
+              seq($._to_keyword, field("to", $._expression)),
+              $.__frame_display_option,
+            ),
+          ),
+        ),
+      ),
+      seq(
+        field("value", $.string_literal),
+        optional(
+          // oxlint-disable-next-line tree-sitter-optimize/recurse
+          repeat1(
+            choice(
+              $.at_phrase,
+              // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
+              seq($._to_keyword, field("to", $._expression)),
+              $.__frame_display_option,
+            ),
+          ),
+        ),
+      ),
+      seq(
+        field("value", $.number_literal),
+        optional(
+          // oxlint-disable-next-line tree-sitter-optimize/recurse
+          repeat1(
+            choice(
+              $.at_phrase,
+              // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
+              seq($._to_keyword, field("to", $._expression)),
+              $.__frame_display_option,
+            ),
+          ),
+        ),
       ),
     ),
-
   __frame_display_option: ($) =>
     choice(
       $._color_font_option,

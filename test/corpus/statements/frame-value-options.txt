@@ -1,0 +1,18 @@
+================================================================================
+FRAME - repeated options stay with their literal values
+================================================================================
+
+DEFINE FRAME f "Label" AT 2 TO 20 WIDGET-ID 3 7 TO 30.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (frame_definition
+    name: (identifier)
+    value: (string_literal)
+    (at_phrase
+      position: (number_literal))
+    to: (number_literal)
+    widget_id: (number_literal)
+    value: (number_literal)
+    to: (number_literal)))
