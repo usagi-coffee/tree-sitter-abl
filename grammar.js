@@ -581,6 +581,7 @@ export default grammar({
           alias($.__list_item_binary_expression, $.binary_expression),
           $._expression,
         ),
+      // oxlint-disable-next-line tree-sitter-optimize/choice-subset, tree-sitter-optimize/single-use-choice
       __list_item_signed_left: ($) =>
         choice(
           alias($._signed_number_literal, $.number_literal),
