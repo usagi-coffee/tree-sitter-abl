@@ -697,7 +697,8 @@ export default grammar({
       // oxlint-disable-next-line tree-sitter-optimize/single-use-sequence
       __arguments_prefix: ($) => seq("(", optional($.argument), optional($.__arguments_comma_tail)),
       // COM calls use empty comma-delimited slots for omitted positional arguments.
-      __arguments_comma_tail: ($) => repeat1(seq(",", optional($.argument))),
+      __arguments_comma_tail: ($) =>
+        seq(",", optional($.argument), optional($.__arguments_comma_tail)),
       argument: ($) =>
         seq(
           optional(prec.dynamic(1, field("direction", $._parameter_direction))),
