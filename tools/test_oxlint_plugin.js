@@ -1,6 +1,7 @@
 import { RuleTester } from "oxlint/plugins-dev";
 
 import {
+  optionalModifierField,
   sharedFieldBody,
   sharedItemAlias,
   sharedExpressionAlias,
@@ -2883,6 +2884,114 @@ new RuleTester().run("shared-field-body", sharedFieldBody, {
     },
   ],
   invalid: [],
+});
+
+const modifierFieldPair = 'optional(kw("CLASS")), field("type", $._type_or_string)';
+const modifierFieldRules = (first, second) =>
+  `export default ({kw}) => ({first: ($) => ${first}, second: ($) => ${second}});`;
+const modifierFieldError = {
+  message: /optional modifier and required field repeat a pair in first/,
+};
+
+new RuleTester().run("optional-modifier-field", optionalModifierField, {
+  valid: [
+    modifierFieldRules(
+      `seq(${modifierFieldPair})`,
+      'seq(optional(kw("OTHER")), field("type", $._type_or_string))',
+    ),
+    modifierFieldRules(
+      `seq(${modifierFieldPair})`,
+      'seq(optional(kw("CLASS")), field("other", $._type_or_string))',
+    ),
+    modifierFieldRules(
+      `seq(${modifierFieldPair})`,
+      'seq(optional(kw("CLASS")), field("type", $.other))',
+    ),
+    modifierFieldRules(
+      `seq(${modifierFieldPair})`,
+      'seq(field("type", $._type_or_string), optional(kw("CLASS")))',
+    ),
+    modifierFieldRules(
+      `seq(${modifierFieldPair})`,
+      'seq(optional(kw("CLASS")), optional(field("type", $._type_or_string)))',
+    ),
+    modifierFieldRules(
+      'seq(optional(kw("CLASS", {offset: 3})), field("type", $.type))',
+      'seq(optional(kw("CLASS", {offset: 4})), field("type", $.type))',
+    ),
+    ...[
+      'seq(optional(kw("CLASS", options)), field("type", $.type))',
+      'seq(optional($.identifier), field("type", $.type))',
+      'seq(optional(alias(kw("CLASS"), $.flag)), field("type", $.type))',
+      'seq(kw("CLASS"), field("type", $.type))',
+      'seq(optional(kw("CLASS")), field("type", choice($.a, $.b)))',
+      'seq(optional(kw("CLASS")), field("type", $["type"]))',
+      'seq(optional(kw("CLASS")), field("type", token(/x/)))',
+      'seq(optional(kw("CLASS")), ":", field("type", $.type))',
+      'seq(optional(kw("CLASS")), ...fields)',
+      `alias(seq(${modifierFieldPair}), $.type)`,
+      `token(seq(${modifierFieldPair}))`,
+      `token.immediate(seq(${modifierFieldPair}))`,
+      `prec("type", seq(${modifierFieldPair}))`,
+      `prec.left(seq(${modifierFieldPair}))`,
+      `prec.right(seq(${modifierFieldPair}))`,
+      `prec.dynamic(1, seq(${modifierFieldPair}))`,
+    ].map((body) => modifierFieldRules(body, body)),
+    `export default ({kw}) => ({first: ($) => choice(seq(${modifierFieldPair}), seq("X", ${modifierFieldPair}))});`,
+    `const a = grammar({rules: {first: ($) => seq(${modifierFieldPair})}}); const b = grammar({rules: {second: ($) => seq(${modifierFieldPair})}});`,
+    `const unrelated = {first: ($) => seq(${modifierFieldPair}), second: ($) => seq(${modifierFieldPair})};`,
+    `export default ({kw}) => ({
+      // oxlint-disable-next-line rule-to-test/optional-modifier-field
+      first: ($) => seq(${modifierFieldPair}),
+      second: ($) => seq(${modifierFieldPair}),
+    });`,
+    `export default ({kw}) => ({first: ($) => seq(
+      // oxlint-disable-next-line rule-to-test/optional-modifier-field
+      ${modifierFieldPair}), second: ($) => seq(${modifierFieldPair})});`,
+    modifierFieldRules(
+      "seq(optional($._as_keyword), $.__type)",
+      "seq($.__type, optional($.extent))",
+    ),
+  ],
+  invalid: [
+    {
+      name: "CLASS property and parameter type regression",
+      code: modifierFieldRules(
+        `seq(optional($._as_keyword), ${modifierFieldPair})`,
+        `seq(${modifierFieldPair}, optional($.extent))`,
+      ),
+      errors: [modifierFieldError],
+    },
+    {
+      name: "existing exact pair helper can be reused",
+      code: modifierFieldRules(
+        `seq(${modifierFieldPair})`,
+        `seq(${modifierFieldPair}, optional($.extent))`,
+      ),
+      errors: [modifierFieldError],
+    },
+    {
+      name: "shared keyword references",
+      code: modifierFieldRules(
+        'seq(optional($._class_keyword), field("type", $.type))',
+        'seq("AS", optional($._class_keyword), field("type", $.type))',
+      ),
+      errors: [modifierFieldError],
+    },
+    {
+      name: "core grammar maps",
+      code: `export default grammar({rules: {first: ($) => seq(${modifierFieldPair}), second: ($) => seq("AS", ${modifierFieldPair})}});`,
+      errors: [modifierFieldError],
+    },
+    {
+      name: "formatting and comments do not affect identity",
+      code: modifierFieldRules(
+        `seq(${modifierFieldPair})`,
+        'seq(optional(kw("CLASS")), /* field */ field( "type", $._type_or_string ))',
+      ),
+      errors: [modifierFieldError],
+    },
+  ],
 });
 
 console.log("✓ Optimizer lint plugin tests passed successfully");
