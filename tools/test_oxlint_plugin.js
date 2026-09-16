@@ -1,6 +1,7 @@
 import { RuleTester } from "oxlint/plugins-dev";
 
 import {
+  orderedOptionalChain,
   precedenceListHeadExtraction,
   fieldListHeadExtraction,
   choiceListHeadExtraction,
@@ -3534,6 +3535,107 @@ new RuleTester().run("precedence-list-head-extraction", precedenceListHeadExtrac
       name: "core grammar",
       code: `export default grammar({rules: {root: ($) => prec.right(seq($.value, optional($.__tail))), __tail: ($) => seq(",", $.value, optional($.__tail))}});`,
       errors: [precedenceHeadError],
+    },
+  ],
+});
+
+const orderedChainGrammar = (
+  first = 'alias(kw("FROM-CURRENT"), $.from_current)',
+  second = "$.__direction",
+  last = "$.frame_phrase",
+) => `
+export default () => ({
+  root: ($) => seq("SCROLL", optional(choice(seq(${first}, optional(choice($.__tail, ${last}))), $.__tail, ${last}))),
+  __tail: ($) => seq(${second}, optional(${last})),
+});`;
+const orderedChainError = {
+  message: /nested choice enumerates three independently optional elements in order/,
+};
+new RuleTester().run("ordered-optional-chain", orderedOptionalChain, {
+  valid: [
+    `export default () => ({root: ($) => seq(optional($.a), optional($.b), optional($.c))});`,
+    orderedChainGrammar()
+      .replace("optional(choice(seq(", "choice(seq(")
+      .replace("$.__tail, $.frame_phrase))),", "$.__tail, $.frame_phrase)),"),
+    orderedChainGrammar().replace(
+      "optional(choice($.__tail, $.frame_phrase))",
+      "optional(choice($.frame_phrase, $.__tail))",
+    ),
+    orderedChainGrammar().replace(
+      "optional(choice($.__tail, $.frame_phrase))",
+      "optional(choice($.__tail, $.other))",
+    ),
+    orderedChainGrammar().replace(
+      "seq($.__direction, optional($.frame_phrase))",
+      "seq($.__direction, optional($.other))",
+    ),
+    orderedChainGrammar().replace(
+      "seq($.__direction, optional($.frame_phrase))",
+      "prec.right(seq($.__direction, optional($.frame_phrase)))",
+    ),
+    orderedChainGrammar().replace(
+      "seq($.__direction, optional($.frame_phrase))",
+      "seq($.__direction, $.frame_phrase)",
+    ),
+    orderedChainGrammar("optional($.a)"),
+    orderedChainGrammar('field("a", optional($.a))'),
+    orderedChainGrammar("alias(optional($.a), $.a)"),
+    orderedChainGrammar("makePrefix($)"),
+    orderedChainGrammar("...items"),
+    orderedChainGrammar("$.a", "optional($.b)"),
+    orderedChainGrammar("$.a", "$.b", "optional($.c)"),
+    orderedChainGrammar().replaceAll("__tail", "visible_tail"),
+    orderedChainGrammar().replaceAll("__tail", "__main_body"),
+    orderedChainGrammar().replaceAll("$.__tail", '$["__tail"]'),
+    orderedChainGrammar().replace("  __tail:", "  extra: ($) => $.__tail,\n  __tail:"),
+    orderedChainGrammar().replace("  __tail:", '  extra: ($) => $["__tail"],\n  __tail:'),
+    ...["alias", "token", "token.immediate", "prec", "prec.left", "prec.right", "prec.dynamic"].map(
+      (wrapper) =>
+        orderedChainGrammar()
+          .replace(
+            'seq("SCROLL", optional(',
+            `${wrapper}(${wrapper === "prec" ? '\"chain\", ' : wrapper === "prec.dynamic" ? "1, " : ""}seq("SCROLL", optional(`,
+          )
+          .replace(
+            "$.frame_phrase))),",
+            `$.frame_phrase)))${wrapper === "alias" ? ", $.chain" : ""}),`,
+          ),
+    ),
+    `export default grammar({inline: ($) => [$.__tail], rules: {root: ($) => optional(choice(seq($.a, optional(choice($.__tail, $.c))), $.__tail, $.c)), __tail: ($) => seq($.b, optional($.c))}});`,
+    `const a = grammar({rules: {root: ($) => optional(choice(seq($.a, optional(choice($.__tail, $.c))), $.__tail, $.c))}}); const b = grammar({rules: {__tail: ($) => seq($.b, optional($.c))}});`,
+    orderedChainGrammar().replace("export default () => (", "const unrelated = ("),
+    ...["root", "__tail"].map((name) =>
+      orderedChainGrammar().replace(
+        `  ${name}:`,
+        `  // oxlint-disable-next-line rule-to-test/ordered-optional-chain\n  ${name}:`,
+      ),
+    ),
+  ],
+  invalid: [
+    { name: "SCROLL regression", code: orderedChainGrammar(), errors: [orderedChainError] },
+    {
+      name: "symbol elements",
+      code: orderedChainGrammar("$.a", "$.b", "$.c"),
+      errors: [orderedChainError],
+    },
+    {
+      name: "field preservation",
+      code: orderedChainGrammar('field("a", $.a)', 'field("b", $.b)', 'field("c", $.c)'),
+      errors: [orderedChainError],
+    },
+    {
+      name: "alias preservation",
+      code: orderedChainGrammar(
+        "alias($.a, $.first)",
+        "alias($.b, $.second)",
+        "alias($.c, $.third)",
+      ),
+      errors: [orderedChainError],
+    },
+    {
+      name: "core grammar",
+      code: `export default grammar({rules: {root: ($) => optional(choice(seq($.a, optional(choice($.__tail, $.c))), $.__tail, $.c)), __tail: ($) => seq($.b, optional($.c))}});`,
+      errors: [orderedChainError],
     },
   ],
 });
