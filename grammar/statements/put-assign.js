@@ -7,8 +7,7 @@ export default ({ kw }) => ({
       field("type", $.__put_assign_type),
       "(",
       field("buffer", $._expression),
-      ",",
-      $._position_length,
+      $._comma_position_length,
       $._close_equals_value,
     ),
 

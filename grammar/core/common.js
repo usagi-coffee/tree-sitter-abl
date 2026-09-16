@@ -521,6 +521,7 @@ export default ({ kw }) => ({
   _equals_value: ($) => seq("=", field("value", $._expression)),
   _close_equals_value: ($) => seq(")", $._equals_value),
   _position_length: ($) => seq(field("position", $._expression), optional($._comma_length)),
+  _comma_position_length: ($) => seq(",", $._position_length),
   _comma_length: ($) => seq(",", field("length", $._expression)),
   _method_definition_signature: ($) =>
     seq(
