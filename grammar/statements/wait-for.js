@@ -31,7 +31,7 @@ export default ({ kw }) => ({
     seq(
       field("events", $.__wait_for_event_list),
       $._of_keyword,
-      field("widgets", prec.right(seq($.widget_phrase, optional($.__wait_for_widget_list_tail)))),
+      field("widgets", prec.right($.__wait_for_widgets)),
     ),
   __wait_for_of_tail: ($) =>
     // oxlint-disable-next-line tree-sitter-optimize/phrase-alias-extraction
@@ -39,8 +39,7 @@ export default ({ kw }) => ({
   __wait_for_focus_phrase: ($) => seq(kw("FOCUS"), field("focus", $.widget_phrase)),
   __wait_for_pause_phrase: ($) => seq(kw("PAUSE"), field("duration", $._expression)),
 
-  __wait_for_widget_list_tail: ($) =>
-    seq(",", $.widget_phrase, optional($.__wait_for_widget_list_tail)),
+  __wait_for_widgets: ($) => seq($.widget_phrase, optional(seq(",", $.__wait_for_widgets))),
   __wait_for_event_list: ($) => seq($._events, optional($.__wait_for_event_list_tail)),
   // oxlint-disable-next-line tree-sitter-optimize/recursive-tail-reuse
   __wait_for_event_list_tail: ($) =>

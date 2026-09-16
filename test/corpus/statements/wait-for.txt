@@ -426,3 +426,33 @@ WAIT-FOR "F1" OF b1, b2 OR "F2" OF b3 FOCUS b2 PAUSE 1.
         handle: (identifier)))
     (pause_phrase
       duration: (number_literal))))
+
+================================================================================
+WAIT-FOR - recursive widgets retain fields and clause boundaries
+================================================================================
+
+WAIT-FOR "F1" OF b1, b2, b3 OR "F2" OF b4, b5 FOCUS b3 PAUSE 2.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (wait_for_statement
+    (of_phrase
+      events: (string_literal)
+      widgets: (widget_phrase
+        handle: (identifier))
+      widgets: (widget_phrase
+        handle: (identifier))
+      widgets: (widget_phrase
+        handle: (identifier)))
+    (of_phrase
+      events: (string_literal)
+      widgets: (widget_phrase
+        handle: (identifier))
+      widgets: (widget_phrase
+        handle: (identifier)))
+    (focus_phrase
+      focus: (widget_phrase
+        handle: (identifier)))
+    (pause_phrase
+      duration: (number_literal))))
