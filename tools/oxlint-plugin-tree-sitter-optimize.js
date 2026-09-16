@@ -1632,7 +1632,9 @@ export const recursiveBodyReuse = rule((context) => {
   };
 }, "Suggest reusing hidden recursive helpers where their complete body is expanded inside another rule");
 
-function listHeadExtractionVisitor(context, optionalHead = false) {
+function listHeadExtractionVisitor(context, mode = "embedded") {
+  const optionalHead = mode === "optional";
+  const choiceHead = mode === "choice";
   const properties = [];
   const sequences = [];
   const signature = (node) =>
@@ -1645,6 +1647,8 @@ function listHeadExtractionVisitor(context, optionalHead = false) {
       if (callName(node) !== "seq" || !isStaticDsl(node)) return;
       const owner = enclosingRule(node);
       if (!owner || isRuleDisabled(context, node)) return;
+      if (choiceHead && (callName(node.parent) !== "choice" || node.parent.arguments.length < 2))
+        return;
       if (
         optionalHead &&
         (callName(node.parent) !== "optional" || node.parent.arguments.length !== 1)
@@ -1704,7 +1708,7 @@ function listHeadExtractionVisitor(context, optionalHead = false) {
           if (sequence.owner === tail.property || sequence.owner.parent !== tail.property.parent)
             continue;
           if (
-            optionalHead
+            optionalHead || choiceHead
               ? sequence.signatures.length !== tail.suffix.length
               : sequence.signatures.length <= tail.suffix.length
           )
@@ -1716,10 +1720,16 @@ function listHeadExtractionVisitor(context, optionalHead = false) {
           report(
             context,
             sequence.node,
-            optionalHead ? "optional-list-head-extraction" : "list-head-extraction",
-            optionalHead
-              ? `This optional list head repeats the item and continuation in ${tail.name}; try extracting a hidden non-empty head and reusing it inside this optional and after the comma in ${tail.name}. Preserve separator optionality, fields, aliases and order; check helper-specific conflicts and precedence, then measure parser size and validate trees.`
-              : `This sequence embeds the item and optional continuation repeated by ${tail.name}; try extracting that non-empty list head and reusing it here and after the comma in ${tail.name}. Preserve separator optionality, fields, aliases and order; measure parser size and validate trees.`,
+            choiceHead
+              ? "choice-list-head-extraction"
+              : optionalHead
+                ? "optional-list-head-extraction"
+                : "list-head-extraction",
+            choiceHead
+              ? `This choice branch repeats the item and continuation in ${tail.name}; try extracting a hidden non-empty list head and reusing it in this branch and after the comma in ${tail.name}. Preserve choice order, separator optionality, fields and aliases; check helper-specific conflicts and precedence, then measure parser size and validate trees.`
+              : optionalHead
+                ? `This optional list head repeats the item and continuation in ${tail.name}; try extracting a hidden non-empty head and reusing it inside this optional and after the comma in ${tail.name}. Preserve separator optionality, fields, aliases and order; check helper-specific conflicts and precedence, then measure parser size and validate trees.`
+                : `This sequence embeds the item and optional continuation repeated by ${tail.name}; try extracting that non-empty list head and reusing it here and after the comma in ${tail.name}. Preserve separator optionality, fields, aliases and order; measure parser size and validate trees.`,
           );
           break;
         }
@@ -1734,8 +1744,13 @@ export const listHeadExtraction = rule(
 );
 
 export const optionalListHeadExtraction = rule(
-  (context) => listHeadExtractionVisitor(context, true),
+  (context) => listHeadExtractionVisitor(context, "optional"),
   "Suggest extracting optional list heads duplicated in recursive comma tails",
+);
+
+export const choiceListHeadExtraction = rule(
+  (context) => listHeadExtractionVisitor(context, "choice"),
+  "Suggest extracting choice-branch list heads duplicated in recursive comma tails",
 );
 
 function referencedSymbols(node) {
@@ -2224,6 +2239,7 @@ const broadDispatcher = rule(
 export default {
   meta: { name: "tree-sitter-optimize" },
   rules: {
+    "choice-list-head-extraction": choiceListHeadExtraction,
     "shared-field-chunk": sharedFieldChunk,
     "single-use-choice-alias-sequence": singleUseChoiceAliasSequence,
     "single-use-precedence-value": singleUsePrecedenceValue,

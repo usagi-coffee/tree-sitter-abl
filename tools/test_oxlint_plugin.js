@@ -1,6 +1,7 @@
 import { RuleTester } from "oxlint/plugins-dev";
 
 import {
+  choiceListHeadExtraction,
   sharedFieldChunk,
   singleUseChoiceAliasSequence,
   singleUsePrecedenceValue,
@@ -3244,6 +3245,95 @@ new RuleTester().run("shared-field-chunk", sharedFieldChunk, {
         'seq(field("name", $._routine_name), /* marker */ optional(kw("RETURNS", { offset: 5 })), $.__type, $.tail)',
       ),
       errors: [fieldChunkError],
+    },
+  ],
+});
+
+const choiceHeadGrammar = (item = 'field("field", $._name)', separator = '","') => `
+export default ({kw}) => ({
+  root: ($) => seq("(", choice(kw("ROWID"), seq(${item}, optional($.__tail))), ")"),
+  __tail: ($) => seq(${separator}, ${item}, optional($.__tail)),
+});`;
+const choiceHeadError = { message: /choice branch repeats the item and continuation in __tail/ };
+
+new RuleTester().run("choice-list-head-extraction", choiceListHeadExtraction, {
+  valid: [
+    `export default () => ({root: ($) => choice("ROWID", $.__head), __head: ($) => seq($.item, optional($.__tail)), __tail: ($) => seq(",", $.__head)});`,
+    choiceHeadGrammar().replace('choice(kw("ROWID"), seq', "optional(seq"),
+    choiceHeadGrammar().replace('choice(kw("ROWID"), seq(', 'choice(kw("ROWID"), seq("PREFIX",'),
+    choiceHeadGrammar().replace('seq(",", field("field"', 'seq(",", field("different"'),
+    choiceHeadGrammar().replace(
+      'seq(",", field("field", $._name)',
+      'seq(",", field("field", $.other)',
+    ),
+    choiceHeadGrammar().replace(
+      'seq(",", field("field", $._name), optional($.__tail))',
+      'seq(",", field("field", $._name), optional($.__other))',
+    ),
+    choiceHeadGrammar().replaceAll("__tail", "visible_tail"),
+    choiceHeadGrammar().replaceAll("$.__tail", '$["__tail"]'),
+    choiceHeadGrammar("optional($.item)"),
+    choiceHeadGrammar('field("field", optional($.item))'),
+    choiceHeadGrammar("alias(optional($.item), $.value)"),
+    choiceHeadGrammar("choice($.item, optional($.other))"),
+    choiceHeadGrammar("seq($.item, $.__tail)"),
+    choiceHeadGrammar("makeItem($)"),
+    choiceHeadGrammar("...items"),
+    choiceHeadGrammar("$.item", '";"'),
+    choiceHeadGrammar("$.item", "$.separator"),
+    choiceHeadGrammar("alias($.item, $.value)").replace(
+      'seq(",", alias($.item, $.value)',
+      'seq(",", alias($.item, $.other)',
+    ),
+    choiceHeadGrammar('kw("FIELD", {offset: 3})').replace(
+      'seq(",", kw("FIELD", {offset: 3})',
+      'seq(",", kw("FIELD", {offset: 4})',
+    ),
+    ...["alias", "token", "token.immediate", "prec", "prec.left", "prec.right", "prec.dynamic"].map(
+      (wrapper) => ({
+        name: `choice under ${wrapper} is excluded`,
+        code: choiceHeadGrammar().replace(
+          'seq("(", choice(kw("ROWID"), seq(field("field", $._name), optional($.__tail))), ")")',
+          `${wrapper}(${wrapper === "prec" ? '"list", ' : wrapper === "prec.dynamic" ? "1, " : ""}choice(kw("ROWID"), seq(field("field", $._name), optional($.__tail)))${wrapper === "alias" ? ", $.list" : ""})`,
+        ),
+      }),
+    ),
+    choiceHeadGrammar().replace(
+      'seq(",", field("field", $._name), optional($.__tail))',
+      'prec.right(seq(",", field("field", $._name), optional($.__tail)))',
+    ),
+    `const a = grammar({rules: {root: ($) => choice("ROWID", seq($.item, optional($.__tail)))}}); const b = grammar({rules: {__tail: ($) => seq(",", $.item, optional($.__tail))}});`,
+    choiceHeadGrammar().replace("export default ({kw}) => (", "const unrelated = ("),
+    choiceHeadGrammar().replace(
+      "  root:",
+      "  // oxlint-disable-next-line rule-to-test/choice-list-head-extraction\n  root:",
+    ),
+    choiceHeadGrammar().replace(
+      "  __tail:",
+      "  // oxlint-disable-next-line rule-to-test/choice-list-head-extraction\n  __tail:",
+    ),
+  ],
+  invalid: [
+    { name: "DATA-SOURCE KEYS regression", code: choiceHeadGrammar(), errors: [choiceHeadError] },
+    {
+      name: "named aliases are preserved",
+      code: choiceHeadGrammar("alias($.item, $.value)"),
+      errors: [choiceHeadError],
+    },
+    {
+      name: "optional comma remains optional",
+      code: choiceHeadGrammar("$.item", 'optional(",")'),
+      errors: [choiceHeadError],
+    },
+    {
+      name: "multiple item parts",
+      code: choiceHeadGrammar('$.key, "=", field("value", $.value)'),
+      errors: [choiceHeadError],
+    },
+    {
+      name: "core rule maps",
+      code: `export default grammar({rules: {root: ($) => choice("ROWID", seq($.item, optional($.__tail))), __tail: ($) => seq(",", $.item, optional($.__tail))}});`,
+      errors: [choiceHeadError],
     },
   ],
 });
