@@ -1,6 +1,7 @@
 export default ({ kw }) => ({
   scroll_statement: ($) => seq($.__scroll_prefix, $._terminator),
   __scroll_prefix: ($) =>
+    // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq(
       kw("SCROLL"),
       optional(alias(kw("FROM-CURRENT"), $.from_current)),
