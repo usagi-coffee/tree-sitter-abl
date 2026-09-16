@@ -18,7 +18,7 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/choice-subset
   __submenu_element: ($) =>
     choice(
-      alias($._menu_item, $.menu_item),
+      $._aliased_menu_item,
       alias($._menu_submenu, $.submenu_item),
       alias(kw("RULE"), $.rule),
       alias(kw("SKIP"), $.skip),

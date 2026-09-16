@@ -701,3 +701,32 @@ DEFINE MENU Pm-lect
       name: (identifier)
       label: (string_literal)
       (read_only))))
+
+================================================================================
+MENU - shared items preserve MENU and SUB-MENU nesting
+================================================================================
+
+DEFINE MENU main MENU-ITEM first LABEL "First" DISABLED MENU-ITEM second.
+DEFINE SUB-MENU child MENU-ITEM first LABEL "First" DISABLED MENU-ITEM second.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (menu_definition
+    name: (identifier)
+    (menu_item
+      name: (identifier)
+      label: (string_literal)
+      (disabled))
+    (menu_item
+      name: (identifier)))
+  (submenu_definition
+    name: (identifier)
+    (menu_element
+      (menu_item
+        name: (identifier)
+        label: (string_literal)
+        (disabled)))
+    (menu_element
+      (menu_item
+        name: (identifier)))))

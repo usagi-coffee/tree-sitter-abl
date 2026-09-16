@@ -68,6 +68,7 @@ export default ({ kw }) => ({
       alias(kw("NO-MAP"), $.no_map),
     ),
 
+  _aliased_menu_item: ($) => alias($._menu_item, $.menu_item),
   _menu_item: ($) =>
     seq(
       kw("MENU-ITEM"),
