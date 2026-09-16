@@ -1,6 +1,7 @@
 import { RuleTester } from "oxlint/plugins-dev";
 
 import {
+  nullableSlotList,
   singleUseFieldChoice,
   recursiveContinuationInline,
   sharedCommaField,
@@ -3988,6 +3989,45 @@ new RuleTester().run("single-use-field-choice", singleUseFieldChoice, {
       name: "static caller precedence",
       code: fieldChoiceGrammar('prec.right(field("size", $._sizes))'),
       errors: [fieldWrappedChoiceError],
+    },
+  ],
+});
+
+const slotListGrammar = `export default () => ({root: ($) => seq("(", optional($._slots)), _slots: ($) => choice(seq($.argument, repeat(seq(",", optional($.argument)))), repeat1(seq(",", optional($.argument))))});`;
+new RuleTester().run("nullable-slot-list", nullableSlotList, {
+  valid: [
+    slotListGrammar.replaceAll("_slots", "visible_slots"),
+    slotListGrammar.replaceAll("$._slots", '$["_slots"]'),
+    slotListGrammar.replace("optional($._slots)", "$._slots"),
+    slotListGrammar.replace(
+      'repeat1(seq(",", optional($.argument)))',
+      'repeat1(seq(",", $.argument))',
+    ),
+    slotListGrammar.replaceAll('seq(",",', 'seq(";",'),
+    slotListGrammar.replace("seq($.argument, repeat", "seq($.different, repeat"),
+    slotListGrammar.replace("_slots:", "other: ($) => $._slots, _slots:"),
+    slotListGrammar.replace("_slots:", 'other: ($) => $["_slots"], _slots:'),
+    slotListGrammar.replace(
+      'seq("(", optional($._slots))',
+      'field("items", seq("(", optional($._slots)))',
+    ),
+    slotListGrammar.replace(
+      'seq("(", optional($._slots))',
+      'alias(seq("(", optional($._slots)), $.items)',
+    ),
+    slotListGrammar.replace('seq("(", optional($._slots))', 'token(seq("(", optional($._slots)))'),
+    ...["root", "_slots"].map((name) =>
+      slotListGrammar.replace(
+        `${name}:`,
+        `\n// oxlint-disable-next-line rule-to-test/nullable-slot-list\n${name}:`,
+      ),
+    ),
+  ],
+  invalid: [
+    {
+      name: "omitted COM arguments",
+      code: slotListGrammar,
+      errors: [{ message: /_slots distinguishes present and omitted first items/ }],
     },
   ],
 });
