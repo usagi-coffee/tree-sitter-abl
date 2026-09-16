@@ -23,19 +23,11 @@ export default ({ kw }) => ({
   __enum_member: ($) =>
     seq(
       field("name", $.identifier),
-      optional(
-        seq(
-          "=",
-          choice(
-            $.number_literal,
-            seq($.identifier, optional($.__enum_member_value_tail)),
-            $.null_literal,
-          ),
-        ),
-      ),
+      optional(seq("=", choice($.number_literal, $.__enum_member_value_head, $.null_literal))),
     ),
   __enum_members: ($) =>
     prec.right(seq(alias($.__enum_member, $.member), optional($.__enum_members))),
 
-  __enum_member_value_tail: ($) => seq(",", $.identifier, optional($.__enum_member_value_tail)),
+  __enum_member_value_head: ($) => seq($.identifier, optional($.__enum_member_value_tail)),
+  __enum_member_value_tail: ($) => seq(",", $.__enum_member_value_head),
 });
