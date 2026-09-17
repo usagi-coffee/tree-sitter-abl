@@ -35,8 +35,7 @@ export default ({ kw }) => ({
         // oxlint-disable-next-line tree-sitter-optimize/shared-valued-fragment
         kw("INNER-LINES"),
         field("inner_lines", $.number_literal),
-        kw("INNER-CHARS"),
-        field("inner_chars", $.number_literal),
+        $._inner_chars_value,
       ),
     ),
 });

@@ -126,12 +126,7 @@ export default ({ kw }) => ({
         field("height", $.number_literal),
       ),
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
-      seq(
-        kw("INNER-CHARS"),
-        field("inner_chars", $.number_literal),
-        kw("INNER-LINES"),
-        field("inner_lines", $.number_literal),
-      ),
+      seq($._inner_chars_value, kw("INNER-LINES"), field("inner_lines", $.number_literal)),
     ),
 
   // These for some cursed reason cannot be moved to grammar/core/common.js
