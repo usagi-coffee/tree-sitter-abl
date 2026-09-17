@@ -96,14 +96,6 @@ export default ({ kw }) => ({
       seq(kw("TOOLTIP"), field("tooltip", $._expression)),
     ),
 
-  __format_size_phrase: ($) =>
-    seq(
-      // oxlint-disable-next-line tree-sitter-optimize/shared-choice
-      choice(kw("SIZE"), kw("SIZE-CHARS"), kw("SIZE-PIXELS")),
-      $._width_by,
-      field("height", $.number_literal),
-    ),
-
   _format_colon_to: ($) =>
     prec(
       "format_position",
@@ -127,7 +119,12 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __format_editor_size: ($) =>
     choice(
-      $.__format_size_phrase,
+      seq(
+        // oxlint-disable-next-line tree-sitter-optimize/shared-choice
+        choice(kw("SIZE"), kw("SIZE-CHARS"), kw("SIZE-PIXELS")),
+        $._width_by,
+        field("height", $.number_literal),
+      ),
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
       seq(
         kw("INNER-CHARS"),
