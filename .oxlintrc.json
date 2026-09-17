@@ -21,6 +21,7 @@
     {
       "files": ["grammar.js", "grammar/**/*.js"],
       "rules": {
+        "tree-sitter-optimize/closing-delimiter-hoist": "warn",
         "tree-sitter-optimize/choice-product-extraction": "warn",
         "tree-sitter-optimize/shared-field-marker": "warn",
         "tree-sitter-optimize/redundant-inherited-field": "warn",

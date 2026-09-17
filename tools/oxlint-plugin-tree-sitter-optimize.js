@@ -1618,6 +1618,111 @@ export const singleUseChoiceAliasSequence = rule(
   "Suggest inlining single-use private sequences combining a small choice and symbol alias",
 );
 
+export const closingDelimiterHoist = rule((context) => {
+  const properties = [],
+    references = new Map();
+  const payload = (node) => {
+    if (memberName(node)) return true;
+    const call = callName(node);
+    if (call === "optional") return node.arguments.length === 1 && payload(node.arguments[0]);
+    if (call === "choice") return node.arguments.length >= 2 && node.arguments.every(payload);
+    if (call === "field")
+      return (
+        node.arguments.length === 2 &&
+        node.arguments[0].type === "Literal" &&
+        typeof node.arguments[0].value === "string" &&
+        payload(node.arguments[1])
+      );
+    return false;
+  };
+  return {
+    Property(node) {
+      if (isRuleProperty(node)) properties.push(node);
+    },
+    MemberExpression(node) {
+      const name =
+        memberName(node) ??
+        (node.computed &&
+        node.object.type === "Identifier" &&
+        node.object.name === "$" &&
+        node.property.type === "Literal" &&
+        typeof node.property.value === "string"
+          ? node.property.value
+          : null);
+      if (!name) return;
+      if (!references.has(name)) references.set(name, []);
+      references.get(name).push(node);
+    },
+    "Program:exit"() {
+      for (const property of properties) {
+        const name = ruleName(property),
+          body = property.value.body;
+        if (!name.startsWith("__") || name.endsWith("_body") || isRuleDisabled(context, property))
+          continue;
+        if (
+          callName(body) !== "seq" ||
+          body.arguments.length < 3 ||
+          body.arguments.length > 6 ||
+          !isStaticDsl(body)
+        )
+          continue;
+        const open = body.arguments[0],
+          close = body.arguments.at(-1),
+          pairs = { "(": ")", "[": "]", "{": "}" };
+        if (
+          open.type !== "Literal" ||
+          close.type !== "Literal" ||
+          !Object.hasOwn(pairs, open.value) ||
+          pairs[open.value] !== close.value
+        )
+          continue;
+        if (!body.arguments.slice(1, -1).every(payload)) continue;
+        const uses = references.get(name) ?? [];
+        if (uses.length < 2 || uses.length > 4) continue;
+        if (
+          !uses.every((use) => {
+            const owner = enclosingRule(use);
+            if (
+              memberName(use) !== name ||
+              !owner ||
+              owner === property ||
+              owner.parent !== property.parent ||
+              isRuleDisabled(context, owner) ||
+              isRuleDisabled(context, use)
+            )
+              return false;
+            for (let parent = use.parent; parent !== owner; parent = parent.parent) {
+              if (
+                parent.type === "CallExpression" &&
+                ![
+                  "seq",
+                  "choice",
+                  "optional",
+                  "repeat",
+                  "repeat1",
+                  "field",
+                  "prec",
+                  "prec.left",
+                  "prec.right",
+                ].includes(callName(parent))
+              )
+                return false;
+            }
+            return true;
+          })
+        )
+          continue;
+        report(
+          context,
+          property,
+          "closing-delimiter-hoist",
+          `${name} repeats a complete delimited value at ${uses.length} local uses; try retaining its opening delimiter and contents in a prefix helper and appending the closing delimiter at each caller, inside the original fields and optional wrappers. Check external references and metadata, preserve token identity and tree shape, then measure parser bytes and counts.`,
+        );
+      }
+    },
+  };
+}, "Suggest moving closing delimiters from reused value helpers into their callers");
+
 export const closingDelimiterWrapper = rule((context) => {
   const properties = [];
   const references = new Map();
@@ -3697,6 +3802,7 @@ const broadDispatcher = rule(
 export default {
   meta: { name: "tree-sitter-optimize" },
   rules: {
+    "closing-delimiter-hoist": closingDelimiterHoist,
     "choice-product-extraction": choiceProductExtraction,
     "shared-field-marker": sharedFieldMarker,
     "redundant-inherited-field": redundantInheritedField,

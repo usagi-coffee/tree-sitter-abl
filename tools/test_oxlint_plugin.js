@@ -1,6 +1,7 @@
 import { RuleTester } from "oxlint/plugins-dev";
 
 import {
+  closingDelimiterHoist,
   choiceProductExtraction,
   sharedFieldMarker,
   redundantInheritedField,
@@ -4615,6 +4616,50 @@ new RuleTester().run("choice-product-extraction", choiceProductExtraction, {
     {
       code: productGrammar.replace("$._to_keyword", 'choice(kw("TO"), kw("FROM"))'),
       errors: [{ message: /3 independent choices form 12 combinations/ }],
+    },
+  ],
+});
+
+const closingHoistGrammar =
+  'export default () => ({a: ($) => optional(field("extent", $.__extent)), b: ($) => field("extent", $.__extent), __extent: ($) => seq("[", optional(choice($.number, $.name)), "]")});';
+new RuleTester().run("closing-delimiter-hoist", closingDelimiterHoist, {
+  valid: [
+    closingHoistGrammar.replace('b: ($) => field("extent", $.__extent), ', ""),
+    closingHoistGrammar.replace(
+      'b: ($) => field("extent", $.__extent)',
+      "b: ($) => alias($.__extent, $.extent)",
+    ),
+    closingHoistGrammar.replace(
+      'b: ($) => field("extent", $.__extent)',
+      "b: ($) => token($.__extent)",
+    ),
+    closingHoistGrammar.replace(
+      'b: ($) => field("extent", $.__extent)',
+      "b: ($) => prec.dynamic(1, $.__extent)",
+    ),
+    closingHoistGrammar.replace("$.__extent)", '$["__extent"])'),
+    closingHoistGrammar.replace("$.name", "$.__extent"),
+    closingHoistGrammar.replace("$.name", "getName($)"),
+    closingHoistGrammar.replace('"]")', '")")'),
+    closingHoistGrammar.replaceAll("__extent", "extent"),
+    closingHoistGrammar.replaceAll("__extent", "__extent_body"),
+    closingHoistGrammar.replace(
+      "__extent:",
+      "\n// oxlint-disable-next-line rule-to-test/closing-delimiter-hoist\n__extent:",
+    ),
+    'export default grammar({inline: ($) => [$.__extent], rules: {a: ($) => $.__extent, b: ($) => $.__extent, __extent: ($) => seq("[", $.n, "]")}});',
+  ],
+  invalid: [
+    {
+      code: closingHoistGrammar,
+      errors: [{ message: /complete delimited value at 2 local uses/ }],
+    },
+    {
+      code: closingHoistGrammar.replace(
+        "optional(choice($.number, $.name))",
+        'field("size", $.number)',
+      ),
+      errors: [{ message: /closing delimiter at each caller/ }],
     },
   ],
 });
