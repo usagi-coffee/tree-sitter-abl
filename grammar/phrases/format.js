@@ -116,7 +116,7 @@ export default ({ kw }) => ({
         optional($.__format_editor_options),
       ),
     ),
-  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice, tree-sitter-optimize/body-extraction
   __format_editor_size: ($) =>
     choice(
       seq(
