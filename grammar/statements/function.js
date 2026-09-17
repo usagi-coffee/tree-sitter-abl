@@ -103,11 +103,7 @@ export default ({ kw }) => ({
         field("table", $._identifier_or_qualified_name),
         optional($.__function_table_options),
       ),
-      seq(
-        kw("TABLE-HANDLE"),
-        field("table_handle", $.identifier),
-        optional($.__function_table_options),
-      ),
+      seq($._table_handle_value, optional($.__function_table_options)),
       seq(
         $._dataset_keyword,
         $._for_keyword,

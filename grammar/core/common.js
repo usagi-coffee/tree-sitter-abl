@@ -6,6 +6,7 @@ export default ({ kw }) => ({
   _key_section: ($) => seq(kw("SECTION"), field("section", $._expression)),
   _key_value: ($) => seq(kw("VALUE"), field("value", $._expression)),
   _for_tenant: ($) => seq($._for_keyword, kw("TENANT"), field("tenant", $._expression)),
+  _table_handle_value: ($) => seq(kw("TABLE-HANDLE"), field("table_handle", $.identifier)),
   _set_update_record_body: ($) =>
     // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq(

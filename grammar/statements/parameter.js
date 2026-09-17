@@ -21,11 +21,7 @@ export default ({ kw }) => ({
               field("table", $._identifier_or_qualified_name),
               optional($.__parameter_table_options),
             ),
-            seq(
-              kw("TABLE-HANDLE"),
-              field("table_handle", $.identifier),
-              optional($.__parameter_handle_options),
-            ),
+            seq($._table_handle_value, optional($.__parameter_handle_options)),
             seq(
               $._dataset_keyword,
               $._for_keyword,
