@@ -1,0 +1,29 @@
+================================================================================
+CASE - Direct include references retain arguments and branch order
+================================================================================
+
+CASE x:
+  {before.i "before"}.
+  WHEN 1 THEN MESSAGE "one".
+  {after.i &v="after"}
+  OTHERWISE MESSAGE "other".
+END CASE.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (case_statement
+    (identifier)
+    (include_file_reference
+      file: (include_file_path (identifier))
+      argument: (include_argument (string_literal)))
+    (case_when_phrase
+      condition: (number_literal)
+      (message_statement (string_literal)))
+    (include_file_reference
+      file: (include_file_path (identifier))
+      argument: (include_argument
+        name: (identifier)
+        value: (string_literal)))
+    (case_otherwise_phrase
+      (message_statement (string_literal)))))
