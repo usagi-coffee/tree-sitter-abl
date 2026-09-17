@@ -1,0 +1,19 @@
+================================================================================
+Preprocessor - ELSE branch retains each value field
+================================================================================
+
+PUT UNFORMATTED &IF TRUE &THEN "a" &ELSE "b" {&suffix} 2 &ENDIF SKIP.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (put_statement
+    (unformatted)
+    value: (if_preprocessor_directive
+      condition: (boolean_literal)
+      value: (string_literal)
+      value: (string_literal)
+      value: (preprocessor_name
+        (identifier))
+      value: (number_literal))
+    (skip)))

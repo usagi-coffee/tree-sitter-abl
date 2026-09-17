@@ -368,11 +368,10 @@ export default grammar({
             field("elseif_branch", $.__if_preprocessor_elseif_branch),
             optional($.__if_preprocessor_branches),
           ),
-          field("else_branch", $.__if_preprocessor_else_branch),
+          field("else_branch", seq(token(/&ELSE/i), $.__if_preprocessor_branch_values)),
         ),
       __if_preprocessor_condition_then: ($) =>
         seq(field("condition", $._expression), token(/&THEN/i)),
-      __if_preprocessor_else_branch: ($) => seq(token(/&ELSE/i), $.__if_preprocessor_branch_values),
       __if_preprocessor_branch_values: ($) =>
         prec.right(
           seq(
