@@ -1,6 +1,7 @@
 import { RuleTester } from "oxlint/plugins-dev";
 
 import {
+  leftRecursiveList,
   recursiveItemInline,
   forwardedAliasReuse,
   closingDelimiterHoist,
@@ -4775,6 +4776,41 @@ new RuleTester().run("recursive-item-inline", recursiveItemInline, {
     {
       code: recursiveItemGrammar.replaceAll("_pair", "__pair"),
       errors: [{ message: /keeping the comma continuation unchanged/ }],
+    },
+  ],
+});
+
+const leftRecursiveListGrammar =
+  'export default () => ({__records: ($) => seq($.__record, repeat(seq(",", $.__record)))});';
+new RuleTester().run("left-recursive-list", leftRecursiveList, {
+  valid: [
+    leftRecursiveListGrammar.replace("__records:", "records:"),
+    leftRecursiveListGrammar.replace("repeat(", "repeat1("),
+    leftRecursiveListGrammar.replace('seq(",", $.__record)', 'seq(";", $.__record)'),
+    leftRecursiveListGrammar.replace('seq(",", $.__record)', 'seq(",", $.__other)'),
+    leftRecursiveListGrammar.replaceAll("$.__record", '$["__record"]'),
+    leftRecursiveListGrammar.replaceAll("$.__record", "$.__records"),
+    leftRecursiveListGrammar.replaceAll("$.__record", 'kw("FLAG")'),
+    leftRecursiveListGrammar.replace(
+      'seq($.__record, repeat(seq(",", $.__record)))',
+      'prec.right(seq($.__record, repeat(seq(",", $.__record))))',
+    ),
+    leftRecursiveListGrammar.replace(
+      "__records:",
+      "\n// oxlint-disable-next-line rule-to-test/left-recursive-list\n__records:",
+    ),
+    'export default grammar({inline: ($) => [$.__records], rules: {__records: ($) => seq($.record, repeat(seq(",", $.record)))}});',
+    'export default () => ({__records: ($) => seq(field("first", $.record), repeat(seq(",", field("next", $.record))))});',
+  ],
+  invalid: [
+    { code: leftRecursiveListGrammar, errors: [{ message: /hidden left-recursive sequence/ }] },
+    {
+      code: leftRecursiveListGrammar.replaceAll("$.__record", 'field("record", $.record)'),
+      errors: [{ message: /one-item minimum/ }],
+    },
+    {
+      code: leftRecursiveListGrammar.replaceAll("$.__record", "alias($.__entry, $.record)"),
+      errors: [{ message: /fields, aliases and order/ }],
     },
   ],
 });
