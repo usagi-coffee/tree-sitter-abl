@@ -26,6 +26,7 @@ export default ({ kw }) => ({
 
   case_otherwise_phrase: ($) => seq(kw("OTHERWISE"), $._statement),
 
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-field-sequence
   __case_when_expression_list: ($) =>
     seq($._expression, optional($.__case_when_expression_list_tail)),
   __case_when_expression_list_tail: ($) =>
