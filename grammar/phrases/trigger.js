@@ -24,6 +24,7 @@ export default ({ kw }) => ({
         seq(
           field("variable", $.identifier),
           "=",
+          // oxlint-disable-next-line tree-sitter-optimize/shared-field-marker
           field("start", $._expression),
           $._to_keyword,
           field("end", $._expression),
