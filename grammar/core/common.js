@@ -1,6 +1,7 @@
 // Non-core statement-specific shared rules
 
 export default ({ kw }) => ({
+  _width_by: ($) => seq(field("width", $.number_literal), $._by_keyword),
   _key_section: ($) => seq(kw("SECTION"), field("section", $._expression)),
   _set_update_record_body: ($) =>
     // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction

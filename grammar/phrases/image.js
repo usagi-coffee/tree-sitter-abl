@@ -7,8 +7,7 @@ export default ({ kw }) => ({
       optional(
         seq(
           choice(kw("IMAGE-SIZE"), kw("IMAGE-SIZE-CHARS"), kw("IMAGE-SIZE-PIXELS")),
-          field("width", $.number_literal),
-          $._by_keyword,
+          $._width_by,
           field("height", $.number_literal),
         ),
       ),

@@ -1,0 +1,23 @@
+================================================================================
+Image and format dimensions preserve width and height fields
+================================================================================
+
+DEFINE IMAGE im FILE "a.png" IMAGE-SIZE-CHARS 24 BY 16.
+DISPLAY c VIEW-AS EDITOR SIZE-PIXELS 24 BY 16.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (image_definition
+    name: (identifier)
+    (image_phrase
+      file: (string_literal)
+      width: (number_literal)
+      height: (number_literal)))
+  (display_statement
+    (field
+      field: (identifier))
+    (format_phrase
+      (editor_phrase
+        width: (number_literal)
+        height: (number_literal)))))

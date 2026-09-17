@@ -100,8 +100,7 @@ export default ({ kw }) => ({
     seq(
       // oxlint-disable-next-line tree-sitter-optimize/shared-choice
       choice(kw("SIZE"), kw("SIZE-CHARS"), kw("SIZE-PIXELS")),
-      field("width", $.number_literal),
-      $._by_keyword,
+      $._width_by,
       field("height", $.number_literal),
     ),
 
