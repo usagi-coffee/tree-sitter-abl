@@ -106,5 +106,5 @@ export default ({ kw }) => ({
   __display_base_field: ($) =>
     choice($._identifier_or_qualified_name, alias($.__display_base_element, $.array_access)),
   __display_base_element: ($) =>
-    seq(field("array", $._identifier_or_qualified_name), "[", field("index", $._expression), "]"),
+    seq(field("array", $._identifier_or_qualified_name), $._index_prefix, "]"),
 });

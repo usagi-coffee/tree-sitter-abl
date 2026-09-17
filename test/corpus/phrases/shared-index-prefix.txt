@@ -1,0 +1,27 @@
+================================================================================
+Index prefixes - preserve DISPLAY arrays and record field-list indexes
+================================================================================
+
+DISPLAY arr[i + 1].
+FOR EACH Customer FIELDS (Name[i + 1] Address): END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (display_statement
+    (field
+      field: (array_access
+        array: (identifier)
+        index: (binary_expression
+          (identifier)
+          (number_literal)))))
+  (for_statement
+    (record_phrase
+      record: (identifier)
+      (field_list
+        (identifier)
+        index: (binary_expression
+          (identifier)
+          (number_literal))
+        (identifier)))
+    (body)))

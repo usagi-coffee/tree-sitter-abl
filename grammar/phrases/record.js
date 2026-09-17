@@ -61,7 +61,7 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/single-use-sequence
   __record_field_names: ($) =>
     seq(
-      seq($._identifier_or_qualified_name, optional(seq("[", field("index", $._expression), "]"))),
+      seq($._identifier_or_qualified_name, optional(seq($._index_prefix, "]"))),
       optional($.__record_field_name_tail),
     ),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-sequence, tree-sitter-optimize/recursive-continuation-inline
