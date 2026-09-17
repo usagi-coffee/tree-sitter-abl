@@ -356,16 +356,17 @@ export default grammar({
         prec.right(seq(token(prec(1, /&ELSEIF/i)), field("condition", $._expression))),
       __if_preprocessor_else_statement: ($) => token(prec(1, /&ELSE/i)),
       __if_preprocessor_endif_statement: ($) => token(prec(1, /&ENDIF/i)),
-      __if_preprocessor_elseif_branch: ($) =>
-        seq(
-          token(/&ELSEIF/i),
-          $.__if_preprocessor_condition_then,
-          field("then_branch", $.__if_preprocessor_branch_values),
-        ),
       __if_preprocessor_branches: ($) =>
         choice(
           seq(
-            field("elseif_branch", $.__if_preprocessor_elseif_branch),
+            field(
+              "elseif_branch",
+              seq(
+                token(/&ELSEIF/i),
+                $.__if_preprocessor_condition_then,
+                field("then_branch", $.__if_preprocessor_branch_values),
+              ),
+            ),
             optional($.__if_preprocessor_branches),
           ),
           field("else_branch", seq(token(/&ELSE/i), $.__if_preprocessor_branch_values)),
