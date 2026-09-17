@@ -90,6 +90,7 @@ export default ({ kw }) => ({
     choice(
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
       seq(
+        // oxlint-disable-next-line tree-sitter-optimize/shared-valued-fragment
         kw("FIELD"),
         field("field", $._identifier_or_array_access),
         // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
