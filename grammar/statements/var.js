@@ -16,6 +16,7 @@ export default ({ kw }) => ({
       optional(field("initializer", $.__var_initializer)),
     ),
 
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-field-sequence
   __var_initializer: ($) => seq("=", $._assignment_value),
   __var_extent: ($) =>
     seq(
