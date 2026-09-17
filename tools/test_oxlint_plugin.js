@@ -1,6 +1,7 @@
 import { RuleTester } from "oxlint/plugins-dev";
 
 import {
+  sharedFieldMarker,
   redundantInheritedField,
   singleUseFieldSequence,
   sharedValuedFragment,
@@ -4523,5 +4524,53 @@ new RuleTester().run("redundant-inherited-field", redundantInheritedField, {
     },
   ],
 });
+
+const fieldMarkerSeed = {
+  filename: "grammar/phrases/format.js",
+  code: 'export default ({kw}) => ({first: ($) => seq(kw("SIZE"), field("width", $.number_literal), $._by_keyword, field("height", $.number_literal))});',
+};
+const fieldMarkerTarget =
+  'export default ({kw}) => ({second: ($) => seq(kw("IMAGE-SIZE"), field("width", $.number_literal), $._by_keyword, field("height", $.number_literal))});';
+for (const code of [
+  fieldMarkerTarget.replace('"width"', '"left"'),
+  fieldMarkerTarget.replace("$.number_literal", "$._expression"),
+  fieldMarkerTarget.replace("$.number_literal", "$.__local"),
+  fieldMarkerTarget.replace("$.number_literal", '$["number_literal"]'),
+  fieldMarkerTarget.replace("$._by_keyword", "$.__by_keyword"),
+  fieldMarkerTarget.replace("$._by_keyword", "$._to_keyword"),
+  fieldMarkerTarget.replace("$._by_keyword", 'kw("BY", options)'),
+  fieldMarkerTarget.replace('field("height", $.number_literal)', "$.number_literal"),
+  fieldMarkerTarget.replace(
+    'seq(kw("IMAGE-SIZE"), field("width", $.number_literal), $._by_keyword, field("height", $.number_literal))',
+    'prec.right(seq(kw("IMAGE-SIZE"), field("width", $.number_literal), $._by_keyword, field("height", $.number_literal)))',
+  ),
+  fieldMarkerTarget.replace(
+    "second:",
+    "\n// oxlint-disable-next-line rule-to-test/shared-field-marker\nsecond:",
+  ),
+]) {
+  resetSharingCandidates();
+  new RuleTester().run("shared-field-marker", sharedFieldMarker, {
+    valid: [fieldMarkerSeed, { filename: "grammar/phrases/image.js", code }],
+    invalid: [],
+  });
+}
+for (const code of [
+  fieldMarkerTarget,
+  fieldMarkerTarget.replace('field("height", $.number_literal)', 'field("other", $._expression)'),
+]) {
+  resetSharingCandidates();
+  new RuleTester().run("shared-field-marker", sharedFieldMarker, {
+    valid: [fieldMarkerSeed],
+    invalid: [
+      {
+        filename: "grammar/phrases/image.js",
+        code,
+        errors: [{ message: /width-and-marker prefix repeats first/ }],
+      },
+    ],
+  });
+}
+resetSharingCandidates();
 
 console.log("✓ Optimizer lint plugin tests passed successfully");
