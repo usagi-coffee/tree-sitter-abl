@@ -35,5 +35,6 @@ export default ({ kw }) => ({
   __put_skip_item: ($) => prec.right(seq(kw("SKIP"), optional($.__put_parenthesized_count))),
 
   __put_space_item: ($) => prec.right(seq(kw("SPACE"), optional($.__put_parenthesized_count))),
+  // oxlint-disable-next-line tree-sitter-optimize/closing-delimiter-hoist
   __put_parenthesized_count: ($) => seq("(", field("count", $._expression), ")"),
 });
