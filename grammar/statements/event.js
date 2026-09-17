@@ -13,6 +13,7 @@ export default ({ kw }) => ({
   __event_parameter_list: ($) =>
     seq($.__event_parameter, optional(seq(",", $.__event_parameter_list))),
 
+  // oxlint-disable-next-line tree-sitter-optimize/recursive-item-inline
   __event_parameter: ($) =>
     seq(
       optional(field("direction", $._parameter_direction)),
