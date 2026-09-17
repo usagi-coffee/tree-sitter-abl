@@ -63,5 +63,6 @@ export default ({ kw }) => ({
       ),
       $.__persistent_trigger_parameters,
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/closing-delimiter-hoist
   __persistent_trigger_parameters: ($) => seq("(", field("parameters", $._expressions), ")"),
 });
