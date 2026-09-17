@@ -6,6 +6,7 @@ export default ({ kw }) => ({
     // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq(
       kw("OPEN"),
+      // oxlint-disable-next-line tree-sitter-optimize/shared-valued-fragment
       kw("QUERY"),
       field("query", $.identifier),
       choice($._for_keyword, kw("PRESELECT")),
