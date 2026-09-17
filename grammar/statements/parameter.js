@@ -29,6 +29,7 @@ export default ({ kw }) => ({
               optional($.__parameter_table_options),
             ),
             seq(
+              // oxlint-disable-next-line tree-sitter-optimize/shared-valued-fragment
               kw("DATASET-HANDLE"),
               field("dataset_handle", $.identifier),
               optional($.__parameter_handle_options),
