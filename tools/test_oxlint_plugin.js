@@ -1,6 +1,7 @@
 import { RuleTester } from "oxlint/plugins-dev";
 
 import {
+  sharedAssignmentClause,
   shortPrivatePrefix,
   sharedDeclarationTail,
   sharedBlockClose,
@@ -4284,5 +4285,45 @@ new RuleTester().run("short-private-prefix", shortPrivatePrefix, {
     },
   ],
 });
+
+const statusSeed = {
+  filename: "grammar/statements/close-stored-procedure.js",
+  code: 'export default () => ({first: ($) => optional(seq(field("status_var", $._identifier_or_qualified_name), "=", kw("PROC-STATUS")))});',
+};
+const statusTarget =
+  'export default () => ({second: ($) => seq("LOAD-RESULT-INTO", $.handle, optional(seq(field("status_var", $._identifier_or_qualified_name), "=", kw("PROC-STATUS"))))});';
+for (const code of [
+  statusTarget.replace('"status_var"', '"other"'),
+  statusTarget.replace("$._identifier_or_qualified_name", "$.identifier"),
+  statusTarget.replace("$._identifier_or_qualified_name", "$.__local"),
+  statusTarget.replace('"="', '":"'),
+  statusTarget.replace('kw("PROC-STATUS")', 'kw("PROC-HANDLE")'),
+  statusTarget.replace('kw("PROC-STATUS")', 'kw("PROC-STATUS", {offset: 4})'),
+  statusTarget.replace("optional(seq(", "token(seq("),
+  statusTarget.replace("optional(seq(", "prec.right(seq("),
+  statusTarget.replace('kw("PROC-STATUS")', "getValue($)"),
+  statusTarget.replace(
+    "second:",
+    "\n// oxlint-disable-next-line rule-to-test/shared-assignment-clause\nsecond:",
+  ),
+]) {
+  resetSharingCandidates();
+  new RuleTester().run("shared-assignment-clause", sharedAssignmentClause, {
+    valid: [statusSeed, { filename: "grammar/statements/run-stored-procedure.js", code }],
+    invalid: [],
+  });
+}
+resetSharingCandidates();
+new RuleTester().run("shared-assignment-clause", sharedAssignmentClause, {
+  valid: [statusSeed],
+  invalid: [
+    {
+      filename: "grammar/statements/run-stored-procedure.js",
+      code: statusTarget,
+      errors: [{ message: /status_var assignment clause repeats first/ }],
+    },
+  ],
+});
+resetSharingCandidates();
 
 console.log("✓ Optimizer lint plugin tests passed successfully");
