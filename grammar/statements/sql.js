@@ -183,6 +183,7 @@ export default ({ kw }) => ({
   // A host variable receiving a column value. Kept to the shapes a variable can
   // take, not to `_assignable`, which reaches widget references with no meaning
   // here.
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-field-sequence
   __sql_table_reference: ($) =>
     seq(field("name", $._identifier_or_qualified_name), optional(field("alias", $.identifier))),
 
