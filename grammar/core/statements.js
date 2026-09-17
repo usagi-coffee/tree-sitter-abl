@@ -5,6 +5,7 @@ export default ({ kw }) => ({
   _statement: ($) =>
     choice(
       // Special
+      // oxlint-disable-next-line tree-sitter-optimize/forwarded-alias-reuse
       alias($.include_statement, $.include_file_reference),
       alias($._macro_statement_token, $.constant),
       $.global_define_preprocessor_directive,
