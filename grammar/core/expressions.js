@@ -37,6 +37,7 @@ export default ({ kw }) => ({
       $.boolean_literal,
       $.null_literal,
       $.input_expression,
+      // oxlint-disable-next-line tree-sitter-optimize/forwarded-alias-reuse
       alias($.include_expression, $.include_file_reference),
     ),
   // oxlint-disable-next-line tree-sitter-optimize/body-extraction
