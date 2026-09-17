@@ -1,0 +1,25 @@
+================================================================================
+Stored procedure status - qualified targets and following clauses
+================================================================================
+
+RUN STORED-PROCEDURE p LOAD-RESULT-INTO resultHandle db.status = PROC-STATUS NO-ERROR (INPUT 1).
+CLOSE STORED-PROCEDURE p db.status = PROC-STATUS WHERE PROC-HANDLE = handleRef.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (run_stored_procedure_statement
+    procedure: (identifier)
+    result_handle: (identifier)
+    status_var: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    (no_error)
+    (parameter_list
+      value: (number_literal)))
+  (close_stored_procedure_statement
+    procedure: (identifier)
+    status_var: (qualified_name
+      left: (identifier)
+      right: (identifier))
+    handle: (identifier)))

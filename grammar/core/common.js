@@ -521,6 +521,7 @@ export default ({ kw }) => ({
   _when_phrase: ($) => seq(kw("WHEN"), field("when", $._expression)),
   _equals_value: ($) => seq("=", field("value", $._expression)),
   _close_equals_value: ($) => seq(")", $._equals_value),
+  _status: ($) => seq(field("status_var", $._identifier_or_qualified_name), "=", kw("PROC-STATUS")),
   _position_length: ($) => seq(field("position", $._expression), optional($._comma_length)),
   _comma_position_length: ($) => seq(",", $._position_length),
   _comma_length: ($) => seq(",", field("length", $._expression)),
