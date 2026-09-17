@@ -8,8 +8,7 @@ export default ({ kw }) => ({
       optional(
         seq($._as_keyword, optional(kw("CLASS")), field("type", $._identifier_or_qualified_name)),
       ),
-      $.body,
-      $._end_keyword,
+      $._closed_body,
       optional(kw("CATCH")),
     ),
 });

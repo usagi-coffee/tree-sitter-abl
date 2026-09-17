@@ -1,0 +1,28 @@
+================================================================================
+CATCH and FINALLY - empty and populated bodies remain visible
+================================================================================
+
+CATCH e AS MyError: END CATCH.
+CATCH e AS MyError: MESSAGE "caught". END CATCH.
+FINALLY: END FINALLY.
+FINALLY: MESSAGE "done". END FINALLY.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (catch_statement
+    name: (identifier)
+    type: (identifier)
+    (body))
+  (catch_statement
+    name: (identifier)
+    type: (identifier)
+    (body
+      (message_statement
+        (string_literal))))
+  (finally_statement
+    (body))
+  (finally_statement
+    (body
+      (message_statement
+        (string_literal)))))

@@ -529,6 +529,7 @@ export default ({ kw }) => ({
       field("name", $.identifier),
       alias($._method_parameters, $.parameters),
     ),
+  _closed_body: ($) => seq($.body, $._end_keyword),
   _compound_body: ($) =>
     seq(
       // oxlint-disable-next-line tree-sitter-optimize/recurse
