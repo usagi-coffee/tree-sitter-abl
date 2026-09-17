@@ -1,6 +1,7 @@
 import { RuleTester } from "oxlint/plugins-dev";
 
 import {
+  sharedRepeatedSignature,
   leftRecursiveList,
   recursiveItemInline,
   forwardedAliasReuse,
@@ -4814,5 +4815,59 @@ new RuleTester().run("left-recursive-list", leftRecursiveList, {
     },
   ],
 });
+
+const repeatedSignatureSeed = {
+  filename: "grammar/statements/interface.js",
+  code: 'export default ({kw}) => ({first: ($) => seq(kw("METHOD"), repeat($._modifiers), $._method_signature)});',
+};
+const repeatedSignatureTarget =
+  'export default ({kw}) => ({second: ($) => seq(kw("METHOD"), kw("ABSTRACT"), repeat($._modifiers), $._method_signature, $._terminator)});';
+for (const code of [
+  repeatedSignatureTarget.replace("$._modifiers", "$._other_modifiers"),
+  repeatedSignatureTarget.replace("$._modifiers", "$.__modifiers"),
+  repeatedSignatureTarget.replace("$._modifiers", '$["_modifiers"]'),
+  repeatedSignatureTarget.replace("$._method_signature", "$._other_signature"),
+  repeatedSignatureTarget.replace("$._method_signature", "$.__method_signature"),
+  repeatedSignatureTarget.replace("$._method_signature", "$.method_signature"),
+  repeatedSignatureTarget.replace("$._method_signature", "$._end_keyword"),
+  repeatedSignatureTarget.replace("repeat(", "repeat1("),
+  repeatedSignatureTarget.replace("$._modifiers", "getModifiers($)"),
+  repeatedSignatureTarget.replace(
+    'seq(kw("METHOD"), kw("ABSTRACT"), repeat($._modifiers), $._method_signature, $._terminator)',
+    'prec.right(seq(kw("METHOD"), kw("ABSTRACT"), repeat($._modifiers), $._method_signature, $._terminator))',
+  ),
+  repeatedSignatureTarget.replace(
+    "second:",
+    "\n// oxlint-disable-next-line rule-to-test/shared-repeated-signature\nsecond:",
+  ),
+]) {
+  resetSharingCandidates();
+  new RuleTester().run("shared-repeated-signature", sharedRepeatedSignature, {
+    valid: [repeatedSignatureSeed, { filename: "grammar/statements/class.js", code }],
+    invalid: [],
+  });
+}
+resetSharingCandidates();
+new RuleTester().run("shared-repeated-signature", sharedRepeatedSignature, {
+  valid: [repeatedSignatureSeed],
+  invalid: [
+    {
+      filename: "grammar/statements/class.js",
+      code: repeatedSignatureTarget,
+      errors: [{ message: /signature also appear in first/ }],
+    },
+  ],
+});
+resetSharingCandidates();
+new RuleTester().run("shared-repeated-signature", sharedRepeatedSignature, {
+  valid: [],
+  invalid: [
+    {
+      code: 'export default ({kw}) => ({first: ($) => seq(kw("METHOD"), repeat($._modifiers), $._method_signature), second: ($) => seq(kw("ABSTRACT"), repeat($._modifiers), $._method_signature)});',
+      errors: [{ message: /required-field metadata/ }],
+    },
+  ],
+});
+resetSharingCandidates();
 
 console.log("✓ Optimizer lint plugin tests passed successfully");
