@@ -536,9 +536,7 @@ export default ({ kw }) => ({
     seq(
       // oxlint-disable-next-line tree-sitter-optimize/recurse
       repeat($._method_modifier_no_abstract),
-      $._method_return_type,
-      field("name", $.identifier),
-      alias($._method_parameters, $.parameters),
+      $._method_definition_signature,
     ),
   _method_definition_signature: ($) =>
     seq(
