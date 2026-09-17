@@ -90,7 +90,9 @@ export default ({ kw }) => ({
       ),
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
       seq(
+        // oxlint-disable-next-line tree-sitter-optimize/shared-valued-fragment
         kw("BUFFER"),
+        // oxlint-disable-next-line tree-sitter-optimize/shared-field-marker
         field("buffer", $.identifier),
         $._for_keyword,
         field("table", $._identifier_or_qualified_name),
