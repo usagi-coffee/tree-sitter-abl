@@ -552,9 +552,12 @@ export default ({ kw }) => ({
   _list_items_phrase: ($) => seq(kw("LIST-ITEMS"), field("items", $._list_item_values)),
   _list_item_pairs_phrase: ($) => seq(kw("LIST-ITEM-PAIRS"), field("pairs", $._list_item_pairs)),
   _list_item_values: ($) => seq($._expression, optional(seq(",", $._list_item_values))),
-  _list_item_pairs: ($) => seq($._list_item_pair, optional(seq(",", $._list_item_pairs))),
-  // oxlint-disable-next-line tree-sitter-optimize/shared-comma-field
-  _list_item_pair: ($) => seq(field("label", $._expression), ",", field("value", $._expression)),
+  _list_item_pairs: ($) =>
+    seq(
+      // oxlint-disable-next-line tree-sitter-optimize/shared-comma-field
+      seq(field("label", $._expression), ",", field("value", $._expression)),
+      optional(seq(",", $._list_item_pairs)),
+    ),
   _scrollbar_option: ($) =>
     choice(
       alias(kw("SCROLLBAR-HORIZONTAL"), $.scrollbar_horizontal),

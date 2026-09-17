@@ -1,0 +1,28 @@
+================================================================================
+Widget pairs - Recursive items retain labels and expression values
+================================================================================
+
+DEFINE VARIABLE r AS INTEGER VIEW-AS RADIO-SET RADIO-BUTTONS caption, base + 1, "Other", ?.
+DEFINE VARIABLE c AS INTEGER VIEW-AS COMBO-BOX LIST-ITEM-PAIRS caption, base + 1, "Other", ?.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (view_as_phrase
+      (radio_set_phrase
+        label: (identifier)
+        value: (binary_expression (identifier) (number_literal))
+        label: (string_literal)
+        value: (null_literal))))
+  (variable_definition
+    name: (identifier)
+    type: (identifier)
+    (view_as_phrase
+      (combo_box_phrase
+        label: (identifier)
+        value: (binary_expression (identifier) (number_literal))
+        label: (string_literal)
+        value: (null_literal)))))
