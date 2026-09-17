@@ -1,6 +1,7 @@
 import { RuleTester } from "oxlint/plugins-dev";
 
 import {
+  redundantInheritedField,
   singleUseFieldSequence,
   sharedValuedFragment,
   sharedDelimiterFieldPrefix,
@@ -4473,6 +4474,52 @@ new RuleTester().run("single-use-field-sequence", singleUseFieldSequence, {
         'seq(field("name", $.identifier), optional(field("alias", $.identifier)))',
       ),
       errors: [{ message: /one local use inside the else_branch field/ }],
+    },
+  ],
+});
+
+const inheritedFieldGrammar =
+  'export default () => ({root: ($) => field("field", $.__item), __item: ($) => seq(field("field", $.identifier), optional($.format_phrase))});';
+new RuleTester().run("redundant-inherited-field", redundantInheritedField, {
+  valid: [
+    inheritedFieldGrammar.replace('root: ($) => field("field", $.__item)', "root: ($) => $.__item"),
+    inheritedFieldGrammar.replace(
+      'root: ($) => field("field", $.__item)',
+      'root: ($) => field("other", $.__item)',
+    ),
+    inheritedFieldGrammar.replace('field("field", $.identifier)', "$.identifier"),
+    inheritedFieldGrammar.replace('field("field", $.identifier)', 'field("name", $.identifier)'),
+    inheritedFieldGrammar.replace(
+      'field("field", $.identifier)',
+      'field("field", alias($.identifier, $.name))',
+    ),
+    inheritedFieldGrammar.replace("$.__item)", '$["__item"])'),
+    inheritedFieldGrammar.replace("optional($.format_phrase)", "optional($.__item)"),
+    inheritedFieldGrammar.replace("optional($.format_phrase)", "dynamic($)"),
+    inheritedFieldGrammar.replaceAll("__item", "item"),
+    inheritedFieldGrammar.replace("__item:", 'other: ($) => field("different", $.__item), __item:'),
+    inheritedFieldGrammar.replace(
+      'field("field", $.__item)',
+      'alias(field("field", $.__item), $.item)',
+    ),
+    inheritedFieldGrammar.replace('field("field", $.__item)', 'token(field("field", $.__item))'),
+    inheritedFieldGrammar.replace(
+      "__item:",
+      "\n// oxlint-disable-next-line rule-to-test/redundant-inherited-field\n__item:",
+    ),
+    'export default grammar({inline: ($) => [$.__item], rules: {root: ($) => field("field", $.__item), __item: ($) => seq(field("field", $.name), $.suffix)}});',
+  ],
+  invalid: [
+    {
+      code: inheritedFieldGrammar,
+      errors: [{ message: /Every local use of __item already applies the field field/ }],
+    },
+    {
+      code: inheritedFieldGrammar.replace(
+        "__item:",
+        'other: ($) => field("field", $.__item), __item:',
+      ),
+      errors: [{ message: /matching inner field annotation/ }],
     },
   ],
 });
