@@ -1,0 +1,34 @@
+================================================================================
+SEEK - Stream and destination combinations
+================================================================================
+
+SEEK INPUT TO END.
+SEEK INPUT TO pos + 1.
+SEEK OUTPUT TO END.
+SEEK OUTPUT TO 0.
+SEEK STREAM outStream TO END.
+SEEK STREAM outStream TO pos.
+SEEK STREAM-HANDLE hStream TO END.
+SEEK STREAM-HANDLE hStream TO pos.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (seek_statement)
+  (seek_statement
+    (binary_expression
+      (identifier)
+      (number_literal)))
+  (seek_statement)
+  (seek_statement
+    (number_literal))
+  (seek_statement
+    stream: (identifier))
+  (seek_statement
+    stream: (identifier)
+    (identifier))
+  (seek_statement
+    stream: (identifier))
+  (seek_statement
+    stream: (identifier)
+    (identifier)))
