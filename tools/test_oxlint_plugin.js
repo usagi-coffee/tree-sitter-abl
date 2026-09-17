@@ -1,6 +1,7 @@
 import { RuleTester } from "oxlint/plugins-dev";
 
 import {
+  forwardedAliasReuse,
   closingDelimiterHoist,
   choiceProductExtraction,
   sharedFieldMarker,
@@ -4663,5 +4664,84 @@ new RuleTester().run("closing-delimiter-hoist", closingDelimiterHoist, {
     },
   ],
 });
+
+const forwardedAliasSeed = {
+  filename: "grammar.js",
+  code: "export default grammar({rules: {include_statement: ($) => $.__include, include_file_reference: ($) => $.__include}});",
+};
+const forwardedAliasTarget =
+  "export default () => ({case_body: ($) => prec.right(choice($.branch, alias($.include_statement, $.include_file_reference)))});";
+for (const code of [
+  forwardedAliasTarget.replace("$.include_statement", "$.missing"),
+  forwardedAliasTarget.replace("$.include_file_reference", "$.different"),
+  forwardedAliasTarget.replace("$.include_statement", '$["include_statement"]'),
+  forwardedAliasTarget.replace("$.include_file_reference", '"include"'),
+  forwardedAliasTarget.replace(
+    "alias($.include_statement, $.include_file_reference)",
+    "$.include_file_reference",
+  ),
+  forwardedAliasTarget.replace(
+    "alias($.include_statement, $.include_file_reference)",
+    "token(alias($.include_statement, $.include_file_reference))",
+  ),
+  forwardedAliasTarget.replace("prec.right", "prec.dynamic.bind(null, 1)"),
+  forwardedAliasTarget.replace(
+    "case_body:",
+    "\n// oxlint-disable-next-line rule-to-test/forwarded-alias-reuse\ncase_body:",
+  ),
+]) {
+  resetSharingCandidates();
+  new RuleTester().run("forwarded-alias-reuse", forwardedAliasReuse, {
+    valid: [forwardedAliasSeed, { filename: "grammar/statements/case.js", code }],
+    invalid: [],
+  });
+}
+resetSharingCandidates();
+new RuleTester().run("forwarded-alias-reuse", forwardedAliasReuse, {
+  valid: [forwardedAliasSeed],
+  invalid: [
+    {
+      filename: "grammar/statements/case.js",
+      code: forwardedAliasTarget,
+      errors: [{ message: /both forward to __include/ }],
+    },
+  ],
+});
+for (const source of [
+  'export default () => ({a: ($) => $.__x, a: ($) => seq("X", $.value), b: ($) => $.__x, use: ($) => alias($.a, $.b)});',
+  "export default () => ({a: ($) => $.visible, b: ($) => $.visible, use: ($) => alias($.a, $.b)});",
+
+  "export default () => ({a: ($) => $.__x, b: ($) => $.__y, use: ($) => alias($.a, $.b)});",
+  "export default () => ({a: ($) => prec.right($.__x), b: ($) => $.__x, use: ($) => alias($.a, $.b)});",
+  "export default () => ({a: ($) => $.__x, b: ($) => $.visible, use: ($) => alias($.a, $.b)});",
+]) {
+  resetSharingCandidates();
+  new RuleTester().run("forwarded-alias-reuse", forwardedAliasReuse, {
+    valid: [source],
+    invalid: [],
+  });
+}
+resetSharingCandidates();
+new RuleTester().run("forwarded-alias-reuse", forwardedAliasReuse, {
+  valid: [],
+  invalid: [
+    {
+      code: "export default () => ({a: ($) => $.__x, b: ($) => $.__x, use: ($) => alias($.a, $.b)});",
+      errors: [{ message: /using \$\.b directly/ }],
+    },
+  ],
+});
+resetSharingCandidates();
+
+resetSharingCandidates();
+new RuleTester().run("forwarded-alias-reuse", forwardedAliasReuse, {
+  valid: [
+    { filename: "grammar/a.js", code: "export default () => ({a: ($) => $.__x});" },
+    { filename: "grammar/b.js", code: "export default () => ({b: ($) => $.__x});" },
+    { filename: "grammar/use.js", code: "export default () => ({use: ($) => alias($.a, $.b)});" },
+  ],
+  invalid: [],
+});
+resetSharingCandidates();
 
 console.log("✓ Optimizer lint plugin tests passed successfully");
