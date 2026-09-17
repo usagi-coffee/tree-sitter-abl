@@ -5,6 +5,7 @@ export default ({ kw }) => ({
   _inner_chars_value: ($) => seq(kw("INNER-CHARS"), field("inner_chars", $.number_literal)),
   _key_section: ($) => seq(kw("SECTION"), field("section", $._expression)),
   _key_value: ($) => seq(kw("VALUE"), field("value", $._expression)),
+  _for_tenant: ($) => seq($._for_keyword, kw("TENANT"), field("tenant", $._expression)),
   _set_update_record_body: ($) =>
     // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq(

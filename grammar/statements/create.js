@@ -106,7 +106,7 @@ export default ({ kw }) => ({
     seq(
       // oxlint-disable-next-line tree-sitter-optimize/shared-choice
       field("table", choice($._identifier_or_qualified_name, $.preprocessor_name)),
-      optional(seq($._for_keyword, kw("TENANT"), field("tenant", $._expression))),
+      optional($._for_tenant),
       optional(
         seq(
           $._using_keyword,
