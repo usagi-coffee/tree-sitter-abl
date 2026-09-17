@@ -1,6 +1,7 @@
 import { RuleTester } from "oxlint/plugins-dev";
 
 import {
+  sharedBlockClose,
   optionalRepetitionInline,
   sharedCommaContinuation,
   nullableSlotList,
@@ -4140,5 +4141,49 @@ new RuleTester().run("optional-repetition-inline", optionalRepetitionInline, {
     },
   ],
 });
+
+const blockCloseSeed = {
+  filename: "grammar/statements/catch.js",
+  code: 'export default () => ({first: ($) => seq("CATCH", $.body, $._end_keyword, optional("CATCH"))});',
+};
+const blockCloseTarget =
+  'export default () => ({second: ($) => seq("FINALLY", $.body, $._end_keyword, optional("FINALLY"))});';
+for (const code of [
+  blockCloseTarget.replace("$.body", "$.__body"),
+  blockCloseTarget.replace("$.body", "$.other_body"),
+  blockCloseTarget.replace("$._end_keyword", "$._terminator"),
+  blockCloseTarget.replace("$.body", 'field("body", $.body)'),
+  blockCloseTarget.replace("$.body", '$["body"]'),
+  blockCloseTarget.replace("$.body, $._end_keyword", "$._closed_body"),
+  ...["alias", "token", "token.immediate", "prec", "prec.left", "prec.right", "prec.dynamic"].map(
+    (wrapper) =>
+      blockCloseTarget.replace(
+        'seq("FINALLY", $.body, $._end_keyword, optional("FINALLY"))',
+        `${wrapper}(${wrapper === "prec" ? '"block", ' : wrapper === "prec.dynamic" ? "1, " : ""}seq("FINALLY", $.body, $._end_keyword)${wrapper === "alias" ? ", $.block" : ""})`,
+      ),
+  ),
+  blockCloseTarget.replace(
+    "second:",
+    "\n// oxlint-disable-next-line rule-to-test/shared-block-close\nsecond:",
+  ),
+]) {
+  resetSharingCandidates();
+  new RuleTester().run("shared-block-close", sharedBlockClose, {
+    valid: [blockCloseSeed, { filename: "grammar/statements/finally.js", code }],
+    invalid: [],
+  });
+}
+resetSharingCandidates();
+new RuleTester().run("shared-block-close", sharedBlockClose, {
+  valid: [blockCloseSeed],
+  invalid: [
+    {
+      filename: "grammar/statements/finally.js",
+      code: blockCloseTarget,
+      errors: [{ message: /body node and END delimiter repeat a fragment in first/ }],
+    },
+  ],
+});
+resetSharingCandidates();
 
 console.log("✓ Optimizer lint plugin tests passed successfully");
