@@ -1,6 +1,7 @@
 import { RuleTester } from "oxlint/plugins-dev";
 
 import {
+  singleUseFieldSequence,
   sharedValuedFragment,
   sharedDelimiterFieldPrefix,
   sharedAssignmentClause,
@@ -4427,5 +4428,53 @@ new RuleTester().run("shared-valued-fragment", sharedValuedFragment, {
   ],
 });
 resetSharingCandidates();
+
+const fieldSequenceGrammar =
+  'export default () => ({root: ($) => field("else_branch", $.__else_clause), __else_clause: ($) => seq(token(/&ELSE/i), $.values)});';
+new RuleTester().run("single-use-field-sequence", singleUseFieldSequence, {
+  valid: [
+    fieldSequenceGrammar.replace('field("else_branch", $.__else_clause)', "$.__else_clause"),
+    fieldSequenceGrammar.replace(
+      'field("else_branch", $.__else_clause)',
+      "alias($.__else_clause, $.branch)",
+    ),
+    fieldSequenceGrammar.replace(
+      'field("else_branch", $.__else_clause)',
+      'alias(field("else_branch", $.__else_clause), $.branch)',
+    ),
+    fieldSequenceGrammar.replace(
+      'field("else_branch", $.__else_clause)',
+      'token(field("else_branch", $.__else_clause))',
+    ),
+    fieldSequenceGrammar.replace(
+      'field("else_branch", $.__else_clause)',
+      'prec.dynamic(1, field("else_branch", $.__else_clause))',
+    ),
+    fieldSequenceGrammar.replace("$.__else_clause)", '$["__else_clause"])'),
+    fieldSequenceGrammar.replace("$.values", "$.__else_clause"),
+    fieldSequenceGrammar.replace("$.values", "dynamic($)"),
+    fieldSequenceGrammar.replace("__else_clause:", "other: ($) => $.__else_clause, __else_clause:"),
+    fieldSequenceGrammar.replaceAll("__else_clause", "visible"),
+    fieldSequenceGrammar.replaceAll("__else_clause", "__else_body"),
+    fieldSequenceGrammar.replace(
+      "__else_clause:",
+      "\n// oxlint-disable-next-line rule-to-test/single-use-field-sequence\n__else_clause:",
+    ),
+    'export default grammar({inline: ($) => [$.__tail], rules: {root: ($) => field("x", $.__tail), __tail: ($) => seq("=", $.value)}});',
+  ],
+  invalid: [
+    {
+      code: fieldSequenceGrammar,
+      errors: [{ message: /one local use inside the else_branch field/ }],
+    },
+    {
+      code: fieldSequenceGrammar.replace(
+        "seq(token(/&ELSE/i), $.values)",
+        'seq(field("name", $.identifier), optional(field("alias", $.identifier)))',
+      ),
+      errors: [{ message: /one local use inside the else_branch field/ }],
+    },
+  ],
+});
 
 console.log("✓ Optimizer lint plugin tests passed successfully");

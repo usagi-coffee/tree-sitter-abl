@@ -21,6 +21,7 @@
     {
       "files": ["grammar.js", "grammar/**/*.js"],
       "rules": {
+        "tree-sitter-optimize/single-use-field-sequence": "warn",
         "tree-sitter-optimize/shared-valued-fragment": "warn",
         "tree-sitter-optimize/shared-block-close": "warn",
         "tree-sitter-optimize/shared-declaration-tail": "warn",
