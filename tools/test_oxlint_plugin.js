@@ -1,6 +1,7 @@
 import { RuleTester } from "oxlint/plugins-dev";
 
 import {
+  sharedDelimiterFieldPrefix,
   sharedAssignmentClause,
   shortPrivatePrefix,
   sharedDeclarationTail,
@@ -4321,6 +4322,58 @@ new RuleTester().run("shared-assignment-clause", sharedAssignmentClause, {
       filename: "grammar/statements/run-stored-procedure.js",
       code: statusTarget,
       errors: [{ message: /status_var assignment clause repeats first/ }],
+    },
+  ],
+});
+resetSharingCandidates();
+
+const delimiterSeed = {
+  filename: "grammar/phrases/record.js",
+  code: 'export default () => ({first: ($) => seq($.name, optional(seq("[", field("index", $._expression), "]")))});',
+};
+const delimiterTarget =
+  'export default () => ({second: ($) => seq(field("array", $.identifier), "[", field("index", $._expression), "]")});';
+for (const code of [
+  delimiterTarget.replace('"index"', '"other"'),
+  delimiterTarget.replace("$._expression", "$.number_literal"),
+  delimiterTarget.replace("$._expression", "$.__local"),
+  delimiterTarget.replace("$._expression", '$["_expression"]'),
+  delimiterTarget.replace('"]"', '")"'),
+  delimiterTarget.replace('"["', '"<"'),
+  delimiterTarget.replace(
+    'field("index", $._expression)',
+    'field("index", optional($._expression))',
+  ),
+  delimiterTarget.replace('field("index", $._expression)', 'field("index", getValue($))'),
+  delimiterTarget.replace(
+    'seq(field("array", $.identifier), "[", field("index", $._expression), "]")',
+    'seq(field("array", $.identifier), $._index_prefix, "]")',
+  ),
+  ...["token", "prec.right"].map((wrapper) =>
+    delimiterTarget.replace(
+      'seq(field("array", $.identifier), "[", field("index", $._expression), "]")',
+      `${wrapper}(seq(field("array", $.identifier), "[", field("index", $._expression), "]"))`,
+    ),
+  ),
+  delimiterTarget.replace(
+    "second:",
+    "\n// oxlint-disable-next-line rule-to-test/shared-delimiter-field-prefix\nsecond:",
+  ),
+]) {
+  resetSharingCandidates();
+  new RuleTester().run("shared-delimiter-field-prefix", sharedDelimiterFieldPrefix, {
+    valid: [delimiterSeed, { filename: "grammar/statements/display.js", code }],
+    invalid: [],
+  });
+}
+resetSharingCandidates();
+new RuleTester().run("shared-delimiter-field-prefix", sharedDelimiterFieldPrefix, {
+  valid: [delimiterSeed],
+  invalid: [
+    {
+      filename: "grammar/statements/display.js",
+      code: delimiterTarget,
+      errors: [{ message: /delimited index field repeats a fragment in first/ }],
     },
   ],
 });
