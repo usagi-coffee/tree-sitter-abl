@@ -40,6 +40,7 @@ export default ({ kw }) => ({
   __wait_for_pause_phrase: ($) => seq(kw("PAUSE"), field("duration", $._expression)),
 
   __wait_for_widgets: ($) => seq($.widget_phrase, optional(seq(",", $.__wait_for_widgets))),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-field-sequence
   __wait_for_event_list: ($) => seq($._events, optional($.__wait_for_event_list_tail)),
   // oxlint-disable-next-line tree-sitter-optimize/recursive-tail-reuse
   __wait_for_event_list_tail: ($) =>
