@@ -21,6 +21,7 @@
     {
       "files": ["grammar.js", "grammar/**/*.js"],
       "rules": {
+        "tree-sitter-optimize/recursive-item-inline": "warn",
         "tree-sitter-optimize/forwarded-alias-reuse": "warn",
         "tree-sitter-optimize/closing-delimiter-hoist": "warn",
         "tree-sitter-optimize/choice-product-extraction": "warn",

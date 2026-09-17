@@ -1,6 +1,7 @@
 import { RuleTester } from "oxlint/plugins-dev";
 
 import {
+  recursiveItemInline,
   forwardedAliasReuse,
   closingDelimiterHoist,
   choiceProductExtraction,
@@ -4743,5 +4744,39 @@ new RuleTester().run("forwarded-alias-reuse", forwardedAliasReuse, {
   invalid: [],
 });
 resetSharingCandidates();
+
+const recursiveItemGrammar =
+  'export default () => ({_pairs: ($) => seq($._pair, optional(seq(",", $._pairs))), _pair: ($) => seq(field("label", $.expression), ",", field("value", $.expression))});';
+new RuleTester().run("recursive-item-inline", recursiveItemInline, {
+  valid: [
+    recursiveItemGrammar.replace("seq($._pair,", "seq(alias($._pair, $.pair),"),
+    recursiveItemGrammar.replace("seq($._pair,", 'seq(field("item", $._pair),'),
+    recursiveItemGrammar.replace("seq($._pair,", 'seq($["_pair"],'),
+    recursiveItemGrammar.replaceAll("_pairs", "pairs"),
+    recursiveItemGrammar.replace("_pair:", "another: ($) => $._pair, _pair:"),
+    recursiveItemGrammar.replace('optional(seq(",", $._pairs))', 'optional(seq(";", $._pairs))'),
+    recursiveItemGrammar.replace('optional(seq(",", $._pairs))', 'optional(seq(",", $._other))'),
+    recursiveItemGrammar.replace("$.expression", "getValue($)"),
+    recursiveItemGrammar.replace(
+      'field("label", $.expression), ",", field("value", $.expression)',
+      '$.expression, ",", $.expression',
+    ),
+    recursiveItemGrammar.replace(
+      "_pair:",
+      "\n// oxlint-disable-next-line rule-to-test/recursive-item-inline\n_pair:",
+    ),
+    'export default grammar({inline: ($) => [$._pair], rules: {_pairs: ($) => seq($._pair, optional(seq(",", $._pairs))), _pair: ($) => seq(field("label", $.x), ",", field("value", $.x))}});',
+  ],
+  invalid: [
+    {
+      code: recursiveItemGrammar,
+      errors: [{ message: /item of the hidden recursive list _pairs/ }],
+    },
+    {
+      code: recursiveItemGrammar.replaceAll("_pair", "__pair"),
+      errors: [{ message: /keeping the comma continuation unchanged/ }],
+    },
+  ],
+});
 
 console.log("✓ Optimizer lint plugin tests passed successfully");
