@@ -6,26 +6,25 @@ export default ({ kw }) => ({
   __var_variable_suffix: ($) =>
     seq(alias($.__var_variable, $.variable), optional(seq(",", $.__var_variable_suffix))),
 
-  _var_type: ($) => seq($._class_type, optional(field("extent", $.__var_extent))),
+  _var_type: ($) => seq($._class_type, optional(field("extent", seq($.__var_extent_prefix, "]")))),
 
   __var_variable: ($) =>
     // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq(
       field("name", $.identifier),
-      optional(field("extent", $.__var_extent)),
+      optional(field("extent", seq($.__var_extent_prefix, "]"))),
       optional(field("initializer", $.__var_initializer)),
     ),
 
   // oxlint-disable-next-line tree-sitter-optimize/single-use-field-sequence
   __var_initializer: ($) => seq("=", $._assignment_value),
-  __var_extent: ($) =>
+  __var_extent_prefix: ($) =>
     seq(
       "[",
       optional(
         // oxlint-disable-next-line tree-sitter-optimize/shared-choice
         choice($.number_literal, $.preprocessor_name, $.identifier),
       ),
-      "]",
     ),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __var_modifier: ($) =>

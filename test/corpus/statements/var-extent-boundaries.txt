@@ -1,0 +1,27 @@
+================================================================================
+VAR - Extent fields survive shared closing boundaries
+================================================================================
+
+VAR INT[3] a, b[2].
+VAR INT[] c, d[].
+VAR INT[n] e, f[{&size}].
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (var_statement
+    type: (identifier)
+    extent: (number_literal)
+    (variable name: (identifier))
+    (variable name: (identifier) extent: (number_literal)))
+  (var_statement
+    type: (identifier)
+    (variable name: (identifier))
+    (variable name: (identifier)))
+  (var_statement
+    type: (identifier)
+    extent: (identifier)
+    (variable name: (identifier))
+    (variable
+      name: (identifier)
+      extent: (preprocessor_name (identifier)))))
