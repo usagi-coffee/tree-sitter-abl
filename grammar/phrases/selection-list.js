@@ -15,10 +15,7 @@ export default ({ kw }) => ({
       $.size_phrase,
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
       seq(
-        // oxlint-disable-next-line tree-sitter-optimize/shared-valued-fragment
-        kw("INNER-CHARS"),
-        // oxlint-disable-next-line tree-sitter-optimize/shared-field-marker
-        field("inner_chars", $.number_literal),
+        $._inner_chars_value,
         // oxlint-disable-next-line tree-sitter-optimize/shared-valued-fragment
         kw("INNER-LINES"),
         field("inner_lines", $.number_literal),
