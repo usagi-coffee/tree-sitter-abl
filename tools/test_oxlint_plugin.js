@@ -1,6 +1,7 @@
 import { RuleTester } from "oxlint/plugins-dev";
 
 import {
+  sharedValuedFragment,
   sharedDelimiterFieldPrefix,
   sharedAssignmentClause,
   shortPrivatePrefix,
@@ -4374,6 +4375,54 @@ new RuleTester().run("shared-delimiter-field-prefix", sharedDelimiterFieldPrefix
       filename: "grammar/statements/display.js",
       code: delimiterTarget,
       errors: [{ message: /delimited index field repeats a fragment in first/ }],
+    },
+  ],
+});
+resetSharingCandidates();
+
+const valuedSeed = {
+  filename: "grammar/statements/get-key-value.js",
+  code: 'export default ({kw}) => ({first: ($) => seq(kw("GET-KEY-VALUE"), kw("SECTION"), field("section", $._expression), $.tail)});',
+};
+const valuedTarget =
+  'export default ({kw}) => ({second: ($) => seq(kw("PUT-KEY-VALUE"), choice(seq(kw("SECTION"), field("section", $._expression), kw("KEY"), $.key), $.other))});';
+for (const code of [
+  valuedTarget.replace('"section"', '"different"'),
+  valuedTarget.replace("$._expression", "$.identifier"),
+  valuedTarget.replace("$._expression", "$.__local"),
+  valuedTarget.replace("$._expression", '$["_expression"]'),
+  valuedTarget.replace('kw("SECTION")', 'kw("SECTION", {offset: 3})'),
+  valuedTarget.replace('kw("SECTION")', "kw(section)"),
+  valuedTarget.replace(
+    'field("section", $._expression)',
+    'field("section", optional($._expression))',
+  ),
+  valuedTarget.replace('field("section", $._expression)', 'field("section", getValue($))'),
+  ...["token", "prec.right", 'field.bind(null, "outer")'].map((wrapper) =>
+    valuedTarget.replace(
+      'seq(kw("SECTION"), field("section", $._expression), kw("KEY"), $.key)',
+      `${wrapper}(seq(kw("SECTION"), field("section", $._expression), kw("KEY"), $.key))`,
+    ),
+  ),
+  valuedTarget.replace(
+    "second:",
+    "\n// oxlint-disable-next-line rule-to-test/shared-valued-fragment\nsecond:",
+  ),
+]) {
+  resetSharingCandidates();
+  new RuleTester().run("shared-valued-fragment", sharedValuedFragment, {
+    valid: [valuedSeed, { filename: "grammar/statements/put-key-value.js", code }],
+    invalid: [],
+  });
+}
+resetSharingCandidates();
+new RuleTester().run("shared-valued-fragment", sharedValuedFragment, {
+  valid: [valuedSeed],
+  invalid: [
+    {
+      filename: "grammar/statements/put-key-value.js",
+      code: valuedTarget,
+      errors: [{ message: /valued section fragment repeats first/ }],
     },
   ],
 });
