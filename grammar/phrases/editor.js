@@ -21,7 +21,7 @@ export default ({ kw }) => ({
   __editor_size: ($) =>
     choice(
       $.size_phrase,
-      // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
+      // oxlint-disable-next-line tree-sitter-optimize/shared-sequence, tree-sitter-optimize/sequence-subset
       seq(
         // oxlint-disable-next-line tree-sitter-optimize/shared-valued-fragment
         kw("INNER-CHARS"),
