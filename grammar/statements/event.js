@@ -1,6 +1,5 @@
 export default ({ kw }) => ({
-  event_definition: ($) =>
-    seq($._define_keyword, optional($.__event_modifier), kw("EVENT"), $._event_body, $._terminator),
+  event_definition: ($) => seq($._define_keyword, optional($.__event_modifier), $._event_tail),
 
   __event_signature: ($) =>
     choice(

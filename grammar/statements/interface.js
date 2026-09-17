@@ -62,13 +62,7 @@ export default ({ kw }) => ({
     seq($._define_keyword, $._dataset_keyword, $._dataset_body, $._terminator),
 
   __interface_event: ($) =>
-    seq(
-      $._define_keyword,
-      optional(alias(kw("PUBLIC"), $.access_modifier)),
-      kw("EVENT"),
-      $._event_body,
-      $._terminator,
-    ),
+    seq($._define_keyword, optional(alias(kw("PUBLIC"), $.access_modifier)), $._event_tail),
 
   interface_method_definition: ($) => seq($.__interface_method_prefix, $._terminator_dot),
 

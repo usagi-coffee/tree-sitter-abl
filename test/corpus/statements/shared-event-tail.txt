@@ -1,0 +1,31 @@
+================================================================================
+EVENT - class and interface declaration tails keep their scopes
+================================================================================
+
+CLASS Example:
+  DEFINE PUBLIC EVENT First SIGNATURE VOID ().
+  DEFINE EVENT Second SIGNATURE VOID ().
+END CLASS.
+INTERFACE IEvents:
+  DEFINE PUBLIC EVENT First SIGNATURE VOID ().
+END INTERFACE.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (class_definition
+    name: (identifier)
+    (event_definition
+      (access_modifier)
+      name: (identifier)
+      (signature))
+    (event_definition
+      name: (identifier)
+      (signature)))
+  (interface_definition
+    name: (identifier)
+    (interface_body_item
+      (event_definition
+        (access_modifier)
+        name: (identifier)
+        (signature)))))

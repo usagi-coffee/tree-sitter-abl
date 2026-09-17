@@ -410,6 +410,7 @@ export default ({ kw }) => ({
   __dataset_for_table_head: ($) =>
     seq(field("table", $.identifier), optional(seq(",", $.__dataset_for_table_head))),
 
+  _event_tail: ($) => seq(kw("EVENT"), $._event_body, $._terminator),
   _event_body: ($) =>
     seq(field("name", $.identifier), optional(alias($.__event_signature, $.signature))),
 
