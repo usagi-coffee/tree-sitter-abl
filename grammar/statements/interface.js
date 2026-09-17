@@ -64,7 +64,5 @@ export default ({ kw }) => ({
   __interface_event: ($) =>
     seq($._define_keyword, optional(alias(kw("PUBLIC"), $.access_modifier)), $._event_tail),
 
-  interface_method_definition: ($) => seq($.__interface_method_prefix, $._terminator_dot),
-
-  __interface_method_prefix: ($) => seq(kw("METHOD"), $._method_header),
+  interface_method_definition: ($) => seq(kw("METHOD"), $._method_header, $._terminator_dot),
 });
