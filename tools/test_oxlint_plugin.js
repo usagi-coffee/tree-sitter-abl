@@ -1,6 +1,7 @@
 import { RuleTester } from "oxlint/plugins-dev";
 
 import {
+  sharedDeclarationTail,
   sharedBlockClose,
   optionalRepetitionInline,
   sharedCommaContinuation,
@@ -4181,6 +4182,53 @@ new RuleTester().run("shared-block-close", sharedBlockClose, {
       filename: "grammar/statements/finally.js",
       code: blockCloseTarget,
       errors: [{ message: /body node and END delimiter repeat a fragment in first/ }],
+    },
+  ],
+});
+resetSharingCandidates();
+
+const declarationSeed = {
+  filename: "grammar/statements/event.js",
+  code: 'export default () => ({first: ($) => seq($._define_keyword, optional($.modifiers), kw("EVENT"), $._event_body, $._terminator)});',
+};
+const declarationTarget =
+  'export default () => ({second: ($) => seq($._define_keyword, kw("EVENT"), $._event_body, $._terminator)});';
+for (const code of [
+  declarationTarget.replace('kw("EVENT")', 'kw("EVENT", {offset: 3})'),
+  declarationTarget.replace("$._event_body", "$._other_body"),
+  declarationTarget.replace("$._event_body", "$.__private_body"),
+  declarationTarget.replace("$._terminator", "$._no_error_terminator"),
+  declarationTarget.replace('kw("EVENT"), $._event_body, $._terminator', "$._event_tail"),
+  declarationTarget.replace('kw("EVENT")', "getKeyword()"),
+  declarationTarget.replace(
+    'seq($._define_keyword, kw("EVENT"), $._event_body, $._terminator)',
+    'token(seq($._define_keyword, kw("EVENT"), $._event_body, $._terminator))',
+  ),
+  declarationTarget.replace(
+    'seq($._define_keyword, kw("EVENT"), $._event_body, $._terminator)',
+    'prec.right(seq($._define_keyword, kw("EVENT"), $._event_body, $._terminator))',
+  ),
+  declarationTarget.replace(
+    "second:",
+    "\n// oxlint-disable-next-line rule-to-test/shared-declaration-tail\nsecond:",
+  ),
+]) {
+  resetSharingCandidates();
+  new RuleTester().run("shared-declaration-tail", sharedDeclarationTail, {
+    valid: [declarationSeed, { filename: "grammar/statements/interface.js", code }],
+    invalid: [],
+  });
+}
+resetSharingCandidates();
+new RuleTester().run("shared-declaration-tail", sharedDeclarationTail, {
+  valid: [declarationSeed],
+  invalid: [
+    {
+      filename: "grammar/statements/interface.js",
+      code: declarationTarget,
+      errors: [
+        { message: /keyword, _event_body and terminator clause repeat a fragment in first/ },
+      ],
     },
   ],
 });
