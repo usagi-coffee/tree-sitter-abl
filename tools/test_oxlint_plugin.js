@@ -1,6 +1,7 @@
 import { RuleTester } from "oxlint/plugins-dev";
 
 import {
+  choiceProductExtraction,
   sharedFieldMarker,
   redundantInheritedField,
   singleUseFieldSequence,
@@ -4572,5 +4573,50 @@ for (const code of [
   });
 }
 resetSharingCandidates();
+
+const productSequence =
+  'seq(kw("SEEK"), choice(kw("INPUT"), kw("OUTPUT"), $._stream_phrase), $._to_keyword, choice($._end_keyword, $._expression))';
+const productGrammar = `export default ({kw}) => ({__seek_prefix: ($) => ${productSequence}});`;
+new RuleTester().run("choice-product-extraction", choiceProductExtraction, {
+  valid: [
+    productGrammar.replace(
+      'choice(kw("INPUT"), kw("OUTPUT"), $._stream_phrase)',
+      "$.__seek_stream",
+    ),
+    productGrammar.replace(', kw("OUTPUT")', ""),
+    productGrammar
+      .replace("$._stream_phrase", 'kw("STREAM")')
+      .replace("$._expression", 'kw("START")'),
+    productGrammar.replace("$._stream_phrase", "getStream($)"),
+    productGrammar.replace(
+      "choice($._end_keyword, $._expression)",
+      "optional(choice($._end_keyword, $._expression))",
+    ),
+    productGrammar.replace(
+      "choice($._end_keyword, $._expression)",
+      "choice($._end_keyword, optional($._expression))",
+    ),
+    productGrammar
+      .replace("$._stream_phrase", "$.__seek_prefix")
+      .replace("$._expression", "$.__seek_prefix"),
+    ...["token", "prec.right", "prec.dynamic.bind(null, 1)"].map((wrapper) =>
+      productGrammar.replace(productSequence, `${wrapper}(${productSequence})`),
+    ),
+    productGrammar.replace(productSequence, `alias(${productSequence}, $.seek)`),
+    productGrammar.replace(productSequence, `field("body", ${productSequence})`),
+    productGrammar.replace(
+      "__seek_prefix:",
+      "\n// oxlint-disable-next-line rule-to-test/choice-product-extraction\n__seek_prefix:",
+    ),
+    `const ordinary = ($) => ${productSequence};`,
+  ],
+  invalid: [
+    { code: productGrammar, errors: [{ message: /2 independent choices form 6 combinations/ }] },
+    {
+      code: productGrammar.replace("$._to_keyword", 'choice(kw("TO"), kw("FROM"))'),
+      errors: [{ message: /3 independent choices form 12 combinations/ }],
+    },
+  ],
+});
 
 console.log("✓ Optimizer lint plugin tests passed successfully");
