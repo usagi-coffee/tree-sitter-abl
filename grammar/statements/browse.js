@@ -178,7 +178,10 @@ export default ({ kw }) => ({
   __browse_enable_phrase: ($) =>
     seq(kw("ENABLE"), choice(alias(kw("ALL"), $.all), $.__browse_enable_fields)),
   __browse_enable_fields: ($) =>
-    prec.right(seq(field("field", $.__browse_enable_field), optional($.__browse_enable_fields))),
-
-  __browse_enable_field: ($) => seq($._input_field, optional($._format_phrases)),
+    prec.right(
+      seq(
+        field("field", seq($._input_field, optional($._format_phrases))),
+        optional($.__browse_enable_fields),
+      ),
+    ),
 });
