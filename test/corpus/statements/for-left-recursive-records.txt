@@ -1,0 +1,22 @@
+================================================================================
+FOR - Left-recursive records preserve selectors and sort boundaries
+================================================================================
+
+FOR EACH Customer, FIRST Order, LAST Item BY Customer.Name: END.
+FOR EACH Customer BY Customer.Name: END.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (for_statement
+    (record_phrase record: (identifier))
+    (record_phrase record: (identifier))
+    (record_phrase record: (identifier))
+    (by_phrase
+      by: (qualified_name left: (identifier) right: (identifier)))
+    (body))
+  (for_statement
+    (record_phrase record: (identifier))
+    (by_phrase
+      by: (qualified_name left: (identifier) right: (identifier)))
+    (body)))

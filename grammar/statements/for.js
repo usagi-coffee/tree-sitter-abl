@@ -41,7 +41,7 @@ export default ({ kw }) => ({
 
   __for_record_phrases: ($) =>
     // oxlint-disable-next-line tree-sitter-optimize/recurse
-    seq($.__for_record, repeat(seq(",", $.__for_record))),
+    seq(optional(seq($.__for_record_phrases, ",")), $.__for_record),
 
   __for_record: ($) =>
     seq(
