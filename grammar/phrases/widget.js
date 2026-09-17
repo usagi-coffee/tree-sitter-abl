@@ -114,6 +114,7 @@ export default ({ kw }) => ({
       ),
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
       seq(
+        // oxlint-disable-next-line tree-sitter-optimize/shared-valued-fragment
         kw("MENU-ITEM"),
         field("item", $._identifier_or_qualified_name),
         // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
