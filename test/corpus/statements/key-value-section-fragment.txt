@@ -1,0 +1,20 @@
+================================================================================
+KEY-VALUE - Compound section expressions retain fields
+================================================================================
+
+GET-KEY-VALUE SECTION cSection + suffix DEFAULT.
+PUT-KEY-VALUE SECTION cSection + suffix KEY DEFAULT VALUE cValue NO-ERROR.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (get_key_value_statement
+    section: (binary_expression
+      (identifier)
+      (identifier)))
+  (put_key_value_statement
+    section: (binary_expression
+      (identifier)
+      (identifier))
+    value: (identifier)
+    (no_error)))

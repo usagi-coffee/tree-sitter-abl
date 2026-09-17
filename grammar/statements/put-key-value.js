@@ -6,8 +6,7 @@ export default ({ kw }) => ({
       kw("PUT-KEY-VALUE", { offset: 11 }),
       choice(
         seq(
-          kw("SECTION"),
-          field("section", $._expression),
+          $._key_section,
           kw("KEY"),
           choice(field("key", $._expression), kw("DEFAULT")),
           kw("VALUE"),
