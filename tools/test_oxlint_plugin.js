@@ -1,6 +1,7 @@
 import { RuleTester } from "oxlint/plugins-dev";
 
 import {
+  shortPrivatePrefix,
   sharedDeclarationTail,
   sharedBlockClose,
   optionalRepetitionInline,
@@ -4233,5 +4234,55 @@ new RuleTester().run("shared-declaration-tail", sharedDeclarationTail, {
   ],
 });
 resetSharingCandidates();
+
+const privatePrefixGrammar =
+  'export default () => ({assign_statement: ($) => seq($.__assign_statement_prefix, $._terminator), __assign_statement_prefix: ($) => seq("ASSIGN", $.value)});';
+new RuleTester().run("short-private-prefix", shortPrivatePrefix, {
+  valid: [
+    { filename: "grammar.js", code: privatePrefixGrammar },
+    { filename: "grammar/core/common.js", code: privatePrefixGrammar },
+    { filename: "grammar/statements/other.js", code: privatePrefixGrammar },
+    {
+      filename: "grammar/statements/assign.js",
+      code: privatePrefixGrammar.replaceAll("__assign_statement_prefix", "__assign_prefix"),
+    },
+    {
+      filename: "grammar/statements/assign.js",
+      code: privatePrefixGrammar.replace(
+        "__assign_statement_prefix:",
+        "__assign_prefix: ($) => $.value, __assign_statement_prefix:",
+      ),
+    },
+    {
+      filename: "grammar/statements/assign.js",
+      code: privatePrefixGrammar.replace("assign_statement:", "different_statement:"),
+    },
+    {
+      filename: "grammar/statements/assign.js",
+      code: privatePrefixGrammar.replace('seq("ASSIGN", $.value)', "choice($.a, $.b)"),
+    },
+    {
+      filename: "grammar/statements/assign.js",
+      code: privatePrefixGrammar.replace(
+        "__assign_statement_prefix:",
+        "other: ($) => alias($.value, $.__assign_statement_prefix), __assign_statement_prefix:",
+      ),
+    },
+    {
+      filename: "grammar/statements/assign.js",
+      code: privatePrefixGrammar.replace(
+        "__assign_statement_prefix:",
+        "\n// oxlint-disable-next-line rule-to-test/short-private-prefix\n__assign_statement_prefix:",
+      ),
+    },
+  ],
+  invalid: [
+    {
+      filename: "grammar/statements/assign.js",
+      code: privatePrefixGrammar,
+      errors: [{ message: /__assign_statement_prefix repeats the statement role/ }],
+    },
+  ],
+});
 
 console.log("✓ Optimizer lint plugin tests passed successfully");

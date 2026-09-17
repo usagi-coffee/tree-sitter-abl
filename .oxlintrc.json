@@ -23,6 +23,7 @@
       "rules": {
         "tree-sitter-optimize/shared-block-close": "warn",
         "tree-sitter-optimize/shared-declaration-tail": "warn",
+        "tree-sitter-optimize/short-private-prefix": "warn",
         "tree-sitter-optimize/recursive-continuation-inline": "warn",
         "tree-sitter-optimize/single-use-field-choice": "warn",
         "tree-sitter-optimize/nullable-slot-list": "warn",
