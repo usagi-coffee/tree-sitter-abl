@@ -1,0 +1,20 @@
+================================================================================
+BROWSE - ENABLE inherits fields across formatting and subscripts
+================================================================================
+
+DEFINE BROWSE b QUERY q DISPLAY rec ENABLE fld FORMAT "x(8)" fld[1].
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (browse_definition
+    name: (identifier)
+    query: (identifier)
+    (column
+      column: (identifier))
+    field: (identifier)
+    field: (format_phrase
+      format: (string_literal))
+    field: (array_access
+      array: (identifier)
+      index: (number_literal))))
