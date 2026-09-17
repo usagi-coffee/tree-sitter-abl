@@ -73,14 +73,7 @@ export default ({ kw }) => ({
         alias($.__class_method_body, $.body),
       ),
       // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
-      seq(
-        $.__class_method_definition_prefix,
-        kw("ABSTRACT"),
-        // oxlint-disable-next-line tree-sitter-optimize/recurse
-        repeat($._method_modifier_no_abstract),
-        $._method_definition_signature,
-        $._terminator_dot,
-      ),
+      seq($.__class_method_definition_prefix, kw("ABSTRACT"), $._method_header, $._terminator_dot),
     ),
   // oxlint-disable-next-line tree-sitter-optimize/shared-choice
   __class_body_opener: ($) => choice(alias($._colon, ":"), $._terminator_dot),

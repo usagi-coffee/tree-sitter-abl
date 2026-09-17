@@ -532,6 +532,14 @@ export default ({ kw }) => ({
   _position_length: ($) => seq(field("position", $._expression), optional($._comma_length)),
   _comma_position_length: ($) => seq(",", $._position_length),
   _comma_length: ($) => seq(",", field("length", $._expression)),
+  _method_header: ($) =>
+    seq(
+      // oxlint-disable-next-line tree-sitter-optimize/recurse
+      repeat($._method_modifier_no_abstract),
+      $._method_return_type,
+      field("name", $.identifier),
+      alias($._method_parameters, $.parameters),
+    ),
   _method_definition_signature: ($) =>
     seq(
       $._method_return_type,

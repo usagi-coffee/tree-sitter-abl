@@ -1,0 +1,44 @@
+================================================================================
+Methods - Shared repeated headers retain required fields
+================================================================================
+
+ABSTRACT CLASS AbstractBase:
+  METHOD ABSTRACT PUBLIC VOID Run(INPUT itemId AS INTEGER).
+  METHOD ABSTRACT INTEGER Count().
+END CLASS.
+
+INTERFACE IRunner:
+  METHOD PUBLIC VOID Run(INPUT itemId AS INTEGER).
+  METHOD INTEGER Count().
+END INTERFACE.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (class_definition
+    (abstract)
+    name: (identifier)
+    (method_definition
+      (access_modifier)
+      type: (identifier)
+      name: (identifier)
+      (parameters
+        (parameter name: (identifier) type: (identifier))))
+    (method_definition
+      type: (identifier)
+      name: (identifier)
+      (parameters)))
+  (interface_definition
+    name: (identifier)
+    (interface_body_item
+      (method_definition
+        (access_modifier)
+        type: (identifier)
+        name: (identifier)
+        (parameters
+          (parameter name: (identifier) type: (identifier)))))
+    (interface_body_item
+      (method_definition
+        type: (identifier)
+        name: (identifier)
+        (parameters)))))
