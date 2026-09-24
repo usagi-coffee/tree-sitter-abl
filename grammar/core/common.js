@@ -514,6 +514,7 @@ export default ({ kw }) => ({
     ),
   _on_action_tail: ($) => seq(",", $._on_phrase_action),
   _on_phrase_action: ($) => choice($._undo_lnr_target, $._on_phrase_return),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-shared-choice-inline
   _undo_lnr_target: ($) =>
     choice(
       seq(kw("LEAVE"), optional(field("leave_label", $.identifier))),
