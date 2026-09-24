@@ -24,7 +24,7 @@ export default ({ kw }) => ({
         kw("SUB-MENU"),
         kw("TEXT"),
         kw("TOGGLE-BOX"),
-        kw("WINDOW"),
+        $._kw_window,
         seq($._kw_value, "(", field("widget_type", $._expression), ")"),
       ),
       optional($._handle_in_widget_pool),
