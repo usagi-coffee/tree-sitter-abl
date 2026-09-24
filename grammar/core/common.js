@@ -77,6 +77,7 @@ export default ({ kw }) => ({
     choice(seq($.preselect_phrase, optional($.query_tuning_phrase)), $.query_tuning_phrase),
   _index_prefix: ($) => seq("[", field("index", $._expression)),
   _parenthesized_value: ($) => seq($._parenthesized_expression_prefix, ")"),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-shared-choice-inline
   _map_phrase: ($) =>
     choice(
       seq(kw("MAP"), field("map", $._identifier_or_string_literal)),
