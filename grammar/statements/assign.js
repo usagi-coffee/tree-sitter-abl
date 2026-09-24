@@ -75,12 +75,12 @@ export default ({ kw }) => ({
         optional($.__assign_input_sections),
       ),
     ),
-  __assign_input_fields: ($) =>
+  __assign_input_fields: ($) => seq($.__assign_input_field, optional($.__assign_input_fields)),
+  __assign_input_field: ($) =>
     // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq(
       field("field", $._assignable),
       optional(seq("=", field("value", $._expression))),
       optional($._when_phrase),
-      optional($.__assign_input_fields),
     ),
 });
