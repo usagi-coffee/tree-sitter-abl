@@ -531,6 +531,7 @@ export default ({ kw }) => ({
       seq(kw("NEXT"), optional(field("next_label", $.identifier))),
       seq(kw("RETRY"), optional(field("retry_label", $.identifier))),
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-shared-sequence-inline
   _on_phrase_return: ($) =>
     seq(
       kw("RETURN"),
