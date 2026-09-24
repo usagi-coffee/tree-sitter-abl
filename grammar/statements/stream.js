@@ -5,7 +5,7 @@ export default ({ kw }) => ({
     seq(
       $._define_keyword,
       optional($.__stream_modifier),
-      kw("STREAM"),
+      $._kw_stream,
       field("name", $.identifier),
     ),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
