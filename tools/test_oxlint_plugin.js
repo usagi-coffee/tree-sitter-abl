@@ -21,6 +21,7 @@ import {
   sharedDelimiterFieldPrefix,
   sharedAssignmentClause,
   shortPrivatePrefix,
+  shortAliasedLexicalName,
   sharedDeclarationTail,
   sharedBlockClose,
   optionalRepetitionInline,
@@ -270,6 +271,29 @@ new RuleTester().run("shared-keyword-field-inline", sharedKeywordFieldInline, {
       name: "abbreviation options remain at the keyword",
       code: `export default () => ({ _initial: ($) => seq(kw("INITIAL", {offset: 4}), field("initial", $.value)) });`,
       errors: [{ message: /_initial is a shared keyword-plus-field helper/ }],
+    },
+  ],
+});
+
+new RuleTester().run("short-aliased-lexical-name", shortAliasedLexicalName, {
+  valid: [
+    `export default () => ({ __symbolic_name: ($) => token(/[!#$%][a-z]*/), root: ($) => alias($.__symbolic_name, $.identifier) });`,
+    `export default () => ({ symbolic_routine_name: ($) => token(/[!#$%][a-z]*/), root: ($) => alias($.symbolic_routine_name, $.identifier) });`,
+    `export default () => ({ __symbolic_routine_name: ($) => token(/[!#$%][a-z]*/), root: ($) => $.__symbolic_routine_name });`,
+    `export default () => ({ __symbolic_routine_name: ($) => token(/[!#$%][a-z]*/), root: ($) => alias($.__symbolic_routine_name, $.routine_name) });`,
+    `export default () => ({ __symbolic_routine_name: ($) => token(/[!#$%][a-z]*/), __symbolic_name: ($) => token(/x/), root: ($) => alias($.__symbolic_routine_name, $.identifier) });`,
+    `export default grammar({ externals: ($) => [$.__symbolic_routine_name], rules: { __symbolic_routine_name: ($) => token(/[!#$%][a-z]*/), root: ($) => alias($.__symbolic_routine_name, $.identifier) } });`,
+    `export default () => ({
+      // oxlint-disable-next-line rule-to-test/short-aliased-lexical-name
+      __symbolic_routine_name: ($) => token(/[!#$%][a-z]*/),
+      root: ($) => alias($.__symbolic_routine_name, $.identifier),
+    });`,
+  ],
+  invalid: [
+    {
+      name: "symbolic token has identifier aliases in multiple name contexts",
+      code: `export default () => ({ __symbolic_routine_name: ($) => token(/[!#$%][a-z]*/), call: ($) => alias($.__symbolic_routine_name, $.identifier), unquoted: ($) => alias($.__symbolic_routine_name, $.identifier) });`,
+      errors: [{ message: /consider the shorter descriptive name __symbolic_name/ }],
     },
   ],
 });
