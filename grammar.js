@@ -211,7 +211,6 @@ export default grammar({
     $._serialization_modifier,
     $._routine_access_modifier,
     $._position_length,
-    $._not_keyword,
     $._for_keyword,
     $._in_keyword,
     $._except_fields,
@@ -599,6 +598,7 @@ export default grammar({
         ),
       // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
       __unary_sign: ($) => choice("+", "-"),
+      // oxlint-disable-next-line tree-sitter-optimize/shared-keyword-inline
       _not_keyword: ($) => kw("NOT"),
       binary_expression: ($) => binary_expression($, $._expression, $._comparison_operator),
       // _statement_expression excludes `=` from comparison operators to disambiguate

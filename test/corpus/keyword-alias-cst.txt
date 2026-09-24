@@ -1,0 +1,19 @@
+=========================================
+CST - NOT alias retains its keyword child
+:cst
+=========================================
+IF wfeven NOT ENTERED THEN RETURN.
+
+---
+
+0:0  - 1:0    source_code
+0:0  - 0:34     if_statement
+0:0  - 0:2        "IF"
+0:3  - 0:21       entered_expression
+0:3  - 0:9          field: identifier `wfeven`
+0:10 - 0:13         not
+0:10 - 0:13           "NOT"
+0:14 - 0:21         "ENTERED"
+0:22 - 0:26       "THEN"
+0:27 - 0:34       then: return_statement
+0:27 - 0:33         "RETURN"
