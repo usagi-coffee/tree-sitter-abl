@@ -853,7 +853,7 @@ export default grammar({
       __operator_name: ($) =>
         token(/[_\p{L}][\p{L}\p{N}_\-&#%$!]*[*+\/][\p{L}\p{N}_\-&#%$!*+\/]*/i),
 
-      __dash_routine_name: ($) => token(/-[\p{L}][\p{L}\p{N}_\-&#%$!]*/i),
+      __dash_name: ($) => token(/-[\p{L}][\p{L}\p{N}_\-&#%$!]*/i),
 
       _unquoted_name_initial: ($) =>
         choice(
@@ -861,7 +861,7 @@ export default grammar({
           alias($.__numeric_name, $.identifier),
         ),
       _routine_name_initial: ($) =>
-        choice($._unquoted_name_initial, alias($.__dash_routine_name, $.identifier)),
+        choice($._unquoted_name_initial, alias($.__dash_name, $.identifier)),
       system_handle_identifier: ($) =>
         alias(
           token(prec(1, new RegExp(`(${SYSTEM_HANDLE_WORDS.map(escape_regex).join("|")})`, "i"))),
