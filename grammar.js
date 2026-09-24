@@ -208,6 +208,7 @@ export default grammar({
   inline: ($) => [
     $._kw_except,
     $._kw_input,
+    $._kw_value,
     $._procedure_keyword,
     $._list_item_pairs_phrase,
     $._list_items_phrase,
@@ -493,6 +494,7 @@ export default grammar({
       _help_keyword: ($) => kw("HELP"),
       _kw_except: ($) => kw("EXCEPT"),
       _kw_input: ($) => kw("INPUT"),
+      _kw_value: ($) => kw("VALUE"),
       _procedure_keyword: ($) => kw("PROCEDURE", { offset: 4 }),
       _delete_keyword: ($) => kw("DELETE"),
       _close_keyword: ($) => kw("CLOSE"),
@@ -894,7 +896,7 @@ export default grammar({
       _value_expression: ($) => seq($._value_expression_opener, ")"),
       _aliased_value_expression: ($) => alias($._value_expression, $.value_expression),
       // oxlint-disable-next-line tree-sitter-optimize/single-use-shared-sequence-inline
-      _value_expression_opener: ($) => seq(kw("VALUE"), "(", field("value", $._expression)),
+      _value_expression_opener: ($) => seq($._kw_value, "(", field("value", $._expression)),
       // oxlint-disable-next-line tree-sitter-optimize/single-use-shared-choice-inline
       _terminator: ($) => choice($._terminator_dot, ";"),
       // oxlint-disable-next-line tree-sitter-optimize/single-use-shared-sequence-inline

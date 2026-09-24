@@ -25,7 +25,7 @@ export default ({ kw }) => ({
         kw("TEXT"),
         kw("TOGGLE-BOX"),
         kw("WINDOW"),
-        seq(kw("VALUE"), "(", field("widget_type", $._expression), ")"),
+        seq($._kw_value, "(", field("widget_type", $._expression), ")"),
       ),
       optional($._handle_in_widget_pool),
       optional($.__no_error),

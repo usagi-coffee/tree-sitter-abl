@@ -269,6 +269,6 @@ export default ({ kw }) => ({
         optional(kw("BUFFER")),
         field("old_record", $.identifier),
       ),
-      seq(kw("OLD"), optional(kw("VALUE")), field("old_field", $.identifier)),
+      seq(kw("OLD"), optional($._kw_value), field("old_field", $.identifier)),
     ),
 });

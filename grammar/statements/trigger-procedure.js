@@ -38,7 +38,7 @@ export default ({ kw }) => ({
 
   __trigger_procedure_value_body: ($) =>
     seq(
-      optional(kw("VALUE")),
+      optional($._kw_value),
       field("value", $.identifier),
       choice(
         seq($._as_keyword, field("data_type", $.identifier)),

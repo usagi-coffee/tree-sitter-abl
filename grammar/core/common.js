@@ -7,7 +7,7 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/shared-keyword-field-inline
   _key_section: ($) => seq(kw("SECTION"), field("section", $._expression)),
   // oxlint-disable-next-line tree-sitter-optimize/shared-keyword-field-inline
-  _key_value: ($) => seq(kw("VALUE"), field("value", $._expression)),
+  _key_value: ($) => seq($._kw_value, field("value", $._expression)),
   _for_tenant: ($) => seq($._for_keyword, kw("TENANT"), field("tenant", $._expression)),
   // oxlint-disable-next-line tree-sitter-optimize/shared-keyword-field-inline
   _table_handle_value: ($) => seq(kw("TABLE-HANDLE"), field("table_handle", $.identifier)),
@@ -201,7 +201,7 @@ export default ({ kw }) => ({
     choice(
       field("command_token", $.identifier),
       field("command_token", $.string_literal),
-      seq(kw("VALUE"), "(", field("command", $._expression), ")"),
+      seq($._kw_value, "(", field("command", $._expression), ")"),
     ),
   _dos_unix_tail: ($) =>
     choice(
