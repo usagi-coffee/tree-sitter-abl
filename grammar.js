@@ -215,6 +215,7 @@ export default grammar({
     $._comparison_operator,
     $._statement_primary_expression,
     $._type_or_string,
+    $._alert_box_title_value,
     $.__include_file_reference,
     $._format_field_option,
     $._comparison_operator_no_eq,
