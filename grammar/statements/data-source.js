@@ -2,14 +2,14 @@ export default ({ kw }) => ({
   data_source_definition: ($) => seq($.__data_source_prefix, $._terminator),
 
   // oxlint-disable-next-line tree-sitter-optimize/single-use-keyword-sequence
-  __data_source_prefix: ($) => seq($._define_keyword, kw("DATA-SOURCE"), $.__data_source_body),
+  __data_source_prefix: ($) => seq($._define_keyword, $._kw_data_source, $.__data_source_body),
 
   // For classes - with modifiers
   data_source_class_definition: ($) =>
     seq(
       $._define_keyword,
       optional($.__data_source_modifier),
-      kw("DATA-SOURCE"),
+      $._kw_data_source,
       $.__data_source_body,
       $._terminator,
     ),

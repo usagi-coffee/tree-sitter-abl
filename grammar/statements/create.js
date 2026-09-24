@@ -59,7 +59,7 @@ export default ({ kw }) => ({
     seq(
       choice(
         kw("CLIENT-PRINCIPAL"),
-        kw("DATA-SOURCE"),
+        $._kw_data_source,
         $._dataset_keyword,
         kw("X-DOCUMENT"),
         kw("X-NODEREF"),
