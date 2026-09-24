@@ -45,7 +45,7 @@ export default ({ kw }) => ({
     // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq(
       kw("CONVERT"),
-      optional(seq(kw("SOURCE"), kw("CODEPAGE"), field("source_codepage", $._expression))),
-      optional(seq(kw("TARGET"), kw("CODEPAGE"), field("target_codepage", $._expression))),
+      optional(seq(kw("SOURCE"), $._kw_codepage, field("source_codepage", $._expression))),
+      optional(seq(kw("TARGET"), $._kw_codepage, field("target_codepage", $._expression))),
     ),
 });

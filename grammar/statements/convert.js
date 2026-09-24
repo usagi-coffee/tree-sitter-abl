@@ -5,10 +5,10 @@ export default ({ kw }) => ({
     seq(
       kw("CONVERT"),
       kw("SOURCE"),
-      kw("CODEPAGE"),
+      $._kw_codepage,
       field("source", $.string_literal),
       kw("TARGET"),
-      kw("CODEPAGE"),
+      $._kw_codepage,
       field("target", $.string_literal),
     ),
 });
