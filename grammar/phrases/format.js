@@ -131,6 +131,7 @@ export default ({ kw }) => ({
 
   // These for some cursed reason cannot be moved to grammar/core/common.js
 
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-shared-sequence-inline
   _format_format: ($) =>
     prec(
       "format_value",
