@@ -22,16 +22,17 @@ export default ({ kw }) => ({
       seq(
         kw("FIELD"),
         field("field", $._identifier_or_array_access),
+        // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
         optional(seq($._in_keyword, kw("FRAME", { offset: 4 }), field("frame", $.__widget_name))),
       ),
       seq(
         field("field", $._identifier_or_array_access),
-        // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
+        // oxlint-disable-next-line tree-sitter-optimize/shared-sequence, tree-sitter-optimize/inline-keyword-owner
         seq($._in_keyword, kw("FRAME", { offset: 4 }), field("frame", $.__widget_name)),
       ),
       seq(
         field("field", $.array_access),
-        // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
+        // oxlint-disable-next-line tree-sitter-optimize/shared-sequence, tree-sitter-optimize/inline-keyword-owner
         optional(seq($._in_keyword, kw("FRAME", { offset: 4 }), field("frame", $.__widget_name))),
       ),
       seq(
@@ -77,7 +78,7 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/body-extraction
   __view_hide_widget_phrase: ($) =>
     choice(
-      // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
+      // oxlint-disable-next-line tree-sitter-optimize/shared-sequence, tree-sitter-optimize/inline-keyword-owner
       seq(kw("FRAME", { offset: 4 }), field("frame", $.__widget_name)),
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
       seq(kw("BROWSE"), field("browse", $.__widget_name)),
@@ -93,17 +94,17 @@ export default ({ kw }) => ({
         // oxlint-disable-next-line tree-sitter-optimize/shared-valued-fragment
         kw("FIELD"),
         field("field", $._identifier_or_array_access),
-        // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
+        // oxlint-disable-next-line tree-sitter-optimize/shared-sequence, tree-sitter-optimize/inline-keyword-owner
         optional(seq($._in_keyword, kw("FRAME", { offset: 4 }), field("frame", $.__widget_name))),
       ),
       seq(
         field("field", $._identifier_or_array_access),
-        // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
+        // oxlint-disable-next-line tree-sitter-optimize/shared-sequence, tree-sitter-optimize/inline-keyword-owner
         seq($._in_keyword, kw("FRAME", { offset: 4 }), field("frame", $.__widget_name)),
       ),
       seq(
         field("field", $.array_access),
-        // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
+        // oxlint-disable-next-line tree-sitter-optimize/shared-sequence, tree-sitter-optimize/inline-keyword-owner
         optional(seq($._in_keyword, kw("FRAME", { offset: 4 }), field("frame", $.__widget_name))),
       ),
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence

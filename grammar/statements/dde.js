@@ -43,6 +43,7 @@ export default ({ kw }) => ({
   __dde_initiate_body: ($) =>
     seq(
       field("ddeid", $._expression),
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       kw("FRAME", { offset: 4 }),
       field("frame", $.identifier),
       kw("APPLICATION"),

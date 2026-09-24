@@ -543,6 +543,7 @@ export default grammar({
       macro_concatenated_name: ($) => token(MACRO_CONCATENATED_NAME),
 
       _widgets: ($) =>
+        // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
         prec.right(alias(choice(...WIDGETS, kw("FRAME", { offset: 4 })), $.identifier)),
       _events: ($) =>
         choice(

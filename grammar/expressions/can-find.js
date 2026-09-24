@@ -67,6 +67,7 @@ export default ({ kw }) => ({
   __record_query_frame_phrase: ($) =>
     seq(
       kw("AND"),
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       kw("FRAME", { offset: 4 }),
       optional(field("frame", $.identifier)),
       field("field", $.identifier),

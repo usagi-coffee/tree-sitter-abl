@@ -12,6 +12,7 @@ export default ({ kw }) => ({
         kw("DIALOG-BOX"),
         kw("EDITOR"),
         kw("FILL-IN"),
+        // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
         kw("FRAME", { offset: 4 }),
         kw("IMAGE"),
         kw("MENU"),

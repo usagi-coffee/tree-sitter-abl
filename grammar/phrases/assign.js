@@ -15,6 +15,7 @@ export default ({ kw }) => ({
           $.__assign_keyword_identifier,
           seq(kw("BROWSE"), field("browse", $.__widget_name), ":", field("attr", $.identifier)),
           seq(
+            // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
             kw("FRAME", { offset: 4 }),
             field("frame", $.__widget_name),
             ":",

@@ -5,6 +5,7 @@ export default ({ kw }) => ({
     seq(
       $._define_keyword,
       optional($._definition_scope_modifier),
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       kw("FRAME", { offset: 4 }),
       $.__frame_body,
     ),
