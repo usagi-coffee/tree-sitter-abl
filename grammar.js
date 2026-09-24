@@ -210,6 +210,7 @@ export default grammar({
     $._for_keyword,
     $._in_keyword,
     $._as_keyword,
+    $._new_keyword,
     $._initial_value,
     $._object_access_plain_left,
     $._object_access_expression_left,
