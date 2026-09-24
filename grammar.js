@@ -262,6 +262,7 @@ export default grammar({
     $.__for_by_phrase,
     $._find_record_option,
     $._method_modifier_no_abstract,
+    $._method_definition_signature,
     $.system_handle_identifier,
   ],
 

@@ -558,6 +558,7 @@ export default ({ kw }) => ({
       repeat($._method_modifier_no_abstract),
       $._method_definition_signature,
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-shared-sequence-inline
   _method_definition_signature: ($) =>
     seq(
       $._method_return_type,
