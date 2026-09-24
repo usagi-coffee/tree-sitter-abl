@@ -208,6 +208,7 @@ export default grammar({
   inline: ($) => [
     $._kw_except,
     $._kw_input,
+    $._kw_or,
     $._kw_value,
     $._procedure_keyword,
     $._list_item_pairs_phrase,
@@ -494,6 +495,7 @@ export default grammar({
       _help_keyword: ($) => kw("HELP"),
       _kw_except: ($) => kw("EXCEPT"),
       _kw_input: ($) => kw("INPUT"),
+      _kw_or: ($) => kw("OR"),
       _kw_value: ($) => kw("VALUE"),
       _procedure_keyword: ($) => kw("PROCEDURE", { offset: 4 }),
       _delete_keyword: ($) => kw("DELETE"),
@@ -568,7 +570,7 @@ export default grammar({
       // Operators
       // oxlint-disable-next-line tree-sitter-optimize/choice-subset
       assignment_operator: ($) => choice("=", "+=", "-=", "*=", "/="),
-      _logical_operator: ($) => choice(kw("AND"), kw("OR")),
+      _logical_operator: ($) => choice(kw("AND"), $._kw_or),
       _comparison_operator: ($) => choice("=", ...COMPARISON_OPERATORS),
 
       // Assignabless

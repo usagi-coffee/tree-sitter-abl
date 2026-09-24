@@ -31,7 +31,7 @@ export default ({ kw }) => ({
     seq($._expression, optional($.__case_when_expression_list_tail)),
   __case_when_expression_list_tail: ($) =>
     seq(
-      kw("OR"),
+      $._kw_or,
       kw("WHEN"),
       field("condition", $._expression),
       optional($.__case_when_expression_list_tail),

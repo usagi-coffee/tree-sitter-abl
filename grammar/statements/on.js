@@ -244,7 +244,7 @@ export default ({ kw }) => ({
   __on_ui_events: ($) => seq(field("event", $.__on_ui_event), optional(seq(",", $.__on_ui_events))),
   __on_ui_event_widgets_tail: ($) =>
     seq(
-      kw("OR"),
+      $._kw_or,
       seq(
         $.__on_ui_events,
         // oxlint-disable-next-line tree-sitter-optimize/phrase-alias-extraction
