@@ -276,7 +276,7 @@ export default ({ kw }) => ({
       optional(alias($._no_undo_keyword, $.no_undo)),
       optional($._table_body_tail),
     ),
-  // oxlint-disable-next-line tree-sitter-optimize/body-extraction
+  // oxlint-disable-next-line tree-sitter-optimize/body-extraction, tree-sitter-optimize/single-use-shared-choice-inline
   _table_body_tail: ($) =>
     choice(
       // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
