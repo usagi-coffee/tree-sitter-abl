@@ -143,6 +143,7 @@ export default ({ kw }) => ({
   __record_operand_opener: ($) => seq("(", $._identifier_or_qualified_name),
   _define_private_prefix: ($) =>
     seq($._define_keyword, optional(alias(kw("PRIVATE"), $.access_modifier))),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-shared-choice-inline
   _definition_scope_modifier: ($) =>
     choice(
       seq(alias($._new_keyword, $.new_modifier), alias(kw("SHARED"), $.scope_modifier)),
