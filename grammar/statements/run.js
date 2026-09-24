@@ -50,6 +50,7 @@ export default ({ kw }) => ({
     ),
   __run_persistence_set_tail: ($) => seq(kw("SET"), field("handle", $.__display_base_field)),
 
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-shared-choice-inline
   _run_target: ($) =>
     choice(
       $._aliased_value_expression,
