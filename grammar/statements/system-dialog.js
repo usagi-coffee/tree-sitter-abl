@@ -85,6 +85,7 @@ export default ({ kw }) => ({
   __system_dialog_printer_setup_body: ($) =>
     seq(kw("PRINTER-SETUP"), optional($.__system_dialog_printer_setup_options)),
 
+  // oxlint-disable-next-line tree-sitter-optimize/recursive-choice-item-extraction
   __system_dialog_printer_setup_options: ($) =>
     prec.right(
       seq(
