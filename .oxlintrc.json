@@ -85,6 +85,7 @@
         "tree-sitter-optimize/shared-keyword-alias-choice-inline": "warn",
         "tree-sitter-optimize/common-suffix-head-extraction": "warn",
         "tree-sitter-optimize/shared-precedence-sequence-inline": "warn",
+        "tree-sitter-optimize/shared-closing-delimiter-inline": "warn",
         "tree-sitter-optimize/recurse": "warn",
         "tree-sitter-optimize/shared-sequence": "warn",
         "tree-sitter-optimize/shared-recursion": "warn",

@@ -9,6 +9,7 @@ import {
   optionalBlockBodyExtraction,
   commonSuffixHeadExtraction,
   sharedPrecedenceSequenceInline,
+  sharedClosingDelimiterInline,
   forwardedAliasReuse,
   closingDelimiterHoist,
   choiceProductExtraction,
@@ -209,6 +210,36 @@ new RuleTester().run("shared-precedence-sequence-inline", sharedPrecedenceSequen
       name: "nested static precedence wrappers are retained",
       code: `export default () => ({ _space: ($) => prec("space", ${displaySpacePhrase}) });`,
       errors: [{ message: /_space wraps a nonrecursive sequence in static precedence/ }],
+    },
+  ],
+});
+
+new RuleTester().run("shared-closing-delimiter-inline", sharedClosingDelimiterInline, {
+  valid: [
+    `export default grammar({ inline: ($) => [$._value], rules: { _value: ($) => seq($._value_prefix, ")") } });`,
+    `export default () => ({ value: ($) => seq($._value_prefix, ")") });`,
+    `export default () => ({ __value: ($) => seq($._value_prefix, ")") });`,
+    `export default () => ({ _value: ($) => seq($._value_prefix, ")", $.tail) });`,
+    `export default () => ({ _value: ($) => seq($.visible_prefix, ")") });`,
+    `export default () => ({ _value: ($) => seq($._value_prefix, ";") });`,
+    `export default () => ({ _value: ($) => seq($._item, ")") });`,
+    `export default () => ({
+      // oxlint-disable-next-line rule-to-test/shared-closing-delimiter-inline
+      _value: ($) => seq($._value_prefix, ")"),
+    });`,
+  ],
+  invalid: [
+    {
+      name: "shared parenthesized value used by FORM and PROMPT-FOR",
+      code: `export default () => ({ _parenthesized_value: ($) => seq($._parenthesized_expression_prefix, ")") });`,
+      errors: [
+        { message: /_parenthesized_value appends.*hidden prefix _parenthesized_expression_prefix/ },
+      ],
+    },
+    {
+      name: "bracket closing wrapper",
+      code: `export default () => ({ _value: ($) => seq($._value_prefix, "]") });`,
+      errors: [{ message: /_value appends.*hidden prefix _value_prefix/ }],
     },
   ],
 });
