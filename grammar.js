@@ -206,6 +206,7 @@ export default grammar({
     [$.__temp_table_modifier, $._member_access_modifier],
   ],
   inline: ($) => [
+    $._kw_and,
     $._kw_except,
     $._kw_input,
     $._kw_or,
@@ -493,6 +494,7 @@ export default grammar({
       _at_keyword: ($) => kw("AT"),
       _using_keyword: ($) => kw("USING"),
       _help_keyword: ($) => kw("HELP"),
+      _kw_and: ($) => kw("AND"),
       _kw_except: ($) => kw("EXCEPT"),
       _kw_input: ($) => kw("INPUT"),
       _kw_or: ($) => kw("OR"),
@@ -570,7 +572,7 @@ export default grammar({
       // Operators
       // oxlint-disable-next-line tree-sitter-optimize/choice-subset
       assignment_operator: ($) => choice("=", "+=", "-=", "*=", "/="),
-      _logical_operator: ($) => choice(kw("AND"), $._kw_or),
+      _logical_operator: ($) => choice($._kw_and, $._kw_or),
       _comparison_operator: ($) => choice("=", ...COMPARISON_OPERATORS),
 
       // Assignabless

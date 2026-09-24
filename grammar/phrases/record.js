@@ -42,7 +42,7 @@ export default ({ kw }) => ({
   __record_using_field: ($) =>
     seq(optional($._frame_identifier_phrase), $._identifier_or_qualified_name),
   __record_using_fields_tail: ($) =>
-    seq(kw("AND"), field("field", $.__record_using_field), optional($.__record_using_fields_tail)),
+    seq($._kw_and, field("field", $.__record_using_field), optional($.__record_using_fields_tail)),
 
   __record_field_list: ($) =>
     choice(
