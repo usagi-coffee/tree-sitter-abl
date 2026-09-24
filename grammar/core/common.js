@@ -460,6 +460,7 @@ export default ({ kw }) => ({
   _alert_box_after_type: ($) =>
     choice(seq($._alert_buttons_phrase, optional($._alert_box_title)), $._alert_box_title),
   _alert_box_title: ($) => seq(kw("TITLE"), field("title", $._alert_box_title_value)),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-shared-choice-inline
   _alert_box_title_value: ($) =>
     choice(
       $._string_or_identifier_access_or_call,
