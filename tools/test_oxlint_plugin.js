@@ -53,6 +53,7 @@ import {
   singleUseChoice,
   singleUseSharedChoiceInline,
   sharedKeywordInline,
+  singleUseSharedSequenceInline,
   forwardingRule,
   choiceSubset,
   singleUseSequence,
@@ -1160,6 +1161,28 @@ new RuleTester().run("shared-keyword-inline", sharedKeywordInline, {
       name: "static keyword options are preserved",
       code: `export default () => ({ _keyword: ($) => kw("DEFINE", { offset: 3 }), root: ($) => $._keyword });`,
       errors: [{ message: /_keyword wraps one static keyword/ }],
+    },
+  ],
+});
+
+new RuleTester().run("single-use-shared-sequence-inline", singleUseSharedSequenceInline, {
+  valid: [
+    `export default () => ({ _pair: ($) => seq($.a, $.b), first: ($) => $._pair, second: ($) => $._pair });`,
+    `export default () => ({ _pair: ($) => seq($.a, $.b), first: ($) => alias($._pair, $.pair) });`,
+    `export default () => ({ __pair: ($) => seq($.a, $.b), first: ($) => $.__pair });`,
+    `export default grammar({ inline: ($) => [$._pair], rules: { _pair: ($) => seq($.a, $.b), first: ($) => $._pair } });`,
+    `export default grammar({ conflicts: ($) => [[$._pair, $.other]], rules: { _pair: ($) => seq($.a, $.b), first: ($) => $._pair } });`,
+    `export default () => ({
+      // oxlint-disable-next-line rule-to-test/single-use-shared-sequence-inline
+      _pair: ($) => seq($.a, $.b),
+      first: ($) => $._pair,
+    });`,
+  ],
+  invalid: [
+    {
+      name: "position and optional length sequence",
+      code: `export default () => ({ _position_length: ($) => seq(field("position", $._expression), optional($._comma_length)), _comma_position_length: ($) => seq(",", $._position_length) });`,
+      errors: [{ message: /_position_length has one unaliased local sequence use/ }],
     },
   ],
 });
