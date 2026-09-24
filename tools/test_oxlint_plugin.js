@@ -54,6 +54,7 @@ import {
   singleUseSharedChoiceInline,
   sharedKeywordInline,
   singleUseSharedSequenceInline,
+  sharedKeywordAliasChoiceInline,
   forwardingRule,
   choiceSubset,
   singleUseSequence,
@@ -1183,6 +1184,36 @@ new RuleTester().run("single-use-shared-sequence-inline", singleUseSharedSequenc
       name: "position and optional length sequence",
       code: `export default () => ({ _position_length: ($) => seq(field("position", $._expression), optional($._comma_length)), _comma_position_length: ($) => seq(",", $._position_length) });`,
       errors: [{ message: /_position_length has one unaliased local sequence use/ }],
+    },
+  ],
+});
+
+const serializationChoice = `choice(alias(kw("SERIALIZABLE"), $.serializable), alias(kw("NON-SERIALIZABLE"), $.serializable))`;
+new RuleTester().run("shared-keyword-alias-choice-inline", sharedKeywordAliasChoiceInline, {
+  valid: [
+    `export default grammar({ inline: ($) => [$._serialization], rules: { _serialization: ($) => ${serializationChoice} } });`,
+    `export default grammar({ conflicts: ($) => [[$._serialization, $.other]], rules: { _serialization: ($) => ${serializationChoice} } });`,
+    `export default () => ({ serialization: ($) => ${serializationChoice} });`,
+    `export default () => ({ __serialization: ($) => ${serializationChoice} });`,
+    `export default () => ({ _access: ($) => choice(alias(kw("PUBLIC"), $.public), alias(kw("PRIVATE"), $.private)) });`,
+    `export default () => ({ _serialization: ($) => choice(alias(kw("A", options), $.flag), alias(kw("B"), $.flag)) });`,
+    `export default () => ({
+      // oxlint-disable-next-line rule-to-test/shared-keyword-alias-choice-inline
+      _serialization: ($) => ${serializationChoice},
+    });`,
+  ],
+  invalid: [
+    {
+      name: "shared serialization choice may have callers in other files",
+      code: `export default () => ({ _serialization_modifier: ($) => ${serializationChoice} });`,
+      errors: [
+        { message: /_serialization_modifier chooses static keywords aliased as serializable/ },
+      ],
+    },
+    {
+      name: "keyword abbreviation options are retained",
+      code: `export default () => ({ _direction: ($) => choice(alias(kw("ASCENDING", {offset: 3}), $.direction), alias(kw("DESCENDING", {offset: 4}), $.direction)) });`,
+      errors: [{ message: /_direction chooses static keywords aliased as direction/ }],
     },
   ],
 });
