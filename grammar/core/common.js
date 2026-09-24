@@ -9,6 +9,7 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/shared-keyword-field-inline
   _key_value: ($) => seq(kw("VALUE"), field("value", $._expression)),
   _for_tenant: ($) => seq($._for_keyword, kw("TENANT"), field("tenant", $._expression)),
+  // oxlint-disable-next-line tree-sitter-optimize/shared-keyword-field-inline
   _table_handle_value: ($) => seq(kw("TABLE-HANDLE"), field("table_handle", $.identifier)),
   _set_update_record_body: ($) =>
     // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
