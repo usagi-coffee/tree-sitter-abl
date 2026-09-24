@@ -525,6 +525,7 @@ export default grammar({
       // TODO: Support marker identifiers in ASSIGN and compound/parenthesized
       // expressions without broadening expression states; preserve assignment
       // boundaries such as ASSIGN x = Buffer y = 1.
+      // oxlint-disable-next-line tree-sitter-optimize/shared-keyword-alias-choice-inline
       _bare_marker_identifier: ($) =>
         choice(alias(kw("BUFFER"), $.identifier), alias(kw("TABLE-HANDLE"), $.identifier)),
       _identifier_or_array_access: ($) => choice($._identifier_or_qualified_name, $.array_access),
