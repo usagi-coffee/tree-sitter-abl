@@ -19,18 +19,15 @@ export default ({ kw }) => ({
       optional(alias($.__procedure_in_super_phrase, $.in_super_phrase)),
     ),
   __procedure_options: ($) =>
-    prec.right(
-      seq(
-        choice(
-          alias(kw("CDECL"), $.cdecl),
-          seq(kw("ORDINAL"), field("ordinal", $.number_literal)),
-          alias(kw("PERSISTENT"), $.persistent),
-          alias(seq(kw("THREAD-SAFE"), optional(kw("SAFE"))), $.thread_safe),
-          alias($.__procedure_external_phrase, $.external_phrase),
-          seq(kw("MAP"), field("name", $.identifier)),
-        ),
-        optional($.__procedure_options),
-      ),
+    prec.right(seq($.__procedure_option, optional($.__procedure_options))),
+  __procedure_option: ($) =>
+    choice(
+      alias(kw("CDECL"), $.cdecl),
+      seq(kw("ORDINAL"), field("ordinal", $.number_literal)),
+      alias(kw("PERSISTENT"), $.persistent),
+      alias(seq(kw("THREAD-SAFE"), optional(kw("SAFE"))), $.thread_safe),
+      alias($.__procedure_external_phrase, $.external_phrase),
+      seq(kw("MAP"), field("name", $.identifier)),
     ),
 
   __procedure_body: ($) =>
