@@ -250,6 +250,7 @@ export default grammar({
     $.__include_file_target,
     $.__include_arguments,
     $.__for_by_phrase,
+    $._find_record_option,
     $.system_handle_identifier,
   ],
 
