@@ -633,6 +633,7 @@ export default grammar({
           alias(kw("STREAM"), $.identifier),
         ),
       object_access: ($) => seq($._object_access_prefix, $._object_access_tail),
+      // oxlint-disable-next-line tree-sitter-optimize/single-use-shared-choice-inline
       _object_access_prefix: ($) =>
         choice(
           $._object_access_widget_prefix,
