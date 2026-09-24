@@ -28,14 +28,17 @@ export default ({ kw }) => ({
       seq(
         $._member_access_modifier,
         optional($.__event_type_modifiers),
+        // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
         optional(alias(kw("OVERRIDE"), $.override_modifier)),
       ),
       // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
       seq(
         $.__event_type_modifiers,
         optional($._member_access_modifier),
+        // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
         optional(alias(kw("OVERRIDE"), $.override_modifier)),
       ),
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(kw("OVERRIDE"), $.override_modifier),
       $.preprocessor_name,
     ),

@@ -147,8 +147,10 @@ export default ({ kw }) => ({
     choice(
       seq(
         alias($.__on_referencing_phrase, $.referencing_phrase),
+        // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
         optional(alias(kw("OVERRIDE"), $.override)),
       ),
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(kw("OVERRIDE"), $.override),
     ),
   __on_web_notify_branch: ($) =>

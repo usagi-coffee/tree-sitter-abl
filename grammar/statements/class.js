@@ -259,6 +259,7 @@ export default ({ kw }) => ({
   __class_property_modifier_tail: ($) =>
     // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq(
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(kw("OVERRIDE"), $.override_modifier),
       optional($._member_access_modifier),
       optional($._serialization_modifier),
@@ -284,6 +285,7 @@ export default ({ kw }) => ({
       alias(kw("PACKAGE-PROTECTED"), $.access_modifier),
       alias(kw("PUBLIC"), $.access_modifier),
       alias(kw("STATIC"), $.static_modifier),
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(kw("OVERRIDE"), $.override_modifier),
       alias(kw("FINAL"), $.final_modifier),
     ),
