@@ -67,6 +67,7 @@ export default ({ kw }) => ({
 
   __frame_title_options: ($) =>
     prec.right(seq($._frame_title_option, optional($.__frame_title_options))),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-shared-choice-inline
   _frame_title_option: ($) =>
     choice(
       seq(kw("BGCOLOR"), field("title_bgcolor", $.__frame_expression)),
