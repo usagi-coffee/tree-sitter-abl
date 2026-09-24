@@ -212,7 +212,6 @@ export default grammar({
     $._routine_access_modifier,
     $._position_length,
     $._for_keyword,
-    $._in_keyword,
     $._except_fields,
     $._as_keyword,
     $._initial_value,
@@ -469,6 +468,7 @@ export default grammar({
 
       _for_keyword: ($) => kw("FOR"),
       _to_keyword: ($) => kw("TO"),
+      // oxlint-disable-next-line tree-sitter-optimize/shared-keyword-inline
       _in_keyword: ($) => kw("IN"),
       _define_keyword: ($) => kw("DEFINE", { offset: 3 }),
       _end_keyword: ($) => kw("END"),

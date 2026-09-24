@@ -50,3 +50,24 @@ DEFINE NEW SHARED VARIABLE v1 AS INTEGER NO-UNDO.
 1:10 - 1:13         value: identifier
 1:10 - 1:13           "NEW"
 1:13 - 1:14       "}"
+
+=========================================
+CST - IN alias retains its keyword child
+:cst
+=========================================
+{foo.i &p=IN}
+
+---
+
+0:0  - 1:0    source_code
+0:0  - 0:13     include_file_reference
+0:0  - 0:1        "{"
+0:1  - 0:6        file: include_file_path
+0:1  - 0:6          identifier `foo.i`
+0:7  - 0:12       argument: include_argument
+0:7  - 0:8          "&"
+0:8  - 0:9          name: identifier `p`
+0:9  - 0:10         "="
+0:10 - 0:12         value: identifier
+0:10 - 0:12           "IN"
+0:12 - 0:13       "}"
