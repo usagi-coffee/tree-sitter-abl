@@ -79,6 +79,7 @@ export default ({ kw }) => ({
   _selection_after_for: ($) =>
     choice(seq($.preselect_phrase, optional($.query_tuning_phrase)), $.query_tuning_phrase),
   _index_prefix: ($) => seq("[", field("index", $._expression)),
+  // oxlint-disable-next-line tree-sitter-optimize/shared-closing-delimiter-inline
   _parenthesized_value: ($) => seq($._parenthesized_expression_prefix, ")"),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-shared-choice-inline
   _map_phrase: ($) =>
