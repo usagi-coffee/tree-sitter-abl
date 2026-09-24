@@ -513,6 +513,7 @@ export default ({ kw }) => ({
       alias(kw("NO-LOCK"), $.no_lock),
     ),
   _on_action_tail: ($) => seq(",", $._on_phrase_action),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-shared-choice-inline
   _on_phrase_action: ($) => choice($._undo_lnr_target, $._on_phrase_return),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-shared-choice-inline
   _undo_lnr_target: ($) =>
