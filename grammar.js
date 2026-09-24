@@ -238,6 +238,7 @@ export default grammar({
     $.__temp_table_like_name,
     $.__browse_flag_option,
     $._identifier_or_array_access,
+    $._unquoted_name_initial,
     $._parameter_direction,
     $.__buffer_compare_compares,
     $.__call_argument,
