@@ -34,6 +34,7 @@ export default ({ kw }) => ({
 
   // oxlint-disable-next-line tree-sitter-optimize/body-extraction
   __set_field: ($) =>
+    // oxlint-disable-next-line tree-sitter-optimize/common-suffix-head-extraction
     choice(
       alias($._skip_phrase, $.skip_phrase),
       alias($._space_phrase, $.space_phrase),
