@@ -27,6 +27,7 @@ export default ({ kw }) => ({
   _as_type_name_phrase: ($) => seq($._as_keyword, field("type", $._type_name)),
   _input_field: ($) => choice($._identifier_or_qualified_name, $.object_access, $.array_access),
 
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-shared-sequence-inline
   _in_widget_pool: ($) =>
     seq(
       $._in_keyword,
