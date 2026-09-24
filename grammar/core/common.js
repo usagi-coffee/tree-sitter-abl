@@ -257,6 +257,7 @@ export default ({ kw }) => ({
   _string_or_identifier_access_or_call: ($) =>
     choice($.string_literal, $._identifier_or_access_or_call),
 
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-shared-choice-inline
   _echo_phrase: ($) => choice(alias(kw("ECHO"), $.echo), alias(kw("NO-ECHO"), $.no_echo)),
 
   _lob_dir_phrase: ($) =>
