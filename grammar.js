@@ -848,7 +848,7 @@ export default grammar({
         ),
       __symbolic_name: ($) => token(/[!#$%][\p{L}\p{N}_\-&#%$!]*/i),
 
-      __numeric_routine_name: ($) => token(/[0-9][\p{N}\-]*[\p{L}][\p{L}\p{N}_\-&#%$!]*/i),
+      __numeric_name: ($) => token(/[0-9][\p{N}\-]*[\p{L}][\p{L}\p{N}_\-&#%$!]*/i),
 
       __operator_routine_name: ($) =>
         token(/[_\p{L}][\p{L}\p{N}_\-&#%$!]*[*+\/][\p{L}\p{N}_\-&#%$!*+\/]*/i),
@@ -858,7 +858,7 @@ export default grammar({
       _unquoted_name_initial: ($) =>
         choice(
           alias($.__symbolic_name, $.identifier),
-          alias($.__numeric_routine_name, $.identifier),
+          alias($.__numeric_name, $.identifier),
         ),
       _routine_name_initial: ($) =>
         choice($._unquoted_name_initial, alias($.__dash_routine_name, $.identifier)),
