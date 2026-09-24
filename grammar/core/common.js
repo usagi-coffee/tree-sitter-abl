@@ -224,6 +224,7 @@ export default ({ kw }) => ({
       optional(seq($._by_keyword, field("step", $._expression))),
     ),
 
+  // oxlint-disable-next-line tree-sitter-optimize/shared-closing-delimiter-inline
   _collate_body: ($) => seq($.__collate_prefix, ")"),
   __collate_prefix: ($) =>
     seq(
