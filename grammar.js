@@ -208,6 +208,7 @@ export default grammar({
   inline: ($) => [
     $._not_keyword,
     $._for_keyword,
+    $._in_keyword,
     $._initial_value,
     $._object_access_plain_left,
     $._object_access_expression_left,
