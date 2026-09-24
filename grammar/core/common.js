@@ -461,6 +461,7 @@ export default ({ kw }) => ({
       $._map_unbuffered_convert_tail,
     ),
 
+  // oxlint-disable-next-line tree-sitter-optimize/shared-keyword-field-inline
   _aggregate_label_phrase: ($) => seq(kw("LABEL"), field("label", $.string_literal)),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-shared-choice-inline
   _initial_value: ($) => choice($._expression, seq($._array_initializer_prefix, "]")),
