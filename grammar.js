@@ -206,6 +206,7 @@ export default grammar({
     [$.__temp_table_modifier, $._member_access_modifier],
   ],
   inline: ($) => [
+    $._position_length,
     $._not_keyword,
     $._for_keyword,
     $._in_keyword,
