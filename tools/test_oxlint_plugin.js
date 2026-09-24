@@ -10,6 +10,7 @@ import {
   commonSuffixHeadExtraction,
   sharedPrecedenceSequenceInline,
   sharedClosingDelimiterInline,
+  sharedKeywordFieldInline,
   forwardedAliasReuse,
   closingDelimiterHoist,
   choiceProductExtraction,
@@ -240,6 +241,35 @@ new RuleTester().run("shared-closing-delimiter-inline", sharedClosingDelimiterIn
       name: "bracket closing wrapper",
       code: `export default () => ({ _value: ($) => seq($._value_prefix, "]") });`,
       errors: [{ message: /_value appends.*hidden prefix _value_prefix/ }],
+    },
+  ],
+});
+
+const keywordFieldBody = `seq(kw("TABLE-HANDLE"), field("table_handle", $.identifier))`;
+new RuleTester().run("shared-keyword-field-inline", sharedKeywordFieldInline, {
+  valid: [
+    `export default grammar({ inline: ($) => [$._value], rules: { _value: ($) => ${keywordFieldBody} } });`,
+    `export default () => ({ value: ($) => ${keywordFieldBody} });`,
+    `export default () => ({ __value: ($) => ${keywordFieldBody} });`,
+    `export default () => ({ _value: ($) => ${keywordFieldBody}, root: ($) => alias($._value, $.value) });`,
+    `export default () => ({ _value: ($) => seq(kw("TABLE-HANDLE", options), field("value", $.identifier)) });`,
+    `export default () => ({ _value: ($) => seq(kw("TABLE-HANDLE"), field("value", choice($.a, $.b))) });`,
+    `export default () => ({ _value: ($) => seq(kw("TABLE-HANDLE"), field("value", $._value)) });`,
+    `export default () => ({
+      // oxlint-disable-next-line rule-to-test/shared-keyword-field-inline
+      _value: ($) => ${keywordFieldBody},
+    });`,
+  ],
+  invalid: [
+    {
+      name: "TABLE-HANDLE value shared by signature grammars",
+      code: `export default () => ({ _table_handle_value: ($) => ${keywordFieldBody} });`,
+      errors: [{ message: /_table_handle_value is a shared keyword-plus-field helper/ }],
+    },
+    {
+      name: "abbreviation options remain at the keyword",
+      code: `export default () => ({ _initial: ($) => seq(kw("INITIAL", {offset: 4}), field("initial", $.value)) });`,
+      errors: [{ message: /_initial is a shared keyword-plus-field helper/ }],
     },
   ],
 });
