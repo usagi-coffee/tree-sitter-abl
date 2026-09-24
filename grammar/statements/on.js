@@ -263,10 +263,10 @@ export default ({ kw }) => ({
     choice(
       seq(
         $._new_keyword,
-        optional(kw("BUFFER")),
+        optional($._kw_buffer),
         field("new_record", $.identifier),
         kw("OLD"),
-        optional(kw("BUFFER")),
+        optional($._kw_buffer),
         field("old_record", $.identifier),
       ),
       seq(kw("OLD"), optional($._kw_value), field("old_field", $.identifier)),

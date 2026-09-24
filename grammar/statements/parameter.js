@@ -92,7 +92,7 @@ export default ({ kw }) => ({
   __parameter_buffer_parameter: ($) =>
     seq(
       kw("PARAMETER", { offset: 5 }),
-      kw("BUFFER"),
+      $._kw_buffer,
       field("name", $.identifier),
       $._for_keyword,
       optional(field("for", kw("TEMP-TABLE"))),

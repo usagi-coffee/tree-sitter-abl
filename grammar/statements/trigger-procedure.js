@@ -15,7 +15,7 @@ export default ({ kw }) => ({
           kw("WRITE"),
           $._of_keyword,
           field("object", $.identifier),
-          optional(seq($._new_keyword, optional(kw("BUFFER")), field("new_buffer", $.identifier))),
+          optional(seq($._new_keyword, optional($._kw_buffer), field("new_buffer", $.identifier))),
           optional($.__trigger_procedure_old_buffer),
         ),
         // ASSIGN event
@@ -34,7 +34,7 @@ export default ({ kw }) => ({
 
   // oxlint-disable-next-line tree-sitter-optimize/single-use-keyword-sequence
   __trigger_procedure_old_buffer: ($) =>
-    seq(kw("OLD"), optional(kw("BUFFER")), field("old_buffer", $.identifier)),
+    seq(kw("OLD"), optional($._kw_buffer), field("old_buffer", $.identifier)),
 
   __trigger_procedure_value_body: ($) =>
     seq(

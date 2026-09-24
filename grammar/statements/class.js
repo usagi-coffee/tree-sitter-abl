@@ -324,7 +324,7 @@ export default ({ kw }) => ({
     choice(
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
       seq(
-        kw("BUFFER"),
+        $._kw_buffer,
         field("buffer", $.identifier),
         $._for_keyword,
         field("table", $._identifier_or_qualified_name),

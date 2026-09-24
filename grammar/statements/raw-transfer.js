@@ -16,14 +16,14 @@ export default ({ kw }) => ({
         ),
         // Case 3: BUFFER source TO target
         seq(
-          kw("BUFFER"),
+          $._kw_buffer,
           field("source_field", $.identifier),
           $._to_keyword,
           field("target", $.identifier),
         ),
         // Case 4: BUFFER source TO FIELD target
         seq(
-          kw("BUFFER"),
+          $._kw_buffer,
           field("source_field", $.identifier),
           $._to_keyword,
           kw("FIELD"),
@@ -34,15 +34,15 @@ export default ({ kw }) => ({
           kw("FIELD"),
           field("source_field", $._expression),
           $._to_keyword,
-          kw("BUFFER"),
+          $._kw_buffer,
           field("target_field", $._expression),
         ),
         // Case 6: BUFFER source TO BUFFER target
         seq(
-          kw("BUFFER"),
+          $._kw_buffer,
           field("source_field", $.identifier),
           $._to_keyword,
-          kw("BUFFER"),
+          $._kw_buffer,
           field("target_field", $.identifier),
         ),
       ),

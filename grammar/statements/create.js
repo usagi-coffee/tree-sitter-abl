@@ -29,7 +29,7 @@ export default ({ kw }) => ({
   __create_buffer: ($) =>
     // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq(
-      kw("BUFFER"),
+      $._kw_buffer,
       field("handle", $._identifier_or_access),
       $._for_keyword,
       kw("TABLE"),

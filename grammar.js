@@ -208,6 +208,7 @@ export default grammar({
   inline: ($) => [
     $._kw_and,
     $._kw_bgcolor,
+    $._kw_buffer,
     $._kw_dcolor,
     $._kw_data_source,
     $._kw_fgcolor,
@@ -505,6 +506,7 @@ export default grammar({
       _help_keyword: ($) => kw("HELP"),
       _kw_and: ($) => kw("AND"),
       _kw_bgcolor: ($) => kw("BGCOLOR"),
+      _kw_buffer: ($) => kw("BUFFER"),
       _kw_dcolor: ($) => kw("DCOLOR"),
       _kw_data_source: ($) => kw("DATA-SOURCE"),
       _kw_fgcolor: ($) => kw("FGCOLOR"),
@@ -562,7 +564,7 @@ export default grammar({
       // boundaries such as ASSIGN x = Buffer y = 1.
       // oxlint-disable-next-line tree-sitter-optimize/shared-keyword-alias-choice-inline
       _bare_marker_identifier: ($) =>
-        choice(alias(kw("BUFFER"), $.identifier), alias(kw("TABLE-HANDLE"), $.identifier)),
+        choice(alias($._kw_buffer, $.identifier), alias(kw("TABLE-HANDLE"), $.identifier)),
       _identifier_or_array_access: ($) => choice($._identifier_or_qualified_name, $.array_access),
       // oxlint-disable-next-line tree-sitter-optimize/choice-subset
       _identifier_or_access: ($) =>
@@ -687,7 +689,7 @@ export default grammar({
       __object_access_handle_type: ($) =>
         choice(
           alias(kw("TEMP-TABLE"), $.identifier),
-          alias(kw("BUFFER"), $.identifier),
+          alias($._kw_buffer, $.identifier),
           alias($._kw_data_source, $.identifier),
           alias($._kw_stream, $.identifier),
         ),
@@ -780,7 +782,7 @@ export default grammar({
             seq(
               choice(
                 seq(
-                  choice(kw("TABLE"), kw("BUFFER"), kw("TABLE-HANDLE"), kw("DATASET-HANDLE")),
+                  choice(kw("TABLE"), $._kw_buffer, kw("TABLE-HANDLE"), kw("DATASET-HANDLE")),
                   field(
                     "name",
                     choice(
