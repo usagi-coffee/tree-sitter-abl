@@ -23,6 +23,7 @@ export default ({ kw }) => ({
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
       seq($._like_keyword, field("like", $._identifier_or_qualified_name)),
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-shared-sequence-inline
   _as_type_name_phrase: ($) => seq($._as_keyword, field("type", $._type_name)),
   _input_field: ($) => choice($._identifier_or_qualified_name, $.object_access, $.array_access),
 
