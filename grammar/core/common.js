@@ -62,6 +62,7 @@ export default ({ kw }) => ({
     ),
   _import_export_except_names: ($) =>
     prec.right(seq($._identifier_or_qualified_name, optional($._import_export_except_names))),
+  // oxlint-disable-next-line tree-sitter-optimize/shared-keyword-field-inline
   _initial_phrase: ($) => seq(kw("INITIAL", { offset: 4 }), field("initial", $._initial_value)),
   _frame_phrases: ($) => seq($.frame_phrase, optional($.frame_phrase)),
   // VIEW and HIDE are the only users, and both admit a trailing IN WINDOW that
