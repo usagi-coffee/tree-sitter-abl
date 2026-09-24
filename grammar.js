@@ -209,6 +209,7 @@ export default grammar({
     $._not_keyword,
     $._for_keyword,
     $._in_keyword,
+    $._as_keyword,
     $._initial_value,
     $._object_access_plain_left,
     $._object_access_expression_left,
