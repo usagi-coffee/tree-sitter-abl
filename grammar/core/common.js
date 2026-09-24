@@ -550,6 +550,7 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/single-use-shared-sequence-inline
   _position_length: ($) => seq(field("position", $._expression), optional($._comma_length)),
   _comma_position_length: ($) => seq(",", $._position_length),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-shared-sequence-inline
   _comma_length: ($) => seq(",", field("length", $._expression)),
   _method_header: ($) =>
     seq(
