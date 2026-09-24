@@ -10,6 +10,7 @@ export default ({ kw }) => ({
       optional($.__function_extent_phrase),
       $.__function_prefix_tail,
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-sequence
   __function_prefix_tail: ($) =>
     seq(optional($.__function_access_parameters_tail), $.__function_compound_body),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
