@@ -227,6 +227,7 @@ export default ({ kw }) => ({
       optional(seq(",", field("collation", $._expression))),
     ),
 
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-shared-choice-inline
   _block_option: ($) =>
     choice(
       $.stop_after_phrase,
