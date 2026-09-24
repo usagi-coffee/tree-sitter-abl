@@ -240,6 +240,7 @@ export default grammar({
     $._identifier_or_array_access,
     $._unquoted_name_initial,
     $._parameter_direction,
+    $._dos_unix_command,
     $.__buffer_compare_compares,
     $.__call_argument,
     $.__system_help_position,
