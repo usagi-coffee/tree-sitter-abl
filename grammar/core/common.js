@@ -428,6 +428,7 @@ export default ({ kw }) => ({
     seq(field("table", $.identifier), optional(seq(",", $.__dataset_for_table_head))),
 
   _event_tail: ($) => seq(kw("EVENT"), $._event_body, $._terminator),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-shared-sequence-inline
   _event_body: ($) =>
     seq(field("name", $.identifier), optional(alias($.__event_signature, $.signature))),
 
