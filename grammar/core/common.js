@@ -547,6 +547,7 @@ export default ({ kw }) => ({
   _equals_value: ($) => seq("=", field("value", $._expression)),
   _close_equals_value: ($) => seq(")", $._equals_value),
   _status: ($) => seq(field("status_var", $._identifier_or_qualified_name), "=", kw("PROC-STATUS")),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-shared-sequence-inline
   _position_length: ($) => seq(field("position", $._expression), optional($._comma_length)),
   _comma_position_length: ($) => seq(",", $._position_length),
   _comma_length: ($) => seq(",", field("length", $._expression)),
