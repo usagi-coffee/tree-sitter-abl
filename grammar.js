@@ -578,6 +578,7 @@ export default grammar({
 
       // Expressions
       parenthesized_expression: ($) => seq($._parenthesized_expression_prefix, ")"),
+      // oxlint-disable-next-line tree-sitter-optimize/single-use-shared-sequence-inline
       _parenthesized_expression_prefix: ($) => seq("(", $._expression),
       // oxlint-disable-next-line tree-sitter-optimize/shared-recursion
       _expressions: ($) => seq($._expression, optional(seq(",", $._expressions))),
