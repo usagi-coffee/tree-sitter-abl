@@ -24,6 +24,7 @@
         "tree-sitter-optimize/shared-repeated-signature": "warn",
         "tree-sitter-optimize/left-recursive-list": "warn",
         "tree-sitter-optimize/recursive-item-inline": "warn",
+        "tree-sitter-optimize/recursive-item-extraction": "warn",
         "tree-sitter-optimize/forwarded-alias-reuse": "warn",
         "tree-sitter-optimize/closing-delimiter-hoist": "warn",
         "tree-sitter-optimize/choice-product-extraction": "warn",

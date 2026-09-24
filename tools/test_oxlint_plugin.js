@@ -4,6 +4,7 @@ import {
   sharedRepeatedSignature,
   leftRecursiveList,
   recursiveItemInline,
+  recursiveItemExtraction,
   forwardedAliasReuse,
   closingDelimiterHoist,
   choiceProductExtraction,
@@ -70,6 +71,29 @@ import {
 
 RuleTester.describe = (_name, run) => run();
 RuleTester.it = (_name, run) => run();
+
+const compoundRecursiveItem = `seq(field("field", $._assignable), optional(seq("=", field("value", $._expression))), optional($._when_phrase), optional($.__items))`;
+new RuleTester().run("recursive-item-extraction", recursiveItemExtraction, {
+  valid: [
+    `export default () => ({ __items: ($) => seq($.__item, optional($.__items)), __item: ($) => seq(field("field", $._assignable), optional($._when_phrase)) });`,
+    `export default () => ({ items: ($) => seq(field("field", $.name), optional($.flag), optional($.items)) });`,
+    `export default () => ({ __items: ($) => prec.right(${compoundRecursiveItem}) });`,
+    `export default () => ({ __items: ($) => seq(optional(field("field", $.name)), optional($.flag), optional($.__items)) });`,
+    `export default () => ({ __items: ($) => seq(field("field", $.__items), optional($.flag), optional($.__items)) });`,
+    `export default () => ({ __items: ($) => seq(field("field", $.name), optional($.__items)) });`,
+    `export default () => ({
+      // oxlint-disable-next-line rule-to-test/recursive-item-extraction
+      __items: ($) => ${compoundRecursiveItem},
+    });`,
+  ],
+  invalid: [
+    {
+      name: "ASSIGN INPUT field with optional value and WHEN",
+      code: `export default () => ({ __items: ($) => ${compoundRecursiveItem} });`,
+      errors: [{ message: /__items repeats a compound field item before optional self-recursion/ }],
+    },
+  ],
+});
 
 const repeatedTableItems = `
 export default () => ({
