@@ -5,6 +5,7 @@ import {
   leftRecursiveList,
   recursiveItemInline,
   recursiveItemExtraction,
+  recursiveChoiceItemExtraction,
   forwardedAliasReuse,
   closingDelimiterHoist,
   choiceProductExtraction,
@@ -91,6 +92,34 @@ new RuleTester().run("recursive-item-extraction", recursiveItemExtraction, {
       name: "ASSIGN INPUT field with optional value and WHEN",
       code: `export default () => ({ __items: ($) => ${compoundRecursiveItem} });`,
       errors: [{ message: /__items repeats a compound field item before optional self-recursion/ }],
+    },
+  ],
+});
+
+const recursiveChoiceItem = `choice(seq(kw("TARGET"), field("target", $.value)), seq(kw("SOURCE"), field("source", $.value)))`;
+new RuleTester().run("recursive-choice-item-extraction", recursiveChoiceItemExtraction, {
+  valid: [
+    `export default () => ({ _options: ($) => prec.right(seq($._option, optional($._options))), _option: ($) => ${recursiveChoiceItem} });`,
+    `export default () => ({ options: ($) => seq(${recursiveChoiceItem}, optional($.options)) });`,
+    `export default () => ({ _options: ($) => prec.dynamic(1, seq(${recursiveChoiceItem}, optional($._options))) });`,
+    `export default () => ({ _options: ($) => seq(choice(optional($.a), seq("B", $.b)), optional($._options)) });`,
+    `export default () => ({ _options: ($) => seq(choice(seq("A", $._options), $.b), optional($._options)) });`,
+    `export default () => ({ _options: ($) => seq(${recursiveChoiceItem}, optional(seq(",", $._options))) });`,
+    `export default () => ({
+      // oxlint-disable-next-line rule-to-test/recursive-choice-item-extraction
+      _options: ($) => prec.right(seq(${recursiveChoiceItem}, optional($._options))),
+    });`,
+  ],
+  invalid: [
+    {
+      name: "CONVERT options retain list precedence after extraction",
+      code: `export default () => ({ _options: ($) => prec.right(seq(${recursiveChoiceItem}, optional($._options))) });`,
+      errors: [{ message: /_options repeats a compound choice before optional self-recursion/ }],
+    },
+    {
+      name: "unwrapped recursive choices are candidates too",
+      code: `export default () => ({ _options: ($) => seq(${recursiveChoiceItem}, optional($._options)) });`,
+      errors: [{ message: /_options repeats a compound choice before optional self-recursion/ }],
     },
   ],
 });
