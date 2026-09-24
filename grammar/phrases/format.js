@@ -158,6 +158,7 @@ export default ({ kw }) => ({
   _format_label: ($) => choice(seq(kw("LABEL"), $._format_labels), kw("NO-LABELS")),
   _format_labels: ($) => seq(field("label", $._expression), optional(seq(",", $._format_labels))),
 
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-shared-sequence-inline
   _format_validate: ($) => seq($.__format_validate_prefix, ")"),
   __format_validate_prefix: ($) =>
     seq(
