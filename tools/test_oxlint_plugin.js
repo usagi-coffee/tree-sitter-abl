@@ -8,6 +8,7 @@ import {
   recursiveChoiceItemExtraction,
   optionalBlockBodyExtraction,
   commonSuffixHeadExtraction,
+  sharedPrecedenceSequenceInline,
   forwardedAliasReuse,
   closingDelimiterHoist,
   choiceProductExtraction,
@@ -176,6 +177,38 @@ new RuleTester().run("common-suffix-head-extraction", commonSuffixHeadExtraction
             /Adjacent sequence alternatives have different heads and an exact compound suffix/,
         },
       ],
+    },
+  ],
+});
+
+const displaySpacePhrase = `prec.left(seq(kw("SPACE"), optional(field("space", seq($._parenthesized_expression_prefix, ")")))))`;
+new RuleTester().run("shared-precedence-sequence-inline", sharedPrecedenceSequenceInline, {
+  valid: [
+    `export default grammar({ inline: ($) => [$._space], rules: { _space: ($) => ${displaySpacePhrase} } });`,
+    `export default () => ({ space: ($) => ${displaySpacePhrase} });`,
+    `export default () => ({ __space: ($) => ${displaySpacePhrase} });`,
+    `export default () => ({ _space: ($) => seq(kw("SPACE"), optional($.value)) });`,
+    `export default () => ({ _space: ($) => prec.dynamic(1, seq(kw("SPACE"), optional($.value))) });`,
+    `export default () => ({ _space: ($) => prec.left(priority, seq(kw("SPACE"), optional($.value))) });`,
+    `export default () => ({ _space: ($) => prec.left(seq(kw("SPACE"), optional($._space))) });`,
+    `export default () => ({ _space: ($) => prec.left(choice(kw("SPACE"), $.value)) });`,
+    `export default () => ({
+      // oxlint-disable-next-line rule-to-test/shared-precedence-sequence-inline
+      _space: ($) => ${displaySpacePhrase},
+    });`,
+  ],
+  invalid: [
+    {
+      name: "DISPLAY SPACE shared precedence sequence",
+      code: `export default () => ({ _display_space_phrase: ($) => ${displaySpacePhrase} });`,
+      errors: [
+        { message: /_display_space_phrase wraps a nonrecursive sequence in static precedence/ },
+      ],
+    },
+    {
+      name: "nested static precedence wrappers are retained",
+      code: `export default () => ({ _space: ($) => prec("space", ${displaySpacePhrase}) });`,
+      errors: [{ message: /_space wraps a nonrecursive sequence in static precedence/ }],
     },
   ],
 });
