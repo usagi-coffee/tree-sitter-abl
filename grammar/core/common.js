@@ -129,6 +129,7 @@ export default ({ kw }) => ({
       seq(choice(kw("MENU"), kw("SUB-MENU")), field("menu", $.__widget_name)),
     ),
   // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
+  // oxlint-disable-next-line tree-sitter-optimize/shared-keyword-field-inline
   _frame_identifier_phrase: ($) => seq(kw("FRAME", { offset: 4 }), field("frame", $.identifier)),
   // oxlint-disable-next-line tree-sitter-optimize/body-extraction
   _color_font_option: ($) =>
