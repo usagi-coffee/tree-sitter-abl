@@ -217,6 +217,7 @@ export default ({ kw }) => ({
     seq($.__format_radio_set_value, optional(seq(",", $.__format_combo_box_values))),
   __format_view_as_tail: ($) =>
     prec.right(choice(seq($.size_phrase, optional($._tooltip_phrase)), $._tooltip_phrase)),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-shared-sequence-inline
   _format_view_as: ($) =>
     prec.right(
       seq(
