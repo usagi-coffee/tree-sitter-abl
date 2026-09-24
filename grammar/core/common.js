@@ -251,6 +251,7 @@ export default ({ kw }) => ({
 
   _convert_options: ($) => prec.right(seq($._convert_option, optional($._convert_options))),
 
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-shared-choice-inline
   _convert_option: ($) =>
     choice(
       seq(kw("TARGET"), field("target", $._string_or_identifier_access_or_call)),
