@@ -572,6 +572,7 @@ export default ({ kw }) => ({
       repeat($._statement),
       $._end_keyword,
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/shared-precedence-sequence-inline
   _display_space_phrase: ($) =>
     prec.left(
       seq(kw("SPACE"), optional(field("space", seq($._parenthesized_expression_prefix, ")")))),
