@@ -20,6 +20,7 @@ export default ({ kw }) => ({
     ),
   __procedure_options: ($) =>
     prec.right(seq($.__procedure_option, optional($.__procedure_options))),
+  // oxlint-disable-next-line tree-sitter-optimize/body-extraction
   __procedure_option: ($) =>
     choice(
       alias(kw("CDECL"), $.cdecl),
