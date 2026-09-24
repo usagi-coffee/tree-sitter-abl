@@ -26,7 +26,7 @@ export default ({ kw }) => ({
       seq($._kw_fgcolor, field("fgcolor", $._expression)),
       alias(kw("GRAPHIC-EDGE"), $.graphic_edge),
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
-      seq(kw("PFCOLOR"), field("pfcolor", $._expression)),
+      seq($._kw_pfcolor, field("pfcolor", $._expression)),
       alias(kw("ROUNDED"), $.rounded),
       alias(kw("GROUP-BOX"), $.group_box),
       seq(kw("TOOLTIP"), field("tooltip", choice($.identifier, $.string_literal, $.null_literal))),

@@ -25,7 +25,7 @@ export default ({ kw }) => ({
       $._format_format,
       seq($._help_keyword, field("help", $.__format_expression)),
       $._format_label,
-      seq(kw("PFCOLOR"), field("pfcolor", $.__format_expression)),
+      seq($._kw_pfcolor, field("pfcolor", $.__format_expression)),
       $._format_validate,
       $._format_view_as,
       seq(kw("WIDGET-ID"), field("widget_id", $.__format_expression)),

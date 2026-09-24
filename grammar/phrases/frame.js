@@ -46,7 +46,7 @@ export default ({ kw }) => ({
       seq($._kw_bgcolor, field("bgcolor", $.__frame_expression)),
       seq($._kw_dcolor, field("dcolor", $.__frame_expression)),
       seq($._kw_fgcolor, field("fgcolor", $.__frame_expression)),
-      seq(kw("PFCOLOR"), field("pfcolor", $.__frame_expression)),
+      seq($._kw_pfcolor, field("pfcolor", $.__frame_expression)),
       seq(
         kw("COLOR"),
         optional(kw("DISPLAY")),

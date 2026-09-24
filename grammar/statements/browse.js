@@ -36,7 +36,7 @@ export default ({ kw }) => ({
       seq($._kw_dcolor, field("dcolor", $.__browse_option_expression)),
       seq($._kw_fgcolor, field("fgcolor", $.__browse_option_expression)),
       seq($._kw_font, field("font", $.__browse_option_expression)),
-      seq(kw("PFCOLOR"), field("pfcolor", $.__browse_option_expression)),
+      seq($._kw_pfcolor, field("pfcolor", $.__browse_option_expression)),
       seq(
         kw("ROW-HEIGHT-CHARS", { alias: "ROW-HEIGHT", offset: 10 }),
         field("row_height_chars", $.__browse_option_expression),

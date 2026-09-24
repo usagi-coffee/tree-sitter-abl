@@ -144,7 +144,7 @@ export default ({ kw }) => ({
         // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
         seq($._kw_font, field("font", $._expression)),
         // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
-        seq(kw("PFCOLOR"), field("pfcolor", $._expression)),
+        seq($._kw_pfcolor, field("pfcolor", $._expression)),
       ),
     ),
   _record_or_parenthesized_record: ($) =>
