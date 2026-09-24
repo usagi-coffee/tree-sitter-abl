@@ -226,6 +226,7 @@ export default grammar({
     $._window_handle,
     $._block_option,
     $._echo_phrase,
+    $._on_phrase_action,
     $._primary_expression,
     $.__preprocessor_name_value,
     $._identifier_or_access_or_call,
