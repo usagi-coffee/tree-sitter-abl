@@ -543,6 +543,7 @@ export default ({ kw }) => ({
   __return_error_clause: ($) => seq(kw("ERROR"), optional(field("error_value", $._expression))),
   // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
   _when_phrase: ($) => seq(kw("WHEN"), field("when", $._expression)),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-shared-sequence-inline
   _equals_value: ($) => seq("=", field("value", $._expression)),
   _close_equals_value: ($) => seq(")", $._equals_value),
   _status: ($) => seq(field("status_var", $._identifier_or_qualified_name), "=", kw("PROC-STATUS")),
