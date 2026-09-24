@@ -69,6 +69,7 @@ import {
   sequenceSubset,
   recursiveTailReuse,
   keywordReuse,
+  inlineKeywordOwner,
   sharedChoice,
   resetSharingCandidates,
   sharedSequence,
@@ -5200,6 +5201,70 @@ new RuleTester().run("shared-repeated-signature", sharedRepeatedSignature, {
     },
   ],
 });
+resetSharingCandidates();
+
+const inlineKeywordPreviousIt = RuleTester.it;
+RuleTester.it = (_name, run) => {
+  resetSharingCandidates();
+  run();
+};
+new RuleTester().run("inline-keyword-owner", inlineKeywordOwner, {
+  valid: [
+    `export default () => ({ first: ($) => seq(kw("PROCEDURE", {offset: 4}), $.name) });`,
+    `export default () => ({ first: ($) => seq(kw("PROCEDURE", {offset: 4}), kw("PROCEDURE", {offset: 5})) });`,
+    `export default () => ({ first: ($) => seq(kw("PROCEDURE", {alias: "PROC"}), kw("PROCEDURE")) });`,
+    `export default grammar({ inline: ($) => [$._procedure_keyword], rules: { _procedure_keyword: ($) => kw("PROCEDURE", {offset: 4}), first: ($) => seq($._procedure_keyword, alias($._procedure_keyword, $.identifier)) } });`,
+    `export default () => ({ first: ($) => seq(kw("PROCEDURE"), kw("PROCEDURE")), _procedure_keyword: ($) => kw("PROCEDURE") });`,
+    `const unrelated = { first: ($) => seq(kw("PROCEDURE"), kw("PROCEDURE")) };`,
+    `export default () => ({ first: ($) => token(seq(kw("PROCEDURE"), kw("PROCEDURE"))) });`,
+    `export default () => ({ first: ($) => seq(
+      // oxlint-disable-next-line rule-to-test/inline-keyword-owner
+      kw("PROCEDURE"),
+      kw("PROCEDURE"), kw("PROCEDURE")),
+    });`,
+  ],
+  invalid: [
+    {
+      name: "one diagnostic for three exact calls including an outer alias",
+      code: `export default () => ({ first: ($) => seq(kw("PROCEDURE", {offset: 4}), alias(kw("PROCEDURE", {offset: 4}), $.identifier), optional(kw("PROCEDURE", {offset: 4}))) });`,
+      errors: [{ message: /exact "PROCEDURE" keyword call repeats/ }],
+    },
+  ],
+});
+RuleTester.it = (_name, run) => run();
+resetSharingCandidates();
+new RuleTester().run("inline-keyword-owner across files", inlineKeywordOwner, {
+  valid: [
+    {
+      filename: "grammar/statements/delete.js",
+      code: `export default () => ({ first: ($) => seq(kw("PROCEDURE", {offset: 4}), $.handle) });`,
+    },
+  ],
+  invalid: [
+    {
+      filename: "grammar/statements/procedure.js",
+      code: `export default () => ({ second: ($) => seq(kw("PROCEDURE", {offset: 4}), $.name) });`,
+      errors: [{ message: /exact "PROCEDURE" keyword call repeats first in delete\.js/ }],
+    },
+  ],
+});
+resetSharingCandidates();
+new RuleTester().run("inline-keyword-owner", inlineKeywordOwner, {
+  valid: [
+    {
+      filename: "grammar/statements/delete.js",
+      code: `export default () => ({ first: ($) => seq(
+        // oxlint-disable-next-line rule-to-test/inline-keyword-owner
+        kw("PROCEDURE"), $.handle) });`,
+    },
+    {
+      filename: "grammar/statements/procedure.js",
+      code: `export default () => ({ second: ($) => seq(kw("PROCEDURE"), kw("PROCEDURE")) });`,
+    },
+  ],
+  invalid: [],
+});
+RuleTester.it = inlineKeywordPreviousIt;
 resetSharingCandidates();
 
 console.log("✓ Optimizer lint plugin tests passed successfully");
