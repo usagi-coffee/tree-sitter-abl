@@ -92,7 +92,7 @@ export default ({ kw }) => ({
     ),
 
   // oxlint-disable-next-line tree-sitter-optimize/shared-choice
-  __frame_color_value: ($) => choice(kw("NORMAL"), kw("INPUT"), kw("MESSAGES"), $.color_phrase),
+  __frame_color_value: ($) => choice(kw("NORMAL"), $._kw_input, kw("MESSAGES"), $.color_phrase),
 
   __frame_with_identifier: ($) =>
     prec.right(

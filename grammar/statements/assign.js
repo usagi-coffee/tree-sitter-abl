@@ -48,7 +48,7 @@ export default ({ kw }) => ({
 
   __assign_input_body: ($) =>
     seq(
-      optional(kw("INPUT")),
+      optional($._kw_input),
       // oxlint-disable-next-line tree-sitter-optimize/shared-choice
       choice(
         // oxlint-disable-next-line tree-sitter-optimize/shared-sequence, tree-sitter-optimize/inline-keyword-owner
@@ -63,7 +63,7 @@ export default ({ kw }) => ({
   __assign_input_sections: ($) =>
     prec.right(
       seq(
-        kw("INPUT"),
+        $._kw_input,
         // oxlint-disable-next-line tree-sitter-optimize/shared-choice
         choice(
           // oxlint-disable-next-line tree-sitter-optimize/shared-sequence, tree-sitter-optimize/inline-keyword-owner

@@ -194,7 +194,7 @@ export default ({ kw }) => ({
 
   _stream_phrase: ($) =>
     seq(choice(kw("STREAM"), kw("STREAM-HANDLE")), field("stream", $.identifier)),
-  _input_stream_prefix: ($) => seq(kw("INPUT"), optional($._stream_phrase)),
+  _input_stream_prefix: ($) => seq($._kw_input, optional($._stream_phrase)),
 
   // oxlint-disable-next-line tree-sitter-optimize/single-use-shared-choice-inline
   _dos_unix_command: ($) =>
@@ -464,7 +464,7 @@ export default ({ kw }) => ({
   _aggregate_label_phrase: ($) => seq(kw("LABEL"), field("label", $.string_literal)),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-shared-choice-inline
   _initial_value: ($) => choice($._expression, seq($._array_initializer_prefix, "]")),
-  _parameter_direction: ($) => choice(kw("INPUT"), kw("OUTPUT"), kw("INPUT-OUTPUT", { offset: 7 })),
+  _parameter_direction: ($) => choice($._kw_input, kw("OUTPUT"), kw("INPUT-OUTPUT", { offset: 7 })),
 
   _alert_box_options: ($) =>
     choice(

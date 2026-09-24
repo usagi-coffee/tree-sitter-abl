@@ -6,7 +6,7 @@ export default ({ kw }) => ({
       field("field", $._input_field),
     ),
   // oxlint-disable-next-line tree-sitter-optimize/keyword-reuse
-  __input_expression_prefix: ($) => kw("INPUT"),
+  __input_expression_prefix: ($) => $._kw_input,
   // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __input_widget_phrase: ($) =>
     choice(
