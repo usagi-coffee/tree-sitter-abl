@@ -471,6 +471,7 @@ export default ({ kw }) => ({
       $._string_or_identifier_access_or_call,
       alias($._alert_box_title_concatenation, $.binary_expression),
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/shared-precedence-sequence-inline
   _alert_box_title_concatenation: ($) =>
     prec.right(
       1,
