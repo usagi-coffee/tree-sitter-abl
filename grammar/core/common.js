@@ -366,7 +366,7 @@ export default ({ kw }) => ({
           $.identifier,
           $.qualified_name,
           $._unquoted_name_initial,
-          alias($.__operator_routine_name, $.identifier),
+          alias($.__operator_name, $.identifier),
         ),
       ),
       // oxlint-disable-next-line tree-sitter-optimize/shared-choice

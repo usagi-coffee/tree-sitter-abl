@@ -844,13 +844,13 @@ export default grammar({
           $.identifier,
           $.qualified_name,
           alias($.__symbolic_name, $.identifier),
-          alias($.__operator_routine_name, $.identifier),
+          alias($.__operator_name, $.identifier),
         ),
       __symbolic_name: ($) => token(/[!#$%][\p{L}\p{N}_\-&#%$!]*/i),
 
       __numeric_name: ($) => token(/[0-9][\p{N}\-]*[\p{L}][\p{L}\p{N}_\-&#%$!]*/i),
 
-      __operator_routine_name: ($) =>
+      __operator_name: ($) =>
         token(/[_\p{L}][\p{L}\p{N}_\-&#%$!]*[*+\/][\p{L}\p{N}_\-&#%$!*+\/]*/i),
 
       __dash_routine_name: ($) => token(/-[\p{L}][\p{L}\p{N}_\-&#%$!]*/i),

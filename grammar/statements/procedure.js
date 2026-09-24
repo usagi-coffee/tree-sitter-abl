@@ -11,7 +11,7 @@ export default ({ kw }) => ({
         choice(
           $._identifier_or_qualified_name,
           $._routine_name_initial,
-          alias($.__operator_routine_name, $.identifier),
+          alias($.__operator_name, $.identifier),
         ),
       ),
       optional($._routine_access_modifier),

@@ -60,7 +60,7 @@ export default ({ kw }) => ({
       $.macro_concatenated_name,
       $.identifier,
       $._routine_name_initial,
-      alias($.__operator_routine_name, $.identifier),
+      alias($.__operator_name, $.identifier),
       $.qualified_name,
       alias($.__run_handle_method, $.object_access),
     ),
