@@ -6,6 +6,7 @@ export default ({ kw }) => ({
   __var_variable_suffix: ($) =>
     seq(alias($.__var_variable, $.variable), optional(seq(",", $.__var_variable_suffix))),
 
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-shared-sequence-inline
   _var_type: ($) => seq($._class_type, optional(field("extent", seq($.__var_extent_prefix, "]")))),
 
   __var_variable: ($) =>
