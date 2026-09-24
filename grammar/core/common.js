@@ -170,6 +170,7 @@ export default ({ kw }) => ({
       alias(kw("SERIALIZABLE"), $.serialization_modifier),
       alias(kw("NON-SERIALIZABLE"), $.serialization_modifier),
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/shared-keyword-alias-choice-inline
   _member_access_modifier: ($) =>
     choice(
       alias(kw("PRIVATE"), $.access_modifier),
