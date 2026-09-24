@@ -164,6 +164,7 @@ export default ({ kw }) => ({
       seq(alias(kw("STATIC"), $.static_modifier), alias(kw("PRIVATE"), $.access_modifier)),
       seq(alias(kw("STATIC"), $.static_modifier), alias(kw("PROTECTED"), $.access_modifier)),
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/shared-keyword-alias-choice-inline
   _serialization_modifier: ($) =>
     choice(
       alias(kw("SERIALIZABLE"), $.serialization_modifier),
