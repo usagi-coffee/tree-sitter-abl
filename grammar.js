@@ -549,6 +549,7 @@ export default grammar({
 
       // oxlint-disable-next-line tree-sitter-optimize/single-use-shared-choice-inline
       _assignment_value: ($) => choice($.array_initializer, $._expression),
+      // oxlint-disable-next-line tree-sitter-optimize/single-use-shared-choice-inline
       _assignable: ($) =>
         choice(
           $.object_access,
