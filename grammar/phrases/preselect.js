@@ -14,8 +14,10 @@ export default ({ kw }) => ({
                 seq(
                   $._by_keyword,
                   field("by", $._expression),
+                  // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
                   optional(kw("DESCENDING", { offset: 4 })),
                 ),
+                // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
                 seq($._collate_body, optional(kw("DESCENDING", { offset: 4 }))),
               ),
             ),

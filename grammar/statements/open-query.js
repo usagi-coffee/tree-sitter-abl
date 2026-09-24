@@ -77,6 +77,7 @@ export default ({ kw }) => ({
     seq(
       $._by_keyword,
       field("by", $._expression),
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       optional(field("sort_order", kw("DESCENDING", { offset: 4 }))),
     ),
   __open_query_by_phrases: ($) =>

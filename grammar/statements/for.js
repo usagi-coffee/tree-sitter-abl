@@ -65,8 +65,16 @@ export default ({ kw }) => ({
     prec.right(seq($._by_keyword, $.__for_by_item, optional($.__for_by_items_tail))),
   // oxlint-disable-next-line tree-sitter-optimize/sequence-subset
   __for_by_item: ($) =>
-    seq(field("by", $._expression), optional(field("sort_order", kw("DESCENDING", { offset: 4 })))),
+    seq(
+      field("by", $._expression),
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
+      optional(field("sort_order", kw("DESCENDING", { offset: 4 }))),
+    ),
 
   __for_collate_phrase: ($) =>
-    seq($._collate_body, optional(field("sort_order", kw("DESCENDING", { offset: 4 })))),
+    seq(
+      $._collate_body,
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
+      optional(field("sort_order", kw("DESCENDING", { offset: 4 }))),
+    ),
 });

@@ -70,6 +70,7 @@ export default ({ kw }) => ({
       optional(
         field(
           "sort_order",
+          // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
           choice(kw("DESCENDING", { offset: 4 }), kw("ASCENDING", { offset: 3 })),
         ),
       ),
