@@ -52,6 +52,7 @@ import {
   singleUsePrecedence,
   singleUseChoice,
   singleUseSharedChoiceInline,
+  sharedKeywordInline,
   forwardingRule,
   choiceSubset,
   singleUseSequence,
@@ -1133,6 +1134,32 @@ new RuleTester().run("single-use-shared-choice-inline", singleUseSharedChoiceInl
       name: "one local use suggests metadata inlining",
       code: `export default () => ({ _initial_value: ($) => choice($._expression, seq($._array_initializer_prefix, "]")), _initial_phrase: ($) => field("initial", $._initial_value) });`,
       errors: [{ message: /_initial_value has one unaliased local use in _initial_phrase/ }],
+    },
+  ],
+});
+
+new RuleTester().run("shared-keyword-inline", sharedKeywordInline, {
+  valid: [
+    `export default grammar({ inline: ($) => [$._not_keyword], rules: { _not_keyword: ($) => kw("NOT"), expression: ($) => seq($._not_keyword, $.value) } });`,
+    `export default () => ({ _keyword: ($) => kw("ONLY") });`,
+    `export default () => ({ _keyword: ($) => kw("ONLY", options), root: ($) => $._keyword });`,
+    `export default () => ({ _keyword: ($) => seq(kw("ONLY"), $.value), root: ($) => $._keyword });`,
+    `export default () => ({
+      // oxlint-disable-next-line rule-to-test/shared-keyword-inline
+      _keyword: ($) => kw("ONLY"),
+      root: ($) => $._keyword,
+    });`,
+  ],
+  invalid: [
+    {
+      name: "static keyword wrapper used by a grammar rule",
+      code: `export default grammar({ rules: { _not_keyword: ($) => kw("NOT"), expression: ($) => prec("not", seq($._not_keyword, $.value)) } });`,
+      errors: [{ message: /_not_keyword wraps one static keyword/ }],
+    },
+    {
+      name: "static keyword options are preserved",
+      code: `export default () => ({ _keyword: ($) => kw("DEFINE", { offset: 3 }), root: ($) => $._keyword });`,
+      errors: [{ message: /_keyword wraps one static keyword/ }],
     },
   ],
 });
