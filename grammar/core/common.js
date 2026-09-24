@@ -211,6 +211,7 @@ export default ({ kw }) => ({
 
   _loop_phrase: ($) =>
     seq(field("variable", choice($.identifier, $.macro_concatenated_name)), $._loop_phrase_tail),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-shared-sequence-inline
   _loop_phrase_tail: ($) =>
     seq(
       "=",
