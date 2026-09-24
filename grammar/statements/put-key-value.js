@@ -11,7 +11,7 @@ export default ({ kw }) => ({
           choice(field("key", $._expression), kw("DEFAULT")),
           $._key_value,
         ),
-        seq(choice(kw("COLOR"), kw("FONT")), choice(field("number", $._expression), kw("ALL"))),
+        seq(choice(kw("COLOR"), $._kw_font), choice(field("number", $._expression), kw("ALL"))),
       ),
     ),
 });

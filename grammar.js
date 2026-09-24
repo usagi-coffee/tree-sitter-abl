@@ -208,6 +208,7 @@ export default grammar({
   inline: ($) => [
     $._kw_and,
     $._kw_except,
+    $._kw_font,
     $._kw_input,
     $._kw_or,
     $._kw_value,
@@ -496,6 +497,7 @@ export default grammar({
       _help_keyword: ($) => kw("HELP"),
       _kw_and: ($) => kw("AND"),
       _kw_except: ($) => kw("EXCEPT"),
+      _kw_font: ($) => kw("FONT"),
       _kw_input: ($) => kw("INPUT"),
       _kw_or: ($) => kw("OR"),
       _kw_value: ($) => kw("VALUE"),

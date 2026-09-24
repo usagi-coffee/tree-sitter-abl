@@ -35,7 +35,7 @@ export default ({ kw }) => ({
       $.__frame_with_identifier,
       seq($._row_keyword, field("row", $.__frame_expression)),
       seq(kw("WIDTH"), field("width", $.__frame_expression)),
-      seq(kw("FONT"), field("font", $.number_literal)),
+      seq($._kw_font, field("font", $.number_literal)),
       seq(kw("CANCEL-BUTTON"), field("cancel_button", $.__frame_identifier)),
       seq(kw("DEFAULT-BUTTON"), field("default_button", $.__frame_identifier)),
       seq(kw("SCROLL"), field("scroll", $.__frame_expression)),
@@ -73,7 +73,7 @@ export default ({ kw }) => ({
       seq(kw("BGCOLOR"), field("title_bgcolor", $.__frame_expression)),
       seq(kw("DCOLOR"), field("title_dcolor", $.__frame_expression)),
       seq(kw("FGCOLOR"), field("title_fgcolor", $.__frame_expression)),
-      seq(kw("FONT"), field("title_font", $.__frame_expression)),
+      seq($._kw_font, field("title_font", $.__frame_expression)),
     ),
   __frame_column_keyword: ($) => choice(kw("COLUMN"), kw("COLUMNS"), kw("COL")),
   // oxlint-disable-next-line tree-sitter-optimize/choice-subset, tree-sitter-optimize/shared-choice

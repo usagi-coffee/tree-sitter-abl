@@ -18,7 +18,7 @@ export default ({ kw }) => ({
 
   __system_dialog_font_body: ($) =>
     seq(
-      kw("FONT"),
+      $._kw_font,
       field("font", $._expression),
       // oxlint-disable-next-line tree-sitter-optimize/recurse
       repeat(
