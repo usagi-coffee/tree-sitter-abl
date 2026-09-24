@@ -494,6 +494,7 @@ export default ({ kw }) => ({
       kw("ERROR"),
       kw("WARNING"),
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-shared-sequence-inline
   _alert_buttons_phrase: ($) =>
     seq(
       kw("BUTTONS", { alias: "BUTTON", offset: 6 }),

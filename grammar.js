@@ -223,6 +223,7 @@ export default grammar({
     $._statement_primary_expression,
     $._type_or_string,
     $._alert_box_title_value,
+    $._alert_buttons_phrase,
     $.__include_file_reference,
     $._format_field_option,
     $._format_label,
