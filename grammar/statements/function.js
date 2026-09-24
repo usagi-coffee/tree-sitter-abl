@@ -8,9 +8,10 @@ export default ({ kw }) => ({
       kw("FUNCTION"),
       $.__function_signature,
       optional($.__function_extent_phrase),
-      optional($.__function_access_parameters_tail),
-      $.__function_compound_body,
+      $.__function_prefix_tail,
     ),
+  __function_prefix_tail: ($) =>
+    seq(optional($.__function_access_parameters_tail), $.__function_compound_body),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __function_access_parameters_tail: ($) =>
     choice(
