@@ -215,7 +215,6 @@ export default grammar({
     $._in_keyword,
     $._except_fields,
     $._as_keyword,
-    $._new_keyword,
     $._initial_value,
     $._object_access_plain_left,
     $._object_access_expression_left,
@@ -479,6 +478,7 @@ export default grammar({
       _of_keyword: ($) => kw("OF"),
       _like_keyword: ($) => kw("LIKE"),
       _row_keyword: ($) => kw("ROW"),
+      // oxlint-disable-next-line tree-sitter-optimize/shared-keyword-inline
       _new_keyword: ($) => kw("NEW"),
       _dataset_keyword: ($) => kw("DATASET"),
       _on_keyword: ($) => kw("ON"),

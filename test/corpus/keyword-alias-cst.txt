@@ -17,3 +17,36 @@ IF wfeven NOT ENTERED THEN RETURN.
 0:22 - 0:26       "THEN"
 0:27 - 0:34       then: return_statement
 0:27 - 0:33         "RETURN"
+
+=========================================
+CST - NEW aliases retain their keyword child
+:cst
+=========================================
+DEFINE NEW SHARED VARIABLE v1 AS INTEGER NO-UNDO.
+{foo.i &p=NEW}
+
+---
+
+0:0  - 2:0    source_code
+0:0  - 0:49     variable_definition
+0:0  - 0:6        "DEFINE"
+0:7  - 0:10       new_modifier
+0:7  - 0:10         "NEW"
+0:11 - 0:17       scope_modifier `SHARED`
+0:18 - 0:26       "VARIABLE"
+0:27 - 0:29       name: identifier `v1`
+0:30 - 0:32       "AS"
+0:33 - 0:40       type: identifier `INTEGER`
+0:41 - 0:48       no_undo
+0:41 - 0:48         "NO-UNDO"
+1:0  - 1:14     include_file_reference
+1:0  - 1:1        "{"
+1:1  - 1:6        file: include_file_path
+1:1  - 1:6          identifier `foo.i`
+1:7  - 1:13       argument: include_argument
+1:7  - 1:8          "&"
+1:8  - 1:9          name: identifier `p`
+1:9  - 1:10         "="
+1:10 - 1:13         value: identifier
+1:10 - 1:13           "NEW"
+1:13 - 1:14       "}"
