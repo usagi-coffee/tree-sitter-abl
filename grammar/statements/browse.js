@@ -33,7 +33,7 @@ export default ({ kw }) => ({
       $.__browse_flag_option,
       seq(kw("TOOLTIP"), field("tooltip", $.__browse_option_expression)),
       seq($._kw_bgcolor, field("bgcolor", $.__browse_option_expression)),
-      seq(kw("DCOLOR"), field("dcolor", $.__browse_option_expression)),
+      seq($._kw_dcolor, field("dcolor", $.__browse_option_expression)),
       seq(kw("FGCOLOR"), field("fgcolor", $.__browse_option_expression)),
       seq($._kw_font, field("font", $.__browse_option_expression)),
       seq(kw("PFCOLOR"), field("pfcolor", $.__browse_option_expression)),

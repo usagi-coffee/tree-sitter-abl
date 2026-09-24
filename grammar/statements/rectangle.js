@@ -19,7 +19,7 @@ export default ({ kw }) => ({
       seq(kw("EDGE-CHARS"), field("edge_chars", $._expression)),
       seq(kw("EDGE-PIXELS"), field("edge_pixels", $._expression)),
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
-      seq(kw("DCOLOR"), field("dcolor", $._expression)),
+      seq($._kw_dcolor, field("dcolor", $._expression)),
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
       seq($._kw_bgcolor, field("bgcolor", $._expression)),
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence

@@ -44,7 +44,7 @@ export default ({ kw }) => ({
       seq(kw("CONTEXT-HELP-FILE"), field("context_help_file", $.__frame_expression)),
       seq($._in_keyword, kw("WINDOW"), field("window", $.__frame_identifier)),
       seq($._kw_bgcolor, field("bgcolor", $.__frame_expression)),
-      seq(kw("DCOLOR"), field("dcolor", $.__frame_expression)),
+      seq($._kw_dcolor, field("dcolor", $.__frame_expression)),
       seq(kw("FGCOLOR"), field("fgcolor", $.__frame_expression)),
       seq(kw("PFCOLOR"), field("pfcolor", $.__frame_expression)),
       seq(
@@ -71,7 +71,7 @@ export default ({ kw }) => ({
   _frame_title_option: ($) =>
     choice(
       seq($._kw_bgcolor, field("title_bgcolor", $.__frame_expression)),
-      seq(kw("DCOLOR"), field("title_dcolor", $.__frame_expression)),
+      seq($._kw_dcolor, field("title_dcolor", $.__frame_expression)),
       seq(kw("FGCOLOR"), field("title_fgcolor", $.__frame_expression)),
       seq($._kw_font, field("title_font", $.__frame_expression)),
     ),
