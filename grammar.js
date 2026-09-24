@@ -692,6 +692,7 @@ export default grammar({
           "[",
           field("index", $._array_subscript),
         ),
+      // oxlint-disable-next-line tree-sitter-optimize/single-use-shared-choice-inline
       _array_subscript: ($) =>
         choice(
           $._expressions,
