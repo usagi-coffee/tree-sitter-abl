@@ -7,6 +7,7 @@ import {
   recursiveItemExtraction,
   recursiveChoiceItemExtraction,
   optionalBlockBodyExtraction,
+  commonSuffixHeadExtraction,
   forwardedAliasReuse,
   closingDelimiterHoist,
   choiceProductExtraction,
@@ -146,6 +147,35 @@ new RuleTester().run("optional-block-body-extraction", optionalBlockBodyExtracti
       name: "named body helper with enclosing precedence",
       code: `export default () => ({ _block: ($) => prec.right(seq("DO", optional($.a), optional($.b), $.__loop_body)) });`,
       errors: [{ message: /two optional clauses and required __loop_body/ }],
+    },
+  ],
+});
+
+const formItemSuffix = `optional(repeat1(choice($.at_phrase, seq(kw("TO"), field("to", $._expression)), $.display_option)))`;
+new RuleTester().run("common-suffix-head-extraction", commonSuffixHeadExtraction, {
+  valid: [
+    `export default () => ({ item: ($) => seq($.__head, ${formItemSuffix}), __head: ($) => choice($.macro, field("value", $.string)) });`,
+    `export default () => ({ item: ($) => choice(seq($.a, ${formItemSuffix}), $.other, seq($.b, ${formItemSuffix})) });`,
+    `export default () => ({ item: ($) => choice(seq(optional($.a), ${formItemSuffix}), seq($.b, ${formItemSuffix})) });`,
+    `export default () => ({ item: ($) => choice(seq(field("value", optional($.a)), ${formItemSuffix}), seq($.b, ${formItemSuffix})) });`,
+    `export default () => ({ item: ($) => choice(seq($.a, optional(field("left", $.value))), seq($.b, optional(field("right", $.value)))) });`,
+    `export default () => ({ item: ($) => choice(seq($.a, $.tail), seq($.b, $.tail)) });`,
+    `export default () => ({ item: ($) => token(choice(seq("A", optional(repeat1("x"))), seq("B", optional(repeat1("x"))))) });`,
+    `export default () => ({ item: ($) =>
+      // oxlint-disable-next-line rule-to-test/common-suffix-head-extraction
+      choice(seq($.a, ${formItemSuffix}), seq($.b, ${formItemSuffix})),
+    });`,
+  ],
+  invalid: [
+    {
+      name: "FRAME macro and literal alternatives share their complete suffix",
+      code: `export default () => ({ item: ($) => choice(seq($.preprocessor_name, ${formItemSuffix}), seq(field("value", $.string_literal), ${formItemSuffix}), seq(field("value", $.number_literal), ${formItemSuffix})) });`,
+      errors: [
+        {
+          message:
+            /Adjacent sequence alternatives have different heads and an exact compound suffix/,
+        },
+      ],
     },
   ],
 });
