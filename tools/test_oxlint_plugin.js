@@ -6,6 +6,7 @@ import {
   recursiveItemInline,
   recursiveItemExtraction,
   recursiveChoiceItemExtraction,
+  optionalBlockBodyExtraction,
   forwardedAliasReuse,
   closingDelimiterHoist,
   choiceProductExtraction,
@@ -120,6 +121,31 @@ new RuleTester().run("recursive-choice-item-extraction", recursiveChoiceItemExtr
       name: "unwrapped recursive choices are candidates too",
       code: `export default () => ({ _options: ($) => seq(${recursiveChoiceItem}, optional($._options)) });`,
       errors: [{ message: /_options repeats a compound choice before optional self-recursion/ }],
+    },
+  ],
+});
+
+new RuleTester().run("optional-block-body-extraction", optionalBlockBodyExtraction, {
+  valid: [
+    `export default () => ({ _block: ($) => seq(optional($.options), optional($.stream), $.body) });`,
+    `export default () => ({ _block: ($) => seq("FOR", $.record, optional($.options), $.body) });`,
+    `export default () => ({ _block: ($) => seq("FOR", optional($.options), optional($.stream), optional($.body)) });`,
+    `export default () => ({ _block: ($) => seq("FOR", optional($.options), optional($.stream), $._terminator) });`,
+    `export default () => ({
+      // oxlint-disable-next-line rule-to-test/optional-block-body-extraction
+      _block: ($) => seq("FOR", optional($.options), optional($.stream), $.body),
+    });`,
+  ],
+  invalid: [
+    {
+      name: "FOR block options and stream clause before required body",
+      code: `export default () => ({ __for_body: ($) => seq($._for_keyword, $.__for_record_or_variables, optional($.__for_while_transaction_tail), optional($._block_options), optional($.__for_with_stream_io_phrase), $.body) });`,
+      errors: [{ message: /two optional clauses and required body/ }],
+    },
+    {
+      name: "named body helper with enclosing precedence",
+      code: `export default () => ({ _block: ($) => prec.right(seq("DO", optional($.a), optional($.b), $.__loop_body)) });`,
+      errors: [{ message: /two optional clauses and required __loop_body/ }],
     },
   ],
 });
