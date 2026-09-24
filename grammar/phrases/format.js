@@ -153,6 +153,7 @@ export default ({ kw }) => ({
       ),
     ),
 
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-shared-choice-inline
   _format_label: ($) => choice(seq(kw("LABEL"), $._format_labels), kw("NO-LABELS")),
   _format_labels: ($) => seq(field("label", $._expression), optional(seq(",", $._format_labels))),
 
