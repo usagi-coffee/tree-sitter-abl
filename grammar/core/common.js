@@ -314,6 +314,7 @@ export default ({ kw }) => ({
         optional($._table_options),
       ),
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-shared-choice-inline
   _table_field_type: ($) =>
     choice(
       $._as_type_name_phrase,
