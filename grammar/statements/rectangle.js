@@ -21,7 +21,7 @@ export default ({ kw }) => ({
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
       seq(kw("DCOLOR"), field("dcolor", $._expression)),
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
-      seq(kw("BGCOLOR"), field("bgcolor", $._expression)),
+      seq($._kw_bgcolor, field("bgcolor", $._expression)),
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
       seq(kw("FGCOLOR"), field("fgcolor", $._expression)),
       alias(kw("GRAPHIC-EDGE"), $.graphic_edge),

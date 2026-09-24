@@ -96,7 +96,7 @@ export default ({ kw }) => ({
     ),
   __prompt_for_constant_style_after_fgcolor: ($) =>
     choice(
-      seq(kw("BGCOLOR"), field("bgcolor", $._expression), optional($.__prompt_for_font_option)),
+      seq($._kw_bgcolor, field("bgcolor", $._expression), optional($.__prompt_for_font_option)),
       $.__prompt_for_font_option,
     ),
   // oxlint-disable-next-line tree-sitter-optimize/shared-sequence, tree-sitter-optimize/sequence-subset

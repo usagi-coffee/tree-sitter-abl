@@ -32,7 +32,7 @@ export default ({ kw }) => ({
       seq(kw("CONTEXT-HELP-ID"), field("context_help_id", $.__browse_option_expression)),
       $.__browse_flag_option,
       seq(kw("TOOLTIP"), field("tooltip", $.__browse_option_expression)),
-      seq(kw("BGCOLOR"), field("bgcolor", $.__browse_option_expression)),
+      seq($._kw_bgcolor, field("bgcolor", $.__browse_option_expression)),
       seq(kw("DCOLOR"), field("dcolor", $.__browse_option_expression)),
       seq(kw("FGCOLOR"), field("fgcolor", $.__browse_option_expression)),
       seq($._kw_font, field("font", $.__browse_option_expression)),

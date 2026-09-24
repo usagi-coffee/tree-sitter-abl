@@ -16,7 +16,7 @@ export default ({ kw }) => ({
   _format_field_option: ($) =>
     choice(
       $._as_like,
-      seq(kw("BGCOLOR"), field("bgcolor", $.__format_expression)),
+      seq($._kw_bgcolor, field("bgcolor", $.__format_expression)),
       $._format_colon_to,
       seq(kw("COLUMN-LABEL"), field("column_label", $.__format_expression)),
       seq(kw("DCOLOR"), field("dcolor", $.__format_expression)),

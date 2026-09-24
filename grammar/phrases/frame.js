@@ -43,7 +43,7 @@ export default ({ kw }) => ({
       seq(kw("WIDGET-ID"), field("widget_id", $.__frame_expression)),
       seq(kw("CONTEXT-HELP-FILE"), field("context_help_file", $.__frame_expression)),
       seq($._in_keyword, kw("WINDOW"), field("window", $.__frame_identifier)),
-      seq(kw("BGCOLOR"), field("bgcolor", $.__frame_expression)),
+      seq($._kw_bgcolor, field("bgcolor", $.__frame_expression)),
       seq(kw("DCOLOR"), field("dcolor", $.__frame_expression)),
       seq(kw("FGCOLOR"), field("fgcolor", $.__frame_expression)),
       seq(kw("PFCOLOR"), field("pfcolor", $.__frame_expression)),
@@ -70,7 +70,7 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/single-use-shared-choice-inline
   _frame_title_option: ($) =>
     choice(
-      seq(kw("BGCOLOR"), field("title_bgcolor", $.__frame_expression)),
+      seq($._kw_bgcolor, field("title_bgcolor", $.__frame_expression)),
       seq(kw("DCOLOR"), field("title_dcolor", $.__frame_expression)),
       seq(kw("FGCOLOR"), field("title_fgcolor", $.__frame_expression)),
       seq($._kw_font, field("title_font", $.__frame_expression)),
