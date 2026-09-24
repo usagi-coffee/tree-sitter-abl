@@ -547,6 +547,7 @@ export default grammar({
           optional($.widget_phrase),
         ),
 
+      // oxlint-disable-next-line tree-sitter-optimize/single-use-shared-choice-inline
       _assignment_value: ($) => choice($.array_initializer, $._expression),
       _assignable: ($) =>
         choice(
