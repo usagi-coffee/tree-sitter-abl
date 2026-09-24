@@ -218,6 +218,7 @@ export default grammar({
     $._alert_box_title_value,
     $.__include_file_reference,
     $._format_field_option,
+    $._format_label,
     $._comparison_operator_no_eq,
     $._simple_type_name,
     $._identifier_or_string_literal,
