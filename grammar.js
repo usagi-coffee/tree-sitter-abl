@@ -213,6 +213,7 @@ export default grammar({
     $._kw_dcolor,
     $._kw_data_source,
     $._kw_fgcolor,
+    $._kw_interface,
     $._kw_except,
     $._kw_font,
     $._kw_input,
@@ -512,6 +513,7 @@ export default grammar({
       _kw_dcolor: ($) => kw("DCOLOR"),
       _kw_data_source: ($) => kw("DATA-SOURCE"),
       _kw_fgcolor: ($) => kw("FGCOLOR"),
+      _kw_interface: ($) => kw("INTERFACE"),
       _kw_except: ($) => kw("EXCEPT"),
       _kw_font: ($) => kw("FONT"),
       _kw_input: ($) => kw("INPUT"),
@@ -557,7 +559,7 @@ export default grammar({
           $.identifier,
           $.qualified_name,
           alias($._procedure_keyword, $.identifier),
-          alias(kw("INTERFACE"), $.identifier),
+          alias($._kw_interface, $.identifier),
         ),
       // BUFFER and TABLE-HANDLE can be identifiers in assignments, receivers,
       // and unnamed arguments, as well as parameter and handle-type markers.
@@ -730,7 +732,7 @@ export default grammar({
           $.macro_concatenated_name,
           $.identifier,
           $.preprocessor_name,
-          alias(kw("INTERFACE"), $.identifier),
+          alias($._kw_interface, $.identifier),
         ),
 
       nested_type_name: ($) => seq(field("left", $._nested_type_left), $.__nested_type_tail),

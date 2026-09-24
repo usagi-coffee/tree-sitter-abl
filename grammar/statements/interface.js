@@ -2,7 +2,7 @@ export default ({ kw }) => ({
   interface_definition: ($) => seq($.__interface_prefix, $._terminator),
 
   // oxlint-disable-next-line tree-sitter-optimize/single-use-keyword-sequence
-  __interface_prefix: ($) => seq(kw("INTERFACE"), $.__interface_body),
+  __interface_prefix: ($) => seq($._kw_interface, $.__interface_body),
 
   __interface_body: ($) =>
     seq(
@@ -19,7 +19,7 @@ export default ({ kw }) => ({
       choice(alias($._colon, ":"), $._terminator_dot),
       optional($.__interface_body_items),
       $._end_keyword,
-      optional(kw("INTERFACE")),
+      optional($._kw_interface),
     ),
 
   __interface_body_items: ($) =>
