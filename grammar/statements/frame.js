@@ -61,36 +61,7 @@ export default ({ kw }) => ({
         optional(alias($.__frame_field_format_phrase, $.format_phrase)),
       ),
       seq(
-        $.preprocessor_name,
-        optional(
-          // oxlint-disable-next-line tree-sitter-optimize/recurse
-          repeat1(
-            choice(
-              $.at_phrase,
-              // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
-              seq($._to_keyword, field("to", $._expression)),
-              $.__frame_display_option,
-            ),
-          ),
-        ),
-      ),
-      seq(
-        field("value", $.string_literal),
-        optional(
-          // oxlint-disable-next-line tree-sitter-optimize/recurse
-          repeat1(
-            // oxlint-disable-next-line tree-sitter-optimize/alternative-extraction
-            choice(
-              $.at_phrase,
-              // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
-              seq($._to_keyword, field("to", $._expression)),
-              $.__frame_display_option,
-            ),
-          ),
-        ),
-      ),
-      seq(
-        field("value", $.number_literal),
+        $.__frame_literal_form_item,
         optional(
           // oxlint-disable-next-line tree-sitter-optimize/recurse
           repeat1(
@@ -105,6 +76,8 @@ export default ({ kw }) => ({
         ),
       ),
     ),
+  __frame_literal_form_item: ($) =>
+    choice($.preprocessor_name, field("value", $.string_literal), field("value", $.number_literal)),
   __frame_display_option: ($) =>
     choice(
       $._color_font_option,
