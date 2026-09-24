@@ -45,7 +45,7 @@ export default ({ kw }) => ({
       seq($._in_keyword, kw("WINDOW"), field("window", $.__frame_identifier)),
       seq($._kw_bgcolor, field("bgcolor", $.__frame_expression)),
       seq($._kw_dcolor, field("dcolor", $.__frame_expression)),
-      seq(kw("FGCOLOR"), field("fgcolor", $.__frame_expression)),
+      seq($._kw_fgcolor, field("fgcolor", $.__frame_expression)),
       seq(kw("PFCOLOR"), field("pfcolor", $.__frame_expression)),
       seq(
         kw("COLOR"),
@@ -72,7 +72,7 @@ export default ({ kw }) => ({
     choice(
       seq($._kw_bgcolor, field("title_bgcolor", $.__frame_expression)),
       seq($._kw_dcolor, field("title_dcolor", $.__frame_expression)),
-      seq(kw("FGCOLOR"), field("title_fgcolor", $.__frame_expression)),
+      seq($._kw_fgcolor, field("title_fgcolor", $.__frame_expression)),
       seq($._kw_font, field("title_font", $.__frame_expression)),
     ),
   __frame_column_keyword: ($) => choice(kw("COLUMN"), kw("COLUMNS"), kw("COL")),

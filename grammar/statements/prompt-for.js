@@ -88,7 +88,7 @@ export default ({ kw }) => ({
   __prompt_for_constant_style_tail: ($) =>
     choice(
       seq(
-        kw("FGCOLOR"),
+        $._kw_fgcolor,
         field("fgcolor", $._expression),
         optional($.__prompt_for_constant_style_after_fgcolor),
       ),

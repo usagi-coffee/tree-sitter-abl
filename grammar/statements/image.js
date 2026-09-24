@@ -16,7 +16,7 @@ export default ({ kw }) => ({
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
       seq($._kw_bgcolor, field("bgcolor", $._expression)),
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
-      seq(kw("FGCOLOR"), field("fgcolor", $._expression)),
+      seq($._kw_fgcolor, field("fgcolor", $._expression)),
       alias(kw("CONVERT-3D-COLORS"), $.convert_3d_colors),
       seq(kw("TOOLTIP"), field("tooltip", $._identifier_or_string_literal)),
       seq(

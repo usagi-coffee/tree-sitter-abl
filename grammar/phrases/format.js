@@ -20,7 +20,7 @@ export default ({ kw }) => ({
       $._format_colon_to,
       seq(kw("COLUMN-LABEL"), field("column_label", $.__format_expression)),
       seq($._kw_dcolor, field("dcolor", $.__format_expression)),
-      seq(kw("FGCOLOR"), field("fgcolor", $.__format_expression)),
+      seq($._kw_fgcolor, field("fgcolor", $.__format_expression)),
       seq($._kw_font, field("font", $.__format_expression)),
       $._format_format,
       seq($._help_keyword, field("help", $.__format_expression)),
