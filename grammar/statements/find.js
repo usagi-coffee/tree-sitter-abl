@@ -27,7 +27,7 @@ export default ({ kw }) => ({
       ),
     ),
 
-  // oxlint-disable-next-line tree-sitter-optimize/body-extraction
+  // oxlint-disable-next-line tree-sitter-optimize/body-extraction, tree-sitter-optimize/single-use-shared-choice-inline
   _find_record_option: ($) =>
     choice(
       $._lock_option,
