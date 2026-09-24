@@ -51,6 +51,7 @@ import {
   recursiveBodyReuse,
   singleUsePrecedence,
   singleUseChoice,
+  singleUseSharedChoiceInline,
   forwardingRule,
   choiceSubset,
   singleUseSequence,
@@ -1109,6 +1110,29 @@ new RuleTester().run("single-use-choice", singleUseChoice, {
       name: "alternative precedence remains inside the inlined choice",
       code: `export default () => ({ __item: ($) => choice(prec.left(1, $.a), $.b), root: ($) => optional($.__item) });`,
       errors: [{ message: /__item has one unaliased local use in root/ }],
+    },
+  ],
+});
+
+new RuleTester().run("single-use-shared-choice-inline", singleUseSharedChoiceInline, {
+  valid: [
+    `export default () => ({ _value: ($) => choice($.a, $.b), first: ($) => $._value, second: ($) => $._value });`,
+    `export default () => ({ _value: ($) => choice($.a, $.b), first: ($) => alias($._value, $.value) });`,
+    `export default () => ({ __value: ($) => choice($.a, $.b), first: ($) => $.__value });`,
+    `export default () => ({ value: ($) => choice($.a, $.b), first: ($) => $.value });`,
+    `export default grammar({ inline: ($) => [$._value], rules: { _value: ($) => choice($.a, $.b), first: ($) => $._value } });`,
+    `export default grammar({ conflicts: ($) => [[$._value, $.other]], rules: { _value: ($) => choice($.a, $.b), first: ($) => $._value } });`,
+    `export default () => ({
+      // oxlint-disable-next-line rule-to-test/single-use-shared-choice-inline
+      _value: ($) => choice($.a, $.b),
+      first: ($) => $._value,
+    });`,
+  ],
+  invalid: [
+    {
+      name: "one local use suggests metadata inlining",
+      code: `export default () => ({ _initial_value: ($) => choice($._expression, seq($._array_initializer_prefix, "]")), _initial_phrase: ($) => field("initial", $._initial_value) });`,
+      errors: [{ message: /_initial_value has one unaliased local use in _initial_phrase/ }],
     },
   ],
 });

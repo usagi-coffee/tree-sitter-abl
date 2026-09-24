@@ -76,6 +76,7 @@
         "tree-sitter-optimize/optional-body-extraction": "warn",
         "tree-sitter-optimize/prefix-extraction": "warn",
         "tree-sitter-optimize/single-use-choice": "warn",
+        "tree-sitter-optimize/single-use-shared-choice-inline": "warn",
         "tree-sitter-optimize/recurse": "warn",
         "tree-sitter-optimize/shared-sequence": "warn",
         "tree-sitter-optimize/shared-recursion": "warn",
