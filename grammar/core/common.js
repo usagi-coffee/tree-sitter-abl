@@ -128,8 +128,7 @@ export default ({ kw }) => ({
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence, tree-sitter-optimize/shared-choice
       seq(choice(kw("MENU"), kw("SUB-MENU")), field("menu", $.__widget_name)),
     ),
-  // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
-  // oxlint-disable-next-line tree-sitter-optimize/shared-keyword-field-inline
+  // oxlint-disable-next-line tree-sitter-optimize/shared-sequence, tree-sitter-optimize/shared-keyword-field-inline
   _frame_identifier_phrase: ($) => seq(kw("FRAME", { offset: 4 }), field("frame", $.identifier)),
   // oxlint-disable-next-line tree-sitter-optimize/body-extraction
   _color_font_option: ($) =>
@@ -525,8 +524,7 @@ export default ({ kw }) => ({
       ),
     ),
   __unquoted_format: ($) => token(/[0-9]+(?:\/[0-9]+)+/),
-  // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
-  // oxlint-disable-next-line tree-sitter-optimize/shared-keyword-field-inline
+  // oxlint-disable-next-line tree-sitter-optimize/shared-sequence, tree-sitter-optimize/shared-keyword-field-inline
   _tooltip_phrase: ($) => seq(kw("TOOLTIP"), field("tooltip", $._expression)),
   _lock_option: ($) =>
     choice(
@@ -554,7 +552,7 @@ export default ({ kw }) => ({
     ),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-keyword-sequence
   __return_error_clause: ($) => seq(kw("ERROR"), optional(field("error_value", $._expression))),
-  // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
+  // oxlint-disable-next-line tree-sitter-optimize/shared-sequence, tree-sitter-optimize/shared-keyword-field-inline
   _when_phrase: ($) => seq(kw("WHEN"), field("when", $._expression)),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-shared-sequence-inline
   _equals_value: ($) => seq("=", field("value", $._expression)),
