@@ -206,6 +206,7 @@ export default grammar({
     [$.__temp_table_modifier, $._member_access_modifier],
   ],
   inline: ($) => [
+    $._table_handle_value,
     $._parenthesized_value,
     $._display_space_phrase,
     $._serialization_modifier,
