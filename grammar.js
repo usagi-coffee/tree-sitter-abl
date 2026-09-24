@@ -206,6 +206,7 @@ export default grammar({
     [$.__temp_table_modifier, $._member_access_modifier],
   ],
   inline: ($) => [
+    $._procedure_keyword,
     $._list_item_pairs_phrase,
     $._list_items_phrase,
     $._table_handle_value,
@@ -488,6 +489,7 @@ export default grammar({
       _at_keyword: ($) => kw("AT"),
       _using_keyword: ($) => kw("USING"),
       _help_keyword: ($) => kw("HELP"),
+      _procedure_keyword: ($) => kw("PROCEDURE", { offset: 4 }),
       _delete_keyword: ($) => kw("DELETE"),
       _close_keyword: ($) => kw("CLOSE"),
       _with_keyword: ($) => kw("WITH"),
@@ -522,7 +524,7 @@ export default grammar({
           $.macro_concatenated_name,
           $.identifier,
           $.qualified_name,
-          alias(kw("PROCEDURE", { offset: 4 }), $.identifier),
+          alias($._procedure_keyword, $.identifier),
           alias(kw("INTERFACE"), $.identifier),
         ),
       // BUFFER and TABLE-HANDLE can be identifiers in assignments, receivers,
@@ -856,10 +858,7 @@ export default grammar({
       __dash_name: ($) => token(/-[\p{L}][\p{L}\p{N}_\-&#%$!]*/i),
 
       _unquoted_name_initial: ($) =>
-        choice(
-          alias($.__symbolic_name, $.identifier),
-          alias($.__numeric_name, $.identifier),
-        ),
+        choice(alias($.__symbolic_name, $.identifier), alias($.__numeric_name, $.identifier)),
       _routine_name_initial: ($) =>
         choice($._unquoted_name_initial, alias($.__dash_name, $.identifier)),
       system_handle_identifier: ($) =>

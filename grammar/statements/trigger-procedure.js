@@ -4,7 +4,7 @@ export default ({ kw }) => ({
   __trigger_procedure_prefix: ($) =>
     seq(
       kw("TRIGGER"),
-      kw("PROCEDURE", { offset: 4 }),
+      $._procedure_keyword,
       $._for_keyword,
       choice(
         // Simple events: CREATE, DELETE, FIND, REPLICATION-CREATE, etc.

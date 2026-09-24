@@ -5,10 +5,7 @@ export default ({ kw }) => ({
     seq(
       kw("SUBSCRIBE"),
       optional(
-        seq(
-          kw("PROCEDURE", { offset: 4 }),
-          field("subscriber", $._string_or_identifier_access_or_call),
-        ),
+        seq($._procedure_keyword, field("subscriber", $._string_or_identifier_access_or_call)),
       ),
       optional($._to_keyword),
       field("event", $._string_or_identifier_access_or_call),

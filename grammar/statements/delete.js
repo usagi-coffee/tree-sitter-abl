@@ -31,7 +31,7 @@ export default ({ kw }) => ({
 
   // oxlint-disable-next-line tree-sitter-optimize/single-use-keyword-sequence
   __delete_procedure_prefix: ($) =>
-    seq($._delete_keyword, kw("PROCEDURE", { offset: 4 }), field("handle", $._expression)),
+    seq($._delete_keyword, $._procedure_keyword, field("handle", $._expression)),
 
   delete_widget_statement: ($) => seq($.__delete_widget_prefix, $._no_error_terminator),
 
