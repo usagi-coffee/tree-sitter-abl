@@ -855,6 +855,7 @@ export default grammar({
             seq($._namedoublecolon, field("member", alias($._identifier_immediate, $.identifier))),
           ),
         ),
+      // oxlint-disable-next-line tree-sitter-optimize/single-use-shared-choice-inline
       _object_access_separator: ($) => choice($._namecolon, token.immediate("?:")),
       // oxlint-disable-next-line tree-sitter-optimize/choice-subset
       _identifier_or_string_literal: ($) => choice($.identifier, $.string_literal),
