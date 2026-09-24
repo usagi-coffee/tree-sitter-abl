@@ -245,6 +245,7 @@ export default grammar({
     $.__preprocessor_name_value,
     $._identifier_or_access_or_call,
     $._format_validate,
+    $._collate_body,
     $._identifier_or_access,
     $.__format_radio_set_value,
     $._format_format,
