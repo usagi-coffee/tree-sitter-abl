@@ -76,6 +76,7 @@ export default ({ kw }) => ({
         ),
       ),
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __frame_literal_form_item: ($) =>
     choice($.preprocessor_name, field("value", $.string_literal), field("value", $.number_literal)),
   __frame_display_option: ($) =>
