@@ -171,6 +171,7 @@ export default ({ kw }) => ({
         optional(alias(seq("@", field("base", $._identifier_or_qualified_name)), $.base_field)),
       ),
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
   __browse_column_view_as: ($) => seq(kw("VIEW-AS"), field("widget", kw("TOGGLE-BOX"))),
 
   __browse_option_expression: ($) => prec.right($._expression),

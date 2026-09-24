@@ -84,6 +84,7 @@ export default ({ kw }) => ({
     choice(
       $._color_font_option,
       $.size_phrase,
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       seq(kw("VIEW-AS"), alias(kw("TEXT"), $.text)),
       seq(kw("WIDGET-ID"), field("widget_id", $._expression)),
     ),

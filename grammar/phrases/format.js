@@ -221,6 +221,7 @@ export default ({ kw }) => ({
   _format_view_as: ($) =>
     prec.right(
       seq(
+        // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
         kw("VIEW-AS"),
         choice(
           seq(kw("TEXT"), optional($.__format_view_as_tail)),

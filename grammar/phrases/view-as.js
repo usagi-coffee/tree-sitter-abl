@@ -1,6 +1,7 @@
 export default ({ kw }) => ({
   view_as_phrase: ($) =>
     seq(
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       kw("VIEW-AS"),
       choice(
         $.combo_box_phrase,

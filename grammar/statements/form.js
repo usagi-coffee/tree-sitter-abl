@@ -56,6 +56,7 @@ export default ({ kw }) => ({
     ),
   __form_view_as: ($) =>
     seq(
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       kw("VIEW-AS"),
       choice(
         field("widget", $.identifier),

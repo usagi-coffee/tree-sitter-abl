@@ -58,6 +58,7 @@ export default ({ kw }) => ({
         seq(field("column", $.number_literal), $.__frame_column_keyword),
         seq($.__frame_column_keyword, field("column", $.__frame_expression)),
       ),
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(seq(kw("VIEW-AS"), field("widget", kw("DIALOG-BOX"))), $.view_as_phrase),
       $.down,
       prec.left(

@@ -40,6 +40,7 @@ export default ({ kw }) => ({
     prec.right(seq($.__message_expression, optional($.__message_expressions))),
 
   __message_view_as_phrase: ($) =>
+    // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
     seq(kw("VIEW-AS"), kw("ALERT-BOX"), optional($._alert_box_options)),
 
   __message_skip_item: ($) =>
