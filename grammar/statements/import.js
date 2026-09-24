@@ -14,7 +14,7 @@ export default ({ kw }) => ({
     seq(
       optional($.delimiter_phrase),
       $.__import_fields,
-      optional(seq(kw("EXCEPT"), $._import_export_except_names)),
+      optional(seq($._kw_except, $._import_export_except_names)),
     ),
   __import_fields: ($) =>
     prec.right(

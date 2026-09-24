@@ -16,7 +16,7 @@ export default ({ kw }) => ({
       // oxlint-disable-next-line tree-sitter-optimize/shared-choice
       field("name", choice($.identifier, $.preprocessor_name)),
       choice(
-        seq(field("record", $._identifier_or_qualified_name), kw("EXCEPT"), $._field_references),
+        seq(field("record", $._identifier_or_qualified_name), $._kw_except, $._field_references),
         optional($.__frame_form_items),
       ),
       optional($.__frame_header_section),

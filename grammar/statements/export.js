@@ -14,5 +14,5 @@ export default ({ kw }) => ({
       alias(kw("NO-LOBS"), $.no_lobs),
     ),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-keyword-sequence
-  __export_except_phrase: ($) => seq(kw("EXCEPT"), $._import_export_except_names),
+  __export_except_phrase: ($) => seq($._kw_except, $._import_export_except_names),
 });

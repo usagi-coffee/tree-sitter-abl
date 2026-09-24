@@ -33,7 +33,7 @@ export default ({ kw }) => ({
       optional(
         // oxlint-disable-next-line tree-sitter-optimize/list-head-extraction
         seq(
-          kw("EXCEPT"),
+          $._kw_except,
           field("field", $._identifier_or_qualified_name),
           optional($.__assign_except_field_tail),
         ),

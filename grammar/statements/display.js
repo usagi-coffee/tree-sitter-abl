@@ -42,7 +42,7 @@ export default ({ kw }) => ({
     choice(
       seq(
         field("record", $._identifier_or_qualified_name),
-        optional(seq(kw("EXCEPT"), $._except_name_list)),
+        optional(seq($._kw_except, $._except_name_list)),
       ),
       $.__display_items_tail,
     ),

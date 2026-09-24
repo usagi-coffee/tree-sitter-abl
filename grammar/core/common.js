@@ -46,7 +46,7 @@ export default ({ kw }) => ({
     seq(field("handle", $._identifier_or_array_access), optional($._in_widget_pool)),
 
   // oxlint-disable-next-line tree-sitter-optimize/single-use-shared-sequence-inline
-  _except_fields: ($) => seq(kw("EXCEPT"), $._except_field_names),
+  _except_fields: ($) => seq($._kw_except, $._except_field_names),
   _field_names: ($) =>
     seq($._identifier_or_qualified_name, optional(seq(optional(","), $._field_names))),
   // oxlint-disable-next-line tree-sitter-optimize/shared-keyword-field-inline

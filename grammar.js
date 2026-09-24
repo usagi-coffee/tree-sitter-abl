@@ -206,6 +206,7 @@ export default grammar({
     [$.__temp_table_modifier, $._member_access_modifier],
   ],
   inline: ($) => [
+    $._kw_except,
     $._kw_input,
     $._procedure_keyword,
     $._list_item_pairs_phrase,
@@ -490,6 +491,7 @@ export default grammar({
       _at_keyword: ($) => kw("AT"),
       _using_keyword: ($) => kw("USING"),
       _help_keyword: ($) => kw("HELP"),
+      _kw_except: ($) => kw("EXCEPT"),
       _kw_input: ($) => kw("INPUT"),
       _procedure_keyword: ($) => kw("PROCEDURE", { offset: 4 }),
       _delete_keyword: ($) => kw("DELETE"),
