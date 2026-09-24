@@ -877,6 +877,7 @@ export default grammar({
       _identifier_or_string_literal: ($) => choice($.identifier, $.string_literal),
       _value_expression: ($) => seq($._value_expression_opener, ")"),
       _aliased_value_expression: ($) => alias($._value_expression, $.value_expression),
+      // oxlint-disable-next-line tree-sitter-optimize/single-use-shared-sequence-inline
       _value_expression_opener: ($) => seq(kw("VALUE"), "(", field("value", $._expression)),
       // oxlint-disable-next-line tree-sitter-optimize/single-use-shared-choice-inline
       _terminator: ($) => choice($._terminator_dot, ";"),
