@@ -207,6 +207,7 @@ export default grammar({
   ],
   inline: ($) => [
     $._serialization_modifier,
+    $._routine_access_modifier,
     $._position_length,
     $._not_keyword,
     $._for_keyword,
