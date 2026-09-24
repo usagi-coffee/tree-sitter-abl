@@ -7,6 +7,7 @@ export default ({ kw }) => ({
     seq(
       kw("SET"),
       optional($._stream_phrase),
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       optional(alias(kw("UNLESS-HIDDEN"), $.unless_hidden)),
     ),
   __set_body: ($) => choice($._set_update_record_body, $.__set_fields_body),

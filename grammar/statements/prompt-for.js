@@ -7,6 +7,7 @@ export default ({ kw }) => ({
     seq(
       kw("PROMPT-FOR"),
       optional($._stream_phrase),
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       optional(alias(kw("UNLESS-HIDDEN"), $.unless_hidden)),
     ),
   __prompt_for_body: ($) => choice($.__prompt_for_fields_body, $.__prompt_for_record_body),

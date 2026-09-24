@@ -8,6 +8,7 @@ export default ({ kw }) => ({
   __update_fields_body: ($) =>
     // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq(
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       optional(alias(kw("UNLESS-HIDDEN"), $.unless_hidden)),
       $.__update_fields,
       optional(alias($._go_on_phrase, $.go_on_phrase)),

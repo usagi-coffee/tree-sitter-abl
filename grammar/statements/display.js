@@ -23,13 +23,16 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __display_stream_frame_tail: ($) =>
     choice(
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       seq(alias(kw("UNLESS-HIDDEN"), $.unless_hidden), $.__display_window_frame_phrases),
       $.__display_window_frame_phrases,
     ),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __display_stream_unless_prefix: ($) =>
     choice(
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       seq($._stream_phrase, optional(alias(kw("UNLESS-HIDDEN"), $.unless_hidden))),
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(kw("UNLESS-HIDDEN"), $.unless_hidden),
     ),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-choice

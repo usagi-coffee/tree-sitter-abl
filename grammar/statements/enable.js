@@ -6,6 +6,7 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __enable_prefix_tail: ($) =>
     choice(
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       seq(alias(kw("UNLESS-HIDDEN"), $.unless_hidden), optional($.__enable_options)),
       $.__enable_options,
     ),

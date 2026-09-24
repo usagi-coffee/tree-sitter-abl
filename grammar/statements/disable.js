@@ -4,6 +4,7 @@ export default ({ kw }) => ({
 
   __disable_body: ($) =>
     seq(
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       optional(alias(kw("UNLESS-HIDDEN"), $.unless_hidden)),
       $.__disable_items,
       optional($.frame_phrase),
