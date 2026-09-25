@@ -5,7 +5,7 @@ export default ({ kw }) => ({
   __close_stored_procedure_body: ($) =>
     // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq(
-      choice(kw("STORED-PROCEDURE"), kw("STORED-PROC")),
+      choice($._kw_stored_procedure, kw("STORED-PROC")),
       field("procedure", $._identifier_or_qualified_name),
       optional($._status),
       optional(
