@@ -7,7 +7,7 @@ export default ({ kw }) => ({
       choice(
         $._kw_button,
         $._kw_browse,
-        kw("COMBO-BOX"),
+        $._kw_combo_box,
         kw("CONTROL-FRAME"),
         kw("DIALOG-BOX"),
         $._kw_editor,

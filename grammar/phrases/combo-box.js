@@ -1,7 +1,7 @@
 export default ({ kw }) => ({
   combo_box_phrase: ($) =>
     seq(
-      field("widget", kw("COMBO-BOX")),
+      field("widget", $._kw_combo_box),
       // oxlint-disable-next-line tree-sitter-optimize/recurse
       repeat(
         choice(
