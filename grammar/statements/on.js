@@ -93,7 +93,7 @@ export default ({ kw }) => ({
   on_statement: ($) =>
     prec.right(
       seq(
-        $._on_keyword,
+        $._kw_on,
         choice(
           seq($.__on_ui_events, $.__on_ui_event_target, $.__on_trigger_action),
           choice(

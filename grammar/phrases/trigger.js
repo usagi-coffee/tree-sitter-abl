@@ -1,12 +1,12 @@
 export default ({ kw }) => ({
   trigger_phrase: ($) =>
-    choice(seq($._kw_triggers, $.__triggers_body), seq($._on_keyword, $.__trigger_event_list)),
+    choice(seq($._kw_triggers, $.__triggers_body), seq($._kw_on, $.__trigger_event_list)),
 
   __triggers_body: ($) =>
     prec.right(seq(":", optional($.__triggers_entries), $._kw_end, optional($._kw_triggers))),
   __triggers_entries: ($) =>
     seq(
-      $._on_keyword,
+      $._kw_on,
       field("event", $.__trigger_event_list),
       // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       optional(alias(kw("ANYWHERE"), $.anywhere)),
