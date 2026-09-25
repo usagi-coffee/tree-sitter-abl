@@ -2,7 +2,7 @@ export default ({ kw }) => ({
   query_definition: ($) => seq($.__query_prefix, $._terminator),
 
   __query_prefix: ($) =>
-    seq($._define_keyword, optional($._buffer_query_modifier), $._kw_query, $.__query_body),
+    seq($._kw_define, optional($._buffer_query_modifier), $._kw_query, $.__query_body),
 
   __query_body: ($) =>
     // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction

@@ -51,7 +51,7 @@ export default ({ kw }) => ({
   __interface_temp_table: ($) =>
     // oxlint-disable-next-line tree-sitter-optimize/optional-body-extraction
     seq(
-      $._define_keyword,
+      $._kw_define,
       // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       kw("TEMP-TABLE"),
       $._table_body,
@@ -59,12 +59,11 @@ export default ({ kw }) => ({
       $._terminator,
     ),
 
-  __interface_dataset: ($) =>
-    seq($._define_keyword, $._dataset_keyword, $._dataset_body, $._terminator),
+  __interface_dataset: ($) => seq($._kw_define, $._dataset_keyword, $._dataset_body, $._terminator),
 
   __interface_event: ($) =>
     seq(
-      $._define_keyword,
+      $._kw_define,
       // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       optional(alias(kw("PUBLIC"), $.access_modifier)),
       $._event_tail,

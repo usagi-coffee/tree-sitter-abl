@@ -15,7 +15,7 @@ export default ({ kw }) => ({
   __enum_definitions: ($) =>
     prec.right(
       seq(
-        seq($._define_keyword, $._kw_enum, $.__enum_members, $._terminator),
+        seq($._kw_define, $._kw_enum, $.__enum_members, $._terminator),
         optional($.__enum_definitions),
       ),
     ),

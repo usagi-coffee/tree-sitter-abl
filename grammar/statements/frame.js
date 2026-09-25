@@ -3,7 +3,7 @@ export default ({ kw }) => ({
 
   __frame_prefix: ($) =>
     seq(
-      $._define_keyword,
+      $._kw_define,
       optional($._definition_scope_modifier),
       // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       kw("FRAME", { offset: 4 }),

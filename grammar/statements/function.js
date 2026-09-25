@@ -32,7 +32,7 @@ export default ({ kw }) => ({
   __function_forward_definition_prefix: ($) =>
     choice(
       seq(
-        $._define_keyword,
+        $._kw_define,
         // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
         kw("FUNCTION"),
         seq($.__function_forward_head, optional($.__function_forward_target)),

@@ -173,7 +173,7 @@ export default ({ kw }) => ({
 
   __class_property_definition_prefix: ($) =>
     seq(
-      $._define_keyword,
+      $._kw_define,
       optional(choice($.__class_property_definition_modifier, $.preprocessor_name)),
       kw("PROPERTY"),
       field("name", $.identifier),

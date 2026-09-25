@@ -233,7 +233,7 @@ export default ({ kw }) => ({
   _kw_to: ($) => kw("TO"),
   // oxlint-disable-next-line tree-sitter-optimize/shared-keyword-inline
   _kw_in: ($) => kw("IN"),
-  _define_keyword: ($) => kw("DEFINE", { offset: 3 }),
+  _kw_define: ($) => kw("DEFINE", { offset: 3 }),
   _end_keyword: ($) => kw("END"),
   _by_keyword: ($) => kw("BY"),
   _as_keyword: ($) => kw("AS"),

@@ -2,7 +2,7 @@ export default ({ kw }) => ({
   menu_definition: ($) => seq($.__menu_prefix, $._terminator),
 
   __menu_prefix: ($) =>
-    seq($._define_keyword, optional($._definition_scope_modifier), $._kw_menu, $.__menu_body),
+    seq($._kw_define, optional($._definition_scope_modifier), $._kw_menu, $.__menu_body),
 
   __menu_body: ($) => seq(field("name", $.identifier), optional($.__menu_options)),
   __menu_options: ($) => prec.right(seq($.__menu_option, optional($.__menu_options))),

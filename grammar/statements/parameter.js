@@ -3,7 +3,7 @@ export default ({ kw }) => ({
 
   __parameter_prefix: ($) =>
     seq(
-      $._define_keyword,
+      $._kw_define,
       choice(
         seq(field("direction", $._kw_return), $._kw_parameter, $.__parameter_standard_body),
         seq(
