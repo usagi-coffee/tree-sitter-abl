@@ -12,7 +12,7 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/single-use-choice, tree-sitter-optimize/optional-tail-choice-collapse
   __radio_set_orientation_size_prefix: ($) =>
     choice(seq($.__radio_set_orientation, optional($.size_phrase)), $.size_phrase),
-  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice, tree-sitter-optimize/optional-tail-choice-collapse
   __radio_set_size_tooltip_tail: ($) =>
     choice(seq($.size_phrase, optional($._tooltip_phrase)), $._tooltip_phrase),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
