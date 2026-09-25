@@ -45,7 +45,7 @@ export default ({ kw }) => ({
       alias(kw("ATTR-SPACE"), $.attr_space),
       // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(kw("NO-ATTR-SPACE"), $.no_attr_space),
-      seq(kw("STREAM-IO"), optional(alias($._equals_value, $.stream_io))),
+      seq($._kw_stream_io, optional(alias($._equals_value, $.stream_io))),
       seq(kw("V6FRAME"), optional(alias($._equals_value, $.v6frame))),
       alias(kw("USE-REVVIDEO"), $.use_revvideo),
       alias(kw("USE-UNDERLINE"), $.use_underline),
