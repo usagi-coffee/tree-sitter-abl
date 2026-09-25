@@ -53,7 +53,7 @@ export default ({ kw }) => ({
       seq($._kw_font, field("font", $.number_literal)),
       seq(kw("CANCEL-BUTTON"), field("cancel_button", $.__frame_identifier)),
       seq(kw("DEFAULT-BUTTON"), field("default_button", $.__frame_identifier)),
-      seq(kw("SCROLL"), field("scroll", $.__frame_expression)),
+      seq($._kw_scroll, field("scroll", $.__frame_expression)),
       seq($._kw_retain, field("retain", $.__frame_expression)),
       seq($._kw_widget_id, field("widget_id", $.__frame_expression)),
       seq(kw("CONTEXT-HELP-FILE"), field("context_help_file", $.__frame_expression)),
