@@ -52,7 +52,7 @@ export default ({ kw }) => ({
       seq($._kw_fgcolor, field("fgcolor", $.__frame_expression)),
       seq($._kw_pfcolor, field("pfcolor", $.__frame_expression)),
       seq(
-        kw("COLOR"),
+        $._kw_color,
         optional($._kw_display),
         field("color", $.__frame_color_value),
         optional(seq($._kw_prompt, field("prompt_color", $.__frame_color_value))),

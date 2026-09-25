@@ -12,7 +12,7 @@ export default ({ kw }) => ({
           $._key_value,
         ),
         seq(
-          choice(kw("COLOR"), $._kw_font),
+          choice($._kw_color, $._kw_font),
           choice(
             field("number", $._expression),
             // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner

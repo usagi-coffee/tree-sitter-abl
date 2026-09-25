@@ -24,7 +24,7 @@ export default ({ kw }) => ({
   __choose_option: ($) =>
     choice(
       alias($._kw_auto_return, $.auto_return),
-      seq(kw("COLOR"), field("color", $.color_phrase)),
+      seq($._kw_color, field("color", $.color_phrase)),
       alias($._go_on_phrase, $.go_on),
       seq(kw("KEYS"), field("keys", $.identifier)),
       // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner

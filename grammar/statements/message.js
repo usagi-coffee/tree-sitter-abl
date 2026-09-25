@@ -8,7 +8,7 @@ export default ({ kw }) => ({
         seq(
           optional(
             seq(
-              kw("COLOR"),
+              $._kw_color,
               field(
                 "color",
                 // oxlint-disable-next-line tree-sitter-optimize/shared-choice
