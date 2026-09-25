@@ -325,6 +325,7 @@ export default ({ kw }) => ({
         optional(alias(kw("REFERENCE-ONLY"), $.reference_only)),
         optional($._table_options),
       ),
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       seq(alias(kw("REFERENCE-ONLY"), $.reference_only), optional($._table_options)),
       $._table_options,
     ),
