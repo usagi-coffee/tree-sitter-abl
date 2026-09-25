@@ -3,12 +3,14 @@ export default ({ kw }) => ({
 
   __case_prefix: ($) =>
     seq(
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       kw("CASE"),
       $._expression,
       alias($._colon, ":"),
       optional($.__case_items),
       optional($.case_otherwise_phrase),
       $._end_keyword,
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       optional(kw("CASE")),
     ),
 
