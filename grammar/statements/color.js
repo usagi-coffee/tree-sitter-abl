@@ -1,7 +1,7 @@
 export default ({ kw }) => ({
   color_statement: ($) => seq($.__color_prefix, $._terminator),
 
-  // oxlint-disable-next-line tree-sitter-optimize/single-use-keyword-sequence
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-keyword-sequence, tree-sitter-optimize/single-use-sequence
   __color_prefix: ($) => seq($._kw_color, optional($.__color_body)),
 
   __color_body: ($) =>
