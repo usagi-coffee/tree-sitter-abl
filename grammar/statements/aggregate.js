@@ -14,7 +14,7 @@ export default ({ kw }) => ({
       seq(
         field("target", $._expression),
         "=",
-        choice($._kw_count, kw("TOTAL"), $._kw_average, $._kw_maximum, $._kw_minimum),
+        choice($._kw_count, $._kw_total, $._kw_average, $._kw_maximum, $._kw_minimum),
         "(",
         field("field", $._expression),
         ")",
