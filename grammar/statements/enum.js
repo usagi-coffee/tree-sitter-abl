@@ -8,7 +8,7 @@ export default ({ kw }) => ({
       optional(alias(kw("FLAGS"), $.flags)),
       alias($._colon, ":"),
       optional($.__enum_definitions),
-      $._end_keyword,
+      $._kw_end,
       $._kw_enum,
     ),
 

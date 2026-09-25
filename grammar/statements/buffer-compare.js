@@ -50,7 +50,7 @@ export default ({ kw }) => ({
       alias($._colon, ":"),
       $.__buffer_compare_when_phrases,
       optional($.__buffer_compare_compares),
-      $._end_keyword,
+      $._kw_end,
     ),
   __buffer_compare_compares: ($) => alias(kw("COMPARES"), $.compares),
   __buffer_compare_when_phrases: ($) =>

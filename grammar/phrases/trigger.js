@@ -3,7 +3,7 @@ export default ({ kw }) => ({
     choice(seq($._kw_triggers, $.__triggers_body), seq($._on_keyword, $.__trigger_event_list)),
 
   __triggers_body: ($) =>
-    prec.right(seq(":", optional($.__triggers_entries), $._end_keyword, optional($._kw_triggers))),
+    prec.right(seq(":", optional($.__triggers_entries), $._kw_end, optional($._kw_triggers))),
   __triggers_entries: ($) =>
     seq(
       $._on_keyword,

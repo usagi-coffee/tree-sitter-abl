@@ -9,7 +9,7 @@ export default ({ kw }) => ({
       alias($._colon, ":"),
       optional($.__case_items),
       optional($.case_otherwise_phrase),
-      $._end_keyword,
+      $._kw_end,
       // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       optional(kw("CASE")),
     ),

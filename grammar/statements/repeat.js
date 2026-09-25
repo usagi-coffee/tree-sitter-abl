@@ -2,7 +2,7 @@ export default ({ kw }) => ({
   repeat_statement: ($) => seq($.__repeat_prefix, $._terminator),
 
   // oxlint-disable-next-line tree-sitter-optimize/single-use-sequence
-  __repeat_prefix: ($) => seq(optional($._label), $.__repeat_body, $._end_keyword),
+  __repeat_prefix: ($) => seq(optional($._label), $.__repeat_body, $._kw_end),
 
   __repeat_body: ($) =>
     seq(

@@ -14,7 +14,7 @@ export default ({ kw }) => ({
     seq(
       $.__class_body_opener,
       optional($.__class_definition_items),
-      $._end_keyword,
+      $._kw_end,
       optional($._kw_class),
     ),
 

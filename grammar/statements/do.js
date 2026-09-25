@@ -2,7 +2,7 @@ export default ({ kw }) => ({
   do_statement: ($) => seq($.__do_prefix, $._terminator),
 
   // oxlint-disable-next-line tree-sitter-optimize/single-use-sequence
-  __do_prefix: ($) => seq(optional($._label), $.__do_body, $._end_keyword),
+  __do_prefix: ($) => seq(optional($._label), $.__do_body, $._kw_end),
 
   // Widening the FOR branch counter makes record-phrase ambiguities global.
   __do_body: ($) =>

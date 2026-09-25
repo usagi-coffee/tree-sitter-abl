@@ -581,12 +581,12 @@ export default ({ kw }) => ({
       field("name", $.identifier),
       alias($._method_parameters, $.parameters),
     ),
-  _closed_body: ($) => seq($.body, $._end_keyword),
+  _closed_body: ($) => seq($.body, $._kw_end),
   _compound_body: ($) =>
     seq(
       // oxlint-disable-next-line tree-sitter-optimize/recurse
       repeat($._statement),
-      $._end_keyword,
+      $._kw_end,
     ),
   // oxlint-disable-next-line tree-sitter-optimize/shared-precedence-sequence-inline
   _display_space_phrase: ($) =>

@@ -18,7 +18,7 @@ export default ({ kw }) => ({
       // oxlint-disable-next-line tree-sitter-optimize/shared-choice
       choice(alias($._colon, ":"), $._terminator_dot),
       optional($.__interface_body_items),
-      $._end_keyword,
+      $._kw_end,
       optional($._kw_interface),
     ),
 

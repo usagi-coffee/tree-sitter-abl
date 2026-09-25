@@ -38,7 +38,7 @@ export default ({ kw }) => ({
     seq(
       choice(alias($._colon, ":"), alias($._terminator_dot, ".")),
       optional($._statements),
-      $._end_keyword,
+      $._kw_end,
     ),
 
   __procedure_in_super_phrase: ($) => seq($._kw_in, $._kw_super),
