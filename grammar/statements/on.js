@@ -203,7 +203,7 @@ export default ({ kw }) => ({
       kw("CURSOR-UP"),
       kw("DELETE-CHARACTER"),
       $._end_keyword,
-      kw("END-ERROR"),
+      $._kw_end_error,
       kw("ENDKEY"),
       kw("ENTER-MENUBAR"),
       $._kw_error,
@@ -224,7 +224,7 @@ export default ({ kw }) => ({
   __on_ui_key_function: ($) =>
     choice(
       $._kw_back_tab,
-      kw("END-ERROR"),
+      $._kw_end_error,
       kw("ENDKEY"),
       kw("GO"),
       $._help_keyword,
