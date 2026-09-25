@@ -10,7 +10,7 @@ export default ({ kw }) => ({
       field("name", $.identifier),
       $._kw_query,
       field("query", $.identifier),
-      // oxlint-disable-next-line tree-sitter-optimize/shared-choice
+      // oxlint-disable-next-line tree-sitter-optimize/shared-choice, tree-sitter-optimize/inline-keyword-owner
       optional(alias(choice(kw("SHARE-LOCK"), kw("EXCLUSIVE-LOCK"), kw("NO-LOCK")), $.lock)),
       // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       optional(alias(kw("NO-WAIT"), $.no_wait)),

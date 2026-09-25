@@ -10,7 +10,7 @@ export default ({ kw }) => ({
       optional(
         field(
           "lock",
-          // oxlint-disable-next-line tree-sitter-optimize/shared-choice
+          // oxlint-disable-next-line tree-sitter-optimize/shared-choice, tree-sitter-optimize/inline-keyword-owner
           choice(kw("SHARE-LOCK"), kw("EXCLUSIVE-LOCK"), kw("NO-LOCK")),
         ),
       ),

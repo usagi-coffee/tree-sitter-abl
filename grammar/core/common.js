@@ -544,6 +544,7 @@ export default ({ kw }) => ({
   _tooltip_phrase: ($) => seq($._kw_tooltip, field("tooltip", $._expression)),
   _lock_option: ($) =>
     choice(
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(kw("SHARE-LOCK"), $.share_lock),
       alias(kw("EXCLUSIVE-LOCK"), $.exclusive_lock),
       alias(kw("NO-LOCK"), $.no_lock),
