@@ -51,7 +51,7 @@ export default ({ kw }) => ({
   __widget_system_handle: ($) =>
     choice(
       kw("ACTIVE-WINDOW"),
-      kw("CLIPBOARD"),
+      $._kw_clipboard,
       kw("COLOR-TABLE"),
       kw("COMPILER"),
       kw("CURRENT-WINDOW"),

@@ -100,7 +100,7 @@ export default ({ kw }) => ({
       ),
       alias(kw("TERMINAL"), $.terminal),
       $._value_expression,
-      alias(kw("CLIPBOARD"), $.clipboard),
+      alias($._kw_clipboard, $.clipboard),
     ),
 
   __output_program_flag: ($) => token(/-[A-Za-z][A-Za-z0-9-]*/),
