@@ -29,7 +29,7 @@ export default ({ kw }) => ({
       ),
       // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
       seq(
-        kw("THROUGH"),
+        $._kw_through,
         $._program_target,
         optional($.__output_program_items),
         optional($.__output_shared_options),

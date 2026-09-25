@@ -3,7 +3,7 @@ export default ({ kw }) => ({
     seq($.__input_through_prefix, $.__input_through_body, $._terminator),
 
   // oxlint-disable-next-line tree-sitter-optimize/single-use-keyword-sequence
-  __input_through_prefix: ($) => seq($._input_stream_prefix, kw("THROUGH")),
+  __input_through_prefix: ($) => seq($._input_stream_prefix, $._kw_through),
   __input_through_body: ($) =>
     // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq(
