@@ -62,6 +62,7 @@ export default ({ kw }) => ({
       field("index", choice($.identifier, $._unquoted_name_initial)),
       optional(alias($.__temp_table_as_primary_phrase, $.as_primary_phrase)),
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
   __temp_table_as_primary_phrase: ($) => seq($._as_keyword, alias(kw("PRIMARY"), $.primary)),
   __temp_table_before_table_phrase: ($) => seq(kw("BEFORE-TABLE"), field("before", $.identifier)),
   __temp_table_index_field: ($) =>
