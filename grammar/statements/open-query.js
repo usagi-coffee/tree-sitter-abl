@@ -50,7 +50,7 @@ export default ({ kw }) => ({
       seq(
         ",",
         // oxlint-disable-next-line tree-sitter-optimize/shared-choice, tree-sitter-optimize/inline-keyword-owner
-        choice(kw("EACH"), kw("FIRST"), kw("LAST")),
+        choice(kw("EACH"), $._kw_first, kw("LAST")),
         $.__open_query_record_tail,
       ),
     ),

@@ -7,7 +7,7 @@ export default ({ kw }) => ({
       kw("FIND"),
       optional(
         choice(
-          alias(kw("FIRST"), $.first),
+          alias($._kw_first, $.first),
           alias(kw("LAST"), $.last),
           alias(kw("NEXT"), $.next),
           alias(kw("PREV"), $.prev),
