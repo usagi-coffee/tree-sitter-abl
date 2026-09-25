@@ -101,7 +101,7 @@ export default ({ kw }) => ({
       seq(kw("COLUMN-CODEPAGE"), field("column_codepage", $.string_literal)),
       seq(kw("XML-DATA-TYPE"), field("xml_data_type", $.string_literal)),
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
-      seq(kw("XML-NODE-TYPE"), field("xml_node_type", $.string_literal)),
+      seq($._kw_xml_node_type, field("xml_node_type", $.string_literal)),
       // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       seq(kw("XML-NODE-NAME"), field("xml_node_name", $.string_literal)),
       $.view_as_phrase,

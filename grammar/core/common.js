@@ -319,7 +319,7 @@ export default ({ kw }) => ({
             seq(kw("XML-NODE-NAME"), field("node", $.string_literal)),
             $.__temp_table_serialize_name_phrase,
             // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
-            seq(kw("XML-NODE-TYPE"), field("xml_node_type", $.string_literal)),
+            seq($._kw_xml_node_type, field("xml_node_type", $.string_literal)),
           ),
         ),
         optional(alias(kw("REFERENCE-ONLY"), $.reference_only)),
@@ -401,7 +401,7 @@ export default ({ kw }) => ({
           // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
           seq(kw("XML-NODE-NAME"), field("xml_node_name", $._expression)),
           seq(kw("SERIALIZE-NAME"), field("serialize_name", $._expression)),
-          seq(kw("XML-NODE-TYPE"), field("xml_node_type", $._expression)),
+          seq($._kw_xml_node_type, field("xml_node_type", $._expression)),
         ),
       ),
       optional($.__dataset_body_tail),
