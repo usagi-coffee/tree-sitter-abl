@@ -40,6 +40,7 @@ export const WIDGETS = [
 export const inline = ($) => [
   $._kw_and,
   $._kw_alias,
+  $._kw_average,
   $._kw_application,
   $._kw_assign,
   $._kw_bell,
@@ -230,6 +231,7 @@ export default ({ kw }) => ({
   _help_keyword: ($) => kw("HELP"),
   _kw_and: ($) => kw("AND"),
   _kw_alias: ($) => kw("ALIAS"),
+  _kw_average: ($) => kw("AVERAGE"),
   _kw_application: ($) => kw("APPLICATION"),
   _kw_assign: ($) => kw("ASSIGN"),
   _kw_bell: ($) => kw("BELL"),
