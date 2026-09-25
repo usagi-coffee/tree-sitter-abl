@@ -91,7 +91,7 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/single-use-shared-choice-inline
   _map_phrase: ($) =>
     choice(
-      seq(kw("MAP"), field("map", $._identifier_or_string_literal)),
+      seq($._kw_map, field("map", $._identifier_or_string_literal)),
       alias(kw("NO-MAP"), $.no_map),
     ),
 

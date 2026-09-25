@@ -57,7 +57,7 @@ export default ({ kw }) => ({
       alias(kw("ECHO"), $.echo),
       alias(kw("NO-ECHO"), $.no_echo),
       seq(
-        kw("MAP"),
+        $._kw_map,
         field(
           "map",
           choice(

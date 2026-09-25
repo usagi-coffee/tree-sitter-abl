@@ -28,7 +28,7 @@ export default ({ kw }) => ({
       alias(kw("PERSISTENT"), $.persistent),
       alias(seq(kw("THREAD-SAFE"), optional(kw("SAFE"))), $.thread_safe),
       alias($.__procedure_external_phrase, $.external_phrase),
-      seq(kw("MAP"), field("name", $.identifier)),
+      seq($._kw_map, field("name", $.identifier)),
     ),
 
   __procedure_body: ($) =>
