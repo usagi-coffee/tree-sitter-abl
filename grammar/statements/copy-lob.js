@@ -35,7 +35,7 @@ export default ({ kw }) => ({
 
   __copy_lob_overlay: ($) =>
     seq(
-      kw("OVERLAY"),
+      $._kw_overlay,
       $._at_keyword,
       field("overlay_at", $._expression),
       optional(alias(kw("TRIM"), $.trim)),

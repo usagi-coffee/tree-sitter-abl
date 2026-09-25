@@ -119,7 +119,7 @@ export default ({ kw }) => ({
       alias(kw("NO-VALIDATE"), $.no_validate),
       alias(kw("NO-BOX"), $.no_box),
       alias(kw("NO-ROW-MARKERS"), $.no_row_markers),
-      alias(kw("OVERLAY"), $.overlay),
+      alias($._kw_overlay, $.overlay),
       alias(kw("NO-COLUMN-SCROLLING"), $.no_column_scrolling),
     ),
 

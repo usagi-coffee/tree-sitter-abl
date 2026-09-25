@@ -4,7 +4,7 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/body-extraction
   __overlay_prefix: ($) =>
     seq(
-      kw("OVERLAY"),
+      $._kw_overlay,
       "(",
       field("target", $._expression),
       ",",

@@ -16,7 +16,7 @@ export default ({ kw }) => ({
       alias(kw("ATTR-SPACE"), $.attr_space),
       // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(kw("NO-ATTR-SPACE"), $.no_attr_space),
-      alias(kw("OVERLAY"), $.overlay),
+      alias($._kw_overlay, $.overlay),
       alias(kw("PAGE-TOP"), $.page_top),
       alias(kw("PAGE-BOTTOM"), $.page_bottom),
       alias(kw("USE-TEXT"), $.use_text),
