@@ -219,7 +219,7 @@ export default ({ kw }) => ({
       kw("RIGHT-END"),
       kw("SCROLL-MODE"),
       $._kw_stop,
-      kw("TAB"),
+      $._kw_tab,
     ),
   __on_ui_key_function: ($) =>
     choice(
@@ -230,7 +230,7 @@ export default ({ kw }) => ({
       $._help_keyword,
       $._kw_next_frame,
       $._kw_prev_frame,
-      kw("TAB"),
+      $._kw_tab,
     ),
   __on_web_notify_event: ($) => token(/["']WEB-NOTIFY["']/i),
   __on_ui_event_name: ($) =>
