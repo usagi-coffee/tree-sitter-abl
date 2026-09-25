@@ -194,7 +194,7 @@ export default ({ kw }) => ({
     choice(
       kw("ABORT"),
       kw("BACKSPACE"),
-      kw("BACK-TAB"),
+      $._kw_back_tab,
       kw("BELL"),
       kw("CLEAR"),
       kw("CURSOR-DOWN"),
@@ -223,7 +223,7 @@ export default ({ kw }) => ({
     ),
   __on_ui_key_function: ($) =>
     choice(
-      kw("BACK-TAB"),
+      $._kw_back_tab,
       kw("END-ERROR"),
       kw("ENDKEY"),
       kw("GO"),
