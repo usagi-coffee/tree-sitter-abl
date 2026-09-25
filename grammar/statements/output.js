@@ -16,7 +16,7 @@ export default ({ kw }) => ({
             $.preprocessor_name,
             alias($._lob_dir_phrase, $.lob_dir_phrase),
             seq(kw("NUM-COPIES"), field("copies", $.__output_numeric_value)),
-            alias(kw("COLLATE"), $.collate),
+            alias($._kw_collate, $.collate),
             alias(kw("LANDSCAPE"), $.landscape),
             alias(kw("PORTRAIT"), $.portrait),
             // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner

@@ -248,7 +248,7 @@ export default ({ kw }) => ({
   _collate_body: ($) => seq($.__collate_prefix, ")"),
   __collate_prefix: ($) =>
     seq(
-      kw("COLLATE"),
+      $._kw_collate,
       "(",
       field("string", $._expression),
       ",",
