@@ -24,9 +24,11 @@ export default ({ kw }) => ({
     choice(
       seq(
         $.__repeat_condition_phrase,
+        // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
         optional(alias(kw("TRANSACTION", { offset: 5 }), $.transaction)),
       ),
       seq(
+        // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
         alias(kw("TRANSACTION", { offset: 5 }), $.transaction),
         optional($.__repeat_condition_phrase),
       ),

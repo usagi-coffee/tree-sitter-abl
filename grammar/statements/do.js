@@ -13,6 +13,7 @@ export default ({ kw }) => ({
         seq($._selection_after_for, $.__do_body_tail),
         choice(
           seq(
+            // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
             alias(kw("TRANSACTION", { offset: 5 }), $.transaction),
             optional($.__do_body_after_first_transaction_wide),
           ),
@@ -30,6 +31,7 @@ export default ({ kw }) => ({
     choice(seq($.__do_while_phrase, optional($.__do_loop_phrase)), $.__do_loop_phrase),
   __do_body_tail: ($) =>
     choice(
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       seq(
         alias(kw("TRANSACTION", { offset: 5 }), $.transaction),
         optional($.__do_body_after_first_transaction),
@@ -43,12 +45,14 @@ export default ({ kw }) => ({
     ),
   __do_body_after_condition_or_loop: ($) =>
     choice(
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       seq(alias(kw("TRANSACTION", { offset: 5 }), $.transaction), optional($.__do_block_tail)),
       seq(alias($.__do_while_phrase, $.while_phrase), optional($.__do_block_tail)),
       $.__do_block_tail,
     ),
   __do_block_tail: ($) =>
     choice(
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       seq(
         $._block_options,
         optional(alias(kw("TRANSACTION", { offset: 5 }), $.transaction)),

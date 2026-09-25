@@ -18,8 +18,10 @@ export default ({ kw }) => ({
     choice(
       seq(
         alias($.__do_while_phrase, $.while_phrase),
+        // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
         optional(alias(kw("TRANSACTION", { offset: 5 }), $.transaction)),
       ),
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       seq(alias(kw("TRANSACTION", { offset: 5 }), $.transaction), optional($.__for_sort_clauses)),
     ),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
