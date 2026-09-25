@@ -95,7 +95,7 @@ export default ({ kw }) => ({
       // oxlint-disable-next-line tree-sitter-optimize/keyword-reuse
       seq(optional(alias(kw("NOT"), $.not)), alias(kw("CASE-SENSITIVE"), $.case_sensitive)),
       alias(kw("SERIALIZE-HIDDEN"), $.serialize_hidden),
-      // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
+      // oxlint-disable-next-line tree-sitter-optimize/shared-sequence, tree-sitter-optimize/inline-keyword-owner
       seq(kw("SERIALIZE-NAME"), field("serialize_name", $.string_literal)),
       seq(kw("TTCODEPAGE"), field("ttcodepage", $.string_literal)),
       seq(kw("COLUMN-CODEPAGE"), field("column_codepage", $.string_literal)),
@@ -121,6 +121,7 @@ export default ({ kw }) => ({
   __temp_table_label_list: ($) =>
     seq($.string_literal, optional(seq(",", $.__temp_table_label_list))),
   __temp_table_serialize_name_phrase: ($) =>
+    // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
     seq(kw("SERIALIZE-NAME"), field("serialize_name", $.string_literal)),
   // oxlint-disable-next-line tree-sitter-optimize/body-extraction, tree-sitter-optimize/single-use-choice
   __temp_table_modifier: ($) =>

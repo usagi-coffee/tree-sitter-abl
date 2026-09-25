@@ -401,6 +401,7 @@ export default ({ kw }) => ({
           seq(kw("NAMESPACE-PREFIX"), field("namespace_prefix", $._expression)),
           // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
           seq(kw("XML-NODE-NAME"), field("xml_node_name", $._expression)),
+          // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
           seq(kw("SERIALIZE-NAME"), field("serialize_name", $._expression)),
           seq($._kw_xml_node_type, field("xml_node_type", $._expression)),
         ),

@@ -26,6 +26,7 @@ export default ({ kw }) => ({
   __variable_option: ($) =>
     choice(
       alias($.__variable_extent_phrase, $.extent_phrase),
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       seq(kw("SERIALIZE-NAME"), field("serialize_name", $._identifier_or_string_literal)),
       alias($._format_string, $.format_phrase),
       $._color_font_option,
