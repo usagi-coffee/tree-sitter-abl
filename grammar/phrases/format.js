@@ -28,7 +28,7 @@ export default ({ kw }) => ({
       seq($._kw_pfcolor, field("pfcolor", $.__format_expression)),
       $._format_validate,
       $._format_view_as,
-      seq(kw("WIDGET-ID"), field("widget_id", $.__format_expression)),
+      seq($._kw_widget_id, field("widget_id", $.__format_expression)),
     ),
   // oxlint-disable-next-line tree-sitter-optimize/forwarding-rule
   __format_expression: ($) => $._expression,

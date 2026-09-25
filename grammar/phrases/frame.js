@@ -44,7 +44,7 @@ export default ({ kw }) => ({
       seq(kw("DEFAULT-BUTTON"), field("default_button", $.__frame_identifier)),
       seq(kw("SCROLL"), field("scroll", $.__frame_expression)),
       seq(kw("RETAIN"), field("retain", $.__frame_expression)),
-      seq(kw("WIDGET-ID"), field("widget_id", $.__frame_expression)),
+      seq($._kw_widget_id, field("widget_id", $.__frame_expression)),
       seq(kw("CONTEXT-HELP-FILE"), field("context_help_file", $.__frame_expression)),
       seq($._in_keyword, $._kw_window, field("window", $.__frame_identifier)),
       seq($._kw_bgcolor, field("bgcolor", $.__frame_expression)),
