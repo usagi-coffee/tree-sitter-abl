@@ -32,7 +32,7 @@ export default ({ kw }) => ({
       ),
     ),
 
-  // oxlint-disable-next-line tree-sitter-optimize/single-use-keyword-sequence
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-keyword-sequence, tree-sitter-optimize/single-use-sequence
   __trigger_procedure_old_buffer: ($) =>
     seq($._kw_old, optional($._kw_buffer), field("old_buffer", $.identifier)),
 
