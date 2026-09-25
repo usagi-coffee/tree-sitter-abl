@@ -24,7 +24,7 @@ export default ({ kw }) => ({
           seq($._kw_image, field("image", $.image_phrase)),
           seq(kw("IMAGE-UP"), field("image_up", $.image_phrase)),
           seq(kw("IMAGE-INSENSITIVE"), field("image_insensitive", $.image_phrase)),
-          // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
+          // oxlint-disable-next-line tree-sitter-optimize/shared-sequence, tree-sitter-optimize/inline-keyword-owner
           seq(kw("MOUSE-POINTER"), field("mouse_pointer", $._expression)),
           // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
           seq($._kw_label, field("label", $._identifier_or_string_literal)),
