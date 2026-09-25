@@ -32,6 +32,7 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/choice-subset, tree-sitter-optimize/single-use-choice
   __input_output_option: ($) =>
     choice(
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(kw("ECHO"), $.echo),
       alias(kw("NO-ECHO"), $.no_echo),
       $._map_phrase,
