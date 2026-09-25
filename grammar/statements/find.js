@@ -9,7 +9,7 @@ export default ({ kw }) => ({
         choice(
           alias($._kw_first, $.first),
           alias($._kw_last, $.last),
-          alias(kw("NEXT"), $.next),
+          alias($._kw_next, $.next),
           alias(kw("PREV"), $.prev),
           alias(kw("CURRENT"), $.current),
         ),
