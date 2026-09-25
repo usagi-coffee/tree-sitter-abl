@@ -5,6 +5,7 @@ export default ({ kw }) => ({
 
   __function_prefix: ($) =>
     seq(
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       kw("FUNCTION"),
       $.__function_signature,
       optional($.__function_extent_phrase),
@@ -23,7 +24,12 @@ export default ({ kw }) => ({
       alias($.__function_definition_parameters, $.parameters),
     ),
   __function_compound_body: ($) =>
-    seq(choice(alias($._colon, ":"), $._terminator), $._compound_body, optional(kw("FUNCTION"))),
+    seq(
+      choice(alias($._colon, ":"), $._terminator),
+      $._compound_body,
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
+      optional(kw("FUNCTION")),
+    ),
 
   function_forward_definition: ($) => seq($.__function_forward_definition_prefix, $._terminator),
 
@@ -32,9 +38,11 @@ export default ({ kw }) => ({
     choice(
       seq(
         $._define_keyword,
+        // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
         kw("FUNCTION"),
         seq($.__function_forward_head, optional($.__function_forward_target)),
       ),
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       seq(kw("FUNCTION"), seq($.__function_forward_head, $.__function_forward_target)),
     ),
 
