@@ -3,6 +3,7 @@ export default ({ kw }) => ({
 
   __message_prefix: ($) =>
     seq(
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       kw("MESSAGE"),
       optional(
         seq(
