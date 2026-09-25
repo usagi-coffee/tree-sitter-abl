@@ -16,6 +16,7 @@ export default ({ kw }) => ({
       $._to_keyword,
       field("target", $._identifier_or_qualified_name),
       optional(alias($.__buffer_copy_assign_phrase, $.assign_phrase)),
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       optional(alias(kw("NO-LOBS"), $.no_lobs)),
     ),
   __buffer_copy_except_phrase: ($) => seq($._kw_except, $._field_names),

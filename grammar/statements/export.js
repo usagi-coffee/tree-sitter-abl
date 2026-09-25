@@ -10,7 +10,9 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __export_tail: ($) =>
     choice(
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       seq($.__export_except_phrase, optional(alias(kw("NO-LOBS"), $.no_lobs))),
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(kw("NO-LOBS"), $.no_lobs),
     ),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-keyword-sequence

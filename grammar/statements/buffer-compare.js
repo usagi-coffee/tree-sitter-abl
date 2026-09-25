@@ -32,8 +32,10 @@ export default ({ kw }) => ({
     choice(
       seq(
         alias($.__buffer_compare_compares_block, $.compares_block),
+        // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
         optional(alias(kw("NO-LOBS"), $.no_lobs)),
       ),
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(kw("NO-LOBS"), $.no_lobs),
     ),
 

@@ -6,6 +6,7 @@ export default ({ kw }) => ({
   __import_body: ($) =>
     seq(
       choice($.__import_fields_phrase, alias($.__import_unformatted_phrase, $.unformatted_phrase)),
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       optional(alias(kw("NO-LOBS"), $.no_lobs)),
     ),
 
