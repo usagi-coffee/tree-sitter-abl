@@ -307,7 +307,7 @@ export default ({ kw }) => ({
 
   _method_return_type: ($) =>
     choice(
-      field("type", alias(kw("VOID"), $.identifier)),
+      field("type", alias($._kw_void, $.identifier)),
       seq($._class_type, optional($.__class_method_return_extent_phrase)),
     ),
   // oxlint-disable-next-line tree-sitter-optimize/shared-sequence

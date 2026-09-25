@@ -4,7 +4,7 @@ export default ({ kw }) => ({
   __event_signature: ($) =>
     choice(
       // VOID signature
-      seq(optional(kw("SIGNATURE")), kw("VOID"), "(", optional($.__event_parameter_list), ")"),
+      seq(optional(kw("SIGNATURE")), $._kw_void, "(", optional($.__event_parameter_list), ")"),
       // DELEGATE signature
       seq(kw("DELEGATE"), optional($._kw_class), field("delegate_type", $._type_or_string)),
     ),
