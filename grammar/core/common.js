@@ -474,7 +474,7 @@ export default ({ kw }) => ({
     ),
 
   // oxlint-disable-next-line tree-sitter-optimize/shared-keyword-field-inline
-  _aggregate_label_phrase: ($) => seq(kw("LABEL"), field("label", $.string_literal)),
+  _aggregate_label_phrase: ($) => seq($._kw_label, field("label", $.string_literal)),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-shared-choice-inline
   _initial_value: ($) => choice($._expression, seq($._array_initializer_prefix, "]")),
   _parameter_direction: ($) => choice($._kw_input, kw("OUTPUT"), kw("INPUT-OUTPUT", { offset: 7 })),

@@ -27,7 +27,7 @@ export default ({ kw }) => ({
           // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
           seq(kw("MOUSE-POINTER"), field("mouse_pointer", $._expression)),
           // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
-          seq(kw("LABEL"), field("label", $._identifier_or_string_literal)),
+          seq($._kw_label, field("label", $._identifier_or_string_literal)),
           // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
           seq($._like_keyword, field("like", $.identifier)),
           seq($.__size_prefix, field("height", $._expression)),

@@ -31,7 +31,7 @@ export default ({ kw }) => ({
           field("field", $._expression),
           // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
           optional(seq(kw("COLON"), field("colon", $._expression))),
-          optional(seq(kw("LABEL"), optional(field("label", $.__form_label)))),
+          optional(seq($._kw_label, optional(field("label", $.__form_label)))),
           optional($.__form_validate_format_view_as_tail),
         ),
         // oxlint-disable-next-line tree-sitter-optimize/shared-sequence

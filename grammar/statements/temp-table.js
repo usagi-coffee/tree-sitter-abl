@@ -89,7 +89,7 @@ export default ({ kw }) => ({
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
       seq($._help_keyword, field("help", $.string_literal)),
       $._initial_phrase,
-      seq(kw("LABEL"), field("label", $.__temp_table_label_list)),
+      seq($._kw_label, field("label", $.__temp_table_label_list)),
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
       seq(kw("MOUSE-POINTER"), field("mouse_pointer", $._expression)),
       // oxlint-disable-next-line tree-sitter-optimize/keyword-reuse
