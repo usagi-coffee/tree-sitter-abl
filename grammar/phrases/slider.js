@@ -48,7 +48,7 @@ export default ({ kw }) => ({
       kw("TIC-MARKS"),
       field(
         "marks",
-        choice(kw("NONE"), kw("TOP"), kw("BOTTOM"), kw("LEFT"), kw("RIGHT"), kw("BOTH")),
+        choice(kw("NONE"), kw("TOP"), kw("BOTTOM"), $._kw_left, kw("RIGHT"), kw("BOTH")),
       ),
       optional(seq(kw("FREQUENCY"), field("frequency", $.number_literal))),
     ),

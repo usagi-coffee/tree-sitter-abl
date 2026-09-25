@@ -68,7 +68,7 @@ export default ({ kw }) => ({
             seq(kw("WHERE"), field("where", $._expression)),
             seq(kw("USE-INDEX"), field("index", $.identifier)),
             field("lock", $._lock_option),
-            seq(optional(alias(kw("LEFT"), $.left)), alias(kw("OUTER-JOIN"), $.outer_join)),
+            seq(optional(alias($._kw_left, $.left)), alias(kw("OUTER-JOIN"), $.outer_join)),
           ),
         ),
       ),
