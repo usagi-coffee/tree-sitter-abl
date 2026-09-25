@@ -9,7 +9,7 @@ export default ({ kw }) => ({
       optional(alias(kw("BEFORE-HIDE"), $.before_hide)),
       optional($.__pause_message_window_tail),
     ),
-  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice, tree-sitter-optimize/optional-tail-choice-collapse
   __pause_message_window_tail: ($) =>
     choice(seq($.__pause_message, optional($.in_window_phrase)), $.in_window_phrase),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
