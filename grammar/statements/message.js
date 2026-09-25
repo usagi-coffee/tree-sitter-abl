@@ -35,7 +35,7 @@ export default ({ kw }) => ({
 
   // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __message_expression: ($) =>
-    choice($._expression, alias($.__message_skip_item, $.skip), alias(kw("MENU"), $.identifier)),
+    choice($._expression, alias($.__message_skip_item, $.skip), alias($._kw_menu, $.identifier)),
   __message_expressions: ($) =>
     prec.right(seq($.__message_expression, optional($.__message_expressions))),
 

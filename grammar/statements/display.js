@@ -94,7 +94,7 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/single-use-choice, tree-sitter-optimize/single-use-field-choice
   __display_aggregate_primary_expression: ($) =>
     choice($.__display_keyword_identifier, $._expression),
-  __display_keyword_identifier: ($) => alias(kw("MENU"), $.identifier),
+  __display_keyword_identifier: ($) => alias($._kw_menu, $.identifier),
 
   // Second branch
   __display_browse_body: ($) =>

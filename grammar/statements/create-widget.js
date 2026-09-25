@@ -15,7 +15,7 @@ export default ({ kw }) => ({
         // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
         kw("FRAME", { offset: 4 }),
         kw("IMAGE"),
-        kw("MENU"),
+        $._kw_menu,
         kw("MENU-ITEM"),
         kw("RADIO-SET"),
         kw("RECTANGLE"),

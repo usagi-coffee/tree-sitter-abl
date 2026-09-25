@@ -27,7 +27,7 @@ export default ({ kw }) => ({
         // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
         seq($._kw_browse, field("browse", $.identifier)),
         $._frame_identifier_phrase,
-        seq(kw("MENU"), field("menu", $.identifier)),
+        seq($._kw_menu, field("menu", $.identifier)),
       ),
     ),
 });
