@@ -212,7 +212,7 @@ export default ({ kw }) => ({
       repeat(
         choice(
           seq($._kw_list_items, field("items", $.__format_combo_box_values)),
-          seq(kw("LIST-ITEM-PAIRS"), field("pairs", $.__format_radio_set_buttons)),
+          seq($._kw_list_item_pairs, field("pairs", $.__format_radio_set_buttons)),
           // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
           seq($._kw_inner_lines, field("inner_lines", $.number_literal)),
           $.size_phrase,

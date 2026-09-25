@@ -612,7 +612,7 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/shared-keyword-field-inline
   _list_items_phrase: ($) => seq($._kw_list_items, field("items", $._list_item_values)),
   // oxlint-disable-next-line tree-sitter-optimize/shared-keyword-field-inline
-  _list_item_pairs_phrase: ($) => seq(kw("LIST-ITEM-PAIRS"), field("pairs", $._list_item_pairs)),
+  _list_item_pairs_phrase: ($) => seq($._kw_list_item_pairs, field("pairs", $._list_item_pairs)),
   _list_item_values: ($) => seq($._expression, optional(seq(",", $._list_item_values))),
   _list_item_pairs: ($) =>
     seq(
