@@ -2,7 +2,7 @@ export default ({ kw }) => ({
   class_definition: ($) => seq($.__class_prefix, $._terminator),
 
   // oxlint-disable-next-line tree-sitter-optimize/single-use-keyword-sequence
-  __class_prefix: ($) => seq(optional($.__class_options), kw("CLASS"), $.__class_body),
+  __class_prefix: ($) => seq(optional($.__class_options), $._kw_class, $.__class_body),
 
   __class_body: ($) =>
     seq(
@@ -15,7 +15,7 @@ export default ({ kw }) => ({
       $.__class_body_opener,
       optional($.__class_definition_items),
       $._end_keyword,
-      optional(kw("CLASS")),
+      optional($._kw_class),
     ),
 
   __class_definition_items: ($) =>

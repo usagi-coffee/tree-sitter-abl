@@ -19,11 +19,11 @@ export default ({ kw }) => ({
       optional($.frame_phrase),
     ),
   _alignment: ($) => choice(kw("COLON-ALIGNED"), kw("LEFT-ALIGNED"), kw("RIGHT-ALIGNED")),
-  _class_type: ($) => seq(optional(kw("CLASS")), field("type", $._type_or_string)),
+  _class_type: ($) => seq(optional($._kw_class), field("type", $._type_or_string)),
   _as_like: ($) =>
     choice(
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence, tree-sitter-optimize/optional-modifier-field, tree-sitter-optimize/sequence-subset
-      seq($._as_keyword, optional(kw("CLASS")), field("type", $._type_or_string)),
+      seq($._as_keyword, optional($._kw_class), field("type", $._type_or_string)),
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
       seq($._like_keyword, field("like", $._identifier_or_qualified_name)),
     ),

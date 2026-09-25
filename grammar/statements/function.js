@@ -60,7 +60,7 @@ export default ({ kw }) => ({
     ),
 
   __function_extent_phrase: ($) => alias($._extent_phrase, $.extent_phrase),
-  __function_type: ($) => seq(optional(kw("CLASS")), field("type", $._type_name)),
+  __function_type: ($) => seq(optional($._kw_class), field("type", $._type_name)),
 
   __function_forward_target: ($) =>
     choice(

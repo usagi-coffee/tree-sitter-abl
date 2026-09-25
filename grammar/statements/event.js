@@ -6,7 +6,7 @@ export default ({ kw }) => ({
       // VOID signature
       seq(optional(kw("SIGNATURE")), kw("VOID"), "(", optional($.__event_parameter_list), ")"),
       // DELEGATE signature
-      seq(kw("DELEGATE"), optional(kw("CLASS")), field("delegate_type", $._type_or_string)),
+      seq(kw("DELEGATE"), optional($._kw_class), field("delegate_type", $._type_or_string)),
     ),
 
   // oxlint-disable-next-line tree-sitter-optimize/single-use-sequence
