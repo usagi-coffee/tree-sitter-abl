@@ -35,6 +35,7 @@ export default ({ kw }) => ({
         optional($.__record_using_fields_tail),
       ),
       $._lock_option,
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(kw("SHARE"), $.share),
       alias(kw("EXCLUSIVE"), $.exclusive),
       alias(kw("NO-PREFETCH"), $.no_prefetch),
