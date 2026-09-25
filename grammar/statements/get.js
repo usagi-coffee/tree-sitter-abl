@@ -14,6 +14,7 @@ export default ({ kw }) => ({
           choice(kw("SHARE-LOCK"), kw("EXCLUSIVE-LOCK"), kw("NO-LOCK")),
         ),
       ),
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       optional(alias(kw("NO-WAIT"), $.no_wait)),
     ),
 });
