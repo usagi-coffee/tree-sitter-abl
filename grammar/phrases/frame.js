@@ -45,6 +45,7 @@ export default ({ kw }) => ({
       alias(kw("CONTEXT-HELP"), $.context_help),
       // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(kw("EXPORT"), $.export),
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(kw("USE-DICT-EXPS"), $.use_dict_exps),
       alias(kw("ACCUM"), $.accum),
       $.__frame_with_identifier,
