@@ -29,7 +29,7 @@ export default ({ kw }) => ({
       seq(
         kw("MULTIPLE-KEY"),
         field("multiple_key", $.__system_help_expression),
-        kw("TEXT"),
+        $._kw_text,
         field("text", $.__system_help_expression),
       ),
       $.__system_help_position,

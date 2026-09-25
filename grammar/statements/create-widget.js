@@ -22,7 +22,7 @@ export default ({ kw }) => ({
         kw("SELECTION-LIST"),
         kw("SLIDER"),
         kw("SUB-MENU"),
-        kw("TEXT"),
+        $._kw_text,
         kw("TOGGLE-BOX"),
         $._kw_window,
         seq($._kw_value, "(", field("widget_type", $._expression), ")"),

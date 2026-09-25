@@ -24,7 +24,7 @@ export default ({ kw }) => ({
       seq($.__update_field_target_item, optional($._when_phrase)),
       // oxlint-disable-next-line tree-sitter-optimize/sequence-subset
       seq($.__update_field_target_item, "=", field("value", $._expression)),
-      seq(kw("TEXT"), "(", $._text_fields, ")"),
+      seq($._kw_text, "(", $._text_fields, ")"),
       seq(
         field("constant", $.string_literal),
         optional(

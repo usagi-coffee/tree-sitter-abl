@@ -224,7 +224,7 @@ export default ({ kw }) => ({
         // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
         kw("VIEW-AS"),
         choice(
-          seq(kw("TEXT"), optional($.__format_view_as_tail)),
+          seq($._kw_text, optional($.__format_view_as_tail)),
           seq(kw("TOGGLE-BOX"), optional($.__format_view_as_tail)),
           // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
           seq(kw("FILL-IN"), optional(kw("NATIVE")), optional($.__format_view_as_tail)),

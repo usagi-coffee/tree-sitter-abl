@@ -55,7 +55,7 @@ export default ({ kw }) => ({
         optional($.format_phrase),
         optional($._when_phrase),
       ),
-      seq(kw("TEXT"), "(", $._text_fields, ")"),
+      seq($._kw_text, "(", $._text_fields, ")"),
       seq(field("constant", $.string_literal), optional($.__prompt_for_constant_tail)),
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
       seq(kw("SKIP"), optional(field("skip", $._parenthesized_value))),

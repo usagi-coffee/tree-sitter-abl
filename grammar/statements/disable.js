@@ -24,7 +24,7 @@ export default ({ kw }) => ({
         optional($._format_phrases),
         optional($._when_phrase),
       ),
-      seq(kw("TEXT"), "(", token(/[A-Za-z_][A-Za-z0-9_-]*/), optional($._format_phrases), ")"),
+      seq($._kw_text, "(", token(/[A-Za-z_][A-Za-z0-9_-]*/), optional($._format_phrases), ")"),
       seq(field("constant", $.string_literal), optional($._format_phrases)),
       alias(kw("SKIP"), $.skip),
     ),

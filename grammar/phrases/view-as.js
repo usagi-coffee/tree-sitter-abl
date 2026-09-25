@@ -15,7 +15,7 @@ export default ({ kw }) => ({
         $.radio_set_phrase,
         $.selection_list_phrase,
         $.slider_phrase,
-        seq(field("widget", kw("TEXT")), optional($.__radio_set_size_tooltip_tail)),
+        seq(field("widget", $._kw_text), optional($.__radio_set_size_tooltip_tail)),
         seq(field("widget", kw("TOGGLE-BOX")), optional($.__radio_set_size_tooltip_tail)),
       ),
     ),
