@@ -1,5 +1,5 @@
 export default ({ kw }) => ({
-  disable_triggers_statement: ($) => seq(kw("DISABLE"), $.__disable_triggers_body, $._terminator),
+  disable_triggers_statement: ($) => seq($._kw_disable, $.__disable_triggers_body, $._terminator),
 
   __disable_triggers_body: ($) =>
     seq(

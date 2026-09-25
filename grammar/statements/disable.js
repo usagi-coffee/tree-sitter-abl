@@ -1,6 +1,6 @@
 export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/optional-body-extraction
-  disable_statement: ($) => seq(kw("DISABLE"), optional($.__disable_body), $._terminator),
+  disable_statement: ($) => seq($._kw_disable, optional($.__disable_body), $._terminator),
 
   __disable_body: ($) =>
     seq(
