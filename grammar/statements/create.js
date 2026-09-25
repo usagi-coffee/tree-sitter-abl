@@ -62,7 +62,7 @@ export default ({ kw }) => ({
       choice(
         kw("CLIENT-PRINCIPAL"),
         $._kw_data_source,
-        $._dataset_keyword,
+        $._kw_dataset,
         kw("X-DOCUMENT"),
         kw("X-NODEREF"),
         kw("SOAP-HEADER"),

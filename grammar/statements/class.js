@@ -354,7 +354,7 @@ export default ({ kw }) => ({
       ),
       seq($._table_handle_value, optional($.__class_handle_options)),
       seq(
-        $._dataset_keyword,
+        $._kw_dataset,
         optional(field("for", $._kw_for)),
         field("dataset", $._qualified_identifier),
         optional($.__class_table_options),

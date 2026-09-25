@@ -1,7 +1,7 @@
 export default ({ kw }) => ({
   dataset_reference: ($) =>
     seq(
-      $._dataset_keyword,
+      $._kw_dataset,
       field("dataset", choice($.object_access, $._qualified_identifier)),
       optional($.arguments),
     ),

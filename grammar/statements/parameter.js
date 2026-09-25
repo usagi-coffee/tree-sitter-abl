@@ -19,7 +19,7 @@ export default ({ kw }) => ({
             ),
             seq($._table_handle_value, optional($.__parameter_handle_options)),
             seq(
-              $._dataset_keyword,
+              $._kw_dataset,
               $._kw_for,
               field("dataset", $._qualified_identifier),
               optional($.__parameter_table_options),
