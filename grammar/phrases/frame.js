@@ -29,6 +29,7 @@ export default ({ kw }) => ({
       alias(kw("NO-HIDE"), $.no_hide),
       // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(kw("NO-UNDERLINE", { offset: 10 }), $.no_underline),
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(kw("NO-HELP"), $.no_help),
       // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(kw("NO-VALIDATE"), $.no_validate),
