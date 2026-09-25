@@ -19,7 +19,7 @@ export default ({ kw }) => ({
         $._kw_menu_item,
         $._kw_radio_set,
         kw("RECTANGLE"),
-        kw("SELECTION-LIST"),
+        $._kw_selection_list,
         $._kw_slider,
         $._kw_sub_menu,
         $._kw_text,
