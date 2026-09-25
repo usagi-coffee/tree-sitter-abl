@@ -13,7 +13,7 @@ export default ({ kw }) => ({
               field(
                 "color",
                 // oxlint-disable-next-line tree-sitter-optimize/shared-choice
-                choice($._kw_normal, $._kw_input, kw("MESSAGES"), $.color_phrase),
+                choice($._kw_normal, $._kw_input, $._kw_messages, $.color_phrase),
               ),
             ),
           ),
