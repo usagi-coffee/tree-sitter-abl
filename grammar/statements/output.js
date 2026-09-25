@@ -1,7 +1,7 @@
 export default ({ kw }) => ({
   output_statement: ($) => seq($.__output_prefix, $._terminator),
 
-  // oxlint-disable-next-line tree-sitter-optimize/single-use-keyword-sequence
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-keyword-sequence, tree-sitter-optimize/single-use-sequence
   __output_prefix: ($) => seq($._kw_output, optional($._stream_phrase), $.__output_body),
   // oxlint-disable-next-line tree-sitter-optimize/body-extraction
   __output_body: ($) =>
