@@ -62,7 +62,7 @@ export default ({ kw }) => ({
         field("widget", $.identifier),
         // oxlint-disable-next-line tree-sitter-optimize/list-head-extraction
         seq(
-          kw("RADIO-SET"),
+          $._kw_radio_set,
           kw("RADIO-BUTTONS"),
           $.__form_radio_button,
           optional($.__form_radio_button_tail),

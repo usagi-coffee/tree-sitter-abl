@@ -17,7 +17,7 @@ export default ({ kw }) => ({
         $._kw_image,
         $._kw_menu,
         kw("MENU-ITEM"),
-        kw("RADIO-SET"),
+        $._kw_radio_set,
         kw("RECTANGLE"),
         kw("SELECTION-LIST"),
         $._kw_slider,

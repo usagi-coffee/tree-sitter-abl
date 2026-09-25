@@ -176,7 +176,7 @@ export default ({ kw }) => ({
   // Local VIEW-AS copies omit TOOLTIP to avoid competing with the enclosing format phrase.
   __format_radio_set_phrase: ($) =>
     seq(
-      kw("RADIO-SET"),
+      $._kw_radio_set,
       optional($.__radio_set_orientation),
       kw("RADIO-BUTTONS"),
       field("buttons", $.__format_radio_set_buttons),

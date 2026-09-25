@@ -1,7 +1,7 @@
 export default ({ kw }) => ({
   radio_set_phrase: ($) =>
     seq(
-      kw("RADIO-SET"),
+      $._kw_radio_set,
       optional($.__radio_set_orientation_size_prefix),
       kw("RADIO-BUTTONS"),
       field("buttons", $._list_item_pairs),
