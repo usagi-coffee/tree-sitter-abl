@@ -10,7 +10,7 @@ export default ({ kw }) => ({
       optional($._status),
       optional(
         // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
-        seq(kw("WHERE"), kw("PROC-HANDLE"), "=", field("handle", $._identifier_or_qualified_name)),
+        seq($._kw_where, kw("PROC-HANDLE"), "=", field("handle", $._identifier_or_qualified_name)),
       ),
     ),
 });

@@ -42,5 +42,5 @@ export default ({ kw }) => ({
     ),
 
   // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
-  __find_where_phrase: ($) => seq(kw("WHERE"), field("where", $._expression)),
+  __find_where_phrase: ($) => seq($._kw_where, field("where", $._expression)),
 });

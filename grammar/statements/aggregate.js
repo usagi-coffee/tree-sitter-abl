@@ -21,5 +21,5 @@ export default ({ kw }) => ({
         optional($.__aggregate_items),
       ),
     ),
-  __aggregate_where_phrase: ($) => seq(kw("WHERE"), field("condition", $._expression)),
+  __aggregate_where_phrase: ($) => seq($._kw_where, field("condition", $._expression)),
 });

@@ -20,7 +20,7 @@ export default ({ kw }) => ({
     choice(
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
       seq($._of_keyword, field("of", $._identifier_or_qualified_name)),
-      prec.right(seq(kw("WHERE"), field("where", optional($._expression)))),
+      prec.right(seq($._kw_where, field("where", optional($._expression)))),
       seq(
         kw("TENANT-WHERE"),
         field("tenant_where", $._expression),
