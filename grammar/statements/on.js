@@ -204,7 +204,7 @@ export default ({ kw }) => ({
       kw("DELETE-CHARACTER"),
       $._end_keyword,
       $._kw_end_error,
-      kw("ENDKEY"),
+      $._kw_endkey,
       kw("ENTER-MENUBAR"),
       $._kw_error,
       kw("GO"),
@@ -225,7 +225,7 @@ export default ({ kw }) => ({
     choice(
       $._kw_back_tab,
       $._kw_end_error,
-      kw("ENDKEY"),
+      $._kw_endkey,
       kw("GO"),
       $._help_keyword,
       kw("NEXT-FRAME"),
