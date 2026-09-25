@@ -713,7 +713,13 @@ export default grammar({
           $.__argument_passing,
         ),
       __argument_passing: ($) =>
-        choice(kw("BY-REFERENCE"), kw("BY-VALUE"), kw("APPEND"), kw("BIND")),
+        choice(
+          kw("BY-REFERENCE"),
+          kw("BY-VALUE"),
+          kw("APPEND"),
+          // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
+          kw("BIND"),
+        ),
       __argument_in_handle: ($) =>
         seq(
           $._in_keyword,
