@@ -178,6 +178,7 @@ export default ({ kw }) => ({
     seq(
       $._kw_radio_set,
       optional($.__radio_set_orientation),
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       kw("RADIO-BUTTONS"),
       field("buttons", $.__format_radio_set_buttons),
       optional($.size_phrase),
