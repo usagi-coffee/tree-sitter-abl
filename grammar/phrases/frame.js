@@ -10,6 +10,7 @@ export default ({ kw }) => ({
       alias(kw("NO-LABELS"), $.no_labels),
       alias(kw("NO-LABEL"), $.no_label),
       alias(kw("SIDE-LABELS", { offset: 10 }), $.side_labels),
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(kw("CENTERED", { offset: 6 }), $.centered),
       alias(kw("THREE-D"), $.three_d),
       alias(kw("NO-BOX"), $.no_box),
