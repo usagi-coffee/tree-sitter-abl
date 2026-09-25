@@ -35,6 +35,7 @@ export default ({ kw }) => ({
   _in_widget_pool: ($) =>
     seq(
       $._in_keyword,
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       kw("WIDGET-POOL"),
       field(
         "pool",
