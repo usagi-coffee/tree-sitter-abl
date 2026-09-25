@@ -61,6 +61,7 @@ export default ({ kw }) => ({
         optional(seq($._kw_ordinal, field("ordinal", $.number_literal))),
         // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
         optional(alias(kw("PERSISTENT"), $.persistent)),
+        // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
         optional(alias(kw("THREAD-SAFE"), $.thread_safe)),
       ),
     ),
