@@ -63,7 +63,7 @@ export default ({ kw }) => ({
       seq(kw("CONTEXT-HELP-FILE"), field("context_help_file", $.__browse_option_expression)),
       seq($._kw_in, $._kw_window, field("window", $.__browse_option_expression)),
       seq(kw("MAX-DATA-GUESS"), field("max_data_guess", $.__browse_option_expression)),
-      seq($._row_keyword, field("row", $.__browse_option_expression)),
+      seq($._kw_row, field("row", $.__browse_option_expression)),
       // oxlint-disable-next-line tree-sitter-optimize/shared-choice
       seq(choice($._kw_column, kw("COL")), field("column", $.__browse_option_expression)),
       $._scrollbar_option,

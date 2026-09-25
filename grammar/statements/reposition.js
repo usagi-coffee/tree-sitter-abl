@@ -19,7 +19,7 @@ export default ({ kw }) => ({
             ),
             seq($._kw_recid, field("recid", $._expression), optional($.__no_error)),
             // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
-            seq($._row_keyword, field("row", $._expression)),
+            seq($._kw_row, field("row", $._expression)),
           ),
         ),
         seq(alias($._kw_forwards, $.forwards), field("count", $._expression)),

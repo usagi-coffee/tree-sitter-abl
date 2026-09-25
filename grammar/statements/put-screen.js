@@ -13,7 +13,7 @@ export default ({ kw }) => ({
       // Standard order: [ROW] [COL] value.
       seq(
         // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
-        optional(seq($._row_keyword, field("row", $._expression))),
+        optional(seq($._kw_row, field("row", $._expression))),
         optional(
           // oxlint-disable-next-line tree-sitter-optimize/shared-choice
           seq(choice($._kw_column, kw("COL")), field("column", $._expression)),
@@ -24,7 +24,7 @@ export default ({ kw }) => ({
       seq(
         field("value", $._expression),
         // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
-        seq($._row_keyword, field("row", $._expression)),
+        seq($._kw_row, field("row", $._expression)),
         // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
         optional(
           // oxlint-disable-next-line tree-sitter-optimize/shared-sequence, tree-sitter-optimize/shared-choice, tree-sitter-optimize/inline-keyword-owner

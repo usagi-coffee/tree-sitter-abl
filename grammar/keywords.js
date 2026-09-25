@@ -240,7 +240,7 @@ export default ({ kw }) => ({
   _kw_no_undo: ($) => kw("NO-UNDO"),
   _kw_of: ($) => kw("OF"),
   _kw_like: ($) => kw("LIKE"),
-  _row_keyword: ($) => kw("ROW"),
+  _kw_row: ($) => kw("ROW"),
   // oxlint-disable-next-line tree-sitter-optimize/shared-keyword-inline
   _new_keyword: ($) => kw("NEW"),
   _dataset_keyword: ($) => kw("DATASET"),

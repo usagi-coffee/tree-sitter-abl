@@ -25,7 +25,7 @@ export default ({ kw }) => ({
         ),
         // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
         seq($._kw_column_of, field("column_of", $._expression)),
-        seq($._row_keyword, choice(field("row", $._expression), alias($.__at_of_suffix, $.row_of))),
+        seq($._kw_row, choice(field("row", $._expression), alias($.__at_of_suffix, $.row_of))),
         // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
         seq($._kw_row_of, field("row_of", $._expression)),
       ),

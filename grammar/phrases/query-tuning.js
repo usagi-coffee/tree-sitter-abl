@@ -14,7 +14,7 @@ export default ({ kw }) => ({
       seq(
         kw("CACHE-SIZE"),
         field("cache_size", $.number_literal),
-        optional(choice(alias($._row_keyword, $.row), alias(kw("BYTE"), $.byte))),
+        optional(choice(alias($._kw_row, $.row), alias(kw("BYTE"), $.byte))),
       ),
       seq(
         kw("DEBUG"),
