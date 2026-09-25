@@ -41,7 +41,7 @@ export default ({ kw }) => ({
       $._end_keyword,
     ),
 
-  __procedure_in_super_phrase: ($) => seq($._in_keyword, kw("SUPER")),
+  __procedure_in_super_phrase: ($) => seq($._in_keyword, $._kw_super),
 
   __procedure_external_phrase: ($) =>
     prec.left(
