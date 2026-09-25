@@ -4,7 +4,7 @@ export default ({ kw }) => ({
   __subscribe_prefix: ($) =>
     seq(
       kw("SUBSCRIBE"),
-      optional(seq($._procedure_keyword, field("subscriber", $._text_operand))),
+      optional(seq($._kw_procedure, field("subscriber", $._text_operand))),
       optional($._to_keyword),
       field("event", $._text_operand),
       // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner

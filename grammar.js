@@ -463,7 +463,7 @@ export default grammar({
           $.macro_concatenated_name,
           $.identifier,
           $.qualified_name,
-          alias($._procedure_keyword, $.identifier),
+          alias($._kw_procedure, $.identifier),
           alias($._kw_interface, $.identifier),
         ),
       // BUFFER and TABLE-HANDLE can be identifiers in assignments, receivers,

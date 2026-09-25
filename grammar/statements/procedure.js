@@ -4,7 +4,7 @@ export default ({ kw }) => ({
   __procedure_header: ($) =>
     // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq(
-      $._procedure_keyword,
+      $._kw_procedure,
       optional($._routine_access_modifier),
       field(
         "name",
@@ -33,7 +33,7 @@ export default ({ kw }) => ({
 
   __procedure_body: ($) =>
     // oxlint-disable-next-line tree-sitter-optimize/optional-body-extraction
-    seq($.__procedure_compound_body, optional($._procedure_keyword), $._terminator),
+    seq($.__procedure_compound_body, optional($._kw_procedure), $._terminator),
   __procedure_compound_body: ($) =>
     seq(
       choice(alias($._colon, ":"), alias($._terminator_dot, ".")),
