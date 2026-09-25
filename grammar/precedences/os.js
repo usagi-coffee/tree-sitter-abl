@@ -2,5 +2,5 @@
 export default ($) => [
   // Purpose: prefer function call when filename starts with identifier + '('.
   // Example: OS-APPEND myFunc() target.
-  [$.function_call, $._string_or_identifier_access_or_call],
+  [$.function_call, $._text_operand],
 ];

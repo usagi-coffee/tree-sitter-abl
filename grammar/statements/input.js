@@ -18,10 +18,7 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/single-use-choice, tree-sitter-optimize/body-extraction
   __input_from_target: ($) =>
     choice(
-      field(
-        "file",
-        choice($.opsys_file, $._string_or_identifier_access_or_call, $.preprocessor_name),
-      ),
+      field("file", choice($.opsys_file, $._text_operand, $.preprocessor_name)),
       alias(kw("TERMINAL"), $.terminal),
       $._value_expression,
       seq(

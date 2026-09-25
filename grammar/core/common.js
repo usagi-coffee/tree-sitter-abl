@@ -274,12 +274,11 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/single-use-shared-choice-inline
   _convert_option: ($) =>
     choice(
-      seq($._kw_target, field("target", $._string_or_identifier_access_or_call)),
-      seq($._kw_source, field("source", $._string_or_identifier_access_or_call)),
+      seq($._kw_target, field("target", $._text_operand)),
+      seq($._kw_source, field("source", $._text_operand)),
     ),
 
-  _string_or_identifier_access_or_call: ($) =>
-    choice($.string_literal, $._identifier_or_access_or_call),
+  _text_operand: ($) => choice($.string_literal, $._identifier_or_access_or_call),
 
   // oxlint-disable-next-line tree-sitter-optimize/single-use-shared-choice-inline
   _echo_phrase: ($) => choice(alias(kw("ECHO"), $.echo), alias(kw("NO-ECHO"), $.no_echo)),
@@ -494,25 +493,12 @@ export default ({ kw }) => ({
   _alert_box_title: ($) => seq($._kw_title, field("title", $._alert_box_title_value)),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-shared-choice-inline
   _alert_box_title_value: ($) =>
-    choice(
-      $._string_or_identifier_access_or_call,
-      alias($._alert_box_title_concatenation, $.binary_expression),
-    ),
+    choice($._text_operand, alias($._alert_box_title_concatenation, $.binary_expression)),
   // oxlint-disable-next-line tree-sitter-optimize/shared-precedence-sequence-inline
   _alert_box_title_concatenation: ($) =>
-    prec.right(
-      1,
-      seq($._string_or_identifier_access_or_call, $._alert_box_title_concatenation_tail),
-    ),
+    prec.right(1, seq($._text_operand, $._alert_box_title_concatenation_tail)),
   _alert_box_title_concatenation_tail: ($) =>
-    prec.right(
-      1,
-      seq(
-        "+",
-        $._string_or_identifier_access_or_call,
-        optional($._alert_box_title_concatenation_tail),
-      ),
-    ),
+    prec.right(1, seq("+", $._text_operand, optional($._alert_box_title_concatenation_tail))),
   _alert_type: ($) =>
     choice(
       kw("MESSAGE"),

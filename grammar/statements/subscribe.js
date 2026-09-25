@@ -4,17 +4,14 @@ export default ({ kw }) => ({
   __subscribe_prefix: ($) =>
     seq(
       kw("SUBSCRIBE"),
-      optional(
-        seq($._procedure_keyword, field("subscriber", $._string_or_identifier_access_or_call)),
-      ),
+      optional(seq($._procedure_keyword, field("subscriber", $._text_operand))),
       optional($._to_keyword),
-      field("event", $._string_or_identifier_access_or_call),
+      field("event", $._text_operand),
       // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       choice(alias($.__subscribe_in_phrase, $.in_phrase), alias(kw("ANYWHERE"), $.anywhere)),
       optional(alias($.__subscribe_run_procedure_phrase, $.run_procedure_phrase)),
     ),
-  __subscribe_in_phrase: ($) =>
-    seq($._in_keyword, field("publisher", $._string_or_identifier_access_or_call)),
+  __subscribe_in_phrase: ($) => seq($._in_keyword, field("publisher", $._text_operand)),
   __subscribe_run_procedure_phrase: ($) =>
-    seq(kw("RUN-PROCEDURE"), field("procedure", $._string_or_identifier_access_or_call)),
+    seq(kw("RUN-PROCEDURE"), field("procedure", $._text_operand)),
 });
