@@ -46,7 +46,7 @@ export default ({ kw }) => ({
     // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq(
       kw("PERSISTENT"),
-      kw("RUN"),
+      $._kw_run,
       field("procedure", $.__persistent_trigger_procedure),
       optional($.__persistent_trigger_tail),
       optional($._terminator_dot),

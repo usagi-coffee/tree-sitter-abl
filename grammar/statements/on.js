@@ -173,7 +173,7 @@ export default ({ kw }) => ({
       // oxlint-disable-next-line tree-sitter-optimize/optional-body-extraction
       seq(
         kw("PERSISTENT"),
-        kw("RUN"),
+        $._kw_run,
         field("procedure", $.identifier),
         optional($.arguments),
         optional(alias($.__on_in_phrase, $.in_phrase)),

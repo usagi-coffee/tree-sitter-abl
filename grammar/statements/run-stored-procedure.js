@@ -1,6 +1,6 @@
 export default ({ kw }) => ({
   run_stored_procedure_statement: ($) =>
-    seq(kw("RUN"), $.__run_stored_procedure_body, $._terminator),
+    seq($._kw_run, $.__run_stored_procedure_body, $._terminator),
 
   __run_stored_procedure_body: ($) =>
     // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction

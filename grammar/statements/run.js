@@ -1,5 +1,5 @@
 export default ({ kw }) => ({
-  run_statement: ($) => seq(kw("RUN"), $.__run_body, $._no_error_terminator),
+  run_statement: ($) => seq($._kw_run, $.__run_body, $._no_error_terminator),
 
   __run_body: ($) =>
     // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
