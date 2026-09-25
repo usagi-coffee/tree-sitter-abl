@@ -5,6 +5,7 @@ export default ({ kw }) => ({
     seq(
       kw("SAVE"),
       $._kw_cache,
+      // oxlint-disable-next-line tree-sitter-optimize/choice-product-extraction
       choice($._kw_current, kw("COMPLETE")),
       choice(field("database", $.identifier), field("database", $.__save_cache_value_expression)),
       $._to_keyword,
