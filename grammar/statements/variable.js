@@ -13,7 +13,7 @@ export default ({ kw }) => ({
     seq(
       field("name", $.identifier),
       optional($.__variable_extents),
-      optional(alias($._no_undo_keyword, $.no_undo)),
+      optional(alias($._kw_no_undo, $.no_undo)),
       choice(
         seq($._kw_as, $._class_type),
         seq($._like_keyword, field("like", $._identifier_or_array_access)),
@@ -45,7 +45,7 @@ export default ({ kw }) => ({
       $.view_as_phrase,
       // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(seq(optional(kw("NOT")), kw("CASE-SENSITIVE")), $.case_sensitive),
-      alias($._no_undo_keyword, $.no_undo),
+      alias($._kw_no_undo, $.no_undo),
       $.trigger_phrase,
     ),
 

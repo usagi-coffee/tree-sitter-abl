@@ -56,6 +56,6 @@ export default ({ kw }) => ({
       $._format_string,
       seq(kw("INITIAL"), field("initial", $._expression)),
       $._aggregate_label_phrase,
-      alias($._no_undo_keyword, $.no_undo),
+      alias($._kw_no_undo, $.no_undo),
     ),
 });

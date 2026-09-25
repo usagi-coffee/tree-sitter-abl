@@ -56,7 +56,7 @@ export default ({ kw }) => ({
       alias($._extent_phrase, $.extent_phrase),
       $._initial_phrase,
       seq($._aggregate_label_phrase, optional($.__parameter_label_tail)),
-      alias($._no_undo_keyword, $.no_undo),
+      alias($._kw_no_undo, $.no_undo),
     ),
   __parameter_table_options: ($) =>
     prec.right(
@@ -68,7 +68,7 @@ export default ({ kw }) => ({
           alias(kw("BIND"), $.bind),
           // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
           alias(kw("BY-VALUE"), $.by_value),
-          alias($._no_undo_keyword, $.no_undo),
+          alias($._kw_no_undo, $.no_undo),
         ),
         optional($.__parameter_table_options),
       ),
@@ -81,7 +81,7 @@ export default ({ kw }) => ({
           alias(kw("BY-VALUE"), $.by_value),
           // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
           alias(kw("BY-REFERENCE"), $.by_reference),
-          alias($._no_undo_keyword, $.no_undo),
+          alias($._kw_no_undo, $.no_undo),
         ),
         optional($.__parameter_handle_options),
       ),

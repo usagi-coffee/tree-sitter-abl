@@ -189,7 +189,7 @@ export default ({ kw }) => ({
       $._initial_phrase,
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence, tree-sitter-optimize/inline-keyword-owner
       seq(kw("SERIALIZE-NAME"), field("serialize_name", $.string_literal)),
-      alias($._no_undo_keyword, $.no_undo),
+      alias($._kw_no_undo, $.no_undo),
       alias($._extent_phrase, $.extent_phrase),
     ),
 
@@ -231,7 +231,7 @@ export default ({ kw }) => ({
     seq(
       field("name", $.identifier),
       $.__class_method_variable_type_phrase,
-      optional(alias($._no_undo_keyword, $.no_undo)),
+      optional(alias($._kw_no_undo, $.no_undo)),
     ),
 
   // oxlint-disable-next-line tree-sitter-optimize/body-extraction

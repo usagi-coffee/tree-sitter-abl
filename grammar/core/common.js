@@ -298,7 +298,7 @@ export default ({ kw }) => ({
     // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq(
       field("name", $.identifier),
-      optional(alias($._no_undo_keyword, $.no_undo)),
+      optional(alias($._kw_no_undo, $.no_undo)),
       optional($._table_body_tail),
     ),
   // oxlint-disable-next-line tree-sitter-optimize/body-extraction, tree-sitter-optimize/single-use-shared-choice-inline

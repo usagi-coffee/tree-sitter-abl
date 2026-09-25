@@ -22,7 +22,7 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/single-use-choice, tree-sitter-optimize/optional-tail-choice-collapse
   __work_table_like_no_undo_tail: ($) =>
     choice(
-      seq(alias($._like_phrase, $.like_phrase), optional(alias($._no_undo_keyword, $.no_undo))),
-      alias($._no_undo_keyword, $.no_undo),
+      seq(alias($._like_phrase, $.like_phrase), optional(alias($._kw_no_undo, $.no_undo))),
+      alias($._kw_no_undo, $.no_undo),
     ),
 });

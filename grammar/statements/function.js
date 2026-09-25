@@ -91,7 +91,7 @@ export default ({ kw }) => ({
       seq(
         field("name", $.identifier),
         $.__function_variable_type_phrase,
-        optional(alias($._no_undo_keyword, $.no_undo)),
+        optional(alias($._kw_no_undo, $.no_undo)),
       ),
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
       seq(
