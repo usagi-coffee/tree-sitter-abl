@@ -101,7 +101,7 @@ export default ({ kw }) => ({
           alias($._kw_blank, $.blank),
           alias($._kw_deblank, $.deblank),
           alias($._kw_disable_auto_zap, $.disable_auto_zap),
-          alias(kw("NO-TAB-STOP"), $.no_tab_stop),
+          alias($._kw_no_tab_stop, $.no_tab_stop),
         ),
       ),
     ),

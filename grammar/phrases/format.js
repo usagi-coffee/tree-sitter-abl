@@ -9,7 +9,7 @@ export default ({ kw }) => ({
       $._kw_blank,
       $._kw_deblank,
       $._kw_disable_auto_zap,
-      kw("NO-TAB-STOP"),
+      $._kw_no_tab_stop,
     ),
 
   // oxlint-disable-next-line tree-sitter-optimize/body-extraction, tree-sitter-optimize/single-use-shared-choice-inline
