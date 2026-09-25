@@ -11,10 +11,11 @@ export default ({ kw }) => ({
   __export_tail: ($) =>
     choice(
       // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
-      seq($.__export_except_phrase, optional(alias(kw("NO-LOBS"), $.no_lobs))),
+      seq(
+        seq($._kw_except, $._import_export_except_names),
+        optional(alias(kw("NO-LOBS"), $.no_lobs)),
+      ),
       // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(kw("NO-LOBS"), $.no_lobs),
     ),
-  // oxlint-disable-next-line tree-sitter-optimize/single-use-keyword-sequence
-  __export_except_phrase: ($) => seq($._kw_except, $._import_export_except_names),
 });
