@@ -9,5 +9,5 @@ export default ({ kw }) => ({
       optional($.frame_phrase),
     ),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
-  __scroll_direction: ($) => choice(alias(kw("UP"), $.up), alias($._kw_down, $.down)),
+  __scroll_direction: ($) => choice(alias($._kw_up, $.up), alias($._kw_down, $.down)),
 });
