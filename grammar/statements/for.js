@@ -55,7 +55,7 @@ export default ({ kw }) => ({
     ),
 
   __for_by_phrase: ($) => prec.right($.__for_by_clause),
-  __for_group_by_phrase: ($) => prec.right(seq(kw("GROUP"), $.__for_by_clause)),
+  __for_group_by_phrase: ($) => prec.right(seq($._kw_group, $.__for_by_clause)),
 
   __for_break_by: ($) => prec.right(seq($._kw_break, $.__for_by_clause)),
   __for_by_clause: ($) =>

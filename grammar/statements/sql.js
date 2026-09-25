@@ -197,7 +197,7 @@ export default ({ kw }) => ({
   __sql_group_by_clause: ($) =>
     // oxlint-disable-next-line tree-sitter-optimize/list-head-extraction
     seq(
-      kw("GROUP"),
+      $._kw_group,
       $._by_keyword,
       field("group", $._identifier_or_qualified_name),
       optional($.__sql_group_by_tail),
