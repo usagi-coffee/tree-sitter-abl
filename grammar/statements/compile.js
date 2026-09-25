@@ -41,6 +41,7 @@ export default ({ kw }) => ({
       seq(kw("DEFAULT-UNTRANSLATABLE"), optional(alias($._equals_value, $.default_untranslatable))),
       seq(kw("LANGUAGES"), "(", field("languages", $._expression), ")"),
       seq(kw("TEXT-SEG-GROW"), field("text_seg_grow", $._expression)),
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(kw("ATTR-SPACE"), $.attr_space),
       alias(kw("NO-ATTR-SPACE"), $.no_attr_space),
       seq(kw("STREAM-IO"), optional(alias($._equals_value, $.stream_io))),

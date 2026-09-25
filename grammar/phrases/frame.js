@@ -12,6 +12,7 @@ export default ({ kw }) => ({
       alias(kw("CENTERED", { offset: 6 }), $.centered),
       alias(kw("THREE-D"), $.three_d),
       alias(kw("NO-BOX"), $.no_box),
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(kw("ATTR-SPACE"), $.attr_space),
       alias(kw("NO-ATTR-SPACE"), $.no_attr_space),
       alias(kw("OVERLAY"), $.overlay),

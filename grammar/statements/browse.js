@@ -96,6 +96,7 @@ export default ({ kw }) => ({
       alias(kw("KEEP-TAB-ORDER"), $.keep_tab_order),
       alias(kw("CENTERED", { offset: 6 }), $.centered),
       alias(kw("THREE-D"), $.three_d),
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(kw("ATTR-SPACE"), $.attr_space),
       alias(kw("NO-ATTR-SPACE"), $.no_attr_space),
       alias(kw("CONTEXT-HELP"), $.context_help),
