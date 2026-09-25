@@ -5,7 +5,7 @@ export default ({ kw }) => ({
     seq(
       $._kw_cursor,
       choice(
-        kw("OFF"),
+        $._kw_off,
         seq(
           // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
           optional(seq($._row_keyword, field("row", $._expression))),
