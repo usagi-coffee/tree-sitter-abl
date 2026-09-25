@@ -18,7 +18,7 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __open_query_tail_after_tuning: ($) =>
     choice(
-      seq(alias(kw("BREAK"), $.break), optional($.__open_query_tail_after_break)),
+      seq(alias($._kw_break, $.break), optional($.__open_query_tail_after_break)),
       $.__open_query_tail_after_break,
     ),
   __open_query_tail_after_break: ($) =>

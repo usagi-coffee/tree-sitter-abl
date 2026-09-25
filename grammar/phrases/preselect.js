@@ -7,7 +7,7 @@ export default ({ kw }) => ({
       optional(
         prec.right(
           seq(
-            optional(kw("BREAK")),
+            optional($._kw_break),
             // oxlint-disable-next-line tree-sitter-optimize/recurse
             repeat1(
               choice(
