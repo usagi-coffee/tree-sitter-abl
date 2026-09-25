@@ -2,7 +2,12 @@ export default ({ kw }) => ({
   preselect_statement: ($) => seq($.__preselect_prefix, $._terminator),
 
   // oxlint-disable-next-line tree-sitter-optimize/single-use-keyword-sequence
-  __preselect_prefix: ($) => seq(kw("PRESELECT"), $.preselect_record_list),
+  __preselect_prefix: ($) =>
+    seq(
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
+      kw("PRESELECT"),
+      $.preselect_record_list,
+    ),
 
   preselect_record_list: ($) => seq($.preselect_record, optional($.__preselect_record_list_tail)),
   __preselect_record_list_tail: ($) =>
