@@ -15,6 +15,7 @@ export default ({ kw }) => ({
   __buffer_compare_tail: ($) =>
     choice(
       seq(
+        // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
         choice(alias(kw("CASE-SENSITIVE"), $.case_sensitive), alias(kw("BINARY"), $.binary)),
         optional($.__buffer_compare_after_mode),
       ),
