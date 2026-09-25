@@ -4,6 +4,7 @@ export default ({ kw }) => ({
   __empty_temp_table_prefix: ($) =>
     seq(
       kw("EMPTY"),
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       kw("TEMP-TABLE"),
       field("name", $.identifier),
       // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
