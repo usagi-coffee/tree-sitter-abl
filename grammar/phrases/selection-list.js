@@ -10,6 +10,7 @@ export default ({ kw }) => ({
       kw("NO-DRAG"),
       $._list_items_phrase,
       $._list_item_pairs_phrase,
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       kw("SCROLLBAR-HORIZONTAL"),
       kw("SCROLLBAR-VERTICAL"),
       $.size_phrase,

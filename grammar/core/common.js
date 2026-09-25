@@ -615,6 +615,7 @@ export default ({ kw }) => ({
     ),
   _scrollbar_option: ($) =>
     choice(
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(kw("SCROLLBAR-HORIZONTAL"), $.scrollbar_horizontal),
       alias(kw("SCROLLBAR-VERTICAL"), $.scrollbar_vertical),
     ),

@@ -92,6 +92,7 @@ export default ({ kw }) => ({
       seq($._kw_max_chars, field("max_chars", $.number_literal)),
       kw("NO-BOX"),
       kw("NO-WORD-WRAP"),
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       kw("SCROLLBAR-HORIZONTAL"),
       kw("SCROLLBAR-VERTICAL"),
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
