@@ -8,6 +8,7 @@ export default ({ kw }) => ({
       optional(seq(kw("FRAME", { offset: 4 }), field("frame", $.identifier))),
       // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       optional(alias(kw("ALL"), $.all)),
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       optional(alias(kw("NO-PAUSE"), $.no_pause)),
     ),
 });
