@@ -42,3 +42,30 @@ HIDE FIELD a.
   (hide_statement
     (widget_phrase
       field: (identifier))))
+
+================================================================================
+WIDGET - macro names retain frame browse and menu fields
+================================================================================
+
+VIEW FIELD a IN FRAME {&FRAME-NAME}.
+HIDE a IN BROWSE {&BROWSE-NAME}.
+VIEW MENU-ITEM go IN MENU {&MENU-NAME}.
+
+--------------------------------------------------------------------------------
+
+(source_code
+  (view_statement
+    (widget_phrase
+      field: (identifier)
+      frame: (preprocessor_name
+        (identifier))))
+  (hide_statement
+    (widget_phrase
+      column: (identifier)
+      browse: (preprocessor_name
+        (identifier))))
+  (view_statement
+    (widget_phrase
+      item: (identifier)
+      menu: (preprocessor_name
+        (identifier)))))

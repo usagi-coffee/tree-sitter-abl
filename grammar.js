@@ -175,6 +175,7 @@ export default grammar({
   ],
   inline: ($) => [
     ...inlineKeywords($),
+    $.__widget_name,
     $._list_item_pairs_phrase,
     $._list_items_phrase,
     $._table_handle_value,
