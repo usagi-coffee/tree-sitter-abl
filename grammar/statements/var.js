@@ -27,7 +27,7 @@ export default ({ kw }) => ({
         choice($.number_literal, $.preprocessor_name, $.identifier),
       ),
     ),
-  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-choice, tree-sitter-optimize/optional-tail-choice-collapse
   __var_modifier: ($) =>
     choice(
       seq($._member_access_modifier, optional($.__var_storage_modifier)),
