@@ -57,7 +57,11 @@ export default ({ kw }) => ({
     choice($.identifier, $.qualified_name, $.string_literal, $._value_expression),
 
   __compile_append_option: ($) =>
-    seq(kw("APPEND"), optional(seq("=", field("append", $._expression)))),
+    seq(
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
+      kw("APPEND"),
+      optional(seq("=", field("append", $._expression))),
+    ),
   __compile_page_size_option: ($) => seq(kw("PAGE-SIZE"), field("page_size", $._expression)),
   __compile_page_width_option: ($) => seq(kw("PAGE-WIDTH"), field("page_width", $._expression)),
 });
