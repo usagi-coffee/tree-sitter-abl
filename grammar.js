@@ -221,6 +221,7 @@ export default grammar({
     $._kw_pfcolor,
     $._kw_stream,
     $._kw_skip,
+    $._kw_table_handle,
     $._kw_triggers,
     $._kw_text,
     $._kw_update,
@@ -524,6 +525,7 @@ export default grammar({
       _kw_pfcolor: ($) => kw("PFCOLOR"),
       _kw_stream: ($) => kw("STREAM"),
       _kw_skip: ($) => kw("SKIP"),
+      _kw_table_handle: ($) => kw("TABLE-HANDLE"),
       _kw_triggers: ($) => kw("TRIGGERS"),
       _kw_text: ($) => kw("TEXT"),
       _kw_update: ($) => kw("UPDATE"),
@@ -574,7 +576,7 @@ export default grammar({
       // boundaries such as ASSIGN x = Buffer y = 1.
       // oxlint-disable-next-line tree-sitter-optimize/shared-keyword-alias-choice-inline
       _bare_marker_identifier: ($) =>
-        choice(alias($._kw_buffer, $.identifier), alias(kw("TABLE-HANDLE"), $.identifier)),
+        choice(alias($._kw_buffer, $.identifier), alias($._kw_table_handle, $.identifier)),
       _identifier_or_array_access: ($) => choice($._identifier_or_qualified_name, $.array_access),
       // oxlint-disable-next-line tree-sitter-optimize/choice-subset
       _identifier_or_access: ($) =>
@@ -792,7 +794,7 @@ export default grammar({
             seq(
               choice(
                 seq(
-                  choice(kw("TABLE"), $._kw_buffer, kw("TABLE-HANDLE"), kw("DATASET-HANDLE")),
+                  choice(kw("TABLE"), $._kw_buffer, $._kw_table_handle, kw("DATASET-HANDLE")),
                   field(
                     "name",
                     choice(
