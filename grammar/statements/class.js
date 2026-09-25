@@ -98,6 +98,7 @@ export default ({ kw }) => ({
           alias(kw("PACKAGE-PRIVATE"), $.access_modifier),
           alias(kw("PROTECTED"), $.access_modifier),
           alias(kw("PACKAGE-PROTECTED"), $.access_modifier),
+          // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
           alias(kw("PUBLIC"), $.access_modifier),
           // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
           alias(kw("STATIC"), $.static_modifier),
@@ -113,6 +114,7 @@ export default ({ kw }) => ({
   destructor_definition: ($) =>
     seq(
       kw("DESTRUCTOR"),
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       optional(alias(kw("PUBLIC"), $.access_modifier)),
       field("name", $.identifier),
       alias($.__class_destructor_parameters, $.parameters),
@@ -205,6 +207,7 @@ export default ({ kw }) => ({
       alias(kw("PACKAGE-PRIVATE"), $.access_modifier),
       alias(kw("PROTECTED"), $.access_modifier),
       alias(kw("PACKAGE-PROTECTED"), $.access_modifier),
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(kw("PUBLIC"), $.access_modifier),
       $.preprocessor_name,
       // A {&NAME} alone on its line lexes as the whole-line macro_statement
@@ -288,6 +291,7 @@ export default ({ kw }) => ({
       alias(kw("PACKAGE-PRIVATE"), $.access_modifier),
       alias(kw("PROTECTED"), $.access_modifier),
       alias(kw("PACKAGE-PROTECTED"), $.access_modifier),
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(kw("PUBLIC"), $.access_modifier),
       // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(kw("STATIC"), $.static_modifier),

@@ -565,6 +565,7 @@ export default grammar({
           // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
           alias(kw("PRIVATE"), $.access_modifier),
           alias(kw("PROTECTED"), $.access_modifier),
+          // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
           alias(kw("PUBLIC"), $.access_modifier),
         ),
 

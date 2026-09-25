@@ -62,7 +62,12 @@ export default ({ kw }) => ({
     seq($._define_keyword, $._dataset_keyword, $._dataset_body, $._terminator),
 
   __interface_event: ($) =>
-    seq($._define_keyword, optional(alias(kw("PUBLIC"), $.access_modifier)), $._event_tail),
+    seq(
+      $._define_keyword,
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
+      optional(alias(kw("PUBLIC"), $.access_modifier)),
+      $._event_tail,
+    ),
 
   interface_method_definition: ($) => seq(kw("METHOD"), $._method_header, $._terminator_dot),
 });
