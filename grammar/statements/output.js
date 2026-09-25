@@ -100,6 +100,7 @@ export default ({ kw }) => ({
         "file",
         choice($.opsys_file, $.string_literal, $.preprocessor_name, $.identifier, $.qualified_name),
       ),
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(kw("TERMINAL"), $.terminal),
       $._value_expression,
       alias($._kw_clipboard, $.clipboard),
