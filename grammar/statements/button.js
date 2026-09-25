@@ -17,7 +17,7 @@ export default ({ kw }) => ({
           alias(kw("DEFAULT"), $.default),
           $._color_font_option,
           // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
-          seq(kw("CONTEXT-HELP-ID"), field("context_help_id", $._expression)),
+          seq($._kw_context_help_id, field("context_help_id", $._expression)),
           alias(kw("DROP-TARGET"), $.drop_target),
           seq(kw("IMAGE-DOWN"), field("image_down", $.image_phrase)),
           seq($._kw_image, field("image", $.image_phrase)),

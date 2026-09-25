@@ -30,7 +30,7 @@ export default ({ kw }) => ({
   __browse_option: ($) =>
     choice(
       $._with_keyword,
-      seq(kw("CONTEXT-HELP-ID"), field("context_help_id", $.__browse_option_expression)),
+      seq($._kw_context_help_id, field("context_help_id", $.__browse_option_expression)),
       $.__browse_flag_option,
       seq($._kw_tooltip, field("tooltip", $.__browse_option_expression)),
       seq($._kw_bgcolor, field("bgcolor", $.__browse_option_expression)),
