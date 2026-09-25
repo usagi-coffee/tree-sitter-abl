@@ -16,7 +16,7 @@ export default ({ kw }) => ({
 
   __image_from_phrase: ($) =>
     seq(
-      kw("FROM"),
+      $._kw_from,
       choice(
         seq(kw("X"), field("x", $.number_literal), kw("Y"), field("y", $.number_literal)),
         seq(

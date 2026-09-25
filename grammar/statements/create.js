@@ -90,7 +90,7 @@ export default ({ kw }) => ({
       field("new_database", $._expression),
       optional(
         seq(
-          kw("FROM"),
+          $._kw_from,
           field("old_database", $._expression),
           optional(alias(kw("NEW-INSTANCE"), $.new_instance)),
         ),

@@ -6,7 +6,7 @@ export default ({ kw }) => ({
       alias($._close_keyword, $.close),
       // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
       seq(
-        kw("FROM"),
+        $._kw_from,
         $.__input_from_target,
         optional(alias($._lob_dir_phrase, $.lob_dir_phrase)),
         optional(choice($.__input_binary_tail, $._echo_map_unbuffered_convert_tail)),

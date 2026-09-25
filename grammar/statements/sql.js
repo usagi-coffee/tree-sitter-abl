@@ -137,7 +137,7 @@ export default ({ kw }) => ({
   __sql_select_from_body: ($) =>
     // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq(
-      kw("FROM"),
+      $._kw_from,
       $.__sql_table_references,
       optional($.__aggregate_where_phrase),
       optional($.__sql_group_by_clause),

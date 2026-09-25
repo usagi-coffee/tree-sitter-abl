@@ -5,7 +5,7 @@ export default ({ kw }) => ({
   __copy_lob_prefix: ($) =>
     seq(
       kw("COPY-LOB"),
-      optional(kw("FROM")),
+      optional($._kw_from),
       $.__copy_lob_source,
       optional(seq(kw("STARTING"), $._at_keyword, field("starting_at", $._expression))),
       optional(seq($._for_keyword, field("for_length", $._expression))),
