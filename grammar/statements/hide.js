@@ -15,6 +15,7 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __hide_target: ($) =>
     choice(
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(kw("MESSAGE"), $.message),
       // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(kw("ALL"), $.all),
