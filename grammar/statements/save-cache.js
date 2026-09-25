@@ -11,6 +11,7 @@ export default ({ kw }) => ({
       $._to_keyword,
       choice(field("path", $.string_literal), field("path", $.__save_cache_value_expression)),
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/sequence-subset
   __save_cache_value_expression: ($) =>
     // oxlint-disable-next-line tree-sitter-optimize/single-use-keyword-sequence
     seq($._kw_value, $._parenthesized_expression_prefix, ")"),
