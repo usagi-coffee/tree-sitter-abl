@@ -2,7 +2,7 @@ export default ({ kw }) => ({
   slider_phrase: ($) =>
     // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq(
-      kw("SLIDER"),
+      $._kw_slider,
       optional(
         choice(
           seq(

@@ -20,7 +20,7 @@ export default ({ kw }) => ({
         kw("RADIO-SET"),
         kw("RECTANGLE"),
         kw("SELECTION-LIST"),
-        kw("SLIDER"),
+        $._kw_slider,
         $._kw_sub_menu,
         $._kw_text,
         kw("TOGGLE-BOX"),
