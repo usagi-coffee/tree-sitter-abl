@@ -94,6 +94,7 @@ export default ({ kw }) => ({
       seq($._kw_fgcolor, field("title_fgcolor", $.__frame_expression)),
       seq($._kw_font, field("title_font", $.__frame_expression)),
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
   __frame_column_keyword: ($) => choice($._kw_column, kw("COLUMNS"), kw("COL")),
   // oxlint-disable-next-line tree-sitter-optimize/choice-subset, tree-sitter-optimize/shared-choice
   __frame_identifier: ($) => choice($.identifier, $.preprocessor_name),
