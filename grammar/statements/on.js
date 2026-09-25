@@ -221,6 +221,7 @@ export default ({ kw }) => ({
       $._kw_stop,
       $._kw_tab,
     ),
+  // oxlint-disable-next-line tree-sitter-optimize/broad-dispatcher
   __on_ui_key_function: ($) =>
     choice(
       $._kw_back_tab,
