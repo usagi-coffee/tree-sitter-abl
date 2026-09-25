@@ -49,6 +49,7 @@ export default ({ kw }) => ({
       alias(kw("ACCUM"), $.accum),
       $.__frame_with_identifier,
       seq($._row_keyword, field("row", $.__frame_expression)),
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       seq(kw("WIDTH"), field("width", $.__frame_expression)),
       seq($._kw_font, field("font", $.number_literal)),
       seq(kw("CANCEL-BUTTON"), field("cancel_button", $.__frame_identifier)),
