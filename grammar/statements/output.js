@@ -75,6 +75,7 @@ export default ({ kw }) => ({
       alias(kw("NO-MAP"), $.no_map),
       alias(kw("PAGED"), $.paged),
       alias($.__output_page_size_phrase, $.page_size_phrase),
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(kw("UNBUFFERED"), $.unbuffered),
       alias($._convert_phrase, $.convert_phrase),
     ),
