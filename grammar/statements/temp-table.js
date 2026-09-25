@@ -88,7 +88,7 @@ export default ({ kw }) => ({
       seq($._kw_extent, field("extent", choice($.number_literal, $.preprocessor_name))),
       $._format_string,
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
-      seq($._help_keyword, field("help", $.string_literal)),
+      seq($._kw_help, field("help", $.string_literal)),
       $._initial_phrase,
       seq($._kw_label, field("label", $.__temp_table_label_list)),
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence, tree-sitter-optimize/inline-keyword-owner

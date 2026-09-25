@@ -162,7 +162,7 @@ export default ({ kw }) => ({
             seq(kw("LABEL-FGCOLOR"), field("label_fgcolor", $.__browse_option_expression)),
             seq(kw("LABEL-PFCOLOR"), field("label_pfcolor", $.__browse_option_expression)),
             // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
-            seq($._help_keyword, field("help", $.string_literal)),
+            seq($._kw_help, field("help", $.string_literal)),
             seq(
               $._kw_validate,
               "(",

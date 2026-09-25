@@ -27,7 +27,7 @@ export default ({ kw }) => ({
     ),
   __set_fields_tail_after_format_validate: ($) =>
     choice(
-      seq($._help_keyword, field("help", $.string_literal), optional($.__set_frame_editing_tail)),
+      seq($._kw_help, field("help", $.string_literal), optional($.__set_frame_editing_tail)),
       $.__set_frame_editing_tail,
     ),
   __set_frame_editing_tail: ($) =>

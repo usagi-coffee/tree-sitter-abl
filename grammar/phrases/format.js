@@ -23,7 +23,7 @@ export default ({ kw }) => ({
       seq($._kw_fgcolor, field("fgcolor", $.__format_expression)),
       seq($._kw_font, field("font", $.__format_expression)),
       $._format_format,
-      seq($._help_keyword, field("help", $.__format_expression)),
+      seq($._kw_help, field("help", $.__format_expression)),
       $._format_label,
       seq($._kw_pfcolor, field("pfcolor", $.__format_expression)),
       $._format_validate,
