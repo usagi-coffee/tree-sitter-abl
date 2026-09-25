@@ -13,7 +13,7 @@ export default ({ kw }) => ({
   __delete_object_prefix: ($) =>
     seq(
       $._delete_keyword,
-      kw("OBJECT"),
+      $._kw_object,
       field(
         "name",
         choice(
