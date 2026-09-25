@@ -10,6 +10,7 @@ export default ({ kw }) => ({
           // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
           seq($._kw_inner_lines, field("inner_lines", $.number_literal)),
           $.size_phrase,
+          // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
           alias(kw("SORT"), $.sort),
           $._tooltip_phrase,
           alias(kw("SIMPLE"), $.simple),
