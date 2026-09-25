@@ -39,6 +39,7 @@ export default ({ kw }) => ({
       // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(kw("STATIC"), $.static_modifier),
       alias(kw("SERIALIZABLE"), $.serialization_modifier),
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(kw("NON-SERIALIZABLE"), $.serialization_modifier),
     ),
 });
