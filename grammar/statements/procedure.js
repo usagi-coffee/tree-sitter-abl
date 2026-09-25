@@ -24,7 +24,7 @@ export default ({ kw }) => ({
   __procedure_option: ($) =>
     choice(
       alias(kw("CDECL"), $.cdecl),
-      seq(kw("ORDINAL"), field("ordinal", $.number_literal)),
+      seq($._kw_ordinal, field("ordinal", $.number_literal)),
       alias(kw("PERSISTENT"), $.persistent),
       alias(seq(kw("THREAD-SAFE"), optional(kw("SAFE"))), $.thread_safe),
       alias($.__procedure_external_phrase, $.external_phrase),
@@ -58,7 +58,7 @@ export default ({ kw }) => ({
           ),
         ),
         // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
-        optional(seq(kw("ORDINAL"), field("ordinal", $.number_literal))),
+        optional(seq($._kw_ordinal, field("ordinal", $.number_literal))),
         optional(alias(kw("PERSISTENT"), $.persistent)),
         optional(alias(kw("THREAD-SAFE"), $.thread_safe)),
       ),
