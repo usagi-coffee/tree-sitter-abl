@@ -381,6 +381,7 @@ export default ({ kw }) => ({
         choice(
           // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
           alias(kw("BIND"), $.bind),
+          // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
           alias(kw("BY-VALUE"), $.by_value),
           alias(kw("BY-REFERENCE"), $.by_reference),
         ),
