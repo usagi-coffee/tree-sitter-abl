@@ -13,7 +13,7 @@ export default ({ kw }) => ({
   __undo_action: ($) =>
     choice(
       seq(
-        kw("THROW"),
+        $._kw_throw,
         optional(
           field(
             "value",
