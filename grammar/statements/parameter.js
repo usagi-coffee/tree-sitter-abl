@@ -49,7 +49,7 @@ export default ({ kw }) => ({
     choice(
       alias(seq(optional(kw("NOT")), kw("CASE-SENSITIVE")), $.case_sensitive),
       $._format_string,
-      // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
+      // oxlint-disable-next-line tree-sitter-optimize/shared-sequence, tree-sitter-optimize/inline-keyword-owner
       seq(kw("COLUMN-LABEL"), field("column_label", $.string_literal)),
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
       seq(kw("DECIMALS"), field("decimals", $.number_literal)),
