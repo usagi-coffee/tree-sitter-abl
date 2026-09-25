@@ -21,7 +21,7 @@ export default ({ kw }) => ({
 
   __temp_table_index: ($) =>
     seq(
-      kw("INDEX"),
+      $._kw_index,
       field("name", $.identifier),
       optional(
         // oxlint-disable-next-line tree-sitter-optimize/shared-choice, tree-sitter-optimize/recurse

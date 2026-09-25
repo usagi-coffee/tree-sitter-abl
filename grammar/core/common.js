@@ -375,7 +375,7 @@ export default ({ kw }) => ({
 
   _table_index: ($) =>
     seq(
-      kw("INDEX"),
+      $._kw_index,
       field(
         "name",
         choice(
