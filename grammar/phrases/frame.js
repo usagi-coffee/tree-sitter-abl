@@ -35,6 +35,7 @@ export default ({ kw }) => ({
       alias(kw("NO-VALIDATE"), $.no_validate),
       // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(kw("SCROLLABLE"), $.scrollable),
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(kw("TOP-ONLY"), $.top_only),
       alias(kw("SCREEN-IO"), $.screen_io),
       alias(kw("KEEP-TAB-ORDER"), $.keep_tab_order),
