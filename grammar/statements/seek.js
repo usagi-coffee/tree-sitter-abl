@@ -2,7 +2,7 @@ export default ({ kw }) => ({
   seek_statement: ($) => prec.right(seq($.__seek_prefix, $._terminator)),
 
   __seek_prefix: ($) =>
-    seq(kw("SEEK"), $.__seek_stream, $._to_keyword, choice($._end_keyword, $._expression)),
+    seq($._kw_seek, $.__seek_stream, $._to_keyword, choice($._end_keyword, $._expression)),
 
   // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __seek_stream: ($) => choice($._kw_input, kw("OUTPUT"), $._stream_phrase),
@@ -11,7 +11,7 @@ export default ({ kw }) => ({
 
   __seek_expression_body: ($) =>
     seq(
-      field("function", alias(kw("SEEK"), $.identifier)),
+      field("function", alias($._kw_seek, $.identifier)),
       "(",
       choice(
         $._kw_input,
