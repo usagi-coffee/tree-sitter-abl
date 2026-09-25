@@ -22,7 +22,7 @@ export default ({ kw }) => ({
         seq(
           $._row_keyword,
           field("row", $.number_literal),
-          kw("COLUMN"),
+          $._kw_column,
           field("column", $.number_literal),
         ),
       ),

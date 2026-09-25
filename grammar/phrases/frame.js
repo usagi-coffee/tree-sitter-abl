@@ -76,7 +76,7 @@ export default ({ kw }) => ({
       seq($._kw_fgcolor, field("title_fgcolor", $.__frame_expression)),
       seq($._kw_font, field("title_font", $.__frame_expression)),
     ),
-  __frame_column_keyword: ($) => choice(kw("COLUMN"), kw("COLUMNS"), kw("COL")),
+  __frame_column_keyword: ($) => choice($._kw_column, kw("COLUMNS"), kw("COL")),
   // oxlint-disable-next-line tree-sitter-optimize/choice-subset, tree-sitter-optimize/shared-choice
   __frame_identifier: ($) => choice($.identifier, $.preprocessor_name),
   // oxlint-disable-next-line tree-sitter-optimize/forwarding-rule
