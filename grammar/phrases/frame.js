@@ -41,6 +41,7 @@ export default ({ kw }) => ({
       // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(kw("KEEP-TAB-ORDER"), $.keep_tab_order),
       alias(kw("DROP-TARGET"), $.drop_target),
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(kw("CONTEXT-HELP"), $.context_help),
       // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(kw("EXPORT"), $.export),
