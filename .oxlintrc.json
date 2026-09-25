@@ -35,6 +35,7 @@
         "tree-sitter-optimize/shared-valued-fragment": "warn",
         "tree-sitter-optimize/shared-block-close": "warn",
         "tree-sitter-optimize/shared-declaration-tail": "warn",
+        "tree-sitter-optimize/short-shared-category-name": "warn",
         "tree-sitter-optimize/short-private-prefix": "warn",
         "tree-sitter-optimize/short-aliased-lexical-name": "warn",
         "tree-sitter-optimize/shared-assignment-clause": "warn",

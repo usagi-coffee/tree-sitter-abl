@@ -24,6 +24,7 @@ import {
   sharedValuedFragment,
   sharedDelimiterFieldPrefix,
   sharedAssignmentClause,
+  shortSharedCategoryName,
   shortPrivatePrefix,
   shortAliasedLexicalName,
   sharedDeclarationTail,
@@ -5410,6 +5411,75 @@ new RuleTester().run("optional-tail-choice-collapse", optionalTailChoiceCollapse
       name: "field-bearing prefix",
       code: optionalTailGrammar(optionalTailChoice('field("head", $.head)')),
       errors: [{ message: /both-present order/ }],
+    },
+  ],
+});
+
+const sharedCategoryName = "_identifier_or_qualified_name";
+const sharedCategoryRule = (
+  body = "choice($.identifier, $.qualified_name)",
+  name = sharedCategoryName,
+) => `export default () => ({ ${name}: ($) => ${body} });`;
+new RuleTester().run("short-shared-category-name", shortSharedCategoryName, {
+  valid: [
+    sharedCategoryRule(undefined, "_qualified_identifier"),
+    sharedCategoryRule(undefined, "_name_or_value"),
+    sharedCategoryRule(undefined, "identifier_or_qualified_name"),
+    sharedCategoryRule(undefined, "__identifier_or_qualified_name"),
+    sharedCategoryRule("token(choice($.identifier, $.qualified_name))"),
+    sharedCategoryRule("prec.right(choice($.identifier, $.qualified_name))"),
+    sharedCategoryRule("choice($.identifier)"),
+    sharedCategoryRule("choice($.identifier, $._identifier_or_qualified_name)"),
+    sharedCategoryRule("choice($.identifier, alias($._identifier_or_qualified_name, $.name))"),
+    sharedCategoryRule('choice($.identifier, "NAME")'),
+    sharedCategoryRule("choice($.identifier, alias(token(/name/), $.name))"),
+    sharedCategoryRule('choice($.identifier, field("name", $.qualified_name))'),
+    sharedCategoryRule("choice($.identifier, ...names)"),
+    sharedCategoryRule("choice($.identifier, $[kind])"),
+    sharedCategoryRule(undefined, '["_identifier_or_qualified_name"]'),
+    `export default () => ({
+      ${sharedCategoryName}: ($) => choice($.identifier, $.qualified_name),
+      root: ($) => alias($.name, $._identifier_or_qualified_name),
+    });`,
+    `export default () => ({
+      ${sharedCategoryName}: ($) => choice($.identifier, $.qualified_name),
+      root: ($) => alias($.name, $["_identifier_or_qualified_name"]),
+    });`,
+    ...["externals", "supertypes", "word"].map(
+      (metadata) =>
+        `export default grammar({ ${metadata}: ($) => [$._identifier_or_qualified_name],
+        rules: { ${sharedCategoryName}: ($) => choice($.identifier, $.qualified_name) } });`,
+    ),
+    `export default () => ({
+      // oxlint-disable-next-line rule-to-test/short-shared-category-name
+      ${sharedCategoryName}: ($) => choice($.identifier, $.qualified_name),
+    });`,
+  ],
+  invalid: [
+    {
+      name: "shared optionally qualified identifier category",
+      code: sharedCategoryRule(),
+      errors: [{ message: /concise semantic category name/ }],
+    },
+    {
+      name: "retain explicit keyword aliases in the body",
+      code: sharedCategoryRule(
+        "choice($.macro_concatenated_name, $.identifier, $.qualified_name, alias($._procedure_keyword, $.identifier), alias($._kw_interface, $.identifier))",
+      ),
+      errors: [{ message: /retain the exact rule body/ }],
+    },
+    {
+      name: "other verbose shared symbol categories",
+      code: sharedCategoryRule(
+        "choice($.identifier, $.array_access)",
+        "_identifier_or_array_access",
+      ),
+      errors: [{ message: /not parser counts or runtime/ }],
+    },
+    {
+      name: "inline and conflict metadata must be updated with references",
+      code: `export default grammar({ inline: ($) => [$._identifier_or_qualified_name], conflicts: ($) => [[$._identifier_or_qualified_name, $.other]], rules: { ${sharedCategoryName}: ($) => choice($.identifier, $.qualified_name) } });`,
+      errors: [{ message: /Update all references and metadata/ }],
     },
   ],
 });
