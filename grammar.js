@@ -295,7 +295,7 @@ export default grammar({
           $.binary_expression,
           $.parenthesized_expression,
           $._qualified_identifier,
-          alias($._new_keyword, $.identifier),
+          alias($._kw_new, $.identifier),
           alias($._kw_window, $.identifier),
           alias($._kw_in, $.identifier),
           $.system_handle_identifier,

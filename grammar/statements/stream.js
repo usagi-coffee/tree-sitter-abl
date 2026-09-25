@@ -7,7 +7,7 @@ export default ({ kw }) => ({
   __stream_modifier: ($) =>
     choice(
       seq(
-        alias($._new_keyword, $.new_modifier),
+        alias($._kw_new, $.new_modifier),
         // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
         optional(alias(kw("GLOBAL"), $.scope_modifier)),
         // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner

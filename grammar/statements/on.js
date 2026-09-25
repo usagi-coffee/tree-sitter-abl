@@ -270,7 +270,7 @@ export default ({ kw }) => ({
   __on_referencing_phrase: ($) =>
     choice(
       seq(
-        $._new_keyword,
+        $._kw_new,
         optional($._kw_buffer),
         field("new_record", $.identifier),
         $._kw_old,

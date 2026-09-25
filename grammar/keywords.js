@@ -242,7 +242,7 @@ export default ({ kw }) => ({
   _kw_like: ($) => kw("LIKE"),
   _kw_row: ($) => kw("ROW"),
   // oxlint-disable-next-line tree-sitter-optimize/shared-keyword-inline
-  _new_keyword: ($) => kw("NEW"),
+  _kw_new: ($) => kw("NEW"),
   _dataset_keyword: ($) => kw("DATASET"),
   _on_keyword: ($) => kw("ON"),
   _at_keyword: ($) => kw("AT"),

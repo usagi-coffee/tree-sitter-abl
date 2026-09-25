@@ -1,7 +1,7 @@
 export default ({ kw }) => ({
   new_expression: ($) =>
     seq(
-      $._new_keyword,
+      $._kw_new,
       choice(
         // Class constructor: NEW ClassName(args) or NEW ClassName<T>(args)
         seq(

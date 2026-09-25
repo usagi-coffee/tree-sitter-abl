@@ -15,7 +15,7 @@ export default ({ kw }) => ({
           $._kw_write,
           $._kw_of,
           field("object", $.identifier),
-          optional(seq($._new_keyword, optional($._kw_buffer), field("new_buffer", $.identifier))),
+          optional(seq($._kw_new, optional($._kw_buffer), field("new_buffer", $.identifier))),
           optional($.__trigger_procedure_old_buffer),
         ),
         // ASSIGN event
@@ -24,7 +24,7 @@ export default ({ kw }) => ({
           choice(
             seq($._kw_of, field("object", $.qualified_name)),
             seq(
-              seq($._new_keyword, $.__trigger_procedure_value_body),
+              seq($._kw_new, $.__trigger_procedure_value_body),
               optional(seq($._kw_old, $.__trigger_procedure_value_body)),
             ),
           ),
