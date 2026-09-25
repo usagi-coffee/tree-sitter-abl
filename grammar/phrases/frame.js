@@ -38,6 +38,7 @@ export default ({ kw }) => ({
       // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(kw("TOP-ONLY"), $.top_only),
       alias(kw("SCREEN-IO"), $.screen_io),
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(kw("KEEP-TAB-ORDER"), $.keep_tab_order),
       alias(kw("DROP-TARGET"), $.drop_target),
       alias(kw("CONTEXT-HELP"), $.context_help),
