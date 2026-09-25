@@ -97,6 +97,7 @@ export default ({ kw }) => ({
           alias(kw("PRIVATE"), $.access_modifier),
           alias(kw("PACKAGE-PRIVATE"), $.access_modifier),
           alias(kw("PROTECTED"), $.access_modifier),
+          // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
           alias(kw("PACKAGE-PROTECTED"), $.access_modifier),
           // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
           alias(kw("PUBLIC"), $.access_modifier),
