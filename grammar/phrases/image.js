@@ -2,7 +2,7 @@ export default ({ kw }) => ({
   image_phrase: ($) =>
     // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq(
-      choice(kw("FILE"), kw("FILENAME")),
+      choice($._kw_file, kw("FILENAME")),
       field("file", $._expression),
       optional(
         seq(

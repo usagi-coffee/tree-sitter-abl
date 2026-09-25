@@ -23,14 +23,14 @@ export default ({ kw }) => ({
   __copy_lob_source: ($) =>
     choice(
       seq(optional($._kw_object), field("source", $._expression)),
-      seq(kw("FILE"), field("source_file", $._expression)),
+      seq($._kw_file, field("source_file", $._expression)),
     ),
 
   // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __copy_lob_target: ($) =>
     choice(
       seq(optional($._kw_object), field("target", $._expression), optional($.__copy_lob_overlay)),
-      seq(kw("FILE"), field("target_file", $._expression), optional(alias(kw("APPEND"), $.append))),
+      seq($._kw_file, field("target_file", $._expression), optional(alias(kw("APPEND"), $.append))),
     ),
 
   __copy_lob_overlay: ($) =>
