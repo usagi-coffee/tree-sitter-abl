@@ -98,6 +98,7 @@ export default ({ kw }) => ({
       alias(kw("THREE-D"), $.three_d),
       // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(kw("ATTR-SPACE"), $.attr_space),
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(kw("NO-ATTR-SPACE"), $.no_attr_space),
       alias(kw("CONTEXT-HELP"), $.context_help),
       alias(kw("EXPORT"), $.export),
