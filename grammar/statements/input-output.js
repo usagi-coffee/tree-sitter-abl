@@ -35,6 +35,7 @@ export default ({ kw }) => ({
       alias(kw("ECHO"), $.echo),
       alias(kw("NO-ECHO"), $.no_echo),
       $._map_phrase,
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(kw("UNBUFFERED"), $.unbuffered),
       alias($._convert_phrase, $.convert_phrase),
     ),
