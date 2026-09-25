@@ -101,7 +101,7 @@ export default ({ kw }) => ({
         choice(
           // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
           seq(kw("FRAME", { offset: 4 }), field("frame", $.__frame_identifier)),
-          seq(kw("BROWSE"), field("browse", $.__frame_identifier)),
+          seq($._kw_browse, field("browse", $.__frame_identifier)),
         ),
         optional($._with_keyword),
       ),

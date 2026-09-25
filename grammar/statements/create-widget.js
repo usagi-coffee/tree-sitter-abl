@@ -6,7 +6,7 @@ export default ({ kw }) => ({
     seq(
       choice(
         kw("BUTTON"),
-        kw("BROWSE"),
+        $._kw_browse,
         kw("COMBO-BOX"),
         kw("CONTROL-FRAME"),
         kw("DIALOG-BOX"),

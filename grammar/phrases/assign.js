@@ -13,7 +13,7 @@ export default ({ kw }) => ({
         choice(
           $._assignable,
           $.__assign_keyword_identifier,
-          seq(kw("BROWSE"), field("browse", $.__widget_name), ":", field("attr", $.identifier)),
+          seq($._kw_browse, field("browse", $.__widget_name), ":", field("attr", $.identifier)),
           seq(
             // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
             kw("FRAME", { offset: 4 }),

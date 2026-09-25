@@ -2,7 +2,7 @@ export default ({ kw }) => ({
   browse_definition: ($) => seq($.__browse_prefix, $._terminator),
 
   __browse_prefix: ($) =>
-    seq($._define_keyword, optional($._definition_scope_modifier), kw("BROWSE"), $.__browse_body),
+    seq($._define_keyword, optional($._definition_scope_modifier), $._kw_browse, $.__browse_body),
 
   // oxlint-disable-next-line tree-sitter-optimize/body-extraction, tree-sitter-optimize/sequence-subset
   __browse_body: ($) =>

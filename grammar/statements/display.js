@@ -101,7 +101,7 @@ export default ({ kw }) => ({
     seq(
       $.__display_items,
       $._with_keyword,
-      kw("BROWSE"),
+      $._kw_browse,
       field("browse", $.identifier),
       $._no_error_terminator,
     ),

@@ -13,6 +13,6 @@ export default ({ kw }) => ({
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence, tree-sitter-optimize/inline-keyword-owner
       seq(kw("FRAME", { offset: 4 }), field("frame", $.identifier)),
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
-      seq(kw("BROWSE"), field("browse", $.identifier)),
+      seq($._kw_browse, field("browse", $.identifier)),
     ),
 });

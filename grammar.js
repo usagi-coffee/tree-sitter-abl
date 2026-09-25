@@ -208,6 +208,7 @@ export default grammar({
   inline: ($) => [
     $._kw_and,
     $._kw_bgcolor,
+    $._kw_browse,
     $._kw_buffer,
     $._kw_codepage,
     $._kw_column,
@@ -514,6 +515,7 @@ export default grammar({
       _help_keyword: ($) => kw("HELP"),
       _kw_and: ($) => kw("AND"),
       _kw_bgcolor: ($) => kw("BGCOLOR"),
+      _kw_browse: ($) => kw("BROWSE"),
       _kw_buffer: ($) => kw("BUFFER"),
       _kw_codepage: ($) => kw("CODEPAGE"),
       _kw_column: ($) => kw("COLUMN"),

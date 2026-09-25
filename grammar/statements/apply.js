@@ -25,7 +25,7 @@ export default ({ kw }) => ({
       $._in_keyword,
       choice(
         // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
-        seq(kw("BROWSE"), field("browse", $.identifier)),
+        seq($._kw_browse, field("browse", $.identifier)),
         $._frame_identifier_phrase,
         seq(kw("MENU"), field("menu", $.identifier)),
       ),
