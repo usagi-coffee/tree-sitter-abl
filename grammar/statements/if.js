@@ -5,7 +5,7 @@ export default ({ kw }) => ({
       prec.right(
         seq(
           $._expression,
-          kw("THEN"),
+          $._kw_then,
           field("then", $._statement),
           optional(seq(kw("ELSE"), field("else", $._statement))),
         ),

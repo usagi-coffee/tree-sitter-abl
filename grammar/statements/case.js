@@ -24,7 +24,7 @@ export default ({ kw }) => ({
     ),
 
   case_when_phrase: ($) =>
-    seq($._kw_when, field("condition", $.__case_when_expression_list), kw("THEN"), $._statement),
+    seq($._kw_when, field("condition", $.__case_when_expression_list), $._kw_then, $._statement),
 
   case_otherwise_phrase: ($) => seq(kw("OTHERWISE"), $._statement),
 

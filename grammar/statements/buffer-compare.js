@@ -62,7 +62,7 @@ export default ({ kw }) => ({
       field("field", $._primary_expression),
       field("operator", $._comparison_operator),
       field("value", $._primary_expression),
-      kw("THEN"),
+      $._kw_then,
       field("action", $._statement),
     ),
 });
