@@ -10,7 +10,7 @@ export default ({ kw }) => ({
       $._kw_query,
       field("query", $.identifier),
       choice($._for_keyword, kw("PRESELECT")),
-      kw("EACH"),
+      $._kw_each,
       $.__open_query_record_tail,
       optional($.query_tuning_phrase),
       optional($.__open_query_tail_after_tuning),
@@ -50,7 +50,7 @@ export default ({ kw }) => ({
       seq(
         ",",
         // oxlint-disable-next-line tree-sitter-optimize/shared-choice, tree-sitter-optimize/inline-keyword-owner
-        choice(kw("EACH"), $._kw_first, $._kw_last),
+        choice($._kw_each, $._kw_first, $._kw_last),
         $.__open_query_record_tail,
       ),
     ),
