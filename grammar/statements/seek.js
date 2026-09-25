@@ -17,7 +17,7 @@ export default ({ kw }) => ({
         $._kw_input,
         $._kw_output,
         field("name", $.identifier),
-        seq(kw("STREAM-HANDLE"), field("handle", $._identifier_or_qualified_name)),
+        seq($._kw_stream_handle, field("handle", $._identifier_or_qualified_name)),
       ),
     ),
 });

@@ -207,7 +207,7 @@ export default ({ kw }) => ({
   _like_phrase: ($) => seq($._like_keyword, $.__temp_table_like_body),
 
   _stream_phrase: ($) =>
-    seq(choice($._kw_stream, kw("STREAM-HANDLE")), field("stream", $.identifier)),
+    seq(choice($._kw_stream, $._kw_stream_handle), field("stream", $.identifier)),
   _input_stream_prefix: ($) => seq($._kw_input, optional($._stream_phrase)),
 
   // oxlint-disable-next-line tree-sitter-optimize/single-use-shared-choice-inline
