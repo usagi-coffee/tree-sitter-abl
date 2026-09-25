@@ -84,7 +84,7 @@ export default ({ kw }) => ({
       seq($._kw_browse, field("browse", $.__widget_name)),
       $.__view_hide_widget_ref,
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence, tree-sitter-optimize/shared-choice
-      seq(choice($._kw_menu, kw("SUB-MENU")), field("menu", $.__widget_name)),
+      seq(choice($._kw_menu, $._kw_sub_menu), field("menu", $.__widget_name)),
     ),
   // oxlint-disable-next-line tree-sitter-optimize/body-extraction, tree-sitter-optimize/choice-subset
   __view_hide_widget_ref: ($) =>

@@ -21,7 +21,7 @@ export default ({ kw }) => ({
         kw("RECTANGLE"),
         kw("SELECTION-LIST"),
         kw("SLIDER"),
-        kw("SUB-MENU"),
+        $._kw_sub_menu,
         $._kw_text,
         kw("TOGGLE-BOX"),
         $._kw_window,

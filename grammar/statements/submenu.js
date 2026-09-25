@@ -2,7 +2,7 @@ export default ({ kw }) => ({
   submenu_definition: ($) => seq($.__submenu_prefix, $._terminator),
 
   // oxlint-disable-next-line tree-sitter-optimize/single-use-keyword-sequence
-  __submenu_prefix: ($) => seq($._define_private_prefix, kw("SUB-MENU"), $.__submenu_body),
+  __submenu_prefix: ($) => seq($._define_private_prefix, $._kw_sub_menu, $.__submenu_body),
 
   __submenu_body: ($) => seq(field("name", $.identifier), optional($.__submenu_options)),
   __submenu_options: ($) => prec.right(seq($.__submenu_option, optional($.__submenu_options))),

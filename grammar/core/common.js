@@ -115,7 +115,7 @@ export default ({ kw }) => ({
   _menu_submenu: ($) =>
     // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq(
-      kw("SUB-MENU"),
+      $._kw_sub_menu,
       field("name", $.identifier),
       // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       optional(alias(kw("DISABLED"), $.disabled)),
@@ -128,7 +128,7 @@ export default ({ kw }) => ({
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
       seq($._kw_browse, field("browse", $.__widget_name)),
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence, tree-sitter-optimize/shared-choice
-      seq(choice($._kw_menu, kw("SUB-MENU")), field("menu", $.__widget_name)),
+      seq(choice($._kw_menu, $._kw_sub_menu), field("menu", $.__widget_name)),
     ),
   // oxlint-disable-next-line tree-sitter-optimize/shared-sequence, tree-sitter-optimize/shared-keyword-field-inline, tree-sitter-optimize/inline-keyword-owner
   _frame_identifier_phrase: ($) => seq(kw("FRAME", { offset: 4 }), field("frame", $.identifier)),
