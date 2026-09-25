@@ -370,6 +370,7 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __class_table_option: ($) =>
     choice(
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(kw("APPEND"), $.append),
       alias(kw("BIND"), $.bind),
       alias(kw("BY-VALUE"), $.by_value),
