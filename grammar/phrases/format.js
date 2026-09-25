@@ -83,7 +83,7 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/body-extraction
   __format_editor_option: ($) =>
     choice(
-      // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
+      // oxlint-disable-next-line tree-sitter-optimize/shared-sequence, tree-sitter-optimize/inline-keyword-owner
       seq(kw("BUFFER-CHARS"), field("buffer_chars", $.number_literal)),
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
       seq(kw("BUFFER-LINES"), field("buffer_lines", $.number_literal)),
