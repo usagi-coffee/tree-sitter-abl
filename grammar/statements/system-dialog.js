@@ -92,6 +92,7 @@ export default ({ kw }) => ({
         choice(
           // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
           seq(kw("NUM-COPIES"), field("copies", $._expression)),
+          // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
           alias(kw("LANDSCAPE"), $.landscape),
           alias(kw("PORTRAIT"), $.portrait),
           $.__system_dialog_window_option,
