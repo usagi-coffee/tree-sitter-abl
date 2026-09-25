@@ -1,7 +1,7 @@
 export default ({ kw }) => ({
   if_statement: ($) =>
     seq(
-      kw("IF"),
+      $._kw_if,
       prec.right(
         seq(
           $._expression,
