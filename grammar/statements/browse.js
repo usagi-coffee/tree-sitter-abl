@@ -141,7 +141,7 @@ export default ({ kw }) => ({
             $._aggregate_label_phrase,
             // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
             alias(kw("NO-LABELS", { alias: "NO-LABEL", offset: 8 }), $.no_labels),
-            // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
+            // oxlint-disable-next-line tree-sitter-optimize/shared-sequence, tree-sitter-optimize/inline-keyword-owner
             seq(kw("WIDTH"), field("width", $.__browse_option_expression)),
             seq(kw("COLUMN-FONT"), field("column_font", $.__browse_option_expression)),
             // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
