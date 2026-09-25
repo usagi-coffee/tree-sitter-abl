@@ -2,7 +2,7 @@ export default ({ kw }) => ({
   enable_statement: ($) => seq($.__enable_prefix, $._terminator),
 
   // oxlint-disable-next-line tree-sitter-optimize/single-use-keyword-sequence
-  __enable_prefix: ($) => seq(kw("ENABLE"), optional($.__enable_prefix_tail)),
+  __enable_prefix: ($) => seq($._kw_enable, optional($.__enable_prefix_tail)),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-choice
   __enable_prefix_tail: ($) =>
     choice(

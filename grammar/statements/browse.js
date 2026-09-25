@@ -183,7 +183,7 @@ export default ({ kw }) => ({
 
   __browse_enable_phrase: ($) =>
     seq(
-      kw("ENABLE"),
+      $._kw_enable,
       choice(
         // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
         alias(kw("ALL"), $.all),
