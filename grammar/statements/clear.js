@@ -3,7 +3,7 @@ export default ({ kw }) => ({
   __clear_prefix: ($) =>
     // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq(
-      kw("CLEAR"),
+      $._kw_clear,
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence, tree-sitter-optimize/inline-keyword-owner
       optional(seq(kw("FRAME", { offset: 4 }), field("frame", $.identifier))),
       // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
