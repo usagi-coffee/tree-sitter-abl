@@ -14,7 +14,7 @@ export default ({ kw }) => ({
       seq($._kw_max_chars, field("max_chars", $.number_literal)),
       // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(kw("NO-BOX"), $.no_box),
-      alias(kw("NO-WORD-WRAP"), $.no_word_wrap),
+      alias($._kw_no_word_wrap, $.no_word_wrap),
       $._scrollbar_option,
       $._tooltip_phrase,
     ),
