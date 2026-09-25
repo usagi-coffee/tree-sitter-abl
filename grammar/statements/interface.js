@@ -52,6 +52,7 @@ export default ({ kw }) => ({
     // oxlint-disable-next-line tree-sitter-optimize/optional-body-extraction
     seq(
       $._define_keyword,
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       kw("TEMP-TABLE"),
       $._table_body,
       optional($._temp_table_items),
