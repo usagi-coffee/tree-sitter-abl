@@ -386,7 +386,7 @@ export default ({ kw }) => ({
         ),
       ),
       // oxlint-disable-next-line tree-sitter-optimize/shared-choice
-      optional(seq(choice($._as_keyword, kw("IS")), optional($.__temp_table_index_modifiers))),
+      optional(seq(choice($._as_keyword, $._kw_is), optional($.__temp_table_index_modifiers))),
       $.__temp_table_index_fields,
     ),
   __temp_table_index_modifiers: ($) =>
