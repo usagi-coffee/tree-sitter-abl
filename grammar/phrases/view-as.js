@@ -16,6 +16,7 @@ export default ({ kw }) => ({
         $.selection_list_phrase,
         $.slider_phrase,
         seq(field("widget", $._kw_text), optional($.__radio_set_size_tooltip_tail)),
+        // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
         seq(field("widget", kw("TOGGLE-BOX")), optional($.__radio_set_size_tooltip_tail)),
       ),
     ),
