@@ -130,6 +130,7 @@ export default ({ kw }) => ({
 
   __function_table_options: ($) =>
     seq(
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       optional(alias(kw("APPEND"), $.append)),
       choice(
         seq(alias(kw("BIND"), $.bind), optional(alias(kw("BY-VALUE"), $.by_value))),
