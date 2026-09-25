@@ -27,7 +27,7 @@ export default ({ kw }) => ({
         seq($._kw_column_of, field("column_of", $._expression)),
         seq($._row_keyword, choice(field("row", $._expression), alias($.__at_of_suffix, $.row_of))),
         // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
-        seq(kw("ROW-OF"), field("row_of", $._expression)),
+        seq($._kw_row_of, field("row_of", $._expression)),
       ),
     ),
   __at_of_suffix: ($) => prec.right(seq($._of_keyword, $._expression)),
