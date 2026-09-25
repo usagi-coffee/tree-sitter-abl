@@ -8,7 +8,7 @@ export default ({ kw }) => ({
       $._kw_auto_return,
       kw("BLANK"),
       kw("DEBLANK"),
-      kw("DISABLE-AUTO-ZAP"),
+      $._kw_disable_auto_zap,
       kw("NO-TAB-STOP"),
     ),
 

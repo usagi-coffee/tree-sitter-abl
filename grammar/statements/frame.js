@@ -100,7 +100,7 @@ export default ({ kw }) => ({
           alias($._kw_auto_return, $.auto_return),
           alias(kw("BLANK"), $.blank),
           alias(kw("DEBLANK"), $.deblank),
-          alias(kw("DISABLE-AUTO-ZAP"), $.disable_auto_zap),
+          alias($._kw_disable_auto_zap, $.disable_auto_zap),
           alias(kw("NO-TAB-STOP"), $.no_tab_stop),
         ),
       ),
