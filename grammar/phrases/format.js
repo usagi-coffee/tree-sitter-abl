@@ -6,7 +6,7 @@ export default ({ kw }) => ({
       $.__format_at_phrase,
       $._format_field_option,
       $._kw_auto_return,
-      kw("BLANK"),
+      $._kw_blank,
       kw("DEBLANK"),
       $._kw_disable_auto_zap,
       kw("NO-TAB-STOP"),

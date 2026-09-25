@@ -98,7 +98,7 @@ export default ({ kw }) => ({
           $._format_field_option,
           $._tooltip_phrase,
           alias($._kw_auto_return, $.auto_return),
-          alias(kw("BLANK"), $.blank),
+          alias($._kw_blank, $.blank),
           alias(kw("DEBLANK"), $.deblank),
           alias($._kw_disable_auto_zap, $.disable_auto_zap),
           alias(kw("NO-TAB-STOP"), $.no_tab_stop),
