@@ -12,7 +12,7 @@ export default ({ kw }) => ({
     seq(
       optional(
         // oxlint-disable-next-line tree-sitter-optimize/shared-choice
-        choice(kw("EACH"), $._kw_first, kw("LAST")),
+        choice(kw("EACH"), $._kw_first, $._kw_last),
       ),
       $.record_phrase,
     ),

@@ -7,7 +7,7 @@ export default ({ kw }) => ({
       "(",
       prec.right(
         seq(
-          optional(choice($._kw_first, kw("LAST"))),
+          optional(choice($._kw_first, $._kw_last)),
           field("table", $._identifier_or_qualified_name),
           optional($.__record_query_options),
         ),
