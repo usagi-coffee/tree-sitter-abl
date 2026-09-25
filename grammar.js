@@ -479,6 +479,7 @@ export default grammar({
       // oxlint-disable-next-line tree-sitter-optimize/choice-subset
       _identifier_or_access: ($) =>
         choice($._qualified_identifier, $.array_access, $.object_access),
+      // oxlint-disable-next-line tree-sitter-optimize/short-shared-category-name
       _identifier_or_access_or_call: ($) => choice($._identifier_or_access, $.function_call),
       macro_concatenated_name: ($) => token(MACRO_CONCATENATED_NAME),
 
