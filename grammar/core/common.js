@@ -563,7 +563,7 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/single-use-keyword-sequence
   __return_error_clause: ($) => seq(kw("ERROR"), optional(field("error_value", $._expression))),
   // oxlint-disable-next-line tree-sitter-optimize/shared-sequence, tree-sitter-optimize/shared-keyword-field-inline
-  _when_phrase: ($) => seq(kw("WHEN"), field("when", $._expression)),
+  _when_phrase: ($) => seq($._kw_when, field("when", $._expression)),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-shared-sequence-inline
   _equals_value: ($) => seq("=", field("value", $._expression)),
   _close_equals_value: ($) => seq(")", $._equals_value),

@@ -57,7 +57,7 @@ export default ({ kw }) => ({
 
   __buffer_compare_when_phrase: ($) =>
     seq(
-      kw("WHEN"),
+      $._kw_when,
       field("field", $._primary_expression),
       field("operator", $._comparison_operator),
       field("value", $._primary_expression),

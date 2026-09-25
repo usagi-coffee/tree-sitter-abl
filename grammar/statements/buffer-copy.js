@@ -29,7 +29,7 @@ export default ({ kw }) => ({
       choice("=", "+=", "-=", "*=", "/="),
       field("right", $._expression),
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
-      optional(seq(kw("WHEN"), field("when", $._expression))),
+      optional(seq($._kw_when, field("when", $._expression))),
     ),
   __buffer_copy_assign_pairs: ($) =>
     prec.right(
