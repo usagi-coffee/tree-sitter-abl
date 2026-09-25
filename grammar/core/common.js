@@ -286,9 +286,9 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/single-use-keyword-sequence
   __skip_parenthesized_prefix: ($) => seq($._kw_skip, "(", field("skip", $._expression)),
 
-  _space_phrase: ($) => prec.right(choice(seq($.__space_parenthesized_prefix, ")"), kw("SPACE"))),
+  _space_phrase: ($) => prec.right(choice(seq($.__space_parenthesized_prefix, ")"), $._kw_space)),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-keyword-sequence
-  __space_parenthesized_prefix: ($) => seq(kw("SPACE"), "(", field("space", $._expression)),
+  __space_parenthesized_prefix: ($) => seq($._kw_space, "(", field("space", $._expression)),
 
   _table_body: ($) =>
     // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
@@ -593,7 +593,7 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/shared-precedence-sequence-inline
   _display_space_phrase: ($) =>
     prec.left(
-      seq(kw("SPACE"), optional(field("space", seq($._parenthesized_expression_prefix, ")")))),
+      seq($._kw_space, optional(field("space", seq($._parenthesized_expression_prefix, ")")))),
     ),
   // oxlint-disable-next-line tree-sitter-optimize/shared-keyword-field-inline
   _list_items_phrase: ($) => seq(kw("LIST-ITEMS"), field("items", $._list_item_values)),

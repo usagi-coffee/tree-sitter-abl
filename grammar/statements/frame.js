@@ -51,9 +51,9 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/body-extraction
   __frame_form_item: ($) =>
     choice(
-      prec.right(seq(kw("SPACE"), "(", optional(field("space", $._expression)), ")")),
+      prec.right(seq($._kw_space, "(", optional(field("space", $._expression)), ")")),
       prec.right(seq($._kw_skip, "(", optional(field("skip", $._expression)), ")")),
-      prec.right(alias(kw("SPACE"), $.space)),
+      prec.right(alias($._kw_space, $.space)),
       prec.right(alias($._kw_skip, $.skip)),
       // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
       seq(
