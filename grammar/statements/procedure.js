@@ -47,7 +47,7 @@ export default ({ kw }) => ({
     prec.left(
       // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
       seq(
-        kw("EXTERNAL"),
+        $._kw_external,
         field("library", alias($.string_literal, "_escaped_string")),
         optional(
           choice(
