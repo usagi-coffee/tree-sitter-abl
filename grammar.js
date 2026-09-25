@@ -177,6 +177,7 @@ export default grammar({
     ...inlineKeywords($),
     $.__widget_name,
     $.__frame_identifier,
+    $.__frame_color_value,
     $._list_item_pairs_phrase,
     $._list_items_phrase,
     $._table_handle_value,
