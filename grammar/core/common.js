@@ -269,7 +269,7 @@ export default ({ kw }) => ({
   _block_options: ($) => prec.right(seq($._block_option, optional($._block_options))),
 
   _convert_phrase: ($) =>
-    choice(alias(kw("NO-CONVERT"), $.no_convert), seq(kw("CONVERT"), optional($._convert_options))),
+    choice(alias(kw("NO-CONVERT"), $.no_convert), seq($._kw_convert, optional($._convert_options))),
 
   _convert_options: ($) => prec.right(seq($._convert_option, optional($._convert_options))),
 
