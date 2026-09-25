@@ -280,6 +280,7 @@ export default ({ kw }) => ({
       // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(kw("STATIC"), $.static_modifier),
       alias(kw("ABSTRACT"), $.abstract_modifier),
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       alias(kw("FINAL"), $.final_modifier),
     ),
   // oxlint-disable-next-line tree-sitter-optimize/single-use-keyword-sequence, tree-sitter-optimize/single-use-sequence
