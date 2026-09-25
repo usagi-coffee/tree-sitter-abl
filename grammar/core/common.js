@@ -627,7 +627,7 @@ export default ({ kw }) => ({
     ),
   _extent_phrase: ($) =>
     seq(
-      kw("EXTENT"),
+      $._kw_extent,
       optional(
         field("size", choice($.number_literal, $.preprocessor_name, $.identifier, $.null_literal)),
       ),

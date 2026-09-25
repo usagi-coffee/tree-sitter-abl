@@ -309,7 +309,7 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
   __class_method_return_extent_phrase: ($) =>
     seq(
-      kw("EXTENT"),
+      $._kw_extent,
       // oxlint-disable-next-line tree-sitter-optimize/shared-choice
       optional(field("size", choice($.number_literal, $.preprocessor_name, $.identifier))),
     ),
@@ -327,7 +327,7 @@ export default ({ kw }) => ({
   __class_method_extent_phrase: ($) =>
     prec.right(
       seq(
-        kw("EXTENT"),
+        $._kw_extent,
         // oxlint-disable-next-line tree-sitter-optimize/alternative-extraction, tree-sitter-optimize/shared-choice
         optional(field("size", choice($.number_literal, $.preprocessor_name, $.identifier))),
       ),

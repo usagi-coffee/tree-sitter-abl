@@ -49,7 +49,7 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
   __variable_extent_phrase: ($) =>
     seq(
-      kw("EXTENT"),
+      $._kw_extent,
       // oxlint-disable-next-line tree-sitter-optimize/shared-choice
       optional(field("size", choice($.number_literal, $.preprocessor_name, $.identifier))),
     ),

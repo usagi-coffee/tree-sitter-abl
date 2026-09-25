@@ -85,7 +85,7 @@ export default ({ kw }) => ({
       seq(kw("COLUMN-LABEL"), field("column_label", $.__temp_table_label_list)),
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
       seq(kw("DECIMALS"), field("decimals", $.number_literal)),
-      seq(kw("EXTENT"), field("extent", choice($.number_literal, $.preprocessor_name))),
+      seq($._kw_extent, field("extent", choice($.number_literal, $.preprocessor_name))),
       $._format_string,
       // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
       seq($._help_keyword, field("help", $.string_literal)),
@@ -110,7 +110,7 @@ export default ({ kw }) => ({
   // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
   __temp_table_extent_option: ($) =>
     seq(
-      kw("EXTENT"),
+      $._kw_extent,
       field(
         "extent",
         // oxlint-disable-next-line tree-sitter-optimize/shared-choice
