@@ -36,6 +36,6 @@ export default ({ kw }) => ({
       ),
       seq($._kw_text, "(", token(/[A-Za-z_][A-Za-z0-9_-]*/), $.format_phrase, ")"),
       seq(field("constant", $.string_literal), optional($._format_phrases)),
-      alias(kw("SKIP"), $.skip),
+      alias($._kw_skip, $.skip),
     ),
 });

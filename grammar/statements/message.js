@@ -47,8 +47,8 @@ export default ({ kw }) => ({
     prec.right(
       choice(
         // oxlint-disable-next-line tree-sitter-optimize/sequence-subset
-        seq(kw("SKIP"), "(", field("count", $._expression), ")"),
-        kw("SKIP"),
+        seq($._kw_skip, "(", field("count", $._expression), ")"),
+        $._kw_skip,
       ),
     ),
 

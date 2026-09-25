@@ -35,7 +35,7 @@ export default ({ kw }) => ({
           optional($.__form_validate_format_view_as_tail),
         ),
         // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
-        seq(kw("SKIP"), optional(field("skip", $._parenthesized_value))),
+        seq($._kw_skip, optional(field("skip", $._parenthesized_value))),
         // oxlint-disable-next-line tree-sitter-optimize/shared-sequence
         seq(kw("SPACE"), optional(field("space", $._parenthesized_value))),
       ),

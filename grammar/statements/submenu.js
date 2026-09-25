@@ -22,6 +22,6 @@ export default ({ kw }) => ({
       // oxlint-disable-next-line tree-sitter-optimize/shared-item-alias
       alias($._menu_submenu, $.submenu_item),
       alias(kw("RULE"), $.rule),
-      alias(kw("SKIP"), $.skip),
+      alias($._kw_skip, $.skip),
     ),
 });

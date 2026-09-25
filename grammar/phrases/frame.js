@@ -62,7 +62,7 @@ export default ({ kw }) => ({
       alias(seq(kw("VIEW-AS"), field("widget", kw("DIALOG-BOX"))), $.view_as_phrase),
       $.down,
       prec.left(
-        seq(kw("SKIP"), optional(field("skip", seq($._parenthesized_expression_prefix, ")")))),
+        seq($._kw_skip, optional(field("skip", seq($._parenthesized_expression_prefix, ")")))),
       ),
     ),
 

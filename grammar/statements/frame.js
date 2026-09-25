@@ -37,7 +37,7 @@ export default ({ kw }) => ({
     choice(
       prec.left(
         "frame_skip",
-        seq(kw("SKIP"), optional(field("skip", seq($._parenthesized_expression_prefix, ")")))),
+        seq($._kw_skip, optional(field("skip", seq($._parenthesized_expression_prefix, ")")))),
       ),
       $._display_space_phrase,
       // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
@@ -52,9 +52,9 @@ export default ({ kw }) => ({
   __frame_form_item: ($) =>
     choice(
       prec.right(seq(kw("SPACE"), "(", optional(field("space", $._expression)), ")")),
-      prec.right(seq(kw("SKIP"), "(", optional(field("skip", $._expression)), ")")),
+      prec.right(seq($._kw_skip, "(", optional(field("skip", $._expression)), ")")),
       prec.right(alias(kw("SPACE"), $.space)),
-      prec.right(alias(kw("SKIP"), $.skip)),
+      prec.right(alias($._kw_skip, $.skip)),
       // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
       seq(
         field("field", choice($._identifier_or_array_access, alias($._widgets, $.identifier))),
