@@ -23,6 +23,7 @@ export default ({ kw }) => ({
       kw("ALIAS"),
       field("alias", $._alias_name),
       $._for_keyword,
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       kw("DATABASE"),
       field("database", $._alias_name),
     ),
@@ -84,6 +85,7 @@ export default ({ kw }) => ({
   __create_database: ($) =>
     // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq(
+      // oxlint-disable-next-line tree-sitter-optimize/inline-keyword-owner
       kw("DATABASE"),
       field("new_database", $._expression),
       optional(
