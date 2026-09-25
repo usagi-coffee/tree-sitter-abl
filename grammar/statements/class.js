@@ -342,7 +342,7 @@ export default ({ kw }) => ({
         field("table", $._identifier_or_qualified_name),
       ),
       seq(
-        kw("TABLE"),
+        $._kw_table,
         optional(field("for", $._for_keyword)),
         field("table", $._identifier_or_qualified_name),
         optional($.__class_table_options),

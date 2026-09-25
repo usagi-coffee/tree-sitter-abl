@@ -12,7 +12,7 @@ export default ({ kw }) => ({
           choice(
             $.__parameter_standard_body,
             seq(
-              kw("TABLE"),
+              $._kw_table,
               $._for_keyword,
               field("table", $._identifier_or_qualified_name),
               optional($.__parameter_table_options),

@@ -686,7 +686,7 @@ export default grammar({
             seq(
               choice(
                 seq(
-                  choice(kw("TABLE"), $._kw_buffer, $._kw_table_handle, kw("DATASET-HANDLE")),
+                  choice($._kw_table, $._kw_buffer, $._kw_table_handle, kw("DATASET-HANDLE")),
                   field(
                     "name",
                     choice(

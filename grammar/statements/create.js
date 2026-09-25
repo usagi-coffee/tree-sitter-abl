@@ -33,7 +33,7 @@ export default ({ kw }) => ({
       $._kw_buffer,
       field("handle", $._identifier_or_access),
       $._for_keyword,
-      kw("TABLE"),
+      $._kw_table,
       field("table", $.__create_buffer_target),
       optional(seq(kw("BUFFER-NAME"), field("name", $.__create_buffer_target))),
       optional($._in_widget_pool),
