@@ -1,6 +1,6 @@
 export default ({ kw }) => ({
   finally_statement: ($) => seq($.__finally_prefix, $._terminator),
 
-  // oxlint-disable-next-line tree-sitter-optimize/single-use-keyword-sequence
+  // oxlint-disable-next-line tree-sitter-optimize/single-use-keyword-sequence, tree-sitter-optimize/inline-keyword-owner
   __finally_prefix: ($) => seq(kw("FINALLY"), $._closed_body, optional(kw("FINALLY"))),
 });
