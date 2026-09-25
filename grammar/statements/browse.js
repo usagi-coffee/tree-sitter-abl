@@ -77,7 +77,7 @@ export default ({ kw }) => ({
         field("height_chars", $.__browse_option_expression),
       ),
       seq(
-        kw("SIZE-PIXELS"),
+        $._kw_size_pixels,
         field("width_pixels", $.__browse_option_expression),
         $._by_keyword,
         field("height_pixels", $.__browse_option_expression),
