@@ -73,7 +73,7 @@ export default ({ kw }) => ({
     ),
 
   // `OPEN c.` -- distinct from OPEN QUERY, which names its keyword.
-  open_cursor_statement: ($) => seq(kw("OPEN"), field("cursor", $.identifier), $._terminator),
+  open_cursor_statement: ($) => seq($._kw_open, field("cursor", $.identifier), $._terminator),
 
   // `FETCH c INTO nm.`
   fetch_statement: ($) => seq(kw("FETCH"), $.__sql_fetch_body, $._terminator),

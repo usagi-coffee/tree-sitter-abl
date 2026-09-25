@@ -5,7 +5,7 @@ export default ({ kw }) => ({
   __open_query_prefix: ($) =>
     // oxlint-disable-next-line tree-sitter-optimize/non-empty-tail-extraction
     seq(
-      kw("OPEN"),
+      $._kw_open,
       // oxlint-disable-next-line tree-sitter-optimize/shared-valued-fragment
       $._kw_query,
       field("query", $.identifier),
